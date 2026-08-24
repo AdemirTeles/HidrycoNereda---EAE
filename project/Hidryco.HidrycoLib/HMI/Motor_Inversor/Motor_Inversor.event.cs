@@ -149,24 +149,24 @@ namespace Hidryco.HidrycoLib.Symbols.Motor_Inversor
       return (System.Int16) var;
     }  }
 
-    public bool Get_STS_FREQUENCIA(ref System.Int16 value)
+    public bool Get_STS_FREQUENCIA(ref System.Single value)
     {
       if (accessorService == null)
         return false;
-      System.Int64 var = 0;
-      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,6, ref var);
-      if (ret) value = (System.Int16) var;
+      float var = 0;
+      bool ret = accessorService.GetFloatValue(channelId, cookie, eventIndex, true,6, ref var);
+      if (ret) value = (System.Single) var;
       return ret;
     }
 
-    public System.Int16? STS_FREQUENCIA
+    public System.Single? STS_FREQUENCIA
     { get {
       if (accessorService == null)
         return null;
-      System.Int64 var = 0;
-      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,6, ref var);
+      float var = 0;
+      bool ret = accessorService.GetFloatValue(channelId, cookie, eventIndex, true,6, ref var);
       if (!ret) return null;
-      return (System.Int16) var;
+      return (System.Single) var;
     }  }
 
     public bool Get_STS_TENSAO(ref System.Int16 value)
@@ -209,24 +209,24 @@ namespace Hidryco.HidrycoLib.Symbols.Motor_Inversor
       return (System.Int16) var;
     }  }
 
-    public bool Get_STS_POTENCIA(ref System.Int16 value)
+    public bool Get_STS_POTENCIA(ref System.Single value)
     {
       if (accessorService == null)
         return false;
-      System.Int64 var = 0;
-      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,9, ref var);
-      if (ret) value = (System.Int16) var;
+      float var = 0;
+      bool ret = accessorService.GetFloatValue(channelId, cookie, eventIndex, true,9, ref var);
+      if (ret) value = (System.Single) var;
       return ret;
     }
 
-    public System.Int16? STS_POTENCIA
+    public System.Single? STS_POTENCIA
     { get {
       if (accessorService == null)
         return null;
-      System.Int64 var = 0;
-      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,9, ref var);
+      float var = 0;
+      bool ret = accessorService.GetFloatValue(channelId, cookie, eventIndex, true,9, ref var);
       if (!ret) return null;
-      return (System.Int16) var;
+      return (System.Single) var;
     }  }
 
     public bool Get_STS_PROTECAO_TERMICA(ref System.Boolean value)
@@ -367,6 +367,26 @@ namespace Hidryco.HidrycoLib.Symbols.Motor_Inversor
       bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,16, ref var);
       if (!ret) return null;
       return (System.Boolean) var;
+    }  }
+
+    public bool Get_STS_CAPACIDADE(ref System.Int16 value)
+    {
+      if (accessorService == null)
+        return false;
+      System.Int64 var = 0;
+      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,17, ref var);
+      if (ret) value = (System.Int16) var;
+      return ret;
+    }
+
+    public System.Int16? STS_CAPACIDADE
+    { get {
+      if (accessorService == null)
+        return null;
+      System.Int64 var = 0;
+      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,17, ref var);
+      if (!ret) return null;
+      return (System.Int16) var;
     }  }
 
 

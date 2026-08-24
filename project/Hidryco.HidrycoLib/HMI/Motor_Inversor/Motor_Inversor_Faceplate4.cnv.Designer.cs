@@ -40,10 +40,10 @@ namespace Hidryco.HidrycoLib.Faceplates.Motor_Inversor
 			this.freeText6 = new NxtControl.GuiFramework.FreeText();
 			this.STS_VELOCIDADE = new System.HMI.Symbols.Base.Label<short>();
 			this.STS_CORRENTE = new System.HMI.Symbols.Base.Label<short>();
-			this.STS_FREQUENCIA = new System.HMI.Symbols.Base.Label<short>();
+			this.STS_FREQUENCIA = new System.HMI.Symbols.Base.Label<System.Single>();
 			this.STS_TENSAO = new System.HMI.Symbols.Base.Label<short>();
 			this.STS_TORQUE = new System.HMI.Symbols.Base.Label<short>();
-			this.STS_POTENCIA = new System.HMI.Symbols.Base.Label<short>();
+			this.STS_POTENCIA = new System.HMI.Symbols.Base.Label<System.Single>();
 			// 
 			// freeText2
 			// 
@@ -252,10 +252,10 @@ namespace Hidryco.HidrycoLib.Faceplates.Motor_Inversor
 		private NxtControl.GuiFramework.FreeText freeText6;
 		private System.HMI.Symbols.Base.Label<short> STS_VELOCIDADE;
 		private System.HMI.Symbols.Base.Label<short> STS_CORRENTE;
-		private System.HMI.Symbols.Base.Label<short> STS_FREQUENCIA;
+		private System.HMI.Symbols.Base.Label<System.Single> STS_FREQUENCIA;
 		private System.HMI.Symbols.Base.Label<short> STS_TENSAO;
 		private System.HMI.Symbols.Base.Label<short> STS_TORQUE;
-		private System.HMI.Symbols.Base.Label<short> STS_POTENCIA;
+		private System.HMI.Symbols.Base.Label<System.Single> STS_POTENCIA;
 		#endregion
 	}
 }
