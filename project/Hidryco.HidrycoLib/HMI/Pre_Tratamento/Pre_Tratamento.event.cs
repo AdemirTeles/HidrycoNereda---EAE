@@ -169,6 +169,66 @@ namespace Hidryco.HidrycoLib.Symbols.Pre_Tratamento
       return (System.Int16) var;
     }  }
 
+    public bool Get_STS_LIGADO(ref System.Boolean value)
+    {
+      if (accessorService == null)
+        return false;
+      bool var = false;
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,7, ref var);
+      if (ret) value = (System.Boolean) var;
+      return ret;
+    }
+
+    public System.Boolean? STS_LIGADO
+    { get {
+      if (accessorService == null)
+        return null;
+      bool var = false;
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,7, ref var);
+      if (!ret) return null;
+      return (System.Boolean) var;
+    }  }
+
+    public bool Get_STS_ALARME(ref System.Boolean value)
+    {
+      if (accessorService == null)
+        return false;
+      bool var = false;
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,8, ref var);
+      if (ret) value = (System.Boolean) var;
+      return ret;
+    }
+
+    public System.Boolean? STS_ALARME
+    { get {
+      if (accessorService == null)
+        return null;
+      bool var = false;
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,8, ref var);
+      if (!ret) return null;
+      return (System.Boolean) var;
+    }  }
+
+    public bool Get_fbkStsAutomatico(ref System.Boolean value)
+    {
+      if (accessorService == null)
+        return false;
+      bool var = false;
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,9, ref var);
+      if (ret) value = (System.Boolean) var;
+      return ret;
+    }
+
+    public System.Boolean? fbkStsAutomatico
+    { get {
+      if (accessorService == null)
+        return null;
+      bool var = false;
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,9, ref var);
+      if (!ret) return null;
+      return (System.Boolean) var;
+    }  }
+
 
   }
 
