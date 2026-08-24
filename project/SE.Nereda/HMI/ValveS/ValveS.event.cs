@@ -143,6 +143,63 @@ namespace SE.Nereda.Symbols.ValveS
 
   }
 
+  public class FB_STATUSEventArgs : System.EventArgs
+  {
+    IHMIAccessorService accessorService;
+    int channelId;
+    int cookie; 
+    int eventIndex;
+
+    public FB_STATUSEventArgs(int channelId, int cookie, int eventIndex)
+    {
+      this.accessorService = (IHMIAccessorService)ServiceProvider.GetService(typeof(IHMIAccessorService));
+      this.channelId = channelId;
+      this.cookie = cookie;
+      this.eventIndex = eventIndex;
+    }
+    public bool Get_FbClose(ref System.Boolean value)
+    {
+      if (accessorService == null)
+        return false;
+      bool var = false;
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,0, ref var);
+      if (ret) value = (System.Boolean) var;
+      return ret;
+    }
+
+    public System.Boolean? FbClose
+    { get {
+      if (accessorService == null)
+        return null;
+      bool var = false;
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,0, ref var);
+      if (!ret) return null;
+      return (System.Boolean) var;
+    }  }
+
+    public bool Get_FbOpen(ref System.Boolean value)
+    {
+      if (accessorService == null)
+        return false;
+      bool var = false;
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,1, ref var);
+      if (ret) value = (System.Boolean) var;
+      return ret;
+    }
+
+    public System.Boolean? FbOpen
+    { get {
+      if (accessorService == null)
+        return null;
+      bool var = false;
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,1, ref var);
+      if (!ret) return null;
+      return (System.Boolean) var;
+    }  }
+
+
+  }
+
 }
 
 namespace SE.Nereda.Symbols.ValveS
@@ -177,6 +234,8 @@ namespace SE.Nereda.Symbols.ValveS
 
     private event EventHandler<SE.Nereda.Symbols.ValveS.FB_FAILEventArgs> FB_FAIL_Fired;
 
+    private event EventHandler<SE.Nereda.Symbols.ValveS.FB_STATUSEventArgs> FB_STATUS_Fired;
+
     protected override void OnEndInit()
     {
       if (LOAD_PERS_DATA_Fired != null)
@@ -187,6 +246,8 @@ namespace SE.Nereda.Symbols.ValveS
         AttachEventInput(2);
       if (FB_FAIL_Fired != null)
         AttachEventInput(3);
+      if (FB_STATUS_Fired != null)
+        AttachEventInput(4);
 
     }
 
@@ -253,6 +314,21 @@ stack Trace:
               NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
 stack Trace:
 {4}","FB_FAIL_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break; 
+        case 4:
+          if (FB_STATUS_Fired != null)
+          {
+            try
+            {
+              FB_STATUS_Fired(this, new SE.Nereda.Symbols.ValveS.FB_STATUSEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","FB_STATUS_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
             }
           }
         break; 
@@ -292,6 +368,8 @@ namespace SE.Nereda.Faceplates.ValveS
 
     private event EventHandler<SE.Nereda.Symbols.ValveS.FB_FAILEventArgs> FB_FAIL_Fired;
 
+    private event EventHandler<SE.Nereda.Symbols.ValveS.FB_STATUSEventArgs> FB_STATUS_Fired;
+
     protected override void OnEndInit()
     {
       if (LOAD_PERS_DATA_Fired != null)
@@ -302,6 +380,8 @@ namespace SE.Nereda.Faceplates.ValveS
         AttachEventInput(2);
       if (FB_FAIL_Fired != null)
         AttachEventInput(3);
+      if (FB_STATUS_Fired != null)
+        AttachEventInput(4);
 
     }
 
@@ -368,6 +448,21 @@ stack Trace:
               NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
 stack Trace:
 {4}","FB_FAIL_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break; 
+        case 4:
+          if (FB_STATUS_Fired != null)
+          {
+            try
+            {
+              FB_STATUS_Fired(this, new SE.Nereda.Symbols.ValveS.FB_STATUSEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","FB_STATUS_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
             }
           }
         break; 
@@ -407,6 +502,8 @@ namespace SE.Nereda.Symbols.ValveS
 
     private event EventHandler<SE.Nereda.Symbols.ValveS.FB_FAILEventArgs> FB_FAIL_Fired;
 
+    private event EventHandler<SE.Nereda.Symbols.ValveS.FB_STATUSEventArgs> FB_STATUS_Fired;
+
     protected override void OnEndInit()
     {
       if (LOAD_PERS_DATA_Fired != null)
@@ -417,6 +514,8 @@ namespace SE.Nereda.Symbols.ValveS
         AttachEventInput(2);
       if (FB_FAIL_Fired != null)
         AttachEventInput(3);
+      if (FB_STATUS_Fired != null)
+        AttachEventInput(4);
 
     }
 
@@ -483,6 +582,21 @@ stack Trace:
               NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
 stack Trace:
 {4}","FB_FAIL_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break; 
+        case 4:
+          if (FB_STATUS_Fired != null)
+          {
+            try
+            {
+              FB_STATUS_Fired(this, new SE.Nereda.Symbols.ValveS.FB_STATUSEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","FB_STATUS_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
             }
           }
         break; 
@@ -522,6 +636,8 @@ namespace SE.Nereda.Faceplates.ValveS
 
     private event EventHandler<SE.Nereda.Symbols.ValveS.FB_FAILEventArgs> FB_FAIL_Fired;
 
+    private event EventHandler<SE.Nereda.Symbols.ValveS.FB_STATUSEventArgs> FB_STATUS_Fired;
+
     protected override void OnEndInit()
     {
       if (LOAD_PERS_DATA_Fired != null)
@@ -532,6 +648,8 @@ namespace SE.Nereda.Faceplates.ValveS
         AttachEventInput(2);
       if (FB_FAIL_Fired != null)
         AttachEventInput(3);
+      if (FB_STATUS_Fired != null)
+        AttachEventInput(4);
 
     }
 
@@ -598,6 +716,21 @@ stack Trace:
               NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
 stack Trace:
 {4}","FB_FAIL_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break; 
+        case 4:
+          if (FB_STATUS_Fired != null)
+          {
+            try
+            {
+              FB_STATUS_Fired(this, new SE.Nereda.Symbols.ValveS.FB_STATUSEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","FB_STATUS_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
             }
           }
         break; 
@@ -637,6 +770,8 @@ namespace SE.Nereda.Symbols.ValveS
 
     private event EventHandler<SE.Nereda.Symbols.ValveS.FB_FAILEventArgs> FB_FAIL_Fired;
 
+    private event EventHandler<SE.Nereda.Symbols.ValveS.FB_STATUSEventArgs> FB_STATUS_Fired;
+
     protected override void OnEndInit()
     {
       if (LOAD_PERS_DATA_Fired != null)
@@ -647,6 +782,8 @@ namespace SE.Nereda.Symbols.ValveS
         AttachEventInput(2);
       if (FB_FAIL_Fired != null)
         AttachEventInput(3);
+      if (FB_STATUS_Fired != null)
+        AttachEventInput(4);
 
     }
 
@@ -713,6 +850,21 @@ stack Trace:
               NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
 stack Trace:
 {4}","FB_FAIL_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break; 
+        case 4:
+          if (FB_STATUS_Fired != null)
+          {
+            try
+            {
+              FB_STATUS_Fired(this, new SE.Nereda.Symbols.ValveS.FB_STATUSEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","FB_STATUS_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
             }
           }
         break; 
@@ -752,6 +904,8 @@ namespace SE.Nereda.Symbols.ValveS
 
     private event EventHandler<SE.Nereda.Symbols.ValveS.FB_FAILEventArgs> FB_FAIL_Fired;
 
+    private event EventHandler<SE.Nereda.Symbols.ValveS.FB_STATUSEventArgs> FB_STATUS_Fired;
+
     protected override void OnEndInit()
     {
       if (LOAD_PERS_DATA_Fired != null)
@@ -762,6 +916,8 @@ namespace SE.Nereda.Symbols.ValveS
         AttachEventInput(2);
       if (FB_FAIL_Fired != null)
         AttachEventInput(3);
+      if (FB_STATUS_Fired != null)
+        AttachEventInput(4);
 
     }
 
@@ -828,6 +984,21 @@ stack Trace:
               NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
 stack Trace:
 {4}","FB_FAIL_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break; 
+        case 4:
+          if (FB_STATUS_Fired != null)
+          {
+            try
+            {
+              FB_STATUS_Fired(this, new SE.Nereda.Symbols.ValveS.FB_STATUSEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","FB_STATUS_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
             }
           }
         break; 
@@ -867,6 +1038,8 @@ namespace SE.Nereda.Symbols.ValveS
 
     private event EventHandler<SE.Nereda.Symbols.ValveS.FB_FAILEventArgs> FB_FAIL_Fired;
 
+    private event EventHandler<SE.Nereda.Symbols.ValveS.FB_STATUSEventArgs> FB_STATUS_Fired;
+
     protected override void OnEndInit()
     {
       if (LOAD_PERS_DATA_Fired != null)
@@ -877,6 +1050,8 @@ namespace SE.Nereda.Symbols.ValveS
         AttachEventInput(2);
       if (FB_FAIL_Fired != null)
         AttachEventInput(3);
+      if (FB_STATUS_Fired != null)
+        AttachEventInput(4);
 
     }
 
@@ -943,6 +1118,21 @@ stack Trace:
               NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
 stack Trace:
 {4}","FB_FAIL_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break; 
+        case 4:
+          if (FB_STATUS_Fired != null)
+          {
+            try
+            {
+              FB_STATUS_Fired(this, new SE.Nereda.Symbols.ValveS.FB_STATUSEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","FB_STATUS_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
             }
           }
         break; 
