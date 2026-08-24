@@ -7,8 +7,8 @@
     <EventInputs>
       <Event ID="42F2E1FCFC7E5858" Name="REQ" Comment="Normal Execution Request">
         <With Var="InStatus" />
-        <With Var="ReactorAvailable" />
-        <With Var="ReactorRunning" />
+        <With Var="SludgeBufferAvailable" />
+        <With Var="SludgeBufferRunning" />
         <With Var="Mode" />
       </Event>
     </EventInputs>
@@ -20,8 +20,8 @@
     <InputVars>
       <VarDeclaration ID="1EBB7FA17C3153B3" Name="InStatus" Type="INT" />
       <VarDeclaration ID="C46408A3ABA13E13" Name="Mode" Type="INT" />
-      <VarDeclaration ID="50D65ED1800D8F1C" Name="ReactorAvailable" Type="BOOL" />
-      <VarDeclaration ID="27BB5B485A1EEF97" Name="ReactorRunning" Type="BOOL" />
+      <VarDeclaration ID="50D65ED1800D8F1C" Name="SludgeBufferAvailable" Type="BOOL" />
+      <VarDeclaration ID="27BB5B485A1EEF97" Name="SludgeBufferRunning" Type="BOOL" />
     </InputVars>
     <OutputVars>
       <VarDeclaration ID="5305838B7B9BBDAE" Name="OutStatus" Type="INT" />
@@ -43,28 +43,28 @@
       <ECState Name="Emer" x="1432" y="200">
         <ECAction Algorithm="ManEmer" Output="CNF" />
       </ECState>
-      <ECTransition Source="START" Destination="Auto" Condition="REQ AND Mode = 0" x="2470.511" y="519.2177">
+      <ECTransition Source="START" Destination="Auto" Condition="REQ AND Mode = 0" x="2470.512" y="519.2178">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="589.9478,126.7842,645.308,124.5318" />
       </ECTransition>
-      <ECTransition Source="Auto" Destination="START" Condition="1" x="2473.561" y="685.9899">
+      <ECTransition Source="Auto" Destination="START" Condition="1" x="2473.561" y="685.9898">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="646.3243,174.5118,590.9641,176.7642" />
       </ECTransition>
       <ECTransition Source="START" Destination="Off" Condition="REQ AND Mode = 1" x="2218.659" y="901.3331">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="549.4491,201.3811,568.0692,244.3116" />
       </ECTransition>
-      <ECTransition Source="Off" Destination="START" Condition="1" x="2064.433" y="998.1764">
+      <ECTransition Source="Off" Destination="START" Condition="1" x="2064.433" y="998.1765">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="521.889,276.5927,503.269,233.6622" />
       </ECTransition>
       <ECTransition Source="START" Destination="Man" Condition="REQ AND Mode = 2" x="1752.193" y="958.192">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="461.5286,224.9427,418.9093,262.7946" />
       </ECTransition>
-      <ECTransition Source="Man" Destination="START" Condition="1" x="1608.999" y="797.5113">
+      <ECTransition Source="Man" Destination="START" Condition="1" x="1608.999" y="797.5114">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="378.3491,210.7166,420.9684,172.8647" />
       </ECTransition>
       <ECTransition Source="START" Destination="Emer" Condition="REQ AND Mode = 3" x="1709.761" y="487.8978">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="448.2034,140.8868,412.0319,114.4662" />
       </ECTransition>
-      <ECTransition Source="Emer" Destination="START" Condition="1" x="1756.383" y="341.9705">
+      <ECTransition Source="Emer" Destination="START" Condition="1" x="1756.032" y="341.9365">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="419.4585,67.06841,458.7728,94.34029" />
       </ECTransition>
     </ECC>
@@ -81,13 +81,13 @@ OutStatus := 10;]]></ST>
     </Algorithm>
     <Algorithm ID="5809e836-1339-4e2b-b061-3d202bf02ab8" Name="ManEmer">
       <ST><![CDATA[;
-IF NOT ReactorRunning AND NOT ReactorAvailable THEN
+IF NOT SludgeBufferRunning AND NOT SludgeBufferAvailable THEN
 	OutStatus := 6;
-ELSIF NOT ReactorRunning AND ReactorAvailable THEN
+ELSIF NOT SludgeBufferRunning AND SludgeBufferAvailable THEN
 	OutStatus := 0;
-ELSIF ReactorRunning AND NOT ReactorAvailable THEN
+ELSIF SludgeBufferRunning AND NOT SludgeBufferAvailable THEN
 	OutStatus := 6;
-ELSIF ReactorRunning AND ReactorAvailable THEN
+ELSIF SludgeBufferRunning AND SludgeBufferAvailable THEN
 	OutStatus := 2;
 END_IF;]]></ST>
     </Algorithm>
