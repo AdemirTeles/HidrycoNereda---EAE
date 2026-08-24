@@ -73,7 +73,7 @@ namespace SE.Nereda.Symbols.ReactorLogic
 			this.Vent.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 8D, 136D);
 			this.Vent.Name = "Vent";
 			this.Vent.SecurityToken = ((uint)(4294967295u));
-			this.Vent.TagName = "Vent";
+			this.Vent.TagName = "VentAeration";
 			this.Vent.EndInit();
 			// 
 			// sDefault
