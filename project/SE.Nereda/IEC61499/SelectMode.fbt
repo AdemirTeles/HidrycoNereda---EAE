@@ -20,6 +20,7 @@
         <With Var="Emergency" />
         <With Var="Light" />
         <With Var="Mode" />
+        <With Var="ModeNereda" />
       </Event>
     </EventOutputs>
     <InputVars>
@@ -33,6 +34,7 @@
       <VarDeclaration Name="Emergency" Type="BOOL" />
       <VarDeclaration Name="Light" Type="BOOL" />
       <VarDeclaration Name="Mode" Type="INT" />
+      <VarDeclaration ID="4C03939BC179E762" Name="ModeNereda" Type="INT" />
     </OutputVars>
   </InterfaceList>
   <BasicFB ID="9e50351c-72e0-4aa8-8231-fd8c3606535f">
@@ -63,6 +65,7 @@ IF SelectMode = 0 AND EmergencyON = FALSE THEN // Auto mode selected and communi
 	
 	// Set current mode value to Auto
 	Mode := 0;
+	ModeNereda:=2;
 
 ELSIF SelectMode = 1 THEN // OFF mode selected
 	
@@ -77,6 +80,7 @@ ELSIF SelectMode = 1 THEN // OFF mode selected
 	
 	// Set current mode value to OFF
 	Mode := 1;
+	ModeNereda:=0;
 	
 ELSIF SelectMode = 2 THEN // Manual mode selected
 	
@@ -91,6 +95,7 @@ ELSIF SelectMode = 2 THEN // Manual mode selected
 	
 	// Set current mode value to Manual
 	Mode := 2;
+	ModeNereda:=1;
 	
 ELSIF SelectMode = 3 OR (EmergencyON = TRUE AND SelectMode = 0) THEN // Emergency mode selected or Auto mode with communication failure
 	
@@ -105,6 +110,7 @@ ELSIF SelectMode = 3 OR (EmergencyON = TRUE AND SelectMode = 0) THEN // Emergenc
 	
 	// Set current mode value to Emergency
 	Mode := 3;
+	ModeNereda:=-1;
 	
 END_IF;]]></ST>
     </Algorithm>

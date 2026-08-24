@@ -129,6 +129,26 @@ namespace SE.Nereda.Symbols.Mode
       return (System.Int16) var;
     }  }
 
+    public bool Get_ModeNereda(ref System.Int16 value)
+    {
+      if (accessorService == null)
+        return false;
+      System.Int64 var = 0;
+      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,5, ref var);
+      if (ret) value = (System.Int16) var;
+      return ret;
+    }
+
+    public System.Int16? ModeNereda
+    { get {
+      if (accessorService == null)
+        return null;
+      System.Int64 var = 0;
+      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,5, ref var);
+      if (!ret) return null;
+      return (System.Int16) var;
+    }  }
+
 
   }
 
@@ -220,6 +240,26 @@ namespace SE.Nereda.Symbols.Mode
       this.cookie = cookie;
       this.eventIndex = eventIndex;
     }
+    public bool Get_ModeNereda(ref System.Int16 value)
+    {
+      if (accessorService == null)
+        return false;
+      System.Int64 var = 0;
+      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,0, ref var);
+      if (ret) value = (System.Int16) var;
+      return ret;
+    }
+
+    public System.Int16? ModeNereda
+    { get {
+      if (accessorService == null)
+        return null;
+      System.Int64 var = 0;
+      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,0, ref var);
+      if (!ret) return null;
+      return (System.Int16) var;
+    }  }
+
 
   }
 
