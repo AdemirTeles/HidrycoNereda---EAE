@@ -1,0 +1,69 @@
+﻿/*
+ * Criado pelo EcoStruxure Automation Expert.
+ * Usuário:  
+ * Data: 09/03/2026
+ * Tempo: 17:33
+ * 
+ */
+
+using System;
+using NxtControl.GuiFramework;
+
+namespace Hidryco.HidrycoLib.Symbols.Rosca
+{
+	/// <summary>
+	/// Description of Direita.
+	/// </summary>
+	public partial class Direita : NxtControl.GuiFramework.HMISymbol
+	{
+		private ushort _stsAnimacao;
+
+		private readonly NxtControl.Drawing.Color _colorGreen   = NxtControl.Drawing.SystemColors.Green;
+		private readonly NxtControl.Drawing.Color _colorRed     = NxtControl.Drawing.Color.FromName("SE.App2Base.aaLibAlarmActive");
+		private readonly NxtControl.Drawing.Color _colorYellow  = NxtControl.Drawing.Color.FromName("SE.App2Base.Abnormal");
+		private readonly NxtControl.Drawing.Color _colorBlue    = NxtControl.Drawing.SystemColors.Blue;
+		private readonly NxtControl.Drawing.Color _colorUnknown = NxtControl.Drawing.Color.FromName("SE.App2Base.Unknown");
+
+		public Direita()
+		{
+			InitializeComponent();
+		}
+
+		void STS_ANIMACAOValueChanged(object sender, ValueChangedEventArgs e)
+		{
+			_stsAnimacao = Convert.ToUInt16(e.Value);
+
+
+			NxtControl.Drawing.Color color;
+
+			switch (_stsAnimacao)
+			{
+				case 0: // Vermelho
+					color = _colorRed;
+					break;
+
+				case 1: // Verde
+					color = _colorGreen;
+					break;
+
+				case 2: // Amarelo
+					color = _colorYellow;
+					break;
+
+				case 3: // Azul
+					color = _colorBlue;
+					break;
+
+				default: // Desconhecido
+					color = _colorUnknown;
+					break;
+			}
+
+			// Aplica a cor em todas as formas
+			Base1R.BrushColor   = color;
+			Base2R.BrushColor   = color;
+			Base3R.BrushColor = color;
+		}
+
+	}
+}

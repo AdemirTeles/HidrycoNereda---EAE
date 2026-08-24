@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="2f033bbc-66bf-465f-a877-72d4e678fb9a" Name="manutencao" Comment="Basic Function Block Type" Namespace="Hidryco.HidrycoLib">
+  <Identification Standard="61499-2" />
+  <VersionInfo Version="0.0" Author=" " Date="26/02/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="E_ATUALIZA_LOCAL_REMOTO">
+        <With Var="stsRemoto" />
+        <With Var="stsLocal" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="E_ATUALIZA_MANUTENCAO">
+        <With Var="stsManutencao" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="stsRemoto" Type="BOOL" />
+      <VarDeclaration Name="stsLocal" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="stsManutencao" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="DefinirManutencao" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="1300.941" y="733.4117" />
+      <ECState Name="STATE1" x="2292" y="980">
+        <ECAction Algorithm="DefinirManutencao" Output="E_ATUALIZA_MANUTENCAO" />
+      </ECState>
+      <ECTransition Source="START" Destination="STATE1" Condition="1" x="1813.587" y="775.9408">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="423.5306,182.0479,483.4374,196.9534" />
+      </ECTransition>
+      <ECTransition Source="STATE1" Destination="START" Condition="1" x="1786.164" y="937.2087">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="477.4011,246.2138,417.4943,231.3082" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="DefinirManutencao">
+      <ST><![CDATA[IF NOT stsLocal AND NOT stsRemoto THEN
+	stsManutencao := TRUE;
+ELSE
+	stsManutencao := FALSE;
+END_IF;
+;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="b8cf66d4-f59a-4ab6-a3a0-e8b194596963" Name="AtvPowerCalculator" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author="SESA713705" Date="8/23/2024" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="REQ_ATV_TYPE">
+        <With Var="AtvType" />
+      </Event>
+      <Event Name="REQ_POWER_PERC">
+        <With Var="PowerPercent" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="CNF_POWER">
+        <With Var="PowerKW" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="PowerPercent" Type="REAL" />
+      <VarDeclaration ID="5CC1D4617F64C731" Name="AtvType" Type="STRING[20]" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="PowerKW" Type="REAL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="Type40N4,Type55N4,Type30N4,Type07N4,Type22N4,Type75N4" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="1050.941" y="941.4117" />
+      <ECState Name="STATE1" x="2794.857" y="300.4286">
+        <ECAction Algorithm="Type40N4" Output="CNF_POWER" />
+      </ECState>
+      <ECState Name="STATE2" x="2800.857" y="853.4285">
+        <ECAction Algorithm="Type55N4" Output="CNF_POWER" />
+      </ECState>
+      <ECState Name="STATE3" x="2817.857" y="1418.428">
+        <ECAction Algorithm="Type30N4" Output="CNF_POWER" />
+      </ECState>
+      <ECState Name="STATE4" x="2837.857" y="1921.428">
+        <ECAction Algorithm="Type07N4" Output="CNF_POWER" />
+      </ECState>
+      <ECState Name="STATE5" x="2863.857" y="2461.427">
+        <ECAction Algorithm="Type22N4" Output="CNF_POWER" />
+      </ECState>
+      <ECState Name="STATE6" x="2886.429" y="3005">
+        <ECAction Algorithm="Type75N4" Output="CNF_POWER" />
+      </ECState>
+      <ECTransition Source="START" Destination="STATE1" Condition="AtvType = '40N4'" x="1885.769" y="556.7139">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="407.5461,157.8682,532.9202,111.523" />
+      </ECTransition>
+      <ECTransition Source="STATE1" Destination="START" Condition="AtvType &lt;&gt; '40N4'" x="1959.324" y="683.8113">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="554.6835,151.7841,428.4335,198.644" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="STATE2" Condition="AtvType = '55N4'" x="1936.909" y="912.4811">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="424.4059,232.0108,546.9971,225.9825" />
+      </ECTransition>
+      <ECTransition Source="STATE2" Destination="START" Condition="AtvType &lt;&gt; '55N4'" x="2012.341" y="1058.891">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="569.5341,272.2214,449.9129,277.3666" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="STATE3" Condition="AtvType = '30N4'" x="1958.444" y="1247.299">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="429.8947,299.4372,554.4482,333.0199" />
+      </ECTransition>
+      <ECTransition Source="STATE3" Destination="START" Condition="AtvType &lt;&gt; '30N4'" x="1868.862" y="1368.714">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="526.1838,371.5497,403.3122,338.7936" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="STATE4" Condition="AtvType = '07N4'" x="1819.474" y="1631.207">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="383.0039,387.165,514.3646,458.7081" />
+      </ECTransition>
+      <ECTransition Source="STATE4" Destination="START" Condition="AtvType &lt;&gt; '07N4'" x="1736.486" y="1781.446">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="488.2635,508.0957,355.2116,435.1246" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="STATE5" Condition="AtvType = '22N4'" x="1584.635" y="2023.657">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="300.3469,472.1536,441.0503,590.1245" />
+      </ECTransition>
+      <ECTransition Source="STATE5" Destination="START" Condition="AtvType &lt;&gt; '22N4'" x="1369.297" y="2191.067">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="369.8666,644.8746,229.1633,526.9037" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="STATE6" Condition="AtvType = '75N4'" x="1147.302" y="2388.053">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="152.4808,548.3317,297.7024,711.6003" />
+      </ECTransition>
+      <ECTransition Source="STATE6" Destination="START" Condition="AtvType &lt;&gt; '75N4'" x="826.9208" y="2603.516">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="191.3694,782.5141,46.14776,619.2454" />
+      </ECTransition>
+      <ECTransition Source="STATE1" Destination="STATE1" Condition="REQ_POWER_PERC" x="2794.857" y="545.5703">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="731.2462,152.4725,666.1824,152.4725" />
+      </ECTransition>
+      <ECTransition Source="STATE2" Destination="STATE2" Condition="REQ_POWER_PERC" x="2800.862" y="1035.515" />
+      <ECTransition Source="STATE3" Destination="STATE3" Condition="REQ_POWER_PERC" x="2817.857" y="1600.514" />
+      <ECTransition Source="STATE4" Destination="STATE4" Condition="REQ_POWER_PERC" x="2837.857" y="2103.514" />
+      <ECTransition Source="STATE5" Destination="STATE5" Condition="REQ_POWER_PERC" x="2863.856" y="2643.513" />
+      <ECTransition Source="STATE6" Destination="STATE6" Condition="REQ_POWER_PERC" x="2886.427" y="3187.086" />
+    </ECC>
+    <Algorithm Name="Type40N4">
+      <ST><![CDATA[;
+PowerKW := (PowerPercent/100) * 2.8;]]></ST>
+    </Algorithm>
+    <Algorithm Name="Type55N4">
+      <ST><![CDATA[;
+PowerKW := (PowerPercent/100) * 4;]]></ST>
+    </Algorithm>
+    <Algorithm Name="Type30N4">
+      <ST><![CDATA[;
+PowerKW := (PowerPercent/100) * 1.5;]]></ST>
+    </Algorithm>
+    <Algorithm Name="Type07N4">
+      <ST><![CDATA[;
+PowerKW := (PowerPercent/100) * 0.37;]]></ST>
+    </Algorithm>
+    <Algorithm Name="Type22N4">
+      <ST><![CDATA[;
+PowerKW := (PowerPercent/100) * 1.8;]]></ST>
+    </Algorithm>
+    <Algorithm Name="Type75N4">
+      <ST><![CDATA[;
+PowerKW := (PowerPercent/100) * 6;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

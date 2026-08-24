@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="bf36f708-7dad-4ead-b496-32a823ccc1f1" Name="StartAfterNoConfig" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="7/11/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="DCF561F02572085E" Name="I_START">
+        <With Var="DT1" />
+      </Event>
+      <Event ID="6FDA35677B7E2724" Name="PAR">
+        <With Var="DT1" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="40DE227700D4BA44" Name="O_START" />
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="83063F4721840793" Name="DT1" Type="TIME" />
+    </InputVars>
+  </InterfaceList>
+  <BasicFB>
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="INIT,REQ" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="1345.441" y="526.4117" />
+      <ECState Name="NoConfig" x="1346.5" y="1079" />
+      <ECState Name="Start" x="1350" y="1570">
+        <ECAction Output="O_START" />
+      </ECState>
+      <ECTransition Source="START" Destination="NoConfig" Condition="I_START AND DT1 = T#0ms" x="1346.241" y="784.2079">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="336.4786,175.8344,336.6718,213.1865" />
+      </ECTransition>
+      <ECTransition Source="NoConfig" Destination="Start" Condition="DT1 &lt;&gt; T#0ms" x="1350.439" y="1322.591">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="337.6217,314.3789,337.8507,346.5985" />
+      </ECTransition>
+      <ECTransition Source="Start" Destination="START" Condition="1" x="856.2784" y="1049.169">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="180.7337,301.507,180.3918,223.2383" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="INIT" Comment="Initialization algorithm">
+      <ST><![CDATA[;]]></ST>
+    </Algorithm>
+    <Algorithm Name="REQ" Comment="Normally executed algorithm">
+      <ST><![CDATA[;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

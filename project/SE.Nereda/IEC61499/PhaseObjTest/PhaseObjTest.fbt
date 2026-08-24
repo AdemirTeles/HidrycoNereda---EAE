@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="5e2d79d9-ae1b-404b-8f8b-c0ce5195f39b" Name="PhaseObjTest" Format="2.0" Comment="CAT Function Block Type" Namespace="SE.Nereda">
+  <Attribute Name="HMI.Alias" Value="" />
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="6/5/2026" Remarks="template" />
+  <InterfaceList>
+    <EventOutputs>
+      <Event ID="0C5E373D5915C0BF" Name="CNF_MODE">
+        <With Var="Mode" />
+      </Event>
+    </EventOutputs>
+    <OutputVars>
+      <VarDeclaration ID="E175B2DD73AF7414" Name="Mode" Type="INT" />
+    </OutputVars>
+    <Sockets>
+      <AdapterDeclaration ID="D5B644860E76C82A" Name="ILogic" Type="IPhase" Namespace="SE.Nereda" x="620" y="1500" />
+    </Sockets>
+    <Plugs>
+      <AdapterDeclaration ID="6152263E3622FD71" Name="IOpCdt" Type="IOpCdtItems" Namespace="SE.Nereda" x="4460" y="1540" />
+    </Plugs>
+  </InterfaceList>
+  <FBNetwork>
+    <FB ID="B74BF67BAD1132B6" Name="IThis" Type="PhaseObjTest_HMI" x="2920" y="600" Namespace="SE.Nereda">
+      <Parameter Name="$E6EEEEDF7BDD9A06" Value="TRUE" />
+    </FB>
+    <FB ID="A11D8F9B42494E88" UID="F472576BBE390658" Name="FbToPhase" Type="PhaseObjTestBasic" x="2140" y="1500" Namespace="SE.Nereda" />
+    <FB ID="DFC324302D7323B8" Name="Wait" Type="E_DELAY" x="3420" y="1560" Namespace="IEC61499.Standard">
+      <Parameter Name="$DT" Value="T#5s" />
+    </FB>
+    <FB ID="AD9A7DCC1434021A" Name="INIT" Type="plcStart" x="1120" y="600" Namespace="SE.App2Base">
+      <Parameter Name="$Prio" Value="52" />
+      <Parameter Name="$Delay" Value="T#0ms" />
+    </FB>
+    <Output ID="0C5E373D5915C0BF" Name="CNF_MODE" x="3996.385" y="732" Type="Event" />
+    <Output ID="E175B2DD73AF7414" Name="Mode" x="4016.677" y="1112" Type="Data" />
+    <EventConnections>
+      <Connection Source="$D5B644860E76C82A.Interlocked_CNF" Destination="$A11D8F9B42494E88.3F9F94A6338DA2AE" />
+      <Connection Source="$A11D8F9B42494E88.05F49FB105C0E812" Destination="$DFC324302D7323B8.START" />
+      <Connection Source="$A11D8F9B42494E88.34B79C670A948645" Destination="$DFC324302D7323B8.STOP" />
+      <Connection Source="$DFC324302D7323B8.EO" Destination="$A11D8F9B42494E88.2842C393D516A8E4">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$A11D8F9B42494E88.18F7DE7D5208819E" Destination="$D5B644860E76C82A.REQ_Start_Ready">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$A11D8F9B42494E88.18F7DE7D5208819E" Destination="$D5B644860E76C82A.REQ_Stop_Ready">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$A11D8F9B42494E88.18F7DE7D5208819E" Destination="$D5B644860E76C82A.REQ_Abort_Ready">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$AD9A7DCC1434021A.FIRST_INIT" Destination="$B74BF67BAD1132B6.3541136A6FA4708F" />
+      <Connection Source="$AD9A7DCC1434021A.REDO_INIT" Destination="$B74BF67BAD1132B6.3541136A6FA4708F" dx1="70" />
+      <Connection Source="$B74BF67BAD1132B6.895D726F00E941FA" Destination="$AD9A7DCC1434021A.ACK_FIRST">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$B74BF67BAD1132B6.0F07212355722485" Destination="$6152263E3622FD71.51FD4CCF54DA16B0">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$B74BF67BAD1132B6.371D804067F7C500" Destination="$0C5E373D5915C0BF" />
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="$D5B644860E76C82A.Ready" Destination="$A11D8F9B42494E88.E7AA23EB2CE4335E" />
+      <Connection Source="$D5B644860E76C82A.Starting" Destination="$A11D8F9B42494E88.C6666212AE812393" />
+      <Connection Source="$D5B644860E76C82A.Run" Destination="$A11D8F9B42494E88.D877BBFA81D5F4BB" />
+      <Connection Source="$D5B644860E76C82A.Stopping" Destination="$A11D8F9B42494E88.3889CCC17B09D2D5" />
+      <Connection Source="$D5B644860E76C82A.Aborting" Destination="$A11D8F9B42494E88.29252BA57FAC0548" />
+      <Connection Source="$D5B644860E76C82A.Aborted" Destination="$A11D8F9B42494E88.222BFEBFFBEE3B7A" />
+      <Connection Source="$D5B644860E76C82A.Interlocked" Destination="$A11D8F9B42494E88.C162999C463FB60F" />
+      <Connection Source="$A11D8F9B42494E88.BED916B208A0C901" Destination="$D5B644860E76C82A.Start_Ready">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$A11D8F9B42494E88.D82CE452DA0C6C26" Destination="$D5B644860E76C82A.Stop_Ready">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$A11D8F9B42494E88.5EA355D716B2EBC4" Destination="$D5B644860E76C82A.Abort_Ready">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$B74BF67BAD1132B6.676386C92203F28D" Destination="$6152263E3622FD71.5E924D1CC4B831CF">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$B74BF67BAD1132B6.37D86D7352D7045C" Destination="$E175B2DD73AF7414" />
+    </DataConnections>
+  </FBNetwork>
+</FBType>

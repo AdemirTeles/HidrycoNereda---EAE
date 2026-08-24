@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="087fd113-a854-4395-9aec-952b1c75897d" Name="ActState" Format="2.0" Comment="CAT Function Block Type" Namespace="SE.Nereda">
+  <Attribute Name="HMI.Alias" Value="" />
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="6/3/2026" Remarks="template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="747A80A26976E9BA" Name="INIT">
+        <With Var="CurrentSp" />
+        <With Var="FbStatus" />
+        <With Var="Prog" />
+        <With Var="Oper" />
+        <With Var="Remote" />
+        <With Var="FbReady" />
+        <With Var="PowerFb" />
+        <With Var="DeviceType" />
+        <With Var="fbSimulation" />
+        <With Var="fbOverride" />
+        <With Var="Interlocked" />
+        <With Var="FbAlarm" />
+        <With Var="FailStatus" />
+        <With Var="NeedReset" />
+      </Event>
+      <Event ID="503DFB34A9D9F842" Name="STATE">
+        <With Var="CurrentSp" />
+        <With Var="FbStatus" />
+        <With Var="FbReady" />
+        <With Var="PowerFb" />
+        <With Var="Prog" />
+        <With Var="Oper" />
+        <With Var="Remote" />
+        <With Var="DeviceType" />
+        <With Var="fbSimulation" />
+        <With Var="fbOverride" />
+        <With Var="Interlocked" />
+        <With Var="FbAlarm" />
+        <With Var="FailStatus" />
+        <With Var="NeedReset" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="B9B326A02DDC85D5" Name="INITO" />
+      <Event ID="3E2F994B40CA5D8A" Name="FB_RDY">
+        <With Var="oFbReady" />
+      </Event>
+      <Event ID="7E9F7DF9BBDC513D" Name="FB_FAIL">
+        <With Var="oFbFailure" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="52C3EF6D9E750127" Name="CurrentSp" Type="INT" />
+      <VarDeclaration ID="8E076A9FED13120E" Name="FbStatus" Type="INT" />
+      <VarDeclaration ID="1C9201C719ABF50B" Name="FbReady" Type="BOOL" />
+      <VarDeclaration ID="655DE7D6E2CF8FB8" Name="PowerFb" Type="BOOL" />
+      <VarDeclaration ID="E90E39DE4A80ABDE" Name="Prog" Type="BOOL" />
+      <VarDeclaration ID="3885B231A80F7FFF" Name="Oper" Type="BOOL" />
+      <VarDeclaration ID="C70237F918BB93F6" Name="Remote" Type="BOOL" />
+      <VarDeclaration ID="DD241BABAE81E6FD" Name="DeviceType" Type="DeviceType" Namespace="SE.Nereda" />
+      <VarDeclaration ID="7A0BDA68B634A263" Name="fbSimulation" Type="BOOL" />
+      <VarDeclaration ID="DD66F5DCF7F6FB1D" Name="fbOverride" Type="BOOL" />
+      <VarDeclaration ID="9A204E382C1350DC" Name="Interlocked" Type="BOOL" />
+      <VarDeclaration ID="F37ACDE435F84908" Name="FbAlarm" Type="BOOL" />
+      <VarDeclaration ID="94E3C396E1CCD1C0" Name="FailStatus" Type="BOOL" />
+      <VarDeclaration ID="3ED730632EF45559" Name="NeedReset" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="4E509FA35DBACB85" Name="oFbReady" Type="BOOL" />
+      <VarDeclaration ID="8CCAFBE354ECA569" Name="oFbFailure" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <FBNetwork>
+    <FB ID="F460CF38584074EB" Name="IThis" Type="ActState_HMI" x="2220" y="820" Namespace="SE.Nereda">
+      <Parameter Name="$2CA52F4FB34A3926" Value="TRUE" />
+    </FB>
+    <FB ID="7C2422D093D2FF10" UID="C8FF3E4DD911F1D6" Name="DeviceTypeDecode" Type="DeviceTypeDecode" x="2220" y="2100" Namespace="SE.Nereda" />
+    <FB ID="3FE15184DF9733D1" Name="Ready" Type="boolValueChanged" x="3040" y="2580" Namespace="SE.App2Base" />
+    <FB ID="5710393DFBB831A1" UID="D3D0E2EF84FCBA57" Name="ReadyCdts" Type="AND_65BD917F4F2EC165" x="2220" y="2580" Namespace="SE.Nereda">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNT:=6;OUT:BOOL" />
+    </FB>
+    <FB ID="04EE5F640F79EB43" UID="F968D99FBDBE9FB7" Name="NotOper" Type="NOT_704CB98696D9F02D" x="1320" y="2580" Namespace="SE.Nereda">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNT:=3;OUT${CNT}:BOOL,BOOL,BOOL" />
+    </FB>
+    <FB ID="9381C9652156F6A4" UID="1B5AB99380477FA7" Name="FailureCdts" Type="OR_88A3DD8EC65DD11C" x="2220" y="3320" Namespace="SE.Nereda">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNT:=2;OUT:BOOL" />
+    </FB>
+    <FB ID="A45B69FA89CB671F" Name="Failure" Type="boolValueChanged" x="3040" y="3320" Namespace="SE.App2Base" />
+    <Input ID="747A80A26976E9BA" Name="INIT" x="360" y="832" Type="Event" />
+    <Input ID="503DFB34A9D9F842" Name="STATE" x="360" y="885.9998" Type="Event" />
+    <Input ID="52C3EF6D9E750127" Name="CurrentSp" x="360" y="1152" Type="Data" />
+    <Input ID="8E076A9FED13120E" Name="FbStatus" x="360" y="1212" Type="Data" />
+    <Input ID="E90E39DE4A80ABDE" Name="Prog" x="360" y="1384" Type="Data" />
+    <Input ID="3885B231A80F7FFF" Name="Oper" x="360" y="1444" Type="Data" />
+    <Input ID="C70237F918BB93F6" Name="Remote" x="360" y="1504" Type="Data" />
+    <Input ID="1C9201C719ABF50B" Name="FbReady" x="360" y="1264" Type="Data" />
+    <Input ID="655DE7D6E2CF8FB8" Name="PowerFb" x="360" y="1324" Type="Data" />
+    <Input ID="DD241BABAE81E6FD" Name="DeviceType" x="360" y="1564" Type="Data" />
+    <Input ID="7A0BDA68B634A263" Name="fbSimulation" x="360" y="1632" Type="Data" />
+    <Input ID="DD66F5DCF7F6FB1D" Name="fbOverride" x="360" y="1692" Type="Data" />
+    <Input ID="9A204E382C1350DC" Name="Interlocked" x="360" y="1746" Type="Data" />
+    <Input ID="F37ACDE435F84908" Name="FbAlarm" x="420" y="3532" Type="Data" />
+    <Input ID="94E3C396E1CCD1C0" Name="FailStatus" x="420" y="3592" Type="Data" />
+    <Input ID="3ED730632EF45559" Name="NeedReset" x="358.3959" y="1812" Type="Data" />
+    <Frame Name="COMMENT1" X="400" Y="2580" Width="680" Height="543.2813" IsComment="true">
+      <Parameter Name="BackgroundColor" Value="LemonChiffon" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 10pt" />
+      <Parameter Name="TextAlignment" Value="TopCenter" />
+      <Parameter Name="MoveStyle" Value="None" />
+      <Parameter Name="Text" Value="Ready Conditions :&#xD;&#xA;&#xD;&#xA;Fb Ready = TRUE&#xD;&#xA;Fb Power = TRUE&#xD;&#xA;Prog = TRUE&#xD;&#xA;Oper = FALSE&#xD;&#xA;Remote = FALSE&#xD;&#xA;Interlock = FALSE" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Output ID="8CCAFBE354ECA569" Name="oFbFailure" x="3840" y="3452" Type="Data" />
+    <Output ID="7E9F7DF9BBDC513D" Name="FB_FAIL" x="3840" y="3392" Type="Event" />
+    <Output ID="4E509FA35DBACB85" Name="oFbReady" x="3840" y="2712" Type="Data" />
+    <Output ID="3E2F994B40CA5D8A" Name="FB_RDY" x="3840" y="2652" Type="Event" />
+    <Output ID="B9B326A02DDC85D5" Name="INITO" x="3219.115" y="832" Type="Event" />
+    <EventConnections>
+      <Connection Source="$3FE15184DF9733D1.CHD" Destination="$3E2F994B40CA5D8A" dx1="70" />
+      <Connection Source="$3FE15184DF9733D1.CNF" Destination="$7C2422D093D2FF10.3D7E829B7F7727B5">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$747A80A26976E9BA" Destination="$F460CF38584074EB.3D79AFE8C5CCC1E0" />
+      <Connection Source="$A45B69FA89CB671F.CNF" Destination="$F460CF38584074EB.EFB91C76FB094C24">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$F460CF38584074EB.3D21A27021CDFFD5" Destination="$B9B326A02DDC85D5" />
+      <Connection Source="$F460CF38584074EB.3D21A27021CDFFD5" Destination="$F460CF38584074EB.EFB91C76FB094C24">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$503DFB34A9D9F842" Destination="$04EE5F640F79EB43.REQ" dx1="467.25">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$F460CF38584074EB.3D21A27021CDFFD5" Destination="$04EE5F640F79EB43.REQ">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$04EE5F640F79EB43.CNF" Destination="$5710393DFBB831A1.REQ" />
+      <Connection Source="$5710393DFBB831A1.CNF" Destination="$3FE15184DF9733D1.REQ" />
+      <Connection Source="$A45B69FA89CB671F.CHD" Destination="$7E9F7DF9BBDC513D" dx1="70" />
+      <Connection Source="$7C2422D093D2FF10.F61F2A50E55F4E82" Destination="$9381C9652156F6A4.REQ">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$9381C9652156F6A4.CNF" Destination="$A45B69FA89CB671F.REQ" />
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="$3FE15184DF9733D1.Output" Destination="$4E509FA35DBACB85" dx1="90" />
+      <Connection Source="$DD241BABAE81E6FD" Destination="$7C2422D093D2FF10.200DB846EB508014" dx1="120.7085">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$52C3EF6D9E750127" Destination="$F460CF38584074EB.55EF8AB59EBE70CA" />
+      <Connection Source="$8E076A9FED13120E" Destination="$F460CF38584074EB.13F5494BA7641560" />
+      <Connection Source="$1C9201C719ABF50B" Destination="$F460CF38584074EB.C4C08803A8CAD7DA" dx1="127.125" />
+      <Connection Source="$655DE7D6E2CF8FB8" Destination="$F460CF38584074EB.26D7A4E5F419C0BD" dx1="129.5209" />
+      <Connection Source="$E90E39DE4A80ABDE" Destination="$F460CF38584074EB.8721D6D48425D088" dx1="120" />
+      <Connection Source="$3885B231A80F7FFF" Destination="$F460CF38584074EB.117B8431C4C2B56E" dx1="125.3959" />
+      <Connection Source="$C70237F918BB93F6" Destination="$F460CF38584074EB.B74FD41813F458FA" dx1="120" />
+      <Connection Source="$7C2422D093D2FF10.DA71AF7072E47302" Destination="$F460CF38584074EB.8E0D2EAE8175DF9E">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$7A0BDA68B634A263" Destination="$F460CF38584074EB.E015A64E76A82B8E" />
+      <Connection Source="$DD66F5DCF7F6FB1D" Destination="$F460CF38584074EB.C6DA3595164AEFC3" />
+      <Connection Source="$9A204E382C1350DC" Destination="$F460CF38584074EB.DD2EBF6DBFC90D42" dx1="120" />
+      <Connection Source="$3885B231A80F7FFF" Destination="$04EE5F640F79EB43.IN1" dx1="402.6979">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$C70237F918BB93F6" Destination="$04EE5F640F79EB43.IN2" dx1="470.8542">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$9A204E382C1350DC" Destination="$04EE5F640F79EB43.IN3" dx1="120">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$1C9201C719ABF50B" Destination="$5710393DFBB831A1.IN1" dx1="813.5625">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$655DE7D6E2CF8FB8" Destination="$5710393DFBB831A1.IN2" dx1="804.7604">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$E90E39DE4A80ABDE" Destination="$5710393DFBB831A1.IN3" dx1="835.0625">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$04EE5F640F79EB43.OUT1" Destination="$5710393DFBB831A1.IN4" dx1="193.75">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$04EE5F640F79EB43.OUT2" Destination="$5710393DFBB831A1.IN5" dx1="133.75">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$5710393DFBB831A1.OUT" Destination="$3FE15184DF9733D1.Input" dx1="47.47925" />
+      <Connection Source="$04EE5F640F79EB43.OUT3" Destination="$5710393DFBB831A1.IN6" dx1="93.75">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$A45B69FA89CB671F.Output" Destination="$8CCAFBE354ECA569" dx1="90" />
+      <Connection Source="$F37ACDE435F84908" Destination="$9381C9652156F6A4.IN1" />
+      <Connection Source="$94E3C396E1CCD1C0" Destination="$9381C9652156F6A4.IN2" dx1="40" />
+      <Connection Source="$9381C9652156F6A4.OUT" Destination="$A45B69FA89CB671F.Input" dx1="47.47925" />
+      <Connection Source="$3ED730632EF45559" Destination="$F460CF38584074EB.EB247ABEDD2E3500" />
+    </DataConnections>
+  </FBNetwork>
+</FBType>

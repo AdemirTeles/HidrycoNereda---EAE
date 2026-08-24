@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="eafd3353-b73a-4e96-b015-0f4da39da61e" Name="acionamento" Comment="Basic Function Block Type" Namespace="Hidryco.HidrycoLib">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="15/01/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="REQ" Comment="Normal Execution Request">
+        <With Var="stsRemoto" />
+        <With Var="stsAutomatico" />
+        <With Var="stsBloqueioManual" />
+        <With Var="cmdLigarManual" />
+        <With Var="cmdLigarAutomatico" />
+        <With Var="stsBloqueioAutomatico" />
+        <With Var="stsFalhaGeral" />
+        <With Var="stsManutencao" />
+        <With Var="stsPIDHabilitado" />
+        <With Var="stsSaidaAutomatico" />
+        <With Var="stsSaidaManual" />
+        <With Var="cmdBloqueiaPorGerador" />
+        <With Var="stsProtecaoTermica" />
+        <With Var="stsEmergencia" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="CNF" Comment="Execution Confirmation">
+        <With Var="acmLigar" />
+        <With Var="stsDisponivelAutomatico" />
+        <With Var="stpSaida" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="8B55FF58A177F1E0" Name="stsEmergencia" Type="BOOL" />
+      <VarDeclaration Name="stsRemoto" Type="BOOL" />
+      <VarDeclaration Name="stsAutomatico" Type="BOOL" />
+      <VarDeclaration Name="stsBloqueioManual" Type="BOOL" />
+      <VarDeclaration Name="stsBloqueioAutomatico" Type="BOOL" />
+      <VarDeclaration Name="cmdLigarAutomatico" Type="BOOL" />
+      <VarDeclaration Name="cmdLigarManual" Type="BOOL" />
+      <VarDeclaration Name="stsFalhaGeral" Type="BOOL" />
+      <VarDeclaration Name="stsManutencao" Type="BOOL" />
+      <VarDeclaration Name="stsPIDHabilitado" Type="BOOL" />
+      <VarDeclaration Name="stsSaidaAutomatico" Type="REAL" />
+      <VarDeclaration Name="stsSaidaManual" Type="REAL" />
+      <VarDeclaration ID="9AF71C44C0909C5B" Name="cmdBloqueiaPorGerador" Type="BOOL" />
+      <VarDeclaration ID="E011DB3DC4C844DC" Name="stsProtecaoTermica" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="cmdLigar" Name="acmLigar" Type="BOOL" />
+      <VarDeclaration Name="stpSaida" Type="REAL" />
+      <VarDeclaration Name="stsDisponivelAutomatico" Type="BOOL" Comment="Status que o equipamento pode ser acionado em automatico" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="599ecbc9-29c8-4a70-b1aa-a98b6b8169c1">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="alg_aval,ALG_EMERGENCIA" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="1820.274" y="860.7454" />
+      <ECState Name="AVALIAR" x="1870.666" y="1354">
+        <ECAction Algorithm="alg_aval" Output="CNF" />
+      </ECState>
+      <ECState Name="STATE1" x="1828" y="344">
+        <ECAction Algorithm="ALG_EMERGENCIA" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="AVALIAR" Condition="REQ AND NOT stsEmergencia" x="1933.627" y="1111.536">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="487.0557,261.6763,489.3062,294.7856" />
+      </ECTransition>
+      <ECTransition Source="AVALIAR" Destination="START" Condition="1" x="1786.191" y="1073.261">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="444.6922,282.1176,441.9862,248.8275" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="STATE1" Condition="stsEmergencia" x="1816.668" y="528.8389">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="453.7052,140.3528,453.8294,111.8111" />
+      </ECTransition>
+      <ECTransition Source="STATE1" Destination="START" Condition="1" x="1894.821" y="607.6604">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="477.9462,135.1581,477.194,169.5534" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="alg_aval">
+      <ST><![CDATA[(* === Disponibilidade para automático === *)
+stsDisponivelAutomatico := stsRemoto 
+                       AND stsAutomatico 
+                       AND NOT stsBloqueioAutomatico 
+                       AND NOT stsFalhaGeral 
+                       AND NOT stsManutencao
+                       AND NOT cmdBloqueiaPorGerador
+					   AND NOT stsProtecaoTermica
+					   AND NOT stsEmergencia;
+(* === Comando de ligar === *)
+IF stsManutencao OR stsFalhaGeral OR NOT stsRemoto THEN
+   acmLigar := FALSE;
+   stpSaida := 0.0;
+   RETURN;
+END_IF;
+
+IF stsAutomatico THEN
+   acmLigar := cmdLigarAutomatico AND NOT stsBloqueioAutomatico AND NOT cmdBloqueiaPorGerador AND NOT stsProtecaoTermica;
+ELSE
+   acmLigar := cmdLigarManual AND NOT stsBloqueioManual AND NOT cmdBloqueiaPorGerador AND NOT stsProtecaoTermica;
+END_IF;
+
+(* === Seleção da fonte de saída === *)
+IF stsAutomatico AND stsPIDHabilitado THEN
+   stpSaida := stsSaidaAutomatico;   (* Auto + PID ON  → saída do controle automático *)
+ELSE
+   stpSaida := stsSaidaManual;       (* Auto+PID OFF ou Manual → saída manual *)
+END_IF;
+;]]></ST>
+    </Algorithm>
+    <Algorithm ID="d73eeb00-d710-41a0-bc9a-7bda583ba283" Name="ALG_EMERGENCIA">
+      <ST><![CDATA[
+acmLigar := FALSE;
+;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

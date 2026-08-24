@@ -1,0 +1,27 @@
+/*
+ * Created by EcoStruxure Automation Expert.
+ * User:  
+ * Date: 6/24/2026
+ * Time: 11:58 AM
+ * 
+ */
+
+using System;
+using NxtControl.GuiFramework;
+
+namespace SE.Nereda.Symbols.NeredaEffluent
+{
+	/// <summary>
+	/// Description of sFlushStatus002.
+	/// </summary>
+	public partial class sFlushStatus002 : NxtControl.GuiFramework.HMISymbol
+	{
+		public sFlushStatus002()
+		{
+			//
+			// The InitializeComponent() call is required for Windows Forms designer support.
+			//
+			InitializeComponent();
+		}
+	}
+}

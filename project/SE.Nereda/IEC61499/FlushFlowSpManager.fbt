@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="05c142e6-6195-4816-a804-0c764e05b4fe" Name="FlushFlowSpManager" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="7/10/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="11EFC538173604A5" Name="REQ" Comment="Normal Execution Request">
+        <With Var="FlushSelected" />
+        <With Var="GSI_FlushFlowSp" />
+        <With Var="GSs_FlushFlowSp" />
+        <With Var="SLB_FlushFlowSp" />
+        <With Var="N_FlowSp" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="8933B5415DF4ADE7" Name="CNF" Comment="Execution Confirmation">
+        <With Var="FlowSp" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="D809E32A9AAF4DB7" Name="FlushSelected" Type="INT" />
+      <VarDeclaration ID="1897BC4B6F9EA603" Name="GSI_FlushFlowSp" Type="REAL" />
+      <VarDeclaration ID="2AB2CCE4EBBC9F51" Name="GSs_FlushFlowSp" Type="REAL" />
+      <VarDeclaration ID="C3A04AF8A83D4A53" Name="SLB_FlushFlowSp" Type="REAL" />
+      <VarDeclaration ID="7BDB52087F72217A" Name="N_FlowSp" Type="REAL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="971EA695F43B2153" Name="FlowSp" Type="REAL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="INIT,REQ" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="552.9412" y="429.4117" />
+      <ECState Name="REQ" Comment="Normal execution" x="1553.647" y="1028.941">
+        <ECAction Algorithm="REQ" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="REQ" Condition="REQ" x="1101.316" y="663.4527">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="241.7341,140.2165,310.6096,181.4802" />
+      </ECTransition>
+      <ECTransition Source="REQ" Destination="START" Condition="1" x="1048.276" y="806.6663">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="297.7613,227.926,228.8858,186.6622" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="INIT" Comment="Initialization algorithm">
+      <ST><![CDATA[;]]></ST>
+    </Algorithm>
+    <Algorithm Name="REQ" Comment="Normally executed algorithm">
+      <ST><![CDATA[;
+IF FlushSelected = 0 THEN
+	FlowSp := N_FlowSp;
+ELSIF FlushSelected = 1 THEN
+	FlowSp := GSI_FlushFlowSp;
+ELSIF FlushSelected = 2 THEN
+	FlowSp := GSs_FlushFlowSp;
+ELSIF FlushSelected = 3 THEN
+	FlowSp := SLB_FlushFlowSp;
+END_IF;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

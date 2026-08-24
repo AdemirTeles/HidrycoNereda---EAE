@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="c5246793-cfc0-458d-b44c-59bd05234497" Name="PIDMgr3" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="9/5/2025" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="REQ" Comment="Normal Execution Request">
+        <With Var="RunPID1" />
+        <With Var="SpIn1" />
+        <With Var="RunPID2" />
+        <With Var="SpIn2" />
+        <With Var="RunPID3" />
+        <With Var="SpIn3" />
+      </Event>
+      <Event Name="CNF_READY">
+        <With Var="InProgLocal" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="REQ_CMD">
+        <With Var="Lsp" />
+      </Event>
+      <Event ID="REQ_SP" Name="REQ_SP_OUT">
+        <With Var="LspReal1" />
+      </Event>
+      <Event Name="PROGLOCAL" Comment="Execution Confirmation">
+        <With Var="ProgLocal" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="RunPID" Name="RunPID1" Type="BOOL" Comment="Input event qualifier" />
+      <VarDeclaration ID="D8DF49D0EFA511FD" Name="SpIn1" Type="REAL" />
+      <VarDeclaration ID="1DBB303CB26BAD83" Name="RunPID2" Type="BOOL" />
+      <VarDeclaration ID="D2690D13163A8932" Name="SpIn2" Type="REAL" />
+      <VarDeclaration ID="BC06F7FDB3C81EAC" Name="RunPID3" Type="BOOL" />
+      <VarDeclaration ID="57617791AA2F9251" Name="SpIn3" Type="REAL" />
+      <VarDeclaration Name="InProgLocal" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="Lsp" Type="INT" />
+      <VarDeclaration ID="LspReal2" Name="LspReal1" Type="REAL" />
+      <VarDeclaration Name="ProgLocal" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="d8ef8e4b-b578-4408-8e00-bcf4988eb522">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="ProgLocal,AutoManual,Output" />
+    <InternalVars>
+      <VarDeclaration ID="651B59536DE6A52E" Name="InLsp" Type="REAL" />
+    </InternalVars>
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="1464.941" y="405.4116" />
+      <ECState Name="ProgLocal" Comment="Normal execution" x="1473.647" y="956.9409">
+        <ECAction Algorithm="ProgLocal" Output="PROGLOCAL" />
+      </ECState>
+      <ECState Name="AutoMan" x="1476" y="1440">
+        <ECAction Algorithm="AutoManual" Output="REQ_CMD" />
+      </ECState>
+      <ECState Name="Output" x="1484" y="1916">
+        <ECAction Algorithm="Output" Output="REQ_SP_OUT" />
+      </ECState>
+      <ECTransition Source="START" Destination="ProgLocal" Condition="REQ" x="1474.07" y="674.568">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="368.4364,149.4518,369.1354,186.7308" />
+      </ECTransition>
+      <ECTransition Source="ProgLocal" Destination="AutoMan" Condition="InProgLocal" x="1479.391" y="1185.628">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="370.2047,279.5626,369.9725,311.1112" />
+      </ECTransition>
+      <ECTransition Source="AutoMan" Destination="Output" Condition="1" x="1481.127" y="1660.388">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="370.1242,398.0868,370.5389,429.172" />
+      </ECTransition>
+      <ECTransition Source="Output" Destination="START" Condition="1" x="966.6507" y="1142.292">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="204.9798,354.0653,205.6846,214.0118" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="ProgLocal" Comment="Normally executed algorithm">
+      <ST><![CDATA[ProgLocal := TRUE;]]></ST>
+    </Algorithm>
+    <Algorithm Name="AutoManual" Comment="Put PID in AUTO or MANUAL">
+      <ST><![CDATA[IF RunPID1 OR RunPID2 OR RunPID3 THEN 
+	Lsp := 1;
+ELSE	
+	Lsp := 0;
+END_IF;
+]]></ST>
+    </Algorithm>
+    <Algorithm Name="Output" Comment="Set output to 0 if off">
+      <ST><![CDATA[InLsp := 0;
+
+IF RunPID1 AND (SpIn1 > InLsp) THEN
+    InLsp := SpIn1;
+END_IF;
+
+IF RunPID2 AND (SpIn2 > InLsp) THEN
+    InLsp := SpIn2;
+END_IF;
+
+IF RunPID3 AND (SpIn3 > InLsp) THEN
+    InLsp := SpIn3;
+END_IF;
+
+LspReal1 := InLsp;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="681f24e9-e118-4877-a4ce-f4b3b83dd341" Name="PID" Format="2.0" Comment="Composite Function Block Type" Namespace="Hidryco.HidrycoLib">
+  <Attribute Name="HMI.Alias" Value="" />
+  <Attribute Name="Configuration.FB.IDCounter" Value="10" />
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="1/20/2026" Remarks="template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="E_ATUALIZA_PV">
+        <With Var="stsPv" />
+      </Event>
+      <Event Name="E_ATUALIZA_INTERLOCK">
+        <With Var="interlock" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="E_ATUALIZA_SAIDA">
+        <With Var="stsSaida" />
+      </Event>
+      <Event Name="E_ATUALIZA_PID_HABILITADO">
+        <With Var="stsPIDHabilitado" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="stsPv" Type="REAL" />
+      <VarDeclaration Name="interlock" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="stsSaida" Type="REAL" />
+      <VarDeclaration Name="stsPIDHabilitado" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <FBNetwork>
+    <FB ID="1" Name="pidCtl1" Type="pidCtl" x="2920" y="720" Namespace="Hidryco.HidrycoLib">
+      <Parameter Name="$Direction" Value="FALSE" />
+    </FB>
+    <FB ID="2" Name="IThis" Type="PID_HMI" x="1020" y="800" Namespace="Hidryco.HidrycoLib">
+      <Parameter Name="$64D2EEC3F84D7890" Value="TRUE" />
+    </FB>
+    <FB ID="10" Name="plcStart1" Type="plcStart" x="220" y="320" Namespace="SE.App2Base">
+      <Parameter Name="$Prio" Value="10" />
+    </FB>
+    <Input Name="stsPv" x="2460" y="1292" Type="Data" />
+    <Input Name="E_ATUALIZA_PV" x="2340" y="732" Type="Event" />
+    <Input Name="E_ATUALIZA_INTERLOCK" x="1120" y="2012" Type="Event" />
+    <Input Name="interlock" x="1800" y="2492" Type="Data" />
+    <Output Name="stsPIDHabilitado" x="2860" y="432" Type="Data" />
+    <Output Name="E_ATUALIZA_PID_HABILITADO" x="2860" y="372" Type="Event" />
+    <Output Name="stsSaida" x="4160" y="1292" Type="Data" />
+    <Output Name="E_ATUALIZA_SAIDA" x="4360" y="732" Type="Event" />
+    <EventConnections>
+      <Connection Source="$E_ATUALIZA_PV" Destination="$1.REQ" />
+      <Connection Source="$10.REDO_INIT" Destination="$2.A52CBBC0C6F5AE97">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$10.FIRST_INIT" Destination="$2.A52CBBC0C6F5AE97">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$1.CNF" Destination="$2.8C98DEB1311A7CA2">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$2.27755EC8CAD9996" Destination="$2.DFF6224D30264680">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$2.17BD8D2AC172EC1D" Destination="$1.REQ">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$2.17BD8D2AC172EC1D" Destination="$1.REQ_SP">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$2.17BD8D2AC172EC1D" Destination="$1.REQ_PARA" dx1="260" />
+      <Connection Source="$2.27755EC8CAD9996" Destination="$10.ACK_FIRST">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$1.CNF" Destination="$E_ATUALIZA_SAIDA" />
+      <Connection Source="$2.17BD8D2AC172EC1D" Destination="$E_ATUALIZA_PID_HABILITADO" dx1="155.0625" />
+      <Connection Source="$E_ATUALIZA_INTERLOCK" Destination="$1.REQ_ILCK" dx1="378.375" />
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="$stsPv" Destination="$1.Pv" />
+      <Connection Source="$1.Out" Destination="$2.BC2DFBA1A80D0AFB">
+        <Points>
+          <Points>
+            <X>949.4479</X>
+            <Y>330</Y>
+          </Points>
+          <Points>
+            <X>967.5</X>
+            <Y>330</Y>
+          </Points>
+          <Points>
+            <X>967.5</X>
+            <Y>192.5</Y>
+          </Points>
+          <Points>
+            <X>717.5</X>
+            <Y>192.5</Y>
+          </Points>
+          <Points>
+            <X>717.5</X>
+            <Y>177.5</Y>
+          </Points>
+          <Points>
+            <X>242.5</X>
+            <Y>177.5</Y>
+          </Points>
+          <Points>
+            <X>242.5</X>
+            <Y>305</Y>
+          </Points>
+          <Points>
+            <X>250</X>
+            <Y>305</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$2.CE40F3D90F109A21" Destination="$1.Mode" dx1="160" />
+      <Connection Source="$2.5D9E33FAF912AFEA" Destination="$1.Sp" dx1="140" />
+      <Connection Source="$2.7C4804C94A472D23" Destination="$1.Gain" dx1="120" />
+      <Connection Source="$2.EB8847873B66A182" Destination="$1.IntegralTime" dx1="100" />
+      <Connection Source="$2.863DB2F1C3B0FBA6" Destination="$1.DerivativeTime" dx1="80" />
+      <Connection Source="$2.D013DCB766CA770B" Destination="$1.OutMin" dx1="60" />
+      <Connection Source="$2.1B7C1AF735A4DFA6" Destination="$1.OutMax" dx1="40" />
+      <Connection Source="$1.Out" Destination="$stsSaida" />
+      <Connection Source="$2.CE40F3D90F109A21" Destination="$stsPIDHabilitado" dx1="95.0625" />
+      <Connection Source="$interlock" Destination="$1.IlckCond" />
+    </DataConnections>
+  </FBNetwork>
+</FBType>

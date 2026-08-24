@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="93a66b7f-37f1-48d1-aa7f-e1fbac5db8d2" Name="PrevCurrState" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="6/11/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="0656E54CEB2F117B" Name="REQ" Comment="Normal Execution Request">
+        <With Var="State" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="C79BF2830073106B" Name="CNF" Comment="Execution Confirmation">
+        <With Var="PrevPrevState" />
+        <With Var="PrevState" />
+        <With Var="CurrState" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="8C198C6E6A0624DE" Name="State" Type="INT" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="4B6C97D21C93CAE0" Name="PrevPrevState" Type="INT" />
+      <VarDeclaration ID="EBE08A4AE843EBA3" Name="PrevState" Type="INT" />
+      <VarDeclaration ID="6EC01B0496A9C391" Name="CurrState" Type="INT" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="REQ" />
+    <InternalVars>
+      <VarDeclaration ID="438E8597A7FA689C" Name="InTable" Type="INT" ArraySize="3" />
+    </InternalVars>
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="552.9412" y="429.4117" />
+      <ECState Name="REQ" Comment="Normal execution" x="1413.647" y="868.9412">
+        <ECAction Algorithm="REQ" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="REQ" Condition="REQ" x="1027.394" y="579.6331">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="230.046,126.1661,284.9405,154.1986" />
+      </ECTransition>
+      <ECTransition Source="REQ" Destination="START" Condition="1" x="979.6611" y="728.6947">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="273.5707,201.4635,218.6762,173.431" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="REQ" Comment="Normally executed algorithm">
+      <ST><![CDATA[;
+
+IF CurrState <> State THEN
+	InTable[2] := InTable[1];
+	InTable[1] := InTable[0];
+	InTable[0] := State;
+END_IF;
+
+PrevPrevState := InTable[2];
+PrevState := InTable[1];
+CurrState := InTable[0];]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

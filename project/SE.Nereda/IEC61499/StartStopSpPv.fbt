@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="609ee5fd-663e-44fc-99d3-24ba710d244d" Comment="Basic Function Block Type" Name="StartStopSpPv" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="7/21/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="19B0F962D4DCEDE2" Name="REQ" Comment="Normal Execution Request">
+        <With Var="Pv" />
+        <With Var="StartSp" />
+        <With Var="StopSp" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="ED0F74C511AB6DA4" Name="CNF" Comment="Execution Confirmation">
+        <With Var="Start" />
+        <With Var="Stop" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="DD34EA40290B8853" Name="Pv" Type="REAL" />
+      <VarDeclaration ID="DA9D6C0B442BDE8A" Name="StartSp" Type="REAL" />
+      <VarDeclaration ID="1127B3C1A86C2C47" Name="StopSp" Type="REAL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="91B941F57B403772" Name="Start" Type="BOOL" />
+      <VarDeclaration ID="79A07DF8BE81D140" Name="Stop" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="0c5d7152-1b6c-4742-a71d-dcdef6ea2d0b">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="REQ" />
+    <InternalVars>
+      <VarDeclaration ID="9226FBBD94473079" Name="FirstStart" Type="BOOL" InitialValue="FALSE" />
+    </InternalVars>
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="368.9412" y="929.4118" />
+      <ECState Name="REQ" Comment="Normal execution" x="1073.647" y="1428.941">
+        <ECAction Algorithm="REQ" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="REQ" Condition="REQ" x="775.8893" y="1116.684">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="171.5529,257.9332,218.0091,290.8636" />
+      </ECTransition>
+      <ECTransition Source="REQ" Destination="START" Condition="1" x="714.7816" y="1256.665">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="203.5517,336.2593,157.0954,303.3289" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="REQ" Comment="Normally executed algorithm">
+      <ST><![CDATA[;
+IF Pv >= StartSp THEN
+	FirstStart := TRUE;
+	Start := TRUE;
+	Stop := FALSE;
+END_IF;
+
+IF Pv <= StopSp OR NOT FirstStart THEN
+	Start := FALSE;
+	Stop := TRUE;
+END_IF;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

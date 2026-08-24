@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="517540c9-9390-4557-b395-8b99607357d5" Name="DelayedActive" Format="2.0" Comment="Composite Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="6/19/2026" Remarks="template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="C451626F7187F42D" Name="REQ">
+        <With Var="FbRun" />
+        <With Var="Delay" />
+        <With Var="Reset" />
+        <With Var="Enable" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="DDA64CDC00519DA4" Name="CNF" Comment="Execution Confirmation">
+        <With Var="Active" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="4E076A4928A0DFEF" Name="Enable" Type="BOOL" />
+      <VarDeclaration ID="19546B227DE05AED" Name="FbRun" Type="BOOL" />
+      <VarDeclaration ID="1CE054BDD0AD4DEB" Name="Delay" Type="TIME" Comment="Delay Time" />
+      <VarDeclaration ID="45767490F5BA3A44" Name="Reset" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="614F3125208254F6" Name="Active" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <FBNetwork>
+    <FB ID="B92B8068A35CC8A6" UID="6AF4262AFCF7ED61" Name="ActiveMng" Type="IlckEnabledManager" x="1900" y="939.9999" Namespace="SE.Nereda" />
+    <FB ID="2D7BFE69487E497B" Name="DelayFb" Type="E_DELAY" x="2040" y="1560" Namespace="IEC61499.Standard" />
+    <FB ID="BDC1CC12138186A6" Name="Smooth" Type="boolValueChanged" x="3980" y="940" Namespace="SE.App2Base" />
+    <FB ID="C097D24B94FDF708" Name="Enabled" Type="AND_88A3DD8EC65DD11C" x="3160" y="940" Namespace="SE.Nereda">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNT:=2;OUT:BOOL" />
+    </FB>
+    <Input ID="C451626F7187F42D" Name="REQ" x="1100" y="947.9999" Type="Event" />
+    <Input ID="19546B227DE05AED" Name="FbRun" x="1100" y="1272" Type="Data" />
+    <Input ID="1CE054BDD0AD4DEB" Name="Delay" x="1100" y="1832" Type="Data" />
+    <Input ID="45767490F5BA3A44" Name="Reset" x="1100" y="1332" Type="Data" />
+    <Input ID="4E076A4928A0DFEF" Name="Enable" x="1100" y="1392" Type="Data" />
+    <Output ID="614F3125208254F6" Name="Active" x="4660" y="1332" Type="Data" />
+    <Output ID="DDA64CDC00519DA4" Name="CNF" x="4660" y="1012" Type="Event" />
+    <EventConnections>
+      <Connection Source="$BDC1CC12138186A6.CHD" Destination="$DDA64CDC00519DA4" dx1="66.521" />
+      <Connection Source="$C097D24B94FDF708.CNF" Destination="$BDC1CC12138186A6.REQ" />
+      <Connection Source="$B92B8068A35CC8A6.CNF" Destination="$C097D24B94FDF708.REQ" dx1="100" />
+      <Connection Source="$B92B8068A35CC8A6.CNF_DELAY" Destination="$2D7BFE69487E497B.START">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$2D7BFE69487E497B.EO" Destination="$B92B8068A35CC8A6.REQ_DELAY">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$C451626F7187F42D" Destination="$B92B8068A35CC8A6.REQ" dx1="40" />
+      <Connection Source="$B92B8068A35CC8A6.4F53EB7FE14653FD" Destination="$2D7BFE69487E497B.STOP">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="$1CE054BDD0AD4DEB" Destination="$2D7BFE69487E497B.DT" dx1="40" />
+      <Connection Source="$BDC1CC12138186A6.Output" Destination="$614F3125208254F6" dx1="46.521" />
+      <Connection Source="$C097D24B94FDF708.OUT" Destination="$BDC1CC12138186A6.Input" dx1="47.47925" />
+      <Connection Source="$4E076A4928A0DFEF" Destination="$C097D24B94FDF708.IN2" dx1="803.5729">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$B92B8068A35CC8A6.Active" Destination="$C097D24B94FDF708.IN1" dx1="110.771" />
+      <Connection Source="$19546B227DE05AED" Destination="$B92B8068A35CC8A6.SetPoint" dx1="40" />
+      <Connection Source="$45767490F5BA3A44" Destination="$B92B8068A35CC8A6.D3CE3126A2AE24D0" dx1="48.79175" />
+    </DataConnections>
+  </FBNetwork>
+</FBType>

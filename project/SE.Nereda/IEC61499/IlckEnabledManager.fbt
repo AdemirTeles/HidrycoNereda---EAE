@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="b2c24a02-e83c-4158-a4e9-fac4761060cf" Name="IlckEnabledManager" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author="SESA713705" Date="8/14/2024" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="REQ">
+        <With Var="FbRun" />
+        <With Var="Reset" />
+      </Event>
+      <Event Name="REQ_DELAY" />
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="CNF" Comment="Execution Confirmation">
+        <With Var="Active" />
+      </Event>
+      <Event ID="CNF_DELAY" Name="START_DELAY" />
+      <Event ID="4F53EB7FE14653FD" Name="STOP_DELAY" />
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="SetPoint" Name="FbRun" Type="BOOL" />
+      <VarDeclaration ID="D3CE3126A2AE24D0" Name="Reset" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="Active" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="642b3f72-1fb0-434a-aae3-13cb5939f9be">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="NotActivated,Activated" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="1692.941" y="549.4117" />
+      <ECState Name="STATE1" x="2758" y="414">
+        <ECAction Algorithm="NotActivated" Output="CNF" />
+      </ECState>
+      <ECState Name="LowLow" x="1694" y="1507">
+        <ECAction Algorithm="Activated" Output="CNF" />
+      </ECState>
+      <ECState Name="PumpRunning" x="1692" y="1032">
+        <ECAction Output="START_DELAY" />
+      </ECState>
+      <ECState Name="PumpStopped" x="2804" y="1496">
+        <ECAction Algorithm="NotActivated" Output="CNF" />
+        <ECAction Output="STOP_DELAY" />
+      </ECState>
+      <ECTransition Source="START" Destination="PumpRunning" Condition="FbRun AND NOT Active" x="1694.818" y="784.8348">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="423.8666,179.9036,423.795,211.5353" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="STATE1" Condition="REQ AND Reset AND Active" x="2170.352" y="350.2529">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="506.3954,85.32568,574.5408,75.17219" />
+      </ECTransition>
+      <ECTransition Source="LowLow" Destination="START" Condition="1" x="1105.016" y="1051.01">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="238.4224,299.2161,235.2067,230.09" />
+      </ECTransition>
+      <ECTransition Source="PumpRunning" Destination="LowLow" Condition="REQ_DELAY" x="1698.754" y="1260.022">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="424.9189,298.7728,425.0677,329.6584" />
+      </ECTransition>
+      <ECTransition Source="STATE1" Destination="START" Condition="1" x="2228.826" y="564.5419">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="591.1639,140.9903,524.4305,149.4491" />
+      </ECTransition>
+      <ECTransition Source="PumpRunning" Destination="PumpStopped" Condition="NOT FbRun" x="2241.824" y="1259.687">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="523.9021,299.5775,595.7258,329.5471" />
+      </ECTransition>
+      <ECTransition Source="PumpStopped" Destination="START" Condition="1" x="2583.54" y="913.9462">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="709.4506,255.4235,627.0705,185.2381" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="NotActivated">
+      <ST><![CDATA[;
+Active := FALSE;]]></ST>
+    </Algorithm>
+    <Algorithm Name="Activated">
+      <ST><![CDATA[;
+Active := TRUE;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="cba0c534-3563-4dc2-b388-63323641a14c" Name="comandoAutomatico" Comment="Basic Function Block Type" Namespace="Hidryco.HidrycoLib">
+  <Identification Standard="61499-2" />
+  <VersionInfo Version="0.0" Author=" " Date="01/03/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="E_ATUALIZA_HABILITADOS">
+        <With Var="stsRevezamentoHabilitado" />
+        <With Var="stsNecessidadeHabilitado" />
+      </Event>
+      <Event Name="E_ATUALIZA_EQUIPAMENTO_PRINCIPAL">
+        <With Var="stsEquipamentoPrincipal" />
+      </Event>
+      <Event Name="E_ATUALIZA_NECESSIDADE_EQUIPAMENTOS">
+        <With Var="stsNecessidadeEquipamentos" />
+      </Event>
+      <Event Name="E_ATUALIZA_DISPONIBILIDADE_EQUIPAMENTOS">
+        <With Var="stsDisponivelEquipamento1" />
+        <With Var="stsDisponivelEquipamento2" />
+        <With Var="stsDisponivelEquipamento3" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="E_ATUALIZA_COMANDO_AUTOMATICO">
+        <With Var="cmdAutomaticoEquipamento1" />
+        <With Var="cmdAutomaticoEquipamento2" />
+        <With Var="cmdAutomaticoEquipamento3" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="stsRevezamentoHabilitado" Type="BOOL" />
+      <VarDeclaration Name="stsEquipamentoPrincipal" Type="UINT" />
+      <VarDeclaration Name="stsNecessidadeHabilitado" Type="BOOL" />
+      <VarDeclaration Name="stsNecessidadeEquipamentos" Type="UINT" />
+      <VarDeclaration Name="stsDisponivelEquipamento1" Type="BOOL" />
+      <VarDeclaration Name="stsDisponivelEquipamento2" Type="BOOL" />
+      <VarDeclaration Name="stsDisponivelEquipamento3" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="cmdAutomaticoEquipamento1" Type="BOOL" />
+      <VarDeclaration Name="cmdAutomaticoEquipamento2" Type="BOOL" />
+      <VarDeclaration Name="cmdAutomaticoEquipamento3" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="ComandoAutomaticoNecessidadeRevezamento,ComandoAutomaticoNecessidade,ChecarQuantidadeEquipamentosDisponiveis,ComandoAutomaticoRevezamento,ComandoAutomatico" />
+    <InternalVars>
+      <VarDeclaration Name="equipamentosDisponiveis" Type="INT" />
+    </InternalVars>
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="1452.941" y="613.4117" />
+      <ECState Name="STATE1" x="2608" y="1344">
+        <ECAction Algorithm="ComandoAutomaticoNecessidadeRevezamento" Output="E_ATUALIZA_COMANDO_AUTOMATICO" />
+      </ECState>
+      <ECState Name="STATE2" x="2028" y="1644">
+        <ECAction Algorithm="ComandoAutomaticoNecessidade" Output="E_ATUALIZA_COMANDO_AUTOMATICO" />
+      </ECState>
+      <ECState Name="STATE3" x="1516" y="196">
+        <ECAction Algorithm="ChecarQuantidadeEquipamentosDisponiveis" />
+      </ECState>
+      <ECState Name="STATE4" x="1372" y="1932">
+        <ECAction Algorithm="ComandoAutomaticoRevezamento" Output="E_ATUALIZA_COMANDO_AUTOMATICO" />
+      </ECState>
+      <ECState Name="STATE5" x="2308" y="580">
+        <ECAction Algorithm="ComandoAutomatico" Output="E_ATUALIZA_COMANDO_AUTOMATICO" />
+      </ECState>
+      <ECTransition Source="START" Destination="STATE3" Condition="1" x="1482.343" y="329.7058">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="369.1471,89.22009,373.0882,63.13283" />
+      </ECTransition>
+      <ECTransition Source="STATE3" Destination="START" Condition="1" x="1567.135" y="415.9091">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="397.8077,91.86725,393.8666,117.9545" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="STATE1" Condition="stsNecessidadeHabilitado AND stsRevezamentoHabilitado" x="2064.244" y="922.3099">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="479.373,202.5488,553.0692,249.2069" />
+      </ECTransition>
+      <ECTransition Source="STATE1" Destination="START" Condition="1" x="2013.716" y="1051.224">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="544.3901,293.6909,465.8149,244.0074" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="STATE2" Condition="stsNecessidadeHabilitado AND NOT stsRevezamentoHabilitado" x="1810.003" y="1093.573">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="435.4831,231.8902,478.3299,309.0411" />
+      </ECTransition>
+      <ECTransition Source="STATE2" Destination="START" Condition="1" x="1747.741" y="1213.002">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="459.789,348.8724,416.6354,271.678" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="STATE4" Condition="NOT stsNecessidadeHabilitado AND stsRevezamentoHabilitado" x="1486.525" y="1280.286">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="380.0583,270.0909,373.7238,371.3156" />
+      </ECTransition>
+      <ECTransition Source="STATE4" Destination="START" Condition="1" x="1402.524" y="1170.834">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="346.8853,334.8333,353.1512,233.6048" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="STATE5" Condition="NOT stsNecessidadeHabilitado AND NOT stsRevezamentoHabilitado" x="1873.791" y="511.675">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="444.1609,125.1907,492.7344,123.2927" />
+      </ECTransition>
+      <ECTransition Source="STATE5" Destination="START" Condition="1" x="1876.719" y="682.2117">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="493.7106,173.2736,445.1371,175.1716" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="ComandoAutomaticoNecessidadeRevezamento">
+      <ST><![CDATA[IF (stsNecessidadeEquipamentos = 1 OR (equipamentosDisponiveis = 1 AND stsNecessidadeEquipamentos > 0)) THEN
+	cmdAutomaticoEquipamento1 := (stsEquipamentoPrincipal = 1);
+	cmdAutomaticoEquipamento2 := (stsEquipamentoPrincipal = 2);
+	cmdAutomaticoEquipamento3 := (stsEquipamentoPrincipal = 3);
+	
+ELSIF (stsNecessidadeEquipamentos = 2 AND equipamentosDisponiveis > 1) THEN
+	cmdAutomaticoEquipamento1 := (stsDisponivelEquipamento1 AND ((stsEquipamentoPrincipal = 1) OR (stsEquipamentoPrincipal = 2 AND (NOT stsDisponivelEquipamento3)) OR (stsEquipamentoPrincipal = 3)));
+	cmdAutomaticoEquipamento2 := (stsDisponivelEquipamento2 AND ((stsEquipamentoPrincipal = 2) OR (stsEquipamentoPrincipal = 3 AND (NOT stsDisponivelEquipamento1)) OR (stsEquipamentoPrincipal = 1)));
+	cmdAutomaticoEquipamento3 := (stsDisponivelEquipamento3 AND ((stsEquipamentoPrincipal = 3) OR (stsEquipamentoPrincipal = 1 AND (NOT stsDisponivelEquipamento2)) OR (stsEquipamentoPrincipal = 2)));
+	
+ELSE
+	cmdAutomaticoEquipamento1 := FALSE;
+	cmdAutomaticoEquipamento2 := FALSE;
+	cmdAutomaticoEquipamento3 := FALSE;
+END_IF;
+;]]></ST>
+    </Algorithm>
+    <Algorithm Name="ComandoAutomaticoNecessidade">
+      <ST><![CDATA[IF stsNecessidadeEquipamentos = 1 OR (equipamentosDisponiveis = 1 AND stsNecessidadeEquipamentos > 0) THEN
+	cmdAutomaticoEquipamento1 := (stsDisponivelEquipamento1); 
+	cmdAutomaticoEquipamento2 := (stsDisponivelEquipamento2 AND NOT stsDisponivelEquipamento1);
+	cmdAutomaticoEquipamento3 := (stsDisponivelEquipamento3 AND (NOT stsDisponivelEquipamento1) AND (NOT stsDisponivelEquipamento2));
+	
+ELSIF (stsNecessidadeEquipamentos = 2 AND equipamentosDisponiveis > 1) THEN
+	cmdAutomaticoEquipamento1 := (stsDisponivelEquipamento1);
+	cmdAutomaticoEquipamento2 := (stsDisponivelEquipamento2);
+	cmdAutomaticoEquipamento3 := (NOT stsDisponivelEquipamento1) OR (NOT stsDisponivelEquipamento2);
+	
+ELSE
+	cmdAutomaticoEquipamento1 := FALSE;
+	cmdAutomaticoEquipamento2 := FALSE;
+	cmdAutomaticoEquipamento3 := FALSE;
+END_IF;
+;]]></ST>
+    </Algorithm>
+    <Algorithm Name="ChecarQuantidadeEquipamentosDisponiveis">
+      <ST><![CDATA[equipamentosDisponiveis := BOOL_TO_INT(stsDisponivelEquipamento1) + BOOL_TO_INT(stsDisponivelEquipamento2) +  BOOL_TO_INT(stsDisponivelEquipamento3);
+;]]></ST>
+    </Algorithm>
+    <Algorithm Name="ComandoAutomaticoRevezamento">
+      <ST><![CDATA[IF stsEquipamentoPrincipal > 0 THEN
+	cmdAutomaticoEquipamento1 := (stsEquipamentoPrincipal = 1);
+	cmdAutomaticoEquipamento2 := (stsEquipamentoPrincipal = 2);
+	cmdAutomaticoEquipamento3 := (stsEquipamentoPrincipal = 3);
+ELSE
+	cmdAutomaticoEquipamento1 := FALSE;
+	cmdAutomaticoEquipamento2 := FALSE;
+	cmdAutomaticoEquipamento3 := FALSE;
+END_IF;
+;]]></ST>
+    </Algorithm>
+    <Algorithm Name="ComandoAutomatico">
+      <ST><![CDATA[cmdAutomaticoEquipamento1 := (stsDisponivelEquipamento1);
+cmdAutomaticoEquipamento2 := (stsDisponivelEquipamento2);
+cmdAutomaticoEquipamento3 := (stsDisponivelEquipamento3);
+;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

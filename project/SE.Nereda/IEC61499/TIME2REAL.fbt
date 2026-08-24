@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="7e83b4d1-117a-4d5e-8ffd-0edc861d26c9" Name="TIME2REAL" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="6/13/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="9954577AA24F9DD6" Name="REQ" Comment="Normal Execution Request">
+        <With Var="QI1" />
+        <With Var="QI2" />
+        <With Var="QI3" />
+        <With Var="QI4" />
+        <With Var="QI5" />
+        <With Var="QI6" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="79B40746AB555956" Name="CNF" Comment="Execution Confirmation">
+        <With Var="QO1" />
+        <With Var="QO2" />
+        <With Var="QO3" />
+        <With Var="QO4" />
+        <With Var="QO5" />
+        <With Var="QO6" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="158B8AA7B31D2617" Name="QI1" Type="TIME" Comment="Input event qualifier" />
+      <VarDeclaration ID="00D88FA23835E0F1" Name="QI2" Type="TIME" />
+      <VarDeclaration ID="E3DD408A3DDFE25F" Name="QI3" Type="TIME" />
+      <VarDeclaration ID="3F7EBA5693CD820C" Name="QI4" Type="TIME" />
+      <VarDeclaration ID="DA4C33EA471E5B04" Name="QI5" Type="TIME" />
+      <VarDeclaration ID="E244C798548C3E17" Name="QI6" Type="TIME" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="8AC404843F53B283" Name="QO1" Type="REAL" Comment="Output event qualifier" />
+      <VarDeclaration ID="FADDF116EEE78DD8" Name="QO2" Type="REAL" />
+      <VarDeclaration ID="F0AD27F053D1AF98" Name="QO3" Type="REAL" />
+      <VarDeclaration ID="B25DE754B5185002" Name="QO4" Type="REAL" />
+      <VarDeclaration ID="AAB73CAB4AE993B0" Name="QO5" Type="REAL" />
+      <VarDeclaration ID="4D1507586A17112D" Name="QO6" Type="REAL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="4dfdfbdd-cd01-4843-a732-7f4ee7419845">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="REQ" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="552.9412" y="429.4117" />
+      <ECState Name="REQ" Comment="Normal execution" x="1229.647" y="948.9412">
+        <ECAction Algorithm="REQ" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="REQ" Condition="REQ" x="948.6151" y="628.9855">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="215.5157,135.1656,260.5796,169.7627" />
+      </ECTransition>
+      <ECTransition Source="REQ" Destination="START" Condition="1" x="884.3931" y="766.1482">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="245.3555,214.5927,200.2916,179.9956" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="REQ" Comment="Normally executed algorithm">
+      <ST><![CDATA[;
+QO1 := TIME_TO_REAL(QI1/1000);
+QO2 := TIME_TO_REAL(QI2/1000);
+QO3 := TIME_TO_REAL(QI3/1000);
+QO4 := TIME_TO_REAL(QI4/1000);
+QO5 := TIME_TO_REAL(QI5/1000);
+QO6 := TIME_TO_REAL(QI6/1000);]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

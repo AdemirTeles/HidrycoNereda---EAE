@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="a8e6f9e4-6e71-421e-9ee6-baabb73de95f" Name="StartIntervalCalc" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="7/5/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="56116EFC174D2765" Name="REQ" Comment="Normal Execution Request">
+        <With Var="CT_ReactorActual" />
+        <With Var="N_AvailableReactors" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="8A437FBF24BFC92F" Name="CNF" Comment="Execution Confirmation">
+        <With Var="Feed_IntervalT" />
+        <With Var="Feed_IntervalV" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="717B6E593DE7C489" Name="N_AvailableReactors" Type="REAL" />
+      <VarDeclaration ID="232FB5D2DFB3AE51" Name="CT_ReactorActual" Type="REAL" Comment="Input event qualifier" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="6A936F9AECB0F130" Name="Feed_IntervalT" Type="TIME" Comment="Output event qualifier" />
+      <VarDeclaration ID="6C899D1F13E17AE7" Name="Feed_IntervalV" Type="REAL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="1dc2ee03-f7e4-4487-a89f-2d394d73f1b8">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="REQ" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="552.9412" y="429.4117" />
+      <ECState Name="REQ" Comment="Normal execution" x="1173.647" y="916.9412">
+        <ECAction Algorithm="REQ" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="REQ" Condition="REQ" x="921.5767" y="613.3046">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="210.9394,132.6684,251.5921,164.5988" />
+      </ECTransition>
+      <ECTransition Source="REQ" Destination="START" Condition="1" x="856.1584" y="750.3478">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="236.1499,209.2593,195.4972,177.3289" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="REQ" Comment="Normally executed algorithm">
+      <ST><![CDATA[;
+IF N_AvailableReactors > 0.0 THEN
+	Feed_IntervalV := CT_ReactorActual / N_AvailableReactors;
+	Feed_IntervalT := REAL_TO_TIME(Feed_IntervalV);
+ELSE
+	Feed_IntervalV := 0;
+	Feed_IntervalT := T#0s;
+END_IF;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

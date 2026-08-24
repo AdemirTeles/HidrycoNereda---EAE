@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="3592a4d0-a065-4ca2-988e-95f664b2574c" Name="SelectMode" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author="SESA371406" Date="3/27/2024" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="REQ" Comment="Normal Execution Request">
+        <With Var="SelectMode" />
+      </Event>
+      <Event ID="HEART_BEAT" Name="EMERGENCY_ON">
+        <With Var="EmergencyON" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="CNF" Comment="Execution Confirmation">
+        <With Var="Auto" />
+        <With Var="OFF" />
+        <With Var="Manu" />
+        <With Var="Emergency" />
+        <With Var="Light" />
+        <With Var="Mode" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="SelectMode" Type="INT" />
+      <VarDeclaration ID="HeartBeat" Name="EmergencyON" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="Auto" Type="BOOL" />
+      <VarDeclaration Name="OFF" Type="BOOL" />
+      <VarDeclaration Name="Manu" Type="BOOL" />
+      <VarDeclaration Name="Emergency" Type="BOOL" />
+      <VarDeclaration Name="Light" Type="BOOL" />
+      <VarDeclaration Name="Mode" Type="INT" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="9e50351c-72e0-4aa8-8231-fd8c3606535f">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="REQ" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="552.9412" y="429.4117" />
+      <ECState Name="REQ" Comment="Normal execution" x="1265.647" y="876.9412">
+        <ECAction Algorithm="REQ" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="REQ" Condition="REQ OR (EMERGENCY_ON AND EmergencyON = 1)" x="959.848" y="587.297">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="217.8472,127.8236,263.389,156.4206" />
+      </ECTransition>
+      <ECTransition Source="REQ" Destination="START" Condition="1" x="903.3118" y="731.5692">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="250.0945,202.5927,204.5526,173.9956" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="REQ" Comment="Normally executed algorithm">
+      <ST><![CDATA[;
+IF SelectMode = 0 AND EmergencyON = FALSE THEN // Auto mode selected and communication is healthy
+	// Activate Auto mode
+	Auto := TRUE;
+	OFF := FALSE;
+	Manu := FALSE;
+	Emergency := FALSE;
+
+	// Turn ON mode indication light
+	Light := TRUE;
+	
+	// Set current mode value to Auto
+	Mode := 0;
+
+ELSIF SelectMode = 1 THEN // OFF mode selected
+	
+	// Activate OFF mode
+	Auto := FALSE;
+	OFF := TRUE;
+	Manu := FALSE;
+	Emergency := FALSE;
+	
+	// Turn OFF mode indication light
+	Light := FALSE;
+	
+	// Set current mode value to OFF
+	Mode := 1;
+	
+ELSIF SelectMode = 2 THEN // Manual mode selected
+	
+	// Activate Manual mode
+	Auto := FALSE;
+	OFF := FALSE;
+	Manu := TRUE;
+	Emergency := FALSE;
+	
+	// Turn ON mode indication light
+	Light := TRUE;
+	
+	// Set current mode value to Manual
+	Mode := 2;
+	
+ELSIF SelectMode = 3 OR (EmergencyON = TRUE AND SelectMode = 0) THEN // Emergency mode selected or Auto mode with communication failure
+	
+	// Activate Emergency mode
+	Auto := FALSE;
+	OFF := FALSE;
+	Manu := FALSE;
+	Emergency := TRUE;
+	
+	// Turn ON mode indication light
+	Light := TRUE;
+	
+	// Set current mode value to Emergency
+	Mode := 3;
+	
+END_IF;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

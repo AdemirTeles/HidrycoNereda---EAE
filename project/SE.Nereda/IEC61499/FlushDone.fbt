@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="6078eeb0-8df8-4915-bc4d-850c1ecedce5" Name="FlushDone" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="6/20/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="60C9036B1713EBA1" Name="REQ" Comment="Normal Execution Request">
+        <With Var="StartFlsuhConfig" />
+        <With Var="FlushStartSp" />
+        <With Var="LevelPv" />
+        <With Var="FlushWayConfig" />
+        <With Var="FlushStarted" />
+        <With Var="FlushStopped" />
+        <With Var="iFlushReady" />
+        <With Var="iStartHMI" />
+      </Event>
+      <Event ID="3E39BF597AD2C2E6" Name="FORCE_RDY">
+        <With Var="ForceStop" />
+      </Event>
+      <Event ID="8608B99E823C5D83" Name="REQ_HMI">
+        <With Var="iStartHMI" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="00A4140AB53E963E" Name="CNF" Comment="Execution Confirmation">
+        <With Var="FlushDone" />
+        <With Var="oFlushReady" />
+        <With Var="oStartHMI" />
+      </Event>
+      <Event ID="666AD382A9785B40" Name="RESET_START_BTN" />
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="BB77DA3FF1F0E737" Name="StartFlsuhConfig" Type="INT" Comment="Input event qualifier" />
+      <VarDeclaration ID="765F7954BE3B2100" Name="FlushWayConfig" Type="INT" />
+      <VarDeclaration ID="46148435C68AE1AB" Name="FlushStartSp" Type="REAL" />
+      <VarDeclaration ID="93C4216D5E9796F5" Name="LevelPv" Type="REAL" />
+      <VarDeclaration ID="67C658F78CED3057" Name="FlushStarted" Type="BOOL" />
+      <VarDeclaration ID="BA8EC4B9BE40E0A6" Name="FlushStopped" Type="BOOL" />
+      <VarDeclaration ID="9108BC98CAC8F1BB" Name="iFlushReady" Type="BOOL" />
+      <VarDeclaration ID="E77A5D891F4172B1" Name="ForceStop" Type="BOOL" />
+      <VarDeclaration ID="5A7EC5FDC0ED3386" Name="iStartHMI" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="970B51ACFFBA5237" Name="FlushDone" Type="BOOL" Comment="Output event qualifier" />
+      <VarDeclaration ID="9411F2FBF7171695" Name="oFlushReady" Type="BOOL" />
+      <VarDeclaration ID="1E842B248EE3D4C0" Name="oStartHMI" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="4e59d9ed-10df-4adb-83a1-4e00c2f4d3b6">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="REQ,FlushStarted,FlushStopped,ForceStop,Done" />
+    <InternalVars>
+      <VarDeclaration ID="4D04A93A1E5CC36C" Name="FirstFlush" Type="BOOL" />
+    </InternalVars>
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="2232.052" y="597.856" />
+      <ECState Name="REQ" x="2241.333" y="1625.333">
+        <ECAction Algorithm="REQ" Output="CNF" />
+      </ECState>
+      <ECState Name="FlushStarted" x="2253.333" y="2157.333">
+        <ECAction Algorithm="FlushStarted" Output="CNF" />
+      </ECState>
+      <ECState Name="Level" x="2258.333" y="3014.333">
+        <ECAction Algorithm="ForceStop" Output="CNF" />
+      </ECState>
+      <ECState Name="FlushStopped" x="2258.966" y="3453.333">
+        <ECAction Algorithm="FlushStopped" Output="CNF" />
+      </ECState>
+      <ECState Name="ResetBtn" x="2893.333" y="2548.333">
+        <ECAction Output="RESET_START_BTN" />
+      </ECState>
+      <ECState Name="Wait" x="3027.06" y="846.6671">
+        <ECAction Algorithm="Done" Output="CNF" />
+      </ECState>
+      <ECState Name="Wait2" x="3033.172" y="1265.515" />
+      <ECTransition Source="START" Destination="Wait" Condition="REQ AND FlushWayConfig = 1" x="2616.99" y="718.8939">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="627.2595,172.0712,676.3148,185.8476" />
+      </ECTransition>
+      <ECTransition Source="REQ" Destination="REQ" Condition="REQ AND NOT FlushStarted" x="1867.719" y="1658.665">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="444.3333,471.3333,443.3333,362.3333" />
+      </ECTransition>
+      <ECTransition Source="REQ" Destination="FlushStarted" Condition="FlushStarted AND NOT FlushStopped" x="2248.954" y="1881.94">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="561.8921,451.8832,562.7546,487.5214" />
+      </ECTransition>
+      <ECTransition Source="FlushStarted" Destination="Level" Condition="FlushWayConfig = 2 AND&#xD;&#xA;NOT FlushStarted AND FlushStopped" x="2256.57" y="2548.019">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="564.0123,602.4934,564.36,665.2139" />
+      </ECTransition>
+      <ECTransition Source="Level" Destination="FlushStopped" Condition="NOT FlushStarted AND FlushStopped" x="2257.177" y="3213.24">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="564.2088,787.6503,564.2284,815.5374" />
+      </ECTransition>
+      <ECTransition Source="FlushStopped" Destination="START" Condition="1" x="1382.257" y="2126.861">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="298.0896,812.1133,276.7807,267.1555" />
+      </ECTransition>
+      <ECTransition Source="FlushStarted" Destination="FlushStarted" Condition="FORCE_RDY OR REQ_HMI" x="1837.227" y="2170.083">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="432.795,589.0833,440.795,498.0833" />
+      </ECTransition>
+      <ECTransition Source="Level" Destination="Level" Condition="FORCE_RDY OR REQ_HMI" x="1884.023" y="3027.05">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="452.6389,808.3975,444.6389,706.3975" />
+      </ECTransition>
+      <ECTransition Source="FlushStarted" Destination="ResetBtn" Condition="FlushWayConfig = 1 AND&#xD;&#xA;NOT FlushStarted AND FlushStopped" x="2574.824" y="2347.633">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="623.9294,574.532,663.0272,598.4182" />
+      </ECTransition>
+      <ECTransition Source="ResetBtn" Destination="Level" Condition="1" x="2591.886" y="2774.68">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="669.6284,678.0476,628.5629,708.1838" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="REQ" Condition="REQ AND (FlushWayConfig = 2 OR iStartHMI)" x="2240.027" y="1103.348">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="559.8843,236.6865,560.58,313.6128" />
+      </ECTransition>
+      <ECTransition Source="Wait" Destination="Wait2" Condition="(StartFlsuhConfig = 1 AND FlushStartSp &gt; LevelPv) OR&#xD;&#xA;(StartFlsuhConfig = 2 AND FlushStartSp &lt; LevelPv) OR&#xD;&#xA;NOT FirstFlush" x="3027.217" y="1028.438">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="756.4293,241.6974,756.8721,267.9131" />
+      </ECTransition>
+      <ECTransition Source="Wait2" Destination="REQ" Condition="(StartFlsuhConfig = 1 AND FlushStartSp &lt; LevelPv) OR&#xD;&#xA;(StartFlsuhConfig = 2 AND FlushStartSp &gt; LevelPv) OR&#xD;&#xA;NOT FirstFlush" x="2687.047" y="1416.593">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="701.0649,340.5869,651.6356,362.9655" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="REQ" Comment="Normally executed algorithm">
+      <ST><![CDATA[;
+// StartFlsuhConfig = 1 => Flush SP <= PV
+// StartFlsuhConfig = 2 => Flush SP >= PV
+// FlushWayConfig = 1 => Flush Once
+// FlushWayConfig = 2 => Cyclic Flush
+
+IF iFlushReady THEN
+	IF FlushWayConfig = 1 THEN
+		IF StartFlsuhConfig = 1 THEN
+			IF FlushStartSp <= LevelPv THEN
+				FlushDone := FALSE;
+				oFlushReady := TRUE;
+			ELSE
+				FlushDone := TRUE;
+			END_IF;
+		ELSIF StartFlsuhConfig = 2 THEN
+			IF FlushStartSp >= LevelPv THEN
+				FlushDone := FALSE;
+				oFlushReady := TRUE;
+			ELSE
+				FlushDone := TRUE;
+			END_IF;
+		END_IF;
+			
+	ELSIF FlushWayConfig = 2 THEN
+		oFlushReady := TRUE;
+		FlushDone := TRUE;
+	END_IF;
+ELSE
+	FlushDone := TRUE;
+	oFlushReady := iFlushReady;
+END_IF;
+
+// StartFlsuhConfig = 1 => Flush SP <= PV
+// StartFlsuhConfig = 2 => Flush SP >= PV
+// FlushWayConfig = 1 => Flush Once
+// FlushWayConfig = 2 => Cyclic Flush
+
+IF iStartHMI THEN
+	oStartHMI := iStartHMI;
+	IF FlushWayConfig = 1 THEN
+		IF StartFlsuhConfig = 1 THEN
+			FlushDone := FALSE;
+			oFlushReady := TRUE;
+		ELSIF StartFlsuhConfig = 2 THEN
+			FlushDone := FALSE;
+			oFlushReady := TRUE;
+		END_IF;
+
+	ELSIF FlushWayConfig = 2 THEN
+		oFlushReady := TRUE;
+		FlushDone := TRUE;
+	END_IF;
+END_IF;]]></ST>
+    </Algorithm>
+    <Algorithm Name="FlushStarted">
+      <ST><![CDATA[;
+FirstFlush := TRUE;
+IF NOT ForceStop THEN
+	IF FlushWayConfig = 1 THEN
+		FlushDone := TRUE;
+		oFlushReady := TRUE;
+	ELSIF FlushWayConfig = 2 THEN
+		FlushDone := FALSE;
+		oFlushReady := iFlushReady;
+	END_IF;
+ELSE
+	oFlushReady := iFlushReady;
+END_IF;]]></ST>
+    </Algorithm>
+    <Algorithm Name="FlushStopped">
+      <ST><![CDATA[;
+IF FlushWayConfig = 1 THEN
+	FlushDone := TRUE;
+	oFlushReady := FALSE;
+ELSIF FlushWayConfig = 2 THEN
+	FlushDone := FALSE;
+	oFlushReady := iFlushReady;
+END_IF;]]></ST>
+    </Algorithm>
+    <Algorithm Name="ForceStop">
+      <ST><![CDATA[;
+IF ForceStop THEN
+	oFlushReady := iFlushReady;
+END_IF;]]></ST>
+    </Algorithm>
+    <Algorithm ID="3d77a72e-0d0d-46db-b1cb-015c0e7178fc" Name="Done">
+      <ST><![CDATA[;
+FlushDone := TRUE;
+oFlushReady := FALSE;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

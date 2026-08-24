@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="1418d6d8-488e-448d-80ee-a120884734c3" Name="OthersDishcargeValvesBasic" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author="SESA371406" Date="11/29/2023" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="TOTAL_REACTOR" Comment="Normal Execution Request">
+        <With Var="TotalReactor" />
+      </Event>
+      <Event ID="REQ_IN" Name="FB_D_V">
+        <With Var="FbDrainVCReactor1" />
+        <With Var="FbDrainVCReactor2" />
+        <With Var="FbDrainVCReactor3" />
+        <With Var="FbDrainVCReactor4" />
+        <With Var="FbDrainVCReactor5" />
+        <With Var="FbDrainVCReactor6" />
+        <With Var="TotalReactor" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="OUT1_CNF" Name="CNF_D_VALVE" Comment="Execution Confirmation">
+        <With Var="DValveCReactor1" />
+        <With Var="DValveCReactor4" />
+        <With Var="DValveCReactor5" />
+        <With Var="DValveCReactor6" />
+        <With Var="DValveCReactor2" />
+        <With Var="DValveCReactor3" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="TotalReactor" Type="REAL" Comment="Input event qualifier" />
+      <VarDeclaration ID="IN1" Name="FbDrainVCReactor1" Type="BOOL" />
+      <VarDeclaration ID="IN2" Name="FbDrainVCReactor2" Type="BOOL" />
+      <VarDeclaration ID="IN3" Name="FbDrainVCReactor3" Type="BOOL" />
+      <VarDeclaration ID="B8B9FB539C4099EB" Name="FbDrainVCReactor4" Type="BOOL" />
+      <VarDeclaration ID="5020DD836CB1CF7C" Name="FbDrainVCReactor5" Type="BOOL" />
+      <VarDeclaration ID="B228A65703C2A465" Name="FbDrainVCReactor6" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="Out1" Name="DValveCReactor1" Type="BOOL" Comment="Output event qualifier" />
+      <VarDeclaration ID="Out2" Name="DValveCReactor2" Type="BOOL" />
+      <VarDeclaration ID="Out3" Name="DValveCReactor3" Type="BOOL" />
+      <VarDeclaration ID="D0D776CA481602B8" Name="DValveCReactor4" Type="BOOL" />
+      <VarDeclaration ID="9F6D0669C229A7DE" Name="DValveCReactor5" Type="BOOL" />
+      <VarDeclaration ID="BB2F6F5AE39C8C7C" Name="DValveCReactor6" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="OneReactor,TowReactors,ThreeReactors,FourReactors,FiveReactors,SixReactors" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="691.3855" y="1496.745" />
+      <ECState Name="OneReactor" x="2182" y="289.3333">
+        <ECAction Algorithm="OneReactor" Output="CNF_D_VALVE" />
+      </ECState>
+      <ECState Name="TowReactors" x="2183.143" y="696.5715">
+        <ECAction Algorithm="TowReactors" Output="CNF_D_VALVE" />
+      </ECState>
+      <ECState Name="ThreeReactors" x="2170" y="1142.5">
+        <ECAction Algorithm="ThreeReactors" Output="CNF_D_VALVE" />
+      </ECState>
+      <ECState Name="FourReactors" x="2177.927" y="1766.666">
+        <ECAction Algorithm="FourReactors" Output="CNF_D_VALVE" />
+      </ECState>
+      <ECState Name="FiveReactors" x="2188.722" y="2188">
+        <ECAction Algorithm="FiveReactors" Output="CNF_D_VALVE" />
+      </ECState>
+      <ECState Name="SixReactors" x="2186.667" y="2622.222">
+        <ECAction Algorithm="SixReactors" Output="CNF_D_VALVE" />
+      </ECState>
+      <ECTransition Source="START" Destination="OneReactor" Condition="FB_D_V AND TotalReactor = 1" x="1006.037" y="560.1381">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="164.0309,160.7173,282.8727,68.44594" />
+      </ECTransition>
+      <ECTransition Source="OneReactor" Destination="START" Condition="1" x="1163.58" y="690.3264">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="332.3187,110.5138,218.2835,202.4398" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="TowReactors" Condition="FB_D_V AND TotalReactor = 2" x="1305.773" y="885.7638">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="270.3043,233.1603,374.2524,178.4997" />
+      </ECTransition>
+      <ECTransition Source="TowReactors" Destination="START" Condition="1" x="1376.526" y="1027.591">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="392.7537,224.1782,293.2376,278.106" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="ThreeReactors" Condition="FB_D_V AND TotalReactor = 3" x="1382.638" y="1229.689">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="300.6743,312.4757,391.8253,291.071" />
+      </ECTransition>
+      <ECTransition Source="ThreeReactors" Destination="START" Condition="1" x="1346.807" y="1378.411">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="377.4534,337.0308,285.1022,359.0668" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="FourReactors" Condition="FB_D_V AND TotalReactor = 4" x="1393.473" y="1565.857">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="300.3333,379.6273,393.1827,396.2176" />
+      </ECTransition>
+      <ECTransition Source="FourReactors" Destination="START" Condition="1" x="1411.262" y="1704.477">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="401.0625,438.9042,306.8467,421.9625" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="FiveReactors" Condition="FB_D_V AND TotalReactor = 5" x="1311.033" y="1889.552">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="269.4268,451.8788,375.2582,500.7606" />
+      </ECTransition>
+      <ECTransition Source="FiveReactors" Destination="START" Condition="1" x="1253.13" y="2054.447">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="358.6772,553.25,250.7149,504.4239" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="SixReactors" Condition="FB_D_V AND TotalReactor = 6" x="1114.362" y="2283.194">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="201.6143,545.3886,316.2006,630.8177" />
+      </ECTransition>
+      <ECTransition Source="SixReactors" Destination="START" Condition="1" x="920.2005" y="2424.971">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="251.8452,676.5978,137.9633,591.3568" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="OneReactor">
+      <ST><![CDATA[;
+DValveCReactor1 := TRUE;
+DValveCReactor2 := FALSE;
+DValveCReactor3 := FALSE;
+DValveCReactor4 := FALSE;
+DValveCReactor5 := FALSE;
+DValveCReactor6 := FALSE;]]></ST>
+    </Algorithm>
+    <Algorithm Name="TowReactors">
+      <ST><![CDATA[;
+//Operating condition Reacotr1:
+IF FbDrainVCReactor1 THEN
+	DValveCReactor2 := TRUE;
+ELSE
+	DValveCReactor2 := FALSE;
+END_IF;
+
+//Operating condition Reacotr2:
+IF FbDrainVCReactor2 THEN
+	DValveCReactor1 := TRUE;
+ELSE
+	DValveCReactor1 := FALSE;
+END_IF;]]></ST>
+    </Algorithm>
+    <Algorithm Name="ThreeReactors">
+      <ST><![CDATA[;
+// Operating condition Reactor 1:
+IF FbDrainVCReactor2 AND FbDrainVCReactor3 THEN
+	DValveCReactor1 := TRUE;
+ELSE
+	DValveCReactor1 := FALSE;
+END_IF;
+
+
+// Operating condition Reactor 2:
+IF FbDrainVCReactor1 AND FbDrainVCReactor3 THEN
+	DValveCReactor2 := TRUE;
+ELSE
+	DValveCReactor2 := FALSE;
+END_IF;
+
+
+// Operating condition Reactor 3:
+IF FbDrainVCReactor1 AND FbDrainVCReactor2 THEN
+	DValveCReactor3 := TRUE;
+ELSE
+	DValveCReactor3 := FALSE;
+END_IF;]]></ST>
+    </Algorithm>
+    <Algorithm Name="FourReactors">
+      <ST><![CDATA[;
+// Operating condition Reactor 1:
+IF FbDrainVCReactor2 AND FbDrainVCReactor3 AND FbDrainVCReactor4 THEN
+	DValveCReactor1 := TRUE;
+ELSE
+	DValveCReactor1 := FALSE;
+END_IF;
+
+
+// Operating condition Reactor 2:
+IF FbDrainVCReactor1 AND FbDrainVCReactor3 AND FbDrainVCReactor4 THEN
+	DValveCReactor2 := TRUE;
+ELSE
+	DValveCReactor2 := FALSE;
+END_IF;
+
+
+// Operating condition Reactor 3:
+IF FbDrainVCReactor1 AND FbDrainVCReactor2 AND FbDrainVCReactor4 THEN
+	DValveCReactor3 := TRUE;
+ELSE
+	DValveCReactor3 := FALSE;
+END_IF;
+
+
+// Operating condition Reactor 4:
+IF FbDrainVCReactor1 AND FbDrainVCReactor2 AND FbDrainVCReactor3 THEN
+	DValveCReactor4 := TRUE;
+ELSE
+	DValveCReactor4 := FALSE;
+END_IF;]]></ST>
+    </Algorithm>
+    <Algorithm Name="FiveReactors">
+      <ST><![CDATA[;
+// Operating condition Reactor 1:
+IF FbDrainVCReactor2 AND FbDrainVCReactor3 AND FbDrainVCReactor4 AND FbDrainVCReactor5 THEN
+	DValveCReactor1 := TRUE;
+ELSE
+	DValveCReactor1 := FALSE;
+END_IF;
+
+
+// Operating condition Reactor 2:
+IF FbDrainVCReactor1 AND FbDrainVCReactor3 AND FbDrainVCReactor4 AND FbDrainVCReactor5 THEN
+	DValveCReactor2 := TRUE;
+ELSE
+	DValveCReactor2 := FALSE;
+END_IF;
+
+
+// Operating condition Reactor 3:
+IF FbDrainVCReactor1 AND FbDrainVCReactor2 AND FbDrainVCReactor4 AND FbDrainVCReactor5 THEN
+	DValveCReactor3 := TRUE;
+ELSE
+	DValveCReactor3 := FALSE;
+END_IF;
+
+
+// Operating condition Reactor 4:
+IF FbDrainVCReactor1 AND FbDrainVCReactor2 AND FbDrainVCReactor3 AND FbDrainVCReactor5 THEN
+	DValveCReactor4 := TRUE;
+ELSE
+	DValveCReactor4 := FALSE;
+END_IF;
+
+
+// Operating condition Reactor 5:
+IF FbDrainVCReactor1 AND FbDrainVCReactor2 AND FbDrainVCReactor3 AND FbDrainVCReactor4 THEN
+	DValveCReactor5 := TRUE;
+ELSE
+	DValveCReactor5 := FALSE;
+END_IF;]]></ST>
+    </Algorithm>
+    <Algorithm Name="SixReactors">
+      <ST><![CDATA[;
+// Operating condition Reactor 1:
+IF FbDrainVCReactor2 AND FbDrainVCReactor3 AND FbDrainVCReactor4 AND FbDrainVCReactor5 AND FbDrainVCReactor6 THEN
+	DValveCReactor1 := TRUE;
+ELSE
+	DValveCReactor1 := FALSE;
+END_IF;
+
+
+// Operating condition Reactor 2:
+IF FbDrainVCReactor1 AND FbDrainVCReactor3 AND FbDrainVCReactor4 AND FbDrainVCReactor5 AND FbDrainVCReactor6 THEN
+	DValveCReactor2 := TRUE;
+ELSE
+	DValveCReactor2 := FALSE;
+END_IF;
+
+
+// Operating condition Reactor 3:
+IF FbDrainVCReactor1 AND FbDrainVCReactor2 AND FbDrainVCReactor4 AND FbDrainVCReactor5 AND FbDrainVCReactor6 THEN
+	DValveCReactor3 := TRUE;
+ELSE
+	DValveCReactor3 := FALSE;
+END_IF;
+
+
+// Operating condition Reactor 4:
+IF FbDrainVCReactor1 AND FbDrainVCReactor2 AND FbDrainVCReactor3 AND FbDrainVCReactor5 AND FbDrainVCReactor6 THEN
+	DValveCReactor4 := TRUE;
+ELSE
+	DValveCReactor4 := FALSE;
+END_IF;
+
+
+// Operating condition Reactor 5:
+IF FbDrainVCReactor1 AND FbDrainVCReactor2 AND FbDrainVCReactor3 AND FbDrainVCReactor4 AND FbDrainVCReactor6 THEN
+	DValveCReactor5 := TRUE;
+ELSE
+	DValveCReactor5 := FALSE;
+END_IF;
+
+
+// Operating condition Reactor 6:
+IF FbDrainVCReactor1 AND FbDrainVCReactor2 AND FbDrainVCReactor3 AND FbDrainVCReactor4 AND FbDrainVCReactor5 THEN
+	DValveCReactor6 := TRUE;
+ELSE
+	DValveCReactor6 := FALSE;
+END_IF;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

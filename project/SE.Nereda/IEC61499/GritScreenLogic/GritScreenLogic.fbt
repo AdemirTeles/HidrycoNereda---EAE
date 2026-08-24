@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="64739602-d6ba-4fac-a083-4a093d36cc7e" Name="GritScreenLogic" Format="2.0" Comment="CAT Function Block Type" Namespace="SE.Nereda">
+  <Attribute Name="HMI.Alias" Value="" />
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="6/15/2026" Remarks="template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="0996BAD8F769B915" Name="INIT" />
+      <Event ID="ADE4DE4A76538746" Name="REQ_START_GS">
+        <With Var="ReqStartGritScreen" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="1EA29378D87A8B35" Name="INITO" />
+      <Event ID="3A6B5E8C5702FBA3" Name="FB_STATE_RGI_001">
+        <With Var="FbStopped_RGI_001" />
+        <With Var="FbRunning_RGI_001" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="76D0FEE710977B1E" Name="ReqStartGritScreen" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="CA5517AE7339BA90" Name="FbStopped_RGI_001" Type="BOOL" />
+      <VarDeclaration ID="16751299E2E45838" Name="FbRunning_RGI_001" Type="BOOL" />
+    </OutputVars>
+    <Sockets>
+      <AdapterDeclaration ID="52077DCC61F0B1BD" Name="IHatchSensorPv" Type="IDigital" Namespace="SE.App2Base" x="859.9999" y="1960" />
+      <AdapterDeclaration ID="F4DF5A3184FB932D" Name="ISafetyStop" Type="IDigital" Namespace="SE.App2Base" x="859.9999" y="2520" />
+      <AdapterDeclaration ID="93E8B22DB41CD544" Name="I46_2_AP_ifp_95_001" Type="IActStatus" Namespace="SE.Nereda" x="859.9999" y="3100" />
+    </Sockets>
+    <Plugs>
+      <AdapterDeclaration ID="BFB03C5769C7401A" Name="INVPP_001_RGI_001" Type="INeredaAct" Namespace="SE.Nereda" x="6080" y="980" />
+    </Plugs>
+    <AdapterOutputs>
+      <Adapter ID="04485FF8C96F2743" Name="IInterlock_RGI_001" Type="IOpCondS" Namespace="SE.App2CommonProcess" Comment="Condition summary chain output to downstream block" />
+    </AdapterOutputs>
+  </InterfaceList>
+  <FBNetwork>
+    <FB ID="A4EA3907DEB7953A" UID="3878081670F62AED" Name="GritScreenLogic" Type="GritScreenBasic" x="3020" y="2260" Namespace="SE.Nereda" />
+    <FB ID="6CAFF44A3CFE0867" UID="6C115ED3AF2785D6" Name="RunHoldTime" Type="E_DELAY_V_D" x="3020" y="3200" Namespace="SE.Nereda" />
+    <FB ID="C41E87BA8B0B7B3E" Name="IThis" Type="GritScreenLogic_HMI" x="3825.885" y="920" Namespace="SE.Nereda">
+      <Parameter Name="$826C8B848805EC1F" Value="TRUE" />
+    </FB>
+    <FB ID="D44815258E92CF9D" Name="CmdGSSmooth" Type="boolValueChanged" x="4340" y="2260" Namespace="SE.App2Base" />
+    <FB ID="F6B3A14B584C00F6" UID="7DBC3990DBC0D19D" Name="SafetyStopReset" Type="SafetyStopBasic" x="4648.729" y="2940" Namespace="SE.Nereda" />
+    <FB ID="C6CEE7146C7CA49E" UID="70EDBC92D8C12429" Name="CmdGS" Type="BOOL2INT" x="5120" y="2320" Namespace="SE.Nereda" />
+    <FB ID="3E30FCDC1DD6B0A3" UID="06FEBEE3C78CE5F4" Name="HatchSensorPv" Type="INT2BOOL" x="1980" y="1960" Namespace="SE.Nereda" />
+    <FB ID="249E90AC67A40FC3" UID="EBEC3087EA930833" Name="SafetyStop" Type="INT2BOOL" x="1980" y="2520" Namespace="SE.Nereda" />
+    <FB ID="4BF972B34300D334" Name="RHT" Type="E_MERGE" x="3800" y="3200" Namespace="IEC61499.Standard" />
+    <FB ID="F796A9B2B0AFE114" Name="HatchSensor" Type="ilckCondItem" x="4580" y="4120" Namespace="SE.App2CommonProcess">
+      <Parameter Name="$CondCause" Value="Active1" />
+    </FB>
+    <FB ID="F4146D7A5455A346" Name="SafetySensor" Type="ilckCondItem" x="4580" y="5040" Namespace="SE.App2CommonProcess">
+      <Parameter Name="$CondCause" Value="Active1" />
+    </FB>
+    <FB ID="9F93BCBEED8ABC11" Name="NotHatch" Type="NOT_42C76073DCEB1A7A" x="3600" y="4120" Namespace="SE.Nereda">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNT:=1;OUT${CNT}:BOOL" />
+    </FB>
+    <FB ID="EE47881184B575D8" Name="SafetySwitchIlckCond" Type="OR_88A3DD8EC65DD11C" x="3640" y="5040" Namespace="SE.Nereda">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNT:=2;OUT:BOOL" />
+    </FB>
+    <Input ID="0996BAD8F769B915" Name="INIT" x="1460" y="1140" Type="Event" />
+    <Input ID="ADE4DE4A76538746" Name="REQ_START_GS" x="1740" y="3092" Type="Event" />
+    <Input ID="76D0FEE710977B1E" Name="ReqStartGritScreen" x="1740" y="3152" Type="Data" />
+    <Frame Name="FRAME6" X="520" Y="1720" Width="2160" Height="2260">
+      <Parameter Name="BackgroundColor" Value="AntiqueWhite" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 14.25pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="01 - FUNCTIONNAL INPUT INTERFACE" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME8" X="520" Y="780" Width="2160" Height="900">
+      <Parameter Name="BackgroundColor" Value="AliceBlue" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 14.25pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="00 - INITIALIZATION" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME10" X="2720" Y="1920" Width="3040" Height="4160">
+      <Parameter Name="BackgroundColor" Value="224, 224, 224" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 14.25pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="05 - LOGIC" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME14" X="2720" Y="6120" Width="3040" Height="320">
+      <Parameter Name="BackgroundColor" Value="LightGoldenrodYellow" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 14.25pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="03 - FIELD INTERFACE" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME1" X="2820" Y="2060" Width="2840" Height="1820">
+      <Parameter Name="BackgroundColor" Value="ButtonFace" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 14.25pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="Grit Screen Logic" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME9" X="5800" Y="780" Width="2100" Height="1900">
+      <Parameter Name="BackgroundColor" Value="AntiqueWhite" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 14.25pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="02 - FUNCTIONNAL OUTPUT INTERFACE" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME7" X="2720" Y="780" Width="3040" Height="1100">
+      <Parameter Name="BackgroundColor" Value="LavenderBlush" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 14.25pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="06 - HMI INTERFACE" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME2" X="2820" Y="3920" Width="2840" Height="2060">
+      <Parameter Name="BackgroundColor" Value="ButtonFace" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 14.25pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="Interlock" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Output ID="04485FF8C96F2743" Name="IInterlock_RGI_001" x="6040" y="2428" Type="Adapter" />
+    <Output ID="3A6B5E8C5702FBA3" Name="FB_STATE_RGI_001" x="7040" y="992" Type="Event" />
+    <Output ID="CA5517AE7339BA90" Name="FbStopped_RGI_001" x="7040" y="1492" Type="Data" />
+    <Output ID="16751299E2E45838" Name="FbRunning_RGI_001" x="7040" y="1552" Type="Data" />
+    <Output ID="1EA29378D87A8B35" Name="INITO" x="1440" y="1304" Type="Event" />
+    <EventConnections>
+      <Connection Source="$0996BAD8F769B915" Destination="$C41E87BA8B0B7B3E.F831843AD47EACC8" dx1="1118.651">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$52077DCC61F0B1BD.REQ" Destination="$3E30FCDC1DD6B0A3.DD5870AA881150BB" />
+      <Connection Source="$F4DF5A3184FB932D.REQ" Destination="$249E90AC67A40FC3.DD5870AA881150BB" />
+      <Connection Source="$3E30FCDC1DD6B0A3.6FC99A5BD1C38561" Destination="$A4EA3907DEB7953A.C98E92D019C137AD">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$249E90AC67A40FC3.6FC99A5BD1C38561" Destination="$F6B3A14B584C00F6.REQ_SENSOR">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$93E8B22DB41CD544.14377629A1F197A9" Destination="$A4EA3907DEB7953A.78F835CEE28AEB6F">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$ADE4DE4A76538746" Destination="$A4EA3907DEB7953A.17292A3319B9B893" dx1="180.9585">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$A4EA3907DEB7953A.5D77A675C82F5E90" Destination="$C41E87BA8B0B7B3E.A6951A52F3A985E4">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$6CAFF44A3CFE0867.INITO" Destination="$C41E87BA8B0B7B3E.DC01046555A7FF27">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$BFB03C5769C7401A.9CD053F8408797ED" Destination="$C41E87BA8B0B7B3E.789D7A6A8CAC6367">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$F6B3A14B584C00F6.ECC6B5D96C32F949" Destination="$C41E87BA8B0B7B3E.32D9972870B622FC">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$C41E87BA8B0B7B3E.6035C0AC8F99A6FF" Destination="$6CAFF44A3CFE0867.INIT">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$C41E87BA8B0B7B3E.A7DB605A2943CFBE" Destination="$F6B3A14B584C00F6.REQ_RESET_HMI">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$F6B3A14B584C00F6.CNF" Destination="$A4EA3907DEB7953A.238D1653B4B86A23">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$6CAFF44A3CFE0867.1457E63E0C241C83" Destination="$A4EA3907DEB7953A.CB782D8CFC61A887">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$A4EA3907DEB7953A.246A1F6CAA1F8088" Destination="$D44815258E92CF9D.REQ">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$A4EA3907DEB7953A.6912D24CC29C1597" Destination="$6CAFF44A3CFE0867.START">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$A4EA3907DEB7953A.6D1EA6DA3C78952A" Destination="$6CAFF44A3CFE0867.STOP">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$D44815258E92CF9D.CHD" Destination="$C6CEE7146C7CA49E.DD5870AA881150BB" />
+      <Connection Source="$C6CEE7146C7CA49E.6FC99A5BD1C38561" Destination="$BFB03C5769C7401A.0F1CDF9A9B4A227A">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$BFB03C5769C7401A.9CD053F8408797ED" Destination="$3A6B5E8C5702FBA3" />
+      <Connection Source="$6CAFF44A3CFE0867.INITO" Destination="$1EA29378D87A8B35" dx1="130" dx2="120" dy="-986.146">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$C41E87BA8B0B7B3E.AF62DFFF0A74CDE9" Destination="$6CAFF44A3CFE0867.8C325F07198FCB13">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$A4EA3907DEB7953A.6912D24CC29C1597" Destination="$4BF972B34300D334.EI1">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$A4EA3907DEB7953A.6D1EA6DA3C78952A" Destination="$4BF972B34300D334.EI2">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$4BF972B34300D334.EO" Destination="$C41E87BA8B0B7B3E.FEB75259036D1A03">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$9F93BCBEED8ABC11.CNF" Destination="$F796A9B2B0AFE114.REQ" />
+      <Connection Source="$3E30FCDC1DD6B0A3.6FC99A5BD1C38561" Destination="$9F93BCBEED8ABC11.REQ">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$249E90AC67A40FC3.6FC99A5BD1C38561" Destination="$EE47881184B575D8.REQ">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$EE47881184B575D8.CNF" Destination="$F4146D7A5455A346.REQ" />
+      <Connection Source="$F6B3A14B584C00F6.CNF" Destination="$EE47881184B575D8.REQ">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="$52077DCC61F0B1BD.Value" Destination="$3E30FCDC1DD6B0A3.4573FC8F228EB71D" dx1="75.16687" />
+      <Connection Source="$F4DF5A3184FB932D.Value" Destination="$249E90AC67A40FC3.4573FC8F228EB71D" dx1="75.16687" />
+      <Connection Source="$3E30FCDC1DD6B0A3.A6DEF5F9C27C1848" Destination="$A4EA3907DEB7953A.BDD30397DC140BB5">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$249E90AC67A40FC3.A6DEF5F9C27C1848" Destination="$F6B3A14B584C00F6.ValSensor">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$93E8B22DB41CD544.D41A46B14EF7208D" Destination="$A4EA3907DEB7953A.5A95E52E4C2C6E8F">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$76D0FEE710977B1E" Destination="$A4EA3907DEB7953A.390F6C196042D9F1" dx1="127.7085">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$A4EA3907DEB7953A.5D66B7CF1BCD2563" Destination="$C41E87BA8B0B7B3E.FABF6D144250FDB8">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$BFB03C5769C7401A.B762734C094A7162" Destination="$C41E87BA8B0B7B3E.C0637BD89035CE8E">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$F6B3A14B584C00F6.FBCD44278B23036C" Destination="$C41E87BA8B0B7B3E.0543E5B8C27C3D5D">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$C41E87BA8B0B7B3E.6D80044980F54AB5" Destination="$6CAFF44A3CFE0867.DT1">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$C41E87BA8B0B7B3E.BBF76FB55387E193" Destination="$F6B3A14B584C00F6.ResetFromHMI">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$F6B3A14B584C00F6.D663346B85035263" Destination="$A4EA3907DEB7953A.36F6151BE7454470">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$6CAFF44A3CFE0867.716D3F3042596C89" Destination="$A4EA3907DEB7953A.4DB8B713381E336F">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$A4EA3907DEB7953A.7BD0CF4C49B6AF03" Destination="$D44815258E92CF9D.Input">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$D44815258E92CF9D.Output" Destination="$C6CEE7146C7CA49E.4573FC8F228EB71D" dx1="70" />
+      <Connection Source="$C6CEE7146C7CA49E.A6DEF5F9C27C1848" Destination="$BFB03C5769C7401A.710D7FC54EE3F35A">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$BFB03C5769C7401A.D83B5BDEFA4D797C" Destination="$CA5517AE7339BA90" />
+      <Connection Source="$BFB03C5769C7401A.B762734C094A7162" Destination="$16751299E2E45838" />
+      <Connection Source="$A4EA3907DEB7953A.7C7F962FEDB00518" Destination="$C41E87BA8B0B7B3E.A017984B93B04E5E">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$9F93BCBEED8ABC11.OUT1" Destination="$F796A9B2B0AFE114.CondSignal" dx1="43.75" />
+      <Connection Source="$3E30FCDC1DD6B0A3.A6DEF5F9C27C1848" Destination="$9F93BCBEED8ABC11.IN1">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$249E90AC67A40FC3.A6DEF5F9C27C1848" Destination="$EE47881184B575D8.IN1">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$EE47881184B575D8.OUT" Destination="$F4146D7A5455A346.CondSignal" dx1="47.47925" />
+      <Connection Source="$F6B3A14B584C00F6.D663346B85035263" Destination="$EE47881184B575D8.IN2">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+    </DataConnections>
+    <AdapterConnections>
+      <Connection Source="$F796A9B2B0AFE114.ICondChainOut" Destination="$F4146D7A5455A346.ICondChainIn">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$F4146D7A5455A346.ICondChainOut" Destination="$04485FF8C96F2743" dx1="120">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+    </AdapterConnections>
+  </FBNetwork>
+</FBType>

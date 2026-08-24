@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="ed612aac-c45f-4e5c-b198-9596cd08f015" Comment="Composite Function Block Type" Name="Valvula_Saida_Digital" Format="2.0" Namespace="Hidryco.HidrycoLib">
+  <Attribute Name="HMI.Alias" Value="" />
+  <Attribute Name="Configuration.FB.IDCounter" Value="16" />
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="1/26/2026" Remarks="template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="REQ" Comment="Normal Execution Request">
+        <With Var="ilkManual" />
+        <With Var="ilkAutomatico" />
+      </Event>
+      <Event Name="E_RESET_FALHA_PROCESSO" />
+      <Event Name="E_STATUS_AUTOMATICO">
+        <With Var="cmdOnAutomatico" />
+        <With Var="cmdOffAutomatico" />
+        <With Var="stsAutomatico" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="CNF">
+        <With Var="stsAnimacao" />
+        <With Var="stsDisponivelAutomatico" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="ilkManual" Type="BOOL" />
+      <VarDeclaration Name="ilkAutomatico" Type="BOOL" />
+      <VarDeclaration Name="stsAutomatico" Type="BOOL" />
+      <VarDeclaration Name="cmdOnAutomatico" Type="BOOL" />
+      <VarDeclaration Name="cmdOffAutomatico" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="stsAnimacao" Type="INT" />
+      <VarDeclaration Name="stsDisponivelAutomatico" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <FBNetwork>
+    <FB ID="13" UID="1" Name="Acionamento" Type="basicValveControlOnOff" x="1340" y="1520" Namespace="Hidryco.HidrycoLib" />
+    <FB ID="2" Name="IThis" Type="Valvula_Saida_Digital_HMI" x="1640" y="360" Namespace="Hidryco.HidrycoLib">
+      <Parameter Name="$14A7B9139D9DA684" Value="TRUE" />
+    </FB>
+    <FB ID="4" Name="Animacao" Type="animacaoAbrirFechar" x="4480" y="1840" Namespace="Hidryco.HidrycoLib" />
+    <FB ID="5" Name="FalhaFeedback" Type="falhaFeedbackOnOff" x="2320" y="1960" Namespace="Hidryco.HidrycoLib" />
+    <FB ID="6" Name="FalhaGeral" Type="AND_148CCC6046D4CE74C" x="3720" y="1960" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNT:=2" />
+    </FB>
+    <FB ID="12" UID="7" Name="LeituraModbus" Type="SYMLINKMULTIVARDST_65D63179E2618F5E" x="1360" y="2960" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=5;VALUE${I}:BOOL,BOOL,BOOL,BOOL,BOOL" />
+      <Parameter Name="$QI" Value="TRUE" />
+      <Parameter Name="$NAME1" Value="'$${PATH}stsRemoto'" />
+      <Parameter Name="$NAME2" Value="'$${PATH}stsFalha'" />
+      <Parameter Name="$NAME3" Value="'$${PATH}stsAberto'" />
+      <Parameter Name="$NAME4" Value="'$${PATH}stsFechado'" />
+      <Parameter Name="$NAME5" Value="'$${PATH}stsFalhaComunicacao'" />
+    </FB>
+    <FB ID="9" Name="plcStart1" Type="plcStart" x="360" y="320" Namespace="SE.App2Base" />
+    <FB ID="11" UID="10" Name="EscritaModbus" Type="SYMLINKMULTIVARSRC_277E97BEC1451D2C" x="2700" y="2980" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=2;VALUE${I}:BOOL,BOOL" />
+      <Parameter Name="$QI" Value="TRUE" />
+      <Parameter Name="$NAME1" Value="'$${PATH}acmAbrir'" />
+      <Parameter Name="$NAME2" Value="'$${PATH}acmFechar'" />
+    </FB>
+    <FB ID="14" Name="AND1" Type="AND_148CCC6046D4CE74C" x="4220" y="739.9999" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNT:=2" />
+    </FB>
+    <FB ID="15" Name="NOT1" Type="NOT_12669C4E53BA46410" x="3540" y="739.9999" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNT:=1" />
+    </FB>
+    <FB ID="16" Name="E_MERGE1" Type="E_MERGE" x="5320" y="1420" Namespace="IEC61499.Standard" />
+    <Input Name="REQ" x="600" y="1592" Type="Event" />
+    <Input Name="ilkManual" x="520" y="2152" Type="Data" />
+    <Input Name="ilkAutomatico" x="520" y="2212" Type="Data" />
+    <Input Name="E_RESET_FALHA_PROCESSO" x="1200" y="2572" Type="Event" />
+    <Input Name="E_STATUS_AUTOMATICO" x="140" y="951.9999" Type="Event" />
+    <Input Name="stsAutomatico" x="140" y="1052" Type="Data" />
+    <Input Name="cmdOnAutomatico" x="520" y="2272" Type="Data" />
+    <Input Name="cmdOffAutomatico" x="520" y="2332" Type="Data" />
+    <Output Name="stsDisponivelAutomatico" x="4840" y="951.9999" Type="Data" />
+    <Output Name="stsAnimacao" x="5280" y="2052" Type="Data" />
+    <Output Name="CNF" x="5620" y="1850" Type="Event" />
+    <EventConnections>
+      <Connection Source="$REQ" Destination="$13.REQ" />
+      <Connection Source="$13.CNF" Destination="$5.REQ">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$5.CNF" Destination="$6.REQ">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$6.CNF" Destination="$4.REQ" dx1="50" />
+      <Connection Source="$13.INITO" Destination="$11.INIT">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$E_RESET_FALHA_PROCESSO" Destination="$5.E_RESET_FALHA" dx1="41.3125" />
+      <Connection Source="$11.INITO" Destination="$12.INIT">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$12.INITO" Destination="$9.ACK_FIRST">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$12.CNF" Destination="$5.REQ">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$12.CNF" Destination="$6.REQ">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$12.CNF" Destination="$4.REQ">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$4.CNF" Destination="$16.EI2" dx1="130" />
+      <Connection Source="$E_STATUS_AUTOMATICO" Destination="$13.REQ" dx1="40" />
+      <Connection Source="$REQ" Destination="$15.REQ">
+        <Points>
+          <Points>
+            <X>215.114578</X>
+            <Y>405</Y>
+          </Points>
+          <Points>
+            <X>227.5</X>
+            <Y>405</Y>
+          </Points>
+          <Points>
+            <X>227.5</X>
+            <Y>362.5</Y>
+          </Points>
+          <Points>
+            <X>717.5</X>
+            <Y>362.5</Y>
+          </Points>
+          <Points>
+            <X>717.5</X>
+            <Y>194.999985</Y>
+          </Points>
+          <Points>
+            <X>879.999939</X>
+            <Y>194.999985</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$15.CNF" Destination="$14.REQ" />
+      <Connection Source="$E_STATUS_AUTOMATICO" Destination="$14.REQ">
+        <Points>
+          <Points>
+            <X>209.0729</X>
+            <Y>244.999969</Y>
+          </Points>
+          <Points>
+            <X>219.0729</X>
+            <Y>244.999969</Y>
+          </Points>
+          <Points>
+            <X>219.0729</X>
+            <Y>307.5</Y>
+          </Points>
+          <Points>
+            <X>982.5</X>
+            <Y>307.5</Y>
+          </Points>
+          <Points>
+            <X>982.5</X>
+            <Y>194.999985</Y>
+          </Points>
+          <Points>
+            <X>1050</X>
+            <Y>194.999985</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$9.FIRST_INIT" Destination="$2.C34EE0C757EC232B" dx1="68.08337" />
+      <Connection Source="$9.REDO_INIT" Destination="$2.C34EE0C757EC232B" dx1="70" />
+      <Connection Source="$12.CNF" Destination="$2.574D49F8EC2B904">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$4.CNF" Destination="$2.9A5DDC84E8DE3D12">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$2.FA6C129C0C543F89" Destination="$2.87A0408D0FFEDF32" dx1="246.7292" dx2="110" dy="-170" />
+      <Connection Source="$E_STATUS_AUTOMATICO" Destination="$2.87A0408D0FFEDF32" dx1="173.7084" />
+      <Connection Source="$2.EC0A2727CF0F86B6" Destination="$13.INIT">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$2.FA6C129C0C543F89" Destination="$13.E_COMMAND">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$2.A0A7948FF1344746" Destination="$5.REQ">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$2.51CC798A23A84B59" Destination="$5.E_RESET_FALHA" dx1="62.9585" dx2="30" dy="750">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$14.CNF" Destination="$16.EI1" dx1="67.479" />
+      <Connection Source="$16.EO" Destination="$CNF" dx1="41.54248" dx2="49.99951" dy="290" />
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="$ilkManual" Destination="$13.ilkManual" />
+      <Connection Source="$ilkAutomatico" Destination="$13.ilkAutomatico" />
+      <Connection Source="$13.acmOn" Destination="$5.cmdOn">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$13.acmOff" Destination="$5.cmdOff">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$5.stsFalhaFeedback" Destination="$6.IN2">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$6.OUT" Destination="$4.stsFalha" />
+      <Connection Source="$13.acmOn" Destination="$11.VALUE1" dx1="141.271" />
+      <Connection Source="$13.acmOff" Destination="$11.VALUE2" dx1="121.271" />
+      <Connection Source="$12.VALUE1" Destination="$13.stsRemoto">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$12.VALUE1" Destination="$5.stsRemoto">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$12.VALUE2" Destination="$13.stsFalha">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$12.VALUE2" Destination="$6.IN1">
+        <Points>
+          <Points>
+            <X>497.09375</X>
+            <Y>874.999939</Y>
+          </Points>
+          <Points>
+            <X>524.59375</X>
+            <Y>874.999939</Y>
+          </Points>
+          <Points>
+            <X>524.59375</X>
+            <Y>727.5</Y>
+          </Points>
+          <Points>
+            <X>857.5</X>
+            <Y>727.5</Y>
+          </Points>
+          <Points>
+            <X>857.5</X>
+            <Y>550</Y>
+          </Points>
+          <Points>
+            <X>925</X>
+            <Y>550</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$12.VALUE3" Destination="$4.stsAberto">
+        <Points>
+          <Points>
+            <X>497.09375</X>
+            <Y>889.999939</Y>
+          </Points>
+          <Points>
+            <X>529.59375</X>
+            <Y>889.999939</Y>
+          </Points>
+          <Points>
+            <X>529.59375</X>
+            <Y>727.5</Y>
+          </Points>
+          <Points>
+            <X>1022.5</X>
+            <Y>727.5</Y>
+          </Points>
+          <Points>
+            <X>1022.5</X>
+            <Y>520</Y>
+          </Points>
+          <Points>
+            <X>1115</X>
+            <Y>520</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$12.VALUE3" Destination="$5.stsOn">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$12.VALUE4" Destination="$4.stsFechado">
+        <Points>
+          <Points>
+            <X>497.09375</X>
+            <Y>904.999939</Y>
+          </Points>
+          <Points>
+            <X>534.59375</X>
+            <Y>904.999939</Y>
+          </Points>
+          <Points>
+            <X>534.59375</X>
+            <Y>727.5</Y>
+          </Points>
+          <Points>
+            <X>1022.5</X>
+            <Y>727.5</Y>
+          </Points>
+          <Points>
+            <X>1022.5</X>
+            <Y>535</Y>
+          </Points>
+          <Points>
+            <X>1115</X>
+            <Y>535</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$12.VALUE4" Destination="$5.stsOff">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$4.stsAnimacao" Destination="$stsAnimacao" />
+      <Connection Source="$stsAutomatico" Destination="$13.stsAutomatico" dx1="132.0417" />
+      <Connection Source="$cmdOnAutomatico" Destination="$13.cmdOnAutomatico" />
+      <Connection Source="$cmdOffAutomatico" Destination="$13.cmdOffAutomatico" />
+      <Connection Source="$ilkAutomatico" Destination="$15.IN1">
+        <Points>
+          <Points>
+            <X>271.057281</X>
+            <Y>560</Y>
+          </Points>
+          <Points>
+            <X>282.5</X>
+            <Y>560</Y>
+          </Points>
+          <Points>
+            <X>282.5</X>
+            <Y>362.5</Y>
+          </Points>
+          <Points>
+            <X>717.5</X>
+            <Y>362.5</Y>
+          </Points>
+          <Points>
+            <X>717.5</X>
+            <Y>244.999985</Y>
+          </Points>
+          <Points>
+            <X>879.999939</X>
+            <Y>244.999985</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$15.OUT1" Destination="$14.IN1" />
+      <Connection Source="$12.VALUE1" Destination="$2.73DD1E4BCBC27411">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$12.VALUE5" Destination="$2.E0FFA91C43931D16" dx1="170" dx2="110" dy="-2230" />
+      <Connection Source="$4.stsAnimacao" Destination="$2.7894F7809DC3F7E5" dx1="70" dx2="90" dy="-630" />
+      <Connection Source="$stsAutomatico" Destination="$2.522002FC51DB837E" dx1="40" />
+      <Connection Source="$2.AE3008169325D9EE" Destination="$2.BF950A7A1A9EEEBF" dx1="106.7292" dx2="230" dy="330" />
+      <Connection Source="$2.774C561208F4F8B5" Destination="$2.8D3AAB662FA3CDC0" dx1="86.72925" dx2="250" dy="270" />
+      <Connection Source="$2.AE3008169325D9EE" Destination="$13.cmdOn" dx1="106.7292" dx2="170" dy="330" />
+      <Connection Source="$2.774C561208F4F8B5" Destination="$13.cmdOff" dx1="86.72925" dx2="190" dy="270" />
+      <Connection Source="$2.A50EEDCC1E03C7FC" Destination="$5.stpTempoFalhaAbertura" dx1="62.9585" dx2="150" dy="250">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$2.7A7D358D6DADC989" Destination="$5.stpTempoFalhaFechamento" dx1="62.9585" dx2="170" dy="190">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$stsAutomatico" Destination="$14.IN2">
+        <Points>
+          <Points>
+            <X>179.489563</X>
+            <Y>270</Y>
+          </Points>
+          <Points>
+            <X>189.489563</X>
+            <Y>270</Y>
+          </Points>
+          <Points>
+            <X>189.489563</X>
+            <Y>307.5</Y>
+          </Points>
+          <Points>
+            <X>982.5</X>
+            <Y>307.5</Y>
+          </Points>
+          <Points>
+            <X>982.5</X>
+            <Y>260</Y>
+          </Points>
+          <Points>
+            <X>1050</X>
+            <Y>260</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$14.OUT" Destination="$stsDisponivelAutomatico" />
+    </DataConnections>
+  </FBNetwork>
+</FBType>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="1235c843-46be-4b84-83f2-dceda284aa8f" Name="falhaFeedback" Format="2.0" Comment="Composite Function Block Type" Namespace="Hidryco.HidrycoLib">
+  <Attribute Name="Configuration.FB.IDCounter" Value="4" />
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="16/01/2026" Remarks="template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="E_CMD_LIGAR">
+        <With Var="stsLigado" />
+        <With Var="stsRemoto" />
+        <With Var="cmdLigar" />
+      </Event>
+      <Event Name="E_CMD_RESET_FALHA" />
+      <Event Name="E_ATUALIZA_SETPOINT">
+        <With Var="stpTempoFalhaLigamento" />
+        <With Var="stpTempoFalhaDesligamento" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="CMD_OUT">
+        <With Var="stsFalhaFeedback" />
+        <With Var="stsFalhaLigamento" />
+        <With Var="stsFalhaDesligamento" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="cmdLigar" Type="BOOL" />
+      <VarDeclaration Name="stsLigado" Type="BOOL" />
+      <VarDeclaration Name="stsRemoto" Type="BOOL" />
+      <VarDeclaration Name="stpTempoFalhaLigamento" Type="UINT" />
+      <VarDeclaration Name="stpTempoFalhaDesligamento" Type="UINT" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="stsFalhaFeedback" Type="BOOL" />
+      <VarDeclaration Name="stsFalhaLigamento" Type="BOOL" />
+      <VarDeclaration Name="stsFalhaDesligamento" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <FBNetwork>
+    <FB ID="2" Name="Delay_Ligamento" Type="E_DELAYR" x="1100" y="220" Namespace="Runtime.Standard" />
+    <FB ID="3" Name="FB2" Type="basicFalhaFeedback" x="1140" y="860" Namespace="Hidryco.HidrycoLib" />
+    <FB ID="4" Name="Delay_Desligamento" Type="E_DELAYR" x="2060" y="240" Namespace="Runtime.Standard" />
+    <Input Name="E_CMD_LIGAR" x="180" y="872" Type="Event" />
+    <Input Name="cmdLigar" x="180" y="1192" Type="Data" />
+    <Input Name="stsLigado" x="180" y="1312" Type="Data" />
+    <Input Name="stsRemoto" x="180" y="1372" Type="Data" />
+    <Input Name="stpTempoFalhaLigamento" x="180" y="1432" Type="Data" />
+    <Input Name="stpTempoFalhaDesligamento" x="179.9999" y="1492" Type="Data" />
+    <Input Name="E_CMD_RESET_FALHA" x="180" y="1052" Type="Event" />
+    <Input Name="E_ATUALIZA_SETPOINT" x="12" y="12" Type="Event" />
+    <Output Name="CMD_OUT" x="2940" y="851.9999" Type="Event" />
+    <Output Name="stsFalhaFeedback" x="2660" y="1192" Type="Data" />
+    <Output Name="stsFalhaLigamento" x="2640" y="1252" Type="Data" />
+    <Output Name="stsFalhaDesligamento" x="2580" y="1312" Type="Data" />
+    <EventConnections>
+      <Connection Source="$3.START_DELAY_DESLIGAMENTO" Destination="$4.RESTART">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$4.EO" Destination="$3.END_DELAY_DESLIGAMENTO">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$2.EO" Destination="$3.END_DELAY_LIGAMENTO">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$E_CMD_LIGAR" Destination="$3.CMD_IN" />
+      <Connection Source="$3.CMD_OUT" Destination="$CMD_OUT" dx1="50" />
+      <Connection Source="$E_CMD_RESET_FALHA" Destination="$3.E_RESET_FALHA" />
+      <Connection Source="$3.START_DELAY_LIGAMENTO" Destination="$2.RESTART">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="$3.DelayTimeDesligamento" Destination="$4.DT">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$3.DelayTimeLigamento" Destination="$2.DT">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$stpTempoFalhaDesligamento" Destination="$3.StpTempoFalhaDesligamento" />
+      <Connection Source="$stpTempoFalhaLigamento" Destination="$3.StpTempoFalhaLigamento" />
+      <Connection Source="$stsRemoto" Destination="$3.StsRemoto" dx1="40" />
+      <Connection Source="$stsLigado" Destination="$3.StsLigado" />
+      <Connection Source="$cmdLigar" Destination="$3.CmdLigar" dx1="44.52087" />
+      <Connection Source="$3.StsFalhaFeedback" Destination="$stsFalhaFeedback" dx1="48.021" />
+      <Connection Source="$3.StsFalhaLigamento" Destination="$stsFalhaLigamento" dx1="768.021" dx2="30" dy="50" />
+      <Connection Source="$3.StsFalhaDesligamento" Destination="$stsFalhaDesligamento">
+        <Points>
+          <Points>
+            <X>640.494751</X>
+            <Y>350</Y>
+          </Points>
+          <Points>
+            <X>645</X>
+            <Y>350</Y>
+          </Points>
+          <Points>
+            <X>645</X>
+            <Y>335</Y>
+          </Points>
+        </Points>
+      </Connection>
+    </DataConnections>
+  </FBNetwork>
+</FBType>

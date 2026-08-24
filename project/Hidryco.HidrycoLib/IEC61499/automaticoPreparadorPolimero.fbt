@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="2cff3921-5253-414f-b923-ab963132871b" Name="automaticoPreparadorPolimero" Comment="Basic Function Block Type" Namespace="Hidryco.HidrycoLib">
+  <Identification Standard="61499-2" />
+  <VersionInfo Version="0.0" Author=" " Date="09/04/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="INIT" Comment="Initialization Request" />
+      <Event Name="REQ" Comment="Normal Execution Request">
+        <With Var="stsSensorVazao1" />
+        <With Var="stsSensorVazao2" />
+        <With Var="stsSensorVazao3" />
+        <With Var="stsAnimacaoValvula1" />
+        <With Var="stsAnimacaoValvula2" />
+        <With Var="stsAnimacaoValvula3" />
+        <With Var="stsAutomatico" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="INITO" Comment="Initialization Confirm" />
+      <Event Name="CNF" Comment="Execution Confirmation">
+        <With Var="acmAutomaticoPreparoPolimero" />
+        <With Var="cmdOnValvula1" />
+        <With Var="cmdOnValvula2" />
+        <With Var="cmdOnValvula3" />
+        <With Var="cmdOffValvula1" />
+        <With Var="cmdOffValvula2" />
+        <With Var="cmdOffValvula3" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="stsAutomatico" Type="BOOL" />
+      <VarDeclaration Name="stsSensorVazao1" Type="INT" />
+      <VarDeclaration Name="stsSensorVazao2" Type="INT" />
+      <VarDeclaration Name="stsSensorVazao3" Type="INT" />
+      <VarDeclaration Name="stsAnimacaoValvula1" Type="INT" />
+      <VarDeclaration Name="stsAnimacaoValvula2" Type="INT" />
+      <VarDeclaration Name="stsAnimacaoValvula3" Type="INT" />
+      <VarDeclaration Name="stpVazaoAcionamento1" Type="INT" />
+      <VarDeclaration Name="stpVazaoAcionamento2" Type="INT" />
+      <VarDeclaration Name="stpVazaoAcionamento3" Type="INT" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="acmAutomaticoPreparoPolimero" Type="BOOL" />
+      <VarDeclaration Name="cmdOnValvula1" Type="BOOL" />
+      <VarDeclaration Name="cmdOnValvula2" Type="BOOL" />
+      <VarDeclaration Name="cmdOnValvula3" Type="BOOL" />
+      <VarDeclaration Name="cmdOffValvula1" Type="BOOL" />
+      <VarDeclaration Name="cmdOffValvula2" Type="BOOL" />
+      <VarDeclaration Name="cmdOffValvula3" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="INIT,REQ,logicaAcionamento" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="1844.941" y="721.4117" />
+      <ECState Name="STATE1" x="2056" y="1488">
+        <ECAction Algorithm="logicaAcionamento" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="STATE1" Condition="1" x="2028.765" y="1087.479">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="504.5542,242.8507,519.5377,298.0176" />
+      </ECTransition>
+      <ECTransition Source="STATE1" Destination="START" Condition="1" x="1948.95" y="1179.706">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="495.2145,328.7691,480.0208,273.5838" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="INIT" Comment="Initialization algorithm">
+      <ST><![CDATA[;]]></ST>
+    </Algorithm>
+    <Algorithm Name="REQ" Comment="Normally executed algorithm">
+      <ST><![CDATA[;]]></ST>
+    </Algorithm>
+    <Algorithm Name="logicaAcionamento">
+      <ST><![CDATA[IF stsAutomatico THEN
+    IF stsSensorVazao1 > stpVazaoAcionamento1 THEN
+        cmdOnValvula1  := TRUE;
+        cmdOffValvula1 := FALSE;
+    ELSE
+        cmdOnValvula1  := FALSE;
+        cmdOffValvula1 := TRUE;
+    END_IF;
+
+    (* Válvula 2 *)
+    IF stsSensorVazao2 > stpVazaoAcionamento2 THEN
+        cmdOnValvula2  := TRUE;
+        cmdOffValvula2 := FALSE;
+    ELSE
+        cmdOnValvula2  := FALSE;
+        cmdOffValvula2 := TRUE;
+    END_IF;
+
+    (* Válvula 3 *)
+    IF stsSensorVazao3 > stpVazaoAcionamento3 THEN
+        cmdOnValvula3  := TRUE;
+        cmdOffValvula3 := FALSE;
+    ELSE
+        cmdOnValvula3  := FALSE;
+        cmdOffValvula3 := TRUE;
+    END_IF;
+ELSE
+    cmdOnValvula1  := FALSE;
+    cmdOnValvula2  := FALSE;
+    cmdOnValvula3  := FALSE;
+    cmdOffValvula1 := FALSE;
+    cmdOffValvula2 := FALSE;
+    cmdOffValvula3 := FALSE;
+END_IF;
+
+acmAutomaticoPreparoPolimero :=
+    stsAutomatico AND
+    (
+        (stsAnimacaoValvula1 = 1) OR
+        (stsAnimacaoValvula2 = 1) OR
+        (stsAnimacaoValvula3 = 1)
+    );
+;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="fb23b824-5f5c-40d3-8963-352db5031540" Name="necessidade2Equipamentos" Format="2.0" Comment="Composite Function Block Type" Namespace="Hidryco.HidrycoLib">
+  <Attribute Name="Configuration.FB.IDCounter" Value="2" />
+  <Identification Standard="61499-2" />
+  <VersionInfo Version="0.0" Author=" " Date="27/02/2026" Remarks="template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="E_ATUALIZA_SETPOINT">
+        <With Var="stpLimiteFaixa1" />
+        <With Var="stpLimiteFaixa2" />
+        <With Var="stpLimiteFaixa3" />
+        <With Var="stpLimiteFaixa4" />
+        <With Var="stpTempoAtuacao_FalhaBoiaL" />
+        <With Var="cmdHabilita" />
+      </Event>
+      <Event Name="E_ATUALIZA_SENSOR">
+        <With Var="stsSensor" />
+      </Event>
+      <Event Name="E_ATUALIZA_ANIMACAO">
+        <With Var="stsAnimacaoBoiaL" />
+        <With Var="stsAnimacaoBoiaH" />
+      </Event>
+      <Event Name="E_ATUALIZA_FALHA_SENSOR">
+        <With Var="stsFalhaSensor" />
+      </Event>
+      <Event Name="E_ATUALIZA_SENSOR_HABILITADO">
+        <With Var="stsSensorHabilitado" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="E_ATUALIZA_NECESSIDADE">
+        <With Var="stsNecessidadeEquipamento" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="cmdHabilita" Type="BOOL" />
+      <VarDeclaration Name="stsSensorHabilitado" Type="BOOL" />
+      <VarDeclaration Name="stsSensor" Type="REAL" />
+      <VarDeclaration Name="stpLimiteFaixa1" Type="REAL" />
+      <VarDeclaration Name="stpLimiteFaixa2" Type="REAL" />
+      <VarDeclaration Name="stpLimiteFaixa3" Type="REAL" />
+      <VarDeclaration Name="stpLimiteFaixa4" Type="REAL" />
+      <VarDeclaration Name="stsFalhaSensor" Type="BOOL" />
+      <VarDeclaration Name="stsAnimacaoBoiaL" Type="INT" />
+      <VarDeclaration Name="stsAnimacaoBoiaH" Type="INT" />
+      <VarDeclaration Name="stpTempoAtuacao_FalhaBoiaL" Type="UINT" Comment="Tempo para equipamento ficar ligado quando bater na boia H e a boia L estiver em falha" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="stsNecessidadeEquipamento" Type="UINT" />
+    </OutputVars>
+  </InterfaceList>
+  <FBNetwork>
+    <FB ID="1" Name="basicNecessidade2Equipamentos1" Type="basicNecessidade2Equipamentos" x="1860" y="1100" Namespace="Hidryco.HidrycoLib" />
+    <FB ID="2" Name="E_DELAY1" Type="E_DELAY" x="2340" y="320" Namespace="IEC61499.Standard" />
+    <Input Name="stsSensor" x="820" y="1732" Type="Data" />
+    <Input Name="stpLimiteFaixa1" x="820" y="1792" Type="Data" />
+    <Input Name="stpLimiteFaixa2" x="820" y="1852" Type="Data" />
+    <Input Name="stpLimiteFaixa3" x="820" y="1912" Type="Data" />
+    <Input Name="stpLimiteFaixa4" x="820" y="1972" Type="Data" />
+    <Input Name="stsFalhaSensor" x="820" y="2032" Type="Data" />
+    <Input Name="stsAnimacaoBoiaL" x="820" y="2092" Type="Data" />
+    <Input Name="stsAnimacaoBoiaH" x="820" y="2152" Type="Data" />
+    <Input Name="stpTempoAtuacao_FalhaBoiaL" x="820" y="2212" Type="Data" />
+    <Input Name="E_ATUALIZA_SETPOINT" x="839.9999" y="1112" Type="Event" />
+    <Input Name="E_ATUALIZA_SENSOR" x="839.9999" y="1172" Type="Event" />
+    <Input Name="E_ATUALIZA_ANIMACAO" x="839.9999" y="1232" Type="Event" />
+    <Input Name="E_ATUALIZA_FALHA_SENSOR" x="839.9999" y="1292" Type="Event" />
+    <Input Name="cmdHabilita" x="820" y="1612" Type="Data" />
+    <Input Name="E_ATUALIZA_SENSOR_HABILITADO" x="840" y="1352" Type="Event" />
+    <Input Name="stsSensorHabilitado" x="820" y="1672" Type="Data" />
+    <Output Name="stsNecessidadeEquipamento" x="3540" y="1552" Type="Data" />
+    <Output Name="E_ATUALIZA_NECESSIDADE" x="3540" y="1172" Type="Event" />
+    <EventConnections>
+      <Connection Source="$E_ATUALIZA_FALHA_SENSOR" Destination="$1.E_ATUALIZA_FALHA_SENSOR" />
+      <Connection Source="$E_ATUALIZA_ANIMACAO" Destination="$1.E_ATUALIZA_ANIMACAO" />
+      <Connection Source="$E_ATUALIZA_SENSOR" Destination="$1.E_ATUALIZA_SENSOR" dx1="42.37524" />
+      <Connection Source="$E_ATUALIZA_SETPOINT" Destination="$1.E_ATUALIZA_SETPOINT" />
+      <Connection Source="$1.E_ATUALIZA_NECESSIDADE" Destination="$E_ATUALIZA_NECESSIDADE" dx1="70" />
+      <Connection Source="$1.START_DELAY" Destination="$2.START" dx1="47.85425" dx2="50" dy="-110" />
+      <Connection Source="$2.EO" Destination="$1.END_DELAY" dx1="48.5" dx2="130" dy="350" />
+      <Connection Source="$E_ATUALIZA_SENSOR_HABILITADO" Destination="$1.E_ATUALIZA_SENSOR_HABILITADO" />
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="$stsSensor" Destination="$1.stsSensor" />
+      <Connection Source="$stpLimiteFaixa1" Destination="$1.stpLimiteFaixa1" />
+      <Connection Source="$stpLimiteFaixa2" Destination="$1.stpLimiteFaixa2" />
+      <Connection Source="$stpLimiteFaixa3" Destination="$1.stpLimiteFaixa3" />
+      <Connection Source="$stpLimiteFaixa4" Destination="$1.stpLimiteFaixa4" />
+      <Connection Source="$stsFalhaSensor" Destination="$1.stsFalhaSensor" />
+      <Connection Source="$stsAnimacaoBoiaL" Destination="$1.stsAnimacaoBoiaL" />
+      <Connection Source="$stsAnimacaoBoiaH" Destination="$1.stsAnimacaoBoiaH" />
+      <Connection Source="$stpTempoAtuacao_FalhaBoiaL" Destination="$1.stpTempoAtuacao_FalhaBoiaL" />
+      <Connection Source="$1.stsNecessidadeEquipamento" Destination="$stsNecessidadeEquipamento" dx1="90" />
+      <Connection Source="$1.stsDelayTime" Destination="$2.DT" dx1="110" dx2="30" dy="-670" />
+      <Connection Source="$cmdHabilita" Destination="$1.cmdHabilita" />
+      <Connection Source="$stsSensorHabilitado" Destination="$1.stsSensorHabilitado" />
+    </DataConnections>
+  </FBNetwork>
+</FBType>

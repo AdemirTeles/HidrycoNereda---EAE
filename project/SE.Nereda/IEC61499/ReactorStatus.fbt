@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="1898cd7a-ff53-40ac-a179-cef36ea6e703" Name="ReactorStatus" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="6/10/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="2C4D36E78CFC061F" Name="REQ" Comment="Normal Execution Request">
+        <With Var="PhaseRunning" />
+        <With Var="PhaseAborted" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="B6E4C96ABAEB4E2A" Name="CNF" Comment="Execution Confirmation">
+        <With Var="ReactorStatus" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="61016BEC47180831" Name="PhaseRunning" Type="BOOL" />
+      <VarDeclaration ID="E9087AE335C18478" Name="PhaseAborted" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="407F4164D4F8FA5A" Name="ReactorStatus" Type="STRING[50]" Comment="Output event qualifier" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="REQ,INIT" />
+    <InternalVars>
+      <VarDeclaration ID="854A0D5C5FB8B376" Name="Init" Type="BOOL" />
+    </InternalVars>
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="552.9412" y="429.4117" />
+      <ECState Name="REQ" Comment="Normal execution" x="1153.647" y="876.9412">
+        <ECAction Algorithm="REQ" Output="CNF" />
+      </ECState>
+      <ECState Name="INIT" x="1488.572" y="228.5714">
+        <ECAction Algorithm="INIT" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="REQ" Condition="REQ AND Init" x="909.947" y="591.4414">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="209.0669,128.9476,247.4519,157.5447" />
+      </ECTransition>
+      <ECTransition Source="REQ" Destination="START" Condition="1" x="846.2917" y="730.9855">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="232.5161,202.5927,194.131,173.9956" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="INIT" Condition="REQ AND NOT Init" x="1065.781" y="243.0959">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="241.6147,61.8015,296.6078,50.46002" />
+      </ECTransition>
+      <ECTransition Source="INIT" Destination="START" Condition="1" x="1055.019" y="406.423">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="294.8106,99.31232,235.3225,112.0819" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="REQ" Comment="Normally executed algorithm">
+      <ST><![CDATA[;
+IF PhaseRunning AND NOT PhaseAborted THEN
+	ReactorStatus := 'Reactor Running';
+ELSIF NOT PhaseRunning AND PhaseAborted THEN
+	ReactorStatus := 'Reactor Aborted';
+ELSE
+	ReactorStatus := 'Reactor Status';
+END_IF;]]></ST>
+    </Algorithm>
+    <Algorithm Name="INIT">
+      <ST><![CDATA[;
+Init := TRUE;
+ReactorStatus := 'Reactor Status';]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

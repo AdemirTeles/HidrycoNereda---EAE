@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="d83eee08-9ec3-4066-85a6-e2f88b38946c" Name="StartFeedPositionRot" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="7/5/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="9A3C6DCF3E2E1FB0" Name="FB_POS_INIT">
+        <With Var="iStartFeedPositionR1" />
+        <With Var="iStartFeedPositionR2" />
+        <With Var="iStartFeedPositionR3" />
+        <With Var="iStartFeedPositionR4" />
+        <With Var="iStartFeedPositionR5" />
+        <With Var="iStartFeedPositionR6" />
+      </Event>
+      <Event ID="DD2DDDBAAA645E47" Name="ASK_POSITION" />
+      <Event ID="7A48F427D4BCBB50" Name="EMERGENCY_ON">
+        <With Var="EmergencyON" />
+      </Event>
+      <Event ID="ED8BAC414D247CDC" Name="TOT_NBR_R">
+        <With Var="TotNbrReactor" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="0BBB611D4A1D02F5" Name="START_FEED_POS">
+        <With Var="oStartFeedPositionR1" />
+        <With Var="oStartFeedPositionR2" />
+        <With Var="oStartFeedPositionR3" />
+        <With Var="oStartFeedPositionR4" />
+        <With Var="oStartFeedPositionR5" />
+        <With Var="oStartFeedPositionR6" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="099085233DD87A61" Name="iStartFeedPositionR1" Type="INT" />
+      <VarDeclaration ID="8BF6FF3109F97218" Name="iStartFeedPositionR2" Type="INT" />
+      <VarDeclaration ID="20EFF23ED1FC7358" Name="iStartFeedPositionR3" Type="INT" />
+      <VarDeclaration ID="9250ABF5D6AAA38B" Name="iStartFeedPositionR4" Type="INT" />
+      <VarDeclaration ID="E7117D164503054F" Name="iStartFeedPositionR5" Type="INT" />
+      <VarDeclaration ID="B2B6919BB8A755AE" Name="iStartFeedPositionR6" Type="INT" />
+      <VarDeclaration ID="558F6D2FAB8E0E57" Name="EmergencyON" Type="BOOL" />
+      <VarDeclaration ID="5DD6878914F7DB72" Name="TotNbrReactor" Type="INT" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="01DB13D42D3DBB3B" Name="oStartFeedPositionR1" Type="INT" />
+      <VarDeclaration ID="6075D515D2693EEC" Name="oStartFeedPositionR2" Type="INT" />
+      <VarDeclaration ID="AE942E19AA2B17CE" Name="oStartFeedPositionR3" Type="INT" />
+      <VarDeclaration ID="A0ADA3770331F35E" Name="oStartFeedPositionR4" Type="INT" />
+      <VarDeclaration ID="5073F46956E92D6C" Name="oStartFeedPositionR5" Type="INT" />
+      <VarDeclaration ID="6BF52B2208BA01D0" Name="oStartFeedPositionR6" Type="INT" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="26b50d00-aafe-47d2-b819-8c4907840155">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="REQ,INIT,Update" />
+    <InternalVars>
+      <VarDeclaration ID="24F985520135B177" Name="PositionTab" Type="INT" ArraySize="6" />
+      <VarDeclaration ID="42862556EB82E0BB" Name="i" Type="INT" />
+      <VarDeclaration ID="58A3D0ED69D20EAA" Name="FirstIndex" Type="INT" />
+    </InternalVars>
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="312.9413" y="329.4117" />
+      <ECState Name="REQ" Comment="Normal execution" x="1227.933" y="1009.513">
+        <ECAction Algorithm="REQ" Output="START_FEED_POS" />
+      </ECState>
+      <ECState Name="INIT" x="1225.714" y="454.2857">
+        <ECAction Algorithm="INIT" Output="START_FEED_POS" />
+      </ECState>
+      <ECState Name="Update" x="1227.5" y="1517.5">
+        <ECAction Algorithm="Update" />
+      </ECState>
+      <ECTransition Source="START" Destination="INIT" Condition="FB_POS_INIT AND EmergencyON AND&#xD;&#xA;(iStartFeedPositionR1 &gt; 0 OR&#xD;&#xA;iStartFeedPositionR2 &gt; 0 OR&#xD;&#xA;iStartFeedPositionR3 &gt; 0 OR&#xD;&#xA;iStartFeedPositionR4 &gt; 0 OR&#xD;&#xA;iStartFeedPositionR5 &gt; 0 OR&#xD;&#xA;iStartFeedPositionR6 &gt; 0)" x="762.5941" y="307.3196">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="158.6656,68.76897,218.4222,75.91722" />
+      </ECTransition>
+      <ECTransition Source="REQ" Destination="START" Condition="NOT EmergencyON" x="674.8866" y="728.5931">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="195.1434,209.8009,131.8077,163.168" />
+      </ECTransition>
+      <ECTransition Source="INIT" Destination="REQ" Condition="1" x="1225.718" y="727.8302">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="306.4123,162.8139,306.3192,200.423" />
+      </ECTransition>
+      <ECTransition Source="REQ" Destination="Update" Condition="ASK_POSITION" x="1384.8" y="1251.067">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="354.8105,294.9126,354.7818,328.5478" />
+      </ECTransition>
+      <ECTransition Source="Update" Destination="REQ" Condition="1" x="1037.684" y="1256.175">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="248.9822,330.2505,249.0109,296.6153" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="REQ" Comment="Normally executed algorithm">
+      <ST><![CDATA[;
+FirstIndex := PositionTab[0];
+oStartFeedPositionR1 := PositionTab[0];
+oStartFeedPositionR2 := PositionTab[1];
+oStartFeedPositionR3 := PositionTab[2];
+oStartFeedPositionR4 := PositionTab[3];
+oStartFeedPositionR5 := PositionTab[4];
+oStartFeedPositionR6 := PositionTab[5];]]></ST>
+    </Algorithm>
+    <Algorithm Name="INIT">
+      <ST><![CDATA[;
+PositionTab[0] := iStartFeedPositionR1;
+PositionTab[1] := iStartFeedPositionR2;
+PositionTab[2] := iStartFeedPositionR3;
+PositionTab[3] := iStartFeedPositionR4;
+PositionTab[4] := iStartFeedPositionR5;
+PositionTab[5] := iStartFeedPositionR6;]]></ST>
+    </Algorithm>
+    <Algorithm ID="1e89a4d5-5965-4d8e-b19a-3d7c3b99d4bd" Name="Update">
+      <ST><![CDATA[;
+IF (TotNbrReactor >= 2) AND (TotNbrReactor <= 6) THEN
+
+    FOR i := 0 TO TotNbrReactor - 2 DO
+        PositionTab[i] := PositionTab[i + 1];
+    END_FOR;
+
+    PositionTab[TotNbrReactor - 1] := FirstIndex;
+END_IF;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

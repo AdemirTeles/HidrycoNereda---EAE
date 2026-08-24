@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="7f193c0c-a565-4e5f-ba34-271c153d5803" Name="basicEscalonamento" Comment="Basic Function Block Type" Namespace="Hidryco.HidrycoLib">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="1/29/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="REQ" Comment="Normal Execution Request">
+        <With Var="stsSensorBruto" />
+        <With Var="cmdHabilitaSensor" />
+      </Event>
+      <Event Name="E_RESET_FALHA" />
+      <Event Name="E_AJUSTE_STP">
+        <With Var="stpRangeMaximo" />
+        <With Var="stpRangeMinimo" />
+      </Event>
+      <Event Name="END_DELAY" />
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="CNF" Comment="Execution Confirmation">
+        <With Var="stsFalhaSensor" />
+        <With Var="stsSensorEscalonado" />
+      </Event>
+      <Event Name="START_DELAY" />
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="cmdHabilitaSensor" Type="BOOL" />
+      <VarDeclaration Name="stsSensorBruto" Type="INT" Comment="Input event qualifier" />
+      <VarDeclaration Name="stpRangeMaximo" Type="REAL" />
+      <VarDeclaration Name="stpRangeMinimo" Type="REAL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="stsFalhaSensor" Type="BOOL" />
+      <VarDeclaration Name="stsSensorEscalonado" Type="REAL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="INIT,REQ,Escalonando,FalhaAtiva,LogicaResetFalha" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="1500.941" y="641.4117" />
+      <ECState Name="SensorHabilitado" x="1504" y="1232" />
+      <ECState Name="IniciaTimer" x="2652" y="1408">
+        <ECAction Output="START_DELAY" />
+      </ECState>
+      <ECState Name="STATE1" x="1440" y="1848">
+        <ECAction Algorithm="Escalonando" Output="CNF" />
+      </ECState>
+      <ECState Name="AcionaFalha" x="2420" y="887.9998">
+        <ECAction Algorithm="FalhaAtiva" />
+      </ECState>
+      <ECState Name="ResetFalha" x="504" y="863.9998">
+        <ECAction Algorithm="LogicaResetFalha" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="SensorHabilitado" Condition="cmdHabilitaSensor" x="1583.597" y="935.9815">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="400.4831,213.6755,400.7509,254.1946" />
+      </ECTransition>
+      <ECTransition Source="SensorHabilitado" Destination="IniciaTimer" Condition="(stsSensorBruto &lt;= 3900) OR (stsSensorBruto &gt;=20000)" x="2106.583" y="1247.736">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="497.7242,304.6881,551.9528,312.0411" />
+      </ECTransition>
+      <ECTransition Source="IniciaTimer" Destination="SensorHabilitado" Condition="1" x="2101.878" y="1407.583">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="558.9863,361.0536,498.1875,351.7326" />
+      </ECTransition>
+      <ECTransition Source="SensorHabilitado" Destination="STATE1" Condition="NOT (stsFalhaSensor)" x="1604.188" y="1530.266">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="411.0153,360.4199,406.615,403.0905" />
+      </ECTransition>
+      <ECTransition Source="STATE1" Destination="SensorHabilitado" Condition="1" x="1303.376" y="1490.129">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="311.7823,406.166,325.086,330.5868" />
+      </ECTransition>
+      <ECTransition Source="SensorHabilitado" Destination="AcionaFalha" Condition="END_DELAY AND ((stsSensorBruto &lt;= 3900) OR (stsSensorBruto &gt;= 20000))" x="1984.897" y="978.5573">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="475.8369,248.7409,528.9756,229.7664" />
+      </ECTransition>
+      <ECTransition Source="AcionaFalha" Destination="SensorHabilitado" Condition="1" x="2025.605" y="1132.108">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="530.3806,277.8839,478.376,297.9084" />
+      </ECTransition>
+      <ECTransition Source="SensorHabilitado" Destination="ResetFalha" Condition="E_RESET_FALHA" x="989.0901" y="1121.713">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="282.9888,296.4968,222.4077,274.8273" />
+      </ECTransition>
+      <ECTransition Source="ResetFalha" Destination="SensorHabilitado" Condition="1" x="1042.567" y="973.576">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="229.7839,227.5534,289.484,249.523" />
+      </ECTransition>
+      <ECTransition Source="SensorHabilitado" Destination="START" Condition="1" x="1501.533" y="1012.316">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="375.4506,279.6396,375.2246,239.1202" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="INIT" Comment="Initialization algorithm">
+      <ST><![CDATA[;]]></ST>
+    </Algorithm>
+    <Algorithm Name="REQ" Comment="Normally executed algorithm">
+      <ST><![CDATA[;]]></ST>
+    </Algorithm>
+    <Algorithm Name="Escalonando">
+      <ST><![CDATA[stsSensorEscalonado := (((INT_TO_REAL(stsSensorBruto - 4000) * stpRangeMaximo) / 16000.0) + stpRangeMinimo);
+;]]></ST>
+    </Algorithm>
+    <Algorithm Name="FalhaAtiva">
+      <ST><![CDATA[stsFalhaSensor := TRUE;
+;]]></ST>
+    </Algorithm>
+    <Algorithm Name="LogicaResetFalha">
+      <ST><![CDATA[stsFalhaSensor := FALSE;
+;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

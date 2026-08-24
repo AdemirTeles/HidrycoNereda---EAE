@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="a4f9e0f2-7619-4567-baa6-dea957192e32" Name="KeepCurrentOpCdtLogic" Format="2.0" Comment="Composite Function Block Type" Namespace="SE.Nereda">
+  <Attribute Name="HMI.Alias" Value="" />
+  <Attribute Name="Configuration.FB.IDCounter" Value="3" />
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author="SESA713705" Date="8/20/2024" Remarks="template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="EVENT_IN" Comment="Initialization Request" />
+      <Event Name="REQ_OP_CDT_STATE" Comment="Normal Execution Request">
+        <With Var="OpCndt" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="EVENT_OUT" Comment="Initialization Confirm" />
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="OpCndt" Type="BOOL" />
+    </InputVars>
+    <Sockets>
+      <AdapterDeclaration ID="3" Name="Input" Type="OpCdtHMI" Namespace="SE.Nereda" x="800" y="1380" />
+    </Sockets>
+  </InterfaceList>
+  <FBNetwork>
+    <FB ID="03AFDB20826467BA" UID="2" Name="Logic" Type="KeepCurrOpCdt" x="2560" y="1040" Namespace="SE.Nereda" />
+    <Input Name="EVENT_IN" x="1260" y="1052" Type="Event" />
+    <Input Name="REQ_OP_CDT_STATE" x="1260" y="1112" Type="Event" />
+    <Input Name="OpCndt" x="1260" y="1172" Type="Data" />
+    <Output Name="EVENT_OUT" x="4100" y="1052" Type="Event" />
+    <EventConnections>
+      <Connection Source="$EVENT_IN" Destination="$03AFDB20826467BA.EVENT_IN" />
+      <Connection Source="$REQ_OP_CDT_STATE" Destination="$03AFDB20826467BA.REQ_OP_CDT" />
+      <Connection Source="$3.57D880E7B4DD84B2" Destination="$03AFDB20826467BA.UPDATE" dx1="40" />
+      <Connection Source="$3.9CE1FFC72E63FFDE" Destination="$03AFDB20826467BA.UPDATE_ACTIVE" dx1="70.0835" />
+      <Connection Source="$03AFDB20826467BA.NEED_UPDATE" Destination="$3.B62733FB079B1110">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$03AFDB20826467BA.EVENT_OUT" Destination="$EVENT_OUT" />
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="$OpCndt" Destination="$03AFDB20826467BA.OpCdt" dx1="113.2085" />
+      <Connection Source="$3.29C601027D1EC51C" Destination="$03AFDB20826467BA.Update" dx1="90.0835" />
+      <Connection Source="$3.03792516DF9C82F0" Destination="$03AFDB20826467BA.UpdateActive" dx1="110.0835" />
+      <Connection Source="$03AFDB20826467BA.NeedUpdate" Destination="$3.A77022E881639D2E">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+    </DataConnections>
+  </FBNetwork>
+</FBType>

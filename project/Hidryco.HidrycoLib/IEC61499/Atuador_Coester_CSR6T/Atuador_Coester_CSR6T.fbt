@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="a7dd477b-cb4e-4fba-8d55-5933628b37d5" Name="Atuador_Coester_CSR6T" Format="2.0" Comment="Composite Function Block Type" Namespace="Hidryco.HidrycoLib">
+  <Attribute Name="HMI.Alias" Value="" />
+  <Attribute Name="Configuration.FB.IDCounter" Value="38" />
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="1/26/2026" Remarks="template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="REQ">
+        <With Var="cmdAbrirAutomatico" />
+        <With Var="cmdFecharAutomatico" />
+        <With Var="bloqueioManual" />
+        <With Var="bloqueioAutomatico" />
+        <With Var="stsPidHabilitado" />
+        <With Var="stpPosicaoDesejadaAutomatico" />
+        <With Var="configShowPositioner" />
+        <With Var="stsEmergencia" />
+      </Event>
+      <Event Name="E_RESET_FALHAS">
+        <With Var="cmdResetFalhas" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="CNF">
+        <With Var="stsAnimacao" />
+        <With Var="stsDisponivelAutomatico" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="B3C2A10F46D5DEBA" Name="stsEmergencia" Type="BOOL" />
+      <VarDeclaration Name="cmdAbrirAutomatico" Type="BOOL" />
+      <VarDeclaration Name="cmdFecharAutomatico" Type="BOOL" />
+      <VarDeclaration Name="bloqueioManual" Type="BOOL" />
+      <VarDeclaration Name="bloqueioAutomatico" Type="BOOL" />
+      <VarDeclaration Name="stsPidHabilitado" Type="BOOL" />
+      <VarDeclaration Name="stpPosicaoDesejadaAutomatico" Type="INT" Comment="Saida do PID" />
+      <VarDeclaration Name="cmdResetFalhas" Type="BOOL" />
+      <VarDeclaration ID="92D2A8BE3C5993D2" Name="configShowPositioner" Type="INT" Comment="Alterar a porcentagem de abertura (0 - Only ON OFF, 1 - With Positioner)" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="stsAnimacao" Type="INT" />
+      <VarDeclaration Name="stsDisponivelAutomatico" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <FBNetwork>
+    <FB ID="2" Name="IThis" Type="Atuador_Coester_CSR6T_HMI" x="4400" y="220" Namespace="Hidryco.HidrycoLib">
+      <Parameter Name="$14A7B9139D9DA684" Value="TRUE" />
+    </FB>
+    <FB ID="D488C66E5472EF06" UID="7" Name="LeituraModbus" Type="SYMLINKMULTIVARDST_878F61316C795212" x="2080" y="2100" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=7;VALUE${I}:WORD,WORD,WORD,INT,BOOL,BOOL,BOOL" />
+      <Parameter Name="$QI" Value="TRUE" />
+      <Parameter Name="$NAME1" Value="'$${PATH}status'" />
+      <Parameter Name="$NAME2" Value="'$${PATH}alarme_1'" />
+      <Parameter Name="$NAME3" Value="'$${PATH}alarme_2'" />
+      <Parameter Name="$NAME4" Value="'$${PATH}posicaoAtual'" />
+      <Parameter Name="$NAME5" Value="'$${PATH}stsFalhaComunicacao'" />
+      <Parameter Name="$NAME6" Value="'$${PATH}stsAberto'" />
+      <Parameter Name="$NAME7" Value="'$${PATH}stsFechado'" />
+    </FB>
+    <FB ID="9" Name="plcStart1" Type="plcStart" x="1120" y="560" Namespace="SE.App2Base" />
+    <FB ID="34" UID="10" Name="EscritaModbus" Type="SYMLINKMULTIVARSRC_91F788A53430F44E" x="8060" y="3240" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=2;VALUE${I}:WORD,WORD" />
+      <Parameter Name="$QI" Value="TRUE" />
+      <Parameter Name="$NAME1" Value="'$${PATH}comandos'" />
+      <Parameter Name="$NAME2" Value="'$${PATH}posicaoDesejada'" />
+    </FB>
+    <FB ID="38" UID="19" Name="BITMAN1" Type="BITMAN_141EBD58A007D1DD5" x="6720" y="3360" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNTIN:=9;CNTOUT:=1;IN${CNTIN}:BOOL,BOOL,BOOL,BOOL,BOOL,BOOL,BOOL,BOOL,BOOL;OUT${CNTOUT}:WORD" />
+    </FB>
+    <FB ID="23" UID="21" Name="BIT_STATUS_1" Type="BITMAN_1879143E4E6E9A030" x="3420" y="1980" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNTIN:=1;CNTOUT:=16;IN${CNTIN}:WORD;OUT${CNTOUT}:BOOL,BOOL,BOOL,BOOL,BOOL,BOOL,BOOL,BOOL,BOOL,BOOL,BOOL,BOOL,BOOL,BOOL,BOOL,BOOL" />
+    </FB>
+    <FB ID="24" Name="BIT_ALARME_1" Type="BITMAN_1879143E4E6E9A030" x="3380" y="3560" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNTIN:=1;CNTOUT:=16;IN${CNTIN}:WORD;OUT${CNTOUT}:BOOL,BOOL,BOOL,BOOL,BOOL,BOOL,BOOL,BOOL,BOOL,BOOL,BOOL,BOOL,BOOL,BOOL,BOOL,BOOL" />
+    </FB>
+    <FB ID="25" Name="BIT_ALARME_2" Type="BITMAN_1879143E4E6E9A030" x="3300" y="5260" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNTIN:=1;CNTOUT:=16;IN${CNTIN}:WORD;OUT${CNTOUT}:BOOL,BOOL,BOOL,BOOL,BOOL,BOOL,BOOL,BOOL,BOOL,BOOL,BOOL,BOOL,BOOL,BOOL,BOOL,BOOL" />
+    </FB>
+    <FB ID="30" Name="fbValvulaAbrirFecharPosicionar_Comunicacao1" Type="fbValvulaAbrirFecharPosicionar_Comunicacao" x="5240" y="1540" Namespace="Hidryco.HidrycoLib" />
+    <FB ID="31" Name="animacaoAbrirFechar1" Type="animacaoAbrirFechar" x="5180" y="2880" Namespace="Hidryco.HidrycoLib" />
+    <FB ID="35" UID="33" Name="ANY2ANY1" Type="ANY2ANY_100577755E31233DE" x="6560" y="1720" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNT:=1;IN${CNT}:INT;OUT${CNT}:WORD" />
+    </FB>
+    <FB ID="36" Name="disponivelAuto1" Type="disponivelAuto" x="7260" y="2180" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.Component.HideUnusedPorts" Value="" />
+    </FB>
+    <FB ID="37" Name="E_MERGE1" Type="E_MERGE" x="7720" y="1560" Namespace="IEC61499.Standard" />
+    <Input Name="REQ" x="2420" y="1232" Type="Event" />
+    <Input Name="cmdAbrirAutomatico" x="2420" y="1292" Type="Data" />
+    <Input Name="cmdFecharAutomatico" x="2420" y="1352" Type="Data" />
+    <Input Name="bloqueioAutomatico" x="2420" y="1472" Type="Data" />
+    <Input Name="bloqueioManual" x="2420" y="1412" Type="Data" />
+    <Input Name="stsPidHabilitado" x="2420" y="1532" Type="Data" />
+    <Input Name="stpPosicaoDesejadaAutomatico" x="2420" y="1592" Type="Data" />
+    <Input Name="E_RESET_FALHAS" x="5820" y="3452" Type="Event" />
+    <Input Name="cmdResetFalhas" x="5840" y="4112" Type="Data" />
+    <Input ID="92D2A8BE3C5993D2" Name="configShowPositioner" x="2420" y="1652" Type="Data" />
+    <Input ID="B3C2A10F46D5DEBA" Name="stsEmergencia" x="1460" y="1492" Type="Data" />
+    <Frame Name="COMMENT1" X="3960" Y="2200" Width="730.4167" Height="965.833" IsComment="true">
+      <Parameter Name="BackgroundColor" Value="LemonChiffon" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 10pt" />
+      <Parameter Name="TextAlignment" Value="TopCenter" />
+      <Parameter Name="MoveStyle" Value="None" />
+      <Parameter Name="Text" Value="Bits de status 1:&#xD;&#xA;0 modo de operação local&#xD;&#xA;1 modo de operação remoto&#xD;&#xA;2 modo de operação desligado&#xD;&#xA;3 posição aberta&#xD;&#xA;4 posição fechada&#xD;&#xA;5 posição intermediária&#xD;&#xA;6 movimento de abertura&#xD;&#xA;7 movimento de fechamento&#xD;&#xA;8 atuador(válvula) parado&#xD;&#xA;9 motor energizado&#xD;&#xA;10 movimento manual&#xD;&#xA;11 aberto com torque&#xD;&#xA;12 fechado com torque&#xD;&#xA;13 modo Modbus" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="COMMENT2" X="4020" Y="3680" Width="1108.333" Height="905.4688" IsComment="true">
+      <Parameter Name="BackgroundColor" Value="LemonChiffon" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 10pt" />
+      <Parameter Name="TextAlignment" Value="TopCenter" />
+      <Parameter Name="MoveStyle" Value="None" />
+      <Parameter Name="Text" Value="Bits de Alarme 1:&#xD;&#xA;0 modo de operação não remoto&#xD;&#xA;1 parada local de emergência&#xD;&#xA;2 parada antecipada por torque na abertura&#xD;&#xA;3 parada antecipada por torque no fechamento&#xD;&#xA;4 atuador(válvula) travado&#xD;&#xA;5 operação incompleta&#xD;&#xA;6 sobreaquecimento do motor&#xD;&#xA;7 falha no motor ao energizar&#xD;&#xA;8 motor energizado após fim de curso&#xD;&#xA;9 motor energizado após comando de parada&#xD;&#xA;10 falha de comando&#xD;&#xA;11 falta de fase&#xD;&#xA;12 atuador não programado" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="COMMENT3" X="3800" Y="5580" Width="1321.276" Height="905.4688" IsComment="true">
+      <Parameter Name="BackgroundColor" Value="LemonChiffon" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 10pt" />
+      <Parameter Name="TextAlignment" Value="TopCenter" />
+      <Parameter Name="MoveStyle" Value="None" />
+      <Parameter Name="Text" Value="Bits de Alarme 2:&#xD;&#xA;0 tensão de alimentação alta&#xD;&#xA;1 tensão de alimentação baixa&#xD;&#xA;2 tensão de bateria baixa&#xD;&#xA;3&#xD;&#xA;4 fim de curso mecânico ultrapassado na abertura&#xD;&#xA;5 fim de curso mecânico ultrapassado no fechamento&#xD;&#xA;6 fim de curso programado ultrapassado na abertura&#xD;&#xA;7 fim de curso programado ultrapassado no fechamento&#xD;&#xA;8 cartão anybus não detectado" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="COMMENT4" X="6440" Y="4320" Width="1108.333" Height="905.4688" IsComment="true">
+      <Parameter Name="BackgroundColor" Value="LemonChiffon" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 10pt" />
+      <Parameter Name="TextAlignment" Value="TopCenter" />
+      <Parameter Name="MoveStyle" Value="None" />
+      <Parameter Name="Text" Value="Bits de comando&#xD;&#xA;0 abrir&#xD;&#xA;1 fechar&#xD;&#xA;2 parar&#xD;&#xA;3 ESD&#xD;&#xA;4 posicionar&#xD;&#xA;5 PST (Partial Stroke Test)&#xD;&#xA;6 espera&#xD;&#xA;7 espera&#xD;&#xA;8 quitar alarmes" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Output Name="CNF" x="8480" y="1852" Type="Event" />
+    <Output Name="stsAnimacao" x="8240" y="1932" Type="Data" />
+    <Output Name="stsDisponivelAutomatico" x="8360" y="2392" Type="Data" />
+    <EventConnections>
+      <Connection Source="$30.CNF" Destination="$35.REQ" dx1="40" />
+      <Connection Source="$35.CNF" Destination="$34.REQ">
+        <Points>
+          <Points>
+            <X>1726.5625</X>
+            <Y>439.999969</Y>
+          </Points>
+          <Points>
+            <X>1742.5</X>
+            <Y>439.999969</Y>
+          </Points>
+          <Points>
+            <X>1742.5</X>
+            <Y>442.5</Y>
+          </Points>
+          <Points>
+            <X>1792.5</X>
+            <Y>442.5</Y>
+          </Points>
+          <Points>
+            <X>1792.5</X>
+            <Y>834.999939</Y>
+          </Points>
+          <Points>
+            <X>2010</X>
+            <Y>834.999939</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$23.CNF" Destination="$30.REQ" dx1="70" />
+      <Connection Source="$23.CNF" Destination="$31.REQ" dx1="109.2292" />
+      <Connection Source="$REQ" Destination="$30.REQ" dx1="589.5417" />
+      <Connection Source="$23.INITO" Destination="$24.INIT" dx1="129.2292" dx2="50" dy="1310" />
+      <Connection Source="$24.INITO" Destination="$25.INIT" dx1="49.22925" dx2="50" dy="1310" />
+      <Connection Source="$25.INITO" Destination="$34.INIT">
+        <Points>
+          <Points>
+            <X>925.1927</X>
+            <Y>1325</Y>
+          </Points>
+          <Points>
+            <X>957.5</X>
+            <Y>1325</Y>
+          </Points>
+          <Points>
+            <X>957.5</X>
+            <Y>857.5</Y>
+          </Points>
+          <Points>
+            <X>1457.5</X>
+            <Y>857.5</Y>
+          </Points>
+          <Points>
+            <X>1457.5</X>
+            <Y>819.999939</Y>
+          </Points>
+          <Points>
+            <X>2010</X>
+            <Y>819.999939</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$31.CNF" Destination="$37.EI1" dx1="624.9375" />
+      <Connection Source="$23.CNF" Destination="$36.E_ATUALIZA">
+        <Points>
+          <Points>
+            <X>955.1927</X>
+            <Y>520</Y>
+          </Points>
+          <Points>
+            <X>982.5</X>
+            <Y>520</Y>
+          </Points>
+          <Points>
+            <X>982.5</X>
+            <Y>632.5</Y>
+          </Points>
+          <Points>
+            <X>1602.5</X>
+            <Y>632.5</Y>
+          </Points>
+          <Points>
+            <X>1602.5</X>
+            <Y>555</Y>
+          </Points>
+          <Points>
+            <X>1810</X>
+            <Y>555</Y>
+          </Points>
+        </Points>
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$REQ" Destination="$36.E_ATUALIZA" dx1="3729.542">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$36.E_ATUALIZA_SAIDA" Destination="$37.EI2">
+        <Points>
+          <Points>
+            <X>2075.14063</X>
+            <Y>555</Y>
+          </Points>
+          <Points>
+            <X>1899.75</X>
+            <Y>555</Y>
+          </Points>
+          <Points>
+            <X>1899.75</X>
+            <Y>526.5</Y>
+          </Points>
+          <Points>
+            <X>1783.90625</X>
+            <Y>526.5</Y>
+          </Points>
+          <Points>
+            <X>1783.90625</X>
+            <Y>415</Y>
+          </Points>
+          <Points>
+            <X>1924.99988</X>
+            <Y>415</Y>
+          </Points>
+        </Points>
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$37.EO" Destination="$CNF" dx1="41.54248" />
+      <Connection Source="$34.INITO" Destination="$38.INIT" dx1="40" dx2="49.99951" dy="-109.9998" />
+      <Connection Source="$38.INITO" Destination="$9.ACK_FIRST">
+        <Points>
+          <Points>
+            <X>1780.19263</X>
+            <Y>849.999939</Y>
+          </Points>
+          <Points>
+            <X>1792.69263</X>
+            <Y>849.999939</Y>
+          </Points>
+          <Points>
+            <X>1792.69263</X>
+            <Y>702.5</Y>
+          </Points>
+          <Points>
+            <X>1297.5</X>
+            <Y>702.5</Y>
+          </Points>
+          <Points>
+            <X>1297.5</X>
+            <Y>477.5</Y>
+          </Points>
+          <Points>
+            <X>267.5</X>
+            <Y>477.5</Y>
+          </Points>
+          <Points>
+            <X>267.5</X>
+            <Y>150</Y>
+          </Points>
+          <Points>
+            <X>275</X>
+            <Y>150</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$E_RESET_FALHAS" Destination="$38.REQ" dx1="40" />
+      <Connection Source="$38.CNF" Destination="$34.REQ" dx1="70" />
+      <Connection Source="$30.CNF" Destination="$38.REQ" dx1="40" />
+      <Connection Source="$9.FIRST_INIT" Destination="$2.C34EE0C757EC232B" dx1="50" />
+      <Connection Source="$9.REDO_INIT" Destination="$2.C34EE0C757EC232B" dx1="70" />
+      <Connection Source="$23.CNF" Destination="$2.574D49F8EC2B904" dx1="70" />
+      <Connection Source="$31.CNF" Destination="$2.574D49F8EC2B904" dx1="50" dx2="30" dy="-110" />
+      <Connection Source="$2.836A04CA3A2E3C49" Destination="$30.REQ" dx1="45.4165" dx2="50" dy="1130" />
+      <Connection Source="$2.836A04CA3A2E3C49" Destination="$36.E_ATUALIZA" dx1="805.416">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$2.755A7ECBF1AA20C5" Destination="$30.REQ" dx1="45.4165" dx2="50" dy="1070" />
+      <Connection Source="$2.B084EAB338310C3D" Destination="$30.REQ" dx1="45.4165" dx2="50" dy="1010" />
+      <Connection Source="$2.392372C9E2AC65B8" Destination="$30.REQ" dx1="45.4165" dx2="50" dy="950" />
+      <Connection Source="$2.F9B4EA374D57FEBC" Destination="$30.REQ" dx1="45.4165" dx2="50" dy="830" />
+      <Connection Source="$2.836A04CA3A2E3C49" Destination="$2.574D49F8EC2B904" dx1="45.4165" dx2="30" dy="-170" />
+      <Connection Source="$2.EC0A2727CF0F86B6" Destination="$D488C66E5472EF06.INIT">
+        <Points>
+          <Points>
+            <X>1401.14587</X>
+            <Y>65</Y>
+          </Points>
+          <Points>
+            <X>1412.5</X>
+            <Y>65</Y>
+          </Points>
+          <Points>
+            <X>1412.5</X>
+            <Y>362.5</Y>
+          </Points>
+          <Points>
+            <X>1297.5</X>
+            <Y>362.5</Y>
+          </Points>
+          <Points>
+            <X>1297.5</X>
+            <Y>432.5</Y>
+          </Points>
+          <Points>
+            <X>502.5</X>
+            <Y>432.5</Y>
+          </Points>
+          <Points>
+            <X>502.5</X>
+            <Y>535</Y>
+          </Points>
+          <Points>
+            <X>515</X>
+            <Y>535</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$D488C66E5472EF06.INITO" Destination="$23.INIT" dx1="50" />
+      <Connection Source="$D488C66E5472EF06.CNF" Destination="$23.REQ" dx1="70" />
+      <Connection Source="$D488C66E5472EF06.CNF" Destination="$24.REQ" dx1="141.625" />
+      <Connection Source="$D488C66E5472EF06.CNF" Destination="$25.REQ" dx1="141.625" />
+      <Connection Source="$D488C66E5472EF06.CNF" Destination="$2.574D49F8EC2B904" dx1="641.625" />
+      <Connection Source="$2.3680F7EB48943C4B" Destination="$30.REQ" dx1="185.417" dx2="50" dy="890" />
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="$23.OUT2" Destination="$30.stsRemoto" dx1="90" />
+      <Connection Source="$23.OUT4" Destination="$31.stsAberto" dx1="69.22925" />
+      <Connection Source="$23.OUT5" Destination="$31.stsFechado" dx1="49.22925" />
+      <Connection Source="$30.stpPosicaoDesejada" Destination="$35.IN1" dx1="137.354" />
+      <Connection Source="$35.OUT1" Destination="$34.VALUE2" dx1="263.75" />
+      <Connection Source="$cmdAbrirAutomatico" Destination="$30.cmdAbrirAutomatico" dx1="755.625" />
+      <Connection Source="$cmdFecharAutomatico" Destination="$30.cmdFecharAutomatico" dx1="713.1667" />
+      <Connection Source="$bloqueioAutomatico" Destination="$30.bloqueioAutomatico" dx1="764.7292" />
+      <Connection Source="$bloqueioManual" Destination="$30.bloqueioManual" dx1="838.2292" />
+      <Connection Source="$stsPidHabilitado" Destination="$30.stsPidHabilitado" dx1="833.3125" />
+      <Connection Source="$stpPosicaoDesejadaAutomatico" Destination="$30.stpPosicaoDesejadaAutomatico" dx1="586.9167" />
+      <Connection Source="$31.stsAnimacao" Destination="$stsAnimacao" dx1="1164.938" />
+      <Connection Source="$23.OUT2" Destination="$36.stsRemoto">
+        <Points>
+          <Points>
+            <X>955.1927</X>
+            <Y>585</Y>
+          </Points>
+          <Points>
+            <X>977.5</X>
+            <Y>585</Y>
+          </Points>
+          <Points>
+            <X>977.5</X>
+            <Y>632.5</Y>
+          </Points>
+          <Points>
+            <X>1602.5</X>
+            <Y>632.5</Y>
+          </Points>
+          <Points>
+            <X>1602.5</X>
+            <Y>605</Y>
+          </Points>
+          <Points>
+            <X>1810</X>
+            <Y>605</Y>
+          </Points>
+        </Points>
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$bloqueioAutomatico" Destination="$36.stsBloqueioAutomatico" dx1="764.7292">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$36.stsDisponivelAutomatico" Destination="$stsDisponivelAutomatico">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$30.acmAbrir" Destination="$38.IN1" dx1="40" />
+      <Connection Source="$30.acmFechar" Destination="$38.IN2" dx1="40" />
+      <Connection Source="$30.acmPosicionar" Destination="$38.IN5" dx1="40" />
+      <Connection Source="$38.OUT1" Destination="$34.VALUE1" dx1="49.22949" />
+      <Connection Source="$cmdResetFalhas" Destination="$38.IN9" />
+      <Connection Source="$23.OUT2" Destination="$2.73DD1E4BCBC27411" dx1="90" />
+      <Connection Source="$31.stsAnimacao" Destination="$2.7894F7809DC3F7E5" dx1="70" dx2="30" dy="-310" />
+      <Connection Source="$2.B98772A48B14BF87" Destination="$2.522002FC51DB837E" dx1="45.4165" dx2="190" dy="510" />
+      <Connection Source="$2.B98772A48B14BF87" Destination="$30.stsAutomatico" dx1="45.4165" dx2="90" dy="510" />
+      <Connection Source="$2.B98772A48B14BF87" Destination="$36.stsAutomatico" dx1="805.416">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$2.6BFB49A3A60A6E4" Destination="$30.cmdAbrirManual" dx1="45.4165" dx2="230" dy="450" />
+      <Connection Source="$2.9DA4F5AA2A2AC00" Destination="$30.cmdFecharManual" dx1="45.4165" dx2="250" dy="390" />
+      <Connection Source="$2.4A6D2E258823DC47" Destination="$30.cmdPosicionarManual" dx1="45.4165" dx2="270" dy="330" />
+      <Connection Source="$2.A195568E18D83088" Destination="$30.stpPosicaoDesejadaManual" dx1="45.4165" dx2="290" dy="210" />
+      <Connection Source="$D488C66E5472EF06.VALUE1" Destination="$23.IN1" dx1="90" />
+      <Connection Source="$D488C66E5472EF06.VALUE2" Destination="$24.IN1" dx1="101.625" />
+      <Connection Source="$D488C66E5472EF06.VALUE3" Destination="$25.IN1" dx1="81.625" />
+      <Connection Source="$D488C66E5472EF06.VALUE4" Destination="$2.AFF7538033C94331" dx1="641.625" />
+      <Connection Source="$D488C66E5472EF06.VALUE5" Destination="$2.8B96E4C0198332E0" dx1="641.625" />
+      <Connection Source="$92D2A8BE3C5993D2" Destination="$2.FE486BA67BDE1EB1" dx1="179.021" />
+      <Connection Source="$2.2D3157988FA0526D" Destination="$30.6BAA79720FA17B16" dx1="65.41699" dx2="290" dy="270" />
+      <Connection Source="$30.66A1FDFBD17E5C82" Destination="$38.IN3" dx1="60" />
+      <Connection Source="$B3C2A10F46D5DEBA" Destination="$30.C471995306C48021" dx1="40" />
+    </DataConnections>
+  </FBNetwork>
+</FBType>

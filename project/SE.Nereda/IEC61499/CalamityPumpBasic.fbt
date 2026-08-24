@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="34216d03-80ed-46c8-98f4-2c9445aa3cdb" Name="CalamityPumpBasic" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="6/26/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="DF23DCB361DA9198" Name="REQ_LEVEL" Comment="Normal Execution Request">
+        <With Var="HiLevel" />
+        <With Var="LoLevel" />
+      </Event>
+      <Event ID="C88AF9BE306E1559" Name="SPEED_SP">
+        <With Var="iSpeedSp" />
+      </Event>
+      <Event ID="6E6C941905C3D56D" Name="FB_PUMP">
+        <With Var="FbRunningPump" />
+        <With Var="FbStoppedPump" />
+        <With Var="FbReadyPump" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="D80113876A820D78" Name="CNF_PUMP" Comment="Execution Confirmation">
+        <With Var="CmdPump" />
+      </Event>
+      <Event ID="D0E3147DF23F35C3" Name="CNF_SPEED_SP">
+        <With Var="oSpeedSp" />
+      </Event>
+      <Event ID="65B8E9E9FD40924C" Name="GRAPH">
+        <With Var="Grafcet" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="F3BCD1558E816D4D" Name="HiLevel" Type="BOOL" />
+      <VarDeclaration ID="5E4B50A6B54508F9" Name="LoLevel" Type="BOOL" />
+      <VarDeclaration ID="4B740182EAB3F037" Name="iSpeedSp" Type="REAL" />
+      <VarDeclaration ID="FFFB2DFE6F24B566" Name="FbRunningPump" Type="BOOL" />
+      <VarDeclaration ID="19DC18FF464DA580" Name="FbStoppedPump" Type="BOOL" />
+      <VarDeclaration ID="126DEC6100818E4D" Name="FbReadyPump" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="26811D54DFA4688D" Name="CmdPump" Type="BOOL" />
+      <VarDeclaration ID="A806F58E43A04127" Name="oSpeedSp" Type="REAL" />
+      <VarDeclaration ID="E48FF2B0215DCB21" Name="Grafcet" Type="INT" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="StartPump,UpdateSpeed,StopPump" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="1840.941" y="589.4117" />
+      <ECState Name="StartPump" x="1840" y="1096">
+        <ECAction Algorithm="StartPump" Output="CNF_PUMP" />
+        <ECAction Output="CNF_SPEED_SP" />
+        <ECAction Output="GRAPH" />
+      </ECState>
+      <ECState Name="PumpRunning" x="1844.667" y="1601.333">
+        <ECAction Algorithm="UpdateSpeed" Output="CNF_SPEED_SP" />
+        <ECAction Output="GRAPH" />
+      </ECState>
+      <ECState Name="StopPump" x="1845.333" y="2142">
+        <ECAction Algorithm="StopPump" Output="CNF_PUMP" />
+        <ECAction Output="CNF_SPEED_SP" />
+        <ECAction Output="GRAPH" />
+      </ECState>
+      <ECTransition Source="START" Destination="StartPump" Condition="HiLevel AND NOT LoLevel AND FbReadyPump AND NOT FbRunningPump" x="1843.595" y="840.0659">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="461.0899,193.0371,461.0508,226.5559" />
+      </ECTransition>
+      <ECTransition Source="StartPump" Destination="PumpRunning" Condition="FbRunningPump" x="1844.378" y="1360.823">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="461.0734,324.5115,461.3458,357.9257" />
+      </ECTransition>
+      <ECTransition Source="PumpRunning" Destination="StopPump" Condition="LoLevel OR NOT FbReadyPump" x="1845.321" y="1868.81">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="461.2935,448.7844,461.4032,485.1442" />
+      </ECTransition>
+      <ECTransition Source="StopPump" Destination="START" Condition="FbStoppedPump" x="518.3915" y="1610.792">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="30.75632,482.1306,30.25691,361.4849" />
+      </ECTransition>
+      <ECTransition Source="PumpRunning" Destination="PumpRunning" Condition="SPEED_SP AND iSpeedSp &lt;&gt; oSpeedSp" x="1409.047" y="1637.833">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="331.6667,460.8333,325.8333,364.1667" />
+      </ECTransition>
+      <ECTransition Source="StartPump" Destination="StopPump" Condition="LoLevel OR NOT FbReadyPump" x="977.5322" y="1616.563">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="184.9618,364.7028,185.7796,443.1722" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="StartPump">
+      <ST><![CDATA[;
+CmdPump := TRUE;
+oSpeedSp := iSpeedSp;
+Grafcet := 1;]]></ST>
+    </Algorithm>
+    <Algorithm Name="UpdateSpeed">
+      <ST><![CDATA[;
+oSpeedSp := iSpeedSp;
+Grafcet := 2;]]></ST>
+    </Algorithm>
+    <Algorithm Name="StopPump">
+      <ST><![CDATA[;
+CmdPump := FALSE;
+oSpeedSp := 0;
+Grafcet := 3;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

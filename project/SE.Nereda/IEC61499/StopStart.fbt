@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="85ff392d-0b1d-4db2-b6c5-d950d21ec408" Name="StopStart" Format="2.0" Comment="Composite Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="7/14/2026" Remarks="template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="9F78D3CDEE09DEB2" Name="REQ" Comment="Normal Execution Request">
+        <With Var="Enable" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="36480E3E35BC8053" Name="START" Comment="Execution Confirmation" />
+      <Event ID="41BA9BA23CD04EBE" Name="STOP" />
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="7E3D27FD59643C3E" Name="Enable" Type="BOOL" Comment="Input event qualifier" />
+    </InputVars>
+  </InterfaceList>
+  <FBNetwork>
+    <FB ID="266C73EFBC298057" Name="StartE" Type="E_PERMIT" x="920" y="220" Namespace="IEC61499.Standard" />
+    <FB ID="2BEBB016071675B6" Name="StopE" Type="E_PERMIT" x="920" y="660" Namespace="IEC61499.Standard" />
+    <FB ID="8E3BC0ACA6C0656C" Name="FB1" Type="NOT_42C76073DCEB1A7A" x="400" y="660" Namespace="SE.Nereda">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNT:=1;OUT${CNT}:BOOL" />
+    </FB>
+    <Input ID="9F78D3CDEE09DEB2" Name="REQ" x="60" y="270" Type="Event" />
+    <Input ID="7E3D27FD59643C3E" Name="Enable" x="60" y="330" Type="Data" />
+    <Output ID="36480E3E35BC8053" Name="START" x="1840" y="312" Type="Event" />
+    <Output ID="41BA9BA23CD04EBE" Name="STOP" x="1860" y="252" Type="Event" />
+    <EventConnections>
+      <Connection Source="$266C73EFBC298057.EO" Destination="$41BA9BA23CD04EBE" dx1="47.16675" />
+      <Connection Source="$9F78D3CDEE09DEB2" Destination="$266C73EFBC298057.EI" dx1="129.5417" />
+      <Connection Source="$8E3BC0ACA6C0656C.CNF" Destination="$2BEBB016071675B6.EI" />
+      <Connection Source="$2BEBB016071675B6.EO" Destination="$36480E3E35BC8053" dx1="47.16675" />
+      <Connection Source="$9F78D3CDEE09DEB2" Destination="$8E3BC0ACA6C0656C.REQ" dx1="249.5417" dx2="110" dy="110">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="$7E3D27FD59643C3E" Destination="$266C73EFBC298057.PERMIT" dx1="127.1459" />
+      <Connection Source="$8E3BC0ACA6C0656C.OUT1" Destination="$2BEBB016071675B6.PERMIT" />
+      <Connection Source="$7E3D27FD59643C3E" Destination="$8E3BC0ACA6C0656C.IN1" dx1="127.1459" dx2="150" dy="50">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+    </DataConnections>
+  </FBNetwork>
+</FBType>

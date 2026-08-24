@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="d3c45343-9af8-4d5b-ad66-1019697d0449" Name="FeedReactor1PBasic" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="6/15/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="7E30127865CFE16B" Name="FEED_REACTOR">
+        <With Var="FeedReactor1" />
+        <With Var="FeedReactor2" />
+        <With Var="FeedReactor3" />
+        <With Var="FeedReactor4" />
+        <With Var="FeedReactor5" />
+        <With Var="FeedReactor6" />
+      </Event>
+      <Event ID="595E94AC272AAE70" Name="FEED_CAPACITY">
+        <With Var="FeedReactor_C1" />
+        <With Var="FeedReactor_C2" />
+        <With Var="FeedReactor_C3" />
+        <With Var="FeedReactor_C4" />
+        <With Var="FeedReactor_C5" />
+        <With Var="FeedReactor_C6" />
+      </Event>
+      <Event ID="FBAC3AB0F3E1774A" Name="FB_FEED_VALVE">
+        <With Var="FbOpenFeedVlv" />
+        <With Var="FbCloseFeedVlv" />
+      </Event>
+      <Event ID="8666C65DB2F34DF4" Name="FB_FEED_PMP">
+        <With Var="FbRunningPmp" />
+        <With Var="FbStoppedPmp" />
+      </Event>
+      <Event ID="01DE5B3982687378" Name="FB_PUMP_RDY">
+        <With Var="FbPumpReady" />
+      </Event>
+      <Event ID="EBB538FC7819A0F0" Name="FB_VALVE_RDY">
+        <With Var="FbValveReady" />
+      </Event>
+      <Event ID="4BDCB67B4FFE0D64" Name="FORCE_STOP">
+        <With Var="ForceStop" />
+      </Event>
+      <Event ID="A69A10F93A67179B" Name="RESET_LOGIC">
+        <With Var="ResetLogic" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="085A47BAE233EC43" Name="CNF_CMD_PUMP">
+        <With Var="CmdPump" />
+      </Event>
+      <Event ID="AFC243259FDEDBAE" Name="CNF_CAP_PUMP">
+        <With Var="PumpCapacity" />
+      </Event>
+      <Event ID="BA495A2CD6F37AAA" Name="CNF_VALVE">
+        <With Var="CmdValve" />
+      </Event>
+      <Event ID="078EA09CED294ADE" Name="GRAPH">
+        <With Var="Grafcet" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="C915B42A7E29ABA7" Name="FeedReactor1" Type="BOOL" />
+      <VarDeclaration ID="C035C9DDF73934B1" Name="FeedReactor2" Type="BOOL" />
+      <VarDeclaration ID="BA46BCD3AD3C4E0E" Name="FeedReactor3" Type="BOOL" />
+      <VarDeclaration ID="05202F12A8CD5CAE" Name="FeedReactor4" Type="BOOL" />
+      <VarDeclaration ID="D190D2DBF4763077" Name="FeedReactor5" Type="BOOL" />
+      <VarDeclaration ID="B2FBAF20E404318A" Name="FeedReactor6" Type="BOOL" />
+      <VarDeclaration ID="9A612CE135251261" Name="FeedReactor_C1" Type="REAL" />
+      <VarDeclaration ID="6A6AFEA4D9C2F12F" Name="FeedReactor_C2" Type="REAL" />
+      <VarDeclaration ID="BA7B380D995C835B" Name="FeedReactor_C3" Type="REAL" />
+      <VarDeclaration ID="4960BF82FE0F0B7B" Name="FeedReactor_C4" Type="REAL" />
+      <VarDeclaration ID="9F7DD4F97732485F" Name="FeedReactor_C5" Type="REAL" />
+      <VarDeclaration ID="A6395326F4DA6B3E" Name="FeedReactor_C6" Type="REAL" />
+      <VarDeclaration ID="BC50782C9A580B55" Name="FbOpenFeedVlv" Type="BOOL" />
+      <VarDeclaration ID="64E818E2A01597EE" Name="FbCloseFeedVlv" Type="BOOL" />
+      <VarDeclaration ID="75F1E123145AA883" Name="FbRunningPmp" Type="BOOL" />
+      <VarDeclaration ID="C81CDED0AFB96994" Name="FbStoppedPmp" Type="BOOL" />
+      <VarDeclaration ID="7CAD63DC84CC56C8" Name="FbPumpReady" Type="BOOL" />
+      <VarDeclaration ID="F956BBADAA4B04D2" Name="FbValveReady" Type="BOOL" />
+      <VarDeclaration ID="908589CFF2BDB3A2" Name="ForceStop" Type="BOOL" />
+      <VarDeclaration ID="2AC43BA050B74406" Name="ResetLogic" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="3FD15F25AD96252C" Name="CmdPump" Type="BOOL" />
+      <VarDeclaration ID="4B70755D8EB51B08" Name="PumpCapacity" Type="REAL" />
+      <VarDeclaration ID="4F7C401724742E6F" Name="CmdValve" Type="BOOL" />
+      <VarDeclaration ID="AE321536059FD861" Name="Grafcet" Type="INT" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="d36cbe92-32ed-4f82-b74c-f539625029f1">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="OpenValve,StartPump,UpdateSpeed,StopPump,CloseValve,Reset,IdleState" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="2418.655" y="892.8404" />
+      <ECState Name="OpenValve" x="2417.143" y="1367.428">
+        <ECAction Algorithm="OpenValve" Output="CNF_VALVE" />
+        <ECAction Output="GRAPH" />
+      </ECState>
+      <ECState Name="StartPump" x="2425.714" y="1822.857">
+        <ECAction Algorithm="StartPump" Output="CNF_CMD_PUMP" />
+        <ECAction Output="CNF_CAP_PUMP" />
+        <ECAction Output="GRAPH" />
+      </ECState>
+      <ECState Name="PumpRun" x="2425.715" y="2282.857">
+        <ECAction Algorithm="UpdateSpeed" Output="CNF_CAP_PUMP" />
+        <ECAction Output="GRAPH" />
+      </ECState>
+      <ECState Name="StopPump" x="2431.428" y="2745.714">
+        <ECAction Algorithm="StopPump" Output="CNF_CMD_PUMP" />
+        <ECAction Output="GRAPH" />
+      </ECState>
+      <ECState Name="CloseValve" x="2434.286" y="3165.714">
+        <ECAction Algorithm="CloseValve" Output="CNF_VALVE" />
+        <ECAction Output="GRAPH" />
+      </ECState>
+      <ECState Name="RESET" x="4360" y="2260.261">
+        <ECAction Algorithm="Reset" Output="CNF_CMD_PUMP" />
+        <ECAction Output="CNF_CAP_PUMP" />
+        <ECAction Output="CNF_VALVE" />
+      </ECState>
+      <ECState Name="IdleState" x="1365" y="1370">
+        <ECAction Algorithm="IdleState" Output="GRAPH" />
+      </ECState>
+      <ECTransition Source="START" Destination="OpenValve" Condition="NOT ForceStop AND FbPumpReady AND FbValveReady AND&#xD;&#xA;&#xD;&#xA;(FeedReactor1 OR&#xD;&#xA;FeedReactor2 OR&#xD;&#xA;FeedReactor3 OR&#xD;&#xA;FeedReactor4 OR&#xD;&#xA;FeedReactor5 OR&#xD;&#xA;FeedReactor6)" x="2416.502" y="1117.843">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="604.1567,263.0105,604.088,293.8625" />
+      </ECTransition>
+      <ECTransition Source="OpenValve" Destination="StartPump" Condition="FbOpenFeedVlv" x="2418.841" y="1596.566">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="604.3986,384.6326,604.9203,413.8878" />
+      </ECTransition>
+      <ECTransition Source="StartPump" Destination="PumpRun" Condition="FbRunningPmp" x="2423.656" y="2042.983">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="605.8566,495.1047,605.9207,524.741" />
+      </ECTransition>
+      <ECTransition Source="PumpRun" Destination="StopPump" Condition="(NOT FeedReactor1 AND&#xD;&#xA;NOT FeedReactor2 AND&#xD;&#xA;NOT FeedReactor3 AND&#xD;&#xA;NOT FeedReactor4 AND&#xD;&#xA;NOT FeedReactor5 AND&#xD;&#xA;NOT FeedReactor6) OR&#xD;&#xA;ForceStop OR NOT FbPumpReady OR NOT FbValveReady" x="2424.074" y="2514.77">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="605.6832,613.7954,606.0316,643.67" />
+      </ECTransition>
+      <ECTransition Source="StopPump" Destination="CloseValve" Condition="FbStoppedPmp OR NOT FbPumpReady" x="2434.015" y="2952.346">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="608.5735,724.6543,608.768,750.9572" />
+      </ECTransition>
+      <ECTransition Source="CloseValve" Destination="IdleState" Condition="FbCloseFeedVlv OR NOT FbValveReady" x="1722.519" y="2741.844">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="488.1177,923.7229,347.5,517.5" />
+      </ECTransition>
+      <ECTransition Source="PumpRun" Destination="PumpRun" Condition="FEED_CAPACITY" x="2138.188" y="2301.965">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="495.7032,621.4983,540.5331,532.6687" />
+      </ECTransition>
+      <ECTransition Source="OpenValve" Destination="RESET" Condition="RESET_LOGIC AND ResetLogic" x="3622.389" y="1245.2">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="848.613,235.5052,993.288,301.0176" />
+      </ECTransition>
+      <ECTransition Source="StartPump" Destination="RESET" Condition="RESET_LOGIC AND ResetLogic" x="3582.748" y="1646.43">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="841.7198,368.3789,972.8263,397.6783" />
+      </ECTransition>
+      <ECTransition Source="PumpRun" Destination="RESET" Condition="RESET_LOGIC AND ResetLogic" x="3427.728" y="2120.744">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="790.2392,521.6845,926.9637,520.1619" />
+      </ECTransition>
+      <ECTransition Source="StopPump" Destination="RESET" Condition="RESET_LOGIC AND ResetLogic" x="3471.911" y="2481.446">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="804.8792,636.1931,940.8082,601.9905" />
+      </ECTransition>
+      <ECTransition Source="CloseValve" Destination="RESET" Condition="RESET_LOGIC AND ResetLogic" x="3730.347" y="2803.031">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="882.3544,740.9399,1026.224,674.0016" />
+      </ECTransition>
+      <ECTransition Source="RESET" Destination="START" Condition="1" x="3975.365" y="1091.444">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1112.212,288.0192,962.0725,182.4478" />
+      </ECTransition>
+      <ECTransition Source="IdleState" Destination="START" Condition="1" x="1906.104" y="1048.598">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="445.0955,271.9838,514.7489,240.7889" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="OpenValve">
+      <ST><![CDATA[;
+Grafcet := 1;
+CmdValve := TRUE;]]></ST>
+    </Algorithm>
+    <Algorithm Name="StartPump">
+      <ST><![CDATA[;
+Grafcet := 2;
+CmdPump := TRUE;
+
+// Default value
+PumpCapacity := 0.0;
+
+// Reactor 1 active
+IF FeedReactor1 THEN
+	PumpCapacity := FeedReactor_C1;
+END_IF;
+
+// Reactor 2 active: keep the highest capacity
+IF FeedReactor2 AND (FeedReactor_C2 > PumpCapacity) THEN
+	PumpCapacity := FeedReactor_C2;
+END_IF;
+
+// Reactor 3 active: keep the highest capacity
+IF FeedReactor3 AND (FeedReactor_C3 > PumpCapacity) THEN
+	PumpCapacity := FeedReactor_C3;
+END_IF;
+
+// Reactor 4 active: keep the highest capacity
+IF FeedReactor4 AND (FeedReactor_C4 > PumpCapacity) THEN
+	PumpCapacity := FeedReactor_C4;
+END_IF;
+
+// Reactor 5 active: keep the highest capacity
+IF FeedReactor5 AND (FeedReactor_C5 > PumpCapacity) THEN
+	PumpCapacity := FeedReactor_C5;
+END_IF;
+
+// Reactor 6 active: keep the highest capacity
+IF FeedReactor6 AND (FeedReactor_C6 > PumpCapacity) THEN
+	PumpCapacity := FeedReactor_C6;
+END_IF;]]></ST>
+    </Algorithm>
+    <Algorithm Name="UpdateSpeed">
+      <ST><![CDATA[;
+Grafcet := 3;
+
+// Default value
+PumpCapacity := 0.0;
+
+// Reactor 1 active
+IF FeedReactor1 THEN
+	PumpCapacity := FeedReactor_C1;
+END_IF;
+
+// Reactor 2 active: keep the highest capacity
+IF FeedReactor2 AND (FeedReactor_C2 > PumpCapacity) THEN
+	PumpCapacity := FeedReactor_C2;
+END_IF;
+
+// Reactor 3 active: keep the highest capacity
+IF FeedReactor3 AND (FeedReactor_C3 > PumpCapacity) THEN
+	PumpCapacity := FeedReactor_C3;
+END_IF;
+
+// Reactor 4 active: keep the highest capacity
+IF FeedReactor4 AND (FeedReactor_C4 > PumpCapacity) THEN
+	PumpCapacity := FeedReactor_C4;
+END_IF;
+
+// Reactor 5 active: keep the highest capacity
+IF FeedReactor5 AND (FeedReactor_C5 > PumpCapacity) THEN
+	PumpCapacity := FeedReactor_C5;
+END_IF;
+
+// Reactor 6 active: keep the highest capacity
+IF FeedReactor6 AND (FeedReactor_C6 > PumpCapacity) THEN
+	PumpCapacity := FeedReactor_C6;
+END_IF;]]></ST>
+    </Algorithm>
+    <Algorithm Name="StopPump">
+      <ST><![CDATA[;
+Grafcet := 4;
+CmdPump := FALSE;]]></ST>
+    </Algorithm>
+    <Algorithm Name="CloseValve">
+      <ST><![CDATA[;
+Grafcet := 5;
+CmdValve := FALSE;]]></ST>
+    </Algorithm>
+    <Algorithm Name="Reset">
+      <ST><![CDATA[;
+CmdValve := FALSE;
+CmdPump := FALSE;
+PumpCapacity := 0;]]></ST>
+    </Algorithm>
+    <Algorithm ID="0436b852-70e9-45a1-96d6-97ed7af8804c" Name="IdleState">
+      <ST><![CDATA[;
+Grafcet := 6;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

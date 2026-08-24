@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="416c49e4-4cc3-49f0-a952-dfb5bae9c301" Name="UDINT2REAL_4" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="7/4/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="DD5870AA881150BB" Name="REQ" Comment="Normal Execution Request">
+        <With Var="QI1" />
+        <With Var="QI2" />
+        <With Var="QI3" />
+        <With Var="QI4" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="6FC99A5BD1C38561" Name="CNF" Comment="Execution Confirmation">
+        <With Var="QO1" />
+        <With Var="QO2" />
+        <With Var="QO3" />
+        <With Var="QO4" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="4573FC8F228EB71D" Name="QI1" Type="UDINT" Comment="Input event qualifier" />
+      <VarDeclaration ID="63EF56506AEB9BC9" Name="QI2" Type="UDINT" />
+      <VarDeclaration ID="83E2958E7CB800E0" Name="QI3" Type="UDINT" />
+      <VarDeclaration ID="3DD611295AF6CE94" Name="QI4" Type="UDINT" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="A6DEF5F9C27C1848" Name="QO1" Type="REAL" Comment="Output event qualifier" />
+      <VarDeclaration ID="5DAA0892996D1670" Name="QO2" Type="REAL" />
+      <VarDeclaration ID="F2C9A69F87315046" Name="QO3" Type="REAL" />
+      <VarDeclaration ID="8ABF236F550EB763" Name="QO4" Type="REAL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="REQ" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="552.9412" y="429.4117" />
+      <ECState Name="REQ" Comment="Normal execution" x="1253.647" y="876.9412">
+        <ECAction Algorithm="REQ" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="REQ" Condition="REQ" x="954.4583" y="587.6765">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="216.8927,127.9262,261.6677,156.5233" />
+      </ECTransition>
+      <ECTransition Source="REQ" Destination="START" Condition="1" x="897.2024" y="731.5155">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="248.211,202.5927,203.436,173.9956" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="REQ" Comment="Normally executed algorithm">
+      <ST><![CDATA[;
+QO1 := UDINT_TO_REAL(QI1);
+QO2 := UDINT_TO_REAL(QI2);
+QO3 := UDINT_TO_REAL(QI3);
+QO4 := UDINT_TO_REAL(QI4);]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

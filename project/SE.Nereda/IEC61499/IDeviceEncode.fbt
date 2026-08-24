@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="1226a434-8c62-4cc4-ad09-24c1c71fb850" Name="IDeviceEncode" Format="2.0" Comment="Composite Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="6/12/2026" Remarks="template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="7A6C1C05B7ACA4D3" Name="REQ_CMD" Comment="Request for new command">
+        <With Var="Sp" />
+      </Event>
+      <Event ID="51FC99EF6C596181" Name="REQ_SPEED" Comment="Request for new  analog setpoint">
+        <With Var="SpeedSp" />
+      </Event>
+      <Event ID="8DD7A09A6565B7F3" Name="REQ_RESET" Comment="Request to reset the device">
+        <With Var="Reset" />
+      </Event>
+      <Event ID="6454C45AB89C818D" Name="REQ_PROGLOCALSEL" Comment="Request for program local owner" />
+    </EventInputs>
+    <InputVars>
+      <VarDeclaration ID="64F0A65D5B10944D" Name="Sp" Type="VTQINT" Comment="Device setpoint in program local owner" />
+      <VarDeclaration ID="35DB549676DB86DA" Name="SpeedSp" Type="VTQREAL" Comment="Device setpoint 1 in program local owner( in real)" />
+      <VarDeclaration ID="48AF5FD15A286274" Name="Reset" Type="BOOL" Comment="1= Reset command" />
+    </InputVars>
+    <Plugs>
+      <AdapterDeclaration ID="3CE9C36DE62AE8E7" Name="ISc" Type="IDevice" Namespace="SE.App2CommonProcess" x="2680" y="480">
+        <Parameter Name="$ProgLocalSel" Value="TRUE" />
+      </AdapterDeclaration>
+    </Plugs>
+  </InterfaceList>
+  <FBNetwork>
+    <FB ID="F49B0EA6B8002E48" Name="CMD" Type="RetriggerEvent" x="880" y="1900" Namespace="SE.Nereda">
+      <Parameter Name="$CFF51EFF0A91DC53" Value="3" />
+      <Parameter Name="$FDD5DC24A8674AF6" Value="T#1s" />
+    </FB>
+    <FB ID="BB80F67B23274D59" Name="CMD_Merge" Type="E_MERGE" x="1540" y="1900" Namespace="IEC61499.Standard" />
+    <Input ID="7A6C1C05B7ACA4D3" Name="REQ_CMD" x="869.4166" y="473.9999" Type="Event" />
+    <Input ID="64F0A65D5B10944D" Name="Sp" x="869.4166" y="1106" Type="Data" />
+    <Input ID="51FC99EF6C596181" Name="REQ_SPEED" x="869.4166" y="546" Type="Event" />
+    <Input ID="35DB549676DB86DA" Name="SpeedSp" x="869.4166" y="1286" Type="Data" />
+    <Input ID="8DD7A09A6565B7F3" Name="REQ_RESET" x="869.4166" y="785.9999" Type="Event" />
+    <Input ID="48AF5FD15A286274" Name="Reset" x="869.4166" y="1646" Type="Data" />
+    <Input ID="6454C45AB89C818D" Name="REQ_PROGLOCALSEL" x="869.4166" y="672" Type="Event" />
+    <EventConnections>
+      <Connection Source="$51FC99EF6C596181" Destination="$3CE9C36DE62AE8E7.REQ_SP" dx1="40" />
+      <Connection Source="$8DD7A09A6565B7F3" Destination="$3CE9C36DE62AE8E7.REQ_RESET" dx1="40" />
+      <Connection Source="$6454C45AB89C818D" Destination="$3CE9C36DE62AE8E7.REQ_PROGLOCALSEL" />
+      <Connection Source="$7A6C1C05B7ACA4D3" Destination="$F49B0EA6B8002E48.2BC1963D96179493" dx1="120" dx2="130" dy="681.8542">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$BB80F67B23274D59.EO" Destination="$3CE9C36DE62AE8E7.REQ_CMD">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$F49B0EA6B8002E48.4002AEF0814D09CF" Destination="$BB80F67B23274D59.EI1" />
+      <Connection Source="$7A6C1C05B7ACA4D3" Destination="$BB80F67B23274D59.EI2" dx1="219.4167" dx2="150" dy="240.0001">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$3CE9C36DE62AE8E7.CNF_READY" Destination="$F49B0EA6B8002E48.2BC1963D96179493">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="$64F0A65D5B10944D" Destination="$3CE9C36DE62AE8E7.Lsp" dx1="40.77087" />
+      <Connection Source="$35DB549676DB86DA" Destination="$3CE9C36DE62AE8E7.LspReal1" dx1="40" />
+      <Connection Source="$48AF5FD15A286274" Destination="$3CE9C36DE62AE8E7.Reset" dx1="40" />
+    </DataConnections>
+  </FBNetwork>
+</FBType>

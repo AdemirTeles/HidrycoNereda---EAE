@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="7b756575-09e8-45f4-a42b-a0ad647b82b2" Name="ValveSpDecode" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="6/4/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="6ADB36776E847893" Name="REQ" Comment="Normal Execution Request">
+        <With Var="QI" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="9274835450AA07E7" Name="CNF" Comment="Execution Confirmation">
+        <With Var="QO" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="E3DBDFEF31CE8CF0" Name="QI" Type="INT" Comment="Input event qualifier" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="2CEC9083D9D2002C" Name="QO" Type="INT" Comment="Output event qualifier" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="REQ" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="552.9412" y="429.4117" />
+      <ECState Name="REQ" Comment="Normal execution" x="1233.647" y="864.9412">
+        <ECAction Algorithm="REQ" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="REQ" Condition="REQ" x="944.6003" y="581.5926">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="215.2309,126.9371,258.3635,154.5341" />
+      </ECTransition>
+      <ECTransition Source="REQ" Destination="START" Condition="1" x="887.1329" y="725.6276">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="244.8898,200.5927,201.7573,172.9956" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="REQ" Comment="Normally executed algorithm">
+      <ST><![CDATA[;
+IF QI = 1 THEN
+	QO := QI;
+ELSIF QI = 0 THEN
+	QO := 2;
+END_IF;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

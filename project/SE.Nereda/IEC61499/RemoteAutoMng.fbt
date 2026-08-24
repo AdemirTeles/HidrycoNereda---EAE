@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="8a2d39cd-075d-48ae-bb69-ca6cb2fb8bea" Name="RemoteAutoMng" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="6/3/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="64070B2561E430BA" Name="REQ" Comment="Normal Execution Request">
+        <With Var="iRemoteSel" />
+        <With Var="iAutoSel" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="6BEF700BD5F898F8" Name="CNF" Comment="Execution Confirmation">
+        <With Var="oRemoteSel" />
+        <With Var="oAutoSel" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="B7B4969BA24515DC" Name="iRemoteSel" Type="BOOL" />
+      <VarDeclaration ID="F1A2D6FBF53580DC" Name="iAutoSel" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="35EEAE8FF93B7DBA" Name="oRemoteSel" Type="BOOL" />
+      <VarDeclaration ID="A72D9DB047E13611" Name="oAutoSel" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="REQ" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="552.9412" y="429.4117" />
+      <ECState Name="REQ" Comment="Normal execution" x="1393.647" y="928.9412">
+        <ECAction Algorithm="REQ" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="REQ" Condition="REQ" x="1021.535" y="612.5701">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="228.383,131.8366,283.8047,164.767" />
+      </ECTransition>
+      <ECTransition Source="REQ" Destination="START" Condition="1" x="967.9319" y="757.3179">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="271.0344,211.2593,215.6127,178.3289" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="REQ" Comment="Normally executed algorithm">
+      <ST><![CDATA[;
+IF iRemoteSel <> iAutoSel THEN
+	oAutoSel := iAutoSel;
+	oRemoteSel := iRemoteSel;
+ELSE
+	oAutoSel := FALSE;
+	oRemoteSel := FALSE;
+END_IF;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

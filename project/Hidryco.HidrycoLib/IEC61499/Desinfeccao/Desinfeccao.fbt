@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="45f996a4-304e-471b-89c1-91f3e092c6bf" Name="Desinfeccao" Format="2.0" Comment="Composite Function Block Type" Namespace="Hidryco.HidrycoLib">
+  <Attribute Name="HMI.Alias" Value="" />
+  <Attribute Name="Configuration.FB.IDCounter" Value="8" />
+  <Identification Standard="61499-2" />
+  <VersionInfo Version="0.0" Author=" " Date="02/03/2026" Remarks="template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="666DF14E53D2A368" Name="REQ">
+        <With Var="stsEmergencia" />
+      </Event>
+    </EventInputs>
+    <InputVars>
+      <VarDeclaration ID="FA0363D20B9174D5" Name="stsEmergencia" Type="BOOL" />
+    </InputVars>
+  </InterfaceList>
+  <FBNetwork>
+    <FB ID="1" Name="TrojanUV30001" Type="TrojanUV3000" x="3400" y="739.9999" Namespace="Hidryco.HidrycoLib" />
+    <FB ID="2" Name="VC_700_01" Type="Atuador_Coester_CSR6T" x="1980" y="1480" Namespace="Hidryco.HidrycoLib">
+      <Parameter Name="$92D2A8BE3C5993D2" Value="1" />
+    </FB>
+    <FB ID="3" Name="FT_700_01" Type="Sensor_Comunicacao" x="4540" y="680" Namespace="Hidryco.HidrycoLib" />
+    <FB ID="4" Name="AIT_700_01" Type="Sensor_Comunicacao" x="4020" y="1800" Namespace="Hidryco.HidrycoLib" />
+    <FB ID="6" Name="PID_VC_700_01" Type="PID" x="260" y="120" Namespace="Hidryco.HidrycoLib" />
+    <FB ID="8" UID="7" Name="ANY2ANY1" Type="ANY2ANY_243151A3E32A9D4B1" x="700" y="1540" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNT:=1;IN${CNT}:REAL;OUT${CNT}:INT" />
+    </FB>
+    <FB ID="F217C16BCE921B02" Name="AIT_700_04" Type="Sensor_Comunicacao" x="5000" y="2440" Namespace="Hidryco.HidrycoLib" />
+    <FB ID="92DB67C489094351" Name="AIT_700_03" Type="Sensor_Comunicacao" x="4020" y="2440" Namespace="Hidryco.HidrycoLib" />
+    <FB ID="D2DEEF015FE23D33" Name="IThis" Type="Desinfeccao_HMI" x="2060" y="600" Namespace="Hidryco.HidrycoLib" />
+    <Input ID="666DF14E53D2A368" Name="REQ" x="160" y="2352" Type="Event" />
+    <Input ID="FA0363D20B9174D5" Name="stsEmergencia" x="160" y="2412" Type="Data" />
+    <EventConnections>
+      <Connection Source="$6.E_ATUALIZA_SAIDA" Destination="$2.REQ" dx1="100" />
+      <Connection Source="$6.E_ATUALIZA_PID_HABILITADO" Destination="$2.REQ" dx1="80" />
+      <Connection Source="$6.E_ATUALIZA_SAIDA" Destination="$8.REQ" dx1="100" dx2="50" dy="410" />
+      <Connection Source="$8.CNF" Destination="$2.REQ" dx1="50" />
+      <Connection Source="$D2DEEF015FE23D33.B61B182CDA281E32" Destination="$2.E_RESET_FALHAS" dx1="60.271" dx2="69.99988" dy="410" />
+      <Connection Source="$1.CNF" Destination="$2.REQ">
+        <Points>
+          <Points>
+            <X>1022.96356</X>
+            <Y>194.999969</Y>
+          </Points>
+          <Points>
+            <X>1037.96362</X>
+            <Y>194.999969</Y>
+          </Points>
+          <Points>
+            <X>1037.96362</X>
+            <Y>379.999969</Y>
+          </Points>
+          <Points>
+            <X>489.999969</X>
+            <Y>379.999969</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$666DF14E53D2A368" Destination="$2.REQ" dx1="40" />
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="$6.stsPIDHabilitado" Destination="$2.stsPidHabilitado" dx1="40" />
+      <Connection Source="$6.stsSaida" Destination="$8.IN1" dx1="60" dx2="70" dy="150" />
+      <Connection Source="$8.OUT1" Destination="$2.stpPosicaoDesejadaAutomatico" dx1="43.75" />
+      <Connection Source="$3.stsSensor" Destination="$6.stsPv">
+        <Points>
+          <Points>
+            <X>1359.2135</X>
+            <Y>260</Y>
+          </Points>
+          <Points>
+            <X>1372.5</X>
+            <Y>260</Y>
+          </Points>
+          <Points>
+            <X>1372.5</X>
+            <Y>132.5</Y>
+          </Points>
+          <Points>
+            <X>502.5</X>
+            <Y>132.5</Y>
+          </Points>
+          <Points>
+            <X>502.5</X>
+            <Y>142.5</Y>
+          </Points>
+          <Points>
+            <X>47.5</X>
+            <Y>142.5</Y>
+          </Points>
+          <Points>
+            <X>47.5</X>
+            <Y>105</Y>
+          </Points>
+          <Points>
+            <X>60</X>
+            <Y>105</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$3.stsFalhaSensor" Destination="$6.interlock">
+        <Points>
+          <Points>
+            <X>1359.2135</X>
+            <Y>275</Y>
+          </Points>
+          <Points>
+            <X>1377.5</X>
+            <Y>275</Y>
+          </Points>
+          <Points>
+            <X>1377.5</X>
+            <Y>132.5</Y>
+          </Points>
+          <Points>
+            <X>502.5</X>
+            <Y>132.5</Y>
+          </Points>
+          <Points>
+            <X>502.5</X>
+            <Y>142.5</Y>
+          </Points>
+          <Points>
+            <X>52.5</X>
+            <Y>142.5</Y>
+          </Points>
+          <Points>
+            <X>52.5</X>
+            <Y>120</Y>
+          </Points>
+          <Points>
+            <X>60</X>
+            <Y>120</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$1.notEnoughHealthyChannels" Destination="$2.bloqueioAutomatico">
+        <Points>
+          <Points>
+            <X>1022.96356</X>
+            <Y>259.999969</Y>
+          </Points>
+          <Points>
+            <X>1032.96362</X>
+            <Y>259.999969</Y>
+          </Points>
+          <Points>
+            <X>1032.96362</X>
+            <Y>504.999969</Y>
+          </Points>
+          <Points>
+            <X>489.999969</X>
+            <Y>504.999969</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$D2DEEF015FE23D33.E92F9554FB78F909" Destination="$2.cmdResetFalhas" dx1="40.271" dx2="149.9999" dy="90" />
+      <Connection Source="$FA0363D20B9174D5" Destination="$2.B3C2A10F46D5DEBA" dx1="40" />
+    </DataConnections>
+  </FBNetwork>
+</FBType>

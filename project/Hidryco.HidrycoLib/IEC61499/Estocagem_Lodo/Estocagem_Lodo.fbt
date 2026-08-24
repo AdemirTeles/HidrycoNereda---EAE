@@ -1,0 +1,474 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="73015edc-4d1f-4f1c-8408-c699b49fc55a" Name="Estocagem_Lodo" Format="2.0" Comment="Composite Function Block Type" Namespace="Hidryco.HidrycoLib">
+  <Attribute Name="HMI.Alias" Value="" />
+  <Attribute Name="Configuration.FB.IDCounter" Value="17" />
+  <Identification Standard="61499-2" />
+  <VersionInfo Version="0.0" Author=" " Date="28/04/2026" Remarks="template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="REQ" Comment="Normal Execution Request">
+        <With Var="cmdOnAutomatico_900_VA_01" />
+        <With Var="cmdOffAutomatico_900_VA_01" />
+        <With Var="cmdOnAutomatico_900_VA_02" />
+        <With Var="cmdOffAutomatico_900_VA_02" />
+        <With Var="stsEmergencia" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="CNF" Comment="Execution Confirmation">
+        <With Var="stsDisponivelAutomatico_900_VA_01" />
+        <With Var="stsDisponivelAutomatico_900_VA_02" />
+        <With Var="stsAnimacao_900_VA_02" />
+        <With Var="stsAnimacao_900_VA_01" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="B85434350E649C9B" Name="stsEmergencia" Type="BOOL" />
+      <VarDeclaration ID="2F0A48BDC0F2E270" Name="cmdOnAutomatico_900_VA_01" Type="BOOL" />
+      <VarDeclaration ID="2BF7F7F96EF9DDC9" Name="cmdOffAutomatico_900_VA_01" Type="BOOL" />
+      <VarDeclaration ID="17E180FDC7F77A9F" Name="cmdOnAutomatico_900_VA_02" Type="BOOL" />
+      <VarDeclaration ID="D2A5DF19113E384E" Name="cmdOffAutomatico_900_VA_02" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="6A2D8AEFB0DCB131" Name="stsDisponivelAutomatico_900_VA_01" Type="BOOL" />
+      <VarDeclaration ID="2A5F8226A7FC3865" Name="stsDisponivelAutomatico_900_VA_02" Type="BOOL" />
+      <VarDeclaration ID="706E8A0B9EDBAA16" Name="stsAnimacao_900_VA_01" Type="INT" />
+      <VarDeclaration ID="44610EE5B4DC4E07" Name="stsAnimacao_900_VA_02" Type="INT" />
+    </OutputVars>
+  </InterfaceList>
+  <FBNetwork>
+    <FB ID="1" Name="LIT_900_02" Type="Sensor_Nivel_4a20" x="4980" y="1300" Namespace="Hidryco.HidrycoLib" />
+    <FB ID="2" Name="LIT_900_01" Type="Sensor_Nivel_4a20" x="3160" y="1300" Namespace="Hidryco.HidrycoLib" />
+    <FB ID="3" Name="VA_900_01" Type="Equipamento_On_Off" x="8380" y="820" Namespace="Hidryco.HidrycoLib" />
+    <FB ID="4" Name="VA_900_02" Type="Equipamento_On_Off" x="8540" y="1660" Namespace="Hidryco.HidrycoLib" />
+    <FB ID="5" Name="VB_900_03" Type="Equipamento_On_Off" x="3860" y="2420" Namespace="Hidryco.HidrycoLib">
+      <Parameter Name="$cmdOnAutomatico" Value="TRUE" />
+    </FB>
+    <FB ID="6" Name="VB_900_04" Type="Equipamento_On_Off" x="5680" y="2420" Namespace="Hidryco.HidrycoLib">
+      <Parameter Name="$cmdOnAutomatico" Value="TRUE" />
+    </FB>
+    <FB ID="7" Name="SO_900_01" Type="Motor_Inversor_Automatico_Unico" x="3640" y="3520" Namespace="Hidryco.HidrycoLib" />
+    <FB ID="8" Name="SO_900_02" Type="Motor_Inversor_Automatico_Unico" x="5980" y="3500" Namespace="Hidryco.HidrycoLib" />
+    <FB ID="9" Name="Revezamento_2_Motores_ok1" Type="Revezamento_2_Motores_ok" x="900" y="4220" Namespace="Hidryco.HidrycoLib" />
+    <FB ID="10" Name="comandoAutomatico1" Type="comandoAutomatico" x="1180" y="2440" Namespace="Hidryco.HidrycoLib">
+      <Parameter Name="$stsNecessidadeHabilitado" Value="FALSE" />
+      <Parameter Name="$stsDisponivelEquipamento3" Value="FALSE" />
+    </FB>
+    <FB ID="14" UID="11" Name="COMPARE1" Type="COMPARE_739E3FB559152FE" x="7520" y="1860" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNT:=2;IN${CNT}:INT" />
+      <Parameter Name="$IN2" Value="2" />
+    </FB>
+    <FB ID="15" UID="12" Name="COMPARE2" Type="COMPARE_739E3FB559152FE" x="7540" y="2560" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNT:=2;IN${CNT}:INT" />
+      <Parameter Name="$IN2" Value="2" />
+    </FB>
+    <FB ID="13" Name="AND1" Type="AND_148CCC6046D4CE74C" x="8180" y="2960" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNT:=2" />
+    </FB>
+    <FB ID="C949DC3DE8E3D2FD" Name="IThis" Type="Estocagem_Lodo_HMI" x="4640" y="520" Namespace="Hidryco.HidrycoLib">
+      <Parameter Name="$AF9B6C02E6A41AAF" Value="TRUE" />
+    </FB>
+    <FB ID="B70C1B2AF14FB129" Name="plcStart1" Type="plcStart" x="2160" y="540" Namespace="SE.App2Base">
+      <Parameter Name="$Prio" Value="10" />
+    </FB>
+    <FB ID="B44F3CD71E112B80" Name="E_MERGE1" Type="E_MERGE" x="9460" y="540" Namespace="IEC61499.Standard" />
+    <Input Name="REQ" x="100" y="472" Type="Event" />
+    <Input ID="2F0A48BDC0F2E270" Name="cmdOnAutomatico_900_VA_01" x="6580" y="1172" Type="Data" />
+    <Input ID="2BF7F7F96EF9DDC9" Name="cmdOffAutomatico_900_VA_01" x="6580" y="1232" Type="Data" />
+    <Input ID="17E180FDC7F77A9F" Name="cmdOnAutomatico_900_VA_02" x="6560" y="1452" Type="Data" />
+    <Input ID="D2A5DF19113E384E" Name="cmdOffAutomatico_900_VA_02" x="6580" y="1512" Type="Data" />
+    <Input ID="B85434350E649C9B" Name="stsEmergencia" x="100" y="592" Type="Data" />
+    <Output ID="6A2D8AEFB0DCB131" Name="stsDisponivelAutomatico_900_VA_01" x="9452.229" y="1152" Type="Data" />
+    <Output ID="2A5F8226A7FC3865" Name="stsDisponivelAutomatico_900_VA_02" x="9660.363" y="1992" Type="Data" />
+    <Output ID="44610EE5B4DC4E07" Name="stsAnimacao_900_VA_02" x="9660" y="1932" Type="Data" />
+    <Output ID="706E8A0B9EDBAA16" Name="stsAnimacao_900_VA_01" x="9455.926" y="1092" Type="Data" />
+    <Output Name="CNF" x="9740" y="352" Type="Event" />
+    <EventConnections>
+      <Connection Source="$15.CNF" Destination="$13.REQ" dx1="69.854" />
+      <Connection Source="$14.CNF" Destination="$13.REQ" dx1="69.85449" />
+      <Connection Source="$3.CNF" Destination="$B44F3CD71E112B80.EI1" dx1="50" />
+      <Connection Source="$4.CNF" Destination="$B44F3CD71E112B80.EI2" dx1="50" dx2="30" dy="-110" />
+      <Connection Source="$B44F3CD71E112B80.EO" Destination="$CNF" dx1="41.54199" dx2="30" dy="-110" />
+      <Connection Source="$REQ" Destination="$3.REQ">
+        <Points>
+          <Points>
+            <X>90.11458</X>
+            <Y>125</Y>
+          </Points>
+          <Points>
+            <X>102.5</X>
+            <Y>125</Y>
+          </Points>
+          <Points>
+            <X>102.5</X>
+            <Y>112.5</Y>
+          </Points>
+          <Points>
+            <X>1367.5</X>
+            <Y>112.5</Y>
+          </Points>
+          <Points>
+            <X>1367.5</X>
+            <Y>215</Y>
+          </Points>
+          <Points>
+            <X>2090</X>
+            <Y>215</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$REQ" Destination="$4.REQ">
+        <Points>
+          <Points>
+            <X>90.11458</X>
+            <Y>125</Y>
+          </Points>
+          <Points>
+            <X>167.5</X>
+            <Y>125</Y>
+          </Points>
+          <Points>
+            <X>167.5</X>
+            <Y>257.5</Y>
+          </Points>
+          <Points>
+            <X>1472.5</X>
+            <Y>257.5</Y>
+          </Points>
+          <Points>
+            <X>1472.5</X>
+            <Y>425</Y>
+          </Points>
+          <Points>
+            <X>2130</X>
+            <Y>425</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$B70C1B2AF14FB129.FIRST_INIT" Destination="$C949DC3DE8E3D2FD.29776332AC145385" dx1="50" />
+      <Connection Source="$B70C1B2AF14FB129.REDO_INIT" Destination="$C949DC3DE8E3D2FD.29776332AC145385" dx1="70" />
+      <Connection Source="$2.E_ATUALIZA_SENSOR" Destination="$C949DC3DE8E3D2FD.BF53C1679D97015B" dx1="59.20874" />
+      <Connection Source="$1.E_ATUALIZA_SENSOR" Destination="$C949DC3DE8E3D2FD.BF53C1679D97015B" dx1="59.2085" dx2="90" dy="-170" />
+      <Connection Source="$C949DC3DE8E3D2FD.F7A297FDAAEECCB1" Destination="$B70C1B2AF14FB129.ACK_FIRST" dx1="45.271" dx2="50" dy="-110" />
+      <Connection Source="$REQ" Destination="$5.REQ">
+        <Points>
+          <Points>
+            <X>90.11458</X>
+            <Y>125</Y>
+          </Points>
+          <Points>
+            <X>167.5</X>
+            <Y>125</Y>
+          </Points>
+          <Points>
+            <X>167.5</X>
+            <Y>482.5</Y>
+          </Points>
+          <Points>
+            <X>797.5</X>
+            <Y>482.5</Y>
+          </Points>
+          <Points>
+            <X>797.5</X>
+            <Y>615</Y>
+          </Points>
+          <Points>
+            <X>959.999939</X>
+            <Y>615</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$REQ" Destination="$7.REQ" dx1="309.5417" />
+      <Connection Source="$REQ" Destination="$6.REQ">
+        <Points>
+          <Points>
+            <X>90.11458</X>
+            <Y>125</Y>
+          </Points>
+          <Points>
+            <X>167.5</X>
+            <Y>125</Y>
+          </Points>
+          <Points>
+            <X>167.5</X>
+            <Y>257.5</Y>
+          </Points>
+          <Points>
+            <X>1217.5</X>
+            <Y>257.5</Y>
+          </Points>
+          <Points>
+            <X>1217.5</X>
+            <Y>615</Y>
+          </Points>
+          <Points>
+            <X>1415</X>
+            <Y>615</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$REQ" Destination="$8.REQ">
+        <Points>
+          <Points>
+            <X>90.11458</X>
+            <Y>125</Y>
+          </Points>
+          <Points>
+            <X>167.5</X>
+            <Y>125</Y>
+          </Points>
+          <Points>
+            <X>167.5</X>
+            <Y>482.5</Y>
+          </Points>
+          <Points>
+            <X>1342.5</X>
+            <Y>482.5</Y>
+          </Points>
+          <Points>
+            <X>1342.5</X>
+            <Y>885</Y>
+          </Points>
+          <Points>
+            <X>1490</X>
+            <Y>885</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$REQ" Destination="$7.E_EMERGENCIA" dx1="309.5417" />
+      <Connection Source="$REQ" Destination="$8.E_EMERGENCIA">
+        <Points>
+          <Points>
+            <X>90.11458</X>
+            <Y>125</Y>
+          </Points>
+          <Points>
+            <X>167.5</X>
+            <Y>125</Y>
+          </Points>
+          <Points>
+            <X>167.5</X>
+            <Y>482.5</Y>
+          </Points>
+          <Points>
+            <X>1342.5</X>
+            <Y>482.5</Y>
+          </Points>
+          <Points>
+            <X>1342.5</X>
+            <Y>900</Y>
+          </Points>
+          <Points>
+            <X>1490</X>
+            <Y>900</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$9.E_ATUALIZA_HABILITADO" Destination="$10.E_ATUALIZA_HABILITADOS" dx1="58.3335" dx2="130" dy="-170" />
+      <Connection Source="$9.E_ATUALIZA_EQUIPAMENTO_PRINCIPAL" Destination="$10.E_ATUALIZA_EQUIPAMENTO_PRINCIPAL" dx1="78.3335" dx2="130" dy="-230" />
+      <Connection Source="$7.E_ATUALIZA_DISPONIBILIDADE" Destination="$10.E_ATUALIZA_DISPONIBILIDADE_EQUIPAMENTOS" dx1="50" dx2="130" dy="-230" />
+      <Connection Source="$8.E_ATUALIZA_DISPONIBILIDADE" Destination="$10.E_ATUALIZA_DISPONIBILIDADE_EQUIPAMENTOS" dx1="50" dx2="130" dy="-230" />
+      <Connection Source="$10.E_ATUALIZA_COMANDO_AUTOMATICO" Destination="$7.E_COMANDO_STATUS_AUTOMATICO" dx1="83.16699" />
+      <Connection Source="$10.E_ATUALIZA_COMANDO_AUTOMATICO" Destination="$8.E_COMANDO_STATUS_AUTOMATICO">
+        <Points>
+          <Points>
+            <X>786.708252</X>
+            <Y>620</Y>
+          </Points>
+          <Points>
+            <X>807.5</X>
+            <Y>620</Y>
+          </Points>
+          <Points>
+            <X>807.5</X>
+            <Y>792.5</Y>
+          </Points>
+          <Points>
+            <X>1312.5</X>
+            <Y>792.5</Y>
+          </Points>
+          <Points>
+            <X>1312.5</X>
+            <Y>960</Y>
+          </Points>
+          <Points>
+            <X>1490</X>
+            <Y>960</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$13.CNF" Destination="$8.REQ" dx1="67.47949" dx2="50" dy="330.0002" />
+      <Connection Source="$13.CNF" Destination="$7.REQ" dx1="67.47949" dx2="50" dy="330.0002" />
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="$7.stsDisponivelAutomatico" Destination="$9.stsDisponivelEquipamento1" dx1="46.04199" dx2="50" dy="610" />
+      <Connection Source="$8.stsDisponivelAutomatico" Destination="$9.stsDisponivelEquipamento2" dx1="46.04199" dx2="70" dy="630" />
+      <Connection Source="$7.stsDisponivelAutomatico" Destination="$10.stsDisponivelEquipamento1" dx1="46.04199" dx2="50" dy="-670" />
+      <Connection Source="$8.stsDisponivelAutomatico" Destination="$10.stsDisponivelEquipamento2" dx1="46.04199" dx2="30" dy="-690" />
+      <Connection Source="$9.stsEquipamentoPrincipal" Destination="$10.stsEquipamentoPrincipal" dx1="78.3335" dx2="90" dy="-490" />
+      <Connection Source="$9.stsRevezamentoHabilitado" Destination="$10.stsRevezamentoHabilitado" dx1="58.3335" dx2="110" dy="-430" />
+      <Connection Source="$10.cmdAutomaticoEquipamento1" Destination="$7.cmdAutomatico" dx1="63.16699" />
+      <Connection Source="$10.cmdAutomaticoEquipamento2" Destination="$8.cmdAutomatico">
+        <Points>
+          <Points>
+            <X>786.708252</X>
+            <Y>730</Y>
+          </Points>
+          <Points>
+            <X>797.5</X>
+            <Y>730</Y>
+          </Points>
+          <Points>
+            <X>797.5</X>
+            <Y>777.5</Y>
+          </Points>
+          <Points>
+            <X>1342.5</X>
+            <Y>777.5</Y>
+          </Points>
+          <Points>
+            <X>1342.5</X>
+            <Y>1055</Y>
+          </Points>
+          <Points>
+            <X>1490</X>
+            <Y>1055</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$6.stsAnimacao" Destination="$15.IN1" dx1="48.89551" />
+      <Connection Source="$15.EQ" Destination="$13.IN2" dx1="49.854" />
+      <Connection Source="$5.stsAnimacao" Destination="$14.IN1" dx1="48.89648" />
+      <Connection Source="$14.EQ" Destination="$13.IN1" dx1="69.85449" />
+      <Connection Source="$13.OUT" Destination="$8.stsBloqueioGeral" dx1="47.47949" dx2="50" dy="130.0002" />
+      <Connection Source="$13.OUT" Destination="$8.stsBloqueioAutomatico" dx1="47.47949" dx2="70" dy="130.0002" />
+      <Connection Source="$13.OUT" Destination="$7.stsBloqueioGeral" dx1="47.47949" dx2="110" dy="130.0002" />
+      <Connection Source="$13.OUT" Destination="$7.stsBloqueioAutomatico" dx1="47.47949" dx2="130" dy="130.0002" />
+      <Connection Source="$2F0A48BDC0F2E270" Destination="$3.cmdOnAutomatico" dx1="42.85449" />
+      <Connection Source="$2BF7F7F96EF9DDC9" Destination="$3.cmdOffAutomatico" dx1="42.875" />
+      <Connection Source="$3.stsDisponivelAutomatico" Destination="$6A2D8AEFB0DCB131" />
+      <Connection Source="$4.stsDisponivelAutomatico" Destination="$2A5F8226A7FC3865" />
+      <Connection Source="$17E180FDC7F77A9F" Destination="$4.cmdOnAutomatico" dx1="422.8545" />
+      <Connection Source="$D2A5DF19113E384E" Destination="$4.cmdOffAutomatico" dx1="402.875" />
+      <Connection Source="$4.stsAnimacao" Destination="$44610EE5B4DC4E07" />
+      <Connection Source="$3.stsAnimacao" Destination="$706E8A0B9EDBAA16" />
+      <Connection Source="$2.stsSensor" Destination="$C949DC3DE8E3D2FD.4CC2ECCB8BD26E01" dx1="79.2085" />
+      <Connection Source="$1.stsSensor" Destination="$C949DC3DE8E3D2FD.55D20AFF0F74FA66" dx1="79.2085" dx2="30" dy="-490" />
+      <Connection Source="$B85434350E649C9B" Destination="$3.E74E49E48343E6DC" dx1="40" />
+      <Connection Source="$B85434350E649C9B" Destination="$4.E74E49E48343E6DC">
+        <Points>
+          <Points>
+            <X>173.046875</X>
+            <Y>155</Y>
+          </Points>
+          <Points>
+            <X>183.046875</X>
+            <Y>155</Y>
+          </Points>
+          <Points>
+            <X>183.046875</X>
+            <Y>257.5</Y>
+          </Points>
+          <Points>
+            <X>1972.5</X>
+            <Y>257.5</Y>
+          </Points>
+          <Points>
+            <X>1972.5</X>
+            <Y>490</Y>
+          </Points>
+          <Points>
+            <X>2130</X>
+            <Y>490</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$B85434350E649C9B" Destination="$6.E74E49E48343E6DC">
+        <Points>
+          <Points>
+            <X>173.046875</X>
+            <Y>155</Y>
+          </Points>
+          <Points>
+            <X>183.046875</X>
+            <Y>155</Y>
+          </Points>
+          <Points>
+            <X>183.046875</X>
+            <Y>257.5</Y>
+          </Points>
+          <Points>
+            <X>1217.5</X>
+            <Y>257.5</Y>
+          </Points>
+          <Points>
+            <X>1217.5</X>
+            <Y>680</Y>
+          </Points>
+          <Points>
+            <X>1415</X>
+            <Y>680</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$B85434350E649C9B" Destination="$5.E74E49E48343E6DC">
+        <Points>
+          <Points>
+            <X>173.046875</X>
+            <Y>155</Y>
+          </Points>
+          <Points>
+            <X>183.046875</X>
+            <Y>155</Y>
+          </Points>
+          <Points>
+            <X>183.046875</X>
+            <Y>482.5</Y>
+          </Points>
+          <Points>
+            <X>797.5</X>
+            <Y>482.5</Y>
+          </Points>
+          <Points>
+            <X>797.5</X>
+            <Y>680</Y>
+          </Points>
+          <Points>
+            <X>959.999939</X>
+            <Y>680</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$B85434350E649C9B" Destination="$7.stsEmergencia" dx1="40" />
+      <Connection Source="$B85434350E649C9B" Destination="$8.stsEmergencia">
+        <Points>
+          <Points>
+            <X>173.046875</X>
+            <Y>155</Y>
+          </Points>
+          <Points>
+            <X>183.046875</X>
+            <Y>155</Y>
+          </Points>
+          <Points>
+            <X>183.046875</X>
+            <Y>482.5</Y>
+          </Points>
+          <Points>
+            <X>1342.5</X>
+            <Y>482.5</Y>
+          </Points>
+          <Points>
+            <X>1342.5</X>
+            <Y>1010</Y>
+          </Points>
+          <Points>
+            <X>1490</X>
+            <Y>1010</Y>
+          </Points>
+        </Points>
+      </Connection>
+    </DataConnections>
+  </FBNetwork>
+</FBType>

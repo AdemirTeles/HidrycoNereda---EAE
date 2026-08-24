@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="956ee080-4181-444f-bfc1-a6589002ce88" Name="SpeedSp" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="7/3/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="3B62B1C54EE8482F" Name="REQ" Comment="Normal Execution Request">
+        <With Var="Sp" />
+        <With Var="iSpeedSp" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="CE921AF394A1453E" Name="CNF" Comment="Execution Confirmation">
+        <With Var="oSpeedSp" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="28B1E385E2B35AAE" Name="Sp" Type="INT" />
+      <VarDeclaration ID="79740CC6CE911CBD" Name="iSpeedSp" Type="REAL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="335EA17E377251F8" Name="oSpeedSp" Type="REAL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="INIT,REQ" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="552.9412" y="429.4117" />
+      <ECState Name="REQ" Comment="Normal execution" x="1165.647" y="864.9412">
+        <ECAction Algorithm="REQ" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="REQ" Condition="REQ" x="914.3595" y="584.0986">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="209.896,127.619,248.7197,155.2161" />
+      </ECTransition>
+      <ECTransition Source="REQ" Destination="START" Condition="1" x="852.5023" y="725.2867">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="234.2354,200.5927,195.4117,172.9956" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="INIT" Comment="Initialization algorithm">
+      <ST><![CDATA[;]]></ST>
+    </Algorithm>
+    <Algorithm Name="REQ" Comment="Normally executed algorithm">
+      <ST><![CDATA[;
+IF Sp = 0 THEN
+	oSpeedSp := 0;
+ELSE
+	oSpeedSp := iSpeedSp;
+END_IF;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

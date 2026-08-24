@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="de0c9a16-a85d-4b54-b086-d09ac0f2ee56" Name="REAL2TIME_Feed" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author="SESA371406" Date="12/28/2023" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="INIT" />
+      <Event Name="FEED_DURATION">
+        <With Var="FeedDuration" />
+      </Event>
+      <Event Name="EMERGENCY_ON">
+        <With Var="EmergencyON" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="LAST_FEED_VALUE" Comment="Execution Confirmation">
+        <With Var="MinutesSinceLastFeedV" />
+      </Event>
+      <Event Name="LAST_FEED_TIME">
+        <With Var="MinutesSinceLastFeedT" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="FeedDuration" Type="UDINT" Comment="Input event qualifier" />
+      <VarDeclaration Name="EmergencyON" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="rMinutesSinceLastFeed" Name="MinutesSinceLastFeedV" Type="REAL" InitialValue="1" />
+      <VarDeclaration ID="MinutesSinceLastFeed" Name="MinutesSinceLastFeedT" Type="TIME" Comment="Output event qualifier" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="TimeLastFeed,Initialisation" />
+    <InternalVars>
+      <VarDeclaration ID="65B62024930FC99D" Name="InValue" Type="REAL" />
+    </InternalVars>
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="1752.941" y="429.4117" />
+      <ECState Name="STATE2" Comment="Initialization" x="1731.529" y="1167.177">
+        <ECAction Algorithm="TimeLastFeed" Output="LAST_FEED_VALUE" />
+        <ECAction Output="LAST_FEED_TIME" />
+      </ECState>
+      <ECState Name="INIT" x="2680" y="428">
+        <ECAction Algorithm="Initialisation" Output="LAST_FEED_VALUE" />
+      </ECState>
+      <ECState Name="STATE3" x="380" y="1168" />
+      <ECTransition Source="START" Destination="STATE2" Condition="FEED_DURATION AND NOT EmergencyON" x="1815.887" y="785.4511">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="459.0334,168.4779,458.1304,222.1071" />
+      </ECTransition>
+      <ECTransition Source="STATE2" Destination="START" Condition="1" x="1465.225" y="794.5679">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="347.5034,224.1015,350.29,172.5614" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="INIT" Condition="INIT" x="2237.74" y="340.4768">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="530.2632,80.60117,589.0647,80.57981" />
+      </ECTransition>
+      <ECTransition Source="INIT" Destination="START" Condition="1" x="2236.378" y="517.4659">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="588.5872,133.7881,529.8326,134.0611" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="STATE3" Condition="EmergencyON" x="1021.255" y="693.0916">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="307.2438,137.576,201.9247,193.2278" />
+      </ECTransition>
+      <ECTransition Source="STATE3" Destination="START" Condition="NOT EmergencyON" x="587.753" y="560.2771">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="59.27654,152.4168,166.7107,92.90594" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="TimeLastFeed" Comment="Initialization algorithm">
+      <ST><![CDATA[;
+// Convert real to time 
+
+InValue := UDINT_TO_REAL(FeedDuration) * 1000;
+MinutesSinceLastFeedT := REAL_TO_TIME(InValue);
+MinutesSinceLastFeedV := InValue / 1000;]]></ST>
+    </Algorithm>
+    <Algorithm Name="Initialisation">
+      <ST><![CDATA[;
+MinutesSinceLastFeedV := 1.0;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

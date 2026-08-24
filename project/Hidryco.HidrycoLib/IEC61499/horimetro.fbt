@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="e6fe794e-a640-4a25-9553-ec54eb6ece2e" Name="horimetro" Format="2.0" Comment="Composite Function Block Type" Namespace="Hidryco.HidrycoLib">
+  <Attribute Name="Configuration.FB.IDCounter" Value="27" />
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="14/01/2026" Remarks="template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="INIT" Comment="Initialization Request" />
+      <Event Name="REQ" Comment="Normal Execution Request">
+        <With Var="stsLigado" />
+      </Event>
+      <Event Name="CMD_RESET_HORIMETRO" />
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="INITO" Comment="Initialization Confirm" />
+      <Event Name="CNF" Comment="Execution Confirmation">
+        <With Var="stsHorimetroSeg" />
+        <With Var="stsHorimetroMin" />
+        <With Var="stsHorimetroHor" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="stsLigado" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="stsHorimetroSeg" Type="UINT" />
+      <VarDeclaration Name="stsHorimetroMin" Type="UINT" />
+      <VarDeclaration Name="stsHorimetroHor" Type="UDINT" />
+    </OutputVars>
+  </InterfaceList>
+  <FBNetwork>
+    <FB ID="23" Name="FB1" Type="basicHorimetro" x="2000" y="1440" Namespace="Hidryco.HidrycoLib" />
+    <FB ID="27" UID="26" Name="FB2" Type="PERSISTENCE_20652AC5DB8BA8AD5" x="2220" y="460" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#I:=3;input${I}:UINT,UINT,UDINT" />
+    </FB>
+    <Input Name="INIT" x="1100" y="1452" Type="Event" />
+    <Input Name="REQ" x="1100" y="1512" Type="Event" />
+    <Input Name="stsLigado" x="1100" y="1772" Type="Data" />
+    <Input Name="CMD_RESET_HORIMETRO" x="1100" y="1572" Type="Event" />
+    <Output Name="stsHorimetroSeg" x="3380" y="1772" Type="Data" />
+    <Output Name="stsHorimetroMin" x="3380" y="1832" Type="Data" />
+    <Output Name="stsHorimetroHor" x="3380" y="1892" Type="Data" />
+    <Output Name="INITO" x="3380" y="1452" Type="Event" />
+    <Output Name="CNF" x="3380" y="1512" Type="Event" />
+    <EventConnections>
+      <Connection Source="$REQ" Destination="$23.REQ" />
+      <Connection Source="$23.CNF" Destination="$CNF" />
+      <Connection Source="$CMD_RESET_HORIMETRO" Destination="$23.CMD_RESET_HORIMETRO" dx1="40" />
+      <Connection Source="$23.INITO" Destination="$INITO" />
+      <Connection Source="$INIT" Destination="$27.INIT" dx1="41.41663" />
+      <Connection Source="$27.INITO" Destination="$27.READ" dx1="68.625" dx2="70" dy="-110" />
+      <Connection Source="$23.CNF" Destination="$27.WRITE" dx1="70" dx2="90" dy="-170" />
+      <Connection Source="$27.READCNF" Destination="$23.INIT" dx1="48.625" dx2="50" dy="710" />
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="$stsLigado" Destination="$23.STS_LIGADO" dx1="40" />
+      <Connection Source="$23.HORIMETRO_HOR" Destination="$stsHorimetroHor" />
+      <Connection Source="$23.HORIMETRO_MIN" Destination="$stsHorimetroMin" />
+      <Connection Source="$23.HORIMETRO_SEC" Destination="$stsHorimetroSeg" dx1="90" />
+      <Connection Source="$23.HORIMETRO_SEC" Destination="$27.input1" dx1="90" dx2="70" dy="-430" />
+      <Connection Source="$23.HORIMETRO_MIN" Destination="$27.input2" dx1="110" dx2="50" dy="-490" />
+      <Connection Source="$23.HORIMETRO_HOR" Destination="$27.input3" dx1="130" dx2="30" dy="-550" />
+    </DataConnections>
+  </FBNetwork>
+</FBType>

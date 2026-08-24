@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="c5b1e6e9-9889-4a79-8983-3cef5be00773" Name="SludgeBufferBasic" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="6/29/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="F33C52883B5BF08E" Name="LEVEL">
+        <With Var="HiLevel" />
+        <With Var="LoLevel" />
+        <With Var="HiHiLevelCalamity" />
+      </Event>
+      <Event ID="D7EF0B47F56F6981" Name="IN_SPEED_SP">
+        <With Var="iSpeedSp" />
+        <With Var="HiHiLevelCalamity" />
+      </Event>
+      <Event ID="0F6EAC4458D09406" Name="FB_VALVE">
+        <With Var="FbOpenValve" />
+        <With Var="FbCloseValve" />
+        <With Var="FbReadyValve" />
+        <With Var="HiHiLevelCalamity" />
+      </Event>
+      <Event ID="F0361C848F1DB519" Name="FB_PUMP">
+        <With Var="FbRunningPump" />
+        <With Var="FbStoppedPump" />
+        <With Var="FbReadyPump" />
+        <With Var="HiHiLevelCalamity" />
+      </Event>
+      <Event ID="03413E102F1BA70C" Name="HI_HI_LVL_CAL">
+        <With Var="HiHiLevelCalamity" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="A78DD0D092C36A46" Name="CMD_VALVE">
+        <With Var="CmdValve" />
+      </Event>
+      <Event ID="47032D0FEA01A8D3" Name="CMD_PUMP">
+        <With Var="CmdPump" />
+      </Event>
+      <Event ID="9D2D26E74E3AD293" Name="OUT_SPPED_SP">
+        <With Var="oSpeedSp" />
+      </Event>
+      <Event ID="675C3C7492E3F812" Name="GRAPH">
+        <With Var="Grafcet" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="5D571A857EF8756C" Name="HiLevel" Type="BOOL" />
+      <VarDeclaration ID="4CD096D395998132" Name="LoLevel" Type="BOOL" />
+      <VarDeclaration ID="722BC51AC60DAF03" Name="iSpeedSp" Type="REAL" />
+      <VarDeclaration ID="1AE2948EE51CD8D6" Name="FbOpenValve" Type="BOOL" />
+      <VarDeclaration ID="9EF0FA433F4DB571" Name="FbCloseValve" Type="BOOL" />
+      <VarDeclaration ID="C1640EBCD545530E" Name="FbReadyValve" Type="BOOL" />
+      <VarDeclaration ID="B277B09CA67DE0B1" Name="FbRunningPump" Type="BOOL" />
+      <VarDeclaration ID="333A12028563A077" Name="FbStoppedPump" Type="BOOL" />
+      <VarDeclaration ID="D3187A61B5C83721" Name="FbReadyPump" Type="BOOL" />
+      <VarDeclaration ID="E28AF42063CD3989" Name="HiHiLevelCalamity" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="7D699583214C1358" Name="CmdValve" Type="BOOL" />
+      <VarDeclaration ID="5D673CEB59E67952" Name="CmdPump" Type="BOOL" />
+      <VarDeclaration ID="9631A34F498CE5BD" Name="oSpeedSp" Type="REAL" />
+      <VarDeclaration ID="E7C2B7C9516FB68C" Name="Grafcet" Type="INT" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="OpenValve,StartPump,UpdateSpeed,StopPump,CloseValve,ValveClosed" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="1880.941" y="429.4117" />
+      <ECState Name="OpenValve" x="1886.857" y="976.5715">
+        <ECAction Algorithm="OpenValve" Output="CMD_VALVE" />
+        <ECAction Output="GRAPH" />
+      </ECState>
+      <ECState Name="StartPump" x="1893.714" y="1494.858">
+        <ECAction Algorithm="StartPump" Output="CMD_PUMP" />
+        <ECAction Output="OUT_SPPED_SP" />
+        <ECAction Output="GRAPH" />
+      </ECState>
+      <ECState Name="PumpRunning" x="1901.333" y="1982">
+        <ECAction Algorithm="UpdateSpeed" Output="OUT_SPPED_SP" />
+        <ECAction Output="GRAPH" />
+      </ECState>
+      <ECState Name="StopPump" x="1900" y="2512">
+        <ECAction Algorithm="StopPump" Output="CMD_PUMP" />
+        <ECAction Output="OUT_SPPED_SP" />
+        <ECAction Output="GRAPH" />
+      </ECState>
+      <ECState Name="CloseValve" x="1902.222" y="3022.223">
+        <ECAction Algorithm="CloseValve" Output="CMD_VALVE" />
+        <ECAction Output="GRAPH" />
+      </ECState>
+      <ECState Name="ValveClosed" x="1905" y="3541.821">
+        <ECAction Algorithm="ValveClosed" Output="CMD_VALVE" />
+        <ECAction Output="CMD_PUMP" />
+        <ECAction Output="OUT_SPPED_SP" />
+        <ECAction Output="GRAPH" />
+      </ECState>
+      <ECTransition Source="START" Destination="OpenValve" Condition="(LEVEL OR FB_VALVE OR FB_PUMP) AND&#xD;&#xA;HiLevel AND NOT LoLevel AND&#xD;&#xA;FbReadyValve AND FbReadyPump AND&#xD;&#xA;NOT HiHiLevelCalamity" x="1886.898" y="696.8087">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="471.6572,155.2371,472.0719,192.1367" />
+      </ECTransition>
+      <ECTransition Source="OpenValve" Destination="StartPump" Condition="FbOpenValve" x="1893.103" y="1219.372">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="473.1786,286.2342,473.6022,320.7279" />
+      </ECTransition>
+      <ECTransition Source="StartPump" Destination="PumpRunning" Condition="FbRunningPump" x="1900.369" y="1733.307">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="474.9536,416.9507,475.4716,448.8489" />
+      </ECTransition>
+      <ECTransition Source="PumpRunning" Destination="PumpRunning" Condition="IN_SPEED_SP AND iSpeedSp &lt;&gt; oSpeedSp" x="1426.992" y="1997.364">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="332.2243,546.8714,329.7243,454.3714" />
+      </ECTransition>
+      <ECTransition Source="PumpRunning" Destination="StopPump" Condition="LoLevel" x="1903.705" y="2232.664">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="476.0984,539.2361,476.025,574.7062" />
+      </ECTransition>
+      <ECTransition Source="StopPump" Destination="CloseValve" Condition="FbStoppedPump OR NOT FbReadyPump" x="1901.064" y="2749.143">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="475.2141,668.8776,475.3079,702.6991" />
+      </ECTransition>
+      <ECTransition Source="CloseValve" Destination="ValveClosed" Condition="FbCloseValve OR NOT FbReadyValve" x="1909.536" y="3270.508">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="477.6911,799.3659,477.8332,833.9689" />
+      </ECTransition>
+      <ECTransition Source="ValveClosed" Destination="START" Condition="1" x="312.3534" y="1999.878">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="-44.1107,626.493,-46.04839,375.8226" />
+      </ECTransition>
+      <ECTransition Source="StartPump" Destination="StopPump" Condition="LoLevel OR HiHiLevelCalamity OR NOT FbReadyValve OR NOT FbReadyPump" x="1004.933" y="1995.102">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="190.3964,460.0874,190.8665,536.1527" />
+      </ECTransition>
+      <ECTransition Source="OpenValve" Destination="StopPump" Condition="LoLevel OR HiHiLevelCalamity OR NOT FbReadyValve OR NOT FbReadyPump" x="586.8408" y="2001.08">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="48.50577,460.6518,49.52658,579.9074" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="OpenValve">
+      <ST><![CDATA[;
+CmdValve := TRUE;
+Grafcet := 1;]]></ST>
+    </Algorithm>
+    <Algorithm Name="StartPump">
+      <ST><![CDATA[;
+CmdPump := TRUE;
+oSpeedSp := iSpeedSp;
+Grafcet := 2;]]></ST>
+    </Algorithm>
+    <Algorithm Name="UpdateSpeed">
+      <ST><![CDATA[;
+oSpeedSp := iSpeedSp;
+Grafcet := 3;]]></ST>
+    </Algorithm>
+    <Algorithm Name="StopPump">
+      <ST><![CDATA[;
+CmdPump := FALSE;
+oSpeedSp := 0;
+Grafcet := 4;]]></ST>
+    </Algorithm>
+    <Algorithm Name="CloseValve">
+      <ST><![CDATA[;
+CmdValve := FALSE;
+Grafcet := 5;]]></ST>
+    </Algorithm>
+    <Algorithm Name="ValveClosed">
+      <ST><![CDATA[;
+CmdValve := FALSE;
+CmdPump := FALSE;
+oSpeedSp := 0;
+Grafcet := 6;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

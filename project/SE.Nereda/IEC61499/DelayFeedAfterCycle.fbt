@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="776374a7-3b49-4717-80e1-00f9fccd8024" Name="DelayFeedAfterCycle" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="7/7/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="11AA3605FDEFF95B" Name="REQ" Comment="Normal Execution Request">
+        <With Var="CT_reactor_actual" />
+        <With Var="ElapsedCycleTime" />
+      </Event>
+      <Event ID="A2E7E8EBAC3E88BD" Name="START_IN" />
+      <Event ID="5BC14FF9EEE51C90" Name="STOP_IN" />
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="6EE07F52BA17A15C" Name="CNF" Comment="Execution Confirmation">
+        <With Var="DelayFeedAfterCycle" />
+      </Event>
+      <Event ID="186BA1549A2AFE3F" Name="START_OUT">
+        <With Var="DelayFeedAfterCycle" />
+      </Event>
+      <Event ID="BF02A56838C7F9DA" Name="STOP_OUT">
+        <With Var="DelayFeedAfterCycle" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="EFD75DD9E4480893" Name="CT_reactor_actual" Type="REAL" Comment="Input event qualifier" />
+      <VarDeclaration ID="FD8FA55805B713A9" Name="ElapsedCycleTime" Type="REAL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="1C8F9C3EF50D420C" Name="DelayFeedAfterCycle" Type="REAL" Comment="Output event qualifier" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="REQ" />
+    <InternalVars>
+      <VarDeclaration ID="59BD2FA4D6308215" Name="InDelayFeedAfterCycle" Type="REAL" />
+    </InternalVars>
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="1396.941" y="509.4117" />
+      <ECState Name="REQ" Comment="Normal execution" x="1397.647" y="1328.941">
+        <ECAction Algorithm="REQ" Output="CNF" />
+      </ECState>
+      <ECState Name="Start" x="2420" y="1320">
+        <ECAction Output="START_OUT" />
+      </ECState>
+      <ECState Name="Stop" x="2456" y="492">
+        <ECAction Output="STOP_OUT" />
+      </ECState>
+      <ECTransition Source="START" Destination="REQ" Condition="REQ OR START_IN" x="1601.353" y="937.564">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="412.6742,206.1918,414.2762,265.6548" />
+      </ECTransition>
+      <ECTransition Source="REQ" Destination="START" Condition="NOT START_IN" x="1175.944" y="941.585">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="280.22,266.0117,279.1584,208.5156" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="Stop" Condition="STOP_IN" x="1968.644" y="378.8883">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="459.6088,88.72576,529.0291,87.55632" />
+      </ECTransition>
+      <ECTransition Source="Stop" Destination="START" Condition="1" x="1943.98" y="582.6324">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="520.7974,149.5349,451.3979,150.6759" />
+      </ECTransition>
+      <ECTransition Source="REQ" Destination="Start" Condition="START_IN" x="1901.309" y="1474.867">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="440.2958,377.4801,508.9835,376.8794" />
+      </ECTransition>
+      <ECTransition Source="Start" Destination="START" Condition="1" x="1971.933" y="976.549">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="535.7151,278.6653,461.4269,219.9163" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="REQ" Comment="Normally executed algorithm">
+      <ST><![CDATA[;
+InDelayFeedAfterCycle := (CT_reactor_actual - ElapsedCycleTime);
+
+IF InDelayFeedAfterCycle > 0 THEN
+	DelayFeedAfterCycle := InDelayFeedAfterCycle;
+ELSE
+	DelayFeedAfterCycle := 0;
+END_IF;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

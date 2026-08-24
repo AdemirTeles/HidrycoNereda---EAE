@@ -1,0 +1,84 @@
+﻿/*
+ * Criado pelo EcoStruxure Automation Expert.
+ * Usuário:  
+ * Data: 27/05/2026
+ * Tempo: 11:45
+ * 
+ */
+using System;
+using System.ComponentModel;
+using System.Collections;
+using System.Diagnostics;
+using NxtControl.GuiFramework;
+
+namespace Hidryco.HidrycoLib.Graphics
+{
+	/// <summary>
+	/// Summary description for Valvula_Vertical.
+	/// </summary>
+	partial class Valvula_Vertical
+	{
+		#region Component Designer generated code
+		/// <summary>
+		/// Required method for Designer support - do not modify
+		/// the contents of this method with the code editor.
+		/// </summary>
+		private void InitializeComponent()
+		{
+			this.vlv_1 = new NxtControl.GuiFramework.Polygon();
+			this.vlv_2 = new NxtControl.GuiFramework.Polygon();
+			this.line1 = new NxtControl.GuiFramework.Line();
+			this.vlv_3 = new NxtControl.GuiFramework.Rectangle();
+			// 
+			// vlv_1
+			// 
+			this.vlv_1.Bounds = new NxtControl.Drawing.RectF(((float)(67D)), ((float)(51D)), ((float)(15D)), ((float)(15D)));
+			this.vlv_1.Closed = true;
+			this.vlv_1.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
+			this.vlv_1.Name = "vlv_1";
+			this.vlv_1.Points.AddRange(new NxtControl.Drawing.PointF[] {
+			new NxtControl.Drawing.PointF(67D, 66D),
+			new NxtControl.Drawing.PointF(82D, 66D),
+			new NxtControl.Drawing.PointF(75D, 51D)});
+			// 
+			// vlv_2
+			// 
+			this.vlv_2.Bounds = new NxtControl.Drawing.RectF(((float)(67D)), ((float)(36D)), ((float)(15D)), ((float)(15D)));
+			this.vlv_2.Closed = true;
+			this.vlv_2.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
+			this.vlv_2.Name = "vlv_2";
+			this.vlv_2.Points.AddRange(new NxtControl.Drawing.PointF[] {
+			new NxtControl.Drawing.PointF(67D, 36D),
+			new NxtControl.Drawing.PointF(82D, 36D),
+			new NxtControl.Drawing.PointF(75D, 51D)});
+			// 
+			// line1
+			// 
+			this.line1.EndPoint = new NxtControl.Drawing.PointF(59D, 51D);
+			this.line1.Name = "line1";
+			this.line1.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.line1.StartPoint = new NxtControl.Drawing.PointF(75D, 51D);
+			// 
+			// vlv_3
+			// 
+			this.vlv_3.Bounds = new NxtControl.Drawing.RectF(((float)(48D)), ((float)(40D)), ((float)(11.666666030883789D)), ((float)(22.5D)));
+			this.vlv_3.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
+			this.vlv_3.Name = "vlv_3";
+			// 
+			// Valvula_Vertical
+			// 
+			this.Shapes.AddRange(new System.ComponentModel.IComponent[] {
+			this.vlv_1,
+			this.vlv_2,
+			this.line1,
+			this.vlv_3});
+			this.SymbolSize = new System.Drawing.Size(200, 136);
+
+		}
+		private NxtControl.GuiFramework.Polygon vlv_1;
+		private NxtControl.GuiFramework.Polygon vlv_2;
+		private NxtControl.GuiFramework.Line line1;
+		private NxtControl.GuiFramework.Rectangle vlv_3;
+		#endregion
+	}
+}

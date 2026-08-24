@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="5dd8dac4-6257-4c9d-ba03-a31e4ff7c825" Name="DIN2TIME" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author="SESA713705" Date="5/23/2024" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="REQ" Comment="Normal Execution Request">
+        <With Var="QI" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="CNF" Comment="Execution Confirmation">
+        <With Var="QO" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="QI" Type="DINT" Comment="Input event qualifier" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="QO" Type="TIME" Comment="Output event qualifier" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="REQ" />
+    <InternalVars>
+      <VarDeclaration Name="Minutes" Type="REAL" />
+    </InternalVars>
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="680.9412" y="609.4117" />
+      <ECState Name="REQ" Comment="Normal execution" x="1193.647" y="1032.941">
+        <ECAction Algorithm="REQ" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="REQ" Condition="REQ" x="997.9827" y="760.5542">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="234.1863,172.1284,266.4821,199.0588" />
+      </ECTransition>
+      <ECTransition Source="REQ" Destination="START" Condition="1" x="929.6631" y="898.8933">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="250.4221,243.5926,218.2249,216.9956" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="REQ" Comment="Normally executed algorithm">
+      <ST><![CDATA[;
+
+QO := DINT_TO_TIME(QI * 1000 * 60);
+]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

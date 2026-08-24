@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="6cd109d1-5180-4a0c-9e49-a3f6b597763d" Name="contadorTempoRestante" Comment="Basic Function Block Type" Namespace="Hidryco.HidrycoLib">
+  <Identification Standard="61499-2" />
+  <VersionInfo Version="0.0" Author=" " Date="25/02/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="E_PULSO_1S" />
+      <Event Name="E_ATUALIZA_SETPOINT">
+        <With Var="stpTempo" />
+      </Event>
+      <Event Name="E_ZERAR" />
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="E_ATUALIZA_TEMPO_RESTANTE">
+        <With Var="stsTempoRestanteSegundo" />
+        <With Var="stsTempoRestanteMinuto" />
+        <With Var="stsTempoRestanteHora" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="stpTempo" Type="TIME" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="stsTempoRestanteSegundo" Type="UINT" />
+      <VarDeclaration Name="stsTempoRestanteMinuto" Type="UINT" />
+      <VarDeclaration Name="stsTempoRestanteHora" Type="UINT" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="INIT,REQ,IncrementaSeg,SetTempoRestante,ZerarContadores" />
+    <InternalVars>
+      <VarDeclaration Name="tempoAtual" Type="UINT" />
+      <VarDeclaration Name="tempoAtualSegundos" Type="UINT" />
+      <VarDeclaration Name="tempoAtualMinutos" Type="UINT" />
+      <VarDeclaration Name="tempoAtualHoras" Type="UINT" />
+      <VarDeclaration Name="totalSec" Type="LINT" />
+      <VarDeclaration Name="restanteSec" Type="UDINT" />
+      <VarDeclaration Name="rU" Type="UDINT" />
+    </InternalVars>
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="1348.941" y="621.4117" />
+      <ECState Name="STATE1" x="2272" y="943.9999">
+        <ECAction Algorithm="IncrementaSeg" />
+      </ECState>
+      <ECState Name="STATE2" x="1616" y="1388">
+        <ECAction Algorithm="SetTempoRestante" Output="E_ATUALIZA_TEMPO_RESTANTE" />
+      </ECState>
+      <ECState Name="STATE3" x="2024" y="300">
+        <ECAction Algorithm="ZerarContadores" Output="E_ATUALIZA_TEMPO_RESTANTE" />
+      </ECState>
+      <ECTransition Source="START" Destination="STATE1" Condition="E_PULSO_1S" x="1824.286" y="706.4011">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="429.1712,163.1116,481.32,180.8099" />
+      </ECTransition>
+      <ECTransition Source="STATE1" Destination="STATE2" Condition="1" x="1998.936" y="1229.728">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="520.9213,298.0522,479.1043,326.3551" />
+      </ECTransition>
+      <ECTransition Source="STATE2" Destination="START" Condition="1" x="1480.547" y="1079.706">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="380.2302,303.7691,361.0051,248.5838" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="STATE3" Condition="E_ZERAR" x="1676.223" y="380.8569">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="402.6233,99.22009,440.6119,81.13283" />
+      </ECTransition>
+      <ECTransition Source="STATE3" Destination="START" Condition="1" x="1728.251" y="533.1262">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="451.359,128.705,413.3704,146.7922" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="INIT" Comment="Initialization algorithm">
+      <ST><![CDATA[;]]></ST>
+    </Algorithm>
+    <Algorithm Name="REQ" Comment="Normally executed algorithm">
+      <ST><![CDATA[;]]></ST>
+    </Algorithm>
+    <Algorithm Name="IncrementaSeg">
+      <ST><![CDATA[tempoAtual := tempoAtual + 1;
+
+tempoAtualHoras := tempoAtual / 3600;
+tempoAtualMinutos := (tempoAtual MOD 3600) / 60;
+tempoAtualSegundos := tempoAtual MOD 60;
+;]]></ST>
+    </Algorithm>
+    <Algorithm Name="SetTempoRestante">
+      <ST><![CDATA[
+totalSec := TIME_TO_LINT(stpTempo) / 1000;
+
+IF UINT_TO_UDINT(tempoAtual) >= LINT_TO_UDINT(totalSec) THEN
+    restanteSec := 0;
+ELSE
+    restanteSec := LINT_TO_UDINT(totalSec) - tempoAtual;
+END_IF;
+
+stsTempoRestanteHora    := UDINT_TO_UINT(restanteSec / 3600);
+stsTempoRestanteMinuto  := UDINT_TO_UINT((restanteSec MOD 3600) / 60);
+stsTempoRestanteSegundo := UDINT_TO_UINT(restanteSec MOD 60);
+]]></ST>
+    </Algorithm>
+    <Algorithm Name="ZerarContadores">
+      <ST><![CDATA[
+tempoAtual := 0;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="4af293a6-1027-43b3-b74a-de7d9e50d209" Name="AnalogInputBase" Format="2.0" Comment="Composite Function Block Type" Namespace="SE.Nereda">
+  <Attribute Name="HMI.Alias" Value="" />
+  <Attribute Name="Configuration.FB.IDCounter" Value="78" />
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="1.0.1" Author="ApplicationLibDevTeam" Date="1/16/2024" Remarks="First Version" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="REQ_PV" Comment="Request input value">
+        <With Var="RawPvIn" />
+        <With Var="SuppressAlarm" />
+      </Event>
+      <Event Name="REQ_SUPPRESS" Comment="Request to suppress the channel failure alarm">
+        <With Var="SuppressAlarm" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="CNF_PV" Comment="Execution confirmation of Pv">
+        <With Var="Pv" />
+        <With Var="PvMin" />
+        <With Var="PvMax" />
+        <With Var="OverrideStatus" />
+      </Event>
+      <Event Name="CNF_ALM" Comment="Execution confirmation of alarm">
+        <With Var="ChFailAlarm" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="RawPvIn" Type="VTQREAL" Comment="Unscaled analog signal" />
+      <VarDeclaration Name="SuppressAlarm" Type="BOOL" Comment="1 = Suppress channel failure in HMI" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="Pv" Type="VTQREAL" Comment="Scaled process signal" />
+      <VarDeclaration Name="PvMin" Type="REAL" Comment="Minimum pv measurement range (in engineering units)" />
+      <VarDeclaration Name="PvMax" Type="REAL" Comment="Maximun pv measurement range (in engineering units)" />
+      <VarDeclaration Name="ChFailAlarm" Type="BOOL" Comment="1 = Alarm condition is true with considering the suppress status" />
+      <VarDeclaration ID="BCEE37427EBF3A7A" Name="OverrideStatus" Type="BOOL" Comment="1 = Signal is forced from HwCat based on quality code" />
+    </OutputVars>
+  </InterfaceList>
+  <FBNetwork>
+    <FB ID="30" Name="plcStart" Type="plcStart" x="1020" y="460" Namespace="SE.App2Base">
+      <Parameter Name="$Delay" Value="T#0ms" />
+      <Parameter Name="$Prio" Value="16" />
+    </FB>
+    <FB ID="35" Name="IThis" Type="AnalogInputBase_HMI" x="3680" y="460" Namespace="SE.Nereda">
+      <Attribute Name="Configuration.Component.HideUnusedPorts" Value="" />
+      <Parameter Name="$3CCB69177D5CA909" Value="TRUE" />
+    </FB>
+    <FB ID="36" Name="control" Type="analogInputLogic" x="3780" y="2680" Namespace="SE.App2CommonProcess" />
+    <FB ID="78" Name="chFailAlarm" Type="stateAlarmBasic" x="6280" y="739.9999" Namespace="SE.App2Base">
+      <Attribute Name="HMI.AlarmText" Value="$key:SE.App2CommonProcess.TxtSignalFail" Context="alarmBit.IND_1" />
+      <Parameter Name="$ScanTime" Value="1" />
+      <Parameter Name="$AlarmState" Value="TRUE" />
+    </FB>
+    <Input Name="RawPvIn" x="3020" y="3072" Type="Data" />
+    <Input Name="REQ_PV" x="3020" y="2692" Type="Event" />
+    <Input Name="SuppressAlarm" x="2980" y="4210" Type="Data" />
+    <Input Name="REQ_SUPPRESS" x="3020" y="2866" Type="Event" />
+    <Frame Name="FRAME1" X="200" Y="180" Width="2400" Height="980">
+      <Parameter Name="BackgroundColor" Value="Cornsilk" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 20.25pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="Initialization" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME2" X="2800" Y="180" Width="2640" Height="1920">
+      <Parameter Name="BackgroundColor" Value="AliceBlue" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 20.25pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="HMI" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME10" X="2800" Y="2300" Width="2640" Height="2200">
+      <Parameter Name="BackgroundColor" Value="AliceBlue" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 20.25pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="Analog Input Core" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME4" X="5640" Y="180" Width="2180" Height="1920">
+      <Parameter Name="BackgroundColor" Value="MistyRose" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 20.25pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="Alarm management" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Output ID="BCEE37427EBF3A7A" Name="OverrideStatus" x="4742.719" y="3252" Type="Data" />
+    <Output Name="ChFailAlarm" x="7060" y="1252" Type="Data" />
+    <Output Name="CNF_ALM" x="7060" y="932" Type="Event" />
+    <Output Name="PvMin" x="4860" y="971.9998" Type="Data" />
+    <Output Name="PvMax" x="4860" y="1032" Type="Data" />
+    <Output Name="CNF_PV" x="4820" y="2692" Type="Event" />
+    <Output Name="Pv" x="4840" y="3072" Type="Data" />
+    <EventConnections>
+      <Connection Source="$REQ_PV" Destination="$36.REQ_PV">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$36.CNF" Destination="$78.REQ">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$78.INITO" Destination="$30.ACK_FIRST">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$REQ_SUPPRESS" Destination="$36.REQ_SUPPRESS" dx1="76.8125">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$78.INITO" Destination="$78.REQ_PARA">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$REQ_SUPPRESS" Destination="$78.REQ_SUPRESS" dx1="873.625">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$36.CNF" Destination="$CNF_PV">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$78.CNF_ALM" Destination="$CNF_ALM">
+        <Points>
+          <Points>
+            <X>1763.13538</X>
+            <Y>239.999969</Y>
+          </Points>
+          <Points>
+            <X>1765</X>
+            <Y>239.999969</Y>
+          </Points>
+          <Points>
+            <X>1765</X>
+            <Y>240</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$30.FIRST_INIT" Destination="$35.A6472C3F23A208E2">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$35.751D75BD7441CB08" Destination="$35.27F16F7AE1B22E30">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$78.CNF_ALM" Destination="$35.3660C53BE30149EB">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$78.CNF" Destination="$35.3660C53BE30149EB">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$36.CNF" Destination="$35.3070A2342EE17C2B">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$35.751D75BD7441CB08" Destination="$78.INIT">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$35.2886E7A2DEFD0865" Destination="$36.REQ_PARA">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$35.E65C45AA2DF89F67" Destination="$36.REQ_SIM">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$35.E65C45AA2DF89F67" Destination="$36.811CA21B81AE1D59">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="$36.Pv" Destination="$Pv" dx1="158.4063">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$RawPvIn" Destination="$36.RawPvIn" dx1="44.45825">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$36.Bad" Destination="$78.Input">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$SuppressAlarm" Destination="$78.Suppress">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <Points>
+          <Points>
+            <X>905.4166</X>
+            <Y>1059.5</Y>
+          </Points>
+          <Points>
+            <X>917.5</X>
+            <Y>1059.5</Y>
+          </Points>
+          <Points>
+            <X>917.5</X>
+            <Y>669.5</Y>
+          </Points>
+          <Points>
+            <X>1122.5</X>
+            <Y>669.5</Y>
+          </Points>
+          <Points>
+            <X>1122.5</X>
+            <Y>342</Y>
+          </Points>
+          <Points>
+            <X>1620</X>
+            <Y>342</Y>
+          </Points>
+        </Points>
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$SuppressAlarm" Destination="$36.SuppressAlarm" dx1="129.1667">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$78.AlarmStatus" Destination="$ChFailAlarm" dx1="57.4585" />
+      <Connection Source="$36.OverrideStatus" Destination="$BCEE37427EBF3A7A" dx1="136.8125" />
+      <Connection Source="$36.Pv" Destination="$35.68EEAD6079DEEFE0">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$36.ScaledOut" Destination="$35.ED035BF793E251C7">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$78.AlarmStatus" Destination="$35.A260CB1FEE42A258">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$78.Suppressed" Destination="$35.BE4341E65CD3CF2E">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$35.5755B496481F77DF" Destination="$36.RawPvMin">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$35.96B142B2A92B45CF" Destination="$36.RawPvMax">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$35.D2F7CCE02EAF5291" Destination="$PvMin" dx1="252.5313">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$35.D2F7CCE02EAF5291" Destination="$36.PvMin">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$35.8FFB9213610860C1" Destination="$PvMax">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$35.8FFB9213610860C1" Destination="$36.PvMax">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$35.CC5A9FA114144AA6" Destination="$36.EnScale">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$35.DED953899C2CCD91" Destination="$36.UseLimits">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$35.BECBF433BD9EED60" Destination="$36.PvCutOff">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$35.7DE032517A417D96" Destination="$36.PvOffset">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$35.F95D2896C5299A79" Destination="$36.Pt1Ftime">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$35.F08DA5464300AC18" Destination="$36.Pt1CycleTime">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$35.5C878BDA8E51F78C" Destination="$36.Over">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$35.5035AD8DA19FFF29" Destination="$36.OverrideVal">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$35.52E3A8B81912C4BE" Destination="$36.BadPvSel">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$35.A622FB3BB93D5C0F" Destination="$36.BadPv">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$35.FAE27BE0B33BE913" Destination="$36.SmoothType">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$35.376941CF4DFB5636" Destination="$36.TimeDiff">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$35.EF464E2F0FF437F9" Destination="$36.ValueDiff">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$35.26B67A50E731E659" Destination="$78.AckType">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+    </DataConnections>
+  </FBNetwork>
+</FBType>

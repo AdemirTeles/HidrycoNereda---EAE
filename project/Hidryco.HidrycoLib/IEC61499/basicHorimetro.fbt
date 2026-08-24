@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="e723e41f-24b0-4cff-bac1-709938aa4143" Name="basicHorimetro" Comment="Basic Function Block Type" Namespace="Hidryco.HidrycoLib">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="13/01/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="INIT" Comment="Initialization Request" />
+      <Event Name="REQ" Comment="Pulso 1S">
+        <With Var="STS_LIGADO" />
+      </Event>
+      <Event Name="CMD_RESET_HORIMETRO" />
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="INITO" Comment="Initialization Confirm" />
+      <Event Name="CNF" Comment="Execution Confirmation">
+        <With Var="HORIMETRO_SEC" />
+        <With Var="HORIMETRO_MIN" />
+        <With Var="HORIMETRO_HOR" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="STS_LIGADO" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="HORIMETRO_SEC" Type="UINT" />
+      <VarDeclaration Name="HORIMETRO_MIN" Type="UINT" />
+      <VarDeclaration Name="HORIMETRO_HOR" Type="UDINT" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="INIT,REQ,LogicaHorimetro,ResetHorimetro" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="2296.941" y="565.4117" />
+      <ECState Name="INIT" Comment="Initialization" x="2975.53" y="773.1765">
+        <ECAction Algorithm="INIT" Output="INITO" />
+      </ECState>
+      <ECState Name="CmdAcrescimo" x="2420" y="1328">
+        <ECAction Algorithm="LogicaHorimetro" Output="CNF" />
+      </ECState>
+      <ECState Name="CmdResetHorimetro" x="752" y="840">
+        <ECAction Algorithm="ResetHorimetro" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="INIT" Condition="INIT" x="2680.022" y="594.8228">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="651.9744,139.0089,690.0424,150.6643" />
+      </ECTransition>
+      <ECTransition Source="INIT" Destination="START" Condition="1" x="2648.447" y="756.2546">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="682.7233,199.5689,644.6555,187.9136" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="CmdAcrescimo" Condition="REQ AND (STS_LIGADO)" x="2494.889" y="916.4489">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="627.1974,198.5047,637.194,254.6769" />
+      </ECTransition>
+      <ECTransition Source="CmdAcrescimo" Destination="START" Condition="1" x="2322.792" y="1030.532">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="583.8797,292.844,573.989,236.3931" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="CmdResetHorimetro" Condition="CMD_RESET_HORIMETRO" x="1442.58" y="776.2808">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="403.558,190.7326,291.1029,207.2569" />
+      </ECTransition>
+      <ECTransition Source="CmdResetHorimetro" Destination="START" Condition="1" x="1627.605" y="615.4225">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="364.7112,156.8602,462.7432,140.742" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="INIT" Comment="Initialization algorithm">
+      <ST><![CDATA[;]]></ST>
+    </Algorithm>
+    <Algorithm Name="REQ" Comment="Normally executed algorithm">
+      <ST><![CDATA[;]]></ST>
+    </Algorithm>
+    <Algorithm Name="LogicaHorimetro">
+      <ST><![CDATA[// Incrementa segundos se houver pulso de 1 segundo e o equipamento estiver ligado
+HORIMETRO_SEC := HORIMETRO_SEC + 1;
+
+// Incrementa minutos e reseta segundos se os segundos ultrapassarem 59
+IF (HORIMETRO_SEC > 59) THEN 
+	HORIMETRO_MIN := HORIMETRO_MIN + 1;
+	HORIMETRO_SEC := 0;
+END_IF;
+
+// Incrementa horas e reseta minutos se os minutos ultrapassarem 59
+IF (HORIMETRO_MIN > 59) THEN 
+    HORIMETRO_HOR := HORIMETRO_HOR + 1;
+    HORIMETRO_MIN := 0;
+END_IF;
+]]></ST>
+    </Algorithm>
+    <Algorithm Name="ResetHorimetro">
+      <ST><![CDATA[HORIMETRO_SEC := 0;
+HORIMETRO_MIN := 0;
+HORIMETRO_HOR := 0;
+;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

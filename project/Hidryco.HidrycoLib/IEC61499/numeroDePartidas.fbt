@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="14862b3e-aec7-4191-a14d-212d1e79149f" Name="numeroDePartidas" Comment="Basic Function Block Type" Namespace="Hidryco.HidrycoLib">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="14/01/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="INIT" Comment="Initialization Request">
+        <With Var="persistentNumeroPartida" />
+      </Event>
+      <Event Name="REQ" Comment="Normal Execution Request">
+        <With Var="stsLigado" />
+      </Event>
+      <Event Name="E_RESET_NUMERO_PARTIDA" />
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="INITO" Comment="Initialization Confirm" />
+      <Event Name="CNF" Comment="Execution Confirmation">
+        <With Var="stsNumeroPartida" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="stsLigado" Type="BOOL" />
+      <VarDeclaration Name="persistentNumeroPartida" Type="UINT" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="stsNumeroPartida" Type="UINT" Comment="Output event qualifier" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="INIT,REQ,LogicaNumeroPartida,ResetNumeroPartida" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="2776.941" y="905.4116" />
+      <ECState Name="INIT" Comment="Initialization" x="3147.53" y="617.1763">
+        <ECAction Algorithm="INIT" Output="INITO" />
+      </ECState>
+      <ECState Name="REQ" Comment="Normal execution" x="3217.647" y="1340.941">
+        <ECAction Algorithm="REQ" Output="CNF" />
+      </ECState>
+      <ECState Name="CmdAcrescimo" x="1572" y="1308">
+        <ECAction Algorithm="LogicaNumeroPartida" Output="CNF" />
+      </ECState>
+      <ECState Name="CmdResetNumeroPartida" x="1812" y="400">
+        <ECAction Algorithm="ResetNumeroPartida" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="INIT" Condition="INIT" x="2955.148" y="680.8373" />
+      <ECTransition Source="INIT" Destination="START" Condition="1" x="3021.593" y="824.3231" />
+      <ECTransition Source="START" Destination="REQ" Condition="REQ" x="3063.56" y="1069.608">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="752.934,249.2138,780.8591,276.8109" />
+      </ECTransition>
+      <ECTransition Source="REQ" Destination="START" Condition="1" x="2988.907" y="1199.955">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="763.2861,319.5927,735.361,291.9956" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="CmdAcrescimo" Condition="stsLigado" x="2174.276" y="1177.733">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="574.7572,288.0769,502.1888,311.0008" />
+      </ECTransition>
+      <ECTransition Source="CmdAcrescimo" Destination="START" Condition="1" x="2231.993" y="1018.062">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="529.7733,259.7058,597.7564,237.6382" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="CmdResetNumeroPartida" Condition="E_RESET_NUMERO_PARTIDA" x="2270.684" y="729.1907">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="598.1343,203.6497,538.8353,171.8923" />
+      </ECTransition>
+      <ECTransition Source="CmdResetNumeroPartida" Destination="START" Condition="1" x="2320.139" y="587.6749">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="542.0934,124.1757,611.5532,158.8233" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="INIT" Comment="Initialization algorithm">
+      <ST><![CDATA[stsNumeroPartida := persistentNumeroPartida;
+;]]></ST>
+    </Algorithm>
+    <Algorithm Name="REQ" Comment="Normally executed algorithm">
+      <ST><![CDATA[;]]></ST>
+    </Algorithm>
+    <Algorithm Name="LogicaNumeroPartida">
+      <ST><![CDATA[stsNumeroPartida := stsNumeroPartida + 1;
+;]]></ST>
+    </Algorithm>
+    <Algorithm Name="ResetNumeroPartida">
+      <ST><![CDATA[
+stsNumeroPartida  := 0;
+;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

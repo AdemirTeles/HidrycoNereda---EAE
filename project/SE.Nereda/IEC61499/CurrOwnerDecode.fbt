@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="16a15942-c53c-418c-ac84-1ee86477c7b2" Name="CurrOwnerDecode" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="6/3/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="3D8B91432EBB5812" Name="REQ" Comment="Normal Execution Request">
+        <With Var="CurrOwner" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="7B1DE71047870DF3" Name="CNF" Comment="Execution Confirmation">
+        <With Var="Prog" />
+        <With Var="Oper" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="B2DAC483AB345195" Name="CurrOwner" Type="WORD" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="CEBE936F1EA616DB" Name="Prog" Type="BOOL" />
+      <VarDeclaration ID="1FF13EB8D921FC26" Name="Oper" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="REQ" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="552.9412" y="429.4117" />
+      <ECState Name="REQ" Comment="Normal execution" x="1133.647" y="900.9412">
+        <ECAction Algorithm="REQ" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="REQ" Condition="REQ" x="902.8168" y="606.0708">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="207.7417,131.5879,245.4231,162.185" />
+      </ECTransition>
+      <ECTransition Source="REQ" Destination="START" Condition="1" x="835.9281" y="742.3729">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="229.6642,206.5927,191.9828,175.9956" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="REQ" Comment="Normally executed algorithm">
+      <ST><![CDATA[;
+IF CurrOwner = 16#8 OR CurrOwner = 16#4 THEN
+	Prog := TRUE;
+	Oper := FALSE;
+ELSIF CurrOwner = 16#10 OR CurrOwner = 16#40 THEN
+	Prog := FALSE;
+	Oper := TRUE;
+END_IF;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

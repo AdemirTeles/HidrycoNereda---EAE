@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="d4cb1e4a-9faf-485e-8466-e9b9d3a4c68e" Name="Sensor_Comunicacao" Format="2.0" Comment="Composite Function Block Type" Namespace="Hidryco.HidrycoLib">
+  <Attribute Name="HMI.Alias" Value="" />
+  <Attribute Name="Configuration.FB.IDCounter" Value="11" />
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="20/01/2026" Remarks="template" />
+  <InterfaceList>
+    <EventOutputs>
+      <Event Name="E_ATUALIZA_SENSOR">
+        <With Var="stsSensor" />
+      </Event>
+      <Event Name="E_ATUALIZA_FALHA_SENSOR">
+        <With Var="stsFalhaSensor" />
+      </Event>
+      <Event Name="E_ATUALIZA_SENSOR_HABILITADO">
+        <With Var="stsSensorHabilitado" />
+      </Event>
+    </EventOutputs>
+    <OutputVars>
+      <VarDeclaration Name="stsSensor" Type="REAL" />
+      <VarDeclaration Name="stsFalhaSensor" Type="BOOL" />
+      <VarDeclaration Name="stsSensorHabilitado" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <FBNetwork>
+    <FB ID="1" Name="FB1" Type="alarmeHH_H_L_LL" x="4120" y="1440" Namespace="Hidryco.HidrycoLib">
+      <Parameter Name="$modoAlarme" Value="1" />
+    </FB>
+    <FB ID="3" Name="IThis" Type="Sensor_Comunicacao_HMI" x="2500" y="1380" Namespace="Hidryco.HidrycoLib">
+      <Parameter Name="$56B60EFB714CEFFB" Value="TRUE" />
+    </FB>
+    <FB ID="6EC9191139E0E5E3" UID="4" Name="SYMLINKMULTIVARDST1" Type="SYMLINKMULTIVARDST_206FDD7447CBB09E6" x="959.9999" y="1220" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=3;VALUE${I}:INT,REAL,BOOL" />
+      <Parameter Name="$QI" Value="TRUE" />
+      <Parameter Name="$NAME1" Value="'$${PATH}stsFalhaSensor'" />
+      <Parameter Name="$NAME2" Value="'$${PATH}stsEntrada'" />
+      <Parameter Name="$NAME3" Value="'$${PATH}stsFalhaComunicacao'" />
+    </FB>
+    <FB ID="6" Name="plcStart1" Type="plcStart" x="180" y="980" Namespace="SE.App2Base">
+      <Parameter Name="$Prio" Value="5" />
+    </FB>
+    <FB ID="10" UID="7" Name="ANY2ANY1" Type="ANY2ANY_210C58BFC8D6B68B4" x="1340" y="2100" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNT:=1;IN${CNT}:INT;OUT${CNT}:BOOL" />
+    </FB>
+    <FB ID="8" Name="NOT1" Type="NOT_12669C4E53BA46410" x="1840" y="2100" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNT:=1" />
+    </FB>
+    <Output Name="E_ATUALIZA_SENSOR_HABILITADO" x="4320" y="1112" Type="Event" />
+    <Output Name="stsSensorHabilitado" x="4320" y="1172" Type="Data" />
+    <Output Name="E_ATUALIZA_FALHA_SENSOR" x="2460" y="2792" Type="Event" />
+    <Output Name="stsFalhaSensor" x="2460" y="2872" Type="Data" />
+    <Output Name="stsSensor" x="1900" y="1132" Type="Data" />
+    <Output Name="E_ATUALIZA_SENSOR" x="1900" y="1052" Type="Event" />
+    <EventConnections>
+      <Connection Source="$10.CNF" Destination="$8.REQ" />
+      <Connection Source="$8.CNF" Destination="$E_ATUALIZA_FALHA_SENSOR" dx1="63.75" />
+      <Connection Source="$6.FIRST_INIT" Destination="$6EC9191139E0E5E3.INIT" dx1="68.08337" />
+      <Connection Source="$6.REDO_INIT" Destination="$6EC9191139E0E5E3.INIT" dx1="48.08337" />
+      <Connection Source="$6EC9191139E0E5E3.CNF" Destination="$1.E_ATUALIZA_ENTRADA">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$6EC9191139E0E5E3.CNF" Destination="$E_ATUALIZA_SENSOR" dx1="150" />
+      <Connection Source="$6EC9191139E0E5E3.CNF" Destination="$10.REQ" dx1="181.6251" dx2="50" dy="590" />
+      <Connection Source="$6EC9191139E0E5E3.INITO" Destination="$3.7C4214ABD77AD620" dx1="121.6251" />
+      <Connection Source="$8.CNF" Destination="$3.20C1F30CD2E31B2E" dx1="50" />
+      <Connection Source="$6EC9191139E0E5E3.CNF" Destination="$3.20C1F30CD2E31B2E" dx1="181.6251" />
+      <Connection Source="$1.CNF" Destination="$3.F38DC4A86A6EA898">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$3.B69DE24165168B8C" Destination="$6.ACK_FIRST" dx1="56.41675" dx2="50" dy="-509.9999" />
+      <Connection Source="$3.5A757ABE707DE3AE" Destination="$1.E_RESET_ALARMES" dx1="296.4167" />
+      <Connection Source="$3.FA63870DF8C3C8D2" Destination="$1.E_ATUALIZA_SETPOINTS" dx1="276.4167" />
+      <Connection Source="$3.FA63870DF8C3C8D2" Destination="$E_ATUALIZA_SENSOR_HABILITADO" dx1="96.41675" />
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="$10.OUT1" Destination="$8.IN1" />
+      <Connection Source="$8.OUT1" Destination="$stsFalhaSensor" dx1="43.75" />
+      <Connection Source="$6EC9191139E0E5E3.VALUE1" Destination="$10.IN1" dx1="81.62512" dx2="70" dy="210" />
+      <Connection Source="$6EC9191139E0E5E3.VALUE2" Destination="$1.stsEntradaAlarme" dx1="221.6251" />
+      <Connection Source="$6EC9191139E0E5E3.VALUE2" Destination="$stsSensor" dx1="110" />
+      <Connection Source="$8.OUT1" Destination="$3.B616CC1A9B833E6A" dx1="70" />
+      <Connection Source="$6EC9191139E0E5E3.VALUE3" Destination="$3.A3234BCF73FB8764" dx1="41.62512" />
+      <Connection Source="$6EC9191139E0E5E3.VALUE2" Destination="$3.695B5768A17FD767" dx1="61.62512" />
+      <Connection Source="$1.stsAlarmeHH" Destination="$3.920D8FA33547407A">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$1.stsAlarmeH" Destination="$3.F2615BE432D06731">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$1.stsAlarmeL" Destination="$3.AF74FDD3283CA24C">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$1.stsAlarmeLL" Destination="$3.DFBEF6FC79B97CDB">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$1.E416AB9D6CFA8D5B" Destination="$3.2531F4FAE5380DDC">
+        <Points>
+          <Points>
+            <X>1258.19788</X>
+            <Y>510</Y>
+          </Points>
+          <Points>
+            <X>1268.19788</X>
+            <Y>510</Y>
+          </Points>
+          <Points>
+            <X>1268.19788</X>
+            <Y>555</Y>
+          </Points>
+          <Points>
+            <X>620</X>
+            <Y>555</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$3.D76A779D33BFF271" Destination="$1.stsSensorHabilitado" dx1="280" />
+      <Connection Source="$3.D76A779D33BFF271" Destination="$stsSensorHabilitado" dx1="116.4167" />
+      <Connection Source="$3.14BE6DD833DF8C9E" Destination="$1.cmdHabilitaAlarmeHH" dx1="260" />
+      <Connection Source="$3.91C62845634A2763" Destination="$1.cmdHabilitaAlarmeH" dx1="240" />
+      <Connection Source="$3.3FAD07EB63179A41" Destination="$1.cmdHabilitaAlarmeL" dx1="220" />
+      <Connection Source="$3.A9A070111AD2CCBC" Destination="$1.cmdHabilitaAlarmeLL" />
+      <Connection Source="$3.A13165F0503A81C3" Destination="$1.stpTempoAlarmeHH" />
+      <Connection Source="$3.23D03DA2896029CE" Destination="$1.stpTempoAlarmeH" />
+      <Connection Source="$3.FF7CA31A52058222" Destination="$1.stpTempoAlarmeL" />
+      <Connection Source="$3.67D5B70D383F4489" Destination="$1.stpTempoAlarmeLL" />
+      <Connection Source="$3.8534534BCB048616" Destination="$1.stpAlarmeHH" />
+      <Connection Source="$3.40CEAFD42C58D934" Destination="$1.stpAlarmeH" />
+      <Connection Source="$3.D151FF684821BDDC" Destination="$1.stpAlarmeL" />
+      <Connection Source="$3.5DDF8C548E55EC9C" Destination="$1.stpAlarmeLL" />
+    </DataConnections>
+  </FBNetwork>
+</FBType>

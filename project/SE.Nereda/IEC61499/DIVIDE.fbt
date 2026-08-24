@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="d79a4372-4f26-41f5-8443-2b830286b2f3" Name="DIVIDE" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="7/8/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="0FDF8A587C3CA146" Name="REQ" Comment="Normal Execution Request">
+        <With Var="QI1" />
+        <With Var="QI2" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="6D05A744943B688E" Name="CNF" Comment="Execution Confirmation">
+        <With Var="QO" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="8EF5C40F2FEA5451" Name="QI1" Type="REAL" Comment="Input event qualifier" />
+      <VarDeclaration ID="02E479D09E2C7EA2" Name="QI2" Type="REAL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="E78A8A65D4120686" Name="QO" Type="REAL" Comment="Output event qualifier" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="REQ" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="552.9412" y="429.4117" />
+      <ECState Name="REQ" Comment="Normal execution" x="1193.647" y="836.9412">
+        <ECAction Algorithm="REQ" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="REQ" Condition="REQ" x="924.5824" y="567.1518">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="211.8815,124.5679,251.6004,149.8316" />
+      </ECTransition>
+      <ECTransition Source="REQ" Destination="START" Condition="1" x="867.0262" y="711.9429">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="238.183,195.926,198.4641,170.6622" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="REQ" Comment="Normally executed algorithm">
+      <ST><![CDATA[;
+QO := QI1 / QI2;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="589d0726-4d81-4e79-aca0-e325503eb1d7" Name="Check_AerateOC_Input" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author="SESA371406" Date="4/2/2024" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="HI_NVPP_001_LT_004" Name="CDT">
+        <With Var="Cdt" />
+      </Event>
+      <Event ID="972902AB5A043317" Name="REQ_STATE">
+        <With Var="AerateStarting" />
+        <With Var="AerateRunning" />
+        <With Var="AerateStopping" />
+        <With Var="AerationAborted" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="INPUT7" Name="INPUT">
+        <With Var="Input" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="HiNVPP_001_lt_004" Name="Cdt" Type="BOOL" />
+      <VarDeclaration Name="AerateStarting" Type="BOOL" />
+      <VarDeclaration Name="AerateRunning" Type="BOOL" />
+      <VarDeclaration Name="AerateStopping" Type="BOOL" />
+      <VarDeclaration Name="AerationAborted" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="Input7" Name="Input" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="REQ" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="1667.941" y="412.4117" />
+      <ECState Name="REQ" Comment="Normal execution" x="1677.647" y="1067.941">
+        <ECAction Algorithm="REQ" Output="INPUT" />
+      </ECState>
+      <ECState Name="WAIT" x="1691.111" y="2405" />
+      <ECTransition Source="START" Destination="REQ" Condition="CDT  OR REQ_STATE&#xD;&#xA;" x="1920.439" y="710.9412">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="495.2654,150.8178,494.2515,199.7803" />
+      </ECTransition>
+      <ECTransition Source="REQ" Destination="START" Condition="NOT AerateStarting AND&#xD;&#xA;NOT AerateRunning AND&#xD;&#xA;NOT AerateStopping" x="1448.764" y="717.8307">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="345.9505,207.3243,352.6933,147.8668" />
+      </ECTransition>
+      <ECTransition Source="REQ" Destination="WAIT" Condition="AerateStarting" x="793.8083" y="1736.977">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="132.2674,382.7361,133.5783,486.0904" />
+      </ECTransition>
+      <ECTransition Source="WAIT" Destination="REQ" Condition="NOT AerateStopping" x="1682.245" y="1739.552">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="423.3245,484.1359,417.4918,386.1535" />
+      </ECTransition>
+      <ECTransition Source="REQ" Destination="WAIT" Condition="AerateRunning" x="1220.691" y="1739.976">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="270.9832,388.4343,272.8684,482.1379" />
+      </ECTransition>
+      <ECTransition Source="REQ" Destination="WAIT" Condition="AerateStopping" x="2165.799" y="1732.527">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="574.2936,385.5094,577.6028,480.097" />
+      </ECTransition>
+      <ECTransition Source="WAIT" Destination="REQ" Condition="AerationAborted" x="2624.91" y="1740.097">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="728.2453,488.36,723.5945,382.4819" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="REQ" Comment="Normally executed algorithm">
+      <ST><![CDATA[;
+
+IF NOT (Cdt AND NOT(AerateStarting OR AerateRunning OR AerateStopping)) THEN
+	Input := TRUE;
+ELSE 
+	Input := FALSE;
+END_IF;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

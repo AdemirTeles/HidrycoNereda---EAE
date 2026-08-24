@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="155f62ab-b584-472a-a26c-471b2a150414" Name="disponivelAuto" Format="2.0" Comment="Extracted Composite Function Block Type" Namespace="Hidryco.HidrycoLib">
+  <Attribute Name="Configuration.FB.IDCounter" Value="0" />
+  <Identification Standard="61499-2" />
+  <VersionInfo Author=" " Date="24/02/2026" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="E_ATUALIZA">
+        <With Var="stsRemoto" />
+        <With Var="stsAutomatico" />
+        <With Var="stsBloqueioAutomatico" />
+        <With Var="stsErroInversor" />
+        <With Var="stsManuntencao" />
+        <With Var="stsEmergencia" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="E_ATUALIZA_SAIDA" Comment="Execution Confirmation">
+        <With Var="stsBloqueioAuto" />
+        <With Var="stsDisponivelAutomatico" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="stsRemoto" Type="BOOL" Comment="Argument" />
+      <VarDeclaration Name="stsAutomatico" Type="BOOL" Comment="Argument" />
+      <VarDeclaration Name="stsBloqueioAutomatico" Type="BOOL" Comment="Argument" />
+      <VarDeclaration Name="stsErroInversor" Type="BOOL" Comment="Argument" />
+      <VarDeclaration Name="stsManuntencao" Type="BOOL" Comment="Argument" />
+      <VarDeclaration Name="stsEmergencia" Type="BOOL" Comment="Argument" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="stsDisponivelAutomatico" Type="BOOL" Comment="Result: IN1 AND IN2 AND ..." />
+      <VarDeclaration Name="stsBloqueioAuto" Type="BOOL" Comment="Result: IN1 OR IN2 OR ..." />
+    </OutputVars>
+  </InterfaceList>
+  <FBNetwork>
+    <FB ID="C91E1A6D2E3A90FA" Name="OR_AUTOMATICO" Type="OR_3135830B7CAB0A29" x="1000" y="700" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNT:=4" />
+    </FB>
+    <FB ID="662AC9C756F56887" Name="NOT_DISPONIVEL_AUTOMATICO" Type="NOT_12669C4E53BA46410" x="1620" y="760" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNT:=1" />
+    </FB>
+    <FB ID="C9DA5EFEDF051206" Name="AND_DISPONIVEL_AUTOMATICO" Type="AND_1122770BAB85676D3" x="3300" y="760" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNT:=3" />
+    </FB>
+    <Input Name="stsRemoto" x="2180" y="1032" Type="Data" />
+    <Input Name="stsAutomatico" x="2180" y="1092" Type="Data" />
+    <Input Name="stsBloqueioAutomatico" x="60" y="892" Type="Data" />
+    <Input Name="stsErroInversor" x="60" y="952" Type="Data" />
+    <Input Name="stsManuntencao" x="60" y="1012" Type="Data" />
+    <Input Name="stsEmergencia" x="60" y="1072" Type="Data" />
+    <Input Name="E_ATUALIZA" x="12" y="12" Type="Event" />
+    <Output Name="E_ATUALIZA_SAIDA" x="3900" y="772" Type="Event" />
+    <Output Name="stsDisponivelAutomatico" x="3700" y="952" Type="Data" />
+    <Output Name="stsBloqueioAuto" x="2300" y="1332" Type="Data" />
+    <EventConnections>
+      <Connection Source="$662AC9C756F56887.CNF" Destination="$C9DA5EFEDF051206.REQ" />
+      <Connection Source="$C91E1A6D2E3A90FA.CNF" Destination="$662AC9C756F56887.REQ" dx1="67.47925" />
+      <Connection Source="$C9DA5EFEDF051206.CNF" Destination="$E_ATUALIZA_SAIDA" />
+      <Connection Source="$E_ATUALIZA" Destination="$C91E1A6D2E3A90FA.REQ" dx1="40" />
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="$662AC9C756F56887.OUT1" Destination="$C9DA5EFEDF051206.IN1" />
+      <Connection Source="$C91E1A6D2E3A90FA.OUT" Destination="$662AC9C756F56887.IN1" dx1="47.47925" />
+      <Connection Source="$stsRemoto" Destination="$C9DA5EFEDF051206.IN2" />
+      <Connection Source="$stsAutomatico" Destination="$C9DA5EFEDF051206.IN3" />
+      <Connection Source="$C9DA5EFEDF051206.OUT" Destination="$stsDisponivelAutomatico" dx1="40" dx2="40" dy="-10" />
+      <Connection Source="$stsBloqueioAutomatico" Destination="$C91E1A6D2E3A90FA.IN1" dx1="45.47925" />
+      <Connection Source="$stsErroInversor" Destination="$C91E1A6D2E3A90FA.IN2" dx1="151" />
+      <Connection Source="$stsManuntencao" Destination="$C91E1A6D2E3A90FA.IN3" dx1="127.1667" />
+      <Connection Source="$stsEmergencia" Destination="$C91E1A6D2E3A90FA.IN4" dx1="40" />
+      <Connection Source="$C91E1A6D2E3A90FA.OUT" Destination="$stsBloqueioAuto" dx1="47.47925" />
+    </DataConnections>
+  </FBNetwork>
+</FBType>

@@ -1,0 +1,998 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="18d38e42-612c-40a5-98d5-fe98df373f78" Name="Sensor_Nivel_4a20" Format="2.0" Comment="Composite Function Block Type" Namespace="Hidryco.HidrycoLib">
+  <Attribute Name="HMI.Alias" Value="" />
+  <Attribute Name="Configuration.FB.IDCounter" Value="10" />
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="2/9/2026" Remarks="template" />
+  <InterfaceList>
+    <EventOutputs>
+      <Event Name="E_AUALIZA_SENSOR_HABILITADO">
+        <With Var="stsSensorHabilitado" />
+      </Event>
+      <Event Name="E_ATUALIZA_SENSOR">
+        <With Var="stsSensor" />
+        <With Var="stsFalhaSensor" />
+        <With Var="stsSensorPorcentagem" />
+      </Event>
+      <Event Name="E_ATUALIZA_FALHA_SENSOR">
+        <With Var="stsFalhaSensor" />
+      </Event>
+    </EventOutputs>
+    <OutputVars>
+      <VarDeclaration ID="stsSensorHabilitado" Name="stsSensorHabilitado" Type="BOOL" />
+      <VarDeclaration ID="stsSensor" Name="stsSensor" Type="REAL" />
+      <VarDeclaration ID="stsFalhaSensor" Name="stsFalhaSensor" Type="BOOL" />
+      <VarDeclaration ID="A4A217FC37074240" Name="stsSensorPorcentagem" Type="INT" />
+    </OutputVars>
+  </InterfaceList>
+  <FBNetwork>
+    <FB ID="3" Name="FB1" Type="escalonamento" x="1960" y="2840" Namespace="Hidryco.HidrycoLib" />
+    <FB ID="4" Name="FB2" Type="alarmeHH_H_L_LL" x="2840" y="4060" Namespace="Hidryco.HidrycoLib">
+      <Parameter Name="$modoAlarme" Value="1" />
+    </FB>
+    <FB ID="5" Name="IThis" Type="Sensor_Nivel_4a20_HMI" x="2260" y="520" Namespace="Hidryco.HidrycoLib" />
+    <FB ID="69972DE9EB7D5C38" UID="6" Name="CALC_FORMULAR1" Type="CALC_FORMULAR_208D242FABEE10E1" x="3260" y="2940" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#OUTCNT:=1;INCNT:=2;X${INCNT}:REAL,REAL;Y${OUTCNT}:INT" />
+      <Parameter Name="$FORMULA1" Value="'(X1/X2) * 100'" />
+    </FB>
+    <FB ID="8" Name="plcStart1" Type="plcStart" x="639.9999" y="220" Namespace="SE.App2Base">
+      <Parameter Name="$Prio" Value="10" />
+    </FB>
+    <FB ID="10" UID="9" Name="SYMLINKMULTIVARDST1" Type="SYMLINKMULTIVARDST_5A03F112CD5D470" x="2200" y="5920" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=1;VALUE${I}:INT" />
+      <Parameter Name="$QI" Value="TRUE" />
+      <Parameter Name="$NAME1" Value="'$${PATH}stsSensorBruto'" />
+    </FB>
+    <Frame Name="FRAME1" X="120" Y="120" Width="1560" Height="600">
+      <Parameter Name="BackgroundColor" Value="AliceBlue" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 9.75pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="0 - INITIALIZATION" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME2" X="120" Y="760" Width="1560" Height="820">
+      <Parameter Name="BackgroundColor" Value="Cornsilk" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 9.75pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="1 - FUNCTIONAL INPUT INTERFACE" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME3" X="1720" Y="120" Width="2380" Height="2220">
+      <Parameter Name="BackgroundColor" Value="PeachPuff" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 9.75pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="6 - OT-IT INTERFACE" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME4" X="4140" Y="760" Width="1780" Height="640">
+      <Parameter Name="BackgroundColor" Value="Cornsilk" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 9.75pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="2 - FUNCTIONAL OUTPUT INTERFACE" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME5" X="1700" Y="5660" Width="2380" Height="960">
+      <Parameter Name="BackgroundColor" Value="PeachPuff" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 9.75pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="3 - FIELD INTERFACE" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME6" X="4140" Y="1420" Width="1780" Height="2640">
+      <Parameter Name="BackgroundColor" Value="Honeydew" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 9.75pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="4 - CHILDREN" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME7" X="1700" Y="2420" Width="2380" Height="3120">
+      <Parameter Name="BackgroundColor" Value="WhiteSmoke" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 9.75pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="5 - LOGICS" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME8" X="4180" Y="1540" Width="1680" Height="1160">
+      <Parameter Name="BackgroundColor" Value="DarkSeaGreen" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 9.75pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="4.A - TYPICALS" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME10" X="1740" Y="3820" Width="2280" Height="820">
+      <Parameter Name="BackgroundColor" Value="DarkGray" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 9.75pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="5.B - OPERATION MODE MANAGEMENT" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME11" X="1740" Y="4680" Width="2300" Height="720">
+      <Parameter Name="BackgroundColor" Value="DarkGray" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 9.75pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="5.C - INTERLOCKS MANAGEMENT" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME12" X="1740" Y="2500" Width="2300" Height="1280">
+      <Parameter Name="BackgroundColor" Value="DarkGray" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 9.75pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="5.A - FUNCTIONAL BEHAVIORS" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME9" X="4180" Y="2760" Width="1680" Height="1260">
+      <Parameter Name="BackgroundColor" Value="DarkSeaGreen" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 9.75pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="4.B- CHILDRENSS" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Output ID="A4A217FC37074240" Name="stsSensorPorcentagem" x="4980" y="1192" Type="Data" />
+    <Output Name="E_ATUALIZA_FALHA_SENSOR" x="4980" y="951.9999" Type="Event" />
+    <Output Name="E_AUALIZA_SENSOR_HABILITADO" x="4980" y="832" Type="Event" />
+    <Output ID="stsSensorHabilitado" Name="stsSensorHabilitado" x="4980" y="1132" Type="Data" />
+    <Output ID="stsSensor" Name="stsSensor" x="4980" y="1012" Type="Data" />
+    <Output ID="stsFalhaSensor" Name="stsFalhaSensor" x="4980" y="1072" Type="Data" />
+    <Output Name="E_ATUALIZA_SENSOR" x="4980" y="889.9999" Type="Event" />
+    <EventConnections>
+      <Connection Source="$10.CNF" Destination="$3.REQ" dx1="70" dx2="150" dy="-169.9995" />
+      <Connection Source="$3.CNF" Destination="$E_ATUALIZA_SENSOR">
+        <Points>
+          <Points>
+            <X>717.9427</X>
+            <Y>720</Y>
+          </Points>
+          <Points>
+            <X>732.5</X>
+            <Y>720</Y>
+          </Points>
+          <Points>
+            <X>732.5</X>
+            <Y>717.5</Y>
+          </Points>
+          <Points>
+            <X>902.5</X>
+            <Y>717.5</Y>
+          </Points>
+          <Points>
+            <X>902.5</X>
+            <Y>229.499969</Y>
+          </Points>
+          <Points>
+            <X>1245</X>
+            <Y>229.499969</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$3.CNF" Destination="$4.E_ATUALIZA_SETPOINTS" dx1="80" dx2="70" dy="590" />
+      <Connection Source="$4.CNF" Destination="$E_ATUALIZA_FALHA_SENSOR" dx1="277.2085" />
+      <Connection Source="$8.FIRST_INIT" Destination="$10.INIT" dx1="68.0835" />
+      <Connection Source="$8.REDO_INIT" Destination="$10.INIT" dx1="48.0835" />
+      <Connection Source="$3.CNF" Destination="$5.7ED4286044D54AF8" dx1="58.22925" dx2="190" dy="-110" />
+      <Connection Source="$4.CNF" Destination="$5.AC3821FA0525BE86">
+        <Points>
+          <Points>
+            <X>938.1979</X>
+            <Y>1024.99988</Y>
+          </Points>
+          <Points>
+            <X>952.5</X>
+            <Y>1024.99988</Y>
+          </Points>
+          <Points>
+            <X>952.5</X>
+            <Y>997.5</Y>
+          </Points>
+          <Points>
+            <X>937.5</X>
+            <Y>997.5</Y>
+          </Points>
+          <Points>
+            <X>937.5</X>
+            <Y>692.5</Y>
+          </Points>
+          <Points>
+            <X>517.5</X>
+            <Y>692.5</Y>
+          </Points>
+          <Points>
+            <X>517.5</X>
+            <Y>170</Y>
+          </Points>
+          <Points>
+            <X>560</X>
+            <Y>170</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$5.32BF723E53905F73" Destination="$8.ACK_FIRST" dx1="50" dx2="69.99988" dy="-410" />
+      <Connection Source="$5.891E89899E155609" Destination="$3.E_AJUSTE_STP" dx1="404.25" dx2="90" dy="1430" />
+      <Connection Source="$5.891E89899E155609" Destination="$4.E_ATUALIZA_SETPOINTS">
+        <Points>
+          <Points>
+            <X>891.4375</X>
+            <Y>155</Y>
+          </Points>
+          <Points>
+            <X>992.5</X>
+            <Y>155</Y>
+          </Points>
+          <Points>
+            <X>992.5</X>
+            <Y>512.5</Y>
+          </Points>
+          <Points>
+            <X>797.5</X>
+            <Y>512.5</Y>
+          </Points>
+          <Points>
+            <X>797.5</X>
+            <Y>867.5</Y>
+          </Points>
+          <Points>
+            <X>687.5</X>
+            <Y>867.5</Y>
+          </Points>
+          <Points>
+            <X>687.5</X>
+            <Y>1039.99988</Y>
+          </Points>
+          <Points>
+            <X>705</X>
+            <Y>1039.99988</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$5.891E89899E155609" Destination="$E_AUALIZA_SENSOR_HABILITADO" dx1="404.25" />
+      <Connection Source="$5.2495B7698509FECD" Destination="$3.E_RESET_FALHA" dx1="384.25" dx2="70" dy="1370" />
+      <Connection Source="$5.F20F8219D2E051B0" Destination="$4.E_RESET_ALARMES">
+        <Points>
+          <Points>
+            <X>891.4375</X>
+            <Y>185</Y>
+          </Points>
+          <Points>
+            <X>982.5</X>
+            <Y>185</Y>
+          </Points>
+          <Points>
+            <X>982.5</X>
+            <Y>512.5</Y>
+          </Points>
+          <Points>
+            <X>797.5</X>
+            <Y>512.5</Y>
+          </Points>
+          <Points>
+            <X>797.5</X>
+            <Y>867.5</Y>
+          </Points>
+          <Points>
+            <X>692.5</X>
+            <Y>867.5</Y>
+          </Points>
+          <Points>
+            <X>692.5</X>
+            <Y>1024.99988</Y>
+          </Points>
+          <Points>
+            <X>705</X>
+            <Y>1024.99988</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$10.INITO" Destination="$69972DE9EB7D5C38.INIT">
+        <Points>
+          <Points>
+            <X>687.09375</X>
+            <Y>1489.99988</Y>
+          </Points>
+          <Points>
+            <X>699.59375</X>
+            <Y>1489.99988</Y>
+          </Points>
+          <Points>
+            <X>699.59375</X>
+            <Y>997.5</Y>
+          </Points>
+          <Points>
+            <X>727.5</X>
+            <Y>997.5</Y>
+          </Points>
+          <Points>
+            <X>727.5</X>
+            <Y>745</Y>
+          </Points>
+          <Points>
+            <X>809.999939</X>
+            <Y>745</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$3.CNF" Destination="$69972DE9EB7D5C38.REQ" dx1="80" />
+      <Connection Source="$5.891E89899E155609" Destination="$69972DE9EB7D5C38.REQ" dx1="404.25" dx2="69.99976" dy="1430" />
+      <Connection Source="$69972DE9EB7D5C38.INITO" Destination="$5.F36E7DDCD808D844" dx1="55.00024" dx2="210" dy="-210" />
+      <Connection Source="$69972DE9EB7D5C38.CNF" Destination="$5.7ED4286044D54AF8" dx1="75.00024" dx2="190" dy="-270" />
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="$10.VALUE1" Destination="$3.stsSensorBruto" dx1="90" dx2="70" dy="-549.9995" />
+      <Connection Source="$3.stsSensorEscalonado" Destination="$4.stsEntradaAlarme" dx1="40" dx2="370" dy="210" />
+      <Connection Source="$3.stsFalhaSensor" Destination="$stsFalhaSensor" dx1="738.2292" />
+      <Connection Source="$3.stsSensorEscalonado" Destination="$stsSensor">
+        <Points>
+          <Points>
+            <X>717.9427</X>
+            <Y>815</Y>
+          </Points>
+          <Points>
+            <X>742.5</X>
+            <Y>815</Y>
+          </Points>
+          <Points>
+            <X>742.5</X>
+            <Y>717.5</Y>
+          </Points>
+          <Points>
+            <X>902.5</X>
+            <Y>717.5</Y>
+          </Points>
+          <Points>
+            <X>902.5</X>
+            <Y>260</Y>
+          </Points>
+          <Points>
+            <X>1245</X>
+            <Y>260</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$3.stsSensorEscalonado" Destination="$5.E6FB1BD72477C437" dx1="98.22925" dx2="150" dy="-490" />
+      <Connection Source="$3.stsFalhaSensor" Destination="$5.7A517242DE3DA10E" dx1="78.22925" dx2="110" dy="-430" />
+      <Connection Source="$4.stsAlarmeHH" Destination="$5.86636529BFB9D5F9">
+        <Points>
+          <Points>
+            <X>938.1979</X>
+            <Y>1104.99988</Y>
+          </Points>
+          <Points>
+            <X>957.5</X>
+            <Y>1104.99988</Y>
+          </Points>
+          <Points>
+            <X>957.5</X>
+            <Y>997.5</Y>
+          </Points>
+          <Points>
+            <X>937.5</X>
+            <Y>997.5</Y>
+          </Points>
+          <Points>
+            <X>937.5</X>
+            <Y>692.5</Y>
+          </Points>
+          <Points>
+            <X>537.5</X>
+            <Y>692.5</Y>
+          </Points>
+          <Points>
+            <X>537.5</X>
+            <Y>295</Y>
+          </Points>
+          <Points>
+            <X>560</X>
+            <Y>295</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$4.stsAlarmeH" Destination="$5.9F69AA3D4124FB33">
+        <Points>
+          <Points>
+            <X>938.1979</X>
+            <Y>1119.99988</Y>
+          </Points>
+          <Points>
+            <X>962.5</X>
+            <Y>1119.99988</Y>
+          </Points>
+          <Points>
+            <X>962.5</X>
+            <Y>997.5</Y>
+          </Points>
+          <Points>
+            <X>937.5</X>
+            <Y>997.5</Y>
+          </Points>
+          <Points>
+            <X>937.5</X>
+            <Y>692.5</Y>
+          </Points>
+          <Points>
+            <X>542.5</X>
+            <Y>692.5</Y>
+          </Points>
+          <Points>
+            <X>542.5</X>
+            <Y>310</Y>
+          </Points>
+          <Points>
+            <X>560</X>
+            <Y>310</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$4.stsAlarmeL" Destination="$5.BEBABD3B45D4D426">
+        <Points>
+          <Points>
+            <X>938.1979</X>
+            <Y>1134.99988</Y>
+          </Points>
+          <Points>
+            <X>967.5</X>
+            <Y>1134.99988</Y>
+          </Points>
+          <Points>
+            <X>967.5</X>
+            <Y>997.5</Y>
+          </Points>
+          <Points>
+            <X>937.5</X>
+            <Y>997.5</Y>
+          </Points>
+          <Points>
+            <X>937.5</X>
+            <Y>692.5</Y>
+          </Points>
+          <Points>
+            <X>547.5</X>
+            <Y>692.5</Y>
+          </Points>
+          <Points>
+            <X>547.5</X>
+            <Y>325</Y>
+          </Points>
+          <Points>
+            <X>560</X>
+            <Y>325</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$4.stsAlarmeLL" Destination="$5.40A4F649D5760177">
+        <Points>
+          <Points>
+            <X>938.1979</X>
+            <Y>1149.99988</Y>
+          </Points>
+          <Points>
+            <X>972.5</X>
+            <Y>1149.99988</Y>
+          </Points>
+          <Points>
+            <X>972.5</X>
+            <Y>997.5</Y>
+          </Points>
+          <Points>
+            <X>937.5</X>
+            <Y>997.5</Y>
+          </Points>
+          <Points>
+            <X>937.5</X>
+            <Y>692.5</Y>
+          </Points>
+          <Points>
+            <X>552.5</X>
+            <Y>692.5</Y>
+          </Points>
+          <Points>
+            <X>552.5</X>
+            <Y>340</Y>
+          </Points>
+          <Points>
+            <X>560</X>
+            <Y>340</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$5.9A8AA68569DF546A" Destination="$3.cmdHabilitaSensor" dx1="344.25" dx2="110" dy="990" />
+      <Connection Source="$5.9A8AA68569DF546A" Destination="$4.stsSensorHabilitado">
+        <Points>
+          <Points>
+            <X>891.4375</X>
+            <Y>265</Y>
+          </Points>
+          <Points>
+            <X>977.5</X>
+            <Y>265</Y>
+          </Points>
+          <Points>
+            <X>977.5</X>
+            <Y>512.5</Y>
+          </Points>
+          <Points>
+            <X>797.5</X>
+            <Y>512.5</Y>
+          </Points>
+          <Points>
+            <X>797.5</X>
+            <Y>867.5</Y>
+          </Points>
+          <Points>
+            <X>677.5</X>
+            <Y>867.5</Y>
+          </Points>
+          <Points>
+            <X>677.5</X>
+            <Y>1119.99988</Y>
+          </Points>
+          <Points>
+            <X>705</X>
+            <Y>1119.99988</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$5.9A8AA68569DF546A" Destination="$stsSensorHabilitado" dx1="344.25" />
+      <Connection Source="$5.4A13EDE552D3B705" Destination="$4.cmdHabilitaAlarmeHH">
+        <Points>
+          <Points>
+            <X>891.4375</X>
+            <Y>280</Y>
+          </Points>
+          <Points>
+            <X>972.5</X>
+            <Y>280</Y>
+          </Points>
+          <Points>
+            <X>972.5</X>
+            <Y>512.5</Y>
+          </Points>
+          <Points>
+            <X>797.5</X>
+            <Y>512.5</Y>
+          </Points>
+          <Points>
+            <X>797.5</X>
+            <Y>867.5</Y>
+          </Points>
+          <Points>
+            <X>672.5</X>
+            <Y>867.5</Y>
+          </Points>
+          <Points>
+            <X>672.5</X>
+            <Y>1134.99988</Y>
+          </Points>
+          <Points>
+            <X>705</X>
+            <Y>1134.99988</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$5.879CF91D9EB7443" Destination="$4.cmdHabilitaAlarmeH">
+        <Points>
+          <Points>
+            <X>891.4375</X>
+            <Y>295</Y>
+          </Points>
+          <Points>
+            <X>967.5</X>
+            <Y>295</Y>
+          </Points>
+          <Points>
+            <X>967.5</X>
+            <Y>512.5</Y>
+          </Points>
+          <Points>
+            <X>797.5</X>
+            <Y>512.5</Y>
+          </Points>
+          <Points>
+            <X>797.5</X>
+            <Y>867.5</Y>
+          </Points>
+          <Points>
+            <X>667.5</X>
+            <Y>867.5</Y>
+          </Points>
+          <Points>
+            <X>667.5</X>
+            <Y>1149.99988</Y>
+          </Points>
+          <Points>
+            <X>705</X>
+            <Y>1149.99988</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$5.78D3223FB8B6E21A" Destination="$4.cmdHabilitaAlarmeL">
+        <Points>
+          <Points>
+            <X>891.4375</X>
+            <Y>310</Y>
+          </Points>
+          <Points>
+            <X>962.5</X>
+            <Y>310</Y>
+          </Points>
+          <Points>
+            <X>962.5</X>
+            <Y>512.5</Y>
+          </Points>
+          <Points>
+            <X>797.5</X>
+            <Y>512.5</Y>
+          </Points>
+          <Points>
+            <X>797.5</X>
+            <Y>867.5</Y>
+          </Points>
+          <Points>
+            <X>662.5</X>
+            <Y>867.5</Y>
+          </Points>
+          <Points>
+            <X>662.5</X>
+            <Y>1164.99988</Y>
+          </Points>
+          <Points>
+            <X>705</X>
+            <Y>1164.99988</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$5.95F06004B0B06493" Destination="$4.cmdHabilitaAlarmeLL">
+        <Points>
+          <Points>
+            <X>891.4375</X>
+            <Y>325</Y>
+          </Points>
+          <Points>
+            <X>957.5</X>
+            <Y>325</Y>
+          </Points>
+          <Points>
+            <X>957.5</X>
+            <Y>512.5</Y>
+          </Points>
+          <Points>
+            <X>797.5</X>
+            <Y>512.5</Y>
+          </Points>
+          <Points>
+            <X>797.5</X>
+            <Y>867.5</Y>
+          </Points>
+          <Points>
+            <X>657.5</X>
+            <Y>867.5</Y>
+          </Points>
+          <Points>
+            <X>657.5</X>
+            <Y>1179.99988</Y>
+          </Points>
+          <Points>
+            <X>705</X>
+            <Y>1179.99988</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$5.3CF000898E4A40DD" Destination="$3.stpRangeMaximo" dx1="224.25" dx2="150" dy="630" />
+      <Connection Source="$5.29D852C1AD2F2BD5" Destination="$3.stpRangeMinimo" dx1="204.25" dx2="170" dy="570" />
+      <Connection Source="$5.E92EEDA1751A67E7" Destination="$4.stpTempoAlarmeHH">
+        <Points>
+          <Points>
+            <X>891.4375</X>
+            <Y>385</Y>
+          </Points>
+          <Points>
+            <X>937.5</X>
+            <Y>385</Y>
+          </Points>
+          <Points>
+            <X>937.5</X>
+            <Y>512.5</Y>
+          </Points>
+          <Points>
+            <X>797.5</X>
+            <Y>512.5</Y>
+          </Points>
+          <Points>
+            <X>797.5</X>
+            <Y>867.5</Y>
+          </Points>
+          <Points>
+            <X>652.5</X>
+            <Y>867.5</Y>
+          </Points>
+          <Points>
+            <X>652.5</X>
+            <Y>1194.99988</Y>
+          </Points>
+          <Points>
+            <X>705</X>
+            <Y>1194.99988</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$5.B2741740E8AF0F89" Destination="$4.stpTempoAlarmeH">
+        <Points>
+          <Points>
+            <X>891.4375</X>
+            <Y>400</Y>
+          </Points>
+          <Points>
+            <X>932.5</X>
+            <Y>400</Y>
+          </Points>
+          <Points>
+            <X>932.5</X>
+            <Y>512.5</Y>
+          </Points>
+          <Points>
+            <X>797.5</X>
+            <Y>512.5</Y>
+          </Points>
+          <Points>
+            <X>797.5</X>
+            <Y>867.5</Y>
+          </Points>
+          <Points>
+            <X>647.5</X>
+            <Y>867.5</Y>
+          </Points>
+          <Points>
+            <X>647.5</X>
+            <Y>1209.99988</Y>
+          </Points>
+          <Points>
+            <X>705</X>
+            <Y>1209.99988</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$5.9EE539779497B6E5" Destination="$4.stpTempoAlarmeL">
+        <Points>
+          <Points>
+            <X>891.4375</X>
+            <Y>415</Y>
+          </Points>
+          <Points>
+            <X>927.5</X>
+            <Y>415</Y>
+          </Points>
+          <Points>
+            <X>927.5</X>
+            <Y>512.5</Y>
+          </Points>
+          <Points>
+            <X>797.5</X>
+            <Y>512.5</Y>
+          </Points>
+          <Points>
+            <X>797.5</X>
+            <Y>867.5</Y>
+          </Points>
+          <Points>
+            <X>642.5</X>
+            <Y>867.5</Y>
+          </Points>
+          <Points>
+            <X>642.5</X>
+            <Y>1224.99988</Y>
+          </Points>
+          <Points>
+            <X>705</X>
+            <Y>1224.99988</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$5.28F3AB29E83B81" Destination="$4.stpTempoAlarmeLL">
+        <Points>
+          <Points>
+            <X>891.4375</X>
+            <Y>430</Y>
+          </Points>
+          <Points>
+            <X>922.5</X>
+            <Y>430</Y>
+          </Points>
+          <Points>
+            <X>922.5</X>
+            <Y>512.5</Y>
+          </Points>
+          <Points>
+            <X>797.5</X>
+            <Y>512.5</Y>
+          </Points>
+          <Points>
+            <X>797.5</X>
+            <Y>867.5</Y>
+          </Points>
+          <Points>
+            <X>637.5</X>
+            <Y>867.5</Y>
+          </Points>
+          <Points>
+            <X>637.5</X>
+            <Y>1239.99988</Y>
+          </Points>
+          <Points>
+            <X>705</X>
+            <Y>1239.99988</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$5.7D271C7DECFD6947" Destination="$4.stpAlarmeHH">
+        <Points>
+          <Points>
+            <X>891.4375</X>
+            <Y>445</Y>
+          </Points>
+          <Points>
+            <X>917.5</X>
+            <Y>445</Y>
+          </Points>
+          <Points>
+            <X>917.5</X>
+            <Y>512.5</Y>
+          </Points>
+          <Points>
+            <X>797.5</X>
+            <Y>512.5</Y>
+          </Points>
+          <Points>
+            <X>797.5</X>
+            <Y>867.5</Y>
+          </Points>
+          <Points>
+            <X>632.5</X>
+            <Y>867.5</Y>
+          </Points>
+          <Points>
+            <X>632.5</X>
+            <Y>1254.99988</Y>
+          </Points>
+          <Points>
+            <X>705</X>
+            <Y>1254.99988</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$5.C57347CFC6E2BF8C" Destination="$4.stpAlarmeH">
+        <Points>
+          <Points>
+            <X>891.4375</X>
+            <Y>460</Y>
+          </Points>
+          <Points>
+            <X>912.5</X>
+            <Y>460</Y>
+          </Points>
+          <Points>
+            <X>912.5</X>
+            <Y>512.5</Y>
+          </Points>
+          <Points>
+            <X>797.5</X>
+            <Y>512.5</Y>
+          </Points>
+          <Points>
+            <X>797.5</X>
+            <Y>867.5</Y>
+          </Points>
+          <Points>
+            <X>627.5</X>
+            <Y>867.5</Y>
+          </Points>
+          <Points>
+            <X>627.5</X>
+            <Y>1269.99988</Y>
+          </Points>
+          <Points>
+            <X>705</X>
+            <Y>1269.99988</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$5.B9F4DA8A0D8FD4C4" Destination="$4.stpAlarmeL">
+        <Points>
+          <Points>
+            <X>891.4375</X>
+            <Y>475</Y>
+          </Points>
+          <Points>
+            <X>907.5</X>
+            <Y>475</Y>
+          </Points>
+          <Points>
+            <X>907.5</X>
+            <Y>512.5</Y>
+          </Points>
+          <Points>
+            <X>797.5</X>
+            <Y>512.5</Y>
+          </Points>
+          <Points>
+            <X>797.5</X>
+            <Y>867.5</Y>
+          </Points>
+          <Points>
+            <X>622.5</X>
+            <Y>867.5</Y>
+          </Points>
+          <Points>
+            <X>622.5</X>
+            <Y>1284.99988</Y>
+          </Points>
+          <Points>
+            <X>705</X>
+            <Y>1284.99988</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$5.305240145541E4F6" Destination="$4.stpAlarmeLL">
+        <Points>
+          <Points>
+            <X>891.4375</X>
+            <Y>490</Y>
+          </Points>
+          <Points>
+            <X>902.5</X>
+            <Y>490</Y>
+          </Points>
+          <Points>
+            <X>902.5</X>
+            <Y>512.5</Y>
+          </Points>
+          <Points>
+            <X>797.5</X>
+            <Y>512.5</Y>
+          </Points>
+          <Points>
+            <X>797.5</X>
+            <Y>867.5</Y>
+          </Points>
+          <Points>
+            <X>617.5</X>
+            <Y>867.5</Y>
+          </Points>
+          <Points>
+            <X>617.5</X>
+            <Y>1299.99988</Y>
+          </Points>
+          <Points>
+            <X>705</X>
+            <Y>1299.99988</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$3.stsSensorEscalonado" Destination="$69972DE9EB7D5C38.X1" dx1="40" />
+      <Connection Source="$5.AE97AA3C5FE9067F" Destination="$69972DE9EB7D5C38.X2" dx1="244.25" dx2="129.9998" dy="690" />
+      <Connection Source="$69972DE9EB7D5C38.Y1" Destination="$5.72E98307B6AC3C3B" dx1="95.00024" dx2="130" dy="-650" />
+      <Connection Source="$69972DE9EB7D5C38.Y1" Destination="$A4A217FC37074240" dx1="95.00024" />
+    </DataConnections>
+  </FBNetwork>
+</FBType>

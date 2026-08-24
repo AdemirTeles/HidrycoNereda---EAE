@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="96a7ea03-a2ab-4176-ae98-3588851a2372" Name="basicFalhaFeedback" Comment="Basic Function Block Type" Namespace="Hidryco.HidrycoLib">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="14/01/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="CMD_IN">
+        <With Var="StpTempoFalhaLigamento" />
+        <With Var="StpTempoFalhaDesligamento" />
+        <With Var="StsRemoto" />
+        <With Var="CmdLigar" />
+        <With Var="StsLigado" />
+      </Event>
+      <Event Name="END_DELAY_DESLIGAMENTO" Comment="Normal Execution Request" />
+      <Event Name="END_DELAY_LIGAMENTO" />
+      <Event Name="E_RESET_FALHA" />
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="CMD_OUT">
+        <With Var="StsFalhaFeedback" />
+        <With Var="StsFalhaLigamento" />
+        <With Var="StsFalhaDesligamento" />
+      </Event>
+      <Event Name="START_DELAY_DESLIGAMENTO" Comment="Execution Confirmation">
+        <With Var="DelayTimeDesligamento" />
+      </Event>
+      <Event Name="START_DELAY_LIGAMENTO">
+        <With Var="DelayTimeLigamento" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="CmdLigar" Type="BOOL" />
+      <VarDeclaration Name="StsLigado" Type="BOOL" />
+      <VarDeclaration Name="StsRemoto" Type="BOOL" />
+      <VarDeclaration Name="StpTempoFalhaLigamento" Type="UINT" />
+      <VarDeclaration Name="StpTempoFalhaDesligamento" Type="UINT" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="StsFalhaFeedback" Type="BOOL" />
+      <VarDeclaration Name="StsFalhaLigamento" Type="BOOL" />
+      <VarDeclaration Name="StsFalhaDesligamento" Type="BOOL" />
+      <VarDeclaration Name="DelayTimeLigamento" Type="TIME" />
+      <VarDeclaration Name="DelayTimeDesligamento" Type="TIME" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="falhaLigamento,falhaDesligamento,resetFalha,startDelayLigamento,startDelayDesligamento" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="1524.941" y="793.412" />
+      <ECState Name="STATE1" x="2332" y="1304">
+        <ECAction Algorithm="startDelayLigamento" Output="START_DELAY_LIGAMENTO" />
+      </ECState>
+      <ECState Name="STATE2" x="988" y="1288">
+        <ECAction Algorithm="falhaLigamento" Output="CMD_OUT" />
+      </ECState>
+      <ECState Name="STATE3" x="2092" y="408">
+        <ECAction Algorithm="startDelayDesligamento" Output="START_DELAY_DESLIGAMENTO" />
+      </ECState>
+      <ECState Name="STATE4" x="720" y="400">
+        <ECAction Algorithm="falhaDesligamento" Output="CMD_OUT" />
+      </ECState>
+      <ECState Name="STATE5" x="2692" y="828">
+        <ECAction Algorithm="resetFalha" Output="CMD_OUT" />
+      </ECState>
+      <ECTransition Source="START" Destination="STATE1" Condition="CMD_IN AND StsRemoto AND (NOT E_RESET_FALHA) AND CmdLigar AND (NOT StsLigado)" x="1959.058" y="979.1531">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="461.3037,222.441,516.6963,256.6476" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="STATE2" Condition="END_DELAY_LIGAMENTO" x="1319.904" y="1095.87">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="348.7068,262.3052,313.4036,294.8238" />
+      </ECTransition>
+      <ECTransition Source="STATE1" Destination="START" Condition="1" x="1917.35" y="1124.957">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="508.8716,304.1025,455.3636,270.2505" />
+      </ECTransition>
+      <ECTransition Source="STATE2" Destination="START" Condition="1" x="1245.353" y="965.7061">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="296.466,251.4358,331.7692,218.9172" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="STATE3" Condition="CMD_IN AND StsRemoto AND (NOT E_RESET_FALHA) AND (NOT CmdLigar) AND StsLigado" x="1796.318" y="522.9971">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="434.8882,136.8868,469.3471,113.4662" />
+      </ECTransition>
+      <ECTransition Source="STATE3" Destination="START" Condition="1" x="1862.285" y="665.4854">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="483.4001,159.1425,448.9412,182.5632" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="STATE4" Condition="END_DELAY_DESLIGAMENTO" x="1148.173" y="683.3042">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="316.7029,188.6308,266.6317,164.7305" />
+      </ECTransition>
+      <ECTransition Source="STATE4" Destination="START" Condition="1" x="1147.349" y="524.9153">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="260.4426,114.5192,310.5858,138.1745" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="STATE5" Condition="E_RESET_FALHA" x="2092.563" y="749.6714">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="486.4657,183.2369,558.2776,185.2329" />
+      </ECTransition>
+      <ECTransition Source="STATE5" Destination="START" Condition="1" x="2109.216" y="869.6957">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="564.6373,221.4673,491.2082,219.5456" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="falhaLigamento">
+      <ST><![CDATA[StsFalhaLigamento := 1;
+StsFalhaFeedback := 1;
+;]]></ST>
+    </Algorithm>
+    <Algorithm Name="falhaDesligamento">
+      <ST><![CDATA[StsFalhaDesligamento := 1;
+StsFalhaFeedback := 1;
+;]]></ST>
+    </Algorithm>
+    <Algorithm Name="resetFalha">
+      <ST><![CDATA[StsFalhaLigamento := 0;
+StsFalhaDesligamento := 0;
+StsFalhaFeedback := 0;
+;]]></ST>
+    </Algorithm>
+    <Algorithm Name="startDelayLigamento">
+      <ST><![CDATA[DelayTimeLigamento := DINT_TO_TIME(UINT_TO_DINT(StpTempoFalhaLigamento) * 1000);
+;]]></ST>
+    </Algorithm>
+    <Algorithm Name="startDelayDesligamento">
+      <ST><![CDATA[DelayTimeDesligamento := DINT_TO_TIME(UINT_TO_DINT(StpTempoFalhaDesligamento) * 1000);
+;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

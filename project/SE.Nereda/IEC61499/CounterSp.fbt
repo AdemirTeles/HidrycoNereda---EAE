@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="71e814ef-61a6-46e7-bca7-8f3975ac06a9" Name="CounterSp" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="7/15/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="C8BF0B5DBAF12ADE" Name="START" Comment="Normal Execution Request">
+        <With Var="DT1" />
+        <With Var="EnableDT" />
+      </Event>
+      <Event ID="A678C75868BE7A7E" Name="STOP">
+        <With Var="DT1" />
+        <With Var="EnableDT" />
+      </Event>
+      <Event ID="3BAEFB620E0425F5" Name="PAR">
+        <With Var="DT1" />
+        <With Var="EnableDT" />
+      </Event>
+      <Event ID="05FD3DED10D7909C" Name="REQ">
+        <With Var="CurrDT" />
+        <With Var="DT1" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="C5DB08088DE67568" Name="CNF_DONE" Comment="Execution Confirmation">
+        <With Var="Done" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="2757200F630CD003" Name="DT1" Type="TIME" Comment="Input event qualifier" />
+      <VarDeclaration ID="86924FE0C1577BC6" Name="CurrDT" Type="TIME" />
+      <VarDeclaration ID="CB3CEBB9E250D30E" Name="EnableDT" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="58C9703823A8F8AF" Name="Done" Type="BOOL" Comment="Output event qualifier" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="a88a97b2-4a66-473f-a492-61158b44727c">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="NotDone,Done" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="552.9412" y="429.4117" />
+      <ECState Name="STARTED" Comment="Normal execution" x="1281.647" y="1000.941">
+        <ECAction Algorithm="NotDone" Output="CNF_DONE" />
+      </ECState>
+      <ECState Name="DONE" x="1285.143" y="1584.571">
+        <ECAction Algorithm="Done" Output="CNF_DONE" />
+      </ECState>
+      <ECState Name="STOP" x="1670" y="356.6667">
+        <ECAction Algorithm="NotDone" Output="CNF_DONE" />
+      </ECState>
+      <ECTransition Source="START" Destination="STARTED" Condition="START AND EnableDT" x="975.1269" y="656.0356">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="219.9336,139.6575,269.5703,178.5879" />
+      </ECTransition>
+      <ECTransition Source="STARTED" Destination="STARTED" Condition="CurrDT &lt; DT1" x="765.4257" y="1030.826">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="173.0417,317.435,147.0417,202.435" />
+      </ECTransition>
+      <ECTransition Source="STARTED" Destination="DONE" Condition="CurrDT &gt;= DT1" x="1282.396" y="1289.514">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="320.4376,302.1395,320.6434,342.0771" />
+      </ECTransition>
+      <ECTransition Source="DONE" Destination="START" Condition="1" x="495.7925" y="1187.444">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="122.2865,354.4153,66.92937,267.1141" />
+      </ECTransition>
+      <ECTransition Source="STARTED" Destination="START" Condition="STOP" x="1195.245" y="473.0458">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="341.0539,120.6265,291.4173,81.69608" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="STOP" Condition="STOP" x="1065.728" y="126.8447">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="227.4007,16.24575,300.1545,11.50788" />
+      </ECTransition>
+      <ECTransition Source="STOP" Destination="START" Condition="1" x="1087.361" y="298.1097">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="305.5912,67.20324,232.8374,71.94111" />
+      </ECTransition>
+    </ECC>
+    <Algorithm ID="06463425-234c-40ed-bf5c-01642867980e" Name="NotDone">
+      <ST><![CDATA[;
+Done := FALSE;]]></ST>
+    </Algorithm>
+    <Algorithm ID="f4086109-904a-4c9a-90ea-3bd360611e8b" Name="Done">
+      <ST><![CDATA[;
+Done := TRUE;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

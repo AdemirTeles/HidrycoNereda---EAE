@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="bf568f5d-f920-446c-a97f-c536dd21ef54" Name="animacao_icone_gerador" Comment="Basic Function Block Type" Namespace="Hidryco.HidrycoLib">
+  <Identification Standard="61499-2" />
+  <VersionInfo Version="0.0" Author=" " Date="03/06/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="6664704A75AB52C7" Name="REQ" Comment="Normal Execution Request">
+        <With Var="geradorConectado" />
+        <With Var="geradorHabilita" />
+        <With Var="stsGerador" />
+        <With Var="stsLigado" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="DFEA3BF8F2708B05" Name="CNF" Comment="Execution Confirmation">
+        <With Var="stsAnimacaoGerador" />
+        <With Var="cmdBloqueiaLigamento" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="3423BEAECBF17FFD" Name="geradorConectado" Type="BOOL" />
+      <VarDeclaration ID="D7467A745E6CDBA8" Name="geradorHabilita" Type="BOOL" />
+      <VarDeclaration ID="D1F24EEF47EA35FE" Name="stsGerador" Type="BOOL" Comment="Status do Gerador ligado" />
+      <VarDeclaration ID="9BDA490118C2DB82" Name="stsLigado" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="9C79DED157DD322B" Name="stsAnimacaoGerador" Type="INT" />
+      <VarDeclaration ID="AAB7DC0D549D5AF0" Name="cmdBloqueiaLigamento" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="logica" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="552.9412" y="429.4117" />
+      <ECState Name="Logica" x="1172" y="732">
+        <ECAction Algorithm="logica" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="Logica" Condition="1" x="894.5677" y="505.9822">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="204.5554,113.1669,241.6158,130.7565" />
+      </ECTransition>
+      <ECTransition Source="Logica" Destination="START" Condition="1" x="882.5656" y="665.9564">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="243.1397,180.4375,206.2824,162.8867" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="logica">
+      <ST><![CDATA[
+// animação
+IF NOT geradorConectado THEN
+    stsAnimacaoGerador := 0;
+ELSIF NOT geradorHabilita THEN
+    stsAnimacaoGerador := 1;
+ELSIF stsLigado AND stsGerador THEN
+    stsAnimacaoGerador := 3;
+ELSE
+    stsAnimacaoGerador := 2;
+END_IF;
+
+// bloqueia o ligamento sempre que não há gerador disponível e habilitado
+cmdBloqueiaLigamento := stsGerador AND NOT (geradorConectado AND geradorHabilita);
+
+;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

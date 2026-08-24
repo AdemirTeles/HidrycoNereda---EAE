@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="6f078def-d670-4281-b17b-376930311480" Name="DeviceTypeDecode" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="6/4/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="3D7E829B7F7727B5" Name="REQ" Comment="Normal Execution Request">
+        <With Var="QI" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="F61F2A50E55F4E82" Name="CNF" Comment="Execution Confirmation">
+        <With Var="QO" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="200DB846EB508014" Name="QI" Type="DeviceType" Namespace="SE.Nereda" Comment="Input event qualifier" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="DA71AF7072E47302" Name="QO" Type="INT" Comment="=1 : Motor ; =2 : Valve" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="REQ" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="552.9412" y="429.4117" />
+      <ECState Name="REQ" Comment="Normal execution" x="1161.647" y="904.9412">
+        <ECAction Algorithm="REQ" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="REQ" Condition="REQ" x="915.4525" y="607.0289">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="209.9178,131.628,249.5106,162.5584" />
+      </ECTransition>
+      <ECTransition Source="REQ" Destination="START" Condition="1" x="850.1442" y="744.4944">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="234.1199,207.2593,194.5272,176.3289" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="REQ" Comment="Normally executed algorithm">
+      <ST><![CDATA[;
+IF QI = DeviceType#Motor THEN
+	QO := 1;
+ELSIF QI = DeviceType#Valve THEN
+	QO := 2;
+END_IF;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

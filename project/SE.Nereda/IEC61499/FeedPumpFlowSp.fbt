@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="91e62db0-9873-4a03-b998-37061a61655c" Name="FeedPumpFlowSp" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author="SESA713705" Date="7/3/2024" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="REQ_LEVEL" Name="REQ">
+        <With Var="InfluentLevel" />
+        <With Var="StartLevelSp" />
+        <With Var="BreakPoint" />
+        <With Var="StopLevelSp" />
+        <With Var="MaxFlowSP" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="CNF_FLOW_SP">
+        <With Var="FlowSp" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="StartLevelSp" Type="REAL" />
+      <VarDeclaration Name="BreakPoint" Type="REAL" />
+      <VarDeclaration Name="StopLevelSp" Type="REAL" />
+      <VarDeclaration Name="MaxFlowSP" Type="REAL" />
+      <VarDeclaration Name="InfluentLevel" Type="REAL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="FlowSp" Type="REAL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="REQ" />
+    <InternalVars>
+      <VarDeclaration Name="a" Type="REAL" />
+      <VarDeclaration Name="b" Type="REAL" />
+    </InternalVars>
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="668.9412" y="445.4117" />
+      <ECState Name="STATE1" x="1564" y="1004">
+        <ECAction Algorithm="REQ" Output="CNF_FLOW_SP" />
+      </ECState>
+      <ECTransition Source="START" Destination="STATE1" Condition="REQ" x="1166.174" y="659.6232">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="262.0274,141.0417,322.6798,178.8937" />
+      </ECTransition>
+      <ECTransition Source="STATE1" Destination="START" Condition="1" x="1105.634" y="800.5617">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="309.4439,225.1024,248.7914,187.2505" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="REQ" Comment="Normally executed algorithm">
+      <ST><![CDATA[;
+IF InfluentLevel < StartLevelSp OR InfluentLevel < BreakPoint THEN
+		FlowSp := MaxFlowSP;
+
+ELSIF BreakPoint <= InfluentLevel AND InfluentLevel <= StopLevelSp THEN
+	a := MaxFlowSP / (BreakPoint - StopLevelSp);
+	b := MaxFlowSP * StopLevelSp / (StopLevelSp - BreakPoint);
+	FlowSp := a * InfluentLevel +b;
+
+ELSE
+	FlowSp := 0;
+END_IF;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

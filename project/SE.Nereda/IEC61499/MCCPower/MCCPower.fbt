@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="9bd7d32d-bbd8-4fab-99a5-2af01242bca8" Name="MCCPower" Format="2.0" Comment="Composite Function Block Type" Namespace="SE.Nereda">
+  <Attribute Name="HMI.Alias" Value="" />
+  <Attribute Name="Configuration.FB.IDCounter" Value="22" />
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author="SESA371406" Date="3/8/2024" Remarks="template" />
+  <InterfaceList />
+  <FBNetwork>
+    <FB ID="1" Name="IThis" Type="MCCPower_HMI" x="4180" y="240" Namespace="SE.Nereda">
+      <Parameter Name="$59840A454B288C29" Value="TRUE" />
+    </FB>
+    <FB ID="4" UID="3" Name="MCCPower" Type="SYMLINKMULTIVARDST_1559B0FF8170C9BA0" x="1560" y="1000" Namespace="SE.Nereda">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=1;VALUE${I}:BOOL" />
+      <Parameter Name="$QI" Value="TRUE" />
+      <Parameter Name="$NAME1" Value="'$${PATH}MCCPower'" />
+    </FB>
+    <FB ID="17" UID="5" Name="CurrentABC_AVG" Type="SYMLINKMULTIVARDST_5523D0A40E83C5C4" x="1560" y="1760" Namespace="SE.Nereda">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=4;VALUE${I}:REAL,REAL,REAL,REAL" />
+      <Parameter Name="$QI" Value="TRUE" />
+      <Parameter Name="$NAME1" Value="'$${PATH}CurrentA'" />
+      <Parameter Name="$NAME2" Value="'$${PATH}CurrentB'" />
+      <Parameter Name="$NAME3" Value="'$${PATH}CurrentC'" />
+      <Parameter Name="$NAME4" Value="'$${PATH}CurrentAVG'" />
+    </FB>
+    <FB ID="18" UID="7" Name="VoltageLL_LN" Type="SYMLINKMULTIVARDST_192DB474C64E14111" x="1560" y="2720" Namespace="SE.Nereda">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=2;VALUE${I}:REAL,REAL" />
+      <Parameter Name="$QI" Value="TRUE" />
+      <Parameter Name="$NAME1" Value="'$${PATH}VoltageLL'" />
+      <Parameter Name="$NAME2" Value="'$${PATH}VoltageLN'" />
+    </FB>
+    <FB ID="19" UID="9" Name="ActivePower_ABC_Total" Type="SYMLINKMULTIVARDST_5523D0A40E83C5C4" x="2700" y="1760" Namespace="SE.Nereda">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=4;VALUE${I}:REAL,REAL,REAL,REAL" />
+      <Parameter Name="$QI" Value="TRUE" />
+      <Parameter Name="$NAME1" Value="'$${PATH}ActivePowerA'" />
+      <Parameter Name="$NAME2" Value="'$${PATH}ActivePowerB'" />
+      <Parameter Name="$NAME3" Value="'$${PATH}ActivePowerC'" />
+      <Parameter Name="$NAME4" Value="'$${PATH}ActivePowerTotal'" />
+    </FB>
+    <FB ID="20" UID="10" Name="Frequency" Type="SYMLINKMULTIVARDST_197068ABA215D7EBA" x="2700" y="2720" Namespace="SE.Nereda">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=1;VALUE${I}:REAL" />
+      <Parameter Name="$QI" Value="TRUE" />
+      <Parameter Name="$NAME1" Value="'$${PATH}Frequency'" />
+    </FB>
+    <FB ID="22" UID="21" Name="VoltageLL_LN_COMPARE" Type="COMPARE_1329C2AB45109BAAB" x="2920" y="939.9999" Namespace="SE.Nereda">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNT:=2;IN${CNT}:REAL" />
+      <Parameter Name="$IN2" Value="360" />
+    </FB>
+    <FB ID="624FB707A5ECF344" Name="INIT" Type="plcStart" x="1560" y="220" Namespace="SE.App2Base">
+      <Parameter Name="$Prio" Value="58" />
+      <Parameter Name="$Delay" Value="T#0ms" />
+    </FB>
+    <EventConnections>
+      <Connection Source="$4.INITO" Destination="$17.INIT" dx1="41.625" dx2="50" dy="530" />
+      <Connection Source="$17.INITO" Destination="$19.INIT" />
+      <Connection Source="$19.INITO" Destination="$18.INIT" dx1="141.625" dx2="50" dy="710" />
+      <Connection Source="$18.INITO" Destination="$20.INIT" />
+      <Connection Source="$20.INITO" Destination="$624FB707A5ECF344.ACK_FIRST">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$17.INITO" Destination="$17.REQ" dx1="141.625" dx2="70" dy="-110" />
+      <Connection Source="$19.INITO" Destination="$19.REQ" dx1="141.625" dx2="70" dy="-110" />
+      <Connection Source="$20.INITO" Destination="$20.REQ" dx1="161.625" dx2="70" dy="-110" />
+      <Connection Source="$18.INITO" Destination="$18.REQ" dx1="101.625" dx2="70" dy="-110" />
+      <Connection Source="$18.CNF" Destination="$22.REQ">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$624FB707A5ECF344.FIRST_INIT" Destination="$1.BB27F7693753AE6A" dx1="48.0835" />
+      <Connection Source="$22.CNF" Destination="$1.90AE6E0AD0CD46E2">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$17.CNF" Destination="$1.44F2A59D3518FBA0">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$18.CNF" Destination="$1.FECB8ADCCB42F863">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$19.CNF" Destination="$1.6CD26063E234B8B4">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$20.CNF" Destination="$1.BF7DF1C9F30AE30C">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$1.A0B4A8D5D43C9D53" Destination="$4.INIT">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$624FB707A5ECF344.REDO_INIT" Destination="$1.BB27F7693753AE6A" dx1="70" />
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="$18.VALUE1" Destination="$22.IN1">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$22.GT" Destination="$1.B6BD4C427DB449E7">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$17.VALUE1" Destination="$1.514750EC57F9CD7">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$17.VALUE2" Destination="$1.9322B30B1692EDD3">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$17.VALUE3" Destination="$1.D31D9A9F42316F84">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$17.VALUE4" Destination="$1.450712653ACC817A">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$18.VALUE1" Destination="$1.4AD53B2ACA09975E">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$18.VALUE2" Destination="$1.81844644CF5C5645">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$19.VALUE1" Destination="$1.3996F912590DEC68">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$19.VALUE2" Destination="$1.E99354A18F02834A">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$19.VALUE3" Destination="$1.8BD12BF016AD2DB3">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$19.VALUE4" Destination="$1.C2A807F7A1BD7A53">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$20.VALUE1" Destination="$1.35F209C8925D84BC">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+    </DataConnections>
+  </FBNetwork>
+</FBType>

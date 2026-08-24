@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="8643cb45-906b-4560-a768-60db56284447" Name="State_CMD_ATV320" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author="SESA371406" Date="05/08/2021" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="INIT" Comment="Initialization Request">
+        <With Var="ETA_Code8" />
+      </Event>
+      <Event Name="REQ_ETA_Error" Comment="Normal Execution Request">
+        <With Var="Reset_ATV320" />
+        <With Var="ETA_Code8" />
+      </Event>
+      <Event Name="REQ_ETA">
+        <With Var="ETA" />
+      </Event>
+      <Event Name="REQ_Speed_Value">
+        <With Var="Speed_Value" />
+      </Event>
+      <Event Name="REQ_RUN">
+        <With Var="RUN" />
+      </Event>
+      <Event Name="REQ_STOP">
+        <With Var="STOP" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="INITO" Comment="Initialization Confirm">
+        <With Var="CMD" />
+        <With Var="LFRD" />
+      </Event>
+      <Event Name="CNF_CMD">
+        <With Var="CMD" />
+        <With Var="LFRD" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="ETA_Code8" Type="WORD" Comment="Input event qualifier" />
+      <VarDeclaration Name="Reset_ATV320" Type="BOOL" />
+      <VarDeclaration Name="ETA" Type="WORD" />
+      <VarDeclaration Name="Speed_Value" Type="WORD" />
+      <VarDeclaration Name="RUN" Type="WORD" />
+      <VarDeclaration Name="STOP" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="CMD" Type="WORD" Comment="Output event qualifier" />
+      <VarDeclaration Name="LFRD" Type="WORD" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="INIT,REQ_ETA_Error,REQ_ETA,REQ_Speed_Value,REQ_RUN,REQ_STOP" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="216.9412" y="145.4117" />
+      <ECState Name="INIT" Comment="Initialization" x="923.5294" y="141.1765">
+        <ECAction Algorithm="INIT" Output="INITO" />
+      </ECState>
+      <ECState Name="REQ_ETA_Error" Comment="Normal execution" x="2677.647" y="1588.941">
+        <ECAction Algorithm="REQ_ETA_Error" Output="CNF_CMD" />
+      </ECState>
+      <ECState Name="REQ_ETA" x="267.9999" y="1136">
+        <ECAction Algorithm="REQ_ETA" Output="CNF_CMD" />
+      </ECState>
+      <ECState Name="NST" x="1352" y="680" />
+      <ECState Name="REQ_Speed_Value" x="2884" y="148">
+        <ECAction Algorithm="REQ_Speed_Value" Output="CNF_CMD" />
+      </ECState>
+      <ECState Name="REQ_RUN" x="1612" y="1804">
+        <ECAction Algorithm="REQ_RUN" Output="CNF_CMD" />
+      </ECState>
+      <ECState Name="STOP" x="3552" y="712">
+        <ECAction Algorithm="REQ_STOP" Output="CNF_CMD" />
+      </ECState>
+      <ECTransition Source="START" Destination="INIT" Condition="INIT" x="588.7574" y="58.0785">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="126.9887,10.91685,167.39,10.67469" />
+      </ECTransition>
+      <ECTransition Source="REQ_ETA" Destination="NST" Condition="1" x="819.6321" y="824.5894">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="170.4415,215.8202,242.3268,185.6239" />
+      </ECTransition>
+      <ECTransition Source="INIT" Destination="NST" Condition="1" x="1205.866" y="363.9082">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="289.6136,68.98461,318.4037,105.1895" />
+      </ECTransition>
+      <ECTransition Source="NST" Destination="REQ_ETA" Condition="REQ_ETA" x="894.6672" y="976.4431">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="261.7989,232.8265,191.0567,264.6195" />
+      </ECTransition>
+      <ECTransition Source="NST" Destination="REQ_ETA_Error" Condition="REQ_ETA_Error" x="2062.503" y="1071.504">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="468.9501,229.4749,566.7365,296.5229" />
+      </ECTransition>
+      <ECTransition Source="REQ_ETA_Error" Destination="NST" Condition="1" x="2008.244" y="1209.471">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="552.5991,342.1417,454.8127,275.0936" />
+      </ECTransition>
+      <ECTransition Source="NST" Destination="REQ_Speed_Value" Condition="REQ_Speed_Value" x="1998.627" y="349.1328">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="448.7905,100.5066,546.585,64.0474" />
+      </ECTransition>
+      <ECTransition Source="REQ_Speed_Value" Destination="NST" Condition="1" x="2360.336" y="432.3017">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="662.8395,89.49709,554.5915,126.9351" />
+      </ECTransition>
+      <ECTransition Source="REQ_RUN" Destination="NST" Condition="1" x="1481.177" y="1317">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="380.3275,377.9848,360.6725,293.0152" />
+      </ECTransition>
+      <ECTransition Source="NST" Destination="REQ_RUN" Condition="REQ_RUN" x="1558.497" y="1225.098">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="385.0294,262.381,404.6843,347.3507" />
+      </ECTransition>
+      <ECTransition Source="STOP" Destination="NST" Condition="1" x="2442.365" y="774.2721">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="693.5104,200.1711,527.6719,197.7589" />
+      </ECTransition>
+      <ECTransition Source="NST" Destination="STOP" Condition="REQ_STOP" x="2443.455" y="617.4508">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="528.0355,147.7609,693.874,150.1717" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="INIT" Comment="Initialization algorithm">
+      <ST><![CDATA[;
+
+	CMD := 16#80;
+
+	
+]]></ST>
+    </Algorithm>
+    <Algorithm Name="REQ_ETA_Error" Comment="Normally executed algorithm">
+      <ST><![CDATA[;
+
+(*IF Reset_ATV320 =TRUE THEN
+	CMD := 16#80;
+END_IF;*)
+
+IF ETA_Code8 = 16#8 AND Reset_ATV320 =TRUE THEN
+	CMD := 16#80;
+	Reset_ATV320 := FALSE;
+END_IF;
+]]></ST>
+    </Algorithm>
+    <Algorithm Name="REQ_ETA">
+      <ST><![CDATA[;
+
+IF ETA = 16#50  THEN
+	CMD := 16#6;
+END_IF;
+
+IF ETA = 16#31  THEN
+	CMD := 16#7;
+END_IF;
+
+
+
+]]></ST>
+    </Algorithm>
+    <Algorithm Name="REQ_Speed_Value">
+      <ST><![CDATA[;
+
+LFRD:=Speed_Value; ]]></ST>
+    </Algorithm>
+    <Algorithm Name="REQ_RUN">
+      <ST><![CDATA[;
+
+IF RUN = 16#F AND ETA = 16#33 AND STOP = FALSE THEN
+	CMD:= 16#F;
+END_IF;
+
+IF RUN = 16#7 AND ETA = 16#37 THEN
+	CMD:= 16#7;
+END_IF;
+]]></ST>
+    </Algorithm>
+    <Algorithm Name="REQ_STOP">
+      <ST><![CDATA[;
+
+IF STOP = TRUE AND (CMD = 16#F OR CMD =16#7) THEN
+	CMD:= 16#2;
+END_IF;
+
+IF STOP = FALSE AND ETA = 16#17 THEN
+	CMD:= 16#0;
+END_IF;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

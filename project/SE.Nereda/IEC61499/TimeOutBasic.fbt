@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="6d8ca889-5e01-4eac-bb3a-4d83984dba9f" Name="TimeOutBasic" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="7/17/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="B92DEFCAD435F463" Name="SENT" Comment="Initialization Request">
+        <With Var="Sent" />
+      </Event>
+      <Event ID="CC474D8C17F1F505" Name="FB" Comment="Normal Execution Request">
+        <With Var="Fb" />
+      </Event>
+      <Event ID="6C964F0A4F827238" Name="CYCLE">
+        <With Var="Fb" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="2D60B61C09A736A9" Name="RESENT" Comment="Execution Confirmation" />
+      <Event ID="69594D323C3B973B" Name="START_C" />
+      <Event ID="1ECC8FAD54A8C208" Name="STOP_C" />
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="B5443A812DCD663E" Name="Sent" Type="BOOL" />
+      <VarDeclaration ID="0D355F8F75866550" Name="Fb" Type="BOOL" />
+    </InputVars>
+  </InterfaceList>
+  <BasicFB ID="86c1f942-959e-494e-83db-2293cdc7a384">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="1768.941" y="313.4117" />
+      <ECState Name="Wait" x="1776" y="843.9999">
+        <ECAction Output="START_C" />
+      </ECState>
+      <ECState Name="Good" x="1260" y="1372">
+        <ECAction Output="STOP_C" />
+      </ECState>
+      <ECState Name="TimeOut" x="2344" y="1348">
+        <ECAction Output="RESENT" />
+      </ECState>
+      <ECTransition Source="START" Destination="Wait" Condition="SENT" x="1773.966" y="582.4991">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="442.687,127.6323,444.4623,164.2495" />
+      </ECTransition>
+      <ECTransition Source="Wait" Destination="Good" Condition="Fb = Sent" x="1535.306" y="1090.66">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="402.509,253.5686,368.0083,288.8716" />
+      </ECTransition>
+      <ECTransition Source="Wait" Destination="TimeOut" Condition="CYCLE AND Fb &lt;&gt; Sent" x="2054.296" y="1086.172">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="494.1783,254.0725,531.7103,287.3755" />
+      </ECTransition>
+      <ECTransition Source="Good" Destination="START" Condition="1" x="1155.796" y="741.301">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="246.5161,216.7912,284.7465,137.2725" />
+      </ECTransition>
+      <ECTransition Source="TimeOut" Destination="Wait" Condition="1" x="2554.905" y="716.4595">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="696.3516,169.9278,652.7553,132.3902" />
+      </ECTransition>
+    </ECC>
+  </BasicFB>
+</FBType>

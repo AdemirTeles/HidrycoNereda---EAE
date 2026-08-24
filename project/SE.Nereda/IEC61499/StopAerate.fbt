@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="70628e1d-0844-469a-97d2-a1c8037d2b2b" Name="StopAerate" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="7/16/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="D950482A44AC5C73" Name="REQ" Comment="Normal Execution Request">
+        <With Var="NextFeedHorizon" />
+        <With Var="S6_Vent" />
+        <With Var="S7_SD" />
+        <With Var="S8_Wait" />
+        <With Var="S5_AerateRunning" />
+        <With Var="S3Done" />
+        <With Var="S7Done" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="7530111629E0F796" Name="STOP_AERATE" Comment="Execution Confirmation">
+        <With Var="StopAerate" />
+      </Event>
+      <Event ID="5ED5F3C70645AC06" Name="AERATE_T">
+        <With Var="AerateTime" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="20B8DEE9B9067A7E" Name="NextFeedHorizon" Type="TIME" />
+      <VarDeclaration ID="02B77BABB54CA7BE" Name="S6_Vent" Type="TIME" />
+      <VarDeclaration ID="E68AB0318ABA2B14" Name="S7_SD" Type="TIME" />
+      <VarDeclaration ID="5E61F739B3DD3A6C" Name="S8_Wait" Type="TIME" />
+      <VarDeclaration ID="19D48581CC6CEC95" Name="S5_AerateRunning" Type="BOOL" />
+      <VarDeclaration ID="E5E5D63C44355F3C" Name="S3Done" Type="BOOL" />
+      <VarDeclaration ID="11917BAB3534074F" Name="S7Done" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="8A55773E02AECBCB" Name="StopAerate" Type="BOOL" />
+      <VarDeclaration ID="C8B85A94FE68EF0C" Name="AerateTime" Type="TIME" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="f2a520ab-6ea8-4c66-88ff-e30f488f7a93">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="NoForce,Force,Convert" />
+    <InternalVars>
+      <VarDeclaration ID="0FDD5863C3F58B99" Name="VentTime" Type="REAL" />
+      <VarDeclaration ID="A1BA9D1A3945E808" Name="SDTime" Type="REAL" />
+      <VarDeclaration ID="6262174CD839A459" Name="WaitTime" Type="REAL" />
+      <VarDeclaration ID="FFC025354C35D0CC" Name="InNextFeedHorizon" Type="REAL" />
+      <VarDeclaration ID="85BC094278742BB8" Name="SumState" Type="REAL" />
+    </InternalVars>
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="1900.941" y="325.4117" />
+      <ECState Name="AerateRun" x="1912" y="920">
+        <ECAction Algorithm="NoForce" Output="STOP_AERATE" />
+      </ECState>
+      <ECState Name="ForceStop" x="1912" y="1800">
+        <ECAction Algorithm="Force" Output="STOP_AERATE" />
+      </ECState>
+      <ECState Name="ResetForce" x="639.9999" y="928">
+        <ECAction Algorithm="NoForce" Output="STOP_AERATE" />
+      </ECState>
+      <ECState Name="CONVERT" x="1911.428" y="1314.286">
+        <ECAction Algorithm="Convert" Output="AERATE_T" />
+      </ECState>
+      <ECTransition Source="START" Destination="AerateRun" Condition="S5_AerateRunning" x="1907.809" y="616.1786">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="476.6472,133.0747,477.4074,173.9267" />
+      </ECTransition>
+      <ECTransition Source="CONVERT" Destination="ForceStop" Condition="InNextFeedHorizon - SumState &lt;= 0" x="1906.63" y="1527.853">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="476.3777,363.6325,476.4008,395.4122" />
+      </ECTransition>
+      <ECTransition Source="ForceStop" Destination="ResetForce" Condition="NOT S5_AerateRunning" x="1019.166" y="1519.979">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="291.6618,426.0314,187.8999,357.3747" />
+      </ECTransition>
+      <ECTransition Source="ResetForce" Destination="START" Condition="1" x="1013.986" y="464.12">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="192.9964,125.3872,280.6873,83.78864" />
+      </ECTransition>
+      <ECTransition Source="AerateRun" Destination="CONVERT" Condition="1" x="1912.825" y="1117.252">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="478.2775,267.2419,478.2425,291.402" />
+      </ECTransition>
+      <ECTransition Source="CONVERT" Destination="CONVERT" Condition="REQ" x="1530.018" y="1328.78">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="363.8604,383.4027,358.1461,283.4027" />
+      </ECTransition>
+    </ECC>
+    <Algorithm ID="5e305fc6-ca3c-4aaa-8d79-6519dee12e0a" Name="NoForce">
+      <ST><![CDATA[;
+StopAerate := FALSE;]]></ST>
+    </Algorithm>
+    <Algorithm ID="94599ada-3ec5-4713-9d7e-7806486f7a9d" Name="Force">
+      <ST><![CDATA[;
+StopAerate := TRUE;]]></ST>
+    </Algorithm>
+    <Algorithm ID="0ac0a63b-b7f7-42c0-8d17-51dc57fdf499" Name="Convert">
+      <ST><![CDATA[;
+VentTime := TIME_TO_REAL(S6_Vent / 1000);
+SDTime := TIME_TO_REAL(S7_SD / 1000);
+WaitTime := TIME_TO_REAL(S8_Wait / 1000);
+InNextFeedHorizon := TIME_TO_REAL(NextFeedHorizon / 1000);
+
+IF S3Done THEN
+	SumState := VentTime + WaitTime;
+ELSE
+	SumState := VentTime + SDTime + WaitTime;
+END_IF;
+
+AerateTime := REAL_TO_TIME((InNextFeedHorizon - SumState) * 1000);]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

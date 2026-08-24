@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="3a7f06dc-2bdc-4f44-8429-67314acd173d" Name="aiSignalDecode" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="7/8/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="76E723C1D2319FCB" Name="SEL_PV">
+        <With Var="SelExtPv" />
+      </Event>
+      <Event ID="4913BACAD6826E20" Name="REQ" Comment="Normal Execution Request">
+        <With Var="InVTQ" />
+      </Event>
+      <Event ID="F08F00BBF3A56140" Name="REQ_EXT_PV">
+        <With Var="SelExtPv" />
+        <With Var="ExtPv" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="4B866291E3506649" Name="CNF" Comment="Execution Confirmation">
+        <With Var="OutVTQ" />
+        <With Var="Value" />
+        <With Var="Timestamp" />
+        <With Var="Quality" />
+        <With Var="Picoseconds" />
+        <With Var="Good" />
+        <With Var="Bad" />
+        <With Var="Uncertain" />
+        <With Var="Forced" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="6969F2D522DDBD33" Name="InVTQ" Type="VTQREAL" />
+      <VarDeclaration ID="3126FE57F7AC4016" Name="SelExtPv" Type="BOOL" />
+      <VarDeclaration ID="D6314ADEFE23DADC" Name="ExtPv" Type="VTQREAL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="03C2FCFDEE2F946C" Name="OutVTQ" Type="VTQREAL" />
+      <VarDeclaration ID="E418044D5B5C384E" Name="Value" Type="REAL" />
+      <VarDeclaration ID="68EF31168FB003CA" Name="Timestamp" Type="LDT" />
+      <VarDeclaration ID="B21AE11E01F42D09" Name="Quality" Type="DWORD" />
+      <VarDeclaration ID="8BBF5558EB9F23BE" Name="Picoseconds" Type="UINT" />
+      <VarDeclaration ID="D0B0323359E0E95D" Name="Good" Type="BOOL" />
+      <VarDeclaration ID="E756592F7CB68AC4" Name="Bad" Type="BOOL" />
+      <VarDeclaration ID="201BC7AF68EF33E6" Name="Uncertain" Type="BOOL" />
+      <VarDeclaration ID="07027665C59045CE" Name="Forced" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="REQ" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="552.9412" y="429.4117" />
+      <ECState Name="REQ" Comment="Normal execution" x="1281.647" y="900.9412">
+        <ECAction Algorithm="REQ" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="REQ" Condition="REQ OR SEL_PV OR REQ_EXT_PV" x="968.7788" y="600.209">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="219.2626,130.0065,266.5476,160.6036" />
+      </ECTransition>
+      <ECTransition Source="REQ" Destination="START" Condition="1" x="911.2299" y="743.2516">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="252.966,206.5927,205.6811,175.9956" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="REQ" Comment="Normally executed algorithm">
+      <ST><![CDATA[;
+IF SelExtPv THEN
+    OutVTQ:= ExtPv;
+ELSE
+    OutVTQ:= InVTQ;
+END_IF;
+
+
+Value := InVTQ.value;
+Picoseconds := InVTQ.picosecs;
+Quality := InVTQ.quality;
+Timestamp := InVTQ.timestamp;
+
+IF Quality = 16#960000 THEN
+    Good:=FALSE;
+    Uncertain := FALSE;
+	Bad := FALSE;
+    Forced := TRUE;
+ELSIF Quality >= 16#00000000 AND Quality <= 16#3FFFFFFF THEN
+    Good:=TRUE;
+    Uncertain := FALSE;
+	Bad := FALSE;
+    Forced := FALSE;
+ELSIF Quality >= 16#40000000 AND Quality <= 16#7FFFFFFF THEN
+    Good:=FALSE;
+    Uncertain := TRUE;
+	Bad := FALSE;
+    Forced := FALSE;
+ELSIF Quality >= 16#80000000 THEN
+    Good:=FALSE;
+    Uncertain := FALSE;
+	Bad := TRUE;
+    Forced := FALSE;
+END_IF;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

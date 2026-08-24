@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="a2ca7962-64a0-4ea8-b027-cadce304e010" Name="HeartBeatBasic" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="7/17/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="6C29444D56112313" Name="INIT">
+        <With Var="ReceivedV" />
+      </Event>
+      <Event ID="3DAC4F3C1DDAD437" Name="RECEIVE">
+        <With Var="ReceivedV" />
+      </Event>
+      <Event ID="3D5469460D8FC333" Name="FB_TIME_OUT" />
+      <Event ID="8A5BA47D5FD2BD91" Name="CYCLE" />
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="3ECF4DEA5C4A621D" Name="SEND">
+        <With Var="SendV" />
+      </Event>
+      <Event ID="8C790260D1064EE6" Name="COMM_STATUS">
+        <With Var="CommStatus" />
+      </Event>
+      <Event ID="ADD13BCBBB438FDF" Name="START_TIME_OUT" />
+      <Event ID="C6BE342831087A8E" Name="STOP_TIME_OUT" />
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="55A1A3E302A937E4" Name="ReceivedV" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="2E04A97CECD4B7C1" Name="SendV" Type="BOOL" />
+      <VarDeclaration ID="B3DCB11A90F195CB" Name="CommStatus" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="7db5c4e5-2dfb-492a-a213-715cb6d0080c">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="INIT,REQ,Reverse,CommGood,CommBad" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="1769.513" y="395.6974" />
+      <ECState Name="Start" x="1768.571" y="970.2858">
+        <ECAction Algorithm="Reverse" Output="SEND" />
+        <ECAction Output="STOP_TIME_OUT" />
+      </ECState>
+      <ECState Name="StartTimeOut" x="1771.428" y="1474.286">
+        <ECAction Output="START_TIME_OUT" />
+      </ECState>
+      <ECState Name="CommGood" x="437.5" y="977.4999">
+        <ECAction Algorithm="CommGood" Output="COMM_STATUS" />
+      </ECState>
+      <ECState Name="CommBad" x="3113.333" y="966.6666">
+        <ECAction Algorithm="CommBad" Output="COMM_STATUS" />
+      </ECState>
+      <ECTransition Source="START" Destination="Start" Condition="INIT" x="1766.292" y="685.2097">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="441.4478,151.8947,441.3804,191.0798" />
+      </ECTransition>
+      <ECTransition Source="Start" Destination="StartTimeOut" Condition="CYCLE" x="1772.071" y="1221.801">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="443.0389,288.7582,443.2266,322.0613" />
+      </ECTransition>
+      <ECTransition Source="StartTimeOut" Destination="CommGood" Condition="RECEIVE AND ReceivedV = SendV" x="1110.247" y="1231.03">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="322.1465,324.5363,234.2972,291.8348" />
+      </ECTransition>
+      <ECTransition Source="CommGood" Destination="Start" Condition="1" x="1123.579" y="765.5823">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="241.0484,178.6395,323.4843,178.1304" />
+      </ECTransition>
+      <ECTransition Source="StartTimeOut" Destination="CommBad" Condition="FB_TIME_OUT AND ReceivedV &lt;&gt; SendV" x="2475.934" y="1212.581">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="577.0007,319.2895,665.8353,285.6849" />
+      </ECTransition>
+      <ECTransition Source="CommBad" Destination="Start" Condition="1" x="2402.328" y="770.4587">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="643.1918,180.3408,553.3182,180.5827" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="INIT" Comment="Initialization algorithm">
+      <ST><![CDATA[;]]></ST>
+    </Algorithm>
+    <Algorithm Name="REQ" Comment="Normally executed algorithm">
+      <ST><![CDATA[;]]></ST>
+    </Algorithm>
+    <Algorithm ID="0bad6610-d12e-41b1-8974-8fefdd6ce979" Name="Reverse">
+      <ST><![CDATA[;
+SendV := NOT ReceivedV;]]></ST>
+    </Algorithm>
+    <Algorithm ID="6a25ad7a-f50c-4a0c-8570-b197d40e3037" Name="CommGood">
+      <ST><![CDATA[;
+CommStatus := TRUE;]]></ST>
+    </Algorithm>
+    <Algorithm ID="30ec1f12-bd5a-4938-a027-98199827d2c4" Name="CommBad">
+      <ST><![CDATA[;
+CommStatus := FALSE;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

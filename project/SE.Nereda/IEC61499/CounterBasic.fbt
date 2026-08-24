@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="b46d69d6-80b8-4553-9deb-f2ffc774656a" Name="CounterBasic" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="7/6/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="DD7C28FB9184AAEE" Name="START" Comment="Normal Execution Request" />
+      <Event ID="E0BAE2B19D215A1B" Name="STOP" />
+      <Event ID="24B9D0C79B9A3EE2" Name="REQ_RESET" />
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="C2AFBA6527CC7C56" Name="CNF_PV" Comment="Execution Confirmation">
+        <With Var="Pv" />
+      </Event>
+      <Event ID="1ED73B7FE4F7947F" Name="RESET">
+        <With Var="Reset" />
+      </Event>
+    </EventOutputs>
+    <OutputVars>
+      <VarDeclaration ID="C5D705445004F6D1" Name="Pv" Type="INT" Comment="Output event qualifier" />
+      <VarDeclaration ID="DAD2EDD22719CB1D" Name="Reset" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="StartAlg,StopAlg,ResetAlg" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="1724.941" y="681.4116" />
+      <ECState Name="START_S" x="2372" y="1264">
+        <ECAction Algorithm="StartAlg" Output="CNF_PV" />
+        <ECAction Output="RESET" />
+      </ECState>
+      <ECState Name="STOP_S" x="963.9999" y="1288">
+        <ECAction Algorithm="StopAlg" Output="CNF_PV" />
+      </ECState>
+      <ECState Name="STATE1" x="2652" y="332">
+        <ECAction Algorithm="ResetAlg" Output="RESET" />
+      </ECState>
+      <ECTransition Source="START" Destination="START_S" Condition="START" x="2257.496" y="847.6436">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="554.3728,183.3348,598.1862,222.8549" />
+      </ECTransition>
+      <ECTransition Source="START_S" Destination="START" Condition="1" x="1922.22" y="1016.762">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="497.1386,277.8429,452.486,237.8805" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="STOP_S" Condition="STOP" x="1142.137" y="807.1111">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="300.186,168.3105,247.6843,210.1625" />
+      </ECTransition>
+      <ECTransition Source="STOP_S" Destination="START" Condition="1" x="1422.667" y="1061.761">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="331.0912,292.6127,383.5928,250.7607" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="STATE1" Condition="REQ_RESET" x="2012.783" y="316.1892">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="466.2239,76.82475,521.157,56.1202" />
+      </ECTransition>
+      <ECTransition Source="STATE1" Destination="START" Condition="1" x="2138.416" y="547.2328">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="557.4733,129.2048,502.54,149.9094" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="StartAlg">
+      <ST><![CDATA[;
+Pv := 1;
+Reset := FALSE;]]></ST>
+    </Algorithm>
+    <Algorithm Name="StopAlg">
+      <ST><![CDATA[;
+Pv := 0;]]></ST>
+    </Algorithm>
+    <Algorithm Name="ResetAlg">
+      <ST><![CDATA[;
+Reset := TRUE;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

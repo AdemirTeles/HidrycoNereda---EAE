@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="d5571241-e492-421b-b57a-b4c21b0f1485" Name="TrojanUV3000" Format="2.0" Comment="Composite Function Block Type" Namespace="Hidryco.HidrycoLib">
+  <Attribute Name="HMI.Alias" Value="" />
+  <Attribute Name="Configuration.FB.IDCounter" Value="9" />
+  <Identification Standard="61499-2" />
+  <VersionInfo Version="0.0" Author=" " Date="03/03/2026" Remarks="template" />
+  <InterfaceList>
+    <EventOutputs>
+      <Event Name="CNF">
+        <With Var="systemFlow" />
+        <With Var="notEnoughHealthyChannels" />
+      </Event>
+    </EventOutputs>
+    <OutputVars>
+      <VarDeclaration Name="systemFlow" Type="INT" />
+      <VarDeclaration Name="notEnoughHealthyChannels" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <FBNetwork>
+    <FB ID="1" Name="Canal_UV1" Type="Canal_UV" x="3960" y="1360" Namespace="Hidryco.HidrycoLib" />
+    <FB ID="2" Name="Canal_UV2" Type="Canal_UV" x="3940" y="1880" Namespace="Hidryco.HidrycoLib" />
+    <FB ID="9" UID="3" Name="SYMLINKMULTIVARDST1" Type="SYMLINKMULTIVARDST_46EE10C6FC093EFB" x="1460" y="1020" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=13;VALUE${I}:INT,INT,INT,BOOL,INT,INT,INT,BOOL,INT,INT,INT,BOOL,INT" />
+      <Parameter Name="$QI" Value="TRUE" />
+      <Parameter Name="$NAME1" Value="'$${PATH}systemFlow'">
+        <Attribute Name="Configuration.Parameter.Style" Value="Width=200" />
+      </Parameter>
+      <Parameter Name="$NAME2" Value="'$${PATH}systemReductionEquivalentDose'">
+        <Attribute Name="Configuration.Parameter.Style" Value="Width=200" />
+      </Parameter>
+      <Parameter Name="$NAME3" Value="'$${PATH}uvTransmittance'">
+        <Attribute Name="Configuration.Parameter.Style" Value="Width=200" />
+      </Parameter>
+      <Parameter Name="$NAME4" Value="'$${PATH}ch1InOperation'">
+        <Attribute Name="Configuration.Parameter.Style" Value="Width=200" />
+      </Parameter>
+      <Parameter Name="$NAME5" Value="'$${PATH}bank1aLampHours'">
+        <Attribute Name="Configuration.Parameter.Style" Value="Width=200" />
+      </Parameter>
+      <Parameter Name="$NAME6" Value="'$${PATH}bank1aPowerLevel'">
+        <Attribute Name="Configuration.Parameter.Style" Value="Width=200" />
+      </Parameter>
+      <Parameter Name="$NAME7" Value="'$${PATH}bank1aUvIntensity'">
+        <Attribute Name="Configuration.Parameter.Style" Value="Width=200" />
+      </Parameter>
+      <Parameter Name="$NAME8" Value="'$${PATH}ch2InOperation'">
+        <Attribute Name="Configuration.Parameter.Style" Value="Width=200" />
+      </Parameter>
+      <Parameter Name="$NAME9" Value="'$${PATH}bank2aLampHours'">
+        <Attribute Name="Configuration.Parameter.Style" Value="Width=200" />
+      </Parameter>
+      <Parameter Name="$NAME10" Value="'$${PATH}bank2aPowerLevel'">
+        <Attribute Name="Configuration.Parameter.Style" Value="Width=200" />
+      </Parameter>
+      <Parameter Name="$NAME11" Value="'$${PATH}bank2aUvIntensity'">
+        <Attribute Name="Configuration.Parameter.Style" Value="Width=200" />
+      </Parameter>
+      <Parameter Name="$NAME12" Value="'$${PATH}notEnoughHealthyChannels'" />
+    </FB>
+    <FB ID="7" Name="plcStart1" Type="plcStart" x="420" y="79.99999" Namespace="SE.App2Base">
+      <Parameter Name="$Prio" Value="10" />
+    </FB>
+    <FB ID="8" Name="IThis" Type="TrojanUV3000_HMI" x="2860" y="1080" Namespace="Hidryco.HidrycoLib" />
+    <Output Name="systemFlow" x="2840" y="2272" Type="Data" />
+    <Output Name="CNF" x="2240" y="292" Type="Event" />
+    <Output Name="notEnoughHealthyChannels" x="2840" y="2332" Type="Data" />
+    <EventConnections>
+      <Connection Source="$2.INITO" Destination="$7.ACK_FIRST">
+        <Points>
+          <Points>
+            <X>1068.5885</X>
+            <Y>480</Y>
+          </Points>
+          <Points>
+            <X>1078.5885</X>
+            <Y>480</Y>
+          </Points>
+          <Points>
+            <X>1078.5885</X>
+            <Y>29.9999981</Y>
+          </Points>
+          <Points>
+            <X>99.99999</X>
+            <Y>29.9999981</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$1.INITO" Destination="$2.INIT" dx1="40" dx2="30" dy="230" />
+      <Connection Source="$7.REDO_INIT" Destination="$9.INIT" dx1="48.08337" />
+      <Connection Source="$7.FIRST_INIT" Destination="$9.INIT" dx1="68.08337" />
+      <Connection Source="$9.CNF" Destination="$CNF" dx1="70" />
+      <Connection Source="$9.INITO" Destination="$8.4BA7EEC4FC08A8EE" dx1="261.625" />
+      <Connection Source="$9.CNF" Destination="$8.3B267FBEC8197619" dx1="261.625" />
+      <Connection Source="$8.35355BB768791DE9" Destination="$1.INIT" dx1="40" />
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="$9.VALUE12" Destination="$notEnoughHealthyChannels" dx1="41.625" />
+      <Connection Source="$9.VALUE1" Destination="$systemFlow" dx1="261.625" />
+      <Connection Source="$9.VALUE1" Destination="$8.12B4DFE8861FBC57" />
+      <Connection Source="$9.VALUE2" Destination="$8.FC15F75E6E9FD0D2" />
+      <Connection Source="$9.VALUE3" Destination="$8.F13C0E3EF8F351AD" />
+      <Connection Source="$9.VALUE4" Destination="$8.E49190DF5E628DCB" />
+      <Connection Source="$9.VALUE5" Destination="$8.3FC77A9DEEE3DDA4" />
+      <Connection Source="$9.VALUE6" Destination="$8.385465252E178467" />
+      <Connection Source="$9.VALUE7" Destination="$8.6A8852BA31F608AF" />
+      <Connection Source="$9.VALUE8" Destination="$8.C2E628A604D0F40" />
+      <Connection Source="$9.VALUE9" Destination="$8.A96BFE8157CC4652" />
+      <Connection Source="$9.VALUE10" Destination="$8.971680C0F3C5AF98" />
+      <Connection Source="$9.VALUE11" Destination="$8.2C623A4728083569" />
+    </DataConnections>
+  </FBNetwork>
+</FBType>

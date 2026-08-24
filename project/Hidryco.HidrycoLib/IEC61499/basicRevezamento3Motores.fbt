@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="a3681ebc-b4f0-46af-a5c4-e209b4ad7ac6" Name="basicRevezamento3Motores" Comment="Basic Function Block Type" Namespace="Hidryco.HidrycoLib">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="2/10/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="END_DELAY" />
+      <Event Name="E_ATUALIZA_SETPOINT">
+        <With Var="stpTempoRevezamentoMotor1" />
+        <With Var="stpTempoRevezamentoMotor2" />
+        <With Var="stpTempoRevezamentoMotor3" />
+        <With Var="cmdHabilita" />
+      </Event>
+      <Event Name="E_ATUALIZA_DISPONIBILIDADE_EQUIPAMENTO">
+        <With Var="stsDisponivelEquipamento1" />
+        <With Var="stsDisponivelEquipamento2" />
+        <With Var="stsDisponivelEquipamento3" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="START_DELAY">
+        <With Var="delayTimeMotor" />
+      </Event>
+      <Event Name="E_ATUALIZA_EQUIPAMENTO_PRINCIPAL">
+        <With Var="equipamentoPrincipal" />
+      </Event>
+      <Event Name="E_NENHUM_EQUIPAMENTO_DISPONIVEL" />
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="cmdHabilita" Type="BOOL" />
+      <VarDeclaration Name="stpTempoRevezamentoMotor1" Type="UINT" />
+      <VarDeclaration Name="stpTempoRevezamentoMotor2" Type="UINT" />
+      <VarDeclaration Name="stpTempoRevezamentoMotor3" Type="UINT" />
+      <VarDeclaration Name="stsDisponivelEquipamento1" Type="BOOL" />
+      <VarDeclaration Name="stsDisponivelEquipamento2" Type="BOOL" />
+      <VarDeclaration Name="stsDisponivelEquipamento3" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="equipamentoPrincipal" Type="UINT" InitialValue="1" />
+      <VarDeclaration Name="delayTimeMotor" Type="TIME" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="Principal1Delay,Principal2Delay,MudaPrincipal,ChecarQuantidadeDisponivel,Principal3Delay,VerificaDisponibilidade" />
+    <InternalVars>
+      <VarDeclaration Name="equipamentosDisponiveis" Type="INT" />
+    </InternalVars>
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="2254.274" y="650.7449" />
+      <ECState Name="STATE1" x="2272" y="1188" />
+      <ECState Name="Principal1" x="3804.316" y="1529.714">
+        <ECAction Algorithm="VerificaDisponibilidade" Output="E_ATUALIZA_EQUIPAMENTO_PRINCIPAL" />
+        <ECAction Algorithm="Principal1Delay" Output="START_DELAY" />
+      </ECState>
+      <ECState Name="Principal2" x="2709.556" y="2389">
+        <ECAction Algorithm="VerificaDisponibilidade" Output="E_ATUALIZA_EQUIPAMENTO_PRINCIPAL" />
+        <ECAction Algorithm="Principal2Delay" Output="START_DELAY" />
+      </ECState>
+      <ECState Name="Principal3" x="911.619" y="2207.81">
+        <ECAction Algorithm="VerificaDisponibilidade" Output="E_ATUALIZA_EQUIPAMENTO_PRINCIPAL" />
+        <ECAction Algorithm="Principal3Delay" Output="START_DELAY" />
+      </ECState>
+      <ECState Name="STATE12" x="448.2697" y="1248.444">
+        <ECAction Algorithm="MudaPrincipal" Output="E_ATUALIZA_EQUIPAMENTO_PRINCIPAL" />
+      </ECState>
+      <ECState Name="STATE13" x="1177.143" y="194.2857">
+        <ECAction Algorithm="ChecarQuantidadeDisponivel" />
+      </ECState>
+      <ECState Name="STATE14" x="254.3494" y="631.111">
+        <ECAction Output="E_NENHUM_EQUIPAMENTO_DISPONIVEL" />
+      </ECState>
+      <ECTransition Source="START" Destination="STATE13" Condition="E_ATUALIZA_DISPONIBILIDADE_EQUIPAMENTO" x="1797.295" y="490.6821">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="492.6575,142.8257,421.7108,112.5483" />
+      </ECTransition>
+      <ECTransition Source="STATE13" Destination="STATE14" Condition="equipamentosDisponiveis = 0" x="786.5607" y="468.6158">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="227.7913,106.4319,169.1556,135.6054" />
+      </ECTransition>
+      <ECTransition Source="STATE14" Destination="STATE13" Condition="1" x="791.7723" y="315.6921">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="174.8188,86.68481,240.068,57.24183" />
+      </ECTransition>
+      <ECTransition Source="STATE13" Destination="START" Condition="1" x="1778.381" y="350.6503">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="410.5528,67.01395,481.5175,98.59901" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="STATE12" Condition="END_DELAY" x="1209.15" y="1050.729">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="353.6153,250.3301,224.5565,290.1106" />
+      </ECTransition>
+      <ECTransition Source="STATE12" Destination="START" Condition="1" x="1617.31" y="818.8953">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="364.7194,214.2316,487.8344,175.8998" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="STATE1" Condition="cmdHabilita AND equipamentosDisponiveis &gt; 0" x="2132.5" y="929.2217">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="524.3222,217.2289,527.0004,249.0235" />
+      </ECTransition>
+      <ECTransition Source="STATE1" Destination="Principal1" Condition="equipamentoPrincipal = 1" x="2998.889" y="1286.455">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="701.861,307.783,791.5569,326.7707" />
+      </ECTransition>
+      <ECTransition Source="Principal1" Destination="STATE1" Condition="1" x="3157.861" y="1446.436">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="851.1479,377.9373,749.1325,356.5806" />
+      </ECTransition>
+      <ECTransition Source="STATE1" Destination="Principal2" Condition="equipamentoPrincipal = 2" x="2525.173" y="1733.832">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="618.6052,389.4532,648.3143,468.3518" />
+      </ECTransition>
+      <ECTransition Source="Principal2" Destination="STATE1" Condition="1" x="2489.284" y="1922.668">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="640.2896,536.6611,605.6741,447.0341" />
+      </ECTransition>
+      <ECTransition Source="STATE1" Destination="Principal3" Condition="equipamentoPrincipal = 3" x="1678.336" y="1699.29">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="469.2392,391.431,381.7435,458.4445" />
+      </ECTransition>
+      <ECTransition Source="Principal3" Destination="STATE1" Condition="1" x="1419.26" y="1769.992">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="291.8446,487.2544,391.535,409.7559" />
+      </ECTransition>
+      <ECTransition Source="STATE1" Destination="START" Condition="1" x="2195.23" y="950.3901">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="546.0345,256.9177,544.043,223.447" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="Principal1Delay">
+      <ST><![CDATA[delayTimeMotor := DINT_TO_TIME(UINT_TO_DINT(stpTempoRevezamentoMotor1)*3600000);
+;]]></ST>
+    </Algorithm>
+    <Algorithm Name="Principal2Delay">
+      <ST><![CDATA[delayTimeMotor := DINT_TO_TIME(UINT_TO_DINT(stpTempoRevezamentoMotor2)*3600000);
+;]]></ST>
+    </Algorithm>
+    <Algorithm Name="Principal3Delay">
+      <ST><![CDATA[delayTimeMotor := DINT_TO_TIME(UINT_TO_DINT(stpTempoRevezamentoMotor3)*3600000);
+;]]></ST>
+    </Algorithm>
+    <Algorithm Name="MudaPrincipal">
+      <ST><![CDATA[IF equipamentoPrincipal > 0 AND equipamentoPrincipal < 3 THEN
+	equipamentoPrincipal := equipamentoPrincipal + 1;
+ELSE 
+	equipamentoPrincipal := 1;
+END_IF;
+;]]></ST>
+    </Algorithm>
+    <Algorithm Name="ChecarQuantidadeDisponivel">
+      <ST><![CDATA[equipamentosDisponiveis := BOOL_TO_INT(stsDisponivelEquipamento1) + BOOL_TO_INT(stsDisponivelEquipamento2) +  BOOL_TO_INT(stsDisponivelEquipamento3);
+;]]></ST>
+    </Algorithm>
+    <Algorithm Name="VerificaDisponibilidade">
+      <ST><![CDATA[IF equipamentoPrincipal = 1 AND NOT stsDisponivelEquipamento1 THEN
+	equipamentoPrincipal := equipamentoPrincipal + 1;
+ELSIF equipamentoPrincipal = 2 AND NOT stsDisponivelEquipamento2 THEN
+	equipamentoPrincipal := equipamentoPrincipal + 1;
+ELSIF equipamentoPrincipal = 3 AND NOT stsDisponivelEquipamento3 THEN
+	equipamentoPrincipal := 1;
+END_IF;
+;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

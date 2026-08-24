@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="16e354ec-5d9f-4a2e-bd8f-729b36bcc427" Name="RetriggerEvent" Format="2.0" Comment="Composite Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="6/24/2026" Remarks="template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="2BC1963D96179493" Name="REQ" Comment="Normal Execution Request">
+        <With Var="Nbr" />
+        <With Var="DT1" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="4002AEF0814D09CF" Name="CNF" Comment="Execution Confirmation" />
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="CFF51EFF0A91DC53" Name="Nbr" Type="INT" Comment="Input event qualifier" />
+      <VarDeclaration ID="FDD5DC24A8674AF6" Name="DT1" Type="TIME" Comment="Delay Time" />
+    </InputVars>
+  </InterfaceList>
+  <FBNetwork>
+    <FB ID="84050A7857D57BCE" Name="Wait" Type="E_DELAY" x="1400" y="1420" Namespace="IEC61499.Standard" />
+    <FB ID="EBFB8FBF2546C644" UID="81476BFC4E0FF13F" Name="Retrigger" Type="RetriggerEventBasic" x="1260" y="920" Namespace="SE.Nereda" />
+    <Input ID="2BC1963D96179493" Name="REQ" x="420" y="932" Type="Event" />
+    <Input ID="CFF51EFF0A91DC53" Name="Nbr" x="420" y="992" Type="Data" />
+    <Input ID="FDD5DC24A8674AF6" Name="DT1" x="433.1458" y="1692" Type="Data" />
+    <Output ID="4002AEF0814D09CF" Name="CNF" x="2260" y="932" Type="Event" />
+    <EventConnections>
+      <Connection Source="$EBFB8FBF2546C644.F3D819A9AFF50ACA" Destination="$4002AEF0814D09CF" />
+      <Connection Source="$EBFB8FBF2546C644.0C05E80AEFE4A530" Destination="$84050A7857D57BCE.START">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$84050A7857D57BCE.EO" Destination="$EBFB8FBF2546C644.6CC0898E7BE72B3F">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$2BC1963D96179493" Destination="$EBFB8FBF2546C644.14E027076047CB26" />
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="$FDD5DC24A8674AF6" Destination="$84050A7857D57BCE.DT" />
+      <Connection Source="$CFF51EFF0A91DC53" Destination="$EBFB8FBF2546C644.B398D8548EE093BC" dx1="41.33337" />
+    </DataConnections>
+  </FBNetwork>
+</FBType>

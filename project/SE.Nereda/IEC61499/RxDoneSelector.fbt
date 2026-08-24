@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="f720d35c-fd6f-4a2b-802f-4db44f9716af" Name="RxDoneSelector" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="7/16/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="C7D92FA891D97969" Name="I_DONE">
+        <With Var="iDoneNFH_R1" />
+        <With Var="iDoneNFH_R2" />
+        <With Var="iDoneNFH_R3" />
+        <With Var="iDoneNFH_R4" />
+        <With Var="iDoneNFH_R5" />
+        <With Var="iDoneNFH_R6" />
+        <With Var="PositionR1" />
+        <With Var="PositionR2" />
+        <With Var="PositionR3" />
+        <With Var="PositionR4" />
+        <With Var="PositionR5" />
+        <With Var="PositionR6" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="F66E605CFBE991BE" Name="O_DONE">
+        <With Var="oDoneNFH_R1" />
+        <With Var="oDoneNFH_R2" />
+        <With Var="oDoneNFH_R3" />
+        <With Var="oDoneNFH_R4" />
+        <With Var="oDoneNFH_R5" />
+        <With Var="oDoneNFH_R6" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="B3ECC429C0788163" Name="iDoneNFH_R1" Type="BOOL" />
+      <VarDeclaration ID="2739710212C80CA3" Name="iDoneNFH_R2" Type="BOOL" />
+      <VarDeclaration ID="A2CCB6D5F7F6AEAF" Name="iDoneNFH_R3" Type="BOOL" />
+      <VarDeclaration ID="77D201FD3DEE63D7" Name="iDoneNFH_R4" Type="BOOL" />
+      <VarDeclaration ID="BB1DDB9DF63A3F82" Name="iDoneNFH_R5" Type="BOOL" />
+      <VarDeclaration ID="5D3703253DC31A95" Name="iDoneNFH_R6" Type="BOOL" />
+      <VarDeclaration ID="77812F460E40A626" Name="PositionR1" Type="INT" />
+      <VarDeclaration ID="A16D020C97250FBD" Name="PositionR2" Type="INT" />
+      <VarDeclaration ID="944003C1E69827F0" Name="PositionR3" Type="INT" />
+      <VarDeclaration ID="C1960C4B257FD0E1" Name="PositionR4" Type="INT" />
+      <VarDeclaration ID="CE3144E1F41D6AE4" Name="PositionR5" Type="INT" />
+      <VarDeclaration ID="23A5E6835D77B036" Name="PositionR6" Type="INT" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="C98FDEA92D397108" Name="oDoneNFH_R1" Type="BOOL" />
+      <VarDeclaration ID="2D4EC85CE11C4908" Name="oDoneNFH_R2" Type="BOOL" />
+      <VarDeclaration ID="1B935CA99D34F379" Name="oDoneNFH_R3" Type="BOOL" />
+      <VarDeclaration ID="97AF662E25430824" Name="oDoneNFH_R4" Type="BOOL" />
+      <VarDeclaration ID="2A3F8F868022774B" Name="oDoneNFH_R5" Type="BOOL" />
+      <VarDeclaration ID="BCD0027C2A299157" Name="oDoneNFH_R6" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="ff5cb38e-92a9-41c1-bb01-b716cd3464cd">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="REQ" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="552.9412" y="429.4117" />
+      <ECState Name="REQ" Comment="Normal execution" x="1285.647" y="940.9412">
+        <ECAction Algorithm="REQ" Output="O_DONE" />
+      </ECState>
+      <ECTransition Source="START" Destination="REQ" Condition="I_DONE&#xD;&#xA;" x="973.2817" y="622.4064">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="219.8338,133.8302,268.4351,167.7606" />
+      </ECTransition>
+      <ECTransition Source="REQ" Destination="START" Condition="1" x="912.9188" y="762.6254">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="254.1242,213.2593,205.5229,179.3289" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="REQ" Comment="Normally executed algorithm">
+      <ST><![CDATA[;
+oDoneNFH_R1 := 	(iDoneNFH_R1 AND (PositionR1 = 1)) OR
+				(iDoneNFH_R2 AND (PositionR2 = 1)) OR
+				(iDoneNFH_R3 AND (PositionR3 = 1)) OR
+				(iDoneNFH_R4 AND (PositionR4 = 1)) OR
+				(iDoneNFH_R5 AND (PositionR5 = 1)) OR
+				(iDoneNFH_R6 AND (PositionR6 = 1));
+				
+oDoneNFH_R2 := 	(iDoneNFH_R1 AND (PositionR1 = 2)) OR
+				(iDoneNFH_R2 AND (PositionR2 = 2)) OR
+				(iDoneNFH_R3 AND (PositionR3 = 2)) OR
+				(iDoneNFH_R4 AND (PositionR4 = 2)) OR
+				(iDoneNFH_R5 AND (PositionR5 = 2)) OR
+				(iDoneNFH_R6 AND (PositionR6 = 2));
+				
+oDoneNFH_R3 := 	(iDoneNFH_R1 AND (PositionR1 = 3)) OR
+				(iDoneNFH_R2 AND (PositionR2 = 3)) OR
+				(iDoneNFH_R3 AND (PositionR3 = 3)) OR
+				(iDoneNFH_R4 AND (PositionR4 = 3)) OR
+				(iDoneNFH_R5 AND (PositionR5 = 3)) OR
+				(iDoneNFH_R6 AND (PositionR6 = 3));
+				
+oDoneNFH_R4 := 	(iDoneNFH_R1 AND (PositionR1 = 4)) OR
+				(iDoneNFH_R2 AND (PositionR2 = 4)) OR
+				(iDoneNFH_R3 AND (PositionR3 = 4)) OR
+				(iDoneNFH_R4 AND (PositionR4 = 4)) OR
+				(iDoneNFH_R5 AND (PositionR5 = 4)) OR
+				(iDoneNFH_R6 AND (PositionR6 = 4));
+				
+oDoneNFH_R5 := 	(iDoneNFH_R1 AND (PositionR1 = 5)) OR
+				(iDoneNFH_R2 AND (PositionR2 = 5)) OR
+				(iDoneNFH_R3 AND (PositionR3 = 5)) OR
+				(iDoneNFH_R4 AND (PositionR4 = 5)) OR
+				(iDoneNFH_R5 AND (PositionR5 = 5)) OR
+				(iDoneNFH_R6 AND (PositionR6 = 5));
+				
+oDoneNFH_R6 := 	(iDoneNFH_R1 AND (PositionR1 = 6)) OR
+				(iDoneNFH_R2 AND (PositionR2 = 6)) OR
+				(iDoneNFH_R3 AND (PositionR3 = 6)) OR
+				(iDoneNFH_R4 AND (PositionR4 = 6)) OR
+				(iDoneNFH_R5 AND (PositionR5 = 6)) OR
+				(iDoneNFH_R6 AND (PositionR6 = 6));]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

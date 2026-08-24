@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="2db9cdbf-8a86-4465-b80d-512579e0da22" Name="AtvResetErrorLogic" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author="SESA713705" Date="8/19/2024" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="INIT" Comment="Initialization Request">
+        <With Var="ETA" />
+      </Event>
+      <Event Name="REQ_ETA" Comment="Normal Execution Request">
+        <With Var="ETA" />
+      </Event>
+      <Event Name="REQ_RESET_HMI">
+        <With Var="ResetHMI" />
+      </Event>
+      <Event Name="REQ_DELAY" />
+      <Event ID="DC1A5A32564FAFE7" Name="FB_RDY">
+        <With Var="FbReady" />
+      </Event>
+      <Event ID="67AB566705059227" Name="TIME_OUT" />
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="CNF_RESET" Comment="Execution Confirmation">
+        <With Var="ResetError" />
+      </Event>
+      <Event Name="CNF_NEED_RESET">
+        <With Var="NeedResetActivated" />
+      </Event>
+      <Event Name="CNF_CMD_READY">
+        <With Var="CmdReady" />
+      </Event>
+      <Event Name="CNF_DELAY" />
+      <Event ID="5D44D7CB37792900" Name="CNF_TIME_OUT" />
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="ETA" Type="UINT" />
+      <VarDeclaration Name="ResetHMI" Type="BOOL" />
+      <VarDeclaration ID="2058B09C5F35C56A" Name="FbReady" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="ResetError" Type="BOOL" />
+      <VarDeclaration Name="NeedResetActivated" Type="BOOL" />
+      <VarDeclaration Name="CmdReady" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="6866de3b-20fa-46e4-aa13-75033af95b72">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="INIT,ATV_RDY,NeedReset,CmdReset,SendCmdRdy,SensResetHMI,ResetReset" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="1720.941" y="697.8562" />
+      <ECState Name="Ready" x="3148" y="1424">
+        <ECAction Algorithm="ATV_RDY" Output="CNF_RESET" />
+        <ECAction Output="CNF_NEED_RESET" />
+      </ECState>
+      <ECState Name="CmdRdy" x="245.778" y="1418.222">
+        <ECAction Algorithm="SendCmdRdy" Output="CNF_RESET" />
+        <ECAction Output="CNF_CMD_READY" />
+        <ECAction Output="CNF_DELAY" />
+      </ECState>
+      <ECState Name="ResetError" x="1727.708" y="2112.667">
+        <ECAction Algorithm="CmdReset" Output="CNF_RESET" />
+        <ECAction Output="CNF_NEED_RESET" />
+        <ECAction Output="CNF_TIME_OUT" />
+      </ECState>
+      <ECState Name="STATE1" x="1720" y="1428">
+        <ECAction Algorithm="NeedReset" Output="CNF_NEED_RESET" />
+      </ECState>
+      <ECState Name="STATE2" x="1700" y="2756">
+        <ECAction Algorithm="ResetReset" Output="CNF_RESET" />
+        <ECAction Output="CNF_DELAY" />
+      </ECState>
+      <ECTransition Source="START" Destination="CmdRdy" Condition="INIT" x="884.3668" y="960.5703">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="268.3358,207.1436,163.5144,259.0968" />
+      </ECTransition>
+      <ECTransition Source="CmdRdy" Destination="ResetError" Condition="REQ_DELAY" x="800.7737" y="1916.692">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="113.8526,456.3521,267.5309,523.3113" />
+      </ECTransition>
+      <ECTransition Source="ResetError" Destination="Ready" Condition="ETA = 563 OR ETA = 561 OR FbReady" x="2537.167" y="1785.69">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="585.4031,474.3952,693.6686,421.3424" />
+      </ECTransition>
+      <ECTransition Source="Ready" Destination="START" Condition="1" x="2519.116" y="888.7156">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="686.6542,239.1265,579.9465,180.4866" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="STATE1" Condition="(REQ_ETA AND (ETA = 576 OR ETA = 592 OR ETA = 568)) OR&#xD;&#xA;(FB_RDY AND NOT FbReady)" x="1724.521" y="1060.153">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="431.4143,238.7328,431.3499,290.8814" />
+      </ECTransition>
+      <ECTransition Source="STATE1" Destination="ResetError" Condition="1" x="1724.058" y="1771.541">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="430.7626,418.8068,431.3057,467.1652" />
+      </ECTransition>
+      <ECTransition Source="ResetError" Destination="STATE2" Condition="REQ_RESET_HMI OR TIME_OUT" x="1875.596" y="2416.242">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="479.4829,580.0923,477.7079,625.0135" />
+      </ECTransition>
+      <ECTransition Source="STATE2" Destination="ResetError" Condition="REQ_DELAY" x="1490.855" y="2409.166">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="358.6108,622.6251,360.2938,577.7635" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="INIT" Comment="Initialization algorithm">
+      <ST><![CDATA[;
+ResetError := FALSE;
+CmdReady := TRUE;]]></ST>
+    </Algorithm>
+    <Algorithm Name="ATV_RDY">
+      <ST><![CDATA[;
+ResetError := FALSE;
+NeedResetActivated := FALSE;]]></ST>
+    </Algorithm>
+    <Algorithm Name="NeedReset">
+      <ST><![CDATA[;
+NeedResetActivated := TRUE;]]></ST>
+    </Algorithm>
+    <Algorithm Name="CmdReset">
+      <ST><![CDATA[ResetError := TRUE;
+NeedResetActivated := TRUE;]]></ST>
+    </Algorithm>
+    <Algorithm Name="SendCmdRdy">
+      <ST><![CDATA[ResetError := FALSE;
+CmdReady := TRUE;]]></ST>
+    </Algorithm>
+    <Algorithm Name="SensResetHMI">
+      <ST><![CDATA[;
+ResetError := ResetHMI;]]></ST>
+    </Algorithm>
+    <Algorithm ID="ef9ffc9b-505e-408b-8a4c-986ec02d2ee7" Name="ResetReset">
+      <ST><![CDATA[;
+ResetError := FALSE;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

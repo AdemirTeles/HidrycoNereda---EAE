@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="0550cc0e-904d-48e0-9665-f9054d3d0209" Name="eventToBool" Comment="Basic Function Block Type" Namespace="Hidryco.HidrycoLib">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="16/01/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="REQ" Comment="Normal Execution Request" />
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="CNF" Comment="Execution Confirmation">
+        <With Var="QO" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="CMD_FALSE" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="QO" Type="BOOL" Comment="Output event qualifier" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="LogicaTrueBool,LogicaFalseBool" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="1432.941" y="553.4117" />
+      <ECState Name="STATE1" x="1772" y="1112">
+        <ECAction Algorithm="LogicaTrueBool" Output="CNF" />
+      </ECState>
+      <ECState Name="STATE2" x="747.9999" y="1152">
+        <ECAction Algorithm="LogicaFalseBool" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="STATE1" Condition="REQ" x="1672.081" y="789.8154">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="409.2812,174.8461,432.8671,212.9132" />
+      </ECTransition>
+      <ECTransition Source="STATE1" Destination="START" Condition="1" x="1567.078" y="895.5154">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="403.0711,248.3361,379.0823,209.8899" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="STATE2" Condition="CMD_FALSE" x="1126.99" y="911.4078">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="303.0725,214.8346,261.0265,250.6529" />
+      </ECTransition>
+      <ECTransition Source="STATE2" Destination="START" Condition="1" x="1073.455" y="778.0756">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="249.6786,205.9586,290.2838,170.6408" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="LogicaTrueBool">
+      <ST><![CDATA[QO := TRUE;
+;]]></ST>
+    </Algorithm>
+    <Algorithm Name="LogicaFalseBool">
+      <ST><![CDATA[QO := FALSE;
+;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

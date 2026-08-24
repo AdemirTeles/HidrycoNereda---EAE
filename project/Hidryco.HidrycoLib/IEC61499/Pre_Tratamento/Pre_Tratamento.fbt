@@ -1,0 +1,572 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="d74460cb-dc3c-4463-ad33-947c83e2a31e" Name="Pre_Tratamento" Format="2.0" Comment="Composite Function Block Type" Namespace="Hidryco.HidrycoLib">
+  <Attribute Name="HMI.Alias" Value="" />
+  <Attribute Name="Configuration.FB.IDCounter" Value="24" />
+  <Identification Standard="61499-2" />
+  <VersionInfo Version="0.0" Author=" " Date="09/03/2026" Remarks="template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="E_RESET_FALHAS_PROCESSO">
+        <With Var="cmdResetFalhas" />
+      </Event>
+      <Event ID="C2F7187A4E6B5C4F" Name="REQ">
+        <With Var="geradorConectado" />
+        <With Var="geradorHabilita" />
+        <With Var="stsGerador" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="E_ATUALIZA_SAIDA">
+        <With Var="stsNivelAltoTanqueGordura" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="cmdResetFalhas" Type="BOOL" />
+      <VarDeclaration ID="C1E2DBFA1E0A2066" Name="geradorConectado" Type="BOOL" />
+      <VarDeclaration ID="F302581DCA5507BC" Name="geradorHabilita" Type="BOOL" />
+      <VarDeclaration ID="DF4D80AA2D823CD0" Name="stsGerador" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="stsNivelAltoTanqueGordura" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <FBNetwork>
+    <FB ID="2" Name="Peneira_Rotativa1" Type="Peneira_Rotativa" x="639.9999" y="900" Namespace="Hidryco.HidrycoLib" />
+    <FB ID="3" Name="Compressor1" Type="Compressor" x="4140" y="900" Namespace="Hidryco.HidrycoLib" />
+    <FB ID="4" Name="Rosca1Horizontal" Type="Rosca" x="2240" y="460" Namespace="Hidryco.HidrycoLib" />
+    <FB ID="5" Name="Rosca2Inclinada" Type="Rosca" x="2240" y="900" Namespace="Hidryco.HidrycoLib" />
+    <FB ID="6" Name="Raspador_Gordura1" Type="Raspador_Gordura" x="4140" y="460" Namespace="Hidryco.HidrycoLib" />
+    <FB ID="14" UID="8" Name="SYMLINKMULTIVARDST1" Type="SYMLINKMULTIVARDST_173DE751D51121F49" x="2260" y="2500" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=6;VALUE${I}:BOOL,BOOL,BOOL,BOOL,BOOL,INT" />
+      <Parameter Name="$NAME1" Value="'$${PATH}stsEmergenciaAcionada'" />
+      <Parameter Name="$NAME2" Value="'$${PATH}stsNivelBaixoPeneira'" />
+      <Parameter Name="$NAME3" Value="'$${PATH}stsNivelAltoPeneira'" />
+      <Parameter Name="$NAME4" Value="'$${PATH}stsNivelBaixoTanqueAgua'" />
+      <Parameter Name="$NAME5" Value="'$${PATH}stsNivelAltoTanqueGordura'" />
+      <Parameter Name="$NAME6" Value="'$${PATH}stsNivelPeneira'" />
+      <Parameter Name="$QI" Value="TRUE" />
+    </FB>
+    <FB ID="9" Name="IThis" Type="Pre_Tratamento_HMI" x="3260" y="2520" Namespace="Hidryco.HidrycoLib">
+      <Parameter Name="$8ADD854C249DC51E" Value="TRUE" />
+    </FB>
+    <FB ID="20" UID="10" Name="SYMLINKMULTIVARSRC1" Type="SYMLINKMULTIVARSRC_91EC7219ED37E472" x="6400" y="2600" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=8;VALUE${I}:BOOL,BOOL,BOOL,BOOL,BOOL,BOOL,BOOL,BOOL" />
+      <Parameter Name="$QI" Value="TRUE" />
+      <Parameter Name="$NAME1" Value="'$${PATH}cmdLigaSubsistemaPeneira'" />
+      <Parameter Name="$NAME2" Value="'$${PATH}cmdSelecaoSubsistemaPeneira'" />
+      <Parameter Name="$NAME3" Value="'$${PATH}cmdLigaSubsistemaRoscas'" />
+      <Parameter Name="$NAME4" Value="'$${PATH}cmdLigaSelecaoSubsistemaRoscas'" />
+      <Parameter Name="$NAME5" Value="'$${PATH}cmdLigaSubsistemaRaspComp'" />
+      <Parameter Name="$NAME6" Value="'$${PATH}cmdSelecaoSubsistemaRaspComp'" />
+      <Parameter Name="$NAME7" Value="'$${PATH}cmdSelecaoBombaHigienizacao'" />
+      <Parameter Name="$NAME8" Value="'$${PATH}cmdResetPainel'" />
+    </FB>
+    <FB ID="13" Name="plcStart1" Type="plcStart" x="1160" y="2680" Namespace="SE.App2Base">
+      <Parameter Name="$Prio" Value="10" />
+    </FB>
+    <FB ID="15" Name="Bomba_Higienizacao1" Type="Bomba_Higienizacao" x="639.9999" y="460" Namespace="Hidryco.HidrycoLib" />
+    <FB ID="16" Name="Bomba_Higienizacao2" Type="Bomba_Higienizacao" x="2240" y="60" Namespace="Hidryco.HidrycoLib" />
+    <FB ID="17" Name="Valvula_Higienizacao1" Type="Valvula_Higienizacao" x="639.9999" y="60" Namespace="Hidryco.HidrycoLib" />
+    <FB ID="18" Name="Valvula_Higienizacao2" Type="Valvula_Higienizacao" x="4140" y="60" Namespace="Hidryco.HidrycoLib" />
+    <FB ID="23" Name="E_MERGE1" Type="E_MERGE" x="5700" y="1300" Namespace="IEC61499.Standard" />
+    <FB ID="24" Name="OR1" Type="OR_148CCC6046D4CE74C" x="4900" y="3940" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNT:=2" />
+    </FB>
+    <FB ID="CBB24F7E22767C55" Name="animacao_icone_gerador1" Type="animacao_icone_gerador" x="2220" y="1560" Namespace="Hidryco.HidrycoLib" />
+    <FB ID="CAD7B1C5A075A5F8" UID="BFE88F36DE29FAE6" Name="COMPARE1" Type="COMPARE_739E3FB559152FE" x="1520" y="1620" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNT:=2;IN${CNT}:INT" />
+      <Parameter Name="$IN2" Value="1" />
+    </FB>
+    <Input Name="E_RESET_FALHAS_PROCESSO" x="3760" y="3932" Type="Event" />
+    <Input Name="cmdResetFalhas" x="3780" y="4132" Type="Data" />
+    <Input ID="C1E2DBFA1E0A2066" Name="geradorConectado" x="100" y="1892" Type="Data" />
+    <Input ID="F302581DCA5507BC" Name="geradorHabilita" x="100" y="1952" Type="Data" />
+    <Input ID="DF4D80AA2D823CD0" Name="stsGerador" x="100" y="1832" Type="Data" />
+    <Input ID="C2F7187A4E6B5C4F" Name="REQ" x="100" y="1772" Type="Event" />
+    <Output Name="stsNivelAltoTanqueGordura" x="6360" y="2432" Type="Data" />
+    <Output Name="E_ATUALIZA_SAIDA" x="6360" y="2372" Type="Event" />
+    <EventConnections>
+      <Connection Source="$13.REDO_INIT" Destination="$14.INIT" dx1="70" />
+      <Connection Source="$13.FIRST_INIT" Destination="$14.INIT" dx1="50" />
+      <Connection Source="$20.INITO" Destination="$13.ACK_FIRST">
+        <Points>
+          <Points>
+            <X>1738.28125</X>
+            <Y>660</Y>
+          </Points>
+          <Points>
+            <X>1748.28125</X>
+            <Y>660</Y>
+          </Points>
+          <Points>
+            <X>1748.28125</X>
+            <Y>632.5</Y>
+          </Points>
+          <Points>
+            <X>1212.5</X>
+            <Y>632.5</Y>
+          </Points>
+          <Points>
+            <X>1212.5</X>
+            <Y>1002.5</Y>
+          </Points>
+          <Points>
+            <X>272.5</X>
+            <Y>1002.5</Y>
+          </Points>
+          <Points>
+            <X>272.5</X>
+            <Y>680</Y>
+          </Points>
+          <Points>
+            <X>285</X>
+            <Y>680</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$16.E_ATUALIZA_ANIMACAO" Destination="$23.EI1" dx1="68.521" />
+      <Connection Source="$18.E_ATUALIZA_ANIMACAO" Destination="$23.EI1" dx1="68.521" />
+      <Connection Source="$6.E_ATUALIZA_ANIMACAO" Destination="$23.EI1" dx1="68.521" />
+      <Connection Source="$3.E_ATUALIZA_ANIMACAO" Destination="$23.EI1" dx1="68.521" />
+      <Connection Source="$4.E_ATUALIZA_ANIMACAO" Destination="$23.EI1" dx1="68.521" />
+      <Connection Source="$5.E_ATUALIZA_ANIMACAO" Destination="$23.EI1" dx1="68.521" />
+      <Connection Source="$2.E_ATUALIZA_ANIMACAO" Destination="$23.EI1" dx1="68.52112" />
+      <Connection Source="$15.E_ATUALIZA_ANIMACAO" Destination="$23.EI1" dx1="68.52112" />
+      <Connection Source="$17.E_ATUALIZA_ANIMACAO" Destination="$23.EI1" dx1="68.52112" />
+      <Connection Source="$14.CNF" Destination="$E_ATUALIZA_SAIDA" dx1="70" />
+      <Connection Source="$E_RESET_FALHAS_PROCESSO" Destination="$24.REQ" dx1="40" />
+      <Connection Source="$24.CNF" Destination="$20.REQ" dx1="50" />
+      <Connection Source="$14.INITO" Destination="$9.73379897072C99BC" dx1="181.625" />
+      <Connection Source="$14.CNF" Destination="$9.AB568CC2EE3C6987" dx1="161.625" />
+      <Connection Source="$14.CNF" Destination="$9.74D389496A49EC77" dx1="161.625" />
+      <Connection Source="$23.EO" Destination="$9.74D389496A49EC77" dx1="41.5415" dx2="90" dy="730" />
+      <Connection Source="$9.94C460257F7023C6" Destination="$20.INIT" dx1="240" />
+      <Connection Source="$9.E8AF34262A3C4689" Destination="$20.REQ">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$9.E8AF34262A3C4689" Destination="$2.E_ATUALIZA_SUBSISTEMA">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$9.E8AF34262A3C4689" Destination="$18.E_ATUALIZA_SUBSISTEMA">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$9.E8AF34262A3C4689" Destination="$16.E_ATUALIZA_SUBSISTEMA">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$9.E8AF34262A3C4689" Destination="$15.E_ATUALIZA_SUBSISTEMA">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$9.E8AF34262A3C4689" Destination="$17.E_ATUALIZA_SUBSISTEMA">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$9.E8AF34262A3C4689" Destination="$4.E_ATUALIZA_SUBSISTEMA" dx1="153.521" dx2="50" dy="-170" />
+      <Connection Source="$9.E8AF34262A3C4689" Destination="$5.E_ATUALIZA_SUBSISTEMA" dx1="153.521" dx2="50" dy="-170" />
+      <Connection Source="$9.E8AF34262A3C4689" Destination="$3.E_ATUALIZA_SUBSISTEMA" dx1="153.521" dx2="50" dy="-170" />
+      <Connection Source="$9.E8AF34262A3C4689" Destination="$6.E_ATUALIZA_SUBSISTEMA" dx1="153.521" dx2="50" dy="-170" />
+      <Connection Source="$9.9F72FDD749D51B8C" Destination="$24.REQ" dx1="200" />
+      <Connection Source="$2.E_ATUALIZA_ANIMACAO" Destination="$CAD7B1C5A075A5F8.REQ" dx1="68.52112" dx2="50" dy="290" />
+      <Connection Source="$CAD7B1C5A075A5F8.CNF" Destination="$CBB24F7E22767C55.6664704A75AB52C7" dx1="50" />
+      <Connection Source="$C2F7187A4E6B5C4F" Destination="$CBB24F7E22767C55.6664704A75AB52C7">
+        <Points>
+          <Points>
+            <X>90.11458</X>
+            <Y>450</Y>
+          </Points>
+          <Points>
+            <X>102.5</X>
+            <Y>450</Y>
+          </Points>
+          <Points>
+            <X>102.5</X>
+            <Y>387.5</Y>
+          </Points>
+          <Points>
+            <X>472.5</X>
+            <Y>387.5</Y>
+          </Points>
+          <Points>
+            <X>472.5</X>
+            <Y>400</Y>
+          </Points>
+          <Points>
+            <X>550</X>
+            <Y>400</Y>
+          </Points>
+        </Points>
+      </Connection>
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="$14.VALUE5" Destination="$stsNivelAltoTanqueGordura">
+        <Points>
+          <Points>
+            <X>702.09375</X>
+            <Y>805</Y>
+          </Points>
+          <Points>
+            <X>744.59375</X>
+            <Y>805</Y>
+          </Points>
+          <Points>
+            <X>744.59375</X>
+            <Y>612.5</Y>
+          </Points>
+          <Points>
+            <X>1157.5</X>
+            <Y>612.5</Y>
+          </Points>
+          <Points>
+            <X>1157.5</X>
+            <Y>615</Y>
+          </Points>
+          <Points>
+            <X>1590</X>
+            <Y>615</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$cmdResetFalhas" Destination="$24.IN1" dx1="40" />
+      <Connection Source="$24.OUT" Destination="$20.VALUE8" dx1="70" />
+      <Connection Source="$14.VALUE1" Destination="$9.344F99B3F221DB89" dx1="90" />
+      <Connection Source="$14.VALUE2" Destination="$9.206D2400C77475EC" dx1="110" />
+      <Connection Source="$14.VALUE3" Destination="$9.F741E4CC87E9D360" dx1="130" />
+      <Connection Source="$14.VALUE4" Destination="$9.D4295186230E03C6" dx1="150" />
+      <Connection Source="$14.VALUE5" Destination="$9.56CF445F3EE52492" dx1="170" />
+      <Connection Source="$14.VALUE6" Destination="$9.2F6D2B97D6A00BFD" dx1="190" />
+      <Connection Source="$15.stsAnimacao" Destination="$9.57041474E7AFFD48">
+        <Points>
+          <Points>
+            <X>460.36972</X>
+            <Y>175</Y>
+          </Points>
+          <Points>
+            <X>472.5</X>
+            <Y>175</Y>
+          </Points>
+          <Points>
+            <X>472.5</X>
+            <Y>517.5</Y>
+          </Points>
+          <Points>
+            <X>712.5</X>
+            <Y>517.5</Y>
+          </Points>
+          <Points>
+            <X>712.5</X>
+            <Y>825</Y>
+          </Points>
+          <Points>
+            <X>810</X>
+            <Y>825</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$16.stsAnimacao" Destination="$9.A2A9C8927C23787B" dx1="48.521" dx2="270" dy="1770" />
+      <Connection Source="$2.stsAnimacao" Destination="$9.227C498FDB5AF3BC">
+        <Points>
+          <Points>
+            <X>460.36972</X>
+            <Y>285</Y>
+          </Points>
+          <Points>
+            <X>472.5</X>
+            <Y>285</Y>
+          </Points>
+          <Points>
+            <X>472.5</X>
+            <Y>517.5</Y>
+          </Points>
+          <Points>
+            <X>712.5</X>
+            <Y>517.5</Y>
+          </Points>
+          <Points>
+            <X>712.5</X>
+            <Y>855</Y>
+          </Points>
+          <Points>
+            <X>810</X>
+            <Y>855</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$17.stsAnimacao" Destination="$9.474889046A548AE8">
+        <Points>
+          <Points>
+            <X>460.36972</X>
+            <Y>75</Y>
+          </Points>
+          <Points>
+            <X>472.5</X>
+            <Y>75</Y>
+          </Points>
+          <Points>
+            <X>472.5</X>
+            <Y>517.5</Y>
+          </Points>
+          <Points>
+            <X>712.5</X>
+            <Y>517.5</Y>
+          </Points>
+          <Points>
+            <X>712.5</X>
+            <Y>870</Y>
+          </Points>
+          <Points>
+            <X>810</X>
+            <Y>870</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$18.stsAnimacao" Destination="$9.1F6E3D562A459F84" dx1="48.521" dx2="330" dy="1770" />
+      <Connection Source="$3.stsAnimacao" Destination="$9.58544991851041D9" dx1="48.521" dx2="350" dy="930" />
+      <Connection Source="$6.stsAnimacao" Destination="$9.8342CB3B4DD198F8" dx1="48.521" dx2="370" dy="1370" />
+      <Connection Source="$4.stsAnimacao" Destination="$9.8375DF01E23091AE" dx1="48.521" dx2="390" dy="1370" />
+      <Connection Source="$5.stsAnimacao" Destination="$9.4E8B75A16AE36159">
+        <Points>
+          <Points>
+            <X>860.369751</X>
+            <Y>285</Y>
+          </Points>
+          <Points>
+            <X>872.5</X>
+            <Y>285</Y>
+          </Points>
+          <Points>
+            <X>872.5</X>
+            <Y>307.5</Y>
+          </Points>
+          <Points>
+            <X>802.5</X>
+            <Y>307.5</Y>
+          </Points>
+          <Points>
+            <X>802.5</X>
+            <Y>892.5</Y>
+          </Points>
+          <Points>
+            <X>707.5</X>
+            <Y>892.5</Y>
+          </Points>
+          <Points>
+            <X>707.5</X>
+            <Y>945</Y>
+          </Points>
+          <Points>
+            <X>810</X>
+            <Y>945</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$CBB24F7E22767C55.9C79DED157DD322B" Destination="$9.2E2B3C3157EA553A" dx1="49.896" dx2="430" dy="1770" />
+      <Connection Source="$9.D555435FD54ACD9C" Destination="$20.VALUE1" dx1="180" />
+      <Connection Source="$9.E2BEA107859CE40F" Destination="$20.VALUE2" dx1="160" />
+      <Connection Source="$9.E2BEA107859CE40F" Destination="$16.stsAutomaticoSubsistema" dx1="133.521" dx2="30" dy="-1570" />
+      <Connection Source="$9.E2BEA107859CE40F" Destination="$18.stsAutomaticoSubsistema" dx1="133.521" dx2="30" dy="-610" />
+      <Connection Source="$9.E2BEA107859CE40F" Destination="$15.stsAutomaticoSubsistema">
+        <Points>
+          <Points>
+            <X>1149.11975</X>
+            <Y>765</Y>
+          </Points>
+          <Points>
+            <X>1182.5</X>
+            <Y>765</Y>
+          </Points>
+          <Points>
+            <X>1182.5</X>
+            <Y>612.5</Y>
+          </Points>
+          <Points>
+            <X>367.5</X>
+            <Y>612.5</Y>
+          </Points>
+          <Points>
+            <X>367.5</X>
+            <Y>452.5</Y>
+          </Points>
+          <Points>
+            <X>142.5</X>
+            <Y>452.5</Y>
+          </Points>
+          <Points>
+            <X>142.5</X>
+            <Y>175</Y>
+          </Points>
+          <Points>
+            <X>154.999969</X>
+            <Y>175</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$9.E2BEA107859CE40F" Destination="$17.stsAutomaticoSubsistema">
+        <Points>
+          <Points>
+            <X>1149.11975</X>
+            <Y>765</Y>
+          </Points>
+          <Points>
+            <X>1182.5</X>
+            <Y>765</Y>
+          </Points>
+          <Points>
+            <X>1182.5</X>
+            <Y>612.5</Y>
+          </Points>
+          <Points>
+            <X>367.5</X>
+            <Y>612.5</Y>
+          </Points>
+          <Points>
+            <X>367.5</X>
+            <Y>452.5</Y>
+          </Points>
+          <Points>
+            <X>142.5</X>
+            <Y>452.5</Y>
+          </Points>
+          <Points>
+            <X>142.5</X>
+            <Y>75</Y>
+          </Points>
+          <Points>
+            <X>154.999969</X>
+            <Y>75</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$9.E2BEA107859CE40F" Destination="$2.stsAutomaticoSubsistema">
+        <Points>
+          <Points>
+            <X>1149.11975</X>
+            <Y>765</Y>
+          </Points>
+          <Points>
+            <X>1182.5</X>
+            <Y>765</Y>
+          </Points>
+          <Points>
+            <X>1182.5</X>
+            <Y>612.5</Y>
+          </Points>
+          <Points>
+            <X>367.5</X>
+            <Y>612.5</Y>
+          </Points>
+          <Points>
+            <X>367.5</X>
+            <Y>452.5</Y>
+          </Points>
+          <Points>
+            <X>142.5</X>
+            <Y>452.5</Y>
+          </Points>
+          <Points>
+            <X>142.5</X>
+            <Y>285</Y>
+          </Points>
+          <Points>
+            <X>154.999969</X>
+            <Y>285</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$9.DE8C26FB35029C35" Destination="$20.VALUE3" dx1="140" />
+      <Connection Source="$9.7CF47BAFC9419307" Destination="$20.VALUE4" dx1="120" />
+      <Connection Source="$9.7CF47BAFC9419307" Destination="$4.stsAutomaticoSubsistema" dx1="173.521" dx2="30" dy="-1690" />
+      <Connection Source="$9.7CF47BAFC9419307" Destination="$5.stsAutomaticoSubsistema" dx1="173.521" dx2="30" dy="-1690" />
+      <Connection Source="$9.D14ACEFD049ED51A" Destination="$20.VALUE5" dx1="100" />
+      <Connection Source="$9.470EBB1A8DC6B25" Destination="$20.VALUE6" dx1="80" />
+      <Connection Source="$9.470EBB1A8DC6B25" Destination="$3.stsAutomaticoSubsistema" dx1="213.521" dx2="30" dy="-850" />
+      <Connection Source="$9.470EBB1A8DC6B25" Destination="$6.stsAutomaticoSubsistema" dx1="213.521" dx2="30" dy="-850" />
+      <Connection Source="$9.D49E6658FAC6CE84" Destination="$20.VALUE7" dx1="60" />
+      <Connection Source="$9.43DDB15809461D8D" Destination="$24.IN2" dx1="40" />
+      <Connection Source="$2.stsAnimacao" Destination="$CAD7B1C5A075A5F8.IN1" dx1="48.52112" dx2="70" dy="90" />
+      <Connection Source="$CAD7B1C5A075A5F8.EQ" Destination="$CBB24F7E22767C55.9BDA490118C2DB82" />
+      <Connection Source="$DF4D80AA2D823CD0" Destination="$CBB24F7E22767C55.D1F24EEF47EA35FE">
+        <Points>
+          <Points>
+            <X>155.1979</X>
+            <Y>465</Y>
+          </Points>
+          <Points>
+            <X>167.5</X>
+            <Y>465</Y>
+          </Points>
+          <Points>
+            <X>167.5</X>
+            <Y>387.5</Y>
+          </Points>
+          <Points>
+            <X>472.5</X>
+            <Y>387.5</Y>
+          </Points>
+          <Points>
+            <X>472.5</X>
+            <Y>480</Y>
+          </Points>
+          <Points>
+            <X>550</X>
+            <Y>480</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$C1E2DBFA1E0A2066" Destination="$CBB24F7E22767C55.3423BEAECBF17FFD">
+        <Points>
+          <Points>
+            <X>190.796875</X>
+            <Y>480</Y>
+          </Points>
+          <Points>
+            <X>202.5</X>
+            <Y>480</Y>
+          </Points>
+          <Points>
+            <X>202.5</X>
+            <Y>387.5</Y>
+          </Points>
+          <Points>
+            <X>472.5</X>
+            <Y>387.5</Y>
+          </Points>
+          <Points>
+            <X>472.5</X>
+            <Y>450</Y>
+          </Points>
+          <Points>
+            <X>550</X>
+            <Y>450</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$F302581DCA5507BC" Destination="$CBB24F7E22767C55.D7467A745E6CDBA8">
+        <Points>
+          <Points>
+            <X>174.963531</X>
+            <Y>495</Y>
+          </Points>
+          <Points>
+            <X>187.5</X>
+            <Y>495</Y>
+          </Points>
+          <Points>
+            <X>187.5</X>
+            <Y>387.5</Y>
+          </Points>
+          <Points>
+            <X>472.5</X>
+            <Y>387.5</Y>
+          </Points>
+          <Points>
+            <X>472.5</X>
+            <Y>465</Y>
+          </Points>
+          <Points>
+            <X>550</X>
+            <Y>465</Y>
+          </Points>
+        </Points>
+      </Connection>
+    </DataConnections>
+  </FBNetwork>
+</FBType>

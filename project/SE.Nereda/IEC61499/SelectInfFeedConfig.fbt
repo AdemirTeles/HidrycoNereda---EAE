@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="1c76c03f-92b8-41d1-9f0a-96d6abb9a669" Name="SelectInfFeedConfig" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="8/24/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="86F5CC324C16477D" Name="REQ" Comment="Normal Execution Request">
+        <With Var="CmdPump_1" />
+        <With Var="PumpCapacity_1" />
+        <With Var="CmdPump_2" />
+        <With Var="PumpCapacity_2" />
+        <With Var="OneP3PConfig" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="307416DAECAB5C55" Name="CNF" Comment="Execution Confirmation">
+        <With Var="CmdPump" />
+        <With Var="PumpCapacity" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="539F2F476697016A" Name="OneP3PConfig" Type="BOOL" Comment="= FALSE : One Pump | = TRUE : 3 Pumps" />
+      <VarDeclaration ID="FA3ECE6C0D6058FE" Name="CmdPump_1" Type="INT" Comment="Input event qualifier" />
+      <VarDeclaration ID="AF5AB86AE96149F7" Name="PumpCapacity_1" Type="REAL" />
+      <VarDeclaration ID="9250B8EFFFD371CA" Name="CmdPump_2" Type="INT" />
+      <VarDeclaration ID="67B386BDD2B23ACD" Name="PumpCapacity_2" Type="REAL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="D059AA67BA6BC676" Name="CmdPump" Type="INT" Comment="Output event qualifier" />
+      <VarDeclaration ID="8B73CC04481F848C" Name="PumpCapacity" Type="REAL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="43491fbc-f904-4190-bcbe-616f8496a68b">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="OneP,ThreeP" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="1316.941" y="1021.412" />
+      <ECState Name="OneP" Comment="Initialization" x="2087.529" y="597.1765">
+        <ECAction Algorithm="OneP" Output="CNF" />
+      </ECState>
+      <ECState Name="ThreeP" Comment="Normal execution" x="1993.647" y="1580.941">
+        <ECAction Algorithm="ThreeP" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="OneP" Condition="REQ AND NOT OneP3PConfig" x="1605.099" y="728.2792">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="373.0457,189.5803,419.6004,164.0781" />
+      </ECTransition>
+      <ECTransition Source="OneP" Destination="START" Condition="1" x="1748.223" y="878.0972">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="461.8249,210.896,413.4066,237.5519" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="ThreeP" Condition="REQ AND OneP3PConfig" x="1714.8" y="1243.376">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="406.8173,287.062,452.6911,324.9924" />
+      </ECTransition>
+      <ECTransition Source="ThreeP" Destination="START" Condition="1" x="1553.153" y="1392.009">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="407.2379,373.64,361.364,335.7096" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="OneP" Comment="Initialization algorithm">
+      <ST><![CDATA[;
+CmdPump := CmdPump_1;
+PumpCapacity := PumpCapacity_1;]]></ST>
+    </Algorithm>
+    <Algorithm Name="ThreeP" Comment="Normally executed algorithm">
+      <ST><![CDATA[;
+CmdPump := CmdPump_2;
+PumpCapacity := PumpCapacity_2;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="3e1860ab-e4b0-44e8-b56d-4a71f4b31509" Name="EmergencyInit" Format="2.0" Comment="CAT Function Block Type" Namespace="SE.Nereda">
+  <Attribute Name="HMI.Alias" Value="" />
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="7/15/2026" Remarks="template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="7772EF333A96DB94" Name="INIT">
+        <With Var="Reactor_ID" />
+      </Event>
+      <Event ID="4A8FE6F9318E2B02" Name="STEP_TIME_SP">
+        <With Var="S3_SDTime" />
+        <With Var="S4_LLTime" />
+        <With Var="S5_AerateTime" />
+        <With Var="S6_VentTime" />
+        <With Var="S7_SDTime" />
+        <With Var="S8_WaitTime" />
+      </Event>
+      <Event ID="E815AC1CDB9AD32A" Name="START_INTERVAL">
+        <With Var="FeedIntervalT" />
+        <With Var="FeedIntervalV" />
+      </Event>
+      <Event ID="1FA17325B39B02F6" Name="EMERGENCY_ON">
+        <With Var="EmergencyON" />
+      </Event>
+      <Event ID="5DED6604D26A7975" Name="INIT_CMD">
+        <With Var="EmergencyON" />
+        <With Var="ReactorPosition" />
+        <With Var="Initialize" />
+        <With Var="InitRx_ToW_S2" />
+        <With Var="InitRx_ToSD" />
+        <With Var="Reactor_ID" />
+      </Event>
+      <Event ID="8D22CD40FC41E8B5" Name="START_R">
+        <With Var="StartR" />
+      </Event>
+      <Event ID="2B59ADD28234FD73" Name="REQ_CDT">
+        <With Var="InitRx_ToW_S2" />
+        <With Var="InitRx_ToSD" />
+        <With Var="Reactor_ID" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="5BE6234FD14189DB" Name="INITO" />
+      <Event ID="87FEA01C25C77B1D" Name="INIT_EMERGENCY">
+        <With Var="GoToSD" />
+        <With Var="GoToWS8" />
+        <With Var="InitialisationDone" />
+        <With Var="GoToWS2" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="948836585F0EEA5B" Name="S3_SDTime" Type="TIME" />
+      <VarDeclaration ID="0CD3D5D316F69EF0" Name="S4_LLTime" Type="TIME" />
+      <VarDeclaration ID="F6BF5230E0E343F0" Name="S5_AerateTime" Type="TIME" />
+      <VarDeclaration ID="167B000B6721BF5C" Name="S6_VentTime" Type="TIME" />
+      <VarDeclaration ID="CFBCABADFC8098AD" Name="S7_SDTime" Type="TIME" />
+      <VarDeclaration ID="38D26424A39E04A0" Name="S8_WaitTime" Type="TIME" />
+      <VarDeclaration ID="8DFF8A8B75E55DBC" Name="FeedIntervalT" Type="TIME" />
+      <VarDeclaration ID="C2EDD382E854309C" Name="FeedIntervalV" Type="REAL" />
+      <VarDeclaration ID="5CEC0909DD41DD44" Name="EmergencyON" Type="BOOL" />
+      <VarDeclaration ID="417A4B99C6EAD037" Name="ReactorPosition" Type="INT" />
+      <VarDeclaration ID="79C2DD791585EF12" Name="Initialize" Type="BOOL" />
+      <VarDeclaration ID="0058582DF67974BB" Name="StartR" Type="BOOL" />
+      <VarDeclaration ID="5DAF9F5AB9589F98" Name="InitRx_ToW_S2" Type="INT" />
+      <VarDeclaration ID="9E91693CC077CF71" Name="InitRx_ToSD" Type="INT" />
+      <VarDeclaration ID="E3C04CDD1BC5A85D" Name="Reactor_ID" Type="INT" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="D2286DA0A6C08636" Name="GoToWS2" Type="BOOL" />
+      <VarDeclaration ID="AC3533DBCBFC24D5" Name="GoToSD" Type="BOOL" />
+      <VarDeclaration ID="DF25ED8EB3FED3D4" Name="GoToWS8" Type="BOOL" />
+      <VarDeclaration ID="511C6D20E2A2A314" Name="InitialisationDone" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <FBNetwork>
+    <FB ID="B5A407B386626BD7" Name="IThis" Type="EmergencyInit_HMI" x="4660" y="400" Namespace="SE.Nereda">
+      <Parameter Name="$8EE65A607C12FF86" Value="TRUE" />
+    </FB>
+    <FB ID="E2D5A622CA93B4F4" Name="EnoughTime" Type="StepRestOfTimeCalc" x="4320" y="1320" Namespace="SE.Nereda" />
+    <FB ID="9A841A0F6B08C1E9" Name="Time2Real" Type="TIME2REAL" x="3660" y="1380" Namespace="SE.Nereda" />
+    <FB ID="77FA24304A4282A0" Name="DecideInit" Type="EmergencyDecideInit" x="5300" y="1320" Namespace="SE.Nereda" />
+    <FB ID="2E842492C3BBB88C" Name="msToMin" Type="DIVIDE" x="3660" y="2120" Namespace="SE.Nereda">
+      <Parameter Name="$02E479D09E2C7EA2" Value="1000" />
+    </FB>
+    <FB ID="D7C183DD9D643571" Name="Init" Type="E_PERMIT" x="4640" y="2120" Namespace="IEC61499.Standard" />
+    <Input ID="7772EF333A96DB94" Name="INIT" x="2020" y="370" Type="Event" />
+    <Input ID="948836585F0EEA5B" Name="S3_SDTime" x="1880" y="1210" Type="Data" />
+    <Input ID="0CD3D5D316F69EF0" Name="S4_LLTime" x="1880" y="1270" Type="Data" />
+    <Input ID="F6BF5230E0E343F0" Name="S5_AerateTime" x="1880" y="1330" Type="Data" />
+    <Input ID="167B000B6721BF5C" Name="S6_VentTime" x="1880" y="1390" Type="Data" />
+    <Input ID="CFBCABADFC8098AD" Name="S7_SDTime" x="1880" y="1450" Type="Data" />
+    <Input ID="38D26424A39E04A0" Name="S8_WaitTime" x="1880" y="1510" Type="Data" />
+    <Input ID="4A8FE6F9318E2B02" Name="STEP_TIME_SP" x="1880" y="1150" Type="Event" />
+    <Input ID="E815AC1CDB9AD32A" Name="START_INTERVAL" x="1880" y="1710" Type="Event" />
+    <Input ID="8DFF8A8B75E55DBC" Name="FeedIntervalT" x="1880" y="1792" Type="Data" />
+    <Input ID="C2EDD382E854309C" Name="FeedIntervalV" x="1880" y="1844" Type="Data" />
+    <Input ID="5CEC0909DD41DD44" Name="EmergencyON" x="1880" y="2090" Type="Data" />
+    <Input ID="1FA17325B39B02F6" Name="EMERGENCY_ON" x="1880" y="2030" Type="Event" />
+    <Input ID="5DED6604D26A7975" Name="INIT_CMD" x="1880" y="2298" Type="Event" />
+    <Input ID="417A4B99C6EAD037" Name="ReactorPosition" x="1880" y="1570" Type="Data" />
+    <Input ID="79C2DD791585EF12" Name="Initialize" x="1880" y="2356" Type="Data" />
+    <Input ID="8D22CD40FC41E8B5" Name="START_R" x="1878.896" y="2540" Type="Event" />
+    <Input ID="0058582DF67974BB" Name="StartR" x="1880" y="2606" Type="Data" />
+    <Input ID="2B59ADD28234FD73" Name="REQ_CDT" x="1880" y="2790" Type="Event" />
+    <Input ID="5DAF9F5AB9589F98" Name="InitRx_ToW_S2" x="1880" y="2850" Type="Data" />
+    <Input ID="9E91693CC077CF71" Name="InitRx_ToSD" x="1880" y="2910" Type="Data" />
+    <Input ID="E3C04CDD1BC5A85D" Name="Reactor_ID" x="1880" y="2970" Type="Data" />
+    <Frame Name="FRAME6" X="1120" Y="1000" Width="2160" Height="2180">
+      <Parameter Name="BackgroundColor" Value="AntiqueWhite" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 14.25pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="01 - FUNCTIONNAL INPUT INTERFACE" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME8" X="1120" Y="160" Width="2160" Height="800.0001">
+      <Parameter Name="BackgroundColor" Value="AliceBlue" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 14.25pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="00 - INITIALIZATION" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME13" X="3320" Y="1000" Width="3040" Height="1720">
+      <Parameter Name="BackgroundColor" Value="224, 224, 224" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 14.25pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="05 - LOGIC" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME15" X="3320" Y="160" Width="3040" Height="800.0001">
+      <Parameter Name="BackgroundColor" Value="LavenderBlush" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 14.25pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="06 - HMI INTERFACE" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME16" X="3320" Y="2760" Width="3040" Height="320">
+      <Parameter Name="BackgroundColor" Value="LightGoldenrodYellow" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 14.25pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="03 - FIELD INTERFACE" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME17" X="6400" Y="160" Width="2060" Height="800">
+      <Parameter Name="BackgroundColor" Value="AntiqueWhite" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 14.25pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="02 - FUNCTIONNAL OUTPUT INTERFACE" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME18" X="3440" Y="1140" Width="2800" Height="1440">
+      <Parameter Name="BackgroundColor" Value="ButtonFace" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 14.25pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="Logic" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME19" X="6400" Y="1000" Width="2060" Height="500">
+      <Parameter Name="BackgroundColor" Value="192, 255, 192" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 14.25pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="04 - CHILDREN" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME20" X="6540" Y="1160" Width="1780" Height="200">
+      <Parameter Name="BackgroundColor" Value="DarkSeaGreen" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 12pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="4A - TYPICALS" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Output ID="D2286DA0A6C08636" Name="GoToWS2" x="7200" y="469.9999" Type="Data" />
+    <Output ID="511C6D20E2A2A314" Name="InitialisationDone" x="7200" y="650" Type="Data" />
+    <Output ID="5BE6234FD14189DB" Name="INITO" x="1980" y="590" Type="Event" />
+    <Output ID="87FEA01C25C77B1D" Name="INIT_EMERGENCY" x="7200" y="366" Type="Event" />
+    <Output ID="AC3533DBCBFC24D5" Name="GoToSD" x="7200" y="530" Type="Data" />
+    <Output ID="DF25ED8EB3FED3D4" Name="GoToWS8" x="7200" y="590" Type="Data" />
+    <EventConnections>
+      <Connection Source="$7772EF333A96DB94" Destination="$B5A407B386626BD7.93BB138255CAD99E" dx1="960.7085">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$B5A407B386626BD7.6860A233C9096CA6" Destination="$5BE6234FD14189DB" dx1="120" dx2="110.0012" dy="-110">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$E815AC1CDB9AD32A" Destination="$9A841A0F6B08C1E9.9954577AA24F9DD6" dx1="129.9585">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$4A8FE6F9318E2B02" Destination="$9A841A0F6B08C1E9.9954577AA24F9DD6" dx1="164.646">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$9A841A0F6B08C1E9.79B40746AB555956" Destination="$2E842492C3BBB88C.0FDF8A587C3CA146">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$E2D5A622CA93B4F4.50D90A5AAF562FFD" Destination="$77FA24304A4282A0.A265894F67E5210F" />
+      <Connection Source="$77FA24304A4282A0.BCEA9B57A1625B8E" Destination="$87FEA01C25C77B1D" dx1="124.2295">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$D7C183DD9D643571.EO" Destination="$77FA24304A4282A0.CB5BC2F1A1AE16A3">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$1FA17325B39B02F6" Destination="$9A841A0F6B08C1E9.9954577AA24F9DD6" dx1="120">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$2E842492C3BBB88C.6D05A744943B688E" Destination="$E2D5A622CA93B4F4.DE3F91074AB90905">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$5DED6604D26A7975" Destination="$D7C183DD9D643571.EI" dx1="1265.354">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$8D22CD40FC41E8B5" Destination="$77FA24304A4282A0.BB0EC835D9E6E7EC" dx1="1599.448">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$2B59ADD28234FD73" Destination="$77FA24304A4282A0.EBD053A98A1A70A5">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$1FA17325B39B02F6" Destination="$77FA24304A4282A0.EBD053A98A1A70A5">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <Points>
+          <Points>
+            <X>622.6354</X>
+            <Y>515</Y>
+          </Points>
+          <Points>
+            <X>632.6354</X>
+            <Y>515</Y>
+          </Points>
+          <Points>
+            <X>632.6354</X>
+            <Y>512.5</Y>
+          </Points>
+          <Points>
+            <X>1007.5</X>
+            <Y>512.5</Y>
+          </Points>
+          <Points>
+            <X>1007.5</X>
+            <Y>370</Y>
+          </Points>
+          <Points>
+            <X>1300</X>
+            <Y>370</Y>
+          </Points>
+        </Points>
+      </Connection>
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="$C2EDD382E854309C" Destination="$2E842492C3BBB88C.8EF5C40F2FEA5451" dx1="128.625">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$9A841A0F6B08C1E9.8AC404843F53B283" Destination="$E2D5A622CA93B4F4.F22EA5F248A50CC4" dx1="147.4377" />
+      <Connection Source="$9A841A0F6B08C1E9.FADDF116EEE78DD8" Destination="$E2D5A622CA93B4F4.BA6E402D256389C3" dx1="120.0002" />
+      <Connection Source="$9A841A0F6B08C1E9.F0AD27F053D1AF98" Destination="$E2D5A622CA93B4F4.99CDBF035F753575" dx1="100" />
+      <Connection Source="$9A841A0F6B08C1E9.B25DE754B5185002" Destination="$E2D5A622CA93B4F4.4007F4626DF49643" dx1="80" />
+      <Connection Source="$9A841A0F6B08C1E9.AAB73CAB4AE993B0" Destination="$E2D5A622CA93B4F4.40853A2DDC4FBA1A" dx1="60" />
+      <Connection Source="$9A841A0F6B08C1E9.4D1507586A17112D" Destination="$E2D5A622CA93B4F4.31B01DC205FFD47B" dx1="40" />
+      <Connection Source="$948836585F0EEA5B" Destination="$9A841A0F6B08C1E9.158B8AA7B31D2617" dx1="126.8335">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$0CD3D5D316F69EF0" Destination="$9A841A0F6B08C1E9.00D88FA23835E0F1" dx1="138.646">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$F6BF5230E0E343F0" Destination="$9A841A0F6B08C1E9.E3DD408A3DDFE25F" dx1="120.396">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$167B000B6721BF5C" Destination="$9A841A0F6B08C1E9.3F7EBA5693CD820C" dx1="120">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$CFBCABADFC8098AD" Destination="$9A841A0F6B08C1E9.DA4C33EA471E5B04" dx1="126.8335">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$38D26424A39E04A0" Destination="$9A841A0F6B08C1E9.E244C798548C3E17" dx1="120.521">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$E2D5A622CA93B4F4.E0E78CD8F23592D1" Destination="$77FA24304A4282A0.02AAB2707FF1365A" dx1="40" />
+      <Connection Source="$77FA24304A4282A0.507EF3B39A4900A8" Destination="$AC3533DBCBFC24D5" dx1="150">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$77FA24304A4282A0.D53B1E868844A93D" Destination="$DF25ED8EB3FED3D4" dx1="170">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$5CEC0909DD41DD44" Destination="$77FA24304A4282A0.B4FF674B444ECDD1" dx1="2640.458">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$417A4B99C6EAD037" Destination="$77FA24304A4282A0.44B3F632AE826032" dx1="1524.198">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$2E842492C3BBB88C.E78A8A65D4120686" Destination="$E2D5A622CA93B4F4.A2F4F2631E28A856">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$79C2DD791585EF12" Destination="$D7C183DD9D643571.PERMIT" dx1="1217.552">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$0058582DF67974BB" Destination="$77FA24304A4282A0.D52D8FD10A41816B" dx1="1562.333">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$77FA24304A4282A0.26198284473355E5" Destination="$511C6D20E2A2A314" dx1="190">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$5DAF9F5AB9589F98" Destination="$77FA24304A4282A0.C5993FA9B2F74796">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$9E91693CC077CF71" Destination="$77FA24304A4282A0.E2AC83895D726999">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$E3C04CDD1BC5A85D" Destination="$77FA24304A4282A0.6F6BBDAF0E4B9539" dx1="2772.24">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$77FA24304A4282A0.9A71B96552AFECD3" Destination="$D2286DA0A6C08636" dx1="150">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+    </DataConnections>
+  </FBNetwork>
+</FBType>

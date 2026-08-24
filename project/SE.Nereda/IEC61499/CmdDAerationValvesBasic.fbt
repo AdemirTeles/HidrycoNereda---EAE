@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="829df521-213a-4846-a06c-c69ae947b1b4" Name="CmdDAerationValvesBasic" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author="SESA713705" Date="8/9/2024" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="0181C35002D51DB9" Name="READY">
+        <With Var="Ready" />
+      </Event>
+      <Event ID="7CF49D36E36F42BF" Name="STARTING">
+        <With Var="Starting" />
+      </Event>
+      <Event ID="270A548115E0D83C" Name="RUN">
+        <With Var="Run" />
+      </Event>
+      <Event ID="B01B36972B4703C3" Name="STOPPING">
+        <With Var="Stopping" />
+      </Event>
+      <Event ID="7D39C1849D7CD2AB" Name="ABORTING">
+        <With Var="Aborting" />
+      </Event>
+      <Event ID="VALVE_036_FB_STATE" Name="AER_VALVE_FB_01">
+        <With Var="AerationValve1_FbOpen" />
+        <With Var="AerationValve1_FbClose" />
+      </Event>
+      <Event ID="VALVE_067_FB_STATE" Name="AER_VALVE_FB_02">
+        <With Var="AerationValve2_FbOpen" />
+        <With Var="AerationValve2_FbClose" />
+      </Event>
+      <Event ID="VALVE_036_AVAILABLE" Name="AER_VALVE_01_RDY">
+        <With Var="AerationValve1_Ready" />
+      </Event>
+      <Event ID="VALVE_067_AVAILABLE" Name="AER_VALVE_02_RDY">
+        <With Var="AerationValve2_Ready" />
+      </Event>
+      <Event ID="BLOWERS_STATE" Name="BLOWERS_FB">
+        <With Var="BlowersFbRunning" />
+        <With Var="BlowersFbStopped" />
+      </Event>
+      <Event ID="BLOWERS_NO_AVAILABLE" Name="BLOWERS_RDY">
+        <With Var="BlowersReady" />
+      </Event>
+      <Event Name="PARAMETERS">
+        <With Var="AerationGrid" />
+        <With Var="InfluentGrid" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="CNF_VALVE_36" Name="CNF_AER_VALVE_01">
+        <With Var="AerationValve1" />
+      </Event>
+      <Event ID="CNF_VALVE_67" Name="CNF_AER_VALVE_02">
+        <With Var="AerationValve2" />
+      </Event>
+      <Event ID="CNF_BLOWERS" Name="CNF_BLOWERS_CMD">
+        <With Var="CmdBlowers" />
+      </Event>
+      <Event Name="CNF_START_RDY">
+        <With Var="StartReady" />
+      </Event>
+      <Event Name="CNF_STOP_RDY">
+        <With Var="StopReady" />
+      </Event>
+      <Event Name="CNF_ABORT_RDY">
+        <With Var="AbortReady" />
+      </Event>
+      <Event ID="2F06A37C5DC5770F" Name="CNF_GRAPH">
+        <With Var="Grafcet" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="Ready" Type="BOOL" />
+      <VarDeclaration Name="Starting" Type="BOOL" />
+      <VarDeclaration Name="Run" Type="BOOL" />
+      <VarDeclaration Name="Stopping" Type="BOOL" />
+      <VarDeclaration Name="Aborting" Type="BOOL" />
+      <VarDeclaration ID="Valve036_FbOpen" Name="AerationValve1_FbOpen" Type="BOOL" />
+      <VarDeclaration ID="Valve036_FbClose" Name="AerationValve1_FbClose" Type="BOOL" />
+      <VarDeclaration ID="Valve067_FbOpen" Name="AerationValve2_FbOpen" Type="BOOL" />
+      <VarDeclaration ID="Valve067_FbClose" Name="AerationValve2_FbClose" Type="BOOL" />
+      <VarDeclaration ID="Valve036_Availabe" Name="AerationValve1_Ready" Type="BOOL" />
+      <VarDeclaration ID="Valve067_Availabe" Name="AerationValve2_Ready" Type="BOOL" />
+      <VarDeclaration Name="BlowersFbRunning" Type="BOOL" />
+      <VarDeclaration Name="BlowersFbStopped" Type="BOOL" />
+      <VarDeclaration ID="BlowersNotAvailable" Name="BlowersReady" Type="BOOL" />
+      <VarDeclaration Name="AerationGrid" Type="BOOL" />
+      <VarDeclaration Name="InfluentGrid" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="Valve036" Name="AerationValve1" Type="BOOL" Comment="Aeration Grid Valve" />
+      <VarDeclaration ID="Valve067" Name="AerationValve2" Type="BOOL" Comment="Influent Grid Valve" />
+      <VarDeclaration ID="Blowers" Name="CmdBlowers" Type="BOOL" />
+      <VarDeclaration Name="StartReady" Type="BOOL" />
+      <VarDeclaration Name="StopReady" Type="BOOL" />
+      <VarDeclaration Name="AbortReady" Type="BOOL" />
+      <VarDeclaration ID="CB6518449836B6D0" Name="Grafcet" Type="INT" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="4c35bdf1-231b-469b-833c-3e92166bfed2">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="CloseAllValves,StartReady,OpenValves,UpdateValvesState,AbortReady,StopReady,RunBlowers,StopBlowers,StopBlowers_WhenAborting,Open1stValve" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="3019.607" y="1216.174" />
+      <ECState Name="Ready" x="4990.477" y="573.4286">
+        <ECAction Algorithm="StopBlowers" Output="CNF_BLOWERS_CMD" />
+        <ECAction Output="CNF_START_RDY" />
+        <ECAction Output="CNF_ABORT_RDY" />
+        <ECAction Output="CNF_GRAPH" />
+      </ECState>
+      <ECState Name="Starting" x="3031.112" y="1728.223">
+        <ECAction Algorithm="OpenValves" Output="CNF_AER_VALVE_01" />
+        <ECAction Output="CNF_AER_VALVE_02" />
+        <ECAction Output="CNF_STOP_RDY" />
+        <ECAction Output="CNF_ABORT_RDY" />
+        <ECAction Output="CNF_GRAPH" />
+      </ECState>
+      <ECState Name="Run" x="3026.889" y="2700.666">
+        <ECAction Algorithm="RunBlowers" Output="CNF_BLOWERS_CMD" />
+        <ECAction Output="CNF_GRAPH" />
+      </ECState>
+      <ECState Name="Stopping1" x="5281.334" y="2379.778">
+        <ECAction Algorithm="StopBlowers" Output="CNF_BLOWERS_CMD" />
+        <ECAction Output="CNF_START_RDY" />
+        <ECAction Output="CNF_ABORT_RDY" />
+        <ECAction Output="CNF_GRAPH" />
+      </ECState>
+      <ECState Name="Aborting1" x="7430.857" y="3080.683">
+        <ECAction Algorithm="StopBlowers_WhenAborting" Output="CNF_BLOWERS_CMD" />
+        <ECAction Output="CNF_START_RDY" />
+        <ECAction Output="CNF_STOP_RDY" />
+        <ECAction Output="CNF_GRAPH" />
+      </ECState>
+      <ECState Name="Abort" x="3469.214" y="5398" />
+      <ECState Name="StopReady" x="5268.992" y="3566.777">
+        <ECAction Algorithm="StopReady" Output="CNF_STOP_RDY" />
+        <ECAction Output="CNF_GRAPH" />
+      </ECState>
+      <ECState Name="Update" x="3026.333" y="3272.333">
+        <ECAction Algorithm="UpdateValvesState" Output="CNF_AER_VALVE_01" />
+        <ECAction Output="CNF_AER_VALVE_02" />
+        <ECAction Output="CNF_GRAPH" />
+      </ECState>
+      <ECState Name="AbortReady" x="7430.429" y="4236.285">
+        <ECAction Algorithm="AbortReady" Output="CNF_ABORT_RDY" />
+        <ECAction Output="CNF_GRAPH" />
+      </ECState>
+      <ECState Name="StartReday" x="3027.111" y="2241">
+        <ECAction Algorithm="StartReady" Output="CNF_START_RDY" />
+        <ECAction Output="CNF_GRAPH" />
+      </ECState>
+      <ECState Name="Aborting2" x="7432.333" y="3640.779">
+        <ECAction Algorithm="CloseAllValves" Output="CNF_AER_VALVE_01" />
+        <ECAction Output="CNF_AER_VALVE_02" />
+        <ECAction Output="CNF_GRAPH" />
+      </ECState>
+      <ECState Name="Stopping2" x="5276.667" y="3036.746">
+        <ECAction Algorithm="CloseAllValves" Output="CNF_AER_VALVE_01" />
+        <ECAction Output="CNF_AER_VALVE_02" />
+        <ECAction Output="CNF_GRAPH" />
+      </ECState>
+      <ECState Name="CloseAll1" x="5001.333" y="1202.666">
+        <ECAction Algorithm="CloseAllValves" Output="CNF_AER_VALVE_01" />
+        <ECAction Output="CNF_AER_VALVE_02" />
+        <ECAction Output="CNF_GRAPH" />
+      </ECState>
+      <ECState Name="Open1stValve" x="3283.667" y="4109">
+        <ECAction Algorithm="Open1stValve" Output="CNF_AER_VALVE_01" />
+        <ECAction Output="CNF_AER_VALVE_02" />
+      </ECState>
+      <ECState Name="Open2ndValve" x="3283.667" y="4518">
+        <ECAction Algorithm="UpdateValvesState" Output="CNF_AER_VALVE_01" />
+        <ECAction Output="CNF_AER_VALVE_02" />
+      </ECState>
+      <ECState Name="NoParameter" x="3284.286" y="3730.324" />
+      <ECTransition Source="START" Destination="Ready" Condition="Ready AND&#xD;&#xA;(AerationValve1_FbOpen OR&#xD;&#xA;AerationValve2_FbOpen OR&#xD;&#xA;BlowersFbRunning)" x="4003.098" y="825.308">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="928.394,225.2076,1073.185,178.2289" />
+      </ECTransition>
+      <ECTransition Source="Ready" Destination="CloseAll1" Condition="BlowersFbStopped OR&#xD;&#xA;NOT BlowersReady" x="4994.583" y="876.2094">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1250.527,198.0644,1246.574,238.0673" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="Starting" Condition="STARTING AND Starting" x="3030.489" y="1477.101">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="759.1104,353.394,756.7182,385.9735" />
+      </ECTransition>
+      <ECTransition Source="Update" Destination="Stopping1" Condition="Stopping" x="4068.469" y="2918.946">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="840.4731,753.3463,1178.759,721.6086" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="Aborting1" Condition="ABORTING AND Aborting" x="6320.872" y="1993.804">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1492.509,413.5637,1840.114,560.3149" />
+      </ECTransition>
+      <ECTransition Source="Starting" Destination="StartReday" Condition="(AerationValve1_FbOpen AND AerationGrid AND AerationValve2_FbClose AND NOT InfluentGrid) OR&#xD;&#xA;(AerationValve2_FbOpen AND InfluentGrid AND AerationValve1_FbClose AND NOT AerationGrid) OR&#xD;&#xA;(AerationValve1_FbOpen AND AerationGrid AND AerationValve2_FbOpen AND InfluentGrid)&#xD;&#xA;" x="3024.211" y="1982.621">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="756.5841,479.2461,754.976,511.7326" />
+      </ECTransition>
+      <ECTransition Source="Abort" Destination="Aborting1" Condition="1" x="6057.815" y="4386.997">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1451.412,1415.305,1683.007,799.6148" />
+      </ECTransition>
+      <ECTransition Source="Stopping1" Destination="Stopping2" Condition="BlowersFbStopped" x="5280.355" y="2692.449">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1320.337,648.7697,1320.009,694.8195" />
+      </ECTransition>
+      <ECTransition Source="Run" Destination="Update" Condition="BlowersFbRunning OR Stopping" x="3022.08" y="2974.818">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="755.2516,723.2604,755.2688,762.202" />
+      </ECTransition>
+      <ECTransition Source="Stopping1" Destination="Abort" Condition="ABORTING AND Aborting" x="4744.876" y="4286.348">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1053.432,1017.248,1374.543,1190.581" />
+      </ECTransition>
+      <ECTransition Source="Starting" Destination="Abort" Condition="ABORTING AND Aborting" x="1020.873" y="4083.725">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="58.1666,919.9156,95.7691,1206.006" />
+      </ECTransition>
+      <ECTransition Source="Run" Destination="Abort" Condition="ABORTING AND Aborting" x="1494.836" y="4093.676">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="233.8796,929.8552,237.7238,1123.841" />
+      </ECTransition>
+      <ECTransition Source="Update" Destination="Abort" Condition="ABORTING AND Aborting" x="1959.113" y="4083.396">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="373.0798,916.6494,409.8774,1084.694" />
+      </ECTransition>
+      <ECTransition Source="Aborting2" Destination="AbortReady" Condition="(AerationValve1_FbClose OR NOT AerationValve1_Ready) AND&#xD;&#xA;(AerationValve2_FbClose OR NOT AerationValve2_Ready)" x="7433.287" y="3921.977">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1858.515,958.6506,1858.353,999.5784" />
+      </ECTransition>
+      <ECTransition Source="StopReady" Destination="Abort" Condition="ABORTING AND Aborting" x="5057.932" y="4771.54">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1387.535,1144.283,1246.214,1286.789" />
+      </ECTransition>
+      <ECTransition Source="AbortReady" Destination="START" Condition="1" x="1660.313" y="5357.011">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="914.8962,1833.687,-667.1934,1274.585" />
+      </ECTransition>
+      <ECTransition Source="StopReady" Destination="START" Condition="1" x="4603.837" y="2221.373">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1092.892,691.2778,1279.7,393.5671" />
+      </ECTransition>
+      <ECTransition Source="StartReday" Destination="Run" Condition="RUN AND Run = TRUE" x="3029.579" y="2472.093">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="757.5352,603.3241,757.525,632.9326" />
+      </ECTransition>
+      <ECTransition Source="Aborting1" Destination="Aborting2" Condition="BlowersFbStopped OR NOT BlowersReady" x="7438.855" y="3365.842">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1860.069,822.8981,1860.189,860.8748" />
+      </ECTransition>
+      <ECTransition Source="Stopping2" Destination="StopReady" Condition="AerationValve1_FbClose AND&#xD;&#xA;AerationValve2_FbClose" x="5270.708" y="3302.848">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1317.815,808.0663,1317.301,843.5385" />
+      </ECTransition>
+      <ECTransition Source="CloseAll1" Destination="START" Condition="(AerationValve1_FbClose OR NOT AerationValve1_Ready) AND&#xD;&#xA;(AerationValve2_FbClose OR NOT AerationValve2_Ready)" x="3989.25" y="1137.671">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1067.332,279.388,925.8983,280.4786" />
+      </ECTransition>
+      <ECTransition Source="Starting" Destination="Starting" Condition="PARAMETERS" x="2657.094" y="1737.198">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="643.7501,477.3333,644.5834,392.3333" />
+      </ECTransition>
+      <ECTransition Source="Update" Destination="NoParameter" Condition="PARAMETERS AND NOT AerationGrid AND NOT InfluentGrid" x="3193.678" y="3574.839">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="793.4677,885.0947,810.0374,914.5764" />
+      </ECTransition>
+      <ECTransition Source="Open1stValve" Destination="Open2ndValve" Condition="(AerationGrid AND AerationValve1_FbOpen) OR&#xD;&#xA;(InfluentGrid AND AerationValve2_FbOpen)" x="3283.457" y="4304.632">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="820.8539,1062.726,820.8536,1088.112" />
+      </ECTransition>
+      <ECTransition Source="Update" Destination="Update" Condition="PARAMETERS AND (AerationGrid OR InfluentGrid)" x="2592.086" y="3163.663">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="576.095,825.0775,663.595,742.5775" />
+      </ECTransition>
+      <ECTransition Source="NoParameter" Destination="Open1stValve" Condition="PARAMETERS AND (AerationGrid OR InfluentGrid)" x="3283.188" y="3927.292">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="820.7775,971.0292,820.7411,993.8887" />
+      </ECTransition>
+      <ECTransition Source="Open2ndValve" Destination="Update" Condition="1" x="2874.597" y="4110.167">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="712.3482,1093.013,692.7004,997.9039" />
+      </ECTransition>
+      <ECTransition Source="Open1stValve" Destination="Stopping1" Condition="Stopping" x="4392.762" y="3558.551">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1053.435,997.7228,1147.032,831.7833" />
+      </ECTransition>
+      <ECTransition Source="NoParameter" Destination="Stopping1" Condition="Stopping" x="4382.604" y="3360.006">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1020.297,915.8655,1173.857,812.0171" />
+      </ECTransition>
+      <ECTransition Source="NoParameter" Destination="Abort" Condition="ABORTING AND Aborting" x="2414.17" y="4080.211">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="526.8091,917.1964,541.2554,1047.473" />
+      </ECTransition>
+      <ECTransition Source="Open1stValve" Destination="Abort" Condition="ABORTING AND Aborting" x="2778.217" y="4370.089">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="648.2151,1014.053,662.4255,1112.773" />
+      </ECTransition>
+      <ECTransition Source="StartReday" Destination="Stopping1" Condition="Stopping" x="4041.132" y="2563.205">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="923.8401,652.8442,1083.554,662.6777" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="CloseAllValves">
+      <ST><![CDATA[;
+IF Grafcet = 5 THEN
+	Grafcet := 6;
+ELSIF Grafcet = 8 THEN
+	Grafcet := 9;
+ELSIF Grafcet = 11 THEN
+	Grafcet := 12;
+END_IF;
+AerationValve1 := FALSE;
+AerationValve2 := FALSE;]]></ST>
+    </Algorithm>
+    <Algorithm Name="StartReady">
+      <ST><![CDATA[;
+Grafcet := 2;
+StartReady := TRUE;]]></ST>
+    </Algorithm>
+    <Algorithm Name="OpenValves">
+      <ST><![CDATA[;
+Grafcet := 1;
+StopReady := FALSE;
+AbortReady := FALSE;
+
+IF AerationGrid AND NOT InfluentGrid THEN
+	AerationValve1 := TRUE;
+	AerationValve2 := FALSE;
+
+ELSIF NOT AerationGrid AND InfluentGrid THEN
+	AerationValve1 := FALSE;
+	AerationValve2 := TRUE;
+
+ELSIF AerationGrid AND InfluentGrid THEN
+	AerationValve1 := TRUE;
+	AerationValve2 := TRUE;
+END_IF;]]></ST>
+    </Algorithm>
+    <Algorithm Name="UpdateValvesState">
+      <ST><![CDATA[;
+Grafcet := 4;
+IF AerationGrid AND NOT InfluentGrid THEN
+	AerationValve1 := TRUE;
+	AerationValve2 := FALSE;
+
+ELSIF NOT AerationGrid AND InfluentGrid THEN
+	AerationValve1 := FALSE;
+	AerationValve2 := TRUE;
+
+ELSIF AerationGrid AND InfluentGrid THEN
+	AerationValve1 := TRUE;
+	AerationValve2 := TRUE;
+END_IF;]]></ST>
+    </Algorithm>
+    <Algorithm Name="AbortReady">
+      <ST><![CDATA[;
+Grafcet := 10;
+AbortReady := TRUE;]]></ST>
+    </Algorithm>
+    <Algorithm Name="StopReady">
+      <ST><![CDATA[;
+Grafcet := 7;
+StopReady := TRUE;]]></ST>
+    </Algorithm>
+    <Algorithm Name="RunBlowers">
+      <ST><![CDATA[;
+Grafcet := 3;
+CmdBlowers := TRUE;]]></ST>
+    </Algorithm>
+    <Algorithm Name="StopBlowers">
+      <ST><![CDATA[;
+IF Grafcet = 4 THEN
+	Grafcet := 5;
+ELSE
+	Grafcet := 11;
+END_IF;
+CmdBlowers := FALSE;
+StartReady := FALSE;
+AbortReady := FALSE;]]></ST>
+    </Algorithm>
+    <Algorithm Name="StopBlowers_WhenAborting">
+      <ST><![CDATA[;
+Grafcet := 8;
+CmdBlowers := FALSE;
+StartReady := FALSE;
+StopReady := FALSE;]]></ST>
+    </Algorithm>
+    <Algorithm ID="efd24950-557f-47b4-ae2f-0d3a0233caad" Name="Open1stValve">
+      <ST><![CDATA[;
+IF AerationGrid AND NOT InfluentGrid THEN
+	AerationValve1 := TRUE;
+	
+ELSIF NOT AerationGrid AND InfluentGrid THEN
+	AerationValve2 := TRUE;
+
+ELSIF AerationGrid AND InfluentGrid THEN
+	AerationValve1 := TRUE;
+	AerationValve2 := TRUE;
+END_IF;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

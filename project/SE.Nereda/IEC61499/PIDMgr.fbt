@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="0e3b03e9-654d-4558-86fe-205a97d67c42" Name="PIDMgr" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="9/5/2025" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="REQ" Comment="Normal Execution Request">
+        <With Var="RunPID" />
+        <With Var="SpIn" />
+      </Event>
+      <Event Name="CNF_READY">
+        <With Var="InProgLocal" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="REQ_CMD">
+        <With Var="Lsp" />
+      </Event>
+      <Event ID="REQ_SP" Name="REQ_SP_OUT">
+        <With Var="LspReal1" />
+      </Event>
+      <Event Name="PROGLOCAL" Comment="Execution Confirmation">
+        <With Var="ProgLocal" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="RunPID" Type="BOOL" Comment="Input event qualifier" />
+      <VarDeclaration ID="D8DF49D0EFA511FD" Name="SpIn" Type="REAL" />
+      <VarDeclaration Name="InProgLocal" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="Lsp" Type="INT" />
+      <VarDeclaration ID="LspReal2" Name="LspReal1" Type="REAL" />
+      <VarDeclaration Name="ProgLocal" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="ProgLocal,AutoManual,Output" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="1464.941" y="405.4116" />
+      <ECState Name="ProgLocal" Comment="Normal execution" x="1473.647" y="956.9409">
+        <ECAction Algorithm="ProgLocal" Output="PROGLOCAL" />
+      </ECState>
+      <ECState Name="AutoMan" x="1476" y="1440">
+        <ECAction Algorithm="AutoManual" Output="REQ_CMD" />
+      </ECState>
+      <ECState Name="Output" x="1484" y="1916">
+        <ECAction Algorithm="Output" Output="REQ_SP_OUT" />
+      </ECState>
+      <ECTransition Source="START" Destination="ProgLocal" Condition="REQ" x="1474.07" y="674.568">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="368.4364,149.4518,369.1354,186.7308" />
+      </ECTransition>
+      <ECTransition Source="ProgLocal" Destination="AutoMan" Condition="InProgLocal" x="1479.391" y="1185.628">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="370.2047,279.5626,369.9725,311.1112" />
+      </ECTransition>
+      <ECTransition Source="AutoMan" Destination="Output" Condition="1" x="1481.127" y="1660.388">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="370.1242,398.0868,370.5389,429.172" />
+      </ECTransition>
+      <ECTransition Source="Output" Destination="START" Condition="1" x="966.6507" y="1142.292">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="204.9798,354.0653,205.6846,214.0118" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="ProgLocal" Comment="Normally executed algorithm">
+      <ST><![CDATA[ProgLocal := TRUE;]]></ST>
+    </Algorithm>
+    <Algorithm Name="AutoManual" Comment="Put PID in AUTO or MANUAL">
+      <ST><![CDATA[IF RunPID THEN 
+	Lsp := 1;
+ELSE	
+	Lsp := 0;
+END_IF;
+]]></ST>
+    </Algorithm>
+    <Algorithm Name="Output" Comment="Set output to 0 if off">
+      <ST><![CDATA[IF NOT RunPID THEN
+	LspReal1 := 0;
+ELSE
+	LspReal1 := SpIn;
+END_IF;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

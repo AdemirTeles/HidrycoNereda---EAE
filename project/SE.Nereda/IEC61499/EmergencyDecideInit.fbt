@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="525bbe71-bc39-49be-a1f5-681a37812590" Name="EmergencyDecideInit" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="7/15/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="A265894F67E5210F" Name="REQ" Comment="Normal Execution Request">
+        <With Var="EnoughTime" />
+        <With Var="InitRx_ToW_S2" />
+        <With Var="InitRx_ToSD" />
+        <With Var="Reactor_ID" />
+        <With Var="EmergencyON" />
+        <With Var="ReactorPosition" />
+      </Event>
+      <Event ID="CB5BC2F1A1AE16A3" Name="INIT_CMD">
+        <With Var="EmergencyON" />
+        <With Var="EnoughTime" />
+        <With Var="InitRx_ToW_S2" />
+        <With Var="InitRx_ToSD" />
+        <With Var="Reactor_ID" />
+        <With Var="ReactorPosition" />
+      </Event>
+      <Event ID="EBD053A98A1A70A5" Name="REQ_CDT">
+        <With Var="InitRx_ToW_S2" />
+        <With Var="InitRx_ToSD" />
+        <With Var="Reactor_ID" />
+        <With Var="EmergencyON" />
+        <With Var="ReactorPosition" />
+      </Event>
+      <Event ID="BB0EC835D9E6E7EC" Name="START_R">
+        <With Var="StartR" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="BCEA9B57A1625B8E" Name="CNF" Comment="Execution Confirmation">
+        <With Var="GoToSD" />
+        <With Var="GoToWS8" />
+        <With Var="InitialisationDone" />
+        <With Var="GoToWS2" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="02AAB2707FF1365A" Name="EnoughTime" Type="BOOL" Comment="Input event qualifier" />
+      <VarDeclaration ID="C5993FA9B2F74796" Name="InitRx_ToW_S2" Type="INT" />
+      <VarDeclaration ID="E2AC83895D726999" Name="InitRx_ToSD" Type="INT" />
+      <VarDeclaration ID="B4FF674B444ECDD1" Name="EmergencyON" Type="BOOL" />
+      <VarDeclaration ID="44B3F632AE826032" Name="ReactorPosition" Type="INT" />
+      <VarDeclaration ID="6F6BBDAF0E4B9539" Name="Reactor_ID" Type="INT" />
+      <VarDeclaration ID="D52D8FD10A41816B" Name="StartR" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="9A71B96552AFECD3" Name="GoToWS2" Type="BOOL" />
+      <VarDeclaration ID="507EF3B39A4900A8" Name="GoToSD" Type="BOOL" Comment="Output event qualifier" />
+      <VarDeclaration ID="D53B1E868844A93D" Name="GoToWS8" Type="BOOL" />
+      <VarDeclaration ID="26198284473355E5" Name="InitialisationDone" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="2e07b71e-2657-40df-8010-94f8e7c8b919">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="REQ,Reset,InitDone" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="552.9412" y="429.4117" />
+      <ECState Name="REQ" Comment="Normal execution" x="1381.647" y="964.9412">
+        <ECAction Algorithm="REQ" Output="CNF" />
+      </ECState>
+      <ECState Name="ResetGo" x="1504" y="280">
+        <ECAction Algorithm="Reset" Output="CNF" />
+      </ECState>
+      <ECState Name="Done" x="580" y="1296">
+        <ECAction Algorithm="InitDone" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="REQ" Condition="INIT_CMD AND EmergencyON AND ReactorPosition &gt; 1" x="1018.377" y="632.7268">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="227.5922,135.3317,283.1927,171.262" />
+      </ECTransition>
+      <ECTransition Source="REQ" Destination="START" Condition="1" x="885.7668" y="767.0045">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="245.0418,214.4698,189.4413,178.5394" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="ResetGo" Condition="(REQ OR REQ_CDT) AND NOT EmergencyON" x="1018.021" y="271.6906">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="226.733,68.34171,282.941,59.41219" />
+      </ECTransition>
+      <ECTransition Source="ResetGo" Destination="START" Condition="1" x="1036.567" y="437.9765">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="287.6144,109.192,231.0409,118.0797" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="Done" Condition="START_R AND StartR" x="645.5892" y="858.2366">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="165.5093,182.4145,167.6307,245.9589" />
+      </ECTransition>
+      <ECTransition Source="Done" Destination="START" Condition="1" x="382.5707" y="870.309">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="84.94506,250.0291,82.29823,186.3926" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="REQ" Comment="Normally executed algorithm">
+      <ST><![CDATA[;
+IF EnoughTime THEN
+	GoToWS8 := FALSE;
+	InitialisationDone := FALSE;
+	IF InitRx_ToW_S2 = Reactor_ID THEN
+		GoToSD := FALSE;
+		GoToWS2 := TRUE;
+	ELSIF InitRx_ToSD = Reactor_ID THEN
+		GoToSD := TRUE;
+		GoToWS2 := FALSE;
+	END_IF;
+ELSE
+	GoToSD := FALSE;
+	GoToWS2 := FALSE;
+	GoToWS8 := TRUE;
+	InitialisationDone := FALSE;
+END_IF;]]></ST>
+    </Algorithm>
+    <Algorithm ID="3bda5925-f3a3-45b1-b995-fda424c33b1f" Name="Reset">
+      <ST><![CDATA[;
+GoToSD := FALSE;
+GoToWS2 := FALSE;
+GoToWS8 := FALSE;]]></ST>
+    </Algorithm>
+    <Algorithm ID="9402421c-dd72-41bd-9995-96dddc1e4d56" Name="InitDone">
+      <ST><![CDATA[;
+GoToSD := FALSE;
+GoToWS2 := FALSE;
+GoToWS8 := FALSE;
+InitialisationDone := TRUE;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

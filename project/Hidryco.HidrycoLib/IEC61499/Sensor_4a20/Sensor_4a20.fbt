@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="0ed403f4-e168-4496-ab71-9068783d0ba1" Name="Sensor_4a20" Format="2.0" Comment="Composite Function Block Type" Namespace="Hidryco.HidrycoLib">
+  <Attribute Name="HMI.Alias" Value="" />
+  <Attribute Name="Configuration.FB.IDCounter" Value="7" />
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="1/29/2026" Remarks="template" />
+  <InterfaceList>
+    <EventOutputs>
+      <Event ID="8C197D486CC94727" Name="CNF">
+        <With Var="stsSensor" />
+        <With Var="stsFalhaSensor" />
+      </Event>
+    </EventOutputs>
+    <OutputVars>
+      <VarDeclaration ID="AACB902BF88ED98A" Name="stsSensor" Type="REAL" />
+      <VarDeclaration ID="9DB2456EEFD85A4F" Name="stsFalhaSensor" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <FBNetwork>
+    <FB ID="1" Name="FB1" Type="escalonamento" x="4740" y="1060" Namespace="Hidryco.HidrycoLib" />
+    <FB ID="2" Name="FB2" Type="alarmeHH_H_L_LL" x="4800" y="1980" Namespace="Hidryco.HidrycoLib">
+      <Parameter Name="$modoAlarme" Value="1" />
+    </FB>
+    <FB ID="3" Name="IThis" Type="Sensor_4a20_HMI" x="1480" y="1400" Namespace="Hidryco.HidrycoLib">
+      <Parameter Name="$61EEBEFFAE4C7E6A" Value="TRUE" />
+    </FB>
+    <FB ID="7" UID="5" Name="SYMLINKMULTIVARDST1" Type="SYMLINKMULTIVARDST_5A03F112CD5D470" x="700" y="2800" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=1;VALUE${I}:INT" />
+      <Parameter Name="$QI" Value="TRUE" />
+      <Parameter Name="$NAME1" Value="'$${PATH}stsSensorBruto'" />
+    </FB>
+    <FB ID="6" Name="plcStart1" Type="plcStart" x="240" y="1680" Namespace="SE.App2Base">
+      <Parameter Name="$Prio" Value="10" />
+    </FB>
+    <Output ID="AACB902BF88ED98A" Name="stsSensor" x="5760" y="1592" Type="Data" />
+    <Output ID="9DB2456EEFD85A4F" Name="stsFalhaSensor" x="5736.781" y="1452" Type="Data" />
+    <Output ID="8C197D486CC94727" Name="CNF" x="5840" y="1092" Type="Event" />
+    <EventConnections>
+      <Connection Source="$1.CNF" Destination="$2.E_ATUALIZA_ENTRADA" dx1="80" dx2="90" dy="590" />
+      <Connection Source="$1.CNF" Destination="$3.2DEB590422843D34" dx1="80" dx2="69.99988" dy="-110" />
+      <Connection Source="$2.CNF" Destination="$3.71375A55927266AF">
+        <Points>
+          <Points>
+            <X>1428.19788</X>
+            <Y>505</Y>
+          </Points>
+          <Points>
+            <X>1442.5</X>
+            <Y>505</Y>
+          </Points>
+          <Points>
+            <X>1442.5</X>
+            <Y>477.5</Y>
+          </Points>
+          <Points>
+            <X>1172.5</X>
+            <Y>477.5</Y>
+          </Points>
+          <Points>
+            <X>1172.5</X>
+            <Y>332.5</Y>
+          </Points>
+          <Points>
+            <X>317.5</X>
+            <Y>332.5</Y>
+          </Points>
+          <Points>
+            <X>317.5</X>
+            <Y>390</Y>
+          </Points>
+          <Points>
+            <X>364.999969</X>
+            <Y>390</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$3.A6B8B755362E8EC7" Destination="$2.E_ATUALIZA_SETPOINTS" dx1="382.6045" />
+      <Connection Source="$3.A6B8B755362E8EC7" Destination="$1.E_AJUSTE_STP" dx1="70" />
+      <Connection Source="$3.8DBA3B6148BD206C" Destination="$1.E_RESET_FALHA" dx1="90" />
+      <Connection Source="$3.72E98372F71595E3" Destination="$2.E_RESET_ALARMES" dx1="342.6045" />
+      <Connection Source="$3.F2D08E9F122F71EC" Destination="$6.ACK_FIRST">
+        <Points>
+          <Points>
+            <X>676.8489</X>
+            <Y>360</Y>
+          </Points>
+          <Points>
+            <X>776.8489</X>
+            <Y>360</Y>
+          </Points>
+          <Points>
+            <X>776.8489</X>
+            <Y>429.999969</Y>
+          </Points>
+          <Points>
+            <X>54.9999962</X>
+            <Y>429.999969</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$6.FIRST_INIT" Destination="$7.INIT" dx1="68.08337" dx2="50" dy="410.0001" />
+      <Connection Source="$6.REDO_INIT" Destination="$7.INIT" dx1="48.08337" dx2="50" dy="350.0001" />
+      <Connection Source="$7.INITO" Destination="$3.C9CE7FEC97FF63B7" dx1="50" dx2="229.9999" dy="-110" />
+      <Connection Source="$7.CNF" Destination="$1.REQ" dx1="70" />
+      <Connection Source="$1.CNF" Destination="$8C197D486CC94727" dx1="80" />
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="$1.stsSensorEscalonado" Destination="$2.stsEntradaAlarme" dx1="40" dx2="390" dy="210" />
+      <Connection Source="$1.stsSensorEscalonado" Destination="$3.C0ABCDF075E1A79D">
+        <Points>
+          <Points>
+            <X>1412.94263</X>
+            <Y>370</Y>
+          </Points>
+          <Points>
+            <X>1422.94263</X>
+            <Y>370</Y>
+          </Points>
+          <Points>
+            <X>1422.94263</X>
+            <Y>422.5</Y>
+          </Points>
+          <Points>
+            <X>1172.5</X>
+            <Y>422.5</Y>
+          </Points>
+          <Points>
+            <X>1172.5</X>
+            <Y>332.5</Y>
+          </Points>
+          <Points>
+            <X>332.5</X>
+            <Y>332.5</Y>
+          </Points>
+          <Points>
+            <X>332.5</X>
+            <Y>470</Y>
+          </Points>
+          <Points>
+            <X>364.999969</X>
+            <Y>470</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$1.stsFalhaSensor" Destination="$3.E9985E431FB89A02">
+        <Points>
+          <Points>
+            <X>1412.94263</X>
+            <Y>355</Y>
+          </Points>
+          <Points>
+            <X>1427.94263</X>
+            <Y>355</Y>
+          </Points>
+          <Points>
+            <X>1427.94263</X>
+            <Y>422.5</Y>
+          </Points>
+          <Points>
+            <X>1172.5</X>
+            <Y>422.5</Y>
+          </Points>
+          <Points>
+            <X>1172.5</X>
+            <Y>332.5</Y>
+          </Points>
+          <Points>
+            <X>327.5</X>
+            <Y>332.5</Y>
+          </Points>
+          <Points>
+            <X>327.5</X>
+            <Y>485</Y>
+          </Points>
+          <Points>
+            <X>364.999969</X>
+            <Y>485</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$2.stsAlarmeHH" Destination="$3.C82CA801D1092F6C">
+        <Points>
+          <Points>
+            <X>1428.19788</X>
+            <Y>585</Y>
+          </Points>
+          <Points>
+            <X>1447.5</X>
+            <Y>585</Y>
+          </Points>
+          <Points>
+            <X>1447.5</X>
+            <Y>477.5</Y>
+          </Points>
+          <Points>
+            <X>1172.5</X>
+            <Y>477.5</Y>
+          </Points>
+          <Points>
+            <X>1172.5</X>
+            <Y>332.5</Y>
+          </Points>
+          <Points>
+            <X>337.5</X>
+            <Y>332.5</Y>
+          </Points>
+          <Points>
+            <X>337.5</X>
+            <Y>500</Y>
+          </Points>
+          <Points>
+            <X>364.999969</X>
+            <Y>500</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$2.stsAlarmeH" Destination="$3.AE7C4A899B580B26">
+        <Points>
+          <Points>
+            <X>1428.19788</X>
+            <Y>600</Y>
+          </Points>
+          <Points>
+            <X>1452.5</X>
+            <Y>600</Y>
+          </Points>
+          <Points>
+            <X>1452.5</X>
+            <Y>477.5</Y>
+          </Points>
+          <Points>
+            <X>1172.5</X>
+            <Y>477.5</Y>
+          </Points>
+          <Points>
+            <X>1172.5</X>
+            <Y>332.5</Y>
+          </Points>
+          <Points>
+            <X>342.5</X>
+            <Y>332.5</Y>
+          </Points>
+          <Points>
+            <X>342.5</X>
+            <Y>515</Y>
+          </Points>
+          <Points>
+            <X>364.999969</X>
+            <Y>515</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$2.stsAlarmeL" Destination="$3.CD2C51A78C03C466">
+        <Points>
+          <Points>
+            <X>1428.19788</X>
+            <Y>615</Y>
+          </Points>
+          <Points>
+            <X>1457.5</X>
+            <Y>615</Y>
+          </Points>
+          <Points>
+            <X>1457.5</X>
+            <Y>477.5</Y>
+          </Points>
+          <Points>
+            <X>1172.5</X>
+            <Y>477.5</Y>
+          </Points>
+          <Points>
+            <X>1172.5</X>
+            <Y>332.5</Y>
+          </Points>
+          <Points>
+            <X>347.5</X>
+            <Y>332.5</Y>
+          </Points>
+          <Points>
+            <X>347.5</X>
+            <Y>530</Y>
+          </Points>
+          <Points>
+            <X>364.999969</X>
+            <Y>530</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$2.stsAlarmeLL" Destination="$3.1FB759DE167297C2" dx1="137.2085" dx2="49.99988" dy="750" />
+      <Connection Source="$3.939069D94C475C89" Destination="$1.cmdHabilitaSensor" dx1="130" />
+      <Connection Source="$3.939069D94C475C89" Destination="$2.stsSensorHabilitado" dx1="322.6045" />
+      <Connection Source="$3.86A5D97104638E60" Destination="$2.cmdHabilitaAlarmeHH" dx1="302.6045" />
+      <Connection Source="$3.57577517CE80C66F" Destination="$2.cmdHabilitaAlarmeH" dx1="282.6045" />
+      <Connection Source="$3.77B70C97887188C5" Destination="$2.cmdHabilitaAlarmeL" dx1="262.6045" />
+      <Connection Source="$3.62DA0CAC2BCB7CAE" Destination="$2.cmdHabilitaAlarmeLL" dx1="242.6045" />
+      <Connection Source="$3.34F5DC7AAFC95566" Destination="$1.stpRangeMaximo" dx1="230" />
+      <Connection Source="$3.76FB2D298BA4774E" Destination="$1.stpRangeMinimo" dx1="250" />
+      <Connection Source="$3.18DB3DA4763C63D" Destination="$2.stpTempoAlarmeHH" dx1="182.6045" />
+      <Connection Source="$3.822C226C3EFAF836" Destination="$2.stpTempoAlarmeH" dx1="162.6045" />
+      <Connection Source="$3.61B311799E9F3DA2" Destination="$2.stpTempoAlarmeL" dx1="142.6045" />
+      <Connection Source="$3.71A70E331E6B2281" Destination="$2.stpTempoAlarmeLL" dx1="122.6045" />
+      <Connection Source="$3.656A4C528450D991" Destination="$2.stpAlarmeHH" dx1="102.6045" />
+      <Connection Source="$3.DDB0422C0CB760AD" Destination="$2.stpAlarmeH" dx1="82.60449" />
+      <Connection Source="$3.AD1FE71FA411C38B" Destination="$2.stpAlarmeL" dx1="62.60449" />
+      <Connection Source="$3.1CFB95872D4B3C1B" Destination="$2.stpAlarmeLL" dx1="42.60449" />
+      <Connection Source="$7.VALUE1" Destination="$1.stsSensorBruto" dx1="1501.625" />
+      <Connection Source="$1.stsSensorEscalonado" Destination="$AACB902BF88ED98A" dx1="40" />
+      <Connection Source="$1.stsFalhaSensor" Destination="$9DB2456EEFD85A4F" dx1="38.22949" />
+    </DataConnections>
+  </FBNetwork>
+</FBType>

@@ -1,0 +1,794 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="daffe45a-e77a-4a90-bb99-caa716570fc5" Name="DosagemAlcalinizante" Format="2.0" Comment="Composite Function Block Type" Namespace="Hidryco.HidrycoLib">
+  <Attribute Name="HMI.Alias" Value="" />
+  <Attribute Name="Configuration.FB.IDCounter" Value="20" />
+  <Identification Standard="61499-2" />
+  <VersionInfo Version="0.0" Author=" " Date="02/03/2026" Remarks="template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="E_ATUALIZA_SENSOR" Name="REQ">
+        <With Var="stsSensor40QT0005" />
+        <With Var="stsEmergencia" />
+      </Event>
+    </EventInputs>
+    <InputVars>
+      <VarDeclaration ID="7468B341DA1AFDBE" Name="stsEmergencia" Type="BOOL" />
+      <VarDeclaration Name="stsSensor40QT0005" Type="REAL" />
+    </InputVars>
+  </InterfaceList>
+  <FBNetwork>
+    <FB ID="6" Name="BO_800_02" Type="Motor_Partida_Direta" x="5160" y="1580" Namespace="Hidryco.HidrycoLib" />
+    <FB ID="7" Name="DO_800_04" Type="Motor_Dosagem" x="5160" y="2700" Namespace="Hidryco.HidrycoLib" />
+    <FB ID="8" Name="DO_800_05" Type="Motor_Dosagem" x="5160" y="3780" Namespace="Hidryco.HidrycoLib" />
+    <FB ID="10" Name="LIT_800_03" Type="Sensor_Nivel_4a20" x="5840" y="4940" Namespace="Hidryco.HidrycoLib" />
+    <FB ID="11" Name="Revezamento_3_Motores_ok1" Type="Revezamento_3_Motores_ok" x="280" y="3460" Namespace="Hidryco.HidrycoLib">
+      <Parameter Name="$stsDisponivelEquipamento3" Value="FALSE" />
+    </FB>
+    <FB ID="12" Name="comandoAutomatico1" Type="comandoAutomatico" x="2720" y="3280" Namespace="Hidryco.HidrycoLib">
+      <Parameter Name="$stsDisponivelEquipamento3" Value="FALSE" />
+      <Parameter Name="$stsNecessidadeHabilitado" Value="FALSE" />
+    </FB>
+    <FB ID="13" Name="plcStart1" Type="plcStart" x="1380" y="220" Namespace="SE.App2Base">
+      <Parameter Name="$Prio" Value="10" />
+    </FB>
+    <FB ID="16" Name="IThis" Type="DosagemAlcalinizante_HMI" x="3260" y="280" Namespace="Hidryco.HidrycoLib">
+      <Parameter Name="$7E9832534733A120" Value="TRUE" />
+    </FB>
+    <FB ID="17" Name="PID_DO_800" Type="PID" x="2920" y="1140" Namespace="Hidryco.HidrycoLib" />
+    <FB ID="18" Name="comandoAutomatico2" Type="comandoAutomatico" x="2580" y="2200" Namespace="Hidryco.HidrycoLib">
+      <Parameter Name="$stsRevezamentoHabilitado" Value="FALSE" />
+      <Parameter Name="$stsNecessidadeHabilitado" Value="FALSE" />
+      <Parameter Name="$stsDisponivelEquipamento2" Value="FALSE" />
+      <Parameter Name="$stsDisponivelEquipamento3" Value="FALSE" />
+    </FB>
+    <FB ID="19" Name="BloqueioAtivaDesativa1" Type="BloqueioAtivaDesativa" x="3760" y="4300" Namespace="Hidryco.HidrycoLib">
+      <Parameter Name="$modoOperacao" Value="1" />
+    </FB>
+    <FB ID="20" Name="BloqueioAtivaDesativa2" Type="BloqueioAtivaDesativa" x="2360" y="4700" Namespace="Hidryco.HidrycoLib">
+      <Parameter Name="$modoOperacao" Value="0" />
+    </FB>
+    <Input Name="stsSensor40QT0005" x="1340" y="1312" Type="Data" />
+    <Input ID="E_ATUALIZA_SENSOR" Name="REQ" x="1340" y="1252" Type="Event" />
+    <Input ID="7468B341DA1AFDBE" Name="stsEmergencia" x="1340" y="1392" Type="Data" />
+    <Frame Name="FRAME1" X="920" Y="120" Width="1560" Height="600">
+      <Parameter Name="BackgroundColor" Value="AliceBlue" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 9.75pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="0 - INITIALIZATION" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME2" X="920" Y="760" Width="1560" Height="820">
+      <Parameter Name="BackgroundColor" Value="Cornsilk" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 9.75pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="1 - FUNCTIONAL INPUT INTERFACE" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME3" X="2520" Y="120" Width="2380" Height="720">
+      <Parameter Name="BackgroundColor" Value="PeachPuff" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 9.75pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="6 - OT-IT INTERFACE" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME4" X="4940" Y="760" Width="1780" Height="640">
+      <Parameter Name="BackgroundColor" Value="Cornsilk" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 9.75pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="2 - FUNCTIONAL OUTPUT INTERFACE" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME5" X="2540" Y="5380" Width="2380" Height="720">
+      <Parameter Name="BackgroundColor" Value="PeachPuff" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 9.75pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="3 - FIELD INTERFACE" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME6" X="4940" Y="1420" Width="2720" Height="4560">
+      <Parameter Name="BackgroundColor" Value="Honeydew" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 9.75pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="4 - CHILDREN" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME7" X="2520" Y="920" Width="2380" Height="4220">
+      <Parameter Name="BackgroundColor" Value="WhiteSmoke" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 9.75pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="5 - LOGICS" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME10" X="-79.99999" Y="2160" Width="4920" Height="2040">
+      <Parameter Name="BackgroundColor" Value="DarkGray" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 9.75pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="5.B - OPERATION MODE MANAGEMENT" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME11" X="900" Y="4240" Width="3960" Height="1100">
+      <Parameter Name="BackgroundColor" Value="DarkGray" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 9.75pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="5.C - INTERLOCKS MANAGEMENT" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME12" X="2560" Y="1000" Width="2300" Height="1120">
+      <Parameter Name="BackgroundColor" Value="DarkGray" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 9.75pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="5.A - FUNCTIONAL BEHAVIORS" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <EventConnections>
+      <Connection Source="$11.E_ATUALIZA_HABILITADO" Destination="$12.E_ATUALIZA_HABILITADOS">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$11.E_ATUALIZA_EQUIPAMENTO_PRINCIPAL" Destination="$12.E_ATUALIZA_EQUIPAMENTO_PRINCIPAL">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$8.CNF" Destination="$11.E_ATUALIZA_DISPONIBILIDADE_EQUIPAMENTO">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$7.CNF" Destination="$11.E_ATUALIZA_DISPONIBILIDADE_EQUIPAMENTO">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$7.CNF" Destination="$12.E_ATUALIZA_DISPONIBILIDADE_EQUIPAMENTOS">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$8.CNF" Destination="$12.E_ATUALIZA_DISPONIBILIDADE_EQUIPAMENTOS">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$E_ATUALIZA_SENSOR" Destination="$17.E_ATUALIZA_PV" dx1="49.54163" />
+      <Connection Source="$6.CNF" Destination="$18.E_ATUALIZA_DISPONIBILIDADE_EQUIPAMENTOS">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$6.CNF" Destination="$18.E_ATUALIZA_HABILITADOS">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$10.E_AUALIZA_SENSOR_HABILITADO" Destination="$19.E_ATUALIZA_SENSOR">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$10.E_ATUALIZA_SENSOR" Destination="$19.E_ATUALIZA_SENSOR">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$10.E_ATUALIZA_FALHA_SENSOR" Destination="$19.E_ATUALIZA_SENSOR">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$10.E_AUALIZA_SENSOR_HABILITADO" Destination="$20.E_ATUALIZA_SENSOR">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$10.E_ATUALIZA_SENSOR" Destination="$20.E_ATUALIZA_SENSOR">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$10.E_ATUALIZA_FALHA_SENSOR" Destination="$20.E_ATUALIZA_SENSOR">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$13.FIRST_INIT" Destination="$16.AB8817508E95161" dx1="68.0835" />
+      <Connection Source="$13.REDO_INIT" Destination="$16.AB8817508E95161" />
+      <Connection Source="$16.3E9DCB3F6C290B63" Destination="$6.E_RESET_FALHAS">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$16.3E9DCB3F6C290B63" Destination="$7.E_RESET_FALHAS">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$16.3E9DCB3F6C290B63" Destination="$8.E_RESET_FALHAS">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$16.89BF3FE22E96B211" Destination="$20.INIT" dx1="80.271" dx2="50" dy="470" />
+      <Connection Source="$20.INITO" Destination="$19.INIT" dx1="50" />
+      <Connection Source="$19.INITO" Destination="$11.INIT">
+        <Points>
+          <Points>
+            <X>1215.48438</X>
+            <Y>1085</Y>
+          </Points>
+          <Points>
+            <X>1227.98438</X>
+            <Y>1085</Y>
+          </Points>
+          <Points>
+            <X>1227.98438</X>
+            <Y>1057.5</Y>
+          </Points>
+          <Points>
+            <X>57.5</X>
+            <Y>1057.5</Y>
+          </Points>
+          <Points>
+            <X>57.5</X>
+            <Y>912.5</Y>
+          </Points>
+          <Points>
+            <X>37.5</X>
+            <Y>912.5</Y>
+          </Points>
+          <Points>
+            <X>37.5</X>
+            <Y>874.999939</Y>
+          </Points>
+          <Points>
+            <X>65</X>
+            <Y>874.999939</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$11.INITO" Destination="$13.ACK_FIRST" dx1="58.3335" dx2="69.99988" dy="-109.9998" />
+      <Connection Source="$E_ATUALIZA_SENSOR" Destination="$6.REQ" dx1="409.5416" />
+      <Connection Source="$E_ATUALIZA_SENSOR" Destination="$7.REQ">
+        <Points>
+          <Points>
+            <X>400.1146</X>
+            <Y>320</Y>
+          </Points>
+          <Points>
+            <X>502.5</X>
+            <Y>320</Y>
+          </Points>
+          <Points>
+            <X>502.5</X>
+            <Y>397.5</Y>
+          </Points>
+          <Points>
+            <X>1147.5</X>
+            <Y>397.5</Y>
+          </Points>
+          <Points>
+            <X>1147.5</X>
+            <Y>685</Y>
+          </Points>
+          <Points>
+            <X>1285</X>
+            <Y>685</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$E_ATUALIZA_SENSOR" Destination="$8.REQ">
+        <Points>
+          <Points>
+            <X>400.1146</X>
+            <Y>320</Y>
+          </Points>
+          <Points>
+            <X>502.5</X>
+            <Y>320</Y>
+          </Points>
+          <Points>
+            <X>502.5</X>
+            <Y>397.5</Y>
+          </Points>
+          <Points>
+            <X>1182.5</X>
+            <Y>397.5</Y>
+          </Points>
+          <Points>
+            <X>1182.5</X>
+            <Y>955</Y>
+          </Points>
+          <Points>
+            <X>1285</X>
+            <Y>955</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$18.E_ATUALIZA_COMANDO_AUTOMATICO" Destination="$6.REQ" dx1="50" />
+      <Connection Source="$19.E_ATUALIZA_BLOQUEIO" Destination="$6.REQ" dx1="70" />
+      <Connection Source="$20.E_ATUALIZA_BLOQUEIO" Destination="$7.REQ">
+        <Points>
+          <Points>
+            <X>865.4844</X>
+            <Y>1200</Y>
+          </Points>
+          <Points>
+            <X>882.9844</X>
+            <Y>1200</Y>
+          </Points>
+          <Points>
+            <X>882.9844</X>
+            <Y>1057.5</Y>
+          </Points>
+          <Points>
+            <X>1182.5</X>
+            <Y>1057.5</Y>
+          </Points>
+          <Points>
+            <X>1182.5</X>
+            <Y>685</Y>
+          </Points>
+          <Points>
+            <X>1285</X>
+            <Y>685</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$20.E_ATUALIZA_BLOQUEIO" Destination="$8.REQ">
+        <Points>
+          <Points>
+            <X>865.4844</X>
+            <Y>1200</Y>
+          </Points>
+          <Points>
+            <X>882.9844</X>
+            <Y>1200</Y>
+          </Points>
+          <Points>
+            <X>882.9844</X>
+            <Y>1057.5</Y>
+          </Points>
+          <Points>
+            <X>1182.5</X>
+            <Y>1057.5</Y>
+          </Points>
+          <Points>
+            <X>1182.5</X>
+            <Y>955</Y>
+          </Points>
+          <Points>
+            <X>1285</X>
+            <Y>955</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$12.E_ATUALIZA_COMANDO_AUTOMATICO" Destination="$8.REQ" dx1="83.16699" />
+      <Connection Source="$12.E_ATUALIZA_COMANDO_AUTOMATICO" Destination="$7.REQ" dx1="50" />
+      <Connection Source="$17.E_ATUALIZA_SAIDA" Destination="$7.REQ" dx1="378.5835" />
+      <Connection Source="$17.E_ATUALIZA_SAIDA" Destination="$8.REQ" dx1="518.5835" />
+      <Connection Source="$17.E_ATUALIZA_PID_HABILITADO" Destination="$7.REQ" dx1="378.5835" />
+      <Connection Source="$17.E_ATUALIZA_PID_HABILITADO" Destination="$8.REQ" dx1="518.5835" />
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="$11.stsRevezamentoHabilitado" Destination="$12.stsRevezamentoHabilitado" dx1="118.3335" />
+      <Connection Source="$11.stsEquipamentoPrincipal" Destination="$12.stsEquipamentoPrincipal" dx1="138.3335" />
+      <Connection Source="$7.stsDisponivelAutomatico" Destination="$11.stsDisponivelEquipamento1">
+        <Points>
+          <Points>
+            <X>1570.14063</X>
+            <Y>750</Y>
+          </Points>
+          <Points>
+            <X>1580.14063</X>
+            <Y>750</Y>
+          </Points>
+          <Points>
+            <X>1580.14063</X>
+            <Y>954.999939</Y>
+          </Points>
+          <Points>
+            <X>65</X>
+            <Y>954.999939</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$8.stsDisponivelAutomatico" Destination="$11.stsDisponivelEquipamento2">
+        <Points>
+          <Points>
+            <X>1550.14063</X>
+            <Y>1020</Y>
+          </Points>
+          <Points>
+            <X>1567.64063</X>
+            <Y>1020</Y>
+          </Points>
+          <Points>
+            <X>1567.64063</X>
+            <Y>927.5</Y>
+          </Points>
+          <Points>
+            <X>1277.5</X>
+            <Y>927.5</Y>
+          </Points>
+          <Points>
+            <X>1277.5</X>
+            <Y>1037.5</Y>
+          </Points>
+          <Points>
+            <X>52.5</X>
+            <Y>1037.5</Y>
+          </Points>
+          <Points>
+            <X>52.5</X>
+            <Y>969.999939</Y>
+          </Points>
+          <Points>
+            <X>65</X>
+            <Y>969.999939</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$7.stsDisponivelAutomatico" Destination="$12.stsDisponivelEquipamento1">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$8.stsDisponivelAutomatico" Destination="$12.stsDisponivelEquipamento2">
+        <Points>
+          <Points>
+            <X>1550.14063</X>
+            <Y>1020</Y>
+          </Points>
+          <Points>
+            <X>1567.64063</X>
+            <Y>1020</Y>
+          </Points>
+          <Points>
+            <X>1567.64063</X>
+            <Y>927.5</Y>
+          </Points>
+          <Points>
+            <X>1277.5</X>
+            <Y>927.5</Y>
+          </Points>
+          <Points>
+            <X>1277.5</X>
+            <Y>1037.5</Y>
+          </Points>
+          <Points>
+            <X>662.5</X>
+            <Y>1037.5</Y>
+          </Points>
+          <Points>
+            <X>662.5</X>
+            <Y>1000</Y>
+          </Points>
+          <Points>
+            <X>675</X>
+            <Y>1000</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$12.cmdAutomaticoEquipamento1" Destination="$7.cmdLigarAutomatico" dx1="50" />
+      <Connection Source="$12.cmdAutomaticoEquipamento2" Destination="$8.cmdLigarAutomatico" dx1="223.167" />
+      <Connection Source="$stsSensor40QT0005" Destination="$17.stsPv" dx1="39.99988" />
+      <Connection Source="$17.stsPIDHabilitado" Destination="$7.stsPIDHabilitado" dx1="518.5835" />
+      <Connection Source="$17.stsPIDHabilitado" Destination="$8.stsPIDHabilitado" dx1="698.5835" />
+      <Connection Source="$17.stsSaida" Destination="$7.stsSaidaAutomatico" dx1="518.5835" />
+      <Connection Source="$17.stsSaida" Destination="$8.stsSaidaAutomatico" dx1="68.5835">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$6.stsDiponivelAutomatico" Destination="$18.stsDisponivelEquipamento1">
+        <Points>
+          <Points>
+            <X>1533.46875</X>
+            <Y>469.999969</Y>
+          </Points>
+          <Points>
+            <X>1543.46875</X>
+            <Y>469.999969</Y>
+          </Points>
+          <Points>
+            <X>1543.46875</X>
+            <Y>597.5</Y>
+          </Points>
+          <Points>
+            <X>1277.5</X>
+            <Y>597.5</Y>
+          </Points>
+          <Points>
+            <X>1277.5</X>
+            <Y>767.5</Y>
+          </Points>
+          <Points>
+            <X>607.5</X>
+            <Y>767.5</Y>
+          </Points>
+          <Points>
+            <X>607.5</X>
+            <Y>715</Y>
+          </Points>
+          <Points>
+            <X>640</X>
+            <Y>715</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$18.cmdAutomaticoEquipamento1" Destination="$6.cmdLigarAutomatico" dx1="43.16699" />
+      <Connection Source="$19.stsBloqueioManual" Destination="$6.bloqueioManual" dx1="70" />
+      <Connection Source="$19.stsBloqueioAutomatico" Destination="$6.bloqueioAutomatico" dx1="90" />
+      <Connection Source="$10.stsSensorHabilitado" Destination="$19.stsSensorHabilitado">
+        <Points>
+          <Points>
+            <X>1677.69788</X>
+            <Y>1325</Y>
+          </Points>
+          <Points>
+            <X>1705.19788</X>
+            <Y>1325</Y>
+          </Points>
+          <Points>
+            <X>1705.19788</X>
+            <Y>1150</Y>
+          </Points>
+          <Points>
+            <X>934.999939</X>
+            <Y>1150</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$10.stsSensor" Destination="$19.stsSensor">
+        <Points>
+          <Points>
+            <X>1677.69788</X>
+            <Y>1340</Y>
+          </Points>
+          <Points>
+            <X>1710.19788</X>
+            <Y>1340</Y>
+          </Points>
+          <Points>
+            <X>1710.19788</X>
+            <Y>1165</Y>
+          </Points>
+          <Points>
+            <X>934.999939</X>
+            <Y>1165</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$10.stsFalhaSensor" Destination="$19.stsFalhaSensor">
+        <Points>
+          <Points>
+            <X>1677.69788</X>
+            <Y>1355</Y>
+          </Points>
+          <Points>
+            <X>1715.19788</X>
+            <Y>1355</Y>
+          </Points>
+          <Points>
+            <X>1715.19788</X>
+            <Y>1180</Y>
+          </Points>
+          <Points>
+            <X>934.999939</X>
+            <Y>1180</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$10.stsSensorHabilitado" Destination="$20.stsSensorHabilitado">
+        <Points>
+          <Points>
+            <X>1677.69788</X>
+            <Y>1325</Y>
+          </Points>
+          <Points>
+            <X>1707.5</X>
+            <Y>1325</Y>
+          </Points>
+          <Points>
+            <X>1707.5</X>
+            <Y>1392.5</Y>
+          </Points>
+          <Points>
+            <X>1447.5</X>
+            <Y>1392.5</Y>
+          </Points>
+          <Points>
+            <X>1447.5</X>
+            <Y>1367.5</Y>
+          </Points>
+          <Points>
+            <X>562.5</X>
+            <Y>1367.5</Y>
+          </Points>
+          <Points>
+            <X>562.5</X>
+            <Y>1250</Y>
+          </Points>
+          <Points>
+            <X>585</X>
+            <Y>1250</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$10.stsSensor" Destination="$20.stsSensor">
+        <Points>
+          <Points>
+            <X>1677.69788</X>
+            <Y>1340</Y>
+          </Points>
+          <Points>
+            <X>1712.5</X>
+            <Y>1340</Y>
+          </Points>
+          <Points>
+            <X>1712.5</X>
+            <Y>1392.5</Y>
+          </Points>
+          <Points>
+            <X>1447.5</X>
+            <Y>1392.5</Y>
+          </Points>
+          <Points>
+            <X>1447.5</X>
+            <Y>1367.5</Y>
+          </Points>
+          <Points>
+            <X>567.5</X>
+            <Y>1367.5</Y>
+          </Points>
+          <Points>
+            <X>567.5</X>
+            <Y>1265</Y>
+          </Points>
+          <Points>
+            <X>585</X>
+            <Y>1265</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$10.stsFalhaSensor" Destination="$20.stsFalhaSensor">
+        <Points>
+          <Points>
+            <X>1677.69788</X>
+            <Y>1355</Y>
+          </Points>
+          <Points>
+            <X>1717.5</X>
+            <Y>1355</Y>
+          </Points>
+          <Points>
+            <X>1717.5</X>
+            <Y>1392.5</Y>
+          </Points>
+          <Points>
+            <X>1447.5</X>
+            <Y>1392.5</Y>
+          </Points>
+          <Points>
+            <X>1447.5</X>
+            <Y>1367.5</Y>
+          </Points>
+          <Points>
+            <X>572.5</X>
+            <Y>1367.5</Y>
+          </Points>
+          <Points>
+            <X>572.5</X>
+            <Y>1280</Y>
+          </Points>
+          <Points>
+            <X>585</X>
+            <Y>1280</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$20.stsBloqueioManual" Destination="$7.stsBloqueioManual">
+        <Points>
+          <Points>
+            <X>865.4844</X>
+            <Y>1250</Y>
+          </Points>
+          <Points>
+            <X>882.9844</X>
+            <Y>1250</Y>
+          </Points>
+          <Points>
+            <X>882.9844</X>
+            <Y>1057.5</Y>
+          </Points>
+          <Points>
+            <X>1182.5</X>
+            <Y>1057.5</Y>
+          </Points>
+          <Points>
+            <X>1182.5</X>
+            <Y>765</Y>
+          </Points>
+          <Points>
+            <X>1285</X>
+            <Y>765</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$20.stsBloqueioManual" Destination="$8.stsBloqueioManual" dx1="70" />
+      <Connection Source="$20.stsBloqueioAutomatico" Destination="$8.stsBloqueioAutomatico" dx1="90" />
+      <Connection Source="$20.stsBloqueioAutomatico" Destination="$7.stsBloqueioAutomatico">
+        <Points>
+          <Points>
+            <X>865.4844</X>
+            <Y>1265</Y>
+          </Points>
+          <Points>
+            <X>887.9844</X>
+            <Y>1265</Y>
+          </Points>
+          <Points>
+            <X>887.9844</X>
+            <Y>1057.5</Y>
+          </Points>
+          <Points>
+            <X>1182.5</X>
+            <Y>1057.5</Y>
+          </Points>
+          <Points>
+            <X>1182.5</X>
+            <Y>780</Y>
+          </Points>
+          <Points>
+            <X>1285</X>
+            <Y>780</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$16.3F76E9CCEE1C62DE" Destination="$6.cmdResetFalhas" dx1="120.271" />
+      <Connection Source="$16.3F76E9CCEE1C62DE" Destination="$7.cmdResetFalhas" dx1="600.271" />
+      <Connection Source="$16.3F76E9CCEE1C62DE" Destination="$8.cmdResetFalhas" dx1="780.271" />
+      <Connection Source="$7468B341DA1AFDBE" Destination="$6.CF68B7C2C7F473D9" dx1="40" />
+      <Connection Source="$7468B341DA1AFDBE" Destination="$7.5C85E7B3BE347ADB">
+        <Points>
+          <Points>
+            <X>483.046875</X>
+            <Y>355</Y>
+          </Points>
+          <Points>
+            <X>493.046875</X>
+            <Y>355</Y>
+          </Points>
+          <Points>
+            <X>493.046875</X>
+            <Y>397.5</Y>
+          </Points>
+          <Points>
+            <X>1147.5</X>
+            <Y>397.5</Y>
+          </Points>
+          <Points>
+            <X>1147.5</X>
+            <Y>750</Y>
+          </Points>
+          <Points>
+            <X>1285</X>
+            <Y>750</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$7468B341DA1AFDBE" Destination="$8.5C85E7B3BE347ADB">
+        <Points>
+          <Points>
+            <X>483.046875</X>
+            <Y>355</Y>
+          </Points>
+          <Points>
+            <X>493.046875</X>
+            <Y>355</Y>
+          </Points>
+          <Points>
+            <X>493.046875</X>
+            <Y>397.5</Y>
+          </Points>
+          <Points>
+            <X>1182.5</X>
+            <Y>397.5</Y>
+          </Points>
+          <Points>
+            <X>1182.5</X>
+            <Y>1020</Y>
+          </Points>
+          <Points>
+            <X>1285</X>
+            <Y>1020</Y>
+          </Points>
+        </Points>
+      </Connection>
+    </DataConnections>
+  </FBNetwork>
+</FBType>

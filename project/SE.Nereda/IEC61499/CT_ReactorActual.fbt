@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="b8349f5c-2eca-41ce-8414-01094c87f5f9" Name="CT_ReactorActual" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="7/5/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="B5AD92DA165DFC02" Name="REQ" Comment="Normal Execution Request">
+        <With Var="N_AvailableReactors" />
+        <With Var="N_TotalReactors" />
+        <With Var="CT_Nominal" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="FB6D4D448571E6B8" Name="CNF" Comment="Execution Confirmation">
+        <With Var="CT_ReactorActualT" />
+        <With Var="CT_ReactorActualV" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="D315DE00E27AAC37" Name="N_AvailableReactors" Type="REAL" />
+      <VarDeclaration ID="5E724B45B393A5A5" Name="N_TotalReactors" Type="REAL" />
+      <VarDeclaration ID="01D9354E0C07C6C2" Name="CT_Nominal" Type="TIME" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="D87066B84ABC3E2B" Name="CT_ReactorActualT" Type="TIME" />
+      <VarDeclaration ID="C0B48C47E5E2C765" Name="CT_ReactorActualV" Type="REAL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="REQ" />
+    <InternalVars>
+      <VarDeclaration ID="AAA9238E7F0C0F5B" Name="InCT_Nominal" Type="REAL" />
+      <VarDeclaration ID="56FDD973421ED212" Name="InCT_ReactorActual" Type="REAL" />
+    </InternalVars>
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="552.9412" y="429.4117" />
+      <ECState Name="REQ" Comment="Normal execution" x="1205.647" y="920.9412">
+        <ECAction Algorithm="REQ" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="REQ" Condition="REQ" x="936.0784" y="614.1921">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="213.441,132.6917,256.2843,164.9554" />
+      </ECTransition>
+      <ECTransition Source="REQ" Destination="START" Condition="1" x="872.4027" y="752.4888">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="241.2452,209.926,198.4019,177.6622" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="REQ" Comment="Normally executed algorithm">
+      <ST><![CDATA[;
+InCT_Nominal := TIME_TO_REAL(CT_Nominal);
+
+IF N_TotalReactors > 0.0 THEN
+	InCT_ReactorActual := (N_AvailableReactors / N_TotalReactors) * InCT_Nominal;
+	CT_ReactorActualV := InCT_ReactorActual;
+	CT_ReactorActualT := REAL_TO_TIME(InCT_ReactorActual);
+ELSE
+	CT_ReactorActualV := 0;
+	CT_ReactorActualT := T#0s;
+END_IF;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

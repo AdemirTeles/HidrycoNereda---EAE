@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="4e2a06dc-a4ba-442a-b2e8-2fb5872b0d0d" Name="NeredaCapacitySpToDBlowersSp" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author="SESA685388" Date="10/7/2023" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="D0388ADF8D5604CA" Name="REQ">
+        <With Var="CapSp" />
+        <With Var="C_MAX" />
+        <With Var="FbTowBLRun" />
+        <With Var="BlowerFailure" />
+        <With Var="CapConfig" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="CNF" Comment="Execution Confirmation">
+        <With Var="SpeedBlower" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="Setpoint" Name="CapSp" Type="REAL" Comment="Input event qualifier" />
+      <VarDeclaration Name="C_MAX" Type="REAL" />
+      <VarDeclaration ID="Fb2BLRun" Name="FbTowBLRun" Type="BOOL" />
+      <VarDeclaration ID="2DED152C27F3FC41" Name="BlowerFailure" Type="BOOL" />
+      <VarDeclaration ID="160780B0FA04E6CC" Name="CapConfig" Type="INT" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="SpeedBlower" Type="REAL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="REQ" />
+    <InternalVars>
+      <VarDeclaration Name="Equal" Type="BOOL" />
+    </InternalVars>
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="388.9412" y="341.4117" />
+      <ECState Name="STATE2" x="1136" y="928.0001">
+        <ECAction Algorithm="REQ" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="STATE2" Condition="REQ" x="849.7797" y="582.2228">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="191.2339,121.165,240.1272,161.4392" />
+      </ECTransition>
+      <ECTransition Source="STATE2" Destination="START" Condition="1" x="615.3357" y="726.9028">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="171.7992,209.7482,121.9296,167.0803" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="REQ" Comment="Initialization algorithm">
+      <ST><![CDATA[;
+IF CapSp > 0 AND CapSp <= C_MAX AND NOT FbTowBLRun THEN
+	SpeedBlower := (CapSp / C_MAX) * 100;
+END_IF;
+
+IF C_MAX < CapSp AND CapSp <= 100.00 AND FbTowBLRun THEN
+	IF NOT BlowerFailure THEN
+		IF CapConfig = 1 THEN
+			SpeedBlower := ((CapSp - C_MAX) / (100.00 - C_MAX)) * 86.00; //0% - 86%
+		ELSIF CapConfig = 2 THEN
+			SpeedBlower := 50.00 + ((CapSp - C_MAX) / (100.00 - C_MAX)) * (86.00 - 50.00); // 50% - 86%
+		END_IF;
+	ELSE
+		SpeedBlower := CapSp; //To check this senario with Nereda Teams
+	END_IF;
+END_IF;
+
+IF CapSp = 0 THEN
+	SpeedBlower := 0.00;
+END_IF;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

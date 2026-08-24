@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="9f613675-edec-44ae-8156-cfc9458ba7ee" Name="Desidratacao_HMI" Comment="Service Interface Function Block Type" Namespace="Hidryco.HidrycoLib">
+  <Identification Standard="61499-2" />
+  <VersionInfo Version="0.2" Author=" " Date="11/05/2026" Remarks="Faceplate Desidratacao. Comandos para cPressControl (cmdStsAutomatico, cmdHabilitaRevezamento, stpTempoRevezamentoCP1/2/3), CPress1/2/3 (cmdLigaCiclo + cmdResetFalha individuais), Preparador_Polimero1 (acmAutomatico, stsAutomatico). Display: almSemBombaDisp_1/2/3 + stsTempoRestante (sec/min/hora). DESIGN: status detalhado de M1..M5/VS1/FS1/ZSAH1/ZSAH2/Floculador de cada CPress eh exibido na faceplate INDIVIDUAL do CPress (publicado direto via SYMLINKMULTIVARSRC interno do bloco CPress). Mesmo design para Preparador_Polimero (faceplate propria). Reset global cmdResetFalhas: vai para BO/BR direto; supervisorio pulsa cmdResetFalha_CP1/2/3 individualmente para cobrir CPress." />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="A0000001000000A1" Name="INIT">
+        <With Var="QI" />
+      </Event>
+      <Event ID="A0000001000000A2" Name="REQ">
+        <With Var="almSemBombaDisp_1" />
+        <With Var="almSemBombaDisp_2" />
+        <With Var="almSemBombaDisp_3" />
+        <With Var="stsTempoRestanteSegundo" />
+        <With Var="stsTempoRestanteMinuto" />
+        <With Var="stsTempoRestanteHora" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="A0000001000000B1" Name="INITO">
+        <With Var="QO" />
+        <With Var="STATUS" />
+      </Event>
+      <Event ID="A0000001000000B2" Name="E_RESET_FALHAS_PROCESSO">
+        <With Var="cmdResetFalhas" />
+      </Event>
+      <Event ID="A0000001000000B3" Name="E_ATUALIZA_COMANDOS_PROCESSO">
+        <With Var="cmdStsAutomatico" />
+        <With Var="cmdHabilitaRevezamento" />
+        <With Var="stpTempoRevezamentoCP1" />
+        <With Var="stpTempoRevezamentoCP2" />
+        <With Var="stpTempoRevezamentoCP3" />
+        <With Var="cmdLigaCiclo_CP1" />
+        <With Var="cmdLigaCiclo_CP2" />
+        <With Var="cmdLigaCiclo_CP3" />
+        <With Var="cmdResetFalha_CP1" />
+        <With Var="cmdResetFalha_CP2" />
+        <With Var="cmdResetFalha_CP3" />
+        <With Var="acmAutomatico_Pol" />
+        <With Var="stsAutomatico_Pol" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="A0000001000000C1" Name="QI" Type="BOOL" />
+      <VarDeclaration ID="A0000001000000C2" Name="almSemBombaDisp_1" Type="BOOL" Comment="Alarme: nenhuma bomba disponivel para C-Press 1" />
+      <VarDeclaration ID="A0000001000000C3" Name="almSemBombaDisp_2" Type="BOOL" Comment="Alarme: nenhuma bomba disponivel para C-Press 2" />
+      <VarDeclaration ID="A0000001000000C4" Name="almSemBombaDisp_3" Type="BOOL" Comment="Alarme: nenhuma bomba disponivel para C-Press 3" />
+      <VarDeclaration ID="A0000001000000C5" Name="stsTempoRestanteSegundo" Type="UINT" Comment="Tempo restante para revezamento (segundos)" />
+      <VarDeclaration ID="A0000001000000C6" Name="stsTempoRestanteMinuto" Type="UINT" Comment="Tempo restante para revezamento (minutos)" />
+      <VarDeclaration ID="A0000001000000C7" Name="stsTempoRestanteHora" Type="UINT" Comment="Tempo restante para revezamento (horas)" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="A0000001000000D1" Name="QO" Type="BOOL" Comment="Event Output Qualifier" />
+      <VarDeclaration ID="A0000001000000D2" Name="STATUS" Type="STRING" Comment="Service Status" />
+      <VarDeclaration ID="A0000001000000D3" Name="cmdResetFalhas" Type="BOOL" Comment="Comando global de reset de falhas" />
+      <VarDeclaration ID="A0000001000000D4" Name="cmdStsAutomatico" Type="BOOL" Comment="Operacao em automatico (cPressControl)" />
+      <VarDeclaration ID="A0000001000000D5" Name="cmdHabilitaRevezamento" Type="BOOL" Comment="Habilita revezamento entre bombas de alimentacao" />
+      <VarDeclaration ID="A0000001000000D6" Name="stpTempoRevezamentoCP1" Type="TIME" Comment="Tempo de revezamento bomba BO_900_01" />
+      <VarDeclaration ID="A0000001000000D7" Name="stpTempoRevezamentoCP2" Type="TIME" Comment="Tempo de revezamento bomba BO_900_02" />
+      <VarDeclaration ID="A0000001000000D8" Name="stpTempoRevezamentoCP3" Type="TIME" Comment="Tempo de revezamento bomba BO_900_03" />
+      <VarDeclaration ID="A0000001000000D9" Name="cmdLigaCiclo_CP1" Type="BOOL" Comment="Liga/Desliga ciclo CPress 1 (remoto)" />
+      <VarDeclaration ID="A0000001000000DA" Name="cmdLigaCiclo_CP2" Type="BOOL" Comment="Liga/Desliga ciclo CPress 2 (remoto)" />
+      <VarDeclaration ID="A0000001000000DB" Name="cmdLigaCiclo_CP3" Type="BOOL" Comment="Liga/Desliga ciclo CPress 3 (remoto)" />
+      <VarDeclaration ID="A0000001000000DC" Name="cmdResetFalha_CP1" Type="BOOL" Comment="Reset de falha CPress 1" />
+      <VarDeclaration ID="A0000001000000DD" Name="cmdResetFalha_CP2" Type="BOOL" Comment="Reset de falha CPress 2" />
+      <VarDeclaration ID="A0000001000000DE" Name="cmdResetFalha_CP3" Type="BOOL" Comment="Reset de falha CPress 3" />
+      <VarDeclaration ID="A0000001000000DF" Name="acmAutomatico_Pol" Type="BOOL" Comment="Acionamento automatico do Preparador de Polimero" />
+      <VarDeclaration ID="A0000001000000E0" Name="stsAutomatico_Pol" Type="BOOL" Comment="Status automatico do Preparador de Polimero" />
+    </OutputVars>
+  </InterfaceList>
+  <Service RightInterface="" LeftInterface="">
+    <ServiceSequence Name="" />
+  </Service>
+</FBType>

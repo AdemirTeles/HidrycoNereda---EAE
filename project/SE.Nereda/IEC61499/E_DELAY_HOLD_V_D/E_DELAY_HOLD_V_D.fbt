@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="df01af4e-3eb8-4cad-b6df-19ff074d54bc" Name="E_DELAY_HOLD_V_D" Format="2.0" Comment="Composite Function Block Type" Namespace="SE.Nereda">
+  <Attribute Name="HMI.Alias" Value="" />
+  <Attribute Name="Configuration.FB.IDCounter" Value="7" />
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author="SESA713705" Date="2/4/2026" Remarks="template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="INIT">
+        <With Var="DT1" />
+      </Event>
+      <Event Name="START" Comment="Begin Delay">
+        <With Var="DT1" />
+        <With Var="Hold" />
+      </Event>
+      <Event ID="46FF7A1A69D9FEE0" Name="HOLD">
+        <With Var="DT1" />
+        <With Var="Hold" />
+      </Event>
+      <Event Name="STOP" Comment="Cancel Delay">
+        <With Var="DT1" />
+        <With Var="Hold" />
+      </Event>
+      <Event ID="8C325F07198FCB13" Name="PAR">
+        <With Var="DT1" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="INITO" />
+      <Event ID="1457E63E0C241C83" Name="DONE" Comment="Input changed">
+        <With Var="Done" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="DT1" Type="TIME" Comment="Delay Time" />
+      <VarDeclaration ID="5F12F87EEE9002AF" Name="Hold" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="716D3F3042596C89" Name="Done" Type="BOOL" Comment="Output value" />
+    </OutputVars>
+  </InterfaceList>
+  <FBNetwork>
+    <FB ID="5362452DCE213801" UID="2" Name="Bool_Smooth" Type="boolValueChanged" x="3380" y="1460" Namespace="SE.App2Base" />
+    <FB ID="7" Name="IThis" Type="E_DELAY_HOLD_V_D_HMI" x="2360" y="600" Namespace="SE.Nereda">
+      <Parameter Name="$17D00C48B70B2078" Value="TRUE" />
+    </FB>
+    <FB ID="39E9AB0BBEE7D464" UID="6FD9C162BC5B8724" Name="DelayMng" Type="E_DELAY_V_D_H_B" x="2360" y="1340" Namespace="SE.Nereda">
+      <Parameter Name="$EA14E66D3494A031" Value="FALSE" />
+    </FB>
+    <FB ID="C6718E6AFD4E502C" Name="Delay" Type="E_DELAY" x="2360" y="2200" Namespace="IEC61499.Standard" />
+    <FB ID="97D3CC531805C63E" Name="Cycle" Type="E_CYCLE" x="3380" y="2200" Namespace="IEC61499.Standard">
+      <Parameter Name="$DT" Value="T#1s" />
+    </FB>
+    <FB ID="77F19833222B9CE0" UID="A68A83986EFB5FB4" Name="NotZero_START" Type="COMPARE_231D1C451B8C01CD0" x="1480" y="1960" Namespace="SE.Nereda">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNT:=2;IN${CNT}:TIME" />
+      <Parameter Name="$IN2" Value="T#0ms" />
+    </FB>
+    <FB ID="BA99661BFE9C41F3" Name="NoConfig_FireSTART" Type="StartAfterNoConfig" x="460" y="1960" Namespace="SE.Nereda" />
+    <Input Name="DT1" x="460" y="1630" Type="Data" />
+    <Input Name="START" x="460" y="1290" Type="Event" />
+    <Input Name="STOP" x="460" y="1472" Type="Event" />
+    <Input Name="INIT" x="460" y="612" Type="Event" />
+    <Input ID="8C325F07198FCB13" Name="PAR" x="460" y="1530" Type="Event" />
+    <Input ID="46FF7A1A69D9FEE0" Name="HOLD" x="460" y="1370" Type="Event" />
+    <Input ID="5F12F87EEE9002AF" Name="Hold" x="460" y="1690" Type="Data" />
+    <Output ID="1457E63E0C241C83" Name="DONE" x="4040" y="1532" Type="Event" />
+    <Output ID="716D3F3042596C89" Name="Done" x="4040" y="1852" Type="Data" />
+    <Output Name="INITO" x="4040" y="612" Type="Event" />
+    <EventConnections>
+      <Connection Source="$5362452DCE213801.CHD" Destination="$1457E63E0C241C83" />
+      <Connection Source="$INIT" Destination="$7.BDCD7F4C509A4BB9" />
+      <Connection Source="$7.17583D3249A041B7" Destination="$INITO" />
+      <Connection Source="$START" Destination="$BA99661BFE9C41F3.DCF561F02572085E" dx1="120" dx2="120" dy="303.8542">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$39E9AB0BBEE7D464.F8CA1CF6855EE67F" Destination="$C6718E6AFD4E502C.START">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$39E9AB0BBEE7D464.F8CA1CF6855EE67F" Destination="$97D3CC531805C63E.START">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$39E9AB0BBEE7D464.8EE9C8A7CAF0E11D" Destination="$C6718E6AFD4E502C.STOP">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$39E9AB0BBEE7D464.8EE9C8A7CAF0E11D" Destination="$97D3CC531805C63E.STOP">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$39E9AB0BBEE7D464.D38CC97F5D25D800" Destination="$5362452DCE213801.REQ">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$39E9AB0BBEE7D464.AC5B8EA9D2C1EEDB" Destination="$7.74F88D2B8EA734B3">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$STOP" Destination="$39E9AB0BBEE7D464.ED831A67179C7FF2" dx1="45.83337" />
+      <Connection Source="$C6718E6AFD4E502C.EO" Destination="$39E9AB0BBEE7D464.C6789781DF73C531">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$97D3CC531805C63E.EO" Destination="$39E9AB0BBEE7D464.40D4D4E019F2B1EF">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$START" Destination="$77F19833222B9CE0.REQ" dx1="122.1459">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$BA99661BFE9C41F3.40DE227700D4BA44" Destination="$77F19833222B9CE0.REQ" />
+      <Connection Source="$8C325F07198FCB13" Destination="$BA99661BFE9C41F3.6FDA35677B7E2724" dx1="120" dx2="150" dy="50">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$46FF7A1A69D9FEE0" Destination="$39E9AB0BBEE7D464.3ED0678594F59A27" dx1="123.4584">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$77F19833222B9CE0.CNF" Destination="$39E9AB0BBEE7D464.3FBE532C44B8CCDA">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="$5362452DCE213801.Output" Destination="$716D3F3042596C89" />
+      <Connection Source="$39E9AB0BBEE7D464.F394963155BA4AAD" Destination="$C6718E6AFD4E502C.DT">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$39E9AB0BBEE7D464.3BF3F8B307AD5850" Destination="$5362452DCE213801.Input">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$39E9AB0BBEE7D464.61631A7B2044B57E" Destination="$7.7197075EDDE66C4">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$77F19833222B9CE0.NE" Destination="$39E9AB0BBEE7D464.FE7BD80F3F8D955F">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$DT1" Destination="$39E9AB0BBEE7D464.CBF1DFDB5E825498" dx1="1096.292">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$5F12F87EEE9002AF" Destination="$39E9AB0BBEE7D464.04593F4AFBB2C5FA" dx1="120">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$DT1" Destination="$77F19833222B9CE0.IN1" dx1="176.2917">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$DT1" Destination="$BA99661BFE9C41F3.83063F4721840793" dx1="120" dx2="170" dy="110">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$DT1" Destination="$7.4FCC400C21CFFB3E" dx1="120">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+    </DataConnections>
+  </FBNetwork>
+</FBType>

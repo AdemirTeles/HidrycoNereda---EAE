@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="77a50b02-477b-46a0-a87e-23fd7296f310" Name="TowParametersSelector" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author="SESA713705" Date="7/3/2024" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="MODE">
+        <With Var="Mode" />
+      </Event>
+      <Event ID="REQ_NEREDA_VAL" Name="REQ_NEREDA_PAR">
+        <With Var="AutoParameter1" />
+        <With Var="AutoParameter2" />
+      </Event>
+      <Event ID="REQ_MAN_VAL" Name="REQ_MAN_PAR">
+        <With Var="ManParameter1" />
+        <With Var="ManParameter2" />
+      </Event>
+      <Event ID="3B878B7E006C38E4" Name="REQ_EMER_PAR">
+        <With Var="EmerParameter2" />
+        <With Var="EmerParameter1" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="CNF" Comment="Execution Confirmation">
+        <With Var="OutParameter1" />
+        <With Var="OutParameter2" />
+      </Event>
+      <Event ID="CNF_MAN_MODE" Name="CNF_MODE">
+        <With Var="ManMode" />
+        <With Var="AutoMode" />
+        <With Var="EmerMode" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="Mode" Type="INT" />
+      <VarDeclaration ID="NeredaValue" Name="AutoParameter1" Type="BOOL" />
+      <VarDeclaration ID="A23B7BAC44D4E804" Name="AutoParameter2" Type="BOOL" />
+      <VarDeclaration ID="ManValue" Name="ManParameter1" Type="BOOL" />
+      <VarDeclaration ID="90D08E776C3858FC" Name="ManParameter2" Type="BOOL" />
+      <VarDeclaration ID="4C6C1BFF70182CBB" Name="EmerParameter1" Type="BOOL" />
+      <VarDeclaration ID="27A998BBD948DCC8" Name="EmerParameter2" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="ValOut" Name="OutParameter1" Type="BOOL" />
+      <VarDeclaration ID="0957435043ED02C2" Name="OutParameter2" Type="BOOL" />
+      <VarDeclaration ID="784BA046E3CC0303" Name="AutoMode" Type="BOOL" />
+      <VarDeclaration Name="ManMode" Type="BOOL" />
+      <VarDeclaration ID="52121C65F371B1A4" Name="EmerMode" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="AutoCase,ManCase,EmerMode,NoSelection" />
+    <InternalVars>
+      <VarDeclaration ID="C311F93B7E4E9607" Name="InParameter1" Type="BOOL" />
+      <VarDeclaration ID="ACC891C2367BB4F3" Name="InParameter2" Type="BOOL" />
+    </InternalVars>
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="2412.18" y="662.5546" />
+      <ECState Name="AUTO" x="1311.142" y="1460.191">
+        <ECAction Algorithm="AutoCase" Output="CNF" />
+        <ECAction Output="CNF_MODE" />
+      </ECState>
+      <ECState Name="MAN" x="2412.19" y="1453.81">
+        <ECAction Algorithm="ManCase" Output="CNF" />
+        <ECAction Output="CNF_MODE" />
+      </ECState>
+      <ECState Name="EMERGENCY" x="3588.572" y="1481.143">
+        <ECAction Algorithm="EmerMode" Output="CNF" />
+        <ECAction Output="CNF_MODE" />
+      </ECState>
+      <ECState Name="Update" x="2456.571" y="2261.144">
+        <ECAction Algorithm="NoSelection" Output="CNF" />
+        <ECAction Output="CNF_MODE" />
+      </ECState>
+      <ECTransition Source="START" Destination="AUTO" Condition="Mode = 0" x="1651.019" y="1040.936">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="440.4355,228.6061,358.9761,288.6286" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="MAN" Condition="Mode = 2" x="2416.052" y="1054.375">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="603.5887,235.8949,604.9355,290.6583" />
+      </ECTransition>
+      <ECTransition Source="AUTO" Destination="AUTO" Condition="(REQ_NEREDA_PAR AND Mode = 0 AND&#xD;&#xA;&#xD;&#xA;(AutoParameter1 &lt;&gt; InParameter1 OR AutoParameter2 &lt;&gt; InParameter2))" x="1310.058" y="1660.593">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="383.1509,431,272.1509,424" />
+      </ECTransition>
+      <ECTransition Source="MAN" Destination="MAN" Condition="(REQ_MAN_PAR AND Mode = 2 AND&#xD;&#xA;&#xD;&#xA;(ManParameter1 &lt;&gt; InParameter1 OR ManParameter2 &lt;&gt; InParameter2))" x="2417.428" y="1680.855">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="670.1429,443.2857,540.1429,426.2857" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="EMERGENCY" Condition="Mode = 3" x="3227.556" y="1030.399">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="778.5129,224.7543,864.0186,284.2525" />
+      </ECTransition>
+      <ECTransition Source="EMERGENCY" Destination="EMERGENCY" Condition="(REQ_EMER_PAR AND Mode = 3 AND&#xD;&#xA;&#xD;&#xA;(EmerParameter1 &lt;&gt; InParameter1 OR EmerParameter2 &lt;&gt; InParameter2))" x="3640.684" y="1697.331">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="982.1509,433,844.1509,443" />
+      </ECTransition>
+      <ECTransition Source="Update" Destination="START" Condition="1" x="743.562" y="1536.914">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="74.28574,611.4289,37.14288,168.5714" />
+      </ECTransition>
+      <ECTransition Source="MAN" Destination="Update" Condition="Mode &lt;&gt; 2" x="2101.729" y="1797.185">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="502.8815,414.9851,506.1017,473.5659" />
+      </ECTransition>
+      <ECTransition Source="AUTO" Destination="Update" Condition="Mode &lt;&gt; 0" x="1891.035" y="1890.756">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="432.5514,446.1718,515.5665,504.2208" />
+      </ECTransition>
+      <ECTransition Source="EMERGENCY" Destination="Update" Condition="Mode &lt;&gt; 3" x="3014.345" y="1884.965">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="793.5226,444.2417,711.8111,500.5447" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="AutoCase">
+      <ST><![CDATA[;
+
+OutParameter1 := AutoParameter1;
+OutParameter2 := AutoParameter2;
+InParameter1 := AutoParameter1;
+InParameter2 := AutoParameter2;
+	
+AutoMode := TRUE;
+ManMode := FALSE;
+EmerMode := FALSE;]]></ST>
+    </Algorithm>
+    <Algorithm Name="ManCase">
+      <ST><![CDATA[;
+
+OutParameter1 := ManParameter1;
+OutParameter2 := ManParameter2;
+InParameter1 := ManParameter1;
+InParameter2 := ManParameter2;
+	
+AutoMode := FALSE;
+ManMode := TRUE;
+EmerMode := FALSE;]]></ST>
+    </Algorithm>
+    <Algorithm Name="EmerMode">
+      <ST><![CDATA[;
+OutParameter1 := EmerParameter1;
+OutParameter2 := EmerParameter2;
+InParameter1 := EmerParameter1;
+InParameter2 := EmerParameter2;
+	
+AutoMode := FALSE;
+ManMode := FALSE;
+EmerMode := TRUE;]]></ST>
+    </Algorithm>
+    <Algorithm Name="NoSelection">
+      <ST><![CDATA[;
+OutParameter1 := FALSE;
+OutParameter2 := FALSE;
+InParameter1 := FALSE;
+InParameter2 := FALSE;
+AutoMode := FALSE;
+ManMode := FALSE;
+EmerMode := FALSE;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

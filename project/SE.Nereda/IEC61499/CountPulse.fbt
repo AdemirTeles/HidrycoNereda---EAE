@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="b839db52-4be9-4e4b-b75d-9d913c7586bb" Name="CountPulse" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="8/6/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="37F2B181FA61BC7D" Name="REQ" Comment="Normal Execution Request">
+        <With Var="QI" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="EEBF1C26172F0C71" Name="CNF" Comment="Execution Confirmation">
+        <With Var="QO" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="3EFE041B4A3DB1DD" Name="QI" Type="BOOL" Comment="Input event qualifier" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="5B7001294FCB7A80" Name="QO" Type="INT" Comment="Output event qualifier" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="cc04ed4e-37cf-4c50-b640-ee1e0cfd8bcb">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="REQ" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="552.9412" y="429.4117" />
+      <ECState Name="REQ" Comment="Normal execution" x="1169.647" y="916.9412">
+        <ECAction Algorithm="REQ" Output="CNF" />
+      </ECState>
+      <ECState Name="STATE1" x="1180" y="1320" />
+      <ECTransition Source="START" Destination="REQ" Condition="REQ AND QI" x="919.8024" y="613.4851">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="210.6322,132.717,251.0229,164.6474" />
+      </ECTransition>
+      <ECTransition Source="STATE1" Destination="START" Condition="1" x="873.2333" y="973.4124">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="243.2393,283.7001,196.9237,219.4572" />
+      </ECTransition>
+      <ECTransition Source="REQ" Destination="STATE1" Condition="NOT QI" x="1174.511" y="1100.611">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="293.2769,261.219,293.9162,286.1102" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="REQ" Comment="Normally executed algorithm">
+      <ST><![CDATA[;
+IF QO < 9999 THEN
+	QO := QO + 1;
+ELSE
+	QO := 0;
+END_IF;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

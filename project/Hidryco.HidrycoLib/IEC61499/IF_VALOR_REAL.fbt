@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="e1510f12-0d98-4ae0-9e13-9b711c547dc8" Name="IF_VALOR_REAL" Comment="Basic Function Block Type" Namespace="Hidryco.HidrycoLib">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="1/23/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="REQ" Comment="Normal Execution Request">
+        <With Var="CONDICAO" />
+        <With Var="VALOR_TRUE" />
+        <With Var="VALOR_FALSE" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="CNF" Comment="Execution Confirmation">
+        <With Var="VALOR_OUT" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="CONDICAO" Type="BOOL" Comment="Input event qualifier" />
+      <VarDeclaration Name="VALOR_TRUE" Type="REAL" />
+      <VarDeclaration Name="VALOR_FALSE" Type="REAL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="VALOR_OUT" Type="REAL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="INIT,REQ" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="552.9412" y="429.4117" />
+      <ECState Name="REQ" Comment="Normal execution" x="853.647" y="852.9412">
+        <ECAction Algorithm="REQ" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="REQ" Condition="REQ" x="776.0892" y="597.7573">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="186.7661,132.5225,205.6501,159.1196" />
+      </ECTransition>
+      <ECTransition Source="REQ" Destination="START" Condition="1" x="693.661" y="716.2103">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="185.2655,198.5927,166.3816,171.9956" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="INIT" Comment="Initialization algorithm">
+      <ST><![CDATA[;]]></ST>
+    </Algorithm>
+    <Algorithm Name="REQ" Comment="Normally executed algorithm">
+      <ST><![CDATA[IF (CONDICAO) THEN
+	VALOR_OUT := VALOR_TRUE;
+ELSE
+	VALOR_OUT := VALOR_FALSE;
+END_IF
+;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

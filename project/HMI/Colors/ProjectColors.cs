@@ -77,6 +77,48 @@ namespace NxtControl.Drawing {
         
         public static NxtControl.Drawing.Color Grey50;
         
+        public static NxtControl.Drawing.Color Hidryco__HidrycoLib__aaLibAlarmActive;
+        
+        public static NxtControl.Drawing.Color Hidryco__HidrycoLib__aaLibFpData;
+        
+        public static NxtControl.Drawing.Color Hidryco__HidrycoLib__aaLibFpOp;
+        
+        public static NxtControl.Drawing.Color Hidryco__HidrycoLib__aaLibFpSp;
+        
+        public static NxtControl.Drawing.Color Hidryco__HidrycoLib__aaLibSymBodyActive;
+        
+        public static NxtControl.Drawing.Color Hidryco__HidrycoLib__aaLibSymBodyAlarm;
+        
+        public static NxtControl.Drawing.Color Hidryco__HidrycoLib__aaLibSymBodyPassive;
+        
+        public static NxtControl.Drawing.Color Hidryco__HidrycoLib__aaLibSymBodyTransition;
+        
+        public static NxtControl.Drawing.Color Hidryco__HidrycoLib__Abnormal;
+        
+        public static NxtControl.Drawing.Color Hidryco__HidrycoLib__ActiveStatus;
+        
+        public static NxtControl.Drawing.Color Hidryco__HidrycoLib__ButtonInnerBorderColor;
+        
+        public static NxtControl.Drawing.Color Hidryco__HidrycoLib__ButtonTextColor;
+        
+        public static NxtControl.Drawing.Color Hidryco__HidrycoLib__ButtonTextColorMouseDown;
+        
+        public static NxtControl.Drawing.Color Hidryco__HidrycoLib__ComboBoxTextColor;
+        
+        public static NxtControl.Drawing.Color Hidryco__HidrycoLib__LabelTextColor;
+        
+        public static NxtControl.Drawing.Color Hidryco__HidrycoLib__NotRunning;
+        
+        public static NxtControl.Drawing.Color Hidryco__HidrycoLib__PassiveStatus;
+        
+        public static NxtControl.Drawing.Color Hidryco__HidrycoLib__Pv;
+        
+        public static NxtControl.Drawing.Color Hidryco__HidrycoLib__SymInstanceLabelTextColor;
+        
+        public static NxtControl.Drawing.Color Hidryco__HidrycoLib__Transition;
+        
+        public static NxtControl.Drawing.Color Hidryco__HidrycoLib__Unknown;
+        
         public static NxtControl.Drawing.Color HmiAccessNotInitialized;
         
         public static NxtControl.Drawing.Color LightGrey;
@@ -117,9 +159,773 @@ namespace NxtControl.Drawing {
         
         public static NxtControl.Drawing.Color Red;
         
+        public static NxtControl.Drawing.Color SE__App2Base__aaLibActingStatePassive;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__aaLibAlarmActive;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__aaLibBreakerDeEnergised;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__aaLibBreakerEnergised;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__aaLibConditionStaticBG;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__aaLibDeviationNormal;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__aaLibExecutePassive;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__aaLibFpAbnormalBackground;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__aaLibFpAbnormalText;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__aaLibFpConditionHealthy;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__aaLibFpConditionUnhealthy;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__aaLibFpData;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__aaLibFpOp;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__aaLibFpPv;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__aaLibFpSp;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__aaLibHeaterActive;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__aaLibHeaterPassive;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__aaLibLimitLoHi;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__aaLibLimitLoLoHiHi;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__aaLibPanelButtonActive;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__aaLibPanelButtonBackgroundDisable;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__aaLibPanelButtonDisable;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__aaLibPanelButtonPassive;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__aaLibROCNormal;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__aaLibStaticEquipment;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__aaLibSymBodyActive;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__aaLibSymBodyAlarm;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__aaLibSymBodyNotRunning;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__aaLibSymBodyPassive;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__aaLibSymBodyTransition;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__aaLibSymData;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__aaLibSymExternalControlLabelText;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__aaLibSymHeadActive;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__aaLibSymHeadAlarm;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__aaLibSymHeadPassive;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__aaLibSymHeadTransition;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__aaLibSymInstanceLabelTextColor;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__aaLibSymOp;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__aaLibSymPv;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__aaLibSymSp;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__aaLibSymUnit;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__aaLibWaitStatePassive;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__Abnormal;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__AbnormalText;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__Active;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__ActiveStatus;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__CondActive;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__ConditionActive;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__ConditionBG;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__ConditionInactive;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__ConditionOn;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__ConditionText;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__CondPassive;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__DeviationBarAlarm;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__DeviationBarNormal;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__Disabled;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__DisabledBackground;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__FpLabelTextColor;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__FpPv;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__FpSp;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__FpText;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__LabelTextColor;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__NotRunning;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__PassiveStatus;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__Pv;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__SAPvAbnormal;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__SAPvAbnormalContrast;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__SAPvNormal;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__SymBAInstanceLabelTextColor;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__SymExternalControlLabel;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__SymInfoRearm;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__SymInstanceName;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__SymLabelTextColor;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__SymLine;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__SymPv;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__SymSp;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__SymText;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__SymTextInfoRearm;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__Transition;
+        
+        public static NxtControl.Drawing.Color SE__App2Base__Unknown;
+        
+        public static NxtControl.Drawing.Color SE__App2CommonProcess__aaLibFpData;
+        
+        public static NxtControl.Drawing.Color SE__App2CommonProcess__aaLibFpOp;
+        
+        public static NxtControl.Drawing.Color SE__App2CommonProcess__aaLibFpPv;
+        
+        public static NxtControl.Drawing.Color SE__App2CommonProcess__aaLibFpSp;
+        
+        public static NxtControl.Drawing.Color SE__App2CommonProcess__aaLibSymInstanceLabelTextColor;
+        
+        public static NxtControl.Drawing.Color SE__App2CommonProcess__aaLibSymOp;
+        
+        public static NxtControl.Drawing.Color SE__App2CommonProcess__aaLibSymPv;
+        
+        public static NxtControl.Drawing.Color SE__App2CommonProcess__aaLibSymSp;
+        
+        public static NxtControl.Drawing.Color SE__App2CommonProcess__Abnormal;
+        
+        public static NxtControl.Drawing.Color SE__App2CommonProcess__Active;
+        
+        public static NxtControl.Drawing.Color SE__App2CommonProcess__ActiveStatus;
+        
+        public static NxtControl.Drawing.Color SE__App2CommonProcess__CondActive;
+        
+        public static NxtControl.Drawing.Color SE__App2CommonProcess__ConditionActive;
+        
+        public static NxtControl.Drawing.Color SE__App2CommonProcess__ConditionBG;
+        
+        public static NxtControl.Drawing.Color SE__App2CommonProcess__ConditionInactive;
+        
+        public static NxtControl.Drawing.Color SE__App2CommonProcess__ConditionOn;
+        
+        public static NxtControl.Drawing.Color SE__App2CommonProcess__ConditionText;
+        
+        public static NxtControl.Drawing.Color SE__App2CommonProcess__CondPassive;
+        
+        public static NxtControl.Drawing.Color SE__App2CommonProcess__Disabled;
+        
+        public static NxtControl.Drawing.Color SE__App2CommonProcess__DisabledBackground;
+        
+        public static NxtControl.Drawing.Color SE__App2CommonProcess__FpLabelTextColor;
+        
+        public static NxtControl.Drawing.Color SE__App2CommonProcess__FpPv;
+        
+        public static NxtControl.Drawing.Color SE__App2CommonProcess__FpSp;
+        
+        public static NxtControl.Drawing.Color SE__App2CommonProcess__FpText;
+        
+        public static NxtControl.Drawing.Color SE__App2CommonProcess__LabelTextColor;
+        
+        public static NxtControl.Drawing.Color SE__App2CommonProcess__NotRunning;
+        
+        public static NxtControl.Drawing.Color SE__App2CommonProcess__PassiveStatus;
+        
+        public static NxtControl.Drawing.Color SE__App2CommonProcess__Pv;
+        
+        public static NxtControl.Drawing.Color SE__App2CommonProcess__SAPvAbnormal;
+        
+        public static NxtControl.Drawing.Color SE__App2CommonProcess__SAPvAbnormalContrast;
+        
+        public static NxtControl.Drawing.Color SE__App2CommonProcess__SAPvNormal;
+        
+        public static NxtControl.Drawing.Color SE__App2CommonProcess__SE_ConditionStaticBG;
+        
+        public static NxtControl.Drawing.Color SE__App2CommonProcess__SE_FpAbnormalBackground;
+        
+        public static NxtControl.Drawing.Color SE__App2CommonProcess__SE_FpConditionHealthy;
+        
+        public static NxtControl.Drawing.Color SE__App2CommonProcess__SE_FpConditionUnhealthy;
+        
+        public static NxtControl.Drawing.Color SE__App2CommonProcess__SE_FpSp;
+        
+        public static NxtControl.Drawing.Color SE__App2CommonProcess__SE_SymPv;
+        
+        public static NxtControl.Drawing.Color SE__App2CommonProcess__SymLine;
+        
+        public static NxtControl.Drawing.Color SE__App2CommonProcess__SymPv;
+        
+        public static NxtControl.Drawing.Color SE__App2CommonProcess__System_FpHeaderText;
+        
+        public static NxtControl.Drawing.Color SE__App2CommonProcess__System_FpLabelText;
+        
+        public static NxtControl.Drawing.Color SE__App2CommonProcess__System_SymLabelText;
+        
+        public static NxtControl.Drawing.Color SE__App2CommonProcess__Transition;
+        
+        public static NxtControl.Drawing.Color SE__App2CommonProcess__Unknown;
+        
+        public static NxtControl.Drawing.Color SE__App2Conveying__aaLibAlarmActive;
+        
+        public static NxtControl.Drawing.Color SE__App2Conveying__aaLibFpData;
+        
+        public static NxtControl.Drawing.Color SE__App2Conveying__aaLibSymBodyActive;
+        
+        public static NxtControl.Drawing.Color SE__App2Conveying__aaLibSymBodyPassive;
+        
+        public static NxtControl.Drawing.Color SE__App2Conveying__aaLibSymData;
+        
+        public static NxtControl.Drawing.Color SE__App2Conveying__aaLibSymInstanceLabelTextColor;
+        
+        public static NxtControl.Drawing.Color SE__App2Conveying__FpPv;
+        
+        public static NxtControl.Drawing.Color SE__App2Conveying__FpSp;
+        
+        public static NxtControl.Drawing.Color SE__App2Conveying__FpText;
+        
+        public static NxtControl.Drawing.Color SE__App2Conveying__Pv;
+        
+        public static NxtControl.Drawing.Color SE__App2Conveying__SymInstanceLabelTextColor;
+        
+        public static NxtControl.Drawing.Color SE__App2Conveying__SymLabelTextColor;
+        
+        public static NxtControl.Drawing.Color SE__App2Conveying__SymLine;
+        
+        public static NxtControl.Drawing.Color SE__App2Conveying__SymText;
+        
+        public static NxtControl.Drawing.Color SE__App2LiquidFood__Active;
+        
+        public static NxtControl.Drawing.Color SE__App2LiquidFood__ActiveStatus;
+        
+        public static NxtControl.Drawing.Color SE__App2LiquidFood__FpLabelTextColor;
+        
+        public static NxtControl.Drawing.Color SE__App2LiquidFood__FpPv;
+        
+        public static NxtControl.Drawing.Color SE__App2LiquidFood__FpSp;
+        
+        public static NxtControl.Drawing.Color SE__App2LiquidFood__FpText;
+        
+        public static NxtControl.Drawing.Color SE__App2LiquidFood__LabelTextColor;
+        
+        public static NxtControl.Drawing.Color SE__App2LiquidFood__PassiveStatus;
+        
+        public static NxtControl.Drawing.Color SE__App2LiquidFood__Pv;
+        
+        public static NxtControl.Drawing.Color SE__App2LiquidFood__Transition;
+        
+        public static NxtControl.Drawing.Color SE__App2LiquidFood__Unknown;
+        
+        public static NxtControl.Drawing.Color SE__App2MMM__aaLibFpData;
+        
+        public static NxtControl.Drawing.Color SE__App2MMM__aaLibFpOp;
+        
+        public static NxtControl.Drawing.Color SE__App2MMM__aaLibFpPv;
+        
+        public static NxtControl.Drawing.Color SE__App2MMM__aaLibFpSp;
+        
+        public static NxtControl.Drawing.Color SE__App2MMM__aaLibStaticEquipment;
+        
+        public static NxtControl.Drawing.Color SE__App2MMM__aaLibSymBodyActive;
+        
+        public static NxtControl.Drawing.Color SE__App2MMM__aaLibSymBodyAlarm;
+        
+        public static NxtControl.Drawing.Color SE__App2MMM__aaLibSymBodyPassive;
+        
+        public static NxtControl.Drawing.Color SE__App2MMM__aaLibSymInstanceLabelTextColor;
+        
+        public static NxtControl.Drawing.Color SE__App2MMM__aaLibSymOp;
+        
+        public static NxtControl.Drawing.Color SE__App2MMM__aaLibSymPv;
+        
+        public static NxtControl.Drawing.Color SE__App2MMM__aaLibSymSp;
+        
+        public static NxtControl.Drawing.Color SE__App2MMM__ActiveStatus;
+        
+        public static NxtControl.Drawing.Color SE__App2MMM__Disabled;
+        
+        public static NxtControl.Drawing.Color SE__App2MMM__DisabledBackground;
+        
+        public static NxtControl.Drawing.Color SE__App2MMM__FpLabelTextColor;
+        
+        public static NxtControl.Drawing.Color SE__App2MMM__FpPv;
+        
+        public static NxtControl.Drawing.Color SE__App2MMM__FpSp;
+        
+        public static NxtControl.Drawing.Color SE__App2MMM__FpText;
+        
+        public static NxtControl.Drawing.Color SE__App2MMM__PassiveStatus;
+        
+        public static NxtControl.Drawing.Color SE__App2MMM__Pv;
+        
+        public static NxtControl.Drawing.Color SE__App2SingleLinePowerMonitoring__aaLibBreakerDeEnergised;
+        
+        public static NxtControl.Drawing.Color SE__App2SingleLinePowerMonitoring__aaLibBreakerEnergised;
+        
+        public static NxtControl.Drawing.Color SE__App2SingleLinePowerMonitoring__aaLibFpData;
+        
+        public static NxtControl.Drawing.Color SE__App2SingleLinePowerMonitoring__aaLibFpOp;
+        
+        public static NxtControl.Drawing.Color SE__App2SingleLinePowerMonitoring__aaLibFpSp;
+        
+        public static NxtControl.Drawing.Color SE__App2SingleLinePowerMonitoring__aaLibSymInstanceLabelTextColor;
+        
+        public static NxtControl.Drawing.Color SE__App2SingleLinePowerMonitoring__aaLibSymPv;
+        
+        public static NxtControl.Drawing.Color SE__App2SingleLinePowerMonitoring__Active;
+        
+        public static NxtControl.Drawing.Color SE__App2SingleLinePowerMonitoring__ActiveStatus;
+        
+        public static NxtControl.Drawing.Color SE__App2SingleLinePowerMonitoring__DeEnergized;
+        
+        public static NxtControl.Drawing.Color SE__App2SingleLinePowerMonitoring__Energized;
+        
+        public static NxtControl.Drawing.Color SE__App2SingleLinePowerMonitoring__FpLabelTextColor;
+        
+        public static NxtControl.Drawing.Color SE__App2SingleLinePowerMonitoring__FpPv;
+        
+        public static NxtControl.Drawing.Color SE__App2SingleLinePowerMonitoring__FpSp;
+        
+        public static NxtControl.Drawing.Color SE__App2SingleLinePowerMonitoring__LabelTextColor;
+        
+        public static NxtControl.Drawing.Color SE__App2SingleLinePowerMonitoring__Passive;
+        
+        public static NxtControl.Drawing.Color SE__App2SingleLinePowerMonitoring__PassiveStatus;
+        
+        public static NxtControl.Drawing.Color SE__App2SingleLinePowerMonitoring__Pv;
+        
+        public static NxtControl.Drawing.Color SE__App2SingleLinePowerMonitoring__Sp;
+        
+        public static NxtControl.Drawing.Color SE__App2SingleLinePowerMonitoring__SymPv;
+        
+        public static NxtControl.Drawing.Color SE__App2SingleLinePowerMonitoring__SymSp;
+        
+        public static NxtControl.Drawing.Color SE__App2StateManagement__ActingStatePassive;
+        
+        public static NxtControl.Drawing.Color SE__App2StateManagement__Active;
+        
+        public static NxtControl.Drawing.Color SE__App2StateManagement__ActiveStatus;
+        
+        public static NxtControl.Drawing.Color SE__App2StateManagement__Black;
+        
+        public static NxtControl.Drawing.Color SE__App2StateManagement__Disabled;
+        
+        public static NxtControl.Drawing.Color SE__App2StateManagement__DisabledBackground;
+        
+        public static NxtControl.Drawing.Color SE__App2StateManagement__ExecutePassive;
+        
+        public static NxtControl.Drawing.Color SE__App2StateManagement__FpLabelTextColor;
+        
+        public static NxtControl.Drawing.Color SE__App2StateManagement__FpPv;
+        
+        public static NxtControl.Drawing.Color SE__App2StateManagement__FpSp;
+        
+        public static NxtControl.Drawing.Color SE__App2StateManagement__FpText;
+        
+        public static NxtControl.Drawing.Color SE__App2StateManagement__LabelTextColor;
+        
+        public static NxtControl.Drawing.Color SE__App2StateManagement__Passive;
+        
+        public static NxtControl.Drawing.Color SE__App2StateManagement__PassiveStatus;
+        
+        public static NxtControl.Drawing.Color SE__App2StateManagement__Pv;
+        
+        public static NxtControl.Drawing.Color SE__App2StateManagement__SeqTransitionActive;
+        
+        public static NxtControl.Drawing.Color SE__App2StateManagement__Sp;
+        
+        public static NxtControl.Drawing.Color SE__App2StateManagement__WaitStatePassive;
+        
+        public static NxtControl.Drawing.Color SE__AppSequence__aaLibSymInstanceLabelTextColor;
+        
+        public static NxtControl.Drawing.Color SE__AppSequence__Abnormal;
+        
+        public static NxtControl.Drawing.Color SE__AppSequence__AbnormalText;
+        
+        public static NxtControl.Drawing.Color SE__AppSequence__Active;
+        
+        public static NxtControl.Drawing.Color SE__AppSequence__ActiveStatus;
+        
+        public static NxtControl.Drawing.Color SE__AppSequence__Black;
+        
+        public static NxtControl.Drawing.Color SE__AppSequence__CommandPB;
+        
+        public static NxtControl.Drawing.Color SE__AppSequence__CondActive;
+        
+        public static NxtControl.Drawing.Color SE__AppSequence__ConditionActive;
+        
+        public static NxtControl.Drawing.Color SE__AppSequence__ConditionBG;
+        
+        public static NxtControl.Drawing.Color SE__AppSequence__ConditionInactive;
+        
+        public static NxtControl.Drawing.Color SE__AppSequence__ConditionOn;
+        
+        public static NxtControl.Drawing.Color SE__AppSequence__ConditionText;
+        
+        public static NxtControl.Drawing.Color SE__AppSequence__CondPassive;
+        
+        public static NxtControl.Drawing.Color SE__AppSequence__DeviationBarAlarm;
+        
+        public static NxtControl.Drawing.Color SE__AppSequence__DeviationBarNormal;
+        
+        public static NxtControl.Drawing.Color SE__AppSequence__Disabled;
+        
+        public static NxtControl.Drawing.Color SE__AppSequence__DisabledBackground;
+        
+        public static NxtControl.Drawing.Color SE__AppSequence__DisplayBGColor;
+        
+        public static NxtControl.Drawing.Color SE__AppSequence__FpLabelTextColor;
+        
+        public static NxtControl.Drawing.Color SE__AppSequence__FpPv;
+        
+        public static NxtControl.Drawing.Color SE__AppSequence__FpSp;
+        
+        public static NxtControl.Drawing.Color SE__AppSequence__FpText;
+        
+        public static NxtControl.Drawing.Color SE__AppSequence__LabelTextColor;
+        
+        public static NxtControl.Drawing.Color SE__AppSequence__NotRunning;
+        
+        public static NxtControl.Drawing.Color SE__AppSequence__Passive;
+        
+        public static NxtControl.Drawing.Color SE__AppSequence__PassiveStatus;
+        
+        public static NxtControl.Drawing.Color SE__AppSequence__Pv;
+        
+        public static NxtControl.Drawing.Color SE__AppSequence__SAElementBG;
+        
+        public static NxtControl.Drawing.Color SE__AppSequence__SAPvAbnormal;
+        
+        public static NxtControl.Drawing.Color SE__AppSequence__SAPvAbnormalContrast;
+        
+        public static NxtControl.Drawing.Color SE__AppSequence__SAPvNormal;
+        
+        public static NxtControl.Drawing.Color SE__AppSequence__SeqNumber;
+        
+        public static NxtControl.Drawing.Color SE__AppSequence__SeqTransitionActive;
+        
+        public static NxtControl.Drawing.Color SE__AppSequence__SeqTransitionComplete;
+        
+        public static NxtControl.Drawing.Color SE__AppSequence__SeqTransitionIdle;
+        
+        public static NxtControl.Drawing.Color SE__AppSequence__Sp;
+        
+        public static NxtControl.Drawing.Color SE__AppSequence__SymBAInstanceLabelTextColor;
+        
+        public static NxtControl.Drawing.Color SE__AppSequence__SymInfoRearm;
+        
+        public static NxtControl.Drawing.Color SE__AppSequence__SymLabelTextColor;
+        
+        public static NxtControl.Drawing.Color SE__AppSequence__SymLine;
+        
+        public static NxtControl.Drawing.Color SE__AppSequence__SymOut;
+        
+        public static NxtControl.Drawing.Color SE__AppSequence__SymPv;
+        
+        public static NxtControl.Drawing.Color SE__AppSequence__SymSp;
+        
+        public static NxtControl.Drawing.Color SE__AppSequence__SymText;
+        
+        public static NxtControl.Drawing.Color SE__AppSequence__SymTextInfoRearm;
+        
+        public static NxtControl.Drawing.Color SE__AppSequence__Text;
+        
+        public static NxtControl.Drawing.Color SE__AppSequence__Transition;
+        
+        public static NxtControl.Drawing.Color SE__AppSequence__Unknown;
+        
         public static NxtControl.Drawing.Color SE__DPAC__DevLEDGreen;
         
         public static NxtControl.Drawing.Color SE__DPAC__DevLEDOff;
+        
+        public static NxtControl.Drawing.Color SE__FieldDevice__ButtonTextColor;
+        
+        public static NxtControl.Drawing.Color SE__FieldDevice__CanvasTopologyButtonCurrentTextColor;
+        
+        public static NxtControl.Drawing.Color SE__FieldDevice__DevLEDGreen;
+        
+        public static NxtControl.Drawing.Color SE__FieldDevice__DevLEDOff;
+        
+        public static NxtControl.Drawing.Color SE__FieldDevice__DevLEDRed;
+        
+        public static NxtControl.Drawing.Color SE__FieldDevice__ForceTextColor;
+        
+        public static NxtControl.Drawing.Color SE__FieldDevice__GroupBoxBackColor;
+        
+        public static NxtControl.Drawing.Color SE__FieldDevice__GroupTextColor;
+        
+        public static NxtControl.Drawing.Color SE__FieldDevice__LedFalseColor;
+        
+        public static NxtControl.Drawing.Color SE__FieldDevice__LedFrameColor;
+        
+        public static NxtControl.Drawing.Color SE__FieldDevice__SchneiderColor;
+        
+        public static NxtControl.Drawing.Color SE__FieldDevice__SchneiderGreen;
+        
+        public static NxtControl.Drawing.Color SE__FieldDevice__TrendAxisLabelColor;
+        
+        public static NxtControl.Drawing.Color SE__HwCommon__DevChannelLEDOff;
+        
+        public static NxtControl.Drawing.Color SE__HwCommon__DevLEDBackground;
+        
+        public static NxtControl.Drawing.Color SE__HwCommon__DevLEDGreen;
+        
+        public static NxtControl.Drawing.Color SE__HwCommon__DevLEDOff;
+        
+        public static NxtControl.Drawing.Color SE__HwCommon__DevLEDOrange;
+        
+        public static NxtControl.Drawing.Color SE__HwCommon__DevLEDRed;
+        
+        public static NxtControl.Drawing.Color SE__HwCommon__ForceTextColor;
+        
+        public static NxtControl.Drawing.Color SE__HwCommon__fpFrameBack;
+        
+        public static NxtControl.Drawing.Color SE__HwCommon__fpFrameBorder;
+        
+        public static NxtControl.Drawing.Color SE__HwCommon__fpHeader3DLineBright;
+        
+        public static NxtControl.Drawing.Color SE__HwCommon__fpHeader3DLineDark;
+        
+        public static NxtControl.Drawing.Color SE__HwCommon__fpHeaderBack;
+        
+        public static NxtControl.Drawing.Color SE__HwCommon__fpHeaderLine2;
+        
+        public static NxtControl.Drawing.Color SE__HwCommon__fpLabel;
+        
+        public static NxtControl.Drawing.Color SE__HwCommon__fpTitle;
+        
+        public static NxtControl.Drawing.Color SE__HwCommon__fpWindowBack;
+        
+        public static NxtControl.Drawing.Color SE__HwCommon__fpWindowBlackBorder;
+        
+        public static NxtControl.Drawing.Color SE__HwCommon__fpWindowWhiteBorder;
+        
+        public static NxtControl.Drawing.Color SE__HwCommon__GroupColor;
+        
+        public static NxtControl.Drawing.Color SE__HwCommon__GroupInactiveColor;
+        
+        public static NxtControl.Drawing.Color SE__HwCommon__GroupInactiveTextColor;
+        
+        public static NxtControl.Drawing.Color SE__HwCommon__GroupTextColor;
+        
+        public static NxtControl.Drawing.Color SE__HwCommon__SchneiderGreen;
+        
+        public static NxtControl.Drawing.Color SE__HwCommon__SchneiderGreenDisabled;
+        
+        public static NxtControl.Drawing.Color SE__HwCommon__UnitDisabledColor;
+        
+        public static NxtControl.Drawing.Color SE__HwCommon__UnitEnabledColor;
+        
+        public static NxtControl.Drawing.Color SE__IoATV__DevLEDGreen;
+        
+        public static NxtControl.Drawing.Color SE__IoATV__DevLEDOff;
+        
+        public static NxtControl.Drawing.Color SE__IoATV__DevLEDOrange;
+        
+        public static NxtControl.Drawing.Color SE__IoATV__DevLEDRed;
+        
+        public static NxtControl.Drawing.Color SE__IoATV__ForceTextColor;
+        
+        public static NxtControl.Drawing.Color SE__IoATV__fpHeader3DLineBright;
+        
+        public static NxtControl.Drawing.Color SE__IoATV__GroupTextColor;
+        
+        public static NxtControl.Drawing.Color SE__IoATV__SchneiderColor;
+        
+        public static NxtControl.Drawing.Color SE__IoATV__SchneiderGreen;
+        
+        public static NxtControl.Drawing.Color SE__IoTMx__DevLEDGreen;
+        
+        public static NxtControl.Drawing.Color SE__IoTMx__DevLEDOff;
+        
+        public static NxtControl.Drawing.Color SE__IoTMx__DevLEDRed;
+        
+        public static NxtControl.Drawing.Color SE__IoTMx__SchneiderGreen;
+        
+        public static NxtControl.Drawing.Color SE__IoTMx__SchneiderGreenDisabled;
+        
+        public static NxtControl.Drawing.Color SE__IoTMx__SE_HwCommon_DevLEDOff;
+        
+        public static NxtControl.Drawing.Color SE__IoTMx__SE_HwCommon_ForceTextColor;
+        
+        public static NxtControl.Drawing.Color SE__IoX80__DevLEDGreen;
+        
+        public static NxtControl.Drawing.Color SE__IoX80__DevLEDOff;
+        
+        public static NxtControl.Drawing.Color SE__IoX80__DevLEDOrange;
+        
+        public static NxtControl.Drawing.Color SE__IoX80__DevLEDRed;
+        
+        public static NxtControl.Drawing.Color SE__IoX80__ForceTextColor;
+        
+        public static NxtControl.Drawing.Color SE__IoX80__fpTitle;
+        
+        public static NxtControl.Drawing.Color SE__IoX80__GroupColor;
+        
+        public static NxtControl.Drawing.Color SE__IoX80__GroupInactiveColor;
+        
+        public static NxtControl.Drawing.Color SE__IoX80__SchneiderGreen;
+        
+        public static NxtControl.Drawing.Color SE__IoX80__UnitDisabledColor;
+        
+        public static NxtControl.Drawing.Color SE__IoX80__UnitEnabledColor;
+        
+        public static NxtControl.Drawing.Color SE__ModbusGateway__fpInputFreeBack;
+        
+        public static NxtControl.Drawing.Color SE__ModbusGateway__fpInputUsedBack;
+        
+        public static NxtControl.Drawing.Color SE__ModEdgeIONTS__aaLibFpLEDActive;
+        
+        public static NxtControl.Drawing.Color SE__ModEdgeIONTS__aaLibFpLEDInActive;
+        
+        public static NxtControl.Drawing.Color SE__ModEdgeIONTS__DevChannelLEDOff;
+        
+        public static NxtControl.Drawing.Color SE__ModEdgeIONTS__DevLEDGreen;
+        
+        public static NxtControl.Drawing.Color SE__ModEdgeIONTS__DevLEDOff;
+        
+        public static NxtControl.Drawing.Color SE__ModEdgeIONTS__DevLEDOrange;
+        
+        public static NxtControl.Drawing.Color SE__ModEdgeIONTS__DevLEDRed;
+        
+        public static NxtControl.Drawing.Color SE__ModEdgeIONTS__ForceTextColor;
+        
+        public static NxtControl.Drawing.Color SE__ModEdgeIONTS__SchneiderGreen;
+        
+        public static NxtControl.Drawing.Color SE__ModEdgeIONTS__UnitDisabledColor;
+        
+        public static NxtControl.Drawing.Color SE__ModEdgeIONTS__UnitEnabledColor;
+        
+        public static NxtControl.Drawing.Color SE__Nereda__Active;
+        
+        public static NxtControl.Drawing.Color SE__Nereda__ActiveStatus;
+        
+        public static NxtControl.Drawing.Color SE__Nereda__ButtonInnerBorderColor;
+        
+        public static NxtControl.Drawing.Color SE__Nereda__ButtonTextColor;
+        
+        public static NxtControl.Drawing.Color SE__Nereda__ButtonTextColorMouseDown;
+        
+        public static NxtControl.Drawing.Color SE__Nereda__DevLEDOff;
+        
+        public static NxtControl.Drawing.Color SE__Nereda__DevLEDRed;
+        
+        public static NxtControl.Drawing.Color SE__Nereda__LabelTextColor;
+        
+        public static NxtControl.Drawing.Color SE__Nereda__LedFalseColor;
+        
+        public static NxtControl.Drawing.Color SE__Nereda__LedFrameColor;
+        
+        public static NxtControl.Drawing.Color SE__Nereda__LedTrueColor;
+        
+        public static NxtControl.Drawing.Color SE__Nereda__Passive;
+        
+        public static NxtControl.Drawing.Color SE__Nereda__PassiveStatus;
+        
+        public static NxtControl.Drawing.Color SE__Nereda__PowerOFF;
+        
+        public static NxtControl.Drawing.Color Standard__HMIExtensions__AlarmClassColor;
+        
+        public static NxtControl.Drawing.Color Standard__HMIExtensions__AlarmColorSeverity1;
+        
+        public static NxtControl.Drawing.Color Standard__HMIExtensions__AlarmColorSeverity2;
+        
+        public static NxtControl.Drawing.Color Standard__HMIExtensions__AlarmColorSeverity3;
+        
+        public static NxtControl.Drawing.Color Standard__HMIExtensions__AlarmColorSeverity4;
+        
+        public static NxtControl.Drawing.Color Standard__HMIExtensions__AlarmPenColorSeverity1;
+        
+        public static NxtControl.Drawing.Color Standard__HMIExtensions__AlarmPenColorSeverity2;
+        
+        public static NxtControl.Drawing.Color Standard__HMIExtensions__AlarmPenColorSeverity3;
+        
+        public static NxtControl.Drawing.Color Standard__HMIExtensions__AlarmPenColorSeverity4;
+        
+        public static NxtControl.Drawing.Color Standard__HMIExtensions__ProcessClassColor;
+        
+        public static NxtControl.Drawing.Color Standard__HMIExtensions__WarningClassColor;
+        
+        public static NxtControl.Drawing.Color Standard__IoModbus__fpButtonBack;
+        
+        public static NxtControl.Drawing.Color Standard__IoModbus__fpFrameBack;
+        
+        public static NxtControl.Drawing.Color Standard__IoModbus__fpFrameBorder;
+        
+        public static NxtControl.Drawing.Color Standard__IoModbus__fpHeader3DLineBright;
+        
+        public static NxtControl.Drawing.Color Standard__IoModbus__fpHeader3DLineDark;
+        
+        public static NxtControl.Drawing.Color Standard__IoModbus__fpHeaderBack;
+        
+        public static NxtControl.Drawing.Color Standard__IoModbus__fpHeaderLine1;
+        
+        public static NxtControl.Drawing.Color Standard__IoModbus__fpHeaderLine2;
+        
+        public static NxtControl.Drawing.Color Standard__IoModbus__fpInputBack;
+        
+        public static NxtControl.Drawing.Color Standard__IoModbus__fpInputFont;
+        
+        public static NxtControl.Drawing.Color Standard__IoModbus__fpInputFreeBack;
+        
+        public static NxtControl.Drawing.Color Standard__IoModbus__fpInputUsedBack;
+        
+        public static NxtControl.Drawing.Color Standard__IoModbus__fpLabel;
+        
+        public static NxtControl.Drawing.Color Standard__IoModbus__fpOutputFont;
+        
+        public static NxtControl.Drawing.Color Standard__IoModbus__fpStatusBarBack;
+        
+        public static NxtControl.Drawing.Color Standard__IoModbus__fpTitle;
+        
+        public static NxtControl.Drawing.Color Standard__IoModbus__fpWindowBack;
+        
+        public static NxtControl.Drawing.Color Standard__IoModbus__fpWindowBlackBorder;
+        
+        public static NxtControl.Drawing.Color Standard__IoModbus__fpWindowWhiteBorder;
+        
+        public static NxtControl.Drawing.Color Standard__IoModbus__LabelTextColor;
         
         public static NxtControl.Drawing.Color SymBackgroundColor;
         
@@ -182,6 +988,146 @@ namespace NxtControl.Drawing {
         public static NxtControl.Drawing.BlinkColor DevGoToPas;
         
         public static NxtControl.Drawing.BlinkColor RedTransparent;
+        
+        public static NxtControl.Drawing.BlinkColor SE__App2Base__aaLibAbnormalSymbolActionRequired;
+        
+        public static NxtControl.Drawing.BlinkColor SE__App2Base__aaLibAbnormalTextActionRequired;
+        
+        public static NxtControl.Drawing.BlinkColor SE__App2Base__aaLibActingStateActive;
+        
+        public static NxtControl.Drawing.BlinkColor SE__App2Base__aaLibExecuteActive;
+        
+        public static NxtControl.Drawing.BlinkColor SE__App2Base__aaLibPanelButtonCommandRequired;
+        
+        public static NxtControl.Drawing.BlinkColor SE__App2Base__aaLibWaitStateActive;
+        
+        public static NxtControl.Drawing.BlinkColor SE__App2Base__AbnormalTextColor;
+        
+        public static NxtControl.Drawing.BlinkColor SE__App2Base__ActionRequired;
+        
+        public static NxtControl.Drawing.BlinkColor SE__App2Base__BlSymInfoRearm;
+        
+        public static NxtControl.Drawing.BlinkColor SE__App2StateManagement__ActingStateActive;
+        
+        public static NxtControl.Drawing.BlinkColor SE__App2StateManagement__CommandRequired;
+        
+        public static NxtControl.Drawing.BlinkColor SE__App2StateManagement__ExecuteActive;
+        
+        public static NxtControl.Drawing.BlinkColor SE__App2StateManagement__WaitStateActive;
+        
+        public static NxtControl.Drawing.BlinkColor SE__AppSequence__AbnormalTextColor;
+        
+        public static NxtControl.Drawing.BlinkColor SE__AppSequence__ActionRequired;
+        
+        public static NxtControl.Drawing.BlinkColor SE__AppSequence__BlSymInfoRearm;
+        
+        public static NxtControl.Drawing.BlinkColor SE__AppSequence__CommandRequired;
+        
+        public static NxtControl.Drawing.BlinkColor SE__AppSequence__dscActive;
+        
+        public static NxtControl.Drawing.BlinkColor SE__AppSequence__dscFinished;
+        
+        public static NxtControl.Drawing.BlinkColor SE__AppSequence__dscHolded;
+        
+        public static NxtControl.Drawing.BlinkColor SE__AppSequence__dscStopped;
+        
+        public static NxtControl.Drawing.BlinkColor SE__FieldDevice__DevForced;
+        
+        public static NxtControl.Drawing.BlinkColor SE__FieldDevice__DevStatusNormalForced;
+        
+        public static NxtControl.Drawing.BlinkColor SE__HwCommon__DevChannelLEDGreenFlash;
+        
+        public static NxtControl.Drawing.BlinkColor SE__HwCommon__DevForced;
+        
+        public static NxtControl.Drawing.BlinkColor SE__HwCommon__DevLEDGreenFlash;
+        
+        public static NxtControl.Drawing.BlinkColor SE__HwCommon__DevLEDGreenFlash2;
+        
+        public static NxtControl.Drawing.BlinkColor SE__HwCommon__DevLEDGreenFlash3;
+        
+        public static NxtControl.Drawing.BlinkColor SE__HwCommon__DevLEDGreenFlash4;
+        
+        public static NxtControl.Drawing.BlinkColor SE__HwCommon__DevLEDOrangeFlash;
+        
+        public static NxtControl.Drawing.BlinkColor SE__HwCommon__DevLEDOrangeFlash4;
+        
+        public static NxtControl.Drawing.BlinkColor SE__HwCommon__DevLEDOrangeGreenFlash;
+        
+        public static NxtControl.Drawing.BlinkColor SE__HwCommon__DevLEDOrangeRedFlash;
+        
+        public static NxtControl.Drawing.BlinkColor SE__HwCommon__DevLEDRedFlash;
+        
+        public static NxtControl.Drawing.BlinkColor SE__HwCommon__DevLEDRedFlash2;
+        
+        public static NxtControl.Drawing.BlinkColor SE__HwCommon__DevLEDRedFlash3;
+        
+        public static NxtControl.Drawing.BlinkColor SE__HwCommon__DevLEDRedFlash4;
+        
+        public static NxtControl.Drawing.BlinkColor SE__HwCommon__DevStatusBadForced;
+        
+        public static NxtControl.Drawing.BlinkColor SE__HwCommon__DevStatusNormalForced;
+        
+        public static NxtControl.Drawing.BlinkColor SE__HwCommon__DevStatusUncertainForced;
+        
+        public static NxtControl.Drawing.BlinkColor SE__IoATV__DevForced;
+        
+        public static NxtControl.Drawing.BlinkColor SE__IoATV__DevStatusBadForced;
+        
+        public static NxtControl.Drawing.BlinkColor SE__IoATV__DevStatusNormalForced;
+        
+        public static NxtControl.Drawing.BlinkColor SE__IoATV__DevStatusUncertainForced;
+        
+        public static NxtControl.Drawing.BlinkColor SE__IoTMx__DevForced;
+        
+        public static NxtControl.Drawing.BlinkColor SE__IoX80__DevForced;
+        
+        public static NxtControl.Drawing.BlinkColor SE__IoX80__DevStatusBadForced;
+        
+        public static NxtControl.Drawing.BlinkColor SE__IoX80__DevStatusNormalForced;
+        
+        public static NxtControl.Drawing.BlinkColor SE__IoX80__DevStatusUncertainForced;
+        
+        public static NxtControl.Drawing.BlinkColor SE__ModEdgeIONTS__DevChannelLEDGreenFlash;
+        
+        public static NxtControl.Drawing.BlinkColor SE__ModEdgeIONTS__DevChannelLEDGreenFlashSlow;
+        
+        public static NxtControl.Drawing.BlinkColor SE__ModEdgeIONTS__DevForced;
+        
+        public static NxtControl.Drawing.BlinkColor SE__ModEdgeIONTS__DevLEDGreenFlash;
+        
+        public static NxtControl.Drawing.BlinkColor SE__ModEdgeIONTS__DevLEDRedFlash;
+        
+        public static NxtControl.Drawing.BlinkColor SE__ModEdgeIONTS__DevLEDRedFlashSlow;
+        
+        public static NxtControl.Drawing.BlinkColor SE__ModEdgeIONTS__DevStatusBadForced;
+        
+        public static NxtControl.Drawing.BlinkColor SE__ModEdgeIONTS__DevStatusNormalForced;
+        
+        public static NxtControl.Drawing.BlinkColor SE__ModEdgeIONTS__DevStatusUncertainForced;
+        
+        public static NxtControl.Drawing.BlinkColor SE__ModEdgeIONTS__MyColor1_fast;
+        
+        public static NxtControl.Drawing.BlinkColor SE__ModEdgeIONTS__MyColor1_Slow;
+        
+        public static NxtControl.Drawing.BlinkColor SE__ModEdgeIONTS__MyColor2_fast;
+        
+        public static NxtControl.Drawing.BlinkColor SE__ModEdgeIONTS__MyColor2_Slow;
+        
+        public static NxtControl.Drawing.BlinkColor SE__Nereda__DevLEDRedFlash;
+        
+        public static NxtControl.Drawing.BlinkColor SE__Nereda__Orangwhite;
+        
+        public static NxtControl.Drawing.BlinkColor SE__Nereda__Running;
+        
+        public static NxtControl.Drawing.BlinkColor Standard__HMIExtensions__AlarmBlinkColorSeverity1;
+        
+        public static NxtControl.Drawing.BlinkColor Standard__HMIExtensions__AlarmBlinkColorSeverity2;
+        
+        public static NxtControl.Drawing.BlinkColor Standard__HMIExtensions__AlarmBlinkColorSeverity3;
+        
+        public static NxtControl.Drawing.BlinkColor Standard__HMIExtensions__AlarmBlinkColorSeverity4;
+        
+        public static NxtControl.Drawing.BlinkColor Standard__IoModbus__DevForced;
         
         public static NxtControl.Drawing.BlinkColor WarningCameNotAcked;
         
@@ -377,6 +1323,27 @@ namespace NxtControl.Drawing {
             FpLineColor = NxtControl.Drawing.SystemColors.FpLineColor;
             Green = NxtControl.Drawing.SystemColors.Green;
             Grey50 = NxtControl.Drawing.SystemColors.Grey50;
+            Hidryco__HidrycoLib__aaLibAlarmActive = new NxtControl.Drawing.Color("Hidryco.HidrycoLib.aaLibAlarmActive", System.Drawing.Color.FromArgb(234, 22, 30), NxtControl.Drawing.DrawingObjectType.Project);
+            Hidryco__HidrycoLib__aaLibFpData = new NxtControl.Drawing.Color("Hidryco.HidrycoLib.aaLibFpData", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            Hidryco__HidrycoLib__aaLibFpOp = new NxtControl.Drawing.Color("Hidryco.HidrycoLib.aaLibFpOp", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            Hidryco__HidrycoLib__aaLibFpSp = new NxtControl.Drawing.Color("Hidryco.HidrycoLib.aaLibFpSp", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            Hidryco__HidrycoLib__aaLibSymBodyActive = new NxtControl.Drawing.Color("Hidryco.HidrycoLib.aaLibSymBodyActive", System.Drawing.Color.FromArgb(255, 255, 255), NxtControl.Drawing.DrawingObjectType.Project);
+            Hidryco__HidrycoLib__aaLibSymBodyAlarm = new NxtControl.Drawing.Color("Hidryco.HidrycoLib.aaLibSymBodyAlarm", System.Drawing.Color.FromArgb(132, 132, 132), NxtControl.Drawing.DrawingObjectType.Project);
+            Hidryco__HidrycoLib__aaLibSymBodyPassive = new NxtControl.Drawing.Color("Hidryco.HidrycoLib.aaLibSymBodyPassive", System.Drawing.Color.FromArgb(132, 132, 132), NxtControl.Drawing.DrawingObjectType.Project);
+            Hidryco__HidrycoLib__aaLibSymBodyTransition = new NxtControl.Drawing.Color("Hidryco.HidrycoLib.aaLibSymBodyTransition", System.Drawing.Color.FromArgb(204, 255, 204), NxtControl.Drawing.DrawingObjectType.Project);
+            Hidryco__HidrycoLib__Abnormal = new NxtControl.Drawing.Color("Hidryco.HidrycoLib.Abnormal", System.Drawing.Color.FromArgb(254, 186, 10), NxtControl.Drawing.DrawingObjectType.Project);
+            Hidryco__HidrycoLib__ActiveStatus = new NxtControl.Drawing.Color("Hidryco.HidrycoLib.ActiveStatus", System.Drawing.Color.FromArgb(255, 255, 255), NxtControl.Drawing.DrawingObjectType.Project);
+            Hidryco__HidrycoLib__ButtonInnerBorderColor = new NxtControl.Drawing.Color("Hidryco.HidrycoLib.ButtonInnerBorderColor", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            Hidryco__HidrycoLib__ButtonTextColor = new NxtControl.Drawing.Color("Hidryco.HidrycoLib.ButtonTextColor", System.Drawing.Color.FromArgb(255, 255, 255), NxtControl.Drawing.DrawingObjectType.Project);
+            Hidryco__HidrycoLib__ButtonTextColorMouseDown = new NxtControl.Drawing.Color("Hidryco.HidrycoLib.ButtonTextColorMouseDown", System.Drawing.Color.FromArgb(255, 255, 255), NxtControl.Drawing.DrawingObjectType.Project);
+            Hidryco__HidrycoLib__ComboBoxTextColor = new NxtControl.Drawing.Color("Hidryco.HidrycoLib.ComboBoxTextColor", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            Hidryco__HidrycoLib__LabelTextColor = new NxtControl.Drawing.Color("Hidryco.HidrycoLib.LabelTextColor", System.Drawing.Color.FromArgb(100, 100, 100), NxtControl.Drawing.DrawingObjectType.Project);
+            Hidryco__HidrycoLib__NotRunning = new NxtControl.Drawing.Color("Hidryco.HidrycoLib.NotRunning", System.Drawing.Color.FromArgb(235, 235, 235), NxtControl.Drawing.DrawingObjectType.Project);
+            Hidryco__HidrycoLib__PassiveStatus = new NxtControl.Drawing.Color("Hidryco.HidrycoLib.PassiveStatus", System.Drawing.Color.FromArgb(132, 132, 132), NxtControl.Drawing.DrawingObjectType.Project);
+            Hidryco__HidrycoLib__Pv = new NxtControl.Drawing.Color("Hidryco.HidrycoLib.Pv", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            Hidryco__HidrycoLib__SymInstanceLabelTextColor = new NxtControl.Drawing.Color("Hidryco.HidrycoLib.SymInstanceLabelTextColor", System.Drawing.Color.FromArgb(50, 50, 50), NxtControl.Drawing.DrawingObjectType.Project);
+            Hidryco__HidrycoLib__Transition = new NxtControl.Drawing.Color("Hidryco.HidrycoLib.Transition", System.Drawing.Color.FromArgb(204, 255, 204), NxtControl.Drawing.DrawingObjectType.Project);
+            Hidryco__HidrycoLib__Unknown = new NxtControl.Drawing.Color("Hidryco.HidrycoLib.Unknown", System.Drawing.Color.FromArgb(0, 0, 0), NxtControl.Drawing.DrawingObjectType.Project);
             HmiAccessNotInitialized = NxtControl.Drawing.SystemColors.HmiAccessNotInitialized;
             LightGrey = NxtControl.Drawing.SystemColors.LightGrey;
             LogStateError = NxtControl.Drawing.SystemColors.LogStateError;
@@ -397,8 +1364,390 @@ namespace NxtControl.Drawing {
             MedSteamMP = NxtControl.Drawing.SystemColors.MedSteamMP;
             NatWater = NxtControl.Drawing.SystemColors.NatWater;
             Red = NxtControl.Drawing.SystemColors.Red;
+            SE__App2Base__aaLibActingStatePassive = new NxtControl.Drawing.Color("SE.App2Base.aaLibActingStatePassive", System.Drawing.Color.FromArgb(202, 218, 170), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__aaLibAlarmActive = new NxtControl.Drawing.Color("SE.App2Base.aaLibAlarmActive", System.Drawing.Color.FromArgb(234, 22, 30), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__aaLibBreakerDeEnergised = new NxtControl.Drawing.Color("SE.App2Base.aaLibBreakerDeEnergised", System.Drawing.Color.FromArgb(26, 170, 66), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__aaLibBreakerEnergised = new NxtControl.Drawing.Color("SE.App2Base.aaLibBreakerEnergised", System.Drawing.Color.FromArgb(234, 22, 30), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__aaLibConditionStaticBG = new NxtControl.Drawing.Color("SE.App2Base.aaLibConditionStaticBG", System.Drawing.Color.FromArgb(255, 255, 255), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__aaLibDeviationNormal = new NxtControl.Drawing.Color("SE.App2Base.aaLibDeviationNormal", System.Drawing.Color.FromArgb(0, 255, 255), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__aaLibExecutePassive = new NxtControl.Drawing.Color("SE.App2Base.aaLibExecutePassive", System.Drawing.Color.FromArgb(117, 149, 191), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__aaLibFpAbnormalBackground = new NxtControl.Drawing.Color("SE.App2Base.aaLibFpAbnormalBackground", System.Drawing.Color.FromArgb(254, 186, 10), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__aaLibFpAbnormalText = new NxtControl.Drawing.Color("SE.App2Base.aaLibFpAbnormalText", System.Drawing.Color.FromArgb(255, 255, 255), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__aaLibFpConditionHealthy = new NxtControl.Drawing.Color("SE.App2Base.aaLibFpConditionHealthy", System.Drawing.Color.FromArgb(114, 114, 114), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__aaLibFpConditionUnhealthy = new NxtControl.Drawing.Color("SE.App2Base.aaLibFpConditionUnhealthy", System.Drawing.Color.FromArgb(234, 22, 30), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__aaLibFpData = new NxtControl.Drawing.Color("SE.App2Base.aaLibFpData", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__aaLibFpOp = new NxtControl.Drawing.Color("SE.App2Base.aaLibFpOp", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__aaLibFpPv = new NxtControl.Drawing.Color("SE.App2Base.aaLibFpPv", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__aaLibFpSp = new NxtControl.Drawing.Color("SE.App2Base.aaLibFpSp", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__aaLibHeaterActive = new NxtControl.Drawing.Color("SE.App2Base.aaLibHeaterActive", System.Drawing.Color.FromArgb(255, 255, 255), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__aaLibHeaterPassive = new NxtControl.Drawing.Color("SE.App2Base.aaLibHeaterPassive", System.Drawing.Color.FromArgb(132, 132, 132), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__aaLibLimitLoHi = new NxtControl.Drawing.Color("SE.App2Base.aaLibLimitLoHi", System.Drawing.Color.FromArgb(114, 114, 114), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__aaLibLimitLoLoHiHi = new NxtControl.Drawing.Color("SE.App2Base.aaLibLimitLoLoHiHi", System.Drawing.Color.FromArgb(248, 62, 35), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__aaLibPanelButtonActive = new NxtControl.Drawing.Color("SE.App2Base.aaLibPanelButtonActive", System.Drawing.Color.FromArgb(255, 255, 255), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__aaLibPanelButtonBackgroundDisable = new NxtControl.Drawing.Color("SE.App2Base.aaLibPanelButtonBackgroundDisable", System.Drawing.Color.FromArgb(210, 210, 210), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__aaLibPanelButtonDisable = new NxtControl.Drawing.Color("SE.App2Base.aaLibPanelButtonDisable", System.Drawing.Color.FromArgb(176, 176, 176), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__aaLibPanelButtonPassive = new NxtControl.Drawing.Color("SE.App2Base.aaLibPanelButtonPassive", System.Drawing.Color.FromArgb(132, 132, 132), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__aaLibROCNormal = new NxtControl.Drawing.Color("SE.App2Base.aaLibROCNormal", System.Drawing.Color.FromArgb(132, 132, 132), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__aaLibStaticEquipment = new NxtControl.Drawing.Color("SE.App2Base.aaLibStaticEquipment", System.Drawing.Color.FromArgb(186, 186, 186), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__aaLibSymBodyActive = new NxtControl.Drawing.Color("SE.App2Base.aaLibSymBodyActive", System.Drawing.Color.FromArgb(255, 255, 255), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__aaLibSymBodyAlarm = new NxtControl.Drawing.Color("SE.App2Base.aaLibSymBodyAlarm", System.Drawing.Color.FromArgb(132, 132, 132), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__aaLibSymBodyNotRunning = new NxtControl.Drawing.Color("SE.App2Base.aaLibSymBodyNotRunning", System.Drawing.Color.FromArgb(235, 235, 235), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__aaLibSymBodyPassive = new NxtControl.Drawing.Color("SE.App2Base.aaLibSymBodyPassive", System.Drawing.Color.FromArgb(132, 132, 132), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__aaLibSymBodyTransition = new NxtControl.Drawing.Color("SE.App2Base.aaLibSymBodyTransition", System.Drawing.Color.FromArgb(204, 255, 204), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__aaLibSymData = new NxtControl.Drawing.Color("SE.App2Base.aaLibSymData", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__aaLibSymExternalControlLabelText = new NxtControl.Drawing.Color("SE.App2Base.aaLibSymExternalControlLabelText", System.Drawing.Color.FromArgb(0, 0, 0), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__aaLibSymHeadActive = new NxtControl.Drawing.Color("SE.App2Base.aaLibSymHeadActive", System.Drawing.Color.FromArgb(255, 255, 255), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__aaLibSymHeadAlarm = new NxtControl.Drawing.Color("SE.App2Base.aaLibSymHeadAlarm", System.Drawing.Color.FromArgb(132, 132, 132), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__aaLibSymHeadPassive = new NxtControl.Drawing.Color("SE.App2Base.aaLibSymHeadPassive", System.Drawing.Color.FromArgb(132, 132, 132), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__aaLibSymHeadTransition = new NxtControl.Drawing.Color("SE.App2Base.aaLibSymHeadTransition", System.Drawing.Color.FromArgb(204, 255, 204), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__aaLibSymInstanceLabelTextColor = new NxtControl.Drawing.Color("SE.App2Base.aaLibSymInstanceLabelTextColor", System.Drawing.Color.FromArgb(50, 50, 50), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__aaLibSymOp = new NxtControl.Drawing.Color("SE.App2Base.aaLibSymOp", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__aaLibSymPv = new NxtControl.Drawing.Color("SE.App2Base.aaLibSymPv", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__aaLibSymSp = new NxtControl.Drawing.Color("SE.App2Base.aaLibSymSp", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__aaLibSymUnit = new NxtControl.Drawing.Color("SE.App2Base.aaLibSymUnit", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__aaLibWaitStatePassive = new NxtControl.Drawing.Color("SE.App2Base.aaLibWaitStatePassive", System.Drawing.Color.FromArgb(250, 206, 124), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__Abnormal = new NxtControl.Drawing.Color("SE.App2Base.Abnormal", System.Drawing.Color.FromArgb(254, 186, 10), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__AbnormalText = new NxtControl.Drawing.Color("SE.App2Base.AbnormalText", System.Drawing.Color.FromArgb(255, 255, 255), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__Active = new NxtControl.Drawing.Color("SE.App2Base.Active", System.Drawing.Color.FromArgb(132, 132, 132), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__ActiveStatus = new NxtControl.Drawing.Color("SE.App2Base.ActiveStatus", System.Drawing.Color.FromArgb(255, 255, 255), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__CondActive = new NxtControl.Drawing.Color("SE.App2Base.CondActive", System.Drawing.Color.FromArgb(255, 255, 255), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__ConditionActive = new NxtControl.Drawing.Color("SE.App2Base.ConditionActive", System.Drawing.Color.FromArgb(234, 22, 30), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__ConditionBG = new NxtControl.Drawing.Color("SE.App2Base.ConditionBG", System.Drawing.Color.FromArgb(255, 255, 255), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__ConditionInactive = new NxtControl.Drawing.Color("SE.App2Base.ConditionInactive", System.Drawing.Color.FromArgb(114, 114, 114), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__ConditionOn = new NxtControl.Drawing.Color("SE.App2Base.ConditionOn", System.Drawing.Color.FromArgb(245, 157, 86), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__ConditionText = new NxtControl.Drawing.Color("SE.App2Base.ConditionText", System.Drawing.Color.FromArgb(114, 114, 114), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__CondPassive = new NxtControl.Drawing.Color("SE.App2Base.CondPassive", System.Drawing.Color.FromArgb(132, 132, 132), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__DeviationBarAlarm = new NxtControl.Drawing.Color("SE.App2Base.DeviationBarAlarm", System.Drawing.Color.FromArgb(234, 22, 30), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__DeviationBarNormal = new NxtControl.Drawing.Color("SE.App2Base.DeviationBarNormal", System.Drawing.Color.FromArgb(0, 255, 255), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__Disabled = new NxtControl.Drawing.Color("SE.App2Base.Disabled", System.Drawing.Color.FromArgb(176, 176, 176), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__DisabledBackground = new NxtControl.Drawing.Color("SE.App2Base.DisabledBackground", System.Drawing.Color.FromArgb(210, 210, 210), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__FpLabelTextColor = new NxtControl.Drawing.Color("SE.App2Base.FpLabelTextColor", System.Drawing.Color.FromArgb(154, 154, 154), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__FpPv = new NxtControl.Drawing.Color("SE.App2Base.FpPv", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__FpSp = new NxtControl.Drawing.Color("SE.App2Base.FpSp", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__FpText = new NxtControl.Drawing.Color("SE.App2Base.FpText", System.Drawing.Color.FromArgb(114, 114, 114), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__LabelTextColor = new NxtControl.Drawing.Color("SE.App2Base.LabelTextColor", System.Drawing.Color.FromArgb(154, 154, 154), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__NotRunning = new NxtControl.Drawing.Color("SE.App2Base.NotRunning", System.Drawing.Color.FromArgb(235, 235, 235), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__PassiveStatus = new NxtControl.Drawing.Color("SE.App2Base.PassiveStatus", System.Drawing.Color.FromArgb(132, 132, 132), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__Pv = new NxtControl.Drawing.Color("SE.App2Base.Pv", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__SAPvAbnormal = new NxtControl.Drawing.Color("SE.App2Base.SAPvAbnormal", System.Drawing.Color.FromArgb(247, 181, 128), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__SAPvAbnormalContrast = new NxtControl.Drawing.Color("SE.App2Base.SAPvAbnormalContrast", System.Drawing.Color.FromArgb(255, 255, 255), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__SAPvNormal = new NxtControl.Drawing.Color("SE.App2Base.SAPvNormal", System.Drawing.Color.FromArgb(154, 154, 154), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__SymBAInstanceLabelTextColor = new NxtControl.Drawing.Color("SE.App2Base.SymBAInstanceLabelTextColor", System.Drawing.Color.FromArgb(114, 114, 114), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__SymExternalControlLabel = new NxtControl.Drawing.Color("SE.App2Base.SymExternalControlLabel", System.Drawing.Color.FromArgb(0, 0, 0), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__SymInfoRearm = new NxtControl.Drawing.Color("SE.App2Base.SymInfoRearm", System.Drawing.Color.FromArgb(254, 186, 10), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__SymInstanceName = new NxtControl.Drawing.Color("SE.App2Base.SymInstanceName", System.Drawing.Color.FromArgb(80, 80, 80), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__SymLabelTextColor = new NxtControl.Drawing.Color("SE.App2Base.SymLabelTextColor", System.Drawing.Color.FromArgb(114, 114, 114), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__SymLine = new NxtControl.Drawing.Color("SE.App2Base.SymLine", System.Drawing.Color.FromArgb(114, 114, 114), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__SymPv = new NxtControl.Drawing.Color("SE.App2Base.SymPv", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__SymSp = new NxtControl.Drawing.Color("SE.App2Base.SymSp", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__SymText = new NxtControl.Drawing.Color("SE.App2Base.SymText", System.Drawing.Color.FromArgb(114, 114, 114), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__SymTextInfoRearm = new NxtControl.Drawing.Color("SE.App2Base.SymTextInfoRearm", System.Drawing.Color.FromArgb(0, 0, 0), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__Transition = new NxtControl.Drawing.Color("SE.App2Base.Transition", System.Drawing.Color.FromArgb(204, 255, 204), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__Unknown = new NxtControl.Drawing.Color("SE.App2Base.Unknown", System.Drawing.Color.FromArgb(0, 0, 0), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2CommonProcess__aaLibFpData = new NxtControl.Drawing.Color("SE.App2CommonProcess.aaLibFpData", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2CommonProcess__aaLibFpOp = new NxtControl.Drawing.Color("SE.App2CommonProcess.aaLibFpOp", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2CommonProcess__aaLibFpPv = new NxtControl.Drawing.Color("SE.App2CommonProcess.aaLibFpPv", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2CommonProcess__aaLibFpSp = new NxtControl.Drawing.Color("SE.App2CommonProcess.aaLibFpSp", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2CommonProcess__aaLibSymInstanceLabelTextColor = new NxtControl.Drawing.Color("SE.App2CommonProcess.aaLibSymInstanceLabelTextColor", System.Drawing.Color.FromArgb(114, 114, 114), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2CommonProcess__aaLibSymOp = new NxtControl.Drawing.Color("SE.App2CommonProcess.aaLibSymOp", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2CommonProcess__aaLibSymPv = new NxtControl.Drawing.Color("SE.App2CommonProcess.aaLibSymPv", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2CommonProcess__aaLibSymSp = new NxtControl.Drawing.Color("SE.App2CommonProcess.aaLibSymSp", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2CommonProcess__Abnormal = new NxtControl.Drawing.Color("SE.App2CommonProcess.Abnormal", System.Drawing.Color.FromArgb(254, 186, 10), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2CommonProcess__Active = new NxtControl.Drawing.Color("SE.App2CommonProcess.Active", System.Drawing.Color.FromArgb(132, 132, 132), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2CommonProcess__ActiveStatus = new NxtControl.Drawing.Color("SE.App2CommonProcess.ActiveStatus", System.Drawing.Color.FromArgb(255, 255, 255), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2CommonProcess__CondActive = new NxtControl.Drawing.Color("SE.App2CommonProcess.CondActive", System.Drawing.Color.FromArgb(255, 255, 255), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2CommonProcess__ConditionActive = new NxtControl.Drawing.Color("SE.App2CommonProcess.ConditionActive", System.Drawing.Color.FromArgb(234, 22, 30), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2CommonProcess__ConditionBG = new NxtControl.Drawing.Color("SE.App2CommonProcess.ConditionBG", System.Drawing.Color.FromArgb(255, 255, 255), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2CommonProcess__ConditionInactive = new NxtControl.Drawing.Color("SE.App2CommonProcess.ConditionInactive", System.Drawing.Color.FromArgb(114, 114, 114), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2CommonProcess__ConditionOn = new NxtControl.Drawing.Color("SE.App2CommonProcess.ConditionOn", System.Drawing.Color.FromArgb(245, 157, 86), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2CommonProcess__ConditionText = new NxtControl.Drawing.Color("SE.App2CommonProcess.ConditionText", System.Drawing.Color.FromArgb(114, 114, 114), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2CommonProcess__CondPassive = new NxtControl.Drawing.Color("SE.App2CommonProcess.CondPassive", System.Drawing.Color.FromArgb(132, 132, 132), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2CommonProcess__Disabled = new NxtControl.Drawing.Color("SE.App2CommonProcess.Disabled", System.Drawing.Color.FromArgb(176, 176, 176), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2CommonProcess__DisabledBackground = new NxtControl.Drawing.Color("SE.App2CommonProcess.DisabledBackground", System.Drawing.Color.FromArgb(210, 210, 210), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2CommonProcess__FpLabelTextColor = new NxtControl.Drawing.Color("SE.App2CommonProcess.FpLabelTextColor", System.Drawing.Color.FromArgb(154, 154, 154), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2CommonProcess__FpPv = new NxtControl.Drawing.Color("SE.App2CommonProcess.FpPv", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2CommonProcess__FpSp = new NxtControl.Drawing.Color("SE.App2CommonProcess.FpSp", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2CommonProcess__FpText = new NxtControl.Drawing.Color("SE.App2CommonProcess.FpText", System.Drawing.Color.FromArgb(114, 114, 114), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2CommonProcess__LabelTextColor = new NxtControl.Drawing.Color("SE.App2CommonProcess.LabelTextColor", System.Drawing.Color.FromArgb(154, 154, 154), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2CommonProcess__NotRunning = new NxtControl.Drawing.Color("SE.App2CommonProcess.NotRunning", System.Drawing.Color.FromArgb(235, 235, 235), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2CommonProcess__PassiveStatus = new NxtControl.Drawing.Color("SE.App2CommonProcess.PassiveStatus", System.Drawing.Color.FromArgb(132, 132, 132), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2CommonProcess__Pv = new NxtControl.Drawing.Color("SE.App2CommonProcess.Pv", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2CommonProcess__SAPvAbnormal = new NxtControl.Drawing.Color("SE.App2CommonProcess.SAPvAbnormal", System.Drawing.Color.FromArgb(247, 181, 128), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2CommonProcess__SAPvAbnormalContrast = new NxtControl.Drawing.Color("SE.App2CommonProcess.SAPvAbnormalContrast", System.Drawing.Color.FromArgb(255, 255, 255), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2CommonProcess__SAPvNormal = new NxtControl.Drawing.Color("SE.App2CommonProcess.SAPvNormal", System.Drawing.Color.FromArgb(154, 154, 154), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2CommonProcess__SE_ConditionStaticBG = new NxtControl.Drawing.Color("SE.App2CommonProcess.SE_ConditionStaticBG", System.Drawing.Color.FromArgb(255, 255, 255), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2CommonProcess__SE_FpAbnormalBackground = new NxtControl.Drawing.Color("SE.App2CommonProcess.SE_FpAbnormalBackground", System.Drawing.Color.FromArgb(254, 186, 10), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2CommonProcess__SE_FpConditionHealthy = new NxtControl.Drawing.Color("SE.App2CommonProcess.SE_FpConditionHealthy", System.Drawing.Color.FromArgb(114, 114, 114), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2CommonProcess__SE_FpConditionUnhealthy = new NxtControl.Drawing.Color("SE.App2CommonProcess.SE_FpConditionUnhealthy", System.Drawing.Color.FromArgb(234, 22, 30), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2CommonProcess__SE_FpSp = new NxtControl.Drawing.Color("SE.App2CommonProcess.SE_FpSp", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2CommonProcess__SE_SymPv = new NxtControl.Drawing.Color("SE.App2CommonProcess.SE_SymPv", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2CommonProcess__SymLine = new NxtControl.Drawing.Color("SE.App2CommonProcess.SymLine", System.Drawing.Color.FromArgb(114, 114, 114), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2CommonProcess__SymPv = new NxtControl.Drawing.Color("SE.App2CommonProcess.SymPv", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2CommonProcess__System_FpHeaderText = new NxtControl.Drawing.Color("SE.App2CommonProcess.System_FpHeaderText", System.Drawing.Color.FromArgb(50, 50, 50), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2CommonProcess__System_FpLabelText = new NxtControl.Drawing.Color("SE.App2CommonProcess.System_FpLabelText", System.Drawing.Color.FromArgb(114, 114, 114), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2CommonProcess__System_SymLabelText = new NxtControl.Drawing.Color("SE.App2CommonProcess.System_SymLabelText", System.Drawing.Color.FromArgb(114, 114, 114), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2CommonProcess__Transition = new NxtControl.Drawing.Color("SE.App2CommonProcess.Transition", System.Drawing.Color.FromArgb(204, 255, 204), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2CommonProcess__Unknown = new NxtControl.Drawing.Color("SE.App2CommonProcess.Unknown", System.Drawing.Color.FromArgb(0, 0, 0), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Conveying__aaLibAlarmActive = new NxtControl.Drawing.Color("SE.App2Conveying.aaLibAlarmActive", System.Drawing.Color.FromArgb(234, 22, 30), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Conveying__aaLibFpData = new NxtControl.Drawing.Color("SE.App2Conveying.aaLibFpData", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Conveying__aaLibSymBodyActive = new NxtControl.Drawing.Color("SE.App2Conveying.aaLibSymBodyActive", System.Drawing.Color.FromArgb(255, 255, 255), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Conveying__aaLibSymBodyPassive = new NxtControl.Drawing.Color("SE.App2Conveying.aaLibSymBodyPassive", System.Drawing.Color.FromArgb(132, 132, 132), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Conveying__aaLibSymData = new NxtControl.Drawing.Color("SE.App2Conveying.aaLibSymData", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Conveying__aaLibSymInstanceLabelTextColor = new NxtControl.Drawing.Color("SE.App2Conveying.aaLibSymInstanceLabelTextColor", System.Drawing.Color.FromArgb(50, 50, 50), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Conveying__FpPv = new NxtControl.Drawing.Color("SE.App2Conveying.FpPv", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Conveying__FpSp = new NxtControl.Drawing.Color("SE.App2Conveying.FpSp", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Conveying__FpText = new NxtControl.Drawing.Color("SE.App2Conveying.FpText", System.Drawing.Color.FromArgb(114, 114, 114), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Conveying__Pv = new NxtControl.Drawing.Color("SE.App2Conveying.Pv", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Conveying__SymInstanceLabelTextColor = new NxtControl.Drawing.Color("SE.App2Conveying.SymInstanceLabelTextColor", System.Drawing.Color.FromArgb(50, 50, 50), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Conveying__SymLabelTextColor = new NxtControl.Drawing.Color("SE.App2Conveying.SymLabelTextColor", System.Drawing.Color.FromArgb(114, 114, 114), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Conveying__SymLine = new NxtControl.Drawing.Color("SE.App2Conveying.SymLine", System.Drawing.Color.FromArgb(114, 114, 114), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Conveying__SymText = new NxtControl.Drawing.Color("SE.App2Conveying.SymText", System.Drawing.Color.FromArgb(114, 114, 114), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2LiquidFood__Active = new NxtControl.Drawing.Color("SE.App2LiquidFood.Active", System.Drawing.Color.FromArgb(132, 132, 132), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2LiquidFood__ActiveStatus = new NxtControl.Drawing.Color("SE.App2LiquidFood.ActiveStatus", System.Drawing.Color.FromArgb(255, 255, 255), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2LiquidFood__FpLabelTextColor = new NxtControl.Drawing.Color("SE.App2LiquidFood.FpLabelTextColor", System.Drawing.Color.FromArgb(154, 154, 154), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2LiquidFood__FpPv = new NxtControl.Drawing.Color("SE.App2LiquidFood.FpPv", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2LiquidFood__FpSp = new NxtControl.Drawing.Color("SE.App2LiquidFood.FpSp", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2LiquidFood__FpText = new NxtControl.Drawing.Color("SE.App2LiquidFood.FpText", System.Drawing.Color.FromArgb(114, 114, 114), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2LiquidFood__LabelTextColor = new NxtControl.Drawing.Color("SE.App2LiquidFood.LabelTextColor", System.Drawing.Color.FromArgb(154, 154, 154), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2LiquidFood__PassiveStatus = new NxtControl.Drawing.Color("SE.App2LiquidFood.PassiveStatus", System.Drawing.Color.FromArgb(132, 132, 132), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2LiquidFood__Pv = new NxtControl.Drawing.Color("SE.App2LiquidFood.Pv", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2LiquidFood__Transition = new NxtControl.Drawing.Color("SE.App2LiquidFood.Transition", System.Drawing.Color.FromArgb(204, 255, 204), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2LiquidFood__Unknown = new NxtControl.Drawing.Color("SE.App2LiquidFood.Unknown", System.Drawing.Color.FromArgb(0, 0, 0), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2MMM__aaLibFpData = new NxtControl.Drawing.Color("SE.App2MMM.aaLibFpData", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2MMM__aaLibFpOp = new NxtControl.Drawing.Color("SE.App2MMM.aaLibFpOp", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2MMM__aaLibFpPv = new NxtControl.Drawing.Color("SE.App2MMM.aaLibFpPv", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2MMM__aaLibFpSp = new NxtControl.Drawing.Color("SE.App2MMM.aaLibFpSp", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2MMM__aaLibStaticEquipment = new NxtControl.Drawing.Color("SE.App2MMM.aaLibStaticEquipment", System.Drawing.Color.FromArgb(186, 186, 186), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2MMM__aaLibSymBodyActive = new NxtControl.Drawing.Color("SE.App2MMM.aaLibSymBodyActive", System.Drawing.Color.FromArgb(255, 255, 255), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2MMM__aaLibSymBodyAlarm = new NxtControl.Drawing.Color("SE.App2MMM.aaLibSymBodyAlarm", System.Drawing.Color.FromArgb(132, 132, 132), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2MMM__aaLibSymBodyPassive = new NxtControl.Drawing.Color("SE.App2MMM.aaLibSymBodyPassive", System.Drawing.Color.FromArgb(132, 132, 132), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2MMM__aaLibSymInstanceLabelTextColor = new NxtControl.Drawing.Color("SE.App2MMM.aaLibSymInstanceLabelTextColor", System.Drawing.Color.FromArgb(50, 50, 50), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2MMM__aaLibSymOp = new NxtControl.Drawing.Color("SE.App2MMM.aaLibSymOp", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2MMM__aaLibSymPv = new NxtControl.Drawing.Color("SE.App2MMM.aaLibSymPv", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2MMM__aaLibSymSp = new NxtControl.Drawing.Color("SE.App2MMM.aaLibSymSp", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2MMM__ActiveStatus = new NxtControl.Drawing.Color("SE.App2MMM.ActiveStatus", System.Drawing.Color.FromArgb(255, 255, 255), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2MMM__Disabled = new NxtControl.Drawing.Color("SE.App2MMM.Disabled", System.Drawing.Color.FromArgb(176, 176, 176), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2MMM__DisabledBackground = new NxtControl.Drawing.Color("SE.App2MMM.DisabledBackground", System.Drawing.Color.FromArgb(210, 210, 210), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2MMM__FpLabelTextColor = new NxtControl.Drawing.Color("SE.App2MMM.FpLabelTextColor", System.Drawing.Color.FromArgb(154, 154, 154), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2MMM__FpPv = new NxtControl.Drawing.Color("SE.App2MMM.FpPv", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2MMM__FpSp = new NxtControl.Drawing.Color("SE.App2MMM.FpSp", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2MMM__FpText = new NxtControl.Drawing.Color("SE.App2MMM.FpText", System.Drawing.Color.FromArgb(114, 114, 114), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2MMM__PassiveStatus = new NxtControl.Drawing.Color("SE.App2MMM.PassiveStatus", System.Drawing.Color.FromArgb(132, 132, 132), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2MMM__Pv = new NxtControl.Drawing.Color("SE.App2MMM.Pv", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2SingleLinePowerMonitoring__aaLibBreakerDeEnergised = new NxtControl.Drawing.Color("SE.App2SingleLinePowerMonitoring.aaLibBreakerDeEnergised", System.Drawing.Color.FromArgb(26, 170, 66), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2SingleLinePowerMonitoring__aaLibBreakerEnergised = new NxtControl.Drawing.Color("SE.App2SingleLinePowerMonitoring.aaLibBreakerEnergised", System.Drawing.Color.FromArgb(234, 22, 30), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2SingleLinePowerMonitoring__aaLibFpData = new NxtControl.Drawing.Color("SE.App2SingleLinePowerMonitoring.aaLibFpData", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2SingleLinePowerMonitoring__aaLibFpOp = new NxtControl.Drawing.Color("SE.App2SingleLinePowerMonitoring.aaLibFpOp", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2SingleLinePowerMonitoring__aaLibFpSp = new NxtControl.Drawing.Color("SE.App2SingleLinePowerMonitoring.aaLibFpSp", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2SingleLinePowerMonitoring__aaLibSymInstanceLabelTextColor = new NxtControl.Drawing.Color("SE.App2SingleLinePowerMonitoring.aaLibSymInstanceLabelTextColor", System.Drawing.Color.FromArgb(50, 50, 50), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2SingleLinePowerMonitoring__aaLibSymPv = new NxtControl.Drawing.Color("SE.App2SingleLinePowerMonitoring.aaLibSymPv", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2SingleLinePowerMonitoring__Active = new NxtControl.Drawing.Color("SE.App2SingleLinePowerMonitoring.Active", System.Drawing.Color.FromArgb(132, 132, 132), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2SingleLinePowerMonitoring__ActiveStatus = new NxtControl.Drawing.Color("SE.App2SingleLinePowerMonitoring.ActiveStatus", System.Drawing.Color.FromArgb(255, 0, 0), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2SingleLinePowerMonitoring__DeEnergized = new NxtControl.Drawing.Color("SE.App2SingleLinePowerMonitoring.DeEnergized", System.Drawing.Color.FromArgb(26, 170, 66), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2SingleLinePowerMonitoring__Energized = new NxtControl.Drawing.Color("SE.App2SingleLinePowerMonitoring.Energized", System.Drawing.Color.FromArgb(234, 22, 30), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2SingleLinePowerMonitoring__FpLabelTextColor = new NxtControl.Drawing.Color("SE.App2SingleLinePowerMonitoring.FpLabelTextColor", System.Drawing.Color.FromArgb(154, 154, 154), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2SingleLinePowerMonitoring__FpPv = new NxtControl.Drawing.Color("SE.App2SingleLinePowerMonitoring.FpPv", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2SingleLinePowerMonitoring__FpSp = new NxtControl.Drawing.Color("SE.App2SingleLinePowerMonitoring.FpSp", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2SingleLinePowerMonitoring__LabelTextColor = new NxtControl.Drawing.Color("SE.App2SingleLinePowerMonitoring.LabelTextColor", System.Drawing.Color.FromArgb(154, 154, 154), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2SingleLinePowerMonitoring__Passive = new NxtControl.Drawing.Color("SE.App2SingleLinePowerMonitoring.Passive", System.Drawing.Color.FromArgb(255, 255, 255), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2SingleLinePowerMonitoring__PassiveStatus = new NxtControl.Drawing.Color("SE.App2SingleLinePowerMonitoring.PassiveStatus", System.Drawing.Color.FromArgb(0, 132, 0), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2SingleLinePowerMonitoring__Pv = new NxtControl.Drawing.Color("SE.App2SingleLinePowerMonitoring.Pv", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2SingleLinePowerMonitoring__Sp = new NxtControl.Drawing.Color("SE.App2SingleLinePowerMonitoring.Sp", System.Drawing.Color.FromArgb(0, 0, 0), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2SingleLinePowerMonitoring__SymPv = new NxtControl.Drawing.Color("SE.App2SingleLinePowerMonitoring.SymPv", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2SingleLinePowerMonitoring__SymSp = new NxtControl.Drawing.Color("SE.App2SingleLinePowerMonitoring.SymSp", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2StateManagement__ActingStatePassive = new NxtControl.Drawing.Color("SE.App2StateManagement.ActingStatePassive", System.Drawing.Color.FromArgb(202, 218, 170), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2StateManagement__Active = new NxtControl.Drawing.Color("SE.App2StateManagement.Active", System.Drawing.Color.FromArgb(255, 255, 255), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2StateManagement__ActiveStatus = new NxtControl.Drawing.Color("SE.App2StateManagement.ActiveStatus", System.Drawing.Color.FromArgb(255, 255, 255), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2StateManagement__Black = new NxtControl.Drawing.Color("SE.App2StateManagement.Black", System.Drawing.Color.FromArgb(0, 0, 0), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2StateManagement__Disabled = new NxtControl.Drawing.Color("SE.App2StateManagement.Disabled", System.Drawing.Color.FromArgb(176, 176, 176), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2StateManagement__DisabledBackground = new NxtControl.Drawing.Color("SE.App2StateManagement.DisabledBackground", System.Drawing.Color.FromArgb(210, 210, 210), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2StateManagement__ExecutePassive = new NxtControl.Drawing.Color("SE.App2StateManagement.ExecutePassive", System.Drawing.Color.FromArgb(117, 149, 191), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2StateManagement__FpLabelTextColor = new NxtControl.Drawing.Color("SE.App2StateManagement.FpLabelTextColor", System.Drawing.Color.FromArgb(154, 154, 154), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2StateManagement__FpPv = new NxtControl.Drawing.Color("SE.App2StateManagement.FpPv", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2StateManagement__FpSp = new NxtControl.Drawing.Color("SE.App2StateManagement.FpSp", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2StateManagement__FpText = new NxtControl.Drawing.Color("SE.App2StateManagement.FpText", System.Drawing.Color.FromArgb(114, 114, 114), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2StateManagement__LabelTextColor = new NxtControl.Drawing.Color("SE.App2StateManagement.LabelTextColor", System.Drawing.Color.FromArgb(154, 154, 154), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2StateManagement__Passive = new NxtControl.Drawing.Color("SE.App2StateManagement.Passive", System.Drawing.Color.FromArgb(132, 132, 132), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2StateManagement__PassiveStatus = new NxtControl.Drawing.Color("SE.App2StateManagement.PassiveStatus", System.Drawing.Color.FromArgb(132, 132, 132), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2StateManagement__Pv = new NxtControl.Drawing.Color("SE.App2StateManagement.Pv", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2StateManagement__SeqTransitionActive = new NxtControl.Drawing.Color("SE.App2StateManagement.SeqTransitionActive", System.Drawing.Color.FromArgb(255, 255, 255), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2StateManagement__Sp = new NxtControl.Drawing.Color("SE.App2StateManagement.Sp", System.Drawing.Color.FromArgb(0, 0, 0), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2StateManagement__WaitStatePassive = new NxtControl.Drawing.Color("SE.App2StateManagement.WaitStatePassive", System.Drawing.Color.FromArgb(250, 206, 124), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__aaLibSymInstanceLabelTextColor = new NxtControl.Drawing.Color("SE.AppSequence.aaLibSymInstanceLabelTextColor", System.Drawing.Color.FromArgb(114, 114, 114), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__Abnormal = new NxtControl.Drawing.Color("SE.AppSequence.Abnormal", System.Drawing.Color.FromArgb(254, 186, 10), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__AbnormalText = new NxtControl.Drawing.Color("SE.AppSequence.AbnormalText", System.Drawing.Color.FromArgb(255, 255, 255), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__Active = new NxtControl.Drawing.Color("SE.AppSequence.Active", System.Drawing.Color.FromArgb(255, 255, 255), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__ActiveStatus = new NxtControl.Drawing.Color("SE.AppSequence.ActiveStatus", System.Drawing.Color.FromArgb(255, 255, 255), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__Black = new NxtControl.Drawing.Color("SE.AppSequence.Black", System.Drawing.Color.FromArgb(0, 0, 0), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__CommandPB = new NxtControl.Drawing.Color("SE.AppSequence.CommandPB", System.Drawing.Color.FromArgb(190, 190, 190), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__CondActive = new NxtControl.Drawing.Color("SE.AppSequence.CondActive", System.Drawing.Color.FromArgb(255, 255, 255), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__ConditionActive = new NxtControl.Drawing.Color("SE.AppSequence.ConditionActive", System.Drawing.Color.FromArgb(234, 22, 30), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__ConditionBG = new NxtControl.Drawing.Color("SE.AppSequence.ConditionBG", System.Drawing.Color.FromArgb(255, 255, 255), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__ConditionInactive = new NxtControl.Drawing.Color("SE.AppSequence.ConditionInactive", System.Drawing.Color.FromArgb(114, 114, 114), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__ConditionOn = new NxtControl.Drawing.Color("SE.AppSequence.ConditionOn", System.Drawing.Color.FromArgb(245, 157, 86), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__ConditionText = new NxtControl.Drawing.Color("SE.AppSequence.ConditionText", System.Drawing.Color.FromArgb(114, 114, 114), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__CondPassive = new NxtControl.Drawing.Color("SE.AppSequence.CondPassive", System.Drawing.Color.FromArgb(132, 132, 132), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__DeviationBarAlarm = new NxtControl.Drawing.Color("SE.AppSequence.DeviationBarAlarm", System.Drawing.Color.FromArgb(234, 22, 30), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__DeviationBarNormal = new NxtControl.Drawing.Color("SE.AppSequence.DeviationBarNormal", System.Drawing.Color.FromArgb(0, 255, 255), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__Disabled = new NxtControl.Drawing.Color("SE.AppSequence.Disabled", System.Drawing.Color.FromArgb(176, 176, 176), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__DisabledBackground = new NxtControl.Drawing.Color("SE.AppSequence.DisabledBackground", System.Drawing.Color.FromArgb(210, 210, 210), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__DisplayBGColor = new NxtControl.Drawing.Color("SE.AppSequence.DisplayBGColor", System.Drawing.Color.FromArgb(120, 192, 212), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__FpLabelTextColor = new NxtControl.Drawing.Color("SE.AppSequence.FpLabelTextColor", System.Drawing.Color.FromArgb(154, 154, 154), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__FpPv = new NxtControl.Drawing.Color("SE.AppSequence.FpPv", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__FpSp = new NxtControl.Drawing.Color("SE.AppSequence.FpSp", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__FpText = new NxtControl.Drawing.Color("SE.AppSequence.FpText", System.Drawing.Color.FromArgb(114, 114, 114), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__LabelTextColor = new NxtControl.Drawing.Color("SE.AppSequence.LabelTextColor", System.Drawing.Color.FromArgb(154, 154, 154), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__NotRunning = new NxtControl.Drawing.Color("SE.AppSequence.NotRunning", System.Drawing.Color.FromArgb(235, 235, 235), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__Passive = new NxtControl.Drawing.Color("SE.AppSequence.Passive", System.Drawing.Color.FromArgb(132, 132, 132), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__PassiveStatus = new NxtControl.Drawing.Color("SE.AppSequence.PassiveStatus", System.Drawing.Color.FromArgb(132, 132, 132), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__Pv = new NxtControl.Drawing.Color("SE.AppSequence.Pv", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__SAElementBG = new NxtControl.Drawing.Color("SE.AppSequence.SAElementBG", System.Drawing.Color.FromArgb(210, 210, 210), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__SAPvAbnormal = new NxtControl.Drawing.Color("SE.AppSequence.SAPvAbnormal", System.Drawing.Color.FromArgb(247, 181, 128), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__SAPvAbnormalContrast = new NxtControl.Drawing.Color("SE.AppSequence.SAPvAbnormalContrast", System.Drawing.Color.FromArgb(255, 255, 255), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__SAPvNormal = new NxtControl.Drawing.Color("SE.AppSequence.SAPvNormal", System.Drawing.Color.FromArgb(154, 154, 154), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__SeqNumber = new NxtControl.Drawing.Color("SE.AppSequence.SeqNumber", System.Drawing.Color.FromArgb(0, 0, 0), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__SeqTransitionActive = new NxtControl.Drawing.Color("SE.AppSequence.SeqTransitionActive", System.Drawing.Color.FromArgb(255, 255, 255), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__SeqTransitionComplete = new NxtControl.Drawing.Color("SE.AppSequence.SeqTransitionComplete", System.Drawing.Color.FromArgb(210, 210, 210), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__SeqTransitionIdle = new NxtControl.Drawing.Color("SE.AppSequence.SeqTransitionIdle", System.Drawing.Color.FromArgb(132, 132, 132), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__Sp = new NxtControl.Drawing.Color("SE.AppSequence.Sp", System.Drawing.Color.FromArgb(0, 0, 0), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__SymBAInstanceLabelTextColor = new NxtControl.Drawing.Color("SE.AppSequence.SymBAInstanceLabelTextColor", System.Drawing.Color.FromArgb(114, 114, 114), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__SymInfoRearm = new NxtControl.Drawing.Color("SE.AppSequence.SymInfoRearm", System.Drawing.Color.FromArgb(254, 186, 10), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__SymLabelTextColor = new NxtControl.Drawing.Color("SE.AppSequence.SymLabelTextColor", System.Drawing.Color.FromArgb(114, 114, 114), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__SymLine = new NxtControl.Drawing.Color("SE.AppSequence.SymLine", System.Drawing.Color.FromArgb(114, 114, 114), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__SymOut = new NxtControl.Drawing.Color("SE.AppSequence.SymOut", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__SymPv = new NxtControl.Drawing.Color("SE.AppSequence.SymPv", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__SymSp = new NxtControl.Drawing.Color("SE.AppSequence.SymSp", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__SymText = new NxtControl.Drawing.Color("SE.AppSequence.SymText", System.Drawing.Color.FromArgb(114, 114, 114), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__SymTextInfoRearm = new NxtControl.Drawing.Color("SE.AppSequence.SymTextInfoRearm", System.Drawing.Color.FromArgb(0, 0, 0), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__Text = new NxtControl.Drawing.Color("SE.AppSequence.Text", System.Drawing.Color.FromArgb(114, 114, 114), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__Transition = new NxtControl.Drawing.Color("SE.AppSequence.Transition", System.Drawing.Color.FromArgb(204, 255, 204), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__Unknown = new NxtControl.Drawing.Color("SE.AppSequence.Unknown", System.Drawing.Color.FromArgb(0, 0, 0), NxtControl.Drawing.DrawingObjectType.Project);
             SE__DPAC__DevLEDGreen = new NxtControl.Drawing.Color("SE.DPAC.DevLEDGreen", System.Drawing.Color.FromArgb(60, 248, 54), NxtControl.Drawing.DrawingObjectType.Project);
             SE__DPAC__DevLEDOff = new NxtControl.Drawing.Color("SE.DPAC.DevLEDOff", System.Drawing.Color.FromArgb(54, 54, 54), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__FieldDevice__ButtonTextColor = new NxtControl.Drawing.Color("SE.FieldDevice.ButtonTextColor", System.Drawing.Color.FromArgb(255, 255, 255), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__FieldDevice__CanvasTopologyButtonCurrentTextColor = new NxtControl.Drawing.Color("SE.FieldDevice.CanvasTopologyButtonCurrentTextColor", System.Drawing.Color.FromArgb(255, 255, 255), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__FieldDevice__DevLEDGreen = new NxtControl.Drawing.Color("SE.FieldDevice.DevLEDGreen", System.Drawing.Color.FromArgb(60, 248, 54), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__FieldDevice__DevLEDOff = new NxtControl.Drawing.Color("SE.FieldDevice.DevLEDOff", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__FieldDevice__DevLEDRed = new NxtControl.Drawing.Color("SE.FieldDevice.DevLEDRed", System.Drawing.Color.FromArgb(255, 31, 36), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__FieldDevice__ForceTextColor = new NxtControl.Drawing.Color("SE.FieldDevice.ForceTextColor", System.Drawing.Color.FromArgb(0, 0, 0), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__FieldDevice__GroupBoxBackColor = new NxtControl.Drawing.Color("SE.FieldDevice.GroupBoxBackColor", System.Drawing.Color.FromArgb(200, 200, 200), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__FieldDevice__GroupTextColor = new NxtControl.Drawing.Color("SE.FieldDevice.GroupTextColor", System.Drawing.Color.FromArgb(230, 230, 230), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__FieldDevice__LedFalseColor = new NxtControl.Drawing.Color("SE.FieldDevice.LedFalseColor", System.Drawing.Color.FromArgb(60, 60, 60), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__FieldDevice__LedFrameColor = new NxtControl.Drawing.Color("SE.FieldDevice.LedFrameColor", System.Drawing.Color.FromArgb(200, 200, 200), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__FieldDevice__SchneiderColor = new NxtControl.Drawing.Color("SE.FieldDevice.SchneiderColor", System.Drawing.Color.FromArgb(61, 205, 88), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__FieldDevice__SchneiderGreen = new NxtControl.Drawing.Color("SE.FieldDevice.SchneiderGreen", System.Drawing.Color.FromArgb(0, 166, 82), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__FieldDevice__TrendAxisLabelColor = new NxtControl.Drawing.Color("SE.FieldDevice.TrendAxisLabelColor", System.Drawing.Color.FromArgb(120, 120, 120), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__HwCommon__DevChannelLEDOff = new NxtControl.Drawing.Color("SE.HwCommon.DevChannelLEDOff", System.Drawing.Color.FromArgb(130, 130, 130), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__HwCommon__DevLEDBackground = new NxtControl.Drawing.Color("SE.HwCommon.DevLEDBackground", System.Drawing.Color.FromArgb(35, 36, 37), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__HwCommon__DevLEDGreen = new NxtControl.Drawing.Color("SE.HwCommon.DevLEDGreen", System.Drawing.Color.FromArgb(60, 248, 54), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__HwCommon__DevLEDOff = new NxtControl.Drawing.Color("SE.HwCommon.DevLEDOff", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__HwCommon__DevLEDOrange = new NxtControl.Drawing.Color("SE.HwCommon.DevLEDOrange", System.Drawing.Color.FromArgb(253, 180, 9), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__HwCommon__DevLEDRed = new NxtControl.Drawing.Color("SE.HwCommon.DevLEDRed", System.Drawing.Color.FromArgb(255, 31, 36), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__HwCommon__ForceTextColor = new NxtControl.Drawing.Color("SE.HwCommon.ForceTextColor", System.Drawing.Color.FromArgb(0, 0, 0), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__HwCommon__fpFrameBack = new NxtControl.Drawing.Color("SE.HwCommon.fpFrameBack", System.Drawing.Color.FromArgb(95, 103, 107), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__HwCommon__fpFrameBorder = new NxtControl.Drawing.Color("SE.HwCommon.fpFrameBorder", System.Drawing.Color.FromArgb(136, 144, 150), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__HwCommon__fpHeader3DLineBright = new NxtControl.Drawing.Color("SE.HwCommon.fpHeader3DLineBright", System.Drawing.Color.FromArgb(87, 87, 87), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__HwCommon__fpHeader3DLineDark = new NxtControl.Drawing.Color("SE.HwCommon.fpHeader3DLineDark", System.Drawing.Color.FromArgb(0, 0, 0), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__HwCommon__fpHeaderBack = new NxtControl.Drawing.Color("SE.HwCommon.fpHeaderBack", System.Drawing.Color.FromArgb(0, 0, 0), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__HwCommon__fpHeaderLine2 = new NxtControl.Drawing.Color("SE.HwCommon.fpHeaderLine2", System.Drawing.Color.FromArgb(87, 87, 87), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__HwCommon__fpLabel = new NxtControl.Drawing.Color("SE.HwCommon.fpLabel", System.Drawing.Color.FromArgb(255, 255, 255), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__HwCommon__fpTitle = new NxtControl.Drawing.Color("SE.HwCommon.fpTitle", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__HwCommon__fpWindowBack = new NxtControl.Drawing.Color("SE.HwCommon.fpWindowBack", System.Drawing.Color.FromArgb(60, 64, 65), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__HwCommon__fpWindowBlackBorder = new NxtControl.Drawing.Color("SE.HwCommon.fpWindowBlackBorder", System.Drawing.Color.FromArgb(0, 0, 0), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__HwCommon__fpWindowWhiteBorder = new NxtControl.Drawing.Color("SE.HwCommon.fpWindowWhiteBorder", System.Drawing.Color.FromArgb(240, 240, 240), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__HwCommon__GroupColor = new NxtControl.Drawing.Color("SE.HwCommon.GroupColor", System.Drawing.Color.FromArgb(200, 200, 200), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__HwCommon__GroupInactiveColor = new NxtControl.Drawing.Color("SE.HwCommon.GroupInactiveColor", System.Drawing.Color.FromArgb(255, 255, 255), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__HwCommon__GroupInactiveTextColor = new NxtControl.Drawing.Color("SE.HwCommon.GroupInactiveTextColor", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__HwCommon__GroupTextColor = new NxtControl.Drawing.Color("SE.HwCommon.GroupTextColor", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__HwCommon__SchneiderGreen = new NxtControl.Drawing.Color("SE.HwCommon.SchneiderGreen", System.Drawing.Color.FromArgb(0, 166, 82), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__HwCommon__SchneiderGreenDisabled = new NxtControl.Drawing.Color("SE.HwCommon.SchneiderGreenDisabled", System.Drawing.Color.FromArgb(0, 100, 50), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__HwCommon__UnitDisabledColor = new NxtControl.Drawing.Color("SE.HwCommon.UnitDisabledColor", System.Drawing.Color.FromArgb(160, 160, 160), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__HwCommon__UnitEnabledColor = new NxtControl.Drawing.Color("SE.HwCommon.UnitEnabledColor", System.Drawing.Color.FromArgb(255, 255, 255), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__IoATV__DevLEDGreen = new NxtControl.Drawing.Color("SE.IoATV.DevLEDGreen", System.Drawing.Color.FromArgb(60, 248, 54), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__IoATV__DevLEDOff = new NxtControl.Drawing.Color("SE.IoATV.DevLEDOff", System.Drawing.Color.FromArgb(54, 54, 54), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__IoATV__DevLEDOrange = new NxtControl.Drawing.Color("SE.IoATV.DevLEDOrange", System.Drawing.Color.FromArgb(253, 180, 9), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__IoATV__DevLEDRed = new NxtControl.Drawing.Color("SE.IoATV.DevLEDRed", System.Drawing.Color.FromArgb(250, 31, 36), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__IoATV__ForceTextColor = new NxtControl.Drawing.Color("SE.IoATV.ForceTextColor", System.Drawing.Color.FromArgb(0, 0, 0), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__IoATV__fpHeader3DLineBright = new NxtControl.Drawing.Color("SE.IoATV.fpHeader3DLineBright", System.Drawing.Color.FromArgb(87, 87, 87), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__IoATV__GroupTextColor = new NxtControl.Drawing.Color("SE.IoATV.GroupTextColor", System.Drawing.Color.FromArgb(230, 230, 230), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__IoATV__SchneiderColor = new NxtControl.Drawing.Color("SE.IoATV.SchneiderColor", System.Drawing.Color.FromArgb(61, 205, 88), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__IoATV__SchneiderGreen = new NxtControl.Drawing.Color("SE.IoATV.SchneiderGreen", System.Drawing.Color.FromArgb(0, 166, 82), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__IoTMx__DevLEDGreen = new NxtControl.Drawing.Color("SE.IoTMx.DevLEDGreen", System.Drawing.Color.FromArgb(60, 248, 54), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__IoTMx__DevLEDOff = new NxtControl.Drawing.Color("SE.IoTMx.DevLEDOff", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__IoTMx__DevLEDRed = new NxtControl.Drawing.Color("SE.IoTMx.DevLEDRed", System.Drawing.Color.FromArgb(255, 31, 36), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__IoTMx__SchneiderGreen = new NxtControl.Drawing.Color("SE.IoTMx.SchneiderGreen", System.Drawing.Color.FromArgb(0, 166, 82), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__IoTMx__SchneiderGreenDisabled = new NxtControl.Drawing.Color("SE.IoTMx.SchneiderGreenDisabled", System.Drawing.Color.FromArgb(0, 100, 50), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__IoTMx__SE_HwCommon_DevLEDOff = new NxtControl.Drawing.Color("SE.IoTMx.SE_HwCommon_DevLEDOff", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__IoTMx__SE_HwCommon_ForceTextColor = new NxtControl.Drawing.Color("SE.IoTMx.SE_HwCommon_ForceTextColor", System.Drawing.Color.FromArgb(0, 0, 0), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__IoX80__DevLEDGreen = new NxtControl.Drawing.Color("SE.IoX80.DevLEDGreen", System.Drawing.Color.FromArgb(60, 248, 54), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__IoX80__DevLEDOff = new NxtControl.Drawing.Color("SE.IoX80.DevLEDOff", System.Drawing.Color.FromArgb(54, 54, 54), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__IoX80__DevLEDOrange = new NxtControl.Drawing.Color("SE.IoX80.DevLEDOrange", System.Drawing.Color.FromArgb(253, 180, 9), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__IoX80__DevLEDRed = new NxtControl.Drawing.Color("SE.IoX80.DevLEDRed", System.Drawing.Color.FromArgb(255, 31, 36), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__IoX80__ForceTextColor = new NxtControl.Drawing.Color("SE.IoX80.ForceTextColor", System.Drawing.Color.FromArgb(0, 0, 0), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__IoX80__fpTitle = new NxtControl.Drawing.Color("SE.IoX80.fpTitle", System.Drawing.Color.FromArgb(230, 230, 230), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__IoX80__GroupColor = new NxtControl.Drawing.Color("SE.IoX80.GroupColor", System.Drawing.Color.FromArgb(32, 36, 40), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__IoX80__GroupInactiveColor = new NxtControl.Drawing.Color("SE.IoX80.GroupInactiveColor", System.Drawing.Color.FromArgb(12, 16, 20), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__IoX80__SchneiderGreen = new NxtControl.Drawing.Color("SE.IoX80.SchneiderGreen", System.Drawing.Color.FromArgb(0, 166, 82), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__IoX80__UnitDisabledColor = new NxtControl.Drawing.Color("SE.IoX80.UnitDisabledColor", System.Drawing.Color.FromArgb(140, 140, 140), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__IoX80__UnitEnabledColor = new NxtControl.Drawing.Color("SE.IoX80.UnitEnabledColor", System.Drawing.Color.FromArgb(0, 166, 82), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__ModbusGateway__fpInputFreeBack = new NxtControl.Drawing.Color("SE.ModbusGateway.fpInputFreeBack", System.Drawing.Color.FromArgb(45, 161, 49), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__ModbusGateway__fpInputUsedBack = new NxtControl.Drawing.Color("SE.ModbusGateway.fpInputUsedBack", System.Drawing.Color.FromArgb(237, 0, 37), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__ModEdgeIONTS__aaLibFpLEDActive = new NxtControl.Drawing.Color("SE.ModEdgeIONTS.aaLibFpLEDActive", System.Drawing.Color.FromArgb(26, 170, 66), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__ModEdgeIONTS__aaLibFpLEDInActive = new NxtControl.Drawing.Color("SE.ModEdgeIONTS.aaLibFpLEDInActive", System.Drawing.Color.FromArgb(234, 22, 30), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__ModEdgeIONTS__DevChannelLEDOff = new NxtControl.Drawing.Color("SE.ModEdgeIONTS.DevChannelLEDOff", System.Drawing.Color.FromArgb(130, 130, 130), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__ModEdgeIONTS__DevLEDGreen = new NxtControl.Drawing.Color("SE.ModEdgeIONTS.DevLEDGreen", System.Drawing.Color.FromArgb(60, 248, 54), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__ModEdgeIONTS__DevLEDOff = new NxtControl.Drawing.Color("SE.ModEdgeIONTS.DevLEDOff", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__ModEdgeIONTS__DevLEDOrange = new NxtControl.Drawing.Color("SE.ModEdgeIONTS.DevLEDOrange", System.Drawing.Color.FromArgb(253, 180, 9), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__ModEdgeIONTS__DevLEDRed = new NxtControl.Drawing.Color("SE.ModEdgeIONTS.DevLEDRed", System.Drawing.Color.FromArgb(255, 31, 36), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__ModEdgeIONTS__ForceTextColor = new NxtControl.Drawing.Color("SE.ModEdgeIONTS.ForceTextColor", System.Drawing.Color.FromArgb(0, 0, 0), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__ModEdgeIONTS__SchneiderGreen = new NxtControl.Drawing.Color("SE.ModEdgeIONTS.SchneiderGreen", System.Drawing.Color.FromArgb(0, 166, 82), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__ModEdgeIONTS__UnitDisabledColor = new NxtControl.Drawing.Color("SE.ModEdgeIONTS.UnitDisabledColor", System.Drawing.Color.FromArgb(160, 160, 160), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__ModEdgeIONTS__UnitEnabledColor = new NxtControl.Drawing.Color("SE.ModEdgeIONTS.UnitEnabledColor", System.Drawing.Color.FromArgb(255, 255, 255), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__Nereda__Active = new NxtControl.Drawing.Color("SE.Nereda.Active", System.Drawing.Color.FromArgb(234, 22, 30), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__Nereda__ActiveStatus = new NxtControl.Drawing.Color("SE.Nereda.ActiveStatus", System.Drawing.Color.FromArgb(234, 22, 30), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__Nereda__ButtonInnerBorderColor = new NxtControl.Drawing.Color("SE.Nereda.ButtonInnerBorderColor", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__Nereda__ButtonTextColor = new NxtControl.Drawing.Color("SE.Nereda.ButtonTextColor", System.Drawing.Color.FromArgb(255, 255, 255), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__Nereda__ButtonTextColorMouseDown = new NxtControl.Drawing.Color("SE.Nereda.ButtonTextColorMouseDown", System.Drawing.Color.FromArgb(255, 255, 255), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__Nereda__DevLEDOff = new NxtControl.Drawing.Color("SE.Nereda.DevLEDOff", System.Drawing.Color.FromArgb(90, 90, 90), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__Nereda__DevLEDRed = new NxtControl.Drawing.Color("SE.Nereda.DevLEDRed", System.Drawing.Color.FromArgb(255, 31, 36), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__Nereda__LabelTextColor = new NxtControl.Drawing.Color("SE.Nereda.LabelTextColor", System.Drawing.Color.FromArgb(154, 154, 154), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__Nereda__LedFalseColor = new NxtControl.Drawing.Color("SE.Nereda.LedFalseColor", System.Drawing.Color.FromArgb(60, 60, 60), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__Nereda__LedFrameColor = new NxtControl.Drawing.Color("SE.Nereda.LedFrameColor", System.Drawing.Color.FromArgb(200, 200, 200), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__Nereda__LedTrueColor = new NxtControl.Drawing.Color("SE.Nereda.LedTrueColor", System.Drawing.Color.FromArgb(0, 168, 231), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__Nereda__Passive = new NxtControl.Drawing.Color("SE.Nereda.Passive", System.Drawing.Color.FromArgb(26, 170, 66), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__Nereda__PassiveStatus = new NxtControl.Drawing.Color("SE.Nereda.PassiveStatus", System.Drawing.Color.FromArgb(26, 170, 66), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__Nereda__PowerOFF = new NxtControl.Drawing.Color("SE.Nereda.PowerOFF", System.Drawing.Color.FromArgb(132, 132, 132), NxtControl.Drawing.DrawingObjectType.Project);
+            Standard__HMIExtensions__AlarmClassColor = new NxtControl.Drawing.Color("Standard.HMIExtensions.AlarmClassColor", System.Drawing.Color.FromArgb(255, 0, 0), NxtControl.Drawing.DrawingObjectType.Project);
+            Standard__HMIExtensions__AlarmColorSeverity1 = new NxtControl.Drawing.Color("Standard.HMIExtensions.AlarmColorSeverity1", System.Drawing.Color.FromArgb(238, 206, 206), NxtControl.Drawing.DrawingObjectType.Project);
+            Standard__HMIExtensions__AlarmColorSeverity2 = new NxtControl.Drawing.Color("Standard.HMIExtensions.AlarmColorSeverity2", System.Drawing.Color.FromArgb(253, 255, 176), NxtControl.Drawing.DrawingObjectType.Project);
+            Standard__HMIExtensions__AlarmColorSeverity3 = new NxtControl.Drawing.Color("Standard.HMIExtensions.AlarmColorSeverity3", System.Drawing.Color.FromArgb(210, 234, 240), NxtControl.Drawing.DrawingObjectType.Project);
+            Standard__HMIExtensions__AlarmColorSeverity4 = new NxtControl.Drawing.Color("Standard.HMIExtensions.AlarmColorSeverity4", System.Drawing.Color.FromArgb(223, 216, 231), NxtControl.Drawing.DrawingObjectType.Project);
+            Standard__HMIExtensions__AlarmPenColorSeverity1 = new NxtControl.Drawing.Color("Standard.HMIExtensions.AlarmPenColorSeverity1", System.Drawing.Color.FromArgb(186, 70, 66), NxtControl.Drawing.DrawingObjectType.Project);
+            Standard__HMIExtensions__AlarmPenColorSeverity2 = new NxtControl.Drawing.Color("Standard.HMIExtensions.AlarmPenColorSeverity2", System.Drawing.Color.FromArgb(255, 255, 0), NxtControl.Drawing.DrawingObjectType.Project);
+            Standard__HMIExtensions__AlarmPenColorSeverity3 = new NxtControl.Drawing.Color("Standard.HMIExtensions.AlarmPenColorSeverity3", System.Drawing.Color.FromArgb(75, 172, 198), NxtControl.Drawing.DrawingObjectType.Project);
+            Standard__HMIExtensions__AlarmPenColorSeverity4 = new NxtControl.Drawing.Color("Standard.HMIExtensions.AlarmPenColorSeverity4", System.Drawing.Color.FromArgb(128, 102, 160), NxtControl.Drawing.DrawingObjectType.Project);
+            Standard__HMIExtensions__ProcessClassColor = new NxtControl.Drawing.Color("Standard.HMIExtensions.ProcessClassColor", System.Drawing.Color.FromArgb(75, 172, 198), NxtControl.Drawing.DrawingObjectType.Project);
+            Standard__HMIExtensions__WarningClassColor = new NxtControl.Drawing.Color("Standard.HMIExtensions.WarningClassColor", System.Drawing.Color.FromArgb(255, 255, 0), NxtControl.Drawing.DrawingObjectType.Project);
+            Standard__IoModbus__fpButtonBack = new NxtControl.Drawing.Color("Standard.IoModbus.fpButtonBack", System.Drawing.Color.FromArgb(82, 82, 82), NxtControl.Drawing.DrawingObjectType.Project);
+            Standard__IoModbus__fpFrameBack = new NxtControl.Drawing.Color("Standard.IoModbus.fpFrameBack", System.Drawing.Color.FromArgb(196, 196, 196), NxtControl.Drawing.DrawingObjectType.Project);
+            Standard__IoModbus__fpFrameBorder = new NxtControl.Drawing.Color("Standard.IoModbus.fpFrameBorder", System.Drawing.Color.FromArgb(232, 232, 232), NxtControl.Drawing.DrawingObjectType.Project);
+            Standard__IoModbus__fpHeader3DLineBright = new NxtControl.Drawing.Color("Standard.IoModbus.fpHeader3DLineBright", System.Drawing.Color.FromArgb(87, 87, 87), NxtControl.Drawing.DrawingObjectType.Project);
+            Standard__IoModbus__fpHeader3DLineDark = new NxtControl.Drawing.Color("Standard.IoModbus.fpHeader3DLineDark", System.Drawing.Color.FromArgb(0, 0, 0), NxtControl.Drawing.DrawingObjectType.Project);
+            Standard__IoModbus__fpHeaderBack = new NxtControl.Drawing.Color("Standard.IoModbus.fpHeaderBack", System.Drawing.Color.FromArgb(0, 0, 0), NxtControl.Drawing.DrawingObjectType.Project);
+            Standard__IoModbus__fpHeaderLine1 = new NxtControl.Drawing.Color("Standard.IoModbus.fpHeaderLine1", System.Drawing.Color.FromArgb(0, 0, 0), NxtControl.Drawing.DrawingObjectType.Project);
+            Standard__IoModbus__fpHeaderLine2 = new NxtControl.Drawing.Color("Standard.IoModbus.fpHeaderLine2", System.Drawing.Color.FromArgb(198, 198, 198), NxtControl.Drawing.DrawingObjectType.Project);
+            Standard__IoModbus__fpInputBack = new NxtControl.Drawing.Color("Standard.IoModbus.fpInputBack", System.Drawing.Color.FromArgb(232, 232, 232), NxtControl.Drawing.DrawingObjectType.Project);
+            Standard__IoModbus__fpInputFont = new NxtControl.Drawing.Color("Standard.IoModbus.fpInputFont", System.Drawing.Color.FromArgb(0, 0, 0), NxtControl.Drawing.DrawingObjectType.Project);
+            Standard__IoModbus__fpInputFreeBack = new NxtControl.Drawing.Color("Standard.IoModbus.fpInputFreeBack", System.Drawing.Color.FromArgb(45, 161, 49), NxtControl.Drawing.DrawingObjectType.Project);
+            Standard__IoModbus__fpInputUsedBack = new NxtControl.Drawing.Color("Standard.IoModbus.fpInputUsedBack", System.Drawing.Color.FromArgb(237, 0, 37), NxtControl.Drawing.DrawingObjectType.Project);
+            Standard__IoModbus__fpLabel = new NxtControl.Drawing.Color("Standard.IoModbus.fpLabel", System.Drawing.Color.FromArgb(26, 26, 26), NxtControl.Drawing.DrawingObjectType.Project);
+            Standard__IoModbus__fpOutputFont = new NxtControl.Drawing.Color("Standard.IoModbus.fpOutputFont", System.Drawing.Color.FromArgb(0, 0, 0), NxtControl.Drawing.DrawingObjectType.Project);
+            Standard__IoModbus__fpStatusBarBack = new NxtControl.Drawing.Color("Standard.IoModbus.fpStatusBarBack", System.Drawing.Color.FromArgb(51, 51, 51), NxtControl.Drawing.DrawingObjectType.Project);
+            Standard__IoModbus__fpTitle = new NxtControl.Drawing.Color("Standard.IoModbus.fpTitle", System.Drawing.Color.FromArgb(255, 255, 255), NxtControl.Drawing.DrawingObjectType.Project);
+            Standard__IoModbus__fpWindowBack = new NxtControl.Drawing.Color("Standard.IoModbus.fpWindowBack", System.Drawing.Color.FromArgb(166, 166, 166), NxtControl.Drawing.DrawingObjectType.Project);
+            Standard__IoModbus__fpWindowBlackBorder = new NxtControl.Drawing.Color("Standard.IoModbus.fpWindowBlackBorder", System.Drawing.Color.FromArgb(0, 0, 0), NxtControl.Drawing.DrawingObjectType.Project);
+            Standard__IoModbus__fpWindowWhiteBorder = new NxtControl.Drawing.Color("Standard.IoModbus.fpWindowWhiteBorder", System.Drawing.Color.FromArgb(240, 240, 240), NxtControl.Drawing.DrawingObjectType.Project);
+            Standard__IoModbus__LabelTextColor = new NxtControl.Drawing.Color("Standard.IoModbus.LabelTextColor", System.Drawing.Color.FromArgb(230, 230, 230), NxtControl.Drawing.DrawingObjectType.Project);
             SymBackgroundColor = NxtControl.Drawing.SystemColors.SymBackgroundColor;
             SymBackgroundPenColor = NxtControl.Drawing.SystemColors.SymBackgroundPenColor;
             SymLabelText = NxtControl.Drawing.SystemColors.SymLabelText;
@@ -430,6 +1779,76 @@ namespace NxtControl.Drawing {
             DevGoToAct2 = NxtControl.Drawing.SystemColors.DevGoToAct2;
             DevGoToPas = NxtControl.Drawing.SystemColors.DevGoToPas;
             RedTransparent = NxtControl.Drawing.SystemColors.RedTransparent;
+            SE__App2Base__aaLibAbnormalSymbolActionRequired = new NxtControl.Drawing.BlinkColor("SE.App2Base.aaLibAbnormalSymbolActionRequired", new NxtControl.Drawing.Color(254, 186, 10), 4, new NxtControl.Drawing.Color("Transparent"), 4, NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__aaLibAbnormalTextActionRequired = new NxtControl.Drawing.BlinkColor("SE.App2Base.aaLibAbnormalTextActionRequired", new NxtControl.Drawing.Color("White"), 4, new NxtControl.Drawing.Color("Transparent"), 4, NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__aaLibActingStateActive = new NxtControl.Drawing.BlinkColor("SE.App2Base.aaLibActingStateActive", new NxtControl.Drawing.Color(150, 214, 66), 4, new NxtControl.Drawing.Color(202, 218, 170), 4, NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__aaLibExecuteActive = new NxtControl.Drawing.BlinkColor("SE.App2Base.aaLibExecuteActive", new NxtControl.Drawing.Color(117, 149, 191), 4, new NxtControl.Drawing.Color(166, 186, 214), 4, NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__aaLibPanelButtonCommandRequired = new NxtControl.Drawing.BlinkColor("SE.App2Base.aaLibPanelButtonCommandRequired", new NxtControl.Drawing.Color(255, 255, 255), 4, new NxtControl.Drawing.Color(130, 130, 130), 4, NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__aaLibWaitStateActive = new NxtControl.Drawing.BlinkColor("SE.App2Base.aaLibWaitStateActive", new NxtControl.Drawing.Color(254, 186, 10), 4, new NxtControl.Drawing.Color(250, 206, 124), 4, NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__AbnormalTextColor = new NxtControl.Drawing.BlinkColor("SE.App2Base.AbnormalTextColor", new NxtControl.Drawing.Color(255, 255, 255), 4, new NxtControl.Drawing.Color("Transparent"), 4, NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__ActionRequired = new NxtControl.Drawing.BlinkColor("SE.App2Base.ActionRequired", new NxtControl.Drawing.Color(254, 186, 10), 4, new NxtControl.Drawing.Color("Transparent"), 4, NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__BlSymInfoRearm = new NxtControl.Drawing.BlinkColor("SE.App2Base.BlSymInfoRearm", new NxtControl.Drawing.Color("LightGrey"), 4, new NxtControl.Drawing.Color(255, 255, 0), 4, NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2StateManagement__ActingStateActive = new NxtControl.Drawing.BlinkColor("SE.App2StateManagement.ActingStateActive", new NxtControl.Drawing.Color(150, 214, 66), 4, new NxtControl.Drawing.Color(202, 218, 170), 4, NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2StateManagement__CommandRequired = new NxtControl.Drawing.BlinkColor("SE.App2StateManagement.CommandRequired", new NxtControl.Drawing.Color(255, 255, 255), 4, new NxtControl.Drawing.Color(130, 130, 130), 4, NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2StateManagement__ExecuteActive = new NxtControl.Drawing.BlinkColor("SE.App2StateManagement.ExecuteActive", new NxtControl.Drawing.Color(117, 149, 191), 4, new NxtControl.Drawing.Color(166, 186, 214), 4, NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2StateManagement__WaitStateActive = new NxtControl.Drawing.BlinkColor("SE.App2StateManagement.WaitStateActive", new NxtControl.Drawing.Color(254, 186, 10), 4, new NxtControl.Drawing.Color(250, 206, 124), 4, NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__AbnormalTextColor = new NxtControl.Drawing.BlinkColor("SE.AppSequence.AbnormalTextColor", new NxtControl.Drawing.Color(255, 255, 255), 4, new NxtControl.Drawing.Color("Transparent"), 4, NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__ActionRequired = new NxtControl.Drawing.BlinkColor("SE.AppSequence.ActionRequired", new NxtControl.Drawing.Color(254, 186, 10), 4, new NxtControl.Drawing.Color("Transparent"), 4, NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__BlSymInfoRearm = new NxtControl.Drawing.BlinkColor("SE.AppSequence.BlSymInfoRearm", new NxtControl.Drawing.Color("LightGrey"), 4, new NxtControl.Drawing.Color(255, 255, 0), 4, NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__CommandRequired = new NxtControl.Drawing.BlinkColor("SE.AppSequence.CommandRequired", new NxtControl.Drawing.Color(255, 255, 255), 4, new NxtControl.Drawing.Color(130, 130, 130), 4, NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__dscActive = new NxtControl.Drawing.BlinkColor("SE.AppSequence.dscActive", new NxtControl.Drawing.Color(150, 214, 66), 4, new NxtControl.Drawing.Color(210, 210, 210), 4, NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__dscFinished = new NxtControl.Drawing.BlinkColor("SE.AppSequence.dscFinished", new NxtControl.Drawing.Color(202, 218, 170), 4, new NxtControl.Drawing.Color(210, 210, 210), 4, NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__dscHolded = new NxtControl.Drawing.BlinkColor("SE.AppSequence.dscHolded", new NxtControl.Drawing.Color(255, 255, 0), 4, new NxtControl.Drawing.Color(210, 210, 210), 4, NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__dscStopped = new NxtControl.Drawing.BlinkColor("SE.AppSequence.dscStopped", new NxtControl.Drawing.Color(255, 255, 255), 4, new NxtControl.Drawing.Color(255, 255, 255), 4, NxtControl.Drawing.DrawingObjectType.Project);
+            SE__FieldDevice__DevForced = new NxtControl.Drawing.BlinkColor("SE.FieldDevice.DevForced", new NxtControl.Drawing.Color(2, 178, 238), 8, new NxtControl.Drawing.Color(255, 255, 255), 8, NxtControl.Drawing.DrawingObjectType.Project);
+            SE__FieldDevice__DevStatusNormalForced = new NxtControl.Drawing.BlinkColor("SE.FieldDevice.DevStatusNormalForced", new NxtControl.Drawing.Color(2, 178, 238), 8, new NxtControl.Drawing.Color("SE.HwCommon.SchneiderGreen"), 8, NxtControl.Drawing.DrawingObjectType.Project);
+            SE__HwCommon__DevChannelLEDGreenFlash = new NxtControl.Drawing.BlinkColor("SE.HwCommon.DevChannelLEDGreenFlash", new NxtControl.Drawing.Color("SE.HwCommon.DevLEDGreen"), 1, new NxtControl.Drawing.Color("SE.HwCommon.DevChannelLEDOff"), 1, NxtControl.Drawing.DrawingObjectType.Project);
+            SE__HwCommon__DevForced = new NxtControl.Drawing.BlinkColor("SE.HwCommon.DevForced", new NxtControl.Drawing.Color(2, 178, 238), 8, new NxtControl.Drawing.Color(255, 255, 255), 8, NxtControl.Drawing.DrawingObjectType.Project);
+            SE__HwCommon__DevLEDGreenFlash = new NxtControl.Drawing.BlinkColor("SE.HwCommon.DevLEDGreenFlash", new NxtControl.Drawing.Color("SE.HwCommon.DevLEDGreen"), 3, new NxtControl.Drawing.Color("SE.HwCommon.DevLEDOff"), 3, NxtControl.Drawing.DrawingObjectType.Project);
+            SE__HwCommon__DevLEDGreenFlash2 = new NxtControl.Drawing.BlinkColor("SE.HwCommon.DevLEDGreenFlash2", new NxtControl.Drawing.Color("SE.HwCommon.DevLEDGreen"), 1, new NxtControl.Drawing.Color("SE.HwCommon.DevLEDOff"), 1, NxtControl.Drawing.DrawingObjectType.Project);
+            SE__HwCommon__DevLEDGreenFlash3 = new NxtControl.Drawing.BlinkColor("SE.HwCommon.DevLEDGreenFlash3", new NxtControl.Drawing.Color("SE.HwCommon.DevLEDGreen"), 1, new NxtControl.Drawing.Color("SE.HwCommon.DevLEDOff"), 10, NxtControl.Drawing.DrawingObjectType.Project);
+            SE__HwCommon__DevLEDGreenFlash4 = new NxtControl.Drawing.BlinkColor("SE.HwCommon.DevLEDGreenFlash4", new NxtControl.Drawing.Color("SE.HwCommon.DevLEDGreen"), 5, new NxtControl.Drawing.Color("SE.HwCommon.DevLEDOff"), 5, NxtControl.Drawing.DrawingObjectType.Project);
+            SE__HwCommon__DevLEDOrangeFlash = new NxtControl.Drawing.BlinkColor("SE.HwCommon.DevLEDOrangeFlash", new NxtControl.Drawing.Color("SE.HwCommon.DevLEDOrange"), 3, new NxtControl.Drawing.Color("SE.HwCommon.DevLEDOff"), 3, NxtControl.Drawing.DrawingObjectType.Project);
+            SE__HwCommon__DevLEDOrangeFlash4 = new NxtControl.Drawing.BlinkColor("SE.HwCommon.DevLEDOrangeFlash4", new NxtControl.Drawing.Color("SE.HwCommon.DevLEDOrange"), 5, new NxtControl.Drawing.Color("SE.HwCommon.DevLEDOff"), 5, NxtControl.Drawing.DrawingObjectType.Project);
+            SE__HwCommon__DevLEDOrangeGreenFlash = new NxtControl.Drawing.BlinkColor("SE.HwCommon.DevLEDOrangeGreenFlash", new NxtControl.Drawing.Color("SE.HwCommon.DevLEDGreen"), 3, new NxtControl.Drawing.Color("SE.HwCommon.DevLEDOrange"), 3, NxtControl.Drawing.DrawingObjectType.Project);
+            SE__HwCommon__DevLEDOrangeRedFlash = new NxtControl.Drawing.BlinkColor("SE.HwCommon.DevLEDOrangeRedFlash", new NxtControl.Drawing.Color("SE.HwCommon.DevLEDRed"), 3, new NxtControl.Drawing.Color("SE.HwCommon.DevLEDOrange"), 3, NxtControl.Drawing.DrawingObjectType.Project);
+            SE__HwCommon__DevLEDRedFlash = new NxtControl.Drawing.BlinkColor("SE.HwCommon.DevLEDRedFlash", new NxtControl.Drawing.Color("SE.HwCommon.DevLEDRed"), 3, new NxtControl.Drawing.Color("SE.HwCommon.DevLEDOff"), 3, NxtControl.Drawing.DrawingObjectType.Project);
+            SE__HwCommon__DevLEDRedFlash2 = new NxtControl.Drawing.BlinkColor("SE.HwCommon.DevLEDRedFlash2", new NxtControl.Drawing.Color("SE.HwCommon.DevLEDRed"), 1, new NxtControl.Drawing.Color("SE.HwCommon.DevLEDOff"), 1, NxtControl.Drawing.DrawingObjectType.Project);
+            SE__HwCommon__DevLEDRedFlash3 = new NxtControl.Drawing.BlinkColor("SE.HwCommon.DevLEDRedFlash3", new NxtControl.Drawing.Color("SE.HwCommon.DevLEDRed"), 1, new NxtControl.Drawing.Color("SE.HwCommon.DevLEDOff"), 10, NxtControl.Drawing.DrawingObjectType.Project);
+            SE__HwCommon__DevLEDRedFlash4 = new NxtControl.Drawing.BlinkColor("SE.HwCommon.DevLEDRedFlash4", new NxtControl.Drawing.Color("SE.HwCommon.DevLEDRed"), 5, new NxtControl.Drawing.Color("SE.HwCommon.DevLEDOff"), 5, NxtControl.Drawing.DrawingObjectType.Project);
+            SE__HwCommon__DevStatusBadForced = new NxtControl.Drawing.BlinkColor("SE.HwCommon.DevStatusBadForced", new NxtControl.Drawing.Color(2, 178, 238), 8, new NxtControl.Drawing.Color("SE.HwCommon.DevLEDRed"), 8, NxtControl.Drawing.DrawingObjectType.Project);
+            SE__HwCommon__DevStatusNormalForced = new NxtControl.Drawing.BlinkColor("SE.HwCommon.DevStatusNormalForced", new NxtControl.Drawing.Color(2, 178, 238), 8, new NxtControl.Drawing.Color("SE.HwCommon.SchneiderGreen"), 8, NxtControl.Drawing.DrawingObjectType.Project);
+            SE__HwCommon__DevStatusUncertainForced = new NxtControl.Drawing.BlinkColor("SE.HwCommon.DevStatusUncertainForced", new NxtControl.Drawing.Color(2, 178, 238), 8, new NxtControl.Drawing.Color("SE.HwCommon.DevLEDOrange"), 8, NxtControl.Drawing.DrawingObjectType.Project);
+            SE__IoATV__DevForced = new NxtControl.Drawing.BlinkColor("SE.IoATV.DevForced", new NxtControl.Drawing.Color(2, 178, 238), 8, new NxtControl.Drawing.Color(255, 255, 255), 8, NxtControl.Drawing.DrawingObjectType.Project);
+            SE__IoATV__DevStatusBadForced = new NxtControl.Drawing.BlinkColor("SE.IoATV.DevStatusBadForced", new NxtControl.Drawing.Color(2, 178, 238), 8, new NxtControl.Drawing.Color("SE.HwCommon.DevLEDRed"), 8, NxtControl.Drawing.DrawingObjectType.Project);
+            SE__IoATV__DevStatusNormalForced = new NxtControl.Drawing.BlinkColor("SE.IoATV.DevStatusNormalForced", new NxtControl.Drawing.Color(2, 178, 238), 8, new NxtControl.Drawing.Color("SE.HwCommon.SchneiderGreen"), 8, NxtControl.Drawing.DrawingObjectType.Project);
+            SE__IoATV__DevStatusUncertainForced = new NxtControl.Drawing.BlinkColor("SE.IoATV.DevStatusUncertainForced", new NxtControl.Drawing.Color(2, 178, 238), 8, new NxtControl.Drawing.Color("SE.HwCommon.DevLEDOrange"), 8, NxtControl.Drawing.DrawingObjectType.Project);
+            SE__IoTMx__DevForced = new NxtControl.Drawing.BlinkColor("SE.IoTMx.DevForced", new NxtControl.Drawing.Color(2, 178, 238), 8, new NxtControl.Drawing.Color(255, 255, 255), 8, NxtControl.Drawing.DrawingObjectType.Project);
+            SE__IoX80__DevForced = new NxtControl.Drawing.BlinkColor("SE.IoX80.DevForced", new NxtControl.Drawing.Color(2, 178, 238), 8, new NxtControl.Drawing.Color(255, 255, 255), 8, NxtControl.Drawing.DrawingObjectType.Project);
+            SE__IoX80__DevStatusBadForced = new NxtControl.Drawing.BlinkColor("SE.IoX80.DevStatusBadForced", new NxtControl.Drawing.Color(2, 178, 238), 8, new NxtControl.Drawing.Color("SE.IoX80.DevLEDRed"), 8, NxtControl.Drawing.DrawingObjectType.Project);
+            SE__IoX80__DevStatusNormalForced = new NxtControl.Drawing.BlinkColor("SE.IoX80.DevStatusNormalForced", new NxtControl.Drawing.Color(2, 178, 238), 8, new NxtControl.Drawing.Color("SE.IoX80.SchneiderGreen"), 8, NxtControl.Drawing.DrawingObjectType.Project);
+            SE__IoX80__DevStatusUncertainForced = new NxtControl.Drawing.BlinkColor("SE.IoX80.DevStatusUncertainForced", new NxtControl.Drawing.Color(2, 178, 238), 8, new NxtControl.Drawing.Color("SE.IoX80.DevLEDOrange"), 8, NxtControl.Drawing.DrawingObjectType.Project);
+            SE__ModEdgeIONTS__DevChannelLEDGreenFlash = new NxtControl.Drawing.BlinkColor("SE.ModEdgeIONTS.DevChannelLEDGreenFlash", new NxtControl.Drawing.Color("SE.HwCommon.DevLEDGreen"), 1, new NxtControl.Drawing.Color("SE.HwCommon.DevChannelLEDOff"), 1, NxtControl.Drawing.DrawingObjectType.Project);
+            SE__ModEdgeIONTS__DevChannelLEDGreenFlashSlow = new NxtControl.Drawing.BlinkColor("SE.ModEdgeIONTS.DevChannelLEDGreenFlashSlow", new NxtControl.Drawing.Color("SE.HwCommon.DevChannelLEDOff"), 16, new NxtControl.Drawing.Color("SE.ModEdgeIONTS.DevLEDGreen"), 2, NxtControl.Drawing.DrawingObjectType.Project);
+            SE__ModEdgeIONTS__DevForced = new NxtControl.Drawing.BlinkColor("SE.ModEdgeIONTS.DevForced", new NxtControl.Drawing.Color(2, 178, 238), 8, new NxtControl.Drawing.Color(114, 114, 114), 8, NxtControl.Drawing.DrawingObjectType.Project);
+            SE__ModEdgeIONTS__DevLEDGreenFlash = new NxtControl.Drawing.BlinkColor("SE.ModEdgeIONTS.DevLEDGreenFlash", new NxtControl.Drawing.Color("SE.HwCommon.DevLEDGreen"), 3, new NxtControl.Drawing.Color("SE.HwCommon.DevLEDOff"), 3, NxtControl.Drawing.DrawingObjectType.Project);
+            SE__ModEdgeIONTS__DevLEDRedFlash = new NxtControl.Drawing.BlinkColor("SE.ModEdgeIONTS.DevLEDRedFlash", new NxtControl.Drawing.Color("SE.HwCommon.DevLEDRed"), 1, new NxtControl.Drawing.Color("SE.HwCommon.DevLEDOff"), 1, NxtControl.Drawing.DrawingObjectType.Project);
+            SE__ModEdgeIONTS__DevLEDRedFlashSlow = new NxtControl.Drawing.BlinkColor("SE.ModEdgeIONTS.DevLEDRedFlashSlow", new NxtControl.Drawing.Color("SE.HwCommon.DevLEDRed"), 3, new NxtControl.Drawing.Color("SE.HwCommon.DevLEDOff"), 3, NxtControl.Drawing.DrawingObjectType.Project);
+            SE__ModEdgeIONTS__DevStatusBadForced = new NxtControl.Drawing.BlinkColor("SE.ModEdgeIONTS.DevStatusBadForced", new NxtControl.Drawing.Color(2, 178, 238), 8, new NxtControl.Drawing.Color("SE.HwCommon.DevLEDRed"), 8, NxtControl.Drawing.DrawingObjectType.Project);
+            SE__ModEdgeIONTS__DevStatusNormalForced = new NxtControl.Drawing.BlinkColor("SE.ModEdgeIONTS.DevStatusNormalForced", new NxtControl.Drawing.Color(2, 178, 238), 8, new NxtControl.Drawing.Color("SE.HwCommon.SchneiderGreen"), 8, NxtControl.Drawing.DrawingObjectType.Project);
+            SE__ModEdgeIONTS__DevStatusUncertainForced = new NxtControl.Drawing.BlinkColor("SE.ModEdgeIONTS.DevStatusUncertainForced", new NxtControl.Drawing.Color(2, 178, 238), 8, new NxtControl.Drawing.Color("SE.HwCommon.DevLEDOrange"), 8, NxtControl.Drawing.DrawingObjectType.Project);
+            SE__ModEdgeIONTS__MyColor1_fast = new NxtControl.Drawing.BlinkColor("SE.ModEdgeIONTS.MyColor1_fast", new NxtControl.Drawing.Color(90, 90, 90), 1, new NxtControl.Drawing.Color(60, 248, 54), 1, NxtControl.Drawing.DrawingObjectType.Project);
+            SE__ModEdgeIONTS__MyColor1_Slow = new NxtControl.Drawing.BlinkColor("SE.ModEdgeIONTS.MyColor1_Slow", new NxtControl.Drawing.Color(90, 90, 90), 16, new NxtControl.Drawing.Color(60, 248, 54), 2, NxtControl.Drawing.DrawingObjectType.Project);
+            SE__ModEdgeIONTS__MyColor2_fast = new NxtControl.Drawing.BlinkColor("SE.ModEdgeIONTS.MyColor2_fast", new NxtControl.Drawing.Color(90, 90, 90), 1, new NxtControl.Drawing.Color(255, 31, 36), 1, NxtControl.Drawing.DrawingObjectType.Project);
+            SE__ModEdgeIONTS__MyColor2_Slow = new NxtControl.Drawing.BlinkColor("SE.ModEdgeIONTS.MyColor2_Slow", new NxtControl.Drawing.Color(90, 90, 90), 16, new NxtControl.Drawing.Color(255, 31, 36), 2, NxtControl.Drawing.DrawingObjectType.Project);
+            SE__Nereda__DevLEDRedFlash = new NxtControl.Drawing.BlinkColor("SE.Nereda.DevLEDRedFlash", new NxtControl.Drawing.Color("SE.Nereda.DevLEDRed"), 3, new NxtControl.Drawing.Color("SE.Nereda.DevLEDOff"), 3, NxtControl.Drawing.DrawingObjectType.Project);
+            SE__Nereda__Orangwhite = new NxtControl.Drawing.BlinkColor("SE.Nereda.Orangwhite", new NxtControl.Drawing.Color(254, 186, 10), 4, new NxtControl.Drawing.Color(255, 255, 255), 4, NxtControl.Drawing.DrawingObjectType.Project);
+            SE__Nereda__Running = new NxtControl.Drawing.BlinkColor("SE.Nereda.Running", new NxtControl.Drawing.Color(0, 255, 0), 4, new NxtControl.Drawing.Color(0, 0, 0), 4, NxtControl.Drawing.DrawingObjectType.Project);
+            Standard__HMIExtensions__AlarmBlinkColorSeverity1 = new NxtControl.Drawing.BlinkColor("Standard.HMIExtensions.AlarmBlinkColorSeverity1", new NxtControl.Drawing.Color(238, 206, 206), 4, new NxtControl.Drawing.Color(218, 158, 158), 4, NxtControl.Drawing.DrawingObjectType.Project);
+            Standard__HMIExtensions__AlarmBlinkColorSeverity2 = new NxtControl.Drawing.BlinkColor("Standard.HMIExtensions.AlarmBlinkColorSeverity2", new NxtControl.Drawing.Color(255, 255, 213), 4, new NxtControl.Drawing.Color(255, 255, 170), 4, NxtControl.Drawing.DrawingObjectType.Project);
+            Standard__HMIExtensions__AlarmBlinkColorSeverity3 = new NxtControl.Drawing.BlinkColor("Standard.HMIExtensions.AlarmBlinkColorSeverity3", new NxtControl.Drawing.Color(210, 234, 240), 4, new NxtControl.Drawing.Color(165, 213, 226), 4, NxtControl.Drawing.DrawingObjectType.Project);
+            Standard__HMIExtensions__AlarmBlinkColorSeverity4 = new NxtControl.Drawing.BlinkColor("Standard.HMIExtensions.AlarmBlinkColorSeverity4", new NxtControl.Drawing.Color(223, 216, 231), 4, new NxtControl.Drawing.Color(191, 178, 207), 4, NxtControl.Drawing.DrawingObjectType.Project);
+            Standard__IoModbus__DevForced = new NxtControl.Drawing.BlinkColor("Standard.IoModbus.DevForced", new NxtControl.Drawing.Color(2, 178, 238), 8, new NxtControl.Drawing.Color(255, 255, 255), 8, NxtControl.Drawing.DrawingObjectType.Project);
             WarningCameNotAcked = NxtControl.Drawing.SystemColors.WarningCameNotAcked;
             WarningGoneNotAcked = NxtControl.Drawing.SystemColors.WarningGoneNotAcked;
             YellowWhite = NxtControl.Drawing.SystemColors.YellowWhite;

@@ -1,0 +1,34 @@
+using System;
+using NxtControl.GuiFramework;
+using Hidryco.HidrycoLib.SupportClasses;
+
+namespace Hidryco.HidrycoLib.Symbols.Motor_Dosagem
+{
+	public partial class sBomba : HMISymbol
+	{
+		public sBomba()
+		{
+			InitializeComponent();
+		}
+
+		void StsAnimacaoValueChanged(object sender, ValueChangedEventArgs e)
+		{
+			bomba1.Animacao = Convert.ToInt16(e.Value);
+		}
+
+
+		void StsFalhaComunicacaoValueChanged(object sender, ValueChangedEventArgs e)
+		{
+		
+			falha_comunicacao1.Visible = (bool)e.Value;
+		    
+		}
+
+		void StsProtecaoTermicaValueChanged(object sender, ValueChangedEventArgs e)
+		{
+			unidade_Portecao_Termica1.Visible = (bool)e.Value;
+		}
+
+
+	}
+}

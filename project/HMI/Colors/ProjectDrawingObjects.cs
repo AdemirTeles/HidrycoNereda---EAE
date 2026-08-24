@@ -17,6 +17,84 @@ namespace NxtControl.Drawing {
         
         public static NxtControl.Drawing.Brush RuntimeConnectionBrush;
         
+        public static NxtControl.Drawing.Brush SE__App2Base__AbnormalBrush;
+        
+        public static NxtControl.Drawing.Brush SE__App2Base__AbnormalTextBrush;
+        
+        public static NxtControl.Drawing.Brush SE__App2Base__ActionReqBrush;
+        
+        public static NxtControl.Drawing.Brush SE__App2Base__ActiveStateBrush;
+        
+        public static NxtControl.Drawing.Brush SE__App2Base__FpBackgroundBrush;
+        
+        public static NxtControl.Drawing.Brush SE__App2Base__PassiveBrush;
+        
+        public static NxtControl.Drawing.Brush SE__App2Base__PassiveStateBrush;
+        
+        public static NxtControl.Drawing.Brush SE__App2Base__SAPvNormal;
+        
+        public static NxtControl.Drawing.Brush SE__App2Base__SwitchButtonTrueBrush;
+        
+        public static NxtControl.Drawing.Brush SE__App2Base__SymBAInstanceLabelBackground;
+        
+        public static NxtControl.Drawing.Brush SE__App2Base__SymInfoRearm;
+        
+        public static NxtControl.Drawing.Brush SE__App2Base__SymInstanceLabelBackground;
+        
+        public static NxtControl.Drawing.Brush SE__App2Base__SymLabelBackground;
+        
+        public static NxtControl.Drawing.Brush SE__App2Base__TextBoxInputBrush;
+        
+        public static NxtControl.Drawing.Brush SE__App2Base__TransitionBrush;
+        
+        public static NxtControl.Drawing.Brush SE__App2CommonProcess__FpBackgroundBrush;
+        
+        public static NxtControl.Drawing.Brush SE__App2Conveying__FpBackgroundBrush;
+        
+        public static NxtControl.Drawing.Brush SE__App2Conveying__PassiveBrush;
+        
+        public static NxtControl.Drawing.Brush SE__App2SingleLinePowerMonitoring__FpBackgroundBrush;
+        
+        public static NxtControl.Drawing.Brush SE__App2SingleLinePowerMonitoring__TextBoxInputBrush;
+        
+        public static NxtControl.Drawing.Brush SE__App2SingleLinePowerMonitoring__TransitionBrush;
+        
+        public static NxtControl.Drawing.Brush SE__AppSequence__AbnormalBrush;
+        
+        public static NxtControl.Drawing.Brush SE__AppSequence__AbnormalTextBrush;
+        
+        public static NxtControl.Drawing.Brush SE__AppSequence__ActionReqBrush;
+        
+        public static NxtControl.Drawing.Brush SE__AppSequence__ActiveBrush;
+        
+        public static NxtControl.Drawing.Brush SE__AppSequence__ActiveStateBrush;
+        
+        public static NxtControl.Drawing.Brush SE__AppSequence__CommandPB;
+        
+        public static NxtControl.Drawing.Brush SE__AppSequence__CompleteBrush;
+        
+        public static NxtControl.Drawing.Brush SE__AppSequence__CompletedBrush;
+        
+        public static NxtControl.Drawing.Brush SE__AppSequence__FpBackgroundBrush;
+        
+        public static NxtControl.Drawing.Brush SE__AppSequence__PassiveBrush;
+        
+        public static NxtControl.Drawing.Brush SE__AppSequence__PassiveStateBrush;
+        
+        public static NxtControl.Drawing.Brush SE__AppSequence__SAPvNormal;
+        
+        public static NxtControl.Drawing.Brush SE__AppSequence__SymBAInstanceLabelBackground;
+        
+        public static NxtControl.Drawing.Brush SE__AppSequence__SymInfoRearm;
+        
+        public static NxtControl.Drawing.Brush SE__AppSequence__SymInstanceLabelBackground;
+        
+        public static NxtControl.Drawing.Brush SE__AppSequence__SymLabelBackground;
+        
+        public static NxtControl.Drawing.Brush SE__AppSequence__TextBoxInputBrush;
+        
+        public static NxtControl.Drawing.Brush SE__AppSequence__TransitionBrush;
+        
         public static NxtControl.Drawing.Brush SymBackgroundBrush;
         
         public static NxtControl.Drawing.Brush TextBoxBrush;
@@ -91,6 +169,73 @@ namespace NxtControl.Drawing {
             LogStateBrush = NxtControl.Drawing.SystemBrushes.LogStateBrush;
             RoundKnobBrush = NxtControl.Drawing.SystemBrushes.RoundKnobBrush;
             RuntimeConnectionBrush = NxtControl.Drawing.SystemBrushes.RuntimeConnectionBrush;
+            SE__App2Base__AbnormalBrush = new NxtControl.Drawing.Brush("SE.App2Base.AbnormalBrush", new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("SE.App2Base.Abnormal")), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__AbnormalTextBrush = new NxtControl.Drawing.Brush("SE.App2Base.AbnormalTextBrush", new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(255)))), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__ActionReqBrush = new NxtControl.Drawing.Brush("SE.App2Base.ActionReqBrush", new NxtControl.Drawing.Brush(new NxtControl.Drawing.BlinkColor("SE.App2Base.ActionRequired")), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__ActiveStateBrush = new NxtControl.Drawing.Brush("SE.App2Base.ActiveStateBrush", new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(255)))), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__FpBackgroundBrush = new NxtControl.Drawing.Brush("SE.App2Base.FpBackgroundBrush", new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("LabelBackColor")), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__PassiveBrush = new NxtControl.Drawing.Brush("SE.App2Base.PassiveBrush", new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(255)))), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__PassiveStateBrush = new NxtControl.Drawing.Brush("SE.App2Base.PassiveStateBrush", new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(132)), ((byte)(132)), ((byte)(132)))), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__SAPvNormal = new NxtControl.Drawing.Brush("SE.App2Base.SAPvNormal", new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("SE.App2Base.SAPvNormal")), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__SwitchButtonTrueBrush = new NxtControl.Drawing.Brush("SE.App2Base.SwitchButtonTrueBrush", new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(114)), ((byte)(114)), ((byte)(110)))), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__SymBAInstanceLabelBackground = new NxtControl.Drawing.Brush("SE.App2Base.SymBAInstanceLabelBackground", new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(255))), new NxtControl.Drawing.GradientFill(NxtControl.Drawing.GradientFillOrientation.VerticalBottom, new NxtControl.Drawing.GradientFillColorBlend(new NxtControl.Drawing.Color[] {
+                                    new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))),
+                                    new NxtControl.Drawing.Color(((byte)(132)), ((byte)(130)), ((byte)(130))),
+                                    new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(255))),
+                                    new NxtControl.Drawing.Color(((byte)(217)), ((byte)(217)), ((byte)(217))),
+                                    new NxtControl.Drawing.Color(((byte)(151)), ((byte)(154)), ((byte)(162)))}, new float[] {
+                                    0F,
+                                    0.23F,
+                                    0.48F,
+                                    0.72F,
+                                    1F}))), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__SymInfoRearm = new NxtControl.Drawing.Brush("SE.App2Base.SymInfoRearm", new NxtControl.Drawing.Brush(new NxtControl.Drawing.BlinkColor("SE.App2Base.BlSymInfoRearm"), new NxtControl.Drawing.GradientFill(NxtControl.Drawing.GradientFillOrientation.Center, NxtControl.Drawing.GradientFillBrightness.Light)), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__SymInstanceLabelBackground = new NxtControl.Drawing.Brush("SE.App2Base.SymInstanceLabelBackground", new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("Transparent")), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__SymLabelBackground = new NxtControl.Drawing.Brush("SE.App2Base.SymLabelBackground", new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(210)), ((byte)(210)), ((byte)(210))), new NxtControl.Drawing.GradientFill(NxtControl.Drawing.GradientFillOrientation.VerticalBottom, new NxtControl.Drawing.GradientFillColorBlend(new NxtControl.Drawing.Color[] {
+                                    new NxtControl.Drawing.Color(((byte)(210)), ((byte)(210)), ((byte)(210))),
+                                    new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(255)))}, new float[] {
+                                    0F,
+                                    1F}))), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__TextBoxInputBrush = new NxtControl.Drawing.Brush("SE.App2Base.TextBoxInputBrush", new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(255)))), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__TransitionBrush = new NxtControl.Drawing.Brush("SE.App2Base.TransitionBrush", new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(204)), ((byte)(255)), ((byte)(204)))), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2CommonProcess__FpBackgroundBrush = new NxtControl.Drawing.Brush("SE.App2CommonProcess.FpBackgroundBrush", new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(240)), ((byte)(240)), ((byte)(240)))), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Conveying__FpBackgroundBrush = new NxtControl.Drawing.Brush("SE.App2Conveying.FpBackgroundBrush", new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("LabelBackColor")), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Conveying__PassiveBrush = new NxtControl.Drawing.Brush("SE.App2Conveying.PassiveBrush", new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(255)))), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2SingleLinePowerMonitoring__FpBackgroundBrush = new NxtControl.Drawing.Brush("SE.App2SingleLinePowerMonitoring.FpBackgroundBrush", new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(240)), ((byte)(240)), ((byte)(240)))), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2SingleLinePowerMonitoring__TextBoxInputBrush = new NxtControl.Drawing.Brush("SE.App2SingleLinePowerMonitoring.TextBoxInputBrush", new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(255)))), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2SingleLinePowerMonitoring__TransitionBrush = new NxtControl.Drawing.Brush("SE.App2SingleLinePowerMonitoring.TransitionBrush", new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(204)), ((byte)(255)), ((byte)(204)))), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__AbnormalBrush = new NxtControl.Drawing.Brush("SE.AppSequence.AbnormalBrush", new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("SE.AppBase.Abnormal")), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__AbnormalTextBrush = new NxtControl.Drawing.Brush("SE.AppSequence.AbnormalTextBrush", new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(255)))), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__ActionReqBrush = new NxtControl.Drawing.Brush("SE.AppSequence.ActionReqBrush", new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("SE.AppBase.ActionRequired")), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__ActiveBrush = new NxtControl.Drawing.Brush("SE.AppSequence.ActiveBrush", new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(255)))), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__ActiveStateBrush = new NxtControl.Drawing.Brush("SE.AppSequence.ActiveStateBrush", new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(255)))), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__CommandPB = new NxtControl.Drawing.Brush("SE.AppSequence.CommandPB", new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(190)), ((byte)(190)), ((byte)(190)))), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__CompleteBrush = new NxtControl.Drawing.Brush("SE.AppSequence.CompleteBrush", new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(210)), ((byte)(210)), ((byte)(210)))), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__CompletedBrush = new NxtControl.Drawing.Brush("SE.AppSequence.CompletedBrush", new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(210)), ((byte)(210)), ((byte)(210)))), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__FpBackgroundBrush = new NxtControl.Drawing.Brush("SE.AppSequence.FpBackgroundBrush", new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("LabelBackColor")), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__PassiveBrush = new NxtControl.Drawing.Brush("SE.AppSequence.PassiveBrush", new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(132)), ((byte)(132)), ((byte)(132)))), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__PassiveStateBrush = new NxtControl.Drawing.Brush("SE.AppSequence.PassiveStateBrush", new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(132)), ((byte)(132)), ((byte)(132)))), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__SAPvNormal = new NxtControl.Drawing.Brush("SE.AppSequence.SAPvNormal", new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("SE.AppBase.SAPvNormal")), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__SymBAInstanceLabelBackground = new NxtControl.Drawing.Brush("SE.AppSequence.SymBAInstanceLabelBackground", new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(255))), new NxtControl.Drawing.GradientFill(NxtControl.Drawing.GradientFillOrientation.VerticalBottom, new NxtControl.Drawing.GradientFillColorBlend(new NxtControl.Drawing.Color[] {
+                                    new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))),
+                                    new NxtControl.Drawing.Color(((byte)(132)), ((byte)(130)), ((byte)(130))),
+                                    new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(255))),
+                                    new NxtControl.Drawing.Color(((byte)(217)), ((byte)(217)), ((byte)(217))),
+                                    new NxtControl.Drawing.Color(((byte)(151)), ((byte)(154)), ((byte)(162)))}, new float[] {
+                                    0F,
+                                    0.23F,
+                                    0.48F,
+                                    0.72F,
+                                    1F}))), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__SymInfoRearm = new NxtControl.Drawing.Brush("SE.AppSequence.SymInfoRearm", new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("SE.AppBase.BlSymInfoRearm"), new NxtControl.Drawing.GradientFill(NxtControl.Drawing.GradientFillOrientation.Center, NxtControl.Drawing.GradientFillBrightness.Light)), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__SymInstanceLabelBackground = new NxtControl.Drawing.Brush("SE.AppSequence.SymInstanceLabelBackground", new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("Transparent")), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__SymLabelBackground = new NxtControl.Drawing.Brush("SE.AppSequence.SymLabelBackground", new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(210)), ((byte)(210)), ((byte)(210))), new NxtControl.Drawing.GradientFill(NxtControl.Drawing.GradientFillOrientation.VerticalBottom, new NxtControl.Drawing.GradientFillColorBlend(new NxtControl.Drawing.Color[] {
+                                    new NxtControl.Drawing.Color(((byte)(210)), ((byte)(210)), ((byte)(210))),
+                                    new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(255)))}, new float[] {
+                                    0F,
+                                    1F}))), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__TextBoxInputBrush = new NxtControl.Drawing.Brush("SE.AppSequence.TextBoxInputBrush", new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(255)))), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__TransitionBrush = new NxtControl.Drawing.Brush("SE.AppSequence.TransitionBrush", new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(204)), ((byte)(255)), ((byte)(204)))), NxtControl.Drawing.DrawingObjectType.Project);
             SymBackgroundBrush = NxtControl.Drawing.SystemBrushes.SymBackgroundBrush;
             TextBoxBrush = NxtControl.Drawing.SystemBrushes.TextBoxBrush;
             TrackerLineBrush = NxtControl.Drawing.SystemBrushes.TrackerLineBrush;
@@ -183,6 +328,30 @@ namespace NxtControl.Drawing {
         
         public static NxtControl.Drawing.Pen LabelPen;
         
+        public static NxtControl.Drawing.Pen SE__App2Base__SAElementFrame;
+        
+        public static NxtControl.Drawing.Pen SE__App2Base__SAPvAbnormal;
+        
+        public static NxtControl.Drawing.Pen SE__App2Base__SAPvNormal;
+        
+        public static NxtControl.Drawing.Pen SE__AppSequence__FrameDefault;
+        
+        public static NxtControl.Drawing.Pen SE__AppSequence__FrameHighlight;
+        
+        public static NxtControl.Drawing.Pen SE__AppSequence__SAElementFrame;
+        
+        public static NxtControl.Drawing.Pen SE__AppSequence__SAPvAbnormal;
+        
+        public static NxtControl.Drawing.Pen SE__AppSequence__SAPvNormal;
+        
+        public static NxtControl.Drawing.Pen Standard__HMIExtensions__AlarmPenSeverity1;
+        
+        public static NxtControl.Drawing.Pen Standard__HMIExtensions__AlarmPenSeverity2;
+        
+        public static NxtControl.Drawing.Pen Standard__HMIExtensions__AlarmPenSeverity3;
+        
+        public static NxtControl.Drawing.Pen Standard__HMIExtensions__AlarmPenSeverity4;
+        
         public static NxtControl.Drawing.Pen SymBackgroundPen;
         
         public static NxtControl.Drawing.Pen SymLinePen;
@@ -213,6 +382,18 @@ namespace NxtControl.Drawing {
             FpLinePen = NxtControl.Drawing.SystemPens.FpLinePen;
             GroupBoxPen = NxtControl.Drawing.SystemPens.GroupBoxPen;
             LabelPen = NxtControl.Drawing.SystemPens.LabelPen;
+            SE__App2Base__SAElementFrame = new NxtControl.Drawing.Pen("SE.App2Base.SAElementFrame", new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(114)), ((byte)(114)), ((byte)(114))), 1F, NxtControl.Drawing.DashStyle.Solid), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__SAPvAbnormal = new NxtControl.Drawing.Pen("SE.App2Base.SAPvAbnormal", new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(245)), ((byte)(157)), ((byte)(86))), 1F, NxtControl.Drawing.DashStyle.Solid), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__SAPvNormal = new NxtControl.Drawing.Pen("SE.App2Base.SAPvNormal", new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(114)), ((byte)(114)), ((byte)(114))), 1F, NxtControl.Drawing.DashStyle.Solid), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__FrameDefault = new NxtControl.Drawing.Pen("SE.AppSequence.FrameDefault", new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(30)), ((byte)(30)), ((byte)(30))), 1F, NxtControl.Drawing.DashStyle.Solid), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__FrameHighlight = new NxtControl.Drawing.Pen("SE.AppSequence.FrameHighlight", new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(254)), ((byte)(186)), ((byte)(10))), 1F, NxtControl.Drawing.DashStyle.Solid), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__SAElementFrame = new NxtControl.Drawing.Pen("SE.AppSequence.SAElementFrame", new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(114)), ((byte)(114)), ((byte)(114))), 1F, NxtControl.Drawing.DashStyle.Solid), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__SAPvAbnormal = new NxtControl.Drawing.Pen("SE.AppSequence.SAPvAbnormal", new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(245)), ((byte)(157)), ((byte)(86))), 1F, NxtControl.Drawing.DashStyle.Solid), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__SAPvNormal = new NxtControl.Drawing.Pen("SE.AppSequence.SAPvNormal", new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(114)), ((byte)(114)), ((byte)(114))), 1F, NxtControl.Drawing.DashStyle.Solid), NxtControl.Drawing.DrawingObjectType.Project);
+            Standard__HMIExtensions__AlarmPenSeverity1 = new NxtControl.Drawing.Pen("Standard.HMIExtensions.AlarmPenSeverity1", new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("Standard.HMIExtensions.AlarmPenColorSeverity1"), 2F, NxtControl.Drawing.DashStyle.Solid), NxtControl.Drawing.DrawingObjectType.Project);
+            Standard__HMIExtensions__AlarmPenSeverity2 = new NxtControl.Drawing.Pen("Standard.HMIExtensions.AlarmPenSeverity2", new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("Standard.HMIExtensions.AlarmPenColorSeverity2"), 2F, NxtControl.Drawing.DashStyle.Solid), NxtControl.Drawing.DrawingObjectType.Project);
+            Standard__HMIExtensions__AlarmPenSeverity3 = new NxtControl.Drawing.Pen("Standard.HMIExtensions.AlarmPenSeverity3", new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("Standard.HMIExtensions.AlarmPenColorSeverity3"), 2F, NxtControl.Drawing.DashStyle.Solid), NxtControl.Drawing.DrawingObjectType.Project);
+            Standard__HMIExtensions__AlarmPenSeverity4 = new NxtControl.Drawing.Pen("Standard.HMIExtensions.AlarmPenSeverity4", new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("Standard.HMIExtensions.AlarmPenColorSeverity4"), 2F, NxtControl.Drawing.DashStyle.Solid), NxtControl.Drawing.DrawingObjectType.Project);
             SymBackgroundPen = NxtControl.Drawing.SystemPens.SymBackgroundPen;
             SymLinePen = NxtControl.Drawing.SystemPens.SymLinePen;
             Transparent = NxtControl.Drawing.SystemPens.Transparent;
@@ -242,6 +423,120 @@ namespace NxtControl.Drawing {
         
         public static NxtControl.Drawing.Font SansSerif;
         
+        public static NxtControl.Drawing.Font SE__App2Base__FpLabelFont;
+        
+        public static NxtControl.Drawing.Font SE__App2Base__FpPv;
+        
+        public static NxtControl.Drawing.Font SE__App2Base__FpText;
+        
+        public static NxtControl.Drawing.Font SE__App2Base__LabelFont;
+        
+        public static NxtControl.Drawing.Font SE__App2Base__Pv;
+        
+        public static NxtControl.Drawing.Font SE__App2Base__Sp;
+        
+        public static NxtControl.Drawing.Font SE__App2Base__SymBAInstanceLabel;
+        
+        public static NxtControl.Drawing.Font SE__App2Base__SymExternalControlLabel;
+        
+        public static NxtControl.Drawing.Font SE__App2Base__SymInstanceLabel;
+        
+        public static NxtControl.Drawing.Font SE__App2Base__SymPv;
+        
+        public static NxtControl.Drawing.Font SE__App2Base__SymSp;
+        
+        public static NxtControl.Drawing.Font SE__App2Base__SymText;
+        
+        public static NxtControl.Drawing.Font SE__App2Base__Text;
+        
+        public static NxtControl.Drawing.Font SE__App2CommonProcess__FpPv;
+        
+        public static NxtControl.Drawing.Font SE__App2CommonProcess__FpText;
+        
+        public static NxtControl.Drawing.Font SE__App2CommonProcess__LabelFont;
+        
+        public static NxtControl.Drawing.Font SE__App2CommonProcess__Pv;
+        
+        public static NxtControl.Drawing.Font SE__App2CommonProcess__Sp;
+        
+        public static NxtControl.Drawing.Font SE__App2CommonProcess__SymInstanceLabel;
+        
+        public static NxtControl.Drawing.Font SE__App2CommonProcess__SymPv;
+        
+        public static NxtControl.Drawing.Font SE__App2Conveying__FpLabelFont;
+        
+        public static NxtControl.Drawing.Font SE__App2Conveying__FpPv;
+        
+        public static NxtControl.Drawing.Font SE__App2Conveying__FpText;
+        
+        public static NxtControl.Drawing.Font SE__App2Conveying__LabelFont;
+        
+        public static NxtControl.Drawing.Font SE__App2Conveying__Pv;
+        
+        public static NxtControl.Drawing.Font SE__App2Conveying__Sp;
+        
+        public static NxtControl.Drawing.Font SE__App2Conveying__SymInstanceLabel;
+        
+        public static NxtControl.Drawing.Font SE__App2Conveying__SymText;
+        
+        public static NxtControl.Drawing.Font SE__App2MMM__LabelFont;
+        
+        public static NxtControl.Drawing.Font SE__App2MMM__Pv;
+        
+        public static NxtControl.Drawing.Font SE__App2MMM__SymInstanceLabel;
+        
+        public static NxtControl.Drawing.Font SE__App2SingleLinePowerMonitoring__FpSp;
+        
+        public static NxtControl.Drawing.Font SE__App2SingleLinePowerMonitoring__LabelFont;
+        
+        public static NxtControl.Drawing.Font SE__App2SingleLinePowerMonitoring__Pv;
+        
+        public static NxtControl.Drawing.Font SE__App2SingleLinePowerMonitoring__Sp;
+        
+        public static NxtControl.Drawing.Font SE__App2SingleLinePowerMonitoring__SymInstanceLabel;
+        
+        public static NxtControl.Drawing.Font SE__App2SingleLinePowerMonitoring__SymPv;
+        
+        public static NxtControl.Drawing.Font SE__App2SingleLinePowerMonitoring__SymSp;
+        
+        public static NxtControl.Drawing.Font SE__AppSequence__FpLabelFont;
+        
+        public static NxtControl.Drawing.Font SE__AppSequence__FpPv;
+        
+        public static NxtControl.Drawing.Font SE__AppSequence__FpSp;
+        
+        public static NxtControl.Drawing.Font SE__AppSequence__FpText;
+        
+        public static NxtControl.Drawing.Font SE__AppSequence__LabelFont;
+        
+        public static NxtControl.Drawing.Font SE__AppSequence__Pv;
+        
+        public static NxtControl.Drawing.Font SE__AppSequence__SALabel;
+        
+        public static NxtControl.Drawing.Font SE__AppSequence__SAPv;
+        
+        public static NxtControl.Drawing.Font SE__AppSequence__SASp;
+        
+        public static NxtControl.Drawing.Font SE__AppSequence__Sp;
+        
+        public static NxtControl.Drawing.Font SE__AppSequence__SymBAInstanceLabel;
+        
+        public static NxtControl.Drawing.Font SE__AppSequence__SymInstanceLabel;
+        
+        public static NxtControl.Drawing.Font SE__AppSequence__SymPv;
+        
+        public static NxtControl.Drawing.Font SE__AppSequence__SymSp;
+        
+        public static NxtControl.Drawing.Font SE__AppSequence__SymText;
+        
+        public static NxtControl.Drawing.Font SE__AppSequence__Text;
+        
+        public static NxtControl.Drawing.Font SE__HwCommon__GroupActiveHeaderFont;
+        
+        public static NxtControl.Drawing.Font SE__HwCommon__GroupInactiveHeaderFont;
+        
+        public static NxtControl.Drawing.Font Standard__IoModbus__SymbolCaptionFont;
+        
         public static NxtControl.Drawing.Font ButtonFont;
         
         public static NxtControl.Drawing.Font CheckBoxFont;
@@ -263,6 +558,63 @@ namespace NxtControl.Drawing {
             LabelFont = NxtControl.Drawing.SystemFonts.LabelFont;
             RoundKnobValueFont = NxtControl.Drawing.SystemFonts.RoundKnobValueFont;
             SansSerif = NxtControl.Drawing.SystemFonts.SansSerif;
+            SE__App2Base__FpLabelFont = new NxtControl.Drawing.Font("SE.App2Base.FpLabelFont", new NxtControl.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__FpPv = new NxtControl.Drawing.Font("SE.App2Base.FpPv", new NxtControl.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__FpText = new NxtControl.Drawing.Font("SE.App2Base.FpText", new NxtControl.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__LabelFont = new NxtControl.Drawing.Font("SE.App2Base.LabelFont", new NxtControl.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__Pv = new NxtControl.Drawing.Font("SE.App2Base.Pv", new NxtControl.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__Sp = new NxtControl.Drawing.Font("SE.App2Base.Sp", new NxtControl.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__SymBAInstanceLabel = new NxtControl.Drawing.Font("SE.App2Base.SymBAInstanceLabel", new NxtControl.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__SymExternalControlLabel = new NxtControl.Drawing.Font("SE.App2Base.SymExternalControlLabel", new NxtControl.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__SymInstanceLabel = new NxtControl.Drawing.Font("SE.App2Base.SymInstanceLabel", new NxtControl.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__SymPv = new NxtControl.Drawing.Font("SE.App2Base.SymPv", new NxtControl.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__SymSp = new NxtControl.Drawing.Font("SE.App2Base.SymSp", new NxtControl.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__SymText = new NxtControl.Drawing.Font("SE.App2Base.SymText", new NxtControl.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Base__Text = new NxtControl.Drawing.Font("SE.App2Base.Text", new NxtControl.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2CommonProcess__FpPv = new NxtControl.Drawing.Font("SE.App2CommonProcess.FpPv", new NxtControl.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2CommonProcess__FpText = new NxtControl.Drawing.Font("SE.App2CommonProcess.FpText", new NxtControl.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2CommonProcess__LabelFont = new NxtControl.Drawing.Font("SE.App2CommonProcess.LabelFont", new NxtControl.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2CommonProcess__Pv = new NxtControl.Drawing.Font("SE.App2CommonProcess.Pv", new NxtControl.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2CommonProcess__Sp = new NxtControl.Drawing.Font("SE.App2CommonProcess.Sp", new NxtControl.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2CommonProcess__SymInstanceLabel = new NxtControl.Drawing.Font("SE.App2CommonProcess.SymInstanceLabel", new NxtControl.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2CommonProcess__SymPv = new NxtControl.Drawing.Font("SE.App2CommonProcess.SymPv", new NxtControl.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Conveying__FpLabelFont = new NxtControl.Drawing.Font("SE.App2Conveying.FpLabelFont", new NxtControl.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Conveying__FpPv = new NxtControl.Drawing.Font("SE.App2Conveying.FpPv", new NxtControl.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Conveying__FpText = new NxtControl.Drawing.Font("SE.App2Conveying.FpText", new NxtControl.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Conveying__LabelFont = new NxtControl.Drawing.Font("SE.App2Conveying.LabelFont", new NxtControl.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Conveying__Pv = new NxtControl.Drawing.Font("SE.App2Conveying.Pv", new NxtControl.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Conveying__Sp = new NxtControl.Drawing.Font("SE.App2Conveying.Sp", new NxtControl.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Conveying__SymInstanceLabel = new NxtControl.Drawing.Font("SE.App2Conveying.SymInstanceLabel", new NxtControl.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2Conveying__SymText = new NxtControl.Drawing.Font("SE.App2Conveying.SymText", new NxtControl.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2MMM__LabelFont = new NxtControl.Drawing.Font("SE.App2MMM.LabelFont", new NxtControl.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2MMM__Pv = new NxtControl.Drawing.Font("SE.App2MMM.Pv", new NxtControl.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2MMM__SymInstanceLabel = new NxtControl.Drawing.Font("SE.App2MMM.SymInstanceLabel", new NxtControl.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2SingleLinePowerMonitoring__FpSp = new NxtControl.Drawing.Font("SE.App2SingleLinePowerMonitoring.FpSp", new NxtControl.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2SingleLinePowerMonitoring__LabelFont = new NxtControl.Drawing.Font("SE.App2SingleLinePowerMonitoring.LabelFont", new NxtControl.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2SingleLinePowerMonitoring__Pv = new NxtControl.Drawing.Font("SE.App2SingleLinePowerMonitoring.Pv", new NxtControl.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2SingleLinePowerMonitoring__Sp = new NxtControl.Drawing.Font("SE.App2SingleLinePowerMonitoring.Sp", new NxtControl.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2SingleLinePowerMonitoring__SymInstanceLabel = new NxtControl.Drawing.Font("SE.App2SingleLinePowerMonitoring.SymInstanceLabel", new NxtControl.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2SingleLinePowerMonitoring__SymPv = new NxtControl.Drawing.Font("SE.App2SingleLinePowerMonitoring.SymPv", new NxtControl.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__App2SingleLinePowerMonitoring__SymSp = new NxtControl.Drawing.Font("SE.App2SingleLinePowerMonitoring.SymSp", new NxtControl.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__FpLabelFont = new NxtControl.Drawing.Font("SE.AppSequence.FpLabelFont", new NxtControl.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__FpPv = new NxtControl.Drawing.Font("SE.AppSequence.FpPv", new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__FpSp = new NxtControl.Drawing.Font("SE.AppSequence.FpSp", new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__FpText = new NxtControl.Drawing.Font("SE.AppSequence.FpText", new NxtControl.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__LabelFont = new NxtControl.Drawing.Font("SE.AppSequence.LabelFont", new NxtControl.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__Pv = new NxtControl.Drawing.Font("SE.AppSequence.Pv", new NxtControl.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__SALabel = new NxtControl.Drawing.Font("SE.AppSequence.SALabel", new NxtControl.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__SAPv = new NxtControl.Drawing.Font("SE.AppSequence.SAPv", new NxtControl.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__SASp = new NxtControl.Drawing.Font("SE.AppSequence.SASp", new NxtControl.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__Sp = new NxtControl.Drawing.Font("SE.AppSequence.Sp", new NxtControl.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__SymBAInstanceLabel = new NxtControl.Drawing.Font("SE.AppSequence.SymBAInstanceLabel", new NxtControl.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__SymInstanceLabel = new NxtControl.Drawing.Font("SE.AppSequence.SymInstanceLabel", new NxtControl.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__SymPv = new NxtControl.Drawing.Font("SE.AppSequence.SymPv", new NxtControl.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__SymSp = new NxtControl.Drawing.Font("SE.AppSequence.SymSp", new NxtControl.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__SymText = new NxtControl.Drawing.Font("SE.AppSequence.SymText", new NxtControl.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__AppSequence__Text = new NxtControl.Drawing.Font("SE.AppSequence.Text", new NxtControl.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__HwCommon__GroupActiveHeaderFont = new NxtControl.Drawing.Font("SE.HwCommon.GroupActiveHeaderFont", new NxtControl.Drawing.Font("HMI Sans Serif", 9F, System.Drawing.FontStyle.Regular), NxtControl.Drawing.DrawingObjectType.Project);
+            SE__HwCommon__GroupInactiveHeaderFont = new NxtControl.Drawing.Font("SE.HwCommon.GroupInactiveHeaderFont", new NxtControl.Drawing.Font("HMI Sans Serif", 9F, System.Drawing.FontStyle.Regular), NxtControl.Drawing.DrawingObjectType.Project);
+            Standard__IoModbus__SymbolCaptionFont = new NxtControl.Drawing.Font("Standard.IoModbus.SymbolCaptionFont", new NxtControl.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular), NxtControl.Drawing.DrawingObjectType.Project);
             ButtonFont = new NxtControl.Drawing.Font("ButtonFont", new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold), NxtControl.Drawing.DrawingObjectType.Project);
             CheckBoxFont = new NxtControl.Drawing.Font("CheckBoxFont", new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold), NxtControl.Drawing.DrawingObjectType.Project);
             RoundKnobFont = new NxtControl.Drawing.Font("RoundKnobFont", new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular), NxtControl.Drawing.DrawingObjectType.Project);

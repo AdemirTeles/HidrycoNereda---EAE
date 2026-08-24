@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="6f750069-ac24-463e-ae3a-fa7857409b10" Name="basicValvulaOnOff" Comment="Basic Function Block Type" Namespace="Hidryco.HidrycoLib">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="1/26/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="INIT" Comment="Initialization Request" />
+      <Event Name="REQ" Comment="Normal Execution Request">
+        <With Var="stsRemoto" />
+        <With Var="stsAutomatico" />
+        <With Var="stsFalha" />
+      </Event>
+      <Event Name="E_COMMAND">
+        <With Var="cmdOn" />
+        <With Var="cmdOff" />
+        <With Var="ilkManual" />
+        <With Var="ilkAutomatico" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="INITO" Comment="Initialization Confirm" />
+      <Event Name="CNF" Comment="Execution Confirmation">
+        <With Var="acmOn" />
+        <With Var="acmOff" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="stsRemoto" Type="BOOL" />
+      <VarDeclaration Name="stsAutomatico" Type="BOOL" />
+      <VarDeclaration Name="stsFalha" Type="BOOL" />
+      <VarDeclaration Name="cmdOn" Type="BOOL" />
+      <VarDeclaration Name="cmdOff" Type="BOOL" />
+      <VarDeclaration Name="ilkManual" Type="BOOL" Comment="Interlock Manual" />
+      <VarDeclaration Name="ilkAutomatico" Type="BOOL" Comment="Interlock Automatico" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="acmOn" Type="BOOL" />
+      <VarDeclaration Name="acmOff" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="INIT,REQ,logicaFecha,logicaAbre" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="1636.941" y="1061.412" />
+      <ECState Name="Remoto" x="1688.444" y="1484.889" />
+      <ECState Name="STATE2" x="2993.334" y="1111.111" />
+      <ECState Name="STATE1" x="476.4444" y="1156.444" />
+      <ECState Name="Abrir" x="1635.556" y="1800">
+        <ECAction Algorithm="logicaAbre" Output="CNF" />
+      </ECState>
+      <ECState Name="Fechar" x="1631.111" y="2306.667">
+        <ECAction Algorithm="logicaFecha" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="Remoto" Condition="stsRemoto" x="1760.772" y="1267.512">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="443.7882,303.1144,446.4194,329.7021" />
+      </ECTransition>
+      <ECTransition Source="Remoto" Destination="STATE2" Condition="stsAutomatico AND NOT (stsFalha)" x="2236.162" y="1263.356">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="520.0677,323.8975,583.455,304.4319" />
+      </ECTransition>
+      <ECTransition Source="Remoto" Destination="STATE1" Condition="NOT (stsAutomatico) AND NOT (stsFalha)" x="1026.268" y="1151.821">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="281.3512,287.5866,217.8414,267.1747" />
+      </ECTransition>
+      <ECTransition Source="STATE1" Destination="Abrir" Condition="cmdOn AND NOT (ilkManual)" x="1023.696" y="1393.106">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="210.8375,320.4511,289.6356,362.1998" />
+      </ECTransition>
+      <ECTransition Source="STATE1" Destination="Fechar" Condition="cmdOff AND NOT (stsFalha)" x="886.4216" y="1828.402">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="166.0779,417.2457,257.8987,513.0961" />
+      </ECTransition>
+      <ECTransition Source="STATE2" Destination="Abrir" Condition="NOT (ilkAutomatico)" x="2353.981" y="1506.801">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="639.9949,354.6205,541.5107,405.7124" />
+      </ECTransition>
+      <ECTransition Source="STATE2" Destination="Fechar" Condition="ilkAutomatico" x="2749.142" y="1986.547">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="770.7272,472.3436,665.7471,563.3937" />
+      </ECTransition>
+      <ECTransition Source="Remoto" Destination="START" Condition="1" x="1655.321" y="1207.734">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="414.7678,309.7794,411.6057,283.1848" />
+      </ECTransition>
+      <ECTransition Source="Abrir" Destination="START" Condition="1" x="2442.335" y="1155.714">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="668.6698,295.093,668.7689,242.2411" />
+      </ECTransition>
+      <ECTransition Source="Fechar" Destination="START" Condition="1" x="1081.632" y="1509.671">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="231.8542,411.0556,232.2993,315.9814" />
+      </ECTransition>
+      <ECTransition Source="STATE1" Destination="START" Condition="1" x="1063.372" y="1025.513">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="228.8298,255.1262,302.8564,249.0643" />
+      </ECTransition>
+      <ECTransition Source="STATE2" Destination="START" Condition="1" x="2308.458" y="1167.852">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="622.2901,298.1595,531.9388,294.8489" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="INIT" Comment="Initialization algorithm">
+      <ST><![CDATA[;]]></ST>
+    </Algorithm>
+    <Algorithm Name="REQ" Comment="Normally executed algorithm">
+      <ST><![CDATA[;]]></ST>
+    </Algorithm>
+    <Algorithm Name="logicaFecha">
+      <ST><![CDATA[acmOn := FALSE;
+acmOff := TRUE;
+;]]></ST>
+    </Algorithm>
+    <Algorithm Name="logicaAbre">
+      <ST><![CDATA[acmOff := FALSE;
+acmOn := TRUE;
+;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>
