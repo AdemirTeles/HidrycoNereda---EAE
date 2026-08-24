@@ -29,6 +29,26 @@ namespace SE.Nereda.Symbols.Motor_VS
       this.cookie = cookie;
       this.eventIndex = eventIndex;
     }
+    public bool Get_Capacity(ref NxtControl.GuiFramework.VTQ<System.Boolean> value)
+    {
+      if (accessorService == null)
+        return false;
+      NxtControl.GuiFramework.VTQ<System.Boolean> var = default;
+      bool ret = accessorService.GetVTQValue<System.Boolean>(channelId, cookie, eventIndex, true,0, ref var);
+      if (ret) value = (NxtControl.GuiFramework.VTQ<System.Boolean>) var;
+      return ret;
+    }
+
+    public NxtControl.GuiFramework.VTQ<System.Boolean>? Capacity
+    { get {
+      if (accessorService == null)
+        return null;
+      NxtControl.GuiFramework.VTQ<System.Boolean> var = default;
+      bool ret = accessorService.GetVTQValue<System.Boolean>(channelId, cookie, eventIndex, true,0, ref var);
+      if (!ret) return null;
+      return (NxtControl.GuiFramework.VTQ<System.Boolean>) var;
+    }  }
+
 
   }
 
@@ -257,6 +277,43 @@ namespace SE.Nereda.Symbols.Motor_VS
 
   }
 
+  public class FB_CAPACITYEventArgs : System.EventArgs
+  {
+    IHMIAccessorService accessorService;
+    int channelId;
+    int cookie; 
+    int eventIndex;
+
+    public FB_CAPACITYEventArgs(int channelId, int cookie, int eventIndex)
+    {
+      this.accessorService = (IHMIAccessorService)ServiceProvider.GetService(typeof(IHMIAccessorService));
+      this.channelId = channelId;
+      this.cookie = cookie;
+      this.eventIndex = eventIndex;
+    }
+    public bool Get_Capacity(ref NxtControl.GuiFramework.VTQ<System.Boolean> value)
+    {
+      if (accessorService == null)
+        return false;
+      NxtControl.GuiFramework.VTQ<System.Boolean> var = default;
+      bool ret = accessorService.GetVTQValue<System.Boolean>(channelId, cookie, eventIndex, true,0, ref var);
+      if (ret) value = (NxtControl.GuiFramework.VTQ<System.Boolean>) var;
+      return ret;
+    }
+
+    public NxtControl.GuiFramework.VTQ<System.Boolean>? Capacity
+    { get {
+      if (accessorService == null)
+        return null;
+      NxtControl.GuiFramework.VTQ<System.Boolean> var = default;
+      bool ret = accessorService.GetVTQValue<System.Boolean>(channelId, cookie, eventIndex, true,0, ref var);
+      if (!ret) return null;
+      return (NxtControl.GuiFramework.VTQ<System.Boolean>) var;
+    }  }
+
+
+  }
+
 }
 
 namespace SE.Nereda.Symbols.Motor_VS
@@ -329,6 +386,8 @@ namespace SE.Nereda.Symbols.Motor_VS
 
     private event EventHandler<SE.Nereda.Symbols.Motor_VS.FB_FWDEventArgs> FB_FWD_Fired;
 
+    private event EventHandler<SE.Nereda.Symbols.Motor_VS.FB_CAPACITYEventArgs> FB_CAPACITY_Fired;
+
     protected override void OnEndInit()
     {
       if (LOAD_PERS_DATA_Fired != null)
@@ -343,6 +402,8 @@ namespace SE.Nereda.Symbols.Motor_VS
         AttachEventInput(4);
       if (FB_FWD_Fired != null)
         AttachEventInput(5);
+      if (FB_CAPACITY_Fired != null)
+        AttachEventInput(6);
 
     }
 
@@ -439,6 +500,21 @@ stack Trace:
               NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
 stack Trace:
 {4}","FB_FWD_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break; 
+        case 6:
+          if (FB_CAPACITY_Fired != null)
+          {
+            try
+            {
+              FB_CAPACITY_Fired(this, new SE.Nereda.Symbols.Motor_VS.FB_CAPACITYEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","FB_CAPACITY_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
             }
           }
         break; 
@@ -516,6 +592,8 @@ namespace SE.Nereda.Faceplates.Motor_VS
 
     private event EventHandler<SE.Nereda.Symbols.Motor_VS.FB_FWDEventArgs> FB_FWD_Fired;
 
+    private event EventHandler<SE.Nereda.Symbols.Motor_VS.FB_CAPACITYEventArgs> FB_CAPACITY_Fired;
+
     protected override void OnEndInit()
     {
       if (LOAD_PERS_DATA_Fired != null)
@@ -530,6 +608,8 @@ namespace SE.Nereda.Faceplates.Motor_VS
         AttachEventInput(4);
       if (FB_FWD_Fired != null)
         AttachEventInput(5);
+      if (FB_CAPACITY_Fired != null)
+        AttachEventInput(6);
 
     }
 
@@ -626,6 +706,21 @@ stack Trace:
               NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
 stack Trace:
 {4}","FB_FWD_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break; 
+        case 6:
+          if (FB_CAPACITY_Fired != null)
+          {
+            try
+            {
+              FB_CAPACITY_Fired(this, new SE.Nereda.Symbols.Motor_VS.FB_CAPACITYEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","FB_CAPACITY_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
             }
           }
         break; 
@@ -703,6 +798,8 @@ namespace SE.Nereda.Symbols.Motor_VS
 
     private event EventHandler<SE.Nereda.Symbols.Motor_VS.FB_FWDEventArgs> FB_FWD_Fired;
 
+    private event EventHandler<SE.Nereda.Symbols.Motor_VS.FB_CAPACITYEventArgs> FB_CAPACITY_Fired;
+
     protected override void OnEndInit()
     {
       if (LOAD_PERS_DATA_Fired != null)
@@ -717,6 +814,8 @@ namespace SE.Nereda.Symbols.Motor_VS
         AttachEventInput(4);
       if (FB_FWD_Fired != null)
         AttachEventInput(5);
+      if (FB_CAPACITY_Fired != null)
+        AttachEventInput(6);
 
     }
 
@@ -813,6 +912,21 @@ stack Trace:
               NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
 stack Trace:
 {4}","FB_FWD_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break; 
+        case 6:
+          if (FB_CAPACITY_Fired != null)
+          {
+            try
+            {
+              FB_CAPACITY_Fired(this, new SE.Nereda.Symbols.Motor_VS.FB_CAPACITYEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","FB_CAPACITY_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
             }
           }
         break; 
@@ -890,6 +1004,8 @@ namespace SE.Nereda.Symbols.Motor_VS
 
     private event EventHandler<SE.Nereda.Symbols.Motor_VS.FB_FWDEventArgs> FB_FWD_Fired;
 
+    private event EventHandler<SE.Nereda.Symbols.Motor_VS.FB_CAPACITYEventArgs> FB_CAPACITY_Fired;
+
     protected override void OnEndInit()
     {
       if (LOAD_PERS_DATA_Fired != null)
@@ -904,6 +1020,8 @@ namespace SE.Nereda.Symbols.Motor_VS
         AttachEventInput(4);
       if (FB_FWD_Fired != null)
         AttachEventInput(5);
+      if (FB_CAPACITY_Fired != null)
+        AttachEventInput(6);
 
     }
 
@@ -1000,6 +1118,21 @@ stack Trace:
               NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
 stack Trace:
 {4}","FB_FWD_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break; 
+        case 6:
+          if (FB_CAPACITY_Fired != null)
+          {
+            try
+            {
+              FB_CAPACITY_Fired(this, new SE.Nereda.Symbols.Motor_VS.FB_CAPACITYEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","FB_CAPACITY_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
             }
           }
         break; 
@@ -1077,6 +1210,8 @@ namespace SE.Nereda.Faceplates.Motor_VS
 
     private event EventHandler<SE.Nereda.Symbols.Motor_VS.FB_FWDEventArgs> FB_FWD_Fired;
 
+    private event EventHandler<SE.Nereda.Symbols.Motor_VS.FB_CAPACITYEventArgs> FB_CAPACITY_Fired;
+
     protected override void OnEndInit()
     {
       if (LOAD_PERS_DATA_Fired != null)
@@ -1091,6 +1226,8 @@ namespace SE.Nereda.Faceplates.Motor_VS
         AttachEventInput(4);
       if (FB_FWD_Fired != null)
         AttachEventInput(5);
+      if (FB_CAPACITY_Fired != null)
+        AttachEventInput(6);
 
     }
 
@@ -1187,6 +1324,21 @@ stack Trace:
               NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
 stack Trace:
 {4}","FB_FWD_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break; 
+        case 6:
+          if (FB_CAPACITY_Fired != null)
+          {
+            try
+            {
+              FB_CAPACITY_Fired(this, new SE.Nereda.Symbols.Motor_VS.FB_CAPACITYEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","FB_CAPACITY_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
             }
           }
         break; 
@@ -1264,6 +1416,8 @@ namespace SE.Nereda.Symbols.Motor_VS
 
     private event EventHandler<SE.Nereda.Symbols.Motor_VS.FB_FWDEventArgs> FB_FWD_Fired;
 
+    private event EventHandler<SE.Nereda.Symbols.Motor_VS.FB_CAPACITYEventArgs> FB_CAPACITY_Fired;
+
     protected override void OnEndInit()
     {
       if (LOAD_PERS_DATA_Fired != null)
@@ -1278,6 +1432,8 @@ namespace SE.Nereda.Symbols.Motor_VS
         AttachEventInput(4);
       if (FB_FWD_Fired != null)
         AttachEventInput(5);
+      if (FB_CAPACITY_Fired != null)
+        AttachEventInput(6);
 
     }
 
@@ -1374,6 +1530,21 @@ stack Trace:
               NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
 stack Trace:
 {4}","FB_FWD_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break; 
+        case 6:
+          if (FB_CAPACITY_Fired != null)
+          {
+            try
+            {
+              FB_CAPACITY_Fired(this, new SE.Nereda.Symbols.Motor_VS.FB_CAPACITYEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","FB_CAPACITY_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
             }
           }
         break; 
@@ -1451,6 +1622,8 @@ namespace SE.Nereda.Symbols.Motor_VS
 
     private event EventHandler<SE.Nereda.Symbols.Motor_VS.FB_FWDEventArgs> FB_FWD_Fired;
 
+    private event EventHandler<SE.Nereda.Symbols.Motor_VS.FB_CAPACITYEventArgs> FB_CAPACITY_Fired;
+
     protected override void OnEndInit()
     {
       if (LOAD_PERS_DATA_Fired != null)
@@ -1465,6 +1638,8 @@ namespace SE.Nereda.Symbols.Motor_VS
         AttachEventInput(4);
       if (FB_FWD_Fired != null)
         AttachEventInput(5);
+      if (FB_CAPACITY_Fired != null)
+        AttachEventInput(6);
 
     }
 
@@ -1561,6 +1736,21 @@ stack Trace:
               NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
 stack Trace:
 {4}","FB_FWD_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break; 
+        case 6:
+          if (FB_CAPACITY_Fired != null)
+          {
+            try
+            {
+              FB_CAPACITY_Fired(this, new SE.Nereda.Symbols.Motor_VS.FB_CAPACITYEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","FB_CAPACITY_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
             }
           }
         break; 
