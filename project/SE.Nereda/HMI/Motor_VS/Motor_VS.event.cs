@@ -29,26 +29,6 @@ namespace SE.Nereda.Symbols.Motor_VS
       this.cookie = cookie;
       this.eventIndex = eventIndex;
     }
-    public bool Get_Capacity(ref NxtControl.GuiFramework.VTQ<System.Boolean> value)
-    {
-      if (accessorService == null)
-        return false;
-      NxtControl.GuiFramework.VTQ<System.Boolean> var = default;
-      bool ret = accessorService.GetVTQValue<System.Boolean>(channelId, cookie, eventIndex, true,0, ref var);
-      if (ret) value = (NxtControl.GuiFramework.VTQ<System.Boolean>) var;
-      return ret;
-    }
-
-    public NxtControl.GuiFramework.VTQ<System.Boolean>? Capacity
-    { get {
-      if (accessorService == null)
-        return null;
-      NxtControl.GuiFramework.VTQ<System.Boolean> var = default;
-      bool ret = accessorService.GetVTQValue<System.Boolean>(channelId, cookie, eventIndex, true,0, ref var);
-      if (!ret) return null;
-      return (NxtControl.GuiFramework.VTQ<System.Boolean>) var;
-    }  }
-
 
   }
 
@@ -291,24 +271,24 @@ namespace SE.Nereda.Symbols.Motor_VS
       this.cookie = cookie;
       this.eventIndex = eventIndex;
     }
-    public bool Get_Capacity(ref NxtControl.GuiFramework.VTQ<System.Boolean> value)
+    public bool Get_Capacity(ref System.Single value)
     {
       if (accessorService == null)
         return false;
-      NxtControl.GuiFramework.VTQ<System.Boolean> var = default;
-      bool ret = accessorService.GetVTQValue<System.Boolean>(channelId, cookie, eventIndex, true,0, ref var);
-      if (ret) value = (NxtControl.GuiFramework.VTQ<System.Boolean>) var;
+      float var = 0;
+      bool ret = accessorService.GetFloatValue(channelId, cookie, eventIndex, true,0, ref var);
+      if (ret) value = (System.Single) var;
       return ret;
     }
 
-    public NxtControl.GuiFramework.VTQ<System.Boolean>? Capacity
+    public System.Single? Capacity
     { get {
       if (accessorService == null)
         return null;
-      NxtControl.GuiFramework.VTQ<System.Boolean> var = default;
-      bool ret = accessorService.GetVTQValue<System.Boolean>(channelId, cookie, eventIndex, true,0, ref var);
+      float var = 0;
+      bool ret = accessorService.GetFloatValue(channelId, cookie, eventIndex, true,0, ref var);
       if (!ret) return null;
-      return (NxtControl.GuiFramework.VTQ<System.Boolean>) var;
+      return (System.Single) var;
     }  }
 
 
