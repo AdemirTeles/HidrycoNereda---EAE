@@ -356,7 +356,7 @@ namespace Hidryco.HidrycoLib.Faceplates.CPress
 			propertyDictionary49.Add("Pen", new NxtControl.Drawing.Pen("LabelPen"));
 			this.stsNivelTanqueFloculador.Ranges.DefaultPropertyValues = propertyDictionary49;
 			this.stsNivelTanqueFloculador.Suffix = "%";
-			this.stsNivelTanqueFloculador.TagName = "stsNivelTanqueFloculador";
+			this.stsNivelTanqueFloculador.TagName = "STS_NIVEL_TANQUE_FLOCULADOR";
 			this.stsNivelTanqueFloculador.EndInit();
 			// 
 			// freeText3
@@ -380,7 +380,7 @@ namespace Hidryco.HidrycoLib.Faceplates.CPress
 			this.stsFS1.Ranges.Add(new NxtControl.GuiFramework.Range<short>(((short)(1)), propertyDictionary52));
 			propertyDictionary50.Add("Image", new NxtControl.Drawing.ImageHolder("Hidryco.HidrycoLib.HMI:Icons.water_32dp_FFFFFF_FILL0_wght500_GRAD0_opsz40"));
 			this.stsFS1.Ranges.DefaultPropertyValues = propertyDictionary50;
-			this.stsFS1.TagName = "stsFS1";
+			this.stsFS1.TagName = "STS_FS1";
 			this.stsFS1.EndInit();
 			// 
 			// stsFS1_1
@@ -404,7 +404,7 @@ namespace Hidryco.HidrycoLib.Faceplates.CPress
 			propertyDictionary53.Add("Brush", new NxtControl.Drawing.Brush("LabelBrush"));
 			propertyDictionary53.Add("Pen", new NxtControl.Drawing.Pen("LabelPen"));
 			this.stsFS1_1.Ranges.DefaultPropertyValues = propertyDictionary53;
-			this.stsFS1_1.TagName = "stsFS1";
+			this.stsFS1_1.TagName = "STS_FS1";
 			this.stsFS1_1.EndInit();
 			// 
 			// freeText4
@@ -446,7 +446,7 @@ namespace Hidryco.HidrycoLib.Faceplates.CPress
 			this.stsZSAH1.Ranges.Add(new NxtControl.GuiFramework.Range<short>(((short)(1)), propertyDictionary58));
 			propertyDictionary56.Add("Image", new NxtControl.Drawing.ImageHolder());
 			this.stsZSAH1.Ranges.DefaultPropertyValues = propertyDictionary56;
-			this.stsZSAH1.TagName = "stsZSAH1";
+			this.stsZSAH1.TagName = "STS_ZSAH1";
 			this.stsZSAH1.EndInit();
 			// 
 			// line12
@@ -478,7 +478,7 @@ namespace Hidryco.HidrycoLib.Faceplates.CPress
 			this.stsZSAH2.Ranges.Add(new NxtControl.GuiFramework.Range<short>(((short)(1)), propertyDictionary61));
 			propertyDictionary59.Add("Image", new NxtControl.Drawing.ImageHolder());
 			this.stsZSAH2.Ranges.DefaultPropertyValues = propertyDictionary59;
-			this.stsZSAH2.TagName = "stsZSAH2";
+			this.stsZSAH2.TagName = "STS_ZSAH2";
 			this.stsZSAH2.EndInit();
 			// 
 			// stsZSAH1_1
@@ -502,7 +502,7 @@ namespace Hidryco.HidrycoLib.Faceplates.CPress
 			propertyDictionary62.Add("Brush", new NxtControl.Drawing.Brush("LabelBrush"));
 			propertyDictionary62.Add("Pen", new NxtControl.Drawing.Pen("LabelPen"));
 			this.stsZSAH1_1.Ranges.DefaultPropertyValues = propertyDictionary62;
-			this.stsZSAH1_1.TagName = "stsZSAH1";
+			this.stsZSAH1_1.TagName = "STS_ZSAH1";
 			this.stsZSAH1_1.EndInit();
 			// 
 			// stsZSAH2_1
@@ -526,7 +526,7 @@ namespace Hidryco.HidrycoLib.Faceplates.CPress
 			propertyDictionary65.Add("Brush", new NxtControl.Drawing.Brush("LabelBrush"));
 			propertyDictionary65.Add("Pen", new NxtControl.Drawing.Pen("LabelPen"));
 			this.stsZSAH2_1.Ranges.DefaultPropertyValues = propertyDictionary65;
-			this.stsZSAH2_1.TagName = "stsZSAH2";
+			this.stsZSAH2_1.TagName = "STS_ZSAH2";
 			this.stsZSAH2_1.EndInit();
 			// 
 			// freeText7
@@ -587,7 +587,7 @@ namespace Hidryco.HidrycoLib.Faceplates.CPress
 			this.stsAlarmeAcionado.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
 			this.stsAlarmeAcionado.Name = "stsAlarmeAcionado";
 			this.stsAlarmeAcionado.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
-			this.stsAlarmeAcionado.TagName = "stsAlarmeAcionado";
+			this.stsAlarmeAcionado.TagName = "STS_ALARME_ACIONADO";
 			this.stsAlarmeAcionado.Value = ((short)(0));
 			this.stsAlarmeAcionado.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.StsAlarmeAcionadoValueChanged);
 			this.stsAlarmeAcionado.EndInit();
@@ -607,7 +607,7 @@ namespace Hidryco.HidrycoLib.Faceplates.CPress
 			this.stsEmergencia.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
 			this.stsEmergencia.Name = "stsEmergencia";
 			this.stsEmergencia.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
-			this.stsEmergencia.TagName = "stsEmergencia";
+			this.stsEmergencia.TagName = "STS_EMERGENCIA";
 			this.stsEmergencia.Value = ((short)(0));
 			this.stsEmergencia.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.StsEmergenciaValueChanged);
 			this.stsEmergencia.EndInit();
@@ -637,7 +637,7 @@ namespace Hidryco.HidrycoLib.Faceplates.CPress
 			propertyDictionary68.Add("Brush", new NxtControl.Drawing.Brush("LabelBrush"));
 			propertyDictionary68.Add("Pen", new NxtControl.Drawing.Pen("LabelPen"));
 			this.stsFuncionamentoM2.Ranges.DefaultPropertyValues = propertyDictionary68;
-			this.stsFuncionamentoM2.TagName = "stsFuncionamentoM2";
+			this.stsFuncionamentoM2.TagName = "STS_FUNCIONAMENTO_M2";
 			this.stsFuncionamentoM2.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleRight;
 			this.stsFuncionamentoM2.EndInit();
 			// 
@@ -649,7 +649,7 @@ namespace Hidryco.HidrycoLib.Faceplates.CPress
 			this.stsVS1.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
 			this.stsVS1.Name = "stsVS1";
 			this.stsVS1.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
-			this.stsVS1.TagName = "stsVS1";
+			this.stsVS1.TagName = "STS_VS1";
 			this.stsVS1.Value = ((short)(0));
 			this.stsVS1.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.StsVS1ValueChanged);
 			this.stsVS1.EndInit();
@@ -662,7 +662,7 @@ namespace Hidryco.HidrycoLib.Faceplates.CPress
 			this.stsFuncionamentoM1.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
 			this.stsFuncionamentoM1.Name = "stsFuncionamentoM1";
 			this.stsFuncionamentoM1.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
-			this.stsFuncionamentoM1.TagName = "stsFuncionamentoM1";
+			this.stsFuncionamentoM1.TagName = "STS_FUNCIONAMENTO_M1";
 			this.stsFuncionamentoM1.Value = ((short)(0));
 			this.stsFuncionamentoM1.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.StsAnimacaoM01ValueChanged);
 			this.stsFuncionamentoM1.EndInit();
@@ -675,7 +675,7 @@ namespace Hidryco.HidrycoLib.Faceplates.CPress
 			this.stsFuncionamentoM2_1.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
 			this.stsFuncionamentoM2_1.Name = "stsFuncionamentoM2_1";
 			this.stsFuncionamentoM2_1.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
-			this.stsFuncionamentoM2_1.TagName = "stsFuncionamentoM2";
+			this.stsFuncionamentoM2_1.TagName = "STS_FUNCIONAMENTO_M2";
 			this.stsFuncionamentoM2_1.Value = ((short)(0));
 			this.stsFuncionamentoM2_1.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.StsAnimacaoM02ValueChanged);
 			this.stsFuncionamentoM2_1.EndInit();
@@ -688,7 +688,7 @@ namespace Hidryco.HidrycoLib.Faceplates.CPress
 			this.stsFuncionamentoM3.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
 			this.stsFuncionamentoM3.Name = "stsFuncionamentoM3";
 			this.stsFuncionamentoM3.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
-			this.stsFuncionamentoM3.TagName = "stsFuncionamentoM3";
+			this.stsFuncionamentoM3.TagName = "STS_FUNCIONAMENTO_M3";
 			this.stsFuncionamentoM3.Value = ((short)(0));
 			this.stsFuncionamentoM3.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.StsAnimacaoM03ValueChanged);
 			this.stsFuncionamentoM3.EndInit();
@@ -701,7 +701,7 @@ namespace Hidryco.HidrycoLib.Faceplates.CPress
 			this.stsFuncionamentoM4.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
 			this.stsFuncionamentoM4.Name = "stsFuncionamentoM4";
 			this.stsFuncionamentoM4.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
-			this.stsFuncionamentoM4.TagName = "stsFuncionamentoM4";
+			this.stsFuncionamentoM4.TagName = "STS_FUNCIONAMENTO_M4";
 			this.stsFuncionamentoM4.Value = ((short)(0));
 			this.stsFuncionamentoM4.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.StsAnimacaoM04ValueChanged);
 			this.stsFuncionamentoM4.EndInit();
@@ -714,7 +714,7 @@ namespace Hidryco.HidrycoLib.Faceplates.CPress
 			this.stsFuncionamentoM5.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
 			this.stsFuncionamentoM5.Name = "stsFuncionamentoM5";
 			this.stsFuncionamentoM5.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
-			this.stsFuncionamentoM5.TagName = "stsFuncionamentoM5";
+			this.stsFuncionamentoM5.TagName = "STS_FUNCIONAMENTO_M5";
 			this.stsFuncionamentoM5.Value = ((short)(0));
 			this.stsFuncionamentoM5.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.StsAnimacaoM05ValueChanged);
 			this.stsFuncionamentoM5.EndInit();
@@ -740,7 +740,7 @@ namespace Hidryco.HidrycoLib.Faceplates.CPress
 			this.stsNivelTanqueFloculador_1.Radius = 20D;
 			this.stsNivelTanqueFloculador_1.ScaleColor = new NxtControl.Drawing.Color("Transparent");
 			this.stsNivelTanqueFloculador_1.ScaleDisabledColor = new NxtControl.Drawing.Color("Transparent");
-			this.stsNivelTanqueFloculador_1.TagName = "stsNivelTanqueFloculador";
+			this.stsNivelTanqueFloculador_1.TagName = "STS_NIVEL_TANQUE_FLOCULADOR";
 			this.stsNivelTanqueFloculador_1.TextDisabledColor = new NxtControl.Drawing.Color("Transparent");
 			this.stsNivelTanqueFloculador_1.TickLength = 5;
 			this.stsNivelTanqueFloculador_1.Value = ((short)(0));

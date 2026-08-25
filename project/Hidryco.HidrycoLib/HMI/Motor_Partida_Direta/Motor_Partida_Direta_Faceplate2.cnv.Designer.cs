@@ -43,7 +43,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Motor_Partida_Direta
 			this.stpTempoFalhaLigamento.Pen = new NxtControl.Drawing.Pen("TextBoxPen");
 			this.stpTempoFalhaLigamento.SetColor = new NxtControl.Drawing.Color("Yellow");
 			this.stpTempoFalhaLigamento.Suffix = "seg";
-			this.stpTempoFalhaLigamento.TagName = "stpTempoFalhaLigamento";
+			this.stpTempoFalhaLigamento.TagName = "STP_FALHA_LIGAMENTO";
 			this.stpTempoFalhaLigamento.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
 			this.stpTempoFalhaLigamento.Value = ((ushort)(0));
 			this.stpTempoFalhaLigamento.EndInit();
@@ -68,7 +68,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Motor_Partida_Direta
 			this.textBox_11.Pen = new NxtControl.Drawing.Pen("TextBoxPen");
 			this.textBox_11.SetColor = new NxtControl.Drawing.Color("Yellow");
 			this.textBox_11.Suffix = "seg";
-			this.textBox_11.TagName = "stpTempoFalhaDesligamento";
+			this.textBox_11.TagName = "STP_FALHA_DESLIGAMENTO";
 			this.textBox_11.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
 			this.textBox_11.Value = ((ushort)(0));
 			this.textBox_11.EndInit();

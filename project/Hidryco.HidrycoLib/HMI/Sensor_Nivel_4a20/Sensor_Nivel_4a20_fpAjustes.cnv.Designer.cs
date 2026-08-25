@@ -46,7 +46,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_Nivel_4a20
 			this.stpRangeMinimo.NumberBase = NxtControl.GuiFramework.NumberBase.Decimal;
 			this.stpRangeMinimo.Pen = new NxtControl.Drawing.Pen("TextBoxPen");
 			this.stpRangeMinimo.SetColor = new NxtControl.Drawing.Color("Yellow");
-			this.stpRangeMinimo.TagName = "stpRangeMinimo";
+			this.stpRangeMinimo.TagName = "STP_RANGE_MAXIMO";
 			this.stpRangeMinimo.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
 			this.stpRangeMinimo.Value = 0F;
 			this.stpRangeMinimo.EndInit();
@@ -70,7 +70,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_Nivel_4a20
 			this.stpRangeMaximo.NumberBase = NxtControl.GuiFramework.NumberBase.Decimal;
 			this.stpRangeMaximo.Pen = new NxtControl.Drawing.Pen("TextBoxPen");
 			this.stpRangeMaximo.SetColor = new NxtControl.Drawing.Color("Yellow");
-			this.stpRangeMaximo.TagName = "stpRangeMaximo";
+			this.stpRangeMaximo.TagName = "STP_RANGE_MINIMO";
 			this.stpRangeMaximo.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
 			this.stpRangeMaximo.Value = 0F;
 			this.stpRangeMaximo.EndInit();
@@ -108,7 +108,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_Nivel_4a20
 			this.stpAlturaMaxima.NumberBase = NxtControl.GuiFramework.NumberBase.Decimal;
 			this.stpAlturaMaxima.Pen = new NxtControl.Drawing.Pen("TextBoxPen");
 			this.stpAlturaMaxima.SetColor = new NxtControl.Drawing.Color("Yellow");
-			this.stpAlturaMaxima.TagName = "stpAlturaMaxima";
+			this.stpAlturaMaxima.TagName = "STP_ALTURA_MAXIMA";
 			this.stpAlturaMaxima.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
 			this.stpAlturaMaxima.Value = 0F;
 			this.stpAlturaMaxima.EndInit();
@@ -131,7 +131,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_Nivel_4a20
 			this.cmdHabilitaSensor.Font = new NxtControl.Drawing.Font("ButtonFont");
 			this.cmdHabilitaSensor.FontScale = false;
 			this.cmdHabilitaSensor.Name = "cmdHabilitaSensor";
-			this.cmdHabilitaSensor.TagName = "cmdHabilitaSensor";
+			this.cmdHabilitaSensor.TagName = "CMD_HABILITA_SENSOR";
 			this.cmdHabilitaSensor.TrueImage = new NxtControl.Drawing.ImageHolder();
 			this.cmdHabilitaSensor.TrueImageDisabled = new NxtControl.Drawing.ImageHolder();
 			this.cmdHabilitaSensor.TrueText = "Habilitado";

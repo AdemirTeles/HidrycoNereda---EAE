@@ -259,11 +259,11 @@ namespace Hidryco.HidrycoLib.Symbols.Motor_Partida_Direta
     public E_RESET_FALHAEventArgs()
     {
     }
-    private System.Boolean? cmdResetFalha_field = null;
-    public System.Boolean? cmdResetFalha
+    private System.Boolean? CMD_RESET_FALHA_field = null;
+    public System.Boolean? CMD_RESET_FALHA
     {
-       get { return cmdResetFalha_field; }
-       set { cmdResetFalha_field = value; }
+       get { return CMD_RESET_FALHA_field; }
+       set { CMD_RESET_FALHA_field = value; }
     }
 
   }
@@ -273,11 +273,11 @@ namespace Hidryco.HidrycoLib.Symbols.Motor_Partida_Direta
     public E_RESET_HORIMETROEventArgs()
     {
     }
-    private System.Boolean? cmdResetHorimetro_field = null;
-    public System.Boolean? cmdResetHorimetro
+    private System.Boolean? CMD_RESET_HORIMETRO_field = null;
+    public System.Boolean? CMD_RESET_HORIMETRO
     {
-       get { return cmdResetHorimetro_field; }
-       set { cmdResetHorimetro_field = value; }
+       get { return CMD_RESET_HORIMETRO_field; }
+       set { CMD_RESET_HORIMETRO_field = value; }
     }
 
   }
@@ -287,11 +287,11 @@ namespace Hidryco.HidrycoLib.Symbols.Motor_Partida_Direta
     public E_RESET_NUMERO_PARTIDASEventArgs()
     {
     }
-    private System.Boolean? cmdResetNumeroPartida_field = null;
-    public System.Boolean? cmdResetNumeroPartida
+    private System.Boolean? CMD_RESET_NUMERO_PARTIDA_field = null;
+    public System.Boolean? CMD_RESET_NUMERO_PARTIDA
     {
-       get { return cmdResetNumeroPartida_field; }
-       set { cmdResetNumeroPartida_field = value; }
+       get { return CMD_RESET_NUMERO_PARTIDA_field; }
+       set { CMD_RESET_NUMERO_PARTIDA_field = value; }
     }
 
   }
@@ -301,11 +301,11 @@ namespace Hidryco.HidrycoLib.Symbols.Motor_Partida_Direta
     public E_STS_AUTOMATICOEventArgs()
     {
     }
-    private System.Boolean? stsAutomatico_field = null;
-    public System.Boolean? stsAutomatico
+    private System.Boolean? STS_AUTOMATICO_field = null;
+    public System.Boolean? STS_AUTOMATICO
     {
-       get { return stsAutomatico_field; }
-       set { stsAutomatico_field = value; }
+       get { return STS_AUTOMATICO_field; }
+       set { STS_AUTOMATICO_field = value; }
     }
 
   }
@@ -315,11 +315,11 @@ namespace Hidryco.HidrycoLib.Symbols.Motor_Partida_Direta
     public E_CMD_MANUALEventArgs()
     {
     }
-    private System.Boolean? cmdManual_field = null;
-    public System.Boolean? cmdManual
+    private System.Boolean? CMD_MANUAL_field = null;
+    public System.Boolean? CMD_MANUAL
     {
-       get { return cmdManual_field; }
-       set { cmdManual_field = value; }
+       get { return CMD_MANUAL_field; }
+       set { CMD_MANUAL_field = value; }
     }
 
   }
@@ -329,17 +329,17 @@ namespace Hidryco.HidrycoLib.Symbols.Motor_Partida_Direta
     public E_AJUSTE_STPEventArgs()
     {
     }
-    private System.UInt16? stpTempoFalhaLigamento_field = null;
-    public System.UInt16? stpTempoFalhaLigamento
+    private System.UInt16? STP_FALHA_LIGAMENTO_field = null;
+    public System.UInt16? STP_FALHA_LIGAMENTO
     {
-       get { return stpTempoFalhaLigamento_field; }
-       set { stpTempoFalhaLigamento_field = value; }
+       get { return STP_FALHA_LIGAMENTO_field; }
+       set { STP_FALHA_LIGAMENTO_field = value; }
     }
-    private System.UInt16? stpTempoFalhaDesligamento_field = null;
-    public System.UInt16? stpTempoFalhaDesligamento
+    private System.UInt16? STP_FALHA_DESLIGAMENTO_field = null;
+    public System.UInt16? STP_FALHA_DESLIGAMENTO
     {
-       get { return stpTempoFalhaDesligamento_field; }
-       set { stpTempoFalhaDesligamento_field = value; }
+       get { return STP_FALHA_DESLIGAMENTO_field; }
+       set { STP_FALHA_DESLIGAMENTO_field = value; }
     }
 
   }
@@ -403,102 +403,102 @@ stack Trace:
 
       }
     }
-    public bool FireEvent_E_RESET_FALHA(System.Boolean cmdResetFalha)
+    public bool FireEvent_E_RESET_FALHA(System.Boolean CMD_RESET_FALHA)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {cmdResetFalha});
+      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {CMD_RESET_FALHA});
     }
     public bool FireEvent_E_RESET_FALHA(Hidryco.HidrycoLib.Symbols.Motor_Partida_Direta.E_RESET_FALHAEventArgs ea)
     {
       object[] _values_ = new object[1];
-      if (ea.cmdResetFalha.HasValue) _values_[0] = ea.cmdResetFalha.Value;
+      if (ea.CMD_RESET_FALHA.HasValue) _values_[0] = ea.CMD_RESET_FALHA.Value;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
-    public bool FireEvent_E_RESET_FALHA(System.Boolean cmdResetFalha, bool ignore_cmdResetFalha)
+    public bool FireEvent_E_RESET_FALHA(System.Boolean CMD_RESET_FALHA, bool ignore_CMD_RESET_FALHA)
     {
       object[] _values_ = new object[1];
-      if (!ignore_cmdResetFalha) _values_[0] = cmdResetFalha;
+      if (!ignore_CMD_RESET_FALHA) _values_[0] = CMD_RESET_FALHA;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
-    public bool FireEvent_E_RESET_HORIMETRO(System.Boolean cmdResetHorimetro)
+    public bool FireEvent_E_RESET_HORIMETRO(System.Boolean CMD_RESET_HORIMETRO)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {cmdResetHorimetro});
+      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {CMD_RESET_HORIMETRO});
     }
     public bool FireEvent_E_RESET_HORIMETRO(Hidryco.HidrycoLib.Symbols.Motor_Partida_Direta.E_RESET_HORIMETROEventArgs ea)
     {
       object[] _values_ = new object[1];
-      if (ea.cmdResetHorimetro.HasValue) _values_[0] = ea.cmdResetHorimetro.Value;
+      if (ea.CMD_RESET_HORIMETRO.HasValue) _values_[0] = ea.CMD_RESET_HORIMETRO.Value;
       return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
     }
-    public bool FireEvent_E_RESET_HORIMETRO(System.Boolean cmdResetHorimetro, bool ignore_cmdResetHorimetro)
+    public bool FireEvent_E_RESET_HORIMETRO(System.Boolean CMD_RESET_HORIMETRO, bool ignore_CMD_RESET_HORIMETRO)
     {
       object[] _values_ = new object[1];
-      if (!ignore_cmdResetHorimetro) _values_[0] = cmdResetHorimetro;
+      if (!ignore_CMD_RESET_HORIMETRO) _values_[0] = CMD_RESET_HORIMETRO;
       return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
     }
-    public bool FireEvent_E_RESET_NUMERO_PARTIDAS(System.Boolean cmdResetNumeroPartida)
+    public bool FireEvent_E_RESET_NUMERO_PARTIDAS(System.Boolean CMD_RESET_NUMERO_PARTIDA)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(2, new object[] {cmdResetNumeroPartida});
+      return ((IHMIAccessorOutput)this).FireEvent(2, new object[] {CMD_RESET_NUMERO_PARTIDA});
     }
     public bool FireEvent_E_RESET_NUMERO_PARTIDAS(Hidryco.HidrycoLib.Symbols.Motor_Partida_Direta.E_RESET_NUMERO_PARTIDASEventArgs ea)
     {
       object[] _values_ = new object[1];
-      if (ea.cmdResetNumeroPartida.HasValue) _values_[0] = ea.cmdResetNumeroPartida.Value;
+      if (ea.CMD_RESET_NUMERO_PARTIDA.HasValue) _values_[0] = ea.CMD_RESET_NUMERO_PARTIDA.Value;
       return ((IHMIAccessorOutput)this).FireEvent(2, _values_);
     }
-    public bool FireEvent_E_RESET_NUMERO_PARTIDAS(System.Boolean cmdResetNumeroPartida, bool ignore_cmdResetNumeroPartida)
+    public bool FireEvent_E_RESET_NUMERO_PARTIDAS(System.Boolean CMD_RESET_NUMERO_PARTIDA, bool ignore_CMD_RESET_NUMERO_PARTIDA)
     {
       object[] _values_ = new object[1];
-      if (!ignore_cmdResetNumeroPartida) _values_[0] = cmdResetNumeroPartida;
+      if (!ignore_CMD_RESET_NUMERO_PARTIDA) _values_[0] = CMD_RESET_NUMERO_PARTIDA;
       return ((IHMIAccessorOutput)this).FireEvent(2, _values_);
     }
-    public bool FireEvent_E_STS_AUTOMATICO(System.Boolean stsAutomatico)
+    public bool FireEvent_E_STS_AUTOMATICO(System.Boolean STS_AUTOMATICO)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(3, new object[] {stsAutomatico});
+      return ((IHMIAccessorOutput)this).FireEvent(3, new object[] {STS_AUTOMATICO});
     }
     public bool FireEvent_E_STS_AUTOMATICO(Hidryco.HidrycoLib.Symbols.Motor_Partida_Direta.E_STS_AUTOMATICOEventArgs ea)
     {
       object[] _values_ = new object[1];
-      if (ea.stsAutomatico.HasValue) _values_[0] = ea.stsAutomatico.Value;
+      if (ea.STS_AUTOMATICO.HasValue) _values_[0] = ea.STS_AUTOMATICO.Value;
       return ((IHMIAccessorOutput)this).FireEvent(3, _values_);
     }
-    public bool FireEvent_E_STS_AUTOMATICO(System.Boolean stsAutomatico, bool ignore_stsAutomatico)
+    public bool FireEvent_E_STS_AUTOMATICO(System.Boolean STS_AUTOMATICO, bool ignore_STS_AUTOMATICO)
     {
       object[] _values_ = new object[1];
-      if (!ignore_stsAutomatico) _values_[0] = stsAutomatico;
+      if (!ignore_STS_AUTOMATICO) _values_[0] = STS_AUTOMATICO;
       return ((IHMIAccessorOutput)this).FireEvent(3, _values_);
     }
-    public bool FireEvent_E_CMD_MANUAL(System.Boolean cmdManual)
+    public bool FireEvent_E_CMD_MANUAL(System.Boolean CMD_MANUAL)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(4, new object[] {cmdManual});
+      return ((IHMIAccessorOutput)this).FireEvent(4, new object[] {CMD_MANUAL});
     }
     public bool FireEvent_E_CMD_MANUAL(Hidryco.HidrycoLib.Symbols.Motor_Partida_Direta.E_CMD_MANUALEventArgs ea)
     {
       object[] _values_ = new object[1];
-      if (ea.cmdManual.HasValue) _values_[0] = ea.cmdManual.Value;
+      if (ea.CMD_MANUAL.HasValue) _values_[0] = ea.CMD_MANUAL.Value;
       return ((IHMIAccessorOutput)this).FireEvent(4, _values_);
     }
-    public bool FireEvent_E_CMD_MANUAL(System.Boolean cmdManual, bool ignore_cmdManual)
+    public bool FireEvent_E_CMD_MANUAL(System.Boolean CMD_MANUAL, bool ignore_CMD_MANUAL)
     {
       object[] _values_ = new object[1];
-      if (!ignore_cmdManual) _values_[0] = cmdManual;
+      if (!ignore_CMD_MANUAL) _values_[0] = CMD_MANUAL;
       return ((IHMIAccessorOutput)this).FireEvent(4, _values_);
     }
-    public bool FireEvent_E_AJUSTE_STP(System.UInt16 stpTempoFalhaLigamento, System.UInt16 stpTempoFalhaDesligamento)
+    public bool FireEvent_E_AJUSTE_STP(System.UInt16 STP_FALHA_LIGAMENTO, System.UInt16 STP_FALHA_DESLIGAMENTO)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(5, new object[] {stpTempoFalhaLigamento, stpTempoFalhaDesligamento});
+      return ((IHMIAccessorOutput)this).FireEvent(5, new object[] {STP_FALHA_LIGAMENTO, STP_FALHA_DESLIGAMENTO});
     }
     public bool FireEvent_E_AJUSTE_STP(Hidryco.HidrycoLib.Symbols.Motor_Partida_Direta.E_AJUSTE_STPEventArgs ea)
     {
       object[] _values_ = new object[2];
-      if (ea.stpTempoFalhaLigamento.HasValue) _values_[0] = ea.stpTempoFalhaLigamento.Value;
-      if (ea.stpTempoFalhaDesligamento.HasValue) _values_[1] = ea.stpTempoFalhaDesligamento.Value;
+      if (ea.STP_FALHA_LIGAMENTO.HasValue) _values_[0] = ea.STP_FALHA_LIGAMENTO.Value;
+      if (ea.STP_FALHA_DESLIGAMENTO.HasValue) _values_[1] = ea.STP_FALHA_DESLIGAMENTO.Value;
       return ((IHMIAccessorOutput)this).FireEvent(5, _values_);
     }
-    public bool FireEvent_E_AJUSTE_STP(System.UInt16 stpTempoFalhaLigamento, bool ignore_stpTempoFalhaLigamento, System.UInt16 stpTempoFalhaDesligamento, bool ignore_stpTempoFalhaDesligamento)
+    public bool FireEvent_E_AJUSTE_STP(System.UInt16 STP_FALHA_LIGAMENTO, bool ignore_STP_FALHA_LIGAMENTO, System.UInt16 STP_FALHA_DESLIGAMENTO, bool ignore_STP_FALHA_DESLIGAMENTO)
     {
       object[] _values_ = new object[2];
-      if (!ignore_stpTempoFalhaLigamento) _values_[0] = stpTempoFalhaLigamento;
-      if (!ignore_stpTempoFalhaDesligamento) _values_[1] = stpTempoFalhaDesligamento;
+      if (!ignore_STP_FALHA_LIGAMENTO) _values_[0] = STP_FALHA_LIGAMENTO;
+      if (!ignore_STP_FALHA_DESLIGAMENTO) _values_[1] = STP_FALHA_DESLIGAMENTO;
       return ((IHMIAccessorOutput)this).FireEvent(5, _values_);
     }
 
@@ -562,102 +562,102 @@ stack Trace:
 
       }
     }
-    public bool FireEvent_E_RESET_FALHA(System.Boolean cmdResetFalha)
+    public bool FireEvent_E_RESET_FALHA(System.Boolean CMD_RESET_FALHA)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {cmdResetFalha});
+      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {CMD_RESET_FALHA});
     }
     public bool FireEvent_E_RESET_FALHA(Hidryco.HidrycoLib.Symbols.Motor_Partida_Direta.E_RESET_FALHAEventArgs ea)
     {
       object[] _values_ = new object[1];
-      if (ea.cmdResetFalha.HasValue) _values_[0] = ea.cmdResetFalha.Value;
+      if (ea.CMD_RESET_FALHA.HasValue) _values_[0] = ea.CMD_RESET_FALHA.Value;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
-    public bool FireEvent_E_RESET_FALHA(System.Boolean cmdResetFalha, bool ignore_cmdResetFalha)
+    public bool FireEvent_E_RESET_FALHA(System.Boolean CMD_RESET_FALHA, bool ignore_CMD_RESET_FALHA)
     {
       object[] _values_ = new object[1];
-      if (!ignore_cmdResetFalha) _values_[0] = cmdResetFalha;
+      if (!ignore_CMD_RESET_FALHA) _values_[0] = CMD_RESET_FALHA;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
-    public bool FireEvent_E_RESET_HORIMETRO(System.Boolean cmdResetHorimetro)
+    public bool FireEvent_E_RESET_HORIMETRO(System.Boolean CMD_RESET_HORIMETRO)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {cmdResetHorimetro});
+      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {CMD_RESET_HORIMETRO});
     }
     public bool FireEvent_E_RESET_HORIMETRO(Hidryco.HidrycoLib.Symbols.Motor_Partida_Direta.E_RESET_HORIMETROEventArgs ea)
     {
       object[] _values_ = new object[1];
-      if (ea.cmdResetHorimetro.HasValue) _values_[0] = ea.cmdResetHorimetro.Value;
+      if (ea.CMD_RESET_HORIMETRO.HasValue) _values_[0] = ea.CMD_RESET_HORIMETRO.Value;
       return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
     }
-    public bool FireEvent_E_RESET_HORIMETRO(System.Boolean cmdResetHorimetro, bool ignore_cmdResetHorimetro)
+    public bool FireEvent_E_RESET_HORIMETRO(System.Boolean CMD_RESET_HORIMETRO, bool ignore_CMD_RESET_HORIMETRO)
     {
       object[] _values_ = new object[1];
-      if (!ignore_cmdResetHorimetro) _values_[0] = cmdResetHorimetro;
+      if (!ignore_CMD_RESET_HORIMETRO) _values_[0] = CMD_RESET_HORIMETRO;
       return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
     }
-    public bool FireEvent_E_RESET_NUMERO_PARTIDAS(System.Boolean cmdResetNumeroPartida)
+    public bool FireEvent_E_RESET_NUMERO_PARTIDAS(System.Boolean CMD_RESET_NUMERO_PARTIDA)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(2, new object[] {cmdResetNumeroPartida});
+      return ((IHMIAccessorOutput)this).FireEvent(2, new object[] {CMD_RESET_NUMERO_PARTIDA});
     }
     public bool FireEvent_E_RESET_NUMERO_PARTIDAS(Hidryco.HidrycoLib.Symbols.Motor_Partida_Direta.E_RESET_NUMERO_PARTIDASEventArgs ea)
     {
       object[] _values_ = new object[1];
-      if (ea.cmdResetNumeroPartida.HasValue) _values_[0] = ea.cmdResetNumeroPartida.Value;
+      if (ea.CMD_RESET_NUMERO_PARTIDA.HasValue) _values_[0] = ea.CMD_RESET_NUMERO_PARTIDA.Value;
       return ((IHMIAccessorOutput)this).FireEvent(2, _values_);
     }
-    public bool FireEvent_E_RESET_NUMERO_PARTIDAS(System.Boolean cmdResetNumeroPartida, bool ignore_cmdResetNumeroPartida)
+    public bool FireEvent_E_RESET_NUMERO_PARTIDAS(System.Boolean CMD_RESET_NUMERO_PARTIDA, bool ignore_CMD_RESET_NUMERO_PARTIDA)
     {
       object[] _values_ = new object[1];
-      if (!ignore_cmdResetNumeroPartida) _values_[0] = cmdResetNumeroPartida;
+      if (!ignore_CMD_RESET_NUMERO_PARTIDA) _values_[0] = CMD_RESET_NUMERO_PARTIDA;
       return ((IHMIAccessorOutput)this).FireEvent(2, _values_);
     }
-    public bool FireEvent_E_STS_AUTOMATICO(System.Boolean stsAutomatico)
+    public bool FireEvent_E_STS_AUTOMATICO(System.Boolean STS_AUTOMATICO)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(3, new object[] {stsAutomatico});
+      return ((IHMIAccessorOutput)this).FireEvent(3, new object[] {STS_AUTOMATICO});
     }
     public bool FireEvent_E_STS_AUTOMATICO(Hidryco.HidrycoLib.Symbols.Motor_Partida_Direta.E_STS_AUTOMATICOEventArgs ea)
     {
       object[] _values_ = new object[1];
-      if (ea.stsAutomatico.HasValue) _values_[0] = ea.stsAutomatico.Value;
+      if (ea.STS_AUTOMATICO.HasValue) _values_[0] = ea.STS_AUTOMATICO.Value;
       return ((IHMIAccessorOutput)this).FireEvent(3, _values_);
     }
-    public bool FireEvent_E_STS_AUTOMATICO(System.Boolean stsAutomatico, bool ignore_stsAutomatico)
+    public bool FireEvent_E_STS_AUTOMATICO(System.Boolean STS_AUTOMATICO, bool ignore_STS_AUTOMATICO)
     {
       object[] _values_ = new object[1];
-      if (!ignore_stsAutomatico) _values_[0] = stsAutomatico;
+      if (!ignore_STS_AUTOMATICO) _values_[0] = STS_AUTOMATICO;
       return ((IHMIAccessorOutput)this).FireEvent(3, _values_);
     }
-    public bool FireEvent_E_CMD_MANUAL(System.Boolean cmdManual)
+    public bool FireEvent_E_CMD_MANUAL(System.Boolean CMD_MANUAL)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(4, new object[] {cmdManual});
+      return ((IHMIAccessorOutput)this).FireEvent(4, new object[] {CMD_MANUAL});
     }
     public bool FireEvent_E_CMD_MANUAL(Hidryco.HidrycoLib.Symbols.Motor_Partida_Direta.E_CMD_MANUALEventArgs ea)
     {
       object[] _values_ = new object[1];
-      if (ea.cmdManual.HasValue) _values_[0] = ea.cmdManual.Value;
+      if (ea.CMD_MANUAL.HasValue) _values_[0] = ea.CMD_MANUAL.Value;
       return ((IHMIAccessorOutput)this).FireEvent(4, _values_);
     }
-    public bool FireEvent_E_CMD_MANUAL(System.Boolean cmdManual, bool ignore_cmdManual)
+    public bool FireEvent_E_CMD_MANUAL(System.Boolean CMD_MANUAL, bool ignore_CMD_MANUAL)
     {
       object[] _values_ = new object[1];
-      if (!ignore_cmdManual) _values_[0] = cmdManual;
+      if (!ignore_CMD_MANUAL) _values_[0] = CMD_MANUAL;
       return ((IHMIAccessorOutput)this).FireEvent(4, _values_);
     }
-    public bool FireEvent_E_AJUSTE_STP(System.UInt16 stpTempoFalhaLigamento, System.UInt16 stpTempoFalhaDesligamento)
+    public bool FireEvent_E_AJUSTE_STP(System.UInt16 STP_FALHA_LIGAMENTO, System.UInt16 STP_FALHA_DESLIGAMENTO)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(5, new object[] {stpTempoFalhaLigamento, stpTempoFalhaDesligamento});
+      return ((IHMIAccessorOutput)this).FireEvent(5, new object[] {STP_FALHA_LIGAMENTO, STP_FALHA_DESLIGAMENTO});
     }
     public bool FireEvent_E_AJUSTE_STP(Hidryco.HidrycoLib.Symbols.Motor_Partida_Direta.E_AJUSTE_STPEventArgs ea)
     {
       object[] _values_ = new object[2];
-      if (ea.stpTempoFalhaLigamento.HasValue) _values_[0] = ea.stpTempoFalhaLigamento.Value;
-      if (ea.stpTempoFalhaDesligamento.HasValue) _values_[1] = ea.stpTempoFalhaDesligamento.Value;
+      if (ea.STP_FALHA_LIGAMENTO.HasValue) _values_[0] = ea.STP_FALHA_LIGAMENTO.Value;
+      if (ea.STP_FALHA_DESLIGAMENTO.HasValue) _values_[1] = ea.STP_FALHA_DESLIGAMENTO.Value;
       return ((IHMIAccessorOutput)this).FireEvent(5, _values_);
     }
-    public bool FireEvent_E_AJUSTE_STP(System.UInt16 stpTempoFalhaLigamento, bool ignore_stpTempoFalhaLigamento, System.UInt16 stpTempoFalhaDesligamento, bool ignore_stpTempoFalhaDesligamento)
+    public bool FireEvent_E_AJUSTE_STP(System.UInt16 STP_FALHA_LIGAMENTO, bool ignore_STP_FALHA_LIGAMENTO, System.UInt16 STP_FALHA_DESLIGAMENTO, bool ignore_STP_FALHA_DESLIGAMENTO)
     {
       object[] _values_ = new object[2];
-      if (!ignore_stpTempoFalhaLigamento) _values_[0] = stpTempoFalhaLigamento;
-      if (!ignore_stpTempoFalhaDesligamento) _values_[1] = stpTempoFalhaDesligamento;
+      if (!ignore_STP_FALHA_LIGAMENTO) _values_[0] = STP_FALHA_LIGAMENTO;
+      if (!ignore_STP_FALHA_DESLIGAMENTO) _values_[1] = STP_FALHA_DESLIGAMENTO;
       return ((IHMIAccessorOutput)this).FireEvent(5, _values_);
     }
 
@@ -721,102 +721,102 @@ stack Trace:
 
       }
     }
-    public bool FireEvent_E_RESET_FALHA(System.Boolean cmdResetFalha)
+    public bool FireEvent_E_RESET_FALHA(System.Boolean CMD_RESET_FALHA)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {cmdResetFalha});
+      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {CMD_RESET_FALHA});
     }
     public bool FireEvent_E_RESET_FALHA(Hidryco.HidrycoLib.Symbols.Motor_Partida_Direta.E_RESET_FALHAEventArgs ea)
     {
       object[] _values_ = new object[1];
-      if (ea.cmdResetFalha.HasValue) _values_[0] = ea.cmdResetFalha.Value;
+      if (ea.CMD_RESET_FALHA.HasValue) _values_[0] = ea.CMD_RESET_FALHA.Value;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
-    public bool FireEvent_E_RESET_FALHA(System.Boolean cmdResetFalha, bool ignore_cmdResetFalha)
+    public bool FireEvent_E_RESET_FALHA(System.Boolean CMD_RESET_FALHA, bool ignore_CMD_RESET_FALHA)
     {
       object[] _values_ = new object[1];
-      if (!ignore_cmdResetFalha) _values_[0] = cmdResetFalha;
+      if (!ignore_CMD_RESET_FALHA) _values_[0] = CMD_RESET_FALHA;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
-    public bool FireEvent_E_RESET_HORIMETRO(System.Boolean cmdResetHorimetro)
+    public bool FireEvent_E_RESET_HORIMETRO(System.Boolean CMD_RESET_HORIMETRO)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {cmdResetHorimetro});
+      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {CMD_RESET_HORIMETRO});
     }
     public bool FireEvent_E_RESET_HORIMETRO(Hidryco.HidrycoLib.Symbols.Motor_Partida_Direta.E_RESET_HORIMETROEventArgs ea)
     {
       object[] _values_ = new object[1];
-      if (ea.cmdResetHorimetro.HasValue) _values_[0] = ea.cmdResetHorimetro.Value;
+      if (ea.CMD_RESET_HORIMETRO.HasValue) _values_[0] = ea.CMD_RESET_HORIMETRO.Value;
       return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
     }
-    public bool FireEvent_E_RESET_HORIMETRO(System.Boolean cmdResetHorimetro, bool ignore_cmdResetHorimetro)
+    public bool FireEvent_E_RESET_HORIMETRO(System.Boolean CMD_RESET_HORIMETRO, bool ignore_CMD_RESET_HORIMETRO)
     {
       object[] _values_ = new object[1];
-      if (!ignore_cmdResetHorimetro) _values_[0] = cmdResetHorimetro;
+      if (!ignore_CMD_RESET_HORIMETRO) _values_[0] = CMD_RESET_HORIMETRO;
       return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
     }
-    public bool FireEvent_E_RESET_NUMERO_PARTIDAS(System.Boolean cmdResetNumeroPartida)
+    public bool FireEvent_E_RESET_NUMERO_PARTIDAS(System.Boolean CMD_RESET_NUMERO_PARTIDA)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(2, new object[] {cmdResetNumeroPartida});
+      return ((IHMIAccessorOutput)this).FireEvent(2, new object[] {CMD_RESET_NUMERO_PARTIDA});
     }
     public bool FireEvent_E_RESET_NUMERO_PARTIDAS(Hidryco.HidrycoLib.Symbols.Motor_Partida_Direta.E_RESET_NUMERO_PARTIDASEventArgs ea)
     {
       object[] _values_ = new object[1];
-      if (ea.cmdResetNumeroPartida.HasValue) _values_[0] = ea.cmdResetNumeroPartida.Value;
+      if (ea.CMD_RESET_NUMERO_PARTIDA.HasValue) _values_[0] = ea.CMD_RESET_NUMERO_PARTIDA.Value;
       return ((IHMIAccessorOutput)this).FireEvent(2, _values_);
     }
-    public bool FireEvent_E_RESET_NUMERO_PARTIDAS(System.Boolean cmdResetNumeroPartida, bool ignore_cmdResetNumeroPartida)
+    public bool FireEvent_E_RESET_NUMERO_PARTIDAS(System.Boolean CMD_RESET_NUMERO_PARTIDA, bool ignore_CMD_RESET_NUMERO_PARTIDA)
     {
       object[] _values_ = new object[1];
-      if (!ignore_cmdResetNumeroPartida) _values_[0] = cmdResetNumeroPartida;
+      if (!ignore_CMD_RESET_NUMERO_PARTIDA) _values_[0] = CMD_RESET_NUMERO_PARTIDA;
       return ((IHMIAccessorOutput)this).FireEvent(2, _values_);
     }
-    public bool FireEvent_E_STS_AUTOMATICO(System.Boolean stsAutomatico)
+    public bool FireEvent_E_STS_AUTOMATICO(System.Boolean STS_AUTOMATICO)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(3, new object[] {stsAutomatico});
+      return ((IHMIAccessorOutput)this).FireEvent(3, new object[] {STS_AUTOMATICO});
     }
     public bool FireEvent_E_STS_AUTOMATICO(Hidryco.HidrycoLib.Symbols.Motor_Partida_Direta.E_STS_AUTOMATICOEventArgs ea)
     {
       object[] _values_ = new object[1];
-      if (ea.stsAutomatico.HasValue) _values_[0] = ea.stsAutomatico.Value;
+      if (ea.STS_AUTOMATICO.HasValue) _values_[0] = ea.STS_AUTOMATICO.Value;
       return ((IHMIAccessorOutput)this).FireEvent(3, _values_);
     }
-    public bool FireEvent_E_STS_AUTOMATICO(System.Boolean stsAutomatico, bool ignore_stsAutomatico)
+    public bool FireEvent_E_STS_AUTOMATICO(System.Boolean STS_AUTOMATICO, bool ignore_STS_AUTOMATICO)
     {
       object[] _values_ = new object[1];
-      if (!ignore_stsAutomatico) _values_[0] = stsAutomatico;
+      if (!ignore_STS_AUTOMATICO) _values_[0] = STS_AUTOMATICO;
       return ((IHMIAccessorOutput)this).FireEvent(3, _values_);
     }
-    public bool FireEvent_E_CMD_MANUAL(System.Boolean cmdManual)
+    public bool FireEvent_E_CMD_MANUAL(System.Boolean CMD_MANUAL)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(4, new object[] {cmdManual});
+      return ((IHMIAccessorOutput)this).FireEvent(4, new object[] {CMD_MANUAL});
     }
     public bool FireEvent_E_CMD_MANUAL(Hidryco.HidrycoLib.Symbols.Motor_Partida_Direta.E_CMD_MANUALEventArgs ea)
     {
       object[] _values_ = new object[1];
-      if (ea.cmdManual.HasValue) _values_[0] = ea.cmdManual.Value;
+      if (ea.CMD_MANUAL.HasValue) _values_[0] = ea.CMD_MANUAL.Value;
       return ((IHMIAccessorOutput)this).FireEvent(4, _values_);
     }
-    public bool FireEvent_E_CMD_MANUAL(System.Boolean cmdManual, bool ignore_cmdManual)
+    public bool FireEvent_E_CMD_MANUAL(System.Boolean CMD_MANUAL, bool ignore_CMD_MANUAL)
     {
       object[] _values_ = new object[1];
-      if (!ignore_cmdManual) _values_[0] = cmdManual;
+      if (!ignore_CMD_MANUAL) _values_[0] = CMD_MANUAL;
       return ((IHMIAccessorOutput)this).FireEvent(4, _values_);
     }
-    public bool FireEvent_E_AJUSTE_STP(System.UInt16 stpTempoFalhaLigamento, System.UInt16 stpTempoFalhaDesligamento)
+    public bool FireEvent_E_AJUSTE_STP(System.UInt16 STP_FALHA_LIGAMENTO, System.UInt16 STP_FALHA_DESLIGAMENTO)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(5, new object[] {stpTempoFalhaLigamento, stpTempoFalhaDesligamento});
+      return ((IHMIAccessorOutput)this).FireEvent(5, new object[] {STP_FALHA_LIGAMENTO, STP_FALHA_DESLIGAMENTO});
     }
     public bool FireEvent_E_AJUSTE_STP(Hidryco.HidrycoLib.Symbols.Motor_Partida_Direta.E_AJUSTE_STPEventArgs ea)
     {
       object[] _values_ = new object[2];
-      if (ea.stpTempoFalhaLigamento.HasValue) _values_[0] = ea.stpTempoFalhaLigamento.Value;
-      if (ea.stpTempoFalhaDesligamento.HasValue) _values_[1] = ea.stpTempoFalhaDesligamento.Value;
+      if (ea.STP_FALHA_LIGAMENTO.HasValue) _values_[0] = ea.STP_FALHA_LIGAMENTO.Value;
+      if (ea.STP_FALHA_DESLIGAMENTO.HasValue) _values_[1] = ea.STP_FALHA_DESLIGAMENTO.Value;
       return ((IHMIAccessorOutput)this).FireEvent(5, _values_);
     }
-    public bool FireEvent_E_AJUSTE_STP(System.UInt16 stpTempoFalhaLigamento, bool ignore_stpTempoFalhaLigamento, System.UInt16 stpTempoFalhaDesligamento, bool ignore_stpTempoFalhaDesligamento)
+    public bool FireEvent_E_AJUSTE_STP(System.UInt16 STP_FALHA_LIGAMENTO, bool ignore_STP_FALHA_LIGAMENTO, System.UInt16 STP_FALHA_DESLIGAMENTO, bool ignore_STP_FALHA_DESLIGAMENTO)
     {
       object[] _values_ = new object[2];
-      if (!ignore_stpTempoFalhaLigamento) _values_[0] = stpTempoFalhaLigamento;
-      if (!ignore_stpTempoFalhaDesligamento) _values_[1] = stpTempoFalhaDesligamento;
+      if (!ignore_STP_FALHA_LIGAMENTO) _values_[0] = STP_FALHA_LIGAMENTO;
+      if (!ignore_STP_FALHA_DESLIGAMENTO) _values_[1] = STP_FALHA_DESLIGAMENTO;
       return ((IHMIAccessorOutput)this).FireEvent(5, _values_);
     }
 
@@ -880,102 +880,102 @@ stack Trace:
 
       }
     }
-    public bool FireEvent_E_RESET_FALHA(System.Boolean cmdResetFalha)
+    public bool FireEvent_E_RESET_FALHA(System.Boolean CMD_RESET_FALHA)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {cmdResetFalha});
+      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {CMD_RESET_FALHA});
     }
     public bool FireEvent_E_RESET_FALHA(Hidryco.HidrycoLib.Symbols.Motor_Partida_Direta.E_RESET_FALHAEventArgs ea)
     {
       object[] _values_ = new object[1];
-      if (ea.cmdResetFalha.HasValue) _values_[0] = ea.cmdResetFalha.Value;
+      if (ea.CMD_RESET_FALHA.HasValue) _values_[0] = ea.CMD_RESET_FALHA.Value;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
-    public bool FireEvent_E_RESET_FALHA(System.Boolean cmdResetFalha, bool ignore_cmdResetFalha)
+    public bool FireEvent_E_RESET_FALHA(System.Boolean CMD_RESET_FALHA, bool ignore_CMD_RESET_FALHA)
     {
       object[] _values_ = new object[1];
-      if (!ignore_cmdResetFalha) _values_[0] = cmdResetFalha;
+      if (!ignore_CMD_RESET_FALHA) _values_[0] = CMD_RESET_FALHA;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
-    public bool FireEvent_E_RESET_HORIMETRO(System.Boolean cmdResetHorimetro)
+    public bool FireEvent_E_RESET_HORIMETRO(System.Boolean CMD_RESET_HORIMETRO)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {cmdResetHorimetro});
+      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {CMD_RESET_HORIMETRO});
     }
     public bool FireEvent_E_RESET_HORIMETRO(Hidryco.HidrycoLib.Symbols.Motor_Partida_Direta.E_RESET_HORIMETROEventArgs ea)
     {
       object[] _values_ = new object[1];
-      if (ea.cmdResetHorimetro.HasValue) _values_[0] = ea.cmdResetHorimetro.Value;
+      if (ea.CMD_RESET_HORIMETRO.HasValue) _values_[0] = ea.CMD_RESET_HORIMETRO.Value;
       return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
     }
-    public bool FireEvent_E_RESET_HORIMETRO(System.Boolean cmdResetHorimetro, bool ignore_cmdResetHorimetro)
+    public bool FireEvent_E_RESET_HORIMETRO(System.Boolean CMD_RESET_HORIMETRO, bool ignore_CMD_RESET_HORIMETRO)
     {
       object[] _values_ = new object[1];
-      if (!ignore_cmdResetHorimetro) _values_[0] = cmdResetHorimetro;
+      if (!ignore_CMD_RESET_HORIMETRO) _values_[0] = CMD_RESET_HORIMETRO;
       return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
     }
-    public bool FireEvent_E_RESET_NUMERO_PARTIDAS(System.Boolean cmdResetNumeroPartida)
+    public bool FireEvent_E_RESET_NUMERO_PARTIDAS(System.Boolean CMD_RESET_NUMERO_PARTIDA)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(2, new object[] {cmdResetNumeroPartida});
+      return ((IHMIAccessorOutput)this).FireEvent(2, new object[] {CMD_RESET_NUMERO_PARTIDA});
     }
     public bool FireEvent_E_RESET_NUMERO_PARTIDAS(Hidryco.HidrycoLib.Symbols.Motor_Partida_Direta.E_RESET_NUMERO_PARTIDASEventArgs ea)
     {
       object[] _values_ = new object[1];
-      if (ea.cmdResetNumeroPartida.HasValue) _values_[0] = ea.cmdResetNumeroPartida.Value;
+      if (ea.CMD_RESET_NUMERO_PARTIDA.HasValue) _values_[0] = ea.CMD_RESET_NUMERO_PARTIDA.Value;
       return ((IHMIAccessorOutput)this).FireEvent(2, _values_);
     }
-    public bool FireEvent_E_RESET_NUMERO_PARTIDAS(System.Boolean cmdResetNumeroPartida, bool ignore_cmdResetNumeroPartida)
+    public bool FireEvent_E_RESET_NUMERO_PARTIDAS(System.Boolean CMD_RESET_NUMERO_PARTIDA, bool ignore_CMD_RESET_NUMERO_PARTIDA)
     {
       object[] _values_ = new object[1];
-      if (!ignore_cmdResetNumeroPartida) _values_[0] = cmdResetNumeroPartida;
+      if (!ignore_CMD_RESET_NUMERO_PARTIDA) _values_[0] = CMD_RESET_NUMERO_PARTIDA;
       return ((IHMIAccessorOutput)this).FireEvent(2, _values_);
     }
-    public bool FireEvent_E_STS_AUTOMATICO(System.Boolean stsAutomatico)
+    public bool FireEvent_E_STS_AUTOMATICO(System.Boolean STS_AUTOMATICO)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(3, new object[] {stsAutomatico});
+      return ((IHMIAccessorOutput)this).FireEvent(3, new object[] {STS_AUTOMATICO});
     }
     public bool FireEvent_E_STS_AUTOMATICO(Hidryco.HidrycoLib.Symbols.Motor_Partida_Direta.E_STS_AUTOMATICOEventArgs ea)
     {
       object[] _values_ = new object[1];
-      if (ea.stsAutomatico.HasValue) _values_[0] = ea.stsAutomatico.Value;
+      if (ea.STS_AUTOMATICO.HasValue) _values_[0] = ea.STS_AUTOMATICO.Value;
       return ((IHMIAccessorOutput)this).FireEvent(3, _values_);
     }
-    public bool FireEvent_E_STS_AUTOMATICO(System.Boolean stsAutomatico, bool ignore_stsAutomatico)
+    public bool FireEvent_E_STS_AUTOMATICO(System.Boolean STS_AUTOMATICO, bool ignore_STS_AUTOMATICO)
     {
       object[] _values_ = new object[1];
-      if (!ignore_stsAutomatico) _values_[0] = stsAutomatico;
+      if (!ignore_STS_AUTOMATICO) _values_[0] = STS_AUTOMATICO;
       return ((IHMIAccessorOutput)this).FireEvent(3, _values_);
     }
-    public bool FireEvent_E_CMD_MANUAL(System.Boolean cmdManual)
+    public bool FireEvent_E_CMD_MANUAL(System.Boolean CMD_MANUAL)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(4, new object[] {cmdManual});
+      return ((IHMIAccessorOutput)this).FireEvent(4, new object[] {CMD_MANUAL});
     }
     public bool FireEvent_E_CMD_MANUAL(Hidryco.HidrycoLib.Symbols.Motor_Partida_Direta.E_CMD_MANUALEventArgs ea)
     {
       object[] _values_ = new object[1];
-      if (ea.cmdManual.HasValue) _values_[0] = ea.cmdManual.Value;
+      if (ea.CMD_MANUAL.HasValue) _values_[0] = ea.CMD_MANUAL.Value;
       return ((IHMIAccessorOutput)this).FireEvent(4, _values_);
     }
-    public bool FireEvent_E_CMD_MANUAL(System.Boolean cmdManual, bool ignore_cmdManual)
+    public bool FireEvent_E_CMD_MANUAL(System.Boolean CMD_MANUAL, bool ignore_CMD_MANUAL)
     {
       object[] _values_ = new object[1];
-      if (!ignore_cmdManual) _values_[0] = cmdManual;
+      if (!ignore_CMD_MANUAL) _values_[0] = CMD_MANUAL;
       return ((IHMIAccessorOutput)this).FireEvent(4, _values_);
     }
-    public bool FireEvent_E_AJUSTE_STP(System.UInt16 stpTempoFalhaLigamento, System.UInt16 stpTempoFalhaDesligamento)
+    public bool FireEvent_E_AJUSTE_STP(System.UInt16 STP_FALHA_LIGAMENTO, System.UInt16 STP_FALHA_DESLIGAMENTO)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(5, new object[] {stpTempoFalhaLigamento, stpTempoFalhaDesligamento});
+      return ((IHMIAccessorOutput)this).FireEvent(5, new object[] {STP_FALHA_LIGAMENTO, STP_FALHA_DESLIGAMENTO});
     }
     public bool FireEvent_E_AJUSTE_STP(Hidryco.HidrycoLib.Symbols.Motor_Partida_Direta.E_AJUSTE_STPEventArgs ea)
     {
       object[] _values_ = new object[2];
-      if (ea.stpTempoFalhaLigamento.HasValue) _values_[0] = ea.stpTempoFalhaLigamento.Value;
-      if (ea.stpTempoFalhaDesligamento.HasValue) _values_[1] = ea.stpTempoFalhaDesligamento.Value;
+      if (ea.STP_FALHA_LIGAMENTO.HasValue) _values_[0] = ea.STP_FALHA_LIGAMENTO.Value;
+      if (ea.STP_FALHA_DESLIGAMENTO.HasValue) _values_[1] = ea.STP_FALHA_DESLIGAMENTO.Value;
       return ((IHMIAccessorOutput)this).FireEvent(5, _values_);
     }
-    public bool FireEvent_E_AJUSTE_STP(System.UInt16 stpTempoFalhaLigamento, bool ignore_stpTempoFalhaLigamento, System.UInt16 stpTempoFalhaDesligamento, bool ignore_stpTempoFalhaDesligamento)
+    public bool FireEvent_E_AJUSTE_STP(System.UInt16 STP_FALHA_LIGAMENTO, bool ignore_STP_FALHA_LIGAMENTO, System.UInt16 STP_FALHA_DESLIGAMENTO, bool ignore_STP_FALHA_DESLIGAMENTO)
     {
       object[] _values_ = new object[2];
-      if (!ignore_stpTempoFalhaLigamento) _values_[0] = stpTempoFalhaLigamento;
-      if (!ignore_stpTempoFalhaDesligamento) _values_[1] = stpTempoFalhaDesligamento;
+      if (!ignore_STP_FALHA_LIGAMENTO) _values_[0] = STP_FALHA_LIGAMENTO;
+      if (!ignore_STP_FALHA_DESLIGAMENTO) _values_[1] = STP_FALHA_DESLIGAMENTO;
       return ((IHMIAccessorOutput)this).FireEvent(5, _values_);
     }
 

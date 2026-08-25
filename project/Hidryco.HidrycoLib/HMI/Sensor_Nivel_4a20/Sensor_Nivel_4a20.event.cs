@@ -219,101 +219,101 @@ namespace Hidryco.HidrycoLib.Symbols.Sensor_Nivel_4a20
     public E_ATUALIZA_SETPOINTSEventArgs()
     {
     }
-    private System.Boolean? cmdHabilitaSensor_field = null;
-    public System.Boolean? cmdHabilitaSensor
+    private System.Boolean? CMD_HABILITA_SENSOR_field = null;
+    public System.Boolean? CMD_HABILITA_SENSOR
     {
-       get { return cmdHabilitaSensor_field; }
-       set { cmdHabilitaSensor_field = value; }
+       get { return CMD_HABILITA_SENSOR_field; }
+       set { CMD_HABILITA_SENSOR_field = value; }
     }
-    private System.Boolean? cmdHabilitaAlarmeHH_field = null;
-    public System.Boolean? cmdHabilitaAlarmeHH
+    private System.Boolean? CMD_HABILITAR_ALARME_HH_field = null;
+    public System.Boolean? CMD_HABILITAR_ALARME_HH
     {
-       get { return cmdHabilitaAlarmeHH_field; }
-       set { cmdHabilitaAlarmeHH_field = value; }
+       get { return CMD_HABILITAR_ALARME_HH_field; }
+       set { CMD_HABILITAR_ALARME_HH_field = value; }
     }
-    private System.Boolean? cmdHabilitaAlarmeH_field = null;
-    public System.Boolean? cmdHabilitaAlarmeH
+    private System.Boolean? CMD_HABILITAR_ALARME_H_field = null;
+    public System.Boolean? CMD_HABILITAR_ALARME_H
     {
-       get { return cmdHabilitaAlarmeH_field; }
-       set { cmdHabilitaAlarmeH_field = value; }
+       get { return CMD_HABILITAR_ALARME_H_field; }
+       set { CMD_HABILITAR_ALARME_H_field = value; }
     }
-    private System.Boolean? cmdHabilitaAlarmeL_field = null;
-    public System.Boolean? cmdHabilitaAlarmeL
+    private System.Boolean? CMD_HABILITAR_ALARME_L_field = null;
+    public System.Boolean? CMD_HABILITAR_ALARME_L
     {
-       get { return cmdHabilitaAlarmeL_field; }
-       set { cmdHabilitaAlarmeL_field = value; }
+       get { return CMD_HABILITAR_ALARME_L_field; }
+       set { CMD_HABILITAR_ALARME_L_field = value; }
     }
-    private System.Boolean? cmdHabilitaAlarmeLL_field = null;
-    public System.Boolean? cmdHabilitaAlarmeLL
+    private System.Boolean? CMD_HABILITAR_ALARME_LL_field = null;
+    public System.Boolean? CMD_HABILITAR_ALARME_LL
     {
-       get { return cmdHabilitaAlarmeLL_field; }
-       set { cmdHabilitaAlarmeLL_field = value; }
+       get { return CMD_HABILITAR_ALARME_LL_field; }
+       set { CMD_HABILITAR_ALARME_LL_field = value; }
     }
-    private System.Single? stpAlturaMaxima_field = null;
-    public System.Single? stpAlturaMaxima
+    private System.Single? STP_ALTURA_MAXIMA_field = null;
+    public System.Single? STP_ALTURA_MAXIMA
     {
-       get { return stpAlturaMaxima_field; }
-       set { stpAlturaMaxima_field = value; }
+       get { return STP_ALTURA_MAXIMA_field; }
+       set { STP_ALTURA_MAXIMA_field = value; }
     }
-    private System.Single? stpRangeMaximo_field = null;
-    public System.Single? stpRangeMaximo
+    private System.Single? STP_RANGE_MINIMO_field = null;
+    public System.Single? STP_RANGE_MINIMO
     {
-       get { return stpRangeMaximo_field; }
-       set { stpRangeMaximo_field = value; }
+       get { return STP_RANGE_MINIMO_field; }
+       set { STP_RANGE_MINIMO_field = value; }
     }
-    private System.Single? stpRangeMinimo_field = null;
-    public System.Single? stpRangeMinimo
+    private System.Single? STP_RANGE_MAXIMO_field = null;
+    public System.Single? STP_RANGE_MAXIMO
     {
-       get { return stpRangeMinimo_field; }
-       set { stpRangeMinimo_field = value; }
+       get { return STP_RANGE_MAXIMO_field; }
+       set { STP_RANGE_MAXIMO_field = value; }
     }
-    private System.UInt16? stpTempoAlarmeHH_field = null;
-    public System.UInt16? stpTempoAlarmeHH
+    private System.UInt16? STP_TEMPO_ALARME_HH_field = null;
+    public System.UInt16? STP_TEMPO_ALARME_HH
     {
-       get { return stpTempoAlarmeHH_field; }
-       set { stpTempoAlarmeHH_field = value; }
+       get { return STP_TEMPO_ALARME_HH_field; }
+       set { STP_TEMPO_ALARME_HH_field = value; }
     }
-    private System.UInt16? stpTempoAlarmeH_field = null;
-    public System.UInt16? stpTempoAlarmeH
+    private System.UInt16? STP_TEMPO_ALARME_H_field = null;
+    public System.UInt16? STP_TEMPO_ALARME_H
     {
-       get { return stpTempoAlarmeH_field; }
-       set { stpTempoAlarmeH_field = value; }
+       get { return STP_TEMPO_ALARME_H_field; }
+       set { STP_TEMPO_ALARME_H_field = value; }
     }
-    private System.UInt16? stpTempoAlarmeL_field = null;
-    public System.UInt16? stpTempoAlarmeL
+    private System.UInt16? STP_TEMPO_ALARME_L_field = null;
+    public System.UInt16? STP_TEMPO_ALARME_L
     {
-       get { return stpTempoAlarmeL_field; }
-       set { stpTempoAlarmeL_field = value; }
+       get { return STP_TEMPO_ALARME_L_field; }
+       set { STP_TEMPO_ALARME_L_field = value; }
     }
-    private System.UInt16? stpTempoAlarmeLL_field = null;
-    public System.UInt16? stpTempoAlarmeLL
+    private System.UInt16? STP_TEMPO_ALARME_LL_field = null;
+    public System.UInt16? STP_TEMPO_ALARME_LL
     {
-       get { return stpTempoAlarmeLL_field; }
-       set { stpTempoAlarmeLL_field = value; }
+       get { return STP_TEMPO_ALARME_LL_field; }
+       set { STP_TEMPO_ALARME_LL_field = value; }
     }
-    private System.Single? stpAlarmeHH_field = null;
-    public System.Single? stpAlarmeHH
+    private System.Single? STP_ALARME_HH_field = null;
+    public System.Single? STP_ALARME_HH
     {
-       get { return stpAlarmeHH_field; }
-       set { stpAlarmeHH_field = value; }
+       get { return STP_ALARME_HH_field; }
+       set { STP_ALARME_HH_field = value; }
     }
-    private System.Single? stpAlarmeH_field = null;
-    public System.Single? stpAlarmeH
+    private System.Single? STP_ALARME_H_field = null;
+    public System.Single? STP_ALARME_H
     {
-       get { return stpAlarmeH_field; }
-       set { stpAlarmeH_field = value; }
+       get { return STP_ALARME_H_field; }
+       set { STP_ALARME_H_field = value; }
     }
-    private System.Single? stpAlarmeL_field = null;
-    public System.Single? stpAlarmeL
+    private System.Single? STP_ALARME_L_field = null;
+    public System.Single? STP_ALARME_L
     {
-       get { return stpAlarmeL_field; }
-       set { stpAlarmeL_field = value; }
+       get { return STP_ALARME_L_field; }
+       set { STP_ALARME_L_field = value; }
     }
-    private System.Single? stpAlarmeLL_field = null;
-    public System.Single? stpAlarmeLL
+    private System.Single? STP_ALARME_LL_field = null;
+    public System.Single? STP_ALARME_LL
     {
-       get { return stpAlarmeLL_field; }
-       set { stpAlarmeLL_field = value; }
+       get { return STP_ALARME_LL_field; }
+       set { STP_ALARME_LL_field = value; }
     }
 
   }
@@ -393,50 +393,50 @@ stack Trace:
 
       }
     }
-    public bool FireEvent_E_ATUALIZA_SETPOINTS(System.Boolean cmdHabilitaSensor, System.Boolean cmdHabilitaAlarmeHH, System.Boolean cmdHabilitaAlarmeH, System.Boolean cmdHabilitaAlarmeL, System.Boolean cmdHabilitaAlarmeLL, System.Single stpAlturaMaxima, System.Single stpRangeMaximo, System.Single stpRangeMinimo, System.UInt16 stpTempoAlarmeHH, System.UInt16 stpTempoAlarmeH, System.UInt16 stpTempoAlarmeL, System.UInt16 stpTempoAlarmeLL, System.Single stpAlarmeHH, System.Single stpAlarmeH, System.Single stpAlarmeL, System.Single stpAlarmeLL)
+    public bool FireEvent_E_ATUALIZA_SETPOINTS(System.Boolean CMD_HABILITA_SENSOR, System.Boolean CMD_HABILITAR_ALARME_HH, System.Boolean CMD_HABILITAR_ALARME_H, System.Boolean CMD_HABILITAR_ALARME_L, System.Boolean CMD_HABILITAR_ALARME_LL, System.Single STP_ALTURA_MAXIMA, System.Single STP_RANGE_MINIMO, System.Single STP_RANGE_MAXIMO, System.UInt16 STP_TEMPO_ALARME_HH, System.UInt16 STP_TEMPO_ALARME_H, System.UInt16 STP_TEMPO_ALARME_L, System.UInt16 STP_TEMPO_ALARME_LL, System.Single STP_ALARME_HH, System.Single STP_ALARME_H, System.Single STP_ALARME_L, System.Single STP_ALARME_LL)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {cmdHabilitaSensor, cmdHabilitaAlarmeHH, cmdHabilitaAlarmeH, cmdHabilitaAlarmeL, cmdHabilitaAlarmeLL, stpAlturaMaxima, stpRangeMaximo, stpRangeMinimo, stpTempoAlarmeHH, stpTempoAlarmeH, stpTempoAlarmeL, stpTempoAlarmeLL, stpAlarmeHH, stpAlarmeH, stpAlarmeL, stpAlarmeLL});
+      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {CMD_HABILITA_SENSOR, CMD_HABILITAR_ALARME_HH, CMD_HABILITAR_ALARME_H, CMD_HABILITAR_ALARME_L, CMD_HABILITAR_ALARME_LL, STP_ALTURA_MAXIMA, STP_RANGE_MINIMO, STP_RANGE_MAXIMO, STP_TEMPO_ALARME_HH, STP_TEMPO_ALARME_H, STP_TEMPO_ALARME_L, STP_TEMPO_ALARME_LL, STP_ALARME_HH, STP_ALARME_H, STP_ALARME_L, STP_ALARME_LL});
     }
     public bool FireEvent_E_ATUALIZA_SETPOINTS(Hidryco.HidrycoLib.Symbols.Sensor_Nivel_4a20.E_ATUALIZA_SETPOINTSEventArgs ea)
     {
       object[] _values_ = new object[16];
-      if (ea.cmdHabilitaSensor.HasValue) _values_[0] = ea.cmdHabilitaSensor.Value;
-      if (ea.cmdHabilitaAlarmeHH.HasValue) _values_[1] = ea.cmdHabilitaAlarmeHH.Value;
-      if (ea.cmdHabilitaAlarmeH.HasValue) _values_[2] = ea.cmdHabilitaAlarmeH.Value;
-      if (ea.cmdHabilitaAlarmeL.HasValue) _values_[3] = ea.cmdHabilitaAlarmeL.Value;
-      if (ea.cmdHabilitaAlarmeLL.HasValue) _values_[4] = ea.cmdHabilitaAlarmeLL.Value;
-      if (ea.stpAlturaMaxima.HasValue) _values_[5] = ea.stpAlturaMaxima.Value;
-      if (ea.stpRangeMaximo.HasValue) _values_[6] = ea.stpRangeMaximo.Value;
-      if (ea.stpRangeMinimo.HasValue) _values_[7] = ea.stpRangeMinimo.Value;
-      if (ea.stpTempoAlarmeHH.HasValue) _values_[8] = ea.stpTempoAlarmeHH.Value;
-      if (ea.stpTempoAlarmeH.HasValue) _values_[9] = ea.stpTempoAlarmeH.Value;
-      if (ea.stpTempoAlarmeL.HasValue) _values_[10] = ea.stpTempoAlarmeL.Value;
-      if (ea.stpTempoAlarmeLL.HasValue) _values_[11] = ea.stpTempoAlarmeLL.Value;
-      if (ea.stpAlarmeHH.HasValue) _values_[12] = ea.stpAlarmeHH.Value;
-      if (ea.stpAlarmeH.HasValue) _values_[13] = ea.stpAlarmeH.Value;
-      if (ea.stpAlarmeL.HasValue) _values_[14] = ea.stpAlarmeL.Value;
-      if (ea.stpAlarmeLL.HasValue) _values_[15] = ea.stpAlarmeLL.Value;
+      if (ea.CMD_HABILITA_SENSOR.HasValue) _values_[0] = ea.CMD_HABILITA_SENSOR.Value;
+      if (ea.CMD_HABILITAR_ALARME_HH.HasValue) _values_[1] = ea.CMD_HABILITAR_ALARME_HH.Value;
+      if (ea.CMD_HABILITAR_ALARME_H.HasValue) _values_[2] = ea.CMD_HABILITAR_ALARME_H.Value;
+      if (ea.CMD_HABILITAR_ALARME_L.HasValue) _values_[3] = ea.CMD_HABILITAR_ALARME_L.Value;
+      if (ea.CMD_HABILITAR_ALARME_LL.HasValue) _values_[4] = ea.CMD_HABILITAR_ALARME_LL.Value;
+      if (ea.STP_ALTURA_MAXIMA.HasValue) _values_[5] = ea.STP_ALTURA_MAXIMA.Value;
+      if (ea.STP_RANGE_MINIMO.HasValue) _values_[6] = ea.STP_RANGE_MINIMO.Value;
+      if (ea.STP_RANGE_MAXIMO.HasValue) _values_[7] = ea.STP_RANGE_MAXIMO.Value;
+      if (ea.STP_TEMPO_ALARME_HH.HasValue) _values_[8] = ea.STP_TEMPO_ALARME_HH.Value;
+      if (ea.STP_TEMPO_ALARME_H.HasValue) _values_[9] = ea.STP_TEMPO_ALARME_H.Value;
+      if (ea.STP_TEMPO_ALARME_L.HasValue) _values_[10] = ea.STP_TEMPO_ALARME_L.Value;
+      if (ea.STP_TEMPO_ALARME_LL.HasValue) _values_[11] = ea.STP_TEMPO_ALARME_LL.Value;
+      if (ea.STP_ALARME_HH.HasValue) _values_[12] = ea.STP_ALARME_HH.Value;
+      if (ea.STP_ALARME_H.HasValue) _values_[13] = ea.STP_ALARME_H.Value;
+      if (ea.STP_ALARME_L.HasValue) _values_[14] = ea.STP_ALARME_L.Value;
+      if (ea.STP_ALARME_LL.HasValue) _values_[15] = ea.STP_ALARME_LL.Value;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
-    public bool FireEvent_E_ATUALIZA_SETPOINTS(System.Boolean cmdHabilitaSensor, bool ignore_cmdHabilitaSensor, System.Boolean cmdHabilitaAlarmeHH, bool ignore_cmdHabilitaAlarmeHH, System.Boolean cmdHabilitaAlarmeH, bool ignore_cmdHabilitaAlarmeH, System.Boolean cmdHabilitaAlarmeL, bool ignore_cmdHabilitaAlarmeL, System.Boolean cmdHabilitaAlarmeLL, bool ignore_cmdHabilitaAlarmeLL, System.Single stpAlturaMaxima, bool ignore_stpAlturaMaxima, System.Single stpRangeMaximo, bool ignore_stpRangeMaximo, System.Single stpRangeMinimo, bool ignore_stpRangeMinimo, System.UInt16 stpTempoAlarmeHH, bool ignore_stpTempoAlarmeHH, System.UInt16 stpTempoAlarmeH, bool ignore_stpTempoAlarmeH, System.UInt16 stpTempoAlarmeL, bool ignore_stpTempoAlarmeL, System.UInt16 stpTempoAlarmeLL, bool ignore_stpTempoAlarmeLL, System.Single stpAlarmeHH, bool ignore_stpAlarmeHH, System.Single stpAlarmeH, bool ignore_stpAlarmeH, System.Single stpAlarmeL, bool ignore_stpAlarmeL, System.Single stpAlarmeLL, bool ignore_stpAlarmeLL)
+    public bool FireEvent_E_ATUALIZA_SETPOINTS(System.Boolean CMD_HABILITA_SENSOR, bool ignore_CMD_HABILITA_SENSOR, System.Boolean CMD_HABILITAR_ALARME_HH, bool ignore_CMD_HABILITAR_ALARME_HH, System.Boolean CMD_HABILITAR_ALARME_H, bool ignore_CMD_HABILITAR_ALARME_H, System.Boolean CMD_HABILITAR_ALARME_L, bool ignore_CMD_HABILITAR_ALARME_L, System.Boolean CMD_HABILITAR_ALARME_LL, bool ignore_CMD_HABILITAR_ALARME_LL, System.Single STP_ALTURA_MAXIMA, bool ignore_STP_ALTURA_MAXIMA, System.Single STP_RANGE_MINIMO, bool ignore_STP_RANGE_MINIMO, System.Single STP_RANGE_MAXIMO, bool ignore_STP_RANGE_MAXIMO, System.UInt16 STP_TEMPO_ALARME_HH, bool ignore_STP_TEMPO_ALARME_HH, System.UInt16 STP_TEMPO_ALARME_H, bool ignore_STP_TEMPO_ALARME_H, System.UInt16 STP_TEMPO_ALARME_L, bool ignore_STP_TEMPO_ALARME_L, System.UInt16 STP_TEMPO_ALARME_LL, bool ignore_STP_TEMPO_ALARME_LL, System.Single STP_ALARME_HH, bool ignore_STP_ALARME_HH, System.Single STP_ALARME_H, bool ignore_STP_ALARME_H, System.Single STP_ALARME_L, bool ignore_STP_ALARME_L, System.Single STP_ALARME_LL, bool ignore_STP_ALARME_LL)
     {
       object[] _values_ = new object[16];
-      if (!ignore_cmdHabilitaSensor) _values_[0] = cmdHabilitaSensor;
-      if (!ignore_cmdHabilitaAlarmeHH) _values_[1] = cmdHabilitaAlarmeHH;
-      if (!ignore_cmdHabilitaAlarmeH) _values_[2] = cmdHabilitaAlarmeH;
-      if (!ignore_cmdHabilitaAlarmeL) _values_[3] = cmdHabilitaAlarmeL;
-      if (!ignore_cmdHabilitaAlarmeLL) _values_[4] = cmdHabilitaAlarmeLL;
-      if (!ignore_stpAlturaMaxima) _values_[5] = stpAlturaMaxima;
-      if (!ignore_stpRangeMaximo) _values_[6] = stpRangeMaximo;
-      if (!ignore_stpRangeMinimo) _values_[7] = stpRangeMinimo;
-      if (!ignore_stpTempoAlarmeHH) _values_[8] = stpTempoAlarmeHH;
-      if (!ignore_stpTempoAlarmeH) _values_[9] = stpTempoAlarmeH;
-      if (!ignore_stpTempoAlarmeL) _values_[10] = stpTempoAlarmeL;
-      if (!ignore_stpTempoAlarmeLL) _values_[11] = stpTempoAlarmeLL;
-      if (!ignore_stpAlarmeHH) _values_[12] = stpAlarmeHH;
-      if (!ignore_stpAlarmeH) _values_[13] = stpAlarmeH;
-      if (!ignore_stpAlarmeL) _values_[14] = stpAlarmeL;
-      if (!ignore_stpAlarmeLL) _values_[15] = stpAlarmeLL;
+      if (!ignore_CMD_HABILITA_SENSOR) _values_[0] = CMD_HABILITA_SENSOR;
+      if (!ignore_CMD_HABILITAR_ALARME_HH) _values_[1] = CMD_HABILITAR_ALARME_HH;
+      if (!ignore_CMD_HABILITAR_ALARME_H) _values_[2] = CMD_HABILITAR_ALARME_H;
+      if (!ignore_CMD_HABILITAR_ALARME_L) _values_[3] = CMD_HABILITAR_ALARME_L;
+      if (!ignore_CMD_HABILITAR_ALARME_LL) _values_[4] = CMD_HABILITAR_ALARME_LL;
+      if (!ignore_STP_ALTURA_MAXIMA) _values_[5] = STP_ALTURA_MAXIMA;
+      if (!ignore_STP_RANGE_MINIMO) _values_[6] = STP_RANGE_MINIMO;
+      if (!ignore_STP_RANGE_MAXIMO) _values_[7] = STP_RANGE_MAXIMO;
+      if (!ignore_STP_TEMPO_ALARME_HH) _values_[8] = STP_TEMPO_ALARME_HH;
+      if (!ignore_STP_TEMPO_ALARME_H) _values_[9] = STP_TEMPO_ALARME_H;
+      if (!ignore_STP_TEMPO_ALARME_L) _values_[10] = STP_TEMPO_ALARME_L;
+      if (!ignore_STP_TEMPO_ALARME_LL) _values_[11] = STP_TEMPO_ALARME_LL;
+      if (!ignore_STP_ALARME_HH) _values_[12] = STP_ALARME_HH;
+      if (!ignore_STP_ALARME_H) _values_[13] = STP_ALARME_H;
+      if (!ignore_STP_ALARME_L) _values_[14] = STP_ALARME_L;
+      if (!ignore_STP_ALARME_LL) _values_[15] = STP_ALARME_LL;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
     public bool FireEvent_E_RESET_FALHA()
@@ -518,50 +518,50 @@ stack Trace:
 
       }
     }
-    public bool FireEvent_E_ATUALIZA_SETPOINTS(System.Boolean cmdHabilitaSensor, System.Boolean cmdHabilitaAlarmeHH, System.Boolean cmdHabilitaAlarmeH, System.Boolean cmdHabilitaAlarmeL, System.Boolean cmdHabilitaAlarmeLL, System.Single stpAlturaMaxima, System.Single stpRangeMaximo, System.Single stpRangeMinimo, System.UInt16 stpTempoAlarmeHH, System.UInt16 stpTempoAlarmeH, System.UInt16 stpTempoAlarmeL, System.UInt16 stpTempoAlarmeLL, System.Single stpAlarmeHH, System.Single stpAlarmeH, System.Single stpAlarmeL, System.Single stpAlarmeLL)
+    public bool FireEvent_E_ATUALIZA_SETPOINTS(System.Boolean CMD_HABILITA_SENSOR, System.Boolean CMD_HABILITAR_ALARME_HH, System.Boolean CMD_HABILITAR_ALARME_H, System.Boolean CMD_HABILITAR_ALARME_L, System.Boolean CMD_HABILITAR_ALARME_LL, System.Single STP_ALTURA_MAXIMA, System.Single STP_RANGE_MINIMO, System.Single STP_RANGE_MAXIMO, System.UInt16 STP_TEMPO_ALARME_HH, System.UInt16 STP_TEMPO_ALARME_H, System.UInt16 STP_TEMPO_ALARME_L, System.UInt16 STP_TEMPO_ALARME_LL, System.Single STP_ALARME_HH, System.Single STP_ALARME_H, System.Single STP_ALARME_L, System.Single STP_ALARME_LL)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {cmdHabilitaSensor, cmdHabilitaAlarmeHH, cmdHabilitaAlarmeH, cmdHabilitaAlarmeL, cmdHabilitaAlarmeLL, stpAlturaMaxima, stpRangeMaximo, stpRangeMinimo, stpTempoAlarmeHH, stpTempoAlarmeH, stpTempoAlarmeL, stpTempoAlarmeLL, stpAlarmeHH, stpAlarmeH, stpAlarmeL, stpAlarmeLL});
+      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {CMD_HABILITA_SENSOR, CMD_HABILITAR_ALARME_HH, CMD_HABILITAR_ALARME_H, CMD_HABILITAR_ALARME_L, CMD_HABILITAR_ALARME_LL, STP_ALTURA_MAXIMA, STP_RANGE_MINIMO, STP_RANGE_MAXIMO, STP_TEMPO_ALARME_HH, STP_TEMPO_ALARME_H, STP_TEMPO_ALARME_L, STP_TEMPO_ALARME_LL, STP_ALARME_HH, STP_ALARME_H, STP_ALARME_L, STP_ALARME_LL});
     }
     public bool FireEvent_E_ATUALIZA_SETPOINTS(Hidryco.HidrycoLib.Symbols.Sensor_Nivel_4a20.E_ATUALIZA_SETPOINTSEventArgs ea)
     {
       object[] _values_ = new object[16];
-      if (ea.cmdHabilitaSensor.HasValue) _values_[0] = ea.cmdHabilitaSensor.Value;
-      if (ea.cmdHabilitaAlarmeHH.HasValue) _values_[1] = ea.cmdHabilitaAlarmeHH.Value;
-      if (ea.cmdHabilitaAlarmeH.HasValue) _values_[2] = ea.cmdHabilitaAlarmeH.Value;
-      if (ea.cmdHabilitaAlarmeL.HasValue) _values_[3] = ea.cmdHabilitaAlarmeL.Value;
-      if (ea.cmdHabilitaAlarmeLL.HasValue) _values_[4] = ea.cmdHabilitaAlarmeLL.Value;
-      if (ea.stpAlturaMaxima.HasValue) _values_[5] = ea.stpAlturaMaxima.Value;
-      if (ea.stpRangeMaximo.HasValue) _values_[6] = ea.stpRangeMaximo.Value;
-      if (ea.stpRangeMinimo.HasValue) _values_[7] = ea.stpRangeMinimo.Value;
-      if (ea.stpTempoAlarmeHH.HasValue) _values_[8] = ea.stpTempoAlarmeHH.Value;
-      if (ea.stpTempoAlarmeH.HasValue) _values_[9] = ea.stpTempoAlarmeH.Value;
-      if (ea.stpTempoAlarmeL.HasValue) _values_[10] = ea.stpTempoAlarmeL.Value;
-      if (ea.stpTempoAlarmeLL.HasValue) _values_[11] = ea.stpTempoAlarmeLL.Value;
-      if (ea.stpAlarmeHH.HasValue) _values_[12] = ea.stpAlarmeHH.Value;
-      if (ea.stpAlarmeH.HasValue) _values_[13] = ea.stpAlarmeH.Value;
-      if (ea.stpAlarmeL.HasValue) _values_[14] = ea.stpAlarmeL.Value;
-      if (ea.stpAlarmeLL.HasValue) _values_[15] = ea.stpAlarmeLL.Value;
+      if (ea.CMD_HABILITA_SENSOR.HasValue) _values_[0] = ea.CMD_HABILITA_SENSOR.Value;
+      if (ea.CMD_HABILITAR_ALARME_HH.HasValue) _values_[1] = ea.CMD_HABILITAR_ALARME_HH.Value;
+      if (ea.CMD_HABILITAR_ALARME_H.HasValue) _values_[2] = ea.CMD_HABILITAR_ALARME_H.Value;
+      if (ea.CMD_HABILITAR_ALARME_L.HasValue) _values_[3] = ea.CMD_HABILITAR_ALARME_L.Value;
+      if (ea.CMD_HABILITAR_ALARME_LL.HasValue) _values_[4] = ea.CMD_HABILITAR_ALARME_LL.Value;
+      if (ea.STP_ALTURA_MAXIMA.HasValue) _values_[5] = ea.STP_ALTURA_MAXIMA.Value;
+      if (ea.STP_RANGE_MINIMO.HasValue) _values_[6] = ea.STP_RANGE_MINIMO.Value;
+      if (ea.STP_RANGE_MAXIMO.HasValue) _values_[7] = ea.STP_RANGE_MAXIMO.Value;
+      if (ea.STP_TEMPO_ALARME_HH.HasValue) _values_[8] = ea.STP_TEMPO_ALARME_HH.Value;
+      if (ea.STP_TEMPO_ALARME_H.HasValue) _values_[9] = ea.STP_TEMPO_ALARME_H.Value;
+      if (ea.STP_TEMPO_ALARME_L.HasValue) _values_[10] = ea.STP_TEMPO_ALARME_L.Value;
+      if (ea.STP_TEMPO_ALARME_LL.HasValue) _values_[11] = ea.STP_TEMPO_ALARME_LL.Value;
+      if (ea.STP_ALARME_HH.HasValue) _values_[12] = ea.STP_ALARME_HH.Value;
+      if (ea.STP_ALARME_H.HasValue) _values_[13] = ea.STP_ALARME_H.Value;
+      if (ea.STP_ALARME_L.HasValue) _values_[14] = ea.STP_ALARME_L.Value;
+      if (ea.STP_ALARME_LL.HasValue) _values_[15] = ea.STP_ALARME_LL.Value;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
-    public bool FireEvent_E_ATUALIZA_SETPOINTS(System.Boolean cmdHabilitaSensor, bool ignore_cmdHabilitaSensor, System.Boolean cmdHabilitaAlarmeHH, bool ignore_cmdHabilitaAlarmeHH, System.Boolean cmdHabilitaAlarmeH, bool ignore_cmdHabilitaAlarmeH, System.Boolean cmdHabilitaAlarmeL, bool ignore_cmdHabilitaAlarmeL, System.Boolean cmdHabilitaAlarmeLL, bool ignore_cmdHabilitaAlarmeLL, System.Single stpAlturaMaxima, bool ignore_stpAlturaMaxima, System.Single stpRangeMaximo, bool ignore_stpRangeMaximo, System.Single stpRangeMinimo, bool ignore_stpRangeMinimo, System.UInt16 stpTempoAlarmeHH, bool ignore_stpTempoAlarmeHH, System.UInt16 stpTempoAlarmeH, bool ignore_stpTempoAlarmeH, System.UInt16 stpTempoAlarmeL, bool ignore_stpTempoAlarmeL, System.UInt16 stpTempoAlarmeLL, bool ignore_stpTempoAlarmeLL, System.Single stpAlarmeHH, bool ignore_stpAlarmeHH, System.Single stpAlarmeH, bool ignore_stpAlarmeH, System.Single stpAlarmeL, bool ignore_stpAlarmeL, System.Single stpAlarmeLL, bool ignore_stpAlarmeLL)
+    public bool FireEvent_E_ATUALIZA_SETPOINTS(System.Boolean CMD_HABILITA_SENSOR, bool ignore_CMD_HABILITA_SENSOR, System.Boolean CMD_HABILITAR_ALARME_HH, bool ignore_CMD_HABILITAR_ALARME_HH, System.Boolean CMD_HABILITAR_ALARME_H, bool ignore_CMD_HABILITAR_ALARME_H, System.Boolean CMD_HABILITAR_ALARME_L, bool ignore_CMD_HABILITAR_ALARME_L, System.Boolean CMD_HABILITAR_ALARME_LL, bool ignore_CMD_HABILITAR_ALARME_LL, System.Single STP_ALTURA_MAXIMA, bool ignore_STP_ALTURA_MAXIMA, System.Single STP_RANGE_MINIMO, bool ignore_STP_RANGE_MINIMO, System.Single STP_RANGE_MAXIMO, bool ignore_STP_RANGE_MAXIMO, System.UInt16 STP_TEMPO_ALARME_HH, bool ignore_STP_TEMPO_ALARME_HH, System.UInt16 STP_TEMPO_ALARME_H, bool ignore_STP_TEMPO_ALARME_H, System.UInt16 STP_TEMPO_ALARME_L, bool ignore_STP_TEMPO_ALARME_L, System.UInt16 STP_TEMPO_ALARME_LL, bool ignore_STP_TEMPO_ALARME_LL, System.Single STP_ALARME_HH, bool ignore_STP_ALARME_HH, System.Single STP_ALARME_H, bool ignore_STP_ALARME_H, System.Single STP_ALARME_L, bool ignore_STP_ALARME_L, System.Single STP_ALARME_LL, bool ignore_STP_ALARME_LL)
     {
       object[] _values_ = new object[16];
-      if (!ignore_cmdHabilitaSensor) _values_[0] = cmdHabilitaSensor;
-      if (!ignore_cmdHabilitaAlarmeHH) _values_[1] = cmdHabilitaAlarmeHH;
-      if (!ignore_cmdHabilitaAlarmeH) _values_[2] = cmdHabilitaAlarmeH;
-      if (!ignore_cmdHabilitaAlarmeL) _values_[3] = cmdHabilitaAlarmeL;
-      if (!ignore_cmdHabilitaAlarmeLL) _values_[4] = cmdHabilitaAlarmeLL;
-      if (!ignore_stpAlturaMaxima) _values_[5] = stpAlturaMaxima;
-      if (!ignore_stpRangeMaximo) _values_[6] = stpRangeMaximo;
-      if (!ignore_stpRangeMinimo) _values_[7] = stpRangeMinimo;
-      if (!ignore_stpTempoAlarmeHH) _values_[8] = stpTempoAlarmeHH;
-      if (!ignore_stpTempoAlarmeH) _values_[9] = stpTempoAlarmeH;
-      if (!ignore_stpTempoAlarmeL) _values_[10] = stpTempoAlarmeL;
-      if (!ignore_stpTempoAlarmeLL) _values_[11] = stpTempoAlarmeLL;
-      if (!ignore_stpAlarmeHH) _values_[12] = stpAlarmeHH;
-      if (!ignore_stpAlarmeH) _values_[13] = stpAlarmeH;
-      if (!ignore_stpAlarmeL) _values_[14] = stpAlarmeL;
-      if (!ignore_stpAlarmeLL) _values_[15] = stpAlarmeLL;
+      if (!ignore_CMD_HABILITA_SENSOR) _values_[0] = CMD_HABILITA_SENSOR;
+      if (!ignore_CMD_HABILITAR_ALARME_HH) _values_[1] = CMD_HABILITAR_ALARME_HH;
+      if (!ignore_CMD_HABILITAR_ALARME_H) _values_[2] = CMD_HABILITAR_ALARME_H;
+      if (!ignore_CMD_HABILITAR_ALARME_L) _values_[3] = CMD_HABILITAR_ALARME_L;
+      if (!ignore_CMD_HABILITAR_ALARME_LL) _values_[4] = CMD_HABILITAR_ALARME_LL;
+      if (!ignore_STP_ALTURA_MAXIMA) _values_[5] = STP_ALTURA_MAXIMA;
+      if (!ignore_STP_RANGE_MINIMO) _values_[6] = STP_RANGE_MINIMO;
+      if (!ignore_STP_RANGE_MAXIMO) _values_[7] = STP_RANGE_MAXIMO;
+      if (!ignore_STP_TEMPO_ALARME_HH) _values_[8] = STP_TEMPO_ALARME_HH;
+      if (!ignore_STP_TEMPO_ALARME_H) _values_[9] = STP_TEMPO_ALARME_H;
+      if (!ignore_STP_TEMPO_ALARME_L) _values_[10] = STP_TEMPO_ALARME_L;
+      if (!ignore_STP_TEMPO_ALARME_LL) _values_[11] = STP_TEMPO_ALARME_LL;
+      if (!ignore_STP_ALARME_HH) _values_[12] = STP_ALARME_HH;
+      if (!ignore_STP_ALARME_H) _values_[13] = STP_ALARME_H;
+      if (!ignore_STP_ALARME_L) _values_[14] = STP_ALARME_L;
+      if (!ignore_STP_ALARME_LL) _values_[15] = STP_ALARME_LL;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
     public bool FireEvent_E_RESET_FALHA()
@@ -643,50 +643,50 @@ stack Trace:
 
       }
     }
-    public bool FireEvent_E_ATUALIZA_SETPOINTS(System.Boolean cmdHabilitaSensor, System.Boolean cmdHabilitaAlarmeHH, System.Boolean cmdHabilitaAlarmeH, System.Boolean cmdHabilitaAlarmeL, System.Boolean cmdHabilitaAlarmeLL, System.Single stpAlturaMaxima, System.Single stpRangeMaximo, System.Single stpRangeMinimo, System.UInt16 stpTempoAlarmeHH, System.UInt16 stpTempoAlarmeH, System.UInt16 stpTempoAlarmeL, System.UInt16 stpTempoAlarmeLL, System.Single stpAlarmeHH, System.Single stpAlarmeH, System.Single stpAlarmeL, System.Single stpAlarmeLL)
+    public bool FireEvent_E_ATUALIZA_SETPOINTS(System.Boolean CMD_HABILITA_SENSOR, System.Boolean CMD_HABILITAR_ALARME_HH, System.Boolean CMD_HABILITAR_ALARME_H, System.Boolean CMD_HABILITAR_ALARME_L, System.Boolean CMD_HABILITAR_ALARME_LL, System.Single STP_ALTURA_MAXIMA, System.Single STP_RANGE_MINIMO, System.Single STP_RANGE_MAXIMO, System.UInt16 STP_TEMPO_ALARME_HH, System.UInt16 STP_TEMPO_ALARME_H, System.UInt16 STP_TEMPO_ALARME_L, System.UInt16 STP_TEMPO_ALARME_LL, System.Single STP_ALARME_HH, System.Single STP_ALARME_H, System.Single STP_ALARME_L, System.Single STP_ALARME_LL)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {cmdHabilitaSensor, cmdHabilitaAlarmeHH, cmdHabilitaAlarmeH, cmdHabilitaAlarmeL, cmdHabilitaAlarmeLL, stpAlturaMaxima, stpRangeMaximo, stpRangeMinimo, stpTempoAlarmeHH, stpTempoAlarmeH, stpTempoAlarmeL, stpTempoAlarmeLL, stpAlarmeHH, stpAlarmeH, stpAlarmeL, stpAlarmeLL});
+      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {CMD_HABILITA_SENSOR, CMD_HABILITAR_ALARME_HH, CMD_HABILITAR_ALARME_H, CMD_HABILITAR_ALARME_L, CMD_HABILITAR_ALARME_LL, STP_ALTURA_MAXIMA, STP_RANGE_MINIMO, STP_RANGE_MAXIMO, STP_TEMPO_ALARME_HH, STP_TEMPO_ALARME_H, STP_TEMPO_ALARME_L, STP_TEMPO_ALARME_LL, STP_ALARME_HH, STP_ALARME_H, STP_ALARME_L, STP_ALARME_LL});
     }
     public bool FireEvent_E_ATUALIZA_SETPOINTS(Hidryco.HidrycoLib.Symbols.Sensor_Nivel_4a20.E_ATUALIZA_SETPOINTSEventArgs ea)
     {
       object[] _values_ = new object[16];
-      if (ea.cmdHabilitaSensor.HasValue) _values_[0] = ea.cmdHabilitaSensor.Value;
-      if (ea.cmdHabilitaAlarmeHH.HasValue) _values_[1] = ea.cmdHabilitaAlarmeHH.Value;
-      if (ea.cmdHabilitaAlarmeH.HasValue) _values_[2] = ea.cmdHabilitaAlarmeH.Value;
-      if (ea.cmdHabilitaAlarmeL.HasValue) _values_[3] = ea.cmdHabilitaAlarmeL.Value;
-      if (ea.cmdHabilitaAlarmeLL.HasValue) _values_[4] = ea.cmdHabilitaAlarmeLL.Value;
-      if (ea.stpAlturaMaxima.HasValue) _values_[5] = ea.stpAlturaMaxima.Value;
-      if (ea.stpRangeMaximo.HasValue) _values_[6] = ea.stpRangeMaximo.Value;
-      if (ea.stpRangeMinimo.HasValue) _values_[7] = ea.stpRangeMinimo.Value;
-      if (ea.stpTempoAlarmeHH.HasValue) _values_[8] = ea.stpTempoAlarmeHH.Value;
-      if (ea.stpTempoAlarmeH.HasValue) _values_[9] = ea.stpTempoAlarmeH.Value;
-      if (ea.stpTempoAlarmeL.HasValue) _values_[10] = ea.stpTempoAlarmeL.Value;
-      if (ea.stpTempoAlarmeLL.HasValue) _values_[11] = ea.stpTempoAlarmeLL.Value;
-      if (ea.stpAlarmeHH.HasValue) _values_[12] = ea.stpAlarmeHH.Value;
-      if (ea.stpAlarmeH.HasValue) _values_[13] = ea.stpAlarmeH.Value;
-      if (ea.stpAlarmeL.HasValue) _values_[14] = ea.stpAlarmeL.Value;
-      if (ea.stpAlarmeLL.HasValue) _values_[15] = ea.stpAlarmeLL.Value;
+      if (ea.CMD_HABILITA_SENSOR.HasValue) _values_[0] = ea.CMD_HABILITA_SENSOR.Value;
+      if (ea.CMD_HABILITAR_ALARME_HH.HasValue) _values_[1] = ea.CMD_HABILITAR_ALARME_HH.Value;
+      if (ea.CMD_HABILITAR_ALARME_H.HasValue) _values_[2] = ea.CMD_HABILITAR_ALARME_H.Value;
+      if (ea.CMD_HABILITAR_ALARME_L.HasValue) _values_[3] = ea.CMD_HABILITAR_ALARME_L.Value;
+      if (ea.CMD_HABILITAR_ALARME_LL.HasValue) _values_[4] = ea.CMD_HABILITAR_ALARME_LL.Value;
+      if (ea.STP_ALTURA_MAXIMA.HasValue) _values_[5] = ea.STP_ALTURA_MAXIMA.Value;
+      if (ea.STP_RANGE_MINIMO.HasValue) _values_[6] = ea.STP_RANGE_MINIMO.Value;
+      if (ea.STP_RANGE_MAXIMO.HasValue) _values_[7] = ea.STP_RANGE_MAXIMO.Value;
+      if (ea.STP_TEMPO_ALARME_HH.HasValue) _values_[8] = ea.STP_TEMPO_ALARME_HH.Value;
+      if (ea.STP_TEMPO_ALARME_H.HasValue) _values_[9] = ea.STP_TEMPO_ALARME_H.Value;
+      if (ea.STP_TEMPO_ALARME_L.HasValue) _values_[10] = ea.STP_TEMPO_ALARME_L.Value;
+      if (ea.STP_TEMPO_ALARME_LL.HasValue) _values_[11] = ea.STP_TEMPO_ALARME_LL.Value;
+      if (ea.STP_ALARME_HH.HasValue) _values_[12] = ea.STP_ALARME_HH.Value;
+      if (ea.STP_ALARME_H.HasValue) _values_[13] = ea.STP_ALARME_H.Value;
+      if (ea.STP_ALARME_L.HasValue) _values_[14] = ea.STP_ALARME_L.Value;
+      if (ea.STP_ALARME_LL.HasValue) _values_[15] = ea.STP_ALARME_LL.Value;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
-    public bool FireEvent_E_ATUALIZA_SETPOINTS(System.Boolean cmdHabilitaSensor, bool ignore_cmdHabilitaSensor, System.Boolean cmdHabilitaAlarmeHH, bool ignore_cmdHabilitaAlarmeHH, System.Boolean cmdHabilitaAlarmeH, bool ignore_cmdHabilitaAlarmeH, System.Boolean cmdHabilitaAlarmeL, bool ignore_cmdHabilitaAlarmeL, System.Boolean cmdHabilitaAlarmeLL, bool ignore_cmdHabilitaAlarmeLL, System.Single stpAlturaMaxima, bool ignore_stpAlturaMaxima, System.Single stpRangeMaximo, bool ignore_stpRangeMaximo, System.Single stpRangeMinimo, bool ignore_stpRangeMinimo, System.UInt16 stpTempoAlarmeHH, bool ignore_stpTempoAlarmeHH, System.UInt16 stpTempoAlarmeH, bool ignore_stpTempoAlarmeH, System.UInt16 stpTempoAlarmeL, bool ignore_stpTempoAlarmeL, System.UInt16 stpTempoAlarmeLL, bool ignore_stpTempoAlarmeLL, System.Single stpAlarmeHH, bool ignore_stpAlarmeHH, System.Single stpAlarmeH, bool ignore_stpAlarmeH, System.Single stpAlarmeL, bool ignore_stpAlarmeL, System.Single stpAlarmeLL, bool ignore_stpAlarmeLL)
+    public bool FireEvent_E_ATUALIZA_SETPOINTS(System.Boolean CMD_HABILITA_SENSOR, bool ignore_CMD_HABILITA_SENSOR, System.Boolean CMD_HABILITAR_ALARME_HH, bool ignore_CMD_HABILITAR_ALARME_HH, System.Boolean CMD_HABILITAR_ALARME_H, bool ignore_CMD_HABILITAR_ALARME_H, System.Boolean CMD_HABILITAR_ALARME_L, bool ignore_CMD_HABILITAR_ALARME_L, System.Boolean CMD_HABILITAR_ALARME_LL, bool ignore_CMD_HABILITAR_ALARME_LL, System.Single STP_ALTURA_MAXIMA, bool ignore_STP_ALTURA_MAXIMA, System.Single STP_RANGE_MINIMO, bool ignore_STP_RANGE_MINIMO, System.Single STP_RANGE_MAXIMO, bool ignore_STP_RANGE_MAXIMO, System.UInt16 STP_TEMPO_ALARME_HH, bool ignore_STP_TEMPO_ALARME_HH, System.UInt16 STP_TEMPO_ALARME_H, bool ignore_STP_TEMPO_ALARME_H, System.UInt16 STP_TEMPO_ALARME_L, bool ignore_STP_TEMPO_ALARME_L, System.UInt16 STP_TEMPO_ALARME_LL, bool ignore_STP_TEMPO_ALARME_LL, System.Single STP_ALARME_HH, bool ignore_STP_ALARME_HH, System.Single STP_ALARME_H, bool ignore_STP_ALARME_H, System.Single STP_ALARME_L, bool ignore_STP_ALARME_L, System.Single STP_ALARME_LL, bool ignore_STP_ALARME_LL)
     {
       object[] _values_ = new object[16];
-      if (!ignore_cmdHabilitaSensor) _values_[0] = cmdHabilitaSensor;
-      if (!ignore_cmdHabilitaAlarmeHH) _values_[1] = cmdHabilitaAlarmeHH;
-      if (!ignore_cmdHabilitaAlarmeH) _values_[2] = cmdHabilitaAlarmeH;
-      if (!ignore_cmdHabilitaAlarmeL) _values_[3] = cmdHabilitaAlarmeL;
-      if (!ignore_cmdHabilitaAlarmeLL) _values_[4] = cmdHabilitaAlarmeLL;
-      if (!ignore_stpAlturaMaxima) _values_[5] = stpAlturaMaxima;
-      if (!ignore_stpRangeMaximo) _values_[6] = stpRangeMaximo;
-      if (!ignore_stpRangeMinimo) _values_[7] = stpRangeMinimo;
-      if (!ignore_stpTempoAlarmeHH) _values_[8] = stpTempoAlarmeHH;
-      if (!ignore_stpTempoAlarmeH) _values_[9] = stpTempoAlarmeH;
-      if (!ignore_stpTempoAlarmeL) _values_[10] = stpTempoAlarmeL;
-      if (!ignore_stpTempoAlarmeLL) _values_[11] = stpTempoAlarmeLL;
-      if (!ignore_stpAlarmeHH) _values_[12] = stpAlarmeHH;
-      if (!ignore_stpAlarmeH) _values_[13] = stpAlarmeH;
-      if (!ignore_stpAlarmeL) _values_[14] = stpAlarmeL;
-      if (!ignore_stpAlarmeLL) _values_[15] = stpAlarmeLL;
+      if (!ignore_CMD_HABILITA_SENSOR) _values_[0] = CMD_HABILITA_SENSOR;
+      if (!ignore_CMD_HABILITAR_ALARME_HH) _values_[1] = CMD_HABILITAR_ALARME_HH;
+      if (!ignore_CMD_HABILITAR_ALARME_H) _values_[2] = CMD_HABILITAR_ALARME_H;
+      if (!ignore_CMD_HABILITAR_ALARME_L) _values_[3] = CMD_HABILITAR_ALARME_L;
+      if (!ignore_CMD_HABILITAR_ALARME_LL) _values_[4] = CMD_HABILITAR_ALARME_LL;
+      if (!ignore_STP_ALTURA_MAXIMA) _values_[5] = STP_ALTURA_MAXIMA;
+      if (!ignore_STP_RANGE_MINIMO) _values_[6] = STP_RANGE_MINIMO;
+      if (!ignore_STP_RANGE_MAXIMO) _values_[7] = STP_RANGE_MAXIMO;
+      if (!ignore_STP_TEMPO_ALARME_HH) _values_[8] = STP_TEMPO_ALARME_HH;
+      if (!ignore_STP_TEMPO_ALARME_H) _values_[9] = STP_TEMPO_ALARME_H;
+      if (!ignore_STP_TEMPO_ALARME_L) _values_[10] = STP_TEMPO_ALARME_L;
+      if (!ignore_STP_TEMPO_ALARME_LL) _values_[11] = STP_TEMPO_ALARME_LL;
+      if (!ignore_STP_ALARME_HH) _values_[12] = STP_ALARME_HH;
+      if (!ignore_STP_ALARME_H) _values_[13] = STP_ALARME_H;
+      if (!ignore_STP_ALARME_L) _values_[14] = STP_ALARME_L;
+      if (!ignore_STP_ALARME_LL) _values_[15] = STP_ALARME_LL;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
     public bool FireEvent_E_RESET_FALHA()
@@ -768,50 +768,50 @@ stack Trace:
 
       }
     }
-    public bool FireEvent_E_ATUALIZA_SETPOINTS(System.Boolean cmdHabilitaSensor, System.Boolean cmdHabilitaAlarmeHH, System.Boolean cmdHabilitaAlarmeH, System.Boolean cmdHabilitaAlarmeL, System.Boolean cmdHabilitaAlarmeLL, System.Single stpAlturaMaxima, System.Single stpRangeMaximo, System.Single stpRangeMinimo, System.UInt16 stpTempoAlarmeHH, System.UInt16 stpTempoAlarmeH, System.UInt16 stpTempoAlarmeL, System.UInt16 stpTempoAlarmeLL, System.Single stpAlarmeHH, System.Single stpAlarmeH, System.Single stpAlarmeL, System.Single stpAlarmeLL)
+    public bool FireEvent_E_ATUALIZA_SETPOINTS(System.Boolean CMD_HABILITA_SENSOR, System.Boolean CMD_HABILITAR_ALARME_HH, System.Boolean CMD_HABILITAR_ALARME_H, System.Boolean CMD_HABILITAR_ALARME_L, System.Boolean CMD_HABILITAR_ALARME_LL, System.Single STP_ALTURA_MAXIMA, System.Single STP_RANGE_MINIMO, System.Single STP_RANGE_MAXIMO, System.UInt16 STP_TEMPO_ALARME_HH, System.UInt16 STP_TEMPO_ALARME_H, System.UInt16 STP_TEMPO_ALARME_L, System.UInt16 STP_TEMPO_ALARME_LL, System.Single STP_ALARME_HH, System.Single STP_ALARME_H, System.Single STP_ALARME_L, System.Single STP_ALARME_LL)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {cmdHabilitaSensor, cmdHabilitaAlarmeHH, cmdHabilitaAlarmeH, cmdHabilitaAlarmeL, cmdHabilitaAlarmeLL, stpAlturaMaxima, stpRangeMaximo, stpRangeMinimo, stpTempoAlarmeHH, stpTempoAlarmeH, stpTempoAlarmeL, stpTempoAlarmeLL, stpAlarmeHH, stpAlarmeH, stpAlarmeL, stpAlarmeLL});
+      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {CMD_HABILITA_SENSOR, CMD_HABILITAR_ALARME_HH, CMD_HABILITAR_ALARME_H, CMD_HABILITAR_ALARME_L, CMD_HABILITAR_ALARME_LL, STP_ALTURA_MAXIMA, STP_RANGE_MINIMO, STP_RANGE_MAXIMO, STP_TEMPO_ALARME_HH, STP_TEMPO_ALARME_H, STP_TEMPO_ALARME_L, STP_TEMPO_ALARME_LL, STP_ALARME_HH, STP_ALARME_H, STP_ALARME_L, STP_ALARME_LL});
     }
     public bool FireEvent_E_ATUALIZA_SETPOINTS(Hidryco.HidrycoLib.Symbols.Sensor_Nivel_4a20.E_ATUALIZA_SETPOINTSEventArgs ea)
     {
       object[] _values_ = new object[16];
-      if (ea.cmdHabilitaSensor.HasValue) _values_[0] = ea.cmdHabilitaSensor.Value;
-      if (ea.cmdHabilitaAlarmeHH.HasValue) _values_[1] = ea.cmdHabilitaAlarmeHH.Value;
-      if (ea.cmdHabilitaAlarmeH.HasValue) _values_[2] = ea.cmdHabilitaAlarmeH.Value;
-      if (ea.cmdHabilitaAlarmeL.HasValue) _values_[3] = ea.cmdHabilitaAlarmeL.Value;
-      if (ea.cmdHabilitaAlarmeLL.HasValue) _values_[4] = ea.cmdHabilitaAlarmeLL.Value;
-      if (ea.stpAlturaMaxima.HasValue) _values_[5] = ea.stpAlturaMaxima.Value;
-      if (ea.stpRangeMaximo.HasValue) _values_[6] = ea.stpRangeMaximo.Value;
-      if (ea.stpRangeMinimo.HasValue) _values_[7] = ea.stpRangeMinimo.Value;
-      if (ea.stpTempoAlarmeHH.HasValue) _values_[8] = ea.stpTempoAlarmeHH.Value;
-      if (ea.stpTempoAlarmeH.HasValue) _values_[9] = ea.stpTempoAlarmeH.Value;
-      if (ea.stpTempoAlarmeL.HasValue) _values_[10] = ea.stpTempoAlarmeL.Value;
-      if (ea.stpTempoAlarmeLL.HasValue) _values_[11] = ea.stpTempoAlarmeLL.Value;
-      if (ea.stpAlarmeHH.HasValue) _values_[12] = ea.stpAlarmeHH.Value;
-      if (ea.stpAlarmeH.HasValue) _values_[13] = ea.stpAlarmeH.Value;
-      if (ea.stpAlarmeL.HasValue) _values_[14] = ea.stpAlarmeL.Value;
-      if (ea.stpAlarmeLL.HasValue) _values_[15] = ea.stpAlarmeLL.Value;
+      if (ea.CMD_HABILITA_SENSOR.HasValue) _values_[0] = ea.CMD_HABILITA_SENSOR.Value;
+      if (ea.CMD_HABILITAR_ALARME_HH.HasValue) _values_[1] = ea.CMD_HABILITAR_ALARME_HH.Value;
+      if (ea.CMD_HABILITAR_ALARME_H.HasValue) _values_[2] = ea.CMD_HABILITAR_ALARME_H.Value;
+      if (ea.CMD_HABILITAR_ALARME_L.HasValue) _values_[3] = ea.CMD_HABILITAR_ALARME_L.Value;
+      if (ea.CMD_HABILITAR_ALARME_LL.HasValue) _values_[4] = ea.CMD_HABILITAR_ALARME_LL.Value;
+      if (ea.STP_ALTURA_MAXIMA.HasValue) _values_[5] = ea.STP_ALTURA_MAXIMA.Value;
+      if (ea.STP_RANGE_MINIMO.HasValue) _values_[6] = ea.STP_RANGE_MINIMO.Value;
+      if (ea.STP_RANGE_MAXIMO.HasValue) _values_[7] = ea.STP_RANGE_MAXIMO.Value;
+      if (ea.STP_TEMPO_ALARME_HH.HasValue) _values_[8] = ea.STP_TEMPO_ALARME_HH.Value;
+      if (ea.STP_TEMPO_ALARME_H.HasValue) _values_[9] = ea.STP_TEMPO_ALARME_H.Value;
+      if (ea.STP_TEMPO_ALARME_L.HasValue) _values_[10] = ea.STP_TEMPO_ALARME_L.Value;
+      if (ea.STP_TEMPO_ALARME_LL.HasValue) _values_[11] = ea.STP_TEMPO_ALARME_LL.Value;
+      if (ea.STP_ALARME_HH.HasValue) _values_[12] = ea.STP_ALARME_HH.Value;
+      if (ea.STP_ALARME_H.HasValue) _values_[13] = ea.STP_ALARME_H.Value;
+      if (ea.STP_ALARME_L.HasValue) _values_[14] = ea.STP_ALARME_L.Value;
+      if (ea.STP_ALARME_LL.HasValue) _values_[15] = ea.STP_ALARME_LL.Value;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
-    public bool FireEvent_E_ATUALIZA_SETPOINTS(System.Boolean cmdHabilitaSensor, bool ignore_cmdHabilitaSensor, System.Boolean cmdHabilitaAlarmeHH, bool ignore_cmdHabilitaAlarmeHH, System.Boolean cmdHabilitaAlarmeH, bool ignore_cmdHabilitaAlarmeH, System.Boolean cmdHabilitaAlarmeL, bool ignore_cmdHabilitaAlarmeL, System.Boolean cmdHabilitaAlarmeLL, bool ignore_cmdHabilitaAlarmeLL, System.Single stpAlturaMaxima, bool ignore_stpAlturaMaxima, System.Single stpRangeMaximo, bool ignore_stpRangeMaximo, System.Single stpRangeMinimo, bool ignore_stpRangeMinimo, System.UInt16 stpTempoAlarmeHH, bool ignore_stpTempoAlarmeHH, System.UInt16 stpTempoAlarmeH, bool ignore_stpTempoAlarmeH, System.UInt16 stpTempoAlarmeL, bool ignore_stpTempoAlarmeL, System.UInt16 stpTempoAlarmeLL, bool ignore_stpTempoAlarmeLL, System.Single stpAlarmeHH, bool ignore_stpAlarmeHH, System.Single stpAlarmeH, bool ignore_stpAlarmeH, System.Single stpAlarmeL, bool ignore_stpAlarmeL, System.Single stpAlarmeLL, bool ignore_stpAlarmeLL)
+    public bool FireEvent_E_ATUALIZA_SETPOINTS(System.Boolean CMD_HABILITA_SENSOR, bool ignore_CMD_HABILITA_SENSOR, System.Boolean CMD_HABILITAR_ALARME_HH, bool ignore_CMD_HABILITAR_ALARME_HH, System.Boolean CMD_HABILITAR_ALARME_H, bool ignore_CMD_HABILITAR_ALARME_H, System.Boolean CMD_HABILITAR_ALARME_L, bool ignore_CMD_HABILITAR_ALARME_L, System.Boolean CMD_HABILITAR_ALARME_LL, bool ignore_CMD_HABILITAR_ALARME_LL, System.Single STP_ALTURA_MAXIMA, bool ignore_STP_ALTURA_MAXIMA, System.Single STP_RANGE_MINIMO, bool ignore_STP_RANGE_MINIMO, System.Single STP_RANGE_MAXIMO, bool ignore_STP_RANGE_MAXIMO, System.UInt16 STP_TEMPO_ALARME_HH, bool ignore_STP_TEMPO_ALARME_HH, System.UInt16 STP_TEMPO_ALARME_H, bool ignore_STP_TEMPO_ALARME_H, System.UInt16 STP_TEMPO_ALARME_L, bool ignore_STP_TEMPO_ALARME_L, System.UInt16 STP_TEMPO_ALARME_LL, bool ignore_STP_TEMPO_ALARME_LL, System.Single STP_ALARME_HH, bool ignore_STP_ALARME_HH, System.Single STP_ALARME_H, bool ignore_STP_ALARME_H, System.Single STP_ALARME_L, bool ignore_STP_ALARME_L, System.Single STP_ALARME_LL, bool ignore_STP_ALARME_LL)
     {
       object[] _values_ = new object[16];
-      if (!ignore_cmdHabilitaSensor) _values_[0] = cmdHabilitaSensor;
-      if (!ignore_cmdHabilitaAlarmeHH) _values_[1] = cmdHabilitaAlarmeHH;
-      if (!ignore_cmdHabilitaAlarmeH) _values_[2] = cmdHabilitaAlarmeH;
-      if (!ignore_cmdHabilitaAlarmeL) _values_[3] = cmdHabilitaAlarmeL;
-      if (!ignore_cmdHabilitaAlarmeLL) _values_[4] = cmdHabilitaAlarmeLL;
-      if (!ignore_stpAlturaMaxima) _values_[5] = stpAlturaMaxima;
-      if (!ignore_stpRangeMaximo) _values_[6] = stpRangeMaximo;
-      if (!ignore_stpRangeMinimo) _values_[7] = stpRangeMinimo;
-      if (!ignore_stpTempoAlarmeHH) _values_[8] = stpTempoAlarmeHH;
-      if (!ignore_stpTempoAlarmeH) _values_[9] = stpTempoAlarmeH;
-      if (!ignore_stpTempoAlarmeL) _values_[10] = stpTempoAlarmeL;
-      if (!ignore_stpTempoAlarmeLL) _values_[11] = stpTempoAlarmeLL;
-      if (!ignore_stpAlarmeHH) _values_[12] = stpAlarmeHH;
-      if (!ignore_stpAlarmeH) _values_[13] = stpAlarmeH;
-      if (!ignore_stpAlarmeL) _values_[14] = stpAlarmeL;
-      if (!ignore_stpAlarmeLL) _values_[15] = stpAlarmeLL;
+      if (!ignore_CMD_HABILITA_SENSOR) _values_[0] = CMD_HABILITA_SENSOR;
+      if (!ignore_CMD_HABILITAR_ALARME_HH) _values_[1] = CMD_HABILITAR_ALARME_HH;
+      if (!ignore_CMD_HABILITAR_ALARME_H) _values_[2] = CMD_HABILITAR_ALARME_H;
+      if (!ignore_CMD_HABILITAR_ALARME_L) _values_[3] = CMD_HABILITAR_ALARME_L;
+      if (!ignore_CMD_HABILITAR_ALARME_LL) _values_[4] = CMD_HABILITAR_ALARME_LL;
+      if (!ignore_STP_ALTURA_MAXIMA) _values_[5] = STP_ALTURA_MAXIMA;
+      if (!ignore_STP_RANGE_MINIMO) _values_[6] = STP_RANGE_MINIMO;
+      if (!ignore_STP_RANGE_MAXIMO) _values_[7] = STP_RANGE_MAXIMO;
+      if (!ignore_STP_TEMPO_ALARME_HH) _values_[8] = STP_TEMPO_ALARME_HH;
+      if (!ignore_STP_TEMPO_ALARME_H) _values_[9] = STP_TEMPO_ALARME_H;
+      if (!ignore_STP_TEMPO_ALARME_L) _values_[10] = STP_TEMPO_ALARME_L;
+      if (!ignore_STP_TEMPO_ALARME_LL) _values_[11] = STP_TEMPO_ALARME_LL;
+      if (!ignore_STP_ALARME_HH) _values_[12] = STP_ALARME_HH;
+      if (!ignore_STP_ALARME_H) _values_[13] = STP_ALARME_H;
+      if (!ignore_STP_ALARME_L) _values_[14] = STP_ALARME_L;
+      if (!ignore_STP_ALARME_LL) _values_[15] = STP_ALARME_LL;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
     public bool FireEvent_E_RESET_FALHA()

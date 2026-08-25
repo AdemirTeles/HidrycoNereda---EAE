@@ -62,7 +62,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_4a20
 			this.cmdHabilitaAlarmeLL.Font = new NxtControl.Drawing.Font("ButtonFont");
 			this.cmdHabilitaAlarmeLL.FontScale = false;
 			this.cmdHabilitaAlarmeLL.Name = "cmdHabilitaAlarmeLL";
-			this.cmdHabilitaAlarmeLL.TagName = "cmdHabilitaAlarmeLL";
+			this.cmdHabilitaAlarmeLL.TagName = "CMD_HABILITA_ALARME_LL";
 			this.cmdHabilitaAlarmeLL.TrueImage = new NxtControl.Drawing.ImageHolder();
 			this.cmdHabilitaAlarmeLL.TrueImageDisabled = new NxtControl.Drawing.ImageHolder();
 			this.cmdHabilitaAlarmeLL.TrueText = "Habilitado";
@@ -87,7 +87,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_4a20
 			this.stpAlarmeLL.NumberBase = NxtControl.GuiFramework.NumberBase.Decimal;
 			this.stpAlarmeLL.Pen = new NxtControl.Drawing.Pen("TextBoxPen");
 			this.stpAlarmeLL.SetColor = new NxtControl.Drawing.Color("Yellow");
-			this.stpAlarmeLL.TagName = "stpAlarmeLL";
+			this.stpAlarmeLL.TagName = "STP_ALARME_LL";
 			this.stpAlarmeLL.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
 			this.stpAlarmeLL.UseInputPad = true;
 			this.stpAlarmeLL.Value = 0F;
@@ -103,7 +103,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_4a20
 			this.stpTempoAlarmeLL.NumberBase = NxtControl.GuiFramework.NumberBase.Decimal;
 			this.stpTempoAlarmeLL.Pen = new NxtControl.Drawing.Pen("TextBoxPen");
 			this.stpTempoAlarmeLL.SetColor = new NxtControl.Drawing.Color("Yellow");
-			this.stpTempoAlarmeLL.TagName = "stpTempoAlarmeLL";
+			this.stpTempoAlarmeLL.TagName = "STP_TEMPO_ALARME_LL";
 			this.stpTempoAlarmeLL.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
 			this.stpTempoAlarmeLL.UseInputPad = true;
 			this.stpTempoAlarmeLL.UseRange = true;
@@ -120,7 +120,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_4a20
 			this.cmdHabilitaAlarmeL.Font = new NxtControl.Drawing.Font("ButtonFont");
 			this.cmdHabilitaAlarmeL.FontScale = false;
 			this.cmdHabilitaAlarmeL.Name = "cmdHabilitaAlarmeL";
-			this.cmdHabilitaAlarmeL.TagName = "cmdHabilitaAlarmeL";
+			this.cmdHabilitaAlarmeL.TagName = "CMD_HABILITA_ALARME_L";
 			this.cmdHabilitaAlarmeL.TrueImage = new NxtControl.Drawing.ImageHolder();
 			this.cmdHabilitaAlarmeL.TrueImageDisabled = new NxtControl.Drawing.ImageHolder();
 			this.cmdHabilitaAlarmeL.TrueText = "Habilitado";
@@ -137,7 +137,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_4a20
 			this.stpAlarmeL.NumberBase = NxtControl.GuiFramework.NumberBase.Decimal;
 			this.stpAlarmeL.Pen = new NxtControl.Drawing.Pen("TextBoxPen");
 			this.stpAlarmeL.SetColor = new NxtControl.Drawing.Color("Yellow");
-			this.stpAlarmeL.TagName = "stpAlarmeL";
+			this.stpAlarmeL.TagName = "STP_ALARME_L";
 			this.stpAlarmeL.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
 			this.stpAlarmeL.UseInputPad = true;
 			this.stpAlarmeL.Value = 0F;
@@ -153,7 +153,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_4a20
 			this.stpTempoAlarmeL.NumberBase = NxtControl.GuiFramework.NumberBase.Decimal;
 			this.stpTempoAlarmeL.Pen = new NxtControl.Drawing.Pen("TextBoxPen");
 			this.stpTempoAlarmeL.SetColor = new NxtControl.Drawing.Color("Yellow");
-			this.stpTempoAlarmeL.TagName = "stpTempoAlarmeL";
+			this.stpTempoAlarmeL.TagName = "STP_TEMPO_ALARME_L";
 			this.stpTempoAlarmeL.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
 			this.stpTempoAlarmeL.UseInputPad = true;
 			this.stpTempoAlarmeL.UseRange = true;
@@ -170,7 +170,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_4a20
 			this.cmdHabilitaAlarmeH.Font = new NxtControl.Drawing.Font("ButtonFont");
 			this.cmdHabilitaAlarmeH.FontScale = false;
 			this.cmdHabilitaAlarmeH.Name = "cmdHabilitaAlarmeH";
-			this.cmdHabilitaAlarmeH.TagName = "cmdHabilitaAlarmeH";
+			this.cmdHabilitaAlarmeH.TagName = "CMD_HABILITA_ALARME_H";
 			this.cmdHabilitaAlarmeH.TrueImage = new NxtControl.Drawing.ImageHolder();
 			this.cmdHabilitaAlarmeH.TrueImageDisabled = new NxtControl.Drawing.ImageHolder();
 			this.cmdHabilitaAlarmeH.TrueText = "Habilitado";
@@ -187,7 +187,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_4a20
 			this.stpAlarmeH.NumberBase = NxtControl.GuiFramework.NumberBase.Decimal;
 			this.stpAlarmeH.Pen = new NxtControl.Drawing.Pen("TextBoxPen");
 			this.stpAlarmeH.SetColor = new NxtControl.Drawing.Color("Yellow");
-			this.stpAlarmeH.TagName = "stpAlarmeH";
+			this.stpAlarmeH.TagName = "STP_ALARME_H";
 			this.stpAlarmeH.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
 			this.stpAlarmeH.UseInputPad = true;
 			this.stpAlarmeH.Value = 0F;
@@ -203,7 +203,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_4a20
 			this.stpTempoAlarmeH.NumberBase = NxtControl.GuiFramework.NumberBase.Decimal;
 			this.stpTempoAlarmeH.Pen = new NxtControl.Drawing.Pen("TextBoxPen");
 			this.stpTempoAlarmeH.SetColor = new NxtControl.Drawing.Color("Yellow");
-			this.stpTempoAlarmeH.TagName = "stpTempoAlarmeH";
+			this.stpTempoAlarmeH.TagName = "STP_TEMPO_ALARME_H";
 			this.stpTempoAlarmeH.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
 			this.stpTempoAlarmeH.UseInputPad = true;
 			this.stpTempoAlarmeH.UseRange = true;
@@ -220,7 +220,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_4a20
 			this.cmdHabilitaAlarmeHH.Font = new NxtControl.Drawing.Font("ButtonFont");
 			this.cmdHabilitaAlarmeHH.FontScale = false;
 			this.cmdHabilitaAlarmeHH.Name = "cmdHabilitaAlarmeHH";
-			this.cmdHabilitaAlarmeHH.TagName = "cmdHabilitaAlarmeHH";
+			this.cmdHabilitaAlarmeHH.TagName = "CMD_HABILITA_ALARME_HH";
 			this.cmdHabilitaAlarmeHH.TrueImage = new NxtControl.Drawing.ImageHolder();
 			this.cmdHabilitaAlarmeHH.TrueImageDisabled = new NxtControl.Drawing.ImageHolder();
 			this.cmdHabilitaAlarmeHH.TrueText = "Habilitado";
@@ -237,7 +237,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_4a20
 			this.stpAlarmeHH.NumberBase = NxtControl.GuiFramework.NumberBase.Decimal;
 			this.stpAlarmeHH.Pen = new NxtControl.Drawing.Pen("TextBoxPen");
 			this.stpAlarmeHH.SetColor = new NxtControl.Drawing.Color("Yellow");
-			this.stpAlarmeHH.TagName = "stpAlarmeHH";
+			this.stpAlarmeHH.TagName = "STP_ALARME_HH";
 			this.stpAlarmeHH.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
 			this.stpAlarmeHH.UseInputPad = true;
 			this.stpAlarmeHH.Value = 0F;
@@ -253,7 +253,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_4a20
 			this.stpTempoAlarmeHH.NumberBase = NxtControl.GuiFramework.NumberBase.Decimal;
 			this.stpTempoAlarmeHH.Pen = new NxtControl.Drawing.Pen("TextBoxPen");
 			this.stpTempoAlarmeHH.SetColor = new NxtControl.Drawing.Color("Yellow");
-			this.stpTempoAlarmeHH.TagName = "stpTempoAlarmeHH";
+			this.stpTempoAlarmeHH.TagName = "STP_TEMPO_ALARME_HH";
 			this.stpTempoAlarmeHH.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
 			this.stpTempoAlarmeHH.UseInputPad = true;
 			this.stpTempoAlarmeHH.UseRange = true;

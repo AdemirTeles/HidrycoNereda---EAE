@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Criado pelo EcoStruxure Automation Expert.
  * Usuário:  
  * Data: 17/03/2026
@@ -289,7 +289,7 @@ namespace Hidryco.HidrycoLib.Faceplates.MGE
 			propertyDictionary1.Add("Pen", new NxtControl.Drawing.Pen("LabelPen"));
 			this.TensaoAB.Ranges.DefaultPropertyValues = propertyDictionary1;
 			this.TensaoAB.Suffix = "V";
-			this.TensaoAB.TagName = "TensaoAB";
+			this.TensaoAB.TagName = "TENSAO_AB";
 			this.TensaoAB.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleRight;
 			this.TensaoAB.EndInit();
 			// 
@@ -313,7 +313,7 @@ namespace Hidryco.HidrycoLib.Faceplates.MGE
 			propertyDictionary3.Add("Pen", new NxtControl.Drawing.Pen("LabelPen"));
 			this.TensaoBC.Ranges.DefaultPropertyValues = propertyDictionary3;
 			this.TensaoBC.Suffix = "V";
-			this.TensaoBC.TagName = "TensaoBC";
+			this.TensaoBC.TagName = "TENSAO_BC";
 			this.TensaoBC.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleRight;
 			this.TensaoBC.EndInit();
 			// 
@@ -337,7 +337,7 @@ namespace Hidryco.HidrycoLib.Faceplates.MGE
 			propertyDictionary5.Add("Pen", new NxtControl.Drawing.Pen("LabelPen"));
 			this.TensaoCA.Ranges.DefaultPropertyValues = propertyDictionary5;
 			this.TensaoCA.Suffix = "V";
-			this.TensaoCA.TagName = "TensaoCA";
+			this.TensaoCA.TagName = "TENSAO_CA";
 			this.TensaoCA.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleRight;
 			this.TensaoCA.EndInit();
 			// 
@@ -361,7 +361,7 @@ namespace Hidryco.HidrycoLib.Faceplates.MGE
 			propertyDictionary7.Add("Pen", new NxtControl.Drawing.Pen("LabelPen"));
 			this.TensaoAN.Ranges.DefaultPropertyValues = propertyDictionary7;
 			this.TensaoAN.Suffix = "V";
-			this.TensaoAN.TagName = "TensaoAN";
+			this.TensaoAN.TagName = "TENSAO_AN";
 			this.TensaoAN.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleRight;
 			this.TensaoAN.EndInit();
 			// 
@@ -385,7 +385,7 @@ namespace Hidryco.HidrycoLib.Faceplates.MGE
 			propertyDictionary9.Add("Pen", new NxtControl.Drawing.Pen("LabelPen"));
 			this.TensaoBN.Ranges.DefaultPropertyValues = propertyDictionary9;
 			this.TensaoBN.Suffix = "V";
-			this.TensaoBN.TagName = "TensaoBN";
+			this.TensaoBN.TagName = "TENSAO_BN";
 			this.TensaoBN.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleRight;
 			this.TensaoBN.EndInit();
 			// 
@@ -409,7 +409,7 @@ namespace Hidryco.HidrycoLib.Faceplates.MGE
 			propertyDictionary11.Add("Pen", new NxtControl.Drawing.Pen("LabelPen"));
 			this.TensaoCN.Ranges.DefaultPropertyValues = propertyDictionary11;
 			this.TensaoCN.Suffix = "V";
-			this.TensaoCN.TagName = "TensaoCN";
+			this.TensaoCN.TagName = "TENSAO_CN";
 			this.TensaoCN.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleRight;
 			this.TensaoCN.EndInit();
 			// 
@@ -433,7 +433,7 @@ namespace Hidryco.HidrycoLib.Faceplates.MGE
 			propertyDictionary13.Add("Pen", new NxtControl.Drawing.Pen("LabelPen"));
 			this.CorrenteA.Ranges.DefaultPropertyValues = propertyDictionary13;
 			this.CorrenteA.Suffix = "A";
-			this.CorrenteA.TagName = "CorrenteA";
+			this.CorrenteA.TagName = "CORRENTE_A";
 			this.CorrenteA.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleRight;
 			this.CorrenteA.EndInit();
 			// 
@@ -457,7 +457,7 @@ namespace Hidryco.HidrycoLib.Faceplates.MGE
 			propertyDictionary15.Add("Pen", new NxtControl.Drawing.Pen("LabelPen"));
 			this.CorrenteB.Ranges.DefaultPropertyValues = propertyDictionary15;
 			this.CorrenteB.Suffix = "A";
-			this.CorrenteB.TagName = "CorrenteB";
+			this.CorrenteB.TagName = "CORRENTE_B";
 			this.CorrenteB.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleRight;
 			this.CorrenteB.EndInit();
 			// 
@@ -481,7 +481,7 @@ namespace Hidryco.HidrycoLib.Faceplates.MGE
 			propertyDictionary17.Add("Pen", new NxtControl.Drawing.Pen("LabelPen"));
 			this.CorrenteC.Ranges.DefaultPropertyValues = propertyDictionary17;
 			this.CorrenteC.Suffix = "A";
-			this.CorrenteC.TagName = "CorrenteC";
+			this.CorrenteC.TagName = "CORRENTE_C";
 			this.CorrenteC.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleRight;
 			this.CorrenteC.EndInit();
 			// 
@@ -505,7 +505,7 @@ namespace Hidryco.HidrycoLib.Faceplates.MGE
 			propertyDictionary19.Add("Pen", new NxtControl.Drawing.Pen("LabelPen"));
 			this.PotenciaAtivaA.Ranges.DefaultPropertyValues = propertyDictionary19;
 			this.PotenciaAtivaA.Suffix = "kW";
-			this.PotenciaAtivaA.TagName = "PotenciaAtivaA";
+			this.PotenciaAtivaA.TagName = "POTENCIA_ATIVA_A";
 			this.PotenciaAtivaA.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleRight;
 			this.PotenciaAtivaA.EndInit();
 			// 
@@ -529,7 +529,7 @@ namespace Hidryco.HidrycoLib.Faceplates.MGE
 			propertyDictionary21.Add("Pen", new NxtControl.Drawing.Pen("LabelPen"));
 			this.PotenciaAtivaB.Ranges.DefaultPropertyValues = propertyDictionary21;
 			this.PotenciaAtivaB.Suffix = "kW";
-			this.PotenciaAtivaB.TagName = "PotenciaAtivaB";
+			this.PotenciaAtivaB.TagName = "POTENCIA_ATIVA_B";
 			this.PotenciaAtivaB.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleRight;
 			this.PotenciaAtivaB.EndInit();
 			// 
@@ -553,7 +553,7 @@ namespace Hidryco.HidrycoLib.Faceplates.MGE
 			propertyDictionary23.Add("Pen", new NxtControl.Drawing.Pen("LabelPen"));
 			this.PotenciaAtivaC.Ranges.DefaultPropertyValues = propertyDictionary23;
 			this.PotenciaAtivaC.Suffix = "kW";
-			this.PotenciaAtivaC.TagName = "PotenciaAtivaC";
+			this.PotenciaAtivaC.TagName = "POTENCIA_ATIVA_C";
 			this.PotenciaAtivaC.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleRight;
 			this.PotenciaAtivaC.EndInit();
 			// 
@@ -577,7 +577,7 @@ namespace Hidryco.HidrycoLib.Faceplates.MGE
 			propertyDictionary25.Add("Pen", new NxtControl.Drawing.Pen("LabelPen"));
 			this.PotenciaAtivaTotal.Ranges.DefaultPropertyValues = propertyDictionary25;
 			this.PotenciaAtivaTotal.Suffix = "kW";
-			this.PotenciaAtivaTotal.TagName = "PotenciaAtivaTotal";
+			this.PotenciaAtivaTotal.TagName = "POTENCIA_ATIVA_TOTAL";
 			this.PotenciaAtivaTotal.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleRight;
 			this.PotenciaAtivaTotal.EndInit();
 			// 
@@ -601,7 +601,7 @@ namespace Hidryco.HidrycoLib.Faceplates.MGE
 			propertyDictionary27.Add("Pen", new NxtControl.Drawing.Pen("LabelPen"));
 			this.PotenciaReativaA.Ranges.DefaultPropertyValues = propertyDictionary27;
 			this.PotenciaReativaA.Suffix = "kVAR";
-			this.PotenciaReativaA.TagName = "PotenciaReativaA";
+			this.PotenciaReativaA.TagName = "POTENCIA_REATIVA_A";
 			this.PotenciaReativaA.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleRight;
 			this.PotenciaReativaA.EndInit();
 			// 
@@ -625,7 +625,7 @@ namespace Hidryco.HidrycoLib.Faceplates.MGE
 			propertyDictionary29.Add("Pen", new NxtControl.Drawing.Pen("LabelPen"));
 			this.PotenciaReativaB.Ranges.DefaultPropertyValues = propertyDictionary29;
 			this.PotenciaReativaB.Suffix = "kVAR";
-			this.PotenciaReativaB.TagName = "PotenciaReativaB";
+			this.PotenciaReativaB.TagName = "POTENCIA_REATIVA_B";
 			this.PotenciaReativaB.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleRight;
 			this.PotenciaReativaB.EndInit();
 			// 
@@ -649,7 +649,7 @@ namespace Hidryco.HidrycoLib.Faceplates.MGE
 			propertyDictionary31.Add("Pen", new NxtControl.Drawing.Pen("LabelPen"));
 			this.PotenciaReativaC.Ranges.DefaultPropertyValues = propertyDictionary31;
 			this.PotenciaReativaC.Suffix = "kVAR";
-			this.PotenciaReativaC.TagName = "PotenciaReativaC";
+			this.PotenciaReativaC.TagName = "POTENCIA_REATIVA_C";
 			this.PotenciaReativaC.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleRight;
 			this.PotenciaReativaC.EndInit();
 			// 
@@ -673,7 +673,7 @@ namespace Hidryco.HidrycoLib.Faceplates.MGE
 			propertyDictionary33.Add("Pen", new NxtControl.Drawing.Pen("LabelPen"));
 			this.PotenciaReativaTotal.Ranges.DefaultPropertyValues = propertyDictionary33;
 			this.PotenciaReativaTotal.Suffix = "kVAR";
-			this.PotenciaReativaTotal.TagName = "PotenciaReativaTotal";
+			this.PotenciaReativaTotal.TagName = "POTENCIA_REATIVA_TOTAL";
 			this.PotenciaReativaTotal.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleRight;
 			this.PotenciaReativaTotal.EndInit();
 			// 

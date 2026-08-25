@@ -29,7 +29,7 @@ namespace Hidryco.HidrycoLib.Symbols.MGE
       this.cookie = cookie;
       this.eventIndex = eventIndex;
     }
-    public bool Get_TensaoAB(ref System.Single value)
+    public bool Get_TENSAO_AB(ref System.Single value)
     {
       if (accessorService == null)
         return false;
@@ -39,7 +39,7 @@ namespace Hidryco.HidrycoLib.Symbols.MGE
       return ret;
     }
 
-    public System.Single? TensaoAB
+    public System.Single? TENSAO_AB
     { get {
       if (accessorService == null)
         return null;
@@ -49,7 +49,7 @@ namespace Hidryco.HidrycoLib.Symbols.MGE
       return (System.Single) var;
     }  }
 
-    public bool Get_TensaoBC(ref System.Single value)
+    public bool Get_TENSAO_BC(ref System.Single value)
     {
       if (accessorService == null)
         return false;
@@ -59,7 +59,7 @@ namespace Hidryco.HidrycoLib.Symbols.MGE
       return ret;
     }
 
-    public System.Single? TensaoBC
+    public System.Single? TENSAO_BC
     { get {
       if (accessorService == null)
         return null;
@@ -69,7 +69,7 @@ namespace Hidryco.HidrycoLib.Symbols.MGE
       return (System.Single) var;
     }  }
 
-    public bool Get_TensaoCA(ref System.Single value)
+    public bool Get_TENSAO_CA(ref System.Single value)
     {
       if (accessorService == null)
         return false;
@@ -79,7 +79,7 @@ namespace Hidryco.HidrycoLib.Symbols.MGE
       return ret;
     }
 
-    public System.Single? TensaoCA
+    public System.Single? TENSAO_CA
     { get {
       if (accessorService == null)
         return null;
@@ -89,7 +89,7 @@ namespace Hidryco.HidrycoLib.Symbols.MGE
       return (System.Single) var;
     }  }
 
-    public bool Get_TensaoAN(ref System.Single value)
+    public bool Get_TENSAO_AN(ref System.Single value)
     {
       if (accessorService == null)
         return false;
@@ -99,7 +99,7 @@ namespace Hidryco.HidrycoLib.Symbols.MGE
       return ret;
     }
 
-    public System.Single? TensaoAN
+    public System.Single? TENSAO_AN
     { get {
       if (accessorService == null)
         return null;
@@ -109,7 +109,7 @@ namespace Hidryco.HidrycoLib.Symbols.MGE
       return (System.Single) var;
     }  }
 
-    public bool Get_TensaoBN(ref System.Single value)
+    public bool Get_TENSAO_BN(ref System.Single value)
     {
       if (accessorService == null)
         return false;
@@ -119,7 +119,7 @@ namespace Hidryco.HidrycoLib.Symbols.MGE
       return ret;
     }
 
-    public System.Single? TensaoBN
+    public System.Single? TENSAO_BN
     { get {
       if (accessorService == null)
         return null;
@@ -129,7 +129,7 @@ namespace Hidryco.HidrycoLib.Symbols.MGE
       return (System.Single) var;
     }  }
 
-    public bool Get_TensaoCN(ref System.Single value)
+    public bool Get_TENSAO_CN(ref System.Single value)
     {
       if (accessorService == null)
         return false;
@@ -139,7 +139,7 @@ namespace Hidryco.HidrycoLib.Symbols.MGE
       return ret;
     }
 
-    public System.Single? TensaoCN
+    public System.Single? TENSAO_CN
     { get {
       if (accessorService == null)
         return null;
@@ -149,7 +149,7 @@ namespace Hidryco.HidrycoLib.Symbols.MGE
       return (System.Single) var;
     }  }
 
-    public bool Get_CorrenteA(ref System.Single value)
+    public bool Get_CORRENTE_A(ref System.Single value)
     {
       if (accessorService == null)
         return false;
@@ -159,7 +159,7 @@ namespace Hidryco.HidrycoLib.Symbols.MGE
       return ret;
     }
 
-    public System.Single? CorrenteA
+    public System.Single? CORRENTE_A
     { get {
       if (accessorService == null)
         return null;
@@ -169,7 +169,7 @@ namespace Hidryco.HidrycoLib.Symbols.MGE
       return (System.Single) var;
     }  }
 
-    public bool Get_CorrenteB(ref System.Single value)
+    public bool Get_CORRENTE_B(ref System.Single value)
     {
       if (accessorService == null)
         return false;
@@ -179,7 +179,7 @@ namespace Hidryco.HidrycoLib.Symbols.MGE
       return ret;
     }
 
-    public System.Single? CorrenteB
+    public System.Single? CORRENTE_B
     { get {
       if (accessorService == null)
         return null;
@@ -189,7 +189,7 @@ namespace Hidryco.HidrycoLib.Symbols.MGE
       return (System.Single) var;
     }  }
 
-    public bool Get_CorrenteC(ref System.Single value)
+    public bool Get_CORRENTE_C(ref System.Single value)
     {
       if (accessorService == null)
         return false;
@@ -199,7 +199,7 @@ namespace Hidryco.HidrycoLib.Symbols.MGE
       return ret;
     }
 
-    public System.Single? CorrenteC
+    public System.Single? CORRENTE_C
     { get {
       if (accessorService == null)
         return null;
@@ -209,7 +209,7 @@ namespace Hidryco.HidrycoLib.Symbols.MGE
       return (System.Single) var;
     }  }
 
-    public bool Get_PotenciaAtivaA(ref System.Single value)
+    public bool Get_POTENCIA_ATIVA_A(ref System.Single value)
     {
       if (accessorService == null)
         return false;
@@ -219,7 +219,7 @@ namespace Hidryco.HidrycoLib.Symbols.MGE
       return ret;
     }
 
-    public System.Single? PotenciaAtivaA
+    public System.Single? POTENCIA_ATIVA_A
     { get {
       if (accessorService == null)
         return null;
@@ -229,7 +229,7 @@ namespace Hidryco.HidrycoLib.Symbols.MGE
       return (System.Single) var;
     }  }
 
-    public bool Get_PotenciaAtivaB(ref System.Single value)
+    public bool Get_POTENCIA_ATIVA_B(ref System.Single value)
     {
       if (accessorService == null)
         return false;
@@ -239,7 +239,7 @@ namespace Hidryco.HidrycoLib.Symbols.MGE
       return ret;
     }
 
-    public System.Single? PotenciaAtivaB
+    public System.Single? POTENCIA_ATIVA_B
     { get {
       if (accessorService == null)
         return null;
@@ -249,7 +249,7 @@ namespace Hidryco.HidrycoLib.Symbols.MGE
       return (System.Single) var;
     }  }
 
-    public bool Get_PotenciaAtivaC(ref System.Single value)
+    public bool Get_POTENCIA_ATIVA_C(ref System.Single value)
     {
       if (accessorService == null)
         return false;
@@ -259,7 +259,7 @@ namespace Hidryco.HidrycoLib.Symbols.MGE
       return ret;
     }
 
-    public System.Single? PotenciaAtivaC
+    public System.Single? POTENCIA_ATIVA_C
     { get {
       if (accessorService == null)
         return null;
@@ -269,7 +269,7 @@ namespace Hidryco.HidrycoLib.Symbols.MGE
       return (System.Single) var;
     }  }
 
-    public bool Get_PotenciaAtivaTotal(ref System.Single value)
+    public bool Get_POTENCIA_ATIVA_TOTAL(ref System.Single value)
     {
       if (accessorService == null)
         return false;
@@ -279,7 +279,7 @@ namespace Hidryco.HidrycoLib.Symbols.MGE
       return ret;
     }
 
-    public System.Single? PotenciaAtivaTotal
+    public System.Single? POTENCIA_ATIVA_TOTAL
     { get {
       if (accessorService == null)
         return null;
@@ -289,7 +289,7 @@ namespace Hidryco.HidrycoLib.Symbols.MGE
       return (System.Single) var;
     }  }
 
-    public bool Get_PotenciaReativaA(ref System.Single value)
+    public bool Get_POTENCIA_REATIVA_A(ref System.Single value)
     {
       if (accessorService == null)
         return false;
@@ -299,7 +299,7 @@ namespace Hidryco.HidrycoLib.Symbols.MGE
       return ret;
     }
 
-    public System.Single? PotenciaReativaA
+    public System.Single? POTENCIA_REATIVA_A
     { get {
       if (accessorService == null)
         return null;
@@ -309,7 +309,7 @@ namespace Hidryco.HidrycoLib.Symbols.MGE
       return (System.Single) var;
     }  }
 
-    public bool Get_PotenciaReativaB(ref System.Single value)
+    public bool Get_POTENCIA_REATIVA_B(ref System.Single value)
     {
       if (accessorService == null)
         return false;
@@ -319,7 +319,7 @@ namespace Hidryco.HidrycoLib.Symbols.MGE
       return ret;
     }
 
-    public System.Single? PotenciaReativaB
+    public System.Single? POTENCIA_REATIVA_B
     { get {
       if (accessorService == null)
         return null;
@@ -329,7 +329,7 @@ namespace Hidryco.HidrycoLib.Symbols.MGE
       return (System.Single) var;
     }  }
 
-    public bool Get_PotenciaReativaC(ref System.Single value)
+    public bool Get_POTENCIA_REATIVA_C(ref System.Single value)
     {
       if (accessorService == null)
         return false;
@@ -339,7 +339,7 @@ namespace Hidryco.HidrycoLib.Symbols.MGE
       return ret;
     }
 
-    public System.Single? PotenciaReativaC
+    public System.Single? POTENCIA_REATIVA_C
     { get {
       if (accessorService == null)
         return null;
@@ -349,7 +349,7 @@ namespace Hidryco.HidrycoLib.Symbols.MGE
       return (System.Single) var;
     }  }
 
-    public bool Get_PotenciaReativaTotal(ref System.Single value)
+    public bool Get_POTENCIA_REATIVA_TOTAL(ref System.Single value)
     {
       if (accessorService == null)
         return false;
@@ -359,7 +359,7 @@ namespace Hidryco.HidrycoLib.Symbols.MGE
       return ret;
     }
 
-    public System.Single? PotenciaReativaTotal
+    public System.Single? POTENCIA_REATIVA_TOTAL
     { get {
       if (accessorService == null)
         return null;

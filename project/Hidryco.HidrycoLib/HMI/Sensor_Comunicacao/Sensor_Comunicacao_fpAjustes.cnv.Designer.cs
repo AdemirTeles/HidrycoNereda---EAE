@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Criado pelo EcoStruxure Automation Expert.
  * Usuário:  
  * Data: 02/03/2026
@@ -53,7 +53,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_Comunicacao
 			this.cmdHabilitaSensor.Font = new NxtControl.Drawing.Font("ButtonFont");
 			this.cmdHabilitaSensor.FontScale = true;
 			this.cmdHabilitaSensor.Name = "cmdHabilitaSensor";
-			this.cmdHabilitaSensor.TagName = "cmdHabilitaSensor";
+			this.cmdHabilitaSensor.TagName = "CMD_HABILITA_SENSOR";
 			this.cmdHabilitaSensor.TrueImage = new NxtControl.Drawing.ImageHolder();
 			this.cmdHabilitaSensor.TrueImageDisabled = new NxtControl.Drawing.ImageHolder();
 			this.cmdHabilitaSensor.TrueText = "Habilitado";

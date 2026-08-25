@@ -107,7 +107,7 @@ namespace Hidryco.HidrycoLib.Symbols.CPress
 			this.stsFuncionamentoM1.Ranges.Add(new NxtControl.GuiFramework.Range<short>(((short)(2)), propertyDictionary115));
 			propertyDictionary112.Add("Color", new NxtControl.Drawing.Color("LedDefaultColor"));
 			this.stsFuncionamentoM1.Ranges.DefaultPropertyValues = propertyDictionary112;
-			this.stsFuncionamentoM1.TagName = "stsFuncionamentoM1";
+			this.stsFuncionamentoM1.TagName = "STS_FUNCIONAMENTO_M1";
 			this.stsFuncionamentoM1.EndInit();
 			// 
 			// stsFuncionamentoM2
@@ -129,7 +129,7 @@ namespace Hidryco.HidrycoLib.Symbols.CPress
 			this.stsFuncionamentoM2.Ranges.Add(new NxtControl.GuiFramework.Range<short>(((short)(3)), propertyDictionary120));
 			propertyDictionary116.Add("Color", new NxtControl.Drawing.Color("LedDefaultColor"));
 			this.stsFuncionamentoM2.Ranges.DefaultPropertyValues = propertyDictionary116;
-			this.stsFuncionamentoM2.TagName = "stsFuncionamentoM2";
+			this.stsFuncionamentoM2.TagName = "STS_FUNCIONAMENTO_M2";
 			this.stsFuncionamentoM2.EndInit();
 			// 
 			// stsFuncionamentoM3
@@ -149,7 +149,7 @@ namespace Hidryco.HidrycoLib.Symbols.CPress
 			this.stsFuncionamentoM3.Ranges.Add(new NxtControl.GuiFramework.Range<short>(((short)(2)), propertyDictionary124));
 			propertyDictionary121.Add("Color", new NxtControl.Drawing.Color("LedDefaultColor"));
 			this.stsFuncionamentoM3.Ranges.DefaultPropertyValues = propertyDictionary121;
-			this.stsFuncionamentoM3.TagName = "stsFuncionamentoM3";
+			this.stsFuncionamentoM3.TagName = "STS_FUNCIONAMENTO_M3";
 			this.stsFuncionamentoM3.EndInit();
 			// 
 			// stsFuncionamentoM4
@@ -169,7 +169,7 @@ namespace Hidryco.HidrycoLib.Symbols.CPress
 			this.stsFuncionamentoM4.Ranges.Add(new NxtControl.GuiFramework.Range<short>(((short)(2)), propertyDictionary128));
 			propertyDictionary125.Add("Color", new NxtControl.Drawing.Color("LedDefaultColor"));
 			this.stsFuncionamentoM4.Ranges.DefaultPropertyValues = propertyDictionary125;
-			this.stsFuncionamentoM4.TagName = "stsFuncionamentoM4";
+			this.stsFuncionamentoM4.TagName = "STS_FUNCIONAMENTO_M4";
 			this.stsFuncionamentoM4.EndInit();
 			// 
 			// stsFuncionamentoM5
@@ -189,7 +189,7 @@ namespace Hidryco.HidrycoLib.Symbols.CPress
 			this.stsFuncionamentoM5.Ranges.Add(new NxtControl.GuiFramework.Range<short>(((short)(2)), propertyDictionary132));
 			propertyDictionary129.Add("Color", new NxtControl.Drawing.Color("LedDefaultColor"));
 			this.stsFuncionamentoM5.Ranges.DefaultPropertyValues = propertyDictionary129;
-			this.stsFuncionamentoM5.TagName = "stsFuncionamentoM5";
+			this.stsFuncionamentoM5.TagName = "STS_FUNCIONAMENTO_M5";
 			this.stsFuncionamentoM5.EndInit();
 			// 
 			// freeText1
@@ -247,7 +247,7 @@ namespace Hidryco.HidrycoLib.Symbols.CPress
 			this.stsVS1.Ranges.Add(new NxtControl.GuiFramework.Range<short>(((short)(1)), propertyDictionary135));
 			propertyDictionary133.Add("Color", new NxtControl.Drawing.Color("LedDefaultColor"));
 			this.stsVS1.Ranges.DefaultPropertyValues = propertyDictionary133;
-			this.stsVS1.TagName = "stsVS1";
+			this.stsVS1.TagName = "STS_VS1";
 			this.stsVS1.EndInit();
 			// 
 			// freeText6
@@ -273,7 +273,7 @@ namespace Hidryco.HidrycoLib.Symbols.CPress
 			this.stsFS1.Ranges.Add(new NxtControl.GuiFramework.Range<short>(((short)(1)), propertyDictionary138));
 			propertyDictionary136.Add("Color", new NxtControl.Drawing.Color("LedDefaultColor"));
 			this.stsFS1.Ranges.DefaultPropertyValues = propertyDictionary136;
-			this.stsFS1.TagName = "stsFS1";
+			this.stsFS1.TagName = "STS_FS1";
 			this.stsFS1.EndInit();
 			// 
 			// freeText7
@@ -299,7 +299,7 @@ namespace Hidryco.HidrycoLib.Symbols.CPress
 			this.stsZSAH1.Ranges.Add(new NxtControl.GuiFramework.Range<short>(((short)(1)), propertyDictionary141));
 			propertyDictionary139.Add("Color", new NxtControl.Drawing.Color("LedDefaultColor"));
 			this.stsZSAH1.Ranges.DefaultPropertyValues = propertyDictionary139;
-			this.stsZSAH1.TagName = "stsZSAH1";
+			this.stsZSAH1.TagName = "STS_ZSAH1";
 			this.stsZSAH1.EndInit();
 			// 
 			// freeText8
@@ -325,7 +325,7 @@ namespace Hidryco.HidrycoLib.Symbols.CPress
 			this.stsZSAH2.Ranges.Add(new NxtControl.GuiFramework.Range<short>(((short)(1)), propertyDictionary144));
 			propertyDictionary142.Add("Color", new NxtControl.Drawing.Color("LedDefaultColor"));
 			this.stsZSAH2.Ranges.DefaultPropertyValues = propertyDictionary142;
-			this.stsZSAH2.TagName = "stsZSAH2";
+			this.stsZSAH2.TagName = "STS_ZSAH2";
 			this.stsZSAH2.EndInit();
 			// 
 			// freeText9
@@ -366,7 +366,7 @@ namespace Hidryco.HidrycoLib.Symbols.CPress
 			this.stsAlarmeAcionado.Ranges.Add(new NxtControl.GuiFramework.Range<short>(((short)(1)), propertyDictionary147));
 			propertyDictionary145.Add("Color", new NxtControl.Drawing.Color("LedDefaultColor"));
 			this.stsAlarmeAcionado.Ranges.DefaultPropertyValues = propertyDictionary145;
-			this.stsAlarmeAcionado.TagName = "stsAlarmeAcionado";
+			this.stsAlarmeAcionado.TagName = "STS_ALARME_ACIONADO";
 			this.stsAlarmeAcionado.EndInit();
 			// 
 			// aliasDisplayLabel1
@@ -401,7 +401,7 @@ namespace Hidryco.HidrycoLib.Symbols.CPress
 			this.cmdLigaCiclo.Font = new NxtControl.Drawing.Font("ButtonFont");
 			this.cmdLigaCiclo.FontScale = false;
 			this.cmdLigaCiclo.Name = "cmdLigaCiclo";
-			this.cmdLigaCiclo.TagName = "cmdLigaCiclo";
+			this.cmdLigaCiclo.TagName = "CMD_LIGA_CICLO";
 			this.cmdLigaCiclo.TrueImage = new NxtControl.Drawing.ImageHolder();
 			this.cmdLigaCiclo.TrueImageDisabled = new NxtControl.Drawing.ImageHolder();
 			this.cmdLigaCiclo.TrueText = "Desligar";
@@ -416,7 +416,7 @@ namespace Hidryco.HidrycoLib.Symbols.CPress
 			this.stsEmergencia.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
 			this.stsEmergencia.Name = "stsEmergencia";
 			this.stsEmergencia.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
-			this.stsEmergencia.TagName = "stsEmergencia";
+			this.stsEmergencia.TagName = "STS_EMERGENCIA";
 			this.stsEmergencia.Value = ((short)(0));
 			this.stsEmergencia.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.StsEmergenciaValueChanged);
 			this.stsEmergencia.EndInit();
@@ -433,7 +433,7 @@ namespace Hidryco.HidrycoLib.Symbols.CPress
 			propertyDictionary148.Add("TextColor", new NxtControl.Drawing.Color("LabelTextColor"));
 			this.stsNivelTanqueFloculador.Ranges.DefaultPropertyValues = propertyDictionary148;
 			this.stsNivelTanqueFloculador.Suffix = "%";
-			this.stsNivelTanqueFloculador.TagName = "stsNivelTanqueFloculador";
+			this.stsNivelTanqueFloculador.TagName = "STS_NIVEL_TANQUE_FLOCULADOR";
 			this.stsNivelTanqueFloculador.TextAngle = 0F;
 			this.stsNivelTanqueFloculador.EndInit();
 			// 

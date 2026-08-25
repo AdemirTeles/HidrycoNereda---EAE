@@ -29,7 +29,7 @@ namespace Hidryco.HidrycoLib.Symbols.CPress
       this.cookie = cookie;
       this.eventIndex = eventIndex;
     }
-    public bool Get_stsEmergencia(ref System.Int16 value)
+    public bool Get_STS_EMERGENCIA(ref System.Int16 value)
     {
       if (accessorService == null)
         return false;
@@ -39,7 +39,7 @@ namespace Hidryco.HidrycoLib.Symbols.CPress
       return ret;
     }
 
-    public System.Int16? stsEmergencia
+    public System.Int16? STS_EMERGENCIA
     { get {
       if (accessorService == null)
         return null;
@@ -49,7 +49,7 @@ namespace Hidryco.HidrycoLib.Symbols.CPress
       return (System.Int16) var;
     }  }
 
-    public bool Get_stsAlarmeAcionado(ref System.Int16 value)
+    public bool Get_STS_ALARME_ACIONADO(ref System.Int16 value)
     {
       if (accessorService == null)
         return false;
@@ -59,7 +59,7 @@ namespace Hidryco.HidrycoLib.Symbols.CPress
       return ret;
     }
 
-    public System.Int16? stsAlarmeAcionado
+    public System.Int16? STS_ALARME_ACIONADO
     { get {
       if (accessorService == null)
         return null;
@@ -69,7 +69,7 @@ namespace Hidryco.HidrycoLib.Symbols.CPress
       return (System.Int16) var;
     }  }
 
-    public bool Get_stsFuncionamentoM1(ref System.Int16 value)
+    public bool Get_STS_FUNCIONAMENTO_M1(ref System.Int16 value)
     {
       if (accessorService == null)
         return false;
@@ -79,7 +79,7 @@ namespace Hidryco.HidrycoLib.Symbols.CPress
       return ret;
     }
 
-    public System.Int16? stsFuncionamentoM1
+    public System.Int16? STS_FUNCIONAMENTO_M1
     { get {
       if (accessorService == null)
         return null;
@@ -89,7 +89,7 @@ namespace Hidryco.HidrycoLib.Symbols.CPress
       return (System.Int16) var;
     }  }
 
-    public bool Get_stsFuncionamentoM2(ref System.Int16 value)
+    public bool Get_STS_FUNCIONAMENTO_M2(ref System.Int16 value)
     {
       if (accessorService == null)
         return false;
@@ -99,7 +99,7 @@ namespace Hidryco.HidrycoLib.Symbols.CPress
       return ret;
     }
 
-    public System.Int16? stsFuncionamentoM2
+    public System.Int16? STS_FUNCIONAMENTO_M2
     { get {
       if (accessorService == null)
         return null;
@@ -109,7 +109,7 @@ namespace Hidryco.HidrycoLib.Symbols.CPress
       return (System.Int16) var;
     }  }
 
-    public bool Get_stsFuncionamentoM3(ref System.Int16 value)
+    public bool Get_STS_FUNCIONAMENTO_M3(ref System.Int16 value)
     {
       if (accessorService == null)
         return false;
@@ -119,7 +119,7 @@ namespace Hidryco.HidrycoLib.Symbols.CPress
       return ret;
     }
 
-    public System.Int16? stsFuncionamentoM3
+    public System.Int16? STS_FUNCIONAMENTO_M3
     { get {
       if (accessorService == null)
         return null;
@@ -129,7 +129,7 @@ namespace Hidryco.HidrycoLib.Symbols.CPress
       return (System.Int16) var;
     }  }
 
-    public bool Get_stsFuncionamentoM4(ref System.Int16 value)
+    public bool Get_STS_FUNCIONAMENTO_M4(ref System.Int16 value)
     {
       if (accessorService == null)
         return false;
@@ -139,7 +139,7 @@ namespace Hidryco.HidrycoLib.Symbols.CPress
       return ret;
     }
 
-    public System.Int16? stsFuncionamentoM4
+    public System.Int16? STS_FUNCIONAMENTO_M4
     { get {
       if (accessorService == null)
         return null;
@@ -149,7 +149,7 @@ namespace Hidryco.HidrycoLib.Symbols.CPress
       return (System.Int16) var;
     }  }
 
-    public bool Get_stsFuncionamentoM5(ref System.Int16 value)
+    public bool Get_STS_FUNCIONAMENTO_M5(ref System.Int16 value)
     {
       if (accessorService == null)
         return false;
@@ -159,7 +159,7 @@ namespace Hidryco.HidrycoLib.Symbols.CPress
       return ret;
     }
 
-    public System.Int16? stsFuncionamentoM5
+    public System.Int16? STS_FUNCIONAMENTO_M5
     { get {
       if (accessorService == null)
         return null;
@@ -169,7 +169,7 @@ namespace Hidryco.HidrycoLib.Symbols.CPress
       return (System.Int16) var;
     }  }
 
-    public bool Get_stsVS1(ref System.Int16 value)
+    public bool Get_STS_VS1(ref System.Int16 value)
     {
       if (accessorService == null)
         return false;
@@ -179,7 +179,7 @@ namespace Hidryco.HidrycoLib.Symbols.CPress
       return ret;
     }
 
-    public System.Int16? stsVS1
+    public System.Int16? STS_VS1
     { get {
       if (accessorService == null)
         return null;
@@ -189,7 +189,7 @@ namespace Hidryco.HidrycoLib.Symbols.CPress
       return (System.Int16) var;
     }  }
 
-    public bool Get_stsFS1(ref System.Int16 value)
+    public bool Get_STS_FS1(ref System.Int16 value)
     {
       if (accessorService == null)
         return false;
@@ -199,7 +199,7 @@ namespace Hidryco.HidrycoLib.Symbols.CPress
       return ret;
     }
 
-    public System.Int16? stsFS1
+    public System.Int16? STS_FS1
     { get {
       if (accessorService == null)
         return null;
@@ -209,7 +209,7 @@ namespace Hidryco.HidrycoLib.Symbols.CPress
       return (System.Int16) var;
     }  }
 
-    public bool Get_stsZSAH1(ref System.Int16 value)
+    public bool Get_STS_ZSAH1(ref System.Int16 value)
     {
       if (accessorService == null)
         return false;
@@ -219,7 +219,7 @@ namespace Hidryco.HidrycoLib.Symbols.CPress
       return ret;
     }
 
-    public System.Int16? stsZSAH1
+    public System.Int16? STS_ZSAH1
     { get {
       if (accessorService == null)
         return null;
@@ -229,7 +229,7 @@ namespace Hidryco.HidrycoLib.Symbols.CPress
       return (System.Int16) var;
     }  }
 
-    public bool Get_stsZSAH2(ref System.Int16 value)
+    public bool Get_STS_ZSAH2(ref System.Int16 value)
     {
       if (accessorService == null)
         return false;
@@ -239,7 +239,7 @@ namespace Hidryco.HidrycoLib.Symbols.CPress
       return ret;
     }
 
-    public System.Int16? stsZSAH2
+    public System.Int16? STS_ZSAH2
     { get {
       if (accessorService == null)
         return null;
@@ -249,7 +249,7 @@ namespace Hidryco.HidrycoLib.Symbols.CPress
       return (System.Int16) var;
     }  }
 
-    public bool Get_stsNivelTanqueFloculador(ref System.Int16 value)
+    public bool Get_STS_NIVEL_TANQUE_FLOCULADOR(ref System.Int16 value)
     {
       if (accessorService == null)
         return false;
@@ -259,7 +259,7 @@ namespace Hidryco.HidrycoLib.Symbols.CPress
       return ret;
     }
 
-    public System.Int16? stsNivelTanqueFloculador
+    public System.Int16? STS_NIVEL_TANQUE_FLOCULADOR
     { get {
       if (accessorService == null)
         return null;
