@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE AdapterType SYSTEM "../LibraryElement.dtd">
-<AdapterType GUID="29fc4316-d3a6-4bc9-9313-462b7a9dd0cc" Name="ISludgeHoldingTankStatus" Comment="Adapter Interface" Namespace="SE.Nereda">
+<AdapterType GUID="34242015-5619-4d15-ac19-74ccd77182bf" Name="ISludgeHoldingTankStatus" Comment="Adapter Interface" Namespace="SE.Nereda">
   <Identification Standard="61499-1" />
   <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="24/08/2026" />
   <InterfaceList>

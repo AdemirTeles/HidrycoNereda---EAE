@@ -17,8 +17,13 @@ namespace SE.Nereda.Symbols.NeredaReactor
 	/// </summary>
 	public partial class sReactor4 : NxtControl.GuiFramework.HMISymbol
 	{
-		private string _LT001 = "lt 001";
+		private string _LT001 = "4xLT1005";
 		private string _REACTOR = "Reactor 1";
+		private string _AV4x101 = "AV4x101";
+		private string _AV4x171 = "AV4x171";
+		private string _AV4x172 = "AV4x172";
+		private string _AV4x103 = "AV4x103";
+		private string _AV4x107 = "AV4x107";
 		public sReactor4()
 		{
 			//
@@ -58,6 +63,81 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			set{
 				_REACTOR = value;
 				REACTOR.Text = value.ToString();
+			}
+		}
+		
+		[RefreshProperties(RefreshProperties.Repaint)]
+		[Category("Tagnames")]
+		[DisplayName("AV4x101 Code")]
+		
+		public string _iAV4x101
+		{
+			get{
+				return _AV4x101;
+			}
+			set{
+				_AV4x101 = value;
+				AV4x101.Text = value.ToString();
+			}
+		}
+		
+		[RefreshProperties(RefreshProperties.Repaint)]
+		[Category("Tagnames")]
+		[DisplayName("AV4x171 Code")]
+		
+		public string _iAV4x171
+		{
+			get{
+				return _AV4x171;
+			}
+			set{
+				_AV4x171 = value;
+				AV4x171.Text = value.ToString();
+			}
+		}
+		
+		[RefreshProperties(RefreshProperties.Repaint)]
+		[Category("Tagnames")]
+		[DisplayName("AV4x172 Code")]
+		
+		public string _iAV4x172
+		{
+			get{
+				return _AV4x172;
+			}
+			set{
+				_AV4x172 = value;
+				AV4x172.Text = value.ToString();
+			}
+		}
+		
+		[RefreshProperties(RefreshProperties.Repaint)]
+		[Category("Tagnames")]
+		[DisplayName("AV4x103 Code")]
+		
+		public string _iAV4x103
+		{
+			get{
+				return _AV4x103;
+			}
+			set{
+				_AV4x103 = value;
+				AV4x103.Text = value.ToString();
+			}
+		}
+		
+		[RefreshProperties(RefreshProperties.Repaint)]
+		[Category("Tagnames")]
+		[DisplayName("AV4x107 Code")]
+		
+		public string _iAV4x107
+		{
+			get{
+				return _AV4x107;
+			}
+			set{
+				_AV4x107 = value;
+				AV4x107.Text = value.ToString();
 			}
 		}
 

@@ -1,0 +1,209 @@
+{
+  "catalogReference": "Server~1.0",
+  "uuid": "a66f5a1d-b333-4a2b-951c-405a1f042c16",
+  "identifier": "Server_1",
+  "path": "Topology",
+  "properties": [
+    {
+      "propertyName": "IsUnderConstruction",
+      "propertyValue": "False"
+    },
+    {
+      "propertyName": "DomainTag",
+      "propertyValue": "3d153763-7e3b-406b-862f-985beafd8ecb"
+    }
+  ],
+  "references": [
+    {
+      "diagramPath": "Physical Views",
+      "x": -250.09521484375,
+      "y": -208.56005859375
+    }
+  ],
+  "equipments": [
+    {
+      "catalogReference": "NIC_EAE~1.0",
+      "uuid": "754d6877-7c81-454e-95a9-0bc2f81ab59f",
+      "identifier": "NIC_2",
+      "path": "Server_1\\NIC_2",
+      "components": [
+        {
+          "interfaces": [
+            {
+              "identifier": "eth0",
+              "disabled": false,
+              "internal": false,
+              "physicalAddress": "",
+              "endpoints": [
+                {
+                  "identifier": "IP Address",
+                  "shared": false,
+                  "isReadOnly": false,
+                  "domainReadOnly": false,
+                  "ipAddress": "192.168.1.51",
+                  "domain": "91f909d2-7258-45f9-b2f9-cf70c3d653b2"
+                }
+              ]
+            },
+            {
+              "identifier": "Softdpac Manager Interface",
+              "disabled": false,
+              "internal": true,
+              "physicalAddress": "",
+              "endpoints": [
+                {
+                  "identifier": "Softdpac Manager IP",
+                  "shared": false,
+                  "isReadOnly": false,
+                  "domainReadOnly": true,
+                  "ipAddress": "192.168.1.1",
+                  "domain": "91f909d2-7258-45f9-b2f9-cf70c3d653b2"
+                }
+              ]
+            }
+          ],
+          "ports": [
+            {
+              "identifier": "Port1",
+              "side": "Default"
+            }
+          ],
+          "componentType": "EthernetDEO"
+        }
+      ]
+    },
+    {
+      "catalogReference": "SoftdpacContainer~1.0",
+      "uuid": "a5f1eb9c-85db-4fea-8844-a5ef6b896f5b",
+      "identifier": "Softdpac_1",
+      "path": "Server_1\\Softdpac_1",
+      "components": [
+        {
+          "interfaces": [
+            {
+              "identifier": "Eth0",
+              "disabled": false,
+              "internal": false,
+              "physicalAddress": "",
+              "endpoints": [
+                {
+                  "identifier": "IP Address",
+                  "shared": false,
+                  "isReadOnly": false,
+                  "domainReadOnly": true,
+                  "ipAddress": "192.168.1.50",
+                  "domain": "91f909d2-7258-45f9-b2f9-cf70c3d653b2"
+                }
+              ]
+            }
+          ],
+          "ports": [
+            {
+              "identifier": "Port0",
+              "side": "Default"
+            }
+          ],
+          "componentType": "EthernetDEO"
+        },
+        {
+          "endpoint": "Eth0\\IP Address",
+          "connectionTypes": "None",
+          "componentType": "EthernetMasterDEO"
+        },
+        {
+          "enabled": false,
+          "securityMode": 0,
+          "componentType": "SysLogClientDEO"
+        },
+        {
+          "imageName": "softdpac",
+          "imageVersion": "v26.0.26152.07",
+          "identifier": "DockerContainer",
+          "allocatedRam": 524288,
+          "cpuCores": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "affinities": [],
+          "componentType": "DockerContainerDEO"
+        },
+        {
+          "uuid": "155fb02b-58f5-400e-af0d-48af9e6ea326",
+          "typeId": "29797a55-a6b8-47c4-9c06-e8a42b1a38b5",
+          "logicalDeviceId": "dc39ade0-4cb5-4522-b2f4-1939b1477120",
+          "runtimeServices": [
+            {
+              "identifier": "Deployment"
+            },
+            {
+              "identifier": "Archive Service",
+              "logicalPortSecured": "0"
+            }
+          ],
+          "componentType": "RuntimeDEO"
+        }
+      ]
+    }
+  ],
+  "components": [
+    {
+      "mode": 0,
+      "deviceCertificateIdentifiers": [
+        "DeviceCertificate"
+      ],
+      "componentType": "CyberSecurityDEO"
+    },
+    {
+      "preferredPrimary": false,
+      "dockerImages": [
+        {
+          "identifier": "softdpac",
+          "version": ""
+        }
+      ],
+      "dockerVlans": [
+        {
+          "identifier": "softdpacDeviceNet",
+          "type": 0,
+          "domain": "91f909d2-7258-45f9-b2f9-cf70c3d653b2",
+          "interface": "NIC_2\\eth0",
+          "domainReadOnly": false
+        }
+      ],
+      "softdpacManagerServices": [
+        {
+          "identifier": "Management Services",
+          "logicalPort": 8080,
+          "endpoint": ""
+        }
+      ],
+      "componentType": "SoftdpacManagerDEO"
+    },
+    {
+      "mode": 1,
+      "servers": [
+        {
+          "name": "Primary NTP Server_1",
+          "address": "0.0.0.0",
+          "type": 0,
+          "minPoll": 1,
+          "maxPoll": 1,
+          "timeServerKey": "Primary Key_1",
+          "iBurst": false
+        },
+        {
+          "name": "Secondary NTP Server_1",
+          "address": "0.0.0.0",
+          "type": 1,
+          "minPoll": 1,
+          "maxPoll": 1,
+          "timeServerKey": "Secondary Key_1",
+          "iBurst": false
+        }
+      ],
+      "componentType": "TimeSettingsDEO"
+    }
+  ]
+}

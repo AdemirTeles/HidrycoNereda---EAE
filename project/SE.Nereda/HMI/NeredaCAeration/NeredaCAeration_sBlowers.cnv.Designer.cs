@@ -61,7 +61,7 @@ namespace SE.Nereda.Symbols.NeredaCAeration
 			this.sBlower1.Name = "sBlower1";
 			this.sBlower1.SecurityToken = ((uint)(4294967295u));
 			this.sBlower1.SymbolNameDisplay = SE.Nereda.Symbols.Motor_VS.sBlower.SymbolNameDisplayOption.Hide;
-			this.sBlower1.TagName = "Actuators.V4601";
+			this.sBlower1.TagName = "Actuators.Blower1";
 			this.sBlower1.EndInit();
 			// 
 			// sBlower2
@@ -73,7 +73,7 @@ namespace SE.Nereda.Symbols.NeredaCAeration
 			this.sBlower2.Name = "sBlower2";
 			this.sBlower2.SecurityToken = ((uint)(4294967295u));
 			this.sBlower2.SymbolNameDisplay = SE.Nereda.Symbols.Motor_VS.sBlower.SymbolNameDisplayOption.Hide;
-			this.sBlower2.TagName = "Actuators.V4602";
+			this.sBlower2.TagName = "Actuators.Blower2";
 			this.sBlower2.EndInit();
 			// 
 			// sBlower3
@@ -85,7 +85,7 @@ namespace SE.Nereda.Symbols.NeredaCAeration
 			this.sBlower3.Name = "sBlower3";
 			this.sBlower3.SecurityToken = ((uint)(4294967295u));
 			this.sBlower3.SymbolNameDisplay = SE.Nereda.Symbols.Motor_VS.sBlower.SymbolNameDisplayOption.Hide;
-			this.sBlower3.TagName = "Actuators.V4603";
+			this.sBlower3.TagName = "Actuators.Blower3";
 			this.sBlower3.EndInit();
 			// 
 			// sBlower4
@@ -97,7 +97,7 @@ namespace SE.Nereda.Symbols.NeredaCAeration
 			this.sBlower4.Name = "sBlower4";
 			this.sBlower4.SecurityToken = ((uint)(4294967295u));
 			this.sBlower4.SymbolNameDisplay = SE.Nereda.Symbols.Motor_VS.sBlower.SymbolNameDisplayOption.Hide;
-			this.sBlower4.TagName = "Actuators.V4604";
+			this.sBlower4.TagName = "Actuators.Blower4";
 			this.sBlower4.EndInit();
 			// 
 			// pipe1

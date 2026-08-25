@@ -271,26 +271,6 @@ namespace SE.Nereda.Symbols.Motor_VS
       this.cookie = cookie;
       this.eventIndex = eventIndex;
     }
-    public bool Get_Capacity(ref System.Single value)
-    {
-      if (accessorService == null)
-        return false;
-      float var = 0;
-      bool ret = accessorService.GetFloatValue(channelId, cookie, eventIndex, true,0, ref var);
-      if (ret) value = (System.Single) var;
-      return ret;
-    }
-
-    public System.Single? Capacity
-    { get {
-      if (accessorService == null)
-        return null;
-      float var = 0;
-      bool ret = accessorService.GetFloatValue(channelId, cookie, eventIndex, true,0, ref var);
-      if (!ret) return null;
-      return (System.Single) var;
-    }  }
-
 
   }
 

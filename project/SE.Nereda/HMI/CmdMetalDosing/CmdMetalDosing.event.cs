@@ -37,30 +37,16 @@ namespace SE.Nereda.Symbols.CmdMetalDosing
 namespace SE.Nereda.Symbols.CmdMetalDosing
 {
 
-  public class FEED_FLOW_SPEventArgs : System.EventArgs
+  public class CNF_SD_SPEventArgs : System.EventArgs
   {
-    public FEED_FLOW_SPEventArgs()
+    public CNF_SD_SPEventArgs()
     {
     }
-    private System.Single? FeedFlowSp_field = null;
-    public System.Single? FeedFlowSp
+    private System.Single? SDLevelSetPoint_field = null;
+    public System.Single? SDLevelSetPoint
     {
-       get { return FeedFlowSp_field; }
-       set { FeedFlowSp_field = value; }
-    }
-
-  }
-
-  public class FEED_FLOW_SP_MANEventArgs : System.EventArgs
-  {
-    public FEED_FLOW_SP_MANEventArgs()
-    {
-    }
-    private System.Single? FeedFlowSpMan_field = null;
-    public System.Single? FeedFlowSpMan
-    {
-       get { return FeedFlowSpMan_field; }
-       set { FeedFlowSpMan_field = value; }
+       get { return SDLevelSetPoint_field; }
+       set { SDLevelSetPoint_field = value; }
     }
 
   }
@@ -105,37 +91,21 @@ stack Trace:
 
       }
     }
-    public bool FireEvent_FEED_FLOW_SP(System.Single FeedFlowSp)
+    public bool FireEvent_CNF_SD_SP(System.Single SDLevelSetPoint)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {FeedFlowSp});
+      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {SDLevelSetPoint});
     }
-    public bool FireEvent_FEED_FLOW_SP(SE.Nereda.Symbols.CmdMetalDosing.FEED_FLOW_SPEventArgs ea)
+    public bool FireEvent_CNF_SD_SP(SE.Nereda.Symbols.CmdMetalDosing.CNF_SD_SPEventArgs ea)
     {
       object[] _values_ = new object[1];
-      if (ea.FeedFlowSp.HasValue) _values_[0] = ea.FeedFlowSp.Value;
+      if (ea.SDLevelSetPoint.HasValue) _values_[0] = ea.SDLevelSetPoint.Value;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
-    public bool FireEvent_FEED_FLOW_SP(System.Single FeedFlowSp, bool ignore_FeedFlowSp)
+    public bool FireEvent_CNF_SD_SP(System.Single SDLevelSetPoint, bool ignore_SDLevelSetPoint)
     {
       object[] _values_ = new object[1];
-      if (!ignore_FeedFlowSp) _values_[0] = FeedFlowSp;
+      if (!ignore_SDLevelSetPoint) _values_[0] = SDLevelSetPoint;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
-    }
-    public bool FireEvent_FEED_FLOW_SP_MAN(System.Single FeedFlowSpMan)
-    {
-      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {FeedFlowSpMan});
-    }
-    public bool FireEvent_FEED_FLOW_SP_MAN(SE.Nereda.Symbols.CmdMetalDosing.FEED_FLOW_SP_MANEventArgs ea)
-    {
-      object[] _values_ = new object[1];
-      if (ea.FeedFlowSpMan.HasValue) _values_[0] = ea.FeedFlowSpMan.Value;
-      return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
-    }
-    public bool FireEvent_FEED_FLOW_SP_MAN(System.Single FeedFlowSpMan, bool ignore_FeedFlowSpMan)
-    {
-      object[] _values_ = new object[1];
-      if (!ignore_FeedFlowSpMan) _values_[0] = FeedFlowSpMan;
-      return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
     }
 
   }

@@ -59,7 +59,7 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			this.sDefault1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 8D, 24D);
 			this.sDefault1.Name = "sDefault1";
 			this.sDefault1.SecurityToken = ((uint)(4294967295u));
-			this.sDefault1.TagName = "Sensors.TemperatureMeasurement_Status";
+			this.sDefault1.TagName = "Sensors.NVPP_001_41QT1002_Status";
 			this.sDefault1.EndInit();
 			// 
 			// sQT003
@@ -79,7 +79,7 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			this.sDefault2.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 216D, 24D);
 			this.sDefault2.Name = "sDefault2";
 			this.sDefault2.SecurityToken = ((uint)(4294967295u));
-			this.sDefault2.TagName = "Sensors.OxygenMeasurementReactor_Status";
+			this.sDefault2.TagName = "Sensors.NVPP_001_41QT1003_Status";
 			this.sDefault2.EndInit();
 			// 
 			// sQT010
@@ -99,7 +99,7 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			this.sDefault3.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 8D, 96D);
 			this.sDefault3.Name = "sDefault3";
 			this.sDefault3.SecurityToken = ((uint)(4294967295u));
-			this.sDefault3.TagName = "Sensors.pHMeasurementReactor_Status";
+			this.sDefault3.TagName = "Sensors.NVPP_001_41QT1010_Status";
 			this.sDefault3.EndInit();
 			// 
 			// sLT001
@@ -119,7 +119,7 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			this.sDefault4.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 216D, 96D);
 			this.sDefault4.Name = "sDefault4";
 			this.sDefault4.SecurityToken = ((uint)(4294967295u));
-			this.sDefault4.TagName = "Sensors.LevelMeasurementReactor_Status";
+			this.sDefault4.TagName = "Sensors.NVPP_001_lt_004_Status";
 			this.sDefault4.EndInit();
 			// 
 			// rectangle1

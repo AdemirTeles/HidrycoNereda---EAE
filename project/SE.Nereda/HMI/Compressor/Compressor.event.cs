@@ -29,124 +29,124 @@ namespace SE.Nereda.Symbols.Compressor
       this.cookie = cookie;
       this.eventIndex = eventIndex;
     }
-    public bool Get_Run(ref System.Int16 value)
+    public bool Get_Run(ref System.Boolean value)
     {
       if (accessorService == null)
         return false;
-      System.Int64 var = 0;
-      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,0, ref var);
-      if (ret) value = (System.Int16) var;
+      bool var = false;
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,0, ref var);
+      if (ret) value = (System.Boolean) var;
       return ret;
     }
 
-    public System.Int16? Run
+    public System.Boolean? Run
     { get {
       if (accessorService == null)
         return null;
-      System.Int64 var = 0;
-      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,0, ref var);
+      bool var = false;
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,0, ref var);
       if (!ret) return null;
-      return (System.Int16) var;
+      return (System.Boolean) var;
     }  }
 
-    public bool Get_Alarm(ref System.Int16 value)
+    public bool Get_Alarm(ref System.Boolean value)
     {
       if (accessorService == null)
         return false;
-      System.Int64 var = 0;
-      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,1, ref var);
-      if (ret) value = (System.Int16) var;
+      bool var = false;
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,1, ref var);
+      if (ret) value = (System.Boolean) var;
       return ret;
     }
 
-    public System.Int16? Alarm
+    public System.Boolean? Alarm
     { get {
       if (accessorService == null)
         return null;
-      System.Int64 var = 0;
-      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,1, ref var);
+      bool var = false;
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,1, ref var);
       if (!ret) return null;
-      return (System.Int16) var;
+      return (System.Boolean) var;
     }  }
 
-    public bool Get_Mode(ref System.Int16 value)
+    public bool Get_Mode(ref System.Boolean value)
     {
       if (accessorService == null)
         return false;
-      System.Int64 var = 0;
-      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,2, ref var);
-      if (ret) value = (System.Int16) var;
+      bool var = false;
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,2, ref var);
+      if (ret) value = (System.Boolean) var;
       return ret;
     }
 
-    public System.Int16? Mode
+    public System.Boolean? Mode
     { get {
       if (accessorService == null)
         return null;
-      System.Int64 var = 0;
-      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,2, ref var);
+      bool var = false;
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,2, ref var);
       if (!ret) return null;
-      return (System.Int16) var;
+      return (System.Boolean) var;
     }  }
 
-    public bool Get_Frequency(ref System.Int16 value)
+    public bool Get_Frequency(ref System.Single value)
     {
       if (accessorService == null)
         return false;
-      System.Int64 var = 0;
-      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,3, ref var);
-      if (ret) value = (System.Int16) var;
+      float var = 0;
+      bool ret = accessorService.GetFloatValue(channelId, cookie, eventIndex, true,3, ref var);
+      if (ret) value = (System.Single) var;
       return ret;
     }
 
-    public System.Int16? Frequency
+    public System.Single? Frequency
     { get {
       if (accessorService == null)
         return null;
-      System.Int64 var = 0;
-      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,3, ref var);
+      float var = 0;
+      bool ret = accessorService.GetFloatValue(channelId, cookie, eventIndex, true,3, ref var);
       if (!ret) return null;
-      return (System.Int16) var;
+      return (System.Single) var;
     }  }
 
-    public bool Get_Power(ref System.Int16 value)
+    public bool Get_Power(ref System.Single value)
     {
       if (accessorService == null)
         return false;
-      System.Int64 var = 0;
-      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,4, ref var);
-      if (ret) value = (System.Int16) var;
+      float var = 0;
+      bool ret = accessorService.GetFloatValue(channelId, cookie, eventIndex, true,4, ref var);
+      if (ret) value = (System.Single) var;
       return ret;
     }
 
-    public System.Int16? Power
+    public System.Single? Power
     { get {
       if (accessorService == null)
         return null;
-      System.Int64 var = 0;
-      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,4, ref var);
+      float var = 0;
+      bool ret = accessorService.GetFloatValue(channelId, cookie, eventIndex, true,4, ref var);
       if (!ret) return null;
-      return (System.Int16) var;
+      return (System.Single) var;
     }  }
 
-    public bool Get_Capacity(ref System.Int16 value)
+    public bool Get_Capacity(ref System.Single value)
     {
       if (accessorService == null)
         return false;
-      System.Int64 var = 0;
-      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,5, ref var);
-      if (ret) value = (System.Int16) var;
+      float var = 0;
+      bool ret = accessorService.GetFloatValue(channelId, cookie, eventIndex, true,5, ref var);
+      if (ret) value = (System.Single) var;
       return ret;
     }
 
-    public System.Int16? Capacity
+    public System.Single? Capacity
     { get {
       if (accessorService == null)
         return null;
-      System.Int64 var = 0;
-      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,5, ref var);
+      float var = 0;
+      bool ret = accessorService.GetFloatValue(channelId, cookie, eventIndex, true,5, ref var);
       if (!ret) return null;
-      return (System.Int16) var;
+      return (System.Single) var;
     }  }
 
 

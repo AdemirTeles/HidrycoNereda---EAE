@@ -1,4 +1,4 @@
-﻿/* DefaultAssemblyInfo.cs */
+/* DefaultAssemblyInfo.cs */
 /* =====================================================================$
  * Copyright © {2022} Schneider Electric.   All rights reserved.
  * The contents of this file is subject to confidentiality.
