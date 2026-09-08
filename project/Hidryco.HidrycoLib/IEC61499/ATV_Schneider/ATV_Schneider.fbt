@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="4a8cc97e-44e8-4269-9255-8306d7df7392" Name="ATV_Schneider" Format="2.0" Comment="Extracted Composite Function Block Type" Namespace="Hidryco.HidrycoLib">
+  <Attribute Name="Configuration.FB.IDCounter" Value="1" />
+  <Identification Standard="61499-2" />
+  <VersionInfo Author=" " Date="24/02/2026" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="E_CMD">
+        <With Var="CommandRun" />
+      </Event>
+      <Event Name="E_QUICK_STOP" Comment="Data write request">
+        <With Var="CommandQuickStop" />
+      </Event>
+      <Event Name="E_RESET">
+        <With Var="ResetError" />
+      </Event>
+      <Event Name="E_SET_POINT">
+        <With Var="AtvSetpointUserValue" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="E_RUN" Comment="Confirmation of an explicit or implicit data read request">
+        <With Var="FeedbackRunForward" />
+      </Event>
+      <Event Name="E_STATUS" Comment="Execution Confirmation">
+        <With Var="stsVelocidade" />
+        <With Var="stsCorrente" />
+        <With Var="stsFrequencia" />
+        <With Var="stsTorque" />
+        <With Var="stsPotencia" />
+        <With Var="stsTensao" />
+      </Event>
+      <Event Name="E_ERROR">
+        <With Var="Error" />
+        <With Var="AtvErrorCode" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="CommandRun" Type="BOOL" />
+      <VarDeclaration Name="CommandQuickStop" Type="BOOL" Comment="New value(i) for the named variable element" />
+      <VarDeclaration Name="ResetError" Type="BOOL" Comment="New value(i) for the named variable element" />
+      <VarDeclaration Name="AtvSetpointUserValue" Type="REAL" Comment="Input in RPM for Speed Control HW CAT, Input in Hz for Frequency Control HW CAT" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="FeedbackRunForward" Type="BOOL" Comment="Current value(i) in the named variable array element" />
+      <VarDeclaration Name="Error" Type="BOOL" Comment="Current value(i) in the named variable array element" />
+      <VarDeclaration Name="AtvErrorCode" Type="UINT" Comment="Current value(i) in the named variable array element" />
+      <VarDeclaration Name="stsVelocidade" Type="INT" Comment="Result" />
+      <VarDeclaration Name="stsCorrente" Type="INT" Comment="Result" />
+      <VarDeclaration Name="stsFrequencia" Type="INT" Comment="Result" />
+      <VarDeclaration Name="stsTorque" Type="INT" Comment="Result" />
+      <VarDeclaration Name="stsPotencia" Type="INT" Comment="Result" />
+      <VarDeclaration Name="stsTensao" Type="INT" Comment="Result" />
+    </OutputVars>
+  </InterfaceList>
+  <FBNetwork>
+    <FB ID="8AFDD7065BB4575" Name="AltivarVs1" Type="AltivarVs" x="1660" y="1260" Namespace="SE.IoATV">
+      <Parameter Name="$AtvSelectSetpoint" Value="FALSE" />
+      <Parameter Name="$CommandReady" Value="TRUE" />
+    </FB>
+    <FB ID="3600E75782DFF7D3" Name="ANY2ANY1" Type="ANY2ANY_145B5B8E9A998631" x="4440" y="2100" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNT:=5;IN${CNT}:REAL,REAL,REAL,REAL,REAL;OUT${CNT}:INT,INT,INT,INT,INT" />
+    </FB>
+    <FB ID="FF362F6D24B0784F" Name="CALC_FORMULAR1" Type="CALC_FORMULAR_1190A6D7B0A1DA7E4" x="3260" y="2780" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#OUTCNT:=1;INCNT:=2;X${INCNT}:LREAL,LREAL;Y${OUTCNT}:INT" />
+      <Parameter Name="$FORMULA1" Value="'X1/X2'" />
+    </FB>
+    <FB ID="1" Name="plcStart1" Type="plcStart" x="320" y="680" Namespace="SE.App2Base">
+      <Parameter Name="$Prio" Value="10" />
+    </FB>
+    <Input Name="E_CMD" x="240" y="1312" Type="Event" />
+    <Input Name="E_QUICK_STOP" x="240" y="1372" Type="Event" />
+    <Input Name="E_RESET" x="240" y="1432" Type="Event" />
+    <Input Name="E_SET_POINT" x="240" y="1492" Type="Event" />
+    <Input Name="CommandRun" x="360" y="2032" Type="Data" />
+    <Input Name="CommandQuickStop" x="360" y="2092" Type="Data" />
+    <Input Name="ResetError" x="360" y="2152" Type="Data" />
+    <Input Name="AtvSetpointUserValue" x="360" y="2212" Type="Data" />
+    <Output Name="E_ERROR" x="3003.344" y="1452" Type="Event" />
+    <Output Name="E_RUN" x="3000" y="1252" Type="Event" />
+    <Output Name="E_STATUS" x="5300" y="2092" Type="Event" />
+    <Output Name="FeedbackRunForward" x="3100" y="1892" Type="Data" />
+    <Output Name="Error" x="3100" y="1952" Type="Data" />
+    <Output Name="AtvErrorCode" x="3100" y="2012" Type="Data" />
+    <Output Name="stsVelocidade" x="4960" y="2272" Type="Data" />
+    <Output Name="stsCorrente" x="4960" y="2332" Type="Data" />
+    <Output Name="stsFrequencia" x="4960" y="2392" Type="Data" />
+    <Output Name="stsTorque" x="4960" y="2452" Type="Data" />
+    <Output Name="stsPotencia" x="4960" y="2512" Type="Data" />
+    <Output Name="stsTensao" x="4120" y="3232" Type="Data" />
+    <EventConnections>
+      <Connection Source="$E_CMD" Destination="$8AFDD7065BB4575.REQ_CMD" dx1="432.8334" />
+      <Connection Source="$E_QUICK_STOP" Destination="$8AFDD7065BB4575.REQ_QUICK_STOP" dx1="135.1667" />
+      <Connection Source="$E_RESET" Destination="$8AFDD7065BB4575.REQ_RESET" dx1="347.75" />
+      <Connection Source="$E_SET_POINT" Destination="$8AFDD7065BB4575.REQ_SET_POINT" dx1="40" />
+      <Connection Source="$8AFDD7065BB4575.CNF_RUN" Destination="$E_RUN" dx1="50" />
+      <Connection Source="$3600E75782DFF7D3.CNF" Destination="$E_STATUS" dx1="50" />
+      <Connection Source="$1.FIRST_INIT" Destination="$FF362F6D24B0784F.INIT">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$1.REDO_INIT" Destination="$FF362F6D24B0784F.INIT">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$FF362F6D24B0784F.INITO" Destination="$8AFDD7065BB4575.REQ_SELECT_SET_POINT">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$FF362F6D24B0784F.INITO" Destination="$1.ACK_FIRST">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$8AFDD7065BB4575.CNF_DRIVE_PARAMS" Destination="$FF362F6D24B0784F.REQ" dx1="165.1042" />
+      <Connection Source="$FF362F6D24B0784F.CNF" Destination="$3600E75782DFF7D3.REQ" dx1="75" />
+      <Connection Source="$8AFDD7065BB4575.CNF_ERROR" Destination="$E_ERROR" />
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="$8AFDD7065BB4575.AtvFeedbackSpeedRpm" Destination="$3600E75782DFF7D3.IN1" dx1="145.1042" />
+      <Connection Source="$8AFDD7065BB4575.AtvCurrentA" Destination="$3600E75782DFF7D3.IN2" dx1="210" />
+      <Connection Source="$8AFDD7065BB4575.AtvFrequencyHz" Destination="$3600E75782DFF7D3.IN3" dx1="230" />
+      <Connection Source="$8AFDD7065BB4575.AtvTorquePercent" Destination="$3600E75782DFF7D3.IN4" dx1="170" />
+      <Connection Source="$8AFDD7065BB4575.AtvPowerPercent" Destination="$3600E75782DFF7D3.IN5" dx1="190" />
+      <Connection Source="$8AFDD7065BB4575.AtvPowerPercent" Destination="$FF362F6D24B0784F.X1" dx1="85.10449" />
+      <Connection Source="$8AFDD7065BB4575.AtvCurrentA" Destination="$FF362F6D24B0784F.X2" dx1="65.10449" />
+      <Connection Source="$CommandRun" Destination="$8AFDD7065BB4575.CommandRun" dx1="45.16675" />
+      <Connection Source="$CommandQuickStop" Destination="$8AFDD7065BB4575.CommandQuickStop" dx1="46.35425" />
+      <Connection Source="$ResetError" Destination="$8AFDD7065BB4575.ResetError" dx1="40" />
+      <Connection Source="$AtvSetpointUserValue" Destination="$8AFDD7065BB4575.AtvSetpointUserValue" dx1="49.4375" />
+      <Connection Source="$8AFDD7065BB4575.FeedbackRunForward" Destination="$FeedbackRunForward" />
+      <Connection Source="$8AFDD7065BB4575.Error" Destination="$Error" dx1="110" />
+      <Connection Source="$8AFDD7065BB4575.AtvErrorCode" Destination="$AtvErrorCode" dx1="150" />
+      <Connection Source="$3600E75782DFF7D3.OUT1" Destination="$stsVelocidade" dx1="70" />
+      <Connection Source="$3600E75782DFF7D3.OUT2" Destination="$stsCorrente" dx1="90" />
+      <Connection Source="$3600E75782DFF7D3.OUT3" Destination="$stsFrequencia" dx1="110" />
+      <Connection Source="$3600E75782DFF7D3.OUT4" Destination="$stsTorque" dx1="130" />
+      <Connection Source="$3600E75782DFF7D3.OUT5" Destination="$stsPotencia" dx1="150" />
+      <Connection Source="$FF362F6D24B0784F.Y1" Destination="$stsTensao" />
+    </DataConnections>
+  </FBNetwork>
+</FBType>

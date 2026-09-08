@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="9b6a98a9-a56d-41b6-af71-a1a9f1524661" Name="Revezamento_3_Motores_ok" Format="2.0" Comment="Composite Function Block Type" Namespace="Hidryco.HidrycoLib">
+  <Attribute Name="HMI.Alias" Value="" />
+  <Attribute Name="Configuration.FB.IDCounter" Value="3" />
+  <Identification Standard="61499-2" />
+  <VersionInfo Version="0.0" Author=" " Date="25/02/2026" Remarks="template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="INIT" />
+      <Event Name="E_ATUALIZA_DISPONIBILIDADE_EQUIPAMENTO">
+        <With Var="stsDisponivelEquipamento1" />
+        <With Var="stsDisponivelEquipamento2" />
+        <With Var="stsDisponivelEquipamento3" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="INITO" />
+      <Event Name="E_ATUALIZA_HABILITADO">
+        <With Var="stsRevezamentoHabilitado" />
+      </Event>
+      <Event Name="E_ATUALIZA_EQUIPAMENTO_PRINCIPAL">
+        <With Var="stsEquipamentoPrincipal" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="stsDisponivelEquipamento1" Type="BOOL" />
+      <VarDeclaration Name="stsDisponivelEquipamento2" Type="BOOL" />
+      <VarDeclaration Name="stsDisponivelEquipamento3" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="stsRevezamentoHabilitado" Type="BOOL" />
+      <VarDeclaration Name="stsEquipamentoPrincipal" Type="UINT" />
+    </OutputVars>
+  </InterfaceList>
+  <FBNetwork>
+    <FB ID="1" Name="IThis" Type="Revezamento_3_Motores_ok_HMI" x="520" y="980" Namespace="Hidryco.HidrycoLib">
+      <Parameter Name="$93CFF5B94A05C494" Value="TRUE" />
+    </FB>
+    <FB ID="2" Name="revezamento3Motores1" Type="revezamento3Motores" x="3240" y="1100" Namespace="Hidryco.HidrycoLib" />
+    <FB ID="3" Name="plcStart1" Type="plcStart" x="540" y="300" Namespace="SE.App2Base">
+      <Parameter Name="$Prio" Value="10" />
+    </FB>
+    <Input Name="stsDisponivelEquipamento1" x="1860" y="1612" Type="Data" />
+    <Input Name="stsDisponivelEquipamento2" x="1860" y="1672" Type="Data" />
+    <Input Name="stsDisponivelEquipamento3" x="1860" y="1732" Type="Data" />
+    <Input Name="E_ATUALIZA_DISPONIBILIDADE_EQUIPAMENTO" x="1960" y="1172" Type="Event" />
+    <Input Name="INIT" x="12" y="72" Type="Event" />
+    <Output Name="INITO" x="839.9999" y="72" Type="Event" />
+    <Output Name="stsRevezamentoHabilitado" x="1920" y="1232" Type="Data" />
+    <Output Name="stsEquipamentoPrincipal" x="5360" y="1372" Type="Data" />
+    <Output Name="E_ATUALIZA_HABILITADO" x="1940" y="951.9999" Type="Event" />
+    <Output Name="E_ATUALIZA_EQUIPAMENTO_PRINCIPAL" x="5260" y="1172" Type="Event" />
+    <EventConnections>
+      <Connection Source="$E_ATUALIZA_DISPONIBILIDADE_EQUIPAMENTO" Destination="$2.E_ATUALIZA_DISPONIBILITADE_EQUIPAMENTO" dx1="40" />
+      <Connection Source="$2.E_ATUALIZA_EQUIPAMENTO_PRINCIPAL" Destination="$E_ATUALIZA_EQUIPAMENTO_PRINCIPAL">
+        <Points>
+          <Points>
+            <X>1301.729</X>
+            <Y>285</Y>
+          </Points>
+          <Points>
+            <X>1336.729</X>
+            <Y>285</Y>
+          </Points>
+          <Points>
+            <X>1336.729</X>
+            <Y>299.999969</Y>
+          </Points>
+          <Points>
+            <X>1315</X>
+            <Y>299.999969</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$3.FIRST_INIT" Destination="$1.E245FCBEE1A792EA" dx1="68.08337" dx2="50" dy="410" />
+      <Connection Source="$3.REDO_INIT" Destination="$1.E245FCBEE1A792EA" dx1="48.08337" dx2="50" dy="350" />
+      <Connection Source="$2.E_ATUALIZA_TEMPO_RESTANTE" Destination="$1.361984E74CC2192C">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$1.1935F1059C076730" Destination="$3.ACK_FIRST" dx1="54.93762" dx2="50" dy="-110" />
+      <Connection Source="$1.BFB85375C16A3C6B" Destination="$2.E_ATUALIZA_SETPOINT" dx1="120" />
+      <Connection Source="$1.BFB85375C16A3C6B" Destination="$E_ATUALIZA_HABILITADO" dx1="74.93762" />
+      <Connection Source="$INIT" Destination="$INITO" />
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="$stsDisponivelEquipamento3" Destination="$2.stsDisponivelEquipamento3" />
+      <Connection Source="$stsDisponivelEquipamento2" Destination="$2.stsDisponivelEquipamento2" dx1="40" />
+      <Connection Source="$stsDisponivelEquipamento1" Destination="$2.stsDisponivelEquipamento1" dx1="40" />
+      <Connection Source="$2.stsEquipamentoPrincipal" Destination="$stsEquipamentoPrincipal" dx1="90" />
+      <Connection Source="$2.stsTempoRestanteHora" Destination="$1.4629D71E346025A9" dx1="110" dx2="70" dy="390" />
+      <Connection Source="$2.stsTempoRestanteMinuto" Destination="$1.90EEA19568D2DF50" dx1="130" dx2="50" dy="330" />
+      <Connection Source="$2.stsTempoRestanteSegundo" Destination="$1.208726374EBE2019" dx1="150" dx2="30" dy="270" />
+      <Connection Source="$1.9ACD54D8548957EA" Destination="$2.cmdHabilita" />
+      <Connection Source="$1.9ACD54D8548957EA" Destination="$stsRevezamentoHabilitado">
+        <Points>
+          <Points>
+            <X>458.7656</X>
+            <Y>350</Y>
+          </Points>
+          <Points>
+            <X>481.2656</X>
+            <Y>350</Y>
+          </Points>
+          <Points>
+            <X>481.2656</X>
+            <Y>315</Y>
+          </Points>
+          <Points>
+            <X>479.999969</X>
+            <Y>315</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$1.EFA9BE72ABEF9C97" Destination="$2.stpTempoRevezamentoMotor1" />
+      <Connection Source="$1.8C169D1814CDEDE3" Destination="$2.stpTempoRevezamentoMotor2" />
+      <Connection Source="$1.F72AEF19C18810C" Destination="$2.stpTempoRevezamentoMotor3" />
+    </DataConnections>
+  </FBNetwork>
+</FBType>

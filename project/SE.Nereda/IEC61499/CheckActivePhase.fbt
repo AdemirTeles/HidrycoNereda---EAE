@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="bf33e4d3-ec7e-4fb5-8080-e1a6f3eb9b8e" Name="CheckActivePhase" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author="SESA371406" Date="4/18/2024" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="REQ" Comment="Normal Execution Request">
+        <With Var="IN1" />
+        <With Var="IN2" />
+        <With Var="IN3" />
+        <With Var="IN4" />
+        <With Var="IN5" />
+        <With Var="IN6" />
+        <With Var="IN7" />
+        <With Var="IN8" />
+        <With Var="IN9" />
+        <With Var="IN10" />
+        <With Var="IN11" />
+        <With Var="IN12" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="CNF" Comment="Execution Confirmation">
+        <With Var="NoActivePhase" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="IN1" Type="BOOL" Comment="Input event qualifier" />
+      <VarDeclaration Name="IN2" Type="BOOL" />
+      <VarDeclaration Name="IN3" Type="BOOL" />
+      <VarDeclaration Name="IN4" Type="BOOL" />
+      <VarDeclaration Name="IN5" Type="BOOL" />
+      <VarDeclaration Name="IN6" Type="BOOL" />
+      <VarDeclaration Name="IN7" Type="BOOL" />
+      <VarDeclaration Name="IN8" Type="BOOL" />
+      <VarDeclaration ID="230F46FBD6471F96" Name="IN9" Type="BOOL" />
+      <VarDeclaration ID="5631C79DD3FFB37A" Name="IN10" Type="BOOL" />
+      <VarDeclaration ID="0D8DBF99DEDCAC31" Name="IN11" Type="BOOL" />
+      <VarDeclaration ID="143EC1F8D1452500" Name="IN12" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="NoActivePhase" Type="BOOL" Comment="Output event qualifier" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="a31823da-b848-4158-acc1-4e400bbfb772">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="REQ,REQ1,REQ2" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="1192.941" y="389.4117" />
+      <ECState Name="REQ" Comment="Normal execution" x="1677.647" y="912.9412">
+        <ECAction Algorithm="REQ" Output="CNF" />
+      </ECState>
+      <ECTransition Source="REQ" Destination="START" Condition="1" x="1353.351" y="694.8342">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="349.5102,194.1758,320.2979,160.2208" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="REQ" Condition="REQ" x="1518.182" y="613.6045">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="367.7374,132.8329,398.1756,167.7074" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="REQ" Comment="Normally executed algorithm">
+      <ST><![CDATA[;
+
+IF (IN1 = TRUE OR IN2 = TRUE OR IN3 = TRUE) AND
+   (IN4 = TRUE OR IN5 = TRUE OR IN6 = TRUE) AND
+   (IN7 = TRUE OR IN8 = TRUE OR IN9 = TRUE) AND
+   (IN10 = TRUE OR IN11 = TRUE OR IN12 = TRUE) THEN
+	
+	NoActivePhase := TRUE;
+ELSE
+	NoActivePhase := FALSE;
+END_IF;]]></ST>
+    </Algorithm>
+    <Algorithm Name="REQ1">
+      <ST><![CDATA[;
+
+NoActivePhase := TRUE;
+]]></ST>
+    </Algorithm>
+    <Algorithm Name="REQ2">
+      <ST><![CDATA[;
+NoActivePhase := FALSE;
+]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

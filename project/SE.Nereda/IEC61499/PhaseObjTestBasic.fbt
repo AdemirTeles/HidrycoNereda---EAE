@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="f3e1e11d-7316-4bcc-9dcf-b383113f4807" Name="PhaseObjTestBasic" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="6/5/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="3F9F94A6338DA2AE" Name="REQ" Comment="Normal Execution Request">
+        <With Var="Starting" />
+        <With Var="Stopping" />
+        <With Var="Aborting" />
+        <With Var="Ready" />
+        <With Var="Run" />
+        <With Var="Aborted" />
+        <With Var="Interlocked" />
+      </Event>
+      <Event ID="2842C393D516A8E4" Name="FB_DELAY" />
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="18F7DE7D5208819E" Name="CNF" Comment="Execution Confirmation">
+        <With Var="FbStartReady" />
+      </Event>
+      <Event ID="05F49FB105C0E812" Name="START_DELAY" />
+      <Event ID="34B79C670A948645" Name="STOP_DELAY">
+        <With Var="FbStartReady" />
+        <With Var="FbStopReady" />
+        <With Var="FbAbortReady" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="E7AA23EB2CE4335E" Name="Ready" Type="BOOL" />
+      <VarDeclaration ID="C6666212AE812393" Name="Starting" Type="BOOL" />
+      <VarDeclaration ID="D877BBFA81D5F4BB" Name="Run" Type="BOOL" />
+      <VarDeclaration ID="3889CCC17B09D2D5" Name="Stopping" Type="BOOL" />
+      <VarDeclaration ID="29252BA57FAC0548" Name="Aborting" Type="BOOL" />
+      <VarDeclaration ID="222BFEBFFBEE3B7A" Name="Aborted" Type="BOOL" />
+      <VarDeclaration ID="C162999C463FB60F" Name="Interlocked" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="BED916B208A0C901" Name="FbStartReady" Type="BOOL" />
+      <VarDeclaration ID="D82CE452DA0C6C26" Name="FbStopReady" Type="BOOL" />
+      <VarDeclaration ID="5EA355D716B2EBC4" Name="FbAbortReady" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="FbStarted,FbStopped,FbAorted,Reset" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="1809.608" y="506.745" />
+      <ECState Name="Starting" x="425.3334" y="1203.333">
+        <ECAction Output="START_DELAY" />
+      </ECState>
+      <ECState Name="FbStarted" x="416.7619" y="1675.333">
+        <ECAction Algorithm="FbStarted" Output="STOP_DELAY" />
+        <ECAction Output="CNF" />
+      </ECState>
+      <ECState Name="Stopping" x="1806.667" y="1186.667">
+        <ECAction Output="START_DELAY" />
+      </ECState>
+      <ECState Name="FbStopped" x="1803.333" y="1670">
+        <ECAction Algorithm="FbStopped" Output="STOP_DELAY" />
+        <ECAction Output="CNF" />
+      </ECState>
+      <ECState Name="Aborting" x="3016.667" y="1173.333">
+        <ECAction Output="START_DELAY" />
+      </ECState>
+      <ECState Name="FbAborted" x="3020" y="1660">
+        <ECAction Algorithm="FbAorted" Output="STOP_DELAY" />
+        <ECAction Output="CNF" />
+      </ECState>
+      <ECState Name="Reset" x="1806.667" y="2425.334">
+        <ECAction Algorithm="Reset" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="Aborting" Condition="REQ AND Aborting" x="2587.648" y="736.2871">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="614.9125,153.2913,699.7521,200.1433" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="Stopping" Condition="REQ AND Stopping" x="1809.111" y="835.364">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="452.4353,183.9143,452.2413,231.8774" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="Starting" Condition="REQ AND Starting" x="1021.085" y="738.1783">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="302.5492,150.7476,198.6716,201.4817" />
+      </ECTransition>
+      <ECTransition Source="Aborting" Destination="FbAborted" Condition="FB_DELAY" x="3024.579" y="1418.721">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="756.3596,338.9221,756.6035,370.7808" />
+      </ECTransition>
+      <ECTransition Source="Starting" Destination="FbStarted" Condition="FB_DELAY" x="426.5612" y="1444.969">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="107.2105,346.3941,106.6495,377.03" />
+      </ECTransition>
+      <ECTransition Source="Stopping" Destination="FbStopped" Condition="FB_DELAY OR Ready" x="1807.433" y="1422.239">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="452.0991,339.2617,451.8813,370.8423" />
+      </ECTransition>
+      <ECTransition Source="FbStarted" Destination="Reset" Condition="Run" x="1178.805" y="2086.973">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="250.4367,497.8985,350.1808,551.6949" />
+      </ECTransition>
+      <ECTransition Source="FbStopped" Destination="Reset" Condition="Ready" x="1804.405" y="2046.029">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="450.9437,484.2471,451.1836,538.4944" />
+      </ECTransition>
+      <ECTransition Source="FbAborted" Destination="Reset" Condition="Aborted" x="2424.49" y="2047.121">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="650.3645,484.6111,563.0107,539.6918" />
+      </ECTransition>
+      <ECTransition Source="Reset" Destination="START" Condition="1" x="4161.567" y="1765.812">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1220,890,1232.933,40.62163" />
+      </ECTransition>
+      <ECTransition Source="Starting" Destination="Aborting" Condition="Aborting" x="1605.122" y="969.5863">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="295.4418,228.8889,488.4249,226.6548" />
+      </ECTransition>
+      <ECTransition Source="Stopping" Destination="Aborting" Condition="Aborting" x="2414.688" y="1377.224">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="565.3268,356.8158,642.0845,355.97" />
+      </ECTransition>
+      <ECTransition Source="Starting" Destination="Reset" Condition="Ready" x="274.7819" y="1986.163">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="-47.32969,462.7139,57.95046,555.8505" />
+      </ECTransition>
+      <ECTransition Source="Aborting" Destination="Reset" Condition="Ready" x="3157.853" y="1955.151">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="891.3337,452.5592,798.9057,548.1956" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="FbStarted">
+      <ST><![CDATA[;
+FbStartReady := TRUE;
+FbStopReady := FALSE;
+FbAbortReady := FALSE;]]></ST>
+    </Algorithm>
+    <Algorithm Name="FbStopped">
+      <ST><![CDATA[;
+FbStartReady := FALSE;
+FbStopReady := TRUE;
+FbAbortReady := FALSE;]]></ST>
+    </Algorithm>
+    <Algorithm Name="FbAorted">
+      <ST><![CDATA[;
+FbStartReady := FALSE;
+FbStopReady := FALSE;
+FbAbortReady := TRUE;]]></ST>
+    </Algorithm>
+    <Algorithm Name="Reset">
+      <ST><![CDATA[;
+FbStartReady := FALSE;
+FbStopReady := FALSE;
+FbAbortReady := FALSE;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

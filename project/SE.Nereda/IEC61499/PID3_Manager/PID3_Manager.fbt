@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="9ba1d35c-2bf1-4857-885a-ab352cec09ed" Name="PID3_Manager" Format="2.0" Comment="Composite Function Block Type" Namespace="SE.Nereda">
+  <Attribute Name="HMI.Alias" Value="" />
+  <Attribute Name="Configuration.FB.IDCounter" Value="5" />
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author="SESA313294" Date="12/17/2025" Remarks="template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="INIT" Comment="Initialization" />
+      <Event Name="REQ" Comment="Normal Execution Request">
+        <With Var="RunPID1" />
+        <With Var="Setpoint1" />
+        <With Var="RunPID2" />
+        <With Var="Setpoint2" />
+        <With Var="RunPID3" />
+        <With Var="Setpoint3" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="CE80458C9D5EF15A" Name="INITO" Comment="Initialization Confirmation" />
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="RunPID" Name="RunPID1" Type="BOOL" />
+      <VarDeclaration ID="Setpoint" Name="Setpoint1" Type="VTQREAL" />
+      <VarDeclaration ID="FD1CA81C3FB77B6D" Name="RunPID2" Type="BOOL" />
+      <VarDeclaration ID="CA178AA84E0878CD" Name="Setpoint2" Type="VTQREAL" />
+      <VarDeclaration ID="FD32B5086AE9222E" Name="RunPID3" Type="BOOL" />
+      <VarDeclaration ID="AD1B1523548C8C11" Name="Setpoint3" Type="VTQREAL" />
+    </InputVars>
+    <Plugs>
+      <AdapterDeclaration ID="FACD1DD4E791A86A" Name="PID_ISc" Type="IDevice" Namespace="SE.App2CommonProcess" x="3580" y="400" />
+    </Plugs>
+  </InterfaceList>
+  <FBNetwork>
+    <FB ID="4860A5D2FB956BB4" UID="E4365E8BA86D8C07" Name="PIDMgr" Type="PIDMgr3" x="1880" y="460" Namespace="SE.Nereda" />
+    <Input Name="REQ" x="639.9999" y="472" Type="Event" />
+    <Input ID="RunPID" Name="RunPID1" x="639.9999" y="791.9999" Type="Data" />
+    <Input ID="Setpoint" Name="Setpoint1" x="639.9999" y="851.9999" Type="Data" />
+    <Input Name="INIT" x="1880" y="1452" Type="Event" />
+    <Input ID="CA178AA84E0878CD" Name="Setpoint2" x="640" y="972" Type="Data" />
+    <Input ID="AD1B1523548C8C11" Name="Setpoint3" x="640" y="1092" Type="Data" />
+    <Input ID="FD1CA81C3FB77B6D" Name="RunPID2" x="640" y="912" Type="Data" />
+    <Input ID="FD32B5086AE9222E" Name="RunPID3" x="640" y="1032" Type="Data" />
+    <Output ID="CE80458C9D5EF15A" Name="INITO" x="2360" y="1452" Type="Event" />
+    <EventConnections>
+      <Connection Source="$FACD1DD4E791A86A.CNF_SP_OP" Destination="$FACD1DD4E791A86A.REQ_SP" dx1="119.271" dx2="220" dy="-290">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$REQ" Destination="$4860A5D2FB956BB4.REQ" dx1="40" />
+      <Connection Source="$FACD1DD4E791A86A.CNF_READY" Destination="$4860A5D2FB956BB4.CNF_READY" dx1="199.271" dx2="50" dy="-260">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$4860A5D2FB956BB4.PROGLOCAL" Destination="$FACD1DD4E791A86A.REQ_PROGLOCALSEL" />
+      <Connection Source="$4860A5D2FB956BB4.REQ_CMD" Destination="$FACD1DD4E791A86A.REQ_CMD">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$INIT" Destination="$CE80458C9D5EF15A" />
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="$RunPID" Destination="$4860A5D2FB956BB4.RunPID" dx1="47.12512" />
+      <Connection Source="$Setpoint" Destination="$4860A5D2FB956BB4.D8DF49D0EFA511FD" dx1="40" />
+      <Connection Source="$4860A5D2FB956BB4.Lsp" Destination="$FACD1DD4E791A86A.Lsp" dx1="555.25">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$4860A5D2FB956BB4.LspReal2" Destination="$FACD1DD4E791A86A.LspReal1" dx1="495.25">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$4860A5D2FB956BB4.ProgLocal" Destination="$FACD1DD4E791A86A.ProgLocalSel" dx1="435.25">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$FACD1DD4E791A86A.ProgLocal" Destination="$4860A5D2FB956BB4.InProgLocal" dx1="90" dx2="49.99988" dy="450" />
+      <Connection Source="$FD1CA81C3FB77B6D" Destination="$4860A5D2FB956BB4.1DBB303CB26BAD83" />
+      <Connection Source="$CA178AA84E0878CD" Destination="$4860A5D2FB956BB4.D2690D13163A8932" />
+      <Connection Source="$AD1B1523548C8C11" Destination="$4860A5D2FB956BB4.57617791AA2F9251" />
+      <Connection Source="$FD32B5086AE9222E" Destination="$4860A5D2FB956BB4.BC06F7FDB3C81EAC" />
+    </DataConnections>
+  </FBNetwork>
+</FBType>

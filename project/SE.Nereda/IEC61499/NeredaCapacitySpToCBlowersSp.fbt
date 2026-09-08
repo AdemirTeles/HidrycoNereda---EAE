@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="61d32ee5-3248-41cb-bdc7-a5d80414b18a" Name="NeredaCapacitySpToCBlowersSp" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author="SESA685388" Date="10/7/2023" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="D0388ADF8D5604CA" Name="REQ">
+        <With Var="CapSp" />
+        <With Var="C2_IN" />
+        <With Var="C3_IN" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="CNF" Comment="Execution Confirmation">
+        <With Var="SpeedBlower" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="Setpoint" Name="CapSp" Type="REAL" Comment="Input event qualifier" />
+      <VarDeclaration ID="366DF9C08522C788" Name="C2_IN" Type="REAL" />
+      <VarDeclaration ID="9458FDB1B841EBF6" Name="C3_IN" Type="REAL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="SpeedBlower" Type="REAL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="71865d44-b989-4ceb-af39-632154f465b8">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="REQ" />
+    <InternalVars>
+      <VarDeclaration Name="Equal" Type="BOOL" />
+    </InternalVars>
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="388.9412" y="341.4117" />
+      <ECState Name="STATE2" x="1136" y="928.0001">
+        <ECAction Algorithm="REQ" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="STATE2" Condition="REQ" x="849.7797" y="582.2228">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="191.2339,121.165,240.1272,161.4392" />
+      </ECTransition>
+      <ECTransition Source="STATE2" Destination="START" Condition="1" x="615.3357" y="726.9028">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="171.7992,209.7482,121.9296,167.0803" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="REQ" Comment="Initialization algorithm">
+      <ST><![CDATA[;
+IF CapSp <= C2_IN THEN
+    // Zone 1 : 0 ... C2_IN  =>  0 ... 100 %
+    IF C2_IN > 0.0 THEN
+        SpeedBlower := (CapSp / C2_IN) * 100.0;
+    ELSE
+        SpeedBlower := 0.0;
+    END_IF;
+
+ELSIF CapSp <= C3_IN THEN
+    // Zone 2 : C2_IN ... C3_IN  =>  0 ... 100 %
+    IF C3_IN > C2_IN THEN
+        SpeedBlower := ((CapSp - C2_IN) / (C3_IN - C2_IN)) * 100.0;
+    ELSE
+        SpeedBlower := 0.0;
+    END_IF;
+
+ELSE
+    // Zone 3 : C3_IN ... 100  =>  0 ... 100 %
+    IF C3_IN < 100.0 THEN
+        SpeedBlower := ((CapSp - C3_IN) / (100.0 - C3_IN)) * 100.0;
+    ELSE
+        SpeedBlower := 100.0;
+    END_IF;
+END_IF;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

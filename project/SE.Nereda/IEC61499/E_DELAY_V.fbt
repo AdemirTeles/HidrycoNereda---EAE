@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="67554bcb-9215-49c8-8458-12b185155b48" Name="E_DELAY_V" Format="2.0" Comment="Composite Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="8/6/2026" Remarks="template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="73DC624F4AA9B9EF" Name="START" Comment="Begin Delay">
+        <With Var="DT1" />
+      </Event>
+      <Event ID="46F27BF60B858860" Name="STOP" Comment="Cancel Delay">
+        <With Var="DT1" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="49657F677FC47D45" Name="EO">
+        <With Var="Done" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="EA75F27E53BC78A7" Name="DT1" Type="TIME" Comment="Delay Time" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="A0AC39E38E6A8452" Name="Done" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <FBNetwork>
+    <FB ID="A5E809C6711496ED" Name="Delay" Type="E_DELAY" x="1960" y="800" Namespace="IEC61499.Standard" />
+    <FB ID="1D0FA98E3569486F" UID="8C39EAE9C77DB863" Name="DelayDone" Type="DS_SELECTX_2536758B411A6CE51" x="2880" y="800" Namespace="SE.Nereda">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNTX:=2;CNTY:=1;DI${CNTX,_,CNTY}:BOOL" />
+      <Parameter Name="$DI1_1" Value="TRUE" />
+      <Parameter Name="$DI2_1" Value="FALSE" />
+    </FB>
+    <FB ID="23F4A66D5D226AF5" Name="DelayDoneSmooth" Type="boolValueChanged" x="3680" y="800" Namespace="SE.App2Base" />
+    <Input ID="73DC624F4AA9B9EF" Name="START" x="880" y="810" Type="Event" />
+    <Input ID="46F27BF60B858860" Name="STOP" x="880" y="870" Type="Event" />
+    <Input ID="EA75F27E53BC78A7" Name="DT1" x="880" y="1072" Type="Data" />
+    <Output ID="49657F677FC47D45" Name="EO" x="4440" y="872" Type="Event" />
+    <Output ID="A0AC39E38E6A8452" Name="Done" x="4440" y="932" Type="Data" />
+    <EventConnections>
+      <Connection Source="$73DC624F4AA9B9EF" Destination="$A5E809C6711496ED.START" />
+      <Connection Source="$46F27BF60B858860" Destination="$A5E809C6711496ED.STOP" />
+      <Connection Source="$A5E809C6711496ED.EO" Destination="$1D0FA98E3569486F.REQ1" />
+      <Connection Source="$1D0FA98E3569486F.IND" Destination="$23F4A66D5D226AF5.REQ" />
+      <Connection Source="$23F4A66D5D226AF5.CHD" Destination="$49657F677FC47D45" />
+      <Connection Source="$73DC624F4AA9B9EF" Destination="$1D0FA98E3569486F.REQ2">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <Points>
+          <Points>
+            <X>296.963531</X>
+            <Y>210</Y>
+          </Points>
+          <Points>
+            <X>307.5</X>
+            <Y>210</Y>
+          </Points>
+          <Points>
+            <X>307.5</X>
+            <Y>182.5</Y>
+          </Points>
+          <Points>
+            <X>587.5</X>
+            <Y>182.5</Y>
+          </Points>
+          <Points>
+            <X>587.5</X>
+            <Y>225</Y>
+          </Points>
+          <Points>
+            <X>715</X>
+            <Y>225</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$46F27BF60B858860" Destination="$1D0FA98E3569486F.REQ2">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <Points>
+          <Points>
+            <X>291.041656</X>
+            <Y>225</Y>
+          </Points>
+          <Points>
+            <X>302.5</X>
+            <Y>225</Y>
+          </Points>
+          <Points>
+            <X>302.5</X>
+            <Y>182.5</Y>
+          </Points>
+          <Points>
+            <X>587.5</X>
+            <Y>182.5</Y>
+          </Points>
+          <Points>
+            <X>587.5</X>
+            <Y>225</Y>
+          </Points>
+          <Points>
+            <X>695</X>
+            <Y>225</Y>
+          </Points>
+        </Points>
+      </Connection>
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="$EA75F27E53BC78A7" Destination="$A5E809C6711496ED.DT" />
+      <Connection Source="$1D0FA98E3569486F.OUT1" Destination="$23F4A66D5D226AF5.Input" dx1="40.02075" />
+      <Connection Source="$23F4A66D5D226AF5.Output" Destination="$A0AC39E38E6A8452" dx1="70" />
+    </DataConnections>
+  </FBNetwork>
+</FBType>

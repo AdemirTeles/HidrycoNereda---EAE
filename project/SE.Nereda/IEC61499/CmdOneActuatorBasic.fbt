@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="6b65d316-fd10-4598-b03e-8eec38979330" Name="CmdOneActuatorBasic" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author="Administrator" Date="7/31/2024" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="READY">
+        <With Var="Ready" />
+      </Event>
+      <Event Name="STARTING" Comment="Normal Execution Request">
+        <With Var="Starting" />
+      </Event>
+      <Event Name="STOPPING">
+        <With Var="Stopping" />
+      </Event>
+      <Event Name="ABORTING">
+        <With Var="Aborting" />
+      </Event>
+      <Event ID="EQT_FB_OPEN" Name="ACT_FB">
+        <With Var="ActFbOpenFbRun" />
+        <With Var="ActFbCloseFbStop" />
+      </Event>
+      <Event ID="EQT_FB_CLOSE" Name="ACT_RDY">
+        <With Var="ActReady" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="EQT_CNF" Name="CNF_ACT" Comment="Execution Confirmation">
+        <With Var="CmdActuator" />
+      </Event>
+      <Event Name="START_READY">
+        <With Var="StartReady" />
+      </Event>
+      <Event Name="STOP_READY">
+        <With Var="StopReady" />
+      </Event>
+      <Event ID="ABORTED_READY" Name="ABORT_READY">
+        <With Var="AbortReady" />
+      </Event>
+      <Event ID="EED82391A9C525C7" Name="GRAPH">
+        <With Var="Grafcet" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="Ready" Type="BOOL" />
+      <VarDeclaration Name="Starting" Type="BOOL" Comment="Input event qualifier" />
+      <VarDeclaration Name="Stopping" Type="BOOL" />
+      <VarDeclaration Name="Aborting" Type="BOOL" />
+      <VarDeclaration ID="EqtfbOpen" Name="ActFbOpenFbRun" Type="BOOL" />
+      <VarDeclaration ID="EqtfbClose" Name="ActFbCloseFbStop" Type="BOOL" />
+      <VarDeclaration ID="EqtNoAVailable" Name="ActReady" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="Eqt" Name="CmdActuator" Type="BOOL" Comment="Output event qualifier" />
+      <VarDeclaration Name="StartReady" Type="BOOL" />
+      <VarDeclaration Name="StopReady" Type="BOOL" />
+      <VarDeclaration ID="AbortedReady" Name="AbortReady" Type="BOOL" />
+      <VarDeclaration ID="AD6187E0BAC0B584" Name="Grafcet" Type="INT" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="StartReady,StopReady,OpenRunAct,CloseStopAct,CloseStop_When_Aborting,AbortReady" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="3052.941" y="469.4117" />
+      <ECState Name="Starting" Comment="Normal execution" x="1267.647" y="1432.941">
+        <ECAction Algorithm="OpenRunAct" Output="CNF_ACT" />
+        <ECAction Output="STOP_READY" />
+        <ECAction Output="ABORT_READY" />
+        <ECAction Output="GRAPH" />
+      </ECState>
+      <ECState Name="StartReady" x="1262" y="2115">
+        <ECAction Algorithm="StartReady" Output="START_READY" />
+        <ECAction Output="GRAPH" />
+      </ECState>
+      <ECState Name="Stopping" x="3054.286" y="1419.571">
+        <ECAction Algorithm="CloseStopAct" Output="CNF_ACT" />
+        <ECAction Output="START_READY" />
+        <ECAction Output="ABORT_READY" />
+        <ECAction Output="GRAPH" />
+      </ECState>
+      <ECState Name="StopReady" x="3053.857" y="2109.286">
+        <ECAction Algorithm="StopReady" Output="STOP_READY" />
+        <ECAction Output="GRAPH" />
+      </ECState>
+      <ECState Name="Aborting1" x="4938.143" y="1443.286">
+        <ECAction Algorithm="CloseStop_When_Aborting" Output="CNF_ACT" />
+        <ECAction Output="START_READY" />
+        <ECAction Output="STOP_READY" />
+        <ECAction Output="GRAPH" />
+      </ECState>
+      <ECState Name="AbortReady" x="4947.428" y="2105.714">
+        <ECAction Algorithm="AbortReady" Output="ABORT_READY" />
+        <ECAction Output="GRAPH" />
+      </ECState>
+      <ECState Name="Aborting" x="3072" y="3057.143" />
+      <ECState Name="Ready" x="4769.745" y="84.12703">
+        <ECAction Algorithm="CloseStopAct" Output="CNF_ACT" />
+        <ECAction Output="START_READY" />
+        <ECAction Output="ABORT_READY" />
+        <ECAction Output="GRAPH" />
+      </ECState>
+      <ECTransition Source="START" Destination="Starting" Condition="STARTING AND Starting" x="2187.957" y="938.3198">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="615.6823,197.6707,482.7808,269.3464" />
+      </ECTransition>
+      <ECTransition Source="Starting" Destination="StartReady" Condition="ActFbOpenFbRun" x="1263.729" y="1771.697">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="315.6588,418.5942,316.0733,466.8752" />
+      </ECTransition>
+      <ECTransition Source="StartReady" Destination="START" Condition="1" x="954.9783" y="997.7673">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="75.2831,289.7675,216.9458,163.481" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="Stopping" Condition="STOPPING AND Stopping" x="3058.364" y="931.2908">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="764.756,196.8222,765.0609,266.6231" />
+      </ECTransition>
+      <ECTransition Source="Stopping" Destination="StopReady" Condition="ActFbCloseFbStop" x="3053.239" y="1753.603">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="763.2286,413.1014,763.2896,461.8956" />
+      </ECTransition>
+      <ECTransition Source="StopReady" Destination="START" Condition="1" x="2552.416" y="1299.71">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="601.032,389.7812,601.6776,261.8004" />
+      </ECTransition>
+      <ECTransition Source="Aborting1" Destination="AbortReady" Condition="ActFbCloseFbStop OR NOT ActReady" x="4940.344" y="1781.315">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1234.582,422.636,1235.298,469.1576" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="Aborting1" Condition="ABORTING AND Aborting" x="3914.601" y="928.1923">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="905.9965,195.8366,1038.662,263.5668" />
+      </ECTransition>
+      <ECTransition Source="AbortReady" Destination="START" Condition="1" x="6648.859" y="1738.032">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1905.601,742.4099,1836.026,196.5398" />
+      </ECTransition>
+      <ECTransition Source="Starting" Destination="Aborting" Condition="ABORTING AND Aborting" x="1052.009" y="2604.041">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="116.3034,622.6627,238.4878,735.4833" />
+      </ECTransition>
+      <ECTransition Source="StartReady" Destination="Aborting" Condition="ABORTING AND Aborting" x="1922.899" y="2596.272">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="398.2356,615.7023,530.1825,683.7764" />
+      </ECTransition>
+      <ECTransition Source="Aborting" Destination="Aborting1" Condition="1" x="4050.558" y="2525.946">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="941.7383,717.7231,1082.222,590.0165" />
+      </ECTransition>
+      <ECTransition Source="Stopping" Destination="Aborting" Condition="ABORTING AND Aborting" x="2485.298" y="2421.985">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="562.1678,584.924,594.9732,656.6732" />
+      </ECTransition>
+      <ECTransition Source="StopReady" Destination="Aborting" Condition="ABORTING AND Aborting" x="3063.257" y="2574.647">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="765.2063,607.7885,766.4605,678.1074" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="Ready" Condition="Ready AND ActFbOpenFbRun" x="3903.166" y="194.9115">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="913.4575,57.28283,1035.902,30.25735" />
+      </ECTransition>
+      <ECTransition Source="Ready" Destination="START" Condition="ActFbCloseFbStop OR NOT ActReady" x="4221.427" y="385.6389">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1138.07,89.67522,1016.984,116.9574" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="OpenRunAct" Comment="Normally executed algorithm">
+      <ST><![CDATA[;
+Grafcet := 1;
+CmdActuator := TRUE;
+StopReady := FALSE;
+AbortReady := FALSE;]]></ST>
+    </Algorithm>
+    <Algorithm Name="StartReady">
+      <ST><![CDATA[;
+Grafcet := 2;
+StartReady := TRUE;]]></ST>
+    </Algorithm>
+    <Algorithm Name="CloseStopAct">
+      <ST><![CDATA[;
+Grafcet := 3;
+CmdActuator := FALSE;
+StartReady := FALSE;
+AbortReady  := FALSE;]]></ST>
+    </Algorithm>
+    <Algorithm Name="StopReady">
+      <ST><![CDATA[;
+Grafcet := 4;
+StopReady := TRUE;]]></ST>
+    </Algorithm>
+    <Algorithm Name="CloseStop_When_Aborting">
+      <ST><![CDATA[;
+Grafcet := 5;
+CmdActuator := FALSE;
+StartReady := FALSE;
+StopReady := FALSE;]]></ST>
+    </Algorithm>
+    <Algorithm Name="AbortReady">
+      <ST><![CDATA[;
+Grafcet := 6;
+AbortReady := TRUE;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

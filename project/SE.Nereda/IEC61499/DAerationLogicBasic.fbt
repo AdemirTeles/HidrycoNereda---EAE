@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="5fc5449d-2b0d-46cd-939e-6fc0b3934063" Name="DAerationLogicBasic" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="6/10/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="D2C11A8772DD75BE" Name="AERATION_CMD">
+        <With Var="AerationCmd" />
+      </Event>
+      <Event ID="BF57157246C0E97B" Name="AERATION_CAPACITY">
+        <With Var="AerCap" />
+        <With Var="AerCapCalc" />
+      </Event>
+      <Event ID="979DF616CA3CB55A" Name="AERATION_PAR">
+        <With Var="C_MAX" />
+        <With Var="C2_IN" />
+        <With Var="C3_IN" />
+      </Event>
+      <Event ID="13BA3066C47C3D65" Name="BLOWERS_FB">
+        <With Var="Blower1FbRunning" />
+        <With Var="Blower1FbStopped" />
+        <With Var="Blower1FbSpeed" />
+        <With Var="Blower2FbRunning" />
+        <With Var="Blower2FbStopped" />
+        <With Var="Blower2FbSpeed" />
+      </Event>
+      <Event ID="C2CA1F9B44AEDC08" Name="BLOWERS_RDY">
+        <With Var="Blower1FbReady" />
+        <With Var="Blower2FbReady" />
+      </Event>
+      <Event ID="349546B416B30E3C" Name="BLOWERS_OPD">
+        <With Var="Blower1TotRunDur" />
+        <With Var="Blower2TotRunDur" />
+        <With Var="Blower1OpCount" />
+        <With Var="Blower2OpCount" />
+      </Event>
+      <Event ID="1B0353354B77DB6A" Name="BLOWERS_PRESSURE">
+        <With Var="Blower1HiHiPressure" />
+        <With Var="Blower2HiHiPressure" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="B804F7AE49CF3E15" Name="CNF_BLOWER_CMD">
+        <With Var="CmdBlower1" />
+        <With Var="CmdBlower2" />
+      </Event>
+      <Event ID="3AB27F52460EDDB2" Name="CNF_BLOWER_CAP">
+        <With Var="C_OUT" />
+      </Event>
+      <Event ID="1ADA5B269032EF11" Name="CNF_BLOWER_FAIL">
+        <With Var="BlowerFailure" />
+      </Event>
+      <Event ID="F0F26EFFA0ABF35A" Name="CNF_GRAPH">
+        <With Var="Grafcet" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="B2CC9DAB470B3A98" Name="AerationCmd" Type="BOOL" />
+      <VarDeclaration ID="09FC2180130EA7A8" Name="AerCap" Type="REAL" />
+      <VarDeclaration ID="DA5588204184617D" Name="AerCapCalc" Type="REAL" />
+      <VarDeclaration ID="A08DC9D6B6A9A9C5" Name="C_MAX" Type="REAL" />
+      <VarDeclaration ID="BB0AA5D7C20FC6DC" Name="C2_IN" Type="REAL" />
+      <VarDeclaration ID="82E6F957CA34CE22" Name="C3_IN" Type="REAL" />
+      <VarDeclaration ID="AF84CB02D2B46EA7" Name="Blower1FbRunning" Type="BOOL" />
+      <VarDeclaration ID="CF3BA6B848432326" Name="Blower1FbStopped" Type="BOOL" />
+      <VarDeclaration ID="577CA07BFE5247BC" Name="Blower1FbSpeed" Type="REAL" />
+      <VarDeclaration ID="46433B3BDDEA2E25" Name="Blower2FbRunning" Type="BOOL" />
+      <VarDeclaration ID="B3E98BF14349172D" Name="Blower2FbStopped" Type="BOOL" />
+      <VarDeclaration ID="274CF35B495F03D7" Name="Blower2FbSpeed" Type="REAL" />
+      <VarDeclaration ID="0D2984DD8432BDE4" Name="Blower1FbReady" Type="BOOL" />
+      <VarDeclaration ID="266E7B658D2D8018" Name="Blower2FbReady" Type="BOOL" />
+      <VarDeclaration ID="1198AC713518BF96" Name="Blower1TotRunDur" Type="UDINT" />
+      <VarDeclaration ID="4207E8B5F773F643" Name="Blower1OpCount" Type="UDINT" />
+      <VarDeclaration ID="0E91FA9948C61E3C" Name="Blower2TotRunDur" Type="UDINT" />
+      <VarDeclaration ID="83358589D0E93502" Name="Blower2OpCount" Type="UDINT" />
+      <VarDeclaration ID="3701C14F32674847" Name="Blower1HiHiPressure" Type="BOOL" />
+      <VarDeclaration ID="70B7D0989DE93DE6" Name="Blower2HiHiPressure" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="6F30DD159F832B4D" Name="CmdBlower1" Type="BOOL" />
+      <VarDeclaration ID="50D97D2FBAA8D1BB" Name="CmdBlower2" Type="BOOL" />
+      <VarDeclaration ID="EA9B07A85C385EDE" Name="C_OUT" Type="REAL" />
+      <VarDeclaration ID="86F036F9D0AC2083" Name="BlowerFailure" Type="BOOL" />
+      <VarDeclaration ID="C09FEE22885584F4" Name="Grafcet" Type="INT" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="5d63002f-a7b1-4326-a938-7f8dd38ad271">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="StartOneBlowers,StartTowBlowers,OneBlowersRunning,TowBlowersRunning,StopAllBlowers,IdleState,AllStopped,FromTowToOneBL" />
+    <InternalVars>
+      <VarDeclaration ID="02D5B97B751B799E" Name="BL1WasRun" Type="BOOL" />
+      <VarDeclaration ID="48673FB3CF5E9DF7" Name="BL2WasRun" Type="BOOL" />
+    </InternalVars>
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="5022.441" y="221.0784" />
+      <ECState Name="Idle_State" x="5023" y="939.3333">
+        <ECAction Algorithm="IdleState" Output="CNF_GRAPH" />
+      </ECState>
+      <ECState Name="StartTowBlowers" x="6918.334" y="1503.714">
+        <ECAction Algorithm="StartTowBlowers" Output="CNF_BLOWER_CMD" />
+        <ECAction Output="CNF_BLOWER_CAP" />
+        <ECAction Output="CNF_GRAPH" />
+      </ECState>
+      <ECState Name="StartOneBlower" x="3155.477" y="1516.666">
+        <ECAction Algorithm="StartOneBlowers" Output="CNF_BLOWER_CMD" />
+        <ECAction Output="CNF_BLOWER_CAP" />
+        <ECAction Output="CNF_GRAPH" />
+      </ECState>
+      <ECState Name="OneBlowerStarted" x="3145.143" y="2675">
+        <ECAction Algorithm="OneBlowersRunning" Output="CNF_BLOWER_CMD" />
+        <ECAction Output="CNF_BLOWER_CAP" />
+        <ECAction Output="CNF_GRAPH" />
+      </ECState>
+      <ECState Name="TowBlowersStarted" x="6927.237" y="2653.095">
+        <ECAction Algorithm="TowBlowersRunning" Output="CNF_BLOWER_CMD" />
+        <ECAction Output="CNF_BLOWER_CAP" />
+        <ECAction Output="CNF_GRAPH" />
+      </ECState>
+      <ECState Name="Stop_All" x="5079.333" y="3467.667">
+        <ECAction Algorithm="StopAllBlowers" Output="CNF_BLOWER_CMD" />
+        <ECAction Output="CNF_BLOWER_CAP" />
+        <ECAction Output="CNF_GRAPH" />
+      </ECState>
+      <ECState Name="All_Stopped" x="5081.667" y="4081.243">
+        <ECAction Algorithm="AllStopped" Output="CNF_GRAPH" />
+      </ECState>
+      <ECState Name="FromTowToOneBL" x="5077.222" y="2665">
+        <ECAction Algorithm="FromTowToOneBL" Output="CNF_BLOWER_CMD" />
+        <ECAction Output="CNF_BLOWER_CAP" />
+      </ECState>
+      <ECTransition Source="START" Destination="Idle_State" Condition="AERATION_CMD AND AerationCmd" x="5316.595" y="570.2596">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1347.387,116.1573,1347.43,167.3148" />
+      </ECTransition>
+      <ECTransition Source="Idle_State" Destination="StartOneBlower" Condition="AerCap &lt;= C_MAX" x="4079.89" y="1223.06">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1083.532,285.6526,954.9312,325.4157" />
+      </ECTransition>
+      <ECTransition Source="Idle_State" Destination="StartTowBlowers" Condition="AerCap &gt; C_MAX" x="5935.047" y="1194.726">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1415.056,277.2933,1546.391,316.3511" />
+      </ECTransition>
+      <ECTransition Source="StartOneBlower" Destination="OneBlowerStarted" Condition="(CmdBlower1 AND Blower1FbRunning) OR&#xD;&#xA;(CmdBlower2 AND Blower2FbRunning) OR&#xD;&#xA;NOT AerationCmd" x="3151.65" y="2072.645">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="788.3975,472.3138,787.6193,560.1442" />
+      </ECTransition>
+      <ECTransition Source="OneBlowerStarted" Destination="OneBlowerStarted" Condition="(AERATION_CAPACITY AND AerCapCalc &lt;&gt; C_OUT) OR&#xD;&#xA;&#xD;&#xA;(BLOWERS_RDY AND&#xD;&#xA;(NOT Blower1FbReady AND CmdBlower1) OR&#xD;&#xA;(NOT Blower2FbReady AND CmdBlower2))" x="3073.251" y="2958.146">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="810.8564,784.6169,717.523,732.9502" />
+      </ECTransition>
+      <ECTransition Source="StartTowBlowers" Destination="TowBlowersStarted" Condition="NOT AerationCmd&#xD;&#xA;OR (BL1WasRun AND Blower1FbSpeed &lt;= C2_IN + 1 AND BL2WasRun AND Blower2FbSpeed &lt;= C2_IN + 1)&#xD;&#xA;OR (NOT BL1WasRun AND Blower1FbSpeed &gt;= C2_IN - 1 AND NOT BL2WasRun AND Blower2FbSpeed &gt;= C2_IN - 1)&#xD;&#xA;OR (BL1WasRun AND Blower1FbSpeed &lt;= C2_IN + 1 AND NOT BL2WasRun AND Blower2FbSpeed &gt;= C2_IN - 1)&#xD;&#xA;OR (NOT BL1WasRun AND Blower1FbSpeed &gt;= C2_IN - 1 AND BL2WasRun AND Blower2FbSpeed &lt;= C2_IN + 1)" x="6923.97" y="2056.647">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1730.723,468.8063,1731.422,555.8912" />
+      </ECTransition>
+      <ECTransition Source="OneBlowerStarted" Destination="Stop_All" Condition="NOT AerationCmd" x="4135.196" y="3070.513">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="965.2694,738.8788,1105.187,796.2407" />
+      </ECTransition>
+      <ECTransition Source="TowBlowersStarted" Destination="Stop_All" Condition="NOT AerationCmd" x="5961.244" y="3085.09">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1553.652,743.7433,1419.426,802.9199" />
+      </ECTransition>
+      <ECTransition Source="TowBlowersStarted" Destination="FromTowToOneBL" Condition="AerCap &lt;= C_MAX" x="5934.313" y="2431.184">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1545.764,592.9792,1413.012,593.3323" />
+      </ECTransition>
+      <ECTransition Source="All_Stopped" Destination="START" Condition="1" x="2326.989" y="2210.81">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="374.9177,1155.479,360.6844,-41.3085" />
+      </ECTransition>
+      <ECTransition Source="OneBlowerStarted" Destination="StartTowBlowers" Condition="AerCap &gt; C_MAX" x="5033.597" y="2109.277">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1114.377,573.5463,1400.92,484.4125" />
+      </ECTransition>
+      <ECTransition Source="TowBlowersStarted" Destination="TowBlowersStarted" Condition="(AERATION_CAPACITY AND Blower2FbReady AND Blower1FbReady AND AerCapCalc &lt;&gt; C_OUT) OR&#xD;&#xA;&#xD;&#xA;(BLOWERS_RDY AND&#xD;&#xA;(Blower1FbReady &lt;&gt; CmdBlower1) OR&#xD;&#xA;(Blower2FbReady &lt;&gt; CmdBlower2))" x="7063.84" y="2923.229">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1839.25,747.3034,1710.917,750.6367" />
+      </ECTransition>
+      <ECTransition Source="StartOneBlower" Destination="StartOneBlower" Condition="BLOWERS_RDY" x="2911.376" y="1261.781">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="755.4167,267.3035,671.25,329.8035" />
+      </ECTransition>
+      <ECTransition Source="Stop_All" Destination="All_Stopped" Condition="Blower1FbStopped AND Blower2FbStopped" x="5080.251" y="3771.344">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1269.954,921.3594,1270.142,963.794" />
+      </ECTransition>
+      <ECTransition Source="FromTowToOneBL" Destination="StartOneBlower" Condition="(BL1WasRun AND Blower1FbSpeed &lt;= C3_IN + 1 AND BL2WasRun AND Blower2FbSpeed &lt;= C3_IN + 1)&#xD;&#xA;OR (NOT BL1WasRun AND Blower1FbSpeed &gt;= C3_IN - 1 AND NOT BL2WasRun AND Blower2FbSpeed &gt;= C3_IN - 1)&#xD;&#xA;OR (BL1WasRun AND Blower1FbSpeed &lt;= C3_IN + 1 AND NOT BL2WasRun AND Blower2FbSpeed &gt;= C3_IN - 1)&#xD;&#xA;OR (NOT BL1WasRun AND Blower1FbSpeed &gt;= C3_IN - 1 AND BL1WasRun AND Blower2FbSpeed &lt;= C3_IN + 1)" x="4132.726" y="2121.195">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1107.847,576.3276,962.2106,489.3301" />
+      </ECTransition>
+      <ECTransition Source="FromTowToOneBL" Destination="Stop_All" Condition="NOT AerationCmd" x="5082.493" y="3062.23">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1270.817,736.1198,1270.97,794.3117" />
+      </ECTransition>
+      <ECTransition Source="Idle_State" Destination="START" Condition="NOT AerationCmd" x="4720.095" y="567.7084">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1161.249,166.4644,1161.209,115.3069" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="StartOneBlowers">
+      <ST><![CDATA[;
+Grafcet := 2;
+// Default commands
+CmdBlower1 := FALSE;
+CmdBlower2 := FALSE;
+
+// Start only one blower
+IF Blower1FbReady AND NOT Blower2FbReady THEN
+
+    // Only blower 1 is available
+    CmdBlower1 := TRUE;
+    CmdBlower2 := FALSE;
+
+
+ELSIF Blower2FbReady AND NOT Blower1FbReady THEN
+
+    // Only blower 2 is available
+    CmdBlower1 := FALSE;
+    CmdBlower2 := TRUE;
+
+
+ELSIF Blower1FbReady AND Blower2FbReady THEN
+
+    // Both blowers are available
+    // First selection criteria: lowest total running duration
+    IF Blower1TotRunDur < Blower2TotRunDur THEN
+
+        CmdBlower1 := TRUE;
+        CmdBlower2 := FALSE;
+
+    ELSIF Blower2TotRunDur < Blower1TotRunDur THEN
+
+        CmdBlower1 := FALSE;
+        CmdBlower2 := TRUE;
+
+    ELSE
+
+        // If running durations are equal,
+        // second selection criteria: lowest operation count
+        IF Blower1OpCount <= Blower2OpCount THEN
+
+            CmdBlower1 := TRUE;
+            CmdBlower2 := FALSE;
+
+        ELSE
+
+            CmdBlower1 := FALSE;
+            CmdBlower2 := TRUE;
+
+        END_IF;
+
+    END_IF;
+
+ELSE
+
+    // No blower available
+    CmdBlower1 := FALSE;
+    CmdBlower2 := FALSE;
+
+END_IF;
+
+C_OUT := C3_IN;]]></ST>
+    </Algorithm>
+    <Algorithm Name="StartTowBlowers">
+      <ST><![CDATA[;
+Grafcet := 4;
+
+CmdBlower1 := TRUE;
+CmdBlower2 := TRUE;
+C_OUT := C2_IN;]]></ST>
+    </Algorithm>
+    <Algorithm Name="OneBlowersRunning">
+      <ST><![CDATA[;
+Grafcet := 3;
+
+// Start only one blower
+IF Blower1FbReady AND NOT Blower2FbReady THEN
+	
+	// Only blower 1 is available
+	CmdBlower1 := TRUE;
+	CmdBlower2 := FALSE;
+	
+	
+ELSIF Blower2FbReady AND NOT Blower1FbReady THEN
+	
+	// Only blower 2 is available
+	CmdBlower1 := FALSE;
+	CmdBlower2 := TRUE;
+END_IF;
+
+// Capacity setpoint during starting
+C_OUT := AerCapCalc;
+
+BL1WasRun := Blower1FbRunning;
+BL2WasRun := Blower2FbRunning;]]></ST>
+    </Algorithm>
+    <Algorithm Name="TowBlowersRunning">
+      <ST><![CDATA[;
+Grafcet := 5;
+
+// Start only one blower
+IF Blower1FbReady AND NOT Blower2FbReady THEN
+	
+	// Only blower 1 is available
+	CmdBlower1 := TRUE;
+	CmdBlower2 := FALSE;
+	C_OUT := 100;
+	
+ELSIF Blower2FbReady AND NOT Blower1FbReady THEN
+	
+	// Only blower 2 is available
+	CmdBlower1 := FALSE;
+	CmdBlower2 := TRUE;
+	C_OUT := 100;
+	
+ELSIF Blower2FbReady AND Blower1FbReady THEN
+	
+	// Tow blowers are available
+	CmdBlower1 := TRUE;
+	CmdBlower2 := TRUE;
+	C_OUT := AerCapCalc;
+END_IF;
+
+BL1WasRun := Blower1FbRunning;
+BL2WasRun := Blower2FbRunning;]]></ST>
+    </Algorithm>
+    <Algorithm Name="StopAllBlowers">
+      <ST><![CDATA[;
+Grafcet := 6;
+
+// Default commands
+CmdBlower1 := FALSE;
+CmdBlower2 := FALSE;
+C_OUT := 0;]]></ST>
+    </Algorithm>
+    <Algorithm Name="IdleState">
+      <ST><![CDATA[;
+Grafcet := 1;]]></ST>
+    </Algorithm>
+    <Algorithm Name="AllStopped">
+      <ST><![CDATA[;
+Grafcet := 7;
+
+BL1WasRun := Blower1FbRunning;
+BL2WasRun := Blower2FbRunning;]]></ST>
+    </Algorithm>
+    <Algorithm Name="FromTowToOneBL">
+      <ST><![CDATA[;
+Grafcet := 8;
+
+CmdBlower1 := TRUE;
+CmdBlower2 := TRUE;
+C_OUT := C3_IN;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="9d85496d-27e2-4087-8522-e7bf8070ab9c" Comment="Basic Function Block Type" Name="FlushingSelector" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="6/22/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="D8D7EDABEA7B3922" Name="CYCLE">
+        <With Var="FbGSInsta_Ready" />
+        <With Var="FbGSs_Ready" />
+        <With Var="FbSLB_Ready" />
+        <With Var="CmdOpenValve014GSInst" />
+        <With Var="CmdCloseValve014GSInst" />
+        <With Var="CmdOpenValve014GSs" />
+        <With Var="CmdCloseValve014GSs" />
+        <With Var="CmdOpenValve014SLB" />
+        <With Var="CmdCloseValve014SLB" />
+        <With Var="ReduceSpeedGSInst" />
+        <With Var="ReduceSpeedGSs" />
+        <With Var="ReduceSpeedSLB" />
+      </Event>
+      <Event ID="B3C3778B51CB7C0B" Name="FLUSH_RDY">
+        <With Var="FbGSInsta_Ready" />
+        <With Var="FbGSs_Ready" />
+        <With Var="FbSLB_Ready" />
+      </Event>
+      <Event ID="DE111E414B61F07B" Name="FB_WAIT" />
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="C5198EBE6703874F" Name="START_CYCLE" Comment="Execution Confirmation">
+        <With Var="FlushSelected" />
+      </Event>
+      <Event ID="B482DC569AD88DF9" Name="STOP_CYCLE">
+        <With Var="FlushSelected" />
+      </Event>
+      <Event ID="72F6AA492327E76C" Name="CNF_SELECT">
+        <With Var="RequestFlushing" />
+        <With Var="CmdOpenValve014" />
+        <With Var="CmdCloseValve014" />
+        <With Var="FlushSelected" />
+        <With Var="ReduceSpeed" />
+      </Event>
+      <Event ID="02F68A5DD7B717EF" Name="WAIT" />
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="DB000855E101C77F" Name="FbGSInsta_Ready" Type="BOOL" />
+      <VarDeclaration ID="6F16CF1994B563D7" Name="FbGSs_Ready" Type="BOOL" />
+      <VarDeclaration ID="DB568F49C4639AC9" Name="FbSLB_Ready" Type="BOOL" />
+      <VarDeclaration ID="0E98C03A6F673D7F" Name="CmdOpenValve014GSInst" Type="BOOL" />
+      <VarDeclaration ID="9DEF7B7D7715E0CE" Name="CmdCloseValve014GSInst" Type="BOOL" />
+      <VarDeclaration ID="91C603F64C0C70F5" Name="CmdOpenValve014GSs" Type="BOOL" />
+      <VarDeclaration ID="CCDB4DBCA0B4B23D" Name="CmdCloseValve014GSs" Type="BOOL" />
+      <VarDeclaration ID="998C0B5D38D41A44" Name="CmdOpenValve014SLB" Type="BOOL" />
+      <VarDeclaration ID="4AFA863861C84038" Name="CmdCloseValve014SLB" Type="BOOL" />
+      <VarDeclaration ID="D29FDD994529B71F" Name="ReduceSpeedGSInst" Type="BOOL" />
+      <VarDeclaration ID="2527676400CBF5ED" Name="ReduceSpeedGSs" Type="BOOL" />
+      <VarDeclaration ID="103BE80FBAF0C7F9" Name="ReduceSpeedSLB" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="90BE0054E7DD7D45" Name="RequestFlushing" Type="BOOL" />
+      <VarDeclaration ID="D74C26B56D3ECE0D" Name="CmdOpenValve014" Type="BOOL" />
+      <VarDeclaration ID="F6F17DAC31C10A1D" Name="CmdCloseValve014" Type="BOOL" />
+      <VarDeclaration ID="E35DB6B1DD2B2E36" Name="ReduceSpeed" Type="BOOL" />
+      <VarDeclaration ID="CCD69D3E6C0C119E" Name="FlushSelected" Type="INT" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="61662e33-a6d9-494c-8b4a-c2fac2d12e7a">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="GSiNstallation,GSs,SLB,NoFlushReq" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="3338.774" y="1031.3" />
+      <ECState Name="GSInstallation" x="1653" y="2185">
+        <ECAction Algorithm="GSiNstallation" Output="CNF_SELECT" />
+      </ECState>
+      <ECState Name="GritScreens" x="3332" y="2164">
+        <ECAction Algorithm="GSs" Output="CNF_SELECT" />
+      </ECState>
+      <ECState Name="SludgeBuffer" x="4843" y="2158">
+        <ECAction Algorithm="SLB" Output="CNF_SELECT" />
+      </ECState>
+      <ECState Name="StartCycle" x="3337" y="1544">
+        <ECAction Output="START_CYCLE" />
+      </ECState>
+      <ECState Name="StopCycle" x="3335" y="2903">
+        <ECAction Output="STOP_CYCLE" />
+        <ECAction Output="WAIT" />
+      </ECState>
+      <ECState Name="NoFlush" x="3336" y="610.9998">
+        <ECAction Algorithm="NoFlushReq" Output="CNF_SELECT" />
+      </ECState>
+      <ECTransition Source="StartCycle" Destination="GSInstallation" Condition="FbGSInsta_Ready" x="2453.67" y="1872.011">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="669.1462,446.2674,551.8099,490.9902" />
+      </ECTransition>
+      <ECTransition Source="StartCycle" Destination="GritScreens" Condition="NOT FbGSInsta_Ready AND FbGSs_Ready" x="3335.429" y="1849.211">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="834.1052,440.4188,833.7214,483.3884" />
+      </ECTransition>
+      <ECTransition Source="StartCycle" Destination="SludgeBuffer" Condition="NOT FbGSInsta_Ready AND NOT FbGSs_Ready AND FbSLB_Ready" x="4078.235" y="1827.138">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="965.4195,433.5713,1069.428,476.0205" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="StartCycle" Condition="FbGSInsta_Ready OR FbGSs_Ready OR FbSLB_Ready" x="3341.19" y="1271.972">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="835.5599,299.6725,835.4002,333.7003" />
+      </ECTransition>
+      <ECTransition Source="GSInstallation" Destination="GSInstallation" Condition="CYCLE" x="1202.909" y="2207.25">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="278.2259,615.6666,268.2259,491.6666" />
+      </ECTransition>
+      <ECTransition Source="GritScreens" Destination="GritScreens" Condition="CYCLE" x="2968.832" y="2197.75">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="724.75,617.75,714.75,486.75" />
+      </ECTransition>
+      <ECTransition Source="SludgeBuffer" Destination="SludgeBuffer" Condition="CYCLE" x="4374.599" y="2164.929">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1070.852,585.3098,1066.852,498.3098" />
+      </ECTransition>
+      <ECTransition Source="SludgeBuffer" Destination="StopCycle" Condition="FLUSH_RDY AND (FbGSInsta_Ready OR FbGSs_Ready OR NOT FbSLB_Ready)" x="4124.948" y="2542.145">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1087.68,609.696,978.3384,663.317" />
+      </ECTransition>
+      <ECTransition Source="GritScreens" Destination="StopCycle" Condition="FLUSH_RDY AND (FbGSInsta_Ready OR NOT FbGSs_Ready)" x="3333.919" y="2533.761">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="833.3996,607.0187,833.6127,659.9052" />
+      </ECTransition>
+      <ECTransition Source="GSInstallation" Destination="StopCycle" Condition="FLUSH_RDY AND NOT FbGSInsta_Ready" x="2518.141" y="2555.637">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="571.6829,614.3111,691.5433,665.4467" />
+      </ECTransition>
+      <ECTransition Source="StopCycle" Destination="StartCycle" Condition="FB_WAIT" x="907.9628" y="2219.056">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="38.27916,606.6868,38.43303,502.1338" />
+      </ECTransition>
+      <ECTransition Source="StartCycle" Destination="NoFlush" Condition="NOT FbGSInsta_Ready AND NOT FbGSs_Ready AND NOT FbSLB_Ready" x="2812.709" y="1076.48">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="668.348,303.5614,668.274,234.5085" />
+      </ECTransition>
+      <ECTransition Source="NoFlush" Destination="START" Condition="1" x="3340.803" y="820.656">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="835.2852,191.9589,835.4589,218.2868" />
+      </ECTransition>
+    </ECC>
+    <Algorithm ID="17b142fa-e92b-4204-ae3d-ff3d8273e521" Name="GSiNstallation">
+      <ST><![CDATA[;
+RequestFlushing := TRUE;
+CmdOpenValve014 := CmdOpenValve014GSInst;
+CmdCloseValve014 := CmdCloseValve014GSInst;
+ReduceSpeed := ReduceSpeedGSInst;
+FlushSelected := 1;]]></ST>
+    </Algorithm>
+    <Algorithm ID="b5c60971-07fb-472c-98fa-3e458e87ab91" Name="GSs">
+      <ST><![CDATA[;
+RequestFlushing := TRUE;
+CmdOpenValve014 := CmdOpenValve014GSs;
+CmdCloseValve014 := CmdCloseValve014GSs;
+ReduceSpeed := ReduceSpeedGSs;
+FlushSelected := 2;]]></ST>
+    </Algorithm>
+    <Algorithm ID="b4e64fca-847c-4075-83e7-68579df8d07e" Name="SLB">
+      <ST><![CDATA[;
+RequestFlushing := TRUE;
+CmdOpenValve014 := CmdOpenValve014SLB;
+CmdCloseValve014 := CmdCloseValve014SLB;
+ReduceSpeed := ReduceSpeedSLB;
+FlushSelected := 3;]]></ST>
+    </Algorithm>
+    <Algorithm ID="08d60faf-3c4e-49db-911b-9088443a103f" Name="NoFlushReq">
+      <ST><![CDATA[;
+RequestFlushing := FALSE;
+CmdOpenValve014 := TRUE;
+CmdCloseValve014 := FALSE;
+ReduceSpeed := FALSE;
+FlushSelected := 0;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

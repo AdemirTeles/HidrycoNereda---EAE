@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="d5c57f56-f932-48c3-81bb-31203fbe7cb8" Name="LevelSetPoint" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="6/10/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="F1EF33EDF930102A" Name="REQ" Comment="Normal Execution Request">
+        <With Var="LevelSp" />
+        <With Var="LevelPv" />
+        <With Var="Deviation" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="5C15B34FA0BE2D12" Name="CNF" Comment="Execution Confirmation">
+        <With Var="L1" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="E7E7E59B5B35FDF5" Name="LevelPv" Type="REAL" Comment="Input event qualifier" />
+      <VarDeclaration ID="B3F14A30A9C6E91C" Name="LevelSp" Type="REAL" />
+      <VarDeclaration ID="E22497432101E9D3" Name="Deviation" Type="REAL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="20BAB588313AD38F" Name="L1" Type="BOOL" Comment="Output event qualifier" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="REQ" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="552.9412" y="429.4117" />
+      <ECState Name="REQ" Comment="Normal execution" x="1241.647" y="852.9412">
+        <ECAction Algorithm="REQ" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="REQ" Condition="REQ" x="947.2598" y="574.5939">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="215.7946,125.7001,259.0444,152.2972" />
+      </ECTransition>
+      <ECTransition Source="REQ" Destination="START" Condition="1" x="891.3257" y="719.8661">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="245.9485,198.5927,202.6987,171.9956" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="REQ" Comment="Normally executed algorithm">
+      <ST><![CDATA[;
+IF (LevelPv <= LevelSp - Deviation) THEN
+	L1 := TRUE; 
+ELSE 
+	L1 := FALSE; 
+END_IF;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="1bd384f5-bed1-4fce-a382-ab0f52e12d23" Name="ConvertFlowUnit" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author="SESA713705" Date="8/23/2024" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="REQ" Comment="Normal Execution Request">
+        <With Var="IN1" />
+        <With Var="Enable" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="CNF" Comment="Execution Confirmation">
+        <With Var="OUT1" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="88326FC8282011A9" Name="Enable" Type="BOOL" />
+      <VarDeclaration Name="IN1" Type="VTQREAL" Comment="Input event qualifier" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="OUT1" Type="VTQREAL" Comment="Output event qualifier" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="34530935-2602-48d0-b5fb-885a5fa42b36">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="Convert" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="740.9412" y="521.4117" />
+      <ECState Name="Convert" x="1836" y="1008">
+        <ECAction Algorithm="Convert" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="Convert" Condition="REQ" x="1340.434" y="704.7223">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="299.6572,155.1992,374.299,189.1715" />
+      </ECTransition>
+      <ECTransition Source="Convert" Destination="START" Condition="1" x="1235.534" y="823.4647">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="344.212,226.612,270.1265,193.06" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="Convert">
+      <ST><![CDATA[;
+IF Enable THEN
+	// flow conversion from m3/s to m3/h
+	OUT1.value := IN1.value * 3.6;
+	OUT1.timestamp := IN1.timestamp;
+	OUT1.picosecs := IN1.picosecs;
+	OUT1.quality := IN1.quality;
+ELSE
+	OUT1 := IN1;
+END_IF;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

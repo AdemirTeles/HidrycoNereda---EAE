@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="a4f3c891-7e2d-4c5b-9f01-3d8e2b6c4a91" Name="horimetro2" Format="2.0" Comment="Composite Function Block Type - Horimetro com persistencia funcional" Namespace="Hidryco.HidrycoLib">
+  <Attribute Name="Configuration.FB.IDCounter" Value="40" />
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Hidryco" Version="1.0.0" Author="Hidryco" Date="11/05/2026" Remarks="Versao corrigida do horimetro - PERSISTENCE.outputN agora alimenta basicHorimetro2.INIT_xxx para restaurar contagem apos reinicio do PLC" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="INIT" Comment="Inicializacao" />
+      <Event Name="REQ" Comment="Pulso de 1s">
+        <With Var="stsLigado" />
+      </Event>
+      <Event Name="CMD_RESET_HORIMETRO" Comment="Zera o horimetro" />
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="INITO" Comment="Confirmacao de inicializacao" />
+      <Event Name="CNF" Comment="Confirmacao de execucao">
+        <With Var="stsHorimetroSeg" />
+        <With Var="stsHorimetroMin" />
+        <With Var="stsHorimetroHor" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="stsLigado" Type="BOOL" Comment="1 = equipamento ligado (acumula tempo)" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="stsHorimetroSeg" Type="UINT" Comment="Segundos (0..59)" />
+      <VarDeclaration Name="stsHorimetroMin" Type="UINT" Comment="Minutos (0..59)" />
+      <VarDeclaration Name="stsHorimetroHor" Type="UDINT" Comment="Horas totais" />
+    </OutputVars>
+  </InterfaceList>
+  <FBNetwork>
+    <FB ID="30" Name="FB1" Type="basicHorimetro2" x="2000" y="1440" Namespace="Hidryco.HidrycoLib" />
+    <FB ID="32" UID="31" Name="FB2" Type="PERSISTENCE_20652AC5DB8BA8AD5" x="2220" y="460" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#I:=3;input${I}:UINT,UINT,UDINT" />
+    </FB>
+    <Input Name="INIT" x="1100" y="1452" Type="Event" />
+    <Input Name="REQ" x="1100" y="1512" Type="Event" />
+    <Input Name="stsLigado" x="1100" y="1772" Type="Data" />
+    <Input Name="CMD_RESET_HORIMETRO" x="1100" y="1572" Type="Event" />
+    <Output Name="stsHorimetroSeg" x="3380" y="1772" Type="Data" />
+    <Output Name="stsHorimetroMin" x="3380" y="1832" Type="Data" />
+    <Output Name="stsHorimetroHor" x="3380" y="1892" Type="Data" />
+    <Output Name="INITO" x="3380" y="1452" Type="Event" />
+    <Output Name="CNF" x="3380" y="1512" Type="Event" />
+    <EventConnections>
+      <Connection Source="$INIT" Destination="$32.INIT" dx1="41.41663" />
+      <Connection Source="$32.INITO" Destination="$32.READ" dx1="68.625" dx2="70" dy="-110" />
+      <Connection Source="$32.READCNF" Destination="$30.INIT" dx1="48.625" dx2="50" dy="710" />
+      <Connection Source="$30.INITO" Destination="$INITO" />
+      <Connection Source="$REQ" Destination="$30.REQ" />
+      <Connection Source="$CMD_RESET_HORIMETRO" Destination="$30.CMD_RESET_HORIMETRO" dx1="40" />
+      <Connection Source="$30.CNF" Destination="$32.WRITE" dx1="70" dx2="90" dy="-170" />
+      <Connection Source="$30.CNF" Destination="$CNF" />
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="$stsLigado" Destination="$30.STS_LIGADO" dx1="40" />
+      <Connection Source="$32.output1" Destination="$30.INIT_SEC" dx1="60" />
+      <Connection Source="$32.output2" Destination="$30.INIT_MIN" dx1="80" />
+      <Connection Source="$32.output3" Destination="$30.INIT_HOR" dx1="100" />
+      <Connection Source="$30.HORIMETRO_SEC" Destination="$stsHorimetroSeg" dx1="90" />
+      <Connection Source="$30.HORIMETRO_MIN" Destination="$stsHorimetroMin" />
+      <Connection Source="$30.HORIMETRO_HOR" Destination="$stsHorimetroHor" />
+      <Connection Source="$30.HORIMETRO_SEC" Destination="$32.input1" dx1="90" dx2="70" dy="-430" />
+      <Connection Source="$30.HORIMETRO_MIN" Destination="$32.input2" dx1="110" dx2="50" dy="-490" />
+      <Connection Source="$30.HORIMETRO_HOR" Destination="$32.input3" dx1="130" dx2="30" dy="-550" />
+    </DataConnections>
+  </FBNetwork>
+</FBType>

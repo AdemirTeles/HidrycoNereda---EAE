@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="b166bf19-cdaa-4cbc-a1d1-32dbd2a9700f" Name="animacaoAbrirFechar" Comment="Basic Function Block Type" Namespace="Hidryco.HidrycoLib">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="1/26/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="REQ" Comment="Normal Execution Request">
+        <With Var="stsAberto" />
+        <With Var="stsFechado" />
+        <With Var="stsFalha" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="CNF" Comment="Execution Confirmation">
+        <With Var="stsAnimacao" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="stsAberto" Type="BOOL" />
+      <VarDeclaration Name="stsFechado" Type="BOOL" />
+      <VarDeclaration Name="stsFalha" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="stsAnimacao" Type="INT" Comment="0-Off; 1-On; 2-Fail; 3-Manut; 4-Transition" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="INIT,REQ,AnimacaoOn,AnimacaoOff,AnimacaoFail,AnimacaoTransition" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="1788.941" y="1057.412" />
+      <ECState Name="STS_ON" x="2868" y="1088">
+        <ECAction Algorithm="AnimacaoOn" Output="CNF" />
+      </ECState>
+      <ECState Name="STS_OFF" x="1820" y="1820">
+        <ECAction Algorithm="AnimacaoOff" Output="CNF" />
+      </ECState>
+      <ECState Name="STS_FAIL" x="472" y="1008">
+        <ECAction Algorithm="AnimacaoFail" Output="CNF" />
+      </ECState>
+      <ECState Name="STS_TRANSITION" x="1776" y="432">
+        <ECAction Algorithm="AnimacaoTransition" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="STS_ON" Condition="stsAberto AND NOT(stsFechado) AND NOT(stsFalha)" x="2270.197" y="995.3965">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="537.3777,244.8195,589.6058,244.9588" />
+      </ECTransition>
+      <ECTransition Source="STS_ON" Destination="START" Condition="1" x="2330.997" y="1154.956">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="616.6506,293.6056,550.8664,292.0346" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="STS_OFF" Condition="stsFalha AND NOT(stsAberto) AND NOT(stsFalha)" x="1898.779" y="1423.207">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="479.6368,327.0828,481.639,381.9375" />
+      </ECTransition>
+      <ECTransition Source="STS_OFF" Destination="START" Condition="1" x="1677.295" y="1514.51">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="423.2821,417.8072,400.209,352.0818" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="STS_FAIL" Condition="stsFalha" x="1132.609" y="1109.609">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="321.894,283.2953,241.8105,279.5388" />
+      </ECTransition>
+      <ECTransition Source="STS_FAIL" Destination="START" Condition="1" x="1158.906" y="903.2333">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="252.5886,216.7769,328.6471,220.7297" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="STS_TRANSITION" Condition="NOT(stsAberto) AND NOT(stsFechado) AND NOT(stsFalha)" x="1920.624" y="778.4714">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="483.323,231.7433,491.4582,163.12" />
+      </ECTransition>
+      <ECTransition Source="STS_TRANSITION" Destination="START" Condition="1" x="1635.785" y="752.4116">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="399.4808,167.0366,400.9756,210.4535" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="INIT" Comment="Initialization algorithm">
+      <ST><![CDATA[;]]></ST>
+    </Algorithm>
+    <Algorithm Name="REQ" Comment="Normally executed algorithm">
+      <ST><![CDATA[;]]></ST>
+    </Algorithm>
+    <Algorithm Name="AnimacaoOn">
+      <ST><![CDATA[stsAnimacao := 1;
+;]]></ST>
+    </Algorithm>
+    <Algorithm Name="AnimacaoOff">
+      <ST><![CDATA[stsAnimacao := 0
+;]]></ST>
+    </Algorithm>
+    <Algorithm Name="AnimacaoFail">
+      <ST><![CDATA[stsAnimacao := 3;
+;]]></ST>
+    </Algorithm>
+    <Algorithm Name="AnimacaoTransition">
+      <ST><![CDATA[stsAnimacao := 5;
+;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

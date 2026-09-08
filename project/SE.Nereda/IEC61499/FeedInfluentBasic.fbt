@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="fc14dff4-cdee-4ed1-8a52-3e6487cfe39a" Comment="Basic Function Block Type" Name="FeedInfluentBasic" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="6/13/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="087CD876DCD6EE87" Name="LEVEL_PV_SP">
+        <With Var="StartLevelSp" />
+        <With Var="StopLevelSp" />
+        <With Var="LevelPv" />
+      </Event>
+      <Event ID="0C4F94A66BD0D588" Name="FREEZ_STATE">
+        <With Var="FreezWeather" />
+      </Event>
+      <Event ID="FA8D01F8193412B5" Name="FB_PUMP_STATE">
+        <With Var="FbStopped" />
+        <With Var="FbRunning" />
+      </Event>
+      <Event ID="3BB3C8F4542D663C" Name="GS_FLUSH_STATE">
+        <With Var="GreetScreenInstFlush" />
+      </Event>
+      <Event ID="BA18149E37AD28B3" Name="FB_PUMP_RDY">
+        <With Var="FbPumpReady" />
+      </Event>
+      <Event ID="A841DEC9A7185651" Name="FB_DELAY_PMP_RUN">
+        <With Var="FbFreezRunDurDone" />
+      </Event>
+      <Event ID="BF17A06E73262AF1" Name="FB_DELAY_PMP_STOP">
+        <With Var="FbFreezStopDurDone" />
+      </Event>
+      <Event ID="D9F01C23F33FA44E" Name="RESET">
+        <With Var="ResetLogic" />
+      </Event>
+      <Event ID="1A10D9AD62D4B5BA" Name="FORCE_STOP">
+        <With Var="ForceStopPump" />
+      </Event>
+      <Event ID="A6EDF9258529D74A" Name="FB_WAIT" />
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="A886049003AB7BF0" Name="CNF_PUMP_SP">
+        <With Var="CmdPump" />
+      </Event>
+      <Event ID="773D179CB48D8BCF" Name="GRAPH">
+        <With Var="Grafcet" />
+      </Event>
+      <Event ID="A36A5BFEC9789D92" Name="START_DELAY_PMP_RUN" />
+      <Event ID="DAFC9A25279F77FA" Name="STOP_DELAY_PMP_RUN" />
+      <Event ID="FE42F39B20F05254" Name="START_DELAY_PMP_STOP" />
+      <Event ID="4542C2B348B73018" Name="STOP_DELAY_PMP_STOP" />
+      <Event ID="462EBC5E04F2E8AC" Name="WAIT" />
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="4E1A1BF0C390C99A" Name="LevelPv" Type="REAL" />
+      <VarDeclaration ID="C449D5A81D824C6A" Name="StartLevelSp" Type="REAL" />
+      <VarDeclaration ID="4B0410BD252B6697" Name="StopLevelSp" Type="REAL" />
+      <VarDeclaration ID="D6D1DFF1CBB2AE71" Name="FreezWeather" Type="BOOL" />
+      <VarDeclaration ID="F46B1546E818D164" Name="FbStopped" Type="BOOL" />
+      <VarDeclaration ID="A435A18234D11579" Name="FbRunning" Type="BOOL" />
+      <VarDeclaration ID="5B7FAD7223786DCB" Name="GreetScreenInstFlush" Type="BOOL" />
+      <VarDeclaration ID="D3CC68030E716A58" Name="FbPumpReady" Type="BOOL" />
+      <VarDeclaration ID="9E484CF026FEE50F" Name="FbFreezRunDurDone" Type="BOOL" />
+      <VarDeclaration ID="4DA8AA650AC4FC55" Name="FbFreezStopDurDone" Type="BOOL" />
+      <VarDeclaration ID="A37751783FF88338" Name="ResetLogic" Type="BOOL" />
+      <VarDeclaration ID="CCE17708114D7274" Name="ForceStopPump" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="6FD1A8945A6CB7E1" Name="CmdPump" Type="BOOL" />
+      <VarDeclaration ID="4CDD3E3012708AFD" Name="Grafcet" Type="INT" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="8397f1f2-365a-4185-b96d-b36ab1358438">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="StartPump,StopPump,NormalOper,FreezOper,PumpRun,PumpStopped,UpdateFreeze,Reset,ReTrigger" />
+    <InternalVars>
+      <VarDeclaration ID="123A696F238CAA48" Name="FreezeMode" Type="BOOL" />
+    </InternalVars>
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="3511.227" y="616.2371" />
+      <ECState Name="NormalOper" x="2204" y="1230">
+        <ECAction Algorithm="NormalOper" Output="GRAPH" />
+      </ECState>
+      <ECState Name="FreezOper" x="4857.142" y="1182.698">
+        <ECAction Algorithm="FreezOper" Output="GRAPH" />
+      </ECState>
+      <ECState Name="StartPump1" x="2206.305" y="1795.714">
+        <ECAction Algorithm="StartPump" Output="CNF_PUMP_SP" />
+        <ECAction Output="GRAPH" />
+      </ECState>
+      <ECState Name="StopPump1" x="2211.622" y="2877.183">
+        <ECAction Algorithm="StopPump" Output="CNF_PUMP_SP" />
+        <ECAction Output="GRAPH" />
+      </ECState>
+      <ECState Name="PumpRun1" x="2201.503" y="2308.492">
+        <ECAction Algorithm="PumpRun" Output="GRAPH" />
+      </ECState>
+      <ECState Name="StartPump2" x="4865.352" y="2056.634">
+        <ECAction Algorithm="StartPump" Output="CNF_PUMP_SP" />
+        <ECAction Output="STOP_DELAY_PMP_STOP" />
+      </ECState>
+      <ECState Name="StopPump2" x="4876.542" y="2902.824">
+        <ECAction Algorithm="StopPump" Output="CNF_PUMP_SP" />
+        <ECAction Output="GRAPH" />
+      </ECState>
+      <ECState Name="PumpRun2" x="4869.523" y="2489.491">
+        <ECAction Algorithm="PumpRun" Output="GRAPH" />
+        <ECAction Output="START_DELAY_PMP_RUN" />
+      </ECState>
+      <ECState Name="PumpStopped" x="3632.436" y="3592.706">
+        <ECAction Algorithm="PumpStopped" Output="CNF_PUMP_SP" />
+        <ECAction Output="STOP_DELAY_PMP_RUN" />
+        <ECAction Output="START_DELAY_PMP_STOP" />
+        <ECAction Output="GRAPH" />
+        <ECAction Output="WAIT" />
+      </ECState>
+      <ECState Name="Update" x="4865.695" y="1673.151">
+        <ECAction Algorithm="UpdateFreeze" />
+      </ECState>
+      <ECState Name="RESET" x="3631.587" y="2201.274" />
+      <ECState Name="STATE1" x="947.9999" y="1804.5">
+        <ECAction Algorithm="ReTrigger" Output="CNF_PUMP_SP" />
+      </ECState>
+      <ECTransition Source="START" Destination="FreezOper" Condition="FreezWeather" x="4037.476" y="826.1548">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="950.334,181.1457,1043.015,220.0339" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="NormalOper" Condition="NOT FreezWeather" x="2874.542" y="903.5547">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="765.8146,203.0405,675.4921,245.4762" />
+      </ECTransition>
+      <ECTransition Source="NormalOper" Destination="FreezOper" Condition="FreezWeather" x="3498.844" y="1072.056">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="775.6379,261.2813,967.0022,257.7434" />
+      </ECTransition>
+      <ECTransition Source="FreezOper" Destination="NormalOper" Condition="NOT FreezWeather" x="3531.103" y="1363.255">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="977.7524,349.0942,786.3937,352.5097" />
+      </ECTransition>
+      <ECTransition Source="NormalOper" Destination="StartPump1" Condition="LevelPv &lt;= StartLevelSp AND&#xD;&#xA;NOT GreetScreenInstFlush AND&#xD;&#xA;FbPumpReady AND NOT ForceStopPump" x="2206.196" y="1505.747">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="551.5308,356.619,551.6855,395.0695" />
+      </ECTransition>
+      <ECTransition Source="PumpRun1" Destination="StopPump1" Condition="LevelPv &gt;= StopLevelSp OR GreetScreenInstFlush OR ForceStopPump" x="2205.738" y="2590.166">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="551.0567,627.9724,551.7151,666.6656" />
+      </ECTransition>
+      <ECTransition Source="StopPump1" Destination="PumpStopped" Condition="FbStopped" x="2950.754" y="3249.178">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="689.4902,788.0037,790.6551,838.9579" />
+      </ECTransition>
+      <ECTransition Source="StartPump1" Destination="PumpRun1" Condition="FbRunning" x="2203.429" y="2029.201">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="550.9462,488.3736,550.7306,522.4097" />
+      </ECTransition>
+      <ECTransition Source="PumpStopped" Destination="START" Condition="FB_WAIT" x="565.5406" y="1956.935">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="-1.096471,779.0455,-188.8134,176.9053" />
+      </ECTransition>
+      <ECTransition Source="FreezOper" Destination="Update" Condition="(FbFreezStopDurDone OR NOT FreezeMode) AND&#xD;&#xA;NOT GreetScreenInstFlush AND&#xD;&#xA;FbPumpReady" x="4861.624" y="1415.771">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1215.119,336.843,1215.703,369.0166" />
+      </ECTransition>
+      <ECTransition Source="StartPump2" Destination="PumpRun2" Condition="FbRunning" x="4868.539" y="2270.292">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1217.039,553.6548,1217.341,581.0294" />
+      </ECTransition>
+      <ECTransition Source="PumpRun2" Destination="StopPump2" Condition="(FB_DELAY_PMP_RUN AND FbFreezRunDurDone) OR NOT FreezWeather OR GreetScreenInstFlush" x="4873.231" y="2683.623">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1218.092,656.9874,1218.529,682.7349" />
+      </ECTransition>
+      <ECTransition Source="StopPump2" Destination="PumpStopped" Condition="FbStopped" x="4276.472" y="3237.94">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1114.918,784.2729,1026.794,833.0595" />
+      </ECTransition>
+      <ECTransition Source="Update" Destination="StartPump2" Condition="1" x="4870.09" y="1860.431">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1217.772,453.1064,1217.708,476.3657" />
+      </ECTransition>
+      <ECTransition Source="StartPump1" Destination="RESET" Condition="RESET AND ResetLogic" x="2777.083" y="2082.161">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="638.0604,512.3282,731.8138,539.0465" />
+      </ECTransition>
+      <ECTransition Source="PumpRun1" Destination="RESET" Condition="RESET AND ResetLogic" x="2883.554" y="2462.571">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="670.8987,631.7861,764.1175,625.4169" />
+      </ECTransition>
+      <ECTransition Source="StopPump1" Destination="RESET" Condition="RESET AND ResetLogic" x="3124.314" y="2596.267">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="743.3328,676.679,841.1403,629.9945" />
+      </ECTransition>
+      <ECTransition Source="StopPump2" Destination="RESET" Condition="RESET AND ResetLogic" x="4244.952" y="2577.945">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1105.69,671.5115,1017.689,621.7771" />
+      </ECTransition>
+      <ECTransition Source="PumpRun2" Destination="RESET" Condition="(RESET AND ResetLogic) OR NOT FreezWeather" x="4230.114" y="2333.887">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1096.039,591.9698,1019.32,574.3662" />
+      </ECTransition>
+      <ECTransition Source="StartPump2" Destination="RESET" Condition="(RESET AND ResetLogic) OR NOT FreezWeather" x="4253.186" y="2125.949">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1103.545,526.5956,1028.159,535.539" />
+      </ECTransition>
+      <ECTransition Source="Update" Destination="RESET" Condition="RESET AND ResetLogic" x="4250.563" y="1930.67">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1103.288,464.9997,1023.042,499.2452" />
+      </ECTransition>
+      <ECTransition Source="StartPump1" Destination="STATE1" Condition="LEVEL_PV_SP AND NOT FbRunning" x="1561.156" y="1984.578">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="438.9624,509.6656,338.749,504.6714" />
+      </ECTransition>
+      <ECTransition Source="StartPump1" Destination="NormalOper" Condition="FreezWeather" x="2594.956" y="1553.672">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="670.4736,412.5784,669.6319,371.0601" />
+      </ECTransition>
+      <ECTransition Source="STATE1" Destination="StartPump1" Condition="1" x="1522.893" y="1654.726">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="343.0165,406.0962,413.0899,405.7336" />
+      </ECTransition>
+      <ECTransition Source="RESET" Destination="PumpStopped" Condition="1" x="3636.85" y="2889.102">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="909.5272,667.9905,909.5917,775.2461" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="StartPump">
+      <ST><![CDATA[;
+CmdPump := TRUE;
+
+IF Grafcet = 1 THEN
+	Grafcet := 2;
+ELSIF Grafcet = 10 THEN
+	Grafcet := 11;
+END_IF;]]></ST>
+    </Algorithm>
+    <Algorithm Name="StopPump">
+      <ST><![CDATA[;
+CmdPump := FALSE;
+
+IF Grafcet = 3 THEN
+	Grafcet := 4;
+ELSIF Grafcet = 12 THEN
+	Grafcet := 13;
+END_IF;]]></ST>
+    </Algorithm>
+    <Algorithm Name="NormalOper">
+      <ST><![CDATA[;
+Grafcet := 1;
+FreezeMode := FALSE;]]></ST>
+    </Algorithm>
+    <Algorithm Name="FreezOper">
+      <ST><![CDATA[;
+Grafcet := 10;]]></ST>
+    </Algorithm>
+    <Algorithm Name="PumpRun">
+      <ST><![CDATA[;
+IF Grafcet = 2 THEN
+	Grafcet := 3;
+ELSIF Grafcet = 11 THEN
+	Grafcet := 12;
+END_IF;]]></ST>
+    </Algorithm>
+    <Algorithm Name="PumpStopped">
+      <ST><![CDATA[;
+CmdPump := FALSE;
+Grafcet := 9;]]></ST>
+    </Algorithm>
+    <Algorithm Name="UpdateFreeze">
+      <ST><![CDATA[;
+FreezeMode := TRUE;]]></ST>
+    </Algorithm>
+    <Algorithm Name="Reset">
+      <ST><![CDATA[;
+CmdPump := FALSE;]]></ST>
+    </Algorithm>
+    <Algorithm Name="ReTrigger">
+      <ST><![CDATA[;
+CmdPump := FALSE;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

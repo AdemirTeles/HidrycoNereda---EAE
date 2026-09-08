@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="aa3ee5ae-96b9-48f8-bf68-90c2f9d6b81c" Name="revezamento3Motores" Format="2.0" Comment="Composite Function Block Type" Namespace="Hidryco.HidrycoLib">
+  <Attribute Name="Configuration.FB.IDCounter" Value="12" />
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="2/24/2026" Remarks="template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="E_ATUALIZA_SETPOINT">
+        <With Var="cmdHabilita" />
+        <With Var="stpTempoRevezamentoMotor2" />
+        <With Var="stpTempoRevezamentoMotor1" />
+        <With Var="stpTempoRevezamentoMotor3" />
+      </Event>
+      <Event Name="E_ATUALIZA_DISPONIBILITADE_EQUIPAMENTO">
+        <With Var="stsDisponivelEquipamento1" />
+        <With Var="stsDisponivelEquipamento2" />
+        <With Var="stsDisponivelEquipamento3" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="E_ATUALIZA_EQUIPAMENTO_PRINCIPAL">
+        <With Var="stsEquipamentoPrincipal" />
+      </Event>
+      <Event Name="E_ATUALIZA_TEMPO_RESTANTE">
+        <With Var="stsTempoRestanteHora" />
+        <With Var="stsTempoRestanteMinuto" />
+        <With Var="stsTempoRestanteSegundo" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="cmdHabilita" Type="BOOL" />
+      <VarDeclaration Name="stpTempoRevezamentoMotor1" Type="UINT" />
+      <VarDeclaration Name="stpTempoRevezamentoMotor2" Type="UINT" />
+      <VarDeclaration Name="stpTempoRevezamentoMotor3" Type="UINT" />
+      <VarDeclaration Name="stsDisponivelEquipamento1" Type="BOOL" />
+      <VarDeclaration Name="stsDisponivelEquipamento2" Type="BOOL" />
+      <VarDeclaration Name="stsDisponivelEquipamento3" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="stsEquipamentoPrincipal" Type="UINT" />
+      <VarDeclaration Name="stsTempoRestanteHora" Type="UINT" />
+      <VarDeclaration Name="stsTempoRestanteMinuto" Type="UINT" />
+      <VarDeclaration Name="stsTempoRestanteSegundo" Type="UINT" />
+    </OutputVars>
+  </InterfaceList>
+  <FBNetwork>
+    <FB ID="2" Name="E_DELAY1" Type="E_DELAY" x="2080" y="240" Namespace="IEC61499.Standard" />
+    <FB ID="6" Name="E_CYCLE1" Type="E_CYCLE" x="2800" y="180" Namespace="IEC61499.Standard">
+      <Parameter Name="$DT" Value="T#1s" />
+    </FB>
+    <FB ID="9" Name="contadorTempoRestante1" Type="contadorTempoRestante" x="3980" y="320" Namespace="Hidryco.HidrycoLib" />
+    <FB ID="12" UID="1" Name="basicRevezamento3Motores1" Type="basicRevezamento3Motores" x="1940" y="1320" Namespace="Hidryco.HidrycoLib" />
+    <Input Name="E_ATUALIZA_SETPOINT" x="520" y="1392" Type="Event" />
+    <Input Name="cmdHabilita" x="520" y="1652" Type="Data" />
+    <Input Name="stpTempoRevezamentoMotor2" x="520" y="1772" Type="Data" />
+    <Input Name="stpTempoRevezamentoMotor3" x="520" y="1832" Type="Data" />
+    <Input Name="stpTempoRevezamentoMotor1" x="520" y="1712" Type="Data" />
+    <Input Name="stsDisponivelEquipamento1" x="520" y="1892" Type="Data" />
+    <Input Name="stsDisponivelEquipamento2" x="520" y="1952" Type="Data" />
+    <Input Name="stsDisponivelEquipamento3" x="520" y="2012" Type="Data" />
+    <Input Name="E_ATUALIZA_DISPONIBILITADE_EQUIPAMENTO" x="520" y="1452" Type="Event" />
+    <Output Name="stsEquipamentoPrincipal" x="4400" y="1652" Type="Data" />
+    <Output Name="E_ATUALIZA_EQUIPAMENTO_PRINCIPAL" x="4400" y="1372" Type="Event" />
+    <Output Name="stsTempoRestanteHora" x="5440" y="592" Type="Data" />
+    <Output Name="stsTempoRestanteMinuto" x="5440" y="652" Type="Data" />
+    <Output Name="stsTempoRestanteSegundo" x="5440" y="712" Type="Data" />
+    <Output Name="E_ATUALIZA_TEMPO_RESTANTE" x="5391.021" y="332" Type="Event" />
+    <EventConnections>
+      <Connection Source="$12.START_DELAY" Destination="$2.START" dx1="50" dx2="70" dy="-110" />
+      <Connection Source="$2.EO" Destination="$12.END_DELAY" dx1="48.5" dx2="50" dy="350" />
+      <Connection Source="$E_ATUALIZA_SETPOINT" Destination="$12.E_ATUALIZA_SETPOINT" />
+      <Connection Source="$E_ATUALIZA_DISPONIBILITADE_EQUIPAMENTO" Destination="$12.E_ATUALIZA_DISPONIBILIDADE_EQUIPAMENTO" />
+      <Connection Source="$12.START_DELAY" Destination="$6.START" dx1="50" dx2="70" dy="-110" />
+      <Connection Source="$2.EO" Destination="$6.STOP" />
+      <Connection Source="$6.EO" Destination="$9.E_PULSO_1S" dx1="48.5" />
+      <Connection Source="$12.START_DELAY" Destination="$9.E_ATUALIZA_SETPOINT" dx1="50" dx2="70" dy="-110" />
+      <Connection Source="$9.E_ATUALIZA_TEMPO_RESTANTE" Destination="$E_ATUALIZA_TEMPO_RESTANTE">
+        <Points>
+          <Points>
+            <X>1323.76563</X>
+            <Y>89.99999</Y>
+          </Points>
+          <Points>
+            <X>1348.76563</X>
+            <Y>89.99999</Y>
+          </Points>
+          <Points>
+            <X>1348.76563</X>
+            <Y>90</Y>
+          </Points>
+          <Points>
+            <X>1347.75525</X>
+            <Y>90</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$12.E_NENHUM_EQUIPAMENTO_DISPONIVEL" Destination="$2.STOP" dx1="90" dx2="50" dy="-230" />
+      <Connection Source="$12.E_NENHUM_EQUIPAMENTO_DISPONIVEL" Destination="$6.STOP" dx1="90" dx2="50" dy="-230" />
+      <Connection Source="$12.E_ATUALIZA_EQUIPAMENTO_PRINCIPAL" Destination="$E_ATUALIZA_EQUIPAMENTO_PRINCIPAL" dx1="70" />
+      <Connection Source="$12.E_ATUALIZA_EQUIPAMENTO_PRINCIPAL" Destination="$9.E_ZERAR" dx1="70" dx2="50" dy="-170" />
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="$12.delayTimeMotor" Destination="$2.DT" dx1="130" dx2="30" dy="-490" />
+      <Connection Source="$cmdHabilita" Destination="$12.cmdHabilita" />
+      <Connection Source="$stpTempoRevezamentoMotor2" Destination="$12.stpTempoRevezamentoMotor2" dx1="40" />
+      <Connection Source="$stpTempoRevezamentoMotor3" Destination="$12.stpTempoRevezamentoMotor3" />
+      <Connection Source="$stpTempoRevezamentoMotor1" Destination="$12.stpTempoRevezamentoMotor1" dx1="40" />
+      <Connection Source="$stsDisponivelEquipamento3" Destination="$12.stsDisponivelEquipamento3" dx1="40" />
+      <Connection Source="$stsDisponivelEquipamento2" Destination="$12.stsDisponivelEquipamento2" />
+      <Connection Source="$stsDisponivelEquipamento1" Destination="$12.stsDisponivelEquipamento1" />
+      <Connection Source="$12.equipamentoPrincipal" Destination="$stsEquipamentoPrincipal" />
+      <Connection Source="$9.stsTempoRestanteHora" Destination="$stsTempoRestanteSegundo" dx1="114.9375" />
+      <Connection Source="$9.stsTempoRestanteMinuto" Destination="$stsTempoRestanteMinuto" dx1="94.9375" />
+      <Connection Source="$9.stsTempoRestanteSegundo" Destination="$stsTempoRestanteHora" dx1="74.9375" />
+      <Connection Source="$12.delayTimeMotor" Destination="$9.stpTempo" dx1="130" dx2="30" dy="-490" />
+    </DataConnections>
+  </FBNetwork>
+</FBType>

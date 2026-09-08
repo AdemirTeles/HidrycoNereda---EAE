@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="34c011f9-ad03-4951-bdcc-c00661098e12" Name="WaitManagerLogic" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author="SESA713705" Date="8/7/2024" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="READY_STATE" Name="STATE">
+        <With Var="ReadyState" />
+        <With Var="StartingState" />
+        <With Var="RunningState" />
+        <With Var="StoppingState" />
+      </Event>
+      <Event Name="REQ_DELAY" />
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="START_RDY">
+        <With Var="StartReday" />
+      </Event>
+      <Event Name="STOP_RDY">
+        <With Var="StopReady" />
+      </Event>
+      <Event Name="CNF_DELAY" />
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="ReadyState" Type="BOOL" />
+      <VarDeclaration Name="StartingState" Type="BOOL" />
+      <VarDeclaration Name="RunningState" Type="BOOL" />
+      <VarDeclaration Name="StoppingState" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="StartReday" Type="BOOL" />
+      <VarDeclaration Name="StopReady" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="b843d194-a20b-48fc-9487-d90a7b0514e3">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="Ready,StartReady,RunningState,StopReady" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="1616.941" y="305.4117" />
+      <ECState Name="READY" x="1624" y="760.0001">
+        <ECAction Algorithm="Ready" Output="START_RDY" />
+        <ECAction Output="STOP_RDY" />
+      </ECState>
+      <ECState Name="DELAY1" x="1624" y="1244">
+        <ECAction Output="CNF_DELAY" />
+      </ECState>
+      <ECState Name="START_RDY" x="1623.556" y="1693.333">
+        <ECAction Algorithm="StartReady" Output="START_RDY" />
+      </ECState>
+      <ECState Name="RUN" x="1630.222" y="2145.777">
+        <ECAction Algorithm="RunningState" Output="START_RDY" />
+      </ECState>
+      <ECState Name="STOP_RDY" x="1628.381" y="2992.444">
+        <ECAction Algorithm="StopReady" Output="STOP_RDY" />
+      </ECState>
+      <ECState Name="DELAY2" x="1624" y="2532">
+        <ECAction Output="CNF_DELAY" />
+      </ECState>
+      <ECTransition Source="START" Destination="READY" Condition="ReadyState" x="1621.735" y="511.068">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="404.8008,111.0963,406.19,140.8314" />
+      </ECTransition>
+      <ECTransition Source="READY" Destination="DELAY1" Condition="StartingState" x="1623.491" y="999.0121">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="405.6931,233.6525,405.9984,265.3556" />
+      </ECTransition>
+      <ECTransition Source="DELAY1" Destination="START_RDY" Condition="REQ_DELAY" x="1623.095" y="1445.891">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="405.7205,345.1917,405.7601,373.9581" />
+      </ECTransition>
+      <ECTransition Source="START_RDY" Destination="RUN" Condition="RunningState" x="1625.757" y="1915.974">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="406.1604,464.1913,406.597,493.1989" />
+      </ECTransition>
+      <ECTransition Source="RUN" Destination="DELAY2" Condition="StoppingState" x="1632.847" y="2329.173">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="408.6379,569.7352,408.344,593.2321" />
+      </ECTransition>
+      <ECTransition Source="STOP_RDY" Destination="START" Condition="ReadyState" x="974.2097" y="1648.362">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="192.6366,733.8581,212.6454,90.46243" />
+      </ECTransition>
+      <ECTransition Source="DELAY2" Destination="STOP_RDY" Condition="REQ_DELAY" x="1628.623" y="2743.058">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="407.1471,669.3305,407.4051,699.0042" />
+      </ECTransition>
+      <ECTransition Source="START_RDY" Destination="DELAY2" Condition="StoppingState" x="1215.251" y="2088.36">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="277.3735,489.4685,277.4059,550.6603" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="Ready">
+      <ST><![CDATA[;
+StartReday := FALSE;
+StopReady := FALSE;]]></ST>
+    </Algorithm>
+    <Algorithm Name="StartReady">
+      <ST><![CDATA[;
+StartReday := TRUE;]]></ST>
+    </Algorithm>
+    <Algorithm Name="RunningState">
+      <ST><![CDATA[;
+StartReday := FALSE;]]></ST>
+    </Algorithm>
+    <Algorithm Name="StopReady">
+      <ST><![CDATA[;
+StopReady := TRUE;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

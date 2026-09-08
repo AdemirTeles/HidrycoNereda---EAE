@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="21c85f5b-5076-424b-87a9-96fcb8d2bafd" Name="numeroPartidas" Format="2.0" Comment="Extracted Composite Function Block Type" Namespace="Hidryco.HidrycoLib">
+  <Attribute Name="Configuration.FB.IDCounter" Value="2" />
+  <Identification Standard="61499-2" />
+  <VersionInfo Author=" " Date="24/02/2026" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="INIT" Comment="Service Initialization">
+        <With Var="stsLigado" />
+      </Event>
+      <Event Name="E_RESET_NUMERO_PARTIDA" />
+      <Event Name="REQ" Comment="Normal Execution Request">
+        <With Var="stsLigado" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="INITO" Comment="Initialization Confirm" />
+      <Event Name="E_ATUALIZA_NUMERO_PARTIDA">
+        <With Var="stsNumeroPartida" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="stsLigado" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="stsNumeroPartida" Type="UINT" Comment="Output event qualifier" />
+    </OutputVars>
+  </InterfaceList>
+  <FBNetwork>
+    <FB ID="4CB0418F8DD10C85" Name="FB4" Type="numeroDePartidas" x="1100" y="1120" Namespace="Hidryco.HidrycoLib" />
+    <FB ID="2" UID="1" Name="PERSISTENCE1" Type="PERSISTENCE_198E669E3B697FB86" x="1380" y="280" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#I:=1;input${I}:UINT" />
+      <Parameter Name="$QI" Value="TRUE" />
+    </FB>
+    <Input Name="E_RESET_NUMERO_PARTIDA" x="240" y="1252" Type="Event" />
+    <Input Name="REQ" x="680" y="1192" Type="Event" />
+    <Input Name="stsLigado" x="380" y="1432" Type="Data" />
+    <Input Name="INIT" x="455.7083" y="292" Type="Event" />
+    <Output Name="E_ATUALIZA_NUMERO_PARTIDA" x="2571.438" y="72" Type="Event" />
+    <Output Name="INITO" x="2860" y="332" Type="Event" />
+    <Output Name="stsNumeroPartida" x="2500" y="1452" Type="Data" />
+    <EventConnections>
+      <Connection Source="$E_RESET_NUMERO_PARTIDA" Destination="$4CB0418F8DD10C85.E_RESET_NUMERO_PARTIDA" />
+      <Connection Source="$REQ" Destination="$4CB0418F8DD10C85.REQ" />
+      <Connection Source="$4CB0418F8DD10C85.INITO" Destination="$INITO" dx1="40" />
+      <Connection Source="$4CB0418F8DD10C85.CNF" Destination="$E_ATUALIZA_NUMERO_PARTIDA" dx1="72.41675" />
+      <Connection Source="$INIT" Destination="$2.INIT" dx1="40" />
+      <Connection Source="$2.INITO" Destination="$2.READ" dx1="68.62524" dx2="69.99988" dy="-110" />
+      <Connection Source="$4CB0418F8DD10C85.CNF" Destination="$2.WRITE" dx1="72.41675" dx2="89.99988" dy="-170" />
+      <Connection Source="$2.READCNF" Destination="$4CB0418F8DD10C85.INIT" dx1="68.62524" dx2="30" dy="530" />
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="$stsLigado" Destination="$4CB0418F8DD10C85.stsLigado" dx1="40" />
+      <Connection Source="$4CB0418F8DD10C85.stsNumeroPartida" Destination="$stsNumeroPartida" />
+      <Connection Source="$4CB0418F8DD10C85.stsNumeroPartida" Destination="$2.input1" dx1="92.41675" dx2="49.99988" dy="-430" />
+      <Connection Source="$2.output1" Destination="$4CB0418F8DD10C85.persistentNumeroPartida">
+        <Points>
+          <Points>
+            <X>480.3437</X>
+            <Y>205</Y>
+          </Points>
+          <Points>
+            <X>492.5</X>
+            <Y>205</Y>
+          </Points>
+          <Points>
+            <X>492.5</X>
+            <Y>227.5</Y>
+          </Points>
+          <Points>
+            <X>262.5</X>
+            <Y>227.5</Y>
+          </Points>
+          <Points>
+            <X>262.5</X>
+            <Y>332.5</Y>
+          </Points>
+          <Points>
+            <X>237.5</X>
+            <Y>332.5</Y>
+          </Points>
+          <Points>
+            <X>237.5</X>
+            <Y>385</Y>
+          </Points>
+          <Points>
+            <X>270</X>
+            <Y>385</Y>
+          </Points>
+        </Points>
+      </Connection>
+    </DataConnections>
+  </FBNetwork>
+</FBType>

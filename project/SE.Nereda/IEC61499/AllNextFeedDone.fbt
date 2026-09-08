@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="1b700f2c-1fbe-4f58-8e27-88f1f7c01492" Name="AllNextFeedDone" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="7/16/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="15A476C4CE053EBB" Name="START">
+        <With Var="DoneR1" />
+        <With Var="DoneR2" />
+        <With Var="DoneR3" />
+        <With Var="DoneR4" />
+        <With Var="DoneR5" />
+        <With Var="DoneR6" />
+        <With Var="PositionR1" />
+        <With Var="PositionR2" />
+        <With Var="PositionR3" />
+        <With Var="PositionR4" />
+        <With Var="PositionR5" />
+        <With Var="PositionR6" />
+      </Event>
+      <Event ID="827D9FFB0EDC0F13" Name="DONE" Comment="Normal Execution Request">
+        <With Var="DoneR1" />
+        <With Var="DoneR2" />
+        <With Var="DoneR3" />
+        <With Var="DoneR4" />
+        <With Var="DoneR5" />
+        <With Var="DoneR6" />
+        <With Var="PositionR1" />
+        <With Var="PositionR2" />
+        <With Var="PositionR3" />
+        <With Var="PositionR4" />
+        <With Var="PositionR5" />
+        <With Var="PositionR6" />
+      </Event>
+      <Event ID="FE4510E34B65A395" Name="POSITION">
+        <With Var="PositionR1" />
+        <With Var="PositionR2" />
+        <With Var="PositionR3" />
+        <With Var="PositionR4" />
+        <With Var="PositionR5" />
+        <With Var="PositionR6" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="C7839E6909E5584F" Name="CNF_CYCLE" Comment="Execution Confirmation">
+        <With Var="CycleFinish" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="A2F8E220DCBA9D90" Name="DoneR1" Type="BOOL" />
+      <VarDeclaration ID="B35D19D9BAD128AE" Name="DoneR2" Type="BOOL" />
+      <VarDeclaration ID="8BC1271916155A47" Name="DoneR3" Type="BOOL" />
+      <VarDeclaration ID="559D0A9CA9501416" Name="DoneR4" Type="BOOL" />
+      <VarDeclaration ID="25D8CA1F5633D382" Name="DoneR5" Type="BOOL" />
+      <VarDeclaration ID="71B0125028A105BD" Name="DoneR6" Type="BOOL" />
+      <VarDeclaration ID="242371E86B1FA6FA" Name="PositionR1" Type="INT" />
+      <VarDeclaration ID="99E9230851F158B0" Name="PositionR2" Type="INT" />
+      <VarDeclaration ID="D2F022346EC536CC" Name="PositionR3" Type="INT" />
+      <VarDeclaration ID="8B717B51BDCFBA56" Name="PositionR4" Type="INT" />
+      <VarDeclaration ID="3099CDB384ACB380" Name="PositionR5" Type="INT" />
+      <VarDeclaration ID="E2C863F1948F207D" Name="PositionR6" Type="INT" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="983FA8826EEC6CED" Name="CycleFinish" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="c878369d-1e24-4c3b-bfdb-457f748b239c">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="REQ" />
+    <InternalVars>
+      <VarDeclaration ID="E98D8062941ED539" Name="InDoneR1" Type="BOOL" />
+      <VarDeclaration ID="FFAEE01BCDB929C9" Name="InDoneR2" Type="BOOL" />
+      <VarDeclaration ID="64B90CF84B03A3FC" Name="InDoneR3" Type="BOOL" />
+      <VarDeclaration ID="A0EE72CB8C2C088A" Name="InDoneR4" Type="BOOL" />
+      <VarDeclaration ID="A230AE7242EA741F" Name="InDoneR5" Type="BOOL" />
+      <VarDeclaration ID="E63801F2FADF9F8E" Name="InDoneR6" Type="BOOL" />
+    </InternalVars>
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="552.9412" y="429.4117" />
+      <ECState Name="REQ" x="1268" y="892">
+        <ECAction Algorithm="REQ" Output="CNF_CYCLE" />
+      </ECState>
+      <ECTransition Source="START" Destination="REQ" Condition="START" x="963.8762" y="597.3558">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="219.7688,130.3407,263.8991,159.0869" />
+      </ECTransition>
+      <ECTransition Source="REQ" Destination="START" Condition="CycleFinish" x="918.1262" y="742.6788">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="255.96,206.269,208.2988,176.6633" />
+      </ECTransition>
+      <ECTransition Source="REQ" Destination="REQ" Condition="DONE" x="1267.997" y="1074.086" />
+    </ECC>
+    <Algorithm Name="REQ" Comment="Normally executed algorithm">
+      <ST><![CDATA[;
+IF PositionR1 > 0 THEN
+	InDoneR1 := DoneR1;
+ELSE
+	InDoneR1 := TRUE;
+END_IF;
+
+IF PositionR2 > 0 THEN
+	InDoneR2 := DoneR2;
+ELSE
+	InDoneR2 := TRUE;
+END_IF;
+
+IF PositionR3 > 0 THEN
+	InDoneR3 := DoneR3;
+ELSE
+	InDoneR3 := TRUE;
+END_IF;
+
+IF PositionR4 > 0 THEN
+	InDoneR4 := DoneR4;
+ELSE
+	InDoneR4 := TRUE;
+END_IF;
+
+IF PositionR5 > 0 THEN
+	InDoneR5 := DoneR5;
+ELSE
+	InDoneR5 := TRUE;
+END_IF;
+
+IF PositionR6 > 0 THEN
+	InDoneR6 := DoneR6;
+ELSE
+	InDoneR6 := TRUE;
+END_IF;
+
+CycleFinish := InDoneR1 AND InDoneR2 AND InDoneR3 AND InDoneR4 AND InDoneR5 AND InDoneR6;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

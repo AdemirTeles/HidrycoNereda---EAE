@@ -1,0 +1,1199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="bd36e691-3081-410e-a10d-d6a55fd1ff83" Name="CmdWaterDischargeSLBLogic" Format="2.0" Comment="CAT Function Block Type" Namespace="SE.Nereda">
+  <Attribute Name="HMI.Alias" Value="" />
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="22/08/2026" Remarks="template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="A14398C211A20C12" Name="INIT" />
+      <Event ID="393B564B9DA2DBA7" Name="REQ_PHASE">
+        <With Var="Ready" />
+        <With Var="Starting" />
+        <With Var="Run" />
+        <With Var="Stopping" />
+        <With Var="Aborting" />
+      </Event>
+      <Event ID="971F31261154ACD5" Name="REQ_SPEED_SP">
+        <With Var="SpeedSp" />
+      </Event>
+      <Event ID="34BCE966BC60321D" Name="REQ_RESET_VLV">
+        <With Var="ResetValve" />
+      </Event>
+      <Event ID="16DB7EB6EE444B85" Name="REQ_RESET_PMP">
+        <With Var="ResetPump" />
+      </Event>
+      <Event ID="A330345A1ECDB15E" Name="FB_VALVE_TANK1">
+        <With Var="FbOpenedValveTank1" />
+        <With Var="FbClosedValveTank1" />
+      </Event>
+      <Event ID="C8C6295AFA4B50B1" Name="FB_RDY_VALVE_TANK1">
+        <With Var="FbValveReadyTank1" />
+      </Event>
+      <Event ID="B07701FB71F5D541" Name="FB_VALVE_TANK2">
+        <With Var="FbOpenedValveTank2" />
+        <With Var="FbClosedValveTank2" />
+      </Event>
+      <Event ID="3F97D506F0CEA8B8" Name="FB_RDY_VALVE_TANK2">
+        <With Var="FbValveReadyTank2" />
+      </Event>
+      <Event ID="FC067D9356815E48" Name="FB_PUMP1">
+        <With Var="FbRunningPump1" />
+        <With Var="FbStoppedPump1" />
+      </Event>
+      <Event ID="98BE81ECCAA43681" Name="FB_RDY_PUMP1">
+        <With Var="FbPumpReady1" />
+      </Event>
+      <Event ID="3DA95C991B838A89" Name="FB_OPE_PUMP1">
+        <With Var="FbTotOpeDurPump1" />
+      </Event>
+      <Event ID="081F4ABED1D2837E" Name="FB_PUMP2">
+        <With Var="FbRunningPump2" />
+        <With Var="FbStoppedPump2" />
+      </Event>
+      <Event ID="4AA89374E2D41DB6" Name="FB_RDY_PUMP2">
+        <With Var="FbPumpReady2" />
+      </Event>
+      <Event ID="F41BB87A25432C76" Name="FB_OPE_PUMP2">
+        <With Var="FbTotOpeDurPump2" />
+      </Event>
+      <Event ID="317A55D3EB9EB756" Name="FB_PUMP3">
+        <With Var="FbRunningPump3" />
+        <With Var="FbStoppedPump3" />
+      </Event>
+      <Event ID="770FF74AF85B13A1" Name="FB_RDY_PUMP3">
+        <With Var="FbPumpReady3" />
+      </Event>
+      <Event ID="5DBE44FCB53AAC81" Name="FB_OPE_PUMP3">
+        <With Var="FbTotOpeDurPump3" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="75C95E56F6162690" Name="INITO" />
+      <Event ID="14521B425578C0B2" Name="CNF_VALVE">
+        <With Var="CmdValveTank1" />
+        <With Var="CmdValveTank2" />
+      </Event>
+      <Event ID="6C5B75A701E7B425" Name="CNF_PUMP">
+        <With Var="CmdPump1" />
+        <With Var="CmdPump2" />
+        <With Var="CmdPump3" />
+      </Event>
+      <Event ID="3441D16350C1D291" Name="START_READY">
+        <With Var="StartReady" />
+      </Event>
+      <Event ID="C8B1A85D0153CD87" Name="STOP_READY">
+        <With Var="StopReady" />
+      </Event>
+      <Event ID="53236A8C814FFA4F" Name="ABORT_READY">
+        <With Var="AbortReady" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="C1328A46AF65D0A6" Name="Ready" Type="BOOL" />
+      <VarDeclaration ID="B6C61BC7391E4616" Name="Starting" Type="BOOL" />
+      <VarDeclaration ID="8259B159B326D7FF" Name="Run" Type="BOOL" />
+      <VarDeclaration ID="B7C1C59879F9DA01" Name="Stopping" Type="BOOL" />
+      <VarDeclaration ID="308AFE103F900E24" Name="Aborting" Type="BOOL" />
+      <VarDeclaration ID="D65A4A7591488987" Name="SpeedSp" Type="REAL" />
+      <VarDeclaration ID="FD8DFE9A48E91BEE" Name="ResetValve" Type="BOOL" />
+      <VarDeclaration ID="8D3B6DC354586BD5" Name="ResetPump" Type="BOOL" />
+      <VarDeclaration ID="D11F59344658DBD1" Name="FbOpenedValveTank1" Type="BOOL" />
+      <VarDeclaration ID="6DFE812A08E1485F" Name="FbClosedValveTank1" Type="BOOL" />
+      <VarDeclaration ID="9EB8EE2A3E5A4A8E" Name="FbValveReadyTank1" Type="BOOL" />
+      <VarDeclaration ID="A9E2B133AD4278BC" Name="FbOpenedValveTank2" Type="BOOL" />
+      <VarDeclaration ID="38A77DA846F180E6" Name="FbClosedValveTank2" Type="BOOL" />
+      <VarDeclaration ID="32A36BB868E991BF" Name="FbValveReadyTank2" Type="BOOL" />
+      <VarDeclaration ID="55DAD624FC7BF050" Name="FbRunningPump1" Type="BOOL" />
+      <VarDeclaration ID="0DA3ABB864775859" Name="FbStoppedPump1" Type="BOOL" />
+      <VarDeclaration ID="19C40FED2D5A691C" Name="FbPumpReady1" Type="BOOL" />
+      <VarDeclaration ID="B292DE6AD63BA356" Name="FbTotOpeDurPump1" Type="UDINT" />
+      <VarDeclaration ID="0A3615757311DEA3" Name="FbRunningPump2" Type="BOOL" />
+      <VarDeclaration ID="A3098679CB0F4720" Name="FbStoppedPump2" Type="BOOL" />
+      <VarDeclaration ID="DCBAEA190470B184" Name="FbPumpReady2" Type="BOOL" />
+      <VarDeclaration ID="B8433F90D3166723" Name="FbTotOpeDurPump2" Type="UDINT" />
+      <VarDeclaration ID="B527E63699907362" Name="FbRunningPump3" Type="BOOL" />
+      <VarDeclaration ID="EE849AB676FF4BEC" Name="FbStoppedPump3" Type="BOOL" />
+      <VarDeclaration ID="7406B0B8AECD72AD" Name="FbPumpReady3" Type="BOOL" />
+      <VarDeclaration ID="C9D93721B2016751" Name="FbTotOpeDurPump3" Type="UDINT" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="37ED00F2D74A1977" Name="CmdValveTank1" Type="BOOL" />
+      <VarDeclaration ID="8279529577B45581" Name="CmdValveTank2" Type="BOOL" />
+      <VarDeclaration ID="19DD728613DE864B" Name="CmdPump1" Type="BOOL" />
+      <VarDeclaration ID="EDC96CE6A73D7823" Name="CmdPump2" Type="BOOL" />
+      <VarDeclaration ID="DCD1974D5BCAE407" Name="CmdPump3" Type="BOOL" />
+      <VarDeclaration ID="A0873A10F64BE3F2" Name="StartReady" Type="BOOL" />
+      <VarDeclaration ID="3E5CE56C6D257D11" Name="StopReady" Type="BOOL" />
+      <VarDeclaration ID="3EC99F3974DE065F" Name="AbortReady" Type="BOOL" />
+    </OutputVars>
+    <Sockets>
+      <AdapterDeclaration ID="F89AF997F6D64559" Name="FlowMeasurement_1" Type="IAnalog" Namespace="SE.App2Base" x="180" y="5000" />
+    </Sockets>
+    <Plugs>
+      <AdapterDeclaration ID="4472550908FB2BBA" Name="Pump1" Type="INeredaAct" Namespace="SE.Nereda" x="5740" y="1020" />
+      <AdapterDeclaration ID="E69CD644C3AB364B" Name="Pump2" Type="INeredaAct" Namespace="SE.Nereda" x="5760" y="2580" />
+      <AdapterDeclaration ID="80FEDED2D558DFFC" Name="Pump3" Type="INeredaAct" Namespace="SE.Nereda" x="5740" y="4140" />
+      <AdapterDeclaration ID="1FE182D7291AACCE" Name="ValveTank1" Type="INeredaAct" Namespace="SE.Nereda" x="6800" y="1660" />
+      <AdapterDeclaration ID="6243C1FB70DE9E92" Name="ValveTank2" Type="INeredaAct" Namespace="SE.Nereda" x="6840" y="3320" />
+    </Plugs>
+    <AdapterInputs>
+      <Adapter ID="4CB774539D1540E0" Name="FlowMeasurement_2" Type="IAnalog" Namespace="SE.App2Base" />
+    </AdapterInputs>
+  </InterfaceList>
+  <FBNetwork>
+    <FB ID="72901911AC298791" UID="0B89B8E1D2D9587B" Name="CmdLogic" Type="CmdSludgeDischargeSLBLogicBasic" x="2100" y="1460" Namespace="SE.Nereda" />
+    <FB ID="27CE4ADED7F6BD9F" Name="ValveCmdSmoothTank1" Type="boolValueChanged" x="3500" y="1360" Namespace="SE.App2Base" />
+    <FB ID="669106E7B3FBF6FC" Name="PumpCmdSmooth1" Type="boolValueChanged" x="3520" y="2500" Namespace="SE.App2Base" />
+    <FB ID="5E57AC1E5187B5EA" Name="FbOpenValveTank1" Type="DS_SELECTX_2536758B411A6CE51" x="2000" y="5100" Namespace="SE.Nereda">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNTX:=2;CNTY:=1;DI${CNTX,_,CNTY}:BOOL" />
+    </FB>
+    <FB ID="C8E0B42A51574B97" Name="FbCloseValveTank1" Type="DS_SELECTX_2536758B411A6CE51" x="2640" y="5100" Namespace="SE.Nereda">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNTX:=2;CNTY:=1;DI${CNTX,_,CNTY}:BOOL" />
+    </FB>
+    <FB ID="440F2BC519D58531" Name="FbRunPump1" Type="DS_SELECTX_2536758B411A6CE51" x="3440" y="4960" Namespace="SE.Nereda">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNTX:=2;CNTY:=1;DI${CNTX,_,CNTY}:BOOL" />
+    </FB>
+    <FB ID="1D820826838315F1" Name="FbStopPump1" Type="DS_SELECTX_2536758B411A6CE51" x="4080" y="4960" Namespace="SE.Nereda">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNTX:=2;CNTY:=1;DI${CNTX,_,CNTY}:BOOL" />
+    </FB>
+    <FB ID="EAAD057606772B57" Name="FbReadyPump1" Type="DS_SELECTX_2536758B411A6CE51" x="3460" y="5560" Namespace="SE.Nereda">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNTX:=2;CNTY:=1;DI${CNTX,_,CNTY}:BOOL" />
+    </FB>
+    <FB ID="E135C8CA527EB18D" Name="FbReadyValveTank1" Type="DS_SELECTX_2536758B411A6CE51" x="2000" y="5720" Namespace="SE.Nereda">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNTX:=2;CNTY:=1;DI${CNTX,_,CNTY}:BOOL" />
+    </FB>
+    <FB ID="2C35B14C59730EA7" Name="ValveCmdTank1" Type="BOOL2INT" x="4280" y="1420" Namespace="SE.Nereda" />
+    <FB ID="80A8C0915DBD27DB" Name="PumpCmd1" Type="BOOL2INT" x="4300" y="2560" Namespace="SE.Nereda" />
+    <FB ID="A14C6732D98B78BF" UID="93DB47560CB58CAA" Name="FbTotOpePump1" Type="DS_SELECTX_29841900CAFD143A" x="4080" y="5580" Namespace="SE.Nereda">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNTX:=2;CNTY:=1;DI${CNTX,_,CNTY}:UDINT" />
+    </FB>
+    <FB ID="989B6AD14B9DF9E8" Name="FbRunPump2" Type="DS_SELECTX_2536758B411A6CE51" x="3420" y="6220" Namespace="SE.Nereda">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNTX:=2;CNTY:=1;DI${CNTX,_,CNTY}:BOOL" />
+    </FB>
+    <FB ID="42BB214B51FBFBB8" Name="FbStopPump2" Type="DS_SELECTX_2536758B411A6CE51" x="4060" y="6220" Namespace="SE.Nereda">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNTX:=2;CNTY:=1;DI${CNTX,_,CNTY}:BOOL" />
+    </FB>
+    <FB ID="DA9F075F1A18C823" Name="FbReadyPump2" Type="DS_SELECTX_2536758B411A6CE51" x="3440" y="6820" Namespace="SE.Nereda">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNTX:=2;CNTY:=1;DI${CNTX,_,CNTY}:BOOL" />
+    </FB>
+    <FB ID="76C162267C714BA4" Name="FbTotOpePump2" Type="DS_SELECTX_29841900CAFD143A" x="4060" y="6840" Namespace="SE.Nereda">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNTX:=2;CNTY:=1;DI${CNTX,_,CNTY}:UDINT" />
+    </FB>
+    <FB ID="0470E9F3D8E729DE" Name="FbRunPump3" Type="DS_SELECTX_2536758B411A6CE51" x="3440" y="7420" Namespace="SE.Nereda">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNTX:=2;CNTY:=1;DI${CNTX,_,CNTY}:BOOL" />
+    </FB>
+    <FB ID="E3BEA3F12F18D040" Name="FbStopPump3" Type="DS_SELECTX_2536758B411A6CE51" x="4080" y="7420" Namespace="SE.Nereda">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNTX:=2;CNTY:=1;DI${CNTX,_,CNTY}:BOOL" />
+    </FB>
+    <FB ID="F862E20DFDCA9590" Name="FbReadyPump3" Type="DS_SELECTX_2536758B411A6CE51" x="3460" y="8020" Namespace="SE.Nereda">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNTX:=2;CNTY:=1;DI${CNTX,_,CNTY}:BOOL" />
+    </FB>
+    <FB ID="AAC8F4F63EF86D81" Name="FbTotOpePump3" Type="DS_SELECTX_29841900CAFD143A" x="4080" y="8040" Namespace="SE.Nereda">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNTX:=2;CNTY:=1;DI${CNTX,_,CNTY}:UDINT" />
+    </FB>
+    <FB ID="9F1171BF14ED21D3" Name="FbOpenValveTank2" Type="DS_SELECTX_2536758B411A6CE51" x="2040" y="6420" Namespace="SE.Nereda">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNTX:=2;CNTY:=1;DI${CNTX,_,CNTY}:BOOL" />
+    </FB>
+    <FB ID="6793CD2080C4EAA0" Name="FbCloseValveTank2" Type="DS_SELECTX_2536758B411A6CE51" x="2680" y="6420" Namespace="SE.Nereda">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNTX:=2;CNTY:=1;DI${CNTX,_,CNTY}:BOOL" />
+    </FB>
+    <FB ID="5668F6F4A7F74290" Name="FbReadyValveTank2" Type="DS_SELECTX_2536758B411A6CE51" x="2040" y="7040" Namespace="SE.Nereda">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNTX:=2;CNTY:=1;DI${CNTX,_,CNTY}:BOOL" />
+    </FB>
+    <FB ID="85FD607B12AB68E9" Name="ValveCmdSmoothTank2" Type="boolValueChanged" x="3520" y="1940" Namespace="SE.App2Base" />
+    <FB ID="1643156B7266102B" Name="ValveCmdTank2" Type="BOOL2INT" x="4300" y="2000" Namespace="SE.Nereda" />
+    <FB ID="0287843EAB0A9572" Name="PumpCmdSmooth2" Type="boolValueChanged" x="3520" y="3080" Namespace="SE.App2Base" />
+    <FB ID="9C63763A561E68DD" Name="PumpCmd2" Type="BOOL2INT" x="4300" y="3240" Namespace="SE.Nereda" />
+    <FB ID="ABD210CD48F90617" Name="PumpCmdSmooth3" Type="boolValueChanged" x="3540" y="3640" Namespace="SE.App2Base" />
+    <FB ID="FBB31EC4BA29404D" Name="PumpCmd3" Type="BOOL2INT" x="4320" y="3700" Namespace="SE.Nereda" />
+    <FB ID="C18250BE8419A37E" Name="MergeValveCmd" Type="E_MERGE" x="4760" y="1760" Namespace="IEC61499.Standard" />
+    <FB ID="437D8B5591443EE7" Name="MergePumpCmd" Type="E_MERGE" x="4800" y="3100" Namespace="IEC61499.Standard" />
+    <FB ID="891FF4F323402185" Name="IThis" Type="CmdWaterDischargeSLBLogic_HMI" x="2960" y="540" Namespace="SE.Nereda">
+      <Parameter Name="$A39E26A0AA5B7D12" Value="TRUE" />
+    </FB>
+    <FB ID="CDE6639853DBE923" Name="PID" Type="PID" x="3700" y="4240" Namespace="SE.App2CommonProcess">
+      <Attribute Name="Configuration.Component.HideUnusedPorts" Value="" />
+    </FB>
+    <FB ID="356753C86B428E61" Name="PIDISc" Type="PID_Manager" x="2780" y="4240" Namespace="SE.Nereda" />
+    <FB ID="7E72B8166108730C" Name="SpeedSp1" Type="SpeedSpFlowSensorFail" x="4420" y="4240" Namespace="SE.Nereda" />
+    <FB ID="50F02C4F22414254" Name="Flow_Status" Type="decodeStatus" x="1040" y="4960" Namespace="SE.App2Base">
+      <Attribute Name="Configuration.Component.HideUnusedPorts" Value="" />
+    </FB>
+    <FB ID="4B99F90E82BDCEFA" UID="689BE22AB3C5870F" Name="OR1" Type="OR_550FE6D62F509EB3" x="2120" y="4240" Namespace="SE.Nereda">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNT:=3;OUT:BOOL" />
+    </FB>
+    <Input ID="393B564B9DA2DBA7" Name="REQ_PHASE" x="600" y="1372" Type="Event" />
+    <Input ID="C1328A46AF65D0A6" Name="Ready" x="600" y="1432" Type="Data" />
+    <Input ID="B6C61BC7391E4616" Name="Starting" x="600" y="1492" Type="Data" />
+    <Input ID="8259B159B326D7FF" Name="Run" x="600" y="1552" Type="Data" />
+    <Input ID="B7C1C59879F9DA01" Name="Stopping" x="600" y="1612" Type="Data" />
+    <Input ID="308AFE103F900E24" Name="Aborting" x="600" y="1672" Type="Data" />
+    <Input ID="971F31261154ACD5" Name="REQ_SPEED_SP" x="600" y="1832" Type="Event" />
+    <Input ID="D65A4A7591488987" Name="SpeedSp" x="600" y="1892" Type="Data" />
+    <Input ID="34BCE966BC60321D" Name="REQ_RESET_VLV" x="600" y="2052" Type="Event" />
+    <Input ID="FD8DFE9A48E91BEE" Name="ResetValve" x="600" y="2112" Type="Data" />
+    <Input ID="16DB7EB6EE444B85" Name="REQ_RESET_PMP" x="600" y="2252" Type="Event" />
+    <Input ID="8D3B6DC354586BD5" Name="ResetPump" x="600" y="2312" Type="Data" />
+    <Input ID="A14398C211A20C12" Name="INIT" x="760" y="448" Type="Event" />
+    <Input ID="A330345A1ECDB15E" Name="FB_VALVE_TANK1" x="600" y="2472" Type="Event" />
+    <Input ID="FC067D9356815E48" Name="FB_PUMP1" x="600" y="3212" Type="Event" />
+    <Input ID="C8C6295AFA4B50B1" Name="FB_RDY_VALVE_TANK1" x="600" y="2652" Type="Event" />
+    <Input ID="98BE81ECCAA43681" Name="FB_RDY_PUMP1" x="600" y="3392" Type="Event" />
+    <Input ID="D11F59344658DBD1" Name="FbOpenedValveTank1" x="600" y="2532" Type="Data" />
+    <Input ID="6DFE812A08E1485F" Name="FbClosedValveTank1" x="600" y="2592" Type="Data" />
+    <Input ID="55DAD624FC7BF050" Name="FbRunningPump1" x="600" y="3272" Type="Data" />
+    <Input ID="0DA3ABB864775859" Name="FbStoppedPump1" x="600" y="3332" Type="Data" />
+    <Input ID="9EB8EE2A3E5A4A8E" Name="FbValveReadyTank1" x="600" y="2712" Type="Data" />
+    <Input ID="19C40FED2D5A691C" Name="FbPumpReady1" x="600" y="3452" Type="Data" />
+    <Input ID="B07701FB71F5D541" Name="FB_VALVE_TANK2" x="600" y="2832" Type="Event" />
+    <Input ID="081F4ABED1D2837E" Name="FB_PUMP2" x="600" y="3672" Type="Event" />
+    <Input ID="317A55D3EB9EB756" Name="FB_PUMP3" x="600" y="4132" Type="Event" />
+    <Input ID="3F97D506F0CEA8B8" Name="FB_RDY_VALVE_TANK2" x="600" y="3012" Type="Event" />
+    <Input ID="4AA89374E2D41DB6" Name="FB_RDY_PUMP2" x="600" y="3852" Type="Event" />
+    <Input ID="770FF74AF85B13A1" Name="FB_RDY_PUMP3" x="600" y="4312" Type="Event" />
+    <Input ID="A9E2B133AD4278BC" Name="FbOpenedValveTank2" x="600" y="2892" Type="Data" />
+    <Input ID="38A77DA846F180E6" Name="FbClosedValveTank2" x="600" y="2952" Type="Data" />
+    <Input ID="32A36BB868E991BF" Name="FbValveReadyTank2" x="600" y="3072" Type="Data" />
+    <Input ID="0A3615757311DEA3" Name="FbRunningPump2" x="600" y="3732" Type="Data" />
+    <Input ID="A3098679CB0F4720" Name="FbStoppedPump2" x="600" y="3792" Type="Data" />
+    <Input ID="DCBAEA190470B184" Name="FbPumpReady2" x="600" y="3912" Type="Data" />
+    <Input ID="B527E63699907362" Name="FbRunningPump3" x="600" y="4192" Type="Data" />
+    <Input ID="EE849AB676FF4BEC" Name="FbStoppedPump3" x="600" y="4252" Type="Data" />
+    <Input ID="7406B0B8AECD72AD" Name="FbPumpReady3" x="600" y="4372" Type="Data" />
+    <Input ID="B292DE6AD63BA356" Name="FbTotOpeDurPump1" x="600" y="3572" Type="Data" />
+    <Input ID="B8433F90D3166723" Name="FbTotOpeDurPump2" x="600" y="4032" Type="Data" />
+    <Input ID="C9D93721B2016751" Name="FbTotOpeDurPump3" x="600" y="4492" Type="Data" />
+    <Input ID="3DA95C991B838A89" Name="FB_OPE_PUMP1" x="600" y="3512" Type="Event" />
+    <Input ID="F41BB87A25432C76" Name="FB_OPE_PUMP2" x="600" y="3972" Type="Event" />
+    <Input ID="5DBE44FCB53AAC81" Name="FB_OPE_PUMP3" x="600" y="4432" Type="Event" />
+    <Input ID="4CB774539D1540E0" Name="FlowMeasurement_2" x="420" y="5652" Type="Adapter" />
+    <Frame Name="FRAME6" X="120" Y="1200" Width="1600" Height="5620">
+      <Parameter Name="BackgroundColor" Value="AntiqueWhite" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 14.25pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="01 - FUNCTIONNAL INPUT INTERFACE" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME8" X="120" Y="140" Width="1600" Height="1020">
+      <Parameter Name="BackgroundColor" Value="AliceBlue" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 14.25pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="00 - INITIALIZATION" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME10" X="1760" Y="1200" Width="3340" Height="6800">
+      <Parameter Name="BackgroundColor" Value="224, 224, 224" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 14.25pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="05 - LOGIC" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME7" X="1760" Y="140" Width="3320" Height="1020">
+      <Parameter Name="BackgroundColor" Value="LavenderBlush" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 14.25pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="06 - HMI INTERFACE" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME14" X="1760" Y="8680" Width="3360" Height="320">
+      <Parameter Name="BackgroundColor" Value="LightGoldenrodYellow" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 14.25pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="03 - FIELD INTERFACE" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME9" X="5160" Y="140" Width="2620" Height="5400">
+      <Parameter Name="BackgroundColor" Value="AntiqueWhite" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 14.25pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="02 - FUNCTIONNAL OUTPUT INTERFACE" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME1" X="1860" Y="1280" Width="3200" Height="2880">
+      <Parameter Name="BackgroundColor" Value="ButtonFace" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 14.25pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="Command Logic" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME2" X="1840" Y="4860" Width="3160" Height="3680">
+      <Parameter Name="BackgroundColor" Value="ButtonFace" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 14.25pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="SIGNAL SELECTION" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Output ID="8279529577B45581" Name="CmdValveTank2" x="6700" y="430" Type="Data" />
+    <Output ID="EDC96CE6A73D7823" Name="CmdPump2" x="6700" y="690" Type="Data" />
+    <Output ID="DCD1974D5BCAE407" Name="CmdPump3" x="6700" y="750" Type="Data" />
+    <Output ID="37ED00F2D74A1977" Name="CmdValveTank1" x="6700" y="370" Type="Data" />
+    <Output ID="19DD728613DE864B" Name="CmdPump1" x="6700" y="630" Type="Data" />
+    <Output ID="14521B425578C0B2" Name="CNF_VALVE" x="6700" y="310" Type="Event" />
+    <Output ID="6C5B75A701E7B425" Name="CNF_PUMP" x="6700" y="570" Type="Event" />
+    <Output ID="75C95E56F6162690" Name="INITO" x="720" y="687.9999" Type="Event" />
+    <Output ID="3441D16350C1D291" Name="START_READY" x="5680" y="310" Type="Event" />
+    <Output ID="C8B1A85D0153CD87" Name="STOP_READY" x="5680" y="370" Type="Event" />
+    <Output ID="53236A8C814FFA4F" Name="ABORT_READY" x="5680" y="430" Type="Event" />
+    <Output ID="A0873A10F64BE3F2" Name="StartReady" x="5680" y="570" Type="Data" />
+    <Output ID="3E5CE56C6D257D11" Name="StopReady" x="5680" y="630" Type="Data" />
+    <Output ID="3EC99F3974DE065F" Name="AbortReady" x="5680" y="690" Type="Data" />
+    <EventConnections>
+      <Connection Source="$5E57AC1E5187B5EA.CNF1" Destination="$C8E0B42A51574B97.REQ1" dx1="130.021">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$5E57AC1E5187B5EA.CNF2" Destination="$C8E0B42A51574B97.REQ2" dx1="150.021">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$440F2BC519D58531.CNF1" Destination="$1D820826838315F1.REQ1" dx1="130.0208">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$440F2BC519D58531.CNF2" Destination="$1D820826838315F1.REQ2" dx1="150.0208">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$27CE4ADED7F6BD9F.CHD" Destination="$2C35B14C59730EA7.DD5870AA881150BB" />
+      <Connection Source="$669106E7B3FBF6FC.CHD" Destination="$80A8C0915DBD27DB.DD5870AA881150BB" dx1="130" />
+      <Connection Source="$A330345A1ECDB15E" Destination="$5E57AC1E5187B5EA.REQ2" dx1="306.375">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$FC067D9356815E48" Destination="$440F2BC519D58531.REQ2" dx1="1310.333">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$C8C6295AFA4B50B1" Destination="$E135C8CA527EB18D.REQ2" dx1="192.75">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$98BE81ECCAA43681" Destination="$EAAD057606772B57.REQ2">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$393B564B9DA2DBA7" Destination="$72901911AC298791.READY" dx1="121.3542">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$393B564B9DA2DBA7" Destination="$72901911AC298791.STARTING" dx1="121.3542">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$393B564B9DA2DBA7" Destination="$72901911AC298791.RUN" dx1="121.3542">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$393B564B9DA2DBA7" Destination="$72901911AC298791.STOPPING" dx1="121.3542">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$393B564B9DA2DBA7" Destination="$72901911AC298791.ABORTING" dx1="121.3542">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$C8E0B42A51574B97.IND" Destination="$72901911AC298791.VALVE_FB_OPEN">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$1D820826838315F1.IND" Destination="$72901911AC298791.PUMP_FB_RUN">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$E135C8CA527EB18D.IND" Destination="$72901911AC298791.VALVE_AVAILABLE">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$EAAD057606772B57.IND" Destination="$72901911AC298791.PUMP_NO_AVAILABLE">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$72901911AC298791.VALVE_CNF" Destination="$27CE4ADED7F6BD9F.REQ">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$72901911AC298791.PUMP_CNF" Destination="$669106E7B3FBF6FC.REQ">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$72901911AC298791.START_READY" Destination="$3441D16350C1D291" dx1="170">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$72901911AC298791.STOP_READY" Destination="$C8B1A85D0153CD87">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <Points>
+          <Points>
+            <X>761.125</X>
+            <Y>419.5</Y>
+          </Points>
+          <Points>
+            <X>788.625</X>
+            <Y>419.5</Y>
+          </Points>
+          <Points>
+            <X>788.625</X>
+            <Y>349.5</Y>
+          </Points>
+          <Points>
+            <X>926.8932</X>
+            <Y>349.5</Y>
+          </Points>
+          <Points>
+            <X>926.8932</X>
+            <Y>89.5</Y>
+          </Points>
+          <Points>
+            <X>1384.39319</X>
+            <Y>89.5</Y>
+          </Points>
+        </Points>
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$72901911AC298791.ABORTED_READY" Destination="$53236A8C814FFA4F">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <Points>
+          <Points>
+            <X>761.125</X>
+            <Y>434.5</Y>
+          </Points>
+          <Points>
+            <X>793.625</X>
+            <Y>434.5</Y>
+          </Points>
+          <Points>
+            <X>793.625</X>
+            <Y>349.5</Y>
+          </Points>
+          <Points>
+            <X>926.8932</X>
+            <Y>349.5</Y>
+          </Points>
+          <Points>
+            <X>926.8932</X>
+            <Y>104.5</Y>
+          </Points>
+          <Points>
+            <X>1384.393</X>
+            <Y>104.5</Y>
+          </Points>
+        </Points>
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$989B6AD14B9DF9E8.CNF1" Destination="$42BB214B51FBFBB8.REQ1" dx1="130.0203">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$989B6AD14B9DF9E8.CNF2" Destination="$42BB214B51FBFBB8.REQ2" dx1="150.0203">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$0470E9F3D8E729DE.CNF1" Destination="$E3BEA3F12F18D040.REQ1" dx1="130.0208">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$0470E9F3D8E729DE.CNF2" Destination="$E3BEA3F12F18D040.REQ2" dx1="150.0208">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$9F1171BF14ED21D3.CNF1" Destination="$6793CD2080C4EAA0.REQ1" dx1="130.021">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$9F1171BF14ED21D3.CNF2" Destination="$6793CD2080C4EAA0.REQ2" dx1="150.021">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$85FD607B12AB68E9.CHD" Destination="$1643156B7266102B.DD5870AA881150BB" />
+      <Connection Source="$0287843EAB0A9572.CHD" Destination="$9C63763A561E68DD.DD5870AA881150BB" dx1="146.521" />
+      <Connection Source="$ABD210CD48F90617.CHD" Destination="$FBB31EC4BA29404D.DD5870AA881150BB" dx1="140" />
+      <Connection Source="$5668F6F4A7F74290.IND" Destination="$72901911AC298791.VALVE_AVAILABLE">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$6793CD2080C4EAA0.IND" Destination="$72901911AC298791.VALVE_FB_OPEN">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$A14C6732D98B78BF.IND" Destination="$72901911AC298791.51724FB542235B99">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$AAC8F4F63EF86D81.IND" Destination="$72901911AC298791.51724FB542235B99">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$76C162267C714BA4.IND" Destination="$72901911AC298791.51724FB542235B99">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$E3BEA3F12F18D040.IND" Destination="$72901911AC298791.PUMP_FB_RUN">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$42BB214B51FBFBB8.IND" Destination="$72901911AC298791.PUMP_FB_RUN">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$DA9F075F1A18C823.IND" Destination="$72901911AC298791.PUMP_NO_AVAILABLE">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$F862E20DFDCA9590.IND" Destination="$72901911AC298791.PUMP_NO_AVAILABLE">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$3F97D506F0CEA8B8" Destination="$5668F6F4A7F74290.REQ2" dx1="120">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$FC067D9356815E48" Destination="$9F1171BF14ED21D3.REQ2" dx1="296.9375">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$770FF74AF85B13A1" Destination="$F862E20DFDCA9590.REQ2" dx1="263.3125">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$5DBE44FCB53AAC81" Destination="$AAC8F4F63EF86D81.REQ2">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$317A55D3EB9EB756" Destination="$0470E9F3D8E729DE.REQ2" dx1="1496.938">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$4AA89374E2D41DB6" Destination="$DA9F075F1A18C823.REQ2" dx1="263.3125">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$F41BB87A25432C76" Destination="$76C162267C714BA4.REQ2">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$081F4ABED1D2837E" Destination="$989B6AD14B9DF9E8.REQ2" dx1="376.9375">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$1FE182D7291AACCE.CC753684FA882790" Destination="$E135C8CA527EB18D.REQ1">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$1FE182D7291AACCE.9CD053F8408797ED" Destination="$5E57AC1E5187B5EA.REQ1">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$6243C1FB70DE9E92.9CD053F8408797ED" Destination="$9F1171BF14ED21D3.REQ1">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$6243C1FB70DE9E92.CC753684FA882790" Destination="$5668F6F4A7F74290.REQ1">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$4472550908FB2BBA.2DA8AEC15204E92D" Destination="$A14C6732D98B78BF.REQ1">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$4472550908FB2BBA.CC753684FA882790" Destination="$EAAD057606772B57.REQ1">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$4472550908FB2BBA.9CD053F8408797ED" Destination="$440F2BC519D58531.REQ1">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$3DA95C991B838A89" Destination="$A14C6732D98B78BF.REQ2">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$E69CD644C3AB364B.9CD053F8408797ED" Destination="$989B6AD14B9DF9E8.REQ1">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$E69CD644C3AB364B.CC753684FA882790" Destination="$DA9F075F1A18C823.REQ1">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$E69CD644C3AB364B.2DA8AEC15204E92D" Destination="$76C162267C714BA4.REQ1">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$80FEDED2D558DFFC.9CD053F8408797ED" Destination="$0470E9F3D8E729DE.REQ1">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$80FEDED2D558DFFC.CC753684FA882790" Destination="$F862E20DFDCA9590.REQ1">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$80FEDED2D558DFFC.2DA8AEC15204E92D" Destination="$AAC8F4F63EF86D81.REQ1">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$2C35B14C59730EA7.6FC99A5BD1C38561" Destination="$1FE182D7291AACCE.0F1CDF9A9B4A227A">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$1643156B7266102B.6FC99A5BD1C38561" Destination="$6243C1FB70DE9E92.0F1CDF9A9B4A227A">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$80A8C0915DBD27DB.6FC99A5BD1C38561" Destination="$4472550908FB2BBA.0F1CDF9A9B4A227A">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$9C63763A561E68DD.6FC99A5BD1C38561" Destination="$E69CD644C3AB364B.0F1CDF9A9B4A227A">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$FBB31EC4BA29404D.6FC99A5BD1C38561" Destination="$80FEDED2D558DFFC.0F1CDF9A9B4A227A">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$72901911AC298791.PUMP_CNF" Destination="$ABD210CD48F90617.REQ">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$72901911AC298791.PUMP_CNF" Destination="$0287843EAB0A9572.REQ">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$72901911AC298791.VALVE_CNF" Destination="$85FD607B12AB68E9.REQ">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$34BCE966BC60321D" Destination="$80FEDED2D558DFFC.37BBC1F841739733">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$34BCE966BC60321D" Destination="$4472550908FB2BBA.37BBC1F841739733">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$34BCE966BC60321D" Destination="$E69CD644C3AB364B.37BBC1F841739733">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$27CE4ADED7F6BD9F.CHD" Destination="$C18250BE8419A37E.EI1">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$85FD607B12AB68E9.CHD" Destination="$C18250BE8419A37E.EI2">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$C18250BE8419A37E.EO" Destination="$14521B425578C0B2" dx1="121.5415">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$669106E7B3FBF6FC.CHD" Destination="$437D8B5591443EE7.EI1">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$0287843EAB0A9572.CHD" Destination="$437D8B5591443EE7.EI2">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$ABD210CD48F90617.CHD" Destination="$437D8B5591443EE7.EI2">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$437D8B5591443EE7.EO" Destination="$6C5B75A701E7B425" dx1="121.5415">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$356753C86B428E61.CE80458C9D5EF15A" Destination="$75C95E56F6162690">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$F89AF997F6D64559.REQ" Destination="$50F02C4F22414254.REQ" dx1="135.1667">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$ABD210CD48F90617.R_TRG" Destination="$4B99F90E82BDCEFA.REQ">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$0287843EAB0A9572.CHD" Destination="$4B99F90E82BDCEFA.REQ">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$669106E7B3FBF6FC.CHD" Destination="$4B99F90E82BDCEFA.REQ">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$4B99F90E82BDCEFA.CNF" Destination="$356753C86B428E61.REQ" dx1="67.47925" />
+      <Connection Source="$971F31261154ACD5" Destination="$356753C86B428E61.REQ">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <Points>
+          <Points>
+            <X>297.276031</X>
+            <Y>465.5</Y>
+          </Points>
+          <Points>
+            <X>327.5</X>
+            <Y>465.5</Y>
+          </Points>
+          <Points>
+            <X>327.5</X>
+            <Y>912.5</Y>
+          </Points>
+          <Points>
+            <X>622.5</X>
+            <Y>912.5</Y>
+          </Points>
+          <Points>
+            <X>622.5</X>
+            <Y>1085</Y>
+          </Points>
+          <Points>
+            <X>690</X>
+            <Y>1085</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$F89AF997F6D64559.REQ" Destination="$7E72B8166108730C.B5D6B08FA2666F02">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$A14398C211A20C12" Destination="$891FF4F323402185.2F65FBA3287455C1">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$72901911AC298791.001688431DB935DE" Destination="$891FF4F323402185.2568B13DF8BCDE7D">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$891FF4F323402185.FFFD39D6E5C086B9" Destination="$356753C86B428E61.INIT">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$50F02C4F22414254.CNF" Destination="$7E72B8166108730C.B5D6B08FA2666F02">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$7E72B8166108730C.1FEAADE7145F64BE" Destination="$4472550908FB2BBA.1E00729184986247">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$7E72B8166108730C.1FEAADE7145F64BE" Destination="$E69CD644C3AB364B.1E00729184986247">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$7E72B8166108730C.1FEAADE7145F64BE" Destination="$80FEDED2D558DFFC.1E00729184986247">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="$27CE4ADED7F6BD9F.Output" Destination="$2C35B14C59730EA7.4573FC8F228EB71D" dx1="150" />
+      <Connection Source="$669106E7B3FBF6FC.Output" Destination="$80A8C0915DBD27DB.4573FC8F228EB71D" dx1="150" />
+      <Connection Source="$27CE4ADED7F6BD9F.Output" Destination="$37ED00F2D74A1977" dx1="150">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$669106E7B3FBF6FC.Output" Destination="$19DD728613DE864B" dx1="150">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$D11F59344658DBD1" Destination="$5E57AC1E5187B5EA.DI2_1" dx1="120">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$6DFE812A08E1485F" Destination="$C8E0B42A51574B97.DI2_1" dx1="775.2084">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$55DAD624FC7BF050" Destination="$440F2BC519D58531.DI2_1" dx1="1159.906">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$0DA3ABB864775859" Destination="$1D820826838315F1.DI2_1" dx1="2740.042">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$9EB8EE2A3E5A4A8E" Destination="$E135C8CA527EB18D.DI2_1" dx1="120.1459">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$19C40FED2D5A691C" Destination="$EAAD057606772B57.DI2_1" dx1="777.8333">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$C1328A46AF65D0A6" Destination="$72901911AC298791.Ready" dx1="156.9167">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$B6C61BC7391E4616" Destination="$72901911AC298791.Starting" dx1="152.9585">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$8259B159B326D7FF" Destination="$72901911AC298791.RunningState" dx1="221.9792">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$B7C1C59879F9DA01" Destination="$72901911AC298791.Stopping" dx1="131.5625">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$308AFE103F900E24" Destination="$72901911AC298791.Aborting" dx1="141.0835">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$72901911AC298791.StartReady" Destination="$A0873A10F64BE3F2">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <Points>
+          <Points>
+            <X>761.125</X>
+            <Y>559.5</Y>
+          </Points>
+          <Points>
+            <X>813.625</X>
+            <Y>559.5</Y>
+          </Points>
+          <Points>
+            <X>813.625</X>
+            <Y>334.500031</Y>
+          </Points>
+          <Points>
+            <X>926.8932</X>
+            <Y>334.500031</Y>
+          </Points>
+          <Points>
+            <X>926.8932</X>
+            <Y>124.500031</Y>
+          </Points>
+          <Points>
+            <X>1384.39319</X>
+            <Y>124.500031</Y>
+          </Points>
+        </Points>
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$72901911AC298791.StopReady" Destination="$3E5CE56C6D257D11">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <Points>
+          <Points>
+            <X>761.125</X>
+            <Y>574.5</Y>
+          </Points>
+          <Points>
+            <X>818.625</X>
+            <Y>574.5</Y>
+          </Points>
+          <Points>
+            <X>818.625</X>
+            <Y>334.500031</Y>
+          </Points>
+          <Points>
+            <X>926.8932</X>
+            <Y>334.500031</Y>
+          </Points>
+          <Points>
+            <X>926.8932</X>
+            <Y>139.500031</Y>
+          </Points>
+          <Points>
+            <X>1384.39319</X>
+            <Y>139.500031</Y>
+          </Points>
+        </Points>
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$72901911AC298791.AbortedReady" Destination="$3EC99F3974DE065F">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <Points>
+          <Points>
+            <X>761.125</X>
+            <Y>589.5</Y>
+          </Points>
+          <Points>
+            <X>823.625</X>
+            <Y>589.5</Y>
+          </Points>
+          <Points>
+            <X>823.625</X>
+            <Y>334.500031</Y>
+          </Points>
+          <Points>
+            <X>926.8932</X>
+            <Y>334.500031</Y>
+          </Points>
+          <Points>
+            <X>926.8932</X>
+            <Y>154.499969</Y>
+          </Points>
+          <Points>
+            <X>1384.39319</X>
+            <Y>154.499969</Y>
+          </Points>
+        </Points>
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$85FD607B12AB68E9.Output" Destination="$1643156B7266102B.4573FC8F228EB71D" dx1="150" />
+      <Connection Source="$0287843EAB0A9572.Output" Destination="$9C63763A561E68DD.4573FC8F228EB71D" dx1="150" />
+      <Connection Source="$ABD210CD48F90617.Output" Destination="$FBB31EC4BA29404D.4573FC8F228EB71D" dx1="150" />
+      <Connection Source="$5E57AC1E5187B5EA.OUT1" Destination="$72901911AC298791.EE3E325E38DB6D95">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$C8E0B42A51574B97.OUT1" Destination="$72901911AC298791.4E0EDF1D6602AD7F">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$E135C8CA527EB18D.OUT1" Destination="$72901911AC298791.78D1EE87F8AE3968">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$9F1171BF14ED21D3.OUT1" Destination="$72901911AC298791.38A9A390455B9A4F">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$6793CD2080C4EAA0.OUT1" Destination="$72901911AC298791.9C68F1DF546D3052">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$5668F6F4A7F74290.OUT1" Destination="$72901911AC298791.71509D151A182356">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$440F2BC519D58531.OUT1" Destination="$72901911AC298791.41857D3371CE356D">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$1D820826838315F1.OUT1" Destination="$72901911AC298791.8966D3D93AE9B840">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$EAAD057606772B57.OUT1" Destination="$72901911AC298791.92B7B9D369930721">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$A14C6732D98B78BF.OUT1" Destination="$72901911AC298791.0D663C311D386D2A">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$989B6AD14B9DF9E8.OUT1" Destination="$72901911AC298791.450E1E0E9DC1B17B">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$0470E9F3D8E729DE.OUT1" Destination="$72901911AC298791.C4E5F519898D3848">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$42BB214B51FBFBB8.OUT1" Destination="$72901911AC298791.EE227D743F972C8D">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$E3BEA3F12F18D040.OUT1" Destination="$72901911AC298791.956E0A0A54836360">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$DA9F075F1A18C823.OUT1" Destination="$72901911AC298791.8294BD3E31844391">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$F862E20DFDCA9590.OUT1" Destination="$72901911AC298791.0EC6936CA60DF719">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$76C162267C714BA4.OUT1" Destination="$72901911AC298791.57AA0C889DBD9CF5">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$AAC8F4F63EF86D81.OUT1" Destination="$72901911AC298791.5E64FC3A91DBC3F6">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$38A77DA846F180E6" Destination="$6793CD2080C4EAA0.DI2_1">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <Points>
+          <Points>
+            <X>359.541656</X>
+            <Y>744</Y>
+          </Points>
+          <Points>
+            <X>369.541656</X>
+            <Y>744</Y>
+          </Points>
+          <Points>
+            <X>369.541656</X>
+            <Y>911.5</Y>
+          </Points>
+          <Points>
+            <X>632.5</X>
+            <Y>911.5</Y>
+          </Points>
+          <Points>
+            <X>632.5</X>
+            <Y>1534</Y>
+          </Points>
+          <Points>
+            <X>685</X>
+            <Y>1534</Y>
+          </Points>
+        </Points>
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$A9E2B133AD4278BC" Destination="$9F1171BF14ED21D3.DI2_1" dx1="120">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$32A36BB868E991BF" Destination="$5668F6F4A7F74290.DI2_1" dx1="121.5625">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$7406B0B8AECD72AD" Destination="$F862E20DFDCA9590.DI2_1" dx1="151.9375">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$C9D93721B2016751" Destination="$AAC8F4F63EF86D81.DI2_1">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$EE849AB676FF4BEC" Destination="$E3BEA3F12F18D040.DI2_1">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$B527E63699907362" Destination="$0470E9F3D8E729DE.DI2_1" dx1="120">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$B8433F90D3166723" Destination="$76C162267C714BA4.DI2_1">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$DCBAEA190470B184" Destination="$DA9F075F1A18C823.DI2_1" dx1="1271.938">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$0A3615757311DEA3" Destination="$989B6AD14B9DF9E8.DI2_1" dx1="1876.083">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$A3098679CB0F4720" Destination="$42BB214B51FBFBB8.DI2_1">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$1FE182D7291AACCE.7F6CC7FEB9223DF3" Destination="$5E57AC1E5187B5EA.DI1_1">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$1FE182D7291AACCE.A8D6C4A1FDCCA991" Destination="$C8E0B42A51574B97.DI1_1">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$1FE182D7291AACCE.8A8A07EFCDA1443C" Destination="$E135C8CA527EB18D.DI1_1">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$6243C1FB70DE9E92.8A8A07EFCDA1443C" Destination="$5668F6F4A7F74290.DI1_1">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$6243C1FB70DE9E92.A8D6C4A1FDCCA991" Destination="$6793CD2080C4EAA0.DI1_1">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$6243C1FB70DE9E92.7F6CC7FEB9223DF3" Destination="$9F1171BF14ED21D3.DI1_1">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$4472550908FB2BBA.B762734C094A7162" Destination="$440F2BC519D58531.DI1_1">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$4472550908FB2BBA.D83B5BDEFA4D797C" Destination="$1D820826838315F1.DI1_1">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$4472550908FB2BBA.8A8A07EFCDA1443C" Destination="$EAAD057606772B57.DI1_1">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$4472550908FB2BBA.C7F638DBF6B860D2" Destination="$A14C6732D98B78BF.DI1_1">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$B292DE6AD63BA356" Destination="$A14C6732D98B78BF.DI2_1">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$E69CD644C3AB364B.B762734C094A7162" Destination="$989B6AD14B9DF9E8.DI1_1">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$E69CD644C3AB364B.D83B5BDEFA4D797C" Destination="$42BB214B51FBFBB8.DI1_1">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$E69CD644C3AB364B.8A8A07EFCDA1443C" Destination="$DA9F075F1A18C823.DI1_1">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$E69CD644C3AB364B.C7F638DBF6B860D2" Destination="$76C162267C714BA4.DI1_1">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$80FEDED2D558DFFC.C7F638DBF6B860D2" Destination="$AAC8F4F63EF86D81.DI1_1">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$80FEDED2D558DFFC.D83B5BDEFA4D797C" Destination="$E3BEA3F12F18D040.DI1_1">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$80FEDED2D558DFFC.B762734C094A7162" Destination="$0470E9F3D8E729DE.DI1_1">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$80FEDED2D558DFFC.8A8A07EFCDA1443C" Destination="$F862E20DFDCA9590.DI1_1">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$2C35B14C59730EA7.A6DEF5F9C27C1848" Destination="$1FE182D7291AACCE.710D7FC54EE3F35A">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$1643156B7266102B.A6DEF5F9C27C1848" Destination="$6243C1FB70DE9E92.710D7FC54EE3F35A">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$80A8C0915DBD27DB.A6DEF5F9C27C1848" Destination="$4472550908FB2BBA.710D7FC54EE3F35A">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$9C63763A561E68DD.A6DEF5F9C27C1848" Destination="$E69CD644C3AB364B.710D7FC54EE3F35A">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$FBB31EC4BA29404D.A6DEF5F9C27C1848" Destination="$80FEDED2D558DFFC.710D7FC54EE3F35A">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$72901911AC298791.AB3759E05952DF13" Destination="$27CE4ADED7F6BD9F.Input">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$72901911AC298791.1F14A2AEE3E323F8" Destination="$85FD607B12AB68E9.Input">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$72901911AC298791.945BF4FE52310595" Destination="$669106E7B3FBF6FC.Input">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$72901911AC298791.750D687533E86DDC" Destination="$0287843EAB0A9572.Input">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$72901911AC298791.A7428AB4F66CF0EA" Destination="$ABD210CD48F90617.Input">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$FD8DFE9A48E91BEE" Destination="$E69CD644C3AB364B.EA28053F07575F36">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$FD8DFE9A48E91BEE" Destination="$80FEDED2D558DFFC.EA28053F07575F36">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$FD8DFE9A48E91BEE" Destination="$4472550908FB2BBA.EA28053F07575F36">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$85FD607B12AB68E9.Output" Destination="$8279529577B45581" dx1="150">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$0287843EAB0A9572.Output" Destination="$EDC96CE6A73D7823" dx1="150">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$ABD210CD48F90617.Output" Destination="$DCD1974D5BCAE407" dx1="150">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$CDE6639853DBE923.Out" Destination="$7E72B8166108730C.4727B0C2E5DD09FB" dx1="49.35449">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$F89AF997F6D64559.Status" Destination="$50F02C4F22414254.Status" dx1="135.1667">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$50F02C4F22414254.FailAlarm" Destination="$7E72B8166108730C.1C28FEF37A13F67F">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$F89AF997F6D64559.ValueMin" Destination="$7E72B8166108730C.B08827D02DBBFA97">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$F89AF997F6D64559.ValueMax" Destination="$7E72B8166108730C.75C86D8B7647050C">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$669106E7B3FBF6FC.Output" Destination="$4B99F90E82BDCEFA.IN1">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$0287843EAB0A9572.Output" Destination="$4B99F90E82BDCEFA.IN2">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$ABD210CD48F90617.Output" Destination="$4B99F90E82BDCEFA.IN3">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$4B99F90E82BDCEFA.OUT" Destination="$356753C86B428E61.RunPID" dx1="47.47925" />
+      <Connection Source="$D65A4A7591488987" Destination="$356753C86B428E61.Setpoint">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <Points>
+          <Points>
+            <X>289.552063</X>
+            <Y>480.5</Y>
+          </Points>
+          <Points>
+            <X>327.5</X>
+            <Y>480.5</Y>
+          </Points>
+          <Points>
+            <X>327.5</X>
+            <Y>912.5</Y>
+          </Points>
+          <Points>
+            <X>622.5</X>
+            <Y>912.5</Y>
+          </Points>
+          <Points>
+            <X>622.5</X>
+            <Y>1150</Y>
+          </Points>
+          <Points>
+            <X>690</X>
+            <Y>1150</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$F89AF997F6D64559.Value" Destination="$7E72B8166108730C.3BE251DFC2E7905D">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$72901911AC298791.DB4AE032AE08C110" Destination="$891FF4F323402185.930FFC0215E780EF">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$7E72B8166108730C.87931CA83794BFFD" Destination="$80FEDED2D558DFFC.1BC103921BBFDA0B">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$7E72B8166108730C.87931CA83794BFFD" Destination="$E69CD644C3AB364B.1BC103921BBFDA0B">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$7E72B8166108730C.87931CA83794BFFD" Destination="$4472550908FB2BBA.1BC103921BBFDA0B">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+    </DataConnections>
+    <AdapterConnections>
+      <Connection Source="$356753C86B428E61.FACD1DD4E791A86A" Destination="$CDE6639853DBE923.ISc">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$4CB774539D1540E0" Destination="$CDE6639853DBE923.IPv">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <Points>
+          <Points>
+            <X>413.03125</X>
+            <Y>1645</Y>
+          </Points>
+          <Points>
+            <X>432.5</X>
+            <Y>1645</Y>
+          </Points>
+          <Points>
+            <X>432.5</X>
+            <Y>1587.5</Y>
+          </Points>
+          <Points>
+            <X>832.5</X>
+            <Y>1587.5</Y>
+          </Points>
+          <Points>
+            <X>832.5</X>
+            <Y>1120</Y>
+          </Points>
+          <Points>
+            <X>920</X>
+            <Y>1120</Y>
+          </Points>
+        </Points>
+      </Connection>
+    </AdapterConnections>
+  </FBNetwork>
+</FBType>

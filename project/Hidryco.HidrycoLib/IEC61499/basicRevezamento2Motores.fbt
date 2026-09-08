@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="0541273b-9e72-47df-9fa9-6bdf0aefc23b" Name="basicRevezamento2Motores" Comment="Basic Function Block Type" Namespace="Hidryco.HidrycoLib">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="2/10/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="INIT" Comment="Initialization Request">
+        <With Var="QI" />
+      </Event>
+      <Event Name="REQ" Comment="Normal Execution Request">
+        <With Var="QI" />
+      </Event>
+      <Event Name="END_DELAY" />
+      <Event Name="E_ATUALIZA_SETPOINT">
+        <With Var="stpTempoRevezamentoMotor1" />
+        <With Var="stpTempoRevezamentoMotor2" />
+        <With Var="cmdHabilita" />
+      </Event>
+      <Event Name="E_ATUALIZA_NECESSIDADE">
+        <With Var="necessidadeEquipamento" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="INITO" Comment="Initialization Confirm">
+        <With Var="QO" />
+      </Event>
+      <Event Name="CNF" Comment="Execution Confirmation">
+        <With Var="QO" />
+      </Event>
+      <Event Name="E_ACIONA_MOTOR_1">
+        <With Var="acmMotor1" />
+      </Event>
+      <Event Name="E_ACIONA_MOTOR_2">
+        <With Var="acmMotor2" />
+      </Event>
+      <Event Name="START_DELAY">
+        <With Var="delayTimeMotor1" />
+        <With Var="delayTimeMotor2" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="QI" Type="BOOL" Comment="Input event qualifier" />
+      <VarDeclaration Name="cmdHabilita" Type="BOOL" />
+      <VarDeclaration Name="necessidadeEquipamento" Type="UINT" />
+      <VarDeclaration Name="stpTempoRevezamentoMotor1" Type="UINT" />
+      <VarDeclaration Name="stpTempoRevezamentoMotor2" Type="UINT" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="QO" Type="BOOL" Comment="Output event qualifier" />
+      <VarDeclaration Name="acmMotor1" Type="BOOL" />
+      <VarDeclaration Name="acmMotor2" Type="BOOL" />
+      <VarDeclaration Name="delayTimeMotor1" Type="UINT" />
+      <VarDeclaration Name="delayTimeMotor2" Type="UINT" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="bfb1e41d-d41a-4b42-a464-bf73c8ae38ec">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="AcionaEquipamento1,AcionaEquipamento1_2,AconaEquipamento2,Principal1Delay,Principal2Delay,MudaPrincipal" />
+    <InternalVars>
+      <VarDeclaration Name="equipamentoPrincipal" Type="UINT" InitialValue="1" />
+    </InternalVars>
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="1420.941" y="837.4117" />
+      <ECState Name="STATE1" x="2077.778" y="743.111" />
+      <ECState Name="STATE3" x="2944" y="1564" />
+      <ECState Name="STATE2" x="2768" y="839.9999" />
+      <ECState Name="STATE4" x="3754.508" y="1212">
+        <ECAction Algorithm="AcionaEquipamento1" Output="E_ACIONA_MOTOR_1" />
+        <ECAction Algorithm="Principal1Delay" Output="START_DELAY" />
+      </ECState>
+      <ECState Name="STATE5" x="3539.508" y="2110">
+        <ECAction Algorithm="AcionaEquipamento1_2" Output="E_ACIONA_MOTOR_1" />
+        <ECAction Output="E_ACIONA_MOTOR_2" />
+      </ECState>
+      <ECState Name="STATE6" x="2484.555" y="2071.222" />
+      <ECState Name="STATE7" x="2431.286" y="2640.333">
+        <ECAction Algorithm="AconaEquipamento2" Output="E_ACIONA_MOTOR_2" />
+        <ECAction Algorithm="Principal2Delay" Output="START_DELAY" />
+      </ECState>
+      <ECState Name="STATE12" x="768.2698" y="1403.444">
+        <ECAction Algorithm="MudaPrincipal" />
+      </ECState>
+      <ECTransition Source="START" Destination="STATE1" Condition="cmdHabilita" x="1814.686" y="928.2352">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="438.3161,243.6155,473.3133,234.8007" />
+      </ECTransition>
+      <ECTransition Source="STATE1" Destination="STATE2" Condition="necessidadeEquipamento = 0" x="2554.321" y="756.0392">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="626.4034,184.1816,666.8957,192.4481" />
+      </ECTransition>
+      <ECTransition Source="STATE2" Destination="START" Condition="1" x="2050.806" y="574.6309">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="567,122,452,130" />
+      </ECTransition>
+      <ECTransition Source="STATE1" Destination="STATE3" Condition="equipamentoPrincipal = 1" x="2532.184" y="1096.222">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="605.935,243.8238,660.545,294.7317" />
+      </ECTransition>
+      <ECTransition Source="STATE3" Destination="STATE4" Condition="necessidadeEquipamento = 1" x="3255.723" y="1363.682">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="789.7363,349.0509,828.8636,330.1433" />
+      </ECTransition>
+      <ECTransition Source="STATE4" Destination="START" Condition="1" x="2556.259" y="1072.104">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="719.2296,284.5037,554.7692,257.7368" />
+      </ECTransition>
+      <ECTransition Source="STATE3" Destination="STATE5" Condition="necessidadeEquipamento = 2" x="3239.795" y="1758.542">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="788.0199,416.8886,826.0832,449.306" />
+      </ECTransition>
+      <ECTransition Source="STATE5" Destination="START" Condition="1" x="2749.009" y="1678.499">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="797.254,487.2122,625.2043,386.1693" />
+      </ECTransition>
+      <ECTransition Source="STATE3" Destination="START" Condition="1" x="2282.075" y="1309.953">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="634.9888,361.1327,527.2596,311.0778" />
+      </ECTransition>
+      <ECTransition Source="STATE1" Destination="STATE6" Condition="equipamentoPrincipal = 2" x="2317.16" y="1350.024">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="567.6625,288.6746,595.6184,376.8137" />
+      </ECTransition>
+      <ECTransition Source="STATE6" Destination="STATE7" Condition="necessidadeEquipamento = 1" x="2511.69" y="2328.659">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="632.109,564.5541,630.2529,595.2554" />
+      </ECTransition>
+      <ECTransition Source="STATE7" Destination="START" Condition="1" x="1877.642" y="1750.545">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="504.2476,507.3221,427.5176,369.8959" />
+      </ECTransition>
+      <ECTransition Source="STATE6" Destination="START" Condition="1" x="2022.035" y="1603.576">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="552.9468,459.098,471.3676,367.5668" />
+      </ECTransition>
+      <ECTransition Source="STATE1" Destination="START" Condition="1" x="1814.402" y="867.1462">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="474.1494,216.9192,439.3874,223.3481" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="STATE12" Condition="END_DELAY" x="1095.239" y="1197.876">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="293.3069,287.8823,248.6926,323.9637" />
+      </ECTransition>
+      <ECTransition Source="STATE12" Destination="START" Condition="1" x="1120.836" y="1021.172">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="265.5131,264.1267,306.005,229.9164" />
+      </ECTransition>
+      <ECTransition Source="STATE6" Destination="STATE5" Condition="necessidadeEquipamento = 2" x="3014.786" y="2006.714">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="721.8672,496.4911,785.9852,498.8479" />
+      </ECTransition>
+      <ECTransition Source="STATE5" Destination="START" Condition="1" x="2442.187" y="1517.637">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="689.6751,431.7461,528.0215,334.3943" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="AcionaEquipamento1">
+      <ST><![CDATA[acmMotor1 := TRUE;
+acmMotor2 := FALSE;
+;]]></ST>
+    </Algorithm>
+    <Algorithm Name="AcionaEquipamento1_2">
+      <ST><![CDATA[acmMotor1 := TRUE;
+acmMotor2 := TRUE;
+;]]></ST>
+    </Algorithm>
+    <Algorithm Name="AconaEquipamento2">
+      <ST><![CDATA[acmMotor1 := FALSE;
+acmMotor2 := TRUE;
+;]]></ST>
+    </Algorithm>
+    <Algorithm Name="Principal1Delay">
+      <ST><![CDATA[delayTimeMotor1 := stpTempoRevezamentoMotor1;
+;]]></ST>
+    </Algorithm>
+    <Algorithm Name="Principal2Delay">
+      <ST><![CDATA[delayTimeMotor2 := stpTempoRevezamentoMotor2;
+;]]></ST>
+    </Algorithm>
+    <Algorithm Name="MudaPrincipal">
+      <ST><![CDATA[IF equipamentoPrincipal = 1 THEN
+	equipamentoPrincipal := equipamentoPrincipal + 1;
+ELSE 
+	equipamentoPrincipal := 1;
+END_IF;
+;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

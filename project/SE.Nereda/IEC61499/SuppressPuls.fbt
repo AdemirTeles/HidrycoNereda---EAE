@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="245054b3-5ed3-466d-acd6-1a143840cd6b" Name="SuppressPuls" Format="2.0" Comment="Composite Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="6/2/2026" Remarks="template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="0AEE6FE801D9C6DE" Name="REQ" Comment="Normal Execution Request">
+        <With Var="QI" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="A2B6DAD4AEF405B0" Name="CNF" Comment="Execution Confirmation">
+        <With Var="QO" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="EE080D25BE952451" Name="QI" Type="BOOL" Comment="Input event qualifier" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="B2A95CCD0BB0FAFE" Name="QO" Type="BOOL" Comment="Output event qualifier" />
+    </OutputVars>
+  </InterfaceList>
+  <FBNetwork>
+    <FB ID="2B5A914E4C0851AD" Name="Puls" Type="E_F_TRIG" x="700" y="560" Namespace="IEC61499.Standard" />
+    <FB ID="883D48554D993217" Name="PulsDelay" Type="E_DELAY" x="1400" y="560" Namespace="IEC61499.Standard">
+      <Parameter Name="$DT" Value="T#100ms" />
+    </FB>
+    <FB ID="50912017C9220AE7" UID="31D42468963EE38E" Name="Out" Type="DS_SELECTX_2536758B411A6CE51" x="2360" y="560" Namespace="SE.Nereda">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNTX:=2;CNTY:=1;DI${CNTX,_,CNTY}:BOOL" />
+      <Parameter Name="$DI1_1" Value="TRUE" />
+      <Parameter Name="$DI2_1" Value="FALSE" />
+    </FB>
+    <Input ID="0AEE6FE801D9C6DE" Name="REQ" x="120" y="572" Type="Event" />
+    <Input ID="EE080D25BE952451" Name="QI" x="120" y="772" Type="Data" />
+    <Output ID="A2B6DAD4AEF405B0" Name="CNF" x="3140" y="572" Type="Event" />
+    <Output ID="B2A95CCD0BB0FAFE" Name="QO" x="3020" y="632" Type="Data" />
+    <EventConnections>
+      <Connection Source="$0AEE6FE801D9C6DE" Destination="$2B5A914E4C0851AD.EI" />
+      <Connection Source="$2B5A914E4C0851AD.EO" Destination="$883D48554D993217.START" />
+      <Connection Source="$50912017C9220AE7.IND" Destination="$A2B6DAD4AEF405B0" />
+      <Connection Source="$883D48554D993217.EO" Destination="$50912017C9220AE7.REQ2" dx1="48.5" />
+      <Connection Source="$2B5A914E4C0851AD.EO" Destination="$50912017C9220AE7.REQ1">
+        <Points>
+          <Points>
+            <X>240.8802</X>
+            <Y>150</Y>
+          </Points>
+          <Points>
+            <X>252.5</X>
+            <Y>150</Y>
+          </Points>
+          <Points>
+            <X>252.5</X>
+            <Y>122.5</Y>
+          </Points>
+          <Points>
+            <X>447.5</X>
+            <Y>122.5</Y>
+          </Points>
+          <Points>
+            <X>447.5</X>
+            <Y>150</Y>
+          </Points>
+          <Points>
+            <X>585</X>
+            <Y>150</Y>
+          </Points>
+        </Points>
+      </Connection>
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="$EE080D25BE952451" Destination="$2B5A914E4C0851AD.QI" />
+      <Connection Source="$50912017C9220AE7.OUT1" Destination="$B2A95CCD0BB0FAFE" dx1="70" />
+    </DataConnections>
+  </FBNetwork>
+</FBType>

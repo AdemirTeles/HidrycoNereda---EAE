@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="91417e9e-9982-46be-ae79-a0462aa2ae30" Name="RESET_BTNs" Format="2.0" Comment="Composite Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="6/18/2026" Remarks="template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="AB695E9A35A20E19" Name="REQ" Comment="Normal Execution Request">
+        <With Var="IN1" />
+        <With Var="IN2" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="920962203CA54948" Name="RESET_BTN" />
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="479D4538AEFD6EE1" Name="IN1" Type="BOOL" Comment="Argument" />
+      <VarDeclaration ID="26767209E3135B52" Name="IN2" Type="BOOL" Comment="Argument" />
+    </InputVars>
+  </InterfaceList>
+  <FBNetwork>
+    <FB ID="A270ADF3AD2363D0" Name="ResetBtn" Type="E_DELAY" x="2840" y="820" Namespace="IEC61499.Standard">
+      <Parameter Name="$DT" Value="T#200ms" />
+    </FB>
+    <FB ID="2C16530996C9C8BD" Name="ResetLoLoFlowBtn" Type="E_PERMIT" x="2000" y="820" Namespace="IEC61499.Standard" />
+    <FB ID="67A7455A033A7BAD" Name="Trigger" Type="OR_88A3DD8EC65DD11C" x="1360" y="820" Namespace="SE.Nereda">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNT:=2;OUT:BOOL" />
+    </FB>
+    <Input ID="AB695E9A35A20E19" Name="REQ" x="680" y="832" Type="Event" />
+    <Input ID="479D4538AEFD6EE1" Name="IN1" x="680" y="1032" Type="Data" />
+    <Input ID="26767209E3135B52" Name="IN2" x="680" y="1092" Type="Data" />
+    <Output ID="920962203CA54948" Name="RESET_BTN" x="3440" y="832" Type="Event" />
+    <EventConnections>
+      <Connection Source="$A270ADF3AD2363D0.EO" Destination="$920962203CA54948" />
+      <Connection Source="$2C16530996C9C8BD.EO" Destination="$A270ADF3AD2363D0.START" />
+      <Connection Source="$67A7455A033A7BAD.CNF" Destination="$2C16530996C9C8BD.EI" />
+      <Connection Source="$AB695E9A35A20E19" Destination="$67A7455A033A7BAD.REQ" />
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="$67A7455A033A7BAD.OUT" Destination="$2C16530996C9C8BD.PERMIT" />
+      <Connection Source="$479D4538AEFD6EE1" Destination="$67A7455A033A7BAD.IN1" />
+      <Connection Source="$26767209E3135B52" Destination="$67A7455A033A7BAD.IN2" />
+    </DataConnections>
+  </FBNetwork>
+</FBType>

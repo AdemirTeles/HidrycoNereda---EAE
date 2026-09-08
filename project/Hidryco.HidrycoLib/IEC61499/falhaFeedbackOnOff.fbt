@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="14d94f4d-0e73-41ab-a4c4-656619708c6f" Name="falhaFeedbackOnOff" Format="2.0" Comment="Composite Function Block Type" Namespace="Hidryco.HidrycoLib">
+  <Attribute Name="Configuration.FB.IDCounter" Value="5" />
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="1/26/2026" Remarks="template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="REQ" Comment="Normal Execution Request">
+        <With Var="stsRemoto" />
+        <With Var="stsOn" />
+        <With Var="stsOff" />
+        <With Var="cmdOn" />
+        <With Var="cmdOff" />
+        <With Var="stpTempoFalhaAbertura" />
+        <With Var="stpTempoFalhaFechamento" />
+      </Event>
+      <Event Name="E_RESET_FALHA" />
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="CNF" Comment="Execution Confirmation">
+        <With Var="stsFalhaFeedback" />
+        <With Var="stsFalhaAbertura" />
+        <With Var="stsFalhaFechamento" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="stsRemoto" Type="BOOL" />
+      <VarDeclaration Name="stsOn" Type="BOOL" />
+      <VarDeclaration Name="stsOff" Type="BOOL" />
+      <VarDeclaration Name="cmdOn" Type="BOOL" />
+      <VarDeclaration Name="cmdOff" Type="BOOL" />
+      <VarDeclaration Name="stpTempoFalhaAbertura" Type="UINT" />
+      <VarDeclaration Name="stpTempoFalhaFechamento" Type="UINT" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="stsFalhaFeedback" Type="BOOL" />
+      <VarDeclaration Name="stsFalhaAbertura" Type="BOOL" />
+      <VarDeclaration Name="stsFalhaFechamento" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <FBNetwork>
+    <FB ID="1" Name="FB1" Type="basicFalhaFeedbackOnOff" x="1740" y="1180" Namespace="Hidryco.HidrycoLib" />
+    <FB ID="4" Name="DelayAbertura" Type="E_DELAYR" x="4020" y="1180" Namespace="Runtime.Standard" />
+    <FB ID="5" Name="DelayFechamento" Type="E_DELAYR" x="4020" y="1700" Namespace="Runtime.Standard" />
+    <Input Name="REQ" x="1320" y="1252" Type="Event" />
+    <Input Name="E_RESET_FALHA" x="1060" y="1432" Type="Event" />
+    <Input Name="stsRemoto" x="760" y="1632" Type="Data" />
+    <Input Name="stsOn" x="760" y="1692" Type="Data" />
+    <Input Name="stsOff" x="760" y="1752" Type="Data" />
+    <Input Name="cmdOn" x="760" y="1812" Type="Data" />
+    <Input Name="cmdOff" x="760" y="1872" Type="Data" />
+    <Input Name="stpTempoFalhaAbertura" x="760" y="1932" Type="Data" />
+    <Input Name="stpTempoFalhaFechamento" x="760" y="1992" Type="Data" />
+    <Output Name="CNF" x="3540" y="1252" Type="Event" />
+    <Output Name="stsFalhaFeedback" x="3140" y="1632" Type="Data" />
+    <Output Name="stsFalhaAbertura" x="3140" y="1692" Type="Data" />
+    <Output Name="stsFalhaFechamento" x="3140" y="1752" Type="Data" />
+    <EventConnections>
+      <Connection Source="$1.START_DELAY_ABERTURA" Destination="$4.RESTART" />
+      <Connection Source="$1.START_DELAY_FECHAMENTO" Destination="$5.RESTART" dx1="838.7292">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$1.CNF" Destination="$CNF" />
+      <Connection Source="$REQ" Destination="$1.REQ" />
+      <Connection Source="$E_RESET_FALHA" Destination="$1.E_RESET_FALHA" />
+      <Connection Source="$4.EO" Destination="$1.END_DELAY_ABERTURA" dx1="49.22949" dx2="440" dy="-180">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$5.EO" Destination="$1.END_DELAY_FECHAMENTO" dx1="99.22949" dx2="500" dy="-760">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="$1.delayTimeAbertura" Destination="$4.DT">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$1.delayTimeFechamento" Destination="$5.DT">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$1.stsFalhaFechamento" Destination="$stsFalhaFechamento" />
+      <Connection Source="$1.stsFalhaAbertura" Destination="$stsFalhaAbertura" />
+      <Connection Source="$1.stsFalhaFeedback" Destination="$stsFalhaFeedback" />
+      <Connection Source="$stpTempoFalhaFechamento" Destination="$1.stpTempoFalhaFechamento" />
+      <Connection Source="$stpTempoFalhaAbertura" Destination="$1.stpTempoFalhaAbertura" />
+      <Connection Source="$cmdOff" Destination="$1.cmdOff" dx1="40" />
+      <Connection Source="$cmdOn" Destination="$1.cmdOn" dx1="40" />
+      <Connection Source="$stsOff" Destination="$1.stsOff" />
+      <Connection Source="$stsOn" Destination="$1.stsOn" />
+      <Connection Source="$stsRemoto" Destination="$1.stsRemoto" />
+    </DataConnections>
+  </FBNetwork>
+</FBType>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="5eba5487-330f-488a-a65d-a474350ca6ad" Name="E_DELAY_V_D_B" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="6/13/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="3FBE532C44B8CCDA" Name="START">
+        <With Var="Enable" />
+        <With Var="Zero" />
+      </Event>
+      <Event ID="ED831A67179C7FF2" Name="STOP">
+        <With Var="Enable" />
+        <With Var="Zero" />
+      </Event>
+      <Event ID="C6789781DF73C531" Name="FB_D" />
+      <Event ID="40D4D4E019F2B1EF" Name="FB_C" />
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="F8CA1CF6855EE67F" Name="START_D_C" />
+      <Event ID="8EE9C8A7CAF0E11D" Name="STOP_D_C" />
+      <Event ID="D38CC97F5D25D800" Name="DONE">
+        <With Var="Done" />
+      </Event>
+      <Event ID="AC5B8EA9D2C1EEDB" Name="DUR_PV">
+        <With Var="DurPv" />
+        <With Var="Started" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="FE7BD80F3F8D955F" Name="Enable" Type="BOOL" />
+      <VarDeclaration ID="EA14E66D3494A031" Name="Zero" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="3BF3F8B307AD5850" Name="Done" Type="BOOL" />
+      <VarDeclaration ID="61631A7B2044B57E" Name="DurPv" Type="TIME" />
+      <VarDeclaration ID="1CCEB9DA0FDD1A66" Name="Started" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="3404ed44-6555-4073-aaae-4eb806ea4801">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="ResetDone,DurPv,Done" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="1376.275" y="361.8562" />
+      <ECState Name="START_D_C" x="1376" y="783.1113">
+        <ECAction Output="START_D_C" />
+      </ECState>
+      <ECState Name="DISPLAY_PV" x="1370" y="1554.445">
+        <ECAction Algorithm="DurPv" Output="DUR_PV" />
+      </ECState>
+      <ECState Name="ResetDone" x="1370" y="1174.445">
+        <ECAction Algorithm="ResetDone" Output="DONE" />
+        <ECAction Output="DUR_PV" />
+      </ECState>
+      <ECState Name="Done" x="1366.667" y="1984.444">
+        <ECAction Algorithm="Done" Output="DONE" />
+        <ECAction Output="STOP_D_C" />
+      </ECState>
+      <ECState Name="Reset" x="2325" y="358.5714">
+        <ECAction Algorithm="ResetDone" Output="DONE" />
+        <ECAction Output="DUR_PV" />
+        <ECAction Output="STOP_D_C" />
+      </ECState>
+      <ECTransition Source="START" Destination="START_D_C" Condition="START AND Enable" x="1375.194" y="567.2966">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="343.6798,128.3486,343.8232,154.4352" />
+      </ECTransition>
+      <ECTransition Source="START_D_C" Destination="ResetDone" Condition="FB_C" x="1376.629" y="965.0004">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="344.5175,228.1445,344.1588,252.0594" />
+      </ECTransition>
+      <ECTransition Source="ResetDone" Destination="DISPLAY_PV" Condition="1" x="1374.608" y="1366.745">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="343.7862,330.3932,343.954,353.3628" />
+      </ECTransition>
+      <ECTransition Source="DISPLAY_PV" Destination="Reset" Condition="STOP" x="2418.009" y="1223.502">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="570.0182,318.75,717.5182,337.5" />
+      </ECTransition>
+      <ECTransition Source="DISPLAY_PV" Destination="Done" Condition="FB_D OR Zero" x="1369.475" y="1760.682">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="342.5273,425.872,342.3306,453.0083" />
+      </ECTransition>
+      <ECTransition Source="DISPLAY_PV" Destination="DISPLAY_PV" Condition="FB_C" x="980.5481" y="1570.695">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="223.3333,439.4445,225,348.6111" />
+      </ECTransition>
+      <ECTransition Source="Done" Destination="START" Condition="1" x="667.2229" y="1200.322">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="113.3333,500.2778,122.5,103.6111" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="Reset" Condition="STOP" x="1860.392" y="288.1294">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="435.6881,68.22575,494.655,68.69356" />
+      </ECTransition>
+      <ECTransition Source="Reset" Destination="START" Condition="1" x="1859.771" y="443.6174">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="494.45,114.9407,435.4787,115.1449" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="ResetDone">
+      <ST><![CDATA[;
+Done := FALSE;
+DurPv := T#0s;
+FB_C := FALSE;
+Started := FALSE;]]></ST>
+    </Algorithm>
+    <Algorithm Name="DurPv">
+      <ST><![CDATA[;
+DurPv := DurPv + T#1s;
+Started := TRUE;]]></ST>
+    </Algorithm>
+    <Algorithm Name="Done">
+      <ST><![CDATA[;
+Done := TRUE;
+Started := FALSE;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

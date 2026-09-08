@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="0a5bcad1-8a6e-4e05-abee-e1daca33bb16" Name="fbValvulaAbrirFecharPosicionar_Comunicacao" Comment="Basic Function Block Type" Namespace="Hidryco.HidrycoLib">
+  <Identification Standard="61499-2" />
+  <VersionInfo Version="0.0" Author=" " Date="17/04/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="REQ" Comment="Normal Execution Request">
+        <With Var="stsRemoto" />
+        <With Var="stsAutomatico" />
+        <With Var="cmdAbrirAutomatico" />
+        <With Var="cmdFecharAutomatico" />
+        <With Var="bloqueioManual" />
+        <With Var="bloqueioAutomatico" />
+        <With Var="stsPidHabilitado" />
+        <With Var="stpPosicaoDesejadaAutomatico" />
+        <With Var="cmdAbrirManual" />
+        <With Var="cmdFecharManual" />
+        <With Var="cmdPosicionarManual" />
+        <With Var="stpPosicaoDesejadaManual" />
+        <With Var="stsEmergencia" />
+        <With Var="cmdPararManual" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="CNF" Comment="Execution Confirmation">
+        <With Var="acmAbrir" />
+        <With Var="acmFechar" />
+        <With Var="acmPosicionar" />
+        <With Var="stpPosicaoDesejada" />
+        <With Var="acmParar" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="C471995306C48021" Name="stsEmergencia" Type="BOOL" />
+      <VarDeclaration Name="stsRemoto" Type="BOOL" />
+      <VarDeclaration Name="stsAutomatico" Type="BOOL" />
+      <VarDeclaration Name="cmdAbrirAutomatico" Type="BOOL" />
+      <VarDeclaration Name="cmdFecharAutomatico" Type="BOOL" />
+      <VarDeclaration Name="bloqueioManual" Type="BOOL" />
+      <VarDeclaration Name="bloqueioAutomatico" Type="BOOL" />
+      <VarDeclaration Name="stsPidHabilitado" Type="BOOL" />
+      <VarDeclaration Name="stpPosicaoDesejadaAutomatico" Type="INT" Comment="Saida do PID" />
+      <VarDeclaration Name="cmdAbrirManual" Type="BOOL" />
+      <VarDeclaration Name="cmdFecharManual" Type="BOOL" />
+      <VarDeclaration Name="cmdPosicionarManual" Type="BOOL" />
+      <VarDeclaration ID="6BAA79720FA17B16" Name="cmdPararManual" Type="BOOL" />
+      <VarDeclaration Name="stpPosicaoDesejadaManual" Type="INT" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="acmAbrir" Type="BOOL" />
+      <VarDeclaration Name="acmFechar" Type="BOOL" />
+      <VarDeclaration Name="acmPosicionar" Type="BOOL" />
+      <VarDeclaration ID="66A1FDFBD17E5C82" Name="acmParar" Type="BOOL" />
+      <VarDeclaration Name="stpPosicaoDesejada" Type="INT" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="9f897768-a5cb-408d-9fe7-a0604b1039c9">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="ALG_MANUAL,ALG_AUTO_PID,ALG_AUTO_DIRETO,ALG_SEGURO,ALG_EMERGENCIA" />
+    <InternalVars>
+      <VarDeclaration Name="prevStpAuto" Type="INT" />
+    </InternalVars>
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="1936.941" y="661.4117" />
+      <ECState Name="EXEC_MANUAL" x="2996" y="963.9998">
+        <ECAction Algorithm="ALG_MANUAL" Output="CNF" />
+      </ECState>
+      <ECState Name="EXEC_AUTO_PID" x="2976" y="1764">
+        <ECAction Algorithm="ALG_AUTO_PID" Output="CNF" />
+      </ECState>
+      <ECState Name="EXEC_AUTO_DIRETO" x="2456" y="2564">
+        <ECAction Algorithm="ALG_AUTO_DIRETO" Output="CNF" />
+      </ECState>
+      <ECState Name="EXEC_SEGURO" x="1760" y="2936">
+        <ECAction Algorithm="ALG_SEGURO" Output="CNF" />
+      </ECState>
+      <ECState Name="EMERGENCIA" x="2132" y="240">
+        <ECAction Algorithm="ALG_EMERGENCIA" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="EXEC_MANUAL" Condition="REQ AND stsRemoto AND NOT stsAutomatico AND NOT bloqueioManual AND NOT stsEmergencia" x="2450.983" y="732.5157">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="578.027,169.7458,642.6613,186.9905" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="EXEC_AUTO_PID" Condition="REQ AND stsRemoto AND stsAutomatico AND stsPidHabilitado AND NOT bloqueioAutomatico AND NOT stsEmergencia" x="2513.607" y="1163.858">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="592.503,245.3389,670.7664,328.4491" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="EXEC_AUTO_DIRETO" Condition="REQ AND stsRemoto AND stsAutomatico AND NOT stsPidHabilitado AND NOT bloqueioAutomatico AND NOT stsEmergencia" x="2269.631" y="1630.961">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="552.6643,333.2607,593.1545,485.2622" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="EXEC_SEGURO" Condition="(REQ AND (NOT stsRemoto OR (NOT stsAutomatico AND bloqueioManual) OR (stsAutomatico AND bloqueioAutomatico)) AND NOT stsEmergencia)" x="1897.825" y="1798.098">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="485.838,359.2376,470.5798,539.7101" />
+      </ECTransition>
+      <ECTransition Source="EXEC_MANUAL" Destination="START" Condition="1" x="2482.318" y="896.5355">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="659.2294,238.0632,595.8091,220.4832" />
+      </ECTransition>
+      <ECTransition Source="EXEC_AUTO_PID" Destination="START" Condition="1" x="2506.337" y="1317.058">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="670.7879,379.541,592.2861,296.3802" />
+      </ECTransition>
+      <ECTransition Source="EXEC_AUTO_DIRETO" Destination="START" Condition="1" x="2116.359" y="1491.173">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="543.1665,438.7553,502.5279,286.5757" />
+      </ECTransition>
+      <ECTransition Source="EXEC_SEGURO" Destination="START" Condition="1" x="1801.534" y="1787.814">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="440.3876,536.3124,453.2559,355.7793" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="EMERGENCIA" Condition="stsEmergencia" x="2028.082" y="375.7059">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="502.503,100.8868,514.7323,74.46617" />
+      </ECTransition>
+      <ECTransition Source="EMERGENCIA" Destination="START" Condition="1" x="2112.333" y="482.21">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="537.4197,109.9675,525.1904,136.3881" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="ALG_MANUAL">
+      <ST><![CDATA[acmAbrir       := cmdAbrirManual;
+acmFechar      := cmdFecharManual;
+acmPosicionar  := cmdPosicionarManual;
+acmParar		:= cmdPararManual;
+
+IF cmdPosicionarManual THEN
+    stpPosicaoDesejada := stpPosicaoDesejadaManual;
+END_IF;
+;]]></ST>
+    </Algorithm>
+    <Algorithm Name="ALG_AUTO_PID">
+      <ST><![CDATA[acmAbrir  := FALSE;
+acmFechar := FALSE;
+acmParar := FALSE;
+
+IF stpPosicaoDesejadaAutomatico <> prevStpAuto THEN
+    stpPosicaoDesejada := stpPosicaoDesejadaAutomatico;
+    acmPosicionar      := TRUE; 
+ELSE
+    acmPosicionar := FALSE;
+END_IF;
+
+prevStpAuto := stpPosicaoDesejadaAutomatico;
+;]]></ST>
+    </Algorithm>
+    <Algorithm Name="ALG_AUTO_DIRETO">
+      <ST><![CDATA[acmAbrir       := cmdAbrirAutomatico;
+acmFechar      := cmdFecharAutomatico;
+acmPosicionar  := FALSE;
+acmParar		:= FALSE;
+;]]></ST>
+    </Algorithm>
+    <Algorithm Name="ALG_SEGURO">
+      <ST><![CDATA[acmAbrir       := FALSE;
+acmFechar      := FALSE;
+acmPosicionar  := FALSE;
+acmParar		:= TRUE;
+;]]></ST>
+    </Algorithm>
+    <Algorithm ID="87da86ab-020d-4dae-80f4-9fd887ccc513" Name="ALG_EMERGENCIA">
+      <ST><![CDATA[
+acmAbrir       := FALSE;
+acmFechar      := FALSE;
+acmPosicionar  := FALSE;
+acmParar		:= TRUE;
+
+;
+
+]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

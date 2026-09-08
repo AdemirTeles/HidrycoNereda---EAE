@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="c90f0610-8aaa-4c3b-95cb-696704b80eb6" Name="ReactorSensors" Format="2.0" Comment="Composite Function Block Type" Namespace="SE.Nereda">
+  <Attribute Name="HMI.Alias" Value="" />
+  <Attribute Name="Configuration.FB.IDCounter" Value="78" />
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author="SESA371406" Date="11/14/2023" Remarks="template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="INIT" Comment="Initializes the symbolic link data destination FB with N (1 &lt;= N &lt;= 16) variables" />
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="INITO" Comment="Initialization Confirm" />
+      <Event ID="F5C2D5BE736233BA" Name="CNF_LEVEL_PV" Comment="Execution confirmation of Pv">
+        <With Var="ReactorLevelPv" />
+        <With Var="ReactorLevelPvMax" />
+      </Event>
+      <Event ID="C9AFBEBFCC954DBE" Name="CNF_L1_L2">
+        <With Var="L1" />
+        <With Var="L2" />
+      </Event>
+      <Event ID="D2EB091A02E78227" Name="CNF_LEVEL_COLOR">
+        <With Var="LevelBarColor" />
+      </Event>
+    </EventOutputs>
+    <OutputVars>
+      <VarDeclaration ID="C4C37255D17EB4E6" Name="ReactorLevelPv" Type="VTQREAL" Comment="Scaled process signal" />
+      <VarDeclaration ID="837F9EBED5615CB7" Name="ReactorLevelPvMax" Type="REAL" Comment="Maximun pv measurement range (in engineering units)" />
+      <VarDeclaration ID="8D0251A007B7850C" Name="L1" Type="BOOL" Comment="Output event qualifier" />
+      <VarDeclaration ID="1CD741245A523D5B" Name="L2" Type="BOOL" Comment="Output event qualifier" />
+      <VarDeclaration ID="11E879B934FF1E2F" Name="LevelBarColor" Type="INT" />
+    </OutputVars>
+    <AdapterOutputs>
+      <Adapter ID="D12EBE3082937A2E" Name="ILevelMeasurementReactor_Pv1" Type="IAnalog" Namespace="SE.App2Base" Comment="Process value and status interface adapter" />
+      <Adapter ID="D5D7A094F3CE5EF7" Name="ILevelMeasurementReactor_Pv2" Type="IAnalog" Namespace="SE.App2Base" Comment="Process value and status interface adapter" />
+      <Adapter ID="6BB9795C0E236086" Name="ILevelMeasurementReactor_Pv3" Type="IAnalog" Namespace="SE.App2Base" Comment="Process value and status interface adapter" />
+    </AdapterOutputs>
+  </InterfaceList>
+  <FBNetwork>
+    <FB ID="1209A3C57B6DE362" UID="70" Name="TemperatureMeasurement_Status" Type="AnalogInput_Status" x="2940" y="2200" Namespace="SE.Nereda" />
+    <FB ID="67348A54784E8A0D" UID="71" Name="pHMeasurementReactor_Status" Type="AnalogInput_Status" x="6760" y="2200" Namespace="SE.Nereda" />
+    <FB ID="76004800679B175C" UID="72" Name="OxygenMeasurementReactor_Status" Type="AnalogInput_Status" x="4180" y="2200" Namespace="SE.Nereda" />
+    <FB ID="4918F3A5F684D5F3" UID="73" Name="LevelMeasurementReactor_Status" Type="AnalogInput_Status" x="5460" y="2200" Namespace="SE.Nereda" />
+    <FB ID="74" Name="IThis" Type="ReactorSensors_HMI" x="5096.166" y="1120" Namespace="SE.Nereda">
+      <Parameter Name="$7301916DAB9A118D" Value="TRUE" />
+    </FB>
+    <FB ID="76" UID="75" Name="reactorAmbientTemp" Type="SYMLINKMULTIVARSRC_197068ABA215D7EBA" x="4440" y="3240" Namespace="SE.Nereda">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=1;VALUE${I}:REAL" />
+      <Parameter Name="$QI" Value="TRUE" />
+    </FB>
+    <FB ID="78" Name="levelName" Type="VALFORMAT_1798710A2657A9EEF" x="3420" y="3420" Namespace="SE.Nereda">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#I:=2;VALUE${I}:STRING,STRING" />
+      <Parameter Name="$FORMAT" Value="'%s.%s'" />
+      <Parameter Name="$VALUE1" Value="'$${PATH}'" />
+      <Parameter Name="$VALUE2" Value="'NVPP_001_41QT1002.rawPv.AIn'" />
+    </FB>
+    <FB ID="AE65E0748F970E41" UID="CA7DCA4C4BCF0ABB" Name="TemperatureMeasurement" Type="AnalogInput" x="2860" y="5340" Namespace="SE.Nereda" />
+    <FB ID="80E115FFE44CDF5C" UID="465C49A66C37BBF8" Name="OxygenMeasurementReactor" Type="AnalogInput" x="3900" y="5340" Namespace="SE.Nereda" />
+    <FB ID="AEB293E206959073" UID="2D125FD3EFD1D265" Name="LevelMeasurementReactor" Type="AnalogInput" x="4940" y="5340" Namespace="SE.Nereda" />
+    <FB ID="BF799AA832C89194" UID="3D9D79A9A4972BAA" Name="pHMeasurementReactor" Type="AnalogInput" x="6020" y="5340" Namespace="SE.Nereda" />
+    <FB ID="776C35E5FDDC03E4" Name="DrySolidsMeasurementReactor" Type="AnalogInput" x="7060" y="5340" Namespace="SE.Nereda" />
+    <FB ID="D02A3608623A2CF9" Name="RedoxMeasurementReactor" Type="AnalogInput" x="2860" y="7380" Namespace="SE.Nereda" />
+    <FB ID="116B6EAFF8036ED1" Name="DrySolidsMeasurementReactor_Status" Type="AnalogInput_Status" x="2940" y="4040" Namespace="SE.Nereda" />
+    <FB ID="9C78A33E34FE4199" Name="RedoxMeasurementReactor_Status" Type="AnalogInput_Status" x="4180" y="4040" Namespace="SE.Nereda" />
+    <Input Name="INIT" x="1300" y="1156" Type="Event" />
+    <Frame Name="FRAME3" X="20620" Y="5460" Width="1880" Height="1140">
+      <Parameter Name="BackgroundColor" Value="LightGoldenrodYellow" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 9.75pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="02 - FUNCTIONNAL OUTPUT INTERFACE" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME1" X="20620" Y="6640" Width="1880" Height="1040">
+      <Parameter Name="BackgroundColor" Value="AliceBlue" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 10pt" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="HMI" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME6" X="460" Y="1820" Width="2160" Height="1340">
+      <Parameter Name="BackgroundColor" Value="AntiqueWhite" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 14.25pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="01 - FUNCTIONNAL INPUT INTERFACE" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME8" X="460" Y="820" Width="2160" Height="960">
+      <Parameter Name="BackgroundColor" Value="AliceBlue" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 14.25pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="00 - INITIALIZATION" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME9" X="2660" Y="1820" Width="5319.999" Height="3280">
+      <Parameter Name="BackgroundColor" Value="224, 224, 224" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 14.25pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="05 - LOGIC" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME10" X="2660" Y="820" Width="5319.999" Height="960">
+      <Parameter Name="BackgroundColor" Value="LavenderBlush" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 14.25pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="06 - HMI INTERFACE" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME13" X="8020" Y="1820" Width="1940" Height="1300">
+      <Parameter Name="BackgroundColor" Value="AntiqueWhite" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 14.25pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="02 - FUNCTIONNAL OUTPUT INTERFACE" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME15" X="2760" Y="1960" Width="5119.999" Height="3040">
+      <Parameter Name="BackgroundColor" Value="ButtonFace" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 14.25pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="Actuators Status" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME16" X="2660" Y="5140" Width="5319.999" Height="4240">
+      <Parameter Name="BackgroundColor" Value="LightGoldenrodYellow" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 14.25pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="03 - FIELD INTERFACE" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME17" X="2840" Y="7040" Width="802.8438" Height="140">
+      <Parameter Name="BackgroundColor" Value="AliceBlue" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 12pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="MiddleCenter" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="Temperature measurement" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME18" X="3880" Y="7040" Width="875.7813" Height="140">
+      <Parameter Name="BackgroundColor" Value="AliceBlue" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 12pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="MiddleCenter" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="Oxygen measurement reactor" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME19" X="4920" Y="7040" Width="807.3125" Height="140">
+      <Parameter Name="BackgroundColor" Value="AliceBlue" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 12pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="MiddleCenter" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="Level measurement reactor" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME20" X="6000" Y="7040" Width="751.3125" Height="140">
+      <Parameter Name="BackgroundColor" Value="AliceBlue" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 12pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="MiddleCenter" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="pH measurement reactor" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME2" X="6940" Y="7040" Width="1034.297" Height="140">
+      <Parameter Name="BackgroundColor" Value="AliceBlue" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 12pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="MiddleCenter" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="Dry solids measurement reactor" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME4" X="2800" Y="9080" Width="912.25" Height="140.001">
+      <Parameter Name="BackgroundColor" Value="AliceBlue" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 12pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="MiddleCenter" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="Redox measurement reactor" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="COMMENT5" X="5680" Y="3280" Width="2080" Height="600" IsComment="true">
+      <Parameter Name="BackgroundColor" Value="LemonChiffon" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 10pt" />
+      <Parameter Name="TextAlignment" Value="TopCenter" />
+      <Parameter Name="MoveStyle" Value="None" />
+      <Parameter Name="Text" Value="Add of the Valformat + SYMlink&#xD;&#xA;&#xD;&#xA;We had it as the reactor's Ambien&#xD;&#xA;temperature was shared through the SC1000_ AnalogInput so we are getting back&#xD;&#xA;the values and sharing it to the Ambinet temperature Analog Input by the symlink&#xD;&#xA;&#xD;&#xA;In the NVPP installation the reactor's ambient temperature sensor was not existing&#xD;&#xA;so we used that work aroud" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Output ID="C9AFBEBFCC954DBE" Name="CNF_L1_L2" x="8520" y="2518" Type="Event" />
+    <Output ID="8D0251A007B7850C" Name="L1" x="8520" y="2580" Type="Data" />
+    <Output ID="1CD741245A523D5B" Name="L2" x="8520" y="2640" Type="Data" />
+    <Output ID="D2EB091A02E78227" Name="CNF_LEVEL_COLOR" x="8520" y="2820" Type="Event" />
+    <Output ID="11E879B934FF1E2F" Name="LevelBarColor" x="8520" y="2880" Type="Data" />
+    <Output ID="F5C2D5BE736233BA" Name="CNF_LEVEL_PV" x="8520" y="2234" Type="Event" />
+    <Output ID="C4C37255D17EB4E6" Name="ReactorLevelPv" x="8520" y="2294" Type="Data" />
+    <Output ID="837F9EBED5615CB7" Name="ReactorLevelPvMax" x="8520" y="2354" Type="Data" />
+    <Output ID="D12EBE3082937A2E" Name="ILevelMeasurementReactor_Pv1" x="8520.002" y="1954" Type="Adapter" />
+    <Output ID="D5D7A094F3CE5EF7" Name="ILevelMeasurementReactor_Pv2" x="8520.002" y="2014" Type="Adapter" />
+    <Output ID="6BB9795C0E236086" Name="ILevelMeasurementReactor_Pv3" x="8520.002" y="2074" Type="Adapter" />
+    <Output Name="INITO" x="1260" y="1336" Type="Event" />
+    <EventConnections>
+      <Connection Source="$9C78A33E34FE4199.INITO" Destination="$INITO" dx1="120" dx2="120" dy="-1068.146">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$INIT" Destination="$74.4714B2733E881033" dx1="975.7084">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$78.CNF" Destination="$76.INIT">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$74.8885599142D4C08F" Destination="$1209A3C57B6DE362.INIT">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$1209A3C57B6DE362.INITO" Destination="$76004800679B175C.INIT" />
+      <Connection Source="$76004800679B175C.INITO" Destination="$4918F3A5F684D5F3.INIT" />
+      <Connection Source="$4918F3A5F684D5F3.INITO" Destination="$67348A54784E8A0D.INIT" />
+      <Connection Source="$67348A54784E8A0D.INITO" Destination="$78.REQ">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$AEB293E206959073.62FA503C8D6E7E00" Destination="$C9AFBEBFCC954DBE" dx1="1494.333">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$AEB293E206959073.CA2CF5543A41F42B" Destination="$D2EB091A02E78227" dx1="1509.333">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$AEB293E206959073.C49CC7AA38661D9D" Destination="$F5C2D5BE736233BA">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <Points>
+          <Points>
+            <X>1437.83325</X>
+            <Y>1344.5</Y>
+          </Points>
+          <Points>
+            <X>1452.5</X>
+            <Y>1344.5</Y>
+          </Points>
+          <Points>
+            <X>1452.5</X>
+            <Y>1317</Y>
+          </Points>
+          <Points>
+            <X>1927.5</X>
+            <Y>1317</Y>
+          </Points>
+          <Points>
+            <X>1927.5</X>
+            <Y>812.5</Y>
+          </Points>
+          <Points>
+            <X>2145</X>
+            <Y>812.5</Y>
+          </Points>
+        </Points>
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$76004800679B175C.TEMP" Destination="$76.REQ" dx1="60" dx2="70" dy="590" />
+      <Connection Source="$116B6EAFF8036ED1.INITO" Destination="$9C78A33E34FE4199.INIT" />
+      <Connection Source="$76.INITO" Destination="$116B6EAFF8036ED1.INIT">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="$78.RESULT" Destination="$76.NAME1" dx1="70" />
+      <Connection Source="$AEB293E206959073.A97F7594726B9149" Destination="$8D0251A007B7850C" dx1="1529.333">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$AEB293E206959073.13353F1684E49268" Destination="$1CD741245A523D5B" dx1="1539.333">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$AEB293E206959073.C4D72E13B7737B3F" Destination="$11E879B934FF1E2F" dx1="1549.333">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$AEB293E206959073.0B48A7A0C76CA60B" Destination="$C4C37255D17EB4E6">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <Points>
+          <Points>
+            <X>1437.83325</X>
+            <Y>1439.5</Y>
+          </Points>
+          <Points>
+            <X>1467.5</X>
+            <Y>1439.5</Y>
+          </Points>
+          <Points>
+            <X>1467.5</X>
+            <Y>1317</Y>
+          </Points>
+          <Points>
+            <X>1927.5</X>
+            <Y>1317</Y>
+          </Points>
+          <Points>
+            <X>1927.5</X>
+            <Y>827.5</Y>
+          </Points>
+          <Points>
+            <X>2145</X>
+            <Y>827.5</Y>
+          </Points>
+        </Points>
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$AEB293E206959073.1B610C0DFE34C8FC" Destination="$837F9EBED5615CB7">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <Points>
+          <Points>
+            <X>1437.83325</X>
+            <Y>1469.5</Y>
+          </Points>
+          <Points>
+            <X>1472.5</X>
+            <Y>1469.5</Y>
+          </Points>
+          <Points>
+            <X>1472.5</X>
+            <Y>1317</Y>
+          </Points>
+          <Points>
+            <X>1927.5</X>
+            <Y>1317</Y>
+          </Points>
+          <Points>
+            <X>1927.5</X>
+            <Y>842.5</Y>
+          </Points>
+          <Points>
+            <X>2145</X>
+            <Y>842.5</Y>
+          </Points>
+        </Points>
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$76004800679B175C.Temp" Destination="$76.VALUE1">
+        <Points>
+          <Points>
+            <X>1258.927</X>
+            <Y>715</Y>
+          </Points>
+          <Points>
+            <X>1268.927</X>
+            <Y>715</Y>
+          </Points>
+          <Points>
+            <X>1268.927</X>
+            <Y>929.999939</Y>
+          </Points>
+          <Points>
+            <X>1105</X>
+            <Y>929.999939</Y>
+          </Points>
+        </Points>
+      </Connection>
+    </DataConnections>
+    <AdapterConnections>
+      <Connection Source="$AE65E0748F970E41.73A667132981F8F7" Destination="$1209A3C57B6DE362.404867D502801067">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$80E115FFE44CDF5C.73A667132981F8F7" Destination="$76004800679B175C.404867D502801067">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$AEB293E206959073.73A667132981F8F7" Destination="$4918F3A5F684D5F3.404867D502801067">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$BF799AA832C89194.73A667132981F8F7" Destination="$67348A54784E8A0D.404867D502801067">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$AEB293E206959073.5EC3A1C2B6EC87E8" Destination="$D12EBE3082937A2E">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <Points>
+          <Points>
+            <X>1437.83325</X>
+            <Y>1664.5</Y>
+          </Points>
+          <Points>
+            <X>1497.5</X>
+            <Y>1664.5</Y>
+          </Points>
+          <Points>
+            <X>1497.5</X>
+            <Y>1317</Y>
+          </Points>
+          <Points>
+            <X>1602.5</X>
+            <Y>1317</Y>
+          </Points>
+          <Points>
+            <X>1602.5</X>
+            <Y>742.5</Y>
+          </Points>
+          <Points>
+            <X>2145</X>
+            <Y>742.5</Y>
+          </Points>
+        </Points>
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$AEB293E206959073.95FA69AE12D9BDE1" Destination="$D5D7A094F3CE5EF7">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <Points>
+          <Points>
+            <X>1437.83325</X>
+            <Y>1679.5</Y>
+          </Points>
+          <Points>
+            <X>1502.5</X>
+            <Y>1679.5</Y>
+          </Points>
+          <Points>
+            <X>1502.5</X>
+            <Y>1317</Y>
+          </Points>
+          <Points>
+            <X>1602.5</X>
+            <Y>1317</Y>
+          </Points>
+          <Points>
+            <X>1602.5</X>
+            <Y>757.499939</Y>
+          </Points>
+          <Points>
+            <X>2145</X>
+            <Y>757.499939</Y>
+          </Points>
+        </Points>
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$AEB293E206959073.84357DECBC9FC157" Destination="$6BB9795C0E236086" dx1="2038.667">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$776C35E5FDDC03E4.73A667132981F8F7" Destination="$116B6EAFF8036ED1.404867D502801067">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$D02A3608623A2CF9.73A667132981F8F7" Destination="$9C78A33E34FE4199.404867D502801067">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+    </AdapterConnections>
+  </FBNetwork>
+</FBType>

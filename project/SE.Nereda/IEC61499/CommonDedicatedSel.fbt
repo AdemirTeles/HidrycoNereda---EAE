@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="b48f9b37-5af2-4b5d-ba3a-408c2a7137f6" Name="CommonDedicatedSel" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="8/19/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="5CA6173F1C4E86FA" Name="SELECT_D_C">
+        <With Var="D_C_Sel" />
+      </Event>
+      <Event ID="9CB3309E89E27687" Name="D_C_TART_READY" Comment="Normal Execution Request">
+        <With Var="D_StartReady" />
+        <With Var="D_C_Sel" />
+        <With Var="C_StartReady" />
+      </Event>
+      <Event ID="F2897017D62E0762" Name="D_C_STOP_READY">
+        <With Var="D_StopReady" />
+        <With Var="D_C_Sel" />
+        <With Var="C_StopReady" />
+      </Event>
+      <Event ID="F758EF8250D0E827" Name="D_C_ABORT_READY">
+        <With Var="D_AbortReady" />
+        <With Var="D_C_Sel" />
+        <With Var="C_AbortReady" />
+      </Event>
+      <Event ID="7C9DDB6CE58F5EAC" Name="D_C_BLOWER_CMD">
+        <With Var="D_CmdBlwoers" />
+        <With Var="D_C_Sel" />
+        <With Var="C_CmdBlwoers" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="B6BCB327BF3D814B" Name="START_READY">
+        <With Var="StartReady" />
+      </Event>
+      <Event ID="DFF9742BEF29F4B2" Name="STOP_READY">
+        <With Var="StopReady" />
+      </Event>
+      <Event ID="E43C5E622E9EDB9D" Name="ABORT_READY">
+        <With Var="AbortReady" />
+      </Event>
+      <Event ID="E6CE576DECE8FA36" Name="BLOWER_CMD">
+        <With Var="CmdBlwoers" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="6B7353E194B83739" Name="D_C_Sel" Type="BOOL" Comment="FALSE = Dedicated | TRUE = Common" />
+      <VarDeclaration ID="4EABAE223D99E058" Name="D_StartReady" Type="BOOL" />
+      <VarDeclaration ID="06E048E98F53EBF6" Name="D_StopReady" Type="BOOL" />
+      <VarDeclaration ID="B02BDAA38C93975F" Name="D_AbortReady" Type="BOOL" />
+      <VarDeclaration ID="D81231E47286A62F" Name="D_CmdBlwoers" Type="BOOL" />
+      <VarDeclaration ID="1F21147CB51C7EA6" Name="C_StartReady" Type="BOOL" />
+      <VarDeclaration ID="EA1A5C22AD5895EC" Name="C_StopReady" Type="BOOL" />
+      <VarDeclaration ID="6F7367F5CFF496A6" Name="C_AbortReady" Type="BOOL" />
+      <VarDeclaration ID="D796844560BAB612" Name="C_CmdBlwoers" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="2A97C77077100C94" Name="StartReady" Type="BOOL" />
+      <VarDeclaration ID="CA3438789A0EA1DF" Name="StopReady" Type="BOOL" />
+      <VarDeclaration ID="0677B13F72D05C6B" Name="AbortReady" Type="BOOL" />
+      <VarDeclaration ID="1EF2595121C47467" Name="CmdBlwoers" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="ebbb23a9-a9ba-4ad6-a11c-4af496e5f959">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="StartReady,StopReady,BlowerCmd,AbortReady" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="2255.418" y="1424.65" />
+      <ECState Name="START_RDY" x="2264" y="670.2221">
+        <ECAction Algorithm="StartReady" Output="START_READY" />
+      </ECState>
+      <ECState Name="STOP_RDY" x="680.0005" y="1426.222">
+        <ECAction Algorithm="StopReady" Output="STOP_READY" />
+      </ECState>
+      <ECState Name="ABORT_RDY" x="2262.222" y="2152.889">
+        <ECAction Algorithm="AbortReady" Output="ABORT_READY" />
+      </ECState>
+      <ECState Name="BLOWER_CMD" x="3472.778" y="1421.111">
+        <ECAction Algorithm="BlowerCmd" Output="BLOWER_CMD" />
+      </ECState>
+      <ECTransition Source="START" Destination="START_RDY" Condition="D_C_TART_READY" x="2095.884" y="1005.152">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="514.7822,274.6807,512.814,220.8482" />
+      </ECTransition>
+      <ECTransition Source="START_RDY" Destination="START" Condition="1" x="2357.156" y="1003.605">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="594.3199,217.993,596.2869,276.5042" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="STOP_RDY" Condition="D_C_STOP_READY" x="1481.731" y="1578.925">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="418.2808,402.8074,321.9086,404.4323" />
+      </ECTransition>
+      <ECTransition Source="STOP_RDY" Destination="START" Condition="1" x="1414.321" y="1307.238">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="296.0979,320.0135,397.9426,320.5681" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="ABORT_RDY" Condition="D_C_ABORT_READY" x="2342.832" y="1788.069">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="590.7108,420.964,591.1967,472.9535" />
+      </ECTransition>
+      <ECTransition Source="ABORT_RDY" Destination="START" Condition="1" x="2162.765" y="1787.768">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="534.9361,472.8534,534.4503,420.8639" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="BLOWER_CMD" Condition="D_C_BLOWER_CMD" x="2761.617" y="1301.999">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="653.105,319.7598,718.3262,319.7896" />
+      </ECTransition>
+      <ECTransition Source="BLOWER_CMD" Destination="START" Condition="1" x="2806.583" y="1499.177">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="736.0312,378.1574,666.3087,378.4408" />
+      </ECTransition>
+    </ECC>
+    <Algorithm ID="13f8ddb1-03ec-4a20-a4f6-4945b16ca131" Name="StartReady">
+      <ST><![CDATA[;
+IF D_C_Sel THEN
+	StartReady := C_StartReady;
+ELSE
+	StartReady := D_StartReady;
+END_IF;]]></ST>
+    </Algorithm>
+    <Algorithm ID="371a2c4f-1239-49fb-8dcb-492eabafa249" Name="StopReady">
+      <ST><![CDATA[;
+IF D_C_Sel THEN
+	StopReady := C_StopReady;
+ELSE
+	StopReady := D_StopReady;
+END_IF;]]></ST>
+    </Algorithm>
+    <Algorithm ID="a110edc6-24f8-41dc-a57c-c6b3d0718680" Name="BlowerCmd">
+      <ST><![CDATA[;
+IF D_C_Sel THEN
+	CmdBlwoers := C_CmdBlwoers;
+ELSE
+	CmdBlwoers := D_CmdBlwoers;
+END_IF;]]></ST>
+    </Algorithm>
+    <Algorithm ID="62b3479b-bae6-41cc-8588-3cd808b8a9a3" Name="AbortReady">
+      <ST><![CDATA[;
+IF D_C_Sel THEN
+	AbortReady := C_AbortReady;
+ELSE
+	AbortReady := D_AbortReady;
+END_IF;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

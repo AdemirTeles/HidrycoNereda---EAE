@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="7f77eaf7-e4cc-424f-ab9f-50abb976e5f5" Name="REAL2TIME" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="6/13/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="9954577AA24F9DD6" Name="REQ" Comment="Normal Execution Request">
+        <With Var="QI" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="79B40746AB555956" Name="CNF" Comment="Execution Confirmation">
+        <With Var="QO" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="158B8AA7B31D2617" Name="QI" Type="REAL" Comment="Input event qualifier" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="8AC404843F53B283" Name="QO" Type="TIME" Comment="Output event qualifier" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="REQ" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="552.9412" y="429.4117" />
+      <ECState Name="REQ" Comment="Normal execution" x="1229.647" y="948.9412">
+        <ECAction Algorithm="REQ" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="REQ" Condition="REQ" x="948.6151" y="628.9855">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="215.5157,135.1656,260.5796,169.7627" />
+      </ECTransition>
+      <ECTransition Source="REQ" Destination="START" Condition="1" x="884.3931" y="766.1482">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="245.3555,214.5927,200.2916,179.9956" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="REQ" Comment="Normally executed algorithm">
+      <ST><![CDATA[;
+QO := REAL_TO_TIME(QI*1000);]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="a5f31dce-ccd9-4370-8fbc-bbb04a0d5858" Name="Reset" Format="2.0" Comment="Composite Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="7/13/2026" Remarks="template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="BAAD7D98C6D42F1E" Name="REQ" Comment="Normal Execution Request">
+        <With Var="NeedReset" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="FEED613FBC3E415D" Name="CNF" Comment="Execution Confirmation">
+        <With Var="Reset" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="6E3779FCEEE15EFE" Name="NeedReset" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="78F11A90675BB1F3" Name="Reset" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <FBNetwork>
+    <FB ID="B5D5D5553D41050F" UID="C8964EEB82CA173F" Name="ResetCmd" Type="DS_SELECTX_2536758B411A6CE51" x="2040" y="620" Namespace="SE.Nereda">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNTX:=2;CNTY:=1;DI${CNTX,_,CNTY}:BOOL" />
+      <Parameter Name="$DI1_1" Value="TRUE" />
+      <Parameter Name="$DI2_1" Value="FALSE" />
+    </FB>
+    <FB ID="E80C84AF047025EA" Name="FireReset" Type="E_PERMIT" x="1200" y="620" Namespace="IEC61499.Standard" />
+    <FB ID="5D4DE44BD9222B2C" Name="FB1" Type="E_DELAY" x="1220" y="1060" Namespace="IEC61499.Standard">
+      <Parameter Name="$DT" Value="T#1s" />
+    </FB>
+    <Input ID="BAAD7D98C6D42F1E" Name="REQ" x="320" y="632" Type="Event" />
+    <Input ID="6E3779FCEEE15EFE" Name="NeedReset" x="320" y="692" Type="Data" />
+    <Output ID="FEED613FBC3E415D" Name="CNF" x="2800" y="692" Type="Event" />
+    <Output ID="78F11A90675BB1F3" Name="Reset" x="2800" y="752" Type="Data" />
+    <EventConnections>
+      <Connection Source="$B5D5D5553D41050F.IND" Destination="$FEED613FBC3E415D" dx1="40.021" />
+      <Connection Source="$E80C84AF047025EA.EO" Destination="$B5D5D5553D41050F.REQ1" />
+      <Connection Source="$BAAD7D98C6D42F1E" Destination="$E80C84AF047025EA.EI" />
+      <Connection Source="$5D4DE44BD9222B2C.EO" Destination="$B5D5D5553D41050F.REQ2" dx1="98.5">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$E80C84AF047025EA.EO" Destination="$5D4DE44BD9222B2C.START" dx1="47.16675" dx2="50" dy="290" />
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="$B5D5D5553D41050F.OUT1" Destination="$78F11A90675BB1F3" dx1="70" />
+      <Connection Source="$6E3779FCEEE15EFE" Destination="$E80C84AF047025EA.PERMIT" dx1="46.79175" />
+    </DataConnections>
+  </FBNetwork>
+</FBType>

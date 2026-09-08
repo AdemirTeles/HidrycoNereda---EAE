@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="23eec270-48c7-43f7-82ae-edc7249cdb23" Name="FlushGritScreenCond" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author="SESA713705" Date="5/26/2024" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="CHECK_CONDITION">
+        <With Var="EffluentLevelIsOK" />
+        <With Var="FbFlowLLAlarm" />
+        <With Var="FbValvesAvailable" />
+        <With Var="ConfigurationIsDone" />
+        <With Var="FlushPumpNotReady" />
+        <With Var="OtherFlushRunning" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="CNF_ENABLE" Comment="Execution Confirmation">
+        <With Var="SendEnableOperation" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="EffluentLevelIsOK" Type="BOOL" />
+      <VarDeclaration Name="FbFlowLLAlarm" Type="BOOL" />
+      <VarDeclaration Name="FbValvesAvailable" Type="BOOL" />
+      <VarDeclaration Name="ConfigurationIsDone" Type="BOOL" />
+      <VarDeclaration Name="FlushPumpNotReady" Type="BOOL" />
+      <VarDeclaration Name="OtherFlushRunning" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="SendEnableOperation" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="CheckConditions" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="756.9412" y="869.4117" />
+      <ECState Name="STATE1" x="1620.444" y="870.6667">
+        <ECAction Algorithm="CheckConditions" Output="CNF_ENABLE" />
+      </ECState>
+      <ECTransition Source="START" Destination="STATE1" Condition="CHECK_CONDITION" x="1185.019" y="763.0916">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="271.6244,185.9883,321.0947,186.1868" />
+      </ECTransition>
+      <ECTransition Source="STATE1" Destination="START" Condition="1" x="1186.528" y="973.8734">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="321.6407,248.1171,272.376,247.8317" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="CheckConditions">
+      <ST><![CDATA[;
+IF 	EffluentLevelIsOK = TRUE AND
+	FbFlowLLAlarm = FALSE AND
+	FbValvesAvailable = TRUE AND
+	NOT OtherFlushRunning AND
+	ConfigurationIsDone = TRUE AND
+	FlushPumpNotReady = FALSE THEN
+	
+	SendEnableOperation := TRUE;
+ELSE
+	SendEnableOperation := FALSE;
+END_IF;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

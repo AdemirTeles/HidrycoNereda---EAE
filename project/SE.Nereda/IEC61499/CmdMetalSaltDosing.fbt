@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="df2b38e5-f5a2-441e-b47d-7c60815740d9" Name="CmdMetalSaltDosing" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author="Administrator" Date="7/31/2024" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="READY">
+        <With Var="Ready" />
+      </Event>
+      <Event Name="STARTING">
+        <With Var="Starting" />
+      </Event>
+      <Event Name="RUN" Comment="Normal Execution Request">
+        <With Var="Run" />
+      </Event>
+      <Event Name="STOPPING">
+        <With Var="Stopping" />
+      </Event>
+      <Event Name="ABORTING">
+        <With Var="Aborting" />
+      </Event>
+      <Event Name="PUMP_FB">
+        <With Var="PumpFbRunning" />
+        <With Var="PumpFbStopped" />
+      </Event>
+      <Event Name="PUMP_NO_AVAILABLE">
+        <With Var="PumpAvailable" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="PUMP_CNF">
+        <With Var="Pump" />
+      </Event>
+      <Event Name="START_READY">
+        <With Var="StartReady" />
+      </Event>
+      <Event Name="STOP_READY">
+        <With Var="StopReady" />
+      </Event>
+      <Event Name="ABORTED_READY">
+        <With Var="AbortedReady" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="Ready" Type="BOOL" />
+      <VarDeclaration Name="Starting" Type="BOOL" />
+      <VarDeclaration Name="Run" Type="BOOL" Comment="Input event qualifier" />
+      <VarDeclaration Name="Stopping" Type="BOOL" />
+      <VarDeclaration Name="Aborting" Type="BOOL" />
+      <VarDeclaration Name="PumpFbRunning" Type="BOOL" />
+      <VarDeclaration Name="PumpFbStopped" Type="BOOL" />
+      <VarDeclaration Name="PumpAvailable" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="Pump" Type="BOOL" />
+      <VarDeclaration Name="StartReady" Type="BOOL" />
+      <VarDeclaration Name="StopReady" Type="BOOL" />
+      <VarDeclaration Name="AbortedReady" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="StartReady,StopReady,AbortedReady,StopPump,StopPump_WhenAborting,StartPump" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="5002.941" y="904.4117" />
+      <ECState Name="STATE1" Comment="Normal execution" x="2837.647" y="1952.941">
+        <ECAction Algorithm="StartReady" Output="START_READY" />
+        <ECAction Output="STOP_READY" />
+        <ECAction Output="ABORTED_READY" />
+      </ECState>
+      <ECState Name="StartPump" x="2832" y="2635">
+        <ECAction Algorithm="StartPump" Output="PUMP_CNF" />
+      </ECState>
+      <ECState Name="STATE4" x="4995" y="2591">
+        <ECAction Algorithm="StopReady" Output="STOP_READY" />
+      </ECState>
+      <ECState Name="STATE8" x="6923.778" y="2625.111">
+        <ECAction Algorithm="AbortedReady" Output="ABORTED_READY" />
+      </ECState>
+      <ECState Name="Aborting" x="5012" y="3825" />
+      <ECState Name="STATE2" x="6229.459" y="379.1745">
+        <ECAction Algorithm="StopPump" Output="PUMP_CNF" />
+        <ECAction Output="START_READY" />
+      </ECState>
+      <ECState Name="STATE7" x="6914.94" y="1946.669">
+        <ECAction Algorithm="StopPump_WhenAborting" Output="PUMP_CNF" />
+        <ECAction Output="START_READY" />
+        <ECAction Output="STOP_READY" />
+      </ECState>
+      <ECState Name="STATE10" x="5000.497" y="1971.669">
+        <ECAction Algorithm="StopPump" Output="PUMP_CNF" />
+        <ECAction Output="START_READY" />
+        <ECAction Output="ABORTED_READY" />
+      </ECState>
+      <ECState Name="PumpRun" x="2833.889" y="3173.683" />
+      <ECTransition Source="START" Destination="STATE1" Condition="STARTING AND Starting = TRUE" x="3945.409" y="1440.514">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1069.092,321.7323,906.2997,400.4976" />
+      </ECTransition>
+      <ECTransition Source="STATE1" Destination="StartPump" Condition="Run" x="2832.59" y="2291.697">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="707.8022,548.5943,708.2211,596.8752" />
+      </ECTransition>
+      <ECTransition Source="PumpRun" Destination="START" Condition="1" x="2390.925" y="1698.544">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="391.5697,485.2728,564.5674,310.2747" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="STATE10" Condition="STOPPING AND Stopping = TRUE" x="5003.886" y="1441.625">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1251.165,320.9724,1251.075,400.4375" />
+      </ECTransition>
+      <ECTransition Source="STATE4" Destination="START" Condition="1" x="4499.233" y="1756.076">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1087.347,505.6525,1088.691,373.7807" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="STATE7" Condition="ABORTING AND Aborting = TRUE" x="5899.248" y="1399.96">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1404.732,312.5786,1535.323,383.1378" />
+      </ECTransition>
+      <ECTransition Source="STATE8" Destination="START" Condition="1" x="8532.967" y="2228.215">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="2469.072,973.7316,2204.784,213.4133" />
+      </ECTransition>
+      <ECTransition Source="STATE1" Destination="Aborting" Condition="ABORTING AND Aborting = TRUE" x="2278.772" y="3831.601">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="365.8983,968.2656,514.0474,1098.029" />
+      </ECTransition>
+      <ECTransition Source="Aborting" Destination="STATE7" Condition="1" x="6250.591" y="2964.44">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1622.086,927.5182,1549.314,564.3723" />
+      </ECTransition>
+      <ECTransition Source="STATE4" Destination="Aborting" Condition="ABORTING AND Aborting = TRUE" x="5005.851" y="3210.302">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1251.32,755.7017,1251.937,849.8333" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="STATE2" Condition="Ready = TRUE AND PumpFbRunning = TRUE" x="5415.873" y="542.0883">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1299.456,147.5939,1384.273,109.9715" />
+      </ECTransition>
+      <ECTransition Source="StartPump" Destination="Aborting" Condition="ABORTING AND Aborting = TRUE" x="2688.43" y="3532.743">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="493.7339,861.7026,661.2671,950.8846" />
+      </ECTransition>
+      <ECTransition Source="STATE7" Destination="STATE8" Condition="PumpFbStopped = TRUE OR PumpAvailable = FALSE" x="6917.735" y="2285.117">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1729.017,547.2946,1729.652,595.1351" />
+      </ECTransition>
+      <ECTransition Source="STATE10" Destination="STATE4" Condition="PumpFbStopped = TRUE" x="4997.17" y="2292.001">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1249.462,552.4321,1249.05,595.3459" />
+      </ECTransition>
+      <ECTransition Source="STATE2" Destination="START" Condition="PumpFbStopped = TRUE OR PumpAvailable = FALSE" x="5707.724" y="670.4334">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1474.85,150.8714,1389.832,187.7246" />
+      </ECTransition>
+      <ECTransition Source="STATE10" Destination="Aborting" Condition="ABORTING AND Aborting = TRUE" x="3937.633" y="3027.683">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="904.5623,694.4984,905.3962,840.4791" />
+      </ECTransition>
+      <ECTransition Source="StartPump" Destination="PumpRun" Condition="PumpFbRunning" x="2834.686" y="2876.281">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="708.7017,698.6355,708.8286,734.8287" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="StartReady">
+      <ST><![CDATA[;
+StartReady := TRUE;
+StopReady := FALSE;
+AbortedReady := FALSE;]]></ST>
+    </Algorithm>
+    <Algorithm Name="StopReady">
+      <ST><![CDATA[;
+StopReady := TRUE;]]></ST>
+    </Algorithm>
+    <Algorithm Name="AbortedReady">
+      <ST><![CDATA[;
+AbortedReady := TRUE;]]></ST>
+    </Algorithm>
+    <Algorithm Name="StartPump">
+      <ST><![CDATA[;
+Pump := TRUE;]]></ST>
+    </Algorithm>
+    <Algorithm Name="StopPump">
+      <ST><![CDATA[;
+Pump := FALSE;
+StartReady := FALSE;
+AbortedReady  := FALSE;]]></ST>
+    </Algorithm>
+    <Algorithm Name="StopPump_WhenAborting">
+      <ST><![CDATA[;
+Pump := FALSE;
+StartReady := FALSE;
+StopReady := FALSE;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

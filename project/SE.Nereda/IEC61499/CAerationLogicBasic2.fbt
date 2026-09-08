@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="8a6fb516-4e16-4303-9bec-8b89346a3ddd" Comment="Basic Function Block Type" Name="CAerationLogicBasic2" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="6/10/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="D2C11A8772DD75BE" Name="AERATION_CMD">
+        <With Var="AerationR1Cmd" />
+        <With Var="AerationR2Cmd" />
+        <With Var="AerCapR1" />
+        <With Var="AerCapR2" />
+        <With Var="C2_IN" />
+        <With Var="C3_IN" />
+        <With Var="Blower1FbReady" />
+        <With Var="Blower2FbReady" />
+        <With Var="Blower3FbReady" />
+        <With Var="Blower4FbReady" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="B804F7AE49CF3E15" Name="CNF_CMD">
+        <With Var="StartScndBL_H1" />
+        <With Var="StartStdby_H1" />
+        <With Var="StartScndBL_H2" />
+        <With Var="StartStdby_H2" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="B2CC9DAB470B3A98" Name="AerationR1Cmd" Type="BOOL" />
+      <VarDeclaration ID="1AEE3F619E7084DB" Name="AerationR2Cmd" Type="BOOL" />
+      <VarDeclaration ID="09FC2180130EA7A8" Name="AerCapR1" Type="REAL" />
+      <VarDeclaration ID="4A7C96523834A9A5" Name="AerCapR2" Type="REAL" />
+      <VarDeclaration ID="BB0AA5D7C20FC6DC" Name="C2_IN" Type="REAL" />
+      <VarDeclaration ID="82E6F957CA34CE22" Name="C3_IN" Type="REAL" />
+      <VarDeclaration ID="F39CADEC2A13420A" Name="Blower1FbReady" Type="BOOL" />
+      <VarDeclaration ID="266E7B658D2D8018" Name="Blower2FbReady" Type="BOOL" />
+      <VarDeclaration ID="7D28FD8AC101CEE8" Name="Blower3FbReady" Type="BOOL" />
+      <VarDeclaration ID="BD31FDCAB4D0C603" Name="Blower4FbReady" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="4F511D89CFAD767B" Name="StartScndBL_H1" Type="BOOL" />
+      <VarDeclaration ID="FE3CA976DB528EC5" Name="StartStdby_H1" Type="BOOL" />
+      <VarDeclaration ID="C27B618F80BE71A0" Name="StartScndBL_H2" Type="BOOL" />
+      <VarDeclaration ID="DFDB6D6DAFE2FA40" Name="StartStdby_H2" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="5d63002f-a7b1-4326-a938-7f8dd38ad271">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="REQ" />
+    <InternalVars>
+      <VarDeclaration ID="211747A19A38948B" Name="H1Stdby_Used" Type="BOOL" />
+      <VarDeclaration ID="2A7296943EF560F8" Name="H2Stdby_Used" Type="BOOL" />
+    </InternalVars>
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="3218.251" y="1562.412" />
+      <ECState Name="REQ" x="4060.401" y="2069.603">
+        <ECAction Algorithm="REQ" Output="CNF_CMD" />
+      </ECState>
+      <ECTransition Source="START" Destination="REQ" Condition="AERATION_CMD" x="3688.012" y="1749.751">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="894.8603,415.8015,950.5987,449.3704" />
+      </ECTransition>
+      <ECTransition Source="REQ" Destination="START" Condition="1" x="3582.658" y="1925.475">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="921.3397,505.6236,865.6013,472.0547" />
+      </ECTransition>
+    </ECC>
+    <Algorithm ID="42cf27f2-e44a-45a4-bc96-9aae58cc0c1e" Name="REQ">
+      <ST><![CDATA[;
+(* Standby status *)
+H1Stdby_Used := AerCapR2 > C2_IN;
+H2Stdby_Used := AerCapR1 > C2_IN;
+
+
+(* Default outputs *)
+StartScndBL_H1 := FALSE;
+StartStdby_H1 := FALSE;
+
+StartScndBL_H2 := FALSE;
+StartStdby_H2 := FALSE;
+
+
+(* ========================================================= *)
+(* HEADER 1 - REACTOR 1                                      *)
+(* Priority: Blower1 -> Blower2 -> Standby                    *)
+(* ========================================================= *)
+
+IF AerationR1Cmd THEN
+
+    (* 1 blower required *)
+    IF AerCapR1 <= C2_IN THEN
+        IF Blower1FbReady THEN
+            StartScndBL_H1 := FALSE;
+            StartStdby_H1 := FALSE;
+        ELSIF NOT H1Stdby_Used THEN
+            StartScndBL_H1 := FALSE;
+            StartStdby_H1 := TRUE;
+        END_IF;
+
+
+    (* 2 blowers required *)
+    ELSIF AerCapR1 <= C3_IN THEN
+        IF Blower1FbReady AND Blower2FbReady THEN
+            StartScndBL_H1 := TRUE;
+            StartStdby_H1 := FALSE;
+        ELSIF NOT H1Stdby_Used THEN
+
+            StartScndBL_H1 := Blower2FbReady;
+            StartStdby_H1 := TRUE;
+        END_IF;
+    END_IF;
+END_IF;
+
+
+(* ========================================================= *)
+(* HEADER 2 - REACTOR 2                                      *)
+(* Priority: Blower4 -> Blower3 -> Standby                    *)
+(* ========================================================= *)
+
+IF AerationR2Cmd THEN
+	
+    (* 1 blower required *)
+    IF AerCapR2 <= C2_IN THEN
+        IF Blower4FbReady THEN
+            StartScndBL_H2 := FALSE;
+            StartStdby_H2 := FALSE;
+        ELSIF NOT H2Stdby_Used THEN
+            StartScndBL_H2 := FALSE;
+            StartStdby_H2 := TRUE;
+        END_IF;
+
+
+    (* 2 blowers required *)
+    ELSIF AerCapR2 <= C3_IN THEN
+        IF Blower4FbReady AND Blower3FbReady THEN
+            StartScndBL_H2 := TRUE;
+            StartStdby_H2 := FALSE;
+        ELSIF NOT H2Stdby_Used THEN
+            StartScndBL_H2 := Blower3FbReady;
+            StartStdby_H2 := TRUE;
+        END_IF;
+    END_IF;
+END_IF;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

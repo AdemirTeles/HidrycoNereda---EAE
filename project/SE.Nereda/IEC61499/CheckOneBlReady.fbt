@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="d997eda2-252d-4766-b971-d7e82e44872e" Name="CheckOneBlReady" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="7/15/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="2E84B14BD871A818" Name="REQ" Comment="Normal Execution Request">
+        <With Var="FbRdy_BL1" />
+        <With Var="FbRdy_BL2" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="F3042427BFA42A43" Name="CNF" Comment="Execution Confirmation">
+        <With Var="OneBLRdy" />
+        <With Var="NoBLRdy" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="B6DDA2768C4989D9" Name="FbRdy_BL1" Type="BOOL" />
+      <VarDeclaration ID="2DAF5142D84D4216" Name="FbRdy_BL2" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="EE3ED52C74CC0874" Name="OneBLRdy" Type="BOOL" />
+      <VarDeclaration ID="4E7661CAE00B8F7F" Name="NoBLRdy" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="3177af6f-f4d0-4328-aa21-a81797568c81">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="REQ" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="1132.941" y="457.4117" />
+      <ECState Name="REQ" x="1860" y="819.9999">
+        <ECAction Algorithm="REQ" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="REQ" Condition="REQ" x="1508.235" y="561.1427">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="350.4525,123.6402,399.7241,146.8625" />
+      </ECTransition>
+      <ECTransition Source="REQ" Destination="START" Condition="1" x="1564.404" y="728.3644">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="421.585,199.2003,373.9279,176.6873" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="REQ" Comment="Normally executed algorithm">
+      <ST><![CDATA[;
+OneBLRdy := (FbRdy_BL1 AND NOT FbRdy_BL2) OR (NOT FbRdy_BL1 AND FbRdy_BL2);
+NoBLRdy := NOT FbRdy_BL1 AND NOT FbRdy_BL2;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

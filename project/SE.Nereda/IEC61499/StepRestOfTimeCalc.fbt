@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="9d938396-2fe4-4f66-9799-195fa0d3f984" Name="StepRestOfTimeCalc" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="7/15/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="DE3F91074AB90905" Name="REQ" Comment="Normal Execution Request">
+        <With Var="FeedIntervalV" />
+        <With Var="S3_SDTime" />
+        <With Var="S4_LLTime" />
+        <With Var="S5_AerateTime" />
+        <With Var="S6_VentTime" />
+        <With Var="S7_SDTime" />
+        <With Var="S8_WaitTime" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="50D90A5AAF562FFD" Name="CNF" Comment="Execution Confirmation">
+        <With Var="EnoughTime" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="A2F4F2631E28A856" Name="FeedIntervalV" Type="REAL" />
+      <VarDeclaration ID="F22EA5F248A50CC4" Name="S3_SDTime" Type="REAL" />
+      <VarDeclaration ID="BA6E402D256389C3" Name="S4_LLTime" Type="REAL" />
+      <VarDeclaration ID="99CDBF035F753575" Name="S5_AerateTime" Type="REAL" />
+      <VarDeclaration ID="4007F4626DF49643" Name="S6_VentTime" Type="REAL" />
+      <VarDeclaration ID="40853A2DDC4FBA1A" Name="S7_SDTime" Type="REAL" />
+      <VarDeclaration ID="31B01DC205FFD47B" Name="S8_WaitTime" Type="REAL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="E0E78CD8F23592D1" Name="EnoughTime" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="54c4e1e0-dc54-4c37-b4e8-8dd8245d04dc">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="REQ" />
+    <InternalVars>
+      <VarDeclaration ID="02C87AD05C8D336D" Name="RestOfTime" Type="REAL" />
+      <VarDeclaration ID="DAD6B2D151DAC671" Name="SDTime" Type="REAL" />
+    </InternalVars>
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="552.9412" y="429.4117" />
+      <ECState Name="REQ" Comment="Normal execution" x="1345.647" y="888.9412">
+        <ECAction Algorithm="REQ" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="REQ" Condition="REQ" x="996.8914" y="591.7159">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="224.3336,128.367,275.3896,157.964" />
+      </ECTransition>
+      <ECTransition Source="REQ" Destination="START" Condition="1" x="943.9143" y="737.7078">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="262.8516,204.5927,211.7955,174.9956" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="REQ" Comment="Normally executed algorithm">
+      <ST><![CDATA[;
+IF S3_SDTime >= S7_SDTime THEN
+	SDTime := S3_SDTime;
+ELSE
+	SDTime := S7_SDTime;
+END_IF;
+	
+RestOfTime := FeedIntervalV - (SDTime + S4_LLTime + S5_AerateTime + S6_VentTime + S8_WaitTime);
+
+IF RestOfTime < 0 THEN
+	EnoughTime := FALSE;
+ELSE
+	EnoughTime := TRUE;
+END_IF;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

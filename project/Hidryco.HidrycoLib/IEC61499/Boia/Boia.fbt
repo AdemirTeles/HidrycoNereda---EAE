@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="31e02778-d8e9-4320-aa32-0268303e594d" Name="Boia" Format="2.0" Comment="Composite Function Block Type" Namespace="Hidryco.HidrycoLib">
+  <Attribute Name="HMI.Alias" Value="" />
+  <Attribute Name="Configuration.FB.IDCounter" Value="12" />
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="2/9/2026" Remarks="template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="E_ATUALIZA_BOIA_ACIMA">
+        <With Var="stsAnimacaoBoiaAcima" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="E_ATUALIZA_ANIMACAO">
+        <With Var="stsAnimacao" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="stsAnimacaoBoiaAcima" Type="INT" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="stsAnimacao" Type="INT" />
+    </OutputVars>
+  </InterfaceList>
+  <FBNetwork>
+    <FB ID="4" UID="1" Name="FB1" Type="SYMLINKMULTIVARDST_1559B0FF8170C9BA0" x="800" y="900" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=1;VALUE${I}:BOOL" />
+      <Parameter Name="$QI" Value="TRUE" />
+      <Parameter Name="$NAME1" Value="'$${PATH}stsBoiaAtiva'" />
+    </FB>
+    <FB ID="2" Name="FB2" Type="plcStart" x="240" y="180" Namespace="SE.App2Base" />
+    <FB ID="3" Name="IThis" Type="Boia_HMI" x="2120" y="220" Namespace="Hidryco.HidrycoLib">
+      <Parameter Name="$80C6E1DB2CCA81F5" Value="TRUE" />
+    </FB>
+    <FB ID="6" Name="AND1" Type="AND_148CCC6046D4CE74C" x="3740" y="1060" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNT:=2" />
+    </FB>
+    <FB ID="7" Name="animacaoEquipamento1" Type="animacaoEquipamento" x="4760" y="980" Namespace="Hidryco.HidrycoLib" />
+    <FB ID="8" Name="NOT1" Type="NOT_12669C4E53BA46410" x="1680" y="2000" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNT:=1" />
+    </FB>
+    <FB ID="12" UID="11" Name="COMPARE1" Type="COMPARE_739E3FB559152FE" x="2340" y="980" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNT:=2;IN${CNT}:INT" />
+      <Parameter Name="$IN2" Value="1" />
+    </FB>
+    <Input Name="stsAnimacaoBoiaAcima" x="1440" y="1192" Type="Data" />
+    <Input Name="E_ATUALIZA_BOIA_ACIMA" x="1480" y="992" Type="Event" />
+    <Output Name="stsAnimacao" x="5640" y="1192" Type="Data" />
+    <Output Name="E_ATUALIZA_ANIMACAO" x="2000" y="-1.907349E-06" Type="Event" />
+    <EventConnections>
+      <Connection Source="$4.INITO" Destination="$2.ACK_FIRST">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$4.CNF" Destination="$E_ATUALIZA_ANIMACAO" dx1="150">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$4.CNF" Destination="$8.REQ">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$8.CNF" Destination="$6.REQ">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$6.CNF" Destination="$7.REQ">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$2.FIRST_INIT" Destination="$3.16083A9F7A13166F" dx1="68.08337" />
+      <Connection Source="$2.REDO_INIT" Destination="$3.16083A9F7A13166F" dx1="70" />
+      <Connection Source="$4.CNF" Destination="$3.771C9A21CCE0F24A">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$7.CNF" Destination="$3.771C9A21CCE0F24A">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$3.6167B6555C03ECD4" Destination="$4.INIT">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$E_ATUALIZA_BOIA_ACIMA" Destination="$12.REQ" />
+      <Connection Source="$12.CNF" Destination="$6.REQ" dx1="69.85425" />
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="$4.VALUE1" Destination="$8.IN1" dx1="41.625" />
+      <Connection Source="$8.OUT1" Destination="$6.IN2" dx1="683.7501" />
+      <Connection Source="$6.OUT" Destination="$7.stsFalhaGeral" dx1="70" />
+      <Connection Source="$4.VALUE1" Destination="$7.stsLigado">
+        <Points>
+          <Points>
+            <X>337.09375</X>
+            <Y>345</Y>
+          </Points>
+          <Points>
+            <X>359.59375</X>
+            <Y>345</Y>
+          </Points>
+          <Points>
+            <X>359.59375</X>
+            <Y>227.5</Y>
+          </Points>
+          <Points>
+            <X>1027.5</X>
+            <Y>227.5</Y>
+          </Points>
+          <Points>
+            <X>1027.5</X>
+            <Y>305</Y>
+          </Points>
+          <Points>
+            <X>1185</X>
+            <Y>305</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$4.VALUE1" Destination="$3.5078A13A6EFBE8E2" dx1="90" />
+      <Connection Source="$7.stsAnimacao" Destination="$3.80CA80CB29E05E2D" dx1="76.146" dx2="30" dy="-310" />
+      <Connection Source="$stsAnimacaoBoiaAcima" Destination="$12.IN1" />
+      <Connection Source="$12.EQ" Destination="$6.IN1" dx1="70" />
+      <Connection Source="$7.stsAnimacao" Destination="$stsAnimacao" />
+    </DataConnections>
+  </FBNetwork>
+</FBType>

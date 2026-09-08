@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="c27618aa-d096-4030-bd15-545259195f3b" Name="RxDone" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="7/16/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="C7D92FA891D97969" Name="NFH">
+        <With Var="NextFeedHorizonR1" />
+        <With Var="NextFeedHorizonR2" />
+        <With Var="NextFeedHorizonR3" />
+        <With Var="NextFeedHorizonR4" />
+        <With Var="NextFeedHorizonR5" />
+        <With Var="NextFeedHorizonR6" />
+        <With Var="PositionR1" />
+        <With Var="PositionR2" />
+        <With Var="PositionR3" />
+        <With Var="PositionR4" />
+        <With Var="PositionR5" />
+        <With Var="PositionR6" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="F66E605CFBE991BE" Name="O_DONE">
+        <With Var="oDoneNFH_R1" />
+        <With Var="oDoneNFH_R2" />
+        <With Var="oDoneNFH_R3" />
+        <With Var="oDoneNFH_R4" />
+        <With Var="oDoneNFH_R5" />
+        <With Var="oDoneNFH_R6" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="860731667DF4D873" Name="NextFeedHorizonR1" Type="REAL" />
+      <VarDeclaration ID="14E12A3D8BF091C1" Name="NextFeedHorizonR2" Type="REAL" />
+      <VarDeclaration ID="65C1CB388B57E6E2" Name="NextFeedHorizonR3" Type="REAL" />
+      <VarDeclaration ID="701DDBE1ED42FA98" Name="NextFeedHorizonR4" Type="REAL" />
+      <VarDeclaration ID="EF0FAC30F2F9F8D1" Name="NextFeedHorizonR5" Type="REAL" />
+      <VarDeclaration ID="16D724347BCF5F1C" Name="NextFeedHorizonR6" Type="REAL" />
+      <VarDeclaration ID="D7556D6059D49CA6" Name="PositionR1" Type="INT" />
+      <VarDeclaration ID="326938D5208F6438" Name="PositionR2" Type="INT" />
+      <VarDeclaration ID="3F16E00CE4743B15" Name="PositionR3" Type="INT" />
+      <VarDeclaration ID="EE8CD69E0821CD9B" Name="PositionR4" Type="INT" />
+      <VarDeclaration ID="F419CEC147F957E5" Name="PositionR5" Type="INT" />
+      <VarDeclaration ID="D6B3B13ABFD248A5" Name="PositionR6" Type="INT" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="C98FDEA92D397108" Name="oDoneNFH_R1" Type="BOOL" />
+      <VarDeclaration ID="2D4EC85CE11C4908" Name="oDoneNFH_R2" Type="BOOL" />
+      <VarDeclaration ID="1B935CA99D34F379" Name="oDoneNFH_R3" Type="BOOL" />
+      <VarDeclaration ID="97AF662E25430824" Name="oDoneNFH_R4" Type="BOOL" />
+      <VarDeclaration ID="2A3F8F868022774B" Name="oDoneNFH_R5" Type="BOOL" />
+      <VarDeclaration ID="BCD0027C2A299157" Name="oDoneNFH_R6" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="ff5cb38e-92a9-41c1-bb01-b716cd3464cd">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="REQ" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="552.9412" y="429.4117" />
+      <ECState Name="REQ" Comment="Normal execution" x="1285.647" y="940.9412">
+        <ECAction Algorithm="REQ" Output="O_DONE" />
+      </ECState>
+      <ECTransition Source="START" Destination="REQ" Condition="NFH&#xD;&#xA;" x="973.2817" y="622.4064">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="219.8338,133.8302,268.4351,167.7606" />
+      </ECTransition>
+      <ECTransition Source="REQ" Destination="START" Condition="1" x="912.9188" y="762.6254">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="254.1242,213.2593,205.5229,179.3289" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="REQ" Comment="Normally executed algorithm">
+      <ST><![CDATA[;
+oDoneNFH_R1 := 	PositionR1 > 0 AND NextFeedHorizonR1 <= 0;
+oDoneNFH_R2 := 	PositionR2 > 0 AND NextFeedHorizonR2 <= 0;
+oDoneNFH_R3 := 	PositionR3 > 0 AND NextFeedHorizonR3 <= 0;
+oDoneNFH_R4 := 	PositionR4 > 0 AND NextFeedHorizonR4 <= 0;
+oDoneNFH_R5 := 	PositionR5 > 0 AND NextFeedHorizonR5 <= 0;
+oDoneNFH_R6 := 	PositionR6 > 0 AND NextFeedHorizonR6 <= 0;		]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="4b1473d9-1786-4fc8-beb6-1551efbc141e" Name="AutoSamplar_Manager" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author="SESA713705" Date="9/26/2024" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="INIT" />
+      <Event Name="REQ_1M_CUBE_DONE">
+        <With Var="mCubeDone" />
+      </Event>
+      <Event Name="REQ_DELAY_TIME_DONE" />
+      <Event Name="REQ_PULSE_DELAY" />
+      <Event Name="REQ_INF_PUMP_ON">
+        <With Var="InfluentDrainPumpON" />
+      </Event>
+      <Event Name="REQ_FLOW_SP_IS_OK">
+        <With Var="FlowSp_IsOK" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="CNF_DELAY_TIME" />
+      <Event Name="CNF_DELAY_PULSE" />
+      <Event Name="CNF_CYCLE" />
+      <Event Name="CNF_PULSE">
+        <With Var="Pulse" />
+      </Event>
+      <Event Name="CNF_STATE">
+        <With Var="State" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="InfluentDrainPumpON" Type="BOOL" />
+      <VarDeclaration Name="FlowSp_IsOK" Type="BOOL" />
+      <VarDeclaration ID="32D95873A2868127" Name="mCubeDone" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="Pulse" Type="BOOL" />
+      <VarDeclaration Name="State" Type="INT" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="59f2eabe-f093-4085-b6c3-dfc8013189d9">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="AutoSamplarON,GeneratePulse,ResetPulse,AutoSamplarOFF,Wait" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="1388.941" y="493.4117" />
+      <ECState Name="STATE1" x="2488.889" y="904.4445">
+        <ECAction Algorithm="AutoSamplarON" Output="CNF_STATE" />
+      </ECState>
+      <ECState Name="STATE2" x="2496" y="1352.889">
+        <ECAction Algorithm="Wait" Output="CNF_DELAY_TIME" />
+        <ECAction Output="CNF_STATE" />
+      </ECState>
+      <ECState Name="STATE3" x="2498.667" y="1816.889">
+        <ECAction Algorithm="GeneratePulse" Output="CNF_PULSE" />
+        <ECAction Output="CNF_DELAY_PULSE" />
+        <ECAction Output="CNF_STATE" />
+      </ECState>
+      <ECState Name="STATE4" x="2485" y="2494.999">
+        <ECAction Algorithm="ResetPulse" Output="CNF_PULSE" />
+        <ECAction Output="CNF_CYCLE" />
+      </ECState>
+      <ECState Name="STATE5" x="600" y="1333.333">
+        <ECAction Algorithm="AutoSamplarOFF" Output="CNF_PULSE" />
+        <ECAction Output="CNF_STATE" />
+      </ECState>
+      <ECState Name="STATE6" x="2475.555" y="253.3333">
+        <ECAction Algorithm="AutoSamplarOFF" Output="CNF_PULSE" />
+        <ECAction Output="CNF_STATE" />
+      </ECState>
+      <ECTransition Source="START" Destination="STATE1" Condition="InfluentDrainPumpON = TRUE" x="1929.948" y="617.508">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="440.859,135.2571,518.9418,162.9042" />
+      </ECTransition>
+      <ECTransition Source="STATE1" Destination="STATE2" Condition="FlowSp_IsOK = TRUE" x="2492.278" y="1124.63">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="622.8172,266.4843,623.3005,295.1576" />
+      </ECTransition>
+      <ECTransition Source="STATE2" Destination="STATE3" Condition="REQ_DELAY_TIME_DONE" x="2497.075" y="1590.135">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="624.1844,382.986,624.3276,412.9557" />
+      </ECTransition>
+      <ECTransition Source="STATE3" Destination="STATE4" Condition="REQ_PULSE_DELAY AND InfluentDrainPumpON = TRUE" x="2712.05" y="2197.059">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="691.7103,528.9172,690.725,576.465" />
+      </ECTransition>
+      <ECTransition Source="STATE4" Destination="STATE3" Condition="REQ_1M_CUBE_DONE AND mCubeDone AND&#xD;&#xA;InfluentDrainPumpON = TRUE AND&#xD;&#xA;FlowSp_IsOK = TRUE" x="2096.335" y="2201.221">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="500.3813,577.9954,500.4695,530.1611" />
+      </ECTransition>
+      <ECTransition Source="STATE3" Destination="STATE5" Condition="InfluentDrainPumpON = FALSE OR FlowSp_IsOK = FALSE" x="1146.395" y="1830.76">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="322.0163,491.7912,194.4025,460.3717" />
+      </ECTransition>
+      <ECTransition Source="STATE4" Destination="STATE5" Condition="InfluentDrainPumpON = FALSE OR FlowSp_IsOK = FALSE" x="733.6984" y="2068.512">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="195.2829,572.1088,51.48849,484.9655" />
+      </ECTransition>
+      <ECTransition Source="STATE5" Destination="START" Condition="1" x="890.6674" y="899.4341">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="187.5719,254.3555,244.7856,193.0385" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="STATE6" Condition="INIT AND (InfluentDrainPumpON = FALSE OR FlowSp_IsOK = FALSE)" x="1778.254" y="259.8598">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="401.0472,65.96085,470.2343,50.4314" />
+      </ECTransition>
+      <ECTransition Source="STATE6" Destination="START" Condition="1" x="1976.192" y="404.9738">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="532.1884,94.83724,464.3447,109.838" />
+      </ECTransition>
+      <ECTransition Source="STATE1" Destination="STATE5" Condition="InfluentDrainPumpON = FALSE" x="1515.017" y="997.1549">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="444.5048,226.1483,310.8921,256.4862" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="AutoSamplarON">
+      <ST><![CDATA[;
+State := 1;]]></ST>
+    </Algorithm>
+    <Algorithm Name="GeneratePulse">
+      <ST><![CDATA[;
+Pulse := TRUE;
+State := 3;]]></ST>
+    </Algorithm>
+    <Algorithm Name="ResetPulse">
+      <ST><![CDATA[;
+Pulse := FALSE;]]></ST>
+    </Algorithm>
+    <Algorithm Name="AutoSamplarOFF">
+      <ST><![CDATA[;
+Pulse := FALSE;
+State := 0;]]></ST>
+    </Algorithm>
+    <Algorithm Name="Wait">
+      <ST><![CDATA[;
+State := 2;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

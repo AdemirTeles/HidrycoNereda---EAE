@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="3d1e884c-f8a4-45e9-b8d2-892fa73454a2" Name="MetreCubeTime_Calculator" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author="SESA713705" Date="9/26/2024" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="REQ_FLOW" Comment="Normal Execution Request">
+        <With Var="FlowPv" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="CNF_TIME">
+        <With Var="MetreCube_Time" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="FlowPv" Type="REAL" Comment="Input event qualifier" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="MetreCube_Time" Type="REAL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="7c3dd704-18bf-4a9d-86c9-ac0c790b356b">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="REQ" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="640.9412" y="425.4117" />
+      <ECState Name="REQ" Comment="Normal execution" x="1345.647" y="924.9412">
+        <ECAction Algorithm="REQ" Output="CNF_TIME" />
+      </ECState>
+      <ECTransition Source="START" Destination="REQ" Condition="REQ_FLOW" x="1047.889" y="612.6837">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="239.5528,131.9333,286.0091,164.8637" />
+      </ECTransition>
+      <ECTransition Source="REQ" Destination="START" Condition="1" x="906.8268" y="784.4827">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="245.8331,220.0346,199.3768,187.1042" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="REQ" Comment="Normally executed algorithm">
+      <ST><![CDATA[;
+// We have time = V / Q; with V = Volume et Q = Flow; x3600 to convert it from Hour to s
+IF FlowPv <> 0 AND FlowPv > 0.1 THEN
+	MetreCube_Time := (1/ FlowPv) * 3600;
+ELSE
+	MetreCube_Time := 0;
+END_IF;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

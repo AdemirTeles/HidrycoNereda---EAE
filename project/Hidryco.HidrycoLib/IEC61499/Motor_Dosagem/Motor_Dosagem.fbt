@@ -1,0 +1,558 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="7394941a-8475-46ca-bd0f-6c4df93e133b" Name="Motor_Dosagem" Format="2.0" Comment="Composite Function Block Type" Namespace="Hidryco.HidrycoLib">
+  <Attribute Name="HMI.Alias" Value="" />
+  <Attribute Name="Configuration.FB.IDCounter" Value="44" />
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="1/22/2026" Remarks="template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="REQ">
+        <With Var="stsBloqueioManual" />
+        <With Var="stsBloqueioAutomatico" />
+        <With Var="cmdLigarAutomatico" />
+        <With Var="stsPIDHabilitado" />
+        <With Var="stsSaidaAutomatico" />
+        <With Var="geradorConectado" />
+        <With Var="geradorHabilita" />
+        <With Var="stsGerador" />
+        <With Var="stsEmergencia" />
+      </Event>
+      <Event Name="E_RESET_FALHAS">
+        <With Var="cmdResetFalhas" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="CNF">
+        <With Var="stsDisponivelAutomatico" />
+        <With Var="stsAnimacao" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="5C85E7B3BE347ADB" Name="stsEmergencia" Type="BOOL" />
+      <VarDeclaration Name="stsBloqueioManual" Type="BOOL" />
+      <VarDeclaration Name="stsBloqueioAutomatico" Type="BOOL" />
+      <VarDeclaration Name="cmdLigarAutomatico" Type="BOOL" />
+      <VarDeclaration Name="stsPIDHabilitado" Type="BOOL" />
+      <VarDeclaration Name="stsSaidaAutomatico" Type="REAL" />
+      <VarDeclaration Name="cmdResetFalhas" Type="BOOL" />
+      <VarDeclaration ID="68B45B1D5CEBB8A8" Name="geradorConectado" Type="BOOL" />
+      <VarDeclaration ID="7854D75F2B71F31F" Name="geradorHabilita" Type="BOOL" />
+      <VarDeclaration ID="9A6DB33A2139FEFD" Name="stsGerador" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="stsDisponivelAutomatico" Type="BOOL" />
+      <VarDeclaration Name="stsAnimacao" Type="INT" />
+    </OutputVars>
+  </InterfaceList>
+  <FBNetwork>
+    <FB ID="2" Name="IThis" Type="Motor_Dosagem_HMI" x="2360" y="140" Namespace="Hidryco.HidrycoLib">
+      <Parameter Name="$2B9D6F39238E9EEF" Value="TRUE" />
+    </FB>
+    <FB ID="40" UID="28" Name="SYMLINKMULTIVARDST1" Type="SYMLINKMULTIVARDST_16501039F25307793" x="2100" y="6040" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=7;VALUE${I}:BOOL,BOOL,BOOL,BOOL,BOOL,REAL,BOOL" />
+      <Parameter Name="$QI" Value="TRUE" />
+      <Parameter Name="$NAME1" Value="'$${PATH}stsLocal'" />
+      <Parameter Name="$NAME2" Value="'$${PATH}stsRemoto'" />
+      <Parameter Name="$NAME3" Value="'$${PATH}stsLigado'" />
+      <Parameter Name="$NAME4" Value="'$${PATH}stsFalha'" />
+      <Parameter Name="$NAME5" Value="'$${PATH}stsFalhaComunicacao'" />
+      <Parameter Name="$NAME6" Value="'$${PATH}stsFluxoInstantaneo'" />
+      <Parameter Name="$NAME7" Value="'$${PATH}stsProtecaoTermica'" />
+    </FB>
+    <FB ID="BCAFC5E663672EAC" UID="33" Name="SYMLINKMULTIVARSRC1" Type="SYMLINKMULTIVARSRC_804524063F215924" x="3380" y="6200" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=3;VALUE${I}:BOOL,REAL,BOOL" />
+      <Parameter Name="$QI" Value="TRUE" />
+      <Parameter Name="$NAME1" Value="'$${PATH}cmdAcionamento'" />
+      <Parameter Name="$NAME2" Value="'$${PATH}stpSaida'" />
+      <Parameter Name="$NAME3" Value="'$${PATH}cmdReset'" />
+    </FB>
+    <FB ID="38" Name="plcStart1" Type="plcStart" x="580" y="180" Namespace="SE.App2Base">
+      <Parameter Name="$Prio" Value="10" />
+    </FB>
+    <Input Name="stsBloqueioManual" x="200" y="1172" Type="Data" />
+    <Input Name="stsBloqueioAutomatico" x="200" y="1232" Type="Data" />
+    <Input Name="cmdLigarAutomatico" x="200" y="1292" Type="Data" />
+    <Input Name="stsSaidaAutomatico" x="200" y="1352" Type="Data" />
+    <Input Name="stsPIDHabilitado" x="200" y="1112" Type="Data" />
+    <Input Name="E_RESET_FALHAS" x="200" y="1052" Type="Event" />
+    <Input Name="cmdResetFalhas" x="200" y="1412" Type="Data" />
+    <Input Name="REQ" x="200" y="992" Type="Event" />
+    <Input ID="68B45B1D5CEBB8A8" Name="geradorConectado" x="200" y="1472" Type="Data" />
+    <Input ID="7854D75F2B71F31F" Name="geradorHabilita" x="200" y="1532" Type="Data" />
+    <Input ID="9A6DB33A2139FEFD" Name="stsGerador" x="200" y="1592" Type="Data" />
+    <Input ID="5C85E7B3BE347ADB" Name="stsEmergencia" x="200" y="1652" Type="Data" />
+    <Frame Name="FRAME13" X="120" Y="120" Width="1560" Height="600">
+      <Parameter Name="BackgroundColor" Value="AliceBlue" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 9.75pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="0 - INITIALIZATION" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME14" X="120" Y="760" Width="1560" Height="1060">
+      <Parameter Name="BackgroundColor" Value="Cornsilk" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 9.75pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="1 - FUNCTIONAL INPUT INTERFACE" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME3" X="1720" Y="120" Width="2380" Height="1480">
+      <Parameter Name="BackgroundColor" Value="PeachPuff" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 9.75pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="6 - OT-IT INTERFACE" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME15" X="4840" Y="739.9999" Width="1780" Height="639.9999">
+      <Parameter Name="BackgroundColor" Value="Cornsilk" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 9.75pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="2 - FUNCTIONAL OUTPUT INTERFACE" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME16" X="1700" Y="5880" Width="2380" Height="1060">
+      <Parameter Name="BackgroundColor" Value="PeachPuff" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 9.75pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="3 - FIELD INTERFACE" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME17" X="4840" Y="1440" Width="1780" Height="2640">
+      <Parameter Name="BackgroundColor" Value="Honeydew" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 9.75pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="4 - CHILDREN" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME18" X="1720" Y="1660" Width="3000" Height="4200">
+      <Parameter Name="BackgroundColor" Value="WhiteSmoke" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 9.75pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="5 - LOGICS" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME10" X="1760" Y="3060" Width="2280" Height="1080">
+      <Parameter Name="BackgroundColor" Value="DarkGray" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 9.75pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="5.B - OPERATION MODE MANAGEMENT" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME11" X="1740" Y="4220" Width="3380" Height="1620">
+      <Parameter Name="BackgroundColor" Value="DarkGray" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 9.75pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="5.C - INTERLOCKS MANAGEMENT" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME12" X="1760" Y="1740" Width="2300" Height="1280">
+      <Parameter Name="BackgroundColor" Value="DarkGray" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 9.75pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="5.A - FUNCTIONAL BEHAVIORS" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="Comentario" X="440" Y="6080" Width="964.7551" Height="600" IsComment="true">
+      <Parameter Name="BackgroundColor" Value="LemonChiffon" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 10pt" />
+      <Parameter Name="TextAlignment" Value="TopCenter" />
+      <Parameter Name="MoveStyle" Value="None" />
+      <Parameter Name="Text" Value="Verificar se precisa gravar a unidade" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Output Name="CNF" x="5360" y="912" Type="Event" />
+    <Output Name="stsAnimacao" x="5360" y="1172" Type="Data" />
+    <Output Name="stsDisponivelAutomatico" x="5360" y="1232" Type="Data" />
+    <EventConnections>
+      <Connection Source="$38.FIRST_INIT" Destination="$2.77A2F60CB33ACCE3" dx1="50" />
+      <Connection Source="$38.REDO_INIT" Destination="$2.77A2F60CB33ACCE3" dx1="70" />
+      <Connection Source="$40.CNF" Destination="$2.3E1D0BBAE7B97111">
+        <Points>
+          <Points>
+            <X>662.09375</X>
+            <Y>1535</Y>
+          </Points>
+          <Points>
+            <X>767.5</X>
+            <Y>1535</Y>
+          </Points>
+          <Points>
+            <X>767.5</X>
+            <Y>1067.5</Y>
+          </Points>
+          <Points>
+            <X>717.5</X>
+            <Y>1067.5</Y>
+          </Points>
+          <Points>
+            <X>717.5</X>
+            <Y>767.5</Y>
+          </Points>
+          <Points>
+            <X>747.5</X>
+            <Y>767.5</Y>
+          </Points>
+          <Points>
+            <X>747.5</X>
+            <Y>442.5</Y>
+          </Points>
+          <Points>
+            <X>517.5</X>
+            <Y>442.5</Y>
+          </Points>
+          <Points>
+            <X>517.5</X>
+            <Y>60</Y>
+          </Points>
+          <Points>
+            <X>585</X>
+            <Y>60</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$2.636E0523AE14AA92" Destination="$2.3E1D0BBAE7B97111" dx1="133.0835" dx2="270" dy="-350" />
+      <Connection Source="$2.E95E96A346CBF4D4" Destination="$2.3E1D0BBAE7B97111" dx1="113.0835" dx2="270" dy="-290" />
+      <Connection Source="$2.8988C31EE2188F23" Destination="$2.885DC47239123EB9" dx1="260" dx2="90" dy="-110" />
+      <Connection Source="$2.8988C31EE2188F23" Destination="$40.INIT" dx1="293.0835" dx2="50" dy="5410" />
+      <Connection Source="$40.INITO" Destination="$BCAFC5E663672EAC.INIT" dx1="201.625" />
+      <Connection Source="$BCAFC5E663672EAC.INITO" Destination="$38.ACK_FIRST">
+        <Points>
+          <Points>
+            <X>983.28125</X>
+            <Y>1560</Y>
+          </Points>
+          <Points>
+            <X>993.28125</X>
+            <Y>1560</Y>
+          </Points>
+          <Points>
+            <X>993.28125</X>
+            <Y>1282.5</Y>
+          </Points>
+          <Points>
+            <X>447.5</X>
+            <Y>1282.5</Y>
+          </Points>
+          <Points>
+            <X>447.5</X>
+            <Y>257.5</Y>
+          </Points>
+          <Points>
+            <X>127.5</X>
+            <Y>257.5</Y>
+          </Points>
+          <Points>
+            <X>127.5</X>
+            <Y>55</Y>
+          </Points>
+          <Points>
+            <X>140</X>
+            <Y>55</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$E_RESET_FALHAS" Destination="$BCAFC5E663672EAC.REQ">
+        <Points>
+          <Points>
+            <X>187.942688</X>
+            <Y>270</Y>
+          </Points>
+          <Points>
+            <X>232.5</X>
+            <Y>270</Y>
+          </Points>
+          <Points>
+            <X>232.5</X>
+            <Y>1397.5</Y>
+          </Points>
+          <Points>
+            <X>672.5</X>
+            <Y>1397.5</Y>
+          </Points>
+          <Points>
+            <X>672.5</X>
+            <Y>1575</Y>
+          </Points>
+          <Points>
+            <X>840</X>
+            <Y>1575</Y>
+          </Points>
+        </Points>
+      </Connection>
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="$40.VALUE2" Destination="$2.841BF87C17BC0349">
+        <Points>
+          <Points>
+            <X>662.09375</X>
+            <Y>1645</Y>
+          </Points>
+          <Points>
+            <X>767.5</X>
+            <Y>1645</Y>
+          </Points>
+          <Points>
+            <X>767.5</X>
+            <Y>1067.5</Y>
+          </Points>
+          <Points>
+            <X>717.5</X>
+            <Y>1067.5</Y>
+          </Points>
+          <Points>
+            <X>717.5</X>
+            <Y>767.5</Y>
+          </Points>
+          <Points>
+            <X>747.5</X>
+            <Y>767.5</Y>
+          </Points>
+          <Points>
+            <X>747.5</X>
+            <Y>442.5</Y>
+          </Points>
+          <Points>
+            <X>532.5</X>
+            <Y>442.5</Y>
+          </Points>
+          <Points>
+            <X>532.5</X>
+            <Y>200</Y>
+          </Points>
+          <Points>
+            <X>585</X>
+            <Y>200</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$40.VALUE5" Destination="$2.B8C930269FBFC965">
+        <Points>
+          <Points>
+            <X>662.09375</X>
+            <Y>1690</Y>
+          </Points>
+          <Points>
+            <X>767.5</X>
+            <Y>1690</Y>
+          </Points>
+          <Points>
+            <X>767.5</X>
+            <Y>1067.5</Y>
+          </Points>
+          <Points>
+            <X>717.5</X>
+            <Y>1067.5</Y>
+          </Points>
+          <Points>
+            <X>717.5</X>
+            <Y>767.5</Y>
+          </Points>
+          <Points>
+            <X>747.5</X>
+            <Y>767.5</Y>
+          </Points>
+          <Points>
+            <X>747.5</X>
+            <Y>442.5</Y>
+          </Points>
+          <Points>
+            <X>537.5</X>
+            <Y>442.5</Y>
+          </Points>
+          <Points>
+            <X>537.5</X>
+            <Y>215</Y>
+          </Points>
+          <Points>
+            <X>585</X>
+            <Y>215</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$40.VALUE6" Destination="$2.E981264F18CB1FBA">
+        <Points>
+          <Points>
+            <X>662.09375</X>
+            <Y>1705</Y>
+          </Points>
+          <Points>
+            <X>767.5</X>
+            <Y>1705</Y>
+          </Points>
+          <Points>
+            <X>767.5</X>
+            <Y>1067.5</Y>
+          </Points>
+          <Points>
+            <X>717.5</X>
+            <Y>1067.5</Y>
+          </Points>
+          <Points>
+            <X>717.5</X>
+            <Y>767.5</Y>
+          </Points>
+          <Points>
+            <X>747.5</X>
+            <Y>767.5</Y>
+          </Points>
+          <Points>
+            <X>747.5</X>
+            <Y>442.5</Y>
+          </Points>
+          <Points>
+            <X>552.5</X>
+            <Y>442.5</Y>
+          </Points>
+          <Points>
+            <X>552.5</X>
+            <Y>275</Y>
+          </Points>
+          <Points>
+            <X>585</X>
+            <Y>275</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$2.3B54B4F232F61934" Destination="$2.F2C3D7B089DF9B40" dx1="120" dx2="230" dy="870" />
+      <Connection Source="$2.89F4F7CACE4761CD" Destination="$2.68C5779237D4A698" dx1="100" dx2="250" dy="810" />
+      <Connection Source="$40.VALUE7" Destination="$2.9599BF1F5A2F9D9B">
+        <Points>
+          <Points>
+            <X>662.09375</X>
+            <Y>1720</Y>
+          </Points>
+          <Points>
+            <X>767.5</X>
+            <Y>1720</Y>
+          </Points>
+          <Points>
+            <X>767.5</X>
+            <Y>1067.5</Y>
+          </Points>
+          <Points>
+            <X>717.5</X>
+            <Y>1067.5</Y>
+          </Points>
+          <Points>
+            <X>717.5</X>
+            <Y>767.5</Y>
+          </Points>
+          <Points>
+            <X>747.5</X>
+            <Y>767.5</Y>
+          </Points>
+          <Points>
+            <X>747.5</X>
+            <Y>442.5</Y>
+          </Points>
+          <Points>
+            <X>567.5</X>
+            <Y>442.5</Y>
+          </Points>
+          <Points>
+            <X>567.5</X>
+            <Y>365</Y>
+          </Points>
+          <Points>
+            <X>585</X>
+            <Y>365</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$40.VALUE3" Destination="$2.8119E32988BA6026">
+        <Points>
+          <Points>
+            <X>662.09375</X>
+            <Y>1660</Y>
+          </Points>
+          <Points>
+            <X>767.5</X>
+            <Y>1660</Y>
+          </Points>
+          <Points>
+            <X>767.5</X>
+            <Y>1067.5</Y>
+          </Points>
+          <Points>
+            <X>717.5</X>
+            <Y>1067.5</Y>
+          </Points>
+          <Points>
+            <X>717.5</X>
+            <Y>767.5</Y>
+          </Points>
+          <Points>
+            <X>747.5</X>
+            <Y>767.5</Y>
+          </Points>
+          <Points>
+            <X>747.5</X>
+            <Y>442.5</Y>
+          </Points>
+          <Points>
+            <X>577.5</X>
+            <Y>442.5</Y>
+          </Points>
+          <Points>
+            <X>577.5</X>
+            <Y>395</Y>
+          </Points>
+          <Points>
+            <X>585</X>
+            <Y>395</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$cmdResetFalhas" Destination="$BCAFC5E663672EAC.VALUE3">
+        <Points>
+          <Points>
+            <X>207.53125</X>
+            <Y>360</Y>
+          </Points>
+          <Points>
+            <X>217.53125</X>
+            <Y>360</Y>
+          </Points>
+          <Points>
+            <X>217.53125</X>
+            <Y>1397.5</Y>
+          </Points>
+          <Points>
+            <X>672.5</X>
+            <Y>1397.5</Y>
+          </Points>
+          <Points>
+            <X>672.5</X>
+            <Y>1730</Y>
+          </Points>
+          <Points>
+            <X>840</X>
+            <Y>1730</Y>
+          </Points>
+        </Points>
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+    </DataConnections>
+  </FBNetwork>
+</FBType>

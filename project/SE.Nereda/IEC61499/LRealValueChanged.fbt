@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="5cde62ce-1e26-4eaf-b766-ed51e92e9a14" Name="LRealValueChanged" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="6/25/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="77F8F9CFF707DAFF" Name="REQ" Comment="Normal Execution Request">
+        <With Var="Input" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="350834820611931F" Name="CNF" Comment="Execution Confirmation">
+        <With Var="Output" />
+      </Event>
+      <Event ID="93AE3729A9342678" Name="CHD">
+        <With Var="Output" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="25B5287A5784F3EC" Name="Input" Type="LREAL" Comment="Input event qualifier" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="AA81B8787A42C5C8" Name="Output" Type="LREAL" Comment="Output event qualifier" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="REQ" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="1024.941" y="557.4117" />
+      <ECState Name="CNF" x="2128" y="540">
+        <ECAction Algorithm="REQ" Output="CNF" />
+      </ECState>
+      <ECState Name="CHD" x="1040" y="1262.857">
+        <ECAction Algorithm="REQ" Output="CHD" />
+        <ECAction Output="CNF" />
+      </ECState>
+      <ECTransition Source="CHD" Destination="START" Condition="1" x="875.0682" y="924.7883">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="209.5915,257.4633,208.5222,207.3732" />
+      </ECTransition>
+      <ECTransition Source="CNF" Destination="START" Condition="1" x="1593.956" y="630.3821">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="435.123,161.5316,362.0525,162.685" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="CHD" Condition="REQ AND Input &lt;&gt; Output" x="1146.012" y="900.0025">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="292.9888,199.1113,294.0409,249.2013" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="CNF" Condition="REQ AND Input = Output" x="1592.22" y="473.7983">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="361.4849,114.9538,434.5332,113.7219" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="REQ" Comment="Normally executed algorithm">
+      <ST><![CDATA[;
+Output := Input;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

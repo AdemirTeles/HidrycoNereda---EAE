@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="cbbeae50-1ccb-4e76-8e26-9e883c7f6b3f" Name="ResetStopCounter" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="7/16/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="7085BAA9D9F1368D" Name="FB_DONE" Comment="Normal Execution Request">
+        <With Var="Done" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="79BA38851A694631" Name="STOP" />
+      <Event ID="CDA9C3B713C09BDA" Name="RESET" />
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="1FF79F7A5E922CD2" Name="Done" Type="BOOL" Comment="Input event qualifier" />
+    </InputVars>
+  </InterfaceList>
+  <BasicFB ID="b536a016-3293-4f6c-aaf2-6d4acbf762cf">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="REQ" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="552.9412" y="429.4117" />
+      <ECState Name="STOP" Comment="Normal execution" x="1209.647" y="876.9412">
+        <ECAction Algorithm="REQ" Output="STOP" />
+      </ECState>
+      <ECState Name="RESET" x="1220" y="1320">
+        <ECAction Output="RESET" />
+      </ECState>
+      <ECTransition Source="START" Destination="STOP" Condition="FB_DONE AND Done" x="934.7822" y="589.1914">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="213.4204,128.3366,255.3838,156.9337" />
+      </ECTransition>
+      <ECTransition Source="STOP" Destination="RESET" Condition="1" x="1214.926" y="1092.382">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="303.4024,258.476,304.0628,286.7005" />
+      </ECTransition>
+      <ECTransition Source="RESET" Destination="START" Condition="1" x="885.5018" y="954.0181">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="247.0968,277.9059,197.7859,212.3219" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="REQ" Comment="Normally executed algorithm">
+      <ST><![CDATA[;
+]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

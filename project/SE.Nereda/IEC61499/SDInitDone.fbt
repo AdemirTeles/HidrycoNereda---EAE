@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="a3c234c0-1427-418d-b1cd-aafbf5657468" Name="SDInitDone" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="7/30/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="B4ABE90B67562793" Name="INIT_RX" Comment="Initialization Request">
+        <With Var="InitRx_ToSD" />
+        <With Var="InitRx_ToW_S2" />
+        <With Var="EmergencyON" />
+      </Event>
+      <Event ID="08F744362D65AFEF" Name="EMERGENCY_ON">
+        <With Var="EmergencyON" />
+      </Event>
+      <Event ID="161A69C360740A5D" Name="FB_R_STATE">
+        <With Var="CurrState_R1" />
+        <With Var="CurrState_R2" />
+        <With Var="CurrState_R3" />
+        <With Var="CurrState_R4" />
+        <With Var="CurrState_R5" />
+        <With Var="CurrState_R6" />
+        <With Var="SDReadyR1" />
+        <With Var="SDReadyR2" />
+        <With Var="SDReadyR3" />
+        <With Var="SDReadyR4" />
+        <With Var="SDReadyR5" />
+        <With Var="SDReadyR6" />
+      </Event>
+      <Event ID="D6BB3A31A896D022" Name="WAIT_DONE" />
+      <Event ID="C1672E927894D208" Name="DELAY_DONE">
+        <With Var="DelayDone" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="349B3D6587A5C960" Name="CNF_SD_DONE" Comment="Execution Confirmation">
+        <With Var="InitGoToSD_ToR1" />
+        <With Var="InitGoToSD_ToR2" />
+        <With Var="InitGoToSD_ToR3" />
+        <With Var="InitGoToSD_ToR4" />
+        <With Var="InitGoToSD_ToR5" />
+        <With Var="InitGoToSD_ToR6" />
+      </Event>
+      <Event ID="EE5D157431DCAF03" Name="WAIT" />
+      <Event ID="61969B4370714317" Name="START_DELAY" />
+      <Event ID="965A154310F12DA0" Name="STOP_DELAY" />
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="A4F615B7B93BC654" Name="InitRx_ToSD" Type="INT" Comment="Input event qualifier" />
+      <VarDeclaration ID="836EEC408BC0CBE9" Name="InitRx_ToW_S2" Type="INT" />
+      <VarDeclaration ID="E8F44C2903DAE817" Name="EmergencyON" Type="BOOL" />
+      <VarDeclaration ID="AA9C2322755234D4" Name="CurrState_R1" Type="INT" />
+      <VarDeclaration ID="3AAB6E0EA8D414C3" Name="CurrState_R2" Type="INT" />
+      <VarDeclaration ID="142729A22C77C117" Name="CurrState_R3" Type="INT" />
+      <VarDeclaration ID="AFD64E411479B55C" Name="CurrState_R4" Type="INT" />
+      <VarDeclaration ID="37E13E80A15F0DC1" Name="CurrState_R5" Type="INT" />
+      <VarDeclaration ID="7D37330759993BBA" Name="CurrState_R6" Type="INT" />
+      <VarDeclaration ID="D2A6AD247A4FAA4E" Name="SDReadyR1" Type="BOOL" />
+      <VarDeclaration ID="F643778FAE08D711" Name="SDReadyR2" Type="BOOL" />
+      <VarDeclaration ID="846CE7FC989F43EC" Name="SDReadyR3" Type="BOOL" />
+      <VarDeclaration ID="9BB0B293AF87503A" Name="SDReadyR4" Type="BOOL" />
+      <VarDeclaration ID="46B4EB9EBD3AAF12" Name="SDReadyR5" Type="BOOL" />
+      <VarDeclaration ID="7A6A945A02239988" Name="SDReadyR6" Type="BOOL" />
+      <VarDeclaration ID="8F677304EBF56E28" Name="DelayDone" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="234E3C02BCC1EECC" Name="InitGoToSD_ToR1" Type="BOOL" Comment="Output event qualifier" />
+      <VarDeclaration ID="DDCC6CFA75DFB7EF" Name="InitGoToSD_ToR2" Type="BOOL" />
+      <VarDeclaration ID="17646700D696E2B5" Name="InitGoToSD_ToR3" Type="BOOL" />
+      <VarDeclaration ID="4821ED2B62A9F30E" Name="InitGoToSD_ToR4" Type="BOOL" />
+      <VarDeclaration ID="F70FEC38519C4AAA" Name="InitGoToSD_ToR5" Type="BOOL" />
+      <VarDeclaration ID="566AA45BA43174B4" Name="InitGoToSD_ToR6" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="e42d5694-10c5-4070-a248-efc7a10289f7">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="REQ,EmerOFF" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="1931.941" y="630.4117" />
+      <ECState Name="REQ" x="1932" y="1632">
+        <ECAction Algorithm="REQ" Output="CNF_SD_DONE" />
+        <ECAction Output="WAIT" />
+        <ECAction Output="STOP_DELAY" />
+      </ECState>
+      <ECState Name="OFF" x="1936" y="2157.714">
+        <ECAction Algorithm="EmerOFF" Output="CNF_SD_DONE" />
+      </ECState>
+      <ECState Name="WAIT" x="1928" y="1160">
+        <ECAction Output="START_DELAY" />
+      </ECState>
+      <ECTransition Source="START" Destination="WAIT" Condition="FB_R_STATE AND &#xD;&#xA;((InitRx_ToSD = 1 AND CurrState_R1 &gt;= 4) OR&#xD;&#xA;(InitRx_ToSD = 2 AND CurrState_R2 &gt;= 4) OR&#xD;&#xA;(InitRx_ToSD = 3 AND CurrState_R3 &gt;= 4) OR&#xD;&#xA;(InitRx_ToSD = 4 AND CurrState_R4 &gt;= 4) OR&#xD;&#xA;(InitRx_ToSD = 5 AND CurrState_R5 &gt;= 4) OR&#xD;&#xA;(InitRx_ToSD = 6 AND CurrState_R6 &gt;= 4))" x="1931.897" y="876.4532">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="483.216,199.8329,482.9543,235.2683" />
+      </ECTransition>
+      <ECTransition Source="REQ" Destination="OFF" Condition="WAIT_DONE" x="1933.337" y="1874.539">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="483.1644,449.3852,483.4222,484.4977" />
+      </ECTransition>
+      <ECTransition Source="OFF" Destination="START" Condition="1" x="1415.9" y="1422.988">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="316.4243,417.2098,316.2662,299.1049" />
+      </ECTransition>
+      <ECTransition Source="WAIT" Destination="REQ" Condition="DelayDone AND SDReadyR1 AND SDReadyR2 AND SDReadyR3&#xD;&#xA;AND SDReadyR4 AND SDReadyR5 AND SDReadyR6" x="1928.614" y="1391.365">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="481.9487,332.1368,482.2084,362.773" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="REQ" Comment="Normally executed algorithm">
+      <ST><![CDATA[;
+IF InitRx_ToW_S2 = 1 THEN
+	InitGoToSD_ToR1 := TRUE;
+	
+ELSIF InitRx_ToW_S2 = 2 THEN
+	InitGoToSD_ToR2 := TRUE;
+	
+ELSIF InitRx_ToW_S2 = 3 THEN
+	InitGoToSD_ToR3 := TRUE;
+	
+ELSIF InitRx_ToW_S2 = 4 THEN
+	InitGoToSD_ToR4 := TRUE;
+	
+ELSIF InitRx_ToW_S2 = 5 THEN
+	InitGoToSD_ToR5 := TRUE;
+	
+ELSIF InitRx_ToW_S2 = 6 THEN
+	InitGoToSD_ToR6 := TRUE;
+END_IF;]]></ST>
+    </Algorithm>
+    <Algorithm ID="bd8335c6-2c17-4f3c-a0d8-ad72fb384f4b" Name="EmerOFF">
+      <ST><![CDATA[;
+InitGoToSD_ToR1 := FALSE;
+InitGoToSD_ToR2 := FALSE;
+InitGoToSD_ToR3 := FALSE;
+InitGoToSD_ToR4 := FALSE;
+InitGoToSD_ToR5 := FALSE;
+InitGoToSD_ToR6 := FALSE;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

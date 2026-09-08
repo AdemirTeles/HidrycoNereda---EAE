@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="61592f8d-cbbc-49e7-bb58-d1ac542acce1" Name="CmdDecode" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="6/4/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="A84FFA5C79DEC05E" Name="REQ" Comment="Normal Execution Request">
+        <With Var="QI" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="7DBA80A4DCA36C5D" Name="CNF" Comment="Execution Confirmation">
+        <With Var="Active1" />
+        <With Var="Active2" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="AB3CA6CBC1A8076E" Name="QI" Type="INT" Comment="Input event qualifier" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="3DD5E33A07331CE4" Name="Active1" Type="BOOL" Comment="Output event qualifier" />
+      <VarDeclaration ID="098895859CE66202" Name="Active2" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="REQ" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="552.9412" y="429.4117" />
+      <ECState Name="REQ" Comment="Normal execution" x="1209.647" y="988.9412">
+        <ECAction Algorithm="REQ" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="REQ" Condition="REQ" x="941.3973" y="652.088">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="214.2781,139.2995,258.7961,177.2299" />
+      </ECTransition>
+      <ECTransition Source="REQ" Destination="START" Condition="1" x="873.9573" y="785.2838">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="242.5825,221.2593,198.0645,183.3289" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="REQ" Comment="Normally executed algorithm">
+      <ST><![CDATA[;
+IF QI = 1 THEN
+	Active1 := TRUE;
+	Active2 := FALSE;
+ELSIF QI = 2 THEN
+	Active1 := FALSE;
+	Active2 := TRUE;
+END_IF;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

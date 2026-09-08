@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="74c9ca19-8859-495a-8695-8a51bb2b49fa" Name="SpeedSimulation" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="6/12/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="B4F607717E62C202" Name="REQ" Comment="Normal Execution Request">
+        <With Var="Sp" />
+        <With Var="Start" />
+      </Event>
+      <Event ID="9BA0ABB9782C6500" Name="FB_DELAY" />
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="D4149FF006C908B7" Name="CNF" Comment="Execution Confirmation">
+        <With Var="Pv" />
+      </Event>
+      <Event ID="B4C08BCD93420821" Name="CNF_DELAY" />
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="7CDD018E02135ED2" Name="Sp" Type="REAL" Comment="Input event qualifier" />
+      <VarDeclaration ID="E8CC4D42D4C588C6" Name="Start" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="CF3EC6D6EF16E4DF" Name="Pv" Type="REAL" Comment="Output event qualifier" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="Up,Down,Finish" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="1808.941" y="513.4117" />
+      <ECState Name="GoUP" x="1020" y="1140">
+        <ECAction Algorithm="Up" Output="CNF" />
+        <ECAction Output="CNF_DELAY" />
+      </ECState>
+      <ECState Name="GoDOWN" x="2492" y="1132">
+        <ECAction Algorithm="Down" Output="CNF" />
+        <ECAction Output="CNF_DELAY" />
+      </ECState>
+      <ECState Name="Finish" x="1820" y="1680">
+        <ECAction Algorithm="Finish" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="GoUP" Condition="Start AND Sp &gt; Pv" x="1414.477" y="806.9588">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="381.5854,178.3354,326.8528,221.8528" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="GoDOWN" Condition="(NOT Start AND Pv &gt; 0) OR (Start AND Sp &lt; Pv)" x="2118.974" y="791.609">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="503.4177,173.8849,550.6779,216.7368" />
+      </ECTransition>
+      <ECTransition Source="GoDOWN" Destination="GoDOWN" Condition="FB_DELAY AND Sp &lt; Pv" x="2491.997" y="1314.086" />
+      <ECTransition Source="GoUP" Destination="GoUP" Condition="FB_DELAY AND Sp &gt; Pv" x="1019.997" y="1322.086" />
+      <ECTransition Source="GoDOWN" Destination="Finish" Condition="Sp &gt;= Pv OR Pv = 0" x="2171.611" y="1392.207">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="566.906,328.4176,521.571,365.3872" />
+      </ECTransition>
+      <ECTransition Source="GoUP" Destination="Finish" Condition="Sp &lt;= Pv OR NOT Start" x="1419.608" y="1401.376">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="327.6611,331.4745,381.4068,367.7765" />
+      </ECTransition>
+      <ECTransition Source="Finish" Destination="START" Condition="1" x="1812.887" y="1021.437">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="453.522,293.3463,452.6831,204.8275" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="Up">
+      <ST><![CDATA[;
+Pv := Pv + 1;]]></ST>
+    </Algorithm>
+    <Algorithm Name="Down">
+      <ST><![CDATA[;
+Pv := Pv - 1;]]></ST>
+    </Algorithm>
+    <Algorithm Name="Finish">
+      <ST><![CDATA[;
+IF Pv < 0 THEN
+	Pv := 0;
+ELSIF Start THEN
+	Pv := Sp;
+END_IF;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

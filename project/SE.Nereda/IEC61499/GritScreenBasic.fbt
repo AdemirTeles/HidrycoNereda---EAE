@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="d09dbd11-fd9a-4ea0-aec7-0fa0abb80ea1" Name="GritScreenBasic" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="6/16/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="78F835CEE28AEB6F" Name="FB_FEED_PUMP">
+        <With Var="FbFeedPumpRunning" />
+      </Event>
+      <Event ID="C98E92D019C137AD" Name="FB_HATCH">
+        <With Var="HatchSensor" />
+      </Event>
+      <Event ID="238D1653B4B86A23" Name="FB_SAFETY">
+        <With Var="SafetySensor" />
+      </Event>
+      <Event ID="CB782D8CFC61A887" Name="RUN_HOLD_TIME">
+        <With Var="RunHoldTimeDone" />
+      </Event>
+      <Event ID="17292A3319B9B893" Name="REQ_START_GS">
+        <With Var="ReqStartGritScreen" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="246A1F6CAA1F8088" Name="CNF_CMD_GS">
+        <With Var="CmdGS" />
+      </Event>
+      <Event ID="6912D24CC29C1597" Name="CNF_START_H_T">
+        <With Var="RunHoldT" />
+      </Event>
+      <Event ID="6D1EA6DA3C78952A" Name="CNF_STOP_H_T">
+        <With Var="RunHoldT" />
+      </Event>
+      <Event ID="5D77A675C82F5E90" Name="GRAPH">
+        <With Var="Grafcet" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="5A95E52E4C2C6E8F" Name="FbFeedPumpRunning" Type="BOOL" />
+      <VarDeclaration ID="BDD30397DC140BB5" Name="HatchSensor" Type="BOOL" />
+      <VarDeclaration ID="36F6151BE7454470" Name="SafetySensor" Type="BOOL" />
+      <VarDeclaration ID="4DB8B713381E336F" Name="RunHoldTimeDone" Type="BOOL" />
+      <VarDeclaration ID="390F6C196042D9F1" Name="ReqStartGritScreen" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="7BD0CF4C49B6AF03" Name="CmdGS" Type="BOOL" />
+      <VarDeclaration ID="5D66B7CF1BCD2563" Name="Grafcet" Type="INT" />
+      <VarDeclaration ID="7C7F962FEDB00518" Name="RunHoldT" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="07158f20-b114-4383-831c-0a03fb798525">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="StartGS,HoldTime,StopGS" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="1696.941" y="402.4117" />
+      <ECState Name="START_GS" x="1700.5" y="962.5">
+        <ECAction Algorithm="StartGS" Output="CNF_CMD_GS" />
+        <ECAction Output="CNF_STOP_H_T" />
+        <ECAction Output="GRAPH" />
+      </ECState>
+      <ECState Name="STOP_GS" x="1708.571" y="2314.929">
+        <ECAction Algorithm="StopGS" Output="CNF_CMD_GS" />
+        <ECAction Output="GRAPH" />
+      </ECState>
+      <ECState Name="START_HOLD_T" x="2353.929" y="1749.571">
+        <ECAction Algorithm="HoldTime" Output="CNF_START_H_T" />
+        <ECAction Output="GRAPH" />
+      </ECState>
+      <ECTransition Source="START" Destination="START_GS" Condition="FB_FEED_PUMP AND FbFeedPumpRunning OR REQ_START_GS AND ReqStartGritScreen AND&#xD;&#xA;NOT SafetySensor AND HatchSensor" x="1700.218" y="679.4794">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="425.0188,150.6333,425.2601,188.6103" />
+      </ECTransition>
+      <ECTransition Source="START_GS" Destination="START_HOLD_T" Condition="NOT FbFeedPumpRunning AND NOT ReqStartGritScreen" x="2010" y="1328.219">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="477.2882,301.2584,524.6096,358.2148" />
+      </ECTransition>
+      <ECTransition Source="START_HOLD_T" Destination="STOP_GS" Condition="RunHoldTimeDone" x="2046.962" y="2023.685">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="534.8212,485.9995,490.9691,524.4156" />
+      </ECTransition>
+      <ECTransition Source="START_GS" Destination="STOP_GS" Condition="SafetySensor OR NOT HatchSensor" x="1704.272" y="1627.933">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="425.738,354.0818,426.3592,458.0878" />
+      </ECTransition>
+      <ECTransition Source="STOP_GS" Destination="START_GS" Condition="NOT SafetySensor AND HatchSensor AND (FbFeedPumpRunning OR ReqStartGritScreen)" x="1255.805" y="1646.347">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="282.3983,464.2271,281.4376,360.2182" />
+      </ECTransition>
+      <ECTransition Source="STOP_GS" Destination="START" Condition="NOT FbFeedPumpRunning" x="720.2159" y="1502.448">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="107.9574,462.8949,106.8949,312.2919" />
+      </ECTransition>
+      <ECTransition Source="START_HOLD_T" Destination="START_GS" Condition="FbFeedPumpRunning OR ReqStartGritScreen" x="2818.619" y="818.9521">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="785.9562,192.7757,738.7241,135.8835" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="StartGS">
+      <ST><![CDATA[;
+Grafcet := 1;
+CmdGS := TRUE;
+RunHoldT := FALSE;]]></ST>
+    </Algorithm>
+    <Algorithm Name="HoldTime">
+      <ST><![CDATA[;
+Grafcet := 3;
+RunHoldT := TRUE;]]></ST>
+    </Algorithm>
+    <Algorithm Name="StopGS">
+      <ST><![CDATA[;
+Grafcet := 2;
+CmdGS := FALSE;
+RunHoldT := FALSE;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

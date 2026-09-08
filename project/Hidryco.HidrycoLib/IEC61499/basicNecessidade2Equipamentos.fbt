@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="5256fcee-f8af-4249-b3c1-c1957196ad3b" Name="basicNecessidade2Equipamentos" Comment="Basic Function Block Type" Namespace="Hidryco.HidrycoLib">
+  <Identification Standard="61499-2" />
+  <VersionInfo Version="0.0" Author=" " Date="24/02/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="E_ATUALIZA_SETPOINT">
+        <With Var="stpLimiteFaixa1" />
+        <With Var="stpLimiteFaixa2" />
+        <With Var="stpLimiteFaixa3" />
+        <With Var="stpLimiteFaixa4" />
+        <With Var="stpTempoAtuacao_FalhaBoiaL" />
+        <With Var="cmdHabilita" />
+      </Event>
+      <Event Name="E_ATUALIZA_SENSOR">
+        <With Var="stsSensor" />
+      </Event>
+      <Event Name="E_ATUALIZA_ANIMACAO">
+        <With Var="stsAnimacaoBoiaL" />
+        <With Var="stsAnimacaoBoiaH" />
+      </Event>
+      <Event Name="E_ATUALIZA_FALHA_SENSOR">
+        <With Var="stsFalhaSensor" />
+      </Event>
+      <Event Name="E_ATUALIZA_SENSOR_HABILITADO">
+        <With Var="stsSensorHabilitado" />
+      </Event>
+      <Event Name="END_DELAY" />
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="START_DELAY">
+        <With Var="stsDelayTime" />
+      </Event>
+      <Event Name="E_ATUALIZA_NECESSIDADE">
+        <With Var="stsNecessidadeEquipamento" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="cmdHabilita" Type="BOOL" />
+      <VarDeclaration Name="stsSensorHabilitado" Type="BOOL" />
+      <VarDeclaration Name="stsSensor" Type="REAL" />
+      <VarDeclaration Name="stpLimiteFaixa1" Type="REAL" />
+      <VarDeclaration Name="stpLimiteFaixa2" Type="REAL" />
+      <VarDeclaration Name="stpLimiteFaixa3" Type="REAL" />
+      <VarDeclaration Name="stpLimiteFaixa4" Type="REAL" />
+      <VarDeclaration Name="stsFalhaSensor" Type="BOOL" />
+      <VarDeclaration Name="stsAnimacaoBoiaL" Type="INT" />
+      <VarDeclaration Name="stsAnimacaoBoiaH" Type="INT" />
+      <VarDeclaration Name="stpTempoAtuacao_FalhaBoiaL" Type="UINT" Comment="Tempo para equipamento ficar ligado quando bater na boia H e a boia L estiver em falha" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="stsNecessidadeEquipamento" Type="UINT" />
+      <VarDeclaration Name="stsDelayTime" Type="TIME" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="Necessidade_1,Necessidade_2,Necessidade_0,SetDelayTime" />
+    <InternalVars>
+      <VarDeclaration Name="auxiliar" Type="INT" InitialValue="0" />
+    </InternalVars>
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="3345.441" y="310.4117" />
+      <ECState Name="STATE1" x="7964.889" y="3621.336" />
+      <ECState Name="STATE2" x="3574.159" y="3862.414">
+        <ECAction Algorithm="Necessidade_1" Output="E_ATUALIZA_NECESSIDADE" />
+      </ECState>
+      <ECState Name="STATE3" x="6522.667" y="3885.335" />
+      <ECState Name="STATE4" x="3387.667" y="3438.549">
+        <ECAction Algorithm="Necessidade_2" Output="E_ATUALIZA_NECESSIDADE" />
+      </ECState>
+      <ECState Name="STATE5" x="3389.667" y="4345.159">
+        <ECAction Algorithm="Necessidade_0" Output="E_ATUALIZA_NECESSIDADE" />
+      </ECState>
+      <ECState Name="STATE6" x="7976" y="4065.335" />
+      <ECState Name="STATE8" x="4309.182" y="1151.591" />
+      <ECState Name="STATE9" x="2940.156" y="1485.454" />
+      <ECState Name="L_H" x="2785" y="2342.333" />
+      <ECState Name="STATE7" x="3540" y="2140.731" />
+      <ECState Name="STATE10" x="3520" y="2720.731">
+        <ECAction Algorithm="SetDelayTime" Output="START_DELAY" />
+      </ECState>
+      <ECState Name="Habilitado" x="3334.768" y="910.9048" />
+      <ECTransition Source="START" Destination="Habilitado" Condition="cmdHabilita" x="3403.534" y="597.8036">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="854.6312,127.6078,854.4932,169.1516" />
+      </ECTransition>
+      <ECTransition Source="Habilitado" Destination="STATE8" Condition="stsSensorHabilitado AND NOT stsFalhaSensor" x="3769.586" y="956.4875">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="911.1186,229.654,962.0181,240.144" />
+      </ECTransition>
+      <ECTransition Source="STATE8" Destination="STATE1" Condition="stsNecessidadeEquipamento = 0" x="6024.794" y="2249.544">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1375.058,469.8505,1617.464,632.1017" />
+      </ECTransition>
+      <ECTransition Source="STATE1" Destination="STATE2" Condition="stsSensor &gt;= stpLimiteFaixa3" x="5885.216" y="3791.761">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1633.43,942.7075,1328.46,960.3871" />
+      </ECTransition>
+      <ECTransition Source="STATE8" Destination="STATE3" Condition="stsNecessidadeEquipamento = 1" x="5467.692" y="2488.449">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1282.052,510.1005,1459.488,729.1216" />
+      </ECTransition>
+      <ECTransition Source="STATE3" Destination="STATE4" Condition="stsSensor &gt;= stpLimiteFaixa4" x="4951.377" y="3731.774">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1356.308,954.7076,1118.749,920.8597" />
+      </ECTransition>
+      <ECTransition Source="STATE3" Destination="STATE5" Condition="stsSensor &lt; stpLimiteFaixa1" x="4873.193" y="4191.384">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1332.46,1036.175,1090.308,1070.398" />
+      </ECTransition>
+      <ECTransition Source="STATE8" Destination="STATE6" Condition="stsNecessidadeEquipamento = 2" x="6354.57" y="2710.185">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1452.096,562.5751,1759.515,809.4708" />
+      </ECTransition>
+      <ECTransition Source="STATE6" Destination="STATE2" Condition="stsSensor &lt; stpLimiteFaixa2" x="5768.687" y="4026.129">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1613.171,1019.007,1270.107,1003.163" />
+      </ECTransition>
+      <ECTransition Source="STATE8" Destination="Habilitado" Condition="1" x="3984.215" y="1135.105">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1035.713,295.1582,983.5977,283.278" />
+      </ECTransition>
+      <ECTransition Source="Habilitado" Destination="STATE9" Condition="stsFalhaSensor OR NOT stsSensorHabilitado" x="3178.911" y="1257.23">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="809.6932,300.2797,781.9603,338.1774" />
+      </ECTransition>
+      <ECTransition Source="STATE9" Destination="L_H" Condition="stsAnimacaoBoiaL &lt; 2 AND stsAnimacaoBoiaH &lt; 2" x="2937.494" y="1917.157">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="744.7872,448.0985,733.7089,511.0237" />
+      </ECTransition>
+      <ECTransition Source="L_H" Destination="STATE4" Condition="stsAnimacaoBoiaH = 1" x="3160.067" y="2856.118">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="772.1556,669.8596,817.446,752.4787" />
+      </ECTransition>
+      <ECTransition Source="L_H" Destination="STATE5" Condition="stsAnimacaoBoiaL = 0" x="3144.36" y="3297.589">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="765.7588,740.7243,814.7419,900.3776" />
+      </ECTransition>
+      <ECTransition Source="STATE9" Destination="STATE7" Condition="stsAnimacaoBoiaL &gt; 1 AND stsAnimacaoBoiaH &lt; 2" x="3313.331" y="1767.021">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="811.1057,415.0373,852.1171,460.7945" />
+      </ECTransition>
+      <ECTransition Source="STATE7" Destination="STATE10" Condition="stsAnimacaoBoiaH = 1" x="3626.281" y="2433.271">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="912.8033,588.7109,911.4841,628.3479" />
+      </ECTransition>
+      <ECTransition Source="STATE10" Destination="STATE4" Condition="1" x="3521.995" y="3109.992">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="889.9636,753.9376,879.1849,806.1174" />
+      </ECTransition>
+      <ECTransition Source="STATE9" Destination="Habilitado" Condition="1" x="3138.647" y="1112.034">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="772.8977,289.3195,800.4839,252.3397" />
+      </ECTransition>
+      <ECTransition Source="Habilitado" Destination="STATE5" Condition="(END_DELAY AND stsAnimacaoBoiaH = 0) OR (stsFalhaSensor AND stsAnimacaoBoiaL &gt; 1 AND stsAnimacaoBoiaH &gt; 1)" x="535.082" y="2083.367">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="453.5556,125.8654,-631.8846,830.6926" />
+      </ECTransition>
+      <ECTransition Source="STATE5" Destination="Habilitado" Condition="1" x="573.5502" y="2760.304">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="52.1288,793.4481,-206.4512,608.7493" />
+      </ECTransition>
+      <ECTransition Source="STATE2" Destination="Habilitado" Condition="1" x="1170.118" y="2667.501">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="-113.9726,764.4706,335.8078,614.1136" />
+      </ECTransition>
+      <ECTransition Source="STATE4" Destination="Habilitado" Condition="1" x="1537.824" y="2381.027">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="-135.7383,797.0168,617.4329,424.2896" />
+      </ECTransition>
+      <ECTransition Source="STATE1" Destination="Habilitado" Condition="1" x="5647.921" y="2340.996">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1598.115,700.0734,1227.151,482.9035" />
+      </ECTransition>
+      <ECTransition Source="STATE6" Destination="Habilitado" Condition="1" x="5654.143" y="2562.989">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1601.01,774.0715,1227.054,519.9009" />
+      </ECTransition>
+      <ECTransition Source="STATE3" Destination="Habilitado" Condition="1" x="4928.012" y="2472.847">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1360.564,744.0244,1104.246,504.8539" />
+      </ECTransition>
+      <ECTransition Source="STATE7" Destination="Habilitado" Condition="1" x="3438.359" y="1597.708">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="867.6373,452.3112,852.007,358.5243" />
+      </ECTransition>
+      <ECTransition Source="Habilitado" Destination="START" Condition="1" x="3318.71" y="705.4768">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="827.8009,201.0585,829.2471,167.483" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="Necessidade_1">
+      <ST><![CDATA[stsNecessidadeEquipamento := 1;]]></ST>
+    </Algorithm>
+    <Algorithm Name="Necessidade_2">
+      <ST><![CDATA[stsNecessidadeEquipamento := 2;
+;]]></ST>
+    </Algorithm>
+    <Algorithm Name="Necessidade_0">
+      <ST><![CDATA[stsNecessidadeEquipamento := 0;
+;]]></ST>
+    </Algorithm>
+    <Algorithm Name="SetDelayTime">
+      <ST><![CDATA[stsDelayTime := DINT_TO_TIME(
+    UINT_TO_DINT(stpTempoAtuacao_FalhaBoiaL) * 60000
+);]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

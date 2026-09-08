@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="7dd052a1-5f2a-4ed9-b01c-18e8390cd424" Name="OverrideV" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="6/26/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="806431ABD5E78883" Name="REQ" Comment="Normal Execution Request">
+        <With Var="Mode" />
+        <With Var="AutoIN1" />
+        <With Var="AutoIN2" />
+        <With Var="ManIN1" />
+        <With Var="ManIN2" />
+        <With Var="AutoIN3" />
+        <With Var="ManIN3" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="B861589364FF8D2A" Name="CNF" Comment="Execution Confirmation">
+        <With Var="OUT3" />
+        <With Var="OUT1" />
+        <With Var="OUT2" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="801967BDFA8F77B6" Name="Mode" Type="BOOL" />
+      <VarDeclaration ID="53EE5823BC68BC38" Name="AutoIN1" Type="BOOL" />
+      <VarDeclaration ID="531474AB7BB2BE86" Name="AutoIN2" Type="BOOL" />
+      <VarDeclaration ID="272BD6D99E89DB2E" Name="AutoIN3" Type="BOOL" />
+      <VarDeclaration ID="F257BF6AA9E98D5A" Name="ManIN1" Type="BOOL" />
+      <VarDeclaration ID="C73C44DF80BC8DC6" Name="ManIN2" Type="BOOL" />
+      <VarDeclaration ID="A8FE9F00BB619032" Name="ManIN3" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="4B7E902E80034964" Name="OUT1" Type="BOOL" />
+      <VarDeclaration ID="FDAA14F9B1820A36" Name="OUT2" Type="BOOL" />
+      <VarDeclaration ID="F25E94E81E907B48" Name="OUT3" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="REQ" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="704.9412" y="525.4117" />
+      <ECState Name="REQ" Comment="Normal execution" x="1433.647" y="920.9412">
+        <ECAction Algorithm="REQ" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="REQ" Condition="REQ" x="1114.997" y="653.8134">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="256.8983,146.6902,301.6008,170.9539" />
+      </ECTransition>
+      <ECTransition Source="REQ" Destination="START" Condition="1" x="1064.016" y="802.4655">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="289.6747,217.926,244.9723,193.6622" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="REQ" Comment="Normally executed algorithm">
+      <ST><![CDATA[;
+IF NOT Mode THEN //Auto
+	OUT1 := AutoIN1;
+	OUT2 := AutoIN2;
+	OUT3 := AutoIN3;
+ELSIF Mode THEN //Man
+	OUT1 := ManIN1;
+	OUT2 := ManIN2;
+	OUT3 := ManIN3;
+END_IF;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

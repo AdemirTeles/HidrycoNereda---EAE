@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="2fcba108-0b87-4b8e-a3fd-501f1c8adb63" Name="FlushStartSp" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="6/20/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="60C9036B1713EBA1" Name="REQ" Comment="Normal Execution Request">
+        <With Var="StartFlsuhConfig" />
+        <With Var="FlushStartSp" />
+        <With Var="LevelPv" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="00A4140AB53E963E" Name="CNF" Comment="Execution Confirmation">
+        <With Var="StartFlush" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="BB77DA3FF1F0E737" Name="StartFlsuhConfig" Type="INT" Comment="Input event qualifier" />
+      <VarDeclaration ID="46148435C68AE1AB" Name="FlushStartSp" Type="REAL" />
+      <VarDeclaration ID="93C4216D5E9796F5" Name="LevelPv" Type="REAL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="970B51ACFFBA5237" Name="StartFlush" Type="BOOL" Comment="Output event qualifier" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="REQ" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="1548.941" y="653.4117" />
+      <ECState Name="REQ" x="2260" y="1180">
+        <ECAction Algorithm="REQ" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="REQ" Condition="REQ" x="1960.485" y="855.6011">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="467.2405,191.4933,514.7517,226.6785" />
+      </ECTransition>
+      <ECTransition Source="REQ" Destination="START" Condition="1" x="1897.798" y="993.7794">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="499.8732,271.7691,452.362,236.5838" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="REQ" Comment="Normally executed algorithm">
+      <ST><![CDATA[;
+IF StartFlsuhConfig = 1 THEN
+	IF FlushStartSp <= LevelPv THEN
+		StartFlush := TRUE;
+	ELSE
+		StartFlush := FALSE;
+	END_IF;
+ELSIF StartFlsuhConfig = 2 THEN
+	IF FlushStartSp >= LevelPv THEN
+		StartFlush := TRUE;
+	ELSE
+		StartFlush := FALSE;
+	END_IF;
+END_IF;	]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

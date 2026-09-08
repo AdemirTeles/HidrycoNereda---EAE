@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="ad7b4647-52d1-4347-a6ba-f67acd0bf20a" Name="IlckMotVs" Format="2.0" Comment="CAT Function Block Type" Namespace="SE.Nereda">
+  <Attribute Name="HMI.Alias" Value="" />
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="6/3/2026" Remarks="template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="BB07CE5CA3A90E8C" Name="REQ" Comment="Request from Socket">
+        <With Var="Suppress" />
+      </Event>
+      <Event ID="47593EB5799F5830" Name="REQ_OWNER">
+        <With Var="CurrentOwner" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="1ACB26BE744F37A1" Name="COND_IND" Comment="Confirmation from Plug">
+        <With Var="State" />
+        <With Var="CondPos" />
+        <With Var="CondType" />
+      </Event>
+      <Event ID="EE1DB4A1219410D4" Name="REQ_ILCK_SPEED" Comment="Request for new value and limits">
+        <With Var="IlckSpeed" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="3100FF95313D2E79" Name="Suppress" Type="BOOL" Comment="1 = Condition suppressed" />
+      <VarDeclaration ID="B24A2EB6CD7D5206" Name="CurrentOwner" Type="WORD" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="74F62D32B8AB17CB" Name="State" Type="BOOL" Comment="1 = interlock active" />
+      <VarDeclaration ID="5B70B8A759686CBA" Name="CondPos" Type="InterlockState" Namespace="SE.App2CommonProcess" Comment="Passive = Passive condition; Active 1 = Active condition 1; Active 2 = Active condition 2" />
+      <VarDeclaration ID="5CCAAE9E9D3EC477" Name="CondType" Type="CondType" Namespace="SE.App2CommonProcess" Comment="Type of condition interlock, (0 = Normal, 1 = Sequential, 2 = Process, 3 = Protection)" />
+      <VarDeclaration ID="7BFBF177262F6463" Name="IlckSpeed" Type="VTQREAL" Comment="Vtq value" />
+    </OutputVars>
+    <Sockets>
+      <AdapterDeclaration ID="67B6C8BC3D21E047" Name="IIlckSum" Type="IIlckCondSum" Namespace="SE.App2CommonProcess" Comment="Interlock condition summary chain input from ilckcondsum block" x="2020" y="620">
+        <Parameter Name="$DeviceType" Value="BiDirectional" />
+        <Parameter Name="$ServiceState" Value="TRUE" />
+      </AdapterDeclaration>
+      <AdapterDeclaration ID="8B394DC08166B07A" Name="IIlckSpeed" Type="IAnalog" Namespace="SE.App2Base" Comment="Speed setpoint to be considered if interlock condition is active" x="2220" y="1500" />
+    </Sockets>
+  </InterfaceList>
+  <FBNetwork>
+    <Input ID="BB07CE5CA3A90E8C" Name="REQ" x="780" y="632" Type="Event" />
+    <Input ID="47593EB5799F5830" Name="REQ_OWNER" x="780" y="752" Type="Event" />
+    <Input ID="3100FF95313D2E79" Name="Suppress" x="780" y="1012" Type="Data" />
+    <Input ID="B24A2EB6CD7D5206" Name="CurrentOwner" x="780" y="1192" Type="Data" />
+    <Frame Name="FRAME3" X="460" Y="400" Width="3880" Height="1760">
+      <Parameter Name="BackgroundColor" Value="Lavender" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 20.25pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="Interlock" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Output ID="1ACB26BE744F37A1" Name="COND_IND" x="3140" y="632" Type="Event" />
+    <Output ID="74F62D32B8AB17CB" Name="State" x="3140" y="1012" Type="Data" />
+    <Output ID="5B70B8A759686CBA" Name="CondPos" x="3140" y="1072" Type="Data" />
+    <Output ID="5CCAAE9E9D3EC477" Name="CondType" x="3140" y="1132" Type="Data" />
+    <Output ID="EE1DB4A1219410D4" Name="REQ_ILCK_SPEED" x="3140" y="1512" Type="Event" />
+    <Output ID="7BFBF177262F6463" Name="IlckSpeed" x="3140" y="1772" Type="Data" />
+    <EventConnections>
+      <Connection Source="$67B6C8BC3D21E047.CHECK_SERVICE" Destination="$67B6C8BC3D21E047.CNF_SERVICE">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$67B6C8BC3D21E047.COND_IND" Destination="$1ACB26BE744F37A1" />
+      <Connection Source="$8B394DC08166B07A.REQ" Destination="$EE1DB4A1219410D4" />
+      <Connection Source="$BB07CE5CA3A90E8C" Destination="$67B6C8BC3D21E047.REQ" />
+      <Connection Source="$47593EB5799F5830" Destination="$67B6C8BC3D21E047.REQ_OWNER" />
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="$67B6C8BC3D21E047.State" Destination="$74F62D32B8AB17CB" />
+      <Connection Source="$67B6C8BC3D21E047.CondPos" Destination="$5B70B8A759686CBA" />
+      <Connection Source="$67B6C8BC3D21E047.CondType" Destination="$5CCAAE9E9D3EC477" />
+      <Connection Source="$8B394DC08166B07A.Value" Destination="$7BFBF177262F6463" />
+      <Connection Source="$3100FF95313D2E79" Destination="$67B6C8BC3D21E047.Suppress" />
+      <Connection Source="$B24A2EB6CD7D5206" Destination="$67B6C8BC3D21E047.CurrentOwner" />
+    </DataConnections>
+  </FBNetwork>
+</FBType>

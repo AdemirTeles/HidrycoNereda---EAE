@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="20c81152-7de3-4b4a-a87a-4d32c51e720a" Comment="Basic Function Block Type" Name="AutoResetIlck" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="8/3/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="0FB5FAB38A5D7F1C" Name="STQRT_CMD">
+        <With Var="StartCmd" />
+      </Event>
+      <Event ID="DF4DEE6CABA81509" Name="FB_ILCK">
+        <With Var="FbIlck" />
+      </Event>
+      <Event ID="B2DD4F18CF3487B6" Name="PAR">
+        <With Var="NbrReset" />
+      </Event>
+      <Event ID="8348511B674F211E" Name="FB_WAT" />
+      <Event ID="259D9CCE3C0F3B79" Name="FB_TIME_OUT">
+        <With Var="TimeOutDone" />
+      </Event>
+      <Event ID="F6DECBEDE286AABC" Name="HMI_RESET">
+        <With Var="HMIReset" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="768680A22B5B19F3" Name="RESET">
+        <With Var="Reset" />
+      </Event>
+      <Event ID="9EC20E908AF2572F" Name="NBR_RESET">
+        <With Var="CurrResetNbr" />
+      </Event>
+      <Event ID="87FD52BF05F071AE" Name="WAIT" />
+      <Event ID="3CA3E4AD3DFDDD61" Name="START_TIME_OUT" />
+      <Event ID="A597F2B6CD599558" Name="STOP_TIME_OUT" />
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="6786DCF58C83F9A7" Name="StartCmd" Type="BOOL" />
+      <VarDeclaration ID="D08D906AE54DF594" Name="FbIlck" Type="BOOL" />
+      <VarDeclaration ID="F6140197128B91F1" Name="NbrReset" Type="INT" />
+      <VarDeclaration ID="69280C2CB02D88AA" Name="TimeOutDone" Type="BOOL" />
+      <VarDeclaration ID="E320D0AAA20435E8" Name="HMIReset" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="BE9C87F08FC41A48" Name="Reset" Type="BOOL" />
+      <VarDeclaration ID="5C1893609E055EA5" Name="CurrResetNbr" Type="INT" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="9eba202f-136c-4e97-bfce-daa60279ceee">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="Reset,UpdateResetNbr,NoReset,ResetCurrNbr" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="1896.941" y="325.8561" />
+      <ECState Name="Reset1" x="1899.556" y="1217.778">
+        <ECAction Algorithm="Reset" Output="RESET" />
+        <ECAction Output="START_TIME_OUT" />
+      </ECState>
+      <ECState Name="NoIlck" x="1907.556" y="2137.778">
+        <ECAction Algorithm="UpdateResetNbr" Output="NBR_RESET" />
+      </ECState>
+      <ECState Name="Reset2" x="3021.333" y="1907.556">
+        <ECAction Algorithm="Reset" Output="RESET" />
+      </ECState>
+      <ECState Name="NoReset" x="1903.556" y="1645.778">
+        <ECAction Algorithm="NoReset" Output="RESET" />
+        <ECAction Output="WAIT" />
+      </ECState>
+      <ECState Name="ResetCurrNbr2" x="1904" y="2669.778">
+        <ECAction Algorithm="ResetCurrNbr" Output="STOP_TIME_OUT" />
+        <ECAction Output="NBR_RESET" />
+      </ECState>
+      <ECState Name="ResetCurrNbr1" x="1897.778" y="791.4285">
+        <ECAction Algorithm="ResetCurrNbr" Output="NBR_RESET" />
+        <ECAction Output="STOP_TIME_OUT" />
+      </ECState>
+      <ECTransition Source="START" Destination="ResetCurrNbr1" Condition="(STQRT_CMD AND StartCmd) OR (HMI_RESET AND HMIReset)" x="1895.976" y="546.2224">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="473.8941,120.4703,473.9474,150.5709" />
+      </ECTransition>
+      <ECTransition Source="Reset1" Destination="NoReset" Condition="NOT FbIlck" x="1902.804" y="1430.513">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="475.5462,344.0311,475.9818,371.0145" />
+      </ECTransition>
+      <ECTransition Source="NoIlck" Destination="Reset2" Condition="FbIlck AND CurrResetNbr &lt; NbrReset AND NOT TimeOutDone" x="2451.484" y="1902.686">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="577.9797,477.1395,648.4725,460.2014" />
+      </ECTransition>
+      <ECTransition Source="NoReset" Destination="NoIlck" Condition="FB_WAT" x="1907.71" y="1900.218">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="476.9305,459.6061,477.1614,491.9092" />
+      </ECTransition>
+      <ECTransition Source="Reset2" Destination="NoReset" Condition="NOT FbIlck" x="2609.082" y="1481.755">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="705.963,357.3142,615.9034,343.1086" />
+      </ECTransition>
+      <ECTransition Source="NoIlck" Destination="START" Condition="StartCmd AND ((CurrResetNbr &gt;= NbrReset AND FbIlck) OR TimeOutDone)" x="1288.31" y="1233.541">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="276.9522,379.6775,276.0256,237.3805" />
+      </ECTransition>
+      <ECTransition Source="NoIlck" Destination="ResetCurrNbr2" Condition="NOT StartCmd" x="1907.093" y="2395.244">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="476.9731,580.2615,476.7235,615.9382" />
+      </ECTransition>
+      <ECTransition Source="ResetCurrNbr2" Destination="START" Condition="1" x="873.5439" y="1308.124">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="139.9424,404.0732,141.7832,218.3733" />
+      </ECTransition>
+      <ECTransition Source="ResetCurrNbr1" Destination="Reset1" Condition="1" x="1896.146" y="1009.826">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="473.854,239.4757,473.9659,266.3078" />
+      </ECTransition>
+    </ECC>
+    <Algorithm ID="718620c7-2546-4d3f-941f-cf53e79bd9c3" Name="Reset">
+      <ST><![CDATA[;
+Reset := TRUE;]]></ST>
+    </Algorithm>
+    <Algorithm ID="e55949f7-cf50-4da6-ada5-cbbe5f00f090" Name="UpdateResetNbr">
+      <ST><![CDATA[;
+CurrResetNbr := CurrResetNbr + 1;]]></ST>
+    </Algorithm>
+    <Algorithm ID="ecf5a756-ed4d-4071-9503-c83bffa6cf6b" Name="NoReset">
+      <ST><![CDATA[;
+Reset := FALSE;]]></ST>
+    </Algorithm>
+    <Algorithm ID="804b7060-3d48-453e-a82e-e63674f2323c" Name="ResetCurrNbr">
+      <ST><![CDATA[;
+CurrResetNbr := 0;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

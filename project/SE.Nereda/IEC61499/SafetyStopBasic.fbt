@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="0f933ffc-ea4a-481a-91bd-40cb981814b1" Name="SafetyStopBasic" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author="SESA713705" Date="6/17/2024" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="REQ_SENSOR">
+        <With Var="iValSensor" />
+      </Event>
+      <Event Name="REQ_RESET_HMI">
+        <With Var="ResetFromHMI" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="CNF" Name="CNF_SENSOR">
+        <With Var="oValSensor" />
+      </Event>
+      <Event ID="ECC6B5D96C32F949" Name="NEED_RESET">
+        <With Var="NeedReset" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="ValSensor" Name="iValSensor" Type="BOOL" />
+      <VarDeclaration Name="ResetFromHMI" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="D663346B85035263" Name="oValSensor" Type="BOOL" />
+      <VarDeclaration ID="FBCD44278B23036C" Name="NeedReset" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="NoSafetyStop,SafetyStopPresent,NeedReset" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="1412.941" y="573.4117" />
+      <ECState Name="NoSafetyStop" x="2492" y="567.9999">
+        <ECAction Algorithm="NoSafetyStop" Output="CNF_SENSOR" />
+        <ECAction Output="NEED_RESET" />
+      </ECState>
+      <ECState Name="SafetyStop" x="1411" y="1156">
+        <ECAction Algorithm="SafetyStopPresent" Output="CNF_SENSOR" />
+      </ECState>
+      <ECState Name="NeedReset" x="1410.474" y="1662.857">
+        <ECAction Algorithm="NeedReset" Output="NEED_RESET" />
+      </ECState>
+      <ECTransition Source="START" Destination="NoSafetyStop" Condition="REQ_SENSOR AND NOT iValSensor" x="1906.229" y="448.1107">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="446.5723,106.3648,502.6014,105.8949" />
+      </ECTransition>
+      <ECTransition Source="NoSafetyStop" Destination="START" Condition="1" x="1905.202" y="682.2361">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="505.3633,175.5193,443.8367,175.9577" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="SafetyStop" Condition="REQ_SENSOR AND iValSensor" x="1416.46" y="835.9604">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="354.4398,186.6681,354.309,226.5212" />
+      </ECTransition>
+      <ECTransition Source="SafetyStop" Destination="NeedReset" Condition="NOT iValSensor" x="1410.432" y="1392.771">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="352.611,330.0344,352.5769,363.5752" />
+      </ECTransition>
+      <ECTransition Source="NeedReset" Destination="NoSafetyStop" Condition="ResetFromHMI" x="2669.299" y="1782.327">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="679.7268,538.0598,761.0506,455.5564" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="NoSafetyStop">
+      <ST><![CDATA[;
+oValSensor := iValSensor;
+NeedReset := FALSE;]]></ST>
+    </Algorithm>
+    <Algorithm Name="SafetyStopPresent">
+      <ST><![CDATA[;
+oValSensor := iValSensor;]]></ST>
+    </Algorithm>
+    <Algorithm Name="NeedReset">
+      <ST><![CDATA[;
+NeedReset := TRUE;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="2429671a-cf66-42a3-aa54-2adbfa8fcfb6" Name="RetriggerEventBasic" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="6/24/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="14E027076047CB26" Name="REQ" Comment="Normal Execution Request">
+        <With Var="Nbr" />
+      </Event>
+      <Event ID="6CC0898E7BE72B3F" Name="FB_DELAY" />
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="F3D819A9AFF50ACA" Name="CNF" Comment="Execution Confirmation" />
+      <Event ID="0C05E80AEFE4A530" Name="CNF_DELAY" />
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="B398D8548EE093BC" Name="Nbr" Type="INT" />
+    </InputVars>
+  </InterfaceList>
+  <BasicFB>
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="INIT,REQ" />
+    <InternalVars>
+      <VarDeclaration ID="8F05B2A4B5E4659A" Name="i" Type="INT" />
+    </InternalVars>
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="920.9412" y="373.4117" />
+      <ECState Name="STATE1" x="1964" y="1048">
+        <ECAction Algorithm="REQ" Output="CNF" />
+        <ECAction Output="CNF_DELAY" />
+      </ECState>
+      <ECState Name="STATE2" x="1956" y="583.9999">
+        <ECAction Algorithm="INIT" />
+      </ECState>
+      <ECTransition Source="START" Destination="STATE2" Condition="REQ AND Nbr &gt; 0" x="1408.487" y="392.3065">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="314.7527,87.34127,383.5745,99.52771" />
+      </ECTransition>
+      <ECTransition Source="STATE1" Destination="STATE1" Condition="FB_DELAY" x="1981.877" y="1282.546">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="559.1666,336.6667,434.1667,335" />
+      </ECTransition>
+      <ECTransition Source="STATE1" Destination="START" Condition="i &gt;= Nbr" x="1350.069" y="844.7791">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="370.8737,243.9369,297.8544,198.2386" />
+      </ECTransition>
+      <ECTransition Source="STATE2" Destination="STATE1" Condition="1" x="1963.253" y="808.64">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="490.7223,186.5617,491.2387,216.5316" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="INIT" Comment="Initialization algorithm">
+      <ST><![CDATA[;
+i := 0;]]></ST>
+    </Algorithm>
+    <Algorithm Name="REQ" Comment="Normally executed algorithm">
+      <ST><![CDATA[;
+i := i + 1;
+FB_DELAY := FALSE;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

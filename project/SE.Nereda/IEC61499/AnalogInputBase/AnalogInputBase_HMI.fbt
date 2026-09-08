@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="233c0d4e-5569-497f-be13-acbe9cf5efef" Name="AnalogInputBase_HMI" Comment="Service Interface Function Block Type" Namespace="SE.Nereda">
+  <Attribute Name="Runtime.Persistence.Storage" Value="0" />
+  <Attribute Name="HMI.Alias" Value="" />
+  <Attribute Name="Configuration.FB.IDCounter" Value="0" />
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="1.0.1" Author="ApplicationLibDevTeam" Date="1/16/2024" Remarks="First Version" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="A6472C3F23A208E2" Name="INIT">
+        <With Var="QI" />
+      </Event>
+      <Event ID="27F16F7AE1B22E30" Name="REQ_INITDATA" Comment="Request initialization data" />
+      <Event ID="3660C53BE30149EB" Name="OP_UPD" Comment="Operation values update">
+        <With Var="ChFailAlarm" />
+        <With Var="AlarmSuppressed" />
+      </Event>
+      <Event ID="3070A2342EE17C2B" Name="OP_UPD_PV" Comment="Update field and processed value ">
+        <With Var="Pv" />
+        <With Var="InputValue" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="751D75BD7441CB08" Name="INITO">
+        <With Var="QO" />
+        <With Var="STATUS" />
+      </Event>
+      <Event ID="2886E7A2DEFD0865" Name="CFG" Comment="Operation parameter values changed">
+        <With Var="RawPvMin" />
+        <With Var="RawPvMax" />
+        <With Var="PvMin" />
+        <With Var="PvMax" />
+        <With Var="EnScale" />
+        <With Var="UseLimits" />
+        <With Var="PvCutOff" />
+        <With Var="PvOffset" />
+        <With Var="Pt1FTime" />
+        <With Var="Pt1CycleTime" />
+        <With Var="BadPvSel" />
+        <With Var="BadPv" />
+        <With Var="SmoothType" />
+        <With Var="TimeDiff" />
+        <With Var="ValDiff" />
+        <With Var="AlmAckType" />
+      </Event>
+      <Event ID="E65C45AA2DF89F67" Name="IND_MODE" Comment="Indicate change in override mode and override value">
+        <With Var="PvOverride" />
+        <With Var="PvOverrideVal" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="3CCB69177D5CA909" Name="QI" Type="BOOL" />
+      <VarDeclaration ID="68EEAD6079DEEFE0" Name="Pv" Type="REAL" Comment="Process value">
+        <Attribute Name="Runtime.Archive.Id" Value="1" />
+        <Attribute Name="Runtime.History.Depth" Value="500" />
+        <Attribute Name="Runtime.History.SmoothTime" Value="60000" />
+        <Attribute Name="Runtime.History.SmoothValue" Value="0.1" />
+      </VarDeclaration>
+      <VarDeclaration ID="ED035BF793E251C7" Name="InputValue" Type="REAL" Comment="Input field value">
+        <Attribute Name="Runtime.Archive.Id" Value="1" />
+        <Attribute Name="Runtime.History.Depth" Value="500" />
+        <Attribute Name="Runtime.History.SmoothTime" Value="60000" />
+        <Attribute Name="Runtime.History.SmoothValue" Value="0.1" />
+      </VarDeclaration>
+      <VarDeclaration ID="A260CB1FEE42A258" Name="ChFailAlarm" Type="BOOL" Comment="1 = Analog input channel failure alarm is present" />
+      <VarDeclaration ID="BE4341E65CD3CF2E" Name="AlarmSuppressed" Type="BOOL" Comment="1 = Alarm generation is suppressed" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="8919D1EE633C5C41" Name="QO" Type="BOOL" Comment="Event Output Qualifier" />
+      <VarDeclaration ID="E3BF226A6222CA12" Name="STATUS" Type="STRING" Comment="Service Status" />
+      <VarDeclaration ID="5755B496481F77DF" Name="RawPvMin" Type="REAL" Comment="Minimum field value" />
+      <VarDeclaration ID="96B142B2A92B45CF" Name="RawPvMax" Type="REAL" Comment="Maximum field value" />
+      <VarDeclaration ID="D2F7CCE02EAF5291" Name="PvMin" Type="REAL" Comment="Minimum process value" />
+      <VarDeclaration ID="8FFB9213610860C1" Name="PvMax" Type="REAL" Comment="Maximum process value" />
+      <VarDeclaration ID="CC5A9FA114144AA6" Name="EnScale" Type="BOOL" Comment="1 = Enable scaling for value from field" />
+      <VarDeclaration ID="DED953899C2CCD91" Name="UseLimits" Type="BOOL" Comment="1 = Enable limiting of process value" />
+      <VarDeclaration ID="BECBF433BD9EED60" Name="PvCutOff" Type="REAL" Comment="Minimum process value limit" />
+      <VarDeclaration ID="7DE032517A417D96" Name="PvOffset" Type="REAL" Comment="Offset value adds to Pv" />
+      <VarDeclaration ID="F95D2896C5299A79" Name="Pt1FTime" Type="DINT" Comment="Filter time for pt1 filter , 0.0 disables the filter functionality" />
+      <VarDeclaration ID="F08DA5464300AC18" Name="Pt1CycleTime" Type="DINT" Comment="Cycle time of the PT1 filter in milliseconds" />
+      <VarDeclaration ID="5C878BDA8E51F78C" Name="PvOverride" Type="BOOL" Comment="1 = Override value will be considered" />
+      <VarDeclaration ID="5035AD8DA19FFF29" Name="PvOverrideVal" Type="REAL" Comment="Scaled value that overrides the input value in override mode" />
+      <VarDeclaration ID="52E3A8B81912C4BE" Name="BadPvSel" Type="INT" Comment="Select pv in case of bad signal (0- use input value; 1- use bad pv; 2- use last good value)" />
+      <VarDeclaration ID="A622FB3BB93D5C0F" Name="BadPv" Type="REAL" Comment="Process value when the signal is bad" />
+      <VarDeclaration ID="FAE27BE0B33BE913" Name="SmoothType" Type="BYTE" Comment="Process value smoothing type 0=none, 1=old new, 2=value difference, 3=time difference, 4=time or value difference, 5=time and value difference" />
+      <VarDeclaration ID="376941CF4DFB5636" Name="TimeDiff" Type="DINT" Comment="Time difference configuration  for process value smoothing" />
+      <VarDeclaration ID="EF464E2F0FF437F9" Name="ValDiff" Type="REAL" Comment="Value difference configuration  for process value smoothing" />
+      <VarDeclaration ID="26B67A50E731E659" Name="AlmAckType" Type="USINT" Comment="0 = not ackable; 1 = ack deletes; 2 = came has to be acked; 3 = came and gone have to be acked; 4 = pair has to be acked" />
+    </OutputVars>
+  </InterfaceList>
+  <Service RightInterface="" LeftInterface="">
+    <ServiceSequence Name="" />
+  </Service>
+</FBType>

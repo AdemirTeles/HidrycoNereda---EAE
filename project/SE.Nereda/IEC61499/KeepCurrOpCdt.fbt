@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="5299b618-67cd-4226-9808-475281654d5e" Name="KeepCurrOpCdt" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author="SESA713705" Date="8/20/2024" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="EVENT_IN" />
+      <Event Name="REQ_OP_CDT">
+        <With Var="OpCdt" />
+      </Event>
+      <Event Name="UPDATE">
+        <With Var="Update" />
+      </Event>
+      <Event Name="UPDATE_ACTIVE">
+        <With Var="UpdateActive" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="EVENT_OUT" />
+      <Event Name="NEED_UPDATE">
+        <With Var="NeedUpdate" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="OpCdt" Type="BOOL" />
+      <VarDeclaration Name="Update" Type="BOOL" />
+      <VarDeclaration Name="UpdateActive" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="NeedUpdate" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="NeedUpdate,NoNeedUpdate" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="872.9412" y="501.4117" />
+      <ECState Name="WithUpdateBtn" x="1540" y="1276">
+        <ECAction Output="EVENT_OUT" />
+      </ECState>
+      <ECState Name="STATE1" x="2244" y="1936">
+        <ECAction Algorithm="NeedUpdate" Output="NEED_UPDATE" />
+      </ECState>
+      <ECState Name="STATE2" x="1448" y="2244">
+        <ECAction Algorithm="NoNeedUpdate" Output="EVENT_OUT" />
+        <ECAction Output="NEED_UPDATE" />
+      </ECState>
+      <ECState Name="WithoutUpdateBtn" x="2708" y="724">
+        <ECAction Output="EVENT_OUT" />
+      </ECState>
+      <ECTransition Source="START" Destination="WithUpdateBtn" Condition="UpdateActive = TRUE" x="1261.418" y="835.4468">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="293.3491,176.3687,342.2278,232.4782" />
+      </ECTransition>
+      <ECTransition Source="WithUpdateBtn" Destination="STATE1" Condition="REQ_OP_CDT AND OpCdt = FALSE" x="1949.809" y="1551.145">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="464.6336,360.0762,514.0458,406.3537" />
+      </ECTransition>
+      <ECTransition Source="WithUpdateBtn" Destination="WithUpdateBtn" Condition="EVENT_IN AND UpdateActive = TRUE" x="1540" y="1458.086" />
+      <ECTransition Source="STATE1" Destination="STATE2" Condition="Update = TRUE" x="1787.023" y="2002.529">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="469.1947,486.398,421.7968,504.3256" />
+      </ECTransition>
+      <ECTransition Source="STATE2" Destination="WithUpdateBtn" Condition="1" x="1125.732" y="1673.079">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="254.1899,447.0113,261.03,375.0417" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="WithoutUpdateBtn" Condition="UpdateActive = FALSE" x="1754.868" y="525.9962">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="376.8904,119.073,500.3139,134.2497" />
+      </ECTransition>
+      <ECTransition Source="WithUpdateBtn" Destination="WithoutUpdateBtn" Condition="UpdateActive = FALSE" x="1889.811" y="825.2003">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="423.4577,212.893,502.3883,175.59" />
+      </ECTransition>
+      <ECTransition Source="STATE1" Destination="WithoutUpdateBtn" Condition="UpdateActive = FALSE" x="2618.958" y="1330.92">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="647.0903,378.9583,682.4275,286.6553" />
+      </ECTransition>
+      <ECTransition Source="WithoutUpdateBtn" Destination="WithUpdateBtn" Condition="UpdateActive = TRUE" x="2114.784" y="1016.08">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="566.7292,236.7084,487.7984,274.0114" />
+      </ECTransition>
+      <ECTransition Source="WithoutUpdateBtn" Destination="WithoutUpdateBtn" Condition="EVENT_IN AND UpdateActive = FALSE" x="3029.489" y="975.5455">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="843,237,711,284" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="NeedUpdate">
+      <ST><![CDATA[;
+NeedUpdate := TRUE;]]></ST>
+    </Algorithm>
+    <Algorithm Name="NoNeedUpdate">
+      <ST><![CDATA[;
+NeedUpdate := FALSE;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

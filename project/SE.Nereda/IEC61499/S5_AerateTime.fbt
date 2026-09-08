@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="3564b1b5-9717-46a9-8811-2faea12f6be6" Name="S5_AerateTime" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="7/5/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="0D2EA60FD6C23367" Name="REQ" Comment="Normal Execution Request">
+        <With Var="S1_Time" />
+        <With Var="S2_Time" />
+        <With Var="S3_Time" />
+        <With Var="S4_Time" />
+        <With Var="S6_Time" />
+        <With Var="S7_Time" />
+        <With Var="S8_Time" />
+        <With Var="CT_ReactorActualT" />
+        <With Var="CT_ReactorActualV" />
+      </Event>
+      <Event ID="C7A276F0816E041D" Name="CACULATE">
+        <With Var="S1_Time" />
+        <With Var="S2_Time" />
+        <With Var="S3_Time" />
+        <With Var="S4_Time" />
+        <With Var="S6_Time" />
+        <With Var="S7_Time" />
+        <With Var="S8_Time" />
+        <With Var="CT_ReactorActualT" />
+        <With Var="CT_ReactorActualV" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="8B394E005AFEAD78" Name="CNF" Comment="Execution Confirmation">
+        <With Var="S5_AerateTimeT" />
+        <With Var="S5_AerateTimeV" />
+      </Event>
+      <Event ID="878A4998A65F56E0" Name="WARNING">
+        <With Var="WarningSteps" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="C5F8AE19B1F00F21" Name="S1_Time" Type="TIME" />
+      <VarDeclaration ID="E8F6A7D9DCD9BBE1" Name="S2_Time" Type="TIME" />
+      <VarDeclaration ID="BBEC65C254C77C0B" Name="S3_Time" Type="TIME" />
+      <VarDeclaration ID="987FE50D3182D670" Name="S4_Time" Type="TIME" />
+      <VarDeclaration ID="03FA70645F2696D4" Name="S6_Time" Type="TIME" />
+      <VarDeclaration ID="F499F59EB03E2123" Name="S7_Time" Type="TIME" />
+      <VarDeclaration ID="F9726491C55C37B7" Name="S8_Time" Type="TIME" />
+      <VarDeclaration ID="4E488DE24686A5F2" Name="CT_ReactorActualT" Type="TIME" />
+      <VarDeclaration ID="051E4CDC84405E95" Name="CT_ReactorActualV" Type="REAL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="3E8F4A267A25DD05" Name="S5_AerateTimeT" Type="TIME" Comment="Output event qualifier" />
+      <VarDeclaration ID="6A9E00F95DC3CAB2" Name="S5_AerateTimeV" Type="REAL" />
+      <VarDeclaration ID="4CD884F27F8D62DD" Name="WarningSteps" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="42f767e4-fe9e-449f-8802-e6d95a8d8b10">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="REQ" />
+    <InternalVars>
+      <VarDeclaration ID="A292DA62BB8749FE" Name="InS1_Time" Type="REAL" />
+      <VarDeclaration ID="C6AD3F748817469A" Name="InS2_Time" Type="REAL" />
+      <VarDeclaration ID="1827409523BA7328" Name="InS3_Time" Type="REAL" />
+      <VarDeclaration ID="02BCEDD39BAB4425" Name="InS4_Time" Type="REAL" />
+      <VarDeclaration ID="3DCF625A9BB1ACDB" Name="InS6_Time" Type="REAL" />
+      <VarDeclaration ID="8FBD893F843C2EB6" Name="InS7_Time" Type="REAL" />
+      <VarDeclaration ID="B75B8E74CF8B545A" Name="InS8_Time" Type="REAL" />
+      <VarDeclaration ID="5583A7D693E11519" Name="SumSteps" Type="REAL" />
+    </InternalVars>
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="552.9412" y="429.4117" />
+      <ECState Name="REQ" Comment="Normal execution" x="1213.647" y="928.9412">
+        <ECAction Algorithm="REQ" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="REQ" Condition="CACULATE" x="940.1763" y="618.3773">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="214.1229,133.387,257.6785,166.3174" />
+      </ECTransition>
+      <ECTransition Source="REQ" Destination="START" Condition="1" x="876.4094" y="756.3966">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="242.6014,211.2593,199.0457,178.3289" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="REQ" Comment="Normally executed algorithm">
+      <ST><![CDATA[;
+InS1_Time := TIME_TO_REAL(S1_Time);
+InS2_Time := TIME_TO_REAL(S2_Time);
+InS3_Time := TIME_TO_REAL(S3_Time);
+InS4_Time := TIME_TO_REAL(S4_Time);
+InS6_Time := TIME_TO_REAL(S6_Time);
+InS7_Time := TIME_TO_REAL(S7_Time);
+InS8_Time := TIME_TO_REAL(S8_Time);
+SumSteps := InS1_Time + InS2_Time + InS3_Time + InS4_Time + InS6_Time + InS7_Time + InS8_Time;
+
+S5_AerateTimeV := CT_ReactorActualV - SumSteps;
+S5_AerateTimeT := REAL_TO_TIME(S5_AerateTimeV);
+
+IF S5_AerateTimeV < 0 THEN
+	WarningSteps := TRUE;
+	S5_AerateTimeV := 0;
+	S5_AerateTimeT := T#0s;
+ELSE
+	WarningSteps := FALSE;
+END_IF;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="484c3e53-6c0b-4f18-90a4-dcb0c950196d" Name="escalonamento" Format="2.0" Comment="Composite Function Block Type" Namespace="Hidryco.HidrycoLib">
+  <Attribute Name="Configuration.FB.IDCounter" Value="2" />
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="1/29/2026" Remarks="template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="REQ" Comment="Normal Execution Request">
+        <With Var="cmdHabilitaSensor" />
+        <With Var="stsSensorBruto" />
+      </Event>
+      <Event Name="E_RESET_FALHA" />
+      <Event Name="E_AJUSTE_STP">
+        <With Var="stpRangeMaximo" />
+        <With Var="stpRangeMinimo" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="CNF" Comment="Execution Confirmation">
+        <With Var="stsFalhaSensor" />
+        <With Var="stsSensorEscalonado" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="cmdHabilitaSensor" Type="BOOL" />
+      <VarDeclaration Name="stsSensorBruto" Type="INT" Comment="Input event qualifier" />
+      <VarDeclaration Name="stpRangeMaximo" Type="REAL" />
+      <VarDeclaration Name="stpRangeMinimo" Type="REAL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="stsFalhaSensor" Type="BOOL" />
+      <VarDeclaration Name="stsSensorEscalonado" Type="REAL" />
+    </OutputVars>
+  </InterfaceList>
+  <FBNetwork>
+    <FB ID="1" Name="FB1" Type="basicEscalonamento" x="2020" y="1480" Namespace="Hidryco.HidrycoLib" />
+    <FB ID="2" Name="FB2" Type="E_DELAY" x="2300" y="859.9999" Namespace="IEC61499.Standard">
+      <Parameter Name="$DT" Value="T#5s" />
+    </FB>
+    <Input Name="REQ" x="1220" y="1552" Type="Event" />
+    <Input Name="E_RESET_FALHA" x="1220" y="1612" Type="Event" />
+    <Input Name="E_AJUSTE_STP" x="1220" y="1672" Type="Event" />
+    <Input Name="cmdHabilitaSensor" x="1220" y="1932" Type="Data" />
+    <Input Name="stsSensorBruto" x="1220" y="1992" Type="Data" />
+    <Input Name="stpRangeMaximo" x="1220" y="2052" Type="Data" />
+    <Input Name="stpRangeMinimo" x="1220" y="2112" Type="Data" />
+    <Output Name="CNF" x="3120" y="1552" Type="Event" />
+    <Output Name="stsFalhaSensor" x="3120" y="1932" Type="Data" />
+    <Output Name="stsSensorEscalonado" x="3120" y="1992" Type="Data" />
+    <EventConnections>
+      <Connection Source="$E_AJUSTE_STP" Destination="$1.E_AJUSTE_STP" dx1="40" />
+      <Connection Source="$E_RESET_FALHA" Destination="$1.E_RESET_FALHA" dx1="46.6875" />
+      <Connection Source="$REQ" Destination="$1.REQ" dx1="49.54163" />
+      <Connection Source="$1.CNF" Destination="$CNF" dx1="100" />
+      <Connection Source="$1.START_DELAY" Destination="$2.START" dx1="78.22949" dx2="50" dy="-169.9999" />
+      <Connection Source="$2.EO" Destination="$1.END_DELAY">
+        <Points>
+          <Points>
+            <X>660.375</X>
+            <Y>224.999985</Y>
+          </Points>
+          <Points>
+            <X>670.375</X>
+            <Y>224.999985</Y>
+          </Points>
+          <Points>
+            <X>670.375</X>
+            <Y>424.999969</Y>
+          </Points>
+          <Points>
+            <X>499.999969</X>
+            <Y>424.999969</Y>
+          </Points>
+        </Points>
+      </Connection>
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="$stpRangeMinimo" Destination="$1.stpRangeMinimo" dx1="46.70837" />
+      <Connection Source="$stpRangeMaximo" Destination="$1.stpRangeMaximo" dx1="40" />
+      <Connection Source="$stsSensorBruto" Destination="$1.stsSensorBruto" dx1="98.39587" />
+      <Connection Source="$cmdHabilitaSensor" Destination="$1.cmdHabilitaSensor" dx1="40" />
+      <Connection Source="$1.stsSensorEscalonado" Destination="$stsSensorEscalonado" dx1="40" />
+      <Connection Source="$1.stsFalhaSensor" Destination="$stsFalhaSensor" dx1="60" />
+    </DataConnections>
+  </FBNetwork>
+</FBType>

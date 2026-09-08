@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="01e7f10b-090c-4491-9fd1-89af1ddb71c5" Name="pidCtl" Format="2.0" Comment="Composite Function Block Type" Namespace="Hidryco.HidrycoLib">
+  <Attribute Name="Configuration.FB.IDCounter" Value="30" />
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="1.0.1" Author="ApplicationLibDevTeam" Date="11/15/2023" Remarks="First Version" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="REQ" Comment="Request to execute PID in auto or manual mode">
+        <With Var="Pv" />
+        <With Var="Gain" />
+        <With Var="DerivativeTime" />
+        <With Var="IntegralTime" />
+        <With Var="Direction" />
+        <With Var="Deadband" />
+        <With Var="DWorkOnError" />
+        <With Var="Mode" />
+        <With Var="PresetValue" />
+        <With Var="CycleTime" />
+        <With Var="EnFeedFwd" />
+        <With Var="FeedFwdGain" />
+        <With Var="FeedFwd" />
+        <With Var="LagTime" />
+        <With Var="OutMin" />
+        <With Var="OutMax" />
+        <With Var="ProhibitOutInc" />
+        <With Var="ProhibitOutDec" />
+        <With Var="Bump" />
+      </Event>
+      <Event Name="REQ_SP" Comment="Request for setpoint execution">
+        <With Var="Sp" />
+      </Event>
+      <Event Name="REQ_ILCK" Comment="Request to update interlock">
+        <With Var="IlckCond" />
+        <With Var="IlckType" />
+      </Event>
+      <Event Name="REQ_TRACK" Comment="Request for track setpoint">
+        <With Var="TrackSp" />
+      </Event>
+      <Event Name="REQ_PARA" Comment="Request for parameter updates">
+        <With Var="Gain" />
+        <With Var="DerivativeTime" />
+        <With Var="IntegralTime" />
+        <With Var="Direction" />
+        <With Var="Deadband" />
+        <With Var="DWorkOnError" />
+        <With Var="CycleTime" />
+        <With Var="EnFeedFwd" />
+        <With Var="LagTime" />
+        <With Var="OutMin" />
+        <With Var="OutMax" />
+        <With Var="ProhibitOutInc" />
+        <With Var="ProhibitOutDec" />
+      </Event>
+      <Event Name="REQ_FEEDFWD" Comment="Request for executing feedforward gain">
+        <With Var="FeedFwd" />
+        <With Var="EnFeedFwd" />
+        <With Var="FeedFwdGain" />
+      </Event>
+      <Event Name="REQ_OUTBIAS" Comment="Request to update outbias offset value">
+        <With Var="OutbiasOffset" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="CNF" Comment="Execution confirmation">
+        <With Var="Out" />
+        <With Var="OutMinActive" />
+        <With Var="OutMaxActive" />
+        <With Var="CalcP" />
+        <With Var="CalcI" />
+        <With Var="CalcD" />
+        <With Var="CalcDeadband" />
+        <With Var="CalcFf" />
+        <With Var="IsAuto" />
+        <With Var="IsMan" />
+        <With Var="DeadbandActive" />
+        <With Var="OutChangeProhibited" />
+        <With Var="Outbias" />
+      </Event>
+      <Event Name="C_CNF" Comment="Cyclic execution confirmation">
+        <With Var="Out" />
+        <With Var="OutMinActive" />
+        <With Var="OutMaxActive" />
+        <With Var="OutInc" />
+        <With Var="OutDec" />
+        <With Var="CalcP" />
+        <With Var="CalcI" />
+        <With Var="CalcD" />
+        <With Var="CalcDeadband" />
+        <With Var="CalcFf" />
+        <With Var="IsAuto" />
+        <With Var="IsMan" />
+        <With Var="DeadbandActive" />
+        <With Var="OutChangeProhibited" />
+        <With Var="Outbias" />
+      </Event>
+      <Event Name="CNF_READY" Comment="Execution confirmation of control module ready">
+        <With Var="Ready" />
+      </Event>
+      <Event Name="IND_LIMIT" Comment="Indication for output low/high limit activated">
+        <With Var="OutMinActive" />
+        <With Var="OutMaxActive" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="Pv" Type="VTQREAL" Comment="Process value" />
+      <VarDeclaration Name="Sp" Type="VTQREAL" Comment="Setpoint" />
+      <VarDeclaration Name="Mode" Type="BOOL" Comment="1 = Auto, 0 = Manual mode" />
+      <VarDeclaration Name="Gain" Type="REAL" Comment="Gain parameter for PID calculation" />
+      <VarDeclaration Name="IntegralTime" Type="REAL" Comment="Integral parameter for I calculation" />
+      <VarDeclaration Name="DerivativeTime" Type="REAL" Comment="Derivative parameter for D calculation" />
+      <VarDeclaration Name="Direction" Type="BOOL" InitialValue="FALSE" Comment="Direction for error calculation (0 = PV-SP; 1 = SP-PV)" />
+      <VarDeclaration Name="Deadband" Type="REAL" Comment="Deadband for I and D calculation" />
+      <VarDeclaration Name="DWorkOnError" Type="BOOL" Comment="1 = Derivative applied to error; 0 = Derivative applied to Pv" />
+      <VarDeclaration Name="LagTime" Type="REAL" Comment="Lag time parameter for D calculation" />
+      <VarDeclaration Name="OutMin" Type="REAL" Comment="Minimal output value" />
+      <VarDeclaration Name="OutMax" Type="REAL" Comment="Maximal output value" />
+      <VarDeclaration Name="PresetValue" Type="VTQREAL" Comment="Preset value for Out" />
+      <VarDeclaration Name="CycleTime" Type="DINT" Comment="Timebase for PID calculation (ms)" />
+      <VarDeclaration Name="EnFeedFwd" Type="BOOL" Comment="1 = Feed forward usage active" />
+      <VarDeclaration Name="FeedFwdGain" Type="REAL" Comment="Feed forward Gain parameter" />
+      <VarDeclaration Name="FeedFwd" Type="REAL" Comment="Feedforward" />
+      <VarDeclaration Name="ProhibitOutInc" Type="BOOL" Comment="1 = Output increment prohibited" />
+      <VarDeclaration Name="ProhibitOutDec" Type="BOOL" Comment="1 = Output decrement prohibited" />
+      <VarDeclaration Name="Bump" Type="BOOL" Comment="1 =Transition to automatic mode with bump ,0= Bumpless transition to automatic mode " />
+      <VarDeclaration Name="IlckCond" Type="BOOL" Comment="1 = Interlock condition active" />
+      <VarDeclaration Name="IlckType" Type="CondType" Namespace="SE.App2CommonProcess" Comment="Type of condition interlock, (0 = Normal, 1 = Process interlock/Sequence interlock)" />
+      <VarDeclaration Name="TrackSp" Type="BOOL" Comment="1 = Track setpoint" />
+      <VarDeclaration Name="OutbiasOffset" Type="REAL" Comment="Output offset (bias), calculated based on integral component " />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="Out" Type="VTQREAL" Comment="Calculated Output value" />
+      <VarDeclaration Name="OutMinActive" Type="BOOL" Comment="1 = Out has reached OutMinLimit" />
+      <VarDeclaration Name="OutMaxActive" Type="BOOL" Comment="1 = Out has reached OutMaxLimit" />
+      <VarDeclaration Name="OutInc" Type="BOOL" Comment="1 = Output is increasing" />
+      <VarDeclaration Name="OutDec" Type="BOOL" Comment="1 = Output is decreasing" />
+      <VarDeclaration Name="Ready" Type="BOOL" Comment="1 = Control module ready for operation" />
+      <VarDeclaration Name="CalcP" Type="REAL" Comment="Calculated proportional part" />
+      <VarDeclaration Name="CalcI" Type="REAL" Comment="Calculated intergral part" />
+      <VarDeclaration Name="CalcD" Type="REAL" Comment="Calculated derivative part" />
+      <VarDeclaration Name="CalcDeadband" Type="REAL" Comment="Calculated Deadband " />
+      <VarDeclaration Name="CalcFf" Type="REAL" Comment="Calculated Feed forward value" />
+      <VarDeclaration Name="IsAuto" Type="BOOL" Comment="1 = Automatic mode detected" />
+      <VarDeclaration Name="IsMan" Type="BOOL" Comment="1 = Manual mode detected" />
+      <VarDeclaration Name="DeadbandActive" Type="BOOL" Comment="1 = Deadband mode is active" />
+      <VarDeclaration Name="OutChangeProhibited" Type="BOOL" Comment="1 = Output changed prohibited" />
+      <VarDeclaration Name="Outbias" Type="REAL" Comment="Output offset (bias) value in Auto Mode and Integration time is zero" />
+    </OutputVars>
+  </InterfaceList>
+  <FBNetwork>
+    <FB ID="2" Name="cycleEvent" Type="E_CYCLE" x="3620" y="380" Namespace="IEC61499.Standard" />
+    <FB ID="30" UID="5" Name="pidSC" Type="pidSC" x="1640" y="380" Namespace="SE.App2Base" />
+    <Input Name="REQ_SP" x="440" y="572" Type="Event" />
+    <Input Name="FeedFwd" x="440" y="1672" Type="Data" />
+    <Input Name="REQ_FEEDFWD" x="4700" y="452" Type="Event" />
+    <Input Name="Mode" x="440" y="1012" Type="Data" />
+    <Input Name="Sp" x="440" y="951.9999" Type="Data" />
+    <Input Name="CycleTime" x="440" y="1612" Type="Data" />
+    <Input Name="EnFeedFwd" x="440" y="1852" Type="Data" />
+    <Input Name="FeedFwdGain" x="440" y="1792" Type="Data" />
+    <Input Name="ProhibitOutInc" x="440" y="1912" Type="Data" />
+    <Input Name="ProhibitOutDec" x="440" y="1972" Type="Data" />
+    <Input Name="Pv" x="440" y="892" Type="Data" />
+    <Input Name="Gain" x="440" y="1072" Type="Data" />
+    <Input Name="DerivativeTime" x="440" y="1132" Type="Data" />
+    <Input Name="IntegralTime" x="440" y="1192" Type="Data" />
+    <Input Name="LagTime" x="440" y="1252" Type="Data" />
+    <Input Name="OutMin" x="440" y="1312" Type="Data" />
+    <Input Name="OutMax" x="440" y="1372" Type="Data" />
+    <Input Name="PresetValue" x="440" y="1732" Type="Data" />
+    <Input Name="Deadband" x="440" y="1432" Type="Data" />
+    <Input Name="Direction" x="440" y="1492" Type="Data" />
+    <Input Name="DWorkOnError" x="440" y="1552" Type="Data" />
+    <Input Name="REQ" x="440" y="392" Type="Event" />
+    <Input Name="REQ_PARA" x="440" y="632" Type="Event" />
+    <Input Name="Bump" x="440" y="2032" Type="Data" />
+    <Input Name="OutbiasOffset" x="440" y="2272" Type="Data" />
+    <Input Name="REQ_ILCK" x="440" y="452" Type="Event" />
+    <Input Name="IlckCond" x="440" y="2092" Type="Data" />
+    <Input Name="IlckType" x="440" y="2152" Type="Data" />
+    <Input Name="REQ_TRACK" x="440" y="512" Type="Event" />
+    <Input Name="TrackSp" x="440" y="2212" Type="Data" />
+    <Input Name="REQ_OUTBIAS" x="440" y="692" Type="Event" />
+    <Frame Name="FRAME1" X="4440" Y="200" Width="946.1982" Height="440">
+      <Parameter Name="BackgroundColor" Value="AliceBlue" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 10pt" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="Event to bing the FF value in the FB&#xD;&#xA;Will wait the normal cycle to be applyed.&#xD;&#xA;Event not connected in purpose&#xD;&#xA;" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME3" X="200" Y="200" Width="4040" Height="2300">
+      <Parameter Name="BackgroundColor" Value="AliceBlue" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 10pt" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="PID Calculation" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Output Name="CNF_READY" x="2880" y="632" Type="Event" />
+    <Output Name="Ready" x="2880" y="1192" Type="Data" />
+    <Output Name="Outbias" x="2880" y="1852" Type="Data" />
+    <Output Name="CNF" x="2880" y="512" Type="Event" />
+    <Output Name="Out" x="2880" y="892" Type="Data" />
+    <Output Name="OutMinActive" x="2880" y="951.9999" Type="Data" />
+    <Output Name="OutMaxActive" x="2880" y="1012" Type="Data" />
+    <Output Name="OutInc" x="2880" y="1072" Type="Data" />
+    <Output Name="C_CNF" x="2880" y="572" Type="Event" />
+    <Output Name="OutDec" x="2880" y="1132" Type="Data" />
+    <Output Name="IND_LIMIT" x="2880" y="692" Type="Event" />
+    <Output Name="CalcP" x="2880" y="1252" Type="Data" />
+    <Output Name="CalcI" x="2880" y="1312" Type="Data" />
+    <Output Name="CalcD" x="2880" y="1372" Type="Data" />
+    <Output Name="CalcDeadband" x="2880" y="1432" Type="Data" />
+    <Output Name="CalcFf" x="2880" y="1492" Type="Data" />
+    <Output Name="IsAuto" x="2880" y="1552" Type="Data" />
+    <Output Name="IsMan" x="2880" y="1612" Type="Data" />
+    <Output Name="DeadbandActive" x="2880" y="1732" Type="Data" />
+    <Output Name="OutChangeProhibited" x="2880" y="1792" Type="Data" />
+    <EventConnections>
+      <Connection Source="$2.EO" Destination="$30.C_REQ">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$30.CNF" Destination="$CNF" />
+      <Connection Source="$30.C_CNF" Destination="$C_CNF" />
+      <Connection Source="$30.IND_LIMIT" Destination="$IND_LIMIT" />
+      <Connection Source="$REQ_PARA" Destination="$30.OP_PARA">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$30.CNF_READY" Destination="$CNF_READY" />
+      <Connection Source="$REQ_ILCK" Destination="$30.REQ_ILCK" dx1="40" />
+      <Connection Source="$REQ_TRACK" Destination="$30.REQ_TRACK" dx1="41.39587" />
+      <Connection Source="$REQ_OUTBIAS" Destination="$30.REQ_OUTBIAS" />
+      <Connection Source="$REQ" Destination="$30.REQ" dx1="40" />
+      <Connection Source="$30.C_START" Destination="$2.START" />
+      <Connection Source="$30.C_STOP" Destination="$2.STOP" />
+      <Connection Source="$REQ_SP" Destination="$30.REQ" dx1="69.08337" />
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="$FeedFwd" Destination="$30.FeedFwd" dx1="40" />
+      <Connection Source="$Sp" Destination="$30.Sp" dx1="47.45837" />
+      <Connection Source="$EnFeedFwd" Destination="$30.FeedFwdOn" />
+      <Connection Source="$FeedFwdGain" Destination="$30.FeedFwdGain" />
+      <Connection Source="$ProhibitOutInc" Destination="$30.ProhibitOutInc" dx1="40" />
+      <Connection Source="$ProhibitOutDec" Destination="$30.ProhibitOutDec" dx1="45.21875" />
+      <Connection Source="$Pv" Destination="$30.Pv" />
+      <Connection Source="$Gain" Destination="$30.Gain" dx1="40" />
+      <Connection Source="$DerivativeTime" Destination="$30.Rate" />
+      <Connection Source="$IntegralTime" Destination="$30.Reset" />
+      <Connection Source="$LagTime" Destination="$30.LagTime" />
+      <Connection Source="$OutMin" Destination="$30.OutMinLimit" />
+      <Connection Source="$OutMax" Destination="$30.OutMaxLimit" dx1="40" />
+      <Connection Source="$PresetValue" Destination="$30.PresetValue" />
+      <Connection Source="$Deadband" Destination="$30.Deadband" />
+      <Connection Source="$Direction" Destination="$30.Direction" />
+      <Connection Source="$DWorkOnError" Destination="$30.DWorkOnError" />
+      <Connection Source="$30.Out" Destination="$Out" />
+      <Connection Source="$30.OutMinActive" Destination="$OutMinActive" dx1="195.8542" />
+      <Connection Source="$30.OutMaxActive" Destination="$OutMaxActive" />
+      <Connection Source="$30.OutInc" Destination="$OutInc" dx1="235.8542" />
+      <Connection Source="$30.OutDec" Destination="$OutDec" />
+      <Connection Source="$30.CalcP" Destination="$CalcP" />
+      <Connection Source="$30.CalcI" Destination="$CalcI" />
+      <Connection Source="$30.CalcD" Destination="$CalcD" dx1="337.927" />
+      <Connection Source="$30.CalcDeadband" Destination="$CalcDeadband" />
+      <Connection Source="$30.CalcFf" Destination="$CalcFf" />
+      <Connection Source="$30.IsAuto" Destination="$IsAuto" />
+      <Connection Source="$30.IsMan" Destination="$IsMan">
+        <Points>
+          <Points>
+            <X>623.536438</X>
+            <Y>410</Y>
+          </Points>
+          <Points>
+            <X>726.036438</X>
+            <Y>410</Y>
+          </Points>
+          <Points>
+            <X>726.036438</X>
+            <Y>409.999969</Y>
+          </Points>
+          <Points>
+            <X>720</X>
+            <Y>409.999969</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$30.DeadbandActive" Destination="$DeadbandActive" />
+      <Connection Source="$30.OutChangeProhibited" Destination="$OutChangeProhibited" />
+      <Connection Source="$Mode" Destination="$30.Mode" />
+      <Connection Source="$30.Outbias" Destination="$Outbias" />
+      <Connection Source="$Bump" Destination="$30.Bump" />
+      <Connection Source="$OutbiasOffset" Destination="$30.OutbiasOffset" />
+      <Connection Source="$CycleTime" Destination="$30.TimeBase" dx1="40" />
+      <Connection Source="$30.Ready" Destination="$Ready" />
+      <Connection Source="$IlckCond" Destination="$30.IlckCond" />
+      <Connection Source="$IlckType" Destination="$30.IlckType" />
+      <Connection Source="$TrackSp" Destination="$30.TrackSp" />
+      <Connection Source="$30.TimeOut" Destination="$2.DT" dx1="995.8542" />
+    </DataConnections>
+  </FBNetwork>
+</FBType>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="953eff34-7bd9-40b2-84e7-8d97b8ad239e" Name="LevelDifferenceSD" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="7/13/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="D9B5D17E158AE3CD" Name="REQ" Comment="Normal Execution Request">
+        <With Var="Starting" />
+        <With Var="Stopping" />
+        <With Var="LevelPv" />
+        <With Var="AdjValue" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="992B7C898E5819B3" Name="CNF_ALARM" Comment="Execution Confirmation">
+        <With Var="Alarm" />
+        <With Var="LevelDifference" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="F802A8EFF37B6E22" Name="Starting" Type="BOOL" />
+      <VarDeclaration ID="590721E0F8BE73EE" Name="Stopping" Type="BOOL" />
+      <VarDeclaration ID="B306C7CD1AB5B0B9" Name="LevelPv" Type="REAL" />
+      <VarDeclaration ID="BB593FCAF41C2297" Name="AdjValue" Type="REAL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="CB518D677C35638A" Name="Alarm" Type="BOOL" />
+      <VarDeclaration ID="44DE1A2386516510" Name="LevelDifference" Type="REAL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="2ea7b1c4-7e95-4039-a888-a18819fd2d90">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="MemoLevelPv,AlarmAlg" />
+    <InternalVars>
+      <VarDeclaration ID="5760562B934EF998" Name="MemoLevelPv" Type="REAL" />
+      <VarDeclaration ID="B994B9A86530D8B2" Name="LevelDiff" Type="REAL" />
+    </InternalVars>
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="1396.941" y="421.4117" />
+      <ECState Name="Starting" x="1400" y="947.9999">
+        <ECAction Algorithm="MemoLevelPv" Output="CNF_ALARM" />
+      </ECState>
+      <ECState Name="Stopping" x="1404" y="1432">
+        <ECAction Algorithm="AlarmAlg" Output="CNF_ALARM" />
+      </ECState>
+      <ECTransition Source="START" Destination="Starting" Condition="REQ AND Starting" x="1401.061" y="672.108">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="350.3048,149.3842,350.5096,184.5702" />
+      </ECTransition>
+      <ECTransition Source="Stopping" Destination="START" Condition="1" x="724.0945" y="939.8682">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="135.3391,273.8284,135.0722,198.2995" />
+      </ECTransition>
+      <ECTransition Source="Starting" Destination="Stopping" Condition="Stopping" x="1401.269" y="1180.625">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="350.0555,278.5567,350.3545,310.1934" />
+      </ECTransition>
+    </ECC>
+    <Algorithm ID="b9ec7c61-6ced-4341-97b9-995494b73cec" Name="MemoLevelPv">
+      <ST><![CDATA[;
+MemoLevelPv := LevelPv;
+Alarm := FALSE;]]></ST>
+    </Algorithm>
+    <Algorithm ID="0121d1ce-4a37-4145-8379-7ed238e85535" Name="AlarmAlg">
+      <ST><![CDATA[;
+LevelDiff := MemoLevelPv - LevelPv;
+LevelDifference := MemoLevelPv - LevelPv;
+
+IF LevelDiff < AdjValue THEN
+	Alarm := TRUE;
+ELSE
+	Alarm := FALSE;
+END_IF;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

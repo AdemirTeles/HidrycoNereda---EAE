@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="32b60df2-19b9-4223-abab-db5cbb9318d5" Name="ManStartFlushGSI" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="6/20/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="60C9036B1713EBA1" Name="REQ" Comment="Normal Execution Request">
+        <With Var="FlushStarted" />
+        <With Var="FlushStopped" />
+        <With Var="iFlushReady" />
+        <With Var="iStartHMI" />
+      </Event>
+      <Event ID="3E39BF597AD2C2E6" Name="FORCE_RDY">
+        <With Var="ForceStop" />
+      </Event>
+      <Event ID="8608B99E823C5D83" Name="REQ_HMI">
+        <With Var="iStartHMI" />
+      </Event>
+      <Event ID="A962C87CC477C248" Name="FB_INF_PUMP">
+        <With Var="FbInfPumpStopped" />
+        <With Var="FbInfPumpRunning" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="00A4140AB53E963E" Name="CNF" Comment="Execution Confirmation">
+        <With Var="oFlushReady" />
+        <With Var="oStartHMI" />
+      </Event>
+      <Event ID="C340939CC9DBD1E9" Name="CNF_START_GS">
+        <With Var="ReqStartGritScreen" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="67C658F78CED3057" Name="FlushStarted" Type="BOOL" />
+      <VarDeclaration ID="BA8EC4B9BE40E0A6" Name="FlushStopped" Type="BOOL" />
+      <VarDeclaration ID="9108BC98CAC8F1BB" Name="iFlushReady" Type="BOOL" />
+      <VarDeclaration ID="E77A5D891F4172B1" Name="ForceStop" Type="BOOL" />
+      <VarDeclaration ID="5A7EC5FDC0ED3386" Name="iStartHMI" Type="BOOL" />
+      <VarDeclaration ID="825A7B95C157030F" Name="FbInfPumpStopped" Type="BOOL" />
+      <VarDeclaration ID="5B2208B856E87E5B" Name="FbInfPumpRunning" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="9411F2FBF7171695" Name="oFlushReady" Type="BOOL" />
+      <VarDeclaration ID="1E842B248EE3D4C0" Name="oStartHMI" Type="BOOL" />
+      <VarDeclaration ID="805B9943D8B65AAB" Name="ReqStartGritScreen" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="ac967ec6-d914-4a7f-8108-7d9965ac1412">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="REQ,ManStart,NoReqGS" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="2020.941" y="841.4116" />
+      <ECState Name="PumpRunning" x="2803.239" y="1880.985" />
+      <ECState Name="ManStart" x="2035.118" y="2782.167">
+        <ECAction Algorithm="ManStart" Output="CNF" />
+        <ECAction Output="CNF_START_GS" />
+      </ECState>
+      <ECState Name="ForceStop" x="2037.977" y="3290.739">
+        <ECAction Algorithm="REQ" Output="CNF" />
+      </ECState>
+      <ECState Name="NoReqGS" x="2026.857" y="1274.754">
+        <ECAction Algorithm="NoReqGS" Output="CNF_START_GS" />
+        <ECAction Output="CNF" />
+      </ECState>
+      <ECState Name="PumpStopped" x="2816" y="2476">
+        <ECAction Algorithm="REQ" Output="CNF" />
+      </ECState>
+      <ECState Name="FlushStarted" x="3788" y="2465">
+        <ECAction Algorithm="REQ" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="NoReqGS" Condition="REQ" x="2025.739" y="1040.835">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="506.3339,245.0638,506.7052,272.4788" />
+      </ECTransition>
+      <ECTransition Source="NoReqGS" Destination="ManStart" Condition="REQ_HMI AND iStartHMI AND NOT ForceStop" x="2032.913" y="1988.96">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="508.0569,435.4835,508.7072,552.4131" />
+      </ECTransition>
+      <ECTransition Source="ManStart" Destination="ManStart" Condition="REQ_HMI" x="1673.469" y="2803.595">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="400.9226,756.9702,393.7798,648.3988" />
+      </ECTransition>
+      <ECTransition Source="ManStart" Destination="START" Condition="NOT iStartHMI" x="1271.194" y="2588.273">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="344.8841,1050.89,175.9848,363.963" />
+      </ECTransition>
+      <ECTransition Source="ManStart" Destination="ForceStop" Condition="ForceStop" x="2038.387" y="3026.094">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="509.6262,738.8191,509.7656,772.5015" />
+      </ECTransition>
+      <ECTransition Source="ForceStop" Destination="START" Condition="1" x="953.4422" y="2416.534">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="182.5478,1033.905,132.4099,227.936" />
+      </ECTransition>
+      <ECTransition Source="NoReqGS" Destination="PumpRunning" Condition="FB_INF_PUMP AND FbInfPumpRunning" x="2404" y="1569.365">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="573.3384,370.7217,626.8751,412.5433" />
+      </ECTransition>
+      <ECTransition Source="PumpRunning" Destination="PumpStopped" Condition="FbInfPumpStopped" x="2813.051" y="2172.263">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="702.9193,522.1,703.8909,562.9937" />
+      </ECTransition>
+      <ECTransition Source="PumpRunning" Destination="ManStart" Condition="REQ_HMI AND iStartHMI AND NOT ForceStop" x="2397.671" y="2331.356">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="626.2993,549.6199,569.7021,616.0214" />
+      </ECTransition>
+      <ECTransition Source="PumpStopped" Destination="FlushStarted" Condition="FlushStarted OR NOT iFlushReady" x="3285.581" y="2650.936">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="796.6303,673.6895,843.9343,673.1541" />
+      </ECTransition>
+      <ECTransition Source="FlushStarted" Destination="NoReqGS" Condition="FlushStopped" x="3374.236" y="1288.955">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="942.6248,323.188,808.7315,232.6979" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="REQ">
+      <ST><![CDATA[;
+oFlushReady := iFlushReady;]]></ST>
+    </Algorithm>
+    <Algorithm Name="ManStart">
+      <ST><![CDATA[;
+oFlushReady := TRUE;
+oStartHMI := iStartHMI;
+ReqStartGritScreen := TRUE;]]></ST>
+    </Algorithm>
+    <Algorithm Name="NoReqGS">
+      <ST><![CDATA[;
+ReqStartGritScreen := FALSE;
+oFlushReady := FALSE;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="4f7d5928-cee9-425b-8a34-6d9abc890a93" Comment="Composite Function Block Type" Name="Raspador_Gordura" Format="2.0" Namespace="Hidryco.HidrycoLib">
+  <Attribute Name="HMI.Alias" Value="" />
+  <Attribute Name="Configuration.FB.IDCounter" Value="9" />
+  <Identification Standard="61499-2" />
+  <VersionInfo Version="0.0" Author=" " Date="04/03/2026" Remarks="template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="E_ATUALIZA_SUBSISTEMA">
+        <With Var="stsAutomaticoSubsistema" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="E_ATUALIZA_ANIMACAO">
+        <With Var="stsAnimacao" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="stsAutomaticoSubsistema" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="stsAnimacao" Type="INT" />
+    </OutputVars>
+  </InterfaceList>
+  <FBNetwork>
+    <FB ID="3" UID="1" Name="SYMLINKMULTIVARDST1" Type="SYMLINKMULTIVARDST_750918ABDFD25675" x="839.9999" y="980" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=3;VALUE${I}:BOOL,INT,DINT" />
+      <Parameter Name="$NAME1" Value="'$${PATH}stsDefeito'" />
+      <Parameter Name="$NAME2" Value="'$${PATH}stsAnimacao'" />
+      <Parameter Name="$NAME3" Value="'$${PATH}stsHorimetroHora'" />
+      <Parameter Name="$QI" Value="TRUE" />
+    </FB>
+    <FB ID="4" Name="IThis" Type="Raspador_Gordura_HMI" x="1720" y="1020" Namespace="Hidryco.HidrycoLib">
+      <Parameter Name="$3BCF911DB9E4A31D" Value="TRUE" />
+    </FB>
+    <FB ID="9" UID="5" Name="SYMLINKMULTIVARSRC1" Type="SYMLINKMULTIVARSRC_189D2BBD407C6F124" x="4100" y="1160" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=4;VALUE${I}:BOOL,INT,BOOL,BOOL" />
+      <Parameter Name="$QI" Value="TRUE" />
+      <Parameter Name="$NAME1" Value="'$${PATH}cmdLigaManual'" />
+      <Parameter Name="$NAME2" Value="'$${PATH}stpVelocidade'" />
+      <Parameter Name="$NAME3" Value="'$${PATH}cmdLigaIntermitente'" />
+      <Parameter Name="$NAME4" Value="'$${PATH}habilitaReversao'" />
+    </FB>
+    <FB ID="6" Name="plcStart1" Type="plcStart" x="360" y="280" Namespace="SE.App2Base">
+      <Parameter Name="$Prio" Value="10" />
+    </FB>
+    <Input Name="E_ATUALIZA_SUBSISTEMA" x="900" y="812" Type="Event" />
+    <Input Name="stsAutomaticoSubsistema" x="560" y="1832" Type="Data" />
+    <Output Name="E_ATUALIZA_ANIMACAO" x="1720" y="2212" Type="Event" />
+    <Output Name="stsAnimacao" x="1900" y="2272" Type="Data" />
+    <EventConnections>
+      <Connection Source="$6.FIRST_INIT" Destination="$3.INIT" dx1="68.08337" dx2="49.99988" dy="410" />
+      <Connection Source="$6.REDO_INIT" Destination="$3.INIT" dx1="48.08337" dx2="49.99988" dy="350" />
+      <Connection Source="$9.INITO" Destination="$6.ACK_FIRST" dx1="40" dx2="50" dy="-290" />
+      <Connection Source="$3.INITO" Destination="$4.15EF549AA50B5CD9" dx1="121.6251" />
+      <Connection Source="$3.CNF" Destination="$4.CE3D71C3D5E8C2A8" dx1="101.6251" />
+      <Connection Source="$4.18973EE9060A42C7" Destination="$4.9261B7CA035A3B20">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$4.9A89ED66517374F3" Destination="$4.9261B7CA035A3B20">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$4.E27D6C619D9B7BB9" Destination="$4.9261B7CA035A3B20">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$4.FD6789879C7C9B6B" Destination="$9.INIT" dx1="200" />
+      <Connection Source="$4.E27D6C619D9B7BB9" Destination="$9.REQ" dx1="260" />
+      <Connection Source="$4.65CFE428D88D8673" Destination="$9.REQ" dx1="160" />
+      <Connection Source="$4.18973EE9060A42C7" Destination="$9.REQ" dx1="220" />
+      <Connection Source="$4.9A89ED66517374F3" Destination="$9.REQ" dx1="218.771" />
+      <Connection Source="$E_ATUALIZA_SUBSISTEMA" Destination="$4.CE3D71C3D5E8C2A8" dx1="7.541748" />
+      <Connection Source="$3.CNF" Destination="$E_ATUALIZA_ANIMACAO" dx1="101.6251" />
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="$3.VALUE1" Destination="$4.FC75FB126E91B6E9" dx1="81.62512" />
+      <Connection Source="$3.VALUE2" Destination="$4.6FE05632F669F60B" dx1="61.62512" />
+      <Connection Source="$3.VALUE3" Destination="$4.5713055A59711DA7" dx1="41.62512" />
+      <Connection Source="$stsAutomaticoSubsistema" Destination="$4.B65F795C505E8E4F" dx1="48.875" />
+      <Connection Source="$4.FD19AE8002B6E555" Destination="$4.8411D69C97330565" dx1="100" dx2="209.9999" dy="390" />
+      <Connection Source="$4.7C0A0D33D5DB5148" Destination="$4.86F965F66A09F9B9" dx1="80" dx2="229.9999" dy="330" />
+      <Connection Source="$4.FD19AE8002B6E555" Destination="$9.VALUE1" dx1="100" />
+      <Connection Source="$4.7C0A0D33D5DB5148" Destination="$9.VALUE3" dx1="80" />
+      <Connection Source="$4.59CA5DE10D19BB93" Destination="$9.VALUE4" dx1="60" />
+      <Connection Source="$4.48BD45512435DD98" Destination="$9.VALUE2" dx1="218.771" />
+      <Connection Source="$3.VALUE2" Destination="$stsAnimacao" dx1="61.62512" />
+    </DataConnections>
+  </FBNetwork>
+</FBType>

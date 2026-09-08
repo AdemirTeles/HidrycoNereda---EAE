@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="ae1c62b6-f4f4-4da2-8a6e-a7709ee05a44" Name="S1SkipS2" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="7/5/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="74AB0FAFF377F024" Name="STEP_ID">
+        <With Var="StepID" />
+        <With Var="S1" />
+        <With Var="S2" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="9D8BC655F08DCD6C" Name="SKIP">
+        <With Var="Skip" />
+      </Event>
+      <Event ID="5213FB99EC5BE951" Name="DONE">
+        <With Var="S1Done" />
+        <With Var="S2Done" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="2058267BFC81675C" Name="StepID" Type="INT" />
+      <VarDeclaration ID="EE0DFC875BC8FD2C" Name="S1" Type="INT" />
+      <VarDeclaration ID="8745D113BFC82E09" Name="S2" Type="INT" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="DBD9C05F71A70F66" Name="Skip" Type="BOOL" />
+      <VarDeclaration ID="59D0E2CFD06FCCA4" Name="S1Done" Type="BOOL" />
+      <VarDeclaration ID="BEF2F356EA04F63C" Name="S2Done" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="f78f8281-3063-461d-94de-0dc35cdc58c8">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="Skip,ResetSkip,S2Done,S1Done" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="1976.941" y="517.4117" />
+      <ECState Name="Skip_S1" x="1184" y="1036">
+        <ECAction Algorithm="S2Done" Output="DONE" />
+      </ECState>
+      <ECState Name="Skip_S2" x="2727.333" y="1029.333">
+        <ECAction Algorithm="S1Done" Output="DONE" />
+      </ECState>
+      <ECState Name="Skip_1" x="1186.666" y="1524.285">
+        <ECAction Algorithm="Skip" Output="SKIP" />
+      </ECState>
+      <ECState Name="ResetSkip" x="2000" y="2034.286">
+        <ECAction Algorithm="ResetSkip" Output="SKIP" />
+      </ECState>
+      <ECState Name="Skip_2" x="2726.666" y="1487.142">
+        <ECAction Algorithm="Skip" Output="SKIP" />
+      </ECState>
+      <ECTransition Source="START" Destination="Skip_S1" Condition="STEP_ID AND StepID = S2" x="1590.348" y="760.5627">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="425.2187,171.5361,372.4383,206.0547" />
+      </ECTransition>
+      <ECTransition Source="Skip_S1" Destination="Skip_1" Condition="StepID = S1 - 1" x="1188.307" y="1272.902">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="297.1487,301.6253,297.3231,333.6187" />
+      </ECTransition>
+      <ECTransition Source="Skip_1" Destination="ResetSkip" Condition="StepID = S1 + 1" x="1575.072" y="1767.585">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="365.2751,424.0197,419.1945,457.823" />
+      </ECTransition>
+      <ECTransition Source="ResetSkip" Destination="START" Condition="1" x="1985.873" y="1275.349">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="494.586,376.5471,497.9725,261.0441" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="Skip_S2" Condition="STEP_ID AND StepID = S1" x="2344.457" y="751.4467">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="559.8806,169.0547,609.6558,203.0144" />
+      </ECTransition>
+      <ECTransition Source="Skip_S2" Destination="Skip_2" Condition="StepID = S2 - 1" x="2728.159" y="1253.744">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="682.181,298.336,682.0198,327.7871" />
+      </ECTransition>
+      <ECTransition Source="Skip_2" Destination="ResetSkip" Condition="StepID = S2 + 1" x="2338.347" y="1774.974">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="607.1697,426.4828,558.1648,463.3811" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="Skip">
+      <ST><![CDATA[;
+Skip := TRUE;]]></ST>
+    </Algorithm>
+    <Algorithm Name="ResetSkip">
+      <ST><![CDATA[;
+Skip := FALSE;]]></ST>
+    </Algorithm>
+    <Algorithm Name="S2Done">
+      <ST><![CDATA[;
+S1Done := FALSE;
+S2Done := TRUE;]]></ST>
+    </Algorithm>
+    <Algorithm ID="0b22b7a5-0d30-459a-b9c5-9cc8f0253a67" Name="S1Done">
+      <ST><![CDATA[;
+S1Done := TRUE;
+S2Done := FALSE;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

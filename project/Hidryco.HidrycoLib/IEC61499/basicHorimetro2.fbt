@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="b5e4d792-8f3c-5d6e-a012-4e9f3c7d5b02" Name="basicHorimetro2" Comment="Basic Function Block Type - Horimetro com carga inicial dos valores persistidos" Namespace="Hidryco.HidrycoLib">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Hidryco" Version="1.0.0" Author="Hidryco" Date="11/05/2026" Remarks="Corrige falha de restauracao apos reinicio do PLC. Expoe INIT_SEC/MIN/HOR para receber valores persistidos." />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="INIT" Comment="Inicializacao - carrega valores persistidos">
+        <With Var="INIT_SEC" />
+        <With Var="INIT_MIN" />
+        <With Var="INIT_HOR" />
+      </Event>
+      <Event Name="REQ" Comment="Pulso de 1s para incrementar a contagem">
+        <With Var="STS_LIGADO" />
+      </Event>
+      <Event Name="CMD_RESET_HORIMETRO" Comment="Zera o horimetro" />
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="INITO" Comment="Confirmacao de inicializacao" />
+      <Event Name="CNF" Comment="Confirmacao de execucao">
+        <With Var="HORIMETRO_SEC" />
+        <With Var="HORIMETRO_MIN" />
+        <With Var="HORIMETRO_HOR" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="STS_LIGADO" Type="BOOL" Comment="1 = equipamento em operacao (acumula tempo)" />
+      <VarDeclaration Name="INIT_SEC" Type="UINT" Comment="Valor inicial de segundos (vindo do PERSISTENCE)" />
+      <VarDeclaration Name="INIT_MIN" Type="UINT" Comment="Valor inicial de minutos (vindo do PERSISTENCE)" />
+      <VarDeclaration Name="INIT_HOR" Type="UDINT" Comment="Valor inicial de horas (vindo do PERSISTENCE)" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="HORIMETRO_SEC" Type="UINT" Comment="Segundos acumulados (0..59)" />
+      <VarDeclaration Name="HORIMETRO_MIN" Type="UINT" Comment="Minutos acumulados (0..59)" />
+      <VarDeclaration Name="HORIMETRO_HOR" Type="UDINT" Comment="Horas totais acumuladas" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="INIT,LogicaHorimetro,ResetHorimetro" />
+    <ECC>
+      <ECState Name="START" Comment="Estado inicial" x="2296.941" y="565.4117" />
+      <ECState Name="INIT" Comment="Inicializacao com valores persistidos" x="2975.53" y="773.1765">
+        <ECAction Algorithm="INIT" Output="INITO" />
+      </ECState>
+      <ECState Name="CmdAcrescimo" Comment="Incrementa contagem" x="2420" y="1328">
+        <ECAction Algorithm="LogicaHorimetro" Output="CNF" />
+      </ECState>
+      <ECState Name="CmdResetHorimetro" Comment="Zera horimetro" x="752" y="840">
+        <ECAction Algorithm="ResetHorimetro" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="INIT" Condition="INIT" x="2680.022" y="594.8228" />
+      <ECTransition Source="INIT" Destination="START" Condition="1" x="2648.447" y="756.2546" />
+      <ECTransition Source="START" Destination="CmdAcrescimo" Condition="REQ AND (STS_LIGADO)" x="2494.889" y="916.4489" />
+      <ECTransition Source="CmdAcrescimo" Destination="START" Condition="1" x="2322.792" y="1030.532" />
+      <ECTransition Source="START" Destination="CmdResetHorimetro" Condition="CMD_RESET_HORIMETRO" x="1442.58" y="776.2808" />
+      <ECTransition Source="CmdResetHorimetro" Destination="START" Condition="1" x="1627.605" y="615.4225" />
+    </ECC>
+    <Algorithm Name="INIT" Comment="Carrega valores persistidos apos boot/restart do PLC">
+      <ST><![CDATA[// Restaura o estado do horimetro a partir dos valores lidos da persistencia.
+// Sem isto, o horimetro reiniciaria do zero a cada reboot do PLC.
+HORIMETRO_SEC := INIT_SEC;
+HORIMETRO_MIN := INIT_MIN;
+HORIMETRO_HOR := INIT_HOR;
+]]></ST>
+    </Algorithm>
+    <Algorithm Name="LogicaHorimetro" Comment="Incrementa segundos e propaga estouro para minutos e horas">
+      <ST><![CDATA[// Incrementa 1 segundo a cada pulso REQ (esperado a 1 Hz) enquanto STS_LIGADO = TRUE
+HORIMETRO_SEC := HORIMETRO_SEC + 1;
+
+// Quando completa 60s, vira para o proximo minuto
+IF (HORIMETRO_SEC >= 60) THEN
+    HORIMETRO_MIN := HORIMETRO_MIN + 1;
+    HORIMETRO_SEC := 0;
+END_IF;
+
+// Quando completa 60 min, vira para a proxima hora
+IF (HORIMETRO_MIN >= 60) THEN
+    HORIMETRO_HOR := HORIMETRO_HOR + 1;
+    HORIMETRO_MIN := 0;
+END_IF;
+]]></ST>
+    </Algorithm>
+    <Algorithm Name="ResetHorimetro" Comment="Zera todos os contadores">
+      <ST><![CDATA[HORIMETRO_SEC := 0;
+HORIMETRO_MIN := 0;
+HORIMETRO_HOR := 0;
+]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="4aaeb0ac-3b51-46a6-b5fb-cebed89a0fb2" Name="Necessidade_2_Equipamentos_ok" Format="2.0" Comment="Composite Function Block Type" Namespace="Hidryco.HidrycoLib">
+  <Attribute Name="HMI.Alias" Value="" />
+  <Attribute Name="Configuration.FB.IDCounter" Value="4" />
+  <Identification Standard="61499-2" />
+  <VersionInfo Version="0.0" Author=" " Date="25/02/2026" Remarks="template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="E_ATUALIZA_SENSOR">
+        <With Var="stsSensor" />
+      </Event>
+      <Event Name="E_ATUALIZA_ANIMACAO">
+        <With Var="stsAnimacaoBoiaL" />
+        <With Var="stsAnimacaoBoiaH" />
+      </Event>
+      <Event Name="E_ATUALIZA_FALHA_SENSOR">
+        <With Var="stsFalhaSensor" />
+      </Event>
+      <Event Name="E_ATUALIZA_SENSOR_HABILITADO">
+        <With Var="stsSensorHabilitado" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="E_ATUALIZA_HABILITADO">
+        <With Var="stsNecessidadeHabilitado" />
+      </Event>
+      <Event Name="E_ATUALIZA_NECESSIDADE">
+        <With Var="stsNecessidadeEquipamento" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="stsSensorHabilitado" Type="BOOL" />
+      <VarDeclaration Name="stsSensor" Type="REAL" />
+      <VarDeclaration Name="stsFalhaSensor" Type="BOOL" />
+      <VarDeclaration Name="stsAnimacaoBoiaL" Type="INT" />
+      <VarDeclaration Name="stsAnimacaoBoiaH" Type="INT" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="stsNecessidadeHabilitado" Type="BOOL" />
+      <VarDeclaration Name="stsNecessidadeEquipamento" Type="UINT" />
+    </OutputVars>
+  </InterfaceList>
+  <FBNetwork>
+    <FB ID="1" Name="IThis" Type="Necessidade_2_Equipamentos_ok_HMI" x="980" y="900" Namespace="Hidryco.HidrycoLib">
+      <Parameter Name="$A30D208A4E065D32" Value="TRUE" />
+    </FB>
+    <FB ID="3" Name="plcStart1" Type="plcStart" x="140" y="800" Namespace="SE.App2Base">
+      <Parameter Name="$Prio" Value="10" />
+    </FB>
+    <FB ID="4" Name="necessidade2Equipamentos1" Type="necessidade2Equipamentos" x="3520" y="839.9999" Namespace="Hidryco.HidrycoLib">
+      <Parameter Name="$stpTempoAtuacao_FalhaBoiaL" Value="10" />
+    </FB>
+    <Input Name="stsSensor" x="2460" y="1412" Type="Data" />
+    <Input Name="E_ATUALIZA_SENSOR" x="2360" y="912" Type="Event" />
+    <Input Name="stsFalhaSensor" x="2580" y="1592" Type="Data" />
+    <Input Name="stsAnimacaoBoiaL" x="2580" y="1652" Type="Data" />
+    <Input Name="stsAnimacaoBoiaH" x="2580" y="1712" Type="Data" />
+    <Input Name="E_ATUALIZA_ANIMACAO" x="2360" y="971.9998" Type="Event" />
+    <Input Name="E_ATUALIZA_FALHA_SENSOR" x="2360" y="1032" Type="Event" />
+    <Input Name="E_ATUALIZA_SENSOR_HABILITADO" x="2360" y="1092" Type="Event" />
+    <Input Name="stsSensorHabilitado" x="2460" y="1352" Type="Data" />
+    <Output Name="stsNecessidadeHabilitado" x="2460" y="1172" Type="Data" />
+    <Output Name="E_ATUALIZA_HABILITADO" x="2320" y="652" Type="Event" />
+    <Output Name="E_ATUALIZA_NECESSIDADE" x="4960" y="851.9999" Type="Event" />
+    <Output Name="stsNecessidadeEquipamento" x="4980" y="1232" Type="Data" />
+    <EventConnections>
+      <Connection Source="$E_ATUALIZA_SENSOR" Destination="$4.E_ATUALIZA_SENSOR" dx1="42.375" />
+      <Connection Source="$E_ATUALIZA_ANIMACAO" Destination="$4.E_ATUALIZA_ANIMACAO" dx1="40" />
+      <Connection Source="$E_ATUALIZA_FALHA_SENSOR" Destination="$4.E_ATUALIZA_FALHA_SENSOR" dx1="41.3125" />
+      <Connection Source="$3.FIRST_INIT" Destination="$1.E97FB218FB895525" dx1="68.08337" />
+      <Connection Source="$3.REDO_INIT" Destination="$1.E97FB218FB895525" dx1="48.08337" />
+      <Connection Source="$4.E_ATUALIZA_NECESSIDADE" Destination="$1.B109654F158FFBD2" dx1="40" dx2="70" dy="1108" />
+      <Connection Source="$1.9E860D503EFCF575" Destination="$3.ACK_FIRST">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$1.7608063BDC869FD4" Destination="$4.E_ATUALIZA_SETPOINT" dx1="71.91675" />
+      <Connection Source="$4.E_ATUALIZA_NECESSIDADE" Destination="$E_ATUALIZA_NECESSIDADE">
+        <Points>
+          <Points>
+            <X>1245.5365</X>
+            <Y>219.999969</Y>
+          </Points>
+          <Points>
+            <X>1240</X>
+            <Y>219.999969</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$1.7608063BDC869FD4" Destination="$E_ATUALIZA_HABILITADO" dx1="71.91675" />
+      <Connection Source="$E_ATUALIZA_SENSOR_HABILITADO" Destination="$4.E_ATUALIZA_SENSOR_HABILITADO">
+        <Points>
+          <Points>
+            <X>816.2135</X>
+            <Y>280</Y>
+          </Points>
+          <Points>
+            <X>812.5</X>
+            <Y>280</Y>
+          </Points>
+          <Points>
+            <X>812.5</X>
+            <Y>279.999969</Y>
+          </Points>
+          <Points>
+            <X>875</X>
+            <Y>279.999969</Y>
+          </Points>
+        </Points>
+      </Connection>
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="$stsSensor" Destination="$4.stsSensor" dx1="40" />
+      <Connection Source="$4.stsNecessidadeEquipamento" Destination="$stsNecessidadeEquipamento">
+        <Points>
+          <Points>
+            <X>1245.5365</X>
+            <Y>329.999969</Y>
+          </Points>
+          <Points>
+            <X>1245</X>
+            <Y>329.999969</Y>
+          </Points>
+          <Points>
+            <X>1245</X>
+            <Y>315</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$4.stsNecessidadeEquipamento" Destination="$1.96344DA51DFDBFB0" dx1="70" dx2="30" dy="670.0001" />
+      <Connection Source="$1.ED59BB5E5980079F" Destination="$4.cmdHabilita" dx1="91.91675" />
+      <Connection Source="$1.D1B0240B7EBFEA87" Destination="$4.stpLimiteFaixa1" dx1="100" />
+      <Connection Source="$1.B7369073C646B51B" Destination="$4.stpLimiteFaixa2" dx1="80" />
+      <Connection Source="$1.CB64890C9F6C5630" Destination="$4.stpLimiteFaixa3" dx1="60" />
+      <Connection Source="$1.277865F3FC57BC46" Destination="$4.stpLimiteFaixa4" dx1="971.9167" />
+      <Connection Source="$stsAnimacaoBoiaH" Destination="$4.stsAnimacaoBoiaH" dx1="40" />
+      <Connection Source="$stsAnimacaoBoiaL" Destination="$4.stsAnimacaoBoiaL" dx1="40" />
+      <Connection Source="$stsFalhaSensor" Destination="$4.stsFalhaSensor" dx1="43.5625" />
+      <Connection Source="$1.ED59BB5E5980079F" Destination="$stsNecessidadeHabilitado" dx1="91.91675" />
+      <Connection Source="$stsSensorHabilitado" Destination="$4.stsSensorHabilitado" dx1="40.04175" />
+    </DataConnections>
+  </FBNetwork>
+</FBType>

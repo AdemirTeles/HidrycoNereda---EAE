@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="655231f4-217d-499d-b185-1a53f9fcce0e" Name="SpeedSpFlowSensorFail" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="7/20/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="B5D6B08FA2666F02" Name="REQ">
+        <With Var="FlowPvMax" />
+        <With Var="FlowPvMin" />
+        <With Var="SensorFail" />
+        <With Var="FlowSp" />
+        <With Var="PIDOut" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="1FEAADE7145F64BE" Name="CNF">
+        <With Var="SpeedSp" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="3BE251DFC2E7905D" Name="FlowSp" Type="REAL" />
+      <VarDeclaration ID="75C86D8B7647050C" Name="FlowPvMax" Type="REAL" />
+      <VarDeclaration ID="B08827D02DBBFA97" Name="FlowPvMin" Type="REAL" />
+      <VarDeclaration ID="1C28FEF37A13F67F" Name="SensorFail" Type="BOOL" />
+      <VarDeclaration ID="4727B0C2E5DD09FB" Name="PIDOut" Type="REAL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="87931CA83794BFFD" Name="SpeedSp" Type="REAL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="00e323e3-828a-4241-9228-53cde8ca7ce0">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="REQ" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="552.9412" y="429.4117" />
+      <ECState Name="REQ" Comment="Normal execution" x="1173.647" y="836.9412">
+        <ECAction Algorithm="REQ" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="REQ" Condition="REQ" x="915.7164" y="567.8668">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="210.3049,124.764,248.784,150.0277" />
+      </ECTransition>
+      <ECTransition Source="REQ" Destination="START" Condition="1" x="856.8325" y="711.8541">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="235.0631,195.926,196.584,170.6622" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="REQ" Comment="Normally executed algorithm">
+      <ST><![CDATA[;
+IF NOT SensorFail THEN
+	SpeedSp := PIDOut;
+ELSE
+	SpeedSp := (FlowSp - FlowPvMin)/(FlowPvMax - FlowPvMin) * 100;
+END_IF;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

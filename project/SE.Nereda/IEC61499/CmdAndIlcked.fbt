@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="38d03852-ab97-4eec-86af-22b9324f8a07" Name="CmdAndIlcked" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="7/31/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="42EB462001E7FF11" Name="REQ" Comment="Normal Execution Request">
+        <With Var="CmdStart" />
+        <With Var="Interlocked" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="F9551E9B0D43115F" Name="CNF" Comment="Execution Confirmation">
+        <With Var="Available" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="40D3CD6CB4F43C33" Name="CmdStart" Type="BOOL" />
+      <VarDeclaration ID="FDADF7D226C9DBAE" Name="Interlocked" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="11AB35620A02C8A5" Name="Available" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="5fdd7abd-799a-43b7-bc3c-c871b8c7a6db">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="INIT,REQ" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="552.9412" y="429.4117" />
+      <ECState Name="INIT" Comment="Initialization" x="1371.53" y="181.1765">
+        <ECAction Algorithm="INIT" Output="CNF" />
+      </ECState>
+      <ECState Name="REQ" Comment="Normal execution" x="1117.647" y="1000.941">
+        <ECAction Algorithm="REQ" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="INIT" Condition="REQ AND NOT CmdStart" x="975.3132" y="219.0965">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="220.3221,57.46027,270.0567,42.37837" />
+      </ECTransition>
+      <ECTransition Source="INIT" Destination="START" Condition="1" x="1004.772" y="379.2014">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="277.3116,91.30251,227.577,106.3845" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="REQ" Condition="REQ AND CmdStart AND Interlocked" x="898.604" y="662.4629">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="207.3743,141.7577,245.8399,180.6881" />
+      </ECTransition>
+      <ECTransition Source="REQ" Destination="START" Condition="1" x="827.2282" y="790.1765">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="228.0564,223.2593,189.5907,184.3289" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="INIT" Comment="Initialization algorithm">
+      <ST><![CDATA[;
+Available := TRUE;]]></ST>
+    </Algorithm>
+    <Algorithm Name="REQ" Comment="Normally executed algorithm">
+      <ST><![CDATA[;
+Available := FALSE;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>
