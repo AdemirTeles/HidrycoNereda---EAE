@@ -92,7 +92,7 @@ namespace HMI.Main.Canvases
 			this.NVPP_REACTOR02.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 8D, 64D);
 			this.NVPP_REACTOR02.Name = "NVPP_REACTOR02";
 			this.NVPP_REACTOR02.SecurityToken = ((uint)(4294967295u));
-			this.NVPP_REACTOR02.TagName = "B553EA539882D2E1";
+			this.NVPP_REACTOR02.TagName = "1D81A826384C2197";
 			this.NVPP_REACTOR02.EndInit();
 			// 
 			// NVPP_REACTOR02_3
@@ -167,7 +167,7 @@ namespace HMI.Main.Canvases
 			this.REACTOR02.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 600D, 200D);
 			this.REACTOR02.Name = "REACTOR02";
 			this.REACTOR02.SecurityToken = ((uint)(4294967295u));
-			this.REACTOR02.TagName = "B553EA539882D2E1";
+			this.REACTOR02.TagName = "1D81A826384C2197";
 			this.REACTOR02.EndInit();
 			// 
 			// REACTOR2

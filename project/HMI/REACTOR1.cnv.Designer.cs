@@ -166,7 +166,7 @@ namespace HMI.Main.Canvases
 			this.REACTOR01.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 608D, 72D);
 			this.REACTOR01.Name = "REACTOR01";
 			this.REACTOR01.SecurityToken = ((uint)(4294967295u));
-			this.REACTOR01.TagName = "D32FABF3E7C17DE2";
+			this.REACTOR01.TagName = "D41247DF3E1D30DC";
 			this.REACTOR01.EndInit();
 			// 
 			// pipe1
@@ -213,10 +213,10 @@ namespace HMI.Main.Canvases
 			// REACTOR01_1
 			// 
 			this.REACTOR01_1.BeginInit();
-			this.REACTOR01_1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 8D, 64D);
+			this.REACTOR01_1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 8D, 72D);
 			this.REACTOR01_1.Name = "REACTOR01_1";
 			this.REACTOR01_1.SecurityToken = ((uint)(4294967295u));
-			this.REACTOR01_1.TagName = "D32FABF3E7C17DE2";
+			this.REACTOR01_1.TagName = "D41247DF3E1D30DC";
 			this.REACTOR01_1.EndInit();
 			// 
 			// pipe2
