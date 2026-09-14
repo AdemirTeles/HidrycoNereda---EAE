@@ -32,7 +32,6 @@ namespace HMI.Main.Canvases
 			this.sHiHiLevelCalamity1 = new SE.Nereda.Symbols.Calamity.sHiHiLevelCalamity();
 			this.OpenWebPage = new SE.Nereda.Symbols.OpenWebPage.sDefault();
 			this.NVPP_REACTOR01 = new SE.Nereda.Symbols.NeredaReactor.sPhases();
-			this.NVPP_REACTOR02 = new SE.Nereda.Symbols.NeredaReactor.sPhases();
 			this.EmergencyR1 = new SE.Nereda.Symbols.EmergencyReactor.sDefault();
 			this.EmergencyR2 = new SE.Nereda.Symbols.EmergencyReactor.sDefault();
 			this.EmergencyManagement = new SE.Nereda.Symbols.EmergencyManagement.sDataR1();
@@ -96,15 +95,6 @@ namespace HMI.Main.Canvases
 			this.NVPP_REACTOR01.SecurityToken = ((uint)(4294967295u));
 			this.NVPP_REACTOR01.TagName = "D32FABF3E7C17DE2";
 			this.NVPP_REACTOR01.EndInit();
-			// 
-			// NVPP_REACTOR02
-			// 
-			this.NVPP_REACTOR02.BeginInit();
-			this.NVPP_REACTOR02.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.91379310344827591D, 0D, 0D, 0.91145833333333337D, 472D, 512D);
-			this.NVPP_REACTOR02.Name = "NVPP_REACTOR02";
-			this.NVPP_REACTOR02.SecurityToken = ((uint)(4294967295u));
-			this.NVPP_REACTOR02.TagName = "B553EA539882D2E1";
-			this.NVPP_REACTOR02.EndInit();
 			// 
 			// EmergencyR1
 			// 
@@ -199,7 +189,6 @@ namespace HMI.Main.Canvases
 			this.Mode,
 			this.sHiHiLevelCalamity1,
 			this.NVPP_REACTOR01,
-			this.NVPP_REACTOR02,
 			this.EmergencyR1,
 			this.EmergencyR2,
 			this.OpenWebPage,
@@ -219,7 +208,6 @@ namespace HMI.Main.Canvases
 		private SE.Nereda.Symbols.Calamity.sHiHiLevelCalamity sHiHiLevelCalamity1;
 		private SE.Nereda.Symbols.OpenWebPage.sDefault OpenWebPage;
 		private SE.Nereda.Symbols.NeredaReactor.sPhases NVPP_REACTOR01;
-		private SE.Nereda.Symbols.NeredaReactor.sPhases NVPP_REACTOR02;
 		private SE.Nereda.Symbols.EmergencyReactor.sDefault EmergencyR1;
 		private SE.Nereda.Symbols.EmergencyReactor.sDefault EmergencyR2;
 		private SE.Nereda.Symbols.EmergencyManagement.sDataR1 EmergencyManagement;

@@ -24,9 +24,13 @@
         <With Var="LLReady" />
         <With Var="LLInterlocked" />
       </Event>
-      <Event ID="3F1D0A688A5176FD" Name="V_RDY_ILCK">
-        <With Var="VentReady" />
-        <With Var="VentInterlocked" />
+      <Event ID="3F1D0A688A5176FD" Name="V_AER_RDY_ILCK">
+        <With Var="VentAerateReady" />
+        <With Var="VentAerateInterlocked" />
+      </Event>
+      <Event ID="2E6F627FE71D38B1" Name="V_SLD_RDY_ILCK">
+        <With Var="VentSludgeReady" />
+        <With Var="VentSludgeInterlocked" />
       </Event>
       <Event ID="B334EFD88038E789" Name="W_RDY_ILCK">
         <With Var="WReady" />
@@ -54,6 +58,12 @@
       </Event>
       <Event ID="ACC2803E6ACB558D" Name="VENT">
         <With Var="CmdVent" />
+      </Event>
+      <Event ID="0F544A40694CE400" Name="VENT_AERATION">
+        <With Var="CmdVentAeration" />
+      </Event>
+      <Event ID="DAE1720DE74FAACB" Name="VENT_SLUDGE">
+        <With Var="CmdVentSludge" />
       </Event>
       <Event ID="8A3A142CC73C9F25" Name="WAIT">
         <With Var="CmdWait" />
@@ -95,8 +105,10 @@
       <VarDeclaration ID="9D8612C8A748A8DE" Name="SDInterlocked" Type="BOOL" />
       <VarDeclaration ID="A1460632301E8B7F" Name="LLReady" Type="BOOL" />
       <VarDeclaration ID="9FAB21A852151825" Name="LLInterlocked" Type="BOOL" />
-      <VarDeclaration ID="E996774D431E1B79" Name="VentReady" Type="BOOL" />
-      <VarDeclaration ID="6B3CB5C4C50BE958" Name="VentInterlocked" Type="BOOL" />
+      <VarDeclaration ID="E996774D431E1B79" Name="VentAerateReady" Type="BOOL" />
+      <VarDeclaration ID="6B3CB5C4C50BE958" Name="VentAerateInterlocked" Type="BOOL" />
+      <VarDeclaration ID="800D089965342DF6" Name="VentSludgeReady" Type="BOOL" />
+      <VarDeclaration ID="6531F3B6F766BAF5" Name="VentSludgeInterlocked" Type="BOOL" />
       <VarDeclaration ID="A92252B4F4DF917A" Name="WReady" Type="BOOL" />
       <VarDeclaration ID="F87C7AE958A99541" Name="WInterlocked" Type="BOOL" />
       <VarDeclaration ID="579DEB3758BDB938" Name="L1v" Type="BOOL" />
@@ -108,6 +120,8 @@
       <VarDeclaration ID="C947D1396F3B0873" Name="CmdSludgeDischarge" Type="BOOL" />
       <VarDeclaration ID="419E697BA1D2FB08" Name="CmdLowerLevel" Type="BOOL" />
       <VarDeclaration ID="6926B570C8BA75E8" Name="CmdVent" Type="BOOL" />
+      <VarDeclaration ID="198FB8D9804ED082" Name="CmdVentAeration" Type="BOOL" />
+      <VarDeclaration ID="486306180C62B9EF" Name="CmdVentSludge" Type="BOOL" />
       <VarDeclaration ID="C584AEAB998AB515" Name="CmdWait" Type="BOOL" />
       <VarDeclaration ID="5159724764416574" Name="EmergencyON" Type="BOOL" />
       <VarDeclaration ID="34423AC7BCF3714C" Name="CapacityFeed" Type="REAL" />

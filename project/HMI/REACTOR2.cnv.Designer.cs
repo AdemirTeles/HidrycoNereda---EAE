@@ -32,7 +32,6 @@ namespace HMI.Main.Canvases
 			this.sHiHiLevelCalamity1 = new SE.Nereda.Symbols.Calamity.sHiHiLevelCalamity();
 			this.OpenWebPage = new SE.Nereda.Symbols.OpenWebPage.sDefault();
 			this.NVPP_REACTOR02 = new SE.Nereda.Symbols.NeredaReactor.sPhases();
-			this.NVPP_REACTOR02_3 = new SE.Nereda.Symbols.NeredaReactor.sSettingsBtn();
 			this.Mode_1 = new SE.Nereda.Symbols.Mode.ResetReactor2();
 			this.changeCanvasButton1 = new NxtControl.GuiFramework.ChangeCanvasButton();
 			this.changeCanvasButton2 = new NxtControl.GuiFramework.ChangeCanvasButton();
@@ -94,15 +93,6 @@ namespace HMI.Main.Canvases
 			this.NVPP_REACTOR02.SecurityToken = ((uint)(4294967295u));
 			this.NVPP_REACTOR02.TagName = "1D81A826384C2197";
 			this.NVPP_REACTOR02.EndInit();
-			// 
-			// NVPP_REACTOR02_3
-			// 
-			this.NVPP_REACTOR02_3.BeginInit();
-			this.NVPP_REACTOR02_3.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 976D, 8D);
-			this.NVPP_REACTOR02_3.Name = "NVPP_REACTOR02_3";
-			this.NVPP_REACTOR02_3.SecurityToken = ((uint)(4294967295u));
-			this.NVPP_REACTOR02_3.TagName = "B553EA539882D2E1";
-			this.NVPP_REACTOR02_3.EndInit();
 			// 
 			// Mode_1
 			// 
@@ -181,7 +171,6 @@ namespace HMI.Main.Canvases
 			this.sHiHiLevelCalamity1,
 			this.OpenWebPage,
 			this.NVPP_REACTOR02,
-			this.NVPP_REACTOR02_3,
 			this.Mode_1,
 			this.changeCanvasButton1,
 			this.changeCanvasButton2,
@@ -202,7 +191,6 @@ namespace HMI.Main.Canvases
 		private SE.Nereda.Symbols.Calamity.sHiHiLevelCalamity sHiHiLevelCalamity1;
 		private SE.Nereda.Symbols.OpenWebPage.sDefault OpenWebPage;
 		private SE.Nereda.Symbols.NeredaReactor.sPhases NVPP_REACTOR02;
-		private SE.Nereda.Symbols.NeredaReactor.sSettingsBtn NVPP_REACTOR02_3;
 		private SE.Nereda.Symbols.Mode.ResetReactor2 Mode_1;
 		private SE.Nereda.Symbols.ResetValvesManager.sDefault sDefault1;
 		private SE.Nereda.Symbols.NeredaReactor.sReactor4 REACTOR02;
