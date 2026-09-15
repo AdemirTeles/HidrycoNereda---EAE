@@ -32,11 +32,8 @@ namespace HMI.Main.Canvases
 			this.sHiHiLevelCalamity1 = new SE.Nereda.Symbols.Calamity.sHiHiLevelCalamity();
 			this.OpenWebPage = new SE.Nereda.Symbols.OpenWebPage.sDefault();
 			this.AERATION_1 = new SE.Nereda.Symbols.NeredaCAeration.sBlowers();
-			this.REACTOR01 = new SE.Nereda.Symbols.NeredaReactor.sReactor4();
 			this.pipe1 = new NxtControl.GuiFramework.Pipe();
 			this.pipe2 = new NxtControl.GuiFramework.Pipe();
-			this.REACTOR01_1 = new SE.Nereda.Symbols.NeredaReactor.sSettingsBtn();
-			this.REACTOR01_2 = new SE.Nereda.Symbols.NeredaReactor.sPhases();
 			// 
 			// HeartBeat
 			// 
@@ -92,22 +89,6 @@ namespace HMI.Main.Canvases
 			this.AERATION_1.TagName = "6307B68BAFBA5753";
 			this.AERATION_1.EndInit();
 			// 
-			// REACTOR01
-			// 
-			this.REACTOR01.BeginInit();
-			this.REACTOR01._iAV4x101 = "AV4x101";
-			this.REACTOR01._iAV4x103 = "AV4x103";
-			this.REACTOR01._iAV4x107 = "AV4x107";
-			this.REACTOR01._iAV4x171 = "AV4x171";
-			this.REACTOR01._iAV4x172 = "AV4x172";
-			this.REACTOR01._iLT001 = "41LT1005";
-			this.REACTOR01._iREACTOR = "Reactor 1";
-			this.REACTOR01.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.6811594202898551D, 0D, 0D, 0.6811594202898551D, 512D, 88D);
-			this.REACTOR01.Name = "REACTOR01";
-			this.REACTOR01.SecurityToken = ((uint)(4294967295u));
-			this.REACTOR01.TagName = "D32FABF3E7C17DE2";
-			this.REACTOR01.EndInit();
-			// 
 			// pipe1
 			// 
 			this.pipe1.Bounds = new NxtControl.Drawing.RectF(((float)(24D)), ((float)(72D)), ((float)(504D)), ((float)(384D)));
@@ -134,24 +115,6 @@ namespace HMI.Main.Canvases
 			new NxtControl.Drawing.PointF(416D, 448D)});
 			this.pipe2.Width = 10;
 			// 
-			// REACTOR01_1
-			// 
-			this.REACTOR01_1.BeginInit();
-			this.REACTOR01_1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 896D, 288D);
-			this.REACTOR01_1.Name = "REACTOR01_1";
-			this.REACTOR01_1.SecurityToken = ((uint)(4294967295u));
-			this.REACTOR01_1.TagName = "D32FABF3E7C17DE2";
-			this.REACTOR01_1.EndInit();
-			// 
-			// REACTOR01_2
-			// 
-			this.REACTOR01_2.BeginInit();
-			this.REACTOR01_2.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 896D, 88D);
-			this.REACTOR01_2.Name = "REACTOR01_2";
-			this.REACTOR01_2.SecurityToken = ((uint)(4294967295u));
-			this.REACTOR01_2.TagName = "D32FABF3E7C17DE2";
-			this.REACTOR01_2.EndInit();
-			// 
 			// AERATION
 			// 
 			this.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(1366D)), ((float)(698D)));
@@ -163,11 +126,8 @@ namespace HMI.Main.Canvases
 			this.sHiHiLevelCalamity1,
 			this.OpenWebPage,
 			this.AERATION_1,
-			this.REACTOR01,
 			this.pipe1,
-			this.pipe2,
-			this.REACTOR01_1,
-			this.REACTOR01_2});
+			this.pipe2});
 			this.Size = new System.Drawing.Size(1366, 698);
 
 		}
@@ -177,11 +137,8 @@ namespace HMI.Main.Canvases
 		private SE.Nereda.Symbols.Calamity.sHiHiLevelCalamity sHiHiLevelCalamity1;
 		private SE.Nereda.Symbols.OpenWebPage.sDefault OpenWebPage;
 		private SE.Nereda.Symbols.NeredaCAeration.sBlowers AERATION_1;
-		private SE.Nereda.Symbols.NeredaReactor.sReactor4 REACTOR01;
 		private NxtControl.GuiFramework.Pipe pipe1;
 		private NxtControl.GuiFramework.Pipe pipe2;
-		private SE.Nereda.Symbols.NeredaReactor.sSettingsBtn REACTOR01_1;
-		private SE.Nereda.Symbols.NeredaReactor.sPhases REACTOR01_2;
 		#endregion
 	}
 }

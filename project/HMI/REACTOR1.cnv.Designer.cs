@@ -37,7 +37,6 @@ namespace HMI.Main.Canvases
 			this.OpenWebPage = new SE.Nereda.Symbols.OpenWebPage.sDefault();
 			this.NVPP_REACTOR01 = new SE.Nereda.Symbols.NeredaReactor.sSettingsBtn();
 			this.Mode_1 = new SE.Nereda.Symbols.Mode.ResetReactor1();
-			this.sDefault1 = new SE.Nereda.Symbols.ResetValvesManager.sDefault();
 			this.REACTOR01 = new SE.Nereda.Symbols.NeredaReactor.sReactor4();
 			this.pipe1 = new NxtControl.GuiFramework.Pipe();
 			this.pipe3 = new NxtControl.GuiFramework.Pipe();
@@ -143,15 +142,6 @@ namespace HMI.Main.Canvases
 			this.Mode_1.SecurityToken = ((uint)(4294967295u));
 			this.Mode_1.TagName = "7A79C015B9ADE3EB";
 			this.Mode_1.EndInit();
-			// 
-			// sDefault1
-			// 
-			this.sDefault1.BeginInit();
-			this.sDefault1.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.83333333333333337D, 0D, 0D, 1D, 480D, 64D);
-			this.sDefault1.Name = "sDefault1";
-			this.sDefault1.SecurityToken = ((uint)(4294967295u));
-			this.sDefault1.TagName = "D32FABF3E7C17DE2.Actuators.ResetAllValves";
-			this.sDefault1.EndInit();
 			// 
 			// REACTOR01
 			// 
@@ -296,7 +286,6 @@ namespace HMI.Main.Canvases
 			this.OpenWebPage,
 			this.NVPP_REACTOR01,
 			this.Mode_1,
-			this.sDefault1,
 			this.REACTOR01,
 			this.REACTOR01_1,
 			this.polygon1,
@@ -317,7 +306,6 @@ namespace HMI.Main.Canvases
 		private SE.Nereda.Symbols.OpenWebPage.sDefault OpenWebPage;
 		private SE.Nereda.Symbols.NeredaReactor.sSettingsBtn NVPP_REACTOR01;
 		private SE.Nereda.Symbols.Mode.ResetReactor1 Mode_1;
-		private SE.Nereda.Symbols.ResetValvesManager.sDefault sDefault1;
 		private SE.Nereda.Symbols.NeredaReactor.sReactor4 REACTOR01;
 		private NxtControl.GuiFramework.Pipe pipe1;
 		private NxtControl.GuiFramework.Pipe pipe2;

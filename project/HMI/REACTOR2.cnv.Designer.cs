@@ -37,7 +37,6 @@ namespace HMI.Main.Canvases
 			this.changeCanvasButton2 = new NxtControl.GuiFramework.ChangeCanvasButton();
 			this.changeCanvasButton4 = new NxtControl.GuiFramework.ChangeCanvasButton();
 			this.changeCanvasButton5 = new NxtControl.GuiFramework.ChangeCanvasButton();
-			this.sDefault1 = new SE.Nereda.Symbols.ResetValvesManager.sDefault();
 			this.REACTOR02 = new SE.Nereda.Symbols.NeredaReactor.sReactor4();
 			// 
 			// HeartBeat
@@ -135,15 +134,6 @@ namespace HMI.Main.Canvases
 			this.changeCanvasButton5.Name = "changeCanvasButton5";
 			this.changeCanvasButton5.Text = "ALARMS";
 			// 
-			// sDefault1
-			// 
-			this.sDefault1.BeginInit();
-			this.sDefault1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 488D, 64D);
-			this.sDefault1.Name = "sDefault1";
-			this.sDefault1.SecurityToken = ((uint)(4294967295u));
-			this.sDefault1.TagName = "B553EA539882D2E1.Actuators.ResetAllValves";
-			this.sDefault1.EndInit();
-			// 
 			// REACTOR02
 			// 
 			this.REACTOR02.BeginInit();
@@ -176,7 +166,6 @@ namespace HMI.Main.Canvases
 			this.changeCanvasButton2,
 			this.changeCanvasButton4,
 			this.changeCanvasButton5,
-			this.sDefault1,
 			this.REACTOR02});
 			this.Size = new System.Drawing.Size(1366, 698);
 
@@ -192,7 +181,6 @@ namespace HMI.Main.Canvases
 		private SE.Nereda.Symbols.OpenWebPage.sDefault OpenWebPage;
 		private SE.Nereda.Symbols.NeredaReactor.sPhases NVPP_REACTOR02;
 		private SE.Nereda.Symbols.Mode.ResetReactor2 Mode_1;
-		private SE.Nereda.Symbols.ResetValvesManager.sDefault sDefault1;
 		private SE.Nereda.Symbols.NeredaReactor.sReactor4 REACTOR02;
 		#endregion
 	}
