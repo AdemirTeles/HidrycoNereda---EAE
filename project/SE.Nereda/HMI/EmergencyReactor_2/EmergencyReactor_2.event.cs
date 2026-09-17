@@ -335,11 +335,11 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
        get { return S1_FeedTime_field; }
        set { S1_FeedTime_field = value; }
     }
-    private NxtControl.GuiFramework.Time? S2_WaitTime_field = null;
-    public NxtControl.GuiFramework.Time? S2_WaitTime
+    private NxtControl.GuiFramework.Time? S2_VentSludge_field = null;
+    public NxtControl.GuiFramework.Time? S2_VentSludge
     {
-       get { return S2_WaitTime_field; }
-       set { S2_WaitTime_field = value; }
+       get { return S2_VentSludge_field; }
+       set { S2_VentSludge_field = value; }
     }
     private NxtControl.GuiFramework.Time? S3_SludgeDischargeTime_field = null;
     public NxtControl.GuiFramework.Time? S3_SludgeDischargeTime
@@ -353,23 +353,41 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
        get { return S4_LowerLevelTime_field; }
        set { S4_LowerLevelTime_field = value; }
     }
-    private NxtControl.GuiFramework.Time? S6_VentTime_field = null;
-    public NxtControl.GuiFramework.Time? S6_VentTime
+    private NxtControl.GuiFramework.Time? S5_AerateTime_1_field = null;
+    public NxtControl.GuiFramework.Time? S5_AerateTime_1
     {
-       get { return S6_VentTime_field; }
-       set { S6_VentTime_field = value; }
+       get { return S5_AerateTime_1_field; }
+       set { S5_AerateTime_1_field = value; }
     }
-    private NxtControl.GuiFramework.Time? S7_SludgeDischargeTime_field = null;
-    public NxtControl.GuiFramework.Time? S7_SludgeDischargeTime
+    private NxtControl.GuiFramework.Time? S6_VentAerateTime_field = null;
+    public NxtControl.GuiFramework.Time? S6_VentAerateTime
     {
-       get { return S7_SludgeDischargeTime_field; }
-       set { S7_SludgeDischargeTime_field = value; }
+       get { return S6_VentAerateTime_field; }
+       set { S6_VentAerateTime_field = value; }
     }
-    private NxtControl.GuiFramework.Time? S8_WaitTime_field = null;
-    public NxtControl.GuiFramework.Time? S8_WaitTime
+    private NxtControl.GuiFramework.Time? S7_WaitTime_field = null;
+    public NxtControl.GuiFramework.Time? S7_WaitTime
     {
-       get { return S8_WaitTime_field; }
-       set { S8_WaitTime_field = value; }
+       get { return S7_WaitTime_field; }
+       set { S7_WaitTime_field = value; }
+    }
+    private NxtControl.GuiFramework.Time? S8_VentSludgeTime_field = null;
+    public NxtControl.GuiFramework.Time? S8_VentSludgeTime
+    {
+       get { return S8_VentSludgeTime_field; }
+       set { S8_VentSludgeTime_field = value; }
+    }
+    private NxtControl.GuiFramework.Time? S9_SludgeDischargeTime_field = null;
+    public NxtControl.GuiFramework.Time? S9_SludgeDischargeTime
+    {
+       get { return S9_SludgeDischargeTime_field; }
+       set { S9_SludgeDischargeTime_field = value; }
+    }
+    private NxtControl.GuiFramework.Time? S10_WaitTime_field = null;
+    public NxtControl.GuiFramework.Time? S10_WaitTime
+    {
+       get { return S10_WaitTime_field; }
+       set { S10_WaitTime_field = value; }
     }
 
   }
@@ -444,6 +462,20 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
     {
        get { return AirLockTime_field; }
        set { AirLockTime_field = value; }
+    }
+
+  }
+
+  public class IFB_LVLEventArgs : System.EventArgs
+  {
+    public IFB_LVLEventArgs()
+    {
+    }
+    private System.Boolean? FeedIFBLevel_field = null;
+    public System.Boolean? FeedIFBLevel
+    {
+       get { return FeedIFBLevel_field; }
+       set { FeedIFBLevel_field = value; }
     }
 
   }
@@ -653,32 +685,38 @@ stack Trace:
       if (!ignore_oEnableForce) _values_[0] = oEnableForce;
       return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
     }
-    public bool FireEvent_STEPS_TIME(NxtControl.GuiFramework.Time S1_FeedTime, NxtControl.GuiFramework.Time S2_WaitTime, NxtControl.GuiFramework.Time S3_SludgeDischargeTime, NxtControl.GuiFramework.Time S4_LowerLevelTime, NxtControl.GuiFramework.Time S6_VentTime, NxtControl.GuiFramework.Time S7_SludgeDischargeTime, NxtControl.GuiFramework.Time S8_WaitTime)
+    public bool FireEvent_STEPS_TIME(NxtControl.GuiFramework.Time S1_FeedTime, NxtControl.GuiFramework.Time S2_VentSludge, NxtControl.GuiFramework.Time S3_SludgeDischargeTime, NxtControl.GuiFramework.Time S4_LowerLevelTime, NxtControl.GuiFramework.Time S5_AerateTime_1, NxtControl.GuiFramework.Time S6_VentAerateTime, NxtControl.GuiFramework.Time S7_WaitTime, NxtControl.GuiFramework.Time S8_VentSludgeTime, NxtControl.GuiFramework.Time S9_SludgeDischargeTime, NxtControl.GuiFramework.Time S10_WaitTime)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(2, new object[] {S1_FeedTime, S2_WaitTime, S3_SludgeDischargeTime, S4_LowerLevelTime, S6_VentTime, S7_SludgeDischargeTime, S8_WaitTime});
+      return ((IHMIAccessorOutput)this).FireEvent(2, new object[] {S1_FeedTime, S2_VentSludge, S3_SludgeDischargeTime, S4_LowerLevelTime, S5_AerateTime_1, S6_VentAerateTime, S7_WaitTime, S8_VentSludgeTime, S9_SludgeDischargeTime, S10_WaitTime});
     }
     public bool FireEvent_STEPS_TIME(SE.Nereda.Symbols.EmergencyReactor_2.STEPS_TIMEEventArgs ea)
     {
-      object[] _values_ = new object[7];
+      object[] _values_ = new object[10];
       if (ea.S1_FeedTime.HasValue) _values_[0] = ea.S1_FeedTime.Value;
-      if (ea.S2_WaitTime.HasValue) _values_[1] = ea.S2_WaitTime.Value;
+      if (ea.S2_VentSludge.HasValue) _values_[1] = ea.S2_VentSludge.Value;
       if (ea.S3_SludgeDischargeTime.HasValue) _values_[2] = ea.S3_SludgeDischargeTime.Value;
       if (ea.S4_LowerLevelTime.HasValue) _values_[3] = ea.S4_LowerLevelTime.Value;
-      if (ea.S6_VentTime.HasValue) _values_[4] = ea.S6_VentTime.Value;
-      if (ea.S7_SludgeDischargeTime.HasValue) _values_[5] = ea.S7_SludgeDischargeTime.Value;
-      if (ea.S8_WaitTime.HasValue) _values_[6] = ea.S8_WaitTime.Value;
+      if (ea.S5_AerateTime_1.HasValue) _values_[4] = ea.S5_AerateTime_1.Value;
+      if (ea.S6_VentAerateTime.HasValue) _values_[5] = ea.S6_VentAerateTime.Value;
+      if (ea.S7_WaitTime.HasValue) _values_[6] = ea.S7_WaitTime.Value;
+      if (ea.S8_VentSludgeTime.HasValue) _values_[7] = ea.S8_VentSludgeTime.Value;
+      if (ea.S9_SludgeDischargeTime.HasValue) _values_[8] = ea.S9_SludgeDischargeTime.Value;
+      if (ea.S10_WaitTime.HasValue) _values_[9] = ea.S10_WaitTime.Value;
       return ((IHMIAccessorOutput)this).FireEvent(2, _values_);
     }
-    public bool FireEvent_STEPS_TIME(NxtControl.GuiFramework.Time S1_FeedTime, bool ignore_S1_FeedTime, NxtControl.GuiFramework.Time S2_WaitTime, bool ignore_S2_WaitTime, NxtControl.GuiFramework.Time S3_SludgeDischargeTime, bool ignore_S3_SludgeDischargeTime, NxtControl.GuiFramework.Time S4_LowerLevelTime, bool ignore_S4_LowerLevelTime, NxtControl.GuiFramework.Time S6_VentTime, bool ignore_S6_VentTime, NxtControl.GuiFramework.Time S7_SludgeDischargeTime, bool ignore_S7_SludgeDischargeTime, NxtControl.GuiFramework.Time S8_WaitTime, bool ignore_S8_WaitTime)
+    public bool FireEvent_STEPS_TIME(NxtControl.GuiFramework.Time S1_FeedTime, bool ignore_S1_FeedTime, NxtControl.GuiFramework.Time S2_VentSludge, bool ignore_S2_VentSludge, NxtControl.GuiFramework.Time S3_SludgeDischargeTime, bool ignore_S3_SludgeDischargeTime, NxtControl.GuiFramework.Time S4_LowerLevelTime, bool ignore_S4_LowerLevelTime, NxtControl.GuiFramework.Time S5_AerateTime_1, bool ignore_S5_AerateTime_1, NxtControl.GuiFramework.Time S6_VentAerateTime, bool ignore_S6_VentAerateTime, NxtControl.GuiFramework.Time S7_WaitTime, bool ignore_S7_WaitTime, NxtControl.GuiFramework.Time S8_VentSludgeTime, bool ignore_S8_VentSludgeTime, NxtControl.GuiFramework.Time S9_SludgeDischargeTime, bool ignore_S9_SludgeDischargeTime, NxtControl.GuiFramework.Time S10_WaitTime, bool ignore_S10_WaitTime)
     {
-      object[] _values_ = new object[7];
+      object[] _values_ = new object[10];
       if (!ignore_S1_FeedTime) _values_[0] = S1_FeedTime;
-      if (!ignore_S2_WaitTime) _values_[1] = S2_WaitTime;
+      if (!ignore_S2_VentSludge) _values_[1] = S2_VentSludge;
       if (!ignore_S3_SludgeDischargeTime) _values_[2] = S3_SludgeDischargeTime;
       if (!ignore_S4_LowerLevelTime) _values_[3] = S4_LowerLevelTime;
-      if (!ignore_S6_VentTime) _values_[4] = S6_VentTime;
-      if (!ignore_S7_SludgeDischargeTime) _values_[5] = S7_SludgeDischargeTime;
-      if (!ignore_S8_WaitTime) _values_[6] = S8_WaitTime;
+      if (!ignore_S5_AerateTime_1) _values_[4] = S5_AerateTime_1;
+      if (!ignore_S6_VentAerateTime) _values_[5] = S6_VentAerateTime;
+      if (!ignore_S7_WaitTime) _values_[6] = S7_WaitTime;
+      if (!ignore_S8_VentSludgeTime) _values_[7] = S8_VentSludgeTime;
+      if (!ignore_S9_SludgeDischargeTime) _values_[8] = S9_SludgeDischargeTime;
+      if (!ignore_S10_WaitTime) _values_[9] = S10_WaitTime;
       return ((IHMIAccessorOutput)this).FireEvent(2, _values_);
     }
     public bool FireEvent_FEED_PAR(System.Single FeedCapacity)
@@ -750,6 +788,22 @@ stack Trace:
       object[] _values_ = new object[1];
       if (!ignore_AirLockTime) _values_[0] = AirLockTime;
       return ((IHMIAccessorOutput)this).FireEvent(6, _values_);
+    }
+    public bool FireEvent_IFB_LVL(System.Boolean FeedIFBLevel)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(7, new object[] {FeedIFBLevel});
+    }
+    public bool FireEvent_IFB_LVL(SE.Nereda.Symbols.EmergencyReactor_2.IFB_LVLEventArgs ea)
+    {
+      object[] _values_ = new object[1];
+      if (ea.FeedIFBLevel.HasValue) _values_[0] = ea.FeedIFBLevel.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(7, _values_);
+    }
+    public bool FireEvent_IFB_LVL(System.Boolean FeedIFBLevel, bool ignore_FeedIFBLevel)
+    {
+      object[] _values_ = new object[1];
+      if (!ignore_FeedIFBLevel) _values_[0] = FeedIFBLevel;
+      return ((IHMIAccessorOutput)this).FireEvent(7, _values_);
     }
 
   }
@@ -958,32 +1012,38 @@ stack Trace:
       if (!ignore_oEnableForce) _values_[0] = oEnableForce;
       return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
     }
-    public bool FireEvent_STEPS_TIME(NxtControl.GuiFramework.Time S1_FeedTime, NxtControl.GuiFramework.Time S2_WaitTime, NxtControl.GuiFramework.Time S3_SludgeDischargeTime, NxtControl.GuiFramework.Time S4_LowerLevelTime, NxtControl.GuiFramework.Time S6_VentTime, NxtControl.GuiFramework.Time S7_SludgeDischargeTime, NxtControl.GuiFramework.Time S8_WaitTime)
+    public bool FireEvent_STEPS_TIME(NxtControl.GuiFramework.Time S1_FeedTime, NxtControl.GuiFramework.Time S2_VentSludge, NxtControl.GuiFramework.Time S3_SludgeDischargeTime, NxtControl.GuiFramework.Time S4_LowerLevelTime, NxtControl.GuiFramework.Time S5_AerateTime_1, NxtControl.GuiFramework.Time S6_VentAerateTime, NxtControl.GuiFramework.Time S7_WaitTime, NxtControl.GuiFramework.Time S8_VentSludgeTime, NxtControl.GuiFramework.Time S9_SludgeDischargeTime, NxtControl.GuiFramework.Time S10_WaitTime)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(2, new object[] {S1_FeedTime, S2_WaitTime, S3_SludgeDischargeTime, S4_LowerLevelTime, S6_VentTime, S7_SludgeDischargeTime, S8_WaitTime});
+      return ((IHMIAccessorOutput)this).FireEvent(2, new object[] {S1_FeedTime, S2_VentSludge, S3_SludgeDischargeTime, S4_LowerLevelTime, S5_AerateTime_1, S6_VentAerateTime, S7_WaitTime, S8_VentSludgeTime, S9_SludgeDischargeTime, S10_WaitTime});
     }
     public bool FireEvent_STEPS_TIME(SE.Nereda.Symbols.EmergencyReactor_2.STEPS_TIMEEventArgs ea)
     {
-      object[] _values_ = new object[7];
+      object[] _values_ = new object[10];
       if (ea.S1_FeedTime.HasValue) _values_[0] = ea.S1_FeedTime.Value;
-      if (ea.S2_WaitTime.HasValue) _values_[1] = ea.S2_WaitTime.Value;
+      if (ea.S2_VentSludge.HasValue) _values_[1] = ea.S2_VentSludge.Value;
       if (ea.S3_SludgeDischargeTime.HasValue) _values_[2] = ea.S3_SludgeDischargeTime.Value;
       if (ea.S4_LowerLevelTime.HasValue) _values_[3] = ea.S4_LowerLevelTime.Value;
-      if (ea.S6_VentTime.HasValue) _values_[4] = ea.S6_VentTime.Value;
-      if (ea.S7_SludgeDischargeTime.HasValue) _values_[5] = ea.S7_SludgeDischargeTime.Value;
-      if (ea.S8_WaitTime.HasValue) _values_[6] = ea.S8_WaitTime.Value;
+      if (ea.S5_AerateTime_1.HasValue) _values_[4] = ea.S5_AerateTime_1.Value;
+      if (ea.S6_VentAerateTime.HasValue) _values_[5] = ea.S6_VentAerateTime.Value;
+      if (ea.S7_WaitTime.HasValue) _values_[6] = ea.S7_WaitTime.Value;
+      if (ea.S8_VentSludgeTime.HasValue) _values_[7] = ea.S8_VentSludgeTime.Value;
+      if (ea.S9_SludgeDischargeTime.HasValue) _values_[8] = ea.S9_SludgeDischargeTime.Value;
+      if (ea.S10_WaitTime.HasValue) _values_[9] = ea.S10_WaitTime.Value;
       return ((IHMIAccessorOutput)this).FireEvent(2, _values_);
     }
-    public bool FireEvent_STEPS_TIME(NxtControl.GuiFramework.Time S1_FeedTime, bool ignore_S1_FeedTime, NxtControl.GuiFramework.Time S2_WaitTime, bool ignore_S2_WaitTime, NxtControl.GuiFramework.Time S3_SludgeDischargeTime, bool ignore_S3_SludgeDischargeTime, NxtControl.GuiFramework.Time S4_LowerLevelTime, bool ignore_S4_LowerLevelTime, NxtControl.GuiFramework.Time S6_VentTime, bool ignore_S6_VentTime, NxtControl.GuiFramework.Time S7_SludgeDischargeTime, bool ignore_S7_SludgeDischargeTime, NxtControl.GuiFramework.Time S8_WaitTime, bool ignore_S8_WaitTime)
+    public bool FireEvent_STEPS_TIME(NxtControl.GuiFramework.Time S1_FeedTime, bool ignore_S1_FeedTime, NxtControl.GuiFramework.Time S2_VentSludge, bool ignore_S2_VentSludge, NxtControl.GuiFramework.Time S3_SludgeDischargeTime, bool ignore_S3_SludgeDischargeTime, NxtControl.GuiFramework.Time S4_LowerLevelTime, bool ignore_S4_LowerLevelTime, NxtControl.GuiFramework.Time S5_AerateTime_1, bool ignore_S5_AerateTime_1, NxtControl.GuiFramework.Time S6_VentAerateTime, bool ignore_S6_VentAerateTime, NxtControl.GuiFramework.Time S7_WaitTime, bool ignore_S7_WaitTime, NxtControl.GuiFramework.Time S8_VentSludgeTime, bool ignore_S8_VentSludgeTime, NxtControl.GuiFramework.Time S9_SludgeDischargeTime, bool ignore_S9_SludgeDischargeTime, NxtControl.GuiFramework.Time S10_WaitTime, bool ignore_S10_WaitTime)
     {
-      object[] _values_ = new object[7];
+      object[] _values_ = new object[10];
       if (!ignore_S1_FeedTime) _values_[0] = S1_FeedTime;
-      if (!ignore_S2_WaitTime) _values_[1] = S2_WaitTime;
+      if (!ignore_S2_VentSludge) _values_[1] = S2_VentSludge;
       if (!ignore_S3_SludgeDischargeTime) _values_[2] = S3_SludgeDischargeTime;
       if (!ignore_S4_LowerLevelTime) _values_[3] = S4_LowerLevelTime;
-      if (!ignore_S6_VentTime) _values_[4] = S6_VentTime;
-      if (!ignore_S7_SludgeDischargeTime) _values_[5] = S7_SludgeDischargeTime;
-      if (!ignore_S8_WaitTime) _values_[6] = S8_WaitTime;
+      if (!ignore_S5_AerateTime_1) _values_[4] = S5_AerateTime_1;
+      if (!ignore_S6_VentAerateTime) _values_[5] = S6_VentAerateTime;
+      if (!ignore_S7_WaitTime) _values_[6] = S7_WaitTime;
+      if (!ignore_S8_VentSludgeTime) _values_[7] = S8_VentSludgeTime;
+      if (!ignore_S9_SludgeDischargeTime) _values_[8] = S9_SludgeDischargeTime;
+      if (!ignore_S10_WaitTime) _values_[9] = S10_WaitTime;
       return ((IHMIAccessorOutput)this).FireEvent(2, _values_);
     }
     public bool FireEvent_FEED_PAR(System.Single FeedCapacity)
@@ -1055,6 +1115,22 @@ stack Trace:
       object[] _values_ = new object[1];
       if (!ignore_AirLockTime) _values_[0] = AirLockTime;
       return ((IHMIAccessorOutput)this).FireEvent(6, _values_);
+    }
+    public bool FireEvent_IFB_LVL(System.Boolean FeedIFBLevel)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(7, new object[] {FeedIFBLevel});
+    }
+    public bool FireEvent_IFB_LVL(SE.Nereda.Symbols.EmergencyReactor_2.IFB_LVLEventArgs ea)
+    {
+      object[] _values_ = new object[1];
+      if (ea.FeedIFBLevel.HasValue) _values_[0] = ea.FeedIFBLevel.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(7, _values_);
+    }
+    public bool FireEvent_IFB_LVL(System.Boolean FeedIFBLevel, bool ignore_FeedIFBLevel)
+    {
+      object[] _values_ = new object[1];
+      if (!ignore_FeedIFBLevel) _values_[0] = FeedIFBLevel;
+      return ((IHMIAccessorOutput)this).FireEvent(7, _values_);
     }
 
   }
@@ -1263,32 +1339,38 @@ stack Trace:
       if (!ignore_oEnableForce) _values_[0] = oEnableForce;
       return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
     }
-    public bool FireEvent_STEPS_TIME(NxtControl.GuiFramework.Time S1_FeedTime, NxtControl.GuiFramework.Time S2_WaitTime, NxtControl.GuiFramework.Time S3_SludgeDischargeTime, NxtControl.GuiFramework.Time S4_LowerLevelTime, NxtControl.GuiFramework.Time S6_VentTime, NxtControl.GuiFramework.Time S7_SludgeDischargeTime, NxtControl.GuiFramework.Time S8_WaitTime)
+    public bool FireEvent_STEPS_TIME(NxtControl.GuiFramework.Time S1_FeedTime, NxtControl.GuiFramework.Time S2_VentSludge, NxtControl.GuiFramework.Time S3_SludgeDischargeTime, NxtControl.GuiFramework.Time S4_LowerLevelTime, NxtControl.GuiFramework.Time S5_AerateTime_1, NxtControl.GuiFramework.Time S6_VentAerateTime, NxtControl.GuiFramework.Time S7_WaitTime, NxtControl.GuiFramework.Time S8_VentSludgeTime, NxtControl.GuiFramework.Time S9_SludgeDischargeTime, NxtControl.GuiFramework.Time S10_WaitTime)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(2, new object[] {S1_FeedTime, S2_WaitTime, S3_SludgeDischargeTime, S4_LowerLevelTime, S6_VentTime, S7_SludgeDischargeTime, S8_WaitTime});
+      return ((IHMIAccessorOutput)this).FireEvent(2, new object[] {S1_FeedTime, S2_VentSludge, S3_SludgeDischargeTime, S4_LowerLevelTime, S5_AerateTime_1, S6_VentAerateTime, S7_WaitTime, S8_VentSludgeTime, S9_SludgeDischargeTime, S10_WaitTime});
     }
     public bool FireEvent_STEPS_TIME(SE.Nereda.Symbols.EmergencyReactor_2.STEPS_TIMEEventArgs ea)
     {
-      object[] _values_ = new object[7];
+      object[] _values_ = new object[10];
       if (ea.S1_FeedTime.HasValue) _values_[0] = ea.S1_FeedTime.Value;
-      if (ea.S2_WaitTime.HasValue) _values_[1] = ea.S2_WaitTime.Value;
+      if (ea.S2_VentSludge.HasValue) _values_[1] = ea.S2_VentSludge.Value;
       if (ea.S3_SludgeDischargeTime.HasValue) _values_[2] = ea.S3_SludgeDischargeTime.Value;
       if (ea.S4_LowerLevelTime.HasValue) _values_[3] = ea.S4_LowerLevelTime.Value;
-      if (ea.S6_VentTime.HasValue) _values_[4] = ea.S6_VentTime.Value;
-      if (ea.S7_SludgeDischargeTime.HasValue) _values_[5] = ea.S7_SludgeDischargeTime.Value;
-      if (ea.S8_WaitTime.HasValue) _values_[6] = ea.S8_WaitTime.Value;
+      if (ea.S5_AerateTime_1.HasValue) _values_[4] = ea.S5_AerateTime_1.Value;
+      if (ea.S6_VentAerateTime.HasValue) _values_[5] = ea.S6_VentAerateTime.Value;
+      if (ea.S7_WaitTime.HasValue) _values_[6] = ea.S7_WaitTime.Value;
+      if (ea.S8_VentSludgeTime.HasValue) _values_[7] = ea.S8_VentSludgeTime.Value;
+      if (ea.S9_SludgeDischargeTime.HasValue) _values_[8] = ea.S9_SludgeDischargeTime.Value;
+      if (ea.S10_WaitTime.HasValue) _values_[9] = ea.S10_WaitTime.Value;
       return ((IHMIAccessorOutput)this).FireEvent(2, _values_);
     }
-    public bool FireEvent_STEPS_TIME(NxtControl.GuiFramework.Time S1_FeedTime, bool ignore_S1_FeedTime, NxtControl.GuiFramework.Time S2_WaitTime, bool ignore_S2_WaitTime, NxtControl.GuiFramework.Time S3_SludgeDischargeTime, bool ignore_S3_SludgeDischargeTime, NxtControl.GuiFramework.Time S4_LowerLevelTime, bool ignore_S4_LowerLevelTime, NxtControl.GuiFramework.Time S6_VentTime, bool ignore_S6_VentTime, NxtControl.GuiFramework.Time S7_SludgeDischargeTime, bool ignore_S7_SludgeDischargeTime, NxtControl.GuiFramework.Time S8_WaitTime, bool ignore_S8_WaitTime)
+    public bool FireEvent_STEPS_TIME(NxtControl.GuiFramework.Time S1_FeedTime, bool ignore_S1_FeedTime, NxtControl.GuiFramework.Time S2_VentSludge, bool ignore_S2_VentSludge, NxtControl.GuiFramework.Time S3_SludgeDischargeTime, bool ignore_S3_SludgeDischargeTime, NxtControl.GuiFramework.Time S4_LowerLevelTime, bool ignore_S4_LowerLevelTime, NxtControl.GuiFramework.Time S5_AerateTime_1, bool ignore_S5_AerateTime_1, NxtControl.GuiFramework.Time S6_VentAerateTime, bool ignore_S6_VentAerateTime, NxtControl.GuiFramework.Time S7_WaitTime, bool ignore_S7_WaitTime, NxtControl.GuiFramework.Time S8_VentSludgeTime, bool ignore_S8_VentSludgeTime, NxtControl.GuiFramework.Time S9_SludgeDischargeTime, bool ignore_S9_SludgeDischargeTime, NxtControl.GuiFramework.Time S10_WaitTime, bool ignore_S10_WaitTime)
     {
-      object[] _values_ = new object[7];
+      object[] _values_ = new object[10];
       if (!ignore_S1_FeedTime) _values_[0] = S1_FeedTime;
-      if (!ignore_S2_WaitTime) _values_[1] = S2_WaitTime;
+      if (!ignore_S2_VentSludge) _values_[1] = S2_VentSludge;
       if (!ignore_S3_SludgeDischargeTime) _values_[2] = S3_SludgeDischargeTime;
       if (!ignore_S4_LowerLevelTime) _values_[3] = S4_LowerLevelTime;
-      if (!ignore_S6_VentTime) _values_[4] = S6_VentTime;
-      if (!ignore_S7_SludgeDischargeTime) _values_[5] = S7_SludgeDischargeTime;
-      if (!ignore_S8_WaitTime) _values_[6] = S8_WaitTime;
+      if (!ignore_S5_AerateTime_1) _values_[4] = S5_AerateTime_1;
+      if (!ignore_S6_VentAerateTime) _values_[5] = S6_VentAerateTime;
+      if (!ignore_S7_WaitTime) _values_[6] = S7_WaitTime;
+      if (!ignore_S8_VentSludgeTime) _values_[7] = S8_VentSludgeTime;
+      if (!ignore_S9_SludgeDischargeTime) _values_[8] = S9_SludgeDischargeTime;
+      if (!ignore_S10_WaitTime) _values_[9] = S10_WaitTime;
       return ((IHMIAccessorOutput)this).FireEvent(2, _values_);
     }
     public bool FireEvent_FEED_PAR(System.Single FeedCapacity)
@@ -1360,6 +1442,22 @@ stack Trace:
       object[] _values_ = new object[1];
       if (!ignore_AirLockTime) _values_[0] = AirLockTime;
       return ((IHMIAccessorOutput)this).FireEvent(6, _values_);
+    }
+    public bool FireEvent_IFB_LVL(System.Boolean FeedIFBLevel)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(7, new object[] {FeedIFBLevel});
+    }
+    public bool FireEvent_IFB_LVL(SE.Nereda.Symbols.EmergencyReactor_2.IFB_LVLEventArgs ea)
+    {
+      object[] _values_ = new object[1];
+      if (ea.FeedIFBLevel.HasValue) _values_[0] = ea.FeedIFBLevel.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(7, _values_);
+    }
+    public bool FireEvent_IFB_LVL(System.Boolean FeedIFBLevel, bool ignore_FeedIFBLevel)
+    {
+      object[] _values_ = new object[1];
+      if (!ignore_FeedIFBLevel) _values_[0] = FeedIFBLevel;
+      return ((IHMIAccessorOutput)this).FireEvent(7, _values_);
     }
 
   }
@@ -1568,32 +1666,38 @@ stack Trace:
       if (!ignore_oEnableForce) _values_[0] = oEnableForce;
       return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
     }
-    public bool FireEvent_STEPS_TIME(NxtControl.GuiFramework.Time S1_FeedTime, NxtControl.GuiFramework.Time S2_WaitTime, NxtControl.GuiFramework.Time S3_SludgeDischargeTime, NxtControl.GuiFramework.Time S4_LowerLevelTime, NxtControl.GuiFramework.Time S6_VentTime, NxtControl.GuiFramework.Time S7_SludgeDischargeTime, NxtControl.GuiFramework.Time S8_WaitTime)
+    public bool FireEvent_STEPS_TIME(NxtControl.GuiFramework.Time S1_FeedTime, NxtControl.GuiFramework.Time S2_VentSludge, NxtControl.GuiFramework.Time S3_SludgeDischargeTime, NxtControl.GuiFramework.Time S4_LowerLevelTime, NxtControl.GuiFramework.Time S5_AerateTime_1, NxtControl.GuiFramework.Time S6_VentAerateTime, NxtControl.GuiFramework.Time S7_WaitTime, NxtControl.GuiFramework.Time S8_VentSludgeTime, NxtControl.GuiFramework.Time S9_SludgeDischargeTime, NxtControl.GuiFramework.Time S10_WaitTime)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(2, new object[] {S1_FeedTime, S2_WaitTime, S3_SludgeDischargeTime, S4_LowerLevelTime, S6_VentTime, S7_SludgeDischargeTime, S8_WaitTime});
+      return ((IHMIAccessorOutput)this).FireEvent(2, new object[] {S1_FeedTime, S2_VentSludge, S3_SludgeDischargeTime, S4_LowerLevelTime, S5_AerateTime_1, S6_VentAerateTime, S7_WaitTime, S8_VentSludgeTime, S9_SludgeDischargeTime, S10_WaitTime});
     }
     public bool FireEvent_STEPS_TIME(SE.Nereda.Symbols.EmergencyReactor_2.STEPS_TIMEEventArgs ea)
     {
-      object[] _values_ = new object[7];
+      object[] _values_ = new object[10];
       if (ea.S1_FeedTime.HasValue) _values_[0] = ea.S1_FeedTime.Value;
-      if (ea.S2_WaitTime.HasValue) _values_[1] = ea.S2_WaitTime.Value;
+      if (ea.S2_VentSludge.HasValue) _values_[1] = ea.S2_VentSludge.Value;
       if (ea.S3_SludgeDischargeTime.HasValue) _values_[2] = ea.S3_SludgeDischargeTime.Value;
       if (ea.S4_LowerLevelTime.HasValue) _values_[3] = ea.S4_LowerLevelTime.Value;
-      if (ea.S6_VentTime.HasValue) _values_[4] = ea.S6_VentTime.Value;
-      if (ea.S7_SludgeDischargeTime.HasValue) _values_[5] = ea.S7_SludgeDischargeTime.Value;
-      if (ea.S8_WaitTime.HasValue) _values_[6] = ea.S8_WaitTime.Value;
+      if (ea.S5_AerateTime_1.HasValue) _values_[4] = ea.S5_AerateTime_1.Value;
+      if (ea.S6_VentAerateTime.HasValue) _values_[5] = ea.S6_VentAerateTime.Value;
+      if (ea.S7_WaitTime.HasValue) _values_[6] = ea.S7_WaitTime.Value;
+      if (ea.S8_VentSludgeTime.HasValue) _values_[7] = ea.S8_VentSludgeTime.Value;
+      if (ea.S9_SludgeDischargeTime.HasValue) _values_[8] = ea.S9_SludgeDischargeTime.Value;
+      if (ea.S10_WaitTime.HasValue) _values_[9] = ea.S10_WaitTime.Value;
       return ((IHMIAccessorOutput)this).FireEvent(2, _values_);
     }
-    public bool FireEvent_STEPS_TIME(NxtControl.GuiFramework.Time S1_FeedTime, bool ignore_S1_FeedTime, NxtControl.GuiFramework.Time S2_WaitTime, bool ignore_S2_WaitTime, NxtControl.GuiFramework.Time S3_SludgeDischargeTime, bool ignore_S3_SludgeDischargeTime, NxtControl.GuiFramework.Time S4_LowerLevelTime, bool ignore_S4_LowerLevelTime, NxtControl.GuiFramework.Time S6_VentTime, bool ignore_S6_VentTime, NxtControl.GuiFramework.Time S7_SludgeDischargeTime, bool ignore_S7_SludgeDischargeTime, NxtControl.GuiFramework.Time S8_WaitTime, bool ignore_S8_WaitTime)
+    public bool FireEvent_STEPS_TIME(NxtControl.GuiFramework.Time S1_FeedTime, bool ignore_S1_FeedTime, NxtControl.GuiFramework.Time S2_VentSludge, bool ignore_S2_VentSludge, NxtControl.GuiFramework.Time S3_SludgeDischargeTime, bool ignore_S3_SludgeDischargeTime, NxtControl.GuiFramework.Time S4_LowerLevelTime, bool ignore_S4_LowerLevelTime, NxtControl.GuiFramework.Time S5_AerateTime_1, bool ignore_S5_AerateTime_1, NxtControl.GuiFramework.Time S6_VentAerateTime, bool ignore_S6_VentAerateTime, NxtControl.GuiFramework.Time S7_WaitTime, bool ignore_S7_WaitTime, NxtControl.GuiFramework.Time S8_VentSludgeTime, bool ignore_S8_VentSludgeTime, NxtControl.GuiFramework.Time S9_SludgeDischargeTime, bool ignore_S9_SludgeDischargeTime, NxtControl.GuiFramework.Time S10_WaitTime, bool ignore_S10_WaitTime)
     {
-      object[] _values_ = new object[7];
+      object[] _values_ = new object[10];
       if (!ignore_S1_FeedTime) _values_[0] = S1_FeedTime;
-      if (!ignore_S2_WaitTime) _values_[1] = S2_WaitTime;
+      if (!ignore_S2_VentSludge) _values_[1] = S2_VentSludge;
       if (!ignore_S3_SludgeDischargeTime) _values_[2] = S3_SludgeDischargeTime;
       if (!ignore_S4_LowerLevelTime) _values_[3] = S4_LowerLevelTime;
-      if (!ignore_S6_VentTime) _values_[4] = S6_VentTime;
-      if (!ignore_S7_SludgeDischargeTime) _values_[5] = S7_SludgeDischargeTime;
-      if (!ignore_S8_WaitTime) _values_[6] = S8_WaitTime;
+      if (!ignore_S5_AerateTime_1) _values_[4] = S5_AerateTime_1;
+      if (!ignore_S6_VentAerateTime) _values_[5] = S6_VentAerateTime;
+      if (!ignore_S7_WaitTime) _values_[6] = S7_WaitTime;
+      if (!ignore_S8_VentSludgeTime) _values_[7] = S8_VentSludgeTime;
+      if (!ignore_S9_SludgeDischargeTime) _values_[8] = S9_SludgeDischargeTime;
+      if (!ignore_S10_WaitTime) _values_[9] = S10_WaitTime;
       return ((IHMIAccessorOutput)this).FireEvent(2, _values_);
     }
     public bool FireEvent_FEED_PAR(System.Single FeedCapacity)
@@ -1665,6 +1769,22 @@ stack Trace:
       object[] _values_ = new object[1];
       if (!ignore_AirLockTime) _values_[0] = AirLockTime;
       return ((IHMIAccessorOutput)this).FireEvent(6, _values_);
+    }
+    public bool FireEvent_IFB_LVL(System.Boolean FeedIFBLevel)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(7, new object[] {FeedIFBLevel});
+    }
+    public bool FireEvent_IFB_LVL(SE.Nereda.Symbols.EmergencyReactor_2.IFB_LVLEventArgs ea)
+    {
+      object[] _values_ = new object[1];
+      if (ea.FeedIFBLevel.HasValue) _values_[0] = ea.FeedIFBLevel.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(7, _values_);
+    }
+    public bool FireEvent_IFB_LVL(System.Boolean FeedIFBLevel, bool ignore_FeedIFBLevel)
+    {
+      object[] _values_ = new object[1];
+      if (!ignore_FeedIFBLevel) _values_[0] = FeedIFBLevel;
+      return ((IHMIAccessorOutput)this).FireEvent(7, _values_);
     }
 
   }
@@ -1873,32 +1993,38 @@ stack Trace:
       if (!ignore_oEnableForce) _values_[0] = oEnableForce;
       return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
     }
-    public bool FireEvent_STEPS_TIME(NxtControl.GuiFramework.Time S1_FeedTime, NxtControl.GuiFramework.Time S2_WaitTime, NxtControl.GuiFramework.Time S3_SludgeDischargeTime, NxtControl.GuiFramework.Time S4_LowerLevelTime, NxtControl.GuiFramework.Time S6_VentTime, NxtControl.GuiFramework.Time S7_SludgeDischargeTime, NxtControl.GuiFramework.Time S8_WaitTime)
+    public bool FireEvent_STEPS_TIME(NxtControl.GuiFramework.Time S1_FeedTime, NxtControl.GuiFramework.Time S2_VentSludge, NxtControl.GuiFramework.Time S3_SludgeDischargeTime, NxtControl.GuiFramework.Time S4_LowerLevelTime, NxtControl.GuiFramework.Time S5_AerateTime_1, NxtControl.GuiFramework.Time S6_VentAerateTime, NxtControl.GuiFramework.Time S7_WaitTime, NxtControl.GuiFramework.Time S8_VentSludgeTime, NxtControl.GuiFramework.Time S9_SludgeDischargeTime, NxtControl.GuiFramework.Time S10_WaitTime)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(2, new object[] {S1_FeedTime, S2_WaitTime, S3_SludgeDischargeTime, S4_LowerLevelTime, S6_VentTime, S7_SludgeDischargeTime, S8_WaitTime});
+      return ((IHMIAccessorOutput)this).FireEvent(2, new object[] {S1_FeedTime, S2_VentSludge, S3_SludgeDischargeTime, S4_LowerLevelTime, S5_AerateTime_1, S6_VentAerateTime, S7_WaitTime, S8_VentSludgeTime, S9_SludgeDischargeTime, S10_WaitTime});
     }
     public bool FireEvent_STEPS_TIME(SE.Nereda.Symbols.EmergencyReactor_2.STEPS_TIMEEventArgs ea)
     {
-      object[] _values_ = new object[7];
+      object[] _values_ = new object[10];
       if (ea.S1_FeedTime.HasValue) _values_[0] = ea.S1_FeedTime.Value;
-      if (ea.S2_WaitTime.HasValue) _values_[1] = ea.S2_WaitTime.Value;
+      if (ea.S2_VentSludge.HasValue) _values_[1] = ea.S2_VentSludge.Value;
       if (ea.S3_SludgeDischargeTime.HasValue) _values_[2] = ea.S3_SludgeDischargeTime.Value;
       if (ea.S4_LowerLevelTime.HasValue) _values_[3] = ea.S4_LowerLevelTime.Value;
-      if (ea.S6_VentTime.HasValue) _values_[4] = ea.S6_VentTime.Value;
-      if (ea.S7_SludgeDischargeTime.HasValue) _values_[5] = ea.S7_SludgeDischargeTime.Value;
-      if (ea.S8_WaitTime.HasValue) _values_[6] = ea.S8_WaitTime.Value;
+      if (ea.S5_AerateTime_1.HasValue) _values_[4] = ea.S5_AerateTime_1.Value;
+      if (ea.S6_VentAerateTime.HasValue) _values_[5] = ea.S6_VentAerateTime.Value;
+      if (ea.S7_WaitTime.HasValue) _values_[6] = ea.S7_WaitTime.Value;
+      if (ea.S8_VentSludgeTime.HasValue) _values_[7] = ea.S8_VentSludgeTime.Value;
+      if (ea.S9_SludgeDischargeTime.HasValue) _values_[8] = ea.S9_SludgeDischargeTime.Value;
+      if (ea.S10_WaitTime.HasValue) _values_[9] = ea.S10_WaitTime.Value;
       return ((IHMIAccessorOutput)this).FireEvent(2, _values_);
     }
-    public bool FireEvent_STEPS_TIME(NxtControl.GuiFramework.Time S1_FeedTime, bool ignore_S1_FeedTime, NxtControl.GuiFramework.Time S2_WaitTime, bool ignore_S2_WaitTime, NxtControl.GuiFramework.Time S3_SludgeDischargeTime, bool ignore_S3_SludgeDischargeTime, NxtControl.GuiFramework.Time S4_LowerLevelTime, bool ignore_S4_LowerLevelTime, NxtControl.GuiFramework.Time S6_VentTime, bool ignore_S6_VentTime, NxtControl.GuiFramework.Time S7_SludgeDischargeTime, bool ignore_S7_SludgeDischargeTime, NxtControl.GuiFramework.Time S8_WaitTime, bool ignore_S8_WaitTime)
+    public bool FireEvent_STEPS_TIME(NxtControl.GuiFramework.Time S1_FeedTime, bool ignore_S1_FeedTime, NxtControl.GuiFramework.Time S2_VentSludge, bool ignore_S2_VentSludge, NxtControl.GuiFramework.Time S3_SludgeDischargeTime, bool ignore_S3_SludgeDischargeTime, NxtControl.GuiFramework.Time S4_LowerLevelTime, bool ignore_S4_LowerLevelTime, NxtControl.GuiFramework.Time S5_AerateTime_1, bool ignore_S5_AerateTime_1, NxtControl.GuiFramework.Time S6_VentAerateTime, bool ignore_S6_VentAerateTime, NxtControl.GuiFramework.Time S7_WaitTime, bool ignore_S7_WaitTime, NxtControl.GuiFramework.Time S8_VentSludgeTime, bool ignore_S8_VentSludgeTime, NxtControl.GuiFramework.Time S9_SludgeDischargeTime, bool ignore_S9_SludgeDischargeTime, NxtControl.GuiFramework.Time S10_WaitTime, bool ignore_S10_WaitTime)
     {
-      object[] _values_ = new object[7];
+      object[] _values_ = new object[10];
       if (!ignore_S1_FeedTime) _values_[0] = S1_FeedTime;
-      if (!ignore_S2_WaitTime) _values_[1] = S2_WaitTime;
+      if (!ignore_S2_VentSludge) _values_[1] = S2_VentSludge;
       if (!ignore_S3_SludgeDischargeTime) _values_[2] = S3_SludgeDischargeTime;
       if (!ignore_S4_LowerLevelTime) _values_[3] = S4_LowerLevelTime;
-      if (!ignore_S6_VentTime) _values_[4] = S6_VentTime;
-      if (!ignore_S7_SludgeDischargeTime) _values_[5] = S7_SludgeDischargeTime;
-      if (!ignore_S8_WaitTime) _values_[6] = S8_WaitTime;
+      if (!ignore_S5_AerateTime_1) _values_[4] = S5_AerateTime_1;
+      if (!ignore_S6_VentAerateTime) _values_[5] = S6_VentAerateTime;
+      if (!ignore_S7_WaitTime) _values_[6] = S7_WaitTime;
+      if (!ignore_S8_VentSludgeTime) _values_[7] = S8_VentSludgeTime;
+      if (!ignore_S9_SludgeDischargeTime) _values_[8] = S9_SludgeDischargeTime;
+      if (!ignore_S10_WaitTime) _values_[9] = S10_WaitTime;
       return ((IHMIAccessorOutput)this).FireEvent(2, _values_);
     }
     public bool FireEvent_FEED_PAR(System.Single FeedCapacity)
@@ -1970,6 +2096,22 @@ stack Trace:
       object[] _values_ = new object[1];
       if (!ignore_AirLockTime) _values_[0] = AirLockTime;
       return ((IHMIAccessorOutput)this).FireEvent(6, _values_);
+    }
+    public bool FireEvent_IFB_LVL(System.Boolean FeedIFBLevel)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(7, new object[] {FeedIFBLevel});
+    }
+    public bool FireEvent_IFB_LVL(SE.Nereda.Symbols.EmergencyReactor_2.IFB_LVLEventArgs ea)
+    {
+      object[] _values_ = new object[1];
+      if (ea.FeedIFBLevel.HasValue) _values_[0] = ea.FeedIFBLevel.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(7, _values_);
+    }
+    public bool FireEvent_IFB_LVL(System.Boolean FeedIFBLevel, bool ignore_FeedIFBLevel)
+    {
+      object[] _values_ = new object[1];
+      if (!ignore_FeedIFBLevel) _values_[0] = FeedIFBLevel;
+      return ((IHMIAccessorOutput)this).FireEvent(7, _values_);
     }
 
   }

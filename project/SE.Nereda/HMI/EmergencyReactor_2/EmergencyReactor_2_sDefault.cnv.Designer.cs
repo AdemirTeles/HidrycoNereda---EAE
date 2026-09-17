@@ -534,7 +534,7 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
 			this.Step2_Wait.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 232D, 144D);
 			this.Step2_Wait.Name = "Step2_Wait";
 			this.Step2_Wait.SecurityToken = ((uint)(4294967295u));
-			this.Step2_Wait.TagName = "Step2_Wait";
+			this.Step2_Wait.TagName = "Step2_VentSludge";
 			this.Step2_Wait.EndInit();
 			// 
 			// Step3_SludgeDischarge
@@ -561,7 +561,7 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
 			this.Step6_Vent.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 232D, 336D);
 			this.Step6_Vent.Name = "Step6_Vent";
 			this.Step6_Vent.SecurityToken = ((uint)(4294967295u));
-			this.Step6_Vent.TagName = "Step6_Vent";
+			this.Step6_Vent.TagName = "Step6_VentAerate";
 			this.Step6_Vent.EndInit();
 			// 
 			// Step7_SludgeDischarge
@@ -570,7 +570,7 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
 			this.Step7_SludgeDischarge.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 232D, 384D);
 			this.Step7_SludgeDischarge.Name = "Step7_SludgeDischarge";
 			this.Step7_SludgeDischarge.SecurityToken = ((uint)(4294967295u));
-			this.Step7_SludgeDischarge.TagName = "Step7_SludgeDischarge";
+			this.Step7_SludgeDischarge.TagName = "Step7_Wait";
 			this.Step7_SludgeDischarge.EndInit();
 			// 
 			// Step8_Wait
@@ -579,7 +579,7 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
 			this.Step8_Wait.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 232D, 432D);
 			this.Step8_Wait.Name = "Step8_Wait";
 			this.Step8_Wait.SecurityToken = ((uint)(4294967295u));
-			this.Step8_Wait.TagName = "Step8_Wait";
+			this.Step8_Wait.TagName = "Step8_VentSludge";
 			this.Step8_Wait.EndInit();
 			// 
 			// Step5_Aerate

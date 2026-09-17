@@ -38,6 +38,9 @@
       <Event ID="9041C273A86FC2E4" Name="FB_DUR_STEP4">
         <With Var="DurDoneStep4" />
       </Event>
+      <Event ID="AA8C7EBD4EBD70F0" Name="FB_DUR_STEP5">
+        <With Var="DurDoneStep5" />
+      </Event>
       <Event ID="5D1CA06DD981DC88" Name="FB_DUR_STEP6">
         <With Var="DurDoneStep6" />
       </Event>
@@ -73,6 +76,12 @@
       </Event>
       <Event ID="CF595DA908C4D604" Name="SD_R_INIT_DONE">
         <With Var="SD_RxInitDone" />
+      </Event>
+      <Event ID="1E0B2A3AB6A90076" Name="IFB_LVL">
+        <With Var="FeedIFBLevel" />
+      </Event>
+      <Event ID="035DD9202D5272B8" Name="SB_AV">
+        <With Var="SBAvailability" />
       </Event>
     </EventInputs>
     <EventOutputs>
@@ -127,6 +136,7 @@
       <VarDeclaration ID="356882B50FEB9A7D" Name="DurDoneStep2" Type="BOOL" />
       <VarDeclaration ID="111361C8BEDF440B" Name="DurDoneStep3" Type="BOOL" />
       <VarDeclaration ID="82CEB92F735FC5D4" Name="DurDoneStep4" Type="BOOL" />
+      <VarDeclaration ID="CC0CCEB2D046659B" Name="DurDoneStep5" Type="BOOL" />
       <VarDeclaration ID="0228D93DF2A0E691" Name="DurDoneStep6" Type="BOOL" />
       <VarDeclaration ID="F00C171ABB730806" Name="DurDoneStep7" Type="BOOL" />
       <VarDeclaration ID="0EEA3AF033FFC1FD" Name="DurDoneStep8" Type="BOOL" />
@@ -139,6 +149,8 @@
       <VarDeclaration ID="53ADC5A2738A60DC" Name="ForceUnavaibility" Type="BOOL" />
       <VarDeclaration ID="F39141D7A6A53184" Name="StopAerate" Type="BOOL" />
       <VarDeclaration ID="DB0738E6DF6AD68E" Name="SD_RxInitDone" Type="BOOL" />
+      <VarDeclaration ID="ACB986D17AA81EAF" Name="FeedIFBLevel" Type="BOOL" />
+      <VarDeclaration ID="5989C017FA1C720B" Name="SBAvailability" Type="BOOL" />
     </InputVars>
     <OutputVars>
       <VarDeclaration ID="8B42F21C51560908" Name="CmdFeed" Type="BOOL" />
@@ -154,7 +166,7 @@
   <BasicFB ID="2ec17f26-1e26-4187-9d1f-898851067dd5">
     <Attribute Name="FBType.Basic.Algorithm.Order" Value="FEED,LOWER_LEVEL,AERATE,StopAll,Synchronize,WAIT_INIT,WAIT_S8,WAIT_S2,SLUDGE_DISCHARGE_S3,SLUDGE_DISCHARGE_S7,VENT_AERATE,VENT_SLUDGE_S9,VENT_SLUDGE_S2" />
     <ECC>
-      <ECState Name="START" Comment="Initial State" x="3282.274" y="1240.078" />
+      <ECState Name="START" Comment="Initial State" x="3227.988" y="1022.935" />
       <ECState Name="FEED" x="3285.333" y="1742.667">
         <ECAction Algorithm="FEED" Output="PHASE_CMD" />
         <ECAction Output="GRAPH" />
@@ -197,7 +209,7 @@
         <ECAction Output="STEP7_START" />
         <ECAction Output="STEP6_STOP" />
       </ECState>
-      <ECState Name="WAIT_2" x="3340.714" y="7964.363">
+      <ECState Name="WAIT_2" x="3340.714" y="7964.361">
         <ECAction Algorithm="WAIT_S8" Output="PHASE_CMD" />
         <ECAction Output="GRAPH" />
         <ECAction Output="STEP10_START" />
@@ -214,6 +226,8 @@
         <ECAction Output="STEP6_STOP" />
         <ECAction Output="STEP7_STOP" />
         <ECAction Output="STEP8_STOP" />
+        <ECAction />
+        <ECAction />
       </ECState>
       <ECState Name="VENT_SLUDGE_2" x="3323.095" y="6855.556">
         <ECAction Algorithm="VENT_SLUDGE_S9" Output="PHASE_CMD" />
@@ -227,35 +241,36 @@
         <ECAction Output="STEP9_START" />
         <ECAction Output="STEP8_STOP" />
       </ECState>
-      <ECTransition Source="START" Destination="FEED" Condition="START_FEED AND StartFeed&#xD;&#xA;AND NOT ForceUnavaibility&#xD;&#xA;AND FeedReady&#xD;&#xA;AND EmergencyON" x="3285.889" y="1482.918">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="821.5081,353.4324,821.6608,386.6177" />
+      <ECState Name="IDLEState" x="3288.571" y="1367.619" />
+      <ECTransition Source="IDLEState" Destination="FEED" Condition="START_FEED AND StartFeed&#xD;&#xA;AND NOT ForceUnavaibility&#xD;&#xA;AND FeedReady&#xD;&#xA;AND EmergencyON" x="3288.56" y="1549.413">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="822.3223,375.5974,822.1121,398.1538" />
       </ECTransition>
-      <ECTransition Source="FEED" Destination="VENT_SLUDGE_1" Condition="FB_DUR_STEP1 AND DurDoneStep1" x="3284.762" y="2128.863">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="821.1121,504.3276,821.1963,560.0529" />
+      <ECTransition Source="FEED" Destination="VENT_SLUDGE_1" Condition="(FB_DUR_STEP1 AND DurDoneStep1)&#xD;&#xA;OR &#xD;&#xA;(IFB_LVL AND FeedIFBLevel)" x="3284.762" y="2131.541">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="821.1121,505.2205,821.1963,560.9458" />
       </ECTransition>
-      <ECTransition Source="VENT_SLUDGE_1" Destination="SLUDGE_DISCHARGE" Condition="(FB_DUR_STEP2 AND DurDoneStep2 AND NOT Skip AND InitialisationDone) OR&#xD;&#xA;(SD_R_INIT_DONE AND SD_RxInitDone AND NOT InitialisationDone)" x="3286.042" y="2871.647">
+      <ECTransition Source="VENT_SLUDGE_1" Destination="SLUDGE_DISCHARGE" Condition="(FB_DUR_STEP2 AND DurDoneStep2 AND NOT Skip AND InitialisationDone)&#xD;&#xA;OR&#xD;&#xA;(SD_R_INIT_DONE AND SD_RxInitDone AND NOT InitialisationDone)" x="3286.042" y="2871.647">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="821.258,689.4249,821.5966,743.2288" />
       </ECTransition>
-      <ECTransition Source="SLUDGE_DISCHARGE" Destination="LOWER_LEVEL" Condition="(FB_DUR_STEP3 AND DurDoneStep3) OR L1v" x="3289.927" y="3632.717">
+      <ECTransition Source="SLUDGE_DISCHARGE" Destination="LOWER_LEVEL" Condition="(FB_DUR_STEP3 AND DurDoneStep3) &#xD;&#xA;" x="3289.927" y="3632.717">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="822.1572,880.2822,822.5282,934.4183" />
       </ECTransition>
-      <ECTransition Source="LOWER_LEVEL" Destination="AERATE" Condition="FB_DUR_STEP4 AND DurDoneStep4" x="3295.079" y="4375.636">
+      <ECTransition Source="LOWER_LEVEL" Destination="AERATE" Condition="(FB_DUR_STEP4 AND DurDoneStep4)&#xD;&#xA;OR&#xD;&#xA;(L1 AND L1v)" x="3295.079" y="4375.636">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="823.9669,1065.177,823.7723,1119.225" />
       </ECTransition>
-      <ECTransition Source="AERATE" Destination="VENT_AERATION" Condition="StopAerate" x="3297.385" y="5155.205">
+      <ECTransition Source="AERATE" Destination="VENT_AERATION" Condition="StopAerate&#xD;&#xA;OR&#xD;&#xA;(FB_DUR_STEP5 AND DurDoneStep5)" x="3297.385" y="5155.205">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="824.1245,1260.374,824.6263,1316.339" />
       </ECTransition>
-      <ECTransition Source="VENT_AERATION" Destination="WAIT" Condition="FB_DUR_STEP6 AND DurDoneStep6 AND NOT Skip" x="3309.255" y="5904.167">
+      <ECTransition Source="VENT_AERATION" Destination="WAIT" Condition="(FB_DUR_STEP6 AND DurDoneStep6 )&#xD;&#xA;AND &#xD;&#xA;NOT Skip" x="3309.255" y="5904.167">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="827.4941,1450.154,827.7721,1501.333" />
       </ECTransition>
-      <ECTransition Source="WAIT" Destination="VENT_SLUDGE_2" Condition="(FB_DUR_STEP7 AND DurDoneStep7) OR L2v" x="3316.661" y="6552.892">
+      <ECTransition Source="WAIT" Destination="VENT_SLUDGE_2" Condition="(FB_DUR_STEP7 AND DurDoneStep7)" x="3316.55" y="6552.892">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="828.6152,1617.34,829.8492,1657.708" />
       </ECTransition>
-      <ECTransition Source="START" Destination="STOP" Condition="(EMERGENCY_ON AND NOT EmergencyON) OR&#xD;&#xA;(FORCE_UNAV AND ForceUnavaibility)" x="4955.518" y="1811.897">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1194.405,326.03,1368.532,498.2257" />
+      <ECTransition Source="START" Destination="STOP" Condition="(EMERGENCY_ON AND NOT EmergencyON) OR&#xD;&#xA;(FORCE_UNAV AND ForceUnavaibility)" x="4945.11" y="1725.576">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1190.887,297.2591,1369.622,486.8403" />
       </ECTransition>
-      <ECTransition Source="STOP" Destination="START" Condition="1" x="5291.013" y="1566.829">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1479.79,417.5497,1305.697,245.2298" />
+      <ECTransition Source="STOP" Destination="START" Condition="1" x="5290.746" y="1494.217">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1484.245,410.6816,1305.561,221.0942" />
       </ECTransition>
       <ECTransition Source="FEED" Destination="STOP" Condition="ForceUnavaibility OR NOT EmergencyON" x="4476.506" y="1810.897">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="1037.894,328.1077,1209.232,458.4095" />
@@ -272,44 +287,50 @@
       <ECTransition Source="AERATE" Destination="STOP" Condition="ForceUnavaibility OR NOT EmergencyON" x="4532.089" y="4256.158">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="1056.888,1129.606,1224.969,1024.913" />
       </ECTransition>
-      <ECTransition Source="VENT_AERATION" Destination="STOP" Condition="ForceUnavaibility OR NOT EmergencyON" x="4559.086" y="4819.906">
+      <ECTransition Source="VENT_AERATION" Destination="STOP" Condition="ForceUnavaibility OR NOT EmergencyON" x="4559.032" y="4819.905">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="1064.024,1317.251,1230.926,1149.423" />
       </ECTransition>
-      <ECTransition Source="WAIT" Destination="STOP" Condition="ForceUnavaibility OR NOT EmergencyON" x="4500.485" y="5416.982">
+      <ECTransition Source="WAIT" Destination="STOP" Condition="ForceUnavaibility OR NOT EmergencyON" x="4500.29" y="5417.091">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="1036.488,1517.366,1224.12,1285.338" />
       </ECTransition>
-      <ECTransition Source="WAIT_2" Destination="STOP" Condition="ForceUnavaibility OR NOT EmergencyON" x="5047.324" y="6940.612">
+      <ECTransition Source="WAIT_2" Destination="STOP" Condition="ForceUnavaibility OR NOT EmergencyON" x="5047.41" y="6940.611">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="1174.488,1846.243,1445.092,1832.912" />
       </ECTransition>
-      <ECTransition Source="VENT_SLUDGE_1" Destination="LOWER_LEVEL" Condition="(FB_DUR_STEP2 AND DurDoneStep2 AND Skip)" x="2625.919" y="3272.038">
+      <ECTransition Source="VENT_SLUDGE_1" Destination="LOWER_LEVEL" Condition="SB_AV AND SBAvailability" x="2625.919" y="3272.038">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="607.9529,760.0558,608.6768,876.692" />
       </ECTransition>
-      <ECTransition Source="VENT_AERATION" Destination="WAIT_2" Condition="FB_DUR_STEP6 AND DurDoneStep6 AND Skip" x="2661.187" y="6753.733">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="614.0599,1591.666,615.6459,1784.751" />
+      <ECTransition Source="VENT_SLUDGE_2" Destination="WAIT_2" Condition="(SB_AV AND SBAvailability)&#xD;&#xA;OR&#xD;&#xA;(SKIP AND Skip)" x="2672.424" y="7286.209">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="624.4141,1769.277,624.7231,1853.203" />
       </ECTransition>
-      <ECTransition Source="START" Destination="SLUDGE_DISCHARGE" Condition="INIT_EMERGENCY AND Init_GoToSD" x="2099.555" y="2403.847">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="436.2874,533.4933,436.9059,693.593" />
+      <ECTransition Source="IDLEState" Destination="SLUDGE_DISCHARGE" Condition="INIT_EMERGENCY AND Init_GoToSD" x="2095.589" y="2451.465">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="435.4228,549.348,435.8791,698.8548" />
       </ECTransition>
-      <ECTransition Source="START" Destination="WAIT_2" Condition="INIT_EMERGENCY AND Init_GoToWS8" x="995.626" y="5139.069">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="59.05539,650.7089,74.02177,2003.776" />
+      <ECTransition Source="START" Destination="WAIT_2" Condition="INIT_EMERGENCY AND Init_GoToWS8" x="975.1409" y="5062.292">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="49.34065,612.0287,74.12507,2009.268" />
       </ECTransition>
-      <ECTransition Source="WAIT_2" Destination="FEED" Condition="NOT ForceUnavaibility AND EmergencyON AND&#xD;&#xA;(START_FEED AND StartFeed)" x="1494.664" y="5114.798">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="200.1256,1734.248,260.5247,866.6981" />
+      <ECTransition Source="WAIT_2" Destination="FEED" Condition="NOT ForceUnavaibility AND EmergencyON &#xD;&#xA;AND&#xD;&#xA;(FB_DUR_STEP10 AND DurDoneStep10)&#xD;&#xA;AND&#xD;&#xA;(START_FEED AND StartFeed)" x="1494.616" y="5114.801">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="200.1264,1734.249,260.5235,866.6995" />
       </ECTransition>
-      <ECTransition Source="START" Destination="VENT_SLUDGE_1" Condition="INIT_EMERGENCY AND Init_GoToWS2" x="2659.254" y="1957.688">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="620.9894,447.2723,621.2234,544.8745" />
+      <ECTransition Source="IDLEState" Destination="VENT_SLUDGE_1" Condition="INIT_EMERGENCY AND Init_GoToWS2" x="2652.175" y="2009.526">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="619.1827,464.5396,619.64,551.537" />
       </ECTransition>
-      <ECTransition Source="VENT_SLUDGE_2" Destination="SLUDGE_DISCHARGE_2" Condition="1" x="3329.534" y="7102.254">
+      <ECTransition Source="VENT_SLUDGE_2" Destination="SLUDGE_DISCHARGE_2" Condition="FB_DUR_STEP8 AND DurDoneStep8" x="3329.68" y="7102.252">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="832.3174,1760.13,832.8052,1791.772" />
       </ECTransition>
-      <ECTransition Source="SLUDGE_DISCHARGE_2" Destination="WAIT_2" Condition="1" x="3341.098" y="7668.624">
+      <ECTransition Source="SLUDGE_DISCHARGE_2" Destination="WAIT_2" Condition="(FB_DUR_STEP9 AND DurDoneStep9)&#xD;&#xA;OR&#xD;&#xA;(L2 AND L2v)" x="3341.098" y="7668.625">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="835.2547,1896.86,835.9224,1940.223" />
       </ECTransition>
-      <ECTransition Source="VENT_SLUDGE_2" Destination="STOP" Condition="ForceUnavaibility OR NOT EmergencyON" x="4807.494" y="5570.603">
+      <ECTransition Source="VENT_SLUDGE_2" Destination="STOP" Condition="ForceUnavaibility OR NOT EmergencyON" x="4807.493" y="5570.604">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="1144.343,1568.297,1318.424,1289.92" />
       </ECTransition>
-      <ECTransition Source="SLUDGE_DISCHARGE_2" Destination="STOP" Condition="ForceUnavaibility OR NOT EmergencyON" x="5013.738" y="5959.983">
+      <ECTransition Source="SLUDGE_DISCHARGE_2" Destination="STOP" Condition="ForceUnavaibility OR NOT EmergencyON" x="5013.738" y="5959.982">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="1211.099,1698.09,1385.202,1379.373" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="IDLEState" Condition="1" x="3276.027" y="1119.007">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="819.5413,268.2849,821.4792,282.8553" />
+      </ECTransition>
+      <ECTransition Source="SLUDGE_DISCHARGE" Destination="AERATE" Condition="(L1 AND L1v)" x="2578.578" y="4098.972">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="593.2038,972.9559,593.4217,1089.837" />
       </ECTransition>
     </ECC>
     <Algorithm Name="FEED">
@@ -329,7 +350,8 @@ CmdFeed := FALSE;
 CmdAerate := FALSE;
 CmdSludgeDischarge := FALSE;
 CmdLowerLevel := FALSE;
-CmdVent := FALSE;
+CmdVentAerate := FALSE;
+CmdVentSludge := FALSE;
 CmdWait := TRUE;
 
 Grafcet := 10;]]></ST>
@@ -340,7 +362,8 @@ CmdFeed := FALSE;
 CmdAerate := FALSE;
 CmdSludgeDischarge := TRUE;
 CmdLowerLevel := FALSE;
-CmdVent := FALSE;
+CmdVentAerate := FALSE;
+CmdVentSludge := FALSE;
 CmdWait := FALSE;
 
 Grafcet := 9;]]></ST>
@@ -373,7 +396,8 @@ CmdFeed := FALSE;
 CmdAerate := FALSE;
 CmdSludgeDischarge := FALSE;
 CmdLowerLevel := FALSE;
-CmdVent := FALSE;
+CmdVentAerate := FALSE;
+CmdVentSludge := FALSE;
 CmdWait := FALSE;
 Grafcet := 10;]]></ST>
     </Algorithm>
@@ -387,7 +411,8 @@ CmdFeed := FALSE;
 CmdAerate := FALSE;
 CmdSludgeDischarge := FALSE;
 CmdLowerLevel := FALSE;
-CmdVent := FALSE;
+CmdVentAerate := FALSE;
+CmdVentSludge := FALSE;
 CmdWait := TRUE;
 
 Grafcet := 8;]]></ST>
@@ -398,7 +423,8 @@ CmdFeed := FALSE;
 CmdAerate := FALSE;
 CmdSludgeDischarge := FALSE;
 CmdLowerLevel := FALSE;
-CmdVent := FALSE;
+CmdVentAerate := FALSE;
+CmdVentSludge := FALSE;
 CmdWait := TRUE;
 
 Grafcet := 2;]]></ST>
@@ -409,8 +435,10 @@ CmdFeed := FALSE;
 CmdAerate := FALSE;
 CmdSludgeDischarge := TRUE;
 CmdLowerLevel := FALSE;
-CmdVent := FALSE;
+CmdVentAerate := FALSE;
+CmdVentSludge := FALSE;
 CmdWait := FALSE;
+Skip:
 
 Grafcet := 3;]]></ST>
     </Algorithm>

@@ -26,20 +26,8 @@ namespace HMI.Main.Canvases
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.REACTOR01_1 = new SE.Nereda.Symbols.NeredaReactor.sPhases();
 			this.Mode = new SE.Nereda.Symbols.Mode.ReactorMode();
 			this.AERATION = new SE.Nereda.Symbols.NeredaCAeration.sBlowers();
-			this.REACTOR01_2 = new SE.Nereda.Symbols.NeredaReactor.sReactor4();
-			this.REACTOR01 = new SE.Nereda.Symbols.NeredaReactor.sSettingsBtn();
-			// 
-			// REACTOR01_1
-			// 
-			this.REACTOR01_1.BeginInit();
-			this.REACTOR01_1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 8D, 8D);
-			this.REACTOR01_1.Name = "REACTOR01_1";
-			this.REACTOR01_1.SecurityToken = ((uint)(4294967295u));
-			this.REACTOR01_1.TagName = "D32FABF3E7C17DE2";
-			this.REACTOR01_1.EndInit();
 			// 
 			// Mode
 			// 
@@ -59,44 +47,18 @@ namespace HMI.Main.Canvases
 			this.AERATION.TagName = "6307B68BAFBA5753";
 			this.AERATION.EndInit();
 			// 
-			// REACTOR01_2
-			// 
-			this.REACTOR01_2.BeginInit();
-			this.REACTOR01_2._iLT001 = "NVPP 001 lt 004";
-			this.REACTOR01_2._iREACTOR = "Reactor 1";
-			this.REACTOR01_2.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 8D, 248D);
-			this.REACTOR01_2.Name = "REACTOR01_2";
-			this.REACTOR01_2.SecurityToken = ((uint)(4294967295u));
-			this.REACTOR01_2.TagName = "D32FABF3E7C17DE2";
-			this.REACTOR01_2.EndInit();
-			// 
-			// REACTOR01
-			// 
-			this.REACTOR01.BeginInit();
-			this.REACTOR01.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 480D, 64D);
-			this.REACTOR01.Name = "REACTOR01";
-			this.REACTOR01.SecurityToken = ((uint)(4294967295u));
-			this.REACTOR01.TagName = "D32FABF3E7C17DE2";
-			this.REACTOR01.EndInit();
-			// 
 			// Canvas2
 			// 
 			this.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(1366D)), ((float)(698D)));
 			this.Brush = new NxtControl.Drawing.Brush("CanvasBrush");
 			this.Shapes.AddRange(new System.ComponentModel.IComponent[] {
-			this.REACTOR01_1,
 			this.Mode,
-			this.AERATION,
-			this.REACTOR01_2,
-			this.REACTOR01});
+			this.AERATION});
 			this.Size = new System.Drawing.Size(1366, 698);
 
 		}
-		private SE.Nereda.Symbols.NeredaReactor.sSettingsBtn REACTOR01;
-		private SE.Nereda.Symbols.NeredaReactor.sPhases REACTOR01_1;
 		private SE.Nereda.Symbols.Mode.ReactorMode Mode;
 		private SE.Nereda.Symbols.NeredaCAeration.sBlowers AERATION;
-		private SE.Nereda.Symbols.NeredaReactor.sReactor4 REACTOR01_2;
 		#endregion
 	}
 }

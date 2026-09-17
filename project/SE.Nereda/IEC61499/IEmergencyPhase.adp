@@ -7,8 +7,11 @@
     <EventInputs>
       <Event ID="3CBA18632C5993F7" Name="FEED_RDY_ILCK">
         <With Var="FeedReady" />
-        <With Var="FeedInterlocked" />
         <With Var="FeedRun" />
+        <With Var="FeedStarted" />
+        <With Var="FeedStopped" />
+        <With Var="FeedAborted" />
+        <With Var="FeedInterlocked" />
       </Event>
       <Event ID="B9A3DD1A626C862D" Name="AERATION_RDY_ILCK">
         <With Var="AerateReady" />
@@ -41,6 +44,9 @@
       </Event>
       <Event ID="0001D958FDF5E959" Name="L2">
         <With Var="L2v" />
+      </Event>
+      <Event ID="2DDA8AB533D7441D" Name="IFB_LVL">
+        <With Var="InfluentBufferLevelReached" />
       </Event>
     </EventInputs>
     <EventOutputs>
@@ -96,6 +102,9 @@
     <InputVars>
       <VarDeclaration ID="599667ECF678E518" Name="FeedReady" Type="BOOL" />
       <VarDeclaration ID="F208B10244BCFEF2" Name="FeedRun" Type="BOOL" />
+      <VarDeclaration ID="D62F1904A2304A82" Name="FeedStarted" Type="BOOL" />
+      <VarDeclaration ID="EDD981DC30DF57BC" Name="FeedStopped" Type="BOOL" />
+      <VarDeclaration ID="DA119668EC2B3E62" Name="FeedAborted" Type="BOOL" />
       <VarDeclaration ID="4F5ECA9F9BF691B9" Name="FeedInterlocked" Type="BOOL" />
       <VarDeclaration ID="656FC0E59D395E4C" Name="AerateReady" Type="BOOL" />
       <VarDeclaration ID="A63167A113600EB8" Name="AerateRun" Type="BOOL" />
@@ -113,6 +122,7 @@
       <VarDeclaration ID="F87C7AE958A99541" Name="WInterlocked" Type="BOOL" />
       <VarDeclaration ID="579DEB3758BDB938" Name="L1v" Type="BOOL" />
       <VarDeclaration ID="1156E288C0C38120" Name="L2v" Type="BOOL" />
+      <VarDeclaration ID="C54C3886CAD71D0C" Name="InfluentBufferLevelReached" Type="BOOL" />
     </InputVars>
     <OutputVars>
       <VarDeclaration ID="8B7B31E6EA54014D" Name="CmdFeed" Type="BOOL" />

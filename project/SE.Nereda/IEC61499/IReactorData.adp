@@ -56,6 +56,9 @@
       <Event ID="77175193A5DFB16A" Name="SD_R_INIT_DONE">
         <With Var="SD_RxInitDone" />
       </Event>
+      <Event ID="93812D9FEC4294F9" Name="SB_AV">
+        <With Var="SBAvailability" />
+      </Event>
     </EventOutputs>
     <InputVars>
       <VarDeclaration ID="793E1D04BE895F4E" Name="S5_AerateTimeT" Type="TIME" />
@@ -81,6 +84,7 @@
       <VarDeclaration ID="5C25718B2BAE6B29" Name="NextFeedHorizonVR" Type="REAL" />
       <VarDeclaration ID="7FC77B7D4B4A5A4D" Name="ID" Type="INT" />
       <VarDeclaration ID="EEDAEC65A069032E" Name="SD_RxInitDone" Type="BOOL" />
+      <VarDeclaration ID="1675BB23EEFCF5E9" Name="SBAvailability" Type="BOOL" />
     </OutputVars>
   </InterfaceList>
   <Service RightInterface="PLUG" LeftInterface="SOCKET">

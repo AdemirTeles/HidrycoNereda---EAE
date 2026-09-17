@@ -35,9 +35,7 @@ namespace HMI.Main.Canvases
 			this.Mode = new SE.Nereda.Symbols.Mode.ReactorMode();
 			this.sHiHiLevelCalamity1 = new SE.Nereda.Symbols.Calamity.sHiHiLevelCalamity();
 			this.OpenWebPage = new SE.Nereda.Symbols.OpenWebPage.sDefault();
-			this.NVPP_REACTOR01 = new SE.Nereda.Symbols.NeredaReactor.sSettingsBtn();
 			this.Mode_1 = new SE.Nereda.Symbols.Mode.ResetReactor1();
-			this.REACTOR01 = new SE.Nereda.Symbols.NeredaReactor.sReactor4();
 			this.pipe1 = new NxtControl.GuiFramework.Pipe();
 			this.pipe3 = new NxtControl.GuiFramework.Pipe();
 			this.pipe4 = new NxtControl.GuiFramework.Pipe();
@@ -125,15 +123,6 @@ namespace HMI.Main.Canvases
 			this.OpenWebPage.TagName = "61745BDDB91DBEF5";
 			this.OpenWebPage.EndInit();
 			// 
-			// NVPP_REACTOR01
-			// 
-			this.NVPP_REACTOR01.BeginInit();
-			this.NVPP_REACTOR01.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 976D, 8D);
-			this.NVPP_REACTOR01.Name = "NVPP_REACTOR01";
-			this.NVPP_REACTOR01.SecurityToken = ((uint)(4294967295u));
-			this.NVPP_REACTOR01.TagName = "D32FABF3E7C17DE2";
-			this.NVPP_REACTOR01.EndInit();
-			// 
 			// Mode_1
 			// 
 			this.Mode_1.BeginInit();
@@ -142,22 +131,6 @@ namespace HMI.Main.Canvases
 			this.Mode_1.SecurityToken = ((uint)(4294967295u));
 			this.Mode_1.TagName = "7A79C015B9ADE3EB";
 			this.Mode_1.EndInit();
-			// 
-			// REACTOR01
-			// 
-			this.REACTOR01.BeginInit();
-			this.REACTOR01._iAV4x101 = "AV41101";
-			this.REACTOR01._iAV4x103 = "AV41103";
-			this.REACTOR01._iAV4x107 = "AV41107";
-			this.REACTOR01._iAV4x171 = "AV41171";
-			this.REACTOR01._iAV4x172 = "AV41172";
-			this.REACTOR01._iLT001 = "41LT1005";
-			this.REACTOR01._iREACTOR = "Reactor 1";
-			this.REACTOR01.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 608D, 72D);
-			this.REACTOR01.Name = "REACTOR01";
-			this.REACTOR01.SecurityToken = ((uint)(4294967295u));
-			this.REACTOR01.TagName = "D41247DF3E1D30DC";
-			this.REACTOR01.EndInit();
 			// 
 			// pipe1
 			// 
@@ -284,9 +257,7 @@ namespace HMI.Main.Canvases
 			this.Mode,
 			this.sHiHiLevelCalamity1,
 			this.OpenWebPage,
-			this.NVPP_REACTOR01,
 			this.Mode_1,
-			this.REACTOR01,
 			this.REACTOR01_1,
 			this.polygon1,
 			this.polygon2,
@@ -304,9 +275,7 @@ namespace HMI.Main.Canvases
 		private SE.Nereda.Symbols.Mode.ReactorMode Mode;
 		private SE.Nereda.Symbols.Calamity.sHiHiLevelCalamity sHiHiLevelCalamity1;
 		private SE.Nereda.Symbols.OpenWebPage.sDefault OpenWebPage;
-		private SE.Nereda.Symbols.NeredaReactor.sSettingsBtn NVPP_REACTOR01;
 		private SE.Nereda.Symbols.Mode.ResetReactor1 Mode_1;
-		private SE.Nereda.Symbols.NeredaReactor.sReactor4 REACTOR01;
 		private NxtControl.GuiFramework.Pipe pipe1;
 		private NxtControl.GuiFramework.Pipe pipe2;
 		private NxtControl.GuiFramework.Pipe pipe3;

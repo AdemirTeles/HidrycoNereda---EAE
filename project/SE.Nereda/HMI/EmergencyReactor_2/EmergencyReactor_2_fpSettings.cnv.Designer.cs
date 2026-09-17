@@ -136,7 +136,7 @@ namespace SE.Nereda.Faceplates.EmergencyReactor_2
 			this.S2_WaitTime.MaximumTag = null;
 			this.S2_WaitTime.MinimumTag = null;
 			this.S2_WaitTime.Name = "S2_WaitTime";
-			this.S2_WaitTime.TagName = "S2_WaitTime";
+			this.S2_WaitTime.TagName = "S2_VentSludge";
 			this.S2_WaitTime.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.S2_WaitTime.UseInputPad = true;
 			this.S2_WaitTime.Value = new NxtControl.GuiFramework.Time(((long)(0)));
@@ -175,7 +175,7 @@ namespace SE.Nereda.Faceplates.EmergencyReactor_2
 			this.S6_VentTime.MaximumTag = null;
 			this.S6_VentTime.MinimumTag = null;
 			this.S6_VentTime.Name = "S6_VentTime";
-			this.S6_VentTime.TagName = "S6_VentTime";
+			this.S6_VentTime.TagName = "S6_VentAerateTime";
 			this.S6_VentTime.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.S6_VentTime.UseInputPad = true;
 			this.S6_VentTime.Value = new NxtControl.GuiFramework.Time(((long)(0)));
@@ -188,7 +188,7 @@ namespace SE.Nereda.Faceplates.EmergencyReactor_2
 			this.S7_SludgeDischargeTime.MaximumTag = null;
 			this.S7_SludgeDischargeTime.MinimumTag = null;
 			this.S7_SludgeDischargeTime.Name = "S7_SludgeDischargeTime";
-			this.S7_SludgeDischargeTime.TagName = "S7_SludgeDischargeTime";
+			this.S7_SludgeDischargeTime.TagName = "S9_SludgeDischargeTime";
 			this.S7_SludgeDischargeTime.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.S7_SludgeDischargeTime.UseInputPad = true;
 			this.S7_SludgeDischargeTime.Value = new NxtControl.GuiFramework.Time(((long)(0)));
@@ -201,7 +201,7 @@ namespace SE.Nereda.Faceplates.EmergencyReactor_2
 			this.S8_WaitTime.MaximumTag = null;
 			this.S8_WaitTime.MinimumTag = null;
 			this.S8_WaitTime.Name = "S8_WaitTime";
-			this.S8_WaitTime.TagName = "S8_WaitTime";
+			this.S8_WaitTime.TagName = "S7_WaitTime";
 			this.S8_WaitTime.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.S8_WaitTime.UseInputPad = true;
 			this.S8_WaitTime.Value = new NxtControl.GuiFramework.Time(((long)(0)));
