@@ -45,6 +45,8 @@ namespace HMI.Main.Canvases
 			this.polygon2 = new NxtControl.GuiFramework.Polygon();
 			this.polygon3 = new NxtControl.GuiFramework.Polygon();
 			this.polygon4 = new NxtControl.GuiFramework.Polygon();
+			this.sSensors1 = new SE.Nereda.Symbols.NeredaReactor.sSensors();
+			this.sReactor41 = new SE.Nereda.Symbols.NeredaReactor.sReactor4();
 			// 
 			// changeCanvasButton1
 			// 
@@ -239,6 +241,31 @@ namespace HMI.Main.Canvases
 			new NxtControl.Drawing.PointF(224D, 680D),
 			new NxtControl.Drawing.PointF(192D, 672D)});
 			// 
+			// sSensors1
+			// 
+			this.sSensors1.BeginInit();
+			this.sSensors1.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.83547557840616959D, 0D, 0D, 0.93333333333333324D, 240D, 288D);
+			this.sSensors1.Name = "sSensors1";
+			this.sSensors1.SecurityToken = ((uint)(4294967295u));
+			this.sSensors1.TagName = "D41247DF3E1D30DC";
+			this.sSensors1.EndInit();
+			// 
+			// sReactor41
+			// 
+			this.sReactor41.BeginInit();
+			this.sReactor41._iAV4x101 = "AV4x101";
+			this.sReactor41._iAV4x103 = "AV4x103";
+			this.sReactor41._iAV4x107 = "AV4x107";
+			this.sReactor41._iAV4x171 = "AV4x171";
+			this.sReactor41._iAV4x172 = "AV4x172";
+			this.sReactor41._iLT001 = "4xLT1005";
+			this.sReactor41._iREACTOR = "Reactor 1";
+			this.sReactor41.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 544D, 72D);
+			this.sReactor41.Name = "sReactor41";
+			this.sReactor41.SecurityToken = ((uint)(4294967295u));
+			this.sReactor41.TagName = "D41247DF3E1D30DC";
+			this.sReactor41.EndInit();
+			// 
 			// REACTOR1
 			// 
 			this.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(1366D)), ((float)(698D)));
@@ -262,7 +289,9 @@ namespace HMI.Main.Canvases
 			this.polygon1,
 			this.polygon2,
 			this.polygon3,
-			this.polygon4});
+			this.polygon4,
+			this.sSensors1,
+			this.sReactor41});
 			this.Size = new System.Drawing.Size(1366, 698);
 
 		}
@@ -285,6 +314,8 @@ namespace HMI.Main.Canvases
 		private NxtControl.GuiFramework.Polygon polygon2;
 		private NxtControl.GuiFramework.Polygon polygon3;
 		private NxtControl.GuiFramework.Polygon polygon4;
+		private SE.Nereda.Symbols.NeredaReactor.sSensors sSensors1;
+		private SE.Nereda.Symbols.NeredaReactor.sReactor4 sReactor41;
 		#endregion
 	}
 }
