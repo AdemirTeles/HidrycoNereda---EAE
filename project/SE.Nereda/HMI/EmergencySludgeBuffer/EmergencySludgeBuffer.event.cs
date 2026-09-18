@@ -199,8 +199,8 @@ namespace SE.Nereda.Symbols.EmergencySludgeBuffer
     public SLD_DIS_PAREventArgs()
     {
     }
-    private System.Int16? SludgeDischargeCapacity_field = null;
-    public System.Int16? SludgeDischargeCapacity
+    private System.Single? SludgeDischargeCapacity_field = null;
+    public System.Single? SludgeDischargeCapacity
     {
        get { return SludgeDischargeCapacity_field; }
        set { SludgeDischargeCapacity_field = value; }
@@ -213,8 +213,8 @@ namespace SE.Nereda.Symbols.EmergencySludgeBuffer
     public SUP_DIS_PAREventArgs()
     {
     }
-    private System.Int16? SupernantDischargeCapacity_field = null;
-    public System.Int16? SupernantDischargeCapacity
+    private System.Single? SupernantDischargeCapacity_field = null;
+    public System.Single? SupernantDischargeCapacity
     {
        get { return SupernantDischargeCapacity_field; }
        set { SupernantDischargeCapacity_field = value; }
@@ -237,9 +237,6 @@ namespace SE.Nereda.Symbols.EmergencySludgeBuffer
   }
 
 }
-
-namespace SE.Nereda.Symbols.EmergencySludgeBuffer
-{}
 
 namespace SE.Nereda.Symbols.EmergencySludgeBuffer
 {
@@ -374,7 +371,7 @@ stack Trace:
       if (!ignore_S4_SupernantDischargeTime) _values_[3] = S4_SupernantDischargeTime;
       return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
     }
-    public bool FireEvent_SLD_DIS_PAR(System.Int16 SludgeDischargeCapacity)
+    public bool FireEvent_SLD_DIS_PAR(System.Single SludgeDischargeCapacity)
     {
       return ((IHMIAccessorOutput)this).FireEvent(2, new object[] {SludgeDischargeCapacity});
     }
@@ -384,13 +381,13 @@ stack Trace:
       if (ea.SludgeDischargeCapacity.HasValue) _values_[0] = ea.SludgeDischargeCapacity.Value;
       return ((IHMIAccessorOutput)this).FireEvent(2, _values_);
     }
-    public bool FireEvent_SLD_DIS_PAR(System.Int16 SludgeDischargeCapacity, bool ignore_SludgeDischargeCapacity)
+    public bool FireEvent_SLD_DIS_PAR(System.Single SludgeDischargeCapacity, bool ignore_SludgeDischargeCapacity)
     {
       object[] _values_ = new object[1];
       if (!ignore_SludgeDischargeCapacity) _values_[0] = SludgeDischargeCapacity;
       return ((IHMIAccessorOutput)this).FireEvent(2, _values_);
     }
-    public bool FireEvent_SUP_DIS_PAR(System.Int16 SupernantDischargeCapacity)
+    public bool FireEvent_SUP_DIS_PAR(System.Single SupernantDischargeCapacity)
     {
       return ((IHMIAccessorOutput)this).FireEvent(3, new object[] {SupernantDischargeCapacity});
     }
@@ -400,7 +397,7 @@ stack Trace:
       if (ea.SupernantDischargeCapacity.HasValue) _values_[0] = ea.SupernantDischargeCapacity.Value;
       return ((IHMIAccessorOutput)this).FireEvent(3, _values_);
     }
-    public bool FireEvent_SUP_DIS_PAR(System.Int16 SupernantDischargeCapacity, bool ignore_SupernantDischargeCapacity)
+    public bool FireEvent_SUP_DIS_PAR(System.Single SupernantDischargeCapacity, bool ignore_SupernantDischargeCapacity)
     {
       object[] _values_ = new object[1];
       if (!ignore_SupernantDischargeCapacity) _values_[0] = SupernantDischargeCapacity;

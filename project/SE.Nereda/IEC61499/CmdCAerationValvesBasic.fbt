@@ -27,10 +27,20 @@
       <Event ID="BLOWERS_NO_AVAILABLE" Name="BLOWERS_RDY">
         <With Var="BlowersReady" />
       </Event>
+      <Event ID="72D3873B05CB4FA1" Name="AERATOR_FB">
+        <With Var="AerationBlockRunning" />
+        <With Var="AerationBlockFbStopped" />
+      </Event>
+      <Event ID="6D817C48E98D93B0" Name="AERATOR_RDY">
+        <With Var="AerationBlockReady" />
+      </Event>
     </EventInputs>
     <EventOutputs>
       <Event ID="CNF_BLOWERS" Name="CNF_BLOWERS_CMD">
         <With Var="CmdBlowers" />
+      </Event>
+      <Event ID="029C19F2648B74C2" Name="CNF_AERATION_CMD">
+        <With Var="CmdAerationBlock" />
       </Event>
       <Event Name="CNF_START_RDY">
         <With Var="StartReady" />
@@ -51,16 +61,20 @@
       <VarDeclaration Name="BlowersFbRunning" Type="BOOL" />
       <VarDeclaration Name="BlowersFbStopped" Type="BOOL" />
       <VarDeclaration ID="BlowersNotAvailable" Name="BlowersReady" Type="BOOL" />
+      <VarDeclaration ID="21FDD93DD473BFE1" Name="AerationBlockRunning" Type="BOOL" />
+      <VarDeclaration ID="087CCAB553E80A7C" Name="AerationBlockFbStopped" Type="BOOL" />
+      <VarDeclaration ID="AB5DEAD009B0E55A" Name="AerationBlockReady" Type="BOOL" />
     </InputVars>
     <OutputVars>
       <VarDeclaration ID="Blowers" Name="CmdBlowers" Type="BOOL" />
+      <VarDeclaration ID="B0854A3A88322687" Name="CmdAerationBlock" Type="BOOL" />
       <VarDeclaration Name="StartReady" Type="BOOL" />
       <VarDeclaration Name="StopReady" Type="BOOL" />
       <VarDeclaration Name="AbortReady" Type="BOOL" />
     </OutputVars>
   </InterfaceList>
   <BasicFB ID="4c35bdf1-231b-469b-833c-3e92166bfed2">
-    <Attribute Name="FBType.Basic.Algorithm.Order" Value="StartReady,AbortReady,StopReady,RunBlowers,StopBlowers,StopBlowers_WhenAborting" />
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="StartReady,AbortReady,StopReady,RunBlowers,StopBlowers,StopBlowers_WhenAborting,StartValve" />
     <ECC>
       <ECState Name="START" Comment="Initial State" x="3019.607" y="1216.174" />
       <ECState Name="Ready" x="4159.366" y="880.0953">
@@ -69,7 +83,7 @@
         <ECAction Output="CNF_ABORT_RDY" />
       </ECState>
       <ECState Name="Starting" x="3031.112" y="1728.223">
-        <ECAction Algorithm="RunBlowers" Output="CNF_BLOWERS_CMD" />
+        <ECAction Algorithm="StartValve" Output="CNF_BLOWERS_CMD" />
       </ECState>
       <ECState Name="Run" x="3026.889" y="2700.666">
         <ECAction Algorithm="RunBlowers" Output="CNF_BLOWERS_CMD" />
@@ -94,10 +108,10 @@
       <ECState Name="StartReday" x="3027.111" y="2241">
         <ECAction Algorithm="StartReady" Output="CNF_START_RDY" />
       </ECState>
-      <ECTransition Source="START" Destination="Ready" Condition="Ready AND&#xD;&#xA;BlowersFbRunning" x="3571.806" y="973.1485">
+      <ECTransition Source="START" Destination="Ready" Condition="Ready AND&#xD;&#xA;BlowersFbRunning" x="3571.779" y="973.1593">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="853.8844,250.2429,930.9771,227.5072" />
       </ECTransition>
-      <ECTransition Source="Ready" Destination="START" Condition="BlowersFbStopped OR&#xD;&#xA;NOT BlowersReady" x="3666.269" y="1139.061">
+      <ECTransition Source="Ready" Destination="START" Condition="BlowersFbStopped OR&#xD;&#xA;NOT BlowersReady" x="3666.218" y="1139.068">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="956.3914,282.034,884.5742,298.7475" />
       </ECTransition>
       <ECTransition Source="START" Destination="Starting" Condition="STARTING AND Starting" x="3030.489" y="1477.101">
@@ -106,34 +120,34 @@
       <ECTransition Source="Run" Destination="Stopping1" Condition="Stopping" x="3738.098" y="3013.356">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="778.6505,762.9763,1025.827,813.8604" />
       </ECTransition>
-      <ECTransition Source="START" Destination="Aborting1" Condition="ABORTING AND Aborting" x="6312.873" y="1882.121">
+      <ECTransition Source="START" Destination="Aborting1" Condition="ABORTING AND Aborting" x="6312.873" y="1882.12">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="1489.839,376.6041,1837.444,523.3553" />
       </ECTransition>
-      <ECTransition Source="Starting" Destination="StartReday" Condition="BlowersFbRunning" x="3024.211" y="1982.621">
+      <ECTransition Source="Starting" Destination="StartReday" Condition="AerationBlockRunning" x="3024.211" y="1982.621">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="756.5841,479.2461,754.976,511.7326" />
       </ECTransition>
-      <ECTransition Source="Abort" Destination="Aborting1" Condition="1" x="5706.374" y="4234.009">
+      <ECTransition Source="Abort" Destination="Aborting1" Condition="1" x="5706.373" y="4234.01">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="1248.333,1489.462,1690,776.1285" />
       </ECTransition>
-      <ECTransition Source="Stopping1" Destination="StopReady" Condition="BlowersFbStopped" x="5283.481" y="2705.25">
+      <ECTransition Source="Stopping1" Destination="StopReady" Condition="BlowersFbStopped" x="5283.483" y="2705.25">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="1320.873,650.7724,1321.01,699.086" />
       </ECTransition>
-      <ECTransition Source="Stopping1" Destination="Abort" Condition="ABORTING AND Aborting" x="4239.873" y="3283.22">
+      <ECTransition Source="Stopping1" Destination="Abort" Condition="ABORTING AND Aborting" x="4239.873" y="3283.219">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="1150.11,789.5051,975.1101,900.5051" />
       </ECTransition>
-      <ECTransition Source="Starting" Destination="Abort" Condition="ABORTING AND Aborting" x="1915.256" y="3057.314">
+      <ECTransition Source="Starting" Destination="Abort" Condition="ABORTING AND Aborting" x="1915.255" y="3057.314">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="385.6805,727.1396,396.6147,867.6057" />
       </ECTransition>
       <ECTransition Source="Run" Destination="Abort" Condition="ABORTING AND Aborting" x="2838.029" y="3049.776">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="708.2352,726.0208,683.1634,786.5602" />
       </ECTransition>
-      <ECTransition Source="StopReady" Destination="Abort" Condition="ABORTING AND Aborting" x="4313.894" y="3720.853">
+      <ECTransition Source="StopReady" Destination="Abort" Condition="ABORTING AND Aborting" x="4313.895" y="3720.853">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="1175.847,942.0256,998.3352,979.7472" />
       </ECTransition>
-      <ECTransition Source="AbortReady" Destination="START" Condition="1" x="2778.459" y="4425.39">
+      <ECTransition Source="AbortReady" Destination="START" Condition="1" x="2778.459" y="4425.389">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="1268.213,1447.457,-275.9292,1089.067" />
       </ECTransition>
-      <ECTransition Source="StopReady" Destination="START" Condition="1" x="4572.72" y="1916.934">
+      <ECTransition Source="StopReady" Destination="START" Condition="1" x="4572.721" y="1916.934">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="1140.516,524.1841,1208.516,399.1841" />
       </ECTransition>
       <ECTransition Source="StartReday" Destination="Run" Condition="RUN AND Run = TRUE" x="3029.579" y="2472.093">
@@ -176,6 +190,10 @@ AbortReady := FALSE;]]></ST>
 CmdBlowers := FALSE;
 StartReady := FALSE;
 StopReady := FALSE;]]></ST>
+    </Algorithm>
+    <Algorithm ID="b695df1d-d780-4c18-89c3-4cb4114528b4" Name="StartValve">
+      <ST><![CDATA[;
+CmdAerationBlock:=TRUE;]]></ST>
     </Algorithm>
   </BasicFB>
 </FBType>
