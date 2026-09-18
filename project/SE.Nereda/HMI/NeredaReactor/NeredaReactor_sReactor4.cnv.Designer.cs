@@ -1539,7 +1539,7 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			this.AV4x101.Font = new NxtControl.Drawing.Font("LabelFont");
 			this.AV4x101.Location = new NxtControl.Drawing.PointF(164D, 628D);
 			this.AV4x101.Name = "AV4x101";
-			this.AV4x101.Text = "AV41101";
+			this.AV4x101.Text = "AV4x101";
 			// 
 			// line8
 			// 
@@ -1573,7 +1573,7 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			this.AV4x171.Font = new NxtControl.Drawing.Font("LabelFont");
 			this.AV4x171.Location = new NxtControl.Drawing.PointF(328D, 237D);
 			this.AV4x171.Name = "AV4x171";
-			this.AV4x171.Text = "AV41171";
+			this.AV4x171.Text = "AV4x171";
 			// 
 			// pipe3
 			// 
@@ -1615,7 +1615,7 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			this.AV4x172.Font = new NxtControl.Drawing.Font("LabelFont");
 			this.AV4x172.Location = new NxtControl.Drawing.PointF(496D, 237D);
 			this.AV4x172.Name = "AV4x172";
-			this.AV4x172.Text = "AV41172";
+			this.AV4x172.Text = "AV4x172";
 			// 
 			// pipe5
 			// 
@@ -1747,7 +1747,7 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			this.AV4x103.Font = new NxtControl.Drawing.Font("LabelFont");
 			this.AV4x103.Location = new NxtControl.Drawing.PointF(816D, 471D);
 			this.AV4x103.Name = "AV4x103";
-			this.AV4x103.Text = "AV41103";
+			this.AV4x103.Text = "AV4x103";
 			// 
 			// pipe7
 			// 
@@ -1805,7 +1805,7 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			this.AV4x107.Font = new NxtControl.Drawing.Font("LabelFont");
 			this.AV4x107.Location = new NxtControl.Drawing.PointF(160D, 200D);
 			this.AV4x107.Name = "AV4x107";
-			this.AV4x107.Text = "AV41107";
+			this.AV4x107.Text = "AV4x107";
 			// 
 			// polygon24
 			// 
@@ -1860,7 +1860,7 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			this.freeText1.Font = new NxtControl.Drawing.Font("LabelFont");
 			this.freeText1.Location = new NxtControl.Drawing.PointF(84D, 238D);
 			this.freeText1.Name = "freeText1";
-			this.freeText1.Text = "AV41170";
+			this.freeText1.Text = "AV4x170";
 			// 
 			// pipe10
 			// 
@@ -1892,7 +1892,7 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			this.freeText2.Font = new NxtControl.Drawing.Font("LabelFont");
 			this.freeText2.Location = new NxtControl.Drawing.PointF(820D, 317D);
 			this.freeText2.Name = "freeText2";
-			this.freeText2.Text = "AV41102";
+			this.freeText2.Text = "AV4x102";
 			// 
 			// sReactor4
 			// 
