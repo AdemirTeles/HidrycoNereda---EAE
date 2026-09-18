@@ -45,6 +45,8 @@ namespace HMI.Main.Canvases
 			this.polygon2 = new NxtControl.GuiFramework.Polygon();
 			this.polygon3 = new NxtControl.GuiFramework.Polygon();
 			this.polygon4 = new NxtControl.GuiFramework.Polygon();
+			this.sReactor41 = new SE.Nereda.Symbols.NeredaReactor.sReactor4();
+			this.sSensors1 = new SE.Nereda.Symbols.NeredaReactor.sSensors();
 			// 
 			// changeCanvasButton1
 			// 
@@ -140,8 +142,8 @@ namespace HMI.Main.Canvases
 			this.pipe1.OuterColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.pipe1.Points.AddRange(new NxtControl.Drawing.PointF[] {
 			new NxtControl.Drawing.PointF(624D, 168D),
-			new NxtControl.Drawing.PointF(600D, 168D),
-			new NxtControl.Drawing.PointF(600D, 528D),
+			new NxtControl.Drawing.PointF(480D, 168D),
+			new NxtControl.Drawing.PointF(480D, 528D),
 			new NxtControl.Drawing.PointF(144D, 528D)});
 			this.pipe1.Width = 10;
 			// 
@@ -152,7 +154,7 @@ namespace HMI.Main.Canvases
 			this.pipe3.Name = "pipe3";
 			this.pipe3.OuterColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.pipe3.Points.AddRange(new NxtControl.Drawing.PointF[] {
-			new NxtControl.Drawing.PointF(1240D, 568D),
+			new NxtControl.Drawing.PointF(1216D, 568D),
 			new NxtControl.Drawing.PointF(1312D, 568D),
 			new NxtControl.Drawing.PointF(1312D, 640D),
 			new NxtControl.Drawing.PointF(600D, 640D),
@@ -184,12 +186,12 @@ namespace HMI.Main.Canvases
 			// 
 			// pipe2
 			// 
-			this.pipe2.Bounds = new NxtControl.Drawing.RectF(((float)(128D)), ((float)(560D)), ((float)(496D)), ((float)(16D)));
+			this.pipe2.Bounds = new NxtControl.Drawing.RectF(((float)(128D)), ((float)(560D)), ((float)(512D)), ((float)(16D)));
 			this.pipe2.InnerColor = new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(255)));
 			this.pipe2.Name = "pipe2";
 			this.pipe2.OuterColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.pipe2.Points.AddRange(new NxtControl.Drawing.PointF[] {
-			new NxtControl.Drawing.PointF(624D, 560D),
+			new NxtControl.Drawing.PointF(640D, 560D),
 			new NxtControl.Drawing.PointF(600D, 560D),
 			new NxtControl.Drawing.PointF(600D, 576D),
 			new NxtControl.Drawing.PointF(128D, 576D)});
@@ -239,6 +241,31 @@ namespace HMI.Main.Canvases
 			new NxtControl.Drawing.PointF(224D, 680D),
 			new NxtControl.Drawing.PointF(192D, 672D)});
 			// 
+			// sReactor41
+			// 
+			this.sReactor41.BeginInit();
+			this.sReactor41._iAV4x101 = "AV4x101";
+			this.sReactor41._iAV4x103 = "AV4x103";
+			this.sReactor41._iAV4x107 = "AV4x107";
+			this.sReactor41._iAV4x171 = "AV4x171";
+			this.sReactor41._iAV4x172 = "AV4x172";
+			this.sReactor41._iLT001 = "4xLT1005";
+			this.sReactor41._iREACTOR = "Reactor 1";
+			this.sReactor41.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 464D, 72D);
+			this.sReactor41.Name = "sReactor41";
+			this.sReactor41.SecurityToken = ((uint)(4294967295u));
+			this.sReactor41.TagName = "D41247DF3E1D30DC";
+			this.sReactor41.EndInit();
+			// 
+			// sSensors1
+			// 
+			this.sSensors1.BeginInit();
+			this.sSensors1.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.65809768637532129D, 0D, 0D, 0.6580976863753214D, 272D, 392D);
+			this.sSensors1.Name = "sSensors1";
+			this.sSensors1.SecurityToken = ((uint)(4294967295u));
+			this.sSensors1.TagName = "D41247DF3E1D30DC";
+			this.sSensors1.EndInit();
+			// 
 			// REACTOR1
 			// 
 			this.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(1366D)), ((float)(698D)));
@@ -262,7 +289,9 @@ namespace HMI.Main.Canvases
 			this.polygon1,
 			this.polygon2,
 			this.polygon3,
-			this.polygon4});
+			this.polygon4,
+			this.sReactor41,
+			this.sSensors1});
 			this.Size = new System.Drawing.Size(1366, 698);
 
 		}
@@ -285,6 +314,8 @@ namespace HMI.Main.Canvases
 		private NxtControl.GuiFramework.Polygon polygon2;
 		private NxtControl.GuiFramework.Polygon polygon3;
 		private NxtControl.GuiFramework.Polygon polygon4;
+		private SE.Nereda.Symbols.NeredaReactor.sReactor4 sReactor41;
+		private SE.Nereda.Symbols.NeredaReactor.sSensors sSensors1;
 		#endregion
 	}
 }
