@@ -5,6 +5,22 @@
   <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="9/17/2026" />
   <InterfaceList>
     <EventInputs>
+      <Event ID="37BB0210227B4D88" Name="FEED">
+        <With Var="CmdFeed" />
+      </Event>
+      <Event ID="B8FB7A13CF18B1CA" Name="WAIT">
+        <With Var="CmdWait" />
+      </Event>
+      <Event ID="7AF6A44EC4713EB1" Name="SLD_DISCHARGE">
+        <With Var="SludgeDischargeCapacity" />
+        <With Var="CmdSludgeDischarge" />
+      </Event>
+      <Event ID="6CE3EC6EFAA8A173" Name="SLD_SUPERNANAT">
+        <With Var="SupernantDischargeCapacity" />
+        <With Var="CmdSupernantDischarge" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
       <Event ID="94F38E4F5A9F83A9" Name="L1">
         <With Var="L1v" />
       </Event>
@@ -34,27 +50,16 @@
         <With Var="SupernantDischargeRun" />
         <With Var="SupernantDischargeInterlock" />
       </Event>
-    </EventInputs>
-    <EventOutputs>
-      <Event ID="37BB0210227B4D88" Name="FEED">
-        <With Var="CmdFeed" />
-      </Event>
-      <Event ID="B8FB7A13CF18B1CA" Name="WAIT">
-        <With Var="CmdWait" />
-      </Event>
-      <Event ID="7AF6A44EC4713EB1" Name="SLD_DISCHARGE">
-        <With Var="CmdSludgeDischarge" />
-        <With Var="SludgeDischargeCapacity" />
-      </Event>
-      <Event ID="6CE3EC6EFAA8A173" Name="SLD_SUPERNANAT">
-        <With Var="CmdSupernantDischarge" />
-        <With Var="SupernantDischargeCapacity" />
-      </Event>
-      <Event ID="4D4A6D622AA6CDB1" Name="EMER_ON">
-        <With Var="EmergencyOn" />
-      </Event>
     </EventOutputs>
     <InputVars>
+      <VarDeclaration ID="0CCCE0E6A38C4CC4" Name="CmdFeed" Type="BOOL" />
+      <VarDeclaration ID="2D97C7DF176F1821" Name="CmdWait" Type="BOOL" />
+      <VarDeclaration ID="CC5E48971A6D3B85" Name="CmdSludgeDischarge" Type="BOOL" />
+      <VarDeclaration ID="FDC6C047971AF4AB" Name="CmdSupernantDischarge" Type="BOOL" />
+      <VarDeclaration ID="290CB544BD4AF7E0" Name="SludgeDischargeCapacity" Type="INT" />
+      <VarDeclaration ID="D5F6310F45243454" Name="SupernantDischargeCapacity" Type="INT" />
+    </InputVars>
+    <OutputVars>
       <VarDeclaration ID="C22B3197E31C2FDC" Name="L1v" Type="BOOL" />
       <VarDeclaration ID="E5D66BA160FEA7BE" Name="L2v" Type="BOOL" />
       <VarDeclaration ID="91843A91DDCD538F" Name="Level" Type="INT" />
@@ -70,15 +75,6 @@
       <VarDeclaration ID="76FC2A554E83498F" Name="SupernantDischargeReady" Type="BOOL" />
       <VarDeclaration ID="08F354F7946D6684" Name="SupernantDischargeRun" Type="BOOL" />
       <VarDeclaration ID="FA3C227BD61E1E98" Name="SupernantDischargeInterlock" Type="BOOL" />
-    </InputVars>
-    <OutputVars>
-      <VarDeclaration ID="0CCCE0E6A38C4CC4" Name="CmdFeed" Type="BOOL" />
-      <VarDeclaration ID="2D97C7DF176F1821" Name="CmdWait" Type="BOOL" />
-      <VarDeclaration ID="CC5E48971A6D3B85" Name="CmdSludgeDischarge" Type="BOOL" />
-      <VarDeclaration ID="FDC6C047971AF4AB" Name="CmdSupernantDischarge" Type="BOOL" />
-      <VarDeclaration ID="290CB544BD4AF7E0" Name="SludgeDischargeCapacity" Type="REAL" />
-      <VarDeclaration ID="D5F6310F45243454" Name="SupernantDischargeCapacity" Type="REAL" />
-      <VarDeclaration ID="A1711B52790021B0" Name="EmergencyOn" Type="BOOL" />
     </OutputVars>
   </InterfaceList>
   <Service RightInterface="PLUG" LeftInterface="SOCKET">
