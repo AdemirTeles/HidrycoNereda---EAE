@@ -65,6 +65,9 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			this.ReactorState = new NxtControl.GuiFramework.RoundedRectangle();
 			this.pipe22 = new NxtControl.GuiFramework.Pipe();
 			this.s3DValve1 = new SE.Nereda.Symbols.ValveS.s3DValve();
+			this.s3DValve2 = new SE.Nereda.Symbols.ValveS.s3DValve();
+			this.s3DValve3 = new SE.Nereda.Symbols.ValveS.s3DValve();
+			this.s3DValve4 = new SE.Nereda.Symbols.ValveS.s3DValve();
 			this.pipe18 = new NxtControl.GuiFramework.Pipe();
 			this.pipe20 = new NxtControl.GuiFramework.Pipe();
 			this.pipe23 = new NxtControl.GuiFramework.Pipe();
@@ -368,6 +371,42 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			this.s3DValve1.SymbolNameDisplay = SE.Nereda.Symbols.ValveS.s3DValve.SymbolNameDisplayOption.Hide;
 			this.s3DValve1.TagName = "Actuators.FeedValve_AV4x101";
 			this.s3DValve1.EndInit();
+			// 
+			// s3DValve2
+			// 
+			this.s3DValve2.BeginInit();
+			this.s3DValve2._iMotName = "Valve";
+			this.s3DValve2.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 278D, 18D);
+			this.s3DValve2.Name = "s3DValve2";
+			this.s3DValve2.SecurityToken = ((uint)(4294967295u));
+			this.s3DValve2.StateTextPosition = SE.Nereda.Symbols.ValveS.s3DValve.StateTextPositionOption.Horizontal;
+			this.s3DValve2.SymbolNameDisplay = SE.Nereda.Symbols.ValveS.s3DValve.SymbolNameDisplayOption.Hide;
+			this.s3DValve2.TagName = "Actuators.VentValve";
+			this.s3DValve2.EndInit();
+			// 
+			// s3DValve3
+			// 
+			this.s3DValve3.BeginInit();
+			this.s3DValve3._iMotName = "Valve";
+			this.s3DValve3.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 278D, 130D);
+			this.s3DValve3.Name = "s3DValve3";
+			this.s3DValve3.SecurityToken = ((uint)(4294967295u));
+			this.s3DValve3.StateTextPosition = SE.Nereda.Symbols.ValveS.s3DValve.StateTextPositionOption.Horizontal;
+			this.s3DValve3.SymbolNameDisplay = SE.Nereda.Symbols.ValveS.s3DValve.SymbolNameDisplayOption.Hide;
+			this.s3DValve3.TagName = "Actuators.AirValveAerationGrid";
+			this.s3DValve3.EndInit();
+			// 
+			// s3DValve4
+			// 
+			this.s3DValve4.BeginInit();
+			this.s3DValve4._iMotName = "Valve";
+			this.s3DValve4.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 394D, 76D);
+			this.s3DValve4.Name = "s3DValve4";
+			this.s3DValve4.SecurityToken = ((uint)(4294967295u));
+			this.s3DValve4.StateTextPosition = SE.Nereda.Symbols.ValveS.s3DValve.StateTextPositionOption.Vertical;
+			this.s3DValve4.SymbolNameDisplay = SE.Nereda.Symbols.ValveS.s3DValve.SymbolNameDisplayOption.Hide;
+			this.s3DValve4.TagName = "Actuators.AirValveInfluentGrid";
+			this.s3DValve4.EndInit();
 			// 
 			// pipe18
 			// 
@@ -765,6 +804,9 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			this.pipe22,
 			this.s3DValve1,
 			this.pipe26,
+			this.s3DValve2,
+			this.s3DValve3,
+			this.s3DValve4,
 			this.pipe23,
 			this.ellipse2,
 			this.ellipse11,
@@ -809,6 +851,9 @@ namespace SE.Nereda.Symbols.NeredaReactor
 		private NxtControl.GuiFramework.RoundedRectangle ReactorState;
 		private NxtControl.GuiFramework.Pipe pipe22;
 		private SE.Nereda.Symbols.ValveS.s3DValve s3DValve1;
+		private SE.Nereda.Symbols.ValveS.s3DValve s3DValve2;
+		private SE.Nereda.Symbols.ValveS.s3DValve s3DValve3;
+		private SE.Nereda.Symbols.ValveS.s3DValve s3DValve4;
 		private NxtControl.GuiFramework.Pipe pipe18;
 		private NxtControl.GuiFramework.Pipe pipe20;
 		private NxtControl.GuiFramework.Pipe pipe23;

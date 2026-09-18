@@ -29,6 +29,7 @@ namespace SE.Nereda.Faceplates.NeredaReactor
 			this.sDefault1 = new SE.Nereda.Symbols.CmdFeed.sDefault();
 			this.sDefault2 = new SE.Nereda.Symbols.CmdAerate.sDefault();
 			this.sDefault3 = new SE.Nereda.Symbols.CmdSludgeDischarge.sDefault();
+			this.sDefault4 = new SE.Nereda.Symbols.CmdVent.sDefault();
 			// 
 			// sDefault1
 			// 
@@ -57,6 +58,15 @@ namespace SE.Nereda.Faceplates.NeredaReactor
 			this.sDefault3.TagName = "ReactorLogic.LogicSludgeDischarge";
 			this.sDefault3.EndInit();
 			// 
+			// sDefault4
+			// 
+			this.sDefault4.BeginInit();
+			this.sDefault4.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 8D, 336D);
+			this.sDefault4.Name = "sDefault4";
+			this.sDefault4.SecurityToken = ((uint)(4294967295u));
+			this.sDefault4.TagName = "ReactorLogic.LogicVent";
+			this.sDefault4.EndInit();
+			// 
 			// fpSettings
 			// 
 			this.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(384D)), ((float)(448D)));
@@ -64,7 +74,8 @@ namespace SE.Nereda.Faceplates.NeredaReactor
 			this.Shapes.AddRange(new System.ComponentModel.IComponent[] {
 			this.sDefault1,
 			this.sDefault2,
-			this.sDefault3});
+			this.sDefault3,
+			this.sDefault4});
 			this.Size = new System.Drawing.Size(384, 448);
 			this.Title = "Reactor Settings";
 
@@ -72,6 +83,7 @@ namespace SE.Nereda.Faceplates.NeredaReactor
 		private SE.Nereda.Symbols.CmdFeed.sDefault sDefault1;
 		private SE.Nereda.Symbols.CmdAerate.sDefault sDefault2;
 		private SE.Nereda.Symbols.CmdSludgeDischarge.sDefault sDefault3;
+		private SE.Nereda.Symbols.CmdVent.sDefault sDefault4;
 		#endregion
 	}
 }
