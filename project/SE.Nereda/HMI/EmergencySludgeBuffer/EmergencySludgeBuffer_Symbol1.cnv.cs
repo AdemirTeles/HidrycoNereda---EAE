@@ -1,22 +1,22 @@
 /*
  * Created by EcoStruxure Automation Expert.
  * User:  
- * Date: 8/10/2026
- * Time: 3:58 PM
+ * Date: 9/18/2026
+ * Time: 3:25 AM
  * 
  */
 
 using System;
 using NxtControl.GuiFramework;
 
-namespace SE.Nereda.Faceplates.EmergencySludgeBuffer
+namespace SE.Nereda.Symbols.EmergencySludgeBuffer
 {
 	/// <summary>
-	/// Description of fpCurrAerateTime.
+	/// Description of Symbol1.
 	/// </summary>
-	public partial class fpCurrAerateTime : NxtControl.GuiFramework.HMIFaceplate
+	public partial class Symbol1 : NxtControl.GuiFramework.HMISymbol
 	{
-		public fpCurrAerateTime()
+		public Symbol1()
 		{
 			//
 			// The InitializeComponent() call is required for Windows Forms designer support.

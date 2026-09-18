@@ -208,13 +208,10 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			this.group5 = new NxtControl.GuiFramework.Group();
 			this.group6 = new NxtControl.GuiFramework.Group();
 			this.XV001 = new NxtControl.GuiFramework.FreeText();
-			this.sDefault2 = new SE.Nereda.Symbols.ValveS.sDefault();
 			this.pipe9 = new NxtControl.GuiFramework.Pipe();
 			this.pipe12 = new NxtControl.GuiFramework.Pipe();
 			this.pipe18 = new NxtControl.GuiFramework.Pipe();
-			this.sDefault3 = new SE.Nereda.Symbols.ValveS.sDefault();
 			this.pipe19 = new NxtControl.GuiFramework.Pipe();
-			this.sDefault4 = new SE.Nereda.Symbols.ValveS.sDefault();
 			this.pipe20 = new NxtControl.GuiFramework.Pipe();
 			this.sDefault5 = new SE.Nereda.Symbols.ValveS.sDefault();
 			this.pipe21 = new NxtControl.GuiFramework.Pipe();
@@ -1879,18 +1876,6 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			this.XV001.Text = "NVPP 001 a-- 073";
 			this.XV001.TextAngle = 90F;
 			// 
-			// sDefault2
-			// 
-			this.sDefault2.BeginInit();
-			this.sDefault2._iVlvName = "Valve";
-			this.sDefault2.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 356D, 40D);
-			this.sDefault2.Name = "sDefault2";
-			this.sDefault2.SecurityToken = ((uint)(4294967295u));
-			this.sDefault2.StateTextPosition = SE.Nereda.Symbols.ValveS.sDefault.StateTextPositionOption.Vertical;
-			this.sDefault2.SymbolNameDisplay = SE.Nereda.Symbols.ValveS.sDefault.SymbolNameDisplayOption.Hide;
-			this.sDefault2.TagName = "Actuators.VentValve";
-			this.sDefault2.EndInit();
-			// 
 			// pipe9
 			// 
 			this.pipe9.Bounds = new NxtControl.Drawing.RectF(((float)(296D)), ((float)(172D)), ((float)(8D)), ((float)(24D)));
@@ -1929,18 +1914,6 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			new NxtControl.Drawing.PointF(624D, 88D)});
 			this.pipe18.Width = 10;
 			// 
-			// sDefault3
-			// 
-			this.sDefault3.BeginInit();
-			this.sDefault3._iVlvName = "Valve";
-			this.sDefault3.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 456D, 96D);
-			this.sDefault3.Name = "sDefault3";
-			this.sDefault3.SecurityToken = ((uint)(4294967295u));
-			this.sDefault3.StateTextPosition = SE.Nereda.Symbols.ValveS.sDefault.StateTextPositionOption.Horizontal;
-			this.sDefault3.SymbolNameDisplay = SE.Nereda.Symbols.ValveS.sDefault.SymbolNameDisplayOption.Hide;
-			this.sDefault3.TagName = "Actuators.AirValveInfluentGrid";
-			this.sDefault3.EndInit();
-			// 
 			// pipe19
 			// 
 			this.pipe19.Bounds = new NxtControl.Drawing.RectF(((float)(520D)), ((float)(88D)), ((float)(0D)), ((float)(32D)));
@@ -1951,18 +1924,6 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			new NxtControl.Drawing.PointF(520D, 120D),
 			new NxtControl.Drawing.PointF(520D, 88D)});
 			this.pipe19.Width = 10;
-			// 
-			// sDefault4
-			// 
-			this.sDefault4.BeginInit();
-			this.sDefault4._iVlvName = "Valve";
-			this.sDefault4.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 356D, 136D);
-			this.sDefault4.Name = "sDefault4";
-			this.sDefault4.SecurityToken = ((uint)(4294967295u));
-			this.sDefault4.StateTextPosition = SE.Nereda.Symbols.ValveS.sDefault.StateTextPositionOption.Vertical;
-			this.sDefault4.SymbolNameDisplay = SE.Nereda.Symbols.ValveS.sDefault.SymbolNameDisplayOption.Hide;
-			this.sDefault4.TagName = "Actuators.AirValveAerationGrid";
-			this.sDefault4.EndInit();
 			// 
 			// pipe20
 			// 
@@ -2101,10 +2062,7 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			this.group4,
 			this.group5,
 			this.group6,
-			this.sDefault2,
 			this.pipe12,
-			this.sDefault3,
-			this.sDefault4,
 			this.sDefault5,
 			this.LT001,
 			this.rectangle5,
@@ -2469,11 +2427,8 @@ namespace SE.Nereda.Symbols.NeredaReactor
 		private NxtControl.GuiFramework.Group group4;
 		private NxtControl.GuiFramework.Group group5;
 		private NxtControl.GuiFramework.Group group6;
-		private SE.Nereda.Symbols.ValveS.sDefault sDefault2;
 		private NxtControl.GuiFramework.Pipe pipe18;
-		private SE.Nereda.Symbols.ValveS.sDefault sDefault3;
 		private NxtControl.GuiFramework.Pipe pipe19;
-		private SE.Nereda.Symbols.ValveS.sDefault sDefault4;
 		private NxtControl.GuiFramework.Pipe pipe20;
 		private SE.Nereda.Symbols.ValveS.sDefault sDefault5;
 		private NxtControl.GuiFramework.Pipe pipe21;

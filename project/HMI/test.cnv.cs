@@ -1,22 +1,23 @@
-/*
+﻿/*
  * Created by EcoStruxure Automation Expert.
  * User:  
- * Date: 7/7/2026
- * Time: 9:46 PM
+ * Date: 9/18/2026
+ * Time: 5:03 AM
  * 
  */
 
 using System;
 using NxtControl.GuiFramework;
 
-namespace SE.Nereda.Symbols.EmergencySludgeBuffer
+
+namespace HMI.Main.Canvases
 {
 	/// <summary>
-	/// Description of sDelayAfterCycle.
+	/// Description of test.
 	/// </summary>
-	public partial class sDelayAfterCycle : NxtControl.GuiFramework.HMISymbol
+	public partial class test : NxtControl.GuiFramework.HMICanvas
 	{
-		public sDelayAfterCycle()
+		public test()
 		{
 			//
 			// The InitializeComponent() call is required for Windows Forms designer support.
