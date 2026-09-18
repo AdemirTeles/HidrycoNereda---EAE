@@ -144,7 +144,7 @@ namespace HMI.Main.Canvases
 			this.REACTOR02._iAV4x172 = "AV4x172";
 			this.REACTOR02._iLT001 = "42LT1005";
 			this.REACTOR02._iREACTOR = "Reactor 2";
-			this.REACTOR02.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 592D, 136D);
+			this.REACTOR02.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 600D, 200D);
 			this.REACTOR02.Name = "REACTOR02";
 			this.REACTOR02.SecurityToken = ((uint)(4294967295u));
 			this.REACTOR02.TagName = "1D81A826384C2197";
