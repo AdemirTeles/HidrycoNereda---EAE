@@ -83,7 +83,7 @@ namespace HMI.Main.Canvases
 			// AERATION_1
 			// 
 			this.AERATION_1.BeginInit();
-			this.AERATION_1.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.99038461538461553D, 0D, 0D, 1D, 12D, 408D);
+			this.AERATION_1.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.99038461538461553D, 0D, 0D, 1D, 296D, 312D);
 			this.AERATION_1.Name = "AERATION_1";
 			this.AERATION_1.SecurityToken = ((uint)(4294967295u));
 			this.AERATION_1.TagName = "6307B68BAFBA5753";
@@ -104,15 +104,15 @@ namespace HMI.Main.Canvases
 			// 
 			// pipe2
 			// 
-			this.pipe2.Bounds = new NxtControl.Drawing.RectF(((float)(416D)), ((float)(392D)), ((float)(112D)), ((float)(56D)));
+			this.pipe2.Bounds = new NxtControl.Drawing.RectF(((float)(752D)), ((float)(272D)), ((float)(112D)), ((float)(56D)));
 			this.pipe2.InnerColor = new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(255)));
 			this.pipe2.Name = "pipe2";
 			this.pipe2.OuterColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.pipe2.Points.AddRange(new NxtControl.Drawing.PointF[] {
-			new NxtControl.Drawing.PointF(528D, 408D),
-			new NxtControl.Drawing.PointF(528D, 392D),
-			new NxtControl.Drawing.PointF(416D, 392D),
-			new NxtControl.Drawing.PointF(416D, 448D)});
+			new NxtControl.Drawing.PointF(864D, 288D),
+			new NxtControl.Drawing.PointF(864D, 272D),
+			new NxtControl.Drawing.PointF(752D, 272D),
+			new NxtControl.Drawing.PointF(752D, 328D)});
 			this.pipe2.Width = 10;
 			// 
 			// AERATION
