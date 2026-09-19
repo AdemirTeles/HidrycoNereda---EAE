@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="0fc4cdd6-0266-46a3-bb1b-cbd23ea515f8" Name="PID" Format="2.0" Comment="Composite Function Block Type" Namespace="Main">
+  <Attribute Name="HMI.Alias" Value="" />
+  <Attribute Name="Configuration.FB.IDCounter" Value="11" />
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="1.0.1" Author="ApplicationLibDevTeam" Date="10/18/2023" Remarks="First Version" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="REQ_FEEDFWD" Comment="Request for executing feedforward gain">
+        <With Var="FeedFwd" />
+      </Event>
+      <Event ID="B5435D149AD65A1C" Name="REQ_RCPY" Comment="Request for actuator position">
+        <With Var="EnRcpy" />
+        <With Var="RcpyVal" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="CNF" Comment="Cyclic execution confirmation">
+        <With Var="Out" />
+        <With Var="OutMinActive" />
+        <With Var="OutMaxActive" />
+      </Event>
+      <Event Name="CNF_MODE" Comment="Execution of confirmation current setpoint">
+        <With Var="Mode" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="FeedFwd" Type="REAL" Comment="Feed forward value" />
+      <VarDeclaration ID="1EFA60967A6821CF" Name="EnRcpy" Type="BOOL" Comment="1 = the RCPY is enabled" />
+      <VarDeclaration ID="FC3948FDBAC10FB5" Name="RcpyVal" Type="REAL" Comment="RCPY value (actuator position)" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="Out" Type="VTQREAL" Comment="Calculated output value" />
+      <VarDeclaration Name="OutMinActive" Type="BOOL" Comment="1 = Out has reached OutMin Limit" />
+      <VarDeclaration Name="OutMaxActive" Type="BOOL" Comment="1 = Out has reached OutMax Limit" />
+      <VarDeclaration Name="Mode" Type="INT" Comment="Current mode selected for PID calculation" />
+    </OutputVars>
+    <AdapterInputs>
+      <Adapter Name="IPv" Type="IAnalog" Namespace="SE.App2Base" Comment="Process value (range considered) interface adapter " />
+      <Adapter Name="IRsp" Type="IAnalog" Namespace="SE.App2Base" Comment="Program remote setpoint interface adapter" />
+      <Adapter Name="IIlck" Type="IOpCondS" Namespace="SE.App2CommonProcess" Comment="Interlock condition summary chain input from ilckCondItem blocks" />
+      <Adapter Name="IIlckSp" Type="IAnalog" Namespace="SE.App2Base" Comment="Interlock setpoint interface adapter, Setpoint to be considered if interlock condition is active" />
+      <Adapter Name="IExtPara" Type="IPIDExtPara" Namespace="SE.App2CommonProcess" Comment="External PID parameters interface adapter" />
+      <Adapter Name="ISc" Type="IDevice" Namespace="SE.App2CommonProcess" Comment="Sequence control adapter, Controls the block when owner is in program local" />
+      <Adapter Name="IAutotune" Type="IAutotune" Namespace="SE.App2CommonProcess" />
+    </AdapterInputs>
+    <AdapterOutputs>
+      <Adapter Name="IOut" Type="IAnalog" Namespace="SE.App2Base" Comment="Current output status Interface adapter" />
+    </AdapterOutputs>
+  </InterfaceList>
+  <FBNetwork>
+    <FB ID="3" Name="interlock" Type="IlckCondSum" x="1894.677" y="380" Namespace="SE.App2CommonProcess">
+      <Attribute Name="Configuration.Component.HideUnusedPorts" Value="" />
+    </FB>
+    <FB ID="6" UID="4" Name="sc" Type="pidSeqData" x="1960" y="1240" Namespace="SE.App2CommonProcess" />
+    <FB ID="5" Name="PIDBaseExt" Type="PIDBaseExt" x="4720" y="620" Namespace="SE.App2CommonProcess" />
+    <Input Name="ISc" x="440" y="1392" Type="Adapter" />
+    <Input Name="IIlck" x="440" y="532" Type="Adapter" />
+    <Input Name="IExtPara" x="3440" y="1312" Type="Adapter" />
+    <Input Name="REQ_FEEDFWD" x="4042.104" y="632" Type="Event" />
+    <Input Name="FeedFwd" x="4056.542" y="892" Type="Data" />
+    <Input Name="IIlckSp" x="3795.084" y="1192" Type="Adapter" />
+    <Input Name="IRsp" x="3835.646" y="1252" Type="Adapter" />
+    <Input Name="IPv" x="3861.729" y="1072" Type="Adapter" />
+    <Input Name="IAutotune" x="3473.042" y="1432" Type="Adapter" />
+    <Input ID="B5435D149AD65A1C" Name="REQ_RCPY" x="4134.5" y="692" Type="Event" />
+    <Input ID="1EFA60967A6821CF" Name="EnRcpy" x="4077.896" y="952" Type="Data" />
+    <Input ID="FC3948FDBAC10FB5" Name="RcpyVal" x="4075.271" y="1012" Type="Data" />
+    <Frame Name="FRAME1" X="3160" Y="200" Width="3380" Height="1480">
+      <Parameter Name="BackgroundColor" Value="AliceBlue" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 20.25pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="PID Control" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME4" X="200" Y="200" Width="2760" Height="639.9999">
+      <Parameter Name="BackgroundColor" Value="ButtonFace" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 20.25pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="Interlock" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME6" X="200" Y="1040" Width="2760" Height="640">
+      <Parameter Name="BackgroundColor" Value="AliceBlue" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 20.25pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="Sequence Control" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Output Name="IOut" x="5660" y="1132" Type="Adapter" />
+    <Output Name="CNF" x="5660" y="632" Type="Event" />
+    <Output Name="CNF_MODE" x="5660" y="692" Type="Event" />
+    <Output Name="Out" x="5660" y="892" Type="Data" />
+    <Output Name="OutMinActive" x="5660" y="951.9999" Type="Data" />
+    <Output Name="OutMaxActive" x="5660" y="1012" Type="Data" />
+    <Output Name="Mode" x="5660" y="1072" Type="Data" />
+    <EventConnections>
+      <Connection Source="$REQ_FEEDFWD" Destination="$5.REQ_FEEDFWD" />
+      <Connection Source="$5.CNF" Destination="$CNF" />
+      <Connection Source="$5.CNF_MODE" Destination="$CNF_MODE" />
+      <Connection Source="$B5435D149AD65A1C" Destination="$5.C244F7DF9C8A6568" />
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="$FeedFwd" Destination="$5.FeedFwd" />
+      <Connection Source="$5.Out" Destination="$Out" />
+      <Connection Source="$5.OutMinActive" Destination="$OutMinActive" dx1="117.25" />
+      <Connection Source="$5.OutMaxActive" Destination="$OutMaxActive" />
+      <Connection Source="$5.Mode" Destination="$Mode" dx1="158.625" />
+      <Connection Source="$1EFA60967A6821CF" Destination="$5.3C6FBFF062D1B9AA" />
+      <Connection Source="$FC3948FDBAC10FB5" Destination="$5.5F8072FA3FCB6408" />
+    </DataConnections>
+    <AdapterConnections>
+      <Connection Source="$ISc" Destination="$6.ISc">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$IIlck" Destination="$3.IOpCondIn">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$3.36" Destination="$5.2" dx1="555.469">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$IIlckSp" Destination="$5.3" />
+      <Connection Source="$IRsp" Destination="$5.IRsp" />
+      <Connection Source="$6.ISeqData" Destination="$5.ISeqData" dx1="620.7917">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$IPv" Destination="$5.1" />
+      <Connection Source="$5.7" Destination="$IOut" />
+      <Connection Source="$IExtPara" Destination="$5.IExtPara" />
+      <Connection Source="$IAutotune" Destination="$5.IAutotune" />
+    </AdapterConnections>
+  </FBNetwork>
+</FBType>

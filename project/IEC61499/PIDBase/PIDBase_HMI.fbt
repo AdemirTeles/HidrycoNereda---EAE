@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="7e923a09-c26e-47ca-91d1-817523886a1c" Name="PIDBase_HMI" Comment="Service Interface Function Block Type" Namespace="Main">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="1.0.1" Author="ApplicationLibDevTeam" Date="10/18/2023" Remarks="First Version" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="F4ED48CC2B5317F8" Name="INIT">
+        <With Var="QI" />
+      </Event>
+      <Event ID="F8BDFB66D6A721B" Name="REQ_INITDATA" Comment="Request to initialize data" />
+      <Event ID="4ECF71528D4B6340" Name="UPD" Comment="Update data to supervision">
+        <With Var="Pv" />
+        <With Var="PvMin" />
+        <With Var="PvMax" />
+        <With Var="CurrentSp" />
+        <With Var="CurrentOp" />
+        <With Var="CurrentMode" />
+        <With Var="OutChannelProhibited" />
+        <With Var="TrackOutput" />
+        <With Var="CurrentOutbias" />
+        <With Var="IlckCond" />
+        <With Var="StdOwnerConnected" />
+        <With Var="CurrentOwner" />
+      </Event>
+      <Event ID="568B5274285BDEC8" Name="UPD_CFG" Comment="Update external parameter data to supervision">
+        <With Var="ExtParaSel" />
+        <With Var="CurrentGain" />
+        <With Var="CurrentIntegralTime" />
+        <With Var="CurrentDerivativeTime" />
+        <With Var="CurrentLagTime" />
+        <With Var="CurrentDeadBand" />
+        <With Var="CurrentOutMin" />
+        <With Var="CurrentOutMax" />
+        <With Var="CurrentDWorkOnError" />
+        <With Var="CurrentDirection" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="3C7816C1E3C12126" Name="INITO">
+        <With Var="QO" />
+        <With Var="STATUS" />
+      </Event>
+      <Event ID="CF580EC7DC4C111C" Name="OWNER" Comment="Request for owner change">
+        <With Var="Owner" />
+      </Event>
+      <Event ID="733DF8FD825824CA" Name="SP_CMD" Comment="Request to update operator setpoint in auto mode">
+        <With Var="Sp" />
+      </Event>
+      <Event ID="F7A34A5B968DDB98" Name="MANUAL_CMD" Comment="Request to update operator setpoint in manual mode">
+        <With Var="ManualSp" />
+      </Event>
+      <Event ID="DF1716734AF61076" Name="CFG" Comment="Request to update generic parameters">
+        <With Var="OutMin" />
+        <With Var="OutMax" />
+        <With Var="Bump" />
+        <With Var="SpRateUp" />
+        <With Var="SpRateDown" />
+        <With Var="TrackSpInManual" />
+        <With Var="OutRate" />
+        <With Var="GainKp" />
+        <With Var="OvsAtt" />
+      </Event>
+      <Event ID="D88CEB590B668985" Name="PID_CFG" Comment="Request to update PID parameter">
+        <With Var="Gain" />
+        <With Var="DerivativeTime" />
+        <With Var="IntegralTime" />
+        <With Var="Mode" />
+        <With Var="LagTime" />
+        <With Var="DeadBand" />
+        <With Var="Direction" />
+        <With Var="CycleTime" />
+        <With Var="DWorkOnError" />
+        <With Var="EnFeedFwd" />
+        <With Var="FeedFwdGain" />
+      </Event>
+      <Event ID="D716EC33D901A5A4" Name="OUTBIAS_CFG" Comment="Request to update outbias configuration">
+        <With Var="OutBias" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="2FE12C7893CE671A" Name="QI" Type="BOOL" />
+      <VarDeclaration ID="ACDC6904590859A8" Name="Pv" Type="REAL" Comment="Process value">
+        <Attribute Name="Runtime.Archive.Counters" Value="AbsoluteValues=False" Type="REAL" />
+        <Attribute Name="Runtime.Archive.Id" Value="1" Type="REAL" />
+        <Attribute Name="Runtime.History.Depth" Value="500" Type="REAL" />
+        <Attribute Name="Runtime.History.SmoothTime" Value="60000" Type="REAL" />
+        <Attribute Name="Runtime.History.SmoothValue" Value="0.1" Type="REAL" />
+      </VarDeclaration>
+      <VarDeclaration ID="8881FFD24D90D865" Name="PvMin" Type="REAL" Comment="Minimum range of process value" />
+      <VarDeclaration ID="E15A9214DEEE85B6" Name="PvMax" Type="REAL" Comment="Maximum range of process value" />
+      <VarDeclaration ID="AA9BE811C6AB052A" Name="CurrentSp" Type="REAL" Comment="Current setpoint value">
+        <Attribute Name="Runtime.Archive.Counters" Value="AbsoluteValues=False" Type="REAL" />
+        <Attribute Name="Runtime.Archive.Id" Value="1" Type="REAL" />
+        <Attribute Name="Runtime.History.Depth" Value="500" Type="REAL" />
+        <Attribute Name="Runtime.History.SmoothTime" Value="60000" Type="REAL" />
+        <Attribute Name="Runtime.History.SmoothValue" Value="0.1" Type="REAL" />
+      </VarDeclaration>
+      <VarDeclaration ID="F680A73B417CD6F5" Name="CurrentOp" Type="REAL" Comment="Current output value">
+        <Attribute Name="Runtime.Archive.Counters" Value="AbsoluteValues=False" Type="REAL" />
+        <Attribute Name="Runtime.Archive.Id" Value="1" Type="REAL" />
+        <Attribute Name="Runtime.History.Depth" Value="500" Type="REAL" />
+        <Attribute Name="Runtime.History.SmoothTime" Value="60000" Type="REAL" />
+        <Attribute Name="Runtime.History.SmoothValue" Value="0.1" Type="REAL" />
+      </VarDeclaration>
+      <VarDeclaration ID="5BB4B57D9CC10C19" Name="CurrentMode" Type="INT" Comment="Current mode selected" />
+      <VarDeclaration ID="3143D32BCC6D529B" Name="CurrentOwner" Type="WORD" Comment="Current Owner status" />
+      <VarDeclaration ID="38051CE7590A4498" Name="OutChannelProhibited" Type="BOOL" Comment="1 = Output change prohibited" />
+      <VarDeclaration ID="F23EE025A922C157" Name="TrackOutput" Type="BOOL" Comment="1 = Output tracking active" />
+      <VarDeclaration ID="A375666527EF676C" Name="CurrentOutbias" Type="REAL" Comment="Current ouput bias value" />
+      <VarDeclaration ID="2F039F336E3FD06B" Name="IlckCond" Type="BOOL" Comment="1= Interlock active" />
+      <VarDeclaration ID="B2A8B3D1DEEA17E" Name="ExtParaSel" Type="BOOL" Comment="1 = External paramters available for PID calculation" />
+      <VarDeclaration ID="9687AF2C021C1405" Name="CurrentGain" Type="REAL" Comment="Current gain for PID calculation" />
+      <VarDeclaration ID="34E69DFE80FEB19D" Name="CurrentIntegralTime" Type="REAL" Comment="Current integral time for PID calculation" />
+      <VarDeclaration ID="DF0E3B1C6754334E" Name="CurrentDerivativeTime" Type="REAL" Comment="Current derivative time for PID calculation" />
+      <VarDeclaration ID="D797C0265258257A" Name="CurrentDirection" Type="BOOL" Comment="Current direction of PID calculation" />
+      <VarDeclaration ID="2D62610692B0BAA7" Name="CurrentDeadBand" Type="REAL" Comment="Current deadband for PID calculation" />
+      <VarDeclaration ID="59BC22F58A2AC5DE" Name="CurrentDWorkOnError" Type="BOOL" Comment="Current derivative work on error for PID calculation" />
+      <VarDeclaration ID="DFD108CBF0371C9F" Name="CurrentLagTime" Type="REAL" Comment="Current lagtime for PID calculation" />
+      <VarDeclaration ID="6582E689B1B84E24" Name="CurrentOutMin" Type="REAL" Comment="Current minimum ouput value for PID calculation" />
+      <VarDeclaration ID="43713152FBB271A0" Name="CurrentOutMax" Type="REAL" Comment="Current maximum ouput value for PID calculation" />
+      <VarDeclaration ID="659F42A0E6591C81" Name="StdOwnerConnected" Type="BOOL" Comment="1= External owner connected" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="AF46D3D41819B5FC" Name="QO" Type="BOOL" Comment="Event Output Qualifier" />
+      <VarDeclaration ID="FB49F483EE98F4C8" Name="STATUS" Type="STRING" Comment="Service Status" />
+      <VarDeclaration ID="45D13D51972F673D" Name="Owner" Type="WORD" Comment="Requested owner (16#10 = Operator, 16#8 = Program remote)" />
+      <VarDeclaration ID="85E36F6C7A7A3394" Name="Sp" Type="REAL" Comment="Setpoint for PID calculation" />
+      <VarDeclaration ID="99DCC6ECF79655A0" Name="ManualSp" Type="REAL" Comment="Manual setpoint for PID calculation" />
+      <VarDeclaration ID="8B3FE585BEF5C081" Name="Mode" Type="INT" Comment="Mode for PID calculation (0 = Manual Mode, 1 = Auto Mode)" />
+      <VarDeclaration ID="91FE3D159818E304" Name="Gain" Type="REAL" Comment="Gain parameter for P calculation" />
+      <VarDeclaration ID="7A7AC172CDE65711" Name="IntegralTime" Type="REAL" Comment="Gain parameter for I calculation" />
+      <VarDeclaration ID="885D832E4B845B40" Name="DerivativeTime" Type="REAL" Comment="Parameter for D calculation" />
+      <VarDeclaration ID="5A6B0DD7FD7B5424" Name="Direction" Type="BOOL" Comment="Direction for error calculation (0 = Pv-Sp; 1 = Sp-Pv)" />
+      <VarDeclaration ID="BB44C6E631F7BD3C" Name="DeadBand" Type="REAL" Comment="Deadband for I and D calculation" />
+      <VarDeclaration ID="6FC912D3B6844A9C" Name="DWorkOnError" Type="BOOL" Comment="1 = D work on error; 0 = D work on Pv" />
+      <VarDeclaration ID="802873E984BC2734" Name="LagTime" Type="REAL" Comment="Lag time parameter for D calculation" />
+      <VarDeclaration ID="40822142BE6CD80A" Name="OutMin" Type="REAL" Comment="Minimum range of ouput value" />
+      <VarDeclaration ID="E96A0C6730BB0132" Name="OutMax" Type="REAL" Comment="Maximum range of ouput value" />
+      <VarDeclaration ID="5A03B435FD6E1D89" Name="CycleTime" Type="DINT" Comment="Cycletime for PID calculation (ms)" />
+      <VarDeclaration ID="598D23039F0AFA46" Name="EnFeedFwd" Type="BOOL" Comment="1 = Feedforward active" />
+      <VarDeclaration ID="5C7C217636F1BA76" Name="FeedFwdGain" Type="REAL" Comment="Feed forward gain value" />
+      <VarDeclaration ID="5CE0359990D76374" Name="Bump" Type="BOOL" Comment="1 =Transition to automatic mode with bump ,0= Bumpless transition to automatic mode " />
+      <VarDeclaration ID="B2E2120DF5C5B08" Name="OutBias" Type="REAL" Comment="Output offset (bias) value in Auto Mode and Integration time is zero" />
+      <VarDeclaration ID="F5B64A07FB2C2078" Name="SpRateUp" Type="REAL" Comment="Setpoint rate to move up" />
+      <VarDeclaration ID="2AF043299B6A959D" Name="SpRateDown" Type="REAL" Comment="Setpoint rate to move down" />
+      <VarDeclaration ID="4568BE33B21F361B" Name="TrackSpInManual" Type="BOOL" Comment="1 = Sp tracking to Pv is enabled in manual mode" />
+      <VarDeclaration ID="2674CCA549C60F52" Name="OutRate" Type="REAL" Comment="Limit for output modification in units per second (≥ 0) " />
+      <VarDeclaration ID="F385201F0CB7361F" Name="GainKp" Type="REAL" Comment="Reducing the proportional contribution within the dead zone dband " />
+      <VarDeclaration ID="896A9B3CA40C38E3" Name="OvsAtt" Type="REAL" Comment="Reducing the overrun ( Should be between 0  to 1)" />
+    </OutputVars>
+  </InterfaceList>
+  <Service RightInterface="" LeftInterface="">
+    <ServiceSequence Name="" />
+  </Service>
+</FBType>

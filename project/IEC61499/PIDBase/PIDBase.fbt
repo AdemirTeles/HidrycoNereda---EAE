@@ -1,0 +1,1069 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="02af2d1a-3c90-4949-ae51-718d11cd24af" Name="PIDBase" Format="2.0" Comment="Composite Function Block Type" Namespace="Main">
+  <Attribute Name="HMI.Alias" Value="" />
+  <Attribute Name="Configuration.FB.IDCounter" Value="54" />
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="1.0.1" Author="ApplicationLibDevTeam" Date="10/18/2023" Remarks="First Version" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="REQ_SP" Comment="Request to update setpoint">
+        <With Var="Sp" />
+      </Event>
+      <Event Name="REQ_PV" Comment="Request to update input value">
+        <With Var="Pv" />
+        <With Var="PvMin" />
+        <With Var="PvMax" />
+      </Event>
+      <Event Name="REQ_EXT_PARA" Comment="Request to update external PID parameters">
+        <With Var="ExtPara" />
+      </Event>
+      <Event Name="REQ_FEEDFWD" Comment="Request for executing feed forward gain">
+        <With Var="FeedFwd" />
+      </Event>
+      <Event Name="REQ_ILCK" Comment="Request to update interlock conditions">
+        <With Var="IlckCond" />
+        <With Var="IlckType" />
+      </Event>
+      <Event Name="REQ_ILCKSP" Comment="Request to update interlock setpoint to PID ouput">
+        <With Var="IlckSp" />
+      </Event>
+      <Event Name="REQ_TRACK" Comment="Request to track PID setpoint with TrackState">
+        <With Var="Track" />
+        <With Var="TrackSp" />
+      </Event>
+      <Event ID="FBF5D049D5250326" Name="REQ_RCPY" Comment="Request for actuator position">
+        <With Var="EnRcpy" />
+        <With Var="RcpyVal" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="CNF" Comment="Execution confirmation (Cyclic update)">
+        <With Var="Out" />
+        <With Var="OutMinActive" />
+        <With Var="OutMaxActive" />
+        <With Var="OutMin" />
+        <With Var="OutMax" />
+      </Event>
+      <Event Name="CNF_SP" Comment="Execution confirmation of current setpoint">
+        <With Var="CurrentSp" />
+      </Event>
+      <Event Name="CNF_MODE" Comment="Execution of confirmation of current mode">
+        <With Var="CurrentMode" />
+      </Event>
+      <Event Name="CNF_OWNER" Comment="Execution confirmation of owner">
+        <With Var="CurrentOwner" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="Sp" Type="REAL" Comment="Setpoint for PID calculation" />
+      <VarDeclaration Name="Pv" Type="VTQREAL" Comment="Unscaled analog process value" />
+      <VarDeclaration Name="PvMin" Type="REAL" Comment="Minimum range of process value" />
+      <VarDeclaration Name="PvMax" Type="REAL" Comment="Maximum range of process value" />
+      <VarDeclaration Name="ExtPara" Type="PIDExternalParameters" Namespace="SE.App2CommonProcess" Comment="External parameters for PID calculation" />
+      <VarDeclaration Name="FeedFwd" Type="REAL" Comment="Feed forward value" />
+      <VarDeclaration Name="IlckCond" Type="BOOL" Comment="1 = Interlock condition active" />
+      <VarDeclaration Name="IlckType" Type="CondType" Namespace="SE.App2CommonProcess" Comment="Type of condition interlock, (0 = Normal, 1 = Process interlock/Sequence interlock)" />
+      <VarDeclaration Name="IlckSp" Type="REAL" Comment="Interlock setpoint" />
+      <VarDeclaration Name="Track" Type="BOOL" Comment="1 = Track calclated output to TrackSp" />
+      <VarDeclaration Name="TrackSp" Type="VTQREAL" Comment="If Track enabled, PID ouput follows TrackSp (Out = TrackSp)" />
+      <VarDeclaration ID="79693414AD076668" Name="EnRcpy" Type="BOOL" Comment="1 = the RCPY is enabled" />
+      <VarDeclaration ID="3A0AFF2C2D605891" Name="RcpyVal" Type="REAL" Comment="RCPY value (actuator position)" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="Out" Type="VTQREAL" Comment="Calculated output value" />
+      <VarDeclaration Name="OutMin" Type="REAL" Comment="Minimum range of ouput value" />
+      <VarDeclaration Name="OutMax" Type="REAL" Comment="Maximum range of ouput value" />
+      <VarDeclaration Name="OutMinActive" Type="BOOL" Comment="1 = Out has reached OutMin Limit" />
+      <VarDeclaration Name="OutMaxActive" Type="BOOL" Comment="1 = Out has reached OutMax Limit" />
+      <VarDeclaration Name="CurrentSp" Type="VTQREAL" Comment="Current setpoint value" />
+      <VarDeclaration Name="CurrentMode" Type="INT" Comment="Current mode selected for PID calculation" />
+      <VarDeclaration Name="CurrentOwner" Type="WORD" Comment="Current owner data from externlal source and basic owner 16#8 = Program owner, 16#10 = Operator owner, 16#4 = program Local and 16#40 Operator Local" />
+    </OutputVars>
+    <Sockets>
+      <AdapterDeclaration Name="IServiceExtension" Type="IPIDServiceExtension" Namespace="SE.App2CommonProcess" Comment="Services extension adapter(Seq control and Owner)" x="12620" y="660">
+        <Parameter Name="$ServiceState" Value="TRUE" />
+      </AdapterDeclaration>
+    </Sockets>
+  </InterfaceList>
+  <FBNetwork>
+    <FB ID="1" Name="IThis" Type="PIDBase_HMI" x="5740" y="360" Namespace="Main">
+      <Parameter Name="$2FE12C7893CE671A" Value="TRUE" />
+    </FB>
+    <FB ID="3" Name="plcStart" Type="plcStart" x="1780" y="380" Namespace="SE.App2Base">
+      <Parameter Name="$Delay" Value="T#0ms" />
+      <Parameter Name="$Prio" Value="16" />
+    </FB>
+    <FB ID="4" Name="setpointRamp" Type="rampCtl" x="4640" y="3280" Namespace="SE.App2CommonProcess">
+      <Parameter Name="$MaxDeviation" Value="0.0" />
+      <Parameter Name="$EnableDeviation" Value="FALSE" />
+    </FB>
+    <FB ID="5" Name="pidCalc" Type="pidCtl" x="8940" y="2980" Namespace="SE.App2CommonProcess">
+      <Parameter Name="$ProhibitOutInc" Value="FALSE" />
+      <Parameter Name="$ProhibitOutDec" Value="FALSE" />
+    </FB>
+    <FB ID="12" Name="modeSelection" Type="devInSel" x="6280" y="5820" Namespace="SE.App2Base">
+      <Attribute Name="Configuration.Component.HideUnusedPorts" Value="" />
+      <Parameter Name="$EnBumpless1" Value="FALSE" />
+      <Parameter Name="$Val1" Value="(value:=0,quality:=16#0,timestamp:=LDT#2023-10-14-17:35:08,picosecs:=0)" />
+      <Parameter Name="$EnBumpless2" Value="TRUE" />
+      <Parameter Name="$EnBumpless3" Value="FALSE" />
+      <Parameter Name="$PermPassive" Value="FALSE" />
+      <Parameter Name="$PermActive1" Value="FALSE" />
+      <Parameter Name="$PermActive2" Value="FALSE" />
+      <Parameter Name="$UseCurrentVal" Value="TRUE" />
+    </FB>
+    <FB ID="13" Name="basicOwner" Type="ownerControl" x="4200" y="6060" Namespace="SE.App2Base" />
+    <FB ID="14" Name="programModeSelection" Type="SELECT_24363B89CFDE21263" x="5240" y="6840" Namespace="Main">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNT:=2;SELECT:BOOL;IN${CNT}:INT" />
+      <Parameter Name="$IN1" Value="1" />
+    </FB>
+    <FB ID="16" Name="spSelection" Type="devRealSel" x="6280" y="7340" Namespace="SE.App2Base">
+      <Attribute Name="Configuration.Component.HideUnusedPorts" Value="" />
+      <Parameter Name="$EnBumpless2" Value="TRUE" />
+      <Parameter Name="$EnBumpless3" Value="FALSE" />
+      <Parameter Name="$EnBumpless1" Value="FALSE" />
+    </FB>
+    <FB ID="17" Name="programSpSelection" Type="SELECT_218F0E76F8A148ECD" x="5240" y="7700" Namespace="Main">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNT:=2;SELECT:BOOL;IN${CNT}:REAL" />
+    </FB>
+    <FB ID="18" Name="outSelection" Type="devRealSel" x="9980" y="6200" Namespace="SE.App2Base">
+      <Attribute Name="Configuration.Component.HideUnusedPorts" Value="" />
+      <Parameter Name="$EnBumpless2" Value="FALSE" />
+      <Parameter Name="$EnBumpless3" Value="TRUE" />
+      <Parameter Name="$EnBumpless1" Value="FALSE" />
+      <Parameter Name="$EnBumpless4" Value="FALSE" />
+      <Parameter Name="$EnBumpless5" Value="FALSE" />
+    </FB>
+    <FB ID="37" Name="modeCalc" Type="modeCalc" x="8160" y="6120" Namespace="SE.App2CommonProcess" />
+    <FB ID="41" Name="trackingActive" Type="E_SELECT" x="10180" y="3040" Namespace="IEC61499.Standard" />
+    <FB ID="46" UID="44" Name="paraSel" Type="DS_SELECTX_125F0E43806CD1F46" x="7040" y="3640" Namespace="Main">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNTX:=2;CNTY:=9;DI${CNTX,_,CNTY}:REAL,REAL,REAL,BOOL,REAL,BOOL,REAL,REAL,REAL" />
+      <Attribute Name="Configuration.Component.HideUnusedPorts" Value="" />
+    </FB>
+    <FB ID="48" UID="47" Name="extParaSel" Type="E_SWITCH" x="5880" y="4020" Namespace="IEC61499.Standard" />
+    <FB ID="53" UID="50" Name="paraSelectionCheck" Type="DS_SELECTX_4480AAC7B40EACCE" x="3240" y="3300" Namespace="Main">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNTX:=2;CNTY:=10;DI${CNTX,_,CNTY}:BOOL,REAL,REAL,REAL,BOOL,REAL,BOOL,REAL,REAL,REAL" />
+    </FB>
+    <FB ID="51" Name="extParaCheck" Type="E_SWITCH" x="2620" y="3300" Namespace="IEC61499.Standard" />
+    <FB ID="54" Name="paraSplit" Type="SPLIT_62F891E498C2EEC3" x="1780" y="3360" Namespace="Main">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#&lt;InterfaceList&gt;&#xD;&#xA;  &lt;EventInputs&gt;&#xD;&#xA;    &lt;Event Name=&quot;REQ&quot; Comment=&quot;Request events for dedicated input data sets&quot;&gt;&#xD;&#xA;      &lt;With Var=&quot;Input&quot; /&gt;&#xD;&#xA;    &lt;/Event&gt;&#xD;&#xA;  &lt;/EventInputs&gt;&#xD;&#xA;  &lt;EventOutputs&gt;&#xD;&#xA;    &lt;Event Name=&quot;CNF&quot; Comment=&quot;Confirmation from Resource for a dedicated request&quot;&gt;&#xD;&#xA;      &lt;With Var=&quot;Output&quot; /&gt;&#xD;&#xA;      &lt;With Var=&quot;Enable&quot; /&gt;&#xD;&#xA;      &lt;With Var=&quot;Gain&quot; /&gt;&#xD;&#xA;      &lt;With Var=&quot;IntegralTime&quot; /&gt;&#xD;&#xA;      &lt;With Var=&quot;DerivationTime&quot; /&gt;&#xD;&#xA;      &lt;With Var=&quot;Directon&quot; /&gt;&#xD;&#xA;      &lt;With Var=&quot;DeadBand&quot; /&gt;&#xD;&#xA;      &lt;With Var=&quot;DWorkOnError&quot; /&gt;&#xD;&#xA;      &lt;With Var=&quot;LagTime&quot; /&gt;&#xD;&#xA;      &lt;With Var=&quot;OutMin&quot; /&gt;&#xD;&#xA;      &lt;With Var=&quot;OutMax&quot; /&gt;&#xD;&#xA;    &lt;/Event&gt;&#xD;&#xA;  &lt;/EventOutputs&gt;&#xD;&#xA;  &lt;InputVars&gt;&#xD;&#xA;    &lt;VarDeclaration Name=&quot;Input&quot; Type=&quot;PIDExternalParameters&quot; Namespace=&quot;SE.App2CommonProcess&quot; /&gt;&#xD;&#xA;  &lt;/InputVars&gt;&#xD;&#xA;  &lt;OutputVars&gt;&#xD;&#xA;    &lt;VarDeclaration Name=&quot;Output&quot; Type=&quot;PIDExternalParameters&quot; Namespace=&quot;SE.App2CommonProcess&quot; /&gt;&#xD;&#xA;    &lt;VarDeclaration Name=&quot;Enable&quot; Type=&quot;BOOL&quot; /&gt;&#xD;&#xA;    &lt;VarDeclaration Name=&quot;Gain&quot; Type=&quot;REAL&quot; /&gt;&#xD;&#xA;    &lt;VarDeclaration Name=&quot;IntegralTime&quot; Type=&quot;REAL&quot; /&gt;&#xD;&#xA;    &lt;VarDeclaration Name=&quot;DerivationTime&quot; Type=&quot;REAL&quot; /&gt;&#xD;&#xA;    &lt;VarDeclaration Name=&quot;Directon&quot; Type=&quot;BOOL&quot; /&gt;&#xD;&#xA;    &lt;VarDeclaration Name=&quot;DeadBand&quot; Type=&quot;REAL&quot; /&gt;&#xD;&#xA;    &lt;VarDeclaration Name=&quot;DWorkOnError&quot; Type=&quot;BOOL&quot; /&gt;&#xD;&#xA;    &lt;VarDeclaration Name=&quot;LagTime&quot; Type=&quot;REAL&quot; /&gt;&#xD;&#xA;    &lt;VarDeclaration Name=&quot;OutMin&quot; Type=&quot;REAL&quot; /&gt;&#xD;&#xA;    &lt;VarDeclaration Name=&quot;OutMax&quot; Type=&quot;REAL&quot; /&gt;&#xD;&#xA;  &lt;/OutputVars&gt;&#xD;&#xA;&lt;/InterfaceList&gt;" />
+    </FB>
+    <Input Name="REQ_SP" x="4580" y="7712" Type="Event" />
+    <Input Name="Sp" x="4580" y="7972" Type="Data" />
+    <Input Name="REQ_ILCKSP" x="9220" y="6332" Type="Event" />
+    <Input Name="IlckCond" x="8019.999" y="4726" Type="Data" />
+    <Input Name="IlckType" x="7520" y="4812" Type="Data" />
+    <Input Name="REQ_ILCK" x="8019.999" y="3082" Type="Event" />
+    <Input Name="IlckSp" x="9240" y="7012" Type="Data" />
+    <Input Name="Track" x="7519.999" y="6668" Type="Data" />
+    <Input Name="REQ_TRACK" x="7540" y="6228" Type="Event" />
+    <Input Name="TrackSp" x="9220" y="6832" Type="Data" />
+    <Input Name="Pv" x="8019.999" y="3522" Type="Data" />
+    <Input Name="REQ_PV" x="8019.999" y="2962" Type="Event" />
+    <Input Name="PvMin" x="4580" y="1022" Type="Data" />
+    <Input Name="PvMax" x="4580" y="1082" Type="Data" />
+    <Input Name="FeedFwd" x="8020" y="4512" Type="Data" />
+    <Input Name="REQ_FEEDFWD" x="8020" y="3292" Type="Event" />
+    <Input Name="REQ_EXT_PARA" x="320" y="3372" Type="Event" />
+    <Input Name="ExtPara" x="320" y="3572" Type="Data" />
+    <Input ID="FBF5D049D5250326" Name="REQ_RCPY" x="8020" y="3392" Type="Event" />
+    <Input ID="79693414AD076668" Name="EnRcpy" x="8220" y="5232" Type="Data" />
+    <Input ID="3A0AFF2C2D605891" Name="RcpyVal" x="8220" y="5292" Type="Data" />
+    <Frame Name="FRAME10" X="200" Y="220" Width="3660" Height="680">
+      <Parameter Name="BackgroundColor" Value="Cornsilk" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 20.25pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="Initialization" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME11" X="4000" Y="200" Width="4220" Height="2280">
+      <Parameter Name="BackgroundColor" Value="AliceBlue" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 20.25pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="Supervision Interface" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME4" X="4040" Y="2700" Width="6979.999" Height="2740">
+      <Parameter Name="BackgroundColor" Value="AliceBlue" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 20.25pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="Control" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME5" X="4040" Y="5560" Width="6979.999" Height="2960">
+      <Parameter Name="BackgroundColor" Value="GradientInactiveCaption" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 20.25pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="Owner &amp; Setpoint Management" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME8" X="11220" Y="200" Width="3680" Height="2300">
+      <Parameter Name="BackgroundColor" Value="Lavender" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 20.25pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="Data exchange with sequence" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="Parameter Selection" X="200" Y="2700" Width="3680" Height="2460">
+      <Parameter Name="BackgroundColor" Value="AliceBlue" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 20.25pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="Parameter Selection" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Output Name="CurrentOwner" x="5260" y="6452" Type="Data" />
+    <Output Name="CNF_OWNER" x="5320" y="6072" Type="Event" />
+    <Output Name="OutMin" x="8040" y="4232" Type="Data" />
+    <Output Name="OutMax" x="8040" y="4292" Type="Data" />
+    <Output Name="CNF" x="10660" y="3052" Type="Event" />
+    <Output Name="Out" x="10040" y="3512" Type="Data" />
+    <Output Name="OutMinActive" x="10040" y="3612" Type="Data" />
+    <Output Name="OutMaxActive" x="10040" y="3672" Type="Data" />
+    <Output Name="CNF_SP" x="7100" y="7352" Type="Event" />
+    <Output Name="CurrentSp" x="7100" y="7732" Type="Data" />
+    <Output Name="CNF_MODE" x="7100" y="5832" Type="Event" />
+    <Output Name="CurrentMode" x="7000" y="6212" Type="Data" />
+    <EventConnections>
+      <Connection Source="$12.CNF" Destination="$CNF_MODE" dx1="137.875">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$17.CNF" Destination="$16.REQ_SP3" dx1="53.9585">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$14.CNF" Destination="$12.REQ_SP3">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$IServiceExtension.REQ_OWNER" Destination="$13.REQ_STDOWNER">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$16.CNF" Destination="$CNF_SP" dx1="146.1563">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$REQ_TRACK" Destination="$12.REQ_SP1" dx1="120" dx2="300" dy="146">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$REQ_ILCK" Destination="$18.REQ_SEL" dx1="855.5732">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$REQ_TRACK" Destination="$37.REQ_TRACK" dx1="81.396" />
+      <Connection Source="$REQ_TRACK" Destination="$18.REQ_SP1" dx1="1020.698">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$37.CNF" Destination="$18.REQ_SEL" dx1="856.208">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$37.CNF_TRACK" Destination="$18.REQ_SEL">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$REQ_ILCKSP" Destination="$18.REQ_SP2">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$5.C_CNF" Destination="$18.REQ_SP5">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$18.CNF" Destination="$5.REQ">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$12.CNF" Destination="$37.REQ_MODE" dx1="29.25">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$37.CNF_TRACK" Destination="$12.REQ_SEL">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$IServiceExtension.REQ_CMD" Destination="$14.REQ">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$IServiceExtension.REQ_SP" Destination="$17.REQ">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$REQ_SP" Destination="$17.REQ" dx1="49.0835" />
+      <Connection Source="$REQ_PV" Destination="$5.REQ" dx1="129.084" />
+      <Connection Source="$37.CNF" Destination="$16.REQ_SEL">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$REQ_PV" Destination="$16.REQ_SP1" dx1="120" dx2="150" dy="2045.854">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$37.CNF" Destination="$4.REQ_TRACK">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$16.CNF" Destination="$4.REQ_SP">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$12.CNF" Destination="$IServiceExtension.CNF_MODE">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$REQ_PV" Destination="$4.REQ_SP" dx1="120" dx2="150" dy="116.854">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$4.CNF" Destination="$5.REQ_SP">
+        <Points>
+          <Points>
+            <X>1355.177</X>
+            <Y>830</Y>
+          </Points>
+          <Points>
+            <X>1367.677</X>
+            <Y>830</Y>
+          </Points>
+          <Points>
+            <X>1367.677</X>
+            <Y>792.5</Y>
+          </Points>
+          <Points>
+            <X>2092.5</X>
+            <Y>792.5</Y>
+          </Points>
+          <Points>
+            <X>2092.5</X>
+            <Y>770</Y>
+          </Points>
+          <Points>
+            <X>2230</X>
+            <Y>770</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$REQ_FEEDFWD" Destination="$5.REQ_FEEDFWD" dx1="40" />
+      <Connection Source="$37.CNF_MODE" Destination="$5.REQ">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$REQ_PV" Destination="$4.REQ_TRACK" dx1="120" dx2="130" dy="116.854">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$REQ_ILCK" Destination="$IServiceExtension.CNF_READY" dx1="2130.573">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$REQ_PV" Destination="$IServiceExtension.CNF_PV" dx1="2129.542">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$4.CNF" Destination="$IServiceExtension.CNF_SP_OP">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$3.FIRST_INIT" Destination="$IServiceExtension.CNF_SERVICE">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$5.CNF_READY" Destination="$IServiceExtension.CNF_READY">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$13.CNF_OWNER" Destination="$37.REQ_OWNER">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$5.C_CNF" Destination="$41.EI0" />
+      <Connection Source="$41.EO" Destination="$CNF" dx1="120" />
+      <Connection Source="$37.CNF_TRACK" Destination="$41.EI0">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$41.EO" Destination="$IServiceExtension.CNF_SP_OP">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$5.CNF" Destination="$41.EI1">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$48.EO1" Destination="$46.REQ2" dx1="429.8633">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$46.IND" Destination="$5.REQ_PARA" dx1="171.834">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$REQ_TRACK" Destination="$5.REQ_TRACK" dx1="475.6978">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$IServiceExtension.REQ_PARA" Destination="$51.EI">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$51.EO0" Destination="$53.REQ1" />
+      <Connection Source="$51.EO1" Destination="$53.REQ2" />
+      <Connection Source="$REQ_EXT_PARA" Destination="$54.REQ" />
+      <Connection Source="$54.CNF" Destination="$51.EI" dx1="50" />
+      <Connection Source="$IServiceExtension.REQ_OUT" Destination="$18.REQ_SP4">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$REQ_ILCK" Destination="$37.REQ_ILCK" dx1="120" dx2="190" dy="1376.854">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$13.CNF_OWNER" Destination="$14.REQ">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$REQ_TRACK" Destination="$IServiceExtension.CNF_TRACK" dx1="2335.698">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$REQ_ILCK" Destination="$5.REQ_ILCK" dx1="120" />
+      <Connection Source="$37.CNF" Destination="$12.REQ_SEL">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$13.CNF_OWNER" Destination="$CNF_OWNER" dx1="133.1665" />
+      <Connection Source="$46.IND" Destination="$IServiceExtension.CNF_SP_OP">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$46.IND" Destination="$IServiceExtension.8CDB19EE4FC593B1">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$53.IND" Destination="$48.EI">
+        <Points>
+          <Points>
+            <X>913.7291</X>
+            <Y>835</Y>
+          </Points>
+          <Points>
+            <X>973.7291</X>
+            <Y>835</Y>
+          </Points>
+          <Points>
+            <X>973.7291</X>
+            <Y>802.5</Y>
+          </Points>
+          <Points>
+            <X>1347.5</X>
+            <Y>802.5</Y>
+          </Points>
+          <Points>
+            <X>1347.5</X>
+            <Y>1015</Y>
+          </Points>
+          <Points>
+            <X>1465</X>
+            <Y>1015</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$3.FIRST_INIT" Destination="$1.F4ED48CC2B5317F8" dx1="128.0835" />
+      <Connection Source="$1.3C7816C1E3C12126" Destination="$1.F8BDFB66D6A721B" dx1="137.8535" dx2="70" dy="-110">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$37.CNF" Destination="$1.4ECF71528D4B6340">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$REQ_ILCK" Destination="$1.4ECF71528D4B6340" dx1="120" dx2="140" dy="-403">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$REQ_PV" Destination="$1.4ECF71528D4B6340" dx1="120" dx2="140" dy="-343">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$4.CNF" Destination="$1.4ECF71528D4B6340">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$5.CNF" Destination="$1.4ECF71528D4B6340">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$37.CNF_MODE" Destination="$1.4ECF71528D4B6340">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$REQ_TRACK" Destination="$1.4ECF71528D4B6340" dx1="120" dx2="140" dy="-1875">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$5.C_CNF" Destination="$1.4ECF71528D4B6340">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$16.CNF" Destination="$1.4ECF71528D4B6340">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$37.CNF_TRACK" Destination="$1.568B5274285BDEC8">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$46.IND" Destination="$1.568B5274285BDEC8">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$48.EO0" Destination="$1.568B5274285BDEC8" dx1="50" dx2="570" dy="-850" />
+      <Connection Source="$1.3C7816C1E3C12126" Destination="$13.REQ_BASICOWNER">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$1.3C7816C1E3C12126" Destination="$3.ACK_FIRST">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$1.CF580EC7DC4C111C" Destination="$13.REQ_BASICOWNER">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$1.733DF8FD825824CA" Destination="$16.REQ_SP2">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$1.F7A34A5B968DDB98" Destination="$18.REQ_SP3">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$1.DF1716734AF61076" Destination="$4.REQ_PARA">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$1.DF1716734AF61076" Destination="$37.REQ_OWNER">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$1.DF1716734AF61076" Destination="$46.REQ1" dx1="337.8545">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$1.D88CEB590B668985" Destination="$12.REQ_SP2">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$1.D88CEB590B668985" Destination="$4.REQ_PARA">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$1.D88CEB590B668985" Destination="$46.REQ1" dx1="337.8545">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$1.D716EC33D901A5A4" Destination="$5.REQ_OUTBIAS">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$FBF5D049D5250326" Destination="$5.F3BAF1D546068DF6" dx1="47.45898" />
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="$12.CurrentVal" Destination="$CurrentMode">
+        <Points>
+          <Points>
+            <X>1746.0625</X>
+            <Y>1559.99988</Y>
+          </Points>
+          <Points>
+            <X>1756.0625</X>
+            <Y>1559.99988</Y>
+          </Points>
+          <Points>
+            <X>1756.0625</X>
+            <Y>1560</Y>
+          </Points>
+          <Points>
+            <X>1750</X>
+            <Y>1560</Y>
+          </Points>
+        </Points>
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$Sp" Destination="$17.IN1" />
+      <Connection Source="$17.OUT" Destination="$16.Val3" dx1="583.9585">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$14.OUT" Destination="$12.Val3" dx1="73.9585">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$13.ProgramOwner" Destination="$12.Sel3">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$13.OperatorOwner" Destination="$12.Sel2" dx1="546.3335">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$13.StdOwnerConnected" Destination="$14.SELECT">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$13.ProgramOwner" Destination="$16.Sel3">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$13.StdOwnerConnected" Destination="$17.SELECT">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$IServiceExtension.StdOwner" Destination="$13.StdOwner">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$16.CurrentVal" Destination="$CurrentSp">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$TrackSp" Destination="$18.Val1">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$Track" Destination="$12.Sel1" dx1="120" dx2="260" dy="106">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$IlckSp" Destination="$18.Val2" dx1="120.458">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$IlckCond" Destination="$18.Sel2" dx1="727">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$Track" Destination="$18.Sel1" dx1="986.7915">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$Track" Destination="$37.Track" dx1="13.58447" />
+      <Connection Source="$12.CurrentVal" Destination="$37.ModeIn" dx1="125.75">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$5.Out" Destination="$18.Val5">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$18.CurrentVal" Destination="$5.PresetValue">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$37.ModeOut" Destination="$18.Sel5">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$37.OperManual" Destination="$18.Sel3" dx1="216.208">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$IServiceExtension.Sp" Destination="$14.IN2">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$IServiceExtension.SpReal1" Destination="$17.IN2">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$37.TrackManual" Destination="$16.Sel1" dx1="126.208" dx2="130" dy="130.0005">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$Pv" Destination="$5.Pv" dx1="129.8555" />
+      <Connection Source="$Pv" Destination="$16.Val1" dx1="120" dx2="250" dy="1765.854">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$37.TrackManual" Destination="$4.Track">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$IlckCond" Destination="$37.IlckCond" dx1="120" dx2="250" dy="554.8545">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$16.CurrentVal" Destination="$4.Sp">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$12.CurrentVal" Destination="$IServiceExtension.CurrentMode">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$PvMin" Destination="$4.SpMin" dx1="118.5625" dx2="640" dy="170">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$PvMax" Destination="$4.SpMax" dx1="40" dx2="150" dy="1063.854">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$Pv" Destination="$4.TrackSp" dx1="120" dx2="270" dy="-163.146">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$4.Out" Destination="$5.Sp">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$FeedFwd" Destination="$5.FeedFwd" dx1="49.5" dx2="510" dy="50" />
+      <Connection Source="$IlckCond" Destination="$IServiceExtension.Interlocked" dx1="2082">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$5.Out" Destination="$IServiceExtension.CurrentOp" dx1="1262.208">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$4.Out" Destination="$IServiceExtension.CurrentSp">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$Pv" Destination="$IServiceExtension.Pv" dx1="2059.927">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$5.Out" Destination="$Out" dx1="192.208" />
+      <Connection Source="$5.OutMinActive" Destination="$OutMinActive" dx1="132.208" />
+      <Connection Source="$5.OutMaxActive" Destination="$OutMaxActive" dx1="152.208" />
+      <Connection Source="$IlckType" Destination="$5.IlckType" dx1="40" dx2="610" dy="50" />
+      <Connection Source="$IlckCond" Destination="$5.IlckCond" dx1="120" dx2="590" dy="42" />
+      <Connection Source="$5.Ready" Destination="$IServiceExtension.Ready" dx1="1282.208">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$Track" Destination="$5.TrackSp" dx1="531.7915">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$37.OperAuto" Destination="$16.Sel2">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$13.Owner" Destination="$37.Owner">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$Track" Destination="$41.G" dx1="1151.792">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$37.ProgLocalManual" Destination="$18.Sel4" dx1="176.208">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$46.OUT1" Destination="$5.Gain" dx1="150">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$46.OUT2" Destination="$5.IntegralTime" dx1="170">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$46.OUT3" Destination="$5.DerivativeTime" dx1="190">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$46.OUT4" Destination="$5.Direction" dx1="210">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$46.OUT5" Destination="$5.Deadband" dx1="230">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$46.OUT6" Destination="$5.DWorkOnError" dx1="250">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$46.OUT7" Destination="$5.LagTime" dx1="270">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$46.OUT8" Destination="$5.OutMin" dx1="1350.021">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$46.OUT9" Destination="$5.OutMax" dx1="1390.021">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$IServiceExtension.ExtParaSel" Destination="$51.G">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$IServiceExtension.Gain" Destination="$53.DI2_2">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$IServiceExtension.IntegralTime" Destination="$53.DI2_3">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$IServiceExtension.DerivationTime" Destination="$53.DI2_4">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$IServiceExtension.Direction" Destination="$53.DI2_5">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$IServiceExtension.DeadBand" Destination="$53.DI2_6">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$IServiceExtension.DWorkOnError" Destination="$53.DI2_7">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$IServiceExtension.LagTime" Destination="$53.DI2_8">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$IServiceExtension.OutMin" Destination="$53.DI2_9">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$IServiceExtension.OutMax" Destination="$53.DI2_10">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$46.OUT8" Destination="$OutMin" dx1="290">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$46.OUT9" Destination="$OutMax" dx1="310">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$53.OUT10" Destination="$46.DI2_9">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$53.OUT2" Destination="$46.DI2_1" dx1="200">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$53.OUT3" Destination="$46.DI2_2" dx1="180">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$53.OUT4" Destination="$46.DI2_3" dx1="160">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$53.OUT5" Destination="$46.DI2_4" dx1="140">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$53.OUT6" Destination="$46.DI2_5" dx1="120">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$53.OUT7" Destination="$46.DI2_6" dx1="100">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$53.OUT8" Destination="$46.DI2_7">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$53.OUT9" Destination="$46.DI2_8">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$IServiceExtension.ExtParaSel" Destination="$53.DI2_1">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$53.OUT1" Destination="$48.G">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$ExtPara" Destination="$54.Input" />
+      <Connection Source="$54.Enable" Destination="$53.DI1_1">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$54.Gain" Destination="$53.DI1_2" dx1="200" />
+      <Connection Source="$54.IntegralTime" Destination="$53.DI1_3" dx1="180" />
+      <Connection Source="$54.DerivationTime" Destination="$53.DI1_4" dx1="160" />
+      <Connection Source="$54.Directon" Destination="$53.DI1_5" dx1="140" />
+      <Connection Source="$54.DeadBand" Destination="$53.DI1_6" dx1="120" />
+      <Connection Source="$54.DWorkOnError" Destination="$53.DI1_7" dx1="100" />
+      <Connection Source="$54.LagTime" Destination="$53.DI1_8" dx1="80" />
+      <Connection Source="$54.OutMin" Destination="$53.DI1_9" />
+      <Connection Source="$54.OutMax" Destination="$53.DI1_10" />
+      <Connection Source="$IServiceExtension.SpReal2" Destination="$18.Val4">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$37.CalcMode" Destination="$5.Mode">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$Track" Destination="$IServiceExtension.Track" dx1="2361.792">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$13.Owner" Destination="$CurrentOwner">
+        <Points>
+          <Points>
+            <X>1305.91663</X>
+            <Y>1620</Y>
+          </Points>
+          <Points>
+            <X>1315</X>
+            <Y>1620</Y>
+          </Points>
+          <Points>
+            <X>1315</X>
+            <Y>1619.99988</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$PvMin" Destination="$IServiceExtension.PvMin" dx1="3784.281">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$PvMax" Destination="$IServiceExtension.PvMax" dx1="3768.479">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$46.OUT8" Destination="$IServiceExtension.CurrentOpMin">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$46.OUT9" Destination="$IServiceExtension.CurrentOpMax">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$46.OUT1" Destination="$IServiceExtension.526988CF984C619A">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$46.OUT2" Destination="$IServiceExtension.7D8F5388E2DC486D">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$46.OUT3" Destination="$IServiceExtension.B62ECEA2F5E6DA8A">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$46.OUT4" Destination="$IServiceExtension.607F2E8B0E693249">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$46.OUT5" Destination="$IServiceExtension.60EB9615BA837102">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$46.OUT6" Destination="$IServiceExtension.3F4910500F1CC6A6">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$46.OUT7" Destination="$IServiceExtension.B38B3033E4F94F3F">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$Pv" Destination="$1.ACDC6904590859A8" dx1="120" dx2="120" dy="-530.9998">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$PvMin" Destination="$1.8881FFD24D90D865" dx1="128.5625" />
+      <Connection Source="$PvMax" Destination="$1.E15A9214DEEE85B6" dx1="120" />
+      <Connection Source="$16.CurrentVal" Destination="$1.AA9BE811C6AB052A">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$5.Out" Destination="$1.F680A73B417CD6F5" dx1="1222.208" dx2="1720" dy="-1040">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$12.CurrentVal" Destination="$1.5BB4B57D9CC10C19">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$13.Owner" Destination="$1.3143D32BCC6D529B">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$5.OutChangeProhibited" Destination="$1.38051CE7590A4498" dx1="1242.208" dx2="1700" dy="-1900">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$Track" Destination="$1.F23EE025A922C157" dx1="120" dx2="120" dy="-2104">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$5.Outbias" Destination="$1.A375666527EF676C">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$IlckCond" Destination="$1.2F039F336E3FD06B" dx1="120" dx2="120" dy="-1133">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$53.OUT1" Destination="$1.B2A8B3D1DEEA17E">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$46.OUT1" Destination="$1.9687AF2C021C1405">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$46.OUT2" Destination="$1.34E69DFE80FEB19D">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$46.OUT3" Destination="$1.DF0E3B1C6754334E">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$46.OUT4" Destination="$1.D797C0265258257A">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$46.OUT5" Destination="$1.2D62610692B0BAA7">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$46.OUT6" Destination="$1.59BC22F58A2AC5DE">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$46.OUT7" Destination="$1.DFD108CBF0371C9F">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$46.OUT8" Destination="$1.6582E689B1B84E24">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$46.OUT9" Destination="$1.43713152FBB271A0">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$13.StdOwnerConnected" Destination="$1.659F42A0E6591C81">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$1.45D13D51972F673D" Destination="$13.BasicOwner">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$1.85E36F6C7A7A3394" Destination="$16.Val2">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$1.99DCC6ECF79655A0" Destination="$18.Val3">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$1.8B3FE585BEF5C081" Destination="$12.Val2">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$1.91FE3D159818E304" Destination="$46.DI1_1" dx1="287.854">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$1.7A7AC172CDE65711" Destination="$46.DI1_2" dx1="267.854">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$1.885D832E4B845B40" Destination="$46.DI1_3" dx1="247.854">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$1.5A6B0DD7FD7B5424" Destination="$46.DI1_4" dx1="227.854">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$1.BB44C6E631F7BD3C" Destination="$46.DI1_5" dx1="207.854">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$1.6FC912D3B6844A9C" Destination="$46.DI1_6" dx1="187.854">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$1.802873E984BC2734" Destination="$46.DI1_7" dx1="167.854">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$1.40822142BE6CD80A" Destination="$46.DI1_8" dx1="147.854">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$1.E96A0C6730BB0132" Destination="$46.DI1_9" dx1="127.854">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$1.5A03B435FD6E1D89" Destination="$4.CycleTime">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$1.5A03B435FD6E1D89" Destination="$5.CycleTime">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$1.598D23039F0AFA46" Destination="$5.EnFeedFwd">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$1.5C7C217636F1BA76" Destination="$5.FeedFwdGain">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$1.5CE0359990D76374" Destination="$5.Bump">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$1.B2E2120DF5C5B08" Destination="$5.OutbiasOffset">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$1.F5B64A07FB2C2078" Destination="$4.RateUp" dx1="1657.854" dx2="680" dy="400">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$1.2AF043299B6A959D" Destination="$4.RateDown" dx1="1637.854" dx2="700" dy="320">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$1.4568BE33B21F361B" Destination="$37.EnManualTrackSp">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$1.2674CCA549C60F52" Destination="$5.92AFF823C3B58F8C">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$1.F385201F0CB7361F" Destination="$5.7B1B4A8898E5166E">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$1.896A9B3CA40C38E3" Destination="$5.1D9F3DDE91AAFB44">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$79693414AD076668" Destination="$5.26A58A49358F5359" />
+      <Connection Source="$3A0AFF2C2D605891" Destination="$5.EB9D275C1F9B5CB3" />
+    </DataConnections>
+  </FBNetwork>
+</FBType>

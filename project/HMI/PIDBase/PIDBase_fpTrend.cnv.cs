@@ -1,0 +1,27 @@
+using System;
+using NxtControl.GuiFramework;
+
+namespace HMI.Main.Faceplates.PIDBase
+{
+	/// <summary>
+	/// Description of fpTrend.
+	/// </summary>
+	public partial class fpTrend : NxtControl.GuiFramework.HMIFaceplate
+	{
+		public fpTrend()
+		{
+			//
+			// The InitializeComponent() call is required for Windows Forms designer support.
+			//
+			InitializeComponent();
+		}
+
+		void PvValueChanged(object sender, ValueChangedEventArgs e)
+		{
+	
+		}
+	}
+}
+
+
+
