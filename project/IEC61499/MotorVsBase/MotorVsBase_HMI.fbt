@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="3c06140e-70e6-4013-8665-b2eb38114699" Comment="Service Interface Function Block Type" Name="MotorVsBase_HMI" Namespace="Main">
+  <Attribute Name="Runtime.Persistence.Storage" Value="0" />
+  <Attribute Name="HMI.Alias" Value="" />
+  <Attribute Name="Configuration.FB.IDCounter" Value="0" />
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="1.0.1" Author="ApplicationLibDevTeam" Date="2/5/2024" Remarks="First Version" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="34A017503AC1070A" Name="INIT">
+        <With Var="QI" />
+      </Event>
+      <Event ID="F2953B6BB9388F21" Name="REQ_INITDATA" Comment="Request to initialize data" />
+      <Event ID="EC791CA6E67D66B3" Name="UPD" Comment="Update data to supervision">
+        <With Var="FbStatus" />
+        <With Var="TransFbStatus" />
+        <With Var="SpeedFbStatus" />
+        <With Var="CurrentSp" />
+        <With Var="CurrentOp" />
+        <With Var="CurrentSpeedSp" />
+        <With Var="CurrentSpeedOp" />
+        <With Var="CurrentOwner" />
+        <With Var="NeedReset" />
+        <With Var="IlckCond" />
+        <With Var="FbFail" />
+        <With Var="DeviceFail" />
+        <With Var="Fail" />
+        <With Var="PermStop" />
+        <With Var="PermFwd" />
+        <With Var="PermRev" />
+        <With Var="StdOwnerConnected" />
+        <With Var="CurrentSpeedOwner" />
+        <With Var="CurrentSpeedSpMin" />
+        <With Var="CurrentSpeedSpMax" />
+        <With Var="ExternalControlled" />
+      </Event>
+      <Event ID="FD2B6A321910142C" Name="UPD_TIME" Comment="Update time variables">
+        <With Var="PassiveRemainTime" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="377462E9CE5193B5" Name="INITO">
+        <With Var="QO" />
+        <With Var="STATUS" />
+      </Event>
+      <Event ID="B42FC414051FE233" Name="OWNER" Comment="Request for owner change">
+        <With Var="Owner" />
+      </Event>
+      <Event ID="1E115F107370F478" Name="SPEED_OWNER" Comment="Request for speed owner change">
+        <With Var="EnSpeedOwner" />
+        <With Var="SpeedOwner" />
+      </Event>
+      <Event ID="95BEA68906019444" Name="CFG" Comment="Request for new parameter">
+        <With Var="MonTime" />
+        <With Var="TripTime" />
+        <With Var="PassiveTime" />
+        <With Var="ConfResetReq" />
+        <With Var="FailResetReq" />
+        <With Var="ScanTime" />
+        <With Var="AlmAckType" />
+        <With Var="EnTrackSp" />
+        <With Var="EnResetSp" />
+        <With Var="DisReverse" />
+        <With Var="SpeedSpRangeSel" />
+      </Event>
+      <Event ID="A8EC0BB0D1766C60" Name="SPEEDSP_CFG" Comment="Request for new speed setpoint parameter">
+        <With Var="SpeedRawMin" />
+        <With Var="SpeedRawMax" />
+        <With Var="SpeedRawIsAbsolute" />
+        <With Var="SpeedSpMin" />
+        <With Var="SpeedSpMax" />
+      </Event>
+      <Event ID="4BC263E0581D4DDB" Name="SPEEDOUT_CFG" Comment="Request for new speed output parameter">
+        <With Var="SpeedOutMin" />
+        <With Var="SpeedOutMax" />
+      </Event>
+      <Event ID="C6CA4032A5F6989A" Name="SP_CMD" Comment="Request for new operator setpoint">
+        <With Var="Sp" />
+      </Event>
+      <Event ID="369F8CFFBEE23AB4" Name="SPEEDSP_CMD" Comment="Request for new operator speed setpoint">
+        <With Var="SpeedSp" />
+      </Event>
+      <Event ID="1A2B085F4B246BF1" Name="RESET_CMD" Comment="Request to reset device">
+        <With Var="Reset" />
+      </Event>
+      <Event ID="4711DA9A2DFC024" Name="IND_MODE" Comment="Request for new operational modes">
+        <With Var="Simulation" />
+        <With Var="FbOverride" />
+        <With Var="Maintenance" />
+        <With Var="OutOfService" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="A08029BD5BCA0193" Name="QI" Type="BOOL" />
+      <VarDeclaration ID="E35507CB164A688E" Name="FbStatus" Type="INT" Comment="Device state(0 = stopped, 1= Running Forward, 2 = Running Reverse)">
+        <Attribute Name="Runtime.Archive.Counters" Value="AbsoluteValues=False" />
+        <Attribute Name="Runtime.Archive.Id" Value="1" />
+        <Attribute Name="Runtime.History.Depth" Value="100" />
+        <Attribute Name="Runtime.History.SmoothTime" Value="60000" />
+        <Attribute Name="Runtime.History.SmoothValue" Value="1" />
+      </VarDeclaration>
+      <VarDeclaration ID="937CA40F4D16204B" Name="TransFbStatus" Type="INT" Comment="Device transition state( 0 = stopped, 1= Running Forward, 2 = Running Reverse, 5 = Starting , 6 = Stopping and 253 = Unknown)">
+        <Attribute Name="Runtime.Archive.Counters" Value="AbsoluteValues=False" />
+        <Attribute Name="Runtime.Archive.Id" Value="1" />
+        <Attribute Name="Runtime.History.Depth" Value="100" />
+        <Attribute Name="Runtime.History.SmoothTime" Value="60000" />
+        <Attribute Name="Runtime.History.SmoothValue" Value="1" />
+      </VarDeclaration>
+      <VarDeclaration ID="5FDD97900C8D5AF7" Name="SpeedFbStatus" Type="REAL" Comment="Speed feedback">
+        <Attribute Name="Runtime.Archive.Counters" Value="" Type="REAL" />
+        <Attribute Name="Runtime.Archive.Id" Value="0" Type="REAL" />
+        <Attribute Name="Runtime.History.Depth" Value="0" Type="REAL" />
+        <Attribute Name="Runtime.History.SmoothTime" Value="0" Type="REAL" />
+        <Attribute Name="Runtime.History.SmoothValue" Value="0" Type="REAL" />
+      </VarDeclaration>
+      <VarDeclaration ID="C6876D790F3A950E" Name="CurrentSp" Type="INT" Comment="Current value of the direction setpoint">
+        <Attribute Name="Runtime.Archive.Counters" Value="AbsoluteValues=False" />
+        <Attribute Name="Runtime.Archive.Id" Value="1" />
+        <Attribute Name="Runtime.History.Depth" Value="100" />
+        <Attribute Name="Runtime.History.SmoothTime" Value="60000" />
+        <Attribute Name="Runtime.History.SmoothValue" Value="1" />
+      </VarDeclaration>
+      <VarDeclaration ID="D2C35BC47DF71FCC" Name="CurrentOp" Type="INT" Comment="Current value of the output">
+        <Attribute Name="Runtime.Archive.Counters" Value="AbsoluteValues=False" />
+        <Attribute Name="Runtime.Archive.Id" Value="1" />
+        <Attribute Name="Runtime.History.Depth" Value="100" />
+        <Attribute Name="Runtime.History.SmoothTime" Value="60000" />
+        <Attribute Name="Runtime.History.SmoothValue" Value="1" />
+      </VarDeclaration>
+      <VarDeclaration ID="977C6234F7727BFD" Name="CurrentSpeedSp" Type="REAL" Comment="Current speed setpoint" />
+      <VarDeclaration ID="51D483D786BBCC80" Name="CurrentSpeedSpMin" Type="REAL" Comment="Current speed minimum range" />
+      <VarDeclaration ID="4209B267B5CDF46" Name="CurrentSpeedSpMax" Type="REAL" Comment="Current speed maximum range" />
+      <VarDeclaration ID="53DD13BB8E7CA9FB" Name="CurrentSpeedOp" Type="REAL" Comment="Current speed output" />
+      <VarDeclaration ID="9CB24E1B5B149DBC" Name="CurrentOwner" Type="WORD" Comment="Current owner status" />
+      <VarDeclaration ID="A2BE276F0EB32372" Name="CurrentSpeedOwner" Type="WORD" Comment="Current speed owner status" />
+      <VarDeclaration ID="9CD6749867E91606" Name="NeedReset" Type="BOOL" Comment="1 = Device need reset" />
+      <VarDeclaration ID="22A0744EA4DC0124" Name="IlckCond" Type="BOOL" Comment="1 = Interlock Active" />
+      <VarDeclaration ID="7F794E74835A9A2" Name="FbFail" Type="VTQBOOL" Comment="1 = Feedback fail alarm status active" />
+      <VarDeclaration ID="E4BB2C7DF94BE70A" Name="DeviceFail" Type="VTQBOOL" Comment="1 = Device fail alarm status active" />
+      <VarDeclaration ID="D28866DFD0C1393B" Name="Fail" Type="BOOL" Comment="1 = Fail Active" />
+      <VarDeclaration ID="AB1D2B96094C90BD" Name="PermStop" Type="BOOL" Comment="1 = Stop permission available" />
+      <VarDeclaration ID="18DA785EF50AD374" Name="PermFwd" Type="BOOL" Comment="1 = Forward start permission available" />
+      <VarDeclaration ID="49F3F7DCC2A083AE" Name="PermRev" Type="BOOL" Comment="1 = Reverse start permission available" />
+      <VarDeclaration ID="1956BBB3F5CBD486" Name="PassiveRemainTime" Type="REAL" Comment="Remaining time during direction change" />
+      <VarDeclaration ID="621B2EAA60B4DCF6" Name="StdOwnerConnected" Type="BOOL" Comment="1= External owner Connected" />
+      <VarDeclaration ID="C2064A64F1E6B239" Name="ExternalControlled" Type="BOOL" Comment="1 = Device is externally controlled" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="6FC14464C1C740FE" Name="QO" Type="BOOL" Comment="Event Output Qualifier" />
+      <VarDeclaration ID="4F225555750B7DE3" Name="STATUS" Type="STRING" Comment="Service Status" />
+      <VarDeclaration ID="922C4AB423622B98" Name="Owner" Type="WORD" Comment="Requested Owner (16#10 = Operator, 16#8 = Program remote)" />
+      <VarDeclaration ID="4DE40AA7535A5A0C" Name="EnSpeedOwner" Type="BOOL" Comment="1 = Enable speed owner" />
+      <VarDeclaration ID="7DA82474095F82B2" Name="SpeedOwner" Type="BOOL" Comment="Speed owner is: 1= Operator, 0 = Program" />
+      <VarDeclaration ID="861B8773AF2757FC" Name="MonTime" Type="DINT" Comment="Feedback monitoring time" />
+      <VarDeclaration ID="5568E3E91B9AAED8" Name="TripTime" Type="DINT" Comment="Feedback trip time" />
+      <VarDeclaration ID="E0899D0C804160D2" Name="PassiveTime" Type="DINT" Comment="Direction switch time" />
+      <VarDeclaration ID="3DA6D0F9276D43A4" Name="ConfResetReq" Type="BOOL" Comment="1= Need reset on confirmation mismatch" />
+      <VarDeclaration ID="22AB1FF8E4CF2F97" Name="FailResetReq" Type="BOOL" Comment="1 = Need reset on device detected failure" />
+      <VarDeclaration ID="4D34C1A4533BA5DF" Name="Reset" Type="BOOL" Comment="1 = Reset request from supervision" />
+      <VarDeclaration ID="869E02415F6A841" Name="Sp" Type="INT" Comment="New direction setpoint from the supervision" />
+      <VarDeclaration ID="5C6A0E86268ED420" Name="SpeedSp" Type="REAL" Comment="New speed setpoint from the supervision" />
+      <VarDeclaration ID="20B18A8DFD1C4D64" Name="SpeedRawMin" Type="REAL" Comment="Minimum range of speed raw value" />
+      <VarDeclaration ID="D294948C15C384E1" Name="SpeedRawMax" Type="REAL" Comment="Maximum range of speed raw value" />
+      <VarDeclaration ID="5B357E1A1315D6FB" Name="SpeedRawIsAbsolute" Type="BOOL" Comment="1 = Absolute value of speed raw value will be considered for operation" />
+      <VarDeclaration ID="5508A90160132C15" Name="SpeedSpMin" Type="REAL" Comment="Minimum range of speed setpoint" />
+      <VarDeclaration ID="2AD891B1627FD8EE" Name="SpeedSpMax" Type="REAL" Comment="Maximum range of speed setpoint" />
+      <VarDeclaration ID="68E0CAABBDF0078" Name="SpeedOutMin" Type="REAL" Comment="Minimum range of speed ouput" />
+      <VarDeclaration ID="322B60ACD17B29E7" Name="SpeedOutMax" Type="REAL" Comment="Maximum range of speed output" />
+      <VarDeclaration ID="CF1EA84FDDBF53A1" Name="Simulation" Type="BOOL" Comment="1 = Enable device in simulation" />
+      <VarDeclaration ID="AD38F01F8F0043E7" Name="FbOverride" Type="BOOL" Comment="1 = Enable device in override mode" />
+      <VarDeclaration ID="C8DEEF765E4F14C0" Name="Maintenance" Type="BOOL" Comment="1 = Enable device in maintenance mode" />
+      <VarDeclaration ID="6EDFC17C06F3153" Name="OutOfService" Type="BOOL" Comment="1 = Out of Service Mode selected" />
+      <VarDeclaration ID="344261B181153C38" Name="SpeedSpRangeSel" Type="BOOL" Comment="SpeedSp range selection; 0 = Selection from HMI, 1 = Selection from service extension adapter/input pins  " />
+      <VarDeclaration ID="152A2BD44E46F288" Name="ScanTime" Type="DINT" Comment="Alarm holding time" />
+      <VarDeclaration ID="3CCC10520A21214A" Name="AlmAckType" Type="USINT" Comment="0=Not ackable; 1=Ack deletes; 2=Came has to be acked; 3=Came and gone have to be acked; 4=Pair has to be acked" />
+      <VarDeclaration ID="89CD17990DC40B0E" Name="EnTrackSp" Type="BOOL" Comment="1= Enable the tracking of Interlock setpoint" />
+      <VarDeclaration ID="B2B61A4BABE50F70" Name="EnResetSp" Type="BOOL" Comment="1= Enable Reset Setpoint" />
+      <VarDeclaration ID="A07A7C784B98F7E9" Name="DisReverse" Type="BOOL" Comment="Device is: 1 = Unidirectional, 0 = Bidirectional" />
+    </OutputVars>
+  </InterfaceList>
+  <Service RightInterface="" LeftInterface="">
+    <ServiceSequence Name="" />
+  </Service>
+</FBType>

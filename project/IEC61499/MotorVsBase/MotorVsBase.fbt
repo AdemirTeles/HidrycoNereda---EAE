@@ -1,0 +1,1400 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="b258bae6-2619-4afc-bfbf-517bd0cce91a" Comment="Composite Function Block Type" Name="MotorVsBase" Format="2.0" Namespace="Main">
+  <Attribute Name="HMI.Alias" Value="" />
+  <Attribute Name="Configuration.FB.IDCounter" Value="204" />
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="1.0.1" Author="ApplicationLibDevTeam" Date="2/5/2024" Remarks="First Version" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="REQ_SP" Comment="Request to update setpoint">
+        <With Var="Sp" />
+      </Event>
+      <Event Name="REQ_SPEED_SP">
+        <With Var="SpeedSp" />
+        <With Var="SpeedSpMin" />
+        <With Var="SpeedSpMax" />
+      </Event>
+      <Event Name="REQ_FB" Comment="Request to update feedbacks">
+        <With Var="FbStop" />
+        <With Var="FbFwd" />
+        <With Var="FbRev" />
+      </Event>
+      <Event Name="REQ_FB_SPEED">
+        <With Var="FbSpeed" />
+      </Event>
+      <Event Name="REQ_PERM" Comment="Request to update permissive conditions">
+        <With Var="PermStop" />
+        <With Var="PermFwd" />
+        <With Var="PermRev" />
+      </Event>
+      <Event Name="REQ_ILCK" Comment="Request to update interlock conditions">
+        <With Var="IlckCond" />
+        <With Var="IlckPos" />
+        <With Var="IlckType" />
+      </Event>
+      <Event Name="REQ_ILCK_SPEED">
+        <With Var="IlckSpeed" />
+      </Event>
+      <Event Name="REQ_FAIL" Comment="Request to update out of service and fail status and parameters">
+        <With Var="Fail" />
+      </Event>
+      <Event Name="REQ_DIS_FB_ALM" Comment="Request to disable feedback alarm" />
+      <Event Name="REQ_EXT_CTL" Comment="Request External control signal">
+        <With Var="ExternalControlled" />
+      </Event>
+      <Event Name="REQ_SUPPRESS_ALM" Comment="Request to update the alarm suppress status">
+        <With Var="SuppressAlarm" />
+      </Event>
+      <Event Name="REQ_RESET" Comment="Request to reset the device">
+        <With Var="Reset" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="CNF_OUT" Comment="Execution of output confirmation">
+        <With Var="Out" />
+        <With Var="OutFwd" />
+        <With Var="OutStop" />
+        <With Var="OutRev" />
+      </Event>
+      <Event Name="CNF_SPEED_OUT" Comment="Execution of apeed output confirmation">
+        <With Var="OutSpeed" />
+        <With Var="OutSpeedMin" />
+        <With Var="OutSpeedMax" />
+      </Event>
+      <Event Name="CNF_SP" Comment="Execution of confirmation current setpoint">
+        <With Var="CurrentSp" />
+      </Event>
+      <Event Name="CNF_SPEED_SP" Comment="Execution of confirmation current speed setpoint">
+        <With Var="CurrentSpeedSp" />
+      </Event>
+      <Event Name="CNF_FB_STS" Comment="Execution of confirmed state">
+        <With Var="FbFwdRunning" />
+        <With Var="FbStopped" />
+        <With Var="FbStatus" />
+        <With Var="FbRevRunning" />
+      </Event>
+      <Event Name="CNF_FB_SPEED_STS" Comment="Execution of confirmed speed state">
+        <With Var="FbSpeedStatus" />
+        <With Var="FbSpeedMin" />
+        <With Var="FbSpeedMax" />
+      </Event>
+      <Event Name="CNF_READY" Comment="Execution of ready status">
+        <With Var="Ready" />
+      </Event>
+      <Event Name="CNF_FB_ALM" Comment="Execution of confirmation  Fb alarm">
+        <With Var="FbAlarm" />
+      </Event>
+      <Event Name="CNF_ALM" Comment="Execution of confirmation  alarm conditions">
+        <With Var="AlarmStatus" />
+      </Event>
+      <Event Name="CNF_FAIL" Comment="Execution of confirmation  failure">
+        <With Var="FailStatus" />
+      </Event>
+      <Event Name="CNF_NEED_RESET" Comment="Request for reset">
+        <With Var="NeedReset" />
+      </Event>
+      <Event Name="CNF_MODE" Comment="Excecution of new operational modes">
+        <With Var="Simulation" />
+        <With Var="FbOverride" />
+        <With Var="Maintenance" />
+        <With Var="OutOfService" />
+      </Event>
+      <Event Name="CNF_OWNER" Comment="Execution confirmation of owner">
+        <With Var="CurrentOwner" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="Sp" Type="INT" Comment="Setpoint of device (0 = Stop, 1 = Run Forward, 2 = Run Reverse)" />
+      <VarDeclaration Name="SpeedSp" Type="REAL" Comment="Speed setpoint of device" />
+      <VarDeclaration Name="SpeedSpMin" Type="REAL" Comment="Speed setpoint minimum range" />
+      <VarDeclaration Name="SpeedSpMax" Type="REAL" Comment="Speed setpoint maximum range" />
+      <VarDeclaration Name="FbStop" Type="BOOL" Comment="1 = Device stop feedback incoming" />
+      <VarDeclaration Name="FbFwd" Type="BOOL" Comment="1 = Device forward running feedback incoming" />
+      <VarDeclaration Name="FbRev" Type="BOOL" Comment="1 = Device reverse running feedback incoming" />
+      <VarDeclaration Name="FbSpeed" Type="REAL" Comment="Device speed feedback incoming (Minimum Value  = 0.0, Maximum Value = 100.0)" />
+      <VarDeclaration Name="PermStop" Type="BOOL" InitialValue="TRUE" Comment="1 = Device stop permission active" />
+      <VarDeclaration Name="PermFwd" Type="BOOL" InitialValue="TRUE" Comment="1 = Device forward run permission active" />
+      <VarDeclaration Name="PermRev" Type="BOOL" InitialValue="TRUE" Comment="1 = Device reverse run permission active" />
+      <VarDeclaration Name="IlckCond" Type="BOOL" Comment="1 = Interlock condition active" />
+      <VarDeclaration Name="IlckPos" Type="INT" Comment="Interlock setpoint state (0 = Stop, 1 = Run Forward, 1 = Run Reverse, 3 = Interlock inactive)" />
+      <VarDeclaration Name="IlckType" Type="CondType" Namespace="SE.App2CommonProcess" Comment="Type of condition interlock, (0 = Normal, 1 = Process interlock/Sequence interlock)" />
+      <VarDeclaration Name="IlckSpeed" Type="REAL" Comment="Interlock speed setpoint" />
+      <VarDeclaration Name="Fail" Type="BOOL" Comment="1 = Failure is active" />
+      <VarDeclaration Name="SuppressAlarm" Type="BOOL" Comment="1 = Suppress alarm in HMI" />
+      <VarDeclaration Name="ExternalControlled" Type="BOOL" Comment="1 = External control is active" />
+      <VarDeclaration Name="Reset" Type="BOOL" Comment="1 = Reset device failure" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="Out" Type="INT" Comment="Calculated output of the device ( 0 = Stop command, 1 = Forward Run command,  1 = Reverse Run command)" />
+      <VarDeclaration Name="OutStop" Type="BOOL" Comment="1 = Stop output of the device" />
+      <VarDeclaration Name="OutFwd" Type="BOOL" Comment="1 = Forward output of the device" />
+      <VarDeclaration Name="OutRev" Type="BOOL" Comment="1 = Reverse output of the device" />
+      <VarDeclaration Name="OutSpeed" Type="REAL" Comment="Calculated speed output of the device" />
+      <VarDeclaration Name="OutSpeedMin" Type="REAL" Comment="Current output speed minimum value" />
+      <VarDeclaration Name="OutSpeedMax" Type="REAL" Comment="Current output speed maximum value" />
+      <VarDeclaration Name="CurrentSp" Type="INT" Comment="Current output value considering permissive conditions" />
+      <VarDeclaration Name="CurrentSpeedSp" Type="REAL" Comment="Current output value" />
+      <VarDeclaration Name="FbStatus" Type="INT" Comment="Confirmed state of the device (0 = Stopped, 1 =Running, 253 = Unknown)" />
+      <VarDeclaration Name="FbStopped" Type="BOOL" Comment="1 = Stopped" />
+      <VarDeclaration Name="FbFwdRunning" Type="BOOL" Comment="1 = Running Forward " />
+      <VarDeclaration Name="FbRevRunning" Type="BOOL" Comment="1 = Running Reverse " />
+      <VarDeclaration Name="FbSpeedStatus" Type="REAL" Comment="Speed feedback" />
+      <VarDeclaration Name="FbSpeedMin" Type="REAL" Comment="Minimum speed setpoint range" />
+      <VarDeclaration Name="FbSpeedMax" Type="REAL" Comment="Maximum speed setpoint range" />
+      <VarDeclaration Name="Ready" Type="BOOL" Comment="1 = Device is ready to run" />
+      <VarDeclaration Name="AlarmStatus" Type="WORD" Comment="Bit 1 = Device failure status, Bit 2 = Feedback failure status" />
+      <VarDeclaration Name="FbAlarm" Type="BOOL" Comment="Current output speed minimum value" />
+      <VarDeclaration Name="FailStatus" Type="BOOL" Comment="1 = Fail active" />
+      <VarDeclaration Name="NeedReset" Type="BOOL" Comment="1 = Device need reset to resume the operation" />
+      <VarDeclaration Name="Simulation" Type="BOOL" Comment="1 = Simulation mode is active" />
+      <VarDeclaration Name="FbOverride" Type="BOOL" Comment="1 = Feedback overide (Sp = FbStatus)" />
+      <VarDeclaration Name="Maintenance" Type="BOOL" Comment="1 = Maintenance mode is active" />
+      <VarDeclaration Name="OutOfService" Type="BOOL" Comment="1 = Out of service mode is active" />
+      <VarDeclaration Name="CurrentOwner" Type="WORD" Comment="Current owner data from externlal source and basic owner 16#8 = Program owner, 16#10 = Operator owner, 16#4 = program Local and 16#40 Operator Local" />
+    </OutputVars>
+    <Sockets>
+      <AdapterDeclaration Name="IServiceExtension" Type="IServiceExtension" Namespace="SE.App2CommonProcess" Comment="Services extension adapter(Seq control, Local panel, Maintenance and Owner)" x="9900" y="3400">
+        <Parameter Name="$ServiceState" Value="TRUE" />
+      </AdapterDeclaration>
+    </Sockets>
+  </InterfaceList>
+  <FBNetwork>
+    <FB ID="23" Name="plcStart" Type="plcStart" x="1260" y="320" Namespace="SE.App2Base">
+      <Parameter Name="$Delay" Value="T#0ms" />
+      <Parameter Name="$Prio" Value="16" />
+    </FB>
+    <FB ID="47" Name="IThis" Type="MotorVsBase_HMI" x="5740" y="320" Namespace="Main">
+      <Parameter Name="$A08029BD5BCA0193" Value="TRUE" />
+    </FB>
+    <FB ID="107" UID="106" Name="spSelection" Type="devInSel" x="6540" y="6260" Namespace="SE.App2Base">
+      <Attribute Name="Configuration.Component.HideUnusedPorts" Value="" />
+      <Parameter Name="$EnBumpless2" Value="TRUE" />
+      <Parameter Name="$EnBumpless3" Value="FALSE" />
+    </FB>
+    <FB ID="184" UID="170" Name="control" Type="motorVsLogic" x="5740" y="3240" Namespace="SE.App2CommonProcess">
+      <Attribute Name="Configuration.Component.HideUnusedPorts" Value="" />
+    </FB>
+    <FB ID="175" UID="172" Name="basicOwner" Type="ownerControl" x="3520" y="6360" Namespace="SE.App2Base" />
+    <FB ID="180" UID="173" Name="deviceFailure" Type="stateAlarmBasic" x="10740" y="700" Namespace="SE.App2Base">
+      <Attribute Name="HMI.AlarmText" Value="$key:SE.App2CommonProcess.AlmLableMotorFail" Context="alarmBit.IND_1" />
+      <Parameter Name="$AlarmState" Value="TRUE" />
+    </FB>
+    <FB ID="181" UID="174" Name="feedbackFailure" Type="stateAlarmBasic" x="10740" y="1740" Namespace="SE.App2Base">
+      <Attribute Name="HMI.AlarmText" Value="$key:SE.App2CommonProcess.AlarmLabelFbFail" Context="alarmBit.IND_1" />
+      <Parameter Name="$AlarmState" Value="TRUE" />
+    </FB>
+    <FB ID="199" UID="177" Name="programSpSelection" Type="SELECT_24363B89CFDE21263" x="5540" y="6980" Namespace="Main">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNT:=2;SELECT:BOOL;IN${CNT}:INT" />
+    </FB>
+    <FB ID="185" Name="speedOwner" Type="externalOwnerSel" x="3560" y="7900" Namespace="SE.App2CommonProcess">
+      <Attribute Name="Configuration.Component.HideUnusedPorts" Value="" />
+      <Parameter Name="$0E0839046EC8AB65" Value="TRUE" />
+    </FB>
+    <FB ID="187" Name="speedSpSelection" Type="devRealSel" x="6500" y="7900" Namespace="SE.App2Base">
+      <Attribute Name="Configuration.Component.HideUnusedPorts" Value="" />
+      <Parameter Name="$EnBumpless2" Value="TRUE" />
+      <Parameter Name="$EnBumpless3" Value="FALSE" />
+    </FB>
+    <FB ID="198" UID="189" Name="programSpeedSpSelection" Type="SELECT_218F0E76F8A148ECD" x="5560" y="8260" Namespace="Main">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNT:=2;SELECT:BOOL;IN${CNT}:REAL" />
+    </FB>
+    <FB ID="197" Name="speedFbScale" Type="limitScaleValue" x="1420" y="3380" Namespace="SE.App2Base">
+      <Attribute Name="Configuration.Component.HideUnusedPorts" Value="" />
+      <Parameter Name="$EnScale" Value="TRUE" />
+      <Parameter Name="$UseCutoff" Value="TRUE" />
+    </FB>
+    <FB ID="200" Name="speedSpRangeSel" Type="externalRangeSel" x="7440" y="6920" Namespace="SE.App2Base" />
+    <FB ID="204" UID="202" Name="resetConditions" Type="DS_SELECTX_1579ED5B8ACDFC94C" x="11700" y="4180" Namespace="Main">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNTX:=3;CNTY:=1;DI${CNTX,_,CNTY}:BOOL" />
+    </FB>
+    <Input Name="REQ_SUPPRESS_ALM" x="9740" y="865.9998" Type="Event" />
+    <Input Name="SuppressAlarm" x="9740" y="1186" Type="Data" />
+    <Input Name="Sp" x="4880" y="7252" Type="Data" />
+    <Input Name="IlckCond" x="4420" y="4652" Type="Data" />
+    <Input Name="IlckPos" x="4420" y="4688" Type="Data" />
+    <Input Name="IlckType" x="4420" y="4832" Type="Data" />
+    <Input Name="FbStop" x="4420" y="4472" Type="Data" />
+    <Input Name="FbFwd" x="4420" y="4532" Type="Data" />
+    <Input Name="PermStop" x="5480" y="6626" Type="Data" />
+    <Input Name="PermFwd" x="5480" y="6686" Type="Data" />
+    <Input Name="Fail" x="4420" y="4892" Type="Data" />
+    <Input Name="REQ_SP" x="4880" y="6992" Type="Event" />
+    <Input Name="REQ_FB" x="4420" y="3372" Type="Event" />
+    <Input Name="REQ_ILCK" x="4420" y="3432" Type="Event" />
+    <Input Name="REQ_PERM" x="5480" y="6246" Type="Event" />
+    <Input Name="REQ_FAIL" x="4420" y="3552" Type="Event" />
+    <Input Name="REQ_DIS_FB_ALM" x="4420" y="3612" Type="Event" />
+    <Input Name="REQ_EXT_CTL" x="4420" y="3706" Type="Event" />
+    <Input Name="ExternalControlled" x="4420" y="5466" Type="Data" />
+    <Input Name="SpeedSp" x="4880" y="8532" Type="Data" />
+    <Input Name="FbRev" x="4420" y="4592" Type="Data" />
+    <Input Name="REQ_SPEED_SP" x="4880" y="8185.998" Type="Event" />
+    <Input Name="PermRev" x="5480" y="6746" Type="Data" />
+    <Input Name="REQ_FB_SPEED" x="620" y="3392" Type="Event" />
+    <Input Name="FbSpeed" x="620" y="3592" Type="Data" />
+    <Input Name="IlckSpeed" x="5480" y="8805.998" Type="Data" />
+    <Input Name="REQ_ILCK_SPEED" x="5480" y="7806" Type="Event" />
+    <Input Name="SpeedSpMin" x="6560" y="7672" Type="Data" />
+    <Input Name="SpeedSpMax" x="6560" y="7732" Type="Data" />
+    <Input Name="Reset" x="11100" y="4692" Type="Data" />
+    <Input Name="REQ_RESET" x="11100" y="4312" Type="Event" />
+    <Frame Name="FRAME2" X="9460" Y="180" Width="2860" Height="2680">
+      <Parameter Name="BackgroundColor" Value="MistyRose" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 20.25pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="Alarm Managment" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME4" X="3120" Y="3060" Width="6140" Height="2740">
+      <Parameter Name="BackgroundColor" Value="AliceBlue" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 20.25pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="Control" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME8" X="9460" Y="3060" Width="2860" Height="2780">
+      <Parameter Name="BackgroundColor" Value="Lavender" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 20.25pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="Data exchange with sequence" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME10" X="180" Y="180" Width="2760" Height="680">
+      <Parameter Name="BackgroundColor" Value="Cornsilk" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 20.25pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="Initialization" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME11" X="3120" Y="180" Width="6140" Height="2660">
+      <Parameter Name="BackgroundColor" Value="AliceBlue" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 20.25pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="Supervision Interface" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="FRAME5" X="3120" Y="6000" Width="6140" Height="3200">
+      <Parameter Name="BackgroundColor" Value="GradientInactiveCaption" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 20.25pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="Owner &amp; Setpoint Management" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="Speed Input" X="180" Y="3060" Width="2740" Height="1280">
+      <Parameter Name="BackgroundColor" Value="AliceBlue" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 20.25pt, style=Bold" />
+      <Parameter Name="TextAlignment" Value="TopLeft" />
+      <Parameter Name="MoveStyle" Value="AnyContained" />
+      <Parameter Name="Text" Value="Speed Input" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Frame Name="ffff" X="3500" Y="8560" Width="881.6924" Height="482.917" IsComment="true">
+      <Parameter Name="BackgroundColor" Value="LemonChiffon" />
+      <Parameter Name="TextColor" Value="Black" />
+      <Parameter Name="Font" Value="Microsoft Sans Serif, 10pt" />
+      <Parameter Name="TextAlignment" Value="TopCenter" />
+      <Parameter Name="MoveStyle" Value="None" />
+      <Parameter Name="Text" Value="Comment&#xD;&#xA;&#xD;&#xA;If external owner is enabled, &#xD;&#xA;the owner for speed selection &#xD;&#xA;will be decoupled from normal owner.&#xD;&#xA;The external speed owner can be &#xD;&#xA;configured from HMI" />
+      <Parameter Name="NxtLayerIdentifier" Value="" />
+    </Frame>
+    <Output Name="CNF_OWNER" x="4658.615" y="6212" Type="Event" />
+    <Output Name="CurrentOwner" x="4814.031" y="6752" Type="Data" />
+    <Output Name="OutSpeedMin" x="7020" y="2152" Type="Data" />
+    <Output Name="OutSpeedMax" x="7020" y="2212" Type="Data" />
+    <Output Name="OutFwd" x="7020" y="4352" Type="Data" />
+    <Output Name="OutStop" x="7020" y="4292" Type="Data" />
+    <Output Name="OutRev" x="7020" y="4412" Type="Data" />
+    <Output Name="FbSpeedMin" x="8480" y="7312" Type="Data" />
+    <Output Name="FbSpeedMax" x="8480" y="7372" Type="Data" />
+    <Output Name="OutSpeed" x="7020" y="4172" Type="Data" />
+    <Output Name="CNF_SPEED_OUT" x="7020" y="3312" Type="Event" />
+    <Output Name="CNF_FB_SPEED_STS" x="2180" y="3392" Type="Event" />
+    <Output Name="FbSpeedStatus" x="2180" y="3592" Type="Data" />
+    <Output Name="FbRevRunning" x="7020" y="4652" Type="Data" />
+    <Output Name="CurrentSpeedSp" x="7400" y="8292" Type="Data" />
+    <Output Name="CNF_SPEED_SP" x="7400" y="7912" Type="Event" />
+    <Output Name="OutOfService" x="7020" y="2452" Type="Data" />
+    <Output Name="CNF_ALM" x="7020" y="3672" Type="Event" />
+    <Output Name="NeedReset" x="7020" y="5072" Type="Data" />
+    <Output Name="CNF_NEED_RESET" x="7020" y="3732" Type="Event" />
+    <Output Name="Ready" x="7020" y="5192" Type="Data" />
+    <Output Name="CNF_READY" x="7020" y="3852" Type="Event" />
+    <Output Name="CNF_SP" x="7340" y="6272" Type="Event" />
+    <Output Name="CurrentSp" x="7340" y="6652" Type="Data" />
+    <Output Name="Out" x="7020" y="4112" Type="Data" />
+    <Output Name="Simulation" x="7020" y="2272" Type="Data" />
+    <Output Name="FbOverride" x="7020" y="2332" Type="Data" />
+    <Output Name="FbStatus" x="7020" y="4472" Type="Data" />
+    <Output Name="AlarmStatus" x="7020" y="5012" Type="Data" />
+    <Output Name="CNF_OUT" x="7020" y="3252" Type="Event" />
+    <Output Name="Maintenance" x="7020" y="2392" Type="Data" />
+    <Output Name="CNF_MODE" x="7020" y="3792" Type="Event" />
+    <Output Name="FbFwdRunning" x="7020" y="4592" Type="Data" />
+    <Output Name="FbStopped" x="7020" y="4532" Type="Data" />
+    <Output Name="FbAlarm" x="7020" y="4772" Type="Data" />
+    <Output Name="FailStatus" x="7020" y="4952" Type="Data" />
+    <Output Name="CNF_FB_ALM" x="7020" y="3492" Type="Event" />
+    <Output Name="CNF_FAIL" x="7020" y="3612" Type="Event" />
+    <Output Name="CNF_FB_STS" x="7020" y="3372" Type="Event" />
+    <EventConnections>
+      <Connection Source="$107.CNF" Destination="$184.REQ_SP">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$184.CNF_OUT" Destination="$IServiceExtension.CNF_STATUS">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$184.CNF_FB_STS" Destination="$IServiceExtension.CNF_STATUS">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$107.CNF" Destination="$IServiceExtension.CNF_STATUS">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$184.CNF_FB_ALM" Destination="$CNF_FB_ALM">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$184.CNF_READY" Destination="$IServiceExtension.CNF_READY">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$184.CNF_MODE" Destination="$IServiceExtension.CNF_OPMODE">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$REQ_SUPPRESS_ALM" Destination="$IServiceExtension.CNF_SUPPRESS_ALM">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <Points>
+          <Points>
+            <X>2601.91138</X>
+            <Y>223.499954</Y>
+          </Points>
+          <Points>
+            <X>2612.50024</X>
+            <Y>223.499954</Y>
+          </Points>
+          <Points>
+            <X>2612.50024</X>
+            <Y>184.499954</Y>
+          </Points>
+          <Points>
+            <X>2977.50024</X>
+            <Y>184.499954</Y>
+          </Points>
+          <Points>
+            <X>2977.50024</X>
+            <Y>229.499954</Y>
+          </Points>
+          <Points>
+            <X>4482.5</X>
+            <Y>229.499954</Y>
+          </Points>
+          <Points>
+            <X>4482.5</X>
+            <Y>-73.0000458</Y>
+          </Points>
+          <Points>
+            <X>4600</X>
+            <Y>-73.0000458</Y>
+          </Points>
+        </Points>
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$REQ_SUPPRESS_ALM" Destination="$180.REQ_SUPRESS" dx1="122.3545" />
+      <Connection Source="$184.CNF_FB_STS" Destination="$CNF_FB_STS">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$184.CNF_OUT" Destination="$CNF_OUT" dx1="222.6978">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$184.CNF_MODE" Destination="$CNF_MODE">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$REQ_FB" Destination="$184.REQ_FB">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$REQ_FAIL" Destination="$184.REQ_FAIL" dx1="462.9478">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$REQ_DIS_FB_ALM" Destination="$184.REQ_PARA" dx1="377.771">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$180.INITO" Destination="$181.INIT">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$REQ_PERM" Destination="$107.REQ_SEL" dx1="311.3647">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$IServiceExtension.REQ_OWNER" Destination="$175.REQ_STDOWNER">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$175.CNF_OWNER" Destination="$107.REQ_SEL" dx1="1868.271">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$181.INITO" Destination="$23.ACK_FIRST">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$184.CNF_NEED_RESET" Destination="$CNF_NEED_RESET" dx1="222.6978">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$184.CNF_READY" Destination="$CNF_READY" dx1="222.6978">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$107.CNF" Destination="$CNF_SP" dx1="156.3228">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$REQ_EXT_CTL" Destination="$184.REQ_EXT_CTL" dx1="414.4375">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$184.CNF_FAIL" Destination="$180.REQ">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$184.CNF_FAIL" Destination="$CNF_FAIL" dx1="222.6978">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$23.FIRST_INIT" Destination="$IServiceExtension.CNF_SERVICE">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$184.CNF_FB_ALM" Destination="$181.REQ">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$184.CNF_ALM" Destination="$CNF_ALM">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$184.CNF_ILCK" Destination="$107.REQ_SEL">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$184.CNF_FAIL" Destination="$107.RESET_SP">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$REQ_SUPPRESS_ALM" Destination="$181.REQ_SUPRESS" dx1="122.3555">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$REQ_PERM" Destination="$IServiceExtension.CNF_READY" dx1="120">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$175.CNF_OWNER" Destination="$185.REQ" dx1="248.2686" dx2="160" dy="860">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$184.CNF_FAIL" Destination="$187.RESET_SP">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$REQ_SPEED_SP" Destination="$198.REQ" dx1="20.896" />
+      <Connection Source="$IServiceExtension.REQ_SP" Destination="$198.REQ">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$184.CNF_ILCK" Destination="$187.REQ_SEL">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$187.CNF" Destination="$184.REQ_SPEED_SP">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$REQ_ILCK_SPEED" Destination="$187.REQ_SEL" dx1="152.9585">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$185.CNF" Destination="$187.REQ_SEL">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$197.CNF" Destination="$CNF_FB_SPEED_STS" dx1="179.1145">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$IServiceExtension.REQ_OWNER" Destination="$185.REQ">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$REQ_FB_SPEED" Destination="$197.REQ" dx1="96.64587">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$197.CNF" Destination="$IServiceExtension.CNF_PV">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$184.CNF_SPEED_OUT" Destination="$CNF_SPEED_OUT" dx1="222.6978">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$187.CNF" Destination="$CNF_SPEED_SP" dx1="186.1563">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$184.CNF_SPEED_OUT" Destination="$IServiceExtension.CNF_SP_OP">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$187.CNF" Destination="$IServiceExtension.CNF_SP_OP">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$198.CNF" Destination="$187.REQ_SP3" dx1="263.9585">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$REQ_SP" Destination="$199.REQ" dx1="49.0835" />
+      <Connection Source="$IServiceExtension.REQ_CMD" Destination="$199.REQ">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$199.CNF" Destination="$107.REQ_SP3">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$184.CNF_ILCK" Destination="$IServiceExtension.CNF_READY">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$184.CNF_ALM" Destination="$IServiceExtension.CNF_READY">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$184.CNF_NEED_RESET" Destination="$IServiceExtension.CNF_READY">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$REQ_ILCK_SPEED" Destination="$184.REQ_ILCK_SPEED">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <Points>
+          <Points>
+            <X>1516.76038</X>
+            <Y>1958.5</Y>
+          </Points>
+          <Points>
+            <X>1543.38538</X>
+            <Y>1958.5</Y>
+          </Points>
+          <Points>
+            <X>1543.38538</X>
+            <Y>894.5</Y>
+          </Points>
+          <Points>
+            <X>1060.88538</X>
+            <Y>894.5</Y>
+          </Points>
+        </Points>
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$175.CNF_OWNER" Destination="$200.REQ_SELECT">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$200.CNF" Destination="$184.REQ_SPEED_SP">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$REQ_SPEED_SP" Destination="$200.REQ_3" dx1="1095.448">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$200.CNF" Destination="$197.REQ">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$IServiceExtension.REQ_SP" Destination="$200.REQ_2">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$23.FIRST_INIT" Destination="$47.34A017503AC1070A" dx1="120" />
+      <Connection Source="$47.377462E9CE5193B5" Destination="$47.F2953B6BB9388F21">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$184.CNF_FB_STS" Destination="$47.EC791CA6E67D66B3">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$184.CNF_OUT" Destination="$47.EC791CA6E67D66B3">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$184.CNF_NEED_RESET" Destination="$47.EC791CA6E67D66B3">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$107.CNF" Destination="$47.EC791CA6E67D66B3">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$184.CNF_TRANS_FB" Destination="$47.EC791CA6E67D66B3">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$REQ_SUPPRESS_ALM" Destination="$47.EC791CA6E67D66B3" dx1="122.3555" dx2="130" dy="-46">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$180.CNF_ALM" Destination="$47.EC791CA6E67D66B3">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$181.CNF_ALM" Destination="$47.EC791CA6E67D66B3">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$184.CNF_FAIL" Destination="$47.EC791CA6E67D66B3">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$184.CNF_ILCK" Destination="$47.EC791CA6E67D66B3">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$REQ_PERM" Destination="$47.EC791CA6E67D66B3" dx1="122.729" dx2="150" dy="-48">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$175.CNF_OWNER" Destination="$47.EC791CA6E67D66B3">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$197.CNF" Destination="$47.EC791CA6E67D66B3">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$184.CNF_SPEED_OUT" Destination="$47.EC791CA6E67D66B3">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$185.CNF" Destination="$47.EC791CA6E67D66B3">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$187.CNF" Destination="$47.EC791CA6E67D66B3">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$200.CNF" Destination="$47.EC791CA6E67D66B3">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$184.PASSIVE_T" Destination="$47.FD2B6A321910142C">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$47.377462E9CE5193B5" Destination="$180.INIT">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$47.377462E9CE5193B5" Destination="$175.REQ_BASICOWNER">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$47.B42FC414051FE233" Destination="$175.REQ_BASICOWNER">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$47.1E115F107370F478" Destination="$185.REQ">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$47.1E115F107370F478" Destination="$IServiceExtension.CNF_OWNER">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$47.95BEA68906019444" Destination="$184.REQ_PARA">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$47.95BEA68906019444" Destination="$181.REQ_PARA">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$47.95BEA68906019444" Destination="$180.REQ_PARA">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$47.95BEA68906019444" Destination="$200.REQ_SELECT">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$47.A8EC0BB0D1766C60" Destination="$200.REQ_1">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$47.4BC263E0581D4DDB" Destination="$184.REQ_SPEED_SP">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$47.C6CA4032A5F6989A" Destination="$107.REQ_SP2">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$47.369F8CFFBEE23AB4" Destination="$187.REQ_SP2">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$47.4711DA9A2DFC024" Destination="$175.REQ_FORCE">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$47.4711DA9A2DFC024" Destination="$184.REQ_PARA">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$47.4711DA9A2DFC024" Destination="$107.REQ_SEL">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$47.4711DA9A2DFC024" Destination="$187.REQ_SEL">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$REQ_ILCK" Destination="$184.REQ_ILCK" dx1="460.5728">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$REQ_EXT_CTL" Destination="$47.EC791CA6E67D66B3" dx1="138.875">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$175.CNF_OWNER" Destination="$CNF_OWNER" dx1="130" />
+      <Connection Source="$REQ_RESET" Destination="$204.REQ3" />
+      <Connection Source="$IServiceExtension.REQ_RESET" Destination="$204.REQ2" dx1="200" />
+      <Connection Source="$47.1A2B085F4B246BF1" Destination="$204.REQ1">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$204.IND" Destination="$184.REQ_RESET">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$47.95BEA68906019444" Destination="$IServiceExtension.CNF_CFG">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$47.A8EC0BB0D1766C60" Destination="$197.REQ">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="$107.PermVal" Destination="$184.Sp">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$184.FbStatus" Destination="$IServiceExtension.Status">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$107.PermVal" Destination="$IServiceExtension.CurrentSp">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$184.Out" Destination="$IServiceExtension.CurrentOp">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$184.NeedReset" Destination="$IServiceExtension.NeedReset">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$184.FbAlarm" Destination="$FbAlarm" dx1="222.6978">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$184.Mode" Destination="$IServiceExtension.OpMode">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$184.Ready" Destination="$IServiceExtension.Ready">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$SuppressAlarm" Destination="$IServiceExtension.SuppressAlarm">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <Points>
+          <Points>
+            <X>2595.41675</X>
+            <Y>303.5</Y>
+          </Points>
+          <Points>
+            <X>2607.5</X>
+            <Y>303.5</Y>
+          </Points>
+          <Points>
+            <X>2607.5</X>
+            <Y>244.5</Y>
+          </Points>
+          <Points>
+            <X>2967.5</X>
+            <Y>244.5</Y>
+          </Points>
+          <Points>
+            <X>2967.5</X>
+            <Y>19.5</Y>
+          </Points>
+          <Points>
+            <X>3812.5</X>
+            <Y>19.5</Y>
+          </Points>
+          <Points>
+            <X>3812.5</X>
+            <Y>-53</Y>
+          </Points>
+          <Points>
+            <X>4590</X>
+            <Y>-53</Y>
+          </Points>
+        </Points>
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$SuppressAlarm" Destination="$180.Suppress" dx1="128.333" />
+      <Connection Source="$SuppressAlarm" Destination="$181.Suppress" dx1="128.333" />
+      <Connection Source="$184.FbAlarm" Destination="$181.Input">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$184.FailStatus" Destination="$FailStatus">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$IlckPos" Destination="$184.IlckPos" dx1="451.1563">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$IlckType" Destination="$184.IlckType">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$FbStop" Destination="$184.FbStop" dx1="406.3438">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$FbFwd" Destination="$184.FbFwd">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$Fail" Destination="$184.Fail">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$PermStop" Destination="$107.PermPassive" dx1="225.271">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$PermFwd" Destination="$107.PermActive1" dx1="218.854">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$184.FbStopped" Destination="$FbStopped">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$184.FbFwdRunning" Destination="$FbFwdRunning">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$184.Out" Destination="$Out">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$184.FbStatus" Destination="$FbStatus" dx1="222.6978">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$175.ProgramOwner" Destination="$107.Sel3">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$175.OperatorOwner" Destination="$107.Sel2">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$IlckPos" Destination="$107.IlckSp" dx1="193.646">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$184.Interlocked" Destination="$107.Ilck">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$IServiceExtension.StdOwner" Destination="$175.StdOwner">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$175.StdOwnerConnected" Destination="$199.SELECT">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$184.NeedReset" Destination="$NeedReset" dx1="222.6978">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$184.Ready" Destination="$Ready">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$ExternalControlled" Destination="$184.ExternalControlled" dx1="319.25">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$184.FailStatus" Destination="$180.Input">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$184.AlarmStatus" Destination="$AlarmStatus">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$107.PermVal" Destination="$CurrentSp" dx1="156.3228">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$184.FailStatus" Destination="$107.Fail">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$PermStop" Destination="$IServiceExtension.PermPassive" dx1="750.5415">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$PermFwd" Destination="$IServiceExtension.PermActive1" dx1="760.0415">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$184.AlarmStatus" Destination="$IServiceExtension.Alarm">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$184.Interlocked" Destination="$IServiceExtension.Interlocked">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$PermRev" Destination="$107.PermActive2" dx1="211.2188">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$175.Owner" Destination="$185.StdOwner" dx1="188.2686" dx2="220" dy="420">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$185.OperOwner" Destination="$187.Sel2">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$185.ProgOwner" Destination="$187.Sel3">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$184.Interlocked" Destination="$187.Ilck">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$184.FailStatus" Destination="$187.Fail">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$175.StdOwnerConnected" Destination="$198.SELECT">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$184.FbRevRunning" Destination="$FbRevRunning">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$FbRev" Destination="$184.FbRev">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$187.CurrentVal" Destination="$184.SpeedSp">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$IlckSpeed" Destination="$184.IlckSpeed">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <Points>
+          <Points>
+            <X>1502.56775</X>
+            <Y>2208.49951</Y>
+          </Points>
+          <Points>
+            <X>1513.06262</X>
+            <Y>2208.49951</Y>
+          </Points>
+          <Points>
+            <X>1513.06262</X>
+            <Y>1241.99951</Y>
+          </Points>
+          <Points>
+            <X>1055</X>
+            <Y>1241.99951</Y>
+          </Points>
+        </Points>
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$IlckSpeed" Destination="$187.IlckSp" dx1="284.8647">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$187.CurrentVal" Destination="$IServiceExtension.CurrentSpReal">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$197.PvOut" Destination="$FbSpeedStatus" dx1="179.1145">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$184.OutSpeed" Destination="$IServiceExtension.CurrentOpReal1" dx1="975.396">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$197.PvOut" Destination="$IServiceExtension.Pv">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$IServiceExtension.ExtOwner" Destination="$185.ExtOwner">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$FbSpeed" Destination="$197.PvIn" dx1="152.0938">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$184.OutSpeedScaled" Destination="$OutSpeed" dx1="222.6978">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$187.CurrentVal" Destination="$CurrentSpeedSp">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$PermRev" Destination="$IServiceExtension.PermActive2" dx1="462.4375">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$SpeedSp" Destination="$198.IN1" />
+      <Connection Source="$IServiceExtension.SpReal1" Destination="$198.IN2">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$198.OUT" Destination="$187.Val3" dx1="281.979">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$Sp" Destination="$199.IN1" />
+      <Connection Source="$IServiceExtension.Sp" Destination="$199.IN2">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$199.OUT" Destination="$107.Val3" dx1="276.979">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$184.OutFwd" Destination="$OutFwd">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$184.OutStop" Destination="$OutStop">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$184.OutRev" Destination="$OutRev">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$200.RangeMin" Destination="$184.SpeedSpMin">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$200.RangeMin" Destination="$197.CutoffValue">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$200.RangeMin" Destination="$197.OutMin">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$200.RangeMin" Destination="$FbSpeedMin" />
+      <Connection Source="$200.RangeMax" Destination="$184.SpeedSpMax">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$200.RangeMax" Destination="$197.OutMax">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$200.RangeMax" Destination="$FbSpeedMax" dx1="127.584" />
+      <Connection Source="$175.StdOwnerConnected" Destination="$200.StdOwnerConnected">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$IServiceExtension.RangeMin" Destination="$200.RangeMin2">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$IServiceExtension.RangeMax" Destination="$200.RangeMax2">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$SpeedSpMin" Destination="$200.RangeMin3" dx1="42.7915" />
+      <Connection Source="$SpeedSpMax" Destination="$200.RangeMax3" dx1="40" />
+      <Connection Source="$184.FbStatus" Destination="$47.E35507CB164A688E">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$184.TransFbStatus" Destination="$47.937CA40F4D16204B">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$197.PvOut" Destination="$47.5FDD97900C8D5AF7">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$107.PermVal" Destination="$47.C6876D790F3A950E">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$184.Out" Destination="$47.D2C35BC47DF71FCC">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$187.CurrentVal" Destination="$47.977C6234F7727BFD">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$200.RangeMin" Destination="$47.51D483D786BBCC80">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$200.RangeMax" Destination="$47.4209B267B5CDF46">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$184.OutSpeedScaled" Destination="$47.53DD13BB8E7CA9FB">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$175.Owner" Destination="$47.9CB24E1B5B149DBC">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$185.Owner" Destination="$47.A2BE276F0EB32372">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$184.NeedReset" Destination="$47.9CD6749867E91606">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$184.Interlocked" Destination="$47.22A0744EA4DC0124">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$181.AlarmStatus" Destination="$47.7F794E74835A9A2">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$180.AlarmStatus" Destination="$47.E4BB2C7DF94BE70A">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$PermStop" Destination="$47.AB1D2B96094C90BD">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <Points>
+          <Points>
+            <X>1504.86462</X>
+            <Y>1663.5</Y>
+          </Points>
+          <Points>
+            <X>1514.86462</X>
+            <Y>1663.5</Y>
+          </Points>
+          <Points>
+            <X>1514.86462</X>
+            <Y>1651</Y>
+          </Points>
+          <Points>
+            <X>1492.5</X>
+            <Y>1651</Y>
+          </Points>
+          <Points>
+            <X>1492.5</X>
+            <Y>936</Y>
+          </Points>
+          <Points>
+            <X>1207.5</X>
+            <Y>936</Y>
+          </Points>
+          <Points>
+            <X>1207.5</X>
+            <Y>728.5</Y>
+          </Points>
+          <Points>
+            <X>1215</X>
+            <Y>728.5</Y>
+          </Points>
+        </Points>
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$PermFwd" Destination="$47.18DA785EF50AD374">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <Points>
+          <Points>
+            <X>1503.07288</X>
+            <Y>1678.49988</Y>
+          </Points>
+          <Points>
+            <X>1513.08325</X>
+            <Y>1678.49988</Y>
+          </Points>
+          <Points>
+            <X>1513.08325</X>
+            <Y>1650.99988</Y>
+          </Points>
+          <Points>
+            <X>1493.08325</X>
+            <Y>1650.99988</Y>
+          </Points>
+          <Points>
+            <X>1493.08325</X>
+            <Y>905.9999</Y>
+          </Points>
+          <Points>
+            <X>1203.08325</X>
+            <Y>905.9999</Y>
+          </Points>
+          <Points>
+            <X>1203.08325</X>
+            <Y>683.4999</Y>
+          </Points>
+          <Points>
+            <X>1215.58325</X>
+            <Y>683.4999</Y>
+          </Points>
+        </Points>
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$PermRev" Destination="$47.49F3F7DCC2A083AE" dx1="122.4375" dx2="110" dy="-168">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$184.PassiveRemainTime" Destination="$47.1956BBB3F5CBD486">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$175.StdOwnerConnected" Destination="$47.621B2EAA60B4DCF6">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$47.922C4AB423622B98" Destination="$175.BasicOwner">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$47.4DE40AA7535A5A0C" Destination="$185.EnExtOwner">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$47.4DE40AA7535A5A0C" Destination="$IServiceExtension.EnExtOwner">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$47.7DA82474095F82B2" Destination="$185.ExtOwnerSel">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$47.7DA82474095F82B2" Destination="$IServiceExtension.ExtOwnerSel">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$47.861B8773AF2757FC" Destination="$184.MonTime">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$47.5568E3E91B9AAED8" Destination="$184.TripTime">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$47.E0899D0C804160D2" Destination="$184.PassiveTime">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$47.3DA6D0F9276D43A4" Destination="$184.ConfResetReq">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$47.22AB1FF8E4CF2F97" Destination="$184.FailResetReq">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$47.869E02415F6A841" Destination="$107.Val2">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$47.5C6A0E86268ED420" Destination="$187.Val2">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$47.5508A90160132C15" Destination="$200.RangeMin1">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$47.2AD891B1627FD8EE" Destination="$200.RangeMax1">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$47.68E0CAABBDF0078" Destination="$184.SpeedOutMin">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$47.68E0CAABBDF0078" Destination="$OutSpeedMin" />
+      <Connection Source="$47.322B60ACD17B29E7" Destination="$184.SpeedOutMax">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$47.322B60ACD17B29E7" Destination="$OutSpeedMax" />
+      <Connection Source="$47.CF1EA84FDDBF53A1" Destination="$184.Simulation">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$47.CF1EA84FDDBF53A1" Destination="$Simulation" />
+      <Connection Source="$47.AD38F01F8F0043E7" Destination="$184.FbOverride">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$47.AD38F01F8F0043E7" Destination="$FbOverride" />
+      <Connection Source="$47.C8DEEF765E4F14C0" Destination="$175.ForceOperator">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$47.C8DEEF765E4F14C0" Destination="$Maintenance" />
+      <Connection Source="$47.C8DEEF765E4F14C0" Destination="$184.Maintenance">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$47.6EDFC17C06F3153" Destination="$107.Sel1">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$47.6EDFC17C06F3153" Destination="$OutOfService" dx1="923.3545" dx2="49.99951" dy="50" />
+      <Connection Source="$47.6EDFC17C06F3153" Destination="$187.Sel1">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$47.6EDFC17C06F3153" Destination="$184.OutOfService">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$47.344261B181153C38" Destination="$200.Select">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$47.152A2BD44E46F288" Destination="$180.ScanTime">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$47.152A2BD44E46F288" Destination="$181.ScanTime">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$47.3CCC10520A21214A" Destination="$180.AckType">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$47.3CCC10520A21214A" Destination="$181.AckType">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$47.89CD17990DC40B0E" Destination="$107.EnTrackSp">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$47.89CD17990DC40B0E" Destination="$187.EnTrackSp">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$47.B2B61A4BABE50F70" Destination="$107.EnResetSp">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$47.B2B61A4BABE50F70" Destination="$187.EnResetSp">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$47.A07A7C784B98F7E9" Destination="$184.DeviceType">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$IlckCond" Destination="$184.IlckCond">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$ExternalControlled" Destination="$47.C2064A64F1E6B239" dx1="448.5">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$175.Owner" Destination="$CurrentOwner" dx1="170" />
+      <Connection Source="$Reset" Destination="$204.DI3_1" />
+      <Connection Source="$IServiceExtension.Reset" Destination="$204.DI2_1" dx1="218.8955" />
+      <Connection Source="$47.4D34C1A4533BA5DF" Destination="$204.DI1_1">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$204.OUT1" Destination="$184.Reset">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$47.89CD17990DC40B0E" Destination="$IServiceExtension.EnTrackSp">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$47.B2B61A4BABE50F70" Destination="$IServiceExtension.EnResetSp">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$184.Failure" Destination="$47.D28866DFD0C1393B">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$47.20B18A8DFD1C4D64" Destination="$197.InMin">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$47.D294948C15C384E1" Destination="$197.InMax">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$47.5B357E1A1315D6FB" Destination="$197.4A685434B427A80E">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+    </DataConnections>
+  </FBNetwork>
+</FBType>
