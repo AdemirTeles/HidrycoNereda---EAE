@@ -614,7 +614,7 @@ namespace SE.Nereda.Symbols.InfluentFeed
 			this.sDisplayPv41.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 736D, 96D);
 			this.sDisplayPv41.Name = "sDisplayPv41";
 			this.sDisplayPv41.SecurityToken = ((uint)(4294967295u));
-			this.sDisplayPv41.TagName = "Sensors.FeedInfluentFlowPv";
+			this.sDisplayPv41.TagName = "Sensors.FeedReactorFlowPv";
 			this.sDisplayPv41.EndInit();
 			// 
 			// line13
