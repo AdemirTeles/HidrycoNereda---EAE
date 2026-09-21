@@ -412,7 +412,7 @@ namespace HMI.Main.Faceplates.PIDBase
 			this.lblCurrentSp.BeginInit();
 			this.lblCurrentSp.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.lblCurrentSp.DecimalPlacesCount = ((uint)(1u));
-			this.lblCurrentSp.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.72666666666666679D, 0D, 0D, 1.1904761904761905D, 120D, 30D);
+			this.lblCurrentSp.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.72666666666666679D, 0D, 0D, 1.1904761904761905D, 119D, 30D);
 			this.lblCurrentSp.Font = new NxtControl.Drawing.Font("SE.App2Base.Pv");
 			this.lblCurrentSp.FontScale = false;
 			this.lblCurrentSp.IsOnlyInput = true;
@@ -757,9 +757,11 @@ namespace HMI.Main.Faceplates.PIDBase
 			// 
 			this.ownerStatus.BeginInit();
 			this.ownerStatus.CurrentBasicOwner = false;
+			this.ownerStatus.CurrOwnerLabelTooltip = "Current Owner";
 			this.ownerStatus.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 5D, 74D);
 			this.ownerStatus.ExternalAvailable = false;
 			this.ownerStatus.InstanceName = "";
+			this.ownerStatus.LblCurrentModeTooltip = "Current Owner";
 			this.ownerStatus.Name = "ownerStatus";
 			this.ownerStatus.EndInit();
 			// 
