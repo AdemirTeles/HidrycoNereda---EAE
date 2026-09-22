@@ -57,9 +57,7 @@ namespace HMI.Main.Canvases
 			this.rectangle7 = new NxtControl.GuiFramework.Rectangle();
 			this.freeText8 = new NxtControl.GuiFramework.FreeText();
 			this.Mode = new SE.Nereda.Symbols.Mode.ReactorMode();
-			this.sHiHiLevelCalamity1 = new SE.Nereda.Symbols.Calamity.sHiHiLevelCalamity();
 			this.HeartBeat = new SE.Nereda.Symbols.HeartBeat.sDefault();
-			this.MCCPower = new SE.Nereda.Symbols.MCCPower.sDefault();
 			this.changeCanvasButton2 = new NxtControl.GuiFramework.ChangeCanvasButton();
 			this.changeCanvasButton4 = new NxtControl.GuiFramework.ChangeCanvasButton();
 			this.changeCanvasButton1 = new NxtControl.GuiFramework.ChangeCanvasButton();
@@ -365,15 +363,6 @@ namespace HMI.Main.Canvases
 			this.Mode.TagName = "7A79C015B9ADE3EB";
 			this.Mode.EndInit();
 			// 
-			// sHiHiLevelCalamity1
-			// 
-			this.sHiHiLevelCalamity1.BeginInit();
-			this.sHiHiLevelCalamity1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 632D, 8D);
-			this.sHiHiLevelCalamity1.Name = "sHiHiLevelCalamity1";
-			this.sHiHiLevelCalamity1.SecurityToken = ((uint)(4294967295u));
-			this.sHiHiLevelCalamity1.TagName = "F2F66466CB372A96.EffluentLogic.Calamity";
-			this.sHiHiLevelCalamity1.EndInit();
-			// 
 			// HeartBeat
 			// 
 			this.HeartBeat.BeginInit();
@@ -382,15 +371,6 @@ namespace HMI.Main.Canvases
 			this.HeartBeat.SecurityToken = ((uint)(4294967295u));
 			this.HeartBeat.TagName = "32B44D45F962192F";
 			this.HeartBeat.EndInit();
-			// 
-			// MCCPower
-			// 
-			this.MCCPower.BeginInit();
-			this.MCCPower.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 216D, 8D);
-			this.MCCPower.Name = "MCCPower";
-			this.MCCPower.SecurityToken = ((uint)(4294967295u));
-			this.MCCPower.TagName = "E1E3B3442DD19945";
-			this.MCCPower.EndInit();
 			// 
 			// changeCanvasButton2
 			// 
@@ -714,9 +694,7 @@ namespace HMI.Main.Canvases
 			this.rectangle7,
 			this.freeText8,
 			this.Mode,
-			this.sHiHiLevelCalamity1,
 			this.HeartBeat,
-			this.MCCPower,
 			this.group8,
 			this.group5,
 			this.group4,
@@ -787,13 +765,11 @@ namespace HMI.Main.Canvases
 		private NxtControl.GuiFramework.Rectangle rectangle7;
 		private NxtControl.GuiFramework.FreeText freeText8;
 		private SE.Nereda.Symbols.Mode.ReactorMode Mode;
-		private SE.Nereda.Symbols.Calamity.sHiHiLevelCalamity sHiHiLevelCalamity1;
 		private NxtControl.GuiFramework.Group group4;
 		private NxtControl.GuiFramework.Group group5;
 		private NxtControl.GuiFramework.Group group6;
 		private NxtControl.GuiFramework.Group group7;
 		private SE.Nereda.Symbols.HeartBeat.sDefault HeartBeat;
-		private SE.Nereda.Symbols.MCCPower.sDefault MCCPower;
 		private NxtControl.GuiFramework.Group group8;
 		private NxtControl.GuiFramework.FreeText freeText9;
 		private NxtControl.GuiFramework.Rectangle rectangle8;

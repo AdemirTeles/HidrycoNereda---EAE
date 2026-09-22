@@ -36,9 +36,7 @@ namespace HMI.Main.Canvases
 			this.changeCanvasButton7 = new NxtControl.GuiFramework.ChangeCanvasButton();
 			this.group1 = new NxtControl.GuiFramework.Group();
 			this.HeartBeat = new SE.Nereda.Symbols.HeartBeat.sDefault();
-			this.MCCPower = new SE.Nereda.Symbols.MCCPower.sDefault();
 			this.Mode = new SE.Nereda.Symbols.Mode.ReactorMode();
-			this.sHiHiLevelCalamity1 = new SE.Nereda.Symbols.Calamity.sHiHiLevelCalamity();
 			this.OpenWebPage = new SE.Nereda.Symbols.OpenWebPage.sDefault();
 			((System.ComponentModel.ISupportInitialize)(this.alarmGrid1)).BeginInit();
 			// 
@@ -159,15 +157,6 @@ namespace HMI.Main.Canvases
 			this.HeartBeat.TagName = "32B44D45F962192F";
 			this.HeartBeat.EndInit();
 			// 
-			// MCCPower
-			// 
-			this.MCCPower.BeginInit();
-			this.MCCPower.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 216D, 8D);
-			this.MCCPower.Name = "MCCPower";
-			this.MCCPower.SecurityToken = ((uint)(4294967295u));
-			this.MCCPower.TagName = "E1E3B3442DD19945";
-			this.MCCPower.EndInit();
-			// 
 			// Mode
 			// 
 			this.Mode.BeginInit();
@@ -176,15 +165,6 @@ namespace HMI.Main.Canvases
 			this.Mode.SecurityToken = ((uint)(4294967295u));
 			this.Mode.TagName = "7A79C015B9ADE3EB";
 			this.Mode.EndInit();
-			// 
-			// sHiHiLevelCalamity1
-			// 
-			this.sHiHiLevelCalamity1.BeginInit();
-			this.sHiHiLevelCalamity1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 632D, 8D);
-			this.sHiHiLevelCalamity1.Name = "sHiHiLevelCalamity1";
-			this.sHiHiLevelCalamity1.SecurityToken = ((uint)(4294967295u));
-			this.sHiHiLevelCalamity1.TagName = "F2F66466CB372A96.EffluentLogic.Calamity";
-			this.sHiHiLevelCalamity1.EndInit();
 			// 
 			// OpenWebPage
 			// 
@@ -203,9 +183,7 @@ namespace HMI.Main.Canvases
 			this.alarmGrid1,
 			this.group1,
 			this.HeartBeat,
-			this.MCCPower,
 			this.Mode,
-			this.sHiHiLevelCalamity1,
 			this.OpenWebPage});
 			this.Size = new System.Drawing.Size(1366, 698);
 			((System.ComponentModel.ISupportInitialize)(this.alarmGrid1)).EndInit();
@@ -221,9 +199,7 @@ namespace HMI.Main.Canvases
 		private NxtControl.GuiFramework.ChangeCanvasButton changeCanvasButton7;
 		private NxtControl.GuiFramework.Group group1;
 		private SE.Nereda.Symbols.HeartBeat.sDefault HeartBeat;
-		private SE.Nereda.Symbols.MCCPower.sDefault MCCPower;
 		private SE.Nereda.Symbols.Mode.ReactorMode Mode;
-		private SE.Nereda.Symbols.Calamity.sHiHiLevelCalamity sHiHiLevelCalamity1;
 		private SE.Nereda.Symbols.OpenWebPage.sDefault OpenWebPage;
 		#endregion
 	}

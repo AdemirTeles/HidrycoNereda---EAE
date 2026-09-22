@@ -27,9 +27,7 @@ namespace HMI.Main.Canvases
 		private void InitializeComponent()
 		{
 			this.HeartBeat = new SE.Nereda.Symbols.HeartBeat.sDefault();
-			this.MCCPower = new SE.Nereda.Symbols.MCCPower.sDefault();
 			this.Mode = new SE.Nereda.Symbols.Mode.ReactorMode();
-			this.sHiHiLevelCalamity1 = new SE.Nereda.Symbols.Calamity.sHiHiLevelCalamity();
 			this.OpenWebPage = new SE.Nereda.Symbols.OpenWebPage.sDefault();
 			this.freeText1 = new NxtControl.GuiFramework.FreeText();
 			this.group1 = new NxtControl.GuiFramework.Group();
@@ -46,15 +44,6 @@ namespace HMI.Main.Canvases
 			this.HeartBeat.TagName = "32B44D45F962192F";
 			this.HeartBeat.EndInit();
 			// 
-			// MCCPower
-			// 
-			this.MCCPower.BeginInit();
-			this.MCCPower.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 216D, 8D);
-			this.MCCPower.Name = "MCCPower";
-			this.MCCPower.SecurityToken = ((uint)(4294967295u));
-			this.MCCPower.TagName = "E1E3B3442DD19945";
-			this.MCCPower.EndInit();
-			// 
 			// Mode
 			// 
 			this.Mode.BeginInit();
@@ -63,15 +52,6 @@ namespace HMI.Main.Canvases
 			this.Mode.SecurityToken = ((uint)(4294967295u));
 			this.Mode.TagName = "7A79C015B9ADE3EB";
 			this.Mode.EndInit();
-			// 
-			// sHiHiLevelCalamity1
-			// 
-			this.sHiHiLevelCalamity1.BeginInit();
-			this.sHiHiLevelCalamity1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 632D, 8D);
-			this.sHiHiLevelCalamity1.Name = "sHiHiLevelCalamity1";
-			this.sHiHiLevelCalamity1.SecurityToken = ((uint)(4294967295u));
-			this.sHiHiLevelCalamity1.TagName = "F2F66466CB372A96.EffluentLogic.Calamity";
-			this.sHiHiLevelCalamity1.EndInit();
 			// 
 			// OpenWebPage
 			// 
@@ -129,9 +109,7 @@ namespace HMI.Main.Canvases
 			this.Brush = new NxtControl.Drawing.Brush("CanvasBrush");
 			this.Shapes.AddRange(new System.ComponentModel.IComponent[] {
 			this.HeartBeat,
-			this.MCCPower,
 			this.Mode,
-			this.sHiHiLevelCalamity1,
 			this.OpenWebPage,
 			this.freeText2,
 			this.group2});
@@ -140,9 +118,7 @@ namespace HMI.Main.Canvases
 		}
 		private NxtControl.GuiFramework.Group group1;
 		private SE.Nereda.Symbols.HeartBeat.sDefault HeartBeat;
-		private SE.Nereda.Symbols.MCCPower.sDefault MCCPower;
 		private SE.Nereda.Symbols.Mode.ReactorMode Mode;
-		private SE.Nereda.Symbols.Calamity.sHiHiLevelCalamity sHiHiLevelCalamity1;
 		private SE.Nereda.Symbols.OpenWebPage.sDefault OpenWebPage;
 		private NxtControl.GuiFramework.FreeText freeText1;
 		private NxtControl.GuiFramework.FreeText freeText2;

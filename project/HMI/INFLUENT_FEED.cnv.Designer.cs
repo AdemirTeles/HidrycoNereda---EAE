@@ -29,15 +29,11 @@ namespace HMI.Main.Canvases
 			this.changeCanvasButton3 = new NxtControl.GuiFramework.ChangeCanvasButton();
 			this.changeCanvasButton4 = new NxtControl.GuiFramework.ChangeCanvasButton();
 			this.HeartBeat = new SE.Nereda.Symbols.HeartBeat.sDefault();
-			this.MCCPower = new SE.Nereda.Symbols.MCCPower.sDefault();
 			this.Mode = new SE.Nereda.Symbols.Mode.ReactorMode();
-			this.sHiHiLevelCalamity1 = new SE.Nereda.Symbols.Calamity.sHiHiLevelCalamity();
 			this.OpenWebPage = new SE.Nereda.Symbols.OpenWebPage.sDefault();
 			this.INFLUENT_FEED_4 = new SE.Nereda.Symbols.InfluentFeed.sSensors();
 			this.sDrainSettings1 = new SE.Nereda.Symbols.InfluentFeedLogic.sDrainSettings();
-			this.EFFLUENT_4 = new SE.Nereda.Symbols.NeredaEffluent.sTempSensor();
 			this.Mode_1 = new SE.Nereda.Symbols.Mode.ResetMetalSaltDosing();
-			this.METAL_SALT_DOSING_1 = new SE.Nereda.Symbols.NeredaMetalSaltDosing.sSensors();
 			this.INFLUENT_FEED_1 = new SE.Nereda.Symbols.InfluentFeed.sInfluentFeed2();
 			this.pipe1 = new NxtControl.GuiFramework.Pipe();
 			// 
@@ -66,15 +62,6 @@ namespace HMI.Main.Canvases
 			this.HeartBeat.TagName = "32B44D45F962192F";
 			this.HeartBeat.EndInit();
 			// 
-			// MCCPower
-			// 
-			this.MCCPower.BeginInit();
-			this.MCCPower.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 216D, 8D);
-			this.MCCPower.Name = "MCCPower";
-			this.MCCPower.SecurityToken = ((uint)(4294967295u));
-			this.MCCPower.TagName = "E1E3B3442DD19945";
-			this.MCCPower.EndInit();
-			// 
 			// Mode
 			// 
 			this.Mode.BeginInit();
@@ -83,15 +70,6 @@ namespace HMI.Main.Canvases
 			this.Mode.SecurityToken = ((uint)(4294967295u));
 			this.Mode.TagName = "7A79C015B9ADE3EB";
 			this.Mode.EndInit();
-			// 
-			// sHiHiLevelCalamity1
-			// 
-			this.sHiHiLevelCalamity1.BeginInit();
-			this.sHiHiLevelCalamity1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 632D, 8D);
-			this.sHiHiLevelCalamity1.Name = "sHiHiLevelCalamity1";
-			this.sHiHiLevelCalamity1.SecurityToken = ((uint)(4294967295u));
-			this.sHiHiLevelCalamity1.TagName = "F2F66466CB372A96.EffluentLogic.Calamity";
-			this.sHiHiLevelCalamity1.EndInit();
 			// 
 			// OpenWebPage
 			// 
@@ -120,15 +98,6 @@ namespace HMI.Main.Canvases
 			this.sDrainSettings1.TagName = "2098DAF96A66AD0A.InfluentFeedLogic";
 			this.sDrainSettings1.EndInit();
 			// 
-			// EFFLUENT_4
-			// 
-			this.EFFLUENT_4.BeginInit();
-			this.EFFLUENT_4.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 960D, 288D);
-			this.EFFLUENT_4.Name = "EFFLUENT_4";
-			this.EFFLUENT_4.SecurityToken = ((uint)(4294967295u));
-			this.EFFLUENT_4.TagName = "F2F66466CB372A96";
-			this.EFFLUENT_4.EndInit();
-			// 
 			// Mode_1
 			// 
 			this.Mode_1.BeginInit();
@@ -137,15 +106,6 @@ namespace HMI.Main.Canvases
 			this.Mode_1.SecurityToken = ((uint)(4294967295u));
 			this.Mode_1.TagName = "7A79C015B9ADE3EB";
 			this.Mode_1.EndInit();
-			// 
-			// METAL_SALT_DOSING_1
-			// 
-			this.METAL_SALT_DOSING_1.BeginInit();
-			this.METAL_SALT_DOSING_1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 1168D, 216D);
-			this.METAL_SALT_DOSING_1.Name = "METAL_SALT_DOSING_1";
-			this.METAL_SALT_DOSING_1.SecurityToken = ((uint)(4294967295u));
-			this.METAL_SALT_DOSING_1.TagName = "19DBCE8B43D468D4";
-			this.METAL_SALT_DOSING_1.EndInit();
 			// 
 			// INFLUENT_FEED_1
 			// 
@@ -175,15 +135,11 @@ namespace HMI.Main.Canvases
 			this.Brush = new NxtControl.Drawing.Brush("CanvasBrush");
 			this.Shapes.AddRange(new System.ComponentModel.IComponent[] {
 			this.HeartBeat,
-			this.MCCPower,
 			this.Mode,
-			this.sHiHiLevelCalamity1,
 			this.OpenWebPage,
 			this.INFLUENT_FEED_4,
 			this.sDrainSettings1,
-			this.EFFLUENT_4,
 			this.Mode_1,
-			this.METAL_SALT_DOSING_1,
 			this.INFLUENT_FEED_1,
 			this.pipe1,
 			this.changeCanvasButton4,
@@ -194,16 +150,12 @@ namespace HMI.Main.Canvases
 		private NxtControl.GuiFramework.ChangeCanvasButton changeCanvasButton3;
 		private NxtControl.GuiFramework.ChangeCanvasButton changeCanvasButton4;
 		private SE.Nereda.Symbols.HeartBeat.sDefault HeartBeat;
-		private SE.Nereda.Symbols.MCCPower.sDefault MCCPower;
 		private SE.Nereda.Symbols.Mode.ReactorMode Mode;
-		private SE.Nereda.Symbols.Calamity.sHiHiLevelCalamity sHiHiLevelCalamity1;
 		private SE.Nereda.Symbols.OpenWebPage.sDefault OpenWebPage;
 		private SE.Nereda.Symbols.InfluentFeed.sInfluentFeed2 INFLUENT_FEED_1;
 		private SE.Nereda.Symbols.InfluentFeed.sSensors INFLUENT_FEED_4;
 		private SE.Nereda.Symbols.InfluentFeedLogic.sDrainSettings sDrainSettings1;
-		private SE.Nereda.Symbols.NeredaEffluent.sTempSensor EFFLUENT_4;
 		private SE.Nereda.Symbols.Mode.ResetMetalSaltDosing Mode_1;
-		private SE.Nereda.Symbols.NeredaMetalSaltDosing.sSensors METAL_SALT_DOSING_1;
 		private NxtControl.GuiFramework.Pipe pipe1;
 		#endregion
 	}

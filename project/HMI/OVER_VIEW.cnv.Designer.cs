@@ -27,12 +27,9 @@ namespace HMI.Main.Canvases
 		private void InitializeComponent()
 		{
 			this.NVPP_REACTOR01 = new SE.Nereda.Symbols.NeredaReactor.sReactor3();
-			this.EFFLUENT = new SE.Nereda.Symbols.NeredaEffluent.sEffluent2();
 			this.NVPP_REACTOR02 = new SE.Nereda.Symbols.NeredaReactor.sReactor3();
 			this.HeartBeat = new SE.Nereda.Symbols.HeartBeat.sDefault();
-			this.MCCPower = new SE.Nereda.Symbols.MCCPower.sDefault();
 			this.Mode = new SE.Nereda.Symbols.Mode.ReactorMode();
-			this.sHiHiLevelCalamity1 = new SE.Nereda.Symbols.Calamity.sHiHiLevelCalamity();
 			this.OpenWebPage = new SE.Nereda.Symbols.OpenWebPage.sDefault();
 			this.INFLUENT_FEED = new SE.Nereda.Symbols.InfluentFeed.sInfluentFeed();
 			this.pipe14 = new NxtControl.GuiFramework.Pipe();
@@ -114,7 +111,6 @@ namespace HMI.Main.Canvases
 			this.pipe16 = new NxtControl.GuiFramework.Pipe();
 			this.pipe3 = new NxtControl.GuiFramework.Pipe();
 			this.pipe6 = new NxtControl.GuiFramework.Pipe();
-			this.EFFLUENT_1 = new SE.Nereda.Symbols.NeredaEffluent.sCalamity3D();
 			this.pipe38 = new NxtControl.GuiFramework.Pipe();
 			this.polygon23 = new NxtControl.GuiFramework.Polygon();
 			// 
@@ -128,17 +124,6 @@ namespace HMI.Main.Canvases
 			this.NVPP_REACTOR01.TagName = "D32FABF3E7C17DE2";
 			this.NVPP_REACTOR01.Click += new System.EventHandler(this.NVPP_REACTOR01Click);
 			this.NVPP_REACTOR01.EndInit();
-			// 
-			// EFFLUENT
-			// 
-			this.EFFLUENT.BeginInit();
-			this.EFFLUENT._iEFFLUENT = "EFFLUENT";
-			this.EFFLUENT.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.51428571428571423D, 0D, 0D, 0.51470588235294112D, 288D, 72D);
-			this.EFFLUENT.Name = "EFFLUENT";
-			this.EFFLUENT.SecurityToken = ((uint)(4294967295u));
-			this.EFFLUENT.TagName = "F2F66466CB372A96";
-			this.EFFLUENT.Click += new System.EventHandler(this.EFFLUENTClick);
-			this.EFFLUENT.EndInit();
 			// 
 			// NVPP_REACTOR02
 			// 
@@ -160,15 +145,6 @@ namespace HMI.Main.Canvases
 			this.HeartBeat.TagName = "32B44D45F962192F";
 			this.HeartBeat.EndInit();
 			// 
-			// MCCPower
-			// 
-			this.MCCPower.BeginInit();
-			this.MCCPower.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 216D, 8D);
-			this.MCCPower.Name = "MCCPower";
-			this.MCCPower.SecurityToken = ((uint)(4294967295u));
-			this.MCCPower.TagName = "E1E3B3442DD19945";
-			this.MCCPower.EndInit();
-			// 
 			// Mode
 			// 
 			this.Mode.BeginInit();
@@ -177,15 +153,6 @@ namespace HMI.Main.Canvases
 			this.Mode.SecurityToken = ((uint)(4294967295u));
 			this.Mode.TagName = "7A79C015B9ADE3EB";
 			this.Mode.EndInit();
-			// 
-			// sHiHiLevelCalamity1
-			// 
-			this.sHiHiLevelCalamity1.BeginInit();
-			this.sHiHiLevelCalamity1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 632D, 8D);
-			this.sHiHiLevelCalamity1.Name = "sHiHiLevelCalamity1";
-			this.sHiHiLevelCalamity1.SecurityToken = ((uint)(4294967295u));
-			this.sHiHiLevelCalamity1.TagName = "F2F66466CB372A96.EffluentLogic.Calamity";
-			this.sHiHiLevelCalamity1.EndInit();
 			// 
 			// OpenWebPage
 			// 
@@ -1192,17 +1159,6 @@ namespace HMI.Main.Canvases
 			new NxtControl.Drawing.PointF(1232D, 600D)});
 			this.pipe6.Width = 8;
 			// 
-			// EFFLUENT_1
-			// 
-			this.EFFLUENT_1.BeginInit();
-			this.EFFLUENT_1._iCALAMITY = "CALAMITY";
-			this.EFFLUENT_1.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.51428571428571423D, 0D, 0D, 0.5152439024390244D, 1184D, 112D);
-			this.EFFLUENT_1.Name = "EFFLUENT_1";
-			this.EFFLUENT_1.SecurityToken = ((uint)(4294967295u));
-			this.EFFLUENT_1.TagName = "F2F66466CB372A96";
-			this.EFFLUENT_1.Click += new System.EventHandler(this.EFFLUENT_1Click);
-			this.EFFLUENT_1.EndInit();
-			// 
 			// pipe38
 			// 
 			this.pipe38.Bounds = new NxtControl.Drawing.RectF(((float)(1208D)), ((float)(270D)), ((float)(24D)), ((float)(80D)));
@@ -1240,12 +1196,9 @@ namespace HMI.Main.Canvases
 			this.pipe3,
 			this.pipe16,
 			this.NVPP_REACTOR01,
-			this.EFFLUENT,
 			this.NVPP_REACTOR02,
 			this.HeartBeat,
-			this.MCCPower,
 			this.Mode,
-			this.sHiHiLevelCalamity1,
 			this.OpenWebPage,
 			this.INFLUENT_FEED,
 			this.pipe37,
@@ -1305,18 +1258,14 @@ namespace HMI.Main.Canvases
 			this.polygon22,
 			this.sPump1,
 			this.sPump3,
-			this.EFFLUENT_1,
 			this.polygon23});
 			this.Size = new System.Drawing.Size(1366, 698);
 
 		}
 		private SE.Nereda.Symbols.NeredaReactor.sReactor3 NVPP_REACTOR01;
-		private SE.Nereda.Symbols.NeredaEffluent.sEffluent2 EFFLUENT;
 		private SE.Nereda.Symbols.NeredaReactor.sReactor3 NVPP_REACTOR02;
 		private SE.Nereda.Symbols.HeartBeat.sDefault HeartBeat;
-		private SE.Nereda.Symbols.MCCPower.sDefault MCCPower;
 		private SE.Nereda.Symbols.Mode.ReactorMode Mode;
-		private SE.Nereda.Symbols.Calamity.sHiHiLevelCalamity sHiHiLevelCalamity1;
 		private SE.Nereda.Symbols.OpenWebPage.sDefault OpenWebPage;
 		private SE.Nereda.Symbols.InfluentFeed.sInfluentFeed INFLUENT_FEED;
 		private NxtControl.GuiFramework.Pipe pipe14;
@@ -1398,7 +1347,6 @@ namespace HMI.Main.Canvases
 		private SE.Nereda.Symbols.Motor_VS.sPump sPump3;
 		private NxtControl.GuiFramework.Pipe pipe3;
 		private NxtControl.GuiFramework.Pipe pipe6;
-		private SE.Nereda.Symbols.NeredaEffluent.sCalamity3D EFFLUENT_1;
 		private NxtControl.GuiFramework.Pipe pipe38;
 		private NxtControl.GuiFramework.Polygon polygon23;
 		#endregion
