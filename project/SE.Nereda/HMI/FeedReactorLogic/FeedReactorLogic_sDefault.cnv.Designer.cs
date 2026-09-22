@@ -33,6 +33,8 @@ namespace SE.Nereda.Symbols.FeedReactorLogic
 			this.C2Capacity = new System.HMI.Symbols.Base.TextBox<float>();
 			this.RestartWaitingTime = new System.HMI.Symbols.Base.TimeTextBox();
 			this.freeText2 = new NxtControl.GuiFramework.FreeText();
+			this.freeText3 = new NxtControl.GuiFramework.FreeText();
+			this.textBox_11 = new System.HMI.Symbols.Base.TextBox<float>();
 			// 
 			// polygon1
 			// 
@@ -52,7 +54,7 @@ namespace SE.Nereda.Symbols.FeedReactorLogic
 			// 
 			// rectangle1
 			// 
-			this.rectangle1.Bounds = new NxtControl.Drawing.RectF(((float)(8D)), ((float)(24D)), ((float)(376D)), ((float)(112D)));
+			this.rectangle1.Bounds = new NxtControl.Drawing.RectF(((float)(8D)), ((float)(24D)), ((float)(376D)), ((float)(152D)));
 			this.rectangle1.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(250)), ((byte)(250)), ((byte)(250))));
 			this.rectangle1.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
 			this.rectangle1.Name = "rectangle1";
@@ -112,7 +114,7 @@ namespace SE.Nereda.Symbols.FeedReactorLogic
 			// RestartWaitingTime
 			// 
 			this.RestartWaitingTime.BeginInit();
-			this.RestartWaitingTime.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.64D, 0D, 0D, 1D, 248D, 96D);
+			this.RestartWaitingTime.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.64D, 0D, 0D, 1D, 248D, 136D);
 			this.RestartWaitingTime.MaximumTag = null;
 			this.RestartWaitingTime.MinimumTag = null;
 			this.RestartWaitingTime.Name = "RestartWaitingTime";
@@ -126,9 +128,35 @@ namespace SE.Nereda.Symbols.FeedReactorLogic
 			// 
 			this.freeText2.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.freeText2.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-			this.freeText2.Location = new NxtControl.Drawing.PointF(16D, 100D);
+			this.freeText2.Location = new NxtControl.Drawing.PointF(16D, 140D);
 			this.freeText2.Name = "freeText2";
 			this.freeText2.Text = "Feed Restart Waiting Time :";
+			// 
+			// freeText3
+			// 
+			this.freeText3.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.freeText3.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+			this.freeText3.Location = new NxtControl.Drawing.PointF(16D, 104D);
+			this.freeText3.Name = "freeText3";
+			this.freeText3.Text = "C2 Transition Capacity :";
+			// 
+			// textBox_11
+			// 
+			this.textBox_11.BeginInit();
+			this.textBox_11.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.64D, 0D, 0D, 1D, 248D, 96D);
+			this.textBox_11.MaximumTag = null;
+			this.textBox_11.MinimumTag = null;
+			this.textBox_11.Name = "textBox_11";
+			this.textBox_11.NumberBase = NxtControl.GuiFramework.NumberBase.Decimal;
+			this.textBox_11.Pen = new NxtControl.Drawing.Pen("TextBoxPen");
+			this.textBox_11.SetColor = new NxtControl.Drawing.Color("Yellow");
+			this.textBox_11.Suffix = "m³/h";
+			this.textBox_11.TagName = "C3Capacity";
+			this.textBox_11.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleCenter;
+			this.textBox_11.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.textBox_11.UseInputPad = true;
+			this.textBox_11.Value = 0F;
+			this.textBox_11.EndInit();
 			// 
 			// sDefault
 			// 
@@ -140,7 +168,9 @@ namespace SE.Nereda.Symbols.FeedReactorLogic
 			this.freeText1,
 			this.C2Capacity,
 			this.RestartWaitingTime,
-			this.freeText2});
+			this.freeText2,
+			this.freeText3,
+			this.textBox_11});
 			this.SymbolSize = new System.Drawing.Size(600, 400);
 
 		}
@@ -152,6 +182,8 @@ namespace SE.Nereda.Symbols.FeedReactorLogic
 		private System.HMI.Symbols.Base.TextBox<float> C2Capacity;
 		private System.HMI.Symbols.Base.TimeTextBox RestartWaitingTime;
 		private NxtControl.GuiFramework.FreeText freeText2;
+		private NxtControl.GuiFramework.FreeText freeText3;
+		private System.HMI.Symbols.Base.TextBox<float> textBox_11;
 		#endregion
 	}
 }

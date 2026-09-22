@@ -33,7 +33,6 @@ namespace HMI.Main.Canvases
 			this.OpenWebPage = new SE.Nereda.Symbols.OpenWebPage.sDefault();
 			this.INFLUENT_FEED_4 = new SE.Nereda.Symbols.InfluentFeed.sSensors();
 			this.sDrainSettings1 = new SE.Nereda.Symbols.InfluentFeedLogic.sDrainSettings();
-			this.Mode_1 = new SE.Nereda.Symbols.Mode.ResetMetalSaltDosing();
 			this.INFLUENT_FEED_1 = new SE.Nereda.Symbols.InfluentFeed.sInfluentFeed2();
 			this.pipe1 = new NxtControl.GuiFramework.Pipe();
 			// 
@@ -98,15 +97,6 @@ namespace HMI.Main.Canvases
 			this.sDrainSettings1.TagName = "2098DAF96A66AD0A.InfluentFeedLogic";
 			this.sDrainSettings1.EndInit();
 			// 
-			// Mode_1
-			// 
-			this.Mode_1.BeginInit();
-			this.Mode_1.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.7142857142857143D, 0D, 0D, 1D, 960D, 8D);
-			this.Mode_1.Name = "Mode_1";
-			this.Mode_1.SecurityToken = ((uint)(4294967295u));
-			this.Mode_1.TagName = "7A79C015B9ADE3EB";
-			this.Mode_1.EndInit();
-			// 
 			// INFLUENT_FEED_1
 			// 
 			this.INFLUENT_FEED_1.BeginInit();
@@ -139,7 +129,6 @@ namespace HMI.Main.Canvases
 			this.OpenWebPage,
 			this.INFLUENT_FEED_4,
 			this.sDrainSettings1,
-			this.Mode_1,
 			this.INFLUENT_FEED_1,
 			this.pipe1,
 			this.changeCanvasButton4,
@@ -155,7 +144,6 @@ namespace HMI.Main.Canvases
 		private SE.Nereda.Symbols.InfluentFeed.sInfluentFeed2 INFLUENT_FEED_1;
 		private SE.Nereda.Symbols.InfluentFeed.sSensors INFLUENT_FEED_4;
 		private SE.Nereda.Symbols.InfluentFeedLogic.sDrainSettings sDrainSettings1;
-		private SE.Nereda.Symbols.Mode.ResetMetalSaltDosing Mode_1;
 		private NxtControl.GuiFramework.Pipe pipe1;
 		#endregion
 	}

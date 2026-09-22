@@ -26,57 +26,14 @@ namespace HMI.Main.Canvases
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.changeCanvasButton1 = new NxtControl.GuiFramework.ChangeCanvasButton();
-			this.changeCanvasButton2 = new NxtControl.GuiFramework.ChangeCanvasButton();
-			this.changeCanvasButton4 = new NxtControl.GuiFramework.ChangeCanvasButton();
-			this.changeCanvasButton5 = new NxtControl.GuiFramework.ChangeCanvasButton();
 			this.HeartBeat = new SE.Nereda.Symbols.HeartBeat.sDefault();
 			this.Mode = new SE.Nereda.Symbols.Mode.ReactorMode();
 			this.OpenWebPage = new SE.Nereda.Symbols.OpenWebPage.sDefault();
 			this.Mode_1 = new SE.Nereda.Symbols.Mode.ResetReactor1();
-			this.pipe1 = new NxtControl.GuiFramework.Pipe();
-			this.pipe3 = new NxtControl.GuiFramework.Pipe();
-			this.pipe4 = new NxtControl.GuiFramework.Pipe();
-			this.REACTOR01_1 = new SE.Nereda.Symbols.NeredaReactor.sPhase2();
-			this.pipe2 = new NxtControl.GuiFramework.Pipe();
-			this.polygon1 = new NxtControl.GuiFramework.Polygon();
-			this.polygon2 = new NxtControl.GuiFramework.Polygon();
-			this.polygon3 = new NxtControl.GuiFramework.Polygon();
-			this.polygon4 = new NxtControl.GuiFramework.Polygon();
 			this.sSensors1 = new SE.Nereda.Symbols.NeredaReactor.sSensors();
 			this.sReactor41 = new SE.Nereda.Symbols.NeredaReactor.sReactor4();
-			// 
-			// changeCanvasButton1
-			// 
-			this.changeCanvasButton1.Bounds = new NxtControl.Drawing.RectF(((float)(8D)), ((float)(656D)), ((float)(168D)), ((float)(32D)));
-			this.changeCanvasButton1.CanvasName = "SLUDGE_BUFFER";
-			this.changeCanvasButton1.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-			this.changeCanvasButton1.Name = "changeCanvasButton1";
-			this.changeCanvasButton1.Text = "SLUDGE BUFFER";
-			// 
-			// changeCanvasButton2
-			// 
-			this.changeCanvasButton2.Bounds = new NxtControl.Drawing.RectF(((float)(8D)), ((float)(560D)), ((float)(168D)), ((float)(32D)));
-			this.changeCanvasButton2.CanvasName = "INFLUENT_FEED";
-			this.changeCanvasButton2.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-			this.changeCanvasButton2.Name = "changeCanvasButton2";
-			this.changeCanvasButton2.Text = "INFLUENT FEED";
-			// 
-			// changeCanvasButton4
-			// 
-			this.changeCanvasButton4.Bounds = new NxtControl.Drawing.RectF(((float)(8D)), ((float)(608D)), ((float)(168D)), ((float)(32D)));
-			this.changeCanvasButton4.CanvasName = "EFFLUENT";
-			this.changeCanvasButton4.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-			this.changeCanvasButton4.Name = "changeCanvasButton4";
-			this.changeCanvasButton4.Text = "EFFLUENT";
-			// 
-			// changeCanvasButton5
-			// 
-			this.changeCanvasButton5.Bounds = new NxtControl.Drawing.RectF(((float)(8D)), ((float)(512D)), ((float)(168D)), ((float)(32D)));
-			this.changeCanvasButton5.CanvasName = "AERATION";
-			this.changeCanvasButton5.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-			this.changeCanvasButton5.Name = "changeCanvasButton5";
-			this.changeCanvasButton5.Text = "AERATION";
+			this.sPhase21 = new SE.Nereda.Symbols.NeredaReactor.sPhase2();
+			this.sSettingsBtn1 = new SE.Nereda.Symbols.NeredaReactor.sSettingsBtn();
 			// 
 			// HeartBeat
 			// 
@@ -114,117 +71,10 @@ namespace HMI.Main.Canvases
 			this.Mode_1.TagName = "7A79C015B9ADE3EB";
 			this.Mode_1.EndInit();
 			// 
-			// pipe1
-			// 
-			this.pipe1.Bounds = new NxtControl.Drawing.RectF(((float)(144D)), ((float)(168D)), ((float)(480D)), ((float)(360D)));
-			this.pipe1.InnerColor = new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(255)));
-			this.pipe1.Name = "pipe1";
-			this.pipe1.OuterColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.pipe1.Points.AddRange(new NxtControl.Drawing.PointF[] {
-			new NxtControl.Drawing.PointF(624D, 168D),
-			new NxtControl.Drawing.PointF(600D, 168D),
-			new NxtControl.Drawing.PointF(600D, 528D),
-			new NxtControl.Drawing.PointF(144D, 528D)});
-			this.pipe1.Width = 10;
-			// 
-			// pipe3
-			// 
-			this.pipe3.Bounds = new NxtControl.Drawing.RectF(((float)(128D)), ((float)(568D)), ((float)(1184D)), ((float)(72D)));
-			this.pipe3.InnerColor = new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(255)));
-			this.pipe3.Name = "pipe3";
-			this.pipe3.OuterColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.pipe3.Points.AddRange(new NxtControl.Drawing.PointF[] {
-			new NxtControl.Drawing.PointF(1240D, 568D),
-			new NxtControl.Drawing.PointF(1312D, 568D),
-			new NxtControl.Drawing.PointF(1312D, 640D),
-			new NxtControl.Drawing.PointF(600D, 640D),
-			new NxtControl.Drawing.PointF(600D, 624D),
-			new NxtControl.Drawing.PointF(128D, 624D)});
-			this.pipe3.Width = 10;
-			// 
-			// pipe4
-			// 
-			this.pipe4.Bounds = new NxtControl.Drawing.RectF(((float)(144D)), ((float)(400D)), ((float)(1200D)), ((float)(272D)));
-			this.pipe4.InnerColor = new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(255)));
-			this.pipe4.Name = "pipe4";
-			this.pipe4.OuterColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.pipe4.Points.AddRange(new NxtControl.Drawing.PointF[] {
-			new NxtControl.Drawing.PointF(1304D, 400D),
-			new NxtControl.Drawing.PointF(1344D, 400D),
-			new NxtControl.Drawing.PointF(1344D, 672D),
-			new NxtControl.Drawing.PointF(144D, 672D)});
-			this.pipe4.Width = 10;
-			// 
-			// REACTOR01_1
-			// 
-			this.REACTOR01_1.BeginInit();
-			this.REACTOR01_1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 8D, 72D);
-			this.REACTOR01_1.Name = "REACTOR01_1";
-			this.REACTOR01_1.SecurityToken = ((uint)(4294967295u));
-			this.REACTOR01_1.TagName = "D41247DF3E1D30DC";
-			this.REACTOR01_1.EndInit();
-			// 
-			// pipe2
-			// 
-			this.pipe2.Bounds = new NxtControl.Drawing.RectF(((float)(128D)), ((float)(560D)), ((float)(496D)), ((float)(16D)));
-			this.pipe2.InnerColor = new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(255)));
-			this.pipe2.Name = "pipe2";
-			this.pipe2.OuterColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.pipe2.Points.AddRange(new NxtControl.Drawing.PointF[] {
-			new NxtControl.Drawing.PointF(624D, 560D),
-			new NxtControl.Drawing.PointF(600D, 560D),
-			new NxtControl.Drawing.PointF(600D, 576D),
-			new NxtControl.Drawing.PointF(128D, 576D)});
-			this.pipe2.Width = 10;
-			// 
-			// polygon1
-			// 
-			this.polygon1.Bounds = new NxtControl.Drawing.RectF(((float)(192D)), ((float)(520D)), ((float)(32D)), ((float)(16D)));
-			this.polygon1.Closed = true;
-			this.polygon1.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
-			this.polygon1.Name = "polygon1";
-			this.polygon1.Points.AddRange(new NxtControl.Drawing.PointF[] {
-			new NxtControl.Drawing.PointF(192D, 520D),
-			new NxtControl.Drawing.PointF(192D, 536D),
-			new NxtControl.Drawing.PointF(224D, 528D)});
-			// 
-			// polygon2
-			// 
-			this.polygon2.Bounds = new NxtControl.Drawing.RectF(((float)(192D)), ((float)(568D)), ((float)(32D)), ((float)(16D)));
-			this.polygon2.Closed = true;
-			this.polygon2.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
-			this.polygon2.Name = "polygon2";
-			this.polygon2.Points.AddRange(new NxtControl.Drawing.PointF[] {
-			new NxtControl.Drawing.PointF(192D, 568D),
-			new NxtControl.Drawing.PointF(192D, 584D),
-			new NxtControl.Drawing.PointF(224D, 576D)});
-			// 
-			// polygon3
-			// 
-			this.polygon3.Bounds = new NxtControl.Drawing.RectF(((float)(192D)), ((float)(616D)), ((float)(32D)), ((float)(16D)));
-			this.polygon3.Closed = true;
-			this.polygon3.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
-			this.polygon3.Name = "polygon3";
-			this.polygon3.Points.AddRange(new NxtControl.Drawing.PointF[] {
-			new NxtControl.Drawing.PointF(224D, 616D),
-			new NxtControl.Drawing.PointF(224D, 632D),
-			new NxtControl.Drawing.PointF(192D, 624D)});
-			// 
-			// polygon4
-			// 
-			this.polygon4.Bounds = new NxtControl.Drawing.RectF(((float)(192D)), ((float)(664D)), ((float)(32D)), ((float)(16D)));
-			this.polygon4.Closed = true;
-			this.polygon4.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
-			this.polygon4.Name = "polygon4";
-			this.polygon4.Points.AddRange(new NxtControl.Drawing.PointF[] {
-			new NxtControl.Drawing.PointF(224D, 664D),
-			new NxtControl.Drawing.PointF(224D, 680D),
-			new NxtControl.Drawing.PointF(192D, 672D)});
-			// 
 			// sSensors1
 			// 
 			this.sSensors1.BeginInit();
-			this.sSensors1.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.83547557840616959D, 0D, 0D, 0.93333333333333324D, 240D, 288D);
+			this.sSensors1.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.79120474507283622D, 0D, 0D, 0.88387713675213642D, 24.000000000000114D, 369.80423076923091D);
 			this.sSensors1.Name = "sSensors1";
 			this.sSensors1.SecurityToken = ((uint)(4294967295u));
 			this.sSensors1.TagName = "D41247DF3E1D30DC";
@@ -240,58 +90,54 @@ namespace HMI.Main.Canvases
 			this.sReactor41._iAV4x172 = "AV4x172";
 			this.sReactor41._iLT001 = "4xLT1005";
 			this.sReactor41._iREACTOR = "Reactor 1";
-			this.sReactor41.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 544D, 72D);
+			this.sReactor41.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.8669833729216152D, 0D, 0D, 0.8669833729216152D, 496D, 152D);
 			this.sReactor41.Name = "sReactor41";
 			this.sReactor41.SecurityToken = ((uint)(4294967295u));
 			this.sReactor41.TagName = "D41247DF3E1D30DC";
 			this.sReactor41.EndInit();
+			// 
+			// sPhase21
+			// 
+			this.sPhase21.BeginInit();
+			this.sPhase21.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.87931034482758619D, 0D, 0D, 0.87931034482758619D, 16D, 72D);
+			this.sPhase21.Name = "sPhase21";
+			this.sPhase21.SecurityToken = ((uint)(4294967295u));
+			this.sPhase21.TagName = "D41247DF3E1D30DC";
+			this.sPhase21.EndInit();
+			// 
+			// sSettingsBtn1
+			// 
+			this.sSettingsBtn1.BeginInit();
+			this.sSettingsBtn1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 1112D, 72D);
+			this.sSettingsBtn1.Name = "sSettingsBtn1";
+			this.sSettingsBtn1.SecurityToken = ((uint)(4294967295u));
+			this.sSettingsBtn1.TagName = "D41247DF3E1D30DC";
+			this.sSettingsBtn1.EndInit();
 			// 
 			// REACTOR1
 			// 
 			this.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(1366D)), ((float)(698D)));
 			this.Brush = new NxtControl.Drawing.Brush("CanvasBrush");
 			this.Shapes.AddRange(new System.ComponentModel.IComponent[] {
-			this.pipe2,
-			this.pipe4,
-			this.pipe3,
-			this.pipe1,
-			this.changeCanvasButton1,
-			this.changeCanvasButton2,
-			this.changeCanvasButton4,
-			this.changeCanvasButton5,
 			this.HeartBeat,
 			this.Mode,
 			this.OpenWebPage,
 			this.Mode_1,
-			this.REACTOR01_1,
-			this.polygon1,
-			this.polygon2,
-			this.polygon3,
-			this.polygon4,
 			this.sSensors1,
-			this.sReactor41});
+			this.sReactor41,
+			this.sPhase21,
+			this.sSettingsBtn1});
 			this.Size = new System.Drawing.Size(1366, 698);
 
 		}
-		private NxtControl.GuiFramework.ChangeCanvasButton changeCanvasButton1;
-		private NxtControl.GuiFramework.ChangeCanvasButton changeCanvasButton2;
-		private NxtControl.GuiFramework.ChangeCanvasButton changeCanvasButton4;
-		private NxtControl.GuiFramework.ChangeCanvasButton changeCanvasButton5;
 		private SE.Nereda.Symbols.HeartBeat.sDefault HeartBeat;
 		private SE.Nereda.Symbols.Mode.ReactorMode Mode;
 		private SE.Nereda.Symbols.OpenWebPage.sDefault OpenWebPage;
 		private SE.Nereda.Symbols.Mode.ResetReactor1 Mode_1;
-		private NxtControl.GuiFramework.Pipe pipe1;
-		private NxtControl.GuiFramework.Pipe pipe2;
-		private NxtControl.GuiFramework.Pipe pipe3;
-		private NxtControl.GuiFramework.Pipe pipe4;
-		private SE.Nereda.Symbols.NeredaReactor.sPhase2 REACTOR01_1;
-		private NxtControl.GuiFramework.Polygon polygon1;
-		private NxtControl.GuiFramework.Polygon polygon2;
-		private NxtControl.GuiFramework.Polygon polygon3;
-		private NxtControl.GuiFramework.Polygon polygon4;
 		private SE.Nereda.Symbols.NeredaReactor.sSensors sSensors1;
 		private SE.Nereda.Symbols.NeredaReactor.sReactor4 sReactor41;
+		private SE.Nereda.Symbols.NeredaReactor.sPhase2 sPhase21;
+		private SE.Nereda.Symbols.NeredaReactor.sSettingsBtn sSettingsBtn1;
 		#endregion
 	}
 }

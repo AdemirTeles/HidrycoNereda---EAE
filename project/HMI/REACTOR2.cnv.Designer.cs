@@ -29,13 +29,11 @@ namespace HMI.Main.Canvases
 			this.HeartBeat = new SE.Nereda.Symbols.HeartBeat.sDefault();
 			this.Mode = new SE.Nereda.Symbols.Mode.ReactorMode();
 			this.OpenWebPage = new SE.Nereda.Symbols.OpenWebPage.sDefault();
-			this.NVPP_REACTOR02 = new SE.Nereda.Symbols.NeredaReactor.sPhases();
-			this.Mode_1 = new SE.Nereda.Symbols.Mode.ResetReactor2();
-			this.changeCanvasButton1 = new NxtControl.GuiFramework.ChangeCanvasButton();
-			this.changeCanvasButton2 = new NxtControl.GuiFramework.ChangeCanvasButton();
-			this.changeCanvasButton4 = new NxtControl.GuiFramework.ChangeCanvasButton();
-			this.changeCanvasButton5 = new NxtControl.GuiFramework.ChangeCanvasButton();
-			this.REACTOR02 = new SE.Nereda.Symbols.NeredaReactor.sReactor4();
+			this.Mode_1 = new SE.Nereda.Symbols.Mode.ResetReactor1();
+			this.sSensors1 = new SE.Nereda.Symbols.NeredaReactor.sSensors();
+			this.sReactor41 = new SE.Nereda.Symbols.NeredaReactor.sReactor4();
+			this.sPhase21 = new SE.Nereda.Symbols.NeredaReactor.sPhase2();
+			this.sSettingsBtn1 = new SE.Nereda.Symbols.NeredaReactor.sSettingsBtn();
 			// 
 			// HeartBeat
 			// 
@@ -64,71 +62,57 @@ namespace HMI.Main.Canvases
 			this.OpenWebPage.TagName = "61745BDDB91DBEF5";
 			this.OpenWebPage.EndInit();
 			// 
-			// NVPP_REACTOR02
-			// 
-			this.NVPP_REACTOR02.BeginInit();
-			this.NVPP_REACTOR02.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 8D, 64D);
-			this.NVPP_REACTOR02.Name = "NVPP_REACTOR02";
-			this.NVPP_REACTOR02.SecurityToken = ((uint)(4294967295u));
-			this.NVPP_REACTOR02.TagName = "1D81A826384C2197";
-			this.NVPP_REACTOR02.EndInit();
-			// 
 			// Mode_1
 			// 
 			this.Mode_1.BeginInit();
 			this.Mode_1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 1112D, 8D);
 			this.Mode_1.Name = "Mode_1";
-			this.Mode_1.SecurityToken = ((uint)(4294967191u));
+			this.Mode_1.SecurityToken = ((uint)(4294967295u));
 			this.Mode_1.TagName = "7A79C015B9ADE3EB";
 			this.Mode_1.EndInit();
 			// 
-			// changeCanvasButton1
+			// sSensors1
 			// 
-			this.changeCanvasButton1.Bounds = new NxtControl.Drawing.RectF(((float)(8D)), ((float)(592D)), ((float)(168D)), ((float)(32D)));
-			this.changeCanvasButton1.CanvasName = "SLUDGE_BUFFER";
-			this.changeCanvasButton1.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-			this.changeCanvasButton1.Name = "changeCanvasButton1";
-			this.changeCanvasButton1.Text = "SLUDGE BUFFER";
+			this.sSensors1.BeginInit();
+			this.sSensors1.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.79120474507283622D, 0D, 0D, 0.88387713675213642D, 24.000000000000114D, 369.80423076923091D);
+			this.sSensors1.Name = "sSensors1";
+			this.sSensors1.SecurityToken = ((uint)(4294967295u));
+			this.sSensors1.TagName = "1D81A826384C2197";
+			this.sSensors1.EndInit();
 			// 
-			// changeCanvasButton2
+			// sReactor41
 			// 
-			this.changeCanvasButton2.Bounds = new NxtControl.Drawing.RectF(((float)(8D)), ((float)(640D)), ((float)(168D)), ((float)(32D)));
-			this.changeCanvasButton2.CanvasName = "INFLUENT_FEED";
-			this.changeCanvasButton2.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-			this.changeCanvasButton2.Name = "changeCanvasButton2";
-			this.changeCanvasButton2.Text = "INFLUENT FEED";
+			this.sReactor41.BeginInit();
+			this.sReactor41._iAV4x101 = "AV4x101";
+			this.sReactor41._iAV4x103 = "AV4x103";
+			this.sReactor41._iAV4x107 = "AV4x107";
+			this.sReactor41._iAV4x171 = "AV4x171";
+			this.sReactor41._iAV4x172 = "AV4x172";
+			this.sReactor41._iLT001 = "4xLT1005";
+			this.sReactor41._iREACTOR = "Reactor 2";
+			this.sReactor41.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.8669833729216152D, 0D, 0D, 0.8669833729216152D, 496D, 152D);
+			this.sReactor41.Name = "sReactor41";
+			this.sReactor41.SecurityToken = ((uint)(4294967295u));
+			this.sReactor41.TagName = "1D81A826384C2197";
+			this.sReactor41.EndInit();
 			// 
-			// changeCanvasButton4
+			// sPhase21
 			// 
-			this.changeCanvasButton4.Bounds = new NxtControl.Drawing.RectF(((float)(8D)), ((float)(544D)), ((float)(168D)), ((float)(32D)));
-			this.changeCanvasButton4.CanvasName = "EFFLUENT";
-			this.changeCanvasButton4.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-			this.changeCanvasButton4.Name = "changeCanvasButton4";
-			this.changeCanvasButton4.Text = "EFFLUENT";
+			this.sPhase21.BeginInit();
+			this.sPhase21.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.87931034482758619D, 0D, 0D, 0.87931034482758619D, 16.000000000000004D, 72D);
+			this.sPhase21.Name = "sPhase21";
+			this.sPhase21.SecurityToken = ((uint)(4294967295u));
+			this.sPhase21.TagName = "1D81A826384C2197";
+			this.sPhase21.EndInit();
 			// 
-			// changeCanvasButton5
+			// sSettingsBtn1
 			// 
-			this.changeCanvasButton5.Bounds = new NxtControl.Drawing.RectF(((float)(8D)), ((float)(496D)), ((float)(168D)), ((float)(32D)));
-			this.changeCanvasButton5.CanvasName = "ALARMS";
-			this.changeCanvasButton5.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-			this.changeCanvasButton5.Name = "changeCanvasButton5";
-			this.changeCanvasButton5.Text = "ALARMS";
-			// 
-			// REACTOR02
-			// 
-			this.REACTOR02.BeginInit();
-			this.REACTOR02._iAV4x101 = "AV4x101";
-			this.REACTOR02._iAV4x103 = "AV4x103";
-			this.REACTOR02._iAV4x107 = "AV4x107";
-			this.REACTOR02._iAV4x171 = "AV4x171";
-			this.REACTOR02._iAV4x172 = "AV4x172";
-			this.REACTOR02._iLT001 = "42LT1005";
-			this.REACTOR02._iREACTOR = "Reactor 2";
-			this.REACTOR02.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 600D, 200D);
-			this.REACTOR02.Name = "REACTOR02";
-			this.REACTOR02.SecurityToken = ((uint)(4294967295u));
-			this.REACTOR02.TagName = "1D81A826384C2197";
-			this.REACTOR02.EndInit();
+			this.sSettingsBtn1.BeginInit();
+			this.sSettingsBtn1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 1112D, 72D);
+			this.sSettingsBtn1.Name = "sSettingsBtn1";
+			this.sSettingsBtn1.SecurityToken = ((uint)(4294967295u));
+			this.sSettingsBtn1.TagName = "1D81A826384C2197";
+			this.sSettingsBtn1.EndInit();
 			// 
 			// REACTOR2
 			// 
@@ -138,26 +122,22 @@ namespace HMI.Main.Canvases
 			this.HeartBeat,
 			this.Mode,
 			this.OpenWebPage,
-			this.NVPP_REACTOR02,
 			this.Mode_1,
-			this.changeCanvasButton1,
-			this.changeCanvasButton2,
-			this.changeCanvasButton4,
-			this.changeCanvasButton5,
-			this.REACTOR02});
+			this.sSensors1,
+			this.sReactor41,
+			this.sPhase21,
+			this.sSettingsBtn1});
 			this.Size = new System.Drawing.Size(1366, 698);
 
 		}
-		private NxtControl.GuiFramework.ChangeCanvasButton changeCanvasButton1;
-		private NxtControl.GuiFramework.ChangeCanvasButton changeCanvasButton2;
-		private NxtControl.GuiFramework.ChangeCanvasButton changeCanvasButton4;
-		private NxtControl.GuiFramework.ChangeCanvasButton changeCanvasButton5;
 		private SE.Nereda.Symbols.HeartBeat.sDefault HeartBeat;
 		private SE.Nereda.Symbols.Mode.ReactorMode Mode;
 		private SE.Nereda.Symbols.OpenWebPage.sDefault OpenWebPage;
-		private SE.Nereda.Symbols.NeredaReactor.sPhases NVPP_REACTOR02;
-		private SE.Nereda.Symbols.Mode.ResetReactor2 Mode_1;
-		private SE.Nereda.Symbols.NeredaReactor.sReactor4 REACTOR02;
+		private SE.Nereda.Symbols.Mode.ResetReactor1 Mode_1;
+		private SE.Nereda.Symbols.NeredaReactor.sSensors sSensors1;
+		private SE.Nereda.Symbols.NeredaReactor.sReactor4 sReactor41;
+		private SE.Nereda.Symbols.NeredaReactor.sPhase2 sPhase21;
+		private SE.Nereda.Symbols.NeredaReactor.sSettingsBtn sSettingsBtn1;
 		#endregion
 	}
 }

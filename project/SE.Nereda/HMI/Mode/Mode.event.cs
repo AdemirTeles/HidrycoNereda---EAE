@@ -321,6 +321,12 @@ namespace SE.Nereda.Symbols.Mode
        get { return ResetSludgeBuffer_field; }
        set { ResetSludgeBuffer_field = value; }
     }
+    private System.Boolean? ResetAll_field = null;
+    public System.Boolean? ResetAll
+    {
+       get { return ResetAll_field; }
+       set { ResetAll_field = value; }
+    }
 
   }
 
@@ -437,13 +443,13 @@ stack Trace:
       if (!ignore_ModeHMI) _values_[0] = ModeHMI;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
-    public bool FireEvent_RESET_CMD(System.Boolean ResetReactor1, System.Boolean ResetReactor2, System.Boolean ResetReactor3, System.Boolean ResetReactor4, System.Boolean ResetReactor5, System.Boolean ResetReactor6, System.Boolean ResetMetalSaltDosing, System.Boolean ResetEmergency, System.Boolean ResetSludgeBuffer)
+    public bool FireEvent_RESET_CMD(System.Boolean ResetReactor1, System.Boolean ResetReactor2, System.Boolean ResetReactor3, System.Boolean ResetReactor4, System.Boolean ResetReactor5, System.Boolean ResetReactor6, System.Boolean ResetMetalSaltDosing, System.Boolean ResetEmergency, System.Boolean ResetSludgeBuffer, System.Boolean ResetAll)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {ResetReactor1, ResetReactor2, ResetReactor3, ResetReactor4, ResetReactor5, ResetReactor6, ResetMetalSaltDosing, ResetEmergency, ResetSludgeBuffer});
+      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {ResetReactor1, ResetReactor2, ResetReactor3, ResetReactor4, ResetReactor5, ResetReactor6, ResetMetalSaltDosing, ResetEmergency, ResetSludgeBuffer, ResetAll});
     }
     public bool FireEvent_RESET_CMD(SE.Nereda.Symbols.Mode.RESET_CMDEventArgs ea)
     {
-      object[] _values_ = new object[9];
+      object[] _values_ = new object[10];
       if (ea.ResetReactor1.HasValue) _values_[0] = ea.ResetReactor1.Value;
       if (ea.ResetReactor2.HasValue) _values_[1] = ea.ResetReactor2.Value;
       if (ea.ResetReactor3.HasValue) _values_[2] = ea.ResetReactor3.Value;
@@ -453,11 +459,12 @@ stack Trace:
       if (ea.ResetMetalSaltDosing.HasValue) _values_[6] = ea.ResetMetalSaltDosing.Value;
       if (ea.ResetEmergency.HasValue) _values_[7] = ea.ResetEmergency.Value;
       if (ea.ResetSludgeBuffer.HasValue) _values_[8] = ea.ResetSludgeBuffer.Value;
+      if (ea.ResetAll.HasValue) _values_[9] = ea.ResetAll.Value;
       return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
     }
-    public bool FireEvent_RESET_CMD(System.Boolean ResetReactor1, bool ignore_ResetReactor1, System.Boolean ResetReactor2, bool ignore_ResetReactor2, System.Boolean ResetReactor3, bool ignore_ResetReactor3, System.Boolean ResetReactor4, bool ignore_ResetReactor4, System.Boolean ResetReactor5, bool ignore_ResetReactor5, System.Boolean ResetReactor6, bool ignore_ResetReactor6, System.Boolean ResetMetalSaltDosing, bool ignore_ResetMetalSaltDosing, System.Boolean ResetEmergency, bool ignore_ResetEmergency, System.Boolean ResetSludgeBuffer, bool ignore_ResetSludgeBuffer)
+    public bool FireEvent_RESET_CMD(System.Boolean ResetReactor1, bool ignore_ResetReactor1, System.Boolean ResetReactor2, bool ignore_ResetReactor2, System.Boolean ResetReactor3, bool ignore_ResetReactor3, System.Boolean ResetReactor4, bool ignore_ResetReactor4, System.Boolean ResetReactor5, bool ignore_ResetReactor5, System.Boolean ResetReactor6, bool ignore_ResetReactor6, System.Boolean ResetMetalSaltDosing, bool ignore_ResetMetalSaltDosing, System.Boolean ResetEmergency, bool ignore_ResetEmergency, System.Boolean ResetSludgeBuffer, bool ignore_ResetSludgeBuffer, System.Boolean ResetAll, bool ignore_ResetAll)
     {
-      object[] _values_ = new object[9];
+      object[] _values_ = new object[10];
       if (!ignore_ResetReactor1) _values_[0] = ResetReactor1;
       if (!ignore_ResetReactor2) _values_[1] = ResetReactor2;
       if (!ignore_ResetReactor3) _values_[2] = ResetReactor3;
@@ -467,6 +474,7 @@ stack Trace:
       if (!ignore_ResetMetalSaltDosing) _values_[6] = ResetMetalSaltDosing;
       if (!ignore_ResetEmergency) _values_[7] = ResetEmergency;
       if (!ignore_ResetSludgeBuffer) _values_[8] = ResetSludgeBuffer;
+      if (!ignore_ResetAll) _values_[9] = ResetAll;
       return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
     }
 
@@ -584,13 +592,13 @@ stack Trace:
       if (!ignore_ModeHMI) _values_[0] = ModeHMI;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
-    public bool FireEvent_RESET_CMD(System.Boolean ResetReactor1, System.Boolean ResetReactor2, System.Boolean ResetReactor3, System.Boolean ResetReactor4, System.Boolean ResetReactor5, System.Boolean ResetReactor6, System.Boolean ResetMetalSaltDosing, System.Boolean ResetEmergency, System.Boolean ResetSludgeBuffer)
+    public bool FireEvent_RESET_CMD(System.Boolean ResetReactor1, System.Boolean ResetReactor2, System.Boolean ResetReactor3, System.Boolean ResetReactor4, System.Boolean ResetReactor5, System.Boolean ResetReactor6, System.Boolean ResetMetalSaltDosing, System.Boolean ResetEmergency, System.Boolean ResetSludgeBuffer, System.Boolean ResetAll)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {ResetReactor1, ResetReactor2, ResetReactor3, ResetReactor4, ResetReactor5, ResetReactor6, ResetMetalSaltDosing, ResetEmergency, ResetSludgeBuffer});
+      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {ResetReactor1, ResetReactor2, ResetReactor3, ResetReactor4, ResetReactor5, ResetReactor6, ResetMetalSaltDosing, ResetEmergency, ResetSludgeBuffer, ResetAll});
     }
     public bool FireEvent_RESET_CMD(SE.Nereda.Symbols.Mode.RESET_CMDEventArgs ea)
     {
-      object[] _values_ = new object[9];
+      object[] _values_ = new object[10];
       if (ea.ResetReactor1.HasValue) _values_[0] = ea.ResetReactor1.Value;
       if (ea.ResetReactor2.HasValue) _values_[1] = ea.ResetReactor2.Value;
       if (ea.ResetReactor3.HasValue) _values_[2] = ea.ResetReactor3.Value;
@@ -600,11 +608,12 @@ stack Trace:
       if (ea.ResetMetalSaltDosing.HasValue) _values_[6] = ea.ResetMetalSaltDosing.Value;
       if (ea.ResetEmergency.HasValue) _values_[7] = ea.ResetEmergency.Value;
       if (ea.ResetSludgeBuffer.HasValue) _values_[8] = ea.ResetSludgeBuffer.Value;
+      if (ea.ResetAll.HasValue) _values_[9] = ea.ResetAll.Value;
       return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
     }
-    public bool FireEvent_RESET_CMD(System.Boolean ResetReactor1, bool ignore_ResetReactor1, System.Boolean ResetReactor2, bool ignore_ResetReactor2, System.Boolean ResetReactor3, bool ignore_ResetReactor3, System.Boolean ResetReactor4, bool ignore_ResetReactor4, System.Boolean ResetReactor5, bool ignore_ResetReactor5, System.Boolean ResetReactor6, bool ignore_ResetReactor6, System.Boolean ResetMetalSaltDosing, bool ignore_ResetMetalSaltDosing, System.Boolean ResetEmergency, bool ignore_ResetEmergency, System.Boolean ResetSludgeBuffer, bool ignore_ResetSludgeBuffer)
+    public bool FireEvent_RESET_CMD(System.Boolean ResetReactor1, bool ignore_ResetReactor1, System.Boolean ResetReactor2, bool ignore_ResetReactor2, System.Boolean ResetReactor3, bool ignore_ResetReactor3, System.Boolean ResetReactor4, bool ignore_ResetReactor4, System.Boolean ResetReactor5, bool ignore_ResetReactor5, System.Boolean ResetReactor6, bool ignore_ResetReactor6, System.Boolean ResetMetalSaltDosing, bool ignore_ResetMetalSaltDosing, System.Boolean ResetEmergency, bool ignore_ResetEmergency, System.Boolean ResetSludgeBuffer, bool ignore_ResetSludgeBuffer, System.Boolean ResetAll, bool ignore_ResetAll)
     {
-      object[] _values_ = new object[9];
+      object[] _values_ = new object[10];
       if (!ignore_ResetReactor1) _values_[0] = ResetReactor1;
       if (!ignore_ResetReactor2) _values_[1] = ResetReactor2;
       if (!ignore_ResetReactor3) _values_[2] = ResetReactor3;
@@ -614,6 +623,7 @@ stack Trace:
       if (!ignore_ResetMetalSaltDosing) _values_[6] = ResetMetalSaltDosing;
       if (!ignore_ResetEmergency) _values_[7] = ResetEmergency;
       if (!ignore_ResetSludgeBuffer) _values_[8] = ResetSludgeBuffer;
+      if (!ignore_ResetAll) _values_[9] = ResetAll;
       return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
     }
 
@@ -731,13 +741,13 @@ stack Trace:
       if (!ignore_ModeHMI) _values_[0] = ModeHMI;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
-    public bool FireEvent_RESET_CMD(System.Boolean ResetReactor1, System.Boolean ResetReactor2, System.Boolean ResetReactor3, System.Boolean ResetReactor4, System.Boolean ResetReactor5, System.Boolean ResetReactor6, System.Boolean ResetMetalSaltDosing, System.Boolean ResetEmergency, System.Boolean ResetSludgeBuffer)
+    public bool FireEvent_RESET_CMD(System.Boolean ResetReactor1, System.Boolean ResetReactor2, System.Boolean ResetReactor3, System.Boolean ResetReactor4, System.Boolean ResetReactor5, System.Boolean ResetReactor6, System.Boolean ResetMetalSaltDosing, System.Boolean ResetEmergency, System.Boolean ResetSludgeBuffer, System.Boolean ResetAll)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {ResetReactor1, ResetReactor2, ResetReactor3, ResetReactor4, ResetReactor5, ResetReactor6, ResetMetalSaltDosing, ResetEmergency, ResetSludgeBuffer});
+      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {ResetReactor1, ResetReactor2, ResetReactor3, ResetReactor4, ResetReactor5, ResetReactor6, ResetMetalSaltDosing, ResetEmergency, ResetSludgeBuffer, ResetAll});
     }
     public bool FireEvent_RESET_CMD(SE.Nereda.Symbols.Mode.RESET_CMDEventArgs ea)
     {
-      object[] _values_ = new object[9];
+      object[] _values_ = new object[10];
       if (ea.ResetReactor1.HasValue) _values_[0] = ea.ResetReactor1.Value;
       if (ea.ResetReactor2.HasValue) _values_[1] = ea.ResetReactor2.Value;
       if (ea.ResetReactor3.HasValue) _values_[2] = ea.ResetReactor3.Value;
@@ -747,11 +757,12 @@ stack Trace:
       if (ea.ResetMetalSaltDosing.HasValue) _values_[6] = ea.ResetMetalSaltDosing.Value;
       if (ea.ResetEmergency.HasValue) _values_[7] = ea.ResetEmergency.Value;
       if (ea.ResetSludgeBuffer.HasValue) _values_[8] = ea.ResetSludgeBuffer.Value;
+      if (ea.ResetAll.HasValue) _values_[9] = ea.ResetAll.Value;
       return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
     }
-    public bool FireEvent_RESET_CMD(System.Boolean ResetReactor1, bool ignore_ResetReactor1, System.Boolean ResetReactor2, bool ignore_ResetReactor2, System.Boolean ResetReactor3, bool ignore_ResetReactor3, System.Boolean ResetReactor4, bool ignore_ResetReactor4, System.Boolean ResetReactor5, bool ignore_ResetReactor5, System.Boolean ResetReactor6, bool ignore_ResetReactor6, System.Boolean ResetMetalSaltDosing, bool ignore_ResetMetalSaltDosing, System.Boolean ResetEmergency, bool ignore_ResetEmergency, System.Boolean ResetSludgeBuffer, bool ignore_ResetSludgeBuffer)
+    public bool FireEvent_RESET_CMD(System.Boolean ResetReactor1, bool ignore_ResetReactor1, System.Boolean ResetReactor2, bool ignore_ResetReactor2, System.Boolean ResetReactor3, bool ignore_ResetReactor3, System.Boolean ResetReactor4, bool ignore_ResetReactor4, System.Boolean ResetReactor5, bool ignore_ResetReactor5, System.Boolean ResetReactor6, bool ignore_ResetReactor6, System.Boolean ResetMetalSaltDosing, bool ignore_ResetMetalSaltDosing, System.Boolean ResetEmergency, bool ignore_ResetEmergency, System.Boolean ResetSludgeBuffer, bool ignore_ResetSludgeBuffer, System.Boolean ResetAll, bool ignore_ResetAll)
     {
-      object[] _values_ = new object[9];
+      object[] _values_ = new object[10];
       if (!ignore_ResetReactor1) _values_[0] = ResetReactor1;
       if (!ignore_ResetReactor2) _values_[1] = ResetReactor2;
       if (!ignore_ResetReactor3) _values_[2] = ResetReactor3;
@@ -761,6 +772,7 @@ stack Trace:
       if (!ignore_ResetMetalSaltDosing) _values_[6] = ResetMetalSaltDosing;
       if (!ignore_ResetEmergency) _values_[7] = ResetEmergency;
       if (!ignore_ResetSludgeBuffer) _values_[8] = ResetSludgeBuffer;
+      if (!ignore_ResetAll) _values_[9] = ResetAll;
       return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
     }
 
@@ -878,13 +890,13 @@ stack Trace:
       if (!ignore_ModeHMI) _values_[0] = ModeHMI;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
-    public bool FireEvent_RESET_CMD(System.Boolean ResetReactor1, System.Boolean ResetReactor2, System.Boolean ResetReactor3, System.Boolean ResetReactor4, System.Boolean ResetReactor5, System.Boolean ResetReactor6, System.Boolean ResetMetalSaltDosing, System.Boolean ResetEmergency, System.Boolean ResetSludgeBuffer)
+    public bool FireEvent_RESET_CMD(System.Boolean ResetReactor1, System.Boolean ResetReactor2, System.Boolean ResetReactor3, System.Boolean ResetReactor4, System.Boolean ResetReactor5, System.Boolean ResetReactor6, System.Boolean ResetMetalSaltDosing, System.Boolean ResetEmergency, System.Boolean ResetSludgeBuffer, System.Boolean ResetAll)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {ResetReactor1, ResetReactor2, ResetReactor3, ResetReactor4, ResetReactor5, ResetReactor6, ResetMetalSaltDosing, ResetEmergency, ResetSludgeBuffer});
+      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {ResetReactor1, ResetReactor2, ResetReactor3, ResetReactor4, ResetReactor5, ResetReactor6, ResetMetalSaltDosing, ResetEmergency, ResetSludgeBuffer, ResetAll});
     }
     public bool FireEvent_RESET_CMD(SE.Nereda.Symbols.Mode.RESET_CMDEventArgs ea)
     {
-      object[] _values_ = new object[9];
+      object[] _values_ = new object[10];
       if (ea.ResetReactor1.HasValue) _values_[0] = ea.ResetReactor1.Value;
       if (ea.ResetReactor2.HasValue) _values_[1] = ea.ResetReactor2.Value;
       if (ea.ResetReactor3.HasValue) _values_[2] = ea.ResetReactor3.Value;
@@ -894,11 +906,12 @@ stack Trace:
       if (ea.ResetMetalSaltDosing.HasValue) _values_[6] = ea.ResetMetalSaltDosing.Value;
       if (ea.ResetEmergency.HasValue) _values_[7] = ea.ResetEmergency.Value;
       if (ea.ResetSludgeBuffer.HasValue) _values_[8] = ea.ResetSludgeBuffer.Value;
+      if (ea.ResetAll.HasValue) _values_[9] = ea.ResetAll.Value;
       return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
     }
-    public bool FireEvent_RESET_CMD(System.Boolean ResetReactor1, bool ignore_ResetReactor1, System.Boolean ResetReactor2, bool ignore_ResetReactor2, System.Boolean ResetReactor3, bool ignore_ResetReactor3, System.Boolean ResetReactor4, bool ignore_ResetReactor4, System.Boolean ResetReactor5, bool ignore_ResetReactor5, System.Boolean ResetReactor6, bool ignore_ResetReactor6, System.Boolean ResetMetalSaltDosing, bool ignore_ResetMetalSaltDosing, System.Boolean ResetEmergency, bool ignore_ResetEmergency, System.Boolean ResetSludgeBuffer, bool ignore_ResetSludgeBuffer)
+    public bool FireEvent_RESET_CMD(System.Boolean ResetReactor1, bool ignore_ResetReactor1, System.Boolean ResetReactor2, bool ignore_ResetReactor2, System.Boolean ResetReactor3, bool ignore_ResetReactor3, System.Boolean ResetReactor4, bool ignore_ResetReactor4, System.Boolean ResetReactor5, bool ignore_ResetReactor5, System.Boolean ResetReactor6, bool ignore_ResetReactor6, System.Boolean ResetMetalSaltDosing, bool ignore_ResetMetalSaltDosing, System.Boolean ResetEmergency, bool ignore_ResetEmergency, System.Boolean ResetSludgeBuffer, bool ignore_ResetSludgeBuffer, System.Boolean ResetAll, bool ignore_ResetAll)
     {
-      object[] _values_ = new object[9];
+      object[] _values_ = new object[10];
       if (!ignore_ResetReactor1) _values_[0] = ResetReactor1;
       if (!ignore_ResetReactor2) _values_[1] = ResetReactor2;
       if (!ignore_ResetReactor3) _values_[2] = ResetReactor3;
@@ -908,6 +921,7 @@ stack Trace:
       if (!ignore_ResetMetalSaltDosing) _values_[6] = ResetMetalSaltDosing;
       if (!ignore_ResetEmergency) _values_[7] = ResetEmergency;
       if (!ignore_ResetSludgeBuffer) _values_[8] = ResetSludgeBuffer;
+      if (!ignore_ResetAll) _values_[9] = ResetAll;
       return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
     }
 
@@ -1025,13 +1039,13 @@ stack Trace:
       if (!ignore_ModeHMI) _values_[0] = ModeHMI;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
-    public bool FireEvent_RESET_CMD(System.Boolean ResetReactor1, System.Boolean ResetReactor2, System.Boolean ResetReactor3, System.Boolean ResetReactor4, System.Boolean ResetReactor5, System.Boolean ResetReactor6, System.Boolean ResetMetalSaltDosing, System.Boolean ResetEmergency, System.Boolean ResetSludgeBuffer)
+    public bool FireEvent_RESET_CMD(System.Boolean ResetReactor1, System.Boolean ResetReactor2, System.Boolean ResetReactor3, System.Boolean ResetReactor4, System.Boolean ResetReactor5, System.Boolean ResetReactor6, System.Boolean ResetMetalSaltDosing, System.Boolean ResetEmergency, System.Boolean ResetSludgeBuffer, System.Boolean ResetAll)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {ResetReactor1, ResetReactor2, ResetReactor3, ResetReactor4, ResetReactor5, ResetReactor6, ResetMetalSaltDosing, ResetEmergency, ResetSludgeBuffer});
+      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {ResetReactor1, ResetReactor2, ResetReactor3, ResetReactor4, ResetReactor5, ResetReactor6, ResetMetalSaltDosing, ResetEmergency, ResetSludgeBuffer, ResetAll});
     }
     public bool FireEvent_RESET_CMD(SE.Nereda.Symbols.Mode.RESET_CMDEventArgs ea)
     {
-      object[] _values_ = new object[9];
+      object[] _values_ = new object[10];
       if (ea.ResetReactor1.HasValue) _values_[0] = ea.ResetReactor1.Value;
       if (ea.ResetReactor2.HasValue) _values_[1] = ea.ResetReactor2.Value;
       if (ea.ResetReactor3.HasValue) _values_[2] = ea.ResetReactor3.Value;
@@ -1041,11 +1055,12 @@ stack Trace:
       if (ea.ResetMetalSaltDosing.HasValue) _values_[6] = ea.ResetMetalSaltDosing.Value;
       if (ea.ResetEmergency.HasValue) _values_[7] = ea.ResetEmergency.Value;
       if (ea.ResetSludgeBuffer.HasValue) _values_[8] = ea.ResetSludgeBuffer.Value;
+      if (ea.ResetAll.HasValue) _values_[9] = ea.ResetAll.Value;
       return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
     }
-    public bool FireEvent_RESET_CMD(System.Boolean ResetReactor1, bool ignore_ResetReactor1, System.Boolean ResetReactor2, bool ignore_ResetReactor2, System.Boolean ResetReactor3, bool ignore_ResetReactor3, System.Boolean ResetReactor4, bool ignore_ResetReactor4, System.Boolean ResetReactor5, bool ignore_ResetReactor5, System.Boolean ResetReactor6, bool ignore_ResetReactor6, System.Boolean ResetMetalSaltDosing, bool ignore_ResetMetalSaltDosing, System.Boolean ResetEmergency, bool ignore_ResetEmergency, System.Boolean ResetSludgeBuffer, bool ignore_ResetSludgeBuffer)
+    public bool FireEvent_RESET_CMD(System.Boolean ResetReactor1, bool ignore_ResetReactor1, System.Boolean ResetReactor2, bool ignore_ResetReactor2, System.Boolean ResetReactor3, bool ignore_ResetReactor3, System.Boolean ResetReactor4, bool ignore_ResetReactor4, System.Boolean ResetReactor5, bool ignore_ResetReactor5, System.Boolean ResetReactor6, bool ignore_ResetReactor6, System.Boolean ResetMetalSaltDosing, bool ignore_ResetMetalSaltDosing, System.Boolean ResetEmergency, bool ignore_ResetEmergency, System.Boolean ResetSludgeBuffer, bool ignore_ResetSludgeBuffer, System.Boolean ResetAll, bool ignore_ResetAll)
     {
-      object[] _values_ = new object[9];
+      object[] _values_ = new object[10];
       if (!ignore_ResetReactor1) _values_[0] = ResetReactor1;
       if (!ignore_ResetReactor2) _values_[1] = ResetReactor2;
       if (!ignore_ResetReactor3) _values_[2] = ResetReactor3;
@@ -1055,6 +1070,7 @@ stack Trace:
       if (!ignore_ResetMetalSaltDosing) _values_[6] = ResetMetalSaltDosing;
       if (!ignore_ResetEmergency) _values_[7] = ResetEmergency;
       if (!ignore_ResetSludgeBuffer) _values_[8] = ResetSludgeBuffer;
+      if (!ignore_ResetAll) _values_[9] = ResetAll;
       return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
     }
 
@@ -1172,13 +1188,13 @@ stack Trace:
       if (!ignore_ModeHMI) _values_[0] = ModeHMI;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
-    public bool FireEvent_RESET_CMD(System.Boolean ResetReactor1, System.Boolean ResetReactor2, System.Boolean ResetReactor3, System.Boolean ResetReactor4, System.Boolean ResetReactor5, System.Boolean ResetReactor6, System.Boolean ResetMetalSaltDosing, System.Boolean ResetEmergency, System.Boolean ResetSludgeBuffer)
+    public bool FireEvent_RESET_CMD(System.Boolean ResetReactor1, System.Boolean ResetReactor2, System.Boolean ResetReactor3, System.Boolean ResetReactor4, System.Boolean ResetReactor5, System.Boolean ResetReactor6, System.Boolean ResetMetalSaltDosing, System.Boolean ResetEmergency, System.Boolean ResetSludgeBuffer, System.Boolean ResetAll)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {ResetReactor1, ResetReactor2, ResetReactor3, ResetReactor4, ResetReactor5, ResetReactor6, ResetMetalSaltDosing, ResetEmergency, ResetSludgeBuffer});
+      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {ResetReactor1, ResetReactor2, ResetReactor3, ResetReactor4, ResetReactor5, ResetReactor6, ResetMetalSaltDosing, ResetEmergency, ResetSludgeBuffer, ResetAll});
     }
     public bool FireEvent_RESET_CMD(SE.Nereda.Symbols.Mode.RESET_CMDEventArgs ea)
     {
-      object[] _values_ = new object[9];
+      object[] _values_ = new object[10];
       if (ea.ResetReactor1.HasValue) _values_[0] = ea.ResetReactor1.Value;
       if (ea.ResetReactor2.HasValue) _values_[1] = ea.ResetReactor2.Value;
       if (ea.ResetReactor3.HasValue) _values_[2] = ea.ResetReactor3.Value;
@@ -1188,11 +1204,12 @@ stack Trace:
       if (ea.ResetMetalSaltDosing.HasValue) _values_[6] = ea.ResetMetalSaltDosing.Value;
       if (ea.ResetEmergency.HasValue) _values_[7] = ea.ResetEmergency.Value;
       if (ea.ResetSludgeBuffer.HasValue) _values_[8] = ea.ResetSludgeBuffer.Value;
+      if (ea.ResetAll.HasValue) _values_[9] = ea.ResetAll.Value;
       return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
     }
-    public bool FireEvent_RESET_CMD(System.Boolean ResetReactor1, bool ignore_ResetReactor1, System.Boolean ResetReactor2, bool ignore_ResetReactor2, System.Boolean ResetReactor3, bool ignore_ResetReactor3, System.Boolean ResetReactor4, bool ignore_ResetReactor4, System.Boolean ResetReactor5, bool ignore_ResetReactor5, System.Boolean ResetReactor6, bool ignore_ResetReactor6, System.Boolean ResetMetalSaltDosing, bool ignore_ResetMetalSaltDosing, System.Boolean ResetEmergency, bool ignore_ResetEmergency, System.Boolean ResetSludgeBuffer, bool ignore_ResetSludgeBuffer)
+    public bool FireEvent_RESET_CMD(System.Boolean ResetReactor1, bool ignore_ResetReactor1, System.Boolean ResetReactor2, bool ignore_ResetReactor2, System.Boolean ResetReactor3, bool ignore_ResetReactor3, System.Boolean ResetReactor4, bool ignore_ResetReactor4, System.Boolean ResetReactor5, bool ignore_ResetReactor5, System.Boolean ResetReactor6, bool ignore_ResetReactor6, System.Boolean ResetMetalSaltDosing, bool ignore_ResetMetalSaltDosing, System.Boolean ResetEmergency, bool ignore_ResetEmergency, System.Boolean ResetSludgeBuffer, bool ignore_ResetSludgeBuffer, System.Boolean ResetAll, bool ignore_ResetAll)
     {
-      object[] _values_ = new object[9];
+      object[] _values_ = new object[10];
       if (!ignore_ResetReactor1) _values_[0] = ResetReactor1;
       if (!ignore_ResetReactor2) _values_[1] = ResetReactor2;
       if (!ignore_ResetReactor3) _values_[2] = ResetReactor3;
@@ -1202,6 +1219,7 @@ stack Trace:
       if (!ignore_ResetMetalSaltDosing) _values_[6] = ResetMetalSaltDosing;
       if (!ignore_ResetEmergency) _values_[7] = ResetEmergency;
       if (!ignore_ResetSludgeBuffer) _values_[8] = ResetSludgeBuffer;
+      if (!ignore_ResetAll) _values_[9] = ResetAll;
       return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
     }
 
@@ -1319,13 +1337,13 @@ stack Trace:
       if (!ignore_ModeHMI) _values_[0] = ModeHMI;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
-    public bool FireEvent_RESET_CMD(System.Boolean ResetReactor1, System.Boolean ResetReactor2, System.Boolean ResetReactor3, System.Boolean ResetReactor4, System.Boolean ResetReactor5, System.Boolean ResetReactor6, System.Boolean ResetMetalSaltDosing, System.Boolean ResetEmergency, System.Boolean ResetSludgeBuffer)
+    public bool FireEvent_RESET_CMD(System.Boolean ResetReactor1, System.Boolean ResetReactor2, System.Boolean ResetReactor3, System.Boolean ResetReactor4, System.Boolean ResetReactor5, System.Boolean ResetReactor6, System.Boolean ResetMetalSaltDosing, System.Boolean ResetEmergency, System.Boolean ResetSludgeBuffer, System.Boolean ResetAll)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {ResetReactor1, ResetReactor2, ResetReactor3, ResetReactor4, ResetReactor5, ResetReactor6, ResetMetalSaltDosing, ResetEmergency, ResetSludgeBuffer});
+      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {ResetReactor1, ResetReactor2, ResetReactor3, ResetReactor4, ResetReactor5, ResetReactor6, ResetMetalSaltDosing, ResetEmergency, ResetSludgeBuffer, ResetAll});
     }
     public bool FireEvent_RESET_CMD(SE.Nereda.Symbols.Mode.RESET_CMDEventArgs ea)
     {
-      object[] _values_ = new object[9];
+      object[] _values_ = new object[10];
       if (ea.ResetReactor1.HasValue) _values_[0] = ea.ResetReactor1.Value;
       if (ea.ResetReactor2.HasValue) _values_[1] = ea.ResetReactor2.Value;
       if (ea.ResetReactor3.HasValue) _values_[2] = ea.ResetReactor3.Value;
@@ -1335,11 +1353,12 @@ stack Trace:
       if (ea.ResetMetalSaltDosing.HasValue) _values_[6] = ea.ResetMetalSaltDosing.Value;
       if (ea.ResetEmergency.HasValue) _values_[7] = ea.ResetEmergency.Value;
       if (ea.ResetSludgeBuffer.HasValue) _values_[8] = ea.ResetSludgeBuffer.Value;
+      if (ea.ResetAll.HasValue) _values_[9] = ea.ResetAll.Value;
       return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
     }
-    public bool FireEvent_RESET_CMD(System.Boolean ResetReactor1, bool ignore_ResetReactor1, System.Boolean ResetReactor2, bool ignore_ResetReactor2, System.Boolean ResetReactor3, bool ignore_ResetReactor3, System.Boolean ResetReactor4, bool ignore_ResetReactor4, System.Boolean ResetReactor5, bool ignore_ResetReactor5, System.Boolean ResetReactor6, bool ignore_ResetReactor6, System.Boolean ResetMetalSaltDosing, bool ignore_ResetMetalSaltDosing, System.Boolean ResetEmergency, bool ignore_ResetEmergency, System.Boolean ResetSludgeBuffer, bool ignore_ResetSludgeBuffer)
+    public bool FireEvent_RESET_CMD(System.Boolean ResetReactor1, bool ignore_ResetReactor1, System.Boolean ResetReactor2, bool ignore_ResetReactor2, System.Boolean ResetReactor3, bool ignore_ResetReactor3, System.Boolean ResetReactor4, bool ignore_ResetReactor4, System.Boolean ResetReactor5, bool ignore_ResetReactor5, System.Boolean ResetReactor6, bool ignore_ResetReactor6, System.Boolean ResetMetalSaltDosing, bool ignore_ResetMetalSaltDosing, System.Boolean ResetEmergency, bool ignore_ResetEmergency, System.Boolean ResetSludgeBuffer, bool ignore_ResetSludgeBuffer, System.Boolean ResetAll, bool ignore_ResetAll)
     {
-      object[] _values_ = new object[9];
+      object[] _values_ = new object[10];
       if (!ignore_ResetReactor1) _values_[0] = ResetReactor1;
       if (!ignore_ResetReactor2) _values_[1] = ResetReactor2;
       if (!ignore_ResetReactor3) _values_[2] = ResetReactor3;
@@ -1349,6 +1368,7 @@ stack Trace:
       if (!ignore_ResetMetalSaltDosing) _values_[6] = ResetMetalSaltDosing;
       if (!ignore_ResetEmergency) _values_[7] = ResetEmergency;
       if (!ignore_ResetSludgeBuffer) _values_[8] = ResetSludgeBuffer;
+      if (!ignore_ResetAll) _values_[9] = ResetAll;
       return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
     }
 
@@ -1466,13 +1486,13 @@ stack Trace:
       if (!ignore_ModeHMI) _values_[0] = ModeHMI;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
-    public bool FireEvent_RESET_CMD(System.Boolean ResetReactor1, System.Boolean ResetReactor2, System.Boolean ResetReactor3, System.Boolean ResetReactor4, System.Boolean ResetReactor5, System.Boolean ResetReactor6, System.Boolean ResetMetalSaltDosing, System.Boolean ResetEmergency, System.Boolean ResetSludgeBuffer)
+    public bool FireEvent_RESET_CMD(System.Boolean ResetReactor1, System.Boolean ResetReactor2, System.Boolean ResetReactor3, System.Boolean ResetReactor4, System.Boolean ResetReactor5, System.Boolean ResetReactor6, System.Boolean ResetMetalSaltDosing, System.Boolean ResetEmergency, System.Boolean ResetSludgeBuffer, System.Boolean ResetAll)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {ResetReactor1, ResetReactor2, ResetReactor3, ResetReactor4, ResetReactor5, ResetReactor6, ResetMetalSaltDosing, ResetEmergency, ResetSludgeBuffer});
+      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {ResetReactor1, ResetReactor2, ResetReactor3, ResetReactor4, ResetReactor5, ResetReactor6, ResetMetalSaltDosing, ResetEmergency, ResetSludgeBuffer, ResetAll});
     }
     public bool FireEvent_RESET_CMD(SE.Nereda.Symbols.Mode.RESET_CMDEventArgs ea)
     {
-      object[] _values_ = new object[9];
+      object[] _values_ = new object[10];
       if (ea.ResetReactor1.HasValue) _values_[0] = ea.ResetReactor1.Value;
       if (ea.ResetReactor2.HasValue) _values_[1] = ea.ResetReactor2.Value;
       if (ea.ResetReactor3.HasValue) _values_[2] = ea.ResetReactor3.Value;
@@ -1482,11 +1502,12 @@ stack Trace:
       if (ea.ResetMetalSaltDosing.HasValue) _values_[6] = ea.ResetMetalSaltDosing.Value;
       if (ea.ResetEmergency.HasValue) _values_[7] = ea.ResetEmergency.Value;
       if (ea.ResetSludgeBuffer.HasValue) _values_[8] = ea.ResetSludgeBuffer.Value;
+      if (ea.ResetAll.HasValue) _values_[9] = ea.ResetAll.Value;
       return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
     }
-    public bool FireEvent_RESET_CMD(System.Boolean ResetReactor1, bool ignore_ResetReactor1, System.Boolean ResetReactor2, bool ignore_ResetReactor2, System.Boolean ResetReactor3, bool ignore_ResetReactor3, System.Boolean ResetReactor4, bool ignore_ResetReactor4, System.Boolean ResetReactor5, bool ignore_ResetReactor5, System.Boolean ResetReactor6, bool ignore_ResetReactor6, System.Boolean ResetMetalSaltDosing, bool ignore_ResetMetalSaltDosing, System.Boolean ResetEmergency, bool ignore_ResetEmergency, System.Boolean ResetSludgeBuffer, bool ignore_ResetSludgeBuffer)
+    public bool FireEvent_RESET_CMD(System.Boolean ResetReactor1, bool ignore_ResetReactor1, System.Boolean ResetReactor2, bool ignore_ResetReactor2, System.Boolean ResetReactor3, bool ignore_ResetReactor3, System.Boolean ResetReactor4, bool ignore_ResetReactor4, System.Boolean ResetReactor5, bool ignore_ResetReactor5, System.Boolean ResetReactor6, bool ignore_ResetReactor6, System.Boolean ResetMetalSaltDosing, bool ignore_ResetMetalSaltDosing, System.Boolean ResetEmergency, bool ignore_ResetEmergency, System.Boolean ResetSludgeBuffer, bool ignore_ResetSludgeBuffer, System.Boolean ResetAll, bool ignore_ResetAll)
     {
-      object[] _values_ = new object[9];
+      object[] _values_ = new object[10];
       if (!ignore_ResetReactor1) _values_[0] = ResetReactor1;
       if (!ignore_ResetReactor2) _values_[1] = ResetReactor2;
       if (!ignore_ResetReactor3) _values_[2] = ResetReactor3;
@@ -1496,6 +1517,7 @@ stack Trace:
       if (!ignore_ResetMetalSaltDosing) _values_[6] = ResetMetalSaltDosing;
       if (!ignore_ResetEmergency) _values_[7] = ResetEmergency;
       if (!ignore_ResetSludgeBuffer) _values_[8] = ResetSludgeBuffer;
+      if (!ignore_ResetAll) _values_[9] = ResetAll;
       return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
     }
 
@@ -1613,13 +1635,13 @@ stack Trace:
       if (!ignore_ModeHMI) _values_[0] = ModeHMI;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
-    public bool FireEvent_RESET_CMD(System.Boolean ResetReactor1, System.Boolean ResetReactor2, System.Boolean ResetReactor3, System.Boolean ResetReactor4, System.Boolean ResetReactor5, System.Boolean ResetReactor6, System.Boolean ResetMetalSaltDosing, System.Boolean ResetEmergency, System.Boolean ResetSludgeBuffer)
+    public bool FireEvent_RESET_CMD(System.Boolean ResetReactor1, System.Boolean ResetReactor2, System.Boolean ResetReactor3, System.Boolean ResetReactor4, System.Boolean ResetReactor5, System.Boolean ResetReactor6, System.Boolean ResetMetalSaltDosing, System.Boolean ResetEmergency, System.Boolean ResetSludgeBuffer, System.Boolean ResetAll)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {ResetReactor1, ResetReactor2, ResetReactor3, ResetReactor4, ResetReactor5, ResetReactor6, ResetMetalSaltDosing, ResetEmergency, ResetSludgeBuffer});
+      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {ResetReactor1, ResetReactor2, ResetReactor3, ResetReactor4, ResetReactor5, ResetReactor6, ResetMetalSaltDosing, ResetEmergency, ResetSludgeBuffer, ResetAll});
     }
     public bool FireEvent_RESET_CMD(SE.Nereda.Symbols.Mode.RESET_CMDEventArgs ea)
     {
-      object[] _values_ = new object[9];
+      object[] _values_ = new object[10];
       if (ea.ResetReactor1.HasValue) _values_[0] = ea.ResetReactor1.Value;
       if (ea.ResetReactor2.HasValue) _values_[1] = ea.ResetReactor2.Value;
       if (ea.ResetReactor3.HasValue) _values_[2] = ea.ResetReactor3.Value;
@@ -1629,11 +1651,12 @@ stack Trace:
       if (ea.ResetMetalSaltDosing.HasValue) _values_[6] = ea.ResetMetalSaltDosing.Value;
       if (ea.ResetEmergency.HasValue) _values_[7] = ea.ResetEmergency.Value;
       if (ea.ResetSludgeBuffer.HasValue) _values_[8] = ea.ResetSludgeBuffer.Value;
+      if (ea.ResetAll.HasValue) _values_[9] = ea.ResetAll.Value;
       return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
     }
-    public bool FireEvent_RESET_CMD(System.Boolean ResetReactor1, bool ignore_ResetReactor1, System.Boolean ResetReactor2, bool ignore_ResetReactor2, System.Boolean ResetReactor3, bool ignore_ResetReactor3, System.Boolean ResetReactor4, bool ignore_ResetReactor4, System.Boolean ResetReactor5, bool ignore_ResetReactor5, System.Boolean ResetReactor6, bool ignore_ResetReactor6, System.Boolean ResetMetalSaltDosing, bool ignore_ResetMetalSaltDosing, System.Boolean ResetEmergency, bool ignore_ResetEmergency, System.Boolean ResetSludgeBuffer, bool ignore_ResetSludgeBuffer)
+    public bool FireEvent_RESET_CMD(System.Boolean ResetReactor1, bool ignore_ResetReactor1, System.Boolean ResetReactor2, bool ignore_ResetReactor2, System.Boolean ResetReactor3, bool ignore_ResetReactor3, System.Boolean ResetReactor4, bool ignore_ResetReactor4, System.Boolean ResetReactor5, bool ignore_ResetReactor5, System.Boolean ResetReactor6, bool ignore_ResetReactor6, System.Boolean ResetMetalSaltDosing, bool ignore_ResetMetalSaltDosing, System.Boolean ResetEmergency, bool ignore_ResetEmergency, System.Boolean ResetSludgeBuffer, bool ignore_ResetSludgeBuffer, System.Boolean ResetAll, bool ignore_ResetAll)
     {
-      object[] _values_ = new object[9];
+      object[] _values_ = new object[10];
       if (!ignore_ResetReactor1) _values_[0] = ResetReactor1;
       if (!ignore_ResetReactor2) _values_[1] = ResetReactor2;
       if (!ignore_ResetReactor3) _values_[2] = ResetReactor3;
@@ -1643,6 +1666,7 @@ stack Trace:
       if (!ignore_ResetMetalSaltDosing) _values_[6] = ResetMetalSaltDosing;
       if (!ignore_ResetEmergency) _values_[7] = ResetEmergency;
       if (!ignore_ResetSludgeBuffer) _values_[8] = ResetSludgeBuffer;
+      if (!ignore_ResetAll) _values_[9] = ResetAll;
       return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
     }
 
