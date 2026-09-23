@@ -67,6 +67,13 @@
       <Event ID="5DBE44FCB53AAC81" Name="FB_OPE_PUMP3">
         <With Var="FbTotOpeDurPump3" />
       </Event>
+      <Event ID="BF934C0B4F9DAFCA" Name="FB_VALVE_TANK_SUP">
+        <With Var="FbOpenedValveTankSupernant" />
+        <With Var="FbClosedValveTankSupernant" />
+      </Event>
+      <Event ID="C55E3B91F77F9411" Name="FB_RDY_VALVE_TANK_SUP">
+        <With Var="FbValveReadyTankSupernant" />
+      </Event>
     </EventInputs>
     <EventOutputs>
       <Event ID="75C95E56F6162690" Name="INITO" />
@@ -116,6 +123,9 @@
       <VarDeclaration ID="EE849AB676FF4BEC" Name="FbStoppedPump3" Type="BOOL" />
       <VarDeclaration ID="7406B0B8AECD72AD" Name="FbPumpReady3" Type="BOOL" />
       <VarDeclaration ID="C9D93721B2016751" Name="FbTotOpeDurPump3" Type="UDINT" />
+      <VarDeclaration ID="6FCDDCD9B6BA8F4E" Name="FbOpenedValveTankSupernant" Type="BOOL" />
+      <VarDeclaration ID="CB08FAD28478C4E2" Name="FbClosedValveTankSupernant" Type="BOOL" />
+      <VarDeclaration ID="100F27F3D2E16ABE" Name="FbValveReadyTankSupernant" Type="BOOL" />
     </InputVars>
     <OutputVars>
       <VarDeclaration ID="37ED00F2D74A1977" Name="CmdValveTank1" Type="BOOL" />
@@ -128,14 +138,15 @@
       <VarDeclaration ID="3EC99F3974DE065F" Name="AbortReady" Type="BOOL" />
     </OutputVars>
     <Sockets>
-      <AdapterDeclaration ID="F89AF997F6D64559" Name="FlowMeasurement_1" Type="IAnalog" Namespace="SE.App2Base" x="180" y="5000" />
+      <AdapterDeclaration ID="F89AF997F6D64559" Name="FlowMeasurement_1" Type="IAnalog" Namespace="SE.App2Base" x="220" y="5280" />
     </Sockets>
     <Plugs>
       <AdapterDeclaration ID="4472550908FB2BBA" Name="Pump1" Type="INeredaAct" Namespace="SE.Nereda" x="5740" y="1020" />
       <AdapterDeclaration ID="E69CD644C3AB364B" Name="Pump2" Type="INeredaAct" Namespace="SE.Nereda" x="5760" y="2580" />
       <AdapterDeclaration ID="80FEDED2D558DFFC" Name="Pump3" Type="INeredaAct" Namespace="SE.Nereda" x="5740" y="4140" />
-      <AdapterDeclaration ID="1FE182D7291AACCE" Name="ValveTank1" Type="INeredaAct" Namespace="SE.Nereda" x="6800" y="1660" />
-      <AdapterDeclaration ID="6243C1FB70DE9E92" Name="ValveTank2" Type="INeredaAct" Namespace="SE.Nereda" x="6840" y="3320" />
+      <AdapterDeclaration ID="1FE182D7291AACCE" Name="ValveTank1" Type="INeredaAct" Namespace="SE.Nereda" x="6860" y="1040" />
+      <AdapterDeclaration ID="6243C1FB70DE9E92" Name="ValveTank2" Type="INeredaAct" Namespace="SE.Nereda" x="6860" y="2560" />
+      <AdapterDeclaration ID="56E89BA7A8737F32" Name="ValveSupernantReturn" Type="INeredaAct" Namespace="SE.Nereda" x="6880" y="4180" />
     </Plugs>
     <AdapterInputs>
       <Adapter ID="4CB774539D1540E0" Name="FlowMeasurement_2" Type="IAnalog" Namespace="SE.App2Base" />
@@ -145,60 +156,60 @@
     <FB ID="72901911AC298791" UID="0B89B8E1D2D9587B" Name="CmdLogic" Type="CmdSludgeDischargeSLBLogicBasic" x="2100" y="1460" Namespace="SE.Nereda" />
     <FB ID="27CE4ADED7F6BD9F" Name="ValveCmdSmoothTank1" Type="boolValueChanged" x="3500" y="1360" Namespace="SE.App2Base" />
     <FB ID="669106E7B3FBF6FC" Name="PumpCmdSmooth1" Type="boolValueChanged" x="3520" y="2500" Namespace="SE.App2Base" />
-    <FB ID="5E57AC1E5187B5EA" Name="FbOpenValveTank1" Type="DS_SELECTX_2536758B411A6CE51" x="2000" y="5100" Namespace="SE.Nereda">
+    <FB ID="5E57AC1E5187B5EA" Name="FbOpenValveTank1" Type="DS_SELECTX_2536758B411A6CE51" x="2000" y="5760" Namespace="SE.Nereda">
       <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNTX:=2;CNTY:=1;DI${CNTX,_,CNTY}:BOOL" />
     </FB>
-    <FB ID="C8E0B42A51574B97" Name="FbCloseValveTank1" Type="DS_SELECTX_2536758B411A6CE51" x="2640" y="5100" Namespace="SE.Nereda">
+    <FB ID="C8E0B42A51574B97" Name="FbCloseValveTank1" Type="DS_SELECTX_2536758B411A6CE51" x="2640" y="5800" Namespace="SE.Nereda">
       <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNTX:=2;CNTY:=1;DI${CNTX,_,CNTY}:BOOL" />
     </FB>
-    <FB ID="440F2BC519D58531" Name="FbRunPump1" Type="DS_SELECTX_2536758B411A6CE51" x="3440" y="4960" Namespace="SE.Nereda">
+    <FB ID="440F2BC519D58531" Name="FbRunPump1" Type="DS_SELECTX_2536758B411A6CE51" x="3440" y="5660" Namespace="SE.Nereda">
       <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNTX:=2;CNTY:=1;DI${CNTX,_,CNTY}:BOOL" />
     </FB>
-    <FB ID="1D820826838315F1" Name="FbStopPump1" Type="DS_SELECTX_2536758B411A6CE51" x="4080" y="4960" Namespace="SE.Nereda">
+    <FB ID="1D820826838315F1" Name="FbStopPump1" Type="DS_SELECTX_2536758B411A6CE51" x="4080" y="5660" Namespace="SE.Nereda">
       <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNTX:=2;CNTY:=1;DI${CNTX,_,CNTY}:BOOL" />
     </FB>
-    <FB ID="EAAD057606772B57" Name="FbReadyPump1" Type="DS_SELECTX_2536758B411A6CE51" x="3460" y="5560" Namespace="SE.Nereda">
+    <FB ID="EAAD057606772B57" Name="FbReadyPump1" Type="DS_SELECTX_2536758B411A6CE51" x="3460" y="6260" Namespace="SE.Nereda">
       <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNTX:=2;CNTY:=1;DI${CNTX,_,CNTY}:BOOL" />
     </FB>
-    <FB ID="E135C8CA527EB18D" Name="FbReadyValveTank1" Type="DS_SELECTX_2536758B411A6CE51" x="2000" y="5720" Namespace="SE.Nereda">
+    <FB ID="E135C8CA527EB18D" Name="FbReadyValveTank1" Type="DS_SELECTX_2536758B411A6CE51" x="2000" y="6340" Namespace="SE.Nereda">
       <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNTX:=2;CNTY:=1;DI${CNTX,_,CNTY}:BOOL" />
     </FB>
     <FB ID="2C35B14C59730EA7" Name="ValveCmdTank1" Type="BOOL2INT" x="4280" y="1420" Namespace="SE.Nereda" />
     <FB ID="80A8C0915DBD27DB" Name="PumpCmd1" Type="BOOL2INT" x="4300" y="2560" Namespace="SE.Nereda" />
-    <FB ID="A14C6732D98B78BF" UID="93DB47560CB58CAA" Name="FbTotOpePump1" Type="DS_SELECTX_29841900CAFD143A" x="4080" y="5580" Namespace="SE.Nereda">
+    <FB ID="A14C6732D98B78BF" UID="93DB47560CB58CAA" Name="FbTotOpePump1" Type="DS_SELECTX_29841900CAFD143A" x="4080" y="6280" Namespace="SE.Nereda">
       <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNTX:=2;CNTY:=1;DI${CNTX,_,CNTY}:UDINT" />
     </FB>
-    <FB ID="989B6AD14B9DF9E8" Name="FbRunPump2" Type="DS_SELECTX_2536758B411A6CE51" x="3420" y="6220" Namespace="SE.Nereda">
+    <FB ID="989B6AD14B9DF9E8" Name="FbRunPump2" Type="DS_SELECTX_2536758B411A6CE51" x="3420" y="6920" Namespace="SE.Nereda">
       <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNTX:=2;CNTY:=1;DI${CNTX,_,CNTY}:BOOL" />
     </FB>
-    <FB ID="42BB214B51FBFBB8" Name="FbStopPump2" Type="DS_SELECTX_2536758B411A6CE51" x="4060" y="6220" Namespace="SE.Nereda">
+    <FB ID="42BB214B51FBFBB8" Name="FbStopPump2" Type="DS_SELECTX_2536758B411A6CE51" x="4060" y="6920" Namespace="SE.Nereda">
       <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNTX:=2;CNTY:=1;DI${CNTX,_,CNTY}:BOOL" />
     </FB>
-    <FB ID="DA9F075F1A18C823" Name="FbReadyPump2" Type="DS_SELECTX_2536758B411A6CE51" x="3440" y="6820" Namespace="SE.Nereda">
+    <FB ID="DA9F075F1A18C823" Name="FbReadyPump2" Type="DS_SELECTX_2536758B411A6CE51" x="3440" y="7520" Namespace="SE.Nereda">
       <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNTX:=2;CNTY:=1;DI${CNTX,_,CNTY}:BOOL" />
     </FB>
-    <FB ID="76C162267C714BA4" Name="FbTotOpePump2" Type="DS_SELECTX_29841900CAFD143A" x="4060" y="6840" Namespace="SE.Nereda">
+    <FB ID="76C162267C714BA4" Name="FbTotOpePump2" Type="DS_SELECTX_29841900CAFD143A" x="4060" y="7540" Namespace="SE.Nereda">
       <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNTX:=2;CNTY:=1;DI${CNTX,_,CNTY}:UDINT" />
     </FB>
-    <FB ID="0470E9F3D8E729DE" Name="FbRunPump3" Type="DS_SELECTX_2536758B411A6CE51" x="3440" y="7420" Namespace="SE.Nereda">
+    <FB ID="0470E9F3D8E729DE" Name="FbRunPump3" Type="DS_SELECTX_2536758B411A6CE51" x="3440" y="8120" Namespace="SE.Nereda">
       <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNTX:=2;CNTY:=1;DI${CNTX,_,CNTY}:BOOL" />
     </FB>
-    <FB ID="E3BEA3F12F18D040" Name="FbStopPump3" Type="DS_SELECTX_2536758B411A6CE51" x="4080" y="7420" Namespace="SE.Nereda">
+    <FB ID="E3BEA3F12F18D040" Name="FbStopPump3" Type="DS_SELECTX_2536758B411A6CE51" x="4080" y="8120" Namespace="SE.Nereda">
       <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNTX:=2;CNTY:=1;DI${CNTX,_,CNTY}:BOOL" />
     </FB>
-    <FB ID="F862E20DFDCA9590" Name="FbReadyPump3" Type="DS_SELECTX_2536758B411A6CE51" x="3460" y="8020" Namespace="SE.Nereda">
+    <FB ID="F862E20DFDCA9590" Name="FbReadyPump3" Type="DS_SELECTX_2536758B411A6CE51" x="3460" y="8720" Namespace="SE.Nereda">
       <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNTX:=2;CNTY:=1;DI${CNTX,_,CNTY}:BOOL" />
     </FB>
-    <FB ID="AAC8F4F63EF86D81" Name="FbTotOpePump3" Type="DS_SELECTX_29841900CAFD143A" x="4080" y="8040" Namespace="SE.Nereda">
+    <FB ID="AAC8F4F63EF86D81" Name="FbTotOpePump3" Type="DS_SELECTX_29841900CAFD143A" x="4080" y="8740" Namespace="SE.Nereda">
       <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNTX:=2;CNTY:=1;DI${CNTX,_,CNTY}:UDINT" />
     </FB>
-    <FB ID="9F1171BF14ED21D3" Name="FbOpenValveTank2" Type="DS_SELECTX_2536758B411A6CE51" x="2040" y="6420" Namespace="SE.Nereda">
+    <FB ID="9F1171BF14ED21D3" Name="FbOpenValveTank2" Type="DS_SELECTX_2536758B411A6CE51" x="2020" y="6960" Namespace="SE.Nereda">
       <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNTX:=2;CNTY:=1;DI${CNTX,_,CNTY}:BOOL" />
     </FB>
-    <FB ID="6793CD2080C4EAA0" Name="FbCloseValveTank2" Type="DS_SELECTX_2536758B411A6CE51" x="2680" y="6420" Namespace="SE.Nereda">
+    <FB ID="6793CD2080C4EAA0" Name="FbCloseValveTank2" Type="DS_SELECTX_2536758B411A6CE51" x="2660" y="6960" Namespace="SE.Nereda">
       <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNTX:=2;CNTY:=1;DI${CNTX,_,CNTY}:BOOL" />
     </FB>
-    <FB ID="5668F6F4A7F74290" Name="FbReadyValveTank2" Type="DS_SELECTX_2536758B411A6CE51" x="2040" y="7040" Namespace="SE.Nereda">
+    <FB ID="5668F6F4A7F74290" Name="FbReadyValveTank2" Type="DS_SELECTX_2536758B411A6CE51" x="2020" y="7520" Namespace="SE.Nereda">
       <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNTX:=2;CNTY:=1;DI${CNTX,_,CNTY}:BOOL" />
     </FB>
     <FB ID="85FD607B12AB68E9" Name="ValveCmdSmoothTank2" Type="boolValueChanged" x="3520" y="1940" Namespace="SE.App2Base" />
@@ -212,62 +223,78 @@
     <FB ID="891FF4F323402185" Name="IThis" Type="CmdSludgeDischargeSLBLogic_HMI" x="2960" y="540" Namespace="SE.Nereda">
       <Parameter Name="$A39E26A0AA5B7D12" Value="TRUE" />
     </FB>
-    <FB ID="CDE6639853DBE923" Name="PID" Type="PID" x="3700" y="4240" Namespace="SE.App2CommonProcess">
+    <FB ID="CDE6639853DBE923" Name="PID" Type="PID" x="3700" y="4940" Namespace="SE.App2CommonProcess">
       <Attribute Name="Configuration.Component.HideUnusedPorts" Value="" />
     </FB>
-    <FB ID="356753C86B428E61" Name="PIDISc" Type="PID_Manager" x="2780" y="4240" Namespace="SE.Nereda" />
-    <FB ID="7E72B8166108730C" Name="SpeedSp1" Type="SpeedSpFlowSensorFail" x="4420" y="4240" Namespace="SE.Nereda" />
-    <FB ID="50F02C4F22414254" Name="Flow_Status" Type="decodeStatus" x="1040" y="4960" Namespace="SE.App2Base">
+    <FB ID="356753C86B428E61" Name="PIDISc" Type="PID_Manager" x="2780" y="4940" Namespace="SE.Nereda" />
+    <FB ID="7E72B8166108730C" Name="SpeedSp1" Type="SpeedSpFlowSensorFail" x="4420" y="4940" Namespace="SE.Nereda" />
+    <FB ID="50F02C4F22414254" Name="Flow_Status" Type="decodeStatus" x="1080" y="5240" Namespace="SE.App2Base">
       <Attribute Name="Configuration.Component.HideUnusedPorts" Value="" />
     </FB>
-    <FB ID="4B99F90E82BDCEFA" UID="689BE22AB3C5870F" Name="OR1" Type="OR_550FE6D62F509EB3" x="2120" y="4240" Namespace="SE.Nereda">
+    <FB ID="4B99F90E82BDCEFA" UID="689BE22AB3C5870F" Name="OR1" Type="OR_550FE6D62F509EB3" x="2120" y="4940" Namespace="SE.Nereda">
       <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNT:=3;OUT:BOOL" />
     </FB>
-    <Input ID="393B564B9DA2DBA7" Name="REQ_PHASE" x="600" y="1368" Type="Event" />
-    <Input ID="C1328A46AF65D0A6" Name="Ready" x="600" y="1428" Type="Data" />
-    <Input ID="B6C61BC7391E4616" Name="Starting" x="600" y="1488" Type="Data" />
-    <Input ID="8259B159B326D7FF" Name="Run" x="600" y="1548" Type="Data" />
-    <Input ID="B7C1C59879F9DA01" Name="Stopping" x="600" y="1608" Type="Data" />
-    <Input ID="308AFE103F900E24" Name="Aborting" x="600" y="1668" Type="Data" />
-    <Input ID="971F31261154ACD5" Name="REQ_SPEED_SP" x="600" y="1828" Type="Event" />
-    <Input ID="D65A4A7591488987" Name="SpeedSp" x="600" y="1888" Type="Data" />
-    <Input ID="34BCE966BC60321D" Name="REQ_RESET_VLV" x="600" y="2048" Type="Event" />
-    <Input ID="FD8DFE9A48E91BEE" Name="ResetValve" x="600" y="2108" Type="Data" />
-    <Input ID="16DB7EB6EE444B85" Name="REQ_RESET_PMP" x="600" y="2252" Type="Event" />
-    <Input ID="8D3B6DC354586BD5" Name="ResetPump" x="600" y="2312" Type="Data" />
-    <Input ID="A14398C211A20C12" Name="INIT" x="760" y="444" Type="Event" />
-    <Input ID="A330345A1ECDB15E" Name="FB_VALVE_TANK1" x="600" y="2468" Type="Event" />
-    <Input ID="FC067D9356815E48" Name="FB_PUMP1" x="600" y="3208" Type="Event" />
-    <Input ID="C8C6295AFA4B50B1" Name="FB_RDY_VALVE_TANK1" x="600" y="2648" Type="Event" />
-    <Input ID="98BE81ECCAA43681" Name="FB_RDY_PUMP1" x="600" y="3388" Type="Event" />
-    <Input ID="D11F59344658DBD1" Name="FbOpenedValveTank1" x="600" y="2528" Type="Data" />
-    <Input ID="6DFE812A08E1485F" Name="FbClosedValveTank1" x="600" y="2588" Type="Data" />
-    <Input ID="55DAD624FC7BF050" Name="FbRunningPump1" x="600" y="3268" Type="Data" />
-    <Input ID="0DA3ABB864775859" Name="FbStoppedPump1" x="600" y="3328" Type="Data" />
-    <Input ID="9EB8EE2A3E5A4A8E" Name="FbValveReadyTank1" x="600" y="2708" Type="Data" />
-    <Input ID="19C40FED2D5A691C" Name="FbPumpReady1" x="600" y="3448" Type="Data" />
+    <FB ID="22B579512B53BF80" Name="PumpCmdSmooth4" Type="boolValueChanged" x="3560" y="4280" Namespace="SE.App2Base" />
+    <FB ID="35B1BC8730878587" Name="PumpCmd4" Type="BOOL2INT" x="4340" y="4340" Namespace="SE.Nereda" />
+    <FB ID="ED924EC0461C4574" Name="FbOpenValveTankSupernant" Type="DS_SELECTX_2536758B411A6CE51" x="2040" y="8140" Namespace="SE.Nereda">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNTX:=2;CNTY:=1;DI${CNTX,_,CNTY}:BOOL" />
+    </FB>
+    <FB ID="85F0A611313B8015" Name="FbCloseValveTankSupernant" Type="DS_SELECTX_2536758B411A6CE51" x="2680" y="8140" Namespace="SE.Nereda">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNTX:=2;CNTY:=1;DI${CNTX,_,CNTY}:BOOL" />
+    </FB>
+    <FB ID="970528481C7F8241" Name="FbReadyValveTankSupernant" Type="DS_SELECTX_2536758B411A6CE51" x="2040" y="8700" Namespace="SE.Nereda">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNTX:=2;CNTY:=1;DI${CNTX,_,CNTY}:BOOL" />
+    </FB>
+    <Input ID="393B564B9DA2DBA7" Name="REQ_PHASE" x="600" y="1364" Type="Event" />
+    <Input ID="C1328A46AF65D0A6" Name="Ready" x="600" y="1424" Type="Data" />
+    <Input ID="B6C61BC7391E4616" Name="Starting" x="600" y="1484" Type="Data" />
+    <Input ID="8259B159B326D7FF" Name="Run" x="600" y="1544" Type="Data" />
+    <Input ID="B7C1C59879F9DA01" Name="Stopping" x="600" y="1604" Type="Data" />
+    <Input ID="308AFE103F900E24" Name="Aborting" x="600" y="1664" Type="Data" />
+    <Input ID="971F31261154ACD5" Name="REQ_SPEED_SP" x="600" y="1824" Type="Event" />
+    <Input ID="D65A4A7591488987" Name="SpeedSp" x="600" y="1884" Type="Data" />
+    <Input ID="34BCE966BC60321D" Name="REQ_RESET_VLV" x="600" y="2044" Type="Event" />
+    <Input ID="FD8DFE9A48E91BEE" Name="ResetValve" x="600" y="2104" Type="Data" />
+    <Input ID="16DB7EB6EE444B85" Name="REQ_RESET_PMP" x="600" y="2250" Type="Event" />
+    <Input ID="8D3B6DC354586BD5" Name="ResetPump" x="600" y="2310" Type="Data" />
+    <Input ID="A14398C211A20C12" Name="INIT" x="760" y="440" Type="Event" />
+    <Input ID="A330345A1ECDB15E" Name="FB_VALVE_TANK1" x="600" y="2464" Type="Event" />
+    <Input ID="FC067D9356815E48" Name="FB_PUMP1" x="600" y="3204" Type="Event" />
+    <Input ID="C8C6295AFA4B50B1" Name="FB_RDY_VALVE_TANK1" x="600" y="2644" Type="Event" />
+    <Input ID="98BE81ECCAA43681" Name="FB_RDY_PUMP1" x="600" y="3384" Type="Event" />
+    <Input ID="D11F59344658DBD1" Name="FbOpenedValveTank1" x="600" y="2524" Type="Data" />
+    <Input ID="6DFE812A08E1485F" Name="FbClosedValveTank1" x="600" y="2584" Type="Data" />
+    <Input ID="55DAD624FC7BF050" Name="FbRunningPump1" x="600" y="3264" Type="Data" />
+    <Input ID="0DA3ABB864775859" Name="FbStoppedPump1" x="600" y="3324" Type="Data" />
+    <Input ID="9EB8EE2A3E5A4A8E" Name="FbValveReadyTank1" x="600" y="2704" Type="Data" />
+    <Input ID="19C40FED2D5A691C" Name="FbPumpReady1" x="600" y="3444" Type="Data" />
     <Input ID="B07701FB71F5D541" Name="FB_VALVE_TANK2" x="600" y="2832" Type="Event" />
-    <Input ID="081F4ABED1D2837E" Name="FB_PUMP2" x="600" y="3668" Type="Event" />
-    <Input ID="317A55D3EB9EB756" Name="FB_PUMP3" x="600" y="4128" Type="Event" />
-    <Input ID="3F97D506F0CEA8B8" Name="FB_RDY_VALVE_TANK2" x="600" y="3008" Type="Event" />
-    <Input ID="4AA89374E2D41DB6" Name="FB_RDY_PUMP2" x="600" y="3848" Type="Event" />
-    <Input ID="770FF74AF85B13A1" Name="FB_RDY_PUMP3" x="600" y="4308" Type="Event" />
-    <Input ID="A9E2B133AD4278BC" Name="FbOpenedValveTank2" x="600" y="2888" Type="Data" />
-    <Input ID="38A77DA846F180E6" Name="FbClosedValveTank2" x="600" y="2948" Type="Data" />
-    <Input ID="32A36BB868E991BF" Name="FbValveReadyTank2" x="600" y="3068" Type="Data" />
-    <Input ID="0A3615757311DEA3" Name="FbRunningPump2" x="600" y="3728" Type="Data" />
-    <Input ID="A3098679CB0F4720" Name="FbStoppedPump2" x="600" y="3788" Type="Data" />
-    <Input ID="DCBAEA190470B184" Name="FbPumpReady2" x="600" y="3908" Type="Data" />
-    <Input ID="B527E63699907362" Name="FbRunningPump3" x="600" y="4188" Type="Data" />
-    <Input ID="EE849AB676FF4BEC" Name="FbStoppedPump3" x="600" y="4248" Type="Data" />
-    <Input ID="7406B0B8AECD72AD" Name="FbPumpReady3" x="600" y="4368" Type="Data" />
-    <Input ID="B292DE6AD63BA356" Name="FbTotOpeDurPump1" x="600" y="3568" Type="Data" />
-    <Input ID="B8433F90D3166723" Name="FbTotOpeDurPump2" x="600" y="4028" Type="Data" />
-    <Input ID="C9D93721B2016751" Name="FbTotOpeDurPump3" x="600" y="4488" Type="Data" />
-    <Input ID="3DA95C991B838A89" Name="FB_OPE_PUMP1" x="600" y="3508" Type="Event" />
-    <Input ID="F41BB87A25432C76" Name="FB_OPE_PUMP2" x="600" y="3968" Type="Event" />
-    <Input ID="5DBE44FCB53AAC81" Name="FB_OPE_PUMP3" x="600" y="4428" Type="Event" />
-    <Input ID="4CB774539D1540E0" Name="FlowMeasurement_2" x="420" y="5648" Type="Adapter" />
+    <Input ID="081F4ABED1D2837E" Name="FB_PUMP2" x="600" y="3664" Type="Event" />
+    <Input ID="317A55D3EB9EB756" Name="FB_PUMP3" x="600" y="4124" Type="Event" />
+    <Input ID="3F97D506F0CEA8B8" Name="FB_RDY_VALVE_TANK2" x="600" y="3004" Type="Event" />
+    <Input ID="4AA89374E2D41DB6" Name="FB_RDY_PUMP2" x="600" y="3844" Type="Event" />
+    <Input ID="770FF74AF85B13A1" Name="FB_RDY_PUMP3" x="600" y="4304" Type="Event" />
+    <Input ID="A9E2B133AD4278BC" Name="FbOpenedValveTank2" x="600" y="2884" Type="Data" />
+    <Input ID="38A77DA846F180E6" Name="FbClosedValveTank2" x="600" y="2944" Type="Data" />
+    <Input ID="32A36BB868E991BF" Name="FbValveReadyTank2" x="600" y="3064" Type="Data" />
+    <Input ID="0A3615757311DEA3" Name="FbRunningPump2" x="600" y="3724" Type="Data" />
+    <Input ID="A3098679CB0F4720" Name="FbStoppedPump2" x="600" y="3784" Type="Data" />
+    <Input ID="DCBAEA190470B184" Name="FbPumpReady2" x="600" y="3904" Type="Data" />
+    <Input ID="B527E63699907362" Name="FbRunningPump3" x="600" y="4184" Type="Data" />
+    <Input ID="EE849AB676FF4BEC" Name="FbStoppedPump3" x="600" y="4244" Type="Data" />
+    <Input ID="7406B0B8AECD72AD" Name="FbPumpReady3" x="600" y="4364" Type="Data" />
+    <Input ID="B292DE6AD63BA356" Name="FbTotOpeDurPump1" x="600" y="3564" Type="Data" />
+    <Input ID="B8433F90D3166723" Name="FbTotOpeDurPump2" x="600" y="4024" Type="Data" />
+    <Input ID="C9D93721B2016751" Name="FbTotOpeDurPump3" x="600" y="4484" Type="Data" />
+    <Input ID="3DA95C991B838A89" Name="FB_OPE_PUMP1" x="600" y="3504" Type="Event" />
+    <Input ID="F41BB87A25432C76" Name="FB_OPE_PUMP2" x="600" y="3964" Type="Event" />
+    <Input ID="5DBE44FCB53AAC81" Name="FB_OPE_PUMP3" x="600" y="4424" Type="Event" />
+    <Input ID="4CB774539D1540E0" Name="FlowMeasurement_2" x="460" y="5932" Type="Adapter" />
+    <Input ID="BF934C0B4F9DAFCA" Name="FB_VALVE_TANK_SUP" x="580" y="4712" Type="Event" />
+    <Input ID="C55E3B91F77F9411" Name="FB_RDY_VALVE_TANK_SUP" x="580" y="4892" Type="Event" />
+    <Input ID="6FCDDCD9B6BA8F4E" Name="FbOpenedValveTankSupernant" x="580" y="4772" Type="Data" />
+    <Input ID="CB08FAD28478C4E2" Name="FbClosedValveTankSupernant" x="580" y="4832" Type="Data" />
+    <Input ID="100F27F3D2E16ABE" Name="FbValveReadyTankSupernant" x="580" y="4952" Type="Data" />
     <Frame Name="FRAME6" X="120" Y="1200" Width="1600" Height="5620">
       <Parameter Name="BackgroundColor" Value="AntiqueWhite" />
       <Parameter Name="TextColor" Value="Black" />
@@ -286,7 +313,7 @@
       <Parameter Name="Text" Value="00 - INITIALIZATION" />
       <Parameter Name="NxtLayerIdentifier" Value="" />
     </Frame>
-    <Frame Name="FRAME10" X="1760" Y="1200" Width="3340" Height="6800">
+    <Frame Name="FRAME10" X="1760" Y="1200" Width="3340" Height="8100">
       <Parameter Name="BackgroundColor" Value="224, 224, 224" />
       <Parameter Name="TextColor" Value="Black" />
       <Parameter Name="Font" Value="Microsoft Sans Serif, 14.25pt, style=Bold" />
@@ -304,7 +331,7 @@
       <Parameter Name="Text" Value="06 - HMI INTERFACE" />
       <Parameter Name="NxtLayerIdentifier" Value="" />
     </Frame>
-    <Frame Name="FRAME14" X="1760" Y="8680" Width="3360" Height="320">
+    <Frame Name="FRAME14" X="1800" Y="9360" Width="3360" Height="320">
       <Parameter Name="BackgroundColor" Value="LightGoldenrodYellow" />
       <Parameter Name="TextColor" Value="Black" />
       <Parameter Name="Font" Value="Microsoft Sans Serif, 14.25pt, style=Bold" />
@@ -322,7 +349,7 @@
       <Parameter Name="Text" Value="02 - FUNCTIONNAL OUTPUT INTERFACE" />
       <Parameter Name="NxtLayerIdentifier" Value="" />
     </Frame>
-    <Frame Name="FRAME1" X="1860" Y="1280" Width="3200" Height="2880">
+    <Frame Name="FRAME1" X="1860" Y="1280" Width="3200" Height="3580">
       <Parameter Name="BackgroundColor" Value="ButtonFace" />
       <Parameter Name="TextColor" Value="Black" />
       <Parameter Name="Font" Value="Microsoft Sans Serif, 14.25pt, style=Bold" />
@@ -331,7 +358,7 @@
       <Parameter Name="Text" Value="Command Logic" />
       <Parameter Name="NxtLayerIdentifier" Value="" />
     </Frame>
-    <Frame Name="FRAME2" X="1840" Y="4860" Width="3160" Height="3680">
+    <Frame Name="FRAME2" X="1840" Y="5560" Width="3160" Height="3680">
       <Parameter Name="BackgroundColor" Value="ButtonFace" />
       <Parameter Name="TextColor" Value="Black" />
       <Parameter Name="Font" Value="Microsoft Sans Serif, 14.25pt, style=Bold" />
@@ -340,20 +367,20 @@
       <Parameter Name="Text" Value="SIGNAL SELECTION" />
       <Parameter Name="NxtLayerIdentifier" Value="" />
     </Frame>
-    <Output ID="8279529577B45581" Name="CmdValveTank2" x="6700" y="426" Type="Data" />
-    <Output ID="EDC96CE6A73D7823" Name="CmdPump2" x="6700" y="685.9999" Type="Data" />
-    <Output ID="DCD1974D5BCAE407" Name="CmdPump3" x="6700" y="746" Type="Data" />
-    <Output ID="37ED00F2D74A1977" Name="CmdValveTank1" x="6700" y="366" Type="Data" />
-    <Output ID="19DD728613DE864B" Name="CmdPump1" x="6700" y="626" Type="Data" />
-    <Output ID="14521B425578C0B2" Name="CNF_VALVE" x="6700" y="306" Type="Event" />
-    <Output ID="6C5B75A701E7B425" Name="CNF_PUMP" x="6700" y="566" Type="Event" />
-    <Output ID="75C95E56F6162690" Name="INITO" x="720" y="683.9999" Type="Event" />
-    <Output ID="3441D16350C1D291" Name="START_READY" x="5680" y="306" Type="Event" />
-    <Output ID="C8B1A85D0153CD87" Name="STOP_READY" x="5680" y="366" Type="Event" />
-    <Output ID="53236A8C814FFA4F" Name="ABORT_READY" x="5680" y="426" Type="Event" />
-    <Output ID="A0873A10F64BE3F2" Name="StartReady" x="5680" y="566" Type="Data" />
-    <Output ID="3E5CE56C6D257D11" Name="StopReady" x="5680" y="626" Type="Data" />
-    <Output ID="3EC99F3974DE065F" Name="AbortReady" x="5680" y="685.9999" Type="Data" />
+    <Output ID="8279529577B45581" Name="CmdValveTank2" x="6700" y="422" Type="Data" />
+    <Output ID="EDC96CE6A73D7823" Name="CmdPump2" x="6700" y="681.9999" Type="Data" />
+    <Output ID="DCD1974D5BCAE407" Name="CmdPump3" x="6700" y="742" Type="Data" />
+    <Output ID="37ED00F2D74A1977" Name="CmdValveTank1" x="6700" y="362" Type="Data" />
+    <Output ID="19DD728613DE864B" Name="CmdPump1" x="6700" y="622" Type="Data" />
+    <Output ID="14521B425578C0B2" Name="CNF_VALVE" x="6700" y="302" Type="Event" />
+    <Output ID="6C5B75A701E7B425" Name="CNF_PUMP" x="6700" y="562" Type="Event" />
+    <Output ID="75C95E56F6162690" Name="INITO" x="720" y="679.9999" Type="Event" />
+    <Output ID="3441D16350C1D291" Name="START_READY" x="5680" y="302" Type="Event" />
+    <Output ID="C8B1A85D0153CD87" Name="STOP_READY" x="5680" y="362" Type="Event" />
+    <Output ID="53236A8C814FFA4F" Name="ABORT_READY" x="5680" y="422" Type="Event" />
+    <Output ID="A0873A10F64BE3F2" Name="StartReady" x="5680" y="562" Type="Data" />
+    <Output ID="3E5CE56C6D257D11" Name="StopReady" x="5680" y="622" Type="Data" />
+    <Output ID="3EC99F3974DE065F" Name="AbortReady" x="5680" y="681.9999" Type="Data" />
     <EventConnections>
       <Connection Source="$5E57AC1E5187B5EA.CNF1" Destination="$C8E0B42A51574B97.REQ1" dx1="130.021">
         <AvoidsNodes>false</AvoidsNodes>
@@ -425,27 +452,27 @@
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
         <Points>
           <Points>
-            <X>761.125</X>
+            <X>802.2031</X>
             <Y>419.5</Y>
           </Points>
           <Points>
-            <X>788.625</X>
+            <X>829.7031</X>
             <Y>419.5</Y>
           </Points>
           <Points>
-            <X>788.625</X>
+            <X>829.7031</X>
             <Y>349.5</Y>
           </Points>
           <Points>
-            <X>926.8932</X>
+            <X>967.9713</X>
             <Y>349.5</Y>
           </Points>
           <Points>
-            <X>926.8932</X>
+            <X>967.9713</X>
             <Y>89.5</Y>
           </Points>
           <Points>
-            <X>1384.39319</X>
+            <X>1425.47131</X>
             <Y>89.5</Y>
           </Points>
         </Points>
@@ -455,27 +482,27 @@
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
         <Points>
           <Points>
-            <X>761.125</X>
+            <X>802.2031</X>
             <Y>434.5</Y>
           </Points>
           <Points>
-            <X>793.625</X>
+            <X>834.7031</X>
             <Y>434.5</Y>
           </Points>
           <Points>
-            <X>793.625</X>
+            <X>834.7031</X>
             <Y>349.5</Y>
           </Points>
           <Points>
-            <X>926.8932</X>
+            <X>967.9713</X>
             <Y>349.5</Y>
           </Points>
           <Points>
-            <X>926.8932</X>
+            <X>967.9713</X>
             <Y>104.5</Y>
           </Points>
           <Points>
-            <X>1384.393</X>
+            <X>1425.47107</X>
             <Y>104.5</Y>
           </Points>
         </Points>
@@ -697,6 +724,77 @@
       <Connection Source="$CDE6639853DBE923.CNF" Destination="$7E72B8166108730C.B5D6B08FA2666F02">
         <AvoidsNodes>false</AvoidsNodes>
       </Connection>
+      <Connection Source="$22B579512B53BF80.CHD" Destination="$35B1BC8730878587.DD5870AA881150BB" />
+      <Connection Source="$35B1BC8730878587.6FC99A5BD1C38561" Destination="$56E89BA7A8737F32.0F1CDF9A9B4A227A">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$72901911AC298791.VALVE_CNF" Destination="$22B579512B53BF80.REQ">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$ED924EC0461C4574.CNF1" Destination="$85F0A611313B8015.REQ1" dx1="130.021">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$ED924EC0461C4574.CNF2" Destination="$85F0A611313B8015.REQ2" dx1="150.021">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$56E89BA7A8737F32.CC753684FA882790" Destination="$970528481C7F8241.REQ2">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$56E89BA7A8737F32.9CD053F8408797ED" Destination="$ED924EC0461C4574.REQ2">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$BF934C0B4F9DAFCA" Destination="$ED924EC0461C4574.REQ1" dx1="337.7709">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$C55E3B91F77F9411" Destination="$970528481C7F8241.REQ1" dx1="204.1459">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$970528481C7F8241.IND" Destination="$72901911AC298791.VALVE_AVAILABLE">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$85F0A611313B8015.IND" Destination="$72901911AC298791.VALVE_FB_OPEN">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$7E72B8166108730C.1FEAADE7145F64BE" Destination="$56E89BA7A8737F32.1E00729184986247">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$16DB7EB6EE444B85" Destination="$56E89BA7A8737F32.37BBC1F841739733">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <Points>
+          <Points>
+            <X>285.5625</X>
+            <Y>569.999939</Y>
+          </Points>
+          <Points>
+            <X>327.5</X>
+            <Y>569.999939</Y>
+          </Points>
+          <Points>
+            <X>327.5</X>
+            <Y>1037.5</Y>
+          </Points>
+          <Points>
+            <X>1002.5</X>
+            <Y>1037.5</Y>
+          </Points>
+          <Points>
+            <X>1002.5</X>
+            <Y>1017.5</Y>
+          </Points>
+          <Points>
+            <X>1622.5</X>
+            <Y>1017.5</Y>
+          </Points>
+          <Points>
+            <X>1622.5</X>
+            <Y>1085</Y>
+          </Points>
+          <Points>
+            <X>1715</X>
+            <Y>1085</Y>
+          </Points>
+        </Points>
+      </Connection>
     </EventConnections>
     <DataConnections>
       <Connection Source="$27CE4ADED7F6BD9F.Output" Destination="$2C35B14C59730EA7.4573FC8F228EB71D" dx1="150" />
@@ -744,27 +842,27 @@
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
         <Points>
           <Points>
-            <X>761.125</X>
+            <X>802.2031</X>
             <Y>559.5</Y>
           </Points>
           <Points>
-            <X>813.625</X>
+            <X>854.7031</X>
             <Y>559.5</Y>
           </Points>
           <Points>
-            <X>813.625</X>
+            <X>854.7031</X>
             <Y>334.500031</Y>
           </Points>
           <Points>
-            <X>926.8932</X>
+            <X>967.9713</X>
             <Y>334.500031</Y>
           </Points>
           <Points>
-            <X>926.8932</X>
+            <X>967.9713</X>
             <Y>124.500031</Y>
           </Points>
           <Points>
-            <X>1384.39319</X>
+            <X>1425.47131</X>
             <Y>124.500031</Y>
           </Points>
         </Points>
@@ -774,27 +872,27 @@
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
         <Points>
           <Points>
-            <X>761.125</X>
+            <X>802.2031</X>
             <Y>574.5</Y>
           </Points>
           <Points>
-            <X>818.625</X>
+            <X>859.7031</X>
             <Y>574.5</Y>
           </Points>
           <Points>
-            <X>818.625</X>
+            <X>859.7031</X>
             <Y>334.500031</Y>
           </Points>
           <Points>
-            <X>926.8932</X>
+            <X>967.9713</X>
             <Y>334.500031</Y>
           </Points>
           <Points>
-            <X>926.8932</X>
+            <X>967.9713</X>
             <Y>139.500031</Y>
           </Points>
           <Points>
-            <X>1384.39319</X>
+            <X>1425.47131</X>
             <Y>139.500031</Y>
           </Points>
         </Points>
@@ -804,27 +902,27 @@
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
         <Points>
           <Points>
-            <X>761.125</X>
+            <X>802.2031</X>
             <Y>589.5</Y>
           </Points>
           <Points>
-            <X>823.625</X>
+            <X>864.7031</X>
             <Y>589.5</Y>
           </Points>
           <Points>
-            <X>823.625</X>
+            <X>864.7031</X>
             <Y>334.500031</Y>
           </Points>
           <Points>
-            <X>926.8932</X>
+            <X>967.9713</X>
             <Y>334.500031</Y>
           </Points>
           <Points>
-            <X>926.8932</X>
+            <X>967.9713</X>
             <Y>154.499969</Y>
           </Points>
           <Points>
-            <X>1384.39319</X>
+            <X>1425.47131</X>
             <Y>154.499969</Y>
           </Points>
         </Points>
@@ -907,27 +1005,27 @@
         <Points>
           <Points>
             <X>339.541656</X>
-            <Y>744</Y>
+            <Y>743</Y>
           </Points>
           <Points>
             <X>349.541656</X>
-            <Y>744</Y>
+            <Y>743</Y>
           </Points>
           <Points>
             <X>349.541656</X>
-            <Y>911.5</Y>
+            <Y>910.5</Y>
           </Points>
           <Points>
             <X>612.5</X>
-            <Y>911.5</Y>
+            <Y>910.5</Y>
           </Points>
           <Points>
             <X>612.5</X>
-            <Y>1534</Y>
+            <Y>1533</Y>
           </Points>
           <Points>
             <X>665</X>
-            <Y>1534</Y>
+            <Y>1533</Y>
           </Points>
         </Points>
         <AvoidsNodes>false</AvoidsNodes>
@@ -1068,25 +1166,7 @@
       <Connection Source="$ABD210CD48F90617.Output" Destination="$DCD1974D5BCAE407" dx1="150">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$CDE6639853DBE923.Out" Destination="$7E72B8166108730C.4727B0C2E5DD09FB">
-        <Points>
-          <Points>
-            <X>1009.79169</X>
-            <Y>1120</Y>
-          </Points>
-          <Points>
-            <X>966.6615</X>
-            <Y>1120</Y>
-          </Points>
-          <Points>
-            <X>966.6615</X>
-            <Y>1180</Y>
-          </Points>
-          <Points>
-            <X>1100</X>
-            <Y>1180</Y>
-          </Points>
-        </Points>
+      <Connection Source="$CDE6639853DBE923.Out" Destination="$7E72B8166108730C.4727B0C2E5DD09FB" dx1="40">
         <AvoidsNodes>false</AvoidsNodes>
       </Connection>
       <Connection Source="$F89AF997F6D64559.Status" Destination="$50F02C4F22414254.Status" dx1="135.1667">
@@ -1112,7 +1192,7 @@
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
       <Connection Source="$4B99F90E82BDCEFA.OUT" Destination="$356753C86B428E61.RunPID" dx1="47.47925" />
-      <Connection Source="$D65A4A7591488987" Destination="$356753C86B428E61.Setpoint" dx1="885.8959">
+      <Connection Source="$D65A4A7591488987" Destination="$356753C86B428E61.Setpoint" dx1="885.8958">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
       <Connection Source="$F89AF997F6D64559.Value" Destination="$7E72B8166108730C.3BE251DFC2E7905D">
@@ -1129,6 +1209,106 @@
       </Connection>
       <Connection Source="$7E72B8166108730C.87931CA83794BFFD" Destination="$4472550908FB2BBA.1BC103921BBFDA0B">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$22B579512B53BF80.Output" Destination="$35B1BC8730878587.4573FC8F228EB71D" dx1="70" />
+      <Connection Source="$35B1BC8730878587.A6DEF5F9C27C1848" Destination="$56E89BA7A8737F32.710D7FC54EE3F35A">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$72901911AC298791.56F564B55D225FAF" Destination="$22B579512B53BF80.Input">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$7E72B8166108730C.87931CA83794BFFD" Destination="$56E89BA7A8737F32.1BC103921BBFDA0B">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$56E89BA7A8737F32.8A8A07EFCDA1443C" Destination="$970528481C7F8241.DI2_1">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$56E89BA7A8737F32.7F6CC7FEB9223DF3" Destination="$ED924EC0461C4574.DI2_1">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$56E89BA7A8737F32.A8D6C4A1FDCCA991" Destination="$85F0A611313B8015.DI2_1">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$6FCDDCD9B6BA8F4E" Destination="$ED924EC0461C4574.DI1_1" dx1="120">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$CB08FAD28478C4E2" Destination="$85F0A611313B8015.DI1_1">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <Points>
+          <Points>
+            <X>357.8333</X>
+            <Y>1970</Y>
+          </Points>
+          <Points>
+            <X>367.8333</X>
+            <Y>1970</Y>
+          </Points>
+          <Points>
+            <X>367.8333</X>
+            <Y>2007.5</Y>
+          </Points>
+          <Points>
+            <X>612.5</X>
+            <Y>2007.5</Y>
+          </Points>
+          <Points>
+            <X>612.5</X>
+            <Y>2125</Y>
+          </Points>
+          <Points>
+            <X>665</X>
+            <Y>2125</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$100F27F3D2E16ABE" Destination="$970528481C7F8241.DI1_1" dx1="128.396">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$ED924EC0461C4574.OUT1" Destination="$72901911AC298791.8A3A0D8C0A296294">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$85F0A611313B8015.OUT1" Destination="$72901911AC298791.5AB763DA99D1722E">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$970528481C7F8241.OUT1" Destination="$72901911AC298791.C2A6AEC1BFED4499">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$8D3B6DC354586BD5" Destination="$56E89BA7A8737F32.EA28053F07575F36">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <Points>
+          <Points>
+            <X>283.166656</X>
+            <Y>585</Y>
+          </Points>
+          <Points>
+            <X>327.5</X>
+            <Y>585</Y>
+          </Points>
+          <Points>
+            <X>327.5</X>
+            <Y>1037.5</Y>
+          </Points>
+          <Points>
+            <X>1002.5</X>
+            <Y>1037.5</Y>
+          </Points>
+          <Points>
+            <X>1002.5</X>
+            <Y>1017.5</Y>
+          </Points>
+          <Points>
+            <X>1622.5</X>
+            <Y>1017.5</Y>
+          </Points>
+          <Points>
+            <X>1622.5</X>
+            <Y>1210</Y>
+          </Points>
+          <Points>
+            <X>1715</X>
+            <Y>1210</Y>
+          </Points>
+        </Points>
       </Connection>
     </DataConnections>
     <AdapterConnections>

@@ -25,6 +25,8 @@
         <With Var="ValveFbClose_1" />
         <With Var="ValveFbOpen_2" />
         <With Var="ValveFbClose_2" />
+        <With Var="ValveFbOpen_Supernant" />
+        <With Var="ValveFbClose_Supernant" />
       </Event>
       <Event ID="PUMP_FB_RUN" Name="PUMP_FB">
         <With Var="PumpFbRunning_1" />
@@ -37,6 +39,7 @@
       <Event ID="VALVE_AVAILABLE" Name="VALVE_READY">
         <With Var="ValveReady_1" />
         <With Var="ValveReady_2" />
+        <With Var="ValveReady_Supernant" />
       </Event>
       <Event ID="PUMP_NO_AVAILABLE" Name="PUMP_READY">
         <With Var="PumpReady_1" />
@@ -53,6 +56,7 @@
       <Event Name="VALVE_CNF" Comment="Execution Confirmation">
         <With Var="Valve_Tank1" />
         <With Var="Valve_Tank2" />
+        <With Var="Valve_TankSupernant" />
       </Event>
       <Event Name="PUMP_CNF">
         <With Var="Pump_1" />
@@ -97,6 +101,9 @@
       <VarDeclaration ID="956E0A0A54836360" Name="PumpFbStopped_3" Type="BOOL" />
       <VarDeclaration ID="0EC6936CA60DF719" Name="PumpReady_3" Type="BOOL" />
       <VarDeclaration ID="5E64FC3A91DBC3F6" Name="PumpTotOpe_3" Type="UDINT" />
+      <VarDeclaration ID="8A3A0D8C0A296294" Name="ValveFbOpen_Supernant" Type="BOOL" />
+      <VarDeclaration ID="5AB763DA99D1722E" Name="ValveFbClose_Supernant" Type="BOOL" />
+      <VarDeclaration ID="C2A6AEC1BFED4499" Name="ValveReady_Supernant" Type="BOOL" />
     </InputVars>
     <OutputVars>
       <VarDeclaration Name="StartReady" Type="BOOL" />
@@ -105,6 +112,7 @@
       <VarDeclaration ID="DB4AE032AE08C110" Name="Grafcet" Type="INT" />
       <VarDeclaration ID="AB3759E05952DF13" Name="Valve_Tank1" Type="BOOL" Comment="Output event qualifier" />
       <VarDeclaration ID="1F14A2AEE3E323F8" Name="Valve_Tank2" Type="BOOL" Comment="Output event qualifier" />
+      <VarDeclaration ID="56F564B55D225FAF" Name="Valve_TankSupernant" Type="BOOL" Comment="Output event qualifier" />
       <VarDeclaration ID="945BF4FE52310595" Name="Pump_1" Type="BOOL" />
       <VarDeclaration ID="750D687533E86DDC" Name="Pump_2" Type="BOOL" />
       <VarDeclaration ID="A7428AB4F66CF0EA" Name="Pump_3" Type="BOOL" />
@@ -170,7 +178,7 @@
       <ECTransition Source="START" Destination="Starting" Condition="STARTING AND Starting" x="3945.409" y="1440.514">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="1069.092,321.7323,906.2997,400.4976" />
       </ECTransition>
-      <ECTransition Source="Starting" Destination="StartReady" Condition="ValveFbOpen_1 OR ValveFbOpen_2" x="2832.59" y="2291.697">
+      <ECTransition Source="Starting" Destination="StartReady" Condition="ValveFbOpen_1 AND ValveFbOpen_2 AND ValveFbOpen_Supernant" x="2832.59" y="2291.697">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="707.8022,548.5943,708.2211,596.8752" />
       </ECTransition>
       <ECTransition Source="Run" Destination="START" Condition="1" x="2372.434" y="1744.056">
@@ -179,13 +187,13 @@
       <ECTransition Source="START" Destination="Stopping1" Condition="STOPPING AND Stopping" x="5003.886" y="1441.625">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="1251.165,320.9724,1251.075,400.4375" />
       </ECTransition>
-      <ECTransition Source="Stopping2" Destination="StopReady" Condition="ValveFbClose_1&#xD;&#xA;OR&#xD;&#xA;ValveFbClose_2" x="4996.067" y="2881.37">
+      <ECTransition Source="Stopping2" Destination="StopReady" Condition="ValveFbClose_1&#xD;&#xA;AND&#xD;&#xA;ValveFbClose_2&#xD;&#xA;AND&#xD;&#xA;ValveFbClose_Supernant" x="4996.067" y="2881.37">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="1249.275,698.9653,1249.121,740.198" />
       </ECTransition>
       <ECTransition Source="StopReady" Destination="START" Condition="1" x="4513.426" y="2059.917">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="1090.772,606.9371,1092.392,425.1398" />
       </ECTransition>
-      <ECTransition Source="Aborting2" Destination="AbortReady" Condition="ValveFbClose_1 OR NOT ValveReady_1&#xD;&#xA;AND&#xD;&#xA;ValveFbClose_2 OR NOT ValveReady_2&#xD;&#xA;" x="6927.898" y="2938.152">
+      <ECTransition Source="Aborting2" Destination="AbortReady" Condition="ValveFbClose_1 OR NOT ValveReady_1&#xD;&#xA;AND&#xD;&#xA;ValveFbClose_2 OR NOT ValveReady_2&#xD;&#xA;AND&#xD;&#xA;ValveFbClose_Supernant OR NOT ValveReady_Supernant" x="6927.898" y="2938.152">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="1732.138,715.1138,1732.292,756.2836" />
       </ECTransition>
       <ECTransition Source="START" Destination="Aborting1" Condition="ABORTING AND Aborting" x="5899.248" y="1399.96">
@@ -209,7 +217,7 @@
       <ECTransition Source="START" Destination="Ready" Condition="Ready AND&#xD;&#xA;(ValveFbOpen_1 OR ValveFbOpen_2&#xD;&#xA;OR&#xD;&#xA;PumpFbRunning_1 OR PumpFbRunning_2 OR PumpFbRunning_3)" x="6043.421" y="456.9407">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="1392.731,134.9044,1587.836,81.80506" />
       </ECTransition>
-      <ECTransition Source="CloseAll" Destination="START" Condition="ValveFbClose_1 OR NOT ValveReady_1&#xD;&#xA;AND&#xD;&#xA;ValveFbClose_2 OR NOT ValveReady_2&#xD;&#xA;" x="6564.148" y="753.7775">
+      <ECTransition Source="CloseAll" Destination="START" Condition="ValveFbClose_1 OR NOT ValveReady_1&#xD;&#xA;AND&#xD;&#xA;ValveFbClose_2 OR NOT ValveReady_2&#xD;&#xA;AND&#xD;&#xA;ValveFbClose_Supernant OR NOT ValveReady_Supernant" x="6564.148" y="753.7775">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="1762.102,222.6981,1563.366,134.6776" />
       </ECTransition>
       <ECTransition Source="StartReady" Destination="Run" Condition="Run" x="2826.402" y="2955.337">
@@ -242,6 +250,7 @@
 Grafcet := 1;
 Valve_Tank1 := TRUE;
 Valve_Tank2 := TRUE;
+Valve_TankSupernant := TRUE;
 StopReady := FALSE;
 AbortedReady := FALSE;]]></ST>
     </Algorithm>
@@ -259,6 +268,7 @@ ELSIF Grafcet = 7 THEN
 END_IF;
 Valve_Tank1 := FALSE;
 Valve_Tank2 := FALSE;
+Valve_TankSupernant := FALSE;
 ]]></ST>
     </Algorithm>
     <Algorithm Name="StopReady">
