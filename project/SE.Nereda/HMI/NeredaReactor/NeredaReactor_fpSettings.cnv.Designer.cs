@@ -29,7 +29,8 @@ namespace SE.Nereda.Faceplates.NeredaReactor
 			this.sDefault1 = new SE.Nereda.Symbols.CmdFeed.sDefault();
 			this.sDefault2 = new SE.Nereda.Symbols.CmdAerate.sDefault();
 			this.sDefault3 = new SE.Nereda.Symbols.CmdSludgeDischarge.sDefault();
-			this.sDefault4 = new SE.Nereda.Symbols.SufficientFeedFlow.sDefault();
+			this.sDefault4 = new SE.Nereda.Symbols.CmdVent.sDefault();
+			this.sDefault5 = new SE.Nereda.Symbols.SufficientFeedFlow.sDefault();
 			// 
 			// sDefault1
 			// 
@@ -64,26 +65,37 @@ namespace SE.Nereda.Faceplates.NeredaReactor
 			this.sDefault4.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 8D, 336D);
 			this.sDefault4.Name = "sDefault4";
 			this.sDefault4.SecurityToken = ((uint)(4294967295u));
-			this.sDefault4.TagName = "ReactorLogic.SufficientFeedFlow";
+			this.sDefault4.TagName = "ReactorLogic.LogicVent";
 			this.sDefault4.EndInit();
+			// 
+			// sDefault5
+			// 
+			this.sDefault5.BeginInit();
+			this.sDefault5.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 8D, 448D);
+			this.sDefault5.Name = "sDefault5";
+			this.sDefault5.SecurityToken = ((uint)(4294967295u));
+			this.sDefault5.TagName = "ReactorLogic.SufficientFeedFlow";
+			this.sDefault5.EndInit();
 			// 
 			// fpSettings
 			// 
-			this.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(384D)), ((float)(448D)));
+			this.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(384D)), ((float)(568D)));
 			this.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(154)), ((byte)(154)), ((byte)(154))));
 			this.Shapes.AddRange(new System.ComponentModel.IComponent[] {
 			this.sDefault1,
 			this.sDefault2,
 			this.sDefault3,
-			this.sDefault4});
-			this.Size = new System.Drawing.Size(384, 448);
+			this.sDefault4,
+			this.sDefault5});
+			this.Size = new System.Drawing.Size(384, 568);
 			this.Title = "Reactor Settings";
 
 		}
 		private SE.Nereda.Symbols.CmdFeed.sDefault sDefault1;
 		private SE.Nereda.Symbols.CmdAerate.sDefault sDefault2;
 		private SE.Nereda.Symbols.CmdSludgeDischarge.sDefault sDefault3;
-		private SE.Nereda.Symbols.SufficientFeedFlow.sDefault sDefault4;
+		private SE.Nereda.Symbols.CmdVent.sDefault sDefault4;
+		private SE.Nereda.Symbols.SufficientFeedFlow.sDefault sDefault5;
 		#endregion
 	}
 }

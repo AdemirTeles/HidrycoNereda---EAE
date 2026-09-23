@@ -37,6 +37,8 @@
     <AdapterOutputs>
       <Adapter ID="2A7255337C32A65B" Name="ICmdAerValve1" Type="INeredaAct" Namespace="SE.Nereda" />
       <Adapter ID="53EE01F26AD9A410" Name="ICmdAerValve2" Type="INeredaAct" Namespace="SE.Nereda" />
+      <Adapter ID="B83F7840435E836E" Name="IAerationBlockValve_Pv1" Type="INeredaAct" Namespace="SE.Nereda" />
+      <Adapter ID="D2FE623904FAC0C3" Name="IAirFillValveSludgeDischarge_Pv2" Type="INeredaAct" Namespace="SE.Nereda" />
     </AdapterOutputs>
   </InterfaceList>
   <FBNetwork>
@@ -48,16 +50,18 @@
     </FB>
     <FB ID="8360EDAC75D05D34" UID="59D6B15D31D2BA9D" Name="AerationInfluentGridParameterSelector" Type="TowParametersSelector" x="4020" y="2880" Namespace="SE.Nereda" />
     <FB ID="C829812552C38C88" UID="7D0C717ED05A3BB5" Name="AerationFlowSpSelector" Type="ParametersSelector" x="5280" y="2880" Namespace="SE.Nereda" />
-    <FB ID="FB54AF525A1A2946" Name="CmdLogic_CommonAeration" Type="CmdCAerationValves" x="2540" y="4060" Namespace="SE.Nereda" />
+    <FB ID="FB54AF525A1A2946" Name="CmdLogic_CommonAeration" Type="CmdCAerationValves" x="2440" y="4040" Namespace="SE.Nereda">
+      <Attribute Name="Configuration.Component.HideUnusedPorts" Value="" />
+    </FB>
     <FB ID="E840F4DC5164E095" Name="DedicatedCommonSelector" Type="CommonDedicatedSel" x="4680" y="4040" Namespace="SE.Nereda" />
-    <Input ID="413C016DFFB59D18" Name="INIT" x="1140" y="1250" Type="Event" />
-    <Input ID="42062FCE2A6CF2D8" Name="MODE" x="959.9999" y="3084" Type="Event" />
-    <Input ID="359E24E45FC44765" Name="Mode" x="960" y="3144" Type="Data" />
-    <Input ID="B960D5854AD6242C" Name="EMERGENCY" x="959.9999" y="3334" Type="Event" />
+    <Input ID="413C016DFFB59D18" Name="INIT" x="1140" y="1246" Type="Event" />
+    <Input ID="42062FCE2A6CF2D8" Name="MODE" x="959.9999" y="3080" Type="Event" />
+    <Input ID="359E24E45FC44765" Name="Mode" x="960" y="3140" Type="Data" />
+    <Input ID="B960D5854AD6242C" Name="EMERGENCY" x="959.9999" y="3330" Type="Event" />
     <Input ID="FC5C6DAB9F518715" Name="EmergencyON" x="959.9999" y="3402" Type="Data" />
-    <Input ID="6B6DC0CDC9D4BF59" Name="EmergencyFlowSP" x="959.9999" y="3454" Type="Data" />
-    <Input ID="646825DD30F2EA5E" Name="EmergencyInfluentGrid" x="960" y="3576" Type="Data" />
-    <Input ID="CAA51838933CA377" Name="EmergencyAerationGrid" x="959.9998" y="3516" Type="Data" />
+    <Input ID="6B6DC0CDC9D4BF59" Name="EmergencyFlowSP" x="959.9999" y="3450" Type="Data" />
+    <Input ID="646825DD30F2EA5E" Name="EmergencyInfluentGrid" x="960" y="3572" Type="Data" />
+    <Input ID="CAA51838933CA377" Name="EmergencyAerationGrid" x="959.9998" y="3512" Type="Data" />
     <Frame Name="FRAME6" X="520" Y="1960" Width="1600" Height="2100">
       <Parameter Name="BackgroundColor" Value="AntiqueWhite" />
       <Parameter Name="TextColor" Value="Black" />
@@ -130,9 +134,11 @@
       <Parameter Name="Text" Value="Capacity &amp; Parameters Setpoint" />
       <Parameter Name="NxtLayerIdentifier" Value="" />
     </Frame>
-    <Output ID="2A7255337C32A65B" Name="ICmdAerValve1" x="6660" y="1074" Type="Adapter" />
-    <Output ID="53EE01F26AD9A410" Name="ICmdAerValve2" x="6660" y="1134" Type="Adapter" />
-    <Output ID="B72A275F8DEDE920" Name="INITO" x="1100" y="1354" Type="Event" />
+    <Output ID="D2FE623904FAC0C3" Name="IAirFillValveSludgeDischarge_Pv2" x="6660" y="1250" Type="Adapter" />
+    <Output ID="B83F7840435E836E" Name="IAerationBlockValve_Pv1" x="6660" y="1188" Type="Adapter" />
+    <Output ID="2A7255337C32A65B" Name="ICmdAerValve1" x="6660" y="1070" Type="Adapter" />
+    <Output ID="53EE01F26AD9A410" Name="ICmdAerValve2" x="6660" y="1130" Type="Adapter" />
+    <Output ID="B72A275F8DEDE920" Name="INITO" x="1100" y="1350" Type="Event" />
     <EventConnections>
       <Connection Source="$E1021AA83C1C4121.Interlocked_CNF" Destination="$0FAC6F262573641E.3B57434A9B977063">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
@@ -276,7 +282,6 @@
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
         <AvoidsNodes>false</AvoidsNodes>
       </Connection>
-      <Connection Source="$C829812552C38C88.CNF" Destination="$FB54AF525A1A2946.E1318246909B9AF9" dx1="140" dx2="90" dy="1010" />
     </EventConnections>
     <DataConnections>
       <Connection Source="$E1021AA83C1C4121.Ready" Destination="$0FAC6F262573641E.D9CFC7F0F0F8C6AB">
@@ -317,7 +322,7 @@
       <Connection Source="$359E24E45FC44765" Destination="$C829812552C38C88.Mode" dx1="2006.677">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$6B6DC0CDC9D4BF59" Destination="$C829812552C38C88.4C6C1BFF70182CBB" dx1="1897.156">
+      <Connection Source="$6B6DC0CDC9D4BF59" Destination="$C829812552C38C88.4C6C1BFF70182CBB">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
       <Connection Source="$CAA51838933CA377" Destination="$8360EDAC75D05D34.4C6C1BFF70182CBB" dx1="1217.219">
@@ -451,7 +456,6 @@
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
         <AvoidsNodes>false</AvoidsNodes>
       </Connection>
-      <Connection Source="$C829812552C38C88.ValOut" Destination="$FB54AF525A1A2946.4BE692A533D45CF1" dx1="120" dx2="230" dy="630" />
     </DataConnections>
     <AdapterConnections>
       <Connection Source="$0FAC6F262573641E.452D64953B161AB4" Destination="$2A7255337C32A65B">
@@ -510,6 +514,66 @@
           <Points>
             <X>1661.22913</X>
             <Y>164.5</Y>
+          </Points>
+        </Points>
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$FB54AF525A1A2946.0BC1BD7F7C60B585" Destination="$B83F7840435E836E">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <Points>
+          <Points>
+            <X>907.614563</X>
+            <Y>1194.49988</Y>
+          </Points>
+          <Points>
+            <X>966.4792</X>
+            <Y>1194.49988</Y>
+          </Points>
+          <Points>
+            <X>966.4792</X>
+            <Y>672</Y>
+          </Points>
+          <Points>
+            <X>1216.47925</X>
+            <Y>672</Y>
+          </Points>
+          <Points>
+            <X>1216.47925</X>
+            <Y>274.5</Y>
+          </Points>
+          <Points>
+            <X>1668.97925</X>
+            <Y>274.5</Y>
+          </Points>
+        </Points>
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$FB54AF525A1A2946.C7DB4697A0EA6C4A" Destination="$D2FE623904FAC0C3">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <Points>
+          <Points>
+            <X>950.6041</X>
+            <Y>1299.99988</Y>
+          </Points>
+          <Points>
+            <X>1013.10413</X>
+            <Y>1299.99988</Y>
+          </Points>
+          <Points>
+            <X>1013.10413</X>
+            <Y>992.5</Y>
+          </Points>
+          <Points>
+            <X>1222.5</X>
+            <Y>992.5</Y>
+          </Points>
+          <Points>
+            <X>1222.5</X>
+            <Y>320</Y>
+          </Points>
+          <Points>
+            <X>1665</X>
+            <Y>320</Y>
           </Points>
         </Points>
         <AvoidsNodes>false</AvoidsNodes>

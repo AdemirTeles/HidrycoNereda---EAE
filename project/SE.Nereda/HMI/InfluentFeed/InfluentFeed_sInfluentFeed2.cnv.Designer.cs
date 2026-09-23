@@ -122,7 +122,7 @@ namespace SE.Nereda.Symbols.InfluentFeed
 			this.sPump1.Name = "sPump1";
 			this.sPump1.SecurityToken = ((uint)(4294967295u));
 			this.sPump1.SymbolNameDisplay = SE.Nereda.Symbols.Motor_VS.sPump.SymbolNameDisplayOption.Show;
-			this.sPump1.TagName = "Actuators.FeedReactorPump03";
+			this.sPump1.TagName = "Actuators.FeedReactorPump01";
 			this.sPump1.EndInit();
 			// 
 			// sPump2
@@ -146,7 +146,7 @@ namespace SE.Nereda.Symbols.InfluentFeed
 			this.sPump3.Name = "sPump3";
 			this.sPump3.SecurityToken = ((uint)(4294967295u));
 			this.sPump3.SymbolNameDisplay = SE.Nereda.Symbols.Motor_VS.sPump.SymbolNameDisplayOption.Show;
-			this.sPump3.TagName = "Actuators.FeedReactorPump01";
+			this.sPump3.TagName = "Actuators.FeedReactorPump03";
 			this.sPump3.EndInit();
 			// 
 			// sMotorVs2
@@ -614,7 +614,7 @@ namespace SE.Nereda.Symbols.InfluentFeed
 			this.sDisplayPv41.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 736D, 96D);
 			this.sDisplayPv41.Name = "sDisplayPv41";
 			this.sDisplayPv41.SecurityToken = ((uint)(4294967295u));
-			this.sDisplayPv41.TagName = "Sensors.FeedReactorFlowPv";
+			this.sDisplayPv41.TagName = "Sensors.FeedInfluentFlowPv";
 			this.sDisplayPv41.EndInit();
 			// 
 			// line13

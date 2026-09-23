@@ -30,6 +30,7 @@ namespace SE.Nereda.Symbols.ReactorLogic
 			this.Wait = new SE.Nereda.Symbols.Phase.sDefault();
 			this.SludgeDischarge = new SE.Nereda.Symbols.Phase.sDefault();
 			this.LowerLevel = new SE.Nereda.Symbols.Phase.sDefault();
+			this.MetalDosing = new SE.Nereda.Symbols.Phase.sDefault();
 			this.VentAerationGrid = new SE.Nereda.Symbols.Phase.sDefault();
 			this.VentSludgeGrid = new SE.Nereda.Symbols.Phase.sDefault();
 			// 
@@ -59,7 +60,7 @@ namespace SE.Nereda.Symbols.ReactorLogic
 			// 
 			this.Wait.BeginInit();
 			this.Wait._iReactorID = "";
-			this.Wait.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 8D, 104D);
+			this.Wait.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 8D, 136D);
 			this.Wait.Name = "Wait";
 			this.Wait.SecurityToken = ((uint)(4294967295u));
 			this.Wait.StateTextPosition = SE.Nereda.Symbols.Phase.sDefault.ShowReactorName.NoReactorName;
@@ -70,7 +71,7 @@ namespace SE.Nereda.Symbols.ReactorLogic
 			// 
 			this.SludgeDischarge.BeginInit();
 			this.SludgeDischarge._iReactorID = "";
-			this.SludgeDischarge.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 8D, 136D);
+			this.SludgeDischarge.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 8D, 168D);
 			this.SludgeDischarge.Name = "SludgeDischarge";
 			this.SludgeDischarge.SecurityToken = ((uint)(4294967295u));
 			this.SludgeDischarge.StateTextPosition = SE.Nereda.Symbols.Phase.sDefault.ShowReactorName.NoReactorName;
@@ -88,11 +89,22 @@ namespace SE.Nereda.Symbols.ReactorLogic
 			this.LowerLevel.TagName = "LowerLevel";
 			this.LowerLevel.EndInit();
 			// 
+			// MetalDosing
+			// 
+			this.MetalDosing.BeginInit();
+			this.MetalDosing._iReactorID = "";
+			this.MetalDosing.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 8D, 104D);
+			this.MetalDosing.Name = "MetalDosing";
+			this.MetalDosing.SecurityToken = ((uint)(4294967295u));
+			this.MetalDosing.StateTextPosition = SE.Nereda.Symbols.Phase.sDefault.ShowReactorName.NoReactorName;
+			this.MetalDosing.TagName = "MetalDosing";
+			this.MetalDosing.EndInit();
+			// 
 			// VentAerationGrid
 			// 
 			this.VentAerationGrid.BeginInit();
 			this.VentAerationGrid._iReactorID = "";
-			this.VentAerationGrid.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 8D, 168D);
+			this.VentAerationGrid.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 8D, 200D);
 			this.VentAerationGrid.Name = "VentAerationGrid";
 			this.VentAerationGrid.SecurityToken = ((uint)(4294967295u));
 			this.VentAerationGrid.StateTextPosition = SE.Nereda.Symbols.Phase.sDefault.ShowReactorName.NoReactorName;
@@ -103,7 +115,7 @@ namespace SE.Nereda.Symbols.ReactorLogic
 			// 
 			this.VentSludgeGrid.BeginInit();
 			this.VentSludgeGrid._iReactorID = "";
-			this.VentSludgeGrid.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 8D, 200D);
+			this.VentSludgeGrid.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 8D, 232D);
 			this.VentSludgeGrid.Name = "VentSludgeGrid";
 			this.VentSludgeGrid.SecurityToken = ((uint)(4294967295u));
 			this.VentSludgeGrid.StateTextPosition = SE.Nereda.Symbols.Phase.sDefault.ShowReactorName.NoReactorName;
@@ -118,6 +130,7 @@ namespace SE.Nereda.Symbols.ReactorLogic
 			this.Wait,
 			this.SludgeDischarge,
 			this.LowerLevel,
+			this.MetalDosing,
 			this.VentAerationGrid,
 			this.VentSludgeGrid});
 			this.SymbolSize = new System.Drawing.Size(488, 288);
@@ -128,6 +141,7 @@ namespace SE.Nereda.Symbols.ReactorLogic
 		private SE.Nereda.Symbols.Phase.sDefault Wait;
 		private SE.Nereda.Symbols.Phase.sDefault SludgeDischarge;
 		private SE.Nereda.Symbols.Phase.sDefault LowerLevel;
+		private SE.Nereda.Symbols.Phase.sDefault MetalDosing;
 		private SE.Nereda.Symbols.Phase.sDefault VentAerationGrid;
 		private SE.Nereda.Symbols.Phase.sDefault VentSludgeGrid;
 		#endregion

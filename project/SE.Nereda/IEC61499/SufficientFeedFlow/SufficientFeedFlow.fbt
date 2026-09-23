@@ -6,10 +6,6 @@
   <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="9/23/2026" Remarks="template" />
   <InterfaceList>
     <EventInputs>
-      <Event ID="66AB3F7D60D6CB57" Name="INIT" />
-      <Event ID="28FBD027F2867232" Name="REQ_PV">
-        <With Var="LevelPv" />
-      </Event>
       <Event ID="39D7C3AFE6D016A9" Name="REQ" Comment="Normal Execution Request">
         <With Var="RunPhase" />
       </Event>
@@ -17,14 +13,13 @@
         <With Var="ResetRecived" />
       </Event>
     </EventInputs>
-    <EventOutputs>
-      <Event ID="D7B036B623D3D99D" Name="INITO" />
-    </EventOutputs>
     <InputVars>
-      <VarDeclaration ID="52D0876B706E5948" Name="LevelPv" Type="REAL" />
       <VarDeclaration ID="ADA40559F28F1824" Name="RunPhase" Type="BOOL" />
       <VarDeclaration ID="00FEDE980413A29F" Name="ResetRecived" Type="BOOL" />
     </InputVars>
+    <Sockets>
+      <AdapterDeclaration ID="C6809F86205722F6" Name="ILevelPv" Type="IAnalog" Namespace="SE.App2Base" x="120" y="1940" />
+    </Sockets>
     <Plugs>
       <AdapterDeclaration ID="E7EF8DDBE5FFFE77" Name="ISufficientFeedFlow" Type="ILevelFeedFlow" Namespace="SE.Nereda" x="2660" y="1280" />
     </Plugs>
@@ -32,27 +27,27 @@
   <FBNetwork>
     <FB ID="D526B4C650BAEF32" Name="SufficientFeedFlow" Type="SufficientFeedFlowBasic" x="1140" y="1100" Namespace="SE.Nereda" />
     <FB ID="361E5ED342C6270D" Name="E_DELAY" Type="E_DELAY" x="2400" y="560" Namespace="IEC61499.Standard" />
-    <FB ID="0DC24CE5A886D082" Name="dintToTime" Type="dintToTime" x="600" y="640" Namespace="SE.App2Base" />
+    <FB ID="0DC24CE5A886D082" Name="dintToTime" Type="dintToTime" x="600" y="639.9999" Namespace="SE.App2Base" />
     <FB ID="99CA24F13CB718E1" Name="IThis" Type="SufficientFeedFlow_HMI" x="1340" y="140" Namespace="SE.Nereda">
       <Parameter Name="$C58D06915B6308EC" Value="TRUE" />
     </FB>
-    <Input ID="28FBD027F2867232" Name="REQ_PV" x="280" y="1112" Type="Event" />
+    <FB ID="C4F1C6A277E1158A" Name="plcStart1" Type="plcStart" x="180" y="79.99999" Namespace="SE.App2Base">
+      <Parameter Name="$Prio" Value="100" />
+    </FB>
     <Input ID="39D7C3AFE6D016A9" Name="REQ" x="280" y="1172" Type="Event" />
     <Input ID="4077042B95A5B675" Name="REQ_RESET" x="280" y="1292" Type="Event" />
-    <Input ID="52D0876B706E5948" Name="LevelPv" x="280" y="1492" Type="Data" />
     <Input ID="ADA40559F28F1824" Name="RunPhase" x="280" y="1552" Type="Data" />
     <Input ID="00FEDE980413A29F" Name="ResetRecived" x="280" y="1732" Type="Data" />
-    <Input ID="66AB3F7D60D6CB57" Name="INIT" x="935.7083" y="152" Type="Event" />
-    <Output ID="D7B036B623D3D99D" Name="INITO" x="2119.115" y="152" Type="Event" />
     <EventConnections>
       <Connection Source="$D526B4C650BAEF32.CEB292B2283171B2" Destination="$361E5ED342C6270D.START" dx1="70" />
       <Connection Source="$D526B4C650BAEF32.613F54422BA47101" Destination="$361E5ED342C6270D.STOP" dx1="90" />
       <Connection Source="$361E5ED342C6270D.EO" Destination="$D526B4C650BAEF32.9849BF7793E3CBCD" dx1="48.5" dx2="90" dy="350" />
-      <Connection Source="$28FBD027F2867232" Destination="$D526B4C650BAEF32.30C32EB006EA4C34" />
       <Connection Source="$39D7C3AFE6D016A9" Destination="$D526B4C650BAEF32.C437AAA8069F1FCB" dx1="49.54169" />
       <Connection Source="$4077042B95A5B675" Destination="$D526B4C650BAEF32.B4D22D015D718341" />
-      <Connection Source="$0DC24CE5A886D082.CNF" Destination="$D526B4C650BAEF32.C437AAA8069F1FCB" dx1="60" dx2="70" dy="290" />
+      <Connection Source="$0DC24CE5A886D082.CNF" Destination="$D526B4C650BAEF32.C437AAA8069F1FCB" dx1="60" dx2="70" dy="270.0001" />
       <Connection Source="$D526B4C650BAEF32.AB0236918B6AB7A8" Destination="$E7EF8DDBE5FFFE77.CC9428CCDD032224" dx1="188.7917" />
+      <Connection Source="$C4F1C6A277E1158A.FIRST_INIT" Destination="$99CA24F13CB718E1.2D4FE5DF8F8EB99A" dx1="68.08337" />
+      <Connection Source="$C4F1C6A277E1158A.REDO_INIT" Destination="$99CA24F13CB718E1.2D4FE5DF8F8EB99A" />
       <Connection Source="$99CA24F13CB718E1.84013FE241EDAE00" Destination="$0DC24CE5A886D082.REQ">
         <Points>
           <Points>
@@ -81,30 +76,49 @@
           </Points>
           <Points>
             <X>132.5</X>
-            <Y>170</Y>
+            <Y>169.999969</Y>
           </Points>
           <Points>
             <X>145</X>
-            <Y>170</Y>
+            <Y>169.999969</Y>
           </Points>
         </Points>
       </Connection>
-      <Connection Source="$99CA24F13CB718E1.84013FE241EDAE00" Destination="$D526B4C650BAEF32.C437AAA8069F1FCB" dx1="80" dx2="70" dy="730" />
-      <Connection Source="$99CA24F13CB718E1.2446D9D84A62A6D6" Destination="$D7B036B623D3D99D" />
-      <Connection Source="$66AB3F7D60D6CB57" Destination="$99CA24F13CB718E1.2D4FE5DF8F8EB99A" />
+      <Connection Source="$99CA24F13CB718E1.84013FE241EDAE00" Destination="$D526B4C650BAEF32.C437AAA8069F1FCB" dx1="80" dx2="70" dy="710" />
+      <Connection Source="$99CA24F13CB718E1.2446D9D84A62A6D6" Destination="$C4F1C6A277E1158A.ACK_FIRST">
+        <Points>
+          <Points>
+            <X>482.7552</X>
+            <Y>45</Y>
+          </Points>
+          <Points>
+            <X>495.2552</X>
+            <Y>45</Y>
+          </Points>
+          <Points>
+            <X>495.2552</X>
+            <Y>29.9999981</Y>
+          </Points>
+          <Points>
+            <X>40</X>
+            <Y>29.9999981</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$C6809F86205722F6.REQ" Destination="$D526B4C650BAEF32.30C32EB006EA4C34" dx1="115.1667" />
     </EventConnections>
     <DataConnections>
-      <Connection Source="$52D0876B706E5948" Destination="$D526B4C650BAEF32.BCE3C25201AA8B6A" />
       <Connection Source="$ADA40559F28F1824" Destination="$D526B4C650BAEF32.90FA4CE95410AC4D" />
       <Connection Source="$00FEDE980413A29F" Destination="$D526B4C650BAEF32.BF5A6785A8565660" />
-      <Connection Source="$0DC24CE5A886D082.TimeValue" Destination="$D526B4C650BAEF32.52D7FB60C38DD9A8" dx1="40" dx2="170" dy="90" />
+      <Connection Source="$0DC24CE5A886D082.TimeValue" Destination="$D526B4C650BAEF32.52D7FB60C38DD9A8" dx1="40" dx2="170" dy="70.00012" />
       <Connection Source="$D526B4C650BAEF32.BE8006DB0CA17265" Destination="$361E5ED342C6270D.DT" dx1="190" />
       <Connection Source="$D526B4C650BAEF32.F365867250E66A90" Destination="$E7EF8DDBE5FFFE77.102CC7A878D73816" dx1="170" />
       <Connection Source="$D526B4C650BAEF32.81FE2D2793117977" Destination="$E7EF8DDBE5FFFE77.74D3D4DE3ED1D6B7" dx1="150" />
       <Connection Source="$D526B4C650BAEF32.60ECB844CED0E64F" Destination="$E7EF8DDBE5FFFE77.B6B46A0A077DA337" dx1="130" />
       <Connection Source="$D526B4C650BAEF32.17DD066F42AD1878" Destination="$E7EF8DDBE5FFFE77.957DAAEC5C0D7635" dx1="110" />
-      <Connection Source="$99CA24F13CB718E1.92D95F3FA9CA83CC" Destination="$D526B4C650BAEF32.9A9AE032169D4A25" dx1="40" dx2="190" dy="350" />
-      <Connection Source="$99CA24F13CB718E1.89CCEFB9E386C33A" Destination="$0DC24CE5A886D082.DintTime" dx1="60" dx2="70" dy="410" />
+      <Connection Source="$99CA24F13CB718E1.89CCEFB9E386C33A" Destination="$0DC24CE5A886D082.DintTime" dx1="60" dx2="70" dy="390" />
+      <Connection Source="$99CA24F13CB718E1.92D95F3FA9CA83CC" Destination="$D526B4C650BAEF32.9A9AE032169D4A25" dx1="40" dx2="190" dy="330" />
+      <Connection Source="$C6809F86205722F6.Value" Destination="$D526B4C650BAEF32.BCE3C25201AA8B6A" dx1="115.1667" />
     </DataConnections>
   </FBNetwork>
 </FBType>
