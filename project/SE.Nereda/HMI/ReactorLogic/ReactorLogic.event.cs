@@ -178,6 +178,9 @@ stack Trace:
 
   }
 }
+
+namespace SE.Nereda.Symbols.ReactorLogic
+{}
 #endregion #ReactorLogic_HMI;
 
 #endregion Definitions;
