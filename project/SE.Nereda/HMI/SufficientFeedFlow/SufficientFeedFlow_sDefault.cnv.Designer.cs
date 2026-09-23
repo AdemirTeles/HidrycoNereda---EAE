@@ -25,67 +25,12 @@ namespace SE.Nereda.Symbols.SufficientFeedFlow
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.freeText11 = new NxtControl.GuiFramework.FreeText();
-			this.MinLevelRiseSp = new System.HMI.Symbols.Base.TextBox<float>();
-			this.freeText2 = new NxtControl.GuiFramework.FreeText();
-			this.txtLevelCheckTimeSp = new System.HMI.Symbols.Base.TextBox<int>();
 			this.polygon1 = new NxtControl.GuiFramework.Polygon();
 			this.rectangle1 = new NxtControl.GuiFramework.Rectangle();
-			// 
-			// freeText11
-			// 
-			this.freeText11.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.freeText11.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-			this.freeText11.Location = new NxtControl.Drawing.PointF(64D, 112D);
-			this.freeText11.Name = "freeText11";
-			this.freeText11.Text = "Minimum Level Rise:";
-			// 
-			// MinLevelRiseSp
-			// 
-			this.MinLevelRiseSp.BeginInit();
-			this.MinLevelRiseSp.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.6399999999999999D, 0D, 0D, 1D, 248D, 112D);
-			this.MinLevelRiseSp.MaximumTag = null;
-			this.MinLevelRiseSp.MinimumTag = null;
-			this.MinLevelRiseSp.Name = "MinLevelRiseSp";
-			this.MinLevelRiseSp.NumberBase = NxtControl.GuiFramework.NumberBase.Decimal;
-			this.MinLevelRiseSp.Pen = new NxtControl.Drawing.Pen("TextBoxPen");
-			this.MinLevelRiseSp.SetColor = new NxtControl.Drawing.Color("Yellow");
-			this.MinLevelRiseSp.Suffix = "m";
-			this.MinLevelRiseSp.TagName = "MinLevelRiseSp";
-			this.MinLevelRiseSp.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleCenter;
-			this.MinLevelRiseSp.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.MinLevelRiseSp.UseInputPad = true;
-			this.MinLevelRiseSp.Value = 0F;
-			this.MinLevelRiseSp.EndInit();
-			// 
-			// freeText2
-			// 
-			this.freeText2.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.freeText2.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-			this.freeText2.Location = new NxtControl.Drawing.PointF(64D, 152D);
-			this.freeText2.Name = "freeText2";
-			this.freeText2.Text = "Feed Flow Check Time:";
-			// 
-			// txtLevelCheckTimeSp
-			// 
-			this.txtLevelCheckTimeSp.BeginInit();
-			this.txtLevelCheckTimeSp.DecimalPlacesCount = ((uint)(0u));
-			this.txtLevelCheckTimeSp.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.6333333333333333D, 0D, 0D, 1D, 248D, 152D);
-			this.txtLevelCheckTimeSp.Font = new NxtControl.Drawing.Font("SE.App2Base.Sp");
-			this.txtLevelCheckTimeSp.MaximumTag = null;
-			this.txtLevelCheckTimeSp.MinimumTag = null;
-			this.txtLevelCheckTimeSp.Name = "txtLevelCheckTimeSp";
-			this.txtLevelCheckTimeSp.NumberBase = NxtControl.GuiFramework.NumberBase.Decimal;
-			this.txtLevelCheckTimeSp.Pen = new NxtControl.Drawing.Pen("TextBoxPen");
-			this.txtLevelCheckTimeSp.SecurityLevel = 6;
-			this.txtLevelCheckTimeSp.SetColor = new NxtControl.Drawing.Color("Yellow");
-			this.txtLevelCheckTimeSp.Suffix = "s";
-			this.txtLevelCheckTimeSp.TagName = "LevelCheckTimeSp";
-			this.txtLevelCheckTimeSp.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
-			this.txtLevelCheckTimeSp.UseInputPad = true;
-			this.txtLevelCheckTimeSp.UseRange = true;
-			this.txtLevelCheckTimeSp.Value = 0;
-			this.txtLevelCheckTimeSp.EndInit();
+			this.freeText11 = new NxtControl.GuiFramework.FreeText();
+			this.freeText2 = new NxtControl.GuiFramework.FreeText();
+			this.MinLevelRiseSp_1 = new System.HMI.Symbols.Base.TextBox<float>();
+			this.LevelCheckTimeSp = new System.HMI.Symbols.Base.TextBox<int>();
 			// 
 			// polygon1
 			// 
@@ -105,10 +50,64 @@ namespace SE.Nereda.Symbols.SufficientFeedFlow
 			// 
 			// rectangle1
 			// 
-			this.rectangle1.Bounds = new NxtControl.Drawing.RectF(((float)(56D)), ((float)(100D)), ((float)(320D)), ((float)(96D)));
+			this.rectangle1.Bounds = new NxtControl.Drawing.RectF(((float)(56D)), ((float)(100D)), ((float)(394D)), ((float)(88D)));
 			this.rectangle1.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(250)), ((byte)(250)), ((byte)(250))));
 			this.rectangle1.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
 			this.rectangle1.Name = "rectangle1";
+			// 
+			// freeText11
+			// 
+			this.freeText11.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.freeText11.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+			this.freeText11.Location = new NxtControl.Drawing.PointF(68D, 114D);
+			this.freeText11.Name = "freeText11";
+			this.freeText11.Text = "Minimum Level Rise:";
+			// 
+			// freeText2
+			// 
+			this.freeText2.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.freeText2.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+			this.freeText2.Location = new NxtControl.Drawing.PointF(68D, 154D);
+			this.freeText2.Name = "freeText2";
+			this.freeText2.Text = "Feed Flow Check Time:";
+			// 
+			// MinLevelRiseSp_1
+			// 
+			this.MinLevelRiseSp_1.BeginInit();
+			this.MinLevelRiseSp_1.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.64D, 0D, 0D, 1D, 326D, 110D);
+			this.MinLevelRiseSp_1.MaximumTag = null;
+			this.MinLevelRiseSp_1.MinimumTag = null;
+			this.MinLevelRiseSp_1.Name = "MinLevelRiseSp_1";
+			this.MinLevelRiseSp_1.NumberBase = NxtControl.GuiFramework.NumberBase.Decimal;
+			this.MinLevelRiseSp_1.Pen = new NxtControl.Drawing.Pen("TextBoxPen");
+			this.MinLevelRiseSp_1.SetColor = new NxtControl.Drawing.Color("Yellow");
+			this.MinLevelRiseSp_1.Suffix = "m";
+			this.MinLevelRiseSp_1.TagName = "MinLevelRiseSp";
+			this.MinLevelRiseSp_1.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleCenter;
+			this.MinLevelRiseSp_1.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.MinLevelRiseSp_1.UseInputPad = true;
+			this.MinLevelRiseSp_1.Value = 0F;
+			this.MinLevelRiseSp_1.EndInit();
+			// 
+			// LevelCheckTimeSp
+			// 
+			this.LevelCheckTimeSp.BeginInit();
+			this.LevelCheckTimeSp.DecimalPlacesCount = ((uint)(0u));
+			this.LevelCheckTimeSp.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.64D, 0D, 0D, 1D, 326D, 150D);
+			this.LevelCheckTimeSp.MaximumTag = null;
+			this.LevelCheckTimeSp.MinimumTag = null;
+			this.LevelCheckTimeSp.Name = "LevelCheckTimeSp";
+			this.LevelCheckTimeSp.NumberBase = NxtControl.GuiFramework.NumberBase.Decimal;
+			this.LevelCheckTimeSp.Pen = new NxtControl.Drawing.Pen("TextBoxPen");
+			this.LevelCheckTimeSp.SetColor = new NxtControl.Drawing.Color("Yellow");
+			this.LevelCheckTimeSp.Suffix = "s";
+			this.LevelCheckTimeSp.TagName = "LevelCheckTimeSp";
+			this.LevelCheckTimeSp.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleCenter;
+			this.LevelCheckTimeSp.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.LevelCheckTimeSp.UseInputPad = true;
+			this.LevelCheckTimeSp.UseRange = true;
+			this.LevelCheckTimeSp.Value = 0;
+			this.LevelCheckTimeSp.EndInit();
 			// 
 			// sDefault
 			// 
@@ -116,18 +115,18 @@ namespace SE.Nereda.Symbols.SufficientFeedFlow
 			this.polygon1,
 			this.rectangle1,
 			this.freeText11,
-			this.MinLevelRiseSp,
 			this.freeText2,
-			this.txtLevelCheckTimeSp});
+			this.MinLevelRiseSp_1,
+			this.LevelCheckTimeSp});
 			this.SymbolSize = new System.Drawing.Size(456, 256);
 
 		}
 		private NxtControl.GuiFramework.FreeText freeText11;
-		private System.HMI.Symbols.Base.TextBox<float> MinLevelRiseSp;
 		private NxtControl.GuiFramework.FreeText freeText2;
-		private System.HMI.Symbols.Base.TextBox<int> txtLevelCheckTimeSp;
 		private NxtControl.GuiFramework.Polygon polygon1;
 		private NxtControl.GuiFramework.Rectangle rectangle1;
+		private System.HMI.Symbols.Base.TextBox<float> MinLevelRiseSp_1;
+		private System.HMI.Symbols.Base.TextBox<int> LevelCheckTimeSp;
 		#endregion
 	}
 }
