@@ -62,6 +62,32 @@ namespace SE.Nereda.Symbols.SufficientFeedFlow
 
   }
 }
+
+namespace SE.Nereda.Faceplates.SufficientFeedFlow
+{
+  partial class fpSettings
+  {
+    public bool FireEvent_CNF(System.Int32 LevelCheckTimeSp, System.Single MinLevelRiseSp)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {LevelCheckTimeSp, MinLevelRiseSp});
+    }
+    public bool FireEvent_CNF(SE.Nereda.Symbols.SufficientFeedFlow.CNFEventArgs ea)
+    {
+      object[] _values_ = new object[2];
+      if (ea.LevelCheckTimeSp.HasValue) _values_[0] = ea.LevelCheckTimeSp.Value;
+      if (ea.MinLevelRiseSp.HasValue) _values_[1] = ea.MinLevelRiseSp.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
+    }
+    public bool FireEvent_CNF(System.Int32 LevelCheckTimeSp, bool ignore_LevelCheckTimeSp, System.Single MinLevelRiseSp, bool ignore_MinLevelRiseSp)
+    {
+      object[] _values_ = new object[2];
+      if (!ignore_LevelCheckTimeSp) _values_[0] = LevelCheckTimeSp;
+      if (!ignore_MinLevelRiseSp) _values_[1] = MinLevelRiseSp;
+      return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
+    }
+
+  }
+}
 #endregion #SufficientFeedFlow_HMI;
 
 #endregion Definitions;

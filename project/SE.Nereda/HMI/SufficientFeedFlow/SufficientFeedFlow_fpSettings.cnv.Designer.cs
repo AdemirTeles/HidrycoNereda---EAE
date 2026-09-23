@@ -2,20 +2,21 @@
  * Created by EcoStruxure Automation Expert.
  * User:  
  * Date: 9/23/2026
- * Time: 3:20 PM
+ * Time: 3:32 PM
  * 
  */
 using System;
 using System.ComponentModel;
 using System.Collections;
+using System.Diagnostics;
 using NxtControl.GuiFramework;
 
-namespace SE.Nereda.Symbols.SufficientFeedFlow
+namespace SE.Nereda.Faceplates.SufficientFeedFlow
 {
 	/// <summary>
-	/// Summary description for sDefault.
+	/// Summary description for fpSettings.
 	/// </summary>
-	partial class sDefault
+	partial class fpSettings
 	{
 
 		#region Component Designer generated code
@@ -29,21 +30,19 @@ namespace SE.Nereda.Symbols.SufficientFeedFlow
 			this.MinLevelRiseSp = new System.HMI.Symbols.Base.TextBox<float>();
 			this.freeText2 = new NxtControl.GuiFramework.FreeText();
 			this.txtLevelCheckTimeSp = new System.HMI.Symbols.Base.TextBox<int>();
-			this.polygon1 = new NxtControl.GuiFramework.Polygon();
-			this.rectangle1 = new NxtControl.GuiFramework.Rectangle();
 			// 
 			// freeText11
 			// 
 			this.freeText11.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.freeText11.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-			this.freeText11.Location = new NxtControl.Drawing.PointF(64D, 112D);
+			this.freeText11.Location = new NxtControl.Drawing.PointF(16D, 28D);
 			this.freeText11.Name = "freeText11";
 			this.freeText11.Text = "Minimum Level Rise:";
 			// 
 			// MinLevelRiseSp
 			// 
 			this.MinLevelRiseSp.BeginInit();
-			this.MinLevelRiseSp.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.6399999999999999D, 0D, 0D, 1D, 248D, 112D);
+			this.MinLevelRiseSp.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.6399999999999999D, 0D, 0D, 1D, 200D, 24D);
 			this.MinLevelRiseSp.MaximumTag = null;
 			this.MinLevelRiseSp.MinimumTag = null;
 			this.MinLevelRiseSp.Name = "MinLevelRiseSp";
@@ -62,7 +61,7 @@ namespace SE.Nereda.Symbols.SufficientFeedFlow
 			// 
 			this.freeText2.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.freeText2.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-			this.freeText2.Location = new NxtControl.Drawing.PointF(64D, 152D);
+			this.freeText2.Location = new NxtControl.Drawing.PointF(16D, 68D);
 			this.freeText2.Name = "freeText2";
 			this.freeText2.Text = "Feed Flow Check Time:";
 			// 
@@ -70,7 +69,7 @@ namespace SE.Nereda.Symbols.SufficientFeedFlow
 			// 
 			this.txtLevelCheckTimeSp.BeginInit();
 			this.txtLevelCheckTimeSp.DecimalPlacesCount = ((uint)(0u));
-			this.txtLevelCheckTimeSp.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.6333333333333333D, 0D, 0D, 1D, 248D, 152D);
+			this.txtLevelCheckTimeSp.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.6333333333333333D, 0D, 0D, 1D, 200D, 64D);
 			this.txtLevelCheckTimeSp.Font = new NxtControl.Drawing.Font("SE.App2Base.Sp");
 			this.txtLevelCheckTimeSp.MaximumTag = null;
 			this.txtLevelCheckTimeSp.MinimumTag = null;
@@ -87,47 +86,22 @@ namespace SE.Nereda.Symbols.SufficientFeedFlow
 			this.txtLevelCheckTimeSp.Value = 0;
 			this.txtLevelCheckTimeSp.EndInit();
 			// 
-			// polygon1
+			// fpSettings
 			// 
-			this.polygon1.Bounds = new NxtControl.Drawing.RectF(((float)(56D)), ((float)(84D)), ((float)(192D)), ((float)(28D)));
-			this.polygon1.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(78)), ((byte)(78)), ((byte)(78))));
-			this.polygon1.Closed = true;
-			this.polygon1.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular);
-			this.polygon1.Name = "polygon1";
-			this.polygon1.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(78)), ((byte)(78)), ((byte)(78))), 1F, NxtControl.Drawing.DashStyle.Solid);
-			this.polygon1.Points.AddRange(new NxtControl.Drawing.PointF[] {
-			new NxtControl.Drawing.PointF(56D, 108D),
-			new NxtControl.Drawing.PointF(56D, 84D),
-			new NxtControl.Drawing.PointF(220D, 84D),
-			new NxtControl.Drawing.PointF(248D, 112D)});
-			this.polygon1.Text = "SUFFICIENT FEED FLOW";
-			this.polygon1.TextColor = new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(0)));
-			// 
-			// rectangle1
-			// 
-			this.rectangle1.Bounds = new NxtControl.Drawing.RectF(((float)(56D)), ((float)(100D)), ((float)(320D)), ((float)(96D)));
-			this.rectangle1.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(250)), ((byte)(250)), ((byte)(250))));
-			this.rectangle1.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
-			this.rectangle1.Name = "rectangle1";
-			// 
-			// sDefault
-			// 
+			this.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(344D)), ((float)(120D)));
+			this.Brush = new NxtControl.Drawing.Brush("FaceplateBrush");
 			this.Shapes.AddRange(new System.ComponentModel.IComponent[] {
-			this.polygon1,
-			this.rectangle1,
 			this.freeText11,
 			this.MinLevelRiseSp,
 			this.freeText2,
 			this.txtLevelCheckTimeSp});
-			this.SymbolSize = new System.Drawing.Size(456, 256);
+			this.Size = new System.Drawing.Size(344, 120);
 
 		}
 		private NxtControl.GuiFramework.FreeText freeText11;
 		private System.HMI.Symbols.Base.TextBox<float> MinLevelRiseSp;
 		private NxtControl.GuiFramework.FreeText freeText2;
 		private System.HMI.Symbols.Base.TextBox<int> txtLevelCheckTimeSp;
-		private NxtControl.GuiFramework.Polygon polygon1;
-		private NxtControl.GuiFramework.Rectangle rectangle1;
 		#endregion
 	}
 }
