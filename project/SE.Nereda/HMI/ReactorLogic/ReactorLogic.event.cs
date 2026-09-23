@@ -42,18 +42,6 @@ namespace SE.Nereda.Symbols.ReactorLogic
     public CNFEventArgs()
     {
     }
-    private System.Int32? LevelCheckTimeSp_field = null;
-    public System.Int32? LevelCheckTimeSp
-    {
-       get { return LevelCheckTimeSp_field; }
-       set { LevelCheckTimeSp_field = value; }
-    }
-    private System.Single? MinLevelRiseSp_field = null;
-    public System.Single? MinLevelRiseSp
-    {
-       get { return MinLevelRiseSp_field; }
-       set { MinLevelRiseSp_field = value; }
-    }
 
   }
 
@@ -97,22 +85,13 @@ stack Trace:
 
       }
     }
-    public bool FireEvent_CNF(System.Int32 LevelCheckTimeSp, System.Single MinLevelRiseSp)
+    public bool FireEvent_CNF()
     {
-      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {LevelCheckTimeSp, MinLevelRiseSp});
+      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {});
     }
     public bool FireEvent_CNF(SE.Nereda.Symbols.ReactorLogic.CNFEventArgs ea)
     {
-      object[] _values_ = new object[2];
-      if (ea.LevelCheckTimeSp.HasValue) _values_[0] = ea.LevelCheckTimeSp.Value;
-      if (ea.MinLevelRiseSp.HasValue) _values_[1] = ea.MinLevelRiseSp.Value;
-      return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
-    }
-    public bool FireEvent_CNF(System.Int32 LevelCheckTimeSp, bool ignore_LevelCheckTimeSp, System.Single MinLevelRiseSp, bool ignore_MinLevelRiseSp)
-    {
-      object[] _values_ = new object[2];
-      if (!ignore_LevelCheckTimeSp) _values_[0] = LevelCheckTimeSp;
-      if (!ignore_MinLevelRiseSp) _values_[1] = MinLevelRiseSp;
+      object[] _values_ = new object[0];
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
 
@@ -157,30 +136,18 @@ stack Trace:
 
       }
     }
-    public bool FireEvent_CNF(System.Int32 LevelCheckTimeSp, System.Single MinLevelRiseSp)
+    public bool FireEvent_CNF()
     {
-      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {LevelCheckTimeSp, MinLevelRiseSp});
+      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {});
     }
     public bool FireEvent_CNF(SE.Nereda.Symbols.ReactorLogic.CNFEventArgs ea)
     {
-      object[] _values_ = new object[2];
-      if (ea.LevelCheckTimeSp.HasValue) _values_[0] = ea.LevelCheckTimeSp.Value;
-      if (ea.MinLevelRiseSp.HasValue) _values_[1] = ea.MinLevelRiseSp.Value;
-      return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
-    }
-    public bool FireEvent_CNF(System.Int32 LevelCheckTimeSp, bool ignore_LevelCheckTimeSp, System.Single MinLevelRiseSp, bool ignore_MinLevelRiseSp)
-    {
-      object[] _values_ = new object[2];
-      if (!ignore_LevelCheckTimeSp) _values_[0] = LevelCheckTimeSp;
-      if (!ignore_MinLevelRiseSp) _values_[1] = MinLevelRiseSp;
+      object[] _values_ = new object[0];
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
 
   }
 }
-
-namespace SE.Nereda.Symbols.ReactorLogic
-{}
 #endregion #ReactorLogic_HMI;
 
 #endregion Definitions;
