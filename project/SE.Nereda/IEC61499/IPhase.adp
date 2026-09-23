@@ -28,6 +28,9 @@
       <Event ID="State_CNF" Name="CNF_STATE">
         <With Var="State" />
       </Event>
+      <Event ID="DAD2DA003FBF1388" Name="CNF_RESET">
+        <With Var="ResetRecived" />
+      </Event>
     </EventOutputs>
     <InputVars>
       <VarDeclaration ID="Start_Ready" Name="FbStartReady" Type="BOOL" />
@@ -43,6 +46,7 @@
       <VarDeclaration Name="Aborted" Type="BOOL" />
       <VarDeclaration Name="Interlocked" Type="BOOL" />
       <VarDeclaration Name="State" Type="STRING[50]" />
+      <VarDeclaration ID="8F0253AF791C383D" Name="ResetRecived" Type="BOOL" />
     </OutputVars>
   </InterfaceList>
   <Service RightInterface="PLUG" LeftInterface="SOCKET">

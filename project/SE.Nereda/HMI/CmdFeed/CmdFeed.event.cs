@@ -65,6 +65,22 @@ namespace SE.Nereda.Symbols.CmdFeed
 
   }
 
+  public class CHECK_TIME_SPEventArgs : System.EventArgs
+  {
+    public CHECK_TIME_SPEventArgs()
+    {
+    }
+
+  }
+
+  public class MIN_LEVEL_RISE_SPEventArgs : System.EventArgs
+  {
+    public MIN_LEVEL_RISE_SPEventArgs()
+    {
+    }
+
+  }
+
 }
 
 namespace SE.Nereda.Symbols.CmdFeed
@@ -136,6 +152,24 @@ stack Trace:
       object[] _values_ = new object[1];
       if (!ignore_FeedFlowSpMan) _values_[0] = FeedFlowSpMan;
       return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
+    }
+    public bool FireEvent_CHECK_TIME_SP()
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(2, new object[] {});
+    }
+    public bool FireEvent_CHECK_TIME_SP(SE.Nereda.Symbols.CmdFeed.CHECK_TIME_SPEventArgs ea)
+    {
+      object[] _values_ = new object[0];
+      return ((IHMIAccessorOutput)this).FireEvent(2, _values_);
+    }
+    public bool FireEvent_MIN_LEVEL_RISE_SP()
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(3, new object[] {});
+    }
+    public bool FireEvent_MIN_LEVEL_RISE_SP(SE.Nereda.Symbols.CmdFeed.MIN_LEVEL_RISE_SPEventArgs ea)
+    {
+      object[] _values_ = new object[0];
+      return ((IHMIAccessorOutput)this).FireEvent(3, _values_);
     }
 
   }

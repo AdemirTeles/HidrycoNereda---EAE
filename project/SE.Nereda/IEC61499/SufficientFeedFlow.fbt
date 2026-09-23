@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="134ef716-e690-4713-92b8-a025c3fca074" Name="SufficientFeedFlow" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="9/23/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="30C32EB006EA4C34" Name="REQ_PV">
+        <With Var="LevelPv" />
+      </Event>
+      <Event ID="C437AAA8069F1FCB" Name="REQ" Comment="Normal Execution Request">
+        <With Var="LevelCheckTimeSp" />
+        <With Var="MinLevelRiseSp" />
+        <With Var="RunPhase" />
+      </Event>
+      <Event ID="9849BF7793E3CBCD" Name="END_DELAY" />
+      <Event ID="B4D22D015D718341" Name="REQ_RESET">
+        <With Var="ResetRecived" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="AB0236918B6AB7A8" Name="CNF">
+        <With Var="FeedFlowLevelStart" />
+        <With Var="FeedFlowOk" />
+        <With Var="FeedFlowInsufficient" />
+        <With Var="FeedFlowLevelCheck" />
+      </Event>
+      <Event ID="CEB292B2283171B2" Name="START_DELAY" />
+      <Event ID="613F54422BA47101" Name="STOP_DELAY" />
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="BCE3C25201AA8B6A" Name="LevelPv" Type="REAL" />
+      <VarDeclaration ID="90FA4CE95410AC4D" Name="RunPhase" Type="BOOL" />
+      <VarDeclaration ID="52D7FB60C38DD9A8" Name="LevelCheckTimeSp" Type="DINT" />
+      <VarDeclaration ID="9A9AE032169D4A25" Name="MinLevelRiseSp" Type="REAL" />
+      <VarDeclaration ID="BF5A6785A8565660" Name="ResetRecived" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="17DD066F42AD1878" Name="FeedFlowLevelStart" Type="REAL" />
+      <VarDeclaration ID="60ECB844CED0E64F" Name="FeedFlowLevelCheck" Type="REAL" />
+      <VarDeclaration ID="81FE2D2793117977" Name="FeedFlowOk" Type="BOOL" />
+      <VarDeclaration ID="F365867250E66A90" Name="FeedFlowInsufficient" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="a471e9e1-f96d-4f2d-92e6-c1853b1a8a21">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="ALG_CaptureStart,ALG_Evaluate,ALG_ClearAll" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="552.9412" y="429.4117" />
+      <ECState Name="S_CAPTURE" x="1344" y="768" />
+      <ECState Name="S_WAIT" x="1808" y="1128" />
+      <ECState Name="S_EVAL" x="628" y="916" />
+      <ECState Name="S_DONE" x="664" y="1184" />
+      <ECState Name="S_ABORT" x="963.9999" y="1380" />
+      <ECState Name="S_RESET" x="1364" y="275.9999" />
+      <ECTransition Source="START" Destination="S_RESET" Condition="REQ_RESET" x="937.8372" y="271.3817">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="213.7745,68.06468,256.9615,59.89587" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="S_CAPTURE" Condition="REQ AND RunPhase" x="986.3796" y="525.0372">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="224.1538,116.9339,269.756,136.4526" />
+      </ECTransition>
+      <ECTransition Source="S_CAPTURE" Destination="S_WAIT" Condition="1" x="1638.579" y="882.0084">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="394.7732,205.0723,420.5041,225.7121" />
+      </ECTransition>
+    </ECC>
+    <Algorithm ID="c82a8158-4508-47bb-91ff-351146c076af" Name="ALG_CaptureStart">
+      <ST><![CDATA[;]]></ST>
+    </Algorithm>
+    <Algorithm ID="91427886-fcab-4987-8a90-3ddd15327e8e" Name="ALG_Evaluate">
+      <ST><![CDATA[;]]></ST>
+    </Algorithm>
+    <Algorithm ID="b1018c32-1b11-4c8d-b1ab-04075bfc4993" Name="ALG_ClearAll">
+      <ST><![CDATA[;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>
