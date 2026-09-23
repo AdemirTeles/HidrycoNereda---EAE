@@ -5,7 +5,12 @@
   <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="9/23/2026" />
   <InterfaceList>
     <EventOutputs>
-      <Event ID="CC9428CCDD032224" Name="CNF" Comment="Confirmation from Plug" />
+      <Event ID="CC9428CCDD032224" Name="CNF" Comment="Confirmation from Plug">
+        <With Var="FeedFlowLevelStart" />
+        <With Var="FeedFlowLevelCheck" />
+        <With Var="FeedFlowOk" />
+        <With Var="FeedFlowInsufficient" />
+      </Event>
     </EventOutputs>
     <OutputVars>
       <VarDeclaration ID="957DAAEC5C0D7635" Name="FeedFlowLevelStart" Type="REAL" />

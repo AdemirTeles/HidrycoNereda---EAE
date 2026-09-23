@@ -16,6 +16,7 @@
       <AdapterDeclaration ID="C9DB6B9CC2C2B4BD" Name="IStatus_SludgeDischargeValve" Type="IActStatus" Namespace="SE.Nereda" x="1960" y="3860" />
       <AdapterDeclaration ID="EE5B0B65D6263231" Name="IStatus_LowerLevelValve" Type="IActStatus" Namespace="SE.Nereda" x="739.9999" y="4680" />
       <AdapterDeclaration ID="B074EF3F5F1CEEF8" Name="IStatus_FeedValve" Type="IActStatus" Namespace="SE.Nereda" x="739.9999" y="3860" />
+      <AdapterDeclaration ID="0E6BE92FA440258D" Name="ISufficientFeedFlow" Type="ILevelFeedFlow" Namespace="SE.Nereda" x="700" y="2900" />
     </Sockets>
     <AdapterOutputs>
       <Adapter ID="6B4386AEC7382B88" Name="IOpCdt" Type="IOpCdtItems" Namespace="SE.Nereda" />
@@ -40,17 +41,20 @@
     <FB ID="EC4A527B15F5C8E7" Name="Status_LevelPv" Type="decodeStatus" x="1760" y="2200" Namespace="SE.App2Base">
       <Attribute Name="Configuration.Component.HideUnusedPorts" Value="" />
     </FB>
-    <FB ID="09E4DE0FD5C198B5" Name="SludgeDischargeValve_Ready_OR_Closed" Type="OR_88A3DD8EC65DD11C" x="3020" y="4520" Namespace="SE.Nereda">
+    <FB ID="09E4DE0FD5C198B5" Name="SludgeDischargeValve_Ready_OR_Closed" Type="OR_88A3DD8EC65DD11C" x="3020" y="4960" Namespace="SE.Nereda">
       <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNT:=2;OUT:BOOL" />
     </FB>
-    <FB ID="AD6BC0B76CC3FD82" Name="No_HH_level_LT" Type="NOT_42C76073DCEB1A7A" x="4020" y="4520" Namespace="SE.Nereda">
+    <FB ID="AD6BC0B76CC3FD82" Name="No_HH_level_LT" Type="NOT_42C76073DCEB1A7A" x="4020" y="4960" Namespace="SE.Nereda">
       <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNT:=1;OUT${CNT}:BOOL" />
     </FB>
-    <FB ID="9551F212A8257E2A" Name="No_Fail_No_Alarm_LT" Type="NOT_42C76073DCEB1A7A" x="4040" y="5060" Namespace="SE.Nereda">
+    <FB ID="9551F212A8257E2A" Name="No_Fail_No_Alarm_LT" Type="NOT_42C76073DCEB1A7A" x="4040" y="5500" Namespace="SE.Nereda">
       <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNT:=1;OUT${CNT}:BOOL" />
     </FB>
-    <FB ID="D9D19A28EEFF7CE4" Name="LowerLevelValve_Ready_OR_Closed" Type="OR_88A3DD8EC65DD11C" x="3020" y="5060" Namespace="SE.Nereda">
+    <FB ID="D9D19A28EEFF7CE4" Name="LowerLevelValve_Ready_OR_Closed" Type="OR_88A3DD8EC65DD11C" x="3020" y="5500" Namespace="SE.Nereda">
       <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNT:=2;OUT:BOOL" />
+    </FB>
+    <FB ID="B25EFC8E905A1575" Name="NOT_Insufficient" Type="NOT_42C76073DCEB1A7A" x="3480" y="4380" Namespace="SE.Nereda">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNT:=1;OUT${CNT}:BOOL" />
     </FB>
     <Input ID="EEE7655ECB3D19E4" Name="INIT" x="1400" y="1198" Type="Event" />
     <Frame Name="FRAME6" X="480" Y="1920" Width="2160" Height="3720">
@@ -71,7 +75,7 @@
       <Parameter Name="Text" Value="00 - INITIALIZATION" />
       <Parameter Name="NxtLayerIdentifier" Value="" />
     </Frame>
-    <Frame Name="FRAME10" X="2680" Y="1920" Width="2020" Height="3640">
+    <Frame Name="FRAME10" X="2680" Y="1920" Width="2020" Height="4020">
       <Parameter Name="BackgroundColor" Value="224, 224, 224" />
       <Parameter Name="TextColor" Value="Black" />
       <Parameter Name="Font" Value="Microsoft Sans Serif, 14.25pt, style=Bold" />
@@ -89,7 +93,7 @@
       <Parameter Name="Text" Value="06 - HMI INTERFACE" />
       <Parameter Name="NxtLayerIdentifier" Value="" />
     </Frame>
-    <Frame Name="FRAME14" X="2680" Y="5600" Width="2020" Height="219.9995">
+    <Frame Name="FRAME14" X="2680" Y="6040" Width="2020" Height="219.9995">
       <Parameter Name="BackgroundColor" Value="LightGoldenrodYellow" />
       <Parameter Name="TextColor" Value="Black" />
       <Parameter Name="Font" Value="Microsoft Sans Serif, 14.25pt, style=Bold" />
@@ -179,6 +183,12 @@
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
       <Connection Source="$D9D19A28EEFF7CE4.CNF" Destination="$9551F212A8257E2A.REQ" />
+      <Connection Source="$0E6BE92FA440258D.CC9428CCDD032224" Destination="$B25EFC8E905A1575.REQ">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$B25EFC8E905A1575.CNF" Destination="$91A4003C243541BC.C4A26A2931936C6C">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
     </EventConnections>
     <DataConnections>
       <Connection Source="$8FA4D2ED1552419F.Status" Destination="$EC4A527B15F5C8E7.Status" dx1="75.16687">
@@ -223,6 +233,12 @@
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
       <Connection Source="$9551F212A8257E2A.OUT1" Destination="$91A4003C243541BC.4E3CFAB7818DC81F">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$0E6BE92FA440258D.102CC7A878D73816" Destination="$B25EFC8E905A1575.IN1">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$B25EFC8E905A1575.OUT1" Destination="$91A4003C243541BC.2D24E9AB41BE5BDB">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
     </DataConnections>
