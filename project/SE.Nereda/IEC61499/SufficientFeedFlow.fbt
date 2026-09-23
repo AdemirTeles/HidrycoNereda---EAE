@@ -1,75 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
-<FBType GUID="134ef716-e690-4713-92b8-a025c3fca074" Name="SufficientFeedFlow" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+<FBType GUID="79036d18-0fad-415b-8499-8a7364a663cd" Name="SufficientFeedFlow" Comment="Extracted Composite Function Block Type" Namespace="SE.Nereda">
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="9/23/2026" Remarks="Template" />
+  <VersionInfo Author=" " Date="9/23/2026" />
   <InterfaceList>
     <EventInputs>
-      <Event ID="30C32EB006EA4C34" Name="REQ_PV">
+      <Event ID="CED7C29718190693" Name="REQ_PV">
         <With Var="LevelPv" />
       </Event>
-      <Event ID="C437AAA8069F1FCB" Name="REQ" Comment="Normal Execution Request">
+      <Event ID="0C346A79A1907B12" Name="REQ" Comment="Normal Execution Request">
+        <With Var="RunPhase" />
         <With Var="LevelCheckTimeSp" />
         <With Var="MinLevelRiseSp" />
-        <With Var="RunPhase" />
       </Event>
-      <Event ID="9849BF7793E3CBCD" Name="END_DELAY" />
-      <Event ID="B4D22D015D718341" Name="REQ_RESET">
+      <Event ID="4DED087752C21A11" Name="REQ_RESET">
         <With Var="ResetRecived" />
       </Event>
     </EventInputs>
-    <EventOutputs>
-      <Event ID="AB0236918B6AB7A8" Name="CNF">
-        <With Var="FeedFlowLevelStart" />
-        <With Var="FeedFlowOk" />
-        <With Var="FeedFlowInsufficient" />
-        <With Var="FeedFlowLevelCheck" />
-      </Event>
-      <Event ID="CEB292B2283171B2" Name="START_DELAY" />
-      <Event ID="613F54422BA47101" Name="STOP_DELAY" />
-    </EventOutputs>
     <InputVars>
-      <VarDeclaration ID="BCE3C25201AA8B6A" Name="LevelPv" Type="REAL" />
-      <VarDeclaration ID="90FA4CE95410AC4D" Name="RunPhase" Type="BOOL" />
-      <VarDeclaration ID="52D7FB60C38DD9A8" Name="LevelCheckTimeSp" Type="DINT" />
-      <VarDeclaration ID="9A9AE032169D4A25" Name="MinLevelRiseSp" Type="REAL" />
-      <VarDeclaration ID="BF5A6785A8565660" Name="ResetRecived" Type="BOOL" />
+      <VarDeclaration ID="E8240B7729108BDA" Name="LevelPv" Type="REAL" />
+      <VarDeclaration ID="137DEC30E7425D41" Name="RunPhase" Type="BOOL" />
+      <VarDeclaration ID="0009581E530FD018" Name="LevelCheckTimeSp" Type="DINT" />
+      <VarDeclaration ID="66A5AE5AA156F937" Name="MinLevelRiseSp" Type="REAL" />
+      <VarDeclaration ID="7731B265B813FA2D" Name="ResetRecived" Type="BOOL" />
     </InputVars>
-    <OutputVars>
-      <VarDeclaration ID="17DD066F42AD1878" Name="FeedFlowLevelStart" Type="REAL" />
-      <VarDeclaration ID="60ECB844CED0E64F" Name="FeedFlowLevelCheck" Type="REAL" />
-      <VarDeclaration ID="81FE2D2793117977" Name="FeedFlowOk" Type="BOOL" />
-      <VarDeclaration ID="F365867250E66A90" Name="FeedFlowInsufficient" Type="BOOL" />
-    </OutputVars>
+    <Plugs>
+      <AdapterDeclaration ID="C46733E063996D6B" Name="ISufficientFeedFlow" Type="ILevelFeedFlow" Namespace="SE.Nereda" x="2620" y="2060" />
+    </Plugs>
   </InterfaceList>
-  <BasicFB ID="a471e9e1-f96d-4f2d-92e6-c1853b1a8a21">
-    <Attribute Name="FBType.Basic.Algorithm.Order" Value="ALG_CaptureStart,ALG_Evaluate,ALG_ClearAll" />
-    <ECC>
-      <ECState Name="START" Comment="Initial State" x="552.9412" y="429.4117" />
-      <ECState Name="S_CAPTURE" x="1344" y="768" />
-      <ECState Name="S_WAIT" x="1808" y="1128" />
-      <ECState Name="S_EVAL" x="628" y="916" />
-      <ECState Name="S_DONE" x="664" y="1184" />
-      <ECState Name="S_ABORT" x="963.9999" y="1380" />
-      <ECState Name="S_RESET" x="1364" y="275.9999" />
-      <ECTransition Source="START" Destination="S_RESET" Condition="REQ_RESET" x="937.8372" y="271.3817">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="213.7745,68.06468,256.9615,59.89587" />
-      </ECTransition>
-      <ECTransition Source="START" Destination="S_CAPTURE" Condition="REQ AND RunPhase" x="986.3796" y="525.0372">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="224.1538,116.9339,269.756,136.4526" />
-      </ECTransition>
-      <ECTransition Source="S_CAPTURE" Destination="S_WAIT" Condition="1" x="1638.579" y="882.0084">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="394.7732,205.0723,420.5041,225.7121" />
-      </ECTransition>
-    </ECC>
-    <Algorithm ID="c82a8158-4508-47bb-91ff-351146c076af" Name="ALG_CaptureStart">
-      <ST><![CDATA[;]]></ST>
-    </Algorithm>
-    <Algorithm ID="91427886-fcab-4987-8a90-3ddd15327e8e" Name="ALG_Evaluate">
-      <ST><![CDATA[;]]></ST>
-    </Algorithm>
-    <Algorithm ID="b1018c32-1b11-4c8d-b1ab-04075bfc4993" Name="ALG_ClearAll">
-      <ST><![CDATA[;]]></ST>
-    </Algorithm>
-  </BasicFB>
+  <FBNetwork>
+    <FB ID="6AE4215EA3D4DB70" Name="SufficientFeedFlow" Type="SufficientFeedFlowBasic" x="1100" y="1880" Namespace="SE.Nereda" />
+    <FB ID="DD23971ADC1666E5" Name="E_DELAY" Type="E_DELAY" x="2360" y="1340" Namespace="IEC61499.Standard" />
+    <FB ID="C38B465FB84EED0D" Name="dintToTime" Type="dintToTime" x="740" y="1300" Namespace="SE.App2Base" />
+    <Input ID="CED7C29718190693" Name="REQ_PV" x="240" y="1892" Type="Event" />
+    <Input ID="0C346A79A1907B12" Name="REQ" x="240" y="1952" Type="Event" />
+    <Input ID="4DED087752C21A11" Name="REQ_RESET" x="240" y="2072" Type="Event" />
+    <Input ID="E8240B7729108BDA" Name="LevelPv" x="240" y="2272" Type="Data" />
+    <Input ID="137DEC30E7425D41" Name="RunPhase" x="240" y="2332" Type="Data" />
+    <Input ID="0009581E530FD018" Name="LevelCheckTimeSp" x="20" y="1512" Type="Data" />
+    <Input ID="66A5AE5AA156F937" Name="MinLevelRiseSp" x="234.1563" y="2452" Type="Data" />
+    <Input ID="7731B265B813FA2D" Name="ResetRecived" x="240" y="2512" Type="Data" />
+    <EventConnections>
+      <Connection Source="$6AE4215EA3D4DB70.CEB292B2283171B2" Destination="$DD23971ADC1666E5.START" dx1="48.79175" />
+      <Connection Source="$6AE4215EA3D4DB70.613F54422BA47101" Destination="$DD23971ADC1666E5.STOP" dx1="70" />
+      <Connection Source="$DD23971ADC1666E5.EO" Destination="$6AE4215EA3D4DB70.9849BF7793E3CBCD">
+        <Points>
+          <Points>
+            <X>675.375</X>
+            <Y>345</Y>
+          </Points>
+          <Points>
+            <X>685.375</X>
+            <Y>345</Y>
+          </Points>
+          <Points>
+            <X>685.375</X>
+            <Y>509.999969</Y>
+          </Points>
+          <Points>
+            <X>270</X>
+            <Y>509.999969</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$CED7C29718190693" Destination="$6AE4215EA3D4DB70.30C32EB006EA4C34" dx1="40" />
+      <Connection Source="$0C346A79A1907B12" Destination="$6AE4215EA3D4DB70.C437AAA8069F1FCB" dx1="40" />
+      <Connection Source="$4DED087752C21A11" Destination="$6AE4215EA3D4DB70.B4D22D015D718341" />
+      <Connection Source="$C38B465FB84EED0D.CNF" Destination="$6AE4215EA3D4DB70.C437AAA8069F1FCB">
+        <Points>
+          <Points>
+            <X>313.90625</X>
+            <Y>335</Y>
+          </Points>
+          <Points>
+            <X>328.90625</X>
+            <Y>335</Y>
+          </Points>
+          <Points>
+            <X>328.90625</X>
+            <Y>494.999969</Y>
+          </Points>
+          <Points>
+            <X>270</X>
+            <Y>494.999969</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$0C346A79A1907B12" Destination="$C38B465FB84EED0D.REQ" dx1="169.5417" />
+      <Connection Source="$6AE4215EA3D4DB70.AB0236918B6AB7A8" Destination="$C46733E063996D6B.CC9428CCDD032224" dx1="188.7917" />
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="$E8240B7729108BDA" Destination="$6AE4215EA3D4DB70.BCE3C25201AA8B6A" />
+      <Connection Source="$137DEC30E7425D41" Destination="$6AE4215EA3D4DB70.90FA4CE95410AC4D" />
+      <Connection Source="$0009581E530FD018" Destination="$C38B465FB84EED0D.DintTime" />
+      <Connection Source="$66A5AE5AA156F937" Destination="$6AE4215EA3D4DB70.9A9AE032169D4A25" />
+      <Connection Source="$7731B265B813FA2D" Destination="$6AE4215EA3D4DB70.BF5A6785A8565660" />
+      <Connection Source="$C38B465FB84EED0D.TimeValue" Destination="$6AE4215EA3D4DB70.52D7FB60C38DD9A8" dx1="40" dx2="170" dy="90" />
+      <Connection Source="$6AE4215EA3D4DB70.BE8006DB0CA17265" Destination="$DD23971ADC1666E5.DT" dx1="90" />
+      <Connection Source="$6AE4215EA3D4DB70.F365867250E66A90" Destination="$C46733E063996D6B.102CC7A878D73816" />
+      <Connection Source="$6AE4215EA3D4DB70.81FE2D2793117977" Destination="$C46733E063996D6B.74D3D4DE3ED1D6B7" />
+      <Connection Source="$6AE4215EA3D4DB70.60ECB844CED0E64F" Destination="$C46733E063996D6B.B6B46A0A077DA337" />
+      <Connection Source="$6AE4215EA3D4DB70.17DD066F42AD1878" Destination="$C46733E063996D6B.957DAAEC5C0D7635" />
+    </DataConnections>
+  </FBNetwork>
 </FBType>
