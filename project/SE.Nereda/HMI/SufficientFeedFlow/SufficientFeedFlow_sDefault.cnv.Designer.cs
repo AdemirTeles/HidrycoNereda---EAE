@@ -105,7 +105,6 @@ namespace SE.Nereda.Symbols.SufficientFeedFlow
 			this.LevelCheckTimeSp.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleCenter;
 			this.LevelCheckTimeSp.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.LevelCheckTimeSp.UseInputPad = true;
-			this.LevelCheckTimeSp.UseRange = true;
 			this.LevelCheckTimeSp.Value = 0;
 			this.LevelCheckTimeSp.EndInit();
 			// 

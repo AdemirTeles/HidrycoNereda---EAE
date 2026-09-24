@@ -25,201 +25,167 @@ namespace SE.Nereda.Symbols.NeredaReactor
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.sQT002 = new SE.Nereda.Symbols.AnalogInput.sDisplayPv2();
-			this.sDefault1 = new SE.Nereda.Symbols.AnalogInput_Status.sDefault();
-			this.sQT003 = new SE.Nereda.Symbols.AnalogInput.sDisplayPv2();
-			this.sDefault2 = new SE.Nereda.Symbols.AnalogInput_Status.sDefault();
-			this.sQT010 = new SE.Nereda.Symbols.AnalogInput.sDisplayPv2();
-			this.sDefault3 = new SE.Nereda.Symbols.AnalogInput_Status.sDefault();
-			this.sLT001 = new SE.Nereda.Symbols.AnalogInput.sDisplayPv2();
-			this.sDefault4 = new SE.Nereda.Symbols.AnalogInput_Status.sDefault();
-			this.rectangle1 = new NxtControl.GuiFramework.Rectangle();
-			this.rectangle2 = new NxtControl.GuiFramework.Rectangle();
-			this.rectangle3 = new NxtControl.GuiFramework.Rectangle();
-			this.rectangle4 = new NxtControl.GuiFramework.Rectangle();
-			this.freeText1 = new NxtControl.GuiFramework.FreeText();
-			this.freeText2 = new NxtControl.GuiFramework.FreeText();
-			this.freeText3 = new NxtControl.GuiFramework.FreeText();
-			this.freeText4 = new NxtControl.GuiFramework.FreeText();
+			this.sDisplayPv21 = new SE.Nereda.Symbols.AnalogInput.sDisplayPv2();
+			this.sDisplayPv22 = new SE.Nereda.Symbols.AnalogInput.sDisplayPv2();
+			this.sDisplayPv23 = new SE.Nereda.Symbols.AnalogInput.sDisplayPv2();
+			this.sDisplayPv24 = new SE.Nereda.Symbols.AnalogInput.sDisplayPv2();
+			this.sDisplayPv25 = new SE.Nereda.Symbols.AnalogInput.sDisplayPv2();
+			this.sDisplayPv26 = new SE.Nereda.Symbols.AnalogInput.sDisplayPv2();
+			this.sDisplayPv27 = new SE.Nereda.Symbols.AnalogInput.sDisplayPv2();
+			this.sDisplayPv28 = new SE.Nereda.Symbols.AnalogInput.sDisplayPv2();
+			this.sDisplayPv29 = new SE.Nereda.Symbols.AnalogInput.sDisplayPv2();
+			this.sDisplayPv210 = new SE.Nereda.Symbols.AnalogInput.sDisplayPv2();
+			this.sDisplayPv211 = new SE.Nereda.Symbols.AnalogInput.sDisplayPv2();
 			// 
-			// sQT002
+			// sDisplayPv21
 			// 
-			this.sQT002.BeginInit();
-			this.sQT002._iSensorName = "NVPP 001 41QT1002";
-			this.sQT002._iUnit = "°C";
-			this.sQT002.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 32D, 24D);
-			this.sQT002.Name = "sQT002";
-			this.sQT002.SecurityToken = ((uint)(4294967295u));
-			this.sQT002.TagName = "Sensors.TemperatureMeasurement";
-			this.sQT002.EndInit();
+			this.sDisplayPv21.BeginInit();
+			this.sDisplayPv21._iSensorName = "Level Measurement";
+			this.sDisplayPv21._iUnit = "m";
+			this.sDisplayPv21.DesignMatrix = new NxtControl.Drawing.Matrix2D(1.1052631578947369D, 0D, 0D, 1D, 32D, 16D);
+			this.sDisplayPv21.Name = "sDisplayPv21";
+			this.sDisplayPv21.SecurityToken = ((uint)(4294967295u));
+			this.sDisplayPv21.TagName = "Sensors.LevelMeasurementReactor";
+			this.sDisplayPv21.EndInit();
 			// 
-			// sDefault1
+			// sDisplayPv22
 			// 
-			this.sDefault1.BeginInit();
-			this.sDefault1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 8D, 24D);
-			this.sDefault1.Name = "sDefault1";
-			this.sDefault1.SecurityToken = ((uint)(4294967295u));
-			this.sDefault1.TagName = "Sensors.TemperatureMeasurement_Status";
-			this.sDefault1.EndInit();
+			this.sDisplayPv22.BeginInit();
+			this.sDisplayPv22._iSensorName = "Air Flow Measurement";
+			this.sDisplayPv22._iUnit = "";
+			this.sDisplayPv22.DesignMatrix = new NxtControl.Drawing.Matrix2D(1.1052631578947369D, 0D, 0D, 1D, 232D, 16D);
+			this.sDisplayPv22.Name = "sDisplayPv22";
+			this.sDisplayPv22.SecurityToken = ((uint)(4294967295u));
+			this.sDisplayPv22.TagName = "Sensors.AirFlowMeasurementReactor";
+			this.sDisplayPv22.EndInit();
 			// 
-			// sQT003
+			// sDisplayPv23
 			// 
-			this.sQT003.BeginInit();
-			this.sQT003._iSensorName = "NVPP 001 41QT1003";
-			this.sQT003._iUnit = "mg/l";
-			this.sQT003.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 240D, 24D);
-			this.sQT003.Name = "sQT003";
-			this.sQT003.SecurityToken = ((uint)(4294967295u));
-			this.sQT003.TagName = "Sensors.OxygenMeasurementReactor";
-			this.sQT003.EndInit();
+			this.sDisplayPv23.BeginInit();
+			this.sDisplayPv23._iSensorName = "DrySolids Measurement";
+			this.sDisplayPv23._iUnit = "";
+			this.sDisplayPv23.DesignMatrix = new NxtControl.Drawing.Matrix2D(1.10062893081761D, 0D, 0D, 1D, 32D, 88D);
+			this.sDisplayPv23.Name = "sDisplayPv23";
+			this.sDisplayPv23.SecurityToken = ((uint)(4294967295u));
+			this.sDisplayPv23.TagName = "Sensors.DrySolidsMeasurementReactor";
+			this.sDisplayPv23.EndInit();
 			// 
-			// sDefault2
+			// sDisplayPv24
 			// 
-			this.sDefault2.BeginInit();
-			this.sDefault2.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 216D, 24D);
-			this.sDefault2.Name = "sDefault2";
-			this.sDefault2.SecurityToken = ((uint)(4294967295u));
-			this.sDefault2.TagName = "Sensors.OxygenMeasurementReactor_Status";
-			this.sDefault2.EndInit();
+			this.sDisplayPv24.BeginInit();
+			this.sDisplayPv24._iSensorName = "Oxygen Measurement";
+			this.sDisplayPv24._iUnit = "";
+			this.sDisplayPv24.DesignMatrix = new NxtControl.Drawing.Matrix2D(1.1052631578947369D, 0D, 0D, 1D, 232D, 88D);
+			this.sDisplayPv24.Name = "sDisplayPv24";
+			this.sDisplayPv24.SecurityToken = ((uint)(4294967295u));
+			this.sDisplayPv24.TagName = "Sensors.OxygenMeasurementReactor";
+			this.sDisplayPv24.EndInit();
 			// 
-			// sQT010
+			// sDisplayPv25
 			// 
-			this.sQT010.BeginInit();
-			this.sQT010._iSensorName = "NVPP 001 41QT1010";
-			this.sQT010._iUnit = "";
-			this.sQT010.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 32D, 96D);
-			this.sQT010.Name = "sQT010";
-			this.sQT010.SecurityToken = ((uint)(4294967295u));
-			this.sQT010.TagName = "Sensors.pHMeasurementReactor";
-			this.sQT010.EndInit();
+			this.sDisplayPv25.BeginInit();
+			this.sDisplayPv25._iSensorName = "pH Measurement";
+			this.sDisplayPv25._iUnit = "";
+			this.sDisplayPv25.DesignMatrix = new NxtControl.Drawing.Matrix2D(1.1052631578947369D, 0D, 0D, 1D, 32D, 160D);
+			this.sDisplayPv25.Name = "sDisplayPv25";
+			this.sDisplayPv25.SecurityToken = ((uint)(4294967295u));
+			this.sDisplayPv25.TagName = "Sensors.pHMeasurementReactor";
+			this.sDisplayPv25.EndInit();
 			// 
-			// sDefault3
+			// sDisplayPv26
 			// 
-			this.sDefault3.BeginInit();
-			this.sDefault3.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 8D, 96D);
-			this.sDefault3.Name = "sDefault3";
-			this.sDefault3.SecurityToken = ((uint)(4294967295u));
-			this.sDefault3.TagName = "Sensors.pHMeasurementReactor_Status";
-			this.sDefault3.EndInit();
+			this.sDisplayPv26.BeginInit();
+			this.sDisplayPv26._iSensorName = "Redox Measurement";
+			this.sDisplayPv26._iUnit = "";
+			this.sDisplayPv26.DesignMatrix = new NxtControl.Drawing.Matrix2D(1.1052631578947369D, 0D, 0D, 1D, 232D, 160D);
+			this.sDisplayPv26.Name = "sDisplayPv26";
+			this.sDisplayPv26.SecurityToken = ((uint)(4294967295u));
+			this.sDisplayPv26.TagName = "Sensors.RedoxMeasurementReactor";
+			this.sDisplayPv26.EndInit();
 			// 
-			// sLT001
+			// sDisplayPv27
 			// 
-			this.sLT001.BeginInit();
-			this.sLT001._iSensorName = "NVPP 001 lt 004";
-			this.sLT001._iUnit = "m";
-			this.sLT001.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 240D, 96D);
-			this.sLT001.Name = "sLT001";
-			this.sLT001.SecurityToken = ((uint)(4294967295u));
-			this.sLT001.TagName = "Sensors.LevelMeasurementReactor";
-			this.sLT001.EndInit();
+			this.sDisplayPv27.BeginInit();
+			this.sDisplayPv27._iSensorName = "Temp Measurement";
+			this.sDisplayPv27._iUnit = "";
+			this.sDisplayPv27.DesignMatrix = new NxtControl.Drawing.Matrix2D(1.1052631578947369D, 0D, 0D, 1D, 32D, 232D);
+			this.sDisplayPv27.Name = "sDisplayPv27";
+			this.sDisplayPv27.SecurityToken = ((uint)(4294967295u));
+			this.sDisplayPv27.TagName = "Sensors.TemperatureMeasurement";
+			this.sDisplayPv27.EndInit();
 			// 
-			// sDefault4
+			// sDisplayPv28
 			// 
-			this.sDefault4.BeginInit();
-			this.sDefault4.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 216D, 96D);
-			this.sDefault4.Name = "sDefault4";
-			this.sDefault4.SecurityToken = ((uint)(4294967295u));
-			this.sDefault4.TagName = "Sensors.LevelMeasurementReactor_Status";
-			this.sDefault4.EndInit();
+			this.sDisplayPv28.BeginInit();
+			this.sDisplayPv28._iSensorName = "Turbidity Measurement";
+			this.sDisplayPv28._iUnit = "";
+			this.sDisplayPv28.DesignMatrix = new NxtControl.Drawing.Matrix2D(1.1045751633986929D, 0D, 0D, 1D, 232D, 232D);
+			this.sDisplayPv28.Name = "sDisplayPv28";
+			this.sDisplayPv28.SecurityToken = ((uint)(4294967295u));
+			this.sDisplayPv28.TagName = "Sensors.TurbidityMeasurementBothReactors";
+			this.sDisplayPv28.EndInit();
 			// 
-			// rectangle1
+			// sDisplayPv29
 			// 
-			this.rectangle1.Bounds = new NxtControl.Drawing.RectF(((float)(16D)), ((float)(32D)), ((float)(24D)), ((float)(32D)));
-			this.rectangle1.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(114)), ((byte)(114)), ((byte)(114))));
-			this.rectangle1.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
-			this.rectangle1.Name = "rectangle1";
+			this.sDisplayPv29.BeginInit();
+			this.sDisplayPv29._iSensorName = "NH4 Measurement";
+			this.sDisplayPv29._iUnit = "";
+			this.sDisplayPv29.DesignMatrix = new NxtControl.Drawing.Matrix2D(1.1052631578947369D, 0D, 0D, 1D, 32D, 304D);
+			this.sDisplayPv29.Name = "sDisplayPv29";
+			this.sDisplayPv29.SecurityToken = ((uint)(4294967295u));
+			this.sDisplayPv29.TagName = "Sensors.NH4MeasurementReactor";
+			this.sDisplayPv29.EndInit();
 			// 
-			// rectangle2
+			// sDisplayPv210
 			// 
-			this.rectangle2.Bounds = new NxtControl.Drawing.RectF(((float)(16D)), ((float)(104D)), ((float)(24D)), ((float)(32D)));
-			this.rectangle2.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(114)), ((byte)(114)), ((byte)(114))));
-			this.rectangle2.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
-			this.rectangle2.Name = "rectangle2";
+			this.sDisplayPv210.BeginInit();
+			this.sDisplayPv210._iSensorName = "NO3 Measurement";
+			this.sDisplayPv210._iUnit = "";
+			this.sDisplayPv210.DesignMatrix = new NxtControl.Drawing.Matrix2D(1.1052631578947369D, 0D, 0D, 1D, 232D, 304D);
+			this.sDisplayPv210.Name = "sDisplayPv210";
+			this.sDisplayPv210.SecurityToken = ((uint)(4294967295u));
+			this.sDisplayPv210.TagName = "Sensors.NO3MeasurementReactor";
+			this.sDisplayPv210.EndInit();
 			// 
-			// rectangle3
+			// sDisplayPv211
 			// 
-			this.rectangle3.Bounds = new NxtControl.Drawing.RectF(((float)(224D)), ((float)(32D)), ((float)(24D)), ((float)(32D)));
-			this.rectangle3.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(114)), ((byte)(114)), ((byte)(114))));
-			this.rectangle3.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
-			this.rectangle3.Name = "rectangle3";
-			// 
-			// rectangle4
-			// 
-			this.rectangle4.Bounds = new NxtControl.Drawing.RectF(((float)(224D)), ((float)(104D)), ((float)(24D)), ((float)(32D)));
-			this.rectangle4.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(114)), ((byte)(114)), ((byte)(114))));
-			this.rectangle4.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
-			this.rectangle4.Name = "rectangle4";
-			// 
-			// freeText1
-			// 
-			this.freeText1.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.freeText1.Font = new NxtControl.Drawing.Font("LabelFont");
-			this.freeText1.Location = new NxtControl.Drawing.PointF(8D, 8D);
-			this.freeText1.Name = "freeText1";
-			this.freeText1.Text = "Temperature measurement reactor";
-			// 
-			// freeText2
-			// 
-			this.freeText2.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.freeText2.Font = new NxtControl.Drawing.Font("LabelFont");
-			this.freeText2.Location = new NxtControl.Drawing.PointF(216D, 8D);
-			this.freeText2.Name = "freeText2";
-			this.freeText2.Text = "Oxygen measurement reactor";
-			// 
-			// freeText3
-			// 
-			this.freeText3.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.freeText3.Font = new NxtControl.Drawing.Font("LabelFont");
-			this.freeText3.Location = new NxtControl.Drawing.PointF(8D, 80D);
-			this.freeText3.Name = "freeText3";
-			this.freeText3.Text = "pH measurement reactor";
-			// 
-			// freeText4
-			// 
-			this.freeText4.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.freeText4.Font = new NxtControl.Drawing.Font("LabelFont");
-			this.freeText4.Location = new NxtControl.Drawing.PointF(216D, 80D);
-			this.freeText4.Name = "freeText4";
-			this.freeText4.Text = "Level measurement reactor";
+			this.sDisplayPv211.BeginInit();
+			this.sDisplayPv211._iSensorName = "PO4 Measurement";
+			this.sDisplayPv211._iUnit = "";
+			this.sDisplayPv211.DesignMatrix = new NxtControl.Drawing.Matrix2D(1.1052631578947369D, 0D, 0D, 1D, 128D, 376D);
+			this.sDisplayPv211.Name = "sDisplayPv211";
+			this.sDisplayPv211.SecurityToken = ((uint)(4294967295u));
+			this.sDisplayPv211.TagName = "Sensors.PO4MeasurementReactor";
+			this.sDisplayPv211.EndInit();
 			// 
 			// sSensors
 			// 
 			this.Shapes.AddRange(new System.ComponentModel.IComponent[] {
-			this.rectangle4,
-			this.rectangle3,
-			this.rectangle2,
-			this.rectangle1,
-			this.sQT002,
-			this.sDefault1,
-			this.sQT003,
-			this.sDefault2,
-			this.sQT010,
-			this.sDefault3,
-			this.sLT001,
-			this.sDefault4,
-			this.freeText1,
-			this.freeText2,
-			this.freeText3,
-			this.freeText4});
-			this.SymbolSize = new System.Drawing.Size(416, 176);
+			this.sDisplayPv21,
+			this.sDisplayPv22,
+			this.sDisplayPv23,
+			this.sDisplayPv24,
+			this.sDisplayPv25,
+			this.sDisplayPv26,
+			this.sDisplayPv27,
+			this.sDisplayPv28,
+			this.sDisplayPv29,
+			this.sDisplayPv210,
+			this.sDisplayPv211});
+			this.SymbolSize = new System.Drawing.Size(416, 432);
 
 		}
-		private SE.Nereda.Symbols.AnalogInput.sDisplayPv2 sQT002;
-		private SE.Nereda.Symbols.AnalogInput_Status.sDefault sDefault1;
-		private SE.Nereda.Symbols.AnalogInput.sDisplayPv2 sQT003;
-		private SE.Nereda.Symbols.AnalogInput_Status.sDefault sDefault2;
-		private SE.Nereda.Symbols.AnalogInput.sDisplayPv2 sQT010;
-		private SE.Nereda.Symbols.AnalogInput_Status.sDefault sDefault3;
-		private SE.Nereda.Symbols.AnalogInput.sDisplayPv2 sLT001;
-		private SE.Nereda.Symbols.AnalogInput_Status.sDefault sDefault4;
-		private NxtControl.GuiFramework.Rectangle rectangle1;
-		private NxtControl.GuiFramework.Rectangle rectangle2;
-		private NxtControl.GuiFramework.Rectangle rectangle3;
-		private NxtControl.GuiFramework.Rectangle rectangle4;
-		private NxtControl.GuiFramework.FreeText freeText1;
-		private NxtControl.GuiFramework.FreeText freeText2;
-		private NxtControl.GuiFramework.FreeText freeText3;
-		private NxtControl.GuiFramework.FreeText freeText4;
+		private SE.Nereda.Symbols.AnalogInput.sDisplayPv2 sDisplayPv21;
+		private SE.Nereda.Symbols.AnalogInput.sDisplayPv2 sDisplayPv22;
+		private SE.Nereda.Symbols.AnalogInput.sDisplayPv2 sDisplayPv23;
+		private SE.Nereda.Symbols.AnalogInput.sDisplayPv2 sDisplayPv24;
+		private SE.Nereda.Symbols.AnalogInput.sDisplayPv2 sDisplayPv25;
+		private SE.Nereda.Symbols.AnalogInput.sDisplayPv2 sDisplayPv26;
+		private SE.Nereda.Symbols.AnalogInput.sDisplayPv2 sDisplayPv27;
+		private SE.Nereda.Symbols.AnalogInput.sDisplayPv2 sDisplayPv28;
+		private SE.Nereda.Symbols.AnalogInput.sDisplayPv2 sDisplayPv29;
+		private SE.Nereda.Symbols.AnalogInput.sDisplayPv2 sDisplayPv210;
+		private SE.Nereda.Symbols.AnalogInput.sDisplayPv2 sDisplayPv211;
 		#endregion
 	}
 }

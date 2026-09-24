@@ -20,10 +20,12 @@ namespace SE.Nereda.Symbols.NeredaReactor
 		private string _LT001 = "4xLT1005";
 		private string _REACTOR = "Reactor 1";
 		private string _AV4x101 = "AV4x101";
+		private string _AV4x170 = "AV4x170";
 		private string _AV4x171 = "AV4x171";
 		private string _AV4x172 = "AV4x172";
+		private string _AV4x102 = "AV4x102";
 		private string _AV4x103 = "AV4x103";
-		private string _AV4x107 = "AV4x107";
+
 		public sReactor4()
 		{
 			//
@@ -83,6 +85,21 @@ namespace SE.Nereda.Symbols.NeredaReactor
 		
 		[RefreshProperties(RefreshProperties.Repaint)]
 		[Category("Tagnames")]
+		[DisplayName("AV4x170 Code")]
+		
+		public string _iAV4x170
+		{
+			get{
+				return _AV4x170;
+			}
+			set{
+				_AV4x170 = value;
+				AV4x170.Text = value.ToString();
+			}
+		}
+		
+		[RefreshProperties(RefreshProperties.Repaint)]
+		[Category("Tagnames")]
 		[DisplayName("AV4x171 Code")]
 		
 		public string _iAV4x171
@@ -113,6 +130,21 @@ namespace SE.Nereda.Symbols.NeredaReactor
 		
 		[RefreshProperties(RefreshProperties.Repaint)]
 		[Category("Tagnames")]
+		[DisplayName("AV4x102 Code")]
+		
+		public string _iAV4x102
+		{
+			get{
+				return _AV4x102;
+			}
+			set{
+				_AV4x102 = value;
+				AV4x102.Text = value.ToString();
+			}
+		}
+		
+		[RefreshProperties(RefreshProperties.Repaint)]
+		[Category("Tagnames")]
 		[DisplayName("AV4x103 Code")]
 		
 		public string _iAV4x103
@@ -126,20 +158,6 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			}
 		}
 		
-		[RefreshProperties(RefreshProperties.Repaint)]
-		[Category("Tagnames")]
-		[DisplayName("AV4x107 Code")]
-		
-		public string _iAV4x107
-		{
-			get{
-				return _AV4x107;
-			}
-			set{
-				_AV4x107 = value;
-				AV4x107.Text = value.ToString();
-			}
-		}
 
 		void PHASE_Fired_EventHandler(object sender, PHASEEventArgs e)
 		{

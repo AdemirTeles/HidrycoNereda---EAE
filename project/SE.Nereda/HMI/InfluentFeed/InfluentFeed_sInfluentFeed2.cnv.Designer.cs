@@ -27,9 +27,9 @@ namespace SE.Nereda.Symbols.InfluentFeed
 		{
 			this.sShowLevel1 = new SE.Nereda.Symbols.AnalogInput.sShowLevel();
 			this.polygon10 = new NxtControl.GuiFramework.Polygon();
-			this.sPump1 = new SE.Nereda.Symbols.Motor_VS.sPump();
-			this.sPump2 = new SE.Nereda.Symbols.Motor_VS.sPump();
 			this.sPump3 = new SE.Nereda.Symbols.Motor_VS.sPump();
+			this.sPump2 = new SE.Nereda.Symbols.Motor_VS.sPump();
+			this.sPump1 = new SE.Nereda.Symbols.Motor_VS.sPump();
 			this.sMotorVs2 = new SE.Nereda.Symbols.Motor_VS.sMotorVs();
 			this.sMotorVs3 = new SE.Nereda.Symbols.Motor_VS.sMotorVs();
 			this.sMixer2 = new SE.Nereda.Symbols.MixerLogic.sMixer();
@@ -113,17 +113,17 @@ namespace SE.Nereda.Symbols.InfluentFeed
 			new NxtControl.Drawing.PointF(160D, 488D),
 			new NxtControl.Drawing.PointF(160D, 248D)});
 			// 
-			// sPump1
+			// sPump3
 			// 
-			this.sPump1.BeginInit();
-			this.sPump1._iMotName = "P4003";
-			this.sPump1._iUnit = "%";
-			this.sPump1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 577D, 392D);
-			this.sPump1.Name = "sPump1";
-			this.sPump1.SecurityToken = ((uint)(4294967295u));
-			this.sPump1.SymbolNameDisplay = SE.Nereda.Symbols.Motor_VS.sPump.SymbolNameDisplayOption.Show;
-			this.sPump1.TagName = "Actuators.FeedReactorPump01";
-			this.sPump1.EndInit();
+			this.sPump3.BeginInit();
+			this.sPump3._iMotName = "P4003";
+			this.sPump3._iUnit = "%";
+			this.sPump3.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 577D, 392D);
+			this.sPump3.Name = "sPump3";
+			this.sPump3.SecurityToken = ((uint)(4294967295u));
+			this.sPump3.SymbolNameDisplay = SE.Nereda.Symbols.Motor_VS.sPump.SymbolNameDisplayOption.Show;
+			this.sPump3.TagName = "Actuators.FeedReactorPump03";
+			this.sPump3.EndInit();
 			// 
 			// sPump2
 			// 
@@ -137,17 +137,17 @@ namespace SE.Nereda.Symbols.InfluentFeed
 			this.sPump2.TagName = "Actuators.FeedReactorPump02";
 			this.sPump2.EndInit();
 			// 
-			// sPump3
+			// sPump1
 			// 
-			this.sPump3.BeginInit();
-			this.sPump3._iMotName = "P4001";
-			this.sPump3._iUnit = "%";
-			this.sPump3.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 286D, 392D);
-			this.sPump3.Name = "sPump3";
-			this.sPump3.SecurityToken = ((uint)(4294967295u));
-			this.sPump3.SymbolNameDisplay = SE.Nereda.Symbols.Motor_VS.sPump.SymbolNameDisplayOption.Show;
-			this.sPump3.TagName = "Actuators.FeedReactorPump03";
-			this.sPump3.EndInit();
+			this.sPump1.BeginInit();
+			this.sPump1._iMotName = "P4001";
+			this.sPump1._iUnit = "%";
+			this.sPump1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 286D, 392D);
+			this.sPump1.Name = "sPump1";
+			this.sPump1.SecurityToken = ((uint)(4294967295u));
+			this.sPump1.SymbolNameDisplay = SE.Nereda.Symbols.Motor_VS.sPump.SymbolNameDisplayOption.Show;
+			this.sPump1.TagName = "Actuators.FeedReactorPump01";
+			this.sPump1.EndInit();
 			// 
 			// sMotorVs2
 			// 
@@ -718,7 +718,7 @@ namespace SE.Nereda.Symbols.InfluentFeed
 			this.pipe18,
 			this.pipe19,
 			this.sPump2,
-			this.sPump1,
+			this.sPump3,
 			this.group1,
 			this.group2,
 			this.sPvBarVer2,
@@ -729,7 +729,7 @@ namespace SE.Nereda.Symbols.InfluentFeed
 			this.group3,
 			this.group6,
 			this.pipe5,
-			this.sPump3,
+			this.sPump1,
 			this.group7,
 			this.group8,
 			this.pipe9,
@@ -749,9 +749,9 @@ namespace SE.Nereda.Symbols.InfluentFeed
 		}
 		private SE.Nereda.Symbols.AnalogInput.sShowLevel sShowLevel1;
 		private NxtControl.GuiFramework.Polygon polygon10;
-		private SE.Nereda.Symbols.Motor_VS.sPump sPump1;
-		private SE.Nereda.Symbols.Motor_VS.sPump sPump2;
 		private SE.Nereda.Symbols.Motor_VS.sPump sPump3;
+		private SE.Nereda.Symbols.Motor_VS.sPump sPump2;
+		private SE.Nereda.Symbols.Motor_VS.sPump sPump1;
 		private SE.Nereda.Symbols.Motor_VS.sMotorVs sMotorVs2;
 		private SE.Nereda.Symbols.Motor_VS.sMotorVs sMotorVs3;
 		private SE.Nereda.Symbols.MixerLogic.sMixer sMixer2;

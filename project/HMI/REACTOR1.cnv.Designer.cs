@@ -74,7 +74,7 @@ namespace HMI.Main.Canvases
 			// sSensors1
 			// 
 			this.sSensors1.BeginInit();
-			this.sSensors1.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.79120474507283622D, 0D, 0D, 0.88387713675213642D, 24.000000000000114D, 369.80423076923091D);
+			this.sSensors1.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.79120474507283622D, 0D, 0D, 0.88387713675213642D, 24.000000000000004D, 320.00000000000006D);
 			this.sSensors1.Name = "sSensors1";
 			this.sSensors1.SecurityToken = ((uint)(4294967295u));
 			this.sSensors1.TagName = "D41247DF3E1D30DC";
@@ -84,8 +84,9 @@ namespace HMI.Main.Canvases
 			// 
 			this.sReactor41.BeginInit();
 			this.sReactor41._iAV4x101 = "AV4x101";
+			this.sReactor41._iAV4x102 = "AV4x102";
 			this.sReactor41._iAV4x103 = "AV4x103";
-			this.sReactor41._iAV4x107 = "AV4x107";
+			this.sReactor41._iAV4x170 = "AV4x170";
 			this.sReactor41._iAV4x171 = "AV4x171";
 			this.sReactor41._iAV4x172 = "AV4x172";
 			this.sReactor41._iLT001 = "4xLT1005";

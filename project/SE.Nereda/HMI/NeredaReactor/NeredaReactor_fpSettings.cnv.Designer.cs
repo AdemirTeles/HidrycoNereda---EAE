@@ -79,7 +79,7 @@ namespace SE.Nereda.Faceplates.NeredaReactor
 			// 
 			// fpSettings
 			// 
-			this.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(384D)), ((float)(568D)));
+			this.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(408D)), ((float)(560D)));
 			this.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(154)), ((byte)(154)), ((byte)(154))));
 			this.Shapes.AddRange(new System.ComponentModel.IComponent[] {
 			this.sDefault1,
@@ -87,7 +87,7 @@ namespace SE.Nereda.Faceplates.NeredaReactor
 			this.sDefault3,
 			this.sDefault4,
 			this.sDefault5});
-			this.Size = new System.Drawing.Size(384, 568);
+			this.Size = new System.Drawing.Size(408, 560);
 			this.Title = "Reactor Settings";
 
 		}

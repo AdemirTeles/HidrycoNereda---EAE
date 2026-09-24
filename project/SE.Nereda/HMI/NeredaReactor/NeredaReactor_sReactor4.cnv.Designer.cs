@@ -212,6 +212,8 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			this.sDefault6 = new SE.Nereda.Symbols.ValveS.sDefault();
 			this.pipe10 = new NxtControl.GuiFramework.Pipe();
 			this.sDefault7 = new SE.Nereda.Symbols.ValveS.sDefault();
+			this.AV4x170 = new NxtControl.GuiFramework.FreeText();
+			this.AV4x102 = new NxtControl.GuiFramework.FreeText();
 			// 
 			// polygon2
 			// 
@@ -1585,7 +1587,7 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			this.sDefault3.SecurityToken = ((uint)(4294967295u));
 			this.sDefault3.StateTextPosition = SE.Nereda.Symbols.ValveS.sDefault.StateTextPositionOption.Vertical;
 			this.sDefault3.SymbolNameDisplay = SE.Nereda.Symbols.ValveS.sDefault.SymbolNameDisplayOption.Hide;
-			this.sDefault3.TagName = "Actuators.VentValve";
+			this.sDefault3.TagName = "Actuators.VentSludgeGridValve_AV4x172";
 			this.sDefault3.EndInit();
 			// 
 			// pipe2
@@ -1794,9 +1796,25 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			this.sDefault7.Name = "sDefault7";
 			this.sDefault7.SecurityToken = ((uint)(4294967295u));
 			this.sDefault7.StateTextPosition = SE.Nereda.Symbols.ValveS.sDefault.StateTextPositionOption.Vertical;
-			this.sDefault7.SymbolNameDisplay = SE.Nereda.Symbols.ValveS.sDefault.SymbolNameDisplayOption.Show;
+			this.sDefault7.SymbolNameDisplay = SE.Nereda.Symbols.ValveS.sDefault.SymbolNameDisplayOption.Hide;
 			this.sDefault7.TagName = "Actuators.LowerLevelValve_AV4x102";
 			this.sDefault7.EndInit();
+			// 
+			// AV4x170
+			// 
+			this.AV4x170.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.AV4x170.Font = new NxtControl.Drawing.Font("LabelFont");
+			this.AV4x170.Location = new NxtControl.Drawing.PointF(168D, 232D);
+			this.AV4x170.Name = "AV4x170";
+			this.AV4x170.Text = "AV41170";
+			// 
+			// AV4x102
+			// 
+			this.AV4x102.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.AV4x102.Font = new NxtControl.Drawing.Font("LabelFont");
+			this.AV4x102.Location = new NxtControl.Drawing.PointF(816D, 304D);
+			this.AV4x102.Name = "AV4x102";
+			this.AV4x102.Text = "AV41102";
 			// 
 			// sReactor4
 			// 
@@ -1859,7 +1877,9 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			this.polygon24,
 			this.sDefault6,
 			this.pipe10,
-			this.sDefault7});
+			this.sDefault7,
+			this.AV4x170,
+			this.AV4x102});
 			this.SymbolSize = new System.Drawing.Size(976, 816);
 
 		}
@@ -2049,6 +2069,8 @@ namespace SE.Nereda.Symbols.NeredaReactor
 		private SE.Nereda.Symbols.ValveS.sDefault sDefault6;
 		private NxtControl.GuiFramework.Pipe pipe10;
 		private SE.Nereda.Symbols.ValveS.sDefault sDefault7;
+		private NxtControl.GuiFramework.FreeText AV4x170;
+		private NxtControl.GuiFramework.FreeText AV4x102;
 		#endregion
 	}
 }
