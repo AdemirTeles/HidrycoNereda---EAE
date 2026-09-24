@@ -31,7 +31,6 @@ namespace HMI.Main.Canvases
 			this.HeartBeat = new SE.Nereda.Symbols.HeartBeat.sDefault();
 			this.Mode = new SE.Nereda.Symbols.Mode.ReactorMode();
 			this.OpenWebPage = new SE.Nereda.Symbols.OpenWebPage.sDefault();
-			this.INFLUENT_FEED = new SE.Nereda.Symbols.InfluentFeed.sInfluentFeed();
 			this.pipe14 = new NxtControl.GuiFramework.Pipe();
 			this.pipe31 = new NxtControl.GuiFramework.Pipe();
 			this.pipe2 = new NxtControl.GuiFramework.Pipe();
@@ -106,8 +105,6 @@ namespace HMI.Main.Canvases
 			this.polygon20 = new NxtControl.GuiFramework.Polygon();
 			this.polygon21 = new NxtControl.GuiFramework.Polygon();
 			this.polygon22 = new NxtControl.GuiFramework.Polygon();
-			this.sPump1 = new SE.Nereda.Symbols.Motor_VS.sPump();
-			this.sPump3 = new SE.Nereda.Symbols.Motor_VS.sPump();
 			this.pipe16 = new NxtControl.GuiFramework.Pipe();
 			this.pipe3 = new NxtControl.GuiFramework.Pipe();
 			this.pipe6 = new NxtControl.GuiFramework.Pipe();
@@ -162,17 +159,6 @@ namespace HMI.Main.Canvases
 			this.OpenWebPage.SecurityToken = ((uint)(4294967295u));
 			this.OpenWebPage.TagName = "61745BDDB91DBEF5";
 			this.OpenWebPage.EndInit();
-			// 
-			// INFLUENT_FEED
-			// 
-			this.INFLUENT_FEED.BeginInit();
-			this.INFLUENT_FEED._iINFLUENT = "INFLUENT FEED";
-			this.INFLUENT_FEED.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.51428571428571423D, 0D, 0D, 0.51470588235294112D, 72D, 72D);
-			this.INFLUENT_FEED.Name = "INFLUENT_FEED";
-			this.INFLUENT_FEED.SecurityToken = ((uint)(4294967295u));
-			this.INFLUENT_FEED.TagName = "2098DAF96A66AD0A";
-			this.INFLUENT_FEED.Click += new System.EventHandler(this.INFLUENT_FEEDClick);
-			this.INFLUENT_FEED.EndInit();
 			// 
 			// pipe14
 			// 
@@ -1096,30 +1082,6 @@ namespace HMI.Main.Canvases
 			new NxtControl.Drawing.PointF(8D, 368D),
 			new NxtControl.Drawing.PointF(24D, 368D)});
 			// 
-			// sPump1
-			// 
-			this.sPump1.BeginInit();
-			this.sPump1._iMotName = "Motor";
-			this.sPump1._iUnit = "%";
-			this.sPump1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 8D, 564D);
-			this.sPump1.Name = "sPump1";
-			this.sPump1.SecurityToken = ((uint)(4294967295u));
-			this.sPump1.SymbolNameDisplay = SE.Nereda.Symbols.Motor_VS.sPump.SymbolNameDisplayOption.Hide;
-			this.sPump1.TagName = "2098DAF96A66AD0A.Actuators.FeedInfluentPump01";
-			this.sPump1.EndInit();
-			// 
-			// sPump3
-			// 
-			this.sPump3.BeginInit();
-			this.sPump3._iMotName = "Motor";
-			this.sPump3._iUnit = "%";
-			this.sPump3.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 312D, 564D);
-			this.sPump3.Name = "sPump3";
-			this.sPump3.SecurityToken = ((uint)(4294967295u));
-			this.sPump3.SymbolNameDisplay = SE.Nereda.Symbols.Motor_VS.sPump.SymbolNameDisplayOption.Hide;
-			this.sPump3.TagName = "2098DAF96A66AD0A.Actuators.FeedReactorPump01";
-			this.sPump3.EndInit();
-			// 
 			// pipe16
 			// 
 			this.pipe16.Bounds = new NxtControl.Drawing.RectF(((float)(616D)), ((float)(544D)), ((float)(120D)), ((float)(56D)));
@@ -1200,7 +1162,6 @@ namespace HMI.Main.Canvases
 			this.HeartBeat,
 			this.Mode,
 			this.OpenWebPage,
-			this.INFLUENT_FEED,
 			this.pipe37,
 			this.PUMP001,
 			this.freeText10,
@@ -1256,8 +1217,6 @@ namespace HMI.Main.Canvases
 			this.polygon20,
 			this.polygon21,
 			this.polygon22,
-			this.sPump1,
-			this.sPump3,
 			this.polygon23});
 			this.Size = new System.Drawing.Size(1366, 698);
 
@@ -1267,7 +1226,6 @@ namespace HMI.Main.Canvases
 		private SE.Nereda.Symbols.HeartBeat.sDefault HeartBeat;
 		private SE.Nereda.Symbols.Mode.ReactorMode Mode;
 		private SE.Nereda.Symbols.OpenWebPage.sDefault OpenWebPage;
-		private SE.Nereda.Symbols.InfluentFeed.sInfluentFeed INFLUENT_FEED;
 		private NxtControl.GuiFramework.Pipe pipe14;
 		private NxtControl.GuiFramework.Pipe pipe31;
 		private NxtControl.GuiFramework.Pipe pipe2;
@@ -1343,8 +1301,6 @@ namespace HMI.Main.Canvases
 		private NxtControl.GuiFramework.Polygon polygon20;
 		private NxtControl.GuiFramework.Polygon polygon21;
 		private NxtControl.GuiFramework.Polygon polygon22;
-		private SE.Nereda.Symbols.Motor_VS.sPump sPump1;
-		private SE.Nereda.Symbols.Motor_VS.sPump sPump3;
 		private NxtControl.GuiFramework.Pipe pipe3;
 		private NxtControl.GuiFramework.Pipe pipe6;
 		private NxtControl.GuiFramework.Pipe pipe38;

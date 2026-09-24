@@ -94,7 +94,6 @@ namespace SE.Nereda.Symbols.InfluentFeed
 			this.sShowLevel1 = new SE.Nereda.Symbols.AnalogInput.sShowLevel();
 			this.sDefault1 = new SE.Nereda.Symbols.ValveS.sDefault();
 			this.pipe13 = new NxtControl.GuiFramework.Pipe();
-			this.sFan1 = new SE.Nereda.Symbols.MotorS.sFan();
 			this.pipe14 = new NxtControl.GuiFramework.Pipe();
 			this.pipe4 = new NxtControl.GuiFramework.Pipe();
 			this.polygon4 = new NxtControl.GuiFramework.Polygon();
@@ -729,17 +728,6 @@ namespace SE.Nereda.Symbols.InfluentFeed
 			new NxtControl.Drawing.PointF(48D, 604D)});
 			this.pipe13.Width = 10;
 			// 
-			// sFan1
-			// 
-			this.sFan1.BeginInit();
-			this.sFan1._iMotName = "Motor";
-			this.sFan1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 96D, 240D);
-			this.sFan1.Name = "sFan1";
-			this.sFan1.SecurityToken = ((uint)(4294967295u));
-			this.sFan1.SymbolNameDisplay = SE.Nereda.Symbols.MotorS.sFan.SymbolNameDisplayOption.Hide;
-			this.sFan1.TagName = "Actuators.NVPP_001_ven_004";
-			this.sFan1.EndInit();
-			// 
 			// pipe14
 			// 
 			this.pipe14.Bounds = new NxtControl.Drawing.RectF(((float)(176D)), ((float)(64D)), ((float)(176D)), ((float)(56D)));
@@ -945,7 +933,6 @@ namespace SE.Nereda.Symbols.InfluentFeed
 			this.rectangle2,
 			this.REACTOR,
 			this.sDefault1,
-			this.sFan1,
 			this.polygon4,
 			this.polygon9});
 			this.SymbolSize = new System.Drawing.Size(624, 664);
@@ -1021,7 +1008,6 @@ namespace SE.Nereda.Symbols.InfluentFeed
 		private SE.Nereda.Symbols.AnalogInput.sShowLevel sShowLevel1;
 		private SE.Nereda.Symbols.ValveS.sDefault sDefault1;
 		private NxtControl.GuiFramework.Pipe pipe13;
-		private SE.Nereda.Symbols.MotorS.sFan sFan1;
 		private NxtControl.GuiFramework.Pipe pipe14;
 		private NxtControl.GuiFramework.Polygon polygon4;
 		private NxtControl.GuiFramework.Polygon polygon9;

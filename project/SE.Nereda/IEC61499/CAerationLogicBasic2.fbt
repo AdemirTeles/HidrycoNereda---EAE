@@ -16,6 +16,7 @@
         <With Var="Blower2FbReady" />
         <With Var="Blower3FbReady" />
         <With Var="Blower4FbReady" />
+        <With Var="MaximumCapacity" />
       </Event>
     </EventInputs>
     <EventOutputs>
@@ -24,6 +25,8 @@
         <With Var="StartStdby_H1" />
         <With Var="StartScndBL_H2" />
         <With Var="StartStdby_H2" />
+        <With Var="MaxSp_H1" />
+        <With Var="MaxSp_H2" />
       </Event>
     </EventOutputs>
     <InputVars>
@@ -37,19 +40,23 @@
       <VarDeclaration ID="266E7B658D2D8018" Name="Blower2FbReady" Type="BOOL" />
       <VarDeclaration ID="7D28FD8AC101CEE8" Name="Blower3FbReady" Type="BOOL" />
       <VarDeclaration ID="BD31FDCAB4D0C603" Name="Blower4FbReady" Type="BOOL" />
+      <VarDeclaration ID="15021417A9DDC3CD" Name="MaximumCapacity" Type="REAL" />
     </InputVars>
     <OutputVars>
       <VarDeclaration ID="4F511D89CFAD767B" Name="StartScndBL_H1" Type="BOOL" />
       <VarDeclaration ID="FE3CA976DB528EC5" Name="StartStdby_H1" Type="BOOL" />
       <VarDeclaration ID="C27B618F80BE71A0" Name="StartScndBL_H2" Type="BOOL" />
       <VarDeclaration ID="DFDB6D6DAFE2FA40" Name="StartStdby_H2" Type="BOOL" />
+      <VarDeclaration ID="1B895462E4166559" Name="MaxSp_H1" Type="BOOL" />
+      <VarDeclaration ID="F7BB9EFC676442B0" Name="MaxSp_H2" Type="BOOL" />
     </OutputVars>
   </InterfaceList>
   <BasicFB ID="5d63002f-a7b1-4326-a938-7f8dd38ad271">
     <Attribute Name="FBType.Basic.Algorithm.Order" Value="REQ" />
     <InternalVars>
-      <VarDeclaration ID="211747A19A38948B" Name="H1Stdby_Used" Type="BOOL" />
-      <VarDeclaration ID="2A7296943EF560F8" Name="H2Stdby_Used" Type="BOOL" />
+      <VarDeclaration ID="211747A19A38948B" Name="H1Stdby_Used" Type="BOOL" InitialValue="FALSE" />
+      <VarDeclaration ID="2A7296943EF560F8" Name="H2Stdby_Used" Type="BOOL" InitialValue="FALSE" />
+      <VarDeclaration ID="D22A33757911D714" Name="Owner" Type="INT" />
     </InternalVars>
     <ECC>
       <ECState Name="START" Comment="Initial State" x="3218.251" y="1562.412" />
@@ -59,6 +66,7 @@
       <ECTransition Source="START" Destination="REQ" Condition="AERATION_CMD" x="3688.012" y="1749.751">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="894.8603,415.8015,950.5987,449.3704" />
       </ECTransition>
+      <ECTransition Source="REQ" Destination="REQ" Condition="Owner = 0" x="4060.396" y="2251.689" />
       <ECTransition Source="REQ" Destination="START" Condition="1" x="3582.658" y="1925.475">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="921.3397,505.6236,865.6013,472.0547" />
       </ECTransition>
@@ -66,9 +74,6 @@
     <Algorithm ID="42cf27f2-e44a-45a4-bc96-9aae58cc0c1e" Name="REQ">
       <ST><![CDATA[;
 (* Standby status *)
-H1Stdby_Used := AerCapR2 > C2_IN;
-H2Stdby_Used := AerCapR1 > C2_IN;
-
 
 (* Default outputs *)
 StartScndBL_H1 := FALSE;
@@ -77,7 +82,8 @@ StartStdby_H1 := FALSE;
 StartScndBL_H2 := FALSE;
 StartStdby_H2 := FALSE;
 
-
+MaxSp_H1 := FALSE;
+MaxSp_H2 := FALSE;
 (* ========================================================= *)
 (* HEADER 1 - REACTOR 1                                      *)
 (* Priority: Blower1 -> Blower2 -> Standby                    *)
@@ -86,25 +92,32 @@ StartStdby_H2 := FALSE;
 IF AerationR1Cmd THEN
 
     (* 1 blower required *)
-    IF AerCapR1 <= C2_IN THEN
+    IF AerCapR1 <= MaximumCapacity THEN
         IF Blower1FbReady THEN
             StartScndBL_H1 := FALSE;
             StartStdby_H1 := FALSE;
-        ELSIF NOT H1Stdby_Used THEN
+        ELSIF Owner = 0 OR Owner = 1 THEN
             StartScndBL_H1 := FALSE;
             StartStdby_H1 := TRUE;
+            Owner := 1;
         END_IF;
 
 
     (* 2 blowers required *)
-    ELSIF AerCapR1 <= C3_IN THEN
-        IF Blower1FbReady AND Blower2FbReady THEN
+    ELSIF AerCapR1 > MaximumCapacity THEN
+        IF Blower1FbReady AND Blower2FbReady AND (Owner = 0 OR Owner = 1) THEN
             StartScndBL_H1 := TRUE;
             StartStdby_H1 := FALSE;
-        ELSIF NOT H1Stdby_Used THEN
+            Owner := 1;
+        ELSIF (Owner = 0 OR Owner = 1) THEN
 
             StartScndBL_H1 := Blower2FbReady;
             StartStdby_H1 := TRUE;
+            Owner := 1;
+            MaxSp_H1 := ((Blower1FbReady +  Blower2FbReady +  Blower3FbReady) = 1);
+    	ELSIF Blower1FbReady THEN
+    		MaxSp_H1 := TRUE;
+    		
         END_IF;
     END_IF;
 END_IF;
@@ -118,26 +131,36 @@ END_IF;
 IF AerationR2Cmd THEN
 	
     (* 1 blower required *)
-    IF AerCapR2 <= C2_IN THEN
+    IF AerCapR2 <= MaximumCapacity THEN
         IF Blower4FbReady THEN
             StartScndBL_H2 := FALSE;
             StartStdby_H2 := FALSE;
-        ELSIF NOT H2Stdby_Used THEN
+        ELSIF Owner = 0 OR Owner = 2 THEN
             StartScndBL_H2 := FALSE;
             StartStdby_H2 := TRUE;
+            Owner := 2;
         END_IF;
 
 
     (* 2 blowers required *)
-    ELSIF AerCapR2 <= C3_IN THEN
-        IF Blower4FbReady AND Blower3FbReady THEN
+    ELSIF AerCapR2 > MaximumCapacity THEN
+        IF Blower4FbReady AND Blower3FbReady AND (Owner = 0 OR Owner = 2) THEN
             StartScndBL_H2 := TRUE;
             StartStdby_H2 := FALSE;
-        ELSIF NOT H2Stdby_Used THEN
+            Owner := 2;
+        ELSIF (Owner = 0 OR Owner = 2) THEN
             StartScndBL_H2 := Blower3FbReady;
             StartStdby_H2 := TRUE;
+            Owner := 2;
+            MaxSp_H2 := ((Blower2FbReady +  Blower3FbReady +  Blower4FbReady) = 1);
+         ELSIF Blower4FbReady THEN
+    		MaxSp_H2 := TRUE;
         END_IF;
     END_IF;
+END_IF;
+
+IF NOT (StartScndBL_H2 OR StartStdby_H2 OR StartScndBL_H1 OR StartStdby_H1) THEN
+	Owner := 0;
 END_IF;]]></ST>
     </Algorithm>
   </BasicFB>

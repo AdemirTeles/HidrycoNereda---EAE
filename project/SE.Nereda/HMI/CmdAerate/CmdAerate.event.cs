@@ -135,6 +135,34 @@ namespace SE.Nereda.Symbols.CmdAerate
 
   }
 
+  public class AIR_FILL_VALVEEventArgs : System.EventArgs
+  {
+    public AIR_FILL_VALVEEventArgs()
+    {
+    }
+    private System.Boolean? AirFillValve_field = null;
+    public System.Boolean? AirFillValve
+    {
+       get { return AirFillValve_field; }
+       set { AirFillValve_field = value; }
+    }
+
+  }
+
+  public class AIR_FILL_VALVE_MANEventArgs : System.EventArgs
+  {
+    public AIR_FILL_VALVE_MANEventArgs()
+    {
+    }
+    private System.Boolean? AirFillValveMan_field = null;
+    public System.Boolean? AirFillValveMan
+    {
+       get { return AirFillValveMan_field; }
+       set { AirFillValveMan_field = value; }
+    }
+
+  }
+
 }
 
 namespace SE.Nereda.Symbols.CmdAerate
@@ -286,6 +314,38 @@ stack Trace:
       object[] _values_ = new object[1];
       if (!ignore_D_C_Sel) _values_[0] = D_C_Sel;
       return ((IHMIAccessorOutput)this).FireEvent(6, _values_);
+    }
+    public bool FireEvent_AIR_FILL_VALVE(System.Boolean AirFillValve)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(7, new object[] {AirFillValve});
+    }
+    public bool FireEvent_AIR_FILL_VALVE(SE.Nereda.Symbols.CmdAerate.AIR_FILL_VALVEEventArgs ea)
+    {
+      object[] _values_ = new object[1];
+      if (ea.AirFillValve.HasValue) _values_[0] = ea.AirFillValve.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(7, _values_);
+    }
+    public bool FireEvent_AIR_FILL_VALVE(System.Boolean AirFillValve, bool ignore_AirFillValve)
+    {
+      object[] _values_ = new object[1];
+      if (!ignore_AirFillValve) _values_[0] = AirFillValve;
+      return ((IHMIAccessorOutput)this).FireEvent(7, _values_);
+    }
+    public bool FireEvent_AIR_FILL_VALVE_MAN(System.Boolean AirFillValveMan)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(8, new object[] {AirFillValveMan});
+    }
+    public bool FireEvent_AIR_FILL_VALVE_MAN(SE.Nereda.Symbols.CmdAerate.AIR_FILL_VALVE_MANEventArgs ea)
+    {
+      object[] _values_ = new object[1];
+      if (ea.AirFillValveMan.HasValue) _values_[0] = ea.AirFillValveMan.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(8, _values_);
+    }
+    public bool FireEvent_AIR_FILL_VALVE_MAN(System.Boolean AirFillValveMan, bool ignore_AirFillValveMan)
+    {
+      object[] _values_ = new object[1];
+      if (!ignore_AirFillValveMan) _values_[0] = AirFillValveMan;
+      return ((IHMIAccessorOutput)this).FireEvent(8, _values_);
     }
 
   }

@@ -24,10 +24,5 @@ namespace SE.Nereda.Symbols.CmdAerate
 			InitializeComponent();
 		}
 
-		void D_C_Sel_1ValueChanged(object sender, ValueChangedEventArgs e)
-		{
-			// TODO: Implement D_C_Sel_1ValueChanged
-			AirValveAerationGridMan.Enabled = AirValveInfluentGridMan.Enabled = !((bool)e.Value);
-		}
 	}
 }

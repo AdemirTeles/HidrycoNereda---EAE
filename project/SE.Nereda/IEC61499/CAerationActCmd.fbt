@@ -27,6 +27,12 @@
         <With Var="Valve1FbReady" />
         <With Var="Valve2FbReady" />
         <With Var="Valve3FbReady" />
+        <With Var="ValveBlower2FbOpened" />
+        <With Var="ValveBlower2FbClosed" />
+        <With Var="ValveBlower3FbOpened" />
+        <With Var="ValveBlower3FbClosed" />
+        <With Var="ValveBlower2FbReady" />
+        <With Var="ValveBlower3FbReady" />
       </Event>
     </EventInputs>
     <EventOutputs>
@@ -36,6 +42,8 @@
         <With Var="CmdValve1" />
         <With Var="CmdValve2" />
         <With Var="CmdValve3" />
+        <With Var="CmdBlowerValve2" />
+        <With Var="CmdBlowerValve3" />
       </Event>
       <Event ID="71502B44797BB7D6" Name="CNF_SPEED_SP">
         <With Var="SpeedSp_BL2" />
@@ -64,6 +72,12 @@
       <VarDeclaration ID="FF754D33E60B1E14" Name="Valve1FbReady" Type="BOOL" />
       <VarDeclaration ID="041D8CCDD94E4A77" Name="Valve2FbReady" Type="BOOL" />
       <VarDeclaration ID="D8974B00E26B10C6" Name="Valve3FbReady" Type="BOOL" />
+      <VarDeclaration ID="54110732FC12EAAC" Name="ValveBlower2FbOpened" Type="BOOL" />
+      <VarDeclaration ID="8610CAD1FF35313D" Name="ValveBlower2FbClosed" Type="BOOL" />
+      <VarDeclaration ID="446B908A6A6E947E" Name="ValveBlower3FbOpened" Type="BOOL" />
+      <VarDeclaration ID="B5780401553C42A4" Name="ValveBlower3FbClosed" Type="BOOL" />
+      <VarDeclaration ID="5A95514FC9A40F7D" Name="ValveBlower2FbReady" Type="BOOL" />
+      <VarDeclaration ID="03F395656869D664" Name="ValveBlower3FbReady" Type="BOOL" />
     </InputVars>
     <OutputVars>
       <VarDeclaration ID="50D97D2FBAA8D1BB" Name="CmdBlower2" Type="BOOL" />
@@ -73,6 +87,8 @@
       <VarDeclaration ID="17AB3608D374DB0E" Name="CmdValve3" Type="BOOL" />
       <VarDeclaration ID="8CE2038B5C8422BA" Name="SpeedSp_BL2" Type="REAL" />
       <VarDeclaration ID="C40FC192AC89DE17" Name="SpeedSp_BL3" Type="REAL" />
+      <VarDeclaration ID="56C8D5F7E1B68F58" Name="CmdBlowerValve2" Type="BOOL" />
+      <VarDeclaration ID="D78C80681718ACEF" Name="CmdBlowerValve3" Type="BOOL" />
     </OutputVars>
   </InterfaceList>
   <BasicFB ID="5d63002f-a7b1-4326-a938-7f8dd38ad271">
@@ -122,13 +138,13 @@
       <ECTransition Source="START" Destination="StartScndBLVlv_H1" Condition="Header1 AND StartScndBL_H1 AND Blower2FbStopped" x="2790.407" y="2702.706">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="839.4001,648.7397,551.1827,702.7347" />
       </ECTransition>
-      <ECTransition Source="StartScndBLVlv_H1" Destination="StartScndBL_H1" Condition="CmdValve1 = Valve1FbOpened" x="816.8831" y="3346.97">
+      <ECTransition Source="StartScndBLVlv_H1" Destination="StartScndBL_H1" Condition="CmdValve1 = Valve1FbOpened&#xD;&#xA;AND&#xD;&#xA;CmdBlowerValve2 = ValveBlower2FbOpened" x="816.8831" y="3346.97">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="204.2944,819.4589,204.099,854.8093" />
       </ECTransition>
       <ECTransition Source="StartScndBL_H1" Destination="Idle_State" Condition="1" x="2359.568" y="4046.226">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="301.7403,1030.928,824.3436,1008.602" />
       </ECTransition>
-      <ECTransition Source="StartScndBLVlv_H2" Destination="StartScndBL_H2" Condition="CmdValve3 = Valve3FbOpened" x="2841.883" y="3346.97">
+      <ECTransition Source="StartScndBLVlv_H2" Destination="StartScndBL_H2" Condition="CmdValve3 = Valve3FbOpened&#xD;&#xA;AND&#xD;&#xA;CmdBlowerValve3= ValveBlower3FbOpened" x="2841.883" y="3346.97">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="710.5444,819.4589,710.349,854.8093" />
       </ECTransition>
       <ECTransition Source="START" Destination="StartScndBLVlv_H2" Condition="Header2 AND StartScndBL_H2 AND Blower3FbStopped" x="3664.178" y="2770.542">
@@ -140,10 +156,10 @@
       <ECTransition Source="Idle_State" Destination="START" Condition="1" x="4671.812" y="3383.61">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="1167.611,927.3088,1168.081,776.9023" />
       </ECTransition>
-      <ECTransition Source="StartStdbyBLVlv_H1" Destination="StartStdbyBL_H1" Condition="CmdValve1 = Valve1FbOpened AND&#xD;&#xA;CmdValve2 = Valve2FbOpened" x="5268.883" y="3352.685">
+      <ECTransition Source="StartStdbyBLVlv_H1" Destination="StartStdbyBL_H1" Condition="CmdValve1 = Valve1FbOpened &#xD;&#xA;AND&#xD;&#xA;CmdValve2 = Valve2FbOpened&#xD;&#xA;AND&#xD;&#xA;CmdBlowerValve2 = ValveBlower2FbOpened" x="5268.883" y="3352.685">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="1317.294,820.8875,1317.099,856.2379" />
       </ECTransition>
-      <ECTransition Source="StartStdbyBLVlv_H2" Destination="StartStdbyBL_H2" Condition="CmdValve3 = Valve3FbOpened AND&#xD;&#xA;CmdValve2 = Valve2FbOpened" x="7293.884" y="3352.685">
+      <ECTransition Source="StartStdbyBLVlv_H2" Destination="StartStdbyBL_H2" Condition="CmdValve3 = Valve3FbOpened &#xD;&#xA;AND&#xD;&#xA;CmdValve2 = Valve2FbOpened&#xD;&#xA;AND&#xD;&#xA;CmdBlowerValve3= ValveBlower3FbOpened" x="7293.884" y="3352.685">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="1823.545,820.8875,1823.349,856.2379" />
       </ECTransition>
       <ECTransition Source="START" Destination="StartStdbyBLVlv_H1" Condition="Header1 AND StartStdby_H1 AND Blower3FbStopped" x="4966.283" y="2719.65">
@@ -170,7 +186,8 @@
     </ECC>
     <Algorithm ID="1f5dcb55-3f2a-41ae-abe4-bf0ee0a75cb9" Name="OpenScndBLVlv_H1">
       <ST><![CDATA[;
-CmdValve1 := TRUE;]]></ST>
+CmdValve1 := TRUE;
+CmdBlowerValve2 := TRUE;]]></ST>
     </Algorithm>
     <Algorithm ID="23d0d32d-89f5-487e-be14-a11a3c175d96" Name="StartScndBL_H1">
       <ST><![CDATA[;
@@ -179,7 +196,9 @@ SpeedSp_BL2 := SpeedSp_H1;]]></ST>
     </Algorithm>
     <Algorithm ID="1c03192b-4bb4-4f07-b28f-793ed4c5317e" Name="OpenScndBLVlv_H2">
       <ST><![CDATA[;
-CmdValve3 := TRUE;]]></ST>
+CmdValve3 := TRUE;
+
+CmdBlowerValve3 := TRUE;]]></ST>
     </Algorithm>
     <Algorithm ID="327c4661-6697-40af-bbe1-d2d5a24b9191" Name="StartScndBL_H2">
       <ST><![CDATA[;
@@ -189,7 +208,9 @@ SpeedSp_BL3 := SpeedSp_H2;]]></ST>
     <Algorithm ID="3506e506-0a3f-4798-aa75-0e1c442db936" Name="StartStdbyBLVlv_H1">
       <ST><![CDATA[;
 CmdValve1 := TRUE;
-CmdValve2 := TRUE;]]></ST>
+CmdValve2 := TRUE;
+
+CmdBlowerValve3 := TRUE;]]></ST>
     </Algorithm>
     <Algorithm ID="a88de788-5503-412d-9712-bcb1fe65a88a" Name="StartStdbyBL_H1">
       <ST><![CDATA[;
@@ -199,7 +220,9 @@ SpeedSp_BL3 := SpeedSp_H1;]]></ST>
     <Algorithm ID="db01c134-ffdd-406b-91ec-0f2ea26b5364" Name="StartStdbyBLVlv_H2">
       <ST><![CDATA[;
 CmdValve3 := TRUE;
-CmdValve2 := TRUE;]]></ST>
+CmdValve2 := TRUE;
+
+CmdBlowerValve2 := TRUE;]]></ST>
     </Algorithm>
     <Algorithm ID="e5fc5b03-2e6a-473f-8739-26217298466c" Name="StartStdbyBL_H2">
       <ST><![CDATA[;
@@ -253,6 +276,28 @@ END_IF;
 
 IF Header2 AND StartScndBL_H2 AND NOT StartStdby_H1 AND NOT StartStdby_H2 THEN
 	CmdValve2 := FALSE;
+END_IF;
+
+/*BlowerValves*/
+IF NOT Header1 AND NOT Header2 THEN
+	CmdBlowerValve2 := FALSE;
+	CmdBlowerValve3 := FALSE;
+END_IF;
+
+IF Header1 AND NOT StartScndBL_H1 AND NOT StartStdby_H2 THEN
+	CmdBlowerValve2 := FALSE;
+END_IF;
+
+IF Header2 AND NOT StartScndBL_H2 AND NOT StartStdby_H1 THEN
+	CmdBlowerValve3 := FALSE;
+END_IF;
+
+IF Header1 AND StartScndBL_H1 AND NOT StartStdby_H1 AND NOT StartStdby_H2 THEN
+	CmdBlowerValve3 := FALSE;
+END_IF;
+
+IF Header2 AND StartScndBL_H2 AND NOT StartStdby_H1 AND NOT StartStdby_H2 THEN
+	CmdBlowerValve2 := FALSE;
 END_IF;]]></ST>
     </Algorithm>
   </BasicFB>

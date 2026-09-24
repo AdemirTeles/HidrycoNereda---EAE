@@ -54,43 +54,97 @@ namespace SE.Nereda.Symbols.CAerationLogic
        get { return C3_IN_field; }
        set { C3_IN_field = value; }
     }
+    private NxtControl.GuiFramework.Time? C2_AdjustableTime_field = null;
+    public NxtControl.GuiFramework.Time? C2_AdjustableTime
+    {
+       get { return C2_AdjustableTime_field; }
+       set { C2_AdjustableTime_field = value; }
+    }
+    private NxtControl.GuiFramework.Time? C3_AdjustableTime_field = null;
+    public NxtControl.GuiFramework.Time? C3_AdjustableTime
+    {
+       get { return C3_AdjustableTime_field; }
+       set { C3_AdjustableTime_field = value; }
+    }
+    private System.Single? MaximumCapacityBlower_field = null;
+    public System.Single? MaximumCapacityBlower
+    {
+       get { return MaximumCapacityBlower_field; }
+       set { MaximumCapacityBlower_field = value; }
+    }
+    private System.Single? MinimumCapacity_field = null;
+    public System.Single? MinimumCapacity
+    {
+       get { return MinimumCapacity_field; }
+       set { MinimumCapacity_field = value; }
+    }
 
   }
 
 }
 
 namespace SE.Nereda.Symbols.CAerationLogic
-{}
-
-namespace SE.Nereda.Symbols.CAerationLogic
-{}
-
-namespace SE.Nereda.Faceplates.CAerationLogic
-{}
-
-namespace SE.Nereda.Symbols.CAerationLogic
 {
-  partial class sGraph
+  partial class sGraphBtn
   {
 
     private event EventHandler<SE.Nereda.Symbols.CAerationLogic.LOAD_PERS_DATAEventArgs> LOAD_PERS_DATA_Fired;
 
-    public bool FireEvent_AERATION_PAR(System.Single C2_IN, System.Single C3_IN)
+    protected override void OnEndInit()
     {
-      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {C2_IN, C3_IN});
+      if (LOAD_PERS_DATA_Fired != null)
+        AttachEventInput(0);
+
+    }
+
+    protected override void FireEventCallback(int channelId, int cookie, int eventIndex)
+    {
+      switch(eventIndex)
+      {
+        default:
+          break;
+        case 0:
+          if (LOAD_PERS_DATA_Fired != null)
+          {
+            try
+            {
+              LOAD_PERS_DATA_Fired(this, new SE.Nereda.Symbols.CAerationLogic.LOAD_PERS_DATAEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","LOAD_PERS_DATA_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break; 
+
+      }
+    }
+    public bool FireEvent_AERATION_PAR(System.Single C2_IN, System.Single C3_IN, NxtControl.GuiFramework.Time C2_AdjustableTime, NxtControl.GuiFramework.Time C3_AdjustableTime, System.Single MaximumCapacityBlower, System.Single MinimumCapacity)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {C2_IN, C3_IN, C2_AdjustableTime, C3_AdjustableTime, MaximumCapacityBlower, MinimumCapacity});
     }
     public bool FireEvent_AERATION_PAR(SE.Nereda.Symbols.CAerationLogic.AERATION_PAREventArgs ea)
     {
-      object[] _values_ = new object[2];
+      object[] _values_ = new object[6];
       if (ea.C2_IN.HasValue) _values_[0] = ea.C2_IN.Value;
       if (ea.C3_IN.HasValue) _values_[1] = ea.C3_IN.Value;
+      if (ea.C2_AdjustableTime.HasValue) _values_[2] = ea.C2_AdjustableTime.Value;
+      if (ea.C3_AdjustableTime.HasValue) _values_[3] = ea.C3_AdjustableTime.Value;
+      if (ea.MaximumCapacityBlower.HasValue) _values_[4] = ea.MaximumCapacityBlower.Value;
+      if (ea.MinimumCapacity.HasValue) _values_[5] = ea.MinimumCapacity.Value;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
-    public bool FireEvent_AERATION_PAR(System.Single C2_IN, bool ignore_C2_IN, System.Single C3_IN, bool ignore_C3_IN)
+    public bool FireEvent_AERATION_PAR(System.Single C2_IN, bool ignore_C2_IN, System.Single C3_IN, bool ignore_C3_IN, NxtControl.GuiFramework.Time C2_AdjustableTime, bool ignore_C2_AdjustableTime, NxtControl.GuiFramework.Time C3_AdjustableTime, bool ignore_C3_AdjustableTime, System.Single MaximumCapacityBlower, bool ignore_MaximumCapacityBlower, System.Single MinimumCapacity, bool ignore_MinimumCapacity)
     {
-      object[] _values_ = new object[2];
+      object[] _values_ = new object[6];
       if (!ignore_C2_IN) _values_[0] = C2_IN;
       if (!ignore_C3_IN) _values_[1] = C3_IN;
+      if (!ignore_C2_AdjustableTime) _values_[2] = C2_AdjustableTime;
+      if (!ignore_C3_AdjustableTime) _values_[3] = C3_AdjustableTime;
+      if (!ignore_MaximumCapacityBlower) _values_[4] = MaximumCapacityBlower;
+      if (!ignore_MinimumCapacity) _values_[5] = MinimumCapacity;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
 
@@ -135,22 +189,30 @@ stack Trace:
 
       }
     }
-    public bool FireEvent_AERATION_PAR(System.Single C2_IN, System.Single C3_IN)
+    public bool FireEvent_AERATION_PAR(System.Single C2_IN, System.Single C3_IN, NxtControl.GuiFramework.Time C2_AdjustableTime, NxtControl.GuiFramework.Time C3_AdjustableTime, System.Single MaximumCapacityBlower, System.Single MinimumCapacity)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {C2_IN, C3_IN});
+      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {C2_IN, C3_IN, C2_AdjustableTime, C3_AdjustableTime, MaximumCapacityBlower, MinimumCapacity});
     }
     public bool FireEvent_AERATION_PAR(SE.Nereda.Symbols.CAerationLogic.AERATION_PAREventArgs ea)
     {
-      object[] _values_ = new object[2];
+      object[] _values_ = new object[6];
       if (ea.C2_IN.HasValue) _values_[0] = ea.C2_IN.Value;
       if (ea.C3_IN.HasValue) _values_[1] = ea.C3_IN.Value;
+      if (ea.C2_AdjustableTime.HasValue) _values_[2] = ea.C2_AdjustableTime.Value;
+      if (ea.C3_AdjustableTime.HasValue) _values_[3] = ea.C3_AdjustableTime.Value;
+      if (ea.MaximumCapacityBlower.HasValue) _values_[4] = ea.MaximumCapacityBlower.Value;
+      if (ea.MinimumCapacity.HasValue) _values_[5] = ea.MinimumCapacity.Value;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
-    public bool FireEvent_AERATION_PAR(System.Single C2_IN, bool ignore_C2_IN, System.Single C3_IN, bool ignore_C3_IN)
+    public bool FireEvent_AERATION_PAR(System.Single C2_IN, bool ignore_C2_IN, System.Single C3_IN, bool ignore_C3_IN, NxtControl.GuiFramework.Time C2_AdjustableTime, bool ignore_C2_AdjustableTime, NxtControl.GuiFramework.Time C3_AdjustableTime, bool ignore_C3_AdjustableTime, System.Single MaximumCapacityBlower, bool ignore_MaximumCapacityBlower, System.Single MinimumCapacity, bool ignore_MinimumCapacity)
     {
-      object[] _values_ = new object[2];
+      object[] _values_ = new object[6];
       if (!ignore_C2_IN) _values_[0] = C2_IN;
       if (!ignore_C3_IN) _values_[1] = C3_IN;
+      if (!ignore_C2_AdjustableTime) _values_[2] = C2_AdjustableTime;
+      if (!ignore_C3_AdjustableTime) _values_[3] = C3_AdjustableTime;
+      if (!ignore_MaximumCapacityBlower) _values_[4] = MaximumCapacityBlower;
+      if (!ignore_MinimumCapacity) _values_[5] = MinimumCapacity;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
 
@@ -195,30 +257,35 @@ stack Trace:
 
       }
     }
-    public bool FireEvent_AERATION_PAR(System.Single C2_IN, System.Single C3_IN)
+    public bool FireEvent_AERATION_PAR(System.Single C2_IN, System.Single C3_IN, NxtControl.GuiFramework.Time C2_AdjustableTime, NxtControl.GuiFramework.Time C3_AdjustableTime, System.Single MaximumCapacityBlower, System.Single MinimumCapacity)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {C2_IN, C3_IN});
+      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {C2_IN, C3_IN, C2_AdjustableTime, C3_AdjustableTime, MaximumCapacityBlower, MinimumCapacity});
     }
     public bool FireEvent_AERATION_PAR(SE.Nereda.Symbols.CAerationLogic.AERATION_PAREventArgs ea)
     {
-      object[] _values_ = new object[2];
+      object[] _values_ = new object[6];
       if (ea.C2_IN.HasValue) _values_[0] = ea.C2_IN.Value;
       if (ea.C3_IN.HasValue) _values_[1] = ea.C3_IN.Value;
+      if (ea.C2_AdjustableTime.HasValue) _values_[2] = ea.C2_AdjustableTime.Value;
+      if (ea.C3_AdjustableTime.HasValue) _values_[3] = ea.C3_AdjustableTime.Value;
+      if (ea.MaximumCapacityBlower.HasValue) _values_[4] = ea.MaximumCapacityBlower.Value;
+      if (ea.MinimumCapacity.HasValue) _values_[5] = ea.MinimumCapacity.Value;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
-    public bool FireEvent_AERATION_PAR(System.Single C2_IN, bool ignore_C2_IN, System.Single C3_IN, bool ignore_C3_IN)
+    public bool FireEvent_AERATION_PAR(System.Single C2_IN, bool ignore_C2_IN, System.Single C3_IN, bool ignore_C3_IN, NxtControl.GuiFramework.Time C2_AdjustableTime, bool ignore_C2_AdjustableTime, NxtControl.GuiFramework.Time C3_AdjustableTime, bool ignore_C3_AdjustableTime, System.Single MaximumCapacityBlower, bool ignore_MaximumCapacityBlower, System.Single MinimumCapacity, bool ignore_MinimumCapacity)
     {
-      object[] _values_ = new object[2];
+      object[] _values_ = new object[6];
       if (!ignore_C2_IN) _values_[0] = C2_IN;
       if (!ignore_C3_IN) _values_[1] = C3_IN;
+      if (!ignore_C2_AdjustableTime) _values_[2] = C2_AdjustableTime;
+      if (!ignore_C3_AdjustableTime) _values_[3] = C3_AdjustableTime;
+      if (!ignore_MaximumCapacityBlower) _values_[4] = MaximumCapacityBlower;
+      if (!ignore_MinimumCapacity) _values_[5] = MinimumCapacity;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
 
   }
 }
-
-namespace SE.Nereda.Symbols.CAerationLogic
-{}
 #endregion #CAerationLogic_HMI;
 
 #endregion Definitions;

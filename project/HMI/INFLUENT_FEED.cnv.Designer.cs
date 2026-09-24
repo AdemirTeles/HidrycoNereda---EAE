@@ -31,9 +31,6 @@ namespace HMI.Main.Canvases
 			this.HeartBeat = new SE.Nereda.Symbols.HeartBeat.sDefault();
 			this.Mode = new SE.Nereda.Symbols.Mode.ReactorMode();
 			this.OpenWebPage = new SE.Nereda.Symbols.OpenWebPage.sDefault();
-			this.INFLUENT_FEED_4 = new SE.Nereda.Symbols.InfluentFeed.sSensors();
-			this.sDrainSettings1 = new SE.Nereda.Symbols.InfluentFeedLogic.sDrainSettings();
-			this.INFLUENT_FEED_1 = new SE.Nereda.Symbols.InfluentFeed.sInfluentFeed2();
 			this.pipe1 = new NxtControl.GuiFramework.Pipe();
 			// 
 			// changeCanvasButton3
@@ -79,33 +76,6 @@ namespace HMI.Main.Canvases
 			this.OpenWebPage.TagName = "61745BDDB91DBEF5";
 			this.OpenWebPage.EndInit();
 			// 
-			// INFLUENT_FEED_4
-			// 
-			this.INFLUENT_FEED_4.BeginInit();
-			this.INFLUENT_FEED_4.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 960D, 144D);
-			this.INFLUENT_FEED_4.Name = "INFLUENT_FEED_4";
-			this.INFLUENT_FEED_4.SecurityToken = ((uint)(4294967295u));
-			this.INFLUENT_FEED_4.TagName = "2098DAF96A66AD0A";
-			this.INFLUENT_FEED_4.EndInit();
-			// 
-			// sDrainSettings1
-			// 
-			this.sDrainSettings1.BeginInit();
-			this.sDrainSettings1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 1096D, 8D);
-			this.sDrainSettings1.Name = "sDrainSettings1";
-			this.sDrainSettings1.SecurityToken = ((uint)(4294967295u));
-			this.sDrainSettings1.TagName = "2098DAF96A66AD0A.InfluentFeedLogic";
-			this.sDrainSettings1.EndInit();
-			// 
-			// INFLUENT_FEED_1
-			// 
-			this.INFLUENT_FEED_1.BeginInit();
-			this.INFLUENT_FEED_1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 32D, 232D);
-			this.INFLUENT_FEED_1.Name = "INFLUENT_FEED_1";
-			this.INFLUENT_FEED_1.SecurityToken = ((uint)(4294967295u));
-			this.INFLUENT_FEED_1.TagName = "2098DAF96A66AD0A";
-			this.INFLUENT_FEED_1.EndInit();
-			// 
 			// pipe1
 			// 
 			this.pipe1.Bounds = new NxtControl.Drawing.RectF(((float)(736D)), ((float)(248D)), ((float)(40D)), ((float)(64D)));
@@ -127,9 +97,6 @@ namespace HMI.Main.Canvases
 			this.HeartBeat,
 			this.Mode,
 			this.OpenWebPage,
-			this.INFLUENT_FEED_4,
-			this.sDrainSettings1,
-			this.INFLUENT_FEED_1,
 			this.pipe1,
 			this.changeCanvasButton4,
 			this.changeCanvasButton3});
@@ -141,9 +108,6 @@ namespace HMI.Main.Canvases
 		private SE.Nereda.Symbols.HeartBeat.sDefault HeartBeat;
 		private SE.Nereda.Symbols.Mode.ReactorMode Mode;
 		private SE.Nereda.Symbols.OpenWebPage.sDefault OpenWebPage;
-		private SE.Nereda.Symbols.InfluentFeed.sInfluentFeed2 INFLUENT_FEED_1;
-		private SE.Nereda.Symbols.InfluentFeed.sSensors INFLUENT_FEED_4;
-		private SE.Nereda.Symbols.InfluentFeedLogic.sDrainSettings sDrainSettings1;
 		private NxtControl.GuiFramework.Pipe pipe1;
 		#endregion
 	}

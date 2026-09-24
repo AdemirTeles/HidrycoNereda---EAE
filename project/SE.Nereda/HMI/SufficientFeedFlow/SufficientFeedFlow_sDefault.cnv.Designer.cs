@@ -94,6 +94,7 @@ namespace SE.Nereda.Symbols.SufficientFeedFlow
 			this.LevelCheckTimeSp.BeginInit();
 			this.LevelCheckTimeSp.DecimalPlacesCount = ((uint)(0u));
 			this.LevelCheckTimeSp.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.64D, 0D, 0D, 1D, 326D, 150D);
+			this.LevelCheckTimeSp.Maximum = 36;
 			this.LevelCheckTimeSp.MaximumTag = null;
 			this.LevelCheckTimeSp.MinimumTag = null;
 			this.LevelCheckTimeSp.Name = "LevelCheckTimeSp";

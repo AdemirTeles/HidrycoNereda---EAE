@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
-<FBType GUID="c06e6d62-bf84-4447-b505-4255355e9937" Name="CAerationLogicBasic" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+<FBType GUID="c06e6d62-bf84-4447-b505-4255355e9937" Comment="Basic Function Block Type" Name="CAerationLogicBasic" Namespace="SE.Nereda">
   <Identification Standard="61499-2" />
   <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="6/10/2026" Remarks="Template" />
   <InterfaceList>
@@ -23,11 +23,23 @@
         <With Var="Blower1FbReady" />
         <With Var="Blower4FbReady" />
       </Event>
+      <Event ID="E57CC257F577A1D0" Name="VALVEBLOWER_FB">
+        <With Var="ValveBlower1FbOpened" />
+        <With Var="ValveBlower1FbClosed" />
+        <With Var="ValveBlower4FbOpened" />
+        <With Var="ValveBlower4FbClosed" />
+      </Event>
+      <Event ID="77D7986251D66128" Name="VALVEBLOWER_RDY">
+        <With Var="ValveBlower1FbReady" />
+        <With Var="ValveBlower4FbReady" />
+      </Event>
     </EventInputs>
     <EventOutputs>
       <Event ID="B804F7AE49CF3E15" Name="CNF_BLR_VLV_CMD">
         <With Var="CmdBlower1" />
         <With Var="CmdBlower4" />
+        <With Var="CmdValveBlower1" />
+        <With Var="CmdValveBlower4" />
       </Event>
     </EventOutputs>
     <InputVars>
@@ -41,39 +53,96 @@
       <VarDeclaration ID="7970F58D086A71AC" Name="Blower4FbStopped" Type="BOOL" />
       <VarDeclaration ID="0D2984DD8432BDE4" Name="Blower1FbReady" Type="BOOL" />
       <VarDeclaration ID="71560028BEB1A1C1" Name="Blower4FbReady" Type="BOOL" />
+      <VarDeclaration ID="DD539EBA296107FA" Name="ValveBlower1FbOpened" Type="BOOL" />
+      <VarDeclaration ID="602F392F126AA85C" Name="ValveBlower1FbClosed" Type="BOOL" />
+      <VarDeclaration ID="75EDF7C081990EBA" Name="ValveBlower4FbOpened" Type="BOOL" />
+      <VarDeclaration ID="D59A94C6C1D30D86" Name="ValveBlower4FbClosed" Type="BOOL" />
+      <VarDeclaration ID="C6EDB0A1C3E2CD9E" Name="ValveBlower1FbReady" Type="BOOL" />
+      <VarDeclaration ID="36717EB085C1DD5C" Name="ValveBlower4FbReady" Type="BOOL" />
     </InputVars>
     <OutputVars>
+      <VarDeclaration ID="6A904F40D20029A1" Name="CmdValveBlower1" Type="BOOL" />
       <VarDeclaration ID="6F30DD159F832B4D" Name="CmdBlower1" Type="BOOL" />
+      <VarDeclaration ID="064AFCAEB0DD5723" Name="CmdValveBlower4" Type="BOOL" />
       <VarDeclaration ID="888716159CBC3FDC" Name="CmdBlower4" Type="BOOL" />
     </OutputVars>
   </InterfaceList>
   <BasicFB ID="5d63002f-a7b1-4326-a938-7f8dd38ad271">
-    <Attribute Name="FBType.Basic.Algorithm.Order" Value="LowAerationR" />
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="LowAerationR,OpenValve" />
     <ECC>
-      <ECState Name="START" Comment="Initial State" x="1759.108" y="1164.412" />
-      <ECState Name="REQ_R" x="2434" y="1694.667">
+      <ECState Name="START" Comment="Initial State" x="244.8221" y="201.5548" />
+      <ECState Name="REQ_R" x="1078.381" y="806.4765">
         <ECAction Algorithm="LowAerationR" Output="CNF_BLR_VLV_CMD" />
       </ECState>
-      <ECTransition Source="START" Destination="REQ_R" Condition="AERATION_CMD OR BLOWERS_RDY" x="2204.218" y="1353.081">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="533.9185,314.9373,577.2095,350.4783" />
+      <ECTransition Source="START" Destination="REQ_R" Condition="AERATION_CMD OR BLOWERS_RDY OR VALVEBLOWER_FB OR BLOWERS_FB" x="761.0131" y="426.6889">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="166.6981,80.25606,222.167,121.4959" />
       </ECTransition>
-      <ECTransition Source="REQ_R" Destination="START" Condition="1" x="2019.503" y="1468.911">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="523.676,388.2254,480.7525,352.7921" />
+      <ECTransition Source="REQ_R" Destination="START" Condition="1" x="492.8332" y="749.735">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="144.5006,226.7965,84.17787,182.4323" />
       </ECTransition>
     </ECC>
     <Algorithm ID="04801a6d-4c5a-485c-aa50-6f1fcea16ea6" Name="LowAerationR">
       <ST><![CDATA[;
-IF AerationR1Cmd AND Blower1FbReady THEN
+IF AerationR1Cmd AND ValveBlower1FbReady THEN
+	CmdValveBlower1 := TRUE;
+ELSIF Blower1FbStopped THEN
+	CmdValveBlower1 := FALSE;
+END_IF;
+
+IF AerationR2Cmd AND ValveBlower4FbReady THEN
+	CmdValveBlower4 := TRUE;
+ELSIF Blower4FbStopped THEN
+	CmdValveBlower4 := FALSE;
+END_IF;
+
+IF AerationR1Cmd AND Blower1FbReady AND ValveBlower1FbOpened THEN
 	CmdBlower1 := TRUE;
 ELSE
 	CmdBlower1 := FALSE;
 END_IF;
 
-IF AerationR2Cmd AND Blower4FbReady THEN
+IF AerationR2Cmd AND Blower4FbReady AND ValveBlower4FbOpened THEN
 	CmdBlower4 := TRUE;
 ELSE
 	CmdBlower4 := FALSE;
+END_IF;
+
+IF Blower4FbStopped AND NOT Blower4FbReady THEN
+	CmdValveBlower4 := FALSE;
+END_IF;
+
+IF Blower1FbStopped AND NOT Blower1FbReady THEN
+	CmdValveBlower1 := FALSE;
 END_IF;]]></ST>
+    </Algorithm>
+    <Algorithm ID="aa378934-0773-4177-900a-2b182e17dec5" Name="OpenValve">
+      <ST><![CDATA[;
+
+IF AerationR1Cmd AND ValveBlower1FbReady THEN
+	CmdValveBlower1 := TRUE;
+ELSE
+	CmdValveBlower1 := FALSE;
+END_IF;
+
+IF AerationR2Cmd AND ValveBlower4FbReady THEN
+	CmdValveBlower4 := TRUE;
+ELSE
+	CmdValveBlower4 := FALSE;
+END_IF;
+
+IF AerationR1Cmd AND Blower1FbReady AND ValveBlower1FbOpened THEN
+	CmdBlower1 := TRUE;
+ELSE
+	CmdBlower1 := FALSE;
+END_IF;
+
+IF AerationR2Cmd AND Blower4FbReady AND ValveBlower4FbOpened THEN
+	CmdBlower4 := TRUE;
+ELSE
+	CmdBlower4 := FALSE;
+END_IF;	
+	
+]]></ST>
     </Algorithm>
   </BasicFB>
 </FBType>

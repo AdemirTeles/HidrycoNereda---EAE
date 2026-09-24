@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
-<FBType GUID="61d32ee5-3248-41cb-bdc7-a5d80414b18a" Name="NeredaCapacitySpToCBlowersSp" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+<FBType GUID="61d32ee5-3248-41cb-bdc7-a5d80414b18a" Comment="Basic Function Block Type" Name="NeredaCapacitySpToCBlowersSp" Namespace="SE.Nereda">
   <Identification Standard="61499-2" />
   <VersionInfo Organization="Schneider Electric" Version="0.0" Author="SESA685388" Date="10/7/2023" Remarks="Template" />
   <InterfaceList>
@@ -9,17 +9,27 @@
         <With Var="CapSp" />
         <With Var="C2_IN" />
         <With Var="C3_IN" />
+        <With Var="UsingPump2" />
+        <With Var="MaximumCapacityBlower" />
+        <With Var="MaxSp" />
       </Event>
+      <Event ID="C290CA59E2E76CE7" Name="END_DELAY_C2" />
+      <Event ID="928BD6855BDB8CD4" Name="END_DELAY_C3" />
     </EventInputs>
     <EventOutputs>
       <Event Name="CNF" Comment="Execution Confirmation">
         <With Var="SpeedBlower" />
       </Event>
+      <Event ID="C8BBF715CC922495" Name="START_DELAY_C2" />
+      <Event ID="C529EC06887E5F22" Name="START_DELAY_C3" />
     </EventOutputs>
     <InputVars>
       <VarDeclaration ID="Setpoint" Name="CapSp" Type="REAL" Comment="Input event qualifier" />
       <VarDeclaration ID="366DF9C08522C788" Name="C2_IN" Type="REAL" />
       <VarDeclaration ID="9458FDB1B841EBF6" Name="C3_IN" Type="REAL" />
+      <VarDeclaration ID="0E6B92BFBD466C31" Name="MaximumCapacityBlower" Type="REAL" />
+      <VarDeclaration ID="F347E80EA65C1CE5" Name="UsingPump2" Type="BOOL" />
+      <VarDeclaration ID="1FE73434323A3C55" Name="MaxSp" Type="BOOL" />
     </InputVars>
     <OutputVars>
       <VarDeclaration Name="SpeedBlower" Type="REAL" />
@@ -28,46 +38,79 @@
   <BasicFB ID="71865d44-b989-4ceb-af39-632154f465b8">
     <Attribute Name="FBType.Basic.Algorithm.Order" Value="REQ" />
     <InternalVars>
-      <VarDeclaration Name="Equal" Type="BOOL" />
+      <VarDeclaration ID="Equal" Name="LastUsingPump2" Type="BOOL" />
+      <VarDeclaration ID="5B14F8F64307848B" Name="Starting2Pumps" Type="BOOL" />
+      <VarDeclaration ID="84D5E450CED202FB" Name="Stopping1Pump" Type="BOOL" />
     </InternalVars>
     <ECC>
       <ECState Name="START" Comment="Initial State" x="388.9412" y="341.4117" />
-      <ECState Name="STATE2" x="1136" y="928.0001">
+      <ECState Name="STATE2" x="1508" y="828.0001">
         <ECAction Algorithm="REQ" Output="CNF" />
       </ECState>
-      <ECTransition Source="START" Destination="STATE2" Condition="REQ" x="849.7797" y="582.2228">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="191.2339,121.165,240.1272,161.4392" />
+      <ECState Name="STARTING" x="951.9999" y="1424">
+        <ECAction Output="START_DELAY_C2" />
+      </ECState>
+      <ECState Name="STOPPING" x="2128" y="1408">
+        <ECAction Output="START_DELAY_C3" />
+      </ECState>
+      <ECTransition Source="START" Destination="STATE2" Condition="REQ" x="1003.159" y="509.4858">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="214.1745,105.2471,291.2572,139.473" />
       </ECTransition>
-      <ECTransition Source="STATE2" Destination="START" Condition="1" x="615.3357" y="726.9028">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="171.7992,209.7482,121.9296,167.0803" />
+      <ECTransition Source="STATE2" Destination="STARTING" Condition="Starting2Pumps" x="1275.085" y="1159.442">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="339.3936,272.2637,301.7205,313.031" />
+      </ECTransition>
+      <ECTransition Source="STARTING" Destination="STATE2" Condition="END_DELAY_C2" x="941.8275" y="1048.674">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="199.7138,276.9595,237.1749,236.3415" />
+      </ECTransition>
+      <ECTransition Source="STATE2" Destination="STOPPING" Condition="Stopping1Pump" x="2195.06" y="1051.208">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="551.239,238.5163,593.6089,278.1526" />
+      </ECTransition>
+      <ECTransition Source="STOPPING" Destination="STATE2" Condition="END_DELAY_C3" x="1809.459" y="1193">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="475.6849,324.3181,433.3151,284.6819" />
+      </ECTransition>
+      <ECTransition Source="STATE2" Destination="START" Condition="1" x="940.2603" y="662.7897">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="273.7443,187.1025,200.491,155.2505" />
       </ECTransition>
     </ECC>
     <Algorithm Name="REQ" Comment="Initialization algorithm">
       <ST><![CDATA[;
-IF CapSp <= C2_IN THEN
-    // Zone 1 : 0 ... C2_IN  =>  0 ... 100 %
-    IF C2_IN > 0.0 THEN
-        SpeedBlower := (CapSp / C2_IN) * 100.0;
-    ELSE
-        SpeedBlower := 0.0;
-    END_IF;
-
-ELSIF CapSp <= C3_IN THEN
-    // Zone 2 : C2_IN ... C3_IN  =>  0 ... 100 %
-    IF C3_IN > C2_IN THEN
-        SpeedBlower := ((CapSp - C2_IN) / (C3_IN - C2_IN)) * 100.0;
-    ELSE
-        SpeedBlower := 0.0;
-    END_IF;
-
+IF (UsingPump2 AND NOT(LastUsingPump2)) THEN
+	Starting2Pumps:=TRUE;
 ELSE
-    // Zone 3 : C3_IN ... 100  =>  0 ... 100 %
-    IF C3_IN < 100.0 THEN
-        SpeedBlower := ((CapSp - C3_IN) / (100.0 - C3_IN)) * 100.0;
+	Starting2Pumps:=FALSE;
+END_IF;
+
+IF (NOT UsingPump2 AND LastUsingPump2) THEN
+	Stopping1Pump := TRUE;
+ELSE
+	Stopping1Pump := FALSE;
+END_IF;
+
+
+IF (NOT UsingPump2 )THEN
+    // Zone 1 : 0 ... C2_IN  =>  0 ... 100 %
+    IF Stopping1Pump THEN
+	    SpeedBlower := C3_IN;
     ELSE
-        SpeedBlower := 100.0;
+    	SpeedBlower := MIN((CapSp / MaximumCapacityBlower) * 100.0, 100);
     END_IF;
-END_IF;]]></ST>
+END_IF; 	
+
+IF (UsingPump2 )THEN
+    // Zone 1 : 0 ... C2_IN  =>  0 ... 100 %
+    IF Starting2Pumps THEN
+	    SpeedBlower := C2_IN;
+    ELSE
+    	SpeedBlower := (CapSp / (2*MaximumCapacityBlower)) * 100.0;
+    END_IF;
+END_IF; 
+
+IF MaxSp AND NOT Stopping1Pump THEN
+	SpeedBlower := 100.0;
+END_IF;
+
+LastUsingPump2:=UsingPump2;
+]]></ST>
     </Algorithm>
   </BasicFB>
 </FBType>
