@@ -52,23 +52,38 @@
     </OutputVars>
   </InterfaceList>
   <BasicFB ID="5d63002f-a7b1-4326-a938-7f8dd38ad271">
-    <Attribute Name="FBType.Basic.Algorithm.Order" Value="REQ" />
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="REQ,algLastValue" />
     <InternalVars>
       <VarDeclaration ID="211747A19A38948B" Name="H1Stdby_Used" Type="BOOL" InitialValue="FALSE" />
       <VarDeclaration ID="2A7296943EF560F8" Name="H2Stdby_Used" Type="BOOL" InitialValue="FALSE" />
       <VarDeclaration ID="D22A33757911D714" Name="Owner" Type="INT" />
+      <VarDeclaration ID="2656437CF84359EC" Name="Last_StartScndBL_H1" Type="BOOL" />
+      <VarDeclaration ID="9D353229C44A74C9" Name="Last_StartStdby_H1" Type="BOOL" />
+      <VarDeclaration ID="4797971439122C3F" Name="Last_StartScndBL_H2" Type="BOOL" />
+      <VarDeclaration ID="8E7C89D7DB05F072" Name="Last_StartStdby_H2" Type="BOOL" />
+      <VarDeclaration ID="02D254C2C8329DA4" Name="Last_MaxSp_H1" Type="BOOL" />
+      <VarDeclaration ID="9CEA58EB1295C426" Name="Last_MaxSp_H2" Type="BOOL" />
     </InternalVars>
     <ECC>
-      <ECState Name="START" Comment="Initial State" x="3218.251" y="1562.412" />
-      <ECState Name="REQ" x="4060.401" y="2069.603">
-        <ECAction Algorithm="REQ" Output="CNF_CMD" />
+      <ECState Name="START" Comment="Initial State" x="2530.251" y="1058.412" />
+      <ECState Name="REQ" x="4012.401" y="2121.603">
+        <ECAction Algorithm="REQ" />
       </ECState>
-      <ECTransition Source="START" Destination="REQ" Condition="AERATION_CMD" x="3688.012" y="1749.751">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="894.8603,415.8015,950.5987,449.3704" />
+      <ECState Name="STATE1" x="4460" y="1710.157">
+        <ECAction Algorithm="algLastValue" Output="CNF_CMD" />
+      </ECState>
+      <ECTransition Source="START" Destination="REQ" Condition="AERATION_CMD" x="3284.666" y="1517.355">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="765.0706,334.0889,875.8425,412.4798" />
       </ECTransition>
-      <ECTransition Source="REQ" Destination="REQ" Condition="Owner = 0" x="4060.396" y="2251.689" />
-      <ECTransition Source="REQ" Destination="START" Condition="1" x="3582.658" y="1925.475">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="921.3397,505.6236,865.6013,472.0547" />
+      <ECTransition Source="REQ" Destination="REQ" Condition="Owner = 0" x="4012.396" y="2303.689" />
+      <ECTransition Source="REQ" Destination="STATE1" Condition="Last_MaxSp_H1 &lt;&gt; MaxSp_H1 OR&#xD;&#xA;Last_MaxSp_H2 &lt;&gt; MaxSp_H2 OR&#xD;&#xA;Last_StartScndBL_H1 &lt;&gt; StartScndBL_H1 OR&#xD;&#xA;Last_StartScndBL_H2 &lt;&gt; StartScndBL_H2 OR&#xD;&#xA;Last_StartStdby_H1 &lt;&gt; StartStdby_H1 OR&#xD;&#xA;Last_StartStdby_H2 &lt;&gt; StartStdby_H2" x="4233.947" y="1829.53">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1048.917,463.5291,1076.615,437.9943" />
+      </ECTransition>
+      <ECTransition Source="STATE1" Destination="START" Condition="1" x="3472.97" y="1448.686">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="937.6135,390.2598,797.8777,342.9702" />
+      </ECTransition>
+      <ECTransition Source="REQ" Destination="START" Condition="1" x="3318.267" y="1693.031">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="889.9545,470.8896,780.2292,392.7963" />
       </ECTransition>
     </ECC>
     <Algorithm ID="42cf27f2-e44a-45a4-bc96-9aae58cc0c1e" Name="REQ">
@@ -162,6 +177,16 @@ END_IF;
 IF NOT (StartScndBL_H2 OR StartStdby_H2 OR StartScndBL_H1 OR StartStdby_H1) THEN
 	Owner := 0;
 END_IF;]]></ST>
+    </Algorithm>
+    <Algorithm ID="6955cf78-208c-4e67-a99e-0bf01b559f9c" Name="algLastValue">
+      <ST><![CDATA[;
+
+Last_MaxSp_H1 := MaxSp_H1;
+Last_MaxSp_H2 := MaxSp_H2;
+Last_StartScndBL_H1 := StartScndBL_H1;
+Last_StartScndBL_H2 := StartScndBL_H2;
+Last_StartStdby_H1 := StartStdby_H1;
+Last_StartStdby_H2 := StartStdby_H2;]]></ST>
     </Algorithm>
   </BasicFB>
 </FBType>

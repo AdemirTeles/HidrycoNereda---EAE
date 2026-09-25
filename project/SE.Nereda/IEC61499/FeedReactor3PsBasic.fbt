@@ -142,8 +142,8 @@
       <ECTransition Source="StartOnePump" Destination="StartTowPumpsC2" Condition="(Pump01Capacity &gt;= MaxCapacityOnePump AND FbRunningPmp01) OR&#xD;&#xA;(Pump02Capacity &gt;= MaxCapacityOnePump AND FbRunningPmp02) OR&#xD;&#xA;(Pump03Capacity &gt;= MaxCapacityOnePump AND FbRunningPmp03)" x="1545.032" y="1410.421">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="386.1805,334.1556,386.4901,374.2918" />
       </ECTransition>
-      <ECTransition Source="StartTowPumpsC2" Destination="StartTowPumpsMax" Condition="(FbRunningPmp01 AND FbRunningPmp02&#xD;&#xA;AND FbCapacityP &gt;= C2Capacity - 2&#xD;&#xA;AND FbCapacityP &lt;= C2Capacity + 2)&#xD;&#xA;&#xD;&#xA;OR&#xD;&#xA;&#xD;&#xA;(FbRunningPmp01 AND FbRunningPmp03&#xD;&#xA;AND FbCapacityP &gt;= C2Capacity - 2&#xD;&#xA;AND FbCapacityP &lt;= C2Capacity + 2)&#xD;&#xA;&#xD;&#xA;OR&#xD;&#xA;&#xD;&#xA;(FbRunningPmp02 AND FbRunningPmp03&#xD;&#xA;AND FbCapacityP &gt;= C2Capacity - 2&#xD;&#xA;AND FbCapacityP &lt;= C2Capacity + 2)" x="1546.593" y="1972.989">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="386.4291,473.0116,386.7015,512.9812" />
+      <ECTransition Source="StartTowPumpsC2" Destination="StartTowPumpsMax" Condition="(FbRunningPmp01 AND FbRunningPmp02&#xD;&#xA;AND FbCapacityP &gt;= C2Capacity - 2&#xD;&#xA;AND FbCapacityP &lt;= C2Capacity + 2)&#xD;&#xA;&#xD;&#xA;OR&#xD;&#xA;&#xD;&#xA;(FbRunningPmp01 AND FbRunningPmp03&#xD;&#xA;AND FbCapacityP &gt;= C2Capacity - 2&#xD;&#xA;AND FbCapacityP &lt;= C2Capacity + 2)&#xD;&#xA;&#xD;&#xA;OR&#xD;&#xA;&#xD;&#xA;(FbRunningPmp02 AND FbRunningPmp03&#xD;&#xA;AND FbCapacityP &gt;= C2Capacity - 2&#xD;&#xA;AND FbCapacityP &lt;= C2Capacity + 2)" x="1546.786" y="1981.879">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="386.4904,475.9749,386.7628,515.9445" />
       </ECTransition>
       <ECTransition Source="StartTowPumpsMax" Destination="StartTowPumpsMax" Condition="FEED_CAPACITY OR FB_PUMP_RDY OR FEED_REACTOR OR PAR" x="990.4648" y="2277">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="211.1304,634.4445,214.4637,505.5556" />
@@ -168,6 +168,9 @@
       </ECTransition>
       <ECTransition Source="WaitingTime" Destination="START" Condition="FB_WAIT_TIME" x="2673.136" y="303.7136">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="747.0748,62.94836,606.0098,48.99782" />
+      </ECTransition>
+      <ECTransition Source="StartTowPumpsMax" Destination="StartOnePump" Condition="CapacitySp &lt; C3Capacity" x="93.70358" y="1800.138">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="161.654,553.5221,-315.1061,365.1184" />
       </ECTransition>
     </ECC>
     <Algorithm ID="b9a0305a-7b60-4353-8ce8-9f1ec530491a" Name="OnePump">
@@ -226,9 +229,13 @@ END_IF;]]></ST>
 Pump01Capacity := 0.0;
 Pump02Capacity := 0.0;
 Pump03Capacity := 0.0;
+CmdPump01 := FALSE;
+CmdPump02 := FALSE;
+CmdPump03 := FALSE;
 
 
 IF FbRunningPmp01 THEN
+	CmdPump01 := TRUE;
 	Pump01Capacity := C2Capacity;	
 	IF FbPump02Ready THEN
 		CmdPump02 := TRUE;
@@ -239,6 +246,7 @@ IF FbRunningPmp01 THEN
 		Pump03Capacity := C2Capacity;
 	END_IF;
 ELSIF FbRunningPmp02 THEN
+	CmdPump02 := TRUE;
 	Pump02Capacity := C2Capacity;	
 	IF FbPump01Ready THEN
 		CmdPump01 := TRUE;
@@ -249,6 +257,7 @@ ELSIF FbRunningPmp02 THEN
 		Pump03Capacity := C2Capacity;
 	END_IF;
 ELSIF FbRunningPmp03 THEN
+	CmdPump03 := TRUE;
 	Pump03Capacity := C2Capacity;	
 	IF FbPump01Ready THEN
 		CmdPump01 := TRUE;
