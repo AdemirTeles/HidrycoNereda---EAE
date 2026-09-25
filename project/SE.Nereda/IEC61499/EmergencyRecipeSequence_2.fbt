@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
-<FBType GUID="050a50e2-1504-4ee4-a18c-5ed75129de48" Name="EmergencyRecipeSequence_2" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+<FBType GUID="050a50e2-1504-4ee4-a18c-5ed75129de48" Comment="Basic Function Block Type" Name="EmergencyRecipeSequence_2" Namespace="SE.Nereda">
   <Identification Standard="61499-2" />
   <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="7/4/2026" Remarks="Template" />
   <InterfaceList>
     <EventInputs>
       <Event ID="4E3261F33DF95CD1" Name="INIT_EMERGENCY">
-        <With Var="Init_GoToSD" />
-        <With Var="Init_GoToWS8" />
+        <With Var="Init_GoToVentSludge" />
+        <With Var="Init_GoToWS10" />
         <With Var="InitialisationDone" />
-        <With Var="Init_GoToWS2" />
       </Event>
       <Event ID="68E2F3B4BFF358D6" Name="EMERGENCY_ON">
         <With Var="EmergencyON" />
@@ -119,9 +118,8 @@
       <Event ID="C125C1F9A17D8460" Name="STEP10_STOP" />
     </EventOutputs>
     <InputVars>
-      <VarDeclaration ID="7B8E9664C1C5FBAC" Name="Init_GoToWS2" Type="BOOL" />
-      <VarDeclaration ID="73A0EB798F8AE64D" Name="Init_GoToSD" Type="BOOL" />
-      <VarDeclaration ID="8C498327642AF905" Name="Init_GoToWS8" Type="BOOL" />
+      <VarDeclaration ID="73A0EB798F8AE64D" Name="Init_GoToVentSludge" Type="BOOL" />
+      <VarDeclaration ID="8C498327642AF905" Name="Init_GoToWS10" Type="BOOL" />
       <VarDeclaration ID="A0CAD84FAFB4D508" Name="InitialisationDone" Type="BOOL" />
       <VarDeclaration ID="C537A25E1616B854" Name="EmergencyON" Type="BOOL" />
       <VarDeclaration ID="EB24B639967D6395" Name="StartFeed" Type="BOOL" />
@@ -166,7 +164,7 @@
   <BasicFB ID="2ec17f26-1e26-4187-9d1f-898851067dd5">
     <Attribute Name="FBType.Basic.Algorithm.Order" Value="FEED,LOWER_LEVEL,AERATE,StopAll,Synchronize,WAIT_INIT,WAIT_S8,WAIT_S2,SLUDGE_DISCHARGE_S3,SLUDGE_DISCHARGE_S7,VENT_AERATE,VENT_SLUDGE_S9,VENT_SLUDGE_S2" />
     <ECC>
-      <ECState Name="START" Comment="Initial State" x="3227.988" y="1022.935" />
+      <ECState Name="START" Comment="Initial State" x="3283.988" y="878.9349" />
       <ECState Name="FEED" x="3285.333" y="1742.667">
         <ECAction Algorithm="FEED" Output="PHASE_CMD" />
         <ECAction Output="GRAPH" />
@@ -266,11 +264,11 @@
       <ECTransition Source="WAIT" Destination="VENT_SLUDGE_2" Condition="(FB_DUR_STEP7 AND DurDoneStep7)" x="3316.55" y="6552.892">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="828.6152,1617.34,829.8492,1657.708" />
       </ECTransition>
-      <ECTransition Source="START" Destination="STOP" Condition="(EMERGENCY_ON AND NOT EmergencyON) OR&#xD;&#xA;(FORCE_UNAV AND ForceUnavaibility)" x="4945.11" y="1725.576">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1190.887,297.2591,1369.622,486.8403" />
+      <ECTransition Source="START" Destination="STOP" Condition="(EMERGENCY_ON AND NOT EmergencyON) OR&#xD;&#xA;(FORCE_UNAV AND ForceUnavaibility)" x="4993.045" y="1679.365">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1206.663,281.8302,1381.002,482.8919" />
       </ECTransition>
-      <ECTransition Source="STOP" Destination="START" Condition="1" x="5290.746" y="1494.217">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1484.245,410.6816,1305.561,221.0942" />
+      <ECTransition Source="STOP" Destination="START" Condition="1" x="5348.191" y="1462.798">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1498.819,411.6403,1324.471,210.6347" />
       </ECTransition>
       <ECTransition Source="FEED" Destination="STOP" Condition="ForceUnavaibility OR NOT EmergencyON" x="4476.506" y="1810.897">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="1037.894,328.1077,1209.232,458.4095" />
@@ -302,16 +300,13 @@
       <ECTransition Source="VENT_SLUDGE_2" Destination="WAIT_2" Condition="(SB_AV AND SBAvailability)&#xD;&#xA;OR&#xD;&#xA;(SKIP AND Skip)" x="2672.424" y="7286.209">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="624.4141,1769.277,624.7231,1853.203" />
       </ECTransition>
-      <ECTransition Source="IDLEState" Destination="SLUDGE_DISCHARGE" Condition="INIT_EMERGENCY AND Init_GoToSD" x="2095.589" y="2451.465">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="435.4228,549.348,435.8791,698.8548" />
-      </ECTransition>
-      <ECTransition Source="START" Destination="WAIT_2" Condition="INIT_EMERGENCY AND Init_GoToWS8" x="975.1409" y="5062.292">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="49.34065,612.0287,74.12507,2009.268" />
+      <ECTransition Source="IDLEState" Destination="WAIT_2" Condition="INIT_EMERGENCY AND Init_GoToWS10" x="908.4998" y="5120.729">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="30.84322,652.3864,44.98218,1979.587" />
       </ECTransition>
       <ECTransition Source="WAIT_2" Destination="FEED" Condition="NOT ForceUnavaibility AND EmergencyON &#xD;&#xA;AND&#xD;&#xA;(FB_DUR_STEP10 AND DurDoneStep10)&#xD;&#xA;AND&#xD;&#xA;(START_FEED AND StartFeed)" x="1494.616" y="5114.801">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="200.1264,1734.249,260.5235,866.6995" />
       </ECTransition>
-      <ECTransition Source="IDLEState" Destination="VENT_SLUDGE_1" Condition="INIT_EMERGENCY AND Init_GoToWS2" x="2652.175" y="2009.526">
+      <ECTransition Source="IDLEState" Destination="VENT_SLUDGE_1" Condition="INIT_EMERGENCY AND Init_GoToVentSludge" x="2652.175" y="2009.526">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="619.1827,464.5396,619.64,551.537" />
       </ECTransition>
       <ECTransition Source="VENT_SLUDGE_2" Destination="SLUDGE_DISCHARGE_2" Condition="FB_DUR_STEP8 AND DurDoneStep8" x="3329.68" y="7102.252">
@@ -326,8 +321,8 @@
       <ECTransition Source="SLUDGE_DISCHARGE_2" Destination="STOP" Condition="ForceUnavaibility OR NOT EmergencyON" x="5013.738" y="5959.982">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="1211.099,1698.09,1385.202,1379.373" />
       </ECTransition>
-      <ECTransition Source="START" Destination="IDLEState" Condition="1" x="3276.027" y="1119.007">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="819.5413,268.2849,821.4792,282.8553" />
+      <ECTransition Source="START" Destination="IDLEState" Condition="1" x="3286.328" y="1110.885">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="822.3561,267.2834,820.7963,286.0941" />
       </ECTransition>
       <ECTransition Source="SLUDGE_DISCHARGE" Destination="AERATE" Condition="(L1 AND L1v)" x="2578.578" y="4098.972">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="593.2038,972.9559,593.4217,1089.837" />
