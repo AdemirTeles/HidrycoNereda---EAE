@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<busmaster xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="MODBUS" busId="MODBUS" protocol="modbus" busCycle="T#80ms" enableSymlinkOC="false" busTolerance="10" busActionMissedCycle="1" alignWithResPriority="false" ReconnectAfterTimeout="Enable">
+  <connectinfo mastertype="master" transportprotocol="tcp" interframedelay="10" />
+  <logging enable="false" filename="modbus.log" />
+  <buscoupler name="ATV320SpeedControlLightMbtcp_255" diagnostics="disabled">
+    <connectinfo transportprotocol="tcp" stationid="255" responsetimeout="500" fallbackValue="HOLD">
+      <tcp ipaddress="127.0.0.1" port="502" />
+      <HA secondaryheartbeat="Disabled" heartbeataddress="0" />
+    </connectinfo>
+    <busdevice name="ATV320SpeedControlLightMbtcp_Data">
+      <parameter addresstype="register" length="2" addressautocalculation="disable" address="1" datatype="inonly" ioevent="cyclic" modbusfunction="0" />
+      <parameter addresstype="register" length="2" addressautocalculation="disable" address="1" datatype="output" ioevent="cyclic" modbusfunction="0" />
+    </busdevice>
+  </buscoupler>
+  <buscoupler name="ATV320SpeedControlLightMbtcp_248">
+    <connectinfo transportprotocol="tcp" stationid="248">
+      <tcp ipaddress="127.0.0.1" port="502" />
+    </connectinfo>
+    <busdevice name="SynchronousPPNS">
+      <parameter addresstype="register" length="1" addressautocalculation="disable" address="9672" datatype="inonly" ioevent="requestread" />
+    </busdevice>
+    <busdevice name="AsynchronousPPN">
+      <parameter addresstype="register" length="1" addressautocalculation="disable" address="9618" datatype="inonly" ioevent="requestread" />
+    </busdevice>
+    <busdevice name="Motortype">
+      <parameter addresstype="register" length="1" addressautocalculation="disable" address="9607" datatype="inonly" ioevent="requestread" />
+    </busdevice>
+    <busdevice name="Bumpless">
+      <parameter addresstype="register" length="1" addressautocalculation="disable" address="13529" datatype="inonly" ioevent="requestread" />
+    </busdevice>
+    <busdevice name="HMIS">
+      <parameter addresstype="register" length="1" addressautocalculation="disable" address="3240" datatype="inonly" ioevent="cyclic" />
+    </busdevice>
+    <busdevice name="SynchronousFRSS">
+      <parameter addresstype="register" length="1" addressautocalculation="disable" address="9679" datatype="inonly" ioevent="requestread" />
+    </busdevice>
+    <busdevice name="AsynchronousFRS">
+      <parameter addresstype="register" length="1" addressautocalculation="disable" address="9602" datatype="inonly" ioevent="requestread" />
+    </busdevice>
+    <busdevice name="CLL">
+      <parameter addresstype="register" length="1" addressautocalculation="disable" address="7015" datatype="inonly" ioevent="requestread" />
+    </busdevice>
+    <busdevice name="FR1">
+      <parameter addresstype="register" length="1" addressautocalculation="disable" address="8413" datatype="inonly" ioevent="requestread" />
+    </busdevice>
+  </buscoupler>
+</busmaster>

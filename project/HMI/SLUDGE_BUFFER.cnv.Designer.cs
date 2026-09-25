@@ -33,6 +33,7 @@ namespace HMI.Main.Canvases
 			this.SludgeBuffer_1 = new SE.Nereda.Symbols.NeredaSludgeBuffer_2.sSettingsSLB();
 			this.SludgeBuffer = new SE.Nereda.Symbols.NeredaSludgeBuffer_2.sSludgeBufferyellow();
 			this.SludgeBuffer_2 = new SE.Nereda.Symbols.NeredaSludgeBuffer_2.sPhases();
+			this.SludgeBuffer_3 = new SE.Nereda.Symbols.NeredaSludgeBuffer_2.sSensors();
 			// 
 			// polygon7
 			// 
@@ -100,6 +101,15 @@ namespace HMI.Main.Canvases
 			this.SludgeBuffer_2.TagName = "9AA3696311BF0C3E";
 			this.SludgeBuffer_2.EndInit();
 			// 
+			// SludgeBuffer_3
+			// 
+			this.SludgeBuffer_3.BeginInit();
+			this.SludgeBuffer_3.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 520D, 80D);
+			this.SludgeBuffer_3.Name = "SludgeBuffer_3";
+			this.SludgeBuffer_3.SecurityToken = ((uint)(4294967295u));
+			this.SludgeBuffer_3.TagName = "9AA3696311BF0C3E";
+			this.SludgeBuffer_3.EndInit();
+			// 
 			// SLUDGE_BUFFER
 			// 
 			this.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(1366D)), ((float)(698D)));
@@ -111,7 +121,8 @@ namespace HMI.Main.Canvases
 			this.OpenWebPage,
 			this.SludgeBuffer_1,
 			this.SludgeBuffer,
-			this.SludgeBuffer_2});
+			this.SludgeBuffer_2,
+			this.SludgeBuffer_3});
 			this.Size = new System.Drawing.Size(1366, 698);
 
 		}
@@ -122,6 +133,7 @@ namespace HMI.Main.Canvases
 		private SE.Nereda.Symbols.NeredaSludgeBuffer_2.sSludgeBufferyellow SludgeBuffer;
 		private SE.Nereda.Symbols.NeredaSludgeBuffer_2.sSettingsSLB SludgeBuffer_1;
 		private SE.Nereda.Symbols.NeredaSludgeBuffer_2.sPhases SludgeBuffer_2;
+		private SE.Nereda.Symbols.NeredaSludgeBuffer_2.sSensors SludgeBuffer_3;
 		#endregion
 	}
 }

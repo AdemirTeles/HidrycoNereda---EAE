@@ -27,7 +27,8 @@ namespace HMI.Main.Canvases
 		private void InitializeComponent()
 		{
 			this.Mode = new SE.Nereda.Symbols.Mode.ReactorMode();
-			this.AERATION = new SE.Nereda.Symbols.NeredaCAeration.sBlowers();
+			this.sDefault1 = new SE.IoTMx.Symbols.TM262L01MDESE8T.sDefault();
+			this.sDefault2 = new SE.IoTMx.Symbols.BMTM3.sDefault();
 			// 
 			// Mode
 			// 
@@ -38,14 +39,24 @@ namespace HMI.Main.Canvases
 			this.Mode.TagName = "7A79C015B9ADE3EB";
 			this.Mode.EndInit();
 			// 
-			// AERATION
+			// sDefault1
 			// 
-			this.AERATION.BeginInit();
-			this.AERATION.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 848D, 160D);
-			this.AERATION.Name = "AERATION";
-			this.AERATION.SecurityToken = ((uint)(4294967295u));
-			this.AERATION.TagName = "6307B68BAFBA5753";
-			this.AERATION.EndInit();
+			this.sDefault1.BeginInit();
+			this.sDefault1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 120D, 104D);
+			this.sDefault1.HeaderText = "";
+			this.sDefault1.Name = "sDefault1";
+			this.sDefault1.SecurityToken = ((uint)(4294967295u));
+			this.sDefault1.TagName = "F903885E680FD8F5";
+			this.sDefault1.EndInit();
+			// 
+			// sDefault2
+			// 
+			this.sDefault2.BeginInit();
+			this.sDefault2.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 613D, 340D);
+			this.sDefault2.Name = "sDefault2";
+			this.sDefault2.SecurityToken = ((uint)(4294967295u));
+			this.sDefault2.TagName = "22B94E91D408B02E";
+			this.sDefault2.EndInit();
 			// 
 			// Canvas2
 			// 
@@ -53,12 +64,14 @@ namespace HMI.Main.Canvases
 			this.Brush = new NxtControl.Drawing.Brush("CanvasBrush");
 			this.Shapes.AddRange(new System.ComponentModel.IComponent[] {
 			this.Mode,
-			this.AERATION});
+			this.sDefault1,
+			this.sDefault2});
 			this.Size = new System.Drawing.Size(1366, 698);
 
 		}
 		private SE.Nereda.Symbols.Mode.ReactorMode Mode;
-		private SE.Nereda.Symbols.NeredaCAeration.sBlowers AERATION;
+		private SE.IoTMx.Symbols.TM262L01MDESE8T.sDefault sDefault1;
+		private SE.IoTMx.Symbols.BMTM3.sDefault sDefault2;
 		#endregion
 	}
 }
