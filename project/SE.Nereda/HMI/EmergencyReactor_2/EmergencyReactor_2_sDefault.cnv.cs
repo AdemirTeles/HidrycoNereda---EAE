@@ -28,7 +28,8 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
 			this.GRAPH_Fired += GRAPH_Fired_EventHandler;
 			this.RESET_F_TRS_Fired += RESET_F_TRS_Fired_EventHandler;
 			F_S1.Enabled = F_S1.Visible = F_S2.Enabled = F_S2.Visible = F_S3.Enabled = F_S3.Visible = F_S4.Enabled = F_S4.Visible =
-			F_S5.Enabled = F_S5.Visible = F_S6.Enabled = F_S6.Visible = F_S7.Enabled = F_S7.Visible = F_S8.Enabled = F_S8.Visible = false;
+			F_S5.Enabled = F_S5.Visible = F_S6.Enabled = F_S6.Visible = F_S7.Enabled = F_S7.Visible = F_S8.Enabled = F_S8.Visible =
+			F_S9.Enabled = F_S9.Visible = F_S10.Enabled = F_S10.Visible = false;
 			Step1.BrushColor = new NxtControl.Drawing.Color(78, 78, 78);
 			Step2.BrushColor = new NxtControl.Drawing.Color(78, 78, 78);
 			Step3.BrushColor = new NxtControl.Drawing.Color(78, 78, 78);
@@ -37,6 +38,8 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
 			Step6.BrushColor = new NxtControl.Drawing.Color(78, 78, 78);
 			Step7.BrushColor = new NxtControl.Drawing.Color(78, 78, 78);
 			Step8.BrushColor = new NxtControl.Drawing.Color(78, 78, 78);
+			Step9.BrushColor = new NxtControl.Drawing.Color(78, 78, 78);
+			Step10.BrushColor = new NxtControl.Drawing.Color(78, 78, 78);
 			Step1.PenColor = new NxtControl.Drawing.Color(0, 0, 0);
 			Step2.PenColor = new NxtControl.Drawing.Color(0, 0, 0);
 			Step3.PenColor = new NxtControl.Drawing.Color(0, 0, 0);
@@ -45,6 +48,8 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
 			Step6.PenColor = new NxtControl.Drawing.Color(0, 0, 0);
 			Step7.PenColor = new NxtControl.Drawing.Color(0, 0, 0);
 			Step8.PenColor = new NxtControl.Drawing.Color(0, 0, 0);
+			Step9.PenColor = new NxtControl.Drawing.Color(0, 0, 0);
+			Step10.PenColor = new NxtControl.Drawing.Color(0, 0, 0);
 			this.ENABLE_FORCE_IN_Fired += ENABLE_FORCE_IN_Fired_EventHandler;
 			this.FORCE_UNAV_Fired += FORCE_UNAV_Fired_EventHandler;
 		}
@@ -102,6 +107,14 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
 					Step8.BrushColor = new NxtControl.Drawing.Color(0,255,0);
 					Step8.PenColor = new NxtControl.Drawing.BlinkColor("SE.Nereda.Running");
 					break;
+				case 9:
+					Step9.BrushColor = new NxtControl.Drawing.Color(0,255,0);
+					Step9.PenColor = new NxtControl.Drawing.BlinkColor("SE.Nereda.Running");
+					break;
+				case 10:
+					Step10.BrushColor = new NxtControl.Drawing.Color(0,255,0);
+					Step10.PenColor = new NxtControl.Drawing.BlinkColor("SE.Nereda.Running");
+					break;
 			}
 		}
 
@@ -152,6 +165,18 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
 			// TODO: Implement F_S8Click
 			FireEvent_FORCE(8);
 		}
+		
+		void F_S9Click(object sender, EventArgs e)
+		{
+			// TODO: Implement F_S8Click
+			FireEvent_FORCE(9);
+		}
+		
+		void F_S10Click(object sender, EventArgs e)
+		{
+			// TODO: Implement F_S8Click
+			FireEvent_FORCE(10);
+		}
 
 		void RESET_F_TRS_Fired_EventHandler(object sender, RESET_F_TRSEventArgs e)
 		{
@@ -178,7 +203,8 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
 		{
 			// TODO: Implement ENABLE_FORCE_IN_Fired_EventHandler
 			F_S1.Enabled = F_S1.Visible = F_S2.Enabled = F_S2.Visible = F_S3.Enabled = F_S3.Visible = F_S4.Enabled = F_S4.Visible =
-			F_S5.Enabled = F_S5.Visible = F_S6.Enabled = F_S6.Visible = F_S7.Enabled = F_S7.Visible = F_S8.Enabled = F_S8.Visible = (bool) e.iEnableForce;
+			F_S5.Enabled = F_S5.Visible = F_S6.Enabled = F_S6.Visible = F_S7.Enabled = F_S7.Visible = F_S8.Enabled = F_S8.Visible = 
+			F_S9.Enabled = F_S9.Visible = F_S10.Enabled = F_S10.Visible = (bool) e.iEnableForce;
 		}
 
 		void FORCE_UNAV_Fired_EventHandler(object sender, FORCE_UNAVEventArgs e)
