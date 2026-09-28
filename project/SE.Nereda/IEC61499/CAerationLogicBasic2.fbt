@@ -115,11 +115,18 @@ MaxSp_H2 := FALSE;
 Using2Pumps_H1 := FALSE;
 Using2Pumps_H2 := FALSE;
 
-IF AerCapR1 >= AerCapR2 THEN
+IF AerationR1Cmd AND AerationR2Cmd THEN
+	IF AerCapR1 >= AerCapR2 THEN
+		Owner := 1;
+	ELSE
+		Owner := 2;
+	END_IF;
+ELSIF AerationR1Cmd AND NOT AerationR2Cmd THEN
 	Owner := 1;
 ELSE
 	Owner := 2;
 END_IF;
+
 (* ========================================================= *)
 (* HEADER 1 - REACTOR 1                                      *)
 (* Priority: Blower1 -> Blower2 -> Standby                    *)
