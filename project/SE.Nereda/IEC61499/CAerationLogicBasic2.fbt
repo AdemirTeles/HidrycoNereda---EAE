@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
-<FBType GUID="8a6fb516-4e16-4303-9bec-8b89346a3ddd" Comment="Basic Function Block Type" Name="CAerationLogicBasic2" Namespace="SE.Nereda">
+<FBType GUID="8a6fb516-4e16-4303-9bec-8b89346a3ddd" Name="CAerationLogicBasic2" Comment="Basic Function Block Type" Namespace="SE.Nereda">
   <Identification Standard="61499-2" />
   <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="6/10/2026" Remarks="Template" />
   <InterfaceList>
@@ -27,6 +27,8 @@
         <With Var="StartStdby_H2" />
         <With Var="MaxSp_H1" />
         <With Var="MaxSp_H2" />
+        <With Var="Using2Pumps_H1" />
+        <With Var="Using2Pumps_H2" />
       </Event>
     </EventOutputs>
     <InputVars>
@@ -49,6 +51,8 @@
       <VarDeclaration ID="DFDB6D6DAFE2FA40" Name="StartStdby_H2" Type="BOOL" />
       <VarDeclaration ID="1B895462E4166559" Name="MaxSp_H1" Type="BOOL" />
       <VarDeclaration ID="F7BB9EFC676442B0" Name="MaxSp_H2" Type="BOOL" />
+      <VarDeclaration ID="666629205E956536" Name="Using2Pumps_H1" Type="BOOL" />
+      <VarDeclaration ID="CF61785EEFC670F6" Name="Using2Pumps_H2" Type="BOOL" />
     </OutputVars>
   </InterfaceList>
   <BasicFB ID="5d63002f-a7b1-4326-a938-7f8dd38ad271">
@@ -72,17 +76,17 @@
       <ECState Name="STATE1" x="4460" y="1710.157">
         <ECAction Algorithm="algLastValue" Output="CNF_CMD" />
       </ECState>
-      <ECTransition Source="START" Destination="REQ" Condition="AERATION_CMD" x="3284.666" y="1517.355">
+      <ECTransition Source="START" Destination="REQ" Condition="AERATION_CMD" x="3284.601" y="1517.355">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="765.0706,334.0889,875.8425,412.4798" />
       </ECTransition>
-      <ECTransition Source="REQ" Destination="REQ" Condition="Owner = 0" x="4012.396" y="2303.689" />
-      <ECTransition Source="REQ" Destination="STATE1" Condition="Last_MaxSp_H1 &lt;&gt; MaxSp_H1 OR&#xD;&#xA;Last_MaxSp_H2 &lt;&gt; MaxSp_H2 OR&#xD;&#xA;Last_StartScndBL_H1 &lt;&gt; StartScndBL_H1 OR&#xD;&#xA;Last_StartScndBL_H2 &lt;&gt; StartScndBL_H2 OR&#xD;&#xA;Last_StartStdby_H1 &lt;&gt; StartStdby_H1 OR&#xD;&#xA;Last_StartStdby_H2 &lt;&gt; StartStdby_H2" x="4233.947" y="1829.53">
+      <ECTransition Source="REQ" Destination="REQ" Condition="Owner = 0" x="4012.395" y="2303.689" />
+      <ECTransition Source="REQ" Destination="STATE1" Condition="Last_MaxSp_H1 &lt;&gt; MaxSp_H1 OR&#xD;&#xA;Last_MaxSp_H2 &lt;&gt; MaxSp_H2 OR&#xD;&#xA;Last_StartScndBL_H1 &lt;&gt; StartScndBL_H1 OR&#xD;&#xA;Last_StartScndBL_H2 &lt;&gt; StartScndBL_H2 OR&#xD;&#xA;Last_StartStdby_H1 &lt;&gt; StartStdby_H1 OR&#xD;&#xA;Last_StartStdby_H2 &lt;&gt; StartStdby_H2" x="4233.971" y="1829.593">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="1048.917,463.5291,1076.615,437.9943" />
       </ECTransition>
-      <ECTransition Source="STATE1" Destination="START" Condition="1" x="3472.97" y="1448.686">
+      <ECTransition Source="STATE1" Destination="START" Condition="1" x="3472.932" y="1448.688">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="937.6135,390.2598,797.8777,342.9702" />
       </ECTransition>
-      <ECTransition Source="REQ" Destination="START" Condition="1" x="3318.267" y="1693.031">
+      <ECTransition Source="REQ" Destination="START" Condition="1" x="3318.219" y="1693.031">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="889.9545,470.8896,780.2292,392.7963" />
       </ECTransition>
     </ECC>
@@ -99,6 +103,9 @@ StartStdby_H2 := FALSE;
 
 MaxSp_H1 := FALSE;
 MaxSp_H2 := FALSE;
+
+Using2Pumps_H1 := FALSE;
+Using2Pumps_H2 := FALSE;
 (* ========================================================= *)
 (* HEADER 1 - REACTOR 1                                      *)
 (* Priority: Blower1 -> Blower2 -> Standby                    *)
@@ -111,10 +118,12 @@ IF AerationR1Cmd THEN
         IF Blower1FbReady THEN
             StartScndBL_H1 := FALSE;
             StartStdby_H1 := FALSE;
+            Using2Pumps_H1 := FALSE;
         ELSIF Owner = 0 OR Owner = 1 THEN
             StartScndBL_H1 := FALSE;
             StartStdby_H1 := TRUE;
             Owner := 1;
+            Using2Pumps_H1 := FALSE;
         END_IF;
 
 
@@ -124,14 +133,18 @@ IF AerationR1Cmd THEN
             StartScndBL_H1 := TRUE;
             StartStdby_H1 := FALSE;
             Owner := 1;
+            Using2Pumps_H1 := TRUE;
+            
         ELSIF (Owner = 0 OR Owner = 1) THEN
 
             StartScndBL_H1 := Blower2FbReady;
             StartStdby_H1 := TRUE;
             Owner := 1;
             MaxSp_H1 := ((Blower1FbReady +  Blower2FbReady +  Blower3FbReady) = 1);
+            Using2Pumps_H1 := NOT MaxSp_H1;
     	ELSIF Blower1FbReady THEN
     		MaxSp_H1 := TRUE;
+    		Using2Pumps_H1 := FALSE;
     		
         END_IF;
     END_IF;
@@ -150,10 +163,12 @@ IF AerationR2Cmd THEN
         IF Blower4FbReady THEN
             StartScndBL_H2 := FALSE;
             StartStdby_H2 := FALSE;
+            Using2Pumps_H2 := FALSE;
         ELSIF Owner = 0 OR Owner = 2 THEN
             StartScndBL_H2 := FALSE;
             StartStdby_H2 := TRUE;
             Owner := 2;
+            Using2Pumps_H2 := FALSE;
         END_IF;
 
 
@@ -163,19 +178,24 @@ IF AerationR2Cmd THEN
             StartScndBL_H2 := TRUE;
             StartStdby_H2 := FALSE;
             Owner := 2;
+            Using2Pumps_H2 := TRUE;
         ELSIF (Owner = 0 OR Owner = 2) THEN
             StartScndBL_H2 := Blower3FbReady;
             StartStdby_H2 := TRUE;
             Owner := 2;
             MaxSp_H2 := ((Blower2FbReady +  Blower3FbReady +  Blower4FbReady) = 1);
+            Using2Pumps_H2 := NOT MaxSp_H2;
          ELSIF Blower4FbReady THEN
     		MaxSp_H2 := TRUE;
+    		Using2Pumps_H2 := FALSE;
         END_IF;
     END_IF;
 END_IF;
 
 IF NOT (StartScndBL_H2 OR StartStdby_H2 OR StartScndBL_H1 OR StartStdby_H1) THEN
 	Owner := 0;
+	Using2Pumps_H1 := FALSE;
+	Using2Pumps_H2 := FALSE;
 END_IF;]]></ST>
     </Algorithm>
     <Algorithm ID="6955cf78-208c-4e67-a99e-0bf01b559f9c" Name="algLastValue">
