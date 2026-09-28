@@ -17,6 +17,10 @@
         <With Var="Blower3FbReady" />
         <With Var="Blower4FbReady" />
         <With Var="MaximumCapacity" />
+        <With Var="Blower1FbRunning" />
+        <With Var="Blower2FbRunning" />
+        <With Var="Blower3FbRunning" />
+        <With Var="Blower4FbRunning" />
       </Event>
     </EventInputs>
     <EventOutputs>
@@ -43,6 +47,10 @@
       <VarDeclaration ID="7D28FD8AC101CEE8" Name="Blower3FbReady" Type="BOOL" />
       <VarDeclaration ID="BD31FDCAB4D0C603" Name="Blower4FbReady" Type="BOOL" />
       <VarDeclaration ID="15021417A9DDC3CD" Name="MaximumCapacity" Type="REAL" />
+      <VarDeclaration ID="CB32EC934DF76E18" Name="Blower1FbRunning" Type="BOOL" />
+      <VarDeclaration ID="8557D5BDB3557853" Name="Blower2FbRunning" Type="BOOL" />
+      <VarDeclaration ID="987796B5153B8A12" Name="Blower3FbRunning" Type="BOOL" />
+      <VarDeclaration ID="6E6C99EFCC1CAE58" Name="Blower4FbRunning" Type="BOOL" />
     </InputVars>
     <OutputVars>
       <VarDeclaration ID="4F511D89CFAD767B" Name="StartScndBL_H1" Type="BOOL" />
@@ -106,6 +114,12 @@ MaxSp_H2 := FALSE;
 
 Using2Pumps_H1 := FALSE;
 Using2Pumps_H2 := FALSE;
+
+IF AerCapR1 >= AerCapR2 THEN
+	Owner := 1;
+ELSE
+	Owner := 2;
+END_IF;
 (* ========================================================= *)
 (* HEADER 1 - REACTOR 1                                      *)
 (* Priority: Blower1 -> Blower2 -> Standby                    *)
@@ -115,34 +129,31 @@ IF AerationR1Cmd THEN
 
     (* 1 blower required *)
     IF AerCapR1 <= MaximumCapacity THEN
-        IF Blower1FbReady THEN
+        IF Blower1FbReady OR Blower1FbRunning THEN
             StartScndBL_H1 := FALSE;
             StartStdby_H1 := FALSE;
             Using2Pumps_H1 := FALSE;
-        ELSIF Owner = 0 OR Owner = 1 THEN
+        ELSIF Owner = 1 THEN
             StartScndBL_H1 := FALSE;
             StartStdby_H1 := TRUE;
-            Owner := 1;
             Using2Pumps_H1 := FALSE;
         END_IF;
 
 
     (* 2 blowers required *)
     ELSIF AerCapR1 > MaximumCapacity THEN
-        IF Blower1FbReady AND Blower2FbReady AND (Owner = 0 OR Owner = 1) THEN
+        IF (Blower1FbReady OR Blower1FbRunning) AND (Blower2FbReady OR Blower2FbRunning) AND (Owner = 1) THEN
             StartScndBL_H1 := TRUE;
             StartStdby_H1 := FALSE;
-            Owner := 1;
             Using2Pumps_H1 := TRUE;
             
-        ELSIF (Owner = 0 OR Owner = 1) THEN
+        ELSIF (Owner = 1) THEN
 
-            StartScndBL_H1 := Blower2FbReady;
+            StartScndBL_H1 := Blower2FbReady OR Blower2FbRunning;
             StartStdby_H1 := TRUE;
-            Owner := 1;
-            MaxSp_H1 := ((Blower1FbReady +  Blower2FbReady +  Blower3FbReady) = 1);
+            MaxSp_H1 := (((Blower1FbReady OR Blower1FbRunning) +  (Blower2FbReady OR Blower2FbRunning) +  (Blower3FbReady OR Blower3FbRunning)) = 1);
             Using2Pumps_H1 := NOT MaxSp_H1;
-    	ELSIF Blower1FbReady THEN
+    	ELSIF (Blower1FbReady OR Blower1FbRunning) THEN
     		MaxSp_H1 := TRUE;
     		Using2Pumps_H1 := FALSE;
     		
@@ -160,32 +171,29 @@ IF AerationR2Cmd THEN
 	
     (* 1 blower required *)
     IF AerCapR2 <= MaximumCapacity THEN
-        IF Blower4FbReady THEN
+        IF Blower4FbReady OR Blower4FbRunning THEN
             StartScndBL_H2 := FALSE;
             StartStdby_H2 := FALSE;
             Using2Pumps_H2 := FALSE;
-        ELSIF Owner = 0 OR Owner = 2 THEN
+        ELSIF Owner = 2 THEN
             StartScndBL_H2 := FALSE;
             StartStdby_H2 := TRUE;
-            Owner := 2;
             Using2Pumps_H2 := FALSE;
         END_IF;
 
 
     (* 2 blowers required *)
     ELSIF AerCapR2 > MaximumCapacity THEN
-        IF Blower4FbReady AND Blower3FbReady AND (Owner = 0 OR Owner = 2) THEN
+        IF (Blower4FbReady OR Blower4FbRunning) AND (Blower3FbReady OR Blower3FbRunning) AND (Owner = 2) THEN
             StartScndBL_H2 := TRUE;
             StartStdby_H2 := FALSE;
-            Owner := 2;
             Using2Pumps_H2 := TRUE;
-        ELSIF (Owner = 0 OR Owner = 2) THEN
-            StartScndBL_H2 := Blower3FbReady;
+        ELSIF (Owner = 2) THEN
+            StartScndBL_H2 := (Blower3FbReady OR Blower3FbRunning);
             StartStdby_H2 := TRUE;
-            Owner := 2;
-            MaxSp_H2 := ((Blower2FbReady +  Blower3FbReady +  Blower4FbReady) = 1);
+            MaxSp_H2 := (((Blower2FbReady OR Blower2FbRunning) +  (Blower3FbReady OR Blower3FbRunning) +  (Blower4FbReady OR Blower4FbRunning)) = 1);
             Using2Pumps_H2 := NOT MaxSp_H2;
-         ELSIF Blower4FbReady THEN
+         ELSIF Blower4FbReady OR Blower4FbRunning THEN
     		MaxSp_H2 := TRUE;
     		Using2Pumps_H2 := FALSE;
         END_IF;

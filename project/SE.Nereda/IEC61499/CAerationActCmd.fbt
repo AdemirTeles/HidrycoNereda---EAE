@@ -92,10 +92,11 @@
     </OutputVars>
   </InterfaceList>
   <BasicFB ID="5d63002f-a7b1-4326-a938-7f8dd38ad271">
-    <Attribute Name="FBType.Basic.Algorithm.Order" Value="OpenScndBLVlv_H1,StartScndBL_H1,OpenScndBLVlv_H2,StartScndBL_H2,StartStdbyBLVlv_H1,StartStdbyBL_H1,StartStdbyBLVlv_H2,StartStdbyBL_H2,StopBlowers,CloseValves" />
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="OpenScndBLVlv_H1,StartScndBL_H1,OpenScndBLVlv_H2,StartScndBL_H2,StartStdbyBLVlv_H1,StartStdbyBL_H1,StartStdbyBLVlv_H2,StartStdbyBL_H2,StopBlowers,CloseValves,algReturn" />
     <InternalVars>
       <VarDeclaration ID="211747A19A38948B" Name="NormalModeR1" Type="BOOL" />
       <VarDeclaration ID="2A7296943EF560F8" Name="NormalModeR2" Type="BOOL" />
+      <VarDeclaration ID="7691E1C44BE803E3" Name="BlowersOk" Type="BOOL" />
     </InternalVars>
     <ECC>
       <ECState Name="START" Comment="Initial State" x="4676.108" y="2354.555" />
@@ -106,7 +107,9 @@
         <ECAction Algorithm="StartScndBL_H1" Output="CNF_BLR_VLV_CMD" />
         <ECAction Output="CNF_SPEED_SP" />
       </ECState>
-      <ECState Name="Idle_State" x="4563.189" y="4754.509" />
+      <ECState Name="Idle_State" x="4563.189" y="4754.509">
+        <ECAction Algorithm="algReturn" />
+      </ECState>
       <ECState Name="StartScndBLVlv_H2" x="2843.73" y="3077.986">
         <ECAction Algorithm="OpenScndBLVlv_H2" Output="CNF_BLR_VLV_CMD" />
       </ECState>
@@ -138,7 +141,7 @@
       <ECTransition Source="START" Destination="Idle_State" Condition="CMD_FB_RDY" x="4673.519" y="3542.258">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="1176.9,788.8483,1168.097,980.2346" />
       </ECTransition>
-      <ECTransition Source="Idle_State" Destination="StartScndBLVlv_H1" Condition="Header1 AND StartScndBL_H1 AND ((NOT StartStdby_H1 AND Valve2FbClosed) OR StartStdby_H1)" x="2666.432" y="3900.002">
+      <ECTransition Source="Idle_State" Destination="StartScndBLVlv_H1" Condition="Header1 AND StartScndBL_H1 AND NOT BlowersOk AND ((NOT StartStdby_H1 AND Valve2FbClosed) OR StartStdby_H1)" x="2666.432" y="3900.002">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="810.8023,1039.181,518.0956,908.1127" />
       </ECTransition>
       <ECTransition Source="StartScndBLVlv_H1" Destination="StartScndBL_H1" Condition="CmdValve1 = Valve1FbOpened&#xD;&#xA;AND&#xD;&#xA;CmdBlowerValve2 = ValveBlower2FbOpened" x="816.8831" y="3346.97">
@@ -147,7 +150,7 @@
       <ECTransition Source="StartScndBL_H1" Destination="Idle_State" Condition="1" x="2290.488" y="4238.066">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="283.7883,1041.368,805.9755,1087.006" />
       </ECTransition>
-      <ECTransition Source="Idle_State" Destination="StartScndBLVlv_H2" Condition="Header2 AND StartScndBL_H2 AND ((NOT StartStdby_H2 AND Valve2FbClosed) OR StartStdby_H2)" x="3578.566" y="3812.215">
+      <ECTransition Source="Idle_State" Destination="StartScndBLVlv_H2" Condition="Header2 AND NOT BlowersOk AND StartScndBL_H2 AND ((NOT StartStdby_H2 AND Valve2FbClosed) OR StartStdby_H2)" x="3578.566" y="3812.215">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="951.933,1010.308,816.9107,878.4611" />
       </ECTransition>
       <ECTransition Source="StartScndBLVlv_H2" Destination="StartScndBL_H2" Condition="CmdValve3 = Valve3FbOpened&#xD;&#xA;AND&#xD;&#xA;CmdBlowerValve3= ValveBlower3FbOpened" x="2841.883" y="3346.97">
@@ -156,7 +159,7 @@
       <ECTransition Source="StartScndBL_H2" Destination="Idle_State" Condition="1" x="3484.879" y="4135.052">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="706.726,991.0817,1004.635,1068.864" />
       </ECTransition>
-      <ECTransition Source="Idle_State" Destination="StartStdbyBLVlv_H1" Condition="Header1 AND StartStdby_H1 AND ((NOT StartScndBL_H1 AND ValveBlower2FbClosed) OR (StartScndBL_H1))" x="4919.327" y="3926.481">
+      <ECTransition Source="Idle_State" Destination="StartStdbyBLVlv_H1" Condition="Header1 AND StartStdby_H1 AND NOT BlowersOk AND ((NOT StartScndBL_H1 AND ValveBlower2FbClosed) OR (StartScndBL_H1))" x="4919.327" y="3926.481">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="1202.331,1047.524,1257.619,916.9456" />
       </ECTransition>
       <ECTransition Source="StartStdbyBLVlv_H1" Destination="StartStdbyBL_H1" Condition="CmdValve1 = Valve1FbOpened &#xD;&#xA;AND&#xD;&#xA;CmdValve2 = Valve2FbOpened&#xD;&#xA;AND&#xD;&#xA;CmdBlowerValve3 = ValveBlower3FbOpened" x="5268.883" y="3352.685">
@@ -165,7 +168,7 @@
       <ECTransition Source="StartStdbyBL_H1" Destination="Idle_State" Condition="1" x="4945.161" y="4137.346">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="1265.415,987.2582,1212.069,1073.741" />
       </ECTransition>
-      <ECTransition Source="Idle_State" Destination="StartStdbyBLVlv_H2" Condition="Header2 AND StartStdby_H2 AND ((NOT StartScndBL_H2 AND ValveBlower3FbClosed) OR (StartScndBL_H2))" x="5878.271" y="3942.562">
+      <ECTransition Source="Idle_State" Destination="StartStdbyBLVlv_H2" Condition="Header2 AND StartStdby_H2 AND NOT BlowersOk AND ((NOT StartScndBL_H2 AND ValveBlower3FbClosed) OR (StartScndBL_H2))" x="5878.271" y="3942.562">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="1358.978,1052.673,1571.878,922.5173" />
       </ECTransition>
       <ECTransition Source="StartStdbyBLVlv_H2" Destination="StartStdbyBL_H2" Condition="CmdValve3 = Valve3FbOpened &#xD;&#xA;AND&#xD;&#xA;CmdValve2 = Valve2FbOpened&#xD;&#xA;AND&#xD;&#xA;CmdBlowerValve2= ValveBlower2FbOpened" x="7293.884" y="3352.685">
@@ -174,7 +177,7 @@
       <ECTransition Source="StartStdbyBL_H2" Destination="Idle_State" Condition="1" x="5971.232" y="4190.302">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="1597.682,1005.357,1393.474,1090.946" />
       </ECTransition>
-      <ECTransition Source="Idle_State" Destination="START" Condition="1" x="4619.572" y="3479.532">
+      <ECTransition Source="Idle_State" Destination="START" Condition="BlowersOk" x="4619.572" y="3479.532">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="1150.412,959.2826,1159.412,767.9834" />
       </ECTransition>
       <ECTransition Source="START" Destination="StopBlowers" Condition="(NOT Header1 AND NOT Header2 AND (Blower2FbRunning OR Blower3FbRunning)) OR&#xD;&#xA;&#xD;&#xA;(Header1 AND NOT StartScndBL_H1 AND NOT StartStdby_H2 AND Blower2FbRunning) OR&#xD;&#xA;&#xD;&#xA;(Header2 AND NOT StartScndBL_H2 AND NOT StartStdby_H1 AND Blower3FbRunning) OR&#xD;&#xA;&#xD;&#xA;(Header1 AND StartScndBL_H1 AND NOT StartStdby_H1 AND NOT StartScndBL_H2 AND Blower3FbRunning) OR&#xD;&#xA;&#xD;&#xA;(Header2 AND StartScndBL_H2 AND NOT StartStdby_H2 AND NOT StartScndBL_H1 AND Blower2FbRunning)" x="4111.863" y="1675.746">
@@ -306,6 +309,30 @@ END_IF;
 IF Header2 AND StartScndBL_H2 AND NOT StartStdby_H1 AND NOT StartStdby_H2 THEN
 	CmdBlowerValve2 := FALSE;
 END_IF;]]></ST>
+    </Algorithm>
+    <Algorithm ID="0504bfa6-243b-4f5a-981c-42af920f75dd" Name="algReturn">
+      <ST><![CDATA[IF Header1 AND StartScndBL_H1 AND NOT StartStdby_H1 AND (SpeedSp_BL2 = SpeedSp_H1) THEN
+	BlowersOk := CmdBlower2 AND CmdBlowerValve2 AND CmdValve1;
+	
+ELSIF Header1 AND NOT StartScndBL_H1 AND StartStdby_H1 AND (SpeedSp_BL3 = SpeedSp_H1)THEN
+	BlowersOk := CmdBlower3 AND CmdBlowerValve3 AND CmdValve1 AND CmdValve2;
+	
+ELSIF Header1 AND StartScndBL_H1 AND StartStdby_H1 AND ((SpeedSp_BL2 = SpeedSp_H1) AND (SpeedSp_BL3 = SpeedSp_H1)) THEN
+	BlowersOk := CmdBlower2 AND CmdBlowerValve2 AND CmdBlower3 AND 
+	CmdBlowerValve3 AND CmdValve1 AND CmdValve2;
+	
+ELSIF Header2 AND StartScndBL_H2 AND NOT StartStdby_H2 AND (SpeedSp_BL3 = SpeedSp_H2) THEN
+	BlowersOk := CmdBlower3 AND CmdBlowerValve3 AND CmdValve3;
+	
+ELSIF Header2 AND NOT StartScndBL_H2 AND StartStdby_H2 AND (SpeedSp_BL2 = SpeedSp_H2)THEN
+	BlowersOk := CmdBlower2 AND CmdBlowerValve2 AND CmdValve2 AND CmdValve3;
+	
+ELSIF Header2 AND StartScndBL_H2 AND StartStdby_H2 AND ((SpeedSp_BL2 = SpeedSp_H2) AND (SpeedSp_BL3 = SpeedSp_H2)) THEN
+	BlowersOk := CmdBlower2 AND CmdBlowerValve2 AND CmdBlower3 AND 
+	CmdBlowerValve3 AND CmdValve2 AND CmdValve3;
+	
+END_IF;
+;]]></ST>
     </Algorithm>
   </BasicFB>
 </FBType>
