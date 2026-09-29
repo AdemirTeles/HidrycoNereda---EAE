@@ -29,11 +29,13 @@ namespace HMI.Main.Canvases
 			this.HeartBeat = new SE.Nereda.Symbols.HeartBeat.sDefault();
 			this.Mode = new SE.Nereda.Symbols.Mode.ReactorMode();
 			this.OpenWebPage = new SE.Nereda.Symbols.OpenWebPage.sDefault();
-			this.EmergencyManagement = new SE.Nereda.Symbols.EmergencyManagement.sDataR1();
 			this.EmergencyManagement_1 = new SE.Nereda.Symbols.EmergencyManagement.sSettingsBtn();
-			this.EmergencyManagement_2 = new SE.Nereda.Symbols.EmergencyManagement.sDataR2();
-			this.EmergencyManagement_3 = new SE.Nereda.Symbols.EmergencyManagement.sDataR3();
 			this.EmergencyManagement_4 = new SE.Nereda.Symbols.EmergencyManagement.sReactorAvExist();
+			this.EmergencyManagement = new SE.Nereda.Symbols.EmergencyManagement.sDataR1();
+			this.EmergencyManagement_2 = new SE.Nereda.Symbols.EmergencyManagement.sDataR2();
+			this.EmergencyManagement_3 = new SE.Nereda.Symbols.EmergencyManagement.sSettingsBtn();
+			this.EmergencyReactor1 = new SE.Nereda.Symbols.EmergencyReactor_2.sDefault();
+			this.EmergencyReactor2 = new SE.Nereda.Symbols.EmergencyReactor_2.sDefault();
 			// 
 			// HeartBeat
 			// 
@@ -62,15 +64,6 @@ namespace HMI.Main.Canvases
 			this.OpenWebPage.TagName = "61745BDDB91DBEF5";
 			this.OpenWebPage.EndInit();
 			// 
-			// EmergencyManagement
-			// 
-			this.EmergencyManagement.BeginInit();
-			this.EmergencyManagement.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 216D, 64D);
-			this.EmergencyManagement.Name = "EmergencyManagement";
-			this.EmergencyManagement.SecurityToken = ((uint)(4294967295u));
-			this.EmergencyManagement.TagName = "A990A73C5D482C0A";
-			this.EmergencyManagement.EndInit();
-			// 
 			// EmergencyManagement_1
 			// 
 			this.EmergencyManagement_1.BeginInit();
@@ -79,24 +72,6 @@ namespace HMI.Main.Canvases
 			this.EmergencyManagement_1.SecurityToken = ((uint)(4294967295u));
 			this.EmergencyManagement_1.TagName = "A990A73C5D482C0A";
 			this.EmergencyManagement_1.EndInit();
-			// 
-			// EmergencyManagement_2
-			// 
-			this.EmergencyManagement_2.BeginInit();
-			this.EmergencyManagement_2.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 672D, 64D);
-			this.EmergencyManagement_2.Name = "EmergencyManagement_2";
-			this.EmergencyManagement_2.SecurityToken = ((uint)(4294967295u));
-			this.EmergencyManagement_2.TagName = "A990A73C5D482C0A";
-			this.EmergencyManagement_2.EndInit();
-			// 
-			// EmergencyManagement_3
-			// 
-			this.EmergencyManagement_3.BeginInit();
-			this.EmergencyManagement_3.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 1128D, 64D);
-			this.EmergencyManagement_3.Name = "EmergencyManagement_3";
-			this.EmergencyManagement_3.SecurityToken = ((uint)(4294967295u));
-			this.EmergencyManagement_3.TagName = "A990A73C5D482C0A";
-			this.EmergencyManagement_3.EndInit();
 			// 
 			// EmergencyManagement_4
 			// 
@@ -107,6 +82,53 @@ namespace HMI.Main.Canvases
 			this.EmergencyManagement_4.TagName = "A990A73C5D482C0A";
 			this.EmergencyManagement_4.EndInit();
 			// 
+			// EmergencyManagement
+			// 
+			this.EmergencyManagement.BeginInit();
+			this.EmergencyManagement.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 296D, 112D);
+			this.EmergencyManagement.Name = "EmergencyManagement";
+			this.EmergencyManagement.SecurityToken = ((uint)(4294967295u));
+			this.EmergencyManagement.TagName = "A990A73C5D482C0A";
+			this.EmergencyManagement.EndInit();
+			// 
+			// EmergencyManagement_2
+			// 
+			this.EmergencyManagement_2.BeginInit();
+			this.EmergencyManagement_2.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 784D, 104D);
+			this.EmergencyManagement_2.Name = "EmergencyManagement_2";
+			this.EmergencyManagement_2.SecurityToken = ((uint)(4294967295u));
+			this.EmergencyManagement_2.TagName = "A990A73C5D482C0A";
+			this.EmergencyManagement_2.EndInit();
+			// 
+			// EmergencyManagement_3
+			// 
+			this.EmergencyManagement_3.BeginInit();
+			this.EmergencyManagement_3.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 592D, 72D);
+			this.EmergencyManagement_3.Name = "EmergencyManagement_3";
+			this.EmergencyManagement_3.SecurityToken = ((uint)(4294967295u));
+			this.EmergencyManagement_3.TagName = "A990A73C5D482C0A";
+			this.EmergencyManagement_3.EndInit();
+			// 
+			// EmergencyReactor1
+			// 
+			this.EmergencyReactor1.BeginInit();
+			this.EmergencyReactor1._iReactorName = "Reactor Name";
+			this.EmergencyReactor1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 48D, 80D);
+			this.EmergencyReactor1.Name = "EmergencyReactor1";
+			this.EmergencyReactor1.SecurityToken = ((uint)(4294967295u));
+			this.EmergencyReactor1.TagName = "A5740D5EBB5FFB16";
+			this.EmergencyReactor1.EndInit();
+			// 
+			// EmergencyReactor2
+			// 
+			this.EmergencyReactor2.BeginInit();
+			this.EmergencyReactor2._iReactorName = "Reactor Name";
+			this.EmergencyReactor2.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 1072D, 88D);
+			this.EmergencyReactor2.Name = "EmergencyReactor2";
+			this.EmergencyReactor2.SecurityToken = ((uint)(4294967295u));
+			this.EmergencyReactor2.TagName = "94EBD1CCA84A7246";
+			this.EmergencyReactor2.EndInit();
+			// 
 			// EMERGENCY_RECIPE
 			// 
 			this.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(1366D)), ((float)(698D)));
@@ -115,11 +137,13 @@ namespace HMI.Main.Canvases
 			this.HeartBeat,
 			this.Mode,
 			this.OpenWebPage,
-			this.EmergencyManagement,
 			this.EmergencyManagement_1,
+			this.EmergencyManagement_4,
+			this.EmergencyManagement,
 			this.EmergencyManagement_2,
 			this.EmergencyManagement_3,
-			this.EmergencyManagement_4});
+			this.EmergencyReactor1,
+			this.EmergencyReactor2});
 			this.Size = new System.Drawing.Size(1366, 698);
 
 		}
@@ -129,8 +153,10 @@ namespace HMI.Main.Canvases
 		private SE.Nereda.Symbols.EmergencyManagement.sDataR1 EmergencyManagement;
 		private SE.Nereda.Symbols.EmergencyManagement.sSettingsBtn EmergencyManagement_1;
 		private SE.Nereda.Symbols.EmergencyManagement.sDataR2 EmergencyManagement_2;
-		private SE.Nereda.Symbols.EmergencyManagement.sDataR3 EmergencyManagement_3;
+		private SE.Nereda.Symbols.EmergencyManagement.sSettingsBtn EmergencyManagement_3;
 		private SE.Nereda.Symbols.EmergencyManagement.sReactorAvExist EmergencyManagement_4;
+		private SE.Nereda.Symbols.EmergencyReactor_2.sDefault EmergencyReactor1;
+		private SE.Nereda.Symbols.EmergencyReactor_2.sDefault EmergencyReactor2;
 		#endregion
 	}
 }

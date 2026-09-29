@@ -605,7 +605,7 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
 			// 
 			// ReactorNotAv
 			// 
-			this.ReactorNotAv.Bounds = new NxtControl.Drawing.RectF(((float)(440D)), ((float)(232D)), ((float)(168D)), ((float)(96D)));
+			this.ReactorNotAv.Bounds = new NxtControl.Drawing.RectF(((float)(208D)), ((float)(248D)), ((float)(168D)), ((float)(96D)));
 			this.ReactorNotAv.Font = new NxtControl.Drawing.Font("Arial", 16F, System.Drawing.FontStyle.Bold);
 			this.ReactorNotAv.Name = "ReactorNotAv";
 			this.ReactorNotAv.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.BlinkColor("SE.HwCommon.DevLEDOrangeRedFlash"), 1F, NxtControl.Drawing.DashStyle.Solid);
