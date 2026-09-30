@@ -2,7 +2,7 @@
 <!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
 <FBType GUID="8a6fb516-4e16-4303-9bec-8b89346a3ddd" Name="CAerationLogicBasic2" Comment="Basic Function Block Type" Namespace="SE.Nereda">
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Schneider Electric" Version="4.0" Author=" " Date="9/29/2026" Remarks="Rev4 - Limite 3, continuidade (transfere sem desligar) e alocacao so por rota passavel" />
+  <VersionInfo Organization="Schneider Electric" Version="6.0" Author=" " Date="9/29/2026" Remarks="Rev6 - B1/B4 so contam com a valvula de cima passavel (+4 entradas VB1/VB4)" />
   <InterfaceList>
     <EventInputs>
       <Event ID="D2C11A8772DD75BE" Name="AERATION_CMD">
@@ -31,6 +31,10 @@
         <With Var="ValveBlower2FbOpened" />
         <With Var="ValveBlower3FbReady" />
         <With Var="ValveBlower3FbOpened" />
+        <With Var="ValveBlower1FbReady" />
+        <With Var="ValveBlower1FbOpened" />
+        <With Var="ValveBlower4FbReady" />
+        <With Var="ValveBlower4FbOpened" />
       </Event>
     </EventInputs>
     <EventOutputs>
@@ -71,6 +75,10 @@
       <VarDeclaration ID="1030013A11257D60" Name="ValveBlower2FbOpened" Type="BOOL" />
       <VarDeclaration ID="7FE01B1E5554C313" Name="ValveBlower3FbReady" Type="BOOL" />
       <VarDeclaration ID="55B3DAAF979CC2E7" Name="ValveBlower3FbOpened" Type="BOOL" />
+      <VarDeclaration ID="68E67740CA57E71D" Name="ValveBlower1FbReady" Type="BOOL" InitialValue="TRUE" Comment="Valvula do B1 (AV46 012) pronta/automatico. Padrao TRUE = comportamento anterior se desligada" />
+      <VarDeclaration ID="99B4843F7ED498C4" Name="ValveBlower1FbOpened" Type="BOOL" InitialValue="TRUE" Comment="Valvula do B1 (AV46 012) aberta. Padrao TRUE = comportamento anterior se desligada" />
+      <VarDeclaration ID="C4B9BEEAC199E058" Name="ValveBlower4FbReady" Type="BOOL" InitialValue="TRUE" Comment="Valvula do B4 (AV46 042) pronta/automatico. Padrao TRUE = comportamento anterior se desligada" />
+      <VarDeclaration ID="3B81A0671CD7BCF6" Name="ValveBlower4FbOpened" Type="BOOL" InitialValue="TRUE" Comment="Valvula do B4 (AV46 042) aberta. Padrao TRUE = comportamento anterior se desligada" />
     </InputVars>
     <OutputVars>
       <VarDeclaration ID="4F511D89CFAD767B" Name="StartScndBL_H1" Type="BOOL" />
@@ -134,6 +142,8 @@
       <VarDeclaration ID="E8E852ED39F6BA13" Name="NewB2" Type="INT" />
       <VarDeclaration ID="297116517E25DCAE" Name="NewB3" Type="INT" />
       <VarDeclaration ID="436392D6EDD63F56" Name="SwapRouteOk" Type="BOOL" />
+      <VarDeclaration ID="B6D3DE1C81A97984" Name="ActH1" Type="INT" Comment="Sopradores soprando de fato no R1" />
+      <VarDeclaration ID="F9B92E548C9D8291" Name="ActH2" Type="INT" Comment="Sopradores soprando de fato no R2" />
     </InternalVars>
     <ECC>
       <ECState Name="START" Comment="Initial State" x="2530.251" y="1058.412" />
@@ -159,7 +169,7 @@
     <Algorithm ID="42cf27f2-e44a-45a4-bc96-9aae58cc0c1e" Name="REQ">
       <ST><![CDATA[;
 (* ======================================================================== *)
-(* CAerationLogicBasic2 - Rev4 (limite 3 + continuidade + rota passavel)    *)
+(* CAerationLogicBasic2 - Rev6                                              *)
 (* Alocacao de sopradores por header                                        *)
 (*   H1 (Reator 1): B1 fixo -> B2 (StartScndBL_H1) -> B3 (StartStdby_H1)     *)
 (*   H2 (Reator 2): B4 fixo -> B3 (StartScndBL_H2) -> B2 (StartStdby_H2)     *)
@@ -168,21 +178,28 @@
 (*   2) Capacidade: 2o soprador quando AerCapRx > MaximumCapacity           *)
 (*   3) Em disputa pelo mesmo soprador compartilhado, o header "dono" vence *)
 (*      (B2 -> H1, B3 -> H2). Aeracao minima SEMPRE vence capacidade extra. *)
-(*   4) Sem 2o soprador disponivel e demanda acima do SP -> MaxSp_Hx        *)
+(*   4) MaxSp_Hx: demanda acima de MaximumCapacity e no maximo 1 soprador  *)
+(*      soprando DE FATO no reator (feedback real, nao o plano)            *)
 (*   5) Maximo MaxBlowers (3) sopradores ligados no total; o extra vai para *)
 (*      o reator com maior demanda acima do SP (com histerese de troca)     *)
 (*   6) Continuidade: prefere transferir soprador rodando a parar/partir    *)
 (*   7) So aloca por rota passavel (todas as valvulas Ready ou abertas).   *)
 (*      Se a prioridade nao consegue receber, o extra vai para o outro.    *)
+(*   8) B1/B4 sempre prioridade no proprio reator: ao voltar ocupam a vaga; *)
+(*      o compartilhado segura o ar (ponte) ate B1/B4 confirmar Running.   *)
+(*   9) B1/B4 com a valvula de cima fechada em manual/falha = indisponivel *)
 (* B1/B4 sao partidos fora deste FB (AerationRxCmd). Um soprador nunca e    *)
 (* alocado aos dois headers ao mesmo tempo.                                 *)
 (* ======================================================================== *)
 
 (* ---------- 1. Disponibilidade ---------- *)
-Avail1 := Blower1FbReady OR Blower1FbRunning;
+(* B1/B4 so contam se a valvula acima deles for passavel (Ready ou aberta). *)
+(* Valvula fechada em manual/falha = B1/B4 indisponivel: o compartilhado    *)
+(* assume o reator.                                                         *)
+Avail1 := (Blower1FbReady OR Blower1FbRunning) AND (ValveBlower1FbReady OR ValveBlower1FbOpened);
 Avail2 := Blower2FbReady OR Blower2FbRunning;
 Avail3 := Blower3FbReady OR Blower3FbRunning;
-Avail4 := Blower4FbReady OR Blower4FbRunning;
+Avail4 := (Blower4FbReady OR Blower4FbRunning) AND (ValveBlower4FbReady OR ValveBlower4FbOpened);
 
 (* ---------- 2. Demanda por header (com histerese) ---------- *)
 HystAbs := MaximumCapacity * HystPct / 100.0;
@@ -255,6 +272,27 @@ IF (NeedH1 >= 1) AND (CntH1 = 0) AND Free3 AND Route3H1 THEN
 END_IF;
 IF (NeedH2 >= 1) AND (CntH2 = 0) AND Free2 AND Route2H2 THEN
     H2_B2 := TRUE; Free2 := FALSE; CntH2 := CntH2 + 1;
+END_IF;
+
+(* ---------- 4c. Ponte: B1/B4 voltando tem prioridade, sem deixar o reator sem ar ---------- *)
+(* B1/B4 ocupa a vaga assim que fica disponivel (etapa 1). Enquanto ele ainda   *)
+(* nao estiver rodando, o compartilhado que ja alimentava o reator continua     *)
+(* ligado (se couber no limite de sopradores). Quando B1/B4 confirma Running,   *)
+(* a ponte cai e o compartilhado e liberado. Vem antes da capacidade extra:    *)
+(* manter ar no reator e mais importante que o 2o soprador do outro.          *)
+IF AerationR1Cmd AND Avail1 AND NOT (Blower1FbRunning AND ValveBlower1FbOpened) AND (CntH1 < 2) AND ((CntH1 + CntH2) < MaxBlowers) THEN
+    IF Free2 AND Route2H1 AND Last_StartScndBL_H1 AND Blower2FbRunning THEN
+        H1_B2 := TRUE; Free2 := FALSE; CntH1 := CntH1 + 1;
+    ELSIF Free3 AND Route3H1 AND Last_StartStdby_H1 AND Blower3FbRunning THEN
+        H1_B3 := TRUE; Free3 := FALSE; CntH1 := CntH1 + 1;
+    END_IF;
+END_IF;
+IF AerationR2Cmd AND Avail4 AND NOT (Blower4FbRunning AND ValveBlower4FbOpened) AND (CntH2 < 2) AND ((CntH1 + CntH2) < MaxBlowers) THEN
+    IF Free3 AND Route3H2 AND Last_StartScndBL_H2 AND Blower3FbRunning THEN
+        H2_B3 := TRUE; Free3 := FALSE; CntH2 := CntH2 + 1;
+    ELSIF Free2 AND Route2H2 AND Last_StartStdby_H2 AND Blower2FbRunning THEN
+        H2_B2 := TRUE; Free2 := FALSE; CntH2 := CntH2 + 1;
+    END_IF;
 END_IF;
 
 (* ---------- 5. Etapa 2 - capacidade acima do setpoint ---------- *)
@@ -352,12 +390,35 @@ StartStdby_H1  := H1_B3;   (* Blower 3 -> Header 1 *)
 StartScndBL_H2 := H2_B3;   (* Blower 3 -> Header 2 *)
 StartStdby_H2  := H2_B2;   (* Blower 2 -> Header 2 *)
 
-Using2Pumps_H1 := CntH1 >= 2;
-Using2Pumps_H2 := CntH2 >= 2;
+(* Sopradores REALMENTE soprando em cada reator (nao o planejado):          *)
+(* fixo em Running + compartilhado alocado, em Running e com o caminho       *)
+(* completo confirmado aberto. Cobre partida em andamento, manobra travada,  *)
+(* valvula que fechou e troca de reator.                                     *)
+ActH1 := 0;
+IF Blower1FbRunning AND ValveBlower1FbOpened THEN ActH1 := ActH1 + 1; END_IF;
+IF H1_B2 AND Blower2FbRunning AND ValveBlower2FbOpened AND Valve1FbOpened THEN
+    ActH1 := ActH1 + 1;
+END_IF;
+IF H1_B3 AND Blower3FbRunning AND ValveBlower3FbOpened AND Valve2FbOpened AND Valve1FbOpened THEN
+    ActH1 := ActH1 + 1;
+END_IF;
 
-(* Demanda acima do SP sem 2o soprador: roda o(s) disponivel(is) no maximo *)
-MaxSp_H1 := AerationR1Cmd AND (CntH1 >= 1) AND (CntH1 < NeedH1);
-MaxSp_H2 := AerationR2Cmd AND (CntH2 >= 1) AND (CntH2 < NeedH2);
+ActH2 := 0;
+IF Blower4FbRunning AND ValveBlower4FbOpened THEN ActH2 := ActH2 + 1; END_IF;
+IF H2_B3 AND Blower3FbRunning AND ValveBlower3FbOpened AND Valve3FbOpened THEN
+    ActH2 := ActH2 + 1;
+END_IF;
+IF H2_B2 AND Blower2FbRunning AND ValveBlower2FbOpened AND Valve2FbOpened AND Valve3FbOpened THEN
+    ActH2 := ActH2 + 1;
+END_IF;
+
+Using2Pumps_H1 := ActH1 >= 2;
+Using2Pumps_H2 := ActH2 >= 2;
+
+(* Capacidade pedida acima de MaximumCapacity e no maximo 1 soprador        *)
+(* soprando de fato no reator: o que estiver soprando vai ao maximo.         *)
+MaxSp_H1 := AerationR1Cmd AND Need2_H1 AND (ActH1 <= 1);
+MaxSp_H2 := AerationR2Cmd AND Need2_H2 AND (ActH2 <= 1);
 
 (* ---------- 7. Deteccao de mudanca (dispara CNF_CMD) ---------- *)
 OutChanged := (NOT Initialized) OR

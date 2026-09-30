@@ -2,7 +2,7 @@
 <!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
 <FBType GUID="a0f3b0b1-63a7-4dc6-a005-e4cc442c633e" Name="CAerationActCmd" Comment="Basic Function Block Type" Namespace="SE.Nereda">
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Schneider Electric" Version="2.0" Author=" " Date="9/29/2026" Remarks="Rev2 - Transferencia de reator sem desligar (abre rota nova, depois fecha a antiga)" />
+  <VersionInfo Organization="Schneider Electric" Version="5.0" Author=" " Date="9/29/2026" Remarks="Rev5 - Abertura de valvulas otimizada: pre-abertura de rota, VB junto com rota, partida junto com break" />
   <InterfaceList>
     <EventInputs>
       <Event ID="D2C11A8772DD75BE" Name="CMD_FB_RDY">
@@ -97,7 +97,7 @@
       <VarDeclaration ID="0E09D688E83C77C9" Name="Initialized" Type="BOOL" InitialValue="FALSE" Comment="Primeira execucao ja tratada" />
       <VarDeclaration ID="6D78D977D68310F5" Name="Reconcile" Type="BOOL" InitialValue="FALSE" Comment="Forca alinhamento completo apos inicializacao" />
       <VarDeclaration ID="E2E1AAEBFD3730F6" Name="FirstSend" Type="BOOL" InitialValue="TRUE" Comment="Forca envio dos eventos no primeiro ciclo" />
-      <VarDeclaration ID="29A9DC187784C8A5" Name="SeqStep" Type="INT" InitialValue="0" Comment="0 regime|10 parar|20 fechar VB|30 pre-fechar rota|40 abrir rota nova|50 fechar rota antiga|60 abrir VB|70 partir" />
+      <VarDeclaration ID="29A9DC187784C8A5" Name="SeqStep" Type="INT" InitialValue="0" Comment="0 regime|10 parar|20 fechar VB + pre-fechar rota|40 abrir rota nova + VB|50 fechar rota antiga + partir" />
       <VarDeclaration ID="DCAE23751230275D" Name="Dest2" Type="INT" InitialValue="0" Comment="Rota em operacao do B2: 0 parado, 1 H1, 2 H2" />
       <VarDeclaration ID="48697FDC8E10DCB1" Name="Dest3" Type="INT" InitialValue="0" Comment="Rota em operacao do B3: 0 parado, 1 H1, 2 H2" />
       <VarDeclaration ID="9D4182A444B4CBB5" Name="Tgt2" Type="INT" InitialValue="0" Comment="Rota desejada do B2" />
@@ -138,6 +138,16 @@
       <VarDeclaration ID="CE67248BEE58D1F2" Name="RunV2" Type="BOOL" />
       <VarDeclaration ID="9E525BFACA1247E6" Name="RunV3" Type="BOOL" />
       <VarDeclaration ID="709F3C105AFEDD7D" Name="XferActive" Type="BOOL" InitialValue="FALSE" Comment="Transferencia de soprador rodando em andamento (make-before-break)" />
+      <VarDeclaration ID="FF74CA0DD5B850F9" Name="PathH1" Type="BOOL" Comment="Caminho ate R1 nao fechado" />
+      <VarDeclaration ID="265AF3EB2DC490F0" Name="PathH2" Type="BOOL" Comment="Caminho ate R2 nao fechado" />
+      <VarDeclaration ID="3C7E1A94B2D05F61" Name="OpenIsh1" Type="BOOL" Comment="V1 comandada ou sem feedback de fechada (protecao I1 na pre-abertura)" />
+      <VarDeclaration ID="8D2F6B07C4E91A35" Name="OpenIsh2" Type="BOOL" />
+      <VarDeclaration ID="E51A93C8D6B27F04" Name="OpenIsh3" Type="BOOL" />
+      <VarDeclaration ID="47B0D2E9A13C8F56" Name="RouteDone" Type="BOOL" Comment="Rota antiga fechada (break concluido)" />
+      <VarDeclaration ID="9F6C14A7E08B3D25" Name="VBSafe2" Type="BOOL" Comment="B2 em alvo ou VB2 fechada (sem refluxo pelo B2 parado)" />
+      <VarDeclaration ID="2A8E5D71C9F04B63" Name="VBSafe3" Type="BOOL" Comment="B3 em alvo ou VB3 fechada (sem refluxo pelo B3 parado)" />
+      <VarDeclaration ID="6B3F09D2E7A14C58" Name="Start2Ok" Type="BOOL" Comment="Caminho completo do B2 confirmado aberto" />
+      <VarDeclaration ID="D07A6E43B5C28F19" Name="Start3Ok" Type="BOOL" Comment="Caminho completo do B3 confirmado aberto" />
     </InternalVars>
     <ECC>
       <ECState Name="START" Comment="Initial State" x="4676.108" y="2354.555" />
@@ -161,7 +171,7 @@
     <Algorithm ID="1f5dcb55-3f2a-41ae-abe4-bf0ee0a75cb9" Name="algSequence">
       <ST><![CDATA[;
 (* ========================================================================== *)
-(* CAerationActCmd - Rev2  |  Sequenciador de valvulas e sopradores B2/B3      *)
+(* CAerationActCmd - Rev5  |  Sequenciador de valvulas e sopradores B2/B3      *)
 (*                                                                            *)
 (*        H1 (R1)                                  H2 (R2)                    *)
 (*          ^                                        ^                        *)
@@ -178,17 +188,24 @@
 (*      fechar a antiga. Fora disso, nunca.                                  *)
 (*   I2 Soprador so parte com caminho completo confirmado por feedback       *)
 (*   I3 Nenhuma valvula do caminho de um soprador rodando fecha antes de o   *)
-(*      novo caminho estar confirmado aberto (nunca dead-head)               *)
-(*   I4 Partida: valvulas de rota -> valvula do soprador -> soprador         *)
+(*      novo caminho estar confirmado aberto (nunca dead-head). Se uma       *)
+(*      valvula fechar sozinha e o soprador ficar sem saida (inclusive em    *)
+(*      transferencia), ele e parado na hora.                                *)
+(*   I4 Partida: rota + valvula do soprador (paralelo) -> soprador          *)
 (*      Parada : soprador -> valvula do soprador -> valvulas de rota         *)
 (*   I5 Troca de reator com soprador rodando: ABRE a rota nova, confirma,    *)
 (*      depois FECHA a antiga. O soprador nao e desligado.                   *)
 (*                                                                            *)
 (*  Dest = rota em operacao (0=parado, 1=H1, 2=H2)                            *)
 (*  Tgt  = rota desejada pelo CAerationLogicBasic2                            *)
-(*  SeqStep: 0 regime | 10 parar | 20 fechar VBx | 30 pre-fechar rota         *)
-(*           40 abrir rota nova (make) | 50 fechar rota antiga (break)        *)
-(*           60 abrir VBx | 70 partir                                         *)
+(*  SeqStep: 0 regime | 10 parar (+pre-abre rota)                            *)
+(*           20 fechar VBx + pre-fechar rota (+pre-abre rota)                 *)
+(*           40 abrir rota nova + VBx (make)                                  *)
+(*           50 fechar rota antiga (break) + partir                           *)
+(*  Rev5: aberturas em paralelo. Rota do alvo pre-abre durante a parada e o  *)
+(*  pre-fechamento (respeitando I1); VBx abre junto com a rota; partida      *)
+(*  junto com o fechamento da rota antiga. Todas as protecoes I1..I5 e a     *)
+(*  partida so com caminho completo confirmado por feedback foram mantidas. *)
 (* ========================================================================== *)
 
 (* ---------- 0. Primeira execucao: assume o estado real da planta ---------- *)
@@ -274,14 +291,18 @@ IF (Tgt2 <> 0) AND (Tgt2 <> Dest2) THEN
     END_IF;
     IF NOT RouteOk THEN Tgt2 := Dest2; END_IF;
 END_IF;
-IF (Tgt2 <> 0) AND (Tgt2 = Dest2) THEN
-    (* em operacao: se alguma valvula do caminho fechou, para o soprador (I3) *)
-    IF Tgt2 = 1 THEN
-        RouteOk := NOT Valve1FbClosed AND NOT ValveBlower2FbClosed;
-    ELSE
-        RouteOk := NOT Valve2FbClosed AND NOT Valve3FbClosed AND NOT ValveBlower2FbClosed;
+(* Protecao (I3): soprador em operacao tem que ter saida de ar SEMPRE.       *)
+(* Saida = VB aberta + rota do reator atual; durante transferencia tambem    *)
+(* vale a rota nova. Valvula que fechou sozinha (mesmo em transferencia):   *)
+(* para o soprador na hora.                                                  *)
+IF Dest2 <> 0 THEN
+    PathH1 := NOT Valve1FbClosed;
+    PathH2 := NOT Valve2FbClosed AND NOT Valve3FbClosed;
+    IF Dest2 = 1 THEN RouteOk := PathH1; ELSE RouteOk := PathH2; END_IF;
+    IF (Tgt2 <> 0) AND (Tgt2 <> Dest2) THEN
+        IF Tgt2 = 1 THEN RouteOk := RouteOk OR PathH1; ELSE RouteOk := RouteOk OR PathH2; END_IF;
     END_IF;
-    IF NOT RouteOk THEN Tgt2 := 0; END_IF;
+    IF NOT (RouteOk AND NOT ValveBlower2FbClosed) THEN Tgt2 := 0; END_IF;
 END_IF;
 
 IF (Tgt3 <> 0) AND (Tgt3 <> Dest3) THEN
@@ -292,13 +313,14 @@ IF (Tgt3 <> 0) AND (Tgt3 <> Dest3) THEN
     END_IF;
     IF NOT RouteOk THEN Tgt3 := Dest3; END_IF;
 END_IF;
-IF (Tgt3 <> 0) AND (Tgt3 = Dest3) THEN
-    IF Tgt3 = 2 THEN
-        RouteOk := NOT Valve3FbClosed AND NOT ValveBlower3FbClosed;
-    ELSE
-        RouteOk := NOT Valve1FbClosed AND NOT Valve2FbClosed AND NOT ValveBlower3FbClosed;
+IF Dest3 <> 0 THEN
+    PathH2 := NOT Valve3FbClosed;
+    PathH1 := NOT Valve2FbClosed AND NOT Valve1FbClosed;
+    IF Dest3 = 2 THEN RouteOk := PathH2; ELSE RouteOk := PathH1; END_IF;
+    IF (Tgt3 <> 0) AND (Tgt3 <> Dest3) THEN
+        IF Tgt3 = 2 THEN RouteOk := RouteOk OR PathH2; ELSE RouteOk := RouteOk OR PathH1; END_IF;
     END_IF;
-    IF NOT RouteOk THEN Tgt3 := 0; END_IF;
+    IF NOT (RouteOk AND NOT ValveBlower3FbClosed) THEN Tgt3 := 0; END_IF;
 END_IF;
 
 (* B2->H2 e B3->H1 juntos cruzam pela V2 e exigiriam V1+V2+V3 abertas  *)
@@ -332,11 +354,6 @@ IF (NeedV1 OR Stuck1) AND (NeedV2 OR Stuck2) AND (NeedV3 OR Stuck3) THEN
 END_IF;
 
 (* ---------- 3. Sequenciador ---------- *)
-(* Valvulas de rota usadas pelos sopradores em operacao (Dest) *)
-RunV1 := (Dest2 = 1) OR (Dest3 = 1);
-RunV2 := (Dest3 = 1) OR (Dest2 = 2);
-RunV3 := (Dest3 = 2) OR (Dest2 = 2);
-
 IF SeqStep = 0 THEN
     IF Reconcile OR (Tgt2 <> Dest2) OR (Tgt3 <> Dest3) THEN
         Reconcile := FALSE;
@@ -364,20 +381,19 @@ IF SeqStep = 10 THEN
     IF B2Done AND B3Done THEN SeqStep := 20; END_IF;
 END_IF;
 
-(* Passo 20 - fechar valvula dos sopradores parados *)
+(* Valvulas de rota usadas pelos sopradores em operacao (Dest).          *)
+(* Rev5: calculado DEPOIS do passo 10 (Dest ja atualizado neste ciclo).  *)
+RunV1 := (Dest2 = 1) OR (Dest3 = 1);
+RunV2 := (Dest3 = 1) OR (Dest2 = 2);
+RunV3 := (Dest3 = 2) OR (Dest2 = 2);
+
+(* Passo 20 - Rev5: fecha VB dos sopradores parados E pre-fecha as       *)
+(* valvulas de rota fora do alvo AO MESMO TEMPO (antes eram 2 passos).   *)
+(* So espera a rota: a VB fechada e exigida so na partida (passo 50).    *)
 IF SeqStep = 20 THEN
-    IF Dest2 = 0 THEN CmdBlowerValve2 := FALSE; END_IF;
-    IF Dest3 = 0 THEN CmdBlowerValve3 := FALSE; END_IF;
+    IF (Dest2 = 0) AND (Tgt2 = 0) THEN CmdBlowerValve2 := FALSE; END_IF;
+    IF (Dest3 = 0) AND (Tgt3 = 0) THEN CmdBlowerValve3 := FALSE; END_IF;
 
-    B2Done := (Dest2 <> 0) OR ValveBlower2FbClosed OR NOT ValveBlower2FbReady;
-    B3Done := (Dest3 <> 0) OR ValveBlower3FbClosed OR NOT ValveBlower3FbReady;
-
-    IF B2Done AND B3Done THEN SeqStep := 30; END_IF;
-END_IF;
-
-(* Passo 30 - pre-fechamento: fecha valvulas fora do alvo que NAO estao   *)
-(* no caminho de nenhum soprador rodando (evita interligar sem motivo)   *)
-IF SeqStep = 30 THEN
     IF NOT NeedV1 AND NOT RunV1 THEN CmdValve1 := FALSE; END_IF;
     IF NOT NeedV2 AND NOT RunV2 THEN CmdValve2 := FALSE; END_IF;
     IF NOT NeedV3 AND NOT RunV3 THEN CmdValve3 := FALSE; END_IF;
@@ -389,8 +405,33 @@ IF SeqStep = 30 THEN
     END_IF;
 END_IF;
 
-(* Passo 40 - ABRE a rota alvo (make). Nada fecha aqui. V1+V2+V3 juntas  *)
-(* so sao aceitas se houver soprador rodando em transferencia.           *)
+(* Pre-abertura (Rev5) - enquanto espera soprador parar (10) ou rota     *)
+(* pre-fechar (20), ja ABRE as valvulas de rota do alvo. Abrir nunca     *)
+(* causa dead-head. Protecao I1: so abre se, depois de abrir, as tres    *)
+(* V1/V2/V3 NAO ficarem abertas/em curso juntas (valvula conta como      *)
+(* aberta se comandada OU sem feedback de fechada). A VB do soprador     *)
+(* NAO pre-abre (evita refluxo longo pelo soprador parado).              *)
+IF (SeqStep = 10) OR (SeqStep = 20) THEN
+    IF NeedV1 AND NOT CmdValve1 THEN
+        OpenIsh2 := CmdValve2 OR NOT Valve2FbClosed;
+        OpenIsh3 := CmdValve3 OR NOT Valve3FbClosed;
+        IF NOT (OpenIsh2 AND OpenIsh3) THEN CmdValve1 := TRUE; END_IF;
+    END_IF;
+    IF NeedV2 AND NOT CmdValve2 THEN
+        OpenIsh1 := CmdValve1 OR NOT Valve1FbClosed;
+        OpenIsh3 := CmdValve3 OR NOT Valve3FbClosed;
+        IF NOT (OpenIsh1 AND OpenIsh3) THEN CmdValve2 := TRUE; END_IF;
+    END_IF;
+    IF NeedV3 AND NOT CmdValve3 THEN
+        OpenIsh1 := CmdValve1 OR NOT Valve1FbClosed;
+        OpenIsh2 := CmdValve2 OR NOT Valve2FbClosed;
+        IF NOT (OpenIsh1 AND OpenIsh2) THEN CmdValve3 := TRUE; END_IF;
+    END_IF;
+END_IF;
+
+(* Passo 40 - ABRE a rota alvo (make) e, Rev5, a VB dos sopradores que   *)
+(* vao partir JUNTO (antes a VB so abria depois da rota confirmada).     *)
+(* Nada fecha aqui. V1+V2+V3 juntas so em transferencia.                 *)
 IF SeqStep = 40 THEN
     XferActive := ((Dest2 <> 0) AND (Tgt2 <> 0) AND (Tgt2 <> Dest2)) OR
                   ((Dest3 <> 0) AND (Tgt3 <> 0) AND (Tgt3 <> Dest3));
@@ -399,6 +440,8 @@ IF SeqStep = 40 THEN
         IF NeedV1 THEN CmdValve1 := TRUE; END_IF;
         IF NeedV2 THEN CmdValve2 := TRUE; END_IF;
         IF NeedV3 THEN CmdValve3 := TRUE; END_IF;
+        IF Tgt2 <> 0 THEN CmdBlowerValve2 := TRUE; END_IF;
+        IF Tgt3 <> 0 THEN CmdBlowerValve3 := TRUE; END_IF;
 
         IF (NOT NeedV1 OR Valve1FbOpened) AND
            (NOT NeedV2 OR Valve2FbOpened) AND
@@ -412,46 +455,65 @@ IF SeqStep = 40 THEN
     END_IF;
 END_IF;
 
-(* Passo 50 - FECHA o que sobrou da rota antiga (break). Todo soprador   *)
-(* rodando ja tem o caminho novo confirmado aberto: sem dead-head.       *)
+(* Passo 50 - Rev5: FECHA a rota antiga (break) e PARTE os sopradores em  *)
+(* paralelo (antes: fecha rota -> abre VB -> parte, tudo em serie).       *)
+(* Partida (I2) exige, por feedback: rota do alvo aberta + VB do proprio  *)
+(* soprador aberta + VB do outro soprador fechada se ele estiver parado   *)
+(* (sem refluxo) + transferencia concluida (headers nao interligados).    *)
 IF SeqStep = 50 THEN
     IF NOT NeedV1 THEN CmdValve1 := FALSE; END_IF;
     IF NOT NeedV2 THEN CmdValve2 := FALSE; END_IF;
     IF NOT NeedV3 THEN CmdValve3 := FALSE; END_IF;
-
-    IF (NeedV1 OR Valve1FbClosed OR NOT Valve1FbReady) AND
-       (NeedV2 OR Valve2FbClosed OR NOT Valve2FbReady) AND
-       (NeedV3 OR Valve3FbClosed OR NOT Valve3FbReady) THEN
-        XferActive := FALSE;
-        SeqStep := 60;
-    END_IF;
-END_IF;
-
-(* Passo 60 - abrir valvula dos sopradores que vao partir *)
-IF SeqStep = 60 THEN
     IF Tgt2 <> 0 THEN CmdBlowerValve2 := TRUE; END_IF;
     IF Tgt3 <> 0 THEN CmdBlowerValve3 := TRUE; END_IF;
 
-    IF ((Tgt2 = 0) OR ValveBlower2FbOpened) AND ((Tgt3 = 0) OR ValveBlower3FbOpened) THEN
-        SeqStep := 70;
-    END_IF;
-END_IF;
+    RouteDone := (NeedV1 OR Valve1FbClosed OR NOT Valve1FbReady) AND
+                 (NeedV2 OR Valve2FbClosed OR NOT Valve2FbReady) AND
+                 (NeedV3 OR Valve3FbClosed OR NOT Valve3FbReady);
+    IF RouteDone THEN XferActive := FALSE; END_IF;
 
-(* Passo 70 - partir sopradores com caminho completo *)
-IF SeqStep = 70 THEN
-    IF (Tgt2 <> 0) AND (Dest2 = 0) THEN
-        Dest2 := Tgt2;
-        CmdBlower2 := TRUE;
+    VBSafe2 := (Tgt2 <> 0) OR ValveBlower2FbClosed OR NOT ValveBlower2FbReady;
+    VBSafe3 := (Tgt3 <> 0) OR ValveBlower3FbClosed OR NOT ValveBlower3FbReady;
+
+    (* Pronto para partir: rota do alvo + VB propria confirmadas abertas *)
+    IF Tgt2 = 1 THEN
+        Start2Ok := Valve1FbOpened AND ValveBlower2FbOpened;
+    ELSE
+        Start2Ok := Valve2FbOpened AND Valve3FbOpened AND ValveBlower2FbOpened;
     END_IF;
-    IF (Tgt3 <> 0) AND (Dest3 = 0) THEN
-        Dest3 := Tgt3;
-        CmdBlower3 := TRUE;
+    IF Tgt3 = 2 THEN
+        Start3Ok := Valve3FbOpened AND ValveBlower3FbOpened;
+    ELSE
+        Start3Ok := Valve2FbOpened AND Valve1FbOpened AND ValveBlower3FbOpened;
     END_IF;
-    SeqStep := 0;
+
+    (* Partida sincronizada: se os dois vao partir, partem JUNTOS (nenhum   *)
+    (* parte com a VB do outro, parado, abrindo = sem refluxo).             *)
+    IF NOT XferActive AND
+       ((Tgt2 = 0) OR (Dest2 <> 0) OR Start2Ok) AND
+       ((Tgt3 = 0) OR (Dest3 <> 0) OR Start3Ok) AND
+       VBSafe2 AND VBSafe3 THEN
+        IF (Tgt2 <> 0) AND (Dest2 = 0) THEN
+            Dest2 := Tgt2;
+            CmdBlower2 := TRUE;
+        END_IF;
+        IF (Tgt3 <> 0) AND (Dest3 = 0) THEN
+            Dest3 := Tgt3;
+            CmdBlower3 := TRUE;
+        END_IF;
+    END_IF;
+
+    B2Done := (Tgt2 = 0) OR (Dest2 <> 0);
+    B3Done := (Tgt3 = 0) OR (Dest3 <> 0);
+    IF RouteDone AND B2Done AND B3Done THEN SeqStep := 0; END_IF;
 END_IF;
 
 (* ---------- 4. Setpoint de velocidade (acompanha o header em tempo real) ---------- *)
-IF Dest2 = 1 THEN
+(* Em transferencia (rodando, indo para o outro reator) o soprador        *)
+(* alimenta os dois: usa o MAIOR setpoint, para nenhum reator ficar abaixo *)
+IF (Dest2 <> 0) AND (Tgt2 <> 0) AND (Tgt2 <> Dest2) THEN
+    SpeedSp_BL2 := MAX(SpeedSp_H1, SpeedSp_H2);
+ELSIF Dest2 = 1 THEN
     SpeedSp_BL2 := SpeedSp_H1;
 ELSIF Dest2 = 2 THEN
     SpeedSp_BL2 := SpeedSp_H2;
@@ -459,7 +521,9 @@ ELSE
     SpeedSp_BL2 := 0.0;
 END_IF;
 
-IF Dest3 = 2 THEN
+IF (Dest3 <> 0) AND (Tgt3 <> 0) AND (Tgt3 <> Dest3) THEN
+    SpeedSp_BL3 := MAX(SpeedSp_H1, SpeedSp_H2);
+ELSIF Dest3 = 2 THEN
     SpeedSp_BL3 := SpeedSp_H2;
 ELSIF Dest3 = 1 THEN
     SpeedSp_BL3 := SpeedSp_H1;
