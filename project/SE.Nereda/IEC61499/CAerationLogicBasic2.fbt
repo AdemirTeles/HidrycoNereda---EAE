@@ -2,7 +2,7 @@
 <!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
 <FBType GUID="8a6fb516-4e16-4303-9bec-8b89346a3ddd" Name="CAerationLogicBasic2" Comment="Basic Function Block Type" Namespace="SE.Nereda">
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Schneider Electric" Version="6.0" Author=" " Date="9/29/2026" Remarks="Rev6 - B1/B4 so contam com a valvula de cima passavel (+4 entradas VB1/VB4)" />
+  <VersionInfo Organization="Schneider Electric" Version="7.0" Author=" " Date="9/30/2026" Remarks="Rev7 - Liga/desliga do 2o soprador conforme especificacao (C2/C3); Plan2Pumps/StopReq; desliga o que roda ha mais tempo" />
   <InterfaceList>
     <EventInputs>
       <Event ID="D2C11A8772DD75BE" Name="AERATION_CMD">
@@ -35,6 +35,8 @@
         <With Var="ValveBlower1FbOpened" />
         <With Var="ValveBlower4FbReady" />
         <With Var="ValveBlower4FbOpened" />
+        <With Var="StopReq_H1" />
+        <With Var="StopReq_H2" />
       </Event>
     </EventInputs>
     <EventOutputs>
@@ -47,6 +49,8 @@
         <With Var="MaxSp_H2" />
         <With Var="Using2Pumps_H1" />
         <With Var="Using2Pumps_H2" />
+        <With Var="Plan2Pumps_H1" />
+        <With Var="Plan2Pumps_H2" />
       </Event>
     </EventOutputs>
     <InputVars>
@@ -79,6 +83,8 @@
       <VarDeclaration ID="99B4843F7ED498C4" Name="ValveBlower1FbOpened" Type="BOOL" InitialValue="TRUE" Comment="Valvula do B1 (AV46 012) aberta. Padrao TRUE = comportamento anterior se desligada" />
       <VarDeclaration ID="C4B9BEEAC199E058" Name="ValveBlower4FbReady" Type="BOOL" InitialValue="TRUE" Comment="Valvula do B4 (AV46 042) pronta/automatico. Padrao TRUE = comportamento anterior se desligada" />
       <VarDeclaration ID="3B81A0671CD7BCF6" Name="ValveBlower4FbOpened" Type="BOOL" InitialValue="TRUE" Comment="Valvula do B4 (AV46 042) aberta. Padrao TRUE = comportamento anterior se desligada" />
+      <VarDeclaration ID="5E0B7C2A91D4F368" Name="StopReq_H1" Type="BOOL" InitialValue="FALSE" Comment="Do NeredaCapacity H1: condicao de desligamento (abaixo de C3 pelo tempo) cumprida" />
+      <VarDeclaration ID="B8D14F7E26A0C953" Name="StopReq_H2" Type="BOOL" InitialValue="FALSE" Comment="Do NeredaCapacity H2: condicao de desligamento (abaixo de C3 pelo tempo) cumprida" />
     </InputVars>
     <OutputVars>
       <VarDeclaration ID="4F511D89CFAD767B" Name="StartScndBL_H1" Type="BOOL" />
@@ -89,6 +95,8 @@
       <VarDeclaration ID="F7BB9EFC676442B0" Name="MaxSp_H2" Type="BOOL" />
       <VarDeclaration ID="666629205E956536" Name="Using2Pumps_H1" Type="BOOL" />
       <VarDeclaration ID="CF61785EEFC670F6" Name="Using2Pumps_H2" Type="BOOL" />
+      <VarDeclaration ID="7A2C5E91F0B34D86" Name="Plan2Pumps_H1" Type="BOOL" Comment="2 sopradores alocados ao R1 (entrando ou em operacao)" />
+      <VarDeclaration ID="C39F0D6B815E2A47" Name="Plan2Pumps_H2" Type="BOOL" Comment="2 sopradores alocados ao R2 (entrando ou em operacao)" />
     </OutputVars>
   </InterfaceList>
   <BasicFB ID="5d63002f-a7b1-4326-a938-7f8dd38ad271">
@@ -100,8 +108,8 @@
       <VarDeclaration ID="01921AB00F046C8C" Name="Avail4" Type="BOOL" />
       <VarDeclaration ID="BE089CB4C2F7F27E" Name="Free2" Type="BOOL" Comment="Blower 2 livre para alocacao no ciclo" />
       <VarDeclaration ID="808D67A58968FB74" Name="Free3" Type="BOOL" Comment="Blower 3 livre para alocacao no ciclo" />
-      <VarDeclaration ID="20B6E0056EC8BD46" Name="Need2_H1" Type="BOOL" InitialValue="FALSE" Comment="Demanda R1 acima do SP (retido por histerese)" />
-      <VarDeclaration ID="1C7A81B16B68696F" Name="Need2_H2" Type="BOOL" InitialValue="FALSE" Comment="Demanda R2 acima do SP (retido por histerese)" />
+      <VarDeclaration ID="20B6E0056EC8BD46" Name="Need2_H1" Type="BOOL" InitialValue="FALSE" Comment="R1 quer 2 sopradores: liga com AerCapR1 &gt; Cmax, desliga com StopReq_H1" />
+      <VarDeclaration ID="1C7A81B16B68696F" Name="Need2_H2" Type="BOOL" InitialValue="FALSE" Comment="R2 quer 2 sopradores: liga com AerCapR2 &gt; Cmax, desliga com StopReq_H2" />
       <VarDeclaration ID="FD50980913FB3D6E" Name="NeedH1" Type="INT" />
       <VarDeclaration ID="26B23FDFCC1C27A4" Name="NeedH2" Type="INT" />
       <VarDeclaration ID="2727EFA8E3E3747D" Name="CntH1" Type="INT" />
@@ -110,7 +118,7 @@
       <VarDeclaration ID="BF60150F5D79B0B4" Name="H1_B3" Type="BOOL" />
       <VarDeclaration ID="2E953F38A62A6478" Name="H2_B3" Type="BOOL" />
       <VarDeclaration ID="E6D8A46C0C306398" Name="H2_B2" Type="BOOL" />
-      <VarDeclaration ID="C94AAE0FCECA097D" Name="HystPct" Type="REAL" InitialValue="5.0" Comment="Histerese de desligamento do 2o soprador em % de MaximumCapacity" />
+      <VarDeclaration ID="C94AAE0FCECA097D" Name="HystPct" Type="REAL" InitialValue="5.0" Comment="Nao usado a partir da Rev7 (desligamento pela regra C3 do NeredaCapacity)" />
       <VarDeclaration ID="00E11C6FD5B1DD07" Name="HystAbs" Type="REAL" />
       <VarDeclaration ID="EAB2F740D86EB614" Name="OutChanged" Type="BOOL" InitialValue="FALSE" />
       <VarDeclaration ID="0AA9B6D7BE17E38B" Name="Initialized" Type="BOOL" InitialValue="FALSE" Comment="Forca CNF_CMD no primeiro ciclo" />
@@ -123,7 +131,7 @@
       <VarDeclaration ID="2CB3A449CCFC4829" Name="Last_Using2Pumps_H1" Type="BOOL" />
       <VarDeclaration ID="B1A385A88662C83A" Name="Last_Using2Pumps_H2" Type="BOOL" />
       <VarDeclaration ID="71DE929B84907F41" Name="MaxBlowers" Type="INT" InitialValue="3" Comment="Maximo de sopradores ligados no total (B1..B4)" />
-      <VarDeclaration ID="F19C244C29628D21" Name="SwapHystPct" Type="REAL" InitialValue="1.0" Comment="Histerese para trocar o reator que recebe o extra, em % de MaximumCapacity" />
+      <VarDeclaration ID="F19C244C29628D21" Name="SwapHystPct" Type="REAL" InitialValue="10.0" Comment="Histerese para trocar o reator que recebe o extra, em % de MaximumCapacity" />
       <VarDeclaration ID="42391F569ACC25A8" Name="SwapHystAbs" Type="REAL" />
       <VarDeclaration ID="3BB54399331D500D" Name="Exc1" Type="REAL" Comment="AerCapR1 - MaximumCapacity" />
       <VarDeclaration ID="C0C10FF3C4F942C4" Name="Exc2" Type="REAL" Comment="AerCapR2 - MaximumCapacity" />
@@ -144,6 +152,13 @@
       <VarDeclaration ID="436392D6EDD63F56" Name="SwapRouteOk" Type="BOOL" />
       <VarDeclaration ID="B6D3DE1C81A97984" Name="ActH1" Type="INT" Comment="Sopradores soprando de fato no R1" />
       <VarDeclaration ID="F9B92E548C9D8291" Name="ActH2" Type="INT" Comment="Sopradores soprando de fato no R2" />
+      <VarDeclaration ID="1F6A3D8C4E27B905" Name="Last_Plan2Pumps_H1" Type="BOOL" />
+      <VarDeclaration ID="94E7B20C5A1D3F68" Name="Last_Plan2Pumps_H2" Type="BOOL" />
+      <VarDeclaration ID="3D85F1A60C2E97B4" Name="Newer2" Type="BOOL" InitialValue="FALSE" Comment="TRUE: B2 partiu depois do B3 (B3 e o que roda ha mais tempo)" />
+      <VarDeclaration ID="A06B4E93D7C1F258" Name="LastRun2" Type="BOOL" />
+      <VarDeclaration ID="6C1F82D5B09E4A37" Name="LastRun3" Type="BOOL" />
+      <VarDeclaration ID="E2D95A0714B6C83F" Name="PlanCnt1" Type="INT" />
+      <VarDeclaration ID="08B7C3E6F2A45D19" Name="PlanCnt2" Type="INT" />
     </InternalVars>
     <ECC>
       <ECState Name="START" Comment="Initial State" x="2530.251" y="1058.412" />
@@ -169,17 +184,22 @@
     <Algorithm ID="42cf27f2-e44a-45a4-bc96-9aae58cc0c1e" Name="REQ">
       <ST><![CDATA[;
 (* ======================================================================== *)
-(* CAerationLogicBasic2 - Rev6                                              *)
+(* CAerationLogicBasic2 - Rev7                                              *)
 (* Alocacao de sopradores por header                                        *)
 (*   H1 (Reator 1): B1 fixo -> B2 (StartScndBL_H1) -> B3 (StartStdby_H1)     *)
 (*   H2 (Reator 2): B4 fixo -> B3 (StartScndBL_H2) -> B2 (StartStdby_H2)     *)
 (* Prioridades:                                                             *)
 (*   1) Aeracao minima: 1 soprador em cada reator comandado                 *)
-(*   2) Capacidade: 2o soprador quando AerCapRx > MaximumCapacity           *)
+(*   2) Capacidade (especificacao):                                         *)
+(*      LIGA 2o soprador quando AerCapRx > capacidade maxima em operacao    *)
+(*      DESLIGA o excedente quando o NeredaCapacity sinaliza StopReq_Hx     *)
+(*      (pedido < soma das minimas E velocidade < C3 pelo tempo ajustavel)  *)
+(*      Com 2 compartilhados no reator, desliga o que roda ha mais tempo.  *)
 (*   3) Em disputa pelo mesmo soprador compartilhado, o header "dono" vence *)
 (*      (B2 -> H1, B3 -> H2). Aeracao minima SEMPRE vence capacidade extra. *)
-(*   4) MaxSp_Hx: demanda acima de MaximumCapacity e no maximo 1 soprador  *)
-(*      soprando DE FATO no reator (feedback real, nao o plano)            *)
+(*   4) MaxSp_Hx: demanda acima de MaximumCapacity e NENHUM 2o soprador    *)
+(*      alocado (limite/indisponivel). Durante a entrada do 2o soprador o  *)
+(*      NeredaCapacity usa C2 (Plan2Pumps_Hx), nunca 100%.                 *)
 (*   5) Maximo MaxBlowers (3) sopradores ligados no total; o extra vai para *)
 (*      o reator com maior demanda acima do SP (com histerese de troca)     *)
 (*   6) Continuidade: prefere transferir soprador rodando a parar/partir    *)
@@ -201,14 +221,20 @@ Avail2 := Blower2FbReady OR Blower2FbRunning;
 Avail3 := Blower3FbReady OR Blower3FbRunning;
 Avail4 := (Blower4FbReady OR Blower4FbRunning) AND (ValveBlower4FbReady OR ValveBlower4FbOpened);
 
-(* ---------- 2. Demanda por header (com histerese) ---------- *)
-HystAbs := MaximumCapacity * HystPct / 100.0;
-
+(* ---------- 2. Demanda por header (especificacao) ---------- *)
+(* Liga : pedido > capacidade maxima de 1 soprador.                        *)
+(* Desliga: StopReq_Hx do NeredaCapacity (pedido < soma das minimas e      *)
+(*          velocidade < C3 pelo tempo ajustavel).                         *)
+(* Sem 2o soprador alocado (limite/indisponivel) e pedido <= Cmax: nao ha  *)
+(* mais o que ligar, a demanda de 2 cai.                                   *)
+(* Sem aeracao: nenhum soprador.                                           *)
 IF NOT AerationR1Cmd THEN
     Need2_H1 := FALSE;
 ELSIF AerCapR1 > MaximumCapacity THEN
     Need2_H1 := TRUE;
-ELSIF AerCapR1 <= (MaximumCapacity - HystAbs) THEN
+ELSIF StopReq_H1 THEN
+    Need2_H1 := FALSE;
+ELSIF NOT Plan2Pumps_H1 THEN
     Need2_H1 := FALSE;
 END_IF;
 
@@ -216,9 +242,17 @@ IF NOT AerationR2Cmd THEN
     Need2_H2 := FALSE;
 ELSIF AerCapR2 > MaximumCapacity THEN
     Need2_H2 := TRUE;
-ELSIF AerCapR2 <= (MaximumCapacity - HystAbs) THEN
+ELSIF StopReq_H2 THEN
+    Need2_H2 := FALSE;
+ELSIF NOT Plan2Pumps_H2 THEN
     Need2_H2 := FALSE;
 END_IF;
+
+(* Ordem de partida B2 x B3 (para desligar o que roda ha mais tempo) *)
+IF Blower2FbRunning AND NOT LastRun2 THEN Newer2 := TRUE; END_IF;
+IF Blower3FbRunning AND NOT LastRun3 THEN Newer2 := FALSE; END_IF;
+LastRun2 := Blower2FbRunning;
+LastRun3 := Blower3FbRunning;
 
 NeedH1 := 0;
 IF AerationR1Cmd THEN
@@ -259,6 +293,16 @@ CntH2 := 0;
 IF AerationR2Cmd AND Avail4 THEN CntH2 := 1; END_IF;
 
 (* ---------- 4. Etapa 1 - garantir aeracao minima ---------- *)
+(* 4-. Reator sem o fixo, com B2 e B3 rodando nele e caindo para 1:     *)
+(*     fica o que partiu por ultimo; desliga o que roda ha mais tempo.  *)
+IF (NeedH1 = 1) AND (CntH1 = 0) AND Last_StartScndBL_H1 AND Last_StartStdby_H1 AND
+   Blower2FbRunning AND Blower3FbRunning AND NOT Newer2 AND Free3 AND Route3H1 THEN
+    H1_B3 := TRUE; Free3 := FALSE; CntH1 := CntH1 + 1;
+END_IF;
+IF (NeedH2 = 1) AND (CntH2 = 0) AND Last_StartScndBL_H2 AND Last_StartStdby_H2 AND
+   Blower2FbRunning AND Blower3FbRunning AND Newer2 AND Free2 AND Route2H2 THEN
+    H2_B2 := TRUE; Free2 := FALSE; CntH2 := CntH2 + 1;
+END_IF;
 (* 4a. soprador compartilhado "dono" *)
 IF (NeedH1 >= 1) AND (CntH1 = 0) AND Free2 AND Route2H1 THEN
     H1_B2 := TRUE; Free2 := FALSE; CntH1 := CntH1 + 1;
@@ -415,10 +459,23 @@ END_IF;
 Using2Pumps_H1 := ActH1 >= 2;
 Using2Pumps_H2 := ActH2 >= 2;
 
-(* Capacidade pedida acima de MaximumCapacity e no maximo 1 soprador        *)
-(* soprando de fato no reator: o que estiver soprando vai ao maximo.         *)
-MaxSp_H1 := AerationR1Cmd AND Need2_H1 AND (ActH1 <= 1);
-MaxSp_H2 := AerationR2Cmd AND Need2_H2 AND (ActH2 <= 1);
+(* Sopradores ALOCADOS (plano) por reator: fixo disponivel + compartilhados *)
+PlanCnt1 := 0;
+IF AerationR1Cmd AND Avail1 THEN PlanCnt1 := 1; END_IF;
+IF H1_B2 THEN PlanCnt1 := PlanCnt1 + 1; END_IF;
+IF H1_B3 THEN PlanCnt1 := PlanCnt1 + 1; END_IF;
+PlanCnt2 := 0;
+IF AerationR2Cmd AND Avail4 THEN PlanCnt2 := 1; END_IF;
+IF H2_B3 THEN PlanCnt2 := PlanCnt2 + 1; END_IF;
+IF H2_B2 THEN PlanCnt2 := PlanCnt2 + 1; END_IF;
+Plan2Pumps_H1 := PlanCnt1 >= 2;
+Plan2Pumps_H2 := PlanCnt2 >= 2;
+
+(* Pedido acima de MaximumCapacity e NENHUM 2o soprador alocado (limite de *)
+(* sopradores ou indisponivel): o unico soprador vai ao maximo. Enquanto o  *)
+(* 2o soprador entra (Plan2Pumps) quem manda e o C2 do NeredaCapacity.     *)
+MaxSp_H1 := AerationR1Cmd AND (AerCapR1 > MaximumCapacity) AND NOT Plan2Pumps_H1;
+MaxSp_H2 := AerationR2Cmd AND (AerCapR2 > MaximumCapacity) AND NOT Plan2Pumps_H2;
 
 (* ---------- 7. Deteccao de mudanca (dispara CNF_CMD) ---------- *)
 OutChanged := (NOT Initialized) OR
@@ -429,7 +486,9 @@ OutChanged := (NOT Initialized) OR
               (Last_MaxSp_H1 <> MaxSp_H1) OR
               (Last_MaxSp_H2 <> MaxSp_H2) OR
               (Last_Using2Pumps_H1 <> Using2Pumps_H1) OR
-              (Last_Using2Pumps_H2 <> Using2Pumps_H2);]]></ST>
+              (Last_Using2Pumps_H2 <> Using2Pumps_H2) OR
+              (Last_Plan2Pumps_H1 <> Plan2Pumps_H1) OR
+              (Last_Plan2Pumps_H2 <> Plan2Pumps_H2);]]></ST>
     </Algorithm>
     <Algorithm ID="6955cf78-208c-4e67-a99e-0bf01b559f9c" Name="algLastValue">
       <ST><![CDATA[;
@@ -441,6 +500,8 @@ Last_MaxSp_H1 := MaxSp_H1;
 Last_MaxSp_H2 := MaxSp_H2;
 Last_Using2Pumps_H1 := Using2Pumps_H1;
 Last_Using2Pumps_H2 := Using2Pumps_H2;
+Last_Plan2Pumps_H1 := Plan2Pumps_H1;
+Last_Plan2Pumps_H2 := Plan2Pumps_H2;
 Initialized := TRUE;]]></ST>
     </Algorithm>
   </BasicFB>

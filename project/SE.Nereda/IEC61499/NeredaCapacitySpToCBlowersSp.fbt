@@ -2,7 +2,7 @@
 <!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
 <FBType GUID="61d32ee5-3248-41cb-bdc7-a5d80414b18a" Name="NeredaCapacitySpToCBlowersSp" Comment="Basic Function Block Type" Namespace="SE.Nereda">
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Schneider Electric" Version="1.0" Author="SESA685388" Date="9/29/2026" Remarks="Rev1 - MaxSp sempre forca 100% (inclusive nas fases C2/C3)" />
+  <VersionInfo Organization="Schneider Electric" Version="2.0" Author="SESA685388" Date="9/30/2026" Remarks="Rev2 - Liga/desliga conforme especificacao: entrada em C2, desligamento por C3+tempo (StopReq). REQ tratado em todos os estados (sem 100% congelado)" />
   <InterfaceList>
     <EventInputs>
       <Event ID="D0388ADF8D5604CA" Name="REQ">
@@ -12,6 +12,8 @@
         <With Var="UsingPump2" />
         <With Var="MaximumCapacityBlower" />
         <With Var="MaxSp" />
+        <With Var="Plan2Pumps" />
+        <With Var="MinimumCapacityBlower" />
       </Event>
       <Event ID="C290CA59E2E76CE7" Name="END_DELAY_C2" />
       <Event ID="928BD6855BDB8CD4" Name="END_DELAY_C3" />
@@ -19,102 +21,187 @@
     <EventOutputs>
       <Event Name="CNF" Comment="Execution Confirmation">
         <With Var="SpeedBlower" />
+        <With Var="StopReq" />
       </Event>
       <Event ID="C8BBF715CC922495" Name="START_DELAY_C2" />
       <Event ID="C529EC06887E5F22" Name="START_DELAY_C3" />
     </EventOutputs>
     <InputVars>
-      <VarDeclaration ID="Setpoint" Name="CapSp" Type="REAL" Comment="Input event qualifier" />
-      <VarDeclaration ID="366DF9C08522C788" Name="C2_IN" Type="REAL" />
-      <VarDeclaration ID="9458FDB1B841EBF6" Name="C3_IN" Type="REAL" />
+      <VarDeclaration ID="Setpoint" Name="CapSp" Type="REAL" Comment="Capacidade de ar pedida pelo reator" />
+      <VarDeclaration ID="366DF9C08522C788" Name="C2_IN" Type="REAL" Comment="Capacidade C2 (%) na entrada de soprador" />
+      <VarDeclaration ID="9458FDB1B841EBF6" Name="C3_IN" Type="REAL" Comment="Limite C3 (%): abaixo dele pelo tempo do E_DELAY C3 desliga o excedente" />
       <VarDeclaration ID="0E6B92BFBD466C31" Name="MaximumCapacityBlower" Type="REAL" />
-      <VarDeclaration ID="F347E80EA65C1CE5" Name="UsingPump2" Type="BOOL" />
-      <VarDeclaration ID="1FE73434323A3C55" Name="MaxSp" Type="BOOL" />
+      <VarDeclaration ID="F347E80EA65C1CE5" Name="UsingPump2" Type="BOOL" Comment="2 sopradores EM OPERACAO (Using2Pumps_Hx)" />
+      <VarDeclaration ID="1FE73434323A3C55" Name="MaxSp" Type="BOOL" Comment="Pedido acima do Cmax sem 2o soprador disponivel" />
+      <VarDeclaration ID="4B7E1D09A3C6F285" Name="Plan2Pumps" Type="BOOL" Comment="2 sopradores ALOCADOS (Plan2Pumps_Hx): entrada do 2o em curso ou em operacao" />
+      <VarDeclaration ID="D2A58F36B19E0C74" Name="MinimumCapacityBlower" Type="REAL" Comment="Capacidade minima de 1 soprador (mesma unidade de CapSp). 0 = usa so o criterio C3" />
     </InputVars>
     <OutputVars>
       <VarDeclaration Name="SpeedBlower" Type="REAL" />
+      <VarDeclaration ID="8F03C6A2E5D7B914" Name="StopReq" Type="BOOL" Comment="Pedido de desligamento do soprador excedente (-&gt; StopReq_Hx do CAerationLogicBasic2)" />
     </OutputVars>
   </InterfaceList>
   <BasicFB ID="71865d44-b989-4ceb-af39-632154f465b8">
-    <Attribute Name="FBType.Basic.Algorithm.Order" Value="REQ" />
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="REQ,algEndC2,algEndC3" />
     <InternalVars>
-      <VarDeclaration ID="Equal" Name="LastUsingPump2" Type="BOOL" />
-      <VarDeclaration ID="5B14F8F64307848B" Name="Starting2Pumps" Type="BOOL" />
-      <VarDeclaration ID="84D5E450CED202FB" Name="Stopping1Pump" Type="BOOL" />
+      <VarDeclaration ID="Equal" Name="LastUsingPump2" Type="BOOL" Comment="Nao usado a partir da Rev2" />
+      <VarDeclaration ID="5B14F8F64307848B" Name="Starting2Pumps" Type="BOOL" Comment="Nao usado a partir da Rev2" />
+      <VarDeclaration ID="84D5E450CED202FB" Name="Stopping1Pump" Type="BOOL" Comment="Nao usado a partir da Rev2" />
+      <VarDeclaration ID="2E9B07D4C61A5F38" Name="Mode" Type="INT" InitialValue="0" Comment="0 um soprador | 1 entrando 2o (C2) | 2 dois em C2 pelo tempo | 3 dois controlando | 4 abaixo de C3 contando | 5 desligamento pedido" />
+      <VarDeclaration ID="97C4A1E0B35D82F6" Name="DoT2" Type="BOOL" Comment="Disparar START_DELAY_C2" />
+      <VarDeclaration ID="1A5E6C83F29B0D47" Name="DoT3" Type="BOOL" Comment="Disparar START_DELAY_C3" />
+      <VarDeclaration ID="F4086D2B7E91C3A5" Name="EvEnd2" Type="BOOL" />
+      <VarDeclaration ID="6D39A5F1C0E84B72" Name="EvEnd3" Type="BOOL" />
+      <VarDeclaration ID="B25E0C97D4A16F83" Name="T2Busy" Type="BOOL" Comment="E_DELAY C2 em contagem" />
+      <VarDeclaration ID="3C71F8A04E6D29B5" Name="T3Busy" Type="BOOL" Comment="E_DELAY C3 em contagem" />
+      <VarDeclaration ID="8E4A2D6C1B93F057" Name="T2Void" Type="BOOL" Comment="Contagem C2 em curso invalida (condicao interrompida)" />
+      <VarDeclaration ID="0F6C93B5A2E84D71" Name="T3Void" Type="BOOL" Comment="Contagem C3 em curso invalida (condicao interrompida)" />
+      <VarDeclaration ID="5A8D1E47C03B6F29" Name="Sp1" Type="REAL" Comment="Velocidade para 1 soprador" />
+      <VarDeclaration ID="C6F20B83D95A4E17" Name="Sp2" Type="REAL" Comment="Velocidade para 2 sopradores como unidade" />
+      <VarDeclaration ID="74B9E3A18F2C0D65" Name="StopCond" Type="BOOL" Comment="Pedido abaixo da soma das minimas e velocidade abaixo de C3" />
     </InternalVars>
     <ECC>
       <ECState Name="START" Comment="Initial State" x="388.9412" y="341.4117" />
-      <ECState Name="STATE2" x="1712" y="632.0001">
+      <ECState Name="STATE2" Comment="REQ: calcula e publica" x="1712" y="632.0001">
         <ECAction Algorithm="REQ" Output="CNF" />
       </ECState>
-      <ECState Name="STARTING" x="951.9999" y="1424">
+      <ECState Name="END_C2" Comment="Fim do tempo em C2" x="951.9999" y="1424">
+        <ECAction Algorithm="algEndC2" />
+        <ECAction Algorithm="REQ" Output="CNF" />
+      </ECState>
+      <ECState Name="END_C3" Comment="Fim do tempo abaixo de C3" x="2128" y="1408">
+        <ECAction Algorithm="algEndC3" />
+        <ECAction Algorithm="REQ" Output="CNF" />
+      </ECState>
+      <ECState Name="STARTING" Comment="Inicia contagem C2" x="1100" y="2100">
         <ECAction Output="START_DELAY_C2" />
       </ECState>
-      <ECState Name="STOPPING" x="2128" y="1408">
+      <ECState Name="STOPPING" Comment="Inicia contagem C3" x="2300" y="2100">
         <ECAction Output="START_DELAY_C3" />
       </ECState>
-      <ECTransition Source="START" Destination="STATE2" Condition="REQ" x="1071.086" y="396.4731">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="223.3548,83.92085,313.8872,103.7102" />
-      </ECTransition>
-      <ECTransition Source="STATE2" Destination="STARTING" Condition="Starting2Pumps" x="1366.871" y="1065.047">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="370.5973,240.7941,315.7913,297.9038" />
-      </ECTransition>
-      <ECTransition Source="STARTING" Destination="STATE2" Condition="END_DELAY_C2" x="1029.852" y="976.2335">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="212.234,267.4897,265.4807,212.3642" />
-      </ECTransition>
-      <ECTransition Source="STATE2" Destination="STOPPING" Condition="Stopping1Pump" x="2301.333" y="1056.212">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="583.7121,240.3562,615.9935,293.7849" />
-      </ECTransition>
-      <ECTransition Source="STOPPING" Destination="STATE2" Condition="END_DELAY_C3" x="1909.487" y="1107.039">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="493.6379,312.5134,462.044,255.5125" />
-      </ECTransition>
-      <ECTransition Source="STARTING" Destination="STATE2" Condition="REQ AND MaxSp" x="700" y="1000" />
-      <ECTransition Source="STOPPING" Destination="STATE2" Condition="REQ AND MaxSp" x="2350" y="1000" />
-      <ECTransition Source="STATE2" Destination="START" Condition="1" x="1085.542" y="572.6321">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="317.5159,157.2652,232.2139,139.1306" />
-      </ECTransition>
+      <ECTransition Source="START" Destination="STATE2" Condition="REQ" x="1071.086" y="396.4731" />
+      <ECTransition Source="START" Destination="END_C2" Condition="END_DELAY_C2" x="600" y="900" />
+      <ECTransition Source="START" Destination="END_C3" Condition="END_DELAY_C3" x="1300" y="900" />
+      <ECTransition Source="STATE2" Destination="STARTING" Condition="DoT2" x="1450" y="1700" />
+      <ECTransition Source="STATE2" Destination="STOPPING" Condition="NOT DoT2 AND DoT3" x="2050" y="1700" />
+      <ECTransition Source="STATE2" Destination="START" Condition="NOT DoT2 AND NOT DoT3" x="1085.542" y="572.6321" />
+      <ECTransition Source="END_C2" Destination="STARTING" Condition="DoT2" x="1000" y="1800" />
+      <ECTransition Source="END_C2" Destination="STOPPING" Condition="NOT DoT2 AND DoT3" x="1600" y="1900" />
+      <ECTransition Source="END_C2" Destination="START" Condition="NOT DoT2 AND NOT DoT3" x="600" y="1100" />
+      <ECTransition Source="END_C3" Destination="STARTING" Condition="DoT2" x="1700" y="2000" />
+      <ECTransition Source="END_C3" Destination="STOPPING" Condition="NOT DoT2 AND DoT3" x="2250" y="1750" />
+      <ECTransition Source="END_C3" Destination="START" Condition="NOT DoT2 AND NOT DoT3" x="1900" y="700" />
+      <ECTransition Source="STARTING" Destination="STOPPING" Condition="DoT3" x="1700" y="2250" />
+      <ECTransition Source="STARTING" Destination="START" Condition="NOT DoT3" x="700" y="1600" />
+      <ECTransition Source="STOPPING" Destination="START" Condition="1" x="2500" y="1000" />
     </ECC>
-    <Algorithm Name="REQ" Comment="Initialization algorithm">
+    <Algorithm Name="REQ" Comment="Liga/desliga de sopradores conforme especificacao">
       <ST><![CDATA[;
-IF (UsingPump2 AND NOT(LastUsingPump2)) THEN
-	Starting2Pumps:=TRUE;
+(* ======================================================================== *)
+(* NeredaCapacitySpToCBlowersSp - Rev2  (um por reator/header)              *)
+(* LIGAR (pedido > capacidade maxima em operacao; decidido no Basic2):     *)
+(*   - soprador(es) rodando descem para C2                                  *)
+(*   - soprador adicional parte em C2                                       *)
+(*   - com os dois EM OPERACAO pelo tempo do E_DELAY C2, controla pelo      *)
+(*     pedido como unidade                                                  *)
+(* DESLIGAR:                                                                *)
+(*   - 2 em operacao E pedido < soma das minimas E velocidade < C3 pelo     *)
+(*     tempo do E_DELAY C3 -> StopReq (Basic2 desliga o excedente)          *)
+(*   - o que fica controla pelo pedido (sem fase de velocidade fixa)        *)
+(* REQ e processado em QUALQUER estado: o setpoint nunca fica congelado.   *)
+(* Contagens do E_DELAY interrompidas sao invalidadas (T2Void/T3Void) e     *)
+(* reiniciadas no fim, entao a condicao precisa se manter o tempo todo.    *)
+(* ======================================================================== *)
+DoT2 := FALSE;
+DoT3 := FALSE;
+
+Sp1 := MIN((CapSp / MaximumCapacityBlower) * 100.0, 100.0);
+Sp2 := MIN((CapSp / (2.0 * MaximumCapacityBlower)) * 100.0, 100.0);
+
+IF MinimumCapacityBlower > 0.0 THEN
+    StopCond := (CapSp < (2.0 * MinimumCapacityBlower)) AND (Sp2 < C3_IN);
 ELSE
-	Starting2Pumps:=FALSE;
+    StopCond := Sp2 < C3_IN;
 END_IF;
 
-IF (NOT UsingPump2 AND LastUsingPump2) THEN
-	Stopping1Pump := TRUE;
+(* ---------- Fim de contagem (evento END_DELAY_Cx) ---------- *)
+IF EvEnd2 THEN
+    T2Busy := FALSE;
+    IF (Mode = 2) AND NOT T2Void THEN
+        Mode := 3;                       (* tempo em C2 cumprido *)
+    END_IF;
+END_IF;
+IF EvEnd3 THEN
+    T3Busy := FALSE;
+    IF (Mode = 4) AND NOT T3Void AND StopCond THEN
+        Mode := 5;                       (* abaixo de C3 pelo tempo todo *)
+    END_IF;
+END_IF;
+
+(* ---------- Modo ---------- *)
+IF NOT Plan2Pumps THEN
+    Mode := 0;                           (* 1 soprador *)
+ELSIF NOT UsingPump2 THEN
+    IF Mode <> 5 THEN Mode := 1; END_IF; (* 2o soprador entrando *)
 ELSE
-	Stopping1Pump := FALSE;
+    IF (Mode = 0) OR (Mode = 1) THEN
+        Mode := 2;                       (* dois em operacao: conta C2 *)
+    END_IF;
+    IF Mode = 3 THEN
+        IF StopCond THEN Mode := 4; END_IF;
+    ELSIF (Mode = 4) OR (Mode = 5) THEN
+        IF NOT StopCond THEN Mode := 3; END_IF;   (* pedido subiu: cancela *)
+    END_IF;
 END_IF;
 
-
-IF (NOT UsingPump2 )THEN
-    // Zone 1 : 0 ... C2_IN  =>  0 ... 100 %
-    IF Stopping1Pump THEN
-	    SpeedBlower := C3_IN;
-    ELSE
-    	SpeedBlower := MIN((CapSp / MaximumCapacityBlower) * 100.0, 100);
+(* ---------- Temporizadores ---------- *)
+(* C2: conta enquanto Mode = 2 *)
+IF Mode = 2 THEN
+    IF NOT T2Busy THEN
+        DoT2 := TRUE; T2Busy := TRUE; T2Void := FALSE;
     END_IF;
-END_IF; 	
-
-IF (UsingPump2 )THEN
-    // Zone 1 : 0 ... C2_IN  =>  0 ... 100 %
-    IF Starting2Pumps THEN
-	    SpeedBlower := C2_IN;
-    ELSE
-    	SpeedBlower := (CapSp / (2*MaximumCapacityBlower)) * 100.0;
-    END_IF;
-END_IF; 
-
-// Rev1: reator acima de Cmax com 1 soprador soprando de fato (MaxSp) fica
-// SEMPRE no maximo, inclusive na saida de um soprador (fase C3).
-IF MaxSp THEN
-	SpeedBlower := 100.0;
+ELSIF T2Busy THEN
+    T2Void := TRUE;                      (* saiu de Mode 2: contagem invalida *)
 END_IF;
 
-LastUsingPump2:=UsingPump2;
+(* C3: conta enquanto Mode = 4 *)
+IF Mode = 4 THEN
+    IF NOT T3Busy THEN
+        DoT3 := TRUE; T3Busy := TRUE; T3Void := FALSE;
+    END_IF;
+ELSIF T3Busy THEN
+    T3Void := TRUE;
+END_IF;
+
+(* ---------- Velocidade ---------- *)
+IF (Mode = 1) OR (Mode = 2) THEN
+    SpeedBlower := C2_IN;                (* entrada de soprador: todos em C2 *)
+ELSIF Mode >= 3 THEN
+    SpeedBlower := Sp2;                  (* dois como unidade *)
+ELSE
+    (* um soprador pelo pedido. Pedido >= Cmax sem MaxSp = o Basic2 ainda   *)
+    (* nao decidiu (2o soprador -> C2 / sem 2o -> MaxSp): segura o ultimo   *)
+    (* valor, nunca pula para 100 de passagem.                             *)
+    IF MaxSp THEN
+        SpeedBlower := 100.0;
+    ELSIF Sp1 < 100.0 THEN
+        SpeedBlower := Sp1;
+    END_IF;
+END_IF;
+
+StopReq := Mode = 5;
+
+EvEnd2 := FALSE;
+EvEnd3 := FALSE;
 ]]></ST>
+    </Algorithm>
+    <Algorithm ID="3E1B8C6F0A2D4957" Name="algEndC2">
+      <ST><![CDATA[;
+EvEnd2 := TRUE;]]></ST>
+    </Algorithm>
+    <Algorithm ID="A7D2F05C9E6B1384" Name="algEndC3">
+      <ST><![CDATA[;
+EvEnd3 := TRUE;]]></ST>
     </Algorithm>
   </BasicFB>
 </FBType>

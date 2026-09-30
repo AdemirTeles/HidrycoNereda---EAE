@@ -2,7 +2,7 @@
 <!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
 <FBType GUID="a0f3b0b1-63a7-4dc6-a005-e4cc442c633e" Name="CAerationActCmd" Comment="Basic Function Block Type" Namespace="SE.Nereda">
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Schneider Electric" Version="5.0" Author=" " Date="9/29/2026" Remarks="Rev5 - Abertura de valvulas otimizada: pre-abertura de rota, VB junto com rota, partida junto com break" />
+  <VersionInfo Organization="Schneider Electric" Version="6.0" Author=" " Date="9/30/2026" Remarks="Rev6 - Em transferencia o soprador usa o setpoint do reator de destino (C2 na entrada), nao mais o MAX" />
   <InterfaceList>
     <EventInputs>
       <Event ID="D2C11A8772DD75BE" Name="CMD_FB_RDY">
@@ -171,7 +171,7 @@
     <Algorithm ID="1f5dcb55-3f2a-41ae-abe4-bf0ee0a75cb9" Name="algSequence">
       <ST><![CDATA[;
 (* ========================================================================== *)
-(* CAerationActCmd - Rev5  |  Sequenciador de valvulas e sopradores B2/B3      *)
+(* CAerationActCmd - Rev6  |  Sequenciador de valvulas e sopradores B2/B3      *)
 (*                                                                            *)
 (*        H1 (R1)                                  H2 (R2)                    *)
 (*          ^                                        ^                        *)
@@ -509,10 +509,11 @@ IF SeqStep = 50 THEN
 END_IF;
 
 (* ---------- 4. Setpoint de velocidade (acompanha o header em tempo real) ---------- *)
-(* Em transferencia (rodando, indo para o outro reator) o soprador        *)
-(* alimenta os dois: usa o MAIOR setpoint, para nenhum reator ficar abaixo *)
+(* Rev6: em transferencia o soprador e o "soprador adicional" do reator de *)
+(* destino: usa o setpoint do destino (C2 durante a entrada, especificacao). *)
+(* O MAX anterior levava a 100% quando um dos reatores estava no maximo.    *)
 IF (Dest2 <> 0) AND (Tgt2 <> 0) AND (Tgt2 <> Dest2) THEN
-    SpeedSp_BL2 := MAX(SpeedSp_H1, SpeedSp_H2);
+    IF Tgt2 = 1 THEN SpeedSp_BL2 := SpeedSp_H1; ELSE SpeedSp_BL2 := SpeedSp_H2; END_IF;
 ELSIF Dest2 = 1 THEN
     SpeedSp_BL2 := SpeedSp_H1;
 ELSIF Dest2 = 2 THEN
@@ -522,7 +523,7 @@ ELSE
 END_IF;
 
 IF (Dest3 <> 0) AND (Tgt3 <> 0) AND (Tgt3 <> Dest3) THEN
-    SpeedSp_BL3 := MAX(SpeedSp_H1, SpeedSp_H2);
+    IF Tgt3 = 1 THEN SpeedSp_BL3 := SpeedSp_H1; ELSE SpeedSp_BL3 := SpeedSp_H2; END_IF;
 ELSIF Dest3 = 2 THEN
     SpeedSp_BL3 := SpeedSp_H2;
 ELSIF Dest3 = 1 THEN
