@@ -55,6 +55,10 @@ namespace SE.Nereda.Symbols.CmdWaterDischargeSLB
 			this.freeText9 = new NxtControl.GuiFramework.FreeText();
 			this.T_Restart = new System.HMI.Symbols.Base.TimeTextBox();
 			this.T_FlowLL = new System.HMI.Symbols.Base.TimeTextBox();
+			this.rectangleCmin = new NxtControl.GuiFramework.Rectangle();
+			this.freeTextCmin = new NxtControl.GuiFramework.FreeText();
+			this.Cmin = new System.HMI.Symbols.Base.TextBox<float>();
+			this.PumpStatus = new SE.Nereda.Symbols.CmdSludgeDischargeSLBLogic.sDefault();
 			// 
 			// rectangle1
 			// 
@@ -168,7 +172,7 @@ namespace SE.Nereda.Symbols.CmdWaterDischargeSLB
 			this.freeText3.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeText3.Location = new NxtControl.Drawing.PointF(16D, 204D);
 			this.freeText3.Name = "freeText3";
-			this.freeText3.Text = "Starting 3nd Blower Sp (C3) :";
+			this.freeText3.Text = "2nd Pump Stop Speed (C3) :";
 			// 
 			// freeText4
 			// 
@@ -176,7 +180,7 @@ namespace SE.Nereda.Symbols.CmdWaterDischargeSLB
 			this.freeText4.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeText4.Location = new NxtControl.Drawing.PointF(16D, 164D);
 			this.freeText4.Name = "freeText4";
-			this.freeText4.Text = "Starting 2rd Blower Sp (C2) :";
+			this.freeText4.Text = "2nd Pump Start Speed (C2) :";
 			// 
 			// freeText5
 			// 
@@ -184,7 +188,7 @@ namespace SE.Nereda.Symbols.CmdWaterDischargeSLB
 			this.freeText5.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeText5.Location = new NxtControl.Drawing.PointF(16D, 124D);
 			this.freeText5.Name = "freeText5";
-			this.freeText5.Text = "Maximun Capacity Blowers :";
+			this.freeText5.Text = "Max Speed 1 Pump (Cmax) :";
 			// 
 			// freeText6
 			// 
@@ -192,7 +196,7 @@ namespace SE.Nereda.Symbols.CmdWaterDischargeSLB
 			this.freeText6.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeText6.Location = new NxtControl.Drawing.PointF(16D, 244D);
 			this.freeText6.Name = "freeText6";
-			this.freeText6.Text = "Adjustable Time (C2) :";
+			this.freeText6.Text = "Time at C2 (T_C2) :";
 			// 
 			// freeText7
 			// 
@@ -200,7 +204,7 @@ namespace SE.Nereda.Symbols.CmdWaterDischargeSLB
 			this.freeText7.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeText7.Location = new NxtControl.Drawing.PointF(16D, 284D);
 			this.freeText7.Name = "freeText7";
-			this.freeText7.Text = "Adjustable Time (C3) :";
+			this.freeText7.Text = "Time below C3 (T_C3) :";
 			// 
 			// rectangle9
 			// 
@@ -240,7 +244,7 @@ namespace SE.Nereda.Symbols.CmdWaterDischargeSLB
 			this.Cmax.NumberBase = NxtControl.GuiFramework.NumberBase.Decimal;
 			this.Cmax.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("Black"), 1F, NxtControl.Drawing.DashStyle.Solid);
 			this.Cmax.SetColor = new NxtControl.Drawing.Color("Yellow");
-			this.Cmax.Suffix = "m³/h";
+			this.Cmax.Suffix = "%";
 			this.Cmax.TagName = "Cmax";
 			this.Cmax.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleCenter;
 			this.Cmax.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
@@ -257,7 +261,7 @@ namespace SE.Nereda.Symbols.CmdWaterDischargeSLB
 			this.C2.NumberBase = NxtControl.GuiFramework.NumberBase.Decimal;
 			this.C2.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("Black"), 1F, NxtControl.Drawing.DashStyle.Solid);
 			this.C2.SetColor = new NxtControl.Drawing.Color("Yellow");
-			this.C2.Suffix = "m³/h";
+			this.C2.Suffix = "%";
 			this.C2.TagName = "C2";
 			this.C2.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleCenter;
 			this.C2.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
@@ -274,7 +278,7 @@ namespace SE.Nereda.Symbols.CmdWaterDischargeSLB
 			this.C3.NumberBase = NxtControl.GuiFramework.NumberBase.Decimal;
 			this.C3.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("Black"), 1F, NxtControl.Drawing.DashStyle.Solid);
 			this.C3.SetColor = new NxtControl.Drawing.Color("Yellow");
-			this.C3.Suffix = "m³/h";
+			this.C3.Suffix = "%";
 			this.C3.TagName = "C3";
 			this.C3.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleCenter;
 			this.C3.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
@@ -341,6 +345,47 @@ namespace SE.Nereda.Symbols.CmdWaterDischargeSLB
 			this.T_FlowLL.Value = new NxtControl.GuiFramework.Time(((long)(0)));
 			this.T_FlowLL.EndInit();
 			// 
+			// rectangleCmin
+			// 
+			this.rectangleCmin.Bounds = new NxtControl.Drawing.RectF(((float)(8D)), ((float)(392D)), ((float)(376D)), ((float)(40D)));
+			this.rectangleCmin.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(250)), ((byte)(250)), ((byte)(250))));
+			this.rectangleCmin.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
+			this.rectangleCmin.Name = "rectangleCmin";
+			// 
+			// freeTextCmin
+			// 
+			this.freeTextCmin.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.freeTextCmin.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+			this.freeTextCmin.Location = new NxtControl.Drawing.PointF(16D, 404D);
+			this.freeTextCmin.Name = "freeTextCmin";
+			this.freeTextCmin.Text = "Min. Pump Speed (Cmin) :";
+			// 
+			// Cmin
+			// 
+			this.Cmin.BeginInit();
+			this.Cmin.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.48D, 0D, 0D, 1D, 272D, 400D);
+			this.Cmin.MaximumTag = null;
+			this.Cmin.MinimumTag = null;
+			this.Cmin.Name = "Cmin";
+			this.Cmin.NumberBase = NxtControl.GuiFramework.NumberBase.Decimal;
+			this.Cmin.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("Black"), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.Cmin.SetColor = new NxtControl.Drawing.Color("Yellow");
+			this.Cmin.Suffix = "%";
+			this.Cmin.TagName = "Cmin";
+			this.Cmin.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleCenter;
+			this.Cmin.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.Cmin.Value = 0F;
+			this.Cmin.EndInit();
+			// 
+			// PumpStatus
+			// 
+			this.PumpStatus.BeginInit();
+			this.PumpStatus.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 8D, 440D);
+			this.PumpStatus.Name = "PumpStatus";
+			this.PumpStatus.SecurityToken = ((uint)(4294967295u));
+			this.PumpStatus.TagName = "CommandLogic";
+			this.PumpStatus.EndInit();
+			// 
 			// sDefault
 			// 
 			this.Shapes.AddRange(new System.ComponentModel.IComponent[] {
@@ -371,8 +416,12 @@ namespace SE.Nereda.Symbols.CmdWaterDischargeSLB
 			this.freeText8,
 			this.freeText9,
 			this.T_Restart,
-			this.T_FlowLL});
-			this.SymbolSize = new System.Drawing.Size(432, 416);
+			this.T_FlowLL,
+			this.rectangleCmin,
+			this.freeTextCmin,
+			this.Cmin,
+			this.PumpStatus});
+			this.SymbolSize = new System.Drawing.Size(432, 624);
 
 		}
 		private NxtControl.GuiFramework.Rectangle rectangle1;
@@ -403,6 +452,10 @@ namespace SE.Nereda.Symbols.CmdWaterDischargeSLB
 		private NxtControl.GuiFramework.FreeText freeText9;
 		private System.HMI.Symbols.Base.TimeTextBox T_Restart;
 		private System.HMI.Symbols.Base.TimeTextBox T_FlowLL;
+		private NxtControl.GuiFramework.Rectangle rectangleCmin;
+		private NxtControl.GuiFramework.FreeText freeTextCmin;
+		private System.HMI.Symbols.Base.TextBox<float> Cmin;
+		private SE.Nereda.Symbols.CmdSludgeDischargeSLBLogic.sDefault PumpStatus;
 		#endregion
 	}
 }

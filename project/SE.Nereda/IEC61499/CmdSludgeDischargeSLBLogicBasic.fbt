@@ -2,7 +2,7 @@
 <!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
 <FBType GUID="b80075c8-22a5-4b20-8d99-ccf621cc16df" Name="CmdSludgeDischargeSLBLogicBasic" Comment="Descarga do Sludge Buffer - valvulas e bombas (lodo / sobrenadante)" Namespace="SE.Nereda">
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Schneider Electric" Version="10.0" Author="Claude/Hidryco" Date="9/30/2026" Remarks="Rev10 - Reserva que entra para compor 2 bombas segue a sequencia C2 (bomba que ficou baixa para C2); Rev9 - Saida da 2a bomba exige velocidade abaixo de C3 alem de T_C3 (com T_C3 = 0 a bomba entrava e saia em ciclo); Rev8 - Capacidade = saida do PID (0-100 % total); Cmax = parcela de 1 bomba [%]; 1 bomba = PID/Cmax, 2 bombas = PID/(2 Cmax), entrada em C2 [%], saida com velocidade abaixo de C3 [%]; Rev5 - Bomba so sai de servico sem Ready E sem Running (modo operador); valvulas so fecham com bombas paradas; Rev4 - ECC simplificado (4 estados/6 transicoes); Sel-&gt;PumpSel (SEL e reservado); algoritmos AlgMain/AlgTick; Rev3 - Pausa no RUN (nivel L 49LT0001 / vazao LL 49FT0004) com retomada por tempo; Logica unica p/ lodo (1+2, AV49004 e/ou AV49005) e sobrenadante (2+1, Cmax/C2/C3 m3/h); troca p/ reserva no RUN" />
+  <VersionInfo Organization="Schneider Electric" Version="13.0" Author="Claude/Hidryco" Date="10/1/2026" Remarks="Rev13 - Saida da 2a bomba pela velocidade pedida (Dem) abaixo de C3 E 2 x Dem abaixo de Cmax - HystExit (protecao anti-ciclo embutida; parametro nao trava mais a fase, ParBad so avisa); T_C2 conta com as duas bombas com velocidade real em C2 (ou apos T_DecMax); reserva em falha parte na hora em C2; C2 efetivo nunca abaixo de Cmin; status para IHM (HMI_STS); Rev12 - Sempre que parte uma bomba nova (entrada da 2a ou reserva), a que esta rodando desce primeiro para C2: a nova so parte com a velocidade real (FbSpeedPv) ate C2 + TolC2 ou apos T_DecMax (internos 2 % / 1 min); PumpMode 1 = reduzindo p/ C2, 2 = nova bomba partindo em C2 (T_C2); Rev11 - Setpoints Cmax/C2/C3/Cmin em % de velocidade de 1 bomba; sobrenadante: 1 bomba = 2 x demanda, 2 bombas = demanda (demanda = PID, 100 % = 2 bombas); velocidade minima Cmin por bomba; falha do 49FT0004 tratada aqui (SP em % da faixa do medidor substitui o PID); setpoint do PID acompanha a vazao medida durante C2 (sem salto ao fim de T_C2); ParBad/AtMin/NPumps p/ IHM; Rev10 - Reserva que entra para compor 2 bombas segue a sequencia C2 (bomba que ficou baixa para C2); Rev9 - Saida da 2a bomba exige velocidade abaixo de C3 alem de T_C3 (com T_C3 = 0 a bomba entrava e saia em ciclo); Rev8 - Capacidade = saida do PID (0-100 % total); Cmax = parcela de 1 bomba [%]; 1 bomba = PID/Cmax, 2 bombas = PID/(2 Cmax), entrada em C2 [%], saida com velocidade abaixo de C3 [%]; Rev5 - Bomba so sai de servico sem Ready E sem Running (modo operador); valvulas so fecham com bombas paradas; Rev4 - ECC simplificado (4 estados/6 transicoes); Sel-&gt;PumpSel (SEL e reservado); algoritmos AlgMain/AlgTick; Rev3 - Pausa no RUN (nivel L 49LT0001 / vazao LL 49FT0004) com retomada por tempo; Logica unica p/ lodo (1+2, AV49004 e/ou AV49005) e sobrenadante (2+1, Cmax/C2/C3 m3/h); troca p/ reserva no RUN" />
   <InterfaceList>
     <EventInputs>
       <Event Name="READY">
@@ -58,10 +58,16 @@
         <With Var="Cmax" />
         <With Var="C2" />
         <With Var="C3" />
+        <With Var="Cmin" />
         <With Var="T_C2" />
         <With Var="T_C3" />
         <With Var="T_Restart" />
         <With Var="T_FlowLL" />
+      </Event>
+      <Event ID="AC2506F2EB70D1EE" Name="PUMP_SPD" Comment="Velocidade real das bombas (FbSpeedPv) [%]">
+        <With Var="PumpSpeedPv_1" />
+        <With Var="PumpSpeedPv_2" />
+        <With Var="PumpSpeedPv_3" />
       </Event>
       <Event ID="2AFCCC4D006C5A58" Name="TICK" Comment="Base de tempo 1 s" />
       <Event ID="19EED5631A4ADE11" Name="LEVEL" Comment="Nivel L do 49LT0001">
@@ -73,6 +79,9 @@
       <Event ID="E12F00872D66F11F" Name="FLOW" Comment="Status do 49FT0004">
         <With Var="FlowLL" />
         <With Var="FlowFail" />
+        <With Var="FlowPvMin" />
+        <With Var="FlowPvMax" />
+        <With Var="FlowPv" />
       </Event>
     </EventInputs>
     <EventOutputs>
@@ -102,6 +111,29 @@
         <With Var="PauseCause" />
         <With Var="Grafcet" />
         <With Var="SelectedPump" />
+        <With Var="AtMin" />
+        <With Var="ParBad" />
+        <With Var="NPumps" />
+      </Event>
+      <Event ID="5CD64F6ACD94781F" Name="HMI_STS" Comment="Status para a IHM (a cada 1 s e na mudanca)">
+        <With Var="Grafcet" />
+        <With Var="PumpMode" />
+        <With Var="NPumps" />
+        <With Var="PauseCause" />
+        <With Var="SelectedPump" />
+        <With Var="SecondPump" />
+        <With Var="PumpSpeed" />
+        <With Var="AtMin" />
+        <With Var="ParBad" />
+        <With Var="HmiCmin" />
+        <With Var="HmiC2" />
+        <With Var="HmiC3" />
+        <With Var="HmiCmax" />
+        <With Var="HmiSup" />
+        <With Var="HmiFlowFail" />
+        <With Var="HmiTC2" />
+        <With Var="HmiTC3" />
+        <With Var="HmiTDec" />
       </Event>
       <Event ID="6F9F08BA58B8009D" Name="SPEED_CNF" Comment="Velocidade das bombas">
         <With Var="PumpSpeed" />
@@ -139,9 +171,9 @@
       <VarDeclaration ID="C2A6AEC1BFED4499" Name="ValveReady_Supernant" Type="BOOL" />
       <VarDeclaration ID="38A57B28987BAE06" Name="FlowSp" Type="REAL" Comment="Setpoint de vazao da fase [m3/h]" />
       <VarDeclaration ID="B8EE5B594802026A" Name="SupernatantMode" Type="BOOL" Comment="TRUE = sobrenadante (2 servico + 1 reserva, AV49002+AV49003+AV40001); FALSE = lodo" />
-      <VarDeclaration ID="0A323B5BB10D6790" Name="Cmax" Type="REAL" Comment="Vazao maxima de 1 bomba [m3/h]" />
-      <VarDeclaration ID="7B6FA0EADBC872E0" Name="C2" Type="REAL" Comment="Vazao por bomba na entrada da 2a bomba [m3/h]" />
-      <VarDeclaration ID="FBBD66E4176C0F4A" Name="C3" Type="REAL" Comment="Vazao por bomba abaixo da qual sai 1 bomba [m3/h]" />
+      <VarDeclaration ID="0A323B5BB10D6790" Name="Cmax" Type="REAL" Comment="Velocidade de 1 bomba acima da qual entra a 2a bomba [% velocidade]" />
+      <VarDeclaration ID="7B6FA0EADBC872E0" Name="C2" Type="REAL" Comment="Velocidade das 2 bombas na entrada da 2a bomba [% velocidade]" />
+      <VarDeclaration ID="FBBD66E4176C0F4A" Name="C3" Type="REAL" Comment="Velocidade das 2 bombas abaixo da qual sai 1 bomba [% velocidade]" />
       <VarDeclaration ID="2EE8E2AD063EE95E" Name="T_C2" Type="TIME" Comment="Tempo em C2" />
       <VarDeclaration ID="097CEF7D3109D4BE" Name="T_C3" Type="TIME" Comment="Tempo abaixo de C3" />
       <VarDeclaration ID="37F2A16CD48B9A9D" Name="T_Restart" Type="TIME" Comment="Tempo para retomar apos a causa da pausa sair" />
@@ -149,7 +181,14 @@
       <VarDeclaration ID="E364687AE6285E4B" Name="LowLevel" Type="BOOL" Comment="Nivel L do 49LT0001" />
       <VarDeclaration ID="CF4621EC925C43E9" Name="FlowLL" Type="BOOL" Comment="Alarme LL do 49FT0004" />
       <VarDeclaration ID="F66FAF9E12E91CF7" Name="FlowFail" Type="BOOL" Comment="Falha do 49FT0004" />
-      <VarDeclaration ID="A7D276693781888D" Name="PIDOut" Type="REAL" Comment="Saida do PID = capacidade total pedida [%]" />
+      <VarDeclaration ID="A7D276693781888D" Name="PIDOut" Type="REAL" Comment="Saida do PID = demanda [%] (sobrenadante: 100 % = 2 bombas; lodo: 100 % = 1 bomba)" />
+      <VarDeclaration ID="EB5C203C0888EDB6" Name="Cmin" Type="REAL" Comment="Velocidade minima de cada bomba em servico [% velocidade]" />
+      <VarDeclaration ID="3F7E80244F83E6EC" Name="FlowPvMin" Type="REAL" Comment="Inicio de faixa do 49FT0004 (uso em falha do medidor)" />
+      <VarDeclaration ID="BF360DB4ADFA54A9" Name="FlowPvMax" Type="REAL" Comment="Fim de faixa do 49FT0004 (uso em falha do medidor)" />
+      <VarDeclaration ID="AF76E8DD0A107DA1" Name="FlowPv" Type="REAL" Comment="Vazao medida 49FT0004 (setpoint do PID acompanha durante C2)" />
+      <VarDeclaration ID="AEEF8416049DD42D" Name="PumpSpeedPv_1" Type="REAL" Comment="Velocidade real da bomba 1 [%]" />
+      <VarDeclaration ID="8140B1A1F71C3184" Name="PumpSpeedPv_2" Type="REAL" Comment="Velocidade real da bomba 2 [%]" />
+      <VarDeclaration ID="341C589C089A3722" Name="PumpSpeedPv_3" Type="REAL" Comment="Velocidade real da bomba 3 [%]" />
     </InputVars>
     <OutputVars>
       <VarDeclaration Name="StartReady" Type="BOOL" />
@@ -163,12 +202,24 @@
       <VarDeclaration ID="750D687533E86DDC" Name="Pump_2" Type="BOOL" />
       <VarDeclaration ID="A7428AB4F66CF0EA" Name="Pump_3" Type="BOOL" />
       <VarDeclaration ID="CE5E9AB5AF070C5F" Name="SelectedPump" Type="INT" />
-      <VarDeclaration ID="CFFB125A7B539DE2" Name="EffFlowSp" Type="REAL" Comment="Setpoint efetivo de vazao para o PI [m3/h]" />
-      <VarDeclaration ID="120DEE7B658C67A3" Name="PumpMode" Type="INT" Comment="0=1 bomba 1=reduzindo p/ C2 2=2a bomba entrando 3=duas bombas" />
+      <VarDeclaration ID="CFFB125A7B539DE2" Name="EffFlowSp" Type="REAL" Comment="Setpoint efetivo de vazao para o PI [m3/h] (= vazao medida enquanto as bombas estao fixas em C2)" />
+      <VarDeclaration ID="120DEE7B658C67A3" Name="PumpMode" Type="INT" Comment="0=1 bomba 1=reduzindo p/ C2 (antes de partir a nova) 2=nova bomba partindo/acelerando em C2 (T_C2) 3=duas bombas no PID" />
       <VarDeclaration ID="62FD82D60F199509" Name="SecondPump" Type="INT" Comment="Segunda bomba em servico" />
       <VarDeclaration ID="11614BB0316B186C" Name="Paused" Type="BOOL" Comment="Descarga em pausa" />
       <VarDeclaration ID="2E15F5890513A407" Name="PauseCause" Type="INT" Comment="0=sem pausa 1=nivel L 49LT0001 2=vazao LL 49FT0004" />
-      <VarDeclaration ID="1E314D8B4487BA0C" Name="PumpSpeed" Type="REAL" Comment="Velocidade enviada as bombas [%]" />
+      <VarDeclaration ID="1E314D8B4487BA0C" Name="PumpSpeed" Type="REAL" Comment="Velocidade enviada a cada bomba em servico [%] (nunca abaixo de Cmin)" />
+      <VarDeclaration ID="1D396C37CC4B0729" Name="AtMin" Type="BOOL" Comment="Velocidade limitada em Cmin (bomba entrega mais que o pedido)" />
+      <VarDeclaration ID="32A287B6E8B199F5" Name="ParBad" Type="BOOL" Comment="Parametros incoerentes (opera com 1 bomba)" />
+      <VarDeclaration ID="8A767DFEA066D001" Name="NPumps" Type="INT" Comment="Bombas em servico rodando" />
+      <VarDeclaration ID="965DC2CE66FF6A0B" Name="HmiCmin" Type="REAL" Comment="Cmin efetivo [%] (IHM)" />
+      <VarDeclaration ID="36CF9546C621AEDD" Name="HmiC2" Type="REAL" Comment="C2 [%] (IHM)" />
+      <VarDeclaration ID="6B93FBB0853215B0" Name="HmiC3" Type="REAL" Comment="C3 [%] (IHM)" />
+      <VarDeclaration ID="058E1875A097FD94" Name="HmiCmax" Type="REAL" Comment="Cmax [%] (IHM)" />
+      <VarDeclaration ID="E474438BEBAB71A9" Name="HmiSup" Type="BOOL" Comment="Modo sobrenadante (IHM)" />
+      <VarDeclaration ID="8A51EE81734EE343" Name="HmiFlowFail" Type="BOOL" Comment="Falha do 49FT0004 (IHM)" />
+      <VarDeclaration ID="8FE9266035FC4537" Name="HmiTC2" Type="INT" Comment="Tempo em C2 [s] (IHM)" />
+      <VarDeclaration ID="B7E0E2DBA29A9E36" Name="HmiTC3" Type="INT" Comment="Tempo abaixo de C3 [s] (IHM)" />
+      <VarDeclaration ID="E05A148A6452F547" Name="HmiTDec" Type="INT" Comment="Tempo descendo ate C2 [s] (IHM)" />
     </OutputVars>
   </InterfaceList>
   <BasicFB ID="b09b6cfe-84e6-466d-9649-93dbbf4f5b70">
@@ -208,6 +259,32 @@
       <VarDeclaration Name="PrevSel" Type="INT" />
       <VarDeclaration Name="PrevSec" Type="INT" />
       <VarDeclaration Name="PrevPM" Type="INT" />
+      <VarDeclaration Name="Dem" Type="REAL" Comment="Demanda usada [%]: PID ou, em falha do medidor, SP em % da faixa" />
+      <VarDeclaration Name="CminEff" Type="REAL" />
+      <VarDeclaration Name="SpdRaw" Type="REAL" />
+      <VarDeclaration Name="PrevAM" Type="BOOL" />
+      <VarDeclaration Name="PrevPB" Type="BOOL" />
+      <VarDeclaration Name="PrevNP" Type="INT" />
+      <VarDeclaration Name="TolC2" Type="REAL" InitialValue="2.0" Comment="Parametro interno: tolerancia [%] para considerar que a bomba desceu ate C2" />
+      <VarDeclaration Name="T_DecMax" Type="TIME" InitialValue="T#1m" Comment="Parametro interno: tempo maximo de descida ate C2; depois parte a nova mesmo sem confirmar a velocidade" />
+      <VarDeclaration Name="Tdec" Type="TIME" />
+      <VarDeclaration Name="SpdAtC2" Type="BOOL" />
+      <VarDeclaration Name="SpdUpC2" Type="BOOL" Comment="Bombas em operacao com velocidade real ja em C2 (subida)" />
+      <VarDeclaration Name="C2Eff" Type="REAL" />
+      <VarDeclaration Name="ExitCond" Type="BOOL" Comment="Condicao fisica de saida da 2a bomba" />
+      <VarDeclaration Name="HystExit" Type="REAL" InitialValue="10.0" Comment="Parametro interno: margem [%] abaixo de Cmax que a bomba que fica deve ter apos a saida da 2a (anti-ciclo)" />
+      <VarDeclaration Name="Tup" Type="TIME" />
+      <VarDeclaration Name="TC2s" Type="INT" />
+      <VarDeclaration Name="TC3s" Type="INT" />
+      <VarDeclaration Name="TDecs" Type="INT" />
+      <VarDeclaration Name="FromTick" Type="BOOL" />
+      <VarDeclaration Name="EdgeSts" Type="BOOL" />
+      <VarDeclaration Name="PrevSPM" Type="INT" />
+      <VarDeclaration Name="PrevSNP" Type="INT" />
+      <VarDeclaration Name="PrevSPC" Type="INT" />
+      <VarDeclaration Name="PrevSGR" Type="INT" />
+      <VarDeclaration Name="PrevSAM" Type="BOOL" />
+      <VarDeclaration Name="PrevSPB" Type="BOOL" />
     </InternalVars>
     <ECC>
       <ECState Name="START" x="2600" y="300" />
@@ -228,15 +305,22 @@
       <ECState Name="SEND_SPD" x="4000" y="1900">
         <ECAction Output="SPEED_CNF" />
       </ECState>
+      <ECState Name="SEND_STS" Comment="Status para a IHM" x="4000" y="2700">
+        <ECAction Output="HMI_STS" />
+      </ECState>
       <ECTransition Source="START" Destination="TIMEBASE" Condition="TICK" x="1700" y="700" />
-      <ECTransition Source="START" Destination="EVAL" Condition="READY OR STARTING OR RUN OR STOPPING OR ABORTING OR VALVE_FB OR PUMP_FB OR VALVE_READY OR PUMP_READY OR PUMP_TOT OR SP OR LEVEL OR FLOW OR PID_UPD" x="2700" y="700" />
+      <ECTransition Source="START" Destination="EVAL" Condition="READY OR STARTING OR RUN OR STOPPING OR ABORTING OR VALVE_FB OR PUMP_FB OR VALVE_READY OR PUMP_READY OR PUMP_TOT OR SP OR LEVEL OR FLOW OR PID_UPD OR PUMP_SPD" x="2700" y="700" />
       <ECTransition Source="TIMEBASE" Destination="EVAL" Condition="1" x="1900" y="1150" />
       <ECTransition Source="EVAL" Destination="SEND_OUT" Condition="EdgeOut" x="2700" y="1500" />
       <ECTransition Source="EVAL" Destination="SEND_SPD" Condition="EdgeSpd" x="3400" y="1500" />
+      <ECTransition Source="EVAL" Destination="SEND_STS" Condition="EdgeSts" x="4300" y="1500" />
       <ECTransition Source="EVAL" Destination="START" Condition="1" x="3300" y="700" />
       <ECTransition Source="SEND_OUT" Destination="SEND_SPD" Condition="EdgeSpd" x="3300" y="2000" />
+      <ECTransition Source="SEND_OUT" Destination="SEND_STS" Condition="EdgeSts" x="3300" y="2600" />
       <ECTransition Source="SEND_OUT" Destination="START" Condition="1" x="3700" y="1100" />
+      <ECTransition Source="SEND_SPD" Destination="SEND_STS" Condition="EdgeSts" x="4200" y="2300" />
       <ECTransition Source="SEND_SPD" Destination="START" Condition="1" x="4200" y="1000" />
+      <ECTransition Source="SEND_STS" Destination="START" Condition="1" x="4600" y="2000" />
     </ECC>
     <Algorithm Name="AlgMain" Comment="Logica de valvulas/bombas da descarga">
       <ST><![CDATA[;
@@ -249,10 +333,17 @@
    Grafcet: 0 repouso | 1 abrindo valvulas | 2 StartReady | 3 Run
             4 parando bombas | 5 fechando valvulas | 6 StopReady
             7 abortando bombas | 8 abortando valvulas | 9 AbortedReady
-   PumpMode (sobrenadante): 0 uma bomba | 1 segunda bomba entrando, ambas em C2
-            2 ambas rodando em C2 (T_C2) | 3 duas bombas moduladas pelo PID
-   Capacidade = saida do PID (0-100 % da capacidade total). Cmax [%] = parcela de uma bomba.
-   Velocidade: 1 bomba = PID/Cmax*100 ; 2 bombas = PID/(2*Cmax)*100 ; entrada = C2
+   PumpMode (sobrenadante): 0 uma bomba | 1 reduzindo a(s) bomba(s) em operacao p/ C2, a nova ainda parada
+            2 nova bomba partindo, todas em C2 (T_C2 com as duas rodando) | 3 duas bombas moduladas pelo PID
+   Rev12: sempre que parte uma bomba nova (entrada da 2a ou reserva no lugar de uma que saiu),
+   a que esta rodando desce primeiro ate C2; a nova so parte com FbSpeedPv <= C2 + TolC2 ou apos T_DecMax.
+   Rev13: T_C2 so conta com as duas com velocidade real em C2; reserva em falha parte na hora (modo 2);
+   saida da 2a: Dem < C3 E 2 x Dem < Cmax - HystExit (parametros incoerentes nao travam: ParBad so avisa).
+   Rev11: demanda = saida do PID [%] (sobrenadante: 100 % = 2 bombas a 100 %; lodo: 100 % = 1 bomba).
+   Em falha do 49FT0004 a demanda = SP em % da faixa do medidor.
+   Cmax / C2 / C3 / Cmin em % de velocidade de UMA bomba (o que o inversor mostra).
+   Velocidade (sobrenadante): 1 bomba = 2 x demanda ; 2 bombas = demanda ; entrada = C2.
+   Lodo: velocidade = demanda. Toda bomba em servico nunca abaixo de Cmin.
    PauseCause: 0 sem pausa | 1 nivel L 49LT0001 | 2 vazao LL 49FT0004
    ============================================================ *)
 
@@ -287,6 +378,41 @@ ELSE
     ValvesOpenOk := (ValveFbOpen_1 OR NOT ValveReady_1) AND (ValveFbOpen_2 OR NOT ValveReady_2) AND (ValveFbOpen_1 OR ValveFbOpen_2);
 END_IF;
 ValvesClosedOk := (ValveFbClose_1 OR NOT ValveReady_1) AND (ValveFbClose_2 OR NOT ValveReady_2) AND ((NOT UseSup) OR ValveFbClose_Supernant OR NOT ValveReady_Supernant);
+
+(* 2b. demanda, velocidade minima e coerencia dos parametros *)
+IF FlowFail THEN
+    IF FlowPvMax > FlowPvMin THEN
+        Dem := (FlowSp - FlowPvMin) / (FlowPvMax - FlowPvMin) * 100.0;
+    ELSE
+        Dem := 0.0;
+    END_IF;
+ELSE
+    Dem := PIDOut;
+END_IF;
+IF Dem > 100.0 THEN
+    Dem := 100.0;
+END_IF;
+IF Dem < 0.0 THEN
+    Dem := 0.0;
+END_IF;
+CminEff := Cmin;
+IF CminEff > 100.0 THEN
+    CminEff := 100.0;
+END_IF;
+IF CminEff < 0.0 THEN
+    CminEff := 0.0;
+END_IF;
+(* C3 acima de Cmin (senao a 2a bomba nunca sai); 2 x C3 abaixo de Cmax (senao entra e sai em ciclo) *)
+(* Rev13: so Cmax e C2 sao indispensaveis; o resto apenas avisa (ParBad) - a protecao anti-ciclo esta embutida na saida *)
+ParOk := SupernatantMode AND (Cmax > 0.0) AND (C2 > 0.0);
+ParBad := (SupernatantMode AND ((Cmax <= 0.0) OR (C2 <= 0.0) OR (C2 < CminEff) OR (C3 <= CminEff) OR ((2.0 * C3) >= Cmax))) OR (Cmin < 0.0) OR (Cmin > 100.0);
+(* C2 efetivo nunca abaixo da velocidade minima *)
+C2Eff := C2;
+IF C2Eff < CminEff THEN
+    C2Eff := CminEff;
+END_IF;
+(* saida da 2a bomba: velocidade pedida abaixo de C3 E a bomba que fica assume sem passar de Cmax - HystExit *)
+ExitCond := (Dem < C3) AND ((2.0 * Dem) < (Cmax - HystExit));
 
 (* ---------- 3. Transicoes ---------- *)
 IF (Grafcet = 1) AND ValvesOpenOk THEN
@@ -343,11 +469,14 @@ IF (Grafcet = 3) AND Paused THEN
     Pump_3 := FALSE;
     PumpMode := 0;
     Tacc := T#0s;
+    TC2s := 0;
     T3acc := T#0s;
+    TC3s := 0;
     NCmd := 0;
     NRun := 0;
     EffFlowSp := FlowSp;
     PumpSpeed := PIDOut;
+    AtMin := FALSE;
 ELSIF Grafcet = 3 THEN
     (* 5.1 bomba sai de servico somente se nao estiver Ready (modo programa) NEM Running.
        Bomba passada para modo operador e ainda rodando continua contando: nao parte reserva *)
@@ -381,36 +510,78 @@ ELSIF Grafcet = 3 THEN
         NRun := NRun + 1;
     END_IF;
     Spare := (PumpReady_1 AND NOT Pump_1) OR (PumpReady_2 AND NOT Pump_2) OR (PumpReady_3 AND NOT Pump_3);
-    ParOk := SupernatantMode AND (Cmax > 0.0) AND (C2 > 0.0);
+    (* bombas em operacao ja desceram ate C2 (velocidade real) *)
+    SpdAtC2 := TRUE;
+    IF Pump_1 AND PumpFbRunning_1 AND (PumpSpeedPv_1 > (C2Eff + TolC2)) THEN
+        SpdAtC2 := FALSE;
+    END_IF;
+    IF Pump_2 AND PumpFbRunning_2 AND (PumpSpeedPv_2 > (C2Eff + TolC2)) THEN
+        SpdAtC2 := FALSE;
+    END_IF;
+    IF Pump_3 AND PumpFbRunning_3 AND (PumpSpeedPv_3 > (C2Eff + TolC2)) THEN
+        SpdAtC2 := FALSE;
+    END_IF;
+    (* bombas em operacao com velocidade real ja em C2 (subida da que entrou) *)
+    SpdUpC2 := TRUE;
+    IF Pump_1 AND PumpFbRunning_1 AND (PumpSpeedPv_1 < (C2Eff - TolC2)) THEN
+        SpdUpC2 := FALSE;
+    END_IF;
+    IF Pump_2 AND PumpFbRunning_2 AND (PumpSpeedPv_2 < (C2Eff - TolC2)) THEN
+        SpdUpC2 := FALSE;
+    END_IF;
+    IF Pump_3 AND PumpFbRunning_3 AND (PumpSpeedPv_3 < (C2Eff - TolC2)) THEN
+        SpdUpC2 := FALSE;
+    END_IF;
+    (* 5.1b com 2 bombas (modo 2/3) uma saiu de servico (falha/indisponivel): a reserva parte NA HORA,
+            todas em C2, T_C2 com as duas em C2, depois PID (a vazao ja caiu: nao espera descida) *)
+    IF ParOk AND (PumpMode >= 2) AND (NCmd < 2) THEN
+        IF Spare AND (NCmd >= 1) THEN
+            PumpMode := 2;
+            Tacc := T#0s;
+            TC2s := 0;
+            Tup := T#0s;
+        ELSE
+            PumpMode := 0;
+        END_IF;
+    END_IF;
 
-    (* 5.2 numero de bombas (so sobrenadante). Capacidade = saida do PID (0-100 % da capacidade total);
-           Cmax = parcela que uma bomba cobre sozinha [%], C2 / C3 = velocidade de cada bomba [%]
-           0: 1 bomba | 1: 2a bomba entrando, ambas em C2 | 2: ambas rodando em C2 (T_C2) | 3: duas no PID *)
+    (* 5.2 numero de bombas (so sobrenadante). Demanda 0-100 % = 0 a 2 bombas a 100 %;
+           Cmax / C2 / C3 = velocidade de cada bomba [%]; entra a 2a quando 1 bomba precisaria passar de Cmax
+           0: 1 bomba | 1: reduzindo p/ C2 (nova parada) | 2: nova partindo em C2 (T_C2) | 3: duas no PID *)
     IF NOT ParOk THEN
         PumpMode := 0;
     ELSIF PumpMode = 0 THEN
-        IF (PIDOut > Cmax) AND Spare AND (NRun >= 1) THEN
+        IF ((2.0 * Dem) > Cmax) AND Spare AND (NRun >= 1) THEN
             PumpMode := 1;
-            Tacc := T#0s;
+            Tdec := T#0s;
+            TDecs := 0;
         END_IF;
     ELSIF PumpMode = 1 THEN
-        IF NRun >= 2 THEN
+        (* a nova so parte depois que a(s) bomba(s) em operacao desceram ate C2 (ou apos T_DecMax) *)
+        IF (NOT Spare) OR (NCmd = 0) THEN
+            PumpMode := 0;
+        ELSIF SpdAtC2 OR (Tdec >= T_DecMax) THEN
             PumpMode := 2;
             Tacc := T#0s;
+            TC2s := 0;
+            Tup := T#0s;
         END_IF;
     ELSIF PumpMode = 2 THEN
-        IF Tacc >= T_C2 THEN
+        (* T_C2 conta com as duas rodando e com velocidade real em C2 (ou apos T_DecMax); condicao fisica junto com o tempo *)
+        IF (NRun >= 2) AND (Tacc >= T_C2) THEN
             PumpMode := 3;
             T3acc := T#0s;
+            TC3s := 0;
         END_IF;
     ELSIF PumpMode = 3 THEN
-        (* saida exige a condicao fisica (velocidade abaixo de C3) alem do tempo: com T_C3 = 0 nao pode sair acima de C3 *)
-        IF (PumpSpeed < C3) AND (T3acc >= T_C3) THEN
+        (* saida exige a condicao fisica (ExitCond) alem do tempo: com T_C3 = 0 nao sai sem a condicao *)
+        IF ExitCond AND (T3acc >= T_C3) THEN
             PumpMode := 0;
             T3acc := T#0s;
+            TC3s := 0;
         END_IF;
     END_IF;
-    IF PumpMode >= 1 THEN
+    IF PumpMode >= 2 THEN
         NWant := 2;
     ELSE
         NWant := 1;
@@ -489,13 +660,6 @@ ELSIF Grafcet = 3 THEN
         END_IF;
     END_IF;
 
-    (* 5.3b bomba entrando para compor 2 bombas (reserva substituindo bomba intertravada/em falha):
-            mesma sequencia da entrada - todas em C2, as duas rodando por T_C2, depois PID *)
-    IF (PumpMode >= 2) AND (NCmd > NCmdPrev) THEN
-        PumpMode := 1;
-        Tacc := T#0s;
-    END_IF;
-
     (* 5.4 excedente: sai a bomba em operacao ha mais tempo (menor ordem de partida) *)
     IF NCmd > NWant THEN
         PumpSel := 0;
@@ -526,26 +690,36 @@ ELSIF Grafcet = 3 THEN
     END_IF;
 
     (* 5.5 sem bomba para a 2a posicao: volta a operar com uma *)
-    IF (PumpMode >= 1) AND (NCmd < 2) THEN
+    IF (PumpMode >= 2) AND (NCmd < 2) THEN
         PumpMode := 0;
     END_IF;
 
     (* 5.6 PI sempre no setpoint de vazao; velocidade das bombas conforme o modo *)
-    EffFlowSp := FlowSp;
-    IF NOT ParOk THEN
-        PumpSpeed := PIDOut;
-    ELSIF (PumpMode = 1) OR (PumpMode = 2) THEN
-        PumpSpeed := C2;
-    ELSIF PumpMode = 3 THEN
-        PumpSpeed := PIDOut / (2.0 * Cmax) * 100.0;
+    (* bombas fixas em C2 (entrada da 2a): setpoint do PID acompanha a vazao medida, o PID nao integra
+       e ao fim de T_C2 a velocidade parte de onde estava (sem salto para 100 %) *)
+    IF ParOk AND ((PumpMode = 1) OR (PumpMode = 2)) AND NOT FlowFail THEN
+        EffFlowSp := FlowPv;
     ELSE
-        PumpSpeed := PIDOut / Cmax * 100.0;
+        EffFlowSp := FlowSp;
     END_IF;
-    IF PumpSpeed > 100.0 THEN
-        PumpSpeed := 100.0;
+    IF NOT SupernatantMode THEN
+        SpdRaw := Dem;
+    ELSIF (PumpMode = 1) OR (PumpMode = 2) THEN
+        SpdRaw := C2Eff;
+    ELSIF PumpMode = 3 THEN
+        SpdRaw := Dem;
+    ELSE
+        SpdRaw := 2.0 * Dem;
     END_IF;
-    IF PumpSpeed < 0.0 THEN
-        PumpSpeed := 0.0;
+    IF SpdRaw > 100.0 THEN
+        SpdRaw := 100.0;
+    END_IF;
+    (* velocidade minima de cada bomba em servico *)
+    AtMin := (NCmd >= 1) AND (SpdRaw < CminEff);
+    IF SpdRaw < CminEff THEN
+        PumpSpeed := CminEff;
+    ELSE
+        PumpSpeed := SpdRaw;
     END_IF;
 ELSE
     Pump_1 := FALSE;
@@ -553,11 +727,14 @@ ELSE
     Pump_3 := FALSE;
     PumpMode := 0;
     Tacc := T#0s;
+    TC2s := 0;
     T3acc := T#0s;
+    TC3s := 0;
     NCmd := 0;
     NRun := 0;
     EffFlowSp := FlowSp;
     PumpSpeed := PIDOut;
+    AtMin := FALSE;
     Paused := FALSE;
     PauseCause := 0;
     Trest := T#0s;
@@ -568,6 +745,7 @@ END_IF;
 StartReady := (Grafcet = 2) OR (Grafcet = 3);
 StopReady := (Grafcet = 6);
 AbortedReady := (Grafcet = 9);
+NPumps := NRun;
 SelectedPump := 0;
 SecondPump := 0;
 MinOrd := 0;
@@ -595,7 +773,10 @@ IF Pump_3 THEN
 END_IF;
 
 (* ---------- 7. Eventos de saida somente quando algum valor muda ---------- *)
-EdgeOut := (StartReady <> PrevSR) OR (StopReady <> PrevST) OR (AbortedReady <> PrevAB) OR (EffFlowSp <> PrevSP) OR (Grafcet <> PrevGR) OR (SelectedPump <> PrevSel) OR (SecondPump <> PrevSec) OR (PumpMode <> PrevPM) OR (PauseCause <> PrevPC);
+EdgeOut := (StartReady <> PrevSR) OR (StopReady <> PrevST) OR (AbortedReady <> PrevAB) OR (EffFlowSp <> PrevSP) OR (Grafcet <> PrevGR) OR (SelectedPump <> PrevSel) OR (SecondPump <> PrevSec) OR (PumpMode <> PrevPM) OR (PauseCause <> PrevPC) OR (AtMin <> PrevAM) OR (ParBad <> PrevPB) OR (NPumps <> PrevNP);
+PrevAM := AtMin;
+PrevPB := ParBad;
+PrevNP := NPumps;
 PrevSR := StartReady;
 PrevST := StopReady;
 PrevAB := AbortedReady;
@@ -607,19 +788,57 @@ PrevPM := PumpMode;
 PrevPC := PauseCause;
 EdgeSpd := PumpSpeed <> PrevSpd;
 PrevSpd := PumpSpeed;
+
+(* ---------- 8. Status para a IHM: a cada 1 s (TICK) e quando o estado muda ---------- *)
+HmiCmin := CminEff;
+HmiC2 := C2Eff;
+HmiC3 := C3;
+HmiCmax := Cmax;
+HmiSup := SupernatantMode;
+HmiFlowFail := FlowFail;
+HmiTC2 := TC2s;
+HmiTC3 := TC3s;
+HmiTDec := TDecs;
+EdgeSts := FromTick OR (PumpMode <> PrevSPM) OR (NPumps <> PrevSNP) OR (PauseCause <> PrevSPC) OR (Grafcet <> PrevSGR) OR (AtMin <> PrevSAM) OR (ParBad <> PrevSPB);
+FromTick := FALSE;
+PrevSPM := PumpMode;
+PrevSNP := NPumps;
+PrevSPC := PauseCause;
+PrevSGR := Grafcet;
+PrevSAM := AtMin;
+PrevSPB := ParBad;
 ]]></ST>
     </Algorithm>
     <Algorithm Name="AlgTick" Comment="Base de tempo 1 s">
       <ST><![CDATA[;
 (* Base de tempo 1 s (E_CYCLE externo): tempos em C2 e abaixo de C3 *)
-IF (PumpMode = 2) AND (NRun >= 2) THEN
+FromTick := TRUE;
+(* tempo de espera da subida da nova bomba ate C2 (limite T_DecMax) *)
+IF PumpMode = 2 THEN
+    Tup := Tup + T#1s;
+ELSE
+    Tup := T#0s;
+END_IF;
+(* T_C2: as duas rodando e com velocidade real em C2 (ou apos T_DecMax sem confirmacao) *)
+IF (PumpMode = 2) AND (NRun >= 2) AND (SpdUpC2 OR (Tup >= T_DecMax)) THEN
     Tacc := Tacc + T#1s;
+    TC2s := TC2s + 1;
+END_IF;
+(* tempo de descida ate C2 antes de partir a nova bomba *)
+IF PumpMode = 1 THEN
+    Tdec := Tdec + T#1s;
+    TDecs := TDecs + 1;
+ELSE
+    Tdec := T#0s;
+    TDecs := 0;
 END_IF;
 (* duas bombas operando com velocidade abaixo de C3 *)
-IF (PumpMode = 3) AND (NRun >= 2) AND (PumpSpeed < C3) THEN
+IF (PumpMode = 3) AND (NRun >= 2) AND ExitCond THEN
     T3acc := T3acc + T#1s;
+    TC3s := TC3s + 1;
 ELSE
     T3acc := T#0s;
+    TC3s := 0;
 END_IF;
 IF (Grafcet = 3) AND Paused AND (NOT LowLevel) THEN
     Trest := Trest + T#1s;

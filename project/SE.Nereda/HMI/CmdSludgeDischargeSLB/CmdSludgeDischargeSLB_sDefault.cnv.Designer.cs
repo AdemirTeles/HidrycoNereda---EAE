@@ -38,6 +38,10 @@ namespace SE.Nereda.Symbols.CmdSludgeDischargeSLB
 			this.freeText9 = new NxtControl.GuiFramework.FreeText();
 			this.T_Restart = new System.HMI.Symbols.Base.TimeTextBox();
 			this.T_FlowLL = new System.HMI.Symbols.Base.TimeTextBox();
+			this.rectangleCmin = new NxtControl.GuiFramework.Rectangle();
+			this.freeTextCmin = new NxtControl.GuiFramework.FreeText();
+			this.Cmin = new System.HMI.Symbols.Base.TextBox<float>();
+			this.PumpStatus = new SE.Nereda.Symbols.CmdSludgeDischargeSLBLogic.sDefault();
 			// 
 			// rectangle1
 			// 
@@ -173,6 +177,47 @@ namespace SE.Nereda.Symbols.CmdSludgeDischargeSLB
 			this.T_FlowLL.Value = new NxtControl.GuiFramework.Time(((long)(0)));
 			this.T_FlowLL.EndInit();
 			// 
+			// rectangleCmin
+			// 
+			this.rectangleCmin.Bounds = new NxtControl.Drawing.RectF(((float)(8D)), ((float)(192D)), ((float)(376D)), ((float)(40D)));
+			this.rectangleCmin.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(250)), ((byte)(250)), ((byte)(250))));
+			this.rectangleCmin.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
+			this.rectangleCmin.Name = "rectangleCmin";
+			// 
+			// freeTextCmin
+			// 
+			this.freeTextCmin.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.freeTextCmin.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+			this.freeTextCmin.Location = new NxtControl.Drawing.PointF(16D, 204D);
+			this.freeTextCmin.Name = "freeTextCmin";
+			this.freeTextCmin.Text = "Min. Pump Speed (Cmin) :";
+			// 
+			// Cmin
+			// 
+			this.Cmin.BeginInit();
+			this.Cmin.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.48D, 0D, 0D, 1D, 272D, 200D);
+			this.Cmin.MaximumTag = null;
+			this.Cmin.MinimumTag = null;
+			this.Cmin.Name = "Cmin";
+			this.Cmin.NumberBase = NxtControl.GuiFramework.NumberBase.Decimal;
+			this.Cmin.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("Black"), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.Cmin.SetColor = new NxtControl.Drawing.Color("Yellow");
+			this.Cmin.Suffix = "%";
+			this.Cmin.TagName = "Cmin";
+			this.Cmin.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleCenter;
+			this.Cmin.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.Cmin.Value = 0F;
+			this.Cmin.EndInit();
+			// 
+			// PumpStatus
+			// 
+			this.PumpStatus.BeginInit();
+			this.PumpStatus.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 8D, 240D);
+			this.PumpStatus.Name = "PumpStatus";
+			this.PumpStatus.SecurityToken = ((uint)(4294967295u));
+			this.PumpStatus.TagName = "CommandLogic";
+			this.PumpStatus.EndInit();
+			// 
 			// sDefault
 			// 
 			this.Shapes.AddRange(new System.ComponentModel.IComponent[] {
@@ -188,8 +233,12 @@ namespace SE.Nereda.Symbols.CmdSludgeDischargeSLB
 			this.freeText8,
 			this.freeText9,
 			this.T_Restart,
-			this.T_FlowLL});
-			this.SymbolSize = new System.Drawing.Size(432, 288);
+			this.T_FlowLL,
+			this.rectangleCmin,
+			this.freeTextCmin,
+			this.Cmin,
+			this.PumpStatus});
+			this.SymbolSize = new System.Drawing.Size(432, 424);
 
 		}
 		private NxtControl.GuiFramework.Rectangle rectangle1;
@@ -205,6 +254,10 @@ namespace SE.Nereda.Symbols.CmdSludgeDischargeSLB
 		private NxtControl.GuiFramework.FreeText freeText9;
 		private System.HMI.Symbols.Base.TimeTextBox T_Restart;
 		private System.HMI.Symbols.Base.TimeTextBox T_FlowLL;
+		private NxtControl.GuiFramework.Rectangle rectangleCmin;
+		private NxtControl.GuiFramework.FreeText freeTextCmin;
+		private System.HMI.Symbols.Base.TextBox<float> Cmin;
+		private SE.Nereda.Symbols.CmdSludgeDischargeSLBLogic.sDefault PumpStatus;
 		#endregion
 	}
 }

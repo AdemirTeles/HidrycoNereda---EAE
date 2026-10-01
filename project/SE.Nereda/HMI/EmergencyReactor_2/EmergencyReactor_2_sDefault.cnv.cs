@@ -65,6 +65,8 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
 			Step6.BrushColor = new NxtControl.Drawing.Color(78, 78, 78);
 			Step7.BrushColor = new NxtControl.Drawing.Color(78, 78, 78);
 			Step8.BrushColor = new NxtControl.Drawing.Color(78, 78, 78);
+			Step9.BrushColor = new NxtControl.Drawing.Color(78, 78, 78);
+			Step10.BrushColor = new NxtControl.Drawing.Color(78, 78, 78);
 			Step1.PenColor = new NxtControl.Drawing.Color(0, 0, 0);
 			Step2.PenColor = new NxtControl.Drawing.Color(0, 0, 0);
 			Step3.PenColor = new NxtControl.Drawing.Color(0, 0, 0);
@@ -73,6 +75,8 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
 			Step6.PenColor = new NxtControl.Drawing.Color(0, 0, 0);
 			Step7.PenColor = new NxtControl.Drawing.Color(0, 0, 0);
 			Step8.PenColor = new NxtControl.Drawing.Color(0, 0, 0);
+			Step9.BrushColor = new NxtControl.Drawing.Color(0, 0, 0);
+			Step10.BrushColor = new NxtControl.Drawing.Color(0, 0, 0);
 			
 			switch(e.Grafcet){
 				case 1:

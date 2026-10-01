@@ -3,7 +3,7 @@
 <FBType GUID="5b0ec4da-6284-45c3-86c9-fe46ccc0e257" Name="CmdSludgeDischargeSLBLogic" Format="2.0" Comment="CAT Function Block Type" Namespace="SE.Nereda">
   <Attribute Name="HMI.Alias" Value="" />
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Schneider Electric" Version="4.1" Author="Claude/Hidryco" Date="9/30/2026" Remarks="Rev4.1 - Velocidade reenviada a cada mudanca de comando das bombas e a cada 1 s (SpeedGate aberto); Rev4 - PID pela logica; Rev3.1 - SpeedGate" />
+  <VersionInfo Organization="Schneider Electric" Version="7.0" Author="Claude/Hidryco" Date="10/1/2026" Remarks="Rev7 - Status das bombas para a IHM (CmdLogic.HMI_STS -&gt; IThis.PUMP_STS); Rev6 - Velocidade real das bombas (FB_SPEED/FbSpeedPv) para a logica (descida ate C2 antes de partir bomba nova); Rev5 - Valor do 49FT0004 para a logica (setpoint acompanha durante C2); Cmin (velocidade minima por bomba) e faixa do 49FT0004 para a logica; SpeedSpFlowSensorFail removido (falha do medidor tratada na logica); PumpSpeed direto ao SpeedGate/bombas; Rev4.1 - Velocidade reenviada a cada mudanca de comando das bombas e a cada 1 s (SpeedGate aberto); Rev4 - PID pela logica; Rev3.1 - SpeedGate" />
   <InterfaceList>
     <EventInputs>
       <Event ID="A14398C211A20C12" Name="INIT" />
@@ -83,6 +83,7 @@
         <With Var="T_C3" />
         <With Var="T_Restart" />
         <With Var="T_FlowLL" />
+        <With Var="Cmin" />
       </Event>
       <Event ID="024991AC33B2DF2D" Name="REQ_LEVEL" Comment="Nivel L do 49LT0001">
         <With Var="LowLevel" />
@@ -140,14 +141,15 @@
       <VarDeclaration ID="CB08FAD28478C4E2" Name="FbClosedValveTankSupernant" Type="BOOL" />
       <VarDeclaration ID="100F27F3D2E16ABE" Name="FbValveReadyTankSupernant" Type="BOOL" />
       <VarDeclaration ID="EDA46437701491D7" Name="SupernatantMode" Type="BOOL" Comment="TRUE = sobrenadante (2 servico + 1 reserva); FALSE/desligado = lodo (1 servico + 2 reserva)" />
-      <VarDeclaration ID="9743FA817FB33581" Name="Cmax" Type="REAL" Comment="Vazao maxima de 1 bomba [m3/h]" />
-      <VarDeclaration ID="9E4EFA5F05462127" Name="C2" Type="REAL" Comment="Vazao por bomba na entrada da 2a bomba [m3/h]" />
-      <VarDeclaration ID="80864F97B82059EB" Name="C3" Type="REAL" Comment="Vazao por bomba abaixo da qual sai 1 bomba [m3/h]" />
+      <VarDeclaration ID="9743FA817FB33581" Name="Cmax" Type="REAL" Comment="Velocidade de 1 bomba acima da qual entra a 2a bomba [% velocidade]" />
+      <VarDeclaration ID="9E4EFA5F05462127" Name="C2" Type="REAL" Comment="Velocidade das 2 bombas na entrada da 2a bomba [% velocidade]" />
+      <VarDeclaration ID="80864F97B82059EB" Name="C3" Type="REAL" Comment="Velocidade das 2 bombas abaixo da qual sai 1 bomba [% velocidade]" />
       <VarDeclaration ID="59DAA3F863258147" Name="T_C2" Type="TIME" Comment="Tempo em C2" />
       <VarDeclaration ID="443B51A39FD2F517" Name="T_C3" Type="TIME" Comment="Tempo abaixo de C3" />
       <VarDeclaration ID="26D3C3E31EC21607" Name="T_Restart" Type="TIME" Comment="Pausa: tempo para retomar" />
       <VarDeclaration ID="22E149C0CC432615" Name="T_FlowLL" Type="TIME" Comment="Vazao LL por este tempo com bomba rodando = pausa (0 = desabilitado)" />
       <VarDeclaration ID="0F129CC61BF3460D" Name="LowLevel" Type="BOOL" Comment="Nivel L do 49LT0001 (pausa a descarga)" />
+      <VarDeclaration ID="A13D37C90CBA8B2D" Name="Cmin" Type="REAL" Comment="Velocidade minima de cada bomba em servico [% velocidade]" />
     </InputVars>
     <OutputVars>
       <VarDeclaration ID="37ED00F2D74A1977" Name="CmdValveTank1" Type="BOOL" />
@@ -249,7 +251,6 @@
       <Attribute Name="Configuration.Component.HideUnusedPorts" Value="" />
     </FB>
     <FB ID="356753C86B428E61" Name="PIDISc" Type="PID_Manager" x="2780" y="4940" Namespace="SE.Nereda" />
-    <FB ID="7E72B8166108730C" Name="SpeedSp1" Type="SpeedSpFlowSensorFail" x="4420" y="4940" Namespace="SE.Nereda" />
     <FB ID="50F02C4F22414254" Name="Flow_Status" Type="decodeStatus" x="1080" y="5240" Namespace="SE.App2Base">
       <Attribute Name="Configuration.Component.HideUnusedPorts" Value="" />
     </FB>
@@ -332,6 +333,7 @@
     <Input ID="22E149C0CC432615" Name="T_FlowLL" x="600" y="2680" Type="Data" />
     <Input ID="024991AC33B2DF2D" Name="REQ_LEVEL" x="600" y="3000" Type="Event" />
     <Input ID="0F129CC61BF3460D" Name="LowLevel" x="600" y="3060" Type="Data" />
+    <Input ID="A13D37C90CBA8B2D" Name="Cmin" x="600" y="2740" Type="Data" />
     <Frame Name="FRAME6" X="120" Y="1200" Width="1600" Height="5620">
       <Parameter Name="BackgroundColor" Value="AntiqueWhite" />
       <Parameter Name="TextColor" Value="Black" />
@@ -730,9 +732,6 @@
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
       <Connection Source="$4B99F90E82BDCEFA.CNF" Destination="$356753C86B428E61.REQ" dx1="67.47925" />
-      <Connection Source="$F89AF997F6D64559.REQ" Destination="$7E72B8166108730C.B5D6B08FA2666F02">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
       <Connection Source="$A14398C211A20C12" Destination="$891FF4F323402185.2F65FBA3287455C1" dx1="1040.708">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
@@ -741,10 +740,6 @@
       </Connection>
       <Connection Source="$891FF4F323402185.FFFD39D6E5C086B9" Destination="$356753C86B428E61.INIT">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$50F02C4F22414254.CNF" Destination="$7E72B8166108730C.B5D6B08FA2666F02">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-        <AvoidsNodes>false</AvoidsNodes>
       </Connection>
       <Connection Source="$22B579512B53BF80.CHD" Destination="$35B1BC8730878587.DD5870AA881150BB" />
       <Connection Source="$35B1BC8730878587.6FC99A5BD1C38561" Destination="$56E89BA7A8737F32.0F1CDF9A9B4A227A">
@@ -819,19 +814,21 @@
       <Connection Source="$971F31261154ACD5" Destination="$72901911AC298791.888C7FFA93152C07" />
       <Connection Source="$65CF25B02F3B6C57" Destination="$72901911AC298791.888C7FFA93152C07" />
       <Connection Source="$72901911AC298791.948C0A3C8D4A59E4" Destination="$356753C86B428E61.REQ" />
-      <Connection Source="$72901911AC298791.948C0A3C8D4A59E4" Destination="$7E72B8166108730C.B5D6B08FA2666F02" />
       <Connection Source="$024991AC33B2DF2D" Destination="$72901911AC298791.19EED5631A4ADE11" />
       <Connection Source="$F89AF997F6D64559.REQ_STATUS" Destination="$50F02C4F22414254.REQ" />
       <Connection Source="$50F02C4F22414254.CNF" Destination="$72901911AC298791.E12F00872D66F11F" />
-      <Connection Source="$7E72B8166108730C.1FEAADE7145F64BE" Destination="$439FB8F923A1C107.EI" />
       <Connection Source="$439FB8F923A1C107.EO" Destination="$4472550908FB2BBA.1E00729184986247" />
       <Connection Source="$439FB8F923A1C107.EO" Destination="$E69CD644C3AB364B.1E00729184986247" />
       <Connection Source="$439FB8F923A1C107.EO" Destination="$80FEDED2D558DFFC.1E00729184986247" />
       <Connection Source="$439FB8F923A1C107.EO" Destination="$56E89BA7A8737F32.1E00729184986247" />
       <Connection Source="$CDE6639853DBE923.CNF" Destination="$72901911AC298791.D9E0400EF0DD670E" />
-      <Connection Source="$72901911AC298791.6F9F08BA58B8009D" Destination="$7E72B8166108730C.B5D6B08FA2666F02" />
-      <Connection Source="$4B99F90E82BDCEFA.CNF" Destination="$7E72B8166108730C.B5D6B08FA2666F02" />
-      <Connection Source="$4B3B9D3B03125C65.EO" Destination="$7E72B8166108730C.B5D6B08FA2666F02" />
+      <Connection Source="$72901911AC298791.6F9F08BA58B8009D" Destination="$439FB8F923A1C107.EI" />
+      <Connection Source="$4B99F90E82BDCEFA.CNF" Destination="$439FB8F923A1C107.EI" />
+      <Connection Source="$4B3B9D3B03125C65.EO" Destination="$439FB8F923A1C107.EI" />
+      <Connection Source="$4472550908FB2BBA.F846995A4121D865" Destination="$72901911AC298791.AC2506F2EB70D1EE" />
+      <Connection Source="$E69CD644C3AB364B.F846995A4121D865" Destination="$72901911AC298791.AC2506F2EB70D1EE" />
+      <Connection Source="$80FEDED2D558DFFC.F846995A4121D865" Destination="$72901911AC298791.AC2506F2EB70D1EE" />
+      <Connection Source="$72901911AC298791.5CD64F6ACD94781F" Destination="$891FF4F323402185.23D8CA8AFE208019" />
     </EventConnections>
     <DataConnections>
       <Connection Source="$27CE4ADED7F6BD9F.Output" Destination="$2C35B14C59730EA7.4573FC8F228EB71D" dx1="150" />
@@ -1206,14 +1203,10 @@
       <Connection Source="$F89AF997F6D64559.Status" Destination="$50F02C4F22414254.Status" dx1="135.1667">
         <AvoidsNodes>false</AvoidsNodes>
       </Connection>
-      <Connection Source="$50F02C4F22414254.FailAlarm" Destination="$7E72B8166108730C.1C28FEF37A13F67F">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-        <AvoidsNodes>false</AvoidsNodes>
-      </Connection>
-      <Connection Source="$F89AF997F6D64559.ValueMin" Destination="$7E72B8166108730C.B08827D02DBBFA97">
+      <Connection Source="$F89AF997F6D64559.ValueMin" Destination="$72901911AC298791.3F7E80244F83E6EC">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$F89AF997F6D64559.ValueMax" Destination="$7E72B8166108730C.75C86D8B7647050C">
+      <Connection Source="$F89AF997F6D64559.ValueMax" Destination="$72901911AC298791.BF360DB4ADFA54A9">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
       <Connection Source="$669106E7B3FBF6FC.Output" Destination="$4B99F90E82BDCEFA.IN1">
@@ -1229,13 +1222,13 @@
       <Connection Source="$72901911AC298791.DB4AE032AE08C110" Destination="$891FF4F323402185.930FFC0215E780EF">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$7E72B8166108730C.87931CA83794BFFD" Destination="$80FEDED2D558DFFC.1BC103921BBFDA0B">
+      <Connection Source="$72901911AC298791.1E314D8B4487BA0C" Destination="$80FEDED2D558DFFC.1BC103921BBFDA0B">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$7E72B8166108730C.87931CA83794BFFD" Destination="$E69CD644C3AB364B.1BC103921BBFDA0B">
+      <Connection Source="$72901911AC298791.1E314D8B4487BA0C" Destination="$E69CD644C3AB364B.1BC103921BBFDA0B">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$7E72B8166108730C.87931CA83794BFFD" Destination="$4472550908FB2BBA.1BC103921BBFDA0B">
+      <Connection Source="$72901911AC298791.1E314D8B4487BA0C" Destination="$4472550908FB2BBA.1BC103921BBFDA0B">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
       <Connection Source="$22B579512B53BF80.Output" Destination="$35B1BC8730878587.4573FC8F228EB71D" dx1="70" />
@@ -1245,7 +1238,7 @@
       <Connection Source="$72901911AC298791.56F564B55D225FAF" Destination="$22B579512B53BF80.Input">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$7E72B8166108730C.87931CA83794BFFD" Destination="$56E89BA7A8737F32.1BC103921BBFDA0B">
+      <Connection Source="$72901911AC298791.1E314D8B4487BA0C" Destination="$56E89BA7A8737F32.1BC103921BBFDA0B">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
       <Connection Source="$56E89BA7A8737F32.8A8A07EFCDA1443C" Destination="$970528481C7F8241.DI2_1">
@@ -1348,13 +1341,34 @@
       <Connection Source="$26D3C3E31EC21607" Destination="$72901911AC298791.37F2A16CD48B9A9D" />
       <Connection Source="$22E149C0CC432615" Destination="$72901911AC298791.E9499B195D781C20" />
       <Connection Source="$72901911AC298791.CFFB125A7B539DE2" Destination="$356753C86B428E61.Setpoint" />
-      <Connection Source="$72901911AC298791.CFFB125A7B539DE2" Destination="$7E72B8166108730C.3BE251DFC2E7905D" />
       <Connection Source="$0F129CC61BF3460D" Destination="$72901911AC298791.E364687AE6285E4B" />
       <Connection Source="$50F02C4F22414254.LoLoAlarm" Destination="$72901911AC298791.CF4621EC925C43E9" />
       <Connection Source="$50F02C4F22414254.FailAlarm" Destination="$72901911AC298791.F66FAF9E12E91CF7" />
       <Connection Source="$4B99F90E82BDCEFA.OUT" Destination="$439FB8F923A1C107.PERMIT" />
       <Connection Source="$CDE6639853DBE923.Out" Destination="$72901911AC298791.A7D276693781888D" />
-      <Connection Source="$72901911AC298791.1E314D8B4487BA0C" Destination="$7E72B8166108730C.4727B0C2E5DD09FB" />
+      <Connection Source="$A13D37C90CBA8B2D" Destination="$72901911AC298791.EB5C203C0888EDB6" />
+      <Connection Source="$F89AF997F6D64559.Value" Destination="$72901911AC298791.AF76E8DD0A107DA1" />
+      <Connection Source="$4472550908FB2BBA.790C5C3BA88E0AF5" Destination="$72901911AC298791.AEEF8416049DD42D" />
+      <Connection Source="$E69CD644C3AB364B.790C5C3BA88E0AF5" Destination="$72901911AC298791.8140B1A1F71C3184" />
+      <Connection Source="$80FEDED2D558DFFC.790C5C3BA88E0AF5" Destination="$72901911AC298791.341C589C089A3722" />
+      <Connection Source="$72901911AC298791.DB4AE032AE08C110" Destination="$891FF4F323402185.729C504223803957" />
+      <Connection Source="$72901911AC298791.120DEE7B658C67A3" Destination="$891FF4F323402185.BA50F8AEA433D734" />
+      <Connection Source="$72901911AC298791.8A767DFEA066D001" Destination="$891FF4F323402185.B34D741DCEF580D0" />
+      <Connection Source="$72901911AC298791.2E15F5890513A407" Destination="$891FF4F323402185.8197DBC5118022F4" />
+      <Connection Source="$72901911AC298791.CE5E9AB5AF070C5F" Destination="$891FF4F323402185.D878EA8EB65D0F7D" />
+      <Connection Source="$72901911AC298791.62FD82D60F199509" Destination="$891FF4F323402185.B728CABD15082CCC" />
+      <Connection Source="$72901911AC298791.1E314D8B4487BA0C" Destination="$891FF4F323402185.4A3D0E6396160A27" />
+      <Connection Source="$72901911AC298791.1D396C37CC4B0729" Destination="$891FF4F323402185.3A5BB13DC2717D42" />
+      <Connection Source="$72901911AC298791.32A287B6E8B199F5" Destination="$891FF4F323402185.99CA31A7B4D3C9D3" />
+      <Connection Source="$72901911AC298791.965DC2CE66FF6A0B" Destination="$891FF4F323402185.4D79F720606EB352" />
+      <Connection Source="$72901911AC298791.36CF9546C621AEDD" Destination="$891FF4F323402185.AB791574C7AD27FE" />
+      <Connection Source="$72901911AC298791.6B93FBB0853215B0" Destination="$891FF4F323402185.368F04ED4E40651B" />
+      <Connection Source="$72901911AC298791.058E1875A097FD94" Destination="$891FF4F323402185.23387B08B13E8A2D" />
+      <Connection Source="$72901911AC298791.E474438BEBAB71A9" Destination="$891FF4F323402185.55CDA96B5AEC3F36" />
+      <Connection Source="$72901911AC298791.8A51EE81734EE343" Destination="$891FF4F323402185.CF3783A6538C32E9" />
+      <Connection Source="$72901911AC298791.8FE9266035FC4537" Destination="$891FF4F323402185.8408E8CD6CE8CB36" />
+      <Connection Source="$72901911AC298791.B7E0E2DBA29A9E36" Destination="$891FF4F323402185.D91FB5629DAEFDC8" />
+      <Connection Source="$72901911AC298791.E05A148A6452F547" Destination="$891FF4F323402185.1E133DD0E8AC3B58" />
     </DataConnections>
     <AdapterConnections>
       <Connection Source="$356753C86B428E61.FACD1DD4E791A86A" Destination="$CDE6639853DBE923.ISc">

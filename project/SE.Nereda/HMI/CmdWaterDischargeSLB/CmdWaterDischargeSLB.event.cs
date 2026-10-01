@@ -123,6 +123,20 @@ namespace SE.Nereda.Symbols.CmdWaterDischargeSLB
 
   }
 
+  public class PUMP_MIN_PAREventArgs : System.EventArgs
+  {
+    public PUMP_MIN_PAREventArgs()
+    {
+    }
+    private System.Single? Cmin_field = null;
+    public System.Single? Cmin
+    {
+       get { return Cmin_field; }
+       set { Cmin_field = value; }
+    }
+
+  }
+
 }
 
 namespace SE.Nereda.Symbols.CmdWaterDischargeSLB
@@ -236,6 +250,22 @@ stack Trace:
       if (!ignore_T_Restart) _values_[0] = T_Restart;
       if (!ignore_T_FlowLL) _values_[1] = T_FlowLL;
       return ((IHMIAccessorOutput)this).FireEvent(3, _values_);
+    }
+    public bool FireEvent_PUMP_MIN_PAR(System.Single Cmin)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(4, new object[] {Cmin});
+    }
+    public bool FireEvent_PUMP_MIN_PAR(SE.Nereda.Symbols.CmdWaterDischargeSLB.PUMP_MIN_PAREventArgs ea)
+    {
+      object[] _values_ = new object[1];
+      if (ea.Cmin.HasValue) _values_[0] = ea.Cmin.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(4, _values_);
+    }
+    public bool FireEvent_PUMP_MIN_PAR(System.Single Cmin, bool ignore_Cmin)
+    {
+      object[] _values_ = new object[1];
+      if (!ignore_Cmin) _values_[0] = Cmin;
+      return ((IHMIAccessorOutput)this).FireEvent(4, _values_);
     }
 
   }

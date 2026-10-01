@@ -49,12 +49,12 @@ namespace SE.Nereda.Faceplates.NeredaSludgeBuffer_2
 			// 
 			// fpSettings
 			// 
-			this.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(760D)), ((float)(400D)));
+			this.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(760D)), ((float)(648D)));
 			this.Brush = new NxtControl.Drawing.Brush("FaceplateBrush");
 			this.Shapes.AddRange(new System.ComponentModel.IComponent[] {
 			this.sDefault1,
 			this.sDefault2});
-			this.Size = new System.Drawing.Size(760, 400);
+			this.Size = new System.Drawing.Size(760, 648);
 
 		}
 		private SE.Nereda.Symbols.CmdSludgeDischargeSLB.sDefault sDefault1;
