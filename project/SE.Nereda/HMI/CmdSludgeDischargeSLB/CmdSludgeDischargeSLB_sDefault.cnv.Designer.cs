@@ -32,10 +32,16 @@ namespace SE.Nereda.Symbols.CmdSludgeDischargeSLB
 			this.rectangle2 = new NxtControl.GuiFramework.Rectangle();
 			this.freeText2 = new NxtControl.GuiFramework.FreeText();
 			this.textBox_11 = new System.HMI.Symbols.Base.TextBox<float>();
+			this.rectangle8 = new NxtControl.GuiFramework.Rectangle();
+			this.rectangle9 = new NxtControl.GuiFramework.Rectangle();
+			this.freeText8 = new NxtControl.GuiFramework.FreeText();
+			this.freeText9 = new NxtControl.GuiFramework.FreeText();
+			this.T_Restart = new System.HMI.Symbols.Base.TimeTextBox();
+			this.T_FlowLL = new System.HMI.Symbols.Base.TimeTextBox();
 			// 
 			// rectangle1
 			// 
-			this.rectangle1.Bounds = new NxtControl.Drawing.RectF(((float)(8D)), ((float)(32D)), ((float)(368D)), ((float)(40D)));
+			this.rectangle1.Bounds = new NxtControl.Drawing.RectF(((float)(8D)), ((float)(32D)), ((float)(376D)), ((float)(40D)));
 			this.rectangle1.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(250)), ((byte)(250)), ((byte)(250))));
 			this.rectangle1.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
 			this.rectangle1.Name = "rectangle1";
@@ -84,7 +90,7 @@ namespace SE.Nereda.Symbols.CmdSludgeDischargeSLB
 			// 
 			// rectangle2
 			// 
-			this.rectangle2.Bounds = new NxtControl.Drawing.RectF(((float)(8D)), ((float)(72D)), ((float)(368D)), ((float)(40D)));
+			this.rectangle2.Bounds = new NxtControl.Drawing.RectF(((float)(8D)), ((float)(72D)), ((float)(376D)), ((float)(40D)));
 			this.rectangle2.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(250)), ((byte)(250)), ((byte)(250))));
 			this.rectangle2.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
 			this.rectangle2.Name = "rectangle2";
@@ -115,6 +121,58 @@ namespace SE.Nereda.Symbols.CmdSludgeDischargeSLB
 			this.textBox_11.Value = 0F;
 			this.textBox_11.EndInit();
 			// 
+			// rectangle8
+			// 
+			this.rectangle8.Bounds = new NxtControl.Drawing.RectF(((float)(8D)), ((float)(112D)), ((float)(376D)), ((float)(40D)));
+			this.rectangle8.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(250)), ((byte)(250)), ((byte)(250))));
+			this.rectangle8.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
+			this.rectangle8.Name = "rectangle8";
+			// 
+			// rectangle9
+			// 
+			this.rectangle9.Bounds = new NxtControl.Drawing.RectF(((float)(8D)), ((float)(152D)), ((float)(376D)), ((float)(40D)));
+			this.rectangle9.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(250)), ((byte)(250)), ((byte)(250))));
+			this.rectangle9.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
+			this.rectangle9.Name = "rectangle9";
+			// 
+			// freeText8
+			// 
+			this.freeText8.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.freeText8.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+			this.freeText8.Location = new NxtControl.Drawing.PointF(16D, 124D);
+			this.freeText8.Name = "freeText8";
+			this.freeText8.Text = "Restart Time :";
+			// 
+			// freeText9
+			// 
+			this.freeText9.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.freeText9.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+			this.freeText9.Location = new NxtControl.Drawing.PointF(16D, 164D);
+			this.freeText9.Name = "freeText9";
+			this.freeText9.Text = "Flow LowLow Time :";
+			// 
+			// T_Restart
+			// 
+			this.T_Restart.BeginInit();
+			this.T_Restart.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.48D, 0D, 0D, 1D, 272D, 120D);
+			this.T_Restart.MaximumTag = null;
+			this.T_Restart.MinimumTag = null;
+			this.T_Restart.Name = "T_Restart";
+			this.T_Restart.TagName = "T_Restart";
+			this.T_Restart.Value = new NxtControl.GuiFramework.Time(((long)(0)));
+			this.T_Restart.EndInit();
+			// 
+			// T_FlowLL
+			// 
+			this.T_FlowLL.BeginInit();
+			this.T_FlowLL.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.48D, 0D, 0D, 1D, 272D, 160D);
+			this.T_FlowLL.MaximumTag = null;
+			this.T_FlowLL.MinimumTag = null;
+			this.T_FlowLL.Name = "T_FlowLL";
+			this.T_FlowLL.TagName = "T_FlowLL";
+			this.T_FlowLL.Value = new NxtControl.GuiFramework.Time(((long)(0)));
+			this.T_FlowLL.EndInit();
+			// 
 			// sDefault
 			// 
 			this.Shapes.AddRange(new System.ComponentModel.IComponent[] {
@@ -124,8 +182,14 @@ namespace SE.Nereda.Symbols.CmdSludgeDischargeSLB
 			this.FeedFlowSpMan,
 			this.rectangle2,
 			this.freeText2,
-			this.textBox_11});
-			this.SymbolSize = new System.Drawing.Size(432, 144);
+			this.textBox_11,
+			this.rectangle8,
+			this.rectangle9,
+			this.freeText8,
+			this.freeText9,
+			this.T_Restart,
+			this.T_FlowLL});
+			this.SymbolSize = new System.Drawing.Size(432, 288);
 
 		}
 		private NxtControl.GuiFramework.Rectangle rectangle1;
@@ -135,6 +199,12 @@ namespace SE.Nereda.Symbols.CmdSludgeDischargeSLB
 		private NxtControl.GuiFramework.Rectangle rectangle2;
 		private NxtControl.GuiFramework.FreeText freeText2;
 		private System.HMI.Symbols.Base.TextBox<float> textBox_11;
+		private NxtControl.GuiFramework.Rectangle rectangle8;
+		private NxtControl.GuiFramework.Rectangle rectangle9;
+		private NxtControl.GuiFramework.FreeText freeText8;
+		private NxtControl.GuiFramework.FreeText freeText9;
+		private System.HMI.Symbols.Base.TimeTextBox T_Restart;
+		private System.HMI.Symbols.Base.TimeTextBox T_FlowLL;
 		#endregion
 	}
 }

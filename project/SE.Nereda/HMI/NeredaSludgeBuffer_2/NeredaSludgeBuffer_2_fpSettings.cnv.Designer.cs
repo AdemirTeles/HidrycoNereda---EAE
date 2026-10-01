@@ -32,7 +32,7 @@ namespace SE.Nereda.Faceplates.NeredaSludgeBuffer_2
 			// sDefault1
 			// 
 			this.sDefault1.BeginInit();
-			this.sDefault1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 24D, 24D);
+			this.sDefault1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 0D, 16D);
 			this.sDefault1.Name = "sDefault1";
 			this.sDefault1.SecurityToken = ((uint)(4294967295u));
 			this.sDefault1.TagName = "Logic.CmdSludgeDischargeSLB1";
@@ -41,7 +41,7 @@ namespace SE.Nereda.Faceplates.NeredaSludgeBuffer_2
 			// sDefault2
 			// 
 			this.sDefault2.BeginInit();
-			this.sDefault2.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 24D, 128D);
+			this.sDefault2.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 384D, 16D);
 			this.sDefault2.Name = "sDefault2";
 			this.sDefault2.SecurityToken = ((uint)(4294967295u));
 			this.sDefault2.TagName = "Logic.CmdWaterDischargeSLB1";
@@ -49,12 +49,12 @@ namespace SE.Nereda.Faceplates.NeredaSludgeBuffer_2
 			// 
 			// fpSettings
 			// 
-			this.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(600D)), ((float)(400D)));
+			this.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(760D)), ((float)(400D)));
 			this.Brush = new NxtControl.Drawing.Brush("FaceplateBrush");
 			this.Shapes.AddRange(new System.ComponentModel.IComponent[] {
 			this.sDefault1,
 			this.sDefault2});
-			this.Size = new System.Drawing.Size(600, 400);
+			this.Size = new System.Drawing.Size(760, 400);
 
 		}
 		private SE.Nereda.Symbols.CmdSludgeDischargeSLB.sDefault sDefault1;

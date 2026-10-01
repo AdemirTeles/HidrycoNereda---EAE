@@ -2,7 +2,7 @@
 <!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
 <FBType GUID="8ad7f1ad-4cd6-4ef4-8d16-3514741dbb77" Name="CmdWaterDischargeSLB_HMI" Comment="Service Interface Function Block Type" Namespace="SE.Nereda">
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="6/7/2026" Remarks="template" />
+  <VersionInfo Organization="Schneider Electric" Version="1.0" Author="Claude/Hidryco" Date="9/30/2026" Remarks="Rev1 - Parametros Cmax/C2/C3/T_C2/T_C3 e T_Restart/T_FlowLL (persistentes)" />
   <InterfaceList>
     <EventInputs>
       <Event ID="C4758748B8B7D3EA" Name="INIT">
@@ -21,6 +21,17 @@
       <Event ID="59FB590F9F8A710E" Name="FEED_FLOW_SP_MAN">
         <With Var="FeedFlowSpMan" />
       </Event>
+      <Event ID="5057011FA5ED4FF7" Name="DISCHARGE_PAR" Comment="Parametros das bombas de sobrenadante">
+        <With Var="Cmax" />
+        <With Var="C2" />
+        <With Var="C3" />
+        <With Var="T_C2" />
+        <With Var="T_C3" />
+      </Event>
+      <Event ID="F5A96D7EEB24B101" Name="PAUSE_PAR" Comment="Parametros da pausa da descarga de sobrenadante">
+        <With Var="T_Restart" />
+        <With Var="T_FlowLL" />
+      </Event>
     </EventOutputs>
     <InputVars>
       <VarDeclaration ID="37B5D0E31CCA8373" Name="QI" Type="BOOL" />
@@ -30,6 +41,13 @@
       <VarDeclaration ID="E73D47E449BA17A0" Name="STATUS" Type="STRING" Comment="Service Status" />
       <VarDeclaration ID="48FC57B4BA0AB67A" Name="FeedFlowSp" Type="REAL" />
       <VarDeclaration ID="C4072BA96C21EBC0" Name="FeedFlowSpMan" Type="REAL" />
+      <VarDeclaration ID="9EE8317B8E069AB0" Name="Cmax" Type="REAL" Comment="Vazao maxima de 1 bomba [m3/h] - acima dela entra a 2a bomba" />
+      <VarDeclaration ID="9780816DAABEA3AC" Name="C2" Type="REAL" Comment="Vazao por bomba na entrada da 2a bomba [m3/h]" />
+      <VarDeclaration ID="186FFB4FD796086C" Name="C3" Type="REAL" Comment="Vazao por bomba abaixo da qual sai 1 bomba [m3/h]" />
+      <VarDeclaration ID="7C24DA33FAF6C65C" Name="T_C2" Type="TIME" Comment="Tempo em C2 (reducao e aceleracao)" />
+      <VarDeclaration ID="932C418507DF85D3" Name="T_C3" Type="TIME" Comment="Tempo abaixo de C3 para retirar 1 bomba" />
+      <VarDeclaration ID="409925CDAB4F13AD" Name="T_Restart" Type="TIME" Comment="Pausa: tempo para retomar apos a causa (nivel L / vazao LL) sair" />
+      <VarDeclaration ID="D39553B54E329FDF" Name="T_FlowLL" Type="TIME" Comment="Vazao LL do 49FT0004 com bomba rodando por este tempo = pausa (0 = desabilitado)" />
     </OutputVars>
   </InterfaceList>
   <Service RightInterface="" LeftInterface="">

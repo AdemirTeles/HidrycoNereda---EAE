@@ -146,6 +146,7 @@ namespace SE.Nereda.Symbols.NeredaSludgeBuffer_2
 			this.sDefault2 = new SE.Nereda.Symbols.ValveS.sDefault();
 			this.sDefault3 = new SE.Nereda.Symbols.ValveS.sDefault();
 			this.sDefault4 = new SE.Nereda.Symbols.ValveS.sDefault();
+			this.sDefault5 = new SE.Nereda.Symbols.ValveS.sDefault();
 			// 
 			// pipe7
 			// 
@@ -614,7 +615,7 @@ namespace SE.Nereda.Symbols.NeredaSludgeBuffer_2
 			// sDefault1
 			// 
 			this.sDefault1.BeginInit();
-			this.sDefault1._iVlvName = "Valve";
+			this.sDefault1._iVlvName = "AV49002";
 			this.sDefault1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 623D, 245D);
 			this.sDefault1.Name = "sDefault1";
 			this.sDefault1.SecurityToken = ((uint)(4294967295u));
@@ -934,59 +935,59 @@ namespace SE.Nereda.Symbols.NeredaSludgeBuffer_2
 			// 
 			// line31
 			// 
-			this.line31.EndPoint = new NxtControl.Drawing.PointF(915D, 130.89655172413791D);
+			this.line31.EndPoint = new NxtControl.Drawing.PointF(905.82216494845352D, 130.89655172413791D);
 			this.line31.Name = "line31";
 			this.line31.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 4F, NxtControl.Drawing.DashStyle.Solid);
-			this.line31.StartPoint = new NxtControl.Drawing.PointF(915D, 107.17241379310343D);
+			this.line31.StartPoint = new NxtControl.Drawing.PointF(905.82216494845352D, 107.17241379310343D);
 			// 
 			// pipe17
 			// 
-			this.pipe17.Bounds = new NxtControl.Drawing.RectF(((float)(880D)), ((float)(273.03448486328125D)), ((float)(28D)), ((float)(0D)));
+			this.pipe17.Bounds = new NxtControl.Drawing.RectF(((float)(878D)), ((float)(273.03448486328125D)), ((float)(21.25D)), ((float)(0D)));
 			this.pipe17.InnerColor = new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(255)));
 			this.pipe17.Name = "pipe17";
 			this.pipe17.OuterColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.pipe17.Points.AddRange(new NxtControl.Drawing.PointF[] {
-			new NxtControl.Drawing.PointF(880D, 273.03448486328125D),
-			new NxtControl.Drawing.PointF(908D, 273.03448486328125D)});
+			new NxtControl.Drawing.PointF(878D, 273.03448486328125D),
+			new NxtControl.Drawing.PointF(899.25D, 273.03448486328125D)});
 			this.pipe17.Width = 10;
 			// 
 			// line32
 			// 
-			this.line32.EndPoint = new NxtControl.Drawing.PointF(940D, 254D);
+			this.line32.EndPoint = new NxtControl.Drawing.PointF(923.53571428571422D, 254D);
 			this.line32.Name = "line32";
 			this.line32.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 3F, NxtControl.Drawing.DashStyle.Solid);
-			this.line32.StartPoint = new NxtControl.Drawing.PointF(924D, 254D);
+			this.line32.StartPoint = new NxtControl.Drawing.PointF(911.39285714285711D, 254D);
 			// 
 			// line33
 			// 
-			this.line33.EndPoint = new NxtControl.Drawing.PointF(932D, 274D);
+			this.line33.EndPoint = new NxtControl.Drawing.PointF(917.46428571428567D, 274D);
 			this.line33.Name = "line33";
 			this.line33.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
-			this.line33.StartPoint = new NxtControl.Drawing.PointF(932D, 254D);
+			this.line33.StartPoint = new NxtControl.Drawing.PointF(917.46428571428567D, 254D);
 			// 
 			// polygon19
 			// 
-			this.polygon19.Bounds = new NxtControl.Drawing.RectF(((float)(932D)), ((float)(266D)), ((float)(20D)), ((float)(16D)));
+			this.polygon19.Bounds = new NxtControl.Drawing.RectF(((float)(917.46428571428567D)), ((float)(266D)), ((float)(15.178571428571331D)), ((float)(16D)));
 			this.polygon19.Brush = new NxtControl.Drawing.Brush(true);
 			this.polygon19.Closed = true;
 			this.polygon19.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
 			this.polygon19.Name = "polygon19";
 			this.polygon19.Points.AddRange(new NxtControl.Drawing.PointF[] {
-			new NxtControl.Drawing.PointF(952D, 266D),
-			new NxtControl.Drawing.PointF(952D, 282D),
-			new NxtControl.Drawing.PointF(932D, 274D)});
+			new NxtControl.Drawing.PointF(932.642857142857D, 266D),
+			new NxtControl.Drawing.PointF(932.642857142857D, 282D),
+			new NxtControl.Drawing.PointF(917.46428571428567D, 274D)});
 			// 
 			// polygon20
 			// 
-			this.polygon20.Bounds = new NxtControl.Drawing.RectF(((float)(912D)), ((float)(266D)), ((float)(20D)), ((float)(16D)));
+			this.polygon20.Bounds = new NxtControl.Drawing.RectF(((float)(902.28571428571422D)), ((float)(266D)), ((float)(15.178571428571445D)), ((float)(16D)));
 			this.polygon20.Brush = new NxtControl.Drawing.Brush(true);
 			this.polygon20.Closed = true;
 			this.polygon20.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
 			this.polygon20.Name = "polygon20";
 			this.polygon20.Points.AddRange(new NxtControl.Drawing.PointF[] {
-			new NxtControl.Drawing.PointF(912D, 266D),
-			new NxtControl.Drawing.PointF(912D, 282D),
-			new NxtControl.Drawing.PointF(932D, 274D)});
+			new NxtControl.Drawing.PointF(902.28571428571422D, 266D),
+			new NxtControl.Drawing.PointF(902.28571428571422D, 282D),
+			new NxtControl.Drawing.PointF(917.46428571428567D, 274D)});
 			// 
 			// group8
 			// 
@@ -1001,77 +1002,77 @@ namespace SE.Nereda.Symbols.NeredaSludgeBuffer_2
 			// 
 			// pipe18
 			// 
-			this.pipe18.Bounds = new NxtControl.Drawing.RectF(((float)(952D)), ((float)(275D)), ((float)(40D)), ((float)(0D)));
+			this.pipe18.Bounds = new NxtControl.Drawing.RectF(((float)(932.642857142857D)), ((float)(275D)), ((float)(30.35714285714289D)), ((float)(0D)));
 			this.pipe18.InnerColor = new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(255)));
 			this.pipe18.Name = "pipe18";
 			this.pipe18.OuterColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.pipe18.Points.AddRange(new NxtControl.Drawing.PointF[] {
-			new NxtControl.Drawing.PointF(952D, 275D),
-			new NxtControl.Drawing.PointF(992D, 275D)});
+			new NxtControl.Drawing.PointF(932.642857142857D, 275D),
+			new NxtControl.Drawing.PointF(962.99999999999989D, 275D)});
 			this.pipe18.Width = 10;
 			// 
 			// line34
 			// 
-			this.line34.EndPoint = new NxtControl.Drawing.PointF(912D, 284.89655172413791D);
+			this.line34.EndPoint = new NxtControl.Drawing.PointF(902.28571428571422D, 284.89655172413791D);
 			this.line34.Name = "line34";
 			this.line34.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 3F, NxtControl.Drawing.DashStyle.Solid);
-			this.line34.StartPoint = new NxtControl.Drawing.PointF(912D, 261.17241379310343D);
+			this.line34.StartPoint = new NxtControl.Drawing.PointF(902.28571428571422D, 261.17241379310343D);
 			// 
 			// line35
 			// 
-			this.line35.EndPoint = new NxtControl.Drawing.PointF(908D, 284.89655172413791D);
+			this.line35.EndPoint = new NxtControl.Drawing.PointF(899.24999999999989D, 284.89655172413791D);
 			this.line35.Name = "line35";
 			this.line35.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 4F, NxtControl.Drawing.DashStyle.Solid);
-			this.line35.StartPoint = new NxtControl.Drawing.PointF(908D, 261.17241379310343D);
+			this.line35.StartPoint = new NxtControl.Drawing.PointF(899.24999999999989D, 261.17241379310343D);
 			// 
 			// pipe19
 			// 
-			this.pipe19.Bounds = new NxtControl.Drawing.RectF(((float)(887D)), ((float)(119.03448486328125D)), ((float)(28D)), ((float)(0D)));
+			this.pipe19.Bounds = new NxtControl.Drawing.RectF(((float)(884.57216494845363D)), ((float)(119.03448486328125D)), ((float)(21.249999999999886D)), ((float)(0D)));
 			this.pipe19.InnerColor = new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(255)));
 			this.pipe19.Name = "pipe19";
 			this.pipe19.OuterColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.pipe19.Points.AddRange(new NxtControl.Drawing.PointF[] {
-			new NxtControl.Drawing.PointF(887D, 119.03448486328125D),
-			new NxtControl.Drawing.PointF(915D, 119.03448486328125D)});
+			new NxtControl.Drawing.PointF(884.57216494845363D, 119.03448486328125D),
+			new NxtControl.Drawing.PointF(905.82216494845352D, 119.03448486328125D)});
 			this.pipe19.Width = 10;
 			// 
 			// line36
 			// 
-			this.line36.EndPoint = new NxtControl.Drawing.PointF(947D, 100D);
+			this.line36.EndPoint = new NxtControl.Drawing.PointF(930.10787923416785D, 100D);
 			this.line36.Name = "line36";
 			this.line36.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 3F, NxtControl.Drawing.DashStyle.Solid);
-			this.line36.StartPoint = new NxtControl.Drawing.PointF(931D, 100D);
+			this.line36.StartPoint = new NxtControl.Drawing.PointF(917.96502209131063D, 100D);
 			// 
 			// line37
 			// 
-			this.line37.EndPoint = new NxtControl.Drawing.PointF(939D, 120D);
+			this.line37.EndPoint = new NxtControl.Drawing.PointF(924.03645066273918D, 120D);
 			this.line37.Name = "line37";
 			this.line37.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
-			this.line37.StartPoint = new NxtControl.Drawing.PointF(939D, 100D);
+			this.line37.StartPoint = new NxtControl.Drawing.PointF(924.03645066273918D, 100D);
 			// 
 			// polygon21
 			// 
-			this.polygon21.Bounds = new NxtControl.Drawing.RectF(((float)(939D)), ((float)(112D)), ((float)(20D)), ((float)(16D)));
+			this.polygon21.Bounds = new NxtControl.Drawing.RectF(((float)(924.03645066273918D)), ((float)(112D)), ((float)(15.178571428571445D)), ((float)(16D)));
 			this.polygon21.Brush = new NxtControl.Drawing.Brush(true);
 			this.polygon21.Closed = true;
 			this.polygon21.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
 			this.polygon21.Name = "polygon21";
 			this.polygon21.Points.AddRange(new NxtControl.Drawing.PointF[] {
-			new NxtControl.Drawing.PointF(959D, 112D),
-			new NxtControl.Drawing.PointF(959D, 128D),
-			new NxtControl.Drawing.PointF(939D, 120D)});
+			new NxtControl.Drawing.PointF(939.21502209131063D, 112D),
+			new NxtControl.Drawing.PointF(939.21502209131063D, 128D),
+			new NxtControl.Drawing.PointF(924.03645066273918D, 120D)});
 			// 
 			// polygon22
 			// 
-			this.polygon22.Bounds = new NxtControl.Drawing.RectF(((float)(919D)), ((float)(112D)), ((float)(20D)), ((float)(16D)));
+			this.polygon22.Bounds = new NxtControl.Drawing.RectF(((float)(908.85787923416774D)), ((float)(112D)), ((float)(15.178571428571331D)), ((float)(16D)));
 			this.polygon22.Brush = new NxtControl.Drawing.Brush(true);
 			this.polygon22.Closed = true;
 			this.polygon22.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
 			this.polygon22.Name = "polygon22";
 			this.polygon22.Points.AddRange(new NxtControl.Drawing.PointF[] {
-			new NxtControl.Drawing.PointF(919D, 112D),
-			new NxtControl.Drawing.PointF(919D, 128D),
-			new NxtControl.Drawing.PointF(939D, 120D)});
+			new NxtControl.Drawing.PointF(908.85787923416774D, 112D),
+			new NxtControl.Drawing.PointF(908.85787923416774D, 128D),
+			new NxtControl.Drawing.PointF(924.03645066273907D, 120D)});
 			// 
 			// group11
 			// 
@@ -1086,21 +1087,21 @@ namespace SE.Nereda.Symbols.NeredaSludgeBuffer_2
 			// 
 			// pipe20
 			// 
-			this.pipe20.Bounds = new NxtControl.Drawing.RectF(((float)(959D)), ((float)(121D)), ((float)(40D)), ((float)(0D)));
+			this.pipe20.Bounds = new NxtControl.Drawing.RectF(((float)(939.21502209131063D)), ((float)(121D)), ((float)(30.35714285714289D)), ((float)(0D)));
 			this.pipe20.InnerColor = new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(255)));
 			this.pipe20.Name = "pipe20";
 			this.pipe20.OuterColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.pipe20.Points.AddRange(new NxtControl.Drawing.PointF[] {
-			new NxtControl.Drawing.PointF(959D, 121D),
-			new NxtControl.Drawing.PointF(999D, 121D)});
+			new NxtControl.Drawing.PointF(939.21502209131063D, 121D),
+			new NxtControl.Drawing.PointF(969.57216494845352D, 121D)});
 			this.pipe20.Width = 10;
 			// 
 			// line38
 			// 
-			this.line38.EndPoint = new NxtControl.Drawing.PointF(919D, 130.89655172413791D);
+			this.line38.EndPoint = new NxtControl.Drawing.PointF(908.85787923416785D, 130.89655172413791D);
 			this.line38.Name = "line38";
 			this.line38.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 3F, NxtControl.Drawing.DashStyle.Solid);
-			this.line38.StartPoint = new NxtControl.Drawing.PointF(919D, 107.17241379310343D);
+			this.line38.StartPoint = new NxtControl.Drawing.PointF(908.85787923416785D, 107.17241379310343D);
 			// 
 			// group12
 			// 
@@ -1213,35 +1214,35 @@ namespace SE.Nereda.Symbols.NeredaSludgeBuffer_2
 			// 
 			// pipe23
 			// 
-			this.pipe23.Bounds = new NxtControl.Drawing.RectF(((float)(998D)), ((float)(116D)), ((float)(0D)), ((float)(328D)));
+			this.pipe23.Bounds = new NxtControl.Drawing.RectF(((float)(969D)), ((float)(116D)), ((float)(0D)), ((float)(326D)));
 			this.pipe23.InnerColor = new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(255)));
 			this.pipe23.Name = "pipe23";
 			this.pipe23.OuterColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.pipe23.Points.AddRange(new NxtControl.Drawing.PointF[] {
-			new NxtControl.Drawing.PointF(998D, 444D),
-			new NxtControl.Drawing.PointF(998D, 116D)});
+			new NxtControl.Drawing.PointF(969D, 442D),
+			new NxtControl.Drawing.PointF(969D, 116D)});
 			this.pipe23.Width = 10;
 			// 
 			// pipe24
 			// 
-			this.pipe24.Bounds = new NxtControl.Drawing.RectF(((float)(1000D)), ((float)(438D)), ((float)(148D)), ((float)(0D)));
+			this.pipe24.Bounds = new NxtControl.Drawing.RectF(((float)(999D)), ((float)(438D)), ((float)(147D)), ((float)(0D)));
 			this.pipe24.InnerColor = new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(255)));
 			this.pipe24.Name = "pipe24";
 			this.pipe24.OuterColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.pipe24.Points.AddRange(new NxtControl.Drawing.PointF[] {
-			new NxtControl.Drawing.PointF(1000D, 438D),
-			new NxtControl.Drawing.PointF(1148D, 438D)});
+			new NxtControl.Drawing.PointF(999D, 438D),
+			new NxtControl.Drawing.PointF(1146D, 438D)});
 			this.pipe24.Width = 10;
 			// 
 			// pipe25
 			// 
-			this.pipe25.Bounds = new NxtControl.Drawing.RectF(((float)(1144D)), ((float)(232D)), ((float)(0D)), ((float)(208D)));
+			this.pipe25.Bounds = new NxtControl.Drawing.RectF(((float)(1160D)), ((float)(232D)), ((float)(0D)), ((float)(208D)));
 			this.pipe25.InnerColor = new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(255)));
 			this.pipe25.Name = "pipe25";
 			this.pipe25.OuterColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.pipe25.Points.AddRange(new NxtControl.Drawing.PointF[] {
-			new NxtControl.Drawing.PointF(1144D, 440D),
-			new NxtControl.Drawing.PointF(1144D, 232D)});
+			new NxtControl.Drawing.PointF(1160D, 440D),
+			new NxtControl.Drawing.PointF(1160D, 232D)});
 			this.pipe25.Width = 10;
 			// 
 			// pipe26
@@ -1257,12 +1258,12 @@ namespace SE.Nereda.Symbols.NeredaSludgeBuffer_2
 			// 
 			// pipe27
 			// 
-			this.pipe27.Bounds = new NxtControl.Drawing.RectF(((float)(1139D)), ((float)(237D)), ((float)(40D)), ((float)(0D)));
+			this.pipe27.Bounds = new NxtControl.Drawing.RectF(((float)(1155D)), ((float)(237D)), ((float)(24D)), ((float)(0D)));
 			this.pipe27.InnerColor = new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(255)));
 			this.pipe27.Name = "pipe27";
 			this.pipe27.OuterColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.pipe27.Points.AddRange(new NxtControl.Drawing.PointF[] {
-			new NxtControl.Drawing.PointF(1139D, 237D),
+			new NxtControl.Drawing.PointF(1155D, 237D),
 			new NxtControl.Drawing.PointF(1179D, 237D)});
 			this.pipe27.Width = 10;
 			// 
@@ -1301,19 +1302,19 @@ namespace SE.Nereda.Symbols.NeredaSludgeBuffer_2
 			// 
 			// pipe31
 			// 
-			this.pipe31.Bounds = new NxtControl.Drawing.RectF(((float)(1141D)), ((float)(336D)), ((float)(40D)), ((float)(0D)));
+			this.pipe31.Bounds = new NxtControl.Drawing.RectF(((float)(1157D)), ((float)(336D)), ((float)(24D)), ((float)(0D)));
 			this.pipe31.InnerColor = new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(255)));
 			this.pipe31.Name = "pipe31";
 			this.pipe31.OuterColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.pipe31.Points.AddRange(new NxtControl.Drawing.PointF[] {
-			new NxtControl.Drawing.PointF(1141D, 336D),
+			new NxtControl.Drawing.PointF(1157D, 336D),
 			new NxtControl.Drawing.PointF(1181D, 336D)});
 			this.pipe31.Width = 10;
 			// 
 			// sDefault2
 			// 
 			this.sDefault2.BeginInit();
-			this.sDefault2._iVlvName = "Valve";
+			this.sDefault2._iVlvName = "AV49005";
 			this.sDefault2.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 1148D, 188D);
 			this.sDefault2.Name = "sDefault2";
 			this.sDefault2.SecurityToken = ((uint)(4294967295u));
@@ -1325,7 +1326,7 @@ namespace SE.Nereda.Symbols.NeredaSludgeBuffer_2
 			// sDefault3
 			// 
 			this.sDefault3.BeginInit();
-			this.sDefault3._iVlvName = "Valve";
+			this.sDefault3._iVlvName = "AV49004";
 			this.sDefault3.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 1149D, 288D);
 			this.sDefault3.Name = "sDefault3";
 			this.sDefault3.SecurityToken = ((uint)(4294967295u));
@@ -1337,7 +1338,7 @@ namespace SE.Nereda.Symbols.NeredaSludgeBuffer_2
 			// sDefault4
 			// 
 			this.sDefault4.BeginInit();
-			this.sDefault4._iVlvName = "Valve";
+			this.sDefault4._iVlvName = "AV49003";
 			this.sDefault4.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 1149D, 390D);
 			this.sDefault4.Name = "sDefault4";
 			this.sDefault4.SecurityToken = ((uint)(4294967295u));
@@ -1346,8 +1347,22 @@ namespace SE.Nereda.Symbols.NeredaSludgeBuffer_2
 			this.sDefault4.TagName = "Actuators.ValveInfeed";
 			this.sDefault4.EndInit();
 			// 
+			// sDefault5
+			// 
+			this.sDefault5.BeginInit();
+			this.sDefault5._iVlvName = "AV40001";
+			this.sDefault5.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 1181D, 309D);
+			this.sDefault5.Name = "sDefault5";
+			this.sDefault5.SecurityToken = ((uint)(4294967295u));
+			this.sDefault5.StateTextPosition = SE.Nereda.Symbols.ValveS.sDefault.StateTextPositionOption.Vertical;
+			this.sDefault5.SymbolNameDisplay = SE.Nereda.Symbols.ValveS.sDefault.SymbolNameDisplayOption.Show;
+			this.sDefault5.TagName = "Actuators.ValveSupernatantReturn";
+			this.sDefault5.EndInit();
+			// 
 			// sSludgeBufferyellow
 			// 
+			this.AnchorPoint = new NxtControl.Drawing.PointF(-56D, -81D);
+			this.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 0D, 1D);
 			this.Shapes.AddRange(new System.ComponentModel.IComponent[] {
 			this.pipe10,
 			this.pipe3,
@@ -1409,8 +1424,9 @@ namespace SE.Nereda.Symbols.NeredaSludgeBuffer_2
 			this.pipe29,
 			this.sDefault2,
 			this.sDefault3,
-			this.sDefault4});
-			this.SymbolSize = new System.Drawing.Size(1480, 560);
+			this.sDefault4,
+			this.sDefault5});
+			this.SymbolSize = new System.Drawing.Size(1272, 744);
 
 		}
 		private NxtControl.GuiFramework.Pipe pipe7;
@@ -1534,6 +1550,7 @@ namespace SE.Nereda.Symbols.NeredaSludgeBuffer_2
 		private SE.Nereda.Symbols.ValveS.sDefault sDefault2;
 		private SE.Nereda.Symbols.ValveS.sDefault sDefault3;
 		private SE.Nereda.Symbols.ValveS.sDefault sDefault4;
+		private SE.Nereda.Symbols.ValveS.sDefault sDefault5;
 		#endregion
 	}
 }

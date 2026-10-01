@@ -34,6 +34,7 @@ namespace HMI.Main.Canvases
 			this.SludgeBuffer = new SE.Nereda.Symbols.NeredaSludgeBuffer_2.sSludgeBufferyellow();
 			this.SludgeBuffer_2 = new SE.Nereda.Symbols.NeredaSludgeBuffer_2.sPhases();
 			this.SludgeBuffer_3 = new SE.Nereda.Symbols.NeredaSludgeBuffer_2.sSensors();
+			this.sBarPvSpOpVert1 = new SE.App2CommonProcess.Symbols.PID.sBarPvSpOpVert();
 			// 
 			// polygon7
 			// 
@@ -77,7 +78,7 @@ namespace HMI.Main.Canvases
 			// SludgeBuffer_1
 			// 
 			this.SludgeBuffer_1.BeginInit();
-			this.SludgeBuffer_1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 1104D, 80D);
+			this.SludgeBuffer_1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 1008D, 80D);
 			this.SludgeBuffer_1.Name = "SludgeBuffer_1";
 			this.SludgeBuffer_1.SecurityToken = ((uint)(4294967295u));
 			this.SludgeBuffer_1.TagName = "9AA3696311BF0C3E";
@@ -110,6 +111,19 @@ namespace HMI.Main.Canvases
 			this.SludgeBuffer_3.TagName = "9AA3696311BF0C3E";
 			this.SludgeBuffer_3.EndInit();
 			// 
+			// sBarPvSpOpVert1
+			// 
+			this.sBarPvSpOpVert1.BeginInit();
+			this.sBarPvSpOpVert1.DefaultInstanceName = null;
+			this.sBarPvSpOpVert1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 1184D, 128D);
+			this.sBarPvSpOpVert1.DisplayType = SE.App2CommonProcess.SupportClasses.PidDisplayType.PvSpOp;
+			this.sBarPvSpOpVert1.Instancelayer = SE.App2Base.SupportClasses.InstanceLayer.Base;
+			this.sBarPvSpOpVert1.MyTagDisplayName = null;
+			this.sBarPvSpOpVert1.Name = "sBarPvSpOpVert1";
+			this.sBarPvSpOpVert1.SecurityToken = ((uint)(4294967295u));
+			this.sBarPvSpOpVert1.TagName = "9AA3696311BF0C3E.Logic.CmdWaterDischargeSLB1.CommandLogic.PID";
+			this.sBarPvSpOpVert1.EndInit();
+			// 
 			// SLUDGE_BUFFER
 			// 
 			this.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(1366D)), ((float)(698D)));
@@ -122,7 +136,8 @@ namespace HMI.Main.Canvases
 			this.SludgeBuffer_1,
 			this.SludgeBuffer,
 			this.SludgeBuffer_2,
-			this.SludgeBuffer_3});
+			this.SludgeBuffer_3,
+			this.sBarPvSpOpVert1});
 			this.Size = new System.Drawing.Size(1366, 698);
 
 		}
@@ -134,6 +149,7 @@ namespace HMI.Main.Canvases
 		private SE.Nereda.Symbols.NeredaSludgeBuffer_2.sSettingsSLB SludgeBuffer_1;
 		private SE.Nereda.Symbols.NeredaSludgeBuffer_2.sPhases SludgeBuffer_2;
 		private SE.Nereda.Symbols.NeredaSludgeBuffer_2.sSensors SludgeBuffer_3;
+		private SE.App2CommonProcess.Symbols.PID.sBarPvSpOpVert sBarPvSpOpVert1;
 		#endregion
 	}
 }

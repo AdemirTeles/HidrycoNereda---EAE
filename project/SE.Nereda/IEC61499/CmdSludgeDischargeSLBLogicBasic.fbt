@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
-<FBType GUID="b80075c8-22a5-4b20-8d99-ccf621cc16df" Name="CmdSludgeDischargeSLBLogicBasic" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+<FBType GUID="b80075c8-22a5-4b20-8d99-ccf621cc16df" Name="CmdSludgeDischargeSLBLogicBasic" Comment="Descarga do Sludge Buffer - valvulas e bombas (lodo / sobrenadante)" Namespace="SE.Nereda">
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Schneider Electric" Version="0.0" Author="Administrator" Date="7/31/2024" Remarks="Template" />
+  <VersionInfo Organization="Schneider Electric" Version="10.0" Author="Claude/Hidryco" Date="9/30/2026" Remarks="Rev10 - Reserva que entra para compor 2 bombas segue a sequencia C2 (bomba que ficou baixa para C2); Rev9 - Saida da 2a bomba exige velocidade abaixo de C3 alem de T_C3 (com T_C3 = 0 a bomba entrava e saia em ciclo); Rev8 - Capacidade = saida do PID (0-100 % total); Cmax = parcela de 1 bomba [%]; 1 bomba = PID/Cmax, 2 bombas = PID/(2 Cmax), entrada em C2 [%], saida com velocidade abaixo de C3 [%]; Rev5 - Bomba so sai de servico sem Ready E sem Running (modo operador); valvulas so fecham com bombas paradas; Rev4 - ECC simplificado (4 estados/6 transicoes); Sel-&gt;PumpSel (SEL e reservado); algoritmos AlgMain/AlgTick; Rev3 - Pausa no RUN (nivel L 49LT0001 / vazao LL 49FT0004) com retomada por tempo; Logica unica p/ lodo (1+2, AV49004 e/ou AV49005) e sobrenadante (2+1, Cmax/C2/C3 m3/h); troca p/ reserva no RUN" />
   <InterfaceList>
     <EventInputs>
       <Event Name="READY">
         <With Var="Ready" />
       </Event>
       <Event Name="STARTING" Comment="Normal Execution Request">
+        <With Var="SupernatantMode" />
         <With Var="Starting" />
       </Event>
       <Event Name="RUN">
@@ -51,6 +52,28 @@
         <With Var="PumpTotOpe_2" />
         <With Var="PumpTotOpe_3" />
       </Event>
+      <Event ID="888C7FFA93152C07" Name="SP" Comment="Setpoint de vazao e parametros">
+        <With Var="FlowSp" />
+        <With Var="SupernatantMode" />
+        <With Var="Cmax" />
+        <With Var="C2" />
+        <With Var="C3" />
+        <With Var="T_C2" />
+        <With Var="T_C3" />
+        <With Var="T_Restart" />
+        <With Var="T_FlowLL" />
+      </Event>
+      <Event ID="2AFCCC4D006C5A58" Name="TICK" Comment="Base de tempo 1 s" />
+      <Event ID="19EED5631A4ADE11" Name="LEVEL" Comment="Nivel L do 49LT0001">
+        <With Var="LowLevel" />
+      </Event>
+      <Event ID="D9E0400EF0DD670E" Name="PID_UPD" Comment="Saida do PID">
+        <With Var="PIDOut" />
+      </Event>
+      <Event ID="E12F00872D66F11F" Name="FLOW" Comment="Status do 49FT0004">
+        <With Var="FlowLL" />
+        <With Var="FlowFail" />
+      </Event>
     </EventInputs>
     <EventOutputs>
       <Event Name="VALVE_CNF" Comment="Execution Confirmation">
@@ -73,8 +96,18 @@
         <With Var="AbortedReady" />
       </Event>
       <Event ID="001688431DB935DE" Name="GRAPH">
+        <With Var="PumpMode" />
+        <With Var="SecondPump" />
+        <With Var="Paused" />
+        <With Var="PauseCause" />
         <With Var="Grafcet" />
         <With Var="SelectedPump" />
+      </Event>
+      <Event ID="6F9F08BA58B8009D" Name="SPEED_CNF" Comment="Velocidade das bombas">
+        <With Var="PumpSpeed" />
+      </Event>
+      <Event ID="948C0A3C8D4A59E4" Name="SP_CNF" Comment="Setpoint efetivo para o PI">
+        <With Var="EffFlowSp" />
       </Event>
     </EventOutputs>
     <InputVars>
@@ -104,6 +137,19 @@
       <VarDeclaration ID="8A3A0D8C0A296294" Name="ValveFbOpen_Supernant" Type="BOOL" />
       <VarDeclaration ID="5AB763DA99D1722E" Name="ValveFbClose_Supernant" Type="BOOL" />
       <VarDeclaration ID="C2A6AEC1BFED4499" Name="ValveReady_Supernant" Type="BOOL" />
+      <VarDeclaration ID="38A57B28987BAE06" Name="FlowSp" Type="REAL" Comment="Setpoint de vazao da fase [m3/h]" />
+      <VarDeclaration ID="B8EE5B594802026A" Name="SupernatantMode" Type="BOOL" Comment="TRUE = sobrenadante (2 servico + 1 reserva, AV49002+AV49003+AV40001); FALSE = lodo" />
+      <VarDeclaration ID="0A323B5BB10D6790" Name="Cmax" Type="REAL" Comment="Vazao maxima de 1 bomba [m3/h]" />
+      <VarDeclaration ID="7B6FA0EADBC872E0" Name="C2" Type="REAL" Comment="Vazao por bomba na entrada da 2a bomba [m3/h]" />
+      <VarDeclaration ID="FBBD66E4176C0F4A" Name="C3" Type="REAL" Comment="Vazao por bomba abaixo da qual sai 1 bomba [m3/h]" />
+      <VarDeclaration ID="2EE8E2AD063EE95E" Name="T_C2" Type="TIME" Comment="Tempo em C2" />
+      <VarDeclaration ID="097CEF7D3109D4BE" Name="T_C3" Type="TIME" Comment="Tempo abaixo de C3" />
+      <VarDeclaration ID="37F2A16CD48B9A9D" Name="T_Restart" Type="TIME" Comment="Tempo para retomar apos a causa da pausa sair" />
+      <VarDeclaration ID="E9499B195D781C20" Name="T_FlowLL" Type="TIME" Comment="Tempo de vazao LL com bomba rodando para pausar (0 = desabilitado)" />
+      <VarDeclaration ID="E364687AE6285E4B" Name="LowLevel" Type="BOOL" Comment="Nivel L do 49LT0001" />
+      <VarDeclaration ID="CF4621EC925C43E9" Name="FlowLL" Type="BOOL" Comment="Alarme LL do 49FT0004" />
+      <VarDeclaration ID="F66FAF9E12E91CF7" Name="FlowFail" Type="BOOL" Comment="Falha do 49FT0004" />
+      <VarDeclaration ID="A7D276693781888D" Name="PIDOut" Type="REAL" Comment="Saida do PID = capacidade total pedida [%]" />
     </InputVars>
     <OutputVars>
       <VarDeclaration Name="StartReady" Type="BOOL" />
@@ -117,233 +163,475 @@
       <VarDeclaration ID="750D687533E86DDC" Name="Pump_2" Type="BOOL" />
       <VarDeclaration ID="A7428AB4F66CF0EA" Name="Pump_3" Type="BOOL" />
       <VarDeclaration ID="CE5E9AB5AF070C5F" Name="SelectedPump" Type="INT" />
+      <VarDeclaration ID="CFFB125A7B539DE2" Name="EffFlowSp" Type="REAL" Comment="Setpoint efetivo de vazao para o PI [m3/h]" />
+      <VarDeclaration ID="120DEE7B658C67A3" Name="PumpMode" Type="INT" Comment="0=1 bomba 1=reduzindo p/ C2 2=2a bomba entrando 3=duas bombas" />
+      <VarDeclaration ID="62FD82D60F199509" Name="SecondPump" Type="INT" Comment="Segunda bomba em servico" />
+      <VarDeclaration ID="11614BB0316B186C" Name="Paused" Type="BOOL" Comment="Descarga em pausa" />
+      <VarDeclaration ID="2E15F5890513A407" Name="PauseCause" Type="INT" Comment="0=sem pausa 1=nivel L 49LT0001 2=vazao LL 49FT0004" />
+      <VarDeclaration ID="1E314D8B4487BA0C" Name="PumpSpeed" Type="REAL" Comment="Velocidade enviada as bombas [%]" />
     </OutputVars>
   </InterfaceList>
   <BasicFB ID="b09b6cfe-84e6-466d-9649-93dbbf4f5b70">
-    <Attribute Name="FBType.Basic.Algorithm.Order" Value="StartReady,StopReady,AbortedReady,OpenValve,CloseValve,RunPump,StopPump,StopPump_WhenAborting" />
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="AlgMain,AlgTick" />
+    <InternalVars>
+      <VarDeclaration Name="UseSup" Type="BOOL" />
+      <VarDeclaration Name="AllPumpsStopped" Type="BOOL" />
+      <VarDeclaration Name="AnyPumpRunning" Type="BOOL" />
+      <VarDeclaration Name="ValvesOpenOk" Type="BOOL" />
+      <VarDeclaration Name="ValvesClosedOk" Type="BOOL" />
+      <VarDeclaration Name="Spare" Type="BOOL" />
+      <VarDeclaration Name="ParOk" Type="BOOL" />
+      <VarDeclaration Name="NCmd" Type="INT" />
+      <VarDeclaration Name="NRun" Type="INT" />
+      <VarDeclaration Name="NWant" Type="INT" />
+      <VarDeclaration Name="PumpSel" Type="INT" />
+      <VarDeclaration Name="NCmdPrev" Type="INT" />
+      <VarDeclaration Name="MinTot" Type="UDINT" />
+      <VarDeclaration Name="MinOrd" Type="UDINT" />
+      <VarDeclaration Name="Seq" Type="UDINT" />
+      <VarDeclaration Name="Ord1" Type="UDINT" />
+      <VarDeclaration Name="Ord2" Type="UDINT" />
+      <VarDeclaration Name="Ord3" Type="UDINT" />
+      <VarDeclaration Name="Tacc" Type="TIME" />
+      <VarDeclaration Name="T3acc" Type="TIME" />
+      <VarDeclaration Name="Trest" Type="TIME" />
+      <VarDeclaration Name="Tll" Type="TIME" />
+      <VarDeclaration Name="PrevPC" Type="INT" />
+      <VarDeclaration Name="EdgeOut" Type="BOOL" />
+      <VarDeclaration Name="EdgeSpd" Type="BOOL" />
+      <VarDeclaration Name="PrevSpd" Type="REAL" />
+      <VarDeclaration Name="PrevSR" Type="BOOL" />
+      <VarDeclaration Name="PrevST" Type="BOOL" />
+      <VarDeclaration Name="PrevAB" Type="BOOL" />
+      <VarDeclaration Name="PrevSP" Type="REAL" />
+      <VarDeclaration Name="PrevGR" Type="INT" />
+      <VarDeclaration Name="PrevSel" Type="INT" />
+      <VarDeclaration Name="PrevSec" Type="INT" />
+      <VarDeclaration Name="PrevPM" Type="INT" />
+    </InternalVars>
     <ECC>
-      <ECState Name="START" Comment="Initial State" x="5002.941" y="904.4117" />
-      <ECState Name="Starting" Comment="Normal execution" x="2837.647" y="1952.941">
-        <ECAction Algorithm="OpenValve" Output="VALVE_CNF" />
+      <ECState Name="START" x="2600" y="300" />
+      <ECState Name="TIMEBASE" x="1200" y="1100">
+        <ECAction Algorithm="AlgTick" />
+      </ECState>
+      <ECState Name="EVAL" x="2600" y="1100">
+        <ECAction Algorithm="AlgMain" Output="VALVE_CNF" />
+        <ECAction Output="PUMP_CNF" />
+      </ECState>
+      <ECState Name="SEND_OUT" x="2600" y="1900">
+        <ECAction Output="SP_CNF" />
+        <ECAction Output="START_READY" />
         <ECAction Output="STOP_READY" />
         <ECAction Output="ABORTED_READY" />
         <ECAction Output="GRAPH" />
       </ECState>
-      <ECState Name="StartReady" x="2832" y="2635">
-        <ECAction Algorithm="StartReady" Output="START_READY" />
-        <ECAction Output="GRAPH" />
+      <ECState Name="SEND_SPD" x="4000" y="1900">
+        <ECAction Output="SPEED_CNF" />
       </ECState>
-      <ECState Name="Stopping2" x="4995" y="2591">
-        <ECAction Algorithm="CloseValve" Output="VALVE_CNF" />
-        <ECAction Output="GRAPH" />
-      </ECState>
-      <ECState Name="StopReady" x="4991" y="3190">
-        <ECAction Algorithm="StopReady" Output="STOP_READY" />
-        <ECAction Output="GRAPH" />
-      </ECState>
-      <ECState Name="Aborting2" x="6923.778" y="2625.111">
-        <ECAction Algorithm="CloseValve" Output="VALVE_CNF" />
-        <ECAction Output="GRAPH" />
-      </ECState>
-      <ECState Name="AbortReady" x="6923.777" y="3223.333">
-        <ECAction Algorithm="AbortedReady" Output="ABORTED_READY" />
-        <ECAction Output="GRAPH" />
-      </ECState>
-      <ECState Name="Aborting" x="4997" y="3849" />
-      <ECState Name="Ready" x="7615.458" y="189.8412">
-        <ECAction Algorithm="StopPump" Output="PUMP_CNF" />
-        <ECAction Output="START_READY" />
-        <ECAction Output="GRAPH" />
-      </ECState>
-      <ECState Name="Run" x="2818.274" y="3225">
-        <ECAction Algorithm="RunPump" Output="PUMP_CNF" />
-        <ECAction Output="GRAPH" />
-      </ECState>
-      <ECState Name="Aborting1" x="6914.94" y="1946.669">
-        <ECAction Algorithm="StopPump_WhenAborting" Output="PUMP_CNF" />
-        <ECAction Output="START_READY" />
-        <ECAction Output="STOP_READY" />
-        <ECAction Output="GRAPH" />
-      </ECState>
-      <ECState Name="Stopping1" x="5000.497" y="1971.669">
-        <ECAction Algorithm="StopPump" Output="PUMP_CNF" />
-        <ECAction Output="START_READY" />
-        <ECAction Output="ABORTED_READY" />
-        <ECAction Output="GRAPH" />
-      </ECState>
-      <ECState Name="CloseAll" x="7615.496" y="870.0001">
-        <ECAction Algorithm="CloseValve" Output="VALVE_CNF" />
-        <ECAction Output="GRAPH" />
-      </ECState>
-      <ECTransition Source="START" Destination="Starting" Condition="STARTING AND Starting" x="3945.409" y="1440.514">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1069.092,321.7323,906.2997,400.4976" />
-      </ECTransition>
-      <ECTransition Source="Starting" Destination="StartReady" Condition="ValveFbOpen_1 AND ValveFbOpen_2 AND ValveFbOpen_Supernant" x="2832.59" y="2291.697">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="707.8022,548.5943,708.2211,596.8752" />
-      </ECTransition>
-      <ECTransition Source="Run" Destination="START" Condition="1" x="2372.434" y="1744.056">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="385.4133,500.2363,559.761,321.2142" />
-      </ECTransition>
-      <ECTransition Source="START" Destination="Stopping1" Condition="STOPPING AND Stopping" x="5003.886" y="1441.625">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1251.165,320.9724,1251.075,400.4375" />
-      </ECTransition>
-      <ECTransition Source="Stopping2" Destination="StopReady" Condition="ValveFbClose_1&#xD;&#xA;AND&#xD;&#xA;ValveFbClose_2&#xD;&#xA;AND&#xD;&#xA;ValveFbClose_Supernant" x="4996.067" y="2881.37">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1249.275,698.9653,1249.121,740.198" />
-      </ECTransition>
-      <ECTransition Source="StopReady" Destination="START" Condition="1" x="4513.426" y="2059.917">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1090.772,606.9371,1092.392,425.1398" />
-      </ECTransition>
-      <ECTransition Source="Aborting2" Destination="AbortReady" Condition="ValveFbClose_1 OR NOT ValveReady_1&#xD;&#xA;AND&#xD;&#xA;ValveFbClose_2 OR NOT ValveReady_2&#xD;&#xA;AND&#xD;&#xA;ValveFbClose_Supernant OR NOT ValveReady_Supernant" x="6927.898" y="2938.152">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1732.138,715.1138,1732.292,756.2836" />
-      </ECTransition>
-      <ECTransition Source="START" Destination="Aborting1" Condition="ABORTING AND Aborting" x="5899.248" y="1399.96">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1404.732,312.5786,1535.323,383.1378" />
-      </ECTransition>
-      <ECTransition Source="AbortReady" Destination="START" Condition="1" x="8469.069" y="2433.568">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="2235,1150,2400,125" />
-      </ECTransition>
-      <ECTransition Source="Starting" Destination="Aborting" Condition="ABORTING AND Aborting" x="2261.79" y="3827.489">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="361.3935,965.1555,508.5423,1096.523" />
-      </ECTransition>
-      <ECTransition Source="Aborting" Destination="Aborting1" Condition="1" x="6244.786" y="2974.286">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1620.134,930.7132,1548.506,565.8259" />
-      </ECTransition>
-      <ECTransition Source="Stopping2" Destination="Aborting" Condition="ABORTING AND Aborting" x="4428.468" y="3259.367">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1067.562,770.0715,1066.783,866.1735" />
-      </ECTransition>
-      <ECTransition Source="StopReady" Destination="Aborting" Condition="ABORTING AND Aborting" x="4992.738" y="3513.896">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1247.947,854.8882,1248.267,901.126" />
-      </ECTransition>
-      <ECTransition Source="START" Destination="Ready" Condition="Ready AND&#xD;&#xA;(ValveFbOpen_1 OR ValveFbOpen_2&#xD;&#xA;OR&#xD;&#xA;PumpFbRunning_1 OR PumpFbRunning_2 OR PumpFbRunning_3)" x="6043.421" y="456.9407">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1392.731,134.9044,1587.836,81.80506" />
-      </ECTransition>
-      <ECTransition Source="CloseAll" Destination="START" Condition="ValveFbClose_1 OR NOT ValveReady_1&#xD;&#xA;AND&#xD;&#xA;ValveFbClose_2 OR NOT ValveReady_2&#xD;&#xA;AND&#xD;&#xA;ValveFbClose_Supernant OR NOT ValveReady_Supernant" x="6564.148" y="753.7775">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1762.102,222.6981,1563.366,134.6776" />
-      </ECTransition>
-      <ECTransition Source="StartReady" Destination="Run" Condition="Run" x="2826.402" y="2955.337">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="707.1434,720.7109,706.1741,761.1805" />
-      </ECTransition>
-      <ECTransition Source="StartReady" Destination="Aborting" Condition="ABORTING AND Aborting" x="2745.525" y="3596.426">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="513.8744,880.0591,679.6636,972.6611" />
-      </ECTransition>
-      <ECTransition Source="Aborting1" Destination="Aborting2" Condition="PumpFbStopped_1 OR NOT PumpReady_1&#xD;&#xA;AND&#xD;&#xA;PumpFbStopped_2 OR NOT PumpReady_2&#xD;&#xA;AND&#xD;&#xA;PumpFbStopped_3 OR NOT PumpReady_3" x="6917.735" y="2285.117">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1729.017,547.2946,1729.652,595.1351" />
-      </ECTransition>
-      <ECTransition Source="Stopping1" Destination="Stopping2" Condition="(PumpFbStopped_1 AND SelectedPump=1) &#xD;&#xA;OR&#xD;&#xA;(PumpFbStopped_2 AND SelectedPump=2) &#xD;&#xA;OR&#xD;&#xA;(PumpFbStopped_3 AND SelectedPump=3) " x="4997.17" y="2292">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1249.462,552.4321,1249.05,595.3459" />
-      </ECTransition>
-      <ECTransition Source="Ready" Destination="CloseAll" Condition="PumpFbStopped_1 OR NOT PumpReady_1&#xD;&#xA;AND&#xD;&#xA;PumpFbStopped_2 OR NOT PumpReady_2&#xD;&#xA;AND&#xD;&#xA;PumpFbStopped_3 OR NOT PumpReady_3" x="7618.166" y="506.6898">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1904.691,100.7441,1904.719,148.729" />
-      </ECTransition>
-      <ECTransition Source="Stopping1" Destination="Aborting" Condition="ABORTING AND Aborting" x="3928.675" y="3033.26">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="902.7976,694.5168,902.476,842.3296" />
-      </ECTransition>
-      <ECTransition Source="Ready" Destination="Starting" Condition="STARTING AND Starting" x="4333.87" y="598.2147">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1201.749,42.75951,824.6929,181.9001" />
-      </ECTransition>
-      <ECTransition Source="StartReady" Destination="Stopping1" Condition="STOPPING AND Stopping" x="3948.986" y="2297.696">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="912.9846,597.407,1065.955,550.6141" />
-      </ECTransition>
+      <ECTransition Source="START" Destination="TIMEBASE" Condition="TICK" x="1700" y="700" />
+      <ECTransition Source="START" Destination="EVAL" Condition="READY OR STARTING OR RUN OR STOPPING OR ABORTING OR VALVE_FB OR PUMP_FB OR VALVE_READY OR PUMP_READY OR PUMP_TOT OR SP OR LEVEL OR FLOW OR PID_UPD" x="2700" y="700" />
+      <ECTransition Source="TIMEBASE" Destination="EVAL" Condition="1" x="1900" y="1150" />
+      <ECTransition Source="EVAL" Destination="SEND_OUT" Condition="EdgeOut" x="2700" y="1500" />
+      <ECTransition Source="EVAL" Destination="SEND_SPD" Condition="EdgeSpd" x="3400" y="1500" />
+      <ECTransition Source="EVAL" Destination="START" Condition="1" x="3300" y="700" />
+      <ECTransition Source="SEND_OUT" Destination="SEND_SPD" Condition="EdgeSpd" x="3300" y="2000" />
+      <ECTransition Source="SEND_OUT" Destination="START" Condition="1" x="3700" y="1100" />
+      <ECTransition Source="SEND_SPD" Destination="START" Condition="1" x="4200" y="1000" />
     </ECC>
-    <Algorithm Name="OpenValve" Comment="Normally executed algorithm">
+    <Algorithm Name="AlgMain" Comment="Logica de valvulas/bombas da descarga">
       <ST><![CDATA[;
-Grafcet := 1;
-Valve_Tank1 := TRUE;
-Valve_Tank2 := TRUE;
-Valve_TankSupernant := TRUE;
-StopReady := FALSE;
-AbortedReady := FALSE;]]></ST>
-    </Algorithm>
-    <Algorithm Name="StartReady">
-      <ST><![CDATA[;
-Grafcet := 2;
-StartReady := TRUE;]]></ST>
-    </Algorithm>
-    <Algorithm Name="CloseValve">
-      <ST><![CDATA[;
-IF Grafcet = 4 THEN
-	Grafcet := 5;
-ELSIF Grafcet = 7 THEN
-	Grafcet := 8;
-END_IF;
-Valve_Tank1 := FALSE;
-Valve_Tank2 := FALSE;
-Valve_TankSupernant := FALSE;
-]]></ST>
-    </Algorithm>
-    <Algorithm Name="StopReady">
-      <ST><![CDATA[;
-Grafcet := 6;
-StopReady := TRUE;]]></ST>
-    </Algorithm>
-    <Algorithm Name="AbortedReady">
-      <ST><![CDATA[;
-Grafcet := 9;
-AbortedReady := TRUE;]]></ST>
-    </Algorithm>
-    <Algorithm Name="RunPump">
-      <VarDeclaration Name="MinTOT" Type="UDINT" InitialValue="16#FFFFFFFF" />
-      <ST><![CDATA[;
-Grafcet := 3;
+(* ============================================================
+   CmdSludgeDischargeSLBLogicBasic Rev2 - logica de descarga do Sludge Buffer
+   SupernatantMode = FALSE : descarga de lodo  (1 servico + 2 reserva,
+                              AV49004 E/OU AV49005, tolera falha de uma delas)
+   SupernatantMode = TRUE  : descarga de sobrenadante (2 servico + 1 reserva,
+                              AV49002 + AV49003 + AV40001, Cmax/C2/C3 em m3/h)
+   Grafcet: 0 repouso | 1 abrindo valvulas | 2 StartReady | 3 Run
+            4 parando bombas | 5 fechando valvulas | 6 StopReady
+            7 abortando bombas | 8 abortando valvulas | 9 AbortedReady
+   PumpMode (sobrenadante): 0 uma bomba | 1 segunda bomba entrando, ambas em C2
+            2 ambas rodando em C2 (T_C2) | 3 duas bombas moduladas pelo PID
+   Capacidade = saida do PID (0-100 % da capacidade total). Cmax [%] = parcela de uma bomba.
+   Velocidade: 1 bomba = PID/Cmax*100 ; 2 bombas = PID/(2*Cmax)*100 ; entrada = C2
+   PauseCause: 0 sem pausa | 1 nivel L 49LT0001 | 2 vazao LL 49FT0004
+   ============================================================ *)
 
-(* Inicialização *)
+(* ---------- 1. Estado da fase -> Grafcet ---------- *)
+IF Aborting THEN
+    IF Grafcet < 7 THEN
+        Grafcet := 7;
+    END_IF;
+ELSIF Stopping THEN
+    IF (Grafcet < 4) OR (Grafcet > 6) THEN
+        Grafcet := 4;
+    END_IF;
+ELSIF Starting THEN
+    IF (Grafcet <> 1) AND (Grafcet <> 2) THEN
+        Grafcet := 1;
+    END_IF;
+ELSIF Run THEN
+    Grafcet := 3;
+ELSE
+    Grafcet := 0;
+END_IF;
+
+(* ---------- 2. Condicoes auxiliares ---------- *)
+UseSup := SupernatantMode;
+(* bomba conta como parada se parada, ou se fora de programa (sem Ready) E sem Running.
+   Bomba em modo operador ainda rodando segura o fechamento das valvulas *)
+AllPumpsStopped := (PumpFbStopped_1 OR (NOT PumpReady_1 AND NOT PumpFbRunning_1)) AND (PumpFbStopped_2 OR (NOT PumpReady_2 AND NOT PumpFbRunning_2)) AND (PumpFbStopped_3 OR (NOT PumpReady_3 AND NOT PumpFbRunning_3));
+AnyPumpRunning := PumpFbRunning_1 OR PumpFbRunning_2 OR PumpFbRunning_3;
+IF SupernatantMode THEN
+    ValvesOpenOk := ValveFbOpen_1 AND ValveFbOpen_2 AND ValveFbOpen_Supernant;
+ELSE
+    ValvesOpenOk := (ValveFbOpen_1 OR NOT ValveReady_1) AND (ValveFbOpen_2 OR NOT ValveReady_2) AND (ValveFbOpen_1 OR ValveFbOpen_2);
+END_IF;
+ValvesClosedOk := (ValveFbClose_1 OR NOT ValveReady_1) AND (ValveFbClose_2 OR NOT ValveReady_2) AND ((NOT UseSup) OR ValveFbClose_Supernant OR NOT ValveReady_Supernant);
+
+(* ---------- 3. Transicoes ---------- *)
+IF (Grafcet = 1) AND ValvesOpenOk THEN
+    Grafcet := 2;
+END_IF;
+IF (Grafcet = 4) AND AllPumpsStopped THEN
+    Grafcet := 5;
+END_IF;
+IF (Grafcet = 5) AND ValvesClosedOk THEN
+    Grafcet := 6;
+END_IF;
+IF (Grafcet = 7) AND AllPumpsStopped THEN
+    Grafcet := 8;
+END_IF;
+IF (Grafcet = 8) AND ValvesClosedOk THEN
+    Grafcet := 9;
+END_IF;
+
+(* ---------- 4. Valvulas (fecham so depois das bombas pararem) ---------- *)
+IF (Grafcet >= 1) AND (Grafcet <= 4) THEN
+    Valve_Tank1 := TRUE;
+    Valve_Tank2 := TRUE;
+    Valve_TankSupernant := UseSup;
+ELSIF (Grafcet = 5) OR (Grafcet = 6) OR (Grafcet >= 8) OR ((Grafcet = 0) AND NOT AnyPumpRunning) THEN
+    Valve_Tank1 := FALSE;
+    Valve_Tank2 := FALSE;
+    Valve_TankSupernant := FALSE;
+END_IF;
+
+(* ---------- 5. Bombas ---------- *)
+IF Grafcet = 3 THEN
+    (* 5.0 pausa no RUN (5.2 / 5.3.6 da narrativa): nivel L do 49LT0001 ou vazao LL do 49FT0004.
+       Bombas param, valvulas permanecem abertas; retoma T_Restart apos a causa sair, sem reset *)
+    IF Paused AND (NOT LowLevel) AND (Trest >= T_Restart) THEN
+        Paused := FALSE;
+        PauseCause := 0;
+        Tll := T#0s;
+    END_IF;
+    IF LowLevel THEN
+        Paused := TRUE;
+        PauseCause := 1;
+        Trest := T#0s;
+    END_IF;
+    IF (NOT Paused) AND (T_FlowLL > T#0s) AND (Tll >= T_FlowLL) THEN
+        Paused := TRUE;
+        PauseCause := 2;
+        Trest := T#0s;
+        Tll := T#0s;
+    END_IF;
+END_IF;
+IF (Grafcet = 3) AND Paused THEN
+    Pump_1 := FALSE;
+    Pump_2 := FALSE;
+    Pump_3 := FALSE;
+    PumpMode := 0;
+    Tacc := T#0s;
+    T3acc := T#0s;
+    NCmd := 0;
+    NRun := 0;
+    EffFlowSp := FlowSp;
+    PumpSpeed := PIDOut;
+ELSIF Grafcet = 3 THEN
+    (* 5.1 bomba sai de servico somente se nao estiver Ready (modo programa) NEM Running.
+       Bomba passada para modo operador e ainda rodando continua contando: nao parte reserva *)
+    IF Pump_1 AND NOT PumpReady_1 AND NOT PumpFbRunning_1 THEN
+        Pump_1 := FALSE;
+    END_IF;
+    IF Pump_2 AND NOT PumpReady_2 AND NOT PumpFbRunning_2 THEN
+        Pump_2 := FALSE;
+    END_IF;
+    IF Pump_3 AND NOT PumpReady_3 AND NOT PumpFbRunning_3 THEN
+        Pump_3 := FALSE;
+    END_IF;
+    NCmd := 0;
+    IF Pump_1 THEN
+        NCmd := NCmd + 1;
+    END_IF;
+    IF Pump_2 THEN
+        NCmd := NCmd + 1;
+    END_IF;
+    IF Pump_3 THEN
+        NCmd := NCmd + 1;
+    END_IF;
+    NRun := 0;
+    IF Pump_1 AND PumpFbRunning_1 THEN
+        NRun := NRun + 1;
+    END_IF;
+    IF Pump_2 AND PumpFbRunning_2 THEN
+        NRun := NRun + 1;
+    END_IF;
+    IF Pump_3 AND PumpFbRunning_3 THEN
+        NRun := NRun + 1;
+    END_IF;
+    Spare := (PumpReady_1 AND NOT Pump_1) OR (PumpReady_2 AND NOT Pump_2) OR (PumpReady_3 AND NOT Pump_3);
+    ParOk := SupernatantMode AND (Cmax > 0.0) AND (C2 > 0.0);
+
+    (* 5.2 numero de bombas (so sobrenadante). Capacidade = saida do PID (0-100 % da capacidade total);
+           Cmax = parcela que uma bomba cobre sozinha [%], C2 / C3 = velocidade de cada bomba [%]
+           0: 1 bomba | 1: 2a bomba entrando, ambas em C2 | 2: ambas rodando em C2 (T_C2) | 3: duas no PID *)
+    IF NOT ParOk THEN
+        PumpMode := 0;
+    ELSIF PumpMode = 0 THEN
+        IF (PIDOut > Cmax) AND Spare AND (NRun >= 1) THEN
+            PumpMode := 1;
+            Tacc := T#0s;
+        END_IF;
+    ELSIF PumpMode = 1 THEN
+        IF NRun >= 2 THEN
+            PumpMode := 2;
+            Tacc := T#0s;
+        END_IF;
+    ELSIF PumpMode = 2 THEN
+        IF Tacc >= T_C2 THEN
+            PumpMode := 3;
+            T3acc := T#0s;
+        END_IF;
+    ELSIF PumpMode = 3 THEN
+        (* saida exige a condicao fisica (velocidade abaixo de C3) alem do tempo: com T_C3 = 0 nao pode sair acima de C3 *)
+        IF (PumpSpeed < C3) AND (T3acc >= T_C3) THEN
+            PumpMode := 0;
+            T3acc := T#0s;
+        END_IF;
+    END_IF;
+    IF PumpMode >= 1 THEN
+        NWant := 2;
+    ELSE
+        NWant := 1;
+    END_IF;
+
+    (* 5.3 entra bomba disponivel de menor horimetro (rodizio) - ate 2 vezes *)
+    NCmdPrev := NCmd;
+    IF NCmd < NWant THEN
+        PumpSel := 0;
+        IF PumpReady_1 AND NOT Pump_1 THEN
+            PumpSel := 1;
+            MinTot := PumpTotOpe_1;
+        END_IF;
+        IF PumpReady_2 AND NOT Pump_2 THEN
+            IF (PumpSel = 0) OR (PumpTotOpe_2 < MinTot) THEN
+                PumpSel := 2;
+                MinTot := PumpTotOpe_2;
+            END_IF;
+        END_IF;
+        IF PumpReady_3 AND NOT Pump_3 THEN
+            IF (PumpSel = 0) OR (PumpTotOpe_3 < MinTot) THEN
+                PumpSel := 3;
+                MinTot := PumpTotOpe_3;
+            END_IF;
+        END_IF;
+        IF PumpSel = 1 THEN
+            Pump_1 := TRUE;
+            Seq := Seq + 1;
+            Ord1 := Seq;
+            NCmd := NCmd + 1;
+        ELSIF PumpSel = 2 THEN
+            Pump_2 := TRUE;
+            Seq := Seq + 1;
+            Ord2 := Seq;
+            NCmd := NCmd + 1;
+        ELSIF PumpSel = 3 THEN
+            Pump_3 := TRUE;
+            Seq := Seq + 1;
+            Ord3 := Seq;
+            NCmd := NCmd + 1;
+        END_IF;
+    END_IF;
+    IF NCmd < NWant THEN
+        PumpSel := 0;
+        IF PumpReady_1 AND NOT Pump_1 THEN
+            PumpSel := 1;
+            MinTot := PumpTotOpe_1;
+        END_IF;
+        IF PumpReady_2 AND NOT Pump_2 THEN
+            IF (PumpSel = 0) OR (PumpTotOpe_2 < MinTot) THEN
+                PumpSel := 2;
+                MinTot := PumpTotOpe_2;
+            END_IF;
+        END_IF;
+        IF PumpReady_3 AND NOT Pump_3 THEN
+            IF (PumpSel = 0) OR (PumpTotOpe_3 < MinTot) THEN
+                PumpSel := 3;
+                MinTot := PumpTotOpe_3;
+            END_IF;
+        END_IF;
+        IF PumpSel = 1 THEN
+            Pump_1 := TRUE;
+            Seq := Seq + 1;
+            Ord1 := Seq;
+            NCmd := NCmd + 1;
+        ELSIF PumpSel = 2 THEN
+            Pump_2 := TRUE;
+            Seq := Seq + 1;
+            Ord2 := Seq;
+            NCmd := NCmd + 1;
+        ELSIF PumpSel = 3 THEN
+            Pump_3 := TRUE;
+            Seq := Seq + 1;
+            Ord3 := Seq;
+            NCmd := NCmd + 1;
+        END_IF;
+    END_IF;
+
+    (* 5.3b bomba entrando para compor 2 bombas (reserva substituindo bomba intertravada/em falha):
+            mesma sequencia da entrada - todas em C2, as duas rodando por T_C2, depois PID *)
+    IF (PumpMode >= 2) AND (NCmd > NCmdPrev) THEN
+        PumpMode := 1;
+        Tacc := T#0s;
+    END_IF;
+
+    (* 5.4 excedente: sai a bomba em operacao ha mais tempo (menor ordem de partida) *)
+    IF NCmd > NWant THEN
+        PumpSel := 0;
+        IF Pump_1 THEN
+            PumpSel := 1;
+            MinOrd := Ord1;
+        END_IF;
+        IF Pump_2 THEN
+            IF (PumpSel = 0) OR (Ord2 < MinOrd) THEN
+                PumpSel := 2;
+                MinOrd := Ord2;
+            END_IF;
+        END_IF;
+        IF Pump_3 THEN
+            IF (PumpSel = 0) OR (Ord3 < MinOrd) THEN
+                PumpSel := 3;
+                MinOrd := Ord3;
+            END_IF;
+        END_IF;
+        IF PumpSel = 1 THEN
+            Pump_1 := FALSE;
+        ELSIF PumpSel = 2 THEN
+            Pump_2 := FALSE;
+        ELSIF PumpSel = 3 THEN
+            Pump_3 := FALSE;
+        END_IF;
+        NCmd := NCmd - 1;
+    END_IF;
+
+    (* 5.5 sem bomba para a 2a posicao: volta a operar com uma *)
+    IF (PumpMode >= 1) AND (NCmd < 2) THEN
+        PumpMode := 0;
+    END_IF;
+
+    (* 5.6 PI sempre no setpoint de vazao; velocidade das bombas conforme o modo *)
+    EffFlowSp := FlowSp;
+    IF NOT ParOk THEN
+        PumpSpeed := PIDOut;
+    ELSIF (PumpMode = 1) OR (PumpMode = 2) THEN
+        PumpSpeed := C2;
+    ELSIF PumpMode = 3 THEN
+        PumpSpeed := PIDOut / (2.0 * Cmax) * 100.0;
+    ELSE
+        PumpSpeed := PIDOut / Cmax * 100.0;
+    END_IF;
+    IF PumpSpeed > 100.0 THEN
+        PumpSpeed := 100.0;
+    END_IF;
+    IF PumpSpeed < 0.0 THEN
+        PumpSpeed := 0.0;
+    END_IF;
+ELSE
+    Pump_1 := FALSE;
+    Pump_2 := FALSE;
+    Pump_3 := FALSE;
+    PumpMode := 0;
+    Tacc := T#0s;
+    T3acc := T#0s;
+    NCmd := 0;
+    NRun := 0;
+    EffFlowSp := FlowSp;
+    PumpSpeed := PIDOut;
+    Paused := FALSE;
+    PauseCause := 0;
+    Trest := T#0s;
+    Tll := T#0s;
+END_IF;
+
+(* ---------- 6. Saidas para a fase e IHM ---------- *)
+StartReady := (Grafcet = 2) OR (Grafcet = 3);
+StopReady := (Grafcet = 6);
+AbortedReady := (Grafcet = 9);
 SelectedPump := 0;
-MinTOT := 16#FFFFFFFF; (* Maior valor possível para UDINT *)
-
-(* Seleciona a bomba Ready com menor ToT *)
-
-IF PumpReady_1 AND NOT PumpFbRunning_1 THEN
-    MinTOT := PumpTotOpe_1;
+SecondPump := 0;
+MinOrd := 0;
+IF Pump_1 THEN
     SelectedPump := 1;
+    MinOrd := Ord1;
 END_IF;
-
-IF PumpReady_2 AND NOT PumpFbRunning_2 THEN
-    IF (SelectedPump = 0) OR (PumpTotOpe_2 < MinTOT) THEN
-        MinTOT := PumpTotOpe_2;
+IF Pump_2 THEN
+    IF (SelectedPump = 0) OR (Ord2 < MinOrd) THEN
+        SecondPump := SelectedPump;
         SelectedPump := 2;
+        MinOrd := Ord2;
+    ELSE
+        SecondPump := 2;
     END_IF;
 END_IF;
-
-IF PumpReady_3 AND NOT PumpFbRunning_3 THEN
-    IF (SelectedPump = 0) OR (PumpTotOpe_3 < MinTOT) THEN
-        MinTOT := PumpTotOpe_3;
+IF Pump_3 THEN
+    IF (SelectedPump = 0) OR (Ord3 < MinOrd) THEN
+        SecondPump := SelectedPump;
         SelectedPump := 3;
+        MinOrd := Ord3;
+    ELSE
+        SecondPump := 3;
     END_IF;
 END_IF;
 
-(* Limpa todos os comandos *)
-Pump_1 := FALSE;
-Pump_2 := FALSE;
-Pump_3 := FALSE;
-
-(* Apenas a bomba selecionada recebe o comando *)
-CASE SelectedPump OF
-    1: Pump_1 := TRUE;
-    2: Pump_2 := TRUE;
-    3: Pump_3 := TRUE;
-END_CASE;
+(* ---------- 7. Eventos de saida somente quando algum valor muda ---------- *)
+EdgeOut := (StartReady <> PrevSR) OR (StopReady <> PrevST) OR (AbortedReady <> PrevAB) OR (EffFlowSp <> PrevSP) OR (Grafcet <> PrevGR) OR (SelectedPump <> PrevSel) OR (SecondPump <> PrevSec) OR (PumpMode <> PrevPM) OR (PauseCause <> PrevPC);
+PrevSR := StartReady;
+PrevST := StopReady;
+PrevAB := AbortedReady;
+PrevSP := EffFlowSp;
+PrevGR := Grafcet;
+PrevSel := SelectedPump;
+PrevSec := SecondPump;
+PrevPM := PumpMode;
+PrevPC := PauseCause;
+EdgeSpd := PumpSpeed <> PrevSpd;
+PrevSpd := PumpSpeed;
 ]]></ST>
     </Algorithm>
-    <Algorithm Name="StopPump">
+    <Algorithm Name="AlgTick" Comment="Base de tempo 1 s">
       <ST><![CDATA[;
-Grafcet := 4;
-CASE SelectedPump OF
-	1: Pump_1 := FALSE;
-	2: Pump_2 := FALSE;
-	3: Pump_3 := FALSE;
-END_CASE;
-
-StartReady := FALSE;
-AbortedReady  := FALSE;]]></ST>
-    </Algorithm>
-    <Algorithm Name="StopPump_WhenAborting">
-      <ST><![CDATA[;
-Grafcet := 7;
-Pump_1 := FALSE;
-Pump_2 := FALSE;
-Pump_3 := FALSE;
-StartReady := FALSE;
-StopReady := FALSE;]]></ST>
+(* Base de tempo 1 s (E_CYCLE externo): tempos em C2 e abaixo de C3 *)
+IF (PumpMode = 2) AND (NRun >= 2) THEN
+    Tacc := Tacc + T#1s;
+END_IF;
+(* duas bombas operando com velocidade abaixo de C3 *)
+IF (PumpMode = 3) AND (NRun >= 2) AND (PumpSpeed < C3) THEN
+    T3acc := T3acc + T#1s;
+ELSE
+    T3acc := T#0s;
+END_IF;
+IF (Grafcet = 3) AND Paused AND (NOT LowLevel) THEN
+    Trest := Trest + T#1s;
+ELSE
+    Trest := T#0s;
+END_IF;
+IF (Grafcet = 3) AND (NOT Paused) AND (NRun >= 1) AND FlowLL AND (NOT FlowFail) THEN
+    Tll := Tll + T#1s;
+ELSE
+    Tll := T#0s;
+END_IF;
+]]></ST>
     </Algorithm>
   </BasicFB>
 </FBType>

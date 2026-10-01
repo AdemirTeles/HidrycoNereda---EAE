@@ -65,6 +65,26 @@ namespace SE.Nereda.Symbols.CmdSludgeDischargeSLB
 
   }
 
+  public class PAUSE_PAREventArgs : System.EventArgs
+  {
+    public PAUSE_PAREventArgs()
+    {
+    }
+    private NxtControl.GuiFramework.Time? T_Restart_field = null;
+    public NxtControl.GuiFramework.Time? T_Restart
+    {
+       get { return T_Restart_field; }
+       set { T_Restart_field = value; }
+    }
+    private NxtControl.GuiFramework.Time? T_FlowLL_field = null;
+    public NxtControl.GuiFramework.Time? T_FlowLL
+    {
+       get { return T_FlowLL_field; }
+       set { T_FlowLL_field = value; }
+    }
+
+  }
+
 }
 
 namespace SE.Nereda.Symbols.CmdSludgeDischargeSLB
@@ -136,6 +156,24 @@ stack Trace:
       object[] _values_ = new object[1];
       if (!ignore_FeedFlowSpMan) _values_[0] = FeedFlowSpMan;
       return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
+    }
+    public bool FireEvent_PAUSE_PAR(NxtControl.GuiFramework.Time T_Restart, NxtControl.GuiFramework.Time T_FlowLL)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(2, new object[] {T_Restart, T_FlowLL});
+    }
+    public bool FireEvent_PAUSE_PAR(SE.Nereda.Symbols.CmdSludgeDischargeSLB.PAUSE_PAREventArgs ea)
+    {
+      object[] _values_ = new object[2];
+      if (ea.T_Restart.HasValue) _values_[0] = ea.T_Restart.Value;
+      if (ea.T_FlowLL.HasValue) _values_[1] = ea.T_FlowLL.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(2, _values_);
+    }
+    public bool FireEvent_PAUSE_PAR(NxtControl.GuiFramework.Time T_Restart, bool ignore_T_Restart, NxtControl.GuiFramework.Time T_FlowLL, bool ignore_T_FlowLL)
+    {
+      object[] _values_ = new object[2];
+      if (!ignore_T_Restart) _values_[0] = T_Restart;
+      if (!ignore_T_FlowLL) _values_[1] = T_FlowLL;
+      return ((IHMIAccessorOutput)this).FireEvent(2, _values_);
     }
 
   }
