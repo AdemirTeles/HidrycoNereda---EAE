@@ -2,7 +2,7 @@
 <!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
 <FBType GUID="a553e34f-a285-4db2-b549-48ca271e56a9" Name="FeedReactorLogic_HMI" Comment="Service Interface Function Block Type" Namespace="SE.Nereda">
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="6/13/2026" Remarks="template" />
+  <VersionInfo Organization="Schneider Electric" Version="1.0" Author="Claude/Hidryco" Date="10/1/2026" Remarks="Rev1 - PUMP_PAR (Cmin, T_C2, T_C3, T_FlowLL, capacidade teorica) e PUMP_STS (status das bombas para o simbolo)" />
   <InterfaceList>
     <EventInputs>
       <Event ID="DA969393F6D27920" Name="INIT">
@@ -13,6 +13,27 @@
       </Event>
       <Event ID="3D88186A4172EAF0" Name="LOAD_PERS_DATA" />
       <Event ID="B1F8118D15146EFE" Name="RESET_BTN" />
+      <Event ID="E675E5B2A8A39442" Name="PUMP_STS" Comment="Status das bombas de alimentacao">
+        <With Var="StsGrafcet" />
+        <With Var="PumpMode" />
+        <With Var="NPumps" />
+        <With Var="PauseCause" />
+        <With Var="SelectedPump" />
+        <With Var="SecondPump" />
+        <With Var="PumpSpeed" />
+        <With Var="AtMin" />
+        <With Var="ParBad" />
+        <With Var="HmiCmin" />
+        <With Var="HmiC2" />
+        <With Var="HmiC3" />
+        <With Var="HmiCmax" />
+        <With Var="HmiFlowFail" />
+        <With Var="HmiTC2" />
+        <With Var="HmiTC3" />
+        <With Var="HmiTDec" />
+        <With Var="HmiTWait" />
+        <With Var="HmiFlowSp" />
+      </Event>
     </EventInputs>
     <EventOutputs>
       <Event ID="A8EF0BC2917800E0" Name="INITO">
@@ -34,10 +55,36 @@
         <With Var="C3Capacity" />
         <With Var="RestartWaitingTime" />
       </Event>
+      <Event ID="C0050F7CE802CE26" Name="PUMP_PAR" Comment="Parametros das bombas (Cmin, tempos, capacidade teorica)">
+        <With Var="Cmin" />
+        <With Var="T_C2" />
+        <With Var="T_C3" />
+        <With Var="T_FlowLL" />
+        <With Var="FlowCapTheo" />
+      </Event>
     </EventOutputs>
     <InputVars>
       <VarDeclaration ID="53AFE13102D89E7B" Name="QI" Type="BOOL" />
       <VarDeclaration ID="B8642C11FD7EB72C" Name="Grafcet" Type="INT" />
+      <VarDeclaration ID="210B62D8902FC1C8" Name="StsGrafcet" Type="INT" />
+      <VarDeclaration ID="806F5B4ED22423C6" Name="PumpMode" Type="INT" />
+      <VarDeclaration ID="EC0BBB2CD187C91A" Name="NPumps" Type="INT" />
+      <VarDeclaration ID="28F388AFD283E2F2" Name="PauseCause" Type="INT" />
+      <VarDeclaration ID="2A8127B03A0A8854" Name="SelectedPump" Type="INT" />
+      <VarDeclaration ID="2B32DD80F05C24B0" Name="SecondPump" Type="INT" />
+      <VarDeclaration ID="51459164C500A8B5" Name="PumpSpeed" Type="REAL" />
+      <VarDeclaration ID="FCEDA547C1A0F67F" Name="AtMin" Type="BOOL" />
+      <VarDeclaration ID="314200F87A96EDB6" Name="ParBad" Type="BOOL" />
+      <VarDeclaration ID="43011023704B7458" Name="HmiCmin" Type="REAL" />
+      <VarDeclaration ID="CAF7985F3BD2F0DE" Name="HmiC2" Type="REAL" />
+      <VarDeclaration ID="3645222F496B83FD" Name="HmiC3" Type="REAL" />
+      <VarDeclaration ID="1637435F6E67D980" Name="HmiCmax" Type="REAL" />
+      <VarDeclaration ID="735547827F158D38" Name="HmiFlowFail" Type="BOOL" />
+      <VarDeclaration ID="EF2AD2FF5C1C003A" Name="HmiTC2" Type="INT" />
+      <VarDeclaration ID="FA967D1C25DA4746" Name="HmiTC3" Type="INT" />
+      <VarDeclaration ID="7ABE6A93E45C19D2" Name="HmiTDec" Type="INT" />
+      <VarDeclaration ID="68776047DC0513BE" Name="HmiTWait" Type="INT" />
+      <VarDeclaration ID="CC250B469F0B0597" Name="HmiFlowSp" Type="REAL" />
     </InputVars>
     <OutputVars>
       <VarDeclaration ID="E1BC9EEDFC276B6E" Name="QO" Type="BOOL" Comment="Event Output Qualifier" />
@@ -45,10 +92,15 @@
       <VarDeclaration ID="F8C15B6A2368EBC2" Name="ResetLogic" Type="BOOL" />
       <VarDeclaration ID="78DC25A16E3E12D4" Name="ResetLoLoFlow" Type="BOOL" />
       <VarDeclaration ID="ACE7E884B21B35FC" Name="OneP3PConfig" Type="BOOL" Comment="= FALSE : One Pump | = TRUE : 3 Pumps" />
-      <VarDeclaration ID="8E376F2FCDE4F86B" Name="MaxCapacityOnePump" Type="REAL" />
-      <VarDeclaration ID="434CA134D4560A87" Name="C2Capacity" Type="REAL" />
-      <VarDeclaration ID="710F885ED2D04B14" Name="C3Capacity" Type="REAL" />
-      <VarDeclaration ID="6E892EF3E58F17EF" Name="RestartWaitingTime" Type="TIME" />
+      <VarDeclaration ID="8E376F2FCDE4F86B" Name="MaxCapacityOnePump" Type="REAL" Comment="Cmax: velocidade de 1 bomba acima da qual entra a 2a [% velocidade]" />
+      <VarDeclaration ID="434CA134D4560A87" Name="C2Capacity" Type="REAL" Comment="C2: velocidade das bombas na entrada de uma nova bomba [% velocidade]" />
+      <VarDeclaration ID="710F885ED2D04B14" Name="C3Capacity" Type="REAL" Comment="C3: velocidade das 2 bombas abaixo da qual sai 1 [% velocidade]" />
+      <VarDeclaration ID="6E892EF3E58F17EF" Name="RestartWaitingTime" Type="TIME" Comment="Tempo de espera para retomar a alimentacao (pH/condutividade/vazao LL)" />
+      <VarDeclaration ID="B983C1B2276C6513" Name="Cmin" Type="REAL" Comment="Velocidade minima de cada bomba em servico [% velocidade]" />
+      <VarDeclaration ID="10B16495C79EB6A0" Name="T_C2" Type="TIME" Comment="Tempo com as bombas em C2" />
+      <VarDeclaration ID="86BCFD975F27C5A1" Name="T_C3" Type="TIME" Comment="Tempo abaixo de C3 para retirar 1 bomba" />
+      <VarDeclaration ID="84BE37C651C94844" Name="T_FlowLL" Type="TIME" Comment="Vazao LL do 40FT0003 com bomba rodando por este tempo = para a alimentacao (0 = desabilitado)" />
+      <VarDeclaration ID="144045E26F155DB9" Name="FlowCapTheo" Type="REAL" Comment="Capacidade teorica de 1 bomba a 100 % [m3/h] (falha do medidor; 0 = usa a faixa do medidor)" />
     </OutputVars>
   </InterfaceList>
   <Service RightInterface="" LeftInterface="">

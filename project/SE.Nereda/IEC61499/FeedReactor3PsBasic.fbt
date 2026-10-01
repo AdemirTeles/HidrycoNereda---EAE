@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
-<FBType GUID="41986be7-4399-49d9-88d6-ddb28bdc3815" Comment="Basic Function Block Type" Name="FeedReactor3PsBasic" Namespace="SE.Nereda">
+<FBType GUID="41986be7-4399-49d9-88d6-ddb28bdc3815" Name="FeedReactor3PsBasic" Comment="Logica das 3 bombas de alimentacao (2 servico + 1 reserva) - mesmo funcionamento da Water Discharge" Namespace="SE.Nereda">
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="6/15/2026" Remarks="Template" />
+  <VersionInfo Organization="Schneider Electric" Version="1.0" Author="Claude/Hidryco" Date="10/1/2026" Remarks="Rev1 - Reescrito conforme a narrativa (cap. 2) com o mesmo funcionamento da Water Discharge (Rev13): Cmax/C2/C3/Cmin em % de velocidade; entrada da 2a com a bomba no Cmax pela velocidade real (narrativa); descida ate C2 confirmada pela velocidade real antes de partir a nova; T_C2 com as bombas em C2; reserva em falha parte na hora em C2; saida da 2a com protecao anti-ciclo; rodizio por horimetro; paradas por LL do buffer, pH/condutividade (L/H, retomada apos T_Restart) e vazao LL (T_FlowLL, retomada apos T_Restart); falha do medidor pela capacidade teorica; status para IHM" />
   <InterfaceList>
     <EventInputs>
-      <Event ID="7E30127865CFE16B" Name="FEED_REACTOR">
+      <Event ID="7E30127865CFE16B" Name="FEED_REACTOR" Comment="Pedido de alimentacao dos reatores (StartFeeding)">
         <With Var="FeedReactor1" />
         <With Var="FeedReactor2" />
         <With Var="FeedReactor3" />
@@ -13,7 +13,13 @@
         <With Var="FeedReactor5" />
         <With Var="FeedReactor6" />
       </Event>
-      <Event ID="595E94AC272AAE70" Name="FEED_CAPACITY">
+      <Event ID="595E94AC272AAE70" Name="FEED_CAPACITY" Comment="Setpoint de vazao dos reatores [m3/h]">
+        <With Var="FeedReactor1" />
+        <With Var="FeedReactor2" />
+        <With Var="FeedReactor3" />
+        <With Var="FeedReactor4" />
+        <With Var="FeedReactor5" />
+        <With Var="FeedReactor6" />
         <With Var="FeedReactor_C1" />
         <With Var="FeedReactor_C2" />
         <With Var="FeedReactor_C3" />
@@ -34,52 +40,100 @@
         <With Var="FbPump02Ready" />
         <With Var="FbPump03Ready" />
       </Event>
-      <Event ID="4BDCB67B4FFE0D64" Name="FORCE_STOP">
+      <Event ID="168409FF111F0B5A" Name="PUMP_TOT" Comment="Horimetro das bombas (rodizio)">
+        <With Var="TotOpePmp01" />
+        <With Var="TotOpePmp02" />
+        <With Var="TotOpePmp03" />
+      </Event>
+      <Event ID="5E41A10D869921BD" Name="PUMP_SPD" Comment="Velocidade real das bombas [%]">
+        <With Var="SpeedPvPmp01" />
+        <With Var="SpeedPvPmp02" />
+        <With Var="SpeedPvPmp03" />
+      </Event>
+      <Event ID="4BDCB67B4FFE0D64" Name="FORCE_STOP" Comment="LL do buffer (40LT0001) e pH/condutividade fora da faixa (L/H)">
         <With Var="ForceStop" />
         <With Var="LoLoLevelPv" />
       </Event>
       <Event ID="A69A10F93A67179B" Name="RESET_LOGIC">
         <With Var="ResetLogic" />
       </Event>
-      <Event ID="30FEAA3587C93DB5" Name="FB_P_CAP">
-        <With Var="FbCapacityP" />
-      </Event>
-      <Event ID="6712A6C827380130" Name="PAR">
+      <Event ID="6712A6C827380130" Name="PAR" Comment="Parametros">
         <With Var="MaxCapacityOnePump" />
         <With Var="C2Capacity" />
         <With Var="C3Capacity" />
+        <With Var="Cmin" />
+        <With Var="T_C2" />
+        <With Var="T_C3" />
+        <With Var="T_Restart" />
+        <With Var="T_FlowLL" />
+        <With Var="CapTheo" />
       </Event>
-      <Event ID="C5F0D6BA4812F155" Name="FB_WAIT_TIME" />
+      <Event ID="16643588834996DE" Name="FLOW" Comment="Status e valor do 40FT0003">
+        <With Var="FlowLL" />
+        <With Var="FlowFail" />
+        <With Var="FlowPvMin" />
+        <With Var="FlowPvMax" />
+        <With Var="FlowPv" />
+      </Event>
+      <Event ID="0510D36B485733F5" Name="PID_UPD" Comment="Saida do PID">
+        <With Var="PIDOut" />
+      </Event>
+      <Event ID="471C3CADA717EC13" Name="TICK" Comment="Base de tempo 1 s" />
     </EventInputs>
     <EventOutputs>
-      <Event ID="085A47BAE233EC43" Name="CNF_CMD_PUMP">
+      <Event ID="085A47BAE233EC43" Name="CNF_CMD_PUMP" Comment="Comando das bombas">
         <With Var="CmdPump01" />
         <With Var="CmdPump02" />
         <With Var="CmdPump03" />
       </Event>
-      <Event ID="AFC243259FDEDBAE" Name="CNF_CAP_PUMP">
-        <With Var="Pump01Capacity" />
-        <With Var="Pump02Capacity" />
-        <With Var="Pump03Capacity" />
+      <Event ID="54C5C4335FC174B1" Name="SPEED_CNF" Comment="Velocidade enviada a cada bomba em servico">
+        <With Var="PumpSpeed" />
+        <With Var="AnyCmd" />
       </Event>
-      <Event ID="B8194902A9068BF7" Name="WAIT_TIME" />
-      <Event ID="078EA09CED294ADE" Name="GRAPH">
+      <Event ID="1878369CED9D9897" Name="SP_CNF" Comment="Setpoint efetivo e liberacao do PID">
+        <With Var="EffFlowSp" />
+        <With Var="RunPID" />
+      </Event>
+      <Event ID="FCD297844523CE03" Name="REACT_FB" Comment="Retorno das bombas para os reatores">
+        <With Var="AnyReady" />
+        <With Var="AnyRunning" />
+        <With Var="AllStopped" />
+      </Event>
+      <Event ID="50ABF706162D6E5D" Name="HMI_STS" Comment="Status para a IHM (a cada 1 s e na mudanca)">
         <With Var="Grafcet" />
+        <With Var="PumpMode" />
+        <With Var="NPumps" />
+        <With Var="PauseCause" />
+        <With Var="SelectedPump" />
+        <With Var="SecondPump" />
+        <With Var="PumpSpeed" />
+        <With Var="AtMin" />
+        <With Var="ParBad" />
+        <With Var="HmiCmin" />
+        <With Var="HmiC2" />
+        <With Var="HmiC3" />
+        <With Var="HmiCmax" />
+        <With Var="HmiFlowFail" />
+        <With Var="HmiTC2" />
+        <With Var="HmiTC3" />
+        <With Var="HmiTDec" />
+        <With Var="HmiTWait" />
+        <With Var="HmiFlowSp" />
       </Event>
     </EventOutputs>
     <InputVars>
-      <VarDeclaration ID="C915B42A7E29ABA7" Name="FeedReactor1" Type="BOOL" />
-      <VarDeclaration ID="C035C9DDF73934B1" Name="FeedReactor2" Type="BOOL" />
-      <VarDeclaration ID="BA46BCD3AD3C4E0E" Name="FeedReactor3" Type="BOOL" />
-      <VarDeclaration ID="05202F12A8CD5CAE" Name="FeedReactor4" Type="BOOL" />
-      <VarDeclaration ID="D190D2DBF4763077" Name="FeedReactor5" Type="BOOL" />
-      <VarDeclaration ID="B2FBAF20E404318A" Name="FeedReactor6" Type="BOOL" />
-      <VarDeclaration ID="9A612CE135251261" Name="FeedReactor_C1" Type="REAL" />
-      <VarDeclaration ID="6A6AFEA4D9C2F12F" Name="FeedReactor_C2" Type="REAL" />
-      <VarDeclaration ID="BA7B380D995C835B" Name="FeedReactor_C3" Type="REAL" />
-      <VarDeclaration ID="4960BF82FE0F0B7B" Name="FeedReactor_C4" Type="REAL" />
-      <VarDeclaration ID="9F7DD4F97732485F" Name="FeedReactor_C5" Type="REAL" />
-      <VarDeclaration ID="A6395326F4DA6B3E" Name="FeedReactor_C6" Type="REAL" />
+      <VarDeclaration ID="C915B42A7E29ABA7" Name="FeedReactor1" Type="BOOL" Comment="StartFeeding do reator 1 (fase Feed em RUN e AV41101 aberta)" />
+      <VarDeclaration ID="C035C9DDF73934B1" Name="FeedReactor2" Type="BOOL" Comment="StartFeeding do reator 2 (fase Feed em RUN e AV41101 aberta)" />
+      <VarDeclaration ID="BA46BCD3AD3C4E0E" Name="FeedReactor3" Type="BOOL" Comment="StartFeeding do reator 3 (fase Feed em RUN e AV41101 aberta)" />
+      <VarDeclaration ID="05202F12A8CD5CAE" Name="FeedReactor4" Type="BOOL" Comment="StartFeeding do reator 4 (fase Feed em RUN e AV41101 aberta)" />
+      <VarDeclaration ID="D190D2DBF4763077" Name="FeedReactor5" Type="BOOL" Comment="StartFeeding do reator 5 (fase Feed em RUN e AV41101 aberta)" />
+      <VarDeclaration ID="B2FBAF20E404318A" Name="FeedReactor6" Type="BOOL" Comment="StartFeeding do reator 6 (fase Feed em RUN e AV41101 aberta)" />
+      <VarDeclaration ID="9A612CE135251261" Name="FeedReactor_C1" Type="REAL" Comment="Setpoint de vazao do reator 1 [m3/h]" />
+      <VarDeclaration ID="6A6AFEA4D9C2F12F" Name="FeedReactor_C2" Type="REAL" Comment="Setpoint de vazao do reator 2 [m3/h]" />
+      <VarDeclaration ID="BA7B380D995C835B" Name="FeedReactor_C3" Type="REAL" Comment="Setpoint de vazao do reator 3 [m3/h]" />
+      <VarDeclaration ID="4960BF82FE0F0B7B" Name="FeedReactor_C4" Type="REAL" Comment="Setpoint de vazao do reator 4 [m3/h]" />
+      <VarDeclaration ID="9F7DD4F97732485F" Name="FeedReactor_C5" Type="REAL" Comment="Setpoint de vazao do reator 5 [m3/h]" />
+      <VarDeclaration ID="A6395326F4DA6B3E" Name="FeedReactor_C6" Type="REAL" Comment="Setpoint de vazao do reator 6 [m3/h]" />
       <VarDeclaration ID="75F1E123145AA883" Name="FbRunningPmp01" Type="BOOL" />
       <VarDeclaration ID="C81CDED0AFB96994" Name="FbStoppedPmp01" Type="BOOL" />
       <VarDeclaration ID="EF60AF9AE01D1F40" Name="FbRunningPmp02" Type="BOOL" />
@@ -89,246 +143,677 @@
       <VarDeclaration ID="7CAD63DC84CC56C8" Name="FbPump01Ready" Type="BOOL" />
       <VarDeclaration ID="79CFF63624562F1A" Name="FbPump02Ready" Type="BOOL" />
       <VarDeclaration ID="A8A9D7088A797CD2" Name="FbPump03Ready" Type="BOOL" />
-      <VarDeclaration ID="908589CFF2BDB3A2" Name="ForceStop" Type="BOOL" />
-      <VarDeclaration ID="3AAAF48443B1CE4B" Name="LoLoLevelPv" Type="BOOL" />
-      <VarDeclaration ID="2AC43BA050B74406" Name="ResetLogic" Type="BOOL" />
-      <VarDeclaration ID="F9503652014EEB4F" Name="FbCapacityP" Type="REAL" />
-      <VarDeclaration ID="F11ED37F50C532BF" Name="MaxCapacityOnePump" Type="REAL" />
-      <VarDeclaration ID="2F2AC3038FC8C5AF" Name="C2Capacity" Type="REAL" />
-      <VarDeclaration ID="C6332A6DD9CA4077" Name="C3Capacity" Type="REAL" />
+      <VarDeclaration ID="03EF3D42F6EC65CA" Name="TotOpePmp01" Type="UDINT" Comment="Horimetro da bomba 1" />
+      <VarDeclaration ID="C12D87A372A0D4A1" Name="TotOpePmp02" Type="UDINT" Comment="Horimetro da bomba 2" />
+      <VarDeclaration ID="C401C148A7F20261" Name="TotOpePmp03" Type="UDINT" Comment="Horimetro da bomba 3" />
+      <VarDeclaration ID="9DC55F3DAAADF065" Name="SpeedPvPmp01" Type="REAL" Comment="Velocidade real da bomba 1 [%]" />
+      <VarDeclaration ID="64DEC646EA2296EC" Name="SpeedPvPmp02" Type="REAL" Comment="Velocidade real da bomba 2 [%]" />
+      <VarDeclaration ID="375265FC6460F988" Name="SpeedPvPmp03" Type="REAL" Comment="Velocidade real da bomba 3 [%]" />
+      <VarDeclaration ID="908589CFF2BDB3A2" Name="ForceStop" Type="BOOL" Comment="pH ou condutividade fora da faixa (alarmes L/H dos analisadores)" />
+      <VarDeclaration ID="3AAAF48443B1CE4B" Name="LoLoLevelPv" Type="BOOL" Comment="Nivel LL do buffer 40LT0001" />
+      <VarDeclaration ID="2AC43BA050B74406" Name="ResetLogic" Type="BOOL" Comment="Nao usado (compatibilidade)" />
+      <VarDeclaration ID="F11ED37F50C532BF" Name="MaxCapacityOnePump" Type="REAL" Comment="Cmax: velocidade de 1 bomba acima da qual entra a 2a [%]" />
+      <VarDeclaration ID="2F2AC3038FC8C5AF" Name="C2Capacity" Type="REAL" Comment="C2: velocidade das bombas na entrada de uma nova bomba [%]" />
+      <VarDeclaration ID="C6332A6DD9CA4077" Name="C3Capacity" Type="REAL" Comment="C3: velocidade das 2 bombas abaixo da qual sai 1 [%]" />
+      <VarDeclaration ID="88EBC3528E8AADEC" Name="Cmin" Type="REAL" Comment="Velocidade minima de cada bomba em servico [%]" />
+      <VarDeclaration ID="51791C50D7ACFF08" Name="T_C2" Type="TIME" Comment="Tempo com as bombas em C2" />
+      <VarDeclaration ID="7B2EFC85E80259FF" Name="T_C3" Type="TIME" Comment="Tempo abaixo de C3" />
+      <VarDeclaration ID="551314EBB6B4C778" Name="T_Restart" Type="TIME" Comment="Tempo de espera para retomar a alimentacao (pH/condutividade/vazao LL)" />
+      <VarDeclaration ID="652192BCEAC4BA87" Name="T_FlowLL" Type="TIME" Comment="Vazao LL do 40FT0003 com bomba rodando por este tempo = para a alimentacao (0 = desabilitado)" />
+      <VarDeclaration ID="72685E9CC3009F17" Name="CapTheo" Type="REAL" Comment="Capacidade teorica de 1 bomba a 100 % [m3/h] (falha do medidor; 0 = usa a faixa do medidor)" />
+      <VarDeclaration ID="3F61CEAC196DAFFA" Name="FlowLL" Type="BOOL" Comment="Alarme LL do 40FT0003" />
+      <VarDeclaration ID="B9FEC6B18C045039" Name="FlowFail" Type="BOOL" Comment="Falha do 40FT0003" />
+      <VarDeclaration ID="3FF978AD45867CD1" Name="FlowPvMin" Type="REAL" Comment="Inicio de faixa do 40FT0003" />
+      <VarDeclaration ID="ECEC37AAF9912DE1" Name="FlowPvMax" Type="REAL" Comment="Fim de faixa do 40FT0003" />
+      <VarDeclaration ID="61C6CAD8A62128A0" Name="FlowPv" Type="REAL" Comment="Vazao medida 40FT0003 [m3/h]" />
+      <VarDeclaration ID="BFA4DE49E102B0EA" Name="PIDOut" Type="REAL" Comment="Saida do PID = demanda [%] (100 % = 2 bombas a 100 %)" />
     </InputVars>
     <OutputVars>
       <VarDeclaration ID="3FD15F25AD96252C" Name="CmdPump01" Type="BOOL" />
       <VarDeclaration ID="A51371F050C5DBE4" Name="CmdPump02" Type="BOOL" />
       <VarDeclaration ID="FFF29CFFBE485BA1" Name="CmdPump03" Type="BOOL" />
-      <VarDeclaration ID="4B70755D8EB51B08" Name="Pump01Capacity" Type="REAL" />
-      <VarDeclaration ID="5AAE740C8C54F713" Name="Pump02Capacity" Type="REAL" />
-      <VarDeclaration ID="7D4866C24C2100A9" Name="Pump03Capacity" Type="REAL" />
-      <VarDeclaration ID="AE321536059FD861" Name="Grafcet" Type="INT" />
+      <VarDeclaration ID="7FEAC15974107CEB" Name="PumpSpeed" Type="REAL" Comment="Velocidade enviada a cada bomba em servico [%] (nunca abaixo de Cmin)" />
+      <VarDeclaration ID="1340A87A57F03816" Name="AnyCmd" Type="BOOL" Comment="Alguma bomba comandada" />
+      <VarDeclaration ID="31751C6AC08065D4" Name="EffFlowSp" Type="REAL" Comment="Setpoint efetivo do PID [m3/h] (= vazao medida enquanto as bombas estao fixas em C2)" />
+      <VarDeclaration ID="2FD2CD82AAE9F327" Name="RunPID" Type="BOOL" Comment="PID em automatico" />
+      <VarDeclaration ID="06C907D918F5800E" Name="AnyReady" Type="BOOL" Comment="Alguma bomba disponivel (Ready ou rodando)" />
+      <VarDeclaration ID="CFD70CC123F161E1" Name="AnyRunning" Type="BOOL" Comment="Alguma bomba rodando" />
+      <VarDeclaration ID="F96B276460D1FCF4" Name="AllStopped" Type="BOOL" Comment="Nenhuma bomba rodando" />
+      <VarDeclaration ID="AE321536059FD861" Name="Grafcet" Type="INT" Comment="0 sem pedido | 3 alimentando" />
+      <VarDeclaration ID="B27176F5DCAA83B1" Name="PumpMode" Type="INT" Comment="0=1 bomba 1=reduzindo p/ C2 2=nova bomba em C2 (T_C2) 3=duas no PID" />
+      <VarDeclaration ID="0C5A6CFA96D233BF" Name="NPumps" Type="INT" Comment="Bombas em servico rodando" />
+      <VarDeclaration ID="D0EA1B1A2197B0B9" Name="PauseCause" Type="INT" Comment="0 sem pausa | 1 nivel LL 40LT0001 | 2 pH/condutividade | 3 vazao LL 40FT0003" />
+      <VarDeclaration ID="1421452A4EBFDDF1" Name="SelectedPump" Type="INT" Comment="Bomba em servico ha mais tempo" />
+      <VarDeclaration ID="098AFC871A3CFD13" Name="SecondPump" Type="INT" Comment="Segunda bomba em servico" />
+      <VarDeclaration ID="5C59000207A0D294" Name="AtMin" Type="BOOL" Comment="Velocidade limitada em Cmin" />
+      <VarDeclaration ID="BAFEC99BDB64D66C" Name="ParBad" Type="BOOL" Comment="Parametros incoerentes (so aviso)" />
+      <VarDeclaration ID="C9EE069C71EFDAD1" Name="HmiCmin" Type="REAL" />
+      <VarDeclaration ID="9CF3FEEBF2B6AA5D" Name="HmiC2" Type="REAL" />
+      <VarDeclaration ID="B895CCC55F3FE220" Name="HmiC3" Type="REAL" />
+      <VarDeclaration ID="36986729985B7CC1" Name="HmiCmax" Type="REAL" />
+      <VarDeclaration ID="C0C1B0C1C3199410" Name="HmiFlowFail" Type="BOOL" />
+      <VarDeclaration ID="87AEC4DAAD8A9CBC" Name="HmiTC2" Type="INT" Comment="Tempo em C2 [s]" />
+      <VarDeclaration ID="A57CDF738DF830C6" Name="HmiTC3" Type="INT" Comment="Tempo abaixo de C3 [s]" />
+      <VarDeclaration ID="490A1F3D34268C5C" Name="HmiTDec" Type="INT" Comment="Tempo descendo ate C2 [s]" />
+      <VarDeclaration ID="4620777000303A22" Name="HmiTWait" Type="INT" Comment="Tempo de espera para retomar [s]" />
+      <VarDeclaration ID="8798015E00F9DFD9" Name="HmiFlowSp" Type="REAL" Comment="Setpoint de vazao [m3/h]" />
     </OutputVars>
   </InterfaceList>
   <BasicFB ID="d36cbe92-32ed-4f82-b74c-f539625029f1">
-    <Attribute Name="FBType.Basic.Algorithm.Order" Value="OnePump,StartTowPumps_C2,StartTowPumps_Max,StopAll" />
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="AlgMain,AlgTick" />
     <InternalVars>
-      <VarDeclaration ID="BF832B5C0972E8B2" Name="CapacitySp" Type="REAL" />
+      <VarDeclaration Name="Paused" Type="BOOL" />
+      <VarDeclaration Name="FeedReq" Type="BOOL" />
+      <VarDeclaration Name="FlowSp" Type="REAL" />
+      <VarDeclaration Name="Dem" Type="REAL" />
+      <VarDeclaration Name="CminEff" Type="REAL" />
+      <VarDeclaration Name="C2Eff" Type="REAL" />
+      <VarDeclaration Name="SpdRaw" Type="REAL" />
+      <VarDeclaration Name="ParOk" Type="BOOL" />
+      <VarDeclaration Name="ExitCond" Type="BOOL" />
+      <VarDeclaration Name="Spare" Type="BOOL" />
+      <VarDeclaration Name="SpdAtC2" Type="BOOL" />
+      <VarDeclaration Name="SpdUpC2" Type="BOOL" />
+      <VarDeclaration Name="SpdAtMax" Type="BOOL" />
+      <VarDeclaration Name="NCmd" Type="INT" />
+      <VarDeclaration Name="NRun" Type="INT" />
+      <VarDeclaration Name="NWant" Type="INT" />
+      <VarDeclaration Name="PumpSel" Type="INT" />
+      <VarDeclaration Name="MinTot" Type="UDINT" />
+      <VarDeclaration Name="MinOrd" Type="UDINT" />
+      <VarDeclaration Name="Seq" Type="UDINT" />
+      <VarDeclaration Name="Ord1" Type="UDINT" />
+      <VarDeclaration Name="Ord2" Type="UDINT" />
+      <VarDeclaration Name="Ord3" Type="UDINT" />
+      <VarDeclaration Name="Tacc" Type="TIME" />
+      <VarDeclaration Name="T3acc" Type="TIME" />
+      <VarDeclaration Name="Tdec" Type="TIME" />
+      <VarDeclaration Name="Tup" Type="TIME" />
+      <VarDeclaration Name="Trest" Type="TIME" />
+      <VarDeclaration Name="Tmax" Type="TIME" />
+      <VarDeclaration Name="Tll" Type="TIME" />
+      <VarDeclaration Name="TC2s" Type="INT" />
+      <VarDeclaration Name="TC3s" Type="INT" />
+      <VarDeclaration Name="TDecs" Type="INT" />
+      <VarDeclaration Name="TRests" Type="INT" />
+      <VarDeclaration Name="FromTick" Type="BOOL" />
+      <VarDeclaration Name="EdgeOut" Type="BOOL" />
+      <VarDeclaration Name="EdgeSpd" Type="BOOL" />
+      <VarDeclaration Name="EdgeSts" Type="BOOL" />
+      <VarDeclaration Name="EdgeCmd" Type="BOOL" />
+      <VarDeclaration Name="PrevSP" Type="REAL" />
+      <VarDeclaration Name="PrevRun" Type="BOOL" />
+      <VarDeclaration Name="PrevAR" Type="BOOL" />
+      <VarDeclaration Name="PrevARun" Type="BOOL" />
+      <VarDeclaration Name="PrevSpd" Type="REAL" />
+      <VarDeclaration Name="PrevAC" Type="BOOL" />
+      <VarDeclaration Name="PrevC1" Type="BOOL" />
+      <VarDeclaration Name="PrevC2" Type="BOOL" />
+      <VarDeclaration Name="PrevC3" Type="BOOL" />
+      <VarDeclaration Name="PrevSPM" Type="INT" />
+      <VarDeclaration Name="PrevSNP" Type="INT" />
+      <VarDeclaration Name="PrevSPC" Type="INT" />
+      <VarDeclaration Name="PrevSGR" Type="INT" />
+      <VarDeclaration Name="PrevSAM" Type="BOOL" />
+      <VarDeclaration Name="PrevSPB" Type="BOOL" />
+      <VarDeclaration Name="TolC2" Type="REAL" InitialValue="2.0" Comment="Parametro interno: tolerancia [%] para considerar a bomba em C2" />
+      <VarDeclaration Name="T_DecMax" Type="TIME" InitialValue="T#1m" Comment="Parametro interno: tempo maximo esperando a velocidade real chegar a C2" />
+      <VarDeclaration Name="HystExit" Type="REAL" InitialValue="10.0" Comment="Parametro interno: margem [%] abaixo de Cmax para a bomba que fica apos a saida da 2a (anti-ciclo)" />
     </InternalVars>
     <ECC>
-      <ECState Name="START" Comment="Initial State" x="1537.155" y="489.3404" />
-      <ECState Name="StartOnePump" x="1541.5" y="1098">
-        <ECAction Algorithm="OnePump" Output="CNF_CMD_PUMP" />
-        <ECAction Output="CNF_CAP_PUMP" />
+      <ECState Name="START" x="2600" y="300" />
+      <ECState Name="TIMEBASE" x="1200" y="1100">
+        <ECAction Algorithm="AlgTick" />
       </ECState>
-      <ECState Name="StartTowPumpsC2" x="1546.021" y="1684">
-        <ECAction Algorithm="StartTowPumps_C2" Output="CNF_CMD_PUMP" />
-        <ECAction Output="CNF_CAP_PUMP" />
+      <ECState Name="EVAL" x="2600" y="1100">
+        <ECAction Algorithm="AlgMain" />
       </ECState>
-      <ECState Name="StartTowPumpsMax" x="1550" y="2268">
-        <ECAction Algorithm="StartTowPumps_Max" Output="CNF_CMD_PUMP" />
-        <ECAction Output="CNF_CAP_PUMP" />
+      <ECState Name="SEND_CMD" x="1600" y="1900">
+        <ECAction Output="CNF_CMD_PUMP" />
       </ECState>
-      <ECState Name="StopAll" x="3556.267" y="1699.047">
-        <ECAction Algorithm="StopAll" Output="CNF_CMD_PUMP" />
-        <ECAction Output="CNF_CAP_PUMP" />
+      <ECState Name="SEND_OUT" x="2600" y="1900">
+        <ECAction Output="SP_CNF" />
+        <ECAction Output="REACT_FB" />
       </ECState>
-      <ECState Name="WaitingTime" x="3547.834" y="692">
-        <ECAction Output="WAIT_TIME" />
+      <ECState Name="SEND_SPD" x="3600" y="1900">
+        <ECAction Output="SPEED_CNF" />
       </ECState>
-      <ECTransition Source="START" Destination="StartOnePump" Condition="NOT ForceStop AND (FbPump01Ready OR FbPump02Ready OR FbPump03Ready) AND&#xD;&#xA;&#xD;&#xA;(FeedReactor1 OR&#xD;&#xA;FeedReactor2 OR&#xD;&#xA;FeedReactor3 OR&#xD;&#xA;FeedReactor4 OR&#xD;&#xA;FeedReactor5 OR&#xD;&#xA;FeedReactor6)" x="1540.824" y="789.431">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="385.1371,175.9922,385.4501,218.0168" />
-      </ECTransition>
-      <ECTransition Source="StartOnePump" Destination="StartOnePump" Condition="FEED_CAPACITY OR FB_PUMP_RDY OR FEED_REACTOR OR PAR" x="1044.484" y="1115.393">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="238.5871,338.1547,224.3014,222.4404" />
-      </ECTransition>
-      <ECTransition Source="StartOnePump" Destination="StartTowPumpsC2" Condition="(Pump01Capacity &gt;= MaxCapacityOnePump AND FbRunningPmp01) OR&#xD;&#xA;(Pump02Capacity &gt;= MaxCapacityOnePump AND FbRunningPmp02) OR&#xD;&#xA;(Pump03Capacity &gt;= MaxCapacityOnePump AND FbRunningPmp03)" x="1545.032" y="1410.421">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="386.1805,334.1556,386.4901,374.2918" />
-      </ECTransition>
-      <ECTransition Source="StartTowPumpsC2" Destination="StartTowPumpsMax" Condition="(FbRunningPmp01 AND FbRunningPmp02&#xD;&#xA;AND FbCapacityP &gt;= C2Capacity - 2&#xD;&#xA;AND FbCapacityP &lt;= C2Capacity + 2)&#xD;&#xA;&#xD;&#xA;OR&#xD;&#xA;&#xD;&#xA;(FbRunningPmp01 AND FbRunningPmp03&#xD;&#xA;AND FbCapacityP &gt;= C2Capacity - 2&#xD;&#xA;AND FbCapacityP &lt;= C2Capacity + 2)&#xD;&#xA;&#xD;&#xA;OR&#xD;&#xA;&#xD;&#xA;(FbRunningPmp02 AND FbRunningPmp03&#xD;&#xA;AND FbCapacityP &gt;= C2Capacity - 2&#xD;&#xA;AND FbCapacityP &lt;= C2Capacity + 2)" x="1546.786" y="1981.879">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="386.4904,475.9749,386.7628,515.9445" />
-      </ECTransition>
-      <ECTransition Source="StartTowPumpsMax" Destination="StartTowPumpsMax" Condition="FEED_CAPACITY OR FB_PUMP_RDY OR FEED_REACTOR OR PAR" x="990.4648" y="2277">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="211.1304,634.4445,214.4637,505.5556" />
-      </ECTransition>
-      <ECTransition Source="StartOnePump" Destination="StopAll" Condition="ForceStop OR LoLoLevelPv&#xD;&#xA;OR (NOT FbPump01Ready AND NOT FbPump02Ready AND NOT FbPump03Ready)&#xD;&#xA;&#xD;&#xA;OR (NOT FeedReactor1 AND&#xD;&#xA;	NOT FeedReactor2 AND&#xD;&#xA;	NOT FeedReactor3 AND&#xD;&#xA;	NOT FeedReactor4 AND&#xD;&#xA;	NOT FeedReactor5 AND&#xD;&#xA;	NOT FeedReactor6)&#xD;&#xA;" x="2604.171" y="902.8737">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="582.051,167.4956,724.5873,210.03" />
-      </ECTransition>
-      <ECTransition Source="StartTowPumpsC2" Destination="StopAll" Condition="ForceStop OR LoLoLevelPv&#xD;&#xA;OR (NOT FbPump01Ready AND NOT FbPump02Ready AND NOT FbPump03Ready)&#xD;&#xA;&#xD;&#xA;OR (NOT FeedReactor1 AND&#xD;&#xA;	NOT FeedReactor2 AND&#xD;&#xA;	NOT FeedReactor3 AND&#xD;&#xA;	NOT FeedReactor4 AND&#xD;&#xA;	NOT FeedReactor5 AND&#xD;&#xA;	NOT FeedReactor6)" x="2600.616" y="1436.979">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="585.9835,341.8522,720.5622,342.9099" />
-      </ECTransition>
-      <ECTransition Source="StartTowPumpsMax" Destination="StopAll" Condition="ForceStop OR LoLoLevelPv&#xD;&#xA;OR (NOT FbPump01Ready AND NOT FbPump02Ready AND NOT FbPump03Ready)&#xD;&#xA;&#xD;&#xA;OR (NOT FeedReactor1 AND&#xD;&#xA;	NOT FeedReactor2 AND&#xD;&#xA;	NOT FeedReactor3 AND&#xD;&#xA;	NOT FeedReactor4 AND&#xD;&#xA;	NOT FeedReactor5 AND&#xD;&#xA;	NOT FeedReactor6)" x="2627.253" y="1960.101">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="589.9637,508.8472,731.4434,468.7021" />
-      </ECTransition>
-      <ECTransition Source="StartTowPumpsC2" Destination="StartTowPumpsC2" Condition="FEED_CAPACITY OR FB_PUMP_RDY OR FEED_REACTOR OR PAR" x="987.0803" y="1684.75">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="206.6667,487.5,216.6667,355" />
-      </ECTransition>
-      <ECTransition Source="StopAll" Destination="START" Condition="LoLoLevelPv&#xD;&#xA;OR (NOT FbPump01Ready AND NOT FbPump02Ready AND NOT FbPump03Ready)&#xD;&#xA;&#xD;&#xA;OR (NOT FeedReactor1 AND&#xD;&#xA;	NOT FeedReactor2 AND&#xD;&#xA;	NOT FeedReactor3 AND&#xD;&#xA;	NOT FeedReactor4 AND&#xD;&#xA;	NOT FeedReactor5 AND&#xD;&#xA;	NOT FeedReactor6)" x="2830.937" y="709.197">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="803.7007,193.8613,649.9624,101.755" />
-      </ECTransition>
-      <ECTransition Source="StopAll" Destination="WaitingTime" Condition="NOT ForceStop" x="3546.661" y="1045.029">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="886.6685,286.3275,885.9539,211.1046" />
-      </ECTransition>
-      <ECTransition Source="WaitingTime" Destination="START" Condition="FB_WAIT_TIME" x="2673.136" y="303.7136">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="747.0748,62.94836,606.0098,48.99782" />
-      </ECTransition>
-      <ECTransition Source="StartTowPumpsMax" Destination="StartOnePump" Condition="CapacitySp &lt; C3Capacity" x="93.70358" y="1800.138">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="161.654,553.5221,-315.1061,365.1184" />
-      </ECTransition>
+      <ECState Name="SEND_STS" x="4400" y="1900">
+        <ECAction Output="HMI_STS" />
+      </ECState>
+      <ECTransition Source="START" Destination="TIMEBASE" Condition="TICK" x="1700" y="700" />
+      <ECTransition Source="START" Destination="EVAL" Condition="FEED_REACTOR OR FEED_CAPACITY OR FB_FEED_PMP OR FB_PUMP_RDY OR PUMP_TOT OR PUMP_SPD OR FORCE_STOP OR RESET_LOGIC OR PAR OR FLOW OR PID_UPD" x="2700" y="700" />
+      <ECTransition Source="EVAL" Destination="SEND_CMD" Condition="EdgeCmd" x="1000" y="1500" />
+      <ECTransition Source="EVAL" Destination="SEND_OUT" Condition="EdgeOut" x="1150" y="1500" />
+      <ECTransition Source="EVAL" Destination="SEND_SPD" Condition="EdgeSpd" x="1300" y="1500" />
+      <ECTransition Source="EVAL" Destination="SEND_STS" Condition="EdgeSts" x="1450" y="1500" />
+      <ECTransition Source="EVAL" Destination="START" Condition="1" x="1600" y="900" />
+      <ECTransition Source="SEND_CMD" Destination="SEND_OUT" Condition="EdgeOut" x="1750" y="1500" />
+      <ECTransition Source="SEND_CMD" Destination="SEND_SPD" Condition="EdgeSpd" x="1900" y="1500" />
+      <ECTransition Source="SEND_CMD" Destination="SEND_STS" Condition="EdgeSts" x="2050" y="1500" />
+      <ECTransition Source="SEND_CMD" Destination="START" Condition="1" x="2200" y="900" />
+      <ECTransition Source="SEND_OUT" Destination="SEND_SPD" Condition="EdgeSpd" x="2350" y="1500" />
+      <ECTransition Source="SEND_OUT" Destination="SEND_STS" Condition="EdgeSts" x="2500" y="1500" />
+      <ECTransition Source="SEND_OUT" Destination="START" Condition="1" x="2650" y="900" />
+      <ECTransition Source="SEND_SPD" Destination="SEND_STS" Condition="EdgeSts" x="2800" y="1500" />
+      <ECTransition Source="SEND_SPD" Destination="START" Condition="1" x="2950" y="900" />
+      <ECTransition Source="SEND_STS" Destination="START" Condition="1" x="3100" y="900" />
+      <ECTransition Source="TIMEBASE" Destination="EVAL" Condition="1" x="1900" y="1150" />
     </ECC>
-    <Algorithm ID="b9a0305a-7b60-4353-8ce8-9f1ec530491a" Name="OnePump">
+    <Algorithm Name="AlgMain" Comment="Logica das bombas de alimentacao">
       <ST><![CDATA[;
-CapacitySp := 0;
+(* ============================================================
+   FeedReactor3PsBasic Rev1 - bombas de alimentacao P4001/P4002/P4003 (2 servico + 1 reserva)
+   Narrativa cap. 2 (Influent feed) com o mesmo funcionamento da Water Discharge do Sludge Buffer.
+   - Partida: StartFeeding de algum reator (fase Feed em RUN e AV41101 aberta). SP = maior pedido [m3/h].
+   - Demanda = saida do PID [%] (100 % = 2 bombas a 100 %). Cmax / C2 / C3 / Cmin em % de velocidade de UMA bomba.
+     1 bomba = 2 x demanda ; 2 bombas = demanda ; nunca abaixo de Cmin.
+   - Entrada: 1 bomba no Cmax (velocidade real; ou demanda acima por T_DecMax) e precisaria passar -> a(s) em operacao descem ate C2 (velocidade real ou T_DecMax),
+     a nova parte em C2, T_C2 com as duas em C2 (velocidade real ou T_DecMax), depois PID.
+   - Saida: demanda abaixo de C3 E 2 x demanda abaixo de Cmax - HystExit por T_C3: sai a que partiu primeiro.
+   - Falha de bomba com 2 em servico: reserva parte na hora, todas em C2, T_C2, depois PID.
+   - Paradas: 1 nivel LL 40LT0001 (retoma ao sair o LL) | 2 pH/condutividade fora da faixa (retoma T_Restart apos voltar)
+              3 vazao LL 40FT0003 por T_FlowLL com bomba rodando (retoma apos T_Restart)
+   - Falha do 40FT0003: demanda = SP / (2 x capacidade teorica) x 100 ; sem capacidade teorica, SP em % da faixa.
+   PumpMode: 0 uma bomba | 1 reduzindo p/ C2 (nova parada) | 2 nova em C2 (T_C2) | 3 duas no PID
+   ============================================================ *)
 
-IF FeedReactor_C1 > CapacitySp AND FeedReactor1 THEN
-    CapacitySp := FeedReactor_C1;
+(* ---------- 1. Pedido de alimentacao e setpoint ---------- *)
+FeedReq := FeedReactor1 OR FeedReactor2 OR FeedReactor3 OR FeedReactor4 OR FeedReactor5 OR FeedReactor6;
+FlowSp := 0.0;
+IF FeedReactor1 AND (FeedReactor_C1 > FlowSp) THEN
+    FlowSp := FeedReactor_C1;
+END_IF;
+IF FeedReactor2 AND (FeedReactor_C2 > FlowSp) THEN
+    FlowSp := FeedReactor_C2;
+END_IF;
+IF FeedReactor3 AND (FeedReactor_C3 > FlowSp) THEN
+    FlowSp := FeedReactor_C3;
+END_IF;
+IF FeedReactor4 AND (FeedReactor_C4 > FlowSp) THEN
+    FlowSp := FeedReactor_C4;
+END_IF;
+IF FeedReactor5 AND (FeedReactor_C5 > FlowSp) THEN
+    FlowSp := FeedReactor_C5;
+END_IF;
+IF FeedReactor6 AND (FeedReactor_C6 > FlowSp) THEN
+    FlowSp := FeedReactor_C6;
+END_IF;
+IF FeedReq THEN
+    Grafcet := 3;
+ELSE
+    Grafcet := 0;
 END_IF;
 
-IF FeedReactor_C2 > CapacitySp AND FeedReactor2 THEN
-    CapacitySp := FeedReactor_C2;
+(* ---------- 2. Demanda, velocidade minima e parametros ---------- *)
+IF FlowFail THEN
+    IF CapTheo > 0.0 THEN
+        Dem := FlowSp / (2.0 * CapTheo) * 100.0;
+    ELSIF FlowPvMax > FlowPvMin THEN
+        Dem := (FlowSp - FlowPvMin) / (FlowPvMax - FlowPvMin) * 100.0;
+    ELSE
+        Dem := 0.0;
+    END_IF;
+ELSE
+    Dem := PIDOut;
+END_IF;
+IF Dem > 100.0 THEN
+    Dem := 100.0;
+END_IF;
+IF Dem < 0.0 THEN
+    Dem := 0.0;
+END_IF;
+CminEff := Cmin;
+IF CminEff > 100.0 THEN
+    CminEff := 100.0;
+END_IF;
+IF CminEff < 0.0 THEN
+    CminEff := 0.0;
+END_IF;
+(* so Cmax e C2 sao indispensaveis; o resto apenas avisa (ParBad) - a protecao anti-ciclo esta embutida na saida *)
+ParOk := (MaxCapacityOnePump > 0.0) AND (C2Capacity > 0.0);
+ParBad := (MaxCapacityOnePump <= 0.0) OR (C2Capacity <= 0.0) OR (C2Capacity < CminEff) OR (C3Capacity <= CminEff) OR ((2.0 * C3Capacity) >= MaxCapacityOnePump) OR (Cmin < 0.0) OR (Cmin > 100.0);
+C2Eff := C2Capacity;
+IF C2Eff < CminEff THEN
+    C2Eff := CminEff;
+END_IF;
+ExitCond := (Dem < C3Capacity) AND ((2.0 * Dem) < (MaxCapacityOnePump - HystExit));
+
+(* ---------- 3. Paradas da alimentacao (narrativa 2.2) ---------- *)
+IF Grafcet = 3 THEN
+    IF Paused THEN
+        IF (PauseCause = 1) AND (NOT LoLoLevelPv) THEN
+            Paused := FALSE;
+            PauseCause := 0;
+            Tll := T#0s;
+        ELSIF (PauseCause >= 2) AND (NOT LoLoLevelPv) AND (NOT ForceStop) AND (Trest >= T_Restart) THEN
+            Paused := FALSE;
+            PauseCause := 0;
+            Tll := T#0s;
+        END_IF;
+    END_IF;
+    IF LoLoLevelPv THEN
+        Paused := TRUE;
+        PauseCause := 1;
+        Trest := T#0s;
+        TRests := 0;
+    ELSIF ForceStop THEN
+        Paused := TRUE;
+        PauseCause := 2;
+        Trest := T#0s;
+        TRests := 0;
+    ELSIF (NOT Paused) AND (T_FlowLL > T#0s) AND (Tll >= T_FlowLL) THEN
+        Paused := TRUE;
+        PauseCause := 3;
+        Trest := T#0s;
+        TRests := 0;
+        Tll := T#0s;
+    END_IF;
 END_IF;
 
-IF FeedReactor_C3 > CapacitySp AND FeedReactor3 THEN
-    CapacitySp := FeedReactor_C3;
+(* ---------- 4. Bombas ---------- *)
+IF (Grafcet = 3) AND Paused THEN
+    CmdPump01 := FALSE;
+    CmdPump02 := FALSE;
+    CmdPump03 := FALSE;
+    PumpMode := 0;
+    Tacc := T#0s;
+    TC2s := 0;
+    T3acc := T#0s;
+    TC3s := 0;
+    NCmd := 0;
+    NRun := 0;
+    EffFlowSp := FlowSp;
+    PumpSpeed := 0.0;
+    AtMin := FALSE;
+ELSIF Grafcet = 3 THEN
+    (* 4.1 bomba sai de servico somente se nao estiver Ready (modo programa) NEM Running *)
+    IF CmdPump01 AND NOT FbPump01Ready AND NOT FbRunningPmp01 THEN
+        CmdPump01 := FALSE;
+    END_IF;
+    IF CmdPump02 AND NOT FbPump02Ready AND NOT FbRunningPmp02 THEN
+        CmdPump02 := FALSE;
+    END_IF;
+    IF CmdPump03 AND NOT FbPump03Ready AND NOT FbRunningPmp03 THEN
+        CmdPump03 := FALSE;
+    END_IF;
+    NCmd := 0;
+    IF CmdPump01 THEN
+        NCmd := NCmd + 1;
+    END_IF;
+    IF CmdPump02 THEN
+        NCmd := NCmd + 1;
+    END_IF;
+    IF CmdPump03 THEN
+        NCmd := NCmd + 1;
+    END_IF;
+    NRun := 0;
+    IF CmdPump01 AND FbRunningPmp01 THEN
+        NRun := NRun + 1;
+    END_IF;
+    IF CmdPump02 AND FbRunningPmp02 THEN
+        NRun := NRun + 1;
+    END_IF;
+    IF CmdPump03 AND FbRunningPmp03 THEN
+        NRun := NRun + 1;
+    END_IF;
+    Spare := (FbPump01Ready AND NOT CmdPump01) OR (FbPump02Ready AND NOT CmdPump02) OR (FbPump03Ready AND NOT CmdPump03);
+    (* bombas em operacao ja desceram ate C2 (velocidade real) *)
+    SpdAtC2 := TRUE;
+    IF CmdPump01 AND FbRunningPmp01 AND (SpeedPvPmp01 > (C2Eff + TolC2)) THEN
+        SpdAtC2 := FALSE;
+    END_IF;
+    IF CmdPump02 AND FbRunningPmp02 AND (SpeedPvPmp02 > (C2Eff + TolC2)) THEN
+        SpdAtC2 := FALSE;
+    END_IF;
+    IF CmdPump03 AND FbRunningPmp03 AND (SpeedPvPmp03 > (C2Eff + TolC2)) THEN
+        SpdAtC2 := FALSE;
+    END_IF;
+    (* bomba em operacao com velocidade real ja no Cmax *)
+    SpdAtMax := FALSE;
+    IF CmdPump01 AND FbRunningPmp01 AND (SpeedPvPmp01 >= (MaxCapacityOnePump - TolC2)) THEN
+        SpdAtMax := TRUE;
+    END_IF;
+    IF CmdPump02 AND FbRunningPmp02 AND (SpeedPvPmp02 >= (MaxCapacityOnePump - TolC2)) THEN
+        SpdAtMax := TRUE;
+    END_IF;
+    IF CmdPump03 AND FbRunningPmp03 AND (SpeedPvPmp03 >= (MaxCapacityOnePump - TolC2)) THEN
+        SpdAtMax := TRUE;
+    END_IF;
+    (* bombas em operacao com velocidade real ja em C2 (subida da que entrou) *)
+    SpdUpC2 := TRUE;
+    IF CmdPump01 AND FbRunningPmp01 AND (SpeedPvPmp01 < (C2Eff - TolC2)) THEN
+        SpdUpC2 := FALSE;
+    END_IF;
+    IF CmdPump02 AND FbRunningPmp02 AND (SpeedPvPmp02 < (C2Eff - TolC2)) THEN
+        SpdUpC2 := FALSE;
+    END_IF;
+    IF CmdPump03 AND FbRunningPmp03 AND (SpeedPvPmp03 < (C2Eff - TolC2)) THEN
+        SpdUpC2 := FALSE;
+    END_IF;
+    (* 4.1b com 2 bombas (modo 2/3) uma saiu de servico: a reserva parte NA HORA, todas em C2, T_C2, depois PID *)
+    IF ParOk AND (PumpMode >= 2) AND (NCmd < 2) THEN
+        IF Spare AND (NCmd >= 1) THEN
+            PumpMode := 2;
+            Tacc := T#0s;
+            TC2s := 0;
+            Tup := T#0s;
+        ELSE
+            PumpMode := 0;
+        END_IF;
+    END_IF;
+
+    (* 4.2 numero de bombas *)
+    IF NOT ParOk THEN
+        PumpMode := 0;
+    ELSIF PumpMode = 0 THEN
+        (* narrativa: bomba EM operacao no Cmax -> velocidade real ja no Cmax (ou demanda acima por T_DecMax) *)
+        IF ((2.0 * Dem) > MaxCapacityOnePump) AND Spare AND (NRun >= 1) AND (SpdAtMax OR (Tmax >= T_DecMax)) THEN
+            PumpMode := 1;
+            Tdec := T#0s;
+            TDecs := 0;
+        END_IF;
+    ELSIF PumpMode = 1 THEN
+        (* a nova so parte depois que a(s) bomba(s) em operacao desceram ate C2 (ou apos T_DecMax) *)
+        IF (NOT Spare) OR (NCmd = 0) THEN
+            PumpMode := 0;
+        ELSIF SpdAtC2 OR (Tdec >= T_DecMax) THEN
+            PumpMode := 2;
+            Tacc := T#0s;
+            TC2s := 0;
+            Tup := T#0s;
+        END_IF;
+    ELSIF PumpMode = 2 THEN
+        (* T_C2 conta com as duas rodando e com velocidade real em C2 (ou apos T_DecMax) *)
+        IF (NRun >= 2) AND (Tacc >= T_C2) THEN
+            PumpMode := 3;
+            T3acc := T#0s;
+            TC3s := 0;
+        END_IF;
+    ELSIF PumpMode = 3 THEN
+        (* saida exige a condicao fisica (ExitCond) alem do tempo *)
+        IF ExitCond AND (T3acc >= T_C3) THEN
+            PumpMode := 0;
+            T3acc := T#0s;
+            TC3s := 0;
+        END_IF;
+    END_IF;
+    IF PumpMode >= 2 THEN
+        NWant := 2;
+    ELSE
+        NWant := 1;
+    END_IF;
+
+    (* 4.3 entra bomba disponivel de menor horimetro (rodizio) - ate 2 vezes *)
+    IF NCmd < NWant THEN
+        PumpSel := 0;
+        IF FbPump01Ready AND NOT CmdPump01 THEN
+            PumpSel := 1;
+            MinTot := TotOpePmp01;
+        END_IF;
+        IF FbPump02Ready AND NOT CmdPump02 THEN
+            IF (PumpSel = 0) OR (TotOpePmp02 < MinTot) THEN
+                PumpSel := 2;
+                MinTot := TotOpePmp02;
+            END_IF;
+        END_IF;
+        IF FbPump03Ready AND NOT CmdPump03 THEN
+            IF (PumpSel = 0) OR (TotOpePmp03 < MinTot) THEN
+                PumpSel := 3;
+                MinTot := TotOpePmp03;
+            END_IF;
+        END_IF;
+        IF PumpSel = 1 THEN
+            CmdPump01 := TRUE;
+            Seq := Seq + 1;
+            Ord1 := Seq;
+            NCmd := NCmd + 1;
+        ELSIF PumpSel = 2 THEN
+            CmdPump02 := TRUE;
+            Seq := Seq + 1;
+            Ord2 := Seq;
+            NCmd := NCmd + 1;
+        ELSIF PumpSel = 3 THEN
+            CmdPump03 := TRUE;
+            Seq := Seq + 1;
+            Ord3 := Seq;
+            NCmd := NCmd + 1;
+        END_IF;
+    END_IF;
+    IF NCmd < NWant THEN
+        PumpSel := 0;
+        IF FbPump01Ready AND NOT CmdPump01 THEN
+            PumpSel := 1;
+            MinTot := TotOpePmp01;
+        END_IF;
+        IF FbPump02Ready AND NOT CmdPump02 THEN
+            IF (PumpSel = 0) OR (TotOpePmp02 < MinTot) THEN
+                PumpSel := 2;
+                MinTot := TotOpePmp02;
+            END_IF;
+        END_IF;
+        IF FbPump03Ready AND NOT CmdPump03 THEN
+            IF (PumpSel = 0) OR (TotOpePmp03 < MinTot) THEN
+                PumpSel := 3;
+                MinTot := TotOpePmp03;
+            END_IF;
+        END_IF;
+        IF PumpSel = 1 THEN
+            CmdPump01 := TRUE;
+            Seq := Seq + 1;
+            Ord1 := Seq;
+            NCmd := NCmd + 1;
+        ELSIF PumpSel = 2 THEN
+            CmdPump02 := TRUE;
+            Seq := Seq + 1;
+            Ord2 := Seq;
+            NCmd := NCmd + 1;
+        ELSIF PumpSel = 3 THEN
+            CmdPump03 := TRUE;
+            Seq := Seq + 1;
+            Ord3 := Seq;
+            NCmd := NCmd + 1;
+        END_IF;
+    END_IF;
+
+    (* 4.4 excedente: sai a bomba em operacao ha mais tempo (menor ordem de partida) *)
+    IF NCmd > NWant THEN
+        PumpSel := 0;
+        IF CmdPump01 THEN
+            PumpSel := 1;
+            MinOrd := Ord1;
+        END_IF;
+        IF CmdPump02 THEN
+            IF (PumpSel = 0) OR (Ord2 < MinOrd) THEN
+                PumpSel := 2;
+                MinOrd := Ord2;
+            END_IF;
+        END_IF;
+        IF CmdPump03 THEN
+            IF (PumpSel = 0) OR (Ord3 < MinOrd) THEN
+                PumpSel := 3;
+                MinOrd := Ord3;
+            END_IF;
+        END_IF;
+        IF PumpSel = 1 THEN
+            CmdPump01 := FALSE;
+        ELSIF PumpSel = 2 THEN
+            CmdPump02 := FALSE;
+        ELSIF PumpSel = 3 THEN
+            CmdPump03 := FALSE;
+        END_IF;
+        NCmd := NCmd - 1;
+    END_IF;
+
+    (* 4.5 sem bomba para a 2a posicao: volta a operar com uma *)
+    IF (PumpMode >= 2) AND (NCmd < 2) THEN
+        PumpMode := 0;
+    END_IF;
+
+    (* 4.6 setpoint do PID e velocidade das bombas *)
+    (* bombas fixas em C2: setpoint do PID acompanha a vazao medida (sem integrar; sem salto ao fim de T_C2) *)
+    IF ParOk AND ((PumpMode = 1) OR (PumpMode = 2)) AND NOT FlowFail THEN
+        EffFlowSp := FlowPv;
+    ELSE
+        EffFlowSp := FlowSp;
+    END_IF;
+    IF (PumpMode = 1) OR (PumpMode = 2) THEN
+        SpdRaw := C2Eff;
+    ELSIF PumpMode = 3 THEN
+        SpdRaw := Dem;
+    ELSE
+        SpdRaw := 2.0 * Dem;
+    END_IF;
+    IF SpdRaw > 100.0 THEN
+        SpdRaw := 100.0;
+    END_IF;
+    AtMin := (NCmd >= 1) AND (SpdRaw < CminEff);
+    IF SpdRaw < CminEff THEN
+        PumpSpeed := CminEff;
+    ELSE
+        PumpSpeed := SpdRaw;
+    END_IF;
+ELSE
+    (* sem pedido de alimentacao *)
+    CmdPump01 := FALSE;
+    CmdPump02 := FALSE;
+    CmdPump03 := FALSE;
+    PumpMode := 0;
+    Tacc := T#0s;
+    TC2s := 0;
+    T3acc := T#0s;
+    TC3s := 0;
+    NCmd := 0;
+    NRun := 0;
+    EffFlowSp := FlowSp;
+    PumpSpeed := 0.0;
+    AtMin := FALSE;
+    Paused := FALSE;
+    PauseCause := 0;
+    Trest := T#0s;
+    TRests := 0;
+    Tll := T#0s;
 END_IF;
 
-IF FeedReactor_C4 > CapacitySp AND FeedReactor4 THEN
-    CapacitySp := FeedReactor_C4;
+(* ---------- 5. Saidas ---------- *)
+AnyCmd := CmdPump01 OR CmdPump02 OR CmdPump03;
+RunPID := (Grafcet = 3) AND (NOT Paused) AND AnyCmd;
+AnyReady := FbPump01Ready OR FbRunningPmp01 OR FbPump02Ready OR FbRunningPmp02 OR FbPump03Ready OR FbRunningPmp03;
+AnyRunning := FbRunningPmp01 OR FbRunningPmp02 OR FbRunningPmp03;
+AllStopped := NOT AnyRunning;
+NPumps := NRun;
+SelectedPump := 0;
+SecondPump := 0;
+MinOrd := 0;
+IF CmdPump01 THEN
+    SelectedPump := 1;
+    MinOrd := Ord1;
+END_IF;
+IF CmdPump02 THEN
+    IF (SelectedPump = 0) OR (Ord2 < MinOrd) THEN
+        SecondPump := SelectedPump;
+        SelectedPump := 2;
+        MinOrd := Ord2;
+    ELSE
+        SecondPump := 2;
+    END_IF;
+END_IF;
+IF CmdPump03 THEN
+    IF (SelectedPump = 0) OR (Ord3 < MinOrd) THEN
+        SecondPump := SelectedPump;
+        SelectedPump := 3;
+        MinOrd := Ord3;
+    ELSE
+        SecondPump := 3;
+    END_IF;
 END_IF;
 
-IF FeedReactor_C5 > CapacitySp AND FeedReactor5 THEN
-    CapacitySp := FeedReactor_C5;
-END_IF;
+(* ---------- 6. Eventos de saida somente na mudanca ---------- *)
+EdgeCmd := (CmdPump01 <> PrevC1) OR (CmdPump02 <> PrevC2) OR (CmdPump03 <> PrevC3);
+PrevC1 := CmdPump01;
+PrevC2 := CmdPump02;
+PrevC3 := CmdPump03;
+EdgeOut := (EffFlowSp <> PrevSP) OR (RunPID <> PrevRun) OR (AnyReady <> PrevAR) OR (AnyRunning <> PrevARun);
+PrevSP := EffFlowSp;
+PrevRun := RunPID;
+PrevAR := AnyReady;
+PrevARun := AnyRunning;
+EdgeSpd := (PumpSpeed <> PrevSpd) OR (AnyCmd <> PrevAC);
+PrevSpd := PumpSpeed;
+PrevAC := AnyCmd;
 
-IF FeedReactor_C6 > CapacitySp AND FeedReactor6 THEN
-    CapacitySp := FeedReactor_C6;
-END_IF;
-
-
-CmdPump01 := FALSE;
-CmdPump02 := FALSE;
-CmdPump03 := FALSE;
-
-Pump01Capacity := 0.0;
-Pump02Capacity := 0.0;
-Pump03Capacity := 0.0;
-
-
-IF FbPump01Ready THEN
-    CmdPump01 := TRUE;
-    Pump01Capacity := CapacitySp;
-
-ELSIF FbPump02Ready THEN
-    CmdPump02 := TRUE;
-    Pump02Capacity := CapacitySp;
-
-ELSIF FbPump03Ready THEN
-    CmdPump03 := TRUE;
-    Pump03Capacity := CapacitySp;
-END_IF;]]></ST>
+(* ---------- 7. Status para a IHM: a cada 1 s (TICK) e quando o estado muda ---------- *)
+HmiCmin := CminEff;
+HmiC2 := C2Eff;
+HmiC3 := C3Capacity;
+HmiCmax := MaxCapacityOnePump;
+HmiFlowFail := FlowFail;
+HmiTC2 := TC2s;
+HmiTC3 := TC3s;
+HmiTDec := TDecs;
+HmiTWait := TRests;
+HmiFlowSp := FlowSp;
+EdgeSts := FromTick OR (PumpMode <> PrevSPM) OR (NPumps <> PrevSNP) OR (PauseCause <> PrevSPC) OR (Grafcet <> PrevSGR) OR (AtMin <> PrevSAM) OR (ParBad <> PrevSPB);
+FromTick := FALSE;
+PrevSPM := PumpMode;
+PrevSNP := NPumps;
+PrevSPC := PauseCause;
+PrevSGR := Grafcet;
+PrevSAM := AtMin;
+PrevSPB := ParBad;
+]]></ST>
     </Algorithm>
-    <Algorithm ID="72237dd9-4c98-48fc-8576-bea150f540a2" Name="StartTowPumps_C2">
+    <Algorithm Name="AlgTick" Comment="Base de tempo 1 s">
       <ST><![CDATA[;
-Pump01Capacity := 0.0;
-Pump02Capacity := 0.0;
-Pump03Capacity := 0.0;
-CmdPump01 := FALSE;
-CmdPump02 := FALSE;
-CmdPump03 := FALSE;
-
-
-IF FbRunningPmp01 THEN
-	CmdPump01 := TRUE;
-	Pump01Capacity := C2Capacity;	
-	IF FbPump02Ready THEN
-		CmdPump02 := TRUE;
-		Pump02Capacity := C2Capacity;
-		
-	ELSIF FbPump03Ready THEN
-		CmdPump03 := TRUE;
-		Pump03Capacity := C2Capacity;
-	END_IF;
-ELSIF FbRunningPmp02 THEN
-	CmdPump02 := TRUE;
-	Pump02Capacity := C2Capacity;	
-	IF FbPump01Ready THEN
-		CmdPump01 := TRUE;
-		Pump01Capacity := C2Capacity;
-		
-	ELSIF FbPump03Ready THEN
-		CmdPump03 := TRUE;
-		Pump03Capacity := C2Capacity;
-	END_IF;
-ELSIF FbRunningPmp03 THEN
-	CmdPump03 := TRUE;
-	Pump03Capacity := C2Capacity;	
-	IF FbPump01Ready THEN
-		CmdPump01 := TRUE;
-		Pump01Capacity := C2Capacity;
-		
-	ELSIF FbPump02Ready THEN
-		CmdPump02 := TRUE;
-		Pump02Capacity := C2Capacity;
-	END_IF;
-END_IF;]]></ST>
-    </Algorithm>
-    <Algorithm ID="d6349448-3fb5-47e4-8743-4f5a9ad3bc08" Name="StartTowPumps_Max">
-      <ST><![CDATA[;
-CapacitySp := 0;
-
-IF FeedReactor_C1 > CapacitySp AND FeedReactor1 THEN
-    CapacitySp := FeedReactor_C1;
+(* Base de tempo 1 s (E_CYCLE externo) *)
+FromTick := TRUE;
+IF PumpMode = 2 THEN
+    Tup := Tup + T#1s;
+ELSE
+    Tup := T#0s;
 END_IF;
-
-IF FeedReactor_C2 > CapacitySp AND FeedReactor2 THEN
-    CapacitySp := FeedReactor_C2;
+(* T_C2: as duas rodando e com velocidade real em C2 (ou apos T_DecMax sem confirmacao) *)
+IF (PumpMode = 2) AND (NRun >= 2) AND (SpdUpC2 OR (Tup >= T_DecMax)) THEN
+    Tacc := Tacc + T#1s;
+    TC2s := TC2s + 1;
 END_IF;
-
-IF FeedReactor_C3 > CapacitySp AND FeedReactor3 THEN
-    CapacitySp := FeedReactor_C3;
+(* demanda acima do Cmax com 1 bomba (limite quando a velocidade real nao confirma o Cmax) *)
+IF (PumpMode = 0) AND (NRun >= 1) AND ((2.0 * Dem) > MaxCapacityOnePump) THEN
+    Tmax := Tmax + T#1s;
+ELSE
+    Tmax := T#0s;
 END_IF;
-
-IF FeedReactor_C4 > CapacitySp AND FeedReactor4 THEN
-    CapacitySp := FeedReactor_C4;
+(* tempo de descida ate C2 antes de partir a nova bomba *)
+IF PumpMode = 1 THEN
+    Tdec := Tdec + T#1s;
+    TDecs := TDecs + 1;
+ELSE
+    Tdec := T#0s;
+    TDecs := 0;
 END_IF;
-
-IF FeedReactor_C5 > CapacitySp AND FeedReactor5 THEN
-    CapacitySp := FeedReactor_C5;
+(* duas bombas com a condicao de saida *)
+IF (PumpMode = 3) AND (NRun >= 2) AND ExitCond THEN
+    T3acc := T3acc + T#1s;
+    TC3s := TC3s + 1;
+ELSE
+    T3acc := T#0s;
+    TC3s := 0;
 END_IF;
-
-IF FeedReactor_C6 > CapacitySp AND FeedReactor6 THEN
-    CapacitySp := FeedReactor_C6;
+(* espera para retomar: conta so com as causas ja normalizadas *)
+IF (Grafcet = 3) AND Paused AND (NOT LoLoLevelPv) AND (NOT ForceStop) THEN
+    Trest := Trest + T#1s;
+    TRests := TRests + 1;
+ELSE
+    Trest := T#0s;
+    TRests := 0;
 END_IF;
-
-Pump01Capacity := 0.0;
-Pump02Capacity := 0.0;
-Pump03Capacity := 0.0;
-
-IF CmdPump01 AND NOT FbPump01Ready THEN
-	CmdPump01 := FALSE;
-    Pump01Capacity := 0.0;
-	CmdPump03 := TRUE;
-    Pump03Capacity := CapacitySp;
+(* vazao LL com bomba rodando *)
+IF (Grafcet = 3) AND (NOT Paused) AND (NRun >= 1) AND FlowLL AND (NOT FlowFail) THEN
+    Tll := Tll + T#1s;
+ELSE
+    Tll := T#0s;
 END_IF;
-
-IF CmdPump02 AND NOT FbPump02Ready THEN
-	CmdPump02 := FALSE;
-    Pump02Capacity := 0.0;
-	CmdPump03 := TRUE;
-    Pump03Capacity := CapacitySp;
-END_IF;
-
-IF FbPump01Ready AND FbPump02Ready THEN
-	CmdPump03 := FALSE;
-    Pump03Capacity := 0.0;
-	CmdPump01 := TRUE;
-    Pump01Capacity := CapacitySp;
-    CmdPump02 := TRUE;
-    Pump02Capacity := CapacitySp;
-END_IF;]]></ST>
-    </Algorithm>
-    <Algorithm ID="35258b4e-d020-4370-929b-15602435f1c6" Name="StopAll">
-      <ST><![CDATA[CmdPump01 := FALSE;
-CmdPump02 := FALSE;
-CmdPump03 := FALSE;
-;]]></ST>
+]]></ST>
     </Algorithm>
   </BasicFB>
 </FBType>

@@ -86,6 +86,403 @@ namespace SE.Nereda.Symbols.FeedReactorLogic
 
   }
 
+  public class PUMP_STSEventArgs : System.EventArgs
+  {
+    IHMIAccessorService accessorService;
+    int channelId;
+    int cookie; 
+    int eventIndex;
+
+    public PUMP_STSEventArgs(int channelId, int cookie, int eventIndex)
+    {
+      this.accessorService = (IHMIAccessorService)ServiceProvider.GetService(typeof(IHMIAccessorService));
+      this.channelId = channelId;
+      this.cookie = cookie;
+      this.eventIndex = eventIndex;
+    }
+    public bool Get_StsGrafcet(ref System.Int16 value)
+    {
+      if (accessorService == null)
+        return false;
+      System.Int64 var = 0;
+      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,0, ref var);
+      if (ret) value = (System.Int16) var;
+      return ret;
+    }
+
+    public System.Int16? StsGrafcet
+    { get {
+      if (accessorService == null)
+        return null;
+      System.Int64 var = 0;
+      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,0, ref var);
+      if (!ret) return null;
+      return (System.Int16) var;
+    }  }
+
+    public bool Get_PumpMode(ref System.Int16 value)
+    {
+      if (accessorService == null)
+        return false;
+      System.Int64 var = 0;
+      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,1, ref var);
+      if (ret) value = (System.Int16) var;
+      return ret;
+    }
+
+    public System.Int16? PumpMode
+    { get {
+      if (accessorService == null)
+        return null;
+      System.Int64 var = 0;
+      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,1, ref var);
+      if (!ret) return null;
+      return (System.Int16) var;
+    }  }
+
+    public bool Get_NPumps(ref System.Int16 value)
+    {
+      if (accessorService == null)
+        return false;
+      System.Int64 var = 0;
+      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,2, ref var);
+      if (ret) value = (System.Int16) var;
+      return ret;
+    }
+
+    public System.Int16? NPumps
+    { get {
+      if (accessorService == null)
+        return null;
+      System.Int64 var = 0;
+      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,2, ref var);
+      if (!ret) return null;
+      return (System.Int16) var;
+    }  }
+
+    public bool Get_PauseCause(ref System.Int16 value)
+    {
+      if (accessorService == null)
+        return false;
+      System.Int64 var = 0;
+      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,3, ref var);
+      if (ret) value = (System.Int16) var;
+      return ret;
+    }
+
+    public System.Int16? PauseCause
+    { get {
+      if (accessorService == null)
+        return null;
+      System.Int64 var = 0;
+      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,3, ref var);
+      if (!ret) return null;
+      return (System.Int16) var;
+    }  }
+
+    public bool Get_SelectedPump(ref System.Int16 value)
+    {
+      if (accessorService == null)
+        return false;
+      System.Int64 var = 0;
+      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,4, ref var);
+      if (ret) value = (System.Int16) var;
+      return ret;
+    }
+
+    public System.Int16? SelectedPump
+    { get {
+      if (accessorService == null)
+        return null;
+      System.Int64 var = 0;
+      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,4, ref var);
+      if (!ret) return null;
+      return (System.Int16) var;
+    }  }
+
+    public bool Get_SecondPump(ref System.Int16 value)
+    {
+      if (accessorService == null)
+        return false;
+      System.Int64 var = 0;
+      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,5, ref var);
+      if (ret) value = (System.Int16) var;
+      return ret;
+    }
+
+    public System.Int16? SecondPump
+    { get {
+      if (accessorService == null)
+        return null;
+      System.Int64 var = 0;
+      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,5, ref var);
+      if (!ret) return null;
+      return (System.Int16) var;
+    }  }
+
+    public bool Get_PumpSpeed(ref System.Single value)
+    {
+      if (accessorService == null)
+        return false;
+      float var = 0;
+      bool ret = accessorService.GetFloatValue(channelId, cookie, eventIndex, true,6, ref var);
+      if (ret) value = (System.Single) var;
+      return ret;
+    }
+
+    public System.Single? PumpSpeed
+    { get {
+      if (accessorService == null)
+        return null;
+      float var = 0;
+      bool ret = accessorService.GetFloatValue(channelId, cookie, eventIndex, true,6, ref var);
+      if (!ret) return null;
+      return (System.Single) var;
+    }  }
+
+    public bool Get_AtMin(ref System.Boolean value)
+    {
+      if (accessorService == null)
+        return false;
+      bool var = false;
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,7, ref var);
+      if (ret) value = (System.Boolean) var;
+      return ret;
+    }
+
+    public System.Boolean? AtMin
+    { get {
+      if (accessorService == null)
+        return null;
+      bool var = false;
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,7, ref var);
+      if (!ret) return null;
+      return (System.Boolean) var;
+    }  }
+
+    public bool Get_ParBad(ref System.Boolean value)
+    {
+      if (accessorService == null)
+        return false;
+      bool var = false;
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,8, ref var);
+      if (ret) value = (System.Boolean) var;
+      return ret;
+    }
+
+    public System.Boolean? ParBad
+    { get {
+      if (accessorService == null)
+        return null;
+      bool var = false;
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,8, ref var);
+      if (!ret) return null;
+      return (System.Boolean) var;
+    }  }
+
+    public bool Get_HmiCmin(ref System.Single value)
+    {
+      if (accessorService == null)
+        return false;
+      float var = 0;
+      bool ret = accessorService.GetFloatValue(channelId, cookie, eventIndex, true,9, ref var);
+      if (ret) value = (System.Single) var;
+      return ret;
+    }
+
+    public System.Single? HmiCmin
+    { get {
+      if (accessorService == null)
+        return null;
+      float var = 0;
+      bool ret = accessorService.GetFloatValue(channelId, cookie, eventIndex, true,9, ref var);
+      if (!ret) return null;
+      return (System.Single) var;
+    }  }
+
+    public bool Get_HmiC2(ref System.Single value)
+    {
+      if (accessorService == null)
+        return false;
+      float var = 0;
+      bool ret = accessorService.GetFloatValue(channelId, cookie, eventIndex, true,10, ref var);
+      if (ret) value = (System.Single) var;
+      return ret;
+    }
+
+    public System.Single? HmiC2
+    { get {
+      if (accessorService == null)
+        return null;
+      float var = 0;
+      bool ret = accessorService.GetFloatValue(channelId, cookie, eventIndex, true,10, ref var);
+      if (!ret) return null;
+      return (System.Single) var;
+    }  }
+
+    public bool Get_HmiC3(ref System.Single value)
+    {
+      if (accessorService == null)
+        return false;
+      float var = 0;
+      bool ret = accessorService.GetFloatValue(channelId, cookie, eventIndex, true,11, ref var);
+      if (ret) value = (System.Single) var;
+      return ret;
+    }
+
+    public System.Single? HmiC3
+    { get {
+      if (accessorService == null)
+        return null;
+      float var = 0;
+      bool ret = accessorService.GetFloatValue(channelId, cookie, eventIndex, true,11, ref var);
+      if (!ret) return null;
+      return (System.Single) var;
+    }  }
+
+    public bool Get_HmiCmax(ref System.Single value)
+    {
+      if (accessorService == null)
+        return false;
+      float var = 0;
+      bool ret = accessorService.GetFloatValue(channelId, cookie, eventIndex, true,12, ref var);
+      if (ret) value = (System.Single) var;
+      return ret;
+    }
+
+    public System.Single? HmiCmax
+    { get {
+      if (accessorService == null)
+        return null;
+      float var = 0;
+      bool ret = accessorService.GetFloatValue(channelId, cookie, eventIndex, true,12, ref var);
+      if (!ret) return null;
+      return (System.Single) var;
+    }  }
+
+    public bool Get_HmiFlowFail(ref System.Boolean value)
+    {
+      if (accessorService == null)
+        return false;
+      bool var = false;
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,13, ref var);
+      if (ret) value = (System.Boolean) var;
+      return ret;
+    }
+
+    public System.Boolean? HmiFlowFail
+    { get {
+      if (accessorService == null)
+        return null;
+      bool var = false;
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,13, ref var);
+      if (!ret) return null;
+      return (System.Boolean) var;
+    }  }
+
+    public bool Get_HmiTC2(ref System.Int16 value)
+    {
+      if (accessorService == null)
+        return false;
+      System.Int64 var = 0;
+      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,14, ref var);
+      if (ret) value = (System.Int16) var;
+      return ret;
+    }
+
+    public System.Int16? HmiTC2
+    { get {
+      if (accessorService == null)
+        return null;
+      System.Int64 var = 0;
+      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,14, ref var);
+      if (!ret) return null;
+      return (System.Int16) var;
+    }  }
+
+    public bool Get_HmiTC3(ref System.Int16 value)
+    {
+      if (accessorService == null)
+        return false;
+      System.Int64 var = 0;
+      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,15, ref var);
+      if (ret) value = (System.Int16) var;
+      return ret;
+    }
+
+    public System.Int16? HmiTC3
+    { get {
+      if (accessorService == null)
+        return null;
+      System.Int64 var = 0;
+      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,15, ref var);
+      if (!ret) return null;
+      return (System.Int16) var;
+    }  }
+
+    public bool Get_HmiTDec(ref System.Int16 value)
+    {
+      if (accessorService == null)
+        return false;
+      System.Int64 var = 0;
+      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,16, ref var);
+      if (ret) value = (System.Int16) var;
+      return ret;
+    }
+
+    public System.Int16? HmiTDec
+    { get {
+      if (accessorService == null)
+        return null;
+      System.Int64 var = 0;
+      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,16, ref var);
+      if (!ret) return null;
+      return (System.Int16) var;
+    }  }
+
+    public bool Get_HmiTWait(ref System.Int16 value)
+    {
+      if (accessorService == null)
+        return false;
+      System.Int64 var = 0;
+      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,17, ref var);
+      if (ret) value = (System.Int16) var;
+      return ret;
+    }
+
+    public System.Int16? HmiTWait
+    { get {
+      if (accessorService == null)
+        return null;
+      System.Int64 var = 0;
+      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,17, ref var);
+      if (!ret) return null;
+      return (System.Int16) var;
+    }  }
+
+    public bool Get_HmiFlowSp(ref System.Single value)
+    {
+      if (accessorService == null)
+        return false;
+      float var = 0;
+      bool ret = accessorService.GetFloatValue(channelId, cookie, eventIndex, true,18, ref var);
+      if (ret) value = (System.Single) var;
+      return ret;
+    }
+
+    public System.Single? HmiFlowSp
+    { get {
+      if (accessorService == null)
+        return null;
+      float var = 0;
+      bool ret = accessorService.GetFloatValue(channelId, cookie, eventIndex, true,18, ref var);
+      if (!ret) return null;
+      return (System.Single) var;
+    }  }
+
+
+  }
+
 }
 
 namespace SE.Nereda.Symbols.FeedReactorLogic
@@ -165,6 +562,44 @@ namespace SE.Nereda.Symbols.FeedReactorLogic
 
   }
 
+  public class PUMP_PAREventArgs : System.EventArgs
+  {
+    public PUMP_PAREventArgs()
+    {
+    }
+    private System.Single? Cmin_field = null;
+    public System.Single? Cmin
+    {
+       get { return Cmin_field; }
+       set { Cmin_field = value; }
+    }
+    private NxtControl.GuiFramework.Time? T_C2_field = null;
+    public NxtControl.GuiFramework.Time? T_C2
+    {
+       get { return T_C2_field; }
+       set { T_C2_field = value; }
+    }
+    private NxtControl.GuiFramework.Time? T_C3_field = null;
+    public NxtControl.GuiFramework.Time? T_C3
+    {
+       get { return T_C3_field; }
+       set { T_C3_field = value; }
+    }
+    private NxtControl.GuiFramework.Time? T_FlowLL_field = null;
+    public NxtControl.GuiFramework.Time? T_FlowLL
+    {
+       get { return T_FlowLL_field; }
+       set { T_FlowLL_field = value; }
+    }
+    private System.Single? FlowCapTheo_field = null;
+    public System.Single? FlowCapTheo
+    {
+       get { return FlowCapTheo_field; }
+       set { FlowCapTheo_field = value; }
+    }
+
+  }
+
 }
 
 namespace SE.Nereda.Symbols.FeedReactorLogic
@@ -178,6 +613,8 @@ namespace SE.Nereda.Symbols.FeedReactorLogic
 
     private event EventHandler<SE.Nereda.Symbols.FeedReactorLogic.RESET_BTNEventArgs> RESET_BTN_Fired;
 
+    private event EventHandler<SE.Nereda.Symbols.FeedReactorLogic.PUMP_STSEventArgs> PUMP_STS_Fired;
+
     protected override void OnEndInit()
     {
       if (GRAPH_Fired != null)
@@ -186,6 +623,8 @@ namespace SE.Nereda.Symbols.FeedReactorLogic
         AttachEventInput(1);
       if (RESET_BTN_Fired != null)
         AttachEventInput(2);
+      if (PUMP_STS_Fired != null)
+        AttachEventInput(3);
 
     }
 
@@ -237,6 +676,21 @@ stack Trace:
               NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
 stack Trace:
 {4}","RESET_BTN_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break; 
+        case 3:
+          if (PUMP_STS_Fired != null)
+          {
+            try
+            {
+              PUMP_STS_Fired(this, new SE.Nereda.Symbols.FeedReactorLogic.PUMP_STSEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","PUMP_STS_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
             }
           }
         break; 
@@ -312,6 +766,30 @@ stack Trace:
       if (!ignore_C3Capacity) _values_[2] = C3Capacity;
       if (!ignore_RestartWaitingTime) _values_[3] = RestartWaitingTime;
       return ((IHMIAccessorOutput)this).FireEvent(3, _values_);
+    }
+    public bool FireEvent_PUMP_PAR(System.Single Cmin, NxtControl.GuiFramework.Time T_C2, NxtControl.GuiFramework.Time T_C3, NxtControl.GuiFramework.Time T_FlowLL, System.Single FlowCapTheo)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(4, new object[] {Cmin, T_C2, T_C3, T_FlowLL, FlowCapTheo});
+    }
+    public bool FireEvent_PUMP_PAR(SE.Nereda.Symbols.FeedReactorLogic.PUMP_PAREventArgs ea)
+    {
+      object[] _values_ = new object[5];
+      if (ea.Cmin.HasValue) _values_[0] = ea.Cmin.Value;
+      if (ea.T_C2.HasValue) _values_[1] = ea.T_C2.Value;
+      if (ea.T_C3.HasValue) _values_[2] = ea.T_C3.Value;
+      if (ea.T_FlowLL.HasValue) _values_[3] = ea.T_FlowLL.Value;
+      if (ea.FlowCapTheo.HasValue) _values_[4] = ea.FlowCapTheo.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(4, _values_);
+    }
+    public bool FireEvent_PUMP_PAR(System.Single Cmin, bool ignore_Cmin, NxtControl.GuiFramework.Time T_C2, bool ignore_T_C2, NxtControl.GuiFramework.Time T_C3, bool ignore_T_C3, NxtControl.GuiFramework.Time T_FlowLL, bool ignore_T_FlowLL, System.Single FlowCapTheo, bool ignore_FlowCapTheo)
+    {
+      object[] _values_ = new object[5];
+      if (!ignore_Cmin) _values_[0] = Cmin;
+      if (!ignore_T_C2) _values_[1] = T_C2;
+      if (!ignore_T_C3) _values_[2] = T_C3;
+      if (!ignore_T_FlowLL) _values_[3] = T_FlowLL;
+      if (!ignore_FlowCapTheo) _values_[4] = FlowCapTheo;
+      return ((IHMIAccessorOutput)this).FireEvent(4, _values_);
     }
 
   }
@@ -328,6 +806,8 @@ namespace SE.Nereda.Symbols.FeedReactorLogic
 
     private event EventHandler<SE.Nereda.Symbols.FeedReactorLogic.RESET_BTNEventArgs> RESET_BTN_Fired;
 
+    private event EventHandler<SE.Nereda.Symbols.FeedReactorLogic.PUMP_STSEventArgs> PUMP_STS_Fired;
+
     protected override void OnEndInit()
     {
       if (GRAPH_Fired != null)
@@ -336,6 +816,8 @@ namespace SE.Nereda.Symbols.FeedReactorLogic
         AttachEventInput(1);
       if (RESET_BTN_Fired != null)
         AttachEventInput(2);
+      if (PUMP_STS_Fired != null)
+        AttachEventInput(3);
 
     }
 
@@ -387,6 +869,21 @@ stack Trace:
               NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
 stack Trace:
 {4}","RESET_BTN_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break; 
+        case 3:
+          if (PUMP_STS_Fired != null)
+          {
+            try
+            {
+              PUMP_STS_Fired(this, new SE.Nereda.Symbols.FeedReactorLogic.PUMP_STSEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","PUMP_STS_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
             }
           }
         break; 
@@ -462,6 +959,30 @@ stack Trace:
       if (!ignore_C3Capacity) _values_[2] = C3Capacity;
       if (!ignore_RestartWaitingTime) _values_[3] = RestartWaitingTime;
       return ((IHMIAccessorOutput)this).FireEvent(3, _values_);
+    }
+    public bool FireEvent_PUMP_PAR(System.Single Cmin, NxtControl.GuiFramework.Time T_C2, NxtControl.GuiFramework.Time T_C3, NxtControl.GuiFramework.Time T_FlowLL, System.Single FlowCapTheo)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(4, new object[] {Cmin, T_C2, T_C3, T_FlowLL, FlowCapTheo});
+    }
+    public bool FireEvent_PUMP_PAR(SE.Nereda.Symbols.FeedReactorLogic.PUMP_PAREventArgs ea)
+    {
+      object[] _values_ = new object[5];
+      if (ea.Cmin.HasValue) _values_[0] = ea.Cmin.Value;
+      if (ea.T_C2.HasValue) _values_[1] = ea.T_C2.Value;
+      if (ea.T_C3.HasValue) _values_[2] = ea.T_C3.Value;
+      if (ea.T_FlowLL.HasValue) _values_[3] = ea.T_FlowLL.Value;
+      if (ea.FlowCapTheo.HasValue) _values_[4] = ea.FlowCapTheo.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(4, _values_);
+    }
+    public bool FireEvent_PUMP_PAR(System.Single Cmin, bool ignore_Cmin, NxtControl.GuiFramework.Time T_C2, bool ignore_T_C2, NxtControl.GuiFramework.Time T_C3, bool ignore_T_C3, NxtControl.GuiFramework.Time T_FlowLL, bool ignore_T_FlowLL, System.Single FlowCapTheo, bool ignore_FlowCapTheo)
+    {
+      object[] _values_ = new object[5];
+      if (!ignore_Cmin) _values_[0] = Cmin;
+      if (!ignore_T_C2) _values_[1] = T_C2;
+      if (!ignore_T_C3) _values_[2] = T_C3;
+      if (!ignore_T_FlowLL) _values_[3] = T_FlowLL;
+      if (!ignore_FlowCapTheo) _values_[4] = FlowCapTheo;
+      return ((IHMIAccessorOutput)this).FireEvent(4, _values_);
     }
 
   }
@@ -478,6 +999,8 @@ namespace SE.Nereda.Faceplates.FeedReactorLogic
 
     private event EventHandler<SE.Nereda.Symbols.FeedReactorLogic.RESET_BTNEventArgs> RESET_BTN_Fired;
 
+    private event EventHandler<SE.Nereda.Symbols.FeedReactorLogic.PUMP_STSEventArgs> PUMP_STS_Fired;
+
     protected override void OnEndInit()
     {
       if (GRAPH_Fired != null)
@@ -486,6 +1009,8 @@ namespace SE.Nereda.Faceplates.FeedReactorLogic
         AttachEventInput(1);
       if (RESET_BTN_Fired != null)
         AttachEventInput(2);
+      if (PUMP_STS_Fired != null)
+        AttachEventInput(3);
 
     }
 
@@ -537,6 +1062,21 @@ stack Trace:
               NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
 stack Trace:
 {4}","RESET_BTN_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break; 
+        case 3:
+          if (PUMP_STS_Fired != null)
+          {
+            try
+            {
+              PUMP_STS_Fired(this, new SE.Nereda.Symbols.FeedReactorLogic.PUMP_STSEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","PUMP_STS_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
             }
           }
         break; 
@@ -612,6 +1152,30 @@ stack Trace:
       if (!ignore_C3Capacity) _values_[2] = C3Capacity;
       if (!ignore_RestartWaitingTime) _values_[3] = RestartWaitingTime;
       return ((IHMIAccessorOutput)this).FireEvent(3, _values_);
+    }
+    public bool FireEvent_PUMP_PAR(System.Single Cmin, NxtControl.GuiFramework.Time T_C2, NxtControl.GuiFramework.Time T_C3, NxtControl.GuiFramework.Time T_FlowLL, System.Single FlowCapTheo)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(4, new object[] {Cmin, T_C2, T_C3, T_FlowLL, FlowCapTheo});
+    }
+    public bool FireEvent_PUMP_PAR(SE.Nereda.Symbols.FeedReactorLogic.PUMP_PAREventArgs ea)
+    {
+      object[] _values_ = new object[5];
+      if (ea.Cmin.HasValue) _values_[0] = ea.Cmin.Value;
+      if (ea.T_C2.HasValue) _values_[1] = ea.T_C2.Value;
+      if (ea.T_C3.HasValue) _values_[2] = ea.T_C3.Value;
+      if (ea.T_FlowLL.HasValue) _values_[3] = ea.T_FlowLL.Value;
+      if (ea.FlowCapTheo.HasValue) _values_[4] = ea.FlowCapTheo.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(4, _values_);
+    }
+    public bool FireEvent_PUMP_PAR(System.Single Cmin, bool ignore_Cmin, NxtControl.GuiFramework.Time T_C2, bool ignore_T_C2, NxtControl.GuiFramework.Time T_C3, bool ignore_T_C3, NxtControl.GuiFramework.Time T_FlowLL, bool ignore_T_FlowLL, System.Single FlowCapTheo, bool ignore_FlowCapTheo)
+    {
+      object[] _values_ = new object[5];
+      if (!ignore_Cmin) _values_[0] = Cmin;
+      if (!ignore_T_C2) _values_[1] = T_C2;
+      if (!ignore_T_C3) _values_[2] = T_C3;
+      if (!ignore_T_FlowLL) _values_[3] = T_FlowLL;
+      if (!ignore_FlowCapTheo) _values_[4] = FlowCapTheo;
+      return ((IHMIAccessorOutput)this).FireEvent(4, _values_);
     }
 
   }
@@ -628,6 +1192,8 @@ namespace SE.Nereda.Symbols.FeedReactorLogic
 
     private event EventHandler<SE.Nereda.Symbols.FeedReactorLogic.RESET_BTNEventArgs> RESET_BTN_Fired;
 
+    private event EventHandler<SE.Nereda.Symbols.FeedReactorLogic.PUMP_STSEventArgs> PUMP_STS_Fired;
+
     protected override void OnEndInit()
     {
       if (GRAPH_Fired != null)
@@ -636,6 +1202,8 @@ namespace SE.Nereda.Symbols.FeedReactorLogic
         AttachEventInput(1);
       if (RESET_BTN_Fired != null)
         AttachEventInput(2);
+      if (PUMP_STS_Fired != null)
+        AttachEventInput(3);
 
     }
 
@@ -687,6 +1255,21 @@ stack Trace:
               NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
 stack Trace:
 {4}","RESET_BTN_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break; 
+        case 3:
+          if (PUMP_STS_Fired != null)
+          {
+            try
+            {
+              PUMP_STS_Fired(this, new SE.Nereda.Symbols.FeedReactorLogic.PUMP_STSEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","PUMP_STS_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
             }
           }
         break; 
@@ -762,6 +1345,30 @@ stack Trace:
       if (!ignore_C3Capacity) _values_[2] = C3Capacity;
       if (!ignore_RestartWaitingTime) _values_[3] = RestartWaitingTime;
       return ((IHMIAccessorOutput)this).FireEvent(3, _values_);
+    }
+    public bool FireEvent_PUMP_PAR(System.Single Cmin, NxtControl.GuiFramework.Time T_C2, NxtControl.GuiFramework.Time T_C3, NxtControl.GuiFramework.Time T_FlowLL, System.Single FlowCapTheo)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(4, new object[] {Cmin, T_C2, T_C3, T_FlowLL, FlowCapTheo});
+    }
+    public bool FireEvent_PUMP_PAR(SE.Nereda.Symbols.FeedReactorLogic.PUMP_PAREventArgs ea)
+    {
+      object[] _values_ = new object[5];
+      if (ea.Cmin.HasValue) _values_[0] = ea.Cmin.Value;
+      if (ea.T_C2.HasValue) _values_[1] = ea.T_C2.Value;
+      if (ea.T_C3.HasValue) _values_[2] = ea.T_C3.Value;
+      if (ea.T_FlowLL.HasValue) _values_[3] = ea.T_FlowLL.Value;
+      if (ea.FlowCapTheo.HasValue) _values_[4] = ea.FlowCapTheo.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(4, _values_);
+    }
+    public bool FireEvent_PUMP_PAR(System.Single Cmin, bool ignore_Cmin, NxtControl.GuiFramework.Time T_C2, bool ignore_T_C2, NxtControl.GuiFramework.Time T_C3, bool ignore_T_C3, NxtControl.GuiFramework.Time T_FlowLL, bool ignore_T_FlowLL, System.Single FlowCapTheo, bool ignore_FlowCapTheo)
+    {
+      object[] _values_ = new object[5];
+      if (!ignore_Cmin) _values_[0] = Cmin;
+      if (!ignore_T_C2) _values_[1] = T_C2;
+      if (!ignore_T_C3) _values_[2] = T_C3;
+      if (!ignore_T_FlowLL) _values_[3] = T_FlowLL;
+      if (!ignore_FlowCapTheo) _values_[4] = FlowCapTheo;
+      return ((IHMIAccessorOutput)this).FireEvent(4, _values_);
     }
 
   }

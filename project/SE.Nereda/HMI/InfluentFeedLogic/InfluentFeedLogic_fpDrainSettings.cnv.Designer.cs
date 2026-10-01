@@ -41,7 +41,7 @@ namespace SE.Nereda.Faceplates.InfluentFeedLogic
 			// MixerLogic
 			// 
 			this.MixerLogic.BeginInit();
-			this.MixerLogic.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 8D, 224D);
+			this.MixerLogic.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 8D, 592D);
 			this.MixerLogic.Name = "MixerLogic";
 			this.MixerLogic.SecurityToken = ((uint)(4294967295u));
 			this.MixerLogic.TagName = "Mixer01Logic";
@@ -49,12 +49,12 @@ namespace SE.Nereda.Faceplates.InfluentFeedLogic
 			// 
 			// fpDrainSettings
 			// 
-			this.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(392D)), ((float)(288D)));
+			this.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(440D)), ((float)(656D)));
 			this.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(154)), ((byte)(154)), ((byte)(154))));
 			this.Shapes.AddRange(new System.ComponentModel.IComponent[] {
 			this.Drain_InfluentFeed,
 			this.MixerLogic});
-			this.Size = new System.Drawing.Size(392, 288);
+			this.Size = new System.Drawing.Size(440, 656);
 			this.Title = "INFLUNET Settings";
 
 		}
