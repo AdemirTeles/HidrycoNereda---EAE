@@ -26,7 +26,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_4a20
 
 		void BtnResetAlarmesClick(object sender, EventArgs e)
 		{
-			FireEvent_E_RESET_ALARMES();
+			FireEvent_E_RESET_ALARMES(true);
 		}
 
 	}

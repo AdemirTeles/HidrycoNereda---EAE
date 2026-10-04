@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="ff2d6f0e-df13-418d-9f9c-e0a0b49b51c7" Name="intValueChange" Comment="Basic Function Block Type" Namespace="Hidryco.HidrycoLib">
+  <Identification Standard="61499-2" />
+  <VersionInfo Version="0.0" Author=" " Date="31/08/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="6013F178B9ED7589" Name="REQ" Comment="Normal Execution Request">
+        <With Var="IN1" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="FB38171E39589958" Name="CNF" Comment="Execution Confirmation">
+        <With Var="OUT1" />
+      </Event>
+      <Event ID="232ECE6C2C9DF5EC" Name="CHD" />
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="A706B74DE5172AFA" Name="IN1" Type="INT" Comment="Argument" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="1013399087BD5DD7" Name="OUT1" Type="INT" Comment="Result" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="f1fbcbfa-1bc9-4f19-a89b-9081ec6a1618">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="alg_check" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="808.9412" y="525.4117" />
+      <ECState Name="STATE1" x="828" y="992">
+        <ECAction Algorithm="alg_check" Output="CNF" />
+        <ECAction Output="CHD" />
+      </ECState>
+      <ECTransition Source="START" Destination="STATE1" Condition="REQ" x="900.9627" y="755.6449">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="228.9803,173.5635,230.2133,203.7488" />
+      </ECTransition>
+      <ECTransition Source="STATE1" Destination="START" Condition="1" x="818.0076" y="833.7058">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="205.2341,229.7691,204.0012,199.5838" />
+      </ECTransition>
+    </ECC>
+    <Algorithm ID="946abc46-ea0c-4461-9c11-4a07a0ed1d7e" Name="alg_check">
+      <ST><![CDATA[CHD := OUT1 <> IN1;
+
+OUT1 := IN1;
+
+;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

@@ -42,7 +42,7 @@ namespace Hidryco.HidrycoLib.Symbols.Estocagem_Lodo
 			this.line11 = new NxtControl.GuiFramework.Line();
 			this.LIT_900_01 = new Hidryco.HidrycoLib.Symbols.Sensor_Nivel_4a20.sDefault();
 			this.LIT_900_02 = new Hidryco.HidrycoLib.Symbols.Sensor_Nivel_4a20.sDefault();
-			this.Revezamento_2_Motores_ok1 = new Hidryco.HidrycoLib.Symbols.Revezamento_2_Motores_ok.sDefault();
+			this.Revezamento_2_Motores_ok1 = new Hidryco.HidrycoLib.Symbols.Revezamento_2_Motores.sDefault();
 			this.line12 = new NxtControl.GuiFramework.Line();
 			this.polyline1 = new NxtControl.GuiFramework.Polyline();
 			this.Valvula_Lodo1 = new Hidryco.HidrycoLib.Symbols.Equipamento_On_Off.sValvulaHorizontal();
@@ -360,7 +360,7 @@ namespace Hidryco.HidrycoLib.Symbols.Estocagem_Lodo
 		private NxtControl.GuiFramework.Line line11;
 		private Hidryco.HidrycoLib.Symbols.Sensor_Nivel_4a20.sDefault LIT_900_01;
 		private Hidryco.HidrycoLib.Symbols.Sensor_Nivel_4a20.sDefault LIT_900_02;
-		private Hidryco.HidrycoLib.Symbols.Revezamento_2_Motores_ok.sDefault Revezamento_2_Motores_ok1;
+		private Hidryco.HidrycoLib.Symbols.Revezamento_2_Motores.sDefault Revezamento_2_Motores_ok1;
 		private NxtControl.GuiFramework.Line line12;
 		private NxtControl.GuiFramework.Polyline polyline1;
 		private Hidryco.HidrycoLib.Symbols.Equipamento_On_Off.sValvulaHorizontal Valvula_Lodo1;

@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Criado pelo EcoStruxure Automation Expert.
  * Usuário:  
  * Data: 02/03/2026
@@ -91,7 +91,7 @@ namespace Hidryco.HidrycoLib.Faceplates.BloqueioAtivaDesativa
 			this.cmdHabilita.Font = new NxtControl.Drawing.Font("ButtonFont");
 			this.cmdHabilita.FontScale = false;
 			this.cmdHabilita.Name = "cmdHabilita";
-			this.cmdHabilita.TagName = "cmdHabilita";
+			this.cmdHabilita.TagName = "CMD_HABILITA";
 			this.cmdHabilita.TrueImage = new NxtControl.Drawing.ImageHolder();
 			this.cmdHabilita.TrueImageDisabled = new NxtControl.Drawing.ImageHolder();
 			this.cmdHabilita.TrueText = "Desabilitar";

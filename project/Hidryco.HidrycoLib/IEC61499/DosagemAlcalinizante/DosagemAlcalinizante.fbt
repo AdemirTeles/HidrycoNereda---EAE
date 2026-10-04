@@ -22,7 +22,7 @@
     <FB ID="7" Name="DO_800_04" Type="Motor_Dosagem" x="5160" y="2700" Namespace="Hidryco.HidrycoLib" />
     <FB ID="8" Name="DO_800_05" Type="Motor_Dosagem" x="5160" y="3780" Namespace="Hidryco.HidrycoLib" />
     <FB ID="10" Name="LIT_800_03" Type="Sensor_Nivel_4a20" x="5840" y="4940" Namespace="Hidryco.HidrycoLib" />
-    <FB ID="11" Name="Revezamento_3_Motores_ok1" Type="Revezamento_3_Motores_ok" x="280" y="3460" Namespace="Hidryco.HidrycoLib">
+    <FB ID="11" Name="Revezamento" Type="Revezamento_3_Motores" x="280" y="3460" Namespace="Hidryco.HidrycoLib">
       <Parameter Name="$stsDisponivelEquipamento3" Value="FALSE" />
     </FB>
     <FB ID="12" Name="comandoAutomatico1" Type="comandoAutomatico" x="2720" y="3280" Namespace="Hidryco.HidrycoLib">
@@ -35,19 +35,15 @@
     <FB ID="16" Name="IThis" Type="DosagemAlcalinizante_HMI" x="3260" y="280" Namespace="Hidryco.HidrycoLib">
       <Parameter Name="$7E9832534733A120" Value="TRUE" />
     </FB>
-    <FB ID="17" Name="PID_DO_800" Type="PID" x="2920" y="1140" Namespace="Hidryco.HidrycoLib" />
-    <FB ID="18" Name="comandoAutomatico2" Type="comandoAutomatico" x="2580" y="2200" Namespace="Hidryco.HidrycoLib">
+    <FB ID="17" Name="PID" Type="PID" x="2920" y="1140" Namespace="Hidryco.HidrycoLib" />
+    <FB ID="18" Name="comandoAutomatico2" Type="comandoAutomatico" x="2500" y="2200" Namespace="Hidryco.HidrycoLib">
       <Parameter Name="$stsRevezamentoHabilitado" Value="FALSE" />
       <Parameter Name="$stsNecessidadeHabilitado" Value="FALSE" />
       <Parameter Name="$stsDisponivelEquipamento2" Value="FALSE" />
       <Parameter Name="$stsDisponivelEquipamento3" Value="FALSE" />
     </FB>
-    <FB ID="19" Name="BloqueioAtivaDesativa1" Type="BloqueioAtivaDesativa" x="3760" y="4300" Namespace="Hidryco.HidrycoLib">
-      <Parameter Name="$modoOperacao" Value="1" />
-    </FB>
-    <FB ID="20" Name="BloqueioAtivaDesativa2" Type="BloqueioAtivaDesativa" x="2360" y="4700" Namespace="Hidryco.HidrycoLib">
-      <Parameter Name="$modoOperacao" Value="0" />
-    </FB>
+    <FB ID="19" Name="Bloq_800_04" Type="BloqueioAtivaDesativa" x="3760" y="4300" Namespace="Hidryco.HidrycoLib" />
+    <FB ID="20" Name="Bloq_800_05" Type="BloqueioAtivaDesativa" x="2360" y="4700" Namespace="Hidryco.HidrycoLib" />
     <Input Name="stsSensor40QT0005" x="1340" y="1312" Type="Data" />
     <Input ID="E_ATUALIZA_SENSOR" Name="REQ" x="1340" y="1252" Type="Event" />
     <Input ID="7468B341DA1AFDBE" Name="stsEmergencia" x="1340" y="1392" Type="Data" />
@@ -173,16 +169,10 @@
       <Connection Source="$10.E_ATUALIZA_SENSOR" Destination="$19.E_ATUALIZA_SENSOR">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$10.E_ATUALIZA_FALHA_SENSOR" Destination="$19.E_ATUALIZA_SENSOR">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
       <Connection Source="$10.E_AUALIZA_SENSOR_HABILITADO" Destination="$20.E_ATUALIZA_SENSOR">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
       <Connection Source="$10.E_ATUALIZA_SENSOR" Destination="$20.E_ATUALIZA_SENSOR">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$10.E_ATUALIZA_FALHA_SENSOR" Destination="$20.E_ATUALIZA_SENSOR">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
       <Connection Source="$13.FIRST_INIT" Destination="$16.AB8817508E95161" dx1="68.0835" />
@@ -253,7 +243,7 @@
           </Points>
         </Points>
       </Connection>
-      <Connection Source="$18.E_ATUALIZA_COMANDO_AUTOMATICO" Destination="$6.REQ" dx1="50" />
+      <Connection Source="$18.E_ATUALIZA_COMANDO_AUTOMATICO" Destination="$6.REQ" dx1="40" />
       <Connection Source="$19.E_ATUALIZA_BLOQUEIO" Destination="$6.REQ" dx1="50" />
       <Connection Source="$20.E_ATUALIZA_BLOQUEIO" Destination="$7.REQ">
         <Points>
@@ -320,8 +310,8 @@
       <Connection Source="$16.89BF3FE22E96B211" Destination="$13.ACK_FIRST" dx1="50" dx2="69.99988" dy="-170" />
     </EventConnections>
     <DataConnections>
-      <Connection Source="$11.stsRevezamentoHabilitado" Destination="$12.stsRevezamentoHabilitado" dx1="118.3335" />
-      <Connection Source="$11.stsEquipamentoPrincipal" Destination="$12.stsEquipamentoPrincipal" dx1="138.3335" />
+      <Connection Source="$11.stsRevezamentoHabilitado" Destination="$12.stsRevezamentoHabilitado" dx1="98.3335" />
+      <Connection Source="$11.stsEquipamentoPrincipal" Destination="$12.stsEquipamentoPrincipal" dx1="118.3335" />
       <Connection Source="$7.stsDisponivelAutomatico" Destination="$11.stsDisponivelEquipamento1">
         <Points>
           <Points>
@@ -449,22 +439,20 @@
             <Y>767.5</Y>
           </Points>
           <Points>
-            <X>607.5</X>
+            <X>587.5</X>
             <Y>767.5</Y>
           </Points>
           <Points>
-            <X>607.5</X>
+            <X>587.5</X>
             <Y>715</Y>
           </Points>
           <Points>
-            <X>640</X>
+            <X>620</X>
             <Y>715</Y>
           </Points>
         </Points>
       </Connection>
-      <Connection Source="$18.cmdAutomaticoEquipamento1" Destination="$6.cmdLigarAutomatico" dx1="70" />
-      <Connection Source="$19.stsBloqueioManual" Destination="$6.bloqueioManual" dx1="70" />
-      <Connection Source="$19.stsBloqueioAutomatico" Destination="$6.bloqueioAutomatico" dx1="90" />
+      <Connection Source="$19.stsBloqueioAutomatico" Destination="$6.bloqueioAutomatico" dx1="70" />
       <Connection Source="$10.stsSensorHabilitado" Destination="$19.stsSensorHabilitado">
         <Points>
           <Points>
@@ -472,11 +460,11 @@
             <Y>1325</Y>
           </Points>
           <Points>
-            <X>1705.19788</X>
+            <X>1700.19788</X>
             <Y>1325</Y>
           </Points>
           <Points>
-            <X>1705.19788</X>
+            <X>1700.19788</X>
             <Y>1135</Y>
           </Points>
           <Points>
@@ -492,11 +480,11 @@
             <Y>1340</Y>
           </Points>
           <Points>
-            <X>1710.19788</X>
+            <X>1705.19788</X>
             <Y>1340</Y>
           </Points>
           <Points>
-            <X>1710.19788</X>
+            <X>1705.19788</X>
             <Y>1150</Y>
           </Points>
           <Points>
@@ -512,11 +500,11 @@
             <Y>1355</Y>
           </Points>
           <Points>
-            <X>1715.19788</X>
+            <X>1710.19788</X>
             <Y>1355</Y>
           </Points>
           <Points>
-            <X>1715.19788</X>
+            <X>1710.19788</X>
             <Y>1165</Y>
           </Points>
           <Points>
@@ -525,51 +513,127 @@
           </Points>
         </Points>
       </Connection>
-      <Connection Source="$10.stsSensorHabilitado" Destination="$20.stsSensorHabilitado" dx1="119.2085" dx2="90" dy="270" />
-      <Connection Source="$10.stsSensor" Destination="$20.stsSensor" dx1="139.2085" dx2="70" dy="210" />
-      <Connection Source="$10.stsFalhaSensor" Destination="$20.stsFalhaSensor" dx1="159.2085" dx2="50" dy="150" />
-      <Connection Source="$20.stsBloqueioManual" Destination="$7.stsBloqueioManual">
+      <Connection Source="$10.stsSensorHabilitado" Destination="$20.stsSensorHabilitado">
         <Points>
           <Points>
-            <X>865.4844</X>
+            <X>1677.69788</X>
+            <Y>1325</Y>
+          </Points>
+          <Points>
+            <X>1702.5</X>
+            <Y>1325</Y>
+          </Points>
+          <Points>
+            <X>1702.5</X>
+            <Y>1217.5</Y>
+          </Points>
+          <Points>
+            <X>1447.5</X>
+            <Y>1217.5</Y>
+          </Points>
+          <Points>
+            <X>1447.5</X>
+            <Y>1287.5</Y>
+          </Points>
+          <Points>
+            <X>567.5</X>
+            <Y>1287.5</Y>
+          </Points>
+          <Points>
+            <X>567.5</X>
             <Y>1235</Y>
           </Points>
           <Points>
-            <X>882.9844</X>
+            <X>585</X>
             <Y>1235</Y>
-          </Points>
-          <Points>
-            <X>882.9844</X>
-            <Y>1057.5</Y>
-          </Points>
-          <Points>
-            <X>1182.5</X>
-            <Y>1057.5</Y>
-          </Points>
-          <Points>
-            <X>1182.5</X>
-            <Y>765</Y>
-          </Points>
-          <Points>
-            <X>1285</X>
-            <Y>765</Y>
           </Points>
         </Points>
       </Connection>
-      <Connection Source="$20.stsBloqueioManual" Destination="$8.stsBloqueioManual" dx1="70" />
-      <Connection Source="$20.stsBloqueioAutomatico" Destination="$8.stsBloqueioAutomatico" dx1="90" />
+      <Connection Source="$10.stsSensor" Destination="$20.stsSensor">
+        <Points>
+          <Points>
+            <X>1677.69788</X>
+            <Y>1340</Y>
+          </Points>
+          <Points>
+            <X>1707.5</X>
+            <Y>1340</Y>
+          </Points>
+          <Points>
+            <X>1707.5</X>
+            <Y>1217.5</Y>
+          </Points>
+          <Points>
+            <X>1447.5</X>
+            <Y>1217.5</Y>
+          </Points>
+          <Points>
+            <X>1447.5</X>
+            <Y>1287.5</Y>
+          </Points>
+          <Points>
+            <X>572.5</X>
+            <Y>1287.5</Y>
+          </Points>
+          <Points>
+            <X>572.5</X>
+            <Y>1250</Y>
+          </Points>
+          <Points>
+            <X>585</X>
+            <Y>1250</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$10.stsFalhaSensor" Destination="$20.stsFalhaSensor">
+        <Points>
+          <Points>
+            <X>1677.69788</X>
+            <Y>1355</Y>
+          </Points>
+          <Points>
+            <X>1712.5</X>
+            <Y>1355</Y>
+          </Points>
+          <Points>
+            <X>1712.5</X>
+            <Y>1217.5</Y>
+          </Points>
+          <Points>
+            <X>1447.5</X>
+            <Y>1217.5</Y>
+          </Points>
+          <Points>
+            <X>1447.5</X>
+            <Y>1287.5</Y>
+          </Points>
+          <Points>
+            <X>577.5</X>
+            <Y>1287.5</Y>
+          </Points>
+          <Points>
+            <X>577.5</X>
+            <Y>1265</Y>
+          </Points>
+          <Points>
+            <X>585</X>
+            <Y>1265</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$20.stsBloqueioAutomatico" Destination="$8.stsBloqueioAutomatico" dx1="70" />
       <Connection Source="$20.stsBloqueioAutomatico" Destination="$7.stsBloqueioAutomatico">
         <Points>
           <Points>
             <X>865.4844</X>
-            <Y>1250</Y>
+            <Y>1235</Y>
           </Points>
           <Points>
-            <X>887.9844</X>
-            <Y>1250</Y>
+            <X>882.9844</X>
+            <Y>1235</Y>
           </Points>
           <Points>
-            <X>887.9844</X>
+            <X>882.9844</X>
             <Y>1057.5</Y>
           </Points>
           <Points>

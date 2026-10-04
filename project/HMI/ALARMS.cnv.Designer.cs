@@ -1,10 +1,3 @@
-﻿/*
- * Created by EcoStruxure Automation Expert.
- * User:  
- * Date: 6/11/2026
- * Time: 3:47 PM
- * 
- */
 using System;
 using System.ComponentModel;
 using System.Collections;

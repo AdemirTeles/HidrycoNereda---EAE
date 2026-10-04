@@ -59,7 +59,7 @@ namespace Hidryco.HidrycoLib.Symbols.DosagemAlcalinizante
 			this.Motor_Dosagem_ok2 = new Hidryco.HidrycoLib.Symbols.Motor_Dosagem.sBomba();
 			this.Sensor_Nivel_4a201 = new Hidryco.HidrycoLib.Symbols.Sensor_Nivel_4a20.sDefault();
 			this.PID1 = new Hidryco.HidrycoLib.Symbols.PID.sDefault();
-			this.Revezamento_3_Motores_ok1 = new Hidryco.HidrycoLib.Symbols.Revezamento_3_Motores_ok.sDefault();
+			this.Revezamento_3_Motores_ok1 = new Hidryco.HidrycoLib.Symbols.Revezamento_3_Motores.sDefault();
 			this.roundedRectangle2 = new NxtControl.GuiFramework.RoundedRectangle();
 			this.resetFalhasProcesso = new NxtControl.GuiFramework.DrawnButton();
 			this.rectangle3 = new NxtControl.GuiFramework.Rectangle();
@@ -342,7 +342,7 @@ namespace Hidryco.HidrycoLib.Symbols.DosagemAlcalinizante
 			this.PID1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 984D, 304D);
 			this.PID1.Name = "PID1";
 			this.PID1.SecurityToken = ((uint)(4294967295u));
-			this.PID1.TagName = "PID_DO_800";
+			this.PID1.TagName = "PID";
 			this.PID1.EndInit();
 			// 
 			// Revezamento_3_Motores_ok1
@@ -351,7 +351,7 @@ namespace Hidryco.HidrycoLib.Symbols.DosagemAlcalinizante
 			this.Revezamento_3_Motores_ok1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 984D, 352D);
 			this.Revezamento_3_Motores_ok1.Name = "Revezamento_3_Motores_ok1";
 			this.Revezamento_3_Motores_ok1.SecurityToken = ((uint)(4294967295u));
-			this.Revezamento_3_Motores_ok1.TagName = "Revezamento_3_Motores_ok1";
+			this.Revezamento_3_Motores_ok1.TagName = "Revezamento";
 			this.Revezamento_3_Motores_ok1.EndInit();
 			// 
 			// roundedRectangle2
@@ -399,7 +399,7 @@ namespace Hidryco.HidrycoLib.Symbols.DosagemAlcalinizante
 			this.BloqueioAtivaDesativa1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 352D, 424D);
 			this.BloqueioAtivaDesativa1.Name = "BloqueioAtivaDesativa1";
 			this.BloqueioAtivaDesativa1.SecurityToken = ((uint)(4294967295u));
-			this.BloqueioAtivaDesativa1.TagName = "BloqueioAtivaDesativa1";
+			this.BloqueioAtivaDesativa1.TagName = "Bloq_800_04";
 			this.BloqueioAtivaDesativa1.EndInit();
 			// 
 			// BloqueioAtivaDesativa2
@@ -408,7 +408,7 @@ namespace Hidryco.HidrycoLib.Symbols.DosagemAlcalinizante
 			this.BloqueioAtivaDesativa2.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 352D, 472D);
 			this.BloqueioAtivaDesativa2.Name = "BloqueioAtivaDesativa2";
 			this.BloqueioAtivaDesativa2.SecurityToken = ((uint)(4294967295u));
-			this.BloqueioAtivaDesativa2.TagName = "BloqueioAtivaDesativa2";
+			this.BloqueioAtivaDesativa2.TagName = "Bloq_800_05";
 			this.BloqueioAtivaDesativa2.EndInit();
 			// 
 			// freeText4
@@ -534,7 +534,7 @@ namespace Hidryco.HidrycoLib.Symbols.DosagemAlcalinizante
 		private Hidryco.HidrycoLib.Symbols.Motor_Dosagem.sBomba Motor_Dosagem_ok2;
 		private Hidryco.HidrycoLib.Symbols.Sensor_Nivel_4a20.sDefault Sensor_Nivel_4a201;
 		private Hidryco.HidrycoLib.Symbols.PID.sDefault PID1;
-		private Hidryco.HidrycoLib.Symbols.Revezamento_3_Motores_ok.sDefault Revezamento_3_Motores_ok1;
+		private Hidryco.HidrycoLib.Symbols.Revezamento_3_Motores.sDefault Revezamento_3_Motores_ok1;
 		private NxtControl.GuiFramework.DrawnButton resetFalhasProcesso;
 		private NxtControl.GuiFramework.Rectangle rectangle3;
 		private NxtControl.GuiFramework.Line line18;

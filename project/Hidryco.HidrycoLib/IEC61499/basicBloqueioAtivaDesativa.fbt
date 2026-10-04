@@ -5,31 +5,22 @@
   <VersionInfo Version="0.0" Author=" " Date="02/03/2026" Remarks="Template" />
   <InterfaceList>
     <EventInputs>
-      <Event Name="INIT" Comment="Initialization Request">
-        <With Var="modoOperacao" />
-      </Event>
-      <Event Name="E_ATUALIZA_SENSOR">
-        <With Var="stsSensor" />
+      <Event ID="21F55DF80FB38702" Name="REQ">
+        <With Var="cmdHabilita" />
         <With Var="stsSensorHabilitado" />
         <With Var="stsFalhaSensor" />
-      </Event>
-      <Event Name="E_ATUALIZA_SETPOINT">
+        <With Var="stsSensor" />
         <With Var="stpAtivaBloqueio" />
         <With Var="stpDesativaBloqueio" />
-        <With Var="modoOperacao" />
-        <With Var="cmdHabilita" />
       </Event>
     </EventInputs>
     <EventOutputs>
-      <Event Name="INITO" Comment="Initialization Confirm" />
-      <Event Name="E_ATUALIZA_BLOQUEIO">
-        <With Var="stsBloqueioAutomatico" />
-        <With Var="stsBloqueioManual" />
+      <Event ID="9A683898C46F5B59" Name="CNF">
+        <With Var="stsBloqueio" />
       </Event>
     </EventOutputs>
     <InputVars>
       <VarDeclaration Name="cmdHabilita" Type="BOOL" />
-      <VarDeclaration Name="modoOperacao" Type="UINT" InitialValue="0" Comment="0 - Ativa bloqueio abaixo de setpointAtivaBloqueio, 1 - Ativa bloqueio acima de setpointAtivaBloqueio" />
       <VarDeclaration Name="stsSensorHabilitado" Type="BOOL" />
       <VarDeclaration Name="stsFalhaSensor" Type="BOOL" />
       <VarDeclaration Name="stsSensor" Type="REAL" />
@@ -37,84 +28,72 @@
       <VarDeclaration Name="stpDesativaBloqueio" Type="REAL" />
     </InputVars>
     <OutputVars>
-      <VarDeclaration Name="stsBloqueioAutomatico" Type="BOOL" />
-      <VarDeclaration Name="stsBloqueioManual" Type="BOOL" />
+      <VarDeclaration ID="stsBloqueioAutomatico" Name="stsBloqueio" Type="BOOL" />
     </OutputVars>
   </InterfaceList>
-  <BasicFB>
-    <Attribute Name="FBType.Basic.Algorithm.Order" Value="INIT,GerenciaBloqueioAbaixo,GerenciaBloqueioAcima,AtivaBloqueio" />
+  <BasicFB ID="7197abd0-b922-4ddd-8be5-832938fb5ed8">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="algREQ" />
+    <InternalVars>
+      <VarDeclaration ID="C05B7820A221C00D" Name="bBloqueioNivel" Type="BOOL" />
+      <VarDeclaration ID="409D44FE31DBA2A8" Name="bBloqueioAnt" Type="BOOL" />
+      <VarDeclaration ID="6DE1117F0C1F1C73" Name="bMudou" Type="BOOL" />
+    </InternalVars>
     <ECC>
       <ECState Name="START" Comment="Initial State" x="1640.941" y="517.4117" />
-      <ECState Name="SensorOK" x="2320" y="988.0001" />
-      <ECState Name="STATE1" x="3540" y="1272">
-        <ECAction Algorithm="GerenciaBloqueioAbaixo" Output="E_ATUALIZA_BLOQUEIO" />
+      <ECState Name="AVALIA" x="1708" y="916">
+        <ECAction Algorithm="algREQ" />
       </ECState>
-      <ECState Name="STATE2" x="2328" y="1648">
-        <ECAction Algorithm="GerenciaBloqueioAcima" Output="E_ATUALIZA_BLOQUEIO" />
+      <ECState Name="NOTIFICA" x="1804" y="1416">
+        <ECAction Output="CNF" />
       </ECState>
-      <ECState Name="STATE3" x="735.9999" y="1184">
-        <ECAction Algorithm="AtivaBloqueio" Output="E_ATUALIZA_BLOQUEIO" />
-      </ECState>
-      <ECTransition Source="START" Destination="SensorOK" Condition="(cmdHabilita AND stsSensorHabilitado AND NOT stsFalhaSensor)" x="2039.605" y="689.6149">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="488.643,152.1149,533.4164,183.3953" />
+      <ECTransition Source="START" Destination="AVALIA" Condition="REQ" x="1757.344" y="704.2627">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="441.2086,162.7694,445.3336,187.2881" />
       </ECTransition>
-      <ECTransition Source="SensorOK" Destination="STATE1" Condition="modoOperacao = 0" x="2950.099" y="1056.643">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="700.6015,251.6201,773.7772,268.2969" />
+      <ECTransition Source="AVALIA" Destination="NOTIFICA" Condition="bMudou" x="1821.425" y="1189.171">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="457.0625,284.993,461.0282,313.4543" />
       </ECTransition>
-      <ECTransition Source="STATE1" Destination="SensorOK" Condition="1" x="2935.125" y="1213.305">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="773.2903,316.9955,697.2728,299.2996" />
+      <ECTransition Source="AVALIA" Destination="START" Condition="1" x="1673.292" y="791.7058">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="420.6801,216.4358,416.5551,191.9171" />
       </ECTransition>
-      <ECTransition Source="SensorOK" Destination="STATE2" Condition="modoOperacao = 1" x="2396.402" y="1323.285">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="603.5612,308.0586,603.4105,354.4646" />
-      </ECTransition>
-      <ECTransition Source="STATE2" Destination="SensorOK" Condition="1" x="2323.919" y="1393">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="581.2806,377.6515,580.7194,331.3485" />
-      </ECTransition>
-      <ECTransition Source="SensorOK" Destination="START" Condition="1" x="1965.823" y="828.1371">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="517.1368,228.4358,473.0984,197.9171" />
-      </ECTransition>
-      <ECTransition Source="START" Destination="STATE3" Condition="(NOT cmdHabilita OR NOT stsSensorHabilitado OR stsFalhaSensor)" x="1166.73" y="938.9361">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="321.8711,217.9238,252.2351,266.2493" />
-      </ECTransition>
-      <ECTransition Source="STATE3" Destination="START" Condition="1" x="1303.914" y="717.2498">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="305.0985,191.6416,371.8373,144.7616" />
+      <ECTransition Source="NOTIFICA" Destination="AVALIA" Condition="1" x="1685.213" y="1151.923">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="419.2781,300.098,415.1647,273.5172" />
       </ECTransition>
     </ECC>
-    <Algorithm Name="INIT" Comment="Initialization algorithm">
-      <ST><![CDATA[;]]></ST>
-    </Algorithm>
-    <Algorithm Name="GerenciaBloqueioAbaixo">
-      <ST><![CDATA[IF stsSensor < stpAtivaBloqueio THEN
-	stsBloqueioAutomatico := TRUE;
-	stsBloqueioManual := TRUE;
-END_IF;
+    <Algorithm ID="d0c70da0-b32e-446f-8096-a543214e47e5" Name="algREQ">
+      <ST><![CDATA[bBloqueioAnt := stsBloqueio;
 
-IF (stsBloqueioAutomatico OR stsBloqueioManual) AND (stsSensor >= stpDesativaBloqueio) THEN
-	stsBloqueioAutomatico := FALSE;
-	stsBloqueioManual := FALSE;
-END_IF;
-;]]></ST>
-    </Algorithm>
-    <Algorithm Name="GerenciaBloqueioAcima">
-      <ST><![CDATA[IF stsSensor >= stpAtivaBloqueio THEN
-	stsBloqueioAutomatico := TRUE;
-	stsBloqueioManual := TRUE;
-END_IF;
+IF NOT cmdHabilita THEN
+    (* bloqueio desabilitado *)
+    stsBloqueio := FALSE;
 
-IF (stsBloqueioAutomatico OR stsBloqueioManual) AND (stsSensor < stpDesativaBloqueio) THEN
-	stsBloqueioAutomatico := FALSE;
-	stsBloqueioManual := FALSE;
-END_IF;
-;]]></ST>
-    </Algorithm>
-    <Algorithm Name="AtivaBloqueio">
-      <ST><![CDATA[IF cmdHabilita THEN 
-	stsBloqueioAutomatico := TRUE;
-	stsBloqueioManual := FALSE;
+ELSIF NOT stsSensorHabilitado OR stsFalhaSensor THEN
+    (* sensor indisponível *)
+    stsBloqueio := TRUE;
+
+ELSIF stpAtivaBloqueio = stpDesativaBloqueio THEN
+    (* setpoints iguais: configuração inválida *)
+    stsBloqueio := TRUE;
+
+ELSIF stpAtivaBloqueio < stpDesativaBloqueio THEN
+    (* nível baixo *)
+    IF stsSensor < stpAtivaBloqueio THEN
+        bBloqueioNivel := TRUE;
+    ELSIF stsSensor >= stpDesativaBloqueio THEN
+        bBloqueioNivel := FALSE;
+    END_IF;
+    stsBloqueio := bBloqueioNivel;
+
 ELSE
-	stsBloqueioAutomatico := FALSE;
-	stsBloqueioManual := FALSE;
+    (* nível alto *)
+    IF stsSensor > stpAtivaBloqueio THEN
+        bBloqueioNivel := TRUE;
+    ELSIF stsSensor <= stpDesativaBloqueio THEN
+        bBloqueioNivel := FALSE;
+    END_IF;
+    stsBloqueio := bBloqueioNivel;
 END_IF;
+
+bMudou := (stsBloqueio <> bBloqueioAnt);
 ;]]></ST>
     </Algorithm>
   </BasicFB>

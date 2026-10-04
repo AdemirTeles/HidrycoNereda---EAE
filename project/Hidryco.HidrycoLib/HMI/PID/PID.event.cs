@@ -79,47 +79,47 @@ namespace Hidryco.HidrycoLib.Symbols.PID
     public E_ATUALIZA_SETPOINTEventArgs()
     {
     }
-    private System.Boolean? cmdHabilitaPID_field = null;
-    public System.Boolean? cmdHabilitaPID
+    private System.Boolean? CMD_HABILITA_field = null;
+    public System.Boolean? CMD_HABILITA
     {
-       get { return cmdHabilitaPID_field; }
-       set { cmdHabilitaPID_field = value; }
+       get { return CMD_HABILITA_field; }
+       set { CMD_HABILITA_field = value; }
     }
-    private System.Single? stpDesejado_field = null;
-    public System.Single? stpDesejado
+    private System.Single? STP_DESEJADO_field = null;
+    public System.Single? STP_DESEJADO
     {
-       get { return stpDesejado_field; }
-       set { stpDesejado_field = value; }
+       get { return STP_DESEJADO_field; }
+       set { STP_DESEJADO_field = value; }
     }
-    private System.Single? stpKP_field = null;
-    public System.Single? stpKP
+    private System.Single? STP_PARAMETRO_KP_field = null;
+    public System.Single? STP_PARAMETRO_KP
     {
-       get { return stpKP_field; }
-       set { stpKP_field = value; }
+       get { return STP_PARAMETRO_KP_field; }
+       set { STP_PARAMETRO_KP_field = value; }
     }
-    private System.Single? stpKI_field = null;
-    public System.Single? stpKI
+    private System.Single? STP_PARAMETRO_KI_field = null;
+    public System.Single? STP_PARAMETRO_KI
     {
-       get { return stpKI_field; }
-       set { stpKI_field = value; }
+       get { return STP_PARAMETRO_KI_field; }
+       set { STP_PARAMETRO_KI_field = value; }
     }
-    private System.Single? stpKD_field = null;
-    public System.Single? stpKD
+    private System.Single? STP_PARAMETRO_KD_field = null;
+    public System.Single? STP_PARAMETRO_KD
     {
-       get { return stpKD_field; }
-       set { stpKD_field = value; }
+       get { return STP_PARAMETRO_KD_field; }
+       set { STP_PARAMETRO_KD_field = value; }
     }
-    private System.Single? stpMaximo_field = null;
-    public System.Single? stpMaximo
+    private System.Single? STP_MAXIMO_field = null;
+    public System.Single? STP_MAXIMO
     {
-       get { return stpMaximo_field; }
-       set { stpMaximo_field = value; }
+       get { return STP_MAXIMO_field; }
+       set { STP_MAXIMO_field = value; }
     }
-    private System.Single? stpMinimo_field = null;
-    public System.Single? stpMinimo
+    private System.Single? STP_MINIMO_field = null;
+    public System.Single? STP_MINIMO
     {
-       get { return stpMinimo_field; }
-       set { stpMinimo_field = value; }
+       get { return STP_MINIMO_field; }
+       set { STP_MINIMO_field = value; }
     }
 
   }
@@ -183,32 +183,32 @@ stack Trace:
 
       }
     }
-    public bool FireEvent_E_ATUALIZA_SETPOINT(System.Boolean cmdHabilitaPID, System.Single stpDesejado, System.Single stpKP, System.Single stpKI, System.Single stpKD, System.Single stpMaximo, System.Single stpMinimo)
+    public bool FireEvent_E_ATUALIZA_SETPOINT(System.Boolean CMD_HABILITA, System.Single STP_DESEJADO, System.Single STP_PARAMETRO_KP, System.Single STP_PARAMETRO_KI, System.Single STP_PARAMETRO_KD, System.Single STP_MAXIMO, System.Single STP_MINIMO)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {cmdHabilitaPID, stpDesejado, stpKP, stpKI, stpKD, stpMaximo, stpMinimo});
+      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {CMD_HABILITA, STP_DESEJADO, STP_PARAMETRO_KP, STP_PARAMETRO_KI, STP_PARAMETRO_KD, STP_MAXIMO, STP_MINIMO});
     }
     public bool FireEvent_E_ATUALIZA_SETPOINT(Hidryco.HidrycoLib.Symbols.PID.E_ATUALIZA_SETPOINTEventArgs ea)
     {
       object[] _values_ = new object[7];
-      if (ea.cmdHabilitaPID.HasValue) _values_[0] = ea.cmdHabilitaPID.Value;
-      if (ea.stpDesejado.HasValue) _values_[1] = ea.stpDesejado.Value;
-      if (ea.stpKP.HasValue) _values_[2] = ea.stpKP.Value;
-      if (ea.stpKI.HasValue) _values_[3] = ea.stpKI.Value;
-      if (ea.stpKD.HasValue) _values_[4] = ea.stpKD.Value;
-      if (ea.stpMaximo.HasValue) _values_[5] = ea.stpMaximo.Value;
-      if (ea.stpMinimo.HasValue) _values_[6] = ea.stpMinimo.Value;
+      if (ea.CMD_HABILITA.HasValue) _values_[0] = ea.CMD_HABILITA.Value;
+      if (ea.STP_DESEJADO.HasValue) _values_[1] = ea.STP_DESEJADO.Value;
+      if (ea.STP_PARAMETRO_KP.HasValue) _values_[2] = ea.STP_PARAMETRO_KP.Value;
+      if (ea.STP_PARAMETRO_KI.HasValue) _values_[3] = ea.STP_PARAMETRO_KI.Value;
+      if (ea.STP_PARAMETRO_KD.HasValue) _values_[4] = ea.STP_PARAMETRO_KD.Value;
+      if (ea.STP_MAXIMO.HasValue) _values_[5] = ea.STP_MAXIMO.Value;
+      if (ea.STP_MINIMO.HasValue) _values_[6] = ea.STP_MINIMO.Value;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
-    public bool FireEvent_E_ATUALIZA_SETPOINT(System.Boolean cmdHabilitaPID, bool ignore_cmdHabilitaPID, System.Single stpDesejado, bool ignore_stpDesejado, System.Single stpKP, bool ignore_stpKP, System.Single stpKI, bool ignore_stpKI, System.Single stpKD, bool ignore_stpKD, System.Single stpMaximo, bool ignore_stpMaximo, System.Single stpMinimo, bool ignore_stpMinimo)
+    public bool FireEvent_E_ATUALIZA_SETPOINT(System.Boolean CMD_HABILITA, bool ignore_CMD_HABILITA, System.Single STP_DESEJADO, bool ignore_STP_DESEJADO, System.Single STP_PARAMETRO_KP, bool ignore_STP_PARAMETRO_KP, System.Single STP_PARAMETRO_KI, bool ignore_STP_PARAMETRO_KI, System.Single STP_PARAMETRO_KD, bool ignore_STP_PARAMETRO_KD, System.Single STP_MAXIMO, bool ignore_STP_MAXIMO, System.Single STP_MINIMO, bool ignore_STP_MINIMO)
     {
       object[] _values_ = new object[7];
-      if (!ignore_cmdHabilitaPID) _values_[0] = cmdHabilitaPID;
-      if (!ignore_stpDesejado) _values_[1] = stpDesejado;
-      if (!ignore_stpKP) _values_[2] = stpKP;
-      if (!ignore_stpKI) _values_[3] = stpKI;
-      if (!ignore_stpKD) _values_[4] = stpKD;
-      if (!ignore_stpMaximo) _values_[5] = stpMaximo;
-      if (!ignore_stpMinimo) _values_[6] = stpMinimo;
+      if (!ignore_CMD_HABILITA) _values_[0] = CMD_HABILITA;
+      if (!ignore_STP_DESEJADO) _values_[1] = STP_DESEJADO;
+      if (!ignore_STP_PARAMETRO_KP) _values_[2] = STP_PARAMETRO_KP;
+      if (!ignore_STP_PARAMETRO_KI) _values_[3] = STP_PARAMETRO_KI;
+      if (!ignore_STP_PARAMETRO_KD) _values_[4] = STP_PARAMETRO_KD;
+      if (!ignore_STP_MAXIMO) _values_[5] = STP_MAXIMO;
+      if (!ignore_STP_MINIMO) _values_[6] = STP_MINIMO;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
 
@@ -272,32 +272,32 @@ stack Trace:
 
       }
     }
-    public bool FireEvent_E_ATUALIZA_SETPOINT(System.Boolean cmdHabilitaPID, System.Single stpDesejado, System.Single stpKP, System.Single stpKI, System.Single stpKD, System.Single stpMaximo, System.Single stpMinimo)
+    public bool FireEvent_E_ATUALIZA_SETPOINT(System.Boolean CMD_HABILITA, System.Single STP_DESEJADO, System.Single STP_PARAMETRO_KP, System.Single STP_PARAMETRO_KI, System.Single STP_PARAMETRO_KD, System.Single STP_MAXIMO, System.Single STP_MINIMO)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {cmdHabilitaPID, stpDesejado, stpKP, stpKI, stpKD, stpMaximo, stpMinimo});
+      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {CMD_HABILITA, STP_DESEJADO, STP_PARAMETRO_KP, STP_PARAMETRO_KI, STP_PARAMETRO_KD, STP_MAXIMO, STP_MINIMO});
     }
     public bool FireEvent_E_ATUALIZA_SETPOINT(Hidryco.HidrycoLib.Symbols.PID.E_ATUALIZA_SETPOINTEventArgs ea)
     {
       object[] _values_ = new object[7];
-      if (ea.cmdHabilitaPID.HasValue) _values_[0] = ea.cmdHabilitaPID.Value;
-      if (ea.stpDesejado.HasValue) _values_[1] = ea.stpDesejado.Value;
-      if (ea.stpKP.HasValue) _values_[2] = ea.stpKP.Value;
-      if (ea.stpKI.HasValue) _values_[3] = ea.stpKI.Value;
-      if (ea.stpKD.HasValue) _values_[4] = ea.stpKD.Value;
-      if (ea.stpMaximo.HasValue) _values_[5] = ea.stpMaximo.Value;
-      if (ea.stpMinimo.HasValue) _values_[6] = ea.stpMinimo.Value;
+      if (ea.CMD_HABILITA.HasValue) _values_[0] = ea.CMD_HABILITA.Value;
+      if (ea.STP_DESEJADO.HasValue) _values_[1] = ea.STP_DESEJADO.Value;
+      if (ea.STP_PARAMETRO_KP.HasValue) _values_[2] = ea.STP_PARAMETRO_KP.Value;
+      if (ea.STP_PARAMETRO_KI.HasValue) _values_[3] = ea.STP_PARAMETRO_KI.Value;
+      if (ea.STP_PARAMETRO_KD.HasValue) _values_[4] = ea.STP_PARAMETRO_KD.Value;
+      if (ea.STP_MAXIMO.HasValue) _values_[5] = ea.STP_MAXIMO.Value;
+      if (ea.STP_MINIMO.HasValue) _values_[6] = ea.STP_MINIMO.Value;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
-    public bool FireEvent_E_ATUALIZA_SETPOINT(System.Boolean cmdHabilitaPID, bool ignore_cmdHabilitaPID, System.Single stpDesejado, bool ignore_stpDesejado, System.Single stpKP, bool ignore_stpKP, System.Single stpKI, bool ignore_stpKI, System.Single stpKD, bool ignore_stpKD, System.Single stpMaximo, bool ignore_stpMaximo, System.Single stpMinimo, bool ignore_stpMinimo)
+    public bool FireEvent_E_ATUALIZA_SETPOINT(System.Boolean CMD_HABILITA, bool ignore_CMD_HABILITA, System.Single STP_DESEJADO, bool ignore_STP_DESEJADO, System.Single STP_PARAMETRO_KP, bool ignore_STP_PARAMETRO_KP, System.Single STP_PARAMETRO_KI, bool ignore_STP_PARAMETRO_KI, System.Single STP_PARAMETRO_KD, bool ignore_STP_PARAMETRO_KD, System.Single STP_MAXIMO, bool ignore_STP_MAXIMO, System.Single STP_MINIMO, bool ignore_STP_MINIMO)
     {
       object[] _values_ = new object[7];
-      if (!ignore_cmdHabilitaPID) _values_[0] = cmdHabilitaPID;
-      if (!ignore_stpDesejado) _values_[1] = stpDesejado;
-      if (!ignore_stpKP) _values_[2] = stpKP;
-      if (!ignore_stpKI) _values_[3] = stpKI;
-      if (!ignore_stpKD) _values_[4] = stpKD;
-      if (!ignore_stpMaximo) _values_[5] = stpMaximo;
-      if (!ignore_stpMinimo) _values_[6] = stpMinimo;
+      if (!ignore_CMD_HABILITA) _values_[0] = CMD_HABILITA;
+      if (!ignore_STP_DESEJADO) _values_[1] = STP_DESEJADO;
+      if (!ignore_STP_PARAMETRO_KP) _values_[2] = STP_PARAMETRO_KP;
+      if (!ignore_STP_PARAMETRO_KI) _values_[3] = STP_PARAMETRO_KI;
+      if (!ignore_STP_PARAMETRO_KD) _values_[4] = STP_PARAMETRO_KD;
+      if (!ignore_STP_MAXIMO) _values_[5] = STP_MAXIMO;
+      if (!ignore_STP_MINIMO) _values_[6] = STP_MINIMO;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
 

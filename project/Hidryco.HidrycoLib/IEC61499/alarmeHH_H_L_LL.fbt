@@ -6,8 +6,10 @@
   <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="1/23/2026" Remarks="template" />
   <InterfaceList>
     <EventInputs>
-      <Event Name="E_RESET_ALARMES" />
-      <Event Name="E_ATUALIZA_SETPOINTS">
+      <Event Name="E_RESET_ALARMES">
+        <With Var="cmdReset" />
+      </Event>
+      <Event ID="E_ATUALIZA_SETPOINTS" Name="REQ_ATUALIZA_SETPOINTS">
         <With Var="modoAlarme" />
         <With Var="cmdHabilitaAlarmeHH" />
         <With Var="cmdHabilitaAlarmeH" />
@@ -23,7 +25,7 @@
         <With Var="stpAlarmeLL" />
         <With Var="stsSensorHabilitado" />
       </Event>
-      <Event Name="E_ATUALIZA_ENTRADA">
+      <Event ID="E_ATUALIZA_ENTRADA" Name="REQ_ATUALIZA_ENTRADA">
         <With Var="stsEntradaAlarme" />
       </Event>
     </EventInputs>
@@ -38,6 +40,7 @@
     </EventOutputs>
     <InputVars>
       <VarDeclaration Name="modoAlarme" Type="UINT" Comment="0 - AutoReset, 1 - Comando Reset" />
+      <VarDeclaration Name="stsEntradaAlarme" Type="REAL" />
       <VarDeclaration Name="stsSensorHabilitado" Type="BOOL" />
       <VarDeclaration Name="cmdHabilitaAlarmeHH" Type="BOOL" />
       <VarDeclaration Name="cmdHabilitaAlarmeH" Type="BOOL" />
@@ -51,7 +54,7 @@
       <VarDeclaration Name="stpAlarmeH" Type="REAL" />
       <VarDeclaration Name="stpAlarmeL" Type="REAL" />
       <VarDeclaration Name="stpAlarmeLL" Type="REAL" />
-      <VarDeclaration Name="stsEntradaAlarme" Type="REAL" />
+      <VarDeclaration ID="06473FB3970986D4" Name="cmdReset" Type="BOOL" />
     </InputVars>
     <OutputVars>
       <VarDeclaration Name="stsAlarmeHH" Type="BOOL" Comment="Output event qualifier" />
@@ -62,16 +65,16 @@
     </OutputVars>
   </InterfaceList>
   <FBNetwork>
-    <FB ID="1" Name="FB1" Type="basicAlarmeHH_H_L_LL" x="1700" y="1520" Namespace="Hidryco.HidrycoLib" />
+    <FB ID="1" Name="basicAlarmeHH_H_L_LL" Type="basicAlarmeHH_H_L_LL" x="1700" y="1520" Namespace="Hidryco.HidrycoLib" />
     <FB ID="2" Name="FB2" Type="E_DELAY" x="3860" y="2160" Namespace="IEC61499.Standard" />
     <FB ID="2EA391500AB9B927" UID="508534CADD04198F" Name="OR1" Type="OR_169B00D031196E7C4" x="3180" y="2560" Namespace="Hidryco.HidrycoLib">
       <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNT:=4;OUT:BOOL" />
     </FB>
-    <FB ID="57CE04E5412049C8" Name="E_MERGE1" Type="E_MERGE" x="3440" y="1500" Namespace="IEC61499.Standard" />
-    <Input Name="E_RESET_ALARMES" x="800" y="1532" Type="Event" />
-    <Input Name="E_ATUALIZA_ENTRADA" x="800" y="1652" Type="Event" />
-    <Input Name="E_ATUALIZA_SETPOINTS" x="800" y="1592" Type="Event" />
-    <Input Name="modoAlarme" x="700" y="1912" Type="Data" />
+    <FB ID="57CE04E5412049C8" Name="E_MERGE1" Type="E_MERGE" x="3560" y="1500" Namespace="IEC61499.Standard" />
+    <Input Name="E_RESET_ALARMES" x="780" y="1592" Type="Event" />
+    <Input ID="E_ATUALIZA_ENTRADA" Name="REQ_ATUALIZA_ENTRADA" x="780" y="1472" Type="Event" />
+    <Input ID="E_ATUALIZA_SETPOINTS" Name="REQ_ATUALIZA_SETPOINTS" x="780" y="1532" Type="Event" />
+    <Input Name="modoAlarme" x="700" y="1852" Type="Data" />
     <Input Name="cmdHabilitaAlarmeHH" x="700" y="2032" Type="Data" />
     <Input Name="cmdHabilitaAlarmeH" x="700" y="2092" Type="Data" />
     <Input Name="cmdHabilitaAlarmeL" x="700" y="2152" Type="Data" />
@@ -84,36 +87,77 @@
     <Input Name="stpAlarmeH" x="700" y="2572" Type="Data" />
     <Input Name="stpAlarmeL" x="700" y="2632" Type="Data" />
     <Input Name="stpAlarmeLL" x="700" y="2692" Type="Data" />
-    <Input Name="stsEntradaAlarme" x="700" y="2752" Type="Data" />
-    <Input Name="stsSensorHabilitado" x="700" y="1972" Type="Data" />
+    <Input Name="stsEntradaAlarme" x="700" y="1972" Type="Data" />
+    <Input Name="stsSensorHabilitado" x="700" y="1912" Type="Data" />
+    <Input ID="06473FB3970986D4" Name="cmdReset" x="700" y="2752" Type="Data" />
     <Output ID="E416AB9D6CFA8D5B" Name="stsAlarme" x="4000" y="2852" Type="Data" />
-    <Output Name="CNF" x="3820" y="1512" Type="Event" />
+    <Output Name="CNF" x="4020" y="1512" Type="Event" />
     <Output Name="stsAlarmeHH" x="2760" y="1912" Type="Data" />
     <Output Name="stsAlarmeH" x="2760" y="1972" Type="Data" />
     <Output Name="stsAlarmeL" x="2760" y="2032" Type="Data" />
     <Output Name="stsAlarmeLL" x="2760" y="2092" Type="Data" />
     <EventConnections>
-      <Connection Source="$1.START_DELAY" Destination="$2.START" dx1="1173.375">
-        <AvoidsNodes>false</AvoidsNodes>
-      </Connection>
-      <Connection Source="$2.EO" Destination="$1.END_DELAY" dx1="48.5" dx2="40" dy="-960">
-        <AvoidsNodes>false</AvoidsNodes>
+      <Connection Source="$1.START_DELAY" Destination="$2.START" dx1="144.9792" />
+      <Connection Source="$2.EO" Destination="$1.END_DELAY">
+        <Points>
+          <Points>
+            <X>1050.375</X>
+            <Y>550</Y>
+          </Points>
+          <Points>
+            <X>1062.5</X>
+            <Y>550</Y>
+          </Points>
+          <Points>
+            <X>1062.5</X>
+            <Y>522.5</Y>
+          </Points>
+          <Points>
+            <X>842.5</X>
+            <Y>522.5</Y>
+          </Points>
+          <Points>
+            <X>842.5</X>
+            <Y>362.5</Y>
+          </Points>
+          <Points>
+            <X>412.5</X>
+            <Y>362.5</Y>
+          </Points>
+          <Points>
+            <X>412.5</X>
+            <Y>417.5</Y>
+          </Points>
+          <Points>
+            <X>332.5</X>
+            <Y>417.5</Y>
+          </Points>
+          <Points>
+            <X>332.5</X>
+            <Y>420</Y>
+          </Points>
+          <Points>
+            <X>420</X>
+            <Y>420</Y>
+          </Points>
+        </Points>
       </Connection>
       <Connection Source="$E_RESET_ALARMES" Destination="$1.E_RESET_ALARMES" />
-      <Connection Source="$E_ATUALIZA_ENTRADA" Destination="$1.E_ATUALIZA_ENTRADA" />
-      <Connection Source="$E_ATUALIZA_SETPOINTS" Destination="$1.E_ATUALIZA_STP" />
       <Connection Source="$1.CNF" Destination="$57CE04E5412049C8.EI1" dx1="50" />
-      <Connection Source="$1.CNF" Destination="$2EA391500AB9B927.REQ" dx1="723.375" dx2="50" dy="610" />
-      <Connection Source="$2EA391500AB9B927.CNF" Destination="$57CE04E5412049C8.EI2" dx1="50" dx2="30" dy="-110" />
+      <Connection Source="$1.CNF" Destination="$2EA391500AB9B927.REQ" dx1="164.9792" />
+      <Connection Source="$2EA391500AB9B927.CNF" Destination="$57CE04E5412049C8.EI2" dx1="50" dx2="30" dy="-109.9998" />
       <Connection Source="$57CE04E5412049C8.EO" Destination="$CNF" />
+      <Connection Source="$E_ATUALIZA_SETPOINTS" Destination="$1.47B035110A931D0B" />
+      <Connection Source="$E_ATUALIZA_ENTRADA" Destination="$1.47B035110A931D0B" dx1="40" />
+      <Connection Source="$1.EC696EA9B8D3D902" Destination="$2.STOP" dx1="144.9792" />
     </EventConnections>
     <DataConnections>
-      <Connection Source="$1.delayTime" Destination="$2.DT" dx1="43.375" />
-      <Connection Source="$1.stsAlarmeLL" Destination="$stsAlarmeLL" />
-      <Connection Source="$1.stsAlarmeL" Destination="$stsAlarmeL" />
-      <Connection Source="$1.stsAlarmeH" Destination="$stsAlarmeH" dx1="93.37476" />
-      <Connection Source="$1.stsAlarmeHH" Destination="$stsAlarmeHH" dx1="91.6875" />
-      <Connection Source="$modoAlarme" Destination="$1.modoAlarme" dx1="40" />
+      <Connection Source="$1.delayTime" Destination="$2.DT" dx1="44.97925" />
+      <Connection Source="$1.stsAlarmeLL" Destination="$stsAlarmeLL" dx1="64.97925" />
+      <Connection Source="$1.stsAlarmeL" Destination="$stsAlarmeL" dx1="84.97925" />
+      <Connection Source="$1.stsAlarmeH" Destination="$stsAlarmeH" dx1="104.9792" />
+      <Connection Source="$1.stsAlarmeHH" Destination="$stsAlarmeHH" dx1="124.9792" />
+      <Connection Source="$modoAlarme" Destination="$1.modoAlarme" />
       <Connection Source="$cmdHabilitaAlarmeHH" Destination="$1.cmdHabilitaAlarmeHH" />
       <Connection Source="$cmdHabilitaAlarmeH" Destination="$1.cmdHabilitaAlarmeH" />
       <Connection Source="$cmdHabilitaAlarmeL" Destination="$1.cmdHabilitaAlarmeL" />
@@ -126,13 +170,14 @@
       <Connection Source="$stpAlarmeH" Destination="$1.stpAlarmeH" />
       <Connection Source="$stpAlarmeL" Destination="$1.stpAlarmeL" />
       <Connection Source="$stpAlarmeLL" Destination="$1.stpAlarmeLL" />
-      <Connection Source="$stsEntradaAlarme" Destination="$1.stsEntradaAlarme" dx1="48" dx2="990" dy="50.00024" />
-      <Connection Source="$stsSensorHabilitado" Destination="$1.stsSensorHabilitado" dx1="40" />
-      <Connection Source="$1.stsAlarmeLL" Destination="$2EA391500AB9B927.IN4" dx1="63.375" />
-      <Connection Source="$1.stsAlarmeL" Destination="$2EA391500AB9B927.IN3" dx1="83.375" />
-      <Connection Source="$1.stsAlarmeH" Destination="$2EA391500AB9B927.IN2" dx1="103.375" />
-      <Connection Source="$1.stsAlarmeHH" Destination="$2EA391500AB9B927.IN1" dx1="123.375" />
+      <Connection Source="$stsEntradaAlarme" Destination="$1.stsEntradaAlarme" />
+      <Connection Source="$1.stsAlarmeLL" Destination="$2EA391500AB9B927.IN4" dx1="64.97925" />
+      <Connection Source="$1.stsAlarmeL" Destination="$2EA391500AB9B927.IN3" dx1="84.97925" />
+      <Connection Source="$1.stsAlarmeH" Destination="$2EA391500AB9B927.IN2" dx1="104.9792" />
+      <Connection Source="$1.stsAlarmeHH" Destination="$2EA391500AB9B927.IN1" dx1="124.9792" />
       <Connection Source="$2EA391500AB9B927.OUT" Destination="$E416AB9D6CFA8D5B" dx1="47.47925" />
+      <Connection Source="$06473FB3970986D4" Destination="$1.736ABAD282CDAA19" />
+      <Connection Source="$stsSensorHabilitado" Destination="$1.stsSensorHabilitado" />
     </DataConnections>
   </FBNetwork>
 </FBType>

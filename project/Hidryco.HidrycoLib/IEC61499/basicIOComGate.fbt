@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="22aa999e-f418-4e1f-92c6-6c432c72443c" Name="basicIOComGate" Comment="Gate de comunicacao de remota Modbus: zera as words e sinaliza falha quando a remota esta offline" Namespace="Hidryco.HidrycoLib">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Hidryco" Version="1.0" Author="Hidryco" Date="10/2/2026" Remarks="Criado para IO_DI32 e IO_DQ32" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="BD23A685891FD57E" Name="REQ" Comment="Nova leitura das words ou do status de comunicacao">
+        <With Var="IN0" />
+        <With Var="IN1" />
+        <With Var="CONN" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="B07445CE7289017B" Name="CNF" Comment="Saidas atualizadas">
+        <With Var="OUT0" />
+        <With Var="OUT1" />
+        <With Var="FALHA" />
+        <With Var="COM_OK" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="E55C0654C443D12C" Name="IN0" Type="INT" Comment="Word 0 lida da remota" />
+      <VarDeclaration ID="1DD6D86783AAC6A7" Name="IN1" Type="INT" Comment="Word 1 lida da remota" />
+      <VarDeclaration ID="802FC2CA3041A58B" Name="CONN" Type="INT" Comment="connStatusInt do acoplador: 1 online, 0 offline" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="46D4D28C21794752" Name="OUT0" Type="INT" Comment="Word 0 liberada (0 se offline)" />
+      <VarDeclaration ID="42FBD7F29792C6AD" Name="OUT1" Type="INT" Comment="Word 1 liberada (0 se offline)" />
+      <VarDeclaration ID="67074C7AC6CF1B2E" Name="FALHA" Type="BOOL" Comment="TRUE = remota offline" />
+      <VarDeclaration ID="E7CF4253A5649388" Name="COM_OK" Type="BOOL" Comment="TRUE = remota online" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="fccec514-9e04-4652-991b-282073909424">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="Main" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="550" y="425" />
+      <ECState Name="EXEC" x="550" y="1100">
+        <ECAction Algorithm="Main" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="EXEC" Condition="REQ" x="760" y="760" />
+      <ECTransition Source="EXEC" Destination="START" Condition="1" x="340" y="760" />
+    </ECC>
+    <Algorithm Name="Main" Comment="Gate de comunicacao">
+      <ST><![CDATA[(* Libera as words da remota somente com a comunicacao OK.
+   CONN = connStatusInt do acoplador Modbus (1 = online, 0 = offline).
+   Remota offline: words = 0 (todos os bits FALSE) e FALHA = TRUE. *)
+IF CONN = 1 THEN
+    OUT0 := IN0;
+    OUT1 := IN1;
+    FALHA := FALSE;
+ELSE
+    OUT0 := 0;
+    OUT1 := 0;
+    FALHA := TRUE;
+END_IF;
+COM_OK := NOT FALHA;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

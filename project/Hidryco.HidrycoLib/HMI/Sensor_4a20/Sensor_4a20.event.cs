@@ -297,6 +297,12 @@ namespace Hidryco.HidrycoLib.Symbols.Sensor_4a20
     public E_RESET_FALHAEventArgs()
     {
     }
+    private System.Boolean? CMD_RESET_field = null;
+    public System.Boolean? CMD_RESET
+    {
+       get { return CMD_RESET_field; }
+       set { CMD_RESET_field = value; }
+    }
 
   }
 
@@ -304,6 +310,12 @@ namespace Hidryco.HidrycoLib.Symbols.Sensor_4a20
   {
     public E_RESET_ALARMESEventArgs()
     {
+    }
+    private System.Boolean? CMD_RESET_field = null;
+    public System.Boolean? CMD_RESET
+    {
+       get { return CMD_RESET_field; }
+       set { CMD_RESET_field = value; }
     }
 
   }
@@ -411,22 +423,36 @@ stack Trace:
       if (!ignore_CMD_HABILITA_SENSOR) _values_[14] = CMD_HABILITA_SENSOR;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
-    public bool FireEvent_E_RESET_FALHA()
+    public bool FireEvent_E_RESET_FALHA(System.Boolean CMD_RESET)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {});
+      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {CMD_RESET});
     }
     public bool FireEvent_E_RESET_FALHA(Hidryco.HidrycoLib.Symbols.Sensor_4a20.E_RESET_FALHAEventArgs ea)
     {
-      object[] _values_ = new object[0];
+      object[] _values_ = new object[1];
+      if (ea.CMD_RESET.HasValue) _values_[0] = ea.CMD_RESET.Value;
       return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
     }
-    public bool FireEvent_E_RESET_ALARMES()
+    public bool FireEvent_E_RESET_FALHA(System.Boolean CMD_RESET, bool ignore_CMD_RESET)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(2, new object[] {});
+      object[] _values_ = new object[1];
+      if (!ignore_CMD_RESET) _values_[0] = CMD_RESET;
+      return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
+    }
+    public bool FireEvent_E_RESET_ALARMES(System.Boolean CMD_RESET)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(2, new object[] {CMD_RESET});
     }
     public bool FireEvent_E_RESET_ALARMES(Hidryco.HidrycoLib.Symbols.Sensor_4a20.E_RESET_ALARMESEventArgs ea)
     {
-      object[] _values_ = new object[0];
+      object[] _values_ = new object[1];
+      if (ea.CMD_RESET.HasValue) _values_[0] = ea.CMD_RESET.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(2, _values_);
+    }
+    public bool FireEvent_E_RESET_ALARMES(System.Boolean CMD_RESET, bool ignore_CMD_RESET)
+    {
+      object[] _values_ = new object[1];
+      if (!ignore_CMD_RESET) _values_[0] = CMD_RESET;
       return ((IHMIAccessorOutput)this).FireEvent(2, _values_);
     }
 
@@ -534,22 +560,36 @@ stack Trace:
       if (!ignore_CMD_HABILITA_SENSOR) _values_[14] = CMD_HABILITA_SENSOR;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
-    public bool FireEvent_E_RESET_FALHA()
+    public bool FireEvent_E_RESET_FALHA(System.Boolean CMD_RESET)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {});
+      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {CMD_RESET});
     }
     public bool FireEvent_E_RESET_FALHA(Hidryco.HidrycoLib.Symbols.Sensor_4a20.E_RESET_FALHAEventArgs ea)
     {
-      object[] _values_ = new object[0];
+      object[] _values_ = new object[1];
+      if (ea.CMD_RESET.HasValue) _values_[0] = ea.CMD_RESET.Value;
       return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
     }
-    public bool FireEvent_E_RESET_ALARMES()
+    public bool FireEvent_E_RESET_FALHA(System.Boolean CMD_RESET, bool ignore_CMD_RESET)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(2, new object[] {});
+      object[] _values_ = new object[1];
+      if (!ignore_CMD_RESET) _values_[0] = CMD_RESET;
+      return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
+    }
+    public bool FireEvent_E_RESET_ALARMES(System.Boolean CMD_RESET)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(2, new object[] {CMD_RESET});
     }
     public bool FireEvent_E_RESET_ALARMES(Hidryco.HidrycoLib.Symbols.Sensor_4a20.E_RESET_ALARMESEventArgs ea)
     {
-      object[] _values_ = new object[0];
+      object[] _values_ = new object[1];
+      if (ea.CMD_RESET.HasValue) _values_[0] = ea.CMD_RESET.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(2, _values_);
+    }
+    public bool FireEvent_E_RESET_ALARMES(System.Boolean CMD_RESET, bool ignore_CMD_RESET)
+    {
+      object[] _values_ = new object[1];
+      if (!ignore_CMD_RESET) _values_[0] = CMD_RESET;
       return ((IHMIAccessorOutput)this).FireEvent(2, _values_);
     }
 
@@ -657,22 +697,36 @@ stack Trace:
       if (!ignore_CMD_HABILITA_SENSOR) _values_[14] = CMD_HABILITA_SENSOR;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
-    public bool FireEvent_E_RESET_FALHA()
+    public bool FireEvent_E_RESET_FALHA(System.Boolean CMD_RESET)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {});
+      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {CMD_RESET});
     }
     public bool FireEvent_E_RESET_FALHA(Hidryco.HidrycoLib.Symbols.Sensor_4a20.E_RESET_FALHAEventArgs ea)
     {
-      object[] _values_ = new object[0];
+      object[] _values_ = new object[1];
+      if (ea.CMD_RESET.HasValue) _values_[0] = ea.CMD_RESET.Value;
       return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
     }
-    public bool FireEvent_E_RESET_ALARMES()
+    public bool FireEvent_E_RESET_FALHA(System.Boolean CMD_RESET, bool ignore_CMD_RESET)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(2, new object[] {});
+      object[] _values_ = new object[1];
+      if (!ignore_CMD_RESET) _values_[0] = CMD_RESET;
+      return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
+    }
+    public bool FireEvent_E_RESET_ALARMES(System.Boolean CMD_RESET)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(2, new object[] {CMD_RESET});
     }
     public bool FireEvent_E_RESET_ALARMES(Hidryco.HidrycoLib.Symbols.Sensor_4a20.E_RESET_ALARMESEventArgs ea)
     {
-      object[] _values_ = new object[0];
+      object[] _values_ = new object[1];
+      if (ea.CMD_RESET.HasValue) _values_[0] = ea.CMD_RESET.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(2, _values_);
+    }
+    public bool FireEvent_E_RESET_ALARMES(System.Boolean CMD_RESET, bool ignore_CMD_RESET)
+    {
+      object[] _values_ = new object[1];
+      if (!ignore_CMD_RESET) _values_[0] = CMD_RESET;
       return ((IHMIAccessorOutput)this).FireEvent(2, _values_);
     }
 
@@ -780,22 +834,36 @@ stack Trace:
       if (!ignore_CMD_HABILITA_SENSOR) _values_[14] = CMD_HABILITA_SENSOR;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
-    public bool FireEvent_E_RESET_FALHA()
+    public bool FireEvent_E_RESET_FALHA(System.Boolean CMD_RESET)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {});
+      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {CMD_RESET});
     }
     public bool FireEvent_E_RESET_FALHA(Hidryco.HidrycoLib.Symbols.Sensor_4a20.E_RESET_FALHAEventArgs ea)
     {
-      object[] _values_ = new object[0];
+      object[] _values_ = new object[1];
+      if (ea.CMD_RESET.HasValue) _values_[0] = ea.CMD_RESET.Value;
       return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
     }
-    public bool FireEvent_E_RESET_ALARMES()
+    public bool FireEvent_E_RESET_FALHA(System.Boolean CMD_RESET, bool ignore_CMD_RESET)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(2, new object[] {});
+      object[] _values_ = new object[1];
+      if (!ignore_CMD_RESET) _values_[0] = CMD_RESET;
+      return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
+    }
+    public bool FireEvent_E_RESET_ALARMES(System.Boolean CMD_RESET)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(2, new object[] {CMD_RESET});
     }
     public bool FireEvent_E_RESET_ALARMES(Hidryco.HidrycoLib.Symbols.Sensor_4a20.E_RESET_ALARMESEventArgs ea)
     {
-      object[] _values_ = new object[0];
+      object[] _values_ = new object[1];
+      if (ea.CMD_RESET.HasValue) _values_[0] = ea.CMD_RESET.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(2, _values_);
+    }
+    public bool FireEvent_E_RESET_ALARMES(System.Boolean CMD_RESET, bool ignore_CMD_RESET)
+    {
+      object[] _values_ = new object[1];
+      if (!ignore_CMD_RESET) _values_[0] = CMD_RESET;
       return ((IHMIAccessorOutput)this).FireEvent(2, _values_);
     }
 

@@ -25,61 +25,30 @@
       <VarDeclaration Name="stsAnimacao" Type="INT" Comment="Output event qualifier" />
     </OutputVars>
   </InterfaceList>
-  <BasicFB>
-    <Attribute Name="FBType.Basic.Algorithm.Order" Value="LogicaManutecao,LogicaFalha,LogicaLigado,LogicaDesligado" />
+  <BasicFB ID="fdd00a67-06df-4d94-a3ea-e3069e7c9528">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="algREQ" />
     <ECC>
       <ECState Name="START" Comment="Initial State" x="1376.941" y="525.4117" />
-      <ECState Name="Desligado" x="2184" y="456">
-        <ECAction Algorithm="LogicaDesligado" Output="CNF" />
+      <ECState Name="REQ" x="1404" y="820">
+        <ECAction Algorithm="algREQ" Output="CNF" />
       </ECState>
-      <ECState Name="Ligado" x="1796" y="1104">
-        <ECAction Algorithm="LogicaLigado" Output="CNF" />
-      </ECState>
-      <ECState Name="Falha" x="587.9999" y="1044">
-        <ECAction Algorithm="LogicaFalha" Output="CNF" />
-      </ECState>
-      <ECState Name="Manutencao" x="220" y="424">
-        <ECAction Algorithm="LogicaManutecao" Output="CNF" />
-      </ECState>
-      <ECTransition Source="START" Destination="Desligado" Condition="NOT stsLigado AND NOT stsFalhaGeral AND NOT stsManutencao" x="1732.742" y="394.5926">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="411.4092,96.93989,451.9274,91.84411" />
+      <ECTransition Source="START" Destination="REQ" Condition="REQ" x="1476.561" y="665.8458">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="371.7848,157.9638,373.2408,173.8158" />
       </ECTransition>
-      <ECTransition Source="Desligado" Destination="START" Condition="1" x="1840.634" y="568.1812">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="486.741,142.9637,441.716,147.8643" />
-      </ECTransition>
-      <ECTransition Source="START" Destination="Ligado" Condition="stsLigado AND NOT stsFalhaGeral AND NOT stsManutencao" x="1661.312" y="773.7021">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="404.703,170.3116,432.7434,209.7055" />
-      </ECTransition>
-      <ECTransition Source="Ligado" Destination="START" Condition="1" x="1595.922" y="890.3957">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="415.5265,248.5805,386.9341,209.2323" />
-      </ECTransition>
-      <ECTransition Source="START" Destination="Falha" Condition="stsFalhaGeral AND NOT stsManutencao" x="1037.47" y="845.7393">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="288.071,197.9967,234.4233,233.5456" />
-      </ECTransition>
-      <ECTransition Source="Falha" Destination="START" Condition="1" x="1036.241" y="712.3369">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="239.9612,189.0978,291.2407,155.0092" />
-      </ECTransition>
-      <ECTransition Source="START" Destination="Manutencao" Condition="stsManutencao" x="739.1597" y="540.3215">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="215.6033,142.1721,141.3107,133.669" />
-      </ECTransition>
-      <ECTransition Source="Manutencao" Destination="START" Condition="1" x="909.6851" y="408.8683">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="201.1752,95.71425,267.2563,102.8473" />
+      <ECTransition Source="REQ" Destination="START" Condition="1" x="1389.434" y="747.7058">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="348.3456,201.1024,346.8896,185.2505" />
       </ECTransition>
     </ECC>
-    <Algorithm Name="LogicaManutecao">
-      <ST><![CDATA[stsAnimacao := 3;
-;]]></ST>
-    </Algorithm>
-    <Algorithm Name="LogicaFalha">
-      <ST><![CDATA[stsAnimacao := 2;
-;]]></ST>
-    </Algorithm>
-    <Algorithm Name="LogicaLigado">
-      <ST><![CDATA[stsAnimacao := 1;
-;]]></ST>
-    </Algorithm>
-    <Algorithm Name="LogicaDesligado">
-      <ST><![CDATA[stsAnimacao := 0;
+    <Algorithm ID="ca055371-be10-4ba4-93df-a0e5006604a5" Name="algREQ">
+      <ST><![CDATA[IF stsManutencao THEN
+    stsAnimacao := 3;
+ELSIF stsFalhaGeral THEN
+    stsAnimacao := 2;
+ELSIF stsLigado THEN
+    stsAnimacao := 1;
+ELSE
+    stsAnimacao := 0;
+END_IF;
 ;]]></ST>
     </Algorithm>
   </BasicFB>

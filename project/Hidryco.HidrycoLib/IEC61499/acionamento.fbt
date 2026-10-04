@@ -8,7 +8,7 @@
       <Event Name="REQ" Comment="Normal Execution Request">
         <With Var="stsRemoto" />
         <With Var="stsAutomatico" />
-        <With Var="stsBloqueioManual" />
+        <With Var="stsBloqueioGeral" />
         <With Var="cmdLigarManual" />
         <With Var="cmdLigarAutomatico" />
         <With Var="stsBloqueioAutomatico" />
@@ -25,15 +25,15 @@
     <EventOutputs>
       <Event Name="CNF" Comment="Execution Confirmation">
         <With Var="acmLigar" />
-        <With Var="stsDisponivelAutomatico" />
         <With Var="stpSaida" />
+        <With Var="stsDisponivelAutomatico" />
       </Event>
     </EventOutputs>
     <InputVars>
       <VarDeclaration ID="8B55FF58A177F1E0" Name="stsEmergencia" Type="BOOL" />
       <VarDeclaration Name="stsRemoto" Type="BOOL" />
       <VarDeclaration Name="stsAutomatico" Type="BOOL" />
-      <VarDeclaration Name="stsBloqueioManual" Type="BOOL" />
+      <VarDeclaration ID="stsBloqueioManual" Name="stsBloqueioGeral" Type="BOOL" />
       <VarDeclaration Name="stsBloqueioAutomatico" Type="BOOL" />
       <VarDeclaration Name="cmdLigarAutomatico" Type="BOOL" />
       <VarDeclaration Name="cmdLigarManual" Type="BOOL" />
@@ -66,40 +66,49 @@
       </ECTransition>
     </ECC>
     <Algorithm Name="alg_aval">
-      <ST><![CDATA[
-(* === Disponibilidade para automático === *)
+      <ST><![CDATA[(* ============================================================
+   CONTROLE DE ACIONAMENTO — Lógica principal
+   ============================================================ *)
 
+(* --- 1. Parada de emergência (prioridade máxima) --- *)
 IF stsEmergencia THEN
-	acmLigar := FALSE;
-	RETURN;
+    acmLigar := FALSE;
+    stpSaida  := 0.0;
+    RETURN;
 END_IF;
 
-stsDisponivelAutomatico := stsRemoto 
-                       AND stsAutomatico 
-                       AND NOT stsBloqueioAutomatico 
-                       AND NOT stsFalhaGeral 
-                       AND NOT stsManutencao
-                       AND NOT cmdBloqueiaPorGerador
-					   AND NOT stsProtecaoTermica
-					   AND NOT stsEmergencia;
-(* === Comando de ligar === *)
+(* --- 2. Condições de bloqueio geral --- *)
 IF stsManutencao OR stsFalhaGeral OR NOT stsRemoto THEN
-   acmLigar := FALSE;
-   stpSaida := 0.0;
-   RETURN;
+    acmLigar := FALSE;
+    stpSaida  := 0.0;
+    RETURN;
 END_IF;
 
+(* --- 3. Status de disponibilidade para modo automático --- *)
+stsDisponivelAutomatico := stsAutomatico
+                       AND NOT stsBloqueioAutomatico
+                       AND NOT cmdBloqueiaPorGerador
+                       AND NOT stsProtecaoTermica;
+
+(* --- 4. Comando de ligar (automático ou manual) --- *)
 IF stsAutomatico THEN
-   acmLigar := cmdLigarAutomatico AND NOT stsBloqueioAutomatico AND NOT cmdBloqueiaPorGerador AND NOT stsProtecaoTermica;
+    acmLigar := cmdLigarAutomatico
+            AND NOT stsBloqueioAutomatico
+            AND NOT stsBloqueioGeral
+            AND NOT cmdBloqueiaPorGerador
+            AND NOT stsProtecaoTermica;
 ELSE
-   acmLigar := cmdLigarManual AND NOT stsBloqueioManual AND NOT cmdBloqueiaPorGerador AND NOT stsProtecaoTermica;
+    acmLigar := cmdLigarManual
+            AND NOT stsBloqueioGeral
+            AND NOT cmdBloqueiaPorGerador
+            AND NOT stsProtecaoTermica;
 END_IF;
 
-(* === Seleção da fonte de saída === *)
+(* --- 5. Seleção da fonte de saída --- *)
 IF stsAutomatico AND stsPIDHabilitado THEN
-   stpSaida := stsSaidaAutomatico;   (* Auto + PID ON  → saída do controle automático *)
+    stpSaida := stsSaidaAutomatico;     (* PID ativo → saída automática *)
 ELSE
-   stpSaida := stsSaidaManual;       (* Auto+PID OFF ou Manual → saída manual *)
+    stpSaida := stsSaidaManual;         (* demais casos → saída manual  *)
 END_IF;
 ;]]></ST>
     </Algorithm>

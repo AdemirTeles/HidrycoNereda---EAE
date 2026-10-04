@@ -15,19 +15,16 @@
     </EventInputs>
     <EventOutputs>
       <Event Name="E_ATUALIZA_BLOQUEIO">
-        <With Var="stsBloqueioManual" />
-        <With Var="stsBloqueioAutomatico" />
+        <With Var="stsBloqueioAtivaDesativa" />
       </Event>
     </EventOutputs>
     <InputVars>
       <VarDeclaration Name="stsSensorHabilitado" Type="BOOL" />
       <VarDeclaration Name="stsSensor" Type="REAL" />
       <VarDeclaration Name="stsFalhaSensor" Type="BOOL" />
-      <VarDeclaration Name="modoOperacao" Type="UINT" Comment="0 - Ativa bloqueio abaixo de setpointAtivaBloqueio, 1 - Ativa bloqueio acima de setpointAtivaBloqueio" />
     </InputVars>
     <OutputVars>
-      <VarDeclaration Name="stsBloqueioManual" Type="BOOL" />
-      <VarDeclaration Name="stsBloqueioAutomatico" Type="BOOL" />
+      <VarDeclaration ID="stsBloqueioAutomatico" Name="stsBloqueioAtivaDesativa" Type="BOOL" />
     </OutputVars>
   </InterfaceList>
   <FBNetwork>
@@ -37,35 +34,30 @@
     </FB>
     <FB ID="18C762F43A091172" Name="plcStart1" Type="plcStart" x="720" y="100" Namespace="SE.App2Base" />
     <Input Name="stsSensor" x="1960" y="1312" Type="Data" />
-    <Input Name="modoOperacao" x="1960" y="1132" Type="Data" />
-    <Input Name="E_ATUALIZA_SENSOR" x="2080" y="812" Type="Event" />
+    <Input Name="E_ATUALIZA_SENSOR" x="1920" y="892" Type="Event" />
     <Input Name="stsFalhaSensor" x="1960" y="1252" Type="Data" />
     <Input Name="stsSensorHabilitado" x="1960" y="1192" Type="Data" />
-    <Output Name="stsBloqueioAutomatico" x="4360" y="1072" Type="Data" />
-    <Output Name="stsBloqueioManual" x="4360" y="1132" Type="Data" />
-    <Output Name="E_ATUALIZA_BLOQUEIO" x="4360" y="812" Type="Event" />
+    <Output ID="stsBloqueioAutomatico" Name="stsBloqueioAtivaDesativa" x="4360" y="1072" Type="Data" />
+    <Output Name="E_ATUALIZA_BLOQUEIO" x="4340" y="752" Type="Event" />
     <EventConnections>
-      <Connection Source="$E_ATUALIZA_SENSOR" Destination="$1.E_ATUALIZA_SENSOR" dx1="40" dx2="200" dy="-6.103516E-05" />
-      <Connection Source="$1.E_ATUALIZA_BLOQUEIO" Destination="$E_ATUALIZA_BLOQUEIO" dx1="80" />
-      <Connection Source="$18C762F43A091172.REDO_INIT" Destination="$2.E21FCE7DB6620568" dx1="48.0835" dx2="50" dy="350" />
-      <Connection Source="$18C762F43A091172.FIRST_INIT" Destination="$2.E21FCE7DB6620568" dx1="68.0835" dx2="50" dy="410" />
-      <Connection Source="$1.E_ATUALIZA_BLOQUEIO" Destination="$2.47808F03641CB8B1" dx1="80" dx2="70" dy="-169.9999" />
-      <Connection Source="$2.6F5A2BFC16C5DFFF" Destination="$1.INIT" dx1="54.89587" />
-      <Connection Source="$2.BED8F0B3C00CF4CA" Destination="$1.E_ATUALIZA_SETPOINT" dx1="74.89587" />
-      <Connection Source="$1.INITO" Destination="$18C762F43A091172.ACK_FIRST" dx1="54.896" dx2="30" dy="-109.9999" />
+      <Connection Source="$18C762F43A091172.REDO_INIT" Destination="$2.E21FCE7DB6620568" dx1="48.08337" dx2="30" dy="350" />
+      <Connection Source="$18C762F43A091172.FIRST_INIT" Destination="$2.E21FCE7DB6620568" dx1="68.08337" dx2="30" dy="410" />
+      <Connection Source="$1.9A683898C46F5B59" Destination="$2.47808F03641CB8B1" dx1="60" dx2="70" dy="-109.9999" />
+      <Connection Source="$2.6F5A2BFC16C5DFFF" Destination="$2.18B6F28BE2EC870E" dx1="40" dx2="70" dy="-110" />
+      <Connection Source="$2.6F5A2BFC16C5DFFF" Destination="$18C762F43A091172.ACK_FIRST" dx1="40" dx2="30" dy="-110" />
+      <Connection Source="$2.BED8F0B3C00CF4CA" Destination="$1.21F55DF80FB38702" dx1="74.89587" />
+      <Connection Source="$E_ATUALIZA_SENSOR" Destination="$1.21F55DF80FB38702" dx1="42.375" />
+      <Connection Source="$1.9A683898C46F5B59" Destination="$E_ATUALIZA_BLOQUEIO" dx1="60" />
     </EventConnections>
     <DataConnections>
       <Connection Source="$stsSensorHabilitado" Destination="$1.stsSensorHabilitado" dx1="40.04199" />
-      <Connection Source="$stsFalhaSensor" Destination="$1.stsFalhaSensor" dx1="43.5625" />
-      <Connection Source="$stsSensor" Destination="$1.stsSensor" dx1="40" />
-      <Connection Source="$modoOperacao" Destination="$1.modoOperacao" dx1="45.16675" />
-      <Connection Source="$1.stsBloqueioManual" Destination="$stsBloqueioManual" dx1="40" />
-      <Connection Source="$1.stsBloqueioAutomatico" Destination="$stsBloqueioAutomatico" />
-      <Connection Source="$1.stsBloqueioAutomatico" Destination="$2.49473D93252B0DA" dx1="60" dx2="110" dy="510.0001" />
-      <Connection Source="$1.stsBloqueioManual" Destination="$2.BB2A0720E9D81771" dx1="40" dx2="130" dy="450.0001" />
+      <Connection Source="$stsFalhaSensor" Destination="$1.stsFalhaSensor" dx1="63.5625" />
+      <Connection Source="$stsSensor" Destination="$1.stsSensor" dx1="177.646" />
+      <Connection Source="$1.stsBloqueioAutomatico" Destination="$stsBloqueioAutomatico" dx1="40" />
+      <Connection Source="$1.stsBloqueioAutomatico" Destination="$2.49473D93252B0DA" dx1="40" dx2="130" dy="-309.9999" />
       <Connection Source="$2.12F0FD62A934C480" Destination="$1.cmdHabilita" dx1="94.89587" />
-      <Connection Source="$2.87580D187FEC4F47" Destination="$1.stpAtivaBloqueio" dx1="114.8959" />
-      <Connection Source="$2.D9EBB6E5B5D78932" Destination="$1.stpDesativaBloqueio" dx1="134.8959" />
+      <Connection Source="$2.87580D187FEC4F47" Destination="$1.stpAtivaBloqueio" dx1="1054.896" />
+      <Connection Source="$2.D9EBB6E5B5D78932" Destination="$1.stpDesativaBloqueio" dx1="974.8959" />
     </DataConnections>
   </FBNetwork>
 </FBType>

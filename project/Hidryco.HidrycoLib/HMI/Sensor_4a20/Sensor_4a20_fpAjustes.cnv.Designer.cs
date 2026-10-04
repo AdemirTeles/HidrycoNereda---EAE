@@ -55,7 +55,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_4a20
 			this.freeText1.Font = new NxtControl.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular);
 			this.freeText1.Location = new NxtControl.Drawing.PointF(8D, 104D);
 			this.freeText1.Name = "freeText1";
-			this.freeText1.Text = "Range mínimo";
+			this.freeText1.Text = "Range Mínimo";
 			// 
 			// stpRangeMaximo
 			// 
@@ -114,7 +114,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_4a20
 			// 
 			// fpAjustes
 			// 
-			this.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(288D)), ((float)(192D)));
+			this.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(288D)), ((float)(197D)));
 			this.Brush = new NxtControl.Drawing.Brush("FaceplateBrush");
 			this.Shapes.AddRange(new System.ComponentModel.IComponent[] {
 			this.cmdHabilitaSensor,
@@ -123,7 +123,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_4a20
 			this.stpRangeMaximo,
 			this.freeText2,
 			this.drawnButton1});
-			this.Size = new System.Drawing.Size(288, 192);
+			this.Size = new System.Drawing.Size(288, 197);
 
 		}
 		private System.HMI.Symbols.Base.TextBox<float> stpRangeMinimo;

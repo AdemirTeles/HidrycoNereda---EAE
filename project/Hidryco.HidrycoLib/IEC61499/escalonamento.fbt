@@ -10,7 +10,9 @@
         <With Var="cmdHabilitaSensor" />
         <With Var="stsSensorBruto" />
       </Event>
-      <Event Name="E_RESET_FALHA" />
+      <Event Name="E_RESET_FALHA">
+        <With Var="cmdReset" />
+      </Event>
       <Event Name="E_AJUSTE_STP">
         <With Var="stpRangeMaximo" />
         <With Var="stpRangeMinimo" />
@@ -27,6 +29,7 @@
       <VarDeclaration Name="stsSensorBruto" Type="INT" Comment="Input event qualifier" />
       <VarDeclaration Name="stpRangeMaximo" Type="REAL" />
       <VarDeclaration Name="stpRangeMinimo" Type="REAL" />
+      <VarDeclaration ID="35C270DE945E5D10" Name="cmdReset" Type="BOOL" />
     </InputVars>
     <OutputVars>
       <VarDeclaration Name="stsFalhaSensor" Type="BOOL" />
@@ -35,53 +38,56 @@
   </InterfaceList>
   <FBNetwork>
     <FB ID="1" Name="FB1" Type="basicEscalonamento" x="2020" y="1480" Namespace="Hidryco.HidrycoLib" />
-    <FB ID="2" Name="FB2" Type="E_DELAY" x="2300" y="859.9999" Namespace="IEC61499.Standard">
+    <FB ID="2" Name="FB2" Type="E_DELAY" x="3700" y="700" Namespace="IEC61499.Standard">
       <Parameter Name="$DT" Value="T#5s" />
     </FB>
-    <Input Name="REQ" x="1220" y="1552" Type="Event" />
-    <Input Name="E_RESET_FALHA" x="1220" y="1612" Type="Event" />
-    <Input Name="E_AJUSTE_STP" x="1220" y="1672" Type="Event" />
-    <Input Name="cmdHabilitaSensor" x="1220" y="1932" Type="Data" />
-    <Input Name="stsSensorBruto" x="1220" y="1992" Type="Data" />
-    <Input Name="stpRangeMaximo" x="1220" y="2052" Type="Data" />
-    <Input Name="stpRangeMinimo" x="1220" y="2112" Type="Data" />
-    <Output Name="CNF" x="3120" y="1552" Type="Event" />
-    <Output Name="stsFalhaSensor" x="3120" y="1932" Type="Data" />
-    <Output Name="stsSensorEscalonado" x="3120" y="1992" Type="Data" />
+    <Input Name="REQ" x="1220" y="1492" Type="Event" />
+    <Input Name="E_RESET_FALHA" x="1220" y="1552" Type="Event" />
+    <Input Name="E_AJUSTE_STP" x="1220" y="1612" Type="Event" />
+    <Input Name="cmdHabilitaSensor" x="1220" y="1812" Type="Data" />
+    <Input Name="stsSensorBruto" x="1220" y="1872" Type="Data" />
+    <Input Name="stpRangeMaximo" x="1220" y="1932" Type="Data" />
+    <Input Name="stpRangeMinimo" x="1220" y="1992" Type="Data" />
+    <Input ID="35C270DE945E5D10" Name="cmdReset" x="1220" y="2052" Type="Data" />
+    <Output Name="CNF" x="3120" y="1492" Type="Event" />
+    <Output Name="stsFalhaSensor" x="3120" y="1872" Type="Data" />
+    <Output Name="stsSensorEscalonado" x="3120" y="1812" Type="Data" />
     <EventConnections>
-      <Connection Source="$E_AJUSTE_STP" Destination="$1.E_AJUSTE_STP" dx1="40" />
       <Connection Source="$E_RESET_FALHA" Destination="$1.E_RESET_FALHA" dx1="46.6875" />
       <Connection Source="$REQ" Destination="$1.REQ" dx1="49.54163" />
-      <Connection Source="$1.CNF" Destination="$CNF" dx1="100" />
-      <Connection Source="$1.START_DELAY" Destination="$2.START" dx1="78.22949" dx2="50" dy="-169.9999" />
+      <Connection Source="$1.CNF" Destination="$CNF" dx1="120" />
+      <Connection Source="$1.START_DELAY" Destination="$2.START" dx1="78.22949" />
       <Connection Source="$2.EO" Destination="$1.END_DELAY">
         <Points>
           <Points>
-            <X>660.375</X>
-            <Y>224.999985</Y>
+            <X>1010.375</X>
+            <Y>185</Y>
           </Points>
           <Points>
-            <X>670.375</X>
-            <Y>224.999985</Y>
+            <X>1020.375</X>
+            <Y>185</Y>
           </Points>
           <Points>
-            <X>670.375</X>
-            <Y>424.999969</Y>
+            <X>1020.375</X>
+            <Y>409.999969</Y>
           </Points>
           <Points>
             <X>499.999969</X>
-            <Y>424.999969</Y>
+            <Y>409.999969</Y>
           </Points>
         </Points>
       </Connection>
+      <Connection Source="$1.4C6B42B2888B4333" Destination="$2.STOP" dx1="98.22949" />
+      <Connection Source="$E_AJUSTE_STP" Destination="$1.REQ" dx1="40" />
     </EventConnections>
     <DataConnections>
-      <Connection Source="$stpRangeMinimo" Destination="$1.stpRangeMinimo" dx1="46.70837" />
+      <Connection Source="$stpRangeMinimo" Destination="$1.stpRangeMinimo" dx1="40" />
       <Connection Source="$stpRangeMaximo" Destination="$1.stpRangeMaximo" dx1="40" />
-      <Connection Source="$stsSensorBruto" Destination="$1.stsSensorBruto" dx1="98.39587" />
+      <Connection Source="$stsSensorBruto" Destination="$1.stsSensorBruto" dx1="40" />
       <Connection Source="$cmdHabilitaSensor" Destination="$1.cmdHabilitaSensor" dx1="40" />
-      <Connection Source="$1.stsSensorEscalonado" Destination="$stsSensorEscalonado" dx1="40" />
-      <Connection Source="$1.stsFalhaSensor" Destination="$stsFalhaSensor" dx1="60" />
+      <Connection Source="$1.stsSensorEscalonado" Destination="$stsSensorEscalonado" dx1="60" />
+      <Connection Source="$1.stsFalhaSensor" Destination="$stsFalhaSensor" dx1="40" />
+      <Connection Source="$35C270DE945E5D10" Destination="$1.28C4AFA85E501AD7" />
     </DataConnections>
   </FBNetwork>
 </FBType>

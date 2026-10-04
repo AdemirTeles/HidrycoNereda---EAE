@@ -1,19 +1,3 @@
-/* StartCanvas.cnv.Designer.cs */
-/* =====================================================================$
- * Copyright © {2022} Schneider Electric.   All rights reserved.
- * The contents of this file is subject to confidentiality.
- *
- * =====================================================================$
- */
-
-/*
- * Created by HMI.Main.
- * User:  
- * Date: 18.09.2008
- * Time: 17:50
- * 
- * To change this template use Tools | Options | Coding | Edit Standard Headers.
- */
 using System;
 using System.ComponentModel;
 using System.Collections;
@@ -54,7 +38,7 @@ namespace HMI.Main.Canvases
     	this.rectangle2 = new NxtControl.GuiFramework.Rectangle();
     	this.rectangle3 = new NxtControl.GuiFramework.Rectangle();
     	this.group1 = new NxtControl.GuiFramework.Group();
-    	this.alarmGrid1 = new NxtControl.GuiFramework.AlarmGrid();
+			this.alarmGrid1 = new NxtControl.GuiFramework.AlarmGrid();
     	this.AckBtn = new NxtControl.GuiFramework.DrawnButton();
     	this.changeCanvasButton1 = new NxtControl.GuiFramework.ChangeCanvasButton();
     	this.changeCanvasButton2 = new NxtControl.GuiFramework.ChangeCanvasButton();

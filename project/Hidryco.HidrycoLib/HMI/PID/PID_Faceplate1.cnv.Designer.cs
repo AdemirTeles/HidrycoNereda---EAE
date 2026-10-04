@@ -54,7 +54,7 @@ namespace Hidryco.HidrycoLib.Faceplates.PID
 			this.cmdHabilitaPID.Font = new NxtControl.Drawing.Font("ButtonFont");
 			this.cmdHabilitaPID.FontScale = false;
 			this.cmdHabilitaPID.Name = "cmdHabilitaPID";
-			this.cmdHabilitaPID.TagName = "cmdHabilitaPID";
+			this.cmdHabilitaPID.TagName = "CMD_HABILITA";
 			this.cmdHabilitaPID.TrueImage = new NxtControl.Drawing.ImageHolder();
 			this.cmdHabilitaPID.TrueImageDisabled = new NxtControl.Drawing.ImageHolder();
 			this.cmdHabilitaPID.TrueText = "Desabilitar";
@@ -72,7 +72,7 @@ namespace Hidryco.HidrycoLib.Faceplates.PID
 			this.stpSaidaDesejada.NumberBase = NxtControl.GuiFramework.NumberBase.Decimal;
 			this.stpSaidaDesejada.Pen = new NxtControl.Drawing.Pen("TextBoxPen");
 			this.stpSaidaDesejada.SetColor = new NxtControl.Drawing.Color("Yellow");
-			this.stpSaidaDesejada.TagName = "stpDesejado";
+			this.stpSaidaDesejada.TagName = "STP_DESEJADO";
 			this.stpSaidaDesejada.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
 			this.stpSaidaDesejada.Value = 0F;
 			this.stpSaidaDesejada.EndInit();
@@ -88,7 +88,7 @@ namespace Hidryco.HidrycoLib.Faceplates.PID
 			this.stpKP.NumberBase = NxtControl.GuiFramework.NumberBase.Decimal;
 			this.stpKP.Pen = new NxtControl.Drawing.Pen("TextBoxPen");
 			this.stpKP.SetColor = new NxtControl.Drawing.Color("Yellow");
-			this.stpKP.TagName = "stpKP";
+			this.stpKP.TagName = "STP_PARAMETRO_KP";
 			this.stpKP.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
 			this.stpKP.Value = 0F;
 			this.stpKP.EndInit();
@@ -104,7 +104,7 @@ namespace Hidryco.HidrycoLib.Faceplates.PID
 			this.stpKI.NumberBase = NxtControl.GuiFramework.NumberBase.Decimal;
 			this.stpKI.Pen = new NxtControl.Drawing.Pen("TextBoxPen");
 			this.stpKI.SetColor = new NxtControl.Drawing.Color("Yellow");
-			this.stpKI.TagName = "stpKI";
+			this.stpKI.TagName = "STP_PARAMETRO_KI";
 			this.stpKI.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
 			this.stpKI.Value = 0F;
 			this.stpKI.EndInit();
@@ -120,7 +120,7 @@ namespace Hidryco.HidrycoLib.Faceplates.PID
 			this.stpKD.NumberBase = NxtControl.GuiFramework.NumberBase.Decimal;
 			this.stpKD.Pen = new NxtControl.Drawing.Pen("TextBoxPen");
 			this.stpKD.SetColor = new NxtControl.Drawing.Color("Yellow");
-			this.stpKD.TagName = "stpKD";
+			this.stpKD.TagName = "STP_PARAMETRO_KD";
 			this.stpKD.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
 			this.stpKD.Value = 0F;
 			this.stpKD.EndInit();
@@ -136,7 +136,7 @@ namespace Hidryco.HidrycoLib.Faceplates.PID
 			this.stpMaximo.NumberBase = NxtControl.GuiFramework.NumberBase.Decimal;
 			this.stpMaximo.Pen = new NxtControl.Drawing.Pen("TextBoxPen");
 			this.stpMaximo.SetColor = new NxtControl.Drawing.Color("Yellow");
-			this.stpMaximo.TagName = "stpMaximo";
+			this.stpMaximo.TagName = "STP_MAXIMO";
 			this.stpMaximo.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
 			this.stpMaximo.Value = 0F;
 			this.stpMaximo.EndInit();
@@ -152,7 +152,7 @@ namespace Hidryco.HidrycoLib.Faceplates.PID
 			this.stpMinimo.NumberBase = NxtControl.GuiFramework.NumberBase.Decimal;
 			this.stpMinimo.Pen = new NxtControl.Drawing.Pen("TextBoxPen");
 			this.stpMinimo.SetColor = new NxtControl.Drawing.Color("Yellow");
-			this.stpMinimo.TagName = "stpMinimo";
+			this.stpMinimo.TagName = "STP_MINIMO";
 			this.stpMinimo.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
 			this.stpMinimo.Value = 0F;
 			this.stpMinimo.EndInit();

@@ -39,9 +39,9 @@ namespace Hidryco.HidrycoLib.Symbols.ElevatoriaEsgotoBruto
 			this.roundedRectangle1 = new NxtControl.GuiFramework.RoundedRectangle();
 			this.roundedRectangle2 = new NxtControl.GuiFramework.RoundedRectangle();
 			this.resetFalhasProcesso = new NxtControl.GuiFramework.DrawnButton();
-			this.Revezamento_3_Motores_ok1 = new Hidryco.HidrycoLib.Symbols.Revezamento_3_Motores_ok.sDefault();
+			this.Revezamento_3_Motores_ok1 = new Hidryco.HidrycoLib.Symbols.Revezamento_3_Motores.sDefault();
 			this.PID2 = new Hidryco.HidrycoLib.Symbols.PID.sDefault();
-			this.Necessidade_2_Equipamentos_ok1 = new Hidryco.HidrycoLib.Symbols.Necessidade_2_Equipamentos_ok.sDefault();
+			this.Necessidade_2_Equipamentos_ok1 = new Hidryco.HidrycoLib.Symbols.Necessidade_2_Equipamentos.sDefault();
 			this.LIT_100_03 = new Hidryco.HidrycoLib.Symbols.Sensor_Nivel_4a20.sDefault();
 			this.PT_100_01 = new Hidryco.HidrycoLib.Symbols.Sensor_4a20.sDefault();
 			// 
@@ -169,7 +169,7 @@ namespace Hidryco.HidrycoLib.Symbols.ElevatoriaEsgotoBruto
 			this.Revezamento_3_Motores_ok1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 48D, 72D);
 			this.Revezamento_3_Motores_ok1.Name = "Revezamento_3_Motores_ok1";
 			this.Revezamento_3_Motores_ok1.SecurityToken = ((uint)(4294967295u));
-			this.Revezamento_3_Motores_ok1.TagName = "Revezamento_3_Motores_ok1";
+			this.Revezamento_3_Motores_ok1.TagName = "Revezamento";
 			this.Revezamento_3_Motores_ok1.EndInit();
 			// 
 			// PID2
@@ -178,7 +178,7 @@ namespace Hidryco.HidrycoLib.Symbols.ElevatoriaEsgotoBruto
 			this.PID2.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 48D, 120D);
 			this.PID2.Name = "PID2";
 			this.PID2.SecurityToken = ((uint)(4294967295u));
-			this.PID2.TagName = "PID2";
+			this.PID2.TagName = "PID";
 			this.PID2.EndInit();
 			// 
 			// Necessidade_2_Equipamentos_ok1
@@ -187,7 +187,7 @@ namespace Hidryco.HidrycoLib.Symbols.ElevatoriaEsgotoBruto
 			this.Necessidade_2_Equipamentos_ok1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 48D, 24D);
 			this.Necessidade_2_Equipamentos_ok1.Name = "Necessidade_2_Equipamentos_ok1";
 			this.Necessidade_2_Equipamentos_ok1.SecurityToken = ((uint)(4294967295u));
-			this.Necessidade_2_Equipamentos_ok1.TagName = "Necessidade_2_Equipamentos_ok1";
+			this.Necessidade_2_Equipamentos_ok1.TagName = "Necessidade";
 			this.Necessidade_2_Equipamentos_ok1.EndInit();
 			// 
 			// LIT_100_03
@@ -245,11 +245,11 @@ namespace Hidryco.HidrycoLib.Symbols.ElevatoriaEsgotoBruto
 		private Hidryco.HidrycoLib.Symbols.Motor_Inversor.sBomba Motor_Inversor_ok5;
 		private Hidryco.HidrycoLib.Symbols.Motor_Inversor.sBomba Motor_Inversor_ok6;
 		private Hidryco.HidrycoLib.Symbols.PID.sDefault PID2;
-		private Hidryco.HidrycoLib.Symbols.Revezamento_3_Motores_ok.sDefault Revezamento_3_Motores_ok1;
+		private Hidryco.HidrycoLib.Symbols.Revezamento_3_Motores.sDefault Revezamento_3_Motores_ok1;
 		private NxtControl.GuiFramework.RoundedRectangle roundedRectangle1;
 		private NxtControl.GuiFramework.RoundedRectangle roundedRectangle2;
 		private NxtControl.GuiFramework.DrawnButton resetFalhasProcesso;
-		private Hidryco.HidrycoLib.Symbols.Necessidade_2_Equipamentos_ok.sDefault Necessidade_2_Equipamentos_ok1;
+		private Hidryco.HidrycoLib.Symbols.Necessidade_2_Equipamentos.sDefault Necessidade_2_Equipamentos_ok1;
 		private Hidryco.HidrycoLib.Symbols.Sensor_Nivel_4a20.sDefault LIT_100_03;
 		private Hidryco.HidrycoLib.Symbols.Sensor_4a20.sDefault PT_100_01;
 		#endregion

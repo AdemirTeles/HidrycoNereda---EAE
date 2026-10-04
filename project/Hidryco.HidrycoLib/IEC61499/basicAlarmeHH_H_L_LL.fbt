@@ -5,8 +5,9 @@
   <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="1/23/2026" Remarks="Template" />
   <InterfaceList>
     <EventInputs>
-      <Event Name="E_RESET_ALARMES" />
-      <Event Name="E_ATUALIZA_STP">
+      <Event ID="47B035110A931D0B" Name="REQ">
+        <With Var="modoAlarme" />
+        <With Var="stsSensorHabilitado" />
         <With Var="cmdHabilitaAlarmeHH" />
         <With Var="cmdHabilitaAlarmeH" />
         <With Var="cmdHabilitaAlarmeL" />
@@ -19,11 +20,10 @@
         <With Var="stpAlarmeH" />
         <With Var="stpAlarmeL" />
         <With Var="stpAlarmeLL" />
-        <With Var="modoAlarme" />
-        <With Var="stsSensorHabilitado" />
-      </Event>
-      <Event Name="E_ATUALIZA_ENTRADA">
         <With Var="stsEntradaAlarme" />
+      </Event>
+      <Event Name="E_RESET_ALARMES">
+        <With Var="cmdReset" />
       </Event>
       <Event Name="END_DELAY" />
     </EventInputs>
@@ -37,10 +37,12 @@
       <Event Name="START_DELAY">
         <With Var="delayTime" />
       </Event>
+      <Event ID="EC696EA9B8D3D902" Name="STOP_DELAY" />
     </EventOutputs>
     <InputVars>
       <VarDeclaration Name="modoAlarme" Type="UINT" Comment="Modo do alarme: 0 - AutoReset, 1 - Comando de Reset" />
       <VarDeclaration Name="stsSensorHabilitado" Type="BOOL" />
+      <VarDeclaration Name="stsEntradaAlarme" Type="REAL" />
       <VarDeclaration Name="cmdHabilitaAlarmeHH" Type="BOOL" />
       <VarDeclaration Name="cmdHabilitaAlarmeH" Type="BOOL" />
       <VarDeclaration Name="cmdHabilitaAlarmeL" Type="BOOL" />
@@ -53,7 +55,7 @@
       <VarDeclaration Name="stpAlarmeH" Type="REAL" />
       <VarDeclaration Name="stpAlarmeL" Type="REAL" />
       <VarDeclaration Name="stpAlarmeLL" Type="REAL" />
-      <VarDeclaration Name="stsEntradaAlarme" Type="REAL" />
+      <VarDeclaration ID="736ABAD282CDAA19" Name="cmdReset" Type="BOOL" />
     </InputVars>
     <OutputVars>
       <VarDeclaration Name="stsAlarmeHH" Type="BOOL" Comment="Output event qualifier" />
@@ -63,123 +65,174 @@
       <VarDeclaration Name="delayTime" Type="TIME" />
     </OutputVars>
   </InterfaceList>
-  <BasicFB>
-    <Attribute Name="FBType.Basic.Algorithm.Order" Value="AlarmeHH,AtivaAlarme,ResetAlarmesManual,ResetAlarmesAutomatico,ResetAlarmesSensorDesabilitado" />
+  <BasicFB ID="e5f6e7c1-b06d-4580-b72b-8258508c3ba1">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="algMarcaFimDelay,algReq,algMarcaReset" />
+    <InternalVars>
+      <VarDeclaration ID="C61AA7648953FEE4" Name="bResetPedido" Type="BOOL" />
+      <VarDeclaration ID="0D1F8070B0B50B9E" Name="bTimerExpirou" Type="BOOL" />
+      <VarDeclaration ID="9BDA289C7B0F683B" Name="bTimerAtivo" Type="BOOL" />
+      <VarDeclaration ID="C80B30200E7644C3" Name="iNivelTimer" Type="INT" />
+      <VarDeclaration ID="98D59377CD380165" Name="iNivelNovo" Type="INT" />
+      <VarDeclaration ID="6492BDB8F65163E5" Name="timerCmd" Type="INT" />
+      <VarDeclaration ID="178E85DF5AAC3748" Name="tNovo" Type="TIME" />
+      <VarDeclaration ID="A08A8D65C20FF485" Name="bCondHH" Type="BOOL" />
+      <VarDeclaration ID="AE85AA08E813A010" Name="bCondH" Type="BOOL" />
+      <VarDeclaration ID="300D56215A7FA107" Name="bCondL" Type="BOOL" />
+      <VarDeclaration ID="B448415932E15A12" Name="bCondLL" Type="BOOL" />
+    </InternalVars>
     <ECC>
-      <ECState Name="START" Comment="Initial State" x="1244.941" y="381.4117" />
-      <ECState Name="STATE2" x="2244" y="2132">
-        <ECAction Algorithm="AlarmeHH" Output="START_DELAY" />
+      <ECState Name="START" Comment="Initial State" x="1576.941" y="381.4117" />
+      <ECState Name="AVALIA" x="2140" y="1748">
+        <ECAction Algorithm="algReq" Output="CNF" />
       </ECState>
-      <ECState Name="STATE1" x="2756" y="1696">
-        <ECAction Algorithm="AtivaAlarme" Output="CNF" />
+      <ECState Name="FIM_DELAY" x="2432" y="976.0001">
+        <ECAction Algorithm="algMarcaFimDelay" />
       </ECState>
-      <ECState Name="STATE3" x="648" y="1860">
-        <ECAction Algorithm="ResetAlarmesManual" Output="CNF" />
+      <ECState Name="INICIA_DELAY" x="423.9999" y="504">
+        <ECAction Output="START_DELAY" />
       </ECState>
-      <ECState Name="STATE4" x="224" y="1380">
-        <ECAction Algorithm="ResetAlarmesAutomatico" Output="CNF" />
+      <ECState Name="PARA_DELAY" x="276" y="1200">
+        <ECAction Output="STOP_DELAY" />
       </ECState>
-      <ECState Name="STATE5" x="1424" y="928.0001" />
-      <ECState Name="STATE6" x="2100" y="416">
-        <ECAction Algorithm="ResetAlarmesSensorDesabilitado" />
+      <ECState Name="REINICIA_DELAY" x="400" y="1860">
+        <ECAction Output="STOP_DELAY" />
+        <ECAction Output="START_DELAY" />
       </ECState>
-      <ECTransition Source="START" Destination="STATE5" Condition="stsSensorHabilitado" x="1412.793" y="631.3573">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="351.3391,137.4676,363.4116,174.3196" />
+      <ECState Name="RESET" x="2160" y="216">
+        <ECAction Algorithm="algMarcaReset" />
+      </ECState>
+      <ECTransition Source="START" Destination="AVALIA" Condition="REQ" x="1993.985" y="920.6455">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="452.4042,195.3127,564,241" />
       </ECTransition>
-      <ECTransition Source="STATE5" Destination="STATE1" Condition="END_DELAY" x="2363.26" y="1432.158">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="571.1469,342.9008,652.7144,393.2049" />
+      <ECTransition Source="START" Destination="RESET" Condition="E_RESET_ALARMES" x="1904.248" y="211.2976">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="470.9885,51.16471,490.4537,46.02129" />
       </ECTransition>
-      <ECTransition Source="STATE1" Destination="STATE5" Condition="1" x="2339.435" y="1087.259">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="691.0005,286.634,508.3286,224.4746" />
+      <ECTransition Source="START" Destination="FIM_DELAY" Condition="END_DELAY" x="2091.077" y="631.4614">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="497.772,133.2412,554.7719,175.0176" />
       </ECTransition>
-      <ECTransition Source="STATE5" Destination="STATE2" Condition="E_ATUALIZA_ENTRADA" x="1889.506" y="1483.559">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="445.209,322.3358,506.4559,411.7038" />
+      <ECTransition Source="RESET" Destination="AVALIA" Condition="1" x="2227.464" y="982.9791">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="563.2745,186.3415,561.7213,305.3112" />
       </ECTransition>
-      <ECTransition Source="STATE2" Destination="STATE5" Condition="1" x="1805.258" y="1601.11">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="481.0981,451.3896,418.8789,361.017" />
+      <ECTransition Source="FIM_DELAY" Destination="AVALIA" Condition="1" x="2325.803" y="1425.777">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="594.5428,333.5924,572.2088,389.9253" />
       </ECTransition>
-      <ECTransition Source="STATE5" Destination="STATE3" Condition="modoAlarme = 1 AND E_RESET_ALARMES" x="1155.409" y="1491.412">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="322.3625,346.7281,267.3195,415.213" />
+      <ECTransition Source="AVALIA" Destination="PARA_DELAY" Condition="timerCmd = 2" x="1205.916" y="1551.365">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="369.5573,412.5557,234.5214,373.3394" />
       </ECTransition>
-      <ECTransition Source="STATE3" Destination="STATE5" Condition="1" x="1042.395" y="1239.526">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="210.5502,313.4688,314.0749,280.5485" />
+      <ECTransition Source="AVALIA" Destination="REINICIA_DELAY" Condition="timerCmd = 3" x="1321.182" y="1868.49">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="385.0202,467.3684,273.739,474.1951" />
       </ECTransition>
-      <ECTransition Source="STATE5" Destination="STATE4" Condition="modoAlarme = 0" x="768.9833" y="1230.385">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="211.0552,304.2968,161.0878,321.8938" />
+      <ECTransition Source="AVALIA" Destination="INICIA_DELAY" Condition="timerCmd = 1" x="1270.128" y="1195.672">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="377.86,347.7744,258.0115,261.6738" />
       </ECTransition>
-      <ECTransition Source="STATE4" Destination="STATE5" Condition="1" x="858.8951" y="1037.704">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="195.3764,260.8038,244.5859,241.9513" />
+      <ECTransition Source="AVALIA" Destination="START" Condition="1" x="1934.389" y="1317.567">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="515.1667,406.5083,465.9431,294.4186" />
       </ECTransition>
-      <ECTransition Source="STATE5" Destination="START" Condition="1" x="1331.612" y="729.7059">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="339.6539,207.1025,327.5814,170.2505" />
+      <ECTransition Source="INICIA_DELAY" Destination="START" Condition="1" x="960.3657" y="363.9237">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="199.0226,91.19733,273.6372,83.08014" />
       </ECTransition>
-      <ECTransition Source="START" Destination="STATE6" Condition="NOT stsSensorHabilitado" x="1660.78" y="320.1744">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="391.505,75.78776,438.0497,77.45992" />
+      <ECTransition Source="PARA_DELAY" Destination="START" Condition="1" x="821.2079" y="806.8622">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="150.6296,233.0353,245.4526,173.0885" />
       </ECTransition>
-      <ECTransition Source="STATE6" Destination="START" Condition="1" x="1671.739" y="474.7105">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="442.2721,122.8541,394.5888,121.1017" />
+      <ECTransition Source="REINICIA_DELAY" Destination="START" Condition="1" x="931.4269" y="1101.794">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="184.0003,331.3705,273.7998,216.3744" />
       </ECTransition>
     </ECC>
-    <Algorithm Name="AlarmeHH">
-      <ST><![CDATA[IF cmdHabilitaAlarmeHH AND (stsEntradaAlarme > stpAlarmeHH) THEN
-	delayTime := DINT_TO_TIME(UINT_TO_DINT(stpTempoAlarmeHH) * 1000);
-	
-ELSIF cmdHabilitaAlarmeH AND (stsEntradaAlarme > stpAlarmeH) THEN
-	delayTime := DINT_TO_TIME(UINT_TO_DINT(stpTempoAlarmeH) * 1000);
-	
-ELSIF cmdHabilitaAlarmeLL AND (stsEntradaAlarme < stpAlarmeLL) THEN
-	delayTime := DINT_TO_TIME(UINT_TO_DINT(stpTempoAlarmeLL) * 1000);
-	
-ELSIF cmdHabilitaAlarmeL AND (stsEntradaAlarme < stpAlarmeL) THEN
-	delayTime := DINT_TO_TIME(UINT_TO_DINT(stpTempoAlarmeL) * 1000);
-END_IF
+    <Algorithm ID="c0478f3d-b09d-41c9-aaf8-2f00834c7f74" Name="algMarcaFimDelay">
+      <ST><![CDATA[bTimerExpirou := bTimerAtivo;
 ;]]></ST>
     </Algorithm>
-    <Algorithm Name="AtivaAlarme">
-      <ST><![CDATA[IF cmdHabilitaAlarmeHH AND (stsEntradaAlarme > stpAlarmeHH) THEN
-	stsAlarmeHH := TRUE;
-	
-ELSIF cmdHabilitaAlarmeH AND (stsEntradaAlarme > stpAlarmeH) THEN
-	stsAlarmeH := TRUE;
-	
-ELSIF cmdHabilitaAlarmeLL AND (stsEntradaAlarme < stpAlarmeLL) THEN
-	stsAlarmeLL := TRUE;
-	
-ELSIF cmdHabilitaAlarmeL AND (stsEntradaAlarme < stpAlarmeL) THEN
-	stsAlarmeL := TRUE;
-END_IF
+    <Algorithm ID="00eee1e1-c9e2-4231-a659-e8921690c749" Name="algReq">
+      <ST><![CDATA[timerCmd := 0;
+
+(* ---- Sensor desabilitado: zera tudo ---- *)
+IF NOT stsSensorHabilitado THEN
+    stsAlarmeHH := FALSE;
+    stsAlarmeH  := FALSE;
+    stsAlarmeL  := FALSE;
+    stsAlarmeLL := FALSE;
+    bResetPedido  := FALSE;
+    bTimerExpirou := FALSE;
+    IF bTimerAtivo THEN
+        timerCmd := 2;
+    END_IF;
+    bTimerAtivo := FALSE;
+    iNivelTimer := 0;
+    RETURN;
+END_IF;
+
+(* ---- Condições atuais ---- *)
+bCondHH := cmdHabilitaAlarmeHH AND (stsEntradaAlarme > stpAlarmeHH);
+bCondH  := cmdHabilitaAlarmeH  AND (stsEntradaAlarme > stpAlarmeH);
+bCondL  := cmdHabilitaAlarmeL  AND (stsEntradaAlarme < stpAlarmeL);
+bCondLL := cmdHabilitaAlarmeLL AND (stsEntradaAlarme < stpAlarmeLL);
+
+(* ---- Alarme desabilitado zera o próprio alarme ---- *)
+IF NOT cmdHabilitaAlarmeHH THEN stsAlarmeHH := FALSE; END_IF;
+IF NOT cmdHabilitaAlarmeH  THEN stsAlarmeH  := FALSE; END_IF;
+IF NOT cmdHabilitaAlarmeL  THEN stsAlarmeL  := FALSE; END_IF;
+IF NOT cmdHabilitaAlarmeLL THEN stsAlarmeLL := FALSE; END_IF;
+
+(* ---- Tempo esgotado: ativa todos cuja condição persiste ---- *)
+IF bTimerExpirou THEN
+    IF bCondHH THEN stsAlarmeHH := TRUE; END_IF;
+    IF bCondH  THEN stsAlarmeH  := TRUE; END_IF;
+    IF bCondL  THEN stsAlarmeL  := TRUE; END_IF;
+    IF bCondLL THEN stsAlarmeLL := TRUE; END_IF;
+    bTimerExpirou := FALSE;
+    bTimerAtivo   := FALSE;
+    iNivelTimer   := 0;
+END_IF;
+
+(* ---- Reset ---- *)
+IF modoAlarme = 0 THEN
+    (* automático, histerese de 10% do setpoint *)
+    IF stsAlarmeHH AND (stsEntradaAlarme <= stpAlarmeHH - ABS(stpAlarmeHH) * 0.1) THEN stsAlarmeHH := FALSE; END_IF;
+    IF stsAlarmeH  AND (stsEntradaAlarme <= stpAlarmeH  - ABS(stpAlarmeH)  * 0.1) THEN stsAlarmeH  := FALSE; END_IF;
+    IF stsAlarmeL  AND (stsEntradaAlarme >= stpAlarmeL  + ABS(stpAlarmeL)  * 0.1) THEN stsAlarmeL  := FALSE; END_IF;
+    IF stsAlarmeLL AND (stsEntradaAlarme >= stpAlarmeLL + ABS(stpAlarmeLL) * 0.1) THEN stsAlarmeLL := FALSE; END_IF;
+ELSIF bResetPedido THEN
+    (* manual, sem histerese: só zera se o valor já voltou *)
+    IF stsAlarmeHH AND (stsEntradaAlarme <= stpAlarmeHH) THEN stsAlarmeHH := FALSE; END_IF;
+    IF stsAlarmeH  AND (stsEntradaAlarme <= stpAlarmeH)  THEN stsAlarmeH  := FALSE; END_IF;
+    IF stsAlarmeL  AND (stsEntradaAlarme >= stpAlarmeL)  THEN stsAlarmeL  := FALSE; END_IF;
+    IF stsAlarmeLL AND (stsEntradaAlarme >= stpAlarmeLL) THEN stsAlarmeLL := FALSE; END_IF;
+END_IF;
+bResetPedido := FALSE;
+
+(* ---- Pendente de maior prioridade (HH > H > LL > L) ---- *)
+iNivelNovo := 0;
+IF bCondHH AND NOT stsAlarmeHH THEN
+    iNivelNovo := 1; tNovo := DINT_TO_TIME(UINT_TO_DINT(stpTempoAlarmeHH) * 1000);
+ELSIF bCondH AND NOT stsAlarmeH THEN
+    iNivelNovo := 2; tNovo := DINT_TO_TIME(UINT_TO_DINT(stpTempoAlarmeH) * 1000);
+ELSIF bCondLL AND NOT stsAlarmeLL THEN
+    iNivelNovo := 3; tNovo := DINT_TO_TIME(UINT_TO_DINT(stpTempoAlarmeLL) * 1000);
+ELSIF bCondL AND NOT stsAlarmeL THEN
+    iNivelNovo := 4; tNovo := DINT_TO_TIME(UINT_TO_DINT(stpTempoAlarmeL) * 1000);
+END_IF;
+
+(* ---- Decisão do temporizador ---- *)
+IF iNivelNovo = 0 THEN
+    IF bTimerAtivo THEN
+        timerCmd := 2;                  (* condição sumiu: cancela *)
+    END_IF;
+    bTimerAtivo := FALSE;
+    iNivelTimer := 0;
+ELSIF NOT bTimerAtivo THEN
+    delayTime   := tNovo;
+    timerCmd    := 1;                   (* inicia *)
+    bTimerAtivo := TRUE;
+    iNivelTimer := iNivelNovo;
+ELSIF iNivelNovo <> iNivelTimer THEN
+    delayTime   := tNovo;
+    timerCmd    := 3;                   (* troca de nível: reinicia com o novo tempo *)
+    iNivelTimer := iNivelNovo;
+END_IF;
 ;]]></ST>
     </Algorithm>
-    <Algorithm Name="ResetAlarmesManual">
-      <ST><![CDATA[stsAlarmeHH := FALSE;
-stsAlarmeH := FALSE;
-stsAlarmeL := FALSE;
-stsAlarmeLL := FALSE;
-;]]></ST>
-    </Algorithm>
-    <Algorithm Name="ResetAlarmesAutomatico">
-      <ST><![CDATA[IF cmdHabilitaAlarmeHH AND (stsEntradaAlarme <= stpAlarmeHH) THEN
-   stsAlarmeHH := FALSE;
-END_IF;
-
-IF cmdHabilitaAlarmeH AND (stsEntradaAlarme <= stpAlarmeH) THEN
-   stsAlarmeH := FALSE;
-END_IF;
-
-IF cmdHabilitaAlarmeLL AND (stsEntradaAlarme >= stpAlarmeLL) THEN
-   stsAlarmeLL := FALSE;
-END_IF;
-
-IF cmdHabilitaAlarmeL AND (stsEntradaAlarme >= stpAlarmeL) THEN
-   stsAlarmeL := FALSE;
-END_IF;
-]]></ST>
-    </Algorithm>
-    <Algorithm Name="ResetAlarmesSensorDesabilitado">
-      <ST><![CDATA[stsAlarmeHH := FALSE;
-stsAlarmeH := FALSE;
-stsAlarmeL := FALSE;
-stsAlarmeLL := FALSE;
+    <Algorithm ID="b8bed43b-d46d-47be-a45e-1d3c4d948c9e" Name="algMarcaReset">
+      <ST><![CDATA[bResetPedido := cmdReset;
 ;]]></ST>
     </Algorithm>
   </BasicFB>
