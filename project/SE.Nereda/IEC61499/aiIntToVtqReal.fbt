@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="33145006-51b4-42c2-b739-6bccac165d73" Name="aiIntToVtqReal" Comment="Converte valor bruto INT (remota) em VTQREAL para a entrada externa do aiSignalDecode" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Hidryco" Version="1.0" Author="Hidryco" Date="10/5/2026" Remarks="Entrada INT para AnalogInput (4-20 mA via TM3BCEIP)" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="9C64D832256C82B4" Name="REQ" Comment="Novo valor bruto">
+        <With Var="RAW_IN" />
+        <With Var="QI_DST" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="BC5EA87CD2275B61" Name="CNF" Comment="Valor convertido">
+        <With Var="PV_OUT" />
+        <With Var="USE_INT" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="A7451C41429F9D06" Name="RAW_IN" Type="INT" Comment="Valor bruto do canal (symlink AInInt)" />
+      <VarDeclaration ID="9F9B5A9C85DA55C7" Name="QI_DST" Type="BOOL" Comment="QO do SYMLINKMULTIVARDST (TRUE = symlink conectado)" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="6E40BF80683FA37C" Name="PV_OUT" Type="VTQREAL" Comment="Valor bruto em VTQREAL" />
+      <VarDeclaration ID="FD829B78B964F3C2" Name="USE_INT" Type="BOOL" Comment="TRUE = usar a entrada INT no lugar do rawPv" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="d199dc0e-b325-4526-95f2-3987ff7fe1a8">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="Main" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="550" y="425" />
+      <ECState Name="EXEC" x="550" y="1100">
+        <ECAction Algorithm="Main" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="EXEC" Condition="REQ" x="760" y="760" />
+      <ECTransition Source="EXEC" Destination="START" Condition="1" x="340" y="760" />
+    </ECC>
+    <Algorithm Name="Main" Comment="Conversao INT para VTQREAL">
+      <ST><![CDATA[(* Converte o valor bruto INT de um canal analogico de remota (TM3AI8 via Modbus)
+   em VTQREAL para a entrada externa do aiSignalDecode. USE_INT so vai para TRUE quando o
+   symlink AInInt esta efetivamente conectado (QO do SYMLINKMULTIVARDST). *)
+IF QI_DST THEN
+    PV_OUT.value := INT_TO_REAL(RAW_IN);
+    PV_OUT.quality := 16#00000000;
+    USE_INT := TRUE;
+END_IF;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

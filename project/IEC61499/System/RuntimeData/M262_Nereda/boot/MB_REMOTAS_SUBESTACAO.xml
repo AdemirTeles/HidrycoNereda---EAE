@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<busmaster xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="MB_REMOTAS_SUBESTACAO" busId="MB_REMOTAS_SUBESTACAO" protocol="modbus" busCycle="T#80ms" enableSymlinkOC="false" busTolerance="10" busActionMissedCycle="1" alignWithResPriority="false" ReconnectAfterTimeout="Enable">
+  <connectinfo mastertype="master" transportprotocol="tcp" interframedelay="10" />
+  <logging enable="false" filename="modbus.log" />
+  <buscoupler name="SUB_A2_REMOTA1" diagnostics="disabled">
+    <connectinfo transportprotocol="tcp" stationid="255" responsetimeout="500" fallbackValue="HOLD">
+      <tcp ipaddress="10.26.208.192" port="502" />
+      <HA secondaryheartbeat="Enabled-ReadHoldingRegister" heartbeataddress="3001" />
+    </connectinfo>
+    <busdevice name="SUB_A3_DI32K">
+      <parameter addresstype="register" length="2" addressautocalculation="disable" address="3001" datatype="inonly" ioevent="cyclic" />
+    </busdevice>
+    <busdevice name="SUB_A4_DI32K">
+      <parameter addresstype="register" length="2" addressautocalculation="disable" address="3003" datatype="inonly" ioevent="cyclic" />
+    </busdevice>
+    <busdevice name="SUB_A6_DI32K">
+      <parameter addresstype="register" length="2" addressautocalculation="disable" address="3007" datatype="inonly" ioevent="cyclic" />
+    </busdevice>
+    <busdevice name="SUB_A8_DQ32TK">
+      <parameter addresstype="register" length="2" addressautocalculation="disable" address="3501" datatype="output" ioevent="cyclic" />
+    </busdevice>
+  </buscoupler>
+</busmaster>

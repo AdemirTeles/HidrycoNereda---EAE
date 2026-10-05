@@ -34,14 +34,14 @@ namespace HMI.Main.Canvases
     	this.newVersionDeployment1 = new NxtControl.GuiFramework.HMIDeployment();
     	this.canvasTopologyNavigation = new NxtControl.GuiFramework.CanvasTopologyRose();
     	this.logState1 = new NxtControl.GuiFramework.LogState();
-    	this.rectangle1 = new NxtControl.GuiFramework.Rectangle();
     	this.rectangle2 = new NxtControl.GuiFramework.Rectangle();
     	this.rectangle3 = new NxtControl.GuiFramework.Rectangle();
     	this.group1 = new NxtControl.GuiFramework.Group();
-			this.alarmGrid1 = new NxtControl.GuiFramework.AlarmGrid();
+    	this.alarmGrid1 = new NxtControl.GuiFramework.AlarmGrid();
     	this.AckBtn = new NxtControl.GuiFramework.DrawnButton();
     	this.changeCanvasButton1 = new NxtControl.GuiFramework.ChangeCanvasButton();
     	this.changeCanvasButton2 = new NxtControl.GuiFramework.ChangeCanvasButton();
+    	this.login2 = new NxtControl.GuiFramework.Login();
     	((System.ComponentModel.ISupportInitialize)(this.alarmGrid1)).BeginInit();
     	// 
     	// canvasTopologySeparator1
@@ -136,7 +136,7 @@ namespace HMI.Main.Canvases
     	// 
     	this.login1.Anchor = NxtControl.Drawing.AnchorStyles.Right;
     	this.login1.AngleIgnore = true;
-    	this.login1.Bounds = new NxtControl.Drawing.RectF(((float)(1296D)), ((float)(0D)), ((float)(35D)), ((float)(35D)));
+    	this.login1.Bounds = new NxtControl.Drawing.RectF(((float)(1280D)), ((float)(0D)), ((float)(35D)), ((float)(35D)));
     	this.login1.Brush = new NxtControl.Drawing.Brush("CanvasTopologyButtonBrush");
     	this.login1.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
     	this.login1.LookAndFeel = "Theme";
@@ -151,7 +151,7 @@ namespace HMI.Main.Canvases
     	this.currentUser1.Anchor = NxtControl.Drawing.AnchorStyles.Right;
     	this.currentUser1.AngleIgnore = true;
     	this.currentUser1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-    	this.currentUser1.Bounds = new NxtControl.Drawing.RectF(((float)(1266D)), ((float)(35D)), ((float)(100D)), ((float)(35D)));
+    	this.currentUser1.Bounds = new NxtControl.Drawing.RectF(((float)(1250D)), ((float)(35D)), ((float)(100D)), ((float)(35D)));
     	this.currentUser1.Brush = new NxtControl.Drawing.Brush(true);
     	this.currentUser1.Font = new NxtControl.Drawing.Font("HeaderFont");
     	this.currentUser1.LookAndFeel = "Theme";
@@ -175,7 +175,7 @@ namespace HMI.Main.Canvases
     	// runtimeConnection1
     	// 
     	this.runtimeConnection1.Anchor = NxtControl.Drawing.AnchorStyles.Right;
-    	this.runtimeConnection1.Bounds = new NxtControl.Drawing.RectF(((float)(1261D)), ((float)(0D)), ((float)(35D)), ((float)(35D)));
+    	this.runtimeConnection1.Bounds = new NxtControl.Drawing.RectF(((float)(1192D)), ((float)(32D)), ((float)(35D)), ((float)(35D)));
     	this.runtimeConnection1.ConnectedColor = new NxtControl.Drawing.Color("RuntimeConnectionConnected");
     	this.runtimeConnection1.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
     	this.runtimeConnection1.MibErrorColor = new NxtControl.Drawing.Color(((byte)(255)), ((byte)(0)), ((byte)(0)));
@@ -212,18 +212,9 @@ namespace HMI.Main.Canvases
     	this.logState1.Name = "logState1";
     	this.logState1.Radius = 0D;
     	// 
-    	// rectangle1
-    	// 
-    	this.rectangle1.Bounds = new NxtControl.Drawing.RectF(((float)(104D)), ((float)(20D)), ((float)(112D)), ((float)(29.473684310913086D)));
-    	this.rectangle1.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("transparent"));
-    	this.rectangle1.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
-    	this.rectangle1.ImageBytes = resources.GetString("rectangle1.ImageBytes");
-    	this.rectangle1.Name = "rectangle1";
-    	this.rectangle1.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("transparent"), 1F, NxtControl.Drawing.DashStyle.Solid);
-    	// 
     	// rectangle2
     	// 
-    	this.rectangle2.Bounds = new NxtControl.Drawing.RectF(((float)(224D)), ((float)(4D)), ((float)(112D)), ((float)(29.473684310913086D)));
+    	this.rectangle2.Bounds = new NxtControl.Drawing.RectF(((float)(112D)), ((float)(8D)), ((float)(112D)), ((float)(29.473684310913086D)));
     	this.rectangle2.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("transparent"));
     	this.rectangle2.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
     	this.rectangle2.ImageBytes = resources.GetString("rectangle2.ImageBytes");
@@ -232,7 +223,7 @@ namespace HMI.Main.Canvases
     	// 
     	// rectangle3
     	// 
-    	this.rectangle3.Bounds = new NxtControl.Drawing.RectF(((float)(224D)), ((float)(36D)), ((float)(112D)), ((float)(29.473684310913086D)));
+    	this.rectangle3.Bounds = new NxtControl.Drawing.RectF(((float)(112D)), ((float)(40D)), ((float)(112D)), ((float)(29.473684310913086D)));
     	this.rectangle3.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("transparent"));
     	this.rectangle3.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
     	this.rectangle3.ImageBytes = resources.GetString("rectangle3.ImageBytes");
@@ -317,6 +308,19 @@ namespace HMI.Main.Canvases
     	this.changeCanvasButton2.Name = "changeCanvasButton2";
     	this.changeCanvasButton2.Text = "EMERGENCY RECIPE";
     	// 
+    	// login2
+    	// 
+    	this.login2.AngleIgnore = true;
+    	this.login2.Bounds = new NxtControl.Drawing.RectF(((float)(256D)), ((float)(16D)), ((float)(48D)), ((float)(40D)));
+    	this.login2.Brush = new NxtControl.Drawing.Brush("CanvasTopologyButtonBrush");
+    	this.login2.Font = new NxtControl.Drawing.Font("HMI Sans Serif", 9F, System.Drawing.FontStyle.Regular);
+    	this.login2.LookAndFeel = "Theme";
+    	this.login2.Name = "login2";
+    	this.login2.Pen = new NxtControl.Drawing.Pen("CanvasTopologyButtonPen");
+    	this.login2.Radius = 2D;
+    	this.login2.TextColor = new NxtControl.Drawing.Color("CanvasTopologyButtonColor");
+    	this.login2.Use3DEffect = false;
+    	// 
     	// StartCanvas_2
     	// 
     	this.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(1366D)), ((float)(768D)));
@@ -335,12 +339,12 @@ namespace HMI.Main.Canvases
 			this.canvasTopologySeparator1,
 			this.canvasTopologySeparator2,
 			this.workArea,
-			this.rectangle1,
 			this.group1,
 			this.AckBtn,
 			this.siblingsPanel,
 			this.changeCanvasButton1,
-			this.changeCanvasButton2});
+			this.changeCanvasButton2,
+			this.login2});
     	this.Size = new System.Drawing.Size(1366, 768);
     	((System.ComponentModel.ISupportInitialize)(this.alarmGrid1)).EndInit();
 
@@ -361,7 +365,6 @@ private NxtControl.GuiFramework.LogState logState1;
     private NxtControl.GuiFramework.WorkAreaControl workArea;    
     private NxtControl.GuiFramework.CanvasTopologySeparator canvasTopologySeparator1;
     private NxtControl.GuiFramework.CanvasTopologySeparator canvasTopologySeparator2; 
-    private NxtControl.GuiFramework.Rectangle rectangle1;
     private NxtControl.GuiFramework.Rectangle rectangle2;
     private NxtControl.GuiFramework.Rectangle rectangle3;
     private NxtControl.GuiFramework.Group group1;
@@ -369,6 +372,7 @@ private NxtControl.GuiFramework.LogState logState1;
     private NxtControl.GuiFramework.DrawnButton AckBtn;
     private NxtControl.GuiFramework.ChangeCanvasButton changeCanvasButton1;
     private NxtControl.GuiFramework.ChangeCanvasButton changeCanvasButton2;
+    private NxtControl.GuiFramework.Login login2;
     #endregion
   }
 }

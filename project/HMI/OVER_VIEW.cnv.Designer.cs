@@ -110,6 +110,7 @@ namespace HMI.Main.Canvases
 			this.pipe6 = new NxtControl.GuiFramework.Pipe();
 			this.pipe38 = new NxtControl.GuiFramework.Pipe();
 			this.polygon23 = new NxtControl.GuiFramework.Polygon();
+			this.sDefault1 = new SE.IoTMx.Symbols.TM262L01MDESE8T.sDefault();
 			// 
 			// NVPP_REACTOR01
 			// 
@@ -1145,6 +1146,16 @@ namespace HMI.Main.Canvases
 			new NxtControl.Drawing.PointF(1200D, 288D),
 			new NxtControl.Drawing.PointF(1208D, 320D)});
 			// 
+			// sDefault1
+			// 
+			this.sDefault1.BeginInit();
+			this.sDefault1.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.50230414746543772D, 0D, 0D, 0.41988950276243092D, 192D, 88D);
+			this.sDefault1.HeaderText = "";
+			this.sDefault1.Name = "sDefault1";
+			this.sDefault1.SecurityToken = ((uint)(4294967295u));
+			this.sDefault1.TagName = "F903885E680FD8F5";
+			this.sDefault1.EndInit();
+			// 
 			// OVER_VIEW
 			// 
 			this.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(1366D)), ((float)(698D)));
@@ -1217,7 +1228,8 @@ namespace HMI.Main.Canvases
 			this.polygon20,
 			this.polygon21,
 			this.polygon22,
-			this.polygon23});
+			this.polygon23,
+			this.sDefault1});
 			this.Size = new System.Drawing.Size(1366, 698);
 
 		}
@@ -1305,6 +1317,7 @@ namespace HMI.Main.Canvases
 		private NxtControl.GuiFramework.Pipe pipe6;
 		private NxtControl.GuiFramework.Pipe pipe38;
 		private NxtControl.GuiFramework.Polygon polygon23;
+		private SE.IoTMx.Symbols.TM262L01MDESE8T.sDefault sDefault1;
 		#endregion
 	}
 }
