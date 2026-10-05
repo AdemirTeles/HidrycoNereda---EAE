@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="8a2aa7ff-1c9d-42b4-af1c-130a9040a955" Name="speedToRawInt" Comment="Converte a velocidade (%) em valor bruto UINT16 para registrador Modbus" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Hidryco" Version="1.0" Author="Hidryco" Date="10/5/2026" Remarks="Velocidade em INT para os sopradores Sulzer" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="45891852F5D66F4B" Name="REQ">
+        <With Var="SPEED_IN" />
+        <With Var="SCALE" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="73091BCABFCCFCB6" Name="CNF">
+        <With Var="RAW_OUT" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="B2FF8AC2A57695C6" Name="SPEED_IN" Type="REAL" Comment="Velocidade em %" />
+      <VarDeclaration ID="EEBD45F5182DE80D" Name="SCALE" Type="REAL" Comment="Fator: valor bruto = % x SCALE" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="0BBC678D1288C222" Name="RAW_OUT" Type="INT" Comment="Valor bruto (padrao de bits UINT16)" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="e3379373-a9e3-4397-b6aa-90a520ee97b2">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="Main" />
+    <InternalVars>
+      <VarDeclaration Name="v" Type="REAL" />
+    </InternalVars>
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="550" y="425" />
+      <ECState Name="EXEC" x="550" y="1100">
+        <ECAction Algorithm="Main" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="EXEC" Condition="REQ" x="760" y="760" />
+      <ECTransition Source="EXEC" Destination="START" Condition="1" x="340" y="760" />
+    </ECC>
+    <Algorithm Name="Main">
+      <ST><![CDATA[(* Referencia de velocidade para registrador de 16 bits (UINT16) do equipamento.
+   SPEED_IN em % -> RAW_OUT = SPEED_IN * SCALE, limitado a 0..65535 e entregue como INT
+   com o mesmo padrao de bits (valores acima de 32767 viram negativos no INT). *)
+v := SPEED_IN * SCALE;
+IF v < 0.0 THEN
+    v := 0.0;
+END_IF;
+IF v > 65535.0 THEN
+    v := 65535.0;
+END_IF;
+IF v > 32767.0 THEN
+    RAW_OUT := REAL_TO_INT(v - 65536.0);
+ELSE
+    RAW_OUT := REAL_TO_INT(v);
+END_IF;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

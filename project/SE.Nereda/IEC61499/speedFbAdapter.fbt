@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="bb87d449-09ad-4c00-b999-152d99b3e13e" Name="speedFbAdapter" Comment="Retorno de velocidade: sinal normal (VTQREAL) ou valor bruto UINT16 com escala" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Hidryco" Version="1.0" Author="Hidryco" Date="10/5/2026" Remarks="Velocidade em INT para os sopradores Sulzer" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="23AEC014E6AA5B8A" Name="REQ_SIG">
+        <With Var="FB_IN" />
+      </Event>
+      <Event ID="D15EB431906F2F27" Name="REQ_RAW">
+        <With Var="RAW_IN" />
+        <With Var="QI_DST" />
+        <With Var="SCALE" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="DCDCAD18DFD61DDE" Name="CNF">
+        <With Var="FB_OUT" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="18FE2B2470AA3359" Name="FB_IN" Type="VTQREAL" Comment="Saida do aISignal fbSpeed" />
+      <VarDeclaration ID="A530287FDB8697A7" Name="RAW_IN" Type="INT" Comment="Valor bruto do symlink fbSpeedINT" />
+      <VarDeclaration ID="46C4F82F6CC69CD7" Name="QI_DST" Type="BOOL" Comment="QO do SYMLINKMULTIVARDST (TRUE = conectado)" />
+      <VarDeclaration ID="919EBDC14EE69C57" Name="SCALE" Type="REAL" Comment="Fator: % = bruto / SCALE" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="02242968B1987D9E" Name="FB_OUT" Type="VTQREAL" Comment="Retorno de velocidade" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="8a5e0248-389b-4480-920b-cfa7a96da6a1">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="Main" />
+    <InternalVars>
+      <VarDeclaration Name="USE_RAW" Type="BOOL" />
+      <VarDeclaration Name="r" Type="REAL" />
+    </InternalVars>
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="550" y="425" />
+      <ECState Name="EXEC" x="550" y="1100">
+        <ECAction Algorithm="Main" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="EXEC" Condition="REQ_SIG OR REQ_RAW" x="760" y="760" />
+      <ECTransition Source="EXEC" Destination="START" Condition="1" x="340" y="760" />
+    </ECC>
+    <Algorithm Name="Main">
+      <ST><![CDATA[(* Retorno de velocidade: usa o valor bruto INT do equipamento (fbSpeedINT) quando
+   esse symlink esta conectado; senao repassa o rawPv/aISignal normal (fbSpeed.AIn).
+   Valor bruto tratado como UINT16 e dividido por SCALE para voltar a %. *)
+IF REQ_RAW AND QI_DST THEN
+    USE_RAW := TRUE;
+    r := INT_TO_REAL(RAW_IN);
+    IF r < 0.0 THEN
+        r := r + 65536.0;
+    END_IF;
+    IF SCALE > 0.0 THEN
+        FB_OUT.value := r / SCALE;
+    END_IF;
+    FB_OUT.quality := 16#00000000;
+ELSIF REQ_SIG AND NOT USE_RAW THEN
+    FB_OUT := FB_IN;
+END_IF;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

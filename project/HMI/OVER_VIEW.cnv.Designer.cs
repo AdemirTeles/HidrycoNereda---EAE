@@ -111,6 +111,8 @@ namespace HMI.Main.Canvases
 			this.pipe38 = new NxtControl.GuiFramework.Pipe();
 			this.polygon23 = new NxtControl.GuiFramework.Polygon();
 			this.sDefault1 = new SE.IoTMx.Symbols.TM262L01MDESE8T.sDefault();
+			this.sATV6xxMbtcp1 = new SE.FieldDevice.Symbols.ATVSpeedControlMbtcp.sATV6xxMbtcp();
+			this.sDrive1 = new SE.FieldDevice.Symbols.ATVSpeedControlMbtcp.sDrive();
 			// 
 			// NVPP_REACTOR01
 			// 
@@ -1149,12 +1151,36 @@ namespace HMI.Main.Canvases
 			// sDefault1
 			// 
 			this.sDefault1.BeginInit();
-			this.sDefault1.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.50230414746543772D, 0D, 0D, 0.41988950276243092D, 192D, 88D);
+			this.sDefault1.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.50230414746543772D, 0D, 0D, 0.41988950276243092D, 216D, 8D);
 			this.sDefault1.HeaderText = "";
 			this.sDefault1.Name = "sDefault1";
 			this.sDefault1.SecurityToken = ((uint)(4294967295u));
 			this.sDefault1.TagName = "F903885E680FD8F5";
 			this.sDefault1.EndInit();
+			// 
+			// sATV6xxMbtcp1
+			// 
+			this.sATV6xxMbtcp1.BeginInit();
+			this.sATV6xxMbtcp1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 736D, 0D);
+			this.sATV6xxMbtcp1.Name = "sATV6xxMbtcp1";
+			this.sATV6xxMbtcp1.SecurityToken = ((uint)(4294967295u));
+			this.sATV6xxMbtcp1.TagName = "C882C43BFA776FF8";
+			this.sATV6xxMbtcp1.EndInit();
+			// 
+			// sDrive1
+			// 
+			this.sDrive1.BeginInit();
+			this.sDrive1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 464D, 232D);
+			this.sDrive1.IPAddress = null;
+			this.sDrive1.Name = "sDrive1";
+			this.sDrive1.SecForce = 3;
+			this.sDrive1.SecMode = 3;
+			this.sDrive1.SecParameter = 12;
+			this.sDrive1.SecReset = 3;
+			this.sDrive1.SecSetpoint = 3;
+			this.sDrive1.SecurityToken = ((uint)(4294967175u));
+			this.sDrive1.TagName = "C882C43BFA776FF8";
+			this.sDrive1.EndInit();
 			// 
 			// OVER_VIEW
 			// 
@@ -1229,7 +1255,9 @@ namespace HMI.Main.Canvases
 			this.polygon21,
 			this.polygon22,
 			this.polygon23,
-			this.sDefault1});
+			this.sDefault1,
+			this.sATV6xxMbtcp1,
+			this.sDrive1});
 			this.Size = new System.Drawing.Size(1366, 698);
 
 		}
@@ -1318,6 +1346,8 @@ namespace HMI.Main.Canvases
 		private NxtControl.GuiFramework.Pipe pipe38;
 		private NxtControl.GuiFramework.Polygon polygon23;
 		private SE.IoTMx.Symbols.TM262L01MDESE8T.sDefault sDefault1;
+		private SE.FieldDevice.Symbols.ATVSpeedControlMbtcp.sDrive sDrive1;
+		private SE.FieldDevice.Symbols.ATVSpeedControlMbtcp.sATV6xxMbtcp sATV6xxMbtcp1;
 		#endregion
 	}
 }

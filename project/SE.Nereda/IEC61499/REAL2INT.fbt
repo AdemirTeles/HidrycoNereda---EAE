@@ -36,8 +36,15 @@
       </ECTransition>
     </ECC>
     <Algorithm Name="REQ" Comment="Normally executed algorithm">
-      <ST><![CDATA[;
-QO := REAL_TO_INT(QI);]]></ST>
+      <ST><![CDATA[(* Conversao REAL -> INT com saturacao: valores fora da faixa do INT
+   nao podem chegar ao REAL_TO_INT (erro ERR_RT_CONVERSION para o recurso). *)
+IF QI >= 32767.0 THEN
+    QO := 32767;
+ELSIF QI <= -32768.0 THEN
+    QO := -32768;
+ELSE
+    QO := REAL_TO_INT(QI);
+END_IF;]]></ST>
     </Algorithm>
   </BasicFB>
 </FBType>
