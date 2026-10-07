@@ -32,6 +32,63 @@ namespace SE.Nereda.Symbols.NeredaSludgeBuffer_2
 
   }
 
+  public class LEVELEventArgs : System.EventArgs
+  {
+    IHMIAccessorService accessorService;
+    int channelId;
+    int cookie; 
+    int eventIndex;
+
+    public LEVELEventArgs(int channelId, int cookie, int eventIndex)
+    {
+      this.accessorService = (IHMIAccessorService)ServiceProvider.GetService(typeof(IHMIAccessorService));
+      this.channelId = channelId;
+      this.cookie = cookie;
+      this.eventIndex = eventIndex;
+    }
+    public bool Get_LevelPv(ref System.Single value)
+    {
+      if (accessorService == null)
+        return false;
+      float var = 0;
+      bool ret = accessorService.GetFloatValue(channelId, cookie, eventIndex, true,0, ref var);
+      if (ret) value = (System.Single) var;
+      return ret;
+    }
+
+    public System.Single? LevelPv
+    { get {
+      if (accessorService == null)
+        return null;
+      float var = 0;
+      bool ret = accessorService.GetFloatValue(channelId, cookie, eventIndex, true,0, ref var);
+      if (!ret) return null;
+      return (System.Single) var;
+    }  }
+
+    public bool Get_LevelPvMax(ref System.Single value)
+    {
+      if (accessorService == null)
+        return false;
+      float var = 0;
+      bool ret = accessorService.GetFloatValue(channelId, cookie, eventIndex, true,1, ref var);
+      if (ret) value = (System.Single) var;
+      return ret;
+    }
+
+    public System.Single? LevelPvMax
+    { get {
+      if (accessorService == null)
+        return null;
+      float var = 0;
+      bool ret = accessorService.GetFloatValue(channelId, cookie, eventIndex, true,1, ref var);
+      if (!ret) return null;
+      return (System.Single) var;
+    }  }
+
+
+  }
+
 }
 
 namespace SE.Nereda.Symbols.NeredaSludgeBuffer_2
@@ -60,10 +117,14 @@ namespace SE.Nereda.Symbols.NeredaSludgeBuffer_2
 
     private event EventHandler<SE.Nereda.Symbols.NeredaSludgeBuffer_2.REQ_STATUSEventArgs> REQ_STATUS_Fired;
 
+    private event EventHandler<SE.Nereda.Symbols.NeredaSludgeBuffer_2.LEVELEventArgs> LEVEL_Fired;
+
     protected override void OnEndInit()
     {
       if (REQ_STATUS_Fired != null)
         AttachEventInput(0);
+      if (LEVEL_Fired != null)
+        AttachEventInput(1);
 
     }
 
@@ -85,6 +146,21 @@ namespace SE.Nereda.Symbols.NeredaSludgeBuffer_2
               NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
 stack Trace:
 {4}","REQ_STATUS_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break; 
+        case 1:
+          if (LEVEL_Fired != null)
+          {
+            try
+            {
+              LEVEL_Fired(this, new SE.Nereda.Symbols.NeredaSludgeBuffer_2.LEVELEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","LEVEL_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
             }
           }
         break; 
@@ -118,10 +194,14 @@ namespace SE.Nereda.Symbols.NeredaSludgeBuffer_2
 
     private event EventHandler<SE.Nereda.Symbols.NeredaSludgeBuffer_2.REQ_STATUSEventArgs> REQ_STATUS_Fired;
 
+    private event EventHandler<SE.Nereda.Symbols.NeredaSludgeBuffer_2.LEVELEventArgs> LEVEL_Fired;
+
     protected override void OnEndInit()
     {
       if (REQ_STATUS_Fired != null)
         AttachEventInput(0);
+      if (LEVEL_Fired != null)
+        AttachEventInput(1);
 
     }
 
@@ -143,6 +223,21 @@ namespace SE.Nereda.Symbols.NeredaSludgeBuffer_2
               NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
 stack Trace:
 {4}","REQ_STATUS_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break; 
+        case 1:
+          if (LEVEL_Fired != null)
+          {
+            try
+            {
+              LEVEL_Fired(this, new SE.Nereda.Symbols.NeredaSludgeBuffer_2.LEVELEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","LEVEL_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
             }
           }
         break; 
@@ -176,10 +271,14 @@ namespace SE.Nereda.Symbols.NeredaSludgeBuffer_2
 
     private event EventHandler<SE.Nereda.Symbols.NeredaSludgeBuffer_2.REQ_STATUSEventArgs> REQ_STATUS_Fired;
 
+    private event EventHandler<SE.Nereda.Symbols.NeredaSludgeBuffer_2.LEVELEventArgs> LEVEL_Fired;
+
     protected override void OnEndInit()
     {
       if (REQ_STATUS_Fired != null)
         AttachEventInput(0);
+      if (LEVEL_Fired != null)
+        AttachEventInput(1);
 
     }
 
@@ -201,6 +300,21 @@ namespace SE.Nereda.Symbols.NeredaSludgeBuffer_2
               NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
 stack Trace:
 {4}","REQ_STATUS_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break; 
+        case 1:
+          if (LEVEL_Fired != null)
+          {
+            try
+            {
+              LEVEL_Fired(this, new SE.Nereda.Symbols.NeredaSludgeBuffer_2.LEVELEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","LEVEL_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
             }
           }
         break; 
@@ -234,10 +348,14 @@ namespace SE.Nereda.Symbols.NeredaSludgeBuffer_2
 
     private event EventHandler<SE.Nereda.Symbols.NeredaSludgeBuffer_2.REQ_STATUSEventArgs> REQ_STATUS_Fired;
 
+    private event EventHandler<SE.Nereda.Symbols.NeredaSludgeBuffer_2.LEVELEventArgs> LEVEL_Fired;
+
     protected override void OnEndInit()
     {
       if (REQ_STATUS_Fired != null)
         AttachEventInput(0);
+      if (LEVEL_Fired != null)
+        AttachEventInput(1);
 
     }
 
@@ -259,6 +377,21 @@ namespace SE.Nereda.Symbols.NeredaSludgeBuffer_2
               NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
 stack Trace:
 {4}","REQ_STATUS_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break; 
+        case 1:
+          if (LEVEL_Fired != null)
+          {
+            try
+            {
+              LEVEL_Fired(this, new SE.Nereda.Symbols.NeredaSludgeBuffer_2.LEVELEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","LEVEL_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
             }
           }
         break; 
@@ -292,10 +425,14 @@ namespace SE.Nereda.Faceplates.NeredaSludgeBuffer_2
 
     private event EventHandler<SE.Nereda.Symbols.NeredaSludgeBuffer_2.REQ_STATUSEventArgs> REQ_STATUS_Fired;
 
+    private event EventHandler<SE.Nereda.Symbols.NeredaSludgeBuffer_2.LEVELEventArgs> LEVEL_Fired;
+
     protected override void OnEndInit()
     {
       if (REQ_STATUS_Fired != null)
         AttachEventInput(0);
+      if (LEVEL_Fired != null)
+        AttachEventInput(1);
 
     }
 
@@ -317,6 +454,21 @@ namespace SE.Nereda.Faceplates.NeredaSludgeBuffer_2
               NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
 stack Trace:
 {4}","REQ_STATUS_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break; 
+        case 1:
+          if (LEVEL_Fired != null)
+          {
+            try
+            {
+              LEVEL_Fired(this, new SE.Nereda.Symbols.NeredaSludgeBuffer_2.LEVELEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","LEVEL_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
             }
           }
         break; 
@@ -350,10 +502,14 @@ namespace SE.Nereda.Symbols.NeredaSludgeBuffer_2
 
     private event EventHandler<SE.Nereda.Symbols.NeredaSludgeBuffer_2.REQ_STATUSEventArgs> REQ_STATUS_Fired;
 
+    private event EventHandler<SE.Nereda.Symbols.NeredaSludgeBuffer_2.LEVELEventArgs> LEVEL_Fired;
+
     protected override void OnEndInit()
     {
       if (REQ_STATUS_Fired != null)
         AttachEventInput(0);
+      if (LEVEL_Fired != null)
+        AttachEventInput(1);
 
     }
 
@@ -375,6 +531,21 @@ namespace SE.Nereda.Symbols.NeredaSludgeBuffer_2
               NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
 stack Trace:
 {4}","REQ_STATUS_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break; 
+        case 1:
+          if (LEVEL_Fired != null)
+          {
+            try
+            {
+              LEVEL_Fired(this, new SE.Nereda.Symbols.NeredaSludgeBuffer_2.LEVELEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","LEVEL_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
             }
           }
         break; 

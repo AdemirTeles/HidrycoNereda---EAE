@@ -2,7 +2,7 @@
 <!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
 <FBType GUID="41986be7-4399-49d9-88d6-ddb28bdc3815" Name="FeedReactor3PsBasic" Comment="Logica das 3 bombas de alimentacao (2 servico + 1 reserva) - mesmo funcionamento da Water Discharge" Namespace="SE.Nereda">
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Schneider Electric" Version="1.1" Author="Claude/Hidryco" Date="10/7/2026" Remarks="Rev2 - Setpoint do PID sempre igual ao setpoint do Nereda (removida a troca pela vazao medida com as bombas em C2) | Rev1 - Reescrito conforme a narrativa (cap. 2) com o mesmo funcionamento da Water Discharge (Rev13): Cmax/C2/C3/Cmin em % de velocidade; entrada da 2a com a bomba no Cmax pela velocidade real (narrativa); descida ate C2 confirmada pela velocidade real antes de partir a nova; T_C2 com as bombas em C2; reserva em falha parte na hora em C2; saida da 2a com protecao anti-ciclo; rodizio por horimetro; paradas por LL do buffer, pH/condutividade (L/H, retomada apos T_Restart) e vazao LL (T_FlowLL, retomada apos T_Restart); falha do medidor pela capacidade teorica; status para IHM" />
+  <VersionInfo Organization="Schneider Electric" Version="1.2" Author="Claude/Hidryco" Date="10/7/2026" Remarks="Rev3 - Velocidade das bombas sempre igual a saida do PID (1 ou 2 bombas); so muda para C2 na entrada/troca de bomba; sem fator 2, sem Cmin e sem capacidade teorica na falha do medidor | Rev2 - Setpoint do PID sempre igual ao setpoint do Nereda (removida a troca pela vazao medida com as bombas em C2) | Rev1 - Reescrito conforme a narrativa (cap. 2) com o mesmo funcionamento da Water Discharge (Rev13): Cmax/C2/C3/Cmin em % de velocidade; entrada da 2a com a bomba no Cmax pela velocidade real (narrativa); descida ate C2 confirmada pela velocidade real antes de partir a nova; T_C2 com as bombas em C2; reserva em falha parte na hora em C2; saida da 2a com protecao anti-ciclo; rodizio por horimetro; paradas por LL do buffer, pH/condutividade (L/H, retomada apos T_Restart) e vazao LL (T_FlowLL, retomada apos T_Restart); falha do medidor pela capacidade teorica; status para IHM" />
   <InterfaceList>
     <EventInputs>
       <Event ID="7E30127865CFE16B" Name="FEED_REACTOR" Comment="Pedido de alimentacao dos reatores (StartFeeding)">
@@ -155,24 +155,24 @@
       <VarDeclaration ID="F11ED37F50C532BF" Name="MaxCapacityOnePump" Type="REAL" Comment="Cmax: velocidade de 1 bomba acima da qual entra a 2a [%]" />
       <VarDeclaration ID="2F2AC3038FC8C5AF" Name="C2Capacity" Type="REAL" Comment="C2: velocidade das bombas na entrada de uma nova bomba [%]" />
       <VarDeclaration ID="C6332A6DD9CA4077" Name="C3Capacity" Type="REAL" Comment="C3: velocidade das 2 bombas abaixo da qual sai 1 [%]" />
-      <VarDeclaration ID="88EBC3528E8AADEC" Name="Cmin" Type="REAL" Comment="Velocidade minima de cada bomba em servico [%]" />
+      <VarDeclaration ID="88EBC3528E8AADEC" Name="Cmin" Type="REAL" Comment="Nao atua desde a Rev3 (velocidade minima = OutMin do PID); so exibido na IHM" />
       <VarDeclaration ID="51791C50D7ACFF08" Name="T_C2" Type="TIME" Comment="Tempo com as bombas em C2" />
       <VarDeclaration ID="7B2EFC85E80259FF" Name="T_C3" Type="TIME" Comment="Tempo abaixo de C3" />
       <VarDeclaration ID="551314EBB6B4C778" Name="T_Restart" Type="TIME" Comment="Tempo de espera para retomar a alimentacao (pH/condutividade/vazao LL)" />
       <VarDeclaration ID="652192BCEAC4BA87" Name="T_FlowLL" Type="TIME" Comment="Vazao LL do 40FT0003 com bomba rodando por este tempo = para a alimentacao (0 = desabilitado)" />
-      <VarDeclaration ID="72685E9CC3009F17" Name="CapTheo" Type="REAL" Comment="Capacidade teorica de 1 bomba a 100 % [m3/h] (falha do medidor; 0 = usa a faixa do medidor)" />
+      <VarDeclaration ID="72685E9CC3009F17" Name="CapTheo" Type="REAL" Comment="Nao usada desde a Rev3 (na falha do medidor as bombas seguem a saida do PID)" />
       <VarDeclaration ID="3F61CEAC196DAFFA" Name="FlowLL" Type="BOOL" Comment="Alarme LL do 40FT0003" />
       <VarDeclaration ID="B9FEC6B18C045039" Name="FlowFail" Type="BOOL" Comment="Falha do 40FT0003" />
       <VarDeclaration ID="3FF978AD45867CD1" Name="FlowPvMin" Type="REAL" Comment="Inicio de faixa do 40FT0003" />
       <VarDeclaration ID="ECEC37AAF9912DE1" Name="FlowPvMax" Type="REAL" Comment="Fim de faixa do 40FT0003" />
       <VarDeclaration ID="61C6CAD8A62128A0" Name="FlowPv" Type="REAL" Comment="Vazao medida 40FT0003 [m3/h] (nao usada desde a Rev2; mantida pela ligacao no FeedReactorLogic)" />
-      <VarDeclaration ID="BFA4DE49E102B0EA" Name="PIDOut" Type="REAL" Comment="Saida do PID = demanda [%] (100 % = 2 bombas a 100 %)" />
+      <VarDeclaration ID="BFA4DE49E102B0EA" Name="PIDOut" Type="REAL" Comment="Saida do PID = velocidade de cada bomba em servico [%]" />
     </InputVars>
     <OutputVars>
       <VarDeclaration ID="3FD15F25AD96252C" Name="CmdPump01" Type="BOOL" />
       <VarDeclaration ID="A51371F050C5DBE4" Name="CmdPump02" Type="BOOL" />
       <VarDeclaration ID="FFF29CFFBE485BA1" Name="CmdPump03" Type="BOOL" />
-      <VarDeclaration ID="7FEAC15974107CEB" Name="PumpSpeed" Type="REAL" Comment="Velocidade enviada a cada bomba em servico [%] (nunca abaixo de Cmin)" />
+      <VarDeclaration ID="7FEAC15974107CEB" Name="PumpSpeed" Type="REAL" Comment="Velocidade enviada a cada bomba em servico [%] (= saida do PID; C2 na entrada/troca de bomba)" />
       <VarDeclaration ID="1340A87A57F03816" Name="AnyCmd" Type="BOOL" Comment="Alguma bomba comandada" />
       <VarDeclaration ID="31751C6AC08065D4" Name="EffFlowSp" Type="REAL" Comment="Setpoint do PID [m3/h] = setpoint do Nereda (maior pedido entre os reatores alimentando)" />
       <VarDeclaration ID="2FD2CD82AAE9F327" Name="RunPID" Type="BOOL" Comment="PID em automatico" />
@@ -185,7 +185,7 @@
       <VarDeclaration ID="D0EA1B1A2197B0B9" Name="PauseCause" Type="INT" Comment="0 sem pausa | 1 nivel LL 40LT0001 | 2 pH/condutividade | 3 vazao LL 40FT0003" />
       <VarDeclaration ID="1421452A4EBFDDF1" Name="SelectedPump" Type="INT" Comment="Bomba em servico ha mais tempo" />
       <VarDeclaration ID="098AFC871A3CFD13" Name="SecondPump" Type="INT" Comment="Segunda bomba em servico" />
-      <VarDeclaration ID="5C59000207A0D294" Name="AtMin" Type="BOOL" Comment="Velocidade limitada em Cmin" />
+      <VarDeclaration ID="5C59000207A0D294" Name="AtMin" Type="BOOL" Comment="Sempre FALSE desde a Rev3 (sem velocidade minima na logica)" />
       <VarDeclaration ID="BAFEC99BDB64D66C" Name="ParBad" Type="BOOL" Comment="Parametros incoerentes (so aviso)" />
       <VarDeclaration ID="C9EE069C71EFDAD1" Name="HmiCmin" Type="REAL" />
       <VarDeclaration ID="9CF3FEEBF2B6AA5D" Name="HmiC2" Type="REAL" />
@@ -303,19 +303,21 @@
     <Algorithm Name="AlgMain" Comment="Logica das bombas de alimentacao">
       <ST><![CDATA[;
 (* ============================================================
-   FeedReactor3PsBasic Rev2 - bombas de alimentacao P4001/P4002/P4003 (2 servico + 1 reserva)
+   FeedReactor3PsBasic Rev3 - bombas de alimentacao P4001/P4002/P4003 (2 servico + 1 reserva)
+   Rev3: a velocidade das bombas e SEMPRE a saida do PID (1 ou 2 bombas). So muda para C2 na entrada/troca de bomba
+         (modos 1 e 2). Sem fator 2 com uma bomba, sem velocidade minima (Cmin) e sem capacidade teorica na falha do medidor.
    Rev2: o setpoint do PID e sempre o setpoint do Nereda (removida a troca pela vazao medida com as bombas em C2).
    Narrativa cap. 2 (Influent feed) com o mesmo funcionamento da Water Discharge do Sludge Buffer.
    - Partida: StartFeeding de algum reator (fase Feed em RUN e AV41101 aberta). SP = maior pedido [m3/h].
-   - Demanda = saida do PID [%] (100 % = 2 bombas a 100 %). Cmax / C2 / C3 / Cmin em % de velocidade de UMA bomba.
-     1 bomba = 2 x demanda ; 2 bombas = demanda ; nunca abaixo de Cmin.
+   - Velocidade de cada bomba em servico = saida do PID [%]. Cmax / C2 / C3 em % de velocidade de UMA bomba.
+     Limites de velocidade: OutMin/OutMax do proprio PID.
    - Entrada: velocidade REAL da bomba em operacao no Cmax -> a(s) em operacao descem ate C2 (velocidade REAL),
      a nova parte em C2, T_C2 com as duas com velocidade REAL em C2, depois PID. Sem liberacao por tempo.
    - Saida: velocidade REAL de todas as bombas em operacao abaixo de C3 por T_C3: sai a que partiu primeiro.
    - Falha de bomba com 2 em servico: reserva parte na hora, todas em C2, T_C2, depois PID.
    - Paradas: 1 nivel LL 40LT0001 (retoma ao sair o LL) | 2 pH/condutividade fora da faixa (retoma T_Restart apos voltar)
               3 vazao LL 40FT0003 por T_FlowLL com bomba rodando (retoma apos T_Restart)
-   - Falha do 40FT0003: demanda = SP / (2 x capacidade teorica) x 100 ; sem capacidade teorica, SP em % da faixa.
+   - Falha do 40FT0003 (40FT05): as bombas continuam seguindo a saida do PID (Rev3).
    PumpMode: 0 uma bomba | 1 reduzindo p/ C2 (nova parada) | 2 nova em C2 (T_C2) | 3 duas no PID
    ============================================================ *)
 
@@ -346,18 +348,9 @@ ELSE
     Grafcet := 0;
 END_IF;
 
-(* ---------- 2. Demanda, velocidade minima e parametros ---------- *)
-IF FlowFail THEN
-    IF CapTheo > 0.0 THEN
-        Dem := FlowSp / (2.0 * CapTheo) * 100.0;
-    ELSIF FlowPvMax > FlowPvMin THEN
-        Dem := (FlowSp - FlowPvMin) / (FlowPvMax - FlowPvMin) * 100.0;
-    ELSE
-        Dem := 0.0;
-    END_IF;
-ELSE
-    Dem := PIDOut;
-END_IF;
+(* ---------- 2. Demanda e parametros ---------- *)
+(* Rev3: a demanda e sempre a saida do PID (inclusive com o medidor em falha) *)
+Dem := PIDOut;
 IF Dem > 100.0 THEN
     Dem := 100.0;
 END_IF;
@@ -373,11 +366,9 @@ IF CminEff < 0.0 THEN
 END_IF;
 (* so Cmax e C2 sao indispensaveis; o resto apenas avisa (ParBad) - a protecao anti-ciclo esta embutida na saida *)
 ParOk := (MaxCapacityOnePump > 0.0) AND (C2Capacity > 0.0);
-ParBad := (MaxCapacityOnePump <= 0.0) OR (C2Capacity <= 0.0) OR (C2Capacity < CminEff) OR (C3Capacity <= CminEff) OR ((2.0 * C3Capacity) >= MaxCapacityOnePump) OR (Cmin < 0.0) OR (Cmin > 100.0);
+(* Rev3: Cmin nao atua mais (velocidade minima = OutMin do PID); 2 x C3 >= Cmax continua causando ciclo de entrada/saida *)
+ParBad := (MaxCapacityOnePump <= 0.0) OR (C2Capacity <= 0.0) OR ((2.0 * C3Capacity) >= MaxCapacityOnePump);
 C2Eff := C2Capacity;
-IF C2Eff < CminEff THEN
-    C2Eff := CminEff;
-END_IF;
 ExitCond := FALSE; (* calculado mais abaixo, so pela velocidade real das bombas *)
 
 (* ---------- 3. Paradas da alimentacao (narrativa 2.2) ---------- *)
@@ -665,22 +656,20 @@ ELSIF Grafcet = 3 THEN
     (* 4.6 setpoint do PID e velocidade das bombas *)
     (* setpoint do PID = setpoint do Nereda (maior pedido), sempre - nunca trocado pela vazao medida (Rev2) *)
     EffFlowSp := FlowSp;
+    (* Rev3: velocidade de cada bomba = saida do PID; a unica sobreposicao e C2 na entrada/troca de bomba (modos 1 e 2) *)
     IF (PumpMode = 1) OR (PumpMode = 2) THEN
         SpdRaw := C2Eff;
-    ELSIF PumpMode = 3 THEN
-        SpdRaw := Dem;
     ELSE
-        SpdRaw := 2.0 * Dem;
+        SpdRaw := Dem;
     END_IF;
     IF SpdRaw > 100.0 THEN
         SpdRaw := 100.0;
     END_IF;
-    AtMin := (NCmd >= 1) AND (SpdRaw < CminEff);
-    IF SpdRaw < CminEff THEN
-        PumpSpeed := CminEff;
-    ELSE
-        PumpSpeed := SpdRaw;
+    IF SpdRaw < 0.0 THEN
+        SpdRaw := 0.0;
     END_IF;
+    AtMin := FALSE; (* Rev3: sem velocidade minima na logica *)
+    PumpSpeed := SpdRaw;
 ELSE
     (* sem pedido de alimentacao *)
     CmdPump01 := FALSE;
@@ -786,7 +775,7 @@ IF (PumpMode = 2) AND (NRun >= 2) AND SpdUpC2 THEN
     TC2s := TC2s + 1;
 END_IF;
 (* demanda acima do Cmax com 1 bomba (limite quando a velocidade real nao confirma o Cmax) *)
-IF (PumpMode = 0) AND (NRun >= 1) AND ((2.0 * Dem) > MaxCapacityOnePump) THEN
+IF (PumpMode = 0) AND (NRun >= 1) AND (Dem > MaxCapacityOnePump) THEN
     Tmax := Tmax + T#1s;
 ELSE
     Tmax := T#0s;

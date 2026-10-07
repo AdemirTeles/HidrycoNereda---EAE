@@ -34,7 +34,10 @@ namespace HMI.Main.Canvases
 			this.SludgeBuffer = new SE.Nereda.Symbols.NeredaSludgeBuffer_2.sSludgeBufferyellow();
 			this.SludgeBuffer_2 = new SE.Nereda.Symbols.NeredaSludgeBuffer_2.sPhases();
 			this.SludgeBuffer_3 = new SE.Nereda.Symbols.NeredaSludgeBuffer_2.sSensors();
+			this.sDefault1 = new SE.App2CommonProcess.Symbols.Autotune.sDefault();
+			this.sBarPvSpOpVert2 = new SE.App2CommonProcess.Symbols.PID.sBarPvSpOpVert();
 			this.sBarPvSpOpVert1 = new SE.App2CommonProcess.Symbols.PID.sBarPvSpOpVert();
+			this.sDefault2 = new SE.App2CommonProcess.Symbols.Autotune.sDefault();
 			// 
 			// polygon7
 			// 
@@ -111,11 +114,36 @@ namespace HMI.Main.Canvases
 			this.SludgeBuffer_3.TagName = "9AA3696311BF0C3E";
 			this.SludgeBuffer_3.EndInit();
 			// 
+			// sDefault1
+			// 
+			this.sDefault1.BeginInit();
+			this.sDefault1.DefaultInstanceName = null;
+			this.sDefault1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 960D, 160D);
+			this.sDefault1.Instancelayer = SE.App2Base.SupportClasses.InstanceLayer.Base;
+			this.sDefault1.MyTagDisplayName = null;
+			this.sDefault1.Name = "sDefault1";
+			this.sDefault1.SecurityToken = ((uint)(4294967295u));
+			this.sDefault1.TagName = "9AA3696311BF0C3E.Logic.CmdSludgeDischargeSLB1.CommandLogic.Autotune1";
+			this.sDefault1.EndInit();
+			// 
+			// sBarPvSpOpVert2
+			// 
+			this.sBarPvSpOpVert2.BeginInit();
+			this.sBarPvSpOpVert2.DefaultInstanceName = null;
+			this.sBarPvSpOpVert2.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 1032D, 128D);
+			this.sBarPvSpOpVert2.DisplayType = SE.App2CommonProcess.SupportClasses.PidDisplayType.PvSpOp;
+			this.sBarPvSpOpVert2.Instancelayer = SE.App2Base.SupportClasses.InstanceLayer.Base;
+			this.sBarPvSpOpVert2.MyTagDisplayName = null;
+			this.sBarPvSpOpVert2.Name = "sBarPvSpOpVert2";
+			this.sBarPvSpOpVert2.SecurityToken = ((uint)(4294967295u));
+			this.sBarPvSpOpVert2.TagName = "9AA3696311BF0C3E.Logic.CmdSludgeDischargeSLB1.CommandLogic.PID";
+			this.sBarPvSpOpVert2.EndInit();
+			// 
 			// sBarPvSpOpVert1
 			// 
 			this.sBarPvSpOpVert1.BeginInit();
 			this.sBarPvSpOpVert1.DefaultInstanceName = null;
-			this.sBarPvSpOpVert1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 1184D, 128D);
+			this.sBarPvSpOpVert1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 1240D, 128D);
 			this.sBarPvSpOpVert1.DisplayType = SE.App2CommonProcess.SupportClasses.PidDisplayType.PvSpOp;
 			this.sBarPvSpOpVert1.Instancelayer = SE.App2Base.SupportClasses.InstanceLayer.Base;
 			this.sBarPvSpOpVert1.MyTagDisplayName = null;
@@ -123,6 +151,18 @@ namespace HMI.Main.Canvases
 			this.sBarPvSpOpVert1.SecurityToken = ((uint)(4294967295u));
 			this.sBarPvSpOpVert1.TagName = "9AA3696311BF0C3E.Logic.CmdWaterDischargeSLB1.CommandLogic.PID";
 			this.sBarPvSpOpVert1.EndInit();
+			// 
+			// sDefault2
+			// 
+			this.sDefault2.BeginInit();
+			this.sDefault2.DefaultInstanceName = null;
+			this.sDefault2.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 1177D, 170D);
+			this.sDefault2.Instancelayer = SE.App2Base.SupportClasses.InstanceLayer.Base;
+			this.sDefault2.MyTagDisplayName = null;
+			this.sDefault2.Name = "sDefault2";
+			this.sDefault2.SecurityToken = ((uint)(4294967295u));
+			this.sDefault2.TagName = "9AA3696311BF0C3E.Logic.CmdWaterDischargeSLB1.CommandLogic.Autotune1";
+			this.sDefault2.EndInit();
 			// 
 			// SLUDGE_BUFFER
 			// 
@@ -137,7 +177,10 @@ namespace HMI.Main.Canvases
 			this.SludgeBuffer,
 			this.SludgeBuffer_2,
 			this.SludgeBuffer_3,
-			this.sBarPvSpOpVert1});
+			this.sDefault1,
+			this.sBarPvSpOpVert2,
+			this.sBarPvSpOpVert1,
+			this.sDefault2});
 			this.Size = new System.Drawing.Size(1366, 698);
 
 		}
@@ -150,6 +193,9 @@ namespace HMI.Main.Canvases
 		private SE.Nereda.Symbols.NeredaSludgeBuffer_2.sPhases SludgeBuffer_2;
 		private SE.Nereda.Symbols.NeredaSludgeBuffer_2.sSensors SludgeBuffer_3;
 		private SE.App2CommonProcess.Symbols.PID.sBarPvSpOpVert sBarPvSpOpVert1;
+		private SE.App2CommonProcess.Symbols.Autotune.sDefault sDefault1;
+		private SE.App2CommonProcess.Symbols.PID.sBarPvSpOpVert sBarPvSpOpVert2;
+		private SE.App2CommonProcess.Symbols.Autotune.sDefault sDefault2;
 		#endregion
 	}
 }

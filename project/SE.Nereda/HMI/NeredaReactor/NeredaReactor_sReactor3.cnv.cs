@@ -59,22 +59,22 @@ namespace SE.Nereda.Symbols.NeredaReactor
 				AirBubbles1.Visible = AirBubbles2.Visible = (bool)e.AerateRun;
 			}
 			
-			if(e.FeedRun == false && e.AerateRun == false && e.SludgeDischargeRun == false && e.VentRun == false && e.WaitRun == false){
+			if(e.FeedRun == false && e.AerateRun == false && e.SludgeDischargeRun == false&& e.WaitRun == false){
 				ReactorState.Text = e.ReactorStatus;
 			}
-			else if(e.FeedRun == true && e.AerateRun == false && e.SludgeDischargeRun == false && e.VentRun == false && e.WaitRun == false){
+			else if(e.FeedRun == true && e.AerateRun == false && e.SludgeDischargeRun == false && e.WaitRun == false){
 				ReactorState.Text = e.ReactorStatus + " : FEED";
 			}
-			else if(e.FeedRun == false && e.AerateRun == true && e.SludgeDischargeRun == false && e.VentRun == false && e.WaitRun == false){
+			else if(e.FeedRun == false && e.AerateRun == true && e.SludgeDischargeRun == false && e.WaitRun == false){
 				ReactorState.Text = e.ReactorStatus + " : AERATE";
 			}
-			else if(e.FeedRun == false && e.AerateRun == false && e.SludgeDischargeRun == true && e.VentRun == false && e.WaitRun == false){
+			else if(e.FeedRun == false && e.AerateRun == false && e.SludgeDischargeRun == true && e.WaitRun == false){
 				ReactorState.Text = e.ReactorStatus + " : SD";
 			}
-			else if(e.FeedRun == false && e.AerateRun == false && e.SludgeDischargeRun == false && e.VentRun == true && e.WaitRun == false){
+			else if(e.FeedRun == false && e.AerateRun == false && e.SludgeDischargeRun == false && e.WaitRun == false){
 				ReactorState.Text = e.ReactorStatus + " : VENT";
 			}
-			else if(e.FeedRun == false && e.AerateRun == false && e.SludgeDischargeRun == false && e.VentRun == false && e.WaitRun == true){
+			else if(e.FeedRun == false && e.AerateRun == false && e.SludgeDischargeRun == false && e.WaitRun == true){
 				ReactorState.Text = e.ReactorStatus + " : WAIT";
 			}
 		}

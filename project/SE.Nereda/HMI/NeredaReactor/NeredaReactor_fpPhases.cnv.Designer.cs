@@ -170,7 +170,7 @@ namespace SE.Nereda.Faceplates.NeredaReactor
 			this.VentRun.Ranges.Add(new NxtControl.GuiFramework.Range<bool>(true, propertyDictionary12));
 			propertyDictionary10.Add("Color", new NxtControl.Drawing.Color("LedFalseColor"));
 			this.VentRun.Ranges.DefaultPropertyValues = propertyDictionary10;
-			this.VentRun.TagName = "VentRun";
+			this.VentRun.TagName = "VentAerationGridRun";
 			this.VentRun.EndInit();
 			// 
 			// WaitRun

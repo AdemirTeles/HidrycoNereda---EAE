@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="32551274-aaa9-404d-b5e7-a166d6de9e54" Name="QualityFailFilter" Comment="Tolerancia de tempo para a falha de canal por qualidade do sinal (por instancia do AnalogInput)" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="1.0" Author="Claude/Hidryco" Date="10/7/2026" Remarks="Rev0 - Falha de canal (qualidade ruim/incerta) so e confirmada se persistir por FailDelay; 0 = imediato (comportamento anterior). Usado no AnalogInput (40FT05)." />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="D0DAEC8E3A7B0649" Name="REQ" Comment="Nova avaliacao da falha de canal">
+        <With Var="ChFailIn" />
+        <With Var="BadIn" />
+        <With Var="UncIn" />
+        <With Var="FailDelay" />
+      </Event>
+      <Event ID="5ACBE650D38A1821" Name="EXPIRED" Comment="Fim do tempo de tolerancia (E_DELAY.EO)" />
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="4A90895B1386766B" Name="CNF" Comment="Falha de canal filtrada (a cada avaliacao)">
+        <With Var="ChFailOut" />
+        <With Var="BadOut" />
+        <With Var="UncOut" />
+      </Event>
+      <Event ID="9F58EC819BE28CD6" Name="START_T" Comment="Inicia o temporizador de tolerancia (E_DELAY.START)" />
+      <Event ID="D03D083CB42919B5" Name="STOP_T" Comment="Para o temporizador de tolerancia (E_DELAY.STOP)" />
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="BEF204F0906FF6D8" Name="ChFailIn" Type="BOOL" Comment="Falha de canal bruta (OR de qualidade ruim, qualidade incerta e falha do AnalogInputBase)" />
+      <VarDeclaration ID="47B2104419F3BB19" Name="BadIn" Type="BOOL" Comment="Qualidade ruim (aiSignalDecode.Bad)" />
+      <VarDeclaration ID="D0B962A0DD67BC30" Name="UncIn" Type="BOOL" Comment="Qualidade incerta (aiSignalDecode.Uncertain)" />
+      <VarDeclaration ID="802A68C220DBE1BD" Name="FailDelay" Type="TIME" Comment="Tolerancia: a falha so e confirmada se durar este tempo (0 = imediato)" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="D2C9F0958E4C098A" Name="ChFailOut" Type="BOOL" Comment="Falha de canal confirmada" />
+      <VarDeclaration ID="1A1043D3C0733A7D" Name="BadOut" Type="BOOL" Comment="Qualidade ruim com a falha confirmada (alarme BadQuality)" />
+      <VarDeclaration ID="1A6AD5B0D24F0EA5" Name="UncOut" Type="BOOL" Comment="Qualidade incerta com a falha confirmada (alarme UncertainQuality)" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="b8fa87dc-ea29-4ce1-b0c1-b713a1cd2087">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="AlgMain,AlgTimer" />
+    <InternalVars>
+      <VarDeclaration Name="Timing" Type="BOOL" Comment="Temporizador de tolerancia contando" />
+      <VarDeclaration Name="Confirmed" Type="BOOL" Comment="Falha confirmada" />
+      <VarDeclaration Name="FromTimer" Type="BOOL" Comment="Avaliacao disparada pelo fim do tempo" />
+      <VarDeclaration Name="DoStart" Type="BOOL" />
+      <VarDeclaration Name="DoStop" Type="BOOL" />
+    </InternalVars>
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="550" y="425" />
+      <ECState Name="EVAL" Comment="Avalia e publica" x="1300" y="900">
+        <ECAction Algorithm="AlgMain" Output="CNF" />
+      </ECState>
+      <ECState Name="TIMER" Comment="Fim do tempo de tolerancia" x="550" y="1300">
+        <ECAction Algorithm="AlgTimer" />
+      </ECState>
+      <ECState Name="SEND_START" x="2100" y="600">
+        <ECAction Output="START_T" />
+      </ECState>
+      <ECState Name="SEND_STOP" x="2100" y="1200">
+        <ECAction Output="STOP_T" />
+      </ECState>
+      <ECTransition Source="START" Destination="EVAL" Condition="REQ" x="950" y="600" />
+      <ECTransition Source="START" Destination="TIMER" Condition="EXPIRED" x="450" y="850" />
+      <ECTransition Source="TIMER" Destination="EVAL" Condition="1" x="950" y="1150" />
+      <ECTransition Source="EVAL" Destination="SEND_START" Condition="DoStart" x="1750" y="700" />
+      <ECTransition Source="EVAL" Destination="SEND_STOP" Condition="DoStop" x="1750" y="1100" />
+      <ECTransition Source="EVAL" Destination="START" Condition="1" x="900" y="800" />
+      <ECTransition Source="SEND_START" Destination="START" Condition="1" x="1400" y="400" />
+      <ECTransition Source="SEND_STOP" Destination="START" Condition="1" x="1400" y="1400" />
+    </ECC>
+    <Algorithm Name="AlgMain" Comment="Tolerancia da falha de canal">
+      <ST><![CDATA[;
+(* QualityFailFilter - tolerancia para a falha de canal (qualidade do sinal)
+   ChFailIn = OR bruto (qualidade ruim, qualidade incerta, falha do AnalogInputBase).
+   A falha so e confirmada se ficar presente sem interrupcao durante FailDelay.
+   FailDelay = 0 (padrao): confirma na hora - mesmo comportamento de antes.
+   Ao normalizar (ChFailIn = FALSE), limpa na hora e para o temporizador.
+   BadOut / UncOut = qualidade ruim / incerta, so com a falha confirmada (alarmes da lista). *)
+DoStart := FALSE;
+DoStop := FALSE;
+IF NOT ChFailIn THEN
+    IF Timing THEN
+        DoStop := TRUE;
+    END_IF;
+    Timing := FALSE;
+    Confirmed := FALSE;
+ELSIF NOT Confirmed THEN
+    IF FailDelay <= T#0s THEN
+        IF Timing THEN
+            DoStop := TRUE;
+        END_IF;
+        Timing := FALSE;
+        Confirmed := TRUE;
+    ELSIF FromTimer AND Timing THEN
+        Timing := FALSE;
+        Confirmed := TRUE;
+    ELSIF NOT Timing THEN
+        Timing := TRUE;
+        DoStart := TRUE;
+    END_IF;
+END_IF;
+FromTimer := FALSE;
+ChFailOut := Confirmed;
+BadOut := BadIn AND Confirmed;
+UncOut := UncIn AND Confirmed;
+]]></ST>
+    </Algorithm>
+    <Algorithm Name="AlgTimer" Comment="Fim do tempo de tolerancia">
+      <ST><![CDATA[;
+(* fim do tempo de tolerancia (E_DELAY.EO) *)
+FromTimer := TRUE;
+]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

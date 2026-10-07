@@ -89,7 +89,7 @@ namespace SE.Nereda.Symbols.NeredaReactor
       return (System.Boolean) var;
     }  }
 
-    public bool Get_VentRun(ref System.Boolean value)
+    public bool Get_VentAerationGridRun(ref System.Boolean value)
     {
       if (accessorService == null)
         return false;
@@ -99,7 +99,7 @@ namespace SE.Nereda.Symbols.NeredaReactor
       return ret;
     }
 
-    public System.Boolean? VentRun
+    public System.Boolean? VentAerationGridRun
     { get {
       if (accessorService == null)
         return null;
@@ -147,6 +147,46 @@ namespace SE.Nereda.Symbols.NeredaReactor
       bool ret = accessorService.GetStringValue(channelId, cookie, eventIndex, true,5, ref var);
       if (!ret) return null;
       return (System.String) var;
+    }  }
+
+    public bool Get_VentSludgeGridRun(ref System.Boolean value)
+    {
+      if (accessorService == null)
+        return false;
+      bool var = false;
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,6, ref var);
+      if (ret) value = (System.Boolean) var;
+      return ret;
+    }
+
+    public System.Boolean? VentSludgeGridRun
+    { get {
+      if (accessorService == null)
+        return null;
+      bool var = false;
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,6, ref var);
+      if (!ret) return null;
+      return (System.Boolean) var;
+    }  }
+
+    public bool Get_LowerLevelRun(ref System.Boolean value)
+    {
+      if (accessorService == null)
+        return false;
+      bool var = false;
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,7, ref var);
+      if (ret) value = (System.Boolean) var;
+      return ret;
+    }
+
+    public System.Boolean? LowerLevelRun
+    { get {
+      if (accessorService == null)
+        return null;
+      bool var = false;
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,7, ref var);
+      if (!ret) return null;
+      return (System.Boolean) var;
     }  }
 
 

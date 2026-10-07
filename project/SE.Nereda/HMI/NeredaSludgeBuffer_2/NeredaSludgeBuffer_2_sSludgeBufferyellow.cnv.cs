@@ -23,5 +23,13 @@ namespace SE.Nereda.Symbols.NeredaSludgeBuffer_2
 			//
 			InitializeComponent();
 		}
+		
+		
+		
+		void LEVEL_Fired_EventHandler(object sender, LEVELEventArgs e)
+		{
+			// TODO: Implement LEVEL_Fired_EventHandler
+			ShowLevel.FillPercent = (float) (e.LevelPv / e.LevelPvMax) *100;
+		}
 	}
 }

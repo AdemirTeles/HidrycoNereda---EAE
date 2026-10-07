@@ -41,16 +41,22 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary14 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary15 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary13 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary17 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary18 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary16 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary20 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary21 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary19 = new NxtControl.GuiFramework.PropertyDictionary();
 			this.AirBubbles1 = new NxtControl.GuiFramework.Rectangle();
 			this.AirBubbles2 = new NxtControl.GuiFramework.Rectangle();
 			this.sPvBarVer1 = new SE.Nereda.Symbols.AnalogInput.sPvBarVer();
 			this.FeedRun = new System.HMI.Symbols.Base.Led<bool>();
 			this.freeText1 = new NxtControl.GuiFramework.FreeText();
 			this.freeText2 = new NxtControl.GuiFramework.FreeText();
+			this.LowerLevelRun = new System.HMI.Symbols.Base.Led<bool>();
 			this.AerateRun = new System.HMI.Symbols.Base.Led<bool>();
-			this.SDRun = new System.HMI.Symbols.Base.Led<bool>();
 			this.VentRun = new System.HMI.Symbols.Base.Led<bool>();
-			this.WaitRun = new System.HMI.Symbols.Base.Led<bool>();
+			this.SludgeDischargeRun = new System.HMI.Symbols.Base.Led<bool>();
 			this.freeText3 = new NxtControl.GuiFramework.FreeText();
 			this.freeText4 = new NxtControl.GuiFramework.FreeText();
 			this.freeText5 = new NxtControl.GuiFramework.FreeText();
@@ -77,6 +83,10 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			this.WaterBase = new NxtControl.GuiFramework.Ellipse();
 			this.group1 = new NxtControl.GuiFramework.Group();
 			this.REACTOR = new NxtControl.GuiFramework.Rectangle();
+			this.VentAerationGridRun = new System.HMI.Symbols.Base.Led<bool>();
+			this.VentSludgeGridRun = new System.HMI.Symbols.Base.Led<bool>();
+			this.freeText6 = new NxtControl.GuiFramework.FreeText();
+			this.freeText7 = new NxtControl.GuiFramework.FreeText();
 			this.group2 = new NxtControl.GuiFramework.Group();
 			// 
 			// AirBubbles1
@@ -102,7 +112,7 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			this.sPvBarVer1.BeginInit();
 			this.sPvBarVer1._iSensorName = "";
 			this.sPvBarVer1._iUnit = "m";
-			this.sPvBarVer1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1.5D, 0D, 0D, 1.5D, 56D, 186D);
+			this.sPvBarVer1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1.5D, 0D, 0D, 1.5D, 48D, 114D);
 			this.sPvBarVer1.Name = "sPvBarVer1";
 			this.sPvBarVer1.SecurityToken = ((uint)(4294967295u));
 			this.sPvBarVer1.TagName = "Sensors.LevelMeasurementReactor";
@@ -112,7 +122,7 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			// 
 			this.FeedRun.BeginInit();
 			this.FeedRun.ColorFrame = new NxtControl.Drawing.Color("LedFrameColor");
-			this.FeedRun.DesignMatrix = new NxtControl.Drawing.Matrix2D(1.1666666666666665D, 0D, 0D, 1.1666666666666665D, 164D, 255D);
+			this.FeedRun.DesignMatrix = new NxtControl.Drawing.Matrix2D(1.1666666666666665D, 0D, 0D, 1.1666666666666665D, 164D, 215D);
 			this.FeedRun.FrameSize = 33F;
 			this.FeedRun.IsOnlyInput = true;
 			this.FeedRun.Name = "FeedRun";
@@ -130,7 +140,7 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			// 
 			this.freeText1.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.freeText1.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-			this.freeText1.Location = new NxtControl.Drawing.PointF(176D, 248D);
+			this.freeText1.Location = new NxtControl.Drawing.PointF(176D, 208D);
 			this.freeText1.Name = "freeText1";
 			this.freeText1.Text = "Phase Feed";
 			// 
@@ -138,51 +148,51 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			// 
 			this.freeText2.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.freeText2.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-			this.freeText2.Location = new NxtControl.Drawing.PointF(176D, 272D);
+			this.freeText2.Location = new NxtControl.Drawing.PointF(176D, 232D);
 			this.freeText2.Name = "freeText2";
-			this.freeText2.Text = "Phase Aerate";
+			this.freeText2.Text = "Phase LowerLevel";
+			// 
+			// LowerLevelRun
+			// 
+			this.LowerLevelRun.BeginInit();
+			this.LowerLevelRun.ColorFrame = new NxtControl.Drawing.Color("LedFrameColor");
+			this.LowerLevelRun.DesignMatrix = new NxtControl.Drawing.Matrix2D(1.1666666666666665D, 0D, 0D, 1.1666666666666665D, 164D, 239D);
+			this.LowerLevelRun.FrameSize = 33F;
+			this.LowerLevelRun.IsOnlyInput = true;
+			this.LowerLevelRun.Name = "LowerLevelRun";
+			propertyDictionary5.Add("Color", new NxtControl.Drawing.Color("LedFalseColor"));
+			propertyDictionary6.Add("Color", new NxtControl.Drawing.Color("DevAnalogOut"));
+			this.LowerLevelRun.Ranges.Clear();
+			this.LowerLevelRun.Ranges.Add(new NxtControl.GuiFramework.Range<bool>(false, propertyDictionary5));
+			this.LowerLevelRun.Ranges.Add(new NxtControl.GuiFramework.Range<bool>(true, propertyDictionary6));
+			propertyDictionary4.Add("Color", new NxtControl.Drawing.Color("LedFalseColor"));
+			this.LowerLevelRun.Ranges.DefaultPropertyValues = propertyDictionary4;
+			this.LowerLevelRun.TagName = "LowerLevelRun";
+			this.LowerLevelRun.EndInit();
 			// 
 			// AerateRun
 			// 
 			this.AerateRun.BeginInit();
 			this.AerateRun.ColorFrame = new NxtControl.Drawing.Color("LedFrameColor");
-			this.AerateRun.DesignMatrix = new NxtControl.Drawing.Matrix2D(1.1666666666666665D, 0D, 0D, 1.1666666666666665D, 164D, 279D);
+			this.AerateRun.DesignMatrix = new NxtControl.Drawing.Matrix2D(1.1666666666666665D, 0D, 0D, 1.1666666666666665D, 164D, 263D);
 			this.AerateRun.FrameSize = 33F;
 			this.AerateRun.IsOnlyInput = true;
 			this.AerateRun.Name = "AerateRun";
-			propertyDictionary5.Add("Color", new NxtControl.Drawing.Color("LedFalseColor"));
-			propertyDictionary6.Add("Color", new NxtControl.Drawing.Color("DevAnalogOut"));
-			this.AerateRun.Ranges.Clear();
-			this.AerateRun.Ranges.Add(new NxtControl.GuiFramework.Range<bool>(false, propertyDictionary5));
-			this.AerateRun.Ranges.Add(new NxtControl.GuiFramework.Range<bool>(true, propertyDictionary6));
-			propertyDictionary4.Add("Color", new NxtControl.Drawing.Color("LedFalseColor"));
-			this.AerateRun.Ranges.DefaultPropertyValues = propertyDictionary4;
-			this.AerateRun.TagName = "AerateRun";
-			this.AerateRun.EndInit();
-			// 
-			// SDRun
-			// 
-			this.SDRun.BeginInit();
-			this.SDRun.ColorFrame = new NxtControl.Drawing.Color("LedFrameColor");
-			this.SDRun.DesignMatrix = new NxtControl.Drawing.Matrix2D(1.1666666666666665D, 0D, 0D, 1.1666666666666665D, 164D, 303D);
-			this.SDRun.FrameSize = 33F;
-			this.SDRun.IsOnlyInput = true;
-			this.SDRun.Name = "SDRun";
 			propertyDictionary8.Add("Color", new NxtControl.Drawing.Color("LedFalseColor"));
 			propertyDictionary9.Add("Color", new NxtControl.Drawing.Color("DevAnalogOut"));
-			this.SDRun.Ranges.Clear();
-			this.SDRun.Ranges.Add(new NxtControl.GuiFramework.Range<bool>(false, propertyDictionary8));
-			this.SDRun.Ranges.Add(new NxtControl.GuiFramework.Range<bool>(true, propertyDictionary9));
+			this.AerateRun.Ranges.Clear();
+			this.AerateRun.Ranges.Add(new NxtControl.GuiFramework.Range<bool>(false, propertyDictionary8));
+			this.AerateRun.Ranges.Add(new NxtControl.GuiFramework.Range<bool>(true, propertyDictionary9));
 			propertyDictionary7.Add("Color", new NxtControl.Drawing.Color("LedFalseColor"));
-			this.SDRun.Ranges.DefaultPropertyValues = propertyDictionary7;
-			this.SDRun.TagName = "SludgeDischargeRun";
-			this.SDRun.EndInit();
+			this.AerateRun.Ranges.DefaultPropertyValues = propertyDictionary7;
+			this.AerateRun.TagName = "AerateRun";
+			this.AerateRun.EndInit();
 			// 
 			// VentRun
 			// 
 			this.VentRun.BeginInit();
 			this.VentRun.ColorFrame = new NxtControl.Drawing.Color("LedFrameColor");
-			this.VentRun.DesignMatrix = new NxtControl.Drawing.Matrix2D(1.1666666666666665D, 0D, 0D, 1.1666666666666665D, 164D, 327D);
+			this.VentRun.DesignMatrix = new NxtControl.Drawing.Matrix2D(1.1666666666666665D, 0D, 0D, 1.1666666666666665D, 164D, 287D);
 			this.VentRun.FrameSize = 33F;
 			this.VentRun.IsOnlyInput = true;
 			this.VentRun.Name = "VentRun";
@@ -193,54 +203,54 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			this.VentRun.Ranges.Add(new NxtControl.GuiFramework.Range<bool>(true, propertyDictionary12));
 			propertyDictionary10.Add("Color", new NxtControl.Drawing.Color("LedFalseColor"));
 			this.VentRun.Ranges.DefaultPropertyValues = propertyDictionary10;
-			this.VentRun.TagName = "VentRun";
+			this.VentRun.TagName = "WaitRun";
 			this.VentRun.EndInit();
 			// 
-			// WaitRun
+			// SludgeDischargeRun
 			// 
-			this.WaitRun.BeginInit();
-			this.WaitRun.ColorFrame = new NxtControl.Drawing.Color("LedFrameColor");
-			this.WaitRun.DesignMatrix = new NxtControl.Drawing.Matrix2D(1.1666666666666665D, 0D, 0D, 1.1666666666666665D, 164D, 351D);
-			this.WaitRun.FrameSize = 33F;
-			this.WaitRun.IsOnlyInput = true;
-			this.WaitRun.Name = "WaitRun";
+			this.SludgeDischargeRun.BeginInit();
+			this.SludgeDischargeRun.ColorFrame = new NxtControl.Drawing.Color("LedFrameColor");
+			this.SludgeDischargeRun.DesignMatrix = new NxtControl.Drawing.Matrix2D(1.1666666666666665D, 0D, 0D, 1.1666666666666665D, 164D, 311D);
+			this.SludgeDischargeRun.FrameSize = 33F;
+			this.SludgeDischargeRun.IsOnlyInput = true;
+			this.SludgeDischargeRun.Name = "SludgeDischargeRun";
 			propertyDictionary14.Add("Color", new NxtControl.Drawing.Color("LedFalseColor"));
 			propertyDictionary15.Add("Color", new NxtControl.Drawing.Color("DevAnalogOut"));
-			this.WaitRun.Ranges.Clear();
-			this.WaitRun.Ranges.Add(new NxtControl.GuiFramework.Range<bool>(false, propertyDictionary14));
-			this.WaitRun.Ranges.Add(new NxtControl.GuiFramework.Range<bool>(true, propertyDictionary15));
+			this.SludgeDischargeRun.Ranges.Clear();
+			this.SludgeDischargeRun.Ranges.Add(new NxtControl.GuiFramework.Range<bool>(false, propertyDictionary14));
+			this.SludgeDischargeRun.Ranges.Add(new NxtControl.GuiFramework.Range<bool>(true, propertyDictionary15));
 			propertyDictionary13.Add("Color", new NxtControl.Drawing.Color("LedFalseColor"));
-			this.WaitRun.Ranges.DefaultPropertyValues = propertyDictionary13;
-			this.WaitRun.TagName = "WaitRun";
-			this.WaitRun.EndInit();
+			this.SludgeDischargeRun.Ranges.DefaultPropertyValues = propertyDictionary13;
+			this.SludgeDischargeRun.TagName = "SludgeDischargeRun";
+			this.SludgeDischargeRun.EndInit();
 			// 
 			// freeText3
 			// 
 			this.freeText3.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.freeText3.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-			this.freeText3.Location = new NxtControl.Drawing.PointF(176D, 296D);
+			this.freeText3.Location = new NxtControl.Drawing.PointF(176D, 256D);
 			this.freeText3.Name = "freeText3";
-			this.freeText3.Text = "Phase Discharge";
+			this.freeText3.Text = "Phase Aerate";
 			// 
 			// freeText4
 			// 
 			this.freeText4.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.freeText4.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-			this.freeText4.Location = new NxtControl.Drawing.PointF(176D, 320D);
+			this.freeText4.Location = new NxtControl.Drawing.PointF(176D, 280D);
 			this.freeText4.Name = "freeText4";
-			this.freeText4.Text = "Phase Vent";
+			this.freeText4.Text = "Phase Wait";
 			// 
 			// freeText5
 			// 
 			this.freeText5.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.freeText5.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-			this.freeText5.Location = new NxtControl.Drawing.PointF(176D, 344D);
+			this.freeText5.Location = new NxtControl.Drawing.PointF(176D, 304D);
 			this.freeText5.Name = "freeText5";
-			this.freeText5.Text = "Phase Wait";
+			this.freeText5.Text = "Phase SludgeDischarge";
 			// 
 			// roundedRectangle3
 			// 
-			this.roundedRectangle3.Bounds = new NxtControl.Drawing.RectF(((float)(152D)), ((float)(240D)), ((float)(136D)), ((float)(128D)));
+			this.roundedRectangle3.Bounds = new NxtControl.Drawing.RectF(((float)(152D)), ((float)(200D)), ((float)(184D)), ((float)(176D)));
 			this.roundedRectangle3.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(255))), new NxtControl.Drawing.GradientFill(NxtControl.Drawing.GradientFillOrientation.DiagonalLeftTop));
 			this.roundedRectangle3.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
 			this.roundedRectangle3.Name = "roundedRectangle3";
@@ -248,7 +258,7 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			// 
 			// ReactorState
 			// 
-			this.ReactorState.Bounds = new NxtControl.Drawing.RectF(((float)(56D)), ((float)(176D)), ((float)(232D)), ((float)(32D)));
+			this.ReactorState.Bounds = new NxtControl.Drawing.RectF(((float)(88D)), ((float)(60D)), ((float)(232D)), ((float)(32D)));
 			this.ReactorState.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(78)), ((byte)(78)), ((byte)(78))));
 			this.ReactorState.Font = new NxtControl.Drawing.Font("Arial", 6F, System.Drawing.FontStyle.Bold);
 			this.ReactorState.Name = "ReactorState";
@@ -259,7 +269,7 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			// 
 			// ellipse1
 			// 
-			this.ellipse1.Bounds = new NxtControl.Drawing.RectF(((float)(136D)), ((float)(32D)), ((float)(72D)), ((float)(32D)));
+			this.ellipse1.Bounds = new NxtControl.Drawing.RectF(((float)(159.77142857142854D)), ((float)(32D)), ((float)(88.457142857142827D)), ((float)(32D)));
 			this.ellipse1.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(255))), new NxtControl.Drawing.GradientFill(NxtControl.Drawing.GradientFillOrientation.HorizontalCenter));
 			this.ellipse1.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
 			this.ellipse1.Name = "ellipse1";
@@ -267,7 +277,7 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			// 
 			// WaterLevel
 			// 
-			this.WaterLevel.Bounds = new NxtControl.Drawing.RectF(((float)(48D)), ((float)(152D)), ((float)(248D)), ((float)(216D)));
+			this.WaterLevel.Bounds = new NxtControl.Drawing.RectF(((float)(51.657142857142858D)), ((float)(152D)), ((float)(304.68571428571431D)), ((float)(216D)));
 			this.WaterLevel.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(165)), ((byte)(213)), ((byte)(226))));
 			this.WaterLevel.FillDirection = NxtControl.Drawing.FillDirection.DownToTop;
 			this.WaterLevel.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
@@ -276,7 +286,7 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			// 
 			// ellipse3
 			// 
-			this.ellipse3.Bounds = new NxtControl.Drawing.RectF(((float)(48D)), ((float)(320D)), ((float)(248D)), ((float)(88D)));
+			this.ellipse3.Bounds = new NxtControl.Drawing.RectF(((float)(51.657142857142858D)), ((float)(320D)), ((float)(304.68571428571431D)), ((float)(88D)));
 			this.ellipse3.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(154)), ((byte)(154)), ((byte)(154))), new NxtControl.Drawing.GradientFill(NxtControl.Drawing.GradientFillOrientation.HorizontalCenter, NxtControl.Drawing.GradientFillBrightness.Dark));
 			this.ellipse3.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
 			this.ellipse3.Name = "ellipse3";
@@ -284,42 +294,42 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			// 
 			// line1
 			// 
-			this.line1.EndPoint = new NxtControl.Drawing.PointF(256D, 32D);
+			this.line1.EndPoint = new NxtControl.Drawing.PointF(307.2D, 32D);
 			this.line1.Name = "line1";
 			this.line1.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
-			this.line1.StartPoint = new NxtControl.Drawing.PointF(208D, 40D);
+			this.line1.StartPoint = new NxtControl.Drawing.PointF(248.22857142857137D, 40D);
 			// 
 			// line2
 			// 
-			this.line2.EndPoint = new NxtControl.Drawing.PointF(136D, 40D);
+			this.line2.EndPoint = new NxtControl.Drawing.PointF(159.77142857142854D, 40D);
 			this.line2.Name = "line2";
 			this.line2.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
-			this.line2.StartPoint = new NxtControl.Drawing.PointF(88D, 32D);
+			this.line2.StartPoint = new NxtControl.Drawing.PointF(100.79999999999998D, 32D);
 			// 
 			// line3
 			// 
-			this.line3.EndPoint = new NxtControl.Drawing.PointF(312D, 64D);
+			this.line3.EndPoint = new NxtControl.Drawing.PointF(376D, 64D);
 			this.line3.Name = "line3";
 			this.line3.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
-			this.line3.StartPoint = new NxtControl.Drawing.PointF(208D, 48D);
+			this.line3.StartPoint = new NxtControl.Drawing.PointF(248.22857142857137D, 48D);
 			// 
 			// line4
 			// 
-			this.line4.EndPoint = new NxtControl.Drawing.PointF(200D, 56D);
+			this.line4.EndPoint = new NxtControl.Drawing.PointF(238.39999999999998D, 56D);
 			this.line4.Name = "line4";
 			this.line4.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
-			this.line4.StartPoint = new NxtControl.Drawing.PointF(280D, 96D);
+			this.line4.StartPoint = new NxtControl.Drawing.PointF(336.68571428571431D, 96D);
 			// 
 			// line5
 			// 
-			this.line5.EndPoint = new NxtControl.Drawing.PointF(184D, 64D);
+			this.line5.EndPoint = new NxtControl.Drawing.PointF(218.74285714285713D, 64D);
 			this.line5.Name = "line5";
 			this.line5.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
-			this.line5.StartPoint = new NxtControl.Drawing.PointF(208D, 112D);
+			this.line5.StartPoint = new NxtControl.Drawing.PointF(248.22857142857137D, 112D);
 			// 
 			// ellipse4
 			// 
-			this.ellipse4.Bounds = new NxtControl.Drawing.RectF(((float)(136D)), ((float)(24D)), ((float)(72D)), ((float)(32D)));
+			this.ellipse4.Bounds = new NxtControl.Drawing.RectF(((float)(159.77142857142854D)), ((float)(24D)), ((float)(88.457142857142827D)), ((float)(32D)));
 			this.ellipse4.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(114)), ((byte)(114)), ((byte)(114))));
 			this.ellipse4.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
 			this.ellipse4.Name = "ellipse4";
@@ -327,7 +337,7 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			// 
 			// WaterTop
 			// 
-			this.WaterTop.Bounds = new NxtControl.Drawing.RectF(((float)(48D)), ((float)(112D)), ((float)(248D)), ((float)(88D)));
+			this.WaterTop.Bounds = new NxtControl.Drawing.RectF(((float)(51.657142857142858D)), ((float)(112D)), ((float)(304.68571428571431D)), ((float)(88D)));
 			this.WaterTop.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(165)), ((byte)(213)), ((byte)(226))));
 			this.WaterTop.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
 			this.WaterTop.Name = "WaterTop";
@@ -335,28 +345,28 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			// 
 			// line6
 			// 
-			this.line6.EndPoint = new NxtControl.Drawing.PointF(160D, 64D);
+			this.line6.EndPoint = new NxtControl.Drawing.PointF(189.25714285714284D, 64D);
 			this.line6.Name = "line6";
 			this.line6.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
-			this.line6.StartPoint = new NxtControl.Drawing.PointF(136D, 112D);
+			this.line6.StartPoint = new NxtControl.Drawing.PointF(159.77142857142854D, 112D);
 			// 
 			// line7
 			// 
-			this.line7.EndPoint = new NxtControl.Drawing.PointF(144D, 56D);
+			this.line7.EndPoint = new NxtControl.Drawing.PointF(169.6D, 56D);
 			this.line7.Name = "line7";
 			this.line7.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
-			this.line7.StartPoint = new NxtControl.Drawing.PointF(64D, 96D);
+			this.line7.StartPoint = new NxtControl.Drawing.PointF(71.314285714285717D, 96D);
 			// 
 			// line12
 			// 
-			this.line12.EndPoint = new NxtControl.Drawing.PointF(136D, 48D);
+			this.line12.EndPoint = new NxtControl.Drawing.PointF(159.77142857142854D, 48D);
 			this.line12.Name = "line12";
 			this.line12.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
 			this.line12.StartPoint = new NxtControl.Drawing.PointF(32D, 64D);
 			// 
 			// ellipse14
 			// 
-			this.ellipse14.Bounds = new NxtControl.Drawing.RectF(((float)(32D)), ((float)(24D)), ((float)(280D)), ((float)(88D)));
+			this.ellipse14.Bounds = new NxtControl.Drawing.RectF(((float)(32D)), ((float)(24D)), ((float)(344D)), ((float)(88D)));
 			this.ellipse14.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(255))), new NxtControl.Drawing.GradientFill(NxtControl.Drawing.GradientFillOrientation.DiagonalRightTop));
 			this.ellipse14.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
 			this.ellipse14.Name = "ellipse14";
@@ -364,7 +374,7 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			// 
 			// ellipse15
 			// 
-			this.ellipse15.Bounds = new NxtControl.Drawing.RectF(((float)(32D)), ((float)(56D)), ((float)(280D)), ((float)(88D)));
+			this.ellipse15.Bounds = new NxtControl.Drawing.RectF(((float)(32D)), ((float)(56D)), ((float)(344D)), ((float)(88D)));
 			this.ellipse15.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(255))), new NxtControl.Drawing.GradientFill(NxtControl.Drawing.GradientFillOrientation.HorizontalCenter, NxtControl.Drawing.GradientFillBrightness.Dark));
 			this.ellipse15.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
 			this.ellipse15.Name = "ellipse15";
@@ -372,7 +382,7 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			// 
 			// rectangle2
 			// 
-			this.rectangle2.Bounds = new NxtControl.Drawing.RectF(((float)(48D)), ((float)(112D)), ((float)(248D)), ((float)(256D)));
+			this.rectangle2.Bounds = new NxtControl.Drawing.RectF(((float)(51.657142857142858D)), ((float)(112D)), ((float)(304.68571428571431D)), ((float)(256D)));
 			this.rectangle2.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(154)), ((byte)(154)), ((byte)(154))), new NxtControl.Drawing.GradientFill(NxtControl.Drawing.GradientFillOrientation.HorizontalCenter, NxtControl.Drawing.GradientFillBrightness.Dark));
 			this.rectangle2.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
 			this.rectangle2.Name = "rectangle2";
@@ -380,7 +390,7 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			// 
 			// rectangle3
 			// 
-			this.rectangle3.Bounds = new NxtControl.Drawing.RectF(((float)(32D)), ((float)(64D)), ((float)(280D)), ((float)(328D)));
+			this.rectangle3.Bounds = new NxtControl.Drawing.RectF(((float)(32D)), ((float)(64D)), ((float)(344D)), ((float)(328D)));
 			this.rectangle3.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(255))), new NxtControl.Drawing.GradientFill(NxtControl.Drawing.GradientFillOrientation.HorizontalCenter, NxtControl.Drawing.GradientFillBrightness.Dark));
 			this.rectangle3.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
 			this.rectangle3.Name = "rectangle3";
@@ -388,7 +398,7 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			// 
 			// ellipse16
 			// 
-			this.ellipse16.Bounds = new NxtControl.Drawing.RectF(((float)(32D)), ((float)(344D)), ((float)(280D)), ((float)(88D)));
+			this.ellipse16.Bounds = new NxtControl.Drawing.RectF(((float)(32D)), ((float)(344D)), ((float)(344D)), ((float)(88D)));
 			this.ellipse16.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(255))), new NxtControl.Drawing.GradientFill(NxtControl.Drawing.GradientFillOrientation.HorizontalCenter, NxtControl.Drawing.GradientFillBrightness.Dark));
 			this.ellipse16.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
 			this.ellipse16.Name = "ellipse16";
@@ -396,7 +406,7 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			// 
 			// WaterBase
 			// 
-			this.WaterBase.Bounds = new NxtControl.Drawing.RectF(((float)(48D)), ((float)(320D)), ((float)(248D)), ((float)(88D)));
+			this.WaterBase.Bounds = new NxtControl.Drawing.RectF(((float)(51.657142857142858D)), ((float)(320D)), ((float)(304.68571428571431D)), ((float)(88D)));
 			this.WaterBase.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(165)), ((byte)(213)), ((byte)(226))));
 			this.WaterBase.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
 			this.WaterBase.Name = "WaterBase";
@@ -430,7 +440,7 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			// 
 			// REACTOR
 			// 
-			this.REACTOR.Bounds = new NxtControl.Drawing.RectF(((float)(32D)), ((float)(108D)), ((float)(280D)), ((float)(40D)));
+			this.REACTOR.Bounds = new NxtControl.Drawing.RectF(((float)(64D)), ((float)(104D)), ((float)(280D)), ((float)(40D)));
 			this.REACTOR.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("transparent"));
 			this.REACTOR.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold);
 			this.REACTOR.Name = "REACTOR";
@@ -438,11 +448,62 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			this.REACTOR.Text = "REACTOR 1";
 			this.REACTOR.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleCenter;
 			// 
+			// VentAerationGridRun
+			// 
+			this.VentAerationGridRun.BeginInit();
+			this.VentAerationGridRun.ColorFrame = new NxtControl.Drawing.Color("LedFrameColor");
+			this.VentAerationGridRun.DesignMatrix = new NxtControl.Drawing.Matrix2D(1.1666666666666665D, 0D, 0D, 1.1666666666666665D, 164D, 335D);
+			this.VentAerationGridRun.FrameSize = 33F;
+			this.VentAerationGridRun.IsOnlyInput = true;
+			this.VentAerationGridRun.Name = "VentAerationGridRun";
+			propertyDictionary17.Add("Color", new NxtControl.Drawing.Color("LedFalseColor"));
+			propertyDictionary18.Add("Color", new NxtControl.Drawing.Color("DevAnalogOut"));
+			this.VentAerationGridRun.Ranges.Clear();
+			this.VentAerationGridRun.Ranges.Add(new NxtControl.GuiFramework.Range<bool>(false, propertyDictionary17));
+			this.VentAerationGridRun.Ranges.Add(new NxtControl.GuiFramework.Range<bool>(true, propertyDictionary18));
+			propertyDictionary16.Add("Color", new NxtControl.Drawing.Color("LedFalseColor"));
+			this.VentAerationGridRun.Ranges.DefaultPropertyValues = propertyDictionary16;
+			this.VentAerationGridRun.TagName = "VentAerationGridRun";
+			this.VentAerationGridRun.EndInit();
+			// 
+			// VentSludgeGridRun
+			// 
+			this.VentSludgeGridRun.BeginInit();
+			this.VentSludgeGridRun.ColorFrame = new NxtControl.Drawing.Color("LedFrameColor");
+			this.VentSludgeGridRun.DesignMatrix = new NxtControl.Drawing.Matrix2D(1.1666666666666665D, 0D, 0D, 1.1666666666666665D, 164D, 359D);
+			this.VentSludgeGridRun.FrameSize = 33F;
+			this.VentSludgeGridRun.IsOnlyInput = true;
+			this.VentSludgeGridRun.Name = "VentSludgeGridRun";
+			propertyDictionary20.Add("Color", new NxtControl.Drawing.Color("LedFalseColor"));
+			propertyDictionary21.Add("Color", new NxtControl.Drawing.Color("DevAnalogOut"));
+			this.VentSludgeGridRun.Ranges.Clear();
+			this.VentSludgeGridRun.Ranges.Add(new NxtControl.GuiFramework.Range<bool>(false, propertyDictionary20));
+			this.VentSludgeGridRun.Ranges.Add(new NxtControl.GuiFramework.Range<bool>(true, propertyDictionary21));
+			propertyDictionary19.Add("Color", new NxtControl.Drawing.Color("LedFalseColor"));
+			this.VentSludgeGridRun.Ranges.DefaultPropertyValues = propertyDictionary19;
+			this.VentSludgeGridRun.TagName = "VentSludgeGridRun";
+			this.VentSludgeGridRun.EndInit();
+			// 
+			// freeText6
+			// 
+			this.freeText6.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.freeText6.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+			this.freeText6.Location = new NxtControl.Drawing.PointF(176D, 328D);
+			this.freeText6.Name = "freeText6";
+			this.freeText6.Text = "Phase VentAerationGrid";
+			// 
+			// freeText7
+			// 
+			this.freeText7.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.freeText7.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+			this.freeText7.Location = new NxtControl.Drawing.PointF(176D, 352D);
+			this.freeText7.Name = "freeText7";
+			this.freeText7.Text = "Phase VentSludgeGrid";
+			// 
 			// group2
 			// 
 			this.group2.BeginInit();
 			this.group2.Name = "group2";
-			this.group2.OpenFaceplates.Add(new NxtControl.GuiFramework.OpenFaceplate("fpPhases", NxtControl.GuiFramework.MouseButtonType.Click));
 			this.group2.Shapes.AddRange(new System.ComponentModel.IComponent[] {
 			this.roundedRectangle3,
 			this.freeText1,
@@ -451,10 +512,14 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			this.freeText4,
 			this.freeText5,
 			this.FeedRun,
+			this.LowerLevelRun,
 			this.AerateRun,
-			this.SDRun,
 			this.VentRun,
-			this.WaitRun});
+			this.SludgeDischargeRun,
+			this.VentAerationGridRun,
+			this.VentSludgeGridRun,
+			this.freeText6,
+			this.freeText7});
 			this.group2.EndInit();
 			// 
 			// sReactor3
@@ -476,10 +541,10 @@ namespace SE.Nereda.Symbols.NeredaReactor
 		private System.HMI.Symbols.Base.Led<bool> FeedRun;
 		private NxtControl.GuiFramework.FreeText freeText1;
 		private NxtControl.GuiFramework.FreeText freeText2;
+		private System.HMI.Symbols.Base.Led<bool> LowerLevelRun;
 		private System.HMI.Symbols.Base.Led<bool> AerateRun;
-		private System.HMI.Symbols.Base.Led<bool> SDRun;
 		private System.HMI.Symbols.Base.Led<bool> VentRun;
-		private System.HMI.Symbols.Base.Led<bool> WaitRun;
+		private System.HMI.Symbols.Base.Led<bool> SludgeDischargeRun;
 		private NxtControl.GuiFramework.FreeText freeText3;
 		private NxtControl.GuiFramework.FreeText freeText4;
 		private NxtControl.GuiFramework.FreeText freeText5;
@@ -506,6 +571,10 @@ namespace SE.Nereda.Symbols.NeredaReactor
 		private NxtControl.GuiFramework.Ellipse ellipse16;
 		private NxtControl.GuiFramework.Ellipse WaterBase;
 		private NxtControl.GuiFramework.Rectangle REACTOR;
+		private System.HMI.Symbols.Base.Led<bool> VentAerationGridRun;
+		private System.HMI.Symbols.Base.Led<bool> VentSludgeGridRun;
+		private NxtControl.GuiFramework.FreeText freeText6;
+		private NxtControl.GuiFramework.FreeText freeText7;
 		private NxtControl.GuiFramework.Group group2;
 		#endregion
 	}

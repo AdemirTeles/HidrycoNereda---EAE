@@ -3,11 +3,14 @@
 <FBType GUID="9b8be7cf-a8d0-484a-9672-85f193df4b6a" Name="AnalogInput" Format="2.0" Comment="CAT Function Block Type" Namespace="SE.Nereda">
   <Attribute Name="HMI.Alias" Value="" />
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="6/5/2026" Remarks="template" />
+  <VersionInfo Organization="Schneider Electric" Version="1.0" Author="Claude/Hidryco" Date="10/7/2026" Remarks="Rev1 - QualityFailDelay: tolerancia da falha de canal por qualidade do sinal (ChFailFilter + ChFailTimer); 0 = imediato, comportamento anterior. Alarmes BadQuality/UncertainQuality so com a falha confirmada." />
   <InterfaceList>
     <EventInputs>
       <Event ID="536A16EAB96A59B7" Name="REQ_SUPPRESS" Comment="Request to suppress the channel failure alarm">
         <With Var="SuppressAlarm" />
+      </Event>
+      <Event ID="72A56D23BBC921D8" Name="REQ_TIME">
+        <With Var="QualityFailDelay" />
       </Event>
     </EventInputs>
     <EventOutputs>
@@ -36,6 +39,7 @@
     </EventOutputs>
     <InputVars>
       <VarDeclaration ID="BB91D7C73416AF1A" Name="SuppressAlarm" Type="BOOL" Comment="1 = Suppress channel failure in HMI" />
+      <VarDeclaration ID="FA79D5A30FC55CE5" Name="QualityFailDelay" Type="TIME" InitialValue="T#5s" Comment="Tolerancia da falha de canal por qualidade do sinal: so acusa se durar este tempo (0 = imediato, comportamento anterior)" />
     </InputVars>
     <OutputVars>
       <VarDeclaration ID="0B48A7A0C76CA60B" Name="Pv" Type="VTQREAL" Comment="Scaled process signal" />
@@ -65,7 +69,7 @@
   </InterfaceList>
   <FBNetwork>
     <FB ID="17B49EAE45CD7218" UID="4750FCB9FF9BDE6B" Name="AnalogInput" Type="AnalogInputBase" x="6998.083" y="3690" Namespace="SE.Nereda" />
-    <FB ID="7EB35AE91C8FA465" Name="rawPv" Type="aISignal" x="880" y="2120" Namespace="SE.App2Base">
+    <FB ID="7EB35AE91C8FA465" Name="rawPv" Type="aISignal" x="400" y="2260" Namespace="SE.App2Base">
       <Parameter Name="$Name" Value="'$${PATH}AIn'" />
     </FB>
     <FB ID="D9DAAE69BF9AF4C5" UID="FC46FE1FF8DF24B5" Name="StatusInfo" Type="StatusInfo" x="700" y="2860" Namespace="SE.Nereda" />
@@ -132,7 +136,7 @@
     <FB ID="07704703047F3272" UID="7743E47645F80F1D" Name="PvStatus" Type="AnalogStatus" x="3020" y="6120" Namespace="SE.Nereda">
       <Attribute Name="Configuration.Component.HideUnusedPorts" Value="" />
     </FB>
-    <FB ID="8D20AC220595DA0A" Name="SignalDecode" Type="aiSignalDecode" x="1620" y="2060" Namespace="SE.Nereda" />
+    <FB ID="8D20AC220595DA0A" Name="SignalDecode" Type="aiSignalDecode" x="2240" y="1940" Namespace="SE.Nereda" />
     <FB ID="5E3DCFEC14485B99" UID="AD79411AEA3B73D7" Name="ChFailure" Type="OR_169B00D031196E7C4" x="2920" y="8300" Namespace="SE.Nereda">
       <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNT:=4;OUT:BOOL" />
     </FB>
@@ -153,9 +157,13 @@
       <Parameter Name="$QI" Value="TRUE" />
       <Parameter Name="$NAME1" Value="'$${PATH}AInInt'" />
     </FB>
-    <FB ID="41321FEE593D40D4" Name="rawPvIntConv" Type="aiIntToVtqReal" x="980" y="1600" Namespace="SE.Nereda" />
-    <Input ID="536A16EAB96A59B7" Name="REQ_SUPPRESS" x="939.9999" y="3904" Type="Event" />
-    <Input ID="BB91D7C73416AF1A" Name="SuppressAlarm" x="940" y="3964" Type="Data" />
+    <FB ID="41321FEE593D40D4" Name="rawPvIntConv" Type="aiIntToVtqReal" x="1320" y="1640" Namespace="SE.Nereda" />
+    <FB ID="F108FECB0DC0DC88" Name="ChFailFilter" Type="QualityFailFilter" x="3240" y="8960" Namespace="SE.Nereda" />
+    <FB ID="B47511C1B72F0474" Name="ChFailTimer" Type="E_DELAY" x="3240" y="9700" Namespace="IEC61499.Standard" />
+    <Input ID="536A16EAB96A59B7" Name="REQ_SUPPRESS" x="939.9999" y="3902" Type="Event" />
+    <Input ID="BB91D7C73416AF1A" Name="SuppressAlarm" x="940" y="3962" Type="Data" />
+    <Input ID="FA79D5A30FC55CE5" Name="QualityFailDelay" x="300" y="9060" Type="Data" />
+    <Input ID="72A56D23BBC921D8" Name="REQ_TIME" x="12" y="12" Type="Event" />
     <Frame Name="FRAME6" X="360" Y="3760" Width="2160" Height="540.0002">
       <Parameter Name="BackgroundColor" Value="AntiqueWhite" />
       <Parameter Name="TextColor" Value="Black" />
@@ -337,30 +345,30 @@
       <Parameter Name="NxtLayerIdentifier" Value="" />
     </Frame>
     <Output ID="62FA503C8D6E7E00" Name="CNF_L1_L2" x="7280" y="2792" Type="Event" />
-    <Output ID="CA2CF5543A41F42B" Name="CNF_COLOR" x="6820" y="1988" Type="Event" />
-    <Output ID="C4D72E13B7737B3F" Name="BarColor" x="6820" y="2048" Type="Data" />
-    <Output ID="A97F7594726B9149" Name="L1" x="7320" y="2902" Type="Data" />
-    <Output ID="13353F1684E49268" Name="L2" x="7320" y="2962" Type="Data" />
-    <Output ID="55D9A875FF8A6C42" Name="Status" x="6820" y="1454" Type="Data" />
-    <Output ID="95FA69AE12D9BDE1" Name="IPv2" x="6819.999" y="2288" Type="Adapter" />
-    <Output ID="84357DECBC9FC157" Name="IPv3" x="6819.999" y="2348" Type="Adapter" />
-    <Output ID="0D7BD97A245CBD60" Name="IPv4" x="6819.999" y="2408" Type="Adapter" />
-    <Output ID="6EF0614AFA3F1863" Name="IPv5" x="6819.999" y="2468" Type="Adapter" />
-    <Output ID="C082456090AC3515" Name="IPv6" x="6819.999" y="2528" Type="Adapter" />
-    <Output ID="5EC3A1C2B6EC87E8" Name="IPv1" x="6819.999" y="2228" Type="Adapter" />
-    <Output ID="73A667132981F8F7" Name="IStatusInfo" x="6800" y="863.9998" Type="Adapter" />
-    <Output ID="C49CC7AA38661D9D" Name="CNF_PV" x="6820" y="1032" Type="Event" />
-    <Output ID="3F29AC8AB4D6A90D" Name="CNF_ALM" x="6820" y="1092" Type="Event" />
-    <Output ID="0B48A7A0C76CA60B" Name="Pv" x="6820" y="1196" Type="Data" />
-    <Output ID="CCB16B274D01A2A1" Name="PvMin" x="6820" y="1256" Type="Data" />
-    <Output ID="1B610C0DFE34C8FC" Name="PvMax" x="6819.999" y="1316" Type="Data" />
-    <Output ID="B1ABC0252BF0A371" Name="ChFailAlarm" x="6820" y="1388" Type="Data" />
-    <Output ID="73FBB798962293ED" Name="HiHiAlarm" x="6820" y="1508" Type="Data" />
-    <Output ID="7E554EE4816FF1BB" Name="HiAlarm" x="6820" y="1568" Type="Data" />
-    <Output ID="17F9137098988035" Name="LoLoAlarm" x="6820" y="1688" Type="Data" />
-    <Output ID="D1E3C24C04232A1F" Name="LoAlarm" x="6820" y="1628" Type="Data" />
-    <Output ID="F02868080991E3C2" Name="DevAlarm" x="6819.999" y="1748" Type="Data" />
-    <Output ID="A32C13DFAD1488C4" Name="RocAlarm" x="6819.999" y="1808" Type="Data" />
+    <Output ID="CA2CF5543A41F42B" Name="CNF_COLOR" x="6820" y="1986" Type="Event" />
+    <Output ID="C4D72E13B7737B3F" Name="BarColor" x="6820" y="2046" Type="Data" />
+    <Output ID="A97F7594726B9149" Name="L1" x="7320" y="2900" Type="Data" />
+    <Output ID="13353F1684E49268" Name="L2" x="7320" y="2960" Type="Data" />
+    <Output ID="55D9A875FF8A6C42" Name="Status" x="6820" y="1452" Type="Data" />
+    <Output ID="95FA69AE12D9BDE1" Name="IPv2" x="6819.999" y="2286" Type="Adapter" />
+    <Output ID="84357DECBC9FC157" Name="IPv3" x="6819.999" y="2346" Type="Adapter" />
+    <Output ID="0D7BD97A245CBD60" Name="IPv4" x="6819.999" y="2406" Type="Adapter" />
+    <Output ID="6EF0614AFA3F1863" Name="IPv5" x="6819.999" y="2466" Type="Adapter" />
+    <Output ID="C082456090AC3515" Name="IPv6" x="6819.999" y="2526" Type="Adapter" />
+    <Output ID="5EC3A1C2B6EC87E8" Name="IPv1" x="6819.999" y="2226" Type="Adapter" />
+    <Output ID="73A667132981F8F7" Name="IStatusInfo" x="6800" y="861.9998" Type="Adapter" />
+    <Output ID="C49CC7AA38661D9D" Name="CNF_PV" x="6820" y="1030" Type="Event" />
+    <Output ID="3F29AC8AB4D6A90D" Name="CNF_ALM" x="6820" y="1090" Type="Event" />
+    <Output ID="0B48A7A0C76CA60B" Name="Pv" x="6820" y="1194" Type="Data" />
+    <Output ID="CCB16B274D01A2A1" Name="PvMin" x="6820" y="1254" Type="Data" />
+    <Output ID="1B610C0DFE34C8FC" Name="PvMax" x="6819.999" y="1314" Type="Data" />
+    <Output ID="B1ABC0252BF0A371" Name="ChFailAlarm" x="6820" y="1386" Type="Data" />
+    <Output ID="73FBB798962293ED" Name="HiHiAlarm" x="6820" y="1506" Type="Data" />
+    <Output ID="7E554EE4816FF1BB" Name="HiAlarm" x="6820" y="1566" Type="Data" />
+    <Output ID="17F9137098988035" Name="LoLoAlarm" x="6820" y="1686" Type="Data" />
+    <Output ID="D1E3C24C04232A1F" Name="LoAlarm" x="6820" y="1626" Type="Data" />
+    <Output ID="F02868080991E3C2" Name="DevAlarm" x="6819.999" y="1746" Type="Data" />
+    <Output ID="A32C13DFAD1488C4" Name="RocAlarm" x="6819.999" y="1806" Type="Data" />
     <EventConnections>
       <Connection Source="$3679CA5D12E8EEBC.EO" Destination="$62FA503C8D6E7E00" dx1="121.5415" />
       <Connection Source="$FBC4282D9A0E2D46.CHD" Destination="$3679CA5D12E8EEBC.EI1">
@@ -498,7 +506,7 @@
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
         <AvoidsNodes>false</AvoidsNodes>
       </Connection>
-      <Connection Source="$7EB35AE91C8FA465.CNF" Destination="$8D20AC220595DA0A.4913BACAD6826E20" />
+      <Connection Source="$7EB35AE91C8FA465.CNF" Destination="$8D20AC220595DA0A.4913BACAD6826E20" dx1="50" />
       <Connection Source="$F753A35E8859ED89.CHD" Destination="$07704703047F3272.F79B6341372EBAF9">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
         <AvoidsNodes>false</AvoidsNodes>
@@ -516,7 +524,6 @@
       <Connection Source="$B00FF0003145C896.CNF" Destination="$5E3DCFEC14485B99.REQ">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$5E3DCFEC14485B99.CNF" Destination="$F753A35E8859ED89.REQ" />
       <Connection Source="$17B49EAE45CD7218.CNF_PV" Destination="$5E3DCFEC14485B99.REQ">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
@@ -639,16 +646,63 @@
       <Connection Source="$8BE6FE3641678EEF.INITO" Destination="$8BE6FE3641678EEF.REQ_INITDATA">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$8D20AC220595DA0A.4B866291E3506649" Destination="$D1466634A02DB4A8.REQ">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$8D20AC220595DA0A.4B866291E3506649" Destination="$8BE6FE3641678EEF.REQ">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
       <Connection Source="$D6C20ACB8C054D38.FIRST_INIT" Destination="$2336B68DAD924F9C.INIT" dx1="148.0834" dx2="49.99998" dy="410" />
       <Connection Source="$D6C20ACB8C054D38.REDO_INIT" Destination="$2336B68DAD924F9C.INIT" dx1="128.0834" dx2="49.99998" dy="350" />
-      <Connection Source="$2336B68DAD924F9C.CNF" Destination="$41321FEE593D40D4.9C64D832256C82B4" dx1="50" />
-      <Connection Source="$41321FEE593D40D4.BC5EA87CD2275B61" Destination="$8D20AC220595DA0A.F08F00BBF3A56140" dx1="64.25" />
+      <Connection Source="$2336B68DAD924F9C.CNF" Destination="$41321FEE593D40D4.9C64D832256C82B4" dx1="80" />
+      <Connection Source="$41321FEE593D40D4.BC5EA87CD2275B61" Destination="$8D20AC220595DA0A.F08F00BBF3A56140" dx1="84.25" />
+      <Connection Source="$5E3DCFEC14485B99.CNF" Destination="$F108FECB0DC0DC88.D0DAEC8E3A7B0649" dx1="67.47925" dx2="49.99976" dy="470" />
+      <Connection Source="$F108FECB0DC0DC88.4A90895B1386766B" Destination="$F753A35E8859ED89.REQ">
+        <Points>
+          <Points>
+            <X>939.9687</X>
+            <Y>2250</Y>
+          </Points>
+          <Points>
+            <X>952.4687</X>
+            <Y>2250</Y>
+          </Points>
+          <Points>
+            <X>952.4687</X>
+            <Y>2085</Y>
+          </Points>
+          <Points>
+            <X>884.999939</X>
+            <Y>2085</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$F108FECB0DC0DC88.4A90895B1386766B" Destination="$D1466634A02DB4A8.REQ">
+        <Points>
+          <Points>
+            <X>939.9687</X>
+            <Y>2250</Y>
+          </Points>
+          <Points>
+            <X>1047.5</X>
+            <Y>2250</Y>
+          </Points>
+          <Points>
+            <X>1047.5</X>
+            <Y>1512.5</Y>
+          </Points>
+          <Points>
+            <X>1057.5</X>
+            <Y>1512.5</Y>
+          </Points>
+          <Points>
+            <X>1057.5</X>
+            <Y>1275</Y>
+          </Points>
+          <Points>
+            <X>1665</X>
+            <Y>1275</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$F108FECB0DC0DC88.4A90895B1386766B" Destination="$8BE6FE3641678EEF.REQ" dx1="3810.125" />
+      <Connection Source="$F108FECB0DC0DC88.9F58EC819BE28CD6" Destination="$B47511C1B72F0474.START" dx1="120" dx2="49.99976" dy="530" />
+      <Connection Source="$F108FECB0DC0DC88.D03D083CB42919B5" Destination="$B47511C1B72F0474.STOP" dx1="100" dx2="69.99976" dy="470" />
+      <Connection Source="$B47511C1B72F0474.EO" Destination="$F108FECB0DC0DC88.5ACBE650D38A1821" dx1="48.50024" dx2="129.9998" dy="-110" />
     </EventConnections>
     <DataConnections>
       <Connection Source="$DA9DB4CB56194499.LimitReached" Destination="$73FBB798962293ED">
@@ -979,7 +1033,6 @@
       <Connection Source="$8D20AC220595DA0A.201BC7AF68EF33E6" Destination="$5E3DCFEC14485B99.IN3">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$5E3DCFEC14485B99.OUT" Destination="$F753A35E8859ED89.Input" dx1="47.47925" />
       <Connection Source="$17B49EAE45CD7218.BCEE37427EBF3A7A" Destination="$D9DAAE69BF9AF4C5.669381E3EE065A76">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
@@ -1079,17 +1132,38 @@
       <Connection Source="$AF1C1550B4169EC2.12285BAA45AA2557" Destination="$B00FF0003145C896.88326FC8282011A9">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$8D20AC220595DA0A.E756592F7CB68AC4" Destination="$D1466634A02DB4A8.INP">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      <Connection Source="$7EB35AE91C8FA465.Out" Destination="$8D20AC220595DA0A.6969F2D522DDBD33" dx1="70" />
+      <Connection Source="$2336B68DAD924F9C.VALUE1" Destination="$41321FEE593D40D4.A7451C41429F9D06" dx1="90" />
+      <Connection Source="$2336B68DAD924F9C.QO" Destination="$41321FEE593D40D4.9F9B5A9C85DA55C7" dx1="60" />
+      <Connection Source="$41321FEE593D40D4.6E40BF80683FA37C" Destination="$8D20AC220595DA0A.D6314ADEFE23DADC" dx1="64.25" />
+      <Connection Source="$41321FEE593D40D4.FD829B78B964F3C2" Destination="$8D20AC220595DA0A.3126FE57F7AC4016" dx1="44.25" />
+      <Connection Source="$5E3DCFEC14485B99.OUT" Destination="$F108FECB0DC0DC88.BEF204F0906FF6D8" dx1="47.47925" dx2="89.99976" dy="270" />
+      <Connection Source="$8D20AC220595DA0A.E756592F7CB68AC4" Destination="$F108FECB0DC0DC88.47B2104419F3BB19" dx1="148.396" dx2="369.9998" dy="210" />
+      <Connection Source="$8D20AC220595DA0A.201BC7AF68EF33E6" Destination="$F108FECB0DC0DC88.D0B962A0DD67BC30" dx1="128.396" dx2="369.9998" dy="150" />
+      <Connection Source="$FA79D5A30FC55CE5" Destination="$F108FECB0DC0DC88.802A68C220DBE1BD" dx1="45.02087" />
+      <Connection Source="$F108FECB0DC0DC88.D2C9F0958E4C098A" Destination="$F753A35E8859ED89.Input">
+        <Points>
+          <Points>
+            <X>939.9687</X>
+            <Y>2330</Y>
+          </Points>
+          <Points>
+            <X>967.4687</X>
+            <Y>2330</Y>
+          </Points>
+          <Points>
+            <X>967.4687</X>
+            <Y>2180</Y>
+          </Points>
+          <Points>
+            <X>884.999939</X>
+            <Y>2180</Y>
+          </Points>
+        </Points>
       </Connection>
-      <Connection Source="$8D20AC220595DA0A.201BC7AF68EF33E6" Destination="$8BE6FE3641678EEF.INP">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$7EB35AE91C8FA465.Out" Destination="$8D20AC220595DA0A.6969F2D522DDBD33" dx1="45.72925" />
-      <Connection Source="$2336B68DAD924F9C.VALUE1" Destination="$41321FEE593D40D4.A7451C41429F9D06" dx1="521.625" dx2="50" dy="-10" />
-      <Connection Source="$2336B68DAD924F9C.QO" Destination="$41321FEE593D40D4.9F9B5A9C85DA55C7" dx1="70" />
-      <Connection Source="$41321FEE593D40D4.6E40BF80683FA37C" Destination="$8D20AC220595DA0A.D6314ADEFE23DADC" dx1="64.25" dx2="129.9999" dy="150" />
-      <Connection Source="$41321FEE593D40D4.FD829B78B964F3C2" Destination="$8D20AC220595DA0A.3126FE57F7AC4016" dx1="44.25" dx2="109.9999" dy="90" />
+      <Connection Source="$F108FECB0DC0DC88.1A1043D3C0733A7D" Destination="$D1466634A02DB4A8.INP" dx1="2210.125" />
+      <Connection Source="$F108FECB0DC0DC88.1A6AD5B0D24F0EA5" Destination="$8BE6FE3641678EEF.INP" dx1="3810.125" />
+      <Connection Source="$FA79D5A30FC55CE5" Destination="$B47511C1B72F0474.DT" dx1="45.02087" />
     </DataConnections>
     <AdapterConnections>
       <Connection Source="$C578D9359C46D59F.IAnalog" Destination="$DA9DB4CB56194499.IPv" dx1="134.1875">
