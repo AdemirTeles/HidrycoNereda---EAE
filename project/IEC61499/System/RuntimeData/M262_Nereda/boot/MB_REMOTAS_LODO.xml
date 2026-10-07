@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<busmaster xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="MB_REMOTAS_LODO" busId="MB_REMOTAS_LODO" protocol="modbus" busCycle="T#80ms" enableSymlinkOC="false" busTolerance="10" busActionMissedCycle="1" alignWithResPriority="false" ReconnectAfterTimeout="Enable">
+  <connectinfo mastertype="master" transportprotocol="tcp" interframedelay="10" />
+  <logging enable="false" filename="modbus.log" />
+  <buscoupler name="A11_REMOTA1" diagnostics="disabled">
+    <connectinfo transportprotocol="tcp" stationid="255" responsetimeout="500" fallbackValue="HOLD">
+      <tcp ipaddress="10.26.208.136" port="502" />
+      <HA secondaryheartbeat="Enabled-ReadHoldingRegister" heartbeataddress="3001" />
+    </connectinfo>
+    <busdevice name="A11_AI8_VAL_1">
+      <parameter addresstype="register" length="8" addressautocalculation="disable" address="3001" datatype="inonly" ioevent="cyclic" />
+    </busdevice>
+    <busdevice name="A11_AI8_STS_1">
+      <parameter addresstype="register" length="8" addressautocalculation="enable" address="0" datatype="input" ioevent="cyclic" />
+    </busdevice>
+  </buscoupler>
+</busmaster>

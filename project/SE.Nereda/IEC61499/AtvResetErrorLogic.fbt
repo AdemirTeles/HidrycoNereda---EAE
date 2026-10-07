@@ -2,7 +2,7 @@
 <!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
 <FBType GUID="2db9cdbf-8a86-4465-b80d-512579e0da22" Name="AtvResetErrorLogic" Comment="Basic Function Block Type" Namespace="SE.Nereda">
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Schneider Electric" Version="0.0" Author="SESA713705" Date="8/19/2024" Remarks="Template" />
+  <VersionInfo Organization="Schneider Electric" Version="0.1" Author="SESA713705" Date="10/6/2026" Remarks="Hidryco 10/2026: reset automatico limitado a 3 tentativas por ocorrencia (antes era infinito 3 s / 1 s); depois so pela IHM ou em nova ocorrencia" />
   <InterfaceList>
     <EventInputs>
       <Event Name="INIT" Comment="Initialization Request">
@@ -46,6 +46,9 @@
   </InterfaceList>
   <BasicFB ID="6866de3b-20fa-46e4-aa13-75033af95b72">
     <Attribute Name="FBType.Basic.Algorithm.Order" Value="INIT,ATV_RDY,NeedReset,CmdReset,SendCmdRdy,SensResetHMI,ResetReset" />
+    <InternalVars>
+      <VarDeclaration ID="7C2B5E91A04D3F18" Name="Tries" Type="INT" InitialValue="0" Comment="Tentativas de reset automatico na ocorrencia atual" />
+    </InternalVars>
     <ECC>
       <ECState Name="START" Comment="Initial State" x="1720.941" y="697.8562" />
       <ECState Name="Ready" x="3148" y="1424">
@@ -90,9 +93,11 @@
       <ECTransition Source="ResetError" Destination="STATE2" Condition="REQ_RESET_HMI OR TIME_OUT" x="1875.596" y="2416.242">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="479.4829,580.0923,477.7079,625.0135" />
       </ECTransition>
-      <ECTransition Source="STATE2" Destination="ResetError" Condition="REQ_DELAY" x="1490.855" y="2409.166">
+      <ECTransition Source="STATE2" Destination="ResetError" Condition="REQ_DELAY AND Tries &lt; 3" x="1490.855" y="2409.166">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="358.6108,622.6251,360.2938,577.7635" />
       </ECTransition>
+      <ECTransition Source="STATE2" Destination="START" Condition="REQ_DELAY AND Tries &gt;= 3" x="1100" y="1700" />
+      <ECTransition Source="START" Destination="ResetError" Condition="REQ_RESET_HMI AND ResetHMI" x="1950" y="1500" />
     </ECC>
     <Algorithm Name="INIT" Comment="Initialization algorithm">
       <ST><![CDATA[;
@@ -102,15 +107,18 @@ CmdReady := TRUE;]]></ST>
     <Algorithm Name="ATV_RDY">
       <ST><![CDATA[;
 ResetError := FALSE;
-NeedResetActivated := FALSE;]]></ST>
+NeedResetActivated := FALSE;
+Tries := 0;]]></ST>
     </Algorithm>
     <Algorithm Name="NeedReset">
       <ST><![CDATA[;
-NeedResetActivated := TRUE;]]></ST>
+NeedResetActivated := TRUE;
+Tries := 0;]]></ST>
     </Algorithm>
     <Algorithm Name="CmdReset">
       <ST><![CDATA[ResetError := TRUE;
-NeedResetActivated := TRUE;]]></ST>
+NeedResetActivated := TRUE;
+Tries := Tries + 1;]]></ST>
     </Algorithm>
     <Algorithm Name="SendCmdRdy">
       <ST><![CDATA[ResetError := FALSE;

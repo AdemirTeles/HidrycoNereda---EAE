@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
-<FBType GUID="a4bcf328-fd4a-4883-aeac-2e38d3467774" Name="IO_DQ32" Format="2.0" Comment="Cartao TM3DQ32TK da remota TM3BCEIP: le 32 comandos BOOL por symlink e escreve as 2 words na remota, com depurador" Namespace="Hidryco.HidrycoLib">
+<FBType GUID="a4bcf328-fd4a-4883-aeac-2e38d3467774" Name="IO_DQ32" Format="2.0" Comment="Cartao TM3DQ32TK da remota TM3BCEIP: le 32 comandos BOOL por symlink e escreve as 2 words na remota sempre (sem bloqueio por comunicacao), com depurador" Namespace="Hidryco.HidrycoLib">
   <Attribute Name="HMI.Alias" Value="" />
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Hidryco" Version="1.0" Author="Hidryco" Date="10/2/2026" Remarks="Baseado em TM_DI32/TM_DO32 e DI_TESTE; inclui gate de comunicacao" />
+  <VersionInfo Organization="Hidryco" Version="1.1" Author="Hidryco" Date="10/6/2026" Remarks="1.1: removido o gate de comunicacao; escrita nunca depende do status da remota" />
   <InterfaceList>
     <InputVars>
       <VarDeclaration ID="302C3F69182ABC91" Name="WORD0" Type="STRING" Comment="Nome do symlink da word 0 do cartao (bits 0-15), ex.: A7_Q0_0_15" />
       <VarDeclaration ID="449EC30B868089F7" Name="WORD1" Type="STRING" Comment="Nome do symlink da word 1 do cartao (bits 16-31)" />
-      <VarDeclaration ID="4CB528AC475AE599" Name="CONN" Type="STRING" Comment="Nome do symlink connStatusInt da remota, ex.: A2_REMOTA1_CONN_STATUS_INT (obrigatorio: sem ele o cartao fica em falha)" />
+      <VarDeclaration ID="4CB528AC475AE599" Name="CONN" Type="STRING" Comment="Opcional, so diagnostico no depurador: symlink connStatusInt da remota. NAO interfere na escrita das saidas" />
       <VarDeclaration ID="9A3A1A81B7B6D445" Name="DO_0" Type="STRING" Comment="Nome do symlink BOOL lido como comando do bit 0 do cartao" />
       <VarDeclaration ID="574F19B312039273" Name="DO_1" Type="STRING" Comment="Nome do symlink BOOL lido como comando do bit 1 do cartao" />
       <VarDeclaration ID="289462D1695B79B9" Name="DO_2" Type="STRING" Comment="Nome do symlink BOOL lido como comando do bit 2 do cartao" />
@@ -54,7 +54,6 @@
       <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=1;VALUE${I}:INT" />
       <Parameter Name="$QI" Value="TRUE" />
     </FB>
-    <FB ID="922EF1E2F842CD39" Name="Gate" Type="basicIOComGate" x="4600" y="4400" Namespace="Hidryco.HidrycoLib" />
     <FB ID="133E10A662B32636" UID="05B68D1E43C5C6D6" Name="DST_B0" Type="SYMLINKMULTIVARDST_854A896E88500D19" x="1500" y="600" Namespace="Hidryco.HidrycoLib">
       <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=16;VALUE${I}:BOOL,BOOL,BOOL,BOOL,BOOL,BOOL,BOOL,BOOL,BOOL,BOOL,BOOL,BOOL,BOOL,BOOL,BOOL,BOOL" />
       <Parameter Name="$QI" Value="TRUE" />
@@ -122,13 +121,9 @@
       <Connection Source="$133E10A662B32636.CNF" Destination="$440CE08B6AFA1D45.REQ" />
       <Connection Source="$440CE08B6AFA1D45.CNF" Destination="$3EA7EB0D40202ABE.REQ" />
       <Connection Source="$3EA7EB0D40202ABE.CNF" Destination="$A71463DA1E7E2EA6.REQ" />
-      <Connection Source="$3EA7EB0D40202ABE.CNF" Destination="$922EF1E2F842CD39.BD23A685891FD57E" />
       <Connection Source="$D313FC04222EDA39.CNF" Destination="$9ED9467A69290FA9.REQ" />
       <Connection Source="$9ED9467A69290FA9.CNF" Destination="$F820F70AF678AED5.REQ" />
       <Connection Source="$F820F70AF678AED5.CNF" Destination="$B7E7C754F035CDF2.REQ" />
-      <Connection Source="$F820F70AF678AED5.CNF" Destination="$922EF1E2F842CD39.BD23A685891FD57E" />
-      <Connection Source="$83C14D126E79635C.CNF" Destination="$922EF1E2F842CD39.BD23A685891FD57E" />
-      <Connection Source="$922EF1E2F842CD39.B07445CE7289017B" Destination="$3157A3015873C644.C93D1AB5D9425049" />
       <Connection Source="$35E29ACD52F83880.FIRST_INIT" Destination="$133E10A662B32636.INIT" />
       <Connection Source="$35E29ACD52F83880.REDO_INIT" Destination="$133E10A662B32636.INIT" />
       <Connection Source="$133E10A662B32636.INITO" Destination="$D313FC04222EDA39.INIT" />
@@ -139,12 +134,14 @@
       <Connection Source="$A71463DA1E7E2EA6.INITO" Destination="$B7E7C754F035CDF2.INIT" />
       <Connection Source="$B7E7C754F035CDF2.INITO" Destination="$3157A3015873C644.2580331DF766B7BD" />
       <Connection Source="$3157A3015873C644.B2F0B7003C60D222" Destination="$35E29ACD52F83880.ACK_FIRST" />
+      <Connection Source="$3EA7EB0D40202ABE.CNF" Destination="$3157A3015873C644.C93D1AB5D9425049" />
+      <Connection Source="$F820F70AF678AED5.CNF" Destination="$3157A3015873C644.C93D1AB5D9425049" />
+      <Connection Source="$83C14D126E79635C.CNF" Destination="$3157A3015873C644.C93D1AB5D9425049" />
     </EventConnections>
     <DataConnections>
       <Connection Source="$440CE08B6AFA1D45.OUT1" Destination="$3EA7EB0D40202ABE.IN1" />
       <Connection Source="$3EA7EB0D40202ABE.OUT1" Destination="$A71463DA1E7E2EA6.VALUE1" />
       <Connection Source="$302C3F69182ABC91" Destination="$A71463DA1E7E2EA6.NAME1" />
-      <Connection Source="$3EA7EB0D40202ABE.OUT1" Destination="$922EF1E2F842CD39.E55C0654C443D12C" />
       <Connection Source="$3EA7EB0D40202ABE.OUT1" Destination="$3157A3015873C644.3A722DFD35FBCED2" />
       <Connection Source="$133E10A662B32636.VALUE1" Destination="$440CE08B6AFA1D45.IN1" />
       <Connection Source="$133E10A662B32636.VALUE1" Destination="$3157A3015873C644.03F32C95190C8373" />
@@ -197,7 +194,6 @@
       <Connection Source="$9ED9467A69290FA9.OUT1" Destination="$F820F70AF678AED5.IN1" />
       <Connection Source="$F820F70AF678AED5.OUT1" Destination="$B7E7C754F035CDF2.VALUE1" />
       <Connection Source="$449EC30B868089F7" Destination="$B7E7C754F035CDF2.NAME1" />
-      <Connection Source="$F820F70AF678AED5.OUT1" Destination="$922EF1E2F842CD39.1DD6D86783AAC6A7" />
       <Connection Source="$F820F70AF678AED5.OUT1" Destination="$3157A3015873C644.3D7D13936729667D" />
       <Connection Source="$D313FC04222EDA39.VALUE1" Destination="$9ED9467A69290FA9.IN1" />
       <Connection Source="$D313FC04222EDA39.VALUE1" Destination="$3157A3015873C644.3436F174B0C6DB0A" />
@@ -248,8 +244,6 @@
       <Connection Source="$D313FC04222EDA39.VALUE16" Destination="$3157A3015873C644.FCE742B05E32D725" />
       <Connection Source="$F178B2FCFCB541E9" Destination="$D313FC04222EDA39.NAME16" />
       <Connection Source="$4CB528AC475AE599" Destination="$83C14D126E79635C.NAME1" />
-      <Connection Source="$83C14D126E79635C.VALUE1" Destination="$922EF1E2F842CD39.802FC2CA3041A58B" />
-      <Connection Source="$922EF1E2F842CD39.67074C7AC6CF1B2E" Destination="$3157A3015873C644.570B8AB371E6B3B7" />
       <Connection Source="$83C14D126E79635C.VALUE1" Destination="$3157A3015873C644.750DA6EE7F1E02B1" />
     </DataConnections>
   </FBNetwork>

@@ -3,12 +3,12 @@
 <FBType GUID="7fba978b-ff61-40c5-9a08-1a715208b732" Name="IO_DI32" Format="2.0" Comment="Cartao TM3DI32K da remota TM3BCEIP: separa as 2 words lidas em 32 bits e publica cada bit por symlink, com depurador" Namespace="Hidryco.HidrycoLib">
   <Attribute Name="HMI.Alias" Value="" />
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Hidryco" Version="1.0" Author="Hidryco" Date="10/2/2026" Remarks="Baseado em TM_DI32/TM_DO32 e DI_TESTE; inclui gate de comunicacao" />
+  <VersionInfo Organization="Hidryco" Version="1.1" Author="Hidryco" Date="10/6/2026" Remarks="1.1: bits nao sao mais zerados pela comunicacao; status da remota so gera FALHA_COM/COM_OK" />
   <InterfaceList>
     <InputVars>
       <VarDeclaration ID="46CCA44197086456" Name="WORD0" Type="STRING" Comment="Nome do symlink da word 0 do cartao (bits 0-15), ex.: A3_I0_0_15" />
       <VarDeclaration ID="0CD1E891B208CBDA" Name="WORD1" Type="STRING" Comment="Nome do symlink da word 1 do cartao (bits 16-31)" />
-      <VarDeclaration ID="029A065AE8EEF4A5" Name="CONN" Type="STRING" Comment="Nome do symlink connStatusInt da remota, ex.: A2_REMOTA1_CONN_STATUS_INT (obrigatorio: sem ele o cartao fica em falha)" />
+      <VarDeclaration ID="029A065AE8EEF4A5" Name="CONN" Type="STRING" Comment="Symlink connStatusInt da remota: so gera FALHA_COM/COM_OK e o depurador. NAO zera os bits" />
       <VarDeclaration ID="91633D6A64C74E2E" Name="FALHA_COM" Type="STRING" Comment="Nome do symlink BOOL publicado com a falha de comunicacao do cartao (TRUE = remota offline)" />
       <VarDeclaration ID="7A8F48C4B98E5515" Name="COM_OK" Type="STRING" Comment="Nome do symlink BOOL publicado com comunicacao OK (TRUE = remota online)" />
       <VarDeclaration ID="21F6274CBA1014D4" Name="DI_0" Type="STRING" Comment="Nome do symlink BOOL publicado para o bit 0 do cartao" />
@@ -127,14 +127,12 @@
     <Input ID="3B4E2202D2B578AA" Name="DI_30" x="200" y="3000" Type="Data" />
     <Input ID="C8A2275FCD06007F" Name="DI_31" x="200" y="3060" Type="Data" />
     <EventConnections>
-      <Connection Source="$3E5DFE3910DE230E.CNF" Destination="$FFD594442713143B.BD23A685891FD57E" dx1="61.625" />
-      <Connection Source="$3620BCC896B53873.CNF" Destination="$FFD594442713143B.BD23A685891FD57E" dx1="70" />
       <Connection Source="$FA014041533A7DCF.CNF" Destination="$FFD594442713143B.BD23A685891FD57E" dx1="70" />
-      <Connection Source="$FFD594442713143B.B07445CE7289017B" Destination="$9A0E180D1EAB4EA9.REQ" dx1="59.646" />
+      <Connection Source="$3E5DFE3910DE230E.CNF" Destination="$9A0E180D1EAB4EA9.REQ" dx1="59.646" />
       <Connection Source="$9A0E180D1EAB4EA9.CNF" Destination="$B877A46CF924A5DA.REQ" dx1="63.75" />
       <Connection Source="$B877A46CF924A5DA.CNF" Destination="$A5525312DF6BE624.REQ" />
       <Connection Source="$B877A46CF924A5DA.CNF" Destination="$5DA3A81126AE86BC.48E8D870A969746E" dx1="70" />
-      <Connection Source="$FFD594442713143B.B07445CE7289017B" Destination="$91C13DA851A559E4.REQ" dx1="120" />
+      <Connection Source="$3620BCC896B53873.CNF" Destination="$91C13DA851A559E4.REQ" dx1="120" />
       <Connection Source="$91C13DA851A559E4.CNF" Destination="$CD358A4A270B55E8.REQ" dx1="63.75" />
       <Connection Source="$CD358A4A270B55E8.CNF" Destination="$3A34989FA7314FA7.REQ" />
       <Connection Source="$CD358A4A270B55E8.CNF" Destination="$5DA3A81126AE86BC.48E8D870A969746E" dx1="70" />
@@ -151,12 +149,14 @@
       <Connection Source="$3A34989FA7314FA7.INITO" Destination="$07286DA71E35DDC6.INIT" dx1="40" dx2="50" dy="2650" />
       <Connection Source="$07286DA71E35DDC6.INITO" Destination="$5DA3A81126AE86BC.750DD2BDCC8DF380" dx1="40" />
       <Connection Source="$5DA3A81126AE86BC.57A7ED843B74E1C5" Destination="$62C5864ED3B34DF9.ACK_FIRST" dx1="41.0835" dx2="30" dy="-110" />
+      <Connection Source="$B877A46CF924A5DA.CNF" Destination="$5DA3A81126AE86BC.48E8D870A969746E" />
+      <Connection Source="$CD358A4A270B55E8.CNF" Destination="$5DA3A81126AE86BC.48E8D870A969746E" />
     </EventConnections>
     <DataConnections>
       <Connection Source="$3E5DFE3910DE230E.VALUE1" Destination="$FFD594442713143B.E55C0654C443D12C" dx1="41.625" />
       <Connection Source="$3620BCC896B53873.VALUE1" Destination="$FFD594442713143B.1DD6D86783AAC6A7" dx1="90" />
       <Connection Source="$FA014041533A7DCF.VALUE1" Destination="$FFD594442713143B.802FC2CA3041A58B" dx1="90" />
-      <Connection Source="$FFD594442713143B.46D4D28C21794752" Destination="$9A0E180D1EAB4EA9.IN1" dx1="79.646" />
+      <Connection Source="$3E5DFE3910DE230E.VALUE1" Destination="$9A0E180D1EAB4EA9.IN1" dx1="79.646" />
       <Connection Source="$9A0E180D1EAB4EA9.OUT1" Destination="$B877A46CF924A5DA.IN1" dx1="43.75" />
       <Connection Source="$B877A46CF924A5DA.OUT1" Destination="$A5525312DF6BE624.VALUE1" dx1="349.229" />
       <Connection Source="$B877A46CF924A5DA.OUT1" Destination="$5DA3A81126AE86BC.C9873E75BAB2C979">
@@ -924,7 +924,7 @@
         </Points>
       </Connection>
       <Connection Source="$6F381A44E74CF961" Destination="$A5525312DF6BE624.NAME16" dx1="3123.958" />
-      <Connection Source="$FFD594442713143B.42FBD7F29792C6AD" Destination="$91C13DA851A559E4.IN1" dx1="80" />
+      <Connection Source="$3620BCC896B53873.VALUE1" Destination="$91C13DA851A559E4.IN1" dx1="80" />
       <Connection Source="$91C13DA851A559E4.OUT1" Destination="$CD358A4A270B55E8.IN1" dx1="43.75" />
       <Connection Source="$CD358A4A270B55E8.OUT1" Destination="$3A34989FA7314FA7.VALUE1" dx1="349.229" />
       <Connection Source="$CD358A4A270B55E8.OUT1" Destination="$5DA3A81126AE86BC.136C56BFB7CFC592">

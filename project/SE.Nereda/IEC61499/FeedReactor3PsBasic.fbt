@@ -308,9 +308,9 @@
    - Partida: StartFeeding de algum reator (fase Feed em RUN e AV41101 aberta). SP = maior pedido [m3/h].
    - Demanda = saida do PID [%] (100 % = 2 bombas a 100 %). Cmax / C2 / C3 / Cmin em % de velocidade de UMA bomba.
      1 bomba = 2 x demanda ; 2 bombas = demanda ; nunca abaixo de Cmin.
-   - Entrada: 1 bomba no Cmax (velocidade real; ou demanda acima por T_DecMax) e precisaria passar -> a(s) em operacao descem ate C2 (velocidade real ou T_DecMax),
-     a nova parte em C2, T_C2 com as duas em C2 (velocidade real ou T_DecMax), depois PID.
-   - Saida: demanda abaixo de C3 E 2 x demanda abaixo de Cmax - HystExit por T_C3: sai a que partiu primeiro.
+   - Entrada: velocidade REAL da bomba em operacao no Cmax -> a(s) em operacao descem ate C2 (velocidade REAL),
+     a nova parte em C2, T_C2 com as duas com velocidade REAL em C2, depois PID. Sem liberacao por tempo.
+   - Saida: velocidade REAL de todas as bombas em operacao abaixo de C3 por T_C3: sai a que partiu primeiro.
    - Falha de bomba com 2 em servico: reserva parte na hora, todas em C2, T_C2, depois PID.
    - Paradas: 1 nivel LL 40LT0001 (retoma ao sair o LL) | 2 pH/condutividade fora da faixa (retoma T_Restart apos voltar)
               3 vazao LL 40FT0003 por T_FlowLL com bomba rodando (retoma apos T_Restart)
@@ -377,7 +377,7 @@ C2Eff := C2Capacity;
 IF C2Eff < CminEff THEN
     C2Eff := CminEff;
 END_IF;
-ExitCond := (Dem < C3Capacity) AND ((2.0 * Dem) < (MaxCapacityOnePump - HystExit));
+ExitCond := FALSE; (* calculado mais abaixo, so pela velocidade real das bombas *)
 
 (* ---------- 3. Paradas da alimentacao (narrativa 2.2) ---------- *)
 IF Grafcet = 3 THEN
@@ -491,6 +491,17 @@ ELSIF Grafcet = 3 THEN
     IF CmdPump03 AND FbRunningPmp03 AND (SpeedPvPmp03 < (C2Eff - TolC2)) THEN
         SpdUpC2 := FALSE;
     END_IF;
+    (* saida de uma bomba: velocidade real de TODAS as bombas em operacao abaixo de C3 (sem usar a saida do PID) *)
+    ExitCond := NRun >= 2;
+    IF CmdPump01 AND FbRunningPmp01 AND (SpeedPvPmp01 >= C3Capacity) THEN
+        ExitCond := FALSE;
+    END_IF;
+    IF CmdPump02 AND FbRunningPmp02 AND (SpeedPvPmp02 >= C3Capacity) THEN
+        ExitCond := FALSE;
+    END_IF;
+    IF CmdPump03 AND FbRunningPmp03 AND (SpeedPvPmp03 >= C3Capacity) THEN
+        ExitCond := FALSE;
+    END_IF;
     (* 4.1b com 2 bombas (modo 2/3) uma saiu de servico: a reserva parte NA HORA, todas em C2, T_C2, depois PID *)
     IF ParOk AND (PumpMode >= 2) AND (NCmd < 2) THEN
         IF Spare AND (NCmd >= 1) THEN
@@ -507,31 +518,31 @@ ELSIF Grafcet = 3 THEN
     IF NOT ParOk THEN
         PumpMode := 0;
     ELSIF PumpMode = 0 THEN
-        (* narrativa: bomba EM operacao no Cmax -> velocidade real ja no Cmax (ou demanda acima por T_DecMax) *)
-        IF ((2.0 * Dem) > MaxCapacityOnePump) AND Spare AND (NRun >= 1) AND (SpdAtMax OR (Tmax >= T_DecMax)) THEN
+        (* entra a 2a bomba somente quando a velocidade REAL da bomba em operacao chega ao Cmax *)
+        IF Spare AND (NRun >= 1) AND SpdAtMax THEN
             PumpMode := 1;
             Tdec := T#0s;
             TDecs := 0;
         END_IF;
     ELSIF PumpMode = 1 THEN
-        (* a nova so parte depois que a(s) bomba(s) em operacao desceram ate C2 (ou apos T_DecMax) *)
+        (* a nova so parte depois que a velocidade REAL da(s) bomba(s) em operacao desceu ate C2 *)
         IF (NOT Spare) OR (NCmd = 0) THEN
             PumpMode := 0;
-        ELSIF SpdAtC2 OR (Tdec >= T_DecMax) THEN
+        ELSIF SpdAtC2 THEN
             PumpMode := 2;
             Tacc := T#0s;
             TC2s := 0;
             Tup := T#0s;
         END_IF;
     ELSIF PumpMode = 2 THEN
-        (* T_C2 conta com as duas rodando e com velocidade real em C2 (ou apos T_DecMax) *)
+        (* T_C2 conta com as duas rodando e com velocidade REAL em C2 *)
         IF (NRun >= 2) AND (Tacc >= T_C2) THEN
             PumpMode := 3;
             T3acc := T#0s;
             TC3s := 0;
         END_IF;
     ELSIF PumpMode = 3 THEN
-        (* saida exige a condicao fisica (ExitCond) alem do tempo *)
+        (* saida: velocidade REAL das bombas abaixo de C3 por T_C3 *)
         IF ExitCond AND (T3acc >= T_C3) THEN
             PumpMode := 0;
             T3acc := T#0s;
@@ -772,8 +783,8 @@ IF PumpMode = 2 THEN
 ELSE
     Tup := T#0s;
 END_IF;
-(* T_C2: as duas rodando e com velocidade real em C2 (ou apos T_DecMax sem confirmacao) *)
-IF (PumpMode = 2) AND (NRun >= 2) AND (SpdUpC2 OR (Tup >= T_DecMax)) THEN
+(* T_C2: as duas rodando e com velocidade REAL em C2 *)
+IF (PumpMode = 2) AND (NRun >= 2) AND SpdUpC2 THEN
     Tacc := Tacc + T#1s;
     TC2s := TC2s + 1;
 END_IF;
