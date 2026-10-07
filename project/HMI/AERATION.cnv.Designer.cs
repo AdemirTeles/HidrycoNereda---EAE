@@ -63,7 +63,7 @@ namespace HMI.Main.Canvases
 			// AERATION_1
 			// 
 			this.AERATION_1.BeginInit();
-			this.AERATION_1.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.99038461538461553D, 0D, 0D, 1D, 296D, 360D);
+			this.AERATION_1.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.99038461538461553D, 0D, 0D, 1D, 368.00000000000011D, 304D);
 			this.AERATION_1.Name = "AERATION_1";
 			this.AERATION_1.SecurityToken = ((uint)(4294967295u));
 			this.AERATION_1.TagName = "6307B68BAFBA5753";
@@ -71,28 +71,28 @@ namespace HMI.Main.Canvases
 			// 
 			// pipe1
 			// 
-			this.pipe1.Bounds = new NxtControl.Drawing.RectF(((float)(752D)), ((float)(144D)), ((float)(200D)), ((float)(232D)));
+			this.pipe1.Bounds = new NxtControl.Drawing.RectF(((float)(824D)), ((float)(88D)), ((float)(320D)), ((float)(232D)));
 			this.pipe1.InnerColor = new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(255)));
 			this.pipe1.Name = "pipe1";
 			this.pipe1.OuterColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.pipe1.Points.AddRange(new NxtControl.Drawing.PointF[] {
-			new NxtControl.Drawing.PointF(752D, 376D),
-			new NxtControl.Drawing.PointF(752D, 144D),
-			new NxtControl.Drawing.PointF(952D, 144D),
-			new NxtControl.Drawing.PointF(952D, 160D)});
+			new NxtControl.Drawing.PointF(824D, 320D),
+			new NxtControl.Drawing.PointF(824D, 88D),
+			new NxtControl.Drawing.PointF(1144D, 88D),
+			new NxtControl.Drawing.PointF(1144D, 104D)});
 			this.pipe1.Width = 10;
 			// 
 			// pipe2
 			// 
-			this.pipe2.Bounds = new NxtControl.Drawing.RectF(((float)(248D)), ((float)(360D)), ((float)(112D)), ((float)(56D)));
+			this.pipe2.Bounds = new NxtControl.Drawing.RectF(((float)(320D)), ((float)(304D)), ((float)(112D)), ((float)(56D)));
 			this.pipe2.InnerColor = new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(255)));
 			this.pipe2.Name = "pipe2";
 			this.pipe2.OuterColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.pipe2.Points.AddRange(new NxtControl.Drawing.PointF[] {
-			new NxtControl.Drawing.PointF(360D, 376D),
-			new NxtControl.Drawing.PointF(360D, 360D),
-			new NxtControl.Drawing.PointF(248D, 360D),
-			new NxtControl.Drawing.PointF(248D, 416D)});
+			new NxtControl.Drawing.PointF(432D, 320D),
+			new NxtControl.Drawing.PointF(432D, 304D),
+			new NxtControl.Drawing.PointF(320D, 304D),
+			new NxtControl.Drawing.PointF(320D, 360D)});
 			this.pipe2.Width = 10;
 			// 
 			// AERATION
