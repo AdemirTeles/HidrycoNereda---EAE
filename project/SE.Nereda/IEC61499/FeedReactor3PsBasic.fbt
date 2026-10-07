@@ -2,7 +2,7 @@
 <!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
 <FBType GUID="41986be7-4399-49d9-88d6-ddb28bdc3815" Name="FeedReactor3PsBasic" Comment="Logica das 3 bombas de alimentacao (2 servico + 1 reserva) - mesmo funcionamento da Water Discharge" Namespace="SE.Nereda">
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Schneider Electric" Version="1.0" Author="Claude/Hidryco" Date="10/1/2026" Remarks="Rev1 - Reescrito conforme a narrativa (cap. 2) com o mesmo funcionamento da Water Discharge (Rev13): Cmax/C2/C3/Cmin em % de velocidade; entrada da 2a com a bomba no Cmax pela velocidade real (narrativa); descida ate C2 confirmada pela velocidade real antes de partir a nova; T_C2 com as bombas em C2; reserva em falha parte na hora em C2; saida da 2a com protecao anti-ciclo; rodizio por horimetro; paradas por LL do buffer, pH/condutividade (L/H, retomada apos T_Restart) e vazao LL (T_FlowLL, retomada apos T_Restart); falha do medidor pela capacidade teorica; status para IHM" />
+  <VersionInfo Organization="Schneider Electric" Version="1.1" Author="Claude/Hidryco" Date="10/7/2026" Remarks="Rev2 - Setpoint do PID sempre igual ao setpoint do Nereda (removida a troca pela vazao medida com as bombas em C2) | Rev1 - Reescrito conforme a narrativa (cap. 2) com o mesmo funcionamento da Water Discharge (Rev13): Cmax/C2/C3/Cmin em % de velocidade; entrada da 2a com a bomba no Cmax pela velocidade real (narrativa); descida ate C2 confirmada pela velocidade real antes de partir a nova; T_C2 com as bombas em C2; reserva em falha parte na hora em C2; saida da 2a com protecao anti-ciclo; rodizio por horimetro; paradas por LL do buffer, pH/condutividade (L/H, retomada apos T_Restart) e vazao LL (T_FlowLL, retomada apos T_Restart); falha do medidor pela capacidade teorica; status para IHM" />
   <InterfaceList>
     <EventInputs>
       <Event ID="7E30127865CFE16B" Name="FEED_REACTOR" Comment="Pedido de alimentacao dos reatores (StartFeeding)">
@@ -165,7 +165,7 @@
       <VarDeclaration ID="B9FEC6B18C045039" Name="FlowFail" Type="BOOL" Comment="Falha do 40FT0003" />
       <VarDeclaration ID="3FF978AD45867CD1" Name="FlowPvMin" Type="REAL" Comment="Inicio de faixa do 40FT0003" />
       <VarDeclaration ID="ECEC37AAF9912DE1" Name="FlowPvMax" Type="REAL" Comment="Fim de faixa do 40FT0003" />
-      <VarDeclaration ID="61C6CAD8A62128A0" Name="FlowPv" Type="REAL" Comment="Vazao medida 40FT0003 [m3/h]" />
+      <VarDeclaration ID="61C6CAD8A62128A0" Name="FlowPv" Type="REAL" Comment="Vazao medida 40FT0003 [m3/h] (nao usada desde a Rev2; mantida pela ligacao no FeedReactorLogic)" />
       <VarDeclaration ID="BFA4DE49E102B0EA" Name="PIDOut" Type="REAL" Comment="Saida do PID = demanda [%] (100 % = 2 bombas a 100 %)" />
     </InputVars>
     <OutputVars>
@@ -174,7 +174,7 @@
       <VarDeclaration ID="FFF29CFFBE485BA1" Name="CmdPump03" Type="BOOL" />
       <VarDeclaration ID="7FEAC15974107CEB" Name="PumpSpeed" Type="REAL" Comment="Velocidade enviada a cada bomba em servico [%] (nunca abaixo de Cmin)" />
       <VarDeclaration ID="1340A87A57F03816" Name="AnyCmd" Type="BOOL" Comment="Alguma bomba comandada" />
-      <VarDeclaration ID="31751C6AC08065D4" Name="EffFlowSp" Type="REAL" Comment="Setpoint efetivo do PID [m3/h] (= vazao medida enquanto as bombas estao fixas em C2)" />
+      <VarDeclaration ID="31751C6AC08065D4" Name="EffFlowSp" Type="REAL" Comment="Setpoint do PID [m3/h] = setpoint do Nereda (maior pedido entre os reatores alimentando)" />
       <VarDeclaration ID="2FD2CD82AAE9F327" Name="RunPID" Type="BOOL" Comment="PID em automatico" />
       <VarDeclaration ID="06C907D918F5800E" Name="AnyReady" Type="BOOL" Comment="Alguma bomba disponivel (Ready ou rodando)" />
       <VarDeclaration ID="CFD70CC123F161E1" Name="AnyRunning" Type="BOOL" Comment="Alguma bomba rodando" />
@@ -303,7 +303,8 @@
     <Algorithm Name="AlgMain" Comment="Logica das bombas de alimentacao">
       <ST><![CDATA[;
 (* ============================================================
-   FeedReactor3PsBasic Rev1 - bombas de alimentacao P4001/P4002/P4003 (2 servico + 1 reserva)
+   FeedReactor3PsBasic Rev2 - bombas de alimentacao P4001/P4002/P4003 (2 servico + 1 reserva)
+   Rev2: o setpoint do PID e sempre o setpoint do Nereda (removida a troca pela vazao medida com as bombas em C2).
    Narrativa cap. 2 (Influent feed) com o mesmo funcionamento da Water Discharge do Sludge Buffer.
    - Partida: StartFeeding de algum reator (fase Feed em RUN e AV41101 aberta). SP = maior pedido [m3/h].
    - Demanda = saida do PID [%] (100 % = 2 bombas a 100 %). Cmax / C2 / C3 / Cmin em % de velocidade de UMA bomba.
@@ -662,12 +663,8 @@ ELSIF Grafcet = 3 THEN
     END_IF;
 
     (* 4.6 setpoint do PID e velocidade das bombas *)
-    (* bombas fixas em C2: setpoint do PID acompanha a vazao medida (sem integrar; sem salto ao fim de T_C2) *)
-    IF ParOk AND ((PumpMode = 1) OR (PumpMode = 2)) AND NOT FlowFail THEN
-        EffFlowSp := FlowPv;
-    ELSE
-        EffFlowSp := FlowSp;
-    END_IF;
+    (* setpoint do PID = setpoint do Nereda (maior pedido), sempre - nunca trocado pela vazao medida (Rev2) *)
+    EffFlowSp := FlowSp;
     IF (PumpMode = 1) OR (PumpMode = 2) THEN
         SpdRaw := C2Eff;
     ELSIF PumpMode = 3 THEN
