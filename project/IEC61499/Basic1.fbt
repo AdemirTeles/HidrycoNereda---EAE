@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="91a73f55-30db-4e5e-991c-29f73b0cddca" Name="Basic1" Comment="Basic Function Block Type" Namespace="Main">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="10/8/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="73EDF9981B53269D" Name="REQ" Comment="Normal Execution Request">
+        <With Var="QI" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="111C1F1184C0834F" Name="CNF" Comment="Execution Confirmation">
+        <With Var="QO" />
+        <With Var="ValueChange" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="D0C2624B144AC64A" Name="QI" Type="BOOL" Comment="Input event qualifier" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="62F47DCDBD82781F" Name="QO" Type="BOOL" Comment="Output event qualifier" />
+      <VarDeclaration ID="98F8DE4777285D21" Name="ValueChange" Type="INT" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="19ee261f-a55c-44b2-8944-7d5d9614988d">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="INIT,REQ" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="552.9412" y="429.4117" />
+      <ECState Name="REQ" x="1132" y="1080">
+        <ECAction Algorithm="REQ" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="REQ" Condition="REQ" x="906.6023" y="704.842">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="209.0351,149.2959,249.5491,194.8145" />
+      </ECTransition>
+      <ECTransition Source="REQ" Destination="START" Condition="1" x="836.4094" y="829.7058">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="230.8747,236.4358,190.3606,190.9171" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="INIT" Comment="Initialization algorithm">
+      <ST><![CDATA[;]]></ST>
+    </Algorithm>
+    <Algorithm Name="REQ" Comment="Normally executed algorithm">
+      <ST><![CDATA[IF QO <> FALSE THEN
+	ValueChange := 1;
+END_IF;
+;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

@@ -57,7 +57,7 @@
     <InputVars>
       <VarDeclaration ID="C22B3197E31C2FDC" Name="L1v" Type="BOOL" />
       <VarDeclaration ID="E5D66BA160FEA7BE" Name="L2v" Type="BOOL" />
-      <VarDeclaration ID="91843A91DDCD538F" Name="Level" Type="INT" />
+      <VarDeclaration ID="91843A91DDCD538F" Name="Level" Type="REAL" />
       <VarDeclaration ID="D440A766CB8B17CF" Name="FeedReady" Type="BOOL" />
       <VarDeclaration ID="0408EC495DD13DC3" Name="FeedRun" Type="BOOL" />
       <VarDeclaration ID="C46CE53379F5294A" Name="FeedInterlock" Type="BOOL" />
