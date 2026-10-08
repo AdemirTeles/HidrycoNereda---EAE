@@ -2,7 +2,7 @@
 <!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
 <FBType GUID="34c011f9-ad03-4951-bdcc-c00661098e12" Name="WaitManagerLogic" Comment="Basic Function Block Type" Namespace="SE.Nereda">
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Schneider Electric" Version="0.0" Author="SESA713705" Date="8/7/2024" Remarks="Template" />
+  <VersionInfo Organization="Schneider Electric" Version="0.1" Author="SESA713705" Date="10/8/2026" Remarks="Hidryco 10/2026: volta ao START quando a fase sai de Starting/Run/Stopping sem passar por Stopping (abort, interlock, reset). Antes ficava presa e a fase nao saia mais do Starting" />
   <InterfaceList>
     <EventInputs>
       <Event ID="READY_STATE" Name="STATE">
@@ -37,17 +37,17 @@
     <Attribute Name="FBType.Basic.Algorithm.Order" Value="Ready,StartReady,RunningState,StopReady" />
     <ECC>
       <ECState Name="START" Comment="Initial State" x="1616.941" y="305.4117" />
-      <ECState Name="READY" x="1624" y="760.0001">
+      <ECState Name="READY" x="2794" y="800.0001">
         <ECAction Algorithm="Ready" Output="START_RDY" />
         <ECAction Output="STOP_RDY" />
       </ECState>
-      <ECState Name="DELAY1" x="1624" y="1244">
+      <ECState Name="DELAY1" x="4514" y="569.0001">
         <ECAction Output="CNF_DELAY" />
       </ECState>
-      <ECState Name="START_RDY" x="1623.556" y="1693.333">
+      <ECState Name="START_RDY" x="2453.556" y="1673.333">
         <ECAction Algorithm="StartReady" Output="START_RDY" />
       </ECState>
-      <ECState Name="RUN" x="1630.222" y="2145.777">
+      <ECState Name="RUN" x="4660.222" y="2260.777">
         <ECAction Algorithm="RunningState" Output="START_RDY" />
       </ECState>
       <ECState Name="STOP_RDY" x="1628.381" y="2992.444">
@@ -56,20 +56,20 @@
       <ECState Name="DELAY2" x="1624" y="2532">
         <ECAction Output="CNF_DELAY" />
       </ECState>
-      <ECTransition Source="START" Destination="READY" Condition="ReadyState" x="1621.735" y="511.068">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="404.8008,111.0963,406.19,140.8314" />
+      <ECTransition Source="START" Destination="READY" Condition="ReadyState" x="2150.422" y="527.5729">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="493.1436,113.6142,572.5622,145.9835" />
       </ECTransition>
-      <ECTransition Source="READY" Destination="DELAY1" Condition="StartingState" x="1623.491" y="999.0121">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="405.6931,233.6525,405.9984,265.3556" />
+      <ECTransition Source="READY" Destination="DELAY1" Condition="StartingState" x="3637.491" y="687.2755">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="848.2447,180.2073,968.6167,163.738" />
       </ECTransition>
-      <ECTransition Source="DELAY1" Destination="START_RDY" Condition="REQ_DELAY" x="1623.095" y="1445.891">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="405.7205,345.1917,405.7601,373.9581" />
+      <ECTransition Source="DELAY1" Destination="START_RDY" Condition="REQ_DELAY" x="3605.95" y="1054.785">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="989.5107,216.4483,833.9604,299.8804" />
       </ECTransition>
-      <ECTransition Source="START_RDY" Destination="RUN" Condition="STATE AND RunningState" x="1625.757" y="1915.974">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="406.1604,464.1913,406.597,493.1989" />
+      <ECTransition Source="START_RDY" Destination="RUN" Condition="STATE AND RunningState" x="3586.422" y="1975.194">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="815.4332,472.2283,974.4679,514.6027" />
       </ECTransition>
-      <ECTransition Source="RUN" Destination="DELAY2" Condition="StoppingState" x="1632.847" y="2329.173">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="408.6379,569.7352,408.344,593.2321" />
+      <ECTransition Source="RUN" Destination="DELAY2" Condition="StoppingState" x="3261.433" y="2389.792">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="939.8171,586.5436,707.0775,607.4399" />
       </ECTransition>
       <ECTransition Source="STOP_RDY" Destination="START" Condition="ReadyState" x="974.2097" y="1648.362">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="192.6366,733.8581,212.6454,90.46243" />
@@ -77,9 +77,19 @@
       <ECTransition Source="DELAY2" Destination="STOP_RDY" Condition="REQ_DELAY" x="1628.623" y="2743.058">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="407.1471,669.3305,407.4051,699.0042" />
       </ECTransition>
-      <ECTransition Source="START_RDY" Destination="DELAY2" Condition="StoppingState" x="1215.251" y="2088.36">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="277.3735,489.4685,277.4059,550.6603" />
+      <ECTransition Source="START_RDY" Destination="DELAY2" Condition="StoppingState" x="1713.584" y="1838.817">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="437.1368,406.8232,382.7971,474.1019" />
       </ECTransition>
+      <ECTransition Source="DELAY1" Destination="START" Condition="STATE AND NOT StartingState AND NOT RunningState AND NOT StoppingState" x="3058.036" y="514.9111">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="873.816,144.0776,655.2018,124.1871" />
+      </ECTransition>
+      <ECTransition Source="START_RDY" Destination="START" Condition="STATE AND NOT StartingState AND NOT RunningState AND NOT StoppingState" x="2033.484" y="1064.372">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="541.0116,324.9913,476.6127,219.6949" />
+      </ECTransition>
+      <ECTransition Source="RUN" Destination="START" Condition="STATE AND NOT StartingState AND NOT RunningState AND NOT StoppingState" x="3135.478" y="1358.094">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="904.6807,422.8986,664.6099,268.6486" />
+      </ECTransition>
+      <ECTransition Source="DELAY2" Destination="START" Condition="STATE AND NOT StartingState AND NOT RunningState AND NOT StoppingState" x="1620.465" y="1493.706" />
     </ECC>
     <Algorithm Name="Ready">
       <ST><![CDATA[;
