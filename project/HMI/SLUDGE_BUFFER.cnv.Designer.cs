@@ -38,6 +38,8 @@ namespace HMI.Main.Canvases
 			this.sBarPvSpOpVert2 = new SE.App2CommonProcess.Symbols.PID.sBarPvSpOpVert();
 			this.sBarPvSpOpVert1 = new SE.App2CommonProcess.Symbols.PID.sBarPvSpOpVert();
 			this.sDefault2 = new SE.App2CommonProcess.Symbols.Autotune.sDefault();
+			this.sDisplayPv21 = new SE.Nereda.Symbols.AnalogInput.sDisplayPv2();
+			this.sDisplayPv22 = new SE.Nereda.Symbols.AnalogInput.sDisplayPv2();
 			// 
 			// polygon7
 			// 
@@ -90,7 +92,7 @@ namespace HMI.Main.Canvases
 			// SludgeBuffer
 			// 
 			this.SludgeBuffer.BeginInit();
-			this.SludgeBuffer.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 80D, 224D);
+			this.SludgeBuffer.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 24D, 224D);
 			this.SludgeBuffer.Name = "SludgeBuffer";
 			this.SludgeBuffer.SecurityToken = ((uint)(4294967295u));
 			this.SludgeBuffer.TagName = "9AA3696311BF0C3E";
@@ -164,6 +166,28 @@ namespace HMI.Main.Canvases
 			this.sDefault2.TagName = "9AA3696311BF0C3E.Logic.CmdWaterDischargeSLB1.CommandLogic.Autotune1";
 			this.sDefault2.EndInit();
 			// 
+			// sDisplayPv21
+			// 
+			this.sDisplayPv21.BeginInit();
+			this.sDisplayPv21._iSensorName = "Name";
+			this.sDisplayPv21._iUnit = "m";
+			this.sDisplayPv21.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.73684210526315785D, 0D, 0D, 0.73684210526315785D, 1216D, 320D);
+			this.sDisplayPv21.Name = "sDisplayPv21";
+			this.sDisplayPv21.SecurityToken = ((uint)(4294967295u));
+			this.sDisplayPv21.TagName = "356FB76E49F87763.LevelMeasurementReactor";
+			this.sDisplayPv21.EndInit();
+			// 
+			// sDisplayPv22
+			// 
+			this.sDisplayPv22.BeginInit();
+			this.sDisplayPv22._iSensorName = "Name";
+			this.sDisplayPv22._iUnit = "m";
+			this.sDisplayPv22.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.73684210526315785D, 0D, 0D, 0.73684210526315752D, 1216D, 408D);
+			this.sDisplayPv22.Name = "sDisplayPv22";
+			this.sDisplayPv22.SecurityToken = ((uint)(4294967295u));
+			this.sDisplayPv22.TagName = "864A57C6293E51C2.LevelMeasurementReactor";
+			this.sDisplayPv22.EndInit();
+			// 
 			// SLUDGE_BUFFER
 			// 
 			this.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(1366D)), ((float)(698D)));
@@ -180,7 +204,9 @@ namespace HMI.Main.Canvases
 			this.sDefault1,
 			this.sBarPvSpOpVert2,
 			this.sBarPvSpOpVert1,
-			this.sDefault2});
+			this.sDefault2,
+			this.sDisplayPv21,
+			this.sDisplayPv22});
 			this.Size = new System.Drawing.Size(1366, 698);
 
 		}
@@ -196,6 +222,8 @@ namespace HMI.Main.Canvases
 		private SE.App2CommonProcess.Symbols.Autotune.sDefault sDefault1;
 		private SE.App2CommonProcess.Symbols.PID.sBarPvSpOpVert sBarPvSpOpVert2;
 		private SE.App2CommonProcess.Symbols.Autotune.sDefault sDefault2;
+		private SE.Nereda.Symbols.AnalogInput.sDisplayPv2 sDisplayPv21;
+		private SE.Nereda.Symbols.AnalogInput.sDisplayPv2 sDisplayPv22;
 		#endregion
 	}
 }
