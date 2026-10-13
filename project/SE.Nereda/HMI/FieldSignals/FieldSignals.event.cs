@@ -229,6 +229,46 @@ namespace SE.Nereda.Symbols.FieldSignals
       return (System.Single) var;
     }  }
 
+    public bool Get_CurrentFb(ref System.Single value)
+    {
+      if (accessorService == null)
+        return false;
+      float var = 0;
+      bool ret = accessorService.GetFloatValue(channelId, cookie, eventIndex, true,10, ref var);
+      if (ret) value = (System.Single) var;
+      return ret;
+    }
+
+    public System.Single? CurrentFb
+    { get {
+      if (accessorService == null)
+        return null;
+      float var = 0;
+      bool ret = accessorService.GetFloatValue(channelId, cookie, eventIndex, true,10, ref var);
+      if (!ret) return null;
+      return (System.Single) var;
+    }  }
+
+    public bool Get_RpmFb(ref System.Single value)
+    {
+      if (accessorService == null)
+        return false;
+      float var = 0;
+      bool ret = accessorService.GetFloatValue(channelId, cookie, eventIndex, true,11, ref var);
+      if (ret) value = (System.Single) var;
+      return ret;
+    }
+
+    public System.Single? RpmFb
+    { get {
+      if (accessorService == null)
+        return null;
+      float var = 0;
+      bool ret = accessorService.GetFloatValue(channelId, cookie, eventIndex, true,11, ref var);
+      if (!ret) return null;
+      return (System.Single) var;
+    }  }
+
 
   }
 

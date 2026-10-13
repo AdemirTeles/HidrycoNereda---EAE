@@ -17,34 +17,30 @@
     <Plugs>
       <AdapterDeclaration ID="B800EAF158E6D272" Name="IMixerCmd" Type="INeredaAct" Namespace="SE.Nereda" x="7140" y="1000" />
     </Plugs>
+    <AdapterOutputs>
+      <Adapter ID="4524720E1B0E251A" Name="IIlck" Type="IOpCondS" Namespace="SE.App2CommonProcess" />
+    </AdapterOutputs>
   </InterfaceList>
   <FBNetwork>
     <FB ID="675335DC54E54FCD" Name="LevelPv_Status" Type="decodeStatus" x="1940" y="1940" Namespace="SE.App2Base" />
     <FB ID="C3D5B71B5D1A58B6" Name="IThis" Type="MixerLogic_HMI" x="4285.438" y="930" Namespace="SE.Nereda">
       <Parameter Name="$A96EF4AB3149A89F" Value="TRUE" />
     </FB>
-    <FB ID="50908853DC386E2B" Name="START" Type="E_PERMIT" x="3860" y="2000" Namespace="IEC61499.Standard" />
-    <FB ID="3B446F865D43F4B5" Name="STOP" Type="E_PERMIT" x="3860" y="2460" Namespace="IEC61499.Standard" />
-    <FB ID="93750228D5FA39E3" Name="NotLowAlarm" Type="NOT_42C76073DCEB1A7A" x="2880" y="2000" Namespace="SE.Nereda">
-      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNT:=1;OUT${CNT}:BOOL" />
-    </FB>
-    <FB ID="9308BAD2CA47DDA3" UID="E6B9919B0E4F6D6A" Name="CmdMixerSel" Type="DS_SELECTX_2536758B411A6CE51" x="4620" y="2000" Namespace="SE.Nereda">
-      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNTX:=2;CNTY:=1;DI${CNTX,_,CNTY}:BOOL" />
-      <Parameter Name="$DI1_1" Value="TRUE" />
-      <Parameter Name="$DI2_1" Value="FALSE" />
-    </FB>
     <FB ID="CB694E4F5F2F48D7" Name="CmdMixerSmooth" Type="boolValueChanged" x="5300" y="2000" Namespace="SE.App2Base" />
     <FB ID="AADCF48EFD30622A" UID="E0FF301A0238089E" Name="CmdMixer" Type="BOOL2INT" x="6160" y="2060" Namespace="SE.Nereda" />
-    <FB ID="65E87D8DC8506F73" Name="OR1" Type="OR_88A3DD8EC65DD11C" x="3420" y="2060" Namespace="SE.Nereda">
+    <FB ID="EE27F1CE7C87CEBD" Name="OR1" Type="OR_88A3DD8EC65DD11C" x="3500" y="2180" Namespace="SE.Nereda">
       <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNT:=2;OUT:BOOL" />
     </FB>
-    <FB ID="ADCD7F39C8C213AD" Name="NotLowLowAlarm" Type="NOT_42C76073DCEB1A7A" x="2880" y="2400" Namespace="SE.Nereda">
+    <FB ID="106764A035C7BF47" Name="NOT1" Type="NOT_42C76073DCEB1A7A" x="4100" y="2200" Namespace="SE.Nereda">
       <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNT:=1;OUT${CNT}:BOOL" />
     </FB>
-    <FB ID="57D3308F2994879C" Name="LowOrLowLow" Type="OR_88A3DD8EC65DD11C" x="2920" y="2780" Namespace="SE.Nereda">
-      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNT:=2;OUT:BOOL" />
+    <FB ID="BB09895F6A1B243E" Name="ilckCondItem1" Type="ilckCondItem" x="4740" y="2640" Namespace="SE.App2CommonProcess">
+      <Parameter Name="$CondCause" Value="Active1" />
     </FB>
-    <Input ID="66FB3AFD4368DC76" Name="INIT" x="1500" y="1116" Type="Event" />
+    <FB ID="EBDA9ABA64AF4599" Name="ilckCondItem2" Type="ilckCondItem" x="6260" y="1340" Namespace="SE.App2CommonProcess">
+      <Parameter Name="$CondCause" Value="Active1" />
+    </FB>
+    <Input ID="66FB3AFD4368DC76" Name="INIT" x="1500" y="1114" Type="Event" />
     <Frame Name="FRAME6" X="520" Y="1640" Width="2160" Height="920">
       <Parameter Name="BackgroundColor" Value="AntiqueWhite" />
       <Parameter Name="TextColor" Value="Black" />
@@ -108,26 +104,15 @@
       <Parameter Name="Text" Value="02 - FUNCTIONNAL OUTPUT INTERFACE" />
       <Parameter Name="NxtLayerIdentifier" Value="" />
     </Frame>
-    <Output ID="2BF2F6D7B5DAD30F" Name="INITO" x="1480" y="1276" Type="Event" />
+    <Output ID="4524720E1B0E251A" Name="IIlck" x="7100" y="2652" Type="Adapter" />
+    <Output ID="2BF2F6D7B5DAD30F" Name="INITO" x="1480" y="1274" Type="Event" />
     <EventConnections>
       <Connection Source="$9EEED033168D712F.REQ_STATUS" Destination="$675335DC54E54FCD.REQ" dx1="60" />
-      <Connection Source="$675335DC54E54FCD.CNF" Destination="$93750228D5FA39E3.REQ">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$675335DC54E54FCD.CNF" Destination="$57D3308F2994879C.REQ">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$93750228D5FA39E3.CNF" Destination="$65E87D8DC8506F73.REQ">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$50908853DC386E2B.EO" Destination="$9308BAD2CA47DDA3.REQ1" />
-      <Connection Source="$9308BAD2CA47DDA3.IND" Destination="$CB694E4F5F2F48D7.REQ" />
-      <Connection Source="$3B446F865D43F4B5.EO" Destination="$9308BAD2CA47DDA3.REQ2" dx1="47.16699" />
       <Connection Source="$CB694E4F5F2F48D7.CHD" Destination="$AADCF48EFD30622A.DD5870AA881150BB" />
       <Connection Source="$AADCF48EFD30622A.6FC99A5BD1C38561" Destination="$B800EAF158E6D272.0F1CDF9A9B4A227A">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$66FB3AFD4368DC76" Destination="$C3D5B71B5D1A58B6.135455C73E8DC82F">
+      <Connection Source="$66FB3AFD4368DC76" Destination="$C3D5B71B5D1A58B6.135455C73E8DC82F" dx1="1328.427">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
       <Connection Source="$C3D5B71B5D1A58B6.C4B5FC59434F1CF9" Destination="$C3D5B71B5D1A58B6.F005B75A6201334C">
@@ -136,32 +121,20 @@
       <Connection Source="$B800EAF158E6D272.9CD053F8408797ED" Destination="$C3D5B71B5D1A58B6.FE4C448D32CE378F">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$C3D5B71B5D1A58B6.C4B5FC59434F1CF9" Destination="$2BF2F6D7B5DAD30F">
+      <Connection Source="$C3D5B71B5D1A58B6.C4B5FC59434F1CF9" Destination="$2BF2F6D7B5DAD30F" dx1="120" dx2="120" dy="508">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
       <Connection Source="$C3D5B71B5D1A58B6.440A4EA6109B5B5E" Destination="$B800EAF158E6D272.1E00729184986247">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$65E87D8DC8506F73.CNF" Destination="$50908853DC386E2B.EI" dx1="50" />
-      <Connection Source="$675335DC54E54FCD.CNF" Destination="$ADCD7F39C8C213AD.REQ">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$ADCD7F39C8C213AD.CNF" Destination="$65E87D8DC8506F73.REQ">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$57D3308F2994879C.CNF" Destination="$3B446F865D43F4B5.EI">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
+      <Connection Source="$106764A035C7BF47.CNF" Destination="$CB694E4F5F2F48D7.REQ" dx1="50" />
+      <Connection Source="$EE27F1CE7C87CEBD.CNF" Destination="$106764A035C7BF47.REQ" dx1="67.47925" />
+      <Connection Source="$675335DC54E54FCD.CNF" Destination="$EE27F1CE7C87CEBD.REQ" dx1="80" />
+      <Connection Source="$675335DC54E54FCD.CNF_UPD" Destination="$EE27F1CE7C87CEBD.REQ" dx1="80" />
+      <Connection Source="$EE27F1CE7C87CEBD.CNF" Destination="$BB09895F6A1B243E.REQ" dx1="67.47925" />
     </EventConnections>
     <DataConnections>
       <Connection Source="$9EEED033168D712F.Status" Destination="$675335DC54E54FCD.Status" dx1="75.16675" />
-      <Connection Source="$93750228D5FA39E3.OUT1" Destination="$65E87D8DC8506F73.IN1">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$675335DC54E54FCD.LoAlarm" Destination="$93750228D5FA39E3.IN1">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$9308BAD2CA47DDA3.OUT1" Destination="$CB694E4F5F2F48D7.Input" dx1="40.021" />
       <Connection Source="$CB694E4F5F2F48D7.Output" Destination="$AADCF48EFD30622A.4573FC8F228EB71D" dx1="70" />
       <Connection Source="$AADCF48EFD30622A.A6DEF5F9C27C1848" Destination="$B800EAF158E6D272.710D7FC54EE3F35A">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
@@ -172,18 +145,14 @@
       <Connection Source="$B800EAF158E6D272.B762734C094A7162" Destination="$C3D5B71B5D1A58B6.5F16CB246B626D18">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$675335DC54E54FCD.LoLoAlarm" Destination="$57D3308F2994879C.IN2">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$ADCD7F39C8C213AD.OUT1" Destination="$65E87D8DC8506F73.IN2">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$65E87D8DC8506F73.OUT" Destination="$50908853DC386E2B.PERMIT" dx1="347.4792" dx2="49.99976" dy="30" />
-      <Connection Source="$57D3308F2994879C.OUT" Destination="$3B446F865D43F4B5.PERMIT">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$675335DC54E54FCD.LoLoAlarm" Destination="$ADCD7F39C8C213AD.IN1" dx1="120" />
-      <Connection Source="$675335DC54E54FCD.LoAlarm" Destination="$57D3308F2994879C.IN1" dx1="140" />
+      <Connection Source="$675335DC54E54FCD.LoAlarm" Destination="$EE27F1CE7C87CEBD.IN1" />
+      <Connection Source="$675335DC54E54FCD.LoLoAlarm" Destination="$EE27F1CE7C87CEBD.IN2" />
+      <Connection Source="$EE27F1CE7C87CEBD.OUT" Destination="$106764A035C7BF47.IN1" dx1="47.47925" />
+      <Connection Source="$106764A035C7BF47.OUT1" Destination="$CB694E4F5F2F48D7.Input" dx1="43.75" />
+      <Connection Source="$EE27F1CE7C87CEBD.OUT" Destination="$BB09895F6A1B243E.CondSignal" dx1="47.47925" />
     </DataConnections>
+    <AdapterConnections>
+      <Connection Source="$BB09895F6A1B243E.ICondChainOut" Destination="$4524720E1B0E251A" dx1="40" />
+    </AdapterConnections>
   </FBNetwork>
 </FBType>
