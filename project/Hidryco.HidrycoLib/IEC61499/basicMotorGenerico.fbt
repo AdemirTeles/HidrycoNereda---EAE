@@ -1,0 +1,632 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="05042151-8115-451f-8d99-594dad2c1076" Name="basicMotorGenerico" Comment="Logica unica do motor generico (partida direta ou inversor)" Namespace="Hidryco.HidrycoLib">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Hidryco" Version="1.4" Author="Hidryco" Date="13/10/2026" Remarks="1.1: refeito no padrao SE.App2CommonProcess - eventos por grupo de dados, saidas so na mudanca, supervisao por E_DELAY (MON_T/MON_RESET/MON_MAX), horimetro e partidas pelo devMntCalc, escala linear com limites. 1.4: horimetro proprio com resolucao de 1 s (E_CYCLE + PERSISTENCE), termica NF por padrao" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="683CE05B486FAC1D" Name="INIT" Comment="Inicializacao (configuracao da instancia)">
+        <With Var="cfgInversor" />
+        <With Var="cfgVelocidadeMin" />
+        <With Var="cfgVelocidadeMax" />
+        <With Var="cfgSaidaMin" />
+        <With Var="cfgSaidaMax" />
+        <With Var="cfgUsaTermica" />
+        <With Var="cfgTermicaNF" />
+        <With Var="cfgUsaFalhaComunicacao" />
+        <With Var="stpTempoFalhaLigamento" />
+        <With Var="stpTempoFalhaDesligamento" />
+        <With Var="stpVelocidadeManual" />
+      </Event>
+      <Event ID="7C3B0EC5F898F810" Name="REQ_PARA" Comment="Atualizacao de parametros (IHM)">
+        <With Var="cfgInversor" />
+        <With Var="cfgVelocidadeMin" />
+        <With Var="cfgVelocidadeMax" />
+        <With Var="cfgSaidaMin" />
+        <With Var="cfgSaidaMax" />
+        <With Var="cfgUsaTermica" />
+        <With Var="cfgTermicaNF" />
+        <With Var="cfgUsaFalhaComunicacao" />
+        <With Var="stpTempoFalhaLigamento" />
+        <With Var="stpTempoFalhaDesligamento" />
+        <With Var="stpVelocidadeManual" />
+      </Event>
+      <Event ID="9A68BE042B943E25" Name="REQ_CMD" Comment="Comando e referencia do processo">
+        <With Var="cmdLigarAutomatico" />
+        <With Var="stpVelocidadeAutomatico" />
+      </Event>
+      <Event ID="5F826E4CBCD659F3" Name="REQ_ILCK" Comment="Intertravamentos, emergencia e gerador">
+        <With Var="ilkGeral" />
+        <With Var="ilkAutomatico" />
+        <With Var="ilkManual" />
+        <With Var="inEmergencia" />
+        <With Var="geradorConectado" />
+        <With Var="geradorHabilita" />
+        <With Var="inGerador" />
+      </Event>
+      <Event ID="B2231D0A37008554" Name="REQ_FB" Comment="Sinais de campo">
+        <With Var="fldFalhaComunicacao" />
+        <With Var="fldRemoto" />
+        <With Var="fldLocal" />
+        <With Var="fldLigado" />
+        <With Var="fldProtecaoTermica" />
+        <With Var="fldSemFalha" />
+      </Event>
+      <Event ID="9806D419CCC98D7A" Name="REQ_SPEED_FB" Comment="Velocidade real do inversor">
+        <With Var="fldVelocidade" />
+      </Event>
+      <Event ID="079FEC4CDDF030BF" Name="REQ_MODE" Comment="Modo automatico/manual (IHM)">
+        <With Var="hmiAutomatico" />
+      </Event>
+      <Event ID="515471E320ACA903" Name="REQ_MANUAL" Comment="Liga/desliga manual (IHM)">
+        <With Var="hmiCmdManual" />
+      </Event>
+      <Event ID="0C2D266AF6549AC9" Name="REQ_RESET" Comment="Reset de falhas (IHM)">
+        <With Var="hmiResetFalha" />
+      </Event>
+      <Event ID="0D409FE636F62649" Name="REQ_RESET_PROC" Comment="Reset de falhas (processo)">
+        <With Var="cmdResetFalhas" />
+      </Event>
+      <Event ID="1767A5462AC4396E" Name="REQ_MNT" Comment="Numero de partidas do devMntCalc">
+        <With Var="mntPartidas" />
+      </Event>
+      <Event ID="84203CA40E4652F0" Name="REQ_PERS" Comment="Horimetro lido do PERSISTENCE (READCNF)">
+        <With Var="perSegundo" />
+        <With Var="perMinuto" />
+        <With Var="perHora" />
+      </Event>
+      <Event ID="D2399131CE3E1F66" Name="TICK" Comment="1 s do E_CYCLE (so com o motor ligado)" />
+      <Event ID="1A33DFD299C36324" Name="REQ_RESET_HOR" Comment="Zera o horimetro (IHM)">
+        <With Var="hmiResetHorimetro" />
+      </Event>
+      <Event ID="F9A311D126CA484B" Name="MON_MAX" Comment="Tempo de supervisao de partida/parada esgotado (E_DELAY)" />
+      <Event ID="068D65FB1CCC02E9" Name="RST_END" Comment="Fim do pulso de reset (E_DELAY)" />
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="B7169CA02CA38134" Name="INITO" Comment="Inicializacao concluida" />
+      <Event ID="0AA258A42CE24B3F" Name="CNF_OUT" Comment="Saidas digitais de campo (na mudanca)">
+        <With Var="acmLigar" />
+        <With Var="acmReset" />
+      </Event>
+      <Event ID="D6EF387B8656A6CB" Name="CNF_SPEED_OUT" Comment="Referencia de velocidade para o campo (na mudanca)">
+        <With Var="stpVelocidadeCampo" />
+      </Event>
+      <Event ID="78ECC0A7580C66C8" Name="CNF" Comment="Status para o processo (na mudanca)">
+        <With Var="stsDisponivelAutomatico" />
+        <With Var="stsLigado" />
+        <With Var="stsParado" />
+        <With Var="stsFalha" />
+        <With Var="stsAnimacao" />
+        <With Var="stsVelocidade" />
+        <With Var="stsRemoto" />
+        <With Var="stsAutomatico" />
+      </Event>
+      <Event ID="0FC40684CDE616F5" Name="CNF_SPEED" Comment="Velocidade real (mudanca maior ou igual a 0,1 %)">
+        <With Var="stsVelocidade" />
+      </Event>
+      <Event ID="194428FC25B1C63C" Name="CNF_HMI" Comment="Status para a IHM (na mudanca)">
+        <With Var="stsRemoto" />
+        <With Var="stsLocal" />
+        <With Var="stsManutencao" />
+        <With Var="stsLigado" />
+        <With Var="stsAutomatico" />
+        <With Var="stsCmdManual" />
+        <With Var="stsAnimacao" />
+        <With Var="stsAnimacaoGerador" />
+        <With Var="stsAlarme" />
+        <With Var="stsFalhaComunicacao" />
+        <With Var="stsProtecaoTermica" />
+        <With Var="stsFalhaInversor" />
+        <With Var="stsFalhaPartida" />
+        <With Var="stsFalhaParada" />
+        <With Var="stsEmergencia" />
+        <With Var="stsBloqueado" />
+        <With Var="stsBloqueioGerador" />
+        <With Var="stsDisponivelAutomatico" />
+        <With Var="stsVelocidade" />
+        <With Var="stsVelocidadeReferencia" />
+        <With Var="stsHorimetroHora" />
+        <With Var="stsHorimetroMinuto" />
+        <With Var="stsNumeroPartidas" />
+        <With Var="stsInversor" />
+        <With Var="stsUsaTermica" />
+        <With Var="stsUsaFalhaComunicacao" />
+      </Event>
+      <Event ID="F8CF5B648D94FB56" Name="CNF_PV" Comment="Estado ligado/parado para o devMntCalc (na mudanca)">
+        <With Var="stsPv" />
+      </Event>
+      <Event ID="814037172F205D14" Name="CNF_HORIMETRO" Comment="Tempo de operacao (na mudanca)">
+        <With Var="stsHorimetro" />
+      </Event>
+      <Event ID="551060398A78E95E" Name="MON_RESET" Comment="Cancela o tempo de supervisao (E_DELAY.STOP) - sai antes do MON_T" />
+      <Event ID="78F16FCFC317D932" Name="MON_T" Comment="Inicia o tempo de supervisao (E_DELAY.START)">
+        <With Var="TimeOut" />
+      </Event>
+      <Event ID="EEEBF5CC51C91C4E" Name="RST_T" Comment="Inicia o pulso de reset (E_DELAY.START)" />
+      <Event ID="53ECCF865FC89D5D" Name="OP_STOP" Comment="Para o E_CYCLE do horimetro - sai antes do OP_START" />
+      <Event ID="51A40868F4B890EF" Name="OP_START" Comment="Inicia o E_CYCLE de 1 s do horimetro" />
+      <Event ID="B3EC08981095182D" Name="CNF_PERS" Comment="Grava o horimetro no PERSISTENCE (a cada minuto, na parada e no reset)">
+        <With Var="stsHorimetroSegundo" />
+        <With Var="stsHorimetroMinuto" />
+        <With Var="stsHorimetroHora" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="7320FF5F4A574EDB" Name="cfgInversor" Type="BOOL" InitialValue="FALSE" Comment="TRUE = motor com inversor (referencia de velocidade e medicoes)" />
+      <VarDeclaration ID="7C3DCCF0844218F0" Name="cfgVelocidadeMin" Type="REAL" InitialValue="0.0" Comment="Limite minimo da referencia de velocidade (%)" />
+      <VarDeclaration ID="E47BA74EEFB23183" Name="cfgVelocidadeMax" Type="REAL" InitialValue="100.0" Comment="Limite maximo da referencia de velocidade (%)" />
+      <VarDeclaration ID="EDD310DB8258871B" Name="cfgSaidaMin" Type="REAL" InitialValue="0.0" Comment="Valor de campo equivalente a 0 % (referencia e realimentacao)" />
+      <VarDeclaration ID="B9430F14918E2745" Name="cfgSaidaMax" Type="REAL" InitialValue="100.0" Comment="Valor de campo equivalente a 100 % (ex.: 100 = %, 60 = Hz, 10000 = Sulzer 0,01 %)" />
+      <VarDeclaration ID="28C58F5448A1FB06" Name="cfgUsaTermica" Type="BOOL" InitialValue="TRUE" Comment="TRUE = supervisiona a protecao termica" />
+      <VarDeclaration ID="851269AC75CA9E8E" Name="cfgTermicaNF" Type="BOOL" InitialValue="TRUE" Comment="TRUE = termica NF (FALSE no campo = atuada). Padrao NF (definido pelo usuario)" />
+      <VarDeclaration ID="F88C337DE680E3C6" Name="cfgUsaFalhaComunicacao" Type="BOOL" InitialValue="TRUE" Comment="TRUE = considera o bit de falha de comunicacao da remota" />
+      <VarDeclaration ID="545E40FBFE122A17" Name="stpTempoFalhaLigamento" Type="UINT" Comment="Tempo maximo para confirmar a partida (s). 0 = sem supervisao" />
+      <VarDeclaration ID="6A2A6C1686F090F5" Name="stpTempoFalhaDesligamento" Type="UINT" Comment="Tempo maximo para confirmar a parada (s). 0 = sem supervisao" />
+      <VarDeclaration ID="7C364BBDFB8C6BF7" Name="stpVelocidadeManual" Type="REAL" Comment="Referencia de velocidade em manual (%)" />
+      <VarDeclaration ID="193DFCC66FFA3627" Name="cmdLigarAutomatico" Type="BOOL" Comment="Comando ligar do processo (modo automatico)" />
+      <VarDeclaration ID="98EE3FBBD960BD99" Name="stpVelocidadeAutomatico" Type="REAL" Comment="Referencia de velocidade do processo (%)" />
+      <VarDeclaration ID="32BEE80CEEB8693D" Name="ilkGeral" Type="BOOL" Comment="Intertravamento geral (automatico e manual)" />
+      <VarDeclaration ID="08FB79476C4E9977" Name="ilkAutomatico" Type="BOOL" Comment="Intertravamento so do automatico" />
+      <VarDeclaration ID="1B53B44C2D19F3A4" Name="ilkManual" Type="BOOL" Comment="Intertravamento so do manual" />
+      <VarDeclaration ID="CE80B360618E059C" Name="inEmergencia" Type="BOOL" Comment="Emergencia (TRUE = acionada): retira o comando e exige reset" />
+      <VarDeclaration ID="08882924EFBEFED3" Name="geradorConectado" Type="BOOL" Comment="TRUE = o gerador pode alimentar este equipamento" />
+      <VarDeclaration ID="AFB89A6AEC1EE209" Name="geradorHabilita" Type="BOOL" Comment="Selecao do operador no CAT Gerador (HAB_GERADOR_EQUIP_n)" />
+      <VarDeclaration ID="C7F3CEE0526BB999" Name="inGerador" Type="BOOL" Comment="TRUE = planta alimentada pelo gerador" />
+      <VarDeclaration ID="14AD61732551E6C9" Name="fldFalhaComunicacao" Type="BOOL" Comment="Campo: falha de comunicacao da remota" />
+      <VarDeclaration ID="4FA04895B58EC5C7" Name="fldRemoto" Type="BOOL" Comment="Campo: chave em remoto" />
+      <VarDeclaration ID="060151A1F4D195B2" Name="fldLocal" Type="BOOL" Comment="Campo: chave em local" />
+      <VarDeclaration ID="C82173D2C2DE6C19" Name="fldLigado" Type="BOOL" Comment="Campo: confirmacao de ligado" />
+      <VarDeclaration ID="88ACEC8481B97DF2" Name="fldProtecaoTermica" Type="BOOL" Comment="Campo: protecao termica (ver cfgTermicaNF)" />
+      <VarDeclaration ID="6AD75282021BE9C8" Name="fldSemFalha" Type="BOOL" Comment="Campo: falha NF (TRUE = sem falha)" />
+      <VarDeclaration ID="D3BA39302C2D6321" Name="fldVelocidade" Type="REAL" Comment="Campo: velocidade real na unidade de cfgSaidaMin..cfgSaidaMax" />
+      <VarDeclaration ID="DBE472141CB0338C" Name="hmiAutomatico" Type="BOOL" Comment="IHM: TRUE = automatico" />
+      <VarDeclaration ID="E56FE8E891007C74" Name="hmiCmdManual" Type="BOOL" Comment="IHM: TRUE = ligar, FALSE = desligar (manual)" />
+      <VarDeclaration ID="9E5F1B4C72F61C66" Name="hmiResetFalha" Type="BOOL" Comment="IHM: reset de falhas (vale com TRUE)" />
+      <VarDeclaration ID="1C00AC032E117AF2" Name="cmdResetFalhas" Type="BOOL" Comment="Processo: reset de falhas (vale com TRUE)" />
+      <VarDeclaration ID="3C67B87F17DDB307" Name="perSegundo" Type="UINT" Comment="Horimetro persistido: segundos" />
+      <VarDeclaration ID="71EDECD1C9B36752" Name="perMinuto" Type="UINT" Comment="Horimetro persistido: minutos" />
+      <VarDeclaration ID="D6BA299117BFAEF2" Name="perHora" Type="UDINT" Comment="Horimetro persistido: horas" />
+      <VarDeclaration ID="6941FE2305CF8A1E" Name="hmiResetHorimetro" Type="BOOL" Comment="IHM: zera o horimetro (vale com TRUE)" />
+      <VarDeclaration ID="40E1D8559C0FE4D8" Name="mntPartidas" Type="UDINT" Comment="devMntCalc: numero de partidas" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="FCC70C7B92BB1D0D" Name="acmLigar" Type="BOOL" Comment="Campo: comando liga" />
+      <VarDeclaration ID="6B3311AC79C69555" Name="acmReset" Type="BOOL" Comment="Campo: pulso de reset (inversor/rele)" />
+      <VarDeclaration ID="0E91B3E8D843667A" Name="stpVelocidadeCampo" Type="REAL" Comment="Campo: referencia de velocidade (cfgSaidaMin..cfgSaidaMax)" />
+      <VarDeclaration ID="73BD8AC3011DABE5" Name="stsDisponivelAutomatico" Type="BOOL" Comment="Pode ser comandado pelo automatico agora" />
+      <VarDeclaration ID="15F1159202E28B21" Name="stsLigado" Type="BOOL" Comment="Motor ligado (confirmacao de campo)" />
+      <VarDeclaration ID="C9FFC4D7ACE51BE3" Name="stsParado" Type="BOOL" Comment="Motor parado" />
+      <VarDeclaration ID="EBB36D1174CD51D5" Name="stsFalha" Type="BOOL" Comment="Alguma falha memorizada (exige reset)" />
+      <VarDeclaration ID="9E4E2F4C4D54D03D" Name="stsAnimacao" Type="INT" Comment="0 desligado, 1 ligado, 2 falha, 3 manutencao" />
+      <VarDeclaration ID="170EA16E9186BAB7" Name="stsAnimacaoGerador" Type="INT" Comment="0 nao conectado, 1 conectado, 2 selecionado, 3 selecionado e gerador ligado" />
+      <VarDeclaration ID="BEDED4165A410119" Name="stsVelocidade" Type="REAL" Comment="Velocidade real (%); partida direta: 0 ou 100" />
+      <VarDeclaration ID="AF6A84AD63E45085" Name="stsVelocidadeReferencia" Type="REAL" Comment="Referencia de velocidade em uso (%)" />
+      <VarDeclaration ID="79F308EF21821B91" Name="stsRemoto" Type="BOOL" Comment="Chave em remoto" />
+      <VarDeclaration ID="A3458504BF6DF144" Name="stsLocal" Type="BOOL" Comment="Chave em local" />
+      <VarDeclaration ID="9558D049DB2CB76C" Name="stsManutencao" Type="BOOL" Comment="Chave na posicao 0" />
+      <VarDeclaration ID="C042A03D7A6369A4" Name="stsAutomatico" Type="BOOL" Comment="Modo automatico" />
+      <VarDeclaration ID="608D1BE3AF5D2E15" Name="stsCmdManual" Type="BOOL" Comment="Comando manual em vigor" />
+      <VarDeclaration ID="7A11796B672969B4" Name="stsAlarme" Type="BOOL" Comment="Falha memorizada ou falha de comunicacao" />
+      <VarDeclaration ID="7A1632E7C1C3C53A" Name="stsFalhaComunicacao" Type="BOOL" Comment="Falha de comunicacao" />
+      <VarDeclaration ID="F8277369617C4FEC" Name="stsProtecaoTermica" Type="BOOL" Comment="Termica memorizada" />
+      <VarDeclaration ID="24D167508AB5B3BF" Name="stsFalhaInversor" Type="BOOL" Comment="Falha do acionamento memorizada" />
+      <VarDeclaration ID="F939957499D9DE01" Name="stsFalhaPartida" Type="BOOL" Comment="Nao confirmou partida no tempo" />
+      <VarDeclaration ID="8DBC1E391953B77A" Name="stsFalhaParada" Type="BOOL" Comment="Nao confirmou parada no tempo" />
+      <VarDeclaration ID="47CFEB602576FDE6" Name="stsEmergencia" Type="BOOL" Comment="Emergencia memorizada" />
+      <VarDeclaration ID="524B369F0AC1FCF0" Name="stsBloqueado" Type="BOOL" Comment="Intertravamento ativo no modo atual" />
+      <VarDeclaration ID="85F7CA319643FCE9" Name="stsBloqueioGerador" Type="BOOL" Comment="Bloqueado pelo gerador" />
+      <VarDeclaration ID="F6C8BE93FC698E3B" Name="stsInversor" Type="BOOL" Comment="Copia de cfgInversor (IHM)" />
+      <VarDeclaration ID="B328ACD14E28750E" Name="stsUsaTermica" Type="BOOL" Comment="Copia de cfgUsaTermica (IHM)" />
+      <VarDeclaration ID="E8C96E839FCF2B87" Name="stsUsaFalhaComunicacao" Type="BOOL" Comment="Copia de cfgUsaFalhaComunicacao (IHM)" />
+      <VarDeclaration ID="6F39EF83A6397DAE" Name="stsHorimetroHora" Type="UDINT" Comment="Horimetro (h)" />
+      <VarDeclaration ID="35334824466D36D9" Name="stsHorimetroMinuto" Type="UINT" Comment="Horimetro (min, 0-59)" />
+      <VarDeclaration ID="750C03D18499F820" Name="stsHorimetroSegundo" Type="UINT" Comment="Horimetro (s, 0-59)" />
+      <VarDeclaration ID="CA7BD048A830149F" Name="stsNumeroPartidas" Type="UDINT" Comment="Numero de partidas" />
+      <VarDeclaration ID="D50BA6FDF5BB251B" Name="stsHorimetro" Type="TIME" Comment="Tempo de operacao (IActStatus.FbHorimetro)" />
+      <VarDeclaration ID="A2096DD8A524EC3D" Name="stsPv" Type="INT" Comment="Estado para o devMntCalc (0 parado, 1 ligado)" />
+      <VarDeclaration ID="689EF5D37ACCCB88" Name="TimeOut" Type="TIME" Comment="Tempo de supervisao enviado ao E_DELAY" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="a4a91ed6-6bd7-4126-aab0-ce18da430cab">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="algMotor" />
+    <InternalVars>
+      <VarDeclaration ID="AB1F3DEE6D20C160" Name="initDone" Type="BOOL" Comment="Bloco inicializado" />
+      <VarDeclaration ID="234EBDD93A406C22" Name="initPass" Type="BOOL" Comment="Primeira execucao apos a inicializacao: envia tudo" />
+      <VarDeclaration ID="FB75C6A1D9D16D4D" Name="fbRecebido" Type="BOOL" Comment="Ja recebeu a primeira leitura de campo" />
+      <VarDeclaration ID="1CD12EDB5B70D2F0" Name="bAutomatico" Type="BOOL" Comment="Modo automatico (nao persistente)" />
+      <VarDeclaration ID="7862320FEBBDC95B" Name="bCmdManual" Type="BOOL" Comment="Comando manual memorizado (nao persistente)" />
+      <VarDeclaration ID="93DFC4B545CEC155" Name="bComOk" Type="BOOL" Comment="Comunicacao OK e campo ja lido" />
+      <VarDeclaration ID="5C6FF96A7148E00E" Name="bRemoto" Type="BOOL" />
+      <VarDeclaration ID="BCAD12F729BCF0F3" Name="bLocal" Type="BOOL" />
+      <VarDeclaration ID="09B4C4EC6CA13DE7" Name="bLigado" Type="BOOL" />
+      <VarDeclaration ID="02103DEDFAEE8B1E" Name="bManutencao" Type="BOOL" />
+      <VarDeclaration ID="825604F95FD8D9CC" Name="bTermicaAtiva" Type="BOOL" Comment="Termica atuada agora" />
+      <VarDeclaration ID="ED14C82B6EC04A9B" Name="bFalhaInvAtiva" Type="BOOL" Comment="Falha do acionamento presente agora" />
+      <VarDeclaration ID="0C769DC08D7CB6A7" Name="bEmergencia" Type="BOOL" Comment="Memoria de emergencia" />
+      <VarDeclaration ID="CCF19E0E29A26BD2" Name="bTermica" Type="BOOL" Comment="Memoria de termica" />
+      <VarDeclaration ID="B58E1384C80156A4" Name="bFalhaInversor" Type="BOOL" Comment="Memoria de falha do acionamento" />
+      <VarDeclaration ID="CCD313BB743253AB" Name="bFalhaPartida" Type="BOOL" Comment="Memoria de falha de partida" />
+      <VarDeclaration ID="6CF376365F217533" Name="bFalhaParada" Type="BOOL" Comment="Memoria de falha de parada" />
+      <VarDeclaration ID="0A27401B36517303" Name="bFalha" Type="BOOL" Comment="Alguma memoria de falha" />
+      <VarDeclaration ID="7CF3BF19F034616B" Name="bReset" Type="BOOL" Comment="Pedido de reset nesta execucao" />
+      <VarDeclaration ID="76BDD3B03672C663" Name="bResetPendente" Type="BOOL" Comment="Pulso de reset em andamento" />
+      <VarDeclaration ID="CDBFF6054439CB8C" Name="bBloqueioGerador" Type="BOOL" />
+      <VarDeclaration ID="24E8BACE5C846199" Name="bPermissivo" Type="BOOL" Comment="Pode operar (remoto, sem falha, sem bloqueio geral)" />
+      <VarDeclaration ID="2A417F035B0FA9A6" Name="iMon" Type="INT" Comment="Supervisao: 0 nenhuma, 1 esperando ligar, 2 esperando desligar" />
+      <VarDeclaration ID="A84B7CB774B2DED0" Name="oldMon" Type="INT" Comment="Supervisao em andamento no E_DELAY" />
+      <VarDeclaration ID="307F51C3A4E4166C" Name="rRef" Type="REAL" Comment="Referencia em %" />
+      <VarDeclaration ID="D06F0999E75C2A00" Name="rFaixa" Type="REAL" Comment="cfgSaidaMax - cfgSaidaMin" />
+      <VarDeclaration ID="09D6B46330DAAA3E" Name="wSts" Type="WORD" Comment="Status da IHM em bits (deteccao de mudanca)" />
+      <VarDeclaration ID="322918943B00799B" Name="oldSts" Type="WORD" InitialValue="16#FFFF" />
+      <VarDeclaration ID="3E5987F733B382AA" Name="oldAcm" Type="BOOL" />
+      <VarDeclaration ID="FD5F2FE24B801222" Name="oldReset" Type="BOOL" />
+      <VarDeclaration ID="67308930FF631642" Name="oldStp" Type="REAL" InitialValue="-1.0" />
+      <VarDeclaration ID="245CF958A5066B55" Name="oldStsProc" Type="WORD" InitialValue="16#FFFF" />
+      <VarDeclaration ID="BAE571E9006369FB" Name="wStsProc" Type="WORD" Comment="Status do processo em bits" />
+      <VarDeclaration ID="71FD8D320B858AD9" Name="oldAnim" Type="INT" InitialValue="-1" />
+      <VarDeclaration ID="F979A9A3109BF34D" Name="oldAnimGer" Type="INT" InitialValue="-1" />
+      <VarDeclaration ID="87FA1DDCB4EFFD73" Name="oldVel" Type="REAL" InitialValue="-1.0" />
+      <VarDeclaration ID="006031E05D69FDCC" Name="oldRef" Type="REAL" InitialValue="-1.0" />
+      <VarDeclaration ID="2676357E2CDA9F76" Name="oldPv" Type="INT" InitialValue="-1" />
+      <VarDeclaration ID="FF1B18C98FCB3E46" Name="oldHorimetro" Type="TIME" />
+      <VarDeclaration ID="8B5FE8D6959822B3" Name="oldMnt" Type="UDINT" InitialValue="16#FFFFFFFF" />
+      <VarDeclaration ID="0DD713B7B6AAA0F5" Name="oldPartidas" Type="UDINT" InitialValue="16#FFFFFFFF" />
+      <VarDeclaration ID="28A7D4F7873195F3" Name="bPersLido" Type="BOOL" Comment="Horimetro ja restaurado do PERSISTENCE" />
+      <VarDeclaration ID="A063BE2E18C7FEF0" Name="bTick" Type="BOOL" Comment="E_CYCLE do horimetro deve rodar" />
+      <VarDeclaration ID="5C1054651E3B97A6" Name="oldTick" Type="BOOL" />
+      <VarDeclaration ID="A2248760A5C0102C" Name="uMinTotal" Type="UDINT" Comment="Horimetro em minutos (deteccao de mudanca)" />
+    </InternalVars>
+    <ECC>
+      <ECState Name="START" Comment="Estado inicial" x="1500" y="640" />
+      <ECState Name="EXEC" Comment="Executa a logica; o algoritmo decide quais eventos saem" x="1500" y="1100">
+        <ECAction Algorithm="algMotor" Output="INITO" />
+        <ECAction Output="CNF_OUT" />
+        <ECAction Output="CNF_SPEED_OUT" />
+        <ECAction Output="CNF" />
+        <ECAction Output="CNF_SPEED" />
+        <ECAction Output="CNF_HMI" />
+        <ECAction Output="CNF_PV" />
+        <ECAction Output="CNF_HORIMETRO" />
+        <ECAction Output="MON_RESET" />
+        <ECAction Output="MON_T" />
+        <ECAction Output="RST_T" />
+        <ECAction Output="OP_STOP" />
+        <ECAction Output="OP_START" />
+        <ECAction Output="CNF_PERS" />
+      </ECState>
+      <ECTransition Source="START" Destination="EXEC" Condition="INIT OR REQ_PARA OR REQ_CMD OR REQ_ILCK OR REQ_FB OR REQ_SPEED_FB OR REQ_MODE OR REQ_MANUAL OR REQ_RESET OR REQ_RESET_PROC OR REQ_MNT OR REQ_PERS OR TICK OR REQ_RESET_HOR OR MON_MAX OR RST_END" x="1580" y="860" />
+      <ECTransition Source="EXEC" Destination="START" Condition="1" x="1420" y="860" />
+    </ECC>
+    <Algorithm Name="algMotor" Comment="Logica completa do motor (um unico algoritmo)">
+      <ST><![CDATA[(* =====================================================================
+   basicMotorGenerico v1.1 - logica do CAT Motor_Generico (HidrycoLib)
+   Padrao das bibliotecas Schneider (SE.App2CommonProcess):
+   - eventos de saida desligados no inicio e ligados so na mudanca (variaveis oldX);
+   - supervisao de partida/parada por E_DELAY externo (MON_T/MON_RESET/MON_MAX);
+   - horimetro e partidas calculados e persistidos pelo devMntCalc.
+   Regras de operacao (definidas pelo usuario):
+   - emergencia, termica, falha do acionamento (NF), falha de partida e de
+     parada ficam memorizadas ate o reset (IHM ou processo);
+   - emergencia so retira o comando;
+   - automatico -> manual mantem o motor como estava;
+   - em manual o motor so liga com comando do operador: qualquer perda de
+     permissivo cancela o comando manual (nao religa sozinho);
+   - falha de comunicacao retira o comando, sem memorizar;
+   - chave nem em local nem em remoto = manutencao.
+   ===================================================================== *)
+
+(* ---- 0. Eventos de saida: so sai o que for ligado abaixo ---- *)
+INITO         := FALSE;
+CNF_OUT       := FALSE;
+CNF_SPEED_OUT := FALSE;
+CNF           := FALSE;
+CNF_SPEED     := FALSE;
+CNF_HMI       := FALSE;
+CNF_PV        := FALSE;
+CNF_HORIMETRO := FALSE;
+MON_RESET     := FALSE;
+MON_T         := FALSE;
+RST_T         := FALSE;
+OP_STOP       := FALSE;
+OP_START      := FALSE;
+CNF_PERS      := FALSE;
+bReset        := FALSE;
+
+IF REQ_FB THEN
+    fbRecebido := TRUE;                    (* campo valido a partir da 1a leitura *)
+END_IF;
+
+(* ---- 1. Inicializacao: nada e calculado antes do INIT ---- *)
+IF INIT THEN
+    initDone := TRUE;
+    initPass := TRUE;
+    INITO    := TRUE;
+END_IF;
+IF NOT initDone THEN
+    RETURN;                                (* os dados recebidos ficam guardados *)
+END_IF;
+
+(* ---- 2. Sinais de campo (so atualizados com comunicacao OK) ---- *)
+bComOk := fbRecebido AND NOT (cfgUsaFalhaComunicacao AND fldFalhaComunicacao);
+IF bComOk THEN
+    bRemoto := fldRemoto;
+    bLocal  := fldLocal;
+    bLigado := fldLigado;
+    bTermicaAtiva  := cfgUsaTermica AND (fldProtecaoTermica XOR cfgTermicaNF);
+    bFalhaInvAtiva := NOT fldSemFalha;     (* falha NF: FALSE no campo = falha *)
+ELSE
+    bRemoto := FALSE;                      (* sem comunicacao: sai de remoto *)
+    bLocal  := FALSE;
+    bLigado := FALSE;                      (* e considera parado; memorias mantidas *)
+END_IF;
+bManutencao := bComOk AND NOT fldLocal AND NOT fldRemoto;
+
+(* ---- 3. Falhas memorizadas ---- *)
+IF inEmergencia THEN
+    bEmergencia := TRUE;
+END_IF;
+IF bComOk AND bTermicaAtiva THEN
+    bTermica := TRUE;
+END_IF;
+IF bComOk AND bFalhaInvAtiva THEN
+    bFalhaInversor := TRUE;
+END_IF;
+(* tempo de supervisao esgotado: vale o tipo de espera que iniciou o E_DELAY *)
+IF MON_MAX THEN
+    IF oldMon = 1 THEN
+        bFalhaPartida := TRUE;
+    ELSIF oldMon = 2 THEN
+        bFalhaParada := TRUE;
+    END_IF;
+END_IF;
+
+(* ---- 4. Reset: libera so o que ja normalizou e pulsa o reset no campo ---- *)
+bReset := (REQ_RESET AND hmiResetFalha) OR (REQ_RESET_PROC AND cmdResetFalhas);
+IF bReset THEN
+    IF NOT inEmergencia THEN
+        bEmergencia := FALSE;
+    END_IF;
+    IF NOT bTermicaAtiva THEN
+        bTermica := FALSE;
+    END_IF;
+    IF NOT bFalhaInvAtiva THEN
+        bFalhaInversor := FALSE;
+    END_IF;
+    bFalhaPartida  := FALSE;
+    bFalhaParada   := FALSE;
+    bResetPendente := TRUE;
+    RST_T          := TRUE;                (* pulso de reset para o campo *)
+END_IF;
+(* falha do acionamento que some durante o pulso de reset tambem e liberada *)
+IF bResetPendente AND bComOk AND NOT bFalhaInvAtiva THEN
+    bFalhaInversor := FALSE;
+END_IF;
+IF RST_END THEN
+    bResetPendente := FALSE;
+END_IF;
+acmReset := bResetPendente;
+
+(* ---- 5. Modo e comando manual (IHM) ---- *)
+IF REQ_MODE THEN
+    IF bAutomatico AND NOT hmiAutomatico THEN
+        bCmdManual := acmLigar;            (* automatico -> manual: mantem como estava *)
+    END_IF;
+    bAutomatico := hmiAutomatico;
+END_IF;
+IF REQ_MANUAL THEN
+    bCmdManual := hmiCmdManual;
+END_IF;
+
+(* ---- 6. Permissivos ---- *)
+bFalha := bEmergencia OR bTermica OR bFalhaInversor OR bFalhaPartida OR bFalhaParada;
+(* gerador: com a planta no gerador so opera o que esta conectado E selecionado *)
+bBloqueioGerador := inGerador AND (NOT geradorConectado OR NOT geradorHabilita);
+bPermissivo := bRemoto AND bComOk AND NOT bFalha AND NOT inEmergencia
+               AND NOT bBloqueioGerador AND NOT ilkGeral;
+IF NOT bPermissivo OR ilkManual THEN
+    bCmdManual := FALSE;                   (* manual nunca religa sozinho *)
+END_IF;
+
+(* ---- 7. Comando ---- *)
+acmLigar := bPermissivo AND
+            ((bAutomatico AND cmdLigarAutomatico AND NOT ilkAutomatico) OR
+             (NOT bAutomatico AND bCmdManual AND NOT ilkManual));
+
+(* ---- 8. Supervisao de partida e parada (E_DELAY externo) ---- *)
+IF bRemoto AND bComOk AND acmLigar AND NOT bLigado THEN
+    iMon := 1;                             (* esperando confirmar ligado *)
+ELSIF bRemoto AND bComOk AND NOT acmLigar AND bLigado THEN
+    iMon := 2;                             (* esperando confirmar parado *)
+ELSE
+    iMon := 0;
+END_IF;
+IF iMon <> oldMon THEN
+    MON_RESET := oldMon <> 0;              (* cancela a espera anterior *)
+    IF iMon = 1 AND stpTempoFalhaLigamento > 0 THEN
+        TimeOut := TO_TIME(UINT_TO_DINT(stpTempoFalhaLigamento) * 1000);
+        MON_T := TRUE;
+    ELSIF iMon = 2 AND stpTempoFalhaDesligamento > 0 THEN
+        TimeOut := TO_TIME(UINT_TO_DINT(stpTempoFalhaDesligamento) * 1000);
+        MON_T := TRUE;
+    END_IF;
+    oldMon := iMon;
+END_IF;
+
+(* ---- 9. Velocidade: limite em % e escala linear para o campo (como analogOutBasic) ---- *)
+IF bAutomatico THEN
+    rRef := stpVelocidadeAutomatico;
+ELSE
+    rRef := stpVelocidadeManual;
+END_IF;
+IF cfgVelocidadeMax > cfgVelocidadeMin THEN
+    rRef := LIMIT(cfgVelocidadeMin, rRef, cfgVelocidadeMax);
+ELSE
+    rRef := LIMIT(0.0, rRef, 100.0);
+END_IF;
+IF NOT cfgInversor THEN
+    rRef := 0.0;                           (* partida direta: sem referencia *)
+END_IF;
+rFaixa := cfgSaidaMax - cfgSaidaMin;
+IF rFaixa = 0.0 THEN
+    rFaixa := 100.0;                       (* escala invalida: trata como % *)
+END_IF;
+stpVelocidadeCampo := cfgSaidaMin + rRef * rFaixa / 100.0;
+IF cfgInversor THEN
+    stsVelocidade := (fldVelocidade - cfgSaidaMin) * 100.0 / rFaixa;
+ELSIF bLigado THEN
+    stsVelocidade := 100.0;
+ELSE
+    stsVelocidade := 0.0;
+END_IF;
+
+(* ---- 10. Horimetro (resolucao de 1 s, persistido) e partidas (devMntCalc) ---- *)
+(* sem comunicacao o estado fica congelado: evita contar partida falsa na volta *)
+IF bComOk THEN
+    IF bLigado THEN
+        stsPv := 1;
+    ELSE
+        stsPv := 0;
+    END_IF;
+END_IF;
+IF REQ_PERS THEN
+    stsHorimetroSegundo := perSegundo;     (* restaura o valor gravado *)
+    stsHorimetroMinuto  := perMinuto;
+    stsHorimetroHora    := perHora;
+    bPersLido := TRUE;
+END_IF;
+IF REQ_RESET_HOR AND hmiResetHorimetro THEN
+    stsHorimetroSegundo := 0;
+    stsHorimetroMinuto  := 0;
+    stsHorimetroHora    := 0;
+    CNF_PERS := TRUE;
+END_IF;
+IF TICK AND bTick THEN
+    stsHorimetroSegundo := stsHorimetroSegundo + 1;
+    IF stsHorimetroSegundo >= 60 THEN
+        stsHorimetroSegundo := 0;
+        stsHorimetroMinuto  := stsHorimetroMinuto + 1;
+        CNF_PERS := TRUE;                  (* grava a cada minuto *)
+        IF stsHorimetroMinuto >= 60 THEN
+            stsHorimetroMinuto := 0;
+            stsHorimetroHora   := stsHorimetroHora + 1;
+        END_IF;
+    END_IF;
+END_IF;
+(* E_CYCLE de 1 s so com o motor ligado; na parada grava os segundos acumulados *)
+bTick := bPersLido AND (stsPv = 1);
+IF bTick <> oldTick THEN
+    IF bTick THEN
+        OP_START := TRUE;
+    ELSE
+        OP_STOP  := TRUE;
+        CNF_PERS := bPersLido;
+    END_IF;
+    oldTick := bTick;
+END_IF;
+uMinTotal := stsHorimetroHora * 60 + UINT_TO_UDINT(stsHorimetroMinuto);
+stsNumeroPartidas := mntPartidas;
+stsHorimetro := TO_TIME(UDINT_TO_LINT(stsHorimetroHora) * 3600000 + UINT_TO_LINT(stsHorimetroMinuto) * 60000 + UINT_TO_LINT(stsHorimetroSegundo) * 1000);
+
+(* ---- 11. Status ---- *)
+stsRemoto := bRemoto;
+stsLocal := bLocal;
+stsManutencao := bManutencao;
+stsLigado := bLigado;
+stsParado := NOT bLigado;
+stsAutomatico := bAutomatico;
+stsCmdManual := bCmdManual;
+stsFalhaComunicacao := NOT bComOk;
+stsProtecaoTermica := bTermica;
+stsFalhaInversor := bFalhaInversor;
+stsFalhaPartida := bFalhaPartida;
+stsFalhaParada := bFalhaParada;
+stsEmergencia := bEmergencia;
+stsFalha := bFalha;
+stsAlarme := bFalha OR NOT bComOk;
+stsBloqueioGerador := bBloqueioGerador;
+stsBloqueado := ilkGeral OR (bAutomatico AND ilkAutomatico) OR (NOT bAutomatico AND ilkManual);
+stsDisponivelAutomatico := bAutomatico AND bPermissivo AND NOT ilkAutomatico;
+stsVelocidadeReferencia := rRef;
+(* configuracao para a IHM: os faceplates escondem o que nao se aplica ao tipo de motor *)
+stsInversor := cfgInversor;
+stsUsaTermica := cfgUsaTermica;
+stsUsaFalhaComunicacao := cfgUsaFalhaComunicacao;
+
+IF bManutencao THEN
+    stsAnimacao := 3;
+ELSIF bFalha THEN
+    stsAnimacao := 2;
+ELSIF bLigado THEN
+    stsAnimacao := 1;
+ELSE
+    stsAnimacao := 0;
+END_IF;
+
+IF NOT geradorConectado THEN
+    stsAnimacaoGerador := 0;
+ELSIF NOT geradorHabilita THEN
+    stsAnimacaoGerador := 1;
+ELSIF NOT inGerador THEN
+    stsAnimacaoGerador := 2;
+ELSE
+    stsAnimacaoGerador := 3;
+END_IF;
+
+(* ---- 12. Emissao so na mudanca ---- *)
+CNF_OUT := initPass OR (acmLigar <> oldAcm) OR (acmReset <> oldReset);
+oldAcm := acmLigar;
+oldReset := acmReset;
+
+CNF_SPEED_OUT := initPass OR (stpVelocidadeCampo <> oldStp);
+oldStp := stpVelocidadeCampo;
+
+wStsProc := 16#0;
+IF stsDisponivelAutomatico THEN wStsProc := wStsProc OR 16#0001; END_IF;
+IF stsLigado THEN wStsProc := wStsProc OR 16#0002; END_IF;
+IF stsFalha THEN wStsProc := wStsProc OR 16#0004; END_IF;
+IF stsRemoto THEN wStsProc := wStsProc OR 16#0008; END_IF;
+IF stsAutomatico THEN wStsProc := wStsProc OR 16#0010; END_IF;
+CNF := initPass OR (wStsProc <> oldStsProc) OR (stsAnimacao <> oldAnim);
+oldStsProc := wStsProc;
+
+CNF_SPEED := initPass OR CNF OR (ABS(stsVelocidade - oldVel) >= 0.1);
+IF CNF_SPEED THEN
+    oldVel := stsVelocidade;
+END_IF;
+
+wSts := 16#0;
+IF stsRemoto THEN wSts := wSts OR 16#0001; END_IF;
+IF stsLocal THEN wSts := wSts OR 16#0002; END_IF;
+IF stsManutencao THEN wSts := wSts OR 16#0004; END_IF;
+IF stsLigado THEN wSts := wSts OR 16#0008; END_IF;
+IF stsAutomatico THEN wSts := wSts OR 16#0010; END_IF;
+IF stsCmdManual THEN wSts := wSts OR 16#0020; END_IF;
+IF stsAlarme THEN wSts := wSts OR 16#0040; END_IF;
+IF stsFalhaComunicacao THEN wSts := wSts OR 16#0080; END_IF;
+IF stsProtecaoTermica THEN wSts := wSts OR 16#0100; END_IF;
+IF stsFalhaInversor THEN wSts := wSts OR 16#0200; END_IF;
+IF stsFalhaPartida THEN wSts := wSts OR 16#0400; END_IF;
+IF stsFalhaParada THEN wSts := wSts OR 16#0800; END_IF;
+IF stsEmergencia THEN wSts := wSts OR 16#1000; END_IF;
+IF stsBloqueado THEN wSts := wSts OR 16#2000; END_IF;
+IF stsBloqueioGerador THEN wSts := wSts OR 16#4000; END_IF;
+IF stsDisponivelAutomatico THEN wSts := wSts OR 16#8000; END_IF;
+CNF_HMI := initPass OR (wSts <> oldSts) OR (stsAnimacao <> oldAnim) OR (stsAnimacaoGerador <> oldAnimGer)
+           OR CNF_SPEED OR (rRef <> oldRef) OR (uMinTotal <> oldMnt) OR (mntPartidas <> oldPartidas);
+oldSts := wSts;
+oldAnim := stsAnimacao;
+oldAnimGer := stsAnimacaoGerador;
+oldRef := rRef;
+
+CNF_PV := fbRecebido AND (stsPv <> oldPv);  (* so depois da 1a leitura do campo *)
+oldPv := stsPv;
+
+CNF_HORIMETRO := initPass OR (uMinTotal <> oldMnt);
+oldMnt := uMinTotal;
+oldPartidas := mntPartidas;
+
+initPass := FALSE;
+]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

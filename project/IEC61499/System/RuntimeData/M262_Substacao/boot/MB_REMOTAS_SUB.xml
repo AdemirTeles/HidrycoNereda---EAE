@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<busmaster xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="MB_REMOTAS_SUB" busId="MB_REMOTAS_SUB" protocol="modbus" busCycle="T#80ms" enableSymlinkOC="false" busTolerance="10" busActionMissedCycle="1" alignWithResPriority="false" ReconnectAfterTimeout="Enable">
+  <connectinfo mastertype="master" transportprotocol="tcp" interframedelay="10" />
+  <logging enable="false" filename="modbus.log" />
+  <buscoupler name="SUB_R1_REMOTA1" diagnostics="disabled">
+    <connectinfo transportprotocol="tcp" stationid="255" responsetimeout="500" fallbackValue="RESET">
+      <tcp ipaddress="10.26.208.192" port="502" />
+      <HA secondaryheartbeat="Enabled-ReadHoldingRegister" heartbeataddress="3001" />
+    </connectinfo>
+    <busdevice name="SUB_R1_A3_DI32K">
+      <parameter addresstype="register" length="2" addressautocalculation="disable" address="3001" datatype="inonly" ioevent="cyclic" />
+    </busdevice>
+    <busdevice name="SUB_R1_A4_DI32K">
+      <parameter addresstype="register" length="2" addressautocalculation="disable" address="3003" datatype="inonly" ioevent="cyclic" />
+    </busdevice>
+    <busdevice name="SUB_R1_A5_DI32K">
+      <parameter addresstype="register" length="2" addressautocalculation="disable" address="3005" datatype="inonly" ioevent="cyclic" />
+    </busdevice>
+    <busdevice name="SUB_R1_A6_DI32K">
+      <parameter addresstype="register" length="2" addressautocalculation="disable" address="3007" datatype="inonly" ioevent="cyclic" />
+    </busdevice>
+    <busdevice name="SUB_R1_A8_DQ32K_W0">
+      <parameter addresstype="register" length="1" addressautocalculation="disable" address="3501" datatype="output" ioevent="cyclic" />
+    </busdevice>
+  </buscoupler>
+  <buscoupler name="SUB_R2_REMOTA2" diagnostics="disabled">
+    <connectinfo transportprotocol="tcp" stationid="255" responsetimeout="500" fallbackValue="RESET">
+      <tcp ipaddress="10.26.208.193" port="502" />
+      <HA secondaryheartbeat="Enabled-ReadHoldingRegister" heartbeataddress="3001" />
+    </connectinfo>
+    <busdevice name="SUB_R2_A12_AI8_VAL">
+      <parameter addresstype="register" length="8" addressautocalculation="disable" address="3001" datatype="inonly" ioevent="cyclic" />
+    </busdevice>
+    <busdevice name="SUB_R2_A12_AI8_STS">
+      <parameter addresstype="register" length="8" addressautocalculation="disable" address="3009" datatype="inonly" ioevent="cyclic" />
+    </busdevice>
+  </buscoupler>
+  <buscoupler name="NER_R2_FT02" diagnostics="disabled">
+    <connectinfo transportprotocol="tcp" stationid="255" responsetimeout="500" fallbackValue="RESET">
+      <tcp ipaddress="10.26.208.161" port="502" />
+      <HA secondaryheartbeat="Enabled-ReadHoldingRegister" heartbeataddress="3017" />
+    </connectinfo>
+    <busdevice name="NER_R2_A12_AI8_VAL">
+      <parameter addresstype="register" length="8" addressautocalculation="disable" address="3017" datatype="inonly" ioevent="cyclic" />
+    </busdevice>
+  </buscoupler>
+</busmaster>

@@ -1,0 +1,326 @@
+/*
+ * Created by EcoStruxure Automation Expert.
+ * User:  
+ * Date: 1/22/2026
+ * Time: 5:25 PM
+ * 
+ */
+using System;
+using System.ComponentModel;
+using System.Collections;
+using NxtControl.GuiFramework;
+
+namespace Hidryco.HidrycoLib.Symbols.Motor_Generico
+{
+	/// <summary>
+	/// Summary description for sDefault.
+	/// </summary>
+	partial class sSoprador
+	{
+
+		#region Component Designer generated code
+		/// <summary>
+		/// Required method for Designer support - do not modify
+		/// the contents of this method with the code editor.
+		/// </summary>
+		private void InitializeComponent()
+		{
+			this.abrirFaceplate = new NxtControl.GuiFramework.DrawnButton();
+			NxtControl.GuiFramework.PropertyDictionary pdVelocidade = new NxtControl.GuiFramework.PropertyDictionary();
+			this.velocidade = new System.HMI.Symbols.Base.Label<float>();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary2 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary3 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary1 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary5 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary6 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary4 = new NxtControl.GuiFramework.PropertyDictionary();
+			this.cfgInversor = new System.HMI.Symbols.Base.Execute<bool>();
+			this.stsFalhaComunicacao = new System.HMI.Symbols.Base.Execute<bool>();
+			this.stsAnimacao = new System.HMI.Symbols.Base.Execute<short>();
+			this.stsAnimacaoGerador = new System.HMI.Symbols.Base.Execute<short>();
+			this.InstanceName = new NxtControl.GuiFramework.AliasDisplayLabel();
+			this.falha_comunicacao1 = new Hidryco.HidrycoLib.Graphics.falha_comunicacao();
+			this.stsProtecaoTermica = new System.HMI.Symbols.Base.Execute<bool>();
+			this.xETerm = new System.HMI.Symbols.Base.Execute<byte>();
+			this.xECom = new System.HMI.Symbols.Base.Execute<byte>();
+			this.rectangle1 = new NxtControl.GuiFramework.Rectangle();
+			this.stsRemoto = new System.HMI.Symbols.Base.FreeText<bool>();
+			this.fbkStsAutomatico = new System.HMI.Symbols.Base.FreeText<bool>();
+			this.line2 = new NxtControl.GuiFramework.Line();
+			this.unidade_Portecao_Termica1 = new Hidryco.HidrycoLib.Graphics.Unidade_Portecao_Termica();
+			this.energizado_por_Gerador1 = new Hidryco.HidrycoLib.Graphics.Energizado_por_Gerador();
+			this.soprador1 = new Hidryco.HidrycoLib.Graphics.Soprador();
+			// 
+			// stsFalhaComunicacao
+			// 
+			this.stsFalhaComunicacao.BeginInit();
+			this.stsFalhaComunicacao.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, double.NaN, double.NaN);
+			this.stsFalhaComunicacao.IsOnlyInput = true;
+			this.stsFalhaComunicacao.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
+			this.stsFalhaComunicacao.Name = "stsFalhaComunicacao";
+			this.stsFalhaComunicacao.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
+			this.stsFalhaComunicacao.TagName = "STS_FALHA_COMUNICACAO";
+			this.stsFalhaComunicacao.Value = false;
+			this.stsFalhaComunicacao.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.StsFalhaComunicacaoValueChanged);
+			this.stsFalhaComunicacao.EndInit();
+			// 
+			// stsAnimacao
+			// 
+			this.stsAnimacao.BeginInit();
+			this.stsAnimacao.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, double.NaN, double.NaN);
+			this.stsAnimacao.IsOnlyInput = true;
+			this.stsAnimacao.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
+			this.stsAnimacao.Name = "stsAnimacao";
+			this.stsAnimacao.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
+			this.stsAnimacao.TagName = "STS_ANIMACAO";
+			this.stsAnimacao.Value = ((short)(0));
+			this.stsAnimacao.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.StsAnimacaoValueChanged);
+			this.stsAnimacao.EndInit();
+			// 
+			// stsAnimacaoGerador
+			// 
+			this.stsAnimacaoGerador.BeginInit();
+			this.stsAnimacaoGerador.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, double.NaN, double.NaN);
+			this.stsAnimacaoGerador.IsOnlyInput = true;
+			this.stsAnimacaoGerador.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
+			this.stsAnimacaoGerador.Name = "stsAnimacaoGerador";
+			this.stsAnimacaoGerador.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
+			this.stsAnimacaoGerador.TagName = "STS_ANIMACAO_GERADOR";
+			this.stsAnimacaoGerador.Value = ((short)(0));
+			this.stsAnimacaoGerador.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.StsAnimacaoGeradorValueChanged);
+			this.stsAnimacaoGerador.EndInit();
+			// 
+			// InstanceName
+			// 
+			this.InstanceName.AngleIgnore = true;
+			this.InstanceName.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.InstanceName.Bounds = new NxtControl.Drawing.RectF(((float)(65D)), ((float)(147D)), ((float)(101D)), ((float)(22D)));
+			this.InstanceName.Brush = new NxtControl.Drawing.Brush(true);
+			this.InstanceName.CustomInstanceName = null;
+			this.InstanceName.Font = new NxtControl.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Bold);
+			this.InstanceName.FontScale = true;
+			this.InstanceName.Name = "InstanceName";
+			this.InstanceName.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.InstanceName.Text = "Label";
+			this.InstanceName.TextColor = new NxtControl.Drawing.Color("Hidryco.HidrycoLib.LabelTextColor");
+			// 
+			// falha_comunicacao1
+			// 
+			this.falha_comunicacao1.BeginInit();
+			this.falha_comunicacao1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 46D, 77D);
+			this.falha_comunicacao1.Name = "falha_comunicacao1";
+			this.falha_comunicacao1.EndInit();
+			// 
+			// xETerm
+			// 
+			this.xETerm.BeginInit();
+			this.xETerm.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, double.NaN, double.NaN);
+			this.xETerm.IsOnlyInput = true;
+			this.xETerm.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
+			this.xETerm.Name = "xETerm";
+			this.xETerm.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
+			this.xETerm.TagName = "STS_ALM_TERMICA_EST";
+			this.xETerm.Value = ((byte)(0));
+			this.xETerm.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.ETermValueChanged);
+			this.xETerm.EndInit();
+			// 
+			// xECom
+			// 
+			this.xECom.BeginInit();
+			this.xECom.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, double.NaN, double.NaN);
+			this.xECom.IsOnlyInput = true;
+			this.xECom.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
+			this.xECom.Name = "xECom";
+			this.xECom.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
+			this.xECom.TagName = "STS_ALM_COMUNICACAO_EST";
+			this.xECom.Value = ((byte)(0));
+			this.xECom.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.EComValueChanged);
+			this.xECom.EndInit();
+			// 
+			// stsProtecaoTermica
+			// 
+			this.stsProtecaoTermica.BeginInit();
+			this.stsProtecaoTermica.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, double.NaN, double.NaN);
+			this.stsProtecaoTermica.IsOnlyInput = true;
+			this.stsProtecaoTermica.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
+			this.stsProtecaoTermica.Name = "stsProtecaoTermica";
+			this.stsProtecaoTermica.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
+			this.stsProtecaoTermica.TagName = "STS_PROTECAO_TERMICA";
+			this.stsProtecaoTermica.Value = false;
+			this.stsProtecaoTermica.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.StsProtecaoTermicaValueChanged);
+			this.stsProtecaoTermica.EndInit();
+			// 
+			// rectangle1
+			// 
+			this.rectangle1.Bounds = new NxtControl.Drawing.RectF(((float)(132D)), ((float)(95D)), ((float)(24D)), ((float)(40D)));
+			this.rectangle1.Brush = new NxtControl.Drawing.Brush(true);
+			this.rectangle1.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
+			this.rectangle1.Name = "rectangle1";
+			// 
+			// stsRemoto
+			// 
+			this.stsRemoto.BeginInit();
+			this.stsRemoto.DecimalPlacesCount = ((uint)(2u));
+			this.stsRemoto.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 132D, 96D);
+			this.stsRemoto.Font = new NxtControl.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
+			this.stsRemoto.IsOnlyInput = true;
+			this.stsRemoto.Name = "stsRemoto";
+			propertyDictionary2.Add("Text", "L");
+			propertyDictionary3.Add("Text", "R");
+			this.stsRemoto.Ranges.Clear();
+			this.stsRemoto.Ranges.Add(new NxtControl.GuiFramework.Range<bool>(false, propertyDictionary2));
+			this.stsRemoto.Ranges.Add(new NxtControl.GuiFramework.Range<bool>(true, propertyDictionary3));
+			propertyDictionary1.Add("Text", "false");
+			propertyDictionary1.Add("TextColor", new NxtControl.Drawing.Color("LabelTextColor"));
+			this.stsRemoto.Ranges.DefaultPropertyValues = propertyDictionary1;
+			this.stsRemoto.TagName = "STS_REMOTO";
+			this.stsRemoto.TextAngle = 0F;
+			this.stsRemoto.EndInit();
+			// 
+			// fbkStsAutomatico
+			// 
+			this.fbkStsAutomatico.BeginInit();
+			this.fbkStsAutomatico.DecimalPlacesCount = ((uint)(2u));
+			this.fbkStsAutomatico.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 130D, 116D);
+			this.fbkStsAutomatico.Font = new NxtControl.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
+			this.fbkStsAutomatico.IsOnlyInput = true;
+			this.fbkStsAutomatico.Name = "fbkStsAutomatico";
+			propertyDictionary5.Add("Text", "M");
+			propertyDictionary6.Add("Text", "A");
+			this.fbkStsAutomatico.Ranges.Clear();
+			this.fbkStsAutomatico.Ranges.Add(new NxtControl.GuiFramework.Range<bool>(false, propertyDictionary5));
+			this.fbkStsAutomatico.Ranges.Add(new NxtControl.GuiFramework.Range<bool>(true, propertyDictionary6));
+			propertyDictionary4.Add("Text", "false");
+			propertyDictionary4.Add("TextColor", new NxtControl.Drawing.Color("LabelTextColor"));
+			this.fbkStsAutomatico.Ranges.DefaultPropertyValues = propertyDictionary4;
+			this.fbkStsAutomatico.TagName = "fbkStsAutomatico";
+			this.fbkStsAutomatico.TextAngle = 0F;
+			this.fbkStsAutomatico.EndInit();
+			// 
+			// line2
+			// 
+			this.line2.EndPoint = new NxtControl.Drawing.PointF(156D, 115D);
+			this.line2.Name = "line2";
+			this.line2.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.line2.StartPoint = new NxtControl.Drawing.PointF(132D, 115D);
+			// 
+			// unidade_Portecao_Termica1
+			// 
+			this.unidade_Portecao_Termica1.BeginInit();
+			this.unidade_Portecao_Termica1.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.87431816598835133D, 0D, 0D, 0.83268396760795349D, 47.708560611337248D, 104D);
+			this.unidade_Portecao_Termica1.Name = "unidade_Portecao_Termica1";
+			this.unidade_Portecao_Termica1.EndInit();
+			// 
+			// energizado_por_Gerador1
+			// 
+			this.energizado_por_Gerador1.BeginInit();
+			this.energizado_por_Gerador1.Animacao = 0;
+			this.energizado_por_Gerador1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 46D, 50D);
+			this.energizado_por_Gerador1.Name = "energizado_por_Gerador1";
+			this.energizado_por_Gerador1.EndInit();
+			// 
+			// soprador1
+			// 
+			this.soprador1.BeginInit();
+			this.soprador1.Animacao = 0;
+			this.soprador1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1.351562486379408D, 0D, 0D, 1.351562486379408D, 71D, 74D);
+			this.soprador1.Name = "soprador1";
+			this.soprador1.EndInit();
+			// 
+			// cfgInversor
+			// 
+			this.cfgInversor.BeginInit();
+			this.cfgInversor.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, double.NaN, double.NaN);
+			this.cfgInversor.IsOnlyInput = true;
+			this.cfgInversor.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
+			this.cfgInversor.Name = "cfgInversor";
+			this.cfgInversor.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
+			this.cfgInversor.TagName = "STS_INVERSOR";
+			this.cfgInversor.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.CfgInversorValueChanged);
+			this.cfgInversor.EndInit();
+			// 
+			// velocidade
+			// 
+			this.velocidade.BeginInit();
+			this.velocidade.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.velocidade.DecimalPlacesCount = ((uint)(0u));
+			this.velocidade.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.6733333333333333D, 0D, 0D, 0.9D, 65D, 170D);
+			this.velocidade.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+			this.velocidade.FontScale = false;
+			this.velocidade.IsOnlyInput = true;
+			this.velocidade.IsPrefixSuffixOutside = false;
+			this.velocidade.LeadingZeros = ((uint)(0u));
+			this.velocidade.Name = "velocidade";
+			this.velocidade.NumberBase = NxtControl.GuiFramework.NumberBase.Decimal;
+			pdVelocidade.Add("Text", "${Value}");
+			pdVelocidade.Add("TextColor", new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))));
+			pdVelocidade.Add("Brush", new NxtControl.Drawing.Brush(true));
+			pdVelocidade.Add("Pen", new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("Transparent"), 1F, NxtControl.Drawing.DashStyle.Solid));
+			this.velocidade.Ranges.DefaultPropertyValues = pdVelocidade;
+			this.velocidade.Suffix = " %";
+			this.velocidade.TagName = "STS_VELOCIDADE";
+			this.velocidade.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleCenter;
+			this.velocidade.Visible = false;
+			this.velocidade.EndInit();
+			// 
+			// abrirFaceplate
+			// 
+			this.abrirFaceplate.Bounds = new NxtControl.Drawing.RectF(((float)(42D)), ((float)(46D)), ((float)(128D)), ((float)(151D)));
+			this.abrirFaceplate.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("Transparent"));
+			this.abrirFaceplate.ButtonPushedBrush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("Transparent"));
+			this.abrirFaceplate.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+			this.abrirFaceplate.InnerBorderColor = new NxtControl.Drawing.Color("Transparent");
+			this.abrirFaceplate.Name = "abrirFaceplate";
+			this.abrirFaceplate.OpenFaceplates.Add(new NxtControl.GuiFramework.OpenFaceplate("fpDefault", NxtControl.GuiFramework.MouseButtonType.Click));
+			this.abrirFaceplate.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("Transparent"), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.abrirFaceplate.Radius = 0D;
+			this.abrirFaceplate.Text = "";
+			this.abrirFaceplate.TextColor = new NxtControl.Drawing.Color("Transparent");
+			this.abrirFaceplate.TextColorMouseDown = new NxtControl.Drawing.Color("Transparent");
+			this.abrirFaceplate.Use3DEffect = false;
+			// 
+			// sSoprador
+			// 
+			this.Shapes.AddRange(new System.ComponentModel.IComponent[] {
+			this.velocidade,
+			this.cfgInversor,
+			this.stsFalhaComunicacao,
+			this.stsAnimacao,
+			this.stsAnimacaoGerador,
+			this.InstanceName,
+			this.falha_comunicacao1,
+			this.stsProtecaoTermica,
+			this.xETerm,
+			this.xECom,
+			this.unidade_Portecao_Termica1,
+			this.energizado_por_Gerador1,
+			this.soprador1,
+			this.rectangle1,
+			this.stsRemoto,
+			this.fbkStsAutomatico,
+			this.line2,
+			this.abrirFaceplate});
+			this.SymbolSize = new System.Drawing.Size(209, 200);
+
+		}
+		private NxtControl.GuiFramework.AliasDisplayLabel InstanceName;
+		private System.HMI.Symbols.Base.Execute<bool> stsFalhaComunicacao;
+		private System.HMI.Symbols.Base.Execute<System.Int16> stsAnimacao;
+		private System.HMI.Symbols.Base.Execute<short> stsAnimacaoGerador;
+		private Hidryco.HidrycoLib.Graphics.falha_comunicacao falha_comunicacao1;
+		private System.HMI.Symbols.Base.Execute<bool> stsProtecaoTermica;
+		private NxtControl.GuiFramework.Rectangle rectangle1;
+		private System.HMI.Symbols.Base.FreeText<bool> stsRemoto;
+		private System.HMI.Symbols.Base.FreeText<bool> fbkStsAutomatico;
+		private NxtControl.GuiFramework.Line line2;
+		private Hidryco.HidrycoLib.Graphics.Energizado_por_Gerador energizado_por_Gerador1;
+		private Hidryco.HidrycoLib.Graphics.Unidade_Portecao_Termica unidade_Portecao_Termica1;
+		private Hidryco.HidrycoLib.Graphics.Soprador soprador1;
+		private System.HMI.Symbols.Base.Execute<bool> cfgInversor;
+		private System.HMI.Symbols.Base.Label<float> velocidade;
+		private NxtControl.GuiFramework.DrawnButton abrirFaceplate;
+		private System.HMI.Symbols.Base.Execute<byte> xETerm;
+		private System.HMI.Symbols.Base.Execute<byte> xECom;
+		#endregion
+	}
+}

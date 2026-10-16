@@ -1,0 +1,550 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="024198ab-e6ed-4357-bf39-bdd2a7c5fcc4" Name="basicSensorGenerico" Comment="Logica unica do sensor generico (4-20 mA ou comunicacao)" Namespace="Hidryco.HidrycoLib">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Hidryco" Version="1.2" Author="Hidryco" Date="16/10/2026" Remarks="1.2: falha do sinal tambem pelo status da conexao Modbus (fldConexao INT, 1 = online) com cfgUsaConexao, nos dois modos (4-20 mA lido por remota e comunicacao). 1.1: inibicao de L/LL pelo processo e condicao instantanea de cada limite. 1.0: padrao SE.App2CommonProcess - escala, falha NAMUR confirmada por tempo, alarmes HH/H/L/LL com tempo proprio e memoria ate o reset, supressao em falha" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="A313A1584C9E1BE5" Name="INIT" Comment="Inicializacao">
+        <With Var="cfgComunicacao" />
+        <With Var="cfgNivel" />
+        <With Var="cfgBrutoMin" />
+        <With Var="cfgBrutoMax" />
+        <With Var="cfgFalhaMin" />
+        <With Var="cfgFalhaMax" />
+        <With Var="cfgTempoFalha" />
+        <With Var="cfgUsaConexao" />
+      </Event>
+      <Event ID="60FC42EE781F51CC" Name="REQ_PARA" Comment="Parametros da IHM (persistentes)">
+        <With Var="hmiHabilitaSensor" />
+        <With Var="stpRangeMinimo" />
+        <With Var="stpRangeMaximo" />
+        <With Var="stpAlturaMaxima" />
+        <With Var="hmiHabilitaAlarmeHH" />
+        <With Var="hmiHabilitaAlarmeH" />
+        <With Var="hmiHabilitaAlarmeL" />
+        <With Var="hmiHabilitaAlarmeLL" />
+        <With Var="stpAlarmeHH" />
+        <With Var="stpAlarmeH" />
+        <With Var="stpAlarmeL" />
+        <With Var="stpAlarmeLL" />
+        <With Var="stpTempoAlarmeHH" />
+        <With Var="stpTempoAlarmeH" />
+        <With Var="stpTempoAlarmeL" />
+        <With Var="stpTempoAlarmeLL" />
+      </Event>
+      <Event ID="BB3A40EF748E4AD2" Name="REQ_FB" Comment="Leitura 4-20 mA">
+        <With Var="fldBruto" />
+      </Event>
+      <Event ID="85BF8544E9C17F76" Name="REQ_FB_COM" Comment="Leitura por comunicacao">
+        <With Var="fldValor" />
+        <With Var="fldFalhaSensor" />
+        <With Var="fldFalhaComunicacao" />
+      </Event>
+      <Event ID="BA1EF67945330BA4" Name="REQ_FB_CON" Comment="Status da conexao Modbus (comunicacao)">
+        <With Var="fldConexao" />
+      </Event>
+      <Event ID="2394F0A61CB1494A" Name="REQ_RESET" Comment="Reset pela IHM">
+        <With Var="hmiReset" />
+      </Event>
+      <Event ID="20033B1C8F10344F" Name="REQ_RESET_PROC" Comment="Reset pelo processo">
+        <With Var="cmdResetFalhas" />
+      </Event>
+      <Event ID="C81E4D5CD6D5669B" Name="REQ_RESET_PLUG" Comment="Reset pelo plug ISensorStatus">
+        <With Var="plgReset" />
+      </Event>
+      <Event ID="F6476A371C298363" Name="REQ_INIBE" Comment="Inibicao dos alarmes L e LL pelo processo">
+        <With Var="inibeBaixos" />
+      </Event>
+      <Event ID="79D90CC239980ABE" Name="FALHA_MAX" Comment="Fim do tempo de confirmacao da falha (E_DELAY)" />
+      <Event ID="0507438F316FE05A" Name="HH_MAX" Comment="Fim do tempo do alarme HH (E_DELAY)" />
+      <Event ID="60C0262360B78E5E" Name="H_MAX" Comment="Fim do tempo do alarme H (E_DELAY)" />
+      <Event ID="2ED9A6722EA41B53" Name="L_MAX" Comment="Fim do tempo do alarme L (E_DELAY)" />
+      <Event ID="1B3FD32E01035504" Name="LL_MAX" Comment="Fim do tempo do alarme LL (E_DELAY)" />
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="AFC15B7A52538DC1" Name="INITO" Comment="Inicializacao concluida">
+        <With Var="qiBruto" />
+        <With Var="qiComunicacao" />
+        <With Var="qiConexao" />
+      </Event>
+      <Event ID="AD639990F05475A6" Name="CNF" Comment="Status para o processo (na mudanca)">
+        <With Var="stsValor" />
+        <With Var="stsPorcentagem" />
+        <With Var="stsFalhaSensor" />
+        <With Var="stsFalhaAtiva" />
+        <With Var="stsHabilitado" />
+        <With Var="stsAlarmeHH" />
+        <With Var="stsAlarmeH" />
+        <With Var="stsAlarmeL" />
+        <With Var="stsAlarmeLL" />
+        <With Var="stsAlarme" />
+        <With Var="stsCondicaoHH" />
+        <With Var="stsCondicaoH" />
+        <With Var="stsCondicaoL" />
+        <With Var="stsCondicaoLL" />
+      </Event>
+      <Event ID="FC4E06ABE3EBBDDF" Name="CNF_PV" Comment="Valor para o plug (na mudanca)">
+        <With Var="stsValor" />
+      </Event>
+      <Event ID="ABC9F934A736FB9D" Name="CNF_STATUS" Comment="Alarmes para o plug (na mudanca)">
+        <With Var="stsAlarmeHH" />
+        <With Var="stsAlarmeH" />
+        <With Var="stsAlarmeL" />
+        <With Var="stsAlarmeLL" />
+        <With Var="stsFalhaAtiva" />
+      </Event>
+      <Event ID="4113A4030DCFA861" Name="CNF_HMI" Comment="Status para a IHM (na mudanca)">
+        <With Var="stsValor" />
+        <With Var="stsPorcentagem" />
+        <With Var="stsEstado" />
+        <With Var="stsFalhaSensor" />
+        <With Var="stsFalhaAtiva" />
+        <With Var="stsHabilitado" />
+        <With Var="stsAlarmeHH" />
+        <With Var="stsAlarmeH" />
+        <With Var="stsAlarmeL" />
+        <With Var="stsAlarmeLL" />
+        <With Var="stsAlarme" />
+        <With Var="stsBruto" />
+      </Event>
+      <Event ID="DA3C0D9212A1D794" Name="CNF_ALM" Comment="Alarmes para os ALARM_BIT (na mudanca)">
+        <With Var="almHH" />
+        <With Var="almH" />
+        <With Var="almL" />
+        <With Var="almLL" />
+        <With Var="almFalha" />
+      </Event>
+      <Event ID="8A583D6DDA99E174" Name="FALHA_RESET" Comment="Cancela o tempo de falha (E_DELAY.STOP) - sai antes do FALHA_T" />
+      <Event ID="88B29E7FCEDFD04A" Name="FALHA_T" Comment="Inicia o tempo de falha (E_DELAY.START)">
+        <With Var="TempoFalha" />
+      </Event>
+      <Event ID="AC54F201197F1308" Name="HH_RESET" Comment="Cancela o tempo do alarme HH - sai antes do HH_T" />
+      <Event ID="AD777C25E731B753" Name="HH_T" Comment="Inicia o tempo do alarme HH">
+        <With Var="TempoHH" />
+      </Event>
+      <Event ID="600AE8762D264606" Name="H_RESET" Comment="Cancela o tempo do alarme H - sai antes do H_T" />
+      <Event ID="286E3580B6A4E911" Name="H_T" Comment="Inicia o tempo do alarme H">
+        <With Var="TempoH" />
+      </Event>
+      <Event ID="64E82BD205C26648" Name="L_RESET" Comment="Cancela o tempo do alarme L - sai antes do L_T" />
+      <Event ID="A5C367FB8CC6123F" Name="L_T" Comment="Inicia o tempo do alarme L">
+        <With Var="TempoL" />
+      </Event>
+      <Event ID="F8318F17CCD7636C" Name="LL_RESET" Comment="Cancela o tempo do alarme LL - sai antes do LL_T" />
+      <Event ID="48A9F0D2C448300B" Name="LL_T" Comment="Inicia o tempo do alarme LL">
+        <With Var="TempoLL" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="BDC9951972159B49" Name="cfgComunicacao" Type="BOOL" InitialValue="FALSE" Comment="FALSE = entrada 4-20 mA (stsSensorBruto), TRUE = valor por comunicacao (stsEntrada, ja em unidade de engenharia)" />
+      <VarDeclaration ID="A121066C0B4E396A" Name="cfgNivel" Type="BOOL" InitialValue="FALSE" Comment="TRUE = sensor de nivel: calcula % sobre a altura maxima" />
+      <VarDeclaration ID="08668FFBD0D4C224" Name="cfgBrutoMin" Type="REAL" InitialValue="4000.0" Comment="Valor bruto em 4 mA (TM3: 4000)" />
+      <VarDeclaration ID="5C5752CDF95E2D99" Name="cfgBrutoMax" Type="REAL" InitialValue="20000.0" Comment="Valor bruto em 20 mA (TM3: 20000)" />
+      <VarDeclaration ID="D75E79B6B7019547" Name="cfgFalhaMin" Type="REAL" InitialValue="3600.0" Comment="Abaixo deste bruto = falha (NAMUR NE43: 3,6 mA)" />
+      <VarDeclaration ID="E942EB878618E7C8" Name="cfgFalhaMax" Type="REAL" InitialValue="21000.0" Comment="Acima deste bruto = falha (NAMUR NE43: 21,0 mA)" />
+      <VarDeclaration ID="2D81E0FCE9B8E921" Name="cfgTempoFalha" Type="UINT" InitialValue="5" Comment="Tempo para confirmar a falha do sinal (s)" />
+      <VarDeclaration ID="5A40623945DBD51C" Name="cfgUsaConexao" Type="BOOL" InitialValue="FALSE" Comment="TRUE = sinal em falha tambem quando o status da conexao Modbus (stsConexao, INT) for diferente de 1 (4-20 mA por remota ou comunicacao)" />
+      <VarDeclaration ID="BCFBEA21C064840B" Name="hmiHabilitaSensor" Type="BOOL" Comment="IHM: sensor habilitado" />
+      <VarDeclaration ID="1EF616CE5E6D0F0D" Name="stpRangeMinimo" Type="REAL" Comment="IHM: valor de engenharia em 4 mA" />
+      <VarDeclaration ID="A67F7A68A4947959" Name="stpRangeMaximo" Type="REAL" Comment="IHM: valor de engenharia em 20 mA" />
+      <VarDeclaration ID="40810CB570D37DC2" Name="stpAlturaMaxima" Type="REAL" Comment="IHM: altura maxima do tanque (nivel)" />
+      <VarDeclaration ID="093F317F91681B94" Name="hmiHabilitaAlarmeHH" Type="BOOL" Comment="IHM: alarme HH habilitado" />
+      <VarDeclaration ID="2368E646122F6C1E" Name="hmiHabilitaAlarmeH" Type="BOOL" Comment="IHM: alarme H habilitado" />
+      <VarDeclaration ID="61BA9A4108167FE1" Name="hmiHabilitaAlarmeL" Type="BOOL" Comment="IHM: alarme L habilitado" />
+      <VarDeclaration ID="E7EC039942CE430E" Name="hmiHabilitaAlarmeLL" Type="BOOL" Comment="IHM: alarme LL habilitado" />
+      <VarDeclaration ID="44FFB666822352BF" Name="stpAlarmeHH" Type="REAL" Comment="IHM: setpoint do alarme HH" />
+      <VarDeclaration ID="1B30B39C75AABA90" Name="stpAlarmeH" Type="REAL" Comment="IHM: setpoint do alarme H" />
+      <VarDeclaration ID="3B12D5C113628B3D" Name="stpAlarmeL" Type="REAL" Comment="IHM: setpoint do alarme L" />
+      <VarDeclaration ID="0C17F55C15BCD39D" Name="stpAlarmeLL" Type="REAL" Comment="IHM: setpoint do alarme LL" />
+      <VarDeclaration ID="275E0286C790B3B5" Name="stpTempoAlarmeHH" Type="UINT" Comment="IHM: tempo do alarme HH (s)" />
+      <VarDeclaration ID="91055F2FEA3A7CFE" Name="stpTempoAlarmeH" Type="UINT" Comment="IHM: tempo do alarme H (s)" />
+      <VarDeclaration ID="5837C50851352086" Name="stpTempoAlarmeL" Type="UINT" Comment="IHM: tempo do alarme L (s)" />
+      <VarDeclaration ID="43D87B8E2D957E3F" Name="stpTempoAlarmeLL" Type="UINT" Comment="IHM: tempo do alarme LL (s)" />
+      <VarDeclaration ID="12DA5CE2186CD3E9" Name="hmiReset" Type="BOOL" Comment="IHM: reset" />
+      <VarDeclaration ID="A71A8E7BCD5DEA8F" Name="cmdResetFalhas" Type="BOOL" Comment="Processo: reset (com E_RESET_FALHAS)" />
+      <VarDeclaration ID="A114BF4DF6C8FACD" Name="plgReset" Type="BOOL" Comment="Plug ISensorStatus: cmdReset" />
+      <VarDeclaration ID="CB16E6E7444E9F47" Name="inibeBaixos" Type="BOOL" Comment="Processo: inibe os alarmes L e LL (ex.: pressao de recalque com as bombas paradas)" />
+      <VarDeclaration ID="AF52988DC4E16721" Name="fldBruto" Type="INT" Comment="Campo: valor bruto 4-20 mA" />
+      <VarDeclaration ID="127AA48C83FCE0F9" Name="fldValor" Type="REAL" Comment="Campo (comunicacao): valor em unidade de engenharia" />
+      <VarDeclaration ID="DC02530AB13A0CE9" Name="fldFalhaSensor" Type="BOOL" Comment="Campo (comunicacao): falha do instrumento" />
+      <VarDeclaration ID="AC6220939047FF1C" Name="fldFalhaComunicacao" Type="BOOL" Comment="Campo (comunicacao): falha de comunicacao" />
+      <VarDeclaration ID="A01E732EBCA193E3" Name="fldConexao" Type="INT" Comment="Campo (comunicacao): status da conexao Modbus (connStatusInt: 1 = online, 0 = offline)" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="0D31DC1406BFACF0" Name="qiBruto" Type="BOOL" Comment="Assina o symlink 4-20 mA (NOT cfgComunicacao)" />
+      <VarDeclaration ID="9DEE58A20A0B0AFD" Name="qiComunicacao" Type="BOOL" Comment="Assina os symlinks de comunicacao (cfgComunicacao)" />
+      <VarDeclaration ID="DD2B06522C2E1D6D" Name="qiConexao" Type="BOOL" Comment="Assina o symlink do status da conexao (cfgUsaConexao)" />
+      <VarDeclaration ID="3203282664F84EE7" Name="stsValor" Type="REAL" Comment="Valor em unidade de engenharia (0 em falha ou desabilitado)" />
+      <VarDeclaration ID="E36A36073A4D8255" Name="stsPorcentagem" Type="REAL" Comment="Nivel em % da altura maxima (so cfgNivel)" />
+      <VarDeclaration ID="D2CE0143DEEF5F5B" Name="stsFalhaSensor" Type="BOOL" Comment="Falha do sensor memorizada (ate o reset)" />
+      <VarDeclaration ID="90D219EA9609F475" Name="stsFalhaAtiva" Type="BOOL" Comment="Sinal em falha agora (valor invalido)" />
+      <VarDeclaration ID="BC2F73C5CA9874F4" Name="stsHabilitado" Type="BOOL" Comment="Sensor habilitado" />
+      <VarDeclaration ID="846DCED7A53DAF52" Name="stsAlarmeHH" Type="BOOL" Comment="Alarme HH (memorizado ate o reset; suprimido com o sinal em falha)" />
+      <VarDeclaration ID="11F28407C39B0DB4" Name="stsAlarmeH" Type="BOOL" Comment="Alarme H (memorizado ate o reset; suprimido com o sinal em falha)" />
+      <VarDeclaration ID="41F92ED47B97DD7B" Name="stsAlarmeL" Type="BOOL" Comment="Alarme L (memorizado ate o reset; suprimido com o sinal em falha)" />
+      <VarDeclaration ID="F2CABDC5ADA79A97" Name="stsAlarmeLL" Type="BOOL" Comment="Alarme LL (memorizado ate o reset; suprimido com o sinal em falha)" />
+      <VarDeclaration ID="478DE584A3EC80F6" Name="stsAlarme" Type="BOOL" Comment="Algum alarme ativo" />
+      <VarDeclaration ID="5C7B1A72AEA1734C" Name="stsCondicaoHH" Type="BOOL" Comment="Valor alem do setpoint HH agora (sem tempo e sem memoria; so com o alarme habilitado e o sinal bom)" />
+      <VarDeclaration ID="B271C2D0A9370A7F" Name="stsCondicaoH" Type="BOOL" Comment="Valor alem do setpoint H agora (sem tempo e sem memoria; so com o alarme habilitado e o sinal bom)" />
+      <VarDeclaration ID="80C046EE3841337A" Name="stsCondicaoL" Type="BOOL" Comment="Valor alem do setpoint L agora (sem tempo e sem memoria; so com o alarme habilitado e o sinal bom)" />
+      <VarDeclaration ID="46248A230C3897E2" Name="stsCondicaoLL" Type="BOOL" Comment="Valor alem do setpoint LL agora (sem tempo e sem memoria; so com o alarme habilitado e o sinal bom)" />
+      <VarDeclaration ID="821A07A8E8DE848B" Name="stsEstado" Type="INT" Comment="IHM: 0 normal, 1 alerta (H/L), 2 alarme (HH/LL), 3 falha, 4 desabilitado" />
+      <VarDeclaration ID="8550C71DBEEC8F3F" Name="stsBruto" Type="REAL" Comment="IHM: valor bruto lido (diagnostico)" />
+      <VarDeclaration ID="7CD1C7E9D29D5BA8" Name="almHH" Type="BOOL" Comment="Entrada do ALARM_BIT HH" />
+      <VarDeclaration ID="2175D6B4C45D9235" Name="almH" Type="BOOL" Comment="Entrada do ALARM_BIT H" />
+      <VarDeclaration ID="D792B1098650EBBE" Name="almL" Type="BOOL" Comment="Entrada do ALARM_BIT L" />
+      <VarDeclaration ID="123CA78819C21E67" Name="almLL" Type="BOOL" Comment="Entrada do ALARM_BIT LL" />
+      <VarDeclaration ID="9751C9BCFBC02314" Name="almFalha" Type="BOOL" Comment="Entrada do ALARM_BIT de falha do sensor" />
+      <VarDeclaration ID="1F6F64330B9EFE72" Name="TempoFalha" Type="TIME" Comment="E_DELAY da falha" />
+      <VarDeclaration ID="F3031E01158FE3E1" Name="TempoHH" Type="TIME" Comment="E_DELAY do alarme HH" />
+      <VarDeclaration ID="585F9BC133BAE667" Name="TempoH" Type="TIME" Comment="E_DELAY do alarme H" />
+      <VarDeclaration ID="AFF40B3AA17C5F37" Name="TempoL" Type="TIME" Comment="E_DELAY do alarme L" />
+      <VarDeclaration ID="D17EC1927CB7668B" Name="TempoLL" Type="TIME" Comment="E_DELAY do alarme LL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="2f63afe4-b754-4117-a634-ef0c8af1ed93">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="algSensor" />
+    <InternalVars>
+      <VarDeclaration ID="94C8494CEF4434B9" Name="initDone" Type="BOOL" />
+      <VarDeclaration ID="AD951ED5D2A0A7B2" Name="initPass" Type="BOOL" />
+      <VarDeclaration ID="688C1D5BC36C2989" Name="fbRecebido" Type="BOOL" Comment="Ja houve leitura do campo" />
+      <VarDeclaration ID="7AE8B667C62D5924" Name="bReset" Type="BOOL" />
+      <VarDeclaration ID="3DE12B1A6FE0A528" Name="bRuimAgora" Type="BOOL" Comment="Sinal fora da faixa / falha agora" />
+      <VarDeclaration ID="20F174963CF1D412" Name="bSuprimido" Type="BOOL" Comment="Alarmes suprimidos" />
+      <VarDeclaration ID="0B1F42FF0D692EAA" Name="rBruto" Type="REAL" />
+      <VarDeclaration ID="B78EB4A289C59C30" Name="rFaixa" Type="REAL" />
+      <VarDeclaration ID="B374A70B0BF2074B" Name="rMin" Type="REAL" />
+      <VarDeclaration ID="6D8198F8DA77F3D1" Name="rMax" Type="REAL" />
+      <VarDeclaration ID="25CAC779A4088C5E" Name="bTimFalha" Type="BOOL" />
+      <VarDeclaration ID="98268F6334B75D7E" Name="oldTimFalha" Type="BOOL" />
+      <VarDeclaration ID="D2018E5FC7533266" Name="bCondHH" Type="BOOL" />
+      <VarDeclaration ID="7FAD0FA44344C6EB" Name="bMemHH" Type="BOOL" />
+      <VarDeclaration ID="EA617F1629DB2261" Name="bTimHH" Type="BOOL" />
+      <VarDeclaration ID="17C8CE36D3EE9D42" Name="oldTimHH" Type="BOOL" />
+      <VarDeclaration ID="61E0E5D98545D2B7" Name="bAcimaHH" Type="BOOL" />
+      <VarDeclaration ID="37A5707092B9A13B" Name="bCondH" Type="BOOL" />
+      <VarDeclaration ID="615104FC3857E4FE" Name="bMemH" Type="BOOL" />
+      <VarDeclaration ID="13279DA9D1363B3F" Name="bTimH" Type="BOOL" />
+      <VarDeclaration ID="8FE8256330417B72" Name="oldTimH" Type="BOOL" />
+      <VarDeclaration ID="924435AEAE9D6F01" Name="bAcimaH" Type="BOOL" />
+      <VarDeclaration ID="60E04E87B334E095" Name="bCondL" Type="BOOL" />
+      <VarDeclaration ID="5A612AA9529ACD98" Name="bMemL" Type="BOOL" />
+      <VarDeclaration ID="87537F33D6C3DA52" Name="bTimL" Type="BOOL" />
+      <VarDeclaration ID="B74CBE7D203806BA" Name="oldTimL" Type="BOOL" />
+      <VarDeclaration ID="AC0FECBA85C26151" Name="bAcimaL" Type="BOOL" />
+      <VarDeclaration ID="F1C4F1F14AA68158" Name="bCondLL" Type="BOOL" />
+      <VarDeclaration ID="7D8F2A5633A54055" Name="bMemLL" Type="BOOL" />
+      <VarDeclaration ID="84C0389D56ADE9EA" Name="bTimLL" Type="BOOL" />
+      <VarDeclaration ID="1535F9D9BCB89CB6" Name="oldTimLL" Type="BOOL" />
+      <VarDeclaration ID="6832A2A4FAD9D3B0" Name="bAcimaLL" Type="BOOL" />
+      <VarDeclaration ID="38CEC748C72CB7DB" Name="oldValor" Type="REAL" />
+      <VarDeclaration ID="CE7F254799EB94EA" Name="oldPct" Type="REAL" />
+      <VarDeclaration ID="BE2A6B2567CF06BA" Name="oldBruto" Type="REAL" />
+      <VarDeclaration ID="24ED5B99130DFCE5" Name="wSts" Type="WORD" />
+      <VarDeclaration ID="630EC76340804E37" Name="oldSts" Type="WORD" InitialValue="16#FFFF" />
+      <VarDeclaration ID="4E66C4A8714FA80B" Name="wAlm" Type="WORD" />
+      <VarDeclaration ID="E0DDBCCFB6260BA3" Name="oldAlm" Type="WORD" InitialValue="16#FFFF" />
+      <VarDeclaration ID="D21ECFE977898748" Name="oldEstado" Type="INT" InitialValue="-1" />
+    </InternalVars>
+    <ECC>
+      <ECState Name="START" Comment="Estado inicial" x="1500" y="640" />
+      <ECState Name="EXEC" Comment="Executa a logica; o algoritmo decide quais eventos saem" x="1500" y="1100">
+        <ECAction Algorithm="algSensor" Output="INITO" />
+        <ECAction Output="CNF" />
+        <ECAction Output="CNF_PV" />
+        <ECAction Output="CNF_STATUS" />
+        <ECAction Output="CNF_HMI" />
+        <ECAction Output="CNF_ALM" />
+        <ECAction Output="FALHA_RESET" />
+        <ECAction Output="FALHA_T" />
+        <ECAction Output="HH_RESET" />
+        <ECAction Output="HH_T" />
+        <ECAction Output="H_RESET" />
+        <ECAction Output="H_T" />
+        <ECAction Output="L_RESET" />
+        <ECAction Output="L_T" />
+        <ECAction Output="LL_RESET" />
+        <ECAction Output="LL_T" />
+      </ECState>
+      <ECTransition Source="START" Destination="EXEC" Condition="INIT OR REQ_PARA OR REQ_FB OR REQ_FB_COM OR REQ_FB_CON OR REQ_RESET OR REQ_RESET_PROC OR REQ_RESET_PLUG OR REQ_INIBE OR FALHA_MAX OR HH_MAX OR H_MAX OR L_MAX OR LL_MAX" x="1580" y="860" />
+      <ECTransition Source="EXEC" Destination="START" Condition="1" x="1420" y="860" />
+    </ECC>
+    <Algorithm Name="algSensor" Comment="Logica completa do sensor (um unico algoritmo)">
+      <ST><![CDATA[(* =====================================================================
+   basicSensorGenerico v1.1 - logica do CAT Sensor_Generico (HidrycoLib)
+   Padrao das bibliotecas Schneider (SE.App2CommonProcess):
+   - eventos de saida desligados no inicio e ligados so na mudanca;
+   - tempos por E_DELAY externo (X_T / X_RESET / X_MAX), um por alarme;
+   - alarmes para o sistema de alarmes do EAE por ALARM_BIT (no CAT).
+   Regras (definidas pelo usuario):
+   - origem 4-20 mA (escala bruta e limites NAMUR offline) ou comunicacao
+     (valor ja em unidade de engenharia);
+   - falha do sinal confirmada apos cfgTempoFalha: valor vai a 0 e os
+     alarmes ficam suprimidos; a falha fica memorizada ate o reset, mas o
+     sensor volta a funcionar assim que o sinal volta;
+   - durante a confirmacao o valor fica congelado (nao vai a 0 por um pico);
+   - alarmes HH/H/L/LL sem histerese, cada um com o proprio tempo,
+     memorizados ate o reset (IHM, processo ou plug);
+   - sensor desabilitado: valor 0, sem falha e sem alarmes.
+   v1.1: inibeBaixos (processo) inibe L/LL e libera a memoria deles;
+         stsCondicaoX = valor alem do setpoint X agora (sem tempo, sem memoria).
+   ===================================================================== *)
+
+(* ---- 0. Eventos de saida: so sai o que for ligado abaixo ---- *)
+INITO       := FALSE;
+CNF         := FALSE;
+CNF_PV      := FALSE;
+CNF_STATUS  := FALSE;
+CNF_HMI     := FALSE;
+CNF_ALM     := FALSE;
+FALHA_RESET := FALSE;
+FALHA_T     := FALSE;
+HH_RESET := FALSE; HH_T := FALSE;
+H_RESET  := FALSE; H_T  := FALSE;
+L_RESET  := FALSE; L_T  := FALSE;
+LL_RESET := FALSE; LL_T := FALSE;
+
+IF REQ_FB OR REQ_FB_COM OR REQ_FB_CON THEN
+    fbRecebido := TRUE;                    (* campo valido a partir da 1a leitura *)
+END_IF;
+
+(* ---- 1. Inicializacao ---- *)
+IF INIT THEN
+    qiBruto       := NOT cfgComunicacao;   (* so assina o symlink da origem configurada *)
+    qiComunicacao := cfgComunicacao;
+    qiConexao     := cfgUsaConexao;           (* status da conexao: vale para 4-20 mA lido por remota e para comunicacao *)
+    initDone := TRUE;
+    initPass := TRUE;
+    INITO    := TRUE;
+END_IF;
+IF NOT initDone THEN
+    RETURN;
+END_IF;
+
+(* ---- 2. Sinal ---- *)
+IF cfgComunicacao THEN
+    rBruto     := fldValor;
+    bRuimAgora := fbRecebido AND (fldFalhaSensor OR fldFalhaComunicacao OR (cfgUsaConexao AND fldConexao <> 1));
+ELSE
+    rBruto     := INT_TO_REAL(fldBruto);
+    bRuimAgora := fbRecebido AND ((rBruto < cfgFalhaMin) OR (rBruto > cfgFalhaMax) OR (cfgUsaConexao AND fldConexao <> 1));
+END_IF;
+
+(* ---- 3. Falha do sensor: confirmada pelo tempo, memorizada ate o reset ---- *)
+bReset := (REQ_RESET AND hmiReset) OR (REQ_RESET_PROC AND cmdResetFalhas) OR (REQ_RESET_PLUG AND plgReset);
+IF NOT hmiHabilitaSensor THEN
+    stsFalhaAtiva  := FALSE;
+    stsFalhaSensor := FALSE;
+ELSE
+    IF FALHA_MAX AND bRuimAgora THEN
+        stsFalhaAtiva  := TRUE;            (* falha confirmada *)
+        stsFalhaSensor := TRUE;
+    END_IF;
+    IF NOT bRuimAgora THEN
+        stsFalhaAtiva := FALSE;            (* sinal voltou: o sensor volta a funcionar *)
+    END_IF;
+    IF bReset AND NOT bRuimAgora THEN
+        stsFalhaSensor := FALSE;           (* memoria so sai com reset e sinal bom *)
+    END_IF;
+END_IF;
+bTimFalha := hmiHabilitaSensor AND bRuimAgora AND NOT stsFalhaAtiva;
+IF bTimFalha <> oldTimFalha THEN
+    IF bTimFalha THEN
+        TempoFalha := TO_TIME(UINT_TO_DINT(cfgTempoFalha) * 1000);
+        FALHA_T := TRUE;
+    ELSE
+        FALHA_RESET := TRUE;
+    END_IF;
+    oldTimFalha := bTimFalha;
+END_IF;
+
+(* ---- 4. Valor em unidade de engenharia ---- *)
+IF NOT hmiHabilitaSensor OR NOT fbRecebido OR stsFalhaAtiva THEN
+    stsValor := 0.0;                       (* desabilitado, sem leitura ou falha confirmada *)
+ELSIF bRuimAgora THEN
+    ;                                      (* confirmando a falha: valor congelado *)
+ELSIF cfgComunicacao THEN
+    stsValor := fldValor;                  (* ja chega em unidade de engenharia *)
+ELSE
+    rFaixa := cfgBrutoMax - cfgBrutoMin;
+    IF rFaixa <> 0.0 THEN
+        stsValor := stpRangeMinimo + (rBruto - cfgBrutoMin) * (stpRangeMaximo - stpRangeMinimo) / rFaixa;
+        rMin := MIN(stpRangeMinimo, stpRangeMaximo);
+        rMax := MAX(stpRangeMinimo, stpRangeMaximo);
+        stsValor := LIMIT(rMin, stsValor, rMax);
+    ELSE
+        stsValor := 0.0;                   (* escala bruta invalida *)
+    END_IF;
+END_IF;
+IF cfgNivel AND stpAlturaMaxima > 0.0 THEN
+    stsPorcentagem := stsValor * 100.0 / stpAlturaMaxima;
+ELSE
+    stsPorcentagem := 0.0;
+END_IF;
+stsBruto := rBruto;
+
+(* ---- 5. Alarmes (suprimidos com o sensor desabilitado, sem leitura ou em falha) ---- *)
+bSuprimido := NOT hmiHabilitaSensor OR NOT fbRecebido OR bRuimAgora OR stsFalhaAtiva;
+bAcimaHH := stsValor > stpAlarmeHH;
+bCondHH := hmiHabilitaAlarmeHH AND NOT bSuprimido AND bAcimaHH;
+stsCondicaoHH := bCondHH;
+IF HH_MAX AND bCondHH THEN
+    bMemHH := TRUE;                       (* tempo do alarme HH venceu com a condicao presente *)
+END_IF;
+IF bReset AND NOT bCondHH THEN
+    bMemHH := FALSE;                      (* reset so libera se a condicao ja sumiu *)
+END_IF;
+IF NOT hmiHabilitaAlarmeHH OR NOT hmiHabilitaSensor THEN
+    bMemHH := FALSE;                      (* alarme ou sensor desabilitado zera o alarme *)
+END_IF;
+bTimHH := bCondHH AND NOT bMemHH;
+IF bTimHH <> oldTimHH THEN
+    IF bTimHH THEN
+        TempoHH := TO_TIME(UINT_TO_DINT(stpTempoAlarmeHH) * 1000);
+        HH_T := TRUE;
+    ELSE
+        HH_RESET := TRUE;
+    END_IF;
+    oldTimHH := bTimHH;
+END_IF;
+stsAlarmeHH := bMemHH AND NOT bSuprimido;
+
+bAcimaH := stsValor > stpAlarmeH;
+bCondH := hmiHabilitaAlarmeH AND NOT bSuprimido AND bAcimaH;
+stsCondicaoH := bCondH;
+IF H_MAX AND bCondH THEN
+    bMemH := TRUE;                       (* tempo do alarme H venceu com a condicao presente *)
+END_IF;
+IF bReset AND NOT bCondH THEN
+    bMemH := FALSE;                      (* reset so libera se a condicao ja sumiu *)
+END_IF;
+IF NOT hmiHabilitaAlarmeH OR NOT hmiHabilitaSensor THEN
+    bMemH := FALSE;                      (* alarme ou sensor desabilitado zera o alarme *)
+END_IF;
+bTimH := bCondH AND NOT bMemH;
+IF bTimH <> oldTimH THEN
+    IF bTimH THEN
+        TempoH := TO_TIME(UINT_TO_DINT(stpTempoAlarmeH) * 1000);
+        H_T := TRUE;
+    ELSE
+        H_RESET := TRUE;
+    END_IF;
+    oldTimH := bTimH;
+END_IF;
+stsAlarmeH := bMemH AND NOT bSuprimido;
+
+bAcimaL := stsValor < stpAlarmeL;
+bCondL := hmiHabilitaAlarmeL AND NOT bSuprimido AND bAcimaL AND NOT inibeBaixos;
+stsCondicaoL := bCondL;
+IF inibeBaixos THEN
+    bMemL := FALSE;                      (* inibido pelo processo: libera o que estava memorizado *)
+END_IF;
+IF L_MAX AND bCondL THEN
+    bMemL := TRUE;                       (* tempo do alarme L venceu com a condicao presente *)
+END_IF;
+IF bReset AND NOT bCondL THEN
+    bMemL := FALSE;                      (* reset so libera se a condicao ja sumiu *)
+END_IF;
+IF NOT hmiHabilitaAlarmeL OR NOT hmiHabilitaSensor THEN
+    bMemL := FALSE;                      (* alarme ou sensor desabilitado zera o alarme *)
+END_IF;
+bTimL := bCondL AND NOT bMemL;
+IF bTimL <> oldTimL THEN
+    IF bTimL THEN
+        TempoL := TO_TIME(UINT_TO_DINT(stpTempoAlarmeL) * 1000);
+        L_T := TRUE;
+    ELSE
+        L_RESET := TRUE;
+    END_IF;
+    oldTimL := bTimL;
+END_IF;
+stsAlarmeL := bMemL AND NOT bSuprimido;
+
+bAcimaLL := stsValor < stpAlarmeLL;
+bCondLL := hmiHabilitaAlarmeLL AND NOT bSuprimido AND bAcimaLL AND NOT inibeBaixos;
+stsCondicaoLL := bCondLL;
+IF inibeBaixos THEN
+    bMemLL := FALSE;                      (* inibido pelo processo: libera o que estava memorizado *)
+END_IF;
+IF LL_MAX AND bCondLL THEN
+    bMemLL := TRUE;                       (* tempo do alarme LL venceu com a condicao presente *)
+END_IF;
+IF bReset AND NOT bCondLL THEN
+    bMemLL := FALSE;                      (* reset so libera se a condicao ja sumiu *)
+END_IF;
+IF NOT hmiHabilitaAlarmeLL OR NOT hmiHabilitaSensor THEN
+    bMemLL := FALSE;                      (* alarme ou sensor desabilitado zera o alarme *)
+END_IF;
+bTimLL := bCondLL AND NOT bMemLL;
+IF bTimLL <> oldTimLL THEN
+    IF bTimLL THEN
+        TempoLL := TO_TIME(UINT_TO_DINT(stpTempoAlarmeLL) * 1000);
+        LL_T := TRUE;
+    ELSE
+        LL_RESET := TRUE;
+    END_IF;
+    oldTimLL := bTimLL;
+END_IF;
+stsAlarmeLL := bMemLL AND NOT bSuprimido;
+
+stsAlarme := stsAlarmeHH OR stsAlarmeH OR stsAlarmeL OR stsAlarmeLL;
+stsHabilitado := hmiHabilitaSensor;
+
+(* ---- 6. Entradas dos ALARM_BIT (lista de alarmes do EAE) ---- *)
+almHH := stsAlarmeHH;
+almH  := stsAlarmeH;
+almL  := stsAlarmeL;
+almLL := stsAlarmeLL;
+almFalha := stsFalhaSensor;
+
+(* ---- 7. Estado para o simbolo ---- *)
+IF NOT hmiHabilitaSensor THEN
+    stsEstado := 4;
+ELSIF stsFalhaSensor OR stsFalhaAtiva THEN
+    stsEstado := 3;
+ELSIF stsAlarmeHH OR stsAlarmeLL THEN
+    stsEstado := 2;
+ELSIF stsAlarmeH OR stsAlarmeL THEN
+    stsEstado := 1;
+ELSE
+    stsEstado := 0;
+END_IF;
+
+(* ---- 8. Eventos so na mudanca ---- *)
+wSts := 0;
+IF stsFalhaSensor THEN wSts := wSts OR 16#0001; END_IF;
+IF stsFalhaAtiva  THEN wSts := wSts OR 16#0002; END_IF;
+IF stsHabilitado  THEN wSts := wSts OR 16#0004; END_IF;
+IF stsAlarmeHH    THEN wSts := wSts OR 16#0010; END_IF;
+IF stsAlarmeH     THEN wSts := wSts OR 16#0020; END_IF;
+IF stsAlarmeL     THEN wSts := wSts OR 16#0040; END_IF;
+IF stsAlarmeLL    THEN wSts := wSts OR 16#0080; END_IF;
+IF stsCondicaoHH  THEN wSts := wSts OR 16#0100; END_IF;
+IF stsCondicaoH   THEN wSts := wSts OR 16#0200; END_IF;
+IF stsCondicaoL   THEN wSts := wSts OR 16#0400; END_IF;
+IF stsCondicaoLL  THEN wSts := wSts OR 16#0800; END_IF;
+wAlm := 0;
+IF almHH    THEN wAlm := wAlm OR 16#0001; END_IF;
+IF almH     THEN wAlm := wAlm OR 16#0002; END_IF;
+IF almL     THEN wAlm := wAlm OR 16#0004; END_IF;
+IF almLL    THEN wAlm := wAlm OR 16#0008; END_IF;
+IF almFalha THEN wAlm := wAlm OR 16#0010; END_IF;
+
+CNF_PV     := initPass OR (stsValor <> oldValor);
+CNF_STATUS := initPass OR ((wSts AND 16#00F2) <> (oldSts AND 16#00F2));
+CNF        := initPass OR (stsValor <> oldValor) OR (stsPorcentagem <> oldPct) OR (wSts <> oldSts);
+CNF_HMI    := CNF OR (stsEstado <> oldEstado) OR (rBruto <> oldBruto);
+CNF_ALM    := initPass OR (wAlm <> oldAlm);
+oldValor  := stsValor;
+oldPct    := stsPorcentagem;
+oldBruto  := rBruto;
+oldSts    := wSts;
+oldAlm    := wAlm;
+oldEstado := stsEstado;
+
+initPass := FALSE;
+]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

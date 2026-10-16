@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="452b06fd-79ba-43ed-9c8e-67a1430e6c52" Name="basicAguaReuso" Comment="Logica unica da agua de reuso (PIT-01/02, boia LSL-01, comunicacao)" Namespace="Hidryco.HidrycoLib">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Hidryco" Version="1.2" Author="Hidryco" Date="15/10/2026" Remarks="1.2: sai o MGE (vira instancia propria no ETE_TJ). 1.0: monitoracao da agua de reuso - niveis 1000-PIT-01/02, boia 1000-LSL-01 e comunicacao das remotas 1/2 da Subestacao" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="1F2574A6F30133E3" Name="INIT" Comment="Inicializacao">
+        <With Var="cfgTempoBoia" />
+        <With Var="cfgBoiaInvertida" />
+        <With Var="cfgTempoCom" />
+      </Event>
+      <Event ID="B449598857AB2011" Name="REQ_S1" Comment="PIT_1000_01">
+        <With Var="s1Valor" />
+        <With Var="s1Porc" />
+        <With Var="s1Hab" />
+        <With Var="s1Falha" />
+        <With Var="s1FalhaMem" />
+        <With Var="s1HH" />
+        <With Var="s1H" />
+        <With Var="s1L" />
+        <With Var="s1LL" />
+      </Event>
+      <Event ID="25FCE411FF203199" Name="REQ_S2" Comment="PIT_1000_02">
+        <With Var="s2Valor" />
+        <With Var="s2Porc" />
+        <With Var="s2Hab" />
+        <With Var="s2Falha" />
+        <With Var="s2FalhaMem" />
+        <With Var="s2HH" />
+        <With Var="s2H" />
+        <With Var="s2L" />
+        <With Var="s2LL" />
+      </Event>
+      <Event ID="299D414224484D8E" Name="REQ_BOIA" Comment="Boia 1000-LSL-01">
+        <With Var="boia" />
+      </Event>
+      <Event ID="AF9BA5F5EA0D0DE5" Name="REQ_COM" Comment="Comunicacao das remotas">
+        <With Var="falhaRemota1" />
+        <With Var="conRemota2" />
+      </Event>
+      <Event ID="196CC39C90BB2858" Name="REQ_RESET" Comment="Reset pela IHM">
+        <With Var="hmiReset" />
+      </Event>
+      <Event ID="F8A99F29850AD5DB" Name="REQ_RESET_PROC" Comment="Reset pelo processo">
+        <With Var="cmdResetFalhas" />
+      </Event>
+      <Event ID="FD7FC9E3C7412179" Name="TICK" Comment="Base de tempo de 1 s (E_CYCLE)" />
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="82CEBA2D0471C377" Name="INITO" Comment="Inicializacao concluida" />
+      <Event ID="0D7078056D047821" Name="CNF" Comment="Valores e alarmes para o processo (na mudanca)">
+        <With Var="stsNivelPIT01" />
+        <With Var="stsPorcentagemPIT01" />
+        <With Var="stsFalhaPIT01" />
+        <With Var="stsAlarmeHHPIT01" />
+        <With Var="stsAlarmeHPIT01" />
+        <With Var="stsAlarmeLPIT01" />
+        <With Var="stsAlarmeLLPIT01" />
+        <With Var="stsNivelPIT02" />
+        <With Var="stsPorcentagemPIT02" />
+        <With Var="stsFalhaPIT02" />
+        <With Var="stsAlarmeHHPIT02" />
+        <With Var="stsAlarmeHPIT02" />
+        <With Var="stsAlarmeLPIT02" />
+        <With Var="stsAlarmeLLPIT02" />
+        <With Var="stsNivelBaixoBoia" />
+        <With Var="stsFalhaComRemota1" />
+        <With Var="stsFalhaComRemota2" />
+        <With Var="stsAlarme" />
+      </Event>
+      <Event ID="48B7766158A72DB1" Name="CNF_HMI" Comment="Status para a IHM (na mudanca)">
+        <With Var="stsNivelPIT01" />
+        <With Var="stsPorcentagemPIT01" />
+        <With Var="stsNivelPIT02" />
+        <With Var="stsPorcentagemPIT02" />
+        <With Var="stsCond01" />
+        <With Var="stsCond02" />
+        <With Var="stsBoiaNormal" />
+        <With Var="stsNivelBaixoBoia" />
+        <With Var="stsFalhaComRemota1" />
+        <With Var="stsFalhaComRemota2" />
+        <With Var="stsAlarme" />
+      </Event>
+      <Event ID="A53CD1FF4E04D581" Name="CNF_ALM" Comment="Alarmes para os ALARM_BIT (na mudanca)">
+        <With Var="almNivelBaixo" />
+        <With Var="almRemota1" />
+        <With Var="almRemota2" />
+      </Event>
+      <Event ID="D611B8DF03491A62" Name="CNF_RESET" Comment="Reset dos sensores">
+        <With Var="resetSensores" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="7AB282FA59C5DE18" Name="cfgTempoBoia" Type="UINT" InitialValue="10" Comment="Tempo (s) da boia 1000-LSL-01 abaixada para confirmar o nivel baixo" />
+      <VarDeclaration ID="78056A861A9FC565" Name="cfgBoiaInvertida" Type="BOOL" InitialValue="FALSE" Comment="FALSE: entrada da boia TRUE = nivel normal (boia levantada). TRUE: entrada TRUE = nivel baixo" />
+      <VarDeclaration ID="DDE31F23C75A7867" Name="cfgTempoCom" Type="UINT" InitialValue="5" Comment="Tempo (s) sem comunicacao para confirmar a falha das remotas" />
+      <VarDeclaration ID="07D3FD1B9693EBA9" Name="s1Valor" Type="REAL" Comment="PIT_1000_01: valor (stsValor)" />
+      <VarDeclaration ID="1ED47B1DA7FFFE36" Name="s1Porc" Type="REAL" Comment="PIT_1000_01: porcentagem (stsPorcentagem)" />
+      <VarDeclaration ID="4674F0A0B1306602" Name="s1Hab" Type="BOOL" Comment="PIT_1000_01: sensor habilitado" />
+      <VarDeclaration ID="483E654AA9295F1F" Name="s1Falha" Type="BOOL" Comment="PIT_1000_01: sinal invalido agora (stsFalhaAtiva)" />
+      <VarDeclaration ID="2F7955EE24BC434E" Name="s1FalhaMem" Type="BOOL" Comment="PIT_1000_01: falha do sensor memorizada (stsFalhaSensor)" />
+      <VarDeclaration ID="AFE2694C114D5BB0" Name="s1HH" Type="BOOL" Comment="PIT_1000_01: alarme HH" />
+      <VarDeclaration ID="586B59BB34B41275" Name="s1H" Type="BOOL" Comment="PIT_1000_01: alarme H" />
+      <VarDeclaration ID="F32A97D9BEF784AF" Name="s1L" Type="BOOL" Comment="PIT_1000_01: alarme L" />
+      <VarDeclaration ID="A3BCA6E4A914D759" Name="s1LL" Type="BOOL" Comment="PIT_1000_01: alarme LL" />
+      <VarDeclaration ID="D111AE3CF546FB41" Name="s2Valor" Type="REAL" Comment="PIT_1000_02: valor (stsValor)" />
+      <VarDeclaration ID="538692287664FC27" Name="s2Porc" Type="REAL" Comment="PIT_1000_02: porcentagem (stsPorcentagem)" />
+      <VarDeclaration ID="67FA77966B860F92" Name="s2Hab" Type="BOOL" Comment="PIT_1000_02: sensor habilitado" />
+      <VarDeclaration ID="785FA5DCD1BD1BBE" Name="s2Falha" Type="BOOL" Comment="PIT_1000_02: sinal invalido agora (stsFalhaAtiva)" />
+      <VarDeclaration ID="129365CAD32FA68D" Name="s2FalhaMem" Type="BOOL" Comment="PIT_1000_02: falha do sensor memorizada (stsFalhaSensor)" />
+      <VarDeclaration ID="768E3A7133E77018" Name="s2HH" Type="BOOL" Comment="PIT_1000_02: alarme HH" />
+      <VarDeclaration ID="834EF20FB7F0A45B" Name="s2H" Type="BOOL" Comment="PIT_1000_02: alarme H" />
+      <VarDeclaration ID="AD38A0A4A9FD5CE4" Name="s2L" Type="BOOL" Comment="PIT_1000_02: alarme L" />
+      <VarDeclaration ID="2BF6430062E3707F" Name="s2LL" Type="BOOL" Comment="PIT_1000_02: alarme LL" />
+      <VarDeclaration ID="B38FC6C6C258CD1C" Name="boia" Type="BOOL" Comment="Campo: boia 1000-LSL-01 (remota 1 da Subestacao, A6 %I0.105)" />
+      <VarDeclaration ID="E3D9D2003045C208" Name="falhaRemota1" Type="BOOL" Comment="Campo: falha de comunicacao da remota 1 da Subestacao (FALHA_COM do cartao SUB_R1_A6_DI32K0)" />
+      <VarDeclaration ID="9A84D5DA142F5D34" Name="conRemota2" Type="INT" Comment="Campo: connStatusInt da remota 2 da Subestacao (1 = online)" />
+      <VarDeclaration ID="A39AEE8EBC0FF16A" Name="hmiReset" Type="BOOL" Comment="IHM: reset / reconhecimento" />
+      <VarDeclaration ID="4012098E9C8C3E1C" Name="cmdResetFalhas" Type="BOOL" Comment="Processo: reset (com E_RESET_FALHAS)" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="CA2E43CC2AB7A710" Name="stsNivelPIT01" Type="REAL" Comment="Nivel PIT_1000_01 (unidade de engenharia do sensor; 0 com o sinal em falha)" />
+      <VarDeclaration ID="EFF4A50248596AAE" Name="stsPorcentagemPIT01" Type="REAL" Comment="Nivel PIT_1000_01 em % da altura maxima" />
+      <VarDeclaration ID="D29D6389261AB801" Name="stsFalhaPIT01" Type="BOOL" Comment="Falha do sensor PIT_1000_01 (memorizada ate o reset)" />
+      <VarDeclaration ID="C356053499FD22FD" Name="stsAlarmeHHPIT01" Type="BOOL" Comment="Alarme HH do PIT_1000_01" />
+      <VarDeclaration ID="6D07A7E00D0B552D" Name="stsAlarmeHPIT01" Type="BOOL" Comment="Alarme H do PIT_1000_01" />
+      <VarDeclaration ID="E662ECFBF9CE0E97" Name="stsAlarmeLPIT01" Type="BOOL" Comment="Alarme L do PIT_1000_01" />
+      <VarDeclaration ID="DAE46A0ED33EAB6E" Name="stsAlarmeLLPIT01" Type="BOOL" Comment="Alarme LL do PIT_1000_01" />
+      <VarDeclaration ID="68F5A0DB478BBF75" Name="stsNivelPIT02" Type="REAL" Comment="Nivel PIT_1000_02 (unidade de engenharia do sensor; 0 com o sinal em falha)" />
+      <VarDeclaration ID="38F9A56D3A39F26B" Name="stsPorcentagemPIT02" Type="REAL" Comment="Nivel PIT_1000_02 em % da altura maxima" />
+      <VarDeclaration ID="C6322136FABA67B7" Name="stsFalhaPIT02" Type="BOOL" Comment="Falha do sensor PIT_1000_02 (memorizada ate o reset)" />
+      <VarDeclaration ID="25F036F3521BEB36" Name="stsAlarmeHHPIT02" Type="BOOL" Comment="Alarme HH do PIT_1000_02" />
+      <VarDeclaration ID="DCDA1244C5EBD289" Name="stsAlarmeHPIT02" Type="BOOL" Comment="Alarme H do PIT_1000_02" />
+      <VarDeclaration ID="AC8C91AE55FF19B5" Name="stsAlarmeLPIT02" Type="BOOL" Comment="Alarme L do PIT_1000_02" />
+      <VarDeclaration ID="CE4E9CC28966EAEA" Name="stsAlarmeLLPIT02" Type="BOOL" Comment="Alarme LL do PIT_1000_02" />
+      <VarDeclaration ID="02BA5107AB682069" Name="stsNivelBaixoBoia" Type="BOOL" Comment="Nivel baixo pela boia 1000-LSL-01 (confirmado por cfgTempoBoia)" />
+      <VarDeclaration ID="E4841A579A62D291" Name="stsFalhaComRemota1" Type="BOOL" Comment="Falha de comunicacao com a remota 1 da Subestacao (boia)" />
+      <VarDeclaration ID="737542A8C4F021EE" Name="stsFalhaComRemota2" Type="BOOL" Comment="Falha de comunicacao com a remota 2 da Subestacao (PIT-01/02)" />
+      <VarDeclaration ID="6565994057372119" Name="stsAlarme" Type="BOOL" Comment="Algum alarme da agua de reuso (sensores, boia, comunicacao)" />
+      <VarDeclaration ID="3319F6072649D6C8" Name="stsBoiaNormal" Type="BOOL" Comment="Boia 1000-LSL-01 levantada (nivel acima do baixo)" />
+      <VarDeclaration ID="6F6AFBBD21CDC2A9" Name="stsCond01" Type="INT" Comment="PIT-01 para a IHM: 0 normal, 1 HH, 2 H, 3 L, 4 LL, 5 sinal invalido, 6 falha memorizada, 7 desabilitado" />
+      <VarDeclaration ID="D04BD5C366CB1C25" Name="stsCond02" Type="INT" Comment="PIT-02 para a IHM (mesmos codigos)" />
+      <VarDeclaration ID="E0009B8BCCB1DC9C" Name="resetSensores" Type="BOOL" Comment="Reset dos sensores (com CNF_RESET)" />
+      <VarDeclaration ID="06A990B615DC7EBF" Name="almNivelBaixo" Type="BOOL" Comment="ALARM_BIT nivel baixo (boia)" />
+      <VarDeclaration ID="8FB5C28302258408" Name="almRemota1" Type="BOOL" Comment="ALARM_BIT remota 1" />
+      <VarDeclaration ID="45C3A871E8411D0B" Name="almRemota2" Type="BOOL" Comment="ALARM_BIT remota 2" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="35a0fec9-1f97-41aa-a3a8-4b368fef3513">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="algReuso" />
+    <InternalVars>
+      <VarDeclaration ID="E754304773D88150" Name="initDone" Type="BOOL" />
+      <VarDeclaration ID="AE5A488D62554EA0" Name="initPass" Type="BOOL" />
+      <VarDeclaration ID="D669BE9E1FBFC96D" Name="bReset" Type="BOOL" />
+      <VarDeclaration ID="9C741A1D0337CDF7" Name="bBoiaRecebida" Type="BOOL" Comment="Ja houve leitura da boia" />
+      <VarDeclaration ID="91D78B334BF95B48" Name="bCondBaixo" Type="BOOL" Comment="Boia abaixada agora (remota 1 ok)" />
+      <VarDeclaration ID="1A312905FF8E793B" Name="uSegBoia" Type="UDINT" />
+      <VarDeclaration ID="670588843E5D4CEE" Name="uSegRem1" Type="UDINT" />
+      <VarDeclaration ID="EFCE6A7F42B6D522" Name="uSegRem2" Type="UDINT" />
+      <VarDeclaration ID="CACF8A79B1F68989" Name="bRem2" Type="BOOL" />
+      <VarDeclaration ID="DD397D70B093193E" Name="wSts" Type="WORD" />
+      <VarDeclaration ID="E514C81AFF01E536" Name="oldSts" Type="WORD" InitialValue="16#FFFF" />
+      <VarDeclaration ID="A75EEDA146C49373" Name="wAlm" Type="WORD" />
+      <VarDeclaration ID="252084C3F4E2C034" Name="oldAlm" Type="WORD" InitialValue="16#FFFF" />
+      <VarDeclaration ID="6216DCD5D96FD276" Name="oldN1" Type="REAL" InitialValue="-1.0" />
+      <VarDeclaration ID="DFECDE59E7B53DAA" Name="oldP1" Type="REAL" InitialValue="-1.0" />
+      <VarDeclaration ID="CB93AE1F5865E341" Name="oldN2" Type="REAL" InitialValue="-1.0" />
+      <VarDeclaration ID="AD97A78510BF765A" Name="oldP2" Type="REAL" InitialValue="-1.0" />
+      <VarDeclaration ID="A3B37C3D3F1CB0B2" Name="oldC1" Type="INT" InitialValue="-1" />
+      <VarDeclaration ID="47DCB04B181B4AAD" Name="oldC2" Type="INT" InitialValue="-1" />
+    </InternalVars>
+    <ECC>
+      <ECState Name="START" Comment="Estado inicial" x="1500" y="640" />
+      <ECState Name="EXEC" Comment="Executa a logica; o algoritmo decide quais eventos saem" x="1500" y="1100">
+        <ECAction Algorithm="algReuso" Output="INITO" />
+        <ECAction Output="CNF" />
+        <ECAction Output="CNF_HMI" />
+        <ECAction Output="CNF_ALM" />
+        <ECAction Output="CNF_RESET" />
+      </ECState>
+      <ECTransition Source="START" Destination="EXEC" Condition="INIT OR REQ_S1 OR REQ_S2 OR REQ_BOIA OR REQ_COM OR REQ_RESET OR REQ_RESET_PROC OR TICK" x="1580" y="860" />
+      <ECTransition Source="EXEC" Destination="START" Condition="1" x="1420" y="860" />
+    </ECC>
+    <Algorithm Name="algReuso" Comment="Logica completa da agua de reuso (um unico algoritmo)">
+      <ST><![CDATA[(* =====================================================================
+   basicAguaReuso v1.2 - Agua de reuso (serie 1000) - so monitoracao
+   Padrao das bibliotecas Schneider: eventos de saida desligados no inicio e
+   ligados so na mudanca; tempos contados pelo TICK de 1 s (E_CYCLE do CAT).
+   - 1000-PIT-01 / 1000-PIT-02: Sensor_Generico (4-20 mA, nivel); valores,
+     falha e alarmes HH/H/L/LL repassados para as saidas do CAT;
+   - boia 1000-LSL-01: nivel baixo depois de cfgTempoBoia s abaixada;
+     ignorada com a remota 1 em falha (os bits ficam congelados);
+   - falha de comunicacao: remota 1 (cartao) e remota 2 (connStatusInt
+     diferente de 1) confirmada depois de cfgTempoCom s;
+   - v1.2: o MGE do PCM Agua Reuso saiu daqui: e a instancia MGE_AGUA_REUSO
+     (MGE_Generico) no frame dos MGEs do layer ETE_TJ;
+   - reset (IHM ou processo): reset dos sensores; a IHM tambem reconhece.
+   ===================================================================== *)
+
+(* ---- 0. Eventos de saida: so sai o que for ligado abaixo ---- *)
+INITO     := FALSE;
+CNF       := FALSE;
+CNF_HMI   := FALSE;
+CNF_ALM   := FALSE;
+CNF_RESET := FALSE;
+
+IF REQ_BOIA THEN
+    bBoiaRecebida := TRUE;
+END_IF;
+
+(* ---- 1. Inicializacao ---- *)
+IF INIT THEN
+    initDone := TRUE;
+    initPass := TRUE;
+    INITO    := TRUE;
+END_IF;
+IF NOT initDone THEN
+    RETURN;
+END_IF;
+
+(* ---- 2. Reset ---- *)
+bReset := (REQ_RESET AND hmiReset) OR (REQ_RESET_PROC AND cmdResetFalhas);
+IF bReset THEN
+    resetSensores := TRUE;
+    CNF_RESET := TRUE;
+END_IF;
+
+(* ---- 3. Comunicacao (falha confirmada depois de cfgTempoCom s) ---- *)
+IF falhaRemota1 THEN
+    IF TICK AND uSegRem1 < UINT_TO_UDINT(cfgTempoCom) THEN
+        uSegRem1 := uSegRem1 + 1;
+    END_IF;
+ELSE
+    uSegRem1 := 0;
+END_IF;
+stsFalhaComRemota1 := falhaRemota1 AND uSegRem1 >= UINT_TO_UDINT(cfgTempoCom);
+
+bRem2 := conRemota2 <> 1;
+IF bRem2 THEN
+    IF TICK AND uSegRem2 < UINT_TO_UDINT(cfgTempoCom) THEN
+        uSegRem2 := uSegRem2 + 1;
+    END_IF;
+ELSE
+    uSegRem2 := 0;
+END_IF;
+stsFalhaComRemota2 := bRem2 AND uSegRem2 >= UINT_TO_UDINT(cfgTempoCom);
+
+(* ---- 4. Boia 1000-LSL-01 ---- *)
+stsBoiaNormal := boia XOR cfgBoiaInvertida;      (* TRUE = boia levantada (nivel acima do baixo) *)
+bCondBaixo := bBoiaRecebida AND NOT falhaRemota1 AND NOT stsBoiaNormal;
+IF bCondBaixo THEN
+    IF TICK AND uSegBoia < UINT_TO_UDINT(cfgTempoBoia) THEN
+        uSegBoia := uSegBoia + 1;
+    END_IF;
+ELSE
+    uSegBoia := 0;
+END_IF;
+stsNivelBaixoBoia := bCondBaixo AND uSegBoia >= UINT_TO_UDINT(cfgTempoBoia);
+
+(* ---- 5. Sensores ---- *)
+stsNivelPIT01 := s1Valor;
+stsPorcentagemPIT01 := s1Porc;
+stsFalhaPIT01 := s1FalhaMem;
+stsAlarmeHHPIT01 := s1HH;
+stsAlarmeHPIT01 := s1H;
+stsAlarmeLPIT01 := s1L;
+stsAlarmeLLPIT01 := s1LL;
+stsNivelPIT02 := s2Valor;
+stsPorcentagemPIT02 := s2Porc;
+stsFalhaPIT02 := s2FalhaMem;
+stsAlarmeHHPIT02 := s2HH;
+stsAlarmeHPIT02 := s2H;
+stsAlarmeLPIT02 := s2L;
+stsAlarmeLLPIT02 := s2LL;
+
+(* condicao para a IHM, da mais grave para a menos grave *)
+IF NOT s1Hab THEN
+    stsCond01 := 7;
+ELSIF s1Falha THEN
+    stsCond01 := 5;
+ELSIF s1FalhaMem THEN
+    stsCond01 := 6;
+ELSIF s1HH THEN
+    stsCond01 := 1;
+ELSIF s1LL THEN
+    stsCond01 := 4;
+ELSIF s1H THEN
+    stsCond01 := 2;
+ELSIF s1L THEN
+    stsCond01 := 3;
+ELSE
+    stsCond01 := 0;
+END_IF;
+IF NOT s2Hab THEN
+    stsCond02 := 7;
+ELSIF s2Falha THEN
+    stsCond02 := 5;
+ELSIF s2FalhaMem THEN
+    stsCond02 := 6;
+ELSIF s2HH THEN
+    stsCond02 := 1;
+ELSIF s2LL THEN
+    stsCond02 := 4;
+ELSIF s2H THEN
+    stsCond02 := 2;
+ELSIF s2L THEN
+    stsCond02 := 3;
+ELSE
+    stsCond02 := 0;
+END_IF;
+
+(* ---- 6. Alarmes ---- *)
+almNivelBaixo := stsNivelBaixoBoia;
+almRemota1 := stsFalhaComRemota1;
+almRemota2 := stsFalhaComRemota2;
+stsAlarme := s1FalhaMem OR s1HH OR s1H OR s1L OR s1LL OR s2FalhaMem OR s2HH OR s2H OR s2L OR s2LL
+             OR almNivelBaixo OR almRemota1 OR almRemota2;
+
+(* ---- 7. Eventos so na mudanca ---- *)
+wSts := 0;
+IF stsFalhaPIT01      THEN wSts := wSts OR 16#0001; END_IF;
+IF stsAlarmeHHPIT01   THEN wSts := wSts OR 16#0002; END_IF;
+IF stsAlarmeHPIT01    THEN wSts := wSts OR 16#0004; END_IF;
+IF stsAlarmeLPIT01    THEN wSts := wSts OR 16#0008; END_IF;
+IF stsAlarmeLLPIT01   THEN wSts := wSts OR 16#0010; END_IF;
+IF stsFalhaPIT02      THEN wSts := wSts OR 16#0020; END_IF;
+IF stsAlarmeHHPIT02   THEN wSts := wSts OR 16#0040; END_IF;
+IF stsAlarmeHPIT02    THEN wSts := wSts OR 16#0080; END_IF;
+IF stsAlarmeLPIT02    THEN wSts := wSts OR 16#0100; END_IF;
+IF stsAlarmeLLPIT02   THEN wSts := wSts OR 16#0200; END_IF;
+IF stsNivelBaixoBoia  THEN wSts := wSts OR 16#0400; END_IF;
+IF stsFalhaComRemota1 THEN wSts := wSts OR 16#0800; END_IF;
+IF stsFalhaComRemota2 THEN wSts := wSts OR 16#1000; END_IF;
+IF stsAlarme          THEN wSts := wSts OR 16#4000; END_IF;
+IF stsBoiaNormal      THEN wSts := wSts OR 16#8000; END_IF;
+CNF := initPass OR ((wSts AND 16#7FFF) <> (oldSts AND 16#7FFF)) OR (stsNivelPIT01 <> oldN1) OR (stsPorcentagemPIT01 <> oldP1)
+       OR (stsNivelPIT02 <> oldN2) OR (stsPorcentagemPIT02 <> oldP2);
+CNF_HMI := initPass OR (wSts <> oldSts) OR (stsNivelPIT01 <> oldN1) OR (stsPorcentagemPIT01 <> oldP1)
+           OR (stsNivelPIT02 <> oldN2) OR (stsPorcentagemPIT02 <> oldP2) OR (stsCond01 <> oldC1) OR (stsCond02 <> oldC2);
+wAlm := 0;
+IF almNivelBaixo THEN wAlm := wAlm OR 16#0001; END_IF;
+IF almRemota1    THEN wAlm := wAlm OR 16#0002; END_IF;
+IF almRemota2    THEN wAlm := wAlm OR 16#0004; END_IF;
+CNF_ALM := initPass OR (wAlm <> oldAlm);
+oldSts := wSts;
+oldAlm := wAlm;
+oldN1 := stsNivelPIT01;
+oldP1 := stsPorcentagemPIT01;
+oldN2 := stsNivelPIT02;
+oldP2 := stsPorcentagemPIT02;
+oldC1 := stsCond01;
+oldC2 := stsCond02;
+
+initPass := FALSE;
+]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

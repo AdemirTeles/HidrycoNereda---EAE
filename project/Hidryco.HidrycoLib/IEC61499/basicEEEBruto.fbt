@@ -1,0 +1,621 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="e14d74a2-b12c-4091-96f7-9c4c77b6d7ba" Comment="Logica unica da elevatoria de esgoto bruto (3 bombas, 2 operando + 1 reserva)" Name="basicEEEBruto" Namespace="Hidryco.HidrycoLib">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Hidryco" Version="1.2" Author="Hidryco" Date="14/10/2026" Remarks="1.2: emergencia do PCM NF. 1.1: emergencia do painel e falha de comunicacao dos ATV630. 1.0: faixas de nivel, revezamento por tempo, PID de velocidade, HH do Nereda, operacao pelas boias, falha de recalque" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="2004138DB0750D97" Name="INIT" Comment="Inicializacao">
+        <With Var="cfgTempoFalhaBoiaL" />
+        <With Var="cfgTempoPartidaPressao" />
+      </Event>
+      <Event ID="FF091F8ADF8E7596" Name="REQ_PARA" Comment="Parametros da IHM (persistentes)">
+        <With Var="necHabilita" />
+        <With Var="stpFaixa1" />
+        <With Var="stpFaixa2" />
+        <With Var="stpFaixa3" />
+        <With Var="stpFaixa4" />
+        <With Var="revHabilita" />
+        <With Var="stpTempoB1" />
+        <With Var="stpTempoB2" />
+        <With Var="stpTempoB3" />
+        <With Var="revSelecao" />
+        <With Var="pidHabilita" />
+        <With Var="pidMinimo" />
+        <With Var="pidMaximo" />
+      </Event>
+      <Event ID="90222814CB973B20" Name="REQ_NIVEL" Comment="LIT-03">
+        <With Var="nivValor" />
+        <With Var="nivFalha" />
+        <With Var="nivAcimaH" />
+      </Event>
+      <Event ID="DBE1B2FFC7FF3B08" Name="REQ_PRESSAO" Comment="PIT-01">
+        <With Var="preLL" />
+      </Event>
+      <Event ID="6AC38C72D7780ED9" Name="REQ_BOIAS" Comment="Boias">
+        <With Var="boiaL" />
+        <With Var="boiaH" />
+      </Event>
+      <Event ID="50C8D5E107305241" Name="REQ_BOMBAS" Comment="Estado das bombas">
+        <With Var="disp1" />
+        <With Var="disp2" />
+        <With Var="disp3" />
+        <With Var="lig1" />
+        <With Var="lig2" />
+        <With Var="lig3" />
+      </Event>
+      <Event ID="0276E9EA951C8BF6" Name="REQ_EXT" Comment="Processo">
+        <With Var="bufferHH" />
+        <With Var="emergProc" />
+      </Event>
+      <Event ID="24497764F9E7DCEC" Name="REQ_CAMPO" Comment="Emergencia do painel">
+        <With Var="emergPainel" />
+      </Event>
+      <Event ID="FA43CD3D3768B370" Name="REQ_ATV" Comment="Comunicacao dos ATV630">
+        <With Var="atvCom1" />
+        <With Var="atvCom2" />
+        <With Var="atvCom3" />
+      </Event>
+      <Event ID="9F042AA84E34F103" Name="REQ_PID" Comment="Saida do PID">
+        <With Var="pidSaida" />
+      </Event>
+      <Event ID="42B63FD756FD5680" Name="REQ_RESET" Comment="Reset pela IHM">
+        <With Var="hmiReset" />
+      </Event>
+      <Event ID="7EBC1FDE51BD3B7B" Name="REQ_RESET_PROC" Comment="Reset pelo processo">
+        <With Var="cmdResetFalhas" />
+      </Event>
+      <Event ID="32C03C0D3ECD7A45" Name="TICK" Comment="Base de tempo de 1 s (E_CYCLE)" />
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="5A945D0C0194930B" Name="INITO" Comment="Inicializacao concluida" />
+      <Event ID="ABCC05CB716E560A" Name="CNF_CMD" Comment="Comandos para as bombas (na mudanca)">
+        <With Var="cmdLiga1" />
+        <With Var="cmdLiga2" />
+        <With Var="cmdLiga3" />
+        <With Var="stpVelocidade" />
+        <With Var="ilkGeral" />
+        <With Var="emergencia" />
+      </Event>
+      <Event ID="1D8700B9217A844B" Name="CNF_COM" Comment="Falha de comunicacao dos ATV630 para os motores (na mudanca e a cada leitura)">
+        <With Var="falhaCom1" />
+        <With Var="falhaCom2" />
+        <With Var="falhaCom3" />
+      </Event>
+      <Event ID="FC3525374D7CA084" Name="CNF_PID" Comment="Modo do pidCtl (na mudanca)">
+        <With Var="pidModo" />
+        <With Var="pidPreset" />
+      </Event>
+      <Event ID="94BCFE033FAC1A7D" Name="CNF_INIBE" Comment="Inibicao dos alarmes baixos do PIT-01 (na mudanca)">
+        <With Var="inibePressao" />
+      </Event>
+      <Event ID="248D4310F5B0BB17" Name="CNF" Comment="Status para o processo (na mudanca)">
+        <With Var="stsNecessidade" />
+        <With Var="stsBombasLigadas" />
+        <With Var="stsSegurandoBuffer" />
+        <With Var="stsModoBoias" />
+        <With Var="stsFalhaRecalque" />
+        <With Var="stsAlarme" />
+      </Event>
+      <Event ID="1098D8AD1579135E" Name="CNF_HMI" Comment="Status para a IHM (na mudanca)">
+        <With Var="stsNecessidade" />
+        <With Var="stsPrincipal" />
+        <With Var="stsSegunda" />
+        <With Var="stsRestanteHor" />
+        <With Var="stsRestanteMin" />
+        <With Var="stsRestanteSeg" />
+        <With Var="stsBombasLigadas" />
+        <With Var="stsModoBoias" />
+        <With Var="stsSegurandoBuffer" />
+        <With Var="stsFalhaRecalque" />
+        <With Var="stsFalhaBoiaL" />
+        <With Var="stsNivelBaixo" />
+        <With Var="stsBoiaL" />
+        <With Var="stsBoiaH" />
+        <With Var="stsBufferHH" />
+        <With Var="stsNivel" />
+        <With Var="stsSaidaPID" />
+        <With Var="stpVelocidade" />
+        <With Var="stsEstado" />
+        <With Var="stsAlarme" />
+      </Event>
+      <Event ID="13609D02FAABDEC3" Name="CNF_ALM" Comment="Alarmes para os ALARM_BIT (na mudanca)">
+        <With Var="almRecalque" />
+        <With Var="almNivelAlto" />
+        <With Var="almFalhaBoiaL" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="2A75047CBF417CA4" Name="cfgTempoFalhaBoiaL" Type="UINT" InitialValue="10" Comment="Operacao pelas boias com a boia LSL com defeito: bombas ficam ligadas este tempo (min) depois que a LSH desce" />
+      <VarDeclaration ID="C074396BDF300B13" Name="cfgTempoPartidaPressao" Type="UINT" InitialValue="30" Comment="Alarmes L/LL do PIT-01 inibidos ate a bomba estar ligada ha este tempo (s); tambem inibidos com as bombas paradas" />
+      <VarDeclaration ID="C05E87D9971F8886" Name="necHabilita" Type="BOOL" Comment="IHM: automatico da elevatoria habilitado (NEC_CMD_HABILITA)" />
+      <VarDeclaration ID="8EB441F793280592" Name="stpFaixa1" Type="REAL" Comment="IHM: com 1 bomba, desliga abaixo deste nivel (STP_LIMITE_FAIXA_1)" />
+      <VarDeclaration ID="072A6C97AFD6585F" Name="stpFaixa2" Type="REAL" Comment="IHM: com 2 bombas, desliga a 2a abaixo deste nivel (STP_LIMITE_FAIXA_2)" />
+      <VarDeclaration ID="BEFB8DAF08C8995F" Name="stpFaixa3" Type="REAL" Comment="IHM: parada, liga a 1a bomba neste nivel (STP_LIMITE_FAIXA_3)" />
+      <VarDeclaration ID="7DBB130FE6E6C808" Name="stpFaixa4" Type="REAL" Comment="IHM: com 1 bomba, liga a 2a neste nivel (STP_LIMITE_FAIXA_4)" />
+      <VarDeclaration ID="5A7C86072FF3CD5A" Name="revHabilita" Type="BOOL" Comment="IHM: revezamento por tempo habilitado (REV_CMD_HABILITA)" />
+      <VarDeclaration ID="CCF7F3F47A1A1320" Name="stpTempoB1" Type="UINT" Comment="IHM: horas da bomba 1 como principal antes da troca; 0 = sem troca por tempo (STP_TEMPO_B1)" />
+      <VarDeclaration ID="665448845ED3554E" Name="stpTempoB2" Type="UINT" Comment="IHM: horas da bomba 2 como principal antes da troca; 0 = sem troca por tempo (STP_TEMPO_B2)" />
+      <VarDeclaration ID="06814213D61A9713" Name="stpTempoB3" Type="UINT" Comment="IHM: horas da bomba 3 como principal antes da troca; 0 = sem troca por tempo (STP_TEMPO_B3)" />
+      <VarDeclaration ID="54CD99170D68F8C4" Name="revSelecao" Type="INT" Comment="IHM: 0 = principal automatica; 1, 2, 3 = principal fixa (CMD_SELECAO_BOMBA)" />
+      <VarDeclaration ID="9E10D0E429B4004A" Name="pidHabilita" Type="BOOL" Comment="IHM: velocidade pelo PID de nivel (PID_CMD_HABILITA); FALSE = velocidade maxima" />
+      <VarDeclaration ID="39D99F13A06DDE55" Name="pidMinimo" Type="REAL" Comment="IHM: velocidade minima / saida minima do PID, % (STP_MINIMO)" />
+      <VarDeclaration ID="6FE815DDF49B081F" Name="pidMaximo" Type="REAL" Comment="IHM: velocidade maxima / saida maxima do PID, % (STP_MAXIMO)" />
+      <VarDeclaration ID="67419F14E8ECCCB2" Name="nivValor" Type="REAL" Comment="LIT-03: nivel (unidade de engenharia)" />
+      <VarDeclaration ID="52C92FD7A4E5C1FD" Name="nivFalha" Type="BOOL" Comment="LIT-03: sinal em falha agora" />
+      <VarDeclaration ID="D4A7159E837D53E2" Name="nivAcimaH" Type="BOOL" Comment="LIT-03: nivel acima do setpoint H agora (alarme H habilitado)" />
+      <VarDeclaration ID="6EC73A6F5DB8968E" Name="preLL" Type="BOOL" Comment="PIT-01: alarme LL de pressao (ja com o tempo do sensor)" />
+      <VarDeclaration ID="4A528109D2D85E74" Name="boiaL" Type="BOOL" Comment="LSL-04: TRUE = boia levantada (nivel acima do baixo)" />
+      <VarDeclaration ID="0BE8A559782EECAE" Name="boiaH" Type="BOOL" Comment="LSH-05: TRUE = boia levantada (nivel alto)" />
+      <VarDeclaration ID="515A40650D020437" Name="disp1" Type="BOOL" Comment="Bomba 1 disponivel para o automatico" />
+      <VarDeclaration ID="AF1EF9EE1167DEDC" Name="disp2" Type="BOOL" Comment="Bomba 2 disponivel para o automatico" />
+      <VarDeclaration ID="5396A772225DEB3F" Name="disp3" Type="BOOL" Comment="Bomba 3 disponivel para o automatico" />
+      <VarDeclaration ID="466542BF0436C757" Name="lig1" Type="BOOL" Comment="Bomba 1 ligada" />
+      <VarDeclaration ID="FCA2071868470917" Name="lig2" Type="BOOL" Comment="Bomba 2 ligada" />
+      <VarDeclaration ID="9B8834E2710E7927" Name="lig3" Type="BOOL" Comment="Bomba 3 ligada" />
+      <VarDeclaration ID="63AE38B1858D4CE6" Name="bufferHH" Type="BOOL" Comment="Processo: nivel HH do tanque de equalizacao do Nereda (40-LT-0001)" />
+      <VarDeclaration ID="36DCE701EB12A3D1" Name="emergProc" Type="BOOL" Comment="Processo: emergencia (entrada stsEmergencia do CAT)" />
+      <VarDeclaration ID="994B7ED99B6C59BF" Name="emergPainel" Type="BOOL" Comment="Campo: emergencia do PCM EEE Bruto, NF (TRUE = normal; FALSE = em emergencia)" />
+      <VarDeclaration ID="22DA8E3A7DE48F1A" Name="atvCom1" Type="BOOL" Comment="ATV630 da bomba 1: comunicacao ativa (ComStatus do HW CAT)" />
+      <VarDeclaration ID="EFA423F4EA5F0E53" Name="atvCom2" Type="BOOL" Comment="ATV630 da bomba 2: comunicacao ativa (ComStatus do HW CAT)" />
+      <VarDeclaration ID="E65C8A6E4484BF72" Name="atvCom3" Type="BOOL" Comment="ATV630 da bomba 3: comunicacao ativa (ComStatus do HW CAT)" />
+      <VarDeclaration ID="B9FF3BEF62466996" Name="pidSaida" Type="REAL" Comment="Saida do pidCtl (%)" />
+      <VarDeclaration ID="ECEAE676A6E41F28" Name="hmiReset" Type="BOOL" Comment="IHM: reset" />
+      <VarDeclaration ID="2FA4CF278B4F3CB3" Name="cmdResetFalhas" Type="BOOL" Comment="Processo: reset (com E_RESET_FALHAS)" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="1F92935144C9F81B" Name="cmdLiga1" Type="BOOL" Comment="Comando automatico da bomba 1" />
+      <VarDeclaration ID="F7CBB0C674366AC9" Name="cmdLiga2" Type="BOOL" Comment="Comando automatico da bomba 2" />
+      <VarDeclaration ID="73409D95B7083780" Name="cmdLiga3" Type="BOOL" Comment="Comando automatico da bomba 3" />
+      <VarDeclaration ID="DB7819F9C5AF6F0F" Name="stpVelocidade" Type="REAL" Comment="Velocidade das bombas ligadas (%)" />
+      <VarDeclaration ID="51E32EDEA2ACC722" Name="ilkGeral" Type="BOOL" Comment="Intertravamento geral das bombas (LSL em nivel baixo ou falha de recalque); vale em qualquer modo" />
+      <VarDeclaration ID="11F225DEC1D0B3A7" Name="pidModo" Type="BOOL" Comment="pidCtl em automatico" />
+      <VarDeclaration ID="6DE3EFF6B05010A8" Name="pidPreset" Type="REAL" Comment="Valor do pidCtl em manual (%)" />
+      <VarDeclaration ID="C04015C0646E521D" Name="inibePressao" Type="BOOL" Comment="Inibe os alarmes L/LL do PIT-01" />
+      <VarDeclaration ID="4AC7770F4C446AEA" Name="stsNecessidade" Type="UINT" Comment="Numero de bombas pedidas (0, 1, 2)" />
+      <VarDeclaration ID="C9E401CFFAA6182F" Name="stsPrincipal" Type="UINT" Comment="Bomba principal (1..3)" />
+      <VarDeclaration ID="A03F17C59577EA19" Name="stsSegunda" Type="UINT" Comment="Bomba que entra como 2a (0 = nenhuma disponivel)" />
+      <VarDeclaration ID="172630242E663B7D" Name="stsRestanteHor" Type="UINT" Comment="Tempo para a troca da principal (h)" />
+      <VarDeclaration ID="7CE98D61C5896B6B" Name="stsRestanteMin" Type="UINT" Comment="Tempo para a troca da principal (min)" />
+      <VarDeclaration ID="FB21944AFA623D56" Name="stsRestanteSeg" Type="UINT" Comment="Tempo para a troca da principal (s)" />
+      <VarDeclaration ID="35666A9BF30FDCC7" Name="stsBombasLigadas" Type="UINT" Comment="Bombas ligadas" />
+      <VarDeclaration ID="BF1AEE1747D48627" Name="stsModoBoias" Type="BOOL" Comment="Operacao de emergencia pelas boias (LIT-03 em falha)" />
+      <VarDeclaration ID="E9F77451534DAE6C" Name="stsSegurandoBuffer" Type="BOOL" Comment="Elevatoria parada segurando o esgoto (HH do tanque do Nereda)" />
+      <VarDeclaration ID="8F72D4456BAA5444" Name="stsFalhaRecalque" Type="BOOL" Comment="Falha de recalque (pressao LL com bomba ligada) - memorizada ate o reset" />
+      <VarDeclaration ID="417E0C30BAF102DF" Name="stsFalhaBoiaL" Type="BOOL" Comment="Boia LSL com defeito (LSH levantada com a LSL abaixada) - memorizada ate o reset" />
+      <VarDeclaration ID="173E069DE197A4CF" Name="stsNivelBaixo" Type="BOOL" Comment="LSL em nivel baixo: bombas intertravadas" />
+      <VarDeclaration ID="489475EDA9AC9EE5" Name="stsBoiaL" Type="BOOL" Comment="LSL-04" />
+      <VarDeclaration ID="1ADD872C67BB4DE1" Name="stsBoiaH" Type="BOOL" Comment="LSH-05" />
+      <VarDeclaration ID="13FC107471B9CC29" Name="stsBufferHH" Type="BOOL" Comment="HH do tanque do Nereda" />
+      <VarDeclaration ID="A676EAE8813C9472" Name="stsNivel" Type="REAL" Comment="Nivel do poco" />
+      <VarDeclaration ID="02A0E42D87C41BFD" Name="stsSaidaPID" Type="REAL" Comment="Saida do PID (%)" />
+      <VarDeclaration ID="93034EF747C7C8B2" Name="stsEstado" Type="INT" Comment="0 parada, 1 bombeando, 2 segurando (HH Nereda), 3 pelas boias, 4 falha de recalque, 5 nivel baixo (LSL), 6 automatico desabilitado, 7 emergencia" />
+      <VarDeclaration ID="E964EB18E69985AA" Name="stsAlarme" Type="BOOL" Comment="Algum alarme da elevatoria" />
+      <VarDeclaration ID="F44BFB101D284D4B" Name="emergencia" Type="BOOL" Comment="Emergencia para as bombas (painel OU processo)" />
+      <VarDeclaration ID="5E2C9EDC99CF53C2" Name="falhaCom1" Type="BOOL" Comment="Falha de comunicacao com o ATV630 da bomba 1 (publicada no stsFalhaComunicacao do motor)" />
+      <VarDeclaration ID="8A88741D2E353A7F" Name="falhaCom2" Type="BOOL" Comment="Falha de comunicacao com o ATV630 da bomba 2 (publicada no stsFalhaComunicacao do motor)" />
+      <VarDeclaration ID="8269D785CA49B905" Name="falhaCom3" Type="BOOL" Comment="Falha de comunicacao com o ATV630 da bomba 3 (publicada no stsFalhaComunicacao do motor)" />
+      <VarDeclaration ID="AC7B9F1FA27C1FD1" Name="almRecalque" Type="BOOL" Comment="ALARM_BIT falha de recalque" />
+      <VarDeclaration ID="058FFE0E7D12B412" Name="almNivelAlto" Type="BOOL" Comment="ALARM_BIT nivel alto (LSH)" />
+      <VarDeclaration ID="3EF67A9DCF2789DB" Name="almFalhaBoiaL" Type="BOOL" Comment="ALARM_BIT defeito da boia LSL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="4c0750c9-6c37-4562-a774-272525a3080f">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="algEEE" />
+    <InternalVars>
+      <VarDeclaration ID="4E9F7F48E66FD124" Name="initDone" Type="BOOL" />
+      <VarDeclaration ID="14B50C28406ED2A3" Name="initPass" Type="BOOL" />
+      <VarDeclaration ID="9228525B9D8B38B6" Name="bReset" Type="BOOL" />
+      <VarDeclaration ID="097ABC71CE30A277" Name="bNivelRecebido" Type="BOOL" Comment="Ja houve leitura do LIT-03" />
+      <VarDeclaration ID="F893FBC7D6CF8F1E" Name="bBoiasRecebidas" Type="BOOL" Comment="Ja houve leitura das boias" />
+      <VarDeclaration ID="AFF2E130095A6C7E" Name="bNivelOk" Type="BOOL" Comment="LIT-03 valido" />
+      <VarDeclaration ID="B162B65596BD1340" Name="bAlgumaLigada" Type="BOOL" />
+      <VarDeclaration ID="211E32DC0850BD0C" Name="bLiberadoHH" Type="BOOL" Comment="HH do Nereda: liberado pelo nivel H do poco" />
+      <VarDeclaration ID="1BFACBC402066490" Name="iNec" Type="UINT" Comment="Numero de bombas pedidas" />
+      <VarDeclaration ID="552DAA145AE14F3D" Name="oldNec" Type="UINT" />
+      <VarDeclaration ID="5E46100FCD7AE74E" Name="bCampoRecebido" Type="BOOL" Comment="Ja houve leitura da emergencia do painel" />
+      <VarDeclaration ID="9CED41839A9F5891" Name="iPrincipal" Type="UINT" InitialValue="1" Comment="Bomba principal (revezamento)" />
+      <VarDeclaration ID="5321C7BB92071026" Name="iUso" Type="UINT" Comment="Principal em uso (fixa indisponivel = proxima)" />
+      <VarDeclaration ID="64241379E2D955C0" Name="iSeg" Type="UINT" Comment="2a bomba" />
+      <VarDeclaration ID="F4B42C5F3F9E208C" Name="iProx" Type="UINT" />
+      <VarDeclaration ID="DF808184195F5F21" Name="iCand" Type="UINT" />
+      <VarDeclaration ID="5FDE72FFB5FA941B" Name="i" Type="UINT" />
+      <VarDeclaration ID="CF48F2B74710C949" Name="bDisp" Type="BOOL" />
+      <VarDeclaration ID="F502E6597948ECCE" Name="bDispP" Type="BOOL" />
+      <VarDeclaration ID="0F4225C99F683992" Name="bLigP" Type="BOOL" />
+      <VarDeclaration ID="444D5C686F3C27BE" Name="uSegPrincipal" Type="UDINT" Comment="Segundos da principal ligada desde a ultima troca" />
+      <VarDeclaration ID="9842A47FF3F66C4C" Name="uLimite" Type="UDINT" />
+      <VarDeclaration ID="52666C046DAD5F62" Name="uResta" Type="UDINT" />
+      <VarDeclaration ID="30829BBABEF40E39" Name="uTempoBoia" Type="UDINT" Comment="Contagem (s) da operacao pelas boias com a LSL com defeito" />
+      <VarDeclaration ID="7B29B65AE1C34CF3" Name="uSegLigada" Type="UDINT" Comment="Segundos com bomba ligada (inibicao do PIT-01)" />
+      <VarDeclaration ID="C7DEBA71688CFC9A" Name="wCmd" Type="WORD" />
+      <VarDeclaration ID="F029F07F7A418156" Name="oldCmd" Type="WORD" InitialValue="16#FFFF" />
+      <VarDeclaration ID="006D4A57343233F0" Name="oldVel" Type="REAL" InitialValue="-1.0" />
+      <VarDeclaration ID="69D6E1B856AE2FFA" Name="oldPidModo" Type="BOOL" />
+      <VarDeclaration ID="3EB114732B736BE3" Name="oldPreset" Type="REAL" InitialValue="-1.0" />
+      <VarDeclaration ID="8B4A5324438B37F8" Name="oldInibe" Type="BOOL" />
+      <VarDeclaration ID="4C45CC67B1DD3C37" Name="wSts" Type="WORD" />
+      <VarDeclaration ID="B6FBFB58981D7E35" Name="oldSts" Type="WORD" InitialValue="16#FFFF" />
+      <VarDeclaration ID="29F86092349D66E6" Name="wHmi" Type="WORD" />
+      <VarDeclaration ID="CEC0B71AE36D2556" Name="oldHmi" Type="WORD" InitialValue="16#FFFF" />
+      <VarDeclaration ID="535CE7BFAE7AC9B1" Name="oldNivel" Type="REAL" InitialValue="-1.0" />
+      <VarDeclaration ID="19CA6483B7740164" Name="oldSaida" Type="REAL" InitialValue="-1.0" />
+      <VarDeclaration ID="A89D1FD6C8A94AB6" Name="oldResta" Type="UDINT" InitialValue="16#FFFFFFFF" />
+      <VarDeclaration ID="9D7158F8D7B23780" Name="oldEstado" Type="INT" InitialValue="-1" />
+      <VarDeclaration ID="944E1735194288BF" Name="oldInfo" Type="UINT" InitialValue="16#FFFF" />
+      <VarDeclaration ID="B542175BA30D10F0" Name="uInfo" Type="UINT" />
+      <VarDeclaration ID="634E59FD27265DA9" Name="wAlm" Type="WORD" />
+      <VarDeclaration ID="E55BDBEDB8958824" Name="oldAlm" Type="WORD" InitialValue="16#FFFF" />
+      <VarDeclaration ID="D5AE841A361C5A0F" Name="wCom" Type="WORD" />
+      <VarDeclaration ID="43C241849E2C3E3F" Name="oldCom" Type="WORD" InitialValue="16#FFFF" />
+    </InternalVars>
+    <ECC>
+      <ECState Name="START" Comment="Estado inicial" x="1500" y="640" />
+      <ECState Name="EXEC" Comment="Executa a logica; o algoritmo decide quais eventos saem" x="1500" y="1100">
+        <ECAction Algorithm="algEEE" Output="INITO" />
+        <ECAction Output="CNF_CMD" />
+        <ECAction Output="CNF_COM" />
+        <ECAction Output="CNF_PID" />
+        <ECAction Output="CNF_INIBE" />
+        <ECAction Output="CNF" />
+        <ECAction Output="CNF_HMI" />
+        <ECAction Output="CNF_ALM" />
+      </ECState>
+      <ECTransition Source="START" Destination="EXEC" Condition="INIT OR REQ_PARA OR REQ_NIVEL OR REQ_PRESSAO OR REQ_BOIAS OR REQ_BOMBAS OR REQ_EXT OR REQ_CAMPO OR REQ_ATV OR REQ_PID OR REQ_RESET OR REQ_RESET_PROC OR TICK" x="1580" y="860" />
+      <ECTransition Source="EXEC" Destination="START" Condition="1" x="1420" y="860" />
+    </ECC>
+    <Algorithm Name="algEEE" Comment="Logica completa da elevatoria (um unico algoritmo)">
+      <ST><![CDATA[(* =====================================================================
+   basicEEEBruto v1.1 - Elevatoria de Esgoto Bruto (100-BS-01/02/03)
+   Padrao das bibliotecas Schneider: eventos de saida desligados no inicio e
+   ligados so na mudanca; tempos contados pelo TICK de 1 s (E_CYCLE do CAT).
+   Regras (definidas pelo usuario, out/2026):
+   - numero de bombas por faixas de nivel do LIT-03 (mesmas tags do CAT
+     Necessidade_2_Equipamentos), no maximo 2; velocidade pelo PID de nivel;
+   - revezamento: troca da principal apos STP_TEMPO_Bx horas ligada, na
+     sequencia 1-2-3 pulando a indisponivel; a 2a e a proxima da sequencia;
+     principal indisponivel = troca na hora (tags do Revezamento_3_Motores);
+   - HH do tanque do Nereda: a elevatoria para e segura o esgoto; volta a
+     bombear quando o poco chega ao H dele (ou na LSH) - o tanque do Nereda
+     tem extravasor; depois que esvazia ate a faixa 1, volta a segurar;
+   - LIT-03 em falha: operacao pelas boias (LSH liga as 2 bombas na
+     velocidade maxima; desligam quando a LSL abaixa; com a LSL com defeito,
+     ficam cfgTempoFalhaBoiaL min depois que a LSH desce);
+   - LSL abaixada desliga as bombas (ilkGeral) e elas voltam sozinhas;
+   - PIT-01 em LL com bomba ligada = falha de recalque: para todas, alarma,
+     memoriza ate o reset; L/LL do PIT-01 inibidos com as bombas paradas e
+     nos primeiros cfgTempoPartidaPressao s depois da partida;
+   - LSH so alarma (fora a operacao pelas boias e a liberacao do HH).
+   v1.2: emergencia do PCM e NF (FALSE = em emergencia), so vale depois da
+         1a leitura do campo.
+   v1.1: emergencia do painel (campo) OU do processo vai para as bombas;
+   falha de comunicacao de cada ATV630 = NOT ComStatus, publicada no
+   stsFalhaComunicacao do motor (sem leitura = falha).
+   ===================================================================== *)
+
+(* ---- 0. Eventos de saida: so sai o que for ligado abaixo ---- *)
+INITO     := FALSE;
+CNF_CMD   := FALSE;
+CNF_PID   := FALSE;
+CNF_INIBE := FALSE;
+CNF       := FALSE;
+CNF_HMI   := FALSE;
+CNF_ALM   := FALSE;
+CNF_COM   := FALSE;
+
+IF REQ_NIVEL THEN
+    bNivelRecebido := TRUE;
+END_IF;
+IF REQ_BOIAS THEN
+    bBoiasRecebidas := TRUE;
+END_IF;
+IF REQ_CAMPO THEN
+    bCampoRecebido := TRUE;
+END_IF;
+
+(* ---- 1. Inicializacao ---- *)
+IF INIT THEN
+    initDone := TRUE;
+    initPass := TRUE;
+    INITO    := TRUE;
+END_IF;
+IF NOT initDone THEN
+    RETURN;
+END_IF;
+
+bReset := (REQ_RESET AND hmiReset) OR (REQ_RESET_PROC AND cmdResetFalhas);
+bAlgumaLigada := lig1 OR lig2 OR lig3;
+stsBombasLigadas := 0;
+IF lig1 THEN stsBombasLigadas := stsBombasLigadas + 1; END_IF;
+IF lig2 THEN stsBombasLigadas := stsBombasLigadas + 1; END_IF;
+IF lig3 THEN stsBombasLigadas := stsBombasLigadas + 1; END_IF;
+
+(* ---- 2. Boias ---- *)
+IF boiaH AND NOT boiaL THEN
+    stsFalhaBoiaL := TRUE;                 (* LSH levantada com a LSL abaixada: LSL com defeito *)
+END_IF;
+IF bReset AND boiaL THEN
+    stsFalhaBoiaL := FALSE;
+END_IF;
+(* nivel baixo: LSL abaixada (so se a LSL estiver confiavel); antes da 1a leitura, bloqueado *)
+stsNivelBaixo := NOT bBoiasRecebidas OR (NOT boiaL AND NOT stsFalhaBoiaL);
+
+(* ---- 3. Falha de recalque (PIT-01) ---- *)
+IF bAlgumaLigada THEN
+    IF TICK AND uSegLigada < UINT_TO_UDINT(cfgTempoPartidaPressao) THEN
+        uSegLigada := uSegLigada + 1;
+    END_IF;
+ELSE
+    uSegLigada := 0;
+END_IF;
+inibePressao := uSegLigada < UINT_TO_UDINT(cfgTempoPartidaPressao);
+IF preLL AND NOT inibePressao THEN
+    stsFalhaRecalque := TRUE;              (* pressao LL com bomba ligada: para todas *)
+END_IF;
+IF bReset AND NOT preLL THEN
+    stsFalhaRecalque := FALSE;
+END_IF;
+ilkGeral := stsNivelBaixo OR stsFalhaRecalque;
+
+(* ---- 3b. Emergencia e comunicacao dos ATV630 ---- *)
+emergencia := emergProc OR (bCampoRecebido AND NOT emergPainel);   (* PCM: contato NF; sem leitura = sem emergencia *)
+falhaCom1 := NOT atvCom1;
+falhaCom2 := NOT atvCom2;
+falhaCom3 := NOT atvCom3;
+
+(* ---- 4. Origem do nivel ---- *)
+bNivelOk := bNivelRecebido AND NOT nivFalha;
+stsModoBoias := NOT bNivelOk;
+
+(* ---- 5. HH do tanque do Nereda: segura enquanto o poco nao chega ao H ---- *)
+IF NOT bufferHH THEN
+    bLiberadoHH := FALSE;
+ELSIF (bNivelOk AND nivAcimaH) OR boiaH THEN
+    bLiberadoHH := TRUE;                   (* poco no H: volta a bombear (o Nereda tem extravasor) *)
+END_IF;
+stsSegurandoBuffer := necHabilita AND bufferHH AND NOT bLiberadoHH;
+
+(* ---- 6. Numero de bombas ---- *)
+IF NOT necHabilita OR stsSegurandoBuffer THEN
+    iNec := 0;
+    uTempoBoia := 0;
+ELSIF NOT stsModoBoias THEN
+    uTempoBoia := 0;
+    IF iNec = 0 THEN
+        IF nivValor >= stpFaixa3 THEN
+            iNec := 1;
+        END_IF;
+    ELSIF iNec = 1 THEN
+        IF nivValor >= stpFaixa4 THEN
+            iNec := 2;
+        ELSIF nivValor < stpFaixa1 THEN
+            iNec := 0;
+        END_IF;
+    ELSE
+        IF nivValor < stpFaixa2 THEN
+            iNec := 1;
+        END_IF;
+    END_IF;
+ELSE
+    (* operacao de emergencia pelas boias *)
+    IF boiaH THEN
+        iNec := 2;
+        uTempoBoia := UINT_TO_UDINT(cfgTempoFalhaBoiaL) * 60;
+    ELSIF iNec > 0 THEN
+        IF stsFalhaBoiaL THEN
+            IF TICK AND uTempoBoia > 0 THEN
+                uTempoBoia := uTempoBoia - 1;
+            END_IF;
+            IF uTempoBoia = 0 THEN
+                iNec := 0;                 (* LSL com defeito: desliga pelo tempo *)
+            END_IF;
+        ELSIF NOT boiaL THEN
+            iNec := 0;                     (* LSL abaixou *)
+        END_IF;
+    END_IF;
+END_IF;
+IF iNec = 0 AND oldNec > 0 THEN
+    bLiberadoHH := FALSE;                  (* esvaziou: se o HH do Nereda continuar, volta a segurar *)
+END_IF;
+oldNec := iNec;
+stsNecessidade := iNec;
+
+(* ---- 7. Revezamento ---- *)
+IF iPrincipal < 1 OR iPrincipal > 3 THEN
+    iPrincipal := 1;
+END_IF;
+IF revSelecao >= 1 AND revSelecao <= 3 THEN
+    IF iPrincipal <> INT_TO_UINT(revSelecao) THEN
+        iPrincipal := INT_TO_UINT(revSelecao);
+        uSegPrincipal := 0;
+    END_IF;
+END_IF;
+(* proxima disponivel depois da principal, na sequencia 1-2-3 *)
+iProx := 0;
+iCand := iPrincipal;
+FOR i := 1 TO 2 DO
+    iCand := iCand + 1;
+    IF iCand > 3 THEN
+        iCand := 1;
+    END_IF;
+    IF iCand = 1 THEN
+        bDisp := disp1;
+    ELSIF iCand = 2 THEN
+        bDisp := disp2;
+    ELSE
+        bDisp := disp3;
+    END_IF;
+    IF bDisp AND iProx = 0 THEN
+        iProx := iCand;
+    END_IF;
+END_FOR;
+IF iPrincipal = 1 THEN
+    bDispP := disp1; bLigP := lig1; uLimite := UINT_TO_UDINT(stpTempoB1) * 3600;
+ELSIF iPrincipal = 2 THEN
+    bDispP := disp2; bLigP := lig2; uLimite := UINT_TO_UDINT(stpTempoB2) * 3600;
+ELSE
+    bDispP := disp3; bLigP := lig3; uLimite := UINT_TO_UDINT(stpTempoB3) * 3600;
+END_IF;
+IF revSelecao >= 1 AND revSelecao <= 3 THEN
+    (* principal fixa: se estiver indisponivel, a proxima assume so enquanto ela estiver fora *)
+    IF NOT bDispP AND iProx <> 0 THEN
+        iUso := iProx;
+    ELSE
+        iUso := iPrincipal;
+    END_IF;
+    uLimite := 0;
+ELSE
+    IF NOT bDispP AND iProx <> 0 THEN
+        iPrincipal := iProx;               (* principal indisponivel: troca na hora *)
+        uSegPrincipal := 0;
+    ELSE
+        IF TICK AND bLigP AND revHabilita AND uLimite > 0 THEN
+            uSegPrincipal := uSegPrincipal + 1;
+        END_IF;
+        IF revHabilita AND uLimite > 0 AND uSegPrincipal >= uLimite AND iProx <> 0 THEN
+            iPrincipal := iProx;           (* venceu o tempo da principal *)
+            uSegPrincipal := 0;
+        END_IF;
+    END_IF;
+    iUso := iPrincipal;
+    IF NOT revHabilita THEN
+        uLimite := 0;
+    ELSIF iPrincipal = 1 THEN
+        uLimite := UINT_TO_UDINT(stpTempoB1) * 3600;
+    ELSIF iPrincipal = 2 THEN
+        uLimite := UINT_TO_UDINT(stpTempoB2) * 3600;
+    ELSE
+        uLimite := UINT_TO_UDINT(stpTempoB3) * 3600;
+    END_IF;
+END_IF;
+(* 2a bomba: proxima disponivel depois da principal em uso *)
+iSeg := 0;
+iCand := iUso;
+FOR i := 1 TO 2 DO
+    iCand := iCand + 1;
+    IF iCand > 3 THEN
+        iCand := 1;
+    END_IF;
+    IF iCand = 1 THEN
+        bDisp := disp1;
+    ELSIF iCand = 2 THEN
+        bDisp := disp2;
+    ELSE
+        bDisp := disp3;
+    END_IF;
+    IF bDisp AND iSeg = 0 THEN
+        iSeg := iCand;
+    END_IF;
+END_FOR;
+stsPrincipal := iUso;
+stsSegunda := iSeg;
+IF uLimite > uSegPrincipal THEN
+    uResta := uLimite - uSegPrincipal;
+ELSE
+    uResta := 0;
+END_IF;
+stsRestanteHor := UDINT_TO_UINT(uResta / 3600);
+stsRestanteMin := UDINT_TO_UINT((uResta MOD 3600) / 60);
+stsRestanteSeg := UDINT_TO_UINT(uResta MOD 60);
+
+(* ---- 8. Comandos ---- *)
+cmdLiga1 := (iNec >= 1 AND iUso = 1) OR (iNec >= 2 AND iSeg = 1);
+cmdLiga2 := (iNec >= 1 AND iUso = 2) OR (iNec >= 2 AND iSeg = 2);
+cmdLiga3 := (iNec >= 1 AND iUso = 3) OR (iNec >= 2 AND iSeg = 3);
+
+(* ---- 9. Velocidade ---- *)
+pidModo := pidHabilita AND NOT stsModoBoias AND iNec > 0 AND bAlgumaLigada;
+pidPreset := pidMinimo;
+IF pidHabilita AND NOT stsModoBoias THEN
+    IF pidModo THEN
+        stpVelocidade := pidSaida;
+    ELSE
+        stpVelocidade := pidMinimo;        (* partida pela velocidade minima; o PID assume com a bomba ligada *)
+    END_IF;
+ELSE
+    stpVelocidade := pidMaximo;            (* PID desabilitado ou operacao pelas boias *)
+END_IF;
+stsSaidaPID := pidSaida;
+
+(* ---- 10. Status e alarmes ---- *)
+stsBoiaL := boiaL;
+stsBoiaH := boiaH;
+stsBufferHH := bufferHH;
+stsNivel := nivValor;
+almRecalque := stsFalhaRecalque;
+almNivelAlto := boiaH;
+almFalhaBoiaL := stsFalhaBoiaL;
+stsAlarme := almRecalque OR almNivelAlto OR almFalhaBoiaL;
+IF emergencia THEN
+    stsEstado := 7;
+ELSIF stsFalhaRecalque THEN
+    stsEstado := 4;
+ELSIF stsNivelBaixo THEN
+    stsEstado := 5;
+ELSIF NOT necHabilita THEN
+    stsEstado := 6;
+ELSIF stsSegurandoBuffer THEN
+    stsEstado := 2;
+ELSIF stsModoBoias THEN
+    stsEstado := 3;
+ELSIF iNec > 0 THEN
+    stsEstado := 1;
+ELSE
+    stsEstado := 0;
+END_IF;
+
+(* ---- 11. Eventos so na mudanca ---- *)
+wCmd := 0;
+IF cmdLiga1 THEN wCmd := wCmd OR 16#0001; END_IF;
+IF cmdLiga2 THEN wCmd := wCmd OR 16#0002; END_IF;
+IF cmdLiga3 THEN wCmd := wCmd OR 16#0004; END_IF;
+IF ilkGeral THEN wCmd := wCmd OR 16#0008; END_IF;
+IF emergencia THEN wCmd := wCmd OR 16#0010; END_IF;
+CNF_CMD := initPass OR (wCmd <> oldCmd) OR (stpVelocidade <> oldVel);
+CNF_PID := initPass OR (pidModo <> oldPidModo) OR (pidPreset <> oldPreset);
+CNF_INIBE := initPass OR (inibePressao <> oldInibe);
+wSts := 0;
+IF stsSegurandoBuffer THEN wSts := wSts OR 16#0001; END_IF;
+IF stsModoBoias       THEN wSts := wSts OR 16#0002; END_IF;
+IF stsFalhaRecalque   THEN wSts := wSts OR 16#0004; END_IF;
+IF stsAlarme          THEN wSts := wSts OR 16#0008; END_IF;
+uInfo := iNec + stsBombasLigadas * 16 + iUso * 256 + iSeg * 4096;
+CNF := initPass OR (wSts <> oldSts) OR (iNec <> (oldInfo MOD 16)) OR (stsBombasLigadas <> ((oldInfo / 16) MOD 16));
+wHmi := wSts;
+IF stsFalhaBoiaL  THEN wHmi := wHmi OR 16#0010; END_IF;
+IF stsNivelBaixo  THEN wHmi := wHmi OR 16#0020; END_IF;
+IF boiaL          THEN wHmi := wHmi OR 16#0040; END_IF;
+IF boiaH          THEN wHmi := wHmi OR 16#0080; END_IF;
+IF bufferHH       THEN wHmi := wHmi OR 16#0100; END_IF;
+CNF_HMI := initPass OR (wHmi <> oldHmi) OR (uInfo <> oldInfo) OR (stsEstado <> oldEstado) OR (nivValor <> oldNivel)
+           OR (pidSaida <> oldSaida) OR (stpVelocidade <> oldVel) OR (uResta <> oldResta);
+wAlm := 0;
+IF almRecalque   THEN wAlm := wAlm OR 16#0001; END_IF;
+IF almNivelAlto  THEN wAlm := wAlm OR 16#0002; END_IF;
+IF almFalhaBoiaL THEN wAlm := wAlm OR 16#0004; END_IF;
+CNF_ALM := initPass OR (wAlm <> oldAlm);
+wCom := 0;
+IF falhaCom1 THEN wCom := wCom OR 16#0001; END_IF;
+IF falhaCom2 THEN wCom := wCom OR 16#0002; END_IF;
+IF falhaCom3 THEN wCom := wCom OR 16#0004; END_IF;
+CNF_COM := initPass OR REQ_ATV OR (wCom <> oldCom);   (* a cada leitura: tambem republica depois do INIT do publicador *)
+oldCmd := wCmd;
+oldVel := stpVelocidade;
+oldPidModo := pidModo;
+oldPreset := pidPreset;
+oldInibe := inibePressao;
+oldSts := wSts;
+oldHmi := wHmi;
+oldInfo := uInfo;
+oldEstado := stsEstado;
+oldNivel := nivValor;
+oldSaida := pidSaida;
+oldResta := uResta;
+oldAlm := wAlm;
+oldCom := wCom;
+
+initPass := FALSE;
+]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

@@ -1,0 +1,698 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="3a2a799b-f958-4af8-8565-a8cdf83fadd4" Name="basicMGEGenerico" Comment="Logica unica do multimedidor (PM5300): valores, falta de fase, tensao e corrente H/L, comunicacao" Namespace="Hidryco.HidrycoLib">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Hidryco" Version="1.5" Author="Hidryco" Date="15/10/2026" Remarks="1.5: valores na IHM com prefixo STS_ (STS_TENSAO_AB ... STS_FREQUENCIA). 1.4: corrente A, B e C baixa (um ajuste, 3 alarmes). 1.3: so as grandezas, ajustes e alarmes da especificacao; referencia 0 = desligado; um tempo por grupo. 1.2: lista de alarmes do cliente. 1.1: frequencia como LINT (VTQLINT do PM53xxMbtcp). 1.0: PM5300 pelo HW CAT PM53xxMbtcp; falta de fase, tensao H/L e corrente H/L ajustaveis na IHM" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="9F5D02D43587CE34" Name="INIT" Comment="Inicializacao">
+        <With Var="cfgTempoCom" />
+      </Event>
+      <Event ID="6A49606260A35652" Name="REQ_PARA" Comment="Parametros da IHM (persistentes)">
+        <With Var="stpFPL" />
+        <With Var="stpVFH" />
+        <With Var="stpVFL" />
+        <With Var="stpVNH" />
+        <With Var="stpVNL" />
+        <With Var="stpIH" />
+        <With Var="stpIL" />
+        <With Var="stpFRH" />
+        <With Var="stpFRL" />
+        <With Var="tmpFP" />
+        <With Var="tmpTEN" />
+        <With Var="tmpCOR" />
+        <With Var="tmpFRE" />
+      </Event>
+      <Event ID="F5C71D3E4D52B580" Name="REQ_V" Comment="Tensoes">
+        <With Var="mVAB" />
+        <With Var="mVBC" />
+        <With Var="mVCA" />
+        <With Var="mVAN" />
+        <With Var="mVBN" />
+        <With Var="mVCN" />
+      </Event>
+      <Event ID="967BB9475D5FB31F" Name="REQ_I" Comment="Correntes">
+        <With Var="mIA" />
+        <With Var="mIB" />
+        <With Var="mIC" />
+      </Event>
+      <Event ID="74289281190DCCEA" Name="REQ_P" Comment="Potencias e FP">
+        <With Var="mPA" />
+        <With Var="mPB" />
+        <With Var="mPC" />
+        <With Var="mPT" />
+        <With Var="mQA" />
+        <With Var="mQB" />
+        <With Var="mQC" />
+        <With Var="mQT" />
+        <With Var="mST" />
+        <With Var="mFp" />
+      </Event>
+      <Event ID="8C17181F30D9640C" Name="REQ_E" Comment="Frequencia">
+        <With Var="mFreq" />
+      </Event>
+      <Event ID="2AA09F5D795E9774" Name="REQ_COM" Comment="Comunicacao">
+        <With Var="comOK" />
+      </Event>
+      <Event ID="A0F14ADAA28E4173" Name="REQ_RESET" Comment="Reset pela IHM">
+        <With Var="hmiReset" />
+      </Event>
+      <Event ID="DB1848E569BB8432" Name="REQ_RESET_PROC" Comment="Reset pelo processo">
+        <With Var="cmdResetFalhas" />
+      </Event>
+      <Event ID="DF07E6CBFE092BB1" Name="TICK" Comment="Base de tempo de 1 s (E_CYCLE)" />
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="E47EE255A9E81DEF" Name="INITO" Comment="Inicializacao concluida" />
+      <Event ID="AEC7342932406D99" Name="CNF" Comment="Valores e alarmes (na mudanca)">
+        <With Var="stsTensaoAB" />
+        <With Var="stsTensaoBC" />
+        <With Var="stsTensaoCA" />
+        <With Var="stsTensaoAN" />
+        <With Var="stsTensaoBN" />
+        <With Var="stsTensaoCN" />
+        <With Var="stsCorrenteA" />
+        <With Var="stsCorrenteB" />
+        <With Var="stsCorrenteC" />
+        <With Var="stsPotenciaAtivaA" />
+        <With Var="stsPotenciaAtivaB" />
+        <With Var="stsPotenciaAtivaC" />
+        <With Var="stsPotenciaAtivaTotal" />
+        <With Var="stsPotenciaReativaA" />
+        <With Var="stsPotenciaReativaB" />
+        <With Var="stsPotenciaReativaC" />
+        <With Var="stsPotenciaReativaTotal" />
+        <With Var="stsPotenciaAparenteTotal" />
+        <With Var="stsFatorPotencia" />
+        <With Var="stsFrequencia" />
+        <With Var="stsAlarmeFPBaixo" />
+        <With Var="stsAlarmeTensaoFFH" />
+        <With Var="stsAlarmeTensaoFFL" />
+        <With Var="stsAlarmeTensaoFNH" />
+        <With Var="stsAlarmeTensaoFNL" />
+        <With Var="stsAlarmeCorrenteAH" />
+        <With Var="stsAlarmeCorrenteBH" />
+        <With Var="stsAlarmeCorrenteCH" />
+        <With Var="stsAlarmeCorrenteAL" />
+        <With Var="stsAlarmeCorrenteBL" />
+        <With Var="stsAlarmeCorrenteCL" />
+        <With Var="stsAlarmeFrequenciaH" />
+        <With Var="stsAlarmeFrequenciaL" />
+        <With Var="stsFalhaComunicacao" />
+        <With Var="stsAlarme" />
+      </Event>
+      <Event ID="9B7481123393F975" Name="CNF_HMI" Comment="Status para a IHM (na mudanca)">
+        <With Var="stsTensaoAB" />
+        <With Var="stsTensaoBC" />
+        <With Var="stsTensaoCA" />
+        <With Var="stsTensaoAN" />
+        <With Var="stsTensaoBN" />
+        <With Var="stsTensaoCN" />
+        <With Var="stsCorrenteA" />
+        <With Var="stsCorrenteB" />
+        <With Var="stsCorrenteC" />
+        <With Var="stsPotenciaAtivaA" />
+        <With Var="stsPotenciaAtivaB" />
+        <With Var="stsPotenciaAtivaC" />
+        <With Var="stsPotenciaAtivaTotal" />
+        <With Var="stsPotenciaReativaA" />
+        <With Var="stsPotenciaReativaB" />
+        <With Var="stsPotenciaReativaC" />
+        <With Var="stsPotenciaReativaTotal" />
+        <With Var="stsPotenciaAparenteTotal" />
+        <With Var="stsFatorPotencia" />
+        <With Var="stsFrequencia" />
+        <With Var="stsAlarmeFPBaixo" />
+        <With Var="stsAlarmeTensaoFFH" />
+        <With Var="stsAlarmeTensaoFFL" />
+        <With Var="stsAlarmeTensaoFNH" />
+        <With Var="stsAlarmeTensaoFNL" />
+        <With Var="stsAlarmeCorrenteAH" />
+        <With Var="stsAlarmeCorrenteBH" />
+        <With Var="stsAlarmeCorrenteCH" />
+        <With Var="stsAlarmeCorrenteAL" />
+        <With Var="stsAlarmeCorrenteBL" />
+        <With Var="stsAlarmeCorrenteCL" />
+        <With Var="stsAlarmeFrequenciaH" />
+        <With Var="stsAlarmeFrequenciaL" />
+        <With Var="stsFalhaComunicacao" />
+        <With Var="stsAlarme" />
+      </Event>
+      <Event ID="CA7EE46F7F0770BC" Name="CNF_ALM" Comment="Alarmes para os ALARM_BIT (na mudanca)">
+        <With Var="almCom" />
+        <With Var="almFPL" />
+        <With Var="almVFH" />
+        <With Var="almVFL" />
+        <With Var="almVNH" />
+        <With Var="almVNL" />
+        <With Var="almIAH" />
+        <With Var="almIBH" />
+        <With Var="almICH" />
+        <With Var="almIAL" />
+        <With Var="almIBL" />
+        <With Var="almICL" />
+        <With Var="almFRH" />
+        <With Var="almFRL" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="437048CAB4EF459B" Name="cfgTempoCom" Type="UINT" InitialValue="5" Comment="Tempo (s) sem comunicacao com o medidor para confirmar a falha" />
+      <VarDeclaration ID="54EB28BC84E7838A" Name="stpFPL" Type="REAL" Comment="IHM: valor de referencia - Fator de potência baixo (abaixo de) (0 = desligado)" />
+      <VarDeclaration ID="E9A3EA6D590FEE37" Name="stpVFH" Type="REAL" Comment="IHM: valor de referencia - Tensão entre fases alta (acima de) (0 = desligado)" />
+      <VarDeclaration ID="4C3B3E1EC499BB7D" Name="stpVFL" Type="REAL" Comment="IHM: valor de referencia - Tensão entre fases baixa (abaixo de) (0 = desligado)" />
+      <VarDeclaration ID="B3A7D982A721D879" Name="stpVNH" Type="REAL" Comment="IHM: valor de referencia - Tensão fase-neutro alta (acima de) (0 = desligado)" />
+      <VarDeclaration ID="05000A39B08793CD" Name="stpVNL" Type="REAL" Comment="IHM: valor de referencia - Tensão fase-neutro baixa (abaixo de) (0 = desligado)" />
+      <VarDeclaration ID="DD5578AD81C8F373" Name="stpIH" Type="REAL" Comment="IHM: valor de referencia - Corrente alta - fases A, B e C (acima de) (0 = desligado)" />
+      <VarDeclaration ID="70F112F8F27AB7E4" Name="stpIL" Type="REAL" Comment="IHM: valor de referencia - Corrente baixa - fases A, B e C (abaixo de) (0 = desligado)" />
+      <VarDeclaration ID="31CBD62CE860DD48" Name="stpFRH" Type="REAL" Comment="IHM: valor de referencia - Frequência alta (acima de) (0 = desligado)" />
+      <VarDeclaration ID="84C7AFD3C570D0FF" Name="stpFRL" Type="REAL" Comment="IHM: valor de referencia - Frequência baixa (abaixo de) (0 = desligado)" />
+      <VarDeclaration ID="0FCB7D8BABE5842B" Name="tmpFP" Type="UINT" Comment="IHM: tempo de retardo (s) dos alarmes de fator de potência" />
+      <VarDeclaration ID="5B2734CC365FC416" Name="tmpTEN" Type="UINT" Comment="IHM: tempo de retardo (s) dos alarmes de tensão" />
+      <VarDeclaration ID="F9E02D7CA7FE396D" Name="tmpCOR" Type="UINT" Comment="IHM: tempo de retardo (s) dos alarmes de corrente" />
+      <VarDeclaration ID="B8BF3F3AEC8BA46F" Name="tmpFRE" Type="UINT" Comment="IHM: tempo de retardo (s) dos alarmes de frequência" />
+      <VarDeclaration ID="23895DD175C25514" Name="mVAB" Type="REAL" Comment="Tensao A-B (V)" />
+      <VarDeclaration ID="F90E2B2FC55BA1CA" Name="mVBC" Type="REAL" Comment="Tensao B-C (V)" />
+      <VarDeclaration ID="9A2FEDFAA23B9FBE" Name="mVCA" Type="REAL" Comment="Tensao C-A (V)" />
+      <VarDeclaration ID="EA2CDED484FB370F" Name="mVAN" Type="REAL" Comment="Tensao A-N (V)" />
+      <VarDeclaration ID="45C7F73083D33855" Name="mVBN" Type="REAL" Comment="Tensao B-N (V)" />
+      <VarDeclaration ID="49C54F216B8FD3B5" Name="mVCN" Type="REAL" Comment="Tensao C-N (V)" />
+      <VarDeclaration ID="15EFB699F1661CF7" Name="mIA" Type="REAL" Comment="Corrente fase A (A)" />
+      <VarDeclaration ID="8E04AD2CCA4792B9" Name="mIB" Type="REAL" Comment="Corrente fase B (A)" />
+      <VarDeclaration ID="8A2E8DB094282CC1" Name="mIC" Type="REAL" Comment="Corrente fase C (A)" />
+      <VarDeclaration ID="8279BBA83A66993B" Name="mPA" Type="REAL" Comment="Potencia ativa fase A (kW)" />
+      <VarDeclaration ID="F3D3261550357656" Name="mPB" Type="REAL" Comment="Potencia ativa fase B (kW)" />
+      <VarDeclaration ID="1521741E9F36758F" Name="mPC" Type="REAL" Comment="Potencia ativa fase C (kW)" />
+      <VarDeclaration ID="13CE1AEB225E8F43" Name="mPT" Type="REAL" Comment="Potencia ativa total (kW)" />
+      <VarDeclaration ID="31DEB4D01C782F4A" Name="mQA" Type="REAL" Comment="Potencia reativa fase A (kVAr)" />
+      <VarDeclaration ID="D0DBE61D0296D28C" Name="mQB" Type="REAL" Comment="Potencia reativa fase B (kVAr)" />
+      <VarDeclaration ID="F287CB8A9A2AB36E" Name="mQC" Type="REAL" Comment="Potencia reativa fase C (kVAr)" />
+      <VarDeclaration ID="B3A13548EF928803" Name="mQT" Type="REAL" Comment="Potencia reativa total (kVAr)" />
+      <VarDeclaration ID="D657F63BBA25F39C" Name="mST" Type="REAL" Comment="Potencia aparente total (kVA)" />
+      <VarDeclaration ID="505EEA3B9A786B68" Name="mFp" Type="REAL" Comment="Fator de potencia total ()" />
+      <VarDeclaration ID="29299DC668CC3955" Name="mFreq" Type="LINT" Comment="Frequencia (Hz; o PM53xxMbtcp publica como VTQLINT, sem decimais)" />
+      <VarDeclaration ID="7B142F22116367BE" Name="comOK" Type="BOOL" Comment="ComStatus do PM53xxMbtcp (TRUE = comunicacao ativa)" />
+      <VarDeclaration ID="09700DEBF5EDB7C8" Name="hmiReset" Type="BOOL" Comment="IHM: reset / reconhecimento" />
+      <VarDeclaration ID="742F5E7E634543E1" Name="cmdResetFalhas" Type="BOOL" Comment="Processo: reset (com E_RESET_FALHAS)" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="D7A00C30A6619D8D" Name="stsTensaoAB" Type="REAL" Comment="Tensao A-B (V)" />
+      <VarDeclaration ID="146C9A11D5258D71" Name="stsTensaoBC" Type="REAL" Comment="Tensao B-C (V)" />
+      <VarDeclaration ID="5A35EDE710ED9E91" Name="stsTensaoCA" Type="REAL" Comment="Tensao C-A (V)" />
+      <VarDeclaration ID="995DA9785F33D214" Name="stsTensaoAN" Type="REAL" Comment="Tensao A-N (V)" />
+      <VarDeclaration ID="55FA9C016450C2DD" Name="stsTensaoBN" Type="REAL" Comment="Tensao B-N (V)" />
+      <VarDeclaration ID="59CA0F9C04715A67" Name="stsTensaoCN" Type="REAL" Comment="Tensao C-N (V)" />
+      <VarDeclaration ID="ADAF9D7DD197D4FE" Name="stsCorrenteA" Type="REAL" Comment="Corrente fase A (A)" />
+      <VarDeclaration ID="C5BFFF1259440D18" Name="stsCorrenteB" Type="REAL" Comment="Corrente fase B (A)" />
+      <VarDeclaration ID="F325E224D7D277DF" Name="stsCorrenteC" Type="REAL" Comment="Corrente fase C (A)" />
+      <VarDeclaration ID="A24B7F06D8ED8FA9" Name="stsPotenciaAtivaA" Type="REAL" Comment="Potencia ativa fase A (kW)" />
+      <VarDeclaration ID="978433C32C86D8EF" Name="stsPotenciaAtivaB" Type="REAL" Comment="Potencia ativa fase B (kW)" />
+      <VarDeclaration ID="7E870D56C81A157A" Name="stsPotenciaAtivaC" Type="REAL" Comment="Potencia ativa fase C (kW)" />
+      <VarDeclaration ID="04AF7B43BB533B3C" Name="stsPotenciaAtivaTotal" Type="REAL" Comment="Potencia ativa total (kW)" />
+      <VarDeclaration ID="FD51813619FC2FED" Name="stsPotenciaReativaA" Type="REAL" Comment="Potencia reativa fase A (kVAr)" />
+      <VarDeclaration ID="09C86328D003AC65" Name="stsPotenciaReativaB" Type="REAL" Comment="Potencia reativa fase B (kVAr)" />
+      <VarDeclaration ID="04CC3B6B399BF634" Name="stsPotenciaReativaC" Type="REAL" Comment="Potencia reativa fase C (kVAr)" />
+      <VarDeclaration ID="6FF4BBF46CE7DF72" Name="stsPotenciaReativaTotal" Type="REAL" Comment="Potencia reativa total (kVAr)" />
+      <VarDeclaration ID="B730EC83BF36AEFA" Name="stsPotenciaAparenteTotal" Type="REAL" Comment="Potencia aparente total (kVA)" />
+      <VarDeclaration ID="06F5ACACA7BE6E27" Name="stsFatorPotencia" Type="REAL" Comment="Fator de potencia total" />
+      <VarDeclaration ID="E3BC683E446C49CD" Name="stsFrequencia" Type="REAL" Comment="Frequencia (Hz)" />
+      <VarDeclaration ID="0E52D748FE28BEED" Name="stsAlarmeFPBaixo" Type="BOOL" Comment="Fator de potência baixo (memorizado ate o reconhecimento)" />
+      <VarDeclaration ID="57FC50EADAB387B2" Name="stsAlarmeTensaoFFH" Type="BOOL" Comment="Tensão entre fases alta (memorizado ate o reconhecimento)" />
+      <VarDeclaration ID="0279D732904DE4AB" Name="stsAlarmeTensaoFFL" Type="BOOL" Comment="Tensão entre fases baixa (memorizado ate o reconhecimento)" />
+      <VarDeclaration ID="159CBC17837FAB70" Name="stsAlarmeTensaoFNH" Type="BOOL" Comment="Tensão fase-neutro alta (memorizado ate o reconhecimento)" />
+      <VarDeclaration ID="7F1B1FD426FC73B7" Name="stsAlarmeTensaoFNL" Type="BOOL" Comment="Tensão fase-neutro baixa (memorizado ate o reconhecimento)" />
+      <VarDeclaration ID="260E565CCC5723A9" Name="stsAlarmeCorrenteAH" Type="BOOL" Comment="Corrente fase A alta (memorizado ate o reconhecimento)" />
+      <VarDeclaration ID="7CCF92D2E693E51A" Name="stsAlarmeCorrenteBH" Type="BOOL" Comment="Corrente fase B alta (memorizado ate o reconhecimento)" />
+      <VarDeclaration ID="D74518AA6577BDAD" Name="stsAlarmeCorrenteCH" Type="BOOL" Comment="Corrente fase C alta (memorizado ate o reconhecimento)" />
+      <VarDeclaration ID="6990D128AAB2F344" Name="stsAlarmeCorrenteAL" Type="BOOL" Comment="Corrente fase A baixa (memorizado ate o reconhecimento)" />
+      <VarDeclaration ID="422EAD019B977526" Name="stsAlarmeCorrenteBL" Type="BOOL" Comment="Corrente fase B baixa (memorizado ate o reconhecimento)" />
+      <VarDeclaration ID="E808F4099E0C778F" Name="stsAlarmeCorrenteCL" Type="BOOL" Comment="Corrente fase C baixa (memorizado ate o reconhecimento)" />
+      <VarDeclaration ID="70016D0B1A1C6D1D" Name="stsAlarmeFrequenciaH" Type="BOOL" Comment="Frequência alta (memorizado ate o reconhecimento)" />
+      <VarDeclaration ID="0411BA8A94954963" Name="stsAlarmeFrequenciaL" Type="BOOL" Comment="Frequência baixa (memorizado ate o reconhecimento)" />
+      <VarDeclaration ID="CC58FAB70A34AB27" Name="stsFalhaComunicacao" Type="BOOL" Comment="Falha de comunicacao com o medidor" />
+      <VarDeclaration ID="803BAB84502C5F25" Name="stsAlarme" Type="BOOL" Comment="Algum alarme do medidor" />
+      <VarDeclaration ID="2BE8F70940E7CC3C" Name="almCom" Type="BOOL" Comment="ALARM_BIT falha de comunicacao" />
+      <VarDeclaration ID="D4D80A135835A68F" Name="almFPL" Type="BOOL" Comment="ALARM_BIT Fator de potência baixo" />
+      <VarDeclaration ID="C84C8E8A4AFB6B52" Name="almVFH" Type="BOOL" Comment="ALARM_BIT Tensão entre fases alta" />
+      <VarDeclaration ID="F520262A71826272" Name="almVFL" Type="BOOL" Comment="ALARM_BIT Tensão entre fases baixa" />
+      <VarDeclaration ID="4400E5A533140BA8" Name="almVNH" Type="BOOL" Comment="ALARM_BIT Tensão fase-neutro alta" />
+      <VarDeclaration ID="7376632FDF9503CB" Name="almVNL" Type="BOOL" Comment="ALARM_BIT Tensão fase-neutro baixa" />
+      <VarDeclaration ID="63B40D626752D741" Name="almIAH" Type="BOOL" Comment="ALARM_BIT Corrente fase A alta" />
+      <VarDeclaration ID="BD23AC0B2C0651A2" Name="almIBH" Type="BOOL" Comment="ALARM_BIT Corrente fase B alta" />
+      <VarDeclaration ID="E5351E94A6A3DACF" Name="almICH" Type="BOOL" Comment="ALARM_BIT Corrente fase C alta" />
+      <VarDeclaration ID="2B9B0D1856474FB9" Name="almIAL" Type="BOOL" Comment="ALARM_BIT Corrente fase A baixa" />
+      <VarDeclaration ID="831D174108141DB9" Name="almIBL" Type="BOOL" Comment="ALARM_BIT Corrente fase B baixa" />
+      <VarDeclaration ID="8D40306CC7CC316D" Name="almICL" Type="BOOL" Comment="ALARM_BIT Corrente fase C baixa" />
+      <VarDeclaration ID="B03E175FA415310D" Name="almFRH" Type="BOOL" Comment="ALARM_BIT Frequência alta" />
+      <VarDeclaration ID="07A0D7C059B80A32" Name="almFRL" Type="BOOL" Comment="ALARM_BIT Frequência baixa" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="42bd22d8-d51d-43f3-a099-86342ce2e9bb">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="algMGE" />
+    <InternalVars>
+      <VarDeclaration ID="04FBCCAD9834DD55" Name="initDone" Type="BOOL" />
+      <VarDeclaration ID="210C99191D3AF561" Name="initPass" Type="BOOL" />
+      <VarDeclaration ID="7A8FDEE69263D00D" Name="bReset" Type="BOOL" />
+      <VarDeclaration ID="6FAAD084D4119682" Name="bComRecebida" Type="BOOL" Comment="Ja houve leitura do ComStatus" />
+      <VarDeclaration ID="58E2D5F82E154CDA" Name="bValido" Type="BOOL" Comment="Medidor comunicando: valores validos" />
+      <VarDeclaration ID="E85B2D3BB46730C8" Name="uSegCom" Type="UDINT" />
+      <VarDeclaration ID="22D305D4796AA2AD" Name="cFPL" Type="BOOL" Comment="Condicao agora" />
+      <VarDeclaration ID="44850560E0C10F29" Name="cVFH" Type="BOOL" Comment="Condicao agora" />
+      <VarDeclaration ID="172DA04E61BBF195" Name="cVFL" Type="BOOL" Comment="Condicao agora" />
+      <VarDeclaration ID="FC5D30AD48220A8F" Name="cVNH" Type="BOOL" Comment="Condicao agora" />
+      <VarDeclaration ID="F1EFF3B67774D090" Name="cVNL" Type="BOOL" Comment="Condicao agora" />
+      <VarDeclaration ID="FA31195A32FEB5CF" Name="cIAH" Type="BOOL" Comment="Condicao agora" />
+      <VarDeclaration ID="2FF6BDC37A21F913" Name="cIBH" Type="BOOL" Comment="Condicao agora" />
+      <VarDeclaration ID="C7361D8E35860FF3" Name="cICH" Type="BOOL" Comment="Condicao agora" />
+      <VarDeclaration ID="FFD511409F91415E" Name="cIAL" Type="BOOL" Comment="Condicao agora" />
+      <VarDeclaration ID="1A24BDC37D1A5B9A" Name="cIBL" Type="BOOL" Comment="Condicao agora" />
+      <VarDeclaration ID="E124629CF9120C11" Name="cICL" Type="BOOL" Comment="Condicao agora" />
+      <VarDeclaration ID="B74F6D976AC3C215" Name="cFRH" Type="BOOL" Comment="Condicao agora" />
+      <VarDeclaration ID="6E2AC9C2FD27074E" Name="cFRL" Type="BOOL" Comment="Condicao agora" />
+      <VarDeclaration ID="A7A4509849294E01" Name="uFPL" Type="UDINT" Comment="Segundos na condicao" />
+      <VarDeclaration ID="29A0ABD7844793A5" Name="uVFH" Type="UDINT" Comment="Segundos na condicao" />
+      <VarDeclaration ID="B4EAA582C5BD3A3E" Name="uVFL" Type="UDINT" Comment="Segundos na condicao" />
+      <VarDeclaration ID="52A6559AACBD404F" Name="uVNH" Type="UDINT" Comment="Segundos na condicao" />
+      <VarDeclaration ID="0BFC49B0B9B7B045" Name="uVNL" Type="UDINT" Comment="Segundos na condicao" />
+      <VarDeclaration ID="2B7ECDDE6C59F5EA" Name="uIAH" Type="UDINT" Comment="Segundos na condicao" />
+      <VarDeclaration ID="53EB18255DD9491D" Name="uIBH" Type="UDINT" Comment="Segundos na condicao" />
+      <VarDeclaration ID="50F29385CC548EFA" Name="uICH" Type="UDINT" Comment="Segundos na condicao" />
+      <VarDeclaration ID="8681C957361763BE" Name="uIAL" Type="UDINT" Comment="Segundos na condicao" />
+      <VarDeclaration ID="ED8056D085085F69" Name="uIBL" Type="UDINT" Comment="Segundos na condicao" />
+      <VarDeclaration ID="293D11880B2FB370" Name="uICL" Type="UDINT" Comment="Segundos na condicao" />
+      <VarDeclaration ID="CA18641B2016166D" Name="uFRH" Type="UDINT" Comment="Segundos na condicao" />
+      <VarDeclaration ID="CE58438E4EA7A99B" Name="uFRL" Type="UDINT" Comment="Segundos na condicao" />
+      <VarDeclaration ID="6A0DD94B5023F007" Name="rOld" Type="REAL" />
+      <VarDeclaration ID="BE35A649328B8714" Name="bMudou" Type="BOOL" />
+      <VarDeclaration ID="523921398BBF4AE7" Name="wSts" Type="WORD" />
+      <VarDeclaration ID="1F4D2C139E96720C" Name="oldSts" Type="WORD" InitialValue="16#FFFF" />
+      <VarDeclaration ID="E4E9CD353B47DE68" Name="wAlm" Type="WORD" />
+      <VarDeclaration ID="79C8BA6A222E97A2" Name="oldAlm" Type="WORD" InitialValue="16#FFFF" />
+      <VarDeclaration ID="76EC5D0499F6720B" Name="o_stsTensaoAB" Type="REAL" InitialValue="-1.0" />
+      <VarDeclaration ID="C9D2AE04E268F028" Name="o_stsTensaoBC" Type="REAL" InitialValue="-1.0" />
+      <VarDeclaration ID="633BF78D274C563D" Name="o_stsTensaoCA" Type="REAL" InitialValue="-1.0" />
+      <VarDeclaration ID="D7267F7BD0E1C98C" Name="o_stsTensaoAN" Type="REAL" InitialValue="-1.0" />
+      <VarDeclaration ID="AF8A1D0888F77F99" Name="o_stsTensaoBN" Type="REAL" InitialValue="-1.0" />
+      <VarDeclaration ID="573699FAC427FFEE" Name="o_stsTensaoCN" Type="REAL" InitialValue="-1.0" />
+      <VarDeclaration ID="4F20695BCF387176" Name="o_stsCorrenteA" Type="REAL" InitialValue="-1.0" />
+      <VarDeclaration ID="20D07697FFDAE585" Name="o_stsCorrenteB" Type="REAL" InitialValue="-1.0" />
+      <VarDeclaration ID="F500B015E672C071" Name="o_stsCorrenteC" Type="REAL" InitialValue="-1.0" />
+      <VarDeclaration ID="E7F53C69F55F31EF" Name="o_stsPotenciaAtivaA" Type="REAL" InitialValue="-1.0" />
+      <VarDeclaration ID="241EB8B49B021962" Name="o_stsPotenciaAtivaB" Type="REAL" InitialValue="-1.0" />
+      <VarDeclaration ID="5AAC604F10A5DAD3" Name="o_stsPotenciaAtivaC" Type="REAL" InitialValue="-1.0" />
+      <VarDeclaration ID="DA1FF0E1D588936B" Name="o_stsPotenciaAtivaTotal" Type="REAL" InitialValue="-1.0" />
+      <VarDeclaration ID="0F8FBE99143AE8BA" Name="o_stsPotenciaReativaA" Type="REAL" InitialValue="-1.0" />
+      <VarDeclaration ID="FEBF457ECADD92F6" Name="o_stsPotenciaReativaB" Type="REAL" InitialValue="-1.0" />
+      <VarDeclaration ID="D9DF345D88ADC1FC" Name="o_stsPotenciaReativaC" Type="REAL" InitialValue="-1.0" />
+      <VarDeclaration ID="9B53E7EB27F109C3" Name="o_stsPotenciaReativaTotal" Type="REAL" InitialValue="-1.0" />
+      <VarDeclaration ID="8F6CA7D8443C8649" Name="o_stsPotenciaAparenteTotal" Type="REAL" InitialValue="-1.0" />
+      <VarDeclaration ID="ED37029593AFF58D" Name="o_stsFatorPotencia" Type="REAL" InitialValue="-1.0" />
+      <VarDeclaration ID="9C95C1403C4DF8E9" Name="o_stsFrequencia" Type="REAL" InitialValue="-1.0" />
+    </InternalVars>
+    <ECC>
+      <ECState Name="START" Comment="Estado inicial" x="1500" y="640" />
+      <ECState Name="EXEC" Comment="Executa a logica; o algoritmo decide quais eventos saem" x="1500" y="1100">
+        <ECAction Algorithm="algMGE" Output="INITO" />
+        <ECAction Output="CNF" />
+        <ECAction Output="CNF_HMI" />
+        <ECAction Output="CNF_ALM" />
+      </ECState>
+      <ECTransition Source="START" Destination="EXEC" Condition="INIT OR REQ_PARA OR REQ_V OR REQ_I OR REQ_P OR REQ_E OR REQ_COM OR REQ_RESET OR REQ_RESET_PROC OR TICK" x="1580" y="860" />
+      <ECTransition Source="EXEC" Destination="START" Condition="1" x="1420" y="860" />
+    </ECC>
+    <Algorithm Name="algMGE" Comment="Logica completa do multimedidor (um unico algoritmo)">
+      <ST><![CDATA[(* =====================================================================
+   basicMGEGenerico v1.5 - multimedidor PowerLogic PM5300 (HW CAT PM53xxMbtcp)
+   Padrao das bibliotecas Schneider: eventos de saida desligados no inicio e
+   ligados so na mudanca; tempos contados pelo TICK de 1 s (E_CYCLE do CAT).
+   - valores recebidos dos symlinks VTQ do PM53xxMbtcp; energias de Wh para kWh;
+   - v1.1: frequencia recebida como VTQLINT (e assim que o PM53xxMbtcp publica);
+   - falha de comunicacao: ComStatus FALSE por cfgTempoCom s; com a falha,
+     os alarmes de medicao ficam suprimidos (os valores ficam congelados);
+   - v1.2: falta de fase (FF abaixo do ajuste); tensao entre fases e
+     fase-neutro alta/baixa (as baixas nao atuam junto com a falta de
+     fase); corrente A, B e C alta (um ajuste, 3 alarmes); FP baixo (so
+     com carga: potencia aparente > 0); frequencia alta/baixa;
+   - v1.3: so as grandezas e alarmes da especificacao (sai a falta de fase,
+     as medias, o desequilibrio, a aparente por fase e as energias); valor
+     de referencia por limite (0 = desligado) e um tempo de retardo por
+     grupo (FP, tensao, corrente, frequencia); memorizado ate o
+     reconhecimento, que so libera o que ja normalizou;
+   - v1.4: corrente A, B e C baixa (um ajuste, 3 alarmes, retardo do
+     grupo corrente).
+   ===================================================================== *)
+
+INITO   := FALSE;
+CNF     := FALSE;
+CNF_HMI := FALSE;
+CNF_ALM := FALSE;
+
+IF REQ_COM THEN
+    bComRecebida := TRUE;
+END_IF;
+IF INIT THEN
+    initDone := TRUE;
+    initPass := TRUE;
+    INITO    := TRUE;
+END_IF;
+IF NOT initDone THEN
+    RETURN;
+END_IF;
+bReset := (REQ_RESET AND hmiReset) OR (REQ_RESET_PROC AND cmdResetFalhas);
+
+(* ---- 1. Comunicacao ---- *)
+IF NOT comOK THEN
+    IF TICK AND uSegCom < UINT_TO_UDINT(cfgTempoCom) THEN
+        uSegCom := uSegCom + 1;
+    END_IF;
+ELSE
+    uSegCom := 0;
+END_IF;
+stsFalhaComunicacao := NOT comOK AND uSegCom >= UINT_TO_UDINT(cfgTempoCom);
+bValido := bComRecebida AND comOK;
+
+(* ---- 2. Valores ---- *)
+stsTensaoAB := mVAB;
+stsTensaoBC := mVBC;
+stsTensaoCA := mVCA;
+stsTensaoAN := mVAN;
+stsTensaoBN := mVBN;
+stsTensaoCN := mVCN;
+stsCorrenteA := mIA;
+stsCorrenteB := mIB;
+stsCorrenteC := mIC;
+stsPotenciaAtivaA := mPA;
+stsPotenciaAtivaB := mPB;
+stsPotenciaAtivaC := mPC;
+stsPotenciaAtivaTotal := mPT;
+stsPotenciaReativaA := mQA;
+stsPotenciaReativaB := mQB;
+stsPotenciaReativaC := mQC;
+stsPotenciaReativaTotal := mQT;
+stsPotenciaAparenteTotal := mST;
+stsFatorPotencia := mFp;
+stsFrequencia := LINT_TO_REAL(mFreq);
+
+(* ---- 3. Condicoes (so com o medidor comunicando) ---- *)
+cFPL := stpFPL > 0.0 AND bValido AND (mST > 0.0 AND ABS(mFp) < stpFPL);
+cVFH := stpVFH > 0.0 AND bValido AND (mVAB > stpVFH OR mVBC > stpVFH OR mVCA > stpVFH);
+cVFL := stpVFL > 0.0 AND bValido AND (mVAB < stpVFL OR mVBC < stpVFL OR mVCA < stpVFL);
+cVNH := stpVNH > 0.0 AND bValido AND (mVAN > stpVNH OR mVBN > stpVNH OR mVCN > stpVNH);
+cVNL := stpVNL > 0.0 AND bValido AND (mVAN < stpVNL OR mVBN < stpVNL OR mVCN < stpVNL);
+cIAH := stpIH > 0.0 AND bValido AND (mIA > stpIH);
+cIBH := stpIH > 0.0 AND bValido AND (mIB > stpIH);
+cICH := stpIH > 0.0 AND bValido AND (mIC > stpIH);
+cIAL := stpIL > 0.0 AND bValido AND (mIA < stpIL);
+cIBL := stpIL > 0.0 AND bValido AND (mIB < stpIL);
+cICL := stpIL > 0.0 AND bValido AND (mIC < stpIL);
+cFRH := stpFRH > 0.0 AND bValido AND (stsFrequencia > stpFRH);
+cFRL := stpFRL > 0.0 AND bValido AND (stsFrequencia < stpFRL);
+
+(* ---- 4. Alarmes: tempo de retardo do grupo, memoria ate o reset, referencia 0 zera ---- *)
+IF cFPL THEN
+    IF TICK AND uFPL < UINT_TO_UDINT(tmpFP) THEN
+        uFPL := uFPL + 1;
+    END_IF;
+    IF uFPL >= UINT_TO_UDINT(tmpFP) THEN
+        stsAlarmeFPBaixo := TRUE;
+    END_IF;
+ELSE
+    uFPL := 0;
+    IF bReset THEN
+        stsAlarmeFPBaixo := FALSE;
+    END_IF;
+END_IF;
+IF stpFPL <= 0.0 THEN
+    stsAlarmeFPBaixo := FALSE;
+END_IF;
+IF cVFH THEN
+    IF TICK AND uVFH < UINT_TO_UDINT(tmpTEN) THEN
+        uVFH := uVFH + 1;
+    END_IF;
+    IF uVFH >= UINT_TO_UDINT(tmpTEN) THEN
+        stsAlarmeTensaoFFH := TRUE;
+    END_IF;
+ELSE
+    uVFH := 0;
+    IF bReset THEN
+        stsAlarmeTensaoFFH := FALSE;
+    END_IF;
+END_IF;
+IF stpVFH <= 0.0 THEN
+    stsAlarmeTensaoFFH := FALSE;
+END_IF;
+IF cVFL THEN
+    IF TICK AND uVFL < UINT_TO_UDINT(tmpTEN) THEN
+        uVFL := uVFL + 1;
+    END_IF;
+    IF uVFL >= UINT_TO_UDINT(tmpTEN) THEN
+        stsAlarmeTensaoFFL := TRUE;
+    END_IF;
+ELSE
+    uVFL := 0;
+    IF bReset THEN
+        stsAlarmeTensaoFFL := FALSE;
+    END_IF;
+END_IF;
+IF stpVFL <= 0.0 THEN
+    stsAlarmeTensaoFFL := FALSE;
+END_IF;
+IF cVNH THEN
+    IF TICK AND uVNH < UINT_TO_UDINT(tmpTEN) THEN
+        uVNH := uVNH + 1;
+    END_IF;
+    IF uVNH >= UINT_TO_UDINT(tmpTEN) THEN
+        stsAlarmeTensaoFNH := TRUE;
+    END_IF;
+ELSE
+    uVNH := 0;
+    IF bReset THEN
+        stsAlarmeTensaoFNH := FALSE;
+    END_IF;
+END_IF;
+IF stpVNH <= 0.0 THEN
+    stsAlarmeTensaoFNH := FALSE;
+END_IF;
+IF cVNL THEN
+    IF TICK AND uVNL < UINT_TO_UDINT(tmpTEN) THEN
+        uVNL := uVNL + 1;
+    END_IF;
+    IF uVNL >= UINT_TO_UDINT(tmpTEN) THEN
+        stsAlarmeTensaoFNL := TRUE;
+    END_IF;
+ELSE
+    uVNL := 0;
+    IF bReset THEN
+        stsAlarmeTensaoFNL := FALSE;
+    END_IF;
+END_IF;
+IF stpVNL <= 0.0 THEN
+    stsAlarmeTensaoFNL := FALSE;
+END_IF;
+IF cIAH THEN
+    IF TICK AND uIAH < UINT_TO_UDINT(tmpCOR) THEN
+        uIAH := uIAH + 1;
+    END_IF;
+    IF uIAH >= UINT_TO_UDINT(tmpCOR) THEN
+        stsAlarmeCorrenteAH := TRUE;
+    END_IF;
+ELSE
+    uIAH := 0;
+    IF bReset THEN
+        stsAlarmeCorrenteAH := FALSE;
+    END_IF;
+END_IF;
+IF stpIH <= 0.0 THEN
+    stsAlarmeCorrenteAH := FALSE;
+END_IF;
+IF cIBH THEN
+    IF TICK AND uIBH < UINT_TO_UDINT(tmpCOR) THEN
+        uIBH := uIBH + 1;
+    END_IF;
+    IF uIBH >= UINT_TO_UDINT(tmpCOR) THEN
+        stsAlarmeCorrenteBH := TRUE;
+    END_IF;
+ELSE
+    uIBH := 0;
+    IF bReset THEN
+        stsAlarmeCorrenteBH := FALSE;
+    END_IF;
+END_IF;
+IF stpIH <= 0.0 THEN
+    stsAlarmeCorrenteBH := FALSE;
+END_IF;
+IF cICH THEN
+    IF TICK AND uICH < UINT_TO_UDINT(tmpCOR) THEN
+        uICH := uICH + 1;
+    END_IF;
+    IF uICH >= UINT_TO_UDINT(tmpCOR) THEN
+        stsAlarmeCorrenteCH := TRUE;
+    END_IF;
+ELSE
+    uICH := 0;
+    IF bReset THEN
+        stsAlarmeCorrenteCH := FALSE;
+    END_IF;
+END_IF;
+IF stpIH <= 0.0 THEN
+    stsAlarmeCorrenteCH := FALSE;
+END_IF;
+IF cIAL THEN
+    IF TICK AND uIAL < UINT_TO_UDINT(tmpCOR) THEN
+        uIAL := uIAL + 1;
+    END_IF;
+    IF uIAL >= UINT_TO_UDINT(tmpCOR) THEN
+        stsAlarmeCorrenteAL := TRUE;
+    END_IF;
+ELSE
+    uIAL := 0;
+    IF bReset THEN
+        stsAlarmeCorrenteAL := FALSE;
+    END_IF;
+END_IF;
+IF stpIL <= 0.0 THEN
+    stsAlarmeCorrenteAL := FALSE;
+END_IF;
+IF cIBL THEN
+    IF TICK AND uIBL < UINT_TO_UDINT(tmpCOR) THEN
+        uIBL := uIBL + 1;
+    END_IF;
+    IF uIBL >= UINT_TO_UDINT(tmpCOR) THEN
+        stsAlarmeCorrenteBL := TRUE;
+    END_IF;
+ELSE
+    uIBL := 0;
+    IF bReset THEN
+        stsAlarmeCorrenteBL := FALSE;
+    END_IF;
+END_IF;
+IF stpIL <= 0.0 THEN
+    stsAlarmeCorrenteBL := FALSE;
+END_IF;
+IF cICL THEN
+    IF TICK AND uICL < UINT_TO_UDINT(tmpCOR) THEN
+        uICL := uICL + 1;
+    END_IF;
+    IF uICL >= UINT_TO_UDINT(tmpCOR) THEN
+        stsAlarmeCorrenteCL := TRUE;
+    END_IF;
+ELSE
+    uICL := 0;
+    IF bReset THEN
+        stsAlarmeCorrenteCL := FALSE;
+    END_IF;
+END_IF;
+IF stpIL <= 0.0 THEN
+    stsAlarmeCorrenteCL := FALSE;
+END_IF;
+IF cFRH THEN
+    IF TICK AND uFRH < UINT_TO_UDINT(tmpFRE) THEN
+        uFRH := uFRH + 1;
+    END_IF;
+    IF uFRH >= UINT_TO_UDINT(tmpFRE) THEN
+        stsAlarmeFrequenciaH := TRUE;
+    END_IF;
+ELSE
+    uFRH := 0;
+    IF bReset THEN
+        stsAlarmeFrequenciaH := FALSE;
+    END_IF;
+END_IF;
+IF stpFRH <= 0.0 THEN
+    stsAlarmeFrequenciaH := FALSE;
+END_IF;
+IF cFRL THEN
+    IF TICK AND uFRL < UINT_TO_UDINT(tmpFRE) THEN
+        uFRL := uFRL + 1;
+    END_IF;
+    IF uFRL >= UINT_TO_UDINT(tmpFRE) THEN
+        stsAlarmeFrequenciaL := TRUE;
+    END_IF;
+ELSE
+    uFRL := 0;
+    IF bReset THEN
+        stsAlarmeFrequenciaL := FALSE;
+    END_IF;
+END_IF;
+IF stpFRL <= 0.0 THEN
+    stsAlarmeFrequenciaL := FALSE;
+END_IF;
+
+almCom := stsFalhaComunicacao;
+almFPL := stsAlarmeFPBaixo;
+almVFH := stsAlarmeTensaoFFH;
+almVFL := stsAlarmeTensaoFFL;
+almVNH := stsAlarmeTensaoFNH;
+almVNL := stsAlarmeTensaoFNL;
+almIAH := stsAlarmeCorrenteAH;
+almIBH := stsAlarmeCorrenteBH;
+almICH := stsAlarmeCorrenteCH;
+almIAL := stsAlarmeCorrenteAL;
+almIBL := stsAlarmeCorrenteBL;
+almICL := stsAlarmeCorrenteCL;
+almFRH := stsAlarmeFrequenciaH;
+almFRL := stsAlarmeFrequenciaL;
+stsAlarme := almCom OR almFPL OR almVFH OR almVFL OR almVNH OR almVNL OR almIAH OR almIBH OR almICH OR almIAL OR almIBL OR almICL OR almFRH OR almFRL;
+
+(* ---- 5. Eventos so na mudanca ---- *)
+bMudou := FALSE;
+IF stsTensaoAB <> o_stsTensaoAB THEN bMudou := TRUE; o_stsTensaoAB := stsTensaoAB; END_IF;
+IF stsTensaoBC <> o_stsTensaoBC THEN bMudou := TRUE; o_stsTensaoBC := stsTensaoBC; END_IF;
+IF stsTensaoCA <> o_stsTensaoCA THEN bMudou := TRUE; o_stsTensaoCA := stsTensaoCA; END_IF;
+IF stsTensaoAN <> o_stsTensaoAN THEN bMudou := TRUE; o_stsTensaoAN := stsTensaoAN; END_IF;
+IF stsTensaoBN <> o_stsTensaoBN THEN bMudou := TRUE; o_stsTensaoBN := stsTensaoBN; END_IF;
+IF stsTensaoCN <> o_stsTensaoCN THEN bMudou := TRUE; o_stsTensaoCN := stsTensaoCN; END_IF;
+IF stsCorrenteA <> o_stsCorrenteA THEN bMudou := TRUE; o_stsCorrenteA := stsCorrenteA; END_IF;
+IF stsCorrenteB <> o_stsCorrenteB THEN bMudou := TRUE; o_stsCorrenteB := stsCorrenteB; END_IF;
+IF stsCorrenteC <> o_stsCorrenteC THEN bMudou := TRUE; o_stsCorrenteC := stsCorrenteC; END_IF;
+IF stsPotenciaAtivaA <> o_stsPotenciaAtivaA THEN bMudou := TRUE; o_stsPotenciaAtivaA := stsPotenciaAtivaA; END_IF;
+IF stsPotenciaAtivaB <> o_stsPotenciaAtivaB THEN bMudou := TRUE; o_stsPotenciaAtivaB := stsPotenciaAtivaB; END_IF;
+IF stsPotenciaAtivaC <> o_stsPotenciaAtivaC THEN bMudou := TRUE; o_stsPotenciaAtivaC := stsPotenciaAtivaC; END_IF;
+IF stsPotenciaAtivaTotal <> o_stsPotenciaAtivaTotal THEN bMudou := TRUE; o_stsPotenciaAtivaTotal := stsPotenciaAtivaTotal; END_IF;
+IF stsPotenciaReativaA <> o_stsPotenciaReativaA THEN bMudou := TRUE; o_stsPotenciaReativaA := stsPotenciaReativaA; END_IF;
+IF stsPotenciaReativaB <> o_stsPotenciaReativaB THEN bMudou := TRUE; o_stsPotenciaReativaB := stsPotenciaReativaB; END_IF;
+IF stsPotenciaReativaC <> o_stsPotenciaReativaC THEN bMudou := TRUE; o_stsPotenciaReativaC := stsPotenciaReativaC; END_IF;
+IF stsPotenciaReativaTotal <> o_stsPotenciaReativaTotal THEN bMudou := TRUE; o_stsPotenciaReativaTotal := stsPotenciaReativaTotal; END_IF;
+IF stsPotenciaAparenteTotal <> o_stsPotenciaAparenteTotal THEN bMudou := TRUE; o_stsPotenciaAparenteTotal := stsPotenciaAparenteTotal; END_IF;
+IF stsFatorPotencia <> o_stsFatorPotencia THEN bMudou := TRUE; o_stsFatorPotencia := stsFatorPotencia; END_IF;
+IF stsFrequencia <> o_stsFrequencia THEN bMudou := TRUE; o_stsFrequencia := stsFrequencia; END_IF;
+wSts := 0;
+IF stsAlarmeFPBaixo THEN wSts := wSts OR 16#0001; END_IF;
+IF stsAlarmeTensaoFFH THEN wSts := wSts OR 16#0002; END_IF;
+IF stsAlarmeTensaoFFL THEN wSts := wSts OR 16#0004; END_IF;
+IF stsAlarmeTensaoFNH THEN wSts := wSts OR 16#0008; END_IF;
+IF stsAlarmeTensaoFNL THEN wSts := wSts OR 16#0010; END_IF;
+IF stsAlarmeCorrenteAH THEN wSts := wSts OR 16#0020; END_IF;
+IF stsAlarmeCorrenteBH THEN wSts := wSts OR 16#0040; END_IF;
+IF stsAlarmeCorrenteCH THEN wSts := wSts OR 16#0080; END_IF;
+IF stsAlarmeCorrenteAL THEN wSts := wSts OR 16#0100; END_IF;
+IF stsAlarmeCorrenteBL THEN wSts := wSts OR 16#0200; END_IF;
+IF stsAlarmeCorrenteCL THEN wSts := wSts OR 16#0400; END_IF;
+IF stsAlarmeFrequenciaH THEN wSts := wSts OR 16#0800; END_IF;
+IF stsAlarmeFrequenciaL THEN wSts := wSts OR 16#1000; END_IF;
+IF stsFalhaComunicacao THEN wSts := wSts OR 16#2000; END_IF;
+IF stsAlarme THEN wSts := wSts OR 16#4000; END_IF;
+wAlm := 0;
+IF almCom THEN wAlm := wAlm OR 16#0001; END_IF;
+IF almFPL THEN wAlm := wAlm OR 16#0002; END_IF;
+IF almVFH THEN wAlm := wAlm OR 16#0004; END_IF;
+IF almVFL THEN wAlm := wAlm OR 16#0008; END_IF;
+IF almVNH THEN wAlm := wAlm OR 16#0010; END_IF;
+IF almVNL THEN wAlm := wAlm OR 16#0020; END_IF;
+IF almIAH THEN wAlm := wAlm OR 16#0040; END_IF;
+IF almIBH THEN wAlm := wAlm OR 16#0080; END_IF;
+IF almICH THEN wAlm := wAlm OR 16#0100; END_IF;
+IF almIAL THEN wAlm := wAlm OR 16#0200; END_IF;
+IF almIBL THEN wAlm := wAlm OR 16#0400; END_IF;
+IF almICL THEN wAlm := wAlm OR 16#0800; END_IF;
+IF almFRH THEN wAlm := wAlm OR 16#1000; END_IF;
+IF almFRL THEN wAlm := wAlm OR 16#2000; END_IF;
+CNF := initPass OR bMudou OR (wSts <> oldSts);
+CNF_HMI := CNF;
+CNF_ALM := initPass OR (wAlm <> oldAlm);
+oldSts := wSts;
+oldAlm := wAlm;
+initPass := FALSE;
+]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

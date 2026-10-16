@@ -1,0 +1,506 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="5f9304dd-53d5-4c3a-a384-d08c3d2f6b97" Name="Gerador_Generico" Format="2.0" Comment="Grupo gerador com DEIF AGC 150 - HidrycoLib" Namespace="Hidryco.HidrycoLib">
+  <Attribute Name="HMI.Alias" Value="" />
+  <Attribute Name="Configuration.FB.IDCounter" Value="6" />
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Hidryco" Version="1.1" Author="Hidryco" Date="15/10/2026" Remarks="1.1: comandos basicos da IHM (automatico, semiautomatico, partir e parar so em semiautomatico, reconhecer alarmes do AGC) nas palavras de comando 5 e 6 do AGC, publicadas em ${PATH}agcCmd5 e ${PATH}agcCmd6 (INT) para um MODBUSWREG2 no endereco 5; pulso de cfgTempoComando s, depois as palavras voltam a 0. 1.0: grupo gerador com controlador DEIF AGC 150 (aplicacao GEN, QTA com GB e MB). Leitura Modbus TCP FC04 pela configuracao de hardware (MODBUSGENTCPS + 9 MODBUSRREG8: 501, 513, 521, 536, 554, 567, 593, 1005, 1013); os registradores sao publicados nos symlinks ${PATH}rVAB ... ${PATH}rW1020 (INT) e o connStatusInt em ${PATH}comInt. Enderecos e escalas da tabela DEIF rev. S (software 1.19). " />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="7928A75A5088ACBD" Name="E_RESET_FALHAS" Comment="Reconhecimento pelo processo com cmdResetFalhas = TRUE">
+        <With Var="cmdResetFalhas" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="B61E80D27D776DFC" Name="CNF" Comment="Valores e estados (so na mudanca)">
+        <With Var="stsTensaoAB" />
+        <With Var="stsTensaoBC" />
+        <With Var="stsTensaoCA" />
+        <With Var="stsTensaoAN" />
+        <With Var="stsTensaoBN" />
+        <With Var="stsTensaoCN" />
+        <With Var="stsTensaoMediaLL" />
+        <With Var="stsFrequencia" />
+        <With Var="stsCorrenteA" />
+        <With Var="stsCorrenteB" />
+        <With Var="stsCorrenteC" />
+        <With Var="stsPotenciaAtiva" />
+        <With Var="stsPotenciaReativa" />
+        <With Var="stsPotenciaAparente" />
+        <With Var="stsFatorPotencia" />
+        <With Var="stsTensaoBarra" />
+        <With Var="stsEnergiaAtiva" />
+        <With Var="stsHorasOperacao" />
+        <With Var="stsTensaoBateria" />
+        <With Var="stsRotacao" />
+        <With Var="stsTempArrefecimento" />
+        <With Var="stsPressaoOleo" />
+        <With Var="stsTempOleo" />
+        <With Var="stsNumAlarmesAGC" />
+        <With Var="stsNumAlarmesNaoRecAGC" />
+        <With Var="stsDisjuntorGerador" />
+        <With Var="stsDisjuntorRede" />
+        <With Var="stsModo" />
+        <With Var="stsFonte" />
+        <With Var="stsFaltaRede" />
+        <With Var="stsMotorOperando" />
+        <With Var="stsGeradorTensaoOK" />
+        <With Var="stsAlarmeAGC" />
+        <With Var="stsFalhaPartida" />
+        <With Var="stsDesligamentoMotor" />
+        <With Var="stsParadaEmergencia" />
+        <With Var="stsFalhaDisjuntor" />
+        <With Var="stsAvisoFaltaRede" />
+        <With Var="stsForaAutomatico" />
+        <With Var="stsFalhaComunicacao" />
+        <With Var="stsAlarme" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="19848145BDBC225E" Name="cmdResetFalhas" Type="BOOL" Comment="TRUE = reconhecimento (com o evento E_RESET_FALHAS)" />
+      <VarDeclaration ID="A410B91E1EF5ABA2" Name="cfgTempoCom" Type="UINT" InitialValue="10" Comment="Tempo (s) sem comunicacao com o AGC 150 para confirmar a falha" />
+      <VarDeclaration ID="1B81B60F03D017E8" Name="cfgTempoComando" Type="UINT" InitialValue="2" Comment="Tempo (s) que a palavra de comando fica escrita no AGC" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="A21F66F90071C01B" Name="stsTensaoAB" Type="REAL" Comment="Tensao A-B (V)" />
+      <VarDeclaration ID="4DD2F281B66D2760" Name="stsTensaoBC" Type="REAL" Comment="Tensao B-C (V)" />
+      <VarDeclaration ID="BA7D2FB18EAAE792" Name="stsTensaoCA" Type="REAL" Comment="Tensao C-A (V)" />
+      <VarDeclaration ID="10D2DC153E3C026E" Name="stsTensaoAN" Type="REAL" Comment="Tensao A-N (V)" />
+      <VarDeclaration ID="492BB6D6104B1292" Name="stsTensaoBN" Type="REAL" Comment="Tensao B-N (V)" />
+      <VarDeclaration ID="78271B166302E5EE" Name="stsTensaoCN" Type="REAL" Comment="Tensao C-N (V)" />
+      <VarDeclaration ID="424026F091D97DEB" Name="stsTensaoMediaLL" Type="REAL" Comment="Tensao media fase-fase (V)" />
+      <VarDeclaration ID="CDEF4DBA5C18DB17" Name="stsFrequencia" Type="REAL" Comment="Frequencia (Hz)" />
+      <VarDeclaration ID="C6EE1CF4F24E322E" Name="stsCorrenteA" Type="REAL" Comment="Corrente fase A (A)" />
+      <VarDeclaration ID="435220BFFD4BE378" Name="stsCorrenteB" Type="REAL" Comment="Corrente fase B (A)" />
+      <VarDeclaration ID="531E259F3FDC5646" Name="stsCorrenteC" Type="REAL" Comment="Corrente fase C (A)" />
+      <VarDeclaration ID="F4097DF03F1F60B8" Name="stsPotenciaAtiva" Type="REAL" Comment="Potencia ativa (kW)" />
+      <VarDeclaration ID="A96FB4927A521C6D" Name="stsPotenciaReativa" Type="REAL" Comment="Potencia reativa (kVAr)" />
+      <VarDeclaration ID="002A29D6FC5A881A" Name="stsPotenciaAparente" Type="REAL" Comment="Potencia aparente (kVA)" />
+      <VarDeclaration ID="08E4E80E6CE7B756" Name="stsFatorPotencia" Type="REAL" Comment="Fator de potencia" />
+      <VarDeclaration ID="28722E568A10D0C0" Name="stsTensaoBarra" Type="REAL" Comment="Tensao do lado B (barramento/rede) L1-L2 (V)" />
+      <VarDeclaration ID="442D5347160D15FF" Name="stsEnergiaAtiva" Type="REAL" Comment="Energia ativa exportada (kWh)" />
+      <VarDeclaration ID="5FBC1E7B0BBCDD00" Name="stsHorasOperacao" Type="REAL" Comment="Horas de funcionamento (h)" />
+      <VarDeclaration ID="3D82285BC957F4A6" Name="stsTensaoBateria" Type="REAL" Comment="Tensao da bateria (V)" />
+      <VarDeclaration ID="0D8842690E513A99" Name="stsRotacao" Type="REAL" Comment="Rotacao do motor (rpm)" />
+      <VarDeclaration ID="5E9511F6B0FB3581" Name="stsTempArrefecimento" Type="REAL" Comment="Temperatura do liquido de arrefecimento (°C)" />
+      <VarDeclaration ID="38B75BA811187B45" Name="stsPressaoOleo" Type="REAL" Comment="Pressao do oleo (bar)" />
+      <VarDeclaration ID="1322978101C45020" Name="stsTempOleo" Type="REAL" Comment="Temperatura do oleo (°C)" />
+      <VarDeclaration ID="B3C67484789F0662" Name="stsNumAlarmesAGC" Type="REAL" Comment="Alarmes ativos no AGC" />
+      <VarDeclaration ID="E81150276E85A88D" Name="stsNumAlarmesNaoRecAGC" Type="REAL" Comment="Alarmes nao reconhecidos no AGC" />
+      <VarDeclaration ID="E607B5D65C774239" Name="stsDisjuntorGerador" Type="INT" Comment="Disjuntor do gerador (GB): 0 indefinido/sem comunicacao, 1 aberto, 2 fechado" />
+      <VarDeclaration ID="36AA02DF41051BAE" Name="stsDisjuntorRede" Type="INT" Comment="Disjuntor de rede (MB): 0 indefinido/sem comunicacao, 1 aberto, 2 fechado" />
+      <VarDeclaration ID="F9B7C6F95154B463" Name="stsModo" Type="INT" Comment="Modo do AGC: 0 indefinido, 1 automatico, 2 semi-automatico, 3 manual, 4 bloqueio, 5 teste" />
+      <VarDeclaration ID="6A17B02D91A0D025" Name="stsFonte" Type="INT" Comment="Fonte da saida do QTA: 0 sem fonte, 1 rede, 2 gerador, 3 indefinida (sem comunicacao)" />
+      <VarDeclaration ID="464FE0685F95923B" Name="stsFaltaRede" Type="BOOL" Comment="Falta de rede (AMF)" />
+      <VarDeclaration ID="A26A78EC1F2355CA" Name="stsMotorOperando" Type="BOOL" Comment="Motor em operacao" />
+      <VarDeclaration ID="0082DFB80248B20D" Name="stsGeradorTensaoOK" Type="BOOL" Comment="Tensao e frequencia do gerador OK" />
+      <VarDeclaration ID="2139EC424EF19A88" Name="stsAlarmeAGC" Type="BOOL" Comment="Alarme ativo no controlador do gerador (AGC 150)" />
+      <VarDeclaration ID="4B9A056A1EF1412A" Name="stsFalhaPartida" Type="BOOL" Comment="Falha na partida do gerador" />
+      <VarDeclaration ID="B9E59DCBEE5654C9" Name="stsDesligamentoMotor" Type="BOOL" Comment="Desligamento do motor (ECU ou sobrevelocidade)" />
+      <VarDeclaration ID="B43B4DFD4A7F3E33" Name="stsParadaEmergencia" Type="BOOL" Comment="Parada de emergência do gerador acionada" />
+      <VarDeclaration ID="2E119CC299FC1B11" Name="stsFalhaDisjuntor" Type="BOOL" Comment="Falha de disjuntor no QTA (gerador ou rede)" />
+      <VarDeclaration ID="F37176EFE77491AD" Name="stsAvisoFaltaRede" Type="BOOL" Comment="Falta de rede no QTA" />
+      <VarDeclaration ID="8B786387C058A06E" Name="stsForaAutomatico" Type="BOOL" Comment="Gerador fora do modo automático" />
+      <VarDeclaration ID="5BBEB485F0B65DBB" Name="stsFalhaComunicacao" Type="BOOL" Comment="Falha de comunicacao com o AGC 150" />
+      <VarDeclaration ID="498E527029816A86" Name="stsAlarme" Type="BOOL" Comment="Algum alarme do gerador" />
+    </OutputVars>
+  </InterfaceList>
+  <FBNetwork>
+    <FB ID="58C76D81C5C3CF9A" Name="IThis" Type="Gerador_Generico_HMI" x="1400" y="1404" Namespace="Hidryco.HidrycoLib">
+      <Parameter Name="$9561F6B0AF1ECE9C" Value="TRUE" />
+    </FB>
+    <FB ID="607DDDC084384EFC" Name="plcStart1" Type="plcStart" x="1400" y="200" Namespace="SE.App2Base">
+      <Parameter Name="$Prio" Value="10" />
+    </FB>
+    <FB ID="F6B53F78AED31CEB" Name="Logica" Type="basicGeradorGenerico" x="4672" y="200" Namespace="Hidryco.HidrycoLib" />
+    <FB ID="A470A64FF5969E4A" Name="Tick" Type="E_CYCLE" x="1400" y="832" Namespace="IEC61499.Standard">
+      <Parameter Name="$DT" Value="T#1s" />
+    </FB>
+    <FB ID="86214800AFC3031E" UID="1" Name="Leitura1" Type="SYMLINKMULTIVARDST_115C998103CD7017B" x="3104" y="200" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=15;VALUE${I}:INT,INT,INT,INT,INT,INT,INT,INT,INT,INT,INT,INT,INT,INT,INT" />
+      <Parameter Name="$NAME1" Value="'$${PATH}rVAB'" />
+      <Parameter Name="$NAME2" Value="'$${PATH}rVBC'" />
+      <Parameter Name="$NAME3" Value="'$${PATH}rVCA'" />
+      <Parameter Name="$NAME4" Value="'$${PATH}rVAN'" />
+      <Parameter Name="$NAME5" Value="'$${PATH}rVBN'" />
+      <Parameter Name="$NAME6" Value="'$${PATH}rVCN'" />
+      <Parameter Name="$NAME7" Value="'$${PATH}rFreq'" />
+      <Parameter Name="$NAME8" Value="'$${PATH}rIA'" />
+      <Parameter Name="$NAME9" Value="'$${PATH}rIB'" />
+      <Parameter Name="$NAME10" Value="'$${PATH}rIC'" />
+      <Parameter Name="$NAME11" Value="'$${PATH}rPAtiva'" />
+      <Parameter Name="$NAME12" Value="'$${PATH}rQReativa'" />
+      <Parameter Name="$NAME13" Value="'$${PATH}rSAparente'" />
+      <Parameter Name="$NAME14" Value="'$${PATH}rFP'" />
+      <Parameter Name="$NAME15" Value="'$${PATH}rVBarra'" />
+      <Parameter Name="$QI" Value="TRUE" />
+    </FB>
+    <FB ID="C9082A3BB1C6FABE" UID="2" Name="Leitura2" Type="SYMLINKMULTIVARDST_115C998103CD7017B" x="3104" y="1732" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=15;VALUE${I}:INT,INT,INT,INT,INT,INT,INT,INT,INT,INT,INT,INT,INT,INT,INT" />
+      <Parameter Name="$NAME1" Value="'$${PATH}rEnergiaH'" />
+      <Parameter Name="$NAME2" Value="'$${PATH}rEnergiaL'" />
+      <Parameter Name="$NAME3" Value="'$${PATH}rHorasH'" />
+      <Parameter Name="$NAME4" Value="'$${PATH}rHorasL'" />
+      <Parameter Name="$NAME5" Value="'$${PATH}rNumAlm'" />
+      <Parameter Name="$NAME6" Value="'$${PATH}rNumAlmNR'" />
+      <Parameter Name="$NAME7" Value="'$${PATH}rBateria'" />
+      <Parameter Name="$NAME8" Value="'$${PATH}rRPM'" />
+      <Parameter Name="$NAME9" Value="'$${PATH}rTempAgua'" />
+      <Parameter Name="$NAME10" Value="'$${PATH}rPressOleo'" />
+      <Parameter Name="$NAME11" Value="'$${PATH}rTempOleo'" />
+      <Parameter Name="$NAME12" Value="'$${PATH}rW1005'" />
+      <Parameter Name="$NAME13" Value="'$${PATH}rW1010'" />
+      <Parameter Name="$NAME14" Value="'$${PATH}rW1013'" />
+      <Parameter Name="$NAME15" Value="'$${PATH}rW1014'" />
+      <Parameter Name="$QI" Value="TRUE" />
+    </FB>
+    <FB ID="B6EB8BFC2AEC5D95" UID="3" Name="Leitura3" Type="SYMLINKMULTIVARDST_15292F208F22048C1" x="3104" y="3264" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=4;VALUE${I}:INT,INT,INT,INT" />
+      <Parameter Name="$NAME1" Value="'$${PATH}rW1015'" />
+      <Parameter Name="$NAME2" Value="'$${PATH}rW1018'" />
+      <Parameter Name="$NAME3" Value="'$${PATH}rW1019'" />
+      <Parameter Name="$NAME4" Value="'$${PATH}rW1020'" />
+      <Parameter Name="$QI" Value="TRUE" />
+    </FB>
+    <FB ID="357859AB79610465" UID="4" Name="Comunicacao" Type="SYMLINKMULTIVARDST_5A03F112CD5D470" x="3104" y="4136" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=1;VALUE${I}:INT" />
+      <Parameter Name="$NAME1" Value="'$${PATH}comInt'" />
+      <Parameter Name="$QI" Value="TRUE" />
+    </FB>
+    <FB ID="106AC80791C9F0A6" Name="AlarmeAGC" Type="ALARM_BIT" x="6348" y="1584" Namespace="Runtime.Standard">
+      <Attribute Name="HMI.AlarmText" Value="Alarme ativo no controlador do gerador (AGC 150)" Context="IND_1" />
+      <Parameter Name="$TYPE" Value="1" />
+      <Parameter Name="$ACKTYPE_1" Value="2" />
+      <Parameter Name="$ACTIVE" Value="TRUE" />
+    </FB>
+    <FB ID="09ADEDE2E4A66455" Name="AlarmePartida" Type="ALARM_BIT" x="6348" y="2876" Namespace="Runtime.Standard">
+      <Attribute Name="HMI.AlarmText" Value="Falha na partida do gerador" Context="IND_1" />
+      <Parameter Name="$TYPE" Value="1" />
+      <Parameter Name="$ACKTYPE_1" Value="2" />
+      <Parameter Name="$ACTIVE" Value="TRUE" />
+    </FB>
+    <FB ID="B17C934003D6D7D9" Name="AlarmeMotor" Type="ALARM_BIT" x="6348" y="4168" Namespace="Runtime.Standard">
+      <Attribute Name="HMI.AlarmText" Value="Desligamento do motor (ECU ou sobrevelocidade)" Context="IND_1" />
+      <Parameter Name="$TYPE" Value="1" />
+      <Parameter Name="$ACKTYPE_1" Value="2" />
+      <Parameter Name="$ACTIVE" Value="TRUE" />
+    </FB>
+    <FB ID="1FBA7DB6A424BFFD" Name="AlarmeEmergencia" Type="ALARM_BIT" x="6348" y="5460" Namespace="Runtime.Standard">
+      <Attribute Name="HMI.AlarmText" Value="Parada de emergência do gerador acionada" Context="IND_1" />
+      <Parameter Name="$TYPE" Value="1" />
+      <Parameter Name="$ACKTYPE_1" Value="2" />
+      <Parameter Name="$ACTIVE" Value="TRUE" />
+    </FB>
+    <FB ID="BF0B52EC9FD8A544" Name="AlarmeDisjuntor" Type="ALARM_BIT" x="6348" y="6752" Namespace="Runtime.Standard">
+      <Attribute Name="HMI.AlarmText" Value="Falha de disjuntor no QTA (gerador ou rede)" Context="IND_1" />
+      <Parameter Name="$TYPE" Value="1" />
+      <Parameter Name="$ACKTYPE_1" Value="2" />
+      <Parameter Name="$ACTIVE" Value="TRUE" />
+    </FB>
+    <FB ID="BE55868AB56BC309" Name="AlarmeFaltaRede" Type="ALARM_BIT" x="6348" y="8044" Namespace="Runtime.Standard">
+      <Attribute Name="HMI.AlarmText" Value="Falta de rede no QTA" Context="IND_1" />
+      <Attribute Name="HMI.AlarmClass" Value="Warning" Context="IND_1" />
+      <Parameter Name="$TYPE" Value="1" />
+      <Parameter Name="$ACKTYPE_1" Value="2" />
+      <Parameter Name="$ACTIVE" Value="TRUE" />
+    </FB>
+    <FB ID="01486FCD43B3FA8B" Name="AlarmeForaAuto" Type="ALARM_BIT" x="6348" y="9336" Namespace="Runtime.Standard">
+      <Attribute Name="HMI.AlarmText" Value="Gerador fora do modo automático" Context="IND_1" />
+      <Attribute Name="HMI.AlarmClass" Value="Warning" Context="IND_1" />
+      <Parameter Name="$TYPE" Value="1" />
+      <Parameter Name="$ACKTYPE_1" Value="2" />
+      <Parameter Name="$ACTIVE" Value="TRUE" />
+    </FB>
+    <FB ID="51D5568DAC74D385" Name="AlarmeComunicacao" Type="ALARM_BIT" x="6348" y="10628" Namespace="Runtime.Standard">
+      <Attribute Name="HMI.AlarmText" Value="Falha de comunicação com o controlador do gerador (AGC 150)" Context="IND_1" />
+      <Parameter Name="$TYPE" Value="1" />
+      <Parameter Name="$ACKTYPE_1" Value="2" />
+      <Parameter Name="$ACTIVE" Value="TRUE" />
+    </FB>
+    <FB ID="4E9E8537F25E59E3" UID="5" Name="ComandoAGC5" Type="SYMLINKMULTIVARSRC_5A03F112CD5D470" x="6348" y="200" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=1;VALUE${I}:INT" />
+      <Parameter Name="$NAME1" Value="'$${PATH}agcCmd5'" />
+      <Parameter Name="$QI" Value="TRUE" />
+    </FB>
+    <FB ID="E7FAD1A5573D74C0" UID="6" Name="ComandoAGC6" Type="SYMLINKMULTIVARSRC_5A03F112CD5D470" x="6348" y="892" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=1;VALUE${I}:INT" />
+      <Parameter Name="$NAME1" Value="'$${PATH}agcCmd6'" />
+      <Parameter Name="$QI" Value="TRUE" />
+    </FB>
+    <Input ID="7928A75A5088ACBD" Name="E_RESET_FALHAS" x="200" y="200" Type="Event" />
+    <Input ID="19848145BDBC225E" Name="cmdResetFalhas" x="200" y="380" Type="Data" />
+    <Input ID="A410B91E1EF5ABA2" Name="cfgTempoCom" x="200" y="440" Type="Data" />
+    <Input ID="1B81B60F03D017E8" Name="cfgTempoComando" x="200" y="500" Type="Data" />
+    <Output ID="B61E80D27D776DFC" Name="CNF" x="8060" y="200" Type="Event" />
+    <Output ID="A21F66F90071C01B" Name="stsTensaoAB" x="8060" y="380" Type="Data" />
+    <Output ID="4DD2F281B66D2760" Name="stsTensaoBC" x="8060" y="440" Type="Data" />
+    <Output ID="BA7D2FB18EAAE792" Name="stsTensaoCA" x="8060" y="500" Type="Data" />
+    <Output ID="10D2DC153E3C026E" Name="stsTensaoAN" x="8060" y="560" Type="Data" />
+    <Output ID="492BB6D6104B1292" Name="stsTensaoBN" x="8060" y="620" Type="Data" />
+    <Output ID="78271B166302E5EE" Name="stsTensaoCN" x="8060" y="680" Type="Data" />
+    <Output ID="424026F091D97DEB" Name="stsTensaoMediaLL" x="8060" y="740" Type="Data" />
+    <Output ID="CDEF4DBA5C18DB17" Name="stsFrequencia" x="8060" y="800" Type="Data" />
+    <Output ID="C6EE1CF4F24E322E" Name="stsCorrenteA" x="8060" y="860" Type="Data" />
+    <Output ID="435220BFFD4BE378" Name="stsCorrenteB" x="8060" y="920" Type="Data" />
+    <Output ID="531E259F3FDC5646" Name="stsCorrenteC" x="8060" y="980" Type="Data" />
+    <Output ID="F4097DF03F1F60B8" Name="stsPotenciaAtiva" x="8060" y="1040" Type="Data" />
+    <Output ID="A96FB4927A521C6D" Name="stsPotenciaReativa" x="8060" y="1100" Type="Data" />
+    <Output ID="002A29D6FC5A881A" Name="stsPotenciaAparente" x="8060" y="1160" Type="Data" />
+    <Output ID="08E4E80E6CE7B756" Name="stsFatorPotencia" x="8060" y="1220" Type="Data" />
+    <Output ID="28722E568A10D0C0" Name="stsTensaoBarra" x="8060" y="1280" Type="Data" />
+    <Output ID="442D5347160D15FF" Name="stsEnergiaAtiva" x="8060" y="1340" Type="Data" />
+    <Output ID="5FBC1E7B0BBCDD00" Name="stsHorasOperacao" x="8060" y="1400" Type="Data" />
+    <Output ID="3D82285BC957F4A6" Name="stsTensaoBateria" x="8060" y="1460" Type="Data" />
+    <Output ID="0D8842690E513A99" Name="stsRotacao" x="8060" y="1520" Type="Data" />
+    <Output ID="5E9511F6B0FB3581" Name="stsTempArrefecimento" x="8060" y="1580" Type="Data" />
+    <Output ID="38B75BA811187B45" Name="stsPressaoOleo" x="8060" y="1640" Type="Data" />
+    <Output ID="1322978101C45020" Name="stsTempOleo" x="8060" y="1700" Type="Data" />
+    <Output ID="B3C67484789F0662" Name="stsNumAlarmesAGC" x="8060" y="1760" Type="Data" />
+    <Output ID="E81150276E85A88D" Name="stsNumAlarmesNaoRecAGC" x="8060" y="1820" Type="Data" />
+    <Output ID="E607B5D65C774239" Name="stsDisjuntorGerador" x="8060" y="1880" Type="Data" />
+    <Output ID="36AA02DF41051BAE" Name="stsDisjuntorRede" x="8060" y="1940" Type="Data" />
+    <Output ID="F9B7C6F95154B463" Name="stsModo" x="8060" y="2000" Type="Data" />
+    <Output ID="6A17B02D91A0D025" Name="stsFonte" x="8060" y="2060" Type="Data" />
+    <Output ID="464FE0685F95923B" Name="stsFaltaRede" x="8060" y="2120" Type="Data" />
+    <Output ID="A26A78EC1F2355CA" Name="stsMotorOperando" x="8060" y="2180" Type="Data" />
+    <Output ID="0082DFB80248B20D" Name="stsGeradorTensaoOK" x="8060" y="2240" Type="Data" />
+    <Output ID="2139EC424EF19A88" Name="stsAlarmeAGC" x="8060" y="2300" Type="Data" />
+    <Output ID="4B9A056A1EF1412A" Name="stsFalhaPartida" x="8060" y="2360" Type="Data" />
+    <Output ID="B9E59DCBEE5654C9" Name="stsDesligamentoMotor" x="8060" y="2420" Type="Data" />
+    <Output ID="B43B4DFD4A7F3E33" Name="stsParadaEmergencia" x="8060" y="2480" Type="Data" />
+    <Output ID="2E119CC299FC1B11" Name="stsFalhaDisjuntor" x="8060" y="2540" Type="Data" />
+    <Output ID="F37176EFE77491AD" Name="stsAvisoFaltaRede" x="8060" y="2600" Type="Data" />
+    <Output ID="8B786387C058A06E" Name="stsForaAutomatico" x="8060" y="2660" Type="Data" />
+    <Output ID="5BBEB485F0B65DBB" Name="stsFalhaComunicacao" x="8060" y="2720" Type="Data" />
+    <Output ID="498E527029816A86" Name="stsAlarme" x="8060" y="2780" Type="Data" />
+    <EventConnections>
+      <Connection Source="$607DDDC084384EFC.FIRST_INIT" Destination="$58C76D81C5C3CF9A.E97FC986B98F8068" />
+      <Connection Source="$607DDDC084384EFC.REDO_INIT" Destination="$58C76D81C5C3CF9A.E97FC986B98F8068" />
+      <Connection Source="$58C76D81C5C3CF9A.E947B6720B0429AC" Destination="$F6B53F78AED31CEB.2BF6A84D5AF65FB4" />
+      <Connection Source="$F6B53F78AED31CEB.DC12539614B57B73" Destination="$A470A64FF5969E4A.START" />
+      <Connection Source="$F6B53F78AED31CEB.DC12539614B57B73" Destination="$86214800AFC3031E.INIT" />
+      <Connection Source="$F6B53F78AED31CEB.DC12539614B57B73" Destination="$C9082A3BB1C6FABE.INIT" />
+      <Connection Source="$F6B53F78AED31CEB.DC12539614B57B73" Destination="$B6EB8BFC2AEC5D95.INIT" />
+      <Connection Source="$F6B53F78AED31CEB.DC12539614B57B73" Destination="$357859AB79610465.INIT" />
+      <Connection Source="$F6B53F78AED31CEB.DC12539614B57B73" Destination="$106AC80791C9F0A6.INIT" />
+      <Connection Source="$106AC80791C9F0A6.INITO" Destination="$106AC80791C9F0A6.REQ_INITDATA" />
+      <Connection Source="$106AC80791C9F0A6.CNF_INITDATA" Destination="$106AC80791C9F0A6.ACTIVATE" />
+      <Connection Source="$106AC80791C9F0A6.INITO" Destination="$09ADEDE2E4A66455.INIT" />
+      <Connection Source="$09ADEDE2E4A66455.INITO" Destination="$09ADEDE2E4A66455.REQ_INITDATA" />
+      <Connection Source="$09ADEDE2E4A66455.CNF_INITDATA" Destination="$09ADEDE2E4A66455.ACTIVATE" />
+      <Connection Source="$09ADEDE2E4A66455.INITO" Destination="$B17C934003D6D7D9.INIT" />
+      <Connection Source="$B17C934003D6D7D9.INITO" Destination="$B17C934003D6D7D9.REQ_INITDATA" />
+      <Connection Source="$B17C934003D6D7D9.CNF_INITDATA" Destination="$B17C934003D6D7D9.ACTIVATE" />
+      <Connection Source="$B17C934003D6D7D9.INITO" Destination="$1FBA7DB6A424BFFD.INIT" />
+      <Connection Source="$1FBA7DB6A424BFFD.INITO" Destination="$1FBA7DB6A424BFFD.REQ_INITDATA" />
+      <Connection Source="$1FBA7DB6A424BFFD.CNF_INITDATA" Destination="$1FBA7DB6A424BFFD.ACTIVATE" />
+      <Connection Source="$1FBA7DB6A424BFFD.INITO" Destination="$BF0B52EC9FD8A544.INIT" />
+      <Connection Source="$BF0B52EC9FD8A544.INITO" Destination="$BF0B52EC9FD8A544.REQ_INITDATA" />
+      <Connection Source="$BF0B52EC9FD8A544.CNF_INITDATA" Destination="$BF0B52EC9FD8A544.ACTIVATE" />
+      <Connection Source="$BF0B52EC9FD8A544.INITO" Destination="$BE55868AB56BC309.INIT" />
+      <Connection Source="$BE55868AB56BC309.INITO" Destination="$BE55868AB56BC309.REQ_INITDATA" />
+      <Connection Source="$BE55868AB56BC309.CNF_INITDATA" Destination="$BE55868AB56BC309.ACTIVATE" />
+      <Connection Source="$BE55868AB56BC309.INITO" Destination="$01486FCD43B3FA8B.INIT" />
+      <Connection Source="$01486FCD43B3FA8B.INITO" Destination="$01486FCD43B3FA8B.REQ_INITDATA" />
+      <Connection Source="$01486FCD43B3FA8B.CNF_INITDATA" Destination="$01486FCD43B3FA8B.ACTIVATE" />
+      <Connection Source="$01486FCD43B3FA8B.INITO" Destination="$51D5568DAC74D385.INIT" />
+      <Connection Source="$51D5568DAC74D385.INITO" Destination="$51D5568DAC74D385.REQ_INITDATA" />
+      <Connection Source="$51D5568DAC74D385.CNF_INITDATA" Destination="$51D5568DAC74D385.ACTIVATE" />
+      <Connection Source="$51D5568DAC74D385.INITO" Destination="$607DDDC084384EFC.ACK_FIRST" />
+      <Connection Source="$F6B53F78AED31CEB.DC12539614B57B73" Destination="$4E9E8537F25E59E3.INIT" />
+      <Connection Source="$F6B53F78AED31CEB.DC12539614B57B73" Destination="$E7FAD1A5573D74C0.INIT" />
+      <Connection Source="$F6B53F78AED31CEB.C9337F6B69351BCF" Destination="$4E9E8537F25E59E3.REQ" />
+      <Connection Source="$F6B53F78AED31CEB.C9337F6B69351BCF" Destination="$E7FAD1A5573D74C0.REQ" />
+      <Connection Source="$58C76D81C5C3CF9A.6D578F9B82E559A7" Destination="$F6B53F78AED31CEB.15D59D6E025E0AEC" />
+      <Connection Source="$58C76D81C5C3CF9A.E92041950CEDCF19" Destination="$F6B53F78AED31CEB.D7C528B832D24695" />
+      <Connection Source="$7928A75A5088ACBD" Destination="$F6B53F78AED31CEB.58BFBDBCB72060FA" />
+      <Connection Source="$A470A64FF5969E4A.EO" Destination="$F6B53F78AED31CEB.1DB3A43D9CFE56D9" />
+      <Connection Source="$F6B53F78AED31CEB.A44CBE1A3706F856" Destination="$B61E80D27D776DFC" />
+      <Connection Source="$F6B53F78AED31CEB.E2CCA36837A78D9A" Destination="$58C76D81C5C3CF9A.26D8CC00FA2A4527" />
+      <Connection Source="$86214800AFC3031E.CNF" Destination="$F6B53F78AED31CEB.BDA6F58D663AD593" />
+      <Connection Source="$C9082A3BB1C6FABE.CNF" Destination="$F6B53F78AED31CEB.11A3A648381739C8" />
+      <Connection Source="$B6EB8BFC2AEC5D95.CNF" Destination="$F6B53F78AED31CEB.748B4B0803385F35" />
+      <Connection Source="$357859AB79610465.CNF" Destination="$F6B53F78AED31CEB.A19EF8FB897BEE21" />
+      <Connection Source="$F6B53F78AED31CEB.0972B515C8BC4FF5" Destination="$106AC80791C9F0A6.REQ" />
+      <Connection Source="$F6B53F78AED31CEB.0972B515C8BC4FF5" Destination="$09ADEDE2E4A66455.REQ" />
+      <Connection Source="$F6B53F78AED31CEB.0972B515C8BC4FF5" Destination="$B17C934003D6D7D9.REQ" />
+      <Connection Source="$F6B53F78AED31CEB.0972B515C8BC4FF5" Destination="$1FBA7DB6A424BFFD.REQ" />
+      <Connection Source="$F6B53F78AED31CEB.0972B515C8BC4FF5" Destination="$BF0B52EC9FD8A544.REQ" />
+      <Connection Source="$F6B53F78AED31CEB.0972B515C8BC4FF5" Destination="$BE55868AB56BC309.REQ" />
+      <Connection Source="$F6B53F78AED31CEB.0972B515C8BC4FF5" Destination="$01486FCD43B3FA8B.REQ" />
+      <Connection Source="$F6B53F78AED31CEB.0972B515C8BC4FF5" Destination="$51D5568DAC74D385.REQ" />
+      <Connection Source="$106AC80791C9F0A6.IND_1" Destination="$58C76D81C5C3CF9A.26D8CC00FA2A4527" />
+      <Connection Source="$09ADEDE2E4A66455.IND_1" Destination="$58C76D81C5C3CF9A.26D8CC00FA2A4527" />
+      <Connection Source="$B17C934003D6D7D9.IND_1" Destination="$58C76D81C5C3CF9A.26D8CC00FA2A4527" />
+      <Connection Source="$1FBA7DB6A424BFFD.IND_1" Destination="$58C76D81C5C3CF9A.26D8CC00FA2A4527" />
+      <Connection Source="$BF0B52EC9FD8A544.IND_1" Destination="$58C76D81C5C3CF9A.26D8CC00FA2A4527" />
+      <Connection Source="$BE55868AB56BC309.IND_1" Destination="$58C76D81C5C3CF9A.26D8CC00FA2A4527" />
+      <Connection Source="$01486FCD43B3FA8B.IND_1" Destination="$58C76D81C5C3CF9A.26D8CC00FA2A4527" />
+      <Connection Source="$51D5568DAC74D385.IND_1" Destination="$58C76D81C5C3CF9A.26D8CC00FA2A4527" />
+      <Connection Source="$58C76D81C5C3CF9A.E92041950CEDCF19" Destination="$106AC80791C9F0A6.ACK_C1" />
+      <Connection Source="$58C76D81C5C3CF9A.E92041950CEDCF19" Destination="$09ADEDE2E4A66455.ACK_C1" />
+      <Connection Source="$58C76D81C5C3CF9A.E92041950CEDCF19" Destination="$B17C934003D6D7D9.ACK_C1" />
+      <Connection Source="$58C76D81C5C3CF9A.E92041950CEDCF19" Destination="$1FBA7DB6A424BFFD.ACK_C1" />
+      <Connection Source="$58C76D81C5C3CF9A.E92041950CEDCF19" Destination="$BF0B52EC9FD8A544.ACK_C1" />
+      <Connection Source="$58C76D81C5C3CF9A.E92041950CEDCF19" Destination="$BE55868AB56BC309.ACK_C1" />
+      <Connection Source="$58C76D81C5C3CF9A.E92041950CEDCF19" Destination="$01486FCD43B3FA8B.ACK_C1" />
+      <Connection Source="$58C76D81C5C3CF9A.E92041950CEDCF19" Destination="$51D5568DAC74D385.ACK_C1" />
+      <Connection Source="$7928A75A5088ACBD" Destination="$106AC80791C9F0A6.ACK_C1" />
+      <Connection Source="$7928A75A5088ACBD" Destination="$09ADEDE2E4A66455.ACK_C1" />
+      <Connection Source="$7928A75A5088ACBD" Destination="$B17C934003D6D7D9.ACK_C1" />
+      <Connection Source="$7928A75A5088ACBD" Destination="$1FBA7DB6A424BFFD.ACK_C1" />
+      <Connection Source="$7928A75A5088ACBD" Destination="$BF0B52EC9FD8A544.ACK_C1" />
+      <Connection Source="$7928A75A5088ACBD" Destination="$BE55868AB56BC309.ACK_C1" />
+      <Connection Source="$7928A75A5088ACBD" Destination="$01486FCD43B3FA8B.ACK_C1" />
+      <Connection Source="$7928A75A5088ACBD" Destination="$51D5568DAC74D385.ACK_C1" />
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="$A410B91E1EF5ABA2" Destination="$F6B53F78AED31CEB.5D2B8D5EEA8CA438" />
+      <Connection Source="$1B81B60F03D017E8" Destination="$F6B53F78AED31CEB.CBB484B85F481F97" />
+      <Connection Source="$19848145BDBC225E" Destination="$F6B53F78AED31CEB.0D423F13A9758F5D" />
+      <Connection Source="$86214800AFC3031E.VALUE1" Destination="$F6B53F78AED31CEB.A7330B3B6EB1E31F" />
+      <Connection Source="$86214800AFC3031E.VALUE2" Destination="$F6B53F78AED31CEB.75CBA331281D5001" />
+      <Connection Source="$86214800AFC3031E.VALUE3" Destination="$F6B53F78AED31CEB.66EF7D2E67C68200" />
+      <Connection Source="$86214800AFC3031E.VALUE4" Destination="$F6B53F78AED31CEB.9C5E7398418C1F4F" />
+      <Connection Source="$86214800AFC3031E.VALUE5" Destination="$F6B53F78AED31CEB.EF4B3D706C982888" />
+      <Connection Source="$86214800AFC3031E.VALUE6" Destination="$F6B53F78AED31CEB.31E01BD221C0A7DE" />
+      <Connection Source="$86214800AFC3031E.VALUE7" Destination="$F6B53F78AED31CEB.245118D9851C76BB" />
+      <Connection Source="$86214800AFC3031E.VALUE8" Destination="$F6B53F78AED31CEB.FC48B87CE94C8360" />
+      <Connection Source="$86214800AFC3031E.VALUE9" Destination="$F6B53F78AED31CEB.13929E799CB18846" />
+      <Connection Source="$86214800AFC3031E.VALUE10" Destination="$F6B53F78AED31CEB.AAC42DE962D3B797" />
+      <Connection Source="$86214800AFC3031E.VALUE11" Destination="$F6B53F78AED31CEB.2B4EE563F848EAD2" />
+      <Connection Source="$86214800AFC3031E.VALUE12" Destination="$F6B53F78AED31CEB.D9530A834C71219B" />
+      <Connection Source="$86214800AFC3031E.VALUE13" Destination="$F6B53F78AED31CEB.61A9D188A9F5851B" />
+      <Connection Source="$86214800AFC3031E.VALUE14" Destination="$F6B53F78AED31CEB.5C1EE40821C23758" />
+      <Connection Source="$86214800AFC3031E.VALUE15" Destination="$F6B53F78AED31CEB.982869116272FA7B" />
+      <Connection Source="$C9082A3BB1C6FABE.VALUE1" Destination="$F6B53F78AED31CEB.D7521402DC916D5E" />
+      <Connection Source="$C9082A3BB1C6FABE.VALUE2" Destination="$F6B53F78AED31CEB.F9EA42AE519A3D2E" />
+      <Connection Source="$C9082A3BB1C6FABE.VALUE3" Destination="$F6B53F78AED31CEB.63486372C36DDBF8" />
+      <Connection Source="$C9082A3BB1C6FABE.VALUE4" Destination="$F6B53F78AED31CEB.F4ABDF0B282740AC" />
+      <Connection Source="$C9082A3BB1C6FABE.VALUE5" Destination="$F6B53F78AED31CEB.EBAD8D198B0E57E2" />
+      <Connection Source="$C9082A3BB1C6FABE.VALUE6" Destination="$F6B53F78AED31CEB.0BADCB814AA024F4" />
+      <Connection Source="$C9082A3BB1C6FABE.VALUE7" Destination="$F6B53F78AED31CEB.DC4211A23853BF02" />
+      <Connection Source="$C9082A3BB1C6FABE.VALUE8" Destination="$F6B53F78AED31CEB.021B316D2E9FC503" />
+      <Connection Source="$C9082A3BB1C6FABE.VALUE9" Destination="$F6B53F78AED31CEB.D0280F27AA894985" />
+      <Connection Source="$C9082A3BB1C6FABE.VALUE10" Destination="$F6B53F78AED31CEB.022589950134A15C" />
+      <Connection Source="$C9082A3BB1C6FABE.VALUE11" Destination="$F6B53F78AED31CEB.1D7067E42F7F920B" />
+      <Connection Source="$C9082A3BB1C6FABE.VALUE12" Destination="$F6B53F78AED31CEB.28086F9A13C4AEC8" />
+      <Connection Source="$C9082A3BB1C6FABE.VALUE13" Destination="$F6B53F78AED31CEB.B744057DFF29435F" />
+      <Connection Source="$C9082A3BB1C6FABE.VALUE14" Destination="$F6B53F78AED31CEB.E7BDF46B90F2ABE7" />
+      <Connection Source="$C9082A3BB1C6FABE.VALUE15" Destination="$F6B53F78AED31CEB.85B76D64ED703E5C" />
+      <Connection Source="$B6EB8BFC2AEC5D95.VALUE1" Destination="$F6B53F78AED31CEB.0B6F0F6CAFB73D0B" />
+      <Connection Source="$B6EB8BFC2AEC5D95.VALUE2" Destination="$F6B53F78AED31CEB.C0ECE3FD244E9D27" />
+      <Connection Source="$B6EB8BFC2AEC5D95.VALUE3" Destination="$F6B53F78AED31CEB.485CC684071F672F" />
+      <Connection Source="$B6EB8BFC2AEC5D95.VALUE4" Destination="$F6B53F78AED31CEB.49ACB6AFF371591F" />
+      <Connection Source="$357859AB79610465.VALUE1" Destination="$F6B53F78AED31CEB.31128805057AE6DF" />
+      <Connection Source="$58C76D81C5C3CF9A.853136B9D18CF5B5" Destination="$F6B53F78AED31CEB.C2183108F3905F97" />
+      <Connection Source="$58C76D81C5C3CF9A.B1D3FD444B829FE6" Destination="$F6B53F78AED31CEB.7160EE4A63D00A51" />
+      <Connection Source="$F6B53F78AED31CEB.2ACC4459D225B2A5" Destination="$4E9E8537F25E59E3.VALUE1" />
+      <Connection Source="$F6B53F78AED31CEB.600857C82B1F69BA" Destination="$E7FAD1A5573D74C0.VALUE1" />
+      <Connection Source="$F6B53F78AED31CEB.7282D542BDBB3FFB" Destination="$106AC80791C9F0A6.INP" />
+      <Connection Source="$F6B53F78AED31CEB.613FBFDAE9BD92D2" Destination="$09ADEDE2E4A66455.INP" />
+      <Connection Source="$F6B53F78AED31CEB.F735731CEC5837CB" Destination="$B17C934003D6D7D9.INP" />
+      <Connection Source="$F6B53F78AED31CEB.3E0F2ACB4615C726" Destination="$1FBA7DB6A424BFFD.INP" />
+      <Connection Source="$F6B53F78AED31CEB.CE665728889A4341" Destination="$BF0B52EC9FD8A544.INP" />
+      <Connection Source="$F6B53F78AED31CEB.422AAB54CD83B326" Destination="$BE55868AB56BC309.INP" />
+      <Connection Source="$F6B53F78AED31CEB.39057C2ACBA9565F" Destination="$01486FCD43B3FA8B.INP" />
+      <Connection Source="$F6B53F78AED31CEB.91DD86BE95DDFBA8" Destination="$51D5568DAC74D385.INP" />
+      <Connection Source="$F6B53F78AED31CEB.1E40D0D699DD144E" Destination="$A21F66F90071C01B" />
+      <Connection Source="$F6B53F78AED31CEB.C19F83948281B0E2" Destination="$4DD2F281B66D2760" />
+      <Connection Source="$F6B53F78AED31CEB.3C88756B36A52512" Destination="$BA7D2FB18EAAE792" />
+      <Connection Source="$F6B53F78AED31CEB.4BA5F5355FF4CEA7" Destination="$10D2DC153E3C026E" />
+      <Connection Source="$F6B53F78AED31CEB.E36E8F1BEC8ADC88" Destination="$492BB6D6104B1292" />
+      <Connection Source="$F6B53F78AED31CEB.CA33BD0236498767" Destination="$78271B166302E5EE" />
+      <Connection Source="$F6B53F78AED31CEB.F19F5E032DA269A0" Destination="$424026F091D97DEB" />
+      <Connection Source="$F6B53F78AED31CEB.B4ED2B665DF935CA" Destination="$CDEF4DBA5C18DB17" />
+      <Connection Source="$F6B53F78AED31CEB.224868A578BADC0A" Destination="$C6EE1CF4F24E322E" />
+      <Connection Source="$F6B53F78AED31CEB.C1F286943C35525A" Destination="$435220BFFD4BE378" />
+      <Connection Source="$F6B53F78AED31CEB.3A87AFDA0837A305" Destination="$531E259F3FDC5646" />
+      <Connection Source="$F6B53F78AED31CEB.953A300991140BB0" Destination="$F4097DF03F1F60B8" />
+      <Connection Source="$F6B53F78AED31CEB.7395FF5E7D3E1486" Destination="$A96FB4927A521C6D" />
+      <Connection Source="$F6B53F78AED31CEB.CA2CF5BB08A1B5AC" Destination="$002A29D6FC5A881A" />
+      <Connection Source="$F6B53F78AED31CEB.95830401F9DB0E6C" Destination="$08E4E80E6CE7B756" />
+      <Connection Source="$F6B53F78AED31CEB.D05459853BFE584C" Destination="$28722E568A10D0C0" />
+      <Connection Source="$F6B53F78AED31CEB.80875DDED85C9768" Destination="$442D5347160D15FF" />
+      <Connection Source="$F6B53F78AED31CEB.42A342504DB52425" Destination="$5FBC1E7B0BBCDD00" />
+      <Connection Source="$F6B53F78AED31CEB.DD82132D7F9E0054" Destination="$3D82285BC957F4A6" />
+      <Connection Source="$F6B53F78AED31CEB.F2420F8AB10CFA35" Destination="$0D8842690E513A99" />
+      <Connection Source="$F6B53F78AED31CEB.D14EBEC5B3C194C5" Destination="$5E9511F6B0FB3581" />
+      <Connection Source="$F6B53F78AED31CEB.0E8548B50BBA41D7" Destination="$38B75BA811187B45" />
+      <Connection Source="$F6B53F78AED31CEB.2053820AB993FCDC" Destination="$1322978101C45020" />
+      <Connection Source="$F6B53F78AED31CEB.C733850F46B2B7C0" Destination="$B3C67484789F0662" />
+      <Connection Source="$F6B53F78AED31CEB.51695C60F1D860CF" Destination="$E81150276E85A88D" />
+      <Connection Source="$F6B53F78AED31CEB.39EB84F933B4E6D9" Destination="$E607B5D65C774239" />
+      <Connection Source="$F6B53F78AED31CEB.692FFC497509E0A1" Destination="$36AA02DF41051BAE" />
+      <Connection Source="$F6B53F78AED31CEB.C084ABF0328A5376" Destination="$F9B7C6F95154B463" />
+      <Connection Source="$F6B53F78AED31CEB.9172A58AE36C8C37" Destination="$6A17B02D91A0D025" />
+      <Connection Source="$F6B53F78AED31CEB.7F54324733CC63A1" Destination="$464FE0685F95923B" />
+      <Connection Source="$F6B53F78AED31CEB.29A1CBB8F7435B76" Destination="$A26A78EC1F2355CA" />
+      <Connection Source="$F6B53F78AED31CEB.36CCB0EB6EDA1E16" Destination="$0082DFB80248B20D" />
+      <Connection Source="$F6B53F78AED31CEB.3FBFE0CD60124175" Destination="$2139EC424EF19A88" />
+      <Connection Source="$F6B53F78AED31CEB.60591644B144BF74" Destination="$4B9A056A1EF1412A" />
+      <Connection Source="$F6B53F78AED31CEB.D0B870E4138B8E9A" Destination="$B9E59DCBEE5654C9" />
+      <Connection Source="$F6B53F78AED31CEB.996A96555603652B" Destination="$B43B4DFD4A7F3E33" />
+      <Connection Source="$F6B53F78AED31CEB.D6D6D24B3FBF0ADC" Destination="$2E119CC299FC1B11" />
+      <Connection Source="$F6B53F78AED31CEB.A7E5F1F016368C29" Destination="$F37176EFE77491AD" />
+      <Connection Source="$F6B53F78AED31CEB.F41F41A2F194D1F0" Destination="$8B786387C058A06E" />
+      <Connection Source="$F6B53F78AED31CEB.A4FF00541968E223" Destination="$5BBEB485F0B65DBB" />
+      <Connection Source="$F6B53F78AED31CEB.69B14C75210049E3" Destination="$498E527029816A86" />
+      <Connection Source="$F6B53F78AED31CEB.1E40D0D699DD144E" Destination="$58C76D81C5C3CF9A.00413B77FB3FD391" />
+      <Connection Source="$F6B53F78AED31CEB.C19F83948281B0E2" Destination="$58C76D81C5C3CF9A.6FB2F6B28DC276BC" />
+      <Connection Source="$F6B53F78AED31CEB.3C88756B36A52512" Destination="$58C76D81C5C3CF9A.61ECA2065F4A1220" />
+      <Connection Source="$F6B53F78AED31CEB.4BA5F5355FF4CEA7" Destination="$58C76D81C5C3CF9A.C55D1A7D24318BE9" />
+      <Connection Source="$F6B53F78AED31CEB.E36E8F1BEC8ADC88" Destination="$58C76D81C5C3CF9A.B3C1C2B1D84A8BEF" />
+      <Connection Source="$F6B53F78AED31CEB.CA33BD0236498767" Destination="$58C76D81C5C3CF9A.A9BCCDA5C9491BC5" />
+      <Connection Source="$F6B53F78AED31CEB.F19F5E032DA269A0" Destination="$58C76D81C5C3CF9A.6D6FCE7EEF5A092F" />
+      <Connection Source="$F6B53F78AED31CEB.B4ED2B665DF935CA" Destination="$58C76D81C5C3CF9A.A6B15948115E4622" />
+      <Connection Source="$F6B53F78AED31CEB.224868A578BADC0A" Destination="$58C76D81C5C3CF9A.06755BC431017794" />
+      <Connection Source="$F6B53F78AED31CEB.C1F286943C35525A" Destination="$58C76D81C5C3CF9A.48E59B4224572852" />
+      <Connection Source="$F6B53F78AED31CEB.3A87AFDA0837A305" Destination="$58C76D81C5C3CF9A.546F39FA179BDCFE" />
+      <Connection Source="$F6B53F78AED31CEB.953A300991140BB0" Destination="$58C76D81C5C3CF9A.D45ADC0A6454CCC7" />
+      <Connection Source="$F6B53F78AED31CEB.7395FF5E7D3E1486" Destination="$58C76D81C5C3CF9A.C25D419DB7DBCFF4" />
+      <Connection Source="$F6B53F78AED31CEB.CA2CF5BB08A1B5AC" Destination="$58C76D81C5C3CF9A.5DD3E088782C8D1B" />
+      <Connection Source="$F6B53F78AED31CEB.95830401F9DB0E6C" Destination="$58C76D81C5C3CF9A.DC02F918C07495F6" />
+      <Connection Source="$F6B53F78AED31CEB.D05459853BFE584C" Destination="$58C76D81C5C3CF9A.B15E2E9E8D19A37F" />
+      <Connection Source="$F6B53F78AED31CEB.80875DDED85C9768" Destination="$58C76D81C5C3CF9A.843AFFBDAD6A0A35" />
+      <Connection Source="$F6B53F78AED31CEB.42A342504DB52425" Destination="$58C76D81C5C3CF9A.D96330EF0A6E3612" />
+      <Connection Source="$F6B53F78AED31CEB.DD82132D7F9E0054" Destination="$58C76D81C5C3CF9A.4C9948807F71F264" />
+      <Connection Source="$F6B53F78AED31CEB.F2420F8AB10CFA35" Destination="$58C76D81C5C3CF9A.226B306D451A97EB" />
+      <Connection Source="$F6B53F78AED31CEB.D14EBEC5B3C194C5" Destination="$58C76D81C5C3CF9A.21DCDE8193E3FBEF" />
+      <Connection Source="$F6B53F78AED31CEB.0E8548B50BBA41D7" Destination="$58C76D81C5C3CF9A.B9558F209B183E4E" />
+      <Connection Source="$F6B53F78AED31CEB.2053820AB993FCDC" Destination="$58C76D81C5C3CF9A.7E4E6F21D9F3B7B2" />
+      <Connection Source="$F6B53F78AED31CEB.C733850F46B2B7C0" Destination="$58C76D81C5C3CF9A.544D9AC77812BDA1" />
+      <Connection Source="$F6B53F78AED31CEB.51695C60F1D860CF" Destination="$58C76D81C5C3CF9A.646698EA651C1295" />
+      <Connection Source="$F6B53F78AED31CEB.39EB84F933B4E6D9" Destination="$58C76D81C5C3CF9A.0C2444BAA28C89B4" />
+      <Connection Source="$F6B53F78AED31CEB.692FFC497509E0A1" Destination="$58C76D81C5C3CF9A.3FCEB32B27865B69" />
+      <Connection Source="$F6B53F78AED31CEB.C084ABF0328A5376" Destination="$58C76D81C5C3CF9A.7138AB6343D50B72" />
+      <Connection Source="$F6B53F78AED31CEB.9172A58AE36C8C37" Destination="$58C76D81C5C3CF9A.5B3A9F4868BF85D1" />
+      <Connection Source="$F6B53F78AED31CEB.7F54324733CC63A1" Destination="$58C76D81C5C3CF9A.9ADF793C78EB9815" />
+      <Connection Source="$F6B53F78AED31CEB.29A1CBB8F7435B76" Destination="$58C76D81C5C3CF9A.040C3BE2C9BFF722" />
+      <Connection Source="$F6B53F78AED31CEB.36CCB0EB6EDA1E16" Destination="$58C76D81C5C3CF9A.E94B12BF1E46D1DE" />
+      <Connection Source="$F6B53F78AED31CEB.3FBFE0CD60124175" Destination="$58C76D81C5C3CF9A.8DFB812BDDFA5844" />
+      <Connection Source="$F6B53F78AED31CEB.60591644B144BF74" Destination="$58C76D81C5C3CF9A.3C3153BF8E08E275" />
+      <Connection Source="$F6B53F78AED31CEB.D0B870E4138B8E9A" Destination="$58C76D81C5C3CF9A.D0DBD7A32CDF5CF0" />
+      <Connection Source="$F6B53F78AED31CEB.996A96555603652B" Destination="$58C76D81C5C3CF9A.AC299F89EBF46FB1" />
+      <Connection Source="$F6B53F78AED31CEB.D6D6D24B3FBF0ADC" Destination="$58C76D81C5C3CF9A.7509DCD3B4E54882" />
+      <Connection Source="$F6B53F78AED31CEB.A7E5F1F016368C29" Destination="$58C76D81C5C3CF9A.B935E662D3F620E5" />
+      <Connection Source="$F6B53F78AED31CEB.F41F41A2F194D1F0" Destination="$58C76D81C5C3CF9A.E9CE0A38EB06D84D" />
+      <Connection Source="$F6B53F78AED31CEB.A4FF00541968E223" Destination="$58C76D81C5C3CF9A.F9C5A53F446008C4" />
+      <Connection Source="$F6B53F78AED31CEB.69B14C75210049E3" Destination="$58C76D81C5C3CF9A.BDC6AA03EB5CCBEC" />
+      <Connection Source="$106AC80791C9F0A6.STATE_1" Destination="$58C76D81C5C3CF9A.A40DB40432E241B0" />
+      <Connection Source="$09ADEDE2E4A66455.STATE_1" Destination="$58C76D81C5C3CF9A.4D16197CC8A6FA3A" />
+      <Connection Source="$B17C934003D6D7D9.STATE_1" Destination="$58C76D81C5C3CF9A.B623E8D435377242" />
+      <Connection Source="$1FBA7DB6A424BFFD.STATE_1" Destination="$58C76D81C5C3CF9A.AF8683B23D9C1DA8" />
+      <Connection Source="$BF0B52EC9FD8A544.STATE_1" Destination="$58C76D81C5C3CF9A.34A389507308939C" />
+      <Connection Source="$BE55868AB56BC309.STATE_1" Destination="$58C76D81C5C3CF9A.D79A25D4A4B48D7C" />
+      <Connection Source="$01486FCD43B3FA8B.STATE_1" Destination="$58C76D81C5C3CF9A.E9D8329650B83C14" />
+      <Connection Source="$51D5568DAC74D385.STATE_1" Destination="$58C76D81C5C3CF9A.00731EA1F129697D" />
+      <Connection Source="$F6B53F78AED31CEB.C2B751B97236C67C" Destination="$58C76D81C5C3CF9A.D970C941743E38D2" />
+      <Connection Source="$F6B53F78AED31CEB.3A929C8EED3B371D" Destination="$58C76D81C5C3CF9A.0B3DF6FBECF5CB74" />
+      <Connection Source="$F6B53F78AED31CEB.840FF50E52A3339F" Destination="$58C76D81C5C3CF9A.ED00303F35471587" />
+      <Connection Source="$F6B53F78AED31CEB.0D4A3E26781F6D90" Destination="$58C76D81C5C3CF9A.BB32D518A4DF7385" />
+      <Connection Source="$F6B53F78AED31CEB.EFA6B10159DC226B" Destination="$58C76D81C5C3CF9A.E4D7528507F03FF0" />
+      <Connection Source="$F6B53F78AED31CEB.3A1C7F4B518A0AFA" Destination="$58C76D81C5C3CF9A.3A49104F51FAE798" />
+    </DataConnections>
+  </FBNetwork>
+</FBType>

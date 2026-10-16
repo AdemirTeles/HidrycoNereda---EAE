@@ -1,0 +1,1504 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="9cdfd66f-bd66-47e3-a445-bd9637b18352" Name="basicUCT" Comment="Logica unica da UCT Fast (Modbus TCP) e da bomba de gordura com a valvula de lavagem" Namespace="Hidryco.HidrycoLib">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Hidryco" Version="1.3" Author="Hidryco" Date="16/10/2026" Remarks="1.0: UCT Fast (memorial PR-809) por Modbus TCP - leitura de estado, comandos manuais e automaticos por evento, reset, disponibilidade para a EEE Bruto, bomba de gordura e valvula de lavagem" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="3C5B6DD981EA9EF0" Name="INIT" Comment="Inicializacao">
+        <With Var="cfgInstalada" />
+        <With Var="cfgTempoCom" />
+        <With Var="cfgTempoReset" />
+      </Event>
+      <Event ID="86B21E575F925410" Name="REQ_L1" Comment="Leitura Modbus (grupo 1)">
+        <With Var="w005" />
+        <With Var="w006" />
+        <With Var="w007" />
+        <With Var="w008" />
+        <With Var="w009" />
+        <With Var="w010" />
+        <With Var="w011" />
+        <With Var="w012" />
+        <With Var="w013" />
+        <With Var="w014" />
+        <With Var="w015" />
+        <With Var="w016" />
+        <With Var="w017" />
+        <With Var="w081" />
+        <With Var="w082" />
+      </Event>
+      <Event ID="ACF117E29FC3AC1C" Name="REQ_L2" Comment="Leitura Modbus (grupo 2)">
+        <With Var="s101" />
+        <With Var="s106" />
+        <With Var="s116" />
+        <With Var="s117" />
+        <With Var="s121" />
+        <With Var="s122" />
+        <With Var="s127" />
+        <With Var="s132" />
+        <With Var="s136" />
+        <With Var="s137" />
+        <With Var="s141" />
+        <With Var="s142" />
+        <With Var="s151" />
+        <With Var="s152" />
+        <With Var="s161" />
+      </Event>
+      <Event ID="FD034B0BBE440D40" Name="REQ_L3" Comment="Leitura Modbus (grupo 3)">
+        <With Var="s162" />
+        <With Var="w230" />
+        <With Var="h500" />
+        <With Var="h501" />
+        <With Var="h502" />
+        <With Var="h503" />
+        <With Var="h504" />
+        <With Var="h505" />
+        <With Var="h506" />
+        <With Var="h507" />
+        <With Var="h508" />
+        <With Var="h509" />
+        <With Var="h510" />
+        <With Var="h511" />
+        <With Var="h512" />
+      </Event>
+      <Event ID="729388FCDFDF68AE" Name="REQ_L4" Comment="Leitura Modbus (grupo 4)">
+        <With Var="h513" />
+        <With Var="h514" />
+        <With Var="h515" />
+        <With Var="h516" />
+      </Event>
+      <Event ID="96AC3F0A2629C81D" Name="REQ_L5" Comment="Leitura Modbus (grupo 5)">
+        <With Var="h517" />
+      </Event>
+      <Event ID="4327DB3EB2D5D05C" Name="REQ_COM" Comment="Comunicacao">
+        <With Var="comInt" />
+      </Event>
+      <Event ID="F5A0AE6E537529F5" Name="REQ_PEN_LIGA" Comment="Peneira rotativa: liga manual">
+        <With Var="penLiga" />
+      </Event>
+      <Event ID="CB1FF06E5DD10F71" Name="REQ_PEN_INT" Comment="Peneira rotativa: intermitente">
+        <With Var="penInt" />
+      </Event>
+      <Event ID="4A489282C873CE35" Name="REQ_PEN_VEL" Comment="Peneira rotativa: velocidade (%)">
+        <With Var="penVel" />
+      </Event>
+      <Event ID="9D9E81ADADCAA296" Name="REQ_B1_LIGA" Comment="Bomba 1 de higienização da peneira: liga manual">
+        <With Var="b1Liga" />
+      </Event>
+      <Event ID="E34661574BF84379" Name="REQ_B1_VEL" Comment="Bomba 1 de higienização da peneira: velocidade (%)">
+        <With Var="b1Vel" />
+      </Event>
+      <Event ID="D87E7B2D8E293BB6" Name="REQ_B2_LIGA" Comment="Bomba 2 de higienização da peneira: liga manual">
+        <With Var="b2Liga" />
+      </Event>
+      <Event ID="7CA1C2A34CD31341" Name="REQ_B2_VEL" Comment="Bomba 2 de higienização da peneira: velocidade (%)">
+        <With Var="b2Vel" />
+      </Event>
+      <Event ID="CF56824B76A4E51B" Name="REQ_V1_LIGA" Comment="Válvula 1 - higienização do cesto da peneira: liga manual">
+        <With Var="v1Liga" />
+      </Event>
+      <Event ID="F75EA032D1A6B02C" Name="REQ_V2_LIGA" Comment="Válvula 2 - higienização da rosca da peneira: liga manual">
+        <With Var="v2Liga" />
+      </Event>
+      <Event ID="548C5ECAC6439F23" Name="REQ_CMP_LIGA" Comment="Compressor de ar: liga manual">
+        <With Var="cmpLiga" />
+      </Event>
+      <Event ID="D33EB6DFF7EADA48" Name="REQ_CMP_VEL" Comment="Compressor de ar: velocidade (%)">
+        <With Var="cmpVel" />
+      </Event>
+      <Event ID="4F24C39CA1B377DA" Name="REQ_RSP_LIGA" Comment="Raspador de gordura: liga manual">
+        <With Var="rspLiga" />
+      </Event>
+      <Event ID="25A416A6D88DD0BD" Name="REQ_RSP_INT" Comment="Raspador de gordura: intermitente">
+        <With Var="rspInt" />
+      </Event>
+      <Event ID="2DDC9EB582C567B6" Name="REQ_RSP_REV" Comment="Raspador de gordura: reversao">
+        <With Var="rspRev" />
+      </Event>
+      <Event ID="E445565C572BE9AB" Name="REQ_RSP_VEL" Comment="Raspador de gordura: velocidade (%)">
+        <With Var="rspVel" />
+      </Event>
+      <Event ID="B6026660A2849366" Name="REQ_R1_LIGA" Comment="Rosca 1 - horizontal: liga manual">
+        <With Var="r1Liga" />
+      </Event>
+      <Event ID="38389BFD6E07A057" Name="REQ_R1_INT" Comment="Rosca 1 - horizontal: intermitente">
+        <With Var="r1Int" />
+      </Event>
+      <Event ID="460B0CE006F8F781" Name="REQ_R1_REV" Comment="Rosca 1 - horizontal: reversao">
+        <With Var="r1Rev" />
+      </Event>
+      <Event ID="9798AA2801C41B49" Name="REQ_R1_VEL" Comment="Rosca 1 - horizontal: velocidade (%)">
+        <With Var="r1Vel" />
+      </Event>
+      <Event ID="05FCFC0A4F34DAC5" Name="REQ_R2_LIGA" Comment="Rosca 2 - inclinada: liga manual">
+        <With Var="r2Liga" />
+      </Event>
+      <Event ID="917F967EEA65C256" Name="REQ_R2_INT" Comment="Rosca 2 - inclinada: intermitente">
+        <With Var="r2Int" />
+      </Event>
+      <Event ID="F6429B88CEB00ADB" Name="REQ_R2_REV" Comment="Rosca 2 - inclinada: reversao">
+        <With Var="r2Rev" />
+      </Event>
+      <Event ID="66FC9636E69253EA" Name="REQ_R2_VEL" Comment="Rosca 2 - inclinada: velocidade (%)">
+        <With Var="r2Vel" />
+      </Event>
+      <Event ID="60A9FA7D1B9019D9" Name="REQ_LIGA_PEN" Comment="cmdLigaSubsistemaPeneira">
+        <With Var="hmiLigaPeneira" />
+      </Event>
+      <Event ID="10C669586AF9B729" Name="REQ_SEL_PEN" Comment="cmdSelecaoSubsistemaPeneira">
+        <With Var="hmiSelPeneira" />
+      </Event>
+      <Event ID="70D47E2D73B66C31" Name="REQ_LIGA_ROS" Comment="cmdLigaSubsistemaRoscas">
+        <With Var="hmiLigaRoscas" />
+      </Event>
+      <Event ID="10434994C0931297" Name="REQ_SEL_ROS" Comment="cmdSelecaoSubsistemaRoscas">
+        <With Var="hmiSelRoscas" />
+      </Event>
+      <Event ID="4287AE5C00B681B1" Name="REQ_LIGA_RC" Comment="cmdLigaSubsistemaRaspComp">
+        <With Var="hmiLigaRaspComp" />
+      </Event>
+      <Event ID="8858219971D3BAD6" Name="REQ_SEL_RC" Comment="cmdSelecaoSubsistemaRaspComp">
+        <With Var="hmiSelRaspComp" />
+      </Event>
+      <Event ID="B055BD39F7E10E53" Name="REQ_SEL_BOMBA" Comment="cmdSelecaoBombaHigienizacao">
+        <With Var="hmiSelBomba" />
+      </Event>
+      <Event ID="8B3CC5BA21742708" Name="REQ_RESET" Comment="Reset pela IHM">
+        <With Var="hmiReset" />
+      </Event>
+      <Event ID="F6EC819575FB3804" Name="REQ_RESET_PROC" Comment="Reset pelo processo">
+        <With Var="cmdResetFalhas" />
+      </Event>
+      <Event ID="01DDB779929E0BD3" Name="REQ_VALVULA" Comment="Valvula de lavagem manual">
+        <With Var="hmiValvula" />
+      </Event>
+      <Event ID="FF42D335F0EB104F" Name="REQ_PARA" Comment="Parametros (persistentes)">
+        <With Var="stpHabilitada" />
+        <With Var="stpTempoPreLavagem" />
+        <With Var="stpTempoValvula" />
+        <With Var="stpTempoDesliga" />
+        <With Var="stpVelBomba" />
+      </Event>
+      <Event ID="B4B1263914B085C1" Name="REQ_DISP" Comment="Resultado do AND de disponibilidade">
+        <With Var="disponivel" />
+      </Event>
+      <Event ID="75410FBD6637F3BE" Name="REQ_PROC" Comment="Cadeia das UCTs e emergencia">
+        <With Var="antHabilitada" />
+        <With Var="antDisponivel" />
+        <With Var="emergencia" />
+      </Event>
+      <Event ID="7F4121B3EAF345EF" Name="REQ_BOMBA" Comment="Estado da bomba de gordura">
+        <With Var="bombaLigada" />
+        <With Var="bombaAutomatico" />
+      </Event>
+      <Event ID="41222487C8D9CF7D" Name="TICK" Comment="Base de tempo de 1 s (E_CYCLE)" />
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="416B84A41F220B84" Name="INITO" Comment="Inicializacao concluida" />
+      <Event ID="A4E8AA815C7798D0" Name="CNF" Comment="Processo (na mudanca)">
+        <With Var="stsDisponivel" />
+        <With Var="stsAlgumaHabilitada" />
+        <With Var="stsAlgumaDisponivel" />
+        <With Var="stsBloqueioEEE" />
+        <With Var="stsFalhaComunicacao" />
+        <With Var="stsEmergenciaUCT" />
+        <With Var="stsNivelAltoGordura" />
+        <With Var="stsAlarme" />
+      </Event>
+      <Event ID="B1173782F7B0D885" Name="CNF_HMI" Comment="IHM da UCT (na mudanca)">
+        <With Var="stsDisponivel" />
+        <With Var="stsAlgumaHabilitada" />
+        <With Var="stsAlgumaDisponivel" />
+        <With Var="stsBloqueioEEE" />
+        <With Var="stsFalhaComunicacao" />
+        <With Var="stsEmergenciaUCT" />
+        <With Var="stsNivelAltoGordura" />
+        <With Var="stsAlarme" />
+        <With Var="stsNivelBaixoPeneira" />
+        <With Var="stsNivelAltoPeneira" />
+        <With Var="stsNivelBaixoAgua" />
+        <With Var="stsNivelPeneira" />
+        <With Var="stsAutoPeneira" />
+        <With Var="stsAutoRoscas" />
+        <With Var="stsAutoRaspComp" />
+        <With Var="stsLigaAutoPeneira" />
+        <With Var="stsLigaAutoRoscas" />
+        <With Var="stsLigaAutoRaspComp" />
+        <With Var="stsSelecaoBomba" />
+        <With Var="stsValvula" />
+        <With Var="stsEtapaGordura" />
+        <With Var="stsTempoRestante" />
+        <With Var="okEmergencia" />
+        <With Var="okPeneira" />
+        <With Var="okMotores" />
+        <With Var="okComunicacao" />
+        <With Var="habilitada" />
+      </Event>
+      <Event ID="A0C13DD0452107CB" Name="CNF_EQ" Comment="IHM dos equipamentos (na mudanca)">
+        <With Var="penAnim" />
+        <With Var="penDef" />
+        <With Var="penHor" />
+        <With Var="penAuto" />
+        <With Var="penVelSts" />
+        <With Var="penFbLiga" />
+        <With Var="penFbInt" />
+        <With Var="penFbRev" />
+        <With Var="b1Anim" />
+        <With Var="b1Def" />
+        <With Var="b1Hor" />
+        <With Var="b1Auto" />
+        <With Var="b1VelSts" />
+        <With Var="b1FbLiga" />
+        <With Var="b1FbInt" />
+        <With Var="b1FbRev" />
+        <With Var="b2Anim" />
+        <With Var="b2Def" />
+        <With Var="b2Hor" />
+        <With Var="b2Auto" />
+        <With Var="b2VelSts" />
+        <With Var="b2FbLiga" />
+        <With Var="b2FbInt" />
+        <With Var="b2FbRev" />
+        <With Var="v1Anim" />
+        <With Var="v1Def" />
+        <With Var="v1Hor" />
+        <With Var="v1Auto" />
+        <With Var="v1VelSts" />
+        <With Var="v1FbLiga" />
+        <With Var="v1FbInt" />
+        <With Var="v1FbRev" />
+        <With Var="v2Anim" />
+        <With Var="v2Def" />
+        <With Var="v2Hor" />
+        <With Var="v2Auto" />
+        <With Var="v2VelSts" />
+        <With Var="v2FbLiga" />
+        <With Var="v2FbInt" />
+        <With Var="v2FbRev" />
+        <With Var="cmpAnim" />
+        <With Var="cmpDef" />
+        <With Var="cmpHor" />
+        <With Var="cmpAuto" />
+        <With Var="cmpVelSts" />
+        <With Var="cmpFbLiga" />
+        <With Var="cmpFbInt" />
+        <With Var="cmpFbRev" />
+        <With Var="rspAnim" />
+        <With Var="rspDef" />
+        <With Var="rspHor" />
+        <With Var="rspAuto" />
+        <With Var="rspVelSts" />
+        <With Var="rspFbLiga" />
+        <With Var="rspFbInt" />
+        <With Var="rspFbRev" />
+        <With Var="r1Anim" />
+        <With Var="r1Def" />
+        <With Var="r1Hor" />
+        <With Var="r1Auto" />
+        <With Var="r1VelSts" />
+        <With Var="r1FbLiga" />
+        <With Var="r1FbInt" />
+        <With Var="r1FbRev" />
+        <With Var="r2Anim" />
+        <With Var="r2Def" />
+        <With Var="r2Hor" />
+        <With Var="r2Auto" />
+        <With Var="r2VelSts" />
+        <With Var="r2FbLiga" />
+        <With Var="r2FbInt" />
+        <With Var="r2FbRev" />
+      </Event>
+      <Event ID="4C6FF34A6B3F84FA" Name="CNF_DISP" Comment="Condicoes para o AND de disponibilidade (na mudanca)">
+        <With Var="okEmergencia" />
+        <With Var="okPeneira" />
+        <With Var="okMotores" />
+        <With Var="okComunicacao" />
+        <With Var="habilitada" />
+      </Event>
+      <Event ID="B2C6B3F912408F66" Name="CNF_ALM" Comment="Alarmes para os ALARM_BIT (na mudanca)">
+        <With Var="almCom" />
+        <With Var="almEmergencia" />
+        <With Var="almDefPEN" />
+        <With Var="almDefB1" />
+        <With Var="almDefB2" />
+        <With Var="almDefCMP" />
+        <With Var="almDefRSP" />
+        <With Var="almDefR1" />
+        <With Var="almDefR2" />
+        <With Var="almNivelAgua" />
+        <With Var="almNivelPeneira" />
+      </Event>
+      <Event ID="31FE10FED34E3AE0" Name="CNF_BOMBA" Comment="Bomba de gordura (na mudanca)">
+        <With Var="cmdLigarBomba" />
+        <With Var="stpVelBombaOut" />
+      </Event>
+      <Event ID="8621D711C765D74F" Name="CNF_VALVULA" Comment="Valvula de lavagem (na mudanca)">
+        <With Var="cmdValvula" />
+      </Event>
+      <Event ID="61B5851DEAB87FC2" Name="CNF_RESET" Comment="Reset da bomba de gordura">
+        <With Var="resetBomba" />
+      </Event>
+      <Event ID="11F41745985917DF" Name="CNF_W005" Comment="Escreve 40005 na UCT">
+        <With Var="ww005" />
+      </Event>
+      <Event ID="E9DD31896C582136" Name="CNF_W006" Comment="Escreve 40006 na UCT">
+        <With Var="ww006" />
+      </Event>
+      <Event ID="E928AC62D8378E2E" Name="CNF_W007" Comment="Escreve 40007 na UCT">
+        <With Var="ww007" />
+      </Event>
+      <Event ID="8C6CC9C5F833000C" Name="CNF_W008" Comment="Escreve 40008 na UCT">
+        <With Var="ww008" />
+      </Event>
+      <Event ID="10A819F294BECD61" Name="CNF_W009" Comment="Escreve 40009 na UCT">
+        <With Var="ww009" />
+      </Event>
+      <Event ID="CCE6CEE36384A6FD" Name="CNF_W010" Comment="Escreve 40010 na UCT">
+        <With Var="ww010" />
+      </Event>
+      <Event ID="48F5F46EFA41CB2E" Name="CNF_W011" Comment="Escreve 40011 na UCT">
+        <With Var="ww011" />
+      </Event>
+      <Event ID="FB2D821A4BBF6B61" Name="CNF_W012" Comment="Escreve 40012 na UCT">
+        <With Var="ww012" />
+      </Event>
+      <Event ID="6F9E0D27072C9DCA" Name="CNF_W013" Comment="Escreve 40013 na UCT">
+        <With Var="ww013" />
+      </Event>
+      <Event ID="3830C851999B1CA8" Name="CNF_W014" Comment="Escreve 40014 na UCT">
+        <With Var="ww014" />
+      </Event>
+      <Event ID="91DFFB362B8ECB72" Name="CNF_W015" Comment="Escreve 40015 na UCT">
+        <With Var="ww015" />
+      </Event>
+      <Event ID="D8E5B77061056FA5" Name="CNF_W016" Comment="Escreve 40016 na UCT">
+        <With Var="ww016" />
+      </Event>
+      <Event ID="67B496F21A680217" Name="CNF_W017" Comment="Escreve 40017 na UCT">
+        <With Var="ww017" />
+      </Event>
+      <Event ID="2DC67FC3F907B62C" Name="CNF_V101" Comment="Escreve 40101 na UCT">
+        <With Var="ww101" />
+      </Event>
+      <Event ID="9697531BFDFDAA11" Name="CNF_V116" Comment="Escreve 40116 na UCT">
+        <With Var="ww116" />
+      </Event>
+      <Event ID="EA10A30027EF1458" Name="CNF_V121" Comment="Escreve 40121 na UCT">
+        <With Var="ww121" />
+      </Event>
+      <Event ID="76B63473D5644862" Name="CNF_V136" Comment="Escreve 40136 na UCT">
+        <With Var="ww136" />
+      </Event>
+      <Event ID="E8A88BE3B83ED632" Name="CNF_V141" Comment="Escreve 40141 na UCT">
+        <With Var="ww141" />
+      </Event>
+      <Event ID="FCC1975F18BB837D" Name="CNF_V151" Comment="Escreve 40151 na UCT">
+        <With Var="ww151" />
+      </Event>
+      <Event ID="D44CECCDCDAFDF05" Name="CNF_V161" Comment="Escreve 40161 na UCT">
+        <With Var="ww161" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="B84AF20A00A0FEAB" Name="cfgInstalada" Type="BOOL" InitialValue="TRUE" Comment="FALSE = UCT ainda nao existe em campo (sem comunicacao, sem alarmes, fora do bloqueio da EEE)" />
+      <VarDeclaration ID="2D0DECC616DD4E29" Name="cfgTempoCom" Type="UINT" InitialValue="10" Comment="Tempo (s) sem comunicacao com a UCT para confirmar a falha" />
+      <VarDeclaration ID="6F72EF7A9957D9B1" Name="cfgTempoReset" Type="UINT" InitialValue="2" Comment="Tempo (s) do pulso de reset escrito na UCT (40005.3)" />
+      <VarDeclaration ID="2AF241D1E0537909" Name="w005" Type="INT" Comment="Modbus UCT 40005" />
+      <VarDeclaration ID="EB87F4844550BF0A" Name="w006" Type="INT" Comment="Modbus UCT 40006" />
+      <VarDeclaration ID="702CACE592B586EC" Name="w007" Type="INT" Comment="Modbus UCT 40007" />
+      <VarDeclaration ID="00E434C4D2FCE1E2" Name="w008" Type="INT" Comment="Modbus UCT 40008" />
+      <VarDeclaration ID="216DC8D1B0130B70" Name="w009" Type="INT" Comment="Modbus UCT 40009" />
+      <VarDeclaration ID="E92E8124C98345A8" Name="w010" Type="INT" Comment="Modbus UCT 40010" />
+      <VarDeclaration ID="5702FCE80FD9232F" Name="w011" Type="INT" Comment="Modbus UCT 40011" />
+      <VarDeclaration ID="2C198397DC93FDE4" Name="w012" Type="INT" Comment="Modbus UCT 40012" />
+      <VarDeclaration ID="8DC0D656670A81AF" Name="w013" Type="INT" Comment="Modbus UCT 40013" />
+      <VarDeclaration ID="FF2A6CB505BDEEED" Name="w014" Type="INT" Comment="Modbus UCT 40014" />
+      <VarDeclaration ID="29D39A9131350120" Name="w015" Type="INT" Comment="Modbus UCT 40015" />
+      <VarDeclaration ID="5047554D33D25508" Name="w016" Type="INT" Comment="Modbus UCT 40016" />
+      <VarDeclaration ID="6213901E687BF582" Name="w017" Type="INT" Comment="Modbus UCT 40017" />
+      <VarDeclaration ID="805F5AA59EEEC2D4" Name="w081" Type="INT" Comment="Modbus UCT 40081" />
+      <VarDeclaration ID="8AF7D7600739FBD8" Name="w082" Type="INT" Comment="Modbus UCT 40082" />
+      <VarDeclaration ID="CBA17D927032CBD4" Name="s101" Type="INT" Comment="Modbus UCT 40101" />
+      <VarDeclaration ID="E81009FF89B5BC15" Name="s106" Type="INT" Comment="Modbus UCT 40106" />
+      <VarDeclaration ID="FDB62ADC45542E9E" Name="s116" Type="INT" Comment="Modbus UCT 40116" />
+      <VarDeclaration ID="6D9544B2D05EE83A" Name="s117" Type="INT" Comment="Modbus UCT 40117" />
+      <VarDeclaration ID="EAC2F7A409142C5D" Name="s121" Type="INT" Comment="Modbus UCT 40121" />
+      <VarDeclaration ID="2873DE3B6BFE44C9" Name="s122" Type="INT" Comment="Modbus UCT 40122" />
+      <VarDeclaration ID="DB13AC717A8B7662" Name="s127" Type="INT" Comment="Modbus UCT 40127" />
+      <VarDeclaration ID="4D5D876EB3A7F171" Name="s132" Type="INT" Comment="Modbus UCT 40132" />
+      <VarDeclaration ID="51DA211617F1996B" Name="s136" Type="INT" Comment="Modbus UCT 40136" />
+      <VarDeclaration ID="97151C90B367E8DC" Name="s137" Type="INT" Comment="Modbus UCT 40137" />
+      <VarDeclaration ID="EEFE5F1EF8383B49" Name="s141" Type="INT" Comment="Modbus UCT 40141" />
+      <VarDeclaration ID="62F04539174C591F" Name="s142" Type="INT" Comment="Modbus UCT 40142" />
+      <VarDeclaration ID="02097632451711DE" Name="s151" Type="INT" Comment="Modbus UCT 40151" />
+      <VarDeclaration ID="7991843F9B2D5590" Name="s152" Type="INT" Comment="Modbus UCT 40152" />
+      <VarDeclaration ID="DDA25525CB8A7B4D" Name="s161" Type="INT" Comment="Modbus UCT 40161" />
+      <VarDeclaration ID="111326FFB7350BF0" Name="s162" Type="INT" Comment="Modbus UCT 40162" />
+      <VarDeclaration ID="605236348EF76178" Name="w230" Type="INT" Comment="Modbus UCT 40230" />
+      <VarDeclaration ID="009C88AD569306A2" Name="h500" Type="INT" Comment="Modbus UCT 40500" />
+      <VarDeclaration ID="A0B989F0831D5C46" Name="h501" Type="INT" Comment="Modbus UCT 40501" />
+      <VarDeclaration ID="C7387B9A6FCCB81F" Name="h502" Type="INT" Comment="Modbus UCT 40502" />
+      <VarDeclaration ID="E47649B3DC153190" Name="h503" Type="INT" Comment="Modbus UCT 40503" />
+      <VarDeclaration ID="3553691F126CE1B5" Name="h504" Type="INT" Comment="Modbus UCT 40504" />
+      <VarDeclaration ID="0A36A58BDBBC0471" Name="h505" Type="INT" Comment="Modbus UCT 40505" />
+      <VarDeclaration ID="42520E00029B280F" Name="h506" Type="INT" Comment="Modbus UCT 40506" />
+      <VarDeclaration ID="B3A245D474F32D30" Name="h507" Type="INT" Comment="Modbus UCT 40507" />
+      <VarDeclaration ID="FDF3C709AEBF1C84" Name="h508" Type="INT" Comment="Modbus UCT 40508" />
+      <VarDeclaration ID="25EE4A659CDB8B19" Name="h509" Type="INT" Comment="Modbus UCT 40509" />
+      <VarDeclaration ID="8E1D474EDFE3E373" Name="h510" Type="INT" Comment="Modbus UCT 40510" />
+      <VarDeclaration ID="A05F827665BFFF1E" Name="h511" Type="INT" Comment="Modbus UCT 40511" />
+      <VarDeclaration ID="DE0C347B4E1AA668" Name="h512" Type="INT" Comment="Modbus UCT 40512" />
+      <VarDeclaration ID="BE7F6B173ECEF46F" Name="h513" Type="INT" Comment="Modbus UCT 40513" />
+      <VarDeclaration ID="5FDC3C3D54E86285" Name="h514" Type="INT" Comment="Modbus UCT 40514" />
+      <VarDeclaration ID="D1FE5B095A8ACDE9" Name="h515" Type="INT" Comment="Modbus UCT 40515" />
+      <VarDeclaration ID="8A95E69557A2E9BE" Name="h516" Type="INT" Comment="Modbus UCT 40516" />
+      <VarDeclaration ID="ED8792C392F4F103" Name="h517" Type="INT" Comment="Modbus UCT 40517" />
+      <VarDeclaration ID="8E65120B34D38BDE" Name="comInt" Type="INT" Comment="connStatusInt do escravo Modbus da UCT (1 = online)" />
+      <VarDeclaration ID="19CB07B401748599" Name="penLiga" Type="BOOL" Comment="IHM: Peneira rotativa: liga manual" />
+      <VarDeclaration ID="4EB5BC958EA12D54" Name="penInt" Type="BOOL" Comment="IHM: Peneira rotativa: intermitente" />
+      <VarDeclaration ID="368D14EA4B585390" Name="penVel" Type="REAL" Comment="IHM: Peneira rotativa: velocidade (%)" />
+      <VarDeclaration ID="C19AEC3805E7291E" Name="b1Liga" Type="BOOL" Comment="IHM: Bomba 1 de higienização da peneira: liga manual" />
+      <VarDeclaration ID="878937D8CA59CE95" Name="b1Vel" Type="REAL" Comment="IHM: Bomba 1 de higienização da peneira: velocidade (%)" />
+      <VarDeclaration ID="6F688A786E95C4D1" Name="b2Liga" Type="BOOL" Comment="IHM: Bomba 2 de higienização da peneira: liga manual" />
+      <VarDeclaration ID="3A9274E19001885E" Name="b2Vel" Type="REAL" Comment="IHM: Bomba 2 de higienização da peneira: velocidade (%)" />
+      <VarDeclaration ID="E44BA349DE6CBE3D" Name="v1Liga" Type="BOOL" Comment="IHM: Válvula 1 - higienização do cesto da peneira: liga manual" />
+      <VarDeclaration ID="90EFC5FA870ED8B5" Name="v2Liga" Type="BOOL" Comment="IHM: Válvula 2 - higienização da rosca da peneira: liga manual" />
+      <VarDeclaration ID="3ECA38388FA33BAB" Name="cmpLiga" Type="BOOL" Comment="IHM: Compressor de ar: liga manual" />
+      <VarDeclaration ID="54782A528428A27E" Name="cmpVel" Type="REAL" Comment="IHM: Compressor de ar: velocidade (%)" />
+      <VarDeclaration ID="EF5E268AEC8FFB6F" Name="rspLiga" Type="BOOL" Comment="IHM: Raspador de gordura: liga manual" />
+      <VarDeclaration ID="CD033E2BD625D117" Name="rspInt" Type="BOOL" Comment="IHM: Raspador de gordura: intermitente" />
+      <VarDeclaration ID="ABC0CD4591666DED" Name="rspRev" Type="BOOL" Comment="IHM: Raspador de gordura: reversao" />
+      <VarDeclaration ID="C50C1B75AA3833A4" Name="rspVel" Type="REAL" Comment="IHM: Raspador de gordura: velocidade (%)" />
+      <VarDeclaration ID="3BCA796FB5DBD06E" Name="r1Liga" Type="BOOL" Comment="IHM: Rosca 1 - horizontal: liga manual" />
+      <VarDeclaration ID="F95CCCF398D56F2E" Name="r1Int" Type="BOOL" Comment="IHM: Rosca 1 - horizontal: intermitente" />
+      <VarDeclaration ID="2227D73D7FD55805" Name="r1Rev" Type="BOOL" Comment="IHM: Rosca 1 - horizontal: reversao" />
+      <VarDeclaration ID="5CEF29EA4AD62820" Name="r1Vel" Type="REAL" Comment="IHM: Rosca 1 - horizontal: velocidade (%)" />
+      <VarDeclaration ID="2C67200E4B5EFF53" Name="r2Liga" Type="BOOL" Comment="IHM: Rosca 2 - inclinada: liga manual" />
+      <VarDeclaration ID="411B151F745A6FE5" Name="r2Int" Type="BOOL" Comment="IHM: Rosca 2 - inclinada: intermitente" />
+      <VarDeclaration ID="F7464DBF7DB7632E" Name="r2Rev" Type="BOOL" Comment="IHM: Rosca 2 - inclinada: reversao" />
+      <VarDeclaration ID="C9BA77924D8D8C4A" Name="r2Vel" Type="REAL" Comment="IHM: Rosca 2 - inclinada: velocidade (%)" />
+      <VarDeclaration ID="679AB85673B231F7" Name="hmiLigaPeneira" Type="BOOL" Comment="IHM: cmdLigaSubsistemaPeneira" />
+      <VarDeclaration ID="597C737D269B71D2" Name="hmiSelPeneira" Type="BOOL" Comment="IHM: cmdSelecaoSubsistemaPeneira" />
+      <VarDeclaration ID="174D0C5CEEEE344F" Name="hmiLigaRoscas" Type="BOOL" Comment="IHM: cmdLigaSubsistemaRoscas" />
+      <VarDeclaration ID="C4A8663B0D52BA34" Name="hmiSelRoscas" Type="BOOL" Comment="IHM: cmdSelecaoSubsistemaRoscas" />
+      <VarDeclaration ID="C21FD557DB2DAA26" Name="hmiLigaRaspComp" Type="BOOL" Comment="IHM: cmdLigaSubsistemaRaspComp" />
+      <VarDeclaration ID="6BFC54B0FFB9A684" Name="hmiSelRaspComp" Type="BOOL" Comment="IHM: cmdSelecaoSubsistemaRaspComp" />
+      <VarDeclaration ID="B940523A960C2800" Name="hmiSelBomba" Type="BOOL" Comment="IHM: cmdSelecaoBombaHigienizacao" />
+      <VarDeclaration ID="07B2B2CF770F4814" Name="hmiReset" Type="BOOL" Comment="IHM: reset (reconhece e reseta a UCT e a bomba de gordura)" />
+      <VarDeclaration ID="F64D45B3992C3082" Name="cmdResetFalhas" Type="BOOL" Comment="Processo: reset (com E_RESET_FALHAS)" />
+      <VarDeclaration ID="E8439982309E033C" Name="hmiValvula" Type="BOOL" Comment="IHM: valvula de lavagem aberta (TRUE) / fechada (FALSE) - so com a bomba de gordura fora do automatico" />
+      <VarDeclaration ID="D48C361677C598B3" Name="stpHabilitada" Type="BOOL" Comment="IHM (persistente): UCT habilitada no bloqueio da EEE Bruto (desabilitada nao conta)" />
+      <VarDeclaration ID="9BC9AEB7EE8B0E7A" Name="stpTempoPreLavagem" Type="UINT" Comment="IHM (persistente): Tempo (s) com a valvula de lavagem aberta antes de ligar a bomba de gordura (0 = liga junto)" />
+      <VarDeclaration ID="969BCD5D8972BBD3" Name="stpTempoValvula" Type="UINT" Comment="IHM (persistente): Tempo (s) que a valvula fica aberta depois que a bomba liga (0 = fecha na partida)" />
+      <VarDeclaration ID="48C7D048A8BBA01A" Name="stpTempoDesliga" Type="UINT" Comment="IHM (persistente): Tempo (s) que a bomba de gordura continua ligada depois que o nivel alto do tanque abaixa" />
+      <VarDeclaration ID="4471CCC90EDB124D" Name="stpVelBomba" Type="REAL" Comment="IHM (persistente): Velocidade da bomba de gordura em automatico (%)" />
+      <VarDeclaration ID="907F6462227B081B" Name="disponivel" Type="BOOL" Comment="Saida do bloco AND editavel: UCT disponivel" />
+      <VarDeclaration ID="CF63D4AF765659C1" Name="antHabilitada" Type="BOOL" Comment="UCT anterior na cadeia: alguma UCT habilitada" />
+      <VarDeclaration ID="9756EA9EC3EE5693" Name="antDisponivel" Type="BOOL" Comment="UCT anterior na cadeia: alguma UCT disponivel" />
+      <VarDeclaration ID="BCC8272ACE7AC349" Name="emergencia" Type="BOOL" Comment="Emergencia pelo processo (fecha a valvula de lavagem)" />
+      <VarDeclaration ID="E35B723AAFA80B5D" Name="bombaLigada" Type="BOOL" Comment="Bomba de gordura ligada (Motor_Generico.stsLigado)" />
+      <VarDeclaration ID="13F60FFCABA8441A" Name="bombaAutomatico" Type="BOOL" Comment="Bomba de gordura em automatico (Motor_Generico.stsAutomatico)" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="E15602DD5EFD812C" Name="penAnim" Type="INT" Comment="Peneira rotativa: 0 desligado, 1 ligado, 2 falha, 3 manutencao, 4 sem comunicacao" />
+      <VarDeclaration ID="895BD8D8326C37F1" Name="penDef" Type="BOOL" Comment="Peneira rotativa: defeito" />
+      <VarDeclaration ID="71216940FF3AAA09" Name="penHor" Type="DINT" Comment="Peneira rotativa: horimetro (h)" />
+      <VarDeclaration ID="431ACF2EB10AEC5B" Name="penAuto" Type="BOOL" Comment="Peneira rotativa: subsistema em automatico" />
+      <VarDeclaration ID="FCE2010BC99734E0" Name="penVelSts" Type="REAL" Comment="Peneira rotativa: velocidade (%)" />
+      <VarDeclaration ID="82C23DAE5245FE05" Name="penFbLiga" Type="BOOL" Comment="Peneira rotativa: liga em vigor" />
+      <VarDeclaration ID="4EAFAAC987F7E6ED" Name="penFbInt" Type="BOOL" Comment="Peneira rotativa: intermitente em vigor" />
+      <VarDeclaration ID="630B3326E520DED3" Name="penFbRev" Type="BOOL" Comment="Peneira rotativa: reversao em vigor" />
+      <VarDeclaration ID="9F5A0BAAA6BA36FB" Name="b1Anim" Type="INT" Comment="Bomba 1 de higienização da peneira: 0 desligado, 1 ligado, 2 falha, 3 manutencao, 4 sem comunicacao" />
+      <VarDeclaration ID="B0882E75048E56C8" Name="b1Def" Type="BOOL" Comment="Bomba 1 de higienização da peneira: defeito" />
+      <VarDeclaration ID="F433D77752764E72" Name="b1Hor" Type="DINT" Comment="Bomba 1 de higienização da peneira: horimetro (h)" />
+      <VarDeclaration ID="BB50EA5A17772016" Name="b1Auto" Type="BOOL" Comment="Bomba 1 de higienização da peneira: subsistema em automatico" />
+      <VarDeclaration ID="6D499885ADD13F89" Name="b1VelSts" Type="REAL" Comment="Bomba 1 de higienização da peneira: velocidade (%)" />
+      <VarDeclaration ID="6F1E502C9B6CF2B2" Name="b1FbLiga" Type="BOOL" Comment="Bomba 1 de higienização da peneira: liga em vigor" />
+      <VarDeclaration ID="B8856E3515E1335F" Name="b1FbInt" Type="BOOL" Comment="Bomba 1 de higienização da peneira: intermitente em vigor" />
+      <VarDeclaration ID="48FD745C0144715F" Name="b1FbRev" Type="BOOL" Comment="Bomba 1 de higienização da peneira: reversao em vigor" />
+      <VarDeclaration ID="26DA29A2F44AB1D9" Name="b2Anim" Type="INT" Comment="Bomba 2 de higienização da peneira: 0 desligado, 1 ligado, 2 falha, 3 manutencao, 4 sem comunicacao" />
+      <VarDeclaration ID="AE4A01B00246A9BC" Name="b2Def" Type="BOOL" Comment="Bomba 2 de higienização da peneira: defeito" />
+      <VarDeclaration ID="49B62932E0024FCB" Name="b2Hor" Type="DINT" Comment="Bomba 2 de higienização da peneira: horimetro (h)" />
+      <VarDeclaration ID="C62B70166A0883C7" Name="b2Auto" Type="BOOL" Comment="Bomba 2 de higienização da peneira: subsistema em automatico" />
+      <VarDeclaration ID="3229D99A95CB4D5D" Name="b2VelSts" Type="REAL" Comment="Bomba 2 de higienização da peneira: velocidade (%)" />
+      <VarDeclaration ID="AC94358F5B25F765" Name="b2FbLiga" Type="BOOL" Comment="Bomba 2 de higienização da peneira: liga em vigor" />
+      <VarDeclaration ID="8F6F2CB2BBCF9FC3" Name="b2FbInt" Type="BOOL" Comment="Bomba 2 de higienização da peneira: intermitente em vigor" />
+      <VarDeclaration ID="4FF14F19D4AA0DEA" Name="b2FbRev" Type="BOOL" Comment="Bomba 2 de higienização da peneira: reversao em vigor" />
+      <VarDeclaration ID="9594942602D571EA" Name="v1Anim" Type="INT" Comment="Válvula 1 - higienização do cesto da peneira: 0 desligado, 1 ligado, 2 falha, 3 manutencao, 4 sem comunicacao" />
+      <VarDeclaration ID="3A38DC7CA6958C9C" Name="v1Def" Type="BOOL" Comment="Válvula 1 - higienização do cesto da peneira: defeito" />
+      <VarDeclaration ID="3E823B19B09A5097" Name="v1Hor" Type="DINT" Comment="Válvula 1 - higienização do cesto da peneira: horimetro (h)" />
+      <VarDeclaration ID="13E9E7335A7C2901" Name="v1Auto" Type="BOOL" Comment="Válvula 1 - higienização do cesto da peneira: subsistema em automatico" />
+      <VarDeclaration ID="A66FC5515667CF08" Name="v1VelSts" Type="REAL" Comment="Válvula 1 - higienização do cesto da peneira: velocidade (%)" />
+      <VarDeclaration ID="3FD3C8118B86508A" Name="v1FbLiga" Type="BOOL" Comment="Válvula 1 - higienização do cesto da peneira: liga em vigor" />
+      <VarDeclaration ID="ACC893CA1C181DB0" Name="v1FbInt" Type="BOOL" Comment="Válvula 1 - higienização do cesto da peneira: intermitente em vigor" />
+      <VarDeclaration ID="3B6C8D4012CD67E8" Name="v1FbRev" Type="BOOL" Comment="Válvula 1 - higienização do cesto da peneira: reversao em vigor" />
+      <VarDeclaration ID="83D44C4C3C2A69C6" Name="v2Anim" Type="INT" Comment="Válvula 2 - higienização da rosca da peneira: 0 desligado, 1 ligado, 2 falha, 3 manutencao, 4 sem comunicacao" />
+      <VarDeclaration ID="2ADE61FFCD947701" Name="v2Def" Type="BOOL" Comment="Válvula 2 - higienização da rosca da peneira: defeito" />
+      <VarDeclaration ID="AB418D0D39BCD6F9" Name="v2Hor" Type="DINT" Comment="Válvula 2 - higienização da rosca da peneira: horimetro (h)" />
+      <VarDeclaration ID="214258657E323579" Name="v2Auto" Type="BOOL" Comment="Válvula 2 - higienização da rosca da peneira: subsistema em automatico" />
+      <VarDeclaration ID="2205641E77B9A34C" Name="v2VelSts" Type="REAL" Comment="Válvula 2 - higienização da rosca da peneira: velocidade (%)" />
+      <VarDeclaration ID="B8A2E15DD4914861" Name="v2FbLiga" Type="BOOL" Comment="Válvula 2 - higienização da rosca da peneira: liga em vigor" />
+      <VarDeclaration ID="608E639AB4ED2F8D" Name="v2FbInt" Type="BOOL" Comment="Válvula 2 - higienização da rosca da peneira: intermitente em vigor" />
+      <VarDeclaration ID="7DAD37347BA7821F" Name="v2FbRev" Type="BOOL" Comment="Válvula 2 - higienização da rosca da peneira: reversao em vigor" />
+      <VarDeclaration ID="4B03E2982EF25D75" Name="cmpAnim" Type="INT" Comment="Compressor de ar: 0 desligado, 1 ligado, 2 falha, 3 manutencao, 4 sem comunicacao" />
+      <VarDeclaration ID="9A133A3818AB7D75" Name="cmpDef" Type="BOOL" Comment="Compressor de ar: defeito" />
+      <VarDeclaration ID="894358E3DD02DC60" Name="cmpHor" Type="DINT" Comment="Compressor de ar: horimetro (h)" />
+      <VarDeclaration ID="04D5D6C179AAB7E5" Name="cmpAuto" Type="BOOL" Comment="Compressor de ar: subsistema em automatico" />
+      <VarDeclaration ID="684C8B722280E4D3" Name="cmpVelSts" Type="REAL" Comment="Compressor de ar: velocidade (%)" />
+      <VarDeclaration ID="C315013255DF205C" Name="cmpFbLiga" Type="BOOL" Comment="Compressor de ar: liga em vigor" />
+      <VarDeclaration ID="5ECE4DBB763DBD73" Name="cmpFbInt" Type="BOOL" Comment="Compressor de ar: intermitente em vigor" />
+      <VarDeclaration ID="5C65E619BE12DEDB" Name="cmpFbRev" Type="BOOL" Comment="Compressor de ar: reversao em vigor" />
+      <VarDeclaration ID="8C265EEC37B1503A" Name="rspAnim" Type="INT" Comment="Raspador de gordura: 0 desligado, 1 ligado, 2 falha, 3 manutencao, 4 sem comunicacao" />
+      <VarDeclaration ID="10B9DDCA13A25793" Name="rspDef" Type="BOOL" Comment="Raspador de gordura: defeito" />
+      <VarDeclaration ID="7D6D39D384DEE9A7" Name="rspHor" Type="DINT" Comment="Raspador de gordura: horimetro (h)" />
+      <VarDeclaration ID="2665663CA7E8C4E3" Name="rspAuto" Type="BOOL" Comment="Raspador de gordura: subsistema em automatico" />
+      <VarDeclaration ID="ECB4D30DAD3A8F7A" Name="rspVelSts" Type="REAL" Comment="Raspador de gordura: velocidade (%)" />
+      <VarDeclaration ID="80173FD5AD234274" Name="rspFbLiga" Type="BOOL" Comment="Raspador de gordura: liga em vigor" />
+      <VarDeclaration ID="67FEABF9507CF440" Name="rspFbInt" Type="BOOL" Comment="Raspador de gordura: intermitente em vigor" />
+      <VarDeclaration ID="CFD27D979F18C5A5" Name="rspFbRev" Type="BOOL" Comment="Raspador de gordura: reversao em vigor" />
+      <VarDeclaration ID="A972128A35D56662" Name="r1Anim" Type="INT" Comment="Rosca 1 - horizontal: 0 desligado, 1 ligado, 2 falha, 3 manutencao, 4 sem comunicacao" />
+      <VarDeclaration ID="62F4E28E677AF90C" Name="r1Def" Type="BOOL" Comment="Rosca 1 - horizontal: defeito" />
+      <VarDeclaration ID="F84A9EFD3BC7F02B" Name="r1Hor" Type="DINT" Comment="Rosca 1 - horizontal: horimetro (h)" />
+      <VarDeclaration ID="7307C4B442730619" Name="r1Auto" Type="BOOL" Comment="Rosca 1 - horizontal: subsistema em automatico" />
+      <VarDeclaration ID="B624A1A3392B6721" Name="r1VelSts" Type="REAL" Comment="Rosca 1 - horizontal: velocidade (%)" />
+      <VarDeclaration ID="EC246D0019464C9A" Name="r1FbLiga" Type="BOOL" Comment="Rosca 1 - horizontal: liga em vigor" />
+      <VarDeclaration ID="8530A93EC6E0B63B" Name="r1FbInt" Type="BOOL" Comment="Rosca 1 - horizontal: intermitente em vigor" />
+      <VarDeclaration ID="970B608B8836000A" Name="r1FbRev" Type="BOOL" Comment="Rosca 1 - horizontal: reversao em vigor" />
+      <VarDeclaration ID="08E4196F96764545" Name="r2Anim" Type="INT" Comment="Rosca 2 - inclinada: 0 desligado, 1 ligado, 2 falha, 3 manutencao, 4 sem comunicacao" />
+      <VarDeclaration ID="2EBC40C7F99057D2" Name="r2Def" Type="BOOL" Comment="Rosca 2 - inclinada: defeito" />
+      <VarDeclaration ID="A91E1AB8D5A774D8" Name="r2Hor" Type="DINT" Comment="Rosca 2 - inclinada: horimetro (h)" />
+      <VarDeclaration ID="EFC6255887164B86" Name="r2Auto" Type="BOOL" Comment="Rosca 2 - inclinada: subsistema em automatico" />
+      <VarDeclaration ID="0268E3B1CAFAE678" Name="r2VelSts" Type="REAL" Comment="Rosca 2 - inclinada: velocidade (%)" />
+      <VarDeclaration ID="F0652198FBD98A9C" Name="r2FbLiga" Type="BOOL" Comment="Rosca 2 - inclinada: liga em vigor" />
+      <VarDeclaration ID="531FF78EC4DA12AC" Name="r2FbInt" Type="BOOL" Comment="Rosca 2 - inclinada: intermitente em vigor" />
+      <VarDeclaration ID="25E9EBFC2025D937" Name="r2FbRev" Type="BOOL" Comment="Rosca 2 - inclinada: reversao em vigor" />
+      <VarDeclaration ID="48B51513B83DEAC1" Name="ww005" Type="INT" Comment="Palavra escrita na UCT: 40005" />
+      <VarDeclaration ID="ABE25A7B6D246024" Name="ww006" Type="INT" Comment="Palavra escrita na UCT: 40006" />
+      <VarDeclaration ID="332BB6C4B414C757" Name="ww007" Type="INT" Comment="Palavra escrita na UCT: 40007" />
+      <VarDeclaration ID="5FF35C3FF4051574" Name="ww008" Type="INT" Comment="Palavra escrita na UCT: 40008" />
+      <VarDeclaration ID="7BCA7ABE5B2A80CB" Name="ww009" Type="INT" Comment="Palavra escrita na UCT: 40009" />
+      <VarDeclaration ID="EE8A41D2485DFDB4" Name="ww010" Type="INT" Comment="Palavra escrita na UCT: 40010" />
+      <VarDeclaration ID="A2EA9BE38D7D6BAA" Name="ww011" Type="INT" Comment="Palavra escrita na UCT: 40011" />
+      <VarDeclaration ID="126C934AB0F6DBFE" Name="ww012" Type="INT" Comment="Palavra escrita na UCT: 40012" />
+      <VarDeclaration ID="73DD8991441412AC" Name="ww013" Type="INT" Comment="Palavra escrita na UCT: 40013" />
+      <VarDeclaration ID="DE2C0333DCDCC77C" Name="ww014" Type="INT" Comment="Palavra escrita na UCT: 40014" />
+      <VarDeclaration ID="8B46394DF76CFFD8" Name="ww015" Type="INT" Comment="Palavra escrita na UCT: 40015" />
+      <VarDeclaration ID="B5B936F289F2140E" Name="ww016" Type="INT" Comment="Palavra escrita na UCT: 40016" />
+      <VarDeclaration ID="96F874CA969849BC" Name="ww017" Type="INT" Comment="Palavra escrita na UCT: 40017" />
+      <VarDeclaration ID="93EC120EF49D8A9B" Name="ww101" Type="INT" Comment="Palavra escrita na UCT: 40101" />
+      <VarDeclaration ID="B84F5A34C7CB0F43" Name="ww116" Type="INT" Comment="Palavra escrita na UCT: 40116" />
+      <VarDeclaration ID="2EEB0ECC5C70DFC8" Name="ww121" Type="INT" Comment="Palavra escrita na UCT: 40121" />
+      <VarDeclaration ID="A95766D7DCAD36EA" Name="ww136" Type="INT" Comment="Palavra escrita na UCT: 40136" />
+      <VarDeclaration ID="D451279D5E50FC08" Name="ww141" Type="INT" Comment="Palavra escrita na UCT: 40141" />
+      <VarDeclaration ID="D04BD37BABA3A53F" Name="ww151" Type="INT" Comment="Palavra escrita na UCT: 40151" />
+      <VarDeclaration ID="77B5D89A59E485CC" Name="ww161" Type="INT" Comment="Palavra escrita na UCT: 40161" />
+      <VarDeclaration ID="4FE6015A2477CFC9" Name="okEmergencia" Type="BOOL" Comment="UCT sem emergencia" />
+      <VarDeclaration ID="3836FD4FBDBFBB63" Name="okPeneira" Type="BOOL" Comment="Peneira sem defeito" />
+      <VarDeclaration ID="CFDFC80ABF4D39D0" Name="okMotores" Type="BOOL" Comment="Bombas de higienizacao, roscas, raspador e compressor sem defeito" />
+      <VarDeclaration ID="9719C72C2028949E" Name="okComunicacao" Type="BOOL" Comment="Comunicacao com a UCT ok" />
+      <VarDeclaration ID="EAECF18552174CCF" Name="habilitada" Type="BOOL" Comment="UCT instalada e habilitada" />
+      <VarDeclaration ID="578D8BBF4DA79A23" Name="stsDisponivel" Type="BOOL" Comment="UCT disponivel (saida do AND)" />
+      <VarDeclaration ID="84171C035357B4E3" Name="stsAlgumaHabilitada" Type="BOOL" Comment="Esta UCT ou alguma anterior habilitada" />
+      <VarDeclaration ID="B1E45CD679DEB114" Name="stsAlgumaDisponivel" Type="BOOL" Comment="Esta UCT ou alguma anterior disponivel" />
+      <VarDeclaration ID="D73E486392D4D5B6" Name="stsBloqueioEEE" Type="BOOL" Comment="Bloqueio do automatico da EEE Bruto: ha UCT habilitada e nenhuma disponivel" />
+      <VarDeclaration ID="C0D9728386F92C77" Name="stsFalhaComunicacao" Type="BOOL" Comment="Falha de comunicacao com a UCT" />
+      <VarDeclaration ID="EB99489D8453BA21" Name="stsEmergenciaUCT" Type="BOOL" Comment="Emergencia acionada na UCT" />
+      <VarDeclaration ID="37ECE09B1E5AEFFB" Name="stsNivelAltoGordura" Type="BOOL" Comment="Nivel alto do tanque de gordura (UCT)" />
+      <VarDeclaration ID="FA37E7894F6BD3D0" Name="stsAlarme" Type="BOOL" Comment="Algum alarme da UCT" />
+      <VarDeclaration ID="0647910676F94640" Name="stsNivelBaixoPeneira" Type="BOOL" Comment="Nivel baixo da peneira" />
+      <VarDeclaration ID="F3713950EE5D1867" Name="stsNivelAltoPeneira" Type="BOOL" Comment="Nivel alto da peneira" />
+      <VarDeclaration ID="7D2A38C25D8FD93C" Name="stsNivelBaixoAgua" Type="BOOL" Comment="Nivel baixo do tanque de agua" />
+      <VarDeclaration ID="C4EE1E8A3DAA5B83" Name="stsNivelPeneira" Type="REAL" Comment="Nivel da peneira (%)" />
+      <VarDeclaration ID="642EE6D10F9115A0" Name="stsAutoPeneira" Type="BOOL" Comment="Subsistema peneira e higienização em automatico" />
+      <VarDeclaration ID="B8C76428B99C0BC3" Name="stsAutoRoscas" Type="BOOL" Comment="Subsistema roscas em automatico" />
+      <VarDeclaration ID="4C8B357E982AEFA5" Name="stsAutoRaspComp" Type="BOOL" Comment="Subsistema raspador e compressor em automatico" />
+      <VarDeclaration ID="42BCE54FED382E40" Name="stsLigaAutoPeneira" Type="BOOL" Comment="Subsistema peneira e higienização: liga automatico em vigor" />
+      <VarDeclaration ID="3C697FA38E7B1CEE" Name="stsLigaAutoRoscas" Type="BOOL" Comment="Subsistema roscas: liga automatico em vigor" />
+      <VarDeclaration ID="35B9945971456169" Name="stsLigaAutoRaspComp" Type="BOOL" Comment="Subsistema raspador e compressor: liga automatico em vigor" />
+      <VarDeclaration ID="DDCDDDAAC0A5E903" Name="stsSelecaoBomba" Type="BOOL" Comment="Bomba de higienizacao selecionada: FALSE = bomba 1, TRUE = bomba 2" />
+      <VarDeclaration ID="D1AFC6808E3F4248" Name="stsValvula" Type="BOOL" Comment="Valvula de lavagem do tanque de gordura aberta" />
+      <VarDeclaration ID="98BD502D5E024892" Name="stsEtapaGordura" Type="INT" Comment="Bomba de gordura: 0 parada, 1 pre-lavagem, 2 bombeando, 3 nivel normal - contando para desligar, 4 fora do automatico" />
+      <VarDeclaration ID="74B9486C9619CFB9" Name="stsTempoRestante" Type="INT" Comment="Tempo restante (s) da etapa da bomba de gordura" />
+      <VarDeclaration ID="3FCEA38A9E6EE5CE" Name="cmdLigarBomba" Type="BOOL" Comment="Bomba de gordura: liga em automatico (Motor_Generico.cmdLigarAutomatico)" />
+      <VarDeclaration ID="370D92A80C450D03" Name="stpVelBombaOut" Type="REAL" Comment="Bomba de gordura: velocidade em automatico (%)" />
+      <VarDeclaration ID="97A930D5B8996F70" Name="cmdValvula" Type="BOOL" Comment="Valvula de lavagem: saida digital (symlink ${PATH}cmdValvulaLavagem)" />
+      <VarDeclaration ID="EB86EA91F4C64D64" Name="resetBomba" Type="BOOL" Comment="Reset da bomba de gordura (com CNF_RESET)" />
+      <VarDeclaration ID="7F7B816331BE1C2B" Name="almCom" Type="BOOL" Comment="ALARM_BIT Falha de comunicação com a UCT" />
+      <VarDeclaration ID="3614F51665280D43" Name="almEmergencia" Type="BOOL" Comment="ALARM_BIT Emergência acionada na UCT" />
+      <VarDeclaration ID="145A4BA522A4B16C" Name="almDefPEN" Type="BOOL" Comment="ALARM_BIT Defeito: Peneira rotativa" />
+      <VarDeclaration ID="350AC8442CDE22A1" Name="almDefB1" Type="BOOL" Comment="ALARM_BIT Defeito: Bomba 1 de higienização da peneira" />
+      <VarDeclaration ID="AFE2F9492D389BBD" Name="almDefB2" Type="BOOL" Comment="ALARM_BIT Defeito: Bomba 2 de higienização da peneira" />
+      <VarDeclaration ID="798FABD1834C18CD" Name="almDefCMP" Type="BOOL" Comment="ALARM_BIT Defeito: Compressor de ar" />
+      <VarDeclaration ID="CAD3C184BA624DED" Name="almDefRSP" Type="BOOL" Comment="ALARM_BIT Defeito: Raspador de gordura" />
+      <VarDeclaration ID="8C0378D10BE98D49" Name="almDefR1" Type="BOOL" Comment="ALARM_BIT Defeito: Rosca 1 - horizontal" />
+      <VarDeclaration ID="78B77585A68CAB67" Name="almDefR2" Type="BOOL" Comment="ALARM_BIT Defeito: Rosca 2 - inclinada" />
+      <VarDeclaration ID="C76BC1CB5B2AF8A0" Name="almNivelAgua" Type="BOOL" Comment="ALARM_BIT Nível baixo do tanque de água de higienização da UCT" />
+      <VarDeclaration ID="FD8522ED9B351538" Name="almNivelPeneira" Type="BOOL" Comment="ALARM_BIT Nível alto na peneira da UCT" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="ee2b3cc6-bde4-4cac-ab00-c0dc36b74a0e">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="algUCT" />
+    <InternalVars>
+      <VarDeclaration ID="86ED088E8C3215D1" Name="initDone" Type="BOOL" />
+      <VarDeclaration ID="FC79B224D25E7EFD" Name="initPass" Type="BOOL" />
+      <VarDeclaration ID="395597491E38F244" Name="bComRecebida" Type="BOOL" Comment="Ja houve leitura do connStatusInt" />
+      <VarDeclaration ID="32A3D4DB5F6894C6" Name="bLeitura" Type="BOOL" Comment="Ja houve leitura das palavras de comando" />
+      <VarDeclaration ID="1F33218D84D2594B" Name="bComOK" Type="BOOL" Comment="Comunicando agora" />
+      <VarDeclaration ID="0FA657930EB7B316" Name="uSegCom" Type="UDINT" />
+      <VarDeclaration ID="AA81A7423FD440AE" Name="uSegReset" Type="UINT" Comment="Segundos do pulso de reset" />
+      <VarDeclaration ID="6B5C22B814F50EB9" Name="bReset" Type="BOOL" />
+      <VarDeclaration ID="EE35918AEF53E466" Name="w81" Type="WORD" />
+      <VarDeclaration ID="97E305777235D821" Name="w82" Type="WORD" />
+      <VarDeclaration ID="81F1AA193DE1CB49" Name="bNivelAltoG" Type="BOOL" Comment="Nivel alto do tanque de gordura valido" />
+      <VarDeclaration ID="E8DF627DB3586D77" Name="uEtapa" Type="INT" Comment="Etapa da bomba de gordura" />
+      <VarDeclaration ID="2F5A08409025A41C" Name="uSegEtapa" Type="UDINT" Comment="Segundos na etapa" />
+      <VarDeclaration ID="0B9425191D314CBD" Name="uSegValv" Type="UDINT" Comment="Segundos com a bomba ligada" />
+      <VarDeclaration ID="8E4276A3DE8AD975" Name="bValvAuto" Type="BOOL" Comment="Valvula pedida pela sequencia" />
+      <VarDeclaration ID="93CD8B1B6E0FB564" Name="bMudou" Type="BOOL" />
+      <VarDeclaration ID="1C73FC01F3305DE3" Name="wD" Type="WORD" />
+      <VarDeclaration ID="DD92846D69825C20" Name="oldD" Type="WORD" InitialValue="16#FFFF" />
+      <VarDeclaration ID="0AA4DED13AE8E499" Name="wP" Type="DWORD" />
+      <VarDeclaration ID="D8A64C56DC5CFD77" Name="oldP" Type="DWORD" InitialValue="16#FFFFFFFF" />
+      <VarDeclaration ID="58594E38AEB0239B" Name="wA" Type="WORD" />
+      <VarDeclaration ID="49C4F78976351A7F" Name="oldA" Type="WORD" InitialValue="16#FFFF" />
+      <VarDeclaration ID="638E504ABA19BF44" Name="oldLigB" Type="BOOL" />
+      <VarDeclaration ID="C038D5B5D051151E" Name="oldVelB" Type="REAL" InitialValue="-1.0" />
+      <VarDeclaration ID="71D0BA49716D96F2" Name="oldValv" Type="BOOL" />
+      <VarDeclaration ID="C4169713E679D348" Name="img005" Type="WORD" Comment="Imagem da palavra 40005 (lida da UCT, alterada so no bit comandado)" />
+      <VarDeclaration ID="E260BE8BCC0CE497" Name="img006" Type="WORD" Comment="Imagem da palavra 40006 (lida da UCT, alterada so no bit comandado)" />
+      <VarDeclaration ID="A70AA1F28A009DFE" Name="img007" Type="WORD" Comment="Imagem da palavra 40007 (lida da UCT, alterada so no bit comandado)" />
+      <VarDeclaration ID="18F86B7040235299" Name="img008" Type="WORD" Comment="Imagem da palavra 40008 (lida da UCT, alterada so no bit comandado)" />
+      <VarDeclaration ID="737ADAF96ADA31A5" Name="img009" Type="WORD" Comment="Imagem da palavra 40009 (lida da UCT, alterada so no bit comandado)" />
+      <VarDeclaration ID="1D5383D675B19698" Name="img010" Type="WORD" Comment="Imagem da palavra 40010 (lida da UCT, alterada so no bit comandado)" />
+      <VarDeclaration ID="FA4C471173656B21" Name="img011" Type="WORD" Comment="Imagem da palavra 40011 (lida da UCT, alterada so no bit comandado)" />
+      <VarDeclaration ID="13D516DA5B74BB06" Name="img012" Type="WORD" Comment="Imagem da palavra 40012 (lida da UCT, alterada so no bit comandado)" />
+      <VarDeclaration ID="8A4C606649BAC3E3" Name="img013" Type="WORD" Comment="Imagem da palavra 40013 (lida da UCT, alterada so no bit comandado)" />
+      <VarDeclaration ID="A223518BF1F03DDA" Name="img014" Type="WORD" Comment="Imagem da palavra 40014 (lida da UCT, alterada so no bit comandado)" />
+      <VarDeclaration ID="35F707C206C0DFFF" Name="img015" Type="WORD" Comment="Imagem da palavra 40015 (lida da UCT, alterada so no bit comandado)" />
+      <VarDeclaration ID="4C9499B29B212F57" Name="img016" Type="WORD" Comment="Imagem da palavra 40016 (lida da UCT, alterada so no bit comandado)" />
+      <VarDeclaration ID="93F5C81C12E91BC6" Name="img017" Type="WORD" Comment="Imagem da palavra 40017 (lida da UCT, alterada so no bit comandado)" />
+      <VarDeclaration ID="127A6C02ED394A84" Name="o_stsNivelPeneira" Type="REAL" InitialValue="-1.0" />
+      <VarDeclaration ID="207612B714ED51D4" Name="o_stsEtapaGordura" Type="INT" InitialValue="-1" />
+      <VarDeclaration ID="295C746388989516" Name="o_stsTempoRestante" Type="INT" InitialValue="-1" />
+      <VarDeclaration ID="E690074AE593D781" Name="o_penAnim" Type="INT" InitialValue="-1" />
+      <VarDeclaration ID="0D9A06814DBE1339" Name="o_penHor" Type="DINT" InitialValue="-1" />
+      <VarDeclaration ID="F3305669D51C78CC" Name="o_penVelSts" Type="REAL" InitialValue="-1.0" />
+      <VarDeclaration ID="66274F635D8DAF55" Name="o_b1Anim" Type="INT" InitialValue="-1" />
+      <VarDeclaration ID="C7C121E8211CE506" Name="o_b1Hor" Type="DINT" InitialValue="-1" />
+      <VarDeclaration ID="D1FBBC782C2A96DA" Name="o_b1VelSts" Type="REAL" InitialValue="-1.0" />
+      <VarDeclaration ID="AF96E75D264CFC9E" Name="o_b2Anim" Type="INT" InitialValue="-1" />
+      <VarDeclaration ID="77AE46C05656685D" Name="o_b2Hor" Type="DINT" InitialValue="-1" />
+      <VarDeclaration ID="BD2C13B4A13C0894" Name="o_b2VelSts" Type="REAL" InitialValue="-1.0" />
+      <VarDeclaration ID="0502A4A86EE04030" Name="o_v1Anim" Type="INT" InitialValue="-1" />
+      <VarDeclaration ID="C3D483A5039F2485" Name="o_v1Hor" Type="DINT" InitialValue="-1" />
+      <VarDeclaration ID="A51208026464F3A2" Name="o_v1VelSts" Type="REAL" InitialValue="-1.0" />
+      <VarDeclaration ID="AA6EBE627B152EAB" Name="o_v2Anim" Type="INT" InitialValue="-1" />
+      <VarDeclaration ID="A6B0304F2298D02E" Name="o_v2Hor" Type="DINT" InitialValue="-1" />
+      <VarDeclaration ID="16A1C94C54049BA9" Name="o_v2VelSts" Type="REAL" InitialValue="-1.0" />
+      <VarDeclaration ID="B93200BEFC7C610D" Name="o_cmpAnim" Type="INT" InitialValue="-1" />
+      <VarDeclaration ID="E916C21F6D4FBA73" Name="o_cmpHor" Type="DINT" InitialValue="-1" />
+      <VarDeclaration ID="E8BE056BCB91B271" Name="o_cmpVelSts" Type="REAL" InitialValue="-1.0" />
+      <VarDeclaration ID="5F67CDE3B2C47560" Name="o_rspAnim" Type="INT" InitialValue="-1" />
+      <VarDeclaration ID="616AE2D25497B013" Name="o_rspHor" Type="DINT" InitialValue="-1" />
+      <VarDeclaration ID="144D0DE891DA71A7" Name="o_rspVelSts" Type="REAL" InitialValue="-1.0" />
+      <VarDeclaration ID="2214048080254E9B" Name="o_r1Anim" Type="INT" InitialValue="-1" />
+      <VarDeclaration ID="13857D5974567E14" Name="o_r1Hor" Type="DINT" InitialValue="-1" />
+      <VarDeclaration ID="9733FAE51225EF35" Name="o_r1VelSts" Type="REAL" InitialValue="-1.0" />
+      <VarDeclaration ID="3AC457B88E0757F6" Name="o_r2Anim" Type="INT" InitialValue="-1" />
+      <VarDeclaration ID="54D44DF231EAF812" Name="o_r2Hor" Type="DINT" InitialValue="-1" />
+      <VarDeclaration ID="AE2114EA385D17C7" Name="o_r2VelSts" Type="REAL" InitialValue="-1.0" />
+      <VarDeclaration ID="CA48E3FBE3D0D7CD" Name="o_penDef" Type="BOOL" />
+      <VarDeclaration ID="14992758C9CE933C" Name="o_penAuto" Type="BOOL" />
+      <VarDeclaration ID="455CA4CC24B611F4" Name="o_penFbLiga" Type="BOOL" />
+      <VarDeclaration ID="ADFDE9C700010BF8" Name="o_penFbInt" Type="BOOL" />
+      <VarDeclaration ID="2971FFB00A83F0F4" Name="o_penFbRev" Type="BOOL" />
+      <VarDeclaration ID="BBE0F862B933B8E4" Name="o_b1Def" Type="BOOL" />
+      <VarDeclaration ID="D2FEAF3C0F27C0C6" Name="o_b1Auto" Type="BOOL" />
+      <VarDeclaration ID="8C5F6CC3BD8FA291" Name="o_b1FbLiga" Type="BOOL" />
+      <VarDeclaration ID="9CE806B49D1F23D2" Name="o_b1FbInt" Type="BOOL" />
+      <VarDeclaration ID="F6E9E75EA4D9FA39" Name="o_b1FbRev" Type="BOOL" />
+      <VarDeclaration ID="EA045AC31B832057" Name="o_b2Def" Type="BOOL" />
+      <VarDeclaration ID="F883269533FC9152" Name="o_b2Auto" Type="BOOL" />
+      <VarDeclaration ID="6FEA7E50B613FAA2" Name="o_b2FbLiga" Type="BOOL" />
+      <VarDeclaration ID="1038B258C37FAF65" Name="o_b2FbInt" Type="BOOL" />
+      <VarDeclaration ID="0A92F3107E5E366C" Name="o_b2FbRev" Type="BOOL" />
+      <VarDeclaration ID="88F86E40CAA0AF4A" Name="o_v1Def" Type="BOOL" />
+      <VarDeclaration ID="2D69DA88D79027A8" Name="o_v1Auto" Type="BOOL" />
+      <VarDeclaration ID="969B524733DD5694" Name="o_v1FbLiga" Type="BOOL" />
+      <VarDeclaration ID="498F4B29ABA6DA2F" Name="o_v1FbInt" Type="BOOL" />
+      <VarDeclaration ID="E66EA582E797F183" Name="o_v1FbRev" Type="BOOL" />
+      <VarDeclaration ID="546BCDFE7E0849DF" Name="o_v2Def" Type="BOOL" />
+      <VarDeclaration ID="A805B67EFBCFBA5C" Name="o_v2Auto" Type="BOOL" />
+      <VarDeclaration ID="16AEAEBB476D8DFE" Name="o_v2FbLiga" Type="BOOL" />
+      <VarDeclaration ID="A5C2AF27CCDB8BE8" Name="o_v2FbInt" Type="BOOL" />
+      <VarDeclaration ID="54B122B3F9A5D047" Name="o_v2FbRev" Type="BOOL" />
+      <VarDeclaration ID="8D079D6E87713166" Name="o_cmpDef" Type="BOOL" />
+      <VarDeclaration ID="8152231A1CD8AC84" Name="o_cmpAuto" Type="BOOL" />
+      <VarDeclaration ID="4FE7243CC4A5FAC6" Name="o_cmpFbLiga" Type="BOOL" />
+      <VarDeclaration ID="CACA29B1DE5A72EF" Name="o_cmpFbInt" Type="BOOL" />
+      <VarDeclaration ID="E8716C1B1ECF6D7B" Name="o_cmpFbRev" Type="BOOL" />
+      <VarDeclaration ID="FCC412382A1D58E6" Name="o_rspDef" Type="BOOL" />
+      <VarDeclaration ID="3D453ECDD89AFAAB" Name="o_rspAuto" Type="BOOL" />
+      <VarDeclaration ID="992A96506290EC2D" Name="o_rspFbLiga" Type="BOOL" />
+      <VarDeclaration ID="BE797E04D2F60838" Name="o_rspFbInt" Type="BOOL" />
+      <VarDeclaration ID="7D687639CABB7271" Name="o_rspFbRev" Type="BOOL" />
+      <VarDeclaration ID="DA3C90673BB14D1A" Name="o_r1Def" Type="BOOL" />
+      <VarDeclaration ID="FD53EA39F1F1BFCE" Name="o_r1Auto" Type="BOOL" />
+      <VarDeclaration ID="E4D6C6F17ED96F76" Name="o_r1FbLiga" Type="BOOL" />
+      <VarDeclaration ID="6F477DC4AD459C58" Name="o_r1FbInt" Type="BOOL" />
+      <VarDeclaration ID="E0E007FA49870D1B" Name="o_r1FbRev" Type="BOOL" />
+      <VarDeclaration ID="3B6EB4AB248B7ACA" Name="o_r2Def" Type="BOOL" />
+      <VarDeclaration ID="B19B7064552C9ADB" Name="o_r2Auto" Type="BOOL" />
+      <VarDeclaration ID="9960DE151CFA0384" Name="o_r2FbLiga" Type="BOOL" />
+      <VarDeclaration ID="E13F41EBC828DCA7" Name="o_r2FbInt" Type="BOOL" />
+      <VarDeclaration ID="C9D416B265EA1B43" Name="o_r2FbRev" Type="BOOL" />
+    </InternalVars>
+    <ECC>
+      <ECState Name="START" Comment="Estado inicial" x="1500" y="640" />
+      <ECState Name="EXEC" Comment="Executa a logica; o algoritmo decide quais eventos saem" x="1500" y="1100">
+        <ECAction Algorithm="algUCT" Output="INITO" />
+        <ECAction Output="CNF" />
+        <ECAction Output="CNF_HMI" />
+        <ECAction Output="CNF_EQ" />
+        <ECAction Output="CNF_DISP" />
+        <ECAction Output="CNF_ALM" />
+        <ECAction Output="CNF_BOMBA" />
+        <ECAction Output="CNF_VALVULA" />
+        <ECAction Output="CNF_RESET" />
+        <ECAction Output="CNF_W005" />
+        <ECAction Output="CNF_W006" />
+        <ECAction Output="CNF_W007" />
+        <ECAction Output="CNF_W008" />
+        <ECAction Output="CNF_W009" />
+        <ECAction Output="CNF_W010" />
+        <ECAction Output="CNF_W011" />
+        <ECAction Output="CNF_W012" />
+        <ECAction Output="CNF_W013" />
+        <ECAction Output="CNF_W014" />
+        <ECAction Output="CNF_W015" />
+        <ECAction Output="CNF_W016" />
+        <ECAction Output="CNF_W017" />
+        <ECAction Output="CNF_V101" />
+        <ECAction Output="CNF_V116" />
+        <ECAction Output="CNF_V121" />
+        <ECAction Output="CNF_V136" />
+        <ECAction Output="CNF_V141" />
+        <ECAction Output="CNF_V151" />
+        <ECAction Output="CNF_V161" />
+      </ECState>
+      <ECTransition Source="START" Destination="EXEC" Condition="INIT OR REQ_L1 OR REQ_L2 OR REQ_L3 OR REQ_L4 OR REQ_L5 OR REQ_COM OR REQ_PEN_LIGA OR REQ_PEN_INT OR REQ_PEN_VEL OR REQ_B1_LIGA OR REQ_B1_VEL OR REQ_B2_LIGA OR REQ_B2_VEL OR REQ_V1_LIGA OR REQ_V2_LIGA OR REQ_CMP_LIGA OR REQ_CMP_VEL OR REQ_RSP_LIGA OR REQ_RSP_INT OR REQ_RSP_REV OR REQ_RSP_VEL OR REQ_R1_LIGA OR REQ_R1_INT OR REQ_R1_REV OR REQ_R1_VEL OR REQ_R2_LIGA OR REQ_R2_INT OR REQ_R2_REV OR REQ_R2_VEL OR REQ_LIGA_PEN OR REQ_SEL_PEN OR REQ_LIGA_ROS OR REQ_SEL_ROS OR REQ_LIGA_RC OR REQ_SEL_RC OR REQ_SEL_BOMBA OR REQ_RESET OR REQ_RESET_PROC OR REQ_VALVULA OR REQ_PARA OR REQ_DISP OR REQ_PROC OR REQ_BOMBA OR TICK" x="1580" y="860" />
+      <ECTransition Source="EXEC" Destination="START" Condition="1" x="1420" y="860" />
+    </ECC>
+    <Algorithm Name="algUCT" Comment="Logica completa da UCT (um unico algoritmo)">
+      <ST><![CDATA[(* =====================================================================
+   basicUCT v1.0 - UCT Fast (tratamento preliminar) por Modbus TCP
+   Padrao das bibliotecas Schneider: eventos de saida desligados no inicio e
+   ligados so na mudanca; tempos pelo TICK de 1 s (E_CYCLE do CAT).
+   - leitura: palavras de comando 40005..40017 (imagem), falhas 40081,
+     niveis 40082, status/velocidade dos equipamentos 401xx, nivel da
+     peneira 40230 (0-16000 = 0-100 %), horimetros 40500..40517 (DINT,
+     palavra baixa no endereco menor);
+   - escrita so quando o operador comanda (um evento por comando): o bit
+     comandado e trocado na imagem lida e a palavra inteira e escrita
+     (os outros bits ficam como a UCT informou); velocidade 0-100 % ->
+     0-16000; reset = pulso de cfgTempoReset s em 40005.3;
+   - disponibilidade: as condicoes vao para o bloco AND do CAT (editavel)
+     e o resultado volta em "disponivel"; cadeia das UCTs: bloqueio da EEE
+     Bruto so com UCT habilitada e nenhuma disponivel;
+   - bomba de gordura (automatico): nivel alto do tanque de gordura ->
+     abre a valvula de lavagem, espera stpTempoPreLavagem e liga a bomba;
+     a valvula fecha stpTempoValvula s depois da partida; com o nivel
+     normal conta stpTempoDesliga e desliga; fora do automatico a
+     valvula segue o botao da IHM.
+   ===================================================================== *)
+
+(* ---- 0. Eventos de saida: so sai o que for ligado abaixo ---- *)
+INITO := FALSE;
+CNF := FALSE;
+CNF_HMI := FALSE;
+CNF_EQ := FALSE;
+CNF_DISP := FALSE;
+CNF_ALM := FALSE;
+CNF_BOMBA := FALSE;
+CNF_VALVULA := FALSE;
+CNF_RESET := FALSE;
+CNF_W005 := FALSE;
+CNF_W006 := FALSE;
+CNF_W007 := FALSE;
+CNF_W008 := FALSE;
+CNF_W009 := FALSE;
+CNF_W010 := FALSE;
+CNF_W011 := FALSE;
+CNF_W012 := FALSE;
+CNF_W013 := FALSE;
+CNF_W014 := FALSE;
+CNF_W015 := FALSE;
+CNF_W016 := FALSE;
+CNF_W017 := FALSE;
+CNF_V101 := FALSE;
+CNF_V116 := FALSE;
+CNF_V121 := FALSE;
+CNF_V136 := FALSE;
+CNF_V141 := FALSE;
+CNF_V151 := FALSE;
+CNF_V161 := FALSE;
+
+IF REQ_COM THEN
+    bComRecebida := TRUE;
+END_IF;
+IF REQ_L1 THEN
+    bLeitura := TRUE;
+    img005 := INT_TO_WORD(w005);
+    img006 := INT_TO_WORD(w006);
+    img007 := INT_TO_WORD(w007);
+    img008 := INT_TO_WORD(w008);
+    img009 := INT_TO_WORD(w009);
+    img010 := INT_TO_WORD(w010);
+    img011 := INT_TO_WORD(w011);
+    img012 := INT_TO_WORD(w012);
+    img013 := INT_TO_WORD(w013);
+    img014 := INT_TO_WORD(w014);
+    img015 := INT_TO_WORD(w015);
+    img016 := INT_TO_WORD(w016);
+    img017 := INT_TO_WORD(w017);
+END_IF;
+
+(* ---- 1. Inicializacao ---- *)
+IF INIT THEN
+    initDone := TRUE;
+    initPass := TRUE;
+    INITO    := TRUE;
+END_IF;
+IF NOT initDone THEN
+    RETURN;
+END_IF;
+
+(* ---- 2. Comunicacao (falha confirmada depois de cfgTempoCom s) ---- *)
+bComOK := cfgInstalada AND bComRecebida AND comInt = 1;
+IF cfgInstalada AND NOT bComOK THEN
+    IF TICK AND uSegCom < UINT_TO_UDINT(cfgTempoCom) THEN
+        uSegCom := uSegCom + 1;
+    END_IF;
+ELSE
+    uSegCom := 0;
+END_IF;
+stsFalhaComunicacao := cfgInstalada AND NOT bComOK AND uSegCom >= UINT_TO_UDINT(cfgTempoCom);
+
+(* ---- 3. Estado lido (com a comunicacao em falha os valores ficam congelados) ---- *)
+w81 := INT_TO_WORD(w081);
+w82 := INT_TO_WORD(w082);
+stsEmergenciaUCT := bComOK AND ((w81 AND 16#0001) <> 16#0000);
+stsNivelBaixoPeneira := bComOK AND ((w82 AND 16#0001) <> 16#0000);
+stsNivelAltoPeneira := bComOK AND ((w82 AND 16#0002) <> 16#0000);
+stsNivelBaixoAgua := bComOK AND ((w82 AND 16#0004) <> 16#0000);
+stsNivelAltoGordura := bComOK AND ((w82 AND 16#0008) <> 16#0000);
+stsNivelPeneira := INT_TO_REAL(w230) * 100.0 / 16000.0;
+stsAutoPeneira := (img015 AND 16#0004) <> 16#0000;
+stsLigaAutoPeneira := (img015 AND 16#0001) <> 16#0000;
+stsAutoRoscas := (img016 AND 16#0004) <> 16#0000;
+stsLigaAutoRoscas := (img016 AND 16#0001) <> 16#0000;
+stsAutoRaspComp := (img017 AND 16#0004) <> 16#0000;
+stsLigaAutoRaspComp := (img017 AND 16#0001) <> 16#0000;
+stsSelecaoBomba := (img007 AND 16#0008) <> 16#0000;
+(* Peneira rotativa *)
+IF bComOK THEN
+    penAnim := s106;
+ELSE
+    penAnim := 4;
+END_IF;
+penDef := bComOK AND ((w81 AND 16#0010) <> 16#0000);
+penHor := DWORD_TO_DINT(SHL(WORD_TO_DWORD(INT_TO_WORD(h501)), 16) OR WORD_TO_DWORD(INT_TO_WORD(h500)));
+penAuto := stsAutoPeneira;
+penVelSts := INT_TO_REAL(s101) * 100.0 / 16000.0;
+penFbLiga := (img006 AND 16#0001) <> 16#0000;
+penFbInt := (img006 AND 16#0020) <> 16#0000;
+penFbRev := FALSE;
+(* Bomba 1 de higienização da peneira *)
+IF bComOK THEN
+    b1Anim := s117;
+ELSE
+    b1Anim := 4;
+END_IF;
+b1Def := bComOK AND ((w81 AND 16#0004) <> 16#0000);
+b1Hor := DWORD_TO_DINT(SHL(WORD_TO_DWORD(INT_TO_WORD(h503)), 16) OR WORD_TO_DWORD(INT_TO_WORD(h502)));
+b1Auto := stsAutoPeneira;
+b1VelSts := INT_TO_REAL(s116) * 100.0 / 16000.0;
+b1FbLiga := (img007 AND 16#0001) <> 16#0000;
+b1FbInt := FALSE;
+b1FbRev := FALSE;
+(* Bomba 2 de higienização da peneira *)
+IF bComOK THEN
+    b2Anim := s122;
+ELSE
+    b2Anim := 4;
+END_IF;
+b2Def := bComOK AND ((w81 AND 16#0008) <> 16#0000);
+b2Hor := DWORD_TO_DINT(SHL(WORD_TO_DWORD(INT_TO_WORD(h505)), 16) OR WORD_TO_DWORD(INT_TO_WORD(h504)));
+b2Auto := stsAutoPeneira;
+b2VelSts := INT_TO_REAL(s121) * 100.0 / 16000.0;
+b2FbLiga := (img008 AND 16#0001) <> 16#0000;
+b2FbInt := FALSE;
+b2FbRev := FALSE;
+(* Válvula 1 - higienização do cesto da peneira *)
+IF bComOK THEN
+    v1Anim := s127;
+ELSE
+    v1Anim := 4;
+END_IF;
+v1Def := bComOK AND (s127 = 2);
+v1Hor := DWORD_TO_DINT(SHL(WORD_TO_DWORD(INT_TO_WORD(h507)), 16) OR WORD_TO_DWORD(INT_TO_WORD(h506)));
+v1Auto := stsAutoPeneira;
+v1VelSts := 0.0;
+v1FbLiga := (img009 AND 16#0001) <> 16#0000;
+v1FbInt := FALSE;
+v1FbRev := FALSE;
+(* Válvula 2 - higienização da rosca da peneira *)
+IF bComOK THEN
+    v2Anim := s132;
+ELSE
+    v2Anim := 4;
+END_IF;
+v2Def := bComOK AND (s132 = 2);
+v2Hor := DWORD_TO_DINT(SHL(WORD_TO_DWORD(INT_TO_WORD(h509)), 16) OR WORD_TO_DWORD(INT_TO_WORD(h508)));
+v2Auto := stsAutoPeneira;
+v2VelSts := 0.0;
+v2FbLiga := (img010 AND 16#0001) <> 16#0000;
+v2FbInt := FALSE;
+v2FbRev := FALSE;
+(* Compressor de ar *)
+IF bComOK THEN
+    cmpAnim := s137;
+ELSE
+    cmpAnim := 4;
+END_IF;
+cmpDef := bComOK AND ((w81 AND 16#0100) <> 16#0000);
+cmpHor := DWORD_TO_DINT(SHL(WORD_TO_DWORD(INT_TO_WORD(h511)), 16) OR WORD_TO_DWORD(INT_TO_WORD(h510)));
+cmpAuto := stsAutoRaspComp;
+cmpVelSts := INT_TO_REAL(s136) * 100.0 / 16000.0;
+cmpFbLiga := (img011 AND 16#0001) <> 16#0000;
+cmpFbInt := FALSE;
+cmpFbRev := FALSE;
+(* Raspador de gordura *)
+IF bComOK THEN
+    rspAnim := s142;
+ELSE
+    rspAnim := 4;
+END_IF;
+rspDef := bComOK AND ((w81 AND 16#0080) <> 16#0000);
+rspHor := DWORD_TO_DINT(SHL(WORD_TO_DWORD(INT_TO_WORD(h513)), 16) OR WORD_TO_DWORD(INT_TO_WORD(h512)));
+rspAuto := stsAutoRaspComp;
+rspVelSts := INT_TO_REAL(s141) * 100.0 / 16000.0;
+rspFbLiga := (img012 AND 16#0001) <> 16#0000;
+rspFbInt := (img012 AND 16#0020) <> 16#0000;
+rspFbRev := (img012 AND 16#0008) <> 16#0000;
+(* Rosca 1 - horizontal *)
+IF bComOK THEN
+    r1Anim := s152;
+ELSE
+    r1Anim := 4;
+END_IF;
+r1Def := bComOK AND ((w81 AND 16#0020) <> 16#0000);
+r1Hor := DWORD_TO_DINT(SHL(WORD_TO_DWORD(INT_TO_WORD(h515)), 16) OR WORD_TO_DWORD(INT_TO_WORD(h514)));
+r1Auto := stsAutoRoscas;
+r1VelSts := INT_TO_REAL(s151) * 100.0 / 16000.0;
+r1FbLiga := (img013 AND 16#0001) <> 16#0000;
+r1FbInt := (img013 AND 16#0020) <> 16#0000;
+r1FbRev := (img013 AND 16#0008) <> 16#0000;
+(* Rosca 2 - inclinada *)
+IF bComOK THEN
+    r2Anim := s162;
+ELSE
+    r2Anim := 4;
+END_IF;
+r2Def := bComOK AND ((w81 AND 16#0040) <> 16#0000);
+r2Hor := DWORD_TO_DINT(SHL(WORD_TO_DWORD(INT_TO_WORD(h517)), 16) OR WORD_TO_DWORD(INT_TO_WORD(h516)));
+r2Auto := stsAutoRoscas;
+r2VelSts := INT_TO_REAL(s161) * 100.0 / 16000.0;
+r2FbLiga := (img014 AND 16#0001) <> 16#0000;
+r2FbInt := (img014 AND 16#0020) <> 16#0000;
+r2FbRev := (img014 AND 16#0008) <> 16#0000;
+
+(* ---- 4. Comandos da IHM: troca so o bit comandado na imagem e escreve a palavra ---- *)
+IF REQ_PEN_LIGA THEN
+    IF penLiga THEN
+        img006 := img006 OR 16#0001;
+    ELSE
+        img006 := img006 AND 16#FFFE;
+    END_IF;
+    ww006 := WORD_TO_INT(img006);
+    CNF_W006 := TRUE;
+END_IF;
+IF REQ_PEN_INT THEN
+    IF penInt THEN
+        img006 := img006 OR 16#0020;
+    ELSE
+        img006 := img006 AND 16#FFDF;
+    END_IF;
+    ww006 := WORD_TO_INT(img006);
+    CNF_W006 := TRUE;
+END_IF;
+IF REQ_PEN_VEL THEN
+    ww101 := REAL_TO_INT(LIMIT(0.0, penVel, 100.0) * 160.0);
+    CNF_V101 := TRUE;
+END_IF;
+IF REQ_B1_LIGA THEN
+    IF b1Liga THEN
+        img007 := img007 OR 16#0001;
+    ELSE
+        img007 := img007 AND 16#FFFE;
+    END_IF;
+    ww007 := WORD_TO_INT(img007);
+    CNF_W007 := TRUE;
+END_IF;
+IF REQ_B1_VEL THEN
+    ww116 := REAL_TO_INT(LIMIT(0.0, b1Vel, 100.0) * 160.0);
+    CNF_V116 := TRUE;
+END_IF;
+IF REQ_B2_LIGA THEN
+    IF b2Liga THEN
+        img008 := img008 OR 16#0001;
+    ELSE
+        img008 := img008 AND 16#FFFE;
+    END_IF;
+    ww008 := WORD_TO_INT(img008);
+    CNF_W008 := TRUE;
+END_IF;
+IF REQ_B2_VEL THEN
+    ww121 := REAL_TO_INT(LIMIT(0.0, b2Vel, 100.0) * 160.0);
+    CNF_V121 := TRUE;
+END_IF;
+IF REQ_V1_LIGA THEN
+    IF v1Liga THEN
+        img009 := img009 OR 16#0001;
+    ELSE
+        img009 := img009 AND 16#FFFE;
+    END_IF;
+    ww009 := WORD_TO_INT(img009);
+    CNF_W009 := TRUE;
+END_IF;
+IF REQ_V2_LIGA THEN
+    IF v2Liga THEN
+        img010 := img010 OR 16#0001;
+    ELSE
+        img010 := img010 AND 16#FFFE;
+    END_IF;
+    ww010 := WORD_TO_INT(img010);
+    CNF_W010 := TRUE;
+END_IF;
+IF REQ_CMP_LIGA THEN
+    IF cmpLiga THEN
+        img011 := img011 OR 16#0001;
+    ELSE
+        img011 := img011 AND 16#FFFE;
+    END_IF;
+    ww011 := WORD_TO_INT(img011);
+    CNF_W011 := TRUE;
+END_IF;
+IF REQ_CMP_VEL THEN
+    ww136 := REAL_TO_INT(LIMIT(0.0, cmpVel, 100.0) * 160.0);
+    CNF_V136 := TRUE;
+END_IF;
+IF REQ_RSP_LIGA THEN
+    IF rspLiga THEN
+        img012 := img012 OR 16#0001;
+    ELSE
+        img012 := img012 AND 16#FFFE;
+    END_IF;
+    ww012 := WORD_TO_INT(img012);
+    CNF_W012 := TRUE;
+END_IF;
+IF REQ_RSP_INT THEN
+    IF rspInt THEN
+        img012 := img012 OR 16#0020;
+    ELSE
+        img012 := img012 AND 16#FFDF;
+    END_IF;
+    ww012 := WORD_TO_INT(img012);
+    CNF_W012 := TRUE;
+END_IF;
+IF REQ_RSP_REV THEN
+    IF rspRev THEN
+        img012 := img012 OR 16#0008;
+    ELSE
+        img012 := img012 AND 16#FFF7;
+    END_IF;
+    ww012 := WORD_TO_INT(img012);
+    CNF_W012 := TRUE;
+END_IF;
+IF REQ_RSP_VEL THEN
+    ww141 := REAL_TO_INT(LIMIT(0.0, rspVel, 100.0) * 160.0);
+    CNF_V141 := TRUE;
+END_IF;
+IF REQ_R1_LIGA THEN
+    IF r1Liga THEN
+        img013 := img013 OR 16#0001;
+    ELSE
+        img013 := img013 AND 16#FFFE;
+    END_IF;
+    ww013 := WORD_TO_INT(img013);
+    CNF_W013 := TRUE;
+END_IF;
+IF REQ_R1_INT THEN
+    IF r1Int THEN
+        img013 := img013 OR 16#0020;
+    ELSE
+        img013 := img013 AND 16#FFDF;
+    END_IF;
+    ww013 := WORD_TO_INT(img013);
+    CNF_W013 := TRUE;
+END_IF;
+IF REQ_R1_REV THEN
+    IF r1Rev THEN
+        img013 := img013 OR 16#0008;
+    ELSE
+        img013 := img013 AND 16#FFF7;
+    END_IF;
+    ww013 := WORD_TO_INT(img013);
+    CNF_W013 := TRUE;
+END_IF;
+IF REQ_R1_VEL THEN
+    ww151 := REAL_TO_INT(LIMIT(0.0, r1Vel, 100.0) * 160.0);
+    CNF_V151 := TRUE;
+END_IF;
+IF REQ_R2_LIGA THEN
+    IF r2Liga THEN
+        img014 := img014 OR 16#0001;
+    ELSE
+        img014 := img014 AND 16#FFFE;
+    END_IF;
+    ww014 := WORD_TO_INT(img014);
+    CNF_W014 := TRUE;
+END_IF;
+IF REQ_R2_INT THEN
+    IF r2Int THEN
+        img014 := img014 OR 16#0020;
+    ELSE
+        img014 := img014 AND 16#FFDF;
+    END_IF;
+    ww014 := WORD_TO_INT(img014);
+    CNF_W014 := TRUE;
+END_IF;
+IF REQ_R2_REV THEN
+    IF r2Rev THEN
+        img014 := img014 OR 16#0008;
+    ELSE
+        img014 := img014 AND 16#FFF7;
+    END_IF;
+    ww014 := WORD_TO_INT(img014);
+    CNF_W014 := TRUE;
+END_IF;
+IF REQ_R2_VEL THEN
+    ww161 := REAL_TO_INT(LIMIT(0.0, r2Vel, 100.0) * 160.0);
+    CNF_V161 := TRUE;
+END_IF;
+IF REQ_LIGA_PEN THEN
+    IF hmiLigaPeneira THEN
+        img015 := img015 OR 16#0001;
+    ELSE
+        img015 := img015 AND 16#FFFE;
+    END_IF;
+    ww015 := WORD_TO_INT(img015);
+    CNF_W015 := TRUE;
+END_IF;
+IF REQ_SEL_PEN THEN
+    IF hmiSelPeneira THEN
+        img015 := img015 OR 16#0004;
+    ELSE
+        img015 := img015 AND 16#FFFB;
+    END_IF;
+    ww015 := WORD_TO_INT(img015);
+    CNF_W015 := TRUE;
+END_IF;
+IF REQ_LIGA_ROS THEN
+    IF hmiLigaRoscas THEN
+        img016 := img016 OR 16#0001;
+    ELSE
+        img016 := img016 AND 16#FFFE;
+    END_IF;
+    ww016 := WORD_TO_INT(img016);
+    CNF_W016 := TRUE;
+END_IF;
+IF REQ_SEL_ROS THEN
+    IF hmiSelRoscas THEN
+        img016 := img016 OR 16#0004;
+    ELSE
+        img016 := img016 AND 16#FFFB;
+    END_IF;
+    ww016 := WORD_TO_INT(img016);
+    CNF_W016 := TRUE;
+END_IF;
+IF REQ_LIGA_RC THEN
+    IF hmiLigaRaspComp THEN
+        img017 := img017 OR 16#0001;
+    ELSE
+        img017 := img017 AND 16#FFFE;
+    END_IF;
+    ww017 := WORD_TO_INT(img017);
+    CNF_W017 := TRUE;
+END_IF;
+IF REQ_SEL_RC THEN
+    IF hmiSelRaspComp THEN
+        img017 := img017 OR 16#0004;
+    ELSE
+        img017 := img017 AND 16#FFFB;
+    END_IF;
+    ww017 := WORD_TO_INT(img017);
+    CNF_W017 := TRUE;
+END_IF;
+IF REQ_SEL_BOMBA THEN
+    IF hmiSelBomba THEN
+        img007 := img007 OR 16#0008;
+    ELSE
+        img007 := img007 AND 16#FFF7;
+    END_IF;
+    ww007 := WORD_TO_INT(img007);
+    CNF_W007 := TRUE;
+END_IF;
+
+(* ---- 5. Reset: pulso em 40005.3, bomba de gordura e reconhecimento ---- *)
+bReset := (REQ_RESET AND hmiReset) OR (REQ_RESET_PROC AND cmdResetFalhas);
+IF bReset THEN
+    img005 := img005 OR 16#0008;
+    ww005 := WORD_TO_INT(img005);
+    CNF_W005 := TRUE;
+    uSegReset := cfgTempoReset;
+    IF uSegReset = 0 THEN
+        uSegReset := 1;
+    END_IF;
+    resetBomba := TRUE;
+    CNF_RESET := TRUE;
+ELSIF TICK AND uSegReset > 0 THEN
+    uSegReset := uSegReset - 1;
+    IF uSegReset = 0 THEN
+        img005 := img005 AND 16#FFF7;
+        ww005 := WORD_TO_INT(img005);
+        CNF_W005 := TRUE;
+    END_IF;
+END_IF;
+
+(* ---- 6. Disponibilidade (condicoes para o AND editavel do CAT) e cadeia das UCTs ---- *)
+habilitada := cfgInstalada AND stpHabilitada;
+okComunicacao := bComOK;
+okEmergencia := bComOK AND NOT stsEmergenciaUCT;
+okPeneira := bComOK AND NOT penDef;
+okMotores := bComOK AND NOT (b1Def OR b2Def OR cmpDef OR rspDef OR r1Def OR r2Def);
+stsDisponivel := disponivel AND habilitada;
+stsAlgumaHabilitada := habilitada OR antHabilitada;
+stsAlgumaDisponivel := stsDisponivel OR antDisponivel;
+stsBloqueioEEE := stsAlgumaHabilitada AND NOT stsAlgumaDisponivel;
+
+(* ---- 7. Bomba de gordura e valvula de lavagem ---- *)
+bNivelAltoG := stsNivelAltoGordura;
+IF emergencia OR NOT bombaAutomatico THEN
+    uEtapa := 0;
+    uSegEtapa := 0;
+    uSegValv := 0;
+    cmdLigarBomba := FALSE;
+    bValvAuto := FALSE;
+ELSE
+    IF TICK THEN
+        uSegEtapa := uSegEtapa + 1;
+        IF uEtapa >= 2 THEN
+            uSegValv := uSegValv + 1;
+        END_IF;
+    END_IF;
+    IF uEtapa = 0 THEN
+        IF bNivelAltoG THEN
+            uEtapa := 1;
+            uSegEtapa := 0;
+        END_IF;
+    END_IF;
+    IF uEtapa = 1 THEN
+        IF uSegEtapa >= UINT_TO_UDINT(stpTempoPreLavagem) THEN
+            uEtapa := 2;
+            uSegEtapa := 0;
+            uSegValv := 0;
+        END_IF;
+    END_IF;
+    IF uEtapa = 2 THEN
+        IF NOT bNivelAltoG THEN
+            uEtapa := 3;
+            uSegEtapa := 0;
+        END_IF;
+    ELSIF uEtapa = 3 THEN
+        IF bNivelAltoG THEN
+            uEtapa := 2;
+            uSegEtapa := 0;
+        ELSIF uSegEtapa >= UINT_TO_UDINT(stpTempoDesliga) THEN
+            uEtapa := 0;
+            uSegEtapa := 0;
+        END_IF;
+    END_IF;
+    cmdLigarBomba := uEtapa >= 2;
+    bValvAuto := (uEtapa = 1) OR (uEtapa >= 2 AND uSegValv < UINT_TO_UDINT(stpTempoValvula));
+END_IF;
+stpVelBombaOut := stpVelBomba;
+IF emergencia THEN
+    cmdValvula := FALSE;
+ELSIF bombaAutomatico THEN
+    cmdValvula := bValvAuto;
+ELSE
+    cmdValvula := hmiValvula;
+END_IF;
+stsValvula := cmdValvula;
+IF NOT bombaAutomatico THEN
+    stsEtapaGordura := 4;
+ELSE
+    stsEtapaGordura := uEtapa;
+END_IF;
+IF bombaAutomatico AND uEtapa = 1 THEN
+    stsTempoRestante := UDINT_TO_INT(UINT_TO_UDINT(stpTempoPreLavagem) - MIN(uSegEtapa, UINT_TO_UDINT(stpTempoPreLavagem)));
+ELSIF bombaAutomatico AND uEtapa = 3 THEN
+    stsTempoRestante := UDINT_TO_INT(UINT_TO_UDINT(stpTempoDesliga) - MIN(uSegEtapa, UINT_TO_UDINT(stpTempoDesliga)));
+ELSE
+    stsTempoRestante := 0;
+END_IF;
+
+(* ---- 8. Alarmes (UCT nao instalada nao alarma) ---- *)
+almCom := stsFalhaComunicacao;
+almEmergencia := stsEmergenciaUCT;
+almDefPEN := penDef;
+almDefB1 := b1Def;
+almDefB2 := b2Def;
+almDefCMP := cmpDef;
+almDefRSP := rspDef;
+almDefR1 := r1Def;
+almDefR2 := r2Def;
+almNivelAgua := stsNivelBaixoAgua;
+almNivelPeneira := stsNivelAltoPeneira;
+stsAlarme := almCom OR almEmergencia OR almDefPEN OR almDefB1 OR almDefB2 OR almDefCMP OR almDefRSP OR almDefR1 OR almDefR2 OR almNivelAgua OR almNivelPeneira;
+
+(* ---- 9. Eventos so na mudanca ---- *)
+wD := 0;
+IF okEmergencia THEN wD := wD OR 16#0001; END_IF;
+IF okPeneira THEN wD := wD OR 16#0002; END_IF;
+IF okMotores THEN wD := wD OR 16#0004; END_IF;
+IF okComunicacao THEN wD := wD OR 16#0008; END_IF;
+IF habilitada THEN wD := wD OR 16#0010; END_IF;
+CNF_DISP := initPass OR (wD <> oldD);
+oldD := wD;
+wP := 0;
+IF stsDisponivel THEN wP := wP OR 16#00000001; END_IF;
+IF stsAlgumaHabilitada THEN wP := wP OR 16#00000002; END_IF;
+IF stsAlgumaDisponivel THEN wP := wP OR 16#00000004; END_IF;
+IF stsBloqueioEEE THEN wP := wP OR 16#00000008; END_IF;
+IF stsFalhaComunicacao THEN wP := wP OR 16#00000010; END_IF;
+IF stsEmergenciaUCT THEN wP := wP OR 16#00000020; END_IF;
+IF stsNivelAltoGordura THEN wP := wP OR 16#00000040; END_IF;
+IF stsAlarme THEN wP := wP OR 16#00000080; END_IF;
+IF stsNivelBaixoPeneira THEN wP := wP OR 16#00000100; END_IF;
+IF stsNivelAltoPeneira THEN wP := wP OR 16#00000200; END_IF;
+IF stsNivelBaixoAgua THEN wP := wP OR 16#00000400; END_IF;
+IF stsAutoPeneira THEN wP := wP OR 16#00000800; END_IF;
+IF stsAutoRoscas THEN wP := wP OR 16#00001000; END_IF;
+IF stsAutoRaspComp THEN wP := wP OR 16#00002000; END_IF;
+IF stsLigaAutoPeneira THEN wP := wP OR 16#00004000; END_IF;
+IF stsLigaAutoRoscas THEN wP := wP OR 16#00008000; END_IF;
+IF stsLigaAutoRaspComp THEN wP := wP OR 16#00010000; END_IF;
+IF stsSelecaoBomba THEN wP := wP OR 16#00020000; END_IF;
+IF stsValvula THEN wP := wP OR 16#00040000; END_IF;
+CNF := initPass OR ((wP AND 16#000000FF) <> (oldP AND 16#000000FF));
+bMudou := (wP <> oldP) OR (wD <> oldD);
+IF stsNivelPeneira <> o_stsNivelPeneira THEN bMudou := TRUE; o_stsNivelPeneira := stsNivelPeneira; END_IF;
+IF stsEtapaGordura <> o_stsEtapaGordura THEN bMudou := TRUE; o_stsEtapaGordura := stsEtapaGordura; END_IF;
+IF stsTempoRestante <> o_stsTempoRestante THEN bMudou := TRUE; o_stsTempoRestante := stsTempoRestante; END_IF;
+CNF_HMI := initPass OR bMudou;
+oldP := wP;
+bMudou := FALSE;
+IF penAnim <> o_penAnim THEN bMudou := TRUE; o_penAnim := penAnim; END_IF;
+IF penDef <> o_penDef THEN bMudou := TRUE; o_penDef := penDef; END_IF;
+IF penHor <> o_penHor THEN bMudou := TRUE; o_penHor := penHor; END_IF;
+IF penAuto <> o_penAuto THEN bMudou := TRUE; o_penAuto := penAuto; END_IF;
+IF penVelSts <> o_penVelSts THEN bMudou := TRUE; o_penVelSts := penVelSts; END_IF;
+IF penFbLiga <> o_penFbLiga THEN bMudou := TRUE; o_penFbLiga := penFbLiga; END_IF;
+IF penFbInt <> o_penFbInt THEN bMudou := TRUE; o_penFbInt := penFbInt; END_IF;
+IF penFbRev <> o_penFbRev THEN bMudou := TRUE; o_penFbRev := penFbRev; END_IF;
+IF b1Anim <> o_b1Anim THEN bMudou := TRUE; o_b1Anim := b1Anim; END_IF;
+IF b1Def <> o_b1Def THEN bMudou := TRUE; o_b1Def := b1Def; END_IF;
+IF b1Hor <> o_b1Hor THEN bMudou := TRUE; o_b1Hor := b1Hor; END_IF;
+IF b1Auto <> o_b1Auto THEN bMudou := TRUE; o_b1Auto := b1Auto; END_IF;
+IF b1VelSts <> o_b1VelSts THEN bMudou := TRUE; o_b1VelSts := b1VelSts; END_IF;
+IF b1FbLiga <> o_b1FbLiga THEN bMudou := TRUE; o_b1FbLiga := b1FbLiga; END_IF;
+IF b1FbInt <> o_b1FbInt THEN bMudou := TRUE; o_b1FbInt := b1FbInt; END_IF;
+IF b1FbRev <> o_b1FbRev THEN bMudou := TRUE; o_b1FbRev := b1FbRev; END_IF;
+IF b2Anim <> o_b2Anim THEN bMudou := TRUE; o_b2Anim := b2Anim; END_IF;
+IF b2Def <> o_b2Def THEN bMudou := TRUE; o_b2Def := b2Def; END_IF;
+IF b2Hor <> o_b2Hor THEN bMudou := TRUE; o_b2Hor := b2Hor; END_IF;
+IF b2Auto <> o_b2Auto THEN bMudou := TRUE; o_b2Auto := b2Auto; END_IF;
+IF b2VelSts <> o_b2VelSts THEN bMudou := TRUE; o_b2VelSts := b2VelSts; END_IF;
+IF b2FbLiga <> o_b2FbLiga THEN bMudou := TRUE; o_b2FbLiga := b2FbLiga; END_IF;
+IF b2FbInt <> o_b2FbInt THEN bMudou := TRUE; o_b2FbInt := b2FbInt; END_IF;
+IF b2FbRev <> o_b2FbRev THEN bMudou := TRUE; o_b2FbRev := b2FbRev; END_IF;
+IF v1Anim <> o_v1Anim THEN bMudou := TRUE; o_v1Anim := v1Anim; END_IF;
+IF v1Def <> o_v1Def THEN bMudou := TRUE; o_v1Def := v1Def; END_IF;
+IF v1Hor <> o_v1Hor THEN bMudou := TRUE; o_v1Hor := v1Hor; END_IF;
+IF v1Auto <> o_v1Auto THEN bMudou := TRUE; o_v1Auto := v1Auto; END_IF;
+IF v1VelSts <> o_v1VelSts THEN bMudou := TRUE; o_v1VelSts := v1VelSts; END_IF;
+IF v1FbLiga <> o_v1FbLiga THEN bMudou := TRUE; o_v1FbLiga := v1FbLiga; END_IF;
+IF v1FbInt <> o_v1FbInt THEN bMudou := TRUE; o_v1FbInt := v1FbInt; END_IF;
+IF v1FbRev <> o_v1FbRev THEN bMudou := TRUE; o_v1FbRev := v1FbRev; END_IF;
+IF v2Anim <> o_v2Anim THEN bMudou := TRUE; o_v2Anim := v2Anim; END_IF;
+IF v2Def <> o_v2Def THEN bMudou := TRUE; o_v2Def := v2Def; END_IF;
+IF v2Hor <> o_v2Hor THEN bMudou := TRUE; o_v2Hor := v2Hor; END_IF;
+IF v2Auto <> o_v2Auto THEN bMudou := TRUE; o_v2Auto := v2Auto; END_IF;
+IF v2VelSts <> o_v2VelSts THEN bMudou := TRUE; o_v2VelSts := v2VelSts; END_IF;
+IF v2FbLiga <> o_v2FbLiga THEN bMudou := TRUE; o_v2FbLiga := v2FbLiga; END_IF;
+IF v2FbInt <> o_v2FbInt THEN bMudou := TRUE; o_v2FbInt := v2FbInt; END_IF;
+IF v2FbRev <> o_v2FbRev THEN bMudou := TRUE; o_v2FbRev := v2FbRev; END_IF;
+IF cmpAnim <> o_cmpAnim THEN bMudou := TRUE; o_cmpAnim := cmpAnim; END_IF;
+IF cmpDef <> o_cmpDef THEN bMudou := TRUE; o_cmpDef := cmpDef; END_IF;
+IF cmpHor <> o_cmpHor THEN bMudou := TRUE; o_cmpHor := cmpHor; END_IF;
+IF cmpAuto <> o_cmpAuto THEN bMudou := TRUE; o_cmpAuto := cmpAuto; END_IF;
+IF cmpVelSts <> o_cmpVelSts THEN bMudou := TRUE; o_cmpVelSts := cmpVelSts; END_IF;
+IF cmpFbLiga <> o_cmpFbLiga THEN bMudou := TRUE; o_cmpFbLiga := cmpFbLiga; END_IF;
+IF cmpFbInt <> o_cmpFbInt THEN bMudou := TRUE; o_cmpFbInt := cmpFbInt; END_IF;
+IF cmpFbRev <> o_cmpFbRev THEN bMudou := TRUE; o_cmpFbRev := cmpFbRev; END_IF;
+IF rspAnim <> o_rspAnim THEN bMudou := TRUE; o_rspAnim := rspAnim; END_IF;
+IF rspDef <> o_rspDef THEN bMudou := TRUE; o_rspDef := rspDef; END_IF;
+IF rspHor <> o_rspHor THEN bMudou := TRUE; o_rspHor := rspHor; END_IF;
+IF rspAuto <> o_rspAuto THEN bMudou := TRUE; o_rspAuto := rspAuto; END_IF;
+IF rspVelSts <> o_rspVelSts THEN bMudou := TRUE; o_rspVelSts := rspVelSts; END_IF;
+IF rspFbLiga <> o_rspFbLiga THEN bMudou := TRUE; o_rspFbLiga := rspFbLiga; END_IF;
+IF rspFbInt <> o_rspFbInt THEN bMudou := TRUE; o_rspFbInt := rspFbInt; END_IF;
+IF rspFbRev <> o_rspFbRev THEN bMudou := TRUE; o_rspFbRev := rspFbRev; END_IF;
+IF r1Anim <> o_r1Anim THEN bMudou := TRUE; o_r1Anim := r1Anim; END_IF;
+IF r1Def <> o_r1Def THEN bMudou := TRUE; o_r1Def := r1Def; END_IF;
+IF r1Hor <> o_r1Hor THEN bMudou := TRUE; o_r1Hor := r1Hor; END_IF;
+IF r1Auto <> o_r1Auto THEN bMudou := TRUE; o_r1Auto := r1Auto; END_IF;
+IF r1VelSts <> o_r1VelSts THEN bMudou := TRUE; o_r1VelSts := r1VelSts; END_IF;
+IF r1FbLiga <> o_r1FbLiga THEN bMudou := TRUE; o_r1FbLiga := r1FbLiga; END_IF;
+IF r1FbInt <> o_r1FbInt THEN bMudou := TRUE; o_r1FbInt := r1FbInt; END_IF;
+IF r1FbRev <> o_r1FbRev THEN bMudou := TRUE; o_r1FbRev := r1FbRev; END_IF;
+IF r2Anim <> o_r2Anim THEN bMudou := TRUE; o_r2Anim := r2Anim; END_IF;
+IF r2Def <> o_r2Def THEN bMudou := TRUE; o_r2Def := r2Def; END_IF;
+IF r2Hor <> o_r2Hor THEN bMudou := TRUE; o_r2Hor := r2Hor; END_IF;
+IF r2Auto <> o_r2Auto THEN bMudou := TRUE; o_r2Auto := r2Auto; END_IF;
+IF r2VelSts <> o_r2VelSts THEN bMudou := TRUE; o_r2VelSts := r2VelSts; END_IF;
+IF r2FbLiga <> o_r2FbLiga THEN bMudou := TRUE; o_r2FbLiga := r2FbLiga; END_IF;
+IF r2FbInt <> o_r2FbInt THEN bMudou := TRUE; o_r2FbInt := r2FbInt; END_IF;
+IF r2FbRev <> o_r2FbRev THEN bMudou := TRUE; o_r2FbRev := r2FbRev; END_IF;
+CNF_EQ := initPass OR bMudou;
+wA := 0;
+IF almCom THEN wA := wA OR 16#0001; END_IF;
+IF almEmergencia THEN wA := wA OR 16#0002; END_IF;
+IF almDefPEN THEN wA := wA OR 16#0004; END_IF;
+IF almDefB1 THEN wA := wA OR 16#0008; END_IF;
+IF almDefB2 THEN wA := wA OR 16#0010; END_IF;
+IF almDefCMP THEN wA := wA OR 16#0020; END_IF;
+IF almDefRSP THEN wA := wA OR 16#0040; END_IF;
+IF almDefR1 THEN wA := wA OR 16#0080; END_IF;
+IF almDefR2 THEN wA := wA OR 16#0100; END_IF;
+IF almNivelAgua THEN wA := wA OR 16#0200; END_IF;
+IF almNivelPeneira THEN wA := wA OR 16#0400; END_IF;
+CNF_ALM := initPass OR (wA <> oldA);
+oldA := wA;
+CNF_BOMBA := initPass OR (cmdLigarBomba <> oldLigB) OR (stpVelBombaOut <> oldVelB);
+oldLigB := cmdLigarBomba;
+oldVelB := stpVelBombaOut;
+CNF_VALVULA := initPass OR (cmdValvula <> oldValv);
+oldValv := cmdValvula;
+initPass := FALSE;
+]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

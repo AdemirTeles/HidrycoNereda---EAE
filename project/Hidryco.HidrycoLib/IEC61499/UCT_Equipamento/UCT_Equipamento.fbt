@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="85e91d08-610c-4eac-a11c-3a45cde114e5" Name="UCT_Equipamento" Format="2.0" Comment="Equipamento de uma UCT (so IHM) - HidrycoLib" Namespace="Hidryco.HidrycoLib">
+  <Attribute Name="HMI.Alias" Value="" />
+  <Attribute Name="Configuration.FB.IDCounter" Value="2" />
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Hidryco" Version="1.4" Author="Hidryco" Date="16/10/2026" Remarks="1.4: motor da rosca inclinada virado para a calha, A/M centralizado na caixa. 1.3: simbolos no padrao do Motor_Generico (graficos da HidrycoLib com Animacao e cores HidrycoColors, falha de comunicacao, A/M, nome), formas sobrepostas na ordem certa, area do simbolo (SymbolSize). 1.2: simbolos graficos por tipo de equipamento (sPeneira, sBomba, sValvula, sRosca, sRoscaInclinada, sCompressor, sRaspador) para o desenho do skid. 1.0: simbolo e faceplate de um equipamento da UCT Fast (peneira, bombas e valvulas de higienizacao, compressor, raspador, roscas). Recebe o estado lido da UCT pelo CAT UCT_PreTratamento e devolve os comandos da IHM (liga manual, velocidade, intermitente, reversao), um evento por comando. Nomes do IThis iguais aos dos CATs antigos da biblioteca." />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="70A516C5CA4155CA" Name="REQ" Comment="Estado da UCT">
+        <With Var="STS_ANIMACAO" />
+        <With Var="STS_DEFEITO" />
+        <With Var="STS_HORIMETRO_HORA" />
+        <With Var="STS_AUTOMATICO_SUBSISTEMA" />
+        <With Var="STS_VELOCIDADE" />
+        <With Var="fbkCmdLigaManual" />
+        <With Var="fbkCmdLigaIntermitente" />
+        <With Var="fbkHabilitaReversao" />
+        <With Var="CFG_VELOCIDADE" />
+        <With Var="CFG_INTERMITENTE" />
+        <With Var="CFG_REVERSAO" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="0ECDAB45E7B0C5AF" Name="E_ATUALIZA_COMANDO_LIGA_MANUAL" Comment="IHM: liga (TRUE) / desliga (FALSE) em manual">
+        <With Var="cmdLigaManual" />
+      </Event>
+      <Event ID="2D7A148B2A7AA879" Name="E_ATUALIZA_SETPOINT" Comment="IHM: velocidade (%)">
+        <With Var="stpVelocidade" />
+      </Event>
+      <Event ID="453EBF0958E76CD5" Name="E_ATUALIZA_COMANDO_LIGA_INTERMITENTE" Comment="IHM: liga (TRUE) / desliga (FALSE) o intermitente">
+        <With Var="cmdLigaIntermitente" />
+      </Event>
+      <Event ID="D9A88CBEE21DBA8E" Name="E_ATUALIZA_HABILITA_REVERSAO" Comment="IHM: habilita (TRUE) / desabilita (FALSE) a reversao">
+        <With Var="habilitaReversao" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="93B31B867A532500" Name="STS_ANIMACAO" Type="INT" Comment="Estado do equipamento na UCT: 0 desligado, 1 ligado, 2 falha, 3 manutencao, 4 sem comunicacao" />
+      <VarDeclaration ID="98FD5EAA90BD9629" Name="STS_DEFEITO" Type="BOOL" Comment="Defeito do equipamento (palavra 40081 da UCT)" />
+      <VarDeclaration ID="96E48787F8AC58C3" Name="STS_HORIMETRO_HORA" Type="DINT" Comment="Horimetro do equipamento (h, lido da UCT)" />
+      <VarDeclaration ID="CC220F735371196B" Name="STS_AUTOMATICO_SUBSISTEMA" Type="BOOL" Comment="Subsistema do equipamento em automatico (comandos manuais bloqueados)" />
+      <VarDeclaration ID="33285C93B9AAB2BC" Name="STS_VELOCIDADE" Type="REAL" Comment="Velocidade ajustada na UCT (%)" />
+      <VarDeclaration ID="3F39B194DE4581AB" Name="fbkCmdLigaManual" Type="BOOL" Comment="Comando liga em vigor na UCT" />
+      <VarDeclaration ID="F6AE4997ED76CC8B" Name="fbkCmdLigaIntermitente" Type="BOOL" Comment="Modo intermitente em vigor na UCT" />
+      <VarDeclaration ID="0E2695E0A2003068" Name="fbkHabilitaReversao" Type="BOOL" Comment="Reversao habilitada na UCT" />
+      <VarDeclaration ID="6729E072E11CC02E" Name="CFG_VELOCIDADE" Type="BOOL" Comment="TRUE = equipamento com ajuste de velocidade" />
+      <VarDeclaration ID="B3CA2188BE2BF3D0" Name="CFG_INTERMITENTE" Type="BOOL" Comment="TRUE = equipamento com modo intermitente" />
+      <VarDeclaration ID="E5B528FA2A3E5A83" Name="CFG_REVERSAO" Type="BOOL" Comment="TRUE = equipamento com reversao" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="074D328E856330C0" Name="cmdLigaManual" Type="BOOL" Comment="IHM: liga (TRUE) / desliga (FALSE) em manual" />
+      <VarDeclaration ID="520AB5A4EADBD8AE" Name="stpVelocidade" Type="REAL" Comment="IHM: velocidade (%)" />
+      <VarDeclaration ID="C49C9947FE6383D2" Name="cmdLigaIntermitente" Type="BOOL" Comment="IHM: liga (TRUE) / desliga (FALSE) o intermitente" />
+      <VarDeclaration ID="E18D01D6E7CD5F0A" Name="habilitaReversao" Type="BOOL" Comment="IHM: habilita (TRUE) / desabilita (FALSE) a reversao" />
+    </OutputVars>
+  </InterfaceList>
+  <FBNetwork>
+    <FB ID="3D0AD884E2E13669" Name="IThis" Type="UCT_Equipamento_HMI" x="1400" y="400" Namespace="Hidryco.HidrycoLib">
+      <Parameter Name="$5D1B6C6BF3A4B682" Value="TRUE" />
+    </FB>
+    <FB ID="F74965DB48DE64C6" Name="plcStart1" Type="plcStart" x="300" y="400" Namespace="SE.App2Base">
+      <Parameter Name="$Prio" Value="10" />
+    </FB>
+    <Input ID="70A516C5CA4155CA" Name="REQ" x="200" y="1400" Type="Event" />
+    <Input ID="93B31B867A532500" Name="STS_ANIMACAO" x="200" y="1460" Type="Data" />
+    <Input ID="98FD5EAA90BD9629" Name="STS_DEFEITO" x="200" y="1520" Type="Data" />
+    <Input ID="96E48787F8AC58C3" Name="STS_HORIMETRO_HORA" x="200" y="1580" Type="Data" />
+    <Input ID="CC220F735371196B" Name="STS_AUTOMATICO_SUBSISTEMA" x="200" y="1640" Type="Data" />
+    <Input ID="33285C93B9AAB2BC" Name="STS_VELOCIDADE" x="200" y="1700" Type="Data" />
+    <Input ID="3F39B194DE4581AB" Name="fbkCmdLigaManual" x="200" y="1760" Type="Data" />
+    <Input ID="F6AE4997ED76CC8B" Name="fbkCmdLigaIntermitente" x="200" y="1820" Type="Data" />
+    <Input ID="0E2695E0A2003068" Name="fbkHabilitaReversao" x="200" y="1880" Type="Data" />
+    <Input ID="6729E072E11CC02E" Name="CFG_VELOCIDADE" x="200" y="1940" Type="Data" />
+    <Input ID="B3CA2188BE2BF3D0" Name="CFG_INTERMITENTE" x="200" y="2000" Type="Data" />
+    <Input ID="E5B528FA2A3E5A83" Name="CFG_REVERSAO" x="200" y="2060" Type="Data" />
+    <Output ID="0ECDAB45E7B0C5AF" Name="E_ATUALIZA_COMANDO_LIGA_MANUAL" x="3200" y="1400" Type="Event" />
+    <Output ID="2D7A148B2A7AA879" Name="E_ATUALIZA_SETPOINT" x="3200" y="1460" Type="Event" />
+    <Output ID="453EBF0958E76CD5" Name="E_ATUALIZA_COMANDO_LIGA_INTERMITENTE" x="3200" y="1520" Type="Event" />
+    <Output ID="D9A88CBEE21DBA8E" Name="E_ATUALIZA_HABILITA_REVERSAO" x="3200" y="1580" Type="Event" />
+    <Output ID="074D328E856330C0" Name="cmdLigaManual" x="3200" y="1640" Type="Data" />
+    <Output ID="520AB5A4EADBD8AE" Name="stpVelocidade" x="3200" y="1700" Type="Data" />
+    <Output ID="C49C9947FE6383D2" Name="cmdLigaIntermitente" x="3200" y="1760" Type="Data" />
+    <Output ID="E18D01D6E7CD5F0A" Name="habilitaReversao" x="3200" y="1820" Type="Data" />
+    <EventConnections>
+      <Connection Source="$F74965DB48DE64C6.FIRST_INIT" Destination="$3D0AD884E2E13669.1CEAFF8E38E7E4D9" />
+      <Connection Source="$F74965DB48DE64C6.REDO_INIT" Destination="$3D0AD884E2E13669.1CEAFF8E38E7E4D9" />
+      <Connection Source="$3D0AD884E2E13669.F20AF722FCD3D50F" Destination="$F74965DB48DE64C6.ACK_FIRST" />
+      <Connection Source="$70A516C5CA4155CA" Destination="$3D0AD884E2E13669.54AE3FB5011654E8" />
+      <Connection Source="$3D0AD884E2E13669.E0B5E0321E48297B" Destination="$0ECDAB45E7B0C5AF" />
+      <Connection Source="$3D0AD884E2E13669.881A83865101816A" Destination="$2D7A148B2A7AA879" />
+      <Connection Source="$3D0AD884E2E13669.1A8D658BBAFE222A" Destination="$453EBF0958E76CD5" />
+      <Connection Source="$3D0AD884E2E13669.2737A4116453BCC4" Destination="$D9A88CBEE21DBA8E" />
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="$93B31B867A532500" Destination="$3D0AD884E2E13669.4B4FDE552ADC9C68" />
+      <Connection Source="$98FD5EAA90BD9629" Destination="$3D0AD884E2E13669.EA31C60917FB1D6D" />
+      <Connection Source="$96E48787F8AC58C3" Destination="$3D0AD884E2E13669.4B54BB6144F3C46D" />
+      <Connection Source="$CC220F735371196B" Destination="$3D0AD884E2E13669.9D0C0EF6DB35F17D" />
+      <Connection Source="$33285C93B9AAB2BC" Destination="$3D0AD884E2E13669.D888240C745C63F3" />
+      <Connection Source="$3F39B194DE4581AB" Destination="$3D0AD884E2E13669.6A12125F513587DD" />
+      <Connection Source="$F6AE4997ED76CC8B" Destination="$3D0AD884E2E13669.7FF4E2EA17E78B93" />
+      <Connection Source="$0E2695E0A2003068" Destination="$3D0AD884E2E13669.9580F45AE22E60AB" />
+      <Connection Source="$6729E072E11CC02E" Destination="$3D0AD884E2E13669.A1C7BF12A409E820" />
+      <Connection Source="$B3CA2188BE2BF3D0" Destination="$3D0AD884E2E13669.D4414309B266F29F" />
+      <Connection Source="$E5B528FA2A3E5A83" Destination="$3D0AD884E2E13669.0DAE64C721A46F8B" />
+      <Connection Source="$3D0AD884E2E13669.66C22661E31C14BE" Destination="$074D328E856330C0" />
+      <Connection Source="$3D0AD884E2E13669.089274AC41F05D45" Destination="$520AB5A4EADBD8AE" />
+      <Connection Source="$3D0AD884E2E13669.AB4A6D17BD605B89" Destination="$C49C9947FE6383D2" />
+      <Connection Source="$3D0AD884E2E13669.C63DB02CB8A0FA97" Destination="$E18D01D6E7CD5F0A" />
+    </DataConnections>
+  </FBNetwork>
+</FBType>
