@@ -20,19 +20,19 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 		private void InitializeComponent()
 		{
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary1 = new NxtControl.GuiFramework.PropertyDictionary();
-			NxtControl.GuiFramework.PropertyDictionary propertyDictionary2 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary3 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary4 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary2 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary5 = new NxtControl.GuiFramework.PropertyDictionary();
-			NxtControl.GuiFramework.PropertyDictionary propertyDictionary6 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary7 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary8 = new NxtControl.GuiFramework.PropertyDictionary();
-			NxtControl.GuiFramework.PropertyDictionary propertyDictionary9 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary6 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary10 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary11 = new NxtControl.GuiFramework.PropertyDictionary();
-			NxtControl.GuiFramework.PropertyDictionary propertyDictionary12 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary9 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary13 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary14 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary12 = new NxtControl.GuiFramework.PropertyDictionary();
 			this.fundo = new NxtControl.GuiFramework.Rectangle();
 			this.pnlHig = new NxtControl.GuiFramework.Rectangle();
 			this.tHig = new NxtControl.GuiFramework.FreeText();
@@ -98,7 +98,7 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			this.rCacamba = new NxtControl.GuiFramework.FreeText();
 			this.Peneira = new Hidryco.HidrycoLib.Symbols.UCT_Equipamento.sPeneira();
 			this.rNivel = new NxtControl.GuiFramework.FreeText();
-			this.vNivel = new System.HMI.Symbols.Base.Label<System.Single>();
+			this.vNivel = new System.HMI.Symbols.Base.Label<float>();
 			this.Raspador = new Hidryco.HidrycoLib.Symbols.UCT_Equipamento.sRaspador();
 			this.Rosca1 = new Hidryco.HidrycoLib.Symbols.UCT_Equipamento.sRosca();
 			this.Rosca2 = new Hidryco.HidrycoLib.Symbols.UCT_Equipamento.sRoscaInclinada();
@@ -117,7 +117,7 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			this.BombaGordura = new Hidryco.HidrycoLib.Symbols.Motor_Generico.sBomba();
 			this.rSaidaG = new NxtControl.GuiFramework.FreeText();
 			this.textoEtapa = new NxtControl.GuiFramework.FreeText();
-			this.vRest = new System.HMI.Symbols.Base.Label<System.Int16>();
+			this.vRest = new System.HMI.Symbols.Base.Label<short>();
 			this.pnlNiv = new NxtControl.GuiFramework.Rectangle();
 			this.tNiv = new NxtControl.GuiFramework.FreeText();
 			this.rn0 = new NxtControl.GuiFramework.FreeText();
@@ -314,8 +314,6 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			this.btnB1.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(160)), ((byte)(160)), ((byte)(160))), 1F, NxtControl.Drawing.DashStyle.Solid);
 			this.btnB1.Radius = 2D;
 			this.btnB1.Text = "Bomba 1";
-			this.btnB1.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.btnB1.TextColorMouseDown = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.btnB1.Use3DEffect = false;
 			this.btnB1.Click += new System.EventHandler(this.BtnB1Click);
 			// 
@@ -329,8 +327,6 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			this.btnB2.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(160)), ((byte)(160)), ((byte)(160))), 1F, NxtControl.Drawing.DashStyle.Solid);
 			this.btnB2.Radius = 2D;
 			this.btnB2.Text = "Bomba 2";
-			this.btnB2.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.btnB2.TextColorMouseDown = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.btnB2.Use3DEffect = false;
 			this.btnB2.Click += new System.EventHandler(this.BtnB2Click);
 			// 
@@ -368,8 +364,6 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			this.btnManPen.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(160)), ((byte)(160)), ((byte)(160))), 1F, NxtControl.Drawing.DashStyle.Solid);
 			this.btnManPen.Radius = 2D;
 			this.btnManPen.Text = "Manual";
-			this.btnManPen.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.btnManPen.TextColorMouseDown = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.btnManPen.Use3DEffect = false;
 			this.btnManPen.Click += new System.EventHandler(this.BtnManPenClick);
 			// 
@@ -383,8 +377,6 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			this.btnAutoPen.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(160)), ((byte)(160)), ((byte)(160))), 1F, NxtControl.Drawing.DashStyle.Solid);
 			this.btnAutoPen.Radius = 2D;
 			this.btnAutoPen.Text = "Automático";
-			this.btnAutoPen.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.btnAutoPen.TextColorMouseDown = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.btnAutoPen.Use3DEffect = false;
 			this.btnAutoPen.Click += new System.EventHandler(this.BtnAutoPenClick);
 			// 
@@ -398,8 +390,6 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			this.btnDesPen.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(160)), ((byte)(160)), ((byte)(160))), 1F, NxtControl.Drawing.DashStyle.Solid);
 			this.btnDesPen.Radius = 2D;
 			this.btnDesPen.Text = "Desliga";
-			this.btnDesPen.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.btnDesPen.TextColorMouseDown = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.btnDesPen.Use3DEffect = false;
 			this.btnDesPen.Click += new System.EventHandler(this.BtnDesPenClick);
 			// 
@@ -413,8 +403,6 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			this.btnLigPen.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(160)), ((byte)(160)), ((byte)(160))), 1F, NxtControl.Drawing.DashStyle.Solid);
 			this.btnLigPen.Radius = 2D;
 			this.btnLigPen.Text = "Liga";
-			this.btnLigPen.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.btnLigPen.TextColorMouseDown = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.btnLigPen.Use3DEffect = false;
 			this.btnLigPen.Click += new System.EventHandler(this.BtnLigPenClick);
 			// 
@@ -436,8 +424,6 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			this.btnManRos.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(160)), ((byte)(160)), ((byte)(160))), 1F, NxtControl.Drawing.DashStyle.Solid);
 			this.btnManRos.Radius = 2D;
 			this.btnManRos.Text = "Manual";
-			this.btnManRos.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.btnManRos.TextColorMouseDown = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.btnManRos.Use3DEffect = false;
 			this.btnManRos.Click += new System.EventHandler(this.BtnManRosClick);
 			// 
@@ -451,8 +437,6 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			this.btnAutoRos.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(160)), ((byte)(160)), ((byte)(160))), 1F, NxtControl.Drawing.DashStyle.Solid);
 			this.btnAutoRos.Radius = 2D;
 			this.btnAutoRos.Text = "Automático";
-			this.btnAutoRos.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.btnAutoRos.TextColorMouseDown = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.btnAutoRos.Use3DEffect = false;
 			this.btnAutoRos.Click += new System.EventHandler(this.BtnAutoRosClick);
 			// 
@@ -466,8 +450,6 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			this.btnDesRos.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(160)), ((byte)(160)), ((byte)(160))), 1F, NxtControl.Drawing.DashStyle.Solid);
 			this.btnDesRos.Radius = 2D;
 			this.btnDesRos.Text = "Desliga";
-			this.btnDesRos.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.btnDesRos.TextColorMouseDown = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.btnDesRos.Use3DEffect = false;
 			this.btnDesRos.Click += new System.EventHandler(this.BtnDesRosClick);
 			// 
@@ -481,8 +463,6 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			this.btnLigRos.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(160)), ((byte)(160)), ((byte)(160))), 1F, NxtControl.Drawing.DashStyle.Solid);
 			this.btnLigRos.Radius = 2D;
 			this.btnLigRos.Text = "Liga";
-			this.btnLigRos.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.btnLigRos.TextColorMouseDown = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.btnLigRos.Use3DEffect = false;
 			this.btnLigRos.Click += new System.EventHandler(this.BtnLigRosClick);
 			// 
@@ -504,8 +484,6 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			this.btnManRc.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(160)), ((byte)(160)), ((byte)(160))), 1F, NxtControl.Drawing.DashStyle.Solid);
 			this.btnManRc.Radius = 2D;
 			this.btnManRc.Text = "Manual";
-			this.btnManRc.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.btnManRc.TextColorMouseDown = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.btnManRc.Use3DEffect = false;
 			this.btnManRc.Click += new System.EventHandler(this.BtnManRcClick);
 			// 
@@ -519,8 +497,6 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			this.btnAutoRc.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(160)), ((byte)(160)), ((byte)(160))), 1F, NxtControl.Drawing.DashStyle.Solid);
 			this.btnAutoRc.Radius = 2D;
 			this.btnAutoRc.Text = "Automático";
-			this.btnAutoRc.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.btnAutoRc.TextColorMouseDown = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.btnAutoRc.Use3DEffect = false;
 			this.btnAutoRc.Click += new System.EventHandler(this.BtnAutoRcClick);
 			// 
@@ -534,8 +510,6 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			this.btnDesRc.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(160)), ((byte)(160)), ((byte)(160))), 1F, NxtControl.Drawing.DashStyle.Solid);
 			this.btnDesRc.Radius = 2D;
 			this.btnDesRc.Text = "Desliga";
-			this.btnDesRc.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.btnDesRc.TextColorMouseDown = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.btnDesRc.Use3DEffect = false;
 			this.btnDesRc.Click += new System.EventHandler(this.BtnDesRcClick);
 			// 
@@ -549,8 +523,6 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			this.btnLigRc.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(160)), ((byte)(160)), ((byte)(160))), 1F, NxtControl.Drawing.DashStyle.Solid);
 			this.btnLigRc.Radius = 2D;
 			this.btnLigRc.Text = "Liga";
-			this.btnLigRc.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.btnLigRc.TextColorMouseDown = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.btnLigRc.Use3DEffect = false;
 			this.btnLigRc.Click += new System.EventHandler(this.BtnLigRcClick);
 			// 
@@ -564,8 +536,6 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			this.btnReset.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(160)), ((byte)(160)), ((byte)(160))), 1F, NxtControl.Drawing.DashStyle.Solid);
 			this.btnReset.Radius = 2D;
 			this.btnReset.Text = "Reconhecer / Reset";
-			this.btnReset.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.btnReset.TextColorMouseDown = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.btnReset.Use3DEffect = false;
 			this.btnReset.Click += new System.EventHandler(this.BtnResetClick);
 			// 
@@ -580,8 +550,6 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			this.btnDetalhes.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(160)), ((byte)(160)), ((byte)(160))), 1F, NxtControl.Drawing.DashStyle.Solid);
 			this.btnDetalhes.Radius = 2D;
 			this.btnDetalhes.Text = "Detalhes";
-			this.btnDetalhes.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.btnDetalhes.TextColorMouseDown = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.btnDetalhes.Use3DEffect = false;
 			// 
 			// textoEstado
@@ -598,7 +566,6 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			this.alP1.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(230)), ((byte)(0)), ((byte)(0))));
 			this.alP1.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
 			this.alP1.Name = "alP1";
-			this.alP1.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
 			this.alP1.Visible = false;
 			// 
 			// alP1n
@@ -617,7 +584,6 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			this.alP2.Closed = true;
 			this.alP2.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
 			this.alP2.Name = "alP2";
-			this.alP2.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
 			this.alP2.Points.AddRange(new NxtControl.Drawing.PointF[] {
 			new NxtControl.Drawing.PointF(330D, 54D),
 			new NxtControl.Drawing.PointF(338D, 38D),
@@ -639,7 +605,6 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			this.alTxt.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.alTxt.Location = new NxtControl.Drawing.PointF(350D, 38D);
 			this.alTxt.Name = "alTxt";
-			this.alTxt.Text = "";
 			this.alTxt.Visible = false;
 			// 
 			// textoBloq
@@ -994,7 +959,6 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			// vl1
 			// 
 			this.vl1.Bounds = new NxtControl.Drawing.RectF(((float)(1180D)), ((float)(430D)), ((float)(20D)), ((float)(20D)));
-			this.vl1.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(255))));
 			this.vl1.Closed = true;
 			this.vl1.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
 			this.vl1.Name = "vl1";
@@ -1007,7 +971,6 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			// vl2
 			// 
 			this.vl2.Bounds = new NxtControl.Drawing.RectF(((float)(1200D)), ((float)(430D)), ((float)(20D)), ((float)(20D)));
-			this.vl2.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(255))));
 			this.vl2.Closed = true;
 			this.vl2.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
 			this.vl2.Name = "vl2";
@@ -1050,9 +1013,6 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			this.abrirValv.OpenFaceplates.Add(new NxtControl.GuiFramework.OpenFaceplate("fpDefault", NxtControl.GuiFramework.MouseButtonType.Click));
 			this.abrirValv.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("Transparent"), 1F, NxtControl.Drawing.DashStyle.Solid);
 			this.abrirValv.Radius = 2D;
-			this.abrirValv.Text = "";
-			this.abrirValv.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.abrirValv.TextColorMouseDown = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.abrirValv.Use3DEffect = false;
 			// 
 			// BombaGordura
@@ -1218,6 +1178,7 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			this.x_aCOM.Name = "x_aCOM";
 			this.x_aCOM.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
 			this.x_aCOM.TagName = "STS_ALARME_COM";
+			this.x_aCOM.Value = false;
 			this.x_aCOM.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.V_aCOMChanged);
 			this.x_aCOM.EndInit();
 			// 
@@ -1230,6 +1191,7 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			this.x_aEMERGENCIA.Name = "x_aEMERGENCIA";
 			this.x_aEMERGENCIA.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
 			this.x_aEMERGENCIA.TagName = "STS_ALARME_EMERGENCIA";
+			this.x_aEMERGENCIA.Value = false;
 			this.x_aEMERGENCIA.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.V_aEMERGENCIAChanged);
 			this.x_aEMERGENCIA.EndInit();
 			// 
@@ -1242,6 +1204,7 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			this.x_aDEFPEN.Name = "x_aDEFPEN";
 			this.x_aDEFPEN.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
 			this.x_aDEFPEN.TagName = "STS_ALARME_DEFPEN";
+			this.x_aDEFPEN.Value = false;
 			this.x_aDEFPEN.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.V_aDEFPENChanged);
 			this.x_aDEFPEN.EndInit();
 			// 
@@ -1254,6 +1217,7 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			this.x_aDEFB1.Name = "x_aDEFB1";
 			this.x_aDEFB1.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
 			this.x_aDEFB1.TagName = "STS_ALARME_DEFB1";
+			this.x_aDEFB1.Value = false;
 			this.x_aDEFB1.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.V_aDEFB1Changed);
 			this.x_aDEFB1.EndInit();
 			// 
@@ -1266,6 +1230,7 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			this.x_aDEFB2.Name = "x_aDEFB2";
 			this.x_aDEFB2.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
 			this.x_aDEFB2.TagName = "STS_ALARME_DEFB2";
+			this.x_aDEFB2.Value = false;
 			this.x_aDEFB2.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.V_aDEFB2Changed);
 			this.x_aDEFB2.EndInit();
 			// 
@@ -1278,6 +1243,7 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			this.x_aDEFCMP.Name = "x_aDEFCMP";
 			this.x_aDEFCMP.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
 			this.x_aDEFCMP.TagName = "STS_ALARME_DEFCMP";
+			this.x_aDEFCMP.Value = false;
 			this.x_aDEFCMP.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.V_aDEFCMPChanged);
 			this.x_aDEFCMP.EndInit();
 			// 
@@ -1290,6 +1256,7 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			this.x_aDEFRSP.Name = "x_aDEFRSP";
 			this.x_aDEFRSP.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
 			this.x_aDEFRSP.TagName = "STS_ALARME_DEFRSP";
+			this.x_aDEFRSP.Value = false;
 			this.x_aDEFRSP.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.V_aDEFRSPChanged);
 			this.x_aDEFRSP.EndInit();
 			// 
@@ -1302,6 +1269,7 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			this.x_aDEFR1.Name = "x_aDEFR1";
 			this.x_aDEFR1.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
 			this.x_aDEFR1.TagName = "STS_ALARME_DEFR1";
+			this.x_aDEFR1.Value = false;
 			this.x_aDEFR1.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.V_aDEFR1Changed);
 			this.x_aDEFR1.EndInit();
 			// 
@@ -1314,6 +1282,7 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			this.x_aDEFR2.Name = "x_aDEFR2";
 			this.x_aDEFR2.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
 			this.x_aDEFR2.TagName = "STS_ALARME_DEFR2";
+			this.x_aDEFR2.Value = false;
 			this.x_aDEFR2.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.V_aDEFR2Changed);
 			this.x_aDEFR2.EndInit();
 			// 
@@ -1326,6 +1295,7 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			this.x_aNIVELAGUA.Name = "x_aNIVELAGUA";
 			this.x_aNIVELAGUA.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
 			this.x_aNIVELAGUA.TagName = "STS_ALARME_NIVELAGUA";
+			this.x_aNIVELAGUA.Value = false;
 			this.x_aNIVELAGUA.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.V_aNIVELAGUAChanged);
 			this.x_aNIVELAGUA.EndInit();
 			// 
@@ -1338,6 +1308,7 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			this.x_aNIVELPENEIRA.Name = "x_aNIVELPENEIRA";
 			this.x_aNIVELPENEIRA.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
 			this.x_aNIVELPENEIRA.TagName = "STS_ALARME_NIVELPENEIRA";
+			this.x_aNIVELPENEIRA.Value = false;
 			this.x_aNIVELPENEIRA.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.V_aNIVELPENEIRAChanged);
 			this.x_aNIVELPENEIRA.EndInit();
 			// 
@@ -1350,6 +1321,7 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			this.x_eCOM.Name = "x_eCOM";
 			this.x_eCOM.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
 			this.x_eCOM.TagName = "STS_ALM_COM_EST";
+			this.x_eCOM.Value = ((byte)(0));
 			this.x_eCOM.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.V_eCOMChanged);
 			this.x_eCOM.EndInit();
 			// 
@@ -1362,6 +1334,7 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			this.x_eEMERGENCIA.Name = "x_eEMERGENCIA";
 			this.x_eEMERGENCIA.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
 			this.x_eEMERGENCIA.TagName = "STS_ALM_EMERGENCIA_EST";
+			this.x_eEMERGENCIA.Value = ((byte)(0));
 			this.x_eEMERGENCIA.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.V_eEMERGENCIAChanged);
 			this.x_eEMERGENCIA.EndInit();
 			// 
@@ -1374,6 +1347,7 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			this.x_eDEFPEN.Name = "x_eDEFPEN";
 			this.x_eDEFPEN.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
 			this.x_eDEFPEN.TagName = "STS_ALM_DEFPEN_EST";
+			this.x_eDEFPEN.Value = ((byte)(0));
 			this.x_eDEFPEN.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.V_eDEFPENChanged);
 			this.x_eDEFPEN.EndInit();
 			// 
@@ -1386,6 +1360,7 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			this.x_eDEFB1.Name = "x_eDEFB1";
 			this.x_eDEFB1.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
 			this.x_eDEFB1.TagName = "STS_ALM_DEFB1_EST";
+			this.x_eDEFB1.Value = ((byte)(0));
 			this.x_eDEFB1.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.V_eDEFB1Changed);
 			this.x_eDEFB1.EndInit();
 			// 
@@ -1398,6 +1373,7 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			this.x_eDEFB2.Name = "x_eDEFB2";
 			this.x_eDEFB2.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
 			this.x_eDEFB2.TagName = "STS_ALM_DEFB2_EST";
+			this.x_eDEFB2.Value = ((byte)(0));
 			this.x_eDEFB2.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.V_eDEFB2Changed);
 			this.x_eDEFB2.EndInit();
 			// 
@@ -1410,6 +1386,7 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			this.x_eDEFCMP.Name = "x_eDEFCMP";
 			this.x_eDEFCMP.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
 			this.x_eDEFCMP.TagName = "STS_ALM_DEFCMP_EST";
+			this.x_eDEFCMP.Value = ((byte)(0));
 			this.x_eDEFCMP.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.V_eDEFCMPChanged);
 			this.x_eDEFCMP.EndInit();
 			// 
@@ -1422,6 +1399,7 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			this.x_eDEFRSP.Name = "x_eDEFRSP";
 			this.x_eDEFRSP.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
 			this.x_eDEFRSP.TagName = "STS_ALM_DEFRSP_EST";
+			this.x_eDEFRSP.Value = ((byte)(0));
 			this.x_eDEFRSP.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.V_eDEFRSPChanged);
 			this.x_eDEFRSP.EndInit();
 			// 
@@ -1434,6 +1412,7 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			this.x_eDEFR1.Name = "x_eDEFR1";
 			this.x_eDEFR1.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
 			this.x_eDEFR1.TagName = "STS_ALM_DEFR1_EST";
+			this.x_eDEFR1.Value = ((byte)(0));
 			this.x_eDEFR1.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.V_eDEFR1Changed);
 			this.x_eDEFR1.EndInit();
 			// 
@@ -1446,6 +1425,7 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			this.x_eDEFR2.Name = "x_eDEFR2";
 			this.x_eDEFR2.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
 			this.x_eDEFR2.TagName = "STS_ALM_DEFR2_EST";
+			this.x_eDEFR2.Value = ((byte)(0));
 			this.x_eDEFR2.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.V_eDEFR2Changed);
 			this.x_eDEFR2.EndInit();
 			// 
@@ -1458,6 +1438,7 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			this.x_eNIVELAGUA.Name = "x_eNIVELAGUA";
 			this.x_eNIVELAGUA.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
 			this.x_eNIVELAGUA.TagName = "STS_ALM_NIVELAGUA_EST";
+			this.x_eNIVELAGUA.Value = ((byte)(0));
 			this.x_eNIVELAGUA.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.V_eNIVELAGUAChanged);
 			this.x_eNIVELAGUA.EndInit();
 			// 
@@ -1470,6 +1451,7 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			this.x_eNIVELPENEIRA.Name = "x_eNIVELPENEIRA";
 			this.x_eNIVELPENEIRA.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
 			this.x_eNIVELPENEIRA.TagName = "STS_ALM_NIVELPENEIRA_EST";
+			this.x_eNIVELPENEIRA.Value = ((byte)(0));
 			this.x_eNIVELPENEIRA.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.V_eNIVELPENEIRAChanged);
 			this.x_eNIVELPENEIRA.EndInit();
 			// 
@@ -1482,6 +1464,7 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			this.x_disp.Name = "x_disp";
 			this.x_disp.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
 			this.x_disp.TagName = "STS_DISPONIVEL";
+			this.x_disp.Value = false;
 			this.x_disp.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.V_dispChanged);
 			this.x_disp.EndInit();
 			// 
@@ -1494,6 +1477,7 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			this.x_hab.Name = "x_hab";
 			this.x_hab.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
 			this.x_hab.TagName = "STS_HABILITADA";
+			this.x_hab.Value = false;
 			this.x_hab.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.V_habChanged);
 			this.x_hab.EndInit();
 			// 
@@ -1506,6 +1490,7 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			this.x_bloq.Name = "x_bloq";
 			this.x_bloq.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
 			this.x_bloq.TagName = "STS_BLOQUEIO_EEE";
+			this.x_bloq.Value = false;
 			this.x_bloq.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.V_bloqChanged);
 			this.x_bloq.EndInit();
 			// 
@@ -1518,6 +1503,7 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			this.x_autoPen.Name = "x_autoPen";
 			this.x_autoPen.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
 			this.x_autoPen.TagName = "STS_AUTOMATICO_PENEIRA";
+			this.x_autoPen.Value = false;
 			this.x_autoPen.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.V_autoPenChanged);
 			this.x_autoPen.EndInit();
 			// 
@@ -1530,6 +1516,7 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			this.x_autoRos.Name = "x_autoRos";
 			this.x_autoRos.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
 			this.x_autoRos.TagName = "STS_AUTOMATICO_ROSCAS";
+			this.x_autoRos.Value = false;
 			this.x_autoRos.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.V_autoRosChanged);
 			this.x_autoRos.EndInit();
 			// 
@@ -1542,6 +1529,7 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			this.x_autoRc.Name = "x_autoRc";
 			this.x_autoRc.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
 			this.x_autoRc.TagName = "STS_AUTOMATICO_RASPCOMP";
+			this.x_autoRc.Value = false;
 			this.x_autoRc.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.V_autoRcChanged);
 			this.x_autoRc.EndInit();
 			// 
@@ -1554,6 +1542,7 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			this.x_ligPen.Name = "x_ligPen";
 			this.x_ligPen.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
 			this.x_ligPen.TagName = "STS_LIGA_AUTOMATICO_PENEIRA";
+			this.x_ligPen.Value = false;
 			this.x_ligPen.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.V_ligPenChanged);
 			this.x_ligPen.EndInit();
 			// 
@@ -1566,6 +1555,7 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			this.x_ligRos.Name = "x_ligRos";
 			this.x_ligRos.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
 			this.x_ligRos.TagName = "STS_LIGA_AUTOMATICO_ROSCAS";
+			this.x_ligRos.Value = false;
 			this.x_ligRos.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.V_ligRosChanged);
 			this.x_ligRos.EndInit();
 			// 
@@ -1578,6 +1568,7 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			this.x_ligRc.Name = "x_ligRc";
 			this.x_ligRc.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
 			this.x_ligRc.TagName = "STS_LIGA_AUTOMATICO_RASPCOMP";
+			this.x_ligRc.Value = false;
 			this.x_ligRc.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.V_ligRcChanged);
 			this.x_ligRc.EndInit();
 			// 
@@ -1590,6 +1581,7 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			this.x_selB2.Name = "x_selB2";
 			this.x_selB2.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
 			this.x_selB2.TagName = "STS_SELECAO_BOMBA";
+			this.x_selB2.Value = false;
 			this.x_selB2.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.V_selB2Changed);
 			this.x_selB2.EndInit();
 			// 
@@ -1602,6 +1594,7 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			this.x_valv.Name = "x_valv";
 			this.x_valv.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
 			this.x_valv.TagName = "STS_VALVULA_LAVAGEM";
+			this.x_valv.Value = false;
 			this.x_valv.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.V_valvChanged);
 			this.x_valv.EndInit();
 			// 
@@ -1614,6 +1607,7 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			this.x_etapa.Name = "x_etapa";
 			this.x_etapa.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
 			this.x_etapa.TagName = "STS_ETAPA_GORDURA";
+			this.x_etapa.Value = ((short)(0));
 			this.x_etapa.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.V_etapaChanged);
 			this.x_etapa.EndInit();
 			// 
@@ -1626,12 +1620,12 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			this.x_nAltoG.Name = "x_nAltoG";
 			this.x_nAltoG.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
 			this.x_nAltoG.TagName = "STS_NIVEL_ALTO_TANQUE_GORDURA";
+			this.x_nAltoG.Value = false;
 			this.x_nAltoG.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.V_nAltoGChanged);
 			this.x_nAltoG.EndInit();
 			// 
 			// sSkid
 			// 
-			this.Name = "sSkid";
 			this.Shapes.AddRange(new System.ComponentModel.IComponent[] {
 			this.fundo,
 			this.pnlHig,
@@ -1761,7 +1755,7 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			this.x_valv,
 			this.x_etapa,
 			this.x_nAltoG});
-			this.SymbolSize = new System.Drawing.Size(1366, 698);
+			this.SymbolSize = new System.Drawing.Size(1384, 670);
 
 		}
 		private NxtControl.GuiFramework.Rectangle fundo;
