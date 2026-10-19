@@ -593,6 +593,7 @@ namespace Hidryco.HidrycoLib.Symbols.UV_Trojan
 			this.xEMEN,
 			this.xELIM,
 			this.abrir});
+			this.SymbolSize = new System.Drawing.Size(300, 112);
 
 		}
 		private NxtControl.GuiFramework.Rectangle fundo;

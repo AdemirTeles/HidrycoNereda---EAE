@@ -1246,6 +1246,160 @@ stack Trace:
   }
 }
 
+namespace Hidryco.HidrycoLib.Symbols.UV_Trojan
+{
+  partial class sCanal1
+  {
+
+    private event EventHandler<Hidryco.HidrycoLib.Symbols.UV_Trojan.LOAD_PERS_DATAEventArgs> LOAD_PERS_DATA_Fired;
+
+    private event EventHandler<Hidryco.HidrycoLib.Symbols.UV_Trojan.REQEventArgs> REQ_Fired;
+
+    protected override void OnEndInit()
+    {
+      if (LOAD_PERS_DATA_Fired != null)
+        AttachEventInput(0);
+      if (REQ_Fired != null)
+        AttachEventInput(1);
+
+    }
+
+    protected override void FireEventCallback(int channelId, int cookie, int eventIndex)
+    {
+      switch(eventIndex)
+      {
+        default:
+          break;
+        case 0:
+          if (LOAD_PERS_DATA_Fired != null)
+          {
+            try
+            {
+              LOAD_PERS_DATA_Fired(this, new Hidryco.HidrycoLib.Symbols.UV_Trojan.LOAD_PERS_DATAEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","LOAD_PERS_DATA_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break; 
+        case 1:
+          if (REQ_Fired != null)
+          {
+            try
+            {
+              REQ_Fired(this, new Hidryco.HidrycoLib.Symbols.UV_Trojan.REQEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","REQ_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break; 
+
+      }
+    }
+    public bool FireEvent_E_RESET(System.Boolean CMD_RESET)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {CMD_RESET});
+    }
+    public bool FireEvent_E_RESET(Hidryco.HidrycoLib.Symbols.UV_Trojan.E_RESETEventArgs ea)
+    {
+      object[] _values_ = new object[1];
+      if (ea.CMD_RESET.HasValue) _values_[0] = ea.CMD_RESET.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
+    }
+    public bool FireEvent_E_RESET(System.Boolean CMD_RESET, bool ignore_CMD_RESET)
+    {
+      object[] _values_ = new object[1];
+      if (!ignore_CMD_RESET) _values_[0] = CMD_RESET;
+      return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
+    }
+
+  }
+}
+
+namespace Hidryco.HidrycoLib.Symbols.UV_Trojan
+{
+  partial class sCanal2
+  {
+
+    private event EventHandler<Hidryco.HidrycoLib.Symbols.UV_Trojan.LOAD_PERS_DATAEventArgs> LOAD_PERS_DATA_Fired;
+
+    private event EventHandler<Hidryco.HidrycoLib.Symbols.UV_Trojan.REQEventArgs> REQ_Fired;
+
+    protected override void OnEndInit()
+    {
+      if (LOAD_PERS_DATA_Fired != null)
+        AttachEventInput(0);
+      if (REQ_Fired != null)
+        AttachEventInput(1);
+
+    }
+
+    protected override void FireEventCallback(int channelId, int cookie, int eventIndex)
+    {
+      switch(eventIndex)
+      {
+        default:
+          break;
+        case 0:
+          if (LOAD_PERS_DATA_Fired != null)
+          {
+            try
+            {
+              LOAD_PERS_DATA_Fired(this, new Hidryco.HidrycoLib.Symbols.UV_Trojan.LOAD_PERS_DATAEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","LOAD_PERS_DATA_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break; 
+        case 1:
+          if (REQ_Fired != null)
+          {
+            try
+            {
+              REQ_Fired(this, new Hidryco.HidrycoLib.Symbols.UV_Trojan.REQEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","REQ_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break; 
+
+      }
+    }
+    public bool FireEvent_E_RESET(System.Boolean CMD_RESET)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {CMD_RESET});
+    }
+    public bool FireEvent_E_RESET(Hidryco.HidrycoLib.Symbols.UV_Trojan.E_RESETEventArgs ea)
+    {
+      object[] _values_ = new object[1];
+      if (ea.CMD_RESET.HasValue) _values_[0] = ea.CMD_RESET.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
+    }
+    public bool FireEvent_E_RESET(System.Boolean CMD_RESET, bool ignore_CMD_RESET)
+    {
+      object[] _values_ = new object[1];
+      if (!ignore_CMD_RESET) _values_[0] = CMD_RESET;
+      return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
+    }
+
+  }
+}
+
 namespace Hidryco.HidrycoLib.Faceplates.UV_Trojan
 {
   partial class fpDefault
