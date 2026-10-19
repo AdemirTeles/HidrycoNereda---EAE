@@ -1,0 +1,489 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="b35c8a41-0d79-3721-eaed-dd872cf5fd7c" Name="basicValvulaCoester" Comment="Logica do atuador Coester CSR (Modbus TCP)" Namespace="Hidryco.HidrycoLib">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Hidryco" Version="1.0" Author="Hidryco" Date="19/10/2026" Remarks="1.0: leitura Words 1-9/36/86/87, escrita Words 1-2; modulante (posicionamento continuo) ou on/off; falhas memorizadas, posicao nao atingida, quitar alarmes por 3 s" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="BC3FDAAC48C266C9" Name="INIT" Comment="Inicializacao (configuracao da instancia)">
+        <With Var="cfgModulante" />
+        <With Var="cfgPosicaoMin" />
+        <With Var="cfgPosicaoMax" />
+        <With Var="cfgPartidasDiaMax" />
+      </Event>
+      <Event ID="439C5B98809C2189" Name="REQ_CMD" Comment="Comando do processo (automatico)">
+        <With Var="cmdAbrirAutomatico" />
+        <With Var="cmdFecharAutomatico" />
+        <With Var="stpPosicaoAutomatico" />
+      </Event>
+      <Event ID="9A76CBB51054FCFA" Name="REQ_ILCK" Comment="Intertravamentos">
+        <With Var="ilkGeral" />
+        <With Var="ilkAutomatico" />
+        <With Var="ilkManual" />
+      </Event>
+      <Event ID="B53852AF9F22A018" Name="REQ_FB1" Comment="Leitura Modbus: status 1/2 e alarmes 1/2 (Words 1 a 4)">
+        <With Var="fldW01" />
+        <With Var="fldW02" />
+        <With Var="fldW03" />
+        <With Var="fldW04" />
+      </Event>
+      <Event ID="1122F70F08541858" Name="REQ_FB2" Comment="Leitura Modbus: posicao, torque, tempo de percurso, temperatura (Words 5 a 8)">
+        <With Var="fldW05" />
+        <With Var="fldW06" />
+        <With Var="fldW07" />
+        <With Var="fldW08" />
+      </Event>
+      <Event ID="A294594AC3667AFD" Name="REQ_FB3" Comment="Leitura Modbus: torque %, opcionais, partidas/dia (Words 9, 36, 86, 87)">
+        <With Var="fldW09" />
+        <With Var="fldW36" />
+        <With Var="fldW86" />
+        <With Var="fldW87" />
+      </Event>
+      <Event ID="45BC53B715393160" Name="REQ_COM" Comment="Status da conexao Modbus (connStatusInt)">
+        <With Var="fldConexao" />
+      </Event>
+      <Event ID="38061816A8BE25E9" Name="REQ_MODE" Comment="IHM: modo de operacao">
+        <With Var="hmiAutomatico" />
+      </Event>
+      <Event ID="381236404F15E6E1" Name="REQ_MANUAL" Comment="IHM: comando manual">
+        <With Var="hmiCmdManual" />
+        <With Var="hmiPosicaoManual" />
+      </Event>
+      <Event ID="0278FF007F66B823" Name="REQ_PARA" Comment="IHM: parametros">
+        <With Var="stpTempoFalhaPosicao" />
+        <With Var="stpToleranciaPosicao" />
+      </Event>
+      <Event ID="3A4B67BCD45EEA9F" Name="REQ_RESET" Comment="IHM: reset de falhas">
+        <With Var="hmiResetFalha" />
+      </Event>
+      <Event ID="E0357D841C57E206" Name="REQ_RESET_PROC" Comment="Processo: reset de falhas">
+        <With Var="cmdResetFalhas" />
+      </Event>
+      <Event ID="AEE5258FE28533BC" Name="TICK" Comment="Base de tempo de 1 s" />
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="2C2FA7A6E9BF9047" Name="INITO" Comment="Inicializacao concluida" />
+      <Event ID="5BDBF19AA0AAE2FE" Name="CNF_OUT" Comment="Escrita Modbus (Word 1 comando, Word 2 posicao)">
+        <With Var="acmW01" />
+        <With Var="acmW02" />
+      </Event>
+      <Event ID="8A6711B6046FDA6A" Name="CNF" Comment="Status para o processo (so na mudanca)">
+        <With Var="stsDisponivelAutomatico" />
+        <With Var="stsAberta" />
+        <With Var="stsFechada" />
+        <With Var="stsPosicao" />
+        <With Var="stsRemoto" />
+        <With Var="stsAutomatico" />
+        <With Var="stsFalha" />
+        <With Var="stsComunicacaoOK" />
+      </Event>
+      <Event ID="990117E8CD2B8B73" Name="CNF_HMI" Comment="Status para a IHM e alarmes">
+        <With Var="stsComunicacaoOK" />
+        <With Var="stsRemoto" />
+        <With Var="stsLocal" />
+        <With Var="stsDesligado" />
+        <With Var="stsAutomatico" />
+        <With Var="stsAberta" />
+        <With Var="stsFechada" />
+        <With Var="stsIntermediaria" />
+        <With Var="stsAbrindo" />
+        <With Var="stsFechando" />
+        <With Var="stsVolante" />
+        <With Var="stsPosicao" />
+        <With Var="stsPosicaoReferencia" />
+        <With Var="stsTorque" />
+        <With Var="stsTorquePct" />
+        <With Var="stsTemperatura" />
+        <With Var="stsTempoPercurso" />
+        <With Var="stsPartidasDia" />
+        <With Var="stsPartidasDiaMax" />
+        <With Var="stsModoContinuo" />
+        <With Var="stsModulante" />
+        <With Var="stsCmdManual" />
+        <With Var="stsFalhaComunicacao" />
+        <With Var="stsFalhaAtuador" />
+        <With Var="stsFalhaPosicao" />
+        <With Var="stsCodigoFalha" />
+        <With Var="stsBloqueado" />
+        <With Var="stsDisponivelAutomatico" />
+        <With Var="stsAlarme" />
+        <With Var="stsAvisoConfig" />
+        <With Var="stsAvisoPartidas" />
+        <With Var="stsAnimacao" />
+        <With Var="stsStatus2" />
+        <With Var="stsAlarme1" />
+        <With Var="stsAlarme2" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="EC14950A36464D14" Name="cfgModulante" Type="BOOL" InitialValue="FALSE" Comment="TRUE = valvula modulante: atuador em posicionamento continuo, CLP escreve so a posicao (Word 2)" />
+      <VarDeclaration ID="410C490809D6916D" Name="cfgPosicaoMin" Type="REAL" InitialValue="0.0" Comment="Limite minimo da posicao no automatico (%)" />
+      <VarDeclaration ID="9DB83B313D3D4707" Name="cfgPosicaoMax" Type="REAL" InitialValue="100.0" Comment="Limite maximo da posicao no automatico (%)" />
+      <VarDeclaration ID="0008094B2F324685" Name="cfgPartidasDiaMax" Type="INT" InitialValue="0" Comment="Aviso se as partidas do dia anterior passarem disto (0 = sem aviso)" />
+      <VarDeclaration ID="70687EF23AE88FC9" Name="cmdAbrirAutomatico" Type="BOOL" Comment="Processo: abrir (valvula on/off)" />
+      <VarDeclaration ID="F2C6EF86A9B85995" Name="cmdFecharAutomatico" Type="BOOL" Comment="Processo: fechar (valvula on/off)" />
+      <VarDeclaration ID="0F827E892CBAF45A" Name="stpPosicaoAutomatico" Type="REAL" Comment="Processo: posicao desejada (%) - valvula modulante" />
+      <VarDeclaration ID="F5A89B14C965772F" Name="ilkGeral" Type="BOOL" Comment="Intertravamento geral: mantem a posicao" />
+      <VarDeclaration ID="B108A8663BF6F01D" Name="ilkAutomatico" Type="BOOL" Comment="Intertravamento so do automatico" />
+      <VarDeclaration ID="AD9606711ECD0A6E" Name="ilkManual" Type="BOOL" Comment="Intertravamento so do manual" />
+      <VarDeclaration ID="3192419CBD3456AF" Name="fldW01" Type="INT" Comment="Word 1: bits de status 1" />
+      <VarDeclaration ID="2E741C6D9D58AA99" Name="fldW02" Type="INT" Comment="Word 2: bits de status 2" />
+      <VarDeclaration ID="EEA997BD3624627A" Name="fldW03" Type="INT" Comment="Word 3: bits de alarme 1" />
+      <VarDeclaration ID="02686A07CF0DEA75" Name="fldW04" Type="INT" Comment="Word 4: bits de alarme 2" />
+      <VarDeclaration ID="4CF28D0E5B603273" Name="fldW05" Type="INT" Comment="Word 5: posicao (%)" />
+      <VarDeclaration ID="71BCBB12C2AF0796" Name="fldW06" Type="INT" Comment="Word 6: torque (Nm)" />
+      <VarDeclaration ID="A8A879D27B091910" Name="fldW07" Type="INT" Comment="Word 7: tempo de percurso (s)" />
+      <VarDeclaration ID="5FC4C940D239F7B7" Name="fldW08" Type="INT" Comment="Word 8: temperatura (valor - 19 = graus C)" />
+      <VarDeclaration ID="8966B61142E1C2AB" Name="fldW09" Type="INT" Comment="Word 9: torque (%)" />
+      <VarDeclaration ID="B732CC35D8316C22" Name="fldW36" Type="INT" Comment="Word 36: bits de opcionais" />
+      <VarDeclaration ID="B639CAC66B51D265" Name="fldW86" Type="INT" Comment="Word 86: partidas no dia anterior" />
+      <VarDeclaration ID="530128CBF41BDA17" Name="fldW87" Type="INT" Comment="Word 87: maximo de partidas por dia" />
+      <VarDeclaration ID="93F81E7F7C459083" Name="fldConexao" Type="INT" Comment="connStatusInt do escravo Modbus (1 = online)" />
+      <VarDeclaration ID="FE01ADD91E2DE6AA" Name="hmiAutomatico" Type="BOOL" Comment="IHM: TRUE = automatico" />
+      <VarDeclaration ID="0AFFB7CCAAAE4650" Name="hmiCmdManual" Type="INT" Comment="IHM: 0 parar, 1 abrir, 2 fechar, 3 posicionar" />
+      <VarDeclaration ID="2953209EDB5B5D08" Name="hmiPosicaoManual" Type="REAL" Comment="IHM: posicao manual (%)" />
+      <VarDeclaration ID="C7AB5DFE5DE027AD" Name="stpTempoFalhaPosicao" Type="INT" Comment="Tempo maximo para atingir a posicao (s); 0 = sem supervisao" />
+      <VarDeclaration ID="33A1A871455C269D" Name="stpToleranciaPosicao" Type="REAL" Comment="Tolerancia da posicao (%)" />
+      <VarDeclaration ID="06F0657BBA388BF2" Name="hmiResetFalha" Type="BOOL" Comment="IHM: reset de falhas" />
+      <VarDeclaration ID="E15FF261880BC83D" Name="cmdResetFalhas" Type="BOOL" Comment="Processo: reset de falhas (vale com TRUE)" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="AC804A87A5A79AB2" Name="acmW01" Type="INT" Comment="Word 1 escrita: b0 abrir, b1 fechar, b2 parar, b4 posicionar, b8 quitar alarmes" />
+      <VarDeclaration ID="4FD4131076BF837A" Name="acmW02" Type="INT" Comment="Word 2 escrita: posicao desejada (%)" />
+      <VarDeclaration ID="BCCB0E0F9BF49DCB" Name="stsComunicacaoOK" Type="BOOL" Comment="Comunicacao Modbus com o atuador OK" />
+      <VarDeclaration ID="C659D358952CD6B7" Name="stsRemoto" Type="BOOL" Comment="Seletor do atuador em Remoto" />
+      <VarDeclaration ID="85BCBF8B868D0FA4" Name="stsLocal" Type="BOOL" Comment="Seletor do atuador em Local" />
+      <VarDeclaration ID="75E55D8876A4AB2E" Name="stsDesligado" Type="BOOL" Comment="Seletor do atuador em Desligado" />
+      <VarDeclaration ID="C86F8A1F62826E46" Name="stsAutomatico" Type="BOOL" Comment="Modo automatico (CLP)" />
+      <VarDeclaration ID="E6D08F90D5C52C33" Name="stsAberta" Type="BOOL" Comment="Posicao aberta" />
+      <VarDeclaration ID="5DD78840DE028F7B" Name="stsFechada" Type="BOOL" Comment="Posicao fechada" />
+      <VarDeclaration ID="00643AE4F2863758" Name="stsIntermediaria" Type="BOOL" Comment="Posicao intermediaria" />
+      <VarDeclaration ID="32153BE2C861ECF0" Name="stsAbrindo" Type="BOOL" Comment="Em movimento de abertura" />
+      <VarDeclaration ID="9AABFB91073A915A" Name="stsFechando" Type="BOOL" Comment="Em movimento de fechamento" />
+      <VarDeclaration ID="0377F31FB4BC212E" Name="stsVolante" Type="BOOL" Comment="Movimento manual pelo volante" />
+      <VarDeclaration ID="B46169A18CD32F7C" Name="stsPosicao" Type="REAL" Comment="Posicao atual (%)" />
+      <VarDeclaration ID="3B6F475C569C5069" Name="stsPosicaoReferencia" Type="REAL" Comment="Posicao enviada ao atuador (%)" />
+      <VarDeclaration ID="F1568A13AC3AEFBE" Name="stsTorque" Type="INT" Comment="Torque maximo do ultimo comando (Nm)" />
+      <VarDeclaration ID="71F9AE205389F66A" Name="stsTorquePct" Type="INT" Comment="Torque relativo ao limite programado (%)" />
+      <VarDeclaration ID="EE389DE2DBE99516" Name="stsTemperatura" Type="INT" Comment="Temperatura interna do atuador (graus C)" />
+      <VarDeclaration ID="A99EAB43BF4ADEB5" Name="stsTempoPercurso" Type="INT" Comment="Tempo do ultimo movimento (s)" />
+      <VarDeclaration ID="A3AC5D7D39845C2F" Name="stsPartidasDia" Type="INT" Comment="Partidas do motor no dia anterior" />
+      <VarDeclaration ID="F7CC3A22744D1368" Name="stsPartidasDiaMax" Type="INT" Comment="Maior numero de partidas por dia registrado" />
+      <VarDeclaration ID="4F78B2448EF3E2AC" Name="stsModoContinuo" Type="BOOL" Comment="Atuador programado em posicionamento continuo (Word 36 b12)" />
+      <VarDeclaration ID="15B91D4F0D7EBACD" Name="stsModulante" Type="BOOL" Comment="Configuracao da instancia: valvula modulante" />
+      <VarDeclaration ID="8F1145FAD0EA7D30" Name="stsCmdManual" Type="INT" Comment="Comando manual atual: 0 parar, 1 abrir, 2 fechar, 3 posicionar" />
+      <VarDeclaration ID="08539AB6A2423C74" Name="stsFalhaComunicacao" Type="BOOL" Comment="Falha de comunicacao Modbus" />
+      <VarDeclaration ID="1E38EF76B7197DEE" Name="stsFalhaAtuador" Type="BOOL" Comment="Falha do atuador memorizada (exige reset)" />
+      <VarDeclaration ID="A7375D096F25E9A0" Name="stsFalhaPosicao" Type="BOOL" Comment="Posicao nao atingida no tempo (memorizada)" />
+      <VarDeclaration ID="46F7138E9A587B4E" Name="stsCodigoFalha" Type="INT" Comment="Codigo da falha do atuador (texto na IHM)" />
+      <VarDeclaration ID="DD326BA823A25366" Name="stsBloqueado" Type="BOOL" Comment="Intertravamento ativo" />
+      <VarDeclaration ID="99653724F6BC8F08" Name="stsDisponivelAutomatico" Type="BOOL" Comment="Pode ser comandada pelo automatico agora" />
+      <VarDeclaration ID="BDE79BC355DC217B" Name="stsAlarme" Type="BOOL" Comment="Algum alarme da valvula" />
+      <VarDeclaration ID="003D99BA219BA018" Name="stsAvisoConfig" Type="BOOL" Comment="Valvula modulante com o atuador fora do posicionamento continuo" />
+      <VarDeclaration ID="417216583F2DBCE9" Name="stsAvisoPartidas" Type="BOOL" Comment="Partidas do dia anterior acima do limite configurado" />
+      <VarDeclaration ID="D71B40294CEB30AA" Name="stsAnimacao" Type="INT" Comment="0 fechada, 1 aberta, 2 intermediaria, 3 em movimento, 4 falha, 5 fora de remoto, 6 sem comunicacao" />
+      <VarDeclaration ID="DB7EA302241EF8BC" Name="stsStatus2" Type="INT" Comment="Word 2 do atuador (diagnostico)" />
+      <VarDeclaration ID="51C9C3E1B4E288BC" Name="stsAlarme1" Type="INT" Comment="Word 3 do atuador (diagnostico)" />
+      <VarDeclaration ID="7A82F28321EB8D2C" Name="stsAlarme2" Type="INT" Comment="Word 4 do atuador (diagnostico)" />
+      <VarDeclaration ID="9F9558ECB3ECDED1" Name="stsFalha" Type="BOOL" Comment="Alguma falha memorizada (exige reset)" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="53606d8b-b985-b14b-741e-1566ea99bc4f">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="algValvula" />
+    <InternalVars>
+      <VarDeclaration ID="F2565D807373C52D" Name="initDone" Type="BOOL" Comment="Bloco inicializado" />
+      <VarDeclaration ID="A968BE911714348D" Name="comRecebido" Type="BOOL" Comment="Status de conexao recebido ao menos uma vez" />
+      <VarDeclaration ID="2701F24A3AB099EC" Name="bComOk" Type="BOOL" />
+      <VarDeclaration ID="EB235CBA46C9CBA9" Name="w01" Type="WORD" />
+      <VarDeclaration ID="780BCB8B9BD64340" Name="w02" Type="WORD" />
+      <VarDeclaration ID="C2F21AB175448E6D" Name="w03" Type="WORD" />
+      <VarDeclaration ID="D1FA84F95A3F8710" Name="w04" Type="WORD" />
+      <VarDeclaration ID="A051AD74A7908293" Name="w36" Type="WORD" />
+      <VarDeclaration ID="38EBF33532308111" Name="wCmd" Type="WORD" Comment="Palavra de comando montada" />
+      <VarDeclaration ID="330CF53F4CEFC6FF" Name="bAuto" Type="BOOL" InitialValue="TRUE" Comment="Modo automatico (partida em automatico)" />
+      <VarDeclaration ID="93D62C08102D9ED6" Name="bAutoAnt" Type="BOOL" InitialValue="TRUE" />
+      <VarDeclaration ID="D320B6F502C3ABAB" Name="bCmdMan" Type="INT" Comment="Comando manual memorizado" />
+      <VarDeclaration ID="94EE2B556A2E72FE" Name="bSpMan" Type="REAL" Comment="Posicao manual memorizada" />
+      <VarDeclaration ID="B68B6D570C7E2CAF" Name="bSp" Type="REAL" Comment="Posicao enviada" />
+      <VarDeclaration ID="8ED4FC01C21C5983" Name="bModo" Type="INT" Comment="0 nenhum, 1 abrir, 2 fechar, 3 posicionar, 4 parar" />
+      <VarDeclaration ID="CEF38318FFBB2CFA" Name="bIlk" Type="BOOL" />
+      <VarDeclaration ID="272A08C0C19FBFBA" Name="bPode" Type="BOOL" Comment="Remoto, comunicacao OK, sem intertravamento e sem falha" />
+      <VarDeclaration ID="F87C38AD348A51A8" Name="bFalhaAtiva" Type="BOOL" Comment="Falha do atuador ativa agora" />
+      <VarDeclaration ID="89965EEC4DAF3083" Name="codAtivo" Type="INT" />
+      <VarDeclaration ID="03A4C554D7821F27" Name="tPos" Type="INT" Comment="Segundos fora da posicao" />
+      <VarDeclaration ID="E9D0BAF92D8A2244" Name="tReset" Type="INT" Comment="Segundos restantes do pulso de quitar alarmes" />
+      <VarDeclaration ID="7A54CDBB17C30D62" Name="rDesvio" Type="REAL" />
+      <VarDeclaration ID="FAB4F179D21D4AA1" Name="rTol" Type="REAL" />
+      <VarDeclaration ID="E45E50E37AC1EA8B" Name="oldW01" Type="INT" InitialValue="-1" />
+      <VarDeclaration ID="ED98FD89CE5C4F0D" Name="oldW02" Type="INT" InitialValue="-1" />
+      <VarDeclaration ID="661E28AEB56AE286" Name="oldDisp" Type="BOOL" />
+      <VarDeclaration ID="548F1142398D3994" Name="oldAberta" Type="BOOL" />
+      <VarDeclaration ID="60542AE44DF3B6A6" Name="oldFechada" Type="BOOL" />
+      <VarDeclaration ID="31E984148A58992A" Name="oldRemoto" Type="BOOL" />
+      <VarDeclaration ID="CC4F2DCF53456BD5" Name="oldAuto" Type="BOOL" />
+      <VarDeclaration ID="C4AA84D3E703EB59" Name="oldFalha" Type="BOOL" />
+      <VarDeclaration ID="8BA0C458491F6994" Name="oldCom" Type="BOOL" />
+      <VarDeclaration ID="720A1C2FC56B1C90" Name="oldPos" Type="REAL" InitialValue="-100.0" />
+      <VarDeclaration ID="028F983F822EAE56" Name="oldAnim" Type="INT" InitialValue="-1" />
+      <VarDeclaration ID="C3368DA99585B9E7" Name="oldAlm" Type="BOOL" />
+      <VarDeclaration ID="0BBBD50A0F14C7B4" Name="primeiro" Type="BOOL" InitialValue="TRUE" Comment="Primeira execucao apos o INIT" />
+    </InternalVars>
+    <ECC>
+      <ECState Name="START" Comment="Estado inicial" x="1500" y="640" />
+      <ECState Name="EXEC" Comment="Executa a logica; o algoritmo decide quais eventos saem" x="1500" y="1100">
+        <ECAction Algorithm="algValvula" Output="INITO" />
+        <ECAction Output="CNF_OUT" />
+        <ECAction Output="CNF" />
+        <ECAction Output="CNF_HMI" />
+      </ECState>
+      <ECTransition Source="START" Destination="EXEC" Condition="INIT OR REQ_CMD OR REQ_ILCK OR REQ_FB1 OR REQ_FB2 OR REQ_FB3 OR REQ_COM OR REQ_MODE OR REQ_MANUAL OR REQ_PARA OR REQ_RESET OR REQ_RESET_PROC OR TICK" x="1580" y="860" />
+      <ECTransition Source="EXEC" Destination="START" Condition="1" x="1420" y="860" />
+    </ECC>
+    <Algorithm Name="algValvula" Comment="Logica completa da valvula (um unico algoritmo)">
+      <ST><![CDATA[(* =====================================================================
+   basicValvulaCoester v1.0 - logica do CAT Valvula_Coester (HidrycoLib)
+   Atuador Coester CSR com interface Modbus TCP (manual MN_123_01).
+   Leitura: Words 1-9, 36, 86 e 87; escrita: Word 1 (comando) e Word 2 (posicao).
+   Regras:
+   - cfgModulante = TRUE: o atuador deve estar programado em posicionamento
+     continuo (Word 36 b12); o CLP escreve so a posicao (Word 2) e os bits de
+     abrir/fechar/parar ficam em zero (o atuador os ignora nesse modo);
+   - cfgModulante = FALSE (on/off): abrir/fechar mantidos (nivel) e parar;
+   - parar, intertravamento ou falha: a referencia enviada passa a ser a
+     propria posicao medida (a valvula fica onde esta; nunca reenvia uma
+     referencia antiga);
+   - automatico -> manual: comando manual volta a "parar" (mantem a posicao);
+   - perda de comunicacao: alarme sem memorizar; a acao do atuador e a
+     programada no proprio atuador (falha de comunicacao: Nenhuma = manter);
+   - falhas do atuador e posicao nao atingida ficam memorizadas ate o reset;
+     o reset tambem envia "quitar alarmes" (Word 1 b8) por 3 s;
+   - parametro de tempo = 0 desliga a supervisao de posicao.
+   ===================================================================== *)
+
+INITO   := FALSE;
+CNF_OUT := FALSE;
+CNF     := FALSE;
+CNF_HMI := FALSE;
+
+IF REQ_COM THEN
+    comRecebido := TRUE;
+END_IF;
+
+IF INIT THEN
+    initDone := TRUE;
+    INITO    := TRUE;
+END_IF;
+IF NOT initDone THEN
+    RETURN;
+END_IF;
+
+(* ---- 1. Comunicacao e decodificacao ---- *)
+bComOk := comRecebido AND (fldConexao = 1);
+stsComunicacaoOK := bComOk;
+stsFalhaComunicacao := NOT bComOk;
+w01 := INT_TO_WORD(fldW01);
+w02 := INT_TO_WORD(fldW02);
+w03 := INT_TO_WORD(fldW03);
+w04 := INT_TO_WORD(fldW04);
+w36 := INT_TO_WORD(fldW36);
+IF bComOk THEN
+    stsLocal         := (w01 AND 16#0001) <> 16#0000;
+    stsRemoto        := (w01 AND 16#0002) <> 16#0000;
+    stsDesligado     := (w01 AND 16#0004) <> 16#0000;
+    stsAberta        := (w01 AND 16#0008) <> 16#0000;
+    stsFechada       := (w01 AND 16#0010) <> 16#0000;
+    stsIntermediaria := (w01 AND 16#0020) <> 16#0000;
+    stsAbrindo       := (w01 AND 16#0040) <> 16#0000;
+    stsFechando      := (w01 AND 16#0080) <> 16#0000;
+    stsVolante       := (w01 AND 16#0400) <> 16#0000;
+    stsModoContinuo  := (w36 AND 16#1000) <> 16#0000;
+    stsPosicao       := LIMIT(0.0, INT_TO_REAL(fldW05), 100.0);
+    stsTorque        := fldW06;
+    stsTempoPercurso := fldW07;
+    stsTemperatura   := fldW08 - 19;
+    stsTorquePct     := fldW09;
+    stsPartidasDia   := fldW86;
+    stsPartidasDiaMax := fldW87;
+    stsStatus2       := fldW02;
+    stsAlarme1       := fldW03;
+    stsAlarme2       := fldW04;
+    (* falha ativa: status 2 b0-b2, alarme 1 b1-b12, alarme 2 b0, b1, b4-b8 *)
+    bFalhaAtiva := ((w02 AND 16#0007) <> 16#0000) OR ((w03 AND 16#1FFE) <> 16#0000) OR ((w04 AND 16#01F3) <> 16#0000);
+ELSE
+    stsLocal := FALSE; stsRemoto := FALSE; stsDesligado := FALSE;
+    stsAberta := FALSE; stsFechada := FALSE; stsIntermediaria := FALSE;
+    stsAbrindo := FALSE; stsFechando := FALSE; stsVolante := FALSE;
+    bFalhaAtiva := FALSE;                  (* posicao e medicoes ficam no ultimo valor lido *)
+END_IF;
+
+(* codigo da falha ativa de maior prioridade (texto na IHM) *)
+codAtivo := 0;
+IF bComOk AND bFalhaAtiva THEN
+    IF ((w02 AND 16#0001) <> 16#0000) OR ((w03 AND 16#0800) <> 16#0000) THEN codAtivo := 1;      (* falta de fase *)
+    ELSIF ((w02 AND 16#0002) <> 16#0000) OR ((w03 AND 16#0040) <> 16#0000) THEN codAtivo := 2;   (* sobreaquecimento *)
+    ELSIF ((w02 AND 16#0004) <> 16#0000) OR ((w03 AND 16#1000) <> 16#0000) THEN codAtivo := 3;   (* sem programacao *)
+    ELSIF (w03 AND 16#0002) <> 16#0000 THEN codAtivo := 4;   (* parada local de emergencia *)
+    ELSIF (w03 AND 16#0004) <> 16#0000 THEN codAtivo := 5;   (* torque na abertura *)
+    ELSIF (w03 AND 16#0008) <> 16#0000 THEN codAtivo := 6;   (* torque no fechamento *)
+    ELSIF (w03 AND 16#0010) <> 16#0000 THEN codAtivo := 7;   (* travado *)
+    ELSIF (w03 AND 16#0020) <> 16#0000 THEN codAtivo := 8;   (* operacao incompleta *)
+    ELSIF (w03 AND 16#0080) <> 16#0000 THEN codAtivo := 9;   (* falha ao energizar o motor *)
+    ELSIF (w03 AND 16#0100) <> 16#0000 THEN codAtivo := 10;  (* motor energizado apos fim de curso *)
+    ELSIF (w03 AND 16#0200) <> 16#0000 THEN codAtivo := 11;  (* motor energizado apos parada *)
+    ELSIF (w03 AND 16#0400) <> 16#0000 THEN codAtivo := 12;  (* falha de comando *)
+    ELSIF (w04 AND 16#0001) <> 16#0000 THEN codAtivo := 13;  (* tensao alta *)
+    ELSIF (w04 AND 16#0002) <> 16#0000 THEN codAtivo := 14;  (* tensao baixa *)
+    ELSIF (w04 AND 16#0030) <> 16#0000 THEN codAtivo := 15;  (* fim de curso mecanico ultrapassado *)
+    ELSIF (w04 AND 16#00C0) <> 16#0000 THEN codAtivo := 16;  (* fim de curso programado ultrapassado *)
+    ELSIF (w04 AND 16#0100) <> 16#0000 THEN codAtivo := 17;  (* cartao de rede nao detectado *)
+    END_IF;
+END_IF;
+IF bFalhaAtiva THEN
+    stsFalhaAtuador := TRUE;               (* memoriza ate o reset *)
+    stsCodigoFalha  := codAtivo;
+END_IF;
+
+(* ---- 2. Reset (IHM ou processo) ---- *)
+IF (REQ_RESET AND hmiResetFalha) OR (REQ_RESET_PROC AND cmdResetFalhas) THEN
+    stsFalhaAtuador := bFalhaAtiva;
+    IF NOT bFalhaAtiva THEN
+        stsCodigoFalha := 0;
+    END_IF;
+    stsFalhaPosicao := FALSE;
+    tPos   := 0;
+    tReset := 3;                           (* quitar alarmes no atuador por 3 s *)
+END_IF;
+IF TICK AND (tReset > 0) THEN
+    tReset := tReset - 1;
+END_IF;
+
+(* ---- 3. Modo e comando manual ---- *)
+IF REQ_MODE THEN
+    bAuto := hmiAutomatico;
+END_IF;
+IF bAutoAnt AND NOT bAuto THEN
+    bCmdMan := 0;                          (* entra em manual mantendo a posicao *)
+END_IF;
+bAutoAnt := bAuto;
+IF REQ_MANUAL THEN
+    bSpMan := LIMIT(0.0, hmiPosicaoManual, 100.0);
+    IF hmiCmdManual <> bCmdMan THEN
+        bCmdMan := LIMIT(0, hmiCmdManual, 3);
+        tPos := 0;
+    END_IF;
+END_IF;
+stsAutomatico := bAuto;
+stsCmdManual  := bCmdMan;
+stsModulante  := cfgModulante;
+
+(* ---- 4. Intertravamentos e permissao ---- *)
+bIlk := ilkGeral OR (bAuto AND ilkAutomatico) OR (NOT bAuto AND ilkManual);
+stsBloqueado := bIlk;
+stsFalha := stsFalhaAtuador OR stsFalhaPosicao;
+bPode := bComOk AND stsRemoto AND NOT bIlk AND NOT stsFalha;
+
+(* ---- 5. Comando efetivo ---- *)
+IF NOT bPode THEN
+    bModo := 4;                            (* parar: referencia = posicao medida, a valvula nao se move *)
+    bSp   := stsPosicao;
+ELSIF bAuto THEN
+    IF cfgModulante THEN
+        bModo := 3;
+        bSp   := LIMIT(cfgPosicaoMin, stpPosicaoAutomatico, cfgPosicaoMax);
+    ELSIF cmdAbrirAutomatico AND NOT cmdFecharAutomatico THEN
+        bModo := 1; bSp := 100.0;
+    ELSIF cmdFecharAutomatico AND NOT cmdAbrirAutomatico THEN
+        bModo := 2; bSp := 0.0;
+    ELSE
+        bModo := 0; bSp := stsPosicao;     (* sem comando: nao mexe *)
+    END_IF;
+ELSE
+    CASE bCmdMan OF
+        1: bModo := 1; bSp := 100.0;
+        2: bModo := 2; bSp := 0.0;
+        3: bModo := 3; bSp := bSpMan;
+    ELSE
+        bModo := 4; bSp := stsPosicao;
+    END_CASE;
+END_IF;
+stsPosicaoReferencia := bSp;
+
+wCmd := 16#0000;
+IF NOT cfgModulante THEN
+    CASE bModo OF
+        1: wCmd := 16#0001;
+        2: wCmd := 16#0002;
+        3: wCmd := 16#0010;
+        4: wCmd := 16#0004;
+    END_CASE;
+END_IF;
+IF tReset > 0 THEN
+    wCmd := wCmd OR 16#0100;
+END_IF;
+acmW01 := WORD_TO_INT(wCmd);
+acmW02 := REAL_TO_INT(LIMIT(0.0, bSp, 100.0));
+IF (acmW01 <> oldW01) OR (acmW02 <> oldW02) OR TICK OR primeiro THEN
+    CNF_OUT := TRUE;
+    oldW01 := acmW01;
+    oldW02 := acmW02;
+END_IF;
+
+(* ---- 6. Supervisao de posicao (tempo 0 = desligada) ---- *)
+IF stpToleranciaPosicao > 0.0 THEN
+    rTol := stpToleranciaPosicao;
+ELSE
+    rTol := 2.0;
+END_IF;
+rDesvio := ABS(stsPosicao - bSp);
+IF TICK THEN
+    IF bPode AND (stpTempoFalhaPosicao > 0) AND (bModo >= 1) AND (bModo <= 3) AND
+       (((bModo = 1) AND NOT stsAberta) OR ((bModo = 2) AND NOT stsFechada) OR ((bModo = 3) AND (rDesvio > rTol))) THEN
+        tPos := tPos + 1;
+        IF tPos >= stpTempoFalhaPosicao THEN
+            stsFalhaPosicao := TRUE;
+        END_IF;
+    ELSE
+        tPos := 0;
+    END_IF;
+END_IF;
+
+(* ---- 7. Avisos, disponibilidade e animacao ---- *)
+stsAvisoConfig := bComOk AND cfgModulante AND NOT stsModoContinuo;
+stsAvisoPartidas := bComOk AND (cfgPartidasDiaMax > 0) AND (fldW86 > cfgPartidasDiaMax);
+stsFalha := stsFalhaAtuador OR stsFalhaPosicao;
+stsDisponivelAutomatico := bComOk AND stsRemoto AND bAuto AND NOT stsFalha AND NOT ilkGeral AND NOT ilkAutomatico;
+stsAlarme := stsFalhaComunicacao OR stsFalha;
+IF NOT bComOk THEN
+    stsAnimacao := 6;
+ELSIF stsFalha THEN
+    stsAnimacao := 4;
+ELSIF NOT stsRemoto THEN
+    stsAnimacao := 5;
+ELSIF stsAbrindo OR stsFechando THEN
+    stsAnimacao := 3;
+ELSIF stsAberta THEN
+    stsAnimacao := 1;
+ELSIF stsFechada THEN
+    stsAnimacao := 0;
+ELSE
+    stsAnimacao := 2;
+END_IF;
+
+(* ---- 8. Eventos de saida ---- *)
+IF primeiro OR (stsDisponivelAutomatico <> oldDisp) OR (stsAberta <> oldAberta) OR (stsFechada <> oldFechada) OR
+   (stsRemoto <> oldRemoto) OR (stsAutomatico <> oldAuto) OR (stsFalha <> oldFalha) OR (stsComunicacaoOK <> oldCom) OR
+   (ABS(stsPosicao - oldPos) >= 0.5) THEN
+    CNF := TRUE;
+    oldDisp := stsDisponivelAutomatico; oldAberta := stsAberta; oldFechada := stsFechada; oldRemoto := stsRemoto;
+    oldAuto := stsAutomatico; oldFalha := stsFalha; oldCom := stsComunicacaoOK; oldPos := stsPosicao;
+END_IF;
+IF primeiro OR TICK OR REQ_MODE OR REQ_MANUAL OR REQ_PARA OR REQ_RESET OR REQ_RESET_PROC OR
+   (stsAnimacao <> oldAnim) OR (stsAlarme <> oldAlm) THEN
+    CNF_HMI := TRUE;
+    oldAnim := stsAnimacao;
+    oldAlm  := stsAlarme;
+END_IF;
+primeiro := FALSE;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

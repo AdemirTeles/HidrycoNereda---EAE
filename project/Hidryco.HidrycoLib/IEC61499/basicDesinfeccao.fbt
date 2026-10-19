@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="816d1b12-0d99-0d77-41e5-231c81e1d08d" Name="basicDesinfeccao" Comment="Logica da desinfeccao (limitacao de vazao pela 700-VC-01, totalizacao, alarmes)" Namespace="Hidryco.HidrycoLib">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Hidryco" Version="1.0" Author="Hidryco" Date="19/10/2026" Remarks="1.0: PID continuo sobre a 700-FT-01 (m3/h) comandando a 700-VC-01; FT em falha ou valvula indisponivel mantem a posicao; totalizador persistente; vazao alta e variacao brusca" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="9E12B42E11EB9FB7" Name="INIT" Comment="Inicializacao" />
+      <Event ID="6559A273E8431D42" Name="REQ_FT" Comment="700-FT-01 (Parshall)">
+        <With Var="ftValor" />
+        <With Var="ftFalha" />
+      </Event>
+      <Event ID="4F5B69463931E86B" Name="REQ_VC" Comment="700-VC-01">
+        <With Var="vcDisponivel" />
+        <With Var="vcPosicao" />
+        <With Var="vcComOk" />
+        <With Var="vcAutomatico" />
+      </Event>
+      <Event ID="1495D2B4E524DEC3" Name="REQ_UV" Comment="700-UV-01/02">
+        <With Var="uvComOk" />
+        <With Var="uvCritico" />
+        <With Var="uvCanaisInsuf" />
+        <With Var="uvDoseBaixa" />
+        <With Var="uvCanal1" />
+        <With Var="uvCanal2" />
+      </Event>
+      <Event ID="22B807AE7A8B903D" Name="REQ_DJ" Comment="Disjuntores (remota da desinfeccao)">
+        <With Var="djPCEDesligado" />
+        <With Var="djPCMDesligado" />
+        <With Var="djUV01" />
+        <With Var="djUV02" />
+        <With Var="djVC01" />
+        <With Var="djMO01" />
+      </Event>
+      <Event ID="2AE8EBA1815E0012" Name="REQ_REM" Comment="Remota da desinfeccao comunicando (COM_OK do IO_DI32)">
+        <With Var="remComOk" />
+      </Event>
+      <Event ID="1DD56BE62400BF1C" Name="REQ_PID" Comment="Saida do PID">
+        <With Var="pidSaida" />
+      </Event>
+      <Event ID="69B239DBC6B5BF03" Name="REQ_PARA" Comment="IHM: parametros">
+        <With Var="pidHabilita" />
+        <With Var="stpVazaoMax" />
+        <With Var="pidMinimo" />
+        <With Var="pidMaximo" />
+        <With Var="stpTolVazao" />
+        <With Var="stpTempoVazao" />
+        <With Var="stpVariacaoMax" />
+      </Event>
+      <Event ID="2E96492E37281113" Name="REQ_PERS" Comment="Totalizador lido da persistencia">
+        <With Var="perTotal" />
+      </Event>
+      <Event ID="F980CDC9B2AFA9D8" Name="REQ_RESET" Comment="IHM: reset">
+        <With Var="hmiReset" />
+      </Event>
+      <Event ID="DA13244B5D56E79F" Name="REQ_RESET_PROC" Comment="Processo: reset">
+        <With Var="cmdResetFalhas" />
+      </Event>
+      <Event ID="B454118112B7B3A8" Name="REQ_ZERA" Comment="IHM: zera o totalizador">
+        <With Var="hmiZeraTotal" />
+      </Event>
+      <Event ID="A43A58424E0F5DF5" Name="TICK" Comment="Base de tempo de 1 s" />
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="39B67DFC9697D1D0" Name="INITO" Comment="Inicializacao concluida" />
+      <Event ID="38355A458523F08C" Name="CNF_PID" Comment="Modo do pidCtl (automatico ou tracking da posicao)">
+        <With Var="pidModo" />
+        <With Var="pidPreset" />
+      </Event>
+      <Event ID="6010724B5A00E1A3" Name="CNF_VC" Comment="Posicao pedida a 700-VC-01">
+        <With Var="vcSp" />
+      </Event>
+      <Event ID="BC4C937414AD6E45" Name="CNF_PERS" Comment="Grava o totalizador">
+        <With Var="perTotalOut" />
+      </Event>
+      <Event ID="6AA932C3761CE99C" Name="CNF" Comment="Status para o processo">
+        <With Var="stsVazao" />
+        <With Var="stsTotal" />
+        <With Var="stsControleAtivo" />
+        <With Var="stsAlarme" />
+      </Event>
+      <Event ID="04CB25776C0D242A" Name="CNF_HMI" Comment="Status para a IHM e alarmes">
+        <With Var="stsVazao" />
+        <With Var="stsVazaoMax" />
+        <With Var="stsTotalHmi" />
+        <With Var="stsControleAtivo" />
+        <With Var="stsHabilitado" />
+        <With Var="stsMotivo" />
+        <With Var="stsSaidaPid" />
+        <With Var="stsVcPosicao" />
+        <With Var="stsFtFalha" />
+        <With Var="stsUvComOk" />
+        <With Var="stsUvCanal1" />
+        <With Var="stsUvCanal2" />
+        <With Var="stsDjPCE" />
+        <With Var="stsDjPCM" />
+        <With Var="stsDjUV01" />
+        <With Var="stsDjUV02" />
+        <With Var="stsDjVC01" />
+        <With Var="stsDjMO01" />
+        <With Var="stsRemotaOk" />
+        <With Var="stsAvisoDisjuntor" />
+        <With Var="stsAlarmeVazaoAlta" />
+        <With Var="stsAvisoVariacao" />
+        <With Var="stsFalhaRemota" />
+        <With Var="stsAlarme" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="F569AB39D886D3C5" Name="ftValor" Type="REAL" Comment="Vazao 700-FT-01 (m3/h)" />
+      <VarDeclaration ID="8F6D70C85B5729EE" Name="ftFalha" Type="BOOL" Comment="700-FT-01 com sinal em falha" />
+      <VarDeclaration ID="C5936F826382DFB8" Name="vcDisponivel" Type="BOOL" Comment="VC-01 disponivel para o automatico" />
+      <VarDeclaration ID="7315FEF776808725" Name="vcPosicao" Type="REAL" Comment="Posicao da VC-01 (%)" />
+      <VarDeclaration ID="023A1B52E4E2056D" Name="vcComOk" Type="BOOL" Comment="VC-01 comunicando" />
+      <VarDeclaration ID="DBD5C62FC984909D" Name="vcAutomatico" Type="BOOL" Comment="VC-01 em automatico" />
+      <VarDeclaration ID="DB1DCC8BAF4C9029" Name="uvComOk" Type="BOOL" />
+      <VarDeclaration ID="1AFFBF765DAF6E05" Name="uvCritico" Type="BOOL" />
+      <VarDeclaration ID="6927441A48A28A44" Name="uvCanaisInsuf" Type="BOOL" />
+      <VarDeclaration ID="FA4C9F16C9AD1E00" Name="uvDoseBaixa" Type="BOOL" />
+      <VarDeclaration ID="E17D46372D8AC1CC" Name="uvCanal1" Type="BOOL" />
+      <VarDeclaration ID="CA02F082C523342B" Name="uvCanal2" Type="BOOL" />
+      <VarDeclaration ID="CF45361D95BFAA25" Name="djPCEDesligado" Type="BOOL" Comment="Remota %I0.0" />
+      <VarDeclaration ID="347EEF72575B0DAD" Name="djPCMDesligado" Type="BOOL" Comment="Remota %I0.1" />
+      <VarDeclaration ID="159FAE7A20FE4F43" Name="djUV01" Type="BOOL" Comment="Remota %I0.2" />
+      <VarDeclaration ID="7868F97BB44D7BB6" Name="djUV02" Type="BOOL" Comment="Remota %I0.3" />
+      <VarDeclaration ID="92824DDB3BCC4699" Name="djVC01" Type="BOOL" Comment="Remota %I0.4" />
+      <VarDeclaration ID="50FED92E4734ACF3" Name="djMO01" Type="BOOL" Comment="Remota %I0.5" />
+      <VarDeclaration ID="D0484A6EFE322016" Name="remComOk" Type="BOOL" Comment="Remota comunicando (COM_OK publicado pelo IO_DI32 da remota)" />
+      <VarDeclaration ID="AA3C6B9770CFA1D6" Name="pidSaida" Type="REAL" Comment="Saida do PID (%)" />
+      <VarDeclaration ID="FEC6CBE54CA37A44" Name="pidHabilita" Type="BOOL" Comment="Controle de vazao habilitado" />
+      <VarDeclaration ID="3EF61F60D9980F84" Name="stpVazaoMax" Type="REAL" Comment="Vazao maxima de lancamento (m3/h)" />
+      <VarDeclaration ID="DF73D60158F656E4" Name="pidMinimo" Type="REAL" Comment="Saida minima do PID (%)" />
+      <VarDeclaration ID="0F4CFB3D37BB8386" Name="pidMaximo" Type="REAL" Comment="Saida maxima do PID (%)" />
+      <VarDeclaration ID="A62BE056EBF6633F" Name="stpTolVazao" Type="REAL" Comment="Tolerancia acima do limite para o alarme (%)" />
+      <VarDeclaration ID="0CA93D1DC0F0D80A" Name="stpTempoVazao" Type="INT" Comment="Tempo acima do limite para o alarme (s); 0 = desligado" />
+      <VarDeclaration ID="EAB397A6710197DE" Name="stpVariacaoMax" Type="REAL" Comment="Variacao maxima da vazao em 1 min (m3/h); 0 = desligado" />
+      <VarDeclaration ID="E77A551E7F1625D6" Name="perTotal" Type="UDINT" Comment="Totalizador persistido (m3)" />
+      <VarDeclaration ID="14F8441489A49AD8" Name="hmiReset" Type="BOOL" />
+      <VarDeclaration ID="5A0059668713CC5A" Name="cmdResetFalhas" Type="BOOL" />
+      <VarDeclaration ID="EDA9F4A4D8516735" Name="hmiZeraTotal" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="B925699CCA1010B0" Name="pidModo" Type="BOOL" Comment="TRUE = PID em automatico; FALSE = saida segue a posicao da valvula" />
+      <VarDeclaration ID="E0C52E4AA1CB94A3" Name="pidPreset" Type="REAL" Comment="Valor de tracking do PID (posicao da valvula)" />
+      <VarDeclaration ID="635B91EC32B193D8" Name="vcSp" Type="REAL" Comment="Posicao pedida a 700-VC-01 (%)" />
+      <VarDeclaration ID="BB35FC69145014F5" Name="perTotalOut" Type="UDINT" Comment="Totalizador a gravar (m3)" />
+      <VarDeclaration ID="2C19FD8E73A079CA" Name="stsTotal" Type="UDINT" Comment="Volume totalizado (m3)" />
+      <VarDeclaration ID="8B489663C97AF746" Name="stsVazao" Type="REAL" Comment="Vazao do efluente final 700-FT-01 (m3/h)" />
+      <VarDeclaration ID="2CB6FFAA3F88FD37" Name="stsVazaoMax" Type="REAL" Comment="Vazao maxima de lancamento em uso (m3/h)" />
+      <VarDeclaration ID="1AC4273BD48629B4" Name="stsTotalHmi" Type="DINT" Comment="Volume totalizado (m3)" />
+      <VarDeclaration ID="7C47B967196CD681" Name="stsControleAtivo" Type="BOOL" Comment="PID controlando a 700-VC-01" />
+      <VarDeclaration ID="F5E44B9CD467E225" Name="stsHabilitado" Type="BOOL" Comment="Controle de vazao habilitado pelo operador" />
+      <VarDeclaration ID="E0E853656DE9663A" Name="stsMotivo" Type="INT" Comment="Controle: 0 controlando, 1 desabilitado, 2 FT-01 em falha, 3 valvula indisponivel, 4 retomando (3 s)" />
+      <VarDeclaration ID="BB5C6CDA218388F6" Name="stsSaidaPid" Type="REAL" Comment="Saida do PID (%)" />
+      <VarDeclaration ID="5B994E1E72A57859" Name="stsVcPosicao" Type="REAL" Comment="Posicao da 700-VC-01 (%)" />
+      <VarDeclaration ID="9D46B9FE82DC9AB1" Name="stsFtFalha" Type="BOOL" Comment="700-FT-01 em falha" />
+      <VarDeclaration ID="06E435E0579C0A31" Name="stsUvComOk" Type="BOOL" Comment="UV comunicando" />
+      <VarDeclaration ID="03E13841379C7979" Name="stsUvCanal1" Type="BOOL" Comment="UV canal 1 operando" />
+      <VarDeclaration ID="9EE277DF1A6EE639" Name="stsUvCanal2" Type="BOOL" Comment="UV canal 2 operando" />
+      <VarDeclaration ID="DD39785BA0B3D6D1" Name="stsDjPCE" Type="BOOL" Comment="Remota %I0.0: disjuntor desligado PCE" />
+      <VarDeclaration ID="DC6A854DD28F4447" Name="stsDjPCM" Type="BOOL" Comment="Remota %I0.1: disjuntor desligado PCM desinfeccao" />
+      <VarDeclaration ID="CFF2FF9B070BCB84" Name="stsDjUV01" Type="BOOL" Comment="Remota %I0.2: disjuntor ligado 700-UV-01" />
+      <VarDeclaration ID="A1948102A71BA04F" Name="stsDjUV02" Type="BOOL" Comment="Remota %I0.3: disjuntor ligado 700-UV-02" />
+      <VarDeclaration ID="49CC92A2C50C5502" Name="stsDjVC01" Type="BOOL" Comment="Remota %I0.4: disjuntor ligado 700-VC-01" />
+      <VarDeclaration ID="029A5972D76D7D9D" Name="stsDjMO01" Type="BOOL" Comment="Remota %I0.5: disjuntor ligado 700-MO-01 (monovia)" />
+      <VarDeclaration ID="7C31ABB79E620CA1" Name="stsRemotaOk" Type="BOOL" Comment="Remota da desinfeccao comunicando" />
+      <VarDeclaration ID="4979C9EBFE656646" Name="stsAvisoDisjuntor" Type="BOOL" Comment="Disjuntor do PCE, PCM, UV ou VC-01 desligado" />
+      <VarDeclaration ID="9AA3D7C962B2722B" Name="stsAlarmeVazaoAlta" Type="BOOL" Comment="Vazao acima do limite de lancamento (memorizado)" />
+      <VarDeclaration ID="F5BC914DFDB76B1B" Name="stsAvisoVariacao" Type="BOOL" Comment="Variacao brusca da vazao de lancamento (memorizado)" />
+      <VarDeclaration ID="2E78B7E52A0ED234" Name="stsFalhaRemota" Type="BOOL" Comment="Falha de comunicacao com a remota da desinfeccao" />
+      <VarDeclaration ID="C779F990E9DA2177" Name="stsAlarme" Type="BOOL" Comment="Algum alarme da desinfeccao" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="aa241410-8595-d8c0-10d1-3bb0dfa9750c">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="algDesinfeccao" />
+    <InternalVars>
+      <VarDeclaration ID="1BC00CC2AA56BA20" Name="initDone" Type="BOOL" />
+      <VarDeclaration ID="D6465BACD87BCEB7" Name="primeiro" Type="BOOL" InitialValue="TRUE" />
+      <VarDeclaration ID="C449DA5054F4912E" Name="acc" Type="REAL" Comment="Fracao do totalizador (m3)" />
+      <VarDeclaration ID="9A2190D40522B834" Name="nInteiro" Type="UDINT" />
+      <VarDeclaration ID="54751A0EC4A3802A" Name="tGrava" Type="INT" />
+      <VarDeclaration ID="6E3DB381B04BC982" Name="totalGravado" Type="UDINT" />
+      <VarDeclaration ID="8010B0BEDFA5F85F" Name="persLido" Type="BOOL" />
+      <VarDeclaration ID="130D56DA45058915" Name="tAlta" Type="INT" />
+      <VarDeclaration ID="A25C0672CD0E9134" Name="tVar" Type="INT" />
+      <VarDeclaration ID="72FD525890E96D91" Name="qAnt" Type="REAL" />
+      <VarDeclaration ID="AC53863177934A60" Name="qAntOk" Type="BOOL" />
+      <VarDeclaration ID="F22108379ACEF1DB" Name="oldModo" Type="BOOL" />
+      <VarDeclaration ID="7DA2D1EA3495D737" Name="oldSp" Type="REAL" InitialValue="-100.0" />
+      <VarDeclaration ID="77C0413918FB628B" Name="oldSig" Type="INT" InitialValue="-1" />
+      <VarDeclaration ID="94D3912C80B7FAA4" Name="sig" Type="INT" />
+      <VarDeclaration ID="68AC7EBF952D00EF" Name="rLimite" Type="REAL" />
+      <VarDeclaration ID="920979B37EC08163" Name="condOk" Type="BOOL" />
+      <VarDeclaration ID="C523B389C8E7DCDE" Name="tEstavel" Type="INT" Comment="Segundos com as condicoes do controle OK" />
+    </InternalVars>
+    <ECC>
+      <ECState Name="START" Comment="Estado inicial" x="1500" y="640" />
+      <ECState Name="EXEC" Comment="Executa a logica; o algoritmo decide quais eventos saem" x="1500" y="1100">
+        <ECAction Algorithm="algDesinfeccao" Output="INITO" />
+        <ECAction Output="CNF_PID" />
+        <ECAction Output="CNF_VC" />
+        <ECAction Output="CNF_PERS" />
+        <ECAction Output="CNF" />
+        <ECAction Output="CNF_HMI" />
+      </ECState>
+      <ECTransition Source="START" Destination="EXEC" Condition="INIT OR REQ_FT OR REQ_VC OR REQ_UV OR REQ_DJ OR REQ_REM OR REQ_PID OR REQ_PARA OR REQ_PERS OR REQ_RESET OR REQ_RESET_PROC OR REQ_ZERA OR TICK" x="1580" y="860" />
+      <ECTransition Source="EXEC" Destination="START" Condition="1" x="1420" y="860" />
+    </ECC>
+    <Algorithm Name="algDesinfeccao" Comment="Logica completa (um unico algoritmo)">
+      <ST><![CDATA[(* =====================================================================
+   basicDesinfeccao v1.0 - logica do CAT Desinfeccao_UV (HidrycoLib)
+   Limitacao da vazao de lancamento pela 700-VC-01 (borboleta DN600 na
+   saida do tanque de amortecimento) com PID continuo sobre a 700-FT-01
+   (Parshall, m3/h) - manual REL-007 2.4.1: maximo 345 L/s = 1242 m3/h.
+   Regras (definidas pelo usuario):
+   - PID continuo; valvula modulante (Valvula_Coester cfgModulante);
+   - FT-01 em falha, PID desabilitado ou valvula indisponivel: a valvula
+     mantem a posicao (referencia = posicao medida) e o PID acompanha a
+     posicao (tracking) para retomar sem salto;
+   - totalizacao em m3 (persistente); alarme de vazao acima do limite e
+     aviso de variacao brusca (manual 2.4.4), ambos ate o reset;
+   - o UV (Trojan) e somente monitorado: nao ha comando do CLP.
+   ===================================================================== *)
+
+INITO    := FALSE;
+CNF_PID  := FALSE;
+CNF_VC   := FALSE;
+CNF_PERS := FALSE;
+CNF      := FALSE;
+CNF_HMI  := FALSE;
+
+IF INIT THEN
+    initDone := TRUE;
+    INITO := TRUE;
+END_IF;
+IF NOT initDone THEN
+    RETURN;
+END_IF;
+
+(* ---- 1. Totalizador persistente ---- *)
+IF REQ_PERS AND NOT persLido THEN
+    persLido := TRUE;
+    IF perTotal > stsTotal THEN
+        stsTotal := perTotal;
+    END_IF;
+    totalGravado := stsTotal;
+END_IF;
+IF REQ_ZERA AND hmiZeraTotal THEN
+    stsTotal := 0;
+    acc := 0.0;
+    CNF_PERS := TRUE;
+END_IF;
+IF TICK AND NOT ftFalha AND (ftValor > 0.0) THEN
+    acc := acc + ftValor / 3600.0;
+    IF acc >= 1.0 THEN
+        nInteiro := REAL_TO_UDINT(acc - 0.5);
+        stsTotal := stsTotal + nInteiro;
+        acc := acc - UDINT_TO_REAL(nInteiro);
+    END_IF;
+END_IF;
+IF TICK THEN
+    tGrava := tGrava + 1;
+    IF (tGrava >= 60) AND (stsTotal <> totalGravado) THEN
+        tGrava := 0;
+        CNF_PERS := TRUE;
+    END_IF;
+END_IF;
+IF CNF_PERS THEN
+    perTotalOut := stsTotal;
+    totalGravado := stsTotal;
+END_IF;
+stsTotalHmi := UDINT_TO_DINT(stsTotal);
+
+(* ---- 2. Controle da 700-VC-01 ---- *)
+stsVazao := ftValor;
+stsFtFalha := ftFalha;
+stsHabilitado := pidHabilita;
+stsVazaoMax := stpVazaoMax;
+stsVcPosicao := vcPosicao;
+stsSaidaPid := pidSaida;
+(* o controle so (re)assume com tudo OK ha 3 s: o PID acompanha a posicao com o PV ja valido e volta sem salto *)
+condOk := pidHabilita AND NOT ftFalha AND vcDisponivel;
+IF NOT condOk THEN
+    tEstavel := 0;
+ELSIF TICK AND (tEstavel < 3) THEN
+    tEstavel := tEstavel + 1;
+END_IF;
+IF NOT pidHabilita THEN
+    stsMotivo := 1;
+ELSIF ftFalha THEN
+    stsMotivo := 2;
+ELSIF NOT vcDisponivel THEN
+    stsMotivo := 3;
+ELSIF tEstavel < 3 THEN
+    stsMotivo := 4;
+ELSE
+    stsMotivo := 0;
+END_IF;
+stsControleAtivo := stsMotivo = 0;
+pidModo := stsControleAtivo;
+pidPreset := vcPosicao;
+IF stsControleAtivo THEN
+    vcSp := LIMIT(pidMinimo, pidSaida, pidMaximo);
+ELSE
+    vcSp := vcPosicao;                     (* mantem a posicao *)
+END_IF;
+IF primeiro OR (pidModo <> oldModo) OR REQ_VC THEN
+    CNF_PID := TRUE;
+    oldModo := pidModo;
+END_IF;
+IF primeiro OR TICK OR (ABS(vcSp - oldSp) >= 0.5) THEN
+    CNF_VC := TRUE;
+    oldSp := vcSp;
+END_IF;
+
+(* ---- 3. Alarmes de processo ---- *)
+IF (REQ_RESET AND hmiReset) OR (REQ_RESET_PROC AND cmdResetFalhas) THEN
+    stsAlarmeVazaoAlta := FALSE;
+    stsAvisoVariacao := FALSE;
+    tAlta := 0;
+END_IF;
+rLimite := stpVazaoMax * (1.0 + stpTolVazao / 100.0);
+IF TICK THEN
+    IF (stpTempoVazao > 0) AND NOT ftFalha AND (stpVazaoMax > 0.0) AND (ftValor > rLimite) THEN
+        tAlta := tAlta + 1;
+        IF tAlta >= stpTempoVazao THEN
+            stsAlarmeVazaoAlta := TRUE;
+        END_IF;
+    ELSE
+        tAlta := 0;
+    END_IF;
+    tVar := tVar + 1;
+    IF tVar >= 60 THEN
+        tVar := 0;
+        IF qAntOk AND NOT ftFalha AND (stpVariacaoMax > 0.0) AND (ABS(ftValor - qAnt) > stpVariacaoMax) THEN
+            stsAvisoVariacao := TRUE;
+        END_IF;
+        qAnt := ftValor;
+        qAntOk := NOT ftFalha;
+    END_IF;
+END_IF;
+stsRemotaOk := remComOk;
+stsFalhaRemota := NOT stsRemotaOk;
+IF stsRemotaOk THEN
+    stsDjPCE := djPCEDesligado; stsDjPCM := djPCMDesligado;
+    stsDjUV01 := djUV01; stsDjUV02 := djUV02; stsDjVC01 := djVC01; stsDjMO01 := djMO01;
+    stsAvisoDisjuntor := djPCEDesligado OR djPCMDesligado OR NOT djUV01 OR NOT djUV02 OR NOT djVC01;
+ELSE
+    stsAvisoDisjuntor := FALSE;
+END_IF;
+stsUvComOk := uvComOk;
+stsUvCanal1 := uvCanal1;
+stsUvCanal2 := uvCanal2;
+stsAlarme := stsAlarmeVazaoAlta OR stsAvisoVariacao OR stsAvisoDisjuntor OR stsFalhaRemota OR ftFalha;
+
+(* ---- 4. Eventos ---- *)
+sig := stsMotivo;
+IF stsAlarmeVazaoAlta THEN sig := sig + 8; END_IF;
+IF stsAvisoVariacao THEN sig := sig + 16; END_IF;
+IF stsAvisoDisjuntor THEN sig := sig + 32; END_IF;
+IF stsFalhaRemota THEN sig := sig + 64; END_IF;
+IF stsAlarme THEN sig := sig + 128; END_IF;
+IF primeiro OR TICK OR REQ_PARA OR REQ_RESET OR REQ_ZERA OR (sig <> oldSig) THEN
+    CNF_HMI := TRUE;
+END_IF;
+IF primeiro OR TICK OR (sig <> oldSig) THEN
+    CNF := TRUE;
+END_IF;
+oldSig := sig;
+primeiro := FALSE;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>
