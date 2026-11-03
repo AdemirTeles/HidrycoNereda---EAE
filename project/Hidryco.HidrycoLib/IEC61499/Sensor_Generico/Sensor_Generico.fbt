@@ -4,7 +4,7 @@
   <Attribute Name="HMI.Alias" Value="" />
   <Attribute Name="Configuration.FB.IDCounter" Value="2" />
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Hidryco" Version="1.4" Author="Hidryco" Date="16/10/2026" Remarks="1.4: sinal em falha tambem pelo status da conexao Modbus (symlink stsConexao INT, 1 = online) com cfgUsaConexao, no 4-20 mA lido por remota e na comunicacao. 1.3: entrada inibeAlarmesBaixos (E_INIBE) e saidas stsCondicaoHH/H/L/LL (limite ultrapassado agora). 1.2: alarmes na lista do EAE com reconhecimento pelo reset e pisca na IHM (ISA-101), tempo padrao de alarme 5 s. 1.0: sensor generico (substitui Sensor_4a20, Sensor_Nivel_4a20 e Sensor_Comunicacao). Campo por symlink ${PATH}: 4-20 mA = stsSensorBruto (INT); comunicacao = stsFalhaSensor, stsEntrada (REAL), stsFalhaComunicacao. Alarmes HH/H/L/LL e falha no sistema de alarmes do EAE (ALARM_BIT)." />
+  <VersionInfo Organization="Hidryco" Version="1.8" Author="Hidryco" Date="22/10/2026" Remarks="1.8: tag STS_FALHA renomeada para STS_FALHA_SENSOR (mesmo ID F96D4140FF4E3BE0), so com a falha do sensor (fora da faixa ou falha do instrumento); a comunicacao fica em STS_FALHA_COMUNICACAO; STS_FALHA_ATIVA com qualquer falha. 1.7: E_CYCLE TickHmi (1 s): valores para a IHM no maximo 1 vez por segundo. 1.6: tag STS_FALHA_SENSOR renomeada para STS_FALHA = falha ativa (sensor em falha agora, sem memoria); nova tag STS_FALHA_COMUNICACAO (sensores por comunicacao ou com status da conexao). 1.5: sensor de nivel (cfgNivel) com os setpoints de alarme em % da altura maxima. 1.4: sinal em falha tambem pelo status da conexao Modbus (symlink stsConexao INT, 1 = online) com cfgUsaConexao, no 4-20 mA lido por remota e na comunicacao. 1.3: entrada inibeAlarmesBaixos (E_INIBE) e saidas stsCondicaoHH/H/L/LL (limite ultrapassado agora). 1.2: alarmes na lista do EAE com reconhecimento pelo reset e pisca na IHM (ISA-101), tempo padrao de alarme 5 s. 1.0: sensor generico (substitui Sensor_4a20, Sensor_Nivel_4a20 e Sensor_Comunicacao). Campo por symlink ${PATH}: 4-20 mA = stsSensorBruto (INT); comunicacao = stsFalhaSensor, stsEntrada (REAL), stsFalhaComunicacao. Alarmes HH/H/L/LL e falha no sistema de alarmes do EAE (ALARM_BIT)." />
   <InterfaceList>
     <EventInputs>
       <Event ID="D21DAA5004F58516" Name="E_RESET_FALHAS" Comment="Reset da falha e dos alarmes pelo processo (com cmdResetFalhas = TRUE)">
@@ -70,7 +70,7 @@
     <FB ID="21DBF75529B17174" Name="IThis" Type="Sensor_Generico_HMI" x="1220" y="1140" Namespace="Hidryco.HidrycoLib">
       <Parameter Name="$1C38ED12C8BD1D24" Value="TRUE" />
     </FB>
-    <FB ID="1DA04E5D7EE17604" Name="plcStart1" Type="plcStart" x="1400" y="200" Namespace="SE.App2Base">
+    <FB ID="1DA04E5D7EE17604" Name="plcStart1" Type="plcStart" x="1440" y="200" Namespace="SE.App2Base">
       <Parameter Name="$Prio" Value="10" />
     </FB>
     <FB ID="1A2582F2B07E0C54" Name="Logica" Type="basicSensorGenerico" x="4700" y="200" Namespace="Hidryco.HidrycoLib" />
@@ -125,35 +125,38 @@
       <Parameter Name="$ACKTYPE_1" Value="2" />
       <Parameter Name="$ACTIVE" Value="TRUE" />
     </FB>
-    <Input ID="D21DAA5004F58516" Name="E_RESET_FALHAS" x="200" y="196" Type="Event" />
-    <Input ID="33AD1B5E06E89E39" Name="E_INIBE" x="200" y="256" Type="Event" />
-    <Input ID="1908F43CB878F5E7" Name="cmdResetFalhas" x="200" y="436" Type="Data" />
-    <Input ID="D46B37D45FD5AF5D" Name="cfgComunicacao" x="200" y="496" Type="Data" />
-    <Input ID="FC98F78ABCBC0A7E" Name="cfgNivel" x="200" y="556" Type="Data" />
-    <Input ID="31E57DCE3AF9C996" Name="cfgBrutoMin" x="200" y="616" Type="Data" />
-    <Input ID="BFED79817B71957D" Name="cfgBrutoMax" x="200" y="676" Type="Data" />
-    <Input ID="CA39953142B1EBBD" Name="cfgFalhaMin" x="200" y="735.9999" Type="Data" />
-    <Input ID="519A2B73CC673344" Name="cfgFalhaMax" x="200" y="796" Type="Data" />
-    <Input ID="F21E4E6BC95CB4D0" Name="cfgTempoFalha" x="200" y="855.9999" Type="Data" />
-    <Input ID="CC8EEC06FF0C4430" Name="cfgUnidade" x="200" y="915.9999" Type="Data" />
-    <Input ID="6D3A2524C5D0F0D1" Name="cfgCasasDecimais" x="200" y="976" Type="Data" />
-    <Input ID="A5CADABB487002E6" Name="inibeAlarmesBaixos" x="200" y="1036" Type="Data" />
-    <Input ID="0ECE7B3867B02E0B" Name="cfgUsaConexao" x="200" y="1096" Type="Data" />
-    <Output ID="28A380156DB271B8" Name="CNF" x="10328" y="196" Type="Event" />
-    <Output ID="D7422D307E6AF52D" Name="stsValor" x="10328" y="376" Type="Data" />
-    <Output ID="E6F78A591442B69F" Name="stsPorcentagem" x="10328" y="436" Type="Data" />
-    <Output ID="6108F9B5CA5170A6" Name="stsFalhaSensor" x="10328" y="496" Type="Data" />
-    <Output ID="726640D1704B3F86" Name="stsFalhaAtiva" x="10328" y="556" Type="Data" />
-    <Output ID="07C3588C57A022B8" Name="stsHabilitado" x="10328" y="616" Type="Data" />
-    <Output ID="9578190A49DBC450" Name="stsAlarmeHH" x="10328" y="676" Type="Data" />
-    <Output ID="0D14BA934DBED883" Name="stsAlarmeH" x="10328" y="735.9999" Type="Data" />
-    <Output ID="ADAD629D7A214F32" Name="stsAlarmeL" x="10328" y="796" Type="Data" />
-    <Output ID="53279A5859ECAB18" Name="stsAlarmeLL" x="10328" y="855.9999" Type="Data" />
-    <Output ID="72E7C8EC75361066" Name="stsAlarme" x="10328" y="915.9999" Type="Data" />
-    <Output ID="5493E1BF18D97620" Name="stsCondicaoHH" x="10328" y="976" Type="Data" />
-    <Output ID="613F6EF6FA647237" Name="stsCondicaoH" x="10328" y="1036" Type="Data" />
-    <Output ID="324136474F57E8DB" Name="stsCondicaoL" x="10328" y="1096" Type="Data" />
-    <Output ID="4D71F9AF04DA2016" Name="stsCondicaoLL" x="10328" y="1156" Type="Data" />
+    <FB ID="DA6A70167165ECE3" Name="TickHmi" Type="E_CYCLE" x="2000" y="3400" Namespace="IEC61499.Standard">
+      <Parameter Name="$DT" Value="T#1s" />
+    </FB>
+    <Input ID="D21DAA5004F58516" Name="E_RESET_FALHAS" x="200" y="192" Type="Event" />
+    <Input ID="33AD1B5E06E89E39" Name="E_INIBE" x="200" y="252" Type="Event" />
+    <Input ID="1908F43CB878F5E7" Name="cmdResetFalhas" x="200" y="432" Type="Data" />
+    <Input ID="D46B37D45FD5AF5D" Name="cfgComunicacao" x="200" y="492" Type="Data" />
+    <Input ID="FC98F78ABCBC0A7E" Name="cfgNivel" x="200" y="552" Type="Data" />
+    <Input ID="31E57DCE3AF9C996" Name="cfgBrutoMin" x="200" y="612" Type="Data" />
+    <Input ID="BFED79817B71957D" Name="cfgBrutoMax" x="200" y="672" Type="Data" />
+    <Input ID="CA39953142B1EBBD" Name="cfgFalhaMin" x="200" y="731.9999" Type="Data" />
+    <Input ID="519A2B73CC673344" Name="cfgFalhaMax" x="200" y="792" Type="Data" />
+    <Input ID="F21E4E6BC95CB4D0" Name="cfgTempoFalha" x="200" y="851.9999" Type="Data" />
+    <Input ID="CC8EEC06FF0C4430" Name="cfgUnidade" x="200" y="911.9998" Type="Data" />
+    <Input ID="6D3A2524C5D0F0D1" Name="cfgCasasDecimais" x="200" y="972" Type="Data" />
+    <Input ID="A5CADABB487002E6" Name="inibeAlarmesBaixos" x="200" y="1032" Type="Data" />
+    <Input ID="0ECE7B3867B02E0B" Name="cfgUsaConexao" x="200" y="1092" Type="Data" />
+    <Output ID="28A380156DB271B8" Name="CNF" x="10328" y="192" Type="Event" />
+    <Output ID="D7422D307E6AF52D" Name="stsValor" x="10328" y="372" Type="Data" />
+    <Output ID="E6F78A591442B69F" Name="stsPorcentagem" x="10328" y="432" Type="Data" />
+    <Output ID="6108F9B5CA5170A6" Name="stsFalhaSensor" x="10328" y="492" Type="Data" />
+    <Output ID="726640D1704B3F86" Name="stsFalhaAtiva" x="10328" y="552" Type="Data" />
+    <Output ID="07C3588C57A022B8" Name="stsHabilitado" x="10328" y="612" Type="Data" />
+    <Output ID="9578190A49DBC450" Name="stsAlarmeHH" x="10328" y="672" Type="Data" />
+    <Output ID="0D14BA934DBED883" Name="stsAlarmeH" x="10328" y="731.9999" Type="Data" />
+    <Output ID="ADAD629D7A214F32" Name="stsAlarmeL" x="10328" y="792" Type="Data" />
+    <Output ID="53279A5859ECAB18" Name="stsAlarmeLL" x="10328" y="851.9999" Type="Data" />
+    <Output ID="72E7C8EC75361066" Name="stsAlarme" x="10328" y="911.9998" Type="Data" />
+    <Output ID="5493E1BF18D97620" Name="stsCondicaoHH" x="10328" y="972" Type="Data" />
+    <Output ID="613F6EF6FA647237" Name="stsCondicaoH" x="10328" y="1032" Type="Data" />
+    <Output ID="324136474F57E8DB" Name="stsCondicaoL" x="10328" y="1092" Type="Data" />
+    <Output ID="4D71F9AF04DA2016" Name="stsCondicaoLL" x="10328" y="1152" Type="Data" />
     <EventConnections>
       <Connection Source="$1DA04E5D7EE17604.FIRST_INIT" Destination="$21DBF75529B17174.B11E9EDFB330BB0A">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
@@ -233,10 +236,10 @@
       <Connection Source="$21DBF75529B17174.4275246E291683C0" Destination="$1A2582F2B07E0C54.2394F0A61CB1494A">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$D21DAA5004F58516" Destination="$1A2582F2B07E0C54.20033B1C8F10344F">
+      <Connection Source="$D21DAA5004F58516" Destination="$1A2582F2B07E0C54.20033B1C8F10344F" dx1="1989.115">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$33AD1B5E06E89E39" Destination="$1A2582F2B07E0C54.F6476A371C298363">
+      <Connection Source="$33AD1B5E06E89E39" Destination="$1A2582F2B07E0C54.F6476A371C298363" dx1="2089.281">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
       <Connection Source="$6CDDEE4759B81B9D.9E548C371B42FEDC" Destination="$1A2582F2B07E0C54.C81E4D5CD6D5669B">
@@ -287,7 +290,7 @@
       <Connection Source="$64AEF6370C038193.EO" Destination="$1A2582F2B07E0C54.1B3FD32E01035504">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$1A2582F2B07E0C54.AD639990F05475A6" Destination="$28A380156DB271B8">
+      <Connection Source="$1A2582F2B07E0C54.AD639990F05475A6" Destination="$28A380156DB271B8" dx1="2478.146">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
       <Connection Source="$1A2582F2B07E0C54.FC4E06ABE3EBBDDF" Destination="$6CDDEE4759B81B9D.C09F18F0C837B93D">
@@ -350,27 +353,33 @@
       <Connection Source="$CE7AF567A7A05B0F.CNF" Destination="$1A2582F2B07E0C54.BA1EF67945330BA4">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
+      <Connection Source="$1A2582F2B07E0C54.AFC15B7A52538DC1" Destination="$DA6A70167165ECE3.START">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$DA6A70167165ECE3.EO" Destination="$1A2582F2B07E0C54.01B9A26CA80ECAC9">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
     </EventConnections>
     <DataConnections>
-      <Connection Source="$D46B37D45FD5AF5D" Destination="$1A2582F2B07E0C54.BDC9951972159B49">
+      <Connection Source="$D46B37D45FD5AF5D" Destination="$1A2582F2B07E0C54.BDC9951972159B49" dx1="1861.104">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$FC98F78ABCBC0A7E" Destination="$1A2582F2B07E0C54.A121066C0B4E396A">
+      <Connection Source="$FC98F78ABCBC0A7E" Destination="$1A2582F2B07E0C54.A121066C0B4E396A" dx1="1934">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$31E57DCE3AF9C996" Destination="$1A2582F2B07E0C54.08668FFBD0D4C224">
+      <Connection Source="$31E57DCE3AF9C996" Destination="$1A2582F2B07E0C54.08668FFBD0D4C224" dx1="1889.729">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$BFED79817B71957D" Destination="$1A2582F2B07E0C54.5C5752CDF95E2D99">
+      <Connection Source="$BFED79817B71957D" Destination="$1A2582F2B07E0C54.5C5752CDF95E2D99" dx1="1873.927">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
       <Connection Source="$CA39953142B1EBBD" Destination="$1A2582F2B07E0C54.D75E79B6B7019547" dx1="2014.458">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$519A2B73CC673344" Destination="$1A2582F2B07E0C54.E942EB878618E7C8">
+      <Connection Source="$519A2B73CC673344" Destination="$1A2582F2B07E0C54.E942EB878618E7C8" dx1="1851.427">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$F21E4E6BC95CB4D0" Destination="$1A2582F2B07E0C54.2D81E0FCE9B8E921">
+      <Connection Source="$F21E4E6BC95CB4D0" Destination="$1A2582F2B07E0C54.2D81E0FCE9B8E921" dx1="1821.292">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
       <Connection Source="$1908F43CB878F5E7" Destination="$1A2582F2B07E0C54.A71A8E7BCD5DEA8F" dx1="120">
@@ -481,46 +490,46 @@
       <Connection Source="$1A2582F2B07E0C54.9751C9BCFBC02314" Destination="$13FDF8017F05FBD1.INP">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$1A2582F2B07E0C54.3203282664F84EE7" Destination="$D7422D307E6AF52D">
+      <Connection Source="$1A2582F2B07E0C54.3203282664F84EE7" Destination="$D7422D307E6AF52D" dx1="2648.146">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$1A2582F2B07E0C54.E36A36073A4D8255" Destination="$E6F78A591442B69F">
+      <Connection Source="$1A2582F2B07E0C54.E36A36073A4D8255" Destination="$E6F78A591442B69F" dx1="2658.146">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$1A2582F2B07E0C54.D2CE0143DEEF5F5B" Destination="$6108F9B5CA5170A6">
+      <Connection Source="$1A2582F2B07E0C54.D2CE0143DEEF5F5B" Destination="$6108F9B5CA5170A6" dx1="2668.146">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$1A2582F2B07E0C54.90D219EA9609F475" Destination="$726640D1704B3F86">
+      <Connection Source="$1A2582F2B07E0C54.90D219EA9609F475" Destination="$726640D1704B3F86" dx1="2678.146">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$1A2582F2B07E0C54.BC2F73C5CA9874F4" Destination="$07C3588C57A022B8">
+      <Connection Source="$1A2582F2B07E0C54.BC2F73C5CA9874F4" Destination="$07C3588C57A022B8" dx1="2688.146">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$1A2582F2B07E0C54.846DCED7A53DAF52" Destination="$9578190A49DBC450">
+      <Connection Source="$1A2582F2B07E0C54.846DCED7A53DAF52" Destination="$9578190A49DBC450" dx1="2698.146">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$1A2582F2B07E0C54.11F28407C39B0DB4" Destination="$0D14BA934DBED883">
+      <Connection Source="$1A2582F2B07E0C54.11F28407C39B0DB4" Destination="$0D14BA934DBED883" dx1="2708.146">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$1A2582F2B07E0C54.41F92ED47B97DD7B" Destination="$ADAD629D7A214F32">
+      <Connection Source="$1A2582F2B07E0C54.41F92ED47B97DD7B" Destination="$ADAD629D7A214F32" dx1="2718.146">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$1A2582F2B07E0C54.F2CABDC5ADA79A97" Destination="$53279A5859ECAB18">
+      <Connection Source="$1A2582F2B07E0C54.F2CABDC5ADA79A97" Destination="$53279A5859ECAB18" dx1="2728.146">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$1A2582F2B07E0C54.478DE584A3EC80F6" Destination="$72E7C8EC75361066">
+      <Connection Source="$1A2582F2B07E0C54.478DE584A3EC80F6" Destination="$72E7C8EC75361066" dx1="2738.146">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$1A2582F2B07E0C54.5C7B1A72AEA1734C" Destination="$5493E1BF18D97620">
+      <Connection Source="$1A2582F2B07E0C54.5C7B1A72AEA1734C" Destination="$5493E1BF18D97620" dx1="2748.146">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$1A2582F2B07E0C54.B271C2D0A9370A7F" Destination="$613F6EF6FA647237">
+      <Connection Source="$1A2582F2B07E0C54.B271C2D0A9370A7F" Destination="$613F6EF6FA647237" dx1="2758.146">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$1A2582F2B07E0C54.80C046EE3841337A" Destination="$324136474F57E8DB">
+      <Connection Source="$1A2582F2B07E0C54.80C046EE3841337A" Destination="$324136474F57E8DB" dx1="2768.146">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$1A2582F2B07E0C54.46248A230C3897E2" Destination="$4D71F9AF04DA2016">
+      <Connection Source="$1A2582F2B07E0C54.46248A230C3897E2" Destination="$4D71F9AF04DA2016" dx1="2778.146">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
       <Connection Source="$1A2582F2B07E0C54.3203282664F84EE7" Destination="$21DBF75529B17174.8897CDA500AC3B43">
@@ -537,6 +546,42 @@
       </Connection>
       <Connection Source="$1A2582F2B07E0C54.90D219EA9609F475" Destination="$21DBF75529B17174.50692E037DBEB5AF">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$1A2582F2B07E0C54.81E22B6ADE19C4D7" Destination="$21DBF75529B17174.3066A0DA727B2781">
+        <Points>
+          <Points>
+            <X>1419.01038</X>
+            <Y>440</Y>
+          </Points>
+          <Points>
+            <X>1539.01038</X>
+            <Y>440</Y>
+          </Points>
+          <Points>
+            <X>1539.01038</X>
+            <Y>837.5</Y>
+          </Points>
+          <Points>
+            <X>1162.5</X>
+            <Y>837.5</Y>
+          </Points>
+          <Points>
+            <X>1162.5</X>
+            <Y>832.5</Y>
+          </Points>
+          <Points>
+            <X>162.5</X>
+            <Y>832.5</Y>
+          </Points>
+          <Points>
+            <X>162.5</X>
+            <Y>705</Y>
+          </Points>
+          <Points>
+            <X>300</X>
+            <Y>705</Y>
+          </Points>
+        </Points>
       </Connection>
       <Connection Source="$1A2582F2B07E0C54.BC2F73C5CA9874F4" Destination="$21DBF75529B17174.8CC7DAAF94A2F272">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
@@ -604,7 +649,7 @@
       <Connection Source="$1A2582F2B07E0C54.F2CABDC5ADA79A97" Destination="$6CDDEE4759B81B9D.D6ADC459B9EEBD4A">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$0ECE7B3867B02E0B" Destination="$1A2582F2B07E0C54.5A40623945DBD51C">
+      <Connection Source="$0ECE7B3867B02E0B" Destination="$1A2582F2B07E0C54.5A40623945DBD51C" dx1="1798.333">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
       <Connection Source="$1A2582F2B07E0C54.DD2B06522C2E1D6D" Destination="$CE7AF567A7A05B0F.QI">

@@ -2,7 +2,7 @@
 <!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
 <FBType GUID="3e98cc65-b615-4ed6-9cb3-494d58a47df7" Name="EmergencyManagementControl" Comment="Basic Function Block Type" Namespace="SE.Nereda">
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="7/5/2026" Remarks="Template" />
+  <VersionInfo Organization="Schneider Electric" Version="0.1" Author=" " Date="28/10/2026" Remarks="0.1: entra com pelo menos 1 reator disponivel (tambem no FB_REACTOR_AV); ASK_FOR_INIT libera com 1 reator so." />
   <InterfaceList>
     <EventInputs>
       <Event ID="F396AB99E066BF1B" Name="VALID">
@@ -51,12 +51,28 @@
       <Event ID="EE2641E02BEB131E" Name="CYCLE_FINISH">
         <With Var="CycleFinish" />
       </Event>
+      <Event ID="6D0EF66EFA84E91F" Name="F_W_R">
+        <With Var="FeedWasRunning" />
+      </Event>
+      <Event ID="DBCEE06436FB5BAC" Name="FB_INIT">
+        <With Var="InitDone" />
+      </Event>
+      <Event ID="34C6501CEA66DC79" Name="SETTLE_TIME">
+        <With Var="SettleTime_R1" />
+        <With Var="SettleTime_R2" />
+        <With Var="SettleTime_R3" />
+        <With Var="SettleTime_R4" />
+        <With Var="SettleTime_R5" />
+        <With Var="SettleTime_R6" />
+      </Event>
     </EventInputs>
     <EventOutputs>
       <Event ID="E01285EC1A4C329B" Name="INIT_R_CMD">
         <With Var="Initialize" />
-        <With Var="InitRx_ToW_S2" />
-        <With Var="InitRx_ToSD" />
+      </Event>
+      <Event ID="4AA6AFF14274D508" Name="EN_F_S_FEED">
+        <With Var="FeedWasRunInit" />
+        <With Var="EnableForceStopFeed" />
       </Event>
       <Event ID="5425B5FF7C2B3EA7" Name="START_FEED">
         <With Var="StartFeed_R1" />
@@ -72,6 +88,12 @@
       <Event ID="BDC96AACAB3D2769" Name="CALCULATE_S5" />
       <Event ID="57B86B24E58CE6DD" Name="GRAPH">
         <With Var="Grafcet" />
+      </Event>
+      <Event ID="25965F8738457253" Name="CHECK_FEED_STATE" />
+      <Event ID="8EF3425406AD09F9" Name="SHOW_INIT_ACT">
+        <With Var="ShowInitAction" />
+        <With Var="ShowRxToFeed" />
+        <With Var="ShowSettleTWait" />
       </Event>
     </EventOutputs>
     <InputVars>
@@ -105,11 +127,19 @@
       <VarDeclaration ID="3F0EC98BBFEFD461" Name="NFHDoneR5" Type="BOOL" />
       <VarDeclaration ID="4CC5F004B67ABC18" Name="NFHDoneR6" Type="BOOL" />
       <VarDeclaration ID="425978B4225D5A81" Name="CycleFinish" Type="BOOL" />
+      <VarDeclaration ID="9BAD9C277F4B4221" Name="FeedWasRunning" Type="BOOL" />
+      <VarDeclaration ID="A584DC81E578FB1D" Name="InitDone" Type="BOOL" />
+      <VarDeclaration ID="10357121C9497460" Name="SettleTime_R1" Type="BOOL" />
+      <VarDeclaration ID="35A92CB221C5AB9D" Name="SettleTime_R2" Type="BOOL" />
+      <VarDeclaration ID="003EA5E55DAAAAA2" Name="SettleTime_R3" Type="BOOL" />
+      <VarDeclaration ID="8B912097F12A72DB" Name="SettleTime_R4" Type="BOOL" />
+      <VarDeclaration ID="BC392E73213C454D" Name="SettleTime_R5" Type="BOOL" />
+      <VarDeclaration ID="AB3E01ABA3A172DF" Name="SettleTime_R6" Type="BOOL" />
     </InputVars>
     <OutputVars>
       <VarDeclaration ID="27C27D9D7E3A4C1B" Name="Initialize" Type="BOOL" />
-      <VarDeclaration ID="70104F20CA3ADF24" Name="InitRx_ToW_S2" Type="INT" />
-      <VarDeclaration ID="0341C3C3411D612A" Name="InitRx_ToSD" Type="INT" />
+      <VarDeclaration ID="35A25DDFB5A0D857" Name="FeedWasRunInit" Type="BOOL" />
+      <VarDeclaration ID="C8EB307C1802E737" Name="EnableForceStopFeed" Type="BOOL" />
       <VarDeclaration ID="93BD970A79F50FF2" Name="StartFeed_R1" Type="BOOL" />
       <VarDeclaration ID="48471A9871450B3D" Name="StartFeed_R2" Type="BOOL" />
       <VarDeclaration ID="C47F108F9D450515" Name="StartFeed_R3" Type="BOOL" />
@@ -117,12 +147,15 @@
       <VarDeclaration ID="98828EA78D316628" Name="StartFeed_R5" Type="BOOL" />
       <VarDeclaration ID="D66C5C5D632E05FA" Name="StartFeed_R6" Type="BOOL" />
       <VarDeclaration ID="8BF438286778ED88" Name="Grafcet" Type="INT" />
+      <VarDeclaration ID="F70558B868F13AC4" Name="ShowInitAction" Type="BOOL" />
+      <VarDeclaration ID="5CA1D4DC943F255F" Name="ShowRxToFeed" Type="INT" />
+      <VarDeclaration ID="DF3AEA0A8B3B5E57" Name="ShowSettleTWait" Type="INT" />
     </OutputVars>
   </InterfaceList>
   <BasicFB ID="3fc991e4-fdcc-461f-99b1-7e8524611f23">
-    <Attribute Name="FBType.Basic.Algorithm.Order" Value="StopAll,Initialize,StartUpDelay,AskForPosition,ResetInit,StartReactors" />
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="StopAll,Initialize,StartUpDelay,AskForPosition,ResetInit,StartReactors,ResetEnableStopFeed,SetResetEnableStopFeed,ResetFeedWasRunInit,CheckSettleTime" />
     <InternalVars>
-      <VarDeclaration ID="A584DC81E578FB1D" Name="InitDone" Type="BOOL" />
+      <VarDeclaration ID="69D9186C949E273E" Name="CheckSettleID" Type="INT" />
     </InternalVars>
     <ECC>
       <ECState Name="START" Comment="Initial State" x="3122.941" y="403.4117" />
@@ -132,77 +165,114 @@
         <ECAction Output="CALCULATE_S5" />
         <ECAction Output="GRAPH" />
         <ECAction Output="STOP_UP_DELAY" />
+        <ECAction Algorithm="ResetEnableStopFeed" Output="EN_F_S_FEED" />
+        <ECAction Algorithm="ResetFeedWasRunInit" Output="SHOW_INIT_ACT" />
       </ECState>
-      <ECState Name="ASK_FEED_POSITION" x="3126" y="2098">
+      <ECState Name="ASK_FEED_POSITION" x="3113" y="2839.286">
         <ECAction Algorithm="AskForPosition" Output="ASK_FEED_POSITION" />
+        <ECAction Output="CHECK_FEED_STATE" />
         <ECAction Output="GRAPH" />
       </ECState>
-      <ECState Name="ASK_FOR_INIT" x="3120.683" y="2626.329">
+      <ECState Name="ASK_FOR_INIT" x="3119.683" y="4039.996">
         <ECAction Algorithm="Initialize" Output="INIT_R_CMD" />
         <ECAction Output="GRAPH" />
       </ECState>
-      <ECState Name="STARTUP_D" x="3127.078" y="1553.172">
+      <ECState Name="STARTUP_D" x="3118.078" y="3438.458">
         <ECAction Algorithm="StartUpDelay" Output="START_UP_DELAY" />
+        <ECAction Output="SHOW_INIT_ACT" />
         <ECAction Output="GRAPH" />
       </ECState>
-      <ECState Name="InitDone" x="3124.507" y="3092.006">
+      <ECState Name="InitDone" x="3128.507" y="5247.338">
         <ECAction Algorithm="ResetInit" Output="INIT_R_CMD" />
+        <ECAction Output="SHOW_INIT_ACT" />
       </ECState>
-      <ECState Name="START_REACTOR" x="3124.143" y="3572.758">
+      <ECState Name="START_REACTOR" x="3118.62" y="5861.424">
         <ECAction Algorithm="StartReactors" Output="START_FEED" />
         <ECAction Output="GRAPH" />
       </ECState>
-      <ECState Name="Change" x="3128.444" y="4157.403" />
-      <ECTransition Source="START" Destination="StopAll" Condition="MODE AND Mode = 3 AND NbrOfReactorsAvailable &gt;= 2 AND&#xD;&#xA;&#xD;&#xA;((NOT FbExistR1) OR Reactor1Available) AND&#xD;&#xA;((NOT FbExistR2) OR Reactor2Available) AND&#xD;&#xA;((NOT FbExistR3) OR Reactor3Available) AND&#xD;&#xA;((NOT FbExistR4) OR Reactor4Available) AND&#xD;&#xA;((NOT FbExistR5) OR Reactor5Available) AND&#xD;&#xA;((NOT FbExistR6) OR Reactor6Available)" x="3121.554" y="659.186">
+      <ECState Name="Change" x="3110.921" y="6906.068">
+        <ECAction Algorithm="ResetEnableStopFeed" Output="EN_F_S_FEED" />
+      </ECState>
+      <ECState Name="IdleState" x="3116.143" y="6368.252">
+        <ECAction Algorithm="ResetFeedWasRunInit" Output="EN_F_S_FEED" />
+      </ECState>
+      <ECState Name="CheckFeedState1" x="3106.111" y="1742.507">
+        <ECAction Output="CHECK_FEED_STATE" />
+      </ECState>
+      <ECState Name="ForceStopFeedState1" x="3113.786" y="2314.561">
+        <ECAction Algorithm="SetResetEnableStopFeed" Output="EN_F_S_FEED" />
+      </ECState>
+      <ECState Name="CheckSettleTime" x="3123.809" y="4701.585">
+        <ECAction Algorithm="CheckSettleTime" Output="SHOW_INIT_ACT" />
+        <ECAction Output="GRAPH" />
+      </ECState>
+      <ECTransition Source="START" Destination="StopAll" Condition="(MODE OR FB_REACTOR_AV) AND Mode = 3 AND&#xD;&#xA;NbrOfReactorsAvailable &gt;= 1" x="3121.554" y="659.186">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="780.3288,146.9099,780.3474,181.7631" />
       </ECTransition>
-      <ECTransition Source="STARTUP_D" Destination="ASK_FEED_POSITION" Condition="FB_START_UP_DELAY AND StartUpDelay AND&#xD;&#xA;NbrOfReactorsAvailable &gt;= 1" x="3124.487" y="1809.895">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="781.0154,432.8134,780.9992,469.5187" />
+      <ECTransition Source="STARTUP_D" Destination="ASK_FOR_INIT" Condition="FB_START_UP_DELAY AND StartUpDelay AND&#xD;&#xA;NbrOfReactorsAvailable &gt;= 1" x="3121.404" y="3721.515">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="780.4874,908.1872,780.5065,949.6184" />
       </ECTransition>
       <ECTransition Source="StopAll" Destination="START" Condition="Mode &lt;&gt; 3" x="2655.995" y="670.2914">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="636.577,185.5772,635.0254,150.2176" />
       </ECTransition>
-      <ECTransition Source="ASK_FEED_POSITION" Destination="ASK_FOR_INIT" Condition="START_FEED_POS AND&#xD;&#xA;&#xD;&#xA;(StartFeedPositionR1 &lt;&gt; 0 OR&#xD;&#xA;StartFeedPositionR2 &lt;&gt; 0 OR&#xD;&#xA;StartFeedPositionR3 &lt;&gt; 0 OR&#xD;&#xA;StartFeedPositionR4 &lt;&gt; 0 OR&#xD;&#xA;StartFeedPositionR5 &lt;&gt; 0 OR&#xD;&#xA;StartFeedPositionR6 &lt;&gt; 0)" x="3121.413" y="2353.346">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="780.4389,569.9572,780.0573,605.2462" />
+      <ECTransition Source="ASK_FEED_POSITION" Destination="STARTUP_D" Condition="START_FEED_POS AND&#xD;&#xA;&#xD;&#xA;(StartFeedPositionR1 &lt;&gt; 0 OR&#xD;&#xA;StartFeedPositionR2 &lt;&gt; 0 OR&#xD;&#xA;StartFeedPositionR3 &lt;&gt; 0 OR&#xD;&#xA;StartFeedPositionR4 &lt;&gt; 0 OR&#xD;&#xA;StartFeedPositionR5 &lt;&gt; 0 OR&#xD;&#xA;StartFeedPositionR6 &lt;&gt; 0)" x="3113.977" y="3128.608">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="778.2324,760.7035,778.569,801.89" />
       </ECTransition>
-      <ECTransition Source="ASK_FOR_INIT" Destination="InitDone" Condition="Valid" x="3125.153" y="2845.996">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="781.3019,695.3469,781.5368,725.4559" />
+      <ECTransition Source="ASK_FOR_INIT" Destination="CheckSettleTime" Condition="Valid AND&#xD;&#xA;(InitDone OR NbrOfReactorsAvailable = 1)" x="3123.63" y="4350.486">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="780.8812,1062.712,781.1552,1109.147" />
       </ECTransition>
-      <ECTransition Source="StopAll" Destination="STARTUP_D" Condition="Mode = 3 AND NbrOfReactorsAvailable &gt;= 2 AND&#xD;&#xA;&#xD;&#xA;((NOT FbExistR1) OR Reactor1Available) AND&#xD;&#xA;((NOT FbExistR2) OR Reactor2Available) AND&#xD;&#xA;((NOT FbExistR3) OR Reactor3Available) AND&#xD;&#xA;((NOT FbExistR4) OR Reactor4Available) AND&#xD;&#xA;((NOT FbExistR5) OR Reactor5Available) AND&#xD;&#xA;((NOT FbExistR6) OR Reactor6Available)" x="3126.074" y="1238.682">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="781.434,287.8116,781.7858,331.3788" />
+      <ECTransition Source="StopAll" Destination="CheckFeedState1" Condition="Mode = 3 AND NbrOfReactorsAvailable &gt;= 1" x="3115.458" y="1333.056">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="779.533,303.4917,778.3773,362.8368" />
       </ECTransition>
-      <ECTransition Source="START_REACTOR" Destination="StopAll" Condition="Mode &lt;&gt; 3" x="1681.936" y="2072.813">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="330.2646,836.0257,303.9562,175.1043" />
+      <ECTransition Source="START_REACTOR" Destination="StopAll" Condition="Mode &lt;&gt; 3" x="988.8134" y="3213.76">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="98.7975,1405.021,73.80184,174.7429" />
       </ECTransition>
-      <ECTransition Source="STARTUP_D" Destination="StopAll" Condition="Mode &lt;&gt; 3" x="2800.128" y="1244.016">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="681.0002,333.1559,680.4335,289.5904" />
+      <ECTransition Source="ASK_FEED_POSITION" Destination="StopAll" Condition="Mode &lt;&gt; 3" x="2084.073" y="2067.695">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="443.508,606.5685,446.7914,458.1211" />
       </ECTransition>
-      <ECTransition Source="ASK_FEED_POSITION" Destination="StopAll" Condition="Mode &lt;&gt; 3" x="2472.008" y="1484.162">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="582.4996,423.5209,563.9756,314.2312" />
+      <ECTransition Source="STARTUP_D" Destination="StopAll" Condition="Mode &lt;&gt; 3" x="1732.737" y="2345.321">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="338.0419,722.3447,319.2485,477.4979" />
       </ECTransition>
-      <ECTransition Source="ASK_FOR_INIT" Destination="StopAll" Condition="Mode &lt;&gt; 3" x="2042.43" y="1742.793">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="432.5,611.2904,438.75,256.2904" />
+      <ECTransition Source="ASK_FOR_INIT" Destination="StopAll" Condition="Mode &lt;&gt; 3" x="1329.939" y="2564.049">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="194.9524,972.7274,201.387,322.3764" />
       </ECTransition>
-      <ECTransition Source="InitDone" Destination="START_REACTOR" Condition="1" x="3126.739" y="3327.667">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="781.8632,815.8753,781.7648,847.172" />
+      <ECTransition Source="IdleState" Destination="Change" Condition="(FB_NEXT_FEED AND&#xD;&#xA;(NFHDoneR1 OR&#xD;&#xA;NFHDoneR2 OR&#xD;&#xA;NFHDoneR3 OR&#xD;&#xA;NFHDoneR4 OR&#xD;&#xA;NFHDoneR5 OR&#xD;&#xA;NFHDoneR6))&#xD;&#xA;&#xD;&#xA;OR Mode &lt;&gt; 3" x="3114.219" y="6627.651">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="777.6993,1636.249,779.5035,1675.992" />
       </ECTransition>
-      <ECTransition Source="START_REACTOR" Destination="Change" Condition="FB_NEXT_FEED AND&#xD;&#xA;(NFHDoneR1 OR&#xD;&#xA;NFHDoneR2 OR&#xD;&#xA;NFHDoneR3 OR&#xD;&#xA;NFHDoneR4 OR&#xD;&#xA;NFHDoneR5 OR&#xD;&#xA;NFHDoneR6)" x="2558.05" y="3865.032">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="609.7456,944.3139,600.4261,987.0911" />
+      <ECTransition Source="Change" Destination="START_REACTOR" Condition="(StartFeedPositionR1 &lt;&gt; 0 OR&#xD;&#xA;StartFeedPositionR2 &lt;&gt; 0 OR&#xD;&#xA;StartFeedPositionR3 &lt;&gt; 0 OR&#xD;&#xA;StartFeedPositionR4 &lt;&gt; 0 OR&#xD;&#xA;StartFeedPositionR5 &lt;&gt; 0 OR&#xD;&#xA;StartFeedPositionR6 &lt;&gt; 0)" x="2611.792" y="6358.839">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="617.9651,1626.141,619.344,1549.127" />
       </ECTransition>
-      <ECTransition Source="Change" Destination="START_REACTOR" Condition="(StartFeedPositionR1 &lt;&gt; 0 OR&#xD;&#xA;StartFeedPositionR2 &lt;&gt; 0 OR&#xD;&#xA;StartFeedPositionR3 &lt;&gt; 0 OR&#xD;&#xA;StartFeedPositionR4 &lt;&gt; 0 OR&#xD;&#xA;StartFeedPositionR5 &lt;&gt; 0 OR&#xD;&#xA;StartFeedPositionR6 &lt;&gt; 0)" x="3129.261" y="3849.811">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="782.6316,981.1921,782.3365,941.1683" />
+      <ECTransition Source="Change" Destination="StopAll" Condition="Mode &lt;&gt; 3" x="612.2495" y="3555.16">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="-63.27301,1746.601,-26.11942,-26.06177" />
       </ECTransition>
-      <ECTransition Source="Change" Destination="StopAll" Condition="Mode &lt;&gt; 3" x="1258.529" y="2338.886">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="154,1048,186,90" />
+      <ECTransition Source="START_REACTOR" Destination="IdleState" Condition="1" x="3120.72" y="6100.474">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="780.4297,1507.152,780.299,1540.691" />
+      </ECTransition>
+      <ECTransition Source="CheckFeedState1" Destination="ForceStopFeedState1" Condition="F_W_R" x="3112.111" y="2028.901">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="777.8898,487.7687,778.4149,526.7426" />
+      </ECTransition>
+      <ECTransition Source="ForceStopFeedState1" Destination="ASK_FEED_POSITION" Condition="1" x="3114.09" y="2546.392">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="778.5954,616.5393,778.5282,651.5679" />
+      </ECTransition>
+      <ECTransition Source="CheckFeedState1" Destination="StopAll" Condition="Mode &lt;&gt; 3" x="2678.632" y="1440.272">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="642.6804,398.3643,645.1379,339.4415" />
+      </ECTransition>
+      <ECTransition Source="CheckSettleTime" Destination="InitDone" Condition="(CheckSettleID = 1 AND NOT SettleTime_R1) OR&#xD;&#xA;(CheckSettleID = 2 AND NOT SettleTime_R2) OR&#xD;&#xA;(CheckSettleID = 3 AND NOT SettleTime_R3) OR&#xD;&#xA;(CheckSettleID = 4 AND NOT SettleTime_R4) OR&#xD;&#xA;(CheckSettleID = 5 AND NOT SettleTime_R5) OR&#xD;&#xA;(CheckSettleID = 6 AND NOT SettleTime_R6)" x="3127.048" y="4962.141">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="781.6511,1221.117,781.9678,1257.9" />
+      </ECTransition>
+      <ECTransition Source="InitDone" Destination="START_REACTOR" Condition="1" x="3127.618" y="5555.576">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="782.4857,1367.755,781.8018,1410.232" />
+      </ECTransition>
+      <ECTransition Source="CheckSettleTime" Destination="StopAll" Condition="Mode &lt;&gt; 3" x="1166.707" y="3016.429">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="231.6667,1246.785,56.66666,291.6667" />
       </ECTransition>
     </ECC>
     <Algorithm Name="StopAll">
-      <ST><![CDATA[;
-Grafcet := 10;
-InitDone := FALSE;
+      <ST><![CDATA[Grafcet := 10;
 Initialize := FALSE;
-InitRx_ToSD := 0;
-InitRx_ToW_S2 := 0;
+ShowInitAction := FALSE;
+ShowRxToFeed := 0;
+
 StartFeed_R1 := FALSE;
 StartFeed_R2 := FALSE;
 StartFeed_R3 := FALSE;
@@ -211,67 +281,39 @@ StartFeed_R5 := FALSE;
 StartFeed_R6 := FALSE;]]></ST>
     </Algorithm>
     <Algorithm ID="4877ac90-febc-4930-bbe8-adb94d3789c8" Name="Initialize">
-      <ST><![CDATA[;
-Grafcet := 3;
-Initialize := TRUE;
-
-//=========================================================
-IF FbExistR1 AND StartFeedPositionR1 = 3 THEN
-	InitRx_ToSD := 1;
-END_IF;
-
-IF FbExistR2 AND StartFeedPositionR2 = 3 THEN
-	InitRx_ToSD := 2;
-END_IF;
-
-IF FbExistR3 AND StartFeedPositionR3 = 3 THEN
-	InitRx_ToSD := 3;
-END_IF;
-
-IF FbExistR4 AND StartFeedPositionR4 = 3 THEN
-	InitRx_ToSD := 4;
-END_IF;
-
-IF FbExistR5 AND StartFeedPositionR5 = 3 THEN
-	InitRx_ToSD := 5;
-END_IF;
-
-IF FbExistR6 AND StartFeedPositionR6 = 3 THEN
-	InitRx_ToSD := 6;
-END_IF;
-
-//=========================================================
-IF FbExistR1 AND StartFeedPositionR1 = 2 THEN
-	InitRx_ToW_S2 := 1;
-END_IF;
-
-IF FbExistR2 AND StartFeedPositionR2 = 2 THEN
-	InitRx_ToW_S2 := 2;
-END_IF;
-
-IF FbExistR3 AND StartFeedPositionR3 = 2 THEN
-	InitRx_ToW_S2 := 3;
-END_IF;
-
-IF FbExistR4 AND StartFeedPositionR4 = 2 THEN
-	InitRx_ToW_S2 := 4;
-END_IF;
-
-IF FbExistR5 AND StartFeedPositionR5 = 2 THEN
-	InitRx_ToW_S2 := 5;
-END_IF;
-
-IF FbExistR6 AND StartFeedPositionR6 = 2 THEN
-	InitRx_ToW_S2 := 6;
-END_IF;]]></ST>
+      <ST><![CDATA[Grafcet := 3;
+Initialize := TRUE;]]></ST>
     </Algorithm>
     <Algorithm ID="46b59b82-eae5-4c38-a90c-e86c990cddcb" Name="StartUpDelay">
-      <ST><![CDATA[;
-Grafcet := 1;]]></ST>
+      <ST><![CDATA[Grafcet := 2;
+ShowInitAction := TRUE;
+
+IF FbExistR1 AND StartFeedPositionR1 = 1 THEN
+	ShowRxToFeed := 1;
+END_IF;
+
+IF FbExistR2 AND StartFeedPositionR2 = 1 THEN
+	ShowRxToFeed := 2;
+END_IF;
+
+IF FbExistR3 AND StartFeedPositionR3 = 1 THEN
+	ShowRxToFeed := 3;
+END_IF;
+
+IF FbExistR4 AND StartFeedPositionR4 = 1 THEN
+	ShowRxToFeed := 4;
+END_IF;
+
+IF FbExistR5 AND StartFeedPositionR5 = 1 THEN
+	ShowRxToFeed := 5;
+END_IF;
+
+IF FbExistR6 AND StartFeedPositionR6 = 1 THEN
+	ShowRxToFeed := 6;
+END_IF;]]></ST>
     </Algorithm>
     <Algorithm ID="071bc27f-30d3-4f8c-9070-50790b325732" Name="AskForPosition">
-      <ST><![CDATA[;
-Grafcet := 2;
+      <ST><![CDATA[Grafcet := 1;
 
 StartFeed_R1 := FALSE;
 StartFeed_R2 := FALSE;
@@ -281,13 +323,15 @@ StartFeed_R5 := FALSE;
 StartFeed_R6 := FALSE;]]></ST>
     </Algorithm>
     <Algorithm ID="f342b562-1ea9-4eef-9144-3a6eef94cf50" Name="ResetInit">
-      <ST><![CDATA[;
-Initialize := FALSE;
-InitDone := TRUE;]]></ST>
+      <ST><![CDATA[Initialize := FALSE;
+ShowInitAction := FALSE;
+ShowRxToFeed := 0;
+CheckSettleID := 0;
+ShowSettleTWait := CheckSettleID;]]></ST>
     </Algorithm>
     <Algorithm ID="415c869a-43d7-4605-b0ea-accdc65675ab" Name="StartReactors">
-      <ST><![CDATA[;
-Grafcet := 4;
+      <ST><![CDATA[Grafcet := 5;
+
 IF FbExistR1 AND StartFeedPositionR1 = 1 THEN
 	StartFeed_R1 := TRUE;
 	
@@ -348,6 +392,49 @@ IF FbExistR6 AND StartFeedPositionR6 = 1 THEN
 	StartFeed_R4 := FALSE;
 	StartFeed_R5 := FALSE;
 END_IF;]]></ST>
+    </Algorithm>
+    <Algorithm ID="f7809c58-f26d-49f3-bb70-1c6875405e0f" Name="ResetEnableStopFeed">
+      <ST><![CDATA[;
+EnableForceStopFeed := FALSE;]]></ST>
+    </Algorithm>
+    <Algorithm ID="68b49f2c-012b-439e-b8e9-0253dfce4de3" Name="SetResetEnableStopFeed">
+      <ST><![CDATA[;
+EnableForceStopFeed := FeedWasRunning;
+FeedWasRunInit := FeedWasRunning;]]></ST>
+    </Algorithm>
+    <Algorithm ID="59c61642-51ee-4b09-8615-0a0fbabf5c85" Name="ResetFeedWasRunInit">
+      <ST><![CDATA[;
+FeedWasRunInit := FALSE;]]></ST>
+    </Algorithm>
+    <Algorithm ID="080e4800-36df-47fe-b9e0-fac54fcb2aec" Name="CheckSettleTime">
+      <ST><![CDATA[;
+Grafcet := 4;
+
+IF FbExistR1 AND StartFeedPositionR1 = 1 THEN
+	CheckSettleID := 1;
+END_IF;
+
+IF FbExistR2 AND StartFeedPositionR2 = 1 THEN
+	CheckSettleID := 2;
+END_IF;
+
+IF FbExistR3 AND StartFeedPositionR3 = 1 THEN
+	CheckSettleID := 3;
+END_IF;
+
+IF FbExistR4 AND StartFeedPositionR4 = 1 THEN
+	CheckSettleID := 4;
+END_IF;
+
+IF FbExistR5 AND StartFeedPositionR5 = 1 THEN
+	CheckSettleID := 5;
+END_IF;
+
+IF FbExistR6 AND StartFeedPositionR6 = 1 THEN
+	CheckSettleID := 6;
+END_IF;
+
+ShowSettleTWait := CheckSettleID;]]></ST>
     </Algorithm>
   </BasicFB>
 </FBType>

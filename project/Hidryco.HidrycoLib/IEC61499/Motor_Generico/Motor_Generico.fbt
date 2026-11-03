@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
-<FBType GUID="35704e0b-2ab3-464d-a9fe-a89344f74869" Comment="Motor generico (partida direta ou inversor) - HidrycoLib" Name="Motor_Generico" Format="2.0" Namespace="Hidryco.HidrycoLib">
+<FBType GUID="35704e0b-2ab3-464d-a9fe-a89344f74869" Name="Motor_Generico" Format="2.0" Comment="Motor generico (partida direta ou inversor) - HidrycoLib" Namespace="Hidryco.HidrycoLib">
   <Attribute Name="HMI.Alias" Value="" />
   <Attribute Name="Configuration.FB.IDCounter" Value="4" />
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Hidryco" Version="1.6" Author="Hidryco" Date="16/10/2026" Remarks="1.6: simbolos sBomba/sMotor/sSoprador - icones de termica e de falha de comunicacao piscam enquanto o alarme nao foi reconhecido. 1.5: symlink stsFalhaComunicacao recebe o ComStatus do ATV (TRUE = comunicacao OK), invertido por NOT para a logica; saida stsComunicacaoOK no CNF. 1.1: padrao SE.App2CommonProcess (supervisao por E_DELAY, horimetro/partidas pelo devMntCalc, escala com limites). 1.3: faceplates ISA-101. 1.4: horimetro com resolucao de 1 s (E_CYCLE + PERSISTENCE), falhas na lista de alarmes do EAE (ALARM_BIT, comunicacao = Warning), reset reconhece os alarmes, termica NF e velocidade manual 50 % por padrao. Campo por symlink ${PATH}: stsFalhaComunicacao, stsRemoto, stsLocal, stsLigado, stsProtecaoTermica, stsSemFalha (NF); saidas cmdAcionamento, stpVelocidade, cmdReset; inversor (cfgInversor=TRUE): stsVelocidade, stsCorrente, stsTensao, stsPotencia, stsFrequencia, stsTorque, stsCodigoFalha, stsRpm" />
+  <VersionInfo Organization="Hidryco" Version="2.1" Author="Hidryco" Date="27/10/2026" Remarks="2.1: velocidade da IHM (STS_VELOCIDADE) em %% entre LSP e HSP lidos do inversor (symlinks stsFrequenciaMaxima HSP 3104, stsFrequenciaMinima LSP 3105); controle continua em Hz. 2.0: inversores ATV600 por Modbus TCP generico (MODBUSGENTCPS unit 248, planilha ATV600 V4.6) no lugar do ATVSpeedControlMbtcp: symlinks com os mesmos nomes em INT (stsVelocidade RFR 0,1 Hz, stsCorrente LCR, stsTensao UOP, stsPotencia OPR, stsTorque OTR, stsCodigoFalha LFT, stsRpm RFRD; stpVelocidade LFR 0,1 Hz; stsFalhaComunicacao = connStatusInt, 1 online), novo cmdPalavraInversor (CMD 8501, bit 7 reset), conversao no basicInversorATV600, cfgEscalaCorrente; com inversor usar cfgSaidaMax = 600 (60,0 Hz = 100 %). 1.9: velocidades da IHM/SCADA em Hz no CLP: STP_SAIDA_MANUAL, STS_VELOCIDADE e STS_VELOCIDADE_REFERENCIA. 1.8: tag STS_FALHA = falha ativa (motor em falha agora, sem memoria). 1.7: alarme de protecao termica sem reconhecimento (ACKTYPE 0) - aparece e some com a termica; velocidade na IHM em Hz (100 % = 60 Hz). 1.6: simbolos sBomba/sMotor/sSoprador - icones de termica e de falha de comunicacao piscam enquanto o alarme nao foi reconhecido. 1.5: symlink stsFalhaComunicacao recebe o ComStatus do ATV (TRUE = comunicacao OK), invertido por NOT para a logica; saida stsComunicacaoOK no CNF. 1.1: padrao SE.App2CommonProcess (supervisao por E_DELAY, horimetro/partidas pelo devMntCalc, escala com limites). 1.3: faceplates ISA-101. 1.4: horimetro com resolucao de 1 s (E_CYCLE + PERSISTENCE), falhas na lista de alarmes do EAE (ALARM_BIT, comunicacao = Warning), reset reconhece os alarmes, termica NF e velocidade manual 50 % por padrao. Campo por symlink ${PATH}: stsFalhaComunicacao, stsRemoto, stsLocal, stsLigado, stsProtecaoTermica, stsSemFalha (NF); saidas cmdAcionamento, stpVelocidade, cmdReset; inversor (cfgInversor=TRUE): stsVelocidade, stsCorrente, stsTensao, stsPotencia, stsFrequencia, stsTorque, stsCodigoFalha, stsRpm" />
   <InterfaceList>
     <EventInputs>
       <Event ID="21070E4B73BFECDC" Name="REQ" Comment="Atualizacao do processo">
@@ -52,6 +52,7 @@
       <VarDeclaration ID="39489193B7758574" Name="cfgSaidaMax" Type="REAL" InitialValue="100.0" Comment="Valor de campo equivalente a 100 % (ex.: 100 = %, 60 = Hz, 10000 = Sulzer 0,01 %)" />
       <VarDeclaration ID="D34C88BE7FFF3208" Name="cfgUsaTermica" Type="BOOL" InitialValue="TRUE" Comment="TRUE = supervisiona a protecao termica" />
       <VarDeclaration ID="66763E13F70A4420" Name="cfgTermicaNF" Type="BOOL" InitialValue="TRUE" Comment="TRUE = termica NF (FALSE no campo = atuada). Padrao NF (definido pelo usuario)" />
+      <VarDeclaration ID="22F828987A86425B" Name="cfgEscalaCorrente" Type="REAL" InitialValue="0.1" Comment="Inversor: A por unidade do LCR (ATV600: 0,1 = LCR em 0,1 A; conferir no display do inversor)" />
       <VarDeclaration ID="3AD811F03C7B9855" Name="cfgUsaFalhaComunicacao" Type="BOOL" InitialValue="TRUE" Comment="TRUE = considera o bit de falha de comunicacao da remota" />
     </InputVars>
     <OutputVars>
@@ -75,38 +76,48 @@
     <FB ID="16472D151FAFCBFE" Name="plcStart1" Type="plcStart" x="1400" y="200" Namespace="SE.App2Base">
       <Parameter Name="$Prio" Value="10" />
     </FB>
-    <FB ID="6C4F34443711FE31" UID="1" Name="Leitura" Type="SYMLINKMULTIVARDST_5495E501E675F500" x="3412" y="200" Namespace="Hidryco.HidrycoLib">
-      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=6;VALUE${I}:BOOL,BOOL,BOOL,BOOL,BOOL,BOOL" />
+    <FB ID="6C4F34443711FE31" UID="1" Name="Leitura" Type="SYMLINKMULTIVARDST_173DE751D51121F49" x="3412" y="200" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=6;VALUE${I}:BOOL,BOOL,BOOL,BOOL,BOOL,INT" />
       <Parameter Name="$QI" Value="TRUE" />
-      <Parameter Name="$NAME1" Value="'$${PATH}stsFalhaComunicacao'" />
-      <Parameter Name="$NAME2" Value="'$${PATH}stsRemoto'" />
-      <Parameter Name="$NAME3" Value="'$${PATH}stsLocal'" />
-      <Parameter Name="$NAME4" Value="'$${PATH}stsLigado'" />
-      <Parameter Name="$NAME5" Value="'$${PATH}stsProtecaoTermica'" />
-      <Parameter Name="$NAME6" Value="'$${PATH}stsSemFalha'" />
+      <Parameter Name="$NAME1" Value="'$${PATH}stsRemoto'" />
+      <Parameter Name="$NAME2" Value="'$${PATH}stsLocal'" />
+      <Parameter Name="$NAME3" Value="'$${PATH}stsLigado'" />
+      <Parameter Name="$NAME4" Value="'$${PATH}stsProtecaoTermica'" />
+      <Parameter Name="$NAME5" Value="'$${PATH}stsSemFalha'" />
+      <Parameter Name="$NAME6" Value="'$${PATH}stsFalhaComunicacao'" />
     </FB>
-    <FB ID="EA168F627A96CE25" UID="2" Name="Escrita" Type="SYMLINKMULTIVARSRC_804524063F215924" x="7000" y="4220" Namespace="Hidryco.HidrycoLib">
-      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=3;VALUE${I}:BOOL,REAL,BOOL" />
+    <FB ID="EA168F627A96CE25" UID="2" Name="Escrita" Type="SYMLINKMULTIVARSRC_2408DB8E08E99B442" x="7000" y="4220" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=3;VALUE${I}:BOOL,INT,BOOL" />
       <Parameter Name="$QI" Value="TRUE" />
       <Parameter Name="$NAME1" Value="'$${PATH}cmdAcionamento'" />
       <Parameter Name="$NAME2" Value="'$${PATH}stpVelocidade'" />
       <Parameter Name="$NAME3" Value="'$${PATH}cmdReset'" />
     </FB>
-    <FB ID="5D211E488A871B50" UID="3" Name="LeituraInversor1" Type="SYMLINKMULTIVARDST_5523D0A40E83C5C4" x="3412" y="1192" Namespace="Hidryco.HidrycoLib">
-      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=4;VALUE${I}:REAL,REAL,REAL,REAL" />
+    <FB ID="5D211E488A871B50" UID="3" Name="LeituraInversor1" Type="SYMLINKMULTIVARDST_15292F208F22048C1" x="3412" y="1192" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=4;VALUE${I}:INT,INT,INT,INT" />
       <Parameter Name="$NAME1" Value="'$${PATH}stsVelocidade'" />
       <Parameter Name="$NAME2" Value="'$${PATH}stsCorrente'" />
       <Parameter Name="$NAME3" Value="'$${PATH}stsTensao'" />
       <Parameter Name="$NAME4" Value="'$${PATH}stsPotencia'" />
     </FB>
-    <FB ID="C154DD89548EB68E" UID="4" Name="LeituraInversor2" Type="SYMLINKMULTIVARDST_5523D0A40E83C5C4" x="3412" y="2064" Namespace="Hidryco.HidrycoLib">
-      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=4;VALUE${I}:REAL,REAL,REAL,REAL" />
+    <FB ID="C154DD89548EB68E" UID="4" Name="LeituraInversor2" Type="SYMLINKMULTIVARDST_15292F208F22048C1" x="3412" y="2064" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=4;VALUE${I}:INT,INT,INT,INT" />
       <Parameter Name="$NAME1" Value="'$${PATH}stsFrequencia'" />
       <Parameter Name="$NAME2" Value="'$${PATH}stsTorque'" />
       <Parameter Name="$NAME3" Value="'$${PATH}stsCodigoFalha'" />
       <Parameter Name="$NAME4" Value="'$${PATH}stsRpm'" />
     </FB>
-    <FB ID="B52BCA011F6E34DF" Name="Logica" Type="basicMotorGenerico" x="4952" y="200" Namespace="Hidryco.HidrycoLib" />
+    <FB ID="3D1FFBD58DAE91EE" UID="7" Name="LeituraLimites" Type="SYMLINKMULTIVARDST_184BA62D721027C6E" x="3412" y="2936" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=2;VALUE${I}:INT,INT" />
+      <Parameter Name="$NAME1" Value="'$${PATH}stsFrequenciaMaxima'" />
+      <Parameter Name="$NAME2" Value="'$${PATH}stsFrequenciaMinima'" />
+    </FB>
+    <FB ID="2A23C6F5FE0791ED" Name="Inversor" Type="basicInversorATV600" x="4360" y="1192" Namespace="Hidryco.HidrycoLib" Comment="ATV600 por Modbus generico: brutos -> grandezas; LFR e CMD" />
+    <FB ID="C725F34C719627D0" UID="6" Name="EscritaInversor" Type="SYMLINKMULTIVARSRC_5A03F112CD5D470" x="7000" y="5120" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=1;VALUE${I}:INT" />
+      <Parameter Name="$NAME1" Value="'$${PATH}cmdPalavraInversor'" />
+    </FB>
+    <FB ID="B52BCA011F6E34DF" Name="Logica" Type="basicMotorGenerico" x="4980" y="180" Namespace="Hidryco.HidrycoLib" />
     <FB ID="D98D502F7612C555" Name="Supervisao" Type="E_DELAY" x="3412" y="3508" Namespace="IEC61499.Standard" />
     <FB ID="6F720F5A20F7532E" Name="PulsoReset" Type="E_DELAY" x="3412" y="2936" Namespace="IEC61499.Standard">
       <Parameter Name="$DT" Value="T#3s" />
@@ -127,7 +138,7 @@
     <FB ID="DC52F0C1F02F167E" Name="AlarmeTermica" Type="ALARM_BIT" x="8864" y="1492" Namespace="Runtime.Standard">
       <Attribute Name="HMI.AlarmText" Value="Proteção térmica" Context="IND_1" />
       <Parameter Name="$TYPE" Value="1" />
-      <Parameter Name="$ACKTYPE_1" Value="2" />
+      <Parameter Name="$ACKTYPE_1" Value="0" />
       <Parameter Name="$ACTIVE" Value="TRUE" />
     </FB>
     <FB ID="D11AA917F802395E" Name="AlarmeAcionamento" Type="ALARM_BIT" x="8864" y="2784" Namespace="Runtime.Standard">
@@ -164,36 +175,60 @@
       <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNT:=1" />
     </FB>
     <FB ID="E06341F3A4D9AE0A" Name="E_MERGE1" Type="E_MERGE" x="11380" y="780" Namespace="IEC61499.Standard" />
-    <Input ID="21070E4B73BFECDC" Name="REQ" x="200" y="194" Type="Event" />
-    <Input ID="BA30A65ADDA4ECC3" Name="E_RESET_FALHAS" x="200" y="254" Type="Event" />
-    <Input ID="87DAE15414E7C412" Name="cmdLigarAutomatico" x="200" y="434" Type="Data" />
-    <Input ID="F94ABA993E8E9FF4" Name="stpVelocidadeAutomatico" x="200" y="494" Type="Data" />
-    <Input ID="8E1E39034B916602" Name="ilkGeral" x="200" y="554" Type="Data" />
-    <Input ID="B35265D6C3CF40DC" Name="ilkAutomatico" x="200" y="614" Type="Data" />
-    <Input ID="868EE32E6507B748" Name="ilkManual" x="200" y="674" Type="Data" />
-    <Input ID="85953C7B9294A9BF" Name="stsEmergencia" x="200" y="733.9999" Type="Data" />
-    <Input ID="8914049066EE23D9" Name="geradorConectado" x="200" y="794" Type="Data" />
-    <Input ID="5C3D51A654AD25BA" Name="geradorHabilita" x="200" y="853.9999" Type="Data" />
-    <Input ID="A33BC24B3E7310B0" Name="stsGerador" x="200" y="913.9999" Type="Data" />
-    <Input ID="C2F1E9C0FB076F17" Name="cmdResetFalhas" x="200" y="974" Type="Data" />
-    <Input ID="63EFEFB7C85EC93E" Name="cfgInversor" x="200" y="1034" Type="Data" />
-    <Input ID="1ECF468387CA7EB2" Name="cfgVelocidadeMin" x="200" y="1094" Type="Data" />
-    <Input ID="540BE0E4E6611ACA" Name="cfgVelocidadeMax" x="200" y="1154" Type="Data" />
-    <Input ID="E24313AE3BEE4D49" Name="cfgSaidaMin" x="200" y="1214" Type="Data" />
-    <Input ID="39489193B7758574" Name="cfgSaidaMax" x="200" y="1274" Type="Data" />
-    <Input ID="D34C88BE7FFF3208" Name="cfgUsaTermica" x="200" y="1334" Type="Data" />
-    <Input ID="66763E13F70A4420" Name="cfgTermicaNF" x="200" y="1394" Type="Data" />
-    <Input ID="3AD811F03C7B9855" Name="cfgUsaFalhaComunicacao" x="200" y="1454" Type="Data" />
-    <Output ID="0F3C10FA447A4A49" Name="stsComunicacaoOK" x="11960" y="807.9999" Type="Data" />
+    <Input ID="21070E4B73BFECDC" Name="REQ" x="200" y="188" Type="Event" />
+    <Input ID="BA30A65ADDA4ECC3" Name="E_RESET_FALHAS" x="200" y="248" Type="Event" />
+    <Input ID="87DAE15414E7C412" Name="cmdLigarAutomatico" x="200" y="428" Type="Data" />
+    <Input ID="F94ABA993E8E9FF4" Name="stpVelocidadeAutomatico" x="200" y="488" Type="Data" />
+    <Input ID="8E1E39034B916602" Name="ilkGeral" x="200" y="548" Type="Data" />
+    <Input ID="B35265D6C3CF40DC" Name="ilkAutomatico" x="200" y="608" Type="Data" />
+    <Input ID="868EE32E6507B748" Name="ilkManual" x="200" y="668" Type="Data" />
+    <Input ID="85953C7B9294A9BF" Name="stsEmergencia" x="200" y="727.9999" Type="Data" />
+    <Input ID="8914049066EE23D9" Name="geradorConectado" x="200" y="787.9999" Type="Data" />
+    <Input ID="5C3D51A654AD25BA" Name="geradorHabilita" x="200" y="847.9999" Type="Data" />
+    <Input ID="A33BC24B3E7310B0" Name="stsGerador" x="200" y="907.9998" Type="Data" />
+    <Input ID="C2F1E9C0FB076F17" Name="cmdResetFalhas" x="200" y="968" Type="Data" />
+    <Input ID="63EFEFB7C85EC93E" Name="cfgInversor" x="200" y="1028" Type="Data" />
+    <Input ID="1ECF468387CA7EB2" Name="cfgVelocidadeMin" x="200" y="1088" Type="Data" />
+    <Input ID="540BE0E4E6611ACA" Name="cfgVelocidadeMax" x="200" y="1148" Type="Data" />
+    <Input ID="E24313AE3BEE4D49" Name="cfgSaidaMin" x="200" y="1208" Type="Data" />
+    <Input ID="39489193B7758574" Name="cfgSaidaMax" x="200" y="1268" Type="Data" />
+    <Input ID="D34C88BE7FFF3208" Name="cfgUsaTermica" x="200" y="1328" Type="Data" />
+    <Input ID="66763E13F70A4420" Name="cfgTermicaNF" x="200" y="1388" Type="Data" />
+    <Input ID="3AD811F03C7B9855" Name="cfgUsaFalhaComunicacao" x="200" y="1448" Type="Data" />
+    <Output ID="0F3C10FA447A4A49" Name="stsComunicacaoOK" x="11960" y="801.9999" Type="Data" />
     <Output ID="9D4F26EE27EDF5B9" Name="CNF" x="11968" y="196" Type="Event" />
-    <Output ID="EBDC9E59C4286586" Name="stsDisponivelAutomatico" x="11968" y="374" Type="Data" />
-    <Output ID="40A5976BFB296133" Name="stsLigado" x="11968" y="434" Type="Data" />
-    <Output ID="C5DF7BA69D90B1CF" Name="stsFalha" x="11968" y="494" Type="Data" />
-    <Output ID="66DCA44233B31656" Name="stsAnimacao" x="11968" y="554" Type="Data" />
-    <Output ID="8D68BF83D50068CD" Name="stsVelocidade" x="11968" y="614" Type="Data" />
-    <Output ID="A08B1C50DE38CD1F" Name="stsRemoto" x="11968" y="674" Type="Data" />
-    <Output ID="368C3F9EC04E0359" Name="stsAutomatico" x="11968" y="733.9999" Type="Data" />
+    <Output ID="EBDC9E59C4286586" Name="stsDisponivelAutomatico" x="11968" y="368" Type="Data" />
+    <Output ID="40A5976BFB296133" Name="stsLigado" x="11968" y="428" Type="Data" />
+    <Output ID="C5DF7BA69D90B1CF" Name="stsFalha" x="11968" y="488" Type="Data" />
+    <Output ID="66DCA44233B31656" Name="stsAnimacao" x="11968" y="548" Type="Data" />
+    <Output ID="8D68BF83D50068CD" Name="stsVelocidade" x="11968" y="608" Type="Data" />
+    <Output ID="A08B1C50DE38CD1F" Name="stsRemoto" x="11968" y="668" Type="Data" />
+    <Output ID="368C3F9EC04E0359" Name="stsAutomatico" x="11968" y="727.9999" Type="Data" />
     <EventConnections>
+      <Connection Source="$EA168F627A96CE25.INITO" Destination="$3D1FFBD58DAE91EE.INIT">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$3D1FFBD58DAE91EE.CNF" Destination="$2A23C6F5FE0791ED.427C31D5944AFC88">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$6C4F34443711FE31.CNF" Destination="$2A23C6F5FE0791ED.E4216BCCDF3BB807">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$2A23C6F5FE0791ED.87B3ECE337A4FF70" Destination="$7FB1981AB5B4DD8C.REQ">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$5D211E488A871B50.CNF" Destination="$2A23C6F5FE0791ED.427C31D5944AFC88">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$2A23C6F5FE0791ED.CB0E4FAA64BD8D11" Destination="$EA168F627A96CE25.REQ">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$2A23C6F5FE0791ED.CB0E4FAA64BD8D11" Destination="$C725F34C719627D0.REQ">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$EA168F627A96CE25.INITO" Destination="$C725F34C719627D0.INIT">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
       <Connection Source="$16472D151FAFCBFE.FIRST_INIT" Destination="$912CF01C0DF81366.CB1A66AC932C34CE">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
@@ -254,7 +289,7 @@
       <Connection Source="$BA30A65ADDA4ECC3" Destination="$B52BCA011F6E34DF.0D409FE636F62649" dx1="2135.115">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$5D211E488A871B50.CNF" Destination="$B52BCA011F6E34DF.9806D419CCC98D7A">
+      <Connection Source="$2A23C6F5FE0791ED.09B0919BB1BB0E30" Destination="$B52BCA011F6E34DF.9806D419CCC98D7A">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
       <Connection Source="$912CF01C0DF81366.EF81D38408160074" Destination="$B52BCA011F6E34DF.079FEC4CDDF030BF">
@@ -296,10 +331,10 @@
       <Connection Source="$6F720F5A20F7532E.EO" Destination="$B52BCA011F6E34DF.068D65FB1CCC02E9">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$B52BCA011F6E34DF.0AA258A42CE24B3F" Destination="$EA168F627A96CE25.REQ">
+      <Connection Source="$B52BCA011F6E34DF.0AA258A42CE24B3F" Destination="$2A23C6F5FE0791ED.1C34035A3C580B77">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$B52BCA011F6E34DF.D6EF387B8656A6CB" Destination="$EA168F627A96CE25.REQ">
+      <Connection Source="$B52BCA011F6E34DF.D6EF387B8656A6CB" Destination="$2A23C6F5FE0791ED.1C34035A3C580B77">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
       <Connection Source="$B52BCA011F6E34DF.78ECC0A7580C66C8" Destination="$E06341F3A4D9AE0A.EI1">
@@ -320,10 +355,10 @@
       <Connection Source="$B52BCA011F6E34DF.194428FC25B1C63C" Destination="$912CF01C0DF81366.102AF7E196740062">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$C154DD89548EB68E.CNF" Destination="$912CF01C0DF81366.102AF7E196740062">
+      <Connection Source="$C154DD89548EB68E.CNF" Destination="$2A23C6F5FE0791ED.427C31D5944AFC88">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$5D211E488A871B50.CNF" Destination="$912CF01C0DF81366.102AF7E196740062">
+      <Connection Source="$2A23C6F5FE0791ED.09B0919BB1BB0E30" Destination="$912CF01C0DF81366.102AF7E196740062">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
       <Connection Source="$0CB6106D9E09A03D.INITO" Destination="$0CB6106D9E09A03D.REQ_INITDATA">
@@ -434,7 +469,6 @@
       <Connection Source="$912CF01C0DF81366.E0F935FB34333983" Destination="$0A35AA3D4BB6D42E.ACK_C1">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$6C4F34443711FE31.CNF" Destination="$7FB1981AB5B4DD8C.REQ" dx1="249.625" />
       <Connection Source="$7FB1981AB5B4DD8C.CNF" Destination="$B52BCA011F6E34DF.B2231D0A37008554">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
@@ -444,6 +478,60 @@
       <Connection Source="$E06341F3A4D9AE0A.EO" Destination="$9D4F26EE27EDF5B9" dx1="41.54199" />
     </EventConnections>
     <DataConnections>
+      <Connection Source="$63EFEFB7C85EC93E" Destination="$3D1FFBD58DAE91EE.QI">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$3D1FFBD58DAE91EE.VALUE1" Destination="$2A23C6F5FE0791ED.42329CFCD2D17FF4">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$3D1FFBD58DAE91EE.VALUE2" Destination="$2A23C6F5FE0791ED.F5C6704A0B387EDE">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$2A23C6F5FE0791ED.AEA206A069529551" Destination="$B52BCA011F6E34DF.3934FBD2505269C1">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$6C4F34443711FE31.VALUE6" Destination="$2A23C6F5FE0791ED.79C0964D27F6F92F">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$2A23C6F5FE0791ED.72B915EBB48AEC2A" Destination="$7FB1981AB5B4DD8C.IN1">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$5D211E488A871B50.VALUE1" Destination="$2A23C6F5FE0791ED.B008AB29C8D9BF35">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$5D211E488A871B50.VALUE2" Destination="$2A23C6F5FE0791ED.2D6376362AF121EB">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$5D211E488A871B50.VALUE3" Destination="$2A23C6F5FE0791ED.3DFB1C68D576229B">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$5D211E488A871B50.VALUE4" Destination="$2A23C6F5FE0791ED.AD5D164EF9FA8C1F">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$C154DD89548EB68E.VALUE2" Destination="$2A23C6F5FE0791ED.CDF6A5D53E7299DD">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$C154DD89548EB68E.VALUE3" Destination="$2A23C6F5FE0791ED.292D962FA485B2BC">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$C154DD89548EB68E.VALUE4" Destination="$2A23C6F5FE0791ED.E045F080AE8FFEBD">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$22F828987A86425B" Destination="$2A23C6F5FE0791ED.B66303760760D9ED">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$B52BCA011F6E34DF.6B3311AC79C69555" Destination="$2A23C6F5FE0791ED.2A9BB2F7498BE636">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$2A23C6F5FE0791ED.360DB67778FD2083" Destination="$EA168F627A96CE25.VALUE2">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$2A23C6F5FE0791ED.53A8BE16002FB240" Destination="$C725F34C719627D0.VALUE1">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$63EFEFB7C85EC93E" Destination="$C725F34C719627D0.QI">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
       <Connection Source="$87DAE15414E7C412" Destination="$B52BCA011F6E34DF.193DFCC66FFA3627" dx1="1931.417">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
@@ -507,22 +595,22 @@
       <Connection Source="$7FB1981AB5B4DD8C.OUT1" Destination="$B52BCA011F6E34DF.14AD61732551E6C9">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$6C4F34443711FE31.VALUE2" Destination="$B52BCA011F6E34DF.4FA04895B58EC5C7">
+      <Connection Source="$6C4F34443711FE31.VALUE1" Destination="$B52BCA011F6E34DF.4FA04895B58EC5C7">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$6C4F34443711FE31.VALUE3" Destination="$B52BCA011F6E34DF.060151A1F4D195B2">
+      <Connection Source="$6C4F34443711FE31.VALUE2" Destination="$B52BCA011F6E34DF.060151A1F4D195B2">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$6C4F34443711FE31.VALUE4" Destination="$B52BCA011F6E34DF.C82173D2C2DE6C19">
+      <Connection Source="$6C4F34443711FE31.VALUE3" Destination="$B52BCA011F6E34DF.C82173D2C2DE6C19">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$6C4F34443711FE31.VALUE5" Destination="$B52BCA011F6E34DF.88ACEC8481B97DF2">
+      <Connection Source="$6C4F34443711FE31.VALUE4" Destination="$B52BCA011F6E34DF.88ACEC8481B97DF2">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$6C4F34443711FE31.VALUE6" Destination="$B52BCA011F6E34DF.6AD75282021BE9C8">
+      <Connection Source="$6C4F34443711FE31.VALUE5" Destination="$B52BCA011F6E34DF.6AD75282021BE9C8">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$5D211E488A871B50.VALUE1" Destination="$B52BCA011F6E34DF.D3BA39302C2D6321">
+      <Connection Source="$2A23C6F5FE0791ED.66AEF9F8E70CFE9D" Destination="$B52BCA011F6E34DF.D3BA39302C2D6321">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
       <Connection Source="$B52BCA011F6E34DF.689EF5D37ACCCB88" Destination="$D98D502F7612C555.DT">
@@ -579,7 +667,7 @@
       <Connection Source="$B52BCA011F6E34DF.FCC70C7B92BB1D0D" Destination="$EA168F627A96CE25.VALUE1">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$B52BCA011F6E34DF.0E91B3E8D843667A" Destination="$EA168F627A96CE25.VALUE2">
+      <Connection Source="$B52BCA011F6E34DF.0E91B3E8D843667A" Destination="$2A23C6F5FE0791ED.B1045E7D3C432FC3">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
       <Connection Source="$B52BCA011F6E34DF.6B3311AC79C69555" Destination="$EA168F627A96CE25.VALUE3">
@@ -660,12 +748,6 @@
       <Connection Source="$B52BCA011F6E34DF.73BD8AC3011DABE5" Destination="$912CF01C0DF81366.21C1E76BA48924FC">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$B52BCA011F6E34DF.BEDED4165A410119" Destination="$912CF01C0DF81366.06277D222F5F3621">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$B52BCA011F6E34DF.AF6A84AD63E45085" Destination="$912CF01C0DF81366.7B3A3676FBDE5F7A">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
       <Connection Source="$B52BCA011F6E34DF.6F39EF83A6397DAE" Destination="$912CF01C0DF81366.16651CA122A2B95B">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
@@ -702,25 +784,25 @@
       <Connection Source="$0A35AA3D4BB6D42E.STATE_1" Destination="$912CF01C0DF81366.C1CC4C6B5FCBBCD2">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$5D211E488A871B50.VALUE2" Destination="$912CF01C0DF81366.7E0C670138DD7B76">
+      <Connection Source="$2A23C6F5FE0791ED.37526A7D778B9E7B" Destination="$912CF01C0DF81366.7E0C670138DD7B76">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$5D211E488A871B50.VALUE3" Destination="$912CF01C0DF81366.6875B6D16C69A2E9">
+      <Connection Source="$2A23C6F5FE0791ED.930BAE86F242A833" Destination="$912CF01C0DF81366.6875B6D16C69A2E9">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$5D211E488A871B50.VALUE4" Destination="$912CF01C0DF81366.62A08FAA4AB91A15">
+      <Connection Source="$2A23C6F5FE0791ED.2DDD2CDD0C674D43" Destination="$912CF01C0DF81366.62A08FAA4AB91A15">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$C154DD89548EB68E.VALUE1" Destination="$912CF01C0DF81366.803D206AACB27DD7">
+      <Connection Source="$2A23C6F5FE0791ED.2C7FE4FF8CF8442A" Destination="$912CF01C0DF81366.803D206AACB27DD7">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$C154DD89548EB68E.VALUE2" Destination="$912CF01C0DF81366.11AE970559C4D02C">
+      <Connection Source="$2A23C6F5FE0791ED.20BE98C14B2600D9" Destination="$912CF01C0DF81366.11AE970559C4D02C">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$C154DD89548EB68E.VALUE3" Destination="$912CF01C0DF81366.A48E8BCAD9763E7A">
+      <Connection Source="$2A23C6F5FE0791ED.59458D47837A2DDA" Destination="$912CF01C0DF81366.A48E8BCAD9763E7A">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$C154DD89548EB68E.VALUE4" Destination="$912CF01C0DF81366.3ABB296BCC446C60">
+      <Connection Source="$2A23C6F5FE0791ED.49A95C3D64F24BED" Destination="$912CF01C0DF81366.3ABB296BCC446C60">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
       <Connection Source="$B52BCA011F6E34DF.47CFEB602576FDE6" Destination="$0CB6106D9E09A03D.INP">
@@ -759,8 +841,16 @@
       <Connection Source="$B52BCA011F6E34DF.D50BA6FDF5BB251B" Destination="$03227ACC7BC898FF.6786798CC8B69406">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$6C4F34443711FE31.VALUE1" Destination="$7FB1981AB5B4DD8C.IN1" dx1="229.625" />
-      <Connection Source="$6C4F34443711FE31.VALUE1" Destination="$0F3C10FA447A4A49">
+      <Connection Source="$2A23C6F5FE0791ED.72B915EBB48AEC2A" Destination="$0F3C10FA447A4A49">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$B52BCA011F6E34DF.E6802855A03CB240" Destination="$912CF01C0DF81366.43C738994B732921">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$B52BCA011F6E34DF.5355A350F226F825" Destination="$912CF01C0DF81366.06277D222F5F3621">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$B52BCA011F6E34DF.E6B78B01125D043A" Destination="$912CF01C0DF81366.7B3A3676FBDE5F7A">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
     </DataConnections>

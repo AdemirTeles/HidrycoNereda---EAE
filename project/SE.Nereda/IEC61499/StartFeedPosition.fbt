@@ -51,6 +51,52 @@
         <With Var="NbrReactorExisting" />
         <With Var="NbrReactorAvailable" />
       </Event>
+      <Event ID="20F03BA48A0BE063" Name="UPDATE_POS">
+        <With Var="TimeFLastFeedV_R1" />
+        <With Var="TimeFLastFeedV_R2" />
+        <With Var="TimeFLastFeedV_R3" />
+        <With Var="TimeFLastFeedV_R4" />
+        <With Var="TimeFLastFeedV_R5" />
+        <With Var="TimeFLastFeedV_R6" />
+        <With Var="R1Exist" />
+        <With Var="R2Exist" />
+        <With Var="R3Exist" />
+        <With Var="R4Exist" />
+        <With Var="R5Exist" />
+        <With Var="R6Exist" />
+        <With Var="R1Available" />
+        <With Var="R2Available" />
+        <With Var="R3Available" />
+        <With Var="R4Available" />
+        <With Var="R5Available" />
+        <With Var="R6Available" />
+        <With Var="EmergencyON" />
+        <With Var="NbrReactorExisting" />
+        <With Var="NbrReactorAvailable" />
+      </Event>
+      <Event ID="43449261A11E2D51" Name="REACTOR_N_AV">
+        <With Var="TimeFLastFeedV_R1" />
+        <With Var="TimeFLastFeedV_R2" />
+        <With Var="TimeFLastFeedV_R3" />
+        <With Var="TimeFLastFeedV_R4" />
+        <With Var="TimeFLastFeedV_R5" />
+        <With Var="TimeFLastFeedV_R6" />
+        <With Var="R1Exist" />
+        <With Var="R2Exist" />
+        <With Var="R3Exist" />
+        <With Var="R4Exist" />
+        <With Var="R5Exist" />
+        <With Var="R6Exist" />
+        <With Var="R1Available" />
+        <With Var="R2Available" />
+        <With Var="R3Available" />
+        <With Var="R4Available" />
+        <With Var="R5Available" />
+        <With Var="R6Available" />
+        <With Var="EmergencyON" />
+        <With Var="NbrReactorExisting" />
+        <With Var="NbrReactorAvailable" />
+      </Event>
     </EventInputs>
     <EventOutputs>
       <Event ID="0BBB611D4A1D02F5" Name="START_FEED_POS">
@@ -95,469 +141,78 @@
     </OutputVars>
   </InterfaceList>
   <BasicFB ID="582bc692-b877-4975-948d-760a4b9c22d1">
-    <Attribute Name="FBType.Basic.Algorithm.Order" Value="REQ,INIT,RxUnAv,InitRxUnAv,REQ2" />
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="INIT,INIT_POS,UPDATE_POS,R_ABORT" />
     <InternalVars>
-      <VarDeclaration ID="1443B7FA10BBACBD" Name="TempPosition" Type="INT" />
-      <VarDeclaration ID="293E2CD21EF62FA4" Name="FPosition" Type="INT" ArraySize="6" />
       <VarDeclaration ID="8E5E8B6385A4F529" Name="i" Type="INT" InitialValue="0" />
       <VarDeclaration ID="52D6ABF204328626" Name="ReactorOrder" Type="INT" ArraySize="6" />
+      <VarDeclaration ID="1264AE157596C536" Name="MemoOrder" Type="INT" />
+      <VarDeclaration ID="0D21BB381BDF82DD" Name="ExAvR1" Type="BOOL" />
+      <VarDeclaration ID="D974762AA0741FB8" Name="ExAvR2" Type="BOOL" />
     </InternalVars>
     <ECC>
       <ECState Name="START" Comment="Initial State" x="816.9413" y="489.983" />
-      <ECState Name="REQ" Comment="Normal execution" x="2626.219" y="863.735">
-        <ECAction Algorithm="REQ2" Output="START_FEED_POS" />
+      <ECState Name="INIT_POS" Comment="Normal execution" x="2602.219" y="951.7349">
+        <ECAction Algorithm="INIT_POS" Output="START_FEED_POS" />
       </ECState>
-      <ECState Name="INIT" x="2624" y="486.2856">
-        <ECAction Algorithm="INIT" Output="START_FEED_POS" />
+      <ECState Name="INIT" x="2600" y="486.2856">
+        <ECAction Algorithm="INIT" />
       </ECState>
       <ECState Name="Reset" x="823.5823" y="870.6511">
         <ECAction Algorithm="INIT" Output="START_FEED_POS" />
       </ECState>
-      <ECTransition Source="START" Destination="INIT" Condition="ASK_POSITION" x="1691.24" y="484.5085">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="350.5934,121.4426,487.0674,120.341" />
+      <ECState Name="UPDATE_POS" x="2604" y="1456">
+        <ECAction Algorithm="UPDATE_POS" Output="START_FEED_POS" />
+      </ECState>
+      <ECState Name="R_ABORT" x="2607.679" y="2134.667">
+        <ECAction Algorithm="R_ABORT" Output="START_FEED_POS" />
+      </ECState>
+      <ECTransition Source="START" Destination="INIT" Condition="ASK_POSITION" x="1679.962" y="484.4326">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="348.8674,121.4176,483.2753,120.3199" />
       </ECTransition>
-      <ECTransition Source="INIT" Destination="REQ" Condition="1" x="2623.535" y="672.5474">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="655.8707,156.5415,655.7464,179.3217" />
+      <ECTransition Source="INIT" Destination="INIT_POS" Condition="1" x="2599.849" y="715.7519">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="649.9484,163.6062,649.8413,193.7267" />
       </ECTransition>
-      <ECTransition Source="REQ" Destination="REQ" Condition="ASK_POSITION AND EmergencyON" x="2631.138" y="1163.646">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="748,308.5556,568,314.5556" />
-      </ECTransition>
-      <ECTransition Source="REQ" Destination="Reset" Condition="NOT EmergencyON" x="1629.701" y="1083.552">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="466.1856,284.9704,332.9681,285.5014" />
+      <ECTransition Source="UPDATE_POS" Destination="Reset" Condition="NOT EmergencyON" x="1556.414" y="1389.391">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="445.5463,385.7756,320.7895,340.2956" />
       </ECTransition>
       <ECTransition Source="Reset" Destination="START" Condition="1" x="822.7991" y="684.1334">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="206.0218,182.8646,205.6232,159.8382" />
       </ECTransition>
+      <ECTransition Source="INIT_POS" Destination="UPDATE_POS" Condition="UPDATE_POS OR REACTOR_N_AV" x="2603.48" y="1208.463">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="650.8581,285.8361,650.9239,319.1612" />
+      </ECTransition>
+      <ECTransition Source="UPDATE_POS" Destination="UPDATE_POS" Condition="UPDATE_POS AND EmergencyON" x="2611.05" y="1762.046">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="722.2222,464.4445,584.4445,458.8889" />
+      </ECTransition>
+      <ECTransition Source="INIT_POS" Destination="Reset" Condition="NOT EmergencyON" x="1680.828" y="1100.69">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="482.336,290.631,357.0433,283.0088" />
+      </ECTransition>
+      <ECTransition Source="UPDATE_POS" Destination="R_ABORT" Condition="REACTOR_N_AV AND EmergencyON AND (&#xD;&#xA;(NOT R1Available AND R1Exist) OR&#xD;&#xA;(NOT R2Available AND R2Exist) OR&#xD;&#xA;(NOT R3Available AND R3Exist) OR&#xD;&#xA;(NOT R4Available AND R4Exist) OR&#xD;&#xA;(NOT R5Available AND R5Exist) OR&#xD;&#xA;(NOT R6Available AND R6Exist))" x="3103.584" y="1772.201">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="806.0174,417.1933,806.2769,465.0518" />
+      </ECTransition>
+      <ECTransition Source="R_ABORT" Destination="UPDATE_POS" Condition="UPDATE_POS AND EmergencyON AND&#xD;&#xA;((NOT R1Exist) OR R1Available) AND&#xD;&#xA;((NOT R2Exist) OR R2Available) AND&#xD;&#xA;((NOT R3Exist) OR R3Available) AND&#xD;&#xA;((NOT R4Exist) OR R4Available) AND&#xD;&#xA;((NOT R5Exist) OR R5Available) AND&#xD;&#xA;((NOT R6Exist) OR R6Available)" x="2103.847" y="1776.647">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="495.5176,466.5339,495.2582,418.6754" />
+      </ECTransition>
+      <ECTransition Source="R_ABORT" Destination="Reset" Condition="NOT EmergencyON" x="1480.368" y="1866.479">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="424.8936,542.8013,288.4943,446.1637" />
+      </ECTransition>
+      <ECTransition Source="INIT_POS" Destination="R_ABORT" Condition="REACTOR_N_AV AND EmergencyON AND (&#xD;&#xA;(NOT R1Available AND R1Exist) OR&#xD;&#xA;(NOT R2Available AND R2Exist) OR&#xD;&#xA;(NOT R3Available AND R3Exist) OR&#xD;&#xA;(NOT R4Available AND R4Exist) OR&#xD;&#xA;(NOT R5Available AND R5Exist) OR&#xD;&#xA;(NOT R6Available AND R6Exist))" x="4142.006" y="1456.201">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1149.581,312.6808,1149.996,402.5615" />
+      </ECTransition>
+      <ECTransition Source="R_ABORT" Destination="R_ABORT" Condition="REACTOR_N_AV AND EmergencyON" x="2606.695" y="2446.565">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="720.2786,639.2842,583.2786,627.2842" />
+      </ECTransition>
     </ECC>
-    <Algorithm Name="REQ" Comment="Normally executed algorithm">
-      <ST><![CDATA[;
-// Reset all positions at each execution
-StartFeedPositionR1 := 0;
-StartFeedPositionR2 := 0;
-StartFeedPositionR3 := 0;
-StartFeedPositionR4 := 0;
-StartFeedPositionR5 := 0;
-StartFeedPositionR6 := 0;
-
-
-// ==================================================
-// Reactor 1 position
-// R1 has priority in case of equality
-// ==================================================
-IF R1Exist AND R1Available THEN
-	StartFeedPositionR1 := 1;
-
-	IF R2Exist AND R2Available AND (TimeFLastFeedV_R2 > TimeFLastFeedV_R1) THEN
-		StartFeedPositionR1 := StartFeedPositionR1 + 1;
-	END_IF;
-
-	IF R3Exist AND R3Available AND (TimeFLastFeedV_R3 > TimeFLastFeedV_R1) THEN
-		StartFeedPositionR1 := StartFeedPositionR1 + 1;
-	END_IF;
-
-	IF R4Exist AND R4Available AND (TimeFLastFeedV_R4 > TimeFLastFeedV_R1) THEN
-		StartFeedPositionR1 := StartFeedPositionR1 + 1;
-	END_IF;
-
-	IF R5Exist AND R5Available AND (TimeFLastFeedV_R5 > TimeFLastFeedV_R1) THEN
-		StartFeedPositionR1 := StartFeedPositionR1 + 1;
-	END_IF;
-
-	IF R6Exist AND R6Available AND (TimeFLastFeedV_R6 > TimeFLastFeedV_R1) THEN
-		StartFeedPositionR1 := StartFeedPositionR1 + 1;
-	END_IF;
-END_IF;
-
-
-// ==================================================
-// Reactor 2 position
-// R1 has priority over R2 in case of equality
-// ==================================================
-IF R2Exist AND R2Available THEN
-	StartFeedPositionR2 := 1;
-
-	IF R1Exist AND R1Available AND (TimeFLastFeedV_R1 >= TimeFLastFeedV_R2) THEN
-		StartFeedPositionR2 := StartFeedPositionR2 + 1;
-	END_IF;
-
-	IF R3Exist AND R3Available AND (TimeFLastFeedV_R3 > TimeFLastFeedV_R2) THEN
-		StartFeedPositionR2 := StartFeedPositionR2 + 1;
-	END_IF;
-
-	IF R4Exist AND R4Available AND (TimeFLastFeedV_R4 > TimeFLastFeedV_R2) THEN
-		StartFeedPositionR2 := StartFeedPositionR2 + 1;
-	END_IF;
-
-	IF R5Exist AND R5Available AND (TimeFLastFeedV_R5 > TimeFLastFeedV_R2) THEN
-		StartFeedPositionR2 := StartFeedPositionR2 + 1;
-	END_IF;
-
-	IF R6Exist AND R6Available AND (TimeFLastFeedV_R6 > TimeFLastFeedV_R2) THEN
-		StartFeedPositionR2 := StartFeedPositionR2 + 1;
-	END_IF;
-END_IF;
-
-
-// ==================================================
-// Reactor 3 position
-// R1 and R2 have priority over R3 in case of equality
-// ==================================================
-IF R3Exist AND R3Available THEN
-	StartFeedPositionR3 := 1;
-
-	IF R1Exist AND R1Available AND (TimeFLastFeedV_R1 >= TimeFLastFeedV_R3) THEN
-		StartFeedPositionR3 := StartFeedPositionR3 + 1;
-	END_IF;
-
-	IF R2Exist AND R2Available AND (TimeFLastFeedV_R2 >= TimeFLastFeedV_R3) THEN
-		StartFeedPositionR3 := StartFeedPositionR3 + 1;
-	END_IF;
-
-	IF R4Exist AND R4Available AND (TimeFLastFeedV_R4 > TimeFLastFeedV_R3) THEN
-		StartFeedPositionR3 := StartFeedPositionR3 + 1;
-	END_IF;
-
-	IF R5Exist AND R5Available AND (TimeFLastFeedV_R5 > TimeFLastFeedV_R3) THEN
-		StartFeedPositionR3 := StartFeedPositionR3 + 1;
-	END_IF;
-
-	IF R6Exist AND R6Available AND (TimeFLastFeedV_R6 > TimeFLastFeedV_R3) THEN
-		StartFeedPositionR3 := StartFeedPositionR3 + 1;
-	END_IF;
-END_IF;
-
-
-// ==================================================
-// Reactor 4 position
-// R1, R2 and R3 have priority over R4 in case of equality
-// ==================================================
-IF R4Exist AND R4Available THEN
-	StartFeedPositionR4 := 1;
-
-	IF R1Exist AND R1Available AND (TimeFLastFeedV_R1 >= TimeFLastFeedV_R4) THEN
-		StartFeedPositionR4 := StartFeedPositionR4 + 1;
-	END_IF;
-
-	IF R2Exist AND R2Available AND (TimeFLastFeedV_R2 >= TimeFLastFeedV_R4) THEN
-		StartFeedPositionR4 := StartFeedPositionR4 + 1;
-	END_IF;
-
-	IF R3Exist AND R3Available AND (TimeFLastFeedV_R3 >= TimeFLastFeedV_R4) THEN
-		StartFeedPositionR4 := StartFeedPositionR4 + 1;
-	END_IF;
-
-	IF R5Exist AND R5Available AND (TimeFLastFeedV_R5 > TimeFLastFeedV_R4) THEN
-		StartFeedPositionR4 := StartFeedPositionR4 + 1;
-	END_IF;
-
-	IF R6Exist AND R6Available AND (TimeFLastFeedV_R6 > TimeFLastFeedV_R4) THEN
-		StartFeedPositionR4 := StartFeedPositionR4 + 1;
-	END_IF;
-END_IF;
-
-
-// ==================================================
-// Reactor 5 position
-// R1, R2, R3 and R4 have priority over R5 in case of equality
-// ==================================================
-IF R5Exist AND R5Available THEN
-	StartFeedPositionR5 := 1;
-
-	IF R1Exist AND R1Available AND (TimeFLastFeedV_R1 >= TimeFLastFeedV_R5) THEN
-		StartFeedPositionR5 := StartFeedPositionR5 + 1;
-	END_IF;
-
-	IF R2Exist AND R2Available AND (TimeFLastFeedV_R2 >= TimeFLastFeedV_R5) THEN
-		StartFeedPositionR5 := StartFeedPositionR5 + 1;
-	END_IF;
-
-	IF R3Exist AND R3Available AND (TimeFLastFeedV_R3 >= TimeFLastFeedV_R5) THEN
-		StartFeedPositionR5 := StartFeedPositionR5 + 1;
-	END_IF;
-
-	IF R4Exist AND R4Available AND (TimeFLastFeedV_R4 >= TimeFLastFeedV_R5) THEN
-		StartFeedPositionR5 := StartFeedPositionR5 + 1;
-	END_IF;
-
-	IF R6Exist AND R6Available AND (TimeFLastFeedV_R6 > TimeFLastFeedV_R5) THEN
-		StartFeedPositionR5 := StartFeedPositionR5 + 1;
-	END_IF;
-END_IF;
-
-
-// ==================================================
-// Reactor 6 position
-// R1, R2, R3, R4 and R5 have priority over R6 in case of equality
-// ==================================================
-IF R6Exist AND R6Available THEN
-	StartFeedPositionR6 := 1;
-
-	IF R1Exist AND R1Available AND (TimeFLastFeedV_R1 >= TimeFLastFeedV_R6) THEN
-		StartFeedPositionR6 := StartFeedPositionR6 + 1;
-	END_IF;
-
-	IF R2Exist AND R2Available AND (TimeFLastFeedV_R2 >= TimeFLastFeedV_R6) THEN
-		StartFeedPositionR6 := StartFeedPositionR6 + 1;
-	END_IF;
-
-	IF R3Exist AND R3Available AND (TimeFLastFeedV_R3 >= TimeFLastFeedV_R6) THEN
-		StartFeedPositionR6 := StartFeedPositionR6 + 1;
-	END_IF;
-
-	IF R4Exist AND R4Available AND (TimeFLastFeedV_R4 >= TimeFLastFeedV_R6) THEN
-		StartFeedPositionR6 := StartFeedPositionR6 + 1;
-	END_IF;
-
-	IF R5Exist AND R5Available AND (TimeFLastFeedV_R5 >= TimeFLastFeedV_R6) THEN
-		StartFeedPositionR6 := StartFeedPositionR6 + 1;
-	END_IF;
-END_IF;
-
-FPosition[0] := StartFeedPositionR1;
-FPosition[1] := StartFeedPositionR2;
-FPosition[2] := StartFeedPositionR3;
-FPosition[3] := StartFeedPositionR4;
-FPosition[4] := StartFeedPositionR5;
-FPosition[5] := StartFeedPositionR6;
-
-ASK_POSITION := FALSE;]]></ST>
-    </Algorithm>
     <Algorithm Name="INIT">
-      <ST><![CDATA[;
-// Reset all positions at each execution
-StartFeedPositionR1 := 0;
+      <ST><![CDATA[StartFeedPositionR1 := 0;
 StartFeedPositionR2 := 0;
 StartFeedPositionR3 := 0;
 StartFeedPositionR4 := 0;
 StartFeedPositionR5 := 0;
 StartFeedPositionR6 := 0;]]></ST>
     </Algorithm>
-    <Algorithm ID="89b0ec30-8da6-4302-9422-3212fb4a299a" Name="RxUnAv">
-      <ST><![CDATA[;
-IF NOT R1Available AND R1Exist THEN
-	FPosition[0] := NbrReactorExisting;
-END_IF;
-
-IF NOT R2Available AND R2Exist THEN
-	FPosition[1] := NbrReactorExisting;
-END_IF;
-
-IF NOT R3Available AND R3Exist THEN
-	FPosition[2] := NbrReactorExisting;
-END_IF;
-
-IF NOT R4Available AND R4Exist THEN
-	FPosition[3] := NbrReactorExisting;
-END_IF;
-
-IF NOT R5Available AND R5Exist THEN
-	FPosition[4] := NbrReactorExisting;
-END_IF;
-
-IF NOT R6Available AND R6Exist THEN
-	FPosition[5] := NbrReactorExisting;
-END_IF;
-
-TempPosition := FPosition[0];
-
-FOR i := 0 TO NbrReactorExisting - (2 + NbrReactorExisting - NbrReactorAvailable) DO
-    FPosition[i] := FPosition[i + 1];
-END_FOR;
-
-FPosition[NbrReactorExisting - (1 + NbrReactorExisting - NbrReactorAvailable)] := TempPosition;
-
-StartFeedPositionR1 := FPosition[0];
-StartFeedPositionR2 := FPosition[1];
-StartFeedPositionR3 := FPosition[2];
-StartFeedPositionR4 := FPosition[3];
-StartFeedPositionR5 := FPosition[4];
-StartFeedPositionR6 := FPosition[5];
-
-ASK_POSITION := FALSE;]]></ST>
-    </Algorithm>
-    <Algorithm ID="3e43c821-4131-49b5-8f8c-93e58a6bde4c" Name="InitRxUnAv">
-      <ST><![CDATA[;
-// Reset all positions at each execution
-FPosition[0] := 0;
-FPosition[1] := 0;
-FPosition[2] := 0;
-FPosition[3] := 0;
-FPosition[4] := 0;
-FPosition[5] := 0;
-
-// ==================================================
-// Reactor 1 position
-// R1 has priority in case of equality
-// ==================================================
-IF R1Exist AND R1Available THEN
-    FPosition[0] := 1;
-
-    IF R2Exist AND R2Available AND (TimeFLastFeedV_R2 > TimeFLastFeedV_R1) THEN
-        FPosition[0] := FPosition[0] + 1;
-    END_IF;
-
-    IF R3Exist AND R3Available AND (TimeFLastFeedV_R3 > TimeFLastFeedV_R1) THEN
-        FPosition[0] := FPosition[0] + 1;
-    END_IF;
-
-    IF R4Exist AND R4Available AND (TimeFLastFeedV_R4 > TimeFLastFeedV_R1) THEN
-        FPosition[0] := FPosition[0] + 1;
-    END_IF;
-
-    IF R5Exist AND R5Available AND (TimeFLastFeedV_R5 > TimeFLastFeedV_R1) THEN
-        FPosition[0] := FPosition[0] + 1;
-    END_IF;
-
-    IF R6Exist AND R6Available AND (TimeFLastFeedV_R6 > TimeFLastFeedV_R1) THEN
-        FPosition[0] := FPosition[0] + 1;
-    END_IF;
-
-END_IF;
-
-// ==================================================
-// Reactor 2 position
-// R1 has priority over R2 in case of equality
-// ==================================================
-IF R2Exist AND R2Available THEN
-    FPosition[1] := 1;
-
-    IF R1Exist AND R1Available AND (TimeFLastFeedV_R1 >= TimeFLastFeedV_R2) THEN
-        FPosition[1] := FPosition[1] + 1;
-    END_IF;
-
-    IF R3Exist AND R3Available AND (TimeFLastFeedV_R3 > TimeFLastFeedV_R2) THEN
-        FPosition[1] := FPosition[1] + 1;
-    END_IF;
-
-    IF R4Exist AND R4Available AND (TimeFLastFeedV_R4 > TimeFLastFeedV_R2) THEN
-        FPosition[1] := FPosition[1] + 1;
-    END_IF;
-
-    IF R5Exist AND R5Available AND (TimeFLastFeedV_R5 > TimeFLastFeedV_R2) THEN
-        FPosition[1] := FPosition[1] + 1;
-    END_IF;
-
-    IF R6Exist AND R6Available AND (TimeFLastFeedV_R6 > TimeFLastFeedV_R2) THEN
-        FPosition[1] := FPosition[1] + 1;
-    END_IF;
-
-END_IF;
-
-// ==================================================
-// Reactor 3 position
-// ==================================================
-IF R3Exist AND R3Available THEN
-    FPosition[2] := 1;
-
-    IF R1Exist AND R1Available AND (TimeFLastFeedV_R1 >= TimeFLastFeedV_R3) THEN
-        FPosition[2] := FPosition[2] + 1;
-    END_IF;
-
-    IF R2Exist AND R2Available AND (TimeFLastFeedV_R2 >= TimeFLastFeedV_R3) THEN
-        FPosition[2] := FPosition[2] + 1;
-    END_IF;
-
-    IF R4Exist AND R4Available AND (TimeFLastFeedV_R4 > TimeFLastFeedV_R3) THEN
-        FPosition[2] := FPosition[2] + 1;
-    END_IF;
-
-    IF R5Exist AND R5Available AND (TimeFLastFeedV_R5 > TimeFLastFeedV_R3) THEN
-        FPosition[2] := FPosition[2] + 1;
-    END_IF;
-
-    IF R6Exist AND R6Available AND (TimeFLastFeedV_R6 > TimeFLastFeedV_R3) THEN
-        FPosition[2] := FPosition[2] + 1;
-    END_IF;
-
-END_IF;
-
-// ==================================================
-// Reactor 4 position
-// ==================================================
-IF R4Exist AND R4Available THEN
-    FPosition[3] := 1;
-
-    IF R1Exist AND R1Available AND (TimeFLastFeedV_R1 >= TimeFLastFeedV_R4) THEN
-        FPosition[3] := FPosition[3] + 1;
-    END_IF;
-
-    IF R2Exist AND R2Available AND (TimeFLastFeedV_R2 >= TimeFLastFeedV_R4) THEN
-        FPosition[3] := FPosition[3] + 1;
-    END_IF;
-
-    IF R3Exist AND R3Available AND (TimeFLastFeedV_R3 >= TimeFLastFeedV_R4) THEN
-        FPosition[3] := FPosition[3] + 1;
-    END_IF;
-
-    IF R5Exist AND R5Available AND (TimeFLastFeedV_R5 > TimeFLastFeedV_R4) THEN
-        FPosition[3] := FPosition[3] + 1;
-    END_IF;
-
-    IF R6Exist AND R6Available AND (TimeFLastFeedV_R6 > TimeFLastFeedV_R4) THEN
-        FPosition[3] := FPosition[3] + 1;
-    END_IF;
-
-END_IF;
-
-// ==================================================
-// Reactor 5 position
-// ==================================================
-IF R5Exist AND R5Available THEN
-    FPosition[4] := 1;
-
-    IF R1Exist AND R1Available AND (TimeFLastFeedV_R1 >= TimeFLastFeedV_R5) THEN
-        FPosition[4] := FPosition[4] + 1;
-    END_IF;
-
-    IF R2Exist AND R2Available AND (TimeFLastFeedV_R2 >= TimeFLastFeedV_R5) THEN
-        FPosition[4] := FPosition[4] + 1;
-    END_IF;
-
-    IF R3Exist AND R3Available AND (TimeFLastFeedV_R3 >= TimeFLastFeedV_R5) THEN
-        FPosition[4] := FPosition[4] + 1;
-    END_IF;
-
-    IF R4Exist AND R4Available AND (TimeFLastFeedV_R4 >= TimeFLastFeedV_R5) THEN
-        FPosition[4] := FPosition[4] + 1;
-    END_IF;
-
-    IF R6Exist AND R6Available AND (TimeFLastFeedV_R6 > TimeFLastFeedV_R5) THEN
-        FPosition[4] := FPosition[4] + 1;
-    END_IF;
-
-END_IF;
-
-// ==================================================
-// Reactor 6 position
-// ==================================================
-IF R6Exist AND R6Available THEN
-    FPosition[5] := 1;
-
-    IF R1Exist AND R1Available AND (TimeFLastFeedV_R1 >= TimeFLastFeedV_R6) THEN
-        FPosition[5] := FPosition[5] + 1;
-    END_IF;
-
-    IF R2Exist AND R2Available AND (TimeFLastFeedV_R2 >= TimeFLastFeedV_R6) THEN
-        FPosition[5] := FPosition[5] + 1;
-    END_IF;
-
-    IF R3Exist AND R3Available AND (TimeFLastFeedV_R3 >= TimeFLastFeedV_R6) THEN
-        FPosition[5] := FPosition[5] + 1;
-    END_IF;
-
-    IF R4Exist AND R4Available AND (TimeFLastFeedV_R4 >= TimeFLastFeedV_R6) THEN
-        FPosition[5] := FPosition[5] + 1;
-    END_IF;
-
-    IF R5Exist AND R5Available AND (TimeFLastFeedV_R5 >= TimeFLastFeedV_R6) THEN
-        FPosition[5] := FPosition[5] + 1;
-    END_IF;
-
-END_IF;]]></ST>
-    </Algorithm>
-    <Algorithm ID="bcd0fe9b-2076-47f9-9f5b-06e4ce62b07d" Name="REQ2">
-      <ST><![CDATA[;
-// Reset all positions at each execution
+    <Algorithm ID="bcd0fe9b-2076-47f9-9f5b-06e4ce62b07d" Name="INIT_POS">
+      <ST><![CDATA[// Reset all positions at each execution
 StartFeedPositionR1 := 0;
 StartFeedPositionR2 := 0;
 StartFeedPositionR3 := 0;
@@ -767,7 +422,57 @@ ELSIF R6Exist AND NOT R6Available THEN
 
     StartFeedPositionR6 := NbrReactorExisting;
 
-END_IF;]]></ST>
+END_IF;
+
+ASK_POSITION := FALSE;
+
+ReactorOrder[0] := StartFeedPositionR1;
+ReactorOrder[1] := StartFeedPositionR2;
+ReactorOrder[2] := StartFeedPositionR3;
+ReactorOrder[3] := StartFeedPositionR4;
+ReactorOrder[4] := StartFeedPositionR5;
+ReactorOrder[5] := StartFeedPositionR6;]]></ST>
+    </Algorithm>
+    <Algorithm ID="5f17273f-c34b-4020-8698-720e13e91d3b" Name="UPDATE_POS">
+      <ST><![CDATA[;
+ExAvR1 := R1Exist AND R1Available;
+ExAvR2 := R2Exist AND R2Available;
+
+IF ExAvR1 AND ExAvR2 THEN
+	MemoOrder := ReactorOrder[0];
+	ReactorOrder[0] := ReactorOrder[1];
+	ReactorOrder[1] := MemoOrder;
+	
+ELSIF NOT ExAvR1 AND ExAvR2 THEN
+	ReactorOrder[0] := 2;
+	ReactorOrder[1] := 1;
+	
+ELSIF ExAvR1 AND NOT ExAvR2 THEN
+	ReactorOrder[0] := 1;
+	ReactorOrder[1] := 2;
+END_IF;
+
+StartFeedPositionR1 := ReactorOrder[0];
+StartFeedPositionR2 := ReactorOrder[1];
+
+UPDATE_POS := FALSE;]]></ST>
+    </Algorithm>
+    <Algorithm ID="59965b2c-ce97-404e-be9d-38a7d5b7fbcd" Name="R_ABORT">
+      <ST><![CDATA[;
+ExAvR1 := R1Exist AND R1Available;
+ExAvR2 := R2Exist AND R2Available;
+
+IF NOT ExAvR1 AND ExAvR2 THEN
+	ReactorOrder[0] := 2;
+	ReactorOrder[1] := 1;
+	
+ELSIF ExAvR1 AND NOT ExAvR2 THEN
+	ReactorOrder[0] := 1;
+	ReactorOrder[1] := 2;
+END_IF;
+
+StartFeedPositionR1 := ReactorOrder[0];
+StartFeedPositionR2 := ReactorOrder[1];]]></ST>
     </Algorithm>
   </BasicFB>
 </FBType>

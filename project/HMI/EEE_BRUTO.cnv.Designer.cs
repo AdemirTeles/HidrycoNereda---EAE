@@ -1,6 +1,6 @@
 /*
  * Hidryco - tela EEE_BRUTO (Elevatoria de Esgoto Bruto)
- * ISA-101: cinzas planos; estados e alarmes vem dos simbolos dos CATs (EEEB, bombas, LIT-03, PIT-01).
+ * ISA-101: cinzas planos; estados e alarmes vem dos simbolos dos CATs (EEEB, bombas, LIT-03, PT-01).
  */
 using System;
 using System.ComponentModel;
@@ -23,6 +23,10 @@ namespace HMI.Main.Canvases
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.irGradeamento = new NxtControl.GuiFramework.ChangeCanvasButton();
+			this.btnResetGeral = new NxtControl.GuiFramework.DrawnButton();
+			this.boiaLSL04 = new Hidryco.HidrycoLib.Symbols.EEE_Bruto.sBoiaL();
+			this.boiaLSH05 = new Hidryco.HidrycoLib.Symbols.EEE_Bruto.sBoiaH();
 			this.fundo = new NxtControl.GuiFramework.Rectangle();
 			this.cardProcesso = new NxtControl.GuiFramework.Rectangle();
 			this.tuboChegada = new NxtControl.GuiFramework.Pipe();
@@ -42,13 +46,11 @@ namespace HMI.Main.Canvases
 			this.paredeFundo = new NxtControl.GuiFramework.Rectangle();
 			this.rotPoco = new NxtControl.GuiFramework.FreeText();
 			this.boiaCabo0 = new NxtControl.GuiFramework.Line();
-			this.boia0 = new NxtControl.GuiFramework.Ellipse();
 			this.boiaGuia0 = new NxtControl.GuiFramework.Line();
 			this.boiaTag0 = new NxtControl.GuiFramework.FreeText();
 			this.boiaTxt0 = new NxtControl.GuiFramework.FreeText();
 			this.boiaTxu0 = new NxtControl.GuiFramework.FreeText();
 			this.boiaCabo1 = new NxtControl.GuiFramework.Line();
-			this.boia1 = new NxtControl.GuiFramework.Ellipse();
 			this.boiaGuia1 = new NxtControl.GuiFramework.Line();
 			this.boiaTag1 = new NxtControl.GuiFramework.FreeText();
 			this.boiaTxt1 = new NxtControl.GuiFramework.FreeText();
@@ -74,6 +76,8 @@ namespace HMI.Main.Canvases
 			this.lit = new Hidryco.HidrycoLib.Symbols.Sensor_Generico.sNivel();
 			this.rotLIT = new NxtControl.GuiFramework.FreeText();
 			this.elevatoria = new Hidryco.HidrycoLib.Symbols.EEE_Bruto.sDefault();
+			this.rotPITag = new NxtControl.GuiFramework.FreeText();
+			this.rotPITxt = new NxtControl.GuiFramework.FreeText();
 			// 
 			// fundo
 			// 
@@ -221,16 +225,9 @@ namespace HMI.Main.Canvases
 			this.boiaCabo0.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(140)), ((byte)(144)), ((byte)(148))), 1F, NxtControl.Drawing.DashStyle.Dash);
 			this.boiaCabo0.StartPoint = new NxtControl.Drawing.PointF(178D, 120D);
 			// 
-			// boia0
-			// 
-			this.boia0.Bounds = new NxtControl.Drawing.RectF(((float)(170D)), ((float)(252D)), ((float)(16D)), ((float)(16D)));
-			this.boia0.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(250)), ((byte)(250)), ((byte)(250))));
-			this.boia0.Name = "boia0";
-			this.boia0.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(84)), ((byte)(88)), ((byte)(92))), 1.5F, NxtControl.Drawing.DashStyle.Solid);
-			// 
 			// boiaGuia0
 			// 
-			this.boiaGuia0.EndPoint = new NxtControl.Drawing.PointF(170D, 260D);
+			this.boiaGuia0.EndPoint = new NxtControl.Drawing.PointF(158D, 260D);
 			this.boiaGuia0.Name = "boiaGuia0";
 			this.boiaGuia0.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(140)), ((byte)(144)), ((byte)(148))), 1F, NxtControl.Drawing.DashStyle.Dash);
 			this.boiaGuia0.StartPoint = new NxtControl.Drawing.PointF(122D, 260D);
@@ -266,16 +263,9 @@ namespace HMI.Main.Canvases
 			this.boiaCabo1.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(140)), ((byte)(144)), ((byte)(148))), 1F, NxtControl.Drawing.DashStyle.Dash);
 			this.boiaCabo1.StartPoint = new NxtControl.Drawing.PointF(178D, 120D);
 			// 
-			// boia1
-			// 
-			this.boia1.Bounds = new NxtControl.Drawing.RectF(((float)(170D)), ((float)(572D)), ((float)(16D)), ((float)(16D)));
-			this.boia1.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(250)), ((byte)(250)), ((byte)(250))));
-			this.boia1.Name = "boia1";
-			this.boia1.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(84)), ((byte)(88)), ((byte)(92))), 1.5F, NxtControl.Drawing.DashStyle.Solid);
-			// 
 			// boiaGuia1
 			// 
-			this.boiaGuia1.EndPoint = new NxtControl.Drawing.PointF(170D, 580D);
+			this.boiaGuia1.EndPoint = new NxtControl.Drawing.PointF(158D, 580D);
 			this.boiaGuia1.Name = "boiaGuia1";
 			this.boiaGuia1.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(140)), ((byte)(144)), ((byte)(148))), 1F, NxtControl.Drawing.DashStyle.Dash);
 			this.boiaGuia1.StartPoint = new NxtControl.Drawing.PointF(122D, 580D);
@@ -478,7 +468,7 @@ namespace HMI.Main.Canvases
 			this.pit.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 792D, 120D);
 			this.pit.Name = "pit";
 			this.pit.SecurityToken = ((uint)(4294967295u));
-			this.pit.TagName = "F8F84A6966B68EF2.PIT_100_01";
+			this.pit.TagName = "F8F84A6966B68EF2.PT_100_01";
 			this.pit.EndInit();
 			// 
 			// sinalLIT
@@ -519,6 +509,61 @@ namespace HMI.Main.Canvases
 			this.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(1366D)), ((float)(698D)));
 			this.Brush = new NxtControl.Drawing.Brush("CanvasBrush");
 			this.Name = "EEE_BRUTO";
+			// 
+			// boiaLSH05
+			// 
+			this.boiaLSH05.BeginInit();
+			this.boiaLSH05.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 160D, 224D);
+			this.boiaLSH05.Name = "boiaLSH05";
+			this.boiaLSH05.SecurityToken = ((uint)(4294967295u));
+			this.boiaLSH05.TagName = "F8F84A6966B68EF2";
+			this.boiaLSH05.EndInit();
+			// 
+			// boiaLSL04
+			// 
+			this.boiaLSL04.BeginInit();
+			this.boiaLSL04.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 160D, 544D);
+			this.boiaLSL04.Name = "boiaLSL04";
+			this.boiaLSL04.SecurityToken = ((uint)(4294967295u));
+			this.boiaLSL04.TagName = "F8F84A6966B68EF2";
+			this.boiaLSL04.EndInit();
+			// 
+			// rotPITag
+			// 
+			this.rotPITag.Color = new NxtControl.Drawing.Color(((byte)(20)), ((byte)(20)), ((byte)(20)));
+			this.rotPITag.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+			this.rotPITag.Location = new NxtControl.Drawing.PointF(976D, 128D);
+			this.rotPITag.Name = "rotPITag";
+			this.rotPITag.Text = "PT-100-01";
+			// 
+			// rotPITxt
+			// 
+			this.rotPITxt.Color = new NxtControl.Drawing.Color(((byte)(96)), ((byte)(100)), ((byte)(104)));
+			this.rotPITxt.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular);
+			this.rotPITxt.Location = new NxtControl.Drawing.PointF(976D, 144D);
+			this.rotPITxt.Name = "rotPITxt";
+			this.rotPITxt.Text = "pressão de recalque";
+			// 
+			// btnResetGeral
+			// 
+			this.btnResetGeral.Bounds = new NxtControl.Drawing.RectF(((float)(6D)), ((float)(662D)), ((float)(126D)), ((float)(30D)));
+			this.btnResetGeral.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208))));
+			this.btnResetGeral.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+			this.btnResetGeral.InnerBorderColor = new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208)));
+			this.btnResetGeral.Name = "btnResetGeral";
+			this.btnResetGeral.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(160)), ((byte)(160)), ((byte)(160))), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.btnResetGeral.Radius = 2D;
+			this.btnResetGeral.Text = "Reset geral";
+			this.btnResetGeral.Use3DEffect = false;
+			this.btnResetGeral.Click += new System.EventHandler(this.BtnResetGeralClick);
+			// 
+			// irGradeamento
+			// 
+			this.irGradeamento.Bounds = new NxtControl.Drawing.RectF(((float)(20D)), ((float)(210D)), ((float)(124D)), ((float)(24D)));
+			this.irGradeamento.CanvasName = "GRADEAMENTO";
+			this.irGradeamento.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+			this.irGradeamento.Name = "irGradeamento";
+			this.irGradeamento.Text = "Gradeamento ›";
 			this.Shapes.AddRange(new System.ComponentModel.IComponent[] {
 			this.fundo,
 			this.cardProcesso,
@@ -539,13 +584,11 @@ namespace HMI.Main.Canvases
 			this.paredeFundo,
 			this.rotPoco,
 			this.boiaCabo0,
-			this.boia0,
 			this.boiaGuia0,
 			this.boiaTag0,
 			this.boiaTxt0,
 			this.boiaTxu0,
 			this.boiaCabo1,
-			this.boia1,
 			this.boiaGuia1,
 			this.boiaTag1,
 			this.boiaTxt1,
@@ -570,7 +613,13 @@ namespace HMI.Main.Canvases
 			this.sinalLIT,
 			this.lit,
 			this.rotLIT,
-			this.elevatoria});
+			this.boiaLSH05,
+			this.boiaLSL04,
+			this.elevatoria,
+			this.btnResetGeral,
+			this.rotPITag,
+			this.irGradeamento,
+			this.rotPITxt});
 			this.Size = new System.Drawing.Size(1366, 698);
 
 		}
@@ -593,13 +642,11 @@ namespace HMI.Main.Canvases
 		private NxtControl.GuiFramework.Rectangle paredeFundo;
 		private NxtControl.GuiFramework.FreeText rotPoco;
 		private NxtControl.GuiFramework.Line boiaCabo0;
-		private NxtControl.GuiFramework.Ellipse boia0;
 		private NxtControl.GuiFramework.Line boiaGuia0;
 		private NxtControl.GuiFramework.FreeText boiaTag0;
 		private NxtControl.GuiFramework.FreeText boiaTxt0;
 		private NxtControl.GuiFramework.FreeText boiaTxu0;
 		private NxtControl.GuiFramework.Line boiaCabo1;
-		private NxtControl.GuiFramework.Ellipse boia1;
 		private NxtControl.GuiFramework.Line boiaGuia1;
 		private NxtControl.GuiFramework.FreeText boiaTag1;
 		private NxtControl.GuiFramework.FreeText boiaTxt1;
@@ -625,6 +672,12 @@ namespace HMI.Main.Canvases
 		private Hidryco.HidrycoLib.Symbols.Sensor_Generico.sNivel lit;
 		private NxtControl.GuiFramework.FreeText rotLIT;
 		private Hidryco.HidrycoLib.Symbols.EEE_Bruto.sDefault elevatoria;
+		private Hidryco.HidrycoLib.Symbols.EEE_Bruto.sBoiaH boiaLSH05;
+		private Hidryco.HidrycoLib.Symbols.EEE_Bruto.sBoiaL boiaLSL04;
+		private NxtControl.GuiFramework.DrawnButton btnResetGeral;
+		private NxtControl.GuiFramework.FreeText rotPITag;
+		private NxtControl.GuiFramework.FreeText rotPITxt;
+		private NxtControl.GuiFramework.ChangeCanvasButton irGradeamento;
 		#endregion
 	}
 }

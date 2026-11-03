@@ -34,7 +34,7 @@ namespace SE.Nereda.Symbols.AnalogInputBase
 			this.aliasDisplayLabel1.Text = "AnalogInputBase";
 			this.aliasDisplayLabel1.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleCenter;
 			this.aliasDisplayLabel1.TextAutoSize = true;
-			this.aliasDisplayLabel1.TextColor = new NxtControl.Drawing.Color("SE.App2Base.SymInstanceLabelTextColor");
+			this.aliasDisplayLabel1.TextColor = new NxtControl.Drawing.Color("SE.App2Base.aaLibSymInstanceLabelTextColor");
 			// 
 			// InstanceName
 			// 

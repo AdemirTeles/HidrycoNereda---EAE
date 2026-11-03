@@ -27,21 +27,6 @@ namespace Hidryco.HidrycoLib.Faceplates.Desinfeccao_UV
 			this.alTxt = new NxtControl.GuiFramework.FreeText();
 			this.e1 = new NxtControl.GuiFramework.FreeText();
 			this.e2 = new NxtControl.GuiFramework.FreeText();
-			this.rCtl = new NxtControl.GuiFramework.FreeText();
-			this.btnDesab = new NxtControl.GuiFramework.DrawnButton();
-			this.btnHab = new NxtControl.GuiFramework.DrawnButton();
-			this.l0 = new NxtControl.GuiFramework.FreeText();
-			this.t0 = new System.HMI.Symbols.Base.TextBox<float>();
-			this.l1 = new NxtControl.GuiFramework.FreeText();
-			this.t1 = new System.HMI.Symbols.Base.TextBox<float>();
-			this.l2 = new NxtControl.GuiFramework.FreeText();
-			this.t2 = new System.HMI.Symbols.Base.TextBox<float>();
-			this.l3 = new NxtControl.GuiFramework.FreeText();
-			this.t3 = new System.HMI.Symbols.Base.TextBox<float>();
-			this.l4 = new NxtControl.GuiFramework.FreeText();
-			this.t4 = new System.HMI.Symbols.Base.TextBox<float>();
-			this.l5 = new NxtControl.GuiFramework.FreeText();
-			this.t5 = new System.HMI.Symbols.Base.TextBox<float>();
 			this.l6 = new NxtControl.GuiFramework.FreeText();
 			this.t6 = new System.HMI.Symbols.Base.TextBox<float>();
 			this.l7 = new NxtControl.GuiFramework.FreeText();
@@ -55,7 +40,6 @@ namespace Hidryco.HidrycoLib.Faceplates.Desinfeccao_UV
 			this.xVMAX = new System.HMI.Symbols.Base.Execute<float>();
 			this.xATIVO = new System.HMI.Symbols.Base.Execute<bool>();
 			this.xMOT = new System.HMI.Symbols.Base.Execute<short>();
-			this.xSPID = new System.HMI.Symbols.Base.Execute<float>();
 			this.xVPOS = new System.HMI.Symbols.Base.Execute<float>();
 			this.xFTF = new System.HMI.Symbols.Base.Execute<bool>();
 			this.xREM = new System.HMI.Symbols.Base.Execute<bool>();
@@ -75,6 +59,8 @@ namespace Hidryco.HidrycoLib.Faceplates.Desinfeccao_UV
 			this.xEREM = new System.HMI.Symbols.Base.Execute<byte>();
 			this.xHAB = new System.HMI.Symbols.Base.Execute<bool>();
 			this.xTOT = new System.HMI.Symbols.Base.Execute<int>();
+			this.PID_VC_700_01 = new Hidryco.HidrycoLib.Symbols.Controle_PID.sAjustes();
+			this.stPID = new Hidryco.HidrycoLib.Symbols.Controle_PID.sStatus();
 			// 
 			// cabecalho
 			// 
@@ -150,202 +136,18 @@ namespace Hidryco.HidrycoLib.Faceplates.Desinfeccao_UV
 			this.e2.Name = "e2";
 			this.e2.Text = "";
 			// 
-			// rCtl
-			// 
-			this.rCtl.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.rCtl.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-			this.rCtl.Location = new NxtControl.Drawing.PointF(20D, 90D);
-			this.rCtl.Name = "rCtl";
-			this.rCtl.Text = "Controle de vazão (700-VC-01)";
-			// 
-			// btnDesab
-			// 
-			this.btnDesab.Bounds = new NxtControl.Drawing.RectF(((float)(20D)), ((float)(110D)), ((float)(170D)), ((float)(32D)));
-			this.btnDesab.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208))));
-			this.btnDesab.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-			this.btnDesab.InnerBorderColor = new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208)));
-			this.btnDesab.Name = "btnDesab";
-			this.btnDesab.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(160)), ((byte)(160)), ((byte)(160))), 1F, NxtControl.Drawing.DashStyle.Solid);
-			this.btnDesab.Radius = 2D;
-			this.btnDesab.Text = "Desabilitar";
-			this.btnDesab.Use3DEffect = false;
-			this.btnDesab.Click += new System.EventHandler(this.BtnDesabClick);
-			// 
-			// btnHab
-			// 
-			this.btnHab.Bounds = new NxtControl.Drawing.RectF(((float)(210D)), ((float)(110D)), ((float)(170D)), ((float)(32D)));
-			this.btnHab.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208))));
-			this.btnHab.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-			this.btnHab.InnerBorderColor = new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208)));
-			this.btnHab.Name = "btnHab";
-			this.btnHab.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(160)), ((byte)(160)), ((byte)(160))), 1F, NxtControl.Drawing.DashStyle.Solid);
-			this.btnHab.Radius = 2D;
-			this.btnHab.Text = "Habilitar";
-			this.btnHab.Use3DEffect = false;
-			this.btnHab.Click += new System.EventHandler(this.BtnHabClick);
-			// 
-			// l0
-			// 
-			this.l0.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.l0.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular);
-			this.l0.Location = new NxtControl.Drawing.PointF(20D, 156D);
-			this.l0.Name = "l0";
-			this.l0.Text = "Vazão máxima (setpoint)";
-			// 
-			// t0
-			// 
-			this.t0.BeginInit();
-			this.t0.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.5D, 0D, 0D, 1D, 290D, 152D);
-			this.t0.MaximumTag = null;
-			this.t0.MinimumTag = null;
-			this.t0.Name = "t0";
-			this.t0.NumberBase = NxtControl.GuiFramework.NumberBase.Decimal;
-			this.t0.Pen = new NxtControl.Drawing.Pen("TextBoxPen");
-			this.t0.SetColor = new NxtControl.Drawing.Color("Yellow");
-			this.t0.Suffix = " m³/h";
-			this.t0.TagName = "STP_VAZAO_MAX";
-			this.t0.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
-			this.t0.UseInputPad = true;
-			this.t0.Value = 0F;
-			this.t0.EndInit();
-			// 
-			// l1
-			// 
-			this.l1.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.l1.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular);
-			this.l1.Location = new NxtControl.Drawing.PointF(20D, 186D);
-			this.l1.Name = "l1";
-			this.l1.Text = "PID ganho (% por m³/h)";
-			// 
-			// t1
-			// 
-			this.t1.BeginInit();
-			this.t1.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.5D, 0D, 0D, 1D, 290D, 182D);
-			this.t1.MaximumTag = null;
-			this.t1.MinimumTag = null;
-			this.t1.Name = "t1";
-			this.t1.NumberBase = NxtControl.GuiFramework.NumberBase.Decimal;
-			this.t1.Pen = new NxtControl.Drawing.Pen("TextBoxPen");
-			this.t1.SetColor = new NxtControl.Drawing.Color("Yellow");
-			this.t1.Suffix = "";
-			this.t1.TagName = "STP_PARAMETRO_KP";
-			this.t1.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
-			this.t1.UseInputPad = true;
-			this.t1.Value = 0F;
-			this.t1.EndInit();
-			// 
-			// l2
-			// 
-			this.l2.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.l2.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular);
-			this.l2.Location = new NxtControl.Drawing.PointF(20D, 216D);
-			this.l2.Name = "l2";
-			this.l2.Text = "PID tempo integral";
-			// 
-			// t2
-			// 
-			this.t2.BeginInit();
-			this.t2.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.5D, 0D, 0D, 1D, 290D, 212D);
-			this.t2.MaximumTag = null;
-			this.t2.MinimumTag = null;
-			this.t2.Name = "t2";
-			this.t2.NumberBase = NxtControl.GuiFramework.NumberBase.Decimal;
-			this.t2.Pen = new NxtControl.Drawing.Pen("TextBoxPen");
-			this.t2.SetColor = new NxtControl.Drawing.Color("Yellow");
-			this.t2.Suffix = " s";
-			this.t2.TagName = "STP_PARAMETRO_KI";
-			this.t2.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
-			this.t2.UseInputPad = true;
-			this.t2.Value = 0F;
-			this.t2.EndInit();
-			// 
-			// l3
-			// 
-			this.l3.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.l3.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular);
-			this.l3.Location = new NxtControl.Drawing.PointF(20D, 246D);
-			this.l3.Name = "l3";
-			this.l3.Text = "PID tempo derivativo";
-			// 
-			// t3
-			// 
-			this.t3.BeginInit();
-			this.t3.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.5D, 0D, 0D, 1D, 290D, 242D);
-			this.t3.MaximumTag = null;
-			this.t3.MinimumTag = null;
-			this.t3.Name = "t3";
-			this.t3.NumberBase = NxtControl.GuiFramework.NumberBase.Decimal;
-			this.t3.Pen = new NxtControl.Drawing.Pen("TextBoxPen");
-			this.t3.SetColor = new NxtControl.Drawing.Color("Yellow");
-			this.t3.Suffix = " s";
-			this.t3.TagName = "STP_PARAMETRO_KD";
-			this.t3.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
-			this.t3.UseInputPad = true;
-			this.t3.Value = 0F;
-			this.t3.EndInit();
-			// 
-			// l4
-			// 
-			this.l4.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.l4.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular);
-			this.l4.Location = new NxtControl.Drawing.PointF(20D, 276D);
-			this.l4.Name = "l4";
-			this.l4.Text = "Abertura mínima";
-			// 
-			// t4
-			// 
-			this.t4.BeginInit();
-			this.t4.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.5D, 0D, 0D, 1D, 290D, 272D);
-			this.t4.MaximumTag = null;
-			this.t4.MinimumTag = null;
-			this.t4.Name = "t4";
-			this.t4.NumberBase = NxtControl.GuiFramework.NumberBase.Decimal;
-			this.t4.Pen = new NxtControl.Drawing.Pen("TextBoxPen");
-			this.t4.SetColor = new NxtControl.Drawing.Color("Yellow");
-			this.t4.Suffix = " %";
-			this.t4.TagName = "STP_MINIMO";
-			this.t4.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
-			this.t4.UseInputPad = true;
-			this.t4.Value = 0F;
-			this.t4.EndInit();
-			// 
-			// l5
-			// 
-			this.l5.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.l5.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular);
-			this.l5.Location = new NxtControl.Drawing.PointF(20D, 306D);
-			this.l5.Name = "l5";
-			this.l5.Text = "Abertura máxima";
-			// 
-			// t5
-			// 
-			this.t5.BeginInit();
-			this.t5.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.5D, 0D, 0D, 1D, 290D, 302D);
-			this.t5.MaximumTag = null;
-			this.t5.MinimumTag = null;
-			this.t5.Name = "t5";
-			this.t5.NumberBase = NxtControl.GuiFramework.NumberBase.Decimal;
-			this.t5.Pen = new NxtControl.Drawing.Pen("TextBoxPen");
-			this.t5.SetColor = new NxtControl.Drawing.Color("Yellow");
-			this.t5.Suffix = " %";
-			this.t5.TagName = "STP_MAXIMO";
-			this.t5.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
-			this.t5.UseInputPad = true;
-			this.t5.Value = 0F;
-			this.t5.EndInit();
-			// 
 			// l6
 			// 
 			this.l6.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.l6.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular);
-			this.l6.Location = new NxtControl.Drawing.PointF(20D, 336D);
+			this.l6.Location = new NxtControl.Drawing.PointF(20D, 378D);
 			this.l6.Name = "l6";
 			this.l6.Text = "Alarme: tolerância acima do limite";
 			// 
 			// t6
 			// 
 			this.t6.BeginInit();
-			this.t6.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.5D, 0D, 0D, 1D, 290D, 332D);
+			this.t6.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.5D, 0D, 0D, 1D, 290D, 374D);
 			this.t6.MaximumTag = null;
 			this.t6.MinimumTag = null;
 			this.t6.Name = "t6";
@@ -363,14 +165,14 @@ namespace Hidryco.HidrycoLib.Faceplates.Desinfeccao_UV
 			// 
 			this.l7.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.l7.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular);
-			this.l7.Location = new NxtControl.Drawing.PointF(20D, 366D);
+			this.l7.Location = new NxtControl.Drawing.PointF(20D, 408D);
 			this.l7.Name = "l7";
 			this.l7.Text = "Alarme: tempo acima do limite (0 = desl.)";
 			// 
 			// t7
 			// 
 			this.t7.BeginInit();
-			this.t7.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.5D, 0D, 0D, 1D, 290D, 362D);
+			this.t7.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.5D, 0D, 0D, 1D, 290D, 404D);
 			this.t7.MaximumTag = null;
 			this.t7.MinimumTag = null;
 			this.t7.Name = "t7";
@@ -388,14 +190,14 @@ namespace Hidryco.HidrycoLib.Faceplates.Desinfeccao_UV
 			// 
 			this.l8.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.l8.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular);
-			this.l8.Location = new NxtControl.Drawing.PointF(20D, 396D);
+			this.l8.Location = new NxtControl.Drawing.PointF(20D, 438D);
 			this.l8.Name = "l8";
 			this.l8.Text = "Aviso: variação máx. em 1 min (0 = desl.)";
 			// 
 			// t8
 			// 
 			this.t8.BeginInit();
-			this.t8.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.5D, 0D, 0D, 1D, 290D, 392D);
+			this.t8.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.5D, 0D, 0D, 1D, 290D, 434D);
 			this.t8.MaximumTag = null;
 			this.t8.MinimumTag = null;
 			this.t8.Name = "t8";
@@ -413,13 +215,13 @@ namespace Hidryco.HidrycoLib.Faceplates.Desinfeccao_UV
 			// 
 			this.rTot.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.rTot.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-			this.rTot.Location = new NxtControl.Drawing.PointF(20D, 430D);
+			this.rTot.Location = new NxtControl.Drawing.PointF(20D, 472D);
 			this.rTot.Name = "rTot";
 			this.rTot.Text = "";
 			// 
 			// btnZera
 			// 
-			this.btnZera.Bounds = new NxtControl.Drawing.RectF(((float)(20D)), ((float)(456D)), ((float)(170D)), ((float)(34D)));
+			this.btnZera.Bounds = new NxtControl.Drawing.RectF(((float)(20D)), ((float)(498D)), ((float)(170D)), ((float)(34D)));
 			this.btnZera.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208))));
 			this.btnZera.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
 			this.btnZera.InnerBorderColor = new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208)));
@@ -432,7 +234,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Desinfeccao_UV
 			// 
 			// btnReset
 			// 
-			this.btnReset.Bounds = new NxtControl.Drawing.RectF(((float)(210D)), ((float)(456D)), ((float)(170D)), ((float)(34D)));
+			this.btnReset.Bounds = new NxtControl.Drawing.RectF(((float)(210D)), ((float)(498D)), ((float)(170D)), ((float)(34D)));
 			this.btnReset.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208))));
 			this.btnReset.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
 			this.btnReset.InnerBorderColor = new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208)));
@@ -490,18 +292,6 @@ namespace Hidryco.HidrycoLib.Faceplates.Desinfeccao_UV
 			this.xMOT.TagName = "STS_MOTIVO";
 			this.xMOT.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.XMOTValueChanged);
 			this.xMOT.EndInit();
-			// 
-			// xSPID
-			// 
-			this.xSPID.BeginInit();
-			this.xSPID.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, double.NaN, double.NaN);
-			this.xSPID.IsOnlyInput = true;
-			this.xSPID.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
-			this.xSPID.Name = "xSPID";
-			this.xSPID.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
-			this.xSPID.TagName = "STS_SAIDA_PID";
-			this.xSPID.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.XSPIDValueChanged);
-			this.xSPID.EndInit();
 			// 
 			// xVPOS
 			// 
@@ -731,9 +521,41 @@ namespace Hidryco.HidrycoLib.Faceplates.Desinfeccao_UV
 			this.xTOT.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.XTOTValueChanged);
 			this.xTOT.EndInit();
 			// 
+			// PID_VC_700_01
+			// 
+			this.PID_VC_700_01.BeginInit();
+			this.PID_VC_700_01.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 10D, 84D);
+			this.PID_VC_700_01.Name = "PID_VC_700_01";
+			this.PID_VC_700_01.SecurityToken = ((uint)(4294967295u));
+			this.PID_VC_700_01.TagName = "PID_VC_700_01";
+			this.PID_VC_700_01.ColunaCampo = 270D;
+			this.PID_VC_700_01.Titulo = "Controle de vazão (700-VC-01)";
+			this.PID_VC_700_01.Rotulo_CMD_HABILITA = "Controle de vazão pelo PID";
+			this.PID_VC_700_01.Rotulo_STP_DESEJADO = "Vazão máxima (setpoint)";
+			this.PID_VC_700_01.Unidade_STP_DESEJADO = " m³/h";
+			this.PID_VC_700_01.Rotulo_STP_PARAMETRO_KP = "PID ganho (% por m³/h)";
+			this.PID_VC_700_01.Unidade_STP_PARAMETRO_KP = "";
+			this.PID_VC_700_01.Rotulo_STP_PARAMETRO_KI = "PID tempo integral";
+			this.PID_VC_700_01.Unidade_STP_PARAMETRO_KI = " s";
+			this.PID_VC_700_01.Rotulo_STP_PARAMETRO_KD = "PID tempo derivativo";
+			this.PID_VC_700_01.Unidade_STP_PARAMETRO_KD = " s";
+			this.PID_VC_700_01.Rotulo_STP_MINIMO = "Abertura mínima";
+			this.PID_VC_700_01.Rotulo_STP_MAXIMO = "Abertura máxima";
+			this.PID_VC_700_01.EndInit();
+			// 
+			// stPID
+			// 
+			this.stPID.BeginInit();
+			this.stPID.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 0D, 0D);
+			this.stPID.Name = "stPID";
+			this.stPID.SecurityToken = ((uint)(4294967295u));
+			this.stPID.TagName = "PID_VC_700_01";
+			this.stPID.stsSaidaPID_Mudou += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.XSPIDValueChanged);
+			this.stPID.EndInit();
+			// 
 			// fpDefault
 			// 
-			this.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(400D)), ((float)(520D)));
+			this.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(400D)), ((float)(562D)));
 			this.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(224)), ((byte)(224)), ((byte)(224))));
 			this.Shapes.AddRange(new System.ComponentModel.IComponent[] {
 			this.cabecalho,
@@ -744,21 +566,6 @@ namespace Hidryco.HidrycoLib.Faceplates.Desinfeccao_UV
 			this.alTxt,
 			this.e1,
 			this.e2,
-			this.rCtl,
-			this.btnDesab,
-			this.btnHab,
-			this.l0,
-			this.t0,
-			this.l1,
-			this.t1,
-			this.l2,
-			this.t2,
-			this.l3,
-			this.t3,
-			this.l4,
-			this.t4,
-			this.l5,
-			this.t5,
 			this.l6,
 			this.t6,
 			this.l7,
@@ -772,7 +579,6 @@ namespace Hidryco.HidrycoLib.Faceplates.Desinfeccao_UV
 			this.xVMAX,
 			this.xATIVO,
 			this.xMOT,
-			this.xSPID,
 			this.xVPOS,
 			this.xFTF,
 			this.xREM,
@@ -791,8 +597,10 @@ namespace Hidryco.HidrycoLib.Faceplates.Desinfeccao_UV
 			this.xEDJ,
 			this.xEREM,
 			this.xHAB,
-			this.xTOT});
-			this.Size = new System.Drawing.Size(400, 520);
+			this.xTOT,
+			this.PID_VC_700_01,
+			this.stPID});
+			this.Size = new System.Drawing.Size(400, 562);
 
 		}
 		private NxtControl.GuiFramework.Rectangle cabecalho;
@@ -803,21 +611,6 @@ namespace Hidryco.HidrycoLib.Faceplates.Desinfeccao_UV
 		private NxtControl.GuiFramework.FreeText alTxt;
 		private NxtControl.GuiFramework.FreeText e1;
 		private NxtControl.GuiFramework.FreeText e2;
-		private NxtControl.GuiFramework.FreeText rCtl;
-		private NxtControl.GuiFramework.DrawnButton btnDesab;
-		private NxtControl.GuiFramework.DrawnButton btnHab;
-		private NxtControl.GuiFramework.FreeText l0;
-		private System.HMI.Symbols.Base.TextBox<float> t0;
-		private NxtControl.GuiFramework.FreeText l1;
-		private System.HMI.Symbols.Base.TextBox<float> t1;
-		private NxtControl.GuiFramework.FreeText l2;
-		private System.HMI.Symbols.Base.TextBox<float> t2;
-		private NxtControl.GuiFramework.FreeText l3;
-		private System.HMI.Symbols.Base.TextBox<float> t3;
-		private NxtControl.GuiFramework.FreeText l4;
-		private System.HMI.Symbols.Base.TextBox<float> t4;
-		private NxtControl.GuiFramework.FreeText l5;
-		private System.HMI.Symbols.Base.TextBox<float> t5;
 		private NxtControl.GuiFramework.FreeText l6;
 		private System.HMI.Symbols.Base.TextBox<float> t6;
 		private NxtControl.GuiFramework.FreeText l7;
@@ -831,7 +624,6 @@ namespace Hidryco.HidrycoLib.Faceplates.Desinfeccao_UV
 		private System.HMI.Symbols.Base.Execute<float> xVMAX;
 		private System.HMI.Symbols.Base.Execute<bool> xATIVO;
 		private System.HMI.Symbols.Base.Execute<short> xMOT;
-		private System.HMI.Symbols.Base.Execute<float> xSPID;
 		private System.HMI.Symbols.Base.Execute<float> xVPOS;
 		private System.HMI.Symbols.Base.Execute<bool> xFTF;
 		private System.HMI.Symbols.Base.Execute<bool> xREM;
@@ -851,6 +643,8 @@ namespace Hidryco.HidrycoLib.Faceplates.Desinfeccao_UV
 		private System.HMI.Symbols.Base.Execute<byte> xEREM;
 		private System.HMI.Symbols.Base.Execute<bool> xHAB;
 		private System.HMI.Symbols.Base.Execute<int> xTOT;
+		private Hidryco.HidrycoLib.Symbols.Controle_PID.sAjustes PID_VC_700_01;
+		private Hidryco.HidrycoLib.Symbols.Controle_PID.sStatus stPID;
 		#endregion
 	}
 }

@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
-<FBType GUID="050a50e2-1504-4ee4-a18c-5ed75129de48" Comment="Basic Function Block Type" Name="EmergencyRecipeSequence_2" Namespace="SE.Nereda">
+<FBType GUID="050a50e2-1504-4ee4-a18c-5ed75129de48" Name="EmergencyRecipeSequence_2" Comment="Basic Function Block Type" Namespace="SE.Nereda">
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="7/4/2026" Remarks="Template" />
+  <VersionInfo Organization="Schneider Electric" Version="0.2" Author=" " Date="30/10/2026" Remarks="0.2: o passo so termina com a fase parada (estados Sx_END, evento PH_OFF); WaitLLReady espera o LL parado (LLOff) e nao mais Ready. 0.1: EmerOFF sempre pelo STOP_ALL (zera comandos e temporizadores); S2 -&gt; S4 com Skip (descarga do ciclo ja feita no S9)." />
   <InterfaceList>
     <EventInputs>
+      <Event ID="F235A05A86065684" Name="MODE">
+        <With Var="Mode" />
+      </Event>
       <Event ID="4E3261F33DF95CD1" Name="INIT_EMERGENCY">
-        <With Var="Init_GoToVentSludge" />
-        <With Var="Init_GoToWS10" />
+        <With Var="Init_GoToStep2" />
+        <With Var="Init_GoToStep10" />
         <With Var="InitialisationDone" />
       </Event>
       <Event ID="68E2F3B4BFF358D6" Name="EMERGENCY_ON">
@@ -24,6 +27,7 @@
         <With Var="VentAerationReady" />
         <With Var="VentSludgeReady" />
         <With Var="WaitReady" />
+        <With Var="FeedRun" />
       </Event>
       <Event ID="62A0C79B5D89C4FB" Name="FB_DUR_STEP1">
         <With Var="DurDoneStep1" />
@@ -36,9 +40,6 @@
       </Event>
       <Event ID="9041C273A86FC2E4" Name="FB_DUR_STEP4">
         <With Var="DurDoneStep4" />
-      </Event>
-      <Event ID="AA8C7EBD4EBD70F0" Name="FB_DUR_STEP5">
-        <With Var="DurDoneStep5" />
       </Event>
       <Event ID="5D1CA06DD981DC88" Name="FB_DUR_STEP6">
         <With Var="DurDoneStep6" />
@@ -73,14 +74,34 @@
       <Event ID="56BBB9AD7704F212" Name="STOP_AERATE">
         <With Var="StopAerate" />
       </Event>
-      <Event ID="CF595DA908C4D604" Name="SD_R_INIT_DONE">
-        <With Var="SD_RxInitDone" />
+      <Event ID="CA4DC5BA35A6FEBD" Name="STOP_FEED">
+        <With Var="StopFeed" />
       </Event>
-      <Event ID="1E0B2A3AB6A90076" Name="IFB_LVL">
-        <With Var="FeedIFBLevel" />
+      <Event ID="01CFD6F3A0FCCEAC" Name="STOP_SD">
+        <With Var="StopSludgeDischarge" />
       </Event>
       <Event ID="035DD9202D5272B8" Name="SB_AV">
         <With Var="SBAvailability" />
+      </Event>
+      <Event ID="1EACF9928FDD5DBC" Name="R_AV">
+        <With Var="ReactorAvailable" />
+      </Event>
+      <Event ID="304CEC6230BEB133" Name="LL_RDY">
+        <With Var="LLReady" />
+      </Event>
+      <Event ID="1E0B2A3AB6A90076" Name="PAR">
+        <With Var="FB_IBL1" />
+        <With Var="FB_RL1" />
+        <With Var="FB_RL2" />
+      </Event>
+      <Event ID="19FE786FE1622633" Name="PH_OFF" Comment="Fases paradas (PhasesOff)">
+        <With Var="FeedOff" />
+        <With Var="AerateOff" />
+        <With Var="SDOff" />
+        <With Var="LLOff" />
+        <With Var="VentAerationOff" />
+        <With Var="VentSludgeOff" />
+        <With Var="WaitOff" />
       </Event>
     </EventInputs>
     <EventOutputs>
@@ -118,12 +139,14 @@
       <Event ID="C125C1F9A17D8460" Name="STEP10_STOP" />
     </EventOutputs>
     <InputVars>
-      <VarDeclaration ID="73A0EB798F8AE64D" Name="Init_GoToVentSludge" Type="BOOL" />
-      <VarDeclaration ID="8C498327642AF905" Name="Init_GoToWS10" Type="BOOL" />
+      <VarDeclaration ID="121E9EDEB7D520C2" Name="Mode" Type="INT" />
+      <VarDeclaration ID="73A0EB798F8AE64D" Name="Init_GoToStep2" Type="BOOL" />
+      <VarDeclaration ID="8C498327642AF905" Name="Init_GoToStep10" Type="BOOL" />
       <VarDeclaration ID="A0CAD84FAFB4D508" Name="InitialisationDone" Type="BOOL" />
       <VarDeclaration ID="C537A25E1616B854" Name="EmergencyON" Type="BOOL" />
       <VarDeclaration ID="EB24B639967D6395" Name="StartFeed" Type="BOOL" />
       <VarDeclaration ID="02C5FE17473E63ED" Name="FeedReady" Type="BOOL" />
+      <VarDeclaration ID="2535614142EE72C2" Name="FeedRun" Type="BOOL" />
       <VarDeclaration ID="9F29B8C1612DCC07" Name="AerateReady" Type="BOOL" />
       <VarDeclaration ID="ED57F4FA4B77207F" Name="SDReady" Type="BOOL" />
       <VarDeclaration ID="89F466D1EDD34A8F" Name="LLReady" Type="BOOL" />
@@ -134,7 +157,6 @@
       <VarDeclaration ID="356882B50FEB9A7D" Name="DurDoneStep2" Type="BOOL" />
       <VarDeclaration ID="111361C8BEDF440B" Name="DurDoneStep3" Type="BOOL" />
       <VarDeclaration ID="82CEB92F735FC5D4" Name="DurDoneStep4" Type="BOOL" />
-      <VarDeclaration ID="CC0CCEB2D046659B" Name="DurDoneStep5" Type="BOOL" />
       <VarDeclaration ID="0228D93DF2A0E691" Name="DurDoneStep6" Type="BOOL" />
       <VarDeclaration ID="F00C171ABB730806" Name="DurDoneStep7" Type="BOOL" />
       <VarDeclaration ID="0EEA3AF033FFC1FD" Name="DurDoneStep8" Type="BOOL" />
@@ -146,9 +168,20 @@
       <VarDeclaration ID="CB5D14E9C5586FB9" Name="L2v" Type="BOOL" />
       <VarDeclaration ID="53ADC5A2738A60DC" Name="ForceUnavaibility" Type="BOOL" />
       <VarDeclaration ID="F39141D7A6A53184" Name="StopAerate" Type="BOOL" />
-      <VarDeclaration ID="DB0738E6DF6AD68E" Name="SD_RxInitDone" Type="BOOL" />
-      <VarDeclaration ID="ACB986D17AA81EAF" Name="FeedIFBLevel" Type="BOOL" />
+      <VarDeclaration ID="30A6DC092F5F2FE3" Name="StopFeed" Type="BOOL" />
+      <VarDeclaration ID="2A258ADD3DD9E59B" Name="StopSludgeDischarge" Type="BOOL" />
       <VarDeclaration ID="5989C017FA1C720B" Name="SBAvailability" Type="BOOL" />
+      <VarDeclaration ID="4A54E49CED3150C3" Name="ReactorAvailable" Type="BOOL" />
+      <VarDeclaration ID="ACB986D17AA81EAF" Name="FB_IBL1" Type="BOOL" />
+      <VarDeclaration ID="1FDBA647EACC96B6" Name="FB_RL1" Type="BOOL" />
+      <VarDeclaration ID="6A2870F3944A402D" Name="FB_RL2" Type="BOOL" />
+      <VarDeclaration ID="0DB2843BD1743299" Name="FeedOff" Type="BOOL" InitialValue="TRUE" Comment="Fase parada (fora de Starting/Running/Stopping/Aborting)" />
+      <VarDeclaration ID="A7E6740DB5B34A62" Name="AerateOff" Type="BOOL" InitialValue="TRUE" Comment="Fase parada (fora de Starting/Running/Stopping/Aborting)" />
+      <VarDeclaration ID="ADA70A6BCB8D8D8D" Name="SDOff" Type="BOOL" InitialValue="TRUE" Comment="Fase parada (fora de Starting/Running/Stopping/Aborting)" />
+      <VarDeclaration ID="61F18EF10BC32EAA" Name="LLOff" Type="BOOL" InitialValue="TRUE" Comment="Fase parada (fora de Starting/Running/Stopping/Aborting)" />
+      <VarDeclaration ID="D29FBD4C2AFC2072" Name="VentAerationOff" Type="BOOL" InitialValue="TRUE" Comment="Fase parada (fora de Starting/Running/Stopping/Aborting)" />
+      <VarDeclaration ID="7B5E81D23B04BB74" Name="VentSludgeOff" Type="BOOL" InitialValue="TRUE" Comment="Fase parada (fora de Starting/Running/Stopping/Aborting)" />
+      <VarDeclaration ID="9A59D958056F0CEC" Name="WaitOff" Type="BOOL" InitialValue="TRUE" Comment="Fase parada (fora de Starting/Running/Stopping/Aborting)" />
     </InputVars>
     <OutputVars>
       <VarDeclaration ID="8B42F21C51560908" Name="CmdFeed" Type="BOOL" />
@@ -162,58 +195,79 @@
     </OutputVars>
   </InterfaceList>
   <BasicFB ID="2ec17f26-1e26-4187-9d1f-898851067dd5">
-    <Attribute Name="FBType.Basic.Algorithm.Order" Value="FEED,LOWER_LEVEL,AERATE,StopAll,Synchronize,WAIT_INIT,WAIT_S8,WAIT_S2,SLUDGE_DISCHARGE_S3,SLUDGE_DISCHARGE_S7,VENT_AERATE,VENT_SLUDGE_S9,VENT_SLUDGE_S2" />
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="FEED,LOWER_LEVEL,AERATE,StopAll,Synchronize,WAIT_INIT,SLUDGE_DISCHARGE_S3,VENT_AERATE,VENT_SLUDGE_S2,IdleState,WAIT_S7,WAIT_S10,SLUDGE_DISCHARGE_S9,VENT_SLUDGE_S8,WaitLLReady,StepEnd" />
     <ECC>
-      <ECState Name="START" Comment="Initial State" x="3283.988" y="878.9349" />
-      <ECState Name="FEED" x="3285.333" y="1742.667">
+      <ECState Name="START" Comment="Initial State" x="5546.209" y="2687.824" />
+      <ECState Name="S1_FEED" x="5552" y="3662.667">
         <ECAction Algorithm="FEED" Output="PHASE_CMD" />
         <ECAction Output="GRAPH" />
         <ECAction Output="STEP1_START" />
-        <ECAction Output="STEP8_STOP" />
+        <ECAction Output="STEP10_STOP" />
       </ECState>
-      <ECState Name="VENT_SLUDGE_1" x="3285.333" y="2515.667">
+      <ECState Name="S2_VENT_SLUDGE" x="5552" y="4435.667">
         <ECAction Algorithm="VENT_SLUDGE_S2" Output="PHASE_CMD" />
         <ECAction Output="GRAPH" />
         <ECAction Output="STEP2_START" />
         <ECAction Output="STEP1_STOP" />
+        <ECAction Output="STEP10_STOP" />
       </ECState>
-      <ECState Name="SLUDGE_DISCHARGE" x="3289.333" y="3265.666">
+      <ECState Name="S3_SLUDGE_DISCHARGE" x="5556" y="5185.665">
         <ECAction Algorithm="SLUDGE_DISCHARGE_S3" Output="PHASE_CMD" />
         <ECAction Output="GRAPH" />
         <ECAction Output="STEP3_START" />
         <ECAction Output="STEP2_STOP" />
       </ECState>
-      <ECState Name="LOWER_LEVEL" x="3294.889" y="4019.666">
+      <ECState Name="S4_LOWER_LEVEL" x="5561.557" y="5939.666">
         <ECAction Algorithm="LOWER_LEVEL" Output="PHASE_CMD" />
         <ECAction Output="GRAPH" />
         <ECAction Output="STEP4_START" />
         <ECAction Output="STEP3_STOP" />
+        <ECAction Output="STEP2_STOP" />
       </ECState>
-      <ECState Name="AERATE" x="3292.142" y="4772.595">
+      <ECState Name="S5_AERATE" x="5558.81" y="7268.596">
         <ECAction Algorithm="AERATE" Output="PHASE_CMD" />
         <ECAction Output="GRAPH" />
         <ECAction Output="STEP5_START" />
         <ECAction Output="STEP4_STOP" />
+        <ECAction Output="STEP3_STOP" />
       </ECState>
-      <ECState Name="VENT_AERATION" x="3301.666" y="5548.492">
+      <ECState Name="S6_VENT_AERATION" x="5568.333" y="8044.492">
         <ECAction Algorithm="VENT_AERATE" Output="PHASE_CMD" />
         <ECAction Output="GRAPH" />
         <ECAction Output="STEP6_START" />
         <ECAction Output="STEP5_STOP" />
       </ECState>
-      <ECState Name="WAIT" x="3306.555" y="6267">
-        <ECAction Algorithm="WAIT_S8" Output="PHASE_CMD" />
+      <ECState Name="S7_WAIT" x="5573.223" y="8763">
+        <ECAction Algorithm="WAIT_S7" Output="PHASE_CMD" />
         <ECAction Output="GRAPH" />
         <ECAction Output="STEP7_START" />
         <ECAction Output="STEP6_STOP" />
-      </ECState>
-      <ECState Name="WAIT_2" x="3340.714" y="7964.361">
-        <ECAction Algorithm="WAIT_S8" Output="PHASE_CMD" />
-        <ECAction Output="GRAPH" />
-        <ECAction Output="STEP10_START" />
         <ECAction Output="STEP10_STOP" />
       </ECState>
-      <ECState Name="STOP" x="5477.333" y="3410.666">
+      <ECState Name="S10_WAIT" x="5595.953" y="10751.79">
+        <ECAction Algorithm="WAIT_S10" Output="PHASE_CMD" />
+        <ECAction Output="GRAPH" />
+        <ECAction Output="STEP10_START" />
+        <ECAction Output="STEP9_STOP" />
+        <ECAction Output="STEP8_STOP" />
+      </ECState>
+      <ECState Name="EmerOFF" x="8864.001" y="5530.666" />
+      <ECState Name="S8_VENT_SLUDGE" x="5589.762" y="9351.556">
+        <ECAction Algorithm="VENT_SLUDGE_S8" Output="PHASE_CMD" />
+        <ECAction Output="GRAPH" />
+        <ECAction Output="STEP8_START" />
+        <ECAction Output="STEP7_STOP" />
+      </ECState>
+      <ECState Name="S9_SLUDGE_DISCHARGE" x="5586.333" y="10029.93">
+        <ECAction Algorithm="SLUDGE_DISCHARGE_S9" Output="PHASE_CMD" />
+        <ECAction Output="GRAPH" />
+        <ECAction Output="STEP9_START" />
+        <ECAction Output="STEP8_STOP" />
+      </ECState>
+      <ECState Name="S0_IDLEState" x="5555.237" y="3212.063">
+        <ECAction Algorithm="IdleState" Output="GRAPH" />
+      </ECState>
+      <ECState Name="STOP_ALL" x="5562.255" y="1511.682">
         <ECAction Algorithm="StopAll" Output="PHASE_CMD" />
         <ECAction Output="GRAPH" />
         <ECAction Output="STEP1_STOP" />
@@ -224,122 +278,166 @@
         <ECAction Output="STEP6_STOP" />
         <ECAction Output="STEP7_STOP" />
         <ECAction Output="STEP8_STOP" />
-        <ECAction />
-        <ECAction />
+        <ECAction Output="STEP9_STOP" />
+        <ECAction Output="STEP10_STOP" />
       </ECState>
-      <ECState Name="VENT_SLUDGE_2" x="3323.095" y="6855.556">
-        <ECAction Algorithm="VENT_SLUDGE_S9" Output="PHASE_CMD" />
-        <ECAction Output="GRAPH" />
-        <ECAction Output="STEP8_START" />
-        <ECAction Output="STEP7_STOP" />
+      <ECState Name="WaitLLReady" x="5566.698" y="6578.581">
+        <ECAction Algorithm="WaitLLReady" Output="PHASE_CMD" />
       </ECState>
-      <ECState Name="SLUDGE_DISCHARGE_2" x="3331.095" y="7339.639">
-        <ECAction Algorithm="SLUDGE_DISCHARGE_S7" Output="PHASE_CMD" />
-        <ECAction Output="GRAPH" />
-        <ECAction Output="STEP9_START" />
-        <ECAction Output="STEP8_STOP" />
+      <ECState Name="S1_END" Comment="Fim do passo: comandos zerados, espera a fase parar" x="8752" y="3962.67">
+        <ECAction Algorithm="StepEnd" Output="PHASE_CMD" />
       </ECState>
-      <ECState Name="IDLEState" x="3288.571" y="1367.619" />
-      <ECTransition Source="IDLEState" Destination="FEED" Condition="START_FEED AND StartFeed&#xD;&#xA;AND NOT ForceUnavaibility&#xD;&#xA;AND FeedReady&#xD;&#xA;AND EmergencyON" x="3288.56" y="1549.413">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="822.3223,375.5974,822.1121,398.1538" />
+      <ECState Name="S2_END" Comment="Fim do passo: comandos zerados, espera a fase parar" x="8752" y="4735.67">
+        <ECAction Algorithm="StepEnd" Output="PHASE_CMD" />
+      </ECState>
+      <ECState Name="S3_END" Comment="Fim do passo: comandos zerados, espera a fase parar" x="8756" y="5485.66">
+        <ECAction Algorithm="StepEnd" Output="PHASE_CMD" />
+      </ECState>
+      <ECState Name="S5_END" Comment="Fim do passo: comandos zerados, espera a fase parar" x="8758.81" y="7568.6">
+        <ECAction Algorithm="StepEnd" Output="PHASE_CMD" />
+      </ECState>
+      <ECState Name="S6_END" Comment="Fim do passo: comandos zerados, espera a fase parar" x="8768.33" y="8344.49">
+        <ECAction Algorithm="StepEnd" Output="PHASE_CMD" />
+      </ECState>
+      <ECState Name="S7_END" Comment="Fim do passo: comandos zerados, espera a fase parar" x="8773.22" y="9063">
+        <ECAction Algorithm="StepEnd" Output="PHASE_CMD" />
+      </ECState>
+      <ECState Name="S8_END" Comment="Fim do passo: comandos zerados, espera a fase parar" x="8789.76" y="9651.56">
+        <ECAction Algorithm="StepEnd" Output="PHASE_CMD" />
+      </ECState>
+      <ECState Name="S9_END" Comment="Fim do passo: comandos zerados, espera a fase parar" x="8786.33" y="10329.9">
+        <ECAction Algorithm="StepEnd" Output="PHASE_CMD" />
+      </ECState>
+      <ECState Name="S10_END" Comment="Fim do passo: comandos zerados, espera a fase parar" x="8795.95" y="11051.8">
+        <ECAction Algorithm="StepEnd" Output="PHASE_CMD" />
+      </ECState>
+      <ECTransition Source="S0_IDLEState" Destination="S1_FEED" Condition="START_FEED AND StartFeed&#xD;&#xA;AND NOT ForceUnavaibility&#xD;&#xA;AND ReactorAvailable&#xD;&#xA;AND EmergencyON" x="5555.766" y="3430.032">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1389.184,842.4708,1388.925,871.3235" />
       </ECTransition>
-      <ECTransition Source="FEED" Destination="VENT_SLUDGE_1" Condition="(FB_DUR_STEP1 AND DurDoneStep1)&#xD;&#xA;OR &#xD;&#xA;(IFB_LVL AND FeedIFBLevel)" x="3284.762" y="2131.541">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="821.1121,505.2205,821.1963,560.9458" />
+      <ECTransition Source="S1_FEED" Destination="S1_END" Condition="(FB_DUR_STEP1 AND DurDoneStep1)&#xD;&#xA;OR &#xD;&#xA;(FB_IBL1 AND FeedRun)&#xD;&#xA;OR&#xD;&#xA;StopFeed" x="5551.429" y="4051.542">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1387.779,985.2205,1387.863,1040.946" />
       </ECTransition>
-      <ECTransition Source="VENT_SLUDGE_1" Destination="SLUDGE_DISCHARGE" Condition="(FB_DUR_STEP2 AND DurDoneStep2 AND NOT Skip AND InitialisationDone)&#xD;&#xA;OR&#xD;&#xA;(SD_R_INIT_DONE AND SD_RxInitDone AND NOT InitialisationDone)" x="3286.042" y="2871.647">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="821.258,689.4249,821.5966,743.2288" />
+      <ECTransition Source="S2_VENT_SLUDGE" Destination="S2_END" Condition="FB_DUR_STEP2 AND DurDoneStep2 AND InitialisationDone" x="5552.708" y="4791.647">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1387.925,1169.425,1388.263,1223.229" />
       </ECTransition>
-      <ECTransition Source="SLUDGE_DISCHARGE" Destination="LOWER_LEVEL" Condition="(FB_DUR_STEP3 AND DurDoneStep3) &#xD;&#xA;" x="3289.927" y="3632.717">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="822.1572,880.2822,822.5282,934.4183" />
+      <ECTransition Source="S3_SLUDGE_DISCHARGE" Destination="S3_END" Condition="(FB_DUR_STEP3 AND DurDoneStep3) OR NOT SBAvailability OR FB_RL1 OR StopSludgeDischarge&#xD;&#xA;" x="5556.595" y="5552.716">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1388.824,1360.282,1389.195,1414.418" />
       </ECTransition>
-      <ECTransition Source="LOWER_LEVEL" Destination="AERATE" Condition="(FB_DUR_STEP4 AND DurDoneStep4)&#xD;&#xA;OR&#xD;&#xA;(L1 AND L1v)" x="3295.079" y="4375.636">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="823.9669,1065.177,823.7723,1119.225" />
+      <ECTransition Source="S4_LOWER_LEVEL" Destination="WaitLLReady" Condition="(FB_DUR_STEP4 AND DurDoneStep4) OR FB_RL1" x="5565.496" y="6242.22">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1391.272,1536.873,1391.633,1581.42" />
       </ECTransition>
-      <ECTransition Source="AERATE" Destination="VENT_AERATION" Condition="StopAerate&#xD;&#xA;OR&#xD;&#xA;(FB_DUR_STEP5 AND DurDoneStep5)" x="3297.385" y="5155.205">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="824.1245,1260.374,824.6263,1316.339" />
+      <ECTransition Source="S5_AERATE" Destination="S5_END" Condition="StopAerate" x="5564.052" y="7651.205">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1390.791,1884.374,1391.293,1940.339" />
       </ECTransition>
-      <ECTransition Source="VENT_AERATION" Destination="WAIT" Condition="(FB_DUR_STEP6 AND DurDoneStep6 )&#xD;&#xA;AND &#xD;&#xA;NOT Skip" x="3309.255" y="5904.167">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="827.4941,1450.154,827.7721,1501.333" />
+      <ECTransition Source="S6_VENT_AERATION" Destination="S6_END" Condition="FB_DUR_STEP6 AND DurDoneStep6" x="5575.923" y="8400.168">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1394.161,2074.154,1394.439,2125.333" />
       </ECTransition>
-      <ECTransition Source="WAIT" Destination="VENT_SLUDGE_2" Condition="(FB_DUR_STEP7 AND DurDoneStep7)" x="3316.55" y="6552.892">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="828.6152,1617.34,829.8492,1657.708" />
+      <ECTransition Source="S7_WAIT" Destination="S7_END" Condition="FB_DUR_STEP7 AND DurDoneStep7" x="5583.218" y="9048.892">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1395.282,2241.34,1396.516,2281.708" />
       </ECTransition>
-      <ECTransition Source="START" Destination="STOP" Condition="(EMERGENCY_ON AND NOT EmergencyON) OR&#xD;&#xA;(FORCE_UNAV AND ForceUnavaibility)" x="4993.045" y="1679.365">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1206.663,281.8302,1381.002,482.8919" />
+      <ECTransition Source="START" Destination="EmerOFF" Condition="(EMERGENCY_ON AND NOT EmergencyON) OR&#xD;&#xA;(FORCE_UNAV AND ForceUnavaibility)" x="7736.171" y="3565.089">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1840.559,734.0365,2106.383,960.689" />
       </ECTransition>
-      <ECTransition Source="STOP" Destination="START" Condition="1" x="5348.191" y="1462.798">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1498.819,411.6403,1324.471,210.6347" />
+      <ECTransition Source="S1_FEED" Destination="EmerOFF" Condition="ForceUnavaibility OR NOT EmergencyON" x="7052.274" y="3751.112">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1617.493,798.6705,1877.52,944.6568" />
       </ECTransition>
-      <ECTransition Source="FEED" Destination="STOP" Condition="ForceUnavaibility OR NOT EmergencyON" x="4476.506" y="1810.897">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1037.894,328.1077,1209.232,458.4095" />
+      <ECTransition Source="S2_VENT_SLUDGE" Destination="EmerOFF" Condition="ForceUnavaibility OR NOT EmergencyON" x="7089.063" y="4420.529">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1636.191,1021.626,1881.367,1103.563" />
       </ECTransition>
-      <ECTransition Source="VENT_SLUDGE_1" Destination="STOP" Condition="ForceUnavaibility OR NOT EmergencyON" x="4384.57" y="2431.608">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1012.409,534.7864,1174.949,601.1215" />
+      <ECTransition Source="S3_SLUDGE_DISCHARGE" Destination="EmerOFF" Condition="ForceUnavaibility OR NOT EmergencyON" x="7335.024" y="4977.944">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1732.36,1205.29,1947.211,1229.009" />
       </ECTransition>
-      <ECTransition Source="SLUDGE_DISCHARGE" Destination="STOP" Condition="ForceUnavaibility OR NOT EmergencyON" x="4447.767" y="2954.409">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1044.193,706.2247,1187.449,715.7175" />
+      <ECTransition Source="S4_LOWER_LEVEL" Destination="EmerOFF" Condition="ForceUnavaibility OR NOT EmergencyON" x="7372.89" y="5704.839">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1732.799,1439.201,1969.846,1409.869" />
       </ECTransition>
-      <ECTransition Source="LOWER_LEVEL" Destination="STOP" Condition="ForceUnavaibility OR NOT EmergencyON" x="4479.879" y="3677.743">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1046.77,939.1403,1203.602,895.3813" />
+      <ECTransition Source="S5_AERATE" Destination="EmerOFF" Condition="ForceUnavaibility OR NOT EmergencyON" x="7351.21" y="6566.258">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1715.67,1723.03,1973.318,1587.87" />
       </ECTransition>
-      <ECTransition Source="AERATE" Destination="STOP" Condition="ForceUnavaibility OR NOT EmergencyON" x="4532.089" y="4256.158">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1056.888,1129.606,1224.969,1024.913" />
+      <ECTransition Source="S6_VENT_AERATION" Destination="EmerOFF" Condition="ForceUnavaibility OR NOT EmergencyON" x="7280.317" y="7179.327">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1690.196,1926.979,1948.615,1727.976" />
       </ECTransition>
-      <ECTransition Source="VENT_AERATION" Destination="STOP" Condition="ForceUnavaibility OR NOT EmergencyON" x="4559.032" y="4819.905">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1064.024,1317.251,1230.926,1149.423" />
+      <ECTransition Source="S7_WAIT" Destination="EmerOFF" Condition="ForceUnavaibility OR NOT EmergencyON" x="7179.616" y="7808.617">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1647.503,2137.713,1925.373,1875.257" />
       </ECTransition>
-      <ECTransition Source="WAIT" Destination="STOP" Condition="ForceUnavaibility OR NOT EmergencyON" x="4500.29" y="5417.091">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1036.488,1517.366,1224.12,1285.338" />
+      <ECTransition Source="S10_WAIT" Destination="EmerOFF" Condition="ForceUnavaibility OR NOT EmergencyON" x="7600.479" y="9631.336">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1783.376,2534.02,2068.314,2529.999" />
       </ECTransition>
-      <ECTransition Source="WAIT_2" Destination="STOP" Condition="ForceUnavaibility OR NOT EmergencyON" x="5047.41" y="6940.611">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1174.488,1846.243,1445.092,1832.912" />
+      <ECTransition Source="S2_END" Destination="S4_LOWER_LEVEL" Condition="VentSludgeOff AND&#xD;&#xA;(Skip OR NOT SBAvailability)" x="4892.588" y="5192.039">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1174.62,1240.056,1175.344,1356.692" />
       </ECTransition>
-      <ECTransition Source="VENT_SLUDGE_1" Destination="LOWER_LEVEL" Condition="SB_AV AND SBAvailability" x="2625.919" y="3272.038">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="607.9529,760.0558,608.6768,876.692" />
+      <ECTransition Source="S8_END" Destination="S10_WAIT" Condition="VentSludgeOff AND&#xD;&#xA;(Skip OR NOT SBAvailability)" x="4944.742" y="9860.195">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1192.05,2395.293,1192.708,2502.892" />
       </ECTransition>
-      <ECTransition Source="VENT_SLUDGE_2" Destination="WAIT_2" Condition="(SB_AV AND SBAvailability)&#xD;&#xA;OR&#xD;&#xA;(SKIP AND Skip)" x="2672.424" y="7286.209">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="624.4141,1769.277,624.7231,1853.203" />
+      <ECTransition Source="S0_IDLEState" Destination="S10_WAIT" Condition="INIT_EMERGENCY AND Init_GoToStep10" x="3156.185" y="7475.128">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="598.2667,1148.934,600.7629,2666.858" />
       </ECTransition>
-      <ECTransition Source="IDLEState" Destination="WAIT_2" Condition="INIT_EMERGENCY AND Init_GoToWS10" x="908.4998" y="5120.729">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="30.84322,652.3864,44.98218,1979.587" />
+      <ECTransition Source="S10_WAIT" Destination="S10_END" Condition="NOT ForceUnavaibility AND EmergencyON AND&#xD;&#xA;START_FEED AND StartFeed" x="3767.795" y="7505.226">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="768.1977,2396.417,829.0374,1405.862" />
       </ECTransition>
-      <ECTransition Source="WAIT_2" Destination="FEED" Condition="NOT ForceUnavaibility AND EmergencyON &#xD;&#xA;AND&#xD;&#xA;(FB_DUR_STEP10 AND DurDoneStep10)" x="1494.616" y="5114.801">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="200.1264,1734.249,260.5235,866.6995" />
+      <ECTransition Source="S0_IDLEState" Destination="S2_VENT_SLUDGE" Condition="INIT_EMERGENCY AND Init_GoToStep2" x="4926.021" y="3900.984">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1187.62,935.0455,1188.195,1028.3" />
       </ECTransition>
-      <ECTransition Source="IDLEState" Destination="VENT_SLUDGE_1" Condition="INIT_EMERGENCY AND Init_GoToVentSludge" x="2652.175" y="2009.526">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="619.1827,464.5396,619.64,551.537" />
+      <ECTransition Source="S8_VENT_SLUDGE" Destination="S8_END" Condition="FB_DUR_STEP8 AND DurDoneStep8" x="5590.741" y="9697.824">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1397.971,2401.131,1397.727,2448.962" />
       </ECTransition>
-      <ECTransition Source="VENT_SLUDGE_2" Destination="SLUDGE_DISCHARGE_2" Condition="FB_DUR_STEP8 AND DurDoneStep8" x="3329.68" y="7102.252">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="832.3174,1760.13,832.8052,1791.772" />
+      <ECTransition Source="S9_SLUDGE_DISCHARGE" Destination="S9_END" Condition="(FB_DUR_STEP9 AND DurDoneStep9)&#xD;&#xA;OR&#xD;&#xA;FB_RL2&#xD;&#xA;OR&#xD;&#xA;NOT SBAvailability&#xD;&#xA;OR&#xD;&#xA;StopSludgeDischarge" x="5596.535" y="10410.6">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1399.142,2578.567,1399.806,2630.026" />
       </ECTransition>
-      <ECTransition Source="SLUDGE_DISCHARGE_2" Destination="WAIT_2" Condition="(FB_DUR_STEP9 AND DurDoneStep9)&#xD;&#xA;OR&#xD;&#xA;(L2 AND L2v)" x="3341.098" y="7668.625">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="835.2547,1896.86,835.9224,1940.223" />
+      <ECTransition Source="S8_VENT_SLUDGE" Destination="EmerOFF" Condition="ForceUnavaibility OR NOT EmergencyON" x="7538.069" y="7961.954">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1773.218,2188.621,2038.29,1879.163" />
       </ECTransition>
-      <ECTransition Source="VENT_SLUDGE_2" Destination="STOP" Condition="ForceUnavaibility OR NOT EmergencyON" x="4807.493" y="5570.604">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1144.343,1568.297,1318.424,1289.92" />
+      <ECTransition Source="S9_SLUDGE_DISCHARGE" Destination="EmerOFF" Condition="ForceUnavaibility OR NOT EmergencyON" x="7715.173" y="8485.252">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1830.2,2363.029,2096.844,1997.089" />
       </ECTransition>
-      <ECTransition Source="SLUDGE_DISCHARGE_2" Destination="STOP" Condition="ForceUnavaibility OR NOT EmergencyON" x="5013.738" y="5959.982">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1211.099,1698.09,1385.202,1379.373" />
+      <ECTransition Source="START" Destination="S0_IDLEState" Condition="1" x="5551.601" y="2936.404">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1388.633,722.6907,1387.249,743.2546" />
       </ECTransition>
-      <ECTransition Source="START" Destination="IDLEState" Condition="1" x="3286.328" y="1110.885">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="822.3561,267.2834,820.7963,286.0941" />
+      <ECTransition Source="EmerOFF" Destination="STOP_ALL" Condition="1" x="8284.325" y="1832.798">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="2306.846,504.77,2002.269,138.9303" />
       </ECTransition>
-      <ECTransition Source="SLUDGE_DISCHARGE" Destination="AERATE" Condition="(L1 AND L1v)" x="2578.578" y="4098.972">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="593.2038,972.9559,593.4217,1089.837" />
+      <ECTransition Source="STOP_ALL" Destination="START" Condition="1" x="5556.201" y="2080.494">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1387.886,469.798,1390.505,567.2394" />
       </ECTransition>
+      <ECTransition Source="S0_IDLEState" Destination="STOP_ALL" Condition="MODE AND Mode = 1" x="4941.13" y="2414.733">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1190.868,675.0529,1188.862,541.124" />
+      </ECTransition>
+      <ECTransition Source="WaitLLReady" Destination="S5_AERATE" Condition="LLOff" x="5560.764" y="6914.447">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1390.35,1703.448,1389.792,1752.252" />
+      </ECTransition>
+      <ECTransition Source="WaitLLReady" Destination="EmerOFF" Condition="ForceUnavaibility OR NOT EmergencyON" x="7245.687" y="6168.536">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1686.355,1590.387,1934.195,1511.621" />
+      </ECTransition>
+      <ECTransition Source="S1_END" Destination="S2_VENT_SLUDGE" Condition="FeedOff" x="7552" y="4462.67" />
+      <ECTransition Source="S2_END" Destination="S3_SLUDGE_DISCHARGE" Condition="VentSludgeOff AND NOT Skip AND SBAvailability" x="7552" y="5235.67" />
+      <ECTransition Source="S3_END" Destination="S4_LOWER_LEVEL" Condition="SDOff" x="7556" y="5985.66" />
+      <ECTransition Source="S5_END" Destination="S6_VENT_AERATION" Condition="AerateOff" x="7558.81" y="8068.6" />
+      <ECTransition Source="S6_END" Destination="S7_WAIT" Condition="VentAerationOff" x="7568.33" y="8844.49" />
+      <ECTransition Source="S7_END" Destination="S8_VENT_SLUDGE" Condition="WaitOff" x="7573.22" y="9563" />
+      <ECTransition Source="S8_END" Destination="S9_SLUDGE_DISCHARGE" Condition="VentSludgeOff AND NOT Skip AND SBAvailability" x="7589.76" y="10151.6" />
+      <ECTransition Source="S9_END" Destination="S10_WAIT" Condition="SDOff" x="7586.33" y="10829.9" />
+      <ECTransition Source="S10_END" Destination="S1_FEED" Condition="WaitOff" x="7595.95" y="11551.8" />
+      <ECTransition Source="S1_END" Destination="EmerOFF" Condition="ForceUnavaibility OR NOT EmergencyON" x="9652" y="3962.67" />
+      <ECTransition Source="S2_END" Destination="EmerOFF" Condition="ForceUnavaibility OR NOT EmergencyON" x="9652" y="4735.67" />
+      <ECTransition Source="S3_END" Destination="EmerOFF" Condition="ForceUnavaibility OR NOT EmergencyON" x="9656" y="5485.66" />
+      <ECTransition Source="S5_END" Destination="EmerOFF" Condition="ForceUnavaibility OR NOT EmergencyON" x="9658" y="7568.6" />
+      <ECTransition Source="S6_END" Destination="EmerOFF" Condition="ForceUnavaibility OR NOT EmergencyON" x="9668" y="8344.49" />
+      <ECTransition Source="S7_END" Destination="EmerOFF" Condition="ForceUnavaibility OR NOT EmergencyON" x="9673" y="9063" />
+      <ECTransition Source="S8_END" Destination="EmerOFF" Condition="ForceUnavaibility OR NOT EmergencyON" x="9689" y="9651.56" />
+      <ECTransition Source="S9_END" Destination="EmerOFF" Condition="ForceUnavaibility OR NOT EmergencyON" x="9686" y="10329.9" />
+      <ECTransition Source="S10_END" Destination="EmerOFF" Condition="ForceUnavaibility OR NOT EmergencyON" x="9695" y="11051.8" />
     </ECC>
     <Algorithm Name="FEED">
-      <ST><![CDATA[;
-CmdFeed := TRUE;
+      <ST><![CDATA[CmdFeed := TRUE;
 CmdAerate := FALSE;
 CmdSludgeDischarge := FALSE;
 CmdLowerLevel := FALSE;
 CmdVentAerate := FALSE;
 CmdVentSludge := FALSE;
 CmdWait := FALSE;
+
 Grafcet := 1;]]></ST>
     </Algorithm>
-    <Algorithm Name="WAIT_S8">
+    <Algorithm Name="WAIT_S10">
       <ST><![CDATA[;
 CmdFeed := FALSE;
 CmdAerate := FALSE;
@@ -351,9 +449,8 @@ CmdWait := TRUE;
 
 Grafcet := 10;]]></ST>
     </Algorithm>
-    <Algorithm Name="SLUDGE_DISCHARGE_S7">
-      <ST><![CDATA[;
-CmdFeed := FALSE;
+    <Algorithm Name="SLUDGE_DISCHARGE_S9">
+      <ST><![CDATA[CmdFeed := FALSE;
 CmdAerate := FALSE;
 CmdSludgeDischarge := TRUE;
 CmdLowerLevel := FALSE;
@@ -364,25 +461,25 @@ CmdWait := FALSE;
 Grafcet := 9;]]></ST>
     </Algorithm>
     <Algorithm Name="LOWER_LEVEL">
-      <ST><![CDATA[;
-CmdFeed := FALSE;
+      <ST><![CDATA[CmdFeed := FALSE;
 CmdAerate := FALSE;
 CmdSludgeDischarge := FALSE;
 CmdLowerLevel := TRUE;
 CmdVentAerate := FALSE;
 CmdVentSludge := FALSE;
 CmdWait := FALSE;
+
 Grafcet := 4;]]></ST>
     </Algorithm>
     <Algorithm Name="AERATE">
-      <ST><![CDATA[;
-CmdFeed := FALSE;
+      <ST><![CDATA[CmdFeed := FALSE;
 CmdAerate := TRUE;
 CmdSludgeDischarge := FALSE;
 CmdLowerLevel := FALSE;
 CmdVentAerate := FALSE;
 CmdVentSludge := FALSE;
 CmdWait := FALSE;
+
 Grafcet := 5;]]></ST>
     </Algorithm>
     <Algorithm Name="StopAll">
@@ -411,9 +508,8 @@ CmdWait := TRUE;
 
 Grafcet := 8;]]></ST>
     </Algorithm>
-    <Algorithm ID="dce46f28-c176-451f-a36e-2de28e923e10" Name="WAIT_S2">
-      <ST><![CDATA[;
-CmdFeed := FALSE;
+    <Algorithm ID="dce46f28-c176-451f-a36e-2de28e923e10" Name="WAIT_S7">
+      <ST><![CDATA[CmdFeed := FALSE;
 CmdAerate := FALSE;
 CmdSludgeDischarge := FALSE;
 CmdLowerLevel := FALSE;
@@ -421,7 +517,7 @@ CmdVentAerate := FALSE;
 CmdVentSludge := FALSE;
 CmdWait := TRUE;
 
-Grafcet := 2;]]></ST>
+Grafcet := 7;]]></ST>
     </Algorithm>
     <Algorithm ID="dfb46956-7eaa-4da9-908a-dcdeaf99b614" Name="SLUDGE_DISCHARGE_S3">
       <ST><![CDATA[;
@@ -436,39 +532,60 @@ CmdWait := FALSE;
 Grafcet := 3;]]></ST>
     </Algorithm>
     <Algorithm ID="99c48456-fb2f-4763-98b7-962884713b8b" Name="VENT_AERATE">
-      <ST><![CDATA[;
-
-CmdFeed := FALSE;
+      <ST><![CDATA[CmdFeed := FALSE;
 CmdAerate := FALSE;
 CmdSludgeDischarge := FALSE;
 CmdLowerLevel := FALSE;
 CmdVentAerate := TRUE;
 CmdVentSludge := FALSE;
 CmdWait := FALSE;
+
 Grafcet := 6;]]></ST>
     </Algorithm>
     <Algorithm ID="52ccfa3a-a6fc-4e1c-92e3-d4f28b2c36cf" Name="VENT_SLUDGE_S2">
-      <ST><![CDATA[;
-
-CmdFeed := FALSE;
+      <ST><![CDATA[CmdFeed := FALSE;
 CmdAerate := FALSE;
 CmdSludgeDischarge := FALSE;
 CmdLowerLevel := FALSE;
 CmdVentAerate := FALSE;
 CmdVentSludge := TRUE;
 CmdWait := FALSE;
+
 Grafcet := 2;]]></ST>
     </Algorithm>
-    <Algorithm ID="7cbb603a-4f26-446a-a076-dc028662206d" Name="VENT_SLUDGE_S9">
-      <ST><![CDATA[;
-CmdFeed := FALSE;
+    <Algorithm ID="7cbb603a-4f26-446a-a076-dc028662206d" Name="VENT_SLUDGE_S8">
+      <ST><![CDATA[CmdFeed := FALSE;
 CmdAerate := FALSE;
 CmdSludgeDischarge := FALSE;
 CmdLowerLevel := FALSE;
 CmdVentAerate := FALSE;
 CmdVentSludge := TRUE;
 CmdWait := FALSE;
+
 Grafcet := 8;]]></ST>
+    </Algorithm>
+    <Algorithm ID="1b676b1b-36ab-40d1-9690-3cf4fc7107c8" Name="IdleState">
+      <ST><![CDATA[;
+Grafcet := 0;]]></ST>
+    </Algorithm>
+    <Algorithm ID="907d0626-afaa-454a-a5ed-3b7d969fefa5" Name="WaitLLReady">
+      <ST><![CDATA[;
+CmdFeed := FALSE;
+CmdAerate := FALSE;
+CmdSludgeDischarge := FALSE;
+CmdLowerLevel := FALSE;
+CmdVentAerate := FALSE;
+CmdVentSludge := FALSE;
+CmdWait := FALSE;]]></ST>
+    </Algorithm>
+    <Algorithm Name="StepEnd" Comment="Fim do passo: zera os comandos e espera a fase parar (Grafcet nao muda)">
+      <ST><![CDATA[CmdFeed := FALSE;
+CmdAerate := FALSE;
+CmdSludgeDischarge := FALSE;
+CmdLowerLevel := FALSE;
+CmdVentAerate := FALSE;
+CmdVentSludge := FALSE;
+CmdWait := FALSE;]]></ST>
     </Algorithm>
   </BasicFB>
 </FBType>

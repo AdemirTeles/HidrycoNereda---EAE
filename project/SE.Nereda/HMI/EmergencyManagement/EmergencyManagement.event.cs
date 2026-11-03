@@ -2884,224 +2884,224 @@ namespace SE.Nereda.Symbols.EmergencyManagement
 
     private event EventHandler<SE.Nereda.Symbols.EmergencyManagement.LOAD_PERS_DATAEventArgs> LOAD_PERS_DATA_Fired;
 
-    protected override void OnEndInit()
-    {
-      if (REACTOR1_DATA_Fired != null)
-        AttachEventInput(0);
-      if (REACTOR2_DATA_Fired != null)
-        AttachEventInput(1);
-      if (REACTOR3_DATA_Fired != null)
-        AttachEventInput(2);
-      if (REACTOR4_DATA_Fired != null)
-        AttachEventInput(3);
-      if (REACTOR5_DATA_Fired != null)
-        AttachEventInput(4);
-      if (REACTOR6_DATA_Fired != null)
-        AttachEventInput(5);
-      if (CT_REACTOR_ACTUAL_Fired != null)
-        AttachEventInput(6);
-      if (NBR_TOT_AV_REACTOR_Fired != null)
-        AttachEventInput(7);
-      if (FEED_INTERVAL_Fired != null)
-        AttachEventInput(8);
-      if (GRAPH_Fired != null)
-        AttachEventInput(9);
-      if (EMER_ON_Fired != null)
-        AttachEventInput(10);
-      if (LOAD_PERS_DATA_Fired != null)
-        AttachEventInput(11);
+//    protected override void OnEndInit()
+//    {
+//      if (REACTOR1_DATA_Fired != null)
+//        AttachEventInput(0);
+//      if (REACTOR2_DATA_Fired != null)
+//        AttachEventInput(1);
+//      if (REACTOR3_DATA_Fired != null)
+//        AttachEventInput(2);
+//      if (REACTOR4_DATA_Fired != null)
+//        AttachEventInput(3);
+//      if (REACTOR5_DATA_Fired != null)
+//        AttachEventInput(4);
+//      if (REACTOR6_DATA_Fired != null)
+//        AttachEventInput(5);
+//      if (CT_REACTOR_ACTUAL_Fired != null)
+//        AttachEventInput(6);
+//      if (NBR_TOT_AV_REACTOR_Fired != null)
+//        AttachEventInput(7);
+//      if (FEED_INTERVAL_Fired != null)
+//        AttachEventInput(8);
+//      if (GRAPH_Fired != null)
+//        AttachEventInput(9);
+//      if (EMER_ON_Fired != null)
+//        AttachEventInput(10);
+//      if (LOAD_PERS_DATA_Fired != null)
+//        AttachEventInput(11);
+//
+//    }
 
-    }
-
-    protected override void FireEventCallback(int channelId, int cookie, int eventIndex)
-    {
-      switch(eventIndex)
-      {
-        default:
-          break;
-        case 0:
-          if (REACTOR1_DATA_Fired != null)
-          {
-            try
-            {
-              REACTOR1_DATA_Fired(this, new SE.Nereda.Symbols.EmergencyManagement.REACTOR1_DATAEventArgs(channelId, cookie, eventIndex));
-            }
-            catch (System.Exception e)
-            {
-              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
-stack Trace:
-{4}","REACTOR1_DATA_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
-            }
-          }
-        break; 
-        case 1:
-          if (REACTOR2_DATA_Fired != null)
-          {
-            try
-            {
-              REACTOR2_DATA_Fired(this, new SE.Nereda.Symbols.EmergencyManagement.REACTOR2_DATAEventArgs(channelId, cookie, eventIndex));
-            }
-            catch (System.Exception e)
-            {
-              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
-stack Trace:
-{4}","REACTOR2_DATA_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
-            }
-          }
-        break; 
-        case 2:
-          if (REACTOR3_DATA_Fired != null)
-          {
-            try
-            {
-              REACTOR3_DATA_Fired(this, new SE.Nereda.Symbols.EmergencyManagement.REACTOR3_DATAEventArgs(channelId, cookie, eventIndex));
-            }
-            catch (System.Exception e)
-            {
-              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
-stack Trace:
-{4}","REACTOR3_DATA_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
-            }
-          }
-        break; 
-        case 3:
-          if (REACTOR4_DATA_Fired != null)
-          {
-            try
-            {
-              REACTOR4_DATA_Fired(this, new SE.Nereda.Symbols.EmergencyManagement.REACTOR4_DATAEventArgs(channelId, cookie, eventIndex));
-            }
-            catch (System.Exception e)
-            {
-              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
-stack Trace:
-{4}","REACTOR4_DATA_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
-            }
-          }
-        break; 
-        case 4:
-          if (REACTOR5_DATA_Fired != null)
-          {
-            try
-            {
-              REACTOR5_DATA_Fired(this, new SE.Nereda.Symbols.EmergencyManagement.REACTOR5_DATAEventArgs(channelId, cookie, eventIndex));
-            }
-            catch (System.Exception e)
-            {
-              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
-stack Trace:
-{4}","REACTOR5_DATA_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
-            }
-          }
-        break; 
-        case 5:
-          if (REACTOR6_DATA_Fired != null)
-          {
-            try
-            {
-              REACTOR6_DATA_Fired(this, new SE.Nereda.Symbols.EmergencyManagement.REACTOR6_DATAEventArgs(channelId, cookie, eventIndex));
-            }
-            catch (System.Exception e)
-            {
-              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
-stack Trace:
-{4}","REACTOR6_DATA_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
-            }
-          }
-        break; 
-        case 6:
-          if (CT_REACTOR_ACTUAL_Fired != null)
-          {
-            try
-            {
-              CT_REACTOR_ACTUAL_Fired(this, new SE.Nereda.Symbols.EmergencyManagement.CT_REACTOR_ACTUALEventArgs(channelId, cookie, eventIndex));
-            }
-            catch (System.Exception e)
-            {
-              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
-stack Trace:
-{4}","CT_REACTOR_ACTUAL_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
-            }
-          }
-        break; 
-        case 7:
-          if (NBR_TOT_AV_REACTOR_Fired != null)
-          {
-            try
-            {
-              NBR_TOT_AV_REACTOR_Fired(this, new SE.Nereda.Symbols.EmergencyManagement.NBR_TOT_AV_REACTOREventArgs(channelId, cookie, eventIndex));
-            }
-            catch (System.Exception e)
-            {
-              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
-stack Trace:
-{4}","NBR_TOT_AV_REACTOR_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
-            }
-          }
-        break; 
-        case 8:
-          if (FEED_INTERVAL_Fired != null)
-          {
-            try
-            {
-              FEED_INTERVAL_Fired(this, new SE.Nereda.Symbols.EmergencyManagement.FEED_INTERVALEventArgs(channelId, cookie, eventIndex));
-            }
-            catch (System.Exception e)
-            {
-              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
-stack Trace:
-{4}","FEED_INTERVAL_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
-            }
-          }
-        break; 
-        case 9:
-          if (GRAPH_Fired != null)
-          {
-            try
-            {
-              GRAPH_Fired(this, new SE.Nereda.Symbols.EmergencyManagement.GRAPHEventArgs(channelId, cookie, eventIndex));
-            }
-            catch (System.Exception e)
-            {
-              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
-stack Trace:
-{4}","GRAPH_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
-            }
-          }
-        break; 
-        case 10:
-          if (EMER_ON_Fired != null)
-          {
-            try
-            {
-              EMER_ON_Fired(this, new SE.Nereda.Symbols.EmergencyManagement.EMER_ONEventArgs(channelId, cookie, eventIndex));
-            }
-            catch (System.Exception e)
-            {
-              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
-stack Trace:
-{4}","EMER_ON_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
-            }
-          }
-        break; 
-        case 11:
-          if (LOAD_PERS_DATA_Fired != null)
-          {
-            try
-            {
-              LOAD_PERS_DATA_Fired(this, new SE.Nereda.Symbols.EmergencyManagement.LOAD_PERS_DATAEventArgs(channelId, cookie, eventIndex));
-            }
-            catch (System.Exception e)
-            {
-              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
-stack Trace:
-{4}","LOAD_PERS_DATA_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
-            }
-          }
-        break; 
-
-      }
-    }
+//    protected override void FireEventCallback(int channelId, int cookie, int eventIndex)
+//    {
+//      switch(eventIndex)
+//      {
+//        default:
+//          break;
+//        case 0:
+//          if (REACTOR1_DATA_Fired != null)
+//          {
+//            try
+//            {
+//              REACTOR1_DATA_Fired(this, new SE.Nereda.Symbols.EmergencyManagement.REACTOR1_DATAEventArgs(channelId, cookie, eventIndex));
+//            }
+//            catch (System.Exception e)
+//            {
+//              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+//stack Trace:
+//{4}","REACTOR1_DATA_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+//            }
+//          }
+//        break; 
+//        case 1:
+//          if (REACTOR2_DATA_Fired != null)
+//          {
+//            try
+//            {
+//              REACTOR2_DATA_Fired(this, new SE.Nereda.Symbols.EmergencyManagement.REACTOR2_DATAEventArgs(channelId, cookie, eventIndex));
+//            }
+//            catch (System.Exception e)
+//            {
+//              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+//stack Trace:
+//{4}","REACTOR2_DATA_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+//            }
+//          }
+//        break; 
+//        case 2:
+//          if (REACTOR3_DATA_Fired != null)
+//          {
+//            try
+//            {
+//              REACTOR3_DATA_Fired(this, new SE.Nereda.Symbols.EmergencyManagement.REACTOR3_DATAEventArgs(channelId, cookie, eventIndex));
+//            }
+//            catch (System.Exception e)
+//            {
+//              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+//stack Trace:
+//{4}","REACTOR3_DATA_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+//            }
+//          }
+//        break; 
+//        case 3:
+//          if (REACTOR4_DATA_Fired != null)
+//          {
+//            try
+//            {
+//              REACTOR4_DATA_Fired(this, new SE.Nereda.Symbols.EmergencyManagement.REACTOR4_DATAEventArgs(channelId, cookie, eventIndex));
+//            }
+//            catch (System.Exception e)
+//            {
+//              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+//stack Trace:
+//{4}","REACTOR4_DATA_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+//            }
+//          }
+//        break; 
+//        case 4:
+//          if (REACTOR5_DATA_Fired != null)
+//          {
+//            try
+//            {
+//              REACTOR5_DATA_Fired(this, new SE.Nereda.Symbols.EmergencyManagement.REACTOR5_DATAEventArgs(channelId, cookie, eventIndex));
+//            }
+//            catch (System.Exception e)
+//            {
+//              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+//stack Trace:
+//{4}","REACTOR5_DATA_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+//            }
+//          }
+//        break; 
+//        case 5:
+//          if (REACTOR6_DATA_Fired != null)
+//          {
+//            try
+//            {
+//              REACTOR6_DATA_Fired(this, new SE.Nereda.Symbols.EmergencyManagement.REACTOR6_DATAEventArgs(channelId, cookie, eventIndex));
+//            }
+//            catch (System.Exception e)
+//            {
+//              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+//stack Trace:
+//{4}","REACTOR6_DATA_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+//            }
+//          }
+//        break; 
+//        case 6:
+//          if (CT_REACTOR_ACTUAL_Fired != null)
+//          {
+//            try
+//            {
+//              CT_REACTOR_ACTUAL_Fired(this, new SE.Nereda.Symbols.EmergencyManagement.CT_REACTOR_ACTUALEventArgs(channelId, cookie, eventIndex));
+//            }
+//            catch (System.Exception e)
+//            {
+//              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+//stack Trace:
+//{4}","CT_REACTOR_ACTUAL_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+//            }
+//          }
+//        break; 
+//        case 7:
+//          if (NBR_TOT_AV_REACTOR_Fired != null)
+//          {
+//            try
+//            {
+//              NBR_TOT_AV_REACTOR_Fired(this, new SE.Nereda.Symbols.EmergencyManagement.NBR_TOT_AV_REACTOREventArgs(channelId, cookie, eventIndex));
+//            }
+//            catch (System.Exception e)
+//            {
+//              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+//stack Trace:
+//{4}","NBR_TOT_AV_REACTOR_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+//            }
+//          }
+//        break; 
+//        case 8:
+//          if (FEED_INTERVAL_Fired != null)
+//          {
+//            try
+//            {
+//              FEED_INTERVAL_Fired(this, new SE.Nereda.Symbols.EmergencyManagement.FEED_INTERVALEventArgs(channelId, cookie, eventIndex));
+//            }
+//            catch (System.Exception e)
+//            {
+//              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+//stack Trace:
+//{4}","FEED_INTERVAL_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+//            }
+//          }
+//        break; 
+//        case 9:
+//          if (GRAPH_Fired != null)
+//          {
+//            try
+//            {
+//              GRAPH_Fired(this, new SE.Nereda.Symbols.EmergencyManagement.GRAPHEventArgs(channelId, cookie, eventIndex));
+//            }
+//            catch (System.Exception e)
+//            {
+//              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+//stack Trace:
+//{4}","GRAPH_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+//            }
+//          }
+//        break; 
+//        case 10:
+//          if (EMER_ON_Fired != null)
+//          {
+//            try
+//            {
+//              EMER_ON_Fired(this, new SE.Nereda.Symbols.EmergencyManagement.EMER_ONEventArgs(channelId, cookie, eventIndex));
+//            }
+//            catch (System.Exception e)
+//            {
+//              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+//stack Trace:
+//{4}","EMER_ON_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+//            }
+//          }
+//        break; 
+//        case 11:
+//          if (LOAD_PERS_DATA_Fired != null)
+//          {
+//            try
+//            {
+//              LOAD_PERS_DATA_Fired(this, new SE.Nereda.Symbols.EmergencyManagement.LOAD_PERS_DATAEventArgs(channelId, cookie, eventIndex));
+//            }
+//            catch (System.Exception e)
+//            {
+//              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+//stack Trace:
+//{4}","LOAD_PERS_DATA_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+//            }
+//          }
+//        break; 
+//
+//      }
+//    }
     public bool FireEvent_CT_NOMINAL(NxtControl.GuiFramework.Time CT_Nominal)
     {
       return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {CT_Nominal});

@@ -53,7 +53,7 @@ namespace SE.Nereda.Faceplates.NeredaReactor
 			// sDefault3
 			// 
 			this.sDefault3.BeginInit();
-			this.sDefault3.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 8D, 264D);
+			this.sDefault3.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 8D, 200D);
 			this.sDefault3.Name = "sDefault3";
 			this.sDefault3.SecurityToken = ((uint)(4294967295u));
 			this.sDefault3.TagName = "ReactorLogic.LogicSludgeDischarge";
@@ -62,7 +62,7 @@ namespace SE.Nereda.Faceplates.NeredaReactor
 			// sDefault4
 			// 
 			this.sDefault4.BeginInit();
-			this.sDefault4.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 8D, 336D);
+			this.sDefault4.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 8D, 272D);
 			this.sDefault4.Name = "sDefault4";
 			this.sDefault4.SecurityToken = ((uint)(4294967295u));
 			this.sDefault4.TagName = "ReactorLogic.LogicVent";
@@ -71,7 +71,7 @@ namespace SE.Nereda.Faceplates.NeredaReactor
 			// sDefault5
 			// 
 			this.sDefault5.BeginInit();
-			this.sDefault5.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 8D, 448D);
+			this.sDefault5.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 8D, 384D);
 			this.sDefault5.Name = "sDefault5";
 			this.sDefault5.SecurityToken = ((uint)(4294967295u));
 			this.sDefault5.TagName = "ReactorLogic.SufficientFeedFlow";
@@ -79,7 +79,7 @@ namespace SE.Nereda.Faceplates.NeredaReactor
 			// 
 			// fpSettings
 			// 
-			this.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(408D)), ((float)(560D)));
+			this.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(384D)), ((float)(496D)));
 			this.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(154)), ((byte)(154)), ((byte)(154))));
 			this.Shapes.AddRange(new System.ComponentModel.IComponent[] {
 			this.sDefault1,
@@ -87,7 +87,7 @@ namespace SE.Nereda.Faceplates.NeredaReactor
 			this.sDefault3,
 			this.sDefault4,
 			this.sDefault5});
-			this.Size = new System.Drawing.Size(408, 560);
+			this.Size = new System.Drawing.Size(384, 496);
 			this.Title = "Reactor Settings";
 
 		}

@@ -2,7 +2,7 @@
 <!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
 <FBType GUID="61d32ee5-3248-41cb-bdc7-a5d80414b18a" Name="NeredaCapacitySpToCBlowersSp" Comment="Basic Function Block Type" Namespace="SE.Nereda">
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Schneider Electric" Version="2.0" Author="SESA685388" Date="9/30/2026" Remarks="Rev2 - Liga/desliga conforme especificacao: entrada em C2, desligamento por C3+tempo (StopReq). REQ tratado em todos os estados (sem 100% congelado)" />
+  <VersionInfo Organization="Schneider Electric" Version="3.0" Author="SESA685388" Date="03/11/2026" Remarks="Rev3 - pedido igual a capacidade maxima de 1 soprador vai a 100 (antes ficava preso na velocidade anterior). Rev2 - Liga/desliga conforme especificacao: entrada em C2, desligamento por C3+tempo (StopReq). REQ tratado em todos os estados (sem 100% congelado)" />
   <InterfaceList>
     <EventInputs>
       <Event ID="D0388ADF8D5604CA" Name="REQ">
@@ -179,12 +179,14 @@ IF (Mode = 1) OR (Mode = 2) THEN
 ELSIF Mode >= 3 THEN
     SpeedBlower := Sp2;                  (* dois como unidade *)
 ELSE
-    (* um soprador pelo pedido. Pedido >= Cmax sem MaxSp = o Basic2 ainda   *)
-    (* nao decidiu (2o soprador -> C2 / sem 2o -> MaxSp): segura o ultimo   *)
-    (* valor, nunca pula para 100 de passagem.                             *)
+    (* um soprador pelo pedido, ate a capacidade maxima (pedido = Cmax -> 100). *)
+    (* Pedido > Cmax sem MaxSp = o Basic2 ainda nao decidiu (2o soprador ->  *)
+    (* C2 / sem 2o -> MaxSp): segura o ultimo valor, nunca pula para 100 de    *)
+    (* passagem. Rev3: antes segurava tambem com pedido = Cmax (Sp1 = 100) e o *)
+    (* Basic2 so decide com pedido > Cmax: o soprador ficava preso.           *)
     IF MaxSp THEN
         SpeedBlower := 100.0;
-    ELSIF Sp1 < 100.0 THEN
+    ELSIF CapSp <= MaximumCapacityBlower THEN
         SpeedBlower := Sp1;
     END_IF;
 END_IF;

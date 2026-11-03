@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="1b333d8d-2e82-464c-8156-55e2f4ede845" Name="TIME_ADD" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="10/5/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="31EE5FA606A29148" Name="REQ" Comment="Normal Execution Request">
+        <With Var="DT1" />
+        <With Var="DT2" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="69595F3E864E5E10" Name="CNF" Comment="Execution Confirmation">
+        <With Var="DTO" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="B52D10198AD31888" Name="DT1" Type="TIME" Comment="Input event qualifier" />
+      <VarDeclaration ID="B11307E34566F10B" Name="DT2" Type="TIME" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="3F6CBD6C41B755CC" Name="DTO" Type="TIME" Comment="Output event qualifier" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="e20970d0-7ced-40c9-b815-6d6d3f7555a9">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="REQ" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="552.9412" y="429.4117" />
+      <ECState Name="REQ" Comment="Normal execution" x="1217.647" y="872.9412">
+        <ECAction Algorithm="REQ" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="REQ" Condition="REQ" x="938.0535" y="586.6454">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="214.0205,127.8666,256.3786,156.1304" />
+      </ECTransition>
+      <ECTransition Source="REQ" Destination="START" Condition="1" x="878.9108" y="729.4133">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="242.5026,201.926,200.1445,173.6622" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="REQ" Comment="Normally executed algorithm">
+      <ST><![CDATA[;
+DTO := DT1 + DT2;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

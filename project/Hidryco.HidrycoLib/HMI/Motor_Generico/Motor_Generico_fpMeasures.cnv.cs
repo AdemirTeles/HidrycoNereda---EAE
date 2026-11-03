@@ -14,5 +14,11 @@ namespace Hidryco.HidrycoLib.Faceplates.Motor_Generico
 		{
 			InitializeComponent();
 		}
+
+		// ---- velocidade: a tag ja vem em % do CLP (0 % no LSP, 100 % no HSP do inversor; conversao no CLP) ----
+		void VelHzValueChanged(object sender, ValueChangedEventArgs e)
+		{
+			((IHMIPrimitiveInput<float>)vSTS_VELOCIDADE).ValueChanged(Convert.ToSingle(e.Value));
+		}
 	}
 }

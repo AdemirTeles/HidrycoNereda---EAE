@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="a4d0069c-1804-3749-0060-f0ef502f6479" Name="Status_Remota" Comment="Estado da comunicacao de uma remota Modbus TCP - HidrycoLib" Namespace="Hidryco.HidrycoLib">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Hidryco" Version="1.0" Author="Hidryco" Date="23/10/2026" Remarks="1.0: le o connStatus (online/offline) do escravo MODBUSGENTCPS pelo symlink stsConexao (ligar no hardware: connStatus = RESID.instancia.stsConexao). IThis: STS_ESTADO (0 aguardando, 1 comunicando, 2 sem comunicacao) e STS_COMUNICANDO." />
+  <InterfaceList>
+  </InterfaceList>
+  <FBNetwork>
+    <FB ID="D93308858F17E815" Name="IThis" Type="Status_Remota_HMI" x="1140" y="1420" Namespace="Hidryco.HidrycoLib">
+      <Parameter Name="$DE8A485AA6FEB6A8" Value="TRUE" />
+    </FB>
+    <FB ID="5A87A329C21B646F" Name="plcStart1" Type="plcStart" x="1400" y="200" Namespace="SE.App2Base">
+      <Parameter Name="$Prio" Value="10" />
+    </FB>
+    <FB ID="98EAC369C96CBCF2" UID="1" Name="Conexao" Type="SYMLINKMULTIVARDST_1955F86B524D08A33" x="3400" y="600" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=1;VALUE${I}:STRING" />
+      <Parameter Name="$QI" Value="TRUE" />
+      <Parameter Name="$NAME1" Value="'$${PATH}stsConexao'" />
+    </FB>
+    <FB ID="31D5DFB5AF6D619E" Name="Logica" Type="basicStatusRemota" x="5400" y="600" Namespace="Hidryco.HidrycoLib">
+    </FB>
+    <EventConnections>
+      <Connection Source="$5A87A329C21B646F.FIRST_INIT" Destination="$D93308858F17E815.2CB1913F2D84E8BE">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$5A87A329C21B646F.REDO_INIT" Destination="$D93308858F17E815.2CB1913F2D84E8BE">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$D93308858F17E815.DB913E98B1D32C77" Destination="$98EAC369C96CBCF2.INIT">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$98EAC369C96CBCF2.INITO" Destination="$31D5DFB5AF6D619E.D8FB89F910445551">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$98EAC369C96CBCF2.CNF" Destination="$31D5DFB5AF6D619E.5CBFC3A39A689AE7">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$31D5DFB5AF6D619E.E1D8AB57600D137E" Destination="$D93308858F17E815.889D8869974C8F09">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$31D5DFB5AF6D619E.53F8DD0FF6D3BB94" Destination="$5A87A329C21B646F.ACK_FIRST">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="$98EAC369C96CBCF2.VALUE1" Destination="$31D5DFB5AF6D619E.5F664A6BAFC27D5F">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$31D5DFB5AF6D619E.64E083C639D0A0DD" Destination="$D93308858F17E815.3D6FE37D230CC7E1">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$31D5DFB5AF6D619E.ED85EB0A8AE1B373" Destination="$D93308858F17E815.8262B86748C46F85">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+    </DataConnections>
+  </FBNetwork>
+</FBType>

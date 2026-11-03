@@ -19,6 +19,7 @@ namespace HMI.Main.Canvases
 		#region Component Designer generated code
 		private void InitializeComponent()
 		{
+			this.btnResetGeral = new NxtControl.GuiFramework.DrawnButton();
 			this.skid = new Hidryco.HidrycoLib.Symbols.UCT_PreTratamento.sSkid();
 			// 
 			// skid
@@ -35,12 +36,27 @@ namespace HMI.Main.Canvases
 			this.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(1366D)), ((float)(698D)));
 			this.Brush = new NxtControl.Drawing.Brush("CanvasBrush");
 			this.Name = "UCT_200_02";
+			// 
+			// btnResetGeral
+			// 
+			this.btnResetGeral.Bounds = new NxtControl.Drawing.RectF(((float)(6D)), ((float)(662D)), ((float)(126D)), ((float)(30D)));
+			this.btnResetGeral.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208))));
+			this.btnResetGeral.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+			this.btnResetGeral.InnerBorderColor = new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208)));
+			this.btnResetGeral.Name = "btnResetGeral";
+			this.btnResetGeral.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(160)), ((byte)(160)), ((byte)(160))), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.btnResetGeral.Radius = 2D;
+			this.btnResetGeral.Text = "Reset geral";
+			this.btnResetGeral.Use3DEffect = false;
+			this.btnResetGeral.Click += new System.EventHandler(this.BtnResetGeralClick);
 			this.Shapes.AddRange(new System.ComponentModel.IComponent[] {
-			this.skid});
+			this.skid,
+			this.btnResetGeral});
 			this.Size = new System.Drawing.Size(1366, 698);
 
 		}
 		private Hidryco.HidrycoLib.Symbols.UCT_PreTratamento.sSkid skid;
+		private NxtControl.GuiFramework.DrawnButton btnResetGeral;
 		#endregion
 	}
 }

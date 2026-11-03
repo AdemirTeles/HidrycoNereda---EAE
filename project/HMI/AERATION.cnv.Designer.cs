@@ -26,6 +26,7 @@ namespace HMI.Main.Canvases
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.btnAckNereda = new NxtControl.GuiFramework.DrawnButton();
 			this.HeartBeat = new SE.Nereda.Symbols.HeartBeat.sDefault();
 			this.Mode = new SE.Nereda.Symbols.Mode.ReactorMode();
 			this.OpenWebPage = new SE.Nereda.Symbols.OpenWebPage.sDefault();
@@ -99,12 +100,26 @@ namespace HMI.Main.Canvases
 			// 
 			this.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(1366D)), ((float)(698D)));
 			this.Brush = new NxtControl.Drawing.Brush("CanvasBrush");
+			// 
+			// btnAckNereda
+			// 
+			this.btnAckNereda.Bounds = new NxtControl.Drawing.RectF(((float)(212D)), ((float)(12D)), ((float)(200D)), ((float)(32D)));
+			this.btnAckNereda.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208))));
+			this.btnAckNereda.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+			this.btnAckNereda.InnerBorderColor = new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208)));
+			this.btnAckNereda.Name = "btnAckNereda";
+			this.btnAckNereda.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(160)), ((byte)(160)), ((byte)(160))), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.btnAckNereda.Radius = 2D;
+			this.btnAckNereda.Text = "Reconhecer alarmes";
+			this.btnAckNereda.Use3DEffect = false;
+			this.btnAckNereda.Click += new System.EventHandler(this.BtnAckNeredaClick);
 			this.Shapes.AddRange(new System.ComponentModel.IComponent[] {
 			this.HeartBeat,
 			this.Mode,
 			this.OpenWebPage,
 			this.AERATION_1,
 			this.pipe1,
+			this.btnAckNereda,
 			this.pipe2});
 			this.Size = new System.Drawing.Size(1366, 698);
 
@@ -115,6 +130,7 @@ namespace HMI.Main.Canvases
 		private SE.Nereda.Symbols.NeredaCAeration.sBlowers AERATION_1;
 		private NxtControl.GuiFramework.Pipe pipe1;
 		private NxtControl.GuiFramework.Pipe pipe2;
+		private NxtControl.GuiFramework.DrawnButton btnAckNereda;
 		#endregion
 	}
 }

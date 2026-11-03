@@ -94,10 +94,13 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
 			this.line16 = new NxtControl.GuiFramework.Line();
 			this.F_S10 = new NxtControl.GuiFramework.DrawnButton();
 			this.Step10_Wait = new SE.Nereda.Symbols.E_DELAY_V_D_ZERO.sDefault();
+			this.roundedRectangle2 = new NxtControl.GuiFramework.RoundedRectangle();
+			this.Step0 = new NxtControl.GuiFramework.RoundedRectangle();
+			this.roundedRectangle17 = new NxtControl.GuiFramework.RoundedRectangle();
 			// 
 			// FeedRecS1
 			// 
-			this.FeedRecS1.Bounds = new NxtControl.Drawing.RectF(((float)(200D)), ((float)(80D)), ((float)(168D)), ((float)(16D)));
+			this.FeedRecS1.Bounds = new NxtControl.Drawing.RectF(((float)(200D)), ((float)(128D)), ((float)(168D)), ((float)(16D)));
 			this.FeedRecS1.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(14)), ((byte)(218)), ((byte)(255))));
 			this.FeedRecS1.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold);
 			this.FeedRecS1.Name = "FeedRecS1";
@@ -106,7 +109,7 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
 			// 
 			// WaitRecS2
 			// 
-			this.WaitRecS2.Bounds = new NxtControl.Drawing.RectF(((float)(200D)), ((float)(128D)), ((float)(168D)), ((float)(16D)));
+			this.WaitRecS2.Bounds = new NxtControl.Drawing.RectF(((float)(200D)), ((float)(176D)), ((float)(168D)), ((float)(16D)));
 			this.WaitRecS2.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(235)), ((byte)(235)), ((byte)(235))));
 			this.WaitRecS2.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold);
 			this.WaitRecS2.Name = "WaitRecS2";
@@ -115,21 +118,21 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
 			// 
 			// Step1
 			// 
-			this.Step1.Bounds = new NxtControl.Drawing.RectF(((float)(352D)), ((float)(76D)), ((float)(24D)), ((float)(24D)));
+			this.Step1.Bounds = new NxtControl.Drawing.RectF(((float)(352D)), ((float)(124D)), ((float)(24D)), ((float)(24D)));
 			this.Step1.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(78)), ((byte)(78)), ((byte)(78))), new NxtControl.Drawing.GradientFill(NxtControl.Drawing.GradientFillOrientation.Center, NxtControl.Drawing.GradientFillBrightness.Light));
 			this.Step1.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
 			this.Step1.Name = "Step1";
 			// 
 			// Step2
 			// 
-			this.Step2.Bounds = new NxtControl.Drawing.RectF(((float)(352D)), ((float)(124D)), ((float)(24D)), ((float)(24D)));
+			this.Step2.Bounds = new NxtControl.Drawing.RectF(((float)(352D)), ((float)(172D)), ((float)(24D)), ((float)(24D)));
 			this.Step2.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(78)), ((byte)(78)), ((byte)(78))), new NxtControl.Drawing.GradientFill(NxtControl.Drawing.GradientFillOrientation.Center, NxtControl.Drawing.GradientFillBrightness.Light));
 			this.Step2.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
 			this.Step2.Name = "Step2";
 			// 
 			// SDRecS3
 			// 
-			this.SDRecS3.Bounds = new NxtControl.Drawing.RectF(((float)(200D)), ((float)(176D)), ((float)(168D)), ((float)(16D)));
+			this.SDRecS3.Bounds = new NxtControl.Drawing.RectF(((float)(200D)), ((float)(224D)), ((float)(168D)), ((float)(16D)));
 			this.SDRecS3.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(235)), ((byte)(235)), ((byte)(235))));
 			this.SDRecS3.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold);
 			this.SDRecS3.Name = "SDRecS3";
@@ -138,14 +141,14 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
 			// 
 			// Step3
 			// 
-			this.Step3.Bounds = new NxtControl.Drawing.RectF(((float)(352D)), ((float)(172D)), ((float)(24D)), ((float)(24D)));
+			this.Step3.Bounds = new NxtControl.Drawing.RectF(((float)(352D)), ((float)(220D)), ((float)(24D)), ((float)(24D)));
 			this.Step3.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(78)), ((byte)(78)), ((byte)(78))), new NxtControl.Drawing.GradientFill(NxtControl.Drawing.GradientFillOrientation.Center, NxtControl.Drawing.GradientFillBrightness.Light));
 			this.Step3.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
 			this.Step3.Name = "Step3";
 			// 
 			// LLRecS4
 			// 
-			this.LLRecS4.Bounds = new NxtControl.Drawing.RectF(((float)(200D)), ((float)(224D)), ((float)(168D)), ((float)(16D)));
+			this.LLRecS4.Bounds = new NxtControl.Drawing.RectF(((float)(200D)), ((float)(272D)), ((float)(168D)), ((float)(16D)));
 			this.LLRecS4.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(235)), ((byte)(235)), ((byte)(235))));
 			this.LLRecS4.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold);
 			this.LLRecS4.Name = "LLRecS4";
@@ -154,14 +157,14 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
 			// 
 			// Step4
 			// 
-			this.Step4.Bounds = new NxtControl.Drawing.RectF(((float)(352D)), ((float)(220D)), ((float)(24D)), ((float)(24D)));
+			this.Step4.Bounds = new NxtControl.Drawing.RectF(((float)(352D)), ((float)(268D)), ((float)(24D)), ((float)(24D)));
 			this.Step4.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(78)), ((byte)(78)), ((byte)(78))), new NxtControl.Drawing.GradientFill(NxtControl.Drawing.GradientFillOrientation.Center, NxtControl.Drawing.GradientFillBrightness.Light));
 			this.Step4.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
 			this.Step4.Name = "Step4";
 			// 
 			// AerateRecS5
 			// 
-			this.AerateRecS5.Bounds = new NxtControl.Drawing.RectF(((float)(200D)), ((float)(272D)), ((float)(168D)), ((float)(16D)));
+			this.AerateRecS5.Bounds = new NxtControl.Drawing.RectF(((float)(200D)), ((float)(320D)), ((float)(168D)), ((float)(16D)));
 			this.AerateRecS5.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(186)), ((byte)(186)), ((byte)(186))));
 			this.AerateRecS5.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold);
 			this.AerateRecS5.Name = "AerateRecS5";
@@ -171,14 +174,14 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
 			// 
 			// Step5
 			// 
-			this.Step5.Bounds = new NxtControl.Drawing.RectF(((float)(352D)), ((float)(268D)), ((float)(24D)), ((float)(24D)));
+			this.Step5.Bounds = new NxtControl.Drawing.RectF(((float)(352D)), ((float)(316D)), ((float)(24D)), ((float)(24D)));
 			this.Step5.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(78)), ((byte)(78)), ((byte)(78))), new NxtControl.Drawing.GradientFill(NxtControl.Drawing.GradientFillOrientation.Center, NxtControl.Drawing.GradientFillBrightness.Light));
 			this.Step5.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
 			this.Step5.Name = "Step5";
 			// 
 			// roundedRectangle7
 			// 
-			this.roundedRectangle7.Bounds = new NxtControl.Drawing.RectF(((float)(200D)), ((float)(416D)), ((float)(168D)), ((float)(16D)));
+			this.roundedRectangle7.Bounds = new NxtControl.Drawing.RectF(((float)(200D)), ((float)(464D)), ((float)(168D)), ((float)(16D)));
 			this.roundedRectangle7.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(235)), ((byte)(235)), ((byte)(235))));
 			this.roundedRectangle7.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold);
 			this.roundedRectangle7.Name = "roundedRectangle7";
@@ -187,7 +190,7 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
 			// 
 			// roundedRectangle8
 			// 
-			this.roundedRectangle8.Bounds = new NxtControl.Drawing.RectF(((float)(200D)), ((float)(320D)), ((float)(168D)), ((float)(16D)));
+			this.roundedRectangle8.Bounds = new NxtControl.Drawing.RectF(((float)(200D)), ((float)(368D)), ((float)(168D)), ((float)(16D)));
 			this.roundedRectangle8.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(235)), ((byte)(235)), ((byte)(235))));
 			this.roundedRectangle8.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold);
 			this.roundedRectangle8.Name = "roundedRectangle8";
@@ -196,7 +199,7 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
 			// 
 			// roundedRectangle9
 			// 
-			this.roundedRectangle9.Bounds = new NxtControl.Drawing.RectF(((float)(200D)), ((float)(368D)), ((float)(168D)), ((float)(16D)));
+			this.roundedRectangle9.Bounds = new NxtControl.Drawing.RectF(((float)(200D)), ((float)(416D)), ((float)(168D)), ((float)(16D)));
 			this.roundedRectangle9.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(235)), ((byte)(235)), ((byte)(235))));
 			this.roundedRectangle9.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold);
 			this.roundedRectangle9.Name = "roundedRectangle9";
@@ -205,35 +208,35 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
 			// 
 			// Step6
 			// 
-			this.Step6.Bounds = new NxtControl.Drawing.RectF(((float)(352D)), ((float)(316D)), ((float)(24D)), ((float)(24D)));
+			this.Step6.Bounds = new NxtControl.Drawing.RectF(((float)(352D)), ((float)(364D)), ((float)(24D)), ((float)(24D)));
 			this.Step6.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(78)), ((byte)(78)), ((byte)(78))), new NxtControl.Drawing.GradientFill(NxtControl.Drawing.GradientFillOrientation.Center, NxtControl.Drawing.GradientFillBrightness.Light));
 			this.Step6.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
 			this.Step6.Name = "Step6";
 			// 
 			// Step7
 			// 
-			this.Step7.Bounds = new NxtControl.Drawing.RectF(((float)(352D)), ((float)(364D)), ((float)(24D)), ((float)(24D)));
+			this.Step7.Bounds = new NxtControl.Drawing.RectF(((float)(352D)), ((float)(412D)), ((float)(24D)), ((float)(24D)));
 			this.Step7.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(78)), ((byte)(78)), ((byte)(78))), new NxtControl.Drawing.GradientFill(NxtControl.Drawing.GradientFillOrientation.Center, NxtControl.Drawing.GradientFillBrightness.Light));
 			this.Step7.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
 			this.Step7.Name = "Step7";
 			// 
 			// Step8
 			// 
-			this.Step8.Bounds = new NxtControl.Drawing.RectF(((float)(352D)), ((float)(412D)), ((float)(24D)), ((float)(24D)));
+			this.Step8.Bounds = new NxtControl.Drawing.RectF(((float)(352D)), ((float)(460D)), ((float)(24D)), ((float)(24D)));
 			this.Step8.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(78)), ((byte)(78)), ((byte)(78))), new NxtControl.Drawing.GradientFill(NxtControl.Drawing.GradientFillOrientation.Center, NxtControl.Drawing.GradientFillBrightness.Light));
 			this.Step8.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
 			this.Step8.Name = "Step8";
 			// 
 			// line1
 			// 
-			this.line1.EndPoint = new NxtControl.Drawing.PointF(224D, 568D);
+			this.line1.EndPoint = new NxtControl.Drawing.PointF(224D, 616D);
 			this.line1.Name = "line1";
 			this.line1.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 3F, NxtControl.Drawing.DashStyle.Solid);
-			this.line1.StartPoint = new NxtControl.Drawing.PointF(224D, 96D);
+			this.line1.StartPoint = new NxtControl.Drawing.PointF(224D, 104D);
 			// 
 			// roundedRectangle6
 			// 
-			this.roundedRectangle6.Bounds = new NxtControl.Drawing.RectF(((float)(192D)), ((float)(80D)), ((float)(24D)), ((float)(16D)));
+			this.roundedRectangle6.Bounds = new NxtControl.Drawing.RectF(((float)(192D)), ((float)(128D)), ((float)(24D)), ((float)(16D)));
 			this.roundedRectangle6.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold);
 			this.roundedRectangle6.Name = "roundedRectangle6";
 			this.roundedRectangle6.Text = "S1";
@@ -241,7 +244,7 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
 			// 
 			// roundedRectangle10
 			// 
-			this.roundedRectangle10.Bounds = new NxtControl.Drawing.RectF(((float)(192D)), ((float)(128D)), ((float)(24D)), ((float)(16D)));
+			this.roundedRectangle10.Bounds = new NxtControl.Drawing.RectF(((float)(192D)), ((float)(176D)), ((float)(24D)), ((float)(16D)));
 			this.roundedRectangle10.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold);
 			this.roundedRectangle10.Name = "roundedRectangle10";
 			this.roundedRectangle10.Text = "S2";
@@ -249,7 +252,7 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
 			// 
 			// roundedRectangle11
 			// 
-			this.roundedRectangle11.Bounds = new NxtControl.Drawing.RectF(((float)(192D)), ((float)(176D)), ((float)(24D)), ((float)(16D)));
+			this.roundedRectangle11.Bounds = new NxtControl.Drawing.RectF(((float)(192D)), ((float)(224D)), ((float)(24D)), ((float)(16D)));
 			this.roundedRectangle11.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold);
 			this.roundedRectangle11.Name = "roundedRectangle11";
 			this.roundedRectangle11.Text = "S3";
@@ -257,7 +260,7 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
 			// 
 			// roundedRectangle12
 			// 
-			this.roundedRectangle12.Bounds = new NxtControl.Drawing.RectF(((float)(192D)), ((float)(224D)), ((float)(24D)), ((float)(16D)));
+			this.roundedRectangle12.Bounds = new NxtControl.Drawing.RectF(((float)(192D)), ((float)(272D)), ((float)(24D)), ((float)(16D)));
 			this.roundedRectangle12.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold);
 			this.roundedRectangle12.Name = "roundedRectangle12";
 			this.roundedRectangle12.Text = "S4";
@@ -265,7 +268,7 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
 			// 
 			// roundedRectangle13
 			// 
-			this.roundedRectangle13.Bounds = new NxtControl.Drawing.RectF(((float)(192D)), ((float)(272D)), ((float)(24D)), ((float)(16D)));
+			this.roundedRectangle13.Bounds = new NxtControl.Drawing.RectF(((float)(192D)), ((float)(320D)), ((float)(24D)), ((float)(16D)));
 			this.roundedRectangle13.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold);
 			this.roundedRectangle13.Name = "roundedRectangle13";
 			this.roundedRectangle13.Text = "S5";
@@ -273,7 +276,7 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
 			// 
 			// roundedRectangle14
 			// 
-			this.roundedRectangle14.Bounds = new NxtControl.Drawing.RectF(((float)(192D)), ((float)(320D)), ((float)(24D)), ((float)(16D)));
+			this.roundedRectangle14.Bounds = new NxtControl.Drawing.RectF(((float)(192D)), ((float)(368D)), ((float)(24D)), ((float)(16D)));
 			this.roundedRectangle14.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold);
 			this.roundedRectangle14.Name = "roundedRectangle14";
 			this.roundedRectangle14.Text = "S6";
@@ -281,7 +284,7 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
 			// 
 			// roundedRectangle15
 			// 
-			this.roundedRectangle15.Bounds = new NxtControl.Drawing.RectF(((float)(192D)), ((float)(368D)), ((float)(24D)), ((float)(16D)));
+			this.roundedRectangle15.Bounds = new NxtControl.Drawing.RectF(((float)(192D)), ((float)(416D)), ((float)(24D)), ((float)(16D)));
 			this.roundedRectangle15.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold);
 			this.roundedRectangle15.Name = "roundedRectangle15";
 			this.roundedRectangle15.Text = "S7";
@@ -289,7 +292,7 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
 			// 
 			// roundedRectangle16
 			// 
-			this.roundedRectangle16.Bounds = new NxtControl.Drawing.RectF(((float)(192D)), ((float)(416D)), ((float)(24D)), ((float)(16D)));
+			this.roundedRectangle16.Bounds = new NxtControl.Drawing.RectF(((float)(192D)), ((float)(464D)), ((float)(24D)), ((float)(16D)));
 			this.roundedRectangle16.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold);
 			this.roundedRectangle16.Name = "roundedRectangle16";
 			this.roundedRectangle16.Text = "S8";
@@ -297,63 +300,63 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
 			// 
 			// line2
 			// 
-			this.line2.EndPoint = new NxtControl.Drawing.PointF(232D, 112D);
+			this.line2.EndPoint = new NxtControl.Drawing.PointF(232D, 160D);
 			this.line2.Name = "line2";
 			this.line2.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 2F, NxtControl.Drawing.DashStyle.Solid);
-			this.line2.StartPoint = new NxtControl.Drawing.PointF(216D, 112D);
+			this.line2.StartPoint = new NxtControl.Drawing.PointF(216D, 160D);
 			// 
 			// line3
 			// 
-			this.line3.EndPoint = new NxtControl.Drawing.PointF(232D, 160D);
+			this.line3.EndPoint = new NxtControl.Drawing.PointF(232D, 208D);
 			this.line3.Name = "line3";
 			this.line3.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 2F, NxtControl.Drawing.DashStyle.Solid);
-			this.line3.StartPoint = new NxtControl.Drawing.PointF(216D, 160D);
+			this.line3.StartPoint = new NxtControl.Drawing.PointF(216D, 208D);
 			// 
 			// line4
 			// 
-			this.line4.EndPoint = new NxtControl.Drawing.PointF(232D, 208D);
+			this.line4.EndPoint = new NxtControl.Drawing.PointF(232D, 256D);
 			this.line4.Name = "line4";
 			this.line4.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 2F, NxtControl.Drawing.DashStyle.Solid);
-			this.line4.StartPoint = new NxtControl.Drawing.PointF(216D, 208D);
+			this.line4.StartPoint = new NxtControl.Drawing.PointF(216D, 256D);
 			// 
 			// line5
 			// 
-			this.line5.EndPoint = new NxtControl.Drawing.PointF(232D, 256D);
+			this.line5.EndPoint = new NxtControl.Drawing.PointF(232D, 304D);
 			this.line5.Name = "line5";
 			this.line5.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 2F, NxtControl.Drawing.DashStyle.Solid);
-			this.line5.StartPoint = new NxtControl.Drawing.PointF(216D, 256D);
+			this.line5.StartPoint = new NxtControl.Drawing.PointF(216D, 304D);
 			// 
 			// line6
 			// 
-			this.line6.EndPoint = new NxtControl.Drawing.PointF(232D, 304D);
+			this.line6.EndPoint = new NxtControl.Drawing.PointF(232D, 352D);
 			this.line6.Name = "line6";
 			this.line6.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 2F, NxtControl.Drawing.DashStyle.Solid);
-			this.line6.StartPoint = new NxtControl.Drawing.PointF(216D, 304D);
+			this.line6.StartPoint = new NxtControl.Drawing.PointF(216D, 352D);
 			// 
 			// line7
 			// 
-			this.line7.EndPoint = new NxtControl.Drawing.PointF(232D, 352D);
+			this.line7.EndPoint = new NxtControl.Drawing.PointF(232D, 400D);
 			this.line7.Name = "line7";
 			this.line7.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 2F, NxtControl.Drawing.DashStyle.Solid);
-			this.line7.StartPoint = new NxtControl.Drawing.PointF(216D, 352D);
+			this.line7.StartPoint = new NxtControl.Drawing.PointF(216D, 400D);
 			// 
 			// line8
 			// 
-			this.line8.EndPoint = new NxtControl.Drawing.PointF(232D, 400D);
+			this.line8.EndPoint = new NxtControl.Drawing.PointF(232D, 448D);
 			this.line8.Name = "line8";
 			this.line8.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 2F, NxtControl.Drawing.DashStyle.Solid);
-			this.line8.StartPoint = new NxtControl.Drawing.PointF(216D, 400D);
+			this.line8.StartPoint = new NxtControl.Drawing.PointF(216D, 448D);
 			// 
 			// line9
 			// 
-			this.line9.EndPoint = new NxtControl.Drawing.PointF(232D, 448D);
+			this.line9.EndPoint = new NxtControl.Drawing.PointF(232D, 496D);
 			this.line9.Name = "line9";
 			this.line9.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 2F, NxtControl.Drawing.DashStyle.Solid);
-			this.line9.StartPoint = new NxtControl.Drawing.PointF(216D, 448D);
+			this.line9.StartPoint = new NxtControl.Drawing.PointF(216D, 496D);
 			// 
 			// F_S1
 			// 
-			this.F_S1.Bounds = new NxtControl.Drawing.RectF(((float)(192D)), ((float)(104D)), ((float)(24D)), ((float)(16D)));
+			this.F_S1.Bounds = new NxtControl.Drawing.RectF(((float)(192D)), ((float)(152D)), ((float)(24D)), ((float)(16D)));
 			this.F_S1.Brush = new NxtControl.Drawing.Brush("ButtonBrush");
 			this.F_S1.Font = new NxtControl.Drawing.Font("ButtonFont");
 			this.F_S1.InnerBorderColor = new NxtControl.Drawing.Color("ButtonInnerBorderColor");
@@ -368,7 +371,7 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
 			// 
 			// F_S2
 			// 
-			this.F_S2.Bounds = new NxtControl.Drawing.RectF(((float)(192D)), ((float)(152D)), ((float)(24D)), ((float)(16D)));
+			this.F_S2.Bounds = new NxtControl.Drawing.RectF(((float)(192D)), ((float)(200D)), ((float)(24D)), ((float)(16D)));
 			this.F_S2.Brush = new NxtControl.Drawing.Brush("ButtonBrush");
 			this.F_S2.Font = new NxtControl.Drawing.Font("ButtonFont");
 			this.F_S2.InnerBorderColor = new NxtControl.Drawing.Color("ButtonInnerBorderColor");
@@ -383,7 +386,7 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
 			// 
 			// F_S3
 			// 
-			this.F_S3.Bounds = new NxtControl.Drawing.RectF(((float)(192D)), ((float)(200D)), ((float)(24D)), ((float)(16D)));
+			this.F_S3.Bounds = new NxtControl.Drawing.RectF(((float)(192D)), ((float)(248D)), ((float)(24D)), ((float)(16D)));
 			this.F_S3.Brush = new NxtControl.Drawing.Brush("ButtonBrush");
 			this.F_S3.Font = new NxtControl.Drawing.Font("ButtonFont");
 			this.F_S3.InnerBorderColor = new NxtControl.Drawing.Color("ButtonInnerBorderColor");
@@ -398,7 +401,7 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
 			// 
 			// F_S4
 			// 
-			this.F_S4.Bounds = new NxtControl.Drawing.RectF(((float)(192D)), ((float)(248D)), ((float)(24D)), ((float)(16D)));
+			this.F_S4.Bounds = new NxtControl.Drawing.RectF(((float)(192D)), ((float)(296D)), ((float)(24D)), ((float)(16D)));
 			this.F_S4.Brush = new NxtControl.Drawing.Brush("ButtonBrush");
 			this.F_S4.Font = new NxtControl.Drawing.Font("ButtonFont");
 			this.F_S4.InnerBorderColor = new NxtControl.Drawing.Color("ButtonInnerBorderColor");
@@ -413,7 +416,7 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
 			// 
 			// F_S5
 			// 
-			this.F_S5.Bounds = new NxtControl.Drawing.RectF(((float)(192D)), ((float)(296D)), ((float)(24D)), ((float)(16D)));
+			this.F_S5.Bounds = new NxtControl.Drawing.RectF(((float)(192D)), ((float)(344D)), ((float)(24D)), ((float)(16D)));
 			this.F_S5.Brush = new NxtControl.Drawing.Brush("ButtonBrush");
 			this.F_S5.Font = new NxtControl.Drawing.Font("ButtonFont");
 			this.F_S5.InnerBorderColor = new NxtControl.Drawing.Color("ButtonInnerBorderColor");
@@ -428,7 +431,7 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
 			// 
 			// F_S6
 			// 
-			this.F_S6.Bounds = new NxtControl.Drawing.RectF(((float)(192D)), ((float)(344D)), ((float)(24D)), ((float)(16D)));
+			this.F_S6.Bounds = new NxtControl.Drawing.RectF(((float)(192D)), ((float)(392D)), ((float)(24D)), ((float)(16D)));
 			this.F_S6.Brush = new NxtControl.Drawing.Brush("ButtonBrush");
 			this.F_S6.Font = new NxtControl.Drawing.Font("ButtonFont");
 			this.F_S6.InnerBorderColor = new NxtControl.Drawing.Color("ButtonInnerBorderColor");
@@ -443,7 +446,7 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
 			// 
 			// F_S7
 			// 
-			this.F_S7.Bounds = new NxtControl.Drawing.RectF(((float)(192D)), ((float)(392D)), ((float)(24D)), ((float)(16D)));
+			this.F_S7.Bounds = new NxtControl.Drawing.RectF(((float)(192D)), ((float)(440D)), ((float)(24D)), ((float)(16D)));
 			this.F_S7.Brush = new NxtControl.Drawing.Brush("ButtonBrush");
 			this.F_S7.Font = new NxtControl.Drawing.Font("ButtonFont");
 			this.F_S7.InnerBorderColor = new NxtControl.Drawing.Color("ButtonInnerBorderColor");
@@ -458,7 +461,7 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
 			// 
 			// F_S8
 			// 
-			this.F_S8.Bounds = new NxtControl.Drawing.RectF(((float)(192D)), ((float)(440D)), ((float)(24D)), ((float)(16D)));
+			this.F_S8.Bounds = new NxtControl.Drawing.RectF(((float)(192D)), ((float)(488D)), ((float)(24D)), ((float)(16D)));
 			this.F_S8.Brush = new NxtControl.Drawing.Brush("ButtonBrush");
 			this.F_S8.Font = new NxtControl.Drawing.Font("ButtonFont");
 			this.F_S8.InnerBorderColor = new NxtControl.Drawing.Color("ButtonInnerBorderColor");
@@ -473,7 +476,7 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
 			// 
 			// drawnButton1
 			// 
-			this.drawnButton1.Bounds = new NxtControl.Drawing.RectF(((float)(192D)), ((float)(576D)), ((float)(184D)), ((float)(25D)));
+			this.drawnButton1.Bounds = new NxtControl.Drawing.RectF(((float)(192D)), ((float)(624D)), ((float)(184D)), ((float)(25D)));
 			this.drawnButton1.Brush = new NxtControl.Drawing.Brush("ButtonBrush");
 			this.drawnButton1.Font = new NxtControl.Drawing.Font("ButtonFont");
 			this.drawnButton1.InnerBorderColor = new NxtControl.Drawing.Color("ButtonInnerBorderColor");
@@ -488,7 +491,7 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
 			// 
 			// ReactorName
 			// 
-			this.ReactorName.Bounds = new NxtControl.Drawing.RectF(((float)(192D)), ((float)(40D)), ((float)(184D)), ((float)(32D)));
+			this.ReactorName.Bounds = new NxtControl.Drawing.RectF(((float)(192D)), ((float)(56D)), ((float)(184D)), ((float)(32D)));
 			this.ReactorName.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("transparent"));
 			this.ReactorName.Font = new NxtControl.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Bold);
 			this.ReactorName.Name = "ReactorName";
@@ -498,43 +501,43 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
 			// 
 			// line10
 			// 
-			this.line10.EndPoint = new NxtControl.Drawing.PointF(184D, 56D);
+			this.line10.EndPoint = new NxtControl.Drawing.PointF(184D, 72D);
 			this.line10.Name = "line10";
 			this.line10.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
-			this.line10.StartPoint = new NxtControl.Drawing.PointF(192D, 56D);
+			this.line10.StartPoint = new NxtControl.Drawing.PointF(192D, 72D);
 			// 
 			// line11
 			// 
-			this.line11.EndPoint = new NxtControl.Drawing.PointF(184D, 56D);
+			this.line11.EndPoint = new NxtControl.Drawing.PointF(184D, 72D);
 			this.line11.Name = "line11";
 			this.line11.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
-			this.line11.StartPoint = new NxtControl.Drawing.PointF(184D, 608D);
+			this.line11.StartPoint = new NxtControl.Drawing.PointF(184D, 656D);
 			// 
 			// line13
 			// 
-			this.line13.EndPoint = new NxtControl.Drawing.PointF(384D, 56D);
+			this.line13.EndPoint = new NxtControl.Drawing.PointF(384D, 72D);
 			this.line13.Name = "line13";
 			this.line13.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
-			this.line13.StartPoint = new NxtControl.Drawing.PointF(384D, 600D);
+			this.line13.StartPoint = new NxtControl.Drawing.PointF(384D, 656D);
 			// 
 			// line14
 			// 
-			this.line14.EndPoint = new NxtControl.Drawing.PointF(376D, 56D);
+			this.line14.EndPoint = new NxtControl.Drawing.PointF(376D, 72D);
 			this.line14.Name = "line14";
 			this.line14.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
-			this.line14.StartPoint = new NxtControl.Drawing.PointF(384D, 56D);
+			this.line14.StartPoint = new NxtControl.Drawing.PointF(384D, 72D);
 			// 
 			// line15
 			// 
-			this.line15.EndPoint = new NxtControl.Drawing.PointF(184D, 608D);
+			this.line15.EndPoint = new NxtControl.Drawing.PointF(184D, 656D);
 			this.line15.Name = "line15";
 			this.line15.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
-			this.line15.StartPoint = new NxtControl.Drawing.PointF(384D, 608D);
+			this.line15.StartPoint = new NxtControl.Drawing.PointF(384D, 656D);
 			// 
 			// Step1_Feed
 			// 
 			this.Step1_Feed.BeginInit();
-			this.Step1_Feed.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 232D, 96D);
+			this.Step1_Feed.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 232D, 144D);
 			this.Step1_Feed.Name = "Step1_Feed";
 			this.Step1_Feed.SecurityToken = ((uint)(4294967295u));
 			this.Step1_Feed.TagName = "Step1_Feed";
@@ -543,7 +546,7 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
 			// Step2_VentSludge
 			// 
 			this.Step2_VentSludge.BeginInit();
-			this.Step2_VentSludge.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 232D, 144D);
+			this.Step2_VentSludge.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 232D, 192D);
 			this.Step2_VentSludge.Name = "Step2_VentSludge";
 			this.Step2_VentSludge.SecurityToken = ((uint)(4294967295u));
 			this.Step2_VentSludge.TagName = "Step2_VentSludge";
@@ -552,7 +555,7 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
 			// Step3_SludgeDischarge
 			// 
 			this.Step3_SludgeDischarge.BeginInit();
-			this.Step3_SludgeDischarge.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 232D, 192D);
+			this.Step3_SludgeDischarge.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 232D, 240D);
 			this.Step3_SludgeDischarge.Name = "Step3_SludgeDischarge";
 			this.Step3_SludgeDischarge.SecurityToken = ((uint)(4294967295u));
 			this.Step3_SludgeDischarge.TagName = "Step3_SludgeDischarge";
@@ -561,7 +564,7 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
 			// Step4_LowerLevel
 			// 
 			this.Step4_LowerLevel.BeginInit();
-			this.Step4_LowerLevel.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 232D, 240D);
+			this.Step4_LowerLevel.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 232D, 288D);
 			this.Step4_LowerLevel.Name = "Step4_LowerLevel";
 			this.Step4_LowerLevel.SecurityToken = ((uint)(4294967295u));
 			this.Step4_LowerLevel.TagName = "Step4_LowerLevel";
@@ -570,7 +573,7 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
 			// Step6_VentAerate
 			// 
 			this.Step6_VentAerate.BeginInit();
-			this.Step6_VentAerate.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 232D, 336D);
+			this.Step6_VentAerate.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 232D, 384D);
 			this.Step6_VentAerate.Name = "Step6_VentAerate";
 			this.Step6_VentAerate.SecurityToken = ((uint)(4294967295u));
 			this.Step6_VentAerate.TagName = "Step6_VentAerate";
@@ -579,7 +582,7 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
 			// Step7_Wait
 			// 
 			this.Step7_Wait.BeginInit();
-			this.Step7_Wait.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 232D, 384D);
+			this.Step7_Wait.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 232D, 432D);
 			this.Step7_Wait.Name = "Step7_Wait";
 			this.Step7_Wait.SecurityToken = ((uint)(4294967295u));
 			this.Step7_Wait.TagName = "Step7_Wait";
@@ -588,7 +591,7 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
 			// Step8_VentSludge
 			// 
 			this.Step8_VentSludge.BeginInit();
-			this.Step8_VentSludge.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 232D, 432D);
+			this.Step8_VentSludge.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 232D, 480D);
 			this.Step8_VentSludge.Name = "Step8_VentSludge";
 			this.Step8_VentSludge.SecurityToken = ((uint)(4294967295u));
 			this.Step8_VentSludge.TagName = "Step8_VentSludge";
@@ -597,7 +600,7 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
 			// Step5_Aerate
 			// 
 			this.Step5_Aerate.BeginInit();
-			this.Step5_Aerate.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 232D, 288D);
+			this.Step5_Aerate.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 232D, 336D);
 			this.Step5_Aerate.Name = "Step5_Aerate";
 			this.Step5_Aerate.SecurityToken = ((uint)(4294967295u));
 			this.Step5_Aerate.TagName = "Step5_Aerate";
@@ -605,7 +608,7 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
 			// 
 			// ReactorNotAv
 			// 
-			this.ReactorNotAv.Bounds = new NxtControl.Drawing.RectF(((float)(208D)), ((float)(248D)), ((float)(168D)), ((float)(96D)));
+			this.ReactorNotAv.Bounds = new NxtControl.Drawing.RectF(((float)(200D)), ((float)(316D)), ((float)(168D)), ((float)(96D)));
 			this.ReactorNotAv.Font = new NxtControl.Drawing.Font("Arial", 16F, System.Drawing.FontStyle.Bold);
 			this.ReactorNotAv.Name = "ReactorNotAv";
 			this.ReactorNotAv.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.BlinkColor("SE.HwCommon.DevLEDOrangeRedFlash"), 1F, NxtControl.Drawing.DashStyle.Solid);
@@ -615,7 +618,7 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
 			// 
 			// roundedRectangle1
 			// 
-			this.roundedRectangle1.Bounds = new NxtControl.Drawing.RectF(((float)(200D)), ((float)(464D)), ((float)(168D)), ((float)(16D)));
+			this.roundedRectangle1.Bounds = new NxtControl.Drawing.RectF(((float)(200D)), ((float)(512D)), ((float)(168D)), ((float)(16D)));
 			this.roundedRectangle1.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(235)), ((byte)(235)), ((byte)(235))));
 			this.roundedRectangle1.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold);
 			this.roundedRectangle1.Name = "roundedRectangle1";
@@ -624,14 +627,14 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
 			// 
 			// Step9
 			// 
-			this.Step9.Bounds = new NxtControl.Drawing.RectF(((float)(352D)), ((float)(460D)), ((float)(24D)), ((float)(24D)));
+			this.Step9.Bounds = new NxtControl.Drawing.RectF(((float)(352D)), ((float)(508D)), ((float)(24D)), ((float)(24D)));
 			this.Step9.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(78)), ((byte)(78)), ((byte)(78))), new NxtControl.Drawing.GradientFill(NxtControl.Drawing.GradientFillOrientation.Center, NxtControl.Drawing.GradientFillBrightness.Light));
 			this.Step9.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
 			this.Step9.Name = "Step9";
 			// 
 			// roundedRectangle3
 			// 
-			this.roundedRectangle3.Bounds = new NxtControl.Drawing.RectF(((float)(192D)), ((float)(464D)), ((float)(24D)), ((float)(16D)));
+			this.roundedRectangle3.Bounds = new NxtControl.Drawing.RectF(((float)(192D)), ((float)(512D)), ((float)(24D)), ((float)(16D)));
 			this.roundedRectangle3.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold);
 			this.roundedRectangle3.Name = "roundedRectangle3";
 			this.roundedRectangle3.Text = "S9";
@@ -639,14 +642,14 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
 			// 
 			// line12
 			// 
-			this.line12.EndPoint = new NxtControl.Drawing.PointF(232D, 496D);
+			this.line12.EndPoint = new NxtControl.Drawing.PointF(232D, 544D);
 			this.line12.Name = "line12";
 			this.line12.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 2F, NxtControl.Drawing.DashStyle.Solid);
-			this.line12.StartPoint = new NxtControl.Drawing.PointF(216D, 496D);
+			this.line12.StartPoint = new NxtControl.Drawing.PointF(216D, 544D);
 			// 
 			// F_S9
 			// 
-			this.F_S9.Bounds = new NxtControl.Drawing.RectF(((float)(192D)), ((float)(488D)), ((float)(24D)), ((float)(16D)));
+			this.F_S9.Bounds = new NxtControl.Drawing.RectF(((float)(192D)), ((float)(536D)), ((float)(24D)), ((float)(16D)));
 			this.F_S9.Brush = new NxtControl.Drawing.Brush("ButtonBrush");
 			this.F_S9.Font = new NxtControl.Drawing.Font("ButtonFont");
 			this.F_S9.InnerBorderColor = new NxtControl.Drawing.Color("ButtonInnerBorderColor");
@@ -662,7 +665,7 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
 			// Step9_SludgeDischarge
 			// 
 			this.Step9_SludgeDischarge.BeginInit();
-			this.Step9_SludgeDischarge.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 232D, 480D);
+			this.Step9_SludgeDischarge.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 232D, 528D);
 			this.Step9_SludgeDischarge.Name = "Step9_SludgeDischarge";
 			this.Step9_SludgeDischarge.SecurityToken = ((uint)(4294967295u));
 			this.Step9_SludgeDischarge.TagName = "Step9_SludgeDischarge";
@@ -670,7 +673,7 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
 			// 
 			// roundedRectangle4
 			// 
-			this.roundedRectangle4.Bounds = new NxtControl.Drawing.RectF(((float)(200D)), ((float)(512D)), ((float)(168D)), ((float)(16D)));
+			this.roundedRectangle4.Bounds = new NxtControl.Drawing.RectF(((float)(200D)), ((float)(560D)), ((float)(168D)), ((float)(16D)));
 			this.roundedRectangle4.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(235)), ((byte)(235)), ((byte)(235))));
 			this.roundedRectangle4.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold);
 			this.roundedRectangle4.Name = "roundedRectangle4";
@@ -679,14 +682,14 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
 			// 
 			// Step10
 			// 
-			this.Step10.Bounds = new NxtControl.Drawing.RectF(((float)(352D)), ((float)(508D)), ((float)(24D)), ((float)(24D)));
+			this.Step10.Bounds = new NxtControl.Drawing.RectF(((float)(352D)), ((float)(556D)), ((float)(24D)), ((float)(24D)));
 			this.Step10.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(78)), ((byte)(78)), ((byte)(78))), new NxtControl.Drawing.GradientFill(NxtControl.Drawing.GradientFillOrientation.Center, NxtControl.Drawing.GradientFillBrightness.Light));
 			this.Step10.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
 			this.Step10.Name = "Step10";
 			// 
 			// S10
 			// 
-			this.S10.Bounds = new NxtControl.Drawing.RectF(((float)(192D)), ((float)(512D)), ((float)(24D)), ((float)(16D)));
+			this.S10.Bounds = new NxtControl.Drawing.RectF(((float)(192D)), ((float)(560D)), ((float)(24D)), ((float)(16D)));
 			this.S10.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold);
 			this.S10.Name = "S10";
 			this.S10.Text = "S10";
@@ -694,14 +697,14 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
 			// 
 			// line16
 			// 
-			this.line16.EndPoint = new NxtControl.Drawing.PointF(232D, 544D);
+			this.line16.EndPoint = new NxtControl.Drawing.PointF(232D, 592D);
 			this.line16.Name = "line16";
 			this.line16.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 2F, NxtControl.Drawing.DashStyle.Solid);
-			this.line16.StartPoint = new NxtControl.Drawing.PointF(216D, 544D);
+			this.line16.StartPoint = new NxtControl.Drawing.PointF(216D, 592D);
 			// 
 			// F_S10
 			// 
-			this.F_S10.Bounds = new NxtControl.Drawing.RectF(((float)(192D)), ((float)(536D)), ((float)(24D)), ((float)(16D)));
+			this.F_S10.Bounds = new NxtControl.Drawing.RectF(((float)(192D)), ((float)(584D)), ((float)(24D)), ((float)(16D)));
 			this.F_S10.Brush = new NxtControl.Drawing.Brush("ButtonBrush");
 			this.F_S10.Font = new NxtControl.Drawing.Font("ButtonFont");
 			this.F_S10.InnerBorderColor = new NxtControl.Drawing.Color("ButtonInnerBorderColor");
@@ -717,11 +720,35 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
 			// Step10_Wait
 			// 
 			this.Step10_Wait.BeginInit();
-			this.Step10_Wait.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 232D, 528D);
+			this.Step10_Wait.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 232D, 576D);
 			this.Step10_Wait.Name = "Step10_Wait";
 			this.Step10_Wait.SecurityToken = ((uint)(4294967295u));
 			this.Step10_Wait.TagName = "Step10_Wait";
 			this.Step10_Wait.EndInit();
+			// 
+			// roundedRectangle2
+			// 
+			this.roundedRectangle2.Bounds = new NxtControl.Drawing.RectF(((float)(200D)), ((float)(88D)), ((float)(168D)), ((float)(16D)));
+			this.roundedRectangle2.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(210)), ((byte)(234)), ((byte)(240))));
+			this.roundedRectangle2.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold);
+			this.roundedRectangle2.Name = "roundedRectangle2";
+			this.roundedRectangle2.Text = "IDLE";
+			this.roundedRectangle2.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// Step0
+			// 
+			this.Step0.Bounds = new NxtControl.Drawing.RectF(((float)(352D)), ((float)(84D)), ((float)(24D)), ((float)(24D)));
+			this.Step0.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(78)), ((byte)(78)), ((byte)(78))), new NxtControl.Drawing.GradientFill(NxtControl.Drawing.GradientFillOrientation.Center, NxtControl.Drawing.GradientFillBrightness.Light));
+			this.Step0.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
+			this.Step0.Name = "Step0";
+			// 
+			// roundedRectangle17
+			// 
+			this.roundedRectangle17.Bounds = new NxtControl.Drawing.RectF(((float)(192D)), ((float)(88D)), ((float)(24D)), ((float)(16D)));
+			this.roundedRectangle17.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold);
+			this.roundedRectangle17.Name = "roundedRectangle17";
+			this.roundedRectangle17.Text = "S0";
+			this.roundedRectangle17.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// sDefault
 			// 
@@ -794,8 +821,11 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
 			this.S10,
 			this.line16,
 			this.F_S10,
-			this.Step10_Wait});
-			this.SymbolSize = new System.Drawing.Size(920, 616);
+			this.Step10_Wait,
+			this.roundedRectangle2,
+			this.Step0,
+			this.roundedRectangle17});
+			this.SymbolSize = new System.Drawing.Size(920, 744);
 
 		}
 		private NxtControl.GuiFramework.RoundedRectangle FeedRecS1;
@@ -867,6 +897,9 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
 		private NxtControl.GuiFramework.Line line16;
 		private NxtControl.GuiFramework.DrawnButton F_S10;
 		private SE.Nereda.Symbols.E_DELAY_V_D_ZERO.sDefault Step10_Wait;
+		private NxtControl.GuiFramework.RoundedRectangle roundedRectangle2;
+		private NxtControl.GuiFramework.RoundedRectangle Step0;
+		private NxtControl.GuiFramework.RoundedRectangle roundedRectangle17;
 		#endregion
 	}
 }

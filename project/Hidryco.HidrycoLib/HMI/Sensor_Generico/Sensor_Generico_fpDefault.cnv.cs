@@ -156,7 +156,8 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_Generico
 		// Indicador analogico de faixa (ISA-101): zonas em cinza (normal claro, alerta medio, alarme escuro) e ponteiro preto
 		float Pos(float v)
 		{
-			float a = Math.Min(rMin, rMax), b = Math.Max(rMin, rMax);
+			// sensor de nivel: alarmes e ponteiro em % (0 a 100); os demais na faixa de engenharia
+			float a = nivelOn ? 0F : Math.Min(rMin, rMax), b = nivelOn ? 100F : Math.Max(rMin, rMax);
 			if (b <= a) return MAI_X;
 			float f = (v - a) / (b - a);
 			if (f < 0F) f = 0F;
@@ -180,11 +181,13 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_Generico
 			Zona(maiLL, x0, xLL); Zona(maiL, xLL, xL); Zona(maiN, xL, xH); Zona(maiH, xH, xHH); Zona(maiHH, xHH, x5);
 			bool ok = estado != 4 && !falhaAtiva;
 			maiPonteiro.Visible = ok;
-			maiPonteiro.Location = new NxtControl.Drawing.PointF(Pos(pv) - 5F, MAI_Y + MAI_H);
+			maiPonteiro.Location = new NxtControl.Drawing.PointF(Pos(nivelOn ? pct : pv) - 5F, MAI_Y + MAI_H);
 		}
 
 
 		bool nivelOn;
+		float pct;
+		void PctValueChanged(object sender, ValueChangedEventArgs e) { pct = Convert.ToSingle(e.Value); Atualiza(); }
 		void NivelValueChanged(object sender, ValueChangedEventArgs e) { nivelOn = Convert.ToBoolean(e.Value); Atualiza(); }
 
 		void Linha(Rectangle p1, FreeText p1n, Polygon p2, FreeText p2n, FreeText txt, FreeText normal, bool ativo, int prioridade, string texto, bool naoRec)
@@ -199,10 +202,10 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_Generico
 			Indicador(alP1, alP1n, alP2, alP2n, alTxt, p, t == "FALHA" ? "FALHA DO SENSOR" : (t.Length > 0 ? "ALARME " + t : ""), NaoRecDe(t));
 			Pisca(AlgumNaoRec());
 			Valor(valor, invalido);
-			textoEstado.Text = estado == 4 ? "Sensor desabilitado" : (falhaAtiva ? "Sinal inválido" : (p == 0 ? "Normal" : (falha ? "Falha memorizada - reset" : "Em alarme")));
+			textoEstado.Text = estado == 4 ? "Sensor desabilitado" : (falha || falhaAtiva ? "Sensor em falha" : (p == 0 ? "Normal" : "Em alarme"));
 			bool ok = estado != 4 && !falhaAtiva;
 			tituloNivel.Visible = nivelOn; porcentagem.Visible = nivelOn && ok;
-			string suf = Sufixo();
+			string suf = nivelOn ? " %" : Sufixo();   // sensor de nivel: setpoints de alarme em %
 			spHH.Suffix = suf; spH.Suffix = suf; spL.Suffix = suf; spLL.Suffix = suf;
 			spHH.DecimalPlacesCount = casas; spH.DecimalPlacesCount = casas; spL.DecimalPlacesCount = casas; spLL.DecimalPlacesCount = casas;
 			escalaMin.DecimalPlacesCount = casas; escalaMax.DecimalPlacesCount = casas;

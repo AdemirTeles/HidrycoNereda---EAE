@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="eb2ae3fc-bae9-3394-4753-e8c953287629" Name="basicMotorInovaisa" Comment="Status de um motor do painel do gradeamento (grade ou rosca)" Namespace="Hidryco.HidrycoLib">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Hidryco" Version="1.0" Author="Hidryco" Date="22/10/2026" Remarks="1.0: codigos de funcionamento da tabela Inovaisa PV-35524 (grade com reverso, rosca), sobretorque, falha" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="CC51ED04AC7B8E15" Name="INIT" Comment="Inicializacao (configuracao da instancia)">
+        <With Var="cfgReverso" />
+        <With Var="cfgSobretorque" />
+      </Event>
+      <Event ID="1A738D87107B5D6E" Name="REQ" Comment="Leitura do painel (pelo processo)">
+        <With Var="fldStatus" />
+        <With Var="fldSobretorque" />
+        <With Var="falhaCom" />
+      </Event>
+      <Event ID="DB88907039BC9764" Name="REQ_RESET" Comment="IHM: reconhece os alarmes">
+        <With Var="hmiReset" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="E84D9EC76B90E86C" Name="INITO" Comment="Inicializacao concluida" />
+      <Event ID="475E549998D92F9C" Name="CNF" Comment="Status para o processo (na mudanca)">
+        <With Var="stsLigado" />
+        <With Var="stsFalha" />
+        <With Var="stsAlarme" />
+      </Event>
+      <Event ID="0DBD7315011AAE6A" Name="CNF_HMI" Comment="Status para a IHM e alarmes (na mudanca)">
+        <With Var="stsFuncionamento" />
+        <With Var="stsSensorSobretorque" />
+        <With Var="stsLigado" />
+        <With Var="stsAlarme" />
+        <With Var="stsReverso" />
+        <With Var="stsFalha" />
+        <With Var="stsSobretorque" />
+        <With Var="stsComunicacaoOK" />
+        <With Var="stsTemReverso" />
+        <With Var="stsTemSobretorque" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="2ADC94B6F20E7414" Name="cfgReverso" Type="BOOL" InitialValue="FALSE" Comment="TRUE = grade (codigos 0 parado, 1 avante, 2 reverso, 3 falha); FALSE = rosca (0 parado, 1 funcionando, 2 falha)" />
+      <VarDeclaration ID="3FC6EF986F299664" Name="cfgSobretorque" Type="BOOL" InitialValue="FALSE" Comment="TRUE = tem sensor de sobretorque" />
+      <VarDeclaration ID="1CDD71797D6C49E5" Name="fldStatus" Type="INT" Comment="Registro de status do motor (4007/4008/4009)" />
+      <VarDeclaration ID="7F6C3C59F50BB037" Name="fldSobretorque" Type="INT" Comment="Registro do sobretorque (4010/4011)" />
+      <VarDeclaration ID="019BDF7EDEF8F0BD" Name="falhaCom" Type="BOOL" Comment="Sem comunicacao com o painel" />
+      <VarDeclaration ID="B98B906E7E2460C2" Name="hmiReset" Type="BOOL" Comment="IHM: reconhece os alarmes" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="24612FD85F48322F" Name="stsFuncionamento" Type="INT" Comment="Codigo de funcionamento do painel: grade 0 parado, 1 avante, 2 reverso, 3 falha; rosca 0 parado, 1 funcionando, 2 falha" />
+      <VarDeclaration ID="8D8BB9C442BD70AB" Name="stsSensorSobretorque" Type="INT" Comment="Sensor de sobretorque: 0 normal, 1 sobretorque (so grade)" />
+      <VarDeclaration ID="9546553501CAFBCC" Name="stsLigado" Type="BOOL" Comment="Motor funcionando (avante ou reverso)" />
+      <VarDeclaration ID="33A942412FF6B3E7" Name="stsAlarme" Type="BOOL" Comment="Falha do motor ou sobretorque" />
+      <VarDeclaration ID="6156601B3E220AA2" Name="stsReverso" Type="BOOL" Comment="Grade funcionando em reverso" />
+      <VarDeclaration ID="F4944FF8E76D8509" Name="stsFalha" Type="BOOL" Comment="Motor em falha (informado pelo painel)" />
+      <VarDeclaration ID="6F41E89DDA623392" Name="stsSobretorque" Type="BOOL" Comment="Sobretorque atuado" />
+      <VarDeclaration ID="3A7206A4772B6FAE" Name="stsComunicacaoOK" Type="BOOL" Comment="Comunicacao com o painel do gradeamento OK" />
+      <VarDeclaration ID="FB09236565887E17" Name="stsTemReverso" Type="BOOL" Comment="Configuracao: motor com reverso (grade)" />
+      <VarDeclaration ID="4B9EC81286BA0C1D" Name="stsTemSobretorque" Type="BOOL" Comment="Configuracao: motor com sensor de sobretorque (grade)" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="d69c63ff-c873-b5a5-69ac-3a8bd39a2877">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="algMotor" />
+    <InternalVars>
+      <VarDeclaration ID="E6BAC722C0186FC3" Name="initDone" Type="BOOL" />
+      <VarDeclaration ID="66F1454E65B4ED90" Name="recebido" Type="BOOL" />
+      <VarDeclaration ID="F854CB49D90FAC59" Name="primeiro" Type="BOOL" InitialValue="TRUE" />
+      <VarDeclaration ID="394B2048022B5AE0" Name="sig" Type="INT" />
+      <VarDeclaration ID="C35B7D6BEA6E9E25" Name="oldSig" Type="INT" InitialValue="-1" />
+    </InternalVars>
+    <ECC>
+      <ECState Name="START" Comment="Estado inicial" x="1500" y="640" />
+      <ECState Name="EXEC" Comment="Executa a logica; o algoritmo decide quais eventos saem" x="1500" y="1100">
+        <ECAction Algorithm="algMotor" Output="INITO" />
+        <ECAction Output="CNF" />
+        <ECAction Output="CNF_HMI" />
+      </ECState>
+      <ECTransition Source="START" Destination="EXEC" Condition="INIT OR REQ OR REQ_RESET" x="1580" y="860" />
+      <ECTransition Source="EXEC" Destination="START" Condition="1" x="1420" y="860" />
+    </ECC>
+    <Algorithm Name="algMotor" Comment="Logica completa">
+      <ST><![CDATA[(* =====================================================================
+   basicMotorInovaisa v1.0 - status de um motor do painel do gradeamento
+   (Vibropac PV-35524, tabela Modbus Inovaisa): o painel comanda o motor;
+   aqui so a leitura do estado, a falha e o sobretorque (sem memoria:
+   seguem o painel; o reconhecimento fica nos alarmes).
+   ===================================================================== *)
+INITO   := FALSE;
+CNF     := FALSE;
+CNF_HMI := FALSE;
+IF INIT THEN
+    initDone := TRUE;
+    INITO := TRUE;
+END_IF;
+IF NOT initDone THEN
+    RETURN;
+END_IF;
+IF REQ THEN
+    recebido := TRUE;
+END_IF;
+stsTemReverso := cfgReverso;
+stsTemSobretorque := cfgSobretorque;
+stsComunicacaoOK := recebido AND NOT falhaCom;
+IF stsComunicacaoOK THEN
+    stsFuncionamento := fldStatus;
+    IF cfgReverso THEN
+        stsLigado  := (fldStatus = 1) OR (fldStatus = 2);
+        stsReverso := fldStatus = 2;
+        stsFalha   := fldStatus = 3;
+    ELSE
+        stsLigado  := fldStatus = 1;
+        stsReverso := FALSE;
+        stsFalha   := fldStatus = 2;
+    END_IF;
+    IF cfgSobretorque THEN
+        stsSensorSobretorque := fldSobretorque;
+    ELSE
+        stsSensorSobretorque := 0;
+    END_IF;
+    stsSobretorque := cfgSobretorque AND (fldSobretorque <> 0);
+ELSE
+    stsFuncionamento := 0;
+    stsSensorSobretorque := 0;
+    stsLigado := FALSE;
+    stsReverso := FALSE;
+    stsFalha := FALSE;
+    stsSobretorque := FALSE;
+END_IF;
+stsAlarme := stsFalha OR stsSobretorque;
+sig := stsFuncionamento * 16 + stsSensorSobretorque;
+IF stsComunicacaoOK THEN sig := sig + 4096; END_IF;
+IF primeiro OR (sig <> oldSig) THEN
+    CNF := TRUE;
+    CNF_HMI := TRUE;
+END_IF;
+IF REQ_RESET THEN
+    CNF_HMI := TRUE;
+END_IF;
+oldSig := sig;
+primeiro := FALSE;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

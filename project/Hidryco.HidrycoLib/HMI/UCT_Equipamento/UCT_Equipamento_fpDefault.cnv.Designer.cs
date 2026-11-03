@@ -21,6 +21,7 @@ namespace Hidryco.HidrycoLib.Faceplates.UCT_Equipamento
 		{
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary1 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary2 = new NxtControl.GuiFramework.PropertyDictionary();
+			this.xHz_vVel = new System.HMI.Symbols.Base.Execute<float>();
 			this.cabecalho = new NxtControl.GuiFramework.Rectangle();
 			this.caixaEstado = new NxtControl.GuiFramework.Rectangle();
 			this.textoEstado = new NxtControl.GuiFramework.FreeText();
@@ -110,7 +111,7 @@ namespace Hidryco.HidrycoLib.Faceplates.UCT_Equipamento
 			propertyDictionary1.Add("Pen", new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("Transparent"), 1F, NxtControl.Drawing.DashStyle.Solid));
 			this.vHor.Ranges.DefaultPropertyValues = propertyDictionary1;
 			this.vHor.Suffix = " h";
-			this.vHor.TagName = "STS_HORIMETRO_HORA";
+			this.vHor.TagName = "STS_HORIMETRO_HOR";
 			this.vHor.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
 			this.vHor.EndInit();
 			// 
@@ -270,8 +271,7 @@ namespace Hidryco.HidrycoLib.Faceplates.UCT_Equipamento
 			propertyDictionary2.Add("Brush", new NxtControl.Drawing.Brush(true));
 			propertyDictionary2.Add("Pen", new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("Transparent"), 1F, NxtControl.Drawing.DashStyle.Solid));
 			this.vVel.Ranges.DefaultPropertyValues = propertyDictionary2;
-			this.vVel.Suffix = " %";
-			this.vVel.TagName = "STS_VELOCIDADE";
+			this.vVel.Suffix = " Hz";
 			this.vVel.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
 			this.vVel.Visible = false;
 			this.vVel.EndInit();
@@ -295,12 +295,12 @@ namespace Hidryco.HidrycoLib.Faceplates.UCT_Equipamento
 			this.tVel.NumberBase = NxtControl.GuiFramework.NumberBase.Decimal;
 			this.tVel.Pen = new NxtControl.Drawing.Pen("TextBoxPen");
 			this.tVel.SetColor = new NxtControl.Drawing.Color("Yellow");
-			this.tVel.Suffix = " %";
-			this.tVel.TagName = "stpVelocidade";
+			this.tVel.Suffix = " Hz";
 			this.tVel.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
 			this.tVel.UseInputPad = true;
 			this.tVel.Value = 0F;
 			this.tVel.Visible = false;
+			this.tVel.TagName = "STP_VELOCIDADE";
 			this.tVel.EndInit();
 			// 
 			// x_anim
@@ -416,7 +416,21 @@ namespace Hidryco.HidrycoLib.Faceplates.UCT_Equipamento
 			this.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(360D)), ((float)(386D)));
 			this.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(224)), ((byte)(224)), ((byte)(224))));
 			this.Name = "fpDefault";
+			// 
+			// xHz_vVel
+			// 
+			this.xHz_vVel.BeginInit();
+			this.xHz_vVel.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, double.NaN, double.NaN);
+			this.xHz_vVel.IsOnlyInput = true;
+			this.xHz_vVel.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
+			this.xHz_vVel.Name = "xHz_vVel";
+			this.xHz_vVel.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
+			this.xHz_vVel.TagName = "STS_VELOCIDADE";
+			this.xHz_vVel.Value = 0F;
+			this.xHz_vVel.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.Hz_vVelValueChanged);
+			this.xHz_vVel.EndInit();
 			this.Shapes.AddRange(new System.ComponentModel.IComponent[] {
+			this.xHz_vVel,
 			this.cabecalho,
 			this.caixaEstado,
 			this.textoEstado,
@@ -478,6 +492,7 @@ namespace Hidryco.HidrycoLib.Faceplates.UCT_Equipamento
 		private System.HMI.Symbols.Base.Execute<bool> x_cfgVel;
 		private System.HMI.Symbols.Base.Execute<bool> x_cfgInt;
 		private System.HMI.Symbols.Base.Execute<bool> x_cfgRev;
+		private System.HMI.Symbols.Base.Execute<float> xHz_vVel;
 		#endregion
 	}
 }

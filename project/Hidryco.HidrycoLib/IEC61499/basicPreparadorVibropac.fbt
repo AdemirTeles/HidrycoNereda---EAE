@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="a4c94f74-de59-6785-ac67-7db04b83e8d3" Name="basicPreparadorVibropac" Comment="Preparador de polimero Vibropac VIB-3000 - logica (Modbus TCP Inovaisa)" Namespace="Hidryco.HidrycoLib">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Hidryco" Version="1.0" Author="Hidryco" Date="19/10/2026" Remarks="1.0: liga/desliga ciclo remoto (4001, reenvio a cada 5 s), reset 4002 por 3 s, leitura 4005..4019, modo automatico/manual, cfgHabilitada" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="C8EB5C44335F3C0F" Name="INIT" Comment="Inicializacao (configuracao da instancia)">
+        <With Var="cfgHabilitada" />
+      </Event>
+      <Event ID="8AC9392B88A3EAB4" Name="REQ_CMD" Comment="Processo: liga/desliga o ciclo (automatico)">
+        <With Var="cmdLigarCiclo" />
+      </Event>
+      <Event ID="23E072CEEE425684" Name="REQ_FB" Comment="Leitura Modbus 4005..4019">
+        <With Var="fldR4005" />
+        <With Var="fldR4006" />
+        <With Var="fldR4007" />
+        <With Var="fldR4008" />
+        <With Var="fldR4009" />
+        <With Var="fldR4010" />
+        <With Var="fldR4011" />
+        <With Var="fldR4012" />
+        <With Var="fldR4013" />
+        <With Var="fldR4014" />
+        <With Var="fldR4015" />
+        <With Var="fldR4016" />
+        <With Var="fldR4017" />
+        <With Var="fldR4018" />
+        <With Var="fldR4019" />
+      </Event>
+      <Event ID="B806FE6C4E61C207" Name="REQ_COM" Comment="Status da conexao Modbus (connStatusInt)">
+        <With Var="fldConexao" />
+      </Event>
+      <Event ID="D4E372C7225AB27A" Name="REQ_MODE" Comment="IHM: modo">
+        <With Var="hmiAutomatico" />
+      </Event>
+      <Event ID="B2DFD9C83F7028CC" Name="REQ_MANUAL" Comment="IHM: liga/desliga o ciclo em manual">
+        <With Var="hmiCicloManual" />
+      </Event>
+      <Event ID="114FAE0222EE1727" Name="REQ_RESET" Comment="IHM: reset">
+        <With Var="hmiReset" />
+      </Event>
+      <Event ID="76A099890FECC3B3" Name="REQ_RESET_PROC" Comment="Processo: reset">
+        <With Var="cmdResetFalhas" />
+      </Event>
+      <Event ID="17F055031C9645AF" Name="TICK" Comment="Base de tempo de 1 s" />
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="254B888A0D851879" Name="INITO" Comment="Inicializacao concluida" />
+      <Event ID="D30BAA5D9A6BA0AA" Name="CNF_OUT" Comment="Escrita Modbus 4001 (ciclo) e 4002 (reset)">
+        <With Var="acmCiclo" />
+        <With Var="acmReset" />
+      </Event>
+      <Event ID="23E15EC5D9D46404" Name="CNF" Comment="Status para o processo (na mudanca e a cada 1 s)">
+        <With Var="stsComunicacaoOK" />
+        <With Var="stsDisponivel" />
+        <With Var="stsCicloLigado" />
+        <With Var="stsFalha" />
+        <With Var="stsEmergencia" />
+        <With Var="stsDosando" />
+        <With Var="stsSiloBaixo" />
+      </Event>
+      <Event ID="C8C5D783F747784A" Name="CNF_HMI" Comment="Status para a IHM e alarmes">
+        <With Var="stsComunicacaoOK" />
+        <With Var="stsFalhaComunicacao" />
+        <With Var="stsHabilitado" />
+        <With Var="stsAutomatico" />
+        <With Var="stsCicloLigado" />
+        <With Var="stsCmdManual" />
+        <With Var="stsAlarmeAcionado" />
+        <With Var="stsEmergencia" />
+        <With Var="stsFalhaMotor" />
+        <With Var="stsFalha" />
+        <With Var="stsDisponivel" />
+        <With Var="stsAlarme" />
+        <With Var="stsM1AgitMistura" />
+        <With Var="stsM2AgitMaturacao" />
+        <With Var="stsM3Dosador" />
+        <With Var="stsM4Bomba" />
+        <With Var="stsM5Bomba" />
+        <With Var="stsVS01Aberta" />
+        <With Var="stsSiloBaixo" />
+        <With Var="stsNivelPreparo" />
+        <With Var="stsResistencia" />
+        <With Var="stsVazaoAgua" />
+        <With Var="stsVazaoPolimero" />
+        <With Var="stsFaltaAgua" />
+        <With Var="stsAlarmeVazao" />
+        <With Var="stsDosando" />
+        <With Var="bAlarmeVazao" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="191D703FC844A905" Name="cfgHabilitada" Type="BOOL" InitialValue="TRUE" Comment="FALSE = instancia desabilitada (equipamento futuro): sem alarme e nunca disponivel" />
+      <VarDeclaration ID="19BBD4690E07733C" Name="cmdLigarCiclo" Type="BOOL" Comment="Processo: TRUE = ciclo remoto ligado" />
+      <VarDeclaration ID="4BDCF94156FA74AE" Name="fldR4005" Type="INT" Comment="Registro 4005: alarme acionado (0/1)" />
+      <VarDeclaration ID="A6F0699BC3067BEF" Name="fldR4006" Type="INT" Comment="Registro 4006: emergencia (0/1)" />
+      <VarDeclaration ID="6C7C0E0497BBA8E1" Name="fldR4007" Type="INT" Comment="Registro 4007: status M1 agitador do tanque de mistura (0 parado, 1 funcionando, 2 falha)" />
+      <VarDeclaration ID="38849C837858760B" Name="fldR4008" Type="INT" Comment="Registro 4008: status M2 agitador do tanque de maturacao (0 parado, 1 funcionando, 2 falha)" />
+      <VarDeclaration ID="93486F19B8C23866" Name="fldR4009" Type="INT" Comment="Registro 4009: status M3 dosador volumetrico (0 parado, 1 funcionando, 2 falha)" />
+      <VarDeclaration ID="77D1793A0A0FE3D0" Name="fldR4010" Type="INT" Comment="Registro 4010: status M4 bomba dosadora M4 (0 parado, 1 funcionando, 2 falha)" />
+      <VarDeclaration ID="CC75C4EB7B90482D" Name="fldR4011" Type="INT" Comment="Registro 4011: status M5 bomba dosadora M5 (0 parado, 1 funcionando, 2 falha)" />
+      <VarDeclaration ID="03D38C48B3C2F206" Name="fldR4012" Type="INT" Comment="Registro 4012: ver tabela Modbus" />
+      <VarDeclaration ID="25A329D1299A8040" Name="fldR4013" Type="INT" Comment="Registro 4013: ver tabela Modbus" />
+      <VarDeclaration ID="97E2B6A71D0021BB" Name="fldR4014" Type="INT" Comment="Registro 4014: ver tabela Modbus" />
+      <VarDeclaration ID="635BD9910675B2AC" Name="fldR4015" Type="INT" Comment="Registro 4015: ver tabela Modbus" />
+      <VarDeclaration ID="141B447A20EF9B47" Name="fldR4016" Type="INT" Comment="Registro 4016: ver tabela Modbus" />
+      <VarDeclaration ID="A515A9BEBB83E4A1" Name="fldR4017" Type="INT" Comment="Registro 4017: ver tabela Modbus" />
+      <VarDeclaration ID="93ECE62774700F33" Name="fldR4018" Type="INT" Comment="Registro 4018: ver tabela Modbus" />
+      <VarDeclaration ID="2EA5961119FF6CB3" Name="fldR4019" Type="INT" Comment="Registro 4019: ver tabela Modbus" />
+      <VarDeclaration ID="4964CAF55D68DC56" Name="fldConexao" Type="INT" Comment="connStatusInt (1 = online)" />
+      <VarDeclaration ID="19549009440DD9D3" Name="hmiAutomatico" Type="BOOL" Comment="IHM: TRUE = automatico" />
+      <VarDeclaration ID="15B98FE28309AD5E" Name="hmiCicloManual" Type="BOOL" Comment="IHM: TRUE = liga o ciclo (manual)" />
+      <VarDeclaration ID="7616CCA17942FEE1" Name="hmiReset" Type="BOOL" Comment="IHM: reset" />
+      <VarDeclaration ID="742E7372BD8D5EE6" Name="cmdResetFalhas" Type="BOOL" Comment="Processo: reset (vale com TRUE)" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="A5FFAEB66487AB4B" Name="acmCiclo" Type="INT" Comment="Registro 4001: 1 liga ciclo remoto, 0 desliga" />
+      <VarDeclaration ID="90138AC3A3675F7D" Name="acmReset" Type="INT" Comment="Registro 4002: 1 reseta falhas (pulso de 3 s)" />
+      <VarDeclaration ID="D6CFFCD03922665E" Name="stsComunicacaoOK" Type="BOOL" Comment="Comunicacao Modbus com o CLP do skid OK" />
+      <VarDeclaration ID="8C66AC73508666A3" Name="stsFalhaComunicacao" Type="BOOL" Comment="Falha de comunicacao com o CLP do skid" />
+      <VarDeclaration ID="88A06CB7FCFC7DDF" Name="stsHabilitado" Type="BOOL" Comment="Instancia habilitada (FALSE = equipamento futuro)" />
+      <VarDeclaration ID="9540D056397D70B8" Name="stsAutomatico" Type="BOOL" Comment="Ciclo comandado pelo processo (automatico)" />
+      <VarDeclaration ID="68EE0FE060200658" Name="stsCicloLigado" Type="BOOL" Comment="Comando de ciclo remoto ligado (4001 = 1)" />
+      <VarDeclaration ID="F543030AB728AD23" Name="stsCmdManual" Type="BOOL" Comment="Comando manual de ciclo (modo manual)" />
+      <VarDeclaration ID="DB86DEF1DC46FA58" Name="stsAlarmeAcionado" Type="BOOL" Comment="Alarme acionado no skid (4005)" />
+      <VarDeclaration ID="36D295DAC8472DC2" Name="stsEmergencia" Type="BOOL" Comment="Botao de emergencia do skid acionado (4006)" />
+      <VarDeclaration ID="0E2C9552C66CCB34" Name="stsFalhaMotor" Type="BOOL" Comment="Algum motor do skid em falha" />
+      <VarDeclaration ID="45D4F6327B243EBB" Name="stsFalha" Type="BOOL" Comment="Skid em falha (alarme, emergencia ou motor)" />
+      <VarDeclaration ID="C1DAD42B5B192216" Name="stsDisponivel" Type="BOOL" Comment="Pode ser ligado pelo automatico agora" />
+      <VarDeclaration ID="4F2186E5E3C61E14" Name="stsAlarme" Type="BOOL" Comment="Algum alarme do skid" />
+      <VarDeclaration ID="8033D1C6DCB63AED" Name="stsM1AgitMistura" Type="INT" Comment="Status M1 agitador do tanque de mistura (4007): 0 parado, 1 funcionando, 2 falha" />
+      <VarDeclaration ID="D7D1452832C1AB3F" Name="stsM2AgitMaturacao" Type="INT" Comment="Status M2 agitador do tanque de maturacao (4008): 0 parado, 1 funcionando, 2 falha" />
+      <VarDeclaration ID="5119292986EDFE28" Name="stsM3Dosador" Type="INT" Comment="Status M3 dosador volumetrico (4009): 0 parado, 1 funcionando, 2 falha" />
+      <VarDeclaration ID="834237AA36AEC2F2" Name="stsM4Bomba" Type="INT" Comment="Status M4 bomba dosadora M4 (4010): 0 parado, 1 funcionando, 2 falha" />
+      <VarDeclaration ID="6E419EA8287FC82C" Name="stsM5Bomba" Type="INT" Comment="Status M5 bomba dosadora M5 (4011): 0 parado, 1 funcionando, 2 falha" />
+      <VarDeclaration ID="A84652D0E97699CF" Name="stsVS01Aberta" Type="BOOL" Comment="Solenoide de agua VS-01 aberta (4012)" />
+      <VarDeclaration ID="04A6AF5EF019A3AB" Name="stsSiloBaixo" Type="BOOL" Comment="Silo de polimero em po com nivel baixo LSL-01 (4013 = 0)" />
+      <VarDeclaration ID="BFE8132319D99475" Name="stsNivelPreparo" Type="INT" Comment="Nivel LS1: 0 muito baixo, 1 baixo, 2 alto, 3 muito alto (4014)" />
+      <VarDeclaration ID="461160BC5B330AEA" Name="stsResistencia" Type="BOOL" Comment="Resistencia de aquecimento RA-01 ligada (4015)" />
+      <VarDeclaration ID="04B11DC67CEDDE72" Name="stsVazaoAgua" Type="REAL" Comment="Vazao de agua FIT-01 (%) (4016, 0-1000)" />
+      <VarDeclaration ID="47A6AFE5B56C37D8" Name="stsVazaoPolimero" Type="REAL" Comment="Vazao de polimero preparado FIT-02 (%) (4017, 0-1000)" />
+      <VarDeclaration ID="74EBBC1024D21A1F" Name="stsFaltaAgua" Type="BOOL" Comment="Alarme de falta d agua (4018)" />
+      <VarDeclaration ID="B5E33501ED704259" Name="stsAlarmeVazao" Type="INT" Comment="Alarme de vazao de polimero: 0 sem, 1 baixa, 2 alta (4019)" />
+      <VarDeclaration ID="29182C5C7C7BFD37" Name="stsDosando" Type="BOOL" Comment="Bomba dosadora M4 ou M5 funcionando" />
+      <VarDeclaration ID="7A59DC54A0F7EDE0" Name="bAlarmeVazao" Type="BOOL" Comment="Alarme de vazao de polimero (baixa ou alta)" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="c37bb1a2-e869-abce-04f3-dfcc2d21e1dc">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="algPreparador" />
+    <InternalVars>
+      <VarDeclaration ID="9881D1EF6402036D" Name="initDone" Type="BOOL" />
+      <VarDeclaration ID="22F7011EC06F16AE" Name="comRecebido" Type="BOOL" />
+      <VarDeclaration ID="09E012976CA3C144" Name="fbRecebido" Type="BOOL" />
+      <VarDeclaration ID="2B298405E1810471" Name="bAuto" Type="BOOL" InitialValue="TRUE" Comment="Modo automatico (partida em automatico)" />
+      <VarDeclaration ID="9FAA406B1ED881C5" Name="bFalhaMotor" Type="BOOL" />
+      <VarDeclaration ID="EF04102565B8D77B" Name="tReset" Type="INT" Comment="Segundos restantes do pulso de reset" />
+      <VarDeclaration ID="A2DDD2D4BE412CCF" Name="tEnvio" Type="INT" />
+      <VarDeclaration ID="C8E63975924C18D2" Name="oldCiclo" Type="INT" InitialValue="-1" />
+      <VarDeclaration ID="0934979EAAAC0B6C" Name="oldReset" Type="INT" InitialValue="-1" />
+      <VarDeclaration ID="5CB6B29E5220FFEE" Name="primeiro" Type="BOOL" InitialValue="TRUE" />
+      <VarDeclaration ID="486DAD38F4DEA2E2" Name="sig" Type="INT" />
+      <VarDeclaration ID="5E34C62E34239983" Name="oldSig" Type="INT" InitialValue="-1" />
+    </InternalVars>
+    <ECC>
+      <ECState Name="START" Comment="Estado inicial" x="1500" y="640" />
+      <ECState Name="EXEC" Comment="Executa a logica; o algoritmo decide quais eventos saem" x="1500" y="1100">
+        <ECAction Algorithm="algPreparador" Output="INITO" />
+        <ECAction Output="CNF_OUT" />
+        <ECAction Output="CNF" />
+        <ECAction Output="CNF_HMI" />
+      </ECState>
+      <ECTransition Source="START" Destination="EXEC" Condition="INIT OR REQ_CMD OR REQ_FB OR REQ_COM OR REQ_MODE OR REQ_MANUAL OR REQ_RESET OR REQ_RESET_PROC OR TICK" x="1580" y="860" />
+      <ECTransition Source="EXEC" Destination="START" Condition="1" x="1420" y="860" />
+    </ECC>
+    <Algorithm Name="algPreparador" Comment="Logica completa (um unico algoritmo)">
+      <ST><![CDATA[(* =====================================================================
+   basicPreparadorVibropac v1.0 - logica do CAT Preparador_Vibropac (HidrycoLib)
+   Preparador de polimero Vibropac VIB-3000 - CLP do skid (M241) servidor Modbus TCP, tabela
+   Inovaisa: 4001 liga/desliga ciclo remoto, 4002 reset, status a partir
+   de 4005. O skid tem a propria logica (sequencia, intertravamentos e
+   limpeza); o CLP da planta so liga/desliga o ciclo e le os estados.
+   Regras:
+   - automatico: ciclo = cmdLigarCiclo do processo; manual: comando da IHM;
+   - o comando 4001 e reenviado a cada 5 s (o skid guarda o ultimo valor);
+   - reset (IHM ou processo): 4002 = 1 por 3 s e reconhece os alarmes;
+   - sem comunicacao: estados zerados, alarme de comunicacao (aviso);
+   - cfgHabilitada = FALSE: equipamento futuro, sem alarme, ciclo desligado.
+   ===================================================================== *)
+
+INITO   := FALSE;
+CNF_OUT := FALSE;
+CNF     := FALSE;
+CNF_HMI := FALSE;
+
+IF REQ_COM THEN
+    comRecebido := TRUE;
+END_IF;
+IF REQ_FB THEN
+    fbRecebido := TRUE;
+END_IF;
+IF INIT THEN
+    initDone := TRUE;
+    INITO := TRUE;
+END_IF;
+IF NOT initDone THEN
+    RETURN;
+END_IF;
+
+(* ---- 1. Comunicacao e decodificacao ---- *)
+stsHabilitado := cfgHabilitada;
+stsComunicacaoOK := cfgHabilitada AND comRecebido AND fbRecebido AND (fldConexao = 1);
+stsFalhaComunicacao := cfgHabilitada AND NOT stsComunicacaoOK;
+IF stsComunicacaoOK THEN
+    stsAlarmeAcionado := fldR4005 <> 0;
+    stsEmergencia := fldR4006 <> 0;
+    stsM1AgitMistura := fldR4007;
+    stsM2AgitMaturacao := fldR4008;
+    stsM3Dosador := fldR4009;
+    stsM4Bomba := fldR4010;
+    stsM5Bomba := fldR4011;
+
+    stsVS01Aberta := fldR4012 = 1;
+    stsSiloBaixo := fldR4013 = 0;
+    stsNivelPreparo := fldR4014;
+    stsResistencia := fldR4015 = 1;
+    stsVazaoAgua := LIMIT(0.0, INT_TO_REAL(fldR4016) / 10.0, 100.0);
+    stsVazaoPolimero := LIMIT(0.0, INT_TO_REAL(fldR4017) / 10.0, 100.0);
+    stsFaltaAgua := fldR4018 <> 0;
+    stsAlarmeVazao := fldR4019;
+    stsDosando := (fldR4010 = 1) OR (fldR4011 = 1);
+    bFalhaMotor := (fldR4007 = 2) OR (fldR4008 = 2) OR (fldR4009 = 2) OR (fldR4010 = 2) OR (fldR4011 = 2);
+ELSE
+    stsAlarmeAcionado := FALSE;
+    stsEmergencia := FALSE;
+    stsM1AgitMistura := 0;
+    stsM2AgitMaturacao := 0;
+    stsM3Dosador := 0;
+    stsM4Bomba := 0;
+    stsM5Bomba := 0;
+    stsVS01Aberta := FALSE; stsSiloBaixo := FALSE; stsResistencia := FALSE; stsFaltaAgua := FALSE; stsAlarmeVazao := 0; stsDosando := FALSE; bFalhaMotor := FALSE;
+END_IF;
+stsFalhaMotor := bFalhaMotor;
+stsFalha := stsAlarmeAcionado OR stsEmergencia OR bFalhaMotor;
+bAlarmeVazao := stsComunicacaoOK AND (stsAlarmeVazao <> 0);
+
+(* ---- 2. Modo, comando e reset ---- *)
+IF REQ_MODE THEN
+    bAuto := hmiAutomatico;
+END_IF;
+IF REQ_MANUAL THEN
+    stsCmdManual := hmiCicloManual;
+END_IF;
+IF bAuto THEN
+    stsCmdManual := FALSE;                 (* volta ao automatico sem comando manual pendente *)
+END_IF;
+stsAutomatico := bAuto;
+IF NOT cfgHabilitada THEN
+    stsCicloLigado := FALSE;
+ELSIF bAuto THEN
+    stsCicloLigado := cmdLigarCiclo;
+ELSE
+    stsCicloLigado := stsCmdManual;
+END_IF;
+IF (REQ_RESET AND hmiReset) OR (REQ_RESET_PROC AND cmdResetFalhas) THEN
+    tReset := 3;
+END_IF;
+IF TICK AND (tReset > 0) THEN
+    tReset := tReset - 1;
+END_IF;
+IF stsCicloLigado THEN
+    acmCiclo := 1;
+ELSE
+    acmCiclo := 0;
+END_IF;
+IF tReset > 0 THEN
+    acmReset := 1;
+ELSE
+    acmReset := 0;
+END_IF;
+IF TICK THEN
+    tEnvio := tEnvio + 1;
+END_IF;
+IF cfgHabilitada AND (primeiro OR (acmCiclo <> oldCiclo) OR (acmReset <> oldReset) OR (tEnvio >= 5)) THEN
+    CNF_OUT := TRUE;
+    tEnvio := 0;
+    oldCiclo := acmCiclo;
+    oldReset := acmReset;
+END_IF;
+
+(* ---- 3. Disponibilidade e alarme ---- *)
+stsDisponivel := stsComunicacaoOK AND bAuto AND NOT stsFalha;
+stsAlarme := stsFalhaComunicacao OR stsFalha OR stsSiloBaixo OR stsFaltaAgua OR bAlarmeVazao;
+
+(* ---- 4. Eventos ---- *)
+sig := 0;
+IF stsComunicacaoOK THEN sig := sig + 1; END_IF;
+IF stsDisponivel THEN sig := sig + 2; END_IF;
+IF stsCicloLigado THEN sig := sig + 4; END_IF;
+IF stsFalha THEN sig := sig + 8; END_IF;
+IF stsEmergencia THEN sig := sig + 16; END_IF;
+IF stsAlarme THEN sig := sig + 32; END_IF;
+IF stsDosando THEN sig := sig + 64; END_IF;
+IF bAuto THEN sig := sig + 128; END_IF;
+IF primeiro OR TICK OR REQ_RESET OR REQ_MODE OR REQ_MANUAL OR (sig <> oldSig) THEN
+    CNF_HMI := TRUE;
+END_IF;
+IF primeiro OR TICK OR (sig <> oldSig) THEN
+    CNF := TRUE;
+END_IF;
+oldSig := sig;
+primeiro := FALSE;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

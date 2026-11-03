@@ -225,7 +225,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Subestacao
 			// c_V4601
 			// 
 			this.c_V4601.BeginInit();
-			this.c_V4601.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 220D, 104D);
+			this.c_V4601.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 232D, 104D);
 			this.c_V4601.FalseImage = new NxtControl.Drawing.ImageHolder();
 			this.c_V4601.FalseImageDisabled = new NxtControl.Drawing.ImageHolder();
 			this.c_V4601.FalseText = "Bloqueado";
@@ -267,7 +267,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Subestacao
 			// c_V4602
 			// 
 			this.c_V4602.BeginInit();
-			this.c_V4602.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 220D, 138D);
+			this.c_V4602.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 232D, 138D);
 			this.c_V4602.FalseImage = new NxtControl.Drawing.ImageHolder();
 			this.c_V4602.FalseImageDisabled = new NxtControl.Drawing.ImageHolder();
 			this.c_V4602.FalseText = "Bloqueado";
@@ -309,7 +309,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Subestacao
 			// c_V4603
 			// 
 			this.c_V4603.BeginInit();
-			this.c_V4603.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 220D, 172D);
+			this.c_V4603.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 232D, 172D);
 			this.c_V4603.FalseImage = new NxtControl.Drawing.ImageHolder();
 			this.c_V4603.FalseImageDisabled = new NxtControl.Drawing.ImageHolder();
 			this.c_V4603.FalseText = "Bloqueado";
@@ -351,7 +351,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Subestacao
 			// c_V4604
 			// 
 			this.c_V4604.BeginInit();
-			this.c_V4604.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 220D, 206D);
+			this.c_V4604.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 232D, 206D);
 			this.c_V4604.FalseImage = new NxtControl.Drawing.ImageHolder();
 			this.c_V4604.FalseImageDisabled = new NxtControl.Drawing.ImageHolder();
 			this.c_V4604.FalseText = "Bloqueado";
@@ -401,7 +401,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Subestacao
 			// c_EX_500_01
 			// 
 			this.c_EX_500_01.BeginInit();
-			this.c_EX_500_01.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 220D, 270D);
+			this.c_EX_500_01.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 232D, 270D);
 			this.c_EX_500_01.FalseImage = new NxtControl.Drawing.ImageHolder();
 			this.c_EX_500_01.FalseImageDisabled = new NxtControl.Drawing.ImageHolder();
 			this.c_EX_500_01.FalseText = "Bloqueado";
@@ -443,7 +443,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Subestacao
 			// c_EX_500_02
 			// 
 			this.c_EX_500_02.BeginInit();
-			this.c_EX_500_02.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 220D, 304D);
+			this.c_EX_500_02.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 232D, 304D);
 			this.c_EX_500_02.FalseImage = new NxtControl.Drawing.ImageHolder();
 			this.c_EX_500_02.FalseImageDisabled = new NxtControl.Drawing.ImageHolder();
 			this.c_EX_500_02.FalseText = "Bloqueado";
@@ -485,7 +485,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Subestacao
 			// c_EX_500_03
 			// 
 			this.c_EX_500_03.BeginInit();
-			this.c_EX_500_03.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 220D, 338D);
+			this.c_EX_500_03.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 232D, 338D);
 			this.c_EX_500_03.FalseImage = new NxtControl.Drawing.ImageHolder();
 			this.c_EX_500_03.FalseImageDisabled = new NxtControl.Drawing.ImageHolder();
 			this.c_EX_500_03.FalseText = "Bloqueado";
@@ -527,7 +527,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Subestacao
 			// c_EX_500_04
 			// 
 			this.c_EX_500_04.BeginInit();
-			this.c_EX_500_04.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 220D, 372D);
+			this.c_EX_500_04.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 232D, 372D);
 			this.c_EX_500_04.FalseImage = new NxtControl.Drawing.ImageHolder();
 			this.c_EX_500_04.FalseImageDisabled = new NxtControl.Drawing.ImageHolder();
 			this.c_EX_500_04.FalseText = "Bloqueado";
@@ -569,7 +569,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Subestacao
 			// c_EX_500_05
 			// 
 			this.c_EX_500_05.BeginInit();
-			this.c_EX_500_05.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 220D, 406D);
+			this.c_EX_500_05.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 232D, 406D);
 			this.c_EX_500_05.FalseImage = new NxtControl.Drawing.ImageHolder();
 			this.c_EX_500_05.FalseImageDisabled = new NxtControl.Drawing.ImageHolder();
 			this.c_EX_500_05.FalseText = "Bloqueado";
@@ -619,7 +619,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Subestacao
 			// c_COMP_500_01
 			// 
 			this.c_COMP_500_01.BeginInit();
-			this.c_COMP_500_01.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 220D, 470D);
+			this.c_COMP_500_01.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 232D, 470D);
 			this.c_COMP_500_01.FalseImage = new NxtControl.Drawing.ImageHolder();
 			this.c_COMP_500_01.FalseImageDisabled = new NxtControl.Drawing.ImageHolder();
 			this.c_COMP_500_01.FalseText = "Bloqueado";
@@ -661,7 +661,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Subestacao
 			// c_COMP_500_02
 			// 
 			this.c_COMP_500_02.BeginInit();
-			this.c_COMP_500_02.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 220D, 504D);
+			this.c_COMP_500_02.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 232D, 504D);
 			this.c_COMP_500_02.FalseImage = new NxtControl.Drawing.ImageHolder();
 			this.c_COMP_500_02.FalseImageDisabled = new NxtControl.Drawing.ImageHolder();
 			this.c_COMP_500_02.FalseText = "Bloqueado";
@@ -711,7 +711,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Subestacao
 			// c_UCT_200_01
 			// 
 			this.c_UCT_200_01.BeginInit();
-			this.c_UCT_200_01.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 550D, 104D);
+			this.c_UCT_200_01.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 570D, 104D);
 			this.c_UCT_200_01.FalseImage = new NxtControl.Drawing.ImageHolder();
 			this.c_UCT_200_01.FalseImageDisabled = new NxtControl.Drawing.ImageHolder();
 			this.c_UCT_200_01.FalseText = "Bloqueado";
@@ -753,7 +753,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Subestacao
 			// c_UCT_200_02
 			// 
 			this.c_UCT_200_02.BeginInit();
-			this.c_UCT_200_02.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 550D, 138D);
+			this.c_UCT_200_02.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 570D, 138D);
 			this.c_UCT_200_02.FalseImage = new NxtControl.Drawing.ImageHolder();
 			this.c_UCT_200_02.FalseImageDisabled = new NxtControl.Drawing.ImageHolder();
 			this.c_UCT_200_02.FalseText = "Bloqueado";
@@ -795,7 +795,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Subestacao
 			// c_UCT_200_03
 			// 
 			this.c_UCT_200_03.BeginInit();
-			this.c_UCT_200_03.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 550D, 172D);
+			this.c_UCT_200_03.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 570D, 172D);
 			this.c_UCT_200_03.FalseImage = new NxtControl.Drawing.ImageHolder();
 			this.c_UCT_200_03.FalseImageDisabled = new NxtControl.Drawing.ImageHolder();
 			this.c_UCT_200_03.FalseText = "Bloqueado";
@@ -845,7 +845,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Subestacao
 			// c_BS_100_01
 			// 
 			this.c_BS_100_01.BeginInit();
-			this.c_BS_100_01.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 550D, 236D);
+			this.c_BS_100_01.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 570D, 236D);
 			this.c_BS_100_01.FalseImage = new NxtControl.Drawing.ImageHolder();
 			this.c_BS_100_01.FalseImageDisabled = new NxtControl.Drawing.ImageHolder();
 			this.c_BS_100_01.FalseText = "Bloqueado";
@@ -887,7 +887,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Subestacao
 			// c_BS_100_02
 			// 
 			this.c_BS_100_02.BeginInit();
-			this.c_BS_100_02.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 550D, 270D);
+			this.c_BS_100_02.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 570D, 270D);
 			this.c_BS_100_02.FalseImage = new NxtControl.Drawing.ImageHolder();
 			this.c_BS_100_02.FalseImageDisabled = new NxtControl.Drawing.ImageHolder();
 			this.c_BS_100_02.FalseText = "Bloqueado";
@@ -929,7 +929,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Subestacao
 			// c_BS_100_03
 			// 
 			this.c_BS_100_03.BeginInit();
-			this.c_BS_100_03.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 550D, 304D);
+			this.c_BS_100_03.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 570D, 304D);
 			this.c_BS_100_03.FalseImage = new NxtControl.Drawing.ImageHolder();
 			this.c_BS_100_03.FalseImageDisabled = new NxtControl.Drawing.ImageHolder();
 			this.c_BS_100_03.FalseText = "Bloqueado";
@@ -971,7 +971,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Subestacao
 			// c_GM_100_01
 			// 
 			this.c_GM_100_01.BeginInit();
-			this.c_GM_100_01.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 550D, 338D);
+			this.c_GM_100_01.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 570D, 338D);
 			this.c_GM_100_01.FalseImage = new NxtControl.Drawing.ImageHolder();
 			this.c_GM_100_01.FalseImageDisabled = new NxtControl.Drawing.ImageHolder();
 			this.c_GM_100_01.FalseText = "Bloqueado";
@@ -1021,7 +1021,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Subestacao
 			// c_UV_700_01
 			// 
 			this.c_UV_700_01.BeginInit();
-			this.c_UV_700_01.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 550D, 402D);
+			this.c_UV_700_01.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 570D, 402D);
 			this.c_UV_700_01.FalseImage = new NxtControl.Drawing.ImageHolder();
 			this.c_UV_700_01.FalseImageDisabled = new NxtControl.Drawing.ImageHolder();
 			this.c_UV_700_01.FalseText = "Bloqueado";
@@ -1063,7 +1063,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Subestacao
 			// c_UV_700_02
 			// 
 			this.c_UV_700_02.BeginInit();
-			this.c_UV_700_02.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 550D, 436D);
+			this.c_UV_700_02.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 570D, 436D);
 			this.c_UV_700_02.FalseImage = new NxtControl.Drawing.ImageHolder();
 			this.c_UV_700_02.FalseImageDisabled = new NxtControl.Drawing.ImageHolder();
 			this.c_UV_700_02.FalseText = "Bloqueado";
@@ -1113,7 +1113,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Subestacao
 			// c_DO_800_04
 			// 
 			this.c_DO_800_04.BeginInit();
-			this.c_DO_800_04.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 550D, 500D);
+			this.c_DO_800_04.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 570D, 500D);
 			this.c_DO_800_04.FalseImage = new NxtControl.Drawing.ImageHolder();
 			this.c_DO_800_04.FalseImageDisabled = new NxtControl.Drawing.ImageHolder();
 			this.c_DO_800_04.FalseText = "Bloqueado";
@@ -1155,7 +1155,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Subestacao
 			// c_DO_800_05
 			// 
 			this.c_DO_800_05.BeginInit();
-			this.c_DO_800_05.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 550D, 534D);
+			this.c_DO_800_05.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 570D, 534D);
 			this.c_DO_800_05.FalseImage = new NxtControl.Drawing.ImageHolder();
 			this.c_DO_800_05.FalseImageDisabled = new NxtControl.Drawing.ImageHolder();
 			this.c_DO_800_05.FalseText = "Bloqueado";
@@ -1205,7 +1205,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Subestacao
 			// c_P4901
 			// 
 			this.c_P4901.BeginInit();
-			this.c_P4901.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 880D, 104D);
+			this.c_P4901.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 890D, 104D);
 			this.c_P4901.FalseImage = new NxtControl.Drawing.ImageHolder();
 			this.c_P4901.FalseImageDisabled = new NxtControl.Drawing.ImageHolder();
 			this.c_P4901.FalseText = "Bloqueado";
@@ -1247,7 +1247,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Subestacao
 			// c_P4902
 			// 
 			this.c_P4902.BeginInit();
-			this.c_P4902.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 880D, 138D);
+			this.c_P4902.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 890D, 138D);
 			this.c_P4902.FalseImage = new NxtControl.Drawing.ImageHolder();
 			this.c_P4902.FalseImageDisabled = new NxtControl.Drawing.ImageHolder();
 			this.c_P4902.FalseText = "Bloqueado";
@@ -1289,7 +1289,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Subestacao
 			// c_P4903
 			// 
 			this.c_P4903.BeginInit();
-			this.c_P4903.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 880D, 172D);
+			this.c_P4903.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 890D, 172D);
 			this.c_P4903.FalseImage = new NxtControl.Drawing.ImageHolder();
 			this.c_P4903.FalseImageDisabled = new NxtControl.Drawing.ImageHolder();
 			this.c_P4903.FalseText = "Bloqueado";
@@ -1331,7 +1331,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Subestacao
 			// c_R4005A
 			// 
 			this.c_R4005A.BeginInit();
-			this.c_R4005A.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 880D, 206D);
+			this.c_R4005A.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 890D, 206D);
 			this.c_R4005A.FalseImage = new NxtControl.Drawing.ImageHolder();
 			this.c_R4005A.FalseImageDisabled = new NxtControl.Drawing.ImageHolder();
 			this.c_R4005A.FalseText = "Bloqueado";
@@ -1373,7 +1373,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Subestacao
 			// c_R4005B
 			// 
 			this.c_R4005B.BeginInit();
-			this.c_R4005B.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 880D, 240D);
+			this.c_R4005B.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 890D, 240D);
 			this.c_R4005B.FalseImage = new NxtControl.Drawing.ImageHolder();
 			this.c_R4005B.FalseImageDisabled = new NxtControl.Drawing.ImageHolder();
 			this.c_R4005B.FalseText = "Bloqueado";
@@ -1415,7 +1415,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Subestacao
 			// c_MO_300_01
 			// 
 			this.c_MO_300_01.BeginInit();
-			this.c_MO_300_01.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 880D, 274D);
+			this.c_MO_300_01.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 890D, 274D);
 			this.c_MO_300_01.FalseImage = new NxtControl.Drawing.ImageHolder();
 			this.c_MO_300_01.FalseImageDisabled = new NxtControl.Drawing.ImageHolder();
 			this.c_MO_300_01.FalseText = "Bloqueado";
@@ -1465,7 +1465,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Subestacao
 			// c_QL_PORTARIA
 			// 
 			this.c_QL_PORTARIA.BeginInit();
-			this.c_QL_PORTARIA.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 880D, 338D);
+			this.c_QL_PORTARIA.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 890D, 338D);
 			this.c_QL_PORTARIA.FalseImage = new NxtControl.Drawing.ImageHolder();
 			this.c_QL_PORTARIA.FalseImageDisabled = new NxtControl.Drawing.ImageHolder();
 			this.c_QL_PORTARIA.FalseText = "Bloqueado";
@@ -1507,7 +1507,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Subestacao
 			// c_QL_ADM
 			// 
 			this.c_QL_ADM.BeginInit();
-			this.c_QL_ADM.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 880D, 372D);
+			this.c_QL_ADM.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 890D, 372D);
 			this.c_QL_ADM.FalseImage = new NxtControl.Drawing.ImageHolder();
 			this.c_QL_ADM.FalseImageDisabled = new NxtControl.Drawing.ImageHolder();
 			this.c_QL_ADM.FalseText = "Bloqueado";
@@ -1549,7 +1549,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Subestacao
 			// c_QL_LODO
 			// 
 			this.c_QL_LODO.BeginInit();
-			this.c_QL_LODO.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 880D, 406D);
+			this.c_QL_LODO.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 890D, 406D);
 			this.c_QL_LODO.FalseImage = new NxtControl.Drawing.ImageHolder();
 			this.c_QL_LODO.FalseImageDisabled = new NxtControl.Drawing.ImageHolder();
 			this.c_QL_LODO.FalseText = "Bloqueado";
@@ -1591,7 +1591,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Subestacao
 			// c_QLSL
 			// 
 			this.c_QLSL.BeginInit();
-			this.c_QLSL.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 880D, 440D);
+			this.c_QLSL.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 890D, 440D);
 			this.c_QLSL.FalseImage = new NxtControl.Drawing.ImageHolder();
 			this.c_QLSL.FalseImageDisabled = new NxtControl.Drawing.ImageHolder();
 			this.c_QLSL.FalseText = "Bloqueado";
@@ -1633,7 +1633,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Subestacao
 			// c_QL_ILUMINACAO
 			// 
 			this.c_QL_ILUMINACAO.BeginInit();
-			this.c_QL_ILUMINACAO.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 880D, 474D);
+			this.c_QL_ILUMINACAO.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 890D, 474D);
 			this.c_QL_ILUMINACAO.FalseImage = new NxtControl.Drawing.ImageHolder();
 			this.c_QL_ILUMINACAO.FalseImageDisabled = new NxtControl.Drawing.ImageHolder();
 			this.c_QL_ILUMINACAO.FalseText = "Bloqueado";

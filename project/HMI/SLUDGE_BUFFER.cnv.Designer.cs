@@ -26,6 +26,7 @@ namespace HMI.Main.Canvases
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.btnAckNereda = new NxtControl.GuiFramework.DrawnButton();
 			this.polygon7 = new NxtControl.GuiFramework.Polygon();
 			this.HeartBeat = new SE.Nereda.Symbols.HeartBeat.sDefault();
 			this.Mode = new SE.Nereda.Symbols.Mode.ReactorMode();
@@ -192,6 +193,19 @@ namespace HMI.Main.Canvases
 			// 
 			this.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(1366D)), ((float)(698D)));
 			this.Brush = new NxtControl.Drawing.Brush("CanvasBrush");
+			// 
+			// btnAckNereda
+			// 
+			this.btnAckNereda.Bounds = new NxtControl.Drawing.RectF(((float)(212D)), ((float)(12D)), ((float)(200D)), ((float)(32D)));
+			this.btnAckNereda.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208))));
+			this.btnAckNereda.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+			this.btnAckNereda.InnerBorderColor = new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208)));
+			this.btnAckNereda.Name = "btnAckNereda";
+			this.btnAckNereda.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(160)), ((byte)(160)), ((byte)(160))), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.btnAckNereda.Radius = 2D;
+			this.btnAckNereda.Text = "Reconhecer alarmes";
+			this.btnAckNereda.Use3DEffect = false;
+			this.btnAckNereda.Click += new System.EventHandler(this.BtnAckNeredaClick);
 			this.Shapes.AddRange(new System.ComponentModel.IComponent[] {
 			this.polygon7,
 			this.HeartBeat,
@@ -206,6 +220,7 @@ namespace HMI.Main.Canvases
 			this.sBarPvSpOpVert1,
 			this.sDefault2,
 			this.sDisplayPv21,
+			this.btnAckNereda,
 			this.sDisplayPv22});
 			this.Size = new System.Drawing.Size(1366, 698);
 
@@ -224,6 +239,7 @@ namespace HMI.Main.Canvases
 		private SE.App2CommonProcess.Symbols.Autotune.sDefault sDefault2;
 		private SE.Nereda.Symbols.AnalogInput.sDisplayPv2 sDisplayPv21;
 		private SE.Nereda.Symbols.AnalogInput.sDisplayPv2 sDisplayPv22;
+		private NxtControl.GuiFramework.DrawnButton btnAckNereda;
 		#endregion
 	}
 }

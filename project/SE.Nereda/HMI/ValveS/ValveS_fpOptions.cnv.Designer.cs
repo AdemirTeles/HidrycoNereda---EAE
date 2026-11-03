@@ -37,7 +37,7 @@ namespace SE.Nereda.Faceplates.ValveS
 			// 
 			this.interlock.BeginInit();
 			this.interlock.DefaultInstanceName = null;
-			this.interlock.DesignMatrix = new NxtControl.Drawing.Matrix2D(1.8181818181818181D, 0D, 0D, 1.8181818181818179D, 8D, 8D);
+			this.interlock.DesignMatrix = new NxtControl.Drawing.Matrix2D(1.8181818181818181D, 0D, 0D, 1.8181818181818179D, 24D, 8D);
 			this.interlock.Instancelayer = SE.App2Base.SupportClasses.InstanceLayer.Base;
 			this.interlock.MyTagDisplayName = null;
 			this.interlock.Name = "interlock";
@@ -50,7 +50,7 @@ namespace SE.Nereda.Faceplates.ValveS
 			// 
 			this.permissive.BeginInit();
 			this.permissive.DefaultInstanceName = null;
-			this.permissive.DesignMatrix = new NxtControl.Drawing.Matrix2D(1.8181818181818183D, 0D, 0D, 1.8181818181818183D, 8D, 56D);
+			this.permissive.DesignMatrix = new NxtControl.Drawing.Matrix2D(1.8181818181818183D, 0D, 0D, 1.8181818181818183D, 24D, 56D);
 			this.permissive.Instancelayer = SE.App2Base.SupportClasses.InstanceLayer.Base;
 			this.permissive.MyTagDisplayName = null;
 			this.permissive.Name = "permissive";
@@ -61,7 +61,7 @@ namespace SE.Nereda.Faceplates.ValveS
 			// 
 			// OpenMotFp
 			// 
-			this.OpenMotFp.Bounds = new NxtControl.Drawing.RectF(((float)(72D)), ((float)(88D)), ((float)(88D)), ((float)(56D)));
+			this.OpenMotFp.Bounds = new NxtControl.Drawing.RectF(((float)(104D)), ((float)(88D)), ((float)(104D)), ((float)(56D)));
 			this.OpenMotFp.Brush = new NxtControl.Drawing.Brush("ButtonBrush");
 			this.OpenMotFp.Font = new NxtControl.Drawing.Font("ButtonFont");
 			this.OpenMotFp.InnerBorderColor = new NxtControl.Drawing.Color("ButtonInnerBorderColor");
@@ -78,7 +78,7 @@ namespace SE.Nereda.Faceplates.ValveS
 			// 
 			this.maintenance.BeginInit();
 			this.maintenance.DefaultInstanceName = null;
-			this.maintenance.DesignMatrix = new NxtControl.Drawing.Matrix2D(2D, 0D, 0D, 2D, 8D, 104D);
+			this.maintenance.DesignMatrix = new NxtControl.Drawing.Matrix2D(2D, 0D, 0D, 2D, 24D, 104D);
 			this.maintenance.Instancelayer = SE.App2Base.SupportClasses.InstanceLayer.Base;
 			this.maintenance.MyTagDisplayName = null;
 			this.maintenance.Name = "maintenance";
@@ -89,7 +89,7 @@ namespace SE.Nereda.Faceplates.ValveS
 			// 
 			// RearmBtn
 			// 
-			this.RearmBtn.Bounds = new NxtControl.Drawing.RectF(((float)(72D)), ((float)(8D)), ((float)(88D)), ((float)(56D)));
+			this.RearmBtn.Bounds = new NxtControl.Drawing.RectF(((float)(104D)), ((float)(8D)), ((float)(104D)), ((float)(56D)));
 			this.RearmBtn.Brush = new NxtControl.Drawing.Brush("ButtonBrush");
 			this.RearmBtn.Font = new NxtControl.Drawing.Font("ButtonFont");
 			this.RearmBtn.InnerBorderColor = new NxtControl.Drawing.Color("ButtonInnerBorderColor");
@@ -116,7 +116,7 @@ namespace SE.Nereda.Faceplates.ValveS
 			// 
 			// fpOptions
 			// 
-			this.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(168D)), ((float)(152D)));
+			this.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(216D)), ((float)(152D)));
 			this.Brush = new NxtControl.Drawing.Brush("FaceplateBrush");
 			this.Shapes.AddRange(new System.ComponentModel.IComponent[] {
 			this.Base,
@@ -125,7 +125,7 @@ namespace SE.Nereda.Faceplates.ValveS
 			this.OpenMotFp,
 			this.maintenance,
 			this.RearmBtn});
-			this.Size = new System.Drawing.Size(168, 152);
+			this.Size = new System.Drawing.Size(216, 152);
 			this.Title = "Options";
 
 		}

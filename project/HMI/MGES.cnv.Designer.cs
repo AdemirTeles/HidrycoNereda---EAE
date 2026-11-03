@@ -23,6 +23,7 @@ namespace HMI.Main.Canvases
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.btnResetGeral = new NxtControl.GuiFramework.DrawnButton();
 			this.fundo = new NxtControl.GuiFramework.Rectangle();
 			this.cardMGE_AGUA_REUSO = new NxtControl.GuiFramework.Rectangle();
 			this.tMGE_AGUA_REUSO = new NxtControl.GuiFramework.FreeText();
@@ -154,7 +155,7 @@ namespace HMI.Main.Canvases
 			// 
 			// cardMGE_EEE_BRUTO
 			// 
-			this.cardMGE_EEE_BRUTO.Bounds = new NxtControl.Drawing.RectF(((float)(12D)), ((float)(358D)), ((float)(436D)), ((float)(326D)));
+			this.cardMGE_EEE_BRUTO.Bounds = new NxtControl.Drawing.RectF(((float)(12D)), ((float)(358D)), ((float)(436D)), ((float)(282D)));
 			this.cardMGE_EEE_BRUTO.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(240)), ((byte)(241)), ((byte)(242))));
 			this.cardMGE_EEE_BRUTO.Name = "cardMGE_EEE_BRUTO";
 			this.cardMGE_EEE_BRUTO.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(204)), ((byte)(206)), ((byte)(209))), 1F, NxtControl.Drawing.DashStyle.Solid);
@@ -186,7 +187,7 @@ namespace HMI.Main.Canvases
 			// 
 			// cardMGE_LODO
 			// 
-			this.cardMGE_LODO.Bounds = new NxtControl.Drawing.RectF(((float)(461D)), ((float)(358D)), ((float)(436D)), ((float)(326D)));
+			this.cardMGE_LODO.Bounds = new NxtControl.Drawing.RectF(((float)(461D)), ((float)(358D)), ((float)(436D)), ((float)(282D)));
 			this.cardMGE_LODO.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(240)), ((byte)(241)), ((byte)(242))));
 			this.cardMGE_LODO.Name = "cardMGE_LODO";
 			this.cardMGE_LODO.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(204)), ((byte)(206)), ((byte)(209))), 1F, NxtControl.Drawing.DashStyle.Solid);
@@ -218,7 +219,7 @@ namespace HMI.Main.Canvases
 			// 
 			// cardMGE_DESINFECCAO
 			// 
-			this.cardMGE_DESINFECCAO.Bounds = new NxtControl.Drawing.RectF(((float)(910D)), ((float)(358D)), ((float)(436D)), ((float)(326D)));
+			this.cardMGE_DESINFECCAO.Bounds = new NxtControl.Drawing.RectF(((float)(910D)), ((float)(358D)), ((float)(436D)), ((float)(282D)));
 			this.cardMGE_DESINFECCAO.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(240)), ((byte)(241)), ((byte)(242))));
 			this.cardMGE_DESINFECCAO.Name = "cardMGE_DESINFECCAO";
 			this.cardMGE_DESINFECCAO.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(204)), ((byte)(206)), ((byte)(209))), 1F, NxtControl.Drawing.DashStyle.Solid);
@@ -253,6 +254,19 @@ namespace HMI.Main.Canvases
 			this.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(1366D)), ((float)(698D)));
 			this.Brush = new NxtControl.Drawing.Brush("CanvasBrush");
 			this.Name = "MGES";
+			// 
+			// btnResetGeral
+			// 
+			this.btnResetGeral.Bounds = new NxtControl.Drawing.RectF(((float)(6D)), ((float)(662D)), ((float)(126D)), ((float)(30D)));
+			this.btnResetGeral.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208))));
+			this.btnResetGeral.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+			this.btnResetGeral.InnerBorderColor = new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208)));
+			this.btnResetGeral.Name = "btnResetGeral";
+			this.btnResetGeral.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(160)), ((byte)(160)), ((byte)(160))), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.btnResetGeral.Radius = 2D;
+			this.btnResetGeral.Text = "Reset geral";
+			this.btnResetGeral.Use3DEffect = false;
+			this.btnResetGeral.Click += new System.EventHandler(this.BtnResetGeralClick);
 			this.Shapes.AddRange(new System.ComponentModel.IComponent[] {
 			this.fundo,
 			this.cardMGE_AGUA_REUSO,
@@ -278,7 +292,8 @@ namespace HMI.Main.Canvases
 			this.cardMGE_DESINFECCAO,
 			this.tMGE_DESINFECCAO,
 			this.sMGE_DESINFECCAO,
-			this.mgeMGE_DESINFECCAO});
+			this.mgeMGE_DESINFECCAO,
+			this.btnResetGeral});
 			this.Size = new System.Drawing.Size(1366, 698);
 
 		}
@@ -307,6 +322,7 @@ namespace HMI.Main.Canvases
 		private NxtControl.GuiFramework.FreeText tMGE_DESINFECCAO;
 		private NxtControl.GuiFramework.FreeText sMGE_DESINFECCAO;
 		private Hidryco.HidrycoLib.Symbols.MGE_Generico.sDefault mgeMGE_DESINFECCAO;
+		private NxtControl.GuiFramework.DrawnButton btnResetGeral;
 		#endregion
 	}
 }

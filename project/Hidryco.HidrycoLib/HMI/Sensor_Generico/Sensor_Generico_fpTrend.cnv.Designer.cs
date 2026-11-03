@@ -1,6 +1,6 @@
 /*
  * Hidryco - Sensor_Generico - fpTrend
- * Grafico do valor (serie STS_VALOR, como o fpTrend do AnalogInput da Schneider). ISA-101: pena escura sobre fundo neutro.
+ * Grafico do valor (serie STS_SENSOR, como o fpTrend do AnalogInput da Schneider). ISA-101: pena escura sobre fundo neutro.
  */
 using System;
 using System.ComponentModel;
@@ -26,7 +26,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_Generico
 			this.trendControl1.MinimalSize = new System.Drawing.Size(60, 60);
 			this.trendControl1.Name = "trendControl1";
 			this.trendControl1.ParentSymbol = this;
-			this.trendControl1.Series.Add(new NxtControl.GuiFramework.TrendFastLine("STS_VALOR", new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), false, 0D, 100D, "Left", "", "", 2, NxtControl.Drawing.DashStyle.Solid, true, "", 100000));
+			this.trendControl1.Series.Add(new NxtControl.GuiFramework.TrendFastLine("STS_SENSOR", new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), false, 0D, 100D, "Left", "", "", 2, NxtControl.Drawing.DashStyle.Solid, true, "", 100000));
 			this.trendControl1.Size = new System.Drawing.Size(693, 393);
 			this.trendControl1.Text = "trendControl1";
 			this.trendControl1.TimeScale = new NxtControl.GuiFramework.TrendTimeScale(true, "HH:mm", false, true);

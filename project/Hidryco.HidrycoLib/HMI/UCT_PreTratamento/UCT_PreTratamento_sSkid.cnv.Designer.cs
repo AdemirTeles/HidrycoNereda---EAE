@@ -96,7 +96,6 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			this.tbRecG = new NxtControl.GuiFramework.Pipe();
 			this.cacamba = new NxtControl.GuiFramework.Rectangle();
 			this.rCacamba = new NxtControl.GuiFramework.FreeText();
-			this.Peneira = new Hidryco.HidrycoLib.Symbols.UCT_Equipamento.sPeneira();
 			this.rNivel = new NxtControl.GuiFramework.FreeText();
 			this.vNivel = new System.HMI.Symbols.Base.Label<float>();
 			this.Raspador = new Hidryco.HidrycoLib.Symbols.UCT_Equipamento.sRaspador();
@@ -266,7 +265,7 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			this.Bomba1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 40D, 40D);
 			this.Bomba1.Name = "Bomba1";
 			this.Bomba1.SecurityToken = ((uint)(4294967295u));
-			this.Bomba1.TagName = "Bomba1";
+			this.Bomba1.TagName = "Bomba_Higienizacao1";
 			this.Bomba1.EndInit();
 			// 
 			// Bomba2
@@ -275,7 +274,7 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			this.Bomba2.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 40D, 170D);
 			this.Bomba2.Name = "Bomba2";
 			this.Bomba2.SecurityToken = ((uint)(4294967295u));
-			this.Bomba2.TagName = "Bomba2";
+			this.Bomba2.TagName = "Bomba_Higienizacao2";
 			this.Bomba2.EndInit();
 			// 
 			// Valvula1
@@ -284,7 +283,7 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			this.Valvula1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 180D, 11D);
 			this.Valvula1.Name = "Valvula1";
 			this.Valvula1.SecurityToken = ((uint)(4294967295u));
-			this.Valvula1.TagName = "Valvula1";
+			this.Valvula1.TagName = "Valvula_Higienizacao1";
 			this.Valvula1.EndInit();
 			// 
 			// Valvula2
@@ -293,7 +292,7 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			this.Valvula2.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 180D, 141D);
 			this.Valvula2.Name = "Valvula2";
 			this.Valvula2.SecurityToken = ((uint)(4294967295u));
-			this.Valvula2.TagName = "Valvula2";
+			this.Valvula2.TagName = "Valvula_Higienizacao2";
 			this.Valvula2.EndInit();
 			// 
 			// rSel
@@ -826,15 +825,6 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			this.rCacamba.Name = "rCacamba";
 			this.rCacamba.Text = "Caçamba";
 			// 
-			// Peneira
-			// 
-			this.Peneira.BeginInit();
-			this.Peneira.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 450D, 90D);
-			this.Peneira.Name = "Peneira";
-			this.Peneira.SecurityToken = ((uint)(4294967295u));
-			this.Peneira.TagName = "Peneira";
-			this.Peneira.EndInit();
-			// 
 			// rNivel
 			// 
 			this.rNivel.Color = new NxtControl.Drawing.Color(((byte)(64)), ((byte)(64)), ((byte)(64)));
@@ -872,7 +862,7 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			this.Raspador.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 560D, 262D);
 			this.Raspador.Name = "Raspador";
 			this.Raspador.SecurityToken = ((uint)(4294967295u));
-			this.Raspador.TagName = "Raspador";
+			this.Raspador.TagName = "Raspador_Gordura1";
 			this.Raspador.EndInit();
 			// 
 			// Rosca1
@@ -881,7 +871,7 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			this.Rosca1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 480D, 410D);
 			this.Rosca1.Name = "Rosca1";
 			this.Rosca1.SecurityToken = ((uint)(4294967295u));
-			this.Rosca1.TagName = "Rosca1";
+			this.Rosca1.TagName = "Rosca1Horizontal";
 			this.Rosca1.EndInit();
 			// 
 			// Rosca2
@@ -890,7 +880,7 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			this.Rosca2.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 870D, 230D);
 			this.Rosca2.Name = "Rosca2";
 			this.Rosca2.SecurityToken = ((uint)(4294967295u));
-			this.Rosca2.TagName = "Rosca2";
+			this.Rosca2.TagName = "Rosca2Inclinada";
 			this.Rosca2.EndInit();
 			// 
 			// Compressor
@@ -899,7 +889,7 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			this.Compressor.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 640D, 540D);
 			this.Compressor.Name = "Compressor";
 			this.Compressor.SecurityToken = ((uint)(4294967295u));
-			this.Compressor.TagName = "Compressor";
+			this.Compressor.TagName = "Compressor1";
 			this.Compressor.EndInit();
 			// 
 			// tqGordura
@@ -1690,7 +1680,6 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			this.tbRecG,
 			this.cacamba,
 			this.rCacamba,
-			this.Peneira,
 			this.rNivel,
 			this.vNivel,
 			this.Raspador,
@@ -1821,7 +1810,6 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 		private NxtControl.GuiFramework.Pipe tbRecG;
 		private NxtControl.GuiFramework.Rectangle cacamba;
 		private NxtControl.GuiFramework.FreeText rCacamba;
-		private Hidryco.HidrycoLib.Symbols.UCT_Equipamento.sPeneira Peneira;
 		private NxtControl.GuiFramework.FreeText rNivel;
 		private System.HMI.Symbols.Base.Label<System.Single> vNivel;
 		private Hidryco.HidrycoLib.Symbols.UCT_Equipamento.sRaspador Raspador;

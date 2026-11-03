@@ -2,7 +2,7 @@
 <!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
 <FBType GUID="5eba5487-330f-488a-a65d-a474350ca6ad" Name="E_DELAY_V_D_B" Comment="Basic Function Block Type" Namespace="SE.Nereda">
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="6/13/2026" Remarks="Template" />
+  <VersionInfo Organization="Schneider Electric" Version="0.4" Author=" " Date="30/10/2026" Remarks="0.4: conta desde a entrada no passo (Step Time inclui a partida); com PhState segue contando ate o STOP (fase parada). 0.3: conta tambem em Stopping/Aborting. 0.2: entrada PH/PhState - com o estado da fase, conta so em Starting/Running e segue contando depois do SP ate o STOP (DONE no SP como antes); sem PhState, igual a 0.1. 0.1: STOP aceito tambem em START_D_C (antes do 1o tique de 1 s) - antes ele se perdia e o tempo seguia contando com o passo ja encerrado (S3/S4 da emergencia contando na aeracao)." />
   <InterfaceList>
     <EventInputs>
       <Event ID="3FBE532C44B8CCDA" Name="START">
@@ -14,6 +14,9 @@
         <With Var="Zero" />
       </Event>
       <Event ID="C6789781DF73C531" Name="FB_D" />
+      <Event ID="7DFA31E6EBF3C631" Name="PH" Comment="Estado da fase do passo">
+        <With Var="PhState" />
+      </Event>
       <Event ID="40D4D4E019F2B1EF" Name="FB_C" />
     </EventInputs>
     <EventOutputs>
@@ -30,6 +33,7 @@
     <InputVars>
       <VarDeclaration ID="FE7BD80F3F8D955F" Name="Enable" Type="BOOL" />
       <VarDeclaration ID="EA14E66D3494A031" Name="Zero" Type="BOOL" />
+      <VarDeclaration ID="DEC3CFB3579DB653" Name="PhState" Type="STRING[50]" Comment="Estado da fase; vazio = conta desde o START e congela no SP" />
     </InputVars>
     <OutputVars>
       <VarDeclaration ID="3BF3F8B307AD5850" Name="Done" Type="BOOL" />
@@ -39,6 +43,9 @@
   </InterfaceList>
   <BasicFB ID="3404ed44-6555-4073-aaae-4eb806ea4801">
     <Attribute Name="FBType.Basic.Algorithm.Order" Value="ResetDone,DurPv,Done" />
+    <InternalVars>
+      <VarDeclaration ID="DCFDAE12DCFBC0B1" Name="PhaseMode" Type="BOOL" Comment="PhState ligado: conta so com a fase em Starting/Running e segue depois do SP" />
+    </InternalVars>
     <ECC>
       <ECState Name="START" Comment="Initial State" x="1376.275" y="361.8562" />
       <ECState Name="START_D_C" x="1376" y="783.1113">
@@ -55,6 +62,9 @@
         <ECAction Algorithm="Done" Output="DONE" />
         <ECAction Output="STOP_D_C" />
       </ECState>
+      <ECState Name="DoneCount" Comment="SP atingido; o contador segue ate o STOP" x="3000" y="1984">
+        <ECAction Algorithm="Done" Output="DONE" />
+      </ECState>
       <ECState Name="Reset" x="2325" y="358.5714">
         <ECAction Algorithm="ResetDone" Output="DONE" />
         <ECAction Output="DUR_PV" />
@@ -63,20 +73,18 @@
       <ECTransition Source="START" Destination="START_D_C" Condition="START AND Enable" x="1375.194" y="567.2966">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="343.6798,128.3486,343.8232,154.4352" />
       </ECTransition>
-      <ECTransition Source="START_D_C" Destination="ResetDone" Condition="FB_C" x="1376.629" y="965.0004">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="344.5175,228.1445,344.1588,252.0594" />
-      </ECTransition>
-      <ECTransition Source="ResetDone" Destination="DISPLAY_PV" Condition="1" x="1374.608" y="1366.745">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="343.7862,330.3932,343.954,353.3628" />
-      </ECTransition>
       <ECTransition Source="DISPLAY_PV" Destination="Reset" Condition="STOP" x="2418.009" y="1223.502">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="570.0182,318.75,717.5182,337.5" />
       </ECTransition>
-      <ECTransition Source="DISPLAY_PV" Destination="Done" Condition="FB_D OR Zero" x="1369.475" y="1760.682">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="342.5273,425.872,342.3306,453.0083" />
+      <ECTransition Source="START_D_C" Destination="ResetDone" Condition="FB_C" x="1376.629" y="965.0004">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="344.5175,228.1445,344.1588,252.0594" />
       </ECTransition>
-      <ECTransition Source="DISPLAY_PV" Destination="DISPLAY_PV" Condition="FB_C" x="980.5481" y="1570.695">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="223.3333,439.4445,225,348.6111" />
+      <ECTransition Source="START_D_C" Destination="Reset" Condition="STOP" x="1900" y="700" />
+      <ECTransition Source="ResetDone" Destination="DISPLAY_PV" Condition="1" x="1374.608" y="1366.745">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="343.7862,330.3932,343.954,353.3628" />
+      </ECTransition>
+      <ECTransition Source="DISPLAY_PV" Destination="Done" Condition="(FB_D OR Zero) AND&#xD;&#xA;NOT PhaseMode" x="1369.475" y="1760.682">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="342.5273,425.872,342.3306,453.0083" />
       </ECTransition>
       <ECTransition Source="Done" Destination="START" Condition="1" x="667.2229" y="1200.322">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="113.3333,500.2778,122.5,103.6111" />
@@ -87,16 +95,32 @@
       <ECTransition Source="Reset" Destination="START" Condition="1" x="1859.771" y="443.6174">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="494.45,114.9407,435.4787,115.1449" />
       </ECTransition>
+      <ECTransition Source="DISPLAY_PV" Destination="DISPLAY_PV" Condition="FB_C" x="980.5481" y="1570.695">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="223.3333,439.4445,225,348.6111" />
+      </ECTransition>
+      <ECTransition Source="DISPLAY_PV" Destination="DoneCount" Condition="(FB_D OR Zero) AND&#xD;&#xA;PhaseMode AND NOT Done" x="2250" y="1600">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="500,375,662.5,425" />
+      </ECTransition>
+      <ECTransition Source="DoneCount" Destination="Reset" Condition="STOP" x="2950" y="1100">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="762.5,325,675,150" />
+      </ECTransition>
+      <ECTransition Source="DoneCount" Destination="DISPLAY_PV" Condition="FB_C" x="2250" y="1950">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="662.5,520,475,475" />
+      </ECTransition>
     </ECC>
     <Algorithm Name="ResetDone">
       <ST><![CDATA[;
 Done := FALSE;
 DurPv := T#0s;
 FB_C := FALSE;
-Started := FALSE;]]></ST>
+Started := FALSE;
+PhaseMode := PhState <> '';]]></ST>
     </Algorithm>
     <Algorithm Name="DurPv">
       <ST><![CDATA[;
+PhaseMode := PhState <> '';
+(* Conta desde a entrada no passo (inclui a partida da fase); com o estado da fase ligado segue contando
+   depois do SP ate o STOP, que so vem com a fase parada *)
 DurPv := DurPv + T#1s;
 Started := TRUE;]]></ST>
     </Algorithm>

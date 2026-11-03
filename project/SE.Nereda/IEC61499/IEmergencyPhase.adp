@@ -2,42 +2,35 @@
 <!DOCTYPE AdapterType SYSTEM "../LibraryElement.dtd">
 <AdapterType GUID="aa436a7d-2ed3-49a6-bf58-847055ae7ede" Name="IEmergencyPhase" Comment="Adapter Interface" Namespace="SE.Nereda">
   <Identification Standard="61499-1" />
-  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="7/6/2026" />
+  <VersionInfo Organization="Schneider Electric" Version="0.2" Author=" " Date="29/10/2026" Remarks="0.1: AerateAborted (fase Aerate abortada) para a receita de emergencia. 0.2: XInterlocked (sem uso) -&gt; XState (estado da fase) e evento PHASE_STATE, para o contador dos passos." />
   <InterfaceList>
     <EventInputs>
       <Event ID="3CBA18632C5993F7" Name="FEED_RDY_ILCK">
         <With Var="FeedReady" />
         <With Var="FeedRun" />
-        <With Var="FeedStarted" />
-        <With Var="FeedStopped" />
-        <With Var="FeedAborted" />
-        <With Var="FeedInterlocked" />
       </Event>
       <Event ID="B9A3DD1A626C862D" Name="AERATION_RDY_ILCK">
         <With Var="AerateReady" />
-        <With Var="AerateInterlocked" />
         <With Var="AerateRun" />
+        <With Var="AerateAborted" />
       </Event>
       <Event ID="4DCB92F6993C5EE1" Name="SD_RDY_ILCK">
         <With Var="SDReady" />
-        <With Var="SDInterlocked" />
         <With Var="SDRun" />
+        <With Var="SDStopping" />
+        <With Var="SDAborted" />
       </Event>
       <Event ID="CF95EBECB4A2EBBE" Name="LL_RDY_ILCK">
         <With Var="LLReady" />
-        <With Var="LLInterlocked" />
       </Event>
       <Event ID="3F1D0A688A5176FD" Name="V_AER_RDY_ILCK">
         <With Var="VentAerateReady" />
-        <With Var="VentAerateInterlocked" />
       </Event>
       <Event ID="2E6F627FE71D38B1" Name="V_SLD_RDY_ILCK">
         <With Var="VentSludgeReady" />
-        <With Var="VentSludgeInterlocked" />
       </Event>
       <Event ID="B334EFD88038E789" Name="W_RDY_ILCK">
         <With Var="WReady" />
-        <With Var="WInterlocked" />
       </Event>
       <Event ID="1F4F3B9CDE5DCB1C" Name="L1">
         <With Var="L1v" />
@@ -47,6 +40,18 @@
       </Event>
       <Event ID="2DDA8AB533D7441D" Name="IFB_LVL">
         <With Var="InfluentBufferLevelReached" />
+      </Event>
+      <Event ID="423C760A7E390A03" Name="R_AV">
+        <With Var="ReactorAvailable" />
+      </Event>
+      <Event ID="27FAE745C524EBCD" Name="PHASE_STATE" Comment="Mudanca de estado de qualquer fase (contador dos passos da emergencia)">
+        <With Var="FeedState" />
+        <With Var="AerateState" />
+        <With Var="SDState" />
+        <With Var="LLState" />
+        <With Var="VentAerationGridState" />
+        <With Var="VentSludgeGridState" />
+        <With Var="WaitState" />
       </Event>
     </EventInputs>
     <EventOutputs>
@@ -102,27 +107,28 @@
     <InputVars>
       <VarDeclaration ID="599667ECF678E518" Name="FeedReady" Type="BOOL" />
       <VarDeclaration ID="F208B10244BCFEF2" Name="FeedRun" Type="BOOL" />
-      <VarDeclaration ID="D62F1904A2304A82" Name="FeedStarted" Type="BOOL" />
-      <VarDeclaration ID="EDD981DC30DF57BC" Name="FeedStopped" Type="BOOL" />
-      <VarDeclaration ID="DA119668EC2B3E62" Name="FeedAborted" Type="BOOL" />
-      <VarDeclaration ID="4F5ECA9F9BF691B9" Name="FeedInterlocked" Type="BOOL" />
+      <VarDeclaration ID="3A105CF8591A3B4A" Name="FeedState" Type="STRING[50]" Comment="Estado da fase (Phase.State)" />
       <VarDeclaration ID="656FC0E59D395E4C" Name="AerateReady" Type="BOOL" />
       <VarDeclaration ID="A63167A113600EB8" Name="AerateRun" Type="BOOL" />
-      <VarDeclaration ID="3EE993A4C10CAFA0" Name="AerateInterlocked" Type="BOOL" />
+      <VarDeclaration ID="1D41180E6BEABB84" Name="AerateState" Type="STRING[50]" Comment="Estado da fase (Phase.State)" />
+      <VarDeclaration ID="DE5DEF6F279D1DB2" Name="AerateAborted" Type="BOOL" Comment="Fase Aerate abortada (encerra o S5 da receita de emergencia)" />
       <VarDeclaration ID="9CFBB312DE29B9C4" Name="SDReady" Type="BOOL" />
       <VarDeclaration ID="28136BA3C9D3697F" Name="SDRun" Type="BOOL" />
-      <VarDeclaration ID="9D8612C8A748A8DE" Name="SDInterlocked" Type="BOOL" />
+      <VarDeclaration ID="7D771324D6C25283" Name="SDStopping" Type="BOOL" />
+      <VarDeclaration ID="8B042E931163B61F" Name="SDAborted" Type="BOOL" />
+      <VarDeclaration ID="64A740ED538C4B9B" Name="SDState" Type="STRING[50]" Comment="Estado da fase (Phase.State)" />
       <VarDeclaration ID="A1460632301E8B7F" Name="LLReady" Type="BOOL" />
-      <VarDeclaration ID="9FAB21A852151825" Name="LLInterlocked" Type="BOOL" />
+      <VarDeclaration ID="560E73BEB3AC34E7" Name="LLState" Type="STRING[50]" Comment="Estado da fase (Phase.State)" />
       <VarDeclaration ID="E996774D431E1B79" Name="VentAerateReady" Type="BOOL" />
-      <VarDeclaration ID="6B3CB5C4C50BE958" Name="VentAerateInterlocked" Type="BOOL" />
+      <VarDeclaration ID="F76A95D4365E942C" Name="VentAerationGridState" Type="STRING[50]" Comment="Estado da fase (Phase.State)" />
       <VarDeclaration ID="800D089965342DF6" Name="VentSludgeReady" Type="BOOL" />
-      <VarDeclaration ID="6531F3B6F766BAF5" Name="VentSludgeInterlocked" Type="BOOL" />
+      <VarDeclaration ID="1B1E58279B462F55" Name="VentSludgeGridState" Type="STRING[50]" Comment="Estado da fase (Phase.State)" />
       <VarDeclaration ID="A92252B4F4DF917A" Name="WReady" Type="BOOL" />
-      <VarDeclaration ID="F87C7AE958A99541" Name="WInterlocked" Type="BOOL" />
+      <VarDeclaration ID="E33DF607900BF079" Name="WaitState" Type="STRING[50]" Comment="Estado da fase (Phase.State)" />
       <VarDeclaration ID="579DEB3758BDB938" Name="L1v" Type="BOOL" />
       <VarDeclaration ID="1156E288C0C38120" Name="L2v" Type="BOOL" />
       <VarDeclaration ID="C54C3886CAD71D0C" Name="InfluentBufferLevelReached" Type="BOOL" />
+      <VarDeclaration ID="F1682C43F359618E" Name="ReactorAvailable" Type="BOOL" />
     </InputVars>
     <OutputVars>
       <VarDeclaration ID="8B7B31E6EA54014D" Name="CmdFeed" Type="BOOL" />

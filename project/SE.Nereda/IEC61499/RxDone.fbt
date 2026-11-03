@@ -18,6 +18,13 @@
         <With Var="PositionR4" />
         <With Var="PositionR5" />
         <With Var="PositionR6" />
+        <With Var="CurrStepR1" />
+        <With Var="CurrStepR2" />
+        <With Var="CurrStepR3" />
+        <With Var="CurrStepR4" />
+        <With Var="CurrStepR5" />
+        <With Var="CurrStepR6" />
+        <With Var="EmergencyON" />
       </Event>
     </EventInputs>
     <EventOutputs>
@@ -43,6 +50,13 @@
       <VarDeclaration ID="EE8CD69E0821CD9B" Name="PositionR4" Type="INT" />
       <VarDeclaration ID="F419CEC147F957E5" Name="PositionR5" Type="INT" />
       <VarDeclaration ID="D6B3B13ABFD248A5" Name="PositionR6" Type="INT" />
+      <VarDeclaration ID="2F78AB97507FA8BD" Name="CurrStepR1" Type="INT" />
+      <VarDeclaration ID="84A6547420DC5DD1" Name="CurrStepR2" Type="INT" />
+      <VarDeclaration ID="E1CC11FEEDB5CC68" Name="CurrStepR3" Type="INT" />
+      <VarDeclaration ID="F08FA01C0517B9B3" Name="CurrStepR4" Type="INT" />
+      <VarDeclaration ID="E1D876101716B29D" Name="CurrStepR5" Type="INT" />
+      <VarDeclaration ID="DFBECA907D928C9A" Name="CurrStepR6" Type="INT" />
+      <VarDeclaration ID="393CF4B8B79F160C" Name="EmergencyON" Type="BOOL" />
     </InputVars>
     <OutputVars>
       <VarDeclaration ID="C98FDEA92D397108" Name="oDoneNFH_R1" Type="BOOL" />
@@ -55,6 +69,9 @@
   </InterfaceList>
   <BasicFB ID="ff5cb38e-92a9-41c1-bb01-b716cd3464cd">
     <Attribute Name="FBType.Basic.Algorithm.Order" Value="REQ" />
+    <InternalVars>
+      <VarDeclaration ID="01668EC10D6A1B4F" Name="i" Type="INT" />
+    </InternalVars>
     <ECC>
       <ECState Name="START" Comment="Initial State" x="552.9412" y="429.4117" />
       <ECState Name="REQ" Comment="Normal execution" x="1285.647" y="940.9412">
@@ -68,13 +85,26 @@
       </ECTransition>
     </ECC>
     <Algorithm Name="REQ" Comment="Normally executed algorithm">
-      <ST><![CDATA[;
-oDoneNFH_R1 := 	PositionR1 > 0 AND NextFeedHorizonR1 <= 0;
-oDoneNFH_R2 := 	PositionR2 > 0 AND NextFeedHorizonR2 <= 0;
-oDoneNFH_R3 := 	PositionR3 > 0 AND NextFeedHorizonR3 <= 0;
-oDoneNFH_R4 := 	PositionR4 > 0 AND NextFeedHorizonR4 <= 0;
-oDoneNFH_R5 := 	PositionR5 > 0 AND NextFeedHorizonR5 <= 0;
-oDoneNFH_R6 := 	PositionR6 > 0 AND NextFeedHorizonR6 <= 0;		]]></ST>
+      <ST><![CDATA[IF i > 0 THEN
+	oDoneNFH_R1 := 	PositionR1 > 0 AND NextFeedHorizonR1 <= 0 AND CurrStepR1 = 10;
+	oDoneNFH_R2 := 	PositionR2 > 0 AND NextFeedHorizonR2 <= 0 AND CurrStepR2 = 10;
+	oDoneNFH_R3 := 	PositionR3 > 0 AND NextFeedHorizonR3 <= 0 AND CurrStepR3 = 10;
+	oDoneNFH_R4 := 	PositionR4 > 0 AND NextFeedHorizonR4 <= 0 AND CurrStepR4 = 10;
+	oDoneNFH_R5 := 	PositionR5 > 0 AND NextFeedHorizonR5 <= 0 AND CurrStepR5 = 10;
+	oDoneNFH_R6 := 	PositionR6 > 0 AND NextFeedHorizonR6 <= 0 AND CurrStepR6 = 10;
+END_IF;
+
+IF (NextFeedHorizonR1 > 0 OR CurrStepR1 = 0) AND (NextFeedHorizonR2 > 0 OR CurrStepR2 = 0) AND (NextFeedHorizonR3 > 0 OR CurrStepR3 = 0) AND (NextFeedHorizonR4 > 0 OR CurrStepR4 = 0) AND (NextFeedHorizonR5 > 0 OR CurrStepR5 = 0) AND (NextFeedHorizonR6 > 0 OR CurrStepR6 = 0) THEN
+	i := i + 1;
+END_IF;
+
+IF NOT EmergencyON THEN
+	i := 0;
+END_IF;
+
+IF i > 100 THEN
+	i := 1;
+END_IF;]]></ST>
     </Algorithm>
   </BasicFB>
 </FBType>

@@ -19,6 +19,7 @@ namespace HMI.Main.Canvases
 		#region Component Designer generated code
 		private void InitializeComponent()
 		{
+			this.btnResetGeral = new NxtControl.GuiFramework.DrawnButton();
 			this.fundo = new NxtControl.GuiFramework.Rectangle();
 			this.tbColetor = new NxtControl.GuiFramework.Pipe();
 			this.tbGordura = new NxtControl.GuiFramework.Pipe();
@@ -356,7 +357,7 @@ namespace HMI.Main.Canvases
 			// 
 			// naoInst3
 			// 
-			this.naoInst3.Bounds = new NxtControl.Drawing.RectF(((float)(780D)), ((float)(264D)), ((float)(296D)), ((float)(198.88D)));
+			this.naoInst3.Bounds = new NxtControl.Drawing.RectF(((float)(780D)), ((float)(264D)), ((float)(312D)), ((float)(198.88D)));
 			this.naoInst3.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(236)), ((byte)(237)), ((byte)(238))));
 			this.naoInst3.Name = "naoInst3";
 			this.naoInst3.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(200)), ((byte)(202)), ((byte)(205))), 1F, NxtControl.Drawing.DashStyle.Solid);
@@ -365,7 +366,7 @@ namespace HMI.Main.Canvases
 			// 
 			this.rNaoInst3.Color = new NxtControl.Drawing.Color(((byte)(96)), ((byte)(100)), ((byte)(104)));
 			this.rNaoInst3.Font = new NxtControl.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Bold);
-			this.rNaoInst3.Location = new NxtControl.Drawing.PointF(872D, 330D);
+			this.rNaoInst3.Location = new NxtControl.Drawing.PointF(880D, 330D);
 			this.rNaoInst3.Name = "rNaoInst3";
 			this.rNaoInst3.Text = "Não instalada";
 			// 
@@ -373,7 +374,7 @@ namespace HMI.Main.Canvases
 			// 
 			this.rNaoInst3b.Color = new NxtControl.Drawing.Color(((byte)(96)), ((byte)(100)), ((byte)(104)));
 			this.rNaoInst3b.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular);
-			this.rNaoInst3b.Location = new NxtControl.Drawing.PointF(822D, 352D);
+			this.rNaoInst3b.Location = new NxtControl.Drawing.PointF(830D, 352D);
 			this.rNaoInst3b.Name = "rNaoInst3b";
 			this.rNaoInst3b.Text = "tanque, válvula e bomba de gordura";
 			// 
@@ -460,6 +461,19 @@ namespace HMI.Main.Canvases
 			this.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(1366D)), ((float)(698D)));
 			this.Brush = new NxtControl.Drawing.Brush("CanvasBrush");
 			this.Name = "PRE_TRATAMENTO";
+			// 
+			// btnResetGeral
+			// 
+			this.btnResetGeral.Bounds = new NxtControl.Drawing.RectF(((float)(6D)), ((float)(662D)), ((float)(126D)), ((float)(30D)));
+			this.btnResetGeral.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208))));
+			this.btnResetGeral.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+			this.btnResetGeral.InnerBorderColor = new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208)));
+			this.btnResetGeral.Name = "btnResetGeral";
+			this.btnResetGeral.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(160)), ((byte)(160)), ((byte)(160))), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.btnResetGeral.Radius = 2D;
+			this.btnResetGeral.Text = "Reset geral";
+			this.btnResetGeral.Use3DEffect = false;
+			this.btnResetGeral.Click += new System.EventHandler(this.BtnResetGeralClick);
 			this.Shapes.AddRange(new System.ComponentModel.IComponent[] {
 			this.fundo,
 			this.tbColetor,
@@ -504,7 +518,8 @@ namespace HMI.Main.Canvases
 			this.irBuffer,
 			this.tqLodo,
 			this.rLodo,
-			this.rLodo2});
+			this.rLodo2,
+			this.btnResetGeral});
 			this.Size = new System.Drawing.Size(1366, 698);
 
 		}
@@ -552,6 +567,7 @@ namespace HMI.Main.Canvases
 		private NxtControl.GuiFramework.Rectangle tqLodo;
 		private NxtControl.GuiFramework.FreeText rLodo;
 		private NxtControl.GuiFramework.FreeText rLodo2;
+		private NxtControl.GuiFramework.DrawnButton btnResetGeral;
 		#endregion
 	}
 }

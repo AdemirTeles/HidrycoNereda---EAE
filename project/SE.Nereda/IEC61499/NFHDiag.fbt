@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="ede01f7d-c339-4527-9dd9-c009492b9e92" Name="NFHDiag" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="10/6/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="36E2052723B191C8" Name="REQ" Comment="Normal Execution Request">
+        <With Var="iNextFeedHorizon" />
+        <With Var="iStartFeedInterval" />
+        <With Var="iFallbackElapsedTime" />
+        <With Var="ii_R" />
+        <With Var="iSettleTime" />
+        <With Var="iNbrRAv" />
+        <With Var="iTimesFed" />
+        <With Var="iRecipeElapsedTime" />
+        <With Var="iNextFeedHorizonPlant" />
+      </Event>
+      <Event ID="5BA2E3F35F457B8F" Name="CTRL">
+        <With Var="Up" />
+        <With Var="Down" />
+        <With Var="Record" />
+      </Event>
+      <Event ID="5E4789244F210D5A" Name="SUPRESS">
+        <With Var="Supress" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="B983BB31AF41AA4B" Name="CNF" Comment="Execution Confirmation">
+        <With Var="oNextFeedHorizon" />
+        <With Var="oStartFeedInterval" />
+        <With Var="oFallbackElapsedTime" />
+        <With Var="oi_R" />
+        <With Var="oSettleTime" />
+        <With Var="i" />
+        <With Var="oNbrRAv" />
+        <With Var="oTimesFed" />
+        <With Var="oRecipeElapsedTime" />
+        <With Var="oNextFeedHorizonPlant" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="ED7812C2457ACA98" Name="iNextFeedHorizon" Type="REAL" />
+      <VarDeclaration ID="DE2760191A58F871" Name="iStartFeedInterval" Type="REAL" />
+      <VarDeclaration ID="7B90B4DF981493A8" Name="iFallbackElapsedTime" Type="REAL" />
+      <VarDeclaration ID="2CB7619073DE4736" Name="ii_R" Type="REAL" />
+      <VarDeclaration ID="9C8C3BB62E42BB26" Name="iNbrRAv" Type="REAL" />
+      <VarDeclaration ID="AE51C4C1519C2AF5" Name="iSettleTime" Type="REAL" />
+      <VarDeclaration ID="7BE915AD2B63703D" Name="iTimesFed" Type="INT" />
+      <VarDeclaration ID="69EAEC28D7C03125" Name="iRecipeElapsedTime" Type="REAL" />
+      <VarDeclaration ID="BFA123AFFD70624D" Name="iNextFeedHorizonPlant" Type="REAL" />
+      <VarDeclaration ID="8E3FF1727F883E12" Name="Up" Type="BOOL" />
+      <VarDeclaration ID="FE776036D69B3621" Name="Down" Type="BOOL" />
+      <VarDeclaration ID="B94DF315CDE63C00" Name="Record" Type="BOOL" />
+      <VarDeclaration ID="B72E514E59F85D0A" Name="Supress" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="3D9C1E49CBE72D1E" Name="oNextFeedHorizon" Type="REAL" />
+      <VarDeclaration ID="7E81C22D212FD45D" Name="oStartFeedInterval" Type="REAL" />
+      <VarDeclaration ID="E4D7DD91A4DC2541" Name="oFallbackElapsedTime" Type="REAL" />
+      <VarDeclaration ID="2D46C404AED69C1B" Name="oi_R" Type="REAL" />
+      <VarDeclaration ID="F837A9E4C58B3C0A" Name="oNbrRAv" Type="REAL" />
+      <VarDeclaration ID="A54395036F9B87CE" Name="oSettleTime" Type="REAL" />
+      <VarDeclaration ID="721A835815A6451B" Name="i" Type="DINT" />
+      <VarDeclaration ID="F250D4A5C3FA592D" Name="oTimesFed" Type="INT" />
+      <VarDeclaration ID="874D55B6727377AB" Name="oRecipeElapsedTime" Type="REAL" />
+      <VarDeclaration ID="8F765B27C26D3CD7" Name="oNextFeedHorizonPlant" Type="REAL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="771f69e8-ff83-4890-ac8b-cd3ded8f84f6">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="Record,Diag,INIT,Clean" />
+    <InternalVars>
+      <VarDeclaration ID="D37A3A1BF78E8B4C" Name="NextFeedHorizon" Type="REAL" ArraySize="100" />
+      <VarDeclaration ID="ACAC752D0A9566A1" Name="StartFeedInterval" Type="REAL" ArraySize="100" />
+      <VarDeclaration ID="E98C99673FCDF694" Name="FallbackElapsedTime" Type="REAL" ArraySize="100" />
+      <VarDeclaration ID="BF9794011A2955AD" Name="NbrRAv" Type="REAL" ArraySize="100" />
+      <VarDeclaration ID="BA07CA934181DCEC" Name="i_R" Type="REAL" ArraySize="100" />
+      <VarDeclaration ID="4EB60D2C87E16CAB" Name="SettleTime" Type="REAL" ArraySize="100" />
+      <VarDeclaration ID="0E4A3231C02AA1F2" Name="TimesFed" Type="INT" ArraySize="100" />
+      <VarDeclaration ID="5D86A7C1733135E7" Name="RecipeElapsedTime" Type="REAL" ArraySize="100" />
+      <VarDeclaration ID="1D82DBDE478C1F0E" Name="NextFeedHorizonPlant" Type="REAL" ArraySize="100" />
+    </InternalVars>
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="1780.941" y="609.4117" />
+      <ECState Name="Record" x="771.3334" y="1616">
+        <ECAction Algorithm="Record" Output="CNF" />
+      </ECState>
+      <ECState Name="Diag" x="2516" y="1216">
+        <ECAction Algorithm="Diag" Output="CNF" />
+      </ECState>
+      <ECState Name="INIT" x="776.6664" y="1200">
+        <ECAction Algorithm="INIT" Output="CNF" />
+      </ECState>
+      <ECState Name="Clean" x="3508" y="1196">
+        <ECAction Algorithm="Clean" />
+      </ECState>
+      <ECTransition Source="START" Destination="INIT" Condition="CTRL AND Record" x="1123.609" y="783.4549">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="306.3598,167.6787,238.2996,206.9987" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="Diag" Condition="CTRL AND NOT Record" x="2293.861" y="791.4337">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="555.7395,168.4966,605.7133,209.7813" />
+      </ECTransition>
+      <ECTransition Source="Diag" Destination="INIT" Condition="CTRL AND Record" x="1617.568" y="993.9317">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="464.8287,234.5709,339.5475,233.6483" />
+      </ECTransition>
+      <ECTransition Source="Record" Destination="Record" Condition="REQ" x="771.34" y="1798.086" />
+      <ECTransition Source="Diag" Destination="Diag" Condition="CTRL" x="2516.002" y="1398.086" />
+      <ECTransition Source="Record" Destination="Diag" Condition="CTRL AND NOT Record" x="1698.5" y="1764.155">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="361.6666,481.0321,491.2828,450.3744" />
+      </ECTransition>
+      <ECTransition Source="INIT" Destination="Record" Condition="1" x="777.594" y="1390.412">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="194.7468,333.152,194.4194,359.1225" />
+      </ECTransition>
+      <ECTransition Source="Diag" Destination="Clean" Condition="SUPRESS AND Supress" x="2941.086" y="1036.371">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="698.138,250.4588,764.2897,248.019" />
+      </ECTransition>
+      <ECTransition Source="Clean" Destination="Diag" Condition="1" x="2962.213" y="1360.464">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="770.0609,348.0198,704.7968,349.3357" />
+      </ECTransition>
+    </ECC>
+    <Algorithm ID="fead2002-5638-4510-ab2b-dc888efc75cf" Name="Record">
+      <ST><![CDATA[;
+IF i < 100 THEN
+	NextFeedHorizon[i] := iNextFeedHorizon;
+	StartFeedInterval[i] := iStartFeedInterval;
+	FallbackElapsedTime[i] := iFallbackElapsedTime;
+	NbrRAv[i] := iNbrRAv;
+	i_R[i] := ii_R;
+	SettleTime[i] := iSettleTime;
+	TimesFed[i] := iTimesFed;
+	RecipeElapsedTime[i] := iRecipeElapsedTime;
+	NextFeedHorizonPlant[i] := iNextFeedHorizonPlant;
+	
+	i := i + 1;
+END_IF;
+
+REQ := FALSE;]]></ST>
+    </Algorithm>
+    <Algorithm ID="c7871b20-fcac-463d-baf7-79585a4a881f" Name="Diag">
+      <ST><![CDATA[;
+IF Up AND NOT Down THEN
+	i := i + 1;
+ELSIF NOT Up AND Down THEN
+	i := i - 1;
+END_IF;
+
+oNextFeedHorizon := NextFeedHorizon[i];
+oStartFeedInterval := StartFeedInterval[i];
+oFallbackElapsedTime := FallbackElapsedTime[i];
+oNbrRAv := NbrRAv[i];
+oi_R := i_R[i];
+oSettleTime := SettleTime[i];
+oTimesFed := TimesFed[i];
+oRecipeElapsedTime := RecipeElapsedTime[i];
+oNextFeedHorizonPlant := NextFeedHorizonPlant[i];
+
+CTRL := FALSE;]]></ST>
+    </Algorithm>
+    <Algorithm ID="de873e36-1228-40a1-a228-4f3b7e17eb15" Name="INIT">
+      <ST><![CDATA[;
+i := 0;]]></ST>
+    </Algorithm>
+    <Algorithm ID="33192756-5b75-41fb-9846-1ddbd354c07d" Name="Clean">
+      <ST><![CDATA[;
+FOR i := 0 TO 98 DO
+	NextFeedHorizon[i] := 0;
+	StartFeedInterval[i] := 0;
+	FallbackElapsedTime[i] := 0;
+	NbrRAv[i] := 0;
+	i_R[i] := 0;
+	SettleTime[i] := 0;
+	TimesFed[i] := 0;
+	RecipeElapsedTime[i] := 0;
+	NextFeedHorizonPlant[i] := 0;
+END_FOR;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

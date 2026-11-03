@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="0472a6e9-7586-4d3d-898e-323623294418" Name="FeedTimesCalc" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="10/7/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="F009D6CCDBEACD6F" Name="REQ" Comment="Normal Execution Request">
+        <With Var="EmergencyON" />
+        <With Var="FeedRun" />
+        <With Var="Reset" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="D0105BAAC33DB3A0" Name="CNF" Comment="Execution Confirmation">
+        <With Var="FedTimes" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="E3F2DA6DC049BD74" Name="EmergencyON" Type="BOOL" Comment="Input event qualifier" />
+      <VarDeclaration ID="9F6EA89F9548F207" Name="FeedRun" Type="BOOL" />
+      <VarDeclaration ID="38832084B081821C" Name="Reset" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="67FAB3BEF32CC5B3" Name="FedTimes" Type="INT" Comment="Output event qualifier" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="92966e0e-702e-4924-aae0-36a09e25b70c">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="IncreaseFedTimes,ResetFedTimes" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="1716.941" y="589.4117" />
+      <ECState Name="Increase" x="871" y="1480">
+        <ECAction Algorithm="IncreaseFedTimes" Output="CNF" />
+      </ECState>
+      <ECState Name="EmergencyOFF" x="2648" y="1474">
+        <ECAction Algorithm="ResetFedTimes" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="Increase" Condition="REQ AND EmergencyON AND FeedRun AND NOT Reset" x="1098.696" y="928.2148">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="294.8996,191.2222,232.138,255.9635" />
+      </ECTransition>
+      <ECTransition Source="Increase" Destination="START" Condition="NOT FeedRun" x="1379.595" y="1092.83">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="317.3752,310.8998,381.4851,245.2024" />
+      </ECTransition>
+      <ECTransition Source="Increase" Destination="EmergencyOFF" Condition="NOT EmergencyON OR (REQ AND Reset)" x="1703.386" y="1669.909">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="366.0131,429.4316,478.6619,428.9774" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="EmergencyOFF" Condition="REQ AND (NOT EmergencyON OR Reset)" x="2324.103" y="939.7983">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="555.0106,196.0685,621.4669,258.6843" />
+      </ECTransition>
+      <ECTransition Source="EmergencyOFF" Destination="START" Condition="1" x="2209.139" y="1130.977">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="591.4581,323.9625,520.8454,258.0709" />
+      </ECTransition>
+      <ECTransition Source="EmergencyOFF" Destination="Increase" Condition="REQ AND EmergencyON AND FeedRun AND NOT Reset" x="1694.49" y="1325.289">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="479.3958,322.6347,362.3036,322.9838" />
+      </ECTransition>
+    </ECC>
+    <Algorithm ID="cf944d33-a977-4841-a177-fd2ccf2e165d" Name="IncreaseFedTimes">
+      <ST><![CDATA[;
+FedTimes := FedTimes + 1;]]></ST>
+    </Algorithm>
+    <Algorithm ID="473cd542-19d2-4977-a64c-939918fa59a0" Name="ResetFedTimes">
+      <ST><![CDATA[;
+FedTimes := 0;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

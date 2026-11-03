@@ -2,7 +2,7 @@
 <!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
 <FBType GUID="296a047b-ad9d-47dd-9e42-4ab310513858" Name="basicSubestacao" Comment="Logica unica do QGBT da Subestacao: Masterpact, fonte das barras, planta nos geradores e cargas liberadas" Namespace="Hidryco.HidrycoLib">
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Hidryco" Version="1.1" Author="Hidryco" Date="15/10/2026" Remarks="1.1: comandos de abrir/fechar dos Masterpact 1Q1/1Q0/1Q2 com intertravamentos e aviso de sem resposta; reservas no unifilar. 1.0: QGBT 440 V com 2 QTAM (AGC 150), 1Q1/1Q0/1Q2 e cargas liberadas no gerador" />
+  <VersionInfo Organization="Hidryco" Version="1.2" Author="Hidryco" Date="20/10/2026" Remarks="1.2: anel - disjuntor com fechamento pendente conta como fechado e o pulso de fechar e cortado se o anel deixar de ter um aberto (nunca as duas QTAM em paralelo). 1.1: comandos de abrir/fechar dos Masterpact 1Q1/1Q0/1Q2 com intertravamentos e aviso de sem resposta; reservas no unifilar. 1.0: QGBT 440 V com 2 QTAM (AGC 150), 1Q1/1Q0/1Q2 e cargas liberadas no gerador" />
   <InterfaceList>
     <EventInputs>
       <Event ID="F0DD93C6F39257DB" Name="INIT" Comment="Inicializacao">
@@ -565,14 +565,16 @@ HAB_QL_ILUMINACAO := habQL_ILUMINACAO;
    fechar: remota OK, aberto, remoto, pronto para fechar, mola carregada, sem falha
            e sem fechar o anel: 1Q1 e 1Q2 so com o 1Q0 ou o outro aberto;
            1Q0 so com o 1Q1 ou o 1Q2 aberto (nunca as duas QTAM em paralelo);
+           disjuntor com fechamento pendente conta como fechado; pulso de fechar e cortado
+           se o anel deixar de ter um disjuntor aberto;
    pulso de cfgTempoPulsoDisjuntor s (acaba antes se o disjuntor mudar);
    sem mudanca em cfgTempoRespostaDisjuntor s: aviso de sem resposta. *)
 stsPermAbrir1q1 := NOT stsFalhaRemota1 AND e1q1 = 2 AND mpR_1q1 AND NOT mpL_1q1;
-stsPermFechar1q1 := NOT stsFalhaRemota1 AND e1q1 = 1 AND mpR_1q1 AND NOT mpL_1q1 AND mpP_1q1 AND mpC_1q1 AND mpSF_1q1 AND (e1q0 = 1 OR e1q2 = 1);
+stsPermFechar1q1 := NOT stsFalhaRemota1 AND e1q1 = 1 AND mpR_1q1 AND NOT mpL_1q1 AND mpP_1q1 AND mpC_1q1 AND mpSF_1q1 AND ((e1q0 = 1 AND alvo1q0 <> 2) OR (e1q2 = 1 AND alvo1q2 <> 2));
 stsPermAbrir1q0 := NOT stsFalhaRemota1 AND e1q0 = 2 AND mpR_1q0 AND NOT mpL_1q0;
-stsPermFechar1q0 := NOT stsFalhaRemota1 AND e1q0 = 1 AND mpR_1q0 AND NOT mpL_1q0 AND mpP_1q0 AND mpC_1q0 AND mpSF_1q0 AND (e1q1 = 1 OR e1q2 = 1);
+stsPermFechar1q0 := NOT stsFalhaRemota1 AND e1q0 = 1 AND mpR_1q0 AND NOT mpL_1q0 AND mpP_1q0 AND mpC_1q0 AND mpSF_1q0 AND ((e1q1 = 1 AND alvo1q1 <> 2) OR (e1q2 = 1 AND alvo1q2 <> 2));
 stsPermAbrir1q2 := NOT stsFalhaRemota1 AND e1q2 = 2 AND mpR_1q2 AND NOT mpL_1q2;
-stsPermFechar1q2 := NOT stsFalhaRemota1 AND e1q2 = 1 AND mpR_1q2 AND NOT mpL_1q2 AND mpP_1q2 AND mpC_1q2 AND mpSF_1q2 AND (e1q0 = 1 OR e1q1 = 1);
+stsPermFechar1q2 := NOT stsFalhaRemota1 AND e1q2 = 1 AND mpR_1q2 AND NOT mpL_1q2 AND mpP_1q2 AND mpC_1q2 AND mpSF_1q2 AND ((e1q0 = 1 AND alvo1q0 <> 2) OR (e1q1 = 1 AND alvo1q1 <> 2));
 IF REQ_CMD THEN
     IF hmiCmdDisjuntor = 1 AND stsPermAbrir1q1 THEN
         tF1q1 := 0;
@@ -692,6 +694,10 @@ IF stsFalhaRemota1 THEN
 END_IF;
 cmdAbrir1q2 := tA1q2 > 0;
 cmdFechar1q2 := tF1q2 > 0;
+(* anel: corta o pulso de fechar se o anel deixou de ter um disjuntor aberto (fechamento no campo durante o pulso) *)
+IF tF1q1 > 0 AND NOT ((e1q0 = 1 AND alvo1q0 <> 2) OR (e1q2 = 1 AND alvo1q2 <> 2)) THEN tF1q1 := 0; cmdFechar1q1 := FALSE; END_IF;
+IF tF1q0 > 0 AND NOT ((e1q1 = 1 AND alvo1q1 <> 2) OR (e1q2 = 1 AND alvo1q2 <> 2)) THEN tF1q0 := 0; cmdFechar1q0 := FALSE; END_IF;
+IF tF1q2 > 0 AND NOT ((e1q0 = 1 AND alvo1q0 <> 2) OR (e1q1 = 1 AND alvo1q1 <> 2)) THEN tF1q2 := 0; cmdFechar1q2 := FALSE; END_IF;
 
 (* ---- alarmes ---- *)
 almF1q1 := stsFalha1q1;

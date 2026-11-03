@@ -6,6 +6,9 @@
   <InterfaceList>
     <EventInputs>
       <Event ID="33EC5B834E8FFAF3" Name="CHECK_EXIST" />
+      <Event ID="5A616C11233E764D" Name="START_UP_DT">
+        <With Var="StartUpDelay" />
+      </Event>
     </EventInputs>
     <EventOutputs>
       <Event ID="PHASE_NO_ABORTED" Name="REACTOR_STATE">
@@ -19,8 +22,15 @@
         <With Var="TotMinutesSinceStartFeedV" />
         <With Var="TotMinutesSinceStartFeedT" />
       </Event>
+      <Event ID="10D9B3E14BBA3AF0" Name="LAST_AERATE_V_T">
+        <With Var="TotMinutesSinceStartAerateV" />
+        <With Var="TotMinutesSinceStartAerateT" />
+      </Event>
       <Event ID="SD_REACTOR" Name="SD_REACTOR_RUN">
         <With Var="SDReactorRun" />
+      </Event>
+      <Event ID="FAF47A815D4F6456" Name="FEED_REACTOR_RUN">
+        <With Var="FeedReactorRun" />
       </Event>
       <Event Name="MODE">
         <With Var="Mode" />
@@ -29,6 +39,9 @@
         <With Var="FbExist" />
       </Event>
     </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="47D97B9593730CF5" Name="StartUpDelay" Type="TIME" />
+    </InputVars>
     <OutputVars>
       <VarDeclaration ID="PhaseNoAborted" Name="PhaseAborted" Type="BOOL" />
       <VarDeclaration ID="3C69BB1A066E9338" Name="ReactorAvailable" Type="BOOL" />
@@ -37,7 +50,10 @@
       <VarDeclaration ID="CD077CD9F3BB8B76" Name="CurrMinutesSinceStartFeedT" Type="TIME" />
       <VarDeclaration ID="8FB3B1E89F73B5E3" Name="TotMinutesSinceStartFeedV" Type="REAL" />
       <VarDeclaration ID="B60AD268A06073AC" Name="TotMinutesSinceStartFeedT" Type="TIME" />
+      <VarDeclaration ID="641DC686E6383AF1" Name="TotMinutesSinceStartAerateV" Type="REAL" />
+      <VarDeclaration ID="3B464862489265F4" Name="TotMinutesSinceStartAerateT" Type="TIME" />
       <VarDeclaration ID="SDReactor" Name="SDReactorRun" Type="BOOL" />
+      <VarDeclaration ID="DC6FEC01BD6D808A" Name="FeedReactorRun" Type="BOOL" />
       <VarDeclaration Name="Mode" Type="INT" />
       <VarDeclaration ID="D997CA5474076632" Name="FbExist" Type="BOOL" />
     </OutputVars>

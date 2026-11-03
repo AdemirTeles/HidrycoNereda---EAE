@@ -41,15 +41,12 @@ namespace SE.Nereda.Symbols.EmergencyManagement
 			this.group1 = new NxtControl.GuiFramework.Group();
 			this.freeText5 = new NxtControl.GuiFramework.FreeText();
 			this.AerateTimeR1 = new System.HMI.Symbols.Base.TimeLabel();
-			this.group4 = new NxtControl.GuiFramework.Group();
 			this.freeText6 = new NxtControl.GuiFramework.FreeText();
 			this.MinutesSinceLastFeedR1 = new System.HMI.Symbols.Base.TimeLabel();
 			this.freeText7 = new NxtControl.GuiFramework.FreeText();
 			this.StartInterval = new System.HMI.Symbols.Base.TimeLabel();
-			this.group7 = new NxtControl.GuiFramework.Group();
 			this.freeText8 = new NxtControl.GuiFramework.FreeText();
 			this.iCT_Nominal = new System.HMI.Symbols.Base.TimeLabel();
-			this.group8 = new NxtControl.GuiFramework.Group();
 			this.rectangle2 = new NxtControl.GuiFramework.Rectangle();
 			this.rectangle3 = new NxtControl.GuiFramework.Rectangle();
 			this.freeText9 = new NxtControl.GuiFramework.FreeText();
@@ -58,12 +55,19 @@ namespace SE.Nereda.Symbols.EmergencyManagement
 			this.line4 = new NxtControl.GuiFramework.Line();
 			this.StartUpDelay = new SE.Nereda.Symbols.E_DELAY_V_D.sCounter2();
 			this.rectangle4 = new NxtControl.GuiFramework.Rectangle();
-			this.group2 = new NxtControl.GuiFramework.Group();
 			this.NextFeedHorizon = new SE.Nereda.Symbols.NextFeedHorizon.sNFHR11();
+			this.line5 = new NxtControl.GuiFramework.Line();
+			this.freeText4 = new NxtControl.GuiFramework.FreeText();
+			this.MinutesSinceLastAerateR1 = new System.HMI.Symbols.Base.TimeLabel();
+			this.freeText10 = new NxtControl.GuiFramework.FreeText();
+			this.SettleTimeR1 = new System.HMI.Symbols.Base.TimeLabel();
+			this.line6 = new NxtControl.GuiFramework.Line();
+			this.line7 = new NxtControl.GuiFramework.Line();
+			this.group2 = new NxtControl.GuiFramework.Group();
 			// 
 			// rectangle1
 			// 
-			this.rectangle1.Bounds = new NxtControl.Drawing.RectF(((float)(24D)), ((float)(24D)), ((float)(224D)), ((float)(440D)));
+			this.rectangle1.Bounds = new NxtControl.Drawing.RectF(((float)(24D)), ((float)(24D)), ((float)(232D)), ((float)(544D)));
 			this.rectangle1.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("transparent"));
 			this.rectangle1.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
 			this.rectangle1.Name = "rectangle1";
@@ -80,7 +84,7 @@ namespace SE.Nereda.Symbols.EmergencyManagement
 			// 
 			this.EmergencyON.BeginInit();
 			this.EmergencyON.ColorFrame = new NxtControl.Drawing.Color(((byte)(114)), ((byte)(114)), ((byte)(114)));
-			this.EmergencyON.DesignMatrix = new NxtControl.Drawing.Matrix2D(4.8333333333333339D, 0D, 0D, 1.5D, 197D, 44D);
+			this.EmergencyON.DesignMatrix = new NxtControl.Drawing.Matrix2D(4.8333333333333339D, 0D, 0D, 1.5D, 213D, 44D);
 			this.EmergencyON.FrameSize = 33F;
 			this.EmergencyON.IsOnlyInput = true;
 			this.EmergencyON.Name = "EmergencyON";
@@ -98,22 +102,22 @@ namespace SE.Nereda.Symbols.EmergencyManagement
 			// 
 			this.freeText2.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.freeText2.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-			this.freeText2.Location = new NxtControl.Drawing.PointF(32D, 72D);
+			this.freeText2.Location = new NxtControl.Drawing.PointF(32D, 96D);
 			this.freeText2.Name = "freeText2";
 			this.freeText2.Text = "Current Feed Order :";
 			// 
 			// line1
 			// 
-			this.line1.EndPoint = new NxtControl.Drawing.PointF(24D, 64D);
+			this.line1.EndPoint = new NxtControl.Drawing.PointF(24D, 88D);
 			this.line1.Name = "line1";
 			this.line1.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
-			this.line1.StartPoint = new NxtControl.Drawing.PointF(248D, 64D);
+			this.line1.StartPoint = new NxtControl.Drawing.PointF(256D, 88D);
 			// 
 			// StartFeedPositionR1
 			// 
 			this.StartFeedPositionR1.BeginInit();
 			this.StartFeedPositionR1.DecimalPlacesCount = ((uint)(2u));
-			this.StartFeedPositionR1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 174D, 71D);
+			this.StartFeedPositionR1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 190D, 95D);
 			this.StartFeedPositionR1.Font = new NxtControl.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Bold);
 			this.StartFeedPositionR1.IsOnlyInput = true;
 			this.StartFeedPositionR1.Name = "StartFeedPositionR1";
@@ -128,15 +132,15 @@ namespace SE.Nereda.Symbols.EmergencyManagement
 			// 
 			this.freeText3.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.freeText3.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular);
-			this.freeText3.Location = new NxtControl.Drawing.PointF(32D, 242D);
+			this.freeText3.Location = new NxtControl.Drawing.PointF(32D, 330D);
 			this.freeText3.Name = "freeText3";
-			this.freeText3.Text = "Cycle Time Actual :";
+			this.freeText3.Text = "Actual Cycle Time :";
 			// 
 			// CT_ReactorActual
 			// 
 			this.CT_ReactorActual.BeginInit();
 			this.CT_ReactorActual.BorderStyle = System.Windows.Forms.BorderStyle.None;
-			this.CT_ReactorActual.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.48D, 0D, 0D, 1D, 176D, 240D);
+			this.CT_ReactorActual.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.48D, 0D, 0D, 1D, 184D, 328D);
 			this.CT_ReactorActual.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular);
 			this.CT_ReactorActual.FontScale = false;
 			this.CT_ReactorActual.IsOnlyInput = true;
@@ -148,7 +152,7 @@ namespace SE.Nereda.Symbols.EmergencyManagement
 			// 
 			// ellipse1
 			// 
-			this.ellipse1.Bounds = new NxtControl.Drawing.RectF(((float)(173D)), ((float)(36D)), ((float)(48D)), ((float)(16D)));
+			this.ellipse1.Bounds = new NxtControl.Drawing.RectF(((float)(189D)), ((float)(36D)), ((float)(48D)), ((float)(16D)));
 			this.ellipse1.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("transparent"));
 			this.ellipse1.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
 			this.ellipse1.Name = "ellipse1";
@@ -167,7 +171,7 @@ namespace SE.Nereda.Symbols.EmergencyManagement
 			// 
 			this.freeText5.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.freeText5.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular);
-			this.freeText5.Location = new NxtControl.Drawing.PointF(32D, 282D);
+			this.freeText5.Location = new NxtControl.Drawing.PointF(32D, 410D);
 			this.freeText5.Name = "freeText5";
 			this.freeText5.Text = "Aeration Time (S5) :";
 			// 
@@ -175,7 +179,7 @@ namespace SE.Nereda.Symbols.EmergencyManagement
 			// 
 			this.AerateTimeR1.BeginInit();
 			this.AerateTimeR1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-			this.AerateTimeR1.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.48D, 0D, 0D, 1D, 176D, 280D);
+			this.AerateTimeR1.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.48D, 0D, 0D, 1D, 184D, 408D);
 			this.AerateTimeR1.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular);
 			this.AerateTimeR1.FontScale = false;
 			this.AerateTimeR1.IsOnlyInput = true;
@@ -185,20 +189,11 @@ namespace SE.Nereda.Symbols.EmergencyManagement
 			this.AerateTimeR1.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.AerateTimeR1.EndInit();
 			// 
-			// group4
-			// 
-			this.group4.BeginInit();
-			this.group4.Name = "group4";
-			this.group4.Shapes.AddRange(new System.ComponentModel.IComponent[] {
-			this.freeText3,
-			this.CT_ReactorActual});
-			this.group4.EndInit();
-			// 
 			// freeText6
 			// 
 			this.freeText6.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.freeText6.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular);
-			this.freeText6.Location = new NxtControl.Drawing.PointF(32D, 104D);
+			this.freeText6.Location = new NxtControl.Drawing.PointF(32D, 128D);
 			this.freeText6.Name = "freeText6";
 			this.freeText6.Text = "Time Since Start Feed :";
 			// 
@@ -206,7 +201,7 @@ namespace SE.Nereda.Symbols.EmergencyManagement
 			// 
 			this.MinutesSinceLastFeedR1.BeginInit();
 			this.MinutesSinceLastFeedR1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-			this.MinutesSinceLastFeedR1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1.44D, 0D, 0D, 1D, 32D, 128D);
+			this.MinutesSinceLastFeedR1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1.44D, 0D, 0D, 1D, 32D, 152D);
 			this.MinutesSinceLastFeedR1.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular);
 			this.MinutesSinceLastFeedR1.FontScale = false;
 			this.MinutesSinceLastFeedR1.IsOnlyInput = true;
@@ -220,15 +215,15 @@ namespace SE.Nereda.Symbols.EmergencyManagement
 			// 
 			this.freeText7.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.freeText7.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular);
-			this.freeText7.Location = new NxtControl.Drawing.PointF(32D, 162D);
+			this.freeText7.Location = new NxtControl.Drawing.PointF(32D, 250D);
 			this.freeText7.Name = "freeText7";
-			this.freeText7.Text = "Start Interval Time :";
+			this.freeText7.Text = "Start Feed Interval Time :";
 			// 
 			// StartInterval
 			// 
 			this.StartInterval.BeginInit();
 			this.StartInterval.BorderStyle = System.Windows.Forms.BorderStyle.None;
-			this.StartInterval.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.48D, 0D, 0D, 1D, 176D, 160D);
+			this.StartInterval.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.48D, 0D, 0D, 1D, 184D, 248D);
 			this.StartInterval.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular);
 			this.StartInterval.FontScale = false;
 			this.StartInterval.IsOnlyInput = true;
@@ -238,20 +233,11 @@ namespace SE.Nereda.Symbols.EmergencyManagement
 			this.StartInterval.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.StartInterval.EndInit();
 			// 
-			// group7
-			// 
-			this.group7.BeginInit();
-			this.group7.Name = "group7";
-			this.group7.Shapes.AddRange(new System.ComponentModel.IComponent[] {
-			this.freeText7,
-			this.StartInterval});
-			this.group7.EndInit();
-			// 
 			// freeText8
 			// 
 			this.freeText8.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.freeText8.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular);
-			this.freeText8.Location = new NxtControl.Drawing.PointF(32D, 202D);
+			this.freeText8.Location = new NxtControl.Drawing.PointF(32D, 290D);
 			this.freeText8.Name = "freeText8";
 			this.freeText8.Text = "Nominal Cycle Time :";
 			// 
@@ -259,7 +245,7 @@ namespace SE.Nereda.Symbols.EmergencyManagement
 			// 
 			this.iCT_Nominal.BeginInit();
 			this.iCT_Nominal.BorderStyle = System.Windows.Forms.BorderStyle.None;
-			this.iCT_Nominal.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.48D, 0D, 0D, 1D, 176D, 200D);
+			this.iCT_Nominal.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.48D, 0D, 0D, 1D, 184D, 288D);
 			this.iCT_Nominal.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular);
 			this.iCT_Nominal.FontScale = false;
 			this.iCT_Nominal.IsOnlyInput = true;
@@ -269,18 +255,9 @@ namespace SE.Nereda.Symbols.EmergencyManagement
 			this.iCT_Nominal.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.iCT_Nominal.EndInit();
 			// 
-			// group8
-			// 
-			this.group8.BeginInit();
-			this.group8.Name = "group8";
-			this.group8.Shapes.AddRange(new System.ComponentModel.IComponent[] {
-			this.freeText8,
-			this.iCT_Nominal});
-			this.group8.EndInit();
-			// 
 			// rectangle2
 			// 
-			this.rectangle2.Bounds = new NxtControl.Drawing.RectF(((float)(24D)), ((float)(278D)), ((float)(224D)), ((float)(26D)));
+			this.rectangle2.Bounds = new NxtControl.Drawing.RectF(((float)(24D)), ((float)(406D)), ((float)(232D)), ((float)(26D)));
 			this.rectangle2.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(245)), ((byte)(245)), ((byte)(245))));
 			this.rectangle2.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
 			this.rectangle2.Name = "rectangle2";
@@ -288,7 +265,7 @@ namespace SE.Nereda.Symbols.EmergencyManagement
 			// 
 			// rectangle3
 			// 
-			this.rectangle3.Bounds = new NxtControl.Drawing.RectF(((float)(24D)), ((float)(64D)), ((float)(224D)), ((float)(32D)));
+			this.rectangle3.Bounds = new NxtControl.Drawing.RectF(((float)(24D)), ((float)(88D)), ((float)(232D)), ((float)(32D)));
 			this.rectangle3.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(245)), ((byte)(245)), ((byte)(245))));
 			this.rectangle3.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
 			this.rectangle3.Name = "rectangle3";
@@ -298,35 +275,35 @@ namespace SE.Nereda.Symbols.EmergencyManagement
 			// 
 			this.freeText9.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.freeText9.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular);
-			this.freeText9.Location = new NxtControl.Drawing.PointF(32D, 424D);
+			this.freeText9.Location = new NxtControl.Drawing.PointF(32D, 528D);
 			this.freeText9.Name = "freeText9";
 			this.freeText9.Text = "Start Up Delay Time :";
 			// 
 			// line2
 			// 
-			this.line2.EndPoint = new NxtControl.Drawing.PointF(248D, 416D);
+			this.line2.EndPoint = new NxtControl.Drawing.PointF(256D, 520D);
 			this.line2.Name = "line2";
 			this.line2.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
-			this.line2.StartPoint = new NxtControl.Drawing.PointF(24D, 416D);
+			this.line2.StartPoint = new NxtControl.Drawing.PointF(24D, 520D);
 			// 
 			// line3
 			// 
-			this.line3.EndPoint = new NxtControl.Drawing.PointF(248D, 96D);
+			this.line3.EndPoint = new NxtControl.Drawing.PointF(256D, 120D);
 			this.line3.Name = "line3";
 			this.line3.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
-			this.line3.StartPoint = new NxtControl.Drawing.PointF(24D, 96D);
+			this.line3.StartPoint = new NxtControl.Drawing.PointF(24D, 120D);
 			// 
 			// line4
 			// 
-			this.line4.EndPoint = new NxtControl.Drawing.PointF(248D, 152D);
+			this.line4.EndPoint = new NxtControl.Drawing.PointF(256D, 232D);
 			this.line4.Name = "line4";
 			this.line4.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
-			this.line4.StartPoint = new NxtControl.Drawing.PointF(24D, 152D);
+			this.line4.StartPoint = new NxtControl.Drawing.PointF(24D, 232D);
 			// 
 			// StartUpDelay
 			// 
 			this.StartUpDelay.BeginInit();
-			this.StartUpDelay.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 32D, 440D);
+			this.StartUpDelay.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 32D, 544D);
 			this.StartUpDelay.Name = "StartUpDelay";
 			this.StartUpDelay.SecurityToken = ((uint)(4294967295u));
 			this.StartUpDelay.TagName = "StartUpDelay";
@@ -334,33 +311,91 @@ namespace SE.Nereda.Symbols.EmergencyManagement
 			// 
 			// rectangle4
 			// 
-			this.rectangle4.Bounds = new NxtControl.Drawing.RectF(((float)(24D)), ((float)(344D)), ((float)(224D)), ((float)(120D)));
+			this.rectangle4.Bounds = new NxtControl.Drawing.RectF(((float)(24D)), ((float)(448D)), ((float)(232D)), ((float)(120D)));
 			this.rectangle4.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(245)), ((byte)(245)), ((byte)(245))));
 			this.rectangle4.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
 			this.rectangle4.Name = "rectangle4";
 			this.rectangle4.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("transparent"), 1F, NxtControl.Drawing.DashStyle.Solid);
+			// 
+			// NextFeedHorizon
+			// 
+			this.NextFeedHorizon.BeginInit();
+			this.NextFeedHorizon.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 32D, 464D);
+			this.NextFeedHorizon.Name = "NextFeedHorizon";
+			this.NextFeedHorizon.SecurityToken = ((uint)(4294967295u));
+			this.NextFeedHorizon.TagName = "NextFeedHorizon";
+			this.NextFeedHorizon.EndInit();
+			// 
+			// line5
+			// 
+			this.line5.EndPoint = new NxtControl.Drawing.PointF(256D, 176D);
+			this.line5.Name = "line5";
+			this.line5.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.line5.StartPoint = new NxtControl.Drawing.PointF(24D, 176D);
+			// 
+			// freeText4
+			// 
+			this.freeText4.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.freeText4.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular);
+			this.freeText4.Location = new NxtControl.Drawing.PointF(32D, 184D);
+			this.freeText4.Name = "freeText4";
+			this.freeText4.Text = "Time Since Last Aerate :";
+			// 
+			// MinutesSinceLastAerateR1
+			// 
+			this.MinutesSinceLastAerateR1.BeginInit();
+			this.MinutesSinceLastAerateR1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.MinutesSinceLastAerateR1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1.3866666666666667D, 0D, 0D, 1D, 32D, 208D);
+			this.MinutesSinceLastAerateR1.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular);
+			this.MinutesSinceLastAerateR1.FontScale = false;
+			this.MinutesSinceLastAerateR1.IsOnlyInput = true;
+			this.MinutesSinceLastAerateR1.Name = "MinutesSinceLastAerateR1";
+			this.MinutesSinceLastAerateR1.Pen = new NxtControl.Drawing.Pen("LabelPen");
+			this.MinutesSinceLastAerateR1.TagName = "MinutesSinceLastAerateR1";
+			this.MinutesSinceLastAerateR1.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.MinutesSinceLastAerateR1.EndInit();
+			// 
+			// freeText10
+			// 
+			this.freeText10.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.freeText10.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular);
+			this.freeText10.Location = new NxtControl.Drawing.PointF(32D, 370D);
+			this.freeText10.Name = "freeText10";
+			this.freeText10.Text = "Settle Time :";
+			// 
+			// SettleTimeR1
+			// 
+			this.SettleTimeR1.BeginInit();
+			this.SettleTimeR1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.SettleTimeR1.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.48D, 0D, 0D, 1D, 184D, 368D);
+			this.SettleTimeR1.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular);
+			this.SettleTimeR1.FontScale = false;
+			this.SettleTimeR1.IsOnlyInput = true;
+			this.SettleTimeR1.Name = "SettleTimeR1";
+			this.SettleTimeR1.Pen = new NxtControl.Drawing.Pen("LabelPen");
+			this.SettleTimeR1.TagName = "SettleTimeR1";
+			this.SettleTimeR1.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.SettleTimeR1.EndInit();
+			// 
+			// line6
+			// 
+			this.line6.EndPoint = new NxtControl.Drawing.PointF(256D, 64D);
+			this.line6.Name = "line6";
+			this.line6.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.line6.StartPoint = new NxtControl.Drawing.PointF(24D, 64D);
+			// 
+			// line7
+			// 
+			this.line7.EndPoint = new NxtControl.Drawing.PointF(256D, 448D);
+			this.line7.Name = "line7";
+			this.line7.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.line7.StartPoint = new NxtControl.Drawing.PointF(24D, 448D);
 			// 
 			// group2
 			// 
 			this.group2.BeginInit();
 			this.group2.Name = "group2";
 			this.group2.Shapes.AddRange(new System.ComponentModel.IComponent[] {
-			this.freeText5,
-			this.AerateTimeR1});
-			this.group2.EndInit();
-			// 
-			// NextFeedHorizon
-			// 
-			this.NextFeedHorizon.BeginInit();
-			this.NextFeedHorizon.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 32D, 360D);
-			this.NextFeedHorizon.Name = "NextFeedHorizon";
-			this.NextFeedHorizon.SecurityToken = ((uint)(4294967295u));
-			this.NextFeedHorizon.TagName = "NextFeedHorizon";
-			this.NextFeedHorizon.EndInit();
-			// 
-			// sDataR1
-			// 
-			this.Shapes.AddRange(new System.ComponentModel.IComponent[] {
 			this.rectangle4,
 			this.rectangle3,
 			this.freeText1,
@@ -370,19 +405,36 @@ namespace SE.Nereda.Symbols.EmergencyManagement
 			this.line2,
 			this.line3,
 			this.line4,
-			this.group4,
-			this.group7,
-			this.group8,
 			this.StartUpDelay,
-			this.rectangle2,
-			this.group2,
 			this.freeText6,
 			this.MinutesSinceLastFeedR1,
 			this.freeText2,
 			this.StartFeedPositionR1,
 			this.NextFeedHorizon,
+			this.line5,
+			this.freeText4,
+			this.MinutesSinceLastAerateR1,
+			this.line6,
+			this.line7,
+			this.rectangle2,
+			this.freeText7,
+			this.StartInterval,
+			this.freeText3,
+			this.CT_ReactorActual,
+			this.freeText8,
+			this.iCT_Nominal,
+			this.freeText5,
+			this.AerateTimeR1,
+			this.freeText10,
+			this.SettleTimeR1});
+			this.group2.EndInit();
+			// 
+			// sDataR1
+			// 
+			this.Shapes.AddRange(new System.ComponentModel.IComponent[] {
+			this.group2,
 			this.rectangle1});
-			this.SymbolSize = new System.Drawing.Size(536, 512);
+			this.SymbolSize = new System.Drawing.Size(536, 688);
 
 		}
 		private NxtControl.GuiFramework.Rectangle rectangle1;
@@ -397,15 +449,12 @@ namespace SE.Nereda.Symbols.EmergencyManagement
 		private NxtControl.GuiFramework.Group group1;
 		private NxtControl.GuiFramework.FreeText freeText5;
 		private System.HMI.Symbols.Base.TimeLabel AerateTimeR1;
-		private NxtControl.GuiFramework.Group group4;
 		private NxtControl.GuiFramework.FreeText freeText6;
 		private System.HMI.Symbols.Base.TimeLabel MinutesSinceLastFeedR1;
 		private NxtControl.GuiFramework.FreeText freeText7;
 		private System.HMI.Symbols.Base.TimeLabel StartInterval;
-		private NxtControl.GuiFramework.Group group7;
 		private NxtControl.GuiFramework.FreeText freeText8;
 		private System.HMI.Symbols.Base.TimeLabel iCT_Nominal;
-		private NxtControl.GuiFramework.Group group8;
 		private NxtControl.GuiFramework.Rectangle rectangle2;
 		private NxtControl.GuiFramework.Rectangle rectangle3;
 		private SE.Nereda.Symbols.E_DELAY_V_D.sCounter2 StartUpDelay;
@@ -414,8 +463,15 @@ namespace SE.Nereda.Symbols.EmergencyManagement
 		private NxtControl.GuiFramework.Line line3;
 		private NxtControl.GuiFramework.Line line4;
 		private NxtControl.GuiFramework.Rectangle rectangle4;
-		private NxtControl.GuiFramework.Group group2;
 		private SE.Nereda.Symbols.NextFeedHorizon.sNFHR11 NextFeedHorizon;
+		private NxtControl.GuiFramework.Line line5;
+		private NxtControl.GuiFramework.FreeText freeText4;
+		private System.HMI.Symbols.Base.TimeLabel MinutesSinceLastAerateR1;
+		private NxtControl.GuiFramework.FreeText freeText10;
+		private System.HMI.Symbols.Base.TimeLabel SettleTimeR1;
+		private NxtControl.GuiFramework.Line line6;
+		private NxtControl.GuiFramework.Line line7;
+		private NxtControl.GuiFramework.Group group2;
 		#endregion
 	}
 }

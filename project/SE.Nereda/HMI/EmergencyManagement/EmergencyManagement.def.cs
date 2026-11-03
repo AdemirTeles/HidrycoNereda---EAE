@@ -864,7 +864,7 @@ namespace SE.Nereda.Symbols.EmergencyManagement
 
 namespace SE.Nereda.Symbols.EmergencyManagement
 {
-  partial class sDataR3
+  partial class sReactorAvExist
   {
 
     private SE.Nereda.Faceplates.EmergencyManagement.fpSettings fpSettings
@@ -1000,7 +1000,7 @@ namespace SE.Nereda.Symbols.EmergencyManagement
 
 namespace SE.Nereda.Symbols.EmergencyManagement
 {
-  partial class sReactorAvExist
+  partial class sCycleCounter
   {
 
     private SE.Nereda.Faceplates.EmergencyManagement.fpSettings fpSettings

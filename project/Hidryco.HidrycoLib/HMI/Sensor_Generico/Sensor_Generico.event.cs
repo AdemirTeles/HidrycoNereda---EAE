@@ -46,7 +46,7 @@ namespace Hidryco.HidrycoLib.Symbols.Sensor_Generico
       this.cookie = cookie;
       this.eventIndex = eventIndex;
     }
-    public bool Get_STS_VALOR(ref System.Single value)
+    public bool Get_STS_SENSOR(ref System.Single value)
     {
       if (accessorService == null)
         return false;
@@ -56,7 +56,7 @@ namespace Hidryco.HidrycoLib.Symbols.Sensor_Generico
       return ret;
     }
 
-    public System.Single? STS_VALOR
+    public System.Single? STS_SENSOR
     { get {
       if (accessorService == null)
         return null;
@@ -464,6 +464,26 @@ namespace Hidryco.HidrycoLib.Symbols.Sensor_Generico
       bool ret = accessorService.GetByteValue(channelId, cookie, eventIndex, true,20, ref var);
       if (!ret) return null;
       return (System.Byte) var;
+    }  }
+
+    public bool Get_STS_FALHA_COMUNICACAO(ref System.Boolean value)
+    {
+      if (accessorService == null)
+        return false;
+      bool var = false;
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,21, ref var);
+      if (ret) value = (System.Boolean) var;
+      return ret;
+    }
+
+    public System.Boolean? STS_FALHA_COMUNICACAO
+    { get {
+      if (accessorService == null)
+        return null;
+      bool var = false;
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,21, ref var);
+      if (!ret) return null;
+      return (System.Boolean) var;
     }  }
 
 

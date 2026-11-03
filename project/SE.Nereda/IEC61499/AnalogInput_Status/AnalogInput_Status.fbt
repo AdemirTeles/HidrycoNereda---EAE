@@ -4,7 +4,7 @@
   <Attribute Name="HMI.Alias" Value="" />
   <Attribute Name="Configuration.FB.IDCounter" Value="31" />
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Schneider Electric" Version="0.0" Author="SESA583220" Date="8/31/2022" Remarks="template" />
+  <VersionInfo Organization="Schneider Electric" Version="0.1" Author="Hidryco" Date="03/11/2026" Remarks="0.1: Reliability da IHM fixo em 80 (parametro do IThis); REQ do IThis no fim da inicializacao para publicar o valor na partida. 0.0: template" />
   <InterfaceList>
     <EventInputs>
       <Event Name="INIT" Comment="Initializes the symbolic link data destination FB with N (1 &lt;= N &lt;= 16) variables" />
@@ -41,12 +41,13 @@
   <FBNetwork>
     <FB ID="8" Name="IThis" Type="AnalogInput_Status_HMI" x="2740" y="560" Namespace="SE.Nereda">
       <Parameter Name="$D558640F8EBAAF8E" Value="TRUE" />
+      <Parameter Name="$8529AECF7FF4A30F" Value="80" />
     </FB>
     <FB ID="21" UID="19" Name="BitMan" Type="BITMAN_8DFA169087FA704" x="3080" y="2260" Namespace="SE.Nereda">
       <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNTIN:=1;CNTOUT:=4;IN${CNTIN}:WORD;OUT${CNTOUT}:BOOL,BOOL,BOOL,BOOL" />
     </FB>
     <FB ID="74A5515BC11AE3EC" UID="210FC9319082C50A" Name="INT2WORD" Type="INT2WORD" x="2380" y="2320" Namespace="SE.Nereda" />
-    <Input Name="INIT" x="1140" y="1688" Type="Event" />
+    <Input Name="INIT" x="1140" y="1686" Type="Event" />
     <Frame Name="FRAME6" X="540" Y="340" Width="1580" Height="1680">
       <Parameter Name="BackgroundColor" Value="AntiqueWhite" />
       <Parameter Name="TextColor" Value="Black" />
@@ -74,7 +75,7 @@
       <Parameter Name="Text" Value="02 - FUNCTIONNAL OUTPUT INTERFACE" />
       <Parameter Name="NxtLayerIdentifier" Value="" />
     </Frame>
-    <Frame Name="FRAME10" X="2160" Y="2060" Width="1560" Height="980.0001">
+    <Frame Name="FRAME10" X="2160" Y="2060" Width="1560" Height="980">
       <Parameter Name="BackgroundColor" Value="224, 224, 224" />
       <Parameter Name="TextColor" Value="Black" />
       <Parameter Name="Font" Value="Microsoft Sans Serif, 14.25pt, style=Bold" />
@@ -83,17 +84,17 @@
       <Parameter Name="Text" Value="05 - LOGIC" />
       <Parameter Name="NxtLayerIdentifier" Value="" />
     </Frame>
-    <Output Name="DaysToMaintenance" x="4480" y="1594" Type="Data" />
-    <Output Name="DAYS_TO_MAINTENANCE" x="4480" y="1534" Type="Event" />
-    <Output Name="ERROR" x="4480" y="873.9998" Type="Event" />
-    <Output Name="TEMP" x="4480" y="1094" Type="Event" />
-    <Output Name="RELIABILITY" x="4480" y="1314" Type="Event" />
-    <Output Name="Reliability" x="4480" y="1374" Type="Data" />
-    <Output Name="Status" x="4480" y="714" Type="Data" />
-    <Output Name="STATUS" x="4480" y="654" Type="Event" />
-    <Output Name="Error" x="4480" y="933.9998" Type="Data" />
-    <Output Name="Temp" x="4480" y="1154" Type="Data" />
-    <Output Name="INITO" x="4460" y="514" Type="Event" />
+    <Output Name="DaysToMaintenance" x="4480" y="1592" Type="Data" />
+    <Output Name="DAYS_TO_MAINTENANCE" x="4480" y="1532" Type="Event" />
+    <Output Name="ERROR" x="4480" y="871.9998" Type="Event" />
+    <Output Name="TEMP" x="4480" y="1092" Type="Event" />
+    <Output Name="RELIABILITY" x="4480" y="1312" Type="Event" />
+    <Output Name="Reliability" x="4480" y="1372" Type="Data" />
+    <Output Name="Status" x="4480" y="712" Type="Data" />
+    <Output Name="STATUS" x="4480" y="652" Type="Event" />
+    <Output Name="Error" x="4480" y="931.9998" Type="Data" />
+    <Output Name="Temp" x="4480" y="1152" Type="Data" />
+    <Output Name="INITO" x="4460" y="512" Type="Event" />
     <EventConnections>
       <Connection Source="$21.INITO" Destination="$INITO" dx1="130">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
@@ -252,7 +253,7 @@
         <AvoidsNodes>false</AvoidsNodes>
       </Connection>
       <Connection Source="$74A5515BC11AE3EC.6FC99A5BD1C38561" Destination="$21.REQ" />
-      <Connection Source="$INIT" Destination="$8.7347D86DDA993015">
+      <Connection Source="$INIT" Destination="$8.7347D86DDA993015" dx1="735.7084">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
       <Connection Source="$21.CNF" Destination="$8.16664CB9A116E3DB">
@@ -277,6 +278,9 @@
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
       <Connection Source="$8.3BEE9E813EF15150" Destination="$21.INIT">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$21.INITO" Destination="$8.16664CB9A116E3DB">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
     </EventConnections>
@@ -454,9 +458,6 @@
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
       <Connection Source="$404867D502801067.F7EFA613AECFA949" Destination="$8.C1852D5FB1070A0F">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$404867D502801067.7E801A3D14F8993F" Destination="$8.8529AECF7FF4A30F">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
       <Connection Source="$404867D502801067.6FB195A940C6F07B" Destination="$8.93DF54841294738E">

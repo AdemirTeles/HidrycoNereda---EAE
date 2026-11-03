@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="206d6e1a-fdd3-7eab-e72a-258cc7608343" Name="PhasesOff" Comment="Emergencia: indica, para ate 7 fases, se a fase esta parada (equipamentos desligados)" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Hidryco" Version="1.0" Author="Hidryco" Date="30/10/2026" Remarks="1.0: Off = estado fora de Starting/Running/Stopping/Aborting (Ready, Aborted, Interlocked ou vazio). Usado para o passo da emergencia so terminar com a fase parada." />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="2F17D91A6F64D136" Name="REQ" Comment="Mudanca de estado de alguma fase">
+        <With Var="State1" />
+        <With Var="State2" />
+        <With Var="State3" />
+        <With Var="State4" />
+        <With Var="State5" />
+        <With Var="State6" />
+        <With Var="State7" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="D7990D7C99EEE591" Name="CNF">
+        <With Var="Off1" />
+        <With Var="Off2" />
+        <With Var="Off3" />
+        <With Var="Off4" />
+        <With Var="Off5" />
+        <With Var="Off6" />
+        <With Var="Off7" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="5A6CF64414F7786A" Name="State1" Type="STRING[50]" Comment="Estado da fase 1 (Phase.State); vazio = sem fase" />
+      <VarDeclaration ID="E9BB4A671EAACBC9" Name="State2" Type="STRING[50]" Comment="Estado da fase 2 (Phase.State); vazio = sem fase" />
+      <VarDeclaration ID="CF70A4C3BE71B635" Name="State3" Type="STRING[50]" Comment="Estado da fase 3 (Phase.State); vazio = sem fase" />
+      <VarDeclaration ID="532979FBB2533CA0" Name="State4" Type="STRING[50]" Comment="Estado da fase 4 (Phase.State); vazio = sem fase" />
+      <VarDeclaration ID="5936C5E2D7E87E38" Name="State5" Type="STRING[50]" Comment="Estado da fase 5 (Phase.State); vazio = sem fase" />
+      <VarDeclaration ID="928E47CFBCD3F478" Name="State6" Type="STRING[50]" Comment="Estado da fase 6 (Phase.State); vazio = sem fase" />
+      <VarDeclaration ID="AB80ADC5D6F96A48" Name="State7" Type="STRING[50]" Comment="Estado da fase 7 (Phase.State); vazio = sem fase" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="958634B72A436E87" Name="Off1" Type="BOOL" InitialValue="TRUE" Comment="Fase 1 parada (nao esta em Starting/Running/Stopping/Aborting)" />
+      <VarDeclaration ID="B19FC186CE5B64BB" Name="Off2" Type="BOOL" InitialValue="TRUE" Comment="Fase 2 parada (nao esta em Starting/Running/Stopping/Aborting)" />
+      <VarDeclaration ID="CCF5127EA1C07543" Name="Off3" Type="BOOL" InitialValue="TRUE" Comment="Fase 3 parada (nao esta em Starting/Running/Stopping/Aborting)" />
+      <VarDeclaration ID="D825D9C6FA394175" Name="Off4" Type="BOOL" InitialValue="TRUE" Comment="Fase 4 parada (nao esta em Starting/Running/Stopping/Aborting)" />
+      <VarDeclaration ID="69DBFF738254C620" Name="Off5" Type="BOOL" InitialValue="TRUE" Comment="Fase 5 parada (nao esta em Starting/Running/Stopping/Aborting)" />
+      <VarDeclaration ID="F74AF32E55C6D82F" Name="Off6" Type="BOOL" InitialValue="TRUE" Comment="Fase 6 parada (nao esta em Starting/Running/Stopping/Aborting)" />
+      <VarDeclaration ID="2D548AC2D1EE44A5" Name="Off7" Type="BOOL" InitialValue="TRUE" Comment="Fase 7 parada (nao esta em Starting/Running/Stopping/Aborting)" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="c8787805-7b70-fc30-6322-e191f4d8f159">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="algOff" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="600" y="400" />
+      <ECState Name="CALC" x="600" y="1100">
+        <ECAction Algorithm="algOff" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="CALC" Condition="REQ" x="400" y="750" />
+      <ECTransition Source="CALC" Destination="START" Condition="1" x="800" y="750" />
+    </ECC>
+    <Algorithm Name="algOff">
+      <ST><![CDATA[Off1 := NOT (State1 = 'Starting' OR State1 = 'Running' OR State1 = 'Stopping' OR State1 = 'Aborting');
+Off2 := NOT (State2 = 'Starting' OR State2 = 'Running' OR State2 = 'Stopping' OR State2 = 'Aborting');
+Off3 := NOT (State3 = 'Starting' OR State3 = 'Running' OR State3 = 'Stopping' OR State3 = 'Aborting');
+Off4 := NOT (State4 = 'Starting' OR State4 = 'Running' OR State4 = 'Stopping' OR State4 = 'Aborting');
+Off5 := NOT (State5 = 'Starting' OR State5 = 'Running' OR State5 = 'Stopping' OR State5 = 'Aborting');
+Off6 := NOT (State6 = 'Starting' OR State6 = 'Running' OR State6 = 'Stopping' OR State6 = 'Aborting');
+Off7 := NOT (State7 = 'Starting' OR State7 = 'Running' OR State7 = 'Stopping' OR State7 = 'Aborting');]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

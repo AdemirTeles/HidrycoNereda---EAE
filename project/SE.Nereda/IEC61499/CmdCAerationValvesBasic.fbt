@@ -2,7 +2,7 @@
 <!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
 <FBType GUID="8d03bd9b-77de-4782-a057-2101ab752904" Comment="Basic Function Block Type" Name="CmdCAerationValvesBasic" Namespace="SE.Nereda">
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Schneider Electric" Version="0.0" Author="SESA713705" Date="8/9/2024" Remarks="Template" />
+  <VersionInfo Organization="Schneider Electric" Version="0.1" Author="SESA713705" Date="30/10/2026" Remarks="0.1: AIRFILL_CHOICE aceito tambem em Starting e StartReday (antes se perdia e a AV-4x171 da emergencia nao abria). Template" />
   <InterfaceList>
     <EventInputs>
       <Event ID="0181C35002D51DB9" Name="READY">
@@ -137,6 +137,12 @@
       <ECState Name="Aborting2" x="7022.182" y="2417.143">
         <ECAction Algorithm="CloseValve" Output="CNF_VALVE_CMD" />
       </ECState>
+      <ECState Name="AirFillStarting" Comment="AIRFILL_CHOICE em Starting: aplica o AirFill sem repetir o StartValve" x="1300" y="1718">
+        <ECAction Algorithm="AirFillCheck" Output="CNF_VALVE_CMD" />
+      </ECState>
+      <ECState Name="AirFillStartReady" Comment="AIRFILL_CHOICE em StartReday: aplica o AirFill sem repetir o StartReady" x="1300" y="2524">
+        <ECAction Algorithm="AirFillCheck" Output="CNF_VALVE_CMD" />
+      </ECState>
       <ECState Name="AirFillCheck" x="4696.154" y="577.1429">
         <ECAction Algorithm="AirFillCheck" Output="CNF_VALVE_CMD" />
       </ECState>
@@ -215,6 +221,15 @@
       <ECTransition Source="AirFillCheck" Destination="START" Condition="1" x="4826.143" y="746.5841">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="1207.301,173.8065,1213.026,196.4176" />
       </ECTransition>
+      <ECTransition Source="Starting" Destination="AirFillStarting" Condition="AIRFILL_CHOICE" x="1950" y="1650" />
+      <ECTransition Source="AirFillStarting" Destination="StartReday" Condition="AerationBlockOpen" x="1950" y="2150" />
+      <ECTransition Source="AirFillStarting" Destination="Abort" Condition="ABORTING AND Aborting" x="1300" y="3500" />
+      <ECTransition Source="AirFillStarting" Destination="AirFillStarting" Condition="AIRFILL_CHOICE" x="1000" y="1600" />
+      <ECTransition Source="StartReday" Destination="AirFillStartReady" Condition="AIRFILL_CHOICE" x="1950" y="2450" />
+      <ECTransition Source="AirFillStartReady" Destination="Run" Condition="RUN AND Run = TRUE" x="1950" y="2800" />
+      <ECTransition Source="AirFillStartReady" Destination="Stopping1" Condition="STOPPING AND Stopping" x="1950" y="2300" />
+      <ECTransition Source="AirFillStartReady" Destination="Abort" Condition="ABORTING AND Aborting" x="1300" y="3700" />
+      <ECTransition Source="AirFillStartReady" Destination="AirFillStartReady" Condition="AIRFILL_CHOICE" x="1000" y="2450" />
     </ECC>
     <Algorithm Name="StartReady">
       <ST><![CDATA[;

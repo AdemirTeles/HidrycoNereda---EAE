@@ -58,6 +58,10 @@ namespace SE.Nereda.Faceplates.EmergencyReactor_2
 			this.freeText16 = new NxtControl.GuiFramework.FreeText();
 			this.timeTextBox1 = new System.HMI.Symbols.Base.TimeTextBox();
 			this.freeText10 = new NxtControl.GuiFramework.FreeText();
+			this.freeText11 = new NxtControl.GuiFramework.FreeText();
+			this.freeText14 = new NxtControl.GuiFramework.FreeText();
+			this.FB_RL1 = new System.HMI.Symbols.Base.TextBox<float>();
+			this.FB_RL2 = new System.HMI.Symbols.Base.TextBox<float>();
 			// 
 			// polygon1
 			// 
@@ -77,7 +81,7 @@ namespace SE.Nereda.Faceplates.EmergencyReactor_2
 			// 
 			// rectangle1
 			// 
-			this.rectangle1.Bounds = new NxtControl.Drawing.RectF(((float)(-144D)), ((float)(-72D)), ((float)(528D)), ((float)(664D)));
+			this.rectangle1.Bounds = new NxtControl.Drawing.RectF(((float)(8D)), ((float)(32D)), ((float)(376D)), ((float)(560D)));
 			this.rectangle1.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(250)), ((byte)(250)), ((byte)(250))));
 			this.rectangle1.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
 			this.rectangle1.Name = "rectangle1";
@@ -86,7 +90,7 @@ namespace SE.Nereda.Faceplates.EmergencyReactor_2
 			// 
 			this.freeText1.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.freeText1.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-			this.freeText1.Location = new NxtControl.Drawing.PointF(16D, 36D);
+			this.freeText1.Location = new NxtControl.Drawing.PointF(16D, 44D);
 			this.freeText1.Name = "freeText1";
 			this.freeText1.Text = "Step 1 - Feed Time :";
 			// 
@@ -94,7 +98,7 @@ namespace SE.Nereda.Faceplates.EmergencyReactor_2
 			// 
 			this.freeText2.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.freeText2.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-			this.freeText2.Location = new NxtControl.Drawing.PointF(16D, 68D);
+			this.freeText2.Location = new NxtControl.Drawing.PointF(16D, 76D);
 			this.freeText2.Name = "freeText2";
 			this.freeText2.Text = "Step 2 - Vent Sludge Time:";
 			// 
@@ -102,7 +106,7 @@ namespace SE.Nereda.Faceplates.EmergencyReactor_2
 			// 
 			this.freeText3.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.freeText3.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-			this.freeText3.Location = new NxtControl.Drawing.PointF(16D, 100D);
+			this.freeText3.Location = new NxtControl.Drawing.PointF(16D, 108D);
 			this.freeText3.Name = "freeText3";
 			this.freeText3.Text = "Step 3 - Sludge Discharge Time :";
 			// 
@@ -110,14 +114,14 @@ namespace SE.Nereda.Faceplates.EmergencyReactor_2
 			// 
 			this.freeText4.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.freeText4.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-			this.freeText4.Location = new NxtControl.Drawing.PointF(16D, 132D);
+			this.freeText4.Location = new NxtControl.Drawing.PointF(16D, 140D);
 			this.freeText4.Name = "freeText4";
 			this.freeText4.Text = "Step 4 - Lower Level Time :";
 			// 
 			// S1_FeedTime
 			// 
 			this.S1_FeedTime.BeginInit();
-			this.S1_FeedTime.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.64D, 0D, 0D, 1.0384615384615385D, 248D, 32D);
+			this.S1_FeedTime.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.64D, 0D, 0D, 1.0384615384615385D, 248D, 40D);
 			this.S1_FeedTime.MaximumTag = null;
 			this.S1_FeedTime.MinimumTag = null;
 			this.S1_FeedTime.Name = "S1_FeedTime";
@@ -130,7 +134,7 @@ namespace SE.Nereda.Faceplates.EmergencyReactor_2
 			// S2_VentSludge
 			// 
 			this.S2_VentSludge.BeginInit();
-			this.S2_VentSludge.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.64D, 0D, 0D, 1D, 248D, 64D);
+			this.S2_VentSludge.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.64D, 0D, 0D, 1D, 248D, 72D);
 			this.S2_VentSludge.MaximumTag = null;
 			this.S2_VentSludge.MinimumTag = null;
 			this.S2_VentSludge.Name = "S2_VentSludge";
@@ -143,7 +147,7 @@ namespace SE.Nereda.Faceplates.EmergencyReactor_2
 			// S3_SludgeDischargeTime
 			// 
 			this.S3_SludgeDischargeTime.BeginInit();
-			this.S3_SludgeDischargeTime.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.64D, 0D, 0D, 1D, 248D, 96D);
+			this.S3_SludgeDischargeTime.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.64D, 0D, 0D, 1D, 248D, 104D);
 			this.S3_SludgeDischargeTime.MaximumTag = null;
 			this.S3_SludgeDischargeTime.MinimumTag = null;
 			this.S3_SludgeDischargeTime.Name = "S3_SludgeDischargeTime";
@@ -156,7 +160,7 @@ namespace SE.Nereda.Faceplates.EmergencyReactor_2
 			// S4_LowerLevelTime
 			// 
 			this.S4_LowerLevelTime.BeginInit();
-			this.S4_LowerLevelTime.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.64D, 0D, 0D, 1D, 248D, 128D);
+			this.S4_LowerLevelTime.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.64D, 0D, 0D, 1D, 248D, 136D);
 			this.S4_LowerLevelTime.MaximumTag = null;
 			this.S4_LowerLevelTime.MinimumTag = null;
 			this.S4_LowerLevelTime.Name = "S4_LowerLevelTime";
@@ -169,7 +173,7 @@ namespace SE.Nereda.Faceplates.EmergencyReactor_2
 			// S6_VentAerateTime
 			// 
 			this.S6_VentAerateTime.BeginInit();
-			this.S6_VentAerateTime.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.64D, 0D, 0D, 1D, 248D, 192D);
+			this.S6_VentAerateTime.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.64D, 0D, 0D, 1D, 248D, 200D);
 			this.S6_VentAerateTime.MaximumTag = null;
 			this.S6_VentAerateTime.MinimumTag = null;
 			this.S6_VentAerateTime.Name = "S6_VentAerateTime";
@@ -182,7 +186,7 @@ namespace SE.Nereda.Faceplates.EmergencyReactor_2
 			// S7_WaitTime
 			// 
 			this.S7_WaitTime.BeginInit();
-			this.S7_WaitTime.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.64D, 0D, 0D, 1D, 248D, 224D);
+			this.S7_WaitTime.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.64D, 0D, 0D, 1D, 248D, 232D);
 			this.S7_WaitTime.MaximumTag = null;
 			this.S7_WaitTime.MinimumTag = null;
 			this.S7_WaitTime.Name = "S7_WaitTime";
@@ -195,7 +199,7 @@ namespace SE.Nereda.Faceplates.EmergencyReactor_2
 			// S8_VentSludgeTime
 			// 
 			this.S8_VentSludgeTime.BeginInit();
-			this.S8_VentSludgeTime.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.64D, 0D, 0D, 1D, 248D, 256D);
+			this.S8_VentSludgeTime.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.64D, 0D, 0D, 1D, 248D, 264D);
 			this.S8_VentSludgeTime.MaximumTag = null;
 			this.S8_VentSludgeTime.MinimumTag = null;
 			this.S8_VentSludgeTime.Name = "S8_VentSludgeTime";
@@ -209,7 +213,7 @@ namespace SE.Nereda.Faceplates.EmergencyReactor_2
 			// 
 			this.freeText5.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.freeText5.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-			this.freeText5.Location = new NxtControl.Drawing.PointF(16D, 196D);
+			this.freeText5.Location = new NxtControl.Drawing.PointF(16D, 204D);
 			this.freeText5.Name = "freeText5";
 			this.freeText5.Text = "Step 6 - Vent Aerate Time :";
 			// 
@@ -217,7 +221,7 @@ namespace SE.Nereda.Faceplates.EmergencyReactor_2
 			// 
 			this.freeText6.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.freeText6.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-			this.freeText6.Location = new NxtControl.Drawing.PointF(16D, 228D);
+			this.freeText6.Location = new NxtControl.Drawing.PointF(16D, 236D);
 			this.freeText6.Name = "freeText6";
 			this.freeText6.Text = "Step 7 - Wait Time :";
 			// 
@@ -225,14 +229,14 @@ namespace SE.Nereda.Faceplates.EmergencyReactor_2
 			// 
 			this.freeText7.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.freeText7.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-			this.freeText7.Location = new NxtControl.Drawing.PointF(16D, 260D);
+			this.freeText7.Location = new NxtControl.Drawing.PointF(16D, 268D);
 			this.freeText7.Name = "freeText7";
 			this.freeText7.Text = "Step 8 - Vent Sludge Time :";
 			// 
 			// S5_AerateTime
 			// 
 			this.S5_AerateTime.BeginInit();
-			this.S5_AerateTime.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.64D, 0D, 0D, 1D, 248D, 160D);
+			this.S5_AerateTime.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.64D, 0D, 0D, 1D, 248D, 168D);
 			this.S5_AerateTime.IsOnlyInput = true;
 			this.S5_AerateTime.MaximumTag = null;
 			this.S5_AerateTime.MinimumTag = null;
@@ -247,14 +251,14 @@ namespace SE.Nereda.Faceplates.EmergencyReactor_2
 			// 
 			this.freeText8.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.freeText8.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-			this.freeText8.Location = new NxtControl.Drawing.PointF(16D, 164D);
+			this.freeText8.Location = new NxtControl.Drawing.PointF(16D, 172D);
 			this.freeText8.Name = "freeText8";
 			this.freeText8.Text = "Step 5 - Aerate Time :";
 			// 
 			// FeedCapacity
 			// 
 			this.FeedCapacity.BeginInit();
-			this.FeedCapacity.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.64D, 0D, 0D, 1D, 248D, 384D);
+			this.FeedCapacity.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.64D, 0D, 0D, 1D, 248D, 368D);
 			this.FeedCapacity.MaximumTag = null;
 			this.FeedCapacity.MinimumTag = null;
 			this.FeedCapacity.Name = "FeedCapacity";
@@ -273,7 +277,7 @@ namespace SE.Nereda.Faceplates.EmergencyReactor_2
 			// 
 			this.freeText9.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.freeText9.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-			this.freeText9.Location = new NxtControl.Drawing.PointF(16D, 424D);
+			this.freeText9.Location = new NxtControl.Drawing.PointF(16D, 408D);
 			this.freeText9.Name = "freeText9";
 			this.freeText9.Text = "Aeration Capacity :";
 			// 
@@ -281,14 +285,14 @@ namespace SE.Nereda.Faceplates.EmergencyReactor_2
 			// 
 			this.freeText12.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.freeText12.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-			this.freeText12.Location = new NxtControl.Drawing.PointF(16D, 392D);
+			this.freeText12.Location = new NxtControl.Drawing.PointF(16D, 376D);
 			this.freeText12.Name = "freeText12";
 			this.freeText12.Text = "Feed Capacity :";
 			// 
 			// AerationCapacity
 			// 
 			this.AerationCapacity.BeginInit();
-			this.AerationCapacity.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.64D, 0D, 0D, 1D, 248D, 416D);
+			this.AerationCapacity.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.64D, 0D, 0D, 1D, 248D, 400D);
 			this.AerationCapacity.MaximumTag = null;
 			this.AerationCapacity.MinimumTag = null;
 			this.AerationCapacity.Name = "AerationCapacity";
@@ -306,7 +310,7 @@ namespace SE.Nereda.Faceplates.EmergencyReactor_2
 			// AirVentGrid
 			// 
 			this.AirVentGrid.BeginInit();
-			this.AirVentGrid.DesignMatrix = new NxtControl.Drawing.Matrix2D(1.1999999999999995D, 0D, 0D, 0.8666666666666667D, 248D, 448D);
+			this.AirVentGrid.DesignMatrix = new NxtControl.Drawing.Matrix2D(1.1999999999999995D, 0D, 0D, 0.8666666666666667D, 248D, 432D);
 			this.AirVentGrid.FalseImage = new NxtControl.Drawing.ImageHolder();
 			this.AirVentGrid.FalseImageDisabled = new NxtControl.Drawing.ImageHolder();
 			this.AirVentGrid.Font = new NxtControl.Drawing.Font("ButtonFont");
@@ -320,7 +324,7 @@ namespace SE.Nereda.Faceplates.EmergencyReactor_2
 			// AirLockTime
 			// 
 			this.AirLockTime.BeginInit();
-			this.AirLockTime.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.64D, 0D, 0D, 1D, 248D, 512D);
+			this.AirLockTime.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.64D, 0D, 0D, 1D, 248D, 472D);
 			this.AirLockTime.MaximumTag = null;
 			this.AirLockTime.MinimumTag = null;
 			this.AirLockTime.Name = "AirLockTime";
@@ -332,7 +336,7 @@ namespace SE.Nereda.Faceplates.EmergencyReactor_2
 			// 
 			this.freeText13.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.freeText13.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-			this.freeText13.Location = new NxtControl.Drawing.PointF(16D, 452D);
+			this.freeText13.Location = new NxtControl.Drawing.PointF(16D, 436D);
 			this.freeText13.Name = "freeText13";
 			this.freeText13.Text = "Vent Phase - Vent Air Grid :";
 			// 
@@ -340,13 +344,13 @@ namespace SE.Nereda.Faceplates.EmergencyReactor_2
 			// 
 			this.freeText15.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.freeText15.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-			this.freeText15.Location = new NxtControl.Drawing.PointF(16D, 516D);
+			this.freeText15.Location = new NxtControl.Drawing.PointF(16D, 476D);
 			this.freeText15.Name = "freeText15";
 			this.freeText15.Text = "Air Lock Time :";
 			// 
 			// rectangle2
 			// 
-			this.rectangle2.Bounds = new NxtControl.Drawing.RectF(((float)(9D)), ((float)(160D)), ((float)(374D)), ((float)(26D)));
+			this.rectangle2.Bounds = new NxtControl.Drawing.RectF(((float)(9D)), ((float)(168D)), ((float)(374D)), ((float)(26D)));
 			this.rectangle2.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(210)), ((byte)(210)), ((byte)(210))));
 			this.rectangle2.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
 			this.rectangle2.Name = "rectangle2";
@@ -354,7 +358,7 @@ namespace SE.Nereda.Faceplates.EmergencyReactor_2
 			// 
 			// rectangle3
 			// 
-			this.rectangle3.Bounds = new NxtControl.Drawing.RectF(((float)(248D)), ((float)(160D)), ((float)(96D)), ((float)(26D)));
+			this.rectangle3.Bounds = new NxtControl.Drawing.RectF(((float)(248D)), ((float)(168D)), ((float)(96D)), ((float)(26D)));
 			this.rectangle3.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("transparent"));
 			this.rectangle3.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
 			this.rectangle3.Name = "rectangle3";
@@ -362,7 +366,7 @@ namespace SE.Nereda.Faceplates.EmergencyReactor_2
 			// S9_SludgeDischargeTime
 			// 
 			this.S9_SludgeDischargeTime.BeginInit();
-			this.S9_SludgeDischargeTime.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.64D, 0D, 0D, 1D, 248D, 288D);
+			this.S9_SludgeDischargeTime.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.64D, 0D, 0D, 1D, 248D, 296D);
 			this.S9_SludgeDischargeTime.MaximumTag = null;
 			this.S9_SludgeDischargeTime.MinimumTag = null;
 			this.S9_SludgeDischargeTime.Name = "S9_SludgeDischargeTime";
@@ -376,14 +380,14 @@ namespace SE.Nereda.Faceplates.EmergencyReactor_2
 			// 
 			this.freeText16.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.freeText16.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-			this.freeText16.Location = new NxtControl.Drawing.PointF(16D, 292D);
+			this.freeText16.Location = new NxtControl.Drawing.PointF(16D, 300D);
 			this.freeText16.Name = "freeText16";
 			this.freeText16.Text = "Step 9 - Sludge Discharge Time :";
 			// 
 			// timeTextBox1
 			// 
 			this.timeTextBox1.BeginInit();
-			this.timeTextBox1.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.64D, 0D, 0D, 1D, 248D, 320D);
+			this.timeTextBox1.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.64D, 0D, 0D, 1D, 248D, 328D);
 			this.timeTextBox1.MaximumTag = null;
 			this.timeTextBox1.MinimumTag = null;
 			this.timeTextBox1.Name = "timeTextBox1";
@@ -397,9 +401,59 @@ namespace SE.Nereda.Faceplates.EmergencyReactor_2
 			// 
 			this.freeText10.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.freeText10.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-			this.freeText10.Location = new NxtControl.Drawing.PointF(16D, 324D);
+			this.freeText10.Location = new NxtControl.Drawing.PointF(16D, 332D);
 			this.freeText10.Name = "freeText10";
 			this.freeText10.Text = "Step10 - Wait Time :";
+			// 
+			// freeText11
+			// 
+			this.freeText11.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.freeText11.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+			this.freeText11.Location = new NxtControl.Drawing.PointF(16D, 520D);
+			this.freeText11.Name = "freeText11";
+			this.freeText11.Text = "FB RL1 - Reactor Level S3 -> S4 :";
+			// 
+			// freeText14
+			// 
+			this.freeText14.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.freeText14.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+			this.freeText14.Location = new NxtControl.Drawing.PointF(16D, 560D);
+			this.freeText14.Name = "freeText14";
+			this.freeText14.Text = "FB RL2 - Reactor Level S9 :";
+			// 
+			// FB_RL1
+			// 
+			this.FB_RL1.BeginInit();
+			this.FB_RL1.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.64D, 0D, 0D, 1D, 248D, 512D);
+			this.FB_RL1.MaximumTag = null;
+			this.FB_RL1.MinimumTag = null;
+			this.FB_RL1.Name = "FB_RL1";
+			this.FB_RL1.NumberBase = NxtControl.GuiFramework.NumberBase.Decimal;
+			this.FB_RL1.Pen = new NxtControl.Drawing.Pen("TextBoxPen");
+			this.FB_RL1.SetColor = new NxtControl.Drawing.Color("Yellow");
+			this.FB_RL1.TagName = "FB_RL1";
+			this.FB_RL1.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
+			this.FB_RL1.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.FB_RL1.UseInputPad = true;
+			this.FB_RL1.Value = 0F;
+			this.FB_RL1.EndInit();
+			// 
+			// FB_RL2
+			// 
+			this.FB_RL2.BeginInit();
+			this.FB_RL2.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.64D, 0D, 0D, 1D, 248D, 552D);
+			this.FB_RL2.MaximumTag = null;
+			this.FB_RL2.MinimumTag = null;
+			this.FB_RL2.Name = "FB_RL2";
+			this.FB_RL2.NumberBase = NxtControl.GuiFramework.NumberBase.Decimal;
+			this.FB_RL2.Pen = new NxtControl.Drawing.Pen("TextBoxPen");
+			this.FB_RL2.SetColor = new NxtControl.Drawing.Color("Yellow");
+			this.FB_RL2.TagName = "FB_RL2";
+			this.FB_RL2.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
+			this.FB_RL2.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.FB_RL2.UseInputPad = true;
+			this.FB_RL2.Value = 0F;
+			this.FB_RL2.EndInit();
 			// 
 			// fpSettings
 			// 
@@ -437,7 +491,11 @@ namespace SE.Nereda.Faceplates.EmergencyReactor_2
 			this.S9_SludgeDischargeTime,
 			this.freeText16,
 			this.timeTextBox1,
-			this.freeText10});
+			this.freeText10,
+			this.freeText11,
+			this.freeText14,
+			this.FB_RL1,
+			this.FB_RL2});
 			this.Size = new System.Drawing.Size(392, 600);
 			this.Title = "EMERGENCY RECIPE  -  SETTINGS";
 
@@ -474,6 +532,10 @@ namespace SE.Nereda.Faceplates.EmergencyReactor_2
 		private NxtControl.GuiFramework.FreeText freeText16;
 		private System.HMI.Symbols.Base.TimeTextBox timeTextBox1;
 		private NxtControl.GuiFramework.FreeText freeText10;
+		private NxtControl.GuiFramework.FreeText freeText11;
+		private NxtControl.GuiFramework.FreeText freeText14;
+		private System.HMI.Symbols.Base.TextBox<float> FB_RL1;
+		private System.HMI.Symbols.Base.TextBox<float> FB_RL2;
 		#endregion
 	}
 }

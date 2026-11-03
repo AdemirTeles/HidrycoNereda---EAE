@@ -3,7 +3,7 @@
 <FBType GUID="cc60a561-a727-4657-9327-bfded43af9fb" Name="InfluentSensors" Format="2.0" Comment="CAT Function Block Type" Namespace="SE.Nereda">
   <Attribute Name="HMI.Alias" Value="" />
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Schneider Electric" Version="0.1" Author="Claude/Hidryco" Date="10/7/2026" Remarks="Rev1 - FeedReactorFlowPv (40FT05): QualityFailDelay = T#10s (tolerancia da falha de canal por qualidade do sinal Modbus)" />
+  <VersionInfo Organization="Schneider Electric" Version="0.2" Author="Claude/Hidryco" Date="30/10/2026" Remarks="Rev2 - saida LevelChFail (falha do radar do buffer de entrada) no CNF_LEVEL_ALM, para parar os misturadores. Rev1 - FeedReactorFlowPv (40FT05): QualityFailDelay = T#10s (tolerancia da falha de canal por qualidade do sinal Modbus)" />
   <InterfaceList>
     <EventInputs>
       <Event ID="9977DC17201CA619" Name="INIT" Comment="Initializes the symbolic link data destination FB with N (1 &lt;= N &lt;= 16) variables" />
@@ -13,9 +13,15 @@
       <Event ID="409CEAF28252E4B1" Name="CNF_L_S_PV" Comment="Execution confirmation of Pv">
         <With Var="LevelSwitch" />
       </Event>
+      <Event ID="DEDC30291695E4A9" Name="CNF_LEVEL_ALM" Comment="Alarmes de nivel do buffer de entrada (LL)">
+        <With Var="LevelLoLo" />
+        <With Var="LevelChFail" />
+      </Event>
     </EventOutputs>
     <OutputVars>
       <VarDeclaration ID="45B83F9CD0834A04" Name="LevelSwitch" Type="BOOL" Comment="Process value output" />
+      <VarDeclaration ID="D0710625DAA94EBC" Name="LevelLoLo" Type="BOOL" Comment="Alarme LL do nivel do buffer de entrada" />
+      <VarDeclaration ID="63B99AA1B0849BC6" Name="LevelChFail" Type="BOOL" Comment="Falha do radar do buffer de entrada (falha de canal)" />
     </OutputVars>
     <Plugs>
       <AdapterDeclaration ID="EB7B6D3A8E8E83E7" Name="IFB_IBL1" Type="IBoolean" Namespace="SE.Nereda" x="7500" y="3760" />
@@ -40,6 +46,7 @@
       <Adapter ID="656137DBE41C10E7" Name="IpHPv" Type="IAnalog" Namespace="SE.App2Base" Comment="Process value and status interface adapter" />
       <Adapter ID="5C582A915C8D98D8" Name="InfluentLevelMeasurement_1" Type="IAnalog" Namespace="SE.App2Base" />
       <Adapter ID="E8428DDA357DC0C4" Name="InfluentLevelSwitch_1" Type="IDigital" Namespace="SE.App2Base" />
+      <Adapter ID="4288C18CAEEBE22C" Name="InfluentLevelMeasurement_2" Type="IAnalog" Namespace="SE.App2Base" Comment="Process value and status interface adapter" />
     </AdapterOutputs>
   </InterfaceList>
   <FBNetwork>
@@ -167,8 +174,12 @@
       <Parameter Name="Text" Value="pH measurement influent buffer" />
       <Parameter Name="NxtLayerIdentifier" Value="" />
     </Frame>
+    <Output ID="4288C18CAEEBE22C" Name="InfluentLevelMeasurement_2" x="7640" y="3230" Type="Adapter" />
     <Output ID="5C582A915C8D98D8" Name="InfluentLevelMeasurement_1" x="7560" y="3306" Type="Adapter" />
     <Output ID="E8428DDA357DC0C4" Name="InfluentLevelSwitch_1" x="7699.999" y="3366" Type="Adapter" />
+    <Output ID="DEDC30291695E4A9" Name="CNF_LEVEL_ALM" x="7619.999" y="2946" Type="Event" />
+    <Output ID="D0710625DAA94EBC" Name="LevelLoLo" x="7619.999" y="3006" Type="Data" />
+    <Output ID="63B99AA1B0849BC6" Name="LevelChFail" x="7619.999" y="3066" Type="Data" />
     <Output ID="409CEAF28252E4B1" Name="CNF_L_S_PV" x="7619.999" y="2886" Type="Event" />
     <Output ID="45B83F9CD0834A04" Name="LevelSwitch" x="7619.999" y="2946" Type="Data" />
     <Output ID="17FB584A3AFD1EEC" Name="IConductivityPv" x="7620" y="2644" Type="Adapter" />
@@ -189,6 +200,9 @@
     <Output ID="B410C1B56735CF55" Name="IFeedInfluentFlow_Pv1" x="7619.999" y="1930" Type="Adapter" />
     <Output ID="257CDF5EC36D9721" Name="INITO" x="2020" y="939.9998" Type="Event" />
     <EventConnections>
+      <Connection Source="$56E93E9241A73398.3F29AC8AB4D6A90D" Destination="$DEDC30291695E4A9">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
       <Connection Source="$D37F6B7942FBD0C0.INITO" Destination="$47F756E5352BF722.INIT" />
       <Connection Source="$47F756E5352BF722.INITO" Destination="$C306A78B9CED4F4E.INIT" />
       <Connection Source="$9977DC17201CA619" Destination="$D37F6B7942FBD0C0.INIT" dx1="121.4167">
@@ -212,6 +226,9 @@
       </Connection>
     </EventConnections>
     <DataConnections>
+      <Connection Source="$56E93E9241A73398.17F9137098988035" Destination="$D0710625DAA94EBC">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
       <Connection Source="$F0B7EFC096446903.C21AFB2E6DC1BF99" Destination="$45B83F9CD0834A04" dx1="457.4478">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
@@ -219,6 +236,9 @@
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
       <Connection Source="$56E93E9241A73398.A97F7594726B9149" Destination="$AFAD5E4DC964C45D.12C123CBE763A47D">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$56E93E9241A73398.B1ABC0252BF0A371" Destination="$63B99AA1B0849BC6">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
     </DataConnections>
@@ -316,6 +336,35 @@
       </Connection>
       <Connection Source="$56E93E9241A73398.6EF0614AFA3F1863" Destination="$5C582A915C8D98D8">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$56E93E9241A73398.C082456090AC3515" Destination="$4288C18CAEEBE22C">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <Points>
+          <Points>
+            <X>912.8333</X>
+            <Y>1385</Y>
+          </Points>
+          <Points>
+            <X>967.5</X>
+            <Y>1385</Y>
+          </Points>
+          <Points>
+            <X>967.5</X>
+            <Y>962.5</Y>
+          </Points>
+          <Points>
+            <X>1347.5</X>
+            <Y>962.5</Y>
+          </Points>
+          <Points>
+            <X>1347.5</X>
+            <Y>815</Y>
+          </Points>
+          <Points>
+            <X>1910</X>
+            <Y>815</Y>
+          </Points>
+        </Points>
       </Connection>
     </AdapterConnections>
   </FBNetwork>

@@ -82,7 +82,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Motor_Generico
 		bool ligado, automatico, cmdManual, remoto, local, manutencao, disponivel, bloqueado, bloqGerador, inversor = false;
 		bool fEmerg, fTerm, fInv, fPart, fPara, fCom;
 		short animGerador;
-		float velocidade, referencia;
+		float velocidade, referencia;   // velocidade = frequencia real (STS_FREQUENCIA, Hz)
 
 		void LigadoValueChanged(object s, ValueChangedEventArgs e) { ligado = Convert.ToBoolean(e.Value); Atualiza(); }
 		void AutomaticoValueChanged(object s, ValueChangedEventArgs e) { automatico = Convert.ToBoolean(e.Value); Atualiza(); }
@@ -110,7 +110,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Motor_Generico
 		void EComValueChanged(object s, ValueChangedEventArgs e) { eCom = Convert.ToByte(e.Value); Atualiza(); }
 		bool AlgumNaoRec() { return NaoRec(eEmerg) || NaoRec(eTerm) || NaoRec(eInv) || NaoRec(ePart) || NaoRec(ePara) || NaoRec(eCom); }
 		void AnimGeradorValueChanged(object s, ValueChangedEventArgs e) { animGerador = Convert.ToInt16(e.Value); Atualiza(); }
-		void VelocidadeValueChanged(object s, ValueChangedEventArgs e) { velocidade = Convert.ToSingle(e.Value); Atualiza(); }
+		void VelocidadeValueChanged(object s, ValueChangedEventArgs e) { velocidade = Convert.ToSingle(e.Value); ((IHMIPrimitiveInput<float>)vel).ValueChanged(velocidade); Atualiza(); }
 		void ReferenciaValueChanged(object s, ValueChangedEventArgs e) { referencia = Convert.ToSingle(e.Value); Atualiza(); }
 
 		// Falha de maior relevancia. Prioridade 1 (classe Alarm): emergencia, termica, acionamento, partida, parada.
@@ -153,10 +153,10 @@ namespace Hidryco.HidrycoLib.Faceplates.Motor_Generico
 			textoDisp.Text = bloqGerador ? "Bloqueado pelo gerador" : (bloqueado ? "Intertravado" : (disponivel ? "Disponível para o automático" : (automatico ? "Indisponível" : "Em manual")));
 			textoGerador.Visible = animGerador > 0;
 			textoGerador.Text = animGerador == 3 ? "Gerador: selecionado e ligado" : (animGerador == 2 ? "Gerador: selecionado" : "Gerador: pode alimentar este equipamento");
-			// velocidade (so com inversor): barra 0-100 %, ponteiro = real, marca vazada = referencia
+			// frequencia (so com inversor): texto em Hz; barra 0-60 Hz, ponteiro = frequencia real, marca vazada = referencia (Hz)
 			tituloVel.Visible = inversor; vel.Visible = inversor; velBarra.Visible = inversor; velRef.Visible = inversor; velPonteiro.Visible = inversor;
-			velPonteiro.Location = new NxtControl.Drawing.PointF(160F + 180F * Limita(velocidade) / 100F - 5F, 116F);
-			velRef.Location = new NxtControl.Drawing.PointF(160F + 180F * Limita(referencia) / 100F - 5F, 98F);
+			velPonteiro.Location = new NxtControl.Drawing.PointF(160F + 180F * Limita(velocidade * 100F / 60F) / 100F - 5F, 116F);
+			velRef.Location = new NxtControl.Drawing.PointF(160F + 180F * Limita(referencia * 100F / 60F) / 100F - 5F, 98F);
 			// navegacao: sem inversor o botao Medicoes some e os outros 3 se redistribuem na mesma largura
 			btnMedicoes.Visible = inversor;
 			if (inversor) { Nav(btnAjustes, 0, 4); Nav(btnManutencao, 1, 4); Nav(btnMedicoes, 2, 4); Nav(btnDiagnostico, 3, 4); }
@@ -185,5 +185,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Motor_Generico
 		}
 		void BtnResetClick(object sender, EventArgs e) { FireEvent_E_RESET_FALHA(true); FireEvent_E_RESET_FALHA(false); }
 
+
+		// ---- frequencia: a tag STS_FREQUENCIA ja vem em Hz do CLP (conversao no CLP) ----
 	}
 }

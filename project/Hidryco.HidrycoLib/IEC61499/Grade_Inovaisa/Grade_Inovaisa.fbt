@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="c0c6a6cf-01db-8a49-24fa-41423473cdb4" Name="Grade_Inovaisa" Comment="Grade mecanizada do painel Vibropac com os niveis montante, jusante e diferencial - HidrycoLib" Namespace="Hidryco.HidrycoLib">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Hidryco" Version="1.0" Author="Hidryco" Date="22/10/2026" Remarks="1.0: uma grade do gradeamento (padrao Grade_Equipamentos do legado): SensorMontante, SensorJusante, SensorDiferencial (Sensor_Generico por comunicacao, %) e Grade_Mecanizada_Inovaisa1 (Motor_Inovaisa com reverso e sobretorque). Os niveis chegam do processo e vao aos sensores por symlink ${PATH}SensorX.stsEntrada / stsFalhaComunicacao." />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="ABEE1148E34D9BFE" Name="REQ" Comment="Leitura do painel (pelo processo)">
+        <With Var="nivMontante" />
+        <With Var="nivJusante" />
+        <With Var="nivDiferencial" />
+        <With Var="falhaCom" />
+        <With Var="fldStatus" />
+        <With Var="fldSobretorque" />
+      </Event>
+      <Event ID="546B340D62024106" Name="E_RESET_FALHAS" Comment="Reset dos sensores e reconhecimento dos alarmes (com cmdResetFalhas = TRUE)">
+        <With Var="cmdResetFalhas" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="E31D8EEC4AA83653" Name="CNF" Comment="Status da grade (na mudanca)">
+        <With Var="stsLigado" />
+        <With Var="stsFalha" />
+        <With Var="stsAlarme" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="5629422A3B5B838A" Name="nivMontante" Type="REAL" Comment="Nivel montante (%)" />
+      <VarDeclaration ID="0A48A90C6A0D0550" Name="nivJusante" Type="REAL" Comment="Nivel jusante (%)" />
+      <VarDeclaration ID="5F90538AE86731E7" Name="nivDiferencial" Type="REAL" Comment="Nivel diferencial (%)" />
+      <VarDeclaration ID="DFE6CA66F4E123D9" Name="falhaCom" Type="BOOL" Comment="Sem comunicacao com o painel" />
+      <VarDeclaration ID="DFA27FFCDD03BE32" Name="fldStatus" Type="INT" Comment="Registro de status da grade (4007/4008)" />
+      <VarDeclaration ID="550C3011667C2FB9" Name="fldSobretorque" Type="INT" Comment="Registro do sobretorque (4010/4011)" />
+      <VarDeclaration ID="605D63048CED98E9" Name="cmdResetFalhas" Type="BOOL" Comment="TRUE = reset (com o evento E_RESET_FALHAS)" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="E2890AE591C3E435" Name="stsLigado" Type="BOOL" Comment="Grade funcionando" />
+      <VarDeclaration ID="8D853BC897AD2F8F" Name="stsFalha" Type="BOOL" Comment="Grade em falha" />
+      <VarDeclaration ID="7912CE47E4646D27" Name="stsAlarme" Type="BOOL" Comment="Falha ou sobretorque" />
+    </OutputVars>
+  </InterfaceList>
+  <FBNetwork>
+    <FB ID="7A66911943FF1778" Name="IThis" Type="Grade_Inovaisa_HMI" x="1140" y="1420" Namespace="Hidryco.HidrycoLib">
+      <Parameter Name="$579D3224D7908F42" Value="TRUE" />
+    </FB>
+    <FB ID="2B3D1D051A004E07" Name="plcStart1" Type="plcStart" x="1400" y="200" Namespace="SE.App2Base">
+      <Parameter Name="$Prio" Value="10" />
+    </FB>
+    <FB ID="184832BB4C46266B" Name="SensorMontante" Type="Sensor_Generico" x="7200" y="200" Namespace="Hidryco.HidrycoLib">
+      <Parameter Name="$D46B37D45FD5AF5D" Value="TRUE" />
+      <Parameter Name="$CC8EEC06FF0C4430" Value="'%'" />
+      <Parameter Name="$6D3A2524C5D0F0D1" Value="1" />
+    </FB>
+    <FB ID="57C347FC20456AB7" UID="1" Name="EnviaMontante" Type="SYMLINKMULTIVARSRC_804524063F215924" x="4200" y="200" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=3;VALUE${I}:BOOL,REAL,BOOL" />
+      <Parameter Name="$QI" Value="TRUE" />
+      <Parameter Name="$NAME1" Value="'$${PATH}SensorMontante.stsFalhaSensor'" />
+      <Parameter Name="$NAME2" Value="'$${PATH}SensorMontante.stsEntrada'" />
+      <Parameter Name="$NAME3" Value="'$${PATH}SensorMontante.stsFalhaComunicacao'" />
+    </FB>
+    <FB ID="1A597F37F0621295" Name="SensorJusante" Type="Sensor_Generico" x="7200" y="1100" Namespace="Hidryco.HidrycoLib">
+      <Parameter Name="$D46B37D45FD5AF5D" Value="TRUE" />
+      <Parameter Name="$CC8EEC06FF0C4430" Value="'%'" />
+      <Parameter Name="$6D3A2524C5D0F0D1" Value="1" />
+    </FB>
+    <FB ID="162010D6678275DA" UID="2" Name="EnviaJusante" Type="SYMLINKMULTIVARSRC_804524063F215924" x="4200" y="1100" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=3;VALUE${I}:BOOL,REAL,BOOL" />
+      <Parameter Name="$QI" Value="TRUE" />
+      <Parameter Name="$NAME1" Value="'$${PATH}SensorJusante.stsFalhaSensor'" />
+      <Parameter Name="$NAME2" Value="'$${PATH}SensorJusante.stsEntrada'" />
+      <Parameter Name="$NAME3" Value="'$${PATH}SensorJusante.stsFalhaComunicacao'" />
+    </FB>
+    <FB ID="A8507482D35668E6" Name="SensorDiferencial" Type="Sensor_Generico" x="7200" y="2000" Namespace="Hidryco.HidrycoLib">
+      <Parameter Name="$D46B37D45FD5AF5D" Value="TRUE" />
+      <Parameter Name="$CC8EEC06FF0C4430" Value="'%'" />
+      <Parameter Name="$6D3A2524C5D0F0D1" Value="1" />
+    </FB>
+    <FB ID="46A9472E8BD0F679" UID="3" Name="EnviaDiferencial" Type="SYMLINKMULTIVARSRC_804524063F215924" x="4200" y="2000" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=3;VALUE${I}:BOOL,REAL,BOOL" />
+      <Parameter Name="$QI" Value="TRUE" />
+      <Parameter Name="$NAME1" Value="'$${PATH}SensorDiferencial.stsFalhaSensor'" />
+      <Parameter Name="$NAME2" Value="'$${PATH}SensorDiferencial.stsEntrada'" />
+      <Parameter Name="$NAME3" Value="'$${PATH}SensorDiferencial.stsFalhaComunicacao'" />
+    </FB>
+    <FB ID="2AC908C99220633C" Name="Grade_Mecanizada_Inovaisa1" Type="Motor_Inovaisa" x="7200" y="3000" Namespace="Hidryco.HidrycoLib">
+      <Parameter Name="$0E1A34A88A70736E" Value="TRUE" />
+      <Parameter Name="$61D2C77E6EFE9878" Value="TRUE" />
+    </FB>
+    <Input ID="ABEE1148E34D9BFE" Name="REQ" x="200" y="200" Type="Event" />
+    <Input ID="546B340D62024106" Name="E_RESET_FALHAS" x="200" y="260" Type="Event" />
+    <Input ID="5629422A3B5B838A" Name="nivMontante" x="200" y="320" Type="Data" />
+    <Input ID="0A48A90C6A0D0550" Name="nivJusante" x="200" y="380" Type="Data" />
+    <Input ID="5F90538AE86731E7" Name="nivDiferencial" x="200" y="440" Type="Data" />
+    <Input ID="DFE6CA66F4E123D9" Name="falhaCom" x="200" y="500" Type="Data" />
+    <Input ID="DFA27FFCDD03BE32" Name="fldStatus" x="200" y="560" Type="Data" />
+    <Input ID="550C3011667C2FB9" Name="fldSobretorque" x="200" y="620" Type="Data" />
+    <Input ID="605D63048CED98E9" Name="cmdResetFalhas" x="200" y="680" Type="Data" />
+    <Output ID="E31D8EEC4AA83653" Name="CNF" x="14000" y="200" Type="Event" />
+    <Output ID="E2890AE591C3E435" Name="stsLigado" x="14000" y="260" Type="Data" />
+    <Output ID="8D853BC897AD2F8F" Name="stsFalha" x="14000" y="320" Type="Data" />
+    <Output ID="7912CE47E4646D27" Name="stsAlarme" x="14000" y="380" Type="Data" />
+    <EventConnections>
+      <Connection Source="$2B3D1D051A004E07.FIRST_INIT" Destination="$7A66911943FF1778.B140FA5448FDFACF">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$2B3D1D051A004E07.REDO_INIT" Destination="$7A66911943FF1778.B140FA5448FDFACF">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$7A66911943FF1778.446D5FC49A8B04D4" Destination="$57C347FC20456AB7.INIT">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$57C347FC20456AB7.INITO" Destination="$162010D6678275DA.INIT">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$162010D6678275DA.INITO" Destination="$46A9472E8BD0F679.INIT">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$46A9472E8BD0F679.INITO" Destination="$2B3D1D051A004E07.ACK_FIRST">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$ABEE1148E34D9BFE" Destination="$57C347FC20456AB7.REQ">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$546B340D62024106" Destination="$184832BB4C46266B.D21DAA5004F58516">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$ABEE1148E34D9BFE" Destination="$162010D6678275DA.REQ">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$546B340D62024106" Destination="$1A597F37F0621295.D21DAA5004F58516">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$ABEE1148E34D9BFE" Destination="$46A9472E8BD0F679.REQ">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$546B340D62024106" Destination="$A8507482D35668E6.D21DAA5004F58516">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$ABEE1148E34D9BFE" Destination="$2AC908C99220633C.94DE44B005A7078D">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$546B340D62024106" Destination="$2AC908C99220633C.86B7A273610FFA5D">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$2AC908C99220633C.B512B9549703084F" Destination="$E31D8EEC4AA83653">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="$5629422A3B5B838A" Destination="$57C347FC20456AB7.VALUE2">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$DFE6CA66F4E123D9" Destination="$57C347FC20456AB7.VALUE3">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$605D63048CED98E9" Destination="$184832BB4C46266B.1908F43CB878F5E7">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$0A48A90C6A0D0550" Destination="$162010D6678275DA.VALUE2">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$DFE6CA66F4E123D9" Destination="$162010D6678275DA.VALUE3">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$605D63048CED98E9" Destination="$1A597F37F0621295.1908F43CB878F5E7">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$5F90538AE86731E7" Destination="$46A9472E8BD0F679.VALUE2">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$DFE6CA66F4E123D9" Destination="$46A9472E8BD0F679.VALUE3">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$605D63048CED98E9" Destination="$A8507482D35668E6.1908F43CB878F5E7">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$DFA27FFCDD03BE32" Destination="$2AC908C99220633C.7B969788E59D2A58">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$550C3011667C2FB9" Destination="$2AC908C99220633C.32F60EC0B2C7F401">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$DFE6CA66F4E123D9" Destination="$2AC908C99220633C.BC209493FBB47803">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$605D63048CED98E9" Destination="$2AC908C99220633C.08D30EE79B49C6AD">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$2AC908C99220633C.9F7A867A79CFF3D0" Destination="$E2890AE591C3E435">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$2AC908C99220633C.0E2B8B9306A90020" Destination="$8D853BC897AD2F8F">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$2AC908C99220633C.3E3B51589C07F168" Destination="$7912CE47E4646D27">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+    </DataConnections>
+  </FBNetwork>
+</FBType>

@@ -23,6 +23,8 @@ namespace HMI.Main.Canvases
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.btnResetGeral = new NxtControl.GuiFramework.DrawnButton();
+			this.boiaLSL01 = new Hidryco.HidrycoLib.Symbols.Agua_Reuso.sBoiaL();
 			this.fundo = new NxtControl.GuiFramework.Rectangle();
 			this.cardProcesso = new NxtControl.GuiFramework.Rectangle();
 			this.tuboEntrada = new NxtControl.GuiFramework.Pipe();
@@ -60,7 +62,6 @@ namespace HMI.Main.Canvases
 			this.rotPIT2 = new NxtControl.GuiFramework.FreeText();
 			this.rotPITb2 = new NxtControl.GuiFramework.FreeText();
 			this.boiaCabo = new NxtControl.GuiFramework.Line();
-			this.boia = new NxtControl.GuiFramework.Ellipse();
 			this.boiaTag = new NxtControl.GuiFramework.FreeText();
 			this.boiaTxt = new NxtControl.GuiFramework.FreeText();
 			this.tuboDistribuicao = new NxtControl.GuiFramework.Pipe();
@@ -386,19 +387,11 @@ namespace HMI.Main.Canvases
 			this.boiaCabo.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(140)), ((byte)(144)), ((byte)(148))), 1F, NxtControl.Drawing.DashStyle.Dash);
 			this.boiaCabo.StartPoint = new NxtControl.Drawing.PointF(186D, 100D);
 			// 
-			// boia
-			// 
-			this.boia.Bounds = new NxtControl.Drawing.RectF(((float)(178D)), ((float)(284D)), ((float)(16D)), ((float)(16D)));
-			this.boia.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(250)), ((byte)(250)), ((byte)(250))));
-			this.boia.Font = new NxtControl.Drawing.Font("HMI Sans Serif", 9F, System.Drawing.FontStyle.Regular);
-			this.boia.Name = "boia";
-			this.boia.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(84)), ((byte)(88)), ((byte)(92))), 1.5F, NxtControl.Drawing.DashStyle.Solid);
-			// 
 			// boiaTag
 			// 
 			this.boiaTag.Color = new NxtControl.Drawing.Color(((byte)(20)), ((byte)(20)), ((byte)(20)));
 			this.boiaTag.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
-			this.boiaTag.Location = new NxtControl.Drawing.PointF(200D, 270D);
+			this.boiaTag.Location = new NxtControl.Drawing.PointF(206D, 270D);
 			this.boiaTag.Name = "boiaTag";
 			this.boiaTag.Text = "1000-LSL-01";
 			// 
@@ -406,7 +399,7 @@ namespace HMI.Main.Canvases
 			// 
 			this.boiaTxt.Color = new NxtControl.Drawing.Color(((byte)(96)), ((byte)(100)), ((byte)(104)));
 			this.boiaTxt.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular);
-			this.boiaTxt.Location = new NxtControl.Drawing.PointF(200D, 286D);
+			this.boiaTxt.Location = new NxtControl.Drawing.PointF(206D, 286D);
 			this.boiaTxt.Name = "boiaTxt";
 			this.boiaTxt.Text = "nível baixo";
 			// 
@@ -509,6 +502,28 @@ namespace HMI.Main.Canvases
 			// 
 			this.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(1366D)), ((float)(698D)));
 			this.Brush = new NxtControl.Drawing.Brush("CanvasBrush");
+			// 
+			// boiaLSL01
+			// 
+			this.boiaLSL01.BeginInit();
+			this.boiaLSL01.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 170D, 256D);
+			this.boiaLSL01.Name = "boiaLSL01";
+			this.boiaLSL01.SecurityToken = ((uint)(4294967295u));
+			this.boiaLSL01.TagName = "F134E1AF157DF837";
+			this.boiaLSL01.EndInit();
+			// 
+			// btnResetGeral
+			// 
+			this.btnResetGeral.Bounds = new NxtControl.Drawing.RectF(((float)(6D)), ((float)(662D)), ((float)(126D)), ((float)(30D)));
+			this.btnResetGeral.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208))));
+			this.btnResetGeral.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+			this.btnResetGeral.InnerBorderColor = new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208)));
+			this.btnResetGeral.Name = "btnResetGeral";
+			this.btnResetGeral.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(160)), ((byte)(160)), ((byte)(160))), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.btnResetGeral.Radius = 2D;
+			this.btnResetGeral.Text = "Reset geral";
+			this.btnResetGeral.Use3DEffect = false;
+			this.btnResetGeral.Click += new System.EventHandler(this.BtnResetGeralClick);
 			this.Shapes.AddRange(new System.ComponentModel.IComponent[] {
 			this.fundo,
 			this.cardProcesso,
@@ -547,7 +562,6 @@ namespace HMI.Main.Canvases
 			this.rotPIT2,
 			this.rotPITb2,
 			this.boiaCabo,
-			this.boia,
 			this.boiaTag,
 			this.boiaTxt,
 			this.tuboDistribuicao,
@@ -559,7 +573,9 @@ namespace HMI.Main.Canvases
 			this.cardPCM,
 			this.rotPCM,
 			this.rotPCM2,
-			this.mge});
+			this.boiaLSL01,
+			this.mge,
+			this.btnResetGeral});
 			this.Size = new System.Drawing.Size(1366, 698);
 
 		}
@@ -600,7 +616,6 @@ namespace HMI.Main.Canvases
 		private NxtControl.GuiFramework.FreeText rotPIT2;
 		private NxtControl.GuiFramework.FreeText rotPITb2;
 		private NxtControl.GuiFramework.Line boiaCabo;
-		private NxtControl.GuiFramework.Ellipse boia;
 		private NxtControl.GuiFramework.FreeText boiaTag;
 		private NxtControl.GuiFramework.FreeText boiaTxt;
 		private NxtControl.GuiFramework.Pipe tuboDistribuicao;
@@ -613,6 +628,8 @@ namespace HMI.Main.Canvases
 		private NxtControl.GuiFramework.FreeText rotPCM;
 		private NxtControl.GuiFramework.FreeText rotPCM2;
 		private Hidryco.HidrycoLib.Symbols.MGE_Generico.sDefault mge;
+		private Hidryco.HidrycoLib.Symbols.Agua_Reuso.sBoiaL boiaLSL01;
+		private NxtControl.GuiFramework.DrawnButton btnResetGeral;
 		#endregion
 	}
 }

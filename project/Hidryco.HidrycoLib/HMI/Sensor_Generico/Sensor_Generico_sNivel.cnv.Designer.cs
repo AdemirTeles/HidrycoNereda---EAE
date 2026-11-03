@@ -215,7 +215,7 @@ namespace Hidryco.HidrycoLib.Symbols.Sensor_Generico
 			propertyDictionary2.Add("Pen", new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("Transparent"), 1F, NxtControl.Drawing.DashStyle.Solid));
 			this.valor.Ranges.DefaultPropertyValues = propertyDictionary2;
 			this.valor.Suffix = "";
-			this.valor.TagName = "STS_VALOR";
+			this.valor.TagName = "STS_SENSOR";
 			this.valor.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleCenter;
 			this.valor.EndInit();
 			// 
@@ -322,7 +322,7 @@ namespace Hidryco.HidrycoLib.Symbols.Sensor_Generico
 			this.xValor.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
 			this.xValor.Name = "xValor";
 			this.xValor.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
-			this.xValor.TagName = "STS_VALOR";
+			this.xValor.TagName = "STS_SENSOR";
 			this.xValor.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.ValorValueChanged);
 			this.xValor.EndInit();
 			// 

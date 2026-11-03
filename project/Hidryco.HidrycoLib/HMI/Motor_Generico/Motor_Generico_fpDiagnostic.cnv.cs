@@ -109,8 +109,8 @@ namespace Hidryco.HidrycoLib.Faceplates.Motor_Generico
 		void EComValueChanged(object s, ValueChangedEventArgs e) { eCom = Convert.ToByte(e.Value); Atualiza(); }
 		bool AlgumNaoRec() { return NaoRec(eEmerg) || NaoRec(eTerm) || NaoRec(eInv) || NaoRec(ePart) || NaoRec(ePara) || NaoRec(eCom); }
 		void AnimGeradorValueChanged(object s, ValueChangedEventArgs e) { animGerador = Convert.ToInt16(e.Value); Atualiza(); }
-		void VelocidadeValueChanged(object s, ValueChangedEventArgs e) { velocidade = Convert.ToSingle(e.Value); Atualiza(); }
-		void ReferenciaValueChanged(object s, ValueChangedEventArgs e) { referencia = Convert.ToSingle(e.Value); Atualiza(); }
+		void VelocidadeValueChanged(object s, ValueChangedEventArgs e) { velocidade = Convert.ToSingle(e.Value); ((IHMIPrimitiveInput<float>)vVel).ValueChanged(velocidade); Atualiza(); }
+		void ReferenciaValueChanged(object s, ValueChangedEventArgs e) { referencia = Convert.ToSingle(e.Value); ((IHMIPrimitiveInput<float>)vVelRef).ValueChanged(referencia); Atualiza(); }
 
 		// Falha de maior relevancia. Prioridade 1 (classe Alarm): emergencia, termica, acionamento, partida, parada.
 		// Prioridade 2 (classe Warning): falha de comunicacao. naoRec = ainda nao reconhecida (a forma pisca).
@@ -174,5 +174,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Motor_Generico
 			Pisca(AlgumNaoRec());
 		}
 
+
+		// ---- velocidade: a tag ja vem em % do CLP (0 % no LSP, 100 % no HSP do inversor; conversao no CLP) ----
 	}
 }

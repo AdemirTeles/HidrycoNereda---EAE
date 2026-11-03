@@ -24,5 +24,11 @@ namespace HMI.Main.Canvases
 			//
 			InitializeComponent();
 		}
+
+		// Reconhece todos os alarmes pendentes do CLP da Nereda (o mesmo "reconhecer todos" da lista de alarmes)
+		void BtnAckNeredaClick(object sender, EventArgs e)
+		{
+			HMI.Main.AckNereda.Executar();
+		}
 	}
 }

@@ -827,6 +827,26 @@ namespace Hidryco.HidrycoLib.Symbols.Motor_Generico
     }  }
 
 
+    public bool Get_STS_FALHA(ref System.Boolean value)
+    {
+      if (accessorService == null)
+        return false;
+      bool var = false;
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,39, ref var);
+      if (ret) value = (System.Boolean) var;
+      return ret;
+    }
+
+    public System.Boolean? STS_FALHA
+    { get {
+      if (accessorService == null)
+        return null;
+      bool var = false;
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,39, ref var);
+      if (!ret) return null;
+      return (System.Boolean) var;
+    }  }
+
   }
 
 }
@@ -935,6 +955,167 @@ namespace Hidryco.HidrycoLib.Symbols.Motor_Generico
 namespace Hidryco.HidrycoLib.Symbols.Motor_Generico
 {
   partial class sBomba
+  {
+
+    private event EventHandler<Hidryco.HidrycoLib.Symbols.Motor_Generico.LOAD_PERS_DATAEventArgs> LOAD_PERS_DATA_Fired;
+
+    private event EventHandler<Hidryco.HidrycoLib.Symbols.Motor_Generico.REQEventArgs> REQ_Fired;
+
+    protected override void OnEndInit()
+    {
+      if (LOAD_PERS_DATA_Fired != null)
+        AttachEventInput(0);
+      if (REQ_Fired != null)
+        AttachEventInput(1);
+
+    }
+
+    protected override void FireEventCallback(int channelId, int cookie, int eventIndex)
+    {
+      switch(eventIndex)
+      {
+        default:
+          break;
+        case 0:
+          if (LOAD_PERS_DATA_Fired != null)
+          {
+            try
+            {
+              LOAD_PERS_DATA_Fired(this, new Hidryco.HidrycoLib.Symbols.Motor_Generico.LOAD_PERS_DATAEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","LOAD_PERS_DATA_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break; 
+        case 1:
+          if (REQ_Fired != null)
+          {
+            try
+            {
+              REQ_Fired(this, new Hidryco.HidrycoLib.Symbols.Motor_Generico.REQEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","REQ_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break; 
+
+      }
+    }
+    public bool FireEvent_E_RESET_FALHA(System.Boolean CMD_RESET_FALHA)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {CMD_RESET_FALHA});
+    }
+    public bool FireEvent_E_RESET_FALHA(Hidryco.HidrycoLib.Symbols.Motor_Generico.E_RESET_FALHAEventArgs ea)
+    {
+      object[] _values_ = new object[1];
+      if (ea.CMD_RESET_FALHA.HasValue) _values_[0] = ea.CMD_RESET_FALHA.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
+    }
+    public bool FireEvent_E_RESET_FALHA(System.Boolean CMD_RESET_FALHA, bool ignore_CMD_RESET_FALHA)
+    {
+      object[] _values_ = new object[1];
+      if (!ignore_CMD_RESET_FALHA) _values_[0] = CMD_RESET_FALHA;
+      return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
+    }
+    public bool FireEvent_E_RESET_HORIMETRO(System.Boolean CMD_RESET_HORIMETRO)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {CMD_RESET_HORIMETRO});
+    }
+    public bool FireEvent_E_RESET_HORIMETRO(Hidryco.HidrycoLib.Symbols.Motor_Generico.E_RESET_HORIMETROEventArgs ea)
+    {
+      object[] _values_ = new object[1];
+      if (ea.CMD_RESET_HORIMETRO.HasValue) _values_[0] = ea.CMD_RESET_HORIMETRO.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
+    }
+    public bool FireEvent_E_RESET_HORIMETRO(System.Boolean CMD_RESET_HORIMETRO, bool ignore_CMD_RESET_HORIMETRO)
+    {
+      object[] _values_ = new object[1];
+      if (!ignore_CMD_RESET_HORIMETRO) _values_[0] = CMD_RESET_HORIMETRO;
+      return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
+    }
+    public bool FireEvent_E_RESET_NUMERO_PARTIDAS(System.Boolean CMD_RESET_NUMERO_PARTIDA)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(2, new object[] {CMD_RESET_NUMERO_PARTIDA});
+    }
+    public bool FireEvent_E_RESET_NUMERO_PARTIDAS(Hidryco.HidrycoLib.Symbols.Motor_Generico.E_RESET_NUMERO_PARTIDASEventArgs ea)
+    {
+      object[] _values_ = new object[1];
+      if (ea.CMD_RESET_NUMERO_PARTIDA.HasValue) _values_[0] = ea.CMD_RESET_NUMERO_PARTIDA.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(2, _values_);
+    }
+    public bool FireEvent_E_RESET_NUMERO_PARTIDAS(System.Boolean CMD_RESET_NUMERO_PARTIDA, bool ignore_CMD_RESET_NUMERO_PARTIDA)
+    {
+      object[] _values_ = new object[1];
+      if (!ignore_CMD_RESET_NUMERO_PARTIDA) _values_[0] = CMD_RESET_NUMERO_PARTIDA;
+      return ((IHMIAccessorOutput)this).FireEvent(2, _values_);
+    }
+    public bool FireEvent_E_COMANDO_MANUAL(System.Boolean CMD_MANUAL)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(3, new object[] {CMD_MANUAL});
+    }
+    public bool FireEvent_E_COMANDO_MANUAL(Hidryco.HidrycoLib.Symbols.Motor_Generico.E_COMANDO_MANUALEventArgs ea)
+    {
+      object[] _values_ = new object[1];
+      if (ea.CMD_MANUAL.HasValue) _values_[0] = ea.CMD_MANUAL.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(3, _values_);
+    }
+    public bool FireEvent_E_COMANDO_MANUAL(System.Boolean CMD_MANUAL, bool ignore_CMD_MANUAL)
+    {
+      object[] _values_ = new object[1];
+      if (!ignore_CMD_MANUAL) _values_[0] = CMD_MANUAL;
+      return ((IHMIAccessorOutput)this).FireEvent(3, _values_);
+    }
+    public bool FireEvent_E_MODO_OPERACAO(System.Boolean STS_AUTOMATICO)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(4, new object[] {STS_AUTOMATICO});
+    }
+    public bool FireEvent_E_MODO_OPERACAO(Hidryco.HidrycoLib.Symbols.Motor_Generico.E_MODO_OPERACAOEventArgs ea)
+    {
+      object[] _values_ = new object[1];
+      if (ea.STS_AUTOMATICO.HasValue) _values_[0] = ea.STS_AUTOMATICO.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(4, _values_);
+    }
+    public bool FireEvent_E_MODO_OPERACAO(System.Boolean STS_AUTOMATICO, bool ignore_STS_AUTOMATICO)
+    {
+      object[] _values_ = new object[1];
+      if (!ignore_STS_AUTOMATICO) _values_[0] = STS_AUTOMATICO;
+      return ((IHMIAccessorOutput)this).FireEvent(4, _values_);
+    }
+    public bool FireEvent_E_AJUSTE_STP(System.UInt16 STP_FALHA_LIGAMENTO, System.UInt16 STP_FALHA_DESLIGAMENTO, System.Single STP_SAIDA_MANUAL)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(5, new object[] {STP_FALHA_LIGAMENTO, STP_FALHA_DESLIGAMENTO, STP_SAIDA_MANUAL});
+    }
+    public bool FireEvent_E_AJUSTE_STP(Hidryco.HidrycoLib.Symbols.Motor_Generico.E_AJUSTE_STPEventArgs ea)
+    {
+      object[] _values_ = new object[3];
+      if (ea.STP_FALHA_LIGAMENTO.HasValue) _values_[0] = ea.STP_FALHA_LIGAMENTO.Value;
+      if (ea.STP_FALHA_DESLIGAMENTO.HasValue) _values_[1] = ea.STP_FALHA_DESLIGAMENTO.Value;
+      if (ea.STP_SAIDA_MANUAL.HasValue) _values_[2] = ea.STP_SAIDA_MANUAL.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(5, _values_);
+    }
+    public bool FireEvent_E_AJUSTE_STP(System.UInt16 STP_FALHA_LIGAMENTO, bool ignore_STP_FALHA_LIGAMENTO, System.UInt16 STP_FALHA_DESLIGAMENTO, bool ignore_STP_FALHA_DESLIGAMENTO, System.Single STP_SAIDA_MANUAL, bool ignore_STP_SAIDA_MANUAL)
+    {
+      object[] _values_ = new object[3];
+      if (!ignore_STP_FALHA_LIGAMENTO) _values_[0] = STP_FALHA_LIGAMENTO;
+      if (!ignore_STP_FALHA_DESLIGAMENTO) _values_[1] = STP_FALHA_DESLIGAMENTO;
+      if (!ignore_STP_SAIDA_MANUAL) _values_[2] = STP_SAIDA_MANUAL;
+      return ((IHMIAccessorOutput)this).FireEvent(5, _values_);
+    }
+
+  }
+}
+
+namespace Hidryco.HidrycoLib.Symbols.Motor_Generico
+{
+  partial class sHelicoidal
   {
 
     private event EventHandler<Hidryco.HidrycoLib.Symbols.Motor_Generico.LOAD_PERS_DATAEventArgs> LOAD_PERS_DATA_Fired;

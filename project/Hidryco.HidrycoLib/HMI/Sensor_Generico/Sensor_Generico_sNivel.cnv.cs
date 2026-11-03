@@ -155,13 +155,13 @@ namespace Hidryco.HidrycoLib.Symbols.Sensor_Generico
 		float pct;
 		void PorcentagemValueChanged(object sender, ValueChangedEventArgs e) { pct = Convert.ToSingle(e.Value); Atualiza(); }
 
-		// marca do limite na altura do tanque (setpoint / altura maxima)
+		// marca do limite na altura do tanque (setpoint em % da altura maxima)
 		void Marca(Rectangle m, FreeText t, bool hab, float sp)
 		{
 			bool v = hab && fAltura > 0F && estado != 4;
 			m.Visible = v; t.Visible = v;
 			if (!v) return;
-			float f = sp / fAltura; if (f < 0F) f = 0F; if (f > 1F) f = 1F;
+			float f = sp / 100F; if (f < 0F) f = 0F; if (f > 1F) f = 1F;
 			float y = 123F - f * 102F;
 			m.Bounds = new NxtControl.Drawing.RectF(80F, y - 1F, 8F, 2F);
 			t.Location = new NxtControl.Drawing.PointF(90F, y - 6F);

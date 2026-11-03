@@ -34,7 +34,7 @@ namespace SE.Nereda.Symbols.CmdAerate
 			// 
 			// rectangle1
 			// 
-			this.rectangle1.Bounds = new NxtControl.Drawing.RectF(((float)(8D)), ((float)(48D)), ((float)(368D)), ((float)(136D)));
+			this.rectangle1.Bounds = new NxtControl.Drawing.RectF(((float)(8D)), ((float)(48D)), ((float)(368D)), ((float)(104D)));
 			this.rectangle1.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(250)), ((byte)(250)), ((byte)(250))));
 			this.rectangle1.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
 			this.rectangle1.Name = "rectangle1";
@@ -43,7 +43,7 @@ namespace SE.Nereda.Symbols.CmdAerate
 			// 
 			this.freeText1.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.freeText1.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-			this.freeText1.Location = new NxtControl.Drawing.PointF(16D, 120D);
+			this.freeText1.Location = new NxtControl.Drawing.PointF(16D, 112D);
 			this.freeText1.Name = "freeText1";
 			this.freeText1.Text = "Air Fill valve (Manual Mode) :";
 			// 
@@ -92,7 +92,7 @@ namespace SE.Nereda.Symbols.CmdAerate
 			// AirFillValveMan
 			// 
 			this.AirFillValveMan.BeginInit();
-			this.AirFillValveMan.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 272D, 112D);
+			this.AirFillValveMan.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 272D, 104D);
 			this.AirFillValveMan.FalseImage = new NxtControl.Drawing.ImageHolder();
 			this.AirFillValveMan.FalseImageDisabled = new NxtControl.Drawing.ImageHolder();
 			this.AirFillValveMan.Font = new NxtControl.Drawing.Font("ButtonFont");

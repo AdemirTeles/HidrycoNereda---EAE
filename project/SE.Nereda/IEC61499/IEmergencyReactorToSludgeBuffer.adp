@@ -4,6 +4,12 @@
   <Identification Standard="61499-1" />
   <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="9/17/2026" />
   <InterfaceList>
+    <EventInputs>
+      <Event ID="2BA3448E5A31A21B" Name="SB_FEED">
+        <With Var="SBFeedStopping" />
+        <With Var="SBFeedAborted" />
+      </Event>
+    </EventInputs>
     <EventOutputs>
       <Event ID="D46CB75BB047204F" Name="EMERGENCY_ON">
         <With Var="EmergencyON" />
@@ -11,18 +17,22 @@
       <Event ID="69A30D6F1EEC778E" Name="FORCE_UNAV">
         <With Var="ForceUnavaibility" />
       </Event>
-      <Event ID="3F9F1A3D0BC5ACBF" Name="FEED_STS">
-        <With Var="FeedStarted" />
-        <With Var="FeedStopped" />
-        <With Var="FeedAborted" />
+      <Event ID="3F9F1A3D0BC5ACBF" Name="REACTOR_SD">
+        <With Var="ReactorSDRun" />
+        <With Var="ReactorSDAborted" />
+        <With Var="R_SDStopping" />
       </Event>
     </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="F8583467D4FEAAF1" Name="SBFeedStopping" Type="BOOL" />
+      <VarDeclaration ID="786333189BD227E8" Name="SBFeedAborted" Type="BOOL" />
+    </InputVars>
     <OutputVars>
       <VarDeclaration ID="128C534CB06CDD0F" Name="EmergencyON" Type="BOOL" />
       <VarDeclaration ID="A351B45A56D7A52F" Name="ForceUnavaibility" Type="BOOL" />
-      <VarDeclaration ID="D455BE5F3243F8CD" Name="FeedStarted" Type="BOOL" />
-      <VarDeclaration ID="98FFA78276DA0653" Name="FeedStopped" Type="BOOL" />
-      <VarDeclaration ID="2680CB24DDCC2D3E" Name="FeedAborted" Type="BOOL" />
+      <VarDeclaration ID="D455BE5F3243F8CD" Name="ReactorSDRun" Type="BOOL" />
+      <VarDeclaration ID="3E232E2C1A5CF305" Name="R_SDStopping" Type="BOOL" />
+      <VarDeclaration ID="DB035EF967DCFED0" Name="ReactorSDAborted" Type="BOOL" />
     </OutputVars>
   </InterfaceList>
   <Service RightInterface="PLUG" LeftInterface="SOCKET">

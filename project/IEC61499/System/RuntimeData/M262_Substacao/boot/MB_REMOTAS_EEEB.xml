@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<busmaster xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="MB_REMOTAS_EEEB" busId="MB_REMOTAS_EEEB" protocol="modbus" busCycle="T#200ms" enableSymlinkOC="false" busTolerance="10" busActionMissedCycle="1" alignWithResPriority="false" ReconnectAfterTimeout="Enable">
+  <connectinfo mastertype="master" transportprotocol="tcp" interframedelay="10" />
+  <logging enable="false" filename="modbus.log" />
+  <buscoupler name="EEEB_A1_REMOTA" diagnostics="disabled">
+    <connectinfo transportprotocol="tcp" stationid="255" responsetimeout="500" fallbackValue="RESET">
+      <tcp ipaddress="10.26.208.197" port="502" />
+      <HA secondaryheartbeat="Enabled-ReadHoldingRegister" heartbeataddress="3001" />
+    </connectinfo>
+    <busdevice name="EEEB_A2_DI32K">
+      <parameter addresstype="register" length="2" addressautocalculation="disable" address="3001" datatype="inonly" ioevent="cyclic" />
+    </busdevice>
+    <busdevice name="EEEB_A3_DQ32TK">
+      <parameter addresstype="register" length="2" addressautocalculation="disable" address="3501" datatype="output" ioevent="cyclic" />
+    </busdevice>
+    <busdevice name="EEEB_A4_AI8_VAL">
+      <parameter addresstype="register" length="8" addressautocalculation="disable" address="3003" datatype="inonly" ioevent="cyclic" />
+    </busdevice>
+    <busdevice name="EEEB_A4_AI8_STS">
+      <parameter addresstype="register" length="8" addressautocalculation="disable" address="3011" datatype="inonly" ioevent="cyclic" />
+    </busdevice>
+  </buscoupler>
+</busmaster>

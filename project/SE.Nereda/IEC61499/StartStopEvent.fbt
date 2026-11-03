@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="c1a601fc-7c2b-4a50-b525-efc1e7748a9b" Name="StartStopEvent" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="10/21/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="AE2C9C5145437A16" Name="I_START" Comment="Normal Execution Request" />
+      <Event ID="B2905E85137521CB" Name="I_STOP" />
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="5C0E21116E915A68" Name="O_START" Comment="Execution Confirmation" />
+      <Event ID="5197B66A2DDEBBBB" Name="O_STOP" Comment="Initialization Confirm" />
+    </EventOutputs>
+  </InterfaceList>
+  <BasicFB ID="62aa8dc7-6f7b-47ce-bbc7-8175e35c0194">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="INIT,REQ" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="1469.513" y="531.126" />
+      <ECState Name="START_REQ" x="2010.476" y="1154.762">
+        <ECAction Output="O_START" />
+      </ECState>
+      <ECState Name="STOP_REQ" x="1461.429" y="1628.095">
+        <ECAction Output="O_STOP" />
+      </ECState>
+      <ECState Name="STOP_REQ_1" x="2523.333" y="520">
+        <ECAction Output="O_STOP" />
+      </ECState>
+      <ECTransition Source="START" Destination="START_REQ" Condition="I_START" x="1739.211" y="842.5369">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="415.9583,188.9683,453.4814,232.2323" />
+      </ECTransition>
+      <ECTransition Source="START_REQ" Destination="STOP_REQ" Condition="I_STOP" x="1732.869" y="1392.792">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="450.877,332.9381,415.1723,363.6851" />
+      </ECTransition>
+      <ECTransition Source="STOP_REQ" Destination="START" Condition="1" x="1467.055" y="1079.878">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="366.566,311.3502,367.1753,228.6333" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="STOP_REQ_1" Condition="I_STOP" x="1954.696" y="447.8568">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="459.3663,108.8335,518.2969,108.3306" />
+      </ECTransition>
+      <ECTransition Source="STOP_REQ_1" Destination="START" Condition="1" x="1940.64" y="610.8253">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="512.1033,156.2166,456.1891,156.4685" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="INIT" Comment="Initialization algorithm">
+      <ST><![CDATA[;]]></ST>
+    </Algorithm>
+    <Algorithm Name="REQ" Comment="Normally executed algorithm">
+      <ST><![CDATA[;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

@@ -103,10 +103,14 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_Generico
 		}
 
 
-		void UnidadeValueChanged(object sender, ValueChangedEventArgs e)
+		// setpoints na unidade do sensor; sensor de nivel (CFG_NIVEL): em % da altura maxima
+		string unidadeSp = "";
+		bool nivelSp;
+		void UnidadeValueChanged(object sender, ValueChangedEventArgs e) { unidadeSp = Convert.ToString(e.Value); SufixoSp(); }
+		void NivelValueChanged(object sender, ValueChangedEventArgs e) { nivelSp = Convert.ToBoolean(e.Value); SufixoSp(); }
+		void SufixoSp()
 		{
-			string u = Convert.ToString(e.Value);
-			string suf = u != null && u.Length > 0 ? " " + u : "";
+			string suf = nivelSp ? " %" : (unidadeSp != null && unidadeSp.Length > 0 ? " " + unidadeSp : "");
 			spHH.Suffix = suf; spH.Suffix = suf; spL.Suffix = suf; spLL.Suffix = suf;
 		}
 

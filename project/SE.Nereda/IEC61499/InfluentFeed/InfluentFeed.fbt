@@ -3,7 +3,7 @@
 <FBType GUID="cf2c0f94-d415-4125-bebb-959e1ef8fc48" Name="InfluentFeed" Format="2.0" Comment="CAT Function Block Type" Namespace="SE.Nereda">
   <Attribute Name="HMI.Alias" Value="" />
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="6/13/2026" Remarks="template" />
+  <VersionInfo Organization="Schneider Electric" Version="0.1" Author=" " Date="30/10/2026" Remarks="0.1: chave do buffer de entrada e LL (alarme LevelLowLowInfluentBuffer, antes LevelTooHighInfluentBuffer) e desliga as bombas FeedReactorPump01/02/03; falha do radar para os misturadores. template" />
   <InterfaceList>
     <AdapterInputs>
       <Adapter ID="458126F8619187E9" Name="IFeedReactor1" Type="IFeeding2" Namespace="SE.Nereda" />
@@ -21,6 +21,7 @@
       <Adapter ID="08DA021DBE2FF670" Name="InfluentLevelSwitch_1" Type="IDigital" Namespace="SE.App2Base" />
       <Adapter ID="072EC58E32F5B902" Name="IFB_IBL1" Type="IBoolean" Namespace="SE.Nereda" />
       <Adapter ID="57887779F0B6E332" Name="IFB_IBL2" Type="IBoolean" Namespace="SE.Nereda" />
+      <Adapter ID="091DBEAA531EFD46" Name="InfluentLevelMeasurement_2" Type="IAnalog" Namespace="SE.App2Base" Comment="Process value and status interface adapter" />
     </AdapterOutputs>
   </InterfaceList>
   <FBNetwork>
@@ -39,19 +40,19 @@
       <Parameter Name="$ACTIVE" Value="TRUE" />
       <Parameter Name="$TYPE" Value="1" />
     </FB>
-    <FB ID="F747900FB19C5F63" Name="LevelTooHighInfluentBuffer" Type="ALARM_BIT" x="5760" y="5580" Namespace="Runtime.Standard">
+    <FB ID="F747900FB19C5F63" Name="LevelLowLowInfluentBuffer" Type="ALARM_BIT" x="5760" y="5580" Namespace="Runtime.Standard">
       <Parameter Name="$ACKTYPE_1" Value="2" />
       <Parameter Name="$ACTIVE" Value="TRUE" />
       <Parameter Name="$TYPE" Value="1" />
     </FB>
-    <Input ID="458126F8619187E9" Name="IFeedReactor1" x="959.9998" y="1826" Type="Adapter" />
-    <Input ID="13A00CB3B1B3C5BD" Name="IFeedReactor2" x="959.9998" y="1886" Type="Adapter" />
-    <Input ID="1328847FB4EA316D" Name="IFeedReactor3" x="959.9998" y="1946" Type="Adapter" />
-    <Input ID="1DDFCBF393C00A9B" Name="IFeedReactor4" x="959.9998" y="2006" Type="Adapter" />
-    <Input ID="3CF3B9BDFDFB44D3" Name="IFeedReactor5" x="959.9998" y="2066" Type="Adapter" />
-    <Input ID="21E48C7ED5FC98D1" Name="IFeedReactor6" x="959.9998" y="2126" Type="Adapter" />
-    <Input ID="A48870501DC0FC95" Name="ISludgeBuffer" x="960" y="2186" Type="Adapter" />
-    <Input ID="9135BA3E72B25810" Name="ICalamity" x="959.9998" y="2246" Type="Adapter" />
+    <Input ID="458126F8619187E9" Name="IFeedReactor1" x="959.9998" y="1824" Type="Adapter" />
+    <Input ID="13A00CB3B1B3C5BD" Name="IFeedReactor2" x="959.9998" y="1884" Type="Adapter" />
+    <Input ID="1328847FB4EA316D" Name="IFeedReactor3" x="959.9998" y="1944" Type="Adapter" />
+    <Input ID="1DDFCBF393C00A9B" Name="IFeedReactor4" x="959.9998" y="2004" Type="Adapter" />
+    <Input ID="3CF3B9BDFDFB44D3" Name="IFeedReactor5" x="959.9998" y="2064" Type="Adapter" />
+    <Input ID="21E48C7ED5FC98D1" Name="IFeedReactor6" x="959.9998" y="2124" Type="Adapter" />
+    <Input ID="A48870501DC0FC95" Name="ISludgeBuffer" x="960" y="2184" Type="Adapter" />
+    <Input ID="9135BA3E72B25810" Name="ICalamity" x="959.9998" y="2244" Type="Adapter" />
     <Frame Name="FRAME6" X="480" Y="1700" Width="2160" Height="760">
       <Parameter Name="BackgroundColor" Value="AntiqueWhite" />
       <Parameter Name="TextColor" Value="Black" />
@@ -133,7 +134,7 @@
       <Parameter Name="Text" Value="Created by Nouriddin OUECHEN" />
       <Parameter Name="NxtLayerIdentifier" Value="" />
     </Frame>
-    <Frame Name="FRAME16" X="2680" Y="3940" Width="2220" Height="1840">
+    <Frame Name="FRAME16" X="2680" Y="3940" Width="2220" Height="1960">
       <Parameter Name="BackgroundColor" Value="LightGoldenrodYellow" />
       <Parameter Name="TextColor" Value="Black" />
       <Parameter Name="Font" Value="Microsoft Sans Serif, 14.25pt, style=Bold" />
@@ -151,12 +152,16 @@
       <Parameter Name="Text" Value="07- REACTOR ALARM" />
       <Parameter Name="NxtLayerIdentifier" Value="" />
     </Frame>
-    <Output ID="072EC58E32F5B902" Name="IFB_IBL1" x="5460" y="1184" Type="Adapter" />
-    <Output ID="57887779F0B6E332" Name="IFB_IBL2" x="5460" y="1264" Type="Adapter" />
-    <Output ID="06B5BF90025137D8" Name="InfluentLevelMeasurement_1" x="5460" y="1042" Type="Adapter" />
-    <Output ID="08DA021DBE2FF670" Name="InfluentLevelSwitch_1" x="5460" y="1124" Type="Adapter" />
-    <Output ID="0FDFBE4B5B0E9112" Name="IEffluent" x="5460" y="970" Type="Adapter" />
+    <Output ID="091DBEAA531EFD46" Name="InfluentLevelMeasurement_2" x="5460" y="1330" Type="Adapter" />
+    <Output ID="072EC58E32F5B902" Name="IFB_IBL1" x="5460" y="1182" Type="Adapter" />
+    <Output ID="57887779F0B6E332" Name="IFB_IBL2" x="5460" y="1262" Type="Adapter" />
+    <Output ID="06B5BF90025137D8" Name="InfluentLevelMeasurement_1" x="5460" y="1040" Type="Adapter" />
+    <Output ID="08DA021DBE2FF670" Name="InfluentLevelSwitch_1" x="5460" y="1122" Type="Adapter" />
+    <Output ID="0FDFBE4B5B0E9112" Name="IEffluent" x="5460" y="968" Type="Adapter" />
     <EventConnections>
+      <Connection Source="$2EC6A70750FD7D7B.DEDC30291695E4A9" Destination="$ADD50A9583FF3EA3.5ABFC6918DABFB06">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
       <Connection Source="$A431C98A17900AF4.FIRST_INIT" Destination="$E32AA49D5DE33E70.4C2FD2FF19635CC3">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
@@ -204,9 +209,21 @@
       <Connection Source="$2EC6A70750FD7D7B.409CEAF28252E4B1" Destination="$F747900FB19C5F63.REQ">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
+      <Connection Source="$2EC6A70750FD7D7B.409CEAF28252E4B1" Destination="$ADD50A9583FF3EA3.DB6CF389044532A0">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
     </EventConnections>
     <DataConnections>
+      <Connection Source="$2EC6A70750FD7D7B.D0710625DAA94EBC" Destination="$ADD50A9583FF3EA3.08871A634DE02788">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
       <Connection Source="$2EC6A70750FD7D7B.45B83F9CD0834A04" Destination="$F747900FB19C5F63.INP">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$2EC6A70750FD7D7B.45B83F9CD0834A04" Destination="$ADD50A9583FF3EA3.31A9C570D0BEC3FB">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$2EC6A70750FD7D7B.63B99AA1B0849BC6" Destination="$ADD50A9583FF3EA3.77E22D1CDDB0AEF7">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
     </DataConnections>
@@ -336,8 +353,9 @@
       <Connection Source="$2EC6A70750FD7D7B.AFAD5E4DC964C45D" Destination="$57887779F0B6E332" dx1="429">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$3C10F30A94E5502F.7F744A923CE960AF" Destination="$ADD50A9583FF3EA3.3B9B24CC1B2B8B6F" dx1="290" />
-      <Connection Source="$3C10F30A94E5502F.8A805F533952F18B" Destination="$ADD50A9583FF3EA3.B42DB2ADBB9D0268" dx1="310" />
+      <Connection Source="$2EC6A70750FD7D7B.4288C18CAEEBE22C" Destination="$091DBEAA531EFD46" dx1="510">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
     </AdapterConnections>
   </FBNetwork>
 </FBType>

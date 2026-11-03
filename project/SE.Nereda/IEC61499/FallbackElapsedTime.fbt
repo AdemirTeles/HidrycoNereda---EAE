@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="5a48154d-d336-4e2e-986c-85f5c4f2c277" Name="FallbackElapsedTime" Format="2.0" Comment="Composite Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="10/7/2026" Remarks="template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="ED8B4DCCCCA43712" Name="INIT" Comment="Initialization Request" />
+      <Event ID="680B81EDE70E91DC" Name="REQ" Comment="Normal Execution Request">
+        <With Var="EmergencyON" />
+        <With Var="StartUpDelayDone" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="C4B5E946AB243482" Name="INITO" Comment="Initialization Confirm" />
+      <Event ID="0AC19C94B1D01091" Name="CNF" Comment="Execution Confirmation">
+        <With Var="FallbackElapsedTime" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="173355EF7C2BA9D7" Name="EmergencyON" Type="BOOL" Comment="Input event qualifier" />
+      <VarDeclaration ID="04E73D3067A72928" Name="StartUpDelayDone" Type="BOOL" Comment="Input event qualifier" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="0219245B8B7B489B" Name="FallbackElapsedTime" Type="REAL" Comment="Output event qualifier" />
+    </OutputVars>
+  </InterfaceList>
+  <FBNetwork>
+    <FB ID="E88CB02C9BB6BF9D" Name="FallbackElapsedTimeCalc" Type="devMntCalc" x="2300" y="920" Namespace="SE.App2CommonProcess">
+      <Attribute Name="Configuration.Component.HideUnusedPorts" Value="" />
+      <Parameter Name="$TBaseOperationDuration" Value="T#1s" />
+      <Parameter Name="$TBaseElapsedDuration" Value="T#1d" />
+    </FB>
+    <FB ID="20CE0C0BFCF2F9E1" Name="FB1" Type="UDINT2REAL" x="3960" y="1140" Namespace="SE.Nereda" />
+    <FB ID="800804ABF7819AFD" Name="FB2" Type="BOOL2INT" x="1540" y="1160" Namespace="SE.Nereda" />
+    <FB ID="11197D24FFBD7339" Name="FB3" Type="AND_88A3DD8EC65DD11C" x="1040" y="1160" Namespace="SE.Nereda">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNT:=2;OUT:BOOL" />
+    </FB>
+    <FB ID="4CC061AED7F741BD" Name="FB4" Type="DIVIDE" x="4640" y="1140" Namespace="SE.Nereda">
+      <Parameter Name="$02E479D09E2C7EA2" Value="60" />
+    </FB>
+    <Input ID="ED8B4DCCCCA43712" Name="INIT" x="1255.708" y="851.9999" Type="Event" />
+    <Input ID="680B81EDE70E91DC" Name="REQ" x="520" y="1112" Type="Event" />
+    <Input ID="173355EF7C2BA9D7" Name="EmergencyON" x="240" y="1332" Type="Data" />
+    <Input ID="04E73D3067A72928" Name="StartUpDelayDone" x="240" y="1472" Type="Data" />
+    <Output ID="C4B5E946AB243482" Name="INITO" x="3899.115" y="851.9999" Type="Event" />
+    <Output ID="0AC19C94B1D01091" Name="CNF" x="5440" y="1152" Type="Event" />
+    <Output ID="0219245B8B7B489B" Name="FallbackElapsedTime" x="5260" y="1352" Type="Data" />
+    <EventConnections>
+      <Connection Source="$ED8B4DCCCCA43712" Destination="$E88CB02C9BB6BF9D.INIT" dx1="347.8541">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$E88CB02C9BB6BF9D.INITO" Destination="$C4B5E946AB243482">
+        <Points>
+          <Points>
+            <X>850.96875</X>
+            <Y>240</Y>
+          </Points>
+          <Points>
+            <X>609.63916</X>
+            <Y>240</Y>
+          </Points>
+          <Points>
+            <X>609.63916</X>
+            <Y>219.999969</Y>
+          </Points>
+          <Points>
+            <X>974.778748</X>
+            <Y>219.999969</Y>
+          </Points>
+        </Points>
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$E88CB02C9BB6BF9D.CNF_OPD" Destination="$20CE0C0BFCF2F9E1.DD5870AA881150BB">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$680B81EDE70E91DC" Destination="$11197D24FFBD7339.REQ" dx1="49.54169" />
+      <Connection Source="$800804ABF7819AFD.6FC99A5BD1C38561" Destination="$E88CB02C9BB6BF9D.REQ_PV" dx1="49.85425">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$20CE0C0BFCF2F9E1.6FC99A5BD1C38561" Destination="$4CC061AED7F741BD.0FDF8A587C3CA146" />
+      <Connection Source="$11197D24FFBD7339.CNF" Destination="$800804ABF7819AFD.DD5870AA881150BB" />
+      <Connection Source="$4CC061AED7F741BD.6D05A744943B688E" Destination="$0AC19C94B1D01091" />
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="$E88CB02C9BB6BF9D.CurrentOperationDuration" Destination="$20CE0C0BFCF2F9E1.4573FC8F228EB71D">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$173355EF7C2BA9D7" Destination="$11197D24FFBD7339.IN1" dx1="40.45837" />
+      <Connection Source="$800804ABF7819AFD.A6DEF5F9C27C1848" Destination="$E88CB02C9BB6BF9D.Pv" dx1="224.927">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="$20CE0C0BFCF2F9E1.A6DEF5F9C27C1848" Destination="$4CC061AED7F741BD.8EF5C40F2FEA5451" />
+      <Connection Source="$04E73D3067A72928" Destination="$11197D24FFBD7339.IN2" dx1="44.27087" />
+      <Connection Source="$11197D24FFBD7339.OUT" Destination="$800804ABF7819AFD.4573FC8F228EB71D" />
+      <Connection Source="$4CC061AED7F741BD.E78A8A65D4120686" Destination="$0219245B8B7B489B" />
+    </DataConnections>
+  </FBNetwork>
+</FBType>

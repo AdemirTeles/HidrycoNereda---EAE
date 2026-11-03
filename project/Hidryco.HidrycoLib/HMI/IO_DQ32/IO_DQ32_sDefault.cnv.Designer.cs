@@ -25,108 +25,179 @@ namespace Hidryco.HidrycoLib.Symbols.IO_DQ32
 		/// </summary>
 		private void InitializeComponent()
 		{
-			NxtControl.GuiFramework.PropertyDictionary propertyDictionary1 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary2 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary3 = new NxtControl.GuiFramework.PropertyDictionary();
-			NxtControl.GuiFramework.PropertyDictionary propertyDictionary4 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary1 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary5 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary6 = new NxtControl.GuiFramework.PropertyDictionary();
-			NxtControl.GuiFramework.PropertyDictionary propertyDictionary7 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary4 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary8 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary9 = new NxtControl.GuiFramework.PropertyDictionary();
-			NxtControl.GuiFramework.PropertyDictionary propertyDictionary10 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary7 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary11 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary12 = new NxtControl.GuiFramework.PropertyDictionary();
-			NxtControl.GuiFramework.PropertyDictionary propertyDictionary13 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary10 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary14 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary15 = new NxtControl.GuiFramework.PropertyDictionary();
-			NxtControl.GuiFramework.PropertyDictionary propertyDictionary16 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary13 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary17 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary18 = new NxtControl.GuiFramework.PropertyDictionary();
-			NxtControl.GuiFramework.PropertyDictionary propertyDictionary19 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary16 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary20 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary21 = new NxtControl.GuiFramework.PropertyDictionary();
-			NxtControl.GuiFramework.PropertyDictionary propertyDictionary22 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary19 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary23 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary24 = new NxtControl.GuiFramework.PropertyDictionary();
-			NxtControl.GuiFramework.PropertyDictionary propertyDictionary25 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary22 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary26 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary27 = new NxtControl.GuiFramework.PropertyDictionary();
-			NxtControl.GuiFramework.PropertyDictionary propertyDictionary28 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary25 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary29 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary30 = new NxtControl.GuiFramework.PropertyDictionary();
-			NxtControl.GuiFramework.PropertyDictionary propertyDictionary31 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary28 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary32 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary33 = new NxtControl.GuiFramework.PropertyDictionary();
-			NxtControl.GuiFramework.PropertyDictionary propertyDictionary34 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary31 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary35 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary36 = new NxtControl.GuiFramework.PropertyDictionary();
-			NxtControl.GuiFramework.PropertyDictionary propertyDictionary37 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary34 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary38 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary39 = new NxtControl.GuiFramework.PropertyDictionary();
-			NxtControl.GuiFramework.PropertyDictionary propertyDictionary40 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary37 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary41 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary42 = new NxtControl.GuiFramework.PropertyDictionary();
-			NxtControl.GuiFramework.PropertyDictionary propertyDictionary43 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary40 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary44 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary45 = new NxtControl.GuiFramework.PropertyDictionary();
-			NxtControl.GuiFramework.PropertyDictionary propertyDictionary46 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary43 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary47 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary48 = new NxtControl.GuiFramework.PropertyDictionary();
-			NxtControl.GuiFramework.PropertyDictionary propertyDictionary49 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary46 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary50 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary51 = new NxtControl.GuiFramework.PropertyDictionary();
-			NxtControl.GuiFramework.PropertyDictionary propertyDictionary52 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary49 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary53 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary54 = new NxtControl.GuiFramework.PropertyDictionary();
-			NxtControl.GuiFramework.PropertyDictionary propertyDictionary55 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary52 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary56 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary57 = new NxtControl.GuiFramework.PropertyDictionary();
-			NxtControl.GuiFramework.PropertyDictionary propertyDictionary58 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary55 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary59 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary60 = new NxtControl.GuiFramework.PropertyDictionary();
-			NxtControl.GuiFramework.PropertyDictionary propertyDictionary61 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary58 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary62 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary63 = new NxtControl.GuiFramework.PropertyDictionary();
-			NxtControl.GuiFramework.PropertyDictionary propertyDictionary64 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary61 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary65 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary66 = new NxtControl.GuiFramework.PropertyDictionary();
-			NxtControl.GuiFramework.PropertyDictionary propertyDictionary67 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary64 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary68 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary69 = new NxtControl.GuiFramework.PropertyDictionary();
-			NxtControl.GuiFramework.PropertyDictionary propertyDictionary70 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary67 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary71 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary72 = new NxtControl.GuiFramework.PropertyDictionary();
-			NxtControl.GuiFramework.PropertyDictionary propertyDictionary73 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary70 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary74 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary75 = new NxtControl.GuiFramework.PropertyDictionary();
-			NxtControl.GuiFramework.PropertyDictionary propertyDictionary76 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary73 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary77 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary78 = new NxtControl.GuiFramework.PropertyDictionary();
-			NxtControl.GuiFramework.PropertyDictionary propertyDictionary79 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary76 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary80 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary81 = new NxtControl.GuiFramework.PropertyDictionary();
-			NxtControl.GuiFramework.PropertyDictionary propertyDictionary82 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary79 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary83 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary84 = new NxtControl.GuiFramework.PropertyDictionary();
-			NxtControl.GuiFramework.PropertyDictionary propertyDictionary85 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary82 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary86 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary87 = new NxtControl.GuiFramework.PropertyDictionary();
-			NxtControl.GuiFramework.PropertyDictionary propertyDictionary88 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary85 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary89 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary90 = new NxtControl.GuiFramework.PropertyDictionary();
-			NxtControl.GuiFramework.PropertyDictionary propertyDictionary91 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary88 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary92 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary93 = new NxtControl.GuiFramework.PropertyDictionary();
-			NxtControl.GuiFramework.PropertyDictionary propertyDictionary94 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary91 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary95 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary96 = new NxtControl.GuiFramework.PropertyDictionary();
-			NxtControl.GuiFramework.PropertyDictionary propertyDictionary97 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary94 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary98 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary99 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary97 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary100 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary101 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary102 = new NxtControl.GuiFramework.PropertyDictionary();
+			this.xD1 = new System.HMI.Symbols.Base.Execute<ushort>();
+			this.xD0 = new System.HMI.Symbols.Base.Execute<ushort>();
+			this.xL1 = new System.HMI.Symbols.Base.Execute<ushort>();
+			this.xL0 = new System.HMI.Symbols.Base.Execute<ushort>();
+			this.xForcado = new System.HMI.Symbols.Base.Execute<bool>();
+			this.avisoForcado = new NxtControl.GuiFramework.FreeText();
+			this.dica = new NxtControl.GuiFramework.FreeText();
+			this.b31 = new NxtControl.GuiFramework.DrawnButton();
+			this.b30 = new NxtControl.GuiFramework.DrawnButton();
+			this.b29 = new NxtControl.GuiFramework.DrawnButton();
+			this.b28 = new NxtControl.GuiFramework.DrawnButton();
+			this.b27 = new NxtControl.GuiFramework.DrawnButton();
+			this.b26 = new NxtControl.GuiFramework.DrawnButton();
+			this.b25 = new NxtControl.GuiFramework.DrawnButton();
+			this.b24 = new NxtControl.GuiFramework.DrawnButton();
+			this.b23 = new NxtControl.GuiFramework.DrawnButton();
+			this.b22 = new NxtControl.GuiFramework.DrawnButton();
+			this.b21 = new NxtControl.GuiFramework.DrawnButton();
+			this.b20 = new NxtControl.GuiFramework.DrawnButton();
+			this.b19 = new NxtControl.GuiFramework.DrawnButton();
+			this.b18 = new NxtControl.GuiFramework.DrawnButton();
+			this.b17 = new NxtControl.GuiFramework.DrawnButton();
+			this.b16 = new NxtControl.GuiFramework.DrawnButton();
+			this.b15 = new NxtControl.GuiFramework.DrawnButton();
+			this.b14 = new NxtControl.GuiFramework.DrawnButton();
+			this.b13 = new NxtControl.GuiFramework.DrawnButton();
+			this.b12 = new NxtControl.GuiFramework.DrawnButton();
+			this.b11 = new NxtControl.GuiFramework.DrawnButton();
+			this.b10 = new NxtControl.GuiFramework.DrawnButton();
+			this.b9 = new NxtControl.GuiFramework.DrawnButton();
+			this.b8 = new NxtControl.GuiFramework.DrawnButton();
+			this.b7 = new NxtControl.GuiFramework.DrawnButton();
+			this.b6 = new NxtControl.GuiFramework.DrawnButton();
+			this.b5 = new NxtControl.GuiFramework.DrawnButton();
+			this.b4 = new NxtControl.GuiFramework.DrawnButton();
+			this.b3 = new NxtControl.GuiFramework.DrawnButton();
+			this.b2 = new NxtControl.GuiFramework.DrawnButton();
+			this.b1 = new NxtControl.GuiFramework.DrawnButton();
+			this.b0 = new NxtControl.GuiFramework.DrawnButton();
+			this.f31 = new NxtControl.GuiFramework.FreeText();
+			this.f30 = new NxtControl.GuiFramework.FreeText();
+			this.f29 = new NxtControl.GuiFramework.FreeText();
+			this.f28 = new NxtControl.GuiFramework.FreeText();
+			this.f27 = new NxtControl.GuiFramework.FreeText();
+			this.f26 = new NxtControl.GuiFramework.FreeText();
+			this.f25 = new NxtControl.GuiFramework.FreeText();
+			this.f24 = new NxtControl.GuiFramework.FreeText();
+			this.f23 = new NxtControl.GuiFramework.FreeText();
+			this.f22 = new NxtControl.GuiFramework.FreeText();
+			this.f21 = new NxtControl.GuiFramework.FreeText();
+			this.f20 = new NxtControl.GuiFramework.FreeText();
+			this.f19 = new NxtControl.GuiFramework.FreeText();
+			this.f18 = new NxtControl.GuiFramework.FreeText();
+			this.f17 = new NxtControl.GuiFramework.FreeText();
+			this.f16 = new NxtControl.GuiFramework.FreeText();
+			this.f15 = new NxtControl.GuiFramework.FreeText();
+			this.f14 = new NxtControl.GuiFramework.FreeText();
+			this.f13 = new NxtControl.GuiFramework.FreeText();
+			this.f12 = new NxtControl.GuiFramework.FreeText();
+			this.f11 = new NxtControl.GuiFramework.FreeText();
+			this.f10 = new NxtControl.GuiFramework.FreeText();
+			this.f9 = new NxtControl.GuiFramework.FreeText();
+			this.f8 = new NxtControl.GuiFramework.FreeText();
+			this.f7 = new NxtControl.GuiFramework.FreeText();
+			this.f6 = new NxtControl.GuiFramework.FreeText();
+			this.f5 = new NxtControl.GuiFramework.FreeText();
+			this.f4 = new NxtControl.GuiFramework.FreeText();
+			this.f3 = new NxtControl.GuiFramework.FreeText();
+			this.f2 = new NxtControl.GuiFramework.FreeText();
+			this.f1 = new NxtControl.GuiFramework.FreeText();
+			this.f0 = new NxtControl.GuiFramework.FreeText();
 			this.txtTitulo = new NxtControl.GuiFramework.FreeText();
 			this.txtB0 = new NxtControl.GuiFramework.FreeText();
 			this.ledB0 = new System.HMI.Symbols.Base.Led<bool>();
@@ -221,7 +292,7 @@ namespace Hidryco.HidrycoLib.Symbols.IO_DQ32
 			// 
 			this.ledB0.BeginInit();
 			this.ledB0.ColorFrame = new NxtControl.Drawing.Color("LedFrameColor");
-			this.ledB0.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 70D, 40D);
+			this.ledB0.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 67D, 55D);
 			this.ledB0.FrameSize = 33F;
 			this.ledB0.IsOnlyInput = true;
 			this.ledB0.Name = "ledB0";
@@ -247,7 +318,7 @@ namespace Hidryco.HidrycoLib.Symbols.IO_DQ32
 			// 
 			this.ledB1.BeginInit();
 			this.ledB1.ColorFrame = new NxtControl.Drawing.Color("LedFrameColor");
-			this.ledB1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 70D, 66D);
+			this.ledB1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 67D, 81D);
 			this.ledB1.FrameSize = 33F;
 			this.ledB1.IsOnlyInput = true;
 			this.ledB1.Name = "ledB1";
@@ -273,7 +344,7 @@ namespace Hidryco.HidrycoLib.Symbols.IO_DQ32
 			// 
 			this.ledB2.BeginInit();
 			this.ledB2.ColorFrame = new NxtControl.Drawing.Color("LedFrameColor");
-			this.ledB2.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 70D, 92D);
+			this.ledB2.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 67D, 107D);
 			this.ledB2.FrameSize = 33F;
 			this.ledB2.IsOnlyInput = true;
 			this.ledB2.Name = "ledB2";
@@ -299,7 +370,7 @@ namespace Hidryco.HidrycoLib.Symbols.IO_DQ32
 			// 
 			this.ledB3.BeginInit();
 			this.ledB3.ColorFrame = new NxtControl.Drawing.Color("LedFrameColor");
-			this.ledB3.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 70D, 118D);
+			this.ledB3.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 67D, 133D);
 			this.ledB3.FrameSize = 33F;
 			this.ledB3.IsOnlyInput = true;
 			this.ledB3.Name = "ledB3";
@@ -325,7 +396,7 @@ namespace Hidryco.HidrycoLib.Symbols.IO_DQ32
 			// 
 			this.ledB4.BeginInit();
 			this.ledB4.ColorFrame = new NxtControl.Drawing.Color("LedFrameColor");
-			this.ledB4.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 70D, 144D);
+			this.ledB4.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 67D, 159D);
 			this.ledB4.FrameSize = 33F;
 			this.ledB4.IsOnlyInput = true;
 			this.ledB4.Name = "ledB4";
@@ -351,7 +422,7 @@ namespace Hidryco.HidrycoLib.Symbols.IO_DQ32
 			// 
 			this.ledB5.BeginInit();
 			this.ledB5.ColorFrame = new NxtControl.Drawing.Color("LedFrameColor");
-			this.ledB5.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 70D, 170D);
+			this.ledB5.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 67D, 185D);
 			this.ledB5.FrameSize = 33F;
 			this.ledB5.IsOnlyInput = true;
 			this.ledB5.Name = "ledB5";
@@ -377,7 +448,7 @@ namespace Hidryco.HidrycoLib.Symbols.IO_DQ32
 			// 
 			this.ledB6.BeginInit();
 			this.ledB6.ColorFrame = new NxtControl.Drawing.Color("LedFrameColor");
-			this.ledB6.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 70D, 196D);
+			this.ledB6.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 67D, 211D);
 			this.ledB6.FrameSize = 33F;
 			this.ledB6.IsOnlyInput = true;
 			this.ledB6.Name = "ledB6";
@@ -403,7 +474,7 @@ namespace Hidryco.HidrycoLib.Symbols.IO_DQ32
 			// 
 			this.ledB7.BeginInit();
 			this.ledB7.ColorFrame = new NxtControl.Drawing.Color("LedFrameColor");
-			this.ledB7.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 70D, 222D);
+			this.ledB7.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 67D, 237D);
 			this.ledB7.FrameSize = 33F;
 			this.ledB7.IsOnlyInput = true;
 			this.ledB7.Name = "ledB7";
@@ -429,7 +500,7 @@ namespace Hidryco.HidrycoLib.Symbols.IO_DQ32
 			// 
 			this.ledB8.BeginInit();
 			this.ledB8.ColorFrame = new NxtControl.Drawing.Color("LedFrameColor");
-			this.ledB8.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 70D, 248D);
+			this.ledB8.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 67D, 263D);
 			this.ledB8.FrameSize = 33F;
 			this.ledB8.IsOnlyInput = true;
 			this.ledB8.Name = "ledB8";
@@ -455,7 +526,7 @@ namespace Hidryco.HidrycoLib.Symbols.IO_DQ32
 			// 
 			this.ledB9.BeginInit();
 			this.ledB9.ColorFrame = new NxtControl.Drawing.Color("LedFrameColor");
-			this.ledB9.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 70D, 274D);
+			this.ledB9.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 67D, 289D);
 			this.ledB9.FrameSize = 33F;
 			this.ledB9.IsOnlyInput = true;
 			this.ledB9.Name = "ledB9";
@@ -481,7 +552,7 @@ namespace Hidryco.HidrycoLib.Symbols.IO_DQ32
 			// 
 			this.ledB10.BeginInit();
 			this.ledB10.ColorFrame = new NxtControl.Drawing.Color("LedFrameColor");
-			this.ledB10.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 70D, 300D);
+			this.ledB10.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 67D, 315D);
 			this.ledB10.FrameSize = 33F;
 			this.ledB10.IsOnlyInput = true;
 			this.ledB10.Name = "ledB10";
@@ -507,7 +578,7 @@ namespace Hidryco.HidrycoLib.Symbols.IO_DQ32
 			// 
 			this.ledB11.BeginInit();
 			this.ledB11.ColorFrame = new NxtControl.Drawing.Color("LedFrameColor");
-			this.ledB11.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 70D, 326D);
+			this.ledB11.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 67D, 341D);
 			this.ledB11.FrameSize = 33F;
 			this.ledB11.IsOnlyInput = true;
 			this.ledB11.Name = "ledB11";
@@ -533,7 +604,7 @@ namespace Hidryco.HidrycoLib.Symbols.IO_DQ32
 			// 
 			this.ledB12.BeginInit();
 			this.ledB12.ColorFrame = new NxtControl.Drawing.Color("LedFrameColor");
-			this.ledB12.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 70D, 352D);
+			this.ledB12.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 67D, 367D);
 			this.ledB12.FrameSize = 33F;
 			this.ledB12.IsOnlyInput = true;
 			this.ledB12.Name = "ledB12";
@@ -559,7 +630,7 @@ namespace Hidryco.HidrycoLib.Symbols.IO_DQ32
 			// 
 			this.ledB13.BeginInit();
 			this.ledB13.ColorFrame = new NxtControl.Drawing.Color("LedFrameColor");
-			this.ledB13.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 70D, 378D);
+			this.ledB13.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 67D, 393D);
 			this.ledB13.FrameSize = 33F;
 			this.ledB13.IsOnlyInput = true;
 			this.ledB13.Name = "ledB13";
@@ -585,7 +656,7 @@ namespace Hidryco.HidrycoLib.Symbols.IO_DQ32
 			// 
 			this.ledB14.BeginInit();
 			this.ledB14.ColorFrame = new NxtControl.Drawing.Color("LedFrameColor");
-			this.ledB14.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 70D, 404D);
+			this.ledB14.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 67D, 419D);
 			this.ledB14.FrameSize = 33F;
 			this.ledB14.IsOnlyInput = true;
 			this.ledB14.Name = "ledB14";
@@ -611,7 +682,7 @@ namespace Hidryco.HidrycoLib.Symbols.IO_DQ32
 			// 
 			this.ledB15.BeginInit();
 			this.ledB15.ColorFrame = new NxtControl.Drawing.Color("LedFrameColor");
-			this.ledB15.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 70D, 430D);
+			this.ledB15.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 67D, 445D);
 			this.ledB15.FrameSize = 33F;
 			this.ledB15.IsOnlyInput = true;
 			this.ledB15.Name = "ledB15";
@@ -637,7 +708,7 @@ namespace Hidryco.HidrycoLib.Symbols.IO_DQ32
 			// 
 			this.ledB16.BeginInit();
 			this.ledB16.ColorFrame = new NxtControl.Drawing.Color("LedFrameColor");
-			this.ledB16.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 310D, 40D);
+			this.ledB16.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 309D, 54D);
 			this.ledB16.FrameSize = 33F;
 			this.ledB16.IsOnlyInput = true;
 			this.ledB16.Name = "ledB16";
@@ -663,7 +734,7 @@ namespace Hidryco.HidrycoLib.Symbols.IO_DQ32
 			// 
 			this.ledB17.BeginInit();
 			this.ledB17.ColorFrame = new NxtControl.Drawing.Color("LedFrameColor");
-			this.ledB17.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 310D, 66D);
+			this.ledB17.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 309D, 80D);
 			this.ledB17.FrameSize = 33F;
 			this.ledB17.IsOnlyInput = true;
 			this.ledB17.Name = "ledB17";
@@ -689,7 +760,7 @@ namespace Hidryco.HidrycoLib.Symbols.IO_DQ32
 			// 
 			this.ledB18.BeginInit();
 			this.ledB18.ColorFrame = new NxtControl.Drawing.Color("LedFrameColor");
-			this.ledB18.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 310D, 92D);
+			this.ledB18.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 309D, 106D);
 			this.ledB18.FrameSize = 33F;
 			this.ledB18.IsOnlyInput = true;
 			this.ledB18.Name = "ledB18";
@@ -715,7 +786,7 @@ namespace Hidryco.HidrycoLib.Symbols.IO_DQ32
 			// 
 			this.ledB19.BeginInit();
 			this.ledB19.ColorFrame = new NxtControl.Drawing.Color("LedFrameColor");
-			this.ledB19.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 310D, 118D);
+			this.ledB19.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 309D, 132D);
 			this.ledB19.FrameSize = 33F;
 			this.ledB19.IsOnlyInput = true;
 			this.ledB19.Name = "ledB19";
@@ -741,7 +812,7 @@ namespace Hidryco.HidrycoLib.Symbols.IO_DQ32
 			// 
 			this.ledB20.BeginInit();
 			this.ledB20.ColorFrame = new NxtControl.Drawing.Color("LedFrameColor");
-			this.ledB20.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 310D, 144D);
+			this.ledB20.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 309D, 158D);
 			this.ledB20.FrameSize = 33F;
 			this.ledB20.IsOnlyInput = true;
 			this.ledB20.Name = "ledB20";
@@ -767,7 +838,7 @@ namespace Hidryco.HidrycoLib.Symbols.IO_DQ32
 			// 
 			this.ledB21.BeginInit();
 			this.ledB21.ColorFrame = new NxtControl.Drawing.Color("LedFrameColor");
-			this.ledB21.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 310D, 170D);
+			this.ledB21.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 309D, 184D);
 			this.ledB21.FrameSize = 33F;
 			this.ledB21.IsOnlyInput = true;
 			this.ledB21.Name = "ledB21";
@@ -793,7 +864,7 @@ namespace Hidryco.HidrycoLib.Symbols.IO_DQ32
 			// 
 			this.ledB22.BeginInit();
 			this.ledB22.ColorFrame = new NxtControl.Drawing.Color("LedFrameColor");
-			this.ledB22.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 310D, 196D);
+			this.ledB22.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 309D, 210D);
 			this.ledB22.FrameSize = 33F;
 			this.ledB22.IsOnlyInput = true;
 			this.ledB22.Name = "ledB22";
@@ -819,7 +890,7 @@ namespace Hidryco.HidrycoLib.Symbols.IO_DQ32
 			// 
 			this.ledB23.BeginInit();
 			this.ledB23.ColorFrame = new NxtControl.Drawing.Color("LedFrameColor");
-			this.ledB23.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 310D, 222D);
+			this.ledB23.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 309D, 236D);
 			this.ledB23.FrameSize = 33F;
 			this.ledB23.IsOnlyInput = true;
 			this.ledB23.Name = "ledB23";
@@ -845,7 +916,7 @@ namespace Hidryco.HidrycoLib.Symbols.IO_DQ32
 			// 
 			this.ledB24.BeginInit();
 			this.ledB24.ColorFrame = new NxtControl.Drawing.Color("LedFrameColor");
-			this.ledB24.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 310D, 248D);
+			this.ledB24.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 309D, 262D);
 			this.ledB24.FrameSize = 33F;
 			this.ledB24.IsOnlyInput = true;
 			this.ledB24.Name = "ledB24";
@@ -871,7 +942,7 @@ namespace Hidryco.HidrycoLib.Symbols.IO_DQ32
 			// 
 			this.ledB25.BeginInit();
 			this.ledB25.ColorFrame = new NxtControl.Drawing.Color("LedFrameColor");
-			this.ledB25.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 310D, 274D);
+			this.ledB25.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 309D, 288D);
 			this.ledB25.FrameSize = 33F;
 			this.ledB25.IsOnlyInput = true;
 			this.ledB25.Name = "ledB25";
@@ -897,7 +968,7 @@ namespace Hidryco.HidrycoLib.Symbols.IO_DQ32
 			// 
 			this.ledB26.BeginInit();
 			this.ledB26.ColorFrame = new NxtControl.Drawing.Color("LedFrameColor");
-			this.ledB26.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 310D, 300D);
+			this.ledB26.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 309D, 314D);
 			this.ledB26.FrameSize = 33F;
 			this.ledB26.IsOnlyInput = true;
 			this.ledB26.Name = "ledB26";
@@ -923,7 +994,7 @@ namespace Hidryco.HidrycoLib.Symbols.IO_DQ32
 			// 
 			this.ledB27.BeginInit();
 			this.ledB27.ColorFrame = new NxtControl.Drawing.Color("LedFrameColor");
-			this.ledB27.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 310D, 326D);
+			this.ledB27.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 309D, 340D);
 			this.ledB27.FrameSize = 33F;
 			this.ledB27.IsOnlyInput = true;
 			this.ledB27.Name = "ledB27";
@@ -949,7 +1020,7 @@ namespace Hidryco.HidrycoLib.Symbols.IO_DQ32
 			// 
 			this.ledB28.BeginInit();
 			this.ledB28.ColorFrame = new NxtControl.Drawing.Color("LedFrameColor");
-			this.ledB28.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 310D, 352D);
+			this.ledB28.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 309D, 366D);
 			this.ledB28.FrameSize = 33F;
 			this.ledB28.IsOnlyInput = true;
 			this.ledB28.Name = "ledB28";
@@ -975,7 +1046,7 @@ namespace Hidryco.HidrycoLib.Symbols.IO_DQ32
 			// 
 			this.ledB29.BeginInit();
 			this.ledB29.ColorFrame = new NxtControl.Drawing.Color("LedFrameColor");
-			this.ledB29.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 310D, 378D);
+			this.ledB29.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 309D, 392D);
 			this.ledB29.FrameSize = 33F;
 			this.ledB29.IsOnlyInput = true;
 			this.ledB29.Name = "ledB29";
@@ -1001,7 +1072,7 @@ namespace Hidryco.HidrycoLib.Symbols.IO_DQ32
 			// 
 			this.ledB30.BeginInit();
 			this.ledB30.ColorFrame = new NxtControl.Drawing.Color("LedFrameColor");
-			this.ledB30.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 310D, 404D);
+			this.ledB30.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 309D, 418D);
 			this.ledB30.FrameSize = 33F;
 			this.ledB30.IsOnlyInput = true;
 			this.ledB30.Name = "ledB30";
@@ -1027,7 +1098,7 @@ namespace Hidryco.HidrycoLib.Symbols.IO_DQ32
 			// 
 			this.ledB31.BeginInit();
 			this.ledB31.ColorFrame = new NxtControl.Drawing.Color("LedFrameColor");
-			this.ledB31.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 310D, 430D);
+			this.ledB31.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 309D, 444D);
 			this.ledB31.FrameSize = 33F;
 			this.ledB31.IsOnlyInput = true;
 			this.ledB31.Name = "ledB31";
@@ -1156,7 +1227,825 @@ namespace Hidryco.HidrycoLib.Symbols.IO_DQ32
 			// 
 			// sDefault
 			// 
+			// 
+			// f0
+			// 
+			this.f0.Color = new NxtControl.Drawing.Color(((byte)(214)), ((byte)(110)), ((byte)(0)));
+			this.f0.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+			this.f0.Location = new NxtControl.Drawing.PointF(88D, 45D);
+			this.f0.Name = "f0";
+			this.f0.Text = "";
+			// 
+			// f1
+			// 
+			this.f1.Color = new NxtControl.Drawing.Color(((byte)(214)), ((byte)(110)), ((byte)(0)));
+			this.f1.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+			this.f1.Location = new NxtControl.Drawing.PointF(88D, 71D);
+			this.f1.Name = "f1";
+			this.f1.Text = "";
+			// 
+			// f2
+			// 
+			this.f2.Color = new NxtControl.Drawing.Color(((byte)(214)), ((byte)(110)), ((byte)(0)));
+			this.f2.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+			this.f2.Location = new NxtControl.Drawing.PointF(88D, 97D);
+			this.f2.Name = "f2";
+			this.f2.Text = "";
+			// 
+			// f3
+			// 
+			this.f3.Color = new NxtControl.Drawing.Color(((byte)(214)), ((byte)(110)), ((byte)(0)));
+			this.f3.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+			this.f3.Location = new NxtControl.Drawing.PointF(88D, 123D);
+			this.f3.Name = "f3";
+			this.f3.Text = "";
+			// 
+			// f4
+			// 
+			this.f4.Color = new NxtControl.Drawing.Color(((byte)(214)), ((byte)(110)), ((byte)(0)));
+			this.f4.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+			this.f4.Location = new NxtControl.Drawing.PointF(88D, 149D);
+			this.f4.Name = "f4";
+			this.f4.Text = "";
+			// 
+			// f5
+			// 
+			this.f5.Color = new NxtControl.Drawing.Color(((byte)(214)), ((byte)(110)), ((byte)(0)));
+			this.f5.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+			this.f5.Location = new NxtControl.Drawing.PointF(88D, 175D);
+			this.f5.Name = "f5";
+			this.f5.Text = "";
+			// 
+			// f6
+			// 
+			this.f6.Color = new NxtControl.Drawing.Color(((byte)(214)), ((byte)(110)), ((byte)(0)));
+			this.f6.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+			this.f6.Location = new NxtControl.Drawing.PointF(88D, 201D);
+			this.f6.Name = "f6";
+			this.f6.Text = "";
+			// 
+			// f7
+			// 
+			this.f7.Color = new NxtControl.Drawing.Color(((byte)(214)), ((byte)(110)), ((byte)(0)));
+			this.f7.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+			this.f7.Location = new NxtControl.Drawing.PointF(88D, 227D);
+			this.f7.Name = "f7";
+			this.f7.Text = "";
+			// 
+			// f8
+			// 
+			this.f8.Color = new NxtControl.Drawing.Color(((byte)(214)), ((byte)(110)), ((byte)(0)));
+			this.f8.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+			this.f8.Location = new NxtControl.Drawing.PointF(88D, 253D);
+			this.f8.Name = "f8";
+			this.f8.Text = "";
+			// 
+			// f9
+			// 
+			this.f9.Color = new NxtControl.Drawing.Color(((byte)(214)), ((byte)(110)), ((byte)(0)));
+			this.f9.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+			this.f9.Location = new NxtControl.Drawing.PointF(88D, 279D);
+			this.f9.Name = "f9";
+			this.f9.Text = "";
+			// 
+			// f10
+			// 
+			this.f10.Color = new NxtControl.Drawing.Color(((byte)(214)), ((byte)(110)), ((byte)(0)));
+			this.f10.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+			this.f10.Location = new NxtControl.Drawing.PointF(88D, 305D);
+			this.f10.Name = "f10";
+			this.f10.Text = "";
+			// 
+			// f11
+			// 
+			this.f11.Color = new NxtControl.Drawing.Color(((byte)(214)), ((byte)(110)), ((byte)(0)));
+			this.f11.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+			this.f11.Location = new NxtControl.Drawing.PointF(88D, 331D);
+			this.f11.Name = "f11";
+			this.f11.Text = "";
+			// 
+			// f12
+			// 
+			this.f12.Color = new NxtControl.Drawing.Color(((byte)(214)), ((byte)(110)), ((byte)(0)));
+			this.f12.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+			this.f12.Location = new NxtControl.Drawing.PointF(88D, 357D);
+			this.f12.Name = "f12";
+			this.f12.Text = "";
+			// 
+			// f13
+			// 
+			this.f13.Color = new NxtControl.Drawing.Color(((byte)(214)), ((byte)(110)), ((byte)(0)));
+			this.f13.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+			this.f13.Location = new NxtControl.Drawing.PointF(88D, 383D);
+			this.f13.Name = "f13";
+			this.f13.Text = "";
+			// 
+			// f14
+			// 
+			this.f14.Color = new NxtControl.Drawing.Color(((byte)(214)), ((byte)(110)), ((byte)(0)));
+			this.f14.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+			this.f14.Location = new NxtControl.Drawing.PointF(88D, 409D);
+			this.f14.Name = "f14";
+			this.f14.Text = "";
+			// 
+			// f15
+			// 
+			this.f15.Color = new NxtControl.Drawing.Color(((byte)(214)), ((byte)(110)), ((byte)(0)));
+			this.f15.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+			this.f15.Location = new NxtControl.Drawing.PointF(88D, 435D);
+			this.f15.Name = "f15";
+			this.f15.Text = "";
+			// 
+			// f16
+			// 
+			this.f16.Color = new NxtControl.Drawing.Color(((byte)(214)), ((byte)(110)), ((byte)(0)));
+			this.f16.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+			this.f16.Location = new NxtControl.Drawing.PointF(328D, 45D);
+			this.f16.Name = "f16";
+			this.f16.Text = "";
+			// 
+			// f17
+			// 
+			this.f17.Color = new NxtControl.Drawing.Color(((byte)(214)), ((byte)(110)), ((byte)(0)));
+			this.f17.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+			this.f17.Location = new NxtControl.Drawing.PointF(328D, 71D);
+			this.f17.Name = "f17";
+			this.f17.Text = "";
+			// 
+			// f18
+			// 
+			this.f18.Color = new NxtControl.Drawing.Color(((byte)(214)), ((byte)(110)), ((byte)(0)));
+			this.f18.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+			this.f18.Location = new NxtControl.Drawing.PointF(328D, 97D);
+			this.f18.Name = "f18";
+			this.f18.Text = "";
+			// 
+			// f19
+			// 
+			this.f19.Color = new NxtControl.Drawing.Color(((byte)(214)), ((byte)(110)), ((byte)(0)));
+			this.f19.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+			this.f19.Location = new NxtControl.Drawing.PointF(328D, 123D);
+			this.f19.Name = "f19";
+			this.f19.Text = "";
+			// 
+			// f20
+			// 
+			this.f20.Color = new NxtControl.Drawing.Color(((byte)(214)), ((byte)(110)), ((byte)(0)));
+			this.f20.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+			this.f20.Location = new NxtControl.Drawing.PointF(328D, 149D);
+			this.f20.Name = "f20";
+			this.f20.Text = "";
+			// 
+			// f21
+			// 
+			this.f21.Color = new NxtControl.Drawing.Color(((byte)(214)), ((byte)(110)), ((byte)(0)));
+			this.f21.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+			this.f21.Location = new NxtControl.Drawing.PointF(328D, 175D);
+			this.f21.Name = "f21";
+			this.f21.Text = "";
+			// 
+			// f22
+			// 
+			this.f22.Color = new NxtControl.Drawing.Color(((byte)(214)), ((byte)(110)), ((byte)(0)));
+			this.f22.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+			this.f22.Location = new NxtControl.Drawing.PointF(328D, 201D);
+			this.f22.Name = "f22";
+			this.f22.Text = "";
+			// 
+			// f23
+			// 
+			this.f23.Color = new NxtControl.Drawing.Color(((byte)(214)), ((byte)(110)), ((byte)(0)));
+			this.f23.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+			this.f23.Location = new NxtControl.Drawing.PointF(328D, 227D);
+			this.f23.Name = "f23";
+			this.f23.Text = "";
+			// 
+			// f24
+			// 
+			this.f24.Color = new NxtControl.Drawing.Color(((byte)(214)), ((byte)(110)), ((byte)(0)));
+			this.f24.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+			this.f24.Location = new NxtControl.Drawing.PointF(328D, 253D);
+			this.f24.Name = "f24";
+			this.f24.Text = "";
+			// 
+			// f25
+			// 
+			this.f25.Color = new NxtControl.Drawing.Color(((byte)(214)), ((byte)(110)), ((byte)(0)));
+			this.f25.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+			this.f25.Location = new NxtControl.Drawing.PointF(328D, 279D);
+			this.f25.Name = "f25";
+			this.f25.Text = "";
+			// 
+			// f26
+			// 
+			this.f26.Color = new NxtControl.Drawing.Color(((byte)(214)), ((byte)(110)), ((byte)(0)));
+			this.f26.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+			this.f26.Location = new NxtControl.Drawing.PointF(328D, 305D);
+			this.f26.Name = "f26";
+			this.f26.Text = "";
+			// 
+			// f27
+			// 
+			this.f27.Color = new NxtControl.Drawing.Color(((byte)(214)), ((byte)(110)), ((byte)(0)));
+			this.f27.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+			this.f27.Location = new NxtControl.Drawing.PointF(328D, 331D);
+			this.f27.Name = "f27";
+			this.f27.Text = "";
+			// 
+			// f28
+			// 
+			this.f28.Color = new NxtControl.Drawing.Color(((byte)(214)), ((byte)(110)), ((byte)(0)));
+			this.f28.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+			this.f28.Location = new NxtControl.Drawing.PointF(328D, 357D);
+			this.f28.Name = "f28";
+			this.f28.Text = "";
+			// 
+			// f29
+			// 
+			this.f29.Color = new NxtControl.Drawing.Color(((byte)(214)), ((byte)(110)), ((byte)(0)));
+			this.f29.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+			this.f29.Location = new NxtControl.Drawing.PointF(328D, 383D);
+			this.f29.Name = "f29";
+			this.f29.Text = "";
+			// 
+			// f30
+			// 
+			this.f30.Color = new NxtControl.Drawing.Color(((byte)(214)), ((byte)(110)), ((byte)(0)));
+			this.f30.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+			this.f30.Location = new NxtControl.Drawing.PointF(328D, 409D);
+			this.f30.Name = "f30";
+			this.f30.Text = "";
+			// 
+			// f31
+			// 
+			this.f31.Color = new NxtControl.Drawing.Color(((byte)(214)), ((byte)(110)), ((byte)(0)));
+			this.f31.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+			this.f31.Location = new NxtControl.Drawing.PointF(328D, 435D);
+			this.f31.Name = "f31";
+			this.f31.Text = "";
+			// 
+			// b0
+			// 
+			this.b0.Bounds = new NxtControl.Drawing.RectF(((float)(8D)), ((float)(42D)), ((float)(140D)), ((float)(24D)));
+			this.b0.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("Transparent"));
+			this.b0.ButtonPushedBrush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("Transparent"));
+			this.b0.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+			this.b0.Name = "b0";
+			this.b0.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("Transparent"), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.b0.Radius = 2D;
+			this.b0.Text = "";
+			this.b0.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.b0.TextColorMouseDown = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.b0.Use3DEffect = false;
+			this.b0.Click += new System.EventHandler(this.B0Click);
+			// 
+			// b1
+			// 
+			this.b1.Bounds = new NxtControl.Drawing.RectF(((float)(8D)), ((float)(68D)), ((float)(140D)), ((float)(24D)));
+			this.b1.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("Transparent"));
+			this.b1.ButtonPushedBrush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("Transparent"));
+			this.b1.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+			this.b1.Name = "b1";
+			this.b1.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("Transparent"), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.b1.Radius = 2D;
+			this.b1.Text = "";
+			this.b1.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.b1.TextColorMouseDown = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.b1.Use3DEffect = false;
+			this.b1.Click += new System.EventHandler(this.B1Click);
+			// 
+			// b2
+			// 
+			this.b2.Bounds = new NxtControl.Drawing.RectF(((float)(8D)), ((float)(94D)), ((float)(140D)), ((float)(24D)));
+			this.b2.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("Transparent"));
+			this.b2.ButtonPushedBrush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("Transparent"));
+			this.b2.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+			this.b2.Name = "b2";
+			this.b2.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("Transparent"), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.b2.Radius = 2D;
+			this.b2.Text = "";
+			this.b2.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.b2.TextColorMouseDown = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.b2.Use3DEffect = false;
+			this.b2.Click += new System.EventHandler(this.B2Click);
+			// 
+			// b3
+			// 
+			this.b3.Bounds = new NxtControl.Drawing.RectF(((float)(8D)), ((float)(120D)), ((float)(140D)), ((float)(24D)));
+			this.b3.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("Transparent"));
+			this.b3.ButtonPushedBrush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("Transparent"));
+			this.b3.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+			this.b3.Name = "b3";
+			this.b3.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("Transparent"), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.b3.Radius = 2D;
+			this.b3.Text = "";
+			this.b3.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.b3.TextColorMouseDown = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.b3.Use3DEffect = false;
+			this.b3.Click += new System.EventHandler(this.B3Click);
+			// 
+			// b4
+			// 
+			this.b4.Bounds = new NxtControl.Drawing.RectF(((float)(8D)), ((float)(146D)), ((float)(140D)), ((float)(24D)));
+			this.b4.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("Transparent"));
+			this.b4.ButtonPushedBrush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("Transparent"));
+			this.b4.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+			this.b4.Name = "b4";
+			this.b4.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("Transparent"), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.b4.Radius = 2D;
+			this.b4.Text = "";
+			this.b4.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.b4.TextColorMouseDown = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.b4.Use3DEffect = false;
+			this.b4.Click += new System.EventHandler(this.B4Click);
+			// 
+			// b5
+			// 
+			this.b5.Bounds = new NxtControl.Drawing.RectF(((float)(8D)), ((float)(172D)), ((float)(140D)), ((float)(24D)));
+			this.b5.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("Transparent"));
+			this.b5.ButtonPushedBrush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("Transparent"));
+			this.b5.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+			this.b5.Name = "b5";
+			this.b5.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("Transparent"), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.b5.Radius = 2D;
+			this.b5.Text = "";
+			this.b5.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.b5.TextColorMouseDown = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.b5.Use3DEffect = false;
+			this.b5.Click += new System.EventHandler(this.B5Click);
+			// 
+			// b6
+			// 
+			this.b6.Bounds = new NxtControl.Drawing.RectF(((float)(8D)), ((float)(198D)), ((float)(140D)), ((float)(24D)));
+			this.b6.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("Transparent"));
+			this.b6.ButtonPushedBrush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("Transparent"));
+			this.b6.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+			this.b6.Name = "b6";
+			this.b6.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("Transparent"), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.b6.Radius = 2D;
+			this.b6.Text = "";
+			this.b6.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.b6.TextColorMouseDown = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.b6.Use3DEffect = false;
+			this.b6.Click += new System.EventHandler(this.B6Click);
+			// 
+			// b7
+			// 
+			this.b7.Bounds = new NxtControl.Drawing.RectF(((float)(8D)), ((float)(224D)), ((float)(140D)), ((float)(24D)));
+			this.b7.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("Transparent"));
+			this.b7.ButtonPushedBrush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("Transparent"));
+			this.b7.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+			this.b7.Name = "b7";
+			this.b7.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("Transparent"), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.b7.Radius = 2D;
+			this.b7.Text = "";
+			this.b7.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.b7.TextColorMouseDown = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.b7.Use3DEffect = false;
+			this.b7.Click += new System.EventHandler(this.B7Click);
+			// 
+			// b8
+			// 
+			this.b8.Bounds = new NxtControl.Drawing.RectF(((float)(8D)), ((float)(250D)), ((float)(140D)), ((float)(24D)));
+			this.b8.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("Transparent"));
+			this.b8.ButtonPushedBrush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("Transparent"));
+			this.b8.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+			this.b8.Name = "b8";
+			this.b8.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("Transparent"), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.b8.Radius = 2D;
+			this.b8.Text = "";
+			this.b8.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.b8.TextColorMouseDown = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.b8.Use3DEffect = false;
+			this.b8.Click += new System.EventHandler(this.B8Click);
+			// 
+			// b9
+			// 
+			this.b9.Bounds = new NxtControl.Drawing.RectF(((float)(8D)), ((float)(276D)), ((float)(140D)), ((float)(24D)));
+			this.b9.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("Transparent"));
+			this.b9.ButtonPushedBrush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("Transparent"));
+			this.b9.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+			this.b9.Name = "b9";
+			this.b9.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("Transparent"), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.b9.Radius = 2D;
+			this.b9.Text = "";
+			this.b9.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.b9.TextColorMouseDown = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.b9.Use3DEffect = false;
+			this.b9.Click += new System.EventHandler(this.B9Click);
+			// 
+			// b10
+			// 
+			this.b10.Bounds = new NxtControl.Drawing.RectF(((float)(8D)), ((float)(302D)), ((float)(140D)), ((float)(24D)));
+			this.b10.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("Transparent"));
+			this.b10.ButtonPushedBrush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("Transparent"));
+			this.b10.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+			this.b10.Name = "b10";
+			this.b10.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("Transparent"), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.b10.Radius = 2D;
+			this.b10.Text = "";
+			this.b10.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.b10.TextColorMouseDown = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.b10.Use3DEffect = false;
+			this.b10.Click += new System.EventHandler(this.B10Click);
+			// 
+			// b11
+			// 
+			this.b11.Bounds = new NxtControl.Drawing.RectF(((float)(8D)), ((float)(328D)), ((float)(140D)), ((float)(24D)));
+			this.b11.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("Transparent"));
+			this.b11.ButtonPushedBrush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("Transparent"));
+			this.b11.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+			this.b11.Name = "b11";
+			this.b11.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("Transparent"), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.b11.Radius = 2D;
+			this.b11.Text = "";
+			this.b11.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.b11.TextColorMouseDown = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.b11.Use3DEffect = false;
+			this.b11.Click += new System.EventHandler(this.B11Click);
+			// 
+			// b12
+			// 
+			this.b12.Bounds = new NxtControl.Drawing.RectF(((float)(8D)), ((float)(354D)), ((float)(140D)), ((float)(24D)));
+			this.b12.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("Transparent"));
+			this.b12.ButtonPushedBrush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("Transparent"));
+			this.b12.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+			this.b12.Name = "b12";
+			this.b12.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("Transparent"), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.b12.Radius = 2D;
+			this.b12.Text = "";
+			this.b12.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.b12.TextColorMouseDown = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.b12.Use3DEffect = false;
+			this.b12.Click += new System.EventHandler(this.B12Click);
+			// 
+			// b13
+			// 
+			this.b13.Bounds = new NxtControl.Drawing.RectF(((float)(8D)), ((float)(380D)), ((float)(140D)), ((float)(24D)));
+			this.b13.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("Transparent"));
+			this.b13.ButtonPushedBrush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("Transparent"));
+			this.b13.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+			this.b13.Name = "b13";
+			this.b13.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("Transparent"), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.b13.Radius = 2D;
+			this.b13.Text = "";
+			this.b13.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.b13.TextColorMouseDown = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.b13.Use3DEffect = false;
+			this.b13.Click += new System.EventHandler(this.B13Click);
+			// 
+			// b14
+			// 
+			this.b14.Bounds = new NxtControl.Drawing.RectF(((float)(8D)), ((float)(406D)), ((float)(140D)), ((float)(24D)));
+			this.b14.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("Transparent"));
+			this.b14.ButtonPushedBrush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("Transparent"));
+			this.b14.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+			this.b14.Name = "b14";
+			this.b14.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("Transparent"), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.b14.Radius = 2D;
+			this.b14.Text = "";
+			this.b14.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.b14.TextColorMouseDown = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.b14.Use3DEffect = false;
+			this.b14.Click += new System.EventHandler(this.B14Click);
+			// 
+			// b15
+			// 
+			this.b15.Bounds = new NxtControl.Drawing.RectF(((float)(8D)), ((float)(432D)), ((float)(140D)), ((float)(24D)));
+			this.b15.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("Transparent"));
+			this.b15.ButtonPushedBrush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("Transparent"));
+			this.b15.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+			this.b15.Name = "b15";
+			this.b15.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("Transparent"), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.b15.Radius = 2D;
+			this.b15.Text = "";
+			this.b15.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.b15.TextColorMouseDown = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.b15.Use3DEffect = false;
+			this.b15.Click += new System.EventHandler(this.B15Click);
+			// 
+			// b16
+			// 
+			this.b16.Bounds = new NxtControl.Drawing.RectF(((float)(248D)), ((float)(42D)), ((float)(140D)), ((float)(24D)));
+			this.b16.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("Transparent"));
+			this.b16.ButtonPushedBrush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("Transparent"));
+			this.b16.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+			this.b16.Name = "b16";
+			this.b16.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("Transparent"), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.b16.Radius = 2D;
+			this.b16.Text = "";
+			this.b16.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.b16.TextColorMouseDown = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.b16.Use3DEffect = false;
+			this.b16.Click += new System.EventHandler(this.B16Click);
+			// 
+			// b17
+			// 
+			this.b17.Bounds = new NxtControl.Drawing.RectF(((float)(248D)), ((float)(68D)), ((float)(140D)), ((float)(24D)));
+			this.b17.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("Transparent"));
+			this.b17.ButtonPushedBrush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("Transparent"));
+			this.b17.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+			this.b17.Name = "b17";
+			this.b17.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("Transparent"), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.b17.Radius = 2D;
+			this.b17.Text = "";
+			this.b17.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.b17.TextColorMouseDown = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.b17.Use3DEffect = false;
+			this.b17.Click += new System.EventHandler(this.B17Click);
+			// 
+			// b18
+			// 
+			this.b18.Bounds = new NxtControl.Drawing.RectF(((float)(248D)), ((float)(94D)), ((float)(140D)), ((float)(24D)));
+			this.b18.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("Transparent"));
+			this.b18.ButtonPushedBrush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("Transparent"));
+			this.b18.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+			this.b18.Name = "b18";
+			this.b18.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("Transparent"), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.b18.Radius = 2D;
+			this.b18.Text = "";
+			this.b18.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.b18.TextColorMouseDown = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.b18.Use3DEffect = false;
+			this.b18.Click += new System.EventHandler(this.B18Click);
+			// 
+			// b19
+			// 
+			this.b19.Bounds = new NxtControl.Drawing.RectF(((float)(248D)), ((float)(120D)), ((float)(140D)), ((float)(24D)));
+			this.b19.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("Transparent"));
+			this.b19.ButtonPushedBrush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("Transparent"));
+			this.b19.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+			this.b19.Name = "b19";
+			this.b19.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("Transparent"), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.b19.Radius = 2D;
+			this.b19.Text = "";
+			this.b19.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.b19.TextColorMouseDown = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.b19.Use3DEffect = false;
+			this.b19.Click += new System.EventHandler(this.B19Click);
+			// 
+			// b20
+			// 
+			this.b20.Bounds = new NxtControl.Drawing.RectF(((float)(248D)), ((float)(146D)), ((float)(140D)), ((float)(24D)));
+			this.b20.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("Transparent"));
+			this.b20.ButtonPushedBrush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("Transparent"));
+			this.b20.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+			this.b20.Name = "b20";
+			this.b20.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("Transparent"), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.b20.Radius = 2D;
+			this.b20.Text = "";
+			this.b20.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.b20.TextColorMouseDown = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.b20.Use3DEffect = false;
+			this.b20.Click += new System.EventHandler(this.B20Click);
+			// 
+			// b21
+			// 
+			this.b21.Bounds = new NxtControl.Drawing.RectF(((float)(248D)), ((float)(172D)), ((float)(140D)), ((float)(24D)));
+			this.b21.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("Transparent"));
+			this.b21.ButtonPushedBrush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("Transparent"));
+			this.b21.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+			this.b21.Name = "b21";
+			this.b21.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("Transparent"), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.b21.Radius = 2D;
+			this.b21.Text = "";
+			this.b21.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.b21.TextColorMouseDown = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.b21.Use3DEffect = false;
+			this.b21.Click += new System.EventHandler(this.B21Click);
+			// 
+			// b22
+			// 
+			this.b22.Bounds = new NxtControl.Drawing.RectF(((float)(248D)), ((float)(198D)), ((float)(140D)), ((float)(24D)));
+			this.b22.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("Transparent"));
+			this.b22.ButtonPushedBrush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("Transparent"));
+			this.b22.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+			this.b22.Name = "b22";
+			this.b22.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("Transparent"), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.b22.Radius = 2D;
+			this.b22.Text = "";
+			this.b22.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.b22.TextColorMouseDown = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.b22.Use3DEffect = false;
+			this.b22.Click += new System.EventHandler(this.B22Click);
+			// 
+			// b23
+			// 
+			this.b23.Bounds = new NxtControl.Drawing.RectF(((float)(248D)), ((float)(224D)), ((float)(140D)), ((float)(24D)));
+			this.b23.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("Transparent"));
+			this.b23.ButtonPushedBrush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("Transparent"));
+			this.b23.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+			this.b23.Name = "b23";
+			this.b23.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("Transparent"), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.b23.Radius = 2D;
+			this.b23.Text = "";
+			this.b23.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.b23.TextColorMouseDown = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.b23.Use3DEffect = false;
+			this.b23.Click += new System.EventHandler(this.B23Click);
+			// 
+			// b24
+			// 
+			this.b24.Bounds = new NxtControl.Drawing.RectF(((float)(248D)), ((float)(250D)), ((float)(140D)), ((float)(24D)));
+			this.b24.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("Transparent"));
+			this.b24.ButtonPushedBrush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("Transparent"));
+			this.b24.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+			this.b24.Name = "b24";
+			this.b24.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("Transparent"), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.b24.Radius = 2D;
+			this.b24.Text = "";
+			this.b24.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.b24.TextColorMouseDown = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.b24.Use3DEffect = false;
+			this.b24.Click += new System.EventHandler(this.B24Click);
+			// 
+			// b25
+			// 
+			this.b25.Bounds = new NxtControl.Drawing.RectF(((float)(248D)), ((float)(276D)), ((float)(140D)), ((float)(24D)));
+			this.b25.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("Transparent"));
+			this.b25.ButtonPushedBrush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("Transparent"));
+			this.b25.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+			this.b25.Name = "b25";
+			this.b25.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("Transparent"), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.b25.Radius = 2D;
+			this.b25.Text = "";
+			this.b25.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.b25.TextColorMouseDown = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.b25.Use3DEffect = false;
+			this.b25.Click += new System.EventHandler(this.B25Click);
+			// 
+			// b26
+			// 
+			this.b26.Bounds = new NxtControl.Drawing.RectF(((float)(248D)), ((float)(302D)), ((float)(140D)), ((float)(24D)));
+			this.b26.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("Transparent"));
+			this.b26.ButtonPushedBrush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("Transparent"));
+			this.b26.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+			this.b26.Name = "b26";
+			this.b26.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("Transparent"), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.b26.Radius = 2D;
+			this.b26.Text = "";
+			this.b26.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.b26.TextColorMouseDown = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.b26.Use3DEffect = false;
+			this.b26.Click += new System.EventHandler(this.B26Click);
+			// 
+			// b27
+			// 
+			this.b27.Bounds = new NxtControl.Drawing.RectF(((float)(248D)), ((float)(328D)), ((float)(140D)), ((float)(24D)));
+			this.b27.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("Transparent"));
+			this.b27.ButtonPushedBrush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("Transparent"));
+			this.b27.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+			this.b27.Name = "b27";
+			this.b27.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("Transparent"), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.b27.Radius = 2D;
+			this.b27.Text = "";
+			this.b27.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.b27.TextColorMouseDown = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.b27.Use3DEffect = false;
+			this.b27.Click += new System.EventHandler(this.B27Click);
+			// 
+			// b28
+			// 
+			this.b28.Bounds = new NxtControl.Drawing.RectF(((float)(248D)), ((float)(354D)), ((float)(140D)), ((float)(24D)));
+			this.b28.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("Transparent"));
+			this.b28.ButtonPushedBrush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("Transparent"));
+			this.b28.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+			this.b28.Name = "b28";
+			this.b28.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("Transparent"), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.b28.Radius = 2D;
+			this.b28.Text = "";
+			this.b28.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.b28.TextColorMouseDown = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.b28.Use3DEffect = false;
+			this.b28.Click += new System.EventHandler(this.B28Click);
+			// 
+			// b29
+			// 
+			this.b29.Bounds = new NxtControl.Drawing.RectF(((float)(248D)), ((float)(380D)), ((float)(140D)), ((float)(24D)));
+			this.b29.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("Transparent"));
+			this.b29.ButtonPushedBrush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("Transparent"));
+			this.b29.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+			this.b29.Name = "b29";
+			this.b29.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("Transparent"), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.b29.Radius = 2D;
+			this.b29.Text = "";
+			this.b29.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.b29.TextColorMouseDown = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.b29.Use3DEffect = false;
+			this.b29.Click += new System.EventHandler(this.B29Click);
+			// 
+			// b30
+			// 
+			this.b30.Bounds = new NxtControl.Drawing.RectF(((float)(248D)), ((float)(406D)), ((float)(140D)), ((float)(24D)));
+			this.b30.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("Transparent"));
+			this.b30.ButtonPushedBrush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("Transparent"));
+			this.b30.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+			this.b30.Name = "b30";
+			this.b30.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("Transparent"), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.b30.Radius = 2D;
+			this.b30.Text = "";
+			this.b30.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.b30.TextColorMouseDown = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.b30.Use3DEffect = false;
+			this.b30.Click += new System.EventHandler(this.B30Click);
+			// 
+			// b31
+			// 
+			this.b31.Bounds = new NxtControl.Drawing.RectF(((float)(248D)), ((float)(432D)), ((float)(140D)), ((float)(24D)));
+			this.b31.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("Transparent"));
+			this.b31.ButtonPushedBrush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("Transparent"));
+			this.b31.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+			this.b31.Name = "b31";
+			this.b31.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("Transparent"), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.b31.Radius = 2D;
+			this.b31.Text = "";
+			this.b31.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.b31.TextColorMouseDown = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.b31.Use3DEffect = false;
+			this.b31.Click += new System.EventHandler(this.B31Click);
+			// 
+			// dica
+			// 
+			this.dica.Color = new NxtControl.Drawing.Color(((byte)(90)), ((byte)(90)), ((byte)(90)));
+			this.dica.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular);
+			this.dica.Location = new NxtControl.Drawing.PointF(10D, 26D);
+			this.dica.Name = "dica";
+			this.dica.Text = "Clique na saída: normal > forçar LIGADA > forçar DESLIGADA > normal";
+			// 
+			// avisoForcado
+			// 
+			this.avisoForcado.Color = new NxtControl.Drawing.Color(((byte)(220)), ((byte)(30)), ((byte)(30)));
+			this.avisoForcado.Font = new NxtControl.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
+			this.avisoForcado.Location = new NxtControl.Drawing.PointF(380D, 6D);
+			this.avisoForcado.Name = "avisoForcado";
+			this.avisoForcado.Text = "FORÇADO";
+			this.avisoForcado.Visible = false;
+			// 
+			// xForcado
+			// 
+			this.xForcado.BeginInit();
+			this.xForcado.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, double.NaN, double.NaN);
+			this.xForcado.IsOnlyInput = true;
+			this.xForcado.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
+			this.xForcado.Name = "xForcado";
+			this.xForcado.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
+			this.xForcado.TagName = "FORCADO";
+			this.xForcado.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.MascaraValueChanged);
+			this.xForcado.EndInit();
+			// 
+			// xL0
+			// 
+			this.xL0.BeginInit();
+			this.xL0.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, double.NaN, double.NaN);
+			this.xL0.IsOnlyInput = true;
+			this.xL0.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
+			this.xL0.Name = "xL0";
+			this.xL0.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
+			this.xL0.TagName = "STS_LIGA0";
+			this.xL0.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.MascaraValueChanged);
+			this.xL0.EndInit();
+			// 
+			// xL1
+			// 
+			this.xL1.BeginInit();
+			this.xL1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, double.NaN, double.NaN);
+			this.xL1.IsOnlyInput = true;
+			this.xL1.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
+			this.xL1.Name = "xL1";
+			this.xL1.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
+			this.xL1.TagName = "STS_LIGA1";
+			this.xL1.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.MascaraValueChanged);
+			this.xL1.EndInit();
+			// 
+			// xD0
+			// 
+			this.xD0.BeginInit();
+			this.xD0.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, double.NaN, double.NaN);
+			this.xD0.IsOnlyInput = true;
+			this.xD0.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
+			this.xD0.Name = "xD0";
+			this.xD0.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
+			this.xD0.TagName = "STS_DESL0";
+			this.xD0.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.MascaraValueChanged);
+			this.xD0.EndInit();
+			// 
+			// xD1
+			// 
+			this.xD1.BeginInit();
+			this.xD1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, double.NaN, double.NaN);
+			this.xD1.IsOnlyInput = true;
+			this.xD1.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
+			this.xD1.Name = "xD1";
+			this.xD1.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
+			this.xD1.TagName = "STS_DESL1";
+			this.xD1.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.MascaraValueChanged);
+			this.xD1.EndInit();
 			this.Shapes.AddRange(new System.ComponentModel.IComponent[] {
+			this.xD1,
+			this.xD0,
+			this.xL1,
+			this.xL0,
+			this.xForcado,
 			this.txtTitulo,
 			this.txtB0,
 			this.ledB0,
@@ -1229,6 +2118,72 @@ namespace Hidryco.HidrycoLib.Symbols.IO_DQ32
 			this.txtW0,
 			this.lblW0,
 			this.txtW1,
+			this.f0,
+			this.f1,
+			this.f2,
+			this.f3,
+			this.f4,
+			this.f5,
+			this.f6,
+			this.f7,
+			this.f8,
+			this.f9,
+			this.f10,
+			this.f11,
+			this.f12,
+			this.f13,
+			this.f14,
+			this.f15,
+			this.f16,
+			this.f17,
+			this.f18,
+			this.f19,
+			this.f20,
+			this.f21,
+			this.f22,
+			this.f23,
+			this.f24,
+			this.f25,
+			this.f26,
+			this.f27,
+			this.f28,
+			this.f29,
+			this.f30,
+			this.f31,
+			this.b0,
+			this.b1,
+			this.b2,
+			this.b3,
+			this.b4,
+			this.b5,
+			this.b6,
+			this.b7,
+			this.b8,
+			this.b9,
+			this.b10,
+			this.b11,
+			this.b12,
+			this.b13,
+			this.b14,
+			this.b15,
+			this.b16,
+			this.b17,
+			this.b18,
+			this.b19,
+			this.b20,
+			this.b21,
+			this.b22,
+			this.b23,
+			this.b24,
+			this.b25,
+			this.b26,
+			this.b27,
+			this.b28,
+			this.b29,
+			this.b30,
+			this.b31,
+			this.dica,
+			this.avisoForcado,
 			this.lblW1});
 			this.SymbolSize = new System.Drawing.Size(480, 540);
 
@@ -1306,6 +2261,77 @@ namespace Hidryco.HidrycoLib.Symbols.IO_DQ32
 		private System.HMI.Symbols.Base.Label<short> lblW0;
 		private NxtControl.GuiFramework.FreeText txtW1;
 		private System.HMI.Symbols.Base.Label<short> lblW1;
+		private NxtControl.GuiFramework.FreeText f0;
+		private NxtControl.GuiFramework.FreeText f1;
+		private NxtControl.GuiFramework.FreeText f2;
+		private NxtControl.GuiFramework.FreeText f3;
+		private NxtControl.GuiFramework.FreeText f4;
+		private NxtControl.GuiFramework.FreeText f5;
+		private NxtControl.GuiFramework.FreeText f6;
+		private NxtControl.GuiFramework.FreeText f7;
+		private NxtControl.GuiFramework.FreeText f8;
+		private NxtControl.GuiFramework.FreeText f9;
+		private NxtControl.GuiFramework.FreeText f10;
+		private NxtControl.GuiFramework.FreeText f11;
+		private NxtControl.GuiFramework.FreeText f12;
+		private NxtControl.GuiFramework.FreeText f13;
+		private NxtControl.GuiFramework.FreeText f14;
+		private NxtControl.GuiFramework.FreeText f15;
+		private NxtControl.GuiFramework.FreeText f16;
+		private NxtControl.GuiFramework.FreeText f17;
+		private NxtControl.GuiFramework.FreeText f18;
+		private NxtControl.GuiFramework.FreeText f19;
+		private NxtControl.GuiFramework.FreeText f20;
+		private NxtControl.GuiFramework.FreeText f21;
+		private NxtControl.GuiFramework.FreeText f22;
+		private NxtControl.GuiFramework.FreeText f23;
+		private NxtControl.GuiFramework.FreeText f24;
+		private NxtControl.GuiFramework.FreeText f25;
+		private NxtControl.GuiFramework.FreeText f26;
+		private NxtControl.GuiFramework.FreeText f27;
+		private NxtControl.GuiFramework.FreeText f28;
+		private NxtControl.GuiFramework.FreeText f29;
+		private NxtControl.GuiFramework.FreeText f30;
+		private NxtControl.GuiFramework.FreeText f31;
+		private NxtControl.GuiFramework.DrawnButton b0;
+		private NxtControl.GuiFramework.DrawnButton b1;
+		private NxtControl.GuiFramework.DrawnButton b2;
+		private NxtControl.GuiFramework.DrawnButton b3;
+		private NxtControl.GuiFramework.DrawnButton b4;
+		private NxtControl.GuiFramework.DrawnButton b5;
+		private NxtControl.GuiFramework.DrawnButton b6;
+		private NxtControl.GuiFramework.DrawnButton b7;
+		private NxtControl.GuiFramework.DrawnButton b8;
+		private NxtControl.GuiFramework.DrawnButton b9;
+		private NxtControl.GuiFramework.DrawnButton b10;
+		private NxtControl.GuiFramework.DrawnButton b11;
+		private NxtControl.GuiFramework.DrawnButton b12;
+		private NxtControl.GuiFramework.DrawnButton b13;
+		private NxtControl.GuiFramework.DrawnButton b14;
+		private NxtControl.GuiFramework.DrawnButton b15;
+		private NxtControl.GuiFramework.DrawnButton b16;
+		private NxtControl.GuiFramework.DrawnButton b17;
+		private NxtControl.GuiFramework.DrawnButton b18;
+		private NxtControl.GuiFramework.DrawnButton b19;
+		private NxtControl.GuiFramework.DrawnButton b20;
+		private NxtControl.GuiFramework.DrawnButton b21;
+		private NxtControl.GuiFramework.DrawnButton b22;
+		private NxtControl.GuiFramework.DrawnButton b23;
+		private NxtControl.GuiFramework.DrawnButton b24;
+		private NxtControl.GuiFramework.DrawnButton b25;
+		private NxtControl.GuiFramework.DrawnButton b26;
+		private NxtControl.GuiFramework.DrawnButton b27;
+		private NxtControl.GuiFramework.DrawnButton b28;
+		private NxtControl.GuiFramework.DrawnButton b29;
+		private NxtControl.GuiFramework.DrawnButton b30;
+		private NxtControl.GuiFramework.DrawnButton b31;
+		private NxtControl.GuiFramework.FreeText dica;
+		private NxtControl.GuiFramework.FreeText avisoForcado;
+		private System.HMI.Symbols.Base.Execute<bool> xForcado;
+		private System.HMI.Symbols.Base.Execute<ushort> xL0;
+		private System.HMI.Symbols.Base.Execute<ushort> xL1;
+		private System.HMI.Symbols.Base.Execute<ushort> xD0;
+		private System.HMI.Symbols.Base.Execute<ushort> xD1;
 		#endregion
 	}
 }

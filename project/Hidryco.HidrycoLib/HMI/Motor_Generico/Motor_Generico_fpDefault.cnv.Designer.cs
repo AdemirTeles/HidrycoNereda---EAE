@@ -174,7 +174,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Motor_Generico
 			this.tituloVel.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular);
 			this.tituloVel.Location = new NxtControl.Drawing.PointF(20D, 104D);
 			this.tituloVel.Name = "tituloVel";
-			this.tituloVel.Text = "Velocidade";
+			this.tituloVel.Text = "Frequência";
 			this.tituloVel.Visible = false;
 			// 
 			// vel
@@ -195,8 +195,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Motor_Generico
 			propertyDictionary1.Add("Brush", new NxtControl.Drawing.Brush(true));
 			propertyDictionary1.Add("Pen", new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("Transparent"), 1F, NxtControl.Drawing.DashStyle.Solid));
 			this.vel.Ranges.DefaultPropertyValues = propertyDictionary1;
-			this.vel.Suffix = " %";
-			this.vel.TagName = "STS_VELOCIDADE";
+			this.vel.Suffix = " Hz";
 			this.vel.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
 			this.vel.Visible = false;
 			this.vel.EndInit();
@@ -529,7 +528,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Motor_Generico
 			this.xVel.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
 			this.xVel.Name = "xVel";
 			this.xVel.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
-			this.xVel.TagName = "STS_VELOCIDADE";
+			this.xVel.TagName = "STS_FREQUENCIA";
 			this.xVel.Value = 0F;
 			this.xVel.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.VelocidadeValueChanged);
 			this.xVel.EndInit();

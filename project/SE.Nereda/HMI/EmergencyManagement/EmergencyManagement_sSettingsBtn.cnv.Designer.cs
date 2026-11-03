@@ -29,7 +29,7 @@ namespace SE.Nereda.Symbols.EmergencyManagement
 			// 
 			// drawnButton1
 			// 
-			this.drawnButton1.Bounds = new NxtControl.Drawing.RectF(((float)(8D)), ((float)(8D)), ((float)(160D)), ((float)(40D)));
+			this.drawnButton1.Bounds = new NxtControl.Drawing.RectF(((float)(8D)), ((float)(8D)), ((float)(184D)), ((float)(40D)));
 			this.drawnButton1.Brush = new NxtControl.Drawing.Brush("ButtonBrush");
 			this.drawnButton1.Font = new NxtControl.Drawing.Font("ButtonFont");
 			this.drawnButton1.InnerBorderColor = new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(0)));
@@ -37,7 +37,7 @@ namespace SE.Nereda.Symbols.EmergencyManagement
 			this.drawnButton1.OpenFaceplates.Add(new NxtControl.GuiFramework.OpenFaceplate("fpSettings", NxtControl.GuiFramework.MouseButtonType.Click));
 			this.drawnButton1.Pen = new NxtControl.Drawing.Pen("ButtonPen");
 			this.drawnButton1.Radius = 4D;
-			this.drawnButton1.Text = "Emergency Management Settings";
+			this.drawnButton1.Text = "Fallback Scheduler Reactors \r\nSettings";
 			this.drawnButton1.TextColor = new NxtControl.Drawing.Color("ButtonTextColor");
 			this.drawnButton1.TextColorMouseDown = new NxtControl.Drawing.Color("ButtonTextColorMouseDown");
 			this.drawnButton1.Use3DEffect = false;

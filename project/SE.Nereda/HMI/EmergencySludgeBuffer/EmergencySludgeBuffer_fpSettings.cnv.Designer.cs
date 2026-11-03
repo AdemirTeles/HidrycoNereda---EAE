@@ -49,14 +49,14 @@ namespace SE.Nereda.Faceplates.EmergencySludgeBuffer
 			// 
 			// rectangle1
 			// 
-			this.rectangle1.Bounds = new NxtControl.Drawing.RectF(((float)(8D)), ((float)(24D)), ((float)(376D)), ((float)(496D)));
+			this.rectangle1.Bounds = new NxtControl.Drawing.RectF(((float)(8D)), ((float)(24D)), ((float)(376D)), ((float)(376D)));
 			this.rectangle1.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(250)), ((byte)(250)), ((byte)(250))));
 			this.rectangle1.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
 			this.rectangle1.Name = "rectangle1";
 			// 
 			// polygon1
 			// 
-			this.polygon1.Bounds = new NxtControl.Drawing.RectF(((float)(8D)), ((float)(8D)), ((float)(288D)), ((float)(24D)));
+			this.polygon1.Bounds = new NxtControl.Drawing.RectF(((float)(8D)), ((float)(8D)), ((float)(368D)), ((float)(24D)));
 			this.polygon1.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(78)), ((byte)(78)), ((byte)(78))));
 			this.polygon1.Closed = true;
 			this.polygon1.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular);
@@ -65,9 +65,9 @@ namespace SE.Nereda.Faceplates.EmergencySludgeBuffer
 			this.polygon1.Points.AddRange(new NxtControl.Drawing.PointF[] {
 			new NxtControl.Drawing.PointF(8D, 32D),
 			new NxtControl.Drawing.PointF(8D, 8D),
-			new NxtControl.Drawing.PointF(264D, 8D),
-			new NxtControl.Drawing.PointF(296D, 32D)});
-			this.polygon1.Text = "EMERGENCY RECIPE  -  SETTINGS";
+			new NxtControl.Drawing.PointF(336D, 8D),
+			new NxtControl.Drawing.PointF(376D, 32D)});
+			this.polygon1.Text = "SLUDGE BUFFER FALLBACK RECIPE  -  SETTINGS";
 			this.polygon1.TextColor = new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(0)));
 			// 
 			// freeText1
@@ -127,6 +127,8 @@ namespace SE.Nereda.Faceplates.EmergencySludgeBuffer
 			this.S1_FeedTime.MinimumTag = null;
 			this.S1_FeedTime.Name = "S1_FeedTime";
 			this.S1_FeedTime.TagName = "S1_FeedTime";
+			this.S1_FeedTime.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.S1_FeedTime.UseInputPad = true;
 			this.S1_FeedTime.UseRange = true;
 			this.S1_FeedTime.Value = new NxtControl.GuiFramework.Time(((long)(0)));
 			this.S1_FeedTime.EndInit();
@@ -140,6 +142,8 @@ namespace SE.Nereda.Faceplates.EmergencySludgeBuffer
 			this.S2_WaitSludge.MinimumTag = null;
 			this.S2_WaitSludge.Name = "S2_WaitSludge";
 			this.S2_WaitSludge.TagName = "S2_WaitSludge";
+			this.S2_WaitSludge.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.S2_WaitSludge.UseInputPad = true;
 			this.S2_WaitSludge.UseRange = true;
 			this.S2_WaitSludge.Value = new NxtControl.GuiFramework.Time(((long)(0)));
 			this.S2_WaitSludge.EndInit();
@@ -153,6 +157,8 @@ namespace SE.Nereda.Faceplates.EmergencySludgeBuffer
 			this.S3_SludgeDischargeTime.MinimumTag = null;
 			this.S3_SludgeDischargeTime.Name = "S3_SludgeDischargeTime";
 			this.S3_SludgeDischargeTime.TagName = "S3_SludgeDischargeTime";
+			this.S3_SludgeDischargeTime.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.S3_SludgeDischargeTime.UseInputPad = true;
 			this.S3_SludgeDischargeTime.UseRange = true;
 			this.S3_SludgeDischargeTime.Value = new NxtControl.GuiFramework.Time(((long)(0)));
 			this.S3_SludgeDischargeTime.EndInit();
@@ -166,6 +172,8 @@ namespace SE.Nereda.Faceplates.EmergencySludgeBuffer
 			this.S4_SupernantDischargeTime.MinimumTag = null;
 			this.S4_SupernantDischargeTime.Name = "S4_SupernantDischargeTime";
 			this.S4_SupernantDischargeTime.TagName = "S4_SupernantDischargeTime";
+			this.S4_SupernantDischargeTime.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.S4_SupernantDischargeTime.UseInputPad = true;
 			this.S4_SupernantDischargeTime.UseRange = true;
 			this.S4_SupernantDischargeTime.Value = new NxtControl.GuiFramework.Time(((long)(0)));
 			this.S4_SupernantDischargeTime.EndInit();
@@ -183,6 +191,8 @@ namespace SE.Nereda.Faceplates.EmergencySludgeBuffer
 			this.SludgeDischargeCapacity.Suffix = "m³/h";
 			this.SludgeDischargeCapacity.TagName = "SludgeDischargeCapacity";
 			this.SludgeDischargeCapacity.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
+			this.SludgeDischargeCapacity.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.SludgeDischargeCapacity.UseInputPad = true;
 			this.SludgeDischargeCapacity.Value = 0F;
 			this.SludgeDischargeCapacity.EndInit();
 			// 
@@ -199,6 +209,8 @@ namespace SE.Nereda.Faceplates.EmergencySludgeBuffer
 			this.SupernantDischargeCapacity.Suffix = "m³/h";
 			this.SupernantDischargeCapacity.TagName = "SupernantDischargeCapacity";
 			this.SupernantDischargeCapacity.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
+			this.SupernantDischargeCapacity.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.SupernantDischargeCapacity.UseInputPad = true;
 			this.SupernantDischargeCapacity.Value = 0F;
 			this.SupernantDischargeCapacity.EndInit();
 			// 
@@ -214,6 +226,8 @@ namespace SE.Nereda.Faceplates.EmergencySludgeBuffer
 			this.Restartlvl.SetColor = new NxtControl.Drawing.Color("Yellow");
 			this.Restartlvl.TagName = "Restartlvl";
 			this.Restartlvl.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
+			this.Restartlvl.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.Restartlvl.UseInputPad = true;
 			this.Restartlvl.Value = ((short)(0));
 			this.Restartlvl.EndInit();
 			// 
@@ -237,6 +251,8 @@ namespace SE.Nereda.Faceplates.EmergencySludgeBuffer
 			this.FB_SBL1.SetColor = new NxtControl.Drawing.Color("Yellow");
 			this.FB_SBL1.TagName = "FB_SBL1";
 			this.FB_SBL1.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
+			this.FB_SBL1.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.FB_SBL1.UseInputPad = true;
 			this.FB_SBL1.Value = 0F;
 			this.FB_SBL1.EndInit();
 			// 
@@ -252,6 +268,8 @@ namespace SE.Nereda.Faceplates.EmergencySludgeBuffer
 			this.FB_SBL2.SetColor = new NxtControl.Drawing.Color("Yellow");
 			this.FB_SBL2.TagName = "FB_SBL2";
 			this.FB_SBL2.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
+			this.FB_SBL2.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.FB_SBL2.UseInputPad = true;
 			this.FB_SBL2.Value = 0F;
 			this.FB_SBL2.EndInit();
 			// 
@@ -273,11 +291,11 @@ namespace SE.Nereda.Faceplates.EmergencySludgeBuffer
 			// 
 			// fpSettings
 			// 
-			this.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(392D)), ((float)(528D)));
-			this.Brush = new NxtControl.Drawing.Brush("FaceplateBrush");
+			this.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(392D)), ((float)(408D)));
+			this.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(154)), ((byte)(154)), ((byte)(154))));
 			this.Shapes.AddRange(new System.ComponentModel.IComponent[] {
-			this.rectangle1,
 			this.polygon1,
+			this.rectangle1,
 			this.freeText1,
 			this.freeText2,
 			this.freeText3,
@@ -296,7 +314,7 @@ namespace SE.Nereda.Faceplates.EmergencySludgeBuffer
 			this.FB_SBL2,
 			this.freeText6,
 			this.freeText7});
-			this.Size = new System.Drawing.Size(392, 528);
+			this.Size = new System.Drawing.Size(392, 408);
 
 		}
 		private NxtControl.GuiFramework.Rectangle rectangle1;

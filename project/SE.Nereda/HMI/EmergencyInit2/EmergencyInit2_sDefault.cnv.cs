@@ -23,5 +23,11 @@ namespace SE.Nereda.Symbols.EmergencyInit2
 			//
 			InitializeComponent();
 		}
+
+		void ShowInitActionValueChanged(object sender, ValueChangedEventArgs e)
+		{
+			// TODO: Implement ShowInitActionValueChanged
+			ShowInitAct.Visible = (bool)e.Value;
+		}
 	}
 }

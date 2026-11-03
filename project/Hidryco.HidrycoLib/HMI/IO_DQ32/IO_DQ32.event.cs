@@ -749,6 +749,143 @@ namespace Hidryco.HidrycoLib.Symbols.IO_DQ32
       return (System.Int16) var;
     }  }
 
+    public bool Get_FORCADO(ref System.Boolean value)
+    {
+      if (accessorService == null)
+        return false;
+      bool var = false;
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,36, ref var);
+      if (ret) value = (System.Boolean) var;
+      return ret;
+    }
+
+    public System.Boolean? FORCADO
+    { get {
+      if (accessorService == null)
+        return null;
+      bool var = false;
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,36, ref var);
+      if (!ret) return null;
+      return (System.Boolean) var;
+    }  }
+
+    public bool Get_STS_LIGA0(ref System.UInt16 value)
+    {
+      if (accessorService == null)
+        return false;
+      System.Int64 var = 0;
+      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,37, ref var);
+      if (ret) value = (System.UInt16) var;
+      return ret;
+    }
+
+    public System.UInt16? STS_LIGA0
+    { get {
+      if (accessorService == null)
+        return null;
+      System.Int64 var = 0;
+      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,37, ref var);
+      if (!ret) return null;
+      return (System.UInt16) var;
+    }  }
+
+    public bool Get_STS_LIGA1(ref System.UInt16 value)
+    {
+      if (accessorService == null)
+        return false;
+      System.Int64 var = 0;
+      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,38, ref var);
+      if (ret) value = (System.UInt16) var;
+      return ret;
+    }
+
+    public System.UInt16? STS_LIGA1
+    { get {
+      if (accessorService == null)
+        return null;
+      System.Int64 var = 0;
+      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,38, ref var);
+      if (!ret) return null;
+      return (System.UInt16) var;
+    }  }
+
+    public bool Get_STS_DESL0(ref System.UInt16 value)
+    {
+      if (accessorService == null)
+        return false;
+      System.Int64 var = 0;
+      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,39, ref var);
+      if (ret) value = (System.UInt16) var;
+      return ret;
+    }
+
+    public System.UInt16? STS_DESL0
+    { get {
+      if (accessorService == null)
+        return null;
+      System.Int64 var = 0;
+      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,39, ref var);
+      if (!ret) return null;
+      return (System.UInt16) var;
+    }  }
+
+    public bool Get_STS_DESL1(ref System.UInt16 value)
+    {
+      if (accessorService == null)
+        return false;
+      System.Int64 var = 0;
+      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,40, ref var);
+      if (ret) value = (System.UInt16) var;
+      return ret;
+    }
+
+    public System.UInt16? STS_DESL1
+    { get {
+      if (accessorService == null)
+        return null;
+      System.Int64 var = 0;
+      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,40, ref var);
+      if (!ret) return null;
+      return (System.UInt16) var;
+    }  }
+
+
+  }
+
+}
+
+namespace Hidryco.HidrycoLib.Symbols.IO_DQ32
+{
+
+  public class E_FORCAEventArgs : System.EventArgs
+  {
+    public E_FORCAEventArgs()
+    {
+    }
+    private System.UInt16? LIGA0_field = null;
+    public System.UInt16? LIGA0
+    {
+       get { return LIGA0_field; }
+       set { LIGA0_field = value; }
+    }
+    private System.UInt16? LIGA1_field = null;
+    public System.UInt16? LIGA1
+    {
+       get { return LIGA1_field; }
+       set { LIGA1_field = value; }
+    }
+    private System.UInt16? DESL0_field = null;
+    public System.UInt16? DESL0
+    {
+       get { return DESL0_field; }
+       set { DESL0_field = value; }
+    }
+    private System.UInt16? DESL1_field = null;
+    public System.UInt16? DESL1
+    {
+       get { return DESL1_field; }
+       set { DESL1_field = value; }
+    }
 
   }
 
@@ -793,6 +930,28 @@ stack Trace:
       }
     }
 
+    public bool FireEvent_E_FORCA(System.UInt16 LIGA0, System.UInt16 LIGA1, System.UInt16 DESL0, System.UInt16 DESL1)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {LIGA0, LIGA1, DESL0, DESL1});
+    }
+    public bool FireEvent_E_FORCA(Hidryco.HidrycoLib.Symbols.IO_DQ32.E_FORCAEventArgs ea)
+    {
+      object[] _values_ = new object[4];
+      if (ea.LIGA0.HasValue) _values_[0] = ea.LIGA0.Value;
+      if (ea.LIGA1.HasValue) _values_[1] = ea.LIGA1.Value;
+      if (ea.DESL0.HasValue) _values_[2] = ea.DESL0.Value;
+      if (ea.DESL1.HasValue) _values_[3] = ea.DESL1.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
+    }
+    public bool FireEvent_E_FORCA(System.UInt16 LIGA0, bool ignore_LIGA0, System.UInt16 LIGA1, bool ignore_LIGA1, System.UInt16 DESL0, bool ignore_DESL0, System.UInt16 DESL1, bool ignore_DESL1)
+    {
+      object[] _values_ = new object[4];
+      if (!ignore_LIGA0) _values_[0] = LIGA0;
+      if (!ignore_LIGA1) _values_[1] = LIGA1;
+      if (!ignore_DESL0) _values_[2] = DESL0;
+      if (!ignore_DESL1) _values_[3] = DESL1;
+      return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
+    }
   }
 }
 #endregion #IO_DQ32_HMI;

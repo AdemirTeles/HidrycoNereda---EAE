@@ -102,6 +102,19 @@ namespace Hidryco.HidrycoLib.Symbols.EEE_Bruto
 
 		static readonly string[] ESTADOS = { "Parada", "Bombeando", "Segurando: HH do tanque do Nereda", "Operação pelas boias (LIT-03 em falha)", "Falha de recalque - reset", "Nível baixo (LSL): bombas bloqueadas", "Automático desabilitado", "Emergência acionada" };
 		string TextoEstado() { return estado >= 0 && estado < ESTADOS.Length ? ESTADOS[estado] : "-"; }
+		// resumo dos controles (sub-CATs Necessidade, Revezamento e PID)
+		bool necHab, revHab, pidHab; float pidSaida;
+		void NecHabChanged(object s, ValueChangedEventArgs e) { necHab = Convert.ToBoolean(e.Value); Atualiza(); }
+		void RevHabChanged(object s, ValueChangedEventArgs e) { revHab = Convert.ToBoolean(e.Value); Atualiza(); }
+		void PidHabChanged(object s, ValueChangedEventArgs e) { pidHab = Convert.ToBoolean(e.Value); Atualiza(); }
+		void PidSaidaChanged(object s, ValueChangedEventArgs e) { pidSaida = Convert.ToSingle(e.Value); Atualiza(); }
+		string Troca()
+		{
+			if (!revHab) return "desabilitado";
+			if (rh == 0 && rm == 0 && rs == 0) return "sem troca por tempo";
+			return "troca em " + rh.ToString() + " h " + rm.ToString("00") + " min";
+		}
+
 		static string Bomba(ushort b) { return b >= 1 && b <= 3 ? "BS-0" + b.ToString() : "-"; }
 
 		// Alarme de maior prioridade: recalque e nivel alto = prioridade 1 (Alarm); defeito da LSL = prioridade 2 (Warning)
@@ -122,9 +135,12 @@ namespace Hidryco.HidrycoLib.Symbols.EEE_Bruto
 			string curto = fRecalque ? "RECALQUE" : (boiaH ? "NÍVEL ALTO" : (fBoiaL ? "BOIA LSL" : ""));
 			Indicador(alP1, alP1n, alP2, alP2n, alTxt, p, curto, nr);
 			Pisca(AlgumNaoRec());
-			textoEstado.Text = TextoEstado();
+			// titulo fixo "Controle" (pedido do usuario); o estado aparece no faceplate
 			textoBombas.Text = "Bombas: " + ligadas.ToString() + " ligada(s) / " + necessidade.ToString() + " pedida(s)";
 			textoPrincipal.Text = "Principal " + Bomba(principal);
+			tAuto.Text = "Automático: " + (necHab ? "habilitado" : "DESABILITADO");
+			tRev.Text = "Revezamento: " + Troca();
+			tPid.Text = "PID: " + (pidHab ? pidSaida.ToString("0.0") + " Hz" : "desabilitado (velocidade máxima)");
 		}
 
 	}

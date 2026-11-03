@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="732377f3-b4f0-731b-084c-94a874814483" Name="basicGradeamento" Comment="Logica do gradeamento mecanizado (painel Vibropac, Modbus TCP Inovaisa)" Namespace="Hidryco.HidrycoLib">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Hidryco" Version="1.0" Author="Hidryco" Date="22/10/2026" Remarks="1.0: ciclo remoto 4001, reset 4002 (3 s), setpoints 4003/4004 em % (x10 no CLP), leitura 4005..4018, niveis em %" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="518C29172BF7055D" Name="INIT" Comment="Inicializacao" />
+      <Event ID="66D3215C55F0091A" Name="REQ_FB" Comment="Leitura Modbus 4005..4016">
+        <With Var="fldR4005" />
+        <With Var="fldR4006" />
+        <With Var="fldR4007" />
+        <With Var="fldR4008" />
+        <With Var="fldR4009" />
+        <With Var="fldR4010" />
+        <With Var="fldR4011" />
+        <With Var="fldR4012" />
+        <With Var="fldR4013" />
+        <With Var="fldR4014" />
+        <With Var="fldR4015" />
+        <With Var="fldR4016" />
+      </Event>
+      <Event ID="4AA0F6BC0C9CCC31" Name="REQ_FB2" Comment="Leitura Modbus 4017..4018">
+        <With Var="fldR4017" />
+        <With Var="fldR4018" />
+      </Event>
+      <Event ID="531A7DC3C1F1E4B4" Name="REQ_COM" Comment="Status da conexao Modbus (connStatusInt)">
+        <With Var="fldConexao" />
+      </Event>
+      <Event ID="EAFDC5E392D9FEFA" Name="REQ_CMD" Comment="Grade_Status1: ciclo remoto e setpoints">
+        <With Var="cmdCiclo" />
+        <With Var="stpDif1" />
+        <With Var="stpDif2" />
+      </Event>
+      <Event ID="6DD1F366F87AD18C" Name="REQ_RESET" Comment="IHM: reset (E_RESET_FALHAS_PROCESSO / cmdResetFalhas)">
+        <With Var="hmiReset" />
+      </Event>
+      <Event ID="D301A4C9803F7EC8" Name="REQ_RESET_PROC" Comment="Processo: reset">
+        <With Var="cmdResetProc" />
+      </Event>
+      <Event ID="C20C38F487867904" Name="REQ_SUB" Comment="Status das grades e da rosca">
+        <With Var="g1Alarme" />
+        <With Var="g2Alarme" />
+        <With Var="rtAlarme" />
+        <With Var="g1Ligado" />
+        <With Var="g2Ligado" />
+        <With Var="rtLigado" />
+      </Event>
+      <Event ID="220EF84FD56D066A" Name="TICK" Comment="Base de tempo de 1 s" />
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="AF9623B10148EEA6" Name="INITO" Comment="Inicializacao concluida" />
+      <Event ID="1476EEC75191AAEB" Name="CNF_OUT" Comment="Escrita Modbus 4001..4004">
+        <With Var="acmCiclo" />
+        <With Var="acmReset" />
+        <With Var="acmSp1" />
+        <With Var="acmSp2" />
+      </Event>
+      <Event ID="5DAEBC207EFA920B" Name="CNF_GRADES" Comment="Leitura para as grades, a rosca e os sensores (na mudanca e a cada 1 s)">
+        <With Var="g1Mont" />
+        <With Var="g1Jus" />
+        <With Var="g1Dif" />
+        <With Var="g2Mont" />
+        <With Var="g2Jus" />
+        <With Var="g2Dif" />
+        <With Var="falhaCom" />
+        <With Var="g1Status" />
+        <With Var="g2Status" />
+        <With Var="rtStatus" />
+        <With Var="g1Sobre" />
+        <With Var="g2Sobre" />
+      </Event>
+      <Event ID="9E246ABECE1E2CE6" Name="CNF_STS" Comment="Diferenciais para o Grade_Status1 (no maximo 1 vez por segundo)">
+        <With Var="g1Dif" />
+        <With Var="g2Dif" />
+      </Event>
+      <Event ID="A571F479BE4CD639" Name="CNF" Comment="Status para o processo">
+        <With Var="stsAlarme" />
+        <With Var="stsEmergencia" />
+        <With Var="stsComunicacaoOK" />
+        <With Var="stsFuncionando" />
+      </Event>
+      <Event ID="229705CA5D539927" Name="CNF_HMI" Comment="Status para a IHM e alarmes">
+        <With Var="stsAlarme" />
+        <With Var="stsEmergencia" />
+        <With Var="stsComunicacaoOK" />
+        <With Var="stsFalhaComunicacao" />
+        <With Var="stsAlarmeAcionado" />
+        <With Var="stsCicloLigado" />
+        <With Var="stsFalhaMotor" />
+        <With Var="stsFuncionando" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="EAAE7720A229695F" Name="fldR4005" Type="INT" Comment="Registro 4005" />
+      <VarDeclaration ID="904A23DAF55DAC59" Name="fldR4006" Type="INT" Comment="Registro 4006" />
+      <VarDeclaration ID="BBA94A1169D8FA73" Name="fldR4007" Type="INT" Comment="Registro 4007" />
+      <VarDeclaration ID="7825C7CE552E6651" Name="fldR4008" Type="INT" Comment="Registro 4008" />
+      <VarDeclaration ID="2498E9974464BCE6" Name="fldR4009" Type="INT" Comment="Registro 4009" />
+      <VarDeclaration ID="9C99F76E861BCD25" Name="fldR4010" Type="INT" Comment="Registro 4010" />
+      <VarDeclaration ID="D43EE0186A628319" Name="fldR4011" Type="INT" Comment="Registro 4011" />
+      <VarDeclaration ID="C5372D9F9D054E62" Name="fldR4012" Type="INT" Comment="Registro 4012" />
+      <VarDeclaration ID="9932DF3BDCD27116" Name="fldR4013" Type="INT" Comment="Registro 4013" />
+      <VarDeclaration ID="32562EFF83F2DC8C" Name="fldR4014" Type="INT" Comment="Registro 4014" />
+      <VarDeclaration ID="7C362804A2CEA9B4" Name="fldR4015" Type="INT" Comment="Registro 4015" />
+      <VarDeclaration ID="81F03E4BE33E3775" Name="fldR4016" Type="INT" Comment="Registro 4016" />
+      <VarDeclaration ID="E74155D0A040D43B" Name="fldR4017" Type="INT" Comment="Registro 4017" />
+      <VarDeclaration ID="EFE29EA2A963985E" Name="fldR4018" Type="INT" Comment="Registro 4018" />
+      <VarDeclaration ID="188BF646E72EEEA1" Name="fldConexao" Type="INT" Comment="connStatusInt (1 = online)" />
+      <VarDeclaration ID="05EA1552B9E3115E" Name="cmdCiclo" Type="BOOL" Comment="CMD_LIGA_CICLO_REMOTO" />
+      <VarDeclaration ID="8B073DFA930CDFDF" Name="stpDif1" Type="REAL" Comment="STP_DIFERENCIAL_NIVEL_GRADE1 (%)" />
+      <VarDeclaration ID="2CD93C02AEE34611" Name="stpDif2" Type="REAL" Comment="STP_DIFERENCIAL_NIVEL_GRADE2 (%)" />
+      <VarDeclaration ID="C648B0BD976A65D6" Name="hmiReset" Type="BOOL" Comment="IHM: reset" />
+      <VarDeclaration ID="E2508CD3A47CDCD2" Name="cmdResetProc" Type="BOOL" Comment="Processo: reset" />
+      <VarDeclaration ID="BE2397D1A1602A70" Name="g1Alarme" Type="BOOL" />
+      <VarDeclaration ID="19A0761DD0428FC1" Name="g2Alarme" Type="BOOL" />
+      <VarDeclaration ID="A295421A8158BEBA" Name="rtAlarme" Type="BOOL" />
+      <VarDeclaration ID="710DE56279147CB9" Name="g1Ligado" Type="BOOL" />
+      <VarDeclaration ID="910F61598CD02A9A" Name="g2Ligado" Type="BOOL" />
+      <VarDeclaration ID="373787043AB8D8D4" Name="rtLigado" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="2350FEDB0EF73756" Name="acmCiclo" Type="INT" Comment="Registro 4001: 1 liga ciclo remoto, 0 desliga" />
+      <VarDeclaration ID="24CB3E5A1C683D3A" Name="acmReset" Type="INT" Comment="Registro 4002: 1 reseta falhas (pulso de 3 s)" />
+      <VarDeclaration ID="5A95BB21F1406E13" Name="acmSp1" Type="INT" Comment="Registro 4003: setpoint diferencial grade 1 (0-1000 = 0-100 %)" />
+      <VarDeclaration ID="02D3ACE173D5282E" Name="acmSp2" Type="INT" Comment="Registro 4004: setpoint diferencial grade 2 (0-1000 = 0-100 %)" />
+      <VarDeclaration ID="B600FA4F4CE980FC" Name="g1Mont" Type="REAL" Comment="Nivel montante grade 1 LSH1 (%)" />
+      <VarDeclaration ID="9E07C0CEFAB1E8CD" Name="g1Jus" Type="REAL" Comment="Nivel jusante grade 1 LSH2 (%)" />
+      <VarDeclaration ID="3A8B059C9015BAAF" Name="g1Dif" Type="REAL" Comment="Nivel diferencial grade 1 (%)" />
+      <VarDeclaration ID="02DB2097D46705DB" Name="g2Mont" Type="REAL" Comment="Nivel montante grade 2 LSH3 (%)" />
+      <VarDeclaration ID="3E8B3064163F5CB3" Name="g2Jus" Type="REAL" Comment="Nivel jusante grade 2 LSH4 (%)" />
+      <VarDeclaration ID="E8BA6941E1D9185F" Name="g2Dif" Type="REAL" Comment="Nivel diferencial grade 2 (%)" />
+      <VarDeclaration ID="B48A5B93D486ADF0" Name="falhaCom" Type="BOOL" Comment="Sem comunicacao com o painel" />
+      <VarDeclaration ID="2B178368B7F1EF8F" Name="g1Status" Type="INT" Comment="Registro 4007" />
+      <VarDeclaration ID="4849D539B9ECCAF9" Name="g2Status" Type="INT" Comment="Registro 4008" />
+      <VarDeclaration ID="A7BB4409F896B441" Name="rtStatus" Type="INT" Comment="Registro 4009" />
+      <VarDeclaration ID="2EE96AEBFD31A115" Name="g1Sobre" Type="INT" Comment="Registro 4010" />
+      <VarDeclaration ID="4A2DAB6388B872A6" Name="g2Sobre" Type="INT" Comment="Registro 4011" />
+      <VarDeclaration ID="8A40AFCE6F808DC2" Name="stsAlarme" Type="BOOL" Comment="Algum alarme do gradeamento (comunicacao, painel, emergencia, motores)" />
+      <VarDeclaration ID="D4E1CE246816215C" Name="stsEmergencia" Type="BOOL" Comment="Botao de emergencia do painel acionado (4006)" />
+      <VarDeclaration ID="D2C98E15D329182A" Name="stsComunicacaoOK" Type="BOOL" Comment="Comunicacao Modbus com o CLP do painel OK" />
+      <VarDeclaration ID="B069C22B63DCD037" Name="stsFalhaComunicacao" Type="BOOL" Comment="Falha de comunicacao com o CLP do painel" />
+      <VarDeclaration ID="4914469ABA3CB0F5" Name="stsAlarmeAcionado" Type="BOOL" Comment="Alarme acionado no painel (4005)" />
+      <VarDeclaration ID="26FB5E58803038CB" Name="stsCicloLigado" Type="BOOL" Comment="Comando de ciclo remoto ligado (4001 = 1)" />
+      <VarDeclaration ID="77ADF001A8F11DA2" Name="stsFalhaMotor" Type="BOOL" Comment="Grade ou rosca em falha ou sobretorque" />
+      <VarDeclaration ID="F73DC825969A7AAC" Name="stsFuncionando" Type="BOOL" Comment="Alguma grade ou a rosca funcionando" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="add18c23-d2c6-a625-3187-a2438009f355">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="algGradeamento" />
+    <InternalVars>
+      <VarDeclaration ID="EC5A425F7B9B62C8" Name="initDone" Type="BOOL" />
+      <VarDeclaration ID="B89E8585D9D8B252" Name="comRecebido" Type="BOOL" />
+      <VarDeclaration ID="92769309184A7878" Name="fbRecebido" Type="BOOL" />
+      <VarDeclaration ID="444C2F63C243C140" Name="fb2Recebido" Type="BOOL" />
+      <VarDeclaration ID="FDAA12101DA50BBA" Name="tReset" Type="INT" Comment="Segundos restantes do pulso de reset" />
+      <VarDeclaration ID="3F00E9616CC31E90" Name="tEnvio" Type="INT" />
+      <VarDeclaration ID="64DF53D21D199277" Name="primeiro" Type="BOOL" InitialValue="TRUE" />
+      <VarDeclaration ID="AE85D081D9866B73" Name="oldCiclo" Type="INT" InitialValue="-1" />
+      <VarDeclaration ID="752457ED0CB7C279" Name="oldReset" Type="INT" InitialValue="-1" />
+      <VarDeclaration ID="18CD8DE7DBFDC85D" Name="oldSp1" Type="INT" InitialValue="-1" />
+      <VarDeclaration ID="A0FF7FDC88201B8A" Name="oldSp2" Type="INT" InitialValue="-1" />
+      <VarDeclaration ID="55A93A9D848EE6FC" Name="sigG" Type="DINT" />
+      <VarDeclaration ID="A4033D0495792AC6" Name="oldSigG" Type="DINT" InitialValue="-1" />
+      <VarDeclaration ID="CA8A9DBDBF1903CF" Name="sig" Type="INT" />
+      <VarDeclaration ID="35C614E08C86BD9D" Name="oldSig" Type="INT" InitialValue="-1" />
+      <VarDeclaration ID="198E37FF2C2A826F" Name="oldDif1" Type="REAL" InitialValue="-1.0" />
+      <VarDeclaration ID="B6ABAEAC4DD93AC4" Name="oldDif2" Type="REAL" InitialValue="-1.0" />
+    </InternalVars>
+    <ECC>
+      <ECState Name="START" Comment="Estado inicial" x="1500" y="640" />
+      <ECState Name="EXEC" Comment="Executa a logica; o algoritmo decide quais eventos saem" x="1500" y="1100">
+        <ECAction Algorithm="algGradeamento" Output="INITO" />
+        <ECAction Output="CNF_OUT" />
+        <ECAction Output="CNF_GRADES" />
+        <ECAction Output="CNF_STS" />
+        <ECAction Output="CNF" />
+        <ECAction Output="CNF_HMI" />
+      </ECState>
+      <ECTransition Source="START" Destination="EXEC" Condition="INIT OR REQ_FB OR REQ_FB2 OR REQ_COM OR REQ_CMD OR REQ_RESET OR REQ_RESET_PROC OR REQ_SUB OR TICK" x="1580" y="860" />
+      <ECTransition Source="EXEC" Destination="START" Condition="1" x="1420" y="860" />
+    </ECC>
+    <Algorithm Name="algGradeamento" Comment="Logica completa (um unico algoritmo)">
+      <ST><![CDATA[(* =====================================================================
+   basicGradeamento v1.0 - logica do CAT Gradeamento_Inovaisa (HidrycoLib)
+   Painel Vibropac PV-35524 (CLP TM241, tabela Modbus TCP Inovaisa Rev.B):
+   4001 liga/desliga ciclo remoto, 4002 reset, 4003/4004 setpoint do
+   diferencial de nivel das grades (0-1000 = 0-100 %), 4005 alarme,
+   4006 emergencia, 4007/4008 grades (0 parado, 1 avante, 2 reverso,
+   3 falha), 4009 rosca (0 parado, 1 funcionando, 2 falha), 4010/4011
+   sobretorque, 4013..4018 niveis montante/jusante/diferencial (0-1000).
+   O painel tem a propria logica (limpeza pelo diferencial, reverso,
+   rosca); o CLP da planta liga/desliga o ciclo, manda os setpoints e le.
+   Regras:
+   - escrita a cada 5 s e na mudanca (o painel guarda o ultimo valor);
+   - reset (IHM ou processo): 4002 = 1 por 3 s;
+   - niveis em % (conversao aqui, no CLP: valor / 10);
+   - sem comunicacao: estados zerados, sensores em falha de comunicacao.
+   ===================================================================== *)
+INITO      := FALSE;
+CNF_OUT    := FALSE;
+CNF_GRADES := FALSE;
+CNF_STS    := FALSE;
+CNF        := FALSE;
+CNF_HMI    := FALSE;
+IF REQ_COM THEN
+    comRecebido := TRUE;
+END_IF;
+IF REQ_FB THEN
+    fbRecebido := TRUE;
+END_IF;
+IF REQ_FB2 THEN
+    fb2Recebido := TRUE;
+END_IF;
+IF INIT THEN
+    initDone := TRUE;
+    INITO := TRUE;
+END_IF;
+IF NOT initDone THEN
+    RETURN;
+END_IF;
+
+(* ---- 1. Comunicacao e decodificacao ---- *)
+stsComunicacaoOK := comRecebido AND fbRecebido AND fb2Recebido AND (fldConexao = 1);
+stsFalhaComunicacao := NOT stsComunicacaoOK;
+falhaCom := stsFalhaComunicacao;
+IF stsComunicacaoOK THEN
+    stsAlarmeAcionado := fldR4005 <> 0;
+    stsEmergencia := fldR4006 <> 0;
+    g1Status := fldR4007;
+    g2Status := fldR4008;
+    rtStatus := fldR4009;
+    g1Sobre := fldR4010;
+    g2Sobre := fldR4011;
+    g1Mont := LIMIT(0.0, INT_TO_REAL(fldR4013) / 10.0, 100.0);
+    g1Jus  := LIMIT(0.0, INT_TO_REAL(fldR4014) / 10.0, 100.0);
+    g1Dif  := LIMIT(0.0, INT_TO_REAL(fldR4015) / 10.0, 100.0);
+    g2Mont := LIMIT(0.0, INT_TO_REAL(fldR4016) / 10.0, 100.0);
+    g2Jus  := LIMIT(0.0, INT_TO_REAL(fldR4017) / 10.0, 100.0);
+    g2Dif  := LIMIT(0.0, INT_TO_REAL(fldR4018) / 10.0, 100.0);
+ELSE
+    stsAlarmeAcionado := FALSE;
+    stsEmergencia := FALSE;
+    g1Status := 0; g2Status := 0; rtStatus := 0; g1Sobre := 0; g2Sobre := 0;
+    g1Mont := 0.0; g1Jus := 0.0; g1Dif := 0.0; g2Mont := 0.0; g2Jus := 0.0; g2Dif := 0.0;
+END_IF;
+
+(* ---- 2. Comandos (4001..4004) e reset ---- *)
+stsCicloLigado := cmdCiclo;
+IF (REQ_RESET AND hmiReset) OR (REQ_RESET_PROC AND cmdResetProc) THEN
+    tReset := 3;
+END_IF;
+IF TICK AND (tReset > 0) THEN
+    tReset := tReset - 1;
+END_IF;
+IF cmdCiclo THEN
+    acmCiclo := 1;
+ELSE
+    acmCiclo := 0;
+END_IF;
+IF tReset > 0 THEN
+    acmReset := 1;
+ELSE
+    acmReset := 0;
+END_IF;
+acmSp1 := REAL_TO_INT(LIMIT(0.0, stpDif1, 100.0) * 10.0);
+acmSp2 := REAL_TO_INT(LIMIT(0.0, stpDif2, 100.0) * 10.0);
+IF TICK THEN
+    tEnvio := tEnvio + 1;
+END_IF;
+IF primeiro OR (acmCiclo <> oldCiclo) OR (acmReset <> oldReset) OR (acmSp1 <> oldSp1) OR (acmSp2 <> oldSp2) OR (tEnvio >= 5) THEN
+    CNF_OUT := TRUE;
+    tEnvio := 0;
+    oldCiclo := acmCiclo; oldReset := acmReset; oldSp1 := acmSp1; oldSp2 := acmSp2;
+END_IF;
+
+(* ---- 3. Para as grades, a rosca e os sensores: na mudanca do estado e a cada 1 s (niveis) ---- *)
+sigG := INT_TO_DINT(g1Status) + INT_TO_DINT(g2Status) * 8 + INT_TO_DINT(rtStatus) * 64 + INT_TO_DINT(g1Sobre) * 512 + INT_TO_DINT(g2Sobre) * 1024;
+IF falhaCom THEN sigG := sigG + 4096; END_IF;
+IF primeiro OR TICK OR (sigG <> oldSigG) THEN
+    CNF_GRADES := TRUE;
+END_IF;
+oldSigG := sigG;
+IF TICK AND ((g1Dif <> oldDif1) OR (g2Dif <> oldDif2)) THEN
+    CNF_STS := TRUE;
+    oldDif1 := g1Dif; oldDif2 := g2Dif;
+END_IF;
+
+(* ---- 4. Alarme geral ---- *)
+stsFalhaMotor := g1Alarme OR g2Alarme OR rtAlarme;
+stsFuncionando := g1Ligado OR g2Ligado OR rtLigado;
+stsAlarme := stsFalhaComunicacao OR stsAlarmeAcionado OR stsEmergencia OR stsFalhaMotor;
+
+(* ---- 5. Eventos ---- *)
+sig := 0;
+IF stsComunicacaoOK THEN sig := sig + 1; END_IF;
+IF stsAlarmeAcionado THEN sig := sig + 2; END_IF;
+IF stsEmergencia THEN sig := sig + 4; END_IF;
+IF stsCicloLigado THEN sig := sig + 8; END_IF;
+IF stsFalhaMotor THEN sig := sig + 16; END_IF;
+IF stsFuncionando THEN sig := sig + 32; END_IF;
+IF stsAlarme THEN sig := sig + 64; END_IF;
+IF primeiro OR REQ_RESET OR (sig <> oldSig) THEN
+    CNF_HMI := TRUE;
+    CNF := TRUE;
+END_IF;
+oldSig := sig;
+primeiro := FALSE;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

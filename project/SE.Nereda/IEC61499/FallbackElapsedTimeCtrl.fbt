@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="651b51f2-b92e-4be6-8c1c-ab706a281445" Name="FallbackElapsedTimeCtrl" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="10/7/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="E2AA8A87BC994B40" Name="REQ" Comment="Normal Execution Request">
+        <With Var="EmergencyON" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="CE1B8ED4C29B1BD1" Name="CNF" Comment="Execution Confirmation">
+        <With Var="Pv" />
+        <With Var="Reset" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="7D2C3405B1C8BCFB" Name="EmergencyON" Type="BOOL" Comment="Input event qualifier" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="A0ED3C1A470B3492" Name="Pv" Type="INT" Comment="Output event qualifier" />
+      <VarDeclaration ID="CEEC9697AF6CC9CD" Name="Reset" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="64d42120-350b-4611-b086-a9e47e9406cd">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="Reset,Start,Stop" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="1456.941" y="545.4117" />
+      <ECState Name="EmergencyON" x="1464" y="1092">
+        <ECAction Algorithm="Reset" Output="CNF" />
+      </ECState>
+      <ECState Name="Start" x="1464" y="1588">
+        <ECAction Algorithm="Start" Output="CNF" />
+      </ECState>
+      <ECState Name="Stop" x="2748" y="1072">
+        <ECAction Algorithm="Stop" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="EmergencyON" Condition="REQ AND EmergencyON AND Pv &lt;&gt; 1" x="1459.053" y="796.4594">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="365.5772,178.3164,363.713,216.2055" />
+      </ECTransition>
+      <ECTransition Source="EmergencyON" Destination="Start" Condition="1" x="1463.698" y="1327.758">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="365.8586,314.6012,365.8755,347.2373" />
+      </ECTransition>
+      <ECTransition Source="Start" Destination="START" Condition="1" x="976.429" y="1089.976">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="211.4293,313.5257,210.8999,235.3404" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="Stop" Condition="REQ AND NOT EmergencyON" x="2220.673" y="604.9973">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="516.767,118.9425,605.6223,155.1842" />
+      </ECTransition>
+      <ECTransition Source="Stop" Destination="START" Condition="1" x="2112.629" y="892.7213">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="573.9304,246.8819,485.0751,210.6402" />
+      </ECTransition>
+    </ECC>
+    <Algorithm ID="a6a0473b-602a-49cb-8b38-58c5b5d0179f" Name="Reset">
+      <ST><![CDATA[;
+Reset := TRUE;]]></ST>
+    </Algorithm>
+    <Algorithm ID="86b75fa4-c0d1-479b-890a-a1c73ae3e88d" Name="Start">
+      <ST><![CDATA[;
+Pv := 1;
+Reset := FALSE;]]></ST>
+    </Algorithm>
+    <Algorithm ID="342e9d1b-ce9f-44f2-a257-999d11511fdb" Name="Stop">
+      <ST><![CDATA[;
+Pv := 0;
+Reset := FALSE;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

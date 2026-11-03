@@ -3,7 +3,7 @@
 <FBType GUID="b62e563f-1385-4f58-82d2-b7b1c31618ee" Comment="CAT Function Block Type" Name="CmdCAerationValves" Format="2.0" Namespace="SE.Nereda">
   <Attribute Name="HMI.Alias" Value="" />
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="6/8/2026" Remarks="template" />
+  <VersionInfo Organization="Schneider Electric" Version="0.1" Author=" " Date="30/10/2026" Remarks="0.1: saida AIRFILL_OPEN/AirFillOpened (AV-4x171 aberta) para o AirLock da emergencia. template" />
   <InterfaceList>
     <EventInputs>
       <Event ID="BD75C065B8FCDA05" Name="INIT" />
@@ -59,6 +59,9 @@
       <Event ID="7A769B3E526745F7" Name="CNF_BLOWERS_CMD">
         <With Var="CmdBlowers" />
       </Event>
+      <Event ID="FFAB71403F4DA3FF" Name="AIRFILL_OPEN" Comment="Retorno da AV-4x171 (air fill)">
+        <With Var="AirFillOpened" />
+      </Event>
     </EventOutputs>
     <InputVars>
       <VarDeclaration ID="D9CFC7F0F0F8C6AB" Name="Ready" Type="BOOL" />
@@ -84,6 +87,7 @@
       <VarDeclaration ID="67F96BD12183C292" Name="StopReady" Type="BOOL" />
       <VarDeclaration ID="BD7F5AACD7869EC1" Name="AbortReady" Type="BOOL" />
       <VarDeclaration ID="709CA1A54761FAAC" Name="CmdBlowers" Type="BOOL" />
+      <VarDeclaration ID="B379D9F3361F2C4C" Name="AirFillOpened" Type="BOOL" Comment="AV-4x171 aberta" />
     </OutputVars>
     <Plugs>
       <AdapterDeclaration ID="49922FCA0F031502" Name="ICmdBlowers" Type="INeredaAct" Namespace="SE.Nereda" x="5680" y="1400" />
@@ -228,6 +232,8 @@
     <Output ID="BD7F5AACD7869EC1" Name="AbortReady" x="5700" y="887.9998" Type="Data" />
     <Output ID="7A769B3E526745F7" Name="CNF_BLOWERS_CMD" x="5700" y="1046" Type="Event" />
     <Output ID="709CA1A54761FAAC" Name="CmdBlowers" x="5700" y="1106" Type="Data" />
+    <Output ID="FFAB71403F4DA3FF" Name="AIRFILL_OPEN" x="5700" y="1206" Type="Event" />
+    <Output ID="B379D9F3361F2C4C" Name="AirFillOpened" x="5700" y="1266" Type="Data" />
     <Output ID="8657B668AE05B414" Name="INITO" x="999.1145" y="807.9998" Type="Event" />
     <EventConnections>
       <Connection Source="$BD75C065B8FCDA05" Destination="$2572D281273718C8.3D5D26A512262747" dx1="1072.094">
@@ -355,6 +361,9 @@
       <Connection Source="$FAA415B7B761CBFE.CHD" Destination="$157D3B5E9417F67C.DD5870AA881150BB" />
       <Connection Source="$4F804FE51F9737C9.029C19F2648B74C2" Destination="$FAA415B7B761CBFE.REQ" dx1="121.8125" />
       <Connection Source="$F5979AB6D06160CD" Destination="$4F804FE51F9737C9.E6FC75C2860CE249" dx1="465.5001">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$493A4675221F315A.IND" Destination="$FFAB71403F4DA3FF">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
     </EventConnections>
@@ -496,6 +505,9 @@
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
       <Connection Source="$2532AC1EEC66842C" Destination="$4F804FE51F9737C9.A67196F990201AE3" dx1="372.6042">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$F1E85119135E7554.OUT1" Destination="$B379D9F3361F2C4C">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
     </DataConnections>

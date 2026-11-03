@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="9b2bef3e-9306-53e0-2599-4d8573298495" Name="Controle_Revezamento_3" Comment="Revezamento de 3 equipamentos por tempo como principal (padrao Revezamento_3_Motores do legado)" Namespace="Hidryco.HidrycoLib">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Hidryco" Version="1.0" Author="Hidryco" Date="21/10/2026" Remarks="1.0: Revezamento de 3 equipamentos por tempo como principal (padrao Revezamento_3_Motores do legado)" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="A7EEDA91D01D2772" Name="REQ" Comment="Status vindo do processo">
+        <With Var="STS_RESTANTE_HOR" />
+        <With Var="STS_RESTANTE_MIN" />
+        <With Var="STS_RESTANTE_SEG" />
+      </Event>
+      <Event ID="3E2B631069BF22E6" Name="RECARREGA" Comment="Reenvia os ajustes persistentes (chamado no fim do INIT do processo)" />
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="B06A49437DB43D50" Name="CNF" Comment="Ajustes para o processo (mudanca na IHM, OPC UA ou recarga)">
+        <With Var="CMD_HABILITA" />
+        <With Var="STP_TEMPO_B1" />
+        <With Var="STP_TEMPO_B2" />
+        <With Var="STP_TEMPO_B3" />
+        <With Var="CMD_SELECAO_BOMBA" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="7A2503B7B1388DC6" Name="STS_RESTANTE_HOR" Type="UINT" Comment="Tempo para a troca da principal (h)" />
+      <VarDeclaration ID="D93AFAFEC8E31E85" Name="STS_RESTANTE_MIN" Type="UINT" Comment="Tempo para a troca da principal (min)" />
+      <VarDeclaration ID="E430C3F15AEF6E1E" Name="STS_RESTANTE_SEG" Type="UINT" Comment="Tempo para a troca da principal (s)" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="14B34C1C3DE79269" Name="CMD_HABILITA" Type="BOOL" Comment="Troca da principal por tempo" />
+      <VarDeclaration ID="E9B6E434B3B859BA" Name="STP_TEMPO_B1" Type="UINT" Comment="Horas do equipamento 1 como principal" />
+      <VarDeclaration ID="5B68F5BBF5994362" Name="STP_TEMPO_B2" Type="UINT" Comment="Horas do equipamento 2 como principal" />
+      <VarDeclaration ID="49A70042A34A21C7" Name="STP_TEMPO_B3" Type="UINT" Comment="Horas do equipamento 3 como principal" />
+      <VarDeclaration ID="1EA41783712558AD" Name="CMD_SELECAO_BOMBA" Type="INT" Comment="Bomba principal" />
+    </OutputVars>
+  </InterfaceList>
+  <FBNetwork>
+    <FB ID="1184863AC2526B3A" Name="IThis" Type="Controle_Revezamento_3_HMI" x="2400" y="600" Namespace="Hidryco.HidrycoLib">
+      <Parameter Name="$06C0C86C8D26D91E" Value="TRUE" />
+    </FB>
+    <FB ID="11621185AD60859D" Name="plcStart1" Type="plcStart" x="600" y="200" Namespace="SE.App2Base">
+      <Parameter Name="$Prio" Value="10" />
+    </FB>
+    <Input ID="A7EEDA91D01D2772" Name="REQ" x="200" y="200" Type="Event" />
+    <Input ID="3E2B631069BF22E6" Name="RECARREGA" x="200" y="260" Type="Event" />
+    <Input ID="7A2503B7B1388DC6" Name="STS_RESTANTE_HOR" x="200" y="320" Type="Data" />
+    <Input ID="D93AFAFEC8E31E85" Name="STS_RESTANTE_MIN" x="200" y="380" Type="Data" />
+    <Input ID="E430C3F15AEF6E1E" Name="STS_RESTANTE_SEG" x="200" y="440" Type="Data" />
+    <Output ID="B06A49437DB43D50" Name="CNF" x="14000" y="200" Type="Event" />
+    <Output ID="14B34C1C3DE79269" Name="CMD_HABILITA" x="14000" y="260" Type="Data" />
+    <Output ID="E9B6E434B3B859BA" Name="STP_TEMPO_B1" x="14000" y="320" Type="Data" />
+    <Output ID="5B68F5BBF5994362" Name="STP_TEMPO_B2" x="14000" y="380" Type="Data" />
+    <Output ID="49A70042A34A21C7" Name="STP_TEMPO_B3" x="14000" y="440" Type="Data" />
+    <Output ID="1EA41783712558AD" Name="CMD_SELECAO_BOMBA" x="14000" y="500" Type="Data" />
+    <EventConnections>
+      <Connection Source="$11621185AD60859D.FIRST_INIT" Destination="$1184863AC2526B3A.0192C87DB3A96998">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$11621185AD60859D.REDO_INIT" Destination="$1184863AC2526B3A.0192C87DB3A96998">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$1184863AC2526B3A.D1BA3C1795D37130" Destination="$1184863AC2526B3A.32A5FD2F512EDDDA">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$1184863AC2526B3A.D1BA3C1795D37130" Destination="$11621185AD60859D.ACK_FIRST">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$3E2B631069BF22E6" Destination="$1184863AC2526B3A.32A5FD2F512EDDDA">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$1184863AC2526B3A.CB0061E02EEB91D1" Destination="$B06A49437DB43D50">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$1184863AC2526B3A.E72592C0EA16EC9C" Destination="$B06A49437DB43D50">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$A7EEDA91D01D2772" Destination="$1184863AC2526B3A.295C900D593A2314">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="$1184863AC2526B3A.EBE3E78A518B8EC3" Destination="$14B34C1C3DE79269">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$1184863AC2526B3A.C87519674C1F0FBB" Destination="$E9B6E434B3B859BA">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$1184863AC2526B3A.B92A8868EF63F063" Destination="$5B68F5BBF5994362">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$1184863AC2526B3A.977D6B81BA3FF67A" Destination="$49A70042A34A21C7">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$1184863AC2526B3A.CBB015BC232625A2" Destination="$1EA41783712558AD">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$7A2503B7B1388DC6" Destination="$1184863AC2526B3A.157CF7A7DDB1868C">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$D93AFAFEC8E31E85" Destination="$1184863AC2526B3A.3954E3DE2B1C77C4">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$E430C3F15AEF6E1E" Destination="$1184863AC2526B3A.1F1CE5670F7852A1">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+    </DataConnections>
+  </FBNetwork>
+</FBType>

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="0b6fd2f9-6896-4aba-a260-e4e918f638a6" Name="PositionManager" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="10/5/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="62F2BAA2CE3D2AE5" Name="POSITION" Comment="Normal Execution Request">
+        <With Var="StartFeedPositionR1" />
+        <With Var="StartFeedPositionR2" />
+        <With Var="StartFeedPositionR3" />
+        <With Var="StartFeedPositionR4" />
+        <With Var="StartFeedPositionR5" />
+        <With Var="StartFeedPositionR6" />
+        <With Var="FeedWasRunInit" />
+      </Event>
+      <Event ID="8670533ACC24665F" Name="FEED_RUN">
+        <With Var="R1WasFeeding" />
+        <With Var="R2WasFeeding" />
+        <With Var="R3WasFeeding" />
+        <With Var="R4WasFeeding" />
+        <With Var="R5WasFeeding" />
+        <With Var="R6WasFeeding" />
+      </Event>
+      <Event ID="1D062C508E25C36C" Name="CHECK_FEED_STATE">
+        <With Var="R1WasFeeding" />
+        <With Var="R2WasFeeding" />
+        <With Var="R3WasFeeding" />
+        <With Var="R4WasFeeding" />
+        <With Var="R5WasFeeding" />
+        <With Var="R6WasFeeding" />
+      </Event>
+      <Event ID="DB4D2147A9FCDB38" Name="FEED_R_INIT">
+        <With Var="FeedWasRunInit" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="CB976C7FDAFB56CB" Name="CNF" Comment="Execution Confirmation">
+        <With Var="OutPositionR1" />
+        <With Var="OutPositionR2" />
+        <With Var="OutPositionR3" />
+        <With Var="OutPositionR4" />
+        <With Var="OutPositionR5" />
+        <With Var="OutPositionR6" />
+      </Event>
+      <Event ID="F93EFE8555898EF0" Name="F_W_R">
+        <With Var="FeedWasRunning" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="B5EC732F306029FB" Name="StartFeedPositionR1" Type="INT" Comment="Input event qualifier" />
+      <VarDeclaration ID="DAD1847922C2018F" Name="StartFeedPositionR2" Type="INT" />
+      <VarDeclaration ID="0927FE81F8DB59D2" Name="StartFeedPositionR3" Type="INT" />
+      <VarDeclaration ID="83D635B0A3B89924" Name="StartFeedPositionR4" Type="INT" />
+      <VarDeclaration ID="514D6D45682B49DA" Name="StartFeedPositionR5" Type="INT" />
+      <VarDeclaration ID="F0025455E8E6C5BE" Name="StartFeedPositionR6" Type="INT" />
+      <VarDeclaration ID="CE5DECFACAFA88F2" Name="R1WasFeeding" Type="BOOL" />
+      <VarDeclaration ID="49AD8B77F054D606" Name="R2WasFeeding" Type="BOOL" />
+      <VarDeclaration ID="761FB7668E11B9EB" Name="R3WasFeeding" Type="BOOL" />
+      <VarDeclaration ID="3801FD59FCB05847" Name="R4WasFeeding" Type="BOOL" />
+      <VarDeclaration ID="A648D6A6110DA594" Name="R5WasFeeding" Type="BOOL" />
+      <VarDeclaration ID="E5516A2271061037" Name="R6WasFeeding" Type="BOOL" />
+      <VarDeclaration ID="E445F2E583CAC52D" Name="FeedWasRunInit" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="F4E8FEDA0DB2783D" Name="OutPositionR1" Type="INT" />
+      <VarDeclaration ID="366B827F69F6F6C7" Name="OutPositionR2" Type="INT" />
+      <VarDeclaration ID="7D5DE468AD7F7987" Name="OutPositionR3" Type="INT" />
+      <VarDeclaration ID="E411C93DB323E922" Name="OutPositionR4" Type="INT" />
+      <VarDeclaration ID="C573A63D6130B1EF" Name="OutPositionR5" Type="INT" />
+      <VarDeclaration ID="8B93E90205EBD2CA" Name="OutPositionR6" Type="INT" />
+      <VarDeclaration ID="FEEE23C933504D83" Name="FeedWasRunning" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="9eac2c0c-9d2f-4627-ae03-07945713248e">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="REQ,ChechFeedState" />
+    <InternalVars>
+      <VarDeclaration ID="F386947A358B7234" Name="InStartFeedPositionR1" Type="INT" />
+      <VarDeclaration ID="69C3DB45A354243C" Name="InStartFeedPositionR2" Type="INT" />
+      <VarDeclaration ID="E3C8BA9D88393605" Name="InStartFeedPositionR3" Type="INT" />
+      <VarDeclaration ID="120EF2FE600CEBE6" Name="InStartFeedPositionR4" Type="INT" />
+      <VarDeclaration ID="BDBB0C8459A397C2" Name="InStartFeedPositionR5" Type="INT" />
+      <VarDeclaration ID="19F49A40A17B4A5F" Name="InStartFeedPositionR6" Type="INT" />
+    </InternalVars>
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="1152.941" y="393.4117" />
+      <ECState Name="REQ" Comment="Normal execution" x="1801.647" y="896.941">
+        <ECAction Algorithm="REQ" Output="CNF" />
+      </ECState>
+      <ECState Name="CheckFeedState" x="1008" y="1380">
+        <ECAction Algorithm="ChechFeedState" Output="F_W_R" />
+        <ECAction Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="CheckFeedState" Condition="CHECK_FEED_STATE" x="1158.489" y="897.6072">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="300.2525,188.5509,289.4518,262.0696" />
+      </ECTransition>
+      <ECTransition Source="REQ" Destination="START" Condition="1" x="1470.278" y="722.2441">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="390.7507,202.926,347.8964,169.6622" />
+      </ECTransition>
+      <ECTransition Source="CheckFeedState" Destination="START" Condition="1" x="932.0626" y="863.6422">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="217.6865,250.7479,228.4872,177.2293" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="REQ" Condition="(POSITION OR FEED_R_INIT) AND NOT FeedWasRunInit" x="1535.08" y="585.1364">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="363.2256,124.9134,406.0799,158.1771" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="REQ" Comment="Normally executed algorithm">
+      <ST><![CDATA[;
+OutPositionR1 := StartFeedPositionR1;
+OutPositionR2 := StartFeedPositionR2;
+OutPositionR3 := StartFeedPositionR3;
+OutPositionR4 := StartFeedPositionR4;
+OutPositionR5 := StartFeedPositionR5;
+OutPositionR6 := StartFeedPositionR6;]]></ST>
+    </Algorithm>
+    <Algorithm ID="42ceb797-d243-4834-96df-8ee4ea517f22" Name="ChechFeedState">
+      <ST><![CDATA[;
+FeedWasRunning := R1WasFeeding OR R2WasFeeding OR R3WasFeeding OR R4WasFeeding OR R5WasFeeding OR R6WasFeeding;
+
+IF NOT FeedWasRunning THEN
+	OutPositionR1 := StartFeedPositionR1;
+	OutPositionR2 := StartFeedPositionR2;
+	OutPositionR3 := StartFeedPositionR3;
+	OutPositionR4 := StartFeedPositionR4;
+	OutPositionR5 := StartFeedPositionR5;
+	OutPositionR6 := StartFeedPositionR6;
+ELSE
+	IF R1WasFeeding THEN
+		OutPositionR1 := 1;
+		OutPositionR2 := 2;
+		OutPositionR3 := 0;
+		OutPositionR4 := 0;
+		OutPositionR5 := 0;
+		OutPositionR6 := 0;
+	ELSIF R2WasFeeding THEN
+		OutPositionR1 := 2;
+		OutPositionR2 := 1;
+		OutPositionR3 := 0;
+		OutPositionR4 := 0;
+		OutPositionR5 := 0;
+		OutPositionR6 := 0;
+	END_IF;
+END_IF;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

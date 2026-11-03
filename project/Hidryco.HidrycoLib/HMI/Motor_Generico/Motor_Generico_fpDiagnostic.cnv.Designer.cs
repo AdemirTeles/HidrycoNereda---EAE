@@ -772,8 +772,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Motor_Generico
 			propertyDictionary22.Add("Brush", new NxtControl.Drawing.Brush(true));
 			propertyDictionary22.Add("Pen", new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("Transparent"), 1F, NxtControl.Drawing.DashStyle.Solid));
 			this.vVelRef.Ranges.DefaultPropertyValues = propertyDictionary22;
-			this.vVelRef.Suffix = " %";
-			this.vVelRef.TagName = "STS_VELOCIDADE_REFERENCIA";
+			this.vVelRef.Suffix = " Hz";
 			this.vVelRef.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
 			this.vVelRef.Visible = false;
 			this.vVelRef.EndInit();
@@ -806,7 +805,6 @@ namespace Hidryco.HidrycoLib.Faceplates.Motor_Generico
 			propertyDictionary23.Add("Pen", new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("Transparent"), 1F, NxtControl.Drawing.DashStyle.Solid));
 			this.vVel.Ranges.DefaultPropertyValues = propertyDictionary23;
 			this.vVel.Suffix = " %";
-			this.vVel.TagName = "STS_VELOCIDADE";
 			this.vVel.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
 			this.vVel.Visible = false;
 			this.vVel.EndInit();

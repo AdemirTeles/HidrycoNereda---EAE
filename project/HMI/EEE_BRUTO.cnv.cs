@@ -20,5 +20,11 @@ namespace HMI.Main.Canvases
 			//
 			InitializeComponent();
 		}
+
+		// Reset geral: falhas e alarmes de todos os equipamentos desta tela (o mesmo reset do faceplate de cada um)
+		void BtnResetGeralClick(object sender, EventArgs e)
+		{
+			HMI.Main.ResetGeral.Executar(this);
+		}
 	}
 }

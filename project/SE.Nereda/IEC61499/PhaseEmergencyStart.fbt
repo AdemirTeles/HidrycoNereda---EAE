@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="36997ddb-20f8-49b5-af58-1f48c22a4a29" Name="PhaseEmergencyStart" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.1" Author=" " Date="28/10/2026" Remarks="0.1: entrada Mode; no EmergencyOFF a fase rodando recebe parada se o modo ainda for 3." />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="F6C12C9BAC9D4826" Name="REQ" Comment="Normal Execution Request">
+        <With Var="iEmergencyStart" />
+        <With Var="iEmergencyStop" />
+        <With Var="PhaseRun" />
+        <With Var="EmergencyON" />
+        <With Var="Mode" />
+      </Event>
+      <Event ID="C2C651A5DAA9AF80" Name="FB_WAIT" />
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="3DEC8CAC853BEF32" Name="CNF" Comment="Execution Confirmation">
+        <With Var="oEmergencyStart" />
+        <With Var="oEmergencyStop" />
+      </Event>
+      <Event ID="220B4910F3DAC785" Name="WAIT" />
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="008F1EF01B410880" Name="EmergencyON" Type="BOOL" />
+      <VarDeclaration ID="5A86F1341D4410C5" Name="iEmergencyStart" Type="BOOL" Comment="Input event qualifier" />
+      <VarDeclaration ID="1AE1758611A8B8BC" Name="iEmergencyStop" Type="BOOL" />
+      <VarDeclaration ID="2D1D6376EC3D684A" Name="PhaseRun" Type="BOOL" />
+      <VarDeclaration ID="23918C4FF86621CC" Name="Mode" Type="INT" Comment="Modo atual (3 = emergencia); lido no REQ" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="B6DDE3E4F48B15E0" Name="oEmergencyStart" Type="BOOL" Comment="Output event qualifier" />
+      <VarDeclaration ID="E538D59A6A4F1873" Name="oEmergencyStop" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="80886832-f2e5-43e3-ae96-467fc77b9a65">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="REQ,NoCmd,EmerOffCmd" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="1510.719" y="468.0784" />
+      <ECState Name="PhaseWasRun" x="700" y="979.611">
+        <ECAction Algorithm="NoCmd" Output="CNF" />
+        <ECAction Output="WAIT" />
+      </ECState>
+      <ECState Name="Normal" x="2219.167" y="957.222">
+        <ECAction Algorithm="REQ" Output="CNF" />
+      </ECState>
+      <ECState Name="EmergencyOFF" x="2508" y="356">
+        <ECAction Algorithm="EmerOffCmd" Output="CNF" />
+      </ECState>
+      <ECTransition Source="Normal" Destination="EmergencyOFF" Condition="NOT EmergencyON" x="2356.498" y="671.4617">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="578.5945,189.8051,598.4712,148.4009" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="PhaseWasRun" Condition="REQ AND EmergencyON AND PhaseRun" x="1103.356" y="728.4462">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="302.4069,165.5203,248.6382,199.4697" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="Normal" Condition="REQ AND EmergencyON AND NOT PhaseRun" x="1821.41" y="682.4135">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="428.8395,152.1108,474.583,184.0565" />
+      </ECTransition>
+      <ECTransition Source="PhaseWasRun" Destination="Normal" Condition="FB_WAIT" x="1462.961" y="1324.722">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="317.0862,357.2434,414.6869,355.805" />
+      </ECTransition>
+      <ECTransition Source="Normal" Destination="Normal" Condition="REQ" x="2393.703" y="1192.664">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="658.75,290,558.125,336.875" />
+      </ECTransition>
+      <ECTransition Source="EmergencyOFF" Destination="START" Condition="1" x="1977.242" y="416.2184">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="522.4032,100.9199,469.2631,106.8923" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="REQ" Comment="Normally executed algorithm">
+      <ST><![CDATA[;
+oEmergencyStart := iEmergencyStart;
+oEmergencyStop := iEmergencyStop;]]></ST>
+    </Algorithm>
+    <Algorithm Name="EmerOffCmd" Comment="Emergencia desligada para esta fase">
+      <ST><![CDATA[;
+(* Reator saiu da emergencia com o modo ainda em 3 (indisponivel / forcado indisponivel):
+   a fase que estava rodando para. Se o modo ja saiu de 3, nao manda nada (Nereda / operador assume). *)
+oEmergencyStart := FALSE;
+oEmergencyStop := PhaseRun AND (Mode = 3);]]></ST>
+    </Algorithm>
+    <Algorithm ID="e6aaaf20-280e-412b-955c-78557d36d7f9" Name="NoCmd">
+      <ST><![CDATA[;
+oEmergencyStart := FALSE;
+oEmergencyStop := FALSE;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

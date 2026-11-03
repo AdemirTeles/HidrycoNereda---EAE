@@ -80,6 +80,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_Generico
 			this.xEH = new System.HMI.Symbols.Base.Execute<byte>();
 			this.xEL = new System.HMI.Symbols.Base.Execute<byte>();
 			this.xELL = new System.HMI.Symbols.Base.Execute<byte>();
+			this.xNivel = new System.HMI.Symbols.Base.Execute<bool>();
 			// 
 			// titulo
 			// 
@@ -752,6 +753,18 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_Generico
 			this.xELL.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.ELLValueChanged);
 			this.xELL.EndInit();
 			// 
+			// xNivel
+			// 
+			this.xNivel.BeginInit();
+			this.xNivel.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, double.NaN, double.NaN);
+			this.xNivel.IsOnlyInput = true;
+			this.xNivel.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
+			this.xNivel.Name = "xNivel";
+			this.xNivel.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
+			this.xNivel.TagName = "CFG_NIVEL";
+			this.xNivel.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.NivelValueChanged);
+			this.xNivel.EndInit();
+			// 
 			// fpAlarm
 			// 
 			this.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(450D)), ((float)(296D)));
@@ -818,7 +831,8 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_Generico
 			this.xEHH,
 			this.xEH,
 			this.xEL,
-			this.xELL});
+			this.xELL,
+			this.xNivel});
 			this.Size = new System.Drawing.Size(450, 296);
 
 		}
@@ -883,6 +897,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_Generico
 		private System.HMI.Symbols.Base.Execute<byte> xEH;
 		private System.HMI.Symbols.Base.Execute<byte> xEL;
 		private System.HMI.Symbols.Base.Execute<byte> xELL;
+		private System.HMI.Symbols.Base.Execute<bool> xNivel;
 		#endregion
 	}
 }

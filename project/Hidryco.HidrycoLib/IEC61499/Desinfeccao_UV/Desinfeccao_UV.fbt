@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
-<FBType GUID="a6411642-91f1-d62c-d6bc-747391f33726" Comment="Desinfeccao UV e limitacao da vazao de lancamento (700) - HidrycoLib" Name="Desinfeccao_UV" Namespace="Hidryco.HidrycoLib">
+<FBType GUID="a6411642-91f1-d62c-d6bc-747391f33726" Name="Desinfeccao_UV" Comment="Desinfeccao UV e limitacao da vazao de lancamento (700) - HidrycoLib" Namespace="Hidryco.HidrycoLib">
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Hidryco" Version="1.0" Author="Hidryco" Date="19/10/2026" Remarks="1.0: desinfeccao (700). Sub-CATs: VC_700_01 (Valvula_Coester modulante), UV (UV_Trojan), FT_700_01 (Parshall 4-20 mA, m3/h), AIT_700_001 turbidez, AIT_700_003 pH, AIT_700_004 OD (SC4500 por comunicacao). PID continuo (pidCtl, Direction TRUE: vazao acima do setpoint fecha a valvula) limita a vazao de lancamento (padrao 1242 m3/h = 345 L/s). Campo por symlink ${PATH}: djPCEDesligado, djPCMDesligado, djUV01, djUV02, djVC01, djMO01 (remota %I0.0-0.5), stsRemotaComOk (COM_OK do IO_DI32 da remota)." />
+  <VersionInfo Organization="Hidryco" Version="1.2" Author="Hidryco" Date="21/10/2026" Remarks="1.2: pidCtl Pid com CycleTime 1000 ms (sem ele o calculo ciclico do pidSC ficava sem periodo). 1.1: ajustes do PID no sub-CAT PID_VC_700_01 (padrao Desinfeccao do legado; desejado = vazao maxima); reset cmdResetFalhas / E_RESET_FALHAS_PROCESSO; AIT_700_01/03/04. 1.0: desinfeccao (700). Sub-CATs: VC_700_01 (Valvula_Coester modulante), UV (UV_Trojan), FT_700_01 (Parshall 4-20 mA, m3/h), AIT_700_001 turbidez, AIT_700_003 pH, AIT_700_004 OD (SC4500 por comunicacao). PID continuo (pidCtl, Direction TRUE: vazao acima do setpoint fecha a valvula) limita a vazao de lancamento (padrao 1242 m3/h = 345 L/s). Campo por symlink ${PATH}: djPCEDesligado, djPCMDesligado, djUV01, djUV02, djVC01, djMO01 (remota %I0.0-0.5), stsRemotaComOk (COM_OK do IO_DI32 da remota)." />
   <InterfaceList>
     <EventInputs>
       <Event ID="F61B5D54A50A440E" Name="E_RESET_FALHAS" Comment="Reset pelo processo (desinfeccao, valvula, UV e sensores) com cmdResetFalhas = TRUE">
@@ -39,6 +39,7 @@
       <Parameter Name="$DT" Value="T#1s" />
     </FB>
     <FB ID="6341064EB7A02429" Name="Pid" Type="pidCtl" x="7600" y="600" Namespace="SE.App2CommonProcess">
+      <Parameter Name="$CycleTime" Value="1000" />
       <Parameter Name="$Direction" Value="TRUE" />
       <Parameter Name="$Bump" Value="FALSE" />
       <Parameter Name="$ProhibitOutInc" Value="FALSE" />
@@ -67,24 +68,24 @@
       <Parameter Name="$CC8EEC06FF0C4430" Value="'m3/h'" />
       <Parameter Name="$6D3A2524C5D0F0D1" Value="0" />
     </FB>
-    <FB ID="C7A8BC8BE7F1E520" Name="AIT_700_001" Type="Sensor_Generico" x="3400" y="2300" Namespace="Hidryco.HidrycoLib">
+    <FB ID="C7A8BC8BE7F1E520" Name="AIT_700_01" Type="Sensor_Generico" x="3400" y="2300" Namespace="Hidryco.HidrycoLib">
       <Parameter Name="$D46B37D45FD5AF5D" Value="TRUE" />
       <Parameter Name="$0ECE7B3867B02E0B" Value="TRUE" />
       <Parameter Name="$CC8EEC06FF0C4430" Value="'NTU'" />
       <Parameter Name="$6D3A2524C5D0F0D1" Value="1" />
     </FB>
-    <FB ID="95905F9933710D97" Name="AIT_700_003" Type="Sensor_Generico" x="3400" y="3000" Namespace="Hidryco.HidrycoLib">
+    <FB ID="95905F9933710D97" Name="AIT_700_03" Type="Sensor_Generico" x="3400" y="3000" Namespace="Hidryco.HidrycoLib">
       <Parameter Name="$D46B37D45FD5AF5D" Value="TRUE" />
       <Parameter Name="$0ECE7B3867B02E0B" Value="TRUE" />
       <Parameter Name="$CC8EEC06FF0C4430" Value="''" />
       <Parameter Name="$6D3A2524C5D0F0D1" Value="2" />
     </FB>
-    <FB ID="F3D23AABE16F1274" Name="AIT_700_004" Type="Sensor_Generico" x="3400" y="3700" Namespace="Hidryco.HidrycoLib">
+    <FB ID="F3D23AABE16F1274" Name="AIT_700_04" Type="Sensor_Generico" x="3400" y="3700" Namespace="Hidryco.HidrycoLib">
       <Parameter Name="$D46B37D45FD5AF5D" Value="TRUE" />
       <Parameter Name="$CC8EEC06FF0C4430" Value="'mg/L'" />
       <Parameter Name="$6D3A2524C5D0F0D1" Value="2" />
     </FB>
-    <FB ID="903F244E2EFA1ECB" Name="VC_700_01" Type="Valvula_Coester" x="9400" y="1200" Namespace="Hidryco.HidrycoLib">
+    <FB ID="903F244E2EFA1ECB" Name="VC_700_01" Type="Atuador_Coester" x="9400" y="1200" Namespace="Hidryco.HidrycoLib">
       <Parameter Name="$FC8FD119D7FC211F" Value="TRUE" />
     </FB>
     <FB ID="AD7B97BE4BACEA3E" Name="UV" Type="UV_Trojan" x="9400" y="2600" Namespace="Hidryco.HidrycoLib" />
@@ -115,13 +116,14 @@
       <Parameter Name="$ACKTYPE_1" Value="2" />
       <Parameter Name="$ACTIVE" Value="TRUE" />
     </FB>
-    <Input ID="F61B5D54A50A440E" Name="E_RESET_FALHAS" x="200" y="198" Type="Event" />
-    <Input ID="D75ACBAB39349035" Name="cmdResetFalhas" x="200" y="258" Type="Data" />
-    <Output ID="662F84A10221381B" Name="CNF" x="14000" y="198" Type="Event" />
-    <Output ID="B3C085A02B02C2C4" Name="stsVazao" x="14000" y="258" Type="Data" />
-    <Output ID="97DEB8182327F657" Name="stsTotal" x="14000" y="318" Type="Data" />
-    <Output ID="74B2B13C10E61F0E" Name="stsControleAtivo" x="14000" y="378" Type="Data" />
-    <Output ID="7FCDA16AD87906A8" Name="stsAlarme" x="14000" y="438" Type="Data" />
+    <FB ID="492AF61116B378D5" Name="PID_VC_700_01" Type="Controle_PID" x="1400" y="4600" Namespace="Hidryco.HidrycoLib" />
+    <Input ID="F61B5D54A50A440E" Name="E_RESET_FALHAS" x="200" y="196" Type="Event" />
+    <Input ID="D75ACBAB39349035" Name="cmdResetFalhas" x="200" y="256" Type="Data" />
+    <Output ID="662F84A10221381B" Name="CNF" x="14000" y="196" Type="Event" />
+    <Output ID="B3C085A02B02C2C4" Name="stsVazao" x="14000" y="256" Type="Data" />
+    <Output ID="97DEB8182327F657" Name="stsTotal" x="14000" y="316" Type="Data" />
+    <Output ID="74B2B13C10E61F0E" Name="stsControleAtivo" x="14000" y="376" Type="Data" />
+    <Output ID="7FCDA16AD87906A8" Name="stsAlarme" x="14000" y="436" Type="Data" />
     <EventConnections>
       <Connection Source="$BED275046456F1BA.FIRST_INIT" Destination="$7BF86B742C42FE59.B18F9527B03F6368">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
@@ -216,12 +218,6 @@
       <Connection Source="$55F41B4AE326646F.6010724B5A00E1A3" Destination="$903F244E2EFA1ECB.6AE7937B5439A162">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$7BF86B742C42FE59.341E4C9D143B2914" Destination="$6341064EB7A02429.REQ_PARA">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$7BF86B742C42FE59.341E4C9D143B2914" Destination="$6341064EB7A02429.REQ_SP">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
       <Connection Source="$3871AAA75AFFE988.28A380156DB271B8" Destination="$6341064EB7A02429.REQ">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
@@ -300,7 +296,22 @@
       <Connection Source="$F61B5D54A50A440E" Destination="$903F244E2EFA1ECB.D903CD18EBE204D1" dx1="4339.114">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$55F41B4AE326646F.6AA932C3761CE99C" Destination="$662F84A10221381B" dx1="4060.135">
+      <Connection Source="$55F41B4AE326646F.6AA932C3761CE99C" Destination="$662F84A10221381B" dx1="4060.134">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$492AF61116B378D5.75EB05A15DC6DC61" Destination="$6341064EB7A02429.REQ_PARA">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$492AF61116B378D5.75EB05A15DC6DC61" Destination="$6341064EB7A02429.REQ_SP">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$492AF61116B378D5.75EB05A15DC6DC61" Destination="$55F41B4AE326646F.69B239DBC6B5BF03">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$41496972FBB8EF65.INITO" Destination="$492AF61116B378D5.117942CC3F34C94C">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$55F41B4AE326646F.04CB25776C0D242A" Destination="$492AF61116B378D5.7BD84B0FC1882775">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
     </EventConnections>
@@ -374,24 +385,6 @@
       <Connection Source="$3871AAA75AFFE988.D7422D307E6AF52D" Destination="$6341064EB7A02429.Pv">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$7BF86B742C42FE59.4B3A66189D8B6C26" Destination="$6341064EB7A02429.Sp">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$7BF86B742C42FE59.E6C6A60AA2C0E36D" Destination="$6341064EB7A02429.Gain">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$7BF86B742C42FE59.CDC7B3814801DB73" Destination="$6341064EB7A02429.IntegralTime">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$7BF86B742C42FE59.73F21D5865D9CDC3" Destination="$6341064EB7A02429.DerivativeTime">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$7BF86B742C42FE59.E979A808BFD47331" Destination="$6341064EB7A02429.OutMin">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$7BF86B742C42FE59.7DF6B8DE030268CF" Destination="$6341064EB7A02429.OutMax">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
       <Connection Source="$55F41B4AE326646F.B925699CCA1010B0" Destination="$6341064EB7A02429.Mode">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
@@ -399,18 +392,6 @@
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
       <Connection Source="$6341064EB7A02429.Out" Destination="$55F41B4AE326646F.AA3C6B9770CFA1D6">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$7BF86B742C42FE59.ABC0E70D5B4BCF7D" Destination="$55F41B4AE326646F.FEC6CBE54CA37A44">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$7BF86B742C42FE59.4B3A66189D8B6C26" Destination="$55F41B4AE326646F.3EF61F60D9980F84">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$7BF86B742C42FE59.E979A808BFD47331" Destination="$55F41B4AE326646F.DF73D60158F656E4">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$7BF86B742C42FE59.7DF6B8DE030268CF" Destination="$55F41B4AE326646F.0F4CFB3D37BB8386">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
       <Connection Source="$7BF86B742C42FE59.975D7F4B71294A99" Destination="$55F41B4AE326646F.A62BE056EBF6633F">
@@ -444,9 +425,6 @@
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
       <Connection Source="$55F41B4AE326646F.E0E853656DE9663A" Destination="$7BF86B742C42FE59.00083F484189930B">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$55F41B4AE326646F.BB5C6CDA218388F6" Destination="$7BF86B742C42FE59.271562BABFD08034">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
       <Connection Source="$55F41B4AE326646F.5B994E1E72A57859" Destination="$7BF86B742C42FE59.5A630CE8F223E31A">
@@ -545,13 +523,46 @@
       <Connection Source="$55F41B4AE326646F.8B489663C97AF746" Destination="$B3C085A02B02C2C4" dx1="4080.135">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$55F41B4AE326646F.2C19FD8E73A079CA" Destination="$97DEB8182327F657" dx1="4120.135">
+      <Connection Source="$55F41B4AE326646F.2C19FD8E73A079CA" Destination="$97DEB8182327F657" dx1="4120.134">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$55F41B4AE326646F.7C47B967196CD681" Destination="$74B2B13C10E61F0E" dx1="4120.135">
+      <Connection Source="$55F41B4AE326646F.7C47B967196CD681" Destination="$74B2B13C10E61F0E" dx1="4120.134">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$55F41B4AE326646F.C779F990E9DA2177" Destination="$7FCDA16AD87906A8" dx1="4320.135">
+      <Connection Source="$55F41B4AE326646F.C779F990E9DA2177" Destination="$7FCDA16AD87906A8" dx1="4320.134">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$492AF61116B378D5.C9DF845DD1ECA932" Destination="$6341064EB7A02429.Sp">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$492AF61116B378D5.C9DF845DD1ECA932" Destination="$55F41B4AE326646F.3EF61F60D9980F84">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$492AF61116B378D5.4F45CBCE24FA8775" Destination="$6341064EB7A02429.Gain">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$492AF61116B378D5.5D86C7647B367BF7" Destination="$6341064EB7A02429.IntegralTime">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$492AF61116B378D5.C753842CF6C65D61" Destination="$6341064EB7A02429.DerivativeTime">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$492AF61116B378D5.8B11A5B11AA557C3" Destination="$6341064EB7A02429.OutMin">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$492AF61116B378D5.8B11A5B11AA557C3" Destination="$55F41B4AE326646F.DF73D60158F656E4">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$492AF61116B378D5.E7AF90225A9267BD" Destination="$6341064EB7A02429.OutMax">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$492AF61116B378D5.E7AF90225A9267BD" Destination="$55F41B4AE326646F.0F4CFB3D37BB8386">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$492AF61116B378D5.004F03C1536C2B1E" Destination="$55F41B4AE326646F.FEC6CBE54CA37A44">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$55F41B4AE326646F.BB5C6CDA218388F6" Destination="$492AF61116B378D5.260D6E81A1639D84">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
     </DataConnections>

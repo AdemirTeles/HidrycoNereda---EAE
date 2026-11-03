@@ -25,6 +25,7 @@ namespace Hidryco.HidrycoLib.Symbols.Motor_Generico
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.xVelHz = new System.HMI.Symbols.Base.Execute<float>();
 			this.abrirFaceplate = new NxtControl.GuiFramework.DrawnButton();
 			NxtControl.GuiFramework.PropertyDictionary pdVelocidade = new NxtControl.GuiFramework.PropertyDictionary();
 			this.velocidade = new System.HMI.Symbols.Base.Label<float>();
@@ -257,8 +258,7 @@ namespace Hidryco.HidrycoLib.Symbols.Motor_Generico
 			pdVelocidade.Add("Brush", new NxtControl.Drawing.Brush(true));
 			pdVelocidade.Add("Pen", new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("Transparent"), 1F, NxtControl.Drawing.DashStyle.Solid));
 			this.velocidade.Ranges.DefaultPropertyValues = pdVelocidade;
-			this.velocidade.Suffix = " %";
-			this.velocidade.TagName = "STS_VELOCIDADE";
+			this.velocidade.Suffix = " Hz";
 			this.velocidade.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleCenter;
 			this.velocidade.Visible = false;
 			this.velocidade.EndInit();
@@ -281,7 +281,21 @@ namespace Hidryco.HidrycoLib.Symbols.Motor_Generico
 			// 
 			// sSoprador
 			// 
+			// 
+			// xVelHz
+			// 
+			this.xVelHz.BeginInit();
+			this.xVelHz.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, double.NaN, double.NaN);
+			this.xVelHz.IsOnlyInput = true;
+			this.xVelHz.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
+			this.xVelHz.Name = "xVelHz";
+			this.xVelHz.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
+			this.xVelHz.TagName = "STS_FREQUENCIA";
+			this.xVelHz.Value = 0F;
+			this.xVelHz.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.VelHzValueChanged);
+			this.xVelHz.EndInit();
 			this.Shapes.AddRange(new System.ComponentModel.IComponent[] {
+			this.xVelHz,
 			this.velocidade,
 			this.cfgInversor,
 			this.stsFalhaComunicacao,
@@ -321,6 +335,7 @@ namespace Hidryco.HidrycoLib.Symbols.Motor_Generico
 		private NxtControl.GuiFramework.DrawnButton abrirFaceplate;
 		private System.HMI.Symbols.Base.Execute<byte> xETerm;
 		private System.HMI.Symbols.Base.Execute<byte> xECom;
+		private System.HMI.Symbols.Base.Execute<float> xVelHz;
 		#endregion
 	}
 }

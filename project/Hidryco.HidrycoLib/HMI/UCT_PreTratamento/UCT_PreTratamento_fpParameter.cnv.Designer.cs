@@ -176,11 +176,11 @@ namespace Hidryco.HidrycoLib.Faceplates.UCT_PreTratamento
 			this.tSTP_VELOCIDADE_BOMBA_GORDURA.NumberBase = NxtControl.GuiFramework.NumberBase.Decimal;
 			this.tSTP_VELOCIDADE_BOMBA_GORDURA.Pen = new NxtControl.Drawing.Pen("TextBoxPen");
 			this.tSTP_VELOCIDADE_BOMBA_GORDURA.SetColor = new NxtControl.Drawing.Color("Yellow");
-			this.tSTP_VELOCIDADE_BOMBA_GORDURA.Suffix = " %";
-			this.tSTP_VELOCIDADE_BOMBA_GORDURA.TagName = "STP_VELOCIDADE_BOMBA_GORDURA";
+			this.tSTP_VELOCIDADE_BOMBA_GORDURA.Suffix = " Hz";
 			this.tSTP_VELOCIDADE_BOMBA_GORDURA.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
 			this.tSTP_VELOCIDADE_BOMBA_GORDURA.UseInputPad = true;
 			this.tSTP_VELOCIDADE_BOMBA_GORDURA.Value = 0F;
+			this.tSTP_VELOCIDADE_BOMBA_GORDURA.TagName = "STP_VELOCIDADE_BOMBA_GORDURA";
 			this.tSTP_VELOCIDADE_BOMBA_GORDURA.EndInit();
 			// 
 			// ajuda

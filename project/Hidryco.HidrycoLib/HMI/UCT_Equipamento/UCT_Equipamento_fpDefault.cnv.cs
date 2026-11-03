@@ -88,5 +88,10 @@ namespace Hidryco.HidrycoLib.Faceplates.UCT_Equipamento
 		void BtnRevOnClick(object sender, EventArgs e) { FireEvent_E_ATUALIZA_HABILITA_REVERSAO(true); }
 		void BtnRevOffClick(object sender, EventArgs e) { FireEvent_E_ATUALIZA_HABILITA_REVERSAO(false); }
 
+
+		void Hz_vVelValueChanged(object sender, ValueChangedEventArgs e)
+		{
+			((IHMIPrimitiveInput<float>)vVel).ValueChanged(Convert.ToSingle(e.Value));
+		}
 	}
 }

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="3e5b15dd-e573-283f-5135-248f61c88ac8" Name="basicInversorATV600" Comment="Inversor ATV600 por Modbus TCP generico: registradores brutos para grandezas e palavras de escrita" Namespace="Hidryco.HidrycoLib">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Hidryco" Version="1.0" Author="Hidryco" Date="27/10/2026" Remarks="1.0: Motor_Generico com ATV600 por MODBUSGENTCPS (unit 248): RFR, LCR, UOP, OPR, OTR, LFT e RFRD lidos; LFR e CMD escritos (planilha ATV600 V4.6)." />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="E4216BCCDF3BB807" Name="REQ_COM" Comment="connStatusInt do escravo Modbus">
+        <With Var="CONEXAO" />
+      </Event>
+      <Event ID="427C31D5944AFC88" Name="REQ_LEITURA" Comment="Nova leitura dos registradores do inversor">
+        <With Var="RFR" />
+        <With Var="LCR" />
+        <With Var="UOP" />
+        <With Var="OPR" />
+        <With Var="OTR" />
+        <With Var="LFT" />
+        <With Var="RFRD" />
+        <With Var="ESCALA_CORRENTE" />
+      </Event>
+      <Event ID="1C34035A3C580B77" Name="REQ_ESCRITA" Comment="Referencia e reset para o inversor">
+        <With Var="VELOCIDADE" />
+        <With Var="RESET" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="87B3ECE337A4FF70" Name="CNF_COM" Comment="Status de comunicacao">
+        <With Var="COM_OK" />
+      </Event>
+      <Event ID="09B0919BB1BB0E30" Name="CNF_LEITURA" Comment="Grandezas do inversor">
+        <With Var="VELOCIDADE_CAMPO" />
+        <With Var="CORRENTE" />
+        <With Var="TENSAO" />
+        <With Var="POTENCIA" />
+        <With Var="FREQUENCIA" />
+        <With Var="TORQUE" />
+        <With Var="CODIGO_FALHA" />
+        <With Var="RPM" />
+      </Event>
+      <Event ID="CB0E4FAA64BD8D11" Name="CNF_ESCRITA" Comment="Palavras para o inversor">
+        <With Var="LFR" />
+        <With Var="CMD" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="79C0964D27F6F92F" Name="CONEXAO" Type="INT" Comment="connStatusInt do MODBUSGENTCPS: 1 = online" />
+      <VarDeclaration ID="B008AB29C8D9BF35" Name="RFR" Type="INT" Comment="RFR 3202 - frequencia do motor (0,1 Hz)" />
+      <VarDeclaration ID="2D6376362AF121EB" Name="LCR" Type="INT" Comment="LCR 3204 - corrente do motor (UINT, unidade em ESCALA_CORRENTE)" />
+      <VarDeclaration ID="3DFB1C68D576229B" Name="UOP" Type="INT" Comment="UOP 3208 - tensao do motor (UINT, 1 V)" />
+      <VarDeclaration ID="AD5D164EF9FA8C1F" Name="OPR" Type="INT" Comment="OPR 3211 - potencia do motor (1 %)" />
+      <VarDeclaration ID="CDF6A5D53E7299DD" Name="OTR" Type="INT" Comment="OTR 3205 - torque do motor (0,1 %)" />
+      <VarDeclaration ID="292D962FA485B2BC" Name="LFT" Type="INT" Comment="LFT 7121 - ultimo erro ocorrido (WORD)" />
+      <VarDeclaration ID="E045F080AE8FFEBD" Name="RFRD" Type="INT" Comment="RFRD 8604 - velocidade de saida (1 rpm)" />
+      <VarDeclaration ID="B66303760760D9ED" Name="ESCALA_CORRENTE" Type="REAL" Comment="A por unidade do LCR (0,1 = LCR em 0,1 A)" />
+      <VarDeclaration ID="B1045E7D3C432FC3" Name="VELOCIDADE" Type="REAL" Comment="Referencia de velocidade na unidade de campo (0,1 Hz, cfgSaidaMax = 600)" />
+      <VarDeclaration ID="2A9BB2F7498BE636" Name="RESET" Type="BOOL" Comment="Pulso de reset de falha" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="72B915EBB48AEC2A" Name="COM_OK" Type="BOOL" Comment="TRUE = inversor online" />
+      <VarDeclaration ID="66AEF9F8E70CFE9D" Name="VELOCIDADE_CAMPO" Type="REAL" Comment="Velocidade real na unidade de campo (RFR em 0,1 Hz)" />
+      <VarDeclaration ID="37526A7D778B9E7B" Name="CORRENTE" Type="REAL" Comment="Corrente (A)" />
+      <VarDeclaration ID="930BAE86F242A833" Name="TENSAO" Type="REAL" Comment="Tensao do motor (V)" />
+      <VarDeclaration ID="2DDD2CDD0C674D43" Name="POTENCIA" Type="REAL" Comment="Potencia do motor (%)" />
+      <VarDeclaration ID="2C7FE4FF8CF8442A" Name="FREQUENCIA" Type="REAL" Comment="Frequencia (Hz)" />
+      <VarDeclaration ID="20BE98C14B2600D9" Name="TORQUE" Type="REAL" Comment="Torque (%)" />
+      <VarDeclaration ID="59458D47837A2DDA" Name="CODIGO_FALHA" Type="REAL" Comment="Ultimo codigo de erro (LFT)" />
+      <VarDeclaration ID="49A95C3D64F24BED" Name="RPM" Type="REAL" Comment="Rotacao (rpm)" />
+      <VarDeclaration ID="360DB67778FD2083" Name="LFR" Type="INT" Comment="LFR 8502 - referencia de frequencia (0,1 Hz)" />
+      <VarDeclaration ID="53A8BE16002FB240" Name="CMD" Type="INT" Comment="CMD 8501 - palavra de comando (bit 7 = reset de falha)" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="65e31bfc-1930-159d-f9ba-a79e45bbc869">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="AlgCom,AlgLeitura,AlgEscrita" />
+    <InternalVars>
+      <VarDeclaration Name="r" Type="REAL" Comment="Auxiliar UINT -&gt; REAL" />
+    </InternalVars>
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="1000" y="425" />
+      <ECState Name="COM" x="300" y="1100">
+        <ECAction Algorithm="AlgCom" Output="CNF_COM" />
+      </ECState>
+      <ECState Name="LEITURA" x="1000" y="1100">
+        <ECAction Algorithm="AlgLeitura" Output="CNF_LEITURA" />
+      </ECState>
+      <ECState Name="ESCRITA" x="1700" y="1100">
+        <ECAction Algorithm="AlgEscrita" Output="CNF_ESCRITA" />
+      </ECState>
+      <ECTransition Source="START" Destination="COM" Condition="REQ_COM" x="400" y="760" />
+      <ECTransition Source="COM" Destination="START" Condition="1" x="200" y="900" />
+      <ECTransition Source="START" Destination="LEITURA" Condition="REQ_LEITURA" x="1100" y="760" />
+      <ECTransition Source="LEITURA" Destination="START" Condition="1" x="900" y="900" />
+      <ECTransition Source="START" Destination="ESCRITA" Condition="REQ_ESCRITA" x="1800" y="760" />
+      <ECTransition Source="ESCRITA" Destination="START" Condition="1" x="1600" y="900" />
+    </ECC>
+    <Algorithm Name="AlgCom">
+      <ST><![CDATA[(* connStatusInt do escravo Modbus: 1 = online *)
+COM_OK := (CONEXAO = 1);]]></ST>
+    </Algorithm>
+    <Algorithm Name="AlgLeitura">
+      <ST><![CDATA[(* Registradores do ATV600 (logic addresses da planilha ATV600 V4.6). LCR, UOP e LFT sao UINT/WORD: lidos em INT,
+   voltam para 0..65535. A velocidade fica em 0,1 Hz (unidade de campo do Motor_Generico, cfgSaidaMax = 600). *)
+VELOCIDADE_CAMPO := INT_TO_REAL(RFR);
+FREQUENCIA := INT_TO_REAL(RFR) / 10.0;
+r := INT_TO_REAL(LCR);
+IF r < 0.0 THEN
+    r := r + 65536.0;
+END_IF;
+CORRENTE := r * ESCALA_CORRENTE;
+r := INT_TO_REAL(UOP);
+IF r < 0.0 THEN
+    r := r + 65536.0;
+END_IF;
+TENSAO := r;
+POTENCIA := INT_TO_REAL(OPR);
+TORQUE := INT_TO_REAL(OTR) / 10.0;
+r := INT_TO_REAL(LFT);
+IF r < 0.0 THEN
+    r := r + 65536.0;
+END_IF;
+CODIGO_FALHA := r;
+RPM := INT_TO_REAL(RFRD);]]></ST>
+    </Algorithm>
+    <Algorithm Name="AlgEscrita">
+      <ST><![CDATA[(* LFR em 0,1 Hz (faixa da planilha -5000..5000); CMD bit 7 = reset de falha, 0 fora do pulso.
+   A partida do motor continua pela saida digital (cmdAcionamento). *)
+LFR := REAL_TO_INT(LIMIT(-5000.0, VELOCIDADE, 5000.0));
+IF RESET THEN
+    CMD := 128;
+ELSE
+    CMD := 0;
+END_IF;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

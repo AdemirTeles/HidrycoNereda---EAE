@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="56e0acbe-e63f-15f1-769c-ea342bffd0a6" Name="basicStatusRemota" Comment="Estado da comunicacao de uma remota Modbus TCP" Namespace="Hidryco.HidrycoLib">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Hidryco" Version="1.0" Author="Hidryco" Date="23/10/2026" Remarks="1.0: connStatus (online/offline) do escravo MODBUSGENTCPS" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="D8FB89F910445551" Name="INIT" Comment="Inicializacao" />
+      <Event ID="5CBFC3A39A689AE7" Name="REQ" Comment="Status da conexao recebido do hardware">
+        <With Var="conn" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="53F8DD0FF6D3BB94" Name="INITO" Comment="Inicializacao concluida" />
+      <Event ID="E1D8AB57600D137E" Name="CNF_HMI" Comment="Status para a IHM (na mudanca)">
+        <With Var="stsEstado" />
+        <With Var="stsComunicando" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="5F664A6BAFC27D5F" Name="conn" Type="STRING" Comment="connStatus do escravo Modbus TCP: online / offline" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="64E083C639D0A0DD" Name="stsEstado" Type="INT" Comment="0 aguardando, 1 comunicando, 2 sem comunicacao" />
+      <VarDeclaration ID="ED85EB0A8AE1B373" Name="stsComunicando" Type="BOOL" Comment="Remota comunicando" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="23dd0d3e-3594-8719-50f2-36ff9131c954">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="algStatus" />
+    <InternalVars>
+      <VarDeclaration ID="C64D19512E9618FF" Name="initDone" Type="BOOL" />
+      <VarDeclaration ID="16B690E22C572B8D" Name="primeiro" Type="BOOL" InitialValue="TRUE" />
+      <VarDeclaration ID="5D82212D6E038DF6" Name="est" Type="INT" />
+      <VarDeclaration ID="6B7716E9E72B5CB2" Name="oldEst" Type="INT" InitialValue="-1" />
+    </InternalVars>
+    <ECC>
+      <ECState Name="START" Comment="Estado inicial" x="1500" y="640" />
+      <ECState Name="EXEC" Comment="Executa a logica; o algoritmo decide quais eventos saem" x="1500" y="1100">
+        <ECAction Algorithm="algStatus" Output="INITO" />
+        <ECAction Output="CNF_HMI" />
+      </ECState>
+      <ECTransition Source="START" Destination="EXEC" Condition="INIT OR REQ" x="1580" y="860" />
+      <ECTransition Source="EXEC" Destination="START" Condition="1" x="1420" y="860" />
+    </ECC>
+    <Algorithm Name="algStatus" Comment="Logica completa">
+      <ST><![CDATA[(* =====================================================================
+   basicStatusRemota v1.0 - estado da comunicacao de uma remota
+   connStatus do MODBUSGENTCPS: 'online' / 'offline'
+   ===================================================================== *)
+INITO   := FALSE;
+CNF_HMI := FALSE;
+IF INIT THEN
+    initDone := TRUE;
+    INITO := TRUE;
+END_IF;
+IF NOT initDone THEN
+    RETURN;
+END_IF;
+IF REQ THEN
+    IF conn = 'online' THEN
+        est := 1;
+    ELSIF conn = '' THEN
+        est := 0;
+    ELSE
+        est := 2;
+    END_IF;
+END_IF;
+stsEstado := est;
+stsComunicando := est = 1;
+IF primeiro OR (est <> oldEst) THEN
+    CNF_HMI := TRUE;
+END_IF;
+oldEst := est;
+primeiro := FALSE;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

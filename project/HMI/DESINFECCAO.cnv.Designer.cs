@@ -23,9 +23,9 @@ namespace HMI.Main.Canvases
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.btnResetGeral = new NxtControl.GuiFramework.DrawnButton();
 			this.fundo = new NxtControl.GuiFramework.Rectangle();
 			this.cardProcesso = new NxtControl.GuiFramework.Rectangle();
-			this.titulo = new NxtControl.GuiFramework.FreeText();
 			this.rEntrada = new NxtControl.GuiFramework.FreeText();
 			this.tEntrada = new NxtControl.GuiFramework.Rectangle();
 			this.sEntrada = new NxtControl.GuiFramework.Polygon();
@@ -43,6 +43,10 @@ namespace HMI.Main.Canvases
 			this.tEntCanal2 = new NxtControl.GuiFramework.Rectangle();
 			this.sCanal2 = new NxtControl.GuiFramework.Polygon();
 			this.rVC = new NxtControl.GuiFramework.FreeText();
+			this.rAIT4 = new NxtControl.GuiFramework.FreeText();
+			this.rAIT3 = new NxtControl.GuiFramework.FreeText();
+			this.rAIT1 = new NxtControl.GuiFramework.FreeText();
+			this.rFT = new NxtControl.GuiFramework.FreeText();
 			this.rUV = new NxtControl.GuiFramework.FreeText();
 			this.tSai1 = new NxtControl.GuiFramework.Rectangle();
 			this.tSai2 = new NxtControl.GuiFramework.Rectangle();
@@ -52,7 +56,6 @@ namespace HMI.Main.Canvases
 			this.parshall = new NxtControl.GuiFramework.Rectangle();
 			this.garganta = new NxtControl.GuiFramework.Polygon();
 			this.rParshall = new NxtControl.GuiFramework.FreeText();
-			this.rParshall2 = new NxtControl.GuiFramework.FreeText();
 			this.tapFT = new NxtControl.GuiFramework.Rectangle();
 			this.tapA1 = new NxtControl.GuiFramework.Rectangle();
 			this.tapA3 = new NxtControl.GuiFramework.Rectangle();
@@ -69,13 +72,12 @@ namespace HMI.Main.Canvases
 			this.setaReceptor = new NxtControl.GuiFramework.Polygon();
 			this.rReceptor = new NxtControl.GuiFramework.FreeText();
 			this.rReceptor2 = new NxtControl.GuiFramework.FreeText();
-			this.rMax = new NxtControl.GuiFramework.FreeText();
 			this.rio = new NxtControl.GuiFramework.Polygon();
 			this.rRio = new NxtControl.GuiFramework.FreeText();
 			this.rRio2 = new NxtControl.GuiFramework.FreeText();
 			this.rCtl = new NxtControl.GuiFramework.FreeText();
 			this.rUVsis = new NxtControl.GuiFramework.FreeText();
-			this.valvula = new Hidryco.HidrycoLib.Symbols.Valvula_Coester.sValvula();
+			this.valvula = new Hidryco.HidrycoLib.Symbols.Atuador_Coester.sValvula();
 			this.canal1 = new Hidryco.HidrycoLib.Symbols.UV_Trojan.sCanal1();
 			this.canal2 = new Hidryco.HidrycoLib.Symbols.UV_Trojan.sCanal2();
 			this.ft = new Hidryco.HidrycoLib.Symbols.Sensor_Generico.sDefault();
@@ -101,21 +103,13 @@ namespace HMI.Main.Canvases
 			this.cardProcesso.Name = "cardProcesso";
 			this.cardProcesso.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(200)), ((byte)(200)), ((byte)(200))), 1F, NxtControl.Drawing.DashStyle.Solid);
 			// 
-			// titulo
-			// 
-			this.titulo.Color = new NxtControl.Drawing.Color(((byte)(40)), ((byte)(40)), ((byte)(40)));
-			this.titulo.Font = new NxtControl.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Bold);
-			this.titulo.Location = new NxtControl.Drawing.PointF(24D, 14D);
-			this.titulo.Name = "titulo";
-			this.titulo.Text = "DESINFECÇÃO UV E EFLUENTE FINAL (700)";
-			// 
 			// rEntrada
 			// 
 			this.rEntrada.Color = new NxtControl.Drawing.Color(((byte)(60)), ((byte)(60)), ((byte)(60)));
 			this.rEntrada.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular);
 			this.rEntrada.Location = new NxtControl.Drawing.PointF(24D, 470D);
 			this.rEntrada.Name = "rEntrada";
-			this.rEntrada.Text = "Decante dos reatores Nereda (até 650 L/s)";
+			this.rEntrada.Text = "Decante dos reatores Nereda";
 			// 
 			// tEntrada
 			// 
@@ -168,11 +162,11 @@ namespace HMI.Main.Canvases
 			this.rTanque2.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold);
 			this.rTanque2.Location = new NxtControl.Drawing.PointF(74D, 584D);
 			this.rTanque2.Name = "rTanque2";
-			this.rTanque2.Text = "DE VAZÃO   V = 1500 m³";
+			this.rTanque2.Text = "DE VAZÃO";
 			// 
 			// tSaidaTanque
 			// 
-			this.tSaidaTanque.Bounds = new NxtControl.Drawing.RectF(((float)(294D)), ((float)(641D)), ((float)(40D)), ((float)(5D)));
+			this.tSaidaTanque.Bounds = new NxtControl.Drawing.RectF(((float)(294D)), ((float)(641D)), ((float)(49.5D)), ((float)(5D)));
 			this.tSaidaTanque.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(110)), ((byte)(110)), ((byte)(110))));
 			this.tSaidaTanque.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
 			this.tSaidaTanque.Name = "tSaidaTanque";
@@ -180,7 +174,7 @@ namespace HMI.Main.Canvases
 			// 
 			// tPosVC
 			// 
-			this.tPosVC.Bounds = new NxtControl.Drawing.RectF(((float)(410D)), ((float)(641D)), ((float)(36D)), ((float)(5D)));
+			this.tPosVC.Bounds = new NxtControl.Drawing.RectF(((float)(386.5D)), ((float)(641D)), ((float)(59.5D)), ((float)(5D)));
 			this.tPosVC.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(110)), ((byte)(110)), ((byte)(110))));
 			this.tPosVC.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
 			this.tPosVC.Name = "tPosVC";
@@ -255,10 +249,42 @@ namespace HMI.Main.Canvases
 			// rVC
 			// 
 			this.rVC.Color = new NxtControl.Drawing.Color(((byte)(60)), ((byte)(60)), ((byte)(60)));
-			this.rVC.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular);
-			this.rVC.Location = new NxtControl.Drawing.PointF(64D, 662D);
+			this.rVC.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold);
+			this.rVC.Location = new NxtControl.Drawing.PointF(339D, 672D);
 			this.rVC.Name = "rVC";
-			this.rVC.Text = "700-VC-01  borboleta modulante DN600";
+			this.rVC.Text = "700-VC-01";
+			// 
+			// rAIT4
+			// 
+			this.rAIT4.Color = new NxtControl.Drawing.Color(((byte)(60)), ((byte)(60)), ((byte)(60)));
+			this.rAIT4.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular);
+			this.rAIT4.Location = new NxtControl.Drawing.PointF(1010D, 156D);
+			this.rAIT4.Name = "rAIT4";
+			this.rAIT4.Text = "700-AIT-004 (OD)";
+			// 
+			// rAIT3
+			// 
+			this.rAIT3.Color = new NxtControl.Drawing.Color(((byte)(60)), ((byte)(60)), ((byte)(60)));
+			this.rAIT3.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular);
+			this.rAIT3.Location = new NxtControl.Drawing.PointF(892D, 115D);
+			this.rAIT3.Name = "rAIT3";
+			this.rAIT3.Text = "700-AIT-003 (pH)";
+			// 
+			// rAIT1
+			// 
+			this.rAIT1.Color = new NxtControl.Drawing.Color(((byte)(60)), ((byte)(60)), ((byte)(60)));
+			this.rAIT1.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular);
+			this.rAIT1.Location = new NxtControl.Drawing.PointF(862D, 85D);
+			this.rAIT1.Name = "rAIT1";
+			this.rAIT1.Text = "700-AIT-001 (turbidez)";
+			// 
+			// rFT
+			// 
+			this.rFT.Color = new NxtControl.Drawing.Color(((byte)(60)), ((byte)(60)), ((byte)(60)));
+			this.rFT.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular);
+			this.rFT.Location = new NxtControl.Drawing.PointF(520D, 82D);
+			this.rFT.Name = "rFT";
+			this.rFT.Text = "700-FT-01";
 			// 
 			// rUV
 			// 
@@ -266,7 +292,7 @@ namespace HMI.Main.Canvases
 			this.rUV.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular);
 			this.rUV.Location = new NxtControl.Drawing.PointF(76D, 214D);
 			this.rUV.Name = "rUV";
-			this.rUV.Text = "DESINFECÇÃO COM U.V.  -  Capacidade 345 L/s por canal";
+			this.rUV.Text = "DESINFECÇÃO COM U.V.";
 			// 
 			// tSai1
 			// 
@@ -342,14 +368,6 @@ namespace HMI.Main.Canvases
 			this.rParshall.Name = "rParshall";
 			this.rParshall.Text = "CALHA PARSHALL 700-PA-01";
 			// 
-			// rParshall2
-			// 
-			this.rParshall2.Color = new NxtControl.Drawing.Color(((byte)(60)), ((byte)(60)), ((byte)(60)));
-			this.rParshall2.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular);
-			this.rParshall2.Location = new NxtControl.Drawing.PointF(528D, 276D);
-			this.rParshall2.Name = "rParshall2";
-			this.rParshall2.Text = "garganta 1,5\"  -  até 692 L/s";
-			// 
 			// tapFT
 			// 
 			this.tapFT.Bounds = new NxtControl.Drawing.RectF(((float)(604D)), ((float)(160D)), ((float)(1D)), ((float)(62D)));
@@ -388,7 +406,7 @@ namespace HMI.Main.Canvases
 			this.rEfluente.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold);
 			this.rEfluente.Location = new NxtControl.Drawing.PointF(760D, 246D);
 			this.rEfluente.Name = "rEfluente";
-			this.rEfluente.Text = "EFLUENTE FINAL  ø800";
+			this.rEfluente.Text = "EFLUENTE FINAL";
 			// 
 			// degrau0
 			// 
@@ -485,14 +503,6 @@ namespace HMI.Main.Canvases
 			this.rReceptor2.Name = "rReceptor2";
 			this.rReceptor2.Text = "CORPO RECEPTOR";
 			// 
-			// rMax
-			// 
-			this.rMax.Color = new NxtControl.Drawing.Color(((byte)(60)), ((byte)(60)), ((byte)(60)));
-			this.rMax.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular);
-			this.rMax.Location = new NxtControl.Drawing.PointF(1150D, 312D);
-			this.rMax.Name = "rMax";
-			this.rMax.Text = "Vazão máxima 345 L/s";
-			// 
 			// rio
 			// 
 			this.rio.Bounds = new NxtControl.Drawing.RectF(((float)(1276D)), ((float)(300D)), ((float)(64D)), ((float)(40D)));
@@ -537,12 +547,12 @@ namespace HMI.Main.Canvases
 			this.rUVsis.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
 			this.rUVsis.Location = new NxtControl.Drawing.PointF(960D, 446D);
 			this.rUVsis.Name = "rUVsis";
-			this.rUVsis.Text = "SISTEMA UV (TROJAN UV3000Plus)";
+			this.rUVsis.Text = "SISTEMA UV";
 			// 
 			// valvula
 			// 
 			this.valvula.BeginInit();
-			this.valvula.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 300D, 570D);
+			this.valvula.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.5D, 0D, 0D, 0.5D, 332.5D, 607.5D);
 			this.valvula.Name = "valvula";
 			this.valvula.SecurityToken = ((uint)(4294967295u));
 			this.valvula.TagName = "8005CB77235157DB.VC_700_01";
@@ -581,7 +591,7 @@ namespace HMI.Main.Canvases
 			this.ait1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 706D, 80D);
 			this.ait1.Name = "ait1";
 			this.ait1.SecurityToken = ((uint)(4294967295u));
-			this.ait1.TagName = "8005CB77235157DB.AIT_700_001";
+			this.ait1.TagName = "8005CB77235157DB.AIT_700_01";
 			this.ait1.EndInit();
 			// 
 			// ait3
@@ -590,7 +600,7 @@ namespace HMI.Main.Canvases
 			this.ait3.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 736D, 110D);
 			this.ait3.Name = "ait3";
 			this.ait3.SecurityToken = ((uint)(4294967295u));
-			this.ait3.TagName = "8005CB77235157DB.AIT_700_003";
+			this.ait3.TagName = "8005CB77235157DB.AIT_700_03";
 			this.ait3.EndInit();
 			// 
 			// ait4
@@ -599,7 +609,7 @@ namespace HMI.Main.Canvases
 			this.ait4.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 1010D, 172D);
 			this.ait4.Name = "ait4";
 			this.ait4.SecurityToken = ((uint)(4294967295u));
-			this.ait4.TagName = "8005CB77235157DB.AIT_700_004";
+			this.ait4.TagName = "8005CB77235157DB.AIT_700_04";
 			this.ait4.EndInit();
 			// 
 			// controle
@@ -624,10 +634,22 @@ namespace HMI.Main.Canvases
 			// 
 			this.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(1366D)), ((float)(698D)));
 			this.Brush = new NxtControl.Drawing.Brush("CanvasBrush");
+			// 
+			// btnResetGeral
+			// 
+			this.btnResetGeral.Bounds = new NxtControl.Drawing.RectF(((float)(6D)), ((float)(662D)), ((float)(126D)), ((float)(30D)));
+			this.btnResetGeral.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208))));
+			this.btnResetGeral.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+			this.btnResetGeral.InnerBorderColor = new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208)));
+			this.btnResetGeral.Name = "btnResetGeral";
+			this.btnResetGeral.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(160)), ((byte)(160)), ((byte)(160))), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.btnResetGeral.Radius = 2D;
+			this.btnResetGeral.Text = "Reset geral";
+			this.btnResetGeral.Use3DEffect = false;
+			this.btnResetGeral.Click += new System.EventHandler(this.BtnResetGeralClick);
 			this.Shapes.AddRange(new System.ComponentModel.IComponent[] {
 			this.fundo,
 			this.cardProcesso,
-			this.titulo,
 			this.rEntrada,
 			this.tEntrada,
 			this.sEntrada,
@@ -645,6 +667,10 @@ namespace HMI.Main.Canvases
 			this.tEntCanal2,
 			this.sCanal2,
 			this.rVC,
+			this.rAIT4,
+			this.rAIT3,
+			this.rAIT1,
+			this.rFT,
 			this.rUV,
 			this.tSai1,
 			this.tSai2,
@@ -654,7 +680,6 @@ namespace HMI.Main.Canvases
 			this.parshall,
 			this.garganta,
 			this.rParshall,
-			this.rParshall2,
 			this.tapFT,
 			this.tapA1,
 			this.tapA3,
@@ -671,7 +696,6 @@ namespace HMI.Main.Canvases
 			this.setaReceptor,
 			this.rReceptor,
 			this.rReceptor2,
-			this.rMax,
 			this.rio,
 			this.rRio,
 			this.rRio2,
@@ -685,11 +709,11 @@ namespace HMI.Main.Canvases
 			this.ait3,
 			this.ait4,
 			this.controle,
-			this.uvSistema});
+			this.uvSistema,
+			this.btnResetGeral});
 		}
 		private NxtControl.GuiFramework.Rectangle fundo;
 		private NxtControl.GuiFramework.Rectangle cardProcesso;
-		private NxtControl.GuiFramework.FreeText titulo;
 		private NxtControl.GuiFramework.FreeText rEntrada;
 		private NxtControl.GuiFramework.Rectangle tEntrada;
 		private NxtControl.GuiFramework.Polygon sEntrada;
@@ -707,6 +731,10 @@ namespace HMI.Main.Canvases
 		private NxtControl.GuiFramework.Rectangle tEntCanal2;
 		private NxtControl.GuiFramework.Polygon sCanal2;
 		private NxtControl.GuiFramework.FreeText rVC;
+		private NxtControl.GuiFramework.FreeText rAIT4;
+		private NxtControl.GuiFramework.FreeText rAIT3;
+		private NxtControl.GuiFramework.FreeText rAIT1;
+		private NxtControl.GuiFramework.FreeText rFT;
 		private NxtControl.GuiFramework.FreeText rUV;
 		private NxtControl.GuiFramework.Rectangle tSai1;
 		private NxtControl.GuiFramework.Rectangle tSai2;
@@ -716,7 +744,6 @@ namespace HMI.Main.Canvases
 		private NxtControl.GuiFramework.Rectangle parshall;
 		private NxtControl.GuiFramework.Polygon garganta;
 		private NxtControl.GuiFramework.FreeText rParshall;
-		private NxtControl.GuiFramework.FreeText rParshall2;
 		private NxtControl.GuiFramework.Rectangle tapFT;
 		private NxtControl.GuiFramework.Rectangle tapA1;
 		private NxtControl.GuiFramework.Rectangle tapA3;
@@ -733,13 +760,12 @@ namespace HMI.Main.Canvases
 		private NxtControl.GuiFramework.Polygon setaReceptor;
 		private NxtControl.GuiFramework.FreeText rReceptor;
 		private NxtControl.GuiFramework.FreeText rReceptor2;
-		private NxtControl.GuiFramework.FreeText rMax;
 		private NxtControl.GuiFramework.Polygon rio;
 		private NxtControl.GuiFramework.FreeText rRio;
 		private NxtControl.GuiFramework.FreeText rRio2;
 		private NxtControl.GuiFramework.FreeText rCtl;
 		private NxtControl.GuiFramework.FreeText rUVsis;
-		private Hidryco.HidrycoLib.Symbols.Valvula_Coester.sValvula valvula;
+		private Hidryco.HidrycoLib.Symbols.Atuador_Coester.sValvula valvula;
 		private Hidryco.HidrycoLib.Symbols.UV_Trojan.sCanal1 canal1;
 		private Hidryco.HidrycoLib.Symbols.UV_Trojan.sCanal2 canal2;
 		private Hidryco.HidrycoLib.Symbols.Sensor_Generico.sDefault ft;
@@ -748,6 +774,7 @@ namespace HMI.Main.Canvases
 		private Hidryco.HidrycoLib.Symbols.Sensor_Generico.sCompacto ait4;
 		private Hidryco.HidrycoLib.Symbols.Desinfeccao_UV.sDefault controle;
 		private Hidryco.HidrycoLib.Symbols.UV_Trojan.sDefault uvSistema;
+		private NxtControl.GuiFramework.DrawnButton btnResetGeral;
 		#endregion
 	}
 }

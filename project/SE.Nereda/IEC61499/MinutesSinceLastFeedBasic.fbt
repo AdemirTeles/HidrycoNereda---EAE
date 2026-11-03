@@ -2,11 +2,12 @@
 <!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
 <FBType GUID="4e67e506-34ac-4be8-be8c-fc071d0b6214" Name="MinutesSinceLastFeedBasic" Comment="Basic Function Block Type" Namespace="SE.Nereda">
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="7/5/2026" Remarks="Template" />
+  <VersionInfo Organization="Schneider Electric" Version="0.1" Author=" " Date="30/10/2026" Remarks="0.1: entrada FromStarting - com TRUE conta e zera a partir do Starting (Next Feed Horizon da Feed); FALSE = como antes. Template" />
   <InterfaceList>
     <EventInputs>
       <Event ID="EB976DACF4DE8504" Name="START">
         <With Var="AllwaysStarted" />
+        <With Var="FromStarting" />
       </Event>
       <Event ID="D1A4D4DD9A455998" Name="REQ" Comment="Normal Execution Request">
         <With Var="Stopping" />
@@ -35,6 +36,7 @@
       <VarDeclaration ID="6E036EF412E3C363" Name="Stopping" Type="BOOL" />
       <VarDeclaration ID="2DC2367CDA2D6F18" Name="State" Type="INT" />
       <VarDeclaration ID="34BF8D198081A1C7" Name="R_Aborted" Type="BOOL" />
+      <VarDeclaration ID="B8594EB80F6CC763" Name="FromStarting" Type="BOOL" InitialValue="FALSE" Comment="TRUE: conta/zera a partir do Starting (Feed: Next Feed Horizon); FALSE: a partir do Run" />
     </InputVars>
     <OutputVars>
       <VarDeclaration ID="AF4A9541A64ED454" Name="Pv" Type="INT" Comment="Output event qualifier" />
@@ -69,7 +71,7 @@
       <ECTransition Source="REQ" Destination="START" Condition="1" x="3106.917" y="1318.996">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="806.5018,357.9438,746.7194,317.868" />
       </ECTransition>
-      <ECTransition Source="START" Destination="Reset" Condition="REQ AND AllwaysStarted AND Run AND NOT R_Aborted" x="3014.557" y="540.4571">
+      <ECTransition Source="START" Destination="Reset" Condition="REQ AND AllwaysStarted AND ((Run AND NOT FromStarting) OR (Starting AND FromStarting)) AND NOT R_Aborted" x="3014.557" y="540.4571">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="716.9032,142.0288,775.4105,112.3767" />
       </ECTransition>
       <ECTransition Source="Reset" Destination="IdleState" Condition="I_DELAY" x="3609.353" y="645.7252">
@@ -93,7 +95,8 @@
     </ECC>
     <Algorithm Name="REQ">
       <ST><![CDATA[;
-IF (Starting AND State = 1) OR (Run AND State = 2) OR (Stopping AND State = 3) THEN
+IF (Starting AND State = 1) OR (Run AND State = 2) OR (Stopping AND State = 3) OR
+   (FromStarting AND Starting AND State = 2) THEN
 	Pv := 1;
 ELSE
 	Pv := 0;

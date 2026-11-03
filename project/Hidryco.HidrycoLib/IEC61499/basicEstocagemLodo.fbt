@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="2ffcb8c4-d225-6146-9f8b-cf1be4d342fe" Name="basicEstocagemLodo" Comment="Tanques de estocagem de lodo: sopradores 1+1 com rodizio e intertravamento de nivel das bombas" Namespace="Hidryco.HidrycoLib">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Hidryco" Version="1.1" Author="Hidryco" Date="21/10/2026" Remarks="1.1: revezamento com horas por soprador (revHabilita, stpTempoB1/B2, padrao do sub-CAT Revezamento) e tempo restante (stsRestanteHor/Min/Seg). 1.0: um soprador sempre ligado no automatico, rodizio por horas (liga o outro antes de desligar), substituicao por indisponibilidade; VA-01/02 e VB-03/04 abertas no automatico; nivel baixo dos tanques com histerese" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="243DC77CA0D0953F" Name="INIT" Comment="Inicializacao" />
+      <Event ID="DFFA20E8FEFD328B" Name="REQ_SO" Comment="900-SO-01/02">
+        <With Var="so1Disp" />
+        <With Var="so1Lig" />
+        <With Var="so2Disp" />
+        <With Var="so2Lig" />
+      </Event>
+      <Event ID="EA4444D55C79B643" Name="REQ_LIT" Comment="900-LIT-01/02 (% da faixa)">
+        <With Var="lit1Pct" />
+        <With Var="lit1Falha" />
+        <With Var="lit2Pct" />
+        <With Var="lit2Falha" />
+      </Event>
+      <Event ID="EBAA94C91027AB04" Name="REQ_EMERG" Comment="Emergencia do PCM LODO">
+        <With Var="emergencia" />
+      </Event>
+      <Event ID="C2DAB560DFFB8D5C" Name="REQ_PARA" Comment="IHM: parametros">
+        <With Var="habSopradores" />
+        <With Var="revHabilita" />
+        <With Var="stpTempoB1" />
+        <With Var="stpTempoB2" />
+        <With Var="stpNivelMinTQ" />
+        <With Var="stpNivelRetomaTQ" />
+      </Event>
+      <Event ID="E8C8FA9D941AAB25" Name="TICK" Comment="Base de tempo de 1 s" />
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="5F76B62564497316" Name="INITO" Comment="Inicializacao concluida" />
+      <Event ID="A37D04399243417C" Name="CNF_SO" Comment="Comando dos sopradores">
+        <With Var="cmdSO1" />
+        <With Var="cmdSO2" />
+        <With Var="emergOut" />
+      </Event>
+      <Event ID="820328527C60D44B" Name="CNF_VAL" Comment="VA-01, VA-02, VB-03 e VB-04 abertas no automatico">
+        <With Var="cmdAbrirTQ" />
+      </Event>
+      <Event ID="DD4EDADF061294FF" Name="CNF" Comment="Intertravamento das bombas por nivel dos tanques">
+        <With Var="stsNivelBaixoTQ" />
+      </Event>
+      <Event ID="12E6850BBBD0B68E" Name="CNF_HMI" Comment="Status para a IHM e alarmes">
+        <With Var="stsSoAtivo" />
+        <With Var="stsSoTransferindo" />
+        <With Var="stsSoHorasAtual" />
+        <With Var="stsSemSoprador" />
+        <With Var="stsNivelTQ" />
+        <With Var="stsNivelBaixoTQ" />
+        <With Var="stsSemNivelTQ" />
+        <With Var="stsRestanteHor" />
+        <With Var="stsRestanteMin" />
+        <With Var="stsRestanteSeg" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="9D0A018985052F58" Name="so1Disp" Type="BOOL" Comment="SO-01 disponivel para o automatico" />
+      <VarDeclaration ID="C050A723D1972718" Name="so1Lig" Type="BOOL" Comment="SO-01 ligado" />
+      <VarDeclaration ID="6442D6171574AD0F" Name="so2Disp" Type="BOOL" Comment="SO-02 disponivel para o automatico" />
+      <VarDeclaration ID="DB889EF87AAB0D82" Name="so2Lig" Type="BOOL" Comment="SO-02 ligado" />
+      <VarDeclaration ID="76186D6114386881" Name="lit1Pct" Type="REAL" Comment="LIT-01 (% da faixa)" />
+      <VarDeclaration ID="DEE813645F20FA9B" Name="lit1Falha" Type="BOOL" Comment="LIT-01 em falha" />
+      <VarDeclaration ID="8747D35EC434F184" Name="lit2Pct" Type="REAL" Comment="LIT-02 (% da faixa)" />
+      <VarDeclaration ID="284C3EA5513A6D62" Name="lit2Falha" Type="BOOL" Comment="LIT-02 em falha" />
+      <VarDeclaration ID="8603BC9EB66FE144" Name="emergencia" Type="BOOL" Comment="Emergencia do PCM LODO" />
+      <VarDeclaration ID="5CF5D34DC0BD4690" Name="habSopradores" Type="BOOL" Comment="Sopradores no automatico (um sempre ligado)" />
+      <VarDeclaration ID="7307922C026394A4" Name="revHabilita" Type="BOOL" Comment="Troca do soprador principal por tempo" />
+      <VarDeclaration ID="ABC6D729A9607229" Name="stpTempoB1" Type="UINT" Comment="Horas do SO-01 como principal; 0 = sem troca por tempo" />
+      <VarDeclaration ID="F2FB54ACA0B1231D" Name="stpTempoB2" Type="UINT" Comment="Horas do SO-02 como principal; 0 = sem troca por tempo" />
+      <VarDeclaration ID="834BCC8A73E45242" Name="stpNivelMinTQ" Type="REAL" Comment="Nivel minimo dos tanques para as bombas (%); 0 = sem intertravamento" />
+      <VarDeclaration ID="6A41927EA4F7A44E" Name="stpNivelRetomaTQ" Type="REAL" Comment="Nivel para retomar as bombas (%)" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="6EEF3183DA620253" Name="cmdSO1" Type="BOOL" Comment="Liga SO-01 (automatico)" />
+      <VarDeclaration ID="8F8F344FCE172148" Name="cmdSO2" Type="BOOL" Comment="Liga SO-02 (automatico)" />
+      <VarDeclaration ID="821D8F0728BFD8D2" Name="emergOut" Type="BOOL" Comment="Emergencia repassada aos sopradores" />
+      <VarDeclaration ID="937510DD507F2D1B" Name="cmdAbrirTQ" Type="BOOL" Comment="Abre VA-01, VA-02, VB-03 e VB-04 (sempre abertas no automatico)" />
+      <VarDeclaration ID="0C2557554843B422" Name="stsSoAtivo" Type="INT" Comment="Soprador designado: 0 nenhum, 1 SO-01, 2 SO-02" />
+      <VarDeclaration ID="0C18C6251210ADD2" Name="stsSoTransferindo" Type="BOOL" Comment="Rodizio em andamento (os dois ligados)" />
+      <VarDeclaration ID="4235B19D4DDCC680" Name="stsSoHorasAtual" Type="INT" Comment="Horas do soprador atual desde a ultima troca" />
+      <VarDeclaration ID="00131AAE1783E6A4" Name="stsSemSoprador" Type="BOOL" Comment="Automatico sem nenhum soprador disponivel (risco de sedimentacao)" />
+      <VarDeclaration ID="27E22A4C9A4D8B67" Name="stsNivelTQ" Type="REAL" Comment="Nivel usado no intertravamento (maior entre LIT-01 e LIT-02 validos, %)" />
+      <VarDeclaration ID="9185345097862782" Name="stsNivelBaixoTQ" Type="BOOL" Comment="Tanques de estocagem em nivel baixo: bombas suspensas" />
+      <VarDeclaration ID="7A648FEA2F2E214A" Name="stsSemNivelTQ" Type="BOOL" Comment="LIT-01 e LIT-02 em falha: bombas suspensas" />
+      <VarDeclaration ID="C56DE563E1383C2E" Name="stsRestanteHor" Type="UINT" Comment="Tempo para a troca do soprador principal (h)" />
+      <VarDeclaration ID="6097DB009BDB40DE" Name="stsRestanteMin" Type="UINT" Comment="Tempo para a troca do soprador principal (min)" />
+      <VarDeclaration ID="53980AC2D919D417" Name="stsRestanteSeg" Type="UINT" Comment="Tempo para a troca do soprador principal (s)" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="8f33c477-753f-4778-40cb-192ce7f76197">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="algEstocagem" />
+    <InternalVars>
+      <VarDeclaration ID="745ECB3CEA4D2BDC" Name="initDone" Type="BOOL" />
+      <VarDeclaration ID="684623E893DFCC6E" Name="primeiro" Type="BOOL" InitialValue="TRUE" />
+      <VarDeclaration ID="04A654137D382BF9" Name="ativo" Type="INT" />
+      <VarDeclaration ID="F6EBECD4E4C36D70" Name="tRod" Type="DINT" Comment="Segundos de operacao do soprador atual" />
+      <VarDeclaration ID="00989268A759BF27" Name="dLim" Type="DINT" />
+      <VarDeclaration ID="98B84FA0C45CD03C" Name="rest" Type="DINT" Comment="Segundos ate a troca do soprador principal" />
+      <VarDeclaration ID="BE0EA02AAB61A184" Name="rRet" Type="REAL" />
+      <VarDeclaration ID="F095585F17A8FE64" Name="v1" Type="BOOL" />
+      <VarDeclaration ID="ADBD7B6A73FDABBE" Name="v2" Type="BOOL" />
+      <VarDeclaration ID="7CEECA4EB748987C" Name="tVal" Type="INT" />
+      <VarDeclaration ID="3637133D41926B9F" Name="oldC1" Type="BOOL" />
+      <VarDeclaration ID="61739BFFD67BADF9" Name="oldC2" Type="BOOL" />
+      <VarDeclaration ID="19C661F793D34C59" Name="oldEm" Type="BOOL" />
+      <VarDeclaration ID="D65708095993A24C" Name="oldBaixo" Type="BOOL" />
+      <VarDeclaration ID="66C12A13EB106A4D" Name="sig" Type="INT" />
+      <VarDeclaration ID="2088E658BA0BAF27" Name="oldSig" Type="INT" InitialValue="-1" />
+    </InternalVars>
+    <ECC>
+      <ECState Name="START" Comment="Estado inicial" x="1500" y="640" />
+      <ECState Name="EXEC" Comment="Executa a logica; o algoritmo decide quais eventos saem" x="1500" y="1100">
+        <ECAction Algorithm="algEstocagem" Output="INITO" />
+        <ECAction Output="CNF_SO" />
+        <ECAction Output="CNF_VAL" />
+        <ECAction Output="CNF" />
+        <ECAction Output="CNF_HMI" />
+      </ECState>
+      <ECTransition Source="START" Destination="EXEC" Condition="INIT OR REQ_SO OR REQ_LIT OR REQ_EMERG OR REQ_PARA OR TICK" x="1580" y="860" />
+      <ECTransition Source="EXEC" Destination="START" Condition="1" x="1420" y="860" />
+    </ECC>
+    <Algorithm Name="algEstocagem" Comment="Logica completa (um unico algoritmo)">
+      <ST><![CDATA[(* =====================================================================
+   basicEstocagemLodo v1.1 - tanques de estocagem de lodo (900, CAT Fase_Solida)
+   EF 4.8.1: dois sopradores tri-lobulares 1+1 com rodizio e substituicao;
+   em automatico pelo menos um soprador sempre ligado (desligar os dois so em
+   manual). VB-03/VB-04 (ar) e VA-01/VA-02 (saida dos tanques) sempre abertas
+   no automatico (decisao do usuario). Intertravamento das bombas 900-BO por
+   nivel baixo (maior nivel valido entre LIT-01 e LIT-02, % da faixa).
+   ===================================================================== *)
+
+INITO   := FALSE;
+CNF_SO  := FALSE;
+CNF_VAL := FALSE;
+CNF     := FALSE;
+CNF_HMI := FALSE;
+
+IF INIT THEN
+    initDone := TRUE;
+    INITO := TRUE;
+END_IF;
+IF NOT initDone THEN
+    RETURN;
+END_IF;
+
+(* ---- 1. Sopradores ---- *)
+IF NOT habSopradores THEN
+    ativo := 0;
+    stsSoTransferindo := FALSE;
+ELSE
+    IF (ativo = 1) AND NOT so1Disp AND so2Disp THEN
+        ativo := 2; stsSoTransferindo := FALSE; tRod := 0;          (* substituicao *)
+    ELSIF (ativo = 2) AND NOT so2Disp AND so1Disp THEN
+        ativo := 1; stsSoTransferindo := FALSE; tRod := 0;
+    ELSIF ativo = 0 THEN
+        IF so1Disp THEN ativo := 1; tRod := 0;
+        ELSIF so2Disp THEN ativo := 2; tRod := 0;
+        END_IF;
+    END_IF;
+    IF ativo = 2 THEN                                               (* horas do soprador atual como principal *)
+        dLim := UINT_TO_DINT(stpTempoB2) * 3600;
+    ELSE
+        dLim := UINT_TO_DINT(stpTempoB1) * 3600;
+    END_IF;
+    IF NOT stsSoTransferindo AND revHabilita AND (dLim > 0) AND (tRod >= dLim) THEN
+        IF ((ativo = 1) AND so2Disp) OR ((ativo = 2) AND so1Disp) THEN
+            stsSoTransferindo := TRUE;                              (* liga o outro antes de desligar o atual *)
+        END_IF;
+    END_IF;
+    IF stsSoTransferindo THEN
+        IF (ativo = 1) AND so2Lig THEN
+            ativo := 2; stsSoTransferindo := FALSE; tRod := 0;
+        ELSIF (ativo = 2) AND so1Lig THEN
+            ativo := 1; stsSoTransferindo := FALSE; tRod := 0;
+        ELSIF ((ativo = 1) AND NOT so2Disp) OR ((ativo = 2) AND NOT so1Disp) THEN
+            stsSoTransferindo := FALSE;
+        END_IF;
+    END_IF;
+END_IF;
+IF TICK AND (((ativo = 1) AND so1Lig) OR ((ativo = 2) AND so2Lig)) AND (tRod < 2000000000) THEN
+    tRod := tRod + 1;
+END_IF;
+cmdSO1 := habSopradores AND ((ativo = 1) OR (stsSoTransferindo AND (ativo = 2)));
+cmdSO2 := habSopradores AND ((ativo = 2) OR (stsSoTransferindo AND (ativo = 1)));
+emergOut := emergencia;
+stsSoAtivo := ativo;
+stsSoHorasAtual := DINT_TO_INT(tRod / 3600);
+(* tempo para a troca do principal: 0 = sem troca por tempo (desabilitada, 0 h ou sem soprador) *)
+rest := 0;
+IF habSopradores AND revHabilita AND (ativo > 0) AND (dLim > 0) AND (tRod < dLim) THEN
+    rest := dLim - tRod;
+END_IF;
+stsRestanteHor := DINT_TO_UINT(rest / 3600);
+stsRestanteMin := DINT_TO_UINT((rest MOD 3600) / 60);
+stsRestanteSeg := DINT_TO_UINT(rest MOD 60);
+stsSemSoprador := habSopradores AND NOT so1Disp AND NOT so2Disp AND NOT so1Lig AND NOT so2Lig;
+IF primeiro OR TICK OR (cmdSO1 <> oldC1) OR (cmdSO2 <> oldC2) OR (emergencia <> oldEm) THEN
+    CNF_SO := TRUE;
+    oldC1 := cmdSO1; oldC2 := cmdSO2; oldEm := emergencia;
+END_IF;
+
+(* ---- 2. Valvulas sempre abertas no automatico (reenvio a cada 10 s) ---- *)
+cmdAbrirTQ := TRUE;
+IF TICK THEN
+    tVal := tVal + 1;
+END_IF;
+IF primeiro OR (tVal >= 10) THEN
+    CNF_VAL := TRUE;
+    tVal := 0;
+END_IF;
+
+(* ---- 3. Nivel dos tanques ---- *)
+v1 := NOT lit1Falha;
+v2 := NOT lit2Falha;
+stsSemNivelTQ := NOT v1 AND NOT v2;
+IF v1 AND v2 THEN
+    stsNivelTQ := MAX(lit1Pct, lit2Pct);
+ELSIF v1 THEN
+    stsNivelTQ := lit1Pct;
+ELSIF v2 THEN
+    stsNivelTQ := lit2Pct;
+ELSE
+    stsNivelTQ := 0.0;
+END_IF;
+rRet := MAX(stpNivelRetomaTQ, stpNivelMinTQ);
+IF stpNivelMinTQ <= 0.0 THEN
+    stsNivelBaixoTQ := FALSE;              (* intertravamento desligado *)
+    stsSemNivelTQ := FALSE;
+ELSIF stsSemNivelTQ THEN
+    stsNivelBaixoTQ := TRUE;               (* sem medicao valida: protege as bombas *)
+ELSIF stsNivelTQ < stpNivelMinTQ THEN
+    stsNivelBaixoTQ := TRUE;
+ELSIF stsNivelTQ >= rRet THEN
+    stsNivelBaixoTQ := FALSE;
+END_IF;
+IF primeiro OR TICK OR (stsNivelBaixoTQ <> oldBaixo) THEN
+    CNF := TRUE;
+    oldBaixo := stsNivelBaixoTQ;
+END_IF;
+
+(* ---- 4. IHM ---- *)
+sig := ativo;
+IF stsSoTransferindo THEN sig := sig + 4; END_IF;
+IF stsSemSoprador THEN sig := sig + 8; END_IF;
+IF stsNivelBaixoTQ THEN sig := sig + 16; END_IF;
+IF stsSemNivelTQ THEN sig := sig + 32; END_IF;
+IF primeiro OR TICK OR REQ_PARA OR (sig <> oldSig) THEN
+    CNF_HMI := TRUE;
+END_IF;
+oldSig := sig;
+primeiro := FALSE;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

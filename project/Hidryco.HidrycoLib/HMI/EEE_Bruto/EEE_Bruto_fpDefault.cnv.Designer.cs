@@ -22,6 +22,7 @@ namespace Hidryco.HidrycoLib.Faceplates.EEE_Bruto
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary1 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary2 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary3 = new NxtControl.GuiFramework.PropertyDictionary();
+			this.xHz_velocidade = new System.HMI.Symbols.Base.Execute<float>();
 			this.cabecalho = new NxtControl.GuiFramework.Rectangle();
 			this.textoEstado = new NxtControl.GuiFramework.FreeText();
 			this.alP1 = new NxtControl.GuiFramework.Rectangle();
@@ -81,13 +82,9 @@ namespace Hidryco.HidrycoLib.Faceplates.EEE_Bruto
 			this.btnReset = new NxtControl.GuiFramework.DrawnButton();
 			this.btnAjustes = new NxtControl.GuiFramework.DrawnButton();
 			this.xEstado = new System.HMI.Symbols.Base.Execute<short>();
-			this.xNec = new System.HMI.Symbols.Base.Execute<ushort>();
 			this.xLigadas = new System.HMI.Symbols.Base.Execute<ushort>();
 			this.xPrincipal = new System.HMI.Symbols.Base.Execute<ushort>();
 			this.xSegunda = new System.HMI.Symbols.Base.Execute<ushort>();
-			this.xRh = new System.HMI.Symbols.Base.Execute<ushort>();
-			this.xRm = new System.HMI.Symbols.Base.Execute<ushort>();
-			this.xRs = new System.HMI.Symbols.Base.Execute<ushort>();
 			this.xRecalque = new System.HMI.Symbols.Base.Execute<bool>();
 			this.xBoiaH = new System.HMI.Symbols.Base.Execute<bool>();
 			this.xBoiaL = new System.HMI.Symbols.Base.Execute<bool>();
@@ -97,6 +94,10 @@ namespace Hidryco.HidrycoLib.Faceplates.EEE_Bruto
 			this.xERecalque = new System.HMI.Symbols.Base.Execute<byte>();
 			this.xENivelAlto = new System.HMI.Symbols.Base.Execute<byte>();
 			this.xEFalhaBoia = new System.HMI.Symbols.Base.Execute<byte>();
+			this.stNecessidade = new Hidryco.HidrycoLib.Symbols.Controle_Necessidade.sStatus();
+			this.stRevezamento = new Hidryco.HidrycoLib.Symbols.Controle_Revezamento_3.sStatus();
+			this.stPID = new Hidryco.HidrycoLib.Symbols.Controle_PID.sStatus();
+			this.textoSituacao = new NxtControl.GuiFramework.FreeText();
 			// 
 			// cabecalho
 			// 
@@ -112,7 +113,7 @@ namespace Hidryco.HidrycoLib.Faceplates.EEE_Bruto
 			this.textoEstado.Font = new NxtControl.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Bold);
 			this.textoEstado.Location = new NxtControl.Drawing.PointF(20D, 12D);
 			this.textoEstado.Name = "textoEstado";
-			this.textoEstado.Text = "Parada";
+			this.textoEstado.Text = "Controle";
 			// 
 			// alP1
 			// 
@@ -309,8 +310,7 @@ namespace Hidryco.HidrycoLib.Faceplates.EEE_Bruto
 			propertyDictionary2.Add("Brush", new NxtControl.Drawing.Brush(true));
 			propertyDictionary2.Add("Pen", new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("Transparent"), 1F, NxtControl.Drawing.DashStyle.Solid));
 			this.velocidade.Ranges.DefaultPropertyValues = propertyDictionary2;
-			this.velocidade.Suffix = " %";
-			this.velocidade.TagName = "STS_VELOCIDADE";
+			this.velocidade.Suffix = " Hz";
 			this.velocidade.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleRight;
 			this.velocidade.EndInit();
 			// 
@@ -348,8 +348,7 @@ namespace Hidryco.HidrycoLib.Faceplates.EEE_Bruto
 			propertyDictionary3.Add("Brush", new NxtControl.Drawing.Brush(true));
 			propertyDictionary3.Add("Pen", new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("Transparent"), 1F, NxtControl.Drawing.DashStyle.Solid));
 			this.saidaPid.Ranges.DefaultPropertyValues = propertyDictionary3;
-			this.saidaPid.Suffix = " %";
-			this.saidaPid.TagName = "stsSaidaPID";
+			this.saidaPid.Suffix = " Hz";
 			this.saidaPid.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleRight;
 			this.saidaPid.EndInit();
 			// 
@@ -439,7 +438,7 @@ namespace Hidryco.HidrycoLib.Faceplates.EEE_Bruto
 			this.rRecalque.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular);
 			this.rRecalque.Location = new NxtControl.Drawing.PointF(22D, 378D);
 			this.rRecalque.Name = "rRecalque";
-			this.rRecalque.Text = "Falha de recalque (PIT-01)";
+			this.rRecalque.Text = "Falha de recalque (PT-01)";
 			// 
 			// nRecalque
 			// 
@@ -673,18 +672,6 @@ namespace Hidryco.HidrycoLib.Faceplates.EEE_Bruto
 			this.xEstado.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.EstadoValueChanged);
 			this.xEstado.EndInit();
 			// 
-			// xNec
-			// 
-			this.xNec.BeginInit();
-			this.xNec.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, double.NaN, double.NaN);
-			this.xNec.IsOnlyInput = true;
-			this.xNec.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
-			this.xNec.Name = "xNec";
-			this.xNec.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
-			this.xNec.TagName = "STS_NECESSIDADE_EQUIPAMENTO";
-			this.xNec.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.NecessidadeValueChanged);
-			this.xNec.EndInit();
-			// 
 			// xLigadas
 			// 
 			this.xLigadas.BeginInit();
@@ -720,42 +707,6 @@ namespace Hidryco.HidrycoLib.Faceplates.EEE_Bruto
 			this.xSegunda.TagName = "STS_SEGUNDA";
 			this.xSegunda.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.SegundaValueChanged);
 			this.xSegunda.EndInit();
-			// 
-			// xRh
-			// 
-			this.xRh.BeginInit();
-			this.xRh.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, double.NaN, double.NaN);
-			this.xRh.IsOnlyInput = true;
-			this.xRh.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
-			this.xRh.Name = "xRh";
-			this.xRh.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
-			this.xRh.TagName = "STS_RESTANTE_HOR";
-			this.xRh.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.RhValueChanged);
-			this.xRh.EndInit();
-			// 
-			// xRm
-			// 
-			this.xRm.BeginInit();
-			this.xRm.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, double.NaN, double.NaN);
-			this.xRm.IsOnlyInput = true;
-			this.xRm.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
-			this.xRm.Name = "xRm";
-			this.xRm.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
-			this.xRm.TagName = "STS_RESTANTE_MIN";
-			this.xRm.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.RmValueChanged);
-			this.xRm.EndInit();
-			// 
-			// xRs
-			// 
-			this.xRs.BeginInit();
-			this.xRs.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, double.NaN, double.NaN);
-			this.xRs.IsOnlyInput = true;
-			this.xRs.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
-			this.xRs.Name = "xRs";
-			this.xRs.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
-			this.xRs.TagName = "STS_RESTANTE_SEG";
-			this.xRs.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.RsValueChanged);
-			this.xRs.EndInit();
 			// 
 			// xRecalque
 			// 
@@ -870,7 +821,61 @@ namespace Hidryco.HidrycoLib.Faceplates.EEE_Bruto
 			this.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(400D)), ((float)(518D)));
 			this.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(224)), ((byte)(224)), ((byte)(224))));
 			this.Name = "fpDefault";
+			// 
+			// stNecessidade
+			// 
+			this.stNecessidade.BeginInit();
+			this.stNecessidade.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 0D, 0D);
+			this.stNecessidade.Name = "stNecessidade";
+			this.stNecessidade.SecurityToken = ((uint)(4294967295u));
+			this.stNecessidade.TagName = "Necessidade";
+			this.stNecessidade.STS_NECESSIDADE_EQUIPAMENTO_Mudou += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.NecessidadeValueChanged);
+			this.stNecessidade.EndInit();
+			// 
+			// stRevezamento
+			// 
+			this.stRevezamento.BeginInit();
+			this.stRevezamento.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 0D, 0D);
+			this.stRevezamento.Name = "stRevezamento";
+			this.stRevezamento.SecurityToken = ((uint)(4294967295u));
+			this.stRevezamento.TagName = "Revezamento";
+			this.stRevezamento.STS_RESTANTE_HOR_Mudou += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.RhValueChanged);
+			this.stRevezamento.STS_RESTANTE_MIN_Mudou += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.RmValueChanged);
+			this.stRevezamento.STS_RESTANTE_SEG_Mudou += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.RsValueChanged);
+			this.stRevezamento.EndInit();
+			// 
+			// stPID
+			// 
+			this.stPID.BeginInit();
+			this.stPID.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 0D, 0D);
+			this.stPID.Name = "stPID";
+			this.stPID.SecurityToken = ((uint)(4294967295u));
+			this.stPID.TagName = "PID";
+			this.stPID.stsSaidaPID_Mudou += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.Hz_saidaPidValueChanged);
+			this.stPID.EndInit();
+			// 
+			// textoSituacao
+			// 
+			this.textoSituacao.Color = new NxtControl.Drawing.Color(((byte)(64)), ((byte)(64)), ((byte)(64)));
+			this.textoSituacao.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular);
+			this.textoSituacao.Location = new NxtControl.Drawing.PointF(130D, 15D);
+			this.textoSituacao.Name = "textoSituacao";
+			this.textoSituacao.Text = "Parada";
+			// 
+			// xHz_velocidade
+			// 
+			this.xHz_velocidade.BeginInit();
+			this.xHz_velocidade.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, double.NaN, double.NaN);
+			this.xHz_velocidade.IsOnlyInput = true;
+			this.xHz_velocidade.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
+			this.xHz_velocidade.Name = "xHz_velocidade";
+			this.xHz_velocidade.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
+			this.xHz_velocidade.TagName = "STS_VELOCIDADE";
+			this.xHz_velocidade.Value = 0F;
+			this.xHz_velocidade.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.Hz_velocidadeValueChanged);
+			this.xHz_velocidade.EndInit();
 			this.Shapes.AddRange(new System.ComponentModel.IComponent[] {
+			this.xHz_velocidade,
 			this.cabecalho,
 			this.textoEstado,
 			this.alP1,
@@ -930,13 +935,9 @@ namespace Hidryco.HidrycoLib.Faceplates.EEE_Bruto
 			this.btnReset,
 			this.btnAjustes,
 			this.xEstado,
-			this.xNec,
 			this.xLigadas,
 			this.xPrincipal,
 			this.xSegunda,
-			this.xRh,
-			this.xRm,
-			this.xRs,
 			this.xRecalque,
 			this.xBoiaH,
 			this.xBoiaL,
@@ -945,7 +946,11 @@ namespace Hidryco.HidrycoLib.Faceplates.EEE_Bruto
 			this.xBuffer,
 			this.xERecalque,
 			this.xENivelAlto,
-			this.xEFalhaBoia});
+			this.xEFalhaBoia,
+			this.stNecessidade,
+			this.stRevezamento,
+			this.stPID,
+			this.textoSituacao});
 			this.Size = new System.Drawing.Size(400, 518);
 
 		}
@@ -1008,13 +1013,9 @@ namespace Hidryco.HidrycoLib.Faceplates.EEE_Bruto
 		private NxtControl.GuiFramework.DrawnButton btnReset;
 		private NxtControl.GuiFramework.DrawnButton btnAjustes;
 		private System.HMI.Symbols.Base.Execute<short> xEstado;
-		private System.HMI.Symbols.Base.Execute<ushort> xNec;
 		private System.HMI.Symbols.Base.Execute<ushort> xLigadas;
 		private System.HMI.Symbols.Base.Execute<ushort> xPrincipal;
 		private System.HMI.Symbols.Base.Execute<ushort> xSegunda;
-		private System.HMI.Symbols.Base.Execute<ushort> xRh;
-		private System.HMI.Symbols.Base.Execute<ushort> xRm;
-		private System.HMI.Symbols.Base.Execute<ushort> xRs;
 		private System.HMI.Symbols.Base.Execute<bool> xRecalque;
 		private System.HMI.Symbols.Base.Execute<bool> xBoiaH;
 		private System.HMI.Symbols.Base.Execute<bool> xBoiaL;
@@ -1024,6 +1025,11 @@ namespace Hidryco.HidrycoLib.Faceplates.EEE_Bruto
 		private System.HMI.Symbols.Base.Execute<byte> xERecalque;
 		private System.HMI.Symbols.Base.Execute<byte> xENivelAlto;
 		private System.HMI.Symbols.Base.Execute<byte> xEFalhaBoia;
+		private System.HMI.Symbols.Base.Execute<float> xHz_velocidade;
+		private Hidryco.HidrycoLib.Symbols.Controle_Necessidade.sStatus stNecessidade;
+		private Hidryco.HidrycoLib.Symbols.Controle_Revezamento_3.sStatus stRevezamento;
+		private Hidryco.HidrycoLib.Symbols.Controle_PID.sStatus stPID;
+		private NxtControl.GuiFramework.FreeText textoSituacao;
 		#endregion
 	}
 }

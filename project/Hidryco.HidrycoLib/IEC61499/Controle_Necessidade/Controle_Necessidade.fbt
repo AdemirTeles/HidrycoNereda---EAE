@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="ae5b4fc6-73cf-a02f-411b-993d4e9cd0e6" Name="Controle_Necessidade" Comment="Necessidade de equipamentos por faixas de nivel (padrao Necessidade_2_Equipamentos do legado)" Namespace="Hidryco.HidrycoLib">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Hidryco" Version="1.0" Author="Hidryco" Date="21/10/2026" Remarks="1.0: Necessidade de equipamentos por faixas de nivel (padrao Necessidade_2_Equipamentos do legado)" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="3304F06E342FF911" Name="REQ" Comment="Status vindo do processo">
+        <With Var="STS_NECESSIDADE_EQUIPAMENTO" />
+        <With Var="STS_NIVEL" />
+      </Event>
+      <Event ID="BF5A5000C611AF6E" Name="RECARREGA" Comment="Reenvia os ajustes persistentes (chamado no fim do INIT do processo)" />
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="0F2BD63F330E2BDA" Name="CNF" Comment="Ajustes para o processo (mudanca na IHM, OPC UA ou recarga)">
+        <With Var="CMD_HABILITA" />
+        <With Var="STP_LIMITE_FAIXA_1" />
+        <With Var="STP_LIMITE_FAIXA_2" />
+        <With Var="STP_LIMITE_FAIXA_3" />
+        <With Var="STP_LIMITE_FAIXA_4" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="26BC67DB3AB94B29" Name="STS_NECESSIDADE_EQUIPAMENTO" Type="UINT" Comment="Equipamentos pedidos pelas faixas" />
+      <VarDeclaration ID="26C50C1A131DC8B6" Name="STS_NIVEL" Type="REAL" Comment="Nivel comparado com as faixas (% da altura)" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="F8E4EB0276D578DB" Name="CMD_HABILITA" Type="BOOL" Comment="Habilitado" />
+      <VarDeclaration ID="5126CE4A870E517F" Name="STP_LIMITE_FAIXA_1" Type="REAL" Comment="Limite da faixa 1" />
+      <VarDeclaration ID="FCED367007BA1689" Name="STP_LIMITE_FAIXA_2" Type="REAL" Comment="Limite da faixa 2" />
+      <VarDeclaration ID="4B45B05E6464EEE7" Name="STP_LIMITE_FAIXA_3" Type="REAL" Comment="Limite da faixa 3" />
+      <VarDeclaration ID="B1260102A6291D33" Name="STP_LIMITE_FAIXA_4" Type="REAL" Comment="Limite da faixa 4" />
+    </OutputVars>
+  </InterfaceList>
+  <FBNetwork>
+    <FB ID="513BB50BE0C436FA" Name="IThis" Type="Controle_Necessidade_HMI" x="2400" y="600" Namespace="Hidryco.HidrycoLib">
+      <Parameter Name="$1F30796EB21014F5" Value="TRUE" />
+    </FB>
+    <FB ID="12F0502B62A3AB0B" Name="plcStart1" Type="plcStart" x="600" y="200" Namespace="SE.App2Base">
+      <Parameter Name="$Prio" Value="10" />
+    </FB>
+    <Input ID="3304F06E342FF911" Name="REQ" x="200" y="200" Type="Event" />
+    <Input ID="BF5A5000C611AF6E" Name="RECARREGA" x="200" y="260" Type="Event" />
+    <Input ID="26BC67DB3AB94B29" Name="STS_NECESSIDADE_EQUIPAMENTO" x="200" y="320" Type="Data" />
+    <Input ID="26C50C1A131DC8B6" Name="STS_NIVEL" x="200" y="380" Type="Data" />
+    <Output ID="0F2BD63F330E2BDA" Name="CNF" x="14000" y="200" Type="Event" />
+    <Output ID="F8E4EB0276D578DB" Name="CMD_HABILITA" x="14000" y="260" Type="Data" />
+    <Output ID="5126CE4A870E517F" Name="STP_LIMITE_FAIXA_1" x="14000" y="320" Type="Data" />
+    <Output ID="FCED367007BA1689" Name="STP_LIMITE_FAIXA_2" x="14000" y="380" Type="Data" />
+    <Output ID="4B45B05E6464EEE7" Name="STP_LIMITE_FAIXA_3" x="14000" y="440" Type="Data" />
+    <Output ID="B1260102A6291D33" Name="STP_LIMITE_FAIXA_4" x="14000" y="500" Type="Data" />
+    <EventConnections>
+      <Connection Source="$12F0502B62A3AB0B.FIRST_INIT" Destination="$513BB50BE0C436FA.621A81CCC76CE764">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$12F0502B62A3AB0B.REDO_INIT" Destination="$513BB50BE0C436FA.621A81CCC76CE764">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$513BB50BE0C436FA.7544B3F7FE08F707" Destination="$513BB50BE0C436FA.9CCC6FC2F9BF33EE">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$513BB50BE0C436FA.7544B3F7FE08F707" Destination="$12F0502B62A3AB0B.ACK_FIRST">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$BF5A5000C611AF6E" Destination="$513BB50BE0C436FA.9CCC6FC2F9BF33EE">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$513BB50BE0C436FA.D720E0780C9D82EF" Destination="$0F2BD63F330E2BDA">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$3304F06E342FF911" Destination="$513BB50BE0C436FA.E60345B826CCA0C2">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="$513BB50BE0C436FA.055DC002B3EB601B" Destination="$F8E4EB0276D578DB">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$513BB50BE0C436FA.7967017B37F460AF" Destination="$5126CE4A870E517F">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$513BB50BE0C436FA.DE7F0A130D074041" Destination="$FCED367007BA1689">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$513BB50BE0C436FA.AFA8C0022DDE1D97" Destination="$4B45B05E6464EEE7">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$513BB50BE0C436FA.F27B7873DE3AF3B0" Destination="$B1260102A6291D33">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$26BC67DB3AB94B29" Destination="$513BB50BE0C436FA.8ECDDE4E7698AB8E">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$26C50C1A131DC8B6" Destination="$513BB50BE0C436FA.B9B5554694A72450">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+    </DataConnections>
+  </FBNetwork>
+</FBType>

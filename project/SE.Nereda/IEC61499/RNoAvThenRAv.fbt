@@ -2,7 +2,7 @@
 <!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
 <FBType GUID="5e307416-701e-423b-a969-ca76e171d35f" Name="RNoAvThenRAv" Comment="Basic Function Block Type" Namespace="SE.Nereda">
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="8/10/2026" Remarks="Template" />
+  <VersionInfo Organization="Schneider Electric" Version="0.1" Author=" " Date="30/10/2026" Remarks="0.1: reator que fica indisponivel depois do primeiro tambem e memorizado (estado UPD) e vai para o S10 quando todos voltam. Template" />
   <InterfaceList>
     <EventInputs>
       <Event ID="D34CB04DF38A6DEF" Name="REQ" Comment="Normal Execution Request">
@@ -18,12 +18,12 @@
     </EventInputs>
     <EventOutputs>
       <Event ID="CDE3D6C9BB9E2A16" Name="CNF" Comment="Execution Confirmation">
-        <With Var="R1GoToS8W" />
-        <With Var="R2GoToS8W" />
-        <With Var="R3GoToS8W" />
-        <With Var="R4GoToS8W" />
-        <With Var="R5GoToS8W" />
-        <With Var="R6GoToS8W" />
+        <With Var="R1GoToS10" />
+        <With Var="R2GoToS10" />
+        <With Var="R3GoToS10" />
+        <With Var="R4GoToS10" />
+        <With Var="R5GoToS10" />
+        <With Var="R6GoToS10" />
       </Event>
       <Event ID="36C8FEB2AEE2D77A" Name="CNF_DELAY" />
     </EventOutputs>
@@ -37,16 +37,16 @@
       <VarDeclaration ID="088CD67AD55F3330" Name="EmergencyON" Type="BOOL" />
     </InputVars>
     <OutputVars>
-      <VarDeclaration ID="EC29A541E7FBE6C9" Name="R1GoToS8W" Type="BOOL" Comment="Output event qualifier" />
-      <VarDeclaration ID="F577B5E8F808E26B" Name="R2GoToS8W" Type="BOOL" />
-      <VarDeclaration ID="403B70773A4F56EF" Name="R3GoToS8W" Type="BOOL" />
-      <VarDeclaration ID="F047C6A8D1E626BD" Name="R4GoToS8W" Type="BOOL" />
-      <VarDeclaration ID="FA7EB0D9886C53C5" Name="R5GoToS8W" Type="BOOL" />
-      <VarDeclaration ID="3C16CC1F05F5D6CE" Name="R6GoToS8W" Type="BOOL" />
+      <VarDeclaration ID="EC29A541E7FBE6C9" Name="R1GoToS10" Type="BOOL" Comment="Output event qualifier" />
+      <VarDeclaration ID="F577B5E8F808E26B" Name="R2GoToS10" Type="BOOL" />
+      <VarDeclaration ID="403B70773A4F56EF" Name="R3GoToS10" Type="BOOL" />
+      <VarDeclaration ID="F047C6A8D1E626BD" Name="R4GoToS10" Type="BOOL" />
+      <VarDeclaration ID="FA7EB0D9886C53C5" Name="R5GoToS10" Type="BOOL" />
+      <VarDeclaration ID="3C16CC1F05F5D6CE" Name="R6GoToS10" Type="BOOL" />
     </OutputVars>
   </InterfaceList>
   <BasicFB ID="42651a32-6af1-4fc3-b491-3c9110b0a9dd">
-    <Attribute Name="FBType.Basic.Algorithm.Order" Value="REQ,BACK_AV" />
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="REQ,BACK_AV,UPD" />
     <InternalVars>
       <VarDeclaration ID="C633D8B0F1F20824" Name="MemoR1Available" Type="BOOL" />
       <VarDeclaration ID="CA1619B98ADC25A5" Name="MemoR2Available" Type="BOOL" />
@@ -64,6 +64,9 @@
         <ECAction Algorithm="BACK_AV" Output="CNF" />
         <ECAction Output="CNF_DELAY" />
       </ECState>
+      <ECState Name="UPD" Comment="Reator ficou indisponivel depois: memoriza para ir ao S10 na volta" x="2300" y="1186.667">
+        <ECAction Algorithm="UPD" />
+      </ECState>
       <ECState Name="RESET" x="1293.333" y="2220.182">
         <ECAction Algorithm="REQ" Output="CNF" />
       </ECState>
@@ -79,55 +82,64 @@
       <ECTransition Source="BACK_AV" Destination="RESET" Condition="FB_DELAY" x="1292.336" y="1962.774">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="323.0745,473.5913,322.6372,505.7427" />
       </ECTransition>
+      <ECTransition Source="R_NO_AV" Destination="UPD" Condition="REQ" x="1800" y="1100" />
+      <ECTransition Source="UPD" Destination="BACK_AV" Condition="R1Available AND&#xD;&#xA;R2Available AND&#xD;&#xA;R3Available AND&#xD;&#xA;R4Available AND&#xD;&#xA;R5Available AND&#xD;&#xA;R6Available" x="1900" y="1500" />
+      <ECTransition Source="UPD" Destination="UPD" Condition="REQ" x="2700" y="1100" />
     </ECC>
     <Algorithm ID="b9783581-e0a0-49d2-b290-6c1947911d92" Name="REQ">
-      <ST><![CDATA[;
-MemoR1Available := R1Available;
+      <ST><![CDATA[MemoR1Available := R1Available;
 MemoR2Available := R2Available;
 MemoR3Available := R3Available;
 MemoR4Available := R4Available;
 MemoR5Available := R5Available;
 MemoR6Available := R6Available;
 
-R1GoToS8W := FALSE;
-R2GoToS8W := FALSE;
-R3GoToS8W := FALSE;
-R4GoToS8W := FALSE;
-R5GoToS8W := FALSE;
-R6GoToS8W := FALSE;]]></ST>
+R1GoToS10 := FALSE;
+R2GoToS10 := FALSE;
+R3GoToS10 := FALSE;
+R4GoToS10 := FALSE;
+R5GoToS10 := FALSE;
+R6GoToS10 := FALSE;]]></ST>
     </Algorithm>
     <Algorithm ID="3d490dbe-5d3b-4410-b7f9-f618d1dafc1e" Name="BACK_AV">
-      <ST><![CDATA[;
-R1GoToS8W := FALSE;
-R2GoToS8W := FALSE;
-R3GoToS8W := FALSE;
-R4GoToS8W := FALSE;
-R5GoToS8W := FALSE;
-R6GoToS8W := FALSE;
+      <ST><![CDATA[R1GoToS10 := FALSE;
+R2GoToS10 := FALSE;
+R3GoToS10 := FALSE;
+R4GoToS10 := FALSE;
+R5GoToS10 := FALSE;
+R6GoToS10 := FALSE;
 
 IF NOT MemoR1Available THEN
-    R1GoToS8W := TRUE;
+    R1GoToS10 := TRUE;
 END_IF;
 
 IF NOT MemoR2Available THEN
-    R2GoToS8W := TRUE;
+    R2GoToS10 := TRUE;
 END_IF;
 
 IF NOT MemoR3Available THEN
-    R3GoToS8W := TRUE;
+    R3GoToS10 := TRUE;
 END_IF;
 
 IF NOT MemoR4Available THEN
-    R4GoToS8W := TRUE;
+    R4GoToS10 := TRUE;
 END_IF;
 
 IF NOT MemoR5Available THEN
-    R5GoToS8W := TRUE;
+    R5GoToS10 := TRUE;
 END_IF;
 
 IF NOT MemoR6Available THEN
-    R6GoToS8W := TRUE;
+    R6GoToS10 := TRUE;
 END_IF;]]></ST>
+    </Algorithm>
+    <Algorithm Name="UPD" Comment="Memoriza quem ficou indisponivel durante o periodo">
+      <ST><![CDATA[MemoR1Available := MemoR1Available AND R1Available;
+MemoR2Available := MemoR2Available AND R2Available;
+MemoR3Available := MemoR3Available AND R3Available;
+MemoR4Available := MemoR4Available AND R4Available;
+MemoR5Available := MemoR5Available AND R5Available;
+MemoR6Available := MemoR6Available AND R6Available;]]></ST>
     </Algorithm>
   </BasicFB>
 </FBType>

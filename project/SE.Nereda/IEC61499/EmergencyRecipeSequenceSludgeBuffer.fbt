@@ -2,14 +2,19 @@
 <!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
 <FBType GUID="6b9bc6e6-a399-44cb-88ba-00012df76668" Name="EmergencyRecipeSequenceSludgeBuffer" Comment="Basic Function Block Type" Namespace="SE.Nereda">
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="7/4/2026" Remarks="Template" />
+  <VersionInfo Organization="Schneider Electric" Version="0.1" Author=" " Date="30/10/2026" Remarks="0.1: o passo so termina com a fase parada (estados *_END, evento PH_OFF). Template" />
   <InterfaceList>
     <EventInputs>
       <Event ID="68E2F3B4BFF358D6" Name="EMERGENCY_ON">
         <With Var="EmergencyON" />
       </Event>
-      <Event ID="8BD9ED85505D599F" Name="START_SLUDGE">
-        <With Var="StartSludge" />
+      <Event ID="25F0D728C2D36669" Name="FORCE_UNAV">
+        <With Var="ForceUnavaibility" />
+      </Event>
+      <Event ID="5327B87255632EDE" Name="REACTOR_STS">
+        <With Var="R_SDRun" />
+        <With Var="R_SDAborted" />
+        <With Var="R_SDStopping" />
       </Event>
       <Event ID="5F230DB7635D55AE" Name="FB_RDY_PHASE">
         <With Var="FeedReady" />
@@ -29,24 +34,19 @@
       <Event ID="9041C273A86FC2E4" Name="FB_DUR_STEP4">
         <With Var="DurDoneStep4" />
       </Event>
-      <Event ID="F6AE117EB4EE709F" Name="L1">
-        <With Var="L1v" />
-      </Event>
-      <Event ID="C960811A6435E9DC" Name="L2">
-        <With Var="L2v" />
-      </Event>
-      <Event ID="25F0D728C2D36669" Name="FORCE_UNAV">
-        <With Var="ForceUnavaibility" />
-      </Event>
-      <Event ID="675981AE93E2378A" Name="SB_LVL">
-        <With Var="SB_Level" />
-      </Event>
-      <Event ID="5D8E05AD95449444" Name="REST_LVL">
+      <Event ID="F6AE117EB4EE709F" Name="SB_LVL_SP">
+        <With Var="FB_SBL1" />
+        <With Var="FB_SBL2" />
         <With Var="RestartLevel" />
       </Event>
-      <Event ID="5327B87255632EDE" Name="REACTOR_STS">
-        <With Var="FeedStopped" />
-        <With Var="FeedAborted" />
+      <Event ID="5493F2C266C8980A" Name="ABORT_FALLBACK">
+        <With Var="AbortFallback" />
+      </Event>
+      <Event ID="3154B40CBEBF05DA" Name="PH_OFF" Comment="Fases paradas (PhasesOff)">
+        <With Var="FeedOff" />
+        <With Var="WaitOff" />
+        <With Var="SDOff" />
+        <With Var="SupOff" />
       </Event>
     </EventInputs>
     <EventOutputs>
@@ -71,7 +71,9 @@
     <InputVars>
       <VarDeclaration ID="C537A25E1616B854" Name="EmergencyON" Type="BOOL" />
       <VarDeclaration ID="53ADC5A2738A60DC" Name="ForceUnavaibility" Type="BOOL" />
-      <VarDeclaration ID="EB24B639967D6395" Name="StartSludge" Type="BOOL" />
+      <VarDeclaration ID="A1908D16CCF1B616" Name="R_SDRun" Type="BOOL" />
+      <VarDeclaration ID="F4FFABC72B7559F7" Name="R_SDStopping" Type="BOOL" />
+      <VarDeclaration ID="E5E1D6F5F3F937A2" Name="R_SDAborted" Type="BOOL" />
       <VarDeclaration ID="02C5FE17473E63ED" Name="FeedReady" Type="BOOL" />
       <VarDeclaration ID="5FBA38ABF9198C98" Name="WaitReady" Type="BOOL" />
       <VarDeclaration ID="69F1D0FE13048380" Name="SludgeReady" Type="BOOL" />
@@ -80,12 +82,14 @@
       <VarDeclaration ID="356882B50FEB9A7D" Name="DurDoneStep2" Type="BOOL" />
       <VarDeclaration ID="111361C8BEDF440B" Name="DurDoneStep3" Type="BOOL" />
       <VarDeclaration ID="82CEB92F735FC5D4" Name="DurDoneStep4" Type="BOOL" />
-      <VarDeclaration ID="7A1CAB8AE52AE374" Name="L1v" Type="BOOL" />
-      <VarDeclaration ID="CB5D14E9C5586FB9" Name="L2v" Type="BOOL" />
-      <VarDeclaration ID="BEC170C6FAF98287" Name="RestartLevel" Type="REAL" />
-      <VarDeclaration ID="A1908D16CCF1B616" Name="FeedStopped" Type="BOOL" />
-      <VarDeclaration ID="E5E1D6F5F3F937A2" Name="FeedAborted" Type="BOOL" />
-      <VarDeclaration ID="6882FED931B8B218" Name="SB_Level" Type="REAL" />
+      <VarDeclaration ID="7A1CAB8AE52AE374" Name="FB_SBL1" Type="BOOL" />
+      <VarDeclaration ID="CB5D14E9C5586FB9" Name="FB_SBL2" Type="BOOL" />
+      <VarDeclaration ID="BEC170C6FAF98287" Name="RestartLevel" Type="BOOL" />
+      <VarDeclaration ID="7403275997645FA9" Name="AbortFallback" Type="BOOL" />
+      <VarDeclaration ID="B400E46AE891C024" Name="FeedOff" Type="BOOL" InitialValue="TRUE" Comment="Fase parada (fora de Starting/Running/Stopping/Aborting)" />
+      <VarDeclaration ID="3A940F138C53D468" Name="WaitOff" Type="BOOL" InitialValue="TRUE" Comment="Fase parada (fora de Starting/Running/Stopping/Aborting)" />
+      <VarDeclaration ID="67C2DB4806953C29" Name="SDOff" Type="BOOL" InitialValue="TRUE" Comment="Fase parada (fora de Starting/Running/Stopping/Aborting)" />
+      <VarDeclaration ID="96EED71444786CD1" Name="SupOff" Type="BOOL" InitialValue="TRUE" Comment="Fase parada (fora de Starting/Running/Stopping/Aborting)" />
     </InputVars>
     <OutputVars>
       <VarDeclaration ID="8B42F21C51560908" Name="CmdFeed" Type="BOOL" />
@@ -96,33 +100,37 @@
     </OutputVars>
   </InterfaceList>
   <BasicFB ID="2ec17f26-1e26-4187-9d1f-898851067dd5">
-    <Attribute Name="FBType.Basic.Algorithm.Order" Value="FEED,StopAll,WAIT_S2,SLUDGE_DISCHARGE_S3,SludgeSupernanatDischargeS4" />
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="FEED,StopAll,WAIT_S2,SLUDGE_DISCHARGE_S3,SludgeSupernanatDischargeS4,IDLE_S0,StepEnd" />
+    <InternalVars>
+      <VarDeclaration ID="65DDED9428A0F409" Name="MemoState" Type="INT" />
+    </InternalVars>
     <ECC>
-      <ECState Name="START" Comment="Initial State" x="3283.988" y="1054.935" />
-      <ECState Name="FEED" x="3285.333" y="1742.667">
+      <ECState Name="START" Comment="Initial State" x="3280.654" y="768.2684" />
+      <ECState Name="FEED" x="3285.333" y="2492.667">
         <ECAction Algorithm="FEED" Output="PHASE_CMD" />
         <ECAction Output="GRAPH" />
         <ECAction Output="STEP1_START" />
+        <ECAction Output="STEP4_STOP" />
       </ECState>
-      <ECState Name="Wait" x="3285.333" y="2515.667">
+      <ECState Name="Wait" x="3277.333" y="3537.667">
         <ECAction Algorithm="WAIT_S2" Output="PHASE_CMD" />
         <ECAction Output="GRAPH" />
         <ECAction Output="STEP2_START" />
         <ECAction Output="STEP1_STOP" />
       </ECState>
-      <ECState Name="SLUDGE_DISCHARGE" x="3289.333" y="3265.666">
+      <ECState Name="SLUDGE_DISCHARGE" x="3275.619" y="4670.522">
         <ECAction Algorithm="SLUDGE_DISCHARGE_S3" Output="PHASE_CMD" />
         <ECAction Output="GRAPH" />
         <ECAction Output="STEP3_START" />
         <ECAction Output="STEP2_STOP" />
       </ECState>
-      <ECState Name="SUPERNANT_DISCHARGE" x="3294.889" y="4019.666">
+      <ECState Name="SUPERNANT_DISCHARGE" x="3281.175" y="5576.523">
         <ECAction Algorithm="SludgeSupernanatDischargeS4" Output="PHASE_CMD" />
         <ECAction Output="GRAPH" />
         <ECAction Output="STEP4_START" />
         <ECAction Output="STEP3_STOP" />
       </ECState>
-      <ECState Name="STOP" x="5477.333" y="3410.666">
+      <ECState Name="ABORT_OR_STOP" x="5883.047" y="2880.666">
         <ECAction Algorithm="StopAll" Output="PHASE_CMD" />
         <ECAction Output="GRAPH" />
         <ECAction Output="STEP1_STOP" />
@@ -130,62 +138,88 @@
         <ECAction Output="STEP3_STOP" />
         <ECAction Output="STEP4_STOP" />
       </ECState>
-      <ECState Name="IDLEState" x="3288.571" y="1367.619" />
-      <ECState Name="ReactorSludgePhaseAbortedStopped" x="1316.128" y="1721.164" />
-      <ECTransition Source="IDLEState" Destination="FEED" Condition="START_SLUDGE AND StartSludge&#xD;&#xA;AND NOT ForceUnavaibility&#xD;&#xA;AND EmergencyON" x="3288.56" y="1549.413">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="822.3223,375.5974,822.1121,398.1538" />
+      <ECState Name="IDLEState" x="3288.571" y="1354.286">
+        <ECAction Algorithm="IDLE_S0" Output="GRAPH" />
+        <ECAction Output="PHASE_CMD" />
+        <ECAction Output="STEP4_STOP" />
+      </ECState>
+      <ECState Name="FEED_END" Comment="Fim do passo: comandos zerados, espera a fase parar" x="5885.33" y="2792.67">
+        <ECAction Algorithm="StepEnd" Output="PHASE_CMD" />
+      </ECState>
+      <ECState Name="WAIT_END" Comment="Fim do passo: comandos zerados, espera a fase parar" x="5877.33" y="3837.67">
+        <ECAction Algorithm="StepEnd" Output="PHASE_CMD" />
+      </ECState>
+      <ECState Name="SLUDGE_END" Comment="Fim do passo: comandos zerados, espera a fase parar" x="5875.62" y="4970.52">
+        <ECAction Algorithm="StepEnd" Output="PHASE_CMD" />
+      </ECState>
+      <ECState Name="SUPER_END" Comment="Fim do passo: comandos zerados, espera a fase parar" x="5881.18" y="5876.52">
+        <ECAction Algorithm="StepEnd" Output="PHASE_CMD" />
+      </ECState>
+      <ECTransition Source="IDLEState" Destination="FEED" Condition="REACTOR_STS AND R_SDRun&#xD;&#xA;AND NOT ForceUnavaibility&#xD;&#xA;AND EmergencyON&#xD;&#xA;AND NOT RestartLevel" x="3288.332" y="1901.556">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="822.2987,430.4794,822.06,516.6452" />
       </ECTransition>
-      <ECTransition Source="FEED" Destination="Wait" Condition="(FB_DUR_STEP1 AND DurDoneStep1)" x="3284.762" y="2131.541">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="821.1121,505.2205,821.1963,560.9458" />
+      <ECTransition Source="FEED" Destination="FEED_END" Condition="(FB_DUR_STEP1 AND DurDoneStep1)&#xD;&#xA;OR&#xD;&#xA;R_SDAborted&#xD;&#xA;OR&#xD;&#xA;R_SDStopping&#xD;&#xA;OR&#xD;&#xA;NOT R_SDRun" x="3280.761" y="3018.503">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="820.4095,715.7068,819.8921,794.1011" />
       </ECTransition>
-      <ECTransition Source="Wait" Destination="SLUDGE_DISCHARGE" Condition="(FB_DUR_STEP2 AND DurDoneStep2)&#xD;&#xA;" x="3286.042" y="2871.647">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="821.258,689.4249,821.5966,743.2288" />
+      <ECTransition Source="Wait" Destination="WAIT_END" Condition="(FB_DUR_STEP2 AND DurDoneStep2)&#xD;&#xA;" x="3275.442" y="4073.789">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="818.8301,973.0664,818.7493,1058.777" />
       </ECTransition>
-      <ECTransition Source="SLUDGE_DISCHARGE" Destination="SUPERNANT_DISCHARGE" Condition="(FB_DUR_STEP3 AND DurDoneStep3)&#xD;&#xA;OR&#xD;&#xA;(L1 AND L1v)&#xD;&#xA;" x="3289.927" y="3632.717">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="822.1572,880.2822,822.5282,934.4183" />
+      <ECTransition Source="SLUDGE_DISCHARGE" Destination="SLUDGE_END" Condition="(FB_DUR_STEP3 AND DurDoneStep3)&#xD;&#xA;OR&#xD;&#xA;FB_SBL1&#xD;&#xA;" x="3275.743" y="5111.241">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="818.5823,1243.386,818.9361,1310.188" />
       </ECTransition>
-      <ECTransition Source="SUPERNANT_DISCHARGE" Destination="IDLEState" Condition="(FB_DUR_STEP4 AND DurDoneStep4)&#xD;&#xA;OR&#xD;&#xA;(L2 AND L2v)" x="2261.384" y="2955.997">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="769.7572,825.1116,198.1655,696.6128" />
+      <ECTransition Source="START" Destination="ABORT_OR_STOP" Condition="(EMERGENCY_ON AND NOT EmergencyON) OR&#xD;&#xA;(FORCE_UNAV AND ForceUnavaibility)" x="4934.914" y="1232.809">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1154.88,177.1017,1361.9,345.5236" />
       </ECTransition>
-      <ECTransition Source="START" Destination="STOP" Condition="(EMERGENCY_ON AND NOT EmergencyON) OR&#xD;&#xA;(FORCE_UNAV AND ForceUnavaibility)" x="4976.424" y="1744.544">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1201.233,303.5573,1375.416,490.5576" />
+      <ECTransition Source="ABORT_OR_STOP" Destination="START" Condition="NOT AbortFallback AND&#xD;&#xA;(ForceUnavaibility OR NOT EmergencyON)" x="5298.165" y="964.5649">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1483.147,256.6626,1274.421,89.09582" />
       </ECTransition>
-      <ECTransition Source="STOP" Destination="START" Condition="1" x="5322.605" y="1514.438">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1490.241,414.8215,1316.068,227.8015" />
+      <ECTransition Source="FEED" Destination="ABORT_OR_STOP" Condition="ForceUnavaibility OR NOT EmergencyON" x="4407.217" y="2361.176">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="984.9427,554.6885,1188.497,579.9452" />
       </ECTransition>
-      <ECTransition Source="FEED" Destination="STOP" Condition="ForceUnavaibility OR NOT EmergencyON" x="4476.506" y="1810.897">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1037.894,328.1077,1209.232,458.4095" />
+      <ECTransition Source="Wait" Destination="ABORT_OR_STOP" Condition="ForceUnavaibility OR NOT EmergencyON" x="4389.973" y="3122.012">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="999.7303,800.236,1178.587,747.7843" />
       </ECTransition>
-      <ECTransition Source="Wait" Destination="STOP" Condition="ForceUnavaibility OR NOT EmergencyON" x="4376.721" y="2433.976">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1009.843,535.5771,1173.187,601.5013" />
+      <ECTransition Source="SLUDGE_DISCHARGE" Destination="ABORT_OR_STOP" Condition="ForceUnavaibility OR NOT EmergencyON" x="4085.156" y="3970.219">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="890.0449,1072.612,1074.579,944.9353" />
       </ECTransition>
-      <ECTransition Source="SLUDGE_DISCHARGE" Destination="STOP" Condition="ForceUnavaibility OR NOT EmergencyON" x="4447.767" y="2954.409">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1044.193,706.2247,1187.449,715.7175" />
+      <ECTransition Source="SUPERNANT_DISCHARGE" Destination="ABORT_OR_STOP" Condition="ForceUnavaibility OR NOT EmergencyON" x="5045.863" y="4472.839">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1183.931,1248.323,1406.355,1028.804" />
       </ECTransition>
-      <ECTransition Source="SUPERNANT_DISCHARGE" Destination="STOP" Condition="ForceUnavaibility OR NOT EmergencyON" x="4479.879" y="3677.743">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1046.77,939.1403,1203.602,895.3813" />
+      <ECTransition Source="IDLEState" Destination="Wait" Condition="REACTOR_STS AND R_SDRun&#xD;&#xA;AND NOT ForceUnavaibility&#xD;&#xA;AND EmergencyON&#xD;&#xA;AND RestartLevel" x="2697.533" y="2400.088">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="629.2151,509.2664,630.9661,683.1297" />
       </ECTransition>
-      <ECTransition Source="IDLEState" Destination="Wait" Condition="SB_Level&gt;=RestartLevel" x="2676.389" y="2039.345">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="623.5699,473.1419,627.4017,561.2424" />
+      <ECTransition Source="START" Destination="IDLEState" Condition="1" x="3283.252" y="1051.507">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="821.5541,250.2981,819.8928,273.8272" />
       </ECTransition>
-      <ECTransition Source="START" Destination="IDLEState" Condition="1" x="3304.052" y="1186.088">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="827.7276,289.3559,825.7488,299.49" />
+      <ECTransition Source="IDLEState" Destination="ABORT_OR_STOP" Condition="(EMERGENCY_ON AND NOT EmergencyON) OR&#xD;&#xA;(FORCE_UNAV AND ForceUnavaibility)" x="4676.954" y="1498.535">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1067.036,268.2319,1275.544,386.1421" />
       </ECTransition>
-      <ECTransition Source="ReactorSludgePhaseAbortedStopped" Destination="Wait" Condition="1" x="2475.383" y="2109.468">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="570.076,502.8188,689.5715,550.4242" />
+      <ECTransition Source="SUPERNANT_DISCHARGE" Destination="SUPER_END" Condition="(FB_DUR_STEP4 AND DurDoneStep4)&#xD;&#xA;OR&#xD;&#xA;FB_SBL2" x="2203.343" y="3262.434">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="451.1649,1227.119,493.4921,373.183" />
       </ECTransition>
-      <ECTransition Source="SUPERNANT_DISCHARGE" Destination="ReactorSludgePhaseAbortedStopped" Condition="EmergencyON&#xD;&#xA;AND&#xD;&#xA;(FeedAborted OR FeedStopped)" x="1418.715" y="2727.213">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="374.4483,764.0822,199.1091,575.6576" />
+      <ECTransition Source="ABORT_OR_STOP" Destination="IDLEState" Condition="NOT AbortFallback AND&#xD;&#xA;NOT ForceUnavaibility AND&#xD;&#xA;EmergencyON AND&#xD;&#xA;MemoState = 0" x="4447.942" y="1914.376">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1264.605,445.5299,936.0937,477.808" />
       </ECTransition>
-      <ECTransition Source="SLUDGE_DISCHARGE" Destination="ReactorSludgePhaseAbortedStopped" Condition="EmergencyON&#xD;&#xA;AND&#xD;&#xA;(FeedAborted OR FeedStopped)" x="1638.337" y="2672.207">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="431.2696,735.3954,298.8121,630.5068" />
+      <ECTransition Source="ABORT_OR_STOP" Destination="FEED" Condition="NOT AbortFallback AND&#xD;&#xA;NOT ForceUnavaibility AND&#xD;&#xA;EmergencyON AND&#xD;&#xA;MemoState = 1" x="4182.443" y="2840.667">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1168.784,640.5,870.7839,805.5" />
       </ECTransition>
-      <ECTransition Source="FEED" Destination="ReactorSludgePhaseAbortedStopped" Condition="EmergencyON&#xD;&#xA;AND&#xD;&#xA;(FeedAborted OR FeedStopped)" x="1978.875" y="2381.204">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="535.1693,644.9367,405.0342,645.1829" />
+      <ECTransition Source="ABORT_OR_STOP" Destination="Wait" Condition="NOT AbortFallback AND&#xD;&#xA;NOT ForceUnavaibility AND&#xD;&#xA;EmergencyON AND&#xD;&#xA;MemoState = 2" x="4357.652" y="3696.841">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1232.179,805.3174,919.8513,1115.685" />
       </ECTransition>
-      <ECTransition Source="Wait" Destination="ReactorSludgePhaseAbortedStopped" Condition="EmergencyON&#xD;&#xA;AND&#xD;&#xA;(FeedAborted OR FeedStopped)" x="1909.607" y="2563.503">
-        <Attribute Name="Configuration.Transaction.BezierPoints" Value="521.4039,705.8123,375.2288,643.7319" />
+      <ECTransition Source="ABORT_OR_STOP" Destination="SLUDGE_DISCHARGE" Condition="NOT AbortFallback AND&#xD;&#xA;NOT ForceUnavaibility AND&#xD;&#xA;EmergencyON AND&#xD;&#xA;MemoState = 3" x="4281.454" y="4105.08">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1146.505,982.9545,937.9399,1124.5" />
       </ECTransition>
+      <ECTransition Source="ABORT_OR_STOP" Destination="SUPERNANT_DISCHARGE" Condition="NOT AbortFallback AND&#xD;&#xA;NOT ForceUnavaibility AND&#xD;&#xA;EmergencyON AND&#xD;&#xA;MemoState = 4" x="5172.339" y="4626.76">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="1443.999,1080.815,1222.494,1298.926" />
+      </ECTransition>
+      <ECTransition Source="FEED_END" Destination="Wait" Condition="FeedOff" x="4885.33" y="3292.67" />
+      <ECTransition Source="WAIT_END" Destination="SLUDGE_DISCHARGE" Condition="WaitOff" x="4877.33" y="4337.67" />
+      <ECTransition Source="SLUDGE_END" Destination="SUPERNANT_DISCHARGE" Condition="SDOff" x="4875.62" y="5470.52" />
+      <ECTransition Source="SUPER_END" Destination="IDLEState" Condition="SupOff" x="4881.18" y="6376.52" />
+      <ECTransition Source="FEED_END" Destination="ABORT_OR_STOP" Condition="ForceUnavaibility OR NOT EmergencyON" x="6785" y="2792.67" />
+      <ECTransition Source="WAIT_END" Destination="ABORT_OR_STOP" Condition="ForceUnavaibility OR NOT EmergencyON" x="6777" y="3837.67" />
+      <ECTransition Source="SLUDGE_END" Destination="ABORT_OR_STOP" Condition="ForceUnavaibility OR NOT EmergencyON" x="6775" y="4970.52" />
+      <ECTransition Source="SUPER_END" Destination="ABORT_OR_STOP" Condition="ForceUnavaibility OR NOT EmergencyON" x="6781" y="5876.52" />
     </ECC>
     <Algorithm Name="FEED">
       <ST><![CDATA[;
@@ -231,6 +265,21 @@ CmdSludgeDischarge := FALSE;
 CmdSupernatantDischarge := TRUE;
 
 Grafcet := 4;]]></ST>
+    </Algorithm>
+    <Algorithm ID="103d97d9-ba6d-471f-b548-186878711f1b" Name="IDLE_S0">
+      <ST><![CDATA[;
+Grafcet :=0;
+
+CmdFeed := FALSE;
+CmdWait := FALSE;
+CmdSludgeDischarge := FALSE;
+CmdSupernatantDischarge := FALSE;]]></ST>
+    </Algorithm>
+    <Algorithm Name="StepEnd" Comment="Fim do passo: zera os comandos e espera a fase parar (Grafcet nao muda)">
+      <ST><![CDATA[CmdFeed := FALSE;
+CmdWait := FALSE;
+CmdSludgeDischarge := FALSE;
+CmdSupernatantDischarge := FALSE;]]></ST>
     </Algorithm>
   </BasicFB>
 </FBType>

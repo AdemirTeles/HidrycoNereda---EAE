@@ -129,17 +129,11 @@ namespace Hidryco.HidrycoLib.Faceplates.Desinfeccao_UV
 			Pisca(AlgumNaoRec());
 			e1.Text = "Vazão: " + (ftF ? "????" : vaz.ToString("0") + " m³/h") + "   VC-01: " + vPos.ToString("0.0") + " %";
 			e2.Text = Motivo();
-			btnHab.BrushColor = hab ? new NxtControl.Drawing.Color(96, 96, 96) : new NxtControl.Drawing.Color(208, 208, 208);
-			btnDesab.BrushColor = !hab ? new NxtControl.Drawing.Color(96, 96, 96) : new NxtControl.Drawing.Color(208, 208, 208);
-			btnHab.TextColor = hab ? new NxtControl.Drawing.Color(255, 255, 255) : new NxtControl.Drawing.Color(0, 0, 0);
-			btnDesab.TextColor = !hab ? new NxtControl.Drawing.Color(255, 255, 255) : new NxtControl.Drawing.Color(0, 0, 0);
 			rTot.Text = "Total lançado: " + tot.ToString() + " m³";
 		}
 
-		void BtnHabClick(object sender, EventArgs e) { FireEvent_E_PARAMETROS(true, false, 0F, true, 0F, true, 0F, true, 0F, true, 0F, true, 0F, true, 0F, true, (short)0, true, 0F, true); }
-		void BtnDesabClick(object sender, EventArgs e) { FireEvent_E_PARAMETROS(false, false, 0F, true, 0F, true, 0F, true, 0F, true, 0F, true, 0F, true, 0F, true, (short)0, true, 0F, true); }
 		void BtnZeraClick(object sender, EventArgs e) { FireEvent_E_ZERA_TOTAL(true); FireEvent_E_ZERA_TOTAL(false); }
-		void BtnResetClick(object sender, EventArgs e) { FireEvent_E_RESET(true); FireEvent_E_RESET(false); }
+		void BtnResetClick(object sender, EventArgs e) { FireEvent_E_RESET_FALHAS_PROCESSO(true); FireEvent_E_RESET_FALHAS_PROCESSO(false); }
 
 	}
 }

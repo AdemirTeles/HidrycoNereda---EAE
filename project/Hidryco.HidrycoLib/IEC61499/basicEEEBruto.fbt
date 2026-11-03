@@ -2,7 +2,7 @@
 <!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
 <FBType GUID="e14d74a2-b12c-4091-96f7-9c4c77b6d7ba" Comment="Logica unica da elevatoria de esgoto bruto (3 bombas, 2 operando + 1 reserva)" Name="basicEEEBruto" Namespace="Hidryco.HidrycoLib">
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Hidryco" Version="1.2" Author="Hidryco" Date="14/10/2026" Remarks="1.2: emergencia do PCM NF. 1.1: emergencia do painel e falha de comunicacao dos ATV630. 1.0: faixas de nivel, revezamento por tempo, PID de velocidade, HH do Nereda, operacao pelas boias, falha de recalque" />
+  <VersionInfo Organization="Hidryco" Version="1.6" Author="Hidryco" Date="21/10/2026" Remarks="1.6: PID de nivel em Hz (minimo, maximo, preset e saida; 60 Hz = 100 %); STS_VELOCIDADE da IHM em Hz. 1.5: faixas da necessidade pela % da altura do poco (nivPct); stsNivel (IHM) continua em metros. 1.4: IHM: nivel, saida do PID, velocidade e tempo restante no maximo 1 vez por segundo (TICK). 1.3: pressao L/LL do PIT-01 inibida com as bombas paradas mesmo com cfgTempoPartidaPressao = 0. 1.2: emergencia do PCM NF. 1.1: emergencia do painel e falha de comunicacao dos ATV630. 1.0: faixas de nivel, revezamento por tempo, PID de velocidade, HH do Nereda, operacao pelas boias, falha de recalque" />
   <InterfaceList>
     <EventInputs>
       <Event ID="2004138DB0750D97" Name="INIT" Comment="Inicializacao">
@@ -26,6 +26,7 @@
       </Event>
       <Event ID="90222814CB973B20" Name="REQ_NIVEL" Comment="LIT-03">
         <With Var="nivValor" />
+        <With Var="nivPct" />
         <With Var="nivFalha" />
         <With Var="nivAcimaH" />
       </Event>
@@ -118,6 +119,7 @@
         <With Var="stpVelocidade" />
         <With Var="stsEstado" />
         <With Var="stsAlarme" />
+        <With Var="stsVelocidadeHz" />
       </Event>
       <Event ID="13609D02FAABDEC3" Name="CNF_ALM" Comment="Alarmes para os ALARM_BIT (na mudanca)">
         <With Var="almRecalque" />
@@ -142,6 +144,7 @@
       <VarDeclaration ID="39D99F13A06DDE55" Name="pidMinimo" Type="REAL" Comment="IHM: velocidade minima / saida minima do PID, % (STP_MINIMO)" />
       <VarDeclaration ID="6FE815DDF49B081F" Name="pidMaximo" Type="REAL" Comment="IHM: velocidade maxima / saida maxima do PID, % (STP_MAXIMO)" />
       <VarDeclaration ID="67419F14E8ECCCB2" Name="nivValor" Type="REAL" Comment="LIT-03: nivel (unidade de engenharia)" />
+      <VarDeclaration ID="0E2F0D9F0929276A" Name="nivPct" Type="REAL" Comment="LIT-03: nivel em % da altura do poco (faixas da necessidade)" />
       <VarDeclaration ID="52C92FD7A4E5C1FD" Name="nivFalha" Type="BOOL" Comment="LIT-03: sinal em falha agora" />
       <VarDeclaration ID="D4A7159E837D53E2" Name="nivAcimaH" Type="BOOL" Comment="LIT-03: nivel acima do setpoint H agora (alarme H habilitado)" />
       <VarDeclaration ID="6EC73A6F5DB8968E" Name="preLL" Type="BOOL" Comment="PIT-01: alarme LL de pressao (ja com o tempo do sensor)" />
@@ -198,6 +201,7 @@
       <VarDeclaration ID="AC7B9F1FA27C1FD1" Name="almRecalque" Type="BOOL" Comment="ALARM_BIT falha de recalque" />
       <VarDeclaration ID="058FFE0E7D12B412" Name="almNivelAlto" Type="BOOL" Comment="ALARM_BIT nivel alto (LSH)" />
       <VarDeclaration ID="3EF67A9DCF2789DB" Name="almFalhaBoiaL" Type="BOOL" Comment="ALARM_BIT defeito da boia LSL" />
+      <VarDeclaration ID="FEB697ACC839FDA4" Name="stsVelocidadeHz" Type="REAL" Comment="Velocidade enviada as bombas em Hz (IHM/SCADA)" />
     </OutputVars>
   </InterfaceList>
   <BasicFB ID="4c0750c9-6c37-4562-a774-272525a3080f">
@@ -241,6 +245,7 @@
       <VarDeclaration ID="535CE7BFAE7AC9B1" Name="oldNivel" Type="REAL" InitialValue="-1.0" />
       <VarDeclaration ID="19CA6483B7740164" Name="oldSaida" Type="REAL" InitialValue="-1.0" />
       <VarDeclaration ID="A89D1FD6C8A94AB6" Name="oldResta" Type="UDINT" InitialValue="16#FFFFFFFF" />
+      <VarDeclaration ID="2362875A945C43C0" Name="hmiVel" Type="REAL" InitialValue="-1.0" />
       <VarDeclaration ID="9D7158F8D7B23780" Name="oldEstado" Type="INT" InitialValue="-1" />
       <VarDeclaration ID="944E1735194288BF" Name="oldInfo" Type="UINT" InitialValue="16#FFFF" />
       <VarDeclaration ID="B542175BA30D10F0" Name="uInfo" Type="UINT" />
@@ -348,7 +353,7 @@ IF bAlgumaLigada THEN
 ELSE
     uSegLigada := 0;
 END_IF;
-inibePressao := uSegLigada < UINT_TO_UDINT(cfgTempoPartidaPressao);
+inibePressao := NOT bAlgumaLigada OR uSegLigada < UINT_TO_UDINT(cfgTempoPartidaPressao);   (* parada: inibido mesmo com o tempo = 0 *)
 IF preLL AND NOT inibePressao THEN
     stsFalhaRecalque := TRUE;              (* pressao LL com bomba ligada: para todas *)
 END_IF;
@@ -382,17 +387,17 @@ IF NOT necHabilita OR stsSegurandoBuffer THEN
 ELSIF NOT stsModoBoias THEN
     uTempoBoia := 0;
     IF iNec = 0 THEN
-        IF nivValor >= stpFaixa3 THEN
+        IF nivPct >= stpFaixa3 THEN
             iNec := 1;
         END_IF;
     ELSIF iNec = 1 THEN
-        IF nivValor >= stpFaixa4 THEN
+        IF nivPct >= stpFaixa4 THEN
             iNec := 2;
-        ELSIF nivValor < stpFaixa1 THEN
+        ELSIF nivPct < stpFaixa1 THEN
             iNec := 0;
         END_IF;
     ELSE
-        IF nivValor < stpFaixa2 THEN
+        IF nivPct < stpFaixa2 THEN
             iNec := 1;
         END_IF;
     END_IF;
@@ -528,14 +533,15 @@ pidModo := pidHabilita AND NOT stsModoBoias AND iNec > 0 AND bAlgumaLigada;
 pidPreset := pidMinimo;
 IF pidHabilita AND NOT stsModoBoias THEN
     IF pidModo THEN
-        stpVelocidade := pidSaida;
+        stpVelocidade := pidSaida / 0.6;   (* PID em Hz -> % das bombas *)
     ELSE
-        stpVelocidade := pidMinimo;        (* partida pela velocidade minima; o PID assume com a bomba ligada *)
+        stpVelocidade := pidMinimo / 0.6;        (* partida pela velocidade minima; o PID assume com a bomba ligada *)
     END_IF;
 ELSE
-    stpVelocidade := pidMaximo;            (* PID desabilitado ou operacao pelas boias *)
+    stpVelocidade := pidMaximo / 0.6;            (* PID desabilitado ou operacao pelas boias *)
 END_IF;
-stsSaidaPID := pidSaida;
+stsSaidaPID := pidSaida;                   (* Hz *)
+stsVelocidadeHz := stpVelocidade * 0.6;     (* IHM/SCADA em Hz *)
 
 (* ---- 10. Status e alarmes ---- *)
 stsBoiaL := boiaL;
@@ -587,8 +593,9 @@ IF stsNivelBaixo  THEN wHmi := wHmi OR 16#0020; END_IF;
 IF boiaL          THEN wHmi := wHmi OR 16#0040; END_IF;
 IF boiaH          THEN wHmi := wHmi OR 16#0080; END_IF;
 IF bufferHH       THEN wHmi := wHmi OR 16#0100; END_IF;
-CNF_HMI := initPass OR (wHmi <> oldHmi) OR (uInfo <> oldInfo) OR (stsEstado <> oldEstado) OR (nivValor <> oldNivel)
-           OR (pidSaida <> oldSaida) OR (stpVelocidade <> oldVel) OR (uResta <> oldResta);
+(* IHM: estado na hora; nivel, saida do PID, velocidade e tempo restante no maximo 1 vez por segundo (TICK) *)
+CNF_HMI := initPass OR (wHmi <> oldHmi) OR (uInfo <> oldInfo) OR (stsEstado <> oldEstado)
+           OR (TICK AND ((nivValor <> oldNivel) OR (pidSaida <> oldSaida) OR (stpVelocidade <> hmiVel) OR (uResta <> oldResta)));
 wAlm := 0;
 IF almRecalque   THEN wAlm := wAlm OR 16#0001; END_IF;
 IF almNivelAlto  THEN wAlm := wAlm OR 16#0002; END_IF;
@@ -608,9 +615,9 @@ oldSts := wSts;
 oldHmi := wHmi;
 oldInfo := uInfo;
 oldEstado := stsEstado;
-oldNivel := nivValor;
-oldSaida := pidSaida;
-oldResta := uResta;
+IF CNF_HMI THEN
+    oldNivel := nivValor; oldSaida := pidSaida; oldResta := uResta; hmiVel := stpVelocidade;
+END_IF;
 oldAlm := wAlm;
 oldCom := wCom;
 

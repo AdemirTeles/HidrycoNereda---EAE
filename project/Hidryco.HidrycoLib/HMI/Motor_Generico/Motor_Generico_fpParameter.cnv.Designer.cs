@@ -114,12 +114,12 @@ namespace Hidryco.HidrycoLib.Faceplates.Motor_Generico
 			this.vManual.NumberBase = NxtControl.GuiFramework.NumberBase.Decimal;
 			this.vManual.Pen = new NxtControl.Drawing.Pen("TextBoxPen");
 			this.vManual.SetColor = new NxtControl.Drawing.Color("Yellow");
-			this.vManual.Suffix = " %";
-			this.vManual.TagName = "STP_SAIDA_MANUAL";
+			this.vManual.Suffix = " Hz";
 			this.vManual.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
 			this.vManual.UseInputPad = true;
 			this.vManual.Value = 0F;
 			this.vManual.Visible = false;
+			this.vManual.TagName = "STP_SAIDA_MANUAL";
 			this.vManual.EndInit();
 			// 
 			// xInversor

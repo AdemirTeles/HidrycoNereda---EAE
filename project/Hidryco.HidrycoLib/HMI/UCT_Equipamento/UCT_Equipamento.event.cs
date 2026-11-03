@@ -69,7 +69,7 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_Equipamento
       return (System.Boolean) var;
     }  }
 
-    public bool Get_STS_HORIMETRO_HORA(ref System.Int32 value)
+    public bool Get_STS_HORIMETRO_HOR(ref System.Int32 value)
     {
       if (accessorService == null)
         return false;
@@ -79,7 +79,7 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_Equipamento
       return ret;
     }
 
-    public System.Int32? STS_HORIMETRO_HORA
+    public System.Int32? STS_HORIMETRO_HOR
     { get {
       if (accessorService == null)
         return null;
@@ -262,11 +262,11 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_Equipamento
     public E_ATUALIZA_COMANDO_LIGA_MANUALEventArgs()
     {
     }
-    private System.Boolean? cmdLigaManual_field = null;
-    public System.Boolean? cmdLigaManual
+    private System.Boolean? CMD_MANUAL_field = null;
+    public System.Boolean? CMD_MANUAL
     {
-       get { return cmdLigaManual_field; }
-       set { cmdLigaManual_field = value; }
+       get { return CMD_MANUAL_field; }
+       set { CMD_MANUAL_field = value; }
     }
 
   }
@@ -276,11 +276,11 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_Equipamento
     public E_ATUALIZA_SETPOINTEventArgs()
     {
     }
-    private System.Single? stpVelocidade_field = null;
-    public System.Single? stpVelocidade
+    private System.Single? STP_VELOCIDADE_field = null;
+    public System.Single? STP_VELOCIDADE
     {
-       get { return stpVelocidade_field; }
-       set { stpVelocidade_field = value; }
+       get { return STP_VELOCIDADE_field; }
+       set { STP_VELOCIDADE_field = value; }
     }
 
   }
@@ -290,11 +290,11 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_Equipamento
     public E_ATUALIZA_COMANDO_LIGA_INTERMITENTEEventArgs()
     {
     }
-    private System.Boolean? cmdLigaIntermitente_field = null;
-    public System.Boolean? cmdLigaIntermitente
+    private System.Boolean? CMD_INTERMITENTE_field = null;
+    public System.Boolean? CMD_INTERMITENTE
     {
-       get { return cmdLigaIntermitente_field; }
-       set { cmdLigaIntermitente_field = value; }
+       get { return CMD_INTERMITENTE_field; }
+       set { CMD_INTERMITENTE_field = value; }
     }
 
   }
@@ -304,11 +304,11 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_Equipamento
     public E_ATUALIZA_HABILITA_REVERSAOEventArgs()
     {
     }
-    private System.Boolean? habilitaReversao_field = null;
-    public System.Boolean? habilitaReversao
+    private System.Boolean? HABILITA_REVERSAO_field = null;
+    public System.Boolean? HABILITA_REVERSAO
     {
-       get { return habilitaReversao_field; }
-       set { habilitaReversao_field = value; }
+       get { return HABILITA_REVERSAO_field; }
+       set { HABILITA_REVERSAO_field = value; }
     }
 
   }
@@ -353,68 +353,68 @@ stack Trace:
 
       }
     }
-    public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_MANUAL(System.Boolean cmdLigaManual)
+    public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_MANUAL(System.Boolean CMD_MANUAL)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {cmdLigaManual});
+      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {CMD_MANUAL});
     }
     public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_MANUAL(Hidryco.HidrycoLib.Symbols.UCT_Equipamento.E_ATUALIZA_COMANDO_LIGA_MANUALEventArgs ea)
     {
       object[] _values_ = new object[1];
-      if (ea.cmdLigaManual.HasValue) _values_[0] = ea.cmdLigaManual.Value;
+      if (ea.CMD_MANUAL.HasValue) _values_[0] = ea.CMD_MANUAL.Value;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
-    public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_MANUAL(System.Boolean cmdLigaManual, bool ignore_cmdLigaManual)
+    public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_MANUAL(System.Boolean CMD_MANUAL, bool ignore_CMD_MANUAL)
     {
       object[] _values_ = new object[1];
-      if (!ignore_cmdLigaManual) _values_[0] = cmdLigaManual;
+      if (!ignore_CMD_MANUAL) _values_[0] = CMD_MANUAL;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
-    public bool FireEvent_E_ATUALIZA_SETPOINT(System.Single stpVelocidade)
+    public bool FireEvent_E_ATUALIZA_SETPOINT(System.Single STP_VELOCIDADE)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {stpVelocidade});
+      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {STP_VELOCIDADE});
     }
     public bool FireEvent_E_ATUALIZA_SETPOINT(Hidryco.HidrycoLib.Symbols.UCT_Equipamento.E_ATUALIZA_SETPOINTEventArgs ea)
     {
       object[] _values_ = new object[1];
-      if (ea.stpVelocidade.HasValue) _values_[0] = ea.stpVelocidade.Value;
+      if (ea.STP_VELOCIDADE.HasValue) _values_[0] = ea.STP_VELOCIDADE.Value;
       return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
     }
-    public bool FireEvent_E_ATUALIZA_SETPOINT(System.Single stpVelocidade, bool ignore_stpVelocidade)
+    public bool FireEvent_E_ATUALIZA_SETPOINT(System.Single STP_VELOCIDADE, bool ignore_STP_VELOCIDADE)
     {
       object[] _values_ = new object[1];
-      if (!ignore_stpVelocidade) _values_[0] = stpVelocidade;
+      if (!ignore_STP_VELOCIDADE) _values_[0] = STP_VELOCIDADE;
       return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
     }
-    public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_INTERMITENTE(System.Boolean cmdLigaIntermitente)
+    public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_INTERMITENTE(System.Boolean CMD_INTERMITENTE)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(2, new object[] {cmdLigaIntermitente});
+      return ((IHMIAccessorOutput)this).FireEvent(2, new object[] {CMD_INTERMITENTE});
     }
     public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_INTERMITENTE(Hidryco.HidrycoLib.Symbols.UCT_Equipamento.E_ATUALIZA_COMANDO_LIGA_INTERMITENTEEventArgs ea)
     {
       object[] _values_ = new object[1];
-      if (ea.cmdLigaIntermitente.HasValue) _values_[0] = ea.cmdLigaIntermitente.Value;
+      if (ea.CMD_INTERMITENTE.HasValue) _values_[0] = ea.CMD_INTERMITENTE.Value;
       return ((IHMIAccessorOutput)this).FireEvent(2, _values_);
     }
-    public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_INTERMITENTE(System.Boolean cmdLigaIntermitente, bool ignore_cmdLigaIntermitente)
+    public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_INTERMITENTE(System.Boolean CMD_INTERMITENTE, bool ignore_CMD_INTERMITENTE)
     {
       object[] _values_ = new object[1];
-      if (!ignore_cmdLigaIntermitente) _values_[0] = cmdLigaIntermitente;
+      if (!ignore_CMD_INTERMITENTE) _values_[0] = CMD_INTERMITENTE;
       return ((IHMIAccessorOutput)this).FireEvent(2, _values_);
     }
-    public bool FireEvent_E_ATUALIZA_HABILITA_REVERSAO(System.Boolean habilitaReversao)
+    public bool FireEvent_E_ATUALIZA_HABILITA_REVERSAO(System.Boolean HABILITA_REVERSAO)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(3, new object[] {habilitaReversao});
+      return ((IHMIAccessorOutput)this).FireEvent(3, new object[] {HABILITA_REVERSAO});
     }
     public bool FireEvent_E_ATUALIZA_HABILITA_REVERSAO(Hidryco.HidrycoLib.Symbols.UCT_Equipamento.E_ATUALIZA_HABILITA_REVERSAOEventArgs ea)
     {
       object[] _values_ = new object[1];
-      if (ea.habilitaReversao.HasValue) _values_[0] = ea.habilitaReversao.Value;
+      if (ea.HABILITA_REVERSAO.HasValue) _values_[0] = ea.HABILITA_REVERSAO.Value;
       return ((IHMIAccessorOutput)this).FireEvent(3, _values_);
     }
-    public bool FireEvent_E_ATUALIZA_HABILITA_REVERSAO(System.Boolean habilitaReversao, bool ignore_habilitaReversao)
+    public bool FireEvent_E_ATUALIZA_HABILITA_REVERSAO(System.Boolean HABILITA_REVERSAO, bool ignore_HABILITA_REVERSAO)
     {
       object[] _values_ = new object[1];
-      if (!ignore_habilitaReversao) _values_[0] = habilitaReversao;
+      if (!ignore_HABILITA_REVERSAO) _values_[0] = HABILITA_REVERSAO;
       return ((IHMIAccessorOutput)this).FireEvent(3, _values_);
     }
 
@@ -459,68 +459,68 @@ stack Trace:
 
       }
     }
-    public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_MANUAL(System.Boolean cmdLigaManual)
+    public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_MANUAL(System.Boolean CMD_MANUAL)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {cmdLigaManual});
+      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {CMD_MANUAL});
     }
     public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_MANUAL(Hidryco.HidrycoLib.Symbols.UCT_Equipamento.E_ATUALIZA_COMANDO_LIGA_MANUALEventArgs ea)
     {
       object[] _values_ = new object[1];
-      if (ea.cmdLigaManual.HasValue) _values_[0] = ea.cmdLigaManual.Value;
+      if (ea.CMD_MANUAL.HasValue) _values_[0] = ea.CMD_MANUAL.Value;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
-    public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_MANUAL(System.Boolean cmdLigaManual, bool ignore_cmdLigaManual)
+    public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_MANUAL(System.Boolean CMD_MANUAL, bool ignore_CMD_MANUAL)
     {
       object[] _values_ = new object[1];
-      if (!ignore_cmdLigaManual) _values_[0] = cmdLigaManual;
+      if (!ignore_CMD_MANUAL) _values_[0] = CMD_MANUAL;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
-    public bool FireEvent_E_ATUALIZA_SETPOINT(System.Single stpVelocidade)
+    public bool FireEvent_E_ATUALIZA_SETPOINT(System.Single STP_VELOCIDADE)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {stpVelocidade});
+      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {STP_VELOCIDADE});
     }
     public bool FireEvent_E_ATUALIZA_SETPOINT(Hidryco.HidrycoLib.Symbols.UCT_Equipamento.E_ATUALIZA_SETPOINTEventArgs ea)
     {
       object[] _values_ = new object[1];
-      if (ea.stpVelocidade.HasValue) _values_[0] = ea.stpVelocidade.Value;
+      if (ea.STP_VELOCIDADE.HasValue) _values_[0] = ea.STP_VELOCIDADE.Value;
       return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
     }
-    public bool FireEvent_E_ATUALIZA_SETPOINT(System.Single stpVelocidade, bool ignore_stpVelocidade)
+    public bool FireEvent_E_ATUALIZA_SETPOINT(System.Single STP_VELOCIDADE, bool ignore_STP_VELOCIDADE)
     {
       object[] _values_ = new object[1];
-      if (!ignore_stpVelocidade) _values_[0] = stpVelocidade;
+      if (!ignore_STP_VELOCIDADE) _values_[0] = STP_VELOCIDADE;
       return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
     }
-    public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_INTERMITENTE(System.Boolean cmdLigaIntermitente)
+    public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_INTERMITENTE(System.Boolean CMD_INTERMITENTE)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(2, new object[] {cmdLigaIntermitente});
+      return ((IHMIAccessorOutput)this).FireEvent(2, new object[] {CMD_INTERMITENTE});
     }
     public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_INTERMITENTE(Hidryco.HidrycoLib.Symbols.UCT_Equipamento.E_ATUALIZA_COMANDO_LIGA_INTERMITENTEEventArgs ea)
     {
       object[] _values_ = new object[1];
-      if (ea.cmdLigaIntermitente.HasValue) _values_[0] = ea.cmdLigaIntermitente.Value;
+      if (ea.CMD_INTERMITENTE.HasValue) _values_[0] = ea.CMD_INTERMITENTE.Value;
       return ((IHMIAccessorOutput)this).FireEvent(2, _values_);
     }
-    public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_INTERMITENTE(System.Boolean cmdLigaIntermitente, bool ignore_cmdLigaIntermitente)
+    public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_INTERMITENTE(System.Boolean CMD_INTERMITENTE, bool ignore_CMD_INTERMITENTE)
     {
       object[] _values_ = new object[1];
-      if (!ignore_cmdLigaIntermitente) _values_[0] = cmdLigaIntermitente;
+      if (!ignore_CMD_INTERMITENTE) _values_[0] = CMD_INTERMITENTE;
       return ((IHMIAccessorOutput)this).FireEvent(2, _values_);
     }
-    public bool FireEvent_E_ATUALIZA_HABILITA_REVERSAO(System.Boolean habilitaReversao)
+    public bool FireEvent_E_ATUALIZA_HABILITA_REVERSAO(System.Boolean HABILITA_REVERSAO)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(3, new object[] {habilitaReversao});
+      return ((IHMIAccessorOutput)this).FireEvent(3, new object[] {HABILITA_REVERSAO});
     }
     public bool FireEvent_E_ATUALIZA_HABILITA_REVERSAO(Hidryco.HidrycoLib.Symbols.UCT_Equipamento.E_ATUALIZA_HABILITA_REVERSAOEventArgs ea)
     {
       object[] _values_ = new object[1];
-      if (ea.habilitaReversao.HasValue) _values_[0] = ea.habilitaReversao.Value;
+      if (ea.HABILITA_REVERSAO.HasValue) _values_[0] = ea.HABILITA_REVERSAO.Value;
       return ((IHMIAccessorOutput)this).FireEvent(3, _values_);
     }
-    public bool FireEvent_E_ATUALIZA_HABILITA_REVERSAO(System.Boolean habilitaReversao, bool ignore_habilitaReversao)
+    public bool FireEvent_E_ATUALIZA_HABILITA_REVERSAO(System.Boolean HABILITA_REVERSAO, bool ignore_HABILITA_REVERSAO)
     {
       object[] _values_ = new object[1];
-      if (!ignore_habilitaReversao) _values_[0] = habilitaReversao;
+      if (!ignore_HABILITA_REVERSAO) _values_[0] = HABILITA_REVERSAO;
       return ((IHMIAccessorOutput)this).FireEvent(3, _values_);
     }
 
@@ -565,68 +565,68 @@ stack Trace:
 
       }
     }
-    public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_MANUAL(System.Boolean cmdLigaManual)
+    public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_MANUAL(System.Boolean CMD_MANUAL)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {cmdLigaManual});
+      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {CMD_MANUAL});
     }
     public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_MANUAL(Hidryco.HidrycoLib.Symbols.UCT_Equipamento.E_ATUALIZA_COMANDO_LIGA_MANUALEventArgs ea)
     {
       object[] _values_ = new object[1];
-      if (ea.cmdLigaManual.HasValue) _values_[0] = ea.cmdLigaManual.Value;
+      if (ea.CMD_MANUAL.HasValue) _values_[0] = ea.CMD_MANUAL.Value;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
-    public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_MANUAL(System.Boolean cmdLigaManual, bool ignore_cmdLigaManual)
+    public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_MANUAL(System.Boolean CMD_MANUAL, bool ignore_CMD_MANUAL)
     {
       object[] _values_ = new object[1];
-      if (!ignore_cmdLigaManual) _values_[0] = cmdLigaManual;
+      if (!ignore_CMD_MANUAL) _values_[0] = CMD_MANUAL;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
-    public bool FireEvent_E_ATUALIZA_SETPOINT(System.Single stpVelocidade)
+    public bool FireEvent_E_ATUALIZA_SETPOINT(System.Single STP_VELOCIDADE)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {stpVelocidade});
+      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {STP_VELOCIDADE});
     }
     public bool FireEvent_E_ATUALIZA_SETPOINT(Hidryco.HidrycoLib.Symbols.UCT_Equipamento.E_ATUALIZA_SETPOINTEventArgs ea)
     {
       object[] _values_ = new object[1];
-      if (ea.stpVelocidade.HasValue) _values_[0] = ea.stpVelocidade.Value;
+      if (ea.STP_VELOCIDADE.HasValue) _values_[0] = ea.STP_VELOCIDADE.Value;
       return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
     }
-    public bool FireEvent_E_ATUALIZA_SETPOINT(System.Single stpVelocidade, bool ignore_stpVelocidade)
+    public bool FireEvent_E_ATUALIZA_SETPOINT(System.Single STP_VELOCIDADE, bool ignore_STP_VELOCIDADE)
     {
       object[] _values_ = new object[1];
-      if (!ignore_stpVelocidade) _values_[0] = stpVelocidade;
+      if (!ignore_STP_VELOCIDADE) _values_[0] = STP_VELOCIDADE;
       return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
     }
-    public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_INTERMITENTE(System.Boolean cmdLigaIntermitente)
+    public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_INTERMITENTE(System.Boolean CMD_INTERMITENTE)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(2, new object[] {cmdLigaIntermitente});
+      return ((IHMIAccessorOutput)this).FireEvent(2, new object[] {CMD_INTERMITENTE});
     }
     public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_INTERMITENTE(Hidryco.HidrycoLib.Symbols.UCT_Equipamento.E_ATUALIZA_COMANDO_LIGA_INTERMITENTEEventArgs ea)
     {
       object[] _values_ = new object[1];
-      if (ea.cmdLigaIntermitente.HasValue) _values_[0] = ea.cmdLigaIntermitente.Value;
+      if (ea.CMD_INTERMITENTE.HasValue) _values_[0] = ea.CMD_INTERMITENTE.Value;
       return ((IHMIAccessorOutput)this).FireEvent(2, _values_);
     }
-    public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_INTERMITENTE(System.Boolean cmdLigaIntermitente, bool ignore_cmdLigaIntermitente)
+    public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_INTERMITENTE(System.Boolean CMD_INTERMITENTE, bool ignore_CMD_INTERMITENTE)
     {
       object[] _values_ = new object[1];
-      if (!ignore_cmdLigaIntermitente) _values_[0] = cmdLigaIntermitente;
+      if (!ignore_CMD_INTERMITENTE) _values_[0] = CMD_INTERMITENTE;
       return ((IHMIAccessorOutput)this).FireEvent(2, _values_);
     }
-    public bool FireEvent_E_ATUALIZA_HABILITA_REVERSAO(System.Boolean habilitaReversao)
+    public bool FireEvent_E_ATUALIZA_HABILITA_REVERSAO(System.Boolean HABILITA_REVERSAO)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(3, new object[] {habilitaReversao});
+      return ((IHMIAccessorOutput)this).FireEvent(3, new object[] {HABILITA_REVERSAO});
     }
     public bool FireEvent_E_ATUALIZA_HABILITA_REVERSAO(Hidryco.HidrycoLib.Symbols.UCT_Equipamento.E_ATUALIZA_HABILITA_REVERSAOEventArgs ea)
     {
       object[] _values_ = new object[1];
-      if (ea.habilitaReversao.HasValue) _values_[0] = ea.habilitaReversao.Value;
+      if (ea.HABILITA_REVERSAO.HasValue) _values_[0] = ea.HABILITA_REVERSAO.Value;
       return ((IHMIAccessorOutput)this).FireEvent(3, _values_);
     }
-    public bool FireEvent_E_ATUALIZA_HABILITA_REVERSAO(System.Boolean habilitaReversao, bool ignore_habilitaReversao)
+    public bool FireEvent_E_ATUALIZA_HABILITA_REVERSAO(System.Boolean HABILITA_REVERSAO, bool ignore_HABILITA_REVERSAO)
     {
       object[] _values_ = new object[1];
-      if (!ignore_habilitaReversao) _values_[0] = habilitaReversao;
+      if (!ignore_HABILITA_REVERSAO) _values_[0] = HABILITA_REVERSAO;
       return ((IHMIAccessorOutput)this).FireEvent(3, _values_);
     }
 
@@ -671,68 +671,68 @@ stack Trace:
 
       }
     }
-    public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_MANUAL(System.Boolean cmdLigaManual)
+    public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_MANUAL(System.Boolean CMD_MANUAL)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {cmdLigaManual});
+      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {CMD_MANUAL});
     }
     public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_MANUAL(Hidryco.HidrycoLib.Symbols.UCT_Equipamento.E_ATUALIZA_COMANDO_LIGA_MANUALEventArgs ea)
     {
       object[] _values_ = new object[1];
-      if (ea.cmdLigaManual.HasValue) _values_[0] = ea.cmdLigaManual.Value;
+      if (ea.CMD_MANUAL.HasValue) _values_[0] = ea.CMD_MANUAL.Value;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
-    public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_MANUAL(System.Boolean cmdLigaManual, bool ignore_cmdLigaManual)
+    public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_MANUAL(System.Boolean CMD_MANUAL, bool ignore_CMD_MANUAL)
     {
       object[] _values_ = new object[1];
-      if (!ignore_cmdLigaManual) _values_[0] = cmdLigaManual;
+      if (!ignore_CMD_MANUAL) _values_[0] = CMD_MANUAL;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
-    public bool FireEvent_E_ATUALIZA_SETPOINT(System.Single stpVelocidade)
+    public bool FireEvent_E_ATUALIZA_SETPOINT(System.Single STP_VELOCIDADE)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {stpVelocidade});
+      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {STP_VELOCIDADE});
     }
     public bool FireEvent_E_ATUALIZA_SETPOINT(Hidryco.HidrycoLib.Symbols.UCT_Equipamento.E_ATUALIZA_SETPOINTEventArgs ea)
     {
       object[] _values_ = new object[1];
-      if (ea.stpVelocidade.HasValue) _values_[0] = ea.stpVelocidade.Value;
+      if (ea.STP_VELOCIDADE.HasValue) _values_[0] = ea.STP_VELOCIDADE.Value;
       return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
     }
-    public bool FireEvent_E_ATUALIZA_SETPOINT(System.Single stpVelocidade, bool ignore_stpVelocidade)
+    public bool FireEvent_E_ATUALIZA_SETPOINT(System.Single STP_VELOCIDADE, bool ignore_STP_VELOCIDADE)
     {
       object[] _values_ = new object[1];
-      if (!ignore_stpVelocidade) _values_[0] = stpVelocidade;
+      if (!ignore_STP_VELOCIDADE) _values_[0] = STP_VELOCIDADE;
       return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
     }
-    public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_INTERMITENTE(System.Boolean cmdLigaIntermitente)
+    public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_INTERMITENTE(System.Boolean CMD_INTERMITENTE)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(2, new object[] {cmdLigaIntermitente});
+      return ((IHMIAccessorOutput)this).FireEvent(2, new object[] {CMD_INTERMITENTE});
     }
     public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_INTERMITENTE(Hidryco.HidrycoLib.Symbols.UCT_Equipamento.E_ATUALIZA_COMANDO_LIGA_INTERMITENTEEventArgs ea)
     {
       object[] _values_ = new object[1];
-      if (ea.cmdLigaIntermitente.HasValue) _values_[0] = ea.cmdLigaIntermitente.Value;
+      if (ea.CMD_INTERMITENTE.HasValue) _values_[0] = ea.CMD_INTERMITENTE.Value;
       return ((IHMIAccessorOutput)this).FireEvent(2, _values_);
     }
-    public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_INTERMITENTE(System.Boolean cmdLigaIntermitente, bool ignore_cmdLigaIntermitente)
+    public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_INTERMITENTE(System.Boolean CMD_INTERMITENTE, bool ignore_CMD_INTERMITENTE)
     {
       object[] _values_ = new object[1];
-      if (!ignore_cmdLigaIntermitente) _values_[0] = cmdLigaIntermitente;
+      if (!ignore_CMD_INTERMITENTE) _values_[0] = CMD_INTERMITENTE;
       return ((IHMIAccessorOutput)this).FireEvent(2, _values_);
     }
-    public bool FireEvent_E_ATUALIZA_HABILITA_REVERSAO(System.Boolean habilitaReversao)
+    public bool FireEvent_E_ATUALIZA_HABILITA_REVERSAO(System.Boolean HABILITA_REVERSAO)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(3, new object[] {habilitaReversao});
+      return ((IHMIAccessorOutput)this).FireEvent(3, new object[] {HABILITA_REVERSAO});
     }
     public bool FireEvent_E_ATUALIZA_HABILITA_REVERSAO(Hidryco.HidrycoLib.Symbols.UCT_Equipamento.E_ATUALIZA_HABILITA_REVERSAOEventArgs ea)
     {
       object[] _values_ = new object[1];
-      if (ea.habilitaReversao.HasValue) _values_[0] = ea.habilitaReversao.Value;
+      if (ea.HABILITA_REVERSAO.HasValue) _values_[0] = ea.HABILITA_REVERSAO.Value;
       return ((IHMIAccessorOutput)this).FireEvent(3, _values_);
     }
-    public bool FireEvent_E_ATUALIZA_HABILITA_REVERSAO(System.Boolean habilitaReversao, bool ignore_habilitaReversao)
+    public bool FireEvent_E_ATUALIZA_HABILITA_REVERSAO(System.Boolean HABILITA_REVERSAO, bool ignore_HABILITA_REVERSAO)
     {
       object[] _values_ = new object[1];
-      if (!ignore_habilitaReversao) _values_[0] = habilitaReversao;
+      if (!ignore_HABILITA_REVERSAO) _values_[0] = HABILITA_REVERSAO;
       return ((IHMIAccessorOutput)this).FireEvent(3, _values_);
     }
 
@@ -777,68 +777,68 @@ stack Trace:
 
       }
     }
-    public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_MANUAL(System.Boolean cmdLigaManual)
+    public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_MANUAL(System.Boolean CMD_MANUAL)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {cmdLigaManual});
+      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {CMD_MANUAL});
     }
     public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_MANUAL(Hidryco.HidrycoLib.Symbols.UCT_Equipamento.E_ATUALIZA_COMANDO_LIGA_MANUALEventArgs ea)
     {
       object[] _values_ = new object[1];
-      if (ea.cmdLigaManual.HasValue) _values_[0] = ea.cmdLigaManual.Value;
+      if (ea.CMD_MANUAL.HasValue) _values_[0] = ea.CMD_MANUAL.Value;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
-    public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_MANUAL(System.Boolean cmdLigaManual, bool ignore_cmdLigaManual)
+    public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_MANUAL(System.Boolean CMD_MANUAL, bool ignore_CMD_MANUAL)
     {
       object[] _values_ = new object[1];
-      if (!ignore_cmdLigaManual) _values_[0] = cmdLigaManual;
+      if (!ignore_CMD_MANUAL) _values_[0] = CMD_MANUAL;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
-    public bool FireEvent_E_ATUALIZA_SETPOINT(System.Single stpVelocidade)
+    public bool FireEvent_E_ATUALIZA_SETPOINT(System.Single STP_VELOCIDADE)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {stpVelocidade});
+      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {STP_VELOCIDADE});
     }
     public bool FireEvent_E_ATUALIZA_SETPOINT(Hidryco.HidrycoLib.Symbols.UCT_Equipamento.E_ATUALIZA_SETPOINTEventArgs ea)
     {
       object[] _values_ = new object[1];
-      if (ea.stpVelocidade.HasValue) _values_[0] = ea.stpVelocidade.Value;
+      if (ea.STP_VELOCIDADE.HasValue) _values_[0] = ea.STP_VELOCIDADE.Value;
       return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
     }
-    public bool FireEvent_E_ATUALIZA_SETPOINT(System.Single stpVelocidade, bool ignore_stpVelocidade)
+    public bool FireEvent_E_ATUALIZA_SETPOINT(System.Single STP_VELOCIDADE, bool ignore_STP_VELOCIDADE)
     {
       object[] _values_ = new object[1];
-      if (!ignore_stpVelocidade) _values_[0] = stpVelocidade;
+      if (!ignore_STP_VELOCIDADE) _values_[0] = STP_VELOCIDADE;
       return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
     }
-    public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_INTERMITENTE(System.Boolean cmdLigaIntermitente)
+    public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_INTERMITENTE(System.Boolean CMD_INTERMITENTE)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(2, new object[] {cmdLigaIntermitente});
+      return ((IHMIAccessorOutput)this).FireEvent(2, new object[] {CMD_INTERMITENTE});
     }
     public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_INTERMITENTE(Hidryco.HidrycoLib.Symbols.UCT_Equipamento.E_ATUALIZA_COMANDO_LIGA_INTERMITENTEEventArgs ea)
     {
       object[] _values_ = new object[1];
-      if (ea.cmdLigaIntermitente.HasValue) _values_[0] = ea.cmdLigaIntermitente.Value;
+      if (ea.CMD_INTERMITENTE.HasValue) _values_[0] = ea.CMD_INTERMITENTE.Value;
       return ((IHMIAccessorOutput)this).FireEvent(2, _values_);
     }
-    public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_INTERMITENTE(System.Boolean cmdLigaIntermitente, bool ignore_cmdLigaIntermitente)
+    public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_INTERMITENTE(System.Boolean CMD_INTERMITENTE, bool ignore_CMD_INTERMITENTE)
     {
       object[] _values_ = new object[1];
-      if (!ignore_cmdLigaIntermitente) _values_[0] = cmdLigaIntermitente;
+      if (!ignore_CMD_INTERMITENTE) _values_[0] = CMD_INTERMITENTE;
       return ((IHMIAccessorOutput)this).FireEvent(2, _values_);
     }
-    public bool FireEvent_E_ATUALIZA_HABILITA_REVERSAO(System.Boolean habilitaReversao)
+    public bool FireEvent_E_ATUALIZA_HABILITA_REVERSAO(System.Boolean HABILITA_REVERSAO)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(3, new object[] {habilitaReversao});
+      return ((IHMIAccessorOutput)this).FireEvent(3, new object[] {HABILITA_REVERSAO});
     }
     public bool FireEvent_E_ATUALIZA_HABILITA_REVERSAO(Hidryco.HidrycoLib.Symbols.UCT_Equipamento.E_ATUALIZA_HABILITA_REVERSAOEventArgs ea)
     {
       object[] _values_ = new object[1];
-      if (ea.habilitaReversao.HasValue) _values_[0] = ea.habilitaReversao.Value;
+      if (ea.HABILITA_REVERSAO.HasValue) _values_[0] = ea.HABILITA_REVERSAO.Value;
       return ((IHMIAccessorOutput)this).FireEvent(3, _values_);
     }
-    public bool FireEvent_E_ATUALIZA_HABILITA_REVERSAO(System.Boolean habilitaReversao, bool ignore_habilitaReversao)
+    public bool FireEvent_E_ATUALIZA_HABILITA_REVERSAO(System.Boolean HABILITA_REVERSAO, bool ignore_HABILITA_REVERSAO)
     {
       object[] _values_ = new object[1];
-      if (!ignore_habilitaReversao) _values_[0] = habilitaReversao;
+      if (!ignore_HABILITA_REVERSAO) _values_[0] = HABILITA_REVERSAO;
       return ((IHMIAccessorOutput)this).FireEvent(3, _values_);
     }
 
@@ -883,68 +883,68 @@ stack Trace:
 
       }
     }
-    public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_MANUAL(System.Boolean cmdLigaManual)
+    public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_MANUAL(System.Boolean CMD_MANUAL)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {cmdLigaManual});
+      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {CMD_MANUAL});
     }
     public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_MANUAL(Hidryco.HidrycoLib.Symbols.UCT_Equipamento.E_ATUALIZA_COMANDO_LIGA_MANUALEventArgs ea)
     {
       object[] _values_ = new object[1];
-      if (ea.cmdLigaManual.HasValue) _values_[0] = ea.cmdLigaManual.Value;
+      if (ea.CMD_MANUAL.HasValue) _values_[0] = ea.CMD_MANUAL.Value;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
-    public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_MANUAL(System.Boolean cmdLigaManual, bool ignore_cmdLigaManual)
+    public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_MANUAL(System.Boolean CMD_MANUAL, bool ignore_CMD_MANUAL)
     {
       object[] _values_ = new object[1];
-      if (!ignore_cmdLigaManual) _values_[0] = cmdLigaManual;
+      if (!ignore_CMD_MANUAL) _values_[0] = CMD_MANUAL;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
-    public bool FireEvent_E_ATUALIZA_SETPOINT(System.Single stpVelocidade)
+    public bool FireEvent_E_ATUALIZA_SETPOINT(System.Single STP_VELOCIDADE)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {stpVelocidade});
+      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {STP_VELOCIDADE});
     }
     public bool FireEvent_E_ATUALIZA_SETPOINT(Hidryco.HidrycoLib.Symbols.UCT_Equipamento.E_ATUALIZA_SETPOINTEventArgs ea)
     {
       object[] _values_ = new object[1];
-      if (ea.stpVelocidade.HasValue) _values_[0] = ea.stpVelocidade.Value;
+      if (ea.STP_VELOCIDADE.HasValue) _values_[0] = ea.STP_VELOCIDADE.Value;
       return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
     }
-    public bool FireEvent_E_ATUALIZA_SETPOINT(System.Single stpVelocidade, bool ignore_stpVelocidade)
+    public bool FireEvent_E_ATUALIZA_SETPOINT(System.Single STP_VELOCIDADE, bool ignore_STP_VELOCIDADE)
     {
       object[] _values_ = new object[1];
-      if (!ignore_stpVelocidade) _values_[0] = stpVelocidade;
+      if (!ignore_STP_VELOCIDADE) _values_[0] = STP_VELOCIDADE;
       return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
     }
-    public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_INTERMITENTE(System.Boolean cmdLigaIntermitente)
+    public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_INTERMITENTE(System.Boolean CMD_INTERMITENTE)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(2, new object[] {cmdLigaIntermitente});
+      return ((IHMIAccessorOutput)this).FireEvent(2, new object[] {CMD_INTERMITENTE});
     }
     public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_INTERMITENTE(Hidryco.HidrycoLib.Symbols.UCT_Equipamento.E_ATUALIZA_COMANDO_LIGA_INTERMITENTEEventArgs ea)
     {
       object[] _values_ = new object[1];
-      if (ea.cmdLigaIntermitente.HasValue) _values_[0] = ea.cmdLigaIntermitente.Value;
+      if (ea.CMD_INTERMITENTE.HasValue) _values_[0] = ea.CMD_INTERMITENTE.Value;
       return ((IHMIAccessorOutput)this).FireEvent(2, _values_);
     }
-    public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_INTERMITENTE(System.Boolean cmdLigaIntermitente, bool ignore_cmdLigaIntermitente)
+    public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_INTERMITENTE(System.Boolean CMD_INTERMITENTE, bool ignore_CMD_INTERMITENTE)
     {
       object[] _values_ = new object[1];
-      if (!ignore_cmdLigaIntermitente) _values_[0] = cmdLigaIntermitente;
+      if (!ignore_CMD_INTERMITENTE) _values_[0] = CMD_INTERMITENTE;
       return ((IHMIAccessorOutput)this).FireEvent(2, _values_);
     }
-    public bool FireEvent_E_ATUALIZA_HABILITA_REVERSAO(System.Boolean habilitaReversao)
+    public bool FireEvent_E_ATUALIZA_HABILITA_REVERSAO(System.Boolean HABILITA_REVERSAO)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(3, new object[] {habilitaReversao});
+      return ((IHMIAccessorOutput)this).FireEvent(3, new object[] {HABILITA_REVERSAO});
     }
     public bool FireEvent_E_ATUALIZA_HABILITA_REVERSAO(Hidryco.HidrycoLib.Symbols.UCT_Equipamento.E_ATUALIZA_HABILITA_REVERSAOEventArgs ea)
     {
       object[] _values_ = new object[1];
-      if (ea.habilitaReversao.HasValue) _values_[0] = ea.habilitaReversao.Value;
+      if (ea.HABILITA_REVERSAO.HasValue) _values_[0] = ea.HABILITA_REVERSAO.Value;
       return ((IHMIAccessorOutput)this).FireEvent(3, _values_);
     }
-    public bool FireEvent_E_ATUALIZA_HABILITA_REVERSAO(System.Boolean habilitaReversao, bool ignore_habilitaReversao)
+    public bool FireEvent_E_ATUALIZA_HABILITA_REVERSAO(System.Boolean HABILITA_REVERSAO, bool ignore_HABILITA_REVERSAO)
     {
       object[] _values_ = new object[1];
-      if (!ignore_habilitaReversao) _values_[0] = habilitaReversao;
+      if (!ignore_HABILITA_REVERSAO) _values_[0] = HABILITA_REVERSAO;
       return ((IHMIAccessorOutput)this).FireEvent(3, _values_);
     }
 
@@ -989,68 +989,68 @@ stack Trace:
 
       }
     }
-    public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_MANUAL(System.Boolean cmdLigaManual)
+    public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_MANUAL(System.Boolean CMD_MANUAL)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {cmdLigaManual});
+      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {CMD_MANUAL});
     }
     public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_MANUAL(Hidryco.HidrycoLib.Symbols.UCT_Equipamento.E_ATUALIZA_COMANDO_LIGA_MANUALEventArgs ea)
     {
       object[] _values_ = new object[1];
-      if (ea.cmdLigaManual.HasValue) _values_[0] = ea.cmdLigaManual.Value;
+      if (ea.CMD_MANUAL.HasValue) _values_[0] = ea.CMD_MANUAL.Value;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
-    public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_MANUAL(System.Boolean cmdLigaManual, bool ignore_cmdLigaManual)
+    public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_MANUAL(System.Boolean CMD_MANUAL, bool ignore_CMD_MANUAL)
     {
       object[] _values_ = new object[1];
-      if (!ignore_cmdLigaManual) _values_[0] = cmdLigaManual;
+      if (!ignore_CMD_MANUAL) _values_[0] = CMD_MANUAL;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
-    public bool FireEvent_E_ATUALIZA_SETPOINT(System.Single stpVelocidade)
+    public bool FireEvent_E_ATUALIZA_SETPOINT(System.Single STP_VELOCIDADE)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {stpVelocidade});
+      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {STP_VELOCIDADE});
     }
     public bool FireEvent_E_ATUALIZA_SETPOINT(Hidryco.HidrycoLib.Symbols.UCT_Equipamento.E_ATUALIZA_SETPOINTEventArgs ea)
     {
       object[] _values_ = new object[1];
-      if (ea.stpVelocidade.HasValue) _values_[0] = ea.stpVelocidade.Value;
+      if (ea.STP_VELOCIDADE.HasValue) _values_[0] = ea.STP_VELOCIDADE.Value;
       return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
     }
-    public bool FireEvent_E_ATUALIZA_SETPOINT(System.Single stpVelocidade, bool ignore_stpVelocidade)
+    public bool FireEvent_E_ATUALIZA_SETPOINT(System.Single STP_VELOCIDADE, bool ignore_STP_VELOCIDADE)
     {
       object[] _values_ = new object[1];
-      if (!ignore_stpVelocidade) _values_[0] = stpVelocidade;
+      if (!ignore_STP_VELOCIDADE) _values_[0] = STP_VELOCIDADE;
       return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
     }
-    public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_INTERMITENTE(System.Boolean cmdLigaIntermitente)
+    public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_INTERMITENTE(System.Boolean CMD_INTERMITENTE)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(2, new object[] {cmdLigaIntermitente});
+      return ((IHMIAccessorOutput)this).FireEvent(2, new object[] {CMD_INTERMITENTE});
     }
     public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_INTERMITENTE(Hidryco.HidrycoLib.Symbols.UCT_Equipamento.E_ATUALIZA_COMANDO_LIGA_INTERMITENTEEventArgs ea)
     {
       object[] _values_ = new object[1];
-      if (ea.cmdLigaIntermitente.HasValue) _values_[0] = ea.cmdLigaIntermitente.Value;
+      if (ea.CMD_INTERMITENTE.HasValue) _values_[0] = ea.CMD_INTERMITENTE.Value;
       return ((IHMIAccessorOutput)this).FireEvent(2, _values_);
     }
-    public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_INTERMITENTE(System.Boolean cmdLigaIntermitente, bool ignore_cmdLigaIntermitente)
+    public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_INTERMITENTE(System.Boolean CMD_INTERMITENTE, bool ignore_CMD_INTERMITENTE)
     {
       object[] _values_ = new object[1];
-      if (!ignore_cmdLigaIntermitente) _values_[0] = cmdLigaIntermitente;
+      if (!ignore_CMD_INTERMITENTE) _values_[0] = CMD_INTERMITENTE;
       return ((IHMIAccessorOutput)this).FireEvent(2, _values_);
     }
-    public bool FireEvent_E_ATUALIZA_HABILITA_REVERSAO(System.Boolean habilitaReversao)
+    public bool FireEvent_E_ATUALIZA_HABILITA_REVERSAO(System.Boolean HABILITA_REVERSAO)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(3, new object[] {habilitaReversao});
+      return ((IHMIAccessorOutput)this).FireEvent(3, new object[] {HABILITA_REVERSAO});
     }
     public bool FireEvent_E_ATUALIZA_HABILITA_REVERSAO(Hidryco.HidrycoLib.Symbols.UCT_Equipamento.E_ATUALIZA_HABILITA_REVERSAOEventArgs ea)
     {
       object[] _values_ = new object[1];
-      if (ea.habilitaReversao.HasValue) _values_[0] = ea.habilitaReversao.Value;
+      if (ea.HABILITA_REVERSAO.HasValue) _values_[0] = ea.HABILITA_REVERSAO.Value;
       return ((IHMIAccessorOutput)this).FireEvent(3, _values_);
     }
-    public bool FireEvent_E_ATUALIZA_HABILITA_REVERSAO(System.Boolean habilitaReversao, bool ignore_habilitaReversao)
+    public bool FireEvent_E_ATUALIZA_HABILITA_REVERSAO(System.Boolean HABILITA_REVERSAO, bool ignore_HABILITA_REVERSAO)
     {
       object[] _values_ = new object[1];
-      if (!ignore_habilitaReversao) _values_[0] = habilitaReversao;
+      if (!ignore_HABILITA_REVERSAO) _values_[0] = HABILITA_REVERSAO;
       return ((IHMIAccessorOutput)this).FireEvent(3, _values_);
     }
 
@@ -1095,68 +1095,68 @@ stack Trace:
 
       }
     }
-    public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_MANUAL(System.Boolean cmdLigaManual)
+    public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_MANUAL(System.Boolean CMD_MANUAL)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {cmdLigaManual});
+      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {CMD_MANUAL});
     }
     public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_MANUAL(Hidryco.HidrycoLib.Symbols.UCT_Equipamento.E_ATUALIZA_COMANDO_LIGA_MANUALEventArgs ea)
     {
       object[] _values_ = new object[1];
-      if (ea.cmdLigaManual.HasValue) _values_[0] = ea.cmdLigaManual.Value;
+      if (ea.CMD_MANUAL.HasValue) _values_[0] = ea.CMD_MANUAL.Value;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
-    public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_MANUAL(System.Boolean cmdLigaManual, bool ignore_cmdLigaManual)
+    public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_MANUAL(System.Boolean CMD_MANUAL, bool ignore_CMD_MANUAL)
     {
       object[] _values_ = new object[1];
-      if (!ignore_cmdLigaManual) _values_[0] = cmdLigaManual;
+      if (!ignore_CMD_MANUAL) _values_[0] = CMD_MANUAL;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
-    public bool FireEvent_E_ATUALIZA_SETPOINT(System.Single stpVelocidade)
+    public bool FireEvent_E_ATUALIZA_SETPOINT(System.Single STP_VELOCIDADE)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {stpVelocidade});
+      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {STP_VELOCIDADE});
     }
     public bool FireEvent_E_ATUALIZA_SETPOINT(Hidryco.HidrycoLib.Symbols.UCT_Equipamento.E_ATUALIZA_SETPOINTEventArgs ea)
     {
       object[] _values_ = new object[1];
-      if (ea.stpVelocidade.HasValue) _values_[0] = ea.stpVelocidade.Value;
+      if (ea.STP_VELOCIDADE.HasValue) _values_[0] = ea.STP_VELOCIDADE.Value;
       return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
     }
-    public bool FireEvent_E_ATUALIZA_SETPOINT(System.Single stpVelocidade, bool ignore_stpVelocidade)
+    public bool FireEvent_E_ATUALIZA_SETPOINT(System.Single STP_VELOCIDADE, bool ignore_STP_VELOCIDADE)
     {
       object[] _values_ = new object[1];
-      if (!ignore_stpVelocidade) _values_[0] = stpVelocidade;
+      if (!ignore_STP_VELOCIDADE) _values_[0] = STP_VELOCIDADE;
       return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
     }
-    public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_INTERMITENTE(System.Boolean cmdLigaIntermitente)
+    public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_INTERMITENTE(System.Boolean CMD_INTERMITENTE)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(2, new object[] {cmdLigaIntermitente});
+      return ((IHMIAccessorOutput)this).FireEvent(2, new object[] {CMD_INTERMITENTE});
     }
     public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_INTERMITENTE(Hidryco.HidrycoLib.Symbols.UCT_Equipamento.E_ATUALIZA_COMANDO_LIGA_INTERMITENTEEventArgs ea)
     {
       object[] _values_ = new object[1];
-      if (ea.cmdLigaIntermitente.HasValue) _values_[0] = ea.cmdLigaIntermitente.Value;
+      if (ea.CMD_INTERMITENTE.HasValue) _values_[0] = ea.CMD_INTERMITENTE.Value;
       return ((IHMIAccessorOutput)this).FireEvent(2, _values_);
     }
-    public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_INTERMITENTE(System.Boolean cmdLigaIntermitente, bool ignore_cmdLigaIntermitente)
+    public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_INTERMITENTE(System.Boolean CMD_INTERMITENTE, bool ignore_CMD_INTERMITENTE)
     {
       object[] _values_ = new object[1];
-      if (!ignore_cmdLigaIntermitente) _values_[0] = cmdLigaIntermitente;
+      if (!ignore_CMD_INTERMITENTE) _values_[0] = CMD_INTERMITENTE;
       return ((IHMIAccessorOutput)this).FireEvent(2, _values_);
     }
-    public bool FireEvent_E_ATUALIZA_HABILITA_REVERSAO(System.Boolean habilitaReversao)
+    public bool FireEvent_E_ATUALIZA_HABILITA_REVERSAO(System.Boolean HABILITA_REVERSAO)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(3, new object[] {habilitaReversao});
+      return ((IHMIAccessorOutput)this).FireEvent(3, new object[] {HABILITA_REVERSAO});
     }
     public bool FireEvent_E_ATUALIZA_HABILITA_REVERSAO(Hidryco.HidrycoLib.Symbols.UCT_Equipamento.E_ATUALIZA_HABILITA_REVERSAOEventArgs ea)
     {
       object[] _values_ = new object[1];
-      if (ea.habilitaReversao.HasValue) _values_[0] = ea.habilitaReversao.Value;
+      if (ea.HABILITA_REVERSAO.HasValue) _values_[0] = ea.HABILITA_REVERSAO.Value;
       return ((IHMIAccessorOutput)this).FireEvent(3, _values_);
     }
-    public bool FireEvent_E_ATUALIZA_HABILITA_REVERSAO(System.Boolean habilitaReversao, bool ignore_habilitaReversao)
+    public bool FireEvent_E_ATUALIZA_HABILITA_REVERSAO(System.Boolean HABILITA_REVERSAO, bool ignore_HABILITA_REVERSAO)
     {
       object[] _values_ = new object[1];
-      if (!ignore_habilitaReversao) _values_[0] = habilitaReversao;
+      if (!ignore_HABILITA_REVERSAO) _values_[0] = HABILITA_REVERSAO;
       return ((IHMIAccessorOutput)this).FireEvent(3, _values_);
     }
 
@@ -1201,68 +1201,68 @@ stack Trace:
 
       }
     }
-    public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_MANUAL(System.Boolean cmdLigaManual)
+    public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_MANUAL(System.Boolean CMD_MANUAL)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {cmdLigaManual});
+      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {CMD_MANUAL});
     }
     public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_MANUAL(Hidryco.HidrycoLib.Symbols.UCT_Equipamento.E_ATUALIZA_COMANDO_LIGA_MANUALEventArgs ea)
     {
       object[] _values_ = new object[1];
-      if (ea.cmdLigaManual.HasValue) _values_[0] = ea.cmdLigaManual.Value;
+      if (ea.CMD_MANUAL.HasValue) _values_[0] = ea.CMD_MANUAL.Value;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
-    public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_MANUAL(System.Boolean cmdLigaManual, bool ignore_cmdLigaManual)
+    public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_MANUAL(System.Boolean CMD_MANUAL, bool ignore_CMD_MANUAL)
     {
       object[] _values_ = new object[1];
-      if (!ignore_cmdLigaManual) _values_[0] = cmdLigaManual;
+      if (!ignore_CMD_MANUAL) _values_[0] = CMD_MANUAL;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
-    public bool FireEvent_E_ATUALIZA_SETPOINT(System.Single stpVelocidade)
+    public bool FireEvent_E_ATUALIZA_SETPOINT(System.Single STP_VELOCIDADE)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {stpVelocidade});
+      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {STP_VELOCIDADE});
     }
     public bool FireEvent_E_ATUALIZA_SETPOINT(Hidryco.HidrycoLib.Symbols.UCT_Equipamento.E_ATUALIZA_SETPOINTEventArgs ea)
     {
       object[] _values_ = new object[1];
-      if (ea.stpVelocidade.HasValue) _values_[0] = ea.stpVelocidade.Value;
+      if (ea.STP_VELOCIDADE.HasValue) _values_[0] = ea.STP_VELOCIDADE.Value;
       return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
     }
-    public bool FireEvent_E_ATUALIZA_SETPOINT(System.Single stpVelocidade, bool ignore_stpVelocidade)
+    public bool FireEvent_E_ATUALIZA_SETPOINT(System.Single STP_VELOCIDADE, bool ignore_STP_VELOCIDADE)
     {
       object[] _values_ = new object[1];
-      if (!ignore_stpVelocidade) _values_[0] = stpVelocidade;
+      if (!ignore_STP_VELOCIDADE) _values_[0] = STP_VELOCIDADE;
       return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
     }
-    public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_INTERMITENTE(System.Boolean cmdLigaIntermitente)
+    public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_INTERMITENTE(System.Boolean CMD_INTERMITENTE)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(2, new object[] {cmdLigaIntermitente});
+      return ((IHMIAccessorOutput)this).FireEvent(2, new object[] {CMD_INTERMITENTE});
     }
     public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_INTERMITENTE(Hidryco.HidrycoLib.Symbols.UCT_Equipamento.E_ATUALIZA_COMANDO_LIGA_INTERMITENTEEventArgs ea)
     {
       object[] _values_ = new object[1];
-      if (ea.cmdLigaIntermitente.HasValue) _values_[0] = ea.cmdLigaIntermitente.Value;
+      if (ea.CMD_INTERMITENTE.HasValue) _values_[0] = ea.CMD_INTERMITENTE.Value;
       return ((IHMIAccessorOutput)this).FireEvent(2, _values_);
     }
-    public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_INTERMITENTE(System.Boolean cmdLigaIntermitente, bool ignore_cmdLigaIntermitente)
+    public bool FireEvent_E_ATUALIZA_COMANDO_LIGA_INTERMITENTE(System.Boolean CMD_INTERMITENTE, bool ignore_CMD_INTERMITENTE)
     {
       object[] _values_ = new object[1];
-      if (!ignore_cmdLigaIntermitente) _values_[0] = cmdLigaIntermitente;
+      if (!ignore_CMD_INTERMITENTE) _values_[0] = CMD_INTERMITENTE;
       return ((IHMIAccessorOutput)this).FireEvent(2, _values_);
     }
-    public bool FireEvent_E_ATUALIZA_HABILITA_REVERSAO(System.Boolean habilitaReversao)
+    public bool FireEvent_E_ATUALIZA_HABILITA_REVERSAO(System.Boolean HABILITA_REVERSAO)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(3, new object[] {habilitaReversao});
+      return ((IHMIAccessorOutput)this).FireEvent(3, new object[] {HABILITA_REVERSAO});
     }
     public bool FireEvent_E_ATUALIZA_HABILITA_REVERSAO(Hidryco.HidrycoLib.Symbols.UCT_Equipamento.E_ATUALIZA_HABILITA_REVERSAOEventArgs ea)
     {
       object[] _values_ = new object[1];
-      if (ea.habilitaReversao.HasValue) _values_[0] = ea.habilitaReversao.Value;
+      if (ea.HABILITA_REVERSAO.HasValue) _values_[0] = ea.HABILITA_REVERSAO.Value;
       return ((IHMIAccessorOutput)this).FireEvent(3, _values_);
     }
-    public bool FireEvent_E_ATUALIZA_HABILITA_REVERSAO(System.Boolean habilitaReversao, bool ignore_habilitaReversao)
+    public bool FireEvent_E_ATUALIZA_HABILITA_REVERSAO(System.Boolean HABILITA_REVERSAO, bool ignore_HABILITA_REVERSAO)
     {
       object[] _values_ = new object[1];
-      if (!ignore_habilitaReversao) _values_[0] = habilitaReversao;
+      if (!ignore_HABILITA_REVERSAO) _values_[0] = HABILITA_REVERSAO;
       return ((IHMIAccessorOutput)this).FireEvent(3, _values_);
     }
 

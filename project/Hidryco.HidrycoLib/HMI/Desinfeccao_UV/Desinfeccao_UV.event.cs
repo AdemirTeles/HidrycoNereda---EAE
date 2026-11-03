@@ -1,7 +1,7 @@
 /*
  * Created by EcoStruxure Automation Expert.
  * User:  
- * Date: 10/19/2026
+ * Date: 10/21/2026
  * Time: 10:00 AM
  * 
  */
@@ -165,32 +165,12 @@ namespace Hidryco.HidrycoLib.Symbols.Desinfeccao_UV
       return (System.Int16) var;
     }  }
 
-    public bool Get_STS_SAIDA_PID(ref System.Single value)
-    {
-      if (accessorService == null)
-        return false;
-      float var = 0;
-      bool ret = accessorService.GetFloatValue(channelId, cookie, eventIndex, true,6, ref var);
-      if (ret) value = (System.Single) var;
-      return ret;
-    }
-
-    public System.Single? STS_SAIDA_PID
-    { get {
-      if (accessorService == null)
-        return null;
-      float var = 0;
-      bool ret = accessorService.GetFloatValue(channelId, cookie, eventIndex, true,6, ref var);
-      if (!ret) return null;
-      return (System.Single) var;
-    }  }
-
     public bool Get_STS_VC_POSICAO(ref System.Single value)
     {
       if (accessorService == null)
         return false;
       float var = 0;
-      bool ret = accessorService.GetFloatValue(channelId, cookie, eventIndex, true,7, ref var);
+      bool ret = accessorService.GetFloatValue(channelId, cookie, eventIndex, true,6, ref var);
       if (ret) value = (System.Single) var;
       return ret;
     }
@@ -200,7 +180,7 @@ namespace Hidryco.HidrycoLib.Symbols.Desinfeccao_UV
       if (accessorService == null)
         return null;
       float var = 0;
-      bool ret = accessorService.GetFloatValue(channelId, cookie, eventIndex, true,7, ref var);
+      bool ret = accessorService.GetFloatValue(channelId, cookie, eventIndex, true,6, ref var);
       if (!ret) return null;
       return (System.Single) var;
     }  }
@@ -210,7 +190,7 @@ namespace Hidryco.HidrycoLib.Symbols.Desinfeccao_UV
       if (accessorService == null)
         return false;
       bool var = false;
-      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,8, ref var);
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,7, ref var);
       if (ret) value = (System.Boolean) var;
       return ret;
     }
@@ -220,7 +200,7 @@ namespace Hidryco.HidrycoLib.Symbols.Desinfeccao_UV
       if (accessorService == null)
         return null;
       bool var = false;
-      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,8, ref var);
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,7, ref var);
       if (!ret) return null;
       return (System.Boolean) var;
     }  }
@@ -230,7 +210,7 @@ namespace Hidryco.HidrycoLib.Symbols.Desinfeccao_UV
       if (accessorService == null)
         return false;
       bool var = false;
-      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,9, ref var);
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,8, ref var);
       if (ret) value = (System.Boolean) var;
       return ret;
     }
@@ -240,7 +220,7 @@ namespace Hidryco.HidrycoLib.Symbols.Desinfeccao_UV
       if (accessorService == null)
         return null;
       bool var = false;
-      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,9, ref var);
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,8, ref var);
       if (!ret) return null;
       return (System.Boolean) var;
     }  }
@@ -250,7 +230,7 @@ namespace Hidryco.HidrycoLib.Symbols.Desinfeccao_UV
       if (accessorService == null)
         return false;
       bool var = false;
-      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,10, ref var);
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,9, ref var);
       if (ret) value = (System.Boolean) var;
       return ret;
     }
@@ -260,7 +240,7 @@ namespace Hidryco.HidrycoLib.Symbols.Desinfeccao_UV
       if (accessorService == null)
         return null;
       bool var = false;
-      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,10, ref var);
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,9, ref var);
       if (!ret) return null;
       return (System.Boolean) var;
     }  }
@@ -270,7 +250,7 @@ namespace Hidryco.HidrycoLib.Symbols.Desinfeccao_UV
       if (accessorService == null)
         return false;
       bool var = false;
-      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,11, ref var);
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,10, ref var);
       if (ret) value = (System.Boolean) var;
       return ret;
     }
@@ -280,7 +260,7 @@ namespace Hidryco.HidrycoLib.Symbols.Desinfeccao_UV
       if (accessorService == null)
         return null;
       bool var = false;
-      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,11, ref var);
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,10, ref var);
       if (!ret) return null;
       return (System.Boolean) var;
     }  }
@@ -290,7 +270,7 @@ namespace Hidryco.HidrycoLib.Symbols.Desinfeccao_UV
       if (accessorService == null)
         return false;
       bool var = false;
-      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,12, ref var);
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,11, ref var);
       if (ret) value = (System.Boolean) var;
       return ret;
     }
@@ -300,7 +280,7 @@ namespace Hidryco.HidrycoLib.Symbols.Desinfeccao_UV
       if (accessorService == null)
         return null;
       bool var = false;
-      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,12, ref var);
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,11, ref var);
       if (!ret) return null;
       return (System.Boolean) var;
     }  }
@@ -310,7 +290,7 @@ namespace Hidryco.HidrycoLib.Symbols.Desinfeccao_UV
       if (accessorService == null)
         return false;
       bool var = false;
-      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,13, ref var);
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,12, ref var);
       if (ret) value = (System.Boolean) var;
       return ret;
     }
@@ -320,7 +300,7 @@ namespace Hidryco.HidrycoLib.Symbols.Desinfeccao_UV
       if (accessorService == null)
         return null;
       bool var = false;
-      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,13, ref var);
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,12, ref var);
       if (!ret) return null;
       return (System.Boolean) var;
     }  }
@@ -330,7 +310,7 @@ namespace Hidryco.HidrycoLib.Symbols.Desinfeccao_UV
       if (accessorService == null)
         return false;
       bool var = false;
-      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,14, ref var);
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,13, ref var);
       if (ret) value = (System.Boolean) var;
       return ret;
     }
@@ -340,7 +320,7 @@ namespace Hidryco.HidrycoLib.Symbols.Desinfeccao_UV
       if (accessorService == null)
         return null;
       bool var = false;
-      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,14, ref var);
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,13, ref var);
       if (!ret) return null;
       return (System.Boolean) var;
     }  }
@@ -350,7 +330,7 @@ namespace Hidryco.HidrycoLib.Symbols.Desinfeccao_UV
       if (accessorService == null)
         return false;
       bool var = false;
-      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,15, ref var);
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,14, ref var);
       if (ret) value = (System.Boolean) var;
       return ret;
     }
@@ -360,7 +340,7 @@ namespace Hidryco.HidrycoLib.Symbols.Desinfeccao_UV
       if (accessorService == null)
         return null;
       bool var = false;
-      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,15, ref var);
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,14, ref var);
       if (!ret) return null;
       return (System.Boolean) var;
     }  }
@@ -370,7 +350,7 @@ namespace Hidryco.HidrycoLib.Symbols.Desinfeccao_UV
       if (accessorService == null)
         return false;
       bool var = false;
-      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,16, ref var);
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,15, ref var);
       if (ret) value = (System.Boolean) var;
       return ret;
     }
@@ -380,7 +360,7 @@ namespace Hidryco.HidrycoLib.Symbols.Desinfeccao_UV
       if (accessorService == null)
         return null;
       bool var = false;
-      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,16, ref var);
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,15, ref var);
       if (!ret) return null;
       return (System.Boolean) var;
     }  }
@@ -390,7 +370,7 @@ namespace Hidryco.HidrycoLib.Symbols.Desinfeccao_UV
       if (accessorService == null)
         return false;
       bool var = false;
-      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,17, ref var);
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,16, ref var);
       if (ret) value = (System.Boolean) var;
       return ret;
     }
@@ -400,7 +380,7 @@ namespace Hidryco.HidrycoLib.Symbols.Desinfeccao_UV
       if (accessorService == null)
         return null;
       bool var = false;
-      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,17, ref var);
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,16, ref var);
       if (!ret) return null;
       return (System.Boolean) var;
     }  }
@@ -410,7 +390,7 @@ namespace Hidryco.HidrycoLib.Symbols.Desinfeccao_UV
       if (accessorService == null)
         return false;
       bool var = false;
-      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,18, ref var);
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,17, ref var);
       if (ret) value = (System.Boolean) var;
       return ret;
     }
@@ -420,7 +400,7 @@ namespace Hidryco.HidrycoLib.Symbols.Desinfeccao_UV
       if (accessorService == null)
         return null;
       bool var = false;
-      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,18, ref var);
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,17, ref var);
       if (!ret) return null;
       return (System.Boolean) var;
     }  }
@@ -430,7 +410,7 @@ namespace Hidryco.HidrycoLib.Symbols.Desinfeccao_UV
       if (accessorService == null)
         return false;
       bool var = false;
-      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,19, ref var);
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,18, ref var);
       if (ret) value = (System.Boolean) var;
       return ret;
     }
@@ -440,7 +420,7 @@ namespace Hidryco.HidrycoLib.Symbols.Desinfeccao_UV
       if (accessorService == null)
         return null;
       bool var = false;
-      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,19, ref var);
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,18, ref var);
       if (!ret) return null;
       return (System.Boolean) var;
     }  }
@@ -450,7 +430,7 @@ namespace Hidryco.HidrycoLib.Symbols.Desinfeccao_UV
       if (accessorService == null)
         return false;
       bool var = false;
-      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,20, ref var);
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,19, ref var);
       if (ret) value = (System.Boolean) var;
       return ret;
     }
@@ -460,7 +440,7 @@ namespace Hidryco.HidrycoLib.Symbols.Desinfeccao_UV
       if (accessorService == null)
         return null;
       bool var = false;
-      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,20, ref var);
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,19, ref var);
       if (!ret) return null;
       return (System.Boolean) var;
     }  }
@@ -470,7 +450,7 @@ namespace Hidryco.HidrycoLib.Symbols.Desinfeccao_UV
       if (accessorService == null)
         return false;
       bool var = false;
-      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,21, ref var);
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,20, ref var);
       if (ret) value = (System.Boolean) var;
       return ret;
     }
@@ -480,7 +460,7 @@ namespace Hidryco.HidrycoLib.Symbols.Desinfeccao_UV
       if (accessorService == null)
         return null;
       bool var = false;
-      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,21, ref var);
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,20, ref var);
       if (!ret) return null;
       return (System.Boolean) var;
     }  }
@@ -490,7 +470,7 @@ namespace Hidryco.HidrycoLib.Symbols.Desinfeccao_UV
       if (accessorService == null)
         return false;
       bool var = false;
-      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,22, ref var);
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,21, ref var);
       if (ret) value = (System.Boolean) var;
       return ret;
     }
@@ -500,7 +480,7 @@ namespace Hidryco.HidrycoLib.Symbols.Desinfeccao_UV
       if (accessorService == null)
         return null;
       bool var = false;
-      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,22, ref var);
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,21, ref var);
       if (!ret) return null;
       return (System.Boolean) var;
     }  }
@@ -510,7 +490,7 @@ namespace Hidryco.HidrycoLib.Symbols.Desinfeccao_UV
       if (accessorService == null)
         return false;
       bool var = false;
-      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,23, ref var);
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,22, ref var);
       if (ret) value = (System.Boolean) var;
       return ret;
     }
@@ -520,7 +500,7 @@ namespace Hidryco.HidrycoLib.Symbols.Desinfeccao_UV
       if (accessorService == null)
         return null;
       bool var = false;
-      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,23, ref var);
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,22, ref var);
       if (!ret) return null;
       return (System.Boolean) var;
     }  }
@@ -530,7 +510,7 @@ namespace Hidryco.HidrycoLib.Symbols.Desinfeccao_UV
       if (accessorService == null)
         return false;
       byte var = 0;
-      bool ret = accessorService.GetByteValue(channelId, cookie, eventIndex, true,24, ref var);
+      bool ret = accessorService.GetByteValue(channelId, cookie, eventIndex, true,23, ref var);
       if (ret) value = (System.Byte) var;
       return ret;
     }
@@ -540,7 +520,7 @@ namespace Hidryco.HidrycoLib.Symbols.Desinfeccao_UV
       if (accessorService == null)
         return null;
       byte var = 0;
-      bool ret = accessorService.GetByteValue(channelId, cookie, eventIndex, true,24, ref var);
+      bool ret = accessorService.GetByteValue(channelId, cookie, eventIndex, true,23, ref var);
       if (!ret) return null;
       return (System.Byte) var;
     }  }
@@ -550,7 +530,7 @@ namespace Hidryco.HidrycoLib.Symbols.Desinfeccao_UV
       if (accessorService == null)
         return false;
       byte var = 0;
-      bool ret = accessorService.GetByteValue(channelId, cookie, eventIndex, true,25, ref var);
+      bool ret = accessorService.GetByteValue(channelId, cookie, eventIndex, true,24, ref var);
       if (ret) value = (System.Byte) var;
       return ret;
     }
@@ -560,7 +540,7 @@ namespace Hidryco.HidrycoLib.Symbols.Desinfeccao_UV
       if (accessorService == null)
         return null;
       byte var = 0;
-      bool ret = accessorService.GetByteValue(channelId, cookie, eventIndex, true,25, ref var);
+      bool ret = accessorService.GetByteValue(channelId, cookie, eventIndex, true,24, ref var);
       if (!ret) return null;
       return (System.Byte) var;
     }  }
@@ -570,7 +550,7 @@ namespace Hidryco.HidrycoLib.Symbols.Desinfeccao_UV
       if (accessorService == null)
         return false;
       byte var = 0;
-      bool ret = accessorService.GetByteValue(channelId, cookie, eventIndex, true,26, ref var);
+      bool ret = accessorService.GetByteValue(channelId, cookie, eventIndex, true,25, ref var);
       if (ret) value = (System.Byte) var;
       return ret;
     }
@@ -580,7 +560,7 @@ namespace Hidryco.HidrycoLib.Symbols.Desinfeccao_UV
       if (accessorService == null)
         return null;
       byte var = 0;
-      bool ret = accessorService.GetByteValue(channelId, cookie, eventIndex, true,26, ref var);
+      bool ret = accessorService.GetByteValue(channelId, cookie, eventIndex, true,25, ref var);
       if (!ret) return null;
       return (System.Byte) var;
     }  }
@@ -590,7 +570,7 @@ namespace Hidryco.HidrycoLib.Symbols.Desinfeccao_UV
       if (accessorService == null)
         return false;
       byte var = 0;
-      bool ret = accessorService.GetByteValue(channelId, cookie, eventIndex, true,27, ref var);
+      bool ret = accessorService.GetByteValue(channelId, cookie, eventIndex, true,26, ref var);
       if (ret) value = (System.Byte) var;
       return ret;
     }
@@ -600,7 +580,7 @@ namespace Hidryco.HidrycoLib.Symbols.Desinfeccao_UV
       if (accessorService == null)
         return null;
       byte var = 0;
-      bool ret = accessorService.GetByteValue(channelId, cookie, eventIndex, true,27, ref var);
+      bool ret = accessorService.GetByteValue(channelId, cookie, eventIndex, true,26, ref var);
       if (!ret) return null;
       return (System.Byte) var;
     }  }
@@ -617,48 +597,6 @@ namespace Hidryco.HidrycoLib.Symbols.Desinfeccao_UV
   {
     public E_PARAMETROSEventArgs()
     {
-    }
-    private System.Boolean? PID_CMD_HABILITA_field = null;
-    public System.Boolean? PID_CMD_HABILITA
-    {
-       get { return PID_CMD_HABILITA_field; }
-       set { PID_CMD_HABILITA_field = value; }
-    }
-    private System.Single? STP_VAZAO_MAX_field = null;
-    public System.Single? STP_VAZAO_MAX
-    {
-       get { return STP_VAZAO_MAX_field; }
-       set { STP_VAZAO_MAX_field = value; }
-    }
-    private System.Single? STP_PARAMETRO_KP_field = null;
-    public System.Single? STP_PARAMETRO_KP
-    {
-       get { return STP_PARAMETRO_KP_field; }
-       set { STP_PARAMETRO_KP_field = value; }
-    }
-    private System.Single? STP_PARAMETRO_KI_field = null;
-    public System.Single? STP_PARAMETRO_KI
-    {
-       get { return STP_PARAMETRO_KI_field; }
-       set { STP_PARAMETRO_KI_field = value; }
-    }
-    private System.Single? STP_PARAMETRO_KD_field = null;
-    public System.Single? STP_PARAMETRO_KD
-    {
-       get { return STP_PARAMETRO_KD_field; }
-       set { STP_PARAMETRO_KD_field = value; }
-    }
-    private System.Single? STP_MINIMO_field = null;
-    public System.Single? STP_MINIMO
-    {
-       get { return STP_MINIMO_field; }
-       set { STP_MINIMO_field = value; }
-    }
-    private System.Single? STP_MAXIMO_field = null;
-    public System.Single? STP_MAXIMO
-    {
-       get { return STP_MAXIMO_field; }
-       set { STP_MAXIMO_field = value; }
     }
     private System.Single? STP_TOL_VAZAO_field = null;
     public System.Single? STP_TOL_VAZAO
@@ -681,16 +619,16 @@ namespace Hidryco.HidrycoLib.Symbols.Desinfeccao_UV
 
   }
 
-  public class E_RESETEventArgs : System.EventArgs
+  public class E_RESET_FALHAS_PROCESSOEventArgs : System.EventArgs
   {
-    public E_RESETEventArgs()
+    public E_RESET_FALHAS_PROCESSOEventArgs()
     {
     }
-    private System.Boolean? CMD_RESET_field = null;
-    public System.Boolean? CMD_RESET
+    private System.Boolean? cmdResetFalhas_field = null;
+    public System.Boolean? cmdResetFalhas
     {
-       get { return CMD_RESET_field; }
-       set { CMD_RESET_field = value; }
+       get { return cmdResetFalhas_field; }
+       set { cmdResetFalhas_field = value; }
     }
 
   }
@@ -768,54 +706,40 @@ stack Trace:
 
       }
     }
-    public bool FireEvent_E_PARAMETROS(System.Boolean PID_CMD_HABILITA, System.Single STP_VAZAO_MAX, System.Single STP_PARAMETRO_KP, System.Single STP_PARAMETRO_KI, System.Single STP_PARAMETRO_KD, System.Single STP_MINIMO, System.Single STP_MAXIMO, System.Single STP_TOL_VAZAO, System.Int16 STP_TEMPO_VAZAO, System.Single STP_VARIACAO_MAX)
+    public bool FireEvent_E_PARAMETROS(System.Single STP_TOL_VAZAO, System.Int16 STP_TEMPO_VAZAO, System.Single STP_VARIACAO_MAX)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {PID_CMD_HABILITA, STP_VAZAO_MAX, STP_PARAMETRO_KP, STP_PARAMETRO_KI, STP_PARAMETRO_KD, STP_MINIMO, STP_MAXIMO, STP_TOL_VAZAO, STP_TEMPO_VAZAO, STP_VARIACAO_MAX});
+      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {STP_TOL_VAZAO, STP_TEMPO_VAZAO, STP_VARIACAO_MAX});
     }
     public bool FireEvent_E_PARAMETROS(Hidryco.HidrycoLib.Symbols.Desinfeccao_UV.E_PARAMETROSEventArgs ea)
     {
-      object[] _values_ = new object[10];
-      if (ea.PID_CMD_HABILITA.HasValue) _values_[0] = ea.PID_CMD_HABILITA.Value;
-      if (ea.STP_VAZAO_MAX.HasValue) _values_[1] = ea.STP_VAZAO_MAX.Value;
-      if (ea.STP_PARAMETRO_KP.HasValue) _values_[2] = ea.STP_PARAMETRO_KP.Value;
-      if (ea.STP_PARAMETRO_KI.HasValue) _values_[3] = ea.STP_PARAMETRO_KI.Value;
-      if (ea.STP_PARAMETRO_KD.HasValue) _values_[4] = ea.STP_PARAMETRO_KD.Value;
-      if (ea.STP_MINIMO.HasValue) _values_[5] = ea.STP_MINIMO.Value;
-      if (ea.STP_MAXIMO.HasValue) _values_[6] = ea.STP_MAXIMO.Value;
-      if (ea.STP_TOL_VAZAO.HasValue) _values_[7] = ea.STP_TOL_VAZAO.Value;
-      if (ea.STP_TEMPO_VAZAO.HasValue) _values_[8] = ea.STP_TEMPO_VAZAO.Value;
-      if (ea.STP_VARIACAO_MAX.HasValue) _values_[9] = ea.STP_VARIACAO_MAX.Value;
+      object[] _values_ = new object[3];
+      if (ea.STP_TOL_VAZAO.HasValue) _values_[0] = ea.STP_TOL_VAZAO.Value;
+      if (ea.STP_TEMPO_VAZAO.HasValue) _values_[1] = ea.STP_TEMPO_VAZAO.Value;
+      if (ea.STP_VARIACAO_MAX.HasValue) _values_[2] = ea.STP_VARIACAO_MAX.Value;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
-    public bool FireEvent_E_PARAMETROS(System.Boolean PID_CMD_HABILITA, bool ignore_PID_CMD_HABILITA, System.Single STP_VAZAO_MAX, bool ignore_STP_VAZAO_MAX, System.Single STP_PARAMETRO_KP, bool ignore_STP_PARAMETRO_KP, System.Single STP_PARAMETRO_KI, bool ignore_STP_PARAMETRO_KI, System.Single STP_PARAMETRO_KD, bool ignore_STP_PARAMETRO_KD, System.Single STP_MINIMO, bool ignore_STP_MINIMO, System.Single STP_MAXIMO, bool ignore_STP_MAXIMO, System.Single STP_TOL_VAZAO, bool ignore_STP_TOL_VAZAO, System.Int16 STP_TEMPO_VAZAO, bool ignore_STP_TEMPO_VAZAO, System.Single STP_VARIACAO_MAX, bool ignore_STP_VARIACAO_MAX)
+    public bool FireEvent_E_PARAMETROS(System.Single STP_TOL_VAZAO, bool ignore_STP_TOL_VAZAO, System.Int16 STP_TEMPO_VAZAO, bool ignore_STP_TEMPO_VAZAO, System.Single STP_VARIACAO_MAX, bool ignore_STP_VARIACAO_MAX)
     {
-      object[] _values_ = new object[10];
-      if (!ignore_PID_CMD_HABILITA) _values_[0] = PID_CMD_HABILITA;
-      if (!ignore_STP_VAZAO_MAX) _values_[1] = STP_VAZAO_MAX;
-      if (!ignore_STP_PARAMETRO_KP) _values_[2] = STP_PARAMETRO_KP;
-      if (!ignore_STP_PARAMETRO_KI) _values_[3] = STP_PARAMETRO_KI;
-      if (!ignore_STP_PARAMETRO_KD) _values_[4] = STP_PARAMETRO_KD;
-      if (!ignore_STP_MINIMO) _values_[5] = STP_MINIMO;
-      if (!ignore_STP_MAXIMO) _values_[6] = STP_MAXIMO;
-      if (!ignore_STP_TOL_VAZAO) _values_[7] = STP_TOL_VAZAO;
-      if (!ignore_STP_TEMPO_VAZAO) _values_[8] = STP_TEMPO_VAZAO;
-      if (!ignore_STP_VARIACAO_MAX) _values_[9] = STP_VARIACAO_MAX;
+      object[] _values_ = new object[3];
+      if (!ignore_STP_TOL_VAZAO) _values_[0] = STP_TOL_VAZAO;
+      if (!ignore_STP_TEMPO_VAZAO) _values_[1] = STP_TEMPO_VAZAO;
+      if (!ignore_STP_VARIACAO_MAX) _values_[2] = STP_VARIACAO_MAX;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
-    public bool FireEvent_E_RESET(System.Boolean CMD_RESET)
+    public bool FireEvent_E_RESET_FALHAS_PROCESSO(System.Boolean cmdResetFalhas)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {CMD_RESET});
+      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {cmdResetFalhas});
     }
-    public bool FireEvent_E_RESET(Hidryco.HidrycoLib.Symbols.Desinfeccao_UV.E_RESETEventArgs ea)
+    public bool FireEvent_E_RESET_FALHAS_PROCESSO(Hidryco.HidrycoLib.Symbols.Desinfeccao_UV.E_RESET_FALHAS_PROCESSOEventArgs ea)
     {
       object[] _values_ = new object[1];
-      if (ea.CMD_RESET.HasValue) _values_[0] = ea.CMD_RESET.Value;
+      if (ea.cmdResetFalhas.HasValue) _values_[0] = ea.cmdResetFalhas.Value;
       return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
     }
-    public bool FireEvent_E_RESET(System.Boolean CMD_RESET, bool ignore_CMD_RESET)
+    public bool FireEvent_E_RESET_FALHAS_PROCESSO(System.Boolean cmdResetFalhas, bool ignore_cmdResetFalhas)
     {
       object[] _values_ = new object[1];
-      if (!ignore_CMD_RESET) _values_[0] = CMD_RESET;
+      if (!ignore_cmdResetFalhas) _values_[0] = cmdResetFalhas;
       return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
     }
     public bool FireEvent_E_ZERA_TOTAL(System.Boolean CMD_ZERA_TOTAL)
@@ -895,54 +819,40 @@ stack Trace:
 
       }
     }
-    public bool FireEvent_E_PARAMETROS(System.Boolean PID_CMD_HABILITA, System.Single STP_VAZAO_MAX, System.Single STP_PARAMETRO_KP, System.Single STP_PARAMETRO_KI, System.Single STP_PARAMETRO_KD, System.Single STP_MINIMO, System.Single STP_MAXIMO, System.Single STP_TOL_VAZAO, System.Int16 STP_TEMPO_VAZAO, System.Single STP_VARIACAO_MAX)
+    public bool FireEvent_E_PARAMETROS(System.Single STP_TOL_VAZAO, System.Int16 STP_TEMPO_VAZAO, System.Single STP_VARIACAO_MAX)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {PID_CMD_HABILITA, STP_VAZAO_MAX, STP_PARAMETRO_KP, STP_PARAMETRO_KI, STP_PARAMETRO_KD, STP_MINIMO, STP_MAXIMO, STP_TOL_VAZAO, STP_TEMPO_VAZAO, STP_VARIACAO_MAX});
+      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {STP_TOL_VAZAO, STP_TEMPO_VAZAO, STP_VARIACAO_MAX});
     }
     public bool FireEvent_E_PARAMETROS(Hidryco.HidrycoLib.Symbols.Desinfeccao_UV.E_PARAMETROSEventArgs ea)
     {
-      object[] _values_ = new object[10];
-      if (ea.PID_CMD_HABILITA.HasValue) _values_[0] = ea.PID_CMD_HABILITA.Value;
-      if (ea.STP_VAZAO_MAX.HasValue) _values_[1] = ea.STP_VAZAO_MAX.Value;
-      if (ea.STP_PARAMETRO_KP.HasValue) _values_[2] = ea.STP_PARAMETRO_KP.Value;
-      if (ea.STP_PARAMETRO_KI.HasValue) _values_[3] = ea.STP_PARAMETRO_KI.Value;
-      if (ea.STP_PARAMETRO_KD.HasValue) _values_[4] = ea.STP_PARAMETRO_KD.Value;
-      if (ea.STP_MINIMO.HasValue) _values_[5] = ea.STP_MINIMO.Value;
-      if (ea.STP_MAXIMO.HasValue) _values_[6] = ea.STP_MAXIMO.Value;
-      if (ea.STP_TOL_VAZAO.HasValue) _values_[7] = ea.STP_TOL_VAZAO.Value;
-      if (ea.STP_TEMPO_VAZAO.HasValue) _values_[8] = ea.STP_TEMPO_VAZAO.Value;
-      if (ea.STP_VARIACAO_MAX.HasValue) _values_[9] = ea.STP_VARIACAO_MAX.Value;
+      object[] _values_ = new object[3];
+      if (ea.STP_TOL_VAZAO.HasValue) _values_[0] = ea.STP_TOL_VAZAO.Value;
+      if (ea.STP_TEMPO_VAZAO.HasValue) _values_[1] = ea.STP_TEMPO_VAZAO.Value;
+      if (ea.STP_VARIACAO_MAX.HasValue) _values_[2] = ea.STP_VARIACAO_MAX.Value;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
-    public bool FireEvent_E_PARAMETROS(System.Boolean PID_CMD_HABILITA, bool ignore_PID_CMD_HABILITA, System.Single STP_VAZAO_MAX, bool ignore_STP_VAZAO_MAX, System.Single STP_PARAMETRO_KP, bool ignore_STP_PARAMETRO_KP, System.Single STP_PARAMETRO_KI, bool ignore_STP_PARAMETRO_KI, System.Single STP_PARAMETRO_KD, bool ignore_STP_PARAMETRO_KD, System.Single STP_MINIMO, bool ignore_STP_MINIMO, System.Single STP_MAXIMO, bool ignore_STP_MAXIMO, System.Single STP_TOL_VAZAO, bool ignore_STP_TOL_VAZAO, System.Int16 STP_TEMPO_VAZAO, bool ignore_STP_TEMPO_VAZAO, System.Single STP_VARIACAO_MAX, bool ignore_STP_VARIACAO_MAX)
+    public bool FireEvent_E_PARAMETROS(System.Single STP_TOL_VAZAO, bool ignore_STP_TOL_VAZAO, System.Int16 STP_TEMPO_VAZAO, bool ignore_STP_TEMPO_VAZAO, System.Single STP_VARIACAO_MAX, bool ignore_STP_VARIACAO_MAX)
     {
-      object[] _values_ = new object[10];
-      if (!ignore_PID_CMD_HABILITA) _values_[0] = PID_CMD_HABILITA;
-      if (!ignore_STP_VAZAO_MAX) _values_[1] = STP_VAZAO_MAX;
-      if (!ignore_STP_PARAMETRO_KP) _values_[2] = STP_PARAMETRO_KP;
-      if (!ignore_STP_PARAMETRO_KI) _values_[3] = STP_PARAMETRO_KI;
-      if (!ignore_STP_PARAMETRO_KD) _values_[4] = STP_PARAMETRO_KD;
-      if (!ignore_STP_MINIMO) _values_[5] = STP_MINIMO;
-      if (!ignore_STP_MAXIMO) _values_[6] = STP_MAXIMO;
-      if (!ignore_STP_TOL_VAZAO) _values_[7] = STP_TOL_VAZAO;
-      if (!ignore_STP_TEMPO_VAZAO) _values_[8] = STP_TEMPO_VAZAO;
-      if (!ignore_STP_VARIACAO_MAX) _values_[9] = STP_VARIACAO_MAX;
+      object[] _values_ = new object[3];
+      if (!ignore_STP_TOL_VAZAO) _values_[0] = STP_TOL_VAZAO;
+      if (!ignore_STP_TEMPO_VAZAO) _values_[1] = STP_TEMPO_VAZAO;
+      if (!ignore_STP_VARIACAO_MAX) _values_[2] = STP_VARIACAO_MAX;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
-    public bool FireEvent_E_RESET(System.Boolean CMD_RESET)
+    public bool FireEvent_E_RESET_FALHAS_PROCESSO(System.Boolean cmdResetFalhas)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {CMD_RESET});
+      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {cmdResetFalhas});
     }
-    public bool FireEvent_E_RESET(Hidryco.HidrycoLib.Symbols.Desinfeccao_UV.E_RESETEventArgs ea)
+    public bool FireEvent_E_RESET_FALHAS_PROCESSO(Hidryco.HidrycoLib.Symbols.Desinfeccao_UV.E_RESET_FALHAS_PROCESSOEventArgs ea)
     {
       object[] _values_ = new object[1];
-      if (ea.CMD_RESET.HasValue) _values_[0] = ea.CMD_RESET.Value;
+      if (ea.cmdResetFalhas.HasValue) _values_[0] = ea.cmdResetFalhas.Value;
       return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
     }
-    public bool FireEvent_E_RESET(System.Boolean CMD_RESET, bool ignore_CMD_RESET)
+    public bool FireEvent_E_RESET_FALHAS_PROCESSO(System.Boolean cmdResetFalhas, bool ignore_cmdResetFalhas)
     {
       object[] _values_ = new object[1];
-      if (!ignore_CMD_RESET) _values_[0] = CMD_RESET;
+      if (!ignore_cmdResetFalhas) _values_[0] = cmdResetFalhas;
       return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
     }
     public bool FireEvent_E_ZERA_TOTAL(System.Boolean CMD_ZERA_TOTAL)

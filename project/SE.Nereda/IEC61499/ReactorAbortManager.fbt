@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="74251aac-6802-49a2-a82b-69ee4f34bd90" Name="ReactorAbortManager" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="10/19/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="0BAB90D91ADA8FE6" Name="AV_R" Comment="Normal Execution Request">
+        <With Var="AvReactor1" />
+        <With Var="AvReactor2" />
+        <With Var="AvReactor3" />
+        <With Var="AvReactor4" />
+        <With Var="AvReactor5" />
+        <With Var="AvReactor6" />
+        <With Var="EmergencyON" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="191DD4636950BFBF" Name="UPD_POS" Comment="Execution Confirmation" />
+      <Event ID="AE1A12FA8CA17FC0" Name="RESET_TIMES_FED">
+        <With Var="ResetTimesFedR1" />
+        <With Var="ResetTimesFedR2" />
+        <With Var="ResetTimesFedR3" />
+        <With Var="ResetTimesFedR4" />
+        <With Var="ResetTimesFedR5" />
+        <With Var="ResetTimesFedR6" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="26CB46CABBD6C832" Name="AvReactor1" Type="BOOL" />
+      <VarDeclaration ID="B0F4FEC0CE756C6E" Name="AvReactor2" Type="BOOL" />
+      <VarDeclaration ID="1F6339469E597D0A" Name="AvReactor3" Type="BOOL" />
+      <VarDeclaration ID="C8D1F06AE09E4E88" Name="AvReactor4" Type="BOOL" />
+      <VarDeclaration ID="D59A3997102838AA" Name="AvReactor5" Type="BOOL" />
+      <VarDeclaration ID="575F86F229D57524" Name="AvReactor6" Type="BOOL" />
+      <VarDeclaration ID="6971E4E8C6048A8B" Name="EmergencyON" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="92BBFF9FC84E7DE9" Name="ResetTimesFedR1" Type="BOOL" />
+      <VarDeclaration ID="513977AA721DADE5" Name="ResetTimesFedR2" Type="BOOL" />
+      <VarDeclaration ID="5B6CA489CF3C700D" Name="ResetTimesFedR3" Type="BOOL" />
+      <VarDeclaration ID="B41C667AFCDFE58E" Name="ResetTimesFedR4" Type="BOOL" />
+      <VarDeclaration ID="706A3AD526852516" Name="ResetTimesFedR5" Type="BOOL" />
+      <VarDeclaration ID="7147407CE291220C" Name="ResetTimesFedR6" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="e29b59e8-17b6-4d18-a7c8-6ebbbe744f88">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="Reset,NotReset" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="1292.624" y="304.7133" />
+      <ECState Name="UPD_POS" x="1295.111" y="812.4442">
+        <ECAction Algorithm="NotReset" Output="UPD_POS" />
+        <ECAction Output="RESET_TIMES_FED" />
+      </ECState>
+      <ECState Name="ResetTimesFed" x="1298.746" y="1298.73">
+        <ECAction Algorithm="Reset" Output="RESET_TIMES_FED" />
+      </ECState>
+      <ECState Name="NoReset" x="1297.142" y="1805.714">
+        <ECAction Algorithm="NotReset" Output="RESET_TIMES_FED" />
+      </ECState>
+      <ECTransition Source="START" Destination="UPD_POS" Condition="AV_R AND EmergencyON AND&#xD;&#xA;(NOT AvReactor1 OR&#xD;&#xA;NOT AvReactor2 OR&#xD;&#xA;NOT AvReactor3 OR&#xD;&#xA;NOT AvReactor4 OR&#xD;&#xA;NOT AvReactor5 OR&#xD;&#xA;NOT AvReactor6)" x="1293.709" y="546.9365">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="323.3158,118.957,323.5186,152.5709" />
+      </ECTransition>
+      <ECTransition Source="UPD_POS" Destination="ResetTimesFed" Condition="1" x="1297.197" y="1051.909">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="324.1939,246.7572,324.4319,278.584" />
+      </ECTransition>
+      <ECTransition Source="ResetTimesFed" Destination="NoReset" Condition="AvReactor1 AND&#xD;&#xA;AvReactor2 AND&#xD;&#xA;AvReactor3 AND&#xD;&#xA;AvReactor4 AND&#xD;&#xA;AvReactor5 AND&#xD;&#xA;AvReactor6" x="1296.819" y="1551.592">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="324.127,371.0708,324.159,404.6201" />
+      </ECTransition>
+      <ECTransition Source="ResetTimesFed" Destination="ResetTimesFed" Condition="AV_R" x="895.2498" y="1325.397">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="202.8571,386.4286,198.5714,280.7143" />
+      </ECTransition>
+      <ECTransition Source="NoReset" Destination="START" Condition="1" x="581.7592" y="1093.546">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="93.98947,334.7741,93.6391,218.3878" />
+      </ECTransition>
+    </ECC>
+    <Algorithm ID="e8efadc0-a56e-42c0-b446-7e3e6fe8c209" Name="Reset">
+      <ST><![CDATA[;
+IF NOT AvReactor1 THEN
+    ResetTimesFedR1 := TRUE;
+END_IF;
+
+IF NOT AvReactor2 THEN
+    ResetTimesFedR2 := TRUE;
+END_IF;
+
+IF NOT AvReactor3 THEN
+    ResetTimesFedR3 := TRUE;
+END_IF;
+
+IF NOT AvReactor4 THEN
+    ResetTimesFedR4 := TRUE;
+END_IF;
+
+IF NOT AvReactor5 THEN
+    ResetTimesFedR5 := TRUE;
+END_IF;
+
+IF NOT AvReactor6 THEN
+	ResetTimesFedR6 := TRUE;
+END_IF;]]></ST>
+    </Algorithm>
+    <Algorithm ID="ce6e8ab7-a465-4866-987e-f55a0a924f79" Name="NotReset">
+      <ST><![CDATA[;
+ResetTimesFedR1 := FALSE;
+ResetTimesFedR2 := FALSE;
+ResetTimesFedR3 := FALSE;
+ResetTimesFedR4 := FALSE;
+ResetTimesFedR5 := FALSE;
+ResetTimesFedR6 := FALSE;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

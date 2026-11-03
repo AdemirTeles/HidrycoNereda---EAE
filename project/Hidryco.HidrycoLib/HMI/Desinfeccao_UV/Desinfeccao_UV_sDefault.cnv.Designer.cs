@@ -36,7 +36,6 @@ namespace Hidryco.HidrycoLib.Symbols.Desinfeccao_UV
 			this.xVMAX = new System.HMI.Symbols.Base.Execute<float>();
 			this.xATIVO = new System.HMI.Symbols.Base.Execute<bool>();
 			this.xMOT = new System.HMI.Symbols.Base.Execute<short>();
-			this.xSPID = new System.HMI.Symbols.Base.Execute<float>();
 			this.xVPOS = new System.HMI.Symbols.Base.Execute<float>();
 			this.xFTF = new System.HMI.Symbols.Base.Execute<bool>();
 			this.xREM = new System.HMI.Symbols.Base.Execute<bool>();
@@ -56,6 +55,7 @@ namespace Hidryco.HidrycoLib.Symbols.Desinfeccao_UV
 			this.xEREM = new System.HMI.Symbols.Base.Execute<byte>();
 			this.xTOT = new System.HMI.Symbols.Base.Execute<int>();
 			this.abrir = new NxtControl.GuiFramework.DrawnButton();
+			this.stPID = new Hidryco.HidrycoLib.Symbols.Controle_PID.sStatus();
 			// 
 			// fundo
 			// 
@@ -224,18 +224,6 @@ namespace Hidryco.HidrycoLib.Symbols.Desinfeccao_UV
 			this.xMOT.TagName = "STS_MOTIVO";
 			this.xMOT.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.XMOTValueChanged);
 			this.xMOT.EndInit();
-			// 
-			// xSPID
-			// 
-			this.xSPID.BeginInit();
-			this.xSPID.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, double.NaN, double.NaN);
-			this.xSPID.IsOnlyInput = true;
-			this.xSPID.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
-			this.xSPID.Name = "xSPID";
-			this.xSPID.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
-			this.xSPID.TagName = "STS_SAIDA_PID";
-			this.xSPID.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.XSPIDValueChanged);
-			this.xSPID.EndInit();
 			// 
 			// xVPOS
 			// 
@@ -468,6 +456,16 @@ namespace Hidryco.HidrycoLib.Symbols.Desinfeccao_UV
 			this.abrir.TextColorMouseDown = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.abrir.Use3DEffect = false;
 			// 
+			// stPID
+			// 
+			this.stPID.BeginInit();
+			this.stPID.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 0D, 0D);
+			this.stPID.Name = "stPID";
+			this.stPID.SecurityToken = ((uint)(4294967295u));
+			this.stPID.TagName = "PID_VC_700_01";
+			this.stPID.stsSaidaPID_Mudou += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.XSPIDValueChanged);
+			this.stPID.EndInit();
+			// 
 			// sDefault
 			// 
 			this.Name = "sDefault";
@@ -489,7 +487,6 @@ namespace Hidryco.HidrycoLib.Symbols.Desinfeccao_UV
 			this.xVMAX,
 			this.xATIVO,
 			this.xMOT,
-			this.xSPID,
 			this.xVPOS,
 			this.xFTF,
 			this.xREM,
@@ -508,7 +505,8 @@ namespace Hidryco.HidrycoLib.Symbols.Desinfeccao_UV
 			this.xEDJ,
 			this.xEREM,
 			this.xTOT,
-			this.abrir});
+			this.abrir,
+			this.stPID});
 
 		}
 		private NxtControl.GuiFramework.Rectangle fundo;
@@ -528,7 +526,6 @@ namespace Hidryco.HidrycoLib.Symbols.Desinfeccao_UV
 		private System.HMI.Symbols.Base.Execute<float> xVMAX;
 		private System.HMI.Symbols.Base.Execute<bool> xATIVO;
 		private System.HMI.Symbols.Base.Execute<short> xMOT;
-		private System.HMI.Symbols.Base.Execute<float> xSPID;
 		private System.HMI.Symbols.Base.Execute<float> xVPOS;
 		private System.HMI.Symbols.Base.Execute<bool> xFTF;
 		private System.HMI.Symbols.Base.Execute<bool> xREM;
@@ -548,6 +545,7 @@ namespace Hidryco.HidrycoLib.Symbols.Desinfeccao_UV
 		private System.HMI.Symbols.Base.Execute<byte> xEREM;
 		private System.HMI.Symbols.Base.Execute<int> xTOT;
 		private NxtControl.GuiFramework.DrawnButton abrir;
+		private Hidryco.HidrycoLib.Symbols.Controle_PID.sStatus stPID;
 		#endregion
 	}
 }

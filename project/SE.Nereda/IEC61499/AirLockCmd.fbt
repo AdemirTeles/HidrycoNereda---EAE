@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="37bcd3dc-5b33-dde5-70e1-0b3f055648f0" Name="AirLockCmd" Comment="Emergencia: abre a AV-4x171 (air fill) no inicio da aeracao durante o AirLockTime" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Hidryco" Version="1.1" Author="Hidryco" Date="30/10/2026" Remarks="1.1: so em Mode 3; o tempo conta da confirmacao de aberta da AV-4x171 (FB_VALVE/Opened) e nao mais do Starting; fecha no fim do tempo, quando a fase sai ou quando o modo sai de 3; sem o reenvio no Run (o seletor so repassa mudancas). 1.0: pulso AirLock no inicio da fase de aeracao durante AirLockTime. AirLockTime = 0 nao abre." />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="0066028B10561232" Name="REQ_PHASE" Comment="Estado da fase de aeracao (IPhase.Interlocked_CNF)">
+        <With Var="Starting" />
+        <With Var="Run" />
+      </Event>
+      <Event ID="B0A5303BDC1BFEC2" Name="REQ_PAR" Comment="Tempo de air lock da emergencia">
+        <With Var="AirLockTime" />
+      </Event>
+      <Event ID="B0B627EF79F13252" Name="TMO" Comment="Fim do tempo (E_DELAY.EO)" />
+      <Event ID="81300448521BC19A" Name="FB_VALVE" Comment="Retorno da AV-4x171">
+        <With Var="Opened" />
+      </Event>
+      <Event ID="591F9CF13A512008" Name="REQ_MODE" Comment="Modo da planta">
+        <With Var="Mode" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="82260ADC05F4B187" Name="CNF" Comment="AirLock mudou">
+        <With Var="AirLock" />
+      </Event>
+      <Event ID="F796B30D3645C90A" Name="T_START" Comment="Inicia o E_DELAY">
+        <With Var="TempoDelay" />
+      </Event>
+      <Event ID="FAD270ECDB41BA5F" Name="T_STOP" Comment="Para o E_DELAY" />
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="9D93F33804C8B9AB" Name="Starting" Type="BOOL" Comment="Fase de aeracao partindo" />
+      <VarDeclaration ID="56AA6C60EFBD5E4C" Name="Run" Type="BOOL" Comment="Fase de aeracao rodando" />
+      <VarDeclaration ID="0895E08E143469B8" Name="AirLockTime" Type="TIME" Comment="Tempo de abertura da AV-4x171 no inicio da aeracao (emergencia)" />
+      <VarDeclaration ID="7B0E37EF5F32B288" Name="Opened" Type="BOOL" Comment="AV-4x171 aberta" />
+      <VarDeclaration ID="140932F3E1BC4354" Name="Mode" Type="INT" Comment="Modo da planta (3 = emergencia)" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="69AAAA67B8C541EF" Name="AirLock" Type="BOOL" Comment="TRUE = AV-4x171 aberta pelo air lock" />
+      <VarDeclaration ID="E623262E2AEF300E" Name="TempoDelay" Type="TIME" Comment="Tempo para o E_DELAY" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="fc8ee538-39e9-89f8-c1d5-6283a944d3ee">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="algFase,algAbrir,algFechar,algContar" />
+    <InternalVars>
+      <VarDeclaration Name="bAtivo" Type="BOOL" Comment="Fase ativa na ultima leitura" />
+      <VarDeclaration Name="bAbrir" Type="BOOL" />
+      <VarDeclaration Name="bFechar" Type="BOOL" />
+      <VarDeclaration Name="bContando" Type="BOOL" Comment="E_DELAY do AirLockTime em andamento (valvula ja confirmou aberta)" />
+    </InternalVars>
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="1100" y="400" />
+      <ECState Name="FASE" x="500" y="1000">
+        <ECAction Algorithm="algFase" />
+      </ECState>
+      <ECState Name="ABRIR" x="200" y="1700">
+        <ECAction Algorithm="algAbrir" Output="CNF" />
+      </ECState>
+      <ECState Name="FECHAR" x="900" y="1700">
+        <ECAction Algorithm="algFechar" Output="T_STOP" />
+        <ECAction Output="CNF" />
+      </ECState>
+      <ECState Name="CONTAR" Comment="Valvula aberta: inicia o AirLockTime" x="2300" y="1000">
+        <ECAction Algorithm="algContar" Output="T_START" />
+      </ECState>
+      <ECState Name="TEMPO" x="1700" y="1000">
+        <ECAction Algorithm="algFechar" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="FASE" Condition="REQ_PHASE OR REQ_MODE" x="800" y="700" />
+      <ECTransition Source="FASE" Destination="ABRIR" Condition="bAbrir" x="300" y="1350" />
+      <ECTransition Source="FASE" Destination="FECHAR" Condition="bFechar" x="750" y="1350" />
+      <ECTransition Source="FASE" Destination="START" Condition="1" x="650" y="650" />
+      <ECTransition Source="ABRIR" Destination="START" Condition="1" x="400" y="500" />
+      <ECTransition Source="FECHAR" Destination="START" Condition="1" x="1000" y="1000" />
+      <ECTransition Source="START" Destination="TEMPO" Condition="TMO AND AirLock AND bContando" x="1500" y="700" />
+      <ECTransition Source="TEMPO" Destination="START" Condition="1" x="1450" y="500" />
+      <ECTransition Source="START" Destination="CONTAR" Condition="AirLock AND Opened AND NOT bContando" x="1900" y="700" />
+      <ECTransition Source="CONTAR" Destination="START" Condition="1" x="1800" y="500" />
+    </ECC>
+    <Algorithm Name="algFase">
+      <ST><![CDATA[(* Abre no flanco de subida da fase (Starting ou Run), so em Mode 3 e se houver tempo;
+   fecha quando a fase sai ou o modo sai de 3 *)
+bAbrir := (Starting OR Run) AND NOT bAtivo AND (AirLockTime > T#0ms) AND (Mode = 3) AND NOT AirLock;
+bFechar := (NOT (Starting OR Run) OR (Mode <> 3)) AND AirLock;
+bAtivo := Starting OR Run;]]></ST>
+    </Algorithm>
+    <Algorithm Name="algAbrir">
+      <ST><![CDATA[AirLock := TRUE;
+bContando := FALSE;]]></ST>
+    </Algorithm>
+    <Algorithm Name="algFechar">
+      <ST><![CDATA[AirLock := FALSE;
+bContando := FALSE;]]></ST>
+    </Algorithm>
+    <Algorithm Name="algContar">
+      <ST><![CDATA[bContando := TRUE;
+TempoDelay := AirLockTime;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

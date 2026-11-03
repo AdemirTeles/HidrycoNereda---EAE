@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="3e702466-1c40-4e90-9a10-499df0d82ebb" Name="StopFeed" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="10/5/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="E1EC2CE4E950010F" Name="REQ" Comment="Normal Execution Request">
+        <With Var="FeedTime" />
+        <With Var="TotMinutesSinceStartFeedV" />
+        <With Var="S1_FeedRunning" />
+        <With Var="Enable" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="E62EF5BA8ED0B973" Name="CNF" Comment="Execution Confirmation">
+        <With Var="StopFeed" />
+        <With Var="CalcResult" />
+      </Event>
+      <Event ID="7A1FDEF644740317" Name="STOP_FEED">
+        <With Var="StopFeed" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="848908A1C7A5A404" Name="Enable" Type="BOOL" />
+      <VarDeclaration ID="EB4D4B3945F9FD48" Name="TotMinutesSinceStartFeedV" Type="REAL" Comment="Input event qualifier" />
+      <VarDeclaration ID="CE4D8749685557B8" Name="FeedTime" Type="TIME" />
+      <VarDeclaration ID="24A590CB814E6137" Name="S1_FeedRunning" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="F1FAA056354C926C" Name="StopFeed" Type="BOOL" Comment="Output event qualifier" />
+      <VarDeclaration ID="7A4605DC2C94ABB8" Name="CalcResult" Type="REAL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="4f7ff6aa-1c36-4d93-aeb3-3fe4829da55c">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="NoForce,Convert,Force" />
+    <InternalVars>
+      <VarDeclaration ID="A22F9185F8A54F4B" Name="InFeedTime" Type="REAL" />
+      <VarDeclaration ID="E508731281056F95" Name="StopCmd" Type="BOOL" />
+    </InternalVars>
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="1948.941" y="457.4117" />
+      <ECState Name="AerateRun" x="1952" y="959.9999">
+        <ECAction Algorithm="NoForce" Output="STOP_FEED" />
+      </ECState>
+      <ECState Name="ForceStop" x="1952" y="1840">
+        <ECAction Algorithm="Force" Output="STOP_FEED" />
+      </ECState>
+      <ECState Name="ResetForce" x="679.9999" y="967.9998">
+        <ECAction Algorithm="NoForce" Output="STOP_FEED" />
+      </ECState>
+      <ECState Name="CONVERT" x="1951.428" y="1354.286">
+        <ECAction Algorithm="Convert" Output="CNF" />
+      </ECState>
+      <ECTransition Source="CONVERT" Destination="ForceStop" Condition="StopCmd" x="1946.63" y="1567.853">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="486.3777,373.6325,486.4008,405.4122" />
+      </ECTransition>
+      <ECTransition Source="ForceStop" Destination="ResetForce" Condition="NOT S1_FeedRunning" x="1059.167" y="1559.979">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="301.6618,436.0314,197.8999,367.3747" />
+      </ECTransition>
+      <ECTransition Source="AerateRun" Destination="CONVERT" Condition="1" x="1952.825" y="1157.252">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="488.2775,277.2419,488.2425,301.402" />
+      </ECTransition>
+      <ECTransition Source="CONVERT" Destination="CONVERT" Condition="REQ" x="1570.018" y="1368.78">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="373.8604,393.4027,368.1461,293.4027" />
+      </ECTransition>
+      <ECTransition Source="START" Destination="AerateRun" Condition="Enable AND S1_FeedRunning" x="1956.652" y="684.3287">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="489.3904,152.4581,489.5923,185.6434" />
+      </ECTransition>
+      <ECTransition Source="ResetForce" Destination="START" Condition="1" x="1148.998" y="566.3962">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="235.2576,148.5022,319.4115,114.641" />
+      </ECTransition>
+    </ECC>
+    <Algorithm ID="6a34e3ac-9965-495a-817c-a0bfd7b1660d" Name="NoForce">
+      <ST><![CDATA[;
+StopFeed := FALSE;]]></ST>
+    </Algorithm>
+    <Algorithm ID="7ded0b28-1510-479f-b835-00ecf59675dc" Name="Convert">
+      <ST><![CDATA[;
+InFeedTime := TIME_TO_REAL(FeedTime) / 60000.0;
+
+CalcResult := InFeedTime - TotMinutesSinceStartFeedV;
+
+StopCmd := CalcResult <= 0;]]></ST>
+    </Algorithm>
+    <Algorithm ID="01285697-e45e-4709-ae7f-25467b47f235" Name="Force">
+      <ST><![CDATA[;
+StopFeed := TRUE;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

@@ -28,11 +28,5 @@ namespace HMI.Main.Canvases
 			InitializeComponent();
 			this.SideNavigationBar ="True";
 		}
-
-		void AckBtnClick(object sender, EventArgs e)
-		{
-			// TODO: Implement AckBtnClick
-			alarmGrid1.AckAllAlarms();
-		}
 	}
 }

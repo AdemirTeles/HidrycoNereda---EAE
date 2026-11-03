@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="6605a615-eaa4-e6b6-1419-252c4126c98e" Name="Controle_PID" Comment="Parametros de PID (padrao PID do legado); o pidCtl fica no processo" Namespace="Hidryco.HidrycoLib">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Hidryco" Version="1.0" Author="Hidryco" Date="21/10/2026" Remarks="1.0: Parametros de PID (padrao PID do legado); o pidCtl fica no processo" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="7BD84B0FC1882775" Name="REQ" Comment="Status vindo do processo">
+        <With Var="stsSaidaPID" />
+      </Event>
+      <Event ID="117942CC3F34C94C" Name="RECARREGA" Comment="Reenvia os ajustes persistentes (chamado no fim do INIT do processo)" />
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="75EB05A15DC6DC61" Name="CNF" Comment="Ajustes para o processo (mudanca na IHM, OPC UA ou recarga)">
+        <With Var="CMD_HABILITA" />
+        <With Var="STP_DESEJADO" />
+        <With Var="STP_PARAMETRO_KP" />
+        <With Var="STP_PARAMETRO_KI" />
+        <With Var="STP_PARAMETRO_KD" />
+        <With Var="STP_MINIMO" />
+        <With Var="STP_MAXIMO" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="260D6E81A1639D84" Name="stsSaidaPID" Type="REAL" Comment="Saida do PID (%)" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="004F03C1536C2B1E" Name="CMD_HABILITA" Type="BOOL" Comment="PID habilitado" />
+      <VarDeclaration ID="C9DF845DD1ECA932" Name="STP_DESEJADO" Type="REAL" Comment="Valor desejado" />
+      <VarDeclaration ID="4F45CBCE24FA8775" Name="STP_PARAMETRO_KP" Type="REAL" Comment="Ganho (Kp)" />
+      <VarDeclaration ID="5D86C7647B367BF7" Name="STP_PARAMETRO_KI" Type="REAL" Comment="Tempo integral (s)" />
+      <VarDeclaration ID="C753842CF6C65D61" Name="STP_PARAMETRO_KD" Type="REAL" Comment="Tempo derivativo (s)" />
+      <VarDeclaration ID="8B11A5B11AA557C3" Name="STP_MINIMO" Type="REAL" Comment="Saída mínima" />
+      <VarDeclaration ID="E7AF90225A9267BD" Name="STP_MAXIMO" Type="REAL" Comment="Saída máxima" />
+    </OutputVars>
+  </InterfaceList>
+  <FBNetwork>
+    <FB ID="7D05196770E39EC0" Name="IThis" Type="Controle_PID_HMI" x="2400" y="600" Namespace="Hidryco.HidrycoLib">
+      <Parameter Name="$6ED3F930158E7480" Value="TRUE" />
+    </FB>
+    <FB ID="16E5E51BE023B37A" Name="plcStart1" Type="plcStart" x="600" y="200" Namespace="SE.App2Base">
+      <Parameter Name="$Prio" Value="10" />
+    </FB>
+    <Input ID="7BD84B0FC1882775" Name="REQ" x="200" y="200" Type="Event" />
+    <Input ID="117942CC3F34C94C" Name="RECARREGA" x="200" y="260" Type="Event" />
+    <Input ID="260D6E81A1639D84" Name="stsSaidaPID" x="200" y="320" Type="Data" />
+    <Output ID="75EB05A15DC6DC61" Name="CNF" x="14000" y="200" Type="Event" />
+    <Output ID="004F03C1536C2B1E" Name="CMD_HABILITA" x="14000" y="260" Type="Data" />
+    <Output ID="C9DF845DD1ECA932" Name="STP_DESEJADO" x="14000" y="320" Type="Data" />
+    <Output ID="4F45CBCE24FA8775" Name="STP_PARAMETRO_KP" x="14000" y="380" Type="Data" />
+    <Output ID="5D86C7647B367BF7" Name="STP_PARAMETRO_KI" x="14000" y="440" Type="Data" />
+    <Output ID="C753842CF6C65D61" Name="STP_PARAMETRO_KD" x="14000" y="500" Type="Data" />
+    <Output ID="8B11A5B11AA557C3" Name="STP_MINIMO" x="14000" y="560" Type="Data" />
+    <Output ID="E7AF90225A9267BD" Name="STP_MAXIMO" x="14000" y="620" Type="Data" />
+    <EventConnections>
+      <Connection Source="$16E5E51BE023B37A.FIRST_INIT" Destination="$7D05196770E39EC0.BDED583D3630F715">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$16E5E51BE023B37A.REDO_INIT" Destination="$7D05196770E39EC0.BDED583D3630F715">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$7D05196770E39EC0.F005F4976A3519E1" Destination="$7D05196770E39EC0.121991B86286E4C6">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$7D05196770E39EC0.F005F4976A3519E1" Destination="$16E5E51BE023B37A.ACK_FIRST">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$117942CC3F34C94C" Destination="$7D05196770E39EC0.121991B86286E4C6">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$7D05196770E39EC0.C6353F61556B21DC" Destination="$75EB05A15DC6DC61">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$7BD84B0FC1882775" Destination="$7D05196770E39EC0.95D672F30A7887FA">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="$7D05196770E39EC0.4DE0DC8F22900EEB" Destination="$004F03C1536C2B1E">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$7D05196770E39EC0.E4E0530DF8DB6A71" Destination="$C9DF845DD1ECA932">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$7D05196770E39EC0.BB03E6E90B8CA1CC" Destination="$4F45CBCE24FA8775">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$7D05196770E39EC0.A07F53E869BCC90D" Destination="$5D86C7647B367BF7">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$7D05196770E39EC0.D0C5A2C5728349F9" Destination="$C753842CF6C65D61">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$7D05196770E39EC0.C4DEF97517D810A8" Destination="$8B11A5B11AA557C3">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$7D05196770E39EC0.8888910686BE1994" Destination="$E7AF90225A9267BD">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$260D6E81A1639D84" Destination="$7D05196770E39EC0.32C267059FF1D22A">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+    </DataConnections>
+  </FBNetwork>
+</FBType>

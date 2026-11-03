@@ -2,7 +2,7 @@
 <!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
 <FBType GUID="bb87d449-09ad-4c00-b999-152d99b3e13e" Name="speedFbAdapter" Comment="Retorno de velocidade: sinal normal (VTQREAL) ou valor bruto UINT16 com escala" Namespace="SE.Nereda">
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Hidryco" Version="1.0" Author="Hidryco" Date="10/5/2026" Remarks="Velocidade em INT para os sopradores Sulzer" />
+  <VersionInfo Organization="Hidryco" Version="1.1" Author="Hidryco" Date="27/10/2026" Remarks="1.1: no modo bruto a saida e 0 com o equipamento parado (RUN/REQ_RUN do fbFwd); 1.0: velocidade em INT para os sopradores Sulzer" />
   <InterfaceList>
     <EventInputs>
       <Event ID="23AEC014E6AA5B8A" Name="REQ_SIG">
@@ -12,6 +12,9 @@
         <With Var="RAW_IN" />
         <With Var="QI_DST" />
         <With Var="SCALE" />
+      </Event>
+      <Event ID="5787DAD88CBF4054" Name="REQ_RUN" Comment="Retorno de rodando atualizado">
+        <With Var="RUN" />
       </Event>
     </EventInputs>
     <EventOutputs>
@@ -24,6 +27,7 @@
       <VarDeclaration ID="A530287FDB8697A7" Name="RAW_IN" Type="INT" Comment="Valor bruto do symlink fbSpeedINT" />
       <VarDeclaration ID="46C4F82F6CC69CD7" Name="QI_DST" Type="BOOL" Comment="QO do SYMLINKMULTIVARDST (TRUE = conectado)" />
       <VarDeclaration ID="919EBDC14EE69C57" Name="SCALE" Type="REAL" Comment="Fator: % = bruto / SCALE" />
+      <VarDeclaration ID="2A8D8066783C9AEC" Name="RUN" Type="BOOL" Comment="Retorno de rodando (fbFwd): no modo bruto a saida e 0 com RUN FALSE" />
     </InputVars>
     <OutputVars>
       <VarDeclaration ID="02242968B1987D9E" Name="FB_OUT" Type="VTQREAL" Comment="Retorno de velocidade" />
@@ -34,19 +38,22 @@
     <InternalVars>
       <VarDeclaration Name="USE_RAW" Type="BOOL" />
       <VarDeclaration Name="r" Type="REAL" />
+      <VarDeclaration Name="vRaw" Type="REAL" Comment="Ultimo valor bruto convertido" />
     </InternalVars>
     <ECC>
       <ECState Name="START" Comment="Initial State" x="550" y="425" />
       <ECState Name="EXEC" x="550" y="1100">
         <ECAction Algorithm="Main" Output="CNF" />
       </ECState>
-      <ECTransition Source="START" Destination="EXEC" Condition="REQ_SIG OR REQ_RAW" x="760" y="760" />
+      <ECTransition Source="START" Destination="EXEC" Condition="REQ_SIG OR REQ_RAW OR REQ_RUN" x="760" y="760" />
       <ECTransition Source="EXEC" Destination="START" Condition="1" x="340" y="760" />
     </ECC>
     <Algorithm Name="Main">
       <ST><![CDATA[(* Retorno de velocidade: usa o valor bruto INT do equipamento (fbSpeedINT) quando
    esse symlink esta conectado; senao repassa o rawPv/aISignal normal (fbSpeed.AIn).
-   Valor bruto tratado como UINT16 e dividido por SCALE para voltar a %. *)
+   Valor bruto tratado como UINT16 e dividido por SCALE para voltar a %.
+   No modo bruto (sopradores Sulzer: o registrador e a referencia atual, que fica com o ultimo valor
+   com a maquina parada) a saida e 0 enquanto RUN (retorno de rodando) for FALSE. *)
 IF REQ_RAW AND QI_DST THEN
     USE_RAW := TRUE;
     r := INT_TO_REAL(RAW_IN);
@@ -54,10 +61,17 @@ IF REQ_RAW AND QI_DST THEN
         r := r + 65536.0;
     END_IF;
     IF SCALE > 0.0 THEN
-        FB_OUT.value := r / SCALE;
+        vRaw := r / SCALE;
+    END_IF;
+END_IF;
+IF USE_RAW THEN
+    IF RUN THEN
+        FB_OUT.value := vRaw;
+    ELSE
+        FB_OUT.value := 0.0;
     END_IF;
     FB_OUT.quality := 16#00000000;
-ELSIF REQ_SIG AND NOT USE_RAW THEN
+ELSIF REQ_SIG THEN
     FB_OUT := FB_IN;
 END_IF;]]></ST>
     </Algorithm>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="5f833975-23b7-4308-803d-53de7432cea2" Name="CycleCounter" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="10/21/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="57BF15978705BBF3" Name="COUNT">
+        <With Var="EmergencyON" />
+      </Event>
+      <Event ID="3E12421847ED10EA" Name="EMER" Comment="Normal Execution Request">
+        <With Var="EmergencyON" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="AF3C2B28C4BA12FA" Name="CNF" Comment="Execution Confirmation">
+        <With Var="QO" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="F136E54649141CDC" Name="EmergencyON" Type="BOOL" Comment="Input event qualifier" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="33482BA54E1A2CE0" Name="QO" Type="DINT" Comment="Output event qualifier" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="6c403e3a-48ca-4a56-8ac1-ec13de4cd75c">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="INIT,REQ" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="1292.941" y="293.4117" />
+      <ECState Name="INIT" Comment="Initialization" x="1297.244" y="1004.605">
+        <ECAction Algorithm="INIT" Output="CNF" />
+      </ECState>
+      <ECState Name="REQ" Comment="Normal execution" x="1293.647" y="1586.084">
+        <ECAction Algorithm="REQ" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="INIT" Condition="EMER AND EmergencyON" x="1294.786" y="643.6171">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="323.5103,135.1688,323.8432,185.7412" />
+      </ECTransition>
+      <ECTransition Source="INIT" Destination="REQ" Condition="COUNT AND EmergencyON" x="1297.448" y="1281.073">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="324.6016,299.1989,324.3585,338.9589" />
+      </ECTransition>
+      <ECTransition Source="REQ" Destination="START" Condition="NOT EmergencyON" x="819.6854" y="949.449">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="178.5429,336.6774,170.8299,138.7921" />
+      </ECTransition>
+      <ECTransition Source="REQ" Destination="REQ" Condition="COUNT AND EmergencyON" x="1289.884" y="1912.703">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="400.8678,510.2018,244.1003,491.8894" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="INIT" Comment="Initialization algorithm">
+      <ST><![CDATA[;
+QO := 0;]]></ST>
+    </Algorithm>
+    <Algorithm Name="REQ" Comment="Normally executed algorithm">
+      <ST><![CDATA[;
+QO := QO + 1;
+COUNT := FALSE;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

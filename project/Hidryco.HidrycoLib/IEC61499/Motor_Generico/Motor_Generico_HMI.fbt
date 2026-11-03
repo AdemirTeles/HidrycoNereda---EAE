@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
-<FBType GUID="c27fa386-ca64-4cfd-a858-349ca20708ed" Comment="Service Interface Function Block Type" Name="Motor_Generico_HMI" Namespace="Hidryco.HidrycoLib">
+<FBType GUID="c27fa386-ca64-4cfd-a858-349ca20708ed" Name="Motor_Generico_HMI" Comment="Service Interface Function Block Type" Namespace="Hidryco.HidrycoLib">
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Hidryco" Version="1.0" Author="Hidryco" Date="13/10/2026" Remarks="IHM do Motor_Generico" />
+  <VersionInfo Organization="Hidryco" Version="1.8" Author="Hidryco" Date="21/10/2026" Remarks="IHM do Motor_Generico 1.8: STS_FALHA = falha ativa" />
   <InterfaceList>
     <EventInputs>
       <Event ID="CB1A66AC932C34CE" Name="INIT">
@@ -49,6 +49,7 @@
         <With Var="STS_TORQUE" />
         <With Var="STS_CODIGO_FALHA" />
         <With Var="STS_RPM" />
+        <With Var="STS_FALHA" />
       </Event>
     </EventInputs>
     <EventOutputs>
@@ -97,8 +98,8 @@
       <VarDeclaration ID="8DFE7C65FD4D26BA" Name="STS_BLOQUEADO" Type="BOOL" Comment="Intertravamento ativo" />
       <VarDeclaration ID="04BB4F9CD24381F2" Name="STS_BLOQUEIO_GERADOR" Type="BOOL" Comment="Bloqueado pelo gerador" />
       <VarDeclaration ID="21C1E76BA48924FC" Name="STS_DISPONIVEL_AUTOMATICO" Type="BOOL" Comment="Disponivel para o automatico" />
-      <VarDeclaration ID="06277D222F5F3621" Name="STS_VELOCIDADE" Type="REAL" Comment="Velocidade real (%)" />
-      <VarDeclaration ID="7B3A3676FBDE5F7A" Name="STS_VELOCIDADE_REFERENCIA" Type="REAL" Comment="Referencia de velocidade (%)" />
+      <VarDeclaration ID="06277D222F5F3621" Name="STS_VELOCIDADE" Type="REAL" Comment="Velocidade (%): com inversor 0 % no LSP e 100 % no HSP; sem inversor 0 ou 100" />
+      <VarDeclaration ID="7B3A3676FBDE5F7A" Name="STS_VELOCIDADE_REFERENCIA" Type="REAL" Comment="Referencia de velocidade (Hz)" />
       <VarDeclaration ID="16651CA122A2B95B" Name="STS_HORIMETRO_HORA" Type="UDINT" Comment="Horimetro (h)" />
       <VarDeclaration ID="9D04D7BAE7D40E02" Name="STS_HORIMETRO_MINUTO" Type="UINT" Comment="Horimetro (min)" />
       <VarDeclaration ID="D7DA16EAB6FF6EEE" Name="STS_NUMERO_PARTIDA" Type="UDINT" Comment="Numero de partidas" />
@@ -118,6 +119,7 @@
       <VarDeclaration ID="11AE970559C4D02C" Name="STS_TORQUE" Type="REAL" Comment="Torque (%)" />
       <VarDeclaration ID="A48E8BCAD9763E7A" Name="STS_CODIGO_FALHA" Type="REAL" Comment="Codigo de falha do inversor" />
       <VarDeclaration ID="3ABB296BCC446C60" Name="STS_RPM" Type="REAL" Comment="Rotacao (rpm)" />
+      <VarDeclaration ID="43C738994B732921" Name="STS_FALHA" Type="BOOL" Comment="Falha ativa: motor em falha agora (emergencia, termica, acionamento ou comunicacao), sem memoria" />
     </InputVars>
     <OutputVars>
       <VarDeclaration ID="2B94B8AE6A07CEF9" Name="QO" Type="BOOL" Comment="Event Output Qualifier" />
@@ -129,7 +131,7 @@
       <VarDeclaration ID="411BDC0B83068DC5" Name="CMD_RESET_HORIMETRO" Type="BOOL" Comment="Zera horimetro" />
       <VarDeclaration ID="947BD655AAF0D307" Name="STP_FALHA_LIGAMENTO" Type="UINT" Comment="Tempo maximo para confirmar partida (s). 0 = desabilitado" />
       <VarDeclaration ID="AE42102A3DDDBAD1" Name="STP_FALHA_DESLIGAMENTO" Type="UINT" Comment="Tempo maximo para confirmar parada (s). 0 = desabilitado" />
-      <VarDeclaration ID="DCF6F7F4874647DD" Name="STP_SAIDA_MANUAL" Type="REAL" Comment="Velocidade em manual (%)" />
+      <VarDeclaration ID="DCF6F7F4874647DD" Name="STP_SAIDA_MANUAL" Type="REAL" Comment="Velocidade em manual (Hz)" />
     </OutputVars>
   </InterfaceList>
   <Service RightInterface="" LeftInterface="">

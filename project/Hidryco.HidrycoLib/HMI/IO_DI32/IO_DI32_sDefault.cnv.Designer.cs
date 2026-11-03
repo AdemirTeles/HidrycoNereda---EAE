@@ -25,105 +25,105 @@ namespace Hidryco.HidrycoLib.Symbols.IO_DI32
 		/// </summary>
 		private void InitializeComponent()
 		{
-			NxtControl.GuiFramework.PropertyDictionary propertyDictionary1 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary2 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary3 = new NxtControl.GuiFramework.PropertyDictionary();
-			NxtControl.GuiFramework.PropertyDictionary propertyDictionary4 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary1 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary5 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary6 = new NxtControl.GuiFramework.PropertyDictionary();
-			NxtControl.GuiFramework.PropertyDictionary propertyDictionary7 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary4 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary8 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary9 = new NxtControl.GuiFramework.PropertyDictionary();
-			NxtControl.GuiFramework.PropertyDictionary propertyDictionary10 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary7 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary11 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary12 = new NxtControl.GuiFramework.PropertyDictionary();
-			NxtControl.GuiFramework.PropertyDictionary propertyDictionary13 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary10 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary14 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary15 = new NxtControl.GuiFramework.PropertyDictionary();
-			NxtControl.GuiFramework.PropertyDictionary propertyDictionary16 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary13 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary17 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary18 = new NxtControl.GuiFramework.PropertyDictionary();
-			NxtControl.GuiFramework.PropertyDictionary propertyDictionary19 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary16 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary20 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary21 = new NxtControl.GuiFramework.PropertyDictionary();
-			NxtControl.GuiFramework.PropertyDictionary propertyDictionary22 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary19 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary23 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary24 = new NxtControl.GuiFramework.PropertyDictionary();
-			NxtControl.GuiFramework.PropertyDictionary propertyDictionary25 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary22 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary26 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary27 = new NxtControl.GuiFramework.PropertyDictionary();
-			NxtControl.GuiFramework.PropertyDictionary propertyDictionary28 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary25 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary29 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary30 = new NxtControl.GuiFramework.PropertyDictionary();
-			NxtControl.GuiFramework.PropertyDictionary propertyDictionary31 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary28 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary32 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary33 = new NxtControl.GuiFramework.PropertyDictionary();
-			NxtControl.GuiFramework.PropertyDictionary propertyDictionary34 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary31 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary35 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary36 = new NxtControl.GuiFramework.PropertyDictionary();
-			NxtControl.GuiFramework.PropertyDictionary propertyDictionary37 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary34 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary38 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary39 = new NxtControl.GuiFramework.PropertyDictionary();
-			NxtControl.GuiFramework.PropertyDictionary propertyDictionary40 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary37 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary41 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary42 = new NxtControl.GuiFramework.PropertyDictionary();
-			NxtControl.GuiFramework.PropertyDictionary propertyDictionary43 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary40 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary44 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary45 = new NxtControl.GuiFramework.PropertyDictionary();
-			NxtControl.GuiFramework.PropertyDictionary propertyDictionary46 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary43 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary47 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary48 = new NxtControl.GuiFramework.PropertyDictionary();
-			NxtControl.GuiFramework.PropertyDictionary propertyDictionary49 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary46 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary50 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary51 = new NxtControl.GuiFramework.PropertyDictionary();
-			NxtControl.GuiFramework.PropertyDictionary propertyDictionary52 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary49 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary53 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary54 = new NxtControl.GuiFramework.PropertyDictionary();
-			NxtControl.GuiFramework.PropertyDictionary propertyDictionary55 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary52 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary56 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary57 = new NxtControl.GuiFramework.PropertyDictionary();
-			NxtControl.GuiFramework.PropertyDictionary propertyDictionary58 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary55 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary59 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary60 = new NxtControl.GuiFramework.PropertyDictionary();
-			NxtControl.GuiFramework.PropertyDictionary propertyDictionary61 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary58 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary62 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary63 = new NxtControl.GuiFramework.PropertyDictionary();
-			NxtControl.GuiFramework.PropertyDictionary propertyDictionary64 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary61 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary65 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary66 = new NxtControl.GuiFramework.PropertyDictionary();
-			NxtControl.GuiFramework.PropertyDictionary propertyDictionary67 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary64 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary68 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary69 = new NxtControl.GuiFramework.PropertyDictionary();
-			NxtControl.GuiFramework.PropertyDictionary propertyDictionary70 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary67 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary71 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary72 = new NxtControl.GuiFramework.PropertyDictionary();
-			NxtControl.GuiFramework.PropertyDictionary propertyDictionary73 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary70 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary74 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary75 = new NxtControl.GuiFramework.PropertyDictionary();
-			NxtControl.GuiFramework.PropertyDictionary propertyDictionary76 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary73 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary77 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary78 = new NxtControl.GuiFramework.PropertyDictionary();
-			NxtControl.GuiFramework.PropertyDictionary propertyDictionary79 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary76 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary80 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary81 = new NxtControl.GuiFramework.PropertyDictionary();
-			NxtControl.GuiFramework.PropertyDictionary propertyDictionary82 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary79 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary83 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary84 = new NxtControl.GuiFramework.PropertyDictionary();
-			NxtControl.GuiFramework.PropertyDictionary propertyDictionary85 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary82 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary86 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary87 = new NxtControl.GuiFramework.PropertyDictionary();
-			NxtControl.GuiFramework.PropertyDictionary propertyDictionary88 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary85 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary89 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary90 = new NxtControl.GuiFramework.PropertyDictionary();
-			NxtControl.GuiFramework.PropertyDictionary propertyDictionary91 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary88 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary92 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary93 = new NxtControl.GuiFramework.PropertyDictionary();
-			NxtControl.GuiFramework.PropertyDictionary propertyDictionary94 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary91 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary95 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary96 = new NxtControl.GuiFramework.PropertyDictionary();
-			NxtControl.GuiFramework.PropertyDictionary propertyDictionary97 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary94 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary98 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary99 = new NxtControl.GuiFramework.PropertyDictionary();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionary97 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary100 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary101 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary102 = new NxtControl.GuiFramework.PropertyDictionary();
@@ -221,7 +221,7 @@ namespace Hidryco.HidrycoLib.Symbols.IO_DI32
 			// 
 			this.ledB0.BeginInit();
 			this.ledB0.ColorFrame = new NxtControl.Drawing.Color("LedFrameColor");
-			this.ledB0.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 70D, 40D);
+			this.ledB0.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 63D, 54D);
 			this.ledB0.FrameSize = 33F;
 			this.ledB0.IsOnlyInput = true;
 			this.ledB0.Name = "ledB0";
@@ -247,7 +247,7 @@ namespace Hidryco.HidrycoLib.Symbols.IO_DI32
 			// 
 			this.ledB1.BeginInit();
 			this.ledB1.ColorFrame = new NxtControl.Drawing.Color("LedFrameColor");
-			this.ledB1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 70D, 66D);
+			this.ledB1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 63D, 80D);
 			this.ledB1.FrameSize = 33F;
 			this.ledB1.IsOnlyInput = true;
 			this.ledB1.Name = "ledB1";
@@ -273,7 +273,7 @@ namespace Hidryco.HidrycoLib.Symbols.IO_DI32
 			// 
 			this.ledB2.BeginInit();
 			this.ledB2.ColorFrame = new NxtControl.Drawing.Color("LedFrameColor");
-			this.ledB2.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 70D, 92D);
+			this.ledB2.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 63D, 106D);
 			this.ledB2.FrameSize = 33F;
 			this.ledB2.IsOnlyInput = true;
 			this.ledB2.Name = "ledB2";
@@ -299,7 +299,7 @@ namespace Hidryco.HidrycoLib.Symbols.IO_DI32
 			// 
 			this.ledB3.BeginInit();
 			this.ledB3.ColorFrame = new NxtControl.Drawing.Color("LedFrameColor");
-			this.ledB3.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 70D, 118D);
+			this.ledB3.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 63D, 132D);
 			this.ledB3.FrameSize = 33F;
 			this.ledB3.IsOnlyInput = true;
 			this.ledB3.Name = "ledB3";
@@ -325,7 +325,7 @@ namespace Hidryco.HidrycoLib.Symbols.IO_DI32
 			// 
 			this.ledB4.BeginInit();
 			this.ledB4.ColorFrame = new NxtControl.Drawing.Color("LedFrameColor");
-			this.ledB4.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 70D, 144D);
+			this.ledB4.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 63D, 158D);
 			this.ledB4.FrameSize = 33F;
 			this.ledB4.IsOnlyInput = true;
 			this.ledB4.Name = "ledB4";
@@ -351,7 +351,7 @@ namespace Hidryco.HidrycoLib.Symbols.IO_DI32
 			// 
 			this.ledB5.BeginInit();
 			this.ledB5.ColorFrame = new NxtControl.Drawing.Color("LedFrameColor");
-			this.ledB5.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 70D, 170D);
+			this.ledB5.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 63D, 184D);
 			this.ledB5.FrameSize = 33F;
 			this.ledB5.IsOnlyInput = true;
 			this.ledB5.Name = "ledB5";
@@ -377,7 +377,7 @@ namespace Hidryco.HidrycoLib.Symbols.IO_DI32
 			// 
 			this.ledB6.BeginInit();
 			this.ledB6.ColorFrame = new NxtControl.Drawing.Color("LedFrameColor");
-			this.ledB6.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 70D, 196D);
+			this.ledB6.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 63D, 210D);
 			this.ledB6.FrameSize = 33F;
 			this.ledB6.IsOnlyInput = true;
 			this.ledB6.Name = "ledB6";
@@ -403,7 +403,7 @@ namespace Hidryco.HidrycoLib.Symbols.IO_DI32
 			// 
 			this.ledB7.BeginInit();
 			this.ledB7.ColorFrame = new NxtControl.Drawing.Color("LedFrameColor");
-			this.ledB7.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 70D, 222D);
+			this.ledB7.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 63D, 236D);
 			this.ledB7.FrameSize = 33F;
 			this.ledB7.IsOnlyInput = true;
 			this.ledB7.Name = "ledB7";
@@ -429,7 +429,7 @@ namespace Hidryco.HidrycoLib.Symbols.IO_DI32
 			// 
 			this.ledB8.BeginInit();
 			this.ledB8.ColorFrame = new NxtControl.Drawing.Color("LedFrameColor");
-			this.ledB8.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 70D, 248D);
+			this.ledB8.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 63D, 262D);
 			this.ledB8.FrameSize = 33F;
 			this.ledB8.IsOnlyInput = true;
 			this.ledB8.Name = "ledB8";
@@ -455,7 +455,7 @@ namespace Hidryco.HidrycoLib.Symbols.IO_DI32
 			// 
 			this.ledB9.BeginInit();
 			this.ledB9.ColorFrame = new NxtControl.Drawing.Color("LedFrameColor");
-			this.ledB9.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 70D, 274D);
+			this.ledB9.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 63D, 288D);
 			this.ledB9.FrameSize = 33F;
 			this.ledB9.IsOnlyInput = true;
 			this.ledB9.Name = "ledB9";
@@ -481,7 +481,7 @@ namespace Hidryco.HidrycoLib.Symbols.IO_DI32
 			// 
 			this.ledB10.BeginInit();
 			this.ledB10.ColorFrame = new NxtControl.Drawing.Color("LedFrameColor");
-			this.ledB10.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 70D, 300D);
+			this.ledB10.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 63D, 314D);
 			this.ledB10.FrameSize = 33F;
 			this.ledB10.IsOnlyInput = true;
 			this.ledB10.Name = "ledB10";
@@ -507,7 +507,7 @@ namespace Hidryco.HidrycoLib.Symbols.IO_DI32
 			// 
 			this.ledB11.BeginInit();
 			this.ledB11.ColorFrame = new NxtControl.Drawing.Color("LedFrameColor");
-			this.ledB11.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 70D, 326D);
+			this.ledB11.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 63D, 340D);
 			this.ledB11.FrameSize = 33F;
 			this.ledB11.IsOnlyInput = true;
 			this.ledB11.Name = "ledB11";
@@ -533,7 +533,7 @@ namespace Hidryco.HidrycoLib.Symbols.IO_DI32
 			// 
 			this.ledB12.BeginInit();
 			this.ledB12.ColorFrame = new NxtControl.Drawing.Color("LedFrameColor");
-			this.ledB12.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 70D, 352D);
+			this.ledB12.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 63D, 366D);
 			this.ledB12.FrameSize = 33F;
 			this.ledB12.IsOnlyInput = true;
 			this.ledB12.Name = "ledB12";
@@ -559,7 +559,7 @@ namespace Hidryco.HidrycoLib.Symbols.IO_DI32
 			// 
 			this.ledB13.BeginInit();
 			this.ledB13.ColorFrame = new NxtControl.Drawing.Color("LedFrameColor");
-			this.ledB13.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 70D, 378D);
+			this.ledB13.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 63D, 392D);
 			this.ledB13.FrameSize = 33F;
 			this.ledB13.IsOnlyInput = true;
 			this.ledB13.Name = "ledB13";
@@ -585,7 +585,7 @@ namespace Hidryco.HidrycoLib.Symbols.IO_DI32
 			// 
 			this.ledB14.BeginInit();
 			this.ledB14.ColorFrame = new NxtControl.Drawing.Color("LedFrameColor");
-			this.ledB14.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 70D, 404D);
+			this.ledB14.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 63D, 418D);
 			this.ledB14.FrameSize = 33F;
 			this.ledB14.IsOnlyInput = true;
 			this.ledB14.Name = "ledB14";
@@ -611,7 +611,7 @@ namespace Hidryco.HidrycoLib.Symbols.IO_DI32
 			// 
 			this.ledB15.BeginInit();
 			this.ledB15.ColorFrame = new NxtControl.Drawing.Color("LedFrameColor");
-			this.ledB15.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 70D, 430D);
+			this.ledB15.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 63D, 444D);
 			this.ledB15.FrameSize = 33F;
 			this.ledB15.IsOnlyInput = true;
 			this.ledB15.Name = "ledB15";
@@ -637,7 +637,7 @@ namespace Hidryco.HidrycoLib.Symbols.IO_DI32
 			// 
 			this.ledB16.BeginInit();
 			this.ledB16.ColorFrame = new NxtControl.Drawing.Color("LedFrameColor");
-			this.ledB16.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 310D, 40D);
+			this.ledB16.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 299D, 53D);
 			this.ledB16.FrameSize = 33F;
 			this.ledB16.IsOnlyInput = true;
 			this.ledB16.Name = "ledB16";
@@ -663,7 +663,7 @@ namespace Hidryco.HidrycoLib.Symbols.IO_DI32
 			// 
 			this.ledB17.BeginInit();
 			this.ledB17.ColorFrame = new NxtControl.Drawing.Color("LedFrameColor");
-			this.ledB17.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 310D, 66D);
+			this.ledB17.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 299D, 79D);
 			this.ledB17.FrameSize = 33F;
 			this.ledB17.IsOnlyInput = true;
 			this.ledB17.Name = "ledB17";
@@ -689,7 +689,7 @@ namespace Hidryco.HidrycoLib.Symbols.IO_DI32
 			// 
 			this.ledB18.BeginInit();
 			this.ledB18.ColorFrame = new NxtControl.Drawing.Color("LedFrameColor");
-			this.ledB18.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 310D, 92D);
+			this.ledB18.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 299D, 105D);
 			this.ledB18.FrameSize = 33F;
 			this.ledB18.IsOnlyInput = true;
 			this.ledB18.Name = "ledB18";
@@ -715,7 +715,7 @@ namespace Hidryco.HidrycoLib.Symbols.IO_DI32
 			// 
 			this.ledB19.BeginInit();
 			this.ledB19.ColorFrame = new NxtControl.Drawing.Color("LedFrameColor");
-			this.ledB19.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 310D, 118D);
+			this.ledB19.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 299D, 131D);
 			this.ledB19.FrameSize = 33F;
 			this.ledB19.IsOnlyInput = true;
 			this.ledB19.Name = "ledB19";
@@ -741,7 +741,7 @@ namespace Hidryco.HidrycoLib.Symbols.IO_DI32
 			// 
 			this.ledB20.BeginInit();
 			this.ledB20.ColorFrame = new NxtControl.Drawing.Color("LedFrameColor");
-			this.ledB20.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 310D, 144D);
+			this.ledB20.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 299D, 157D);
 			this.ledB20.FrameSize = 33F;
 			this.ledB20.IsOnlyInput = true;
 			this.ledB20.Name = "ledB20";
@@ -767,7 +767,7 @@ namespace Hidryco.HidrycoLib.Symbols.IO_DI32
 			// 
 			this.ledB21.BeginInit();
 			this.ledB21.ColorFrame = new NxtControl.Drawing.Color("LedFrameColor");
-			this.ledB21.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 310D, 170D);
+			this.ledB21.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 299D, 183D);
 			this.ledB21.FrameSize = 33F;
 			this.ledB21.IsOnlyInput = true;
 			this.ledB21.Name = "ledB21";
@@ -793,7 +793,7 @@ namespace Hidryco.HidrycoLib.Symbols.IO_DI32
 			// 
 			this.ledB22.BeginInit();
 			this.ledB22.ColorFrame = new NxtControl.Drawing.Color("LedFrameColor");
-			this.ledB22.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 310D, 196D);
+			this.ledB22.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 299D, 209D);
 			this.ledB22.FrameSize = 33F;
 			this.ledB22.IsOnlyInput = true;
 			this.ledB22.Name = "ledB22";
@@ -819,7 +819,7 @@ namespace Hidryco.HidrycoLib.Symbols.IO_DI32
 			// 
 			this.ledB23.BeginInit();
 			this.ledB23.ColorFrame = new NxtControl.Drawing.Color("LedFrameColor");
-			this.ledB23.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 310D, 222D);
+			this.ledB23.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 299D, 235D);
 			this.ledB23.FrameSize = 33F;
 			this.ledB23.IsOnlyInput = true;
 			this.ledB23.Name = "ledB23";
@@ -845,7 +845,7 @@ namespace Hidryco.HidrycoLib.Symbols.IO_DI32
 			// 
 			this.ledB24.BeginInit();
 			this.ledB24.ColorFrame = new NxtControl.Drawing.Color("LedFrameColor");
-			this.ledB24.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 310D, 248D);
+			this.ledB24.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 299D, 261D);
 			this.ledB24.FrameSize = 33F;
 			this.ledB24.IsOnlyInput = true;
 			this.ledB24.Name = "ledB24";
@@ -871,7 +871,7 @@ namespace Hidryco.HidrycoLib.Symbols.IO_DI32
 			// 
 			this.ledB25.BeginInit();
 			this.ledB25.ColorFrame = new NxtControl.Drawing.Color("LedFrameColor");
-			this.ledB25.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 310D, 274D);
+			this.ledB25.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 299D, 287D);
 			this.ledB25.FrameSize = 33F;
 			this.ledB25.IsOnlyInput = true;
 			this.ledB25.Name = "ledB25";
@@ -897,7 +897,7 @@ namespace Hidryco.HidrycoLib.Symbols.IO_DI32
 			// 
 			this.ledB26.BeginInit();
 			this.ledB26.ColorFrame = new NxtControl.Drawing.Color("LedFrameColor");
-			this.ledB26.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 310D, 300D);
+			this.ledB26.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 299D, 313D);
 			this.ledB26.FrameSize = 33F;
 			this.ledB26.IsOnlyInput = true;
 			this.ledB26.Name = "ledB26";
@@ -923,7 +923,7 @@ namespace Hidryco.HidrycoLib.Symbols.IO_DI32
 			// 
 			this.ledB27.BeginInit();
 			this.ledB27.ColorFrame = new NxtControl.Drawing.Color("LedFrameColor");
-			this.ledB27.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 310D, 326D);
+			this.ledB27.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 299D, 339D);
 			this.ledB27.FrameSize = 33F;
 			this.ledB27.IsOnlyInput = true;
 			this.ledB27.Name = "ledB27";
@@ -949,7 +949,7 @@ namespace Hidryco.HidrycoLib.Symbols.IO_DI32
 			// 
 			this.ledB28.BeginInit();
 			this.ledB28.ColorFrame = new NxtControl.Drawing.Color("LedFrameColor");
-			this.ledB28.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 310D, 352D);
+			this.ledB28.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 299D, 365D);
 			this.ledB28.FrameSize = 33F;
 			this.ledB28.IsOnlyInput = true;
 			this.ledB28.Name = "ledB28";
@@ -975,7 +975,7 @@ namespace Hidryco.HidrycoLib.Symbols.IO_DI32
 			// 
 			this.ledB29.BeginInit();
 			this.ledB29.ColorFrame = new NxtControl.Drawing.Color("LedFrameColor");
-			this.ledB29.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 310D, 378D);
+			this.ledB29.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 299D, 391D);
 			this.ledB29.FrameSize = 33F;
 			this.ledB29.IsOnlyInput = true;
 			this.ledB29.Name = "ledB29";
@@ -1001,7 +1001,7 @@ namespace Hidryco.HidrycoLib.Symbols.IO_DI32
 			// 
 			this.ledB30.BeginInit();
 			this.ledB30.ColorFrame = new NxtControl.Drawing.Color("LedFrameColor");
-			this.ledB30.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 310D, 404D);
+			this.ledB30.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 299D, 417D);
 			this.ledB30.FrameSize = 33F;
 			this.ledB30.IsOnlyInput = true;
 			this.ledB30.Name = "ledB30";
@@ -1027,7 +1027,7 @@ namespace Hidryco.HidrycoLib.Symbols.IO_DI32
 			// 
 			this.ledB31.BeginInit();
 			this.ledB31.ColorFrame = new NxtControl.Drawing.Color("LedFrameColor");
-			this.ledB31.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 310D, 430D);
+			this.ledB31.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 299D, 443D);
 			this.ledB31.FrameSize = 33F;
 			this.ledB31.IsOnlyInput = true;
 			this.ledB31.Name = "ledB31";

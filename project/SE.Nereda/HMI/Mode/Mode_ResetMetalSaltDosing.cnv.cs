@@ -28,8 +28,15 @@ namespace SE.Nereda.Symbols.Mode
 
 		void Reset_CommandValueChanged(object sender, ValueChangedEventArgs e)
 		{
-			// TODO: Implement Reset_CommandValueChanged
-			Task.Delay(1000).ContinueWith(u=> Reset_Command.Checked = false);
+			// So no clique (TRUE). Devolve o botao a FALSE em 1 s na thread da IHM: antes o Checked era mudado
+			// fora dela (ContinueWith roda num thread do pool).
+			if (!(e.Value is bool) || !(bool)e.Value) return;
+			System.Threading.SynchronizationContext ui = System.Threading.SynchronizationContext.Current;
+			Task.Delay(1000).ContinueWith(u =>
+			{
+				if (ui != null) ui.Post(s => Reset_Command.Checked = false, null);
+				else Reset_Command.Checked = false;
+			});
 		}
 
 

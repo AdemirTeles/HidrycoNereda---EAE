@@ -26,12 +26,25 @@ namespace HMI.Main.Canvases
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.btnAckNereda = new NxtControl.GuiFramework.DrawnButton();
 			this.HeartBeat = new SE.Nereda.Symbols.HeartBeat.sDefault();
 			this.Mode = new SE.Nereda.Symbols.Mode.ReactorMode();
 			this.OpenWebPage = new SE.Nereda.Symbols.OpenWebPage.sDefault();
-			this.sDefault1 = new SE.IoTMx.Symbols.TM262L01MDESE8T.sDefault();
 			this.Reactor1 = new SE.Nereda.Symbols.NeredaReactor.sReactor3();
 			this.Reactor2 = new SE.Nereda.Symbols.NeredaReactor.sReactor3();
+			// 
+			// btnAckNereda
+			// 
+			this.btnAckNereda.Bounds = new NxtControl.Drawing.RectF(((float)(212D)), ((float)(12D)), ((float)(200D)), ((float)(32D)));
+			this.btnAckNereda.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208))));
+			this.btnAckNereda.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+			this.btnAckNereda.InnerBorderColor = new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208)));
+			this.btnAckNereda.Name = "btnAckNereda";
+			this.btnAckNereda.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(160)), ((byte)(160)), ((byte)(160))), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.btnAckNereda.Radius = 2D;
+			this.btnAckNereda.Text = "Reconhecer alarmes";
+			this.btnAckNereda.Use3DEffect = false;
+			this.btnAckNereda.Click += new System.EventHandler(this.BtnAckNeredaClick);
 			// 
 			// HeartBeat
 			// 
@@ -60,21 +73,11 @@ namespace HMI.Main.Canvases
 			this.OpenWebPage.TagName = "61745BDDB91DBEF5";
 			this.OpenWebPage.EndInit();
 			// 
-			// sDefault1
-			// 
-			this.sDefault1.BeginInit();
-			this.sDefault1.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.50230414746543772D, 0D, 0D, 0.41988950276243092D, 1104D, 40D);
-			this.sDefault1.HeaderText = "";
-			this.sDefault1.Name = "sDefault1";
-			this.sDefault1.SecurityToken = ((uint)(4294967295u));
-			this.sDefault1.TagName = "F903885E680FD8F5";
-			this.sDefault1.EndInit();
-			// 
 			// Reactor1
 			// 
 			this.Reactor1.BeginInit();
 			this.Reactor1._iREACTOR = "Reactor 1";
-			this.Reactor1.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.48571428571428571D, 0D, 0D, 0.48571428571428571D, 96D, 136D);
+			this.Reactor1.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.48571428571428571D, 0D, 0D, 0.48571428571428571D, 464D, 160D);
 			this.Reactor1.Name = "Reactor1";
 			this.Reactor1.SecurityToken = ((uint)(4294967295u));
 			this.Reactor1.TagName = "D41247DF3E1D30DC";
@@ -84,7 +87,7 @@ namespace HMI.Main.Canvases
 			// 
 			this.Reactor2.BeginInit();
 			this.Reactor2._iREACTOR = "Reactor 1";
-			this.Reactor2.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.48571428571428571D, 0D, 0D, 0.48571428571428571D, 304D, 144D);
+			this.Reactor2.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.48571428571428571D, 0D, 0D, 0.48571428571428571D, 464D, 392D);
 			this.Reactor2.Name = "Reactor2";
 			this.Reactor2.SecurityToken = ((uint)(4294967295u));
 			this.Reactor2.TagName = "1D81A826384C2197";
@@ -98,8 +101,8 @@ namespace HMI.Main.Canvases
 			this.HeartBeat,
 			this.Mode,
 			this.OpenWebPage,
-			this.sDefault1,
 			this.Reactor1,
+			this.btnAckNereda,
 			this.Reactor2});
 			this.Size = new System.Drawing.Size(1366, 698);
 
@@ -107,9 +110,9 @@ namespace HMI.Main.Canvases
 		private SE.Nereda.Symbols.HeartBeat.sDefault HeartBeat;
 		private SE.Nereda.Symbols.Mode.ReactorMode Mode;
 		private SE.Nereda.Symbols.OpenWebPage.sDefault OpenWebPage;
-		private SE.IoTMx.Symbols.TM262L01MDESE8T.sDefault sDefault1;
 		private SE.Nereda.Symbols.NeredaReactor.sReactor3 Reactor1;
 		private SE.Nereda.Symbols.NeredaReactor.sReactor3 Reactor2;
+		private NxtControl.GuiFramework.DrawnButton btnAckNereda;
 		#endregion
 	}
 }

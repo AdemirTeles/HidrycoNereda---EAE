@@ -2,7 +2,7 @@
 <!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
 <FBType GUID="024198ab-e6ed-4357-bf39-bdd2a7c5fcc4" Name="basicSensorGenerico" Comment="Logica unica do sensor generico (4-20 mA ou comunicacao)" Namespace="Hidryco.HidrycoLib">
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Hidryco" Version="1.2" Author="Hidryco" Date="16/10/2026" Remarks="1.2: falha do sinal tambem pelo status da conexao Modbus (fldConexao INT, 1 = online) com cfgUsaConexao, nos dois modos (4-20 mA lido por remota e comunicacao). 1.1: inibicao de L/LL pelo processo e condicao instantanea de cada limite. 1.0: padrao SE.App2CommonProcess - escala, falha NAMUR confirmada por tempo, alarmes HH/H/L/LL com tempo proprio e memoria ate o reset, supressao em falha" />
+  <VersionInfo Organization="Hidryco" Version="1.7" Author="Hidryco" Date="22/10/2026" Remarks="1.7: stsFalhaSensor (STS_FALHA_SENSOR) so com a falha do sensor (fora da faixa ou falha do instrumento), sem a comunicacao; stsFalhaAtiva e o alarme de falha com qualquer falha. 1.6: IHM: valor, % e bruto no maximo 1 vez por segundo (evento TICK de 1 s); estado, falha e alarmes na hora. 1.5: saida stsFalhaComunicacao (comunicacao do instrumento ou conexao Modbus offline). 1.4: stsFalhaSensor (STS_FALHA_SENSOR na IHM) = falha ativa: sensor em falha agora, sem memoria nem reset; o alarme de falha segue. 1.3: sensor de nivel (cfgNivel) compara os alarmes HH/H/L/LL com a % da altura maxima (setpoints em %); os demais com o valor. 1.2: falha do sinal tambem pelo status da conexao Modbus (fldConexao INT, 1 = online) com cfgUsaConexao, nos dois modos (4-20 mA lido por remota e comunicacao). 1.1: inibicao de L/LL pelo processo e condicao instantanea de cada limite. 1.0: padrao SE.App2CommonProcess - escala, falha NAMUR confirmada por tempo, alarmes HH/H/L/LL com tempo proprio e memoria ate o reset, supressao em falha" />
   <InterfaceList>
     <EventInputs>
       <Event ID="A313A1584C9E1BE5" Name="INIT" Comment="Inicializacao">
@@ -56,6 +56,7 @@
       <Event ID="F6476A371C298363" Name="REQ_INIBE" Comment="Inibicao dos alarmes L e LL pelo processo">
         <With Var="inibeBaixos" />
       </Event>
+      <Event ID="01B9A26CA80ECAC9" Name="TICK" Comment="Base de 1 s para atualizar a IHM" />
       <Event ID="79D90CC239980ABE" Name="FALHA_MAX" Comment="Fim do tempo de confirmacao da falha (E_DELAY)" />
       <Event ID="0507438F316FE05A" Name="HH_MAX" Comment="Fim do tempo do alarme HH (E_DELAY)" />
       <Event ID="60C0262360B78E5E" Name="H_MAX" Comment="Fim do tempo do alarme H (E_DELAY)" />
@@ -107,6 +108,7 @@
         <With Var="stsAlarmeLL" />
         <With Var="stsAlarme" />
         <With Var="stsBruto" />
+        <With Var="stsFalhaComunicacao" />
       </Event>
       <Event ID="DA3C0D9212A1D794" Name="CNF_ALM" Comment="Alarmes para os ALARM_BIT (na mudanca)">
         <With Var="almHH" />
@@ -177,8 +179,9 @@
       <VarDeclaration ID="DD2B06522C2E1D6D" Name="qiConexao" Type="BOOL" Comment="Assina o symlink do status da conexao (cfgUsaConexao)" />
       <VarDeclaration ID="3203282664F84EE7" Name="stsValor" Type="REAL" Comment="Valor em unidade de engenharia (0 em falha ou desabilitado)" />
       <VarDeclaration ID="E36A36073A4D8255" Name="stsPorcentagem" Type="REAL" Comment="Nivel em % da altura maxima (so cfgNivel)" />
-      <VarDeclaration ID="D2CE0143DEEF5F5B" Name="stsFalhaSensor" Type="BOOL" Comment="Falha do sensor memorizada (ate o reset)" />
-      <VarDeclaration ID="90D219EA9609F475" Name="stsFalhaAtiva" Type="BOOL" Comment="Sinal em falha agora (valor invalido)" />
+      <VarDeclaration ID="D2CE0143DEEF5F5B" Name="stsFalhaSensor" Type="BOOL" Comment="Falha do sensor (4-20 mA fora da faixa ou falha do instrumento), confirmada e ativa, sem a falha de comunicacao" />
+      <VarDeclaration ID="90D219EA9609F475" Name="stsFalhaAtiva" Type="BOOL" Comment="Qualquer falha confirmada e ativa (sensor ou comunicacao)" />
+      <VarDeclaration ID="81E22B6ADE19C4D7" Name="stsFalhaComunicacao" Type="BOOL" Comment="Falha de comunicacao do sensor (falha do instrumento por comunicacao ou conexao Modbus offline)" />
       <VarDeclaration ID="BC2F73C5CA9874F4" Name="stsHabilitado" Type="BOOL" Comment="Sensor habilitado" />
       <VarDeclaration ID="846DCED7A53DAF52" Name="stsAlarmeHH" Type="BOOL" Comment="Alarme HH (memorizado ate o reset; suprimido com o sinal em falha)" />
       <VarDeclaration ID="11F28407C39B0DB4" Name="stsAlarmeH" Type="BOOL" Comment="Alarme H (memorizado ate o reset; suprimido com o sinal em falha)" />
@@ -211,6 +214,7 @@
       <VarDeclaration ID="688C1D5BC36C2989" Name="fbRecebido" Type="BOOL" Comment="Ja houve leitura do campo" />
       <VarDeclaration ID="7AE8B667C62D5924" Name="bReset" Type="BOOL" />
       <VarDeclaration ID="3DE12B1A6FE0A528" Name="bRuimAgora" Type="BOOL" Comment="Sinal fora da faixa / falha agora" />
+      <VarDeclaration ID="F0603D2F678707D9" Name="bSensorRuim" Type="BOOL" Comment="Falha do proprio sensor agora (fora da faixa 4-20 mA ou falha do instrumento), sem a comunicacao" />
       <VarDeclaration ID="20F174963CF1D412" Name="bSuprimido" Type="BOOL" Comment="Alarmes suprimidos" />
       <VarDeclaration ID="0B1F42FF0D692EAA" Name="rBruto" Type="REAL" />
       <VarDeclaration ID="B78EB4A289C59C30" Name="rFaixa" Type="REAL" />
@@ -246,6 +250,10 @@
       <VarDeclaration ID="4E66C4A8714FA80B" Name="wAlm" Type="WORD" />
       <VarDeclaration ID="E0DDBCCFB6260BA3" Name="oldAlm" Type="WORD" InitialValue="16#FFFF" />
       <VarDeclaration ID="D21ECFE977898748" Name="oldEstado" Type="INT" InitialValue="-1" />
+      <VarDeclaration ID="B9D48B5280F885B7" Name="hmiBruto" Type="REAL" InitialValue="-1.0" />
+      <VarDeclaration ID="0A8FB337BF7C21CC" Name="hmiPct" Type="REAL" InitialValue="-1.0" />
+      <VarDeclaration ID="9BCDAC94C6423216" Name="hmiValor" Type="REAL" InitialValue="-1.0" />
+      <VarDeclaration ID="85B5E57FE6A19EA2" Name="rCmp" Type="REAL" Comment="Valor comparado com os alarmes: % (sensor de nivel) ou valor" />
     </InternalVars>
     <ECC>
       <ECState Name="START" Comment="Estado inicial" x="1500" y="640" />
@@ -267,7 +275,7 @@
         <ECAction Output="LL_RESET" />
         <ECAction Output="LL_T" />
       </ECState>
-      <ECTransition Source="START" Destination="EXEC" Condition="INIT OR REQ_PARA OR REQ_FB OR REQ_FB_COM OR REQ_FB_CON OR REQ_RESET OR REQ_RESET_PROC OR REQ_RESET_PLUG OR REQ_INIBE OR FALHA_MAX OR HH_MAX OR H_MAX OR L_MAX OR LL_MAX" x="1580" y="860" />
+      <ECTransition Source="START" Destination="EXEC" Condition="INIT OR REQ_PARA OR REQ_FB OR REQ_FB_COM OR REQ_FB_CON OR REQ_RESET OR REQ_RESET_PROC OR REQ_RESET_PLUG OR REQ_INIBE OR FALHA_MAX OR HH_MAX OR H_MAX OR L_MAX OR LL_MAX OR TICK" x="1580" y="860" />
       <ECTransition Source="EXEC" Destination="START" Condition="1" x="1420" y="860" />
     </ECC>
     <Algorithm Name="algSensor" Comment="Logica completa do sensor (um unico algoritmo)">
@@ -281,12 +289,13 @@
    - origem 4-20 mA (escala bruta e limites NAMUR offline) ou comunicacao
      (valor ja em unidade de engenharia);
    - falha do sinal confirmada apos cfgTempoFalha: valor vai a 0 e os
-     alarmes ficam suprimidos; a falha fica memorizada ate o reset, mas o
+     alarmes ficam suprimidos; a falha vale enquanto o sinal estiver ruim, e o
      sensor volta a funcionar assim que o sinal volta;
    - durante a confirmacao o valor fica congelado (nao vai a 0 por um pico);
    - alarmes HH/H/L/LL sem histerese, cada um com o proprio tempo,
      memorizados ate o reset (IHM, processo ou plug);
    - sensor desabilitado: valor 0, sem falha e sem alarmes.
+   v1.3: sensor de nivel (cfgNivel): HH/H/L/LL comparados com a % da altura maxima.
    v1.1: inibeBaixos (processo) inibe L/LL e libera a memoria deles;
          stsCondicaoX = valor alem do setpoint X agora (sem tempo, sem memoria).
    ===================================================================== *)
@@ -326,28 +335,30 @@ END_IF;
 IF cfgComunicacao THEN
     rBruto     := fldValor;
     bRuimAgora := fbRecebido AND (fldFalhaSensor OR fldFalhaComunicacao OR (cfgUsaConexao AND fldConexao <> 1));
+    bSensorRuim := fbRecebido AND fldFalhaSensor;
 ELSE
     rBruto     := INT_TO_REAL(fldBruto);
     bRuimAgora := fbRecebido AND ((rBruto < cfgFalhaMin) OR (rBruto > cfgFalhaMax) OR (cfgUsaConexao AND fldConexao <> 1));
+    bSensorRuim := fbRecebido AND ((rBruto < cfgFalhaMin) OR (rBruto > cfgFalhaMax));
 END_IF;
 
-(* ---- 3. Falha do sensor: confirmada pelo tempo, memorizada ate o reset ---- *)
+(* ---- 3. Falha do sensor: confirmada pelo tempo; vale enquanto o sensor estiver em falha (sem memoria) ---- *)
 bReset := (REQ_RESET AND hmiReset) OR (REQ_RESET_PROC AND cmdResetFalhas) OR (REQ_RESET_PLUG AND plgReset);
 IF NOT hmiHabilitaSensor THEN
-    stsFalhaAtiva  := FALSE;
-    stsFalhaSensor := FALSE;
+    stsFalhaAtiva := FALSE;
 ELSE
     IF FALHA_MAX AND bRuimAgora THEN
-        stsFalhaAtiva  := TRUE;            (* falha confirmada *)
-        stsFalhaSensor := TRUE;
+        stsFalhaAtiva := TRUE;             (* falha confirmada *)
     END_IF;
     IF NOT bRuimAgora THEN
-        stsFalhaAtiva := FALSE;            (* sinal voltou: o sensor volta a funcionar *)
-    END_IF;
-    IF bReset AND NOT bRuimAgora THEN
-        stsFalhaSensor := FALSE;           (* memoria so sai com reset e sinal bom *)
+        stsFalhaAtiva := FALSE;            (* sinal voltou: a falha sai sozinha, sem reset *)
     END_IF;
 END_IF;
+(* falha de comunicacao (imediata; o tempo de deteccao e o do proprio Modbus) *)
+stsFalhaComunicacao := hmiHabilitaSensor AND fbRecebido AND
+    ((cfgComunicacao AND fldFalhaComunicacao) OR (cfgUsaConexao AND fldConexao <> 1));
+(* STS_FALHA_SENSOR = so a falha do sensor (confirmada pelo tempo); com a comunicacao em falha o valor lido nao vale, entao nao conta *)
+stsFalhaSensor := stsFalhaAtiva AND bSensorRuim AND NOT stsFalhaComunicacao;
 bTimFalha := hmiHabilitaSensor AND bRuimAgora AND NOT stsFalhaAtiva;
 IF bTimFalha <> oldTimFalha THEN
     IF bTimFalha THEN
@@ -383,10 +394,16 @@ ELSE
     stsPorcentagem := 0.0;
 END_IF;
 stsBruto := rBruto;
+(* alarmes do sensor de nivel pela % da altura maxima; os demais pelo valor em unidade de engenharia *)
+IF cfgNivel THEN
+    rCmp := stsPorcentagem;
+ELSE
+    rCmp := stsValor;
+END_IF;
 
 (* ---- 5. Alarmes (suprimidos com o sensor desabilitado, sem leitura ou em falha) ---- *)
 bSuprimido := NOT hmiHabilitaSensor OR NOT fbRecebido OR bRuimAgora OR stsFalhaAtiva;
-bAcimaHH := stsValor > stpAlarmeHH;
+bAcimaHH := rCmp > stpAlarmeHH;
 bCondHH := hmiHabilitaAlarmeHH AND NOT bSuprimido AND bAcimaHH;
 stsCondicaoHH := bCondHH;
 IF HH_MAX AND bCondHH THEN
@@ -410,7 +427,7 @@ IF bTimHH <> oldTimHH THEN
 END_IF;
 stsAlarmeHH := bMemHH AND NOT bSuprimido;
 
-bAcimaH := stsValor > stpAlarmeH;
+bAcimaH := rCmp > stpAlarmeH;
 bCondH := hmiHabilitaAlarmeH AND NOT bSuprimido AND bAcimaH;
 stsCondicaoH := bCondH;
 IF H_MAX AND bCondH THEN
@@ -434,7 +451,7 @@ IF bTimH <> oldTimH THEN
 END_IF;
 stsAlarmeH := bMemH AND NOT bSuprimido;
 
-bAcimaL := stsValor < stpAlarmeL;
+bAcimaL := rCmp < stpAlarmeL;
 bCondL := hmiHabilitaAlarmeL AND NOT bSuprimido AND bAcimaL AND NOT inibeBaixos;
 stsCondicaoL := bCondL;
 IF inibeBaixos THEN
@@ -461,7 +478,7 @@ IF bTimL <> oldTimL THEN
 END_IF;
 stsAlarmeL := bMemL AND NOT bSuprimido;
 
-bAcimaLL := stsValor < stpAlarmeLL;
+bAcimaLL := rCmp < stpAlarmeLL;
 bCondLL := hmiHabilitaAlarmeLL AND NOT bSuprimido AND bAcimaLL AND NOT inibeBaixos;
 stsCondicaoLL := bCondLL;
 IF inibeBaixos THEN
@@ -496,7 +513,7 @@ almHH := stsAlarmeHH;
 almH  := stsAlarmeH;
 almL  := stsAlarmeL;
 almLL := stsAlarmeLL;
-almFalha := stsFalhaSensor;
+almFalha := stsFalhaAtiva;                (* alarme de falha: sensor ou comunicacao *)
 
 (* ---- 7. Estado para o simbolo ---- *)
 IF NOT hmiHabilitaSensor THEN
@@ -524,6 +541,7 @@ IF stsCondicaoHH  THEN wSts := wSts OR 16#0100; END_IF;
 IF stsCondicaoH   THEN wSts := wSts OR 16#0200; END_IF;
 IF stsCondicaoL   THEN wSts := wSts OR 16#0400; END_IF;
 IF stsCondicaoLL  THEN wSts := wSts OR 16#0800; END_IF;
+IF stsFalhaComunicacao THEN wSts := wSts OR 16#1000; END_IF;
 wAlm := 0;
 IF almHH    THEN wAlm := wAlm OR 16#0001; END_IF;
 IF almH     THEN wAlm := wAlm OR 16#0002; END_IF;
@@ -534,7 +552,12 @@ IF almFalha THEN wAlm := wAlm OR 16#0010; END_IF;
 CNF_PV     := initPass OR (stsValor <> oldValor);
 CNF_STATUS := initPass OR ((wSts AND 16#00F2) <> (oldSts AND 16#00F2));
 CNF        := initPass OR (stsValor <> oldValor) OR (stsPorcentagem <> oldPct) OR (wSts <> oldSts);
-CNF_HMI    := CNF OR (stsEstado <> oldEstado) OR (rBruto <> oldBruto);
+(* IHM: estado/falha/alarme na hora; valor, % e bruto no maximo 1 vez por segundo (TICK) *)
+CNF_HMI    := initPass OR (wSts <> oldSts) OR (stsEstado <> oldEstado)
+              OR (TICK AND ((stsValor <> hmiValor) OR (stsPorcentagem <> hmiPct) OR (rBruto <> hmiBruto)));
+IF CNF_HMI THEN
+    hmiValor := stsValor; hmiPct := stsPorcentagem; hmiBruto := rBruto;
+END_IF;
 CNF_ALM    := initPass OR (wAlm <> oldAlm);
 oldValor  := stsValor;
 oldPct    := stsPorcentagem;

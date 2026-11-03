@@ -75,10 +75,12 @@ namespace SE.Nereda.Symbols.FieldSignals
 			this.OverEn_AutoSelect = new System.HMI.Symbols.Base.SwitchButton();
 			this.OverEn_PowerFb = new System.HMI.Symbols.Base.SwitchButton();
 			this.OverEn_AtvEta = new System.HMI.Symbols.Base.SwitchButton();
+			this.EnOverride_MDPMS = new System.HMI.Symbols.Base.SwitchButton();
+			this.OverrideV_MDPMS = new System.HMI.Symbols.Base.SwitchButton();
 			// 
 			// rectangle1
 			// 
-			this.rectangle1.Bounds = new NxtControl.Drawing.RectF(((float)(8D)), ((float)(8D)), ((float)(392D)), ((float)(312D)));
+			this.rectangle1.Bounds = new NxtControl.Drawing.RectF(((float)(8D)), ((float)(8D)), ((float)(392D)), ((float)(376D)));
 			this.rectangle1.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(231)), ((byte)(231)), ((byte)(231))), new NxtControl.Drawing.GradientFill(NxtControl.Drawing.GradientFillOrientation.DiagonalLeftTop));
 			this.rectangle1.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
 			this.rectangle1.Name = "rectangle1";
@@ -607,6 +609,34 @@ namespace SE.Nereda.Symbols.FieldSignals
 			this.OverEn_AtvEta.Value = false;
 			this.OverEn_AtvEta.EndInit();
 			// 
+			// EnOverride_MDPMS
+			// 
+			this.EnOverride_MDPMS.BeginInit();
+			this.EnOverride_MDPMS.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 16D, 344D);
+			this.EnOverride_MDPMS.FalseImage = new NxtControl.Drawing.ImageHolder();
+			this.EnOverride_MDPMS.FalseImageDisabled = new NxtControl.Drawing.ImageHolder();
+			this.EnOverride_MDPMS.Font = new NxtControl.Drawing.Font("ButtonFont");
+			this.EnOverride_MDPMS.Name = "EnOverride_MDPMS";
+			this.EnOverride_MDPMS.TagName = "EnOverride_MDPMS";
+			this.EnOverride_MDPMS.TrueImage = new NxtControl.Drawing.ImageHolder();
+			this.EnOverride_MDPMS.TrueImageDisabled = new NxtControl.Drawing.ImageHolder();
+			this.EnOverride_MDPMS.Value = false;
+			this.EnOverride_MDPMS.EndInit();
+			// 
+			// OverrideV_MDPMS
+			// 
+			this.OverrideV_MDPMS.BeginInit();
+			this.OverrideV_MDPMS.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 104D, 344D);
+			this.OverrideV_MDPMS.FalseImage = new NxtControl.Drawing.ImageHolder();
+			this.OverrideV_MDPMS.FalseImageDisabled = new NxtControl.Drawing.ImageHolder();
+			this.OverrideV_MDPMS.Font = new NxtControl.Drawing.Font("ButtonFont");
+			this.OverrideV_MDPMS.Name = "OverrideV_MDPMS";
+			this.OverrideV_MDPMS.TagName = "OverrideV_MDPMS";
+			this.OverrideV_MDPMS.TrueImage = new NxtControl.Drawing.ImageHolder();
+			this.OverrideV_MDPMS.TrueImageDisabled = new NxtControl.Drawing.ImageHolder();
+			this.OverrideV_MDPMS.Value = false;
+			this.OverrideV_MDPMS.EndInit();
+			// 
 			// sPanel
 			// 
 			this.Shapes.AddRange(new System.ComponentModel.IComponent[] {
@@ -658,8 +688,10 @@ namespace SE.Nereda.Symbols.FieldSignals
 			this.OverEn_RemoteSelect,
 			this.OverEn_AutoSelect,
 			this.OverEn_PowerFb,
-			this.OverEn_AtvEta});
-			this.SymbolSize = new System.Drawing.Size(424, 336);
+			this.OverEn_AtvEta,
+			this.EnOverride_MDPMS,
+			this.OverrideV_MDPMS});
+			this.SymbolSize = new System.Drawing.Size(424, 392);
 
 		}
 		private NxtControl.GuiFramework.Rectangle rectangle1;
@@ -711,6 +743,8 @@ namespace SE.Nereda.Symbols.FieldSignals
 		private System.HMI.Symbols.Base.SwitchButton OverEn_AutoSelect;
 		private System.HMI.Symbols.Base.SwitchButton OverEn_PowerFb;
 		private System.HMI.Symbols.Base.SwitchButton OverEn_AtvEta;
+		private System.HMI.Symbols.Base.SwitchButton EnOverride_MDPMS;
+		private System.HMI.Symbols.Base.SwitchButton OverrideV_MDPMS;
 		#endregion
 	}
 }

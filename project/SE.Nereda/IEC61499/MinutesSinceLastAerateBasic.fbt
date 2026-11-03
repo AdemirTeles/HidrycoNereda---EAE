@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="35cdc265-ead9-435d-9d3d-4705586f1aa3" Name="MinutesSinceLastAerateBasic" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="7/5/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="EB976DACF4DE8504" Name="START" />
+      <Event ID="D1A4D4DD9A455998" Name="REQ" Comment="Normal Execution Request">
+        <With Var="Stopping" />
+        <With Var="Aborting" />
+      </Event>
+      <Event ID="C74CA44BB5067CA3" Name="I_DELAY" />
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="75CA504D935A84DB" Name="CNF_PV" Comment="Execution Confirmation">
+        <With Var="Pv" />
+      </Event>
+      <Event ID="F1D1A71B672AAB1D" Name="RESET_OPD">
+        <With Var="Reset" />
+      </Event>
+      <Event ID="9EBF6DD97932C10B" Name="O_DELAY" />
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="6E036EF412E3C363" Name="Stopping" Type="BOOL" />
+      <VarDeclaration ID="DC7B969DFD1DBEB0" Name="Aborting" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="AF4A9541A64ED454" Name="Pv" Type="INT" Comment="Output event qualifier" />
+      <VarDeclaration ID="6A2647797C19ACFF" Name="Reset" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="8f48ac0b-3924-44f7-b104-5cbd3b63b4e3">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="Reset,NoReset" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="1501.584" y="991.1338" />
+      <ECState Name="Reset" x="2436.444" y="517.7778">
+        <ECAction Algorithm="Reset" Output="RESET_OPD" />
+        <ECAction Output="O_DELAY" />
+      </ECState>
+      <ECState Name="IdleState" x="2438.667" y="983.9998">
+        <ECAction Algorithm="NoReset" Output="RESET_OPD" />
+        <ECAction Output="CNF_PV" />
+      </ECState>
+      <ECTransition Source="START" Destination="Reset" Condition="START OR&#xD;&#xA;(REQ AND (Stopping OR Aborting))" x="1838.557" y="636.4571">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="422.9032,166.0288,481.4105,136.3767" />
+      </ECTransition>
+      <ECTransition Source="Reset" Destination="IdleState" Condition="I_DELAY" x="2433.353" y="741.7252">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="608.6445,169.9187,607.5768,199.4166" />
+      </ECTransition>
+      <ECTransition Source="IdleState" Destination="START" Condition="1" x="1964.659" y="985.2455">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="518.9705,245.9991,463.9487,246.4048" />
+      </ECTransition>
+    </ECC>
+    <Algorithm ID="4a50b3f4-86a7-40b5-ace5-a45743f35f52" Name="Reset">
+      <ST><![CDATA[;
+Reset := TRUE;]]></ST>
+    </Algorithm>
+    <Algorithm ID="93ee0507-e733-417c-9434-15f8b2e67c9e" Name="NoReset">
+      <ST><![CDATA[;
+Pv := 1;
+Reset := FALSE;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

@@ -18,6 +18,9 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
 	public partial class sDefault : NxtControl.GuiFramework.HMISymbol
 	{
 		private string _ReactorName = "Reactor Name";
+		// Aviso "Reactor Not Available": forcado pelo operador OU indisponivel pela logica (Feed/Aerate abortada)
+		private bool _forcedUnav = false;
+		private bool _reactorAv = true;
 		public sDefault()
 		{
 			//
@@ -52,11 +55,13 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
 			Step10.PenColor = new NxtControl.Drawing.Color(0, 0, 0);
 			this.ENABLE_FORCE_IN_Fired += ENABLE_FORCE_IN_Fired_EventHandler;
 			this.FORCE_UNAV_Fired += FORCE_UNAV_Fired_EventHandler;
+			this.R_AV_Fired += R_AV_Fired_EventHandler;
 		}
 
 		void GRAPH_Fired_EventHandler(object sender, GRAPHEventArgs e)
 		{
 			// TODO: Implement GRAPH_Fired_EventHandler
+			Step0.BrushColor = new NxtControl.Drawing.Color(78, 78, 78);
 			Step1.BrushColor = new NxtControl.Drawing.Color(78, 78, 78);
 			Step2.BrushColor = new NxtControl.Drawing.Color(78, 78, 78);
 			Step3.BrushColor = new NxtControl.Drawing.Color(78, 78, 78);
@@ -67,6 +72,7 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
 			Step8.BrushColor = new NxtControl.Drawing.Color(78, 78, 78);
 			Step9.BrushColor = new NxtControl.Drawing.Color(78, 78, 78);
 			Step10.BrushColor = new NxtControl.Drawing.Color(78, 78, 78);
+			Step0.PenColor = new NxtControl.Drawing.Color(0, 0, 0);
 			Step1.PenColor = new NxtControl.Drawing.Color(0, 0, 0);
 			Step2.PenColor = new NxtControl.Drawing.Color(0, 0, 0);
 			Step3.PenColor = new NxtControl.Drawing.Color(0, 0, 0);
@@ -75,10 +81,14 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
 			Step6.PenColor = new NxtControl.Drawing.Color(0, 0, 0);
 			Step7.PenColor = new NxtControl.Drawing.Color(0, 0, 0);
 			Step8.PenColor = new NxtControl.Drawing.Color(0, 0, 0);
-			Step9.BrushColor = new NxtControl.Drawing.Color(0, 0, 0);
-			Step10.BrushColor = new NxtControl.Drawing.Color(0, 0, 0);
+			Step9.PenColor = new NxtControl.Drawing.Color(0, 0, 0);
+			Step10.PenColor = new NxtControl.Drawing.Color(0, 0, 0);
 			
 			switch(e.Grafcet){
+				case 0:
+					Step0.BrushColor = new NxtControl.Drawing.Color(0,255,0);
+					Step0.PenColor = new NxtControl.Drawing.BlinkColor("SE.Nereda.Running");
+					break;
 				case 1:
 					Step1.BrushColor = new NxtControl.Drawing.Color(0,255,0);
 					Step1.PenColor = new NxtControl.Drawing.BlinkColor("SE.Nereda.Running");
@@ -214,7 +224,20 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
 		void FORCE_UNAV_Fired_EventHandler(object sender, FORCE_UNAVEventArgs e)
 		{
 			// TODO: Implement FORCE_UNAV_Fired_EventHandler
-			ReactorNotAv.Visible = (bool) e.ForceUnavailable;
+			if (e.ForceUnavailable.HasValue) _forcedUnav = e.ForceUnavailable.Value;
+			UpdateNotAv();
+		}
+
+		void R_AV_Fired_EventHandler(object sender, R_AVEventArgs e)
+		{
+			if (e.ReactorAvailable.HasValue) _reactorAv = e.ReactorAvailable.Value;
+			if (e.ForceUnavailable.HasValue) _forcedUnav = e.ForceUnavailable.Value;
+			UpdateNotAv();
+		}
+
+		void UpdateNotAv()
+		{
+			ReactorNotAv.Visible = _forcedUnav || !_reactorAv;
 		}
 	}
 }

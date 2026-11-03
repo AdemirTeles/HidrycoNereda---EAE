@@ -242,69 +242,6 @@ namespace Hidryco.HidrycoLib.Symbols.Subestacao
 			this.alP2 = new NxtControl.GuiFramework.Polygon();
 			this.alP2n = new NxtControl.GuiFramework.FreeText();
 			this.alTxt = new NxtControl.GuiFramework.FreeText();
-			this.rF1q1 = new NxtControl.GuiFramework.FreeText();
-			this.nF1q1 = new NxtControl.GuiFramework.FreeText();
-			this.iF1q1P1 = new NxtControl.GuiFramework.Rectangle();
-			this.iF1q1P1n = new NxtControl.GuiFramework.FreeText();
-			this.iF1q1P2 = new NxtControl.GuiFramework.Polygon();
-			this.iF1q1P2n = new NxtControl.GuiFramework.FreeText();
-			this.iF1q1Txt = new NxtControl.GuiFramework.FreeText();
-			this.rF1q0 = new NxtControl.GuiFramework.FreeText();
-			this.nF1q0 = new NxtControl.GuiFramework.FreeText();
-			this.iF1q0P1 = new NxtControl.GuiFramework.Rectangle();
-			this.iF1q0P1n = new NxtControl.GuiFramework.FreeText();
-			this.iF1q0P2 = new NxtControl.GuiFramework.Polygon();
-			this.iF1q0P2n = new NxtControl.GuiFramework.FreeText();
-			this.iF1q0Txt = new NxtControl.GuiFramework.FreeText();
-			this.rF1q2 = new NxtControl.GuiFramework.FreeText();
-			this.nF1q2 = new NxtControl.GuiFramework.FreeText();
-			this.iF1q2P1 = new NxtControl.GuiFramework.Rectangle();
-			this.iF1q2P1n = new NxtControl.GuiFramework.FreeText();
-			this.iF1q2P2 = new NxtControl.GuiFramework.Polygon();
-			this.iF1q2P2n = new NxtControl.GuiFramework.FreeText();
-			this.iF1q2Txt = new NxtControl.GuiFramework.FreeText();
-			this.rD1q1 = new NxtControl.GuiFramework.FreeText();
-			this.nD1q1 = new NxtControl.GuiFramework.FreeText();
-			this.iD1q1P1 = new NxtControl.GuiFramework.Rectangle();
-			this.iD1q1P1n = new NxtControl.GuiFramework.FreeText();
-			this.iD1q1P2 = new NxtControl.GuiFramework.Polygon();
-			this.iD1q1P2n = new NxtControl.GuiFramework.FreeText();
-			this.iD1q1Txt = new NxtControl.GuiFramework.FreeText();
-			this.rD1q0 = new NxtControl.GuiFramework.FreeText();
-			this.nD1q0 = new NxtControl.GuiFramework.FreeText();
-			this.iD1q0P1 = new NxtControl.GuiFramework.Rectangle();
-			this.iD1q0P1n = new NxtControl.GuiFramework.FreeText();
-			this.iD1q0P2 = new NxtControl.GuiFramework.Polygon();
-			this.iD1q0P2n = new NxtControl.GuiFramework.FreeText();
-			this.iD1q0Txt = new NxtControl.GuiFramework.FreeText();
-			this.rD1q2 = new NxtControl.GuiFramework.FreeText();
-			this.nD1q2 = new NxtControl.GuiFramework.FreeText();
-			this.iD1q2P1 = new NxtControl.GuiFramework.Rectangle();
-			this.iD1q2P1n = new NxtControl.GuiFramework.FreeText();
-			this.iD1q2P2 = new NxtControl.GuiFramework.Polygon();
-			this.iD1q2P2n = new NxtControl.GuiFramework.FreeText();
-			this.iD1q2Txt = new NxtControl.GuiFramework.FreeText();
-			this.rC1q1 = new NxtControl.GuiFramework.FreeText();
-			this.nC1q1 = new NxtControl.GuiFramework.FreeText();
-			this.iC1q1P1 = new NxtControl.GuiFramework.Rectangle();
-			this.iC1q1P1n = new NxtControl.GuiFramework.FreeText();
-			this.iC1q1P2 = new NxtControl.GuiFramework.Polygon();
-			this.iC1q1P2n = new NxtControl.GuiFramework.FreeText();
-			this.iC1q1Txt = new NxtControl.GuiFramework.FreeText();
-			this.rC1q0 = new NxtControl.GuiFramework.FreeText();
-			this.nC1q0 = new NxtControl.GuiFramework.FreeText();
-			this.iC1q0P1 = new NxtControl.GuiFramework.Rectangle();
-			this.iC1q0P1n = new NxtControl.GuiFramework.FreeText();
-			this.iC1q0P2 = new NxtControl.GuiFramework.Polygon();
-			this.iC1q0P2n = new NxtControl.GuiFramework.FreeText();
-			this.iC1q0Txt = new NxtControl.GuiFramework.FreeText();
-			this.rC1q2 = new NxtControl.GuiFramework.FreeText();
-			this.nC1q2 = new NxtControl.GuiFramework.FreeText();
-			this.iC1q2P1 = new NxtControl.GuiFramework.Rectangle();
-			this.iC1q2P1n = new NxtControl.GuiFramework.FreeText();
-			this.iC1q2P2 = new NxtControl.GuiFramework.Polygon();
-			this.iC1q2P2n = new NxtControl.GuiFramework.FreeText();
-			this.iC1q2Txt = new NxtControl.GuiFramework.FreeText();
 			this.btnCargas = new NxtControl.GuiFramework.DrawnButton();
 			this.btnComandos = new NxtControl.GuiFramework.DrawnButton();
 			this.btnReset = new NxtControl.GuiFramework.DrawnButton();
@@ -389,6 +326,117 @@ namespace Hidryco.HidrycoLib.Symbols.Subestacao
 			this.xEC1q1 = new System.HMI.Symbols.Base.Execute<byte>();
 			this.xEC1q0 = new System.HMI.Symbols.Base.Execute<byte>();
 			this.xEC1q2 = new System.HMI.Symbols.Base.Execute<byte>();
+			this.pNER = new NxtControl.GuiFramework.Rectangle();
+			this.pNERt = new NxtControl.GuiFramework.FreeText();
+			this.pNERc = new NxtControl.GuiFramework.FreeText();
+			this.pNERbar = new NxtControl.GuiFramework.Rectangle();
+			this.lpNER_PCE = new NxtControl.GuiFramework.Line();
+			this.bpNER_PCE = new NxtControl.GuiFramework.Rectangle();
+			this.tpNER_PCE = new NxtControl.GuiFramework.FreeText();
+			this.lpNER_PCM = new NxtControl.GuiFramework.Line();
+			this.bpNER_PCM = new NxtControl.GuiFramework.Rectangle();
+			this.tpNER_PCM = new NxtControl.GuiFramework.FreeText();
+			this.lpMO_300_01 = new NxtControl.GuiFramework.Line();
+			this.bpMO_300_01 = new NxtControl.GuiFramework.Rectangle();
+			this.tpMO_300_01 = new NxtControl.GuiFramework.FreeText();
+			this.lpR4005A = new NxtControl.GuiFramework.Line();
+			this.bpR4005A = new NxtControl.GuiFramework.Rectangle();
+			this.tpR4005A = new NxtControl.GuiFramework.FreeText();
+			this.lpR4005B = new NxtControl.GuiFramework.Line();
+			this.bpR4005B = new NxtControl.GuiFramework.Rectangle();
+			this.tpR4005B = new NxtControl.GuiFramework.FreeText();
+			this.lpP4901 = new NxtControl.GuiFramework.Line();
+			this.bpP4901 = new NxtControl.GuiFramework.Rectangle();
+			this.tpP4901 = new NxtControl.GuiFramework.FreeText();
+			this.lpP4902 = new NxtControl.GuiFramework.Line();
+			this.bpP4902 = new NxtControl.GuiFramework.Rectangle();
+			this.tpP4902 = new NxtControl.GuiFramework.FreeText();
+			this.lpP4903 = new NxtControl.GuiFramework.Line();
+			this.bpP4903 = new NxtControl.GuiFramework.Rectangle();
+			this.tpP4903 = new NxtControl.GuiFramework.FreeText();
+			this.pDES = new NxtControl.GuiFramework.Rectangle();
+			this.pDESt = new NxtControl.GuiFramework.FreeText();
+			this.pDESc = new NxtControl.GuiFramework.FreeText();
+			this.pDESbar = new NxtControl.GuiFramework.Rectangle();
+			this.lpDES_PCE = new NxtControl.GuiFramework.Line();
+			this.bpDES_PCE = new NxtControl.GuiFramework.Rectangle();
+			this.tpDES_PCE = new NxtControl.GuiFramework.FreeText();
+			this.lpDES_PCM = new NxtControl.GuiFramework.Line();
+			this.bpDES_PCM = new NxtControl.GuiFramework.Rectangle();
+			this.tpDES_PCM = new NxtControl.GuiFramework.FreeText();
+			this.lpUV_700_01 = new NxtControl.GuiFramework.Line();
+			this.bpUV_700_01 = new NxtControl.GuiFramework.Rectangle();
+			this.tpUV_700_01 = new NxtControl.GuiFramework.FreeText();
+			this.lpUV_700_02 = new NxtControl.GuiFramework.Line();
+			this.bpUV_700_02 = new NxtControl.GuiFramework.Rectangle();
+			this.tpUV_700_02 = new NxtControl.GuiFramework.FreeText();
+			this.lpVC_700_01 = new NxtControl.GuiFramework.Line();
+			this.bpVC_700_01 = new NxtControl.GuiFramework.Rectangle();
+			this.tpVC_700_01 = new NxtControl.GuiFramework.FreeText();
+			this.lpMO_700_01 = new NxtControl.GuiFramework.Line();
+			this.bpMO_700_01 = new NxtControl.GuiFramework.Rectangle();
+			this.tpMO_700_01 = new NxtControl.GuiFramework.FreeText();
+			this.pEEEB = new NxtControl.GuiFramework.Rectangle();
+			this.pEEEBt = new NxtControl.GuiFramework.FreeText();
+			this.pEEEBc = new NxtControl.GuiFramework.FreeText();
+			this.pEEEBbar = new NxtControl.GuiFramework.Rectangle();
+			this.lpEEEB_PCE = new NxtControl.GuiFramework.Line();
+			this.bpEEEB_PCE = new NxtControl.GuiFramework.Rectangle();
+			this.tpEEEB_PCE = new NxtControl.GuiFramework.FreeText();
+			this.lpEEEB_PCM = new NxtControl.GuiFramework.Line();
+			this.bpEEEB_PCM = new NxtControl.GuiFramework.Rectangle();
+			this.tpEEEB_PCM = new NxtControl.GuiFramework.FreeText();
+			this.lpCO_100_01 = new NxtControl.GuiFramework.Line();
+			this.bpCO_100_01 = new NxtControl.GuiFramework.Rectangle();
+			this.tpCO_100_01 = new NxtControl.GuiFramework.FreeText();
+			this.lpCO_100_02 = new NxtControl.GuiFramework.Line();
+			this.bpCO_100_02 = new NxtControl.GuiFramework.Rectangle();
+			this.tpCO_100_02 = new NxtControl.GuiFramework.FreeText();
+			this.lpCO_100_03 = new NxtControl.GuiFramework.Line();
+			this.bpCO_100_03 = new NxtControl.GuiFramework.Rectangle();
+			this.tpCO_100_03 = new NxtControl.GuiFramework.FreeText();
+			this.lpCO_100_04 = new NxtControl.GuiFramework.Line();
+			this.bpCO_100_04 = new NxtControl.GuiFramework.Rectangle();
+			this.tpCO_100_04 = new NxtControl.GuiFramework.FreeText();
+			this.lpGM_100_01_02 = new NxtControl.GuiFramework.Line();
+			this.bpGM_100_01_02 = new NxtControl.GuiFramework.Rectangle();
+			this.tpGM_100_01_02 = new NxtControl.GuiFramework.FreeText();
+			this.lpMO_100_01 = new NxtControl.GuiFramework.Line();
+			this.bpMO_100_01 = new NxtControl.GuiFramework.Rectangle();
+			this.tpMO_100_01 = new NxtControl.GuiFramework.FreeText();
+			this.pLeg = new NxtControl.GuiFramework.Rectangle();
+			this.pLegT = new NxtControl.GuiFramework.FreeText();
+			this.pLeg0 = new NxtControl.GuiFramework.Rectangle();
+			this.pLeg0t = new NxtControl.GuiFramework.FreeText();
+			this.pLeg1 = new NxtControl.GuiFramework.Rectangle();
+			this.pLeg1t = new NxtControl.GuiFramework.FreeText();
+			this.pLeg2 = new NxtControl.GuiFramework.Rectangle();
+			this.pLeg2t = new NxtControl.GuiFramework.FreeText();
+			this.xDJ_NER_PCE = new System.HMI.Symbols.Base.Execute<bool>();
+			this.xDJ_NER_PCM = new System.HMI.Symbols.Base.Execute<bool>();
+			this.xDJ_MO_300_01 = new System.HMI.Symbols.Base.Execute<bool>();
+			this.xDJ_R4005A = new System.HMI.Symbols.Base.Execute<bool>();
+			this.xDJ_R4005B = new System.HMI.Symbols.Base.Execute<bool>();
+			this.xDJ_P4901 = new System.HMI.Symbols.Base.Execute<bool>();
+			this.xDJ_P4902 = new System.HMI.Symbols.Base.Execute<bool>();
+			this.xDJ_P4903 = new System.HMI.Symbols.Base.Execute<bool>();
+			this.xDJ_EEEB_PCE = new System.HMI.Symbols.Base.Execute<bool>();
+			this.xDJ_EEEB_PCM = new System.HMI.Symbols.Base.Execute<bool>();
+			this.xDJ_CO_100_01 = new System.HMI.Symbols.Base.Execute<bool>();
+			this.xDJ_CO_100_02 = new System.HMI.Symbols.Base.Execute<bool>();
+			this.xDJ_CO_100_03 = new System.HMI.Symbols.Base.Execute<bool>();
+			this.xDJ_CO_100_04 = new System.HMI.Symbols.Base.Execute<bool>();
+			this.xDJ_GM_100_01_02 = new System.HMI.Symbols.Base.Execute<bool>();
+			this.xDJ_MO_100_01 = new System.HMI.Symbols.Base.Execute<bool>();
+			this.xDJ_DES_PCE_DESLIGADO = new System.HMI.Symbols.Base.Execute<bool>();
+			this.xDJ_DES_PCM_DESLIGADO = new System.HMI.Symbols.Base.Execute<bool>();
+			this.xDJ_UV_700_01 = new System.HMI.Symbols.Base.Execute<bool>();
+			this.xDJ_UV_700_02 = new System.HMI.Symbols.Base.Execute<bool>();
+			this.xDJ_VC_700_01 = new System.HMI.Symbols.Base.Execute<bool>();
+			this.xDJ_MO_700_01 = new System.HMI.Symbols.Base.Execute<bool>();
+			this.xFALHA_REMOTA_NER = new System.HMI.Symbols.Base.Execute<bool>();
+			this.xFALHA_REMOTA_EEEB = new System.HMI.Symbols.Base.Execute<bool>();
+			this.xFALHA_REMOTA_DES = new System.HMI.Symbols.Base.Execute<bool>();
 			// 
 			// fundo
 			// 
@@ -966,7 +1014,7 @@ namespace Hidryco.HidrycoLib.Symbols.Subestacao
 			// 
 			this.tPCM_EEE_BRUTO.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.tPCM_EEE_BRUTO.Font = new NxtControl.Drawing.Font("Arial", 7.5F, System.Drawing.FontStyle.Bold);
-			this.tPCM_EEE_BRUTO.Location = new NxtControl.Drawing.PointF(155.463D, 390D);
+			this.tPCM_EEE_BRUTO.Location = new NxtControl.Drawing.PointF(156.463D, 390D);
 			this.tPCM_EEE_BRUTO.Name = "tPCM_EEE_BRUTO";
 			this.tPCM_EEE_BRUTO.Text = "PCM\r\nEEE BRUTO";
 			// 
@@ -996,9 +1044,9 @@ namespace Hidryco.HidrycoLib.Symbols.Subestacao
 			// 
 			this.tPCM_DESINFECCAO.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.tPCM_DESINFECCAO.Font = new NxtControl.Drawing.Font("Arial", 7.5F, System.Drawing.FontStyle.Bold);
-			this.tPCM_DESINFECCAO.Location = new NxtControl.Drawing.PointF(214.963D, 390D);
+			this.tPCM_DESINFECCAO.Location = new NxtControl.Drawing.PointF(220.963D, 390D);
 			this.tPCM_DESINFECCAO.Name = "tPCM_DESINFECCAO";
-			this.tPCM_DESINFECCAO.Text = "PCM\r\nDESINFEC.";
+			this.tPCM_DESINFECCAO.Text = "PCM\r\nDESINF.";
 			// 
 			// lAQGBT_220V
 			// 
@@ -1416,9 +1464,9 @@ namespace Hidryco.HidrycoLib.Symbols.Subestacao
 			// 
 			this.tPCM_AGUA_REUSO.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.tPCM_AGUA_REUSO.Font = new NxtControl.Drawing.Font("Arial", 6.5F, System.Drawing.FontStyle.Bold);
-			this.tPCM_AGUA_REUSO.Location = new NxtControl.Drawing.PointF(1025.81D, 390D);
+			this.tPCM_AGUA_REUSO.Location = new NxtControl.Drawing.PointF(1031.81D, 390D);
 			this.tPCM_AGUA_REUSO.Name = "tPCM_AGUA_REUSO";
-			this.tPCM_AGUA_REUSO.Text = "PCM ÁGUA\r\nREÚSO";
+			this.tPCM_AGUA_REUSO.Text = "PCM\r\nREÚSO";
 			// 
 			// lBMO_500_01
 			// 
@@ -1536,9 +1584,9 @@ namespace Hidryco.HidrycoLib.Symbols.Subestacao
 			// 
 			this.tRES_B1.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.tRES_B1.Font = new NxtControl.Drawing.Font("Arial", 6.5F, System.Drawing.FontStyle.Bold);
-			this.tRES_B1.Location = new NxtControl.Drawing.PointF(1198.05D, 390D);
+			this.tRES_B1.Location = new NxtControl.Drawing.PointF(1206.05D, 390D);
 			this.tRES_B1.Name = "tRES_B1";
-			this.tRES_B1.Text = "RESERVA";
+			this.tRES_B1.Text = "RES.";
 			// 
 			// lBRES_B2
 			// 
@@ -1566,9 +1614,9 @@ namespace Hidryco.HidrycoLib.Symbols.Subestacao
 			// 
 			this.tRES_B2.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.tRES_B2.Font = new NxtControl.Drawing.Font("Arial", 6.5F, System.Drawing.FontStyle.Bold);
-			this.tRES_B2.Location = new NxtControl.Drawing.PointF(1240.55D, 390D);
+			this.tRES_B2.Location = new NxtControl.Drawing.PointF(1248.55D, 390D);
 			this.tRES_B2.Name = "tRES_B2";
-			this.tRES_B2.Text = "RESERVA";
+			this.tRES_B2.Text = "RES.";
 			// 
 			// lBRES_B3
 			// 
@@ -1596,9 +1644,9 @@ namespace Hidryco.HidrycoLib.Symbols.Subestacao
 			// 
 			this.tRES_B3.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.tRES_B3.Font = new NxtControl.Drawing.Font("Arial", 6.5F, System.Drawing.FontStyle.Bold);
-			this.tRES_B3.Location = new NxtControl.Drawing.PointF(1283.05D, 390D);
+			this.tRES_B3.Location = new NxtControl.Drawing.PointF(1291.05D, 390D);
 			this.tRES_B3.Name = "tRES_B3";
-			this.tRES_B3.Text = "RESERVA";
+			this.tRES_B3.Text = "RES.";
 			// 
 			// l220a
 			// 
@@ -1821,9 +1869,9 @@ namespace Hidryco.HidrycoLib.Symbols.Subestacao
 			// 
 			this.tPCE_SOPRADORES.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.tPCE_SOPRADORES.Font = new NxtControl.Drawing.Font("Arial", 6.5F, System.Drawing.FontStyle.Bold);
-			this.tPCE_SOPRADORES.Location = new NxtControl.Drawing.PointF(238.2D, 614D);
+			this.tPCE_SOPRADORES.Location = new NxtControl.Drawing.PointF(246.2D, 614D);
 			this.tPCE_SOPRADORES.Name = "tPCE_SOPRADORES";
-			this.tPCE_SOPRADORES.Text = "PCE\r\nSOPRADORES";
+			this.tPCE_SOPRADORES.Text = "PCE\r\nSOPRAD.";
 			// 
 			// lCQL_LODO
 			// 
@@ -2037,7 +2085,7 @@ namespace Hidryco.HidrycoLib.Symbols.Subestacao
 			// 
 			// painel
 			// 
-			this.painel.Bounds = new NxtControl.Drawing.RectF(((float)(695D)), ((float)(470D)), ((float)(635D)), ((float)(200D)));
+			this.painel.Bounds = new NxtControl.Drawing.RectF(((float)(695D)), ((float)(414D)), ((float)(635D)), ((float)(84D)));
 			this.painel.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(235)), ((byte)(235)), ((byte)(235))));
 			this.painel.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
 			this.painel.Name = "painel";
@@ -2047,7 +2095,7 @@ namespace Hidryco.HidrycoLib.Symbols.Subestacao
 			// 
 			this.tPlanta.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.tPlanta.Font = new NxtControl.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Bold);
-			this.tPlanta.Location = new NxtControl.Drawing.PointF(705D, 478D);
+			this.tPlanta.Location = new NxtControl.Drawing.PointF(705D, 420D);
 			this.tPlanta.Name = "tPlanta";
 			this.tPlanta.Text = "Planta na rede";
 			// 
@@ -2055,13 +2103,13 @@ namespace Hidryco.HidrycoLib.Symbols.Subestacao
 			// 
 			this.tRemota.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.tRemota.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
-			this.tRemota.Location = new NxtControl.Drawing.PointF(705D, 500D);
+			this.tRemota.Location = new NxtControl.Drawing.PointF(705D, 442D);
 			this.tRemota.Name = "tRemota";
 			this.tRemota.Text = "";
 			// 
 			// alP1
 			// 
-			this.alP1.Bounds = new NxtControl.Drawing.RectF(((float)(1025D)), ((float)(478D)), ((float)(16D)), ((float)(16D)));
+			this.alP1.Bounds = new NxtControl.Drawing.RectF(((float)(1025D)), ((float)(420D)), ((float)(16D)), ((float)(16D)));
 			this.alP1.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(230)), ((byte)(0)), ((byte)(0))));
 			this.alP1.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
 			this.alP1.Name = "alP1";
@@ -2072,30 +2120,30 @@ namespace Hidryco.HidrycoLib.Symbols.Subestacao
 			// 
 			this.alP1n.Color = new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(255)));
 			this.alP1n.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
-			this.alP1n.Location = new NxtControl.Drawing.PointF(1029D, 479D);
+			this.alP1n.Location = new NxtControl.Drawing.PointF(1029D, 421D);
 			this.alP1n.Name = "alP1n";
 			this.alP1n.Text = "1";
 			this.alP1n.Visible = false;
 			// 
 			// alP2
 			// 
-			this.alP2.Bounds = new NxtControl.Drawing.RectF(((float)(1025D)), ((float)(478D)), ((float)(16D)), ((float)(16D)));
+			this.alP2.Bounds = new NxtControl.Drawing.RectF(((float)(1025D)), ((float)(420D)), ((float)(16D)), ((float)(16D)));
 			this.alP2.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(255)), ((byte)(205)), ((byte)(0))));
 			this.alP2.Closed = true;
 			this.alP2.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
 			this.alP2.Name = "alP2";
 			this.alP2.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
 			this.alP2.Points.AddRange(new NxtControl.Drawing.PointF[] {
-			new NxtControl.Drawing.PointF(1025D, 494D),
-			new NxtControl.Drawing.PointF(1033D, 478D),
-			new NxtControl.Drawing.PointF(1041D, 494D)});
+			new NxtControl.Drawing.PointF(1025D, 436D),
+			new NxtControl.Drawing.PointF(1033D, 420D),
+			new NxtControl.Drawing.PointF(1041D, 436D)});
 			this.alP2.Visible = false;
 			// 
 			// alP2n
 			// 
 			this.alP2n.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.alP2n.Font = new NxtControl.Drawing.Font("Arial", 7F, System.Drawing.FontStyle.Bold);
-			this.alP2n.Location = new NxtControl.Drawing.PointF(1030D, 482D);
+			this.alP2n.Location = new NxtControl.Drawing.PointF(1030D, 424D);
 			this.alP2n.Name = "alP2n";
 			this.alP2n.Text = "2";
 			this.alP2n.Visible = false;
@@ -2104,608 +2152,14 @@ namespace Hidryco.HidrycoLib.Symbols.Subestacao
 			// 
 			this.alTxt.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.alTxt.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
-			this.alTxt.Location = new NxtControl.Drawing.PointF(1045D, 478D);
+			this.alTxt.Location = new NxtControl.Drawing.PointF(1045D, 420D);
 			this.alTxt.Name = "alTxt";
 			this.alTxt.Text = "";
 			this.alTxt.Visible = false;
 			// 
-			// rF1q1
-			// 
-			this.rF1q1.Color = new NxtControl.Drawing.Color(((byte)(64)), ((byte)(64)), ((byte)(64)));
-			this.rF1q1.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular);
-			this.rF1q1.Location = new NxtControl.Drawing.PointF(705D, 526D);
-			this.rF1q1.Name = "rF1q1";
-			this.rF1q1.Text = "Falha 1Q1";
-			// 
-			// nF1q1
-			// 
-			this.nF1q1.Color = new NxtControl.Drawing.Color(((byte)(110)), ((byte)(110)), ((byte)(110)));
-			this.nF1q1.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular);
-			this.nF1q1.Location = new NxtControl.Drawing.PointF(837D, 526D);
-			this.nF1q1.Name = "nF1q1";
-			this.nF1q1.Text = "—";
-			// 
-			// iF1q1P1
-			// 
-			this.iF1q1P1.Bounds = new NxtControl.Drawing.RectF(((float)(833D)), ((float)(526D)), ((float)(16D)), ((float)(16D)));
-			this.iF1q1P1.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(230)), ((byte)(0)), ((byte)(0))));
-			this.iF1q1P1.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
-			this.iF1q1P1.Name = "iF1q1P1";
-			this.iF1q1P1.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
-			this.iF1q1P1.Visible = false;
-			// 
-			// iF1q1P1n
-			// 
-			this.iF1q1P1n.Color = new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(255)));
-			this.iF1q1P1n.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
-			this.iF1q1P1n.Location = new NxtControl.Drawing.PointF(837D, 527D);
-			this.iF1q1P1n.Name = "iF1q1P1n";
-			this.iF1q1P1n.Text = "1";
-			this.iF1q1P1n.Visible = false;
-			// 
-			// iF1q1P2
-			// 
-			this.iF1q1P2.Bounds = new NxtControl.Drawing.RectF(((float)(833D)), ((float)(526D)), ((float)(16D)), ((float)(16D)));
-			this.iF1q1P2.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(255)), ((byte)(205)), ((byte)(0))));
-			this.iF1q1P2.Closed = true;
-			this.iF1q1P2.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
-			this.iF1q1P2.Name = "iF1q1P2";
-			this.iF1q1P2.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
-			this.iF1q1P2.Points.AddRange(new NxtControl.Drawing.PointF[] {
-			new NxtControl.Drawing.PointF(833D, 542D),
-			new NxtControl.Drawing.PointF(841D, 526D),
-			new NxtControl.Drawing.PointF(849D, 542D)});
-			this.iF1q1P2.Visible = false;
-			// 
-			// iF1q1P2n
-			// 
-			this.iF1q1P2n.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.iF1q1P2n.Font = new NxtControl.Drawing.Font("Arial", 7F, System.Drawing.FontStyle.Bold);
-			this.iF1q1P2n.Location = new NxtControl.Drawing.PointF(838D, 530D);
-			this.iF1q1P2n.Name = "iF1q1P2n";
-			this.iF1q1P2n.Text = "2";
-			this.iF1q1P2n.Visible = false;
-			// 
-			// iF1q1Txt
-			// 
-			this.iF1q1Txt.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.iF1q1Txt.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
-			this.iF1q1Txt.Location = new NxtControl.Drawing.PointF(853D, 526D);
-			this.iF1q1Txt.Name = "iF1q1Txt";
-			this.iF1q1Txt.Text = "";
-			this.iF1q1Txt.Visible = false;
-			// 
-			// rF1q0
-			// 
-			this.rF1q0.Color = new NxtControl.Drawing.Color(((byte)(64)), ((byte)(64)), ((byte)(64)));
-			this.rF1q0.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular);
-			this.rF1q0.Location = new NxtControl.Drawing.PointF(705D, 550D);
-			this.rF1q0.Name = "rF1q0";
-			this.rF1q0.Text = "Falha 1Q0";
-			// 
-			// nF1q0
-			// 
-			this.nF1q0.Color = new NxtControl.Drawing.Color(((byte)(110)), ((byte)(110)), ((byte)(110)));
-			this.nF1q0.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular);
-			this.nF1q0.Location = new NxtControl.Drawing.PointF(837D, 550D);
-			this.nF1q0.Name = "nF1q0";
-			this.nF1q0.Text = "—";
-			// 
-			// iF1q0P1
-			// 
-			this.iF1q0P1.Bounds = new NxtControl.Drawing.RectF(((float)(833D)), ((float)(550D)), ((float)(16D)), ((float)(16D)));
-			this.iF1q0P1.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(230)), ((byte)(0)), ((byte)(0))));
-			this.iF1q0P1.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
-			this.iF1q0P1.Name = "iF1q0P1";
-			this.iF1q0P1.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
-			this.iF1q0P1.Visible = false;
-			// 
-			// iF1q0P1n
-			// 
-			this.iF1q0P1n.Color = new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(255)));
-			this.iF1q0P1n.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
-			this.iF1q0P1n.Location = new NxtControl.Drawing.PointF(837D, 551D);
-			this.iF1q0P1n.Name = "iF1q0P1n";
-			this.iF1q0P1n.Text = "1";
-			this.iF1q0P1n.Visible = false;
-			// 
-			// iF1q0P2
-			// 
-			this.iF1q0P2.Bounds = new NxtControl.Drawing.RectF(((float)(833D)), ((float)(550D)), ((float)(16D)), ((float)(16D)));
-			this.iF1q0P2.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(255)), ((byte)(205)), ((byte)(0))));
-			this.iF1q0P2.Closed = true;
-			this.iF1q0P2.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
-			this.iF1q0P2.Name = "iF1q0P2";
-			this.iF1q0P2.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
-			this.iF1q0P2.Points.AddRange(new NxtControl.Drawing.PointF[] {
-			new NxtControl.Drawing.PointF(833D, 566D),
-			new NxtControl.Drawing.PointF(841D, 550D),
-			new NxtControl.Drawing.PointF(849D, 566D)});
-			this.iF1q0P2.Visible = false;
-			// 
-			// iF1q0P2n
-			// 
-			this.iF1q0P2n.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.iF1q0P2n.Font = new NxtControl.Drawing.Font("Arial", 7F, System.Drawing.FontStyle.Bold);
-			this.iF1q0P2n.Location = new NxtControl.Drawing.PointF(838D, 554D);
-			this.iF1q0P2n.Name = "iF1q0P2n";
-			this.iF1q0P2n.Text = "2";
-			this.iF1q0P2n.Visible = false;
-			// 
-			// iF1q0Txt
-			// 
-			this.iF1q0Txt.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.iF1q0Txt.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
-			this.iF1q0Txt.Location = new NxtControl.Drawing.PointF(853D, 550D);
-			this.iF1q0Txt.Name = "iF1q0Txt";
-			this.iF1q0Txt.Text = "";
-			this.iF1q0Txt.Visible = false;
-			// 
-			// rF1q2
-			// 
-			this.rF1q2.Color = new NxtControl.Drawing.Color(((byte)(64)), ((byte)(64)), ((byte)(64)));
-			this.rF1q2.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular);
-			this.rF1q2.Location = new NxtControl.Drawing.PointF(705D, 574D);
-			this.rF1q2.Name = "rF1q2";
-			this.rF1q2.Text = "Falha 1Q2";
-			// 
-			// nF1q2
-			// 
-			this.nF1q2.Color = new NxtControl.Drawing.Color(((byte)(110)), ((byte)(110)), ((byte)(110)));
-			this.nF1q2.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular);
-			this.nF1q2.Location = new NxtControl.Drawing.PointF(837D, 574D);
-			this.nF1q2.Name = "nF1q2";
-			this.nF1q2.Text = "—";
-			// 
-			// iF1q2P1
-			// 
-			this.iF1q2P1.Bounds = new NxtControl.Drawing.RectF(((float)(833D)), ((float)(574D)), ((float)(16D)), ((float)(16D)));
-			this.iF1q2P1.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(230)), ((byte)(0)), ((byte)(0))));
-			this.iF1q2P1.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
-			this.iF1q2P1.Name = "iF1q2P1";
-			this.iF1q2P1.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
-			this.iF1q2P1.Visible = false;
-			// 
-			// iF1q2P1n
-			// 
-			this.iF1q2P1n.Color = new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(255)));
-			this.iF1q2P1n.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
-			this.iF1q2P1n.Location = new NxtControl.Drawing.PointF(837D, 575D);
-			this.iF1q2P1n.Name = "iF1q2P1n";
-			this.iF1q2P1n.Text = "1";
-			this.iF1q2P1n.Visible = false;
-			// 
-			// iF1q2P2
-			// 
-			this.iF1q2P2.Bounds = new NxtControl.Drawing.RectF(((float)(833D)), ((float)(574D)), ((float)(16D)), ((float)(16D)));
-			this.iF1q2P2.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(255)), ((byte)(205)), ((byte)(0))));
-			this.iF1q2P2.Closed = true;
-			this.iF1q2P2.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
-			this.iF1q2P2.Name = "iF1q2P2";
-			this.iF1q2P2.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
-			this.iF1q2P2.Points.AddRange(new NxtControl.Drawing.PointF[] {
-			new NxtControl.Drawing.PointF(833D, 590D),
-			new NxtControl.Drawing.PointF(841D, 574D),
-			new NxtControl.Drawing.PointF(849D, 590D)});
-			this.iF1q2P2.Visible = false;
-			// 
-			// iF1q2P2n
-			// 
-			this.iF1q2P2n.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.iF1q2P2n.Font = new NxtControl.Drawing.Font("Arial", 7F, System.Drawing.FontStyle.Bold);
-			this.iF1q2P2n.Location = new NxtControl.Drawing.PointF(838D, 578D);
-			this.iF1q2P2n.Name = "iF1q2P2n";
-			this.iF1q2P2n.Text = "2";
-			this.iF1q2P2n.Visible = false;
-			// 
-			// iF1q2Txt
-			// 
-			this.iF1q2Txt.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.iF1q2Txt.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
-			this.iF1q2Txt.Location = new NxtControl.Drawing.PointF(853D, 574D);
-			this.iF1q2Txt.Name = "iF1q2Txt";
-			this.iF1q2Txt.Text = "";
-			this.iF1q2Txt.Visible = false;
-			// 
-			// rD1q1
-			// 
-			this.rD1q1.Color = new NxtControl.Drawing.Color(((byte)(64)), ((byte)(64)), ((byte)(64)));
-			this.rD1q1.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular);
-			this.rD1q1.Location = new NxtControl.Drawing.PointF(913D, 526D);
-			this.rD1q1.Name = "rD1q1";
-			this.rD1q1.Text = "Indefinido 1Q1";
-			// 
-			// nD1q1
-			// 
-			this.nD1q1.Color = new NxtControl.Drawing.Color(((byte)(110)), ((byte)(110)), ((byte)(110)));
-			this.nD1q1.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular);
-			this.nD1q1.Location = new NxtControl.Drawing.PointF(1045D, 526D);
-			this.nD1q1.Name = "nD1q1";
-			this.nD1q1.Text = "—";
-			// 
-			// iD1q1P1
-			// 
-			this.iD1q1P1.Bounds = new NxtControl.Drawing.RectF(((float)(1041D)), ((float)(526D)), ((float)(16D)), ((float)(16D)));
-			this.iD1q1P1.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(230)), ((byte)(0)), ((byte)(0))));
-			this.iD1q1P1.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
-			this.iD1q1P1.Name = "iD1q1P1";
-			this.iD1q1P1.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
-			this.iD1q1P1.Visible = false;
-			// 
-			// iD1q1P1n
-			// 
-			this.iD1q1P1n.Color = new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(255)));
-			this.iD1q1P1n.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
-			this.iD1q1P1n.Location = new NxtControl.Drawing.PointF(1045D, 527D);
-			this.iD1q1P1n.Name = "iD1q1P1n";
-			this.iD1q1P1n.Text = "1";
-			this.iD1q1P1n.Visible = false;
-			// 
-			// iD1q1P2
-			// 
-			this.iD1q1P2.Bounds = new NxtControl.Drawing.RectF(((float)(1041D)), ((float)(526D)), ((float)(16D)), ((float)(16D)));
-			this.iD1q1P2.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(255)), ((byte)(205)), ((byte)(0))));
-			this.iD1q1P2.Closed = true;
-			this.iD1q1P2.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
-			this.iD1q1P2.Name = "iD1q1P2";
-			this.iD1q1P2.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
-			this.iD1q1P2.Points.AddRange(new NxtControl.Drawing.PointF[] {
-			new NxtControl.Drawing.PointF(1041D, 542D),
-			new NxtControl.Drawing.PointF(1049D, 526D),
-			new NxtControl.Drawing.PointF(1057D, 542D)});
-			this.iD1q1P2.Visible = false;
-			// 
-			// iD1q1P2n
-			// 
-			this.iD1q1P2n.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.iD1q1P2n.Font = new NxtControl.Drawing.Font("Arial", 7F, System.Drawing.FontStyle.Bold);
-			this.iD1q1P2n.Location = new NxtControl.Drawing.PointF(1046D, 530D);
-			this.iD1q1P2n.Name = "iD1q1P2n";
-			this.iD1q1P2n.Text = "2";
-			this.iD1q1P2n.Visible = false;
-			// 
-			// iD1q1Txt
-			// 
-			this.iD1q1Txt.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.iD1q1Txt.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
-			this.iD1q1Txt.Location = new NxtControl.Drawing.PointF(1061D, 526D);
-			this.iD1q1Txt.Name = "iD1q1Txt";
-			this.iD1q1Txt.Text = "";
-			this.iD1q1Txt.Visible = false;
-			// 
-			// rD1q0
-			// 
-			this.rD1q0.Color = new NxtControl.Drawing.Color(((byte)(64)), ((byte)(64)), ((byte)(64)));
-			this.rD1q0.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular);
-			this.rD1q0.Location = new NxtControl.Drawing.PointF(913D, 550D);
-			this.rD1q0.Name = "rD1q0";
-			this.rD1q0.Text = "Indefinido 1Q0";
-			// 
-			// nD1q0
-			// 
-			this.nD1q0.Color = new NxtControl.Drawing.Color(((byte)(110)), ((byte)(110)), ((byte)(110)));
-			this.nD1q0.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular);
-			this.nD1q0.Location = new NxtControl.Drawing.PointF(1045D, 550D);
-			this.nD1q0.Name = "nD1q0";
-			this.nD1q0.Text = "—";
-			// 
-			// iD1q0P1
-			// 
-			this.iD1q0P1.Bounds = new NxtControl.Drawing.RectF(((float)(1041D)), ((float)(550D)), ((float)(16D)), ((float)(16D)));
-			this.iD1q0P1.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(230)), ((byte)(0)), ((byte)(0))));
-			this.iD1q0P1.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
-			this.iD1q0P1.Name = "iD1q0P1";
-			this.iD1q0P1.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
-			this.iD1q0P1.Visible = false;
-			// 
-			// iD1q0P1n
-			// 
-			this.iD1q0P1n.Color = new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(255)));
-			this.iD1q0P1n.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
-			this.iD1q0P1n.Location = new NxtControl.Drawing.PointF(1045D, 551D);
-			this.iD1q0P1n.Name = "iD1q0P1n";
-			this.iD1q0P1n.Text = "1";
-			this.iD1q0P1n.Visible = false;
-			// 
-			// iD1q0P2
-			// 
-			this.iD1q0P2.Bounds = new NxtControl.Drawing.RectF(((float)(1041D)), ((float)(550D)), ((float)(16D)), ((float)(16D)));
-			this.iD1q0P2.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(255)), ((byte)(205)), ((byte)(0))));
-			this.iD1q0P2.Closed = true;
-			this.iD1q0P2.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
-			this.iD1q0P2.Name = "iD1q0P2";
-			this.iD1q0P2.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
-			this.iD1q0P2.Points.AddRange(new NxtControl.Drawing.PointF[] {
-			new NxtControl.Drawing.PointF(1041D, 566D),
-			new NxtControl.Drawing.PointF(1049D, 550D),
-			new NxtControl.Drawing.PointF(1057D, 566D)});
-			this.iD1q0P2.Visible = false;
-			// 
-			// iD1q0P2n
-			// 
-			this.iD1q0P2n.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.iD1q0P2n.Font = new NxtControl.Drawing.Font("Arial", 7F, System.Drawing.FontStyle.Bold);
-			this.iD1q0P2n.Location = new NxtControl.Drawing.PointF(1046D, 554D);
-			this.iD1q0P2n.Name = "iD1q0P2n";
-			this.iD1q0P2n.Text = "2";
-			this.iD1q0P2n.Visible = false;
-			// 
-			// iD1q0Txt
-			// 
-			this.iD1q0Txt.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.iD1q0Txt.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
-			this.iD1q0Txt.Location = new NxtControl.Drawing.PointF(1061D, 550D);
-			this.iD1q0Txt.Name = "iD1q0Txt";
-			this.iD1q0Txt.Text = "";
-			this.iD1q0Txt.Visible = false;
-			// 
-			// rD1q2
-			// 
-			this.rD1q2.Color = new NxtControl.Drawing.Color(((byte)(64)), ((byte)(64)), ((byte)(64)));
-			this.rD1q2.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular);
-			this.rD1q2.Location = new NxtControl.Drawing.PointF(913D, 574D);
-			this.rD1q2.Name = "rD1q2";
-			this.rD1q2.Text = "Indefinido 1Q2";
-			// 
-			// nD1q2
-			// 
-			this.nD1q2.Color = new NxtControl.Drawing.Color(((byte)(110)), ((byte)(110)), ((byte)(110)));
-			this.nD1q2.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular);
-			this.nD1q2.Location = new NxtControl.Drawing.PointF(1045D, 574D);
-			this.nD1q2.Name = "nD1q2";
-			this.nD1q2.Text = "—";
-			// 
-			// iD1q2P1
-			// 
-			this.iD1q2P1.Bounds = new NxtControl.Drawing.RectF(((float)(1041D)), ((float)(574D)), ((float)(16D)), ((float)(16D)));
-			this.iD1q2P1.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(230)), ((byte)(0)), ((byte)(0))));
-			this.iD1q2P1.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
-			this.iD1q2P1.Name = "iD1q2P1";
-			this.iD1q2P1.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
-			this.iD1q2P1.Visible = false;
-			// 
-			// iD1q2P1n
-			// 
-			this.iD1q2P1n.Color = new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(255)));
-			this.iD1q2P1n.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
-			this.iD1q2P1n.Location = new NxtControl.Drawing.PointF(1045D, 575D);
-			this.iD1q2P1n.Name = "iD1q2P1n";
-			this.iD1q2P1n.Text = "1";
-			this.iD1q2P1n.Visible = false;
-			// 
-			// iD1q2P2
-			// 
-			this.iD1q2P2.Bounds = new NxtControl.Drawing.RectF(((float)(1041D)), ((float)(574D)), ((float)(16D)), ((float)(16D)));
-			this.iD1q2P2.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(255)), ((byte)(205)), ((byte)(0))));
-			this.iD1q2P2.Closed = true;
-			this.iD1q2P2.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
-			this.iD1q2P2.Name = "iD1q2P2";
-			this.iD1q2P2.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
-			this.iD1q2P2.Points.AddRange(new NxtControl.Drawing.PointF[] {
-			new NxtControl.Drawing.PointF(1041D, 590D),
-			new NxtControl.Drawing.PointF(1049D, 574D),
-			new NxtControl.Drawing.PointF(1057D, 590D)});
-			this.iD1q2P2.Visible = false;
-			// 
-			// iD1q2P2n
-			// 
-			this.iD1q2P2n.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.iD1q2P2n.Font = new NxtControl.Drawing.Font("Arial", 7F, System.Drawing.FontStyle.Bold);
-			this.iD1q2P2n.Location = new NxtControl.Drawing.PointF(1046D, 578D);
-			this.iD1q2P2n.Name = "iD1q2P2n";
-			this.iD1q2P2n.Text = "2";
-			this.iD1q2P2n.Visible = false;
-			// 
-			// iD1q2Txt
-			// 
-			this.iD1q2Txt.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.iD1q2Txt.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
-			this.iD1q2Txt.Location = new NxtControl.Drawing.PointF(1061D, 574D);
-			this.iD1q2Txt.Name = "iD1q2Txt";
-			this.iD1q2Txt.Text = "";
-			this.iD1q2Txt.Visible = false;
-			// 
-			// rC1q1
-			// 
-			this.rC1q1.Color = new NxtControl.Drawing.Color(((byte)(64)), ((byte)(64)), ((byte)(64)));
-			this.rC1q1.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular);
-			this.rC1q1.Location = new NxtControl.Drawing.PointF(1121D, 526D);
-			this.rC1q1.Name = "rC1q1";
-			this.rC1q1.Text = "Sem resposta 1Q1";
-			// 
-			// nC1q1
-			// 
-			this.nC1q1.Color = new NxtControl.Drawing.Color(((byte)(110)), ((byte)(110)), ((byte)(110)));
-			this.nC1q1.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular);
-			this.nC1q1.Location = new NxtControl.Drawing.PointF(1253D, 526D);
-			this.nC1q1.Name = "nC1q1";
-			this.nC1q1.Text = "—";
-			// 
-			// iC1q1P1
-			// 
-			this.iC1q1P1.Bounds = new NxtControl.Drawing.RectF(((float)(1249D)), ((float)(526D)), ((float)(16D)), ((float)(16D)));
-			this.iC1q1P1.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(230)), ((byte)(0)), ((byte)(0))));
-			this.iC1q1P1.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
-			this.iC1q1P1.Name = "iC1q1P1";
-			this.iC1q1P1.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
-			this.iC1q1P1.Visible = false;
-			// 
-			// iC1q1P1n
-			// 
-			this.iC1q1P1n.Color = new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(255)));
-			this.iC1q1P1n.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
-			this.iC1q1P1n.Location = new NxtControl.Drawing.PointF(1253D, 527D);
-			this.iC1q1P1n.Name = "iC1q1P1n";
-			this.iC1q1P1n.Text = "1";
-			this.iC1q1P1n.Visible = false;
-			// 
-			// iC1q1P2
-			// 
-			this.iC1q1P2.Bounds = new NxtControl.Drawing.RectF(((float)(1249D)), ((float)(526D)), ((float)(16D)), ((float)(16D)));
-			this.iC1q1P2.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(255)), ((byte)(205)), ((byte)(0))));
-			this.iC1q1P2.Closed = true;
-			this.iC1q1P2.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
-			this.iC1q1P2.Name = "iC1q1P2";
-			this.iC1q1P2.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
-			this.iC1q1P2.Points.AddRange(new NxtControl.Drawing.PointF[] {
-			new NxtControl.Drawing.PointF(1249D, 542D),
-			new NxtControl.Drawing.PointF(1257D, 526D),
-			new NxtControl.Drawing.PointF(1265D, 542D)});
-			this.iC1q1P2.Visible = false;
-			// 
-			// iC1q1P2n
-			// 
-			this.iC1q1P2n.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.iC1q1P2n.Font = new NxtControl.Drawing.Font("Arial", 7F, System.Drawing.FontStyle.Bold);
-			this.iC1q1P2n.Location = new NxtControl.Drawing.PointF(1254D, 530D);
-			this.iC1q1P2n.Name = "iC1q1P2n";
-			this.iC1q1P2n.Text = "2";
-			this.iC1q1P2n.Visible = false;
-			// 
-			// iC1q1Txt
-			// 
-			this.iC1q1Txt.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.iC1q1Txt.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
-			this.iC1q1Txt.Location = new NxtControl.Drawing.PointF(1269D, 526D);
-			this.iC1q1Txt.Name = "iC1q1Txt";
-			this.iC1q1Txt.Text = "";
-			this.iC1q1Txt.Visible = false;
-			// 
-			// rC1q0
-			// 
-			this.rC1q0.Color = new NxtControl.Drawing.Color(((byte)(64)), ((byte)(64)), ((byte)(64)));
-			this.rC1q0.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular);
-			this.rC1q0.Location = new NxtControl.Drawing.PointF(1121D, 550D);
-			this.rC1q0.Name = "rC1q0";
-			this.rC1q0.Text = "Sem resposta 1Q0";
-			// 
-			// nC1q0
-			// 
-			this.nC1q0.Color = new NxtControl.Drawing.Color(((byte)(110)), ((byte)(110)), ((byte)(110)));
-			this.nC1q0.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular);
-			this.nC1q0.Location = new NxtControl.Drawing.PointF(1253D, 550D);
-			this.nC1q0.Name = "nC1q0";
-			this.nC1q0.Text = "—";
-			// 
-			// iC1q0P1
-			// 
-			this.iC1q0P1.Bounds = new NxtControl.Drawing.RectF(((float)(1249D)), ((float)(550D)), ((float)(16D)), ((float)(16D)));
-			this.iC1q0P1.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(230)), ((byte)(0)), ((byte)(0))));
-			this.iC1q0P1.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
-			this.iC1q0P1.Name = "iC1q0P1";
-			this.iC1q0P1.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
-			this.iC1q0P1.Visible = false;
-			// 
-			// iC1q0P1n
-			// 
-			this.iC1q0P1n.Color = new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(255)));
-			this.iC1q0P1n.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
-			this.iC1q0P1n.Location = new NxtControl.Drawing.PointF(1253D, 551D);
-			this.iC1q0P1n.Name = "iC1q0P1n";
-			this.iC1q0P1n.Text = "1";
-			this.iC1q0P1n.Visible = false;
-			// 
-			// iC1q0P2
-			// 
-			this.iC1q0P2.Bounds = new NxtControl.Drawing.RectF(((float)(1249D)), ((float)(550D)), ((float)(16D)), ((float)(16D)));
-			this.iC1q0P2.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(255)), ((byte)(205)), ((byte)(0))));
-			this.iC1q0P2.Closed = true;
-			this.iC1q0P2.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
-			this.iC1q0P2.Name = "iC1q0P2";
-			this.iC1q0P2.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
-			this.iC1q0P2.Points.AddRange(new NxtControl.Drawing.PointF[] {
-			new NxtControl.Drawing.PointF(1249D, 566D),
-			new NxtControl.Drawing.PointF(1257D, 550D),
-			new NxtControl.Drawing.PointF(1265D, 566D)});
-			this.iC1q0P2.Visible = false;
-			// 
-			// iC1q0P2n
-			// 
-			this.iC1q0P2n.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.iC1q0P2n.Font = new NxtControl.Drawing.Font("Arial", 7F, System.Drawing.FontStyle.Bold);
-			this.iC1q0P2n.Location = new NxtControl.Drawing.PointF(1254D, 554D);
-			this.iC1q0P2n.Name = "iC1q0P2n";
-			this.iC1q0P2n.Text = "2";
-			this.iC1q0P2n.Visible = false;
-			// 
-			// iC1q0Txt
-			// 
-			this.iC1q0Txt.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.iC1q0Txt.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
-			this.iC1q0Txt.Location = new NxtControl.Drawing.PointF(1269D, 550D);
-			this.iC1q0Txt.Name = "iC1q0Txt";
-			this.iC1q0Txt.Text = "";
-			this.iC1q0Txt.Visible = false;
-			// 
-			// rC1q2
-			// 
-			this.rC1q2.Color = new NxtControl.Drawing.Color(((byte)(64)), ((byte)(64)), ((byte)(64)));
-			this.rC1q2.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular);
-			this.rC1q2.Location = new NxtControl.Drawing.PointF(1121D, 574D);
-			this.rC1q2.Name = "rC1q2";
-			this.rC1q2.Text = "Sem resposta 1Q2";
-			// 
-			// nC1q2
-			// 
-			this.nC1q2.Color = new NxtControl.Drawing.Color(((byte)(110)), ((byte)(110)), ((byte)(110)));
-			this.nC1q2.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular);
-			this.nC1q2.Location = new NxtControl.Drawing.PointF(1253D, 574D);
-			this.nC1q2.Name = "nC1q2";
-			this.nC1q2.Text = "—";
-			// 
-			// iC1q2P1
-			// 
-			this.iC1q2P1.Bounds = new NxtControl.Drawing.RectF(((float)(1249D)), ((float)(574D)), ((float)(16D)), ((float)(16D)));
-			this.iC1q2P1.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(230)), ((byte)(0)), ((byte)(0))));
-			this.iC1q2P1.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
-			this.iC1q2P1.Name = "iC1q2P1";
-			this.iC1q2P1.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
-			this.iC1q2P1.Visible = false;
-			// 
-			// iC1q2P1n
-			// 
-			this.iC1q2P1n.Color = new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(255)));
-			this.iC1q2P1n.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
-			this.iC1q2P1n.Location = new NxtControl.Drawing.PointF(1253D, 575D);
-			this.iC1q2P1n.Name = "iC1q2P1n";
-			this.iC1q2P1n.Text = "1";
-			this.iC1q2P1n.Visible = false;
-			// 
-			// iC1q2P2
-			// 
-			this.iC1q2P2.Bounds = new NxtControl.Drawing.RectF(((float)(1249D)), ((float)(574D)), ((float)(16D)), ((float)(16D)));
-			this.iC1q2P2.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(255)), ((byte)(205)), ((byte)(0))));
-			this.iC1q2P2.Closed = true;
-			this.iC1q2P2.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
-			this.iC1q2P2.Name = "iC1q2P2";
-			this.iC1q2P2.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
-			this.iC1q2P2.Points.AddRange(new NxtControl.Drawing.PointF[] {
-			new NxtControl.Drawing.PointF(1249D, 590D),
-			new NxtControl.Drawing.PointF(1257D, 574D),
-			new NxtControl.Drawing.PointF(1265D, 590D)});
-			this.iC1q2P2.Visible = false;
-			// 
-			// iC1q2P2n
-			// 
-			this.iC1q2P2n.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.iC1q2P2n.Font = new NxtControl.Drawing.Font("Arial", 7F, System.Drawing.FontStyle.Bold);
-			this.iC1q2P2n.Location = new NxtControl.Drawing.PointF(1254D, 578D);
-			this.iC1q2P2n.Name = "iC1q2P2n";
-			this.iC1q2P2n.Text = "2";
-			this.iC1q2P2n.Visible = false;
-			// 
-			// iC1q2Txt
-			// 
-			this.iC1q2Txt.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.iC1q2Txt.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
-			this.iC1q2Txt.Location = new NxtControl.Drawing.PointF(1269D, 574D);
-			this.iC1q2Txt.Name = "iC1q2Txt";
-			this.iC1q2Txt.Text = "";
-			this.iC1q2Txt.Visible = false;
-			// 
 			// btnCargas
 			// 
-			this.btnCargas.Bounds = new NxtControl.Drawing.RectF(((float)(705D)), ((float)(610D)), ((float)(200D)), ((float)(40D)));
+			this.btnCargas.Bounds = new NxtControl.Drawing.RectF(((float)(705D)), ((float)(460D)), ((float)(200D)), ((float)(32D)));
 			this.btnCargas.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208))));
 			this.btnCargas.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.btnCargas.InnerBorderColor = new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208)));
@@ -2720,7 +2174,7 @@ namespace Hidryco.HidrycoLib.Symbols.Subestacao
 			// 
 			// btnComandos
 			// 
-			this.btnComandos.Bounds = new NxtControl.Drawing.RectF(((float)(915D)), ((float)(610D)), ((float)(200D)), ((float)(40D)));
+			this.btnComandos.Bounds = new NxtControl.Drawing.RectF(((float)(915D)), ((float)(460D)), ((float)(200D)), ((float)(32D)));
 			this.btnComandos.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208))));
 			this.btnComandos.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.btnComandos.InnerBorderColor = new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208)));
@@ -2735,7 +2189,7 @@ namespace Hidryco.HidrycoLib.Symbols.Subestacao
 			// 
 			// btnReset
 			// 
-			this.btnReset.Bounds = new NxtControl.Drawing.RectF(((float)(1125D)), ((float)(610D)), ((float)(160D)), ((float)(40D)));
+			this.btnReset.Bounds = new NxtControl.Drawing.RectF(((float)(1125D)), ((float)(460D)), ((float)(160D)), ((float)(32D)));
 			this.btnReset.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208))));
 			this.btnReset.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.btnReset.InnerBorderColor = new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208)));
@@ -3720,6 +3174,972 @@ namespace Hidryco.HidrycoLib.Symbols.Subestacao
 			this.xEC1q2.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.MpChanged);
 			this.xEC1q2.EndInit();
 			// 
+			// pNER
+			// 
+			this.pNER.Bounds = new NxtControl.Drawing.RectF(((float)(695D)), ((float)(504D)), ((float)(352D)), ((float)(80D)));
+			this.pNER.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(235)), ((byte)(235)), ((byte)(235))));
+			this.pNER.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
+			this.pNER.Name = "pNER";
+			this.pNER.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(160)), ((byte)(160)), ((byte)(160))), 1F, NxtControl.Drawing.DashStyle.Solid);
+			// 
+			// pNERt
+			// 
+			this.pNERt.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.pNERt.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold);
+			this.pNERt.Location = new NxtControl.Drawing.PointF(701D, 508D);
+			this.pNERt.Name = "pNERt";
+			this.pNERt.Text = "PAINEL NEREDA";
+			// 
+			// pNERc
+			// 
+			this.pNERc.Color = new NxtControl.Drawing.Color(((byte)(200)), ((byte)(30)), ((byte)(30)));
+			this.pNERc.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold);
+			this.pNERc.Location = new NxtControl.Drawing.PointF(835D, 508D);
+			this.pNERc.Name = "pNERc";
+			this.pNERc.Text = "";
+			// 
+			// pNERbar
+			// 
+			this.pNERbar.Bounds = new NxtControl.Drawing.RectF(((float)(701D)), ((float)(526D)), ((float)(340D)), ((float)(4D)));
+			this.pNERbar.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(60)), ((byte)(60)), ((byte)(60))));
+			this.pNERbar.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
+			this.pNERbar.Name = "pNERbar";
+			this.pNERbar.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("Transparent"), 0F, NxtControl.Drawing.DashStyle.Solid);
+			// 
+			// lpNER_PCE
+			// 
+			this.lpNER_PCE.EndPoint = new NxtControl.Drawing.PointF(720.5D, 538D);
+			this.lpNER_PCE.Name = "lpNER_PCE";
+			this.lpNER_PCE.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(90)), ((byte)(90)), ((byte)(90))), 2F, NxtControl.Drawing.DashStyle.Solid);
+			this.lpNER_PCE.StartPoint = new NxtControl.Drawing.PointF(720.5D, 530D);
+			// 
+			// bpNER_PCE
+			// 
+			this.bpNER_PCE.Bounds = new NxtControl.Drawing.RectF(((float)(712.5D)), ((float)(538D)), ((float)(16D)), ((float)(16D)));
+			this.bpNER_PCE.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(190)), ((byte)(190)), ((byte)(190))));
+			this.bpNER_PCE.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
+			this.bpNER_PCE.Name = "bpNER_PCE";
+			this.bpNER_PCE.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
+			// 
+			// tpNER_PCE
+			// 
+			this.tpNER_PCE.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.tpNER_PCE.Font = new NxtControl.Drawing.Font("Arial", 7F, System.Drawing.FontStyle.Bold);
+			this.tpNER_PCE.Location = new NxtControl.Drawing.PointF(713.1D, 557D);
+			this.tpNER_PCE.Name = "tpNER_PCE";
+			this.tpNER_PCE.Text = "PCE";
+			// 
+			// lpNER_PCM
+			// 
+			this.lpNER_PCM.EndPoint = new NxtControl.Drawing.PointF(763.5D, 538D);
+			this.lpNER_PCM.Name = "lpNER_PCM";
+			this.lpNER_PCM.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(90)), ((byte)(90)), ((byte)(90))), 2F, NxtControl.Drawing.DashStyle.Solid);
+			this.lpNER_PCM.StartPoint = new NxtControl.Drawing.PointF(763.5D, 530D);
+			// 
+			// bpNER_PCM
+			// 
+			this.bpNER_PCM.Bounds = new NxtControl.Drawing.RectF(((float)(755.5D)), ((float)(538D)), ((float)(16D)), ((float)(16D)));
+			this.bpNER_PCM.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(190)), ((byte)(190)), ((byte)(190))));
+			this.bpNER_PCM.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
+			this.bpNER_PCM.Name = "bpNER_PCM";
+			this.bpNER_PCM.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
+			// 
+			// tpNER_PCM
+			// 
+			this.tpNER_PCM.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.tpNER_PCM.Font = new NxtControl.Drawing.Font("Arial", 7F, System.Drawing.FontStyle.Bold);
+			this.tpNER_PCM.Location = new NxtControl.Drawing.PointF(756.1D, 557D);
+			this.tpNER_PCM.Name = "tpNER_PCM";
+			this.tpNER_PCM.Text = "PCM";
+			// 
+			// lpMO_300_01
+			// 
+			this.lpMO_300_01.EndPoint = new NxtControl.Drawing.PointF(806.5D, 538D);
+			this.lpMO_300_01.Name = "lpMO_300_01";
+			this.lpMO_300_01.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(90)), ((byte)(90)), ((byte)(90))), 2F, NxtControl.Drawing.DashStyle.Solid);
+			this.lpMO_300_01.StartPoint = new NxtControl.Drawing.PointF(806.5D, 530D);
+			// 
+			// bpMO_300_01
+			// 
+			this.bpMO_300_01.Bounds = new NxtControl.Drawing.RectF(((float)(798.5D)), ((float)(538D)), ((float)(16D)), ((float)(16D)));
+			this.bpMO_300_01.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(190)), ((byte)(190)), ((byte)(190))));
+			this.bpMO_300_01.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
+			this.bpMO_300_01.Name = "bpMO_300_01";
+			this.bpMO_300_01.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
+			// 
+			// tpMO_300_01
+			// 
+			this.tpMO_300_01.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.tpMO_300_01.Font = new NxtControl.Drawing.Font("Arial", 7F, System.Drawing.FontStyle.Bold);
+			this.tpMO_300_01.Location = new NxtControl.Drawing.PointF(794.2D, 557D);
+			this.tpMO_300_01.Name = "tpMO_300_01";
+			this.tpMO_300_01.Text = "300-\r\nMO-01";
+			// 
+			// lpR4005A
+			// 
+			this.lpR4005A.EndPoint = new NxtControl.Drawing.PointF(849.5D, 538D);
+			this.lpR4005A.Name = "lpR4005A";
+			this.lpR4005A.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(90)), ((byte)(90)), ((byte)(90))), 2F, NxtControl.Drawing.DashStyle.Solid);
+			this.lpR4005A.StartPoint = new NxtControl.Drawing.PointF(849.5D, 530D);
+			// 
+			// bpR4005A
+			// 
+			this.bpR4005A.Bounds = new NxtControl.Drawing.RectF(((float)(841.5D)), ((float)(538D)), ((float)(16D)), ((float)(16D)));
+			this.bpR4005A.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(190)), ((byte)(190)), ((byte)(190))));
+			this.bpR4005A.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
+			this.bpR4005A.Name = "bpR4005A";
+			this.bpR4005A.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
+			// 
+			// tpR4005A
+			// 
+			this.tpR4005A.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.tpR4005A.Font = new NxtControl.Drawing.Font("Arial", 7F, System.Drawing.FontStyle.Bold);
+			this.tpR4005A.Location = new NxtControl.Drawing.PointF(834.8D, 557D);
+			this.tpR4005A.Name = "tpR4005A";
+			this.tpR4005A.Text = "R4005A";
+			// 
+			// lpR4005B
+			// 
+			this.lpR4005B.EndPoint = new NxtControl.Drawing.PointF(892.5D, 538D);
+			this.lpR4005B.Name = "lpR4005B";
+			this.lpR4005B.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(90)), ((byte)(90)), ((byte)(90))), 2F, NxtControl.Drawing.DashStyle.Solid);
+			this.lpR4005B.StartPoint = new NxtControl.Drawing.PointF(892.5D, 530D);
+			// 
+			// bpR4005B
+			// 
+			this.bpR4005B.Bounds = new NxtControl.Drawing.RectF(((float)(884.5D)), ((float)(538D)), ((float)(16D)), ((float)(16D)));
+			this.bpR4005B.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(190)), ((byte)(190)), ((byte)(190))));
+			this.bpR4005B.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
+			this.bpR4005B.Name = "bpR4005B";
+			this.bpR4005B.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
+			// 
+			// tpR4005B
+			// 
+			this.tpR4005B.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.tpR4005B.Font = new NxtControl.Drawing.Font("Arial", 7F, System.Drawing.FontStyle.Bold);
+			this.tpR4005B.Location = new NxtControl.Drawing.PointF(877.8D, 557D);
+			this.tpR4005B.Name = "tpR4005B";
+			this.tpR4005B.Text = "R4005B";
+			// 
+			// lpP4901
+			// 
+			this.lpP4901.EndPoint = new NxtControl.Drawing.PointF(935.5D, 538D);
+			this.lpP4901.Name = "lpP4901";
+			this.lpP4901.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(90)), ((byte)(90)), ((byte)(90))), 2F, NxtControl.Drawing.DashStyle.Solid);
+			this.lpP4901.StartPoint = new NxtControl.Drawing.PointF(935.5D, 530D);
+			// 
+			// bpP4901
+			// 
+			this.bpP4901.Bounds = new NxtControl.Drawing.RectF(((float)(927.5D)), ((float)(538D)), ((float)(16D)), ((float)(16D)));
+			this.bpP4901.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(190)), ((byte)(190)), ((byte)(190))));
+			this.bpP4901.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
+			this.bpP4901.Name = "bpP4901";
+			this.bpP4901.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
+			// 
+			// tpP4901
+			// 
+			this.tpP4901.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.tpP4901.Font = new NxtControl.Drawing.Font("Arial", 7F, System.Drawing.FontStyle.Bold);
+			this.tpP4901.Location = new NxtControl.Drawing.PointF(923.2D, 557D);
+			this.tpP4901.Name = "tpP4901";
+			this.tpP4901.Text = "P4901";
+			// 
+			// lpP4902
+			// 
+			this.lpP4902.EndPoint = new NxtControl.Drawing.PointF(978.5D, 538D);
+			this.lpP4902.Name = "lpP4902";
+			this.lpP4902.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(90)), ((byte)(90)), ((byte)(90))), 2F, NxtControl.Drawing.DashStyle.Solid);
+			this.lpP4902.StartPoint = new NxtControl.Drawing.PointF(978.5D, 530D);
+			// 
+			// bpP4902
+			// 
+			this.bpP4902.Bounds = new NxtControl.Drawing.RectF(((float)(970.5D)), ((float)(538D)), ((float)(16D)), ((float)(16D)));
+			this.bpP4902.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(190)), ((byte)(190)), ((byte)(190))));
+			this.bpP4902.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
+			this.bpP4902.Name = "bpP4902";
+			this.bpP4902.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
+			// 
+			// tpP4902
+			// 
+			this.tpP4902.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.tpP4902.Font = new NxtControl.Drawing.Font("Arial", 7F, System.Drawing.FontStyle.Bold);
+			this.tpP4902.Location = new NxtControl.Drawing.PointF(966.2D, 557D);
+			this.tpP4902.Name = "tpP4902";
+			this.tpP4902.Text = "P4902";
+			// 
+			// lpP4903
+			// 
+			this.lpP4903.EndPoint = new NxtControl.Drawing.PointF(1021.5D, 538D);
+			this.lpP4903.Name = "lpP4903";
+			this.lpP4903.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(90)), ((byte)(90)), ((byte)(90))), 2F, NxtControl.Drawing.DashStyle.Solid);
+			this.lpP4903.StartPoint = new NxtControl.Drawing.PointF(1021.5D, 530D);
+			// 
+			// bpP4903
+			// 
+			this.bpP4903.Bounds = new NxtControl.Drawing.RectF(((float)(1013.5D)), ((float)(538D)), ((float)(16D)), ((float)(16D)));
+			this.bpP4903.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(190)), ((byte)(190)), ((byte)(190))));
+			this.bpP4903.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
+			this.bpP4903.Name = "bpP4903";
+			this.bpP4903.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
+			// 
+			// tpP4903
+			// 
+			this.tpP4903.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.tpP4903.Font = new NxtControl.Drawing.Font("Arial", 7F, System.Drawing.FontStyle.Bold);
+			this.tpP4903.Location = new NxtControl.Drawing.PointF(1009.2D, 557D);
+			this.tpP4903.Name = "tpP4903";
+			this.tpP4903.Text = "P4903";
+			// 
+			// pDES
+			// 
+			this.pDES.Bounds = new NxtControl.Drawing.RectF(((float)(1055D)), ((float)(504D)), ((float)(275D)), ((float)(80D)));
+			this.pDES.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(235)), ((byte)(235)), ((byte)(235))));
+			this.pDES.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
+			this.pDES.Name = "pDES";
+			this.pDES.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(160)), ((byte)(160)), ((byte)(160))), 1F, NxtControl.Drawing.DashStyle.Solid);
+			// 
+			// pDESt
+			// 
+			this.pDESt.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.pDESt.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold);
+			this.pDESt.Location = new NxtControl.Drawing.PointF(1061D, 508D);
+			this.pDESt.Name = "pDESt";
+			this.pDESt.Text = "PAINEL DESINFECÇÃO";
+			// 
+			// pDESc
+			// 
+			this.pDESc.Color = new NxtControl.Drawing.Color(((byte)(200)), ((byte)(30)), ((byte)(30)));
+			this.pDESc.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold);
+			this.pDESc.Location = new NxtControl.Drawing.PointF(1195D, 508D);
+			this.pDESc.Name = "pDESc";
+			this.pDESc.Text = "";
+			// 
+			// pDESbar
+			// 
+			this.pDESbar.Bounds = new NxtControl.Drawing.RectF(((float)(1061D)), ((float)(526D)), ((float)(263D)), ((float)(4D)));
+			this.pDESbar.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(60)), ((byte)(60)), ((byte)(60))));
+			this.pDESbar.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
+			this.pDESbar.Name = "pDESbar";
+			this.pDESbar.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("Transparent"), 0F, NxtControl.Drawing.DashStyle.Solid);
+			// 
+			// lpDES_PCE
+			// 
+			this.lpDES_PCE.EndPoint = new NxtControl.Drawing.PointF(1082.5D, 538D);
+			this.lpDES_PCE.Name = "lpDES_PCE";
+			this.lpDES_PCE.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(90)), ((byte)(90)), ((byte)(90))), 2F, NxtControl.Drawing.DashStyle.Solid);
+			this.lpDES_PCE.StartPoint = new NxtControl.Drawing.PointF(1082.5D, 530D);
+			// 
+			// bpDES_PCE
+			// 
+			this.bpDES_PCE.Bounds = new NxtControl.Drawing.RectF(((float)(1074.5D)), ((float)(538D)), ((float)(16D)), ((float)(16D)));
+			this.bpDES_PCE.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(190)), ((byte)(190)), ((byte)(190))));
+			this.bpDES_PCE.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
+			this.bpDES_PCE.Name = "bpDES_PCE";
+			this.bpDES_PCE.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
+			// 
+			// tpDES_PCE
+			// 
+			this.tpDES_PCE.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.tpDES_PCE.Font = new NxtControl.Drawing.Font("Arial", 7F, System.Drawing.FontStyle.Bold);
+			this.tpDES_PCE.Location = new NxtControl.Drawing.PointF(1075.2D, 557D);
+			this.tpDES_PCE.Name = "tpDES_PCE";
+			this.tpDES_PCE.Text = "PCE";
+			// 
+			// lpDES_PCM
+			// 
+			this.lpDES_PCM.EndPoint = new NxtControl.Drawing.PointF(1126.5D, 538D);
+			this.lpDES_PCM.Name = "lpDES_PCM";
+			this.lpDES_PCM.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(90)), ((byte)(90)), ((byte)(90))), 2F, NxtControl.Drawing.DashStyle.Solid);
+			this.lpDES_PCM.StartPoint = new NxtControl.Drawing.PointF(1126.5D, 530D);
+			// 
+			// bpDES_PCM
+			// 
+			this.bpDES_PCM.Bounds = new NxtControl.Drawing.RectF(((float)(1118.5D)), ((float)(538D)), ((float)(16D)), ((float)(16D)));
+			this.bpDES_PCM.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(190)), ((byte)(190)), ((byte)(190))));
+			this.bpDES_PCM.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
+			this.bpDES_PCM.Name = "bpDES_PCM";
+			this.bpDES_PCM.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
+			// 
+			// tpDES_PCM
+			// 
+			this.tpDES_PCM.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.tpDES_PCM.Font = new NxtControl.Drawing.Font("Arial", 7F, System.Drawing.FontStyle.Bold);
+			this.tpDES_PCM.Location = new NxtControl.Drawing.PointF(1119.2D, 557D);
+			this.tpDES_PCM.Name = "tpDES_PCM";
+			this.tpDES_PCM.Text = "PCM";
+			// 
+			// lpUV_700_01
+			// 
+			this.lpUV_700_01.EndPoint = new NxtControl.Drawing.PointF(1170.5D, 538D);
+			this.lpUV_700_01.Name = "lpUV_700_01";
+			this.lpUV_700_01.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(90)), ((byte)(90)), ((byte)(90))), 2F, NxtControl.Drawing.DashStyle.Solid);
+			this.lpUV_700_01.StartPoint = new NxtControl.Drawing.PointF(1170.5D, 530D);
+			// 
+			// bpUV_700_01
+			// 
+			this.bpUV_700_01.Bounds = new NxtControl.Drawing.RectF(((float)(1162.5D)), ((float)(538D)), ((float)(16D)), ((float)(16D)));
+			this.bpUV_700_01.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(190)), ((byte)(190)), ((byte)(190))));
+			this.bpUV_700_01.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
+			this.bpUV_700_01.Name = "bpUV_700_01";
+			this.bpUV_700_01.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
+			// 
+			// tpUV_700_01
+			// 
+			this.tpUV_700_01.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.tpUV_700_01.Font = new NxtControl.Drawing.Font("Arial", 7F, System.Drawing.FontStyle.Bold);
+			this.tpUV_700_01.Location = new NxtControl.Drawing.PointF(1158.2D, 557D);
+			this.tpUV_700_01.Name = "tpUV_700_01";
+			this.tpUV_700_01.Text = "700-\r\nUV-01";
+			// 
+			// lpUV_700_02
+			// 
+			this.lpUV_700_02.EndPoint = new NxtControl.Drawing.PointF(1214.5D, 538D);
+			this.lpUV_700_02.Name = "lpUV_700_02";
+			this.lpUV_700_02.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(90)), ((byte)(90)), ((byte)(90))), 2F, NxtControl.Drawing.DashStyle.Solid);
+			this.lpUV_700_02.StartPoint = new NxtControl.Drawing.PointF(1214.5D, 530D);
+			// 
+			// bpUV_700_02
+			// 
+			this.bpUV_700_02.Bounds = new NxtControl.Drawing.RectF(((float)(1206.5D)), ((float)(538D)), ((float)(16D)), ((float)(16D)));
+			this.bpUV_700_02.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(190)), ((byte)(190)), ((byte)(190))));
+			this.bpUV_700_02.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
+			this.bpUV_700_02.Name = "bpUV_700_02";
+			this.bpUV_700_02.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
+			// 
+			// tpUV_700_02
+			// 
+			this.tpUV_700_02.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.tpUV_700_02.Font = new NxtControl.Drawing.Font("Arial", 7F, System.Drawing.FontStyle.Bold);
+			this.tpUV_700_02.Location = new NxtControl.Drawing.PointF(1202.2D, 557D);
+			this.tpUV_700_02.Name = "tpUV_700_02";
+			this.tpUV_700_02.Text = "700-\r\nUV-02";
+			// 
+			// lpVC_700_01
+			// 
+			this.lpVC_700_01.EndPoint = new NxtControl.Drawing.PointF(1258.5D, 538D);
+			this.lpVC_700_01.Name = "lpVC_700_01";
+			this.lpVC_700_01.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(90)), ((byte)(90)), ((byte)(90))), 2F, NxtControl.Drawing.DashStyle.Solid);
+			this.lpVC_700_01.StartPoint = new NxtControl.Drawing.PointF(1258.5D, 530D);
+			// 
+			// bpVC_700_01
+			// 
+			this.bpVC_700_01.Bounds = new NxtControl.Drawing.RectF(((float)(1250.5D)), ((float)(538D)), ((float)(16D)), ((float)(16D)));
+			this.bpVC_700_01.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(190)), ((byte)(190)), ((byte)(190))));
+			this.bpVC_700_01.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
+			this.bpVC_700_01.Name = "bpVC_700_01";
+			this.bpVC_700_01.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
+			// 
+			// tpVC_700_01
+			// 
+			this.tpVC_700_01.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.tpVC_700_01.Font = new NxtControl.Drawing.Font("Arial", 7F, System.Drawing.FontStyle.Bold);
+			this.tpVC_700_01.Location = new NxtControl.Drawing.PointF(1246.2D, 557D);
+			this.tpVC_700_01.Name = "tpVC_700_01";
+			this.tpVC_700_01.Text = "700-\r\nVC-01";
+			// 
+			// lpMO_700_01
+			// 
+			this.lpMO_700_01.EndPoint = new NxtControl.Drawing.PointF(1302.5D, 538D);
+			this.lpMO_700_01.Name = "lpMO_700_01";
+			this.lpMO_700_01.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(90)), ((byte)(90)), ((byte)(90))), 2F, NxtControl.Drawing.DashStyle.Solid);
+			this.lpMO_700_01.StartPoint = new NxtControl.Drawing.PointF(1302.5D, 530D);
+			// 
+			// bpMO_700_01
+			// 
+			this.bpMO_700_01.Bounds = new NxtControl.Drawing.RectF(((float)(1294.5D)), ((float)(538D)), ((float)(16D)), ((float)(16D)));
+			this.bpMO_700_01.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(190)), ((byte)(190)), ((byte)(190))));
+			this.bpMO_700_01.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
+			this.bpMO_700_01.Name = "bpMO_700_01";
+			this.bpMO_700_01.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
+			// 
+			// tpMO_700_01
+			// 
+			this.tpMO_700_01.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.tpMO_700_01.Font = new NxtControl.Drawing.Font("Arial", 7F, System.Drawing.FontStyle.Bold);
+			this.tpMO_700_01.Location = new NxtControl.Drawing.PointF(1290.2D, 557D);
+			this.tpMO_700_01.Name = "tpMO_700_01";
+			this.tpMO_700_01.Text = "700-\r\nMO-01";
+			// 
+			// pEEEB
+			// 
+			this.pEEEB.Bounds = new NxtControl.Drawing.RectF(((float)(695D)), ((float)(590D)), ((float)(352D)), ((float)(80D)));
+			this.pEEEB.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(235)), ((byte)(235)), ((byte)(235))));
+			this.pEEEB.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
+			this.pEEEB.Name = "pEEEB";
+			this.pEEEB.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(160)), ((byte)(160)), ((byte)(160))), 1F, NxtControl.Drawing.DashStyle.Solid);
+			// 
+			// pEEEBt
+			// 
+			this.pEEEBt.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.pEEEBt.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold);
+			this.pEEEBt.Location = new NxtControl.Drawing.PointF(701D, 594D);
+			this.pEEEBt.Name = "pEEEBt";
+			this.pEEEBt.Text = "PAINEL EEE BRUTO";
+			// 
+			// pEEEBc
+			// 
+			this.pEEEBc.Color = new NxtControl.Drawing.Color(((byte)(200)), ((byte)(30)), ((byte)(30)));
+			this.pEEEBc.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold);
+			this.pEEEBc.Location = new NxtControl.Drawing.PointF(835D, 594D);
+			this.pEEEBc.Name = "pEEEBc";
+			this.pEEEBc.Text = "";
+			// 
+			// pEEEBbar
+			// 
+			this.pEEEBbar.Bounds = new NxtControl.Drawing.RectF(((float)(701D)), ((float)(612D)), ((float)(340D)), ((float)(4D)));
+			this.pEEEBbar.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(60)), ((byte)(60)), ((byte)(60))));
+			this.pEEEBbar.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
+			this.pEEEBbar.Name = "pEEEBbar";
+			this.pEEEBbar.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("Transparent"), 0F, NxtControl.Drawing.DashStyle.Solid);
+			// 
+			// lpEEEB_PCE
+			// 
+			this.lpEEEB_PCE.EndPoint = new NxtControl.Drawing.PointF(720.5D, 624D);
+			this.lpEEEB_PCE.Name = "lpEEEB_PCE";
+			this.lpEEEB_PCE.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(90)), ((byte)(90)), ((byte)(90))), 2F, NxtControl.Drawing.DashStyle.Solid);
+			this.lpEEEB_PCE.StartPoint = new NxtControl.Drawing.PointF(720.5D, 616D);
+			// 
+			// bpEEEB_PCE
+			// 
+			this.bpEEEB_PCE.Bounds = new NxtControl.Drawing.RectF(((float)(712.5D)), ((float)(624D)), ((float)(16D)), ((float)(16D)));
+			this.bpEEEB_PCE.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(190)), ((byte)(190)), ((byte)(190))));
+			this.bpEEEB_PCE.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
+			this.bpEEEB_PCE.Name = "bpEEEB_PCE";
+			this.bpEEEB_PCE.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
+			// 
+			// tpEEEB_PCE
+			// 
+			this.tpEEEB_PCE.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.tpEEEB_PCE.Font = new NxtControl.Drawing.Font("Arial", 7F, System.Drawing.FontStyle.Bold);
+			this.tpEEEB_PCE.Location = new NxtControl.Drawing.PointF(713.1D, 643D);
+			this.tpEEEB_PCE.Name = "tpEEEB_PCE";
+			this.tpEEEB_PCE.Text = "PCE";
+			// 
+			// lpEEEB_PCM
+			// 
+			this.lpEEEB_PCM.EndPoint = new NxtControl.Drawing.PointF(763.5D, 624D);
+			this.lpEEEB_PCM.Name = "lpEEEB_PCM";
+			this.lpEEEB_PCM.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(90)), ((byte)(90)), ((byte)(90))), 2F, NxtControl.Drawing.DashStyle.Solid);
+			this.lpEEEB_PCM.StartPoint = new NxtControl.Drawing.PointF(763.5D, 616D);
+			// 
+			// bpEEEB_PCM
+			// 
+			this.bpEEEB_PCM.Bounds = new NxtControl.Drawing.RectF(((float)(755.5D)), ((float)(624D)), ((float)(16D)), ((float)(16D)));
+			this.bpEEEB_PCM.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(190)), ((byte)(190)), ((byte)(190))));
+			this.bpEEEB_PCM.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
+			this.bpEEEB_PCM.Name = "bpEEEB_PCM";
+			this.bpEEEB_PCM.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
+			// 
+			// tpEEEB_PCM
+			// 
+			this.tpEEEB_PCM.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.tpEEEB_PCM.Font = new NxtControl.Drawing.Font("Arial", 7F, System.Drawing.FontStyle.Bold);
+			this.tpEEEB_PCM.Location = new NxtControl.Drawing.PointF(756.1D, 643D);
+			this.tpEEEB_PCM.Name = "tpEEEB_PCM";
+			this.tpEEEB_PCM.Text = "PCM";
+			// 
+			// lpCO_100_01
+			// 
+			this.lpCO_100_01.EndPoint = new NxtControl.Drawing.PointF(806.5D, 624D);
+			this.lpCO_100_01.Name = "lpCO_100_01";
+			this.lpCO_100_01.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(90)), ((byte)(90)), ((byte)(90))), 2F, NxtControl.Drawing.DashStyle.Solid);
+			this.lpCO_100_01.StartPoint = new NxtControl.Drawing.PointF(806.5D, 616D);
+			// 
+			// bpCO_100_01
+			// 
+			this.bpCO_100_01.Bounds = new NxtControl.Drawing.RectF(((float)(798.5D)), ((float)(624D)), ((float)(16D)), ((float)(16D)));
+			this.bpCO_100_01.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(190)), ((byte)(190)), ((byte)(190))));
+			this.bpCO_100_01.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
+			this.bpCO_100_01.Name = "bpCO_100_01";
+			this.bpCO_100_01.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
+			// 
+			// tpCO_100_01
+			// 
+			this.tpCO_100_01.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.tpCO_100_01.Font = new NxtControl.Drawing.Font("Arial", 7F, System.Drawing.FontStyle.Bold);
+			this.tpCO_100_01.Location = new NxtControl.Drawing.PointF(794.2D, 643D);
+			this.tpCO_100_01.Name = "tpCO_100_01";
+			this.tpCO_100_01.Text = "100-\r\nCO-01";
+			// 
+			// lpCO_100_02
+			// 
+			this.lpCO_100_02.EndPoint = new NxtControl.Drawing.PointF(849.5D, 624D);
+			this.lpCO_100_02.Name = "lpCO_100_02";
+			this.lpCO_100_02.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(90)), ((byte)(90)), ((byte)(90))), 2F, NxtControl.Drawing.DashStyle.Solid);
+			this.lpCO_100_02.StartPoint = new NxtControl.Drawing.PointF(849.5D, 616D);
+			// 
+			// bpCO_100_02
+			// 
+			this.bpCO_100_02.Bounds = new NxtControl.Drawing.RectF(((float)(841.5D)), ((float)(624D)), ((float)(16D)), ((float)(16D)));
+			this.bpCO_100_02.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(190)), ((byte)(190)), ((byte)(190))));
+			this.bpCO_100_02.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
+			this.bpCO_100_02.Name = "bpCO_100_02";
+			this.bpCO_100_02.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
+			// 
+			// tpCO_100_02
+			// 
+			this.tpCO_100_02.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.tpCO_100_02.Font = new NxtControl.Drawing.Font("Arial", 7F, System.Drawing.FontStyle.Bold);
+			this.tpCO_100_02.Location = new NxtControl.Drawing.PointF(837.2D, 643D);
+			this.tpCO_100_02.Name = "tpCO_100_02";
+			this.tpCO_100_02.Text = "100-\r\nCO-02";
+			// 
+			// lpCO_100_03
+			// 
+			this.lpCO_100_03.EndPoint = new NxtControl.Drawing.PointF(892.5D, 624D);
+			this.lpCO_100_03.Name = "lpCO_100_03";
+			this.lpCO_100_03.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(90)), ((byte)(90)), ((byte)(90))), 2F, NxtControl.Drawing.DashStyle.Solid);
+			this.lpCO_100_03.StartPoint = new NxtControl.Drawing.PointF(892.5D, 616D);
+			// 
+			// bpCO_100_03
+			// 
+			this.bpCO_100_03.Bounds = new NxtControl.Drawing.RectF(((float)(884.5D)), ((float)(624D)), ((float)(16D)), ((float)(16D)));
+			this.bpCO_100_03.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(190)), ((byte)(190)), ((byte)(190))));
+			this.bpCO_100_03.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
+			this.bpCO_100_03.Name = "bpCO_100_03";
+			this.bpCO_100_03.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
+			// 
+			// tpCO_100_03
+			// 
+			this.tpCO_100_03.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.tpCO_100_03.Font = new NxtControl.Drawing.Font("Arial", 7F, System.Drawing.FontStyle.Bold);
+			this.tpCO_100_03.Location = new NxtControl.Drawing.PointF(880.2D, 643D);
+			this.tpCO_100_03.Name = "tpCO_100_03";
+			this.tpCO_100_03.Text = "100-\r\nCO-03";
+			// 
+			// lpCO_100_04
+			// 
+			this.lpCO_100_04.EndPoint = new NxtControl.Drawing.PointF(935.5D, 624D);
+			this.lpCO_100_04.Name = "lpCO_100_04";
+			this.lpCO_100_04.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(90)), ((byte)(90)), ((byte)(90))), 2F, NxtControl.Drawing.DashStyle.Solid);
+			this.lpCO_100_04.StartPoint = new NxtControl.Drawing.PointF(935.5D, 616D);
+			// 
+			// bpCO_100_04
+			// 
+			this.bpCO_100_04.Bounds = new NxtControl.Drawing.RectF(((float)(927.5D)), ((float)(624D)), ((float)(16D)), ((float)(16D)));
+			this.bpCO_100_04.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(190)), ((byte)(190)), ((byte)(190))));
+			this.bpCO_100_04.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
+			this.bpCO_100_04.Name = "bpCO_100_04";
+			this.bpCO_100_04.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
+			// 
+			// tpCO_100_04
+			// 
+			this.tpCO_100_04.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.tpCO_100_04.Font = new NxtControl.Drawing.Font("Arial", 7F, System.Drawing.FontStyle.Bold);
+			this.tpCO_100_04.Location = new NxtControl.Drawing.PointF(923.2D, 643D);
+			this.tpCO_100_04.Name = "tpCO_100_04";
+			this.tpCO_100_04.Text = "100-\r\nCO-04";
+			// 
+			// lpGM_100_01_02
+			// 
+			this.lpGM_100_01_02.EndPoint = new NxtControl.Drawing.PointF(978.5D, 624D);
+			this.lpGM_100_01_02.Name = "lpGM_100_01_02";
+			this.lpGM_100_01_02.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(90)), ((byte)(90)), ((byte)(90))), 2F, NxtControl.Drawing.DashStyle.Solid);
+			this.lpGM_100_01_02.StartPoint = new NxtControl.Drawing.PointF(978.5D, 616D);
+			// 
+			// bpGM_100_01_02
+			// 
+			this.bpGM_100_01_02.Bounds = new NxtControl.Drawing.RectF(((float)(970.5D)), ((float)(624D)), ((float)(16D)), ((float)(16D)));
+			this.bpGM_100_01_02.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(190)), ((byte)(190)), ((byte)(190))));
+			this.bpGM_100_01_02.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
+			this.bpGM_100_01_02.Name = "bpGM_100_01_02";
+			this.bpGM_100_01_02.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
+			// 
+			// tpGM_100_01_02
+			// 
+			this.tpGM_100_01_02.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.tpGM_100_01_02.Font = new NxtControl.Drawing.Font("Arial", 7F, System.Drawing.FontStyle.Bold);
+			this.tpGM_100_01_02.Location = new NxtControl.Drawing.PointF(958.9D, 643D);
+			this.tpGM_100_01_02.Name = "tpGM_100_01_02";
+			this.tpGM_100_01_02.Text = "100-\r\nGM-01/02";
+			// 
+			// lpMO_100_01
+			// 
+			this.lpMO_100_01.EndPoint = new NxtControl.Drawing.PointF(1021.5D, 624D);
+			this.lpMO_100_01.Name = "lpMO_100_01";
+			this.lpMO_100_01.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(90)), ((byte)(90)), ((byte)(90))), 2F, NxtControl.Drawing.DashStyle.Solid);
+			this.lpMO_100_01.StartPoint = new NxtControl.Drawing.PointF(1021.5D, 616D);
+			// 
+			// bpMO_100_01
+			// 
+			this.bpMO_100_01.Bounds = new NxtControl.Drawing.RectF(((float)(1013.5D)), ((float)(624D)), ((float)(16D)), ((float)(16D)));
+			this.bpMO_100_01.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(190)), ((byte)(190)), ((byte)(190))));
+			this.bpMO_100_01.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
+			this.bpMO_100_01.Name = "bpMO_100_01";
+			this.bpMO_100_01.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
+			// 
+			// tpMO_100_01
+			// 
+			this.tpMO_100_01.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.tpMO_100_01.Font = new NxtControl.Drawing.Font("Arial", 7F, System.Drawing.FontStyle.Bold);
+			this.tpMO_100_01.Location = new NxtControl.Drawing.PointF(1009.2D, 643D);
+			this.tpMO_100_01.Name = "tpMO_100_01";
+			this.tpMO_100_01.Text = "100-\r\nMO-01";
+			// 
+			// pLeg
+			// 
+			this.pLeg.Bounds = new NxtControl.Drawing.RectF(((float)(1055D)), ((float)(590D)), ((float)(275D)), ((float)(80D)));
+			this.pLeg.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(235)), ((byte)(235)), ((byte)(235))));
+			this.pLeg.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
+			this.pLeg.Name = "pLeg";
+			this.pLeg.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(160)), ((byte)(160)), ((byte)(160))), 1F, NxtControl.Drawing.DashStyle.Solid);
+			// 
+			// pLegT
+			// 
+			this.pLegT.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.pLegT.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold);
+			this.pLegT.Location = new NxtControl.Drawing.PointF(1061D, 594D);
+			this.pLegT.Name = "pLegT";
+			this.pLegT.Text = "Disjuntores dos painéis";
+			// 
+			// pLeg0
+			// 
+			this.pLeg0.Bounds = new NxtControl.Drawing.RectF(((float)(1065D)), ((float)(614D)), ((float)(12D)), ((float)(12D)));
+			this.pLeg0.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(200)), ((byte)(30)), ((byte)(30))));
+			this.pLeg0.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
+			this.pLeg0.Name = "pLeg0";
+			this.pLeg0.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
+			// 
+			// pLeg0t
+			// 
+			this.pLeg0t.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.pLeg0t.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular);
+			this.pLeg0t.Location = new NxtControl.Drawing.PointF(1083D, 613D);
+			this.pLeg0t.Name = "pLeg0t";
+			this.pLeg0t.Text = "Ligado";
+			// 
+			// pLeg1
+			// 
+			this.pLeg1.Bounds = new NxtControl.Drawing.RectF(((float)(1065D)), ((float)(632D)), ((float)(12D)), ((float)(12D)));
+			this.pLeg1.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(140)), ((byte)(60))));
+			this.pLeg1.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
+			this.pLeg1.Name = "pLeg1";
+			this.pLeg1.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
+			// 
+			// pLeg1t
+			// 
+			this.pLeg1t.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.pLeg1t.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular);
+			this.pLeg1t.Location = new NxtControl.Drawing.PointF(1083D, 631D);
+			this.pLeg1t.Name = "pLeg1t";
+			this.pLeg1t.Text = "Desligado";
+			// 
+			// pLeg2
+			// 
+			this.pLeg2.Bounds = new NxtControl.Drawing.RectF(((float)(1065D)), ((float)(650D)), ((float)(12D)), ((float)(12D)));
+			this.pLeg2.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(190)), ((byte)(190)), ((byte)(190))));
+			this.pLeg2.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
+			this.pLeg2.Name = "pLeg2";
+			this.pLeg2.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
+			// 
+			// pLeg2t
+			// 
+			this.pLeg2t.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.pLeg2t.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular);
+			this.pLeg2t.Location = new NxtControl.Drawing.PointF(1083D, 649D);
+			this.pLeg2t.Name = "pLeg2t";
+			this.pLeg2t.Text = "Sem informação (remota sem comunicação)";
+			// 
+			// xDJ_NER_PCE
+			// 
+			this.xDJ_NER_PCE.BeginInit();
+			this.xDJ_NER_PCE.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, double.NaN, double.NaN);
+			this.xDJ_NER_PCE.IsOnlyInput = true;
+			this.xDJ_NER_PCE.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
+			this.xDJ_NER_PCE.Name = "xDJ_NER_PCE";
+			this.xDJ_NER_PCE.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
+			this.xDJ_NER_PCE.TagName = "DJ_NER_PCE";
+			this.xDJ_NER_PCE.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.DjChanged);
+			this.xDJ_NER_PCE.EndInit();
+			// 
+			// xDJ_NER_PCM
+			// 
+			this.xDJ_NER_PCM.BeginInit();
+			this.xDJ_NER_PCM.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, double.NaN, double.NaN);
+			this.xDJ_NER_PCM.IsOnlyInput = true;
+			this.xDJ_NER_PCM.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
+			this.xDJ_NER_PCM.Name = "xDJ_NER_PCM";
+			this.xDJ_NER_PCM.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
+			this.xDJ_NER_PCM.TagName = "DJ_NER_PCM";
+			this.xDJ_NER_PCM.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.DjChanged);
+			this.xDJ_NER_PCM.EndInit();
+			// 
+			// xDJ_MO_300_01
+			// 
+			this.xDJ_MO_300_01.BeginInit();
+			this.xDJ_MO_300_01.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, double.NaN, double.NaN);
+			this.xDJ_MO_300_01.IsOnlyInput = true;
+			this.xDJ_MO_300_01.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
+			this.xDJ_MO_300_01.Name = "xDJ_MO_300_01";
+			this.xDJ_MO_300_01.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
+			this.xDJ_MO_300_01.TagName = "DJ_MO_300_01";
+			this.xDJ_MO_300_01.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.DjChanged);
+			this.xDJ_MO_300_01.EndInit();
+			// 
+			// xDJ_R4005A
+			// 
+			this.xDJ_R4005A.BeginInit();
+			this.xDJ_R4005A.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, double.NaN, double.NaN);
+			this.xDJ_R4005A.IsOnlyInput = true;
+			this.xDJ_R4005A.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
+			this.xDJ_R4005A.Name = "xDJ_R4005A";
+			this.xDJ_R4005A.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
+			this.xDJ_R4005A.TagName = "DJ_R4005A";
+			this.xDJ_R4005A.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.DjChanged);
+			this.xDJ_R4005A.EndInit();
+			// 
+			// xDJ_R4005B
+			// 
+			this.xDJ_R4005B.BeginInit();
+			this.xDJ_R4005B.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, double.NaN, double.NaN);
+			this.xDJ_R4005B.IsOnlyInput = true;
+			this.xDJ_R4005B.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
+			this.xDJ_R4005B.Name = "xDJ_R4005B";
+			this.xDJ_R4005B.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
+			this.xDJ_R4005B.TagName = "DJ_R4005B";
+			this.xDJ_R4005B.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.DjChanged);
+			this.xDJ_R4005B.EndInit();
+			// 
+			// xDJ_P4901
+			// 
+			this.xDJ_P4901.BeginInit();
+			this.xDJ_P4901.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, double.NaN, double.NaN);
+			this.xDJ_P4901.IsOnlyInput = true;
+			this.xDJ_P4901.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
+			this.xDJ_P4901.Name = "xDJ_P4901";
+			this.xDJ_P4901.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
+			this.xDJ_P4901.TagName = "DJ_P4901";
+			this.xDJ_P4901.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.DjChanged);
+			this.xDJ_P4901.EndInit();
+			// 
+			// xDJ_P4902
+			// 
+			this.xDJ_P4902.BeginInit();
+			this.xDJ_P4902.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, double.NaN, double.NaN);
+			this.xDJ_P4902.IsOnlyInput = true;
+			this.xDJ_P4902.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
+			this.xDJ_P4902.Name = "xDJ_P4902";
+			this.xDJ_P4902.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
+			this.xDJ_P4902.TagName = "DJ_P4902";
+			this.xDJ_P4902.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.DjChanged);
+			this.xDJ_P4902.EndInit();
+			// 
+			// xDJ_P4903
+			// 
+			this.xDJ_P4903.BeginInit();
+			this.xDJ_P4903.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, double.NaN, double.NaN);
+			this.xDJ_P4903.IsOnlyInput = true;
+			this.xDJ_P4903.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
+			this.xDJ_P4903.Name = "xDJ_P4903";
+			this.xDJ_P4903.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
+			this.xDJ_P4903.TagName = "DJ_P4903";
+			this.xDJ_P4903.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.DjChanged);
+			this.xDJ_P4903.EndInit();
+			// 
+			// xDJ_EEEB_PCE
+			// 
+			this.xDJ_EEEB_PCE.BeginInit();
+			this.xDJ_EEEB_PCE.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, double.NaN, double.NaN);
+			this.xDJ_EEEB_PCE.IsOnlyInput = true;
+			this.xDJ_EEEB_PCE.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
+			this.xDJ_EEEB_PCE.Name = "xDJ_EEEB_PCE";
+			this.xDJ_EEEB_PCE.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
+			this.xDJ_EEEB_PCE.TagName = "DJ_EEEB_PCE";
+			this.xDJ_EEEB_PCE.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.DjChanged);
+			this.xDJ_EEEB_PCE.EndInit();
+			// 
+			// xDJ_EEEB_PCM
+			// 
+			this.xDJ_EEEB_PCM.BeginInit();
+			this.xDJ_EEEB_PCM.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, double.NaN, double.NaN);
+			this.xDJ_EEEB_PCM.IsOnlyInput = true;
+			this.xDJ_EEEB_PCM.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
+			this.xDJ_EEEB_PCM.Name = "xDJ_EEEB_PCM";
+			this.xDJ_EEEB_PCM.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
+			this.xDJ_EEEB_PCM.TagName = "DJ_EEEB_PCM";
+			this.xDJ_EEEB_PCM.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.DjChanged);
+			this.xDJ_EEEB_PCM.EndInit();
+			// 
+			// xDJ_CO_100_01
+			// 
+			this.xDJ_CO_100_01.BeginInit();
+			this.xDJ_CO_100_01.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, double.NaN, double.NaN);
+			this.xDJ_CO_100_01.IsOnlyInput = true;
+			this.xDJ_CO_100_01.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
+			this.xDJ_CO_100_01.Name = "xDJ_CO_100_01";
+			this.xDJ_CO_100_01.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
+			this.xDJ_CO_100_01.TagName = "DJ_CO_100_01";
+			this.xDJ_CO_100_01.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.DjChanged);
+			this.xDJ_CO_100_01.EndInit();
+			// 
+			// xDJ_CO_100_02
+			// 
+			this.xDJ_CO_100_02.BeginInit();
+			this.xDJ_CO_100_02.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, double.NaN, double.NaN);
+			this.xDJ_CO_100_02.IsOnlyInput = true;
+			this.xDJ_CO_100_02.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
+			this.xDJ_CO_100_02.Name = "xDJ_CO_100_02";
+			this.xDJ_CO_100_02.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
+			this.xDJ_CO_100_02.TagName = "DJ_CO_100_02";
+			this.xDJ_CO_100_02.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.DjChanged);
+			this.xDJ_CO_100_02.EndInit();
+			// 
+			// xDJ_CO_100_03
+			// 
+			this.xDJ_CO_100_03.BeginInit();
+			this.xDJ_CO_100_03.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, double.NaN, double.NaN);
+			this.xDJ_CO_100_03.IsOnlyInput = true;
+			this.xDJ_CO_100_03.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
+			this.xDJ_CO_100_03.Name = "xDJ_CO_100_03";
+			this.xDJ_CO_100_03.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
+			this.xDJ_CO_100_03.TagName = "DJ_CO_100_03";
+			this.xDJ_CO_100_03.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.DjChanged);
+			this.xDJ_CO_100_03.EndInit();
+			// 
+			// xDJ_CO_100_04
+			// 
+			this.xDJ_CO_100_04.BeginInit();
+			this.xDJ_CO_100_04.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, double.NaN, double.NaN);
+			this.xDJ_CO_100_04.IsOnlyInput = true;
+			this.xDJ_CO_100_04.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
+			this.xDJ_CO_100_04.Name = "xDJ_CO_100_04";
+			this.xDJ_CO_100_04.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
+			this.xDJ_CO_100_04.TagName = "DJ_CO_100_04";
+			this.xDJ_CO_100_04.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.DjChanged);
+			this.xDJ_CO_100_04.EndInit();
+			// 
+			// xDJ_GM_100_01_02
+			// 
+			this.xDJ_GM_100_01_02.BeginInit();
+			this.xDJ_GM_100_01_02.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, double.NaN, double.NaN);
+			this.xDJ_GM_100_01_02.IsOnlyInput = true;
+			this.xDJ_GM_100_01_02.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
+			this.xDJ_GM_100_01_02.Name = "xDJ_GM_100_01_02";
+			this.xDJ_GM_100_01_02.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
+			this.xDJ_GM_100_01_02.TagName = "DJ_GM_100_01_02";
+			this.xDJ_GM_100_01_02.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.DjChanged);
+			this.xDJ_GM_100_01_02.EndInit();
+			// 
+			// xDJ_MO_100_01
+			// 
+			this.xDJ_MO_100_01.BeginInit();
+			this.xDJ_MO_100_01.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, double.NaN, double.NaN);
+			this.xDJ_MO_100_01.IsOnlyInput = true;
+			this.xDJ_MO_100_01.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
+			this.xDJ_MO_100_01.Name = "xDJ_MO_100_01";
+			this.xDJ_MO_100_01.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
+			this.xDJ_MO_100_01.TagName = "DJ_MO_100_01";
+			this.xDJ_MO_100_01.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.DjChanged);
+			this.xDJ_MO_100_01.EndInit();
+			// 
+			// xDJ_DES_PCE_DESLIGADO
+			// 
+			this.xDJ_DES_PCE_DESLIGADO.BeginInit();
+			this.xDJ_DES_PCE_DESLIGADO.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, double.NaN, double.NaN);
+			this.xDJ_DES_PCE_DESLIGADO.IsOnlyInput = true;
+			this.xDJ_DES_PCE_DESLIGADO.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
+			this.xDJ_DES_PCE_DESLIGADO.Name = "xDJ_DES_PCE_DESLIGADO";
+			this.xDJ_DES_PCE_DESLIGADO.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
+			this.xDJ_DES_PCE_DESLIGADO.TagName = "DJ_DES_PCE_DESLIGADO";
+			this.xDJ_DES_PCE_DESLIGADO.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.DjChanged);
+			this.xDJ_DES_PCE_DESLIGADO.EndInit();
+			// 
+			// xDJ_DES_PCM_DESLIGADO
+			// 
+			this.xDJ_DES_PCM_DESLIGADO.BeginInit();
+			this.xDJ_DES_PCM_DESLIGADO.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, double.NaN, double.NaN);
+			this.xDJ_DES_PCM_DESLIGADO.IsOnlyInput = true;
+			this.xDJ_DES_PCM_DESLIGADO.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
+			this.xDJ_DES_PCM_DESLIGADO.Name = "xDJ_DES_PCM_DESLIGADO";
+			this.xDJ_DES_PCM_DESLIGADO.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
+			this.xDJ_DES_PCM_DESLIGADO.TagName = "DJ_DES_PCM_DESLIGADO";
+			this.xDJ_DES_PCM_DESLIGADO.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.DjChanged);
+			this.xDJ_DES_PCM_DESLIGADO.EndInit();
+			// 
+			// xDJ_UV_700_01
+			// 
+			this.xDJ_UV_700_01.BeginInit();
+			this.xDJ_UV_700_01.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, double.NaN, double.NaN);
+			this.xDJ_UV_700_01.IsOnlyInput = true;
+			this.xDJ_UV_700_01.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
+			this.xDJ_UV_700_01.Name = "xDJ_UV_700_01";
+			this.xDJ_UV_700_01.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
+			this.xDJ_UV_700_01.TagName = "DJ_UV_700_01";
+			this.xDJ_UV_700_01.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.DjChanged);
+			this.xDJ_UV_700_01.EndInit();
+			// 
+			// xDJ_UV_700_02
+			// 
+			this.xDJ_UV_700_02.BeginInit();
+			this.xDJ_UV_700_02.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, double.NaN, double.NaN);
+			this.xDJ_UV_700_02.IsOnlyInput = true;
+			this.xDJ_UV_700_02.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
+			this.xDJ_UV_700_02.Name = "xDJ_UV_700_02";
+			this.xDJ_UV_700_02.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
+			this.xDJ_UV_700_02.TagName = "DJ_UV_700_02";
+			this.xDJ_UV_700_02.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.DjChanged);
+			this.xDJ_UV_700_02.EndInit();
+			// 
+			// xDJ_VC_700_01
+			// 
+			this.xDJ_VC_700_01.BeginInit();
+			this.xDJ_VC_700_01.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, double.NaN, double.NaN);
+			this.xDJ_VC_700_01.IsOnlyInput = true;
+			this.xDJ_VC_700_01.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
+			this.xDJ_VC_700_01.Name = "xDJ_VC_700_01";
+			this.xDJ_VC_700_01.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
+			this.xDJ_VC_700_01.TagName = "DJ_VC_700_01";
+			this.xDJ_VC_700_01.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.DjChanged);
+			this.xDJ_VC_700_01.EndInit();
+			// 
+			// xDJ_MO_700_01
+			// 
+			this.xDJ_MO_700_01.BeginInit();
+			this.xDJ_MO_700_01.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, double.NaN, double.NaN);
+			this.xDJ_MO_700_01.IsOnlyInput = true;
+			this.xDJ_MO_700_01.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
+			this.xDJ_MO_700_01.Name = "xDJ_MO_700_01";
+			this.xDJ_MO_700_01.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
+			this.xDJ_MO_700_01.TagName = "DJ_MO_700_01";
+			this.xDJ_MO_700_01.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.DjChanged);
+			this.xDJ_MO_700_01.EndInit();
+			// 
+			// xFALHA_REMOTA_NER
+			// 
+			this.xFALHA_REMOTA_NER.BeginInit();
+			this.xFALHA_REMOTA_NER.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, double.NaN, double.NaN);
+			this.xFALHA_REMOTA_NER.IsOnlyInput = true;
+			this.xFALHA_REMOTA_NER.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
+			this.xFALHA_REMOTA_NER.Name = "xFALHA_REMOTA_NER";
+			this.xFALHA_REMOTA_NER.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
+			this.xFALHA_REMOTA_NER.TagName = "FALHA_REMOTA_NER";
+			this.xFALHA_REMOTA_NER.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.DjChanged);
+			this.xFALHA_REMOTA_NER.EndInit();
+			// 
+			// xFALHA_REMOTA_EEEB
+			// 
+			this.xFALHA_REMOTA_EEEB.BeginInit();
+			this.xFALHA_REMOTA_EEEB.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, double.NaN, double.NaN);
+			this.xFALHA_REMOTA_EEEB.IsOnlyInput = true;
+			this.xFALHA_REMOTA_EEEB.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
+			this.xFALHA_REMOTA_EEEB.Name = "xFALHA_REMOTA_EEEB";
+			this.xFALHA_REMOTA_EEEB.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
+			this.xFALHA_REMOTA_EEEB.TagName = "FALHA_REMOTA_EEEB";
+			this.xFALHA_REMOTA_EEEB.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.DjChanged);
+			this.xFALHA_REMOTA_EEEB.EndInit();
+			// 
+			// xFALHA_REMOTA_DES
+			// 
+			this.xFALHA_REMOTA_DES.BeginInit();
+			this.xFALHA_REMOTA_DES.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, double.NaN, double.NaN);
+			this.xFALHA_REMOTA_DES.IsOnlyInput = true;
+			this.xFALHA_REMOTA_DES.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
+			this.xFALHA_REMOTA_DES.Name = "xFALHA_REMOTA_DES";
+			this.xFALHA_REMOTA_DES.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
+			this.xFALHA_REMOTA_DES.TagName = "FALHA_REMOTA_DES";
+			this.xFALHA_REMOTA_DES.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.DjChanged);
+			this.xFALHA_REMOTA_DES.EndInit();
+			// 
 			// sDefault
 			// 
 			this.Name = "sDefault";
@@ -3947,69 +4367,6 @@ namespace Hidryco.HidrycoLib.Symbols.Subestacao
 			this.alP2,
 			this.alP2n,
 			this.alTxt,
-			this.rF1q1,
-			this.nF1q1,
-			this.iF1q1P1,
-			this.iF1q1P1n,
-			this.iF1q1P2,
-			this.iF1q1P2n,
-			this.iF1q1Txt,
-			this.rF1q0,
-			this.nF1q0,
-			this.iF1q0P1,
-			this.iF1q0P1n,
-			this.iF1q0P2,
-			this.iF1q0P2n,
-			this.iF1q0Txt,
-			this.rF1q2,
-			this.nF1q2,
-			this.iF1q2P1,
-			this.iF1q2P1n,
-			this.iF1q2P2,
-			this.iF1q2P2n,
-			this.iF1q2Txt,
-			this.rD1q1,
-			this.nD1q1,
-			this.iD1q1P1,
-			this.iD1q1P1n,
-			this.iD1q1P2,
-			this.iD1q1P2n,
-			this.iD1q1Txt,
-			this.rD1q0,
-			this.nD1q0,
-			this.iD1q0P1,
-			this.iD1q0P1n,
-			this.iD1q0P2,
-			this.iD1q0P2n,
-			this.iD1q0Txt,
-			this.rD1q2,
-			this.nD1q2,
-			this.iD1q2P1,
-			this.iD1q2P1n,
-			this.iD1q2P2,
-			this.iD1q2P2n,
-			this.iD1q2Txt,
-			this.rC1q1,
-			this.nC1q1,
-			this.iC1q1P1,
-			this.iC1q1P1n,
-			this.iC1q1P2,
-			this.iC1q1P2n,
-			this.iC1q1Txt,
-			this.rC1q0,
-			this.nC1q0,
-			this.iC1q0P1,
-			this.iC1q0P1n,
-			this.iC1q0P2,
-			this.iC1q0P2n,
-			this.iC1q0Txt,
-			this.rC1q2,
-			this.nC1q2,
-			this.iC1q2P1,
-			this.iC1q2P1n,
-			this.iC1q2P2,
-			this.iC1q2P2n,
-			this.iC1q2Txt,
 			this.btnCargas,
 			this.btnComandos,
 			this.btnReset,
@@ -4093,7 +4450,118 @@ namespace Hidryco.HidrycoLib.Symbols.Subestacao
 			this.xED1q2,
 			this.xEC1q1,
 			this.xEC1q0,
-			this.xEC1q2});
+			this.xEC1q2,
+			this.pNER,
+			this.pNERt,
+			this.pNERc,
+			this.pNERbar,
+			this.lpNER_PCE,
+			this.bpNER_PCE,
+			this.tpNER_PCE,
+			this.lpNER_PCM,
+			this.bpNER_PCM,
+			this.tpNER_PCM,
+			this.lpMO_300_01,
+			this.bpMO_300_01,
+			this.tpMO_300_01,
+			this.lpR4005A,
+			this.bpR4005A,
+			this.tpR4005A,
+			this.lpR4005B,
+			this.bpR4005B,
+			this.tpR4005B,
+			this.lpP4901,
+			this.bpP4901,
+			this.tpP4901,
+			this.lpP4902,
+			this.bpP4902,
+			this.tpP4902,
+			this.lpP4903,
+			this.bpP4903,
+			this.tpP4903,
+			this.pDES,
+			this.pDESt,
+			this.pDESc,
+			this.pDESbar,
+			this.lpDES_PCE,
+			this.bpDES_PCE,
+			this.tpDES_PCE,
+			this.lpDES_PCM,
+			this.bpDES_PCM,
+			this.tpDES_PCM,
+			this.lpUV_700_01,
+			this.bpUV_700_01,
+			this.tpUV_700_01,
+			this.lpUV_700_02,
+			this.bpUV_700_02,
+			this.tpUV_700_02,
+			this.lpVC_700_01,
+			this.bpVC_700_01,
+			this.tpVC_700_01,
+			this.lpMO_700_01,
+			this.bpMO_700_01,
+			this.tpMO_700_01,
+			this.pEEEB,
+			this.pEEEBt,
+			this.pEEEBc,
+			this.pEEEBbar,
+			this.lpEEEB_PCE,
+			this.bpEEEB_PCE,
+			this.tpEEEB_PCE,
+			this.lpEEEB_PCM,
+			this.bpEEEB_PCM,
+			this.tpEEEB_PCM,
+			this.lpCO_100_01,
+			this.bpCO_100_01,
+			this.tpCO_100_01,
+			this.lpCO_100_02,
+			this.bpCO_100_02,
+			this.tpCO_100_02,
+			this.lpCO_100_03,
+			this.bpCO_100_03,
+			this.tpCO_100_03,
+			this.lpCO_100_04,
+			this.bpCO_100_04,
+			this.tpCO_100_04,
+			this.lpGM_100_01_02,
+			this.bpGM_100_01_02,
+			this.tpGM_100_01_02,
+			this.lpMO_100_01,
+			this.bpMO_100_01,
+			this.tpMO_100_01,
+			this.pLeg,
+			this.pLegT,
+			this.pLeg0,
+			this.pLeg0t,
+			this.pLeg1,
+			this.pLeg1t,
+			this.pLeg2,
+			this.pLeg2t,
+			this.xDJ_NER_PCE,
+			this.xDJ_NER_PCM,
+			this.xDJ_MO_300_01,
+			this.xDJ_R4005A,
+			this.xDJ_R4005B,
+			this.xDJ_P4901,
+			this.xDJ_P4902,
+			this.xDJ_P4903,
+			this.xDJ_EEEB_PCE,
+			this.xDJ_EEEB_PCM,
+			this.xDJ_CO_100_01,
+			this.xDJ_CO_100_02,
+			this.xDJ_CO_100_03,
+			this.xDJ_CO_100_04,
+			this.xDJ_GM_100_01_02,
+			this.xDJ_MO_100_01,
+			this.xDJ_DES_PCE_DESLIGADO,
+			this.xDJ_DES_PCM_DESLIGADO,
+			this.xDJ_UV_700_01,
+			this.xDJ_UV_700_02,
+			this.xDJ_VC_700_01,
+			this.xDJ_MO_700_01,
+			this.xFALHA_REMOTA_NER,
+			this.xFALHA_REMOTA_EEEB,
+			this.xFALHA_REMOTA_DES});
 
 		}
 		private NxtControl.GuiFramework.Rectangle fundo;
@@ -4319,69 +4787,6 @@ namespace Hidryco.HidrycoLib.Symbols.Subestacao
 		private NxtControl.GuiFramework.Polygon alP2;
 		private NxtControl.GuiFramework.FreeText alP2n;
 		private NxtControl.GuiFramework.FreeText alTxt;
-		private NxtControl.GuiFramework.FreeText rF1q1;
-		private NxtControl.GuiFramework.FreeText nF1q1;
-		private NxtControl.GuiFramework.Rectangle iF1q1P1;
-		private NxtControl.GuiFramework.FreeText iF1q1P1n;
-		private NxtControl.GuiFramework.Polygon iF1q1P2;
-		private NxtControl.GuiFramework.FreeText iF1q1P2n;
-		private NxtControl.GuiFramework.FreeText iF1q1Txt;
-		private NxtControl.GuiFramework.FreeText rF1q0;
-		private NxtControl.GuiFramework.FreeText nF1q0;
-		private NxtControl.GuiFramework.Rectangle iF1q0P1;
-		private NxtControl.GuiFramework.FreeText iF1q0P1n;
-		private NxtControl.GuiFramework.Polygon iF1q0P2;
-		private NxtControl.GuiFramework.FreeText iF1q0P2n;
-		private NxtControl.GuiFramework.FreeText iF1q0Txt;
-		private NxtControl.GuiFramework.FreeText rF1q2;
-		private NxtControl.GuiFramework.FreeText nF1q2;
-		private NxtControl.GuiFramework.Rectangle iF1q2P1;
-		private NxtControl.GuiFramework.FreeText iF1q2P1n;
-		private NxtControl.GuiFramework.Polygon iF1q2P2;
-		private NxtControl.GuiFramework.FreeText iF1q2P2n;
-		private NxtControl.GuiFramework.FreeText iF1q2Txt;
-		private NxtControl.GuiFramework.FreeText rD1q1;
-		private NxtControl.GuiFramework.FreeText nD1q1;
-		private NxtControl.GuiFramework.Rectangle iD1q1P1;
-		private NxtControl.GuiFramework.FreeText iD1q1P1n;
-		private NxtControl.GuiFramework.Polygon iD1q1P2;
-		private NxtControl.GuiFramework.FreeText iD1q1P2n;
-		private NxtControl.GuiFramework.FreeText iD1q1Txt;
-		private NxtControl.GuiFramework.FreeText rD1q0;
-		private NxtControl.GuiFramework.FreeText nD1q0;
-		private NxtControl.GuiFramework.Rectangle iD1q0P1;
-		private NxtControl.GuiFramework.FreeText iD1q0P1n;
-		private NxtControl.GuiFramework.Polygon iD1q0P2;
-		private NxtControl.GuiFramework.FreeText iD1q0P2n;
-		private NxtControl.GuiFramework.FreeText iD1q0Txt;
-		private NxtControl.GuiFramework.FreeText rD1q2;
-		private NxtControl.GuiFramework.FreeText nD1q2;
-		private NxtControl.GuiFramework.Rectangle iD1q2P1;
-		private NxtControl.GuiFramework.FreeText iD1q2P1n;
-		private NxtControl.GuiFramework.Polygon iD1q2P2;
-		private NxtControl.GuiFramework.FreeText iD1q2P2n;
-		private NxtControl.GuiFramework.FreeText iD1q2Txt;
-		private NxtControl.GuiFramework.FreeText rC1q1;
-		private NxtControl.GuiFramework.FreeText nC1q1;
-		private NxtControl.GuiFramework.Rectangle iC1q1P1;
-		private NxtControl.GuiFramework.FreeText iC1q1P1n;
-		private NxtControl.GuiFramework.Polygon iC1q1P2;
-		private NxtControl.GuiFramework.FreeText iC1q1P2n;
-		private NxtControl.GuiFramework.FreeText iC1q1Txt;
-		private NxtControl.GuiFramework.FreeText rC1q0;
-		private NxtControl.GuiFramework.FreeText nC1q0;
-		private NxtControl.GuiFramework.Rectangle iC1q0P1;
-		private NxtControl.GuiFramework.FreeText iC1q0P1n;
-		private NxtControl.GuiFramework.Polygon iC1q0P2;
-		private NxtControl.GuiFramework.FreeText iC1q0P2n;
-		private NxtControl.GuiFramework.FreeText iC1q0Txt;
-		private NxtControl.GuiFramework.FreeText rC1q2;
-		private NxtControl.GuiFramework.FreeText nC1q2;
-		private NxtControl.GuiFramework.Rectangle iC1q2P1;
-		private NxtControl.GuiFramework.FreeText iC1q2P1n;
-		private NxtControl.GuiFramework.Polygon iC1q2P2;
-		private NxtControl.GuiFramework.FreeText iC1q2P2n;
-		private NxtControl.GuiFramework.FreeText iC1q2Txt;
 		private NxtControl.GuiFramework.DrawnButton btnCargas;
 		private NxtControl.GuiFramework.DrawnButton btnComandos;
 		private NxtControl.GuiFramework.DrawnButton btnReset;
@@ -4466,6 +4871,117 @@ namespace Hidryco.HidrycoLib.Symbols.Subestacao
 		private System.HMI.Symbols.Base.Execute<byte> xEC1q1;
 		private System.HMI.Symbols.Base.Execute<byte> xEC1q0;
 		private System.HMI.Symbols.Base.Execute<byte> xEC1q2;
+		private NxtControl.GuiFramework.Rectangle pNER;
+		private NxtControl.GuiFramework.FreeText pNERt;
+		private NxtControl.GuiFramework.FreeText pNERc;
+		private NxtControl.GuiFramework.Rectangle pNERbar;
+		private NxtControl.GuiFramework.Line lpNER_PCE;
+		private NxtControl.GuiFramework.Rectangle bpNER_PCE;
+		private NxtControl.GuiFramework.FreeText tpNER_PCE;
+		private NxtControl.GuiFramework.Line lpNER_PCM;
+		private NxtControl.GuiFramework.Rectangle bpNER_PCM;
+		private NxtControl.GuiFramework.FreeText tpNER_PCM;
+		private NxtControl.GuiFramework.Line lpMO_300_01;
+		private NxtControl.GuiFramework.Rectangle bpMO_300_01;
+		private NxtControl.GuiFramework.FreeText tpMO_300_01;
+		private NxtControl.GuiFramework.Line lpR4005A;
+		private NxtControl.GuiFramework.Rectangle bpR4005A;
+		private NxtControl.GuiFramework.FreeText tpR4005A;
+		private NxtControl.GuiFramework.Line lpR4005B;
+		private NxtControl.GuiFramework.Rectangle bpR4005B;
+		private NxtControl.GuiFramework.FreeText tpR4005B;
+		private NxtControl.GuiFramework.Line lpP4901;
+		private NxtControl.GuiFramework.Rectangle bpP4901;
+		private NxtControl.GuiFramework.FreeText tpP4901;
+		private NxtControl.GuiFramework.Line lpP4902;
+		private NxtControl.GuiFramework.Rectangle bpP4902;
+		private NxtControl.GuiFramework.FreeText tpP4902;
+		private NxtControl.GuiFramework.Line lpP4903;
+		private NxtControl.GuiFramework.Rectangle bpP4903;
+		private NxtControl.GuiFramework.FreeText tpP4903;
+		private NxtControl.GuiFramework.Rectangle pDES;
+		private NxtControl.GuiFramework.FreeText pDESt;
+		private NxtControl.GuiFramework.FreeText pDESc;
+		private NxtControl.GuiFramework.Rectangle pDESbar;
+		private NxtControl.GuiFramework.Line lpDES_PCE;
+		private NxtControl.GuiFramework.Rectangle bpDES_PCE;
+		private NxtControl.GuiFramework.FreeText tpDES_PCE;
+		private NxtControl.GuiFramework.Line lpDES_PCM;
+		private NxtControl.GuiFramework.Rectangle bpDES_PCM;
+		private NxtControl.GuiFramework.FreeText tpDES_PCM;
+		private NxtControl.GuiFramework.Line lpUV_700_01;
+		private NxtControl.GuiFramework.Rectangle bpUV_700_01;
+		private NxtControl.GuiFramework.FreeText tpUV_700_01;
+		private NxtControl.GuiFramework.Line lpUV_700_02;
+		private NxtControl.GuiFramework.Rectangle bpUV_700_02;
+		private NxtControl.GuiFramework.FreeText tpUV_700_02;
+		private NxtControl.GuiFramework.Line lpVC_700_01;
+		private NxtControl.GuiFramework.Rectangle bpVC_700_01;
+		private NxtControl.GuiFramework.FreeText tpVC_700_01;
+		private NxtControl.GuiFramework.Line lpMO_700_01;
+		private NxtControl.GuiFramework.Rectangle bpMO_700_01;
+		private NxtControl.GuiFramework.FreeText tpMO_700_01;
+		private NxtControl.GuiFramework.Rectangle pEEEB;
+		private NxtControl.GuiFramework.FreeText pEEEBt;
+		private NxtControl.GuiFramework.FreeText pEEEBc;
+		private NxtControl.GuiFramework.Rectangle pEEEBbar;
+		private NxtControl.GuiFramework.Line lpEEEB_PCE;
+		private NxtControl.GuiFramework.Rectangle bpEEEB_PCE;
+		private NxtControl.GuiFramework.FreeText tpEEEB_PCE;
+		private NxtControl.GuiFramework.Line lpEEEB_PCM;
+		private NxtControl.GuiFramework.Rectangle bpEEEB_PCM;
+		private NxtControl.GuiFramework.FreeText tpEEEB_PCM;
+		private NxtControl.GuiFramework.Line lpCO_100_01;
+		private NxtControl.GuiFramework.Rectangle bpCO_100_01;
+		private NxtControl.GuiFramework.FreeText tpCO_100_01;
+		private NxtControl.GuiFramework.Line lpCO_100_02;
+		private NxtControl.GuiFramework.Rectangle bpCO_100_02;
+		private NxtControl.GuiFramework.FreeText tpCO_100_02;
+		private NxtControl.GuiFramework.Line lpCO_100_03;
+		private NxtControl.GuiFramework.Rectangle bpCO_100_03;
+		private NxtControl.GuiFramework.FreeText tpCO_100_03;
+		private NxtControl.GuiFramework.Line lpCO_100_04;
+		private NxtControl.GuiFramework.Rectangle bpCO_100_04;
+		private NxtControl.GuiFramework.FreeText tpCO_100_04;
+		private NxtControl.GuiFramework.Line lpGM_100_01_02;
+		private NxtControl.GuiFramework.Rectangle bpGM_100_01_02;
+		private NxtControl.GuiFramework.FreeText tpGM_100_01_02;
+		private NxtControl.GuiFramework.Line lpMO_100_01;
+		private NxtControl.GuiFramework.Rectangle bpMO_100_01;
+		private NxtControl.GuiFramework.FreeText tpMO_100_01;
+		private NxtControl.GuiFramework.Rectangle pLeg;
+		private NxtControl.GuiFramework.FreeText pLegT;
+		private NxtControl.GuiFramework.Rectangle pLeg0;
+		private NxtControl.GuiFramework.FreeText pLeg0t;
+		private NxtControl.GuiFramework.Rectangle pLeg1;
+		private NxtControl.GuiFramework.FreeText pLeg1t;
+		private NxtControl.GuiFramework.Rectangle pLeg2;
+		private NxtControl.GuiFramework.FreeText pLeg2t;
+		private System.HMI.Symbols.Base.Execute<bool> xDJ_NER_PCE;
+		private System.HMI.Symbols.Base.Execute<bool> xDJ_NER_PCM;
+		private System.HMI.Symbols.Base.Execute<bool> xDJ_MO_300_01;
+		private System.HMI.Symbols.Base.Execute<bool> xDJ_R4005A;
+		private System.HMI.Symbols.Base.Execute<bool> xDJ_R4005B;
+		private System.HMI.Symbols.Base.Execute<bool> xDJ_P4901;
+		private System.HMI.Symbols.Base.Execute<bool> xDJ_P4902;
+		private System.HMI.Symbols.Base.Execute<bool> xDJ_P4903;
+		private System.HMI.Symbols.Base.Execute<bool> xDJ_EEEB_PCE;
+		private System.HMI.Symbols.Base.Execute<bool> xDJ_EEEB_PCM;
+		private System.HMI.Symbols.Base.Execute<bool> xDJ_CO_100_01;
+		private System.HMI.Symbols.Base.Execute<bool> xDJ_CO_100_02;
+		private System.HMI.Symbols.Base.Execute<bool> xDJ_CO_100_03;
+		private System.HMI.Symbols.Base.Execute<bool> xDJ_CO_100_04;
+		private System.HMI.Symbols.Base.Execute<bool> xDJ_GM_100_01_02;
+		private System.HMI.Symbols.Base.Execute<bool> xDJ_MO_100_01;
+		private System.HMI.Symbols.Base.Execute<bool> xDJ_DES_PCE_DESLIGADO;
+		private System.HMI.Symbols.Base.Execute<bool> xDJ_DES_PCM_DESLIGADO;
+		private System.HMI.Symbols.Base.Execute<bool> xDJ_UV_700_01;
+		private System.HMI.Symbols.Base.Execute<bool> xDJ_UV_700_02;
+		private System.HMI.Symbols.Base.Execute<bool> xDJ_VC_700_01;
+		private System.HMI.Symbols.Base.Execute<bool> xDJ_MO_700_01;
+		private System.HMI.Symbols.Base.Execute<bool> xFALHA_REMOTA_NER;
+		private System.HMI.Symbols.Base.Execute<bool> xFALHA_REMOTA_EEEB;
+		private System.HMI.Symbols.Base.Execute<bool> xFALHA_REMOTA_DES;
 		#endregion
 	}
 }

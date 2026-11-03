@@ -86,7 +86,7 @@ namespace Hidryco.HidrycoLib.Symbols.DisjuntorCAT
 			this.InstanceName.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
 			this.InstanceName.Text = "label";
 			this.InstanceName.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleCenter;
-			this.InstanceName.TextColor = new NxtControl.Drawing.Color("SE.App2Base.SymInstanceLabelTextColor");
+			this.InstanceName.TextColor = new NxtControl.Drawing.Color("SE.App2Base.aaLibSymInstanceLabelTextColor");
 			// 
 			// sDefault
 			// 

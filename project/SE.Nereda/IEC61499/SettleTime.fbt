@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="13aeebea-3bf4-4e1a-b415-cebaa4864129" Name="SettleTime" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="10/6/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="A825A9883A27AEA6" Name="REQ" Comment="Normal Execution Request">
+        <With Var="MinSettleTime" />
+        <With Var="TimeSinceStartAerate" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="3D730E73E36A2BA8" Name="CNF" Comment="Execution Confirmation">
+        <With Var="SettleTimeVs" />
+        <With Var="SettleTimeT" />
+        <With Var="SettleTimeVm" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="AAB3D20C0EB690BA" Name="MinSettleTime" Type="TIME" Comment="Input event qualifier" />
+      <VarDeclaration ID="28F15C72C32256A3" Name="TimeSinceStartAerate" Type="TIME" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="8D1A00955F760296" Name="SettleTimeVs" Type="REAL" Comment="Output event qualifier" />
+      <VarDeclaration ID="097A6B1E2EE8D61E" Name="SettleTimeVm" Type="REAL" />
+      <VarDeclaration ID="D03E9546E51EA192" Name="SettleTimeT" Type="TIME" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="db21f87b-d230-4ffd-bf90-558cc1e5194e">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="REQ" />
+    <InternalVars>
+      <VarDeclaration ID="2A0346BBAE7ECDAF" Name="InMinSettleTime" Type="REAL" />
+      <VarDeclaration ID="61DE6F5E2B73CBA6" Name="InTimeSinceStartAerate" Type="REAL" />
+      <VarDeclaration ID="4ECBA2A9691EC813" Name="InSettleTimeV" Type="REAL" />
+    </InternalVars>
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="552.9412" y="429.4117" />
+      <ECState Name="REQ" Comment="Normal execution" x="1273.647" y="760.9412">
+        <ECAction Algorithm="REQ" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="REQ" Condition="REQ" x="959.0273" y="524.8242">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="219.3327,117.14,261.6228,136.5938" />
+      </ECTransition>
+      <ECTransition Source="REQ" Destination="START" Condition="1" x="913.9547" y="677.9542">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="251.175,184.306,208.8849,164.8522" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="REQ" Comment="Normally executed algorithm">
+      <ST><![CDATA[;
+InMinSettleTime := TIME_TO_REAL(MinSettleTime);
+InTimeSinceStartAerate := TIME_TO_REAL(TimeSinceStartAerate);
+
+InSettleTimeV := (InMinSettleTime - InTimeSinceStartAerate);
+
+IF InSettleTimeV > 0 THEN
+	SettleTimeVs := InSettleTimeV / 1000;
+	SettleTimeT := REAL_TO_TIME(InSettleTimeV);
+	SettleTimeVm := SettleTimeVs / 60;
+ELSE
+	SettleTimeVs := 0;
+	SettleTimeVm := 0;
+	SettleTimeT := T#0s;
+END_IF;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

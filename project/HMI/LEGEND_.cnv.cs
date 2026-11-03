@@ -1,9 +1,5 @@
 ﻿/*
- * Created by EcoStruxure Automation Expert.
- * User: SESA713705
- * Date: 8/8/2024
- * Time: 4:43 PM
- * 
+ * Hidryco - tela LEGEND_ (fase solida - serie 900)
  */
 
 using System;

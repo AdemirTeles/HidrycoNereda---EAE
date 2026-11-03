@@ -2,7 +2,7 @@
 <!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
 <FBType GUID="b35c8a41-0d79-3721-eaed-dd872cf5fd7c" Name="basicValvulaCoester" Comment="Logica do atuador Coester CSR (Modbus TCP)" Namespace="Hidryco.HidrycoLib">
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Hidryco" Version="1.0" Author="Hidryco" Date="19/10/2026" Remarks="1.0: leitura Words 1-9/36/86/87, escrita Words 1-2; modulante (posicionamento continuo) ou on/off; falhas memorizadas, posicao nao atingida, quitar alarmes por 3 s" />
+  <VersionInfo Organization="Hidryco" Version="1.2" Author="Hidryco" Date="27/10/2026" Remarks="1.2: comandos do legado (abrir/fechar/posicionar/parar em BOOL com evento proprio), posicao manual INT, tempos de falha de abertura e fechamento (UINT), STS_ANIMACAO do legado (0 fechada, 1 aberta, 2 falha, 3 intermediaria, 4 abrindo, 5 fechando, 99 incoerente), stsPosicaoAtual INT e stsConfigPos. 1.1: cfgHabilitada (instancia de equipamento futuro sem alarme); LIMIT com DINT_TO_INT (correcao do usuario). 1.0: leitura Words 1-9/36/86/87, escrita Words 1-2; modulante (posicionamento continuo) ou on/off; falhas memorizadas, posicao nao atingida, quitar alarmes por 3 s" />
   <InterfaceList>
     <EventInputs>
       <Event ID="BC3FDAAC48C266C9" Name="INIT" Comment="Inicializacao (configuracao da instancia)">
@@ -10,6 +10,7 @@
         <With Var="cfgPosicaoMin" />
         <With Var="cfgPosicaoMax" />
         <With Var="cfgPartidasDiaMax" />
+        <With Var="cfgHabilitada" />
       </Event>
       <Event ID="439C5B98809C2189" Name="REQ_CMD" Comment="Comando do processo (automatico)">
         <With Var="cmdAbrirAutomatico" />
@@ -45,12 +46,24 @@
       <Event ID="38061816A8BE25E9" Name="REQ_MODE" Comment="IHM: modo de operacao">
         <With Var="hmiAutomatico" />
       </Event>
-      <Event ID="381236404F15E6E1" Name="REQ_MANUAL" Comment="IHM: comando manual">
-        <With Var="hmiCmdManual" />
-        <With Var="hmiPosicaoManual" />
+      <Event ID="30AE7F49F37189A9" Name="REQ_ABRIR" Comment="IHM/supervisorio: abrir (manual)">
+        <With Var="hmiAbrir" />
+      </Event>
+      <Event ID="EC0B2AD711C1FF32" Name="REQ_FECHAR" Comment="IHM/supervisorio: fechar (manual)">
+        <With Var="hmiFechar" />
+      </Event>
+      <Event ID="3CF8A223CC6B0E4B" Name="REQ_POSICIONAR" Comment="IHM/supervisorio: posicionar (manual)">
+        <With Var="hmiPosicionar" />
+      </Event>
+      <Event ID="93A69175E8783E53" Name="REQ_PARAR" Comment="IHM/supervisorio: parar (manual)">
+        <With Var="hmiParar" />
+      </Event>
+      <Event ID="A0107A1DD2534969" Name="REQ_SP" Comment="IHM/supervisorio: posicao manual e tempos de falha">
+        <With Var="stpPosicaoManual" />
+        <With Var="stpFalhaAbertura" />
+        <With Var="stpFalhaFechamento" />
       </Event>
       <Event ID="0278FF007F66B823" Name="REQ_PARA" Comment="IHM: parametros">
-        <With Var="stpTempoFalhaPosicao" />
         <With Var="stpToleranciaPosicao" />
       </Event>
       <Event ID="3A4B67BCD45EEA9F" Name="REQ_RESET" Comment="IHM: reset de falhas">
@@ -78,6 +91,8 @@
         <With Var="stsComunicacaoOK" />
       </Event>
       <Event ID="990117E8CD2B8B73" Name="CNF_HMI" Comment="Status para a IHM e alarmes">
+        <With Var="stsPosicaoAtual" />
+        <With Var="stsConfigPos" />
         <With Var="stsComunicacaoOK" />
         <With Var="stsRemoto" />
         <With Var="stsLocal" />
@@ -117,6 +132,7 @@
     </EventOutputs>
     <InputVars>
       <VarDeclaration ID="EC14950A36464D14" Name="cfgModulante" Type="BOOL" InitialValue="FALSE" Comment="TRUE = valvula modulante: atuador em posicionamento continuo, CLP escreve so a posicao (Word 2)" />
+      <VarDeclaration ID="EF3C511F4EFC8BD0" Name="cfgHabilitada" Type="BOOL" InitialValue="TRUE" Comment="FALSE = instancia desabilitada (equipamento futuro): sem alarme de comunicacao e fora do automatico" />
       <VarDeclaration ID="410C490809D6916D" Name="cfgPosicaoMin" Type="REAL" InitialValue="0.0" Comment="Limite minimo da posicao no automatico (%)" />
       <VarDeclaration ID="9DB83B313D3D4707" Name="cfgPosicaoMax" Type="REAL" InitialValue="100.0" Comment="Limite maximo da posicao no automatico (%)" />
       <VarDeclaration ID="0008094B2F324685" Name="cfgPartidasDiaMax" Type="INT" InitialValue="0" Comment="Aviso se as partidas do dia anterior passarem disto (0 = sem aviso)" />
@@ -140,9 +156,13 @@
       <VarDeclaration ID="530128CBF41BDA17" Name="fldW87" Type="INT" Comment="Word 87: maximo de partidas por dia" />
       <VarDeclaration ID="93F81E7F7C459083" Name="fldConexao" Type="INT" Comment="connStatusInt do escravo Modbus (1 = online)" />
       <VarDeclaration ID="FE01ADD91E2DE6AA" Name="hmiAutomatico" Type="BOOL" Comment="IHM: TRUE = automatico" />
-      <VarDeclaration ID="0AFFB7CCAAAE4650" Name="hmiCmdManual" Type="INT" Comment="IHM: 0 parar, 1 abrir, 2 fechar, 3 posicionar" />
-      <VarDeclaration ID="2953209EDB5B5D08" Name="hmiPosicaoManual" Type="REAL" Comment="IHM: posicao manual (%)" />
-      <VarDeclaration ID="C7AB5DFE5DE027AD" Name="stpTempoFalhaPosicao" Type="INT" Comment="Tempo maximo para atingir a posicao (s); 0 = sem supervisao" />
+      <VarDeclaration ID="5541C75939BAAAF4" Name="hmiAbrir" Type="BOOL" Comment="TRUE = abrir (com REQ_ABRIR)" />
+      <VarDeclaration ID="C1B1DDD6702777D0" Name="hmiFechar" Type="BOOL" Comment="TRUE = fechar (com REQ_FECHAR)" />
+      <VarDeclaration ID="7957616432A80571" Name="hmiPosicionar" Type="BOOL" Comment="TRUE = posicionar em stpPosicaoManual (com REQ_POSICIONAR)" />
+      <VarDeclaration ID="9314A77CB5285DA8" Name="hmiParar" Type="BOOL" Comment="TRUE = parar (com REQ_PARAR)" />
+      <VarDeclaration ID="6DD97D51A927EFDE" Name="stpPosicaoManual" Type="INT" Comment="Posicao manual (%)" />
+      <VarDeclaration ID="544203CD781FBA82" Name="stpFalhaAbertura" Type="UINT" Comment="Tempo maximo para abrir/atingir posicao acima (s); 0 = sem supervisao" />
+      <VarDeclaration ID="5D2134F1C8188850" Name="stpFalhaFechamento" Type="UINT" Comment="Tempo maximo para fechar/atingir posicao abaixo (s); 0 = sem supervisao" />
       <VarDeclaration ID="33A1A871455C269D" Name="stpToleranciaPosicao" Type="REAL" Comment="Tolerancia da posicao (%)" />
       <VarDeclaration ID="06F0657BBA388BF2" Name="hmiResetFalha" Type="BOOL" Comment="IHM: reset de falhas" />
       <VarDeclaration ID="E15FF261880BC83D" Name="cmdResetFalhas" Type="BOOL" Comment="Processo: reset de falhas (vale com TRUE)" />
@@ -162,6 +182,8 @@
       <VarDeclaration ID="9AABFB91073A915A" Name="stsFechando" Type="BOOL" Comment="Em movimento de fechamento" />
       <VarDeclaration ID="0377F31FB4BC212E" Name="stsVolante" Type="BOOL" Comment="Movimento manual pelo volante" />
       <VarDeclaration ID="B46169A18CD32F7C" Name="stsPosicao" Type="REAL" Comment="Posicao atual (%)" />
+      <VarDeclaration ID="9E9903A02854D46D" Name="stsPosicaoAtual" Type="INT" Comment="Posicao atual (%), inteiro (STS_POSICAO_ATUAL do legado)" />
+      <VarDeclaration ID="784EA9F97E75518C" Name="stsConfigPos" Type="INT" Comment="0 = on/off, 1 = com posicionador (configShowPositioner do legado)" />
       <VarDeclaration ID="3B6F475C569C5069" Name="stsPosicaoReferencia" Type="REAL" Comment="Posicao enviada ao atuador (%)" />
       <VarDeclaration ID="F1568A13AC3AEFBE" Name="stsTorque" Type="INT" Comment="Torque maximo do ultimo comando (Nm)" />
       <VarDeclaration ID="71F9AE205389F66A" Name="stsTorquePct" Type="INT" Comment="Torque relativo ao limite programado (%)" />
@@ -191,6 +213,8 @@
   <BasicFB ID="53606d8b-b985-b14b-741e-1566ea99bc4f">
     <Attribute Name="FBType.Basic.Algorithm.Order" Value="algValvula" />
     <InternalVars>
+      <VarDeclaration ID="E3B96CBA1C629CB0" Name="tLim" Type="DINT" Comment="Tempo maximo da supervisao de posicao no movimento atual (s)" />
+      <VarDeclaration ID="7E7C140BE2801969" Name="bNovo" Type="INT" Comment="Comando manual recebido (-1 = nenhum)" />
       <VarDeclaration ID="F2565D807373C52D" Name="initDone" Type="BOOL" Comment="Bloco inicializado" />
       <VarDeclaration ID="A968BE911714348D" Name="comRecebido" Type="BOOL" Comment="Status de conexao recebido ao menos uma vez" />
       <VarDeclaration ID="2701F24A3AB099EC" Name="bComOk" Type="BOOL" />
@@ -236,7 +260,7 @@
         <ECAction Output="CNF" />
         <ECAction Output="CNF_HMI" />
       </ECState>
-      <ECTransition Source="START" Destination="EXEC" Condition="INIT OR REQ_CMD OR REQ_ILCK OR REQ_FB1 OR REQ_FB2 OR REQ_FB3 OR REQ_COM OR REQ_MODE OR REQ_MANUAL OR REQ_PARA OR REQ_RESET OR REQ_RESET_PROC OR TICK" x="1580" y="860" />
+      <ECTransition Source="START" Destination="EXEC" Condition="INIT OR REQ_CMD OR REQ_ILCK OR REQ_FB1 OR REQ_FB2 OR REQ_FB3 OR REQ_COM OR REQ_MODE OR REQ_ABRIR OR REQ_FECHAR OR REQ_POSICIONAR OR REQ_PARAR OR REQ_SP OR REQ_PARA OR REQ_RESET OR REQ_RESET_PROC OR TICK" x="1580" y="860" />
       <ECTransition Source="EXEC" Destination="START" Condition="1" x="1420" y="860" />
     </ECC>
     <Algorithm Name="algValvula" Comment="Logica completa da valvula (um unico algoritmo)">
@@ -257,7 +281,9 @@
      programada no proprio atuador (falha de comunicacao: Nenhuma = manter);
    - falhas do atuador e posicao nao atingida ficam memorizadas ate o reset;
      o reset tambem envia "quitar alarmes" (Word 1 b8) por 3 s;
-   - parametro de tempo = 0 desliga a supervisao de posicao.
+   - parametro de tempo = 0 desliga a supervisao de posicao;
+   - cfgHabilitada = FALSE (equipamento futuro): sem comunicacao esperada,
+     sem alarme e nunca disponivel para o automatico.
    ===================================================================== *)
 
 INITO   := FALSE;
@@ -278,9 +304,9 @@ IF NOT initDone THEN
 END_IF;
 
 (* ---- 1. Comunicacao e decodificacao ---- *)
-bComOk := comRecebido AND (fldConexao = 1);
+bComOk := cfgHabilitada AND comRecebido AND (fldConexao = 1);
 stsComunicacaoOK := bComOk;
-stsFalhaComunicacao := NOT bComOk;
+stsFalhaComunicacao := cfgHabilitada AND NOT bComOk;   (* desabilitada: sem alarme *)
 w01 := INT_TO_WORD(fldW01);
 w02 := INT_TO_WORD(fldW02);
 w03 := INT_TO_WORD(fldW03);
@@ -365,12 +391,20 @@ IF bAutoAnt AND NOT bAuto THEN
     bCmdMan := 0;                          (* entra em manual mantendo a posicao *)
 END_IF;
 bAutoAnt := bAuto;
-IF REQ_MANUAL THEN
-    bSpMan := LIMIT(0.0, hmiPosicaoManual, 100.0);
-    IF hmiCmdManual <> bCmdMan THEN
-        bCmdMan := LIMIT(0, hmiCmdManual, 3);
-        tPos := 0;
+IF REQ_SP THEN
+    bSpMan := LIMIT(0.0, INT_TO_REAL(stpPosicaoManual), 100.0);
+    IF bCmdMan = 3 THEN
+        tPos := 0;                         (* nova posicao: recomeca a supervisao *)
     END_IF;
+END_IF;
+bNovo := -1;                               (* comandos do legado: TRUE com o evento de cada um; FALSE nao faz nada *)
+IF REQ_PARAR AND hmiParar THEN bNovo := 0; END_IF;
+IF REQ_ABRIR AND hmiAbrir THEN bNovo := 1; END_IF;
+IF REQ_FECHAR AND hmiFechar THEN bNovo := 2; END_IF;
+IF REQ_POSICIONAR AND hmiPosicionar THEN bNovo := 3; END_IF;
+IF (bNovo >= 0) AND (bNovo <> bCmdMan) THEN
+    bCmdMan := bNovo;
+    tPos := 0;
 END_IF;
 stsAutomatico := bAuto;
 stsCmdManual  := bCmdMan;
@@ -435,11 +469,18 @@ ELSE
     rTol := 2.0;
 END_IF;
 rDesvio := ABS(stsPosicao - bSp);
+IF (bModo = 1) OR ((bModo = 3) AND (bSp >= stsPosicao)) THEN
+    tLim := UINT_TO_DINT(stpFalhaAbertura);
+ELSIF (bModo = 2) OR (bModo = 3) THEN
+    tLim := UINT_TO_DINT(stpFalhaFechamento);
+ELSE
+    tLim := 0;
+END_IF;
 IF TICK THEN
-    IF bPode AND (stpTempoFalhaPosicao > 0) AND (bModo >= 1) AND (bModo <= 3) AND
+    IF bPode AND (tLim > 0) AND (bModo >= 1) AND (bModo <= 3) AND
        (((bModo = 1) AND NOT stsAberta) OR ((bModo = 2) AND NOT stsFechada) OR ((bModo = 3) AND (rDesvio > rTol))) THEN
         tPos := tPos + 1;
-        IF tPos >= stpTempoFalhaPosicao THEN
+        IF INT_TO_DINT(tPos) >= tLim THEN
             stsFalhaPosicao := TRUE;
         END_IF;
     ELSE
@@ -453,20 +494,27 @@ stsAvisoPartidas := bComOk AND (cfgPartidasDiaMax > 0) AND (fldW86 > cfgPartidas
 stsFalha := stsFalhaAtuador OR stsFalhaPosicao;
 stsDisponivelAutomatico := bComOk AND stsRemoto AND bAuto AND NOT stsFalha AND NOT ilkGeral AND NOT ilkAutomatico;
 stsAlarme := stsFalhaComunicacao OR stsFalha;
-IF NOT bComOk THEN
-    stsAnimacao := 6;
-ELSIF stsFalha THEN
+(* STS_ANIMACAO na codificacao do legado, com o transito separado em abrindo/fechando *)
+IF NOT bComOk OR stsFalha THEN
+    stsAnimacao := 2;                      (* falha (comunicacao, atuador ou posicao) *)
+ELSIF stsAberta AND stsFechada THEN
+    stsAnimacao := 99;                     (* fins de curso incoerentes *)
+ELSIF stsAbrindo THEN
     stsAnimacao := 4;
-ELSIF NOT stsRemoto THEN
+ELSIF stsFechando THEN
     stsAnimacao := 5;
-ELSIF stsAbrindo OR stsFechando THEN
-    stsAnimacao := 3;
 ELSIF stsAberta THEN
     stsAnimacao := 1;
 ELSIF stsFechada THEN
     stsAnimacao := 0;
 ELSE
-    stsAnimacao := 2;
+    stsAnimacao := 3;                      (* intermediaria, parada *)
+END_IF;
+stsPosicaoAtual := REAL_TO_INT(stsPosicao);
+IF cfgModulante THEN
+    stsConfigPos := 1;
+ELSE
+    stsConfigPos := 0;
 END_IF;
 
 (* ---- 8. Eventos de saida ---- *)
@@ -477,7 +525,7 @@ IF primeiro OR (stsDisponivelAutomatico <> oldDisp) OR (stsAberta <> oldAberta) 
     oldDisp := stsDisponivelAutomatico; oldAberta := stsAberta; oldFechada := stsFechada; oldRemoto := stsRemoto;
     oldAuto := stsAutomatico; oldFalha := stsFalha; oldCom := stsComunicacaoOK; oldPos := stsPosicao;
 END_IF;
-IF primeiro OR TICK OR REQ_MODE OR REQ_MANUAL OR REQ_PARA OR REQ_RESET OR REQ_RESET_PROC OR
+IF primeiro OR TICK OR REQ_MODE OR REQ_ABRIR OR REQ_FECHAR OR REQ_POSICIONAR OR REQ_PARAR OR REQ_SP OR REQ_PARA OR REQ_RESET OR REQ_RESET_PROC OR
    (stsAnimacao <> oldAnim) OR (stsAlarme <> oldAlm) THEN
     CNF_HMI := TRUE;
     oldAnim := stsAnimacao;

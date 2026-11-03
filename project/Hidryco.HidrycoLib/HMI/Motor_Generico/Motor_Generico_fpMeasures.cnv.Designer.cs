@@ -27,6 +27,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Motor_Generico
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary6 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary7 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary8 = new NxtControl.GuiFramework.PropertyDictionary();
+			this.xVelHz = new System.HMI.Symbols.Base.Execute<float>();
 			this.titulo = new NxtControl.GuiFramework.FreeText();
 			this.lSTS_VELOCIDADE = new NxtControl.GuiFramework.Rectangle();
 			this.tSTS_VELOCIDADE = new NxtControl.GuiFramework.FreeText();
@@ -96,7 +97,6 @@ namespace Hidryco.HidrycoLib.Faceplates.Motor_Generico
 			propertyDictionary1.Add("Pen", new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("Transparent"), 1F, NxtControl.Drawing.DashStyle.Solid));
 			this.vSTS_VELOCIDADE.Ranges.DefaultPropertyValues = propertyDictionary1;
 			this.vSTS_VELOCIDADE.Suffix = " %";
-			this.vSTS_VELOCIDADE.TagName = "STS_VELOCIDADE";
 			this.vSTS_VELOCIDADE.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleRight;
 			this.vSTS_VELOCIDADE.EndInit();
 			// 
@@ -375,7 +375,21 @@ namespace Hidryco.HidrycoLib.Faceplates.Motor_Generico
 			// 
 			this.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(320D)), ((float)(332D)));
 			this.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(224)), ((byte)(224)), ((byte)(224))));
+			// 
+			// xVelHz
+			// 
+			this.xVelHz.BeginInit();
+			this.xVelHz.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, double.NaN, double.NaN);
+			this.xVelHz.IsOnlyInput = true;
+			this.xVelHz.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
+			this.xVelHz.Name = "xVelHz";
+			this.xVelHz.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
+			this.xVelHz.TagName = "STS_VELOCIDADE";
+			this.xVelHz.Value = 0F;
+			this.xVelHz.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.VelHzValueChanged);
+			this.xVelHz.EndInit();
 			this.Shapes.AddRange(new System.ComponentModel.IComponent[] {
+			this.xVelHz,
 			this.titulo,
 			this.lSTS_VELOCIDADE,
 			this.tSTS_VELOCIDADE,
@@ -429,6 +443,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Motor_Generico
 		private NxtControl.GuiFramework.Rectangle lSTS_CODIGO_FALHA;
 		private NxtControl.GuiFramework.FreeText tSTS_CODIGO_FALHA;
 		private System.HMI.Symbols.Base.Label<System.Single> vSTS_CODIGO_FALHA;
+		private System.HMI.Symbols.Base.Execute<float> xVelHz;
 		#endregion
 	}
 }

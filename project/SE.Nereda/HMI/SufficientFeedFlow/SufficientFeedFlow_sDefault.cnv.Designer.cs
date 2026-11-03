@@ -34,23 +34,23 @@ namespace SE.Nereda.Symbols.SufficientFeedFlow
 			// 
 			// polygon1
 			// 
-			this.polygon1.Bounds = new NxtControl.Drawing.RectF(((float)(56D)), ((float)(84D)), ((float)(192D)), ((float)(28D)));
+			this.polygon1.Bounds = new NxtControl.Drawing.RectF(((float)(17D)), ((float)(30D)), ((float)(192D)), ((float)(28D)));
 			this.polygon1.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(78)), ((byte)(78)), ((byte)(78))));
 			this.polygon1.Closed = true;
 			this.polygon1.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular);
 			this.polygon1.Name = "polygon1";
 			this.polygon1.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(78)), ((byte)(78)), ((byte)(78))), 1F, NxtControl.Drawing.DashStyle.Solid);
 			this.polygon1.Points.AddRange(new NxtControl.Drawing.PointF[] {
-			new NxtControl.Drawing.PointF(56D, 108D),
-			new NxtControl.Drawing.PointF(56D, 84D),
-			new NxtControl.Drawing.PointF(220D, 84D),
-			new NxtControl.Drawing.PointF(248D, 112D)});
+			new NxtControl.Drawing.PointF(17D, 54D),
+			new NxtControl.Drawing.PointF(17D, 30D),
+			new NxtControl.Drawing.PointF(181D, 30D),
+			new NxtControl.Drawing.PointF(209D, 58D)});
 			this.polygon1.Text = "SUFFICIENT FEED FLOW";
 			this.polygon1.TextColor = new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(0)));
 			// 
 			// rectangle1
 			// 
-			this.rectangle1.Bounds = new NxtControl.Drawing.RectF(((float)(56D)), ((float)(100D)), ((float)(394D)), ((float)(88D)));
+			this.rectangle1.Bounds = new NxtControl.Drawing.RectF(((float)(16D)), ((float)(46D)), ((float)(369D)), ((float)(88D)));
 			this.rectangle1.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(250)), ((byte)(250)), ((byte)(250))));
 			this.rectangle1.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
 			this.rectangle1.Name = "rectangle1";
@@ -59,7 +59,7 @@ namespace SE.Nereda.Symbols.SufficientFeedFlow
 			// 
 			this.freeText11.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.freeText11.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-			this.freeText11.Location = new NxtControl.Drawing.PointF(68D, 114D);
+			this.freeText11.Location = new NxtControl.Drawing.PointF(29D, 60D);
 			this.freeText11.Name = "freeText11";
 			this.freeText11.Text = "Minimum Level Rise:";
 			// 
@@ -67,14 +67,14 @@ namespace SE.Nereda.Symbols.SufficientFeedFlow
 			// 
 			this.freeText2.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.freeText2.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-			this.freeText2.Location = new NxtControl.Drawing.PointF(68D, 154D);
+			this.freeText2.Location = new NxtControl.Drawing.PointF(29D, 100D);
 			this.freeText2.Name = "freeText2";
 			this.freeText2.Text = "Feed Flow Check Time:";
 			// 
 			// MinLevelRiseSp_1
 			// 
 			this.MinLevelRiseSp_1.BeginInit();
-			this.MinLevelRiseSp_1.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.64D, 0D, 0D, 1D, 326D, 110D);
+			this.MinLevelRiseSp_1.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.64D, 0D, 0D, 1D, 262D, 56D);
 			this.MinLevelRiseSp_1.MaximumTag = null;
 			this.MinLevelRiseSp_1.MinimumTag = null;
 			this.MinLevelRiseSp_1.Name = "MinLevelRiseSp_1";
@@ -93,7 +93,7 @@ namespace SE.Nereda.Symbols.SufficientFeedFlow
 			// 
 			this.LevelCheckTimeSp.BeginInit();
 			this.LevelCheckTimeSp.DecimalPlacesCount = ((uint)(0u));
-			this.LevelCheckTimeSp.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.64D, 0D, 0D, 1D, 326D, 150D);
+			this.LevelCheckTimeSp.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.64D, 0D, 0D, 1D, 262D, 96D);
 			this.LevelCheckTimeSp.Maximum = 36;
 			this.LevelCheckTimeSp.MaximumTag = null;
 			this.LevelCheckTimeSp.MinimumTag = null;

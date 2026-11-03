@@ -20,14 +20,6 @@ namespace HMI.Main.Canvases
 		private void InitializeComponent()
 		{
 			this.alarmGrid1 = new NxtControl.GuiFramework.AlarmGrid();
-			this.changeCanvasButton2 = new NxtControl.GuiFramework.ChangeCanvasButton();
-			this.changeCanvasButton4 = new NxtControl.GuiFramework.ChangeCanvasButton();
-			this.changeCanvasButton1 = new NxtControl.GuiFramework.ChangeCanvasButton();
-			this.changeCanvasButton3 = new NxtControl.GuiFramework.ChangeCanvasButton();
-			this.changeCanvasButton5 = new NxtControl.GuiFramework.ChangeCanvasButton();
-			this.changeCanvasButton6 = new NxtControl.GuiFramework.ChangeCanvasButton();
-			this.changeCanvasButton7 = new NxtControl.GuiFramework.ChangeCanvasButton();
-			this.group1 = new NxtControl.GuiFramework.Group();
 			this.HeartBeat = new SE.Nereda.Symbols.HeartBeat.sDefault();
 			this.Mode = new SE.Nereda.Symbols.Mode.ReactorMode();
 			this.OpenWebPage = new SE.Nereda.Symbols.OpenWebPage.sDefault();
@@ -71,76 +63,6 @@ namespace HMI.Main.Canvases
 			this.alarmGrid1.ToolBarBackColor = System.Drawing.SystemColors.AppWorkspace;
 			this.alarmGrid1.ToolBarForeColor = System.Drawing.SystemColors.ControlText;
 			// 
-			// changeCanvasButton2
-			// 
-			this.changeCanvasButton2.Bounds = new NxtControl.Drawing.RectF(((float)(1152D)), ((float)(648D)), ((float)(168D)), ((float)(32D)));
-			this.changeCanvasButton2.CanvasName = "SLUDGE_BUFFER";
-			this.changeCanvasButton2.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-			this.changeCanvasButton2.Name = "changeCanvasButton2";
-			this.changeCanvasButton2.Text = "SLUDGE BUFFER";
-			// 
-			// changeCanvasButton4
-			// 
-			this.changeCanvasButton4.Bounds = new NxtControl.Drawing.RectF(((float)(600D)), ((float)(648D)), ((float)(168D)), ((float)(32D)));
-			this.changeCanvasButton4.CanvasName = "INFLUENT_FEED";
-			this.changeCanvasButton4.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-			this.changeCanvasButton4.Name = "changeCanvasButton4";
-			this.changeCanvasButton4.Text = "INFLUENT FEED";
-			// 
-			// changeCanvasButton1
-			// 
-			this.changeCanvasButton1.Bounds = new NxtControl.Drawing.RectF(((float)(416D)), ((float)(648D)), ((float)(168D)), ((float)(32D)));
-			this.changeCanvasButton1.CanvasName = "REACTOR3";
-			this.changeCanvasButton1.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-			this.changeCanvasButton1.Name = "changeCanvasButton1";
-			this.changeCanvasButton1.Text = "REACTOR 3";
-			// 
-			// changeCanvasButton3
-			// 
-			this.changeCanvasButton3.Bounds = new NxtControl.Drawing.RectF(((float)(232D)), ((float)(648D)), ((float)(168D)), ((float)(32D)));
-			this.changeCanvasButton3.CanvasName = "REACTOR2";
-			this.changeCanvasButton3.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-			this.changeCanvasButton3.Name = "changeCanvasButton3";
-			this.changeCanvasButton3.Text = "REACTOR 2";
-			// 
-			// changeCanvasButton5
-			// 
-			this.changeCanvasButton5.Bounds = new NxtControl.Drawing.RectF(((float)(48D)), ((float)(648D)), ((float)(168D)), ((float)(32D)));
-			this.changeCanvasButton5.CanvasName = "REACTOR1";
-			this.changeCanvasButton5.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-			this.changeCanvasButton5.Name = "changeCanvasButton5";
-			this.changeCanvasButton5.Text = "REACTOR 1";
-			// 
-			// changeCanvasButton6
-			// 
-			this.changeCanvasButton6.Bounds = new NxtControl.Drawing.RectF(((float)(784D)), ((float)(648D)), ((float)(168D)), ((float)(32D)));
-			this.changeCanvasButton6.CanvasName = "EFFLUENT";
-			this.changeCanvasButton6.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-			this.changeCanvasButton6.Name = "changeCanvasButton6";
-			this.changeCanvasButton6.Text = "EFFLUENT";
-			// 
-			// changeCanvasButton7
-			// 
-			this.changeCanvasButton7.Bounds = new NxtControl.Drawing.RectF(((float)(968D)), ((float)(648D)), ((float)(168D)), ((float)(32D)));
-			this.changeCanvasButton7.CanvasName = "CALAMITY";
-			this.changeCanvasButton7.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-			this.changeCanvasButton7.Name = "changeCanvasButton7";
-			this.changeCanvasButton7.Text = "CALAMITY";
-			// 
-			// group1
-			// 
-			this.group1.BeginInit();
-			this.group1.Name = "group1";
-			this.group1.Shapes.AddRange(new System.ComponentModel.IComponent[] {
-			this.changeCanvasButton2,
-			this.changeCanvasButton4,
-			this.changeCanvasButton1,
-			this.changeCanvasButton3,
-			this.changeCanvasButton5,
-			this.changeCanvasButton6,
-			this.changeCanvasButton7});
-			this.group1.EndInit();
-			// 
 			// HeartBeat
 			// 
 			this.HeartBeat.BeginInit();
@@ -174,7 +96,6 @@ namespace HMI.Main.Canvases
 			this.Brush = new NxtControl.Drawing.Brush("CanvasBrush");
 			this.Shapes.AddRange(new System.ComponentModel.IComponent[] {
 			this.alarmGrid1,
-			this.group1,
 			this.HeartBeat,
 			this.Mode,
 			this.OpenWebPage});
@@ -183,14 +104,6 @@ namespace HMI.Main.Canvases
 
 		}
 		private NxtControl.GuiFramework.AlarmGrid alarmGrid1;
-		private NxtControl.GuiFramework.ChangeCanvasButton changeCanvasButton2;
-		private NxtControl.GuiFramework.ChangeCanvasButton changeCanvasButton4;
-		private NxtControl.GuiFramework.ChangeCanvasButton changeCanvasButton1;
-		private NxtControl.GuiFramework.ChangeCanvasButton changeCanvasButton3;
-		private NxtControl.GuiFramework.ChangeCanvasButton changeCanvasButton5;
-		private NxtControl.GuiFramework.ChangeCanvasButton changeCanvasButton6;
-		private NxtControl.GuiFramework.ChangeCanvasButton changeCanvasButton7;
-		private NxtControl.GuiFramework.Group group1;
 		private SE.Nereda.Symbols.HeartBeat.sDefault HeartBeat;
 		private SE.Nereda.Symbols.Mode.ReactorMode Mode;
 		private SE.Nereda.Symbols.OpenWebPage.sDefault OpenWebPage;

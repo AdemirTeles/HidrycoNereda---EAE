@@ -66,5 +66,11 @@ namespace HMI.Main.Canvases
 			// TODO: Implement EFFLUENT_1Click
 			OpenCanvas("CALAMITY");
 		}
+
+		// Reconhece todos os alarmes pendentes do CLP da Nereda (o mesmo "reconhecer todos" da lista de alarmes)
+		void BtnAckNeredaClick(object sender, EventArgs e)
+		{
+			HMI.Main.AckNereda.Executar();
+		}
 	}
 }

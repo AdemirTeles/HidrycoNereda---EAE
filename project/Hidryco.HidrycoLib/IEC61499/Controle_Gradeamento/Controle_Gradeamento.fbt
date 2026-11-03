@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="a571e4f7-d20f-edcd-17a8-27485b008a3a" Name="Controle_Gradeamento" Comment="Comandos do gradeamento mecanizado (padrao Grade_Comandos do legado): ciclo remoto e setpoints de diferencial de nivel das grades" Namespace="Hidryco.HidrycoLib">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Hidryco" Version="1.0" Author="Hidryco" Date="21/10/2026" Remarks="1.0: Comandos do gradeamento mecanizado (padrao Grade_Comandos do legado): ciclo remoto e setpoints de diferencial de nivel das grades" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="BBE1950646B5A750" Name="REQ" Comment="Status vindo do processo">
+        <With Var="STS_DIFERENCIAL_GRADE1" />
+        <With Var="STS_DIFERENCIAL_GRADE2" />
+      </Event>
+      <Event ID="508124526D7AA457" Name="RECARREGA" Comment="Reenvia os ajustes persistentes (chamado no fim do INIT do processo)" />
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="D0FBBC66A6D482D4" Name="CNF" Comment="Ajustes para o processo (mudanca na IHM, OPC UA ou recarga)">
+        <With Var="CMD_LIGA_CICLO_REMOTO" />
+        <With Var="STP_DIFERENCIAL_NIVEL_GRADE1" />
+        <With Var="STP_DIFERENCIAL_NIVEL_GRADE2" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="6CEB761D53844355" Name="STS_DIFERENCIAL_GRADE1" Type="REAL" Comment="Nivel diferencial da grade 1 agora (%)" />
+      <VarDeclaration ID="09D3C19DE8A6CC53" Name="STS_DIFERENCIAL_GRADE2" Type="REAL" Comment="Nivel diferencial da grade 2 agora (%)" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="5789487A2939E166" Name="CMD_LIGA_CICLO_REMOTO" Type="BOOL" Comment="Ciclo remoto" />
+      <VarDeclaration ID="8424D01B7357CBD5" Name="STP_DIFERENCIAL_NIVEL_GRADE1" Type="REAL" Comment="Diferencial de nível para limpar a grade 1" />
+      <VarDeclaration ID="CB4F5A4E2AB68CC0" Name="STP_DIFERENCIAL_NIVEL_GRADE2" Type="REAL" Comment="Diferencial de nível para limpar a grade 2" />
+    </OutputVars>
+  </InterfaceList>
+  <FBNetwork>
+    <FB ID="8B5DD21E39626B12" Name="IThis" Type="Controle_Gradeamento_HMI" x="2400" y="600" Namespace="Hidryco.HidrycoLib">
+      <Parameter Name="$8224027113271FAA" Value="TRUE" />
+    </FB>
+    <FB ID="949107C35B1A0E20" Name="plcStart1" Type="plcStart" x="600" y="200" Namespace="SE.App2Base">
+      <Parameter Name="$Prio" Value="10" />
+    </FB>
+    <Input ID="BBE1950646B5A750" Name="REQ" x="200" y="200" Type="Event" />
+    <Input ID="508124526D7AA457" Name="RECARREGA" x="200" y="260" Type="Event" />
+    <Input ID="6CEB761D53844355" Name="STS_DIFERENCIAL_GRADE1" x="200" y="320" Type="Data" />
+    <Input ID="09D3C19DE8A6CC53" Name="STS_DIFERENCIAL_GRADE2" x="200" y="380" Type="Data" />
+    <Output ID="D0FBBC66A6D482D4" Name="CNF" x="14000" y="200" Type="Event" />
+    <Output ID="5789487A2939E166" Name="CMD_LIGA_CICLO_REMOTO" x="14000" y="260" Type="Data" />
+    <Output ID="8424D01B7357CBD5" Name="STP_DIFERENCIAL_NIVEL_GRADE1" x="14000" y="320" Type="Data" />
+    <Output ID="CB4F5A4E2AB68CC0" Name="STP_DIFERENCIAL_NIVEL_GRADE2" x="14000" y="380" Type="Data" />
+    <EventConnections>
+      <Connection Source="$949107C35B1A0E20.FIRST_INIT" Destination="$8B5DD21E39626B12.78D060DDF0D6C29B">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$949107C35B1A0E20.REDO_INIT" Destination="$8B5DD21E39626B12.78D060DDF0D6C29B">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$8B5DD21E39626B12.096E3F14444C7AE4" Destination="$8B5DD21E39626B12.EB84A4D09D4A561C">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$8B5DD21E39626B12.096E3F14444C7AE4" Destination="$949107C35B1A0E20.ACK_FIRST">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$508124526D7AA457" Destination="$8B5DD21E39626B12.EB84A4D09D4A561C">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$8B5DD21E39626B12.C21A00BE6F76DA69" Destination="$D0FBBC66A6D482D4">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$BBE1950646B5A750" Destination="$8B5DD21E39626B12.3B0B4B327E0E53A5">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="$8B5DD21E39626B12.E35995B34DA02859" Destination="$5789487A2939E166">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$8B5DD21E39626B12.1D4739E4AA7907D3" Destination="$8424D01B7357CBD5">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$8B5DD21E39626B12.42EA1CA3AF8E6D51" Destination="$CB4F5A4E2AB68CC0">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$6CEB761D53844355" Destination="$8B5DD21E39626B12.BBB488887FAB7468">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+      <Connection Source="$09D3C19DE8A6CC53" Destination="$8B5DD21E39626B12.B366ED964F960D7B">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
+    </DataConnections>
+  </FBNetwork>
+</FBType>

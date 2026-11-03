@@ -291,6 +291,63 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
 
   }
 
+  public class R_AVEventArgs : System.EventArgs
+  {
+    IHMIAccessorService accessorService;
+    int channelId;
+    int cookie; 
+    int eventIndex;
+
+    public R_AVEventArgs(int channelId, int cookie, int eventIndex)
+    {
+      this.accessorService = (IHMIAccessorService)ServiceProvider.GetService(typeof(IHMIAccessorService));
+      this.channelId = channelId;
+      this.cookie = cookie;
+      this.eventIndex = eventIndex;
+    }
+    public bool Get_ReactorAvailable(ref System.Boolean value)
+    {
+      if (accessorService == null)
+        return false;
+      bool var = false;
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,0, ref var);
+      if (ret) value = (System.Boolean) var;
+      return ret;
+    }
+
+    public System.Boolean? ReactorAvailable
+    { get {
+      if (accessorService == null)
+        return null;
+      bool var = false;
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,0, ref var);
+      if (!ret) return null;
+      return (System.Boolean) var;
+    }  }
+
+    public bool Get_ForceUnavailable(ref System.Boolean value)
+    {
+      if (accessorService == null)
+        return false;
+      bool var = false;
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,1, ref var);
+      if (ret) value = (System.Boolean) var;
+      return ret;
+    }
+
+    public System.Boolean? ForceUnavailable
+    { get {
+      if (accessorService == null)
+        return null;
+      bool var = false;
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,1, ref var);
+      if (!ret) return null;
+      return (System.Boolean) var;
+    }  }
+
+
+  }
+
 }
 
 namespace SE.Nereda.Symbols.EmergencyReactor_2
@@ -503,6 +560,8 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
 
     private event EventHandler<SE.Nereda.Symbols.EmergencyReactor_2.FORCE_UNAVEventArgs> FORCE_UNAV_Fired;
 
+    private event EventHandler<SE.Nereda.Symbols.EmergencyReactor_2.R_AVEventArgs> R_AV_Fired;
+
     protected override void OnEndInit()
     {
       if (GRAPH_Fired != null)
@@ -521,6 +580,8 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
         AttachEventInput(6);
       if (FORCE_UNAV_Fired != null)
         AttachEventInput(7);
+      if (R_AV_Fired != null)
+        AttachEventInput(8);
 
     }
 
@@ -647,6 +708,21 @@ stack Trace:
               NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
 stack Trace:
 {4}","FORCE_UNAV_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break; 
+        case 8:
+          if (R_AV_Fired != null)
+          {
+            try
+            {
+              R_AV_Fired(this, new SE.Nereda.Symbols.EmergencyReactor_2.R_AVEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","R_AV_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
             }
           }
         break; 
@@ -830,6 +906,8 @@ namespace SE.Nereda.Faceplates.EmergencyReactor_2
 
     private event EventHandler<SE.Nereda.Symbols.EmergencyReactor_2.FORCE_UNAVEventArgs> FORCE_UNAV_Fired;
 
+    private event EventHandler<SE.Nereda.Symbols.EmergencyReactor_2.R_AVEventArgs> R_AV_Fired;
+
     protected override void OnEndInit()
     {
       if (GRAPH_Fired != null)
@@ -848,6 +926,8 @@ namespace SE.Nereda.Faceplates.EmergencyReactor_2
         AttachEventInput(6);
       if (FORCE_UNAV_Fired != null)
         AttachEventInput(7);
+      if (R_AV_Fired != null)
+        AttachEventInput(8);
 
     }
 
@@ -974,6 +1054,21 @@ stack Trace:
               NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
 stack Trace:
 {4}","FORCE_UNAV_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break; 
+        case 8:
+          if (R_AV_Fired != null)
+          {
+            try
+            {
+              R_AV_Fired(this, new SE.Nereda.Symbols.EmergencyReactor_2.R_AVEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","R_AV_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
             }
           }
         break; 
@@ -1157,6 +1252,8 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
 
     private event EventHandler<SE.Nereda.Symbols.EmergencyReactor_2.FORCE_UNAVEventArgs> FORCE_UNAV_Fired;
 
+    private event EventHandler<SE.Nereda.Symbols.EmergencyReactor_2.R_AVEventArgs> R_AV_Fired;
+
     protected override void OnEndInit()
     {
       if (GRAPH_Fired != null)
@@ -1175,6 +1272,8 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
         AttachEventInput(6);
       if (FORCE_UNAV_Fired != null)
         AttachEventInput(7);
+      if (R_AV_Fired != null)
+        AttachEventInput(8);
 
     }
 
@@ -1301,6 +1400,21 @@ stack Trace:
               NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
 stack Trace:
 {4}","FORCE_UNAV_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break; 
+        case 8:
+          if (R_AV_Fired != null)
+          {
+            try
+            {
+              R_AV_Fired(this, new SE.Nereda.Symbols.EmergencyReactor_2.R_AVEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","R_AV_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
             }
           }
         break; 
@@ -1484,6 +1598,8 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
 
     private event EventHandler<SE.Nereda.Symbols.EmergencyReactor_2.FORCE_UNAVEventArgs> FORCE_UNAV_Fired;
 
+    private event EventHandler<SE.Nereda.Symbols.EmergencyReactor_2.R_AVEventArgs> R_AV_Fired;
+
     protected override void OnEndInit()
     {
       if (GRAPH_Fired != null)
@@ -1502,6 +1618,8 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
         AttachEventInput(6);
       if (FORCE_UNAV_Fired != null)
         AttachEventInput(7);
+      if (R_AV_Fired != null)
+        AttachEventInput(8);
 
     }
 
@@ -1628,6 +1746,21 @@ stack Trace:
               NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
 stack Trace:
 {4}","FORCE_UNAV_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break; 
+        case 8:
+          if (R_AV_Fired != null)
+          {
+            try
+            {
+              R_AV_Fired(this, new SE.Nereda.Symbols.EmergencyReactor_2.R_AVEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","R_AV_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
             }
           }
         break; 
@@ -1811,6 +1944,8 @@ namespace SE.Nereda.Faceplates.EmergencyReactor_2
 
     private event EventHandler<SE.Nereda.Symbols.EmergencyReactor_2.FORCE_UNAVEventArgs> FORCE_UNAV_Fired;
 
+    private event EventHandler<SE.Nereda.Symbols.EmergencyReactor_2.R_AVEventArgs> R_AV_Fired;
+
     protected override void OnEndInit()
     {
       if (GRAPH_Fired != null)
@@ -1829,6 +1964,8 @@ namespace SE.Nereda.Faceplates.EmergencyReactor_2
         AttachEventInput(6);
       if (FORCE_UNAV_Fired != null)
         AttachEventInput(7);
+      if (R_AV_Fired != null)
+        AttachEventInput(8);
 
     }
 
@@ -1955,6 +2092,21 @@ stack Trace:
               NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
 stack Trace:
 {4}","FORCE_UNAV_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break; 
+        case 8:
+          if (R_AV_Fired != null)
+          {
+            try
+            {
+              R_AV_Fired(this, new SE.Nereda.Symbols.EmergencyReactor_2.R_AVEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","R_AV_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
             }
           }
         break; 

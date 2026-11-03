@@ -126,7 +126,7 @@ namespace Hidryco.HidrycoLib.Faceplates.EEE_Bruto
 			string t; bool nr; int p = Prioridade(out t, out nr);
 			Indicador(alP1, alP1n, alP2, alP2n, alTxt, p, t, nr);
 			Pisca(AlgumNaoRec());
-			textoEstado.Text = TextoEstado();
+			textoSituacao.Text = TextoEstado();   // titulo fixo "Controle"; o estado vai ao lado
 			textoBombas.Text = necessidade.ToString() + " / " + ligadas.ToString();
 			textoPrincipal.Text = Bomba(principal) + " / " + Bomba(segunda);
 			textoTroca.Text = (rh == 0 && rm == 0 && rs == 0) ? "sem troca por tempo" : rh.ToString() + " h " + rm.ToString("00") + " min " + rs.ToString("00") + " s";
@@ -139,7 +139,17 @@ namespace Hidryco.HidrycoLib.Faceplates.EEE_Bruto
 		}
 
 		// Reconhece os alarmes da elevatoria e faz o reset da falha de recalque e do defeito da LSL (so libera o que ja normalizou)
-		void BtnResetClick(object sender, EventArgs e) { FireEvent_E_RESET(true); FireEvent_E_RESET(false); }
+		void BtnResetClick(object sender, EventArgs e) { FireEvent_E_RESET_FALHAS_PROCESSO(true); FireEvent_E_RESET_FALHAS_PROCESSO(false); }
 
+
+		// ---- velocidade: as tags ja sao em Hz no CLP (conversao no CLP) ----
+		void Hz_velocidadeValueChanged(object sender, ValueChangedEventArgs e)
+		{
+			((IHMIPrimitiveInput<float>)velocidade).ValueChanged(Convert.ToSingle(e.Value));
+		}
+		void Hz_saidaPidValueChanged(object sender, ValueChangedEventArgs e)
+		{
+			((IHMIPrimitiveInput<float>)saidaPid).ValueChanged(Convert.ToSingle(e.Value));
+		}
 	}
 }

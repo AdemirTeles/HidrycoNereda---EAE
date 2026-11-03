@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<busmaster xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="MB_PAINEIS_SUB" busId="MB_PAINEIS_SUB" protocol="modbus" busCycle="T#500ms" enableSymlinkOC="false" busTolerance="10" busActionMissedCycle="1" alignWithResPriority="false" ReconnectAfterTimeout="Enable">
+  <connectinfo mastertype="master" transportprotocol="tcp" interframedelay="10" />
+  <logging enable="false" filename="modbus.log" />
+  <buscoupler name="SUB_NER_REMOTA1" diagnostics="disabled">
+    <connectinfo transportprotocol="tcp" stationid="255" responsetimeout="500" fallbackValue="RESET">
+      <tcp ipaddress="10.26.208.160" port="502" />
+      <HA secondaryheartbeat="Enabled-ReadHoldingRegister" heartbeataddress="3001" />
+    </connectinfo>
+    <busdevice name="SUB_NER_A3_DI32K">
+      <parameter addresstype="register" length="2" addressautocalculation="disable" address="3001" datatype="inonly" ioevent="cyclic" />
+    </busdevice>
+    <busdevice name="SUB_NER_A4_DI32K">
+      <parameter addresstype="register" length="2" addressautocalculation="disable" address="3003" datatype="inonly" ioevent="cyclic" />
+    </busdevice>
+  </buscoupler>
+  <buscoupler name="SUB_EEEB_REMOTA" diagnostics="disabled">
+    <connectinfo transportprotocol="tcp" stationid="255" responsetimeout="500" fallbackValue="RESET">
+      <tcp ipaddress="10.26.208.197" port="502" />
+      <HA secondaryheartbeat="Enabled-ReadHoldingRegister" heartbeataddress="3001" />
+    </connectinfo>
+    <busdevice name="SUB_EEEB_A2_DI32K">
+      <parameter addresstype="register" length="2" addressautocalculation="disable" address="3001" datatype="inonly" ioevent="cyclic" />
+    </busdevice>
+  </buscoupler>
+  <buscoupler name="SUB_DESINF_REMOTA" diagnostics="disabled">
+    <connectinfo transportprotocol="tcp" stationid="255" responsetimeout="500" fallbackValue="RESET">
+      <tcp ipaddress="10.26.208.137" port="502" />
+      <HA secondaryheartbeat="Enabled-ReadHoldingRegister" heartbeataddress="3001" />
+    </connectinfo>
+    <busdevice name="SUB_DESINF_A2_DI32K">
+      <parameter addresstype="register" length="2" addressautocalculation="disable" address="3001" datatype="inonly" ioevent="cyclic" />
+    </busdevice>
+  </buscoupler>
+</busmaster>

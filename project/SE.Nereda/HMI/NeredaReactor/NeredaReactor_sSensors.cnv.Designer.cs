@@ -53,7 +53,7 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			this.sDisplayPv22.BeginInit();
 			this.sDisplayPv22._iSensorName = "Air Flow Measurement";
 			this.sDisplayPv22._iUnit = "";
-			this.sDisplayPv22.DesignMatrix = new NxtControl.Drawing.Matrix2D(1.1052631578947369D, 0D, 0D, 1D, 232D, 16D);
+			this.sDisplayPv22.DesignMatrix = new NxtControl.Drawing.Matrix2D(1.1052631578947369D, 0D, 0D, 1D, 216D, 16D);
 			this.sDisplayPv22.Name = "sDisplayPv22";
 			this.sDisplayPv22.SecurityToken = ((uint)(4294967295u));
 			this.sDisplayPv22.TagName = "Sensors.AirFlowMeasurementReactor";
@@ -64,7 +64,7 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			this.sDisplayPv23.BeginInit();
 			this.sDisplayPv23._iSensorName = "DrySolids Measurement";
 			this.sDisplayPv23._iUnit = "";
-			this.sDisplayPv23.DesignMatrix = new NxtControl.Drawing.Matrix2D(1.10062893081761D, 0D, 0D, 1D, 32D, 88D);
+			this.sDisplayPv23.DesignMatrix = new NxtControl.Drawing.Matrix2D(1.10062893081761D, 0D, 0D, 1D, 32D, 80D);
 			this.sDisplayPv23.Name = "sDisplayPv23";
 			this.sDisplayPv23.SecurityToken = ((uint)(4294967295u));
 			this.sDisplayPv23.TagName = "Sensors.DrySolidsMeasurementReactor";
@@ -75,7 +75,7 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			this.sDisplayPv24.BeginInit();
 			this.sDisplayPv24._iSensorName = "Oxygen Measurement";
 			this.sDisplayPv24._iUnit = "";
-			this.sDisplayPv24.DesignMatrix = new NxtControl.Drawing.Matrix2D(1.1052631578947369D, 0D, 0D, 1D, 232D, 88D);
+			this.sDisplayPv24.DesignMatrix = new NxtControl.Drawing.Matrix2D(1.1052631578947369D, 0D, 0D, 1D, 216D, 80D);
 			this.sDisplayPv24.Name = "sDisplayPv24";
 			this.sDisplayPv24.SecurityToken = ((uint)(4294967295u));
 			this.sDisplayPv24.TagName = "Sensors.OxygenMeasurementReactor";
@@ -86,7 +86,7 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			this.sDisplayPv25.BeginInit();
 			this.sDisplayPv25._iSensorName = "pH Measurement";
 			this.sDisplayPv25._iUnit = "";
-			this.sDisplayPv25.DesignMatrix = new NxtControl.Drawing.Matrix2D(1.1052631578947369D, 0D, 0D, 1D, 32D, 160D);
+			this.sDisplayPv25.DesignMatrix = new NxtControl.Drawing.Matrix2D(1.1052631578947369D, 0D, 0D, 1D, 32D, 144D);
 			this.sDisplayPv25.Name = "sDisplayPv25";
 			this.sDisplayPv25.SecurityToken = ((uint)(4294967295u));
 			this.sDisplayPv25.TagName = "Sensors.pHMeasurementReactor";
@@ -97,7 +97,7 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			this.sDisplayPv26.BeginInit();
 			this.sDisplayPv26._iSensorName = "Redox Measurement";
 			this.sDisplayPv26._iUnit = "";
-			this.sDisplayPv26.DesignMatrix = new NxtControl.Drawing.Matrix2D(1.1052631578947369D, 0D, 0D, 1D, 232D, 160D);
+			this.sDisplayPv26.DesignMatrix = new NxtControl.Drawing.Matrix2D(1.1052631578947369D, 0D, 0D, 1D, 216D, 144D);
 			this.sDisplayPv26.Name = "sDisplayPv26";
 			this.sDisplayPv26.SecurityToken = ((uint)(4294967295u));
 			this.sDisplayPv26.TagName = "Sensors.RedoxMeasurementReactor";
@@ -108,7 +108,7 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			this.sDisplayPv27.BeginInit();
 			this.sDisplayPv27._iSensorName = "Temp Measurement";
 			this.sDisplayPv27._iUnit = "";
-			this.sDisplayPv27.DesignMatrix = new NxtControl.Drawing.Matrix2D(1.1052631578947369D, 0D, 0D, 1D, 32D, 232D);
+			this.sDisplayPv27.DesignMatrix = new NxtControl.Drawing.Matrix2D(1.1052631578947369D, 0D, 0D, 1D, 32D, 208D);
 			this.sDisplayPv27.Name = "sDisplayPv27";
 			this.sDisplayPv27.SecurityToken = ((uint)(4294967295u));
 			this.sDisplayPv27.TagName = "Sensors.TemperatureMeasurement";
@@ -119,7 +119,7 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			this.sDisplayPv28.BeginInit();
 			this.sDisplayPv28._iSensorName = "Turbidity Measurement";
 			this.sDisplayPv28._iUnit = "";
-			this.sDisplayPv28.DesignMatrix = new NxtControl.Drawing.Matrix2D(1.1045751633986929D, 0D, 0D, 1D, 232D, 232D);
+			this.sDisplayPv28.DesignMatrix = new NxtControl.Drawing.Matrix2D(1.1045751633986929D, 0D, 0D, 1D, 216D, 208D);
 			this.sDisplayPv28.Name = "sDisplayPv28";
 			this.sDisplayPv28.SecurityToken = ((uint)(4294967295u));
 			this.sDisplayPv28.TagName = "Sensors.TurbidityMeasurementBothReactors";
@@ -130,7 +130,7 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			this.sDisplayPv29.BeginInit();
 			this.sDisplayPv29._iSensorName = "NH4 Measurement";
 			this.sDisplayPv29._iUnit = "";
-			this.sDisplayPv29.DesignMatrix = new NxtControl.Drawing.Matrix2D(1.1052631578947369D, 0D, 0D, 1D, 32D, 304D);
+			this.sDisplayPv29.DesignMatrix = new NxtControl.Drawing.Matrix2D(1.1052631578947369D, 0D, 0D, 1D, 32D, 272D);
 			this.sDisplayPv29.Name = "sDisplayPv29";
 			this.sDisplayPv29.SecurityToken = ((uint)(4294967295u));
 			this.sDisplayPv29.TagName = "Sensors.NH4MeasurementReactor";
@@ -141,7 +141,7 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			this.sDisplayPv210.BeginInit();
 			this.sDisplayPv210._iSensorName = "NO3 Measurement";
 			this.sDisplayPv210._iUnit = "";
-			this.sDisplayPv210.DesignMatrix = new NxtControl.Drawing.Matrix2D(1.1052631578947369D, 0D, 0D, 1D, 232D, 304D);
+			this.sDisplayPv210.DesignMatrix = new NxtControl.Drawing.Matrix2D(1.1052631578947369D, 0D, 0D, 1D, 216D, 272D);
 			this.sDisplayPv210.Name = "sDisplayPv210";
 			this.sDisplayPv210.SecurityToken = ((uint)(4294967295u));
 			this.sDisplayPv210.TagName = "Sensors.NO3MeasurementReactor";
@@ -152,7 +152,7 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			this.sDisplayPv211.BeginInit();
 			this.sDisplayPv211._iSensorName = "PO4 Measurement";
 			this.sDisplayPv211._iUnit = "";
-			this.sDisplayPv211.DesignMatrix = new NxtControl.Drawing.Matrix2D(1.1052631578947369D, 0D, 0D, 1D, 128D, 376D);
+			this.sDisplayPv211.DesignMatrix = new NxtControl.Drawing.Matrix2D(1.1052631578947369D, 0D, 0D, 1D, 32D, 336D);
 			this.sDisplayPv211.Name = "sDisplayPv211";
 			this.sDisplayPv211.SecurityToken = ((uint)(4294967295u));
 			this.sDisplayPv211.TagName = "Sensors.PO4MeasurementReactor";

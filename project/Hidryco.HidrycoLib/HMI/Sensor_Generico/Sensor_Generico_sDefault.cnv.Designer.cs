@@ -61,6 +61,8 @@ namespace Hidryco.HidrycoLib.Symbols.Sensor_Generico
 			this.xRMin = new System.HMI.Symbols.Base.Execute<float>();
 			this.xRMax = new System.HMI.Symbols.Base.Execute<float>();
 			this.abrir = new NxtControl.GuiFramework.DrawnButton();
+			this.xNivel = new System.HMI.Symbols.Base.Execute<bool>();
+			this.xPct = new System.HMI.Symbols.Base.Execute<float>();
 			// 
 			// fundo
 			// 
@@ -103,7 +105,7 @@ namespace Hidryco.HidrycoLib.Symbols.Sensor_Generico
 			propertyDictionary1.Add("Pen", new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("Transparent"), 1F, NxtControl.Drawing.DashStyle.Solid));
 			this.valor.Ranges.DefaultPropertyValues = propertyDictionary1;
 			this.valor.Suffix = "";
-			this.valor.TagName = "STS_VALOR";
+			this.valor.TagName = "STS_SENSOR";
 			this.valor.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
 			this.valor.EndInit();
 			// 
@@ -264,7 +266,7 @@ namespace Hidryco.HidrycoLib.Symbols.Sensor_Generico
 			this.xValor.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
 			this.xValor.Name = "xValor";
 			this.xValor.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
-			this.xValor.TagName = "STS_VALOR";
+			this.xValor.TagName = "STS_SENSOR";
 			this.xValor.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.ValorValueChanged);
 			this.xValor.EndInit();
 			// 
@@ -535,6 +537,30 @@ namespace Hidryco.HidrycoLib.Symbols.Sensor_Generico
 			this.abrir.TextColorMouseDown = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.abrir.Use3DEffect = false;
 			// 
+			// xNivel
+			// 
+			this.xNivel.BeginInit();
+			this.xNivel.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, double.NaN, double.NaN);
+			this.xNivel.IsOnlyInput = true;
+			this.xNivel.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
+			this.xNivel.Name = "xNivel";
+			this.xNivel.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
+			this.xNivel.TagName = "CFG_NIVEL";
+			this.xNivel.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.NivelValueChanged);
+			this.xNivel.EndInit();
+			// 
+			// xPct
+			// 
+			this.xPct.BeginInit();
+			this.xPct.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, double.NaN, double.NaN);
+			this.xPct.IsOnlyInput = true;
+			this.xPct.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
+			this.xPct.Name = "xPct";
+			this.xPct.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
+			this.xPct.TagName = "STS_PORCENTAGEM";
+			this.xPct.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.PctValueChanged);
+			this.xPct.EndInit();
+			// 
 			// sDefault
 			// 
 			this.Name = "sDefault";
@@ -579,7 +605,9 @@ namespace Hidryco.HidrycoLib.Symbols.Sensor_Generico
 			this.xSpLL,
 			this.xRMin,
 			this.xRMax,
-			this.abrir});
+			this.abrir,
+			this.xNivel,
+			this.xPct});
 
 		}
 		private NxtControl.GuiFramework.Rectangle fundo;
@@ -623,6 +651,8 @@ namespace Hidryco.HidrycoLib.Symbols.Sensor_Generico
 		private System.HMI.Symbols.Base.Execute<float> xRMin;
 		private System.HMI.Symbols.Base.Execute<float> xRMax;
 		private NxtControl.GuiFramework.DrawnButton abrir;
+		private System.HMI.Symbols.Base.Execute<bool> xNivel;
+		private System.HMI.Symbols.Base.Execute<float> xPct;
 		#endregion
 	}
 }

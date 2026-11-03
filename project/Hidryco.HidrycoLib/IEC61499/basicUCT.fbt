@@ -2,7 +2,7 @@
 <!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
 <FBType GUID="9cdfd66f-bd66-47e3-a445-bd9637b18352" Name="basicUCT" Comment="Logica unica da UCT Fast (Modbus TCP) e da bomba de gordura com a valvula de lavagem" Namespace="Hidryco.HidrycoLib">
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Hidryco" Version="1.3" Author="Hidryco" Date="16/10/2026" Remarks="1.0: UCT Fast (memorial PR-809) por Modbus TCP - leitura de estado, comandos manuais e automaticos por evento, reset, disponibilidade para a EEE Bruto, bomba de gordura e valvula de lavagem" />
+  <VersionInfo Organization="Hidryco" Version="1.6" Author="Hidryco" Date="03/11/2026" Remarks="1.6: nivel da peneira e velocidades da UCT em % direto (0-100); o 0-16000 da tabela e so o limite do registrador. IHM em Hz (60 Hz = 100 %). 1.5: velocidades dos equipamentos da UCT e da bomba de gordura em Hz (16000 = 60 Hz); conversao no CLP. 1.4: CNF_HMI tambem sai quando muda so a palavra de disponibilidade (STS_HABILITADA). 1.0: UCT Fast (memorial PR-809) por Modbus TCP - leitura de estado, comandos manuais e automaticos por evento, reset, disponibilidade para a EEE Bruto, bomba de gordura e valvula de lavagem" />
   <InterfaceList>
     <EventInputs>
       <Event ID="3C5B6DD981EA9EF0" Name="INIT" Comment="Inicializacao">
@@ -796,12 +796,12 @@
    ligados so na mudanca; tempos pelo TICK de 1 s (E_CYCLE do CAT).
    - leitura: palavras de comando 40005..40017 (imagem), falhas 40081,
      niveis 40082, status/velocidade dos equipamentos 401xx, nivel da
-     peneira 40230 (0-16000 = 0-100 %), horimetros 40500..40517 (DINT,
+     peneira 40230 (0-100 %, direto), horimetros 40500..40517 (DINT,
      palavra baixa no endereco menor);
    - escrita so quando o operador comanda (um evento por comando): o bit
      comandado e trocado na imagem lida e a palavra inteira e escrita
-     (os outros bits ficam como a UCT informou); velocidade 0-100 % ->
-     0-16000; reset = pulso de cfgTempoReset s em 40005.3;
+     (os outros bits ficam como a UCT informou); velocidade em Hz ->
+     0-100 % (60 Hz = 100 %); reset = pulso de cfgTempoReset s em 40005.3;
    - disponibilidade: as condicoes vao para o bloco AND do CAT (editavel)
      e o resultado volta em "disponivel"; cadeia das UCTs: bloqueio da EEE
      Bruto so com UCT habilitada e nenhuma disponivel;
@@ -892,7 +892,7 @@ stsNivelBaixoPeneira := bComOK AND ((w82 AND 16#0001) <> 16#0000);
 stsNivelAltoPeneira := bComOK AND ((w82 AND 16#0002) <> 16#0000);
 stsNivelBaixoAgua := bComOK AND ((w82 AND 16#0004) <> 16#0000);
 stsNivelAltoGordura := bComOK AND ((w82 AND 16#0008) <> 16#0000);
-stsNivelPeneira := INT_TO_REAL(w230) * 100.0 / 16000.0;
+stsNivelPeneira := INT_TO_REAL(w230);   (* % direto *)
 stsAutoPeneira := (img015 AND 16#0004) <> 16#0000;
 stsLigaAutoPeneira := (img015 AND 16#0001) <> 16#0000;
 stsAutoRoscas := (img016 AND 16#0004) <> 16#0000;
@@ -909,7 +909,7 @@ END_IF;
 penDef := bComOK AND ((w81 AND 16#0010) <> 16#0000);
 penHor := DWORD_TO_DINT(SHL(WORD_TO_DWORD(INT_TO_WORD(h501)), 16) OR WORD_TO_DWORD(INT_TO_WORD(h500)));
 penAuto := stsAutoPeneira;
-penVelSts := INT_TO_REAL(s101) * 100.0 / 16000.0;
+penVelSts := INT_TO_REAL(s101) * 60.0 / 100.0;   (* Hz; UCT em % *)
 penFbLiga := (img006 AND 16#0001) <> 16#0000;
 penFbInt := (img006 AND 16#0020) <> 16#0000;
 penFbRev := FALSE;
@@ -922,7 +922,7 @@ END_IF;
 b1Def := bComOK AND ((w81 AND 16#0004) <> 16#0000);
 b1Hor := DWORD_TO_DINT(SHL(WORD_TO_DWORD(INT_TO_WORD(h503)), 16) OR WORD_TO_DWORD(INT_TO_WORD(h502)));
 b1Auto := stsAutoPeneira;
-b1VelSts := INT_TO_REAL(s116) * 100.0 / 16000.0;
+b1VelSts := INT_TO_REAL(s116) * 60.0 / 100.0;   (* Hz; UCT em % *)
 b1FbLiga := (img007 AND 16#0001) <> 16#0000;
 b1FbInt := FALSE;
 b1FbRev := FALSE;
@@ -935,7 +935,7 @@ END_IF;
 b2Def := bComOK AND ((w81 AND 16#0008) <> 16#0000);
 b2Hor := DWORD_TO_DINT(SHL(WORD_TO_DWORD(INT_TO_WORD(h505)), 16) OR WORD_TO_DWORD(INT_TO_WORD(h504)));
 b2Auto := stsAutoPeneira;
-b2VelSts := INT_TO_REAL(s121) * 100.0 / 16000.0;
+b2VelSts := INT_TO_REAL(s121) * 60.0 / 100.0;   (* Hz; UCT em % *)
 b2FbLiga := (img008 AND 16#0001) <> 16#0000;
 b2FbInt := FALSE;
 b2FbRev := FALSE;
@@ -974,7 +974,7 @@ END_IF;
 cmpDef := bComOK AND ((w81 AND 16#0100) <> 16#0000);
 cmpHor := DWORD_TO_DINT(SHL(WORD_TO_DWORD(INT_TO_WORD(h511)), 16) OR WORD_TO_DWORD(INT_TO_WORD(h510)));
 cmpAuto := stsAutoRaspComp;
-cmpVelSts := INT_TO_REAL(s136) * 100.0 / 16000.0;
+cmpVelSts := INT_TO_REAL(s136) * 60.0 / 100.0;   (* Hz; UCT em % *)
 cmpFbLiga := (img011 AND 16#0001) <> 16#0000;
 cmpFbInt := FALSE;
 cmpFbRev := FALSE;
@@ -987,7 +987,7 @@ END_IF;
 rspDef := bComOK AND ((w81 AND 16#0080) <> 16#0000);
 rspHor := DWORD_TO_DINT(SHL(WORD_TO_DWORD(INT_TO_WORD(h513)), 16) OR WORD_TO_DWORD(INT_TO_WORD(h512)));
 rspAuto := stsAutoRaspComp;
-rspVelSts := INT_TO_REAL(s141) * 100.0 / 16000.0;
+rspVelSts := INT_TO_REAL(s141) * 60.0 / 100.0;   (* Hz; UCT em % *)
 rspFbLiga := (img012 AND 16#0001) <> 16#0000;
 rspFbInt := (img012 AND 16#0020) <> 16#0000;
 rspFbRev := (img012 AND 16#0008) <> 16#0000;
@@ -1000,7 +1000,7 @@ END_IF;
 r1Def := bComOK AND ((w81 AND 16#0020) <> 16#0000);
 r1Hor := DWORD_TO_DINT(SHL(WORD_TO_DWORD(INT_TO_WORD(h515)), 16) OR WORD_TO_DWORD(INT_TO_WORD(h514)));
 r1Auto := stsAutoRoscas;
-r1VelSts := INT_TO_REAL(s151) * 100.0 / 16000.0;
+r1VelSts := INT_TO_REAL(s151) * 60.0 / 100.0;   (* Hz; UCT em % *)
 r1FbLiga := (img013 AND 16#0001) <> 16#0000;
 r1FbInt := (img013 AND 16#0020) <> 16#0000;
 r1FbRev := (img013 AND 16#0008) <> 16#0000;
@@ -1013,7 +1013,7 @@ END_IF;
 r2Def := bComOK AND ((w81 AND 16#0040) <> 16#0000);
 r2Hor := DWORD_TO_DINT(SHL(WORD_TO_DWORD(INT_TO_WORD(h517)), 16) OR WORD_TO_DWORD(INT_TO_WORD(h516)));
 r2Auto := stsAutoRoscas;
-r2VelSts := INT_TO_REAL(s161) * 100.0 / 16000.0;
+r2VelSts := INT_TO_REAL(s161) * 60.0 / 100.0;   (* Hz; UCT em % *)
 r2FbLiga := (img014 AND 16#0001) <> 16#0000;
 r2FbInt := (img014 AND 16#0020) <> 16#0000;
 r2FbRev := (img014 AND 16#0008) <> 16#0000;
@@ -1038,7 +1038,7 @@ IF REQ_PEN_INT THEN
     CNF_W006 := TRUE;
 END_IF;
 IF REQ_PEN_VEL THEN
-    ww101 := REAL_TO_INT(LIMIT(0.0, penVel, 100.0) * 160.0);
+    ww101 := REAL_TO_INT(LIMIT(0.0, penVel, 60.0) * 100.0 / 60.0);
     CNF_V101 := TRUE;
 END_IF;
 IF REQ_B1_LIGA THEN
@@ -1051,7 +1051,7 @@ IF REQ_B1_LIGA THEN
     CNF_W007 := TRUE;
 END_IF;
 IF REQ_B1_VEL THEN
-    ww116 := REAL_TO_INT(LIMIT(0.0, b1Vel, 100.0) * 160.0);
+    ww116 := REAL_TO_INT(LIMIT(0.0, b1Vel, 60.0) * 100.0 / 60.0);
     CNF_V116 := TRUE;
 END_IF;
 IF REQ_B2_LIGA THEN
@@ -1064,7 +1064,7 @@ IF REQ_B2_LIGA THEN
     CNF_W008 := TRUE;
 END_IF;
 IF REQ_B2_VEL THEN
-    ww121 := REAL_TO_INT(LIMIT(0.0, b2Vel, 100.0) * 160.0);
+    ww121 := REAL_TO_INT(LIMIT(0.0, b2Vel, 60.0) * 100.0 / 60.0);
     CNF_V121 := TRUE;
 END_IF;
 IF REQ_V1_LIGA THEN
@@ -1095,7 +1095,7 @@ IF REQ_CMP_LIGA THEN
     CNF_W011 := TRUE;
 END_IF;
 IF REQ_CMP_VEL THEN
-    ww136 := REAL_TO_INT(LIMIT(0.0, cmpVel, 100.0) * 160.0);
+    ww136 := REAL_TO_INT(LIMIT(0.0, cmpVel, 60.0) * 100.0 / 60.0);
     CNF_V136 := TRUE;
 END_IF;
 IF REQ_RSP_LIGA THEN
@@ -1126,7 +1126,7 @@ IF REQ_RSP_REV THEN
     CNF_W012 := TRUE;
 END_IF;
 IF REQ_RSP_VEL THEN
-    ww141 := REAL_TO_INT(LIMIT(0.0, rspVel, 100.0) * 160.0);
+    ww141 := REAL_TO_INT(LIMIT(0.0, rspVel, 60.0) * 100.0 / 60.0);
     CNF_V141 := TRUE;
 END_IF;
 IF REQ_R1_LIGA THEN
@@ -1157,7 +1157,7 @@ IF REQ_R1_REV THEN
     CNF_W013 := TRUE;
 END_IF;
 IF REQ_R1_VEL THEN
-    ww151 := REAL_TO_INT(LIMIT(0.0, r1Vel, 100.0) * 160.0);
+    ww151 := REAL_TO_INT(LIMIT(0.0, r1Vel, 60.0) * 100.0 / 60.0);
     CNF_V151 := TRUE;
 END_IF;
 IF REQ_R2_LIGA THEN
@@ -1188,7 +1188,7 @@ IF REQ_R2_REV THEN
     CNF_W014 := TRUE;
 END_IF;
 IF REQ_R2_VEL THEN
-    ww161 := REAL_TO_INT(LIMIT(0.0, r2Vel, 100.0) * 160.0);
+    ww161 := REAL_TO_INT(LIMIT(0.0, r2Vel, 60.0) * 100.0 / 60.0);
     CNF_V161 := TRUE;
 END_IF;
 IF REQ_LIGA_PEN THEN
@@ -1332,7 +1332,7 @@ ELSE
     cmdLigarBomba := uEtapa >= 2;
     bValvAuto := (uEtapa = 1) OR (uEtapa >= 2 AND uSegValv < UINT_TO_UDINT(stpTempoValvula));
 END_IF;
-stpVelBombaOut := stpVelBomba;
+stpVelBombaOut := stpVelBomba / 0.6;   (* IHM/SCADA em Hz -> % do Motor_Generico *)
 IF emergencia THEN
     cmdValvula := FALSE;
 ELSIF bombaAutomatico THEN
@@ -1376,7 +1376,6 @@ IF okMotores THEN wD := wD OR 16#0004; END_IF;
 IF okComunicacao THEN wD := wD OR 16#0008; END_IF;
 IF habilitada THEN wD := wD OR 16#0010; END_IF;
 CNF_DISP := initPass OR (wD <> oldD);
-oldD := wD;
 wP := 0;
 IF stsDisponivel THEN wP := wP OR 16#00000001; END_IF;
 IF stsAlgumaHabilitada THEN wP := wP OR 16#00000002; END_IF;
@@ -1399,6 +1398,7 @@ IF stsSelecaoBomba THEN wP := wP OR 16#00020000; END_IF;
 IF stsValvula THEN wP := wP OR 16#00040000; END_IF;
 CNF := initPass OR ((wP AND 16#000000FF) <> (oldP AND 16#000000FF));
 bMudou := (wP <> oldP) OR (wD <> oldD);
+oldD := wD;                                (* depois do bMudou: mudanca so em wD tambem atualiza a IHM *)
 IF stsNivelPeneira <> o_stsNivelPeneira THEN bMudou := TRUE; o_stsNivelPeneira := stsNivelPeneira; END_IF;
 IF stsEtapaGordura <> o_stsEtapaGordura THEN bMudou := TRUE; o_stsEtapaGordura := stsEtapaGordura; END_IF;
 IF stsTempoRestante <> o_stsTempoRestante THEN bMudou := TRUE; o_stsTempoRestante := stsTempoRestante; END_IF;

@@ -1,0 +1,1025 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="48f7af8f-3f6d-fa13-779f-f44080d94d76" Name="basicAlimentacaoPrensas" Comment="Alimentacao das prensas C-Press: rotas do barrilete, bombas helicoidais, PID de vazao, preparador, painel" Namespace="Hidryco.HidrycoLib">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Hidryco" Version="1.1" Author="Hidryco" Date="21/10/2026" Remarks="1.1: velocidade de partida (stpVelInicial) e PIDs das prensas em Hz (60 Hz = 100 %); bombas continuam em %. 1.0: maquina de estados por prensa (valvulas, bomba, PID, suspensao por floculador/tanque), alocacao de bombas por no do barrilete, BO-02 reserva comum com rodizio na partida, horimetro persistente, ciclo das prensas e do preparador, SV manual, emergencia NF e disjuntores" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="13FEA6D5249A7B77" Name="INIT" Comment="Inicializacao" />
+      <Event ID="38F5F6E182F651D4" Name="REQ_AD" Comment="Prensas 900-AD-01/02/03">
+        <With Var="ad1Disp" />
+        <With Var="ad1Func" />
+        <With Var="ad1Nivel" />
+        <With Var="ad2Disp" />
+        <With Var="ad2Func" />
+        <With Var="ad2Nivel" />
+        <With Var="ad3Disp" />
+        <With Var="ad3Func" />
+        <With Var="ad3Nivel" />
+      </Event>
+      <Event ID="CA246CEBE60B1023" Name="REQ_BO" Comment="Bombas 900-BO-01/02/03">
+        <With Var="bo1Disp" />
+        <With Var="bo1Lig" />
+        <With Var="bo1Falha" />
+        <With Var="bo2Disp" />
+        <With Var="bo2Lig" />
+        <With Var="bo2Falha" />
+        <With Var="bo3Disp" />
+        <With Var="bo3Lig" />
+        <With Var="bo3Falha" />
+      </Event>
+      <Event ID="6647071B86B2ADCE" Name="REQ_VA" Comment="Valvulas do barrilete 900-VA-06..13">
+        <With Var="va06Aberta" />
+        <With Var="va07Aberta" />
+        <With Var="va08Aberta" />
+        <With Var="va09Aberta" />
+        <With Var="va10Aberta" />
+        <With Var="va11Aberta" />
+        <With Var="va12Aberta" />
+        <With Var="va13Aberta" />
+        <With Var="va06Fechada" />
+        <With Var="va07Fechada" />
+        <With Var="va08Fechada" />
+        <With Var="va09Fechada" />
+        <With Var="va10Fechada" />
+        <With Var="va11Fechada" />
+        <With Var="va12Fechada" />
+        <With Var="va13Fechada" />
+        <With Var="va06Disp" />
+        <With Var="va07Disp" />
+        <With Var="va08Disp" />
+        <With Var="va09Disp" />
+        <With Var="va10Disp" />
+        <With Var="va11Disp" />
+        <With Var="va12Disp" />
+        <With Var="va13Disp" />
+      </Event>
+      <Event ID="48ABB9D9BB2D6CEE" Name="REQ_FT" Comment="Vazao de lodo de cada prensa (FT-01, FT-02, FT-03)">
+        <With Var="ft1Valor" />
+        <With Var="ft1Falha" />
+        <With Var="ft2Valor" />
+        <With Var="ft2Falha" />
+        <With Var="ft3Valor" />
+        <With Var="ft3Falha" />
+      </Event>
+      <Event ID="37F5128277E33C7D" Name="REQ_PID" Comment="Saida dos PID de vazao">
+        <With Var="pid1Out" />
+        <With Var="pid2Out" />
+        <With Var="pid3Out" />
+      </Event>
+      <Event ID="2E29057D22A77FC3" Name="REQ_PP" Comment="Preparador de polimero 900-PP-01">
+        <With Var="ppDisp" />
+        <With Var="ppDosando" />
+        <With Var="ppFalha" />
+      </Event>
+      <Event ID="CBCF1D50DEE68A86" Name="REQ_TQ" Comment="Tanques de estocagem: nivel baixo">
+        <With Var="tqNivelBaixo" />
+      </Event>
+      <Event ID="19B51840153EBC5A" Name="REQ_PAINEL" Comment="PCM LODO: emergencia e monitoramentos">
+        <With Var="pnEmergenciaNF" />
+        <With Var="pnMonitTrafo" />
+        <With Var="pnMonitFonte" />
+      </Event>
+      <Event ID="939B3751BD07756D" Name="REQ_REM1" Comment="Remota 1 (.135): COM_OK do IO_DI32">
+        <With Var="pnRemota1Ok" />
+      </Event>
+      <Event ID="5748134B24BEF763" Name="REQ_REM2" Comment="Remota 2 (.136): connStatusInt do escravo Modbus">
+        <With Var="pnRemota2Conexao" />
+      </Event>
+      <Event ID="856DAE0A3F3D97F7" Name="REQ_DJ" Comment="Disjuntores do PCM LODO">
+        <With Var="djPCE" />
+        <With Var="djPCM" />
+        <With Var="djSO01" />
+        <With Var="djSO02" />
+        <With Var="djAD01" />
+        <With Var="djAD02" />
+        <With Var="djAD03" />
+        <With Var="djPP01" />
+        <With Var="djMN01" />
+        <With Var="djMN02" />
+        <With Var="djMN03" />
+        <With Var="djMN04" />
+        <With Var="djMN05" />
+        <With Var="djBO01" />
+        <With Var="djBO02" />
+        <With Var="djBO03" />
+        <With Var="djBR01" />
+        <With Var="djBR02" />
+        <With Var="djVA01" />
+        <With Var="djVA02" />
+        <With Var="djVE01" />
+        <With Var="djVE02" />
+        <With Var="djVA06" />
+        <With Var="djVA07" />
+        <With Var="djVA08" />
+        <With Var="djVA09" />
+        <With Var="djVA10" />
+        <With Var="djVA11" />
+        <With Var="djVA12" />
+        <With Var="djVA13" />
+        <With Var="djVB03" />
+        <With Var="djVB04" />
+      </Event>
+      <Event ID="912D39602F9C91C5" Name="REQ_PARA" Comment="IHM: parametros">
+        <With Var="stpVazao1" />
+        <With Var="stpVazao2" />
+        <With Var="stpVazao3" />
+        <With Var="stpVelInicial" />
+        <With Var="stpNivelSuspende" />
+        <With Var="stpNivelRetoma" />
+        <With Var="stpTempoValvulas" />
+        <With Var="stpDifHorasBO" />
+        <With Var="stpTempoSemPartir" />
+      </Event>
+      <Event ID="477B3CB066C0064B" Name="REQ_CMD" Comment="IHM: desaguamento ligado por prensa">
+        <With Var="hmiAD1" />
+        <With Var="hmiAD2" />
+        <With Var="hmiAD3" />
+      </Event>
+      <Event ID="B672F1361E424ACE" Name="REQ_SV" Comment="IHM: solenoides (so manual)">
+        <With Var="hmiSV01" />
+        <With Var="hmiSV02" />
+        <With Var="hmiSV03" />
+        <With Var="hmiSV04" />
+        <With Var="hmiSV06" />
+        <With Var="hmiSV08" />
+      </Event>
+      <Event ID="08CA7CB6A8F97690" Name="REQ_PERS" Comment="Minutos de operacao das bombas lidos da persistencia">
+        <With Var="perMin1" />
+        <With Var="perMin2" />
+        <With Var="perMin3" />
+      </Event>
+      <Event ID="FBC24ECA7AD15CA0" Name="REQ_RESET" Comment="IHM: reset">
+        <With Var="hmiReset" />
+      </Event>
+      <Event ID="E0DC297DC07DC5FB" Name="REQ_RESET_PROC" Comment="Processo: reset">
+        <With Var="cmdResetFalhas" />
+      </Event>
+      <Event ID="97FA92419A632264" Name="TICK" Comment="Base de tempo de 1 s" />
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="8D3D86F80598A7BB" Name="INITO" Comment="Inicializacao concluida" />
+      <Event ID="7490FED3332AEC1E" Name="CNF_BO" Comment="Comando das bombas">
+        <With Var="cmdBO1" />
+        <With Var="velBO1" />
+        <With Var="cmdBO2" />
+        <With Var="velBO2" />
+        <With Var="cmdBO3" />
+        <With Var="velBO3" />
+        <With Var="emergOut" />
+      </Event>
+      <Event ID="B985DE359C566AD4" Name="CNF_VA" Comment="Comando das valvulas do barrilete">
+        <With Var="abr06" />
+        <With Var="abr07" />
+        <With Var="abr08" />
+        <With Var="abr09" />
+        <With Var="abr10" />
+        <With Var="abr11" />
+        <With Var="abr12" />
+        <With Var="abr13" />
+        <With Var="fec06" />
+        <With Var="fec07" />
+        <With Var="fec08" />
+        <With Var="fec09" />
+        <With Var="fec10" />
+        <With Var="fec11" />
+        <With Var="fec12" />
+        <With Var="fec13" />
+      </Event>
+      <Event ID="9C532436C7A3B461" Name="CNF_AD" Comment="Ciclo remoto das prensas">
+        <With Var="ciclo1" />
+        <With Var="ciclo2" />
+        <With Var="ciclo3" />
+      </Event>
+      <Event ID="FAFF2EF1C05DA77F" Name="CNF_PP" Comment="Ciclo remoto do preparador">
+        <With Var="cicloPP" />
+      </Event>
+      <Event ID="CF7635F428763261" Name="CNF_PID" Comment="Modo e tracking dos PID">
+        <With Var="pid1Modo" />
+        <With Var="pid1Preset" />
+        <With Var="pid2Modo" />
+        <With Var="pid2Preset" />
+        <With Var="pid3Modo" />
+        <With Var="pid3Preset" />
+      </Event>
+      <Event ID="F922E54EB08BF260" Name="CNF_SV" Comment="Solenoides">
+        <With Var="sv01" />
+        <With Var="sv02" />
+        <With Var="sv03" />
+        <With Var="sv04" />
+        <With Var="sv06" />
+        <With Var="sv08" />
+      </Event>
+      <Event ID="557985467D809489" Name="CNF_PERS" Comment="Grava os minutos de operacao das bombas">
+        <With Var="perMin1Out" />
+        <With Var="perMin2Out" />
+        <With Var="perMin3Out" />
+      </Event>
+      <Event ID="8A05961272844DF6" Name="CNF" Comment="Status para o processo">
+        <With Var="stsEmergencia" />
+        <With Var="stsAlarme" />
+      </Event>
+      <Event ID="4D417ED96141B64B" Name="CNF_HMI" Comment="Status para a IHM e alarmes">
+        <With Var="stsEst1" />
+        <With Var="stsMotivo1" />
+        <With Var="stsBomba1" />
+        <With Var="stsAlimentando1" />
+        <With Var="stsFalhaRota1" />
+        <With Var="stsSemPartir1" />
+        <With Var="stsEst2" />
+        <With Var="stsMotivo2" />
+        <With Var="stsBomba2" />
+        <With Var="stsAlimentando2" />
+        <With Var="stsFalhaRota2" />
+        <With Var="stsSemPartir2" />
+        <With Var="stsEst3" />
+        <With Var="stsMotivo3" />
+        <With Var="stsBomba3" />
+        <With Var="stsAlimentando3" />
+        <With Var="stsFalhaRota3" />
+        <With Var="stsSemPartir3" />
+        <With Var="stsHorasBO1" />
+        <With Var="stsUsoBO1" />
+        <With Var="stsHorasBO2" />
+        <With Var="stsUsoBO2" />
+        <With Var="stsHorasBO3" />
+        <With Var="stsUsoBO3" />
+        <With Var="stsValvulasCmd" />
+        <With Var="stsValvulasBloq" />
+        <With Var="stsEmergencia" />
+        <With Var="stsRemota1Ok" />
+        <With Var="stsRemota2Ok" />
+        <With Var="stsFalhaRemota" />
+        <With Var="stsMonitTrafo" />
+        <With Var="stsMonitFonte" />
+        <With Var="stsDj1" />
+        <With Var="stsDj2" />
+        <With Var="stsAvisoDisjuntor" />
+        <With Var="stsSemBomba" />
+        <With Var="stsFalhaRota" />
+        <With Var="stsSemPartir" />
+        <With Var="stsFtFalha" />
+        <With Var="stsCicloPP" />
+        <With Var="stsSV" />
+        <With Var="stsAlarme" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="65110DE39233F1DF" Name="ad1Disp" Type="BOOL" Comment="disponivel (comunicacao, automatico, sem falha) - AD-01" />
+      <VarDeclaration ID="F2B23EF191CE5815" Name="ad1Func" Type="BOOL" Comment="prensa M1 funcionando - AD-01" />
+      <VarDeclaration ID="EA7AE03BB2089BBC" Name="ad1Nivel" Type="REAL" Comment="nivel do floculador LT1 (%) - AD-01" />
+      <VarDeclaration ID="77FAB1BD40DD3B80" Name="ad2Disp" Type="BOOL" Comment="disponivel (comunicacao, automatico, sem falha) - AD-02" />
+      <VarDeclaration ID="841BFE40D529C6D2" Name="ad2Func" Type="BOOL" Comment="prensa M1 funcionando - AD-02" />
+      <VarDeclaration ID="04A6E0D53C4D9443" Name="ad2Nivel" Type="REAL" Comment="nivel do floculador LT1 (%) - AD-02" />
+      <VarDeclaration ID="274510EEDF09C6C1" Name="ad3Disp" Type="BOOL" Comment="disponivel (comunicacao, automatico, sem falha) - AD-03" />
+      <VarDeclaration ID="6BCEE4FB5283E200" Name="ad3Func" Type="BOOL" Comment="prensa M1 funcionando - AD-03" />
+      <VarDeclaration ID="4EEBC2ED0DBBF0E1" Name="ad3Nivel" Type="REAL" Comment="nivel do floculador LT1 (%) - AD-03" />
+      <VarDeclaration ID="948786DC7FA5A6CE" Name="bo1Disp" Type="BOOL" Comment="disponivel para o automatico - BO-01" />
+      <VarDeclaration ID="7764C36D58E005D1" Name="bo1Lig" Type="BOOL" Comment="ligada - BO-01" />
+      <VarDeclaration ID="83CDCBFE9DEDD3FA" Name="bo1Falha" Type="BOOL" Comment="em falha - BO-01" />
+      <VarDeclaration ID="B7E8FF7BEBB89AF3" Name="bo2Disp" Type="BOOL" Comment="disponivel para o automatico - BO-02" />
+      <VarDeclaration ID="41C84D6CB5F8D848" Name="bo2Lig" Type="BOOL" Comment="ligada - BO-02" />
+      <VarDeclaration ID="1A1D9754A8468CF5" Name="bo2Falha" Type="BOOL" Comment="em falha - BO-02" />
+      <VarDeclaration ID="5A6232E8B7292CDD" Name="bo3Disp" Type="BOOL" Comment="disponivel para o automatico - BO-03" />
+      <VarDeclaration ID="32464E571E89C87D" Name="bo3Lig" Type="BOOL" Comment="ligada - BO-03" />
+      <VarDeclaration ID="BE30680B6785F53B" Name="bo3Falha" Type="BOOL" Comment="em falha - BO-03" />
+      <VarDeclaration ID="EAEBC6AA04FEFCE7" Name="va06Aberta" Type="BOOL" Comment="900-VA-06 aberta" />
+      <VarDeclaration ID="260161B67AA60DC8" Name="va07Aberta" Type="BOOL" Comment="900-VA-07 aberta" />
+      <VarDeclaration ID="5D2228E3EC8A6E1D" Name="va08Aberta" Type="BOOL" Comment="900-VA-08 aberta" />
+      <VarDeclaration ID="AFE22666313FA87F" Name="va09Aberta" Type="BOOL" Comment="900-VA-09 aberta" />
+      <VarDeclaration ID="37E7DA5192455D76" Name="va10Aberta" Type="BOOL" Comment="900-VA-10 aberta" />
+      <VarDeclaration ID="BDD83839263E31A1" Name="va11Aberta" Type="BOOL" Comment="900-VA-11 aberta" />
+      <VarDeclaration ID="0EB99790809C97DD" Name="va12Aberta" Type="BOOL" Comment="900-VA-12 aberta" />
+      <VarDeclaration ID="1265105CC55986A5" Name="va13Aberta" Type="BOOL" Comment="900-VA-13 aberta" />
+      <VarDeclaration ID="0160D0A62EA49008" Name="va06Fechada" Type="BOOL" Comment="900-VA-06 fechada" />
+      <VarDeclaration ID="78E29B18EA62877A" Name="va07Fechada" Type="BOOL" Comment="900-VA-07 fechada" />
+      <VarDeclaration ID="E7A0AAF9B673D116" Name="va08Fechada" Type="BOOL" Comment="900-VA-08 fechada" />
+      <VarDeclaration ID="656542BCD835F282" Name="va09Fechada" Type="BOOL" Comment="900-VA-09 fechada" />
+      <VarDeclaration ID="706657C3D65F7F40" Name="va10Fechada" Type="BOOL" Comment="900-VA-10 fechada" />
+      <VarDeclaration ID="0BF81BEEF6EED279" Name="va11Fechada" Type="BOOL" Comment="900-VA-11 fechada" />
+      <VarDeclaration ID="85DCC3F2A49D036D" Name="va12Fechada" Type="BOOL" Comment="900-VA-12 fechada" />
+      <VarDeclaration ID="034CCB38CD43E88F" Name="va13Fechada" Type="BOOL" Comment="900-VA-13 fechada" />
+      <VarDeclaration ID="4DCA85ED8ED727AC" Name="va06Disp" Type="BOOL" Comment="900-VA-06 disponivel para o automatico" />
+      <VarDeclaration ID="4F349E1228AFA18C" Name="va07Disp" Type="BOOL" Comment="900-VA-07 disponivel para o automatico" />
+      <VarDeclaration ID="F47AE21FE590F0B3" Name="va08Disp" Type="BOOL" Comment="900-VA-08 disponivel para o automatico" />
+      <VarDeclaration ID="C008B33DFC39701B" Name="va09Disp" Type="BOOL" Comment="900-VA-09 disponivel para o automatico" />
+      <VarDeclaration ID="CC429EBE88373900" Name="va10Disp" Type="BOOL" Comment="900-VA-10 disponivel para o automatico" />
+      <VarDeclaration ID="58D7F1A138120A11" Name="va11Disp" Type="BOOL" Comment="900-VA-11 disponivel para o automatico" />
+      <VarDeclaration ID="E64E50A12946C6F7" Name="va12Disp" Type="BOOL" Comment="900-VA-12 disponivel para o automatico" />
+      <VarDeclaration ID="4BD9CB54C9563BCC" Name="va13Disp" Type="BOOL" Comment="900-VA-13 disponivel para o automatico" />
+      <VarDeclaration ID="E11687C0F6E4D8D0" Name="ft1Valor" Type="REAL" Comment="Vazao (m3/h) - FT da AD-01" />
+      <VarDeclaration ID="34CF43065C440B3F" Name="ft1Falha" Type="BOOL" Comment="Em falha - FT da AD-01" />
+      <VarDeclaration ID="0B775DA830BA5C8F" Name="ft2Valor" Type="REAL" Comment="Vazao (m3/h) - FT da AD-02" />
+      <VarDeclaration ID="BF4060DB062B029B" Name="ft2Falha" Type="BOOL" Comment="Em falha - FT da AD-02" />
+      <VarDeclaration ID="1C872E508B6F9CCA" Name="ft3Valor" Type="REAL" Comment="Vazao (m3/h) - FT da AD-03" />
+      <VarDeclaration ID="6DEAF5F9074BEFF6" Name="ft3Falha" Type="BOOL" Comment="Em falha - FT da AD-03" />
+      <VarDeclaration ID="EF0418ED47F514A0" Name="pid1Out" Type="REAL" Comment="Saida do PID da AD-01 (% de velocidade)" />
+      <VarDeclaration ID="CB7E7E5A60558086" Name="pid2Out" Type="REAL" Comment="Saida do PID da AD-02 (% de velocidade)" />
+      <VarDeclaration ID="0398A48B9177A287" Name="pid3Out" Type="REAL" Comment="Saida do PID da AD-03 (% de velocidade)" />
+      <VarDeclaration ID="F50C4FB10C56E01C" Name="ppDisp" Type="BOOL" Comment="Preparador disponivel" />
+      <VarDeclaration ID="1B803ED11E2532F9" Name="ppDosando" Type="BOOL" Comment="Preparador dosando" />
+      <VarDeclaration ID="CC53CD434F3E136E" Name="ppFalha" Type="BOOL" Comment="Preparador em falha" />
+      <VarDeclaration ID="70D9A60B95DEEE36" Name="tqNivelBaixo" Type="BOOL" Comment="Tanques de estocagem em nivel baixo" />
+      <VarDeclaration ID="9252FB36847BBAB8" Name="pnRemota2Conexao" Type="INT" Comment="Remota 2 (.136): connStatusInt (1 = online)" />
+      <VarDeclaration ID="DE87224B5A8EF166" Name="pnEmergenciaNF" Type="BOOL" Comment="Emergencia do PCM LODO (contato NF: FALSE = emergencia)" />
+      <VarDeclaration ID="554D2A3603C18677" Name="pnMonitTrafo" Type="BOOL" Comment="Monitoramento do transformador" />
+      <VarDeclaration ID="DFA71CBA2E1C52C4" Name="pnMonitFonte" Type="BOOL" Comment="Monitoramento da fonte" />
+      <VarDeclaration ID="82720E0D992C7F0F" Name="pnRemota1Ok" Type="BOOL" Comment="Remota 1 (.135) comunicando (COM_OK do IO_DI32)" />
+      <VarDeclaration ID="4B9AB4FB6046D8EE" Name="djPCE" Type="BOOL" Comment="Disjuntor ligado" />
+      <VarDeclaration ID="F352CCB996881721" Name="djPCM" Type="BOOL" Comment="Disjuntor ligado" />
+      <VarDeclaration ID="842E883449FD3557" Name="djSO01" Type="BOOL" Comment="Disjuntor ligado" />
+      <VarDeclaration ID="539AE49B193C0D44" Name="djSO02" Type="BOOL" Comment="Disjuntor ligado" />
+      <VarDeclaration ID="299A09E7B67B47A1" Name="djAD01" Type="BOOL" Comment="Disjuntor ligado" />
+      <VarDeclaration ID="F1AD4D08B9B3E19B" Name="djAD02" Type="BOOL" Comment="Disjuntor ligado" />
+      <VarDeclaration ID="F9AFDD74B68569E8" Name="djAD03" Type="BOOL" Comment="Disjuntor ligado" />
+      <VarDeclaration ID="A015D8C5AD7E44D6" Name="djPP01" Type="BOOL" Comment="Disjuntor ligado" />
+      <VarDeclaration ID="A2936012A1CB58B1" Name="djMN01" Type="BOOL" Comment="Disjuntor ligado" />
+      <VarDeclaration ID="4FDDCD566D00E429" Name="djMN02" Type="BOOL" Comment="Disjuntor ligado" />
+      <VarDeclaration ID="9F13912CAF6722CA" Name="djMN03" Type="BOOL" Comment="Disjuntor ligado" />
+      <VarDeclaration ID="C0CD4D3BED37162D" Name="djMN04" Type="BOOL" Comment="Disjuntor ligado" />
+      <VarDeclaration ID="F054F35A815A5F3B" Name="djMN05" Type="BOOL" Comment="Disjuntor ligado" />
+      <VarDeclaration ID="D38C2EC92076024C" Name="djBO01" Type="BOOL" Comment="Disjuntor ligado" />
+      <VarDeclaration ID="F3ED74F582F3070A" Name="djBO02" Type="BOOL" Comment="Disjuntor ligado" />
+      <VarDeclaration ID="E8080276013928B8" Name="djBO03" Type="BOOL" Comment="Disjuntor ligado" />
+      <VarDeclaration ID="1C7E6FC9EE536D0D" Name="djBR01" Type="BOOL" Comment="Disjuntor ligado" />
+      <VarDeclaration ID="B2F0010C50C459DF" Name="djBR02" Type="BOOL" Comment="Disjuntor ligado" />
+      <VarDeclaration ID="77D0D5AE9FA08670" Name="djVA01" Type="BOOL" Comment="Disjuntor ligado" />
+      <VarDeclaration ID="8E3376557963A36A" Name="djVA02" Type="BOOL" Comment="Disjuntor ligado" />
+      <VarDeclaration ID="341C7D073810ED81" Name="djVE01" Type="BOOL" Comment="Disjuntor ligado" />
+      <VarDeclaration ID="9B9B7975525B3D51" Name="djVE02" Type="BOOL" Comment="Disjuntor ligado" />
+      <VarDeclaration ID="635621EAC24C7E9F" Name="djVA06" Type="BOOL" Comment="Disjuntor ligado" />
+      <VarDeclaration ID="CFF227E520FF8AAB" Name="djVA07" Type="BOOL" Comment="Disjuntor ligado" />
+      <VarDeclaration ID="B71059A1C4B0E360" Name="djVA08" Type="BOOL" Comment="Disjuntor ligado" />
+      <VarDeclaration ID="7890B49E5275799F" Name="djVA09" Type="BOOL" Comment="Disjuntor ligado" />
+      <VarDeclaration ID="651AFFD01F8F8841" Name="djVA10" Type="BOOL" Comment="Disjuntor ligado" />
+      <VarDeclaration ID="AA36A93C04F0663F" Name="djVA11" Type="BOOL" Comment="Disjuntor ligado" />
+      <VarDeclaration ID="5365886519406CEA" Name="djVA12" Type="BOOL" Comment="Disjuntor ligado" />
+      <VarDeclaration ID="EBA41320B6D71E7A" Name="djVA13" Type="BOOL" Comment="Disjuntor ligado" />
+      <VarDeclaration ID="1FB52CF6E301DAFF" Name="djVB03" Type="BOOL" Comment="Disjuntor ligado" />
+      <VarDeclaration ID="0C6B46DC80495D9D" Name="djVB04" Type="BOOL" Comment="Disjuntor ligado" />
+      <VarDeclaration ID="831130D22BEBE078" Name="stpVazao1" Type="REAL" Comment="Vazao de lodo da AD-01 (m3/h); 0 = nao alimenta" />
+      <VarDeclaration ID="CF86D1D755F0EA89" Name="stpVazao2" Type="REAL" Comment="Vazao de lodo da AD-02 (m3/h)" />
+      <VarDeclaration ID="35630ED20F729613" Name="stpVazao3" Type="REAL" Comment="Vazao de lodo da AD-03 (m3/h)" />
+      <VarDeclaration ID="3CE89723CC83D95B" Name="stpVelInicial" Type="REAL" Comment="Velocidade de partida da bomba (%)" />
+      <VarDeclaration ID="C297DFFBB305E08D" Name="stpNivelSuspende" Type="REAL" Comment="Floculador: suspende a alimentacao acima deste nivel (%); 0 = desligado" />
+      <VarDeclaration ID="6540F6059C1CADFB" Name="stpNivelRetoma" Type="REAL" Comment="Floculador: retoma abaixo deste nivel (%)" />
+      <VarDeclaration ID="0F2A42F20BB3A299" Name="stpTempoValvulas" Type="INT" Comment="Tempo maximo para abrir as valvulas da rota (s); 0 = sem limite" />
+      <VarDeclaration ID="6EADB4D7BECA8D09" Name="stpDifHorasBO" Type="INT" Comment="Rodizio: BO-02 assume quando a titular tiver estas horas a mais; 0 = sem rodizio" />
+      <VarDeclaration ID="01D9A373E0929133" Name="stpTempoSemPartir" Type="INT" Comment="Aviso se a prensa nao partir com a alimentacao ligada (min); 0 = desligado" />
+      <VarDeclaration ID="AA3E9DEF7B14FC07" Name="hmiAD1" Type="BOOL" Comment="IHM: desaguamento ligado na AD-01" />
+      <VarDeclaration ID="90A8AB90CFE56298" Name="hmiAD2" Type="BOOL" Comment="IHM: desaguamento ligado na AD-02" />
+      <VarDeclaration ID="052CCF025B5CF1E6" Name="hmiAD3" Type="BOOL" Comment="IHM: desaguamento ligado na AD-03" />
+      <VarDeclaration ID="AEE5CBA91FD7B8C0" Name="hmiSV01" Type="BOOL" Comment="IHM: abre a 900-SV-01" />
+      <VarDeclaration ID="92496204688A25B6" Name="hmiSV02" Type="BOOL" Comment="IHM: abre a 900-SV-02" />
+      <VarDeclaration ID="9B16B5CD8598F0FE" Name="hmiSV03" Type="BOOL" Comment="IHM: abre a 900-SV-03" />
+      <VarDeclaration ID="E768577E71FC29DC" Name="hmiSV04" Type="BOOL" Comment="IHM: abre a 900-SV-04" />
+      <VarDeclaration ID="287E3CB21FEE06B9" Name="hmiSV06" Type="BOOL" Comment="IHM: abre a 900-SV-06" />
+      <VarDeclaration ID="9F60FEAA00C8DAD0" Name="hmiSV08" Type="BOOL" Comment="IHM: abre a 900-SV-08" />
+      <VarDeclaration ID="B911BDD750DFDB18" Name="perMin1" Type="UDINT" Comment="Minutos de operacao persistidos da BO-01" />
+      <VarDeclaration ID="0B46A3EB87E62664" Name="perMin2" Type="UDINT" Comment="Minutos de operacao persistidos da BO-02" />
+      <VarDeclaration ID="F9B917CCD98459B1" Name="perMin3" Type="UDINT" Comment="Minutos de operacao persistidos da BO-03" />
+      <VarDeclaration ID="4FC52CF361E2E60C" Name="hmiReset" Type="BOOL" />
+      <VarDeclaration ID="3DBC80F4FE0835E7" Name="cmdResetFalhas" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="3D555F8584F77E3E" Name="cmdBO1" Type="BOOL" Comment="Liga BO-01 (automatico)" />
+      <VarDeclaration ID="539E2B4F1B6EB82B" Name="velBO1" Type="REAL" Comment="Velocidade da BO-01 (%)" />
+      <VarDeclaration ID="BF55FDEF007D89FD" Name="cmdBO2" Type="BOOL" Comment="Liga BO-02 (automatico)" />
+      <VarDeclaration ID="F2E13B217536BA96" Name="velBO2" Type="REAL" Comment="Velocidade da BO-02 (%)" />
+      <VarDeclaration ID="15B6EA39D5978533" Name="cmdBO3" Type="BOOL" Comment="Liga BO-03 (automatico)" />
+      <VarDeclaration ID="3A30521D5984EF99" Name="velBO3" Type="REAL" Comment="Velocidade da BO-03 (%)" />
+      <VarDeclaration ID="37F7D293861FDD8C" Name="emergOut" Type="BOOL" Comment="Emergencia repassada aos motores" />
+      <VarDeclaration ID="09388B5323AA3765" Name="abr06" Type="BOOL" Comment="Abre VA-900-06" />
+      <VarDeclaration ID="AD2094C9498D759A" Name="abr07" Type="BOOL" Comment="Abre VA-900-07" />
+      <VarDeclaration ID="0A83E200DBF274DA" Name="abr08" Type="BOOL" Comment="Abre VA-900-08" />
+      <VarDeclaration ID="64C7E137F02EE9D7" Name="abr09" Type="BOOL" Comment="Abre VA-900-09" />
+      <VarDeclaration ID="1196AAA785140AD5" Name="abr10" Type="BOOL" Comment="Abre VA-900-10" />
+      <VarDeclaration ID="11B4927E17D401ED" Name="abr11" Type="BOOL" Comment="Abre VA-900-11" />
+      <VarDeclaration ID="EDCFAA44360A7A3E" Name="abr12" Type="BOOL" Comment="Abre VA-900-12" />
+      <VarDeclaration ID="AA673A290EB62EF4" Name="abr13" Type="BOOL" Comment="Abre VA-900-13" />
+      <VarDeclaration ID="A7CB426F9568B620" Name="fec06" Type="BOOL" Comment="Fecha VA-900-06" />
+      <VarDeclaration ID="85D68BAB1621B6ED" Name="fec07" Type="BOOL" Comment="Fecha VA-900-07" />
+      <VarDeclaration ID="D72F280458923969" Name="fec08" Type="BOOL" Comment="Fecha VA-900-08" />
+      <VarDeclaration ID="77D4E686879E7239" Name="fec09" Type="BOOL" Comment="Fecha VA-900-09" />
+      <VarDeclaration ID="85FEEEECD707E5BA" Name="fec10" Type="BOOL" Comment="Fecha VA-900-10" />
+      <VarDeclaration ID="60F03D282CD92FBF" Name="fec11" Type="BOOL" Comment="Fecha VA-900-11" />
+      <VarDeclaration ID="2CA326C6E7119016" Name="fec12" Type="BOOL" Comment="Fecha VA-900-12" />
+      <VarDeclaration ID="DB9D8913794AE690" Name="fec13" Type="BOOL" Comment="Fecha VA-900-13" />
+      <VarDeclaration ID="61DAE1163D383245" Name="ciclo1" Type="BOOL" Comment="Ciclo remoto da AD-01" />
+      <VarDeclaration ID="7BECFC93E64F7C4C" Name="ciclo2" Type="BOOL" Comment="Ciclo remoto da AD-02" />
+      <VarDeclaration ID="0886EC6A983E53EF" Name="ciclo3" Type="BOOL" Comment="Ciclo remoto da AD-03" />
+      <VarDeclaration ID="CE3A2F0FFB2A4E6D" Name="cicloPP" Type="BOOL" Comment="Ciclo remoto do preparador" />
+      <VarDeclaration ID="AC7C96EC320F9B56" Name="pid1Modo" Type="BOOL" Comment="PID da AD-01 em automatico" />
+      <VarDeclaration ID="66CC0FC8380DE7A9" Name="pid1Preset" Type="REAL" Comment="Tracking do PID da AD-01 (%)" />
+      <VarDeclaration ID="8D0D9C2E90DCA136" Name="pid2Modo" Type="BOOL" Comment="PID da AD-02 em automatico" />
+      <VarDeclaration ID="82217E0576C4A321" Name="pid2Preset" Type="REAL" Comment="Tracking do PID da AD-02 (%)" />
+      <VarDeclaration ID="580E8B452F14C837" Name="pid3Modo" Type="BOOL" Comment="PID da AD-03 em automatico" />
+      <VarDeclaration ID="F7E26881AF4B195B" Name="pid3Preset" Type="REAL" Comment="Tracking do PID da AD-03 (%)" />
+      <VarDeclaration ID="60CC14D8DBDCF308" Name="sv01" Type="BOOL" Comment="Abre a 900-SV-01" />
+      <VarDeclaration ID="253C46304686EE40" Name="sv02" Type="BOOL" Comment="Abre a 900-SV-02" />
+      <VarDeclaration ID="9AE50630E8A856E9" Name="sv03" Type="BOOL" Comment="Abre a 900-SV-03" />
+      <VarDeclaration ID="28A4416677CA3C6A" Name="sv04" Type="BOOL" Comment="Abre a 900-SV-04" />
+      <VarDeclaration ID="21FE5B252B52D38C" Name="sv06" Type="BOOL" Comment="Abre a 900-SV-06" />
+      <VarDeclaration ID="2A1E389F770A9C7F" Name="sv08" Type="BOOL" Comment="Abre a 900-SV-08" />
+      <VarDeclaration ID="1115D73707983236" Name="perMin1Out" Type="UDINT" Comment="Minutos de operacao da BO-01 a gravar" />
+      <VarDeclaration ID="B5376FDD1F7B80EC" Name="perMin2Out" Type="UDINT" Comment="Minutos de operacao da BO-02 a gravar" />
+      <VarDeclaration ID="4AE15F69ED84F18E" Name="perMin3Out" Type="UDINT" Comment="Minutos de operacao da BO-03 a gravar" />
+      <VarDeclaration ID="D719943085A661DC" Name="stsEst1" Type="INT" Comment="AD-01: 0 parado, 1 abrindo valvulas, 2 partindo bomba, 3 alimentando, 4 suspenso, 5 parando" />
+      <VarDeclaration ID="7ABDDDB4AC047B40" Name="stsMotivo1" Type="INT" Comment="AD-01: 0 ok, 1 prensa indisponivel, 2 setpoint zero, 3 sem bomba ou rota, 4 houve falha de rota, 5 emergencia, 6 floculador cheio, 7 tanque baixo, 8 FT em falha, 9 prensa nao partiu" />
+      <VarDeclaration ID="EEF5EE0476E38158" Name="stsBomba1" Type="INT" Comment="AD-01: bomba em uso (0 nenhuma, 1 a 3 = BO-01 a BO-03)" />
+      <VarDeclaration ID="1C58EC4E4D6007CF" Name="stsAlimentando1" Type="BOOL" Comment="AD-01 sendo alimentada" />
+      <VarDeclaration ID="3B3BA86239824893" Name="stsFalhaRota1" Type="BOOL" Comment="AD-01: valvula da rota nao abriu/fechou ou saiu de posicao com a bomba em uso (memorizado; outra rota e tentada)" />
+      <VarDeclaration ID="3668184FE0033268" Name="stsSemPartir1" Type="BOOL" Comment="AD-01 alimentada e a prensa nao partiu no tempo" />
+      <VarDeclaration ID="8CDFD98CD3EFB259" Name="stsEst2" Type="INT" Comment="AD-02: 0 parado, 1 abrindo valvulas, 2 partindo bomba, 3 alimentando, 4 suspenso, 5 parando" />
+      <VarDeclaration ID="8C2711D878B9AC5E" Name="stsMotivo2" Type="INT" Comment="AD-02: 0 ok, 1 prensa indisponivel, 2 setpoint zero, 3 sem bomba ou rota, 4 houve falha de rota, 5 emergencia, 6 floculador cheio, 7 tanque baixo, 8 FT em falha, 9 prensa nao partiu" />
+      <VarDeclaration ID="BB3E6BCFC6AF1E38" Name="stsBomba2" Type="INT" Comment="AD-02: bomba em uso (0 nenhuma, 1 a 3 = BO-01 a BO-03)" />
+      <VarDeclaration ID="DF31C371889E2274" Name="stsAlimentando2" Type="BOOL" Comment="AD-02 sendo alimentada" />
+      <VarDeclaration ID="16341BB29A3C6F44" Name="stsFalhaRota2" Type="BOOL" Comment="AD-02: valvula da rota nao abriu/fechou ou saiu de posicao com a bomba em uso (memorizado; outra rota e tentada)" />
+      <VarDeclaration ID="E71239536EFCF901" Name="stsSemPartir2" Type="BOOL" Comment="AD-02 alimentada e a prensa nao partiu no tempo" />
+      <VarDeclaration ID="FBFF69BE7DE7E92A" Name="stsEst3" Type="INT" Comment="AD-03: 0 parado, 1 abrindo valvulas, 2 partindo bomba, 3 alimentando, 4 suspenso, 5 parando" />
+      <VarDeclaration ID="DABC56E6789EBDFB" Name="stsMotivo3" Type="INT" Comment="AD-03: 0 ok, 1 prensa indisponivel, 2 setpoint zero, 3 sem bomba ou rota, 4 houve falha de rota, 5 emergencia, 6 floculador cheio, 7 tanque baixo, 8 FT em falha, 9 prensa nao partiu" />
+      <VarDeclaration ID="75E3B37E3578B9B2" Name="stsBomba3" Type="INT" Comment="AD-03: bomba em uso (0 nenhuma, 1 a 3 = BO-01 a BO-03)" />
+      <VarDeclaration ID="3A28F1E50DEF39F0" Name="stsAlimentando3" Type="BOOL" Comment="AD-03 sendo alimentada" />
+      <VarDeclaration ID="EDE63BC2D534A388" Name="stsFalhaRota3" Type="BOOL" Comment="AD-03: valvula da rota nao abriu/fechou ou saiu de posicao com a bomba em uso (memorizado; outra rota e tentada)" />
+      <VarDeclaration ID="A6216B2CB75B6248" Name="stsSemPartir3" Type="BOOL" Comment="AD-03 alimentada e a prensa nao partiu no tempo" />
+      <VarDeclaration ID="DCFBAD76FD6DAC8A" Name="stsHorasBO1" Type="DINT" Comment="BO-01: horas de operacao (rodizio)" />
+      <VarDeclaration ID="F44FD4A3D46566D4" Name="stsUsoBO1" Type="INT" Comment="BO-01: prensa atendida (0 nenhuma, 1 a 3)" />
+      <VarDeclaration ID="E8F08415D1DE11AE" Name="stsHorasBO2" Type="DINT" Comment="BO-02: horas de operacao (rodizio)" />
+      <VarDeclaration ID="153BDE356C7E9BEA" Name="stsUsoBO2" Type="INT" Comment="BO-02: prensa atendida (0 nenhuma, 1 a 3)" />
+      <VarDeclaration ID="28634CDA5A89EA26" Name="stsHorasBO3" Type="DINT" Comment="BO-03: horas de operacao (rodizio)" />
+      <VarDeclaration ID="57C5F71A067DD1B0" Name="stsUsoBO3" Type="INT" Comment="BO-03: prensa atendida (0 nenhuma, 1 a 3)" />
+      <VarDeclaration ID="7932648D00F8B909" Name="stsValvulasCmd" Type="INT" Comment="Valvulas do barrilete comandadas abertas (bit 0 = VA-06 ... bit 7 = VA-13)" />
+      <VarDeclaration ID="F378C93E70C9BC6C" Name="stsValvulasBloq" Type="INT" Comment="Valvulas do barrilete bloqueadas por falha de rota ate o reset (bit 0 = VA-06 ... bit 7 = VA-13)" />
+      <VarDeclaration ID="1322393E4B988CAC" Name="stsEmergencia" Type="BOOL" Comment="Emergencia do PCM LODO acionada" />
+      <VarDeclaration ID="F6BBD672B702660F" Name="stsRemota1Ok" Type="BOOL" Comment="Remota 1 do PCE LODO (.135) comunicando" />
+      <VarDeclaration ID="B7F2CA425EC4E9E5" Name="stsRemota2Ok" Type="BOOL" Comment="Remota 2 do PCE LODO (.136) comunicando" />
+      <VarDeclaration ID="4CFE0F5C97B9A171" Name="stsFalhaRemota" Type="BOOL" Comment="Alguma remota do PCE LODO sem comunicacao" />
+      <VarDeclaration ID="0BA3DFBF7BC917B6" Name="stsMonitTrafo" Type="BOOL" Comment="PCM LODO: monitoramento do transformador (%I0.45)" />
+      <VarDeclaration ID="DD0E1AA5D8A1DB26" Name="stsMonitFonte" Type="BOOL" Comment="PCM LODO: monitoramento da fonte (%I0.51)" />
+      <VarDeclaration ID="42975C96291AF6C2" Name="stsDj1" Type="DINT" Comment="Disjuntores ligados, bit 0..15 = PCE, PCM, SO01, SO02, AD01, AD02, AD03, PP01, MN01, MN02, MN03, MN04, MN05, BO01, BO02, BO03" />
+      <VarDeclaration ID="5C804F1F7A91C337" Name="stsDj2" Type="DINT" Comment="Disjuntores ligados, bit 0..15 = BR01, BR02, VA01, VA02, VE01, VE02, VA06, VA07, VA08, VA09, VA10, VA11, VA12, VA13, VB03, VB04" />
+      <VarDeclaration ID="59CAA41FF7F076C8" Name="stsAvisoDisjuntor" Type="BOOL" Comment="Disjuntor de equipamento existente desligado" />
+      <VarDeclaration ID="D7727D91DD4BF548" Name="stsSemBomba" Type="BOOL" Comment="Prensa pedida sem bomba disponivel" />
+      <VarDeclaration ID="BEDB08F04967A6AF" Name="stsFalhaRota" Type="BOOL" Comment="Alguma rota de alimentacao com falha de valvula" />
+      <VarDeclaration ID="712DA676390F489B" Name="stsSemPartir" Type="BOOL" Comment="Alguma prensa alimentada sem partir" />
+      <VarDeclaration ID="3EAEFAB9CF3845DF" Name="stsFtFalha" Type="BOOL" Comment="FT de prensa em falha durante a alimentacao (velocidade mantida)" />
+      <VarDeclaration ID="81F88C6586FE748B" Name="stsCicloPP" Type="BOOL" Comment="Ciclo do preparador de polimero ligado pelo automatico" />
+      <VarDeclaration ID="01F97979450409F0" Name="stsSV" Type="INT" Comment="Solenoides abertas: bit0 SV-01, bit1 SV-02, bit2 SV-03, bit3 SV-04, bit4 SV-06, bit5 SV-08" />
+      <VarDeclaration ID="192257EE9070D8F5" Name="stsAlarme" Type="BOOL" Comment="Algum alarme da alimentacao/painel" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="e451045f-2975-d35e-b2da-2f6b6e1943ad">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="algAlimentacao" />
+    <InternalVars>
+      <VarDeclaration ID="FC9F2B495E44D36F" Name="initDone" Type="BOOL" />
+      <VarDeclaration ID="1D37A8C57E34DB1B" Name="primeiro" Type="BOOL" InitialValue="TRUE" />
+      <VarDeclaration ID="69D684A0F6C44633" Name="k" Type="INT" />
+      <VarDeclaration ID="CD8F7938F4BFD0A5" Name="b" Type="INT" />
+      <VarDeclaration ID="918420FE3FFCD2A4" Name="i" Type="INT" />
+      <VarDeclaration ID="B52E94921BE5978E" Name="v" Type="INT" />
+      <VarDeclaration ID="F32C9A5972B1CAEE" Name="bb" Type="INT" />
+      <VarDeclaration ID="C319FBE12CCFD229" Name="achou" Type="BOOL" />
+      <VarDeclaration ID="399903E61B716728" Name="ocup" Type="WORD" Comment="Nos do barrilete ocupados" />
+      <VarDeclaration ID="4778BF809EDA849F" Name="mAbr" Type="WORD" Comment="Valvulas a abrir" />
+      <VarDeclaration ID="033A86B805EA5F78" Name="mAbertas" Type="WORD" Comment="Valvulas abertas" />
+      <VarDeclaration ID="F77153EB53EBC7B6" Name="mRota" Type="WORD" />
+      <VarDeclaration ID="DEDC554026F5FB56" Name="mFechadas" Type="WORD" />
+      <VarDeclaration ID="6A19054BA44D0A1E" Name="mInd" Type="WORD" />
+      <VarDeclaration ID="403CF02269E50739" Name="mBloq" Type="WORD" />
+      <VarDeclaration ID="43407BB3B545B1F3" Name="emerg" Type="BOOL" />
+      <VarDeclaration ID="10C415A1C8F4BCDB" Name="pnRecebido" Type="BOOL" />
+      <VarDeclaration ID="BD5089440DA79A90" Name="rem2Recebido" Type="BOOL" />
+      <VarDeclaration ID="E73B3403F9171D72" Name="djRecebido" Type="BOOL" />
+      <VarDeclaration ID="24D70F3ED10AC19F" Name="pode" Type="BOOL" />
+      <VarDeclaration ID="395FAB71D3DF7A2A" Name="susp" Type="BOOL" />
+      <VarDeclaration ID="88504EDE20C54002" Name="mudou" Type="BOOL" />
+      <VarDeclaration ID="E455AAE673BC2E37" Name="uUm" Type="UDINT" InitialValue="1" />
+      <VarDeclaration ID="E7587EF940B3C208" Name="dHoras" Type="DINT" />
+      <VarDeclaration ID="40DAD2FBE9D8D1B0" Name="tGrava" Type="INT" />
+      <VarDeclaration ID="8A5FA6E1C36EF2A5" Name="sujo" Type="BOOL" />
+      <VarDeclaration ID="457F99BB335356FC" Name="d1" Type="DWORD" />
+      <VarDeclaration ID="8E48B1B2BAF2B6D2" Name="d2" Type="DWORD" />
+      <VarDeclaration ID="8A200BFEB330E23F" Name="wSv" Type="INT" />
+      <VarDeclaration ID="AF04D76364EF6A2B" Name="oldSv" Type="INT" InitialValue="-1" />
+      <VarDeclaration ID="123FE0363B79E02F" Name="oldMod" Type="INT" InitialValue="-1" />
+      <VarDeclaration ID="821429008DA9E2F5" Name="nMod" Type="INT" />
+      <VarDeclaration ID="BAF300F62AC361E6" Name="oldVa" Type="WORD" InitialValue="16#FFFF" />
+      <VarDeclaration ID="EF34B29E888C76CE" Name="oldCic" Type="INT" InitialValue="-1" />
+      <VarDeclaration ID="A088B6003C39D956" Name="nCic" Type="INT" />
+      <VarDeclaration ID="54D246E6EA723FC0" Name="sig" Type="DINT" />
+      <VarDeclaration ID="13B278D55B21D548" Name="oldSig" Type="DINT" InitialValue="-1" />
+      <VarDeclaration ID="B349A34E988D2770" Name="tBo" Type="INT" Comment="Reenvio periodico" />
+      <VarDeclaration ID="B5B523D6DF1D858B" Name="rotaVal" Type="WORD" ArraySize="9" Comment="Valvulas de cada rota [bomba*3 + prensa], bit 0 = VA-06 ... bit 7 = VA-13" />
+      <VarDeclaration ID="B06032C25792689E" Name="rotaNo" Type="WORD" ArraySize="9" Comment="Nos do barrilete de cada rota [bomba*3 + prensa] (bit0 no BO-01, bit1 no BO-02, bit2 no BO-03)" />
+      <VarDeclaration ID="AA682EBE49317D50" Name="pref" Type="INT" ArraySize="9" Comment="Ordem de preferencia das bombas por prensa [prensa*3 + i]" />
+      <VarDeclaration ID="EEA965342E2648E1" Name="ordem" Type="INT" ArraySize="3" />
+      <VarDeclaration ID="CA30C65F4F55EA1E" Name="bitv" Type="WORD" ArraySize="8" />
+      <VarDeclaration ID="FA3668E5BC89463B" Name="bitd" Type="DWORD" ArraySize="16" />
+      <VarDeclaration ID="FE7640FD8617018F" Name="est" Type="INT" ArraySize="3" Comment="Estado de cada prensa" />
+      <VarDeclaration ID="67F38E6E949F1CDA" Name="bomba" Type="INT" ArraySize="3" Comment="Bomba alocada a cada prensa (-1 nenhuma)" />
+      <VarDeclaration ID="DE2DD185AAAB6AEE" Name="tEst" Type="INT" ArraySize="3" Comment="Segundos no estado" />
+      <VarDeclaration ID="DDE4B9F4C899C952" Name="suspF" Type="BOOL" ArraySize="3" Comment="Floculador cheio (com histerese)" />
+      <VarDeclaration ID="B0B95883EDE346E1" Name="alRota" Type="BOOL" ArraySize="3" Comment="Falha de rota memorizada" />
+      <VarDeclaration ID="55576295CCC73F80" Name="semB" Type="BOOL" ArraySize="3" />
+      <VarDeclaration ID="E4C3366E7E85E352" Name="tSemP" Type="INT" ArraySize="3" />
+      <VarDeclaration ID="0ABAFA8D80C79334" Name="avSemP" Type="BOOL" ArraySize="3" />
+      <VarDeclaration ID="9A5592AF8308F661" Name="mot" Type="INT" ArraySize="3" />
+      <VarDeclaration ID="40F8F2C984AEE6B1" Name="ped" Type="BOOL" ArraySize="3" />
+      <VarDeclaration ID="2126E5B2D495934E" Name="aDsp" Type="BOOL" ArraySize="3" />
+      <VarDeclaration ID="93CC2DC3F5277484" Name="adF" Type="BOOL" ArraySize="3" />
+      <VarDeclaration ID="894F11BC38C9B3C7" Name="adN" Type="REAL" ArraySize="3" />
+      <VarDeclaration ID="EA8B44550B71EB3D" Name="ftF" Type="BOOL" ArraySize="3" />
+      <VarDeclaration ID="2A7ACFCE58D39ABF" Name="pOut" Type="REAL" ArraySize="3" />
+      <VarDeclaration ID="EB896BACE5F04C82" Name="sp" Type="REAL" ArraySize="3" />
+      <VarDeclaration ID="74F98C60D3D3C53E" Name="pMod" Type="BOOL" ArraySize="3" />
+      <VarDeclaration ID="1731441EC7A15EF8" Name="pPre" Type="REAL" ArraySize="3" />
+      <VarDeclaration ID="600EA7CDCDA82181" Name="cic" Type="BOOL" ArraySize="3" />
+      <VarDeclaration ID="EBABC70DDA5B4D5C" Name="boD" Type="BOOL" ArraySize="3" />
+      <VarDeclaration ID="393E9D8F5F7E8405" Name="boL" Type="BOOL" ArraySize="3" />
+      <VarDeclaration ID="D02479B5777A9A68" Name="boF" Type="BOOL" ArraySize="3" />
+      <VarDeclaration ID="B36B3F71ABD90AAE" Name="uso" Type="INT" ArraySize="3" />
+      <VarDeclaration ID="F337D47FE7AFB9AF" Name="cB" Type="BOOL" ArraySize="3" />
+      <VarDeclaration ID="672E3636983D7B6D" Name="vB" Type="REAL" ArraySize="3" />
+      <VarDeclaration ID="23877AB082E559D5" Name="minB" Type="UDINT" ArraySize="3" />
+      <VarDeclaration ID="EA2B06A2E09B0A46" Name="segB" Type="INT" ArraySize="3" />
+      <VarDeclaration ID="6B3414867FE9440F" Name="vaA" Type="BOOL" ArraySize="8" />
+      <VarDeclaration ID="10A2E5BBF2709F46" Name="vaCmd" Type="BOOL" ArraySize="8" />
+      <VarDeclaration ID="D3DB92808A7576A2" Name="vaF" Type="BOOL" ArraySize="8" />
+      <VarDeclaration ID="5E8310FE77F60E73" Name="vaD" Type="BOOL" ArraySize="8" />
+      <VarDeclaration ID="00987B86D044F5E1" Name="vaBloq" Type="BOOL" ArraySize="8" Comment="Valvula bloqueada por falha de rota (ate o reset)" />
+      <VarDeclaration ID="C53C6FE767D47EB3" Name="tPerda" Type="INT" ArraySize="3" />
+      <VarDeclaration ID="6D070475CEBC8F5D" Name="rotaIso" Type="WORD" ArraySize="9" Comment="Valvulas que isolam cada rota (VA-09/10 e entradas de prensa ligadas aos nos usados e fora da rota): devem estar fechadas" />
+      <VarDeclaration ID="78C3653EF8BA0354" Name="mIso" Type="WORD" />
+      <VarDeclaration ID="24C6139B30661823" Name="rotaOk" Type="BOOL" ArraySize="3" />
+      <VarDeclaration ID="089F0B3F7CEB344F" Name="mCulpa" Type="WORD" />
+      <VarDeclaration ID="184301F75A853A35" Name="vHold" Type="REAL" ArraySize="3" Comment="Ultima velocidade do PID valida" />
+    </InternalVars>
+    <ECC>
+      <ECState Name="START" Comment="Estado inicial" x="1500" y="640" />
+      <ECState Name="EXEC" Comment="Executa a logica; o algoritmo decide quais eventos saem" x="1500" y="1100">
+        <ECAction Algorithm="algAlimentacao" Output="INITO" />
+        <ECAction Output="CNF_BO" />
+        <ECAction Output="CNF_VA" />
+        <ECAction Output="CNF_AD" />
+        <ECAction Output="CNF_PP" />
+        <ECAction Output="CNF_PID" />
+        <ECAction Output="CNF_SV" />
+        <ECAction Output="CNF_PERS" />
+        <ECAction Output="CNF" />
+        <ECAction Output="CNF_HMI" />
+      </ECState>
+      <ECTransition Source="START" Destination="EXEC" Condition="INIT OR REQ_AD OR REQ_BO OR REQ_VA OR REQ_FT OR REQ_PID OR REQ_PP OR REQ_TQ OR REQ_PAINEL OR REQ_REM1 OR REQ_REM2 OR REQ_DJ OR REQ_PARA OR REQ_CMD OR REQ_SV OR REQ_PERS OR REQ_RESET OR REQ_RESET_PROC OR TICK" x="1580" y="860" />
+      <ECTransition Source="EXEC" Destination="START" Condition="1" x="1420" y="860" />
+    </ECC>
+    <Algorithm Name="algAlimentacao" Comment="Logica completa (um unico algoritmo)">
+      <ST><![CDATA[(* =====================================================================
+   basicAlimentacaoPrensas v1.0 - alimentacao das prensas C-Press (900)
+   Logica aprovada pelo usuario (out/2026):
+   - a prensa nao pede lodo: o CLP liga o ciclo remoto da prensa, abre a
+     rota do barrilete (tabela 5 da EF), confirma as valvulas abertas, parte
+     a bomba e controla a vazao da linha da prensa por PID (FT da linha,
+     setpoint em m3/h do operador); a prensa liga sozinha pelo nivel do
+     floculador (LT1-L agitador, LT1-O prensa);
+   - LT1 so como protecao: suspende a bomba acima de stpNivelSuspende e
+     retoma abaixo de stpNivelRetoma; tanque de estocagem baixo tambem
+     suspende;
+   - uma bomba por prensa: BO-01 -> AD-01 e BO-03 -> AD-02 (titulares),
+     BO-02 reserva comum; rotas que ocupam um no do barrilete ja em uso nao
+     sao permitidas (prensas juntas sem misturar fluxo); rodizio na partida
+     (BO-02 assume quando a titular tem stpDifHorasBO horas a mais);
+     bomba que falha e substituida (a prensa reinicia com outra bomba);
+   - FT em falha durante a alimentacao: velocidade mantida + aviso;
+   - preparador de polimero com ciclo ligado enquanto houver prensa ativa;
+   - booster e solenoides so em manual (SV pela IHM);
+   - emergencia do PCM LODO (contato NF, como no PCM da EEE Bruto) para
+     tudo; disjuntores de equipamentos existentes desligados geram aviso.
+   ===================================================================== *)
+
+INITO    := FALSE;
+CNF_BO   := FALSE;
+CNF_VA   := FALSE;
+CNF_AD   := FALSE;
+CNF_PP   := FALSE;
+CNF_PID  := FALSE;
+CNF_SV   := FALSE;
+CNF_PERS := FALSE;
+CNF      := FALSE;
+CNF_HMI  := FALSE;
+
+IF REQ_REM2 THEN
+    rem2Recebido := TRUE;
+END_IF;
+IF REQ_PAINEL THEN
+    pnRecebido := TRUE;
+END_IF;
+IF REQ_DJ THEN
+    djRecebido := TRUE;
+END_IF;
+IF INIT THEN
+    (* rotas: indice = bomba*3 + prensa (bomba 0 = BO-01, prensa 0 = AD-01); bits: 0 VA-06, 1 VA-07, 2 VA-08, 3 VA-09, 4 VA-10, 5 VA-11, 6 VA-12, 7 VA-13 *)
+    rotaVal[0] := 16#0021; rotaNo[0] := 16#0001;   (* BO-01 -> AD-01: VA-06, VA-11 *)
+    rotaVal[1] := 16#0099; rotaNo[1] := 16#0007;   (* BO-01 -> AD-02: VA-06, VA-09, VA-10, VA-13 *)
+    rotaVal[2] := 16#0059; rotaNo[2] := 16#0007;   (* BO-01 -> AD-03: VA-06, VA-09, VA-10, VA-12 *)
+    rotaVal[3] := 16#002A; rotaNo[3] := 16#0003;   (* BO-02 -> AD-01: VA-07, VA-09, VA-11 *)
+    rotaVal[4] := 16#0092; rotaNo[4] := 16#0006;   (* BO-02 -> AD-02: VA-07, VA-10, VA-13 *)
+    rotaVal[5] := 16#0052; rotaNo[5] := 16#0006;   (* BO-02 -> AD-03: VA-07, VA-10, VA-12 *)
+    rotaVal[6] := 16#003C; rotaNo[6] := 16#0007;   (* BO-03 -> AD-01: VA-08, VA-10, VA-09, VA-11 *)
+    rotaVal[7] := 16#0084; rotaNo[7] := 16#0004;   (* BO-03 -> AD-02: VA-08, VA-13 *)
+    rotaVal[8] := 16#0044; rotaNo[8] := 16#0004;   (* BO-03 -> AD-03: VA-08, VA-12 *)
+    (* isolamento: interligacoes dos nos (VA-09, VA-10) e entradas das outras prensas (VA-11, VA-12, VA-13) ligadas aos nos da rota
+       e fora dela; o recalque de bomba parada (VA-06/07/08) nao entra: bomba helicoidal parada nao deixa passar fluxo *)
+    rotaIso[0] := 16#0008; rotaIso[1] := 16#0060; rotaIso[2] := 16#00A0;
+    rotaIso[3] := 16#0010; rotaIso[4] := 16#0048; rotaIso[5] := 16#0088;
+    rotaIso[6] := 16#00C0; rotaIso[7] := 16#0050; rotaIso[8] := 16#0090;
+    pref[0] := 0; pref[1] := 1; pref[2] := 2;      (* AD-01: BO-01, BO-02, BO-03 *)
+    pref[3] := 2; pref[4] := 1; pref[5] := 0;      (* AD-02: BO-03, BO-02, BO-01 *)
+    pref[6] := 2; pref[7] := 1; pref[8] := 0;      (* AD-03: BO-03, BO-02, BO-01 *)
+    bitv[0] := 16#0001; bitv[1] := 16#0002; bitv[2] := 16#0004; bitv[3] := 16#0008;
+    bitv[4] := 16#0010; bitv[5] := 16#0020; bitv[6] := 16#0040; bitv[7] := 16#0080;
+    bitd[0] := 16#00000001; bitd[1] := 16#00000002; bitd[2] := 16#00000004; bitd[3] := 16#00000008; bitd[4] := 16#00000010; bitd[5] := 16#00000020; bitd[6] := 16#00000040; bitd[7] := 16#00000080;
+    bitd[8] := 16#00000100; bitd[9] := 16#00000200; bitd[10] := 16#00000400; bitd[11] := 16#00000800; bitd[12] := 16#00001000; bitd[13] := 16#00002000; bitd[14] := 16#00004000; bitd[15] := 16#00008000;
+    FOR k := 0 TO 2 DO
+        est[k] := 0; bomba[k] := -1; uso[k] := 0;
+    END_FOR;
+    initDone := TRUE;
+    INITO := TRUE;
+END_IF;
+IF NOT initDone THEN
+    RETURN;
+END_IF;
+
+(* ---- 1. Entradas em tabelas ---- *)
+aDsp[0] := ad1Disp; adF[0] := ad1Func; adN[0] := ad1Nivel;
+aDsp[1] := ad2Disp; adF[1] := ad2Func; adN[1] := ad2Nivel;
+aDsp[2] := ad3Disp; adF[2] := ad3Func; adN[2] := ad3Nivel;
+ftF[0] := ft1Falha; ftF[1] := ft2Falha; ftF[2] := ft3Falha;
+pOut[0] := pid1Out / 0.6; pOut[1] := pid2Out / 0.6; pOut[2] := pid3Out / 0.6;   (* PIDs em Hz -> % das bombas *)
+sp[0] := stpVazao1; sp[1] := stpVazao2; sp[2] := stpVazao3;
+ped[0] := hmiAD1; ped[1] := hmiAD2; ped[2] := hmiAD3;
+boD[0] := bo1Disp; boL[0] := bo1Lig; boF[0] := bo1Falha;
+boD[1] := bo2Disp; boL[1] := bo2Lig; boF[1] := bo2Falha;
+boD[2] := bo3Disp; boL[2] := bo3Lig; boF[2] := bo3Falha;
+vaA[0] := va06Aberta; vaA[1] := va07Aberta; vaA[2] := va08Aberta; vaA[3] := va09Aberta;
+vaA[4] := va10Aberta; vaA[5] := va11Aberta; vaA[6] := va12Aberta; vaA[7] := va13Aberta;
+vaF[0] := va06Fechada; vaF[1] := va07Fechada; vaF[2] := va08Fechada; vaF[3] := va09Fechada;
+vaF[4] := va10Fechada; vaF[5] := va11Fechada; vaF[6] := va12Fechada; vaF[7] := va13Fechada;
+vaD[0] := va06Disp; vaD[1] := va07Disp; vaD[2] := va08Disp; vaD[3] := va09Disp;
+vaD[4] := va10Disp; vaD[5] := va11Disp; vaD[6] := va12Disp; vaD[7] := va13Disp;
+mAbertas := 16#0000;
+mFechadas := 16#0040;                      (* VA-12 (segunda fase, sem comunicacao) considerada fechada *)
+mInd := 16#0000;
+mBloq := 16#0000;
+FOR v := 0 TO 7 DO
+    IF vaA[v] THEN mAbertas := mAbertas OR bitv[v]; END_IF;
+    IF vaF[v] THEN mFechadas := mFechadas OR bitv[v]; END_IF;
+    IF NOT vaD[v] OR vaBloq[v] THEN mInd := mInd OR bitv[v]; END_IF;
+    IF vaBloq[v] THEN mBloq := mBloq OR bitv[v]; END_IF;
+END_FOR;
+
+(* ---- 2. Painel: emergencia (NF), remotas e disjuntores ---- *)
+stsRemota1Ok := pnRemota1Ok;
+stsRemota2Ok := rem2Recebido AND (pnRemota2Conexao = 1);
+stsFalhaRemota := NOT pnRemota1Ok OR NOT stsRemota2Ok;
+emerg := pnRecebido AND pnRemota1Ok AND NOT pnEmergenciaNF;
+stsEmergencia := emerg;
+stsMonitTrafo := pnMonitTrafo;
+stsMonitFonte := pnMonitFonte;
+d1 := 16#00000000;
+IF djPCE THEN d1 := d1 OR bitd[0]; END_IF;
+IF djPCM THEN d1 := d1 OR bitd[1]; END_IF;
+IF djSO01 THEN d1 := d1 OR bitd[2]; END_IF;
+IF djSO02 THEN d1 := d1 OR bitd[3]; END_IF;
+IF djAD01 THEN d1 := d1 OR bitd[4]; END_IF;
+IF djAD02 THEN d1 := d1 OR bitd[5]; END_IF;
+IF djAD03 THEN d1 := d1 OR bitd[6]; END_IF;
+IF djPP01 THEN d1 := d1 OR bitd[7]; END_IF;
+IF djMN01 THEN d1 := d1 OR bitd[8]; END_IF;
+IF djMN02 THEN d1 := d1 OR bitd[9]; END_IF;
+IF djMN03 THEN d1 := d1 OR bitd[10]; END_IF;
+IF djMN04 THEN d1 := d1 OR bitd[11]; END_IF;
+IF djMN05 THEN d1 := d1 OR bitd[12]; END_IF;
+IF djBO01 THEN d1 := d1 OR bitd[13]; END_IF;
+IF djBO02 THEN d1 := d1 OR bitd[14]; END_IF;
+IF djBO03 THEN d1 := d1 OR bitd[15]; END_IF;
+d2 := 16#00000000;
+IF djBR01 THEN d2 := d2 OR bitd[0]; END_IF;
+IF djBR02 THEN d2 := d2 OR bitd[1]; END_IF;
+IF djVA01 THEN d2 := d2 OR bitd[2]; END_IF;
+IF djVA02 THEN d2 := d2 OR bitd[3]; END_IF;
+IF djVE01 THEN d2 := d2 OR bitd[4]; END_IF;
+IF djVE02 THEN d2 := d2 OR bitd[5]; END_IF;
+IF djVA06 THEN d2 := d2 OR bitd[6]; END_IF;
+IF djVA07 THEN d2 := d2 OR bitd[7]; END_IF;
+IF djVA08 THEN d2 := d2 OR bitd[8]; END_IF;
+IF djVA09 THEN d2 := d2 OR bitd[9]; END_IF;
+IF djVA10 THEN d2 := d2 OR bitd[10]; END_IF;
+IF djVA11 THEN d2 := d2 OR bitd[11]; END_IF;
+IF djVA12 THEN d2 := d2 OR bitd[12]; END_IF;
+IF djVA13 THEN d2 := d2 OR bitd[13]; END_IF;
+IF djVB03 THEN d2 := d2 OR bitd[14]; END_IF;
+IF djVB04 THEN d2 := d2 OR bitd[15]; END_IF;
+stsDj1 := DWORD_TO_DINT(d1);
+stsDj2 := DWORD_TO_DINT(d2);
+stsAvisoDisjuntor := djRecebido AND pnRemota1Ok AND (((d1 AND 16#0000FBBE) <> 16#0000FBBE) OR ((d2 AND 16#0000EFCF) <> 16#0000EFCF));
+
+(* ---- 3. Reset ---- *)
+IF (REQ_RESET AND hmiReset) OR (REQ_RESET_PROC AND cmdResetFalhas) THEN
+    FOR k := 0 TO 2 DO
+        alRota[k] := FALSE; avSemP[k] := FALSE; tSemP[k] := 0;
+    END_FOR;
+    FOR v := 0 TO 7 DO
+        vaBloq[v] := FALSE;
+    END_FOR;
+END_IF;
+
+(* ---- 4. Horimetro das bombas (minutos, persistente) ---- *)
+IF REQ_PERS THEN
+    IF perMin1 > minB[0] THEN minB[0] := perMin1; END_IF;
+    IF perMin2 > minB[1] THEN minB[1] := perMin2; END_IF;
+    IF perMin3 > minB[2] THEN minB[2] := perMin3; END_IF;
+END_IF;
+IF TICK THEN
+    FOR b := 0 TO 2 DO
+        IF boL[b] THEN
+            segB[b] := segB[b] + 1;
+            IF segB[b] >= 60 THEN
+                segB[b] := 0;
+                minB[b] := minB[b] + uUm;
+                sujo := TRUE;
+            END_IF;
+        END_IF;
+    END_FOR;
+    tGrava := tGrava + 1;
+    IF sujo AND (tGrava >= 600) THEN
+        CNF_PERS := TRUE;
+    END_IF;
+END_IF;
+IF CNF_PERS THEN
+    perMin1Out := minB[0]; perMin2Out := minB[1]; perMin3Out := minB[2];
+    sujo := FALSE; tGrava := 0;
+END_IF;
+
+(* ---- 5. Maquina de estados de cada prensa ---- *)
+(* nos ocupados pelas prensas ativas *)
+ocup := 16#0000;
+FOR k := 0 TO 2 DO
+    IF (est[k] > 0) AND (bomba[k] >= 0) THEN
+        ocup := ocup OR rotaNo[bomba[k] * 3 + k];
+    END_IF;
+END_FOR;
+FOR k := 0 TO 2 DO
+    IF TICK AND (tEst[k] < 32000) THEN
+        tEst[k] := tEst[k] + 1;
+    END_IF;
+    pode := ped[k] AND aDsp[k] AND (sp[k] > 0.0) AND NOT emerg;
+    (* rota aberta e isolada agora (intertravamento da bomba) *)
+    rotaOk[k] := FALSE;
+    IF bomba[k] >= 0 THEN
+        mRota := rotaVal[bomba[k] * 3 + k];
+        mIso := rotaIso[bomba[k] * 3 + k];
+        rotaOk[k] := ((mAbertas AND mRota) = mRota) AND ((mFechadas AND mIso) = mIso);
+    END_IF;
+    (* floculador cheio com histerese (0 = protecao desligada) *)
+    IF stpNivelSuspende <= 0.0 THEN
+        suspF[k] := FALSE;
+    ELSIF adN[k] >= stpNivelSuspende THEN
+        suspF[k] := TRUE;
+    ELSIF adN[k] <= MIN(stpNivelRetoma, stpNivelSuspende) THEN
+        suspF[k] := FALSE;
+    END_IF;
+    susp := suspF[k] OR tqNivelBaixo;
+    b := bomba[k];
+    semB[k] := FALSE;
+    CASE est[k] OF
+    0:  IF pode THEN
+            (* ordem das bombas: titular, reserva, outra; rodizio: BO-02 primeiro se a titular tem horas a mais *)
+            ordem[0] := pref[k * 3]; ordem[1] := pref[k * 3 + 1]; ordem[2] := pref[k * 3 + 2];
+            dHoras := INT_TO_DINT(stpDifHorasBO) * 60;
+            IF (stpDifHorasBO > 0) AND (ordem[0] <> 1) AND
+               (UDINT_TO_DINT(minB[ordem[0]]) >= UDINT_TO_DINT(minB[1]) + dHoras) THEN
+                ordem[1] := ordem[0];
+                ordem[0] := 1;
+            END_IF;
+            achou := FALSE;
+            FOR i := 0 TO 2 DO
+                bb := ordem[i];
+                IF NOT achou AND boD[bb] AND (uso[bb] = 0) AND ((ocup AND rotaNo[bb * 3 + k]) = 16#0000) AND
+                   ((rotaVal[bb * 3 + k] AND mInd) = 16#0000) AND
+                   ((rotaIso[bb * 3 + k] AND mInd AND NOT mFechadas) = 16#0000) THEN
+                    achou := TRUE;
+                    bomba[k] := bb;
+                    uso[bb] := k + 1;
+                    ocup := ocup OR rotaNo[bb * 3 + k];
+                    est[k] := 1;
+                    tEst[k] := 0;
+                END_IF;
+            END_FOR;
+            semB[k] := NOT achou;
+        END_IF;
+    1:  (* abrindo as valvulas da rota (e fechando as de isolamento) *)
+        IF NOT pode THEN
+            est[k] := 5; tEst[k] := 0;
+        ELSIF rotaOk[k] THEN
+            est[k] := 2; tEst[k] := 0;
+        ELSIF (stpTempoValvulas > 0) AND (tEst[k] >= stpTempoValvulas) THEN
+            (* valvulas que nao abriram ou nao fecharam ficam bloqueadas; a prensa tenta outra rota *)
+            mCulpa := (mRota AND NOT mAbertas) OR (mIso AND NOT mFechadas);
+            FOR v := 0 TO 7 DO
+                IF (mCulpa AND bitv[v]) <> 16#0000 THEN vaBloq[v] := TRUE; END_IF;
+            END_FOR;
+            alRota[k] := TRUE;
+            est[k] := 5; tEst[k] := 0;
+        END_IF;
+    2:  (* partindo a bomba (velocidade de partida) *)
+        IF NOT pode OR NOT boD[b] OR boF[b] THEN
+            est[k] := 5; tEst[k] := 0;
+        ELSIF susp THEN
+            est[k] := 4; tEst[k] := 0;
+        ELSIF boL[b] THEN
+            est[k] := 3; tEst[k] := 0;
+        END_IF;
+    3:  (* alimentando (PID) *)
+        IF NOT pode OR NOT boD[b] OR boF[b] THEN
+            est[k] := 5; tEst[k] := 0;
+        ELSIF susp THEN
+            est[k] := 4; tEst[k] := 0;
+        END_IF;
+    4:  (* suspenso: bomba parada, valvulas abertas *)
+        IF NOT pode OR NOT boD[b] OR boF[b] THEN
+            est[k] := 5; tEst[k] := 0;
+        ELSIF NOT susp THEN
+            est[k] := 2; tEst[k] := 0;
+        END_IF;
+    5:  (* parando: espera a bomba parar e libera a rota *)
+        IF NOT boL[b] OR NOT boD[b] OR boF[b] OR (tEst[k] >= 30) THEN
+            uso[b] := 0;
+            bomba[k] := -1;
+            est[k] := 0; tEst[k] := 0;
+        END_IF;
+    END_CASE;
+    (* rota perdida com a bomba em uso: 3 s para confirmar, bloqueia as culpadas e tenta outra rota *)
+    IF (est[k] >= 2) AND (est[k] <= 4) AND NOT rotaOk[k] THEN
+        IF TICK THEN
+            tPerda[k] := tPerda[k] + 1;
+        END_IF;
+        IF tPerda[k] >= 3 THEN
+            mCulpa := (mRota AND NOT mAbertas) OR (mIso AND NOT mFechadas);
+            FOR v := 0 TO 7 DO
+                IF (mCulpa AND bitv[v]) <> 16#0000 THEN vaBloq[v] := TRUE; END_IF;
+            END_FOR;
+            alRota[k] := TRUE;
+            est[k] := 5; tEst[k] := 0; tPerda[k] := 0;
+        END_IF;
+    ELSE
+        tPerda[k] := 0;
+    END_IF;
+    (* prensa nao partiu *)
+    IF ((est[k] = 3) OR (est[k] = 4)) AND NOT adF[k] THEN
+        IF TICK AND (tSemP[k] < 32000) THEN
+            tSemP[k] := tSemP[k] + 1;
+        END_IF;
+        IF (stpTempoSemPartir > 0) AND (tSemP[k] >= stpTempoSemPartir * 60) THEN
+            avSemP[k] := TRUE;
+        END_IF;
+    ELSE
+        tSemP[k] := 0;
+    END_IF;
+    (* motivo para a IHM *)
+    IF emerg AND ped[k] THEN mot[k] := 5;
+    ELSIF ped[k] AND NOT aDsp[k] THEN mot[k] := 1;
+    ELSIF ped[k] AND (sp[k] <= 0.0) THEN mot[k] := 2;
+    ELSIF semB[k] THEN mot[k] := 3;
+    ELSIF (est[k] = 4) AND suspF[k] THEN mot[k] := 6;
+    ELSIF (est[k] = 4) AND tqNivelBaixo THEN mot[k] := 7;
+    ELSIF (est[k] = 3) AND ftF[k] THEN mot[k] := 8;
+    ELSIF avSemP[k] THEN mot[k] := 9;
+    ELSIF alRota[k] THEN mot[k] := 4;
+    ELSE mot[k] := 0;
+    END_IF;
+END_FOR;
+
+(* ---- 6. Saidas: valvulas, bombas, PID, prensas, preparador ---- *)
+mAbr := 16#0000;
+FOR k := 0 TO 2 DO
+    IF (est[k] >= 1) AND (bomba[k] >= 0) THEN
+        mAbr := mAbr OR rotaVal[bomba[k] * 3 + k];
+    END_IF;
+END_FOR;
+FOR v := 0 TO 7 DO
+    vaCmd[v] := (mAbr AND bitv[v]) <> 16#0000;
+END_FOR;
+abr06 := vaCmd[0]; abr07 := vaCmd[1]; abr08 := vaCmd[2]; abr09 := vaCmd[3];
+abr10 := vaCmd[4]; abr11 := vaCmd[5]; abr12 := vaCmd[6]; abr13 := vaCmd[7];
+fec06 := NOT vaCmd[0]; fec07 := NOT vaCmd[1]; fec08 := NOT vaCmd[2]; fec09 := NOT vaCmd[3];
+fec10 := NOT vaCmd[4]; fec11 := NOT vaCmd[5]; fec12 := NOT vaCmd[6]; fec13 := NOT vaCmd[7];
+stsValvulasCmd := WORD_TO_INT(mAbr);
+stsValvulasBloq := WORD_TO_INT(mBloq);
+FOR b := 0 TO 2 DO
+    cB[b] := FALSE;
+    vB[b] := 0.0;
+END_FOR;
+FOR k := 0 TO 2 DO
+    pMod[k] := (est[k] = 3) AND NOT ftF[k];
+    IF pMod[k] THEN
+        vHold[k] := pOut[k];
+    END_IF;
+    IF est[k] = 3 THEN
+        pPre[k] := vHold[k];               (* FT em falha: mantem a ultima velocidade valida *)
+    ELSE
+        pPre[k] := stpVelInicial / 0.6;    (* IHM/SCADA em Hz -> % *)
+        vHold[k] := stpVelInicial / 0.6;
+    END_IF;
+    b := bomba[k];
+    IF (b >= 0) AND ((est[k] = 2) OR (est[k] = 3)) AND rotaOk[k] THEN   (* bomba so com a rota aberta e isolada *)
+        cB[b] := TRUE;
+        vB[b] := pOut[k];
+    END_IF;
+    cic[k] := est[k] >= 1;
+END_FOR;
+cmdBO1 := cB[0]; velBO1 := vB[0];
+cmdBO2 := cB[1]; velBO2 := vB[1];
+cmdBO3 := cB[2]; velBO3 := vB[2];
+emergOut := emerg;
+pid1Modo := pMod[0]; pid1Preset := pPre[0] * 0.6;   (* preset dos PIDs em Hz *)
+pid2Modo := pMod[1]; pid2Preset := pPre[1] * 0.6;
+pid3Modo := pMod[2]; pid3Preset := pPre[2] * 0.6;
+ciclo1 := cic[0]; ciclo2 := cic[1]; ciclo3 := cic[2];
+cicloPP := cic[0] OR cic[1] OR cic[2];
+stsCicloPP := cicloPP;
+nMod := 0;
+IF pMod[0] THEN nMod := nMod + 1; END_IF;
+IF pMod[1] THEN nMod := nMod + 2; END_IF;
+IF pMod[2] THEN nMod := nMod + 4; END_IF;
+nCic := 0;
+IF cic[0] THEN nCic := nCic + 1; END_IF;
+IF cic[1] THEN nCic := nCic + 2; END_IF;
+IF cic[2] THEN nCic := nCic + 4; END_IF;
+IF TICK THEN
+    tBo := tBo + 1;
+END_IF;
+IF primeiro OR TICK OR (nMod <> oldMod) THEN
+    CNF_PID := TRUE;                       (* tracking a cada 1 s e na troca de modo *)
+    oldMod := nMod;
+END_IF;
+IF primeiro OR TICK OR (nCic <> oldCic) THEN
+    CNF_BO := TRUE;                        (* velocidade acompanha o PID a cada 1 s *)
+END_IF;
+IF primeiro OR (mAbr <> oldVa) OR (tBo >= 10) THEN
+    CNF_VA := TRUE;
+    oldVa := mAbr;
+END_IF;
+IF primeiro OR (nCic <> oldCic) OR (tBo >= 10) THEN
+    CNF_AD := TRUE;
+    CNF_PP := TRUE;
+    oldCic := nCic;
+END_IF;
+IF tBo >= 10 THEN
+    tBo := 0;
+END_IF;
+
+(* ---- 7. Solenoides (so manual; fecham na emergencia) ---- *)
+IF emerg THEN
+    sv01 := FALSE; sv02 := FALSE; sv03 := FALSE; sv04 := FALSE; sv06 := FALSE; sv08 := FALSE;
+ELSIF REQ_SV THEN
+    sv01 := hmiSV01; sv02 := hmiSV02; sv03 := hmiSV03; sv04 := hmiSV04; sv06 := hmiSV06; sv08 := hmiSV08;
+END_IF;
+wSv := 0;
+IF sv01 THEN wSv := wSv + 1; END_IF;
+IF sv02 THEN wSv := wSv + 2; END_IF;
+IF sv03 THEN wSv := wSv + 4; END_IF;
+IF sv04 THEN wSv := wSv + 8; END_IF;
+IF sv06 THEN wSv := wSv + 16; END_IF;
+IF sv08 THEN wSv := wSv + 32; END_IF;
+stsSV := wSv;
+IF primeiro OR (wSv <> oldSv) THEN
+    CNF_SV := TRUE;
+    oldSv := wSv;
+END_IF;
+
+(* ---- 8. Status ---- *)
+stsEst1 := est[0]; stsEst2 := est[1]; stsEst3 := est[2];
+stsMotivo1 := mot[0]; stsMotivo2 := mot[1]; stsMotivo3 := mot[2];
+stsBomba1 := bomba[0] + 1; stsBomba2 := bomba[1] + 1; stsBomba3 := bomba[2] + 1;
+stsAlimentando1 := est[0] = 3; stsAlimentando2 := est[1] = 3; stsAlimentando3 := est[2] = 3;
+stsFalhaRota1 := alRota[0]; stsFalhaRota2 := alRota[1]; stsFalhaRota3 := alRota[2];
+stsSemPartir1 := avSemP[0]; stsSemPartir2 := avSemP[1]; stsSemPartir3 := avSemP[2];
+stsHorasBO1 := UDINT_TO_DINT(minB[0]) / 60; stsHorasBO2 := UDINT_TO_DINT(minB[1]) / 60; stsHorasBO3 := UDINT_TO_DINT(minB[2]) / 60;
+stsUsoBO1 := uso[0]; stsUsoBO2 := uso[1]; stsUsoBO3 := uso[2];
+stsSemBomba := semB[0] OR semB[1] OR semB[2];
+stsFalhaRota := alRota[0] OR alRota[1] OR alRota[2];
+stsSemPartir := avSemP[0] OR avSemP[1] OR avSemP[2];
+stsFtFalha := ((est[0] = 3) AND ftF[0]) OR ((est[1] = 3) AND ftF[1]) OR ((est[2] = 3) AND ftF[2]);
+stsAlarme := emerg OR stsFalhaRemota OR stsAvisoDisjuntor OR stsSemBomba OR stsFalhaRota OR stsSemPartir OR stsFtFalha;
+sig := INT_TO_DINT(est[0] + est[1] * 8 + est[2] * 64) + INT_TO_DINT(mot[0] + mot[1] * 16 + mot[2] * 256) * 512;
+IF stsAlarme THEN sig := sig + 1; END_IF;
+IF primeiro OR TICK OR REQ_PARA OR REQ_CMD OR REQ_RESET OR (sig <> oldSig) THEN
+    CNF_HMI := TRUE;
+END_IF;
+IF primeiro OR TICK OR (sig <> oldSig) THEN
+    CNF := TRUE;
+END_IF;
+oldSig := sig;
+primeiro := FALSE;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

@@ -151,12 +151,18 @@ namespace Hidryco.HidrycoLib.Symbols.Sensor_Generico
 			lbl.DecimalPlacesCount = casas;
 		}
 
+		bool nivelOn;
+		float pct;
+		void NivelValueChanged(object sender, ValueChangedEventArgs e) { nivelOn = Convert.ToBoolean(e.Value); Atualiza(); }
+		void PctValueChanged(object sender, ValueChangedEventArgs e) { pct = Convert.ToSingle(e.Value); Atualiza(); }
+
 		const float MAI_X = 8F, MAI_Y = 44F, MAI_W = 160F, MAI_H = 6F;
 
 		// Indicador analogico de faixa (ISA-101): zonas em cinza (normal claro, alerta medio, alarme escuro) e ponteiro preto
 		float Pos(float v)
 		{
-			float a = Math.Min(rMin, rMax), b = Math.Max(rMin, rMax);
+			// sensor de nivel: alarmes e ponteiro em % (0 a 100); os demais na faixa de engenharia
+			float a = nivelOn ? 0F : Math.Min(rMin, rMax), b = nivelOn ? 100F : Math.Max(rMin, rMax);
 			if (b <= a) return MAI_X;
 			float f = (v - a) / (b - a);
 			if (f < 0F) f = 0F;
@@ -180,7 +186,7 @@ namespace Hidryco.HidrycoLib.Symbols.Sensor_Generico
 			Zona(maiLL, x0, xLL); Zona(maiL, xLL, xL); Zona(maiN, xL, xH); Zona(maiH, xH, xHH); Zona(maiHH, xHH, x5);
 			bool ok = estado != 4 && !falhaAtiva;
 			maiPonteiro.Visible = ok;
-			maiPonteiro.Location = new NxtControl.Drawing.PointF(Pos(pv) - 5F, MAI_Y + MAI_H);
+			maiPonteiro.Location = new NxtControl.Drawing.PointF(Pos(nivelOn ? pct : pv) - 5F, MAI_Y + MAI_H);
 		}
 
 

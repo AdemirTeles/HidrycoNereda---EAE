@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="bd569aa6-5f96-4d05-9f71-f91179e456ef" Name="ActivePhaseAborted" Comment="Basic Function Block Type" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author=" " Date="10/12/2026" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="489E2DEAAD6FBFD7" Name="REQ" Comment="Normal Execution Request">
+        <With Var="PhaseRun" />
+        <With Var="PhaseAborted" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="0E98ABD9CE6AAE67" Name="CNF" Comment="Execution Confirmation">
+        <With Var="AbortFallbackCtrl" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="576A185377D7F36D" Name="PhaseRun" Type="BOOL" />
+      <VarDeclaration ID="B331057DD01BBB6D" Name="PhaseAborted" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="ECDC0716E39942E0" Name="AbortFallbackCtrl" Type="BOOL" Comment="Output event qualifier" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="cff68c14-990a-422d-8550-52b19c0aabdf">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="Run,Off,Abort" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="1492.941" y="381.4117" />
+      <ECState Name="Run" Comment="Normal execution" x="1485.647" y="892.9412">
+        <ECAction Algorithm="Run" Output="CNF" />
+      </ECState>
+      <ECState Name="Abort" x="1482.857" y="1448.572">
+        <ECAction Algorithm="Abort" Output="CNF" />
+      </ECState>
+      <ECState Name="OFF" x="2428.572" y="879.9998">
+        <ECAction Algorithm="Off" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="Run" Condition="REQ AND PhaseRun" x="1487.388" y="622.2457">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="371.9905,137.352,371.5067,171.2824" />
+      </ECTransition>
+      <ECTransition Source="Run" Destination="Abort" Condition="PhaseAborted" x="1485.691" y="1162.324">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="371.6001,271.0756,371.4113,308.681" />
+      </ECTransition>
+      <ECTransition Source="Run" Destination="OFF" Condition="NOT PhaseRun AND&#xD;&#xA;NOT PhaseAborted" x="1938.002" y="1058.627">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="451.7181,275.0999,514.7749,274.209" />
+      </ECTransition>
+      <ECTransition Source="OFF" Destination="START" Condition="1" x="1980.495" y="627.0183">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="526.931,172.9311,465.0655,139.9635" />
+      </ECTransition>
+      <ECTransition Source="Abort" Destination="OFF" Condition="NOT PhaseAborted" x="2010.954" y="1218.024">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="472.9664,327.6386,537.3099,288.9547" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="Run" Comment="Normally executed algorithm">
+      <ST><![CDATA[;
+AbortFallbackCtrl := FALSE;]]></ST>
+    </Algorithm>
+    <Algorithm ID="972a1e0b-fe1a-40e0-991b-59cfd6c2c49c" Name="Off">
+      <ST><![CDATA[;
+AbortFallbackCtrl := FALSE;]]></ST>
+    </Algorithm>
+    <Algorithm ID="dedae0f8-1179-477a-abad-37e2fd7b27e9" Name="Abort">
+      <ST><![CDATA[;
+AbortFallbackCtrl := TRUE;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

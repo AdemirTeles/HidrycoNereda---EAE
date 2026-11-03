@@ -150,7 +150,7 @@ namespace SE.Nereda.Symbols.AnalogInputBase
 			this.lblInstanceName.Text = "Label";
 			this.lblInstanceName.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleRight;
 			this.lblInstanceName.TextAutoSizeHorizontalOffset = 10;
-			this.lblInstanceName.TextColor = new NxtControl.Drawing.Color("SE.App2Base.SymInstanceLabelTextColor");
+			this.lblInstanceName.TextColor = new NxtControl.Drawing.Color("SE.App2Base.aaLibSymInstanceLabelTextColor");
 			this.lblInstanceName.TextPadding = new NxtControl.Drawing.Padding(2);
 			// 
 			// sDisplayPv

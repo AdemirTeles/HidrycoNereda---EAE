@@ -326,6 +326,244 @@ namespace SE.Nereda.Symbols.FieldSignals
 
   }
 
+  public class REQ_ATVEventArgs : System.EventArgs
+  {
+    IHMIAccessorService accessorService;
+    int channelId;
+    int cookie; 
+    int eventIndex;
+
+    public REQ_ATVEventArgs(int channelId, int cookie, int eventIndex)
+    {
+      this.accessorService = (IHMIAccessorService)ServiceProvider.GetService(typeof(IHMIAccessorService));
+      this.channelId = channelId;
+      this.cookie = cookie;
+      this.eventIndex = eventIndex;
+    }
+    public bool Get_AtvRunForward(ref System.Boolean value)
+    {
+      if (accessorService == null)
+        return false;
+      bool var = false;
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,0, ref var);
+      if (ret) value = (System.Boolean) var;
+      return ret;
+    }
+
+    public System.Boolean? AtvRunForward
+    { get {
+      if (accessorService == null)
+        return null;
+      bool var = false;
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,0, ref var);
+      if (!ret) return null;
+      return (System.Boolean) var;
+    }  }
+
+    public bool Get_AtvRunReverse(ref System.Boolean value)
+    {
+      if (accessorService == null)
+        return false;
+      bool var = false;
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,1, ref var);
+      if (ret) value = (System.Boolean) var;
+      return ret;
+    }
+
+    public System.Boolean? AtvRunReverse
+    { get {
+      if (accessorService == null)
+        return null;
+      bool var = false;
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,1, ref var);
+      if (!ret) return null;
+      return (System.Boolean) var;
+    }  }
+
+    public bool Get_AtvStatusEti(ref System.UInt16 value)
+    {
+      if (accessorService == null)
+        return false;
+      System.Int64 var = 0;
+      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,2, ref var);
+      if (ret) value = (System.UInt16) var;
+      return ret;
+    }
+
+    public System.UInt16? AtvStatusEti
+    { get {
+      if (accessorService == null)
+        return null;
+      System.Int64 var = 0;
+      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,2, ref var);
+      if (!ret) return null;
+      return (System.UInt16) var;
+    }  }
+
+    public bool Get_AtvStatusHmis(ref System.UInt16 value)
+    {
+      if (accessorService == null)
+        return false;
+      System.Int64 var = 0;
+      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,3, ref var);
+      if (ret) value = (System.UInt16) var;
+      return ret;
+    }
+
+    public System.UInt16? AtvStatusHmis
+    { get {
+      if (accessorService == null)
+        return null;
+      System.Int64 var = 0;
+      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,3, ref var);
+      if (!ret) return null;
+      return (System.UInt16) var;
+    }  }
+
+    public bool Get_AtvSpeedRpm(ref System.Single value)
+    {
+      if (accessorService == null)
+        return false;
+      float var = 0;
+      bool ret = accessorService.GetFloatValue(channelId, cookie, eventIndex, true,4, ref var);
+      if (ret) value = (System.Single) var;
+      return ret;
+    }
+
+    public System.Single? AtvSpeedRpm
+    { get {
+      if (accessorService == null)
+        return null;
+      float var = 0;
+      bool ret = accessorService.GetFloatValue(channelId, cookie, eventIndex, true,4, ref var);
+      if (!ret) return null;
+      return (System.Single) var;
+    }  }
+
+    public bool Get_AtvTorquePct(ref System.Single value)
+    {
+      if (accessorService == null)
+        return false;
+      float var = 0;
+      bool ret = accessorService.GetFloatValue(channelId, cookie, eventIndex, true,5, ref var);
+      if (ret) value = (System.Single) var;
+      return ret;
+    }
+
+    public System.Single? AtvTorquePct
+    { get {
+      if (accessorService == null)
+        return null;
+      float var = 0;
+      bool ret = accessorService.GetFloatValue(channelId, cookie, eventIndex, true,5, ref var);
+      if (!ret) return null;
+      return (System.Single) var;
+    }  }
+
+    public bool Get_AtvCurrentA(ref System.Single value)
+    {
+      if (accessorService == null)
+        return false;
+      float var = 0;
+      bool ret = accessorService.GetFloatValue(channelId, cookie, eventIndex, true,6, ref var);
+      if (ret) value = (System.Single) var;
+      return ret;
+    }
+
+    public System.Single? AtvCurrentA
+    { get {
+      if (accessorService == null)
+        return null;
+      float var = 0;
+      bool ret = accessorService.GetFloatValue(channelId, cookie, eventIndex, true,6, ref var);
+      if (!ret) return null;
+      return (System.Single) var;
+    }  }
+
+    public bool Get_AtvErrorCode(ref System.UInt16 value)
+    {
+      if (accessorService == null)
+        return false;
+      System.Int64 var = 0;
+      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,7, ref var);
+      if (ret) value = (System.UInt16) var;
+      return ret;
+    }
+
+    public System.UInt16? AtvErrorCode
+    { get {
+      if (accessorService == null)
+        return null;
+      System.Int64 var = 0;
+      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,7, ref var);
+      if (!ret) return null;
+      return (System.UInt16) var;
+    }  }
+
+    public bool Get_AtvWarning(ref System.Boolean value)
+    {
+      if (accessorService == null)
+        return false;
+      bool var = false;
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,8, ref var);
+      if (ret) value = (System.Boolean) var;
+      return ret;
+    }
+
+    public System.Boolean? AtvWarning
+    { get {
+      if (accessorService == null)
+        return null;
+      bool var = false;
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,8, ref var);
+      if (!ret) return null;
+      return (System.Boolean) var;
+    }  }
+
+    public bool Get_AtvWarningCode(ref System.UInt16 value)
+    {
+      if (accessorService == null)
+        return false;
+      System.Int64 var = 0;
+      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,9, ref var);
+      if (ret) value = (System.UInt16) var;
+      return ret;
+    }
+
+    public System.UInt16? AtvWarningCode
+    { get {
+      if (accessorService == null)
+        return null;
+      System.Int64 var = 0;
+      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,9, ref var);
+      if (!ret) return null;
+      return (System.UInt16) var;
+    }  }
+
+    public bool Get_AtvComStatus(ref System.Boolean value)
+    {
+      if (accessorService == null)
+        return false;
+      bool var = false;
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,10, ref var);
+      if (ret) value = (System.Boolean) var;
+      return ret;
+    }
+
+    public System.Boolean? AtvComStatus
+    { get {
+      if (accessorService == null)
+        return null;
+      bool var = false;
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,10, ref var);
+      if (!ret) return null;
+      return (System.Boolean) var;
+    }  }
+
+
+  }
+
+
 }
 
 namespace SE.Nereda.Symbols.FieldSignals
@@ -594,6 +832,8 @@ namespace SE.Nereda.Symbols.FieldSignals
 
     private event EventHandler<SE.Nereda.Symbols.FieldSignals.LOAD_PERS_DATAEventArgs> LOAD_PERS_DATA_Fired;
 
+    private event EventHandler<SE.Nereda.Symbols.FieldSignals.REQ_ATVEventArgs> REQ_ATV_Fired;
+
     protected override void OnEndInit()
     {
       if (REQ_STATE_Fired != null)
@@ -602,6 +842,8 @@ namespace SE.Nereda.Symbols.FieldSignals
         AttachEventInput(1);
       if (LOAD_PERS_DATA_Fired != null)
         AttachEventInput(2);
+      if (REQ_ATV_Fired != null)
+        AttachEventInput(3);
 
     }
 
@@ -653,6 +895,21 @@ stack Trace:
               NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
 stack Trace:
 {4}","LOAD_PERS_DATA_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break; 
+        case 3:
+          if (REQ_ATV_Fired != null)
+          {
+            try
+            {
+              REQ_ATV_Fired(this, new SE.Nereda.Symbols.FieldSignals.REQ_ATVEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","REQ_ATV_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
             }
           }
         break; 
@@ -882,6 +1139,8 @@ namespace SE.Nereda.Symbols.FieldSignals
 
     private event EventHandler<SE.Nereda.Symbols.FieldSignals.LOAD_PERS_DATAEventArgs> LOAD_PERS_DATA_Fired;
 
+    private event EventHandler<SE.Nereda.Symbols.FieldSignals.REQ_ATVEventArgs> REQ_ATV_Fired;
+
     protected override void OnEndInit()
     {
       if (REQ_STATE_Fired != null)
@@ -890,6 +1149,8 @@ namespace SE.Nereda.Symbols.FieldSignals
         AttachEventInput(1);
       if (LOAD_PERS_DATA_Fired != null)
         AttachEventInput(2);
+      if (REQ_ATV_Fired != null)
+        AttachEventInput(3);
 
     }
 
@@ -941,6 +1202,21 @@ stack Trace:
               NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
 stack Trace:
 {4}","LOAD_PERS_DATA_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break; 
+        case 3:
+          if (REQ_ATV_Fired != null)
+          {
+            try
+            {
+              REQ_ATV_Fired(this, new SE.Nereda.Symbols.FieldSignals.REQ_ATVEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","REQ_ATV_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
             }
           }
         break; 

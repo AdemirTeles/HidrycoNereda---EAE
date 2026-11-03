@@ -21,5 +21,6 @@ namespace Hidryco.HidrycoLib.Faceplates.Motor_Generico
 			lblVel.Visible = inv; vManual.Visible = inv;
 		}
 
+
 	}
 }

@@ -91,10 +91,16 @@ namespace Hidryco.HidrycoLib.Symbols.Motor_Generico
 			energizado_por_Gerador1.Animacao = Convert.ToInt32(e.Value);
 		}
 
-		// Velocidade em % so aparece em motor com inversor (STS_INVERSOR = cfgInversor do CAT)
+		// Frequencia (Hz) so aparece em motor com inversor (STS_INVERSOR = cfgInversor do CAT)
 		void CfgInversorValueChanged(object sender, ValueChangedEventArgs e)
 		{
 			velocidade.Visible = Convert.ToBoolean(e.Value);
+		}
+
+		// ---- embaixo do simbolo: frequencia do inversor (STS_FREQUENCIA, Hz, vinda do CLP) ----
+		void VelHzValueChanged(object sender, ValueChangedEventArgs e)
+		{
+			((IHMIPrimitiveInput<float>)velocidade).ValueChanged(Convert.ToSingle(e.Value));
 		}
 	}
 }

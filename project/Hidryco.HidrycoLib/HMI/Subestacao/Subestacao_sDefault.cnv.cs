@@ -1,6 +1,7 @@
 /*
  * Hidryco - Subestacao - sDefault
- * Unifilar do QGBT 440 V: QTAM 1 (G2) e QTAM 2 (G1), 1Q1/1Q0/1Q2, barras A e B, saidas e QGBT 220 V. Vermelho = fechado, verde = aberto.
+ * Unifilar do QGBT 440 V: QTAM 1 (G2) e QTAM 2 (G1), 1Q1/1Q0/1Q2, barras A e B, saidas e QGBT 220 V, e disjuntores dos paineis
+ * Nereda, EEE Bruto e Desinfeccao. Vermelho = fechado, verde = aberto, cinza = sem informacao.
  */
 
 using System;
@@ -99,10 +100,19 @@ namespace Hidryco.HidrycoLib.Symbols.Subestacao
 		void DjChanged(object s, ValueChangedEventArgs e) { Atualiza(); }
 		void MpChanged(object s, ValueChangedEventArgs e) { Atualiza(); }
 
-		void Linha(Rectangle p1, FreeText p1n, Polygon p2, FreeText p2n, FreeText txt, FreeText normal, bool ativo, int prioridade, bool naoRec)
+		// Resumo dos alarmes de 1Q1/1Q0/1Q2 (o detalhe fica no faceplate de comandos)
+		static void Alarme(object ativo, object estado, int p, ref bool algum, ref int prio, ref bool naoRec)
 		{
-			Indicador(p1, p1n, p2, p2n, txt, ativo ? prioridade : 0, "ATIVO", naoRec);
-			normal.Visible = !ativo;
+			if (B(ativo)) { algum = true; if (prio == 0 || p < prio) prio = p; }
+			naoRec |= NaoRec(E(estado));
+		}
+
+		// Disjuntor de painel: 2 ligado (vermelho), 1 desligado (verde), 0 sem informacao (remota sem comunicacao ou valor ainda nao lido)
+		// contatoDesligado = a DI e o contato de disjuntor DESLIGADO (PCE e PCM da desinfeccao)
+		static int Dj(bool semCom, object v, bool contatoDesligado)
+		{
+			if (semCom || v == null) return 0;
+			return (Convert.ToBoolean(v) != contatoDesligado) ? 2 : 1;
 		}
 
 		void Atualiza()
@@ -160,18 +170,47 @@ namespace Hidryco.HidrycoLib.Symbols.Subestacao
 			tBarraB.Text = "BARRA B - " + Fonte(S(xFB.Value));
 			tPlanta.Text = B(xPlanta.Value) ? "Planta nos geradores" : "Planta na rede";
 			tRemota.Text = remota ? "Remota 1 sem comunicação: disjuntores sem informação" : "";
+
+			// Paineis de campo: DIs lidas pelo M262_Substacao nas remotas Nereda (.160), EEE Bruto (.197) e Desinfeccao (.137)
+			bool fNer = B(xFALHA_REMOTA_NER.Value), fEeeb = B(xFALHA_REMOTA_EEEB.Value), fDes = B(xFALHA_REMOTA_DES.Value);
+			pNERc.Text = fNer ? "REMOTA SEM COMUNICAÇÃO" : "";
+			pEEEBc.Text = fEeeb ? "REMOTA SEM COMUNICAÇÃO" : "";
+			pDESc.Text = fDes ? "SEM COMUNICAÇÃO" : "";
+			Cor(bpNER_PCE, Dj(fNer, xDJ_NER_PCE.Value, false));
+			Cor(bpNER_PCM, Dj(fNer, xDJ_NER_PCM.Value, false));
+			Cor(bpMO_300_01, Dj(fNer, xDJ_MO_300_01.Value, false));
+			Cor(bpR4005A, Dj(fNer, xDJ_R4005A.Value, false));
+			Cor(bpR4005B, Dj(fNer, xDJ_R4005B.Value, false));
+			Cor(bpP4901, Dj(fNer, xDJ_P4901.Value, false));
+			Cor(bpP4902, Dj(fNer, xDJ_P4902.Value, false));
+			Cor(bpP4903, Dj(fNer, xDJ_P4903.Value, false));
+			Cor(bpEEEB_PCE, Dj(fEeeb, xDJ_EEEB_PCE.Value, false));
+			Cor(bpEEEB_PCM, Dj(fEeeb, xDJ_EEEB_PCM.Value, false));
+			Cor(bpCO_100_01, Dj(fEeeb, xDJ_CO_100_01.Value, false));
+			Cor(bpCO_100_02, Dj(fEeeb, xDJ_CO_100_02.Value, false));
+			Cor(bpCO_100_03, Dj(fEeeb, xDJ_CO_100_03.Value, false));
+			Cor(bpCO_100_04, Dj(fEeeb, xDJ_CO_100_04.Value, false));
+			Cor(bpGM_100_01_02, Dj(fEeeb, xDJ_GM_100_01_02.Value, false));
+			Cor(bpMO_100_01, Dj(fEeeb, xDJ_MO_100_01.Value, false));
+			Cor(bpDES_PCE, Dj(fDes, xDJ_DES_PCE_DESLIGADO.Value, true));
+			Cor(bpDES_PCM, Dj(fDes, xDJ_DES_PCM_DESLIGADO.Value, true));
+			Cor(bpUV_700_01, Dj(fDes, xDJ_UV_700_01.Value, false));
+			Cor(bpUV_700_02, Dj(fDes, xDJ_UV_700_02.Value, false));
+			Cor(bpVC_700_01, Dj(fDes, xDJ_VC_700_01.Value, false));
+			Cor(bpMO_700_01, Dj(fDes, xDJ_MO_700_01.Value, false));
+
 			bool algum = false, naoRec = false; int prio = 0;
 
-			{ bool a = B(xAF1q1.Value); bool nr = NaoRec(E(xEF1q1.Value)); Linha(iF1q1P1, iF1q1P1n, iF1q1P2, iF1q1P2n, iF1q1Txt, nF1q1, a, 1, nr); if (a) { algum = true; if (prio == 0 || 1 < prio) prio = 1; } naoRec |= nr; }
-			{ bool a = B(xAF1q0.Value); bool nr = NaoRec(E(xEF1q0.Value)); Linha(iF1q0P1, iF1q0P1n, iF1q0P2, iF1q0P2n, iF1q0Txt, nF1q0, a, 1, nr); if (a) { algum = true; if (prio == 0 || 1 < prio) prio = 1; } naoRec |= nr; }
-			{ bool a = B(xAF1q2.Value); bool nr = NaoRec(E(xEF1q2.Value)); Linha(iF1q2P1, iF1q2P1n, iF1q2P2, iF1q2P2n, iF1q2Txt, nF1q2, a, 1, nr); if (a) { algum = true; if (prio == 0 || 1 < prio) prio = 1; } naoRec |= nr; }
-			{ bool a = B(xAD1q1.Value); bool nr = NaoRec(E(xED1q1.Value)); Linha(iD1q1P1, iD1q1P1n, iD1q1P2, iD1q1P2n, iD1q1Txt, nD1q1, a, 2, nr); if (a) { algum = true; if (prio == 0 || 2 < prio) prio = 2; } naoRec |= nr; }
-			{ bool a = B(xAD1q0.Value); bool nr = NaoRec(E(xED1q0.Value)); Linha(iD1q0P1, iD1q0P1n, iD1q0P2, iD1q0P2n, iD1q0Txt, nD1q0, a, 2, nr); if (a) { algum = true; if (prio == 0 || 2 < prio) prio = 2; } naoRec |= nr; }
-			{ bool a = B(xAD1q2.Value); bool nr = NaoRec(E(xED1q2.Value)); Linha(iD1q2P1, iD1q2P1n, iD1q2P2, iD1q2P2n, iD1q2Txt, nD1q2, a, 2, nr); if (a) { algum = true; if (prio == 0 || 2 < prio) prio = 2; } naoRec |= nr; }
-			{ bool a = B(xAC1q1.Value); bool nr = NaoRec(E(xEC1q1.Value)); Linha(iC1q1P1, iC1q1P1n, iC1q1P2, iC1q1P2n, iC1q1Txt, nC1q1, a, 2, nr); if (a) { algum = true; if (prio == 0 || 2 < prio) prio = 2; } naoRec |= nr; }
-			{ bool a = B(xAC1q0.Value); bool nr = NaoRec(E(xEC1q0.Value)); Linha(iC1q0P1, iC1q0P1n, iC1q0P2, iC1q0P2n, iC1q0Txt, nC1q0, a, 2, nr); if (a) { algum = true; if (prio == 0 || 2 < prio) prio = 2; } naoRec |= nr; }
-			{ bool a = B(xAC1q2.Value); bool nr = NaoRec(E(xEC1q2.Value)); Linha(iC1q2P1, iC1q2P1n, iC1q2P2, iC1q2P2n, iC1q2Txt, nC1q2, a, 2, nr); if (a) { algum = true; if (prio == 0 || 2 < prio) prio = 2; } naoRec |= nr; }
-			Indicador(alP1, alP1n, alP2, alP2n, alTxt, algum ? prio : 0, algum ? "ALARME NO QGBT" : "", naoRec);
+			Alarme(xAF1q1.Value, xEF1q1.Value, 1, ref algum, ref prio, ref naoRec);
+			Alarme(xAF1q0.Value, xEF1q0.Value, 1, ref algum, ref prio, ref naoRec);
+			Alarme(xAF1q2.Value, xEF1q2.Value, 1, ref algum, ref prio, ref naoRec);
+			Alarme(xAD1q1.Value, xED1q1.Value, 2, ref algum, ref prio, ref naoRec);
+			Alarme(xAD1q0.Value, xED1q0.Value, 2, ref algum, ref prio, ref naoRec);
+			Alarme(xAD1q2.Value, xED1q2.Value, 2, ref algum, ref prio, ref naoRec);
+			Alarme(xAC1q1.Value, xEC1q1.Value, 2, ref algum, ref prio, ref naoRec);
+			Alarme(xAC1q0.Value, xEC1q0.Value, 2, ref algum, ref prio, ref naoRec);
+			Alarme(xAC1q2.Value, xEC1q2.Value, 2, ref algum, ref prio, ref naoRec);
+			Indicador(alP1, alP1n, alP2, alP2n, alTxt, algum ? prio : 0, algum ? "ALARME NO QGBT (detalhe em Comandos)" : "", naoRec);
 			Pisca(naoRec);
 		}
 
