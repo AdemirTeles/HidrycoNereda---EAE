@@ -29,7 +29,7 @@ namespace SE.Nereda.Faceplates.HeartBeat
 			this.label1 = new NxtControl.GuiFramework.Label();
 			this.polygon2 = new NxtControl.GuiFramework.Polygon();
 			this.rectangle2 = new NxtControl.GuiFramework.Rectangle();
-			this.EnableSim = new System.HMI.Symbols.Base.SwitchButton();
+			this.EmergFalhaCom = new System.HMI.Symbols.Base.SwitchButton();
 			this.label2 = new NxtControl.GuiFramework.Label();
 			this.Watchdog = new System.HMI.Symbols.Base.TimeTextBox();
 			this.line1 = new NxtControl.GuiFramework.Line();
@@ -74,19 +74,19 @@ namespace SE.Nereda.Faceplates.HeartBeat
 			this.rectangle2.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
 			this.rectangle2.Name = "rectangle2";
 			// 
-			// EnableSim
+			// EmergFalhaCom
 			// 
-			this.EnableSim.BeginInit();
-			this.EnableSim.DesignMatrix = new NxtControl.Drawing.Matrix2D(1.2D, 0D, 0D, 1D, 176D, 64D);
-			this.EnableSim.FalseImage = new NxtControl.Drawing.ImageHolder();
-			this.EnableSim.FalseImageDisabled = new NxtControl.Drawing.ImageHolder();
-			this.EnableSim.Font = new NxtControl.Drawing.Font("ButtonFont");
-			this.EnableSim.Name = "EnableSim";
-			this.EnableSim.TagName = "EnableSim";
-			this.EnableSim.TrueImage = new NxtControl.Drawing.ImageHolder();
-			this.EnableSim.TrueImageDisabled = new NxtControl.Drawing.ImageHolder();
-			this.EnableSim.Value = false;
-			this.EnableSim.EndInit();
+			this.EmergFalhaCom.BeginInit();
+			this.EmergFalhaCom.DesignMatrix = new NxtControl.Drawing.Matrix2D(1.2D, 0D, 0D, 1D, 176D, 64D);
+			this.EmergFalhaCom.FalseImage = new NxtControl.Drawing.ImageHolder();
+			this.EmergFalhaCom.FalseImageDisabled = new NxtControl.Drawing.ImageHolder();
+			this.EmergFalhaCom.Font = new NxtControl.Drawing.Font("ButtonFont");
+			this.EmergFalhaCom.Name = "EmergFalhaCom";
+			this.EmergFalhaCom.TagName = "EmergFalhaCom";
+			this.EmergFalhaCom.TrueImage = new NxtControl.Drawing.ImageHolder();
+			this.EmergFalhaCom.TrueImageDisabled = new NxtControl.Drawing.ImageHolder();
+			this.EmergFalhaCom.Value = true;
+			this.EmergFalhaCom.EndInit();
 			// 
 			// label2
 			// 
@@ -98,7 +98,7 @@ namespace SE.Nereda.Faceplates.HeartBeat
 			this.label2.FontScale = true;
 			this.label2.Name = "label2";
 			this.label2.Pen = new NxtControl.Drawing.Pen("LabelPen");
-			this.label2.Text = "Simula\u00e7\u00e3o :";
+			this.label2.Text = "Emerg\u00eancia na falha :";
 			this.label2.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
 			this.label2.TextAutoSizeHorizontalOffset = 10;
 			this.label2.TextPadding = new NxtControl.Drawing.Padding(2);
@@ -154,7 +154,7 @@ namespace SE.Nereda.Faceplates.HeartBeat
 			this.polygon2,
 			this.rectangle2,
 			this.label1,
-			this.EnableSim,
+			this.EmergFalhaCom,
 			this.label2,
 			this.Watchdog,
 			this.line1,
@@ -168,7 +168,7 @@ namespace SE.Nereda.Faceplates.HeartBeat
 		private NxtControl.GuiFramework.Label label1;
 		private NxtControl.GuiFramework.Polygon polygon2;
 		private NxtControl.GuiFramework.Rectangle rectangle2;
-		private System.HMI.Symbols.Base.SwitchButton EnableSim;
+		private System.HMI.Symbols.Base.SwitchButton EmergFalhaCom;
 		private NxtControl.GuiFramework.Label label2;
 		private NxtControl.GuiFramework.Line line1;
 		private NxtControl.GuiFramework.Label label3;

@@ -24,6 +24,7 @@ namespace HMI.Main.Canvases
 		private void InitializeComponent()
 		{
 			this.btnResetGeral = new NxtControl.GuiFramework.DrawnButton();
+			this.btnReconhecerGeral = new NxtControl.GuiFramework.DrawnButton();
 			this.fundo = new NxtControl.GuiFramework.Rectangle();
 			this.cardProcesso = new NxtControl.GuiFramework.Rectangle();
 			this.pE = new NxtControl.GuiFramework.Rectangle();
@@ -101,7 +102,7 @@ namespace HMI.Main.Canvases
 			this.vb3 = new Hidryco.HidrycoLib.Symbols.Atuador_Coester.sValvulaV();
 			this.so2 = new Hidryco.HidrycoLib.Symbols.Motor_Generico.sSoprador();
 			this.vb4 = new Hidryco.HidrycoLib.Symbols.Atuador_Coester.sValvulaV();
-			this.processo = new Hidryco.HidrycoLib.Symbols.Fase_Solida.sDefault();
+			this.processo = new Hidryco.HidrycoLib.Symbols.DesidratacaoLodo.sDefault();
 			this.repAI1 = new SE.Nereda.Symbols.AnalogInputBase.sInstanceName();
 			this.repHH1 = new SE.App2Base.Symbols.LimitAlarm.sIndicator();
 			this.repH1 = new SE.App2Base.Symbols.LimitAlarm.sIndicator();
@@ -777,7 +778,7 @@ namespace HMI.Main.Canvases
 			this.lit1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1.25D, 0D, 0D, 1.25D, 340D, 170D);
 			this.lit1.Name = "lit1";
 			this.lit1.SecurityToken = ((uint)(4294967295u));
-			this.lit1.TagName = "91957488A3380C04.LIT_900_01";
+			this.lit1.TagName = "A03873967E84DB27.LIT_900_01";
 			this.lit1.EndInit();
 			// 
 			// lit2
@@ -786,7 +787,7 @@ namespace HMI.Main.Canvases
 			this.lit2.DesignMatrix = new NxtControl.Drawing.Matrix2D(1.25D, 0D, 0D, 1.25D, 560D, 170D);
 			this.lit2.Name = "lit2";
 			this.lit2.SecurityToken = ((uint)(4294967295u));
-			this.lit2.TagName = "91957488A3380C04.LIT_900_02";
+			this.lit2.TagName = "A03873967E84DB27.LIT_900_02";
 			this.lit2.EndInit();
 			// 
 			// va01
@@ -795,7 +796,7 @@ namespace HMI.Main.Canvases
 			this.va01.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.5D, 0D, 0D, 0.5D, 217.5D, 340D);
 			this.va01.Name = "va01";
 			this.va01.SecurityToken = ((uint)(4294967295u));
-			this.va01.TagName = "91957488A3380C04.VA_900_01";
+			this.va01.TagName = "A03873967E84DB27.VA_900_01";
 			this.va01.EndInit();
 			// 
 			// va02
@@ -804,7 +805,7 @@ namespace HMI.Main.Canvases
 			this.va02.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.5D, 0D, 0D, 0.5D, 757.5D, 340D);
 			this.va02.Name = "va02";
 			this.va02.SecurityToken = ((uint)(4294967295u));
-			this.va02.TagName = "91957488A3380C04.VA_900_02";
+			this.va02.TagName = "A03873967E84DB27.VA_900_02";
 			this.va02.EndInit();
 			// 
 			// so1
@@ -813,7 +814,7 @@ namespace HMI.Main.Canvases
 			this.so1.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.55D, 0D, 0D, 0.55D, 389.26D, 604.6D);
 			this.so1.Name = "so1";
 			this.so1.SecurityToken = ((uint)(4294967295u));
-			this.so1.TagName = "91957488A3380C04.SO_900_01";
+			this.so1.TagName = "A03873967E84DB27.SO_900_01";
 			this.so1.EndInit();
 			// 
 			// vb3
@@ -822,7 +823,7 @@ namespace HMI.Main.Canvases
 			this.vb3.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.5D, 0D, 0D, 0.5D, 387.5D, 461D);
 			this.vb3.Name = "vb3";
 			this.vb3.SecurityToken = ((uint)(4294967295u));
-			this.vb3.TagName = "91957488A3380C04.VB_900_03";
+			this.vb3.TagName = "A03873967E84DB27.VB_900_03";
 			this.vb3.EndInit();
 			// 
 			// so2
@@ -831,7 +832,7 @@ namespace HMI.Main.Canvases
 			this.so2.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.55D, 0D, 0D, 0.55D, 609.26D, 604.6D);
 			this.so2.Name = "so2";
 			this.so2.SecurityToken = ((uint)(4294967295u));
-			this.so2.TagName = "91957488A3380C04.SO_900_02";
+			this.so2.TagName = "A03873967E84DB27.SO_900_02";
 			this.so2.EndInit();
 			// 
 			// vb4
@@ -840,7 +841,7 @@ namespace HMI.Main.Canvases
 			this.vb4.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.5D, 0D, 0D, 0.5D, 607.5D, 461D);
 			this.vb4.Name = "vb4";
 			this.vb4.SecurityToken = ((uint)(4294967295u));
-			this.vb4.TagName = "91957488A3380C04.VB_900_04";
+			this.vb4.TagName = "A03873967E84DB27.VB_900_04";
 			this.vb4.EndInit();
 			// 
 			// processo
@@ -969,6 +970,19 @@ namespace HMI.Main.Canvases
 			this.btnResetGeral.Text = "Reset geral";
 			this.btnResetGeral.Use3DEffect = false;
 			this.btnResetGeral.Click += new System.EventHandler(this.BtnResetGeralClick);
+			// 
+			// btnReconhecerGeral
+			// 
+			this.btnReconhecerGeral.Bounds = new NxtControl.Drawing.RectF(((float)(138D)), ((float)(662D)), ((float)(150D)), ((float)(30D)));
+			this.btnReconhecerGeral.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208))));
+			this.btnReconhecerGeral.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+			this.btnReconhecerGeral.InnerBorderColor = new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208)));
+			this.btnReconhecerGeral.Name = "btnReconhecerGeral";
+			this.btnReconhecerGeral.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(160)), ((byte)(160)), ((byte)(160))), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.btnReconhecerGeral.Radius = 2D;
+			this.btnReconhecerGeral.Text = "Reconhecer geral";
+			this.btnReconhecerGeral.Use3DEffect = false;
+			this.btnReconhecerGeral.Click += new System.EventHandler(this.BtnReconhecerGeralClick);
 			this.Shapes.AddRange(new System.ComponentModel.IComponent[] {
 			this.fundo,
 			this.cardProcesso,
@@ -1058,7 +1072,8 @@ namespace HMI.Main.Canvases
 			this.repHH2,
 			this.repH2,
 			this.repL2,
-			this.repLL2});
+			this.repLL2,
+			this.btnReconhecerGeral});
 		}
 		private NxtControl.GuiFramework.Rectangle fundo;
 		private NxtControl.GuiFramework.Rectangle cardProcesso;
@@ -1137,8 +1152,9 @@ namespace HMI.Main.Canvases
 		private Hidryco.HidrycoLib.Symbols.Atuador_Coester.sValvulaV vb3;
 		private Hidryco.HidrycoLib.Symbols.Motor_Generico.sSoprador so2;
 		private Hidryco.HidrycoLib.Symbols.Atuador_Coester.sValvulaV vb4;
-		private Hidryco.HidrycoLib.Symbols.Fase_Solida.sDefault processo;
+		private Hidryco.HidrycoLib.Symbols.DesidratacaoLodo.sDefault processo;
 		private NxtControl.GuiFramework.DrawnButton btnResetGeral;
+		private NxtControl.GuiFramework.DrawnButton btnReconhecerGeral;
 		private SE.Nereda.Symbols.AnalogInputBase.sInstanceName repAI1;
 		private SE.App2Base.Symbols.LimitAlarm.sIndicator repHH1;
 		private SE.App2Base.Symbols.LimitAlarm.sIndicator repH1;

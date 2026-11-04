@@ -2,7 +2,7 @@
 <!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
 <FBType GUID="9cdfd66f-bd66-47e3-a445-bd9637b18352" Name="basicUCT" Comment="Logica unica da UCT Fast (Modbus TCP) e da bomba de gordura com a valvula de lavagem" Namespace="Hidryco.HidrycoLib">
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Hidryco" Version="1.6" Author="Hidryco" Date="03/11/2026" Remarks="1.6: nivel da peneira e velocidades da UCT em % direto (0-100); o 0-16000 da tabela e so o limite do registrador. IHM em Hz (60 Hz = 100 %). 1.5: velocidades dos equipamentos da UCT e da bomba de gordura em Hz (16000 = 60 Hz); conversao no CLP. 1.4: CNF_HMI tambem sai quando muda so a palavra de disponibilidade (STS_HABILITADA). 1.0: UCT Fast (memorial PR-809) por Modbus TCP - leitura de estado, comandos manuais e automaticos por evento, reset, disponibilidade para a EEE Bruto, bomba de gordura e valvula de lavagem" />
+  <VersionInfo Organization="Hidryco" Version="1.7" Author="Hidryco" Date="04/11/2026" Remarks="1.7: stsLigado para a IO List da Nereda. 1.6: nivel da peneira e velocidades da UCT em % direto (0-100); o 0-16000 da tabela e so o limite do registrador. IHM em Hz (60 Hz = 100 %). 1.5: velocidades dos equipamentos da UCT e da bomba de gordura em Hz (16000 = 60 Hz); conversao no CLP. 1.4: CNF_HMI tambem sai quando muda so a palavra de disponibilidade (STS_HABILITADA). 1.0: UCT Fast (memorial PR-809) por Modbus TCP - leitura de estado, comandos manuais e automaticos por evento, reset, disponibilidade para a EEE Bruto, bomba de gordura e valvula de lavagem" />
   <InterfaceList>
     <EventInputs>
       <Event ID="3C5B6DD981EA9EF0" Name="INIT" Comment="Inicializacao">
@@ -233,6 +233,7 @@
         <With Var="okMotores" />
         <With Var="okComunicacao" />
         <With Var="habilitada" />
+        <With Var="stsLigado" />
       </Event>
       <Event ID="A0C13DD0452107CB" Name="CNF_EQ" Comment="IHM dos equipamentos (na mudanca)">
         <With Var="penAnim" />
@@ -634,6 +635,7 @@
       <VarDeclaration ID="78B77585A68CAB67" Name="almDefR2" Type="BOOL" Comment="ALARM_BIT Defeito: Rosca 2 - inclinada" />
       <VarDeclaration ID="C76BC1CB5B2AF8A0" Name="almNivelAgua" Type="BOOL" Comment="ALARM_BIT Nível baixo do tanque de água de higienização da UCT" />
       <VarDeclaration ID="FD8522ED9B351538" Name="almNivelPeneira" Type="BOOL" Comment="ALARM_BIT Nível alto na peneira da UCT" />
+      <VarDeclaration ID="65044E21F1507E93" Name="stsLigado" Type="BOOL" Comment="Algum subsistema com liga-automatico (peneira, roscas ou raspador/compressor)" />
     </OutputVars>
   </InterfaceList>
   <BasicFB ID="ee2b3cc6-bde4-4cac-ab00-c0dc36b74a0e">
@@ -899,6 +901,8 @@ stsAutoRoscas := (img016 AND 16#0004) <> 16#0000;
 stsLigaAutoRoscas := (img016 AND 16#0001) <> 16#0000;
 stsAutoRaspComp := (img017 AND 16#0004) <> 16#0000;
 stsLigaAutoRaspComp := (img017 AND 16#0001) <> 16#0000;
+(* IO List da Nereda: UCT ligada = algum subsistema com liga-automatico *)
+stsLigado := stsLigaAutoPeneira OR stsLigaAutoRoscas OR stsLigaAutoRaspComp;
 stsSelecaoBomba := (img007 AND 16#0008) <> 16#0000;
 (* Peneira rotativa *)
 IF bComOK THEN

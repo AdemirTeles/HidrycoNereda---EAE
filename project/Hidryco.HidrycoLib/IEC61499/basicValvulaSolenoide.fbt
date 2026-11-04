@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="cf5f5d36-6fdf-5b34-a6b0-c6c7296598a5" Name="basicValvulaSolenoide" Comment="Valvula solenoide on/off: aberta/fechada pelo fim de curso (se houver) ou pelo comando, e alarme de discrepancia" Namespace="Hidryco.HidrycoLib">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Hidryco" Version="1.0" Author="Hidryco" Date="04/11/2026" Remarks="1.0: criado para as SV-900 (agua de servico do lodo)" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="8AA043532289F33C" Name="INIT" Comment="Inicializacao">
+        <With Var="cfgUsaFimCurso" />
+        <With Var="cfgTempoFalha" />
+      </Event>
+      <Event ID="4834F1DB0A80B0B7" Name="REQ" Comment="Novo comando da logica">
+        <With Var="cmdAbrir" />
+        <With Var="cfgUsaFimCurso" />
+        <With Var="cfgTempoFalha" />
+      </Event>
+      <Event ID="2415431E77C38DB8" Name="POS" Comment="Novo estado dos fins de curso">
+        <With Var="fbkAberto" />
+        <With Var="fbkFechado" />
+      </Event>
+      <Event ID="9DD00C673CF0A0A3" Name="TICK" Comment="Base de tempo de 1 s" />
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="B2BF4FF583135421" Name="INITO" Comment="Inicializacao concluida" />
+      <Event ID="107E670501E39023" Name="CNF" Comment="Estado atualizado">
+        <With Var="stsAberto" />
+        <With Var="stsFechado" />
+        <With Var="stsAlarme" />
+        <With Var="stsAutomatico" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="EEF9D1A5E1A79F83" Name="cmdAbrir" Type="BOOL" Comment="Comando abrir (saida digital da solenoide)" />
+      <VarDeclaration ID="8A5B35B45FEF5589" Name="fbkAberto" Type="BOOL" Comment="Fim de curso aberta (campo)" />
+      <VarDeclaration ID="6F1E9071B9A4E938" Name="fbkFechado" Type="BOOL" Comment="Fim de curso fechada (campo)" />
+      <VarDeclaration ID="8200DC614682718A" Name="cfgUsaFimCurso" Type="BOOL" InitialValue="FALSE" Comment="TRUE = aberta/fechada pelos fins de curso e alarme de discrepancia; FALSE = pelo comando, sem alarme" />
+      <VarDeclaration ID="13A925768C207E12" Name="cfgTempoFalha" Type="UINT" InitialValue="10" Comment="Tempo de discrepancia entre comando e fim de curso para o alarme (s)" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="9D9F7241AD0C3532" Name="stsAberto" Type="BOOL" Comment="Valvula aberta" />
+      <VarDeclaration ID="5DD8BBCF17212C7D" Name="stsFechado" Type="BOOL" Comment="Valvula fechada" />
+      <VarDeclaration ID="A4F82AAD815DFD16" Name="stsAlarme" Type="BOOL" Comment="Discrepancia entre comando e fim de curso (so com cfgUsaFimCurso)" />
+      <VarDeclaration ID="4B5EBCBCEBE76B7E" Name="stsAutomatico" Type="BOOL" Comment="Sempre FALSE: as SV sao so manuais" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="553da062-4713-5a63-a7c0-dfe43ee50a64">
+    <InternalVars>
+      <VarDeclaration ID="BC4478763C560D11" Name="discrepancia" Type="BOOL" Comment="Comando e fim de curso diferentes agora" />
+      <VarDeclaration ID="33114AAAB21A6F39" Name="contagem" Type="UINT" Comment="Segundos em discrepancia" />
+    </InternalVars>
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="550" y="425" />
+      <ECState Name="INICIALIZA" x="1300" y="425">
+        <ECAction Algorithm="Avalia" Output="INITO" />
+      </ECState>
+      <ECState Name="EXEC" x="550" y="1100">
+        <ECAction Algorithm="Avalia" Output="CNF" />
+      </ECState>
+      <ECState Name="TEMPO" x="1300" y="1100">
+        <ECAction Algorithm="Conta" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="INICIALIZA" Condition="INIT" x="925" y="350" />
+      <ECTransition Source="INICIALIZA" Destination="START" Condition="1" x="925" y="500" />
+      <ECTransition Source="START" Destination="EXEC" Condition="REQ OR POS" x="760" y="760" />
+      <ECTransition Source="EXEC" Destination="START" Condition="1" x="340" y="760" />
+      <ECTransition Source="START" Destination="TEMPO" Condition="TICK" x="1000" y="760" />
+      <ECTransition Source="TEMPO" Destination="START" Condition="1" x="1100" y="900" />
+    </ECC>
+    <Algorithm Name="Avalia" Comment="Estado pela posicao ou pelo comando">
+      <ST><![CDATA[IF cfgUsaFimCurso THEN
+  stsAberto := fbkAberto;
+  stsFechado := fbkFechado;
+  discrepancia := (cmdAbrir AND NOT fbkAberto) OR (NOT cmdAbrir AND NOT fbkFechado) OR (fbkAberto AND fbkFechado);
+ELSE
+  stsAberto := cmdAbrir;
+  stsFechado := NOT cmdAbrir;
+  discrepancia := FALSE;
+END_IF;
+IF NOT discrepancia THEN
+  contagem := 0;
+  stsAlarme := FALSE;
+END_IF;
+stsAutomatico := FALSE;]]></ST>
+    </Algorithm>
+    <Algorithm Name="Conta" Comment="Conta o tempo de discrepancia (1 s por TICK)">
+      <ST><![CDATA[IF discrepancia THEN
+  IF contagem < 65535 THEN
+    contagem := contagem + 1;
+  END_IF;
+  stsAlarme := contagem >= cfgTempoFalha;
+END_IF;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

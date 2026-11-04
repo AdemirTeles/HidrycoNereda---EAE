@@ -906,6 +906,46 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
       return (System.Byte) var;
     }  }
 
+    public bool Get_STS_LIGADO(ref System.Boolean value)
+    {
+      if (accessorService == null)
+        return false;
+      bool var = false;
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,43, ref var);
+      if (ret) value = (System.Boolean) var;
+      return ret;
+    }
+
+    public System.Boolean? STS_LIGADO
+    { get {
+      if (accessorService == null)
+        return null;
+      bool var = false;
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,43, ref var);
+      if (!ret) return null;
+      return (System.Boolean) var;
+    }  }
+
+    public bool Get_STS_AUTOMATICO(ref System.Boolean value)
+    {
+      if (accessorService == null)
+        return false;
+      bool var = false;
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,44, ref var);
+      if (ret) value = (System.Boolean) var;
+      return ret;
+    }
+
+    public System.Boolean? STS_AUTOMATICO
+    { get {
+      if (accessorService == null)
+        return null;
+      bool var = false;
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,44, ref var);
+      if (!ret) return null;
+      return (System.Boolean) var;
+    }  }
+
 
   }
 

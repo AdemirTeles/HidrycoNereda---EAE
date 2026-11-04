@@ -19,11 +19,13 @@ namespace HMI.Main
 		{
 			{ "Motor_Generico", "FireEvent_E_RESET_FALHA" },
 			{ "Valvula_Coester", "FireEvent_E_CMD_RESET_FALHA" },
+			{ "Atuador_Coester", "FireEvent_E_CMD_RESET_FALHA" },
 			{ "UCT_PreTratamento", "FireEvent_E_RESET_FALHA" },
 			{ "Agua_Reuso", "FireEvent_E_RESET" },
 			{ "Desinfeccao_UV", "FireEvent_E_RESET_FALHAS_PROCESSO" },
 			{ "EEE_Bruto", "FireEvent_E_RESET_FALHAS_PROCESSO" },
 			{ "Fase_Solida", "FireEvent_E_RESET" },
+			{ "DesidratacaoLodo", "FireEvent_E_RESET" },
 			{ "Gerador_Generico", "FireEvent_E_RESET" },
 			{ "MGE_Generico", "FireEvent_E_RESET" },
 			{ "Prensa_Vibropac", "FireEvent_E_RESET" },

@@ -15,6 +15,7 @@ namespace Hidryco.HidrycoLib.SupportClasses
 		public bool Nivel;                       // TRUE = alarmes em % da altura maxima
 		public bool[] Hab = new bool[4];         // habilitacao HH, H, L, LL
 		public float[] Sp = new float[4];        // limites HH, H, L, LL (% da altura se Nivel, senao unidade de engenharia)
+		public ushort[] Tempo = new ushort[4];   // retardo dos alarmes HH, H, L, LL (s)
 	}
 
 	public static class ReplicaSensor

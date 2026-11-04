@@ -52,6 +52,10 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_Generico
 			this.rSpH = new System.HMI.Symbols.Base.TextBox<float>();
 			this.rSpL = new System.HMI.Symbols.Base.TextBox<float>();
 			this.rSpLL = new System.HMI.Symbols.Base.TextBox<float>();
+			this.rTempoHH = new System.HMI.Symbols.Base.TextBox<ushort>();
+			this.rTempoH = new System.HMI.Symbols.Base.TextBox<ushort>();
+			this.rTempoL = new System.HMI.Symbols.Base.TextBox<ushort>();
+			this.rTempoLL = new System.HMI.Symbols.Base.TextBox<ushort>();
 			// 
 			// titulo
 			// 
@@ -461,6 +465,74 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_Generico
 			this.rSpLL.Visible = false;
 			this.rSpLL.EndInit();
 			// 
+			// rTempoHH
+			// 
+			this.rTempoHH.BeginInit();
+			this.rTempoHH.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.42D, 0D, 0D, 1D, 300D, 86D);
+			this.rTempoHH.MaximumTag = null;
+			this.rTempoHH.MinimumTag = null;
+			this.rTempoHH.Name = "rTempoHH";
+			this.rTempoHH.NumberBase = NxtControl.GuiFramework.NumberBase.Decimal;
+			this.rTempoHH.Pen = new NxtControl.Drawing.Pen("TextBoxPen");
+			this.rTempoHH.SetColor = new NxtControl.Drawing.Color("Yellow");
+			this.rTempoHH.TagName = "STP_TEMPO_ALARME_HH";
+			this.rTempoHH.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
+			this.rTempoHH.UseInputPad = true;
+			this.rTempoHH.Value = ((ushort)(0));
+			this.rTempoHH.Visible = false;
+			this.rTempoHH.EndInit();
+			// 
+			// rTempoH
+			// 
+			this.rTempoH.BeginInit();
+			this.rTempoH.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.42D, 0D, 0D, 1D, 300D, 126D);
+			this.rTempoH.MaximumTag = null;
+			this.rTempoH.MinimumTag = null;
+			this.rTempoH.Name = "rTempoH";
+			this.rTempoH.NumberBase = NxtControl.GuiFramework.NumberBase.Decimal;
+			this.rTempoH.Pen = new NxtControl.Drawing.Pen("TextBoxPen");
+			this.rTempoH.SetColor = new NxtControl.Drawing.Color("Yellow");
+			this.rTempoH.TagName = "STP_TEMPO_ALARME_H";
+			this.rTempoH.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
+			this.rTempoH.UseInputPad = true;
+			this.rTempoH.Value = ((ushort)(0));
+			this.rTempoH.Visible = false;
+			this.rTempoH.EndInit();
+			// 
+			// rTempoL
+			// 
+			this.rTempoL.BeginInit();
+			this.rTempoL.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.42D, 0D, 0D, 1D, 300D, 166D);
+			this.rTempoL.MaximumTag = null;
+			this.rTempoL.MinimumTag = null;
+			this.rTempoL.Name = "rTempoL";
+			this.rTempoL.NumberBase = NxtControl.GuiFramework.NumberBase.Decimal;
+			this.rTempoL.Pen = new NxtControl.Drawing.Pen("TextBoxPen");
+			this.rTempoL.SetColor = new NxtControl.Drawing.Color("Yellow");
+			this.rTempoL.TagName = "STP_TEMPO_ALARME_L";
+			this.rTempoL.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
+			this.rTempoL.UseInputPad = true;
+			this.rTempoL.Value = ((ushort)(0));
+			this.rTempoL.Visible = false;
+			this.rTempoL.EndInit();
+			// 
+			// rTempoLL
+			// 
+			this.rTempoLL.BeginInit();
+			this.rTempoLL.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.42D, 0D, 0D, 1D, 300D, 206D);
+			this.rTempoLL.MaximumTag = null;
+			this.rTempoLL.MinimumTag = null;
+			this.rTempoLL.Name = "rTempoLL";
+			this.rTempoLL.NumberBase = NxtControl.GuiFramework.NumberBase.Decimal;
+			this.rTempoLL.Pen = new NxtControl.Drawing.Pen("TextBoxPen");
+			this.rTempoLL.SetColor = new NxtControl.Drawing.Color("Yellow");
+			this.rTempoLL.TagName = "STP_TEMPO_ALARME_LL";
+			this.rTempoLL.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
+			this.rTempoLL.UseInputPad = true;
+			this.rTempoLL.Value = ((ushort)(0));
+			this.rTempoLL.Visible = false;
+			this.rTempoLL.EndInit();
+			// 
 			// fpParameter
 			// 
 			this.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(380D)), ((float)(330D)));
@@ -498,7 +570,11 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_Generico
 			this.rSpHH,
 			this.rSpH,
 			this.rSpL,
-			this.rSpLL});
+			this.rSpLL,
+			this.rTempoHH,
+			this.rTempoH,
+			this.rTempoL,
+			this.rTempoLL});
 			this.Size = new System.Drawing.Size(380, 330);
 
 		}
@@ -534,6 +610,10 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_Generico
 		private System.HMI.Symbols.Base.TextBox<float> rSpH;
 		private System.HMI.Symbols.Base.TextBox<float> rSpL;
 		private System.HMI.Symbols.Base.TextBox<float> rSpLL;
+		private System.HMI.Symbols.Base.TextBox<ushort> rTempoHH;
+		private System.HMI.Symbols.Base.TextBox<ushort> rTempoH;
+		private System.HMI.Symbols.Base.TextBox<ushort> rTempoL;
+		private System.HMI.Symbols.Base.TextBox<ushort> rTempoLL;
 		#endregion
 	}
 }

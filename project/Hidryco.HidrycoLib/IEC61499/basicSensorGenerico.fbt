@@ -2,7 +2,7 @@
 <!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
 <FBType GUID="024198ab-e6ed-4357-bf39-bdd2a7c5fcc4" Name="basicSensorGenerico" Comment="Logica unica do sensor generico (4-20 mA ou comunicacao)" Namespace="Hidryco.HidrycoLib">
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Hidryco" Version="1.7" Author="Hidryco" Date="22/10/2026" Remarks="1.7: stsFalhaSensor (STS_FALHA_SENSOR) so com a falha do sensor (fora da faixa ou falha do instrumento), sem a comunicacao; stsFalhaAtiva e o alarme de falha com qualquer falha. 1.6: IHM: valor, % e bruto no maximo 1 vez por segundo (evento TICK de 1 s); estado, falha e alarmes na hora. 1.5: saida stsFalhaComunicacao (comunicacao do instrumento ou conexao Modbus offline). 1.4: stsFalhaSensor (STS_FALHA_SENSOR na IHM) = falha ativa: sensor em falha agora, sem memoria nem reset; o alarme de falha segue. 1.3: sensor de nivel (cfgNivel) compara os alarmes HH/H/L/LL com a % da altura maxima (setpoints em %); os demais com o valor. 1.2: falha do sinal tambem pelo status da conexao Modbus (fldConexao INT, 1 = online) com cfgUsaConexao, nos dois modos (4-20 mA lido por remota e comunicacao). 1.1: inibicao de L/LL pelo processo e condicao instantanea de cada limite. 1.0: padrao SE.App2CommonProcess - escala, falha NAMUR confirmada por tempo, alarmes HH/H/L/LL com tempo proprio e memoria ate o reset, supressao em falha" />
+  <VersionInfo Organization="Hidryco" Version="1.8" Author="Hidryco" Date="04/11/2026" Remarks="1.8: limites dos alarmes em unidade de engenharia para o grafico da IHM (stsLimHH..LL; nivel: % x altura maxima / 100). 1.7: stsFalhaSensor (STS_FALHA_SENSOR) so com a falha do sensor (fora da faixa ou falha do instrumento), sem a comunicacao; stsFalhaAtiva e o alarme de falha com qualquer falha. 1.6: IHM: valor, % e bruto no maximo 1 vez por segundo (evento TICK de 1 s); estado, falha e alarmes na hora. 1.5: saida stsFalhaComunicacao (comunicacao do instrumento ou conexao Modbus offline). 1.4: stsFalhaSensor (STS_FALHA_SENSOR na IHM) = falha ativa: sensor em falha agora, sem memoria nem reset; o alarme de falha segue. 1.3: sensor de nivel (cfgNivel) compara os alarmes HH/H/L/LL com a % da altura maxima (setpoints em %); os demais com o valor. 1.2: falha do sinal tambem pelo status da conexao Modbus (fldConexao INT, 1 = online) com cfgUsaConexao, nos dois modos (4-20 mA lido por remota e comunicacao). 1.1: inibicao de L/LL pelo processo e condicao instantanea de cada limite. 1.0: padrao SE.App2CommonProcess - escala, falha NAMUR confirmada por tempo, alarmes HH/H/L/LL com tempo proprio e memoria ate o reset, supressao em falha" />
   <InterfaceList>
     <EventInputs>
       <Event ID="A313A1584C9E1BE5" Name="INIT" Comment="Inicializacao">
@@ -109,6 +109,10 @@
         <With Var="stsAlarme" />
         <With Var="stsBruto" />
         <With Var="stsFalhaComunicacao" />
+        <With Var="stsLimHH" />
+        <With Var="stsLimH" />
+        <With Var="stsLimL" />
+        <With Var="stsLimLL" />
       </Event>
       <Event ID="DA3C0D9212A1D794" Name="CNF_ALM" Comment="Alarmes para os ALARM_BIT (na mudanca)">
         <With Var="almHH" />
@@ -204,6 +208,10 @@
       <VarDeclaration ID="585F9BC133BAE667" Name="TempoH" Type="TIME" Comment="E_DELAY do alarme H" />
       <VarDeclaration ID="AFF40B3AA17C5F37" Name="TempoL" Type="TIME" Comment="E_DELAY do alarme L" />
       <VarDeclaration ID="D17EC1927CB7668B" Name="TempoLL" Type="TIME" Comment="E_DELAY do alarme LL" />
+      <VarDeclaration ID="72AFED77258A9210" Name="stsLimHH" Type="REAL" Comment="Limite do alarme HH em unidade de engenharia (para o grafico)" />
+      <VarDeclaration ID="082D88F711CCD739" Name="stsLimH" Type="REAL" Comment="Limite do alarme H em unidade de engenharia (para o grafico)" />
+      <VarDeclaration ID="D91E42414EEE194E" Name="stsLimL" Type="REAL" Comment="Limite do alarme L em unidade de engenharia (para o grafico)" />
+      <VarDeclaration ID="6D7F45595C9C84C3" Name="stsLimLL" Type="REAL" Comment="Limite do alarme LL em unidade de engenharia (para o grafico)" />
     </OutputVars>
   </InterfaceList>
   <BasicFB ID="2f63afe4-b754-4117-a634-ef0c8af1ed93">
@@ -254,6 +262,11 @@
       <VarDeclaration ID="0A8FB337BF7C21CC" Name="hmiPct" Type="REAL" InitialValue="-1.0" />
       <VarDeclaration ID="9BCDAC94C6423216" Name="hmiValor" Type="REAL" InitialValue="-1.0" />
       <VarDeclaration ID="85B5E57FE6A19EA2" Name="rCmp" Type="REAL" Comment="Valor comparado com os alarmes: % (sensor de nivel) ou valor" />
+      <VarDeclaration ID="28F63204808E84D4" Name="rEscLim" Type="REAL" />
+      <VarDeclaration ID="372B056ACF13CF5D" Name="ostsLimHH" Type="REAL" InitialValue="-1.0" />
+      <VarDeclaration ID="564643DA04C6BCB5" Name="ostsLimH" Type="REAL" InitialValue="-1.0" />
+      <VarDeclaration ID="0E89AAE9B7D775DC" Name="ostsLimL" Type="REAL" InitialValue="-1.0" />
+      <VarDeclaration ID="43854FECF9093B30" Name="ostsLimLL" Type="REAL" InitialValue="-1.0" />
     </InternalVars>
     <ECC>
       <ECState Name="START" Comment="Estado inicial" x="1500" y="640" />
@@ -549,14 +562,27 @@ IF almL     THEN wAlm := wAlm OR 16#0004; END_IF;
 IF almLL    THEN wAlm := wAlm OR 16#0008; END_IF;
 IF almFalha THEN wAlm := wAlm OR 16#0010; END_IF;
 
+(* limites dos alarmes em unidade de engenharia (grafico da IHM); nivel: setpoints em % da altura maxima *)
+IF cfgNivel THEN
+    rEscLim := stpAlturaMaxima / 100.0;
+ELSE
+    rEscLim := 1.0;
+END_IF;
+stsLimHH := stpAlarmeHH * rEscLim;
+stsLimH  := stpAlarmeH * rEscLim;
+stsLimL  := stpAlarmeL * rEscLim;
+stsLimLL := stpAlarmeLL * rEscLim;
+
 CNF_PV     := initPass OR (stsValor <> oldValor);
 CNF_STATUS := initPass OR ((wSts AND 16#00F2) <> (oldSts AND 16#00F2));
 CNF        := initPass OR (stsValor <> oldValor) OR (stsPorcentagem <> oldPct) OR (wSts <> oldSts);
 (* IHM: estado/falha/alarme na hora; valor, % e bruto no maximo 1 vez por segundo (TICK) *)
 CNF_HMI    := initPass OR (wSts <> oldSts) OR (stsEstado <> oldEstado)
-              OR (TICK AND ((stsValor <> hmiValor) OR (stsPorcentagem <> hmiPct) OR (rBruto <> hmiBruto)));
+              OR (TICK AND ((stsValor <> hmiValor) OR (stsPorcentagem <> hmiPct) OR (rBruto <> hmiBruto)))
+              OR (stsLimHH <> ostsLimHH) OR (stsLimH <> ostsLimH) OR (stsLimL <> ostsLimL) OR (stsLimLL <> ostsLimLL);
 IF CNF_HMI THEN
     hmiValor := stsValor; hmiPct := stsPorcentagem; hmiBruto := rBruto;
+    ostsLimHH := stsLimHH; ostsLimH := stsLimH; ostsLimL := stsLimL; ostsLimLL := stsLimLL;
 END_IF;
 CNF_ALM    := initPass OR (wAlm <> oldAlm);
 oldValor  := stsValor;

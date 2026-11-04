@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="8455b537-2fed-54b3-a3ad-b382a3a32209" Name="Valvula_Solenoide" Comment="Valvula solenoide on/off (saida digital) com fim de curso opcional - HidrycoLib" Namespace="Hidryco.HidrycoLib">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Hidryco" Version="1.0" Author="Hidryco" Date="04/11/2026" Remarks="1.0: SV-900 da agua de servico do lodo. O comando continua na logica do pai (cmdAbrir com REQ). Fins de curso por symlink ${PATH}stsAberto e ${PATH}stsFechado, usados so com cfgUsaFimCurso = TRUE; sem eles aberta/fechada saem do comando. Alarme = discrepancia por cfgTempoFalha (s). Modo sempre manual (fbkStsAutomatico = FALSE)." />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="86EA94777281EF59" Name="REQ" Comment="Novo comando da logica">
+        <With Var="cmdAbrir" />
+      </Event>
+    </EventInputs>
+    <InputVars>
+      <VarDeclaration ID="D0E4493379BA5C47" Name="cmdAbrir" Type="BOOL" Comment="Comando abrir (mesmo valor enviado a saida digital)" />
+      <VarDeclaration ID="F8C5AB276CEAC3A9" Name="cfgUsaFimCurso" Type="BOOL" InitialValue="FALSE" Comment="TRUE = usa os fins de curso (symlinks stsAberto/stsFechado) e alarme de discrepancia" />
+      <VarDeclaration ID="ABEA54D0FF478A94" Name="cfgTempoFalha" Type="UINT" InitialValue="10" Comment="Tempo de discrepancia para o alarme (s)" />
+    </InputVars>
+  </InterfaceList>
+  <FBNetwork>
+    <FB ID="5A857A695D3F0271" Name="IThis" Type="Valvula_Solenoide_HMI" x="3000" y="1400" Namespace="Hidryco.HidrycoLib">
+      <Parameter Name="$6842FA5378295046" Value="TRUE" />
+    </FB>
+    <FB ID="992D691402098C31" Name="plcStart1" Type="plcStart" x="400" y="200" Namespace="SE.App2Base">
+      <Parameter Name="$Prio" Value="10" />
+    </FB>
+    <FB ID="B62ADBB86DF80539" Name="Tick" Type="E_CYCLE" x="400" y="1000" Namespace="IEC61499.Standard">
+      <Parameter Name="$DT" Value="T#1s" />
+    </FB>
+    <FB ID="23FBFE23F967B2D8" Name="Logica" Type="basicValvulaSolenoide" x="1700" y="200" Namespace="Hidryco.HidrycoLib" />
+    <FB ID="CD1EA4D22BA39826" Name="FimAberto" Type="SYMLINKMULTIVARDST_1559B0FF8170C9BA0" x="400" y="1600" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=1;VALUE${I}:BOOL" />
+      <Parameter Name="$NAME1" Value="'$${PATH}stsAberto'" />
+      <Parameter Name="$QI" Value="TRUE" />
+    </FB>
+    <FB ID="191756F647887BAB" Name="FimFechado" Type="SYMLINKMULTIVARDST_1559B0FF8170C9BA0" x="400" y="2200" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=1;VALUE${I}:BOOL" />
+      <Parameter Name="$NAME1" Value="'$${PATH}stsFechado'" />
+      <Parameter Name="$QI" Value="TRUE" />
+    </FB>
+    <EventConnections>
+      <Connection Source="$992D691402098C31.FIRST_INIT" Destination="$5A857A695D3F0271.83089A3FA0CD105D" />
+      <Connection Source="$992D691402098C31.REDO_INIT" Destination="$5A857A695D3F0271.83089A3FA0CD105D" />
+      <Connection Source="$5A857A695D3F0271.9A210691C7CE4150" Destination="$CD1EA4D22BA39826.INIT" />
+      <Connection Source="$CD1EA4D22BA39826.INITO" Destination="$191756F647887BAB.INIT" />
+      <Connection Source="$191756F647887BAB.INITO" Destination="$23FBFE23F967B2D8.8AA043532289F33C" />
+      <Connection Source="$23FBFE23F967B2D8.B2BF4FF583135421" Destination="$B62ADBB86DF80539.START" />
+      <Connection Source="$23FBFE23F967B2D8.B2BF4FF583135421" Destination="$992D691402098C31.ACK_FIRST" />
+      <Connection Source="$86EA94777281EF59" Destination="$23FBFE23F967B2D8.4834F1DB0A80B0B7" />
+      <Connection Source="$CD1EA4D22BA39826.CNF" Destination="$23FBFE23F967B2D8.2415431E77C38DB8" />
+      <Connection Source="$191756F647887BAB.CNF" Destination="$23FBFE23F967B2D8.2415431E77C38DB8" />
+      <Connection Source="$B62ADBB86DF80539.EO" Destination="$23FBFE23F967B2D8.9DD00C673CF0A0A3" />
+      <Connection Source="$23FBFE23F967B2D8.107E670501E39023" Destination="$5A857A695D3F0271.6F6FC729C43E4672" />
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="$D0E4493379BA5C47" Destination="$23FBFE23F967B2D8.EEF9D1A5E1A79F83" />
+      <Connection Source="$F8C5AB276CEAC3A9" Destination="$23FBFE23F967B2D8.8200DC614682718A" />
+      <Connection Source="$ABEA54D0FF478A94" Destination="$23FBFE23F967B2D8.13A925768C207E12" />
+      <Connection Source="$CD1EA4D22BA39826.VALUE1" Destination="$23FBFE23F967B2D8.8A5B35B45FEF5589" />
+      <Connection Source="$191756F647887BAB.VALUE1" Destination="$23FBFE23F967B2D8.6F1E9071B9A4E938" />
+      <Connection Source="$23FBFE23F967B2D8.9D9F7241AD0C3532" Destination="$5A857A695D3F0271.40389A597DFA46C2" />
+      <Connection Source="$23FBFE23F967B2D8.5DD8BBCF17212C7D" Destination="$5A857A695D3F0271.D4D007E20DF75F61" />
+      <Connection Source="$23FBFE23F967B2D8.A4F82AAD815DFD16" Destination="$5A857A695D3F0271.CD6047F1FD3E57C1" />
+      <Connection Source="$23FBFE23F967B2D8.4B5EBCBCEBE76B7E" Destination="$5A857A695D3F0271.3A86C4D695C209FE" />
+    </DataConnections>
+    <Input ID="86EA94777281EF59" Name="REQ" x="100" y="200" Type="Event" />
+    <Input ID="D0E4493379BA5C47" Name="cmdAbrir" x="100" y="300" Type="Data" />
+    <Input ID="F8C5AB276CEAC3A9" Name="cfgUsaFimCurso" x="100" y="360" Type="Data" />
+    <Input ID="ABEA54D0FF478A94" Name="cfgTempoFalha" x="100" y="420" Type="Data" />
+  </FBNetwork>
+</FBType>

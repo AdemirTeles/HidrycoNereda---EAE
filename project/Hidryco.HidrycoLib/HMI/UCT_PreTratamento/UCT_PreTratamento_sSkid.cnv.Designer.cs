@@ -100,6 +100,7 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			this.vNivel = new System.HMI.Symbols.Base.Label<float>();
 			this.Raspador = new Hidryco.HidrycoLib.Symbols.UCT_Equipamento.sRaspador();
 			this.Rosca1 = new Hidryco.HidrycoLib.Symbols.UCT_Equipamento.sRosca();
+			this.Peneira = new Hidryco.HidrycoLib.Symbols.UCT_Equipamento.sPeneira();
 			this.Rosca2 = new Hidryco.HidrycoLib.Symbols.UCT_Equipamento.sRoscaInclinada();
 			this.Compressor = new Hidryco.HidrycoLib.Symbols.UCT_Equipamento.sCompressor();
 			this.tqGordura = new NxtControl.GuiFramework.Rectangle();
@@ -657,15 +658,15 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			// 
 			// tbRoscaPen
 			// 
-			this.tbRoscaPen.Bounds = new NxtControl.Drawing.RectF(((float)(240D)), ((float)(152D)), ((float)(250D)), ((float)(36.5D)));
+			this.tbRoscaPen.Bounds = new NxtControl.Drawing.RectF(((float)(240D)), ((float)(140D)), ((float)(222D)), ((float)(48.5D)));
 			this.tbRoscaPen.InnerColor = new NxtControl.Drawing.Color(((byte)(176)), ((byte)(184)), ((byte)(192)));
 			this.tbRoscaPen.Name = "tbRoscaPen";
 			this.tbRoscaPen.OuterColor = new NxtControl.Drawing.Color(((byte)(84)), ((byte)(88)), ((byte)(92)));
 			this.tbRoscaPen.Points.AddRange(new NxtControl.Drawing.PointF[] {
 			new NxtControl.Drawing.PointF(240D, 188.5D),
-			new NxtControl.Drawing.PointF(470D, 188.5D),
-			new NxtControl.Drawing.PointF(470D, 152D),
-			new NxtControl.Drawing.PointF(490D, 152D)});
+			new NxtControl.Drawing.PointF(450D, 188.5D),
+			new NxtControl.Drawing.PointF(450D, 140D),
+			new NxtControl.Drawing.PointF(462D, 140D)});
 			this.tbRoscaPen.Width = 4;
 			// 
 			// rRoscaPen
@@ -864,6 +865,15 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			this.Raspador.SecurityToken = ((uint)(4294967295u));
 			this.Raspador.TagName = "Raspador_Gordura1";
 			this.Raspador.EndInit();
+			// 
+			// Peneira
+			// 
+			this.Peneira.BeginInit();
+			this.Peneira.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 420D, 90D);
+			this.Peneira.Name = "Peneira";
+			this.Peneira.SecurityToken = ((uint)(4294967295u));
+			this.Peneira.TagName = "Peneira_Rotativa1";
+			this.Peneira.EndInit();
 			// 
 			// Rosca1
 			// 
@@ -1684,6 +1694,7 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 			this.vNivel,
 			this.Raspador,
 			this.Rosca1,
+			this.Peneira,
 			this.Rosca2,
 			this.Compressor,
 			this.tqGordura,
@@ -1814,6 +1825,7 @@ namespace Hidryco.HidrycoLib.Symbols.UCT_PreTratamento
 		private System.HMI.Symbols.Base.Label<System.Single> vNivel;
 		private Hidryco.HidrycoLib.Symbols.UCT_Equipamento.sRaspador Raspador;
 		private Hidryco.HidrycoLib.Symbols.UCT_Equipamento.sRosca Rosca1;
+		private Hidryco.HidrycoLib.Symbols.UCT_Equipamento.sPeneira Peneira;
 		private Hidryco.HidrycoLib.Symbols.UCT_Equipamento.sRoscaInclinada Rosca2;
 		private Hidryco.HidrycoLib.Symbols.UCT_Equipamento.sCompressor Compressor;
 		private NxtControl.GuiFramework.Rectangle tqGordura;

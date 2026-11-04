@@ -24,6 +24,7 @@ namespace HMI.Main.Canvases
 		private void InitializeComponent()
 		{
 			this.btnResetGeral = new NxtControl.GuiFramework.DrawnButton();
+			this.btnReconhecerGeral = new NxtControl.GuiFramework.DrawnButton();
 			this.fundo = new NxtControl.GuiFramework.Rectangle();
 			this.cardProcesso = new NxtControl.GuiFramework.Rectangle();
 			this.rEntrada = new NxtControl.GuiFramework.FreeText();
@@ -647,6 +648,19 @@ namespace HMI.Main.Canvases
 			this.btnResetGeral.Text = "Reset geral";
 			this.btnResetGeral.Use3DEffect = false;
 			this.btnResetGeral.Click += new System.EventHandler(this.BtnResetGeralClick);
+			// 
+			// btnReconhecerGeral
+			// 
+			this.btnReconhecerGeral.Bounds = new NxtControl.Drawing.RectF(((float)(138D)), ((float)(662D)), ((float)(150D)), ((float)(30D)));
+			this.btnReconhecerGeral.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208))));
+			this.btnReconhecerGeral.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+			this.btnReconhecerGeral.InnerBorderColor = new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208)));
+			this.btnReconhecerGeral.Name = "btnReconhecerGeral";
+			this.btnReconhecerGeral.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(160)), ((byte)(160)), ((byte)(160))), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.btnReconhecerGeral.Radius = 2D;
+			this.btnReconhecerGeral.Text = "Reconhecer geral";
+			this.btnReconhecerGeral.Use3DEffect = false;
+			this.btnReconhecerGeral.Click += new System.EventHandler(this.BtnReconhecerGeralClick);
 			this.Shapes.AddRange(new System.ComponentModel.IComponent[] {
 			this.fundo,
 			this.cardProcesso,
@@ -710,7 +724,8 @@ namespace HMI.Main.Canvases
 			this.ait4,
 			this.controle,
 			this.uvSistema,
-			this.btnResetGeral});
+			this.btnResetGeral,
+			this.btnReconhecerGeral});
 		}
 		private NxtControl.GuiFramework.Rectangle fundo;
 		private NxtControl.GuiFramework.Rectangle cardProcesso;
@@ -775,6 +790,7 @@ namespace HMI.Main.Canvases
 		private Hidryco.HidrycoLib.Symbols.Desinfeccao_UV.sDefault controle;
 		private Hidryco.HidrycoLib.Symbols.UV_Trojan.sDefault uvSistema;
 		private NxtControl.GuiFramework.DrawnButton btnResetGeral;
+		private NxtControl.GuiFramework.DrawnButton btnReconhecerGeral;
 		#endregion
 	}
 }

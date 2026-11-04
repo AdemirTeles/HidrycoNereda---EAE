@@ -342,6 +342,20 @@ namespace SE.Nereda.Symbols.NeredaReactor
 
   }
 
+  public class CNF_HIBERNATIONEventArgs : System.EventArgs
+  {
+    public CNF_HIBERNATIONEventArgs()
+    {
+    }
+    private System.Int16? HibernationStatus_field = null;
+    public System.Int16? HibernationStatus
+    {
+       get { return HibernationStatus_field; }
+       set { HibernationStatus_field = value; }
+    }
+
+  }
+
 }
 
 namespace SE.Nereda.Symbols.NeredaReactor
@@ -454,6 +468,22 @@ stack Trace:
       object[] _values_ = new object[1];
       if (!ignore_Status) _values_[0] = Status;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
+    }
+    public bool FireEvent_CNF_HIBERNATION(System.Int16 HibernationStatus)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {HibernationStatus});
+    }
+    public bool FireEvent_CNF_HIBERNATION(SE.Nereda.Symbols.NeredaReactor.CNF_HIBERNATIONEventArgs ea)
+    {
+      object[] _values_ = new object[1];
+      if (ea.HibernationStatus.HasValue) _values_[0] = ea.HibernationStatus.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
+    }
+    public bool FireEvent_CNF_HIBERNATION(System.Int16 HibernationStatus, bool ignore_HibernationStatus)
+    {
+      object[] _values_ = new object[1];
+      if (!ignore_HibernationStatus) _values_[0] = HibernationStatus;
+      return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
     }
 
   }
@@ -570,6 +600,22 @@ stack Trace:
       if (!ignore_Status) _values_[0] = Status;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
+    public bool FireEvent_CNF_HIBERNATION(System.Int16 HibernationStatus)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {HibernationStatus});
+    }
+    public bool FireEvent_CNF_HIBERNATION(SE.Nereda.Symbols.NeredaReactor.CNF_HIBERNATIONEventArgs ea)
+    {
+      object[] _values_ = new object[1];
+      if (ea.HibernationStatus.HasValue) _values_[0] = ea.HibernationStatus.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
+    }
+    public bool FireEvent_CNF_HIBERNATION(System.Int16 HibernationStatus, bool ignore_HibernationStatus)
+    {
+      object[] _values_ = new object[1];
+      if (!ignore_HibernationStatus) _values_[0] = HibernationStatus;
+      return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
+    }
 
   }
 }
@@ -684,6 +730,22 @@ stack Trace:
       object[] _values_ = new object[1];
       if (!ignore_Status) _values_[0] = Status;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
+    }
+    public bool FireEvent_CNF_HIBERNATION(System.Int16 HibernationStatus)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {HibernationStatus});
+    }
+    public bool FireEvent_CNF_HIBERNATION(SE.Nereda.Symbols.NeredaReactor.CNF_HIBERNATIONEventArgs ea)
+    {
+      object[] _values_ = new object[1];
+      if (ea.HibernationStatus.HasValue) _values_[0] = ea.HibernationStatus.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
+    }
+    public bool FireEvent_CNF_HIBERNATION(System.Int16 HibernationStatus, bool ignore_HibernationStatus)
+    {
+      object[] _values_ = new object[1];
+      if (!ignore_HibernationStatus) _values_[0] = HibernationStatus;
+      return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
     }
 
   }
@@ -800,6 +862,22 @@ stack Trace:
       if (!ignore_Status) _values_[0] = Status;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
+    public bool FireEvent_CNF_HIBERNATION(System.Int16 HibernationStatus)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {HibernationStatus});
+    }
+    public bool FireEvent_CNF_HIBERNATION(SE.Nereda.Symbols.NeredaReactor.CNF_HIBERNATIONEventArgs ea)
+    {
+      object[] _values_ = new object[1];
+      if (ea.HibernationStatus.HasValue) _values_[0] = ea.HibernationStatus.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
+    }
+    public bool FireEvent_CNF_HIBERNATION(System.Int16 HibernationStatus, bool ignore_HibernationStatus)
+    {
+      object[] _values_ = new object[1];
+      if (!ignore_HibernationStatus) _values_[0] = HibernationStatus;
+      return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
+    }
 
   }
 }
@@ -914,6 +992,22 @@ stack Trace:
       object[] _values_ = new object[1];
       if (!ignore_Status) _values_[0] = Status;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
+    }
+    public bool FireEvent_CNF_HIBERNATION(System.Int16 HibernationStatus)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {HibernationStatus});
+    }
+    public bool FireEvent_CNF_HIBERNATION(SE.Nereda.Symbols.NeredaReactor.CNF_HIBERNATIONEventArgs ea)
+    {
+      object[] _values_ = new object[1];
+      if (ea.HibernationStatus.HasValue) _values_[0] = ea.HibernationStatus.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
+    }
+    public bool FireEvent_CNF_HIBERNATION(System.Int16 HibernationStatus, bool ignore_HibernationStatus)
+    {
+      object[] _values_ = new object[1];
+      if (!ignore_HibernationStatus) _values_[0] = HibernationStatus;
+      return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
     }
 
   }
@@ -1030,6 +1124,22 @@ stack Trace:
       if (!ignore_Status) _values_[0] = Status;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
+    public bool FireEvent_CNF_HIBERNATION(System.Int16 HibernationStatus)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {HibernationStatus});
+    }
+    public bool FireEvent_CNF_HIBERNATION(SE.Nereda.Symbols.NeredaReactor.CNF_HIBERNATIONEventArgs ea)
+    {
+      object[] _values_ = new object[1];
+      if (ea.HibernationStatus.HasValue) _values_[0] = ea.HibernationStatus.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
+    }
+    public bool FireEvent_CNF_HIBERNATION(System.Int16 HibernationStatus, bool ignore_HibernationStatus)
+    {
+      object[] _values_ = new object[1];
+      if (!ignore_HibernationStatus) _values_[0] = HibernationStatus;
+      return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
+    }
 
   }
 }
@@ -1144,6 +1254,22 @@ stack Trace:
       object[] _values_ = new object[1];
       if (!ignore_Status) _values_[0] = Status;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
+    }
+    public bool FireEvent_CNF_HIBERNATION(System.Int16 HibernationStatus)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {HibernationStatus});
+    }
+    public bool FireEvent_CNF_HIBERNATION(SE.Nereda.Symbols.NeredaReactor.CNF_HIBERNATIONEventArgs ea)
+    {
+      object[] _values_ = new object[1];
+      if (ea.HibernationStatus.HasValue) _values_[0] = ea.HibernationStatus.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
+    }
+    public bool FireEvent_CNF_HIBERNATION(System.Int16 HibernationStatus, bool ignore_HibernationStatus)
+    {
+      object[] _values_ = new object[1];
+      if (!ignore_HibernationStatus) _values_[0] = HibernationStatus;
+      return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
     }
 
   }
@@ -1260,6 +1386,22 @@ stack Trace:
       if (!ignore_Status) _values_[0] = Status;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
+    public bool FireEvent_CNF_HIBERNATION(System.Int16 HibernationStatus)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {HibernationStatus});
+    }
+    public bool FireEvent_CNF_HIBERNATION(SE.Nereda.Symbols.NeredaReactor.CNF_HIBERNATIONEventArgs ea)
+    {
+      object[] _values_ = new object[1];
+      if (ea.HibernationStatus.HasValue) _values_[0] = ea.HibernationStatus.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
+    }
+    public bool FireEvent_CNF_HIBERNATION(System.Int16 HibernationStatus, bool ignore_HibernationStatus)
+    {
+      object[] _values_ = new object[1];
+      if (!ignore_HibernationStatus) _values_[0] = HibernationStatus;
+      return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
+    }
 
   }
 }
@@ -1374,6 +1516,22 @@ stack Trace:
       object[] _values_ = new object[1];
       if (!ignore_Status) _values_[0] = Status;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
+    }
+    public bool FireEvent_CNF_HIBERNATION(System.Int16 HibernationStatus)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {HibernationStatus});
+    }
+    public bool FireEvent_CNF_HIBERNATION(SE.Nereda.Symbols.NeredaReactor.CNF_HIBERNATIONEventArgs ea)
+    {
+      object[] _values_ = new object[1];
+      if (ea.HibernationStatus.HasValue) _values_[0] = ea.HibernationStatus.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
+    }
+    public bool FireEvent_CNF_HIBERNATION(System.Int16 HibernationStatus, bool ignore_HibernationStatus)
+    {
+      object[] _values_ = new object[1];
+      if (!ignore_HibernationStatus) _values_[0] = HibernationStatus;
+      return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
     }
 
   }
@@ -1490,6 +1648,22 @@ stack Trace:
       if (!ignore_Status) _values_[0] = Status;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
+    public bool FireEvent_CNF_HIBERNATION(System.Int16 HibernationStatus)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {HibernationStatus});
+    }
+    public bool FireEvent_CNF_HIBERNATION(SE.Nereda.Symbols.NeredaReactor.CNF_HIBERNATIONEventArgs ea)
+    {
+      object[] _values_ = new object[1];
+      if (ea.HibernationStatus.HasValue) _values_[0] = ea.HibernationStatus.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
+    }
+    public bool FireEvent_CNF_HIBERNATION(System.Int16 HibernationStatus, bool ignore_HibernationStatus)
+    {
+      object[] _values_ = new object[1];
+      if (!ignore_HibernationStatus) _values_[0] = HibernationStatus;
+      return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
+    }
 
   }
 }
@@ -1604,6 +1778,22 @@ stack Trace:
       object[] _values_ = new object[1];
       if (!ignore_Status) _values_[0] = Status;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
+    }
+    public bool FireEvent_CNF_HIBERNATION(System.Int16 HibernationStatus)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {HibernationStatus});
+    }
+    public bool FireEvent_CNF_HIBERNATION(SE.Nereda.Symbols.NeredaReactor.CNF_HIBERNATIONEventArgs ea)
+    {
+      object[] _values_ = new object[1];
+      if (ea.HibernationStatus.HasValue) _values_[0] = ea.HibernationStatus.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
+    }
+    public bool FireEvent_CNF_HIBERNATION(System.Int16 HibernationStatus, bool ignore_HibernationStatus)
+    {
+      object[] _values_ = new object[1];
+      if (!ignore_HibernationStatus) _values_[0] = HibernationStatus;
+      return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
     }
 
   }

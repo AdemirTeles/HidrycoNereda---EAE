@@ -606,6 +606,26 @@ namespace Hidryco.HidrycoLib.Symbols.Atuador_Coester
       return (System.Int16) var;
     }  }
 
+    public bool Get_STS_ALARME(ref System.Boolean value)
+    {
+      if (accessorService == null)
+        return false;
+      bool var = false;
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,28, ref var);
+      if (ret) value = (System.Boolean) var;
+      return ret;
+    }
+
+    public System.Boolean? STS_ALARME
+    { get {
+      if (accessorService == null)
+        return null;
+      bool var = false;
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,28, ref var);
+      if (!ret) return null;
+      return (System.Boolean) var;
+    }  }
+
 
   }
 

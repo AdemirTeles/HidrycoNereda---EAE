@@ -2,7 +2,7 @@
 <!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
 <FBType GUID="b35c8a41-0d79-3721-eaed-dd872cf5fd7c" Name="basicValvulaCoester" Comment="Logica do atuador Coester CSR (Modbus TCP)" Namespace="Hidryco.HidrycoLib">
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Hidryco" Version="2.1" Author="Hidryco" Date="04/11/2026" Remarks="2.1: leituras 100 a 108 (posicao, torque, temperatura, tempo de percurso, status 2, alarmes), falha do atuador, posicionar por comando e parar so com cfgPosicionador (Word 2 de escrita). 2.0: refeito simples." />
+  <VersionInfo Organization="Hidryco" Version="2.2" Author="Hidryco" Date="04/11/2026" Remarks="2.2: stsAlarme para a IO List da Nereda. 2.1: leituras 100 a 108 (posicao, torque, temperatura, tempo de percurso, status 2, alarmes), falha do atuador, posicionar por comando e parar so com cfgPosicionador (Word 2 de escrita). 2.0: refeito simples." />
   <InterfaceList>
     <EventInputs>
       <Event ID="BC3FDAAC48C266C9" Name="INIT" Comment="Inicializacao">
@@ -101,6 +101,7 @@
         <With Var="stsStatus2" />
         <With Var="stsAlarme1" />
         <With Var="stsAlarme2" />
+        <With Var="stsAlarme" />
       </Event>
     </EventOutputs>
     <InputVars>
@@ -159,6 +160,7 @@
       <VarDeclaration ID="DB7EA302241EF8BC" Name="stsStatus2" Type="INT" Comment="Word 2" />
       <VarDeclaration ID="51C9C3E1B4E288BC" Name="stsAlarme1" Type="INT" Comment="Word 3" />
       <VarDeclaration ID="7A82F28321EB8D2C" Name="stsAlarme2" Type="INT" Comment="Word 4" />
+      <VarDeclaration ID="2B816C29C7AA4CF1" Name="stsAlarme" Type="BOOL" Comment="Alarme: falha de comunicacao OU falha do atuador OU nao abriu/fechou/posicionou" />
     </OutputVars>
   </InterfaceList>
   <BasicFB>
@@ -457,6 +459,8 @@ ELSIF stsFechada THEN
 ELSE
     stsAnimacao := 3;
 END_IF;
+(* IO List da Nereda: alarme unico da valvula *)
+stsAlarme := stsFalhaComunicacao OR stsFalhaAtuador OR stsFalhaPosicao;
 
 (* ---- 8. Eventos: processo na mudanca (posicao a cada 1 %); IHM a cada 1 s e no comando ---- *)
 nProc := BOOL_TO_INT(stsDisponivelAutomatico) + 2 * BOOL_TO_INT(stsAberta) + 4 * BOOL_TO_INT(stsFechada) +

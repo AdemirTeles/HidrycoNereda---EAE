@@ -25,6 +25,7 @@ namespace HMI.Main.Canvases
 		{
 			this.irGradeamento = new NxtControl.GuiFramework.ChangeCanvasButton();
 			this.btnResetGeral = new NxtControl.GuiFramework.DrawnButton();
+			this.btnReconhecerGeral = new NxtControl.GuiFramework.DrawnButton();
 			this.boiaLSL04 = new Hidryco.HidrycoLib.Symbols.EEE_Bruto.sBoiaL();
 			this.boiaLSH05 = new Hidryco.HidrycoLib.Symbols.EEE_Bruto.sBoiaH();
 			this.fundo = new NxtControl.GuiFramework.Rectangle();
@@ -557,6 +558,19 @@ namespace HMI.Main.Canvases
 			this.btnResetGeral.Use3DEffect = false;
 			this.btnResetGeral.Click += new System.EventHandler(this.BtnResetGeralClick);
 			// 
+			// btnReconhecerGeral
+			// 
+			this.btnReconhecerGeral.Bounds = new NxtControl.Drawing.RectF(((float)(138D)), ((float)(667D)), ((float)(150D)), ((float)(28D)));
+			this.btnReconhecerGeral.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208))));
+			this.btnReconhecerGeral.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+			this.btnReconhecerGeral.InnerBorderColor = new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208)));
+			this.btnReconhecerGeral.Name = "btnReconhecerGeral";
+			this.btnReconhecerGeral.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(160)), ((byte)(160)), ((byte)(160))), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.btnReconhecerGeral.Radius = 2D;
+			this.btnReconhecerGeral.Text = "Reconhecer geral";
+			this.btnReconhecerGeral.Use3DEffect = false;
+			this.btnReconhecerGeral.Click += new System.EventHandler(this.BtnReconhecerGeralClick);
+			// 
 			// irGradeamento
 			// 
 			this.irGradeamento.Bounds = new NxtControl.Drawing.RectF(((float)(20D)), ((float)(210D)), ((float)(124D)), ((float)(24D)));
@@ -619,7 +633,8 @@ namespace HMI.Main.Canvases
 			this.btnResetGeral,
 			this.rotPITag,
 			this.irGradeamento,
-			this.rotPITxt});
+			this.rotPITxt,
+			this.btnReconhecerGeral});
 			this.Size = new System.Drawing.Size(1366, 698);
 
 		}
@@ -675,6 +690,7 @@ namespace HMI.Main.Canvases
 		private Hidryco.HidrycoLib.Symbols.EEE_Bruto.sBoiaH boiaLSH05;
 		private Hidryco.HidrycoLib.Symbols.EEE_Bruto.sBoiaL boiaLSL04;
 		private NxtControl.GuiFramework.DrawnButton btnResetGeral;
+		private NxtControl.GuiFramework.DrawnButton btnReconhecerGeral;
 		private NxtControl.GuiFramework.FreeText rotPITag;
 		private NxtControl.GuiFramework.FreeText rotPITxt;
 		private NxtControl.GuiFramework.ChangeCanvasButton irGradeamento;

@@ -139,6 +139,20 @@ namespace SE.Nereda.Symbols.HeartBeat
 
   }
 
+  public class EMERG_FALHA_COMEventArgs : System.EventArgs
+  {
+    public EMERG_FALHA_COMEventArgs()
+    {
+    }
+    private System.Boolean? EmergFalhaCom_field = null;
+    public System.Boolean? EmergFalhaCom
+    {
+       get { return EmergFalhaCom_field; }
+       set { EmergFalhaCom_field = value; }
+    }
+
+  }
+
   public class SIMEventArgs : System.EventArgs
   {
     public SIMEventArgs()
@@ -279,6 +293,22 @@ stack Trace:
       if (!ignore_EnableSim) _values_[0] = EnableSim;
       return ((IHMIAccessorOutput)this).FireEvent(2, _values_);
     }
+    public bool FireEvent_EMERG_FALHA_COM(System.Boolean EmergFalhaCom)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(3, new object[] {EmergFalhaCom});
+    }
+    public bool FireEvent_EMERG_FALHA_COM(SE.Nereda.Symbols.HeartBeat.EMERG_FALHA_COMEventArgs ea)
+    {
+      object[] _values_ = new object[1];
+      if (ea.EmergFalhaCom.HasValue) _values_[0] = ea.EmergFalhaCom.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(3, _values_);
+    }
+    public bool FireEvent_EMERG_FALHA_COM(System.Boolean EmergFalhaCom, bool ignore_EmergFalhaCom)
+    {
+      object[] _values_ = new object[1];
+      if (!ignore_EmergFalhaCom) _values_[0] = EmergFalhaCom;
+      return ((IHMIAccessorOutput)this).FireEvent(3, _values_);
+    }
 
   }
 }
@@ -406,6 +436,22 @@ stack Trace:
       object[] _values_ = new object[1];
       if (!ignore_EnableSim) _values_[0] = EnableSim;
       return ((IHMIAccessorOutput)this).FireEvent(2, _values_);
+    }
+    public bool FireEvent_EMERG_FALHA_COM(System.Boolean EmergFalhaCom)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(3, new object[] {EmergFalhaCom});
+    }
+    public bool FireEvent_EMERG_FALHA_COM(SE.Nereda.Symbols.HeartBeat.EMERG_FALHA_COMEventArgs ea)
+    {
+      object[] _values_ = new object[1];
+      if (ea.EmergFalhaCom.HasValue) _values_[0] = ea.EmergFalhaCom.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(3, _values_);
+    }
+    public bool FireEvent_EMERG_FALHA_COM(System.Boolean EmergFalhaCom, bool ignore_EmergFalhaCom)
+    {
+      object[] _values_ = new object[1];
+      if (!ignore_EmergFalhaCom) _values_[0] = EmergFalhaCom;
+      return ((IHMIAccessorOutput)this).FireEvent(3, _values_);
     }
 
   }

@@ -24,5 +24,11 @@ namespace HMI.Main.Canvases
 		{
 			HMI.Main.ResetGeral.Executar(this);
 		}
+
+		// Reconhecer geral: reconhece todos os alarmes pendentes da planta (nao reseta falhas)
+		void BtnReconhecerGeralClick(object sender, EventArgs e)
+		{
+			HMI.Main.ReconhecerGeral.Executar();
+		}
 	}
 }

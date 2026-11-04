@@ -24,6 +24,7 @@ namespace HMI.Main.Canvases
 		private void InitializeComponent()
 		{
 			this.btnResetGeral = new NxtControl.GuiFramework.DrawnButton();
+			this.btnReconhecerGeral = new NxtControl.GuiFramework.DrawnButton();
 			this.fundo = new NxtControl.GuiFramework.Rectangle();
 			this.cardProcesso = new NxtControl.GuiFramework.Rectangle();
 			this.fr1 = new NxtControl.GuiFramework.FreeText();
@@ -208,9 +209,9 @@ namespace HMI.Main.Canvases
 			this.ad01 = new Hidryco.HidrycoLib.Symbols.Prensa_Vibropac.sCPress();
 			this.ad02 = new Hidryco.HidrycoLib.Symbols.Prensa_Vibropac.sCPress();
 			this.ad03 = new Hidryco.HidrycoLib.Symbols.Prensa_Vibropac.sCPress();
-			this.sv04 = new Hidryco.HidrycoLib.Symbols.Fase_Solida.sSV04();
-			this.sv06 = new Hidryco.HidrycoLib.Symbols.Fase_Solida.sSV06();
-			this.sv08 = new Hidryco.HidrycoLib.Symbols.Fase_Solida.sSV08();
+			this.sv04 = new Hidryco.HidrycoLib.Symbols.DesidratacaoLodo.sSV04();
+			this.sv06 = new Hidryco.HidrycoLib.Symbols.DesidratacaoLodo.sSV06();
+			this.sv08 = new Hidryco.HidrycoLib.Symbols.DesidratacaoLodo.sSV08();
 			this.pp01 = new Hidryco.HidrycoLib.Symbols.Preparador_Vibropac.sPolimero();
 			this.bo01 = new Hidryco.HidrycoLib.Symbols.Motor_Generico.sHelicoidal();
 			this.va06 = new Hidryco.HidrycoLib.Symbols.Atuador_Coester.sValvula();
@@ -223,16 +224,16 @@ namespace HMI.Main.Canvases
 			this.va12 = new Hidryco.HidrycoLib.Symbols.Atuador_Coester.sValvulaV();
 			this.va11 = new Hidryco.HidrycoLib.Symbols.Atuador_Coester.sValvula();
 			this.va13 = new Hidryco.HidrycoLib.Symbols.Atuador_Coester.sValvula();
-			this.sv03 = new Hidryco.HidrycoLib.Symbols.Fase_Solida.sSV03();
-			this.sv02 = new Hidryco.HidrycoLib.Symbols.Fase_Solida.sSV02();
-			this.sv01 = new Hidryco.HidrycoLib.Symbols.Fase_Solida.sSV01();
+			this.sv03 = new Hidryco.HidrycoLib.Symbols.DesidratacaoLodo.sSV03();
+			this.sv02 = new Hidryco.HidrycoLib.Symbols.DesidratacaoLodo.sSV02();
+			this.sv01 = new Hidryco.HidrycoLib.Symbols.DesidratacaoLodo.sSV01();
 			this.ft01 = new Hidryco.HidrycoLib.Symbols.Sensor_Generico.sCompacto();
 			this.ft02 = new Hidryco.HidrycoLib.Symbols.Sensor_Generico.sCompacto();
 			this.ft03 = new Hidryco.HidrycoLib.Symbols.Sensor_Generico.sCompacto();
 			this.br01 = new Hidryco.HidrycoLib.Symbols.Motor_Generico.sBomba();
 			this.br02 = new Hidryco.HidrycoLib.Symbols.Motor_Generico.sBomba();
 			this.ft07 = new Hidryco.HidrycoLib.Symbols.Sensor_Generico.sCompacto();
-			this.processo = new Hidryco.HidrycoLib.Symbols.Fase_Solida.sFaixa();
+			this.processo = new Hidryco.HidrycoLib.Symbols.DesidratacaoLodo.sFaixa();
 			// 
 			// fundo
 			// 
@@ -2373,6 +2374,19 @@ namespace HMI.Main.Canvases
 			this.btnResetGeral.Text = "Reset geral";
 			this.btnResetGeral.Use3DEffect = false;
 			this.btnResetGeral.Click += new System.EventHandler(this.BtnResetGeralClick);
+			// 
+			// btnReconhecerGeral
+			// 
+			this.btnReconhecerGeral.Bounds = new NxtControl.Drawing.RectF(((float)(138D)), ((float)(662D)), ((float)(150D)), ((float)(30D)));
+			this.btnReconhecerGeral.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208))));
+			this.btnReconhecerGeral.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+			this.btnReconhecerGeral.InnerBorderColor = new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208)));
+			this.btnReconhecerGeral.Name = "btnReconhecerGeral";
+			this.btnReconhecerGeral.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(160)), ((byte)(160)), ((byte)(160))), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.btnReconhecerGeral.Radius = 2D;
+			this.btnReconhecerGeral.Text = "Reconhecer geral";
+			this.btnReconhecerGeral.Use3DEffect = false;
+			this.btnReconhecerGeral.Click += new System.EventHandler(this.BtnReconhecerGeralClick);
 			this.Shapes.AddRange(new System.ComponentModel.IComponent[] {
 			this.fundo,
 			this.cardProcesso,
@@ -2583,7 +2597,8 @@ namespace HMI.Main.Canvases
 			this.br02,
 			this.ft07,
 			this.processo,
-			this.btnResetGeral});
+			this.btnResetGeral,
+			this.btnReconhecerGeral});
 		}
 		private NxtControl.GuiFramework.Rectangle fundo;
 		private NxtControl.GuiFramework.Rectangle cardProcesso;
@@ -2769,9 +2784,9 @@ namespace HMI.Main.Canvases
 		private Hidryco.HidrycoLib.Symbols.Prensa_Vibropac.sCPress ad01;
 		private Hidryco.HidrycoLib.Symbols.Prensa_Vibropac.sCPress ad02;
 		private Hidryco.HidrycoLib.Symbols.Prensa_Vibropac.sCPress ad03;
-		private Hidryco.HidrycoLib.Symbols.Fase_Solida.sSV04 sv04;
-		private Hidryco.HidrycoLib.Symbols.Fase_Solida.sSV06 sv06;
-		private Hidryco.HidrycoLib.Symbols.Fase_Solida.sSV08 sv08;
+		private Hidryco.HidrycoLib.Symbols.DesidratacaoLodo.sSV04 sv04;
+		private Hidryco.HidrycoLib.Symbols.DesidratacaoLodo.sSV06 sv06;
+		private Hidryco.HidrycoLib.Symbols.DesidratacaoLodo.sSV08 sv08;
 		private Hidryco.HidrycoLib.Symbols.Preparador_Vibropac.sPolimero pp01;
 		private Hidryco.HidrycoLib.Symbols.Motor_Generico.sHelicoidal bo01;
 		private Hidryco.HidrycoLib.Symbols.Atuador_Coester.sValvula va06;
@@ -2784,17 +2799,18 @@ namespace HMI.Main.Canvases
 		private Hidryco.HidrycoLib.Symbols.Atuador_Coester.sValvulaV va12;
 		private Hidryco.HidrycoLib.Symbols.Atuador_Coester.sValvula va11;
 		private Hidryco.HidrycoLib.Symbols.Atuador_Coester.sValvula va13;
-		private Hidryco.HidrycoLib.Symbols.Fase_Solida.sSV03 sv03;
-		private Hidryco.HidrycoLib.Symbols.Fase_Solida.sSV02 sv02;
-		private Hidryco.HidrycoLib.Symbols.Fase_Solida.sSV01 sv01;
+		private Hidryco.HidrycoLib.Symbols.DesidratacaoLodo.sSV03 sv03;
+		private Hidryco.HidrycoLib.Symbols.DesidratacaoLodo.sSV02 sv02;
+		private Hidryco.HidrycoLib.Symbols.DesidratacaoLodo.sSV01 sv01;
 		private Hidryco.HidrycoLib.Symbols.Sensor_Generico.sCompacto ft01;
 		private Hidryco.HidrycoLib.Symbols.Sensor_Generico.sCompacto ft02;
 		private Hidryco.HidrycoLib.Symbols.Sensor_Generico.sCompacto ft03;
 		private Hidryco.HidrycoLib.Symbols.Motor_Generico.sBomba br01;
 		private Hidryco.HidrycoLib.Symbols.Motor_Generico.sBomba br02;
 		private Hidryco.HidrycoLib.Symbols.Sensor_Generico.sCompacto ft07;
-		private Hidryco.HidrycoLib.Symbols.Fase_Solida.sFaixa processo;
+		private Hidryco.HidrycoLib.Symbols.DesidratacaoLodo.sFaixa processo;
 		private NxtControl.GuiFramework.DrawnButton btnResetGeral;
+		private NxtControl.GuiFramework.DrawnButton btnReconhecerGeral;
 		#endregion
 	}
 }

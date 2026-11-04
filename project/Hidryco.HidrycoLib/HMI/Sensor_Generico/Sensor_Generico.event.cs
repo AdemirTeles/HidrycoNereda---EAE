@@ -486,6 +486,146 @@ namespace Hidryco.HidrycoLib.Symbols.Sensor_Generico
       return (System.Boolean) var;
     }  }
 
+    public bool Get_STS_LIMITE_HH(ref System.Single value)
+    {
+      if (accessorService == null)
+        return false;
+      float var = 0;
+      bool ret = accessorService.GetFloatValue(channelId, cookie, eventIndex, true,22, ref var);
+      if (ret) value = (System.Single) var;
+      return ret;
+    }
+
+    public System.Single? STS_LIMITE_HH
+    { get {
+      if (accessorService == null)
+        return null;
+      float var = 0;
+      bool ret = accessorService.GetFloatValue(channelId, cookie, eventIndex, true,22, ref var);
+      if (!ret) return null;
+      return (System.Single) var;
+    }  }
+
+    public bool Get_STS_LIMITE_H(ref System.Single value)
+    {
+      if (accessorService == null)
+        return false;
+      float var = 0;
+      bool ret = accessorService.GetFloatValue(channelId, cookie, eventIndex, true,23, ref var);
+      if (ret) value = (System.Single) var;
+      return ret;
+    }
+
+    public System.Single? STS_LIMITE_H
+    { get {
+      if (accessorService == null)
+        return null;
+      float var = 0;
+      bool ret = accessorService.GetFloatValue(channelId, cookie, eventIndex, true,23, ref var);
+      if (!ret) return null;
+      return (System.Single) var;
+    }  }
+
+    public bool Get_STS_LIMITE_L(ref System.Single value)
+    {
+      if (accessorService == null)
+        return false;
+      float var = 0;
+      bool ret = accessorService.GetFloatValue(channelId, cookie, eventIndex, true,24, ref var);
+      if (ret) value = (System.Single) var;
+      return ret;
+    }
+
+    public System.Single? STS_LIMITE_L
+    { get {
+      if (accessorService == null)
+        return null;
+      float var = 0;
+      bool ret = accessorService.GetFloatValue(channelId, cookie, eventIndex, true,24, ref var);
+      if (!ret) return null;
+      return (System.Single) var;
+    }  }
+
+    public bool Get_STS_LIMITE_LL(ref System.Single value)
+    {
+      if (accessorService == null)
+        return false;
+      float var = 0;
+      bool ret = accessorService.GetFloatValue(channelId, cookie, eventIndex, true,25, ref var);
+      if (ret) value = (System.Single) var;
+      return ret;
+    }
+
+    public System.Single? STS_LIMITE_LL
+    { get {
+      if (accessorService == null)
+        return null;
+      float var = 0;
+      bool ret = accessorService.GetFloatValue(channelId, cookie, eventIndex, true,25, ref var);
+      if (!ret) return null;
+      return (System.Single) var;
+    }  }
+
+    public bool Get_CommonError(ref System.Boolean value)
+    {
+      if (accessorService == null)
+        return false;
+      bool var = false;
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,26, ref var);
+      if (ret) value = (System.Boolean) var;
+      return ret;
+    }
+
+    public System.Boolean? CommonError
+    { get {
+      if (accessorService == null)
+        return null;
+      bool var = false;
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,26, ref var);
+      if (!ret) return null;
+      return (System.Boolean) var;
+    }  }
+
+    public bool Get_Reliability(ref System.Int16 value)
+    {
+      if (accessorService == null)
+        return false;
+      System.Int64 var = 0;
+      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,27, ref var);
+      if (ret) value = (System.Int16) var;
+      return ret;
+    }
+
+    public System.Int16? Reliability
+    { get {
+      if (accessorService == null)
+        return null;
+      System.Int64 var = 0;
+      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,27, ref var);
+      if (!ret) return null;
+      return (System.Int16) var;
+    }  }
+
+    public bool Get_DaysToMaintenance(ref System.Int16 value)
+    {
+      if (accessorService == null)
+        return false;
+      System.Int64 var = 0;
+      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,28, ref var);
+      if (ret) value = (System.Int16) var;
+      return ret;
+    }
+
+    public System.Int16? DaysToMaintenance
+    { get {
+      if (accessorService == null)
+        return null;
+      System.Int64 var = 0;
+      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,28, ref var);
+      if (!ret) return null;
+      return (System.Int16) var;
+    }  }
+
 
   }
 

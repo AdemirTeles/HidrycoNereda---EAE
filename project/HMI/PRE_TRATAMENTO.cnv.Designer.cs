@@ -20,6 +20,7 @@ namespace HMI.Main.Canvases
 		private void InitializeComponent()
 		{
 			this.btnResetGeral = new NxtControl.GuiFramework.DrawnButton();
+			this.btnReconhecerGeral = new NxtControl.GuiFramework.DrawnButton();
 			this.fundo = new NxtControl.GuiFramework.Rectangle();
 			this.tbColetor = new NxtControl.GuiFramework.Pipe();
 			this.tbGordura = new NxtControl.GuiFramework.Pipe();
@@ -64,6 +65,11 @@ namespace HMI.Main.Canvases
 			this.tqLodo = new NxtControl.GuiFramework.Rectangle();
 			this.rLodo = new NxtControl.GuiFramework.FreeText();
 			this.rLodo2 = new NxtControl.GuiFramework.FreeText();
+			this.repAIft = new SE.Nereda.Symbols.AnalogInputBase.sInstanceName();
+			this.repHHft = new SE.App2Base.Symbols.LimitAlarm.sIndicator();
+			this.repHft = new SE.App2Base.Symbols.LimitAlarm.sIndicator();
+			this.repLft = new SE.App2Base.Symbols.LimitAlarm.sIndicator();
+			this.repLLft = new SE.App2Base.Symbols.LimitAlarm.sIndicator();
 			// 
 			// fundo
 			// 
@@ -456,6 +462,56 @@ namespace HMI.Main.Canvases
 			this.rLodo2.Name = "rLodo2";
 			this.rLodo2.Text = "de lodo (sólidos)";
 			// 
+			// repAIft
+			// 
+			this.repAIft.BeginInit();
+			this.repAIft.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 0D, 0D);
+			this.repAIft.Name = "repAIft";
+			this.repAIft.SecurityToken = ((uint)(4294967295u));
+			this.repAIft.TagName = "DE5E3E2FE4C5E300.Sensors.FeedInfluentFlowPv.AnalogInput";
+			this.repAIft.Visible = false;
+			this.repAIft.EndInit();
+			// 
+			// repHHft
+			// 
+			this.repHHft.BeginInit();
+			this.repHHft.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 0D, 0D);
+			this.repHHft.Name = "repHHft";
+			this.repHHft.SecurityToken = ((uint)(4294967295u));
+			this.repHHft.TagName = "DE5E3E2FE4C5E300.Sensors.FeedInfluentFlowPv.highHigh";
+			this.repHHft.Visible = false;
+			this.repHHft.EndInit();
+			// 
+			// repHft
+			// 
+			this.repHft.BeginInit();
+			this.repHft.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 0D, 0D);
+			this.repHft.Name = "repHft";
+			this.repHft.SecurityToken = ((uint)(4294967295u));
+			this.repHft.TagName = "DE5E3E2FE4C5E300.Sensors.FeedInfluentFlowPv.high";
+			this.repHft.Visible = false;
+			this.repHft.EndInit();
+			// 
+			// repLft
+			// 
+			this.repLft.BeginInit();
+			this.repLft.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 0D, 0D);
+			this.repLft.Name = "repLft";
+			this.repLft.SecurityToken = ((uint)(4294967295u));
+			this.repLft.TagName = "DE5E3E2FE4C5E300.Sensors.FeedInfluentFlowPv.low";
+			this.repLft.Visible = false;
+			this.repLft.EndInit();
+			// 
+			// repLLft
+			// 
+			this.repLLft.BeginInit();
+			this.repLLft.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 0D, 0D);
+			this.repLLft.Name = "repLLft";
+			this.repLLft.SecurityToken = ((uint)(4294967295u));
+			this.repLLft.TagName = "DE5E3E2FE4C5E300.Sensors.FeedInfluentFlowPv.lowLow";
+			this.repLLft.Visible = false;
+			this.repLLft.EndInit();
+			// 
 			// PRE_TRATAMENTO
 			// 
 			this.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(1366D)), ((float)(698D)));
@@ -474,6 +530,19 @@ namespace HMI.Main.Canvases
 			this.btnResetGeral.Text = "Reset geral";
 			this.btnResetGeral.Use3DEffect = false;
 			this.btnResetGeral.Click += new System.EventHandler(this.BtnResetGeralClick);
+			// 
+			// btnReconhecerGeral
+			// 
+			this.btnReconhecerGeral.Bounds = new NxtControl.Drawing.RectF(((float)(138D)), ((float)(662D)), ((float)(150D)), ((float)(30D)));
+			this.btnReconhecerGeral.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208))));
+			this.btnReconhecerGeral.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+			this.btnReconhecerGeral.InnerBorderColor = new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208)));
+			this.btnReconhecerGeral.Name = "btnReconhecerGeral";
+			this.btnReconhecerGeral.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(160)), ((byte)(160)), ((byte)(160))), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.btnReconhecerGeral.Radius = 2D;
+			this.btnReconhecerGeral.Text = "Reconhecer geral";
+			this.btnReconhecerGeral.Use3DEffect = false;
+			this.btnReconhecerGeral.Click += new System.EventHandler(this.BtnReconhecerGeralClick);
 			this.Shapes.AddRange(new System.ComponentModel.IComponent[] {
 			this.fundo,
 			this.tbColetor,
@@ -519,7 +588,13 @@ namespace HMI.Main.Canvases
 			this.tqLodo,
 			this.rLodo,
 			this.rLodo2,
-			this.btnResetGeral});
+			this.btnResetGeral,
+			this.btnReconhecerGeral,
+			this.repAIft,
+			this.repHHft,
+			this.repHft,
+			this.repLft,
+			this.repLLft});
 			this.Size = new System.Drawing.Size(1366, 698);
 
 		}
@@ -568,6 +643,12 @@ namespace HMI.Main.Canvases
 		private NxtControl.GuiFramework.FreeText rLodo;
 		private NxtControl.GuiFramework.FreeText rLodo2;
 		private NxtControl.GuiFramework.DrawnButton btnResetGeral;
+		private NxtControl.GuiFramework.DrawnButton btnReconhecerGeral;
+		private SE.Nereda.Symbols.AnalogInputBase.sInstanceName repAIft;
+		private SE.App2Base.Symbols.LimitAlarm.sIndicator repHHft;
+		private SE.App2Base.Symbols.LimitAlarm.sIndicator repHft;
+		private SE.App2Base.Symbols.LimitAlarm.sIndicator repLft;
+		private SE.App2Base.Symbols.LimitAlarm.sIndicator repLLft;
 		#endregion
 	}
 }

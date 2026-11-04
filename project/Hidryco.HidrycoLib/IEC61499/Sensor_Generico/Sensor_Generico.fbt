@@ -4,7 +4,7 @@
   <Attribute Name="HMI.Alias" Value="" />
   <Attribute Name="Configuration.FB.IDCounter" Value="2" />
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Hidryco" Version="1.8" Author="Hidryco" Date="22/10/2026" Remarks="1.8: tag STS_FALHA renomeada para STS_FALHA_SENSOR (mesmo ID F96D4140FF4E3BE0), so com a falha do sensor (fora da faixa ou falha do instrumento); a comunicacao fica em STS_FALHA_COMUNICACAO; STS_FALHA_ATIVA com qualquer falha. 1.7: E_CYCLE TickHmi (1 s): valores para a IHM no maximo 1 vez por segundo. 1.6: tag STS_FALHA_SENSOR renomeada para STS_FALHA = falha ativa (sensor em falha agora, sem memoria); nova tag STS_FALHA_COMUNICACAO (sensores por comunicacao ou com status da conexao). 1.5: sensor de nivel (cfgNivel) com os setpoints de alarme em % da altura maxima. 1.4: sinal em falha tambem pelo status da conexao Modbus (symlink stsConexao INT, 1 = online) com cfgUsaConexao, no 4-20 mA lido por remota e na comunicacao. 1.3: entrada inibeAlarmesBaixos (E_INIBE) e saidas stsCondicaoHH/H/L/LL (limite ultrapassado agora). 1.2: alarmes na lista do EAE com reconhecimento pelo reset e pisca na IHM (ISA-101), tempo padrao de alarme 5 s. 1.0: sensor generico (substitui Sensor_4a20, Sensor_Nivel_4a20 e Sensor_Comunicacao). Campo por symlink ${PATH}: 4-20 mA = stsSensorBruto (INT); comunicacao = stsFalhaSensor, stsEntrada (REAL), stsFalhaComunicacao. Alarmes HH/H/L/LL e falha no sistema de alarmes do EAE (ALARM_BIT)." />
+  <VersionInfo Organization="Hidryco" Version="2.0" Author="Hidryco" Date="04/11/2026" Remarks="2.0: tags da IO List da Nereda no IThis: CommonError (mesma origem do STS_FALHA_SENSOR), Reliability = 80 fixo e DaysToMaintenance = 0. 1.9: limites dos alarmes em unidade de engenharia (Logica.stsLimHH..LL) para o grafico da IHM. 1.8: tag STS_FALHA renomeada para STS_FALHA_SENSOR (mesmo ID F96D4140FF4E3BE0), so com a falha do sensor (fora da faixa ou falha do instrumento); a comunicacao fica em STS_FALHA_COMUNICACAO; STS_FALHA_ATIVA com qualquer falha. 1.7: E_CYCLE TickHmi (1 s): valores para a IHM no maximo 1 vez por segundo. 1.6: tag STS_FALHA_SENSOR renomeada para STS_FALHA = falha ativa (sensor em falha agora, sem memoria); nova tag STS_FALHA_COMUNICACAO (sensores por comunicacao ou com status da conexao). 1.5: sensor de nivel (cfgNivel) com os setpoints de alarme em % da altura maxima. 1.4: sinal em falha tambem pelo status da conexao Modbus (symlink stsConexao INT, 1 = online) com cfgUsaConexao, no 4-20 mA lido por remota e na comunicacao. 1.3: entrada inibeAlarmesBaixos (E_INIBE) e saidas stsCondicaoHH/H/L/LL (limite ultrapassado agora). 1.2: alarmes na lista do EAE com reconhecimento pelo reset e pisca na IHM (ISA-101), tempo padrao de alarme 5 s. 1.0: sensor generico (substitui Sensor_4a20, Sensor_Nivel_4a20 e Sensor_Comunicacao). Campo por symlink ${PATH}: 4-20 mA = stsSensorBruto (INT); comunicacao = stsFalhaSensor, stsEntrada (REAL), stsFalhaComunicacao. Alarmes HH/H/L/LL e falha no sistema de alarmes do EAE (ALARM_BIT)." />
   <InterfaceList>
     <EventInputs>
       <Event ID="D21DAA5004F58516" Name="E_RESET_FALHAS" Comment="Reset da falha e dos alarmes pelo processo (com cmdResetFalhas = TRUE)">
@@ -69,6 +69,7 @@
   <FBNetwork>
     <FB ID="21DBF75529B17174" Name="IThis" Type="Sensor_Generico_HMI" x="1220" y="1140" Namespace="Hidryco.HidrycoLib">
       <Parameter Name="$1C38ED12C8BD1D24" Value="TRUE" />
+      <Parameter Name="$3B6F1F6BAD6853A9" Value="80" />
     </FB>
     <FB ID="1DA04E5D7EE17604" Name="plcStart1" Type="plcStart" x="1440" y="200" Namespace="SE.App2Base">
       <Parameter Name="$Prio" Value="10" />
@@ -544,6 +545,9 @@
       <Connection Source="$1A2582F2B07E0C54.D2CE0143DEEF5F5B" Destination="$21DBF75529B17174.F96D4140FF4E3BE0">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
+      <Connection Source="$1A2582F2B07E0C54.D2CE0143DEEF5F5B" Destination="$21DBF75529B17174.339076CC42EE7FBD">
+        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      </Connection>
       <Connection Source="$1A2582F2B07E0C54.90D219EA9609F475" Destination="$21DBF75529B17174.50692E037DBEB5AF">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
@@ -658,6 +662,10 @@
       <Connection Source="$CE7AF567A7A05B0F.VALUE1" Destination="$1A2582F2B07E0C54.A01E732EBCA193E3">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
+      <Connection Source="$1A2582F2B07E0C54.72AFED77258A9210" Destination="$21DBF75529B17174.4D0002C974B24A69" />
+      <Connection Source="$1A2582F2B07E0C54.082D88F711CCD739" Destination="$21DBF75529B17174.2007E90E21C8B4CF" />
+      <Connection Source="$1A2582F2B07E0C54.D91E42414EEE194E" Destination="$21DBF75529B17174.7B165BE1315191C3" />
+      <Connection Source="$1A2582F2B07E0C54.6D7F45595C9C84C3" Destination="$21DBF75529B17174.FFEA0503A1019B14" />
     </DataConnections>
   </FBNetwork>
 </FBType>

@@ -28,9 +28,15 @@ namespace HMI.Main.Canvases
 			HMI.Main.ResetGeral.Executar(this);
 		}
 
+		// Reconhecer geral: reconhece todos os alarmes pendentes da planta (nao reseta falhas)
+		void BtnReconhecerGeralClick(object sender, EventArgs e)
+		{
+			HMI.Main.ReconhecerGeral.Executar();
+		}
+
 		// ---- Replicacao dos ajustes do LIT-900-01/02 (Lodo) no SludgeHoldingTank1/2 (Nereda) ----
 		// O faceplate do LIT avisa quando o operador grava; aqui os mesmos valores vao para o AnalogInput do tanque da Nereda:
-		// faixa (PvMin/PvMax = valor em 4/20 mA) e os quatro LimitAlarm (habilitacao e limite; nivel em % vira metro pela altura maxima).
+		// faixa (PvMin/PvMax = valor em 4/20 mA, com EnScale e UseLimits ligados) e os quatro LimitAlarm (habilitacao e limite; nivel em % vira metro pela altura maxima).
 		void ReplicaTanques(Hidryco.HidrycoLib.SupportClasses.AjustesSensor a)
 		{
 			if (a == null || a.Tag == null) return;
@@ -42,7 +48,7 @@ namespace HMI.Main.Canvases
 				: new SE.App2Base.Symbols.LimitAlarm.sIndicator[] { repHH2, repH2, repL2, repLL2 };
 			try
 			{
-				ai.FireEvent_CFG(0F, true, 0F, true, a.RangeMin, false, a.RangeMax, false, false, true, false, true, 0F, true, 0F, true,
+				ai.FireEvent_CFG(0F, true, 0F, true, a.RangeMin, false, a.RangeMax, false, true, false, true, false, 0F, true, 0F, true,
 					0, true, 0, true, (short)0, true, 0F, true, (byte)0, true, 0, true, 0F, true, (byte)0, true);
 				if (a.Nivel && a.Altura <= 0F) return;          // sem altura maxima nao da para converter % em metro
 				for (int i = 0; i < 4; i++)

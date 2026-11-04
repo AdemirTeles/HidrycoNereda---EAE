@@ -69,6 +69,8 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_Generico
 				c.OutputValueChanged += Replica;
 			foreach (System.HMI.Symbols.Base.CheckButton c in new System.HMI.Symbols.Base.CheckButton[] { rHabHH, rHabH, rHabL, rHabLL })
 				c.OutputValueChanged += Replica;
+			foreach (System.HMI.Symbols.Base.TextBox<ushort> c in new System.HMI.Symbols.Base.TextBox<ushort>[] { rTempoHH, rTempoH, rTempoL, rTempoLL })
+				c.OutputValueChanged += Replica;
 		}
 
 		static float ValF(System.HMI.Symbols.Base.TextBox<float> c, object sender, ValueChangedEventArgs e)
@@ -81,6 +83,11 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_Generico
 			return object.ReferenceEquals(c, sender) ? Convert.ToBoolean(e.Value) : Convert.ToBoolean(c.Value);
 		}
 
+		static ushort ValU(System.HMI.Symbols.Base.TextBox<ushort> c, object sender, ValueChangedEventArgs e)
+		{
+			return object.ReferenceEquals(c, sender) ? Convert.ToUInt16(e.Value) : Convert.ToUInt16(c.Value);
+		}
+
 		void Replica(object sender, ValueChangedEventArgs e)
 		{
 			Hidryco.HidrycoLib.SupportClasses.AjustesSensor a = new Hidryco.HidrycoLib.SupportClasses.AjustesSensor();
@@ -91,6 +98,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_Generico
 			a.Nivel = Convert.ToBoolean(xNivel.Value);
 			a.Hab[0] = ValB(rHabHH, sender, e); a.Hab[1] = ValB(rHabH, sender, e); a.Hab[2] = ValB(rHabL, sender, e); a.Hab[3] = ValB(rHabLL, sender, e);
 			a.Sp[0] = ValF(rSpHH, sender, e); a.Sp[1] = ValF(rSpH, sender, e); a.Sp[2] = ValF(rSpL, sender, e); a.Sp[3] = ValF(rSpLL, sender, e);
+			a.Tempo[0] = ValU(rTempoHH, sender, e); a.Tempo[1] = ValU(rTempoH, sender, e); a.Tempo[2] = ValU(rTempoL, sender, e); a.Tempo[3] = ValU(rTempoLL, sender, e);
 			Hidryco.HidrycoLib.SupportClasses.ReplicaSensor.Publicar(a);
 		}
 	}
