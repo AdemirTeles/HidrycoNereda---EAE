@@ -1,6 +1,6 @@
 /*
- * Hidryco - Valvula_Coester - fpDefault
- * ISA-101: estado, posicao (barra e referencia), alarme por prioridade, chave/modo/disponibilidade, comando manual, reset e diagnostico.
+ * Hidryco - Atuador_Coester 2.1 - fpDefault
+ * ISA-101: estado, posicao, alarme por prioridade, chave/modo/disponibilidade, comando manual, tempos, reset e diagnostico.
  */
 using System;
 using System.ComponentModel;
@@ -44,11 +44,14 @@ namespace Hidryco.HidrycoLib.Faceplates.Atuador_Coester
 			this.btnFechar = new NxtControl.GuiFramework.DrawnButton();
 			this.rSp = new NxtControl.GuiFramework.FreeText();
 			this.vSpMan = new System.HMI.Symbols.Base.TextBox<short>();
+			this.rTAb = new NxtControl.GuiFramework.FreeText();
+			this.vTAb = new System.HMI.Symbols.Base.TextBox<ushort>();
+			this.rTFe = new NxtControl.GuiFramework.FreeText();
+			this.vTFe = new System.HMI.Symbols.Base.TextBox<ushort>();
 			this.btnPosicionar = new NxtControl.GuiFramework.DrawnButton();
 			this.textoCmd = new NxtControl.GuiFramework.FreeText();
 			this.btnReset = new NxtControl.GuiFramework.DrawnButton();
 			this.btnDiag = new NxtControl.GuiFramework.DrawnButton();
-			this.textoBloq = new NxtControl.GuiFramework.FreeText();
 			this.xANIM = new System.HMI.Symbols.Base.Execute<short>();
 			this.xPOS = new System.HMI.Symbols.Base.Execute<float>();
 			this.xREF = new System.HMI.Symbols.Base.Execute<float>();
@@ -60,12 +63,8 @@ namespace Hidryco.HidrycoLib.Faceplates.Atuador_Coester
 			this.xFATU = new System.HMI.Symbols.Base.Execute<bool>();
 			this.xFPOS = new System.HMI.Symbols.Base.Execute<bool>();
 			this.xCOD = new System.HMI.Symbols.Base.Execute<short>();
-			this.xACFG = new System.HMI.Symbols.Base.Execute<bool>();
-			this.xAPART = new System.HMI.Symbols.Base.Execute<bool>();
-			this.xBLOQ = new System.HMI.Symbols.Base.Execute<bool>();
 			this.xDISP = new System.HMI.Symbols.Base.Execute<bool>();
 			this.xMOD = new System.HMI.Symbols.Base.Execute<bool>();
-			this.xCMDM = new System.HMI.Symbols.Base.Execute<short>();
 			this.xECOM = new System.HMI.Symbols.Base.Execute<byte>();
 			this.xEATU = new System.HMI.Symbols.Base.Execute<byte>();
 			this.xEPOS = new System.HMI.Symbols.Base.Execute<byte>();
@@ -300,7 +299,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Atuador_Coester
 			this.rSp.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular);
 			this.rSp.Location = new NxtControl.Drawing.PointF(20D, 292D);
 			this.rSp.Name = "rSp";
-			this.rSp.Text = "Posição manual";
+			this.rSp.Text = "Posição desejada";
 			// 
 			// vSpMan
 			// 
@@ -318,6 +317,56 @@ namespace Hidryco.HidrycoLib.Faceplates.Atuador_Coester
 			this.vSpMan.UseInputPad = true;
 			this.vSpMan.Value = ((short)(0));
 			this.vSpMan.EndInit();
+			// 
+			// rTAb
+			// 
+			this.rTAb.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.rTAb.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular);
+			this.rTAb.Location = new NxtControl.Drawing.PointF(20D, 364D);
+			this.rTAb.Name = "rTAb";
+			this.rTAb.Text = "Tempo máx. para abrir";
+			// 
+			// vTAb
+			// 
+			this.vTAb.BeginInit();
+			this.vTAb.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.5D, 0D, 0D, 1D, 220D, 358D);
+			this.vTAb.MaximumTag = null;
+			this.vTAb.MinimumTag = null;
+			this.vTAb.Name = "vTAb";
+			this.vTAb.NumberBase = NxtControl.GuiFramework.NumberBase.Decimal;
+			this.vTAb.Pen = new NxtControl.Drawing.Pen("TextBoxPen");
+			this.vTAb.SetColor = new NxtControl.Drawing.Color("Yellow");
+			this.vTAb.Suffix = " s";
+			this.vTAb.TagName = "STP_FALHA_ABERTURA";
+			this.vTAb.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
+			this.vTAb.UseInputPad = true;
+			this.vTAb.Value = ((ushort)(0));
+			this.vTAb.EndInit();
+			// 
+			// rTFe
+			// 
+			this.rTFe.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.rTFe.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular);
+			this.rTFe.Location = new NxtControl.Drawing.PointF(20D, 398D);
+			this.rTFe.Name = "rTFe";
+			this.rTFe.Text = "Tempo máx. para fechar";
+			// 
+			// vTFe
+			// 
+			this.vTFe.BeginInit();
+			this.vTFe.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.5D, 0D, 0D, 1D, 220D, 392D);
+			this.vTFe.MaximumTag = null;
+			this.vTFe.MinimumTag = null;
+			this.vTFe.Name = "vTFe";
+			this.vTFe.NumberBase = NxtControl.GuiFramework.NumberBase.Decimal;
+			this.vTFe.Pen = new NxtControl.Drawing.Pen("TextBoxPen");
+			this.vTFe.SetColor = new NxtControl.Drawing.Color("Yellow");
+			this.vTFe.Suffix = " s";
+			this.vTFe.TagName = "STP_FALHA_FECHAMENTO";
+			this.vTFe.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
+			this.vTFe.UseInputPad = true;
+			this.vTFe.Value = ((ushort)(0));
+			this.vTFe.EndInit();
 			// 
 			// btnPosicionar
 			// 
@@ -342,7 +391,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Atuador_Coester
 			// 
 			// btnReset
 			// 
-			this.btnReset.Bounds = new NxtControl.Drawing.RectF(((float)(20D)), ((float)(350D)), ((float)(150D)), ((float)(34D)));
+			this.btnReset.Bounds = new NxtControl.Drawing.RectF(((float)(20D)), ((float)(432D)), ((float)(150D)), ((float)(34D)));
 			this.btnReset.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208))));
 			this.btnReset.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
 			this.btnReset.InnerBorderColor = new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208)));
@@ -355,7 +404,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Atuador_Coester
 			// 
 			// btnDiag
 			// 
-			this.btnDiag.Bounds = new NxtControl.Drawing.RectF(((float)(190D)), ((float)(350D)), ((float)(150D)), ((float)(34D)));
+			this.btnDiag.Bounds = new NxtControl.Drawing.RectF(((float)(190D)), ((float)(432D)), ((float)(150D)), ((float)(34D)));
 			this.btnDiag.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208))));
 			this.btnDiag.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.btnDiag.InnerBorderColor = new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208)));
@@ -365,14 +414,6 @@ namespace Hidryco.HidrycoLib.Faceplates.Atuador_Coester
 			this.btnDiag.Radius = 2D;
 			this.btnDiag.Text = "Diagnóstico";
 			this.btnDiag.Use3DEffect = false;
-			// 
-			// textoBloq
-			// 
-			this.textoBloq.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.textoBloq.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
-			this.textoBloq.Location = new NxtControl.Drawing.PointF(20D, 398D);
-			this.textoBloq.Name = "textoBloq";
-			this.textoBloq.Text = "";
 			// 
 			// xANIM
 			// 
@@ -506,42 +547,6 @@ namespace Hidryco.HidrycoLib.Faceplates.Atuador_Coester
 			this.xCOD.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.XCODValueChanged);
 			this.xCOD.EndInit();
 			// 
-			// xACFG
-			// 
-			this.xACFG.BeginInit();
-			this.xACFG.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, double.NaN, double.NaN);
-			this.xACFG.IsOnlyInput = true;
-			this.xACFG.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
-			this.xACFG.Name = "xACFG";
-			this.xACFG.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
-			this.xACFG.TagName = "STS_AVISO_CONFIG";
-			this.xACFG.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.XACFGValueChanged);
-			this.xACFG.EndInit();
-			// 
-			// xAPART
-			// 
-			this.xAPART.BeginInit();
-			this.xAPART.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, double.NaN, double.NaN);
-			this.xAPART.IsOnlyInput = true;
-			this.xAPART.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
-			this.xAPART.Name = "xAPART";
-			this.xAPART.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
-			this.xAPART.TagName = "STS_AVISO_PARTIDAS";
-			this.xAPART.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.XAPARTValueChanged);
-			this.xAPART.EndInit();
-			// 
-			// xBLOQ
-			// 
-			this.xBLOQ.BeginInit();
-			this.xBLOQ.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, double.NaN, double.NaN);
-			this.xBLOQ.IsOnlyInput = true;
-			this.xBLOQ.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
-			this.xBLOQ.Name = "xBLOQ";
-			this.xBLOQ.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
-			this.xBLOQ.TagName = "STS_BLOQUEADO";
-			this.xBLOQ.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.XBLOQValueChanged);
-			this.xBLOQ.EndInit();
-			// 
 			// xDISP
 			// 
 			this.xDISP.BeginInit();
@@ -562,21 +567,9 @@ namespace Hidryco.HidrycoLib.Faceplates.Atuador_Coester
 			this.xMOD.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
 			this.xMOD.Name = "xMOD";
 			this.xMOD.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
-			this.xMOD.TagName = "STS_MODULANTE";
+			this.xMOD.TagName = "STS_POSICIONADOR";
 			this.xMOD.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.XMODValueChanged);
 			this.xMOD.EndInit();
-			// 
-			// xCMDM
-			// 
-			this.xCMDM.BeginInit();
-			this.xCMDM.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, double.NaN, double.NaN);
-			this.xCMDM.IsOnlyInput = true;
-			this.xCMDM.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
-			this.xCMDM.Name = "xCMDM";
-			this.xCMDM.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
-			this.xCMDM.TagName = "STS_CMD_MANUAL";
-			this.xCMDM.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.XCMDMValueChanged);
-			this.xCMDM.EndInit();
 			// 
 			// xECOM
 			// 
@@ -616,7 +609,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Atuador_Coester
 			// 
 			// fpDefault
 			// 
-			this.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(360D)), ((float)(446D)));
+			this.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(360D)), ((float)(480D)));
 			this.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(224)), ((byte)(224)), ((byte)(224))));
 			this.Shapes.AddRange(new System.ComponentModel.IComponent[] {
 			this.cabecalho,
@@ -646,9 +639,12 @@ namespace Hidryco.HidrycoLib.Faceplates.Atuador_Coester
 			this.vSpMan,
 			this.btnPosicionar,
 			this.textoCmd,
+			this.rTAb,
+			this.vTAb,
+			this.rTFe,
+			this.vTFe,
 			this.btnReset,
 			this.btnDiag,
-			this.textoBloq,
 			this.xANIM,
 			this.xPOS,
 			this.xREF,
@@ -660,16 +656,12 @@ namespace Hidryco.HidrycoLib.Faceplates.Atuador_Coester
 			this.xFATU,
 			this.xFPOS,
 			this.xCOD,
-			this.xACFG,
-			this.xAPART,
-			this.xBLOQ,
 			this.xDISP,
 			this.xMOD,
-			this.xCMDM,
 			this.xECOM,
 			this.xEATU,
 			this.xEPOS});
-			this.Size = new System.Drawing.Size(360, 446);
+			this.Size = new System.Drawing.Size(360, 480);
 
 		}
 		private NxtControl.GuiFramework.Rectangle cabecalho;
@@ -697,11 +689,14 @@ namespace Hidryco.HidrycoLib.Faceplates.Atuador_Coester
 		private NxtControl.GuiFramework.DrawnButton btnFechar;
 		private NxtControl.GuiFramework.FreeText rSp;
 		private System.HMI.Symbols.Base.TextBox<short> vSpMan;
+		private NxtControl.GuiFramework.FreeText rTAb;
+		private System.HMI.Symbols.Base.TextBox<ushort> vTAb;
+		private NxtControl.GuiFramework.FreeText rTFe;
+		private System.HMI.Symbols.Base.TextBox<ushort> vTFe;
 		private NxtControl.GuiFramework.DrawnButton btnPosicionar;
 		private NxtControl.GuiFramework.FreeText textoCmd;
 		private NxtControl.GuiFramework.DrawnButton btnReset;
 		private NxtControl.GuiFramework.DrawnButton btnDiag;
-		private NxtControl.GuiFramework.FreeText textoBloq;
 		private System.HMI.Symbols.Base.Execute<short> xANIM;
 		private System.HMI.Symbols.Base.Execute<float> xPOS;
 		private System.HMI.Symbols.Base.Execute<float> xREF;
@@ -713,12 +708,8 @@ namespace Hidryco.HidrycoLib.Faceplates.Atuador_Coester
 		private System.HMI.Symbols.Base.Execute<bool> xFATU;
 		private System.HMI.Symbols.Base.Execute<bool> xFPOS;
 		private System.HMI.Symbols.Base.Execute<short> xCOD;
-		private System.HMI.Symbols.Base.Execute<bool> xACFG;
-		private System.HMI.Symbols.Base.Execute<bool> xAPART;
-		private System.HMI.Symbols.Base.Execute<bool> xBLOQ;
 		private System.HMI.Symbols.Base.Execute<bool> xDISP;
 		private System.HMI.Symbols.Base.Execute<bool> xMOD;
-		private System.HMI.Symbols.Base.Execute<short> xCMDM;
 		private System.HMI.Symbols.Base.Execute<byte> xECOM;
 		private System.HMI.Symbols.Base.Execute<byte> xEATU;
 		private System.HMI.Symbols.Base.Execute<byte> xEPOS;

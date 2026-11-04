@@ -94,7 +94,7 @@ namespace SE.Nereda.Faceplates.MotVsFailures
 			this.freeText1.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular);
 			this.freeText1.Location = new NxtControl.Drawing.PointF(16D, 16D);
 			this.freeText1.Name = "freeText1";
-			this.freeText1.Text = "Failure Name";
+			this.freeText1.Text = "Falha";
 			// 
 			// freeText2
 			// 
@@ -102,7 +102,7 @@ namespace SE.Nereda.Faceplates.MotVsFailures
 			this.freeText2.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular);
 			this.freeText2.Location = new NxtControl.Drawing.PointF(216D, 16D);
 			this.freeText2.Name = "freeText2";
-			this.freeText2.Text = "Failure Present";
+			this.freeText2.Text = "Falha presente";
 			// 
 			// freeText3
 			// 
@@ -110,7 +110,7 @@ namespace SE.Nereda.Faceplates.MotVsFailures
 			this.freeText3.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular);
 			this.freeText3.Location = new NxtControl.Drawing.PointF(328D, 16D);
 			this.freeText3.Name = "freeText3";
-			this.freeText3.Text = "Failure Count";
+			this.freeText3.Text = "N\u00ba falhas";
 			// 
 			// rectangle1
 			// 
@@ -139,7 +139,7 @@ namespace SE.Nereda.Faceplates.MotVsFailures
 			this.freeText4.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular);
 			this.freeText4.Location = new NxtControl.Drawing.PointF(16D, 48D);
 			this.freeText4.Name = "freeText4";
-			this.freeText4.Text = "Drive Failure";
+			this.freeText4.Text = "Falha do inversor";
 			// 
 			// freeText5
 			// 
@@ -147,7 +147,7 @@ namespace SE.Nereda.Faceplates.MotVsFailures
 			this.freeText5.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular);
 			this.freeText5.Location = new NxtControl.Drawing.PointF(16D, 80D);
 			this.freeText5.Name = "freeText5";
-			this.freeText5.Text = "Electric Circuit Failure";
+			this.freeText5.Text = "Falha do circuito el\u00e9trico";
 			// 
 			// freeText6
 			// 
@@ -155,7 +155,7 @@ namespace SE.Nereda.Faceplates.MotVsFailures
 			this.freeText6.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular);
 			this.freeText6.Location = new NxtControl.Drawing.PointF(16D, 112D);
 			this.freeText6.Name = "freeText6";
-			this.freeText6.Text = "Frequency Inverter Failure";
+			this.freeText6.Text = "Falha inversor freq.";
 			// 
 			// freeText7
 			// 
@@ -163,7 +163,7 @@ namespace SE.Nereda.Faceplates.MotVsFailures
 			this.freeText7.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular);
 			this.freeText7.Location = new NxtControl.Drawing.PointF(16D, 144D);
 			this.freeText7.Name = "freeText7";
-			this.freeText7.Text = "Power Failure";
+			this.freeText7.Text = "Falha de alimenta\u00e7\u00e3o";
 			// 
 			// freeText8
 			// 
@@ -171,7 +171,7 @@ namespace SE.Nereda.Faceplates.MotVsFailures
 			this.freeText8.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular);
 			this.freeText8.Location = new NxtControl.Drawing.PointF(16D, 176D);
 			this.freeText8.Name = "freeText8";
-			this.freeText8.Text = "TRIP Failure";
+			this.freeText8.Text = "Falha TRIP";
 			// 
 			// freeText9
 			// 
@@ -179,7 +179,7 @@ namespace SE.Nereda.Faceplates.MotVsFailures
 			this.freeText9.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular);
 			this.freeText9.Location = new NxtControl.Drawing.PointF(16D, 208D);
 			this.freeText9.Name = "freeText9";
-			this.freeText9.Text = "Moisture Detection Pump MS";
+			this.freeText9.Text = "Umidade bomba MS";
 			// 
 			// Failure1
 			// 

@@ -204,7 +204,7 @@ namespace SE.Nereda.Faceplates.AnalogInputBase
 			this.labelS1.Name = "labelS1";
 			this.labelS1.NameSpace = "SE.App2CommonProcess";
 			this.labelS1.SeperatorVisiblity = true;
-			this.labelS1.Text = "Process Value";
+			this.labelS1.Text = "Valor de processo";
 			this.labelS1.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleRight;
 			this.labelS1.TextColor = new NxtControl.Drawing.Color("FpLabelText");
 			this.labelS1.TextKey = "LabelProcessValue";

@@ -78,7 +78,7 @@ namespace SE.Nereda.Symbols.EmergencyManagement
 			this.freeText1.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeText1.Location = new NxtControl.Drawing.PointF(32D, 36D);
 			this.freeText1.Name = "freeText1";
-			this.freeText1.Text = "Emergency ON :";
+			this.freeText1.Text = "Emerg\u00eancia ativa :";
 			// 
 			// EmergencyON
 			// 
@@ -104,7 +104,7 @@ namespace SE.Nereda.Symbols.EmergencyManagement
 			this.freeText2.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeText2.Location = new NxtControl.Drawing.PointF(32D, 96D);
 			this.freeText2.Name = "freeText2";
-			this.freeText2.Text = "Current Feed Order :";
+			this.freeText2.Text = "Ordem alim. atual :";
 			// 
 			// line1
 			// 
@@ -134,7 +134,7 @@ namespace SE.Nereda.Symbols.EmergencyManagement
 			this.freeText3.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular);
 			this.freeText3.Location = new NxtControl.Drawing.PointF(32D, 330D);
 			this.freeText3.Name = "freeText3";
-			this.freeText3.Text = "Actual Cycle Time :";
+			this.freeText3.Text = "Ciclo atual :";
 			// 
 			// CT_ReactorActual
 			// 
@@ -173,7 +173,7 @@ namespace SE.Nereda.Symbols.EmergencyManagement
 			this.freeText5.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular);
 			this.freeText5.Location = new NxtControl.Drawing.PointF(32D, 410D);
 			this.freeText5.Name = "freeText5";
-			this.freeText5.Text = "Aeration Time (S5) :";
+			this.freeText5.Text = "Aera\u00e7\u00e3o (S5) :";
 			// 
 			// AerateTimeR1
 			// 
@@ -195,7 +195,7 @@ namespace SE.Nereda.Symbols.EmergencyManagement
 			this.freeText6.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular);
 			this.freeText6.Location = new NxtControl.Drawing.PointF(32D, 128D);
 			this.freeText6.Name = "freeText6";
-			this.freeText6.Text = "Time Since Start Feed :";
+			this.freeText6.Text = "Desde in\u00edcio alim. :";
 			// 
 			// MinutesSinceLastFeedR1
 			// 
@@ -217,7 +217,7 @@ namespace SE.Nereda.Symbols.EmergencyManagement
 			this.freeText7.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular);
 			this.freeText7.Location = new NxtControl.Drawing.PointF(32D, 250D);
 			this.freeText7.Name = "freeText7";
-			this.freeText7.Text = "Start Feed Interval Time :";
+			this.freeText7.Text = "Intervalo alim. :";
 			// 
 			// StartInterval
 			// 
@@ -239,7 +239,7 @@ namespace SE.Nereda.Symbols.EmergencyManagement
 			this.freeText8.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular);
 			this.freeText8.Location = new NxtControl.Drawing.PointF(32D, 290D);
 			this.freeText8.Name = "freeText8";
-			this.freeText8.Text = "Nominal Cycle Time :";
+			this.freeText8.Text = "Ciclo nominal :";
 			// 
 			// iCT_Nominal
 			// 
@@ -277,7 +277,7 @@ namespace SE.Nereda.Symbols.EmergencyManagement
 			this.freeText9.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular);
 			this.freeText9.Location = new NxtControl.Drawing.PointF(32D, 528D);
 			this.freeText9.Name = "freeText9";
-			this.freeText9.Text = "Start Up Delay Time :";
+			this.freeText9.Text = "Atraso partida :";
 			// 
 			// line2
 			// 
@@ -339,7 +339,7 @@ namespace SE.Nereda.Symbols.EmergencyManagement
 			this.freeText4.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular);
 			this.freeText4.Location = new NxtControl.Drawing.PointF(32D, 184D);
 			this.freeText4.Name = "freeText4";
-			this.freeText4.Text = "Time Since Last Aerate :";
+			this.freeText4.Text = "Desde \u00faltima aera\u00e7\u00e3o :";
 			// 
 			// MinutesSinceLastAerateR1
 			// 
@@ -361,7 +361,7 @@ namespace SE.Nereda.Symbols.EmergencyManagement
 			this.freeText10.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular);
 			this.freeText10.Location = new NxtControl.Drawing.PointF(32D, 370D);
 			this.freeText10.Name = "freeText10";
-			this.freeText10.Text = "Settle Time :";
+			this.freeText10.Text = "Decanta\u00e7\u00e3o :";
 			// 
 			// SettleTimeR1
 			// 

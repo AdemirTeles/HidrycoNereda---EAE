@@ -45,7 +45,7 @@ namespace SE.Nereda.Symbols.CmdAerate
 			this.freeText1.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeText1.Location = new NxtControl.Drawing.PointF(16D, 112D);
 			this.freeText1.Name = "freeText1";
-			this.freeText1.Text = "Air Fill valve (Manual Mode) :";
+			this.freeText1.Text = "V\u00e1lvula pressuriza\u00e7\u00e3o (manual) :";
 			// 
 			// freeText3
 			// 
@@ -53,7 +53,7 @@ namespace SE.Nereda.Symbols.CmdAerate
 			this.freeText3.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeText3.Location = new NxtControl.Drawing.PointF(16D, 64D);
 			this.freeText3.Name = "freeText3";
-			this.freeText3.Text = "Aeration Capacity Sp (Manual Mode) :";
+			this.freeText3.Text = "SP capacidade aera\u00e7\u00e3o (manual) :";
 			// 
 			// ManCapacity_Blower
 			// 
@@ -86,7 +86,7 @@ namespace SE.Nereda.Symbols.CmdAerate
 			new NxtControl.Drawing.PointF(8D, 32D),
 			new NxtControl.Drawing.PointF(160D, 32D),
 			new NxtControl.Drawing.PointF(184D, 56D)});
-			this.polygon1.Text = "AERATE";
+			this.polygon1.Text = "AERA\u00c7\u00c3O";
 			this.polygon1.TextColor = new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(0)));
 			// 
 			// AirFillValveMan

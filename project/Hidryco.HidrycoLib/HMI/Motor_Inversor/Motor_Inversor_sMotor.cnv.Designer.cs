@@ -128,6 +128,7 @@ namespace Hidryco.HidrycoLib.Symbols.Motor_Inversor
 			this.stsRemoto.IsOnlyInput = true;
 			this.stsRemoto.Name = "stsRemoto";
 			propertyDictionary2.Add("Text", "L");
+			propertyDictionary2.Add("TextColor", new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))));
 			propertyDictionary3.Add("Text", "R");
 			this.stsRemoto.Ranges.Clear();
 			this.stsRemoto.Ranges.Add(new NxtControl.GuiFramework.Range<bool>(false, propertyDictionary2));
@@ -148,6 +149,7 @@ namespace Hidryco.HidrycoLib.Symbols.Motor_Inversor
 			this.fbkStsAutomatico.IsOnlyInput = true;
 			this.fbkStsAutomatico.Name = "fbkStsAutomatico";
 			propertyDictionary5.Add("Text", "M");
+			propertyDictionary5.Add("TextColor", new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))));
 			propertyDictionary6.Add("Text", "A");
 			this.fbkStsAutomatico.Ranges.Clear();
 			this.fbkStsAutomatico.Ranges.Add(new NxtControl.GuiFramework.Range<bool>(false, propertyDictionary5));

@@ -51,7 +51,7 @@ namespace SE.Nereda.Faceplates.CAerationLogic
 			this.freeText2.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeText2.Location = new NxtControl.Drawing.PointF(16D, 20D);
 			this.freeText2.Name = "freeText2";
-			this.freeText2.Text = "Starting 2nd Blower Sp (C2) :";
+			this.freeText2.Text = "SP partida 2\u00ba soprador (C2) :";
 			// 
 			// C2_IN
 			// 
@@ -77,7 +77,7 @@ namespace SE.Nereda.Faceplates.CAerationLogic
 			this.freeText3.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeText3.Location = new NxtControl.Drawing.PointF(16D, 57D);
 			this.freeText3.Name = "freeText3";
-			this.freeText3.Text = "Starting 3rd Blower Sp (C3) :";
+			this.freeText3.Text = "SP partida 3\u00ba soprador (C3) :";
 			// 
 			// C3_IN
 			// 
@@ -103,7 +103,7 @@ namespace SE.Nereda.Faceplates.CAerationLogic
 			this.freeText1.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeText1.Location = new NxtControl.Drawing.PointF(16D, 94D);
 			this.freeText1.Name = "freeText1";
-			this.freeText1.Text = "Maximun Capacity Blowers :";
+			this.freeText1.Text = "Capacidade m\u00e1x. sopradores :";
 			// 
 			// freeText5
 			// 
@@ -111,7 +111,7 @@ namespace SE.Nereda.Faceplates.CAerationLogic
 			this.freeText5.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeText5.Location = new NxtControl.Drawing.PointF(16D, 131D);
 			this.freeText5.Name = "freeText5";
-			this.freeText5.Text = "Adjustable Time (C2) :";
+			this.freeText5.Text = "Tempo ajust\u00e1vel (C2) :";
 			// 
 			// MaximumCapacityBlower
 			// 
@@ -137,7 +137,7 @@ namespace SE.Nereda.Faceplates.CAerationLogic
 			this.freeText4.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeText4.Location = new NxtControl.Drawing.PointF(16D, 168D);
 			this.freeText4.Name = "freeText4";
-			this.freeText4.Text = "Adjustable Time (C3) :";
+			this.freeText4.Text = "Tempo ajust\u00e1vel (C3) :";
 			// 
 			// C2_AdjustableTime
 			// 

@@ -73,7 +73,7 @@ namespace SE.Nereda.Symbols.CmdWaterDischargeSLB
 			this.freeText1.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeText1.Location = new NxtControl.Drawing.PointF(16D, 44D);
 			this.freeText1.Name = "freeText1";
-			this.freeText1.Text = "Flow Setpoint (Manual Mode) :";
+			this.freeText1.Text = "SP vaz\u00e3o (manual) :";
 			// 
 			// FeedFlowSpMan
 			// 
@@ -106,7 +106,7 @@ namespace SE.Nereda.Symbols.CmdWaterDischargeSLB
 			new NxtControl.Drawing.PointF(8D, 16D),
 			new NxtControl.Drawing.PointF(160D, 16D),
 			new NxtControl.Drawing.PointF(184D, 40D)});
-			this.polygon1.Text = "WATER DISCHARGE";
+			this.polygon1.Text = "DESCARGA DE \u00c1GUA";
 			this.polygon1.TextColor = new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(0)));
 			// 
 			// rectangle2
@@ -122,7 +122,7 @@ namespace SE.Nereda.Symbols.CmdWaterDischargeSLB
 			this.freeText2.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeText2.Location = new NxtControl.Drawing.PointF(16D, 84D);
 			this.freeText2.Name = "freeText2";
-			this.freeText2.Text = "Flow Setpoint (AutoMode) :";
+			this.freeText2.Text = "SP vaz\u00e3o (autom\u00e1tico) :";
 			// 
 			// rectangle3
 			// 
@@ -172,7 +172,7 @@ namespace SE.Nereda.Symbols.CmdWaterDischargeSLB
 			this.freeText3.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeText3.Location = new NxtControl.Drawing.PointF(16D, 204D);
 			this.freeText3.Name = "freeText3";
-			this.freeText3.Text = "2nd Pump Stop Speed (C3) :";
+			this.freeText3.Text = "Veloc. parada 2\u00aa bomba (C3) :";
 			// 
 			// freeText4
 			// 
@@ -180,7 +180,7 @@ namespace SE.Nereda.Symbols.CmdWaterDischargeSLB
 			this.freeText4.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeText4.Location = new NxtControl.Drawing.PointF(16D, 164D);
 			this.freeText4.Name = "freeText4";
-			this.freeText4.Text = "2nd Pump Start Speed (C2) :";
+			this.freeText4.Text = "Veloc. partida 2\u00aa bomba (C2) :";
 			// 
 			// freeText5
 			// 
@@ -188,7 +188,7 @@ namespace SE.Nereda.Symbols.CmdWaterDischargeSLB
 			this.freeText5.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeText5.Location = new NxtControl.Drawing.PointF(16D, 124D);
 			this.freeText5.Name = "freeText5";
-			this.freeText5.Text = "Max Speed 1 Pump (Cmax) :";
+			this.freeText5.Text = "Veloc. m\u00e1x. 1 bomba (Cmax) :";
 			// 
 			// freeText6
 			// 
@@ -196,7 +196,7 @@ namespace SE.Nereda.Symbols.CmdWaterDischargeSLB
 			this.freeText6.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeText6.Location = new NxtControl.Drawing.PointF(16D, 244D);
 			this.freeText6.Name = "freeText6";
-			this.freeText6.Text = "Time at C2 (T_C2) :";
+			this.freeText6.Text = "Tempo em C2 (T_C2) :";
 			// 
 			// freeText7
 			// 
@@ -204,7 +204,7 @@ namespace SE.Nereda.Symbols.CmdWaterDischargeSLB
 			this.freeText7.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeText7.Location = new NxtControl.Drawing.PointF(16D, 284D);
 			this.freeText7.Name = "freeText7";
-			this.freeText7.Text = "Time below C3 (T_C3) :";
+			this.freeText7.Text = "Tempo abaixo de C3 (T_C3) :";
 			// 
 			// rectangle9
 			// 
@@ -313,7 +313,7 @@ namespace SE.Nereda.Symbols.CmdWaterDischargeSLB
 			this.freeText8.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeText8.Location = new NxtControl.Drawing.PointF(16D, 324D);
 			this.freeText8.Name = "freeText8";
-			this.freeText8.Text = "Restart Time :";
+			this.freeText8.Text = "Tempo de religamento :";
 			// 
 			// freeText9
 			// 
@@ -321,7 +321,7 @@ namespace SE.Nereda.Symbols.CmdWaterDischargeSLB
 			this.freeText9.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeText9.Location = new NxtControl.Drawing.PointF(16D, 364D);
 			this.freeText9.Name = "freeText9";
-			this.freeText9.Text = "Flow LowLow Time :";
+			this.freeText9.Text = "Tempo vaz\u00e3o muito baixa :";
 			// 
 			// T_Restart
 			// 
@@ -358,7 +358,7 @@ namespace SE.Nereda.Symbols.CmdWaterDischargeSLB
 			this.freeTextCmin.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeTextCmin.Location = new NxtControl.Drawing.PointF(16D, 404D);
 			this.freeTextCmin.Name = "freeTextCmin";
-			this.freeTextCmin.Text = "Min. Pump Speed (Cmin) :";
+			this.freeTextCmin.Text = "Veloc. m\u00edn. bomba (Cmin) :";
 			// 
 			// Cmin
 			// 

@@ -152,7 +152,7 @@ namespace SE.Nereda.Symbols.InfluentFeed
 			// sMotorVs2
 			// 
 			this.sMotorVs2.BeginInit();
-			this.sMotorVs2._iMotName = "P4005A";
+			this.sMotorVs2._iMotName = "R4005A";
 			this.sMotorVs2._iUnit = "%";
 			this.sMotorVs2.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 166D, 256D);
 			this.sMotorVs2.Name = "sMotorVs2";
@@ -165,7 +165,7 @@ namespace SE.Nereda.Symbols.InfluentFeed
 			// sMotorVs3
 			// 
 			this.sMotorVs3.BeginInit();
-			this.sMotorVs3._iMotName = "P4005B";
+			this.sMotorVs3._iMotName = "R4005B";
 			this.sMotorVs3._iUnit = "%";
 			this.sMotorVs3.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 696D, 256D);
 			this.sMotorVs3.Name = "sMotorVs3";
@@ -274,8 +274,8 @@ namespace SE.Nereda.Symbols.InfluentFeed
 			// sPvBarVer2
 			// 
 			this.sPvBarVer2.BeginInit();
-			this.sPvBarVer2._iSensorName = "40 LIT 0001";
-			this.sPvBarVer2._iUnit = "%";
+			this.sPvBarVer2._iSensorName = "40LIT0001 N\u00edvel";
+			this.sPvBarVer2._iUnit = "m";
 			this.sPvBarVer2.DesignMatrix = new NxtControl.Drawing.Matrix2D(1.2252252252252254D, 0D, 0D, 1.2252252252252254D, 839.99999999999989D, 332.97297297297291D);
 			this.sPvBarVer2.Name = "sPvBarVer2";
 			this.sPvBarVer2.SecurityToken = ((uint)(4294967295u));

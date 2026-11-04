@@ -13,6 +13,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_Generico
 		public fpAlarm()
 		{
 			InitializeComponent();
+			LigaReplica();
 			Atualiza();
 		}
 
@@ -120,5 +121,37 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_Generico
 			FireEvent_E_RESET(false);
 		}
 
+		// ---- Replicacao dos ajustes: avisa a tela quando o operador grava faixa, altura, alarmes ou habilitacoes.
+		// As telas ESTOCAGEM_LODO e VISAO_GERAL replicam o LIT-900-01/02 no AnalogInput do SludgeHoldingTank1/2 da Nereda.
+		void LigaReplica()
+		{
+			foreach (System.HMI.Symbols.Base.TextBox<float> c in new System.HMI.Symbols.Base.TextBox<float>[] { rRangeMin, rRangeMax, rAltura, spHH, spH, spL, spLL })
+				c.OutputValueChanged += Replica;
+			foreach (System.HMI.Symbols.Base.CheckButton c in new System.HMI.Symbols.Base.CheckButton[] { habHH, habH, habL, habLL })
+				c.OutputValueChanged += Replica;
+		}
+
+		static float ValF(System.HMI.Symbols.Base.TextBox<float> c, object sender, ValueChangedEventArgs e)
+		{
+			return object.ReferenceEquals(c, sender) ? Convert.ToSingle(e.Value) : Convert.ToSingle(c.Value);
+		}
+
+		static bool ValB(System.HMI.Symbols.Base.CheckButton c, object sender, ValueChangedEventArgs e)
+		{
+			return object.ReferenceEquals(c, sender) ? Convert.ToBoolean(e.Value) : Convert.ToBoolean(c.Value);
+		}
+
+		void Replica(object sender, ValueChangedEventArgs e)
+		{
+			Hidryco.HidrycoLib.SupportClasses.AjustesSensor a = new Hidryco.HidrycoLib.SupportClasses.AjustesSensor();
+			a.Tag = TagName;
+			a.RangeMin = ValF(rRangeMin, sender, e);
+			a.RangeMax = ValF(rRangeMax, sender, e);
+			a.Altura = ValF(rAltura, sender, e);
+			a.Nivel = Convert.ToBoolean(xNivel.Value);
+			a.Hab[0] = ValB(habHH, sender, e); a.Hab[1] = ValB(habH, sender, e); a.Hab[2] = ValB(habL, sender, e); a.Hab[3] = ValB(habLL, sender, e);
+			a.Sp[0] = ValF(spHH, sender, e); a.Sp[1] = ValF(spH, sender, e); a.Sp[2] = ValF(spL, sender, e); a.Sp[3] = ValF(spLL, sender, e);
+			Hidryco.HidrycoLib.SupportClasses.ReplicaSensor.Publicar(a);
+		}
 	}
 }

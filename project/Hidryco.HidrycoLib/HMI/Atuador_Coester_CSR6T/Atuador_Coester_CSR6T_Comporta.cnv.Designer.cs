@@ -75,6 +75,7 @@ namespace Hidryco.HidrycoLib.Symbols.Atuador_Coester_CSR6T
 			this.freeText_11.IsOnlyInput = true;
 			this.freeText_11.Name = "freeText_11";
 			propertyDictionary2.Add("Text", "L");
+			propertyDictionary2.Add("TextColor", new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))));
 			propertyDictionary3.Add("Text", "R");
 			this.freeText_11.Ranges.Clear();
 			this.freeText_11.Ranges.Add(new NxtControl.GuiFramework.Range<bool>(false, propertyDictionary2));
@@ -95,6 +96,7 @@ namespace Hidryco.HidrycoLib.Symbols.Atuador_Coester_CSR6T
 			this.freeText_12.IsOnlyInput = true;
 			this.freeText_12.Name = "freeText_12";
 			propertyDictionary5.Add("Text", "M");
+			propertyDictionary5.Add("TextColor", new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))));
 			propertyDictionary6.Add("Text", "A");
 			this.freeText_12.Ranges.Clear();
 			this.freeText_12.Ranges.Add(new NxtControl.GuiFramework.Range<bool>(false, propertyDictionary5));

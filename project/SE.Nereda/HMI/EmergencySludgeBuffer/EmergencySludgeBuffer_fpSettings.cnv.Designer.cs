@@ -67,7 +67,7 @@ namespace SE.Nereda.Faceplates.EmergencySludgeBuffer
 			new NxtControl.Drawing.PointF(8D, 8D),
 			new NxtControl.Drawing.PointF(336D, 8D),
 			new NxtControl.Drawing.PointF(376D, 32D)});
-			this.polygon1.Text = "SLUDGE BUFFER FALLBACK RECIPE  -  SETTINGS";
+			this.polygon1.Text = "RECEITA DE EMERG\u00caNCIA SLUDGE BUFFER  -  AJUSTES";
 			this.polygon1.TextColor = new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(0)));
 			// 
 			// freeText1
@@ -76,7 +76,7 @@ namespace SE.Nereda.Faceplates.EmergencySludgeBuffer
 			this.freeText1.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeText1.Location = new NxtControl.Drawing.PointF(16D, 44D);
 			this.freeText1.Name = "freeText1";
-			this.freeText1.Text = "Step 1 - Feed Time :";
+			this.freeText1.Text = "Passo 1 - Tempo alimenta\u00e7\u00e3o :";
 			// 
 			// freeText2
 			// 
@@ -84,7 +84,7 @@ namespace SE.Nereda.Faceplates.EmergencySludgeBuffer
 			this.freeText2.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeText2.Location = new NxtControl.Drawing.PointF(16D, 76D);
 			this.freeText2.Name = "freeText2";
-			this.freeText2.Text = "Step 2 - Wait Time :";
+			this.freeText2.Text = "Passo 2 - Tempo espera :";
 			// 
 			// freeText3
 			// 
@@ -92,7 +92,7 @@ namespace SE.Nereda.Faceplates.EmergencySludgeBuffer
 			this.freeText3.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeText3.Location = new NxtControl.Drawing.PointF(16D, 116D);
 			this.freeText3.Name = "freeText3";
-			this.freeText3.Text = "Step 3 - Sludge Discharge Time :";
+			this.freeText3.Text = "Passo 3 - Tempo descarte lodo :";
 			// 
 			// freeText4
 			// 
@@ -100,7 +100,7 @@ namespace SE.Nereda.Faceplates.EmergencySludgeBuffer
 			this.freeText4.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeText4.Location = new NxtControl.Drawing.PointF(16D, 156D);
 			this.freeText4.Name = "freeText4";
-			this.freeText4.Text = "Step 4 - Supernant Discharge Time :";
+			this.freeText4.Text = "Passo 4 - Tempo sobrenadante :";
 			// 
 			// freeText9
 			// 
@@ -108,7 +108,7 @@ namespace SE.Nereda.Faceplates.EmergencySludgeBuffer
 			this.freeText9.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeText9.Location = new NxtControl.Drawing.PointF(16D, 240D);
 			this.freeText9.Name = "freeText9";
-			this.freeText9.Text = "Supernant Discharge Flow Setpoint :";
+			this.freeText9.Text = "SP vaz\u00e3o descarga sobrenadante :";
 			// 
 			// freeText12
 			// 
@@ -116,7 +116,7 @@ namespace SE.Nereda.Faceplates.EmergencySludgeBuffer
 			this.freeText12.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeText12.Location = new NxtControl.Drawing.PointF(16D, 200D);
 			this.freeText12.Name = "freeText12";
-			this.freeText12.Text = "Sludge Discharge Flow Setpoint :";
+			this.freeText12.Text = "SP vaz\u00e3o descarte de lodo :";
 			// 
 			// S1_FeedTime
 			// 
@@ -237,7 +237,7 @@ namespace SE.Nereda.Faceplates.EmergencySludgeBuffer
 			this.freeText5.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeText5.Location = new NxtControl.Drawing.PointF(16D, 280D);
 			this.freeText5.Name = "freeText5";
-			this.freeText5.Text = "Restart Level :";
+			this.freeText5.Text = "N\u00edvel de religamento :";
 			// 
 			// FB_SBL1
 			// 

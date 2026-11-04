@@ -65,8 +65,8 @@ namespace SE.Nereda.Symbols.NeredaSludgeBuffer_2
 			// sQT002
 			// 
 			this.sQT002.BeginInit();
-			this.sQT002._iSensorName = "NVPP 001 41QT1002";
-			this.sQT002._iUnit = "°C";
+			this.sQT002._iSensorName = "49QT0003 S\u00f3lidos descarte";
+			this.sQT002._iUnit = "";
 			this.sQT002.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 32D, 24D);
 			this.sQT002.Name = "sQT002";
 			this.sQT002.SecurityToken = ((uint)(4294967295u));
@@ -85,8 +85,8 @@ namespace SE.Nereda.Symbols.NeredaSludgeBuffer_2
 			// sQT003
 			// 
 			this.sQT003.BeginInit();
-			this.sQT003._iSensorName = "NVPP 001 41QT1003";
-			this.sQT003._iUnit = "mg/l";
+			this.sQT003._iSensorName = "49FT0004 Vaz\u00e3o descarte";
+			this.sQT003._iUnit = "m\u00b3/h";
 			this.sQT003.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 256D, 24D);
 			this.sQT003.Name = "sQT003";
 			this.sQT003.SecurityToken = ((uint)(4294967295u));
@@ -105,8 +105,8 @@ namespace SE.Nereda.Symbols.NeredaSludgeBuffer_2
 			// sQT010
 			// 
 			this.sQT010.BeginInit();
-			this.sQT010._iSensorName = "NVPP 001 41QT1010";
-			this.sQT010._iUnit = "";
+			this.sQT010._iSensorName = "49LIT0001 N\u00edvel";
+			this.sQT010._iUnit = "m";
 			this.sQT010.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 32D, 96D);
 			this.sQT010.Name = "sQT010";
 			this.sQT010.SecurityToken = ((uint)(4294967295u));
@@ -128,7 +128,7 @@ namespace SE.Nereda.Symbols.NeredaSludgeBuffer_2
 			this.freeText1.Font = new NxtControl.Drawing.Font("LabelFont");
 			this.freeText1.Location = new NxtControl.Drawing.PointF(8D, 8D);
 			this.freeText1.Name = "freeText1";
-			this.freeText1.Text = "Dry Solid Measurement Sludge Buffer";
+			this.freeText1.Text = "S\u00f3lidos Sludge Buffer";
 			// 
 			// freeText2
 			// 
@@ -136,7 +136,7 @@ namespace SE.Nereda.Symbols.NeredaSludgeBuffer_2
 			this.freeText2.Font = new NxtControl.Drawing.Font("LabelFont");
 			this.freeText2.Location = new NxtControl.Drawing.PointF(232D, 8D);
 			this.freeText2.Name = "freeText2";
-			this.freeText2.Text = "Flow Measurement Discharge";
+			this.freeText2.Text = "Vaz\u00e3o de descarte";
 			// 
 			// freeText3
 			// 
@@ -144,7 +144,7 @@ namespace SE.Nereda.Symbols.NeredaSludgeBuffer_2
 			this.freeText3.Font = new NxtControl.Drawing.Font("LabelFont");
 			this.freeText3.Location = new NxtControl.Drawing.PointF(8D, 80D);
 			this.freeText3.Name = "freeText3";
-			this.freeText3.Text = "Level measurement Sludge Buffer";
+			this.freeText3.Text = "N\u00edvel Sludge Buffer";
 			// 
 			// sDIn21
 			// 

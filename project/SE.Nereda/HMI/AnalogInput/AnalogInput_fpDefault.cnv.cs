@@ -142,33 +142,33 @@ namespace SE.Nereda.Faceplates.AnalogInput
 			
 			// Display Level Status
 			if(iChFail == true){
-				LevelStatus.Text = "I/O Channel Failure";
+				LevelStatus.Text = "Falha do canal de E/S";
 				LevelStatus.TextColor = new NxtControl.Drawing.BlinkColor("SE.Nereda.Orangwhite");
 			}
 			else{
 				if (iLoLoPv == false && iLoPv == false && iHiPv == false && iHiHiPv == false)
 				{
-				    LevelStatus.Text = "Normal Level";
+				    LevelStatus.Text = "N\u00edvel normal";
 				    LevelStatus.Color = new NxtControl.Drawing.Color(61, 205, 88); // Green
 				}
 				else if (iLoPv == true && iLoLoPv == false)
 				{
-				    LevelStatus.Text = "Low Level";
+				    LevelStatus.Text = "N\u00edvel baixo";
 				    LevelStatus.Color = new NxtControl.Drawing.Color(254, 186, 10); // Orange
 				}
 				else if (iHiPv == true && iHiHiPv == false)
 				{
-				    LevelStatus.Text = "High Level";
+				    LevelStatus.Text = "N\u00edvel alto";
 				    LevelStatus.Color = new NxtControl.Drawing.Color(254, 186, 10); // Orange
 				}
 				else if (iLoPv == true && iLoLoPv == true)
 				{
-				    LevelStatus.Text = "Low Low Level";
+				    LevelStatus.Text = "N\u00edvel muito baixo";
 				    LevelStatus.Color = new NxtControl.Drawing.Color(255, 0, 0); // Red
 				}
 				else if (iHiPv == true && iHiHiPv == true)
 				{
-				    LevelStatus.Text = "High High Level";
+				    LevelStatus.Text = "N\u00edvel muito alto";
 				    LevelStatus.Color = new NxtControl.Drawing.Color(255, 0, 0); // Red
 				}
 			}

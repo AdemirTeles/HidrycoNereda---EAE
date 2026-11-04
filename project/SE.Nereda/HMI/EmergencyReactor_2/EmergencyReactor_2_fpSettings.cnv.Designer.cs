@@ -76,7 +76,7 @@ namespace SE.Nereda.Faceplates.EmergencyReactor_2
 			new NxtControl.Drawing.PointF(8D, 8D),
 			new NxtControl.Drawing.PointF(264D, 8D),
 			new NxtControl.Drawing.PointF(296D, 32D)});
-			this.polygon1.Text = "EMERGENCY RECIPE  -  SETTINGS";
+			this.polygon1.Text = "RECEITA DE EMERG\u00caNCIA  -  AJUSTES";
 			this.polygon1.TextColor = new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(0)));
 			// 
 			// rectangle1
@@ -92,7 +92,7 @@ namespace SE.Nereda.Faceplates.EmergencyReactor_2
 			this.freeText1.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeText1.Location = new NxtControl.Drawing.PointF(16D, 44D);
 			this.freeText1.Name = "freeText1";
-			this.freeText1.Text = "Step 1 - Feed Time :";
+			this.freeText1.Text = "Passo 1 - Tempo alimenta\u00e7\u00e3o :";
 			// 
 			// freeText2
 			// 
@@ -100,7 +100,7 @@ namespace SE.Nereda.Faceplates.EmergencyReactor_2
 			this.freeText2.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeText2.Location = new NxtControl.Drawing.PointF(16D, 76D);
 			this.freeText2.Name = "freeText2";
-			this.freeText2.Text = "Step 2 - Vent Sludge Time:";
+			this.freeText2.Text = "Passo 2 - Tempo respiro lodo:";
 			// 
 			// freeText3
 			// 
@@ -108,7 +108,7 @@ namespace SE.Nereda.Faceplates.EmergencyReactor_2
 			this.freeText3.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeText3.Location = new NxtControl.Drawing.PointF(16D, 108D);
 			this.freeText3.Name = "freeText3";
-			this.freeText3.Text = "Step 3 - Sludge Discharge Time :";
+			this.freeText3.Text = "Passo 3 - Tempo descarte lodo :";
 			// 
 			// freeText4
 			// 
@@ -116,7 +116,7 @@ namespace SE.Nereda.Faceplates.EmergencyReactor_2
 			this.freeText4.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeText4.Location = new NxtControl.Drawing.PointF(16D, 140D);
 			this.freeText4.Name = "freeText4";
-			this.freeText4.Text = "Step 4 - Lower Level Time :";
+			this.freeText4.Text = "Passo 4 - Tempo rebaixar n\u00edvel :";
 			// 
 			// S1_FeedTime
 			// 
@@ -215,7 +215,7 @@ namespace SE.Nereda.Faceplates.EmergencyReactor_2
 			this.freeText5.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeText5.Location = new NxtControl.Drawing.PointF(16D, 204D);
 			this.freeText5.Name = "freeText5";
-			this.freeText5.Text = "Step 6 - Vent Aerate Time :";
+			this.freeText5.Text = "Passo 6 - Tempo resp. aera\u00e7\u00e3o :";
 			// 
 			// freeText6
 			// 
@@ -223,7 +223,7 @@ namespace SE.Nereda.Faceplates.EmergencyReactor_2
 			this.freeText6.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeText6.Location = new NxtControl.Drawing.PointF(16D, 236D);
 			this.freeText6.Name = "freeText6";
-			this.freeText6.Text = "Step 7 - Wait Time :";
+			this.freeText6.Text = "Passo 7 - Tempo espera :";
 			// 
 			// freeText7
 			// 
@@ -231,7 +231,7 @@ namespace SE.Nereda.Faceplates.EmergencyReactor_2
 			this.freeText7.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeText7.Location = new NxtControl.Drawing.PointF(16D, 268D);
 			this.freeText7.Name = "freeText7";
-			this.freeText7.Text = "Step 8 - Vent Sludge Time :";
+			this.freeText7.Text = "Passo 8 - Tempo respiro lodo :";
 			// 
 			// S5_AerateTime
 			// 
@@ -253,7 +253,7 @@ namespace SE.Nereda.Faceplates.EmergencyReactor_2
 			this.freeText8.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeText8.Location = new NxtControl.Drawing.PointF(16D, 172D);
 			this.freeText8.Name = "freeText8";
-			this.freeText8.Text = "Step 5 - Aerate Time :";
+			this.freeText8.Text = "Passo 5 - Tempo aera\u00e7\u00e3o :";
 			// 
 			// FeedCapacity
 			// 
@@ -279,7 +279,7 @@ namespace SE.Nereda.Faceplates.EmergencyReactor_2
 			this.freeText9.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeText9.Location = new NxtControl.Drawing.PointF(16D, 408D);
 			this.freeText9.Name = "freeText9";
-			this.freeText9.Text = "Aeration Capacity :";
+			this.freeText9.Text = "Capacidade de aera\u00e7\u00e3o :";
 			// 
 			// freeText12
 			// 
@@ -287,7 +287,7 @@ namespace SE.Nereda.Faceplates.EmergencyReactor_2
 			this.freeText12.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeText12.Location = new NxtControl.Drawing.PointF(16D, 376D);
 			this.freeText12.Name = "freeText12";
-			this.freeText12.Text = "Feed Capacity :";
+			this.freeText12.Text = "Capacidade de alimenta\u00e7\u00e3o :";
 			// 
 			// AerationCapacity
 			// 
@@ -338,7 +338,7 @@ namespace SE.Nereda.Faceplates.EmergencyReactor_2
 			this.freeText13.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeText13.Location = new NxtControl.Drawing.PointF(16D, 436D);
 			this.freeText13.Name = "freeText13";
-			this.freeText13.Text = "Vent Phase - Vent Air Grid :";
+			this.freeText13.Text = "Fase respiro - grade de ar :";
 			// 
 			// freeText15
 			// 
@@ -346,7 +346,7 @@ namespace SE.Nereda.Faceplates.EmergencyReactor_2
 			this.freeText15.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeText15.Location = new NxtControl.Drawing.PointF(16D, 476D);
 			this.freeText15.Name = "freeText15";
-			this.freeText15.Text = "Air Lock Time :";
+			this.freeText15.Text = "Tempo de air lock :";
 			// 
 			// rectangle2
 			// 
@@ -382,7 +382,7 @@ namespace SE.Nereda.Faceplates.EmergencyReactor_2
 			this.freeText16.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeText16.Location = new NxtControl.Drawing.PointF(16D, 300D);
 			this.freeText16.Name = "freeText16";
-			this.freeText16.Text = "Step 9 - Sludge Discharge Time :";
+			this.freeText16.Text = "Passo 9 - Tempo descarte lodo :";
 			// 
 			// timeTextBox1
 			// 
@@ -403,7 +403,7 @@ namespace SE.Nereda.Faceplates.EmergencyReactor_2
 			this.freeText10.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeText10.Location = new NxtControl.Drawing.PointF(16D, 332D);
 			this.freeText10.Name = "freeText10";
-			this.freeText10.Text = "Step10 - Wait Time :";
+			this.freeText10.Text = "Passo 10 - Tempo espera :";
 			// 
 			// freeText11
 			// 
@@ -411,7 +411,7 @@ namespace SE.Nereda.Faceplates.EmergencyReactor_2
 			this.freeText11.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeText11.Location = new NxtControl.Drawing.PointF(16D, 520D);
 			this.freeText11.Name = "freeText11";
-			this.freeText11.Text = "FB RL1 - Reactor Level S3 -> S4 :";
+			this.freeText11.Text = "FB RL1 - N\u00edvel reator S3 -> S4 :";
 			// 
 			// freeText14
 			// 
@@ -419,7 +419,7 @@ namespace SE.Nereda.Faceplates.EmergencyReactor_2
 			this.freeText14.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeText14.Location = new NxtControl.Drawing.PointF(16D, 560D);
 			this.freeText14.Name = "freeText14";
-			this.freeText14.Text = "FB RL2 - Reactor Level S9 :";
+			this.freeText14.Text = "FB RL2 - N\u00edvel reator S9 :";
 			// 
 			// FB_RL1
 			// 
@@ -497,7 +497,7 @@ namespace SE.Nereda.Faceplates.EmergencyReactor_2
 			this.FB_RL1,
 			this.FB_RL2});
 			this.Size = new System.Drawing.Size(392, 600);
-			this.Title = "EMERGENCY RECIPE  -  SETTINGS";
+			this.Title = "RECEITA DE EMERG\u00caNCIA  -  AJUSTES";
 
 		}
 		private NxtControl.GuiFramework.Polygon polygon1;

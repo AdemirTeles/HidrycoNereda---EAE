@@ -29,6 +29,7 @@ namespace SE.Nereda.Symbols.AnalogInput
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary1 = new NxtControl.GuiFramework.PropertyDictionary();
 			this.OpenFp = new NxtControl.GuiFramework.Rectangle();
 			this.Unit = new NxtControl.GuiFramework.FreeText();
+			this.Percent = new NxtControl.GuiFramework.FreeText();
 			this.Pv = new System.HMI.Symbols.Base.FreeText<float>();
 			this.SensorName = new NxtControl.GuiFramework.FreeText();
 			this.alarmSAFrame1 = new NxtControl.GuiFramework.AlarmFrame();
@@ -62,9 +63,17 @@ namespace SE.Nereda.Symbols.AnalogInput
 			// 
 			this.Unit.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.Unit.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular);
-			this.Unit.Location = new NxtControl.Drawing.PointF(40D, 80D);
+			this.Unit.Location = new NxtControl.Drawing.PointF(76D, 58D);
 			this.Unit.Name = "Unit";
-			this.Unit.Text = "%";
+			this.Unit.Text = "m";
+			// 
+			// Percent
+			// 
+			this.Percent.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.Percent.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular);
+			this.Percent.Location = new NxtControl.Drawing.PointF(37D, 80D);
+			this.Percent.Name = "Percent";
+			this.Percent.Text = "-- %";
 			// 
 			// Pv
 			// 
@@ -89,7 +98,7 @@ namespace SE.Nereda.Symbols.AnalogInput
 			this.SensorName.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular);
 			this.SensorName.Location = new NxtControl.Drawing.PointF(16D, 12D);
 			this.SensorName.Name = "SensorName";
-			this.SensorName.Text = "Name";
+			this.SensorName.Text = "Nome";
 			// 
 			// alarmSAFrame1
 			// 
@@ -120,7 +129,7 @@ namespace SE.Nereda.Symbols.AnalogInput
 			this.StatusTxt.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular);
 			this.StatusTxt.Location = new NxtControl.Drawing.PointF(36D, 32D);
 			this.StatusTxt.Name = "StatusTxt";
-			this.StatusTxt.Text = "Senosr Status";
+			this.StatusTxt.Text = "Estado do sensor";
 			// 
 			// Override
 			// 
@@ -278,6 +287,7 @@ namespace SE.Nereda.Symbols.AnalogInput
 			// 
 			this.Shapes.AddRange(new System.ComponentModel.IComponent[] {
 			this.Unit,
+			this.Percent,
 			this.Pv,
 			this.SensorName,
 			this.ShowLevel,
@@ -303,6 +313,7 @@ namespace SE.Nereda.Symbols.AnalogInput
 		}
 		private NxtControl.GuiFramework.Rectangle OpenFp;
 		private NxtControl.GuiFramework.FreeText Unit;
+		private NxtControl.GuiFramework.FreeText Percent;
 		private System.HMI.Symbols.Base.FreeText<float> Pv;
 		private NxtControl.GuiFramework.FreeText SensorName;
 		private NxtControl.GuiFramework.AlarmFrame alarmSAFrame1;

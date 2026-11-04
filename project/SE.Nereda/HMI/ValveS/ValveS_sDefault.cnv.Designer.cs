@@ -100,13 +100,13 @@ namespace SE.Nereda.Symbols.ValveS
 			// 
 			// VlvName
 			// 
-			this.VlvName.Bounds = new NxtControl.Drawing.RectF(((float)(16D)), ((float)(106D)), ((float)(96D)), ((float)(16D)));
+			this.VlvName.Bounds = new NxtControl.Drawing.RectF(((float)(8D)), ((float)(107D)), ((float)(112D)), ((float)(28D)));
 			this.VlvName.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("transparent"));
 			this.VlvName.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
 			this.VlvName.Name = "VlvName";
 			this.VlvName.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("transparent"), 1F, NxtControl.Drawing.DashStyle.Solid);
-			this.VlvName.Text = "Valve";
-			this.VlvName.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleCenter;
+			this.VlvName.Text = "V\u00e1lvula";
+			this.VlvName.TextAlignment = NxtControl.Drawing.ContentAlignment.TopCenter;
 			// 
 			// OpenFp
 			// 

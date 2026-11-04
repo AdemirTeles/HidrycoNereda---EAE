@@ -81,6 +81,9 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_Generico
 			this.xEL = new System.HMI.Symbols.Base.Execute<byte>();
 			this.xELL = new System.HMI.Symbols.Base.Execute<byte>();
 			this.xNivel = new System.HMI.Symbols.Base.Execute<bool>();
+			this.rRangeMin = new System.HMI.Symbols.Base.TextBox<float>();
+			this.rRangeMax = new System.HMI.Symbols.Base.TextBox<float>();
+			this.rAltura = new System.HMI.Symbols.Base.TextBox<float>();
 			// 
 			// titulo
 			// 
@@ -765,6 +768,58 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_Generico
 			this.xNivel.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.NivelValueChanged);
 			this.xNivel.EndInit();
 			// 
+			// rRangeMin
+			// 
+			this.rRangeMin.BeginInit();
+			this.rRangeMin.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.7D, 0D, 0D, 1D, 220D, 112D);
+			this.rRangeMin.MaximumTag = null;
+			this.rRangeMin.MinimumTag = null;
+			this.rRangeMin.Name = "rRangeMin";
+			this.rRangeMin.NumberBase = NxtControl.GuiFramework.NumberBase.Decimal;
+			this.rRangeMin.Pen = new NxtControl.Drawing.Pen("TextBoxPen");
+			this.rRangeMin.SetColor = new NxtControl.Drawing.Color("Yellow");
+			this.rRangeMin.TagName = "STP_RANGE_MINIMO";
+			this.rRangeMin.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
+			this.rRangeMin.UseInputPad = true;
+			this.rRangeMin.Value = 0F;
+			this.rRangeMin.Visible = false;
+			this.rRangeMin.EndInit();
+			// 
+			// rRangeMax
+			// 
+			this.rRangeMax.BeginInit();
+			this.rRangeMax.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.7D, 0D, 0D, 1D, 220D, 152D);
+			this.rRangeMax.MaximumTag = null;
+			this.rRangeMax.MinimumTag = null;
+			this.rRangeMax.Name = "rRangeMax";
+			this.rRangeMax.NumberBase = NxtControl.GuiFramework.NumberBase.Decimal;
+			this.rRangeMax.Pen = new NxtControl.Drawing.Pen("TextBoxPen");
+			this.rRangeMax.SetColor = new NxtControl.Drawing.Color("Yellow");
+			this.rRangeMax.TagName = "STP_RANGE_MAXIMO";
+			this.rRangeMax.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
+			this.rRangeMax.UseInputPad = true;
+			this.rRangeMax.Value = 0F;
+			this.rRangeMax.Visible = false;
+			this.rRangeMax.EndInit();
+			// 
+			// rAltura
+			// 
+			this.rAltura.BeginInit();
+			this.rAltura.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.7D, 0D, 0D, 1D, 220D, 192D);
+			this.rAltura.MaximumTag = null;
+			this.rAltura.MinimumTag = null;
+			this.rAltura.Name = "rAltura";
+			this.rAltura.NumberBase = NxtControl.GuiFramework.NumberBase.Decimal;
+			this.rAltura.Pen = new NxtControl.Drawing.Pen("TextBoxPen");
+			this.rAltura.SetColor = new NxtControl.Drawing.Color("Yellow");
+			this.rAltura.TagName = "STP_ALTURA_MAXIMA";
+			this.rAltura.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
+			this.rAltura.UseInputPad = true;
+			this.rAltura.Value = 0F;
+			this.rAltura.Visible = false;
+			this.rAltura.Visible = false;
+			this.rAltura.EndInit();
+			// 
 			// fpAlarm
 			// 
 			this.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(450D)), ((float)(296D)));
@@ -832,7 +887,10 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_Generico
 			this.xEH,
 			this.xEL,
 			this.xELL,
-			this.xNivel});
+			this.xNivel,
+			this.rRangeMin,
+			this.rRangeMax,
+			this.rAltura});
 			this.Size = new System.Drawing.Size(450, 296);
 
 		}
@@ -898,6 +956,9 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_Generico
 		private System.HMI.Symbols.Base.Execute<byte> xEL;
 		private System.HMI.Symbols.Base.Execute<byte> xELL;
 		private System.HMI.Symbols.Base.Execute<bool> xNivel;
+		private System.HMI.Symbols.Base.TextBox<float> rRangeMin;
+		private System.HMI.Symbols.Base.TextBox<float> rRangeMax;
+		private System.HMI.Symbols.Base.TextBox<float> rAltura;
 		#endregion
 	}
 }

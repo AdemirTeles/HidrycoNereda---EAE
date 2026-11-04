@@ -45,7 +45,7 @@ namespace SE.Nereda.Symbols.ReactorAvCtrl
 			new NxtControl.Drawing.PointF(8D, 8D),
 			new NxtControl.Drawing.PointF(264D, 8D),
 			new NxtControl.Drawing.PointF(296D, 32D)});
-			this.polygon2.Text = "FORCE REACTOR AVAIBILITY";
+			this.polygon2.Text = "FOR\u00c7AR DISPONIBILIDADE";
 			this.polygon2.TextColor = new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(0)));
 			// 
 			// rectangle2
@@ -61,7 +61,7 @@ namespace SE.Nereda.Symbols.ReactorAvCtrl
 			this.freeText1.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeText1.Location = new NxtControl.Drawing.PointF(16D, 38D);
 			this.freeText1.Name = "freeText1";
-			this.freeText1.Text = "Force Unavaibility - Reactor 1 :";
+			this.freeText1.Text = "For\u00e7ar indispon\u00edvel - Reator 1 :";
 			// 
 			// ForceNotAvR1
 			// 
@@ -97,7 +97,7 @@ namespace SE.Nereda.Symbols.ReactorAvCtrl
 			this.freeText2.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeText2.Location = new NxtControl.Drawing.PointF(16D, 68D);
 			this.freeText2.Name = "freeText2";
-			this.freeText2.Text = "Force Unavaibility - Reactor 2 :";
+			this.freeText2.Text = "For\u00e7ar indispon\u00edvel - Reator 2 :";
 			// 
 			// sDefault
 			// 

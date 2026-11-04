@@ -88,7 +88,7 @@ namespace SE.Nereda.Faceplates.NeredaReactor
 			this.sDefault4,
 			this.sDefault5});
 			this.Size = new System.Drawing.Size(384, 496);
-			this.Title = "Reactor Settings";
+			this.Title = "Ajustes do reator";
 
 		}
 		private SE.Nereda.Symbols.CmdFeed.sDefault sDefault1;

@@ -129,7 +129,7 @@ namespace SE.Nereda.Symbols.ActState
 				stopping.Visible = false;
 				ManuelMode.Visible = false;
 		
-				Mode.Text = "OFF";
+				Mode.Text = "DESL.";
 		
 				iActStateV = 100;
 				iManV = false;

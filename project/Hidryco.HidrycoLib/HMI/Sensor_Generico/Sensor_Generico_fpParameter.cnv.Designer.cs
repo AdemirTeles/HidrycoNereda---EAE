@@ -44,6 +44,14 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_Generico
 			this.xNivel = new System.HMI.Symbols.Base.Execute<bool>();
 			this.xUnidade = new System.HMI.Symbols.Base.Execute<string>();
 			this.xFalhaAtiva = new System.HMI.Symbols.Base.Execute<bool>();
+			this.rHabHH = new System.HMI.Symbols.Base.CheckButton();
+			this.rHabH = new System.HMI.Symbols.Base.CheckButton();
+			this.rHabL = new System.HMI.Symbols.Base.CheckButton();
+			this.rHabLL = new System.HMI.Symbols.Base.CheckButton();
+			this.rSpHH = new System.HMI.Symbols.Base.TextBox<float>();
+			this.rSpH = new System.HMI.Symbols.Base.TextBox<float>();
+			this.rSpL = new System.HMI.Symbols.Base.TextBox<float>();
+			this.rSpLL = new System.HMI.Symbols.Base.TextBox<float>();
 			// 
 			// titulo
 			// 
@@ -313,6 +321,146 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_Generico
 			this.xFalhaAtiva.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.FalhaAtivaValueChanged);
 			this.xFalhaAtiva.EndInit();
 			// 
+			// rHabHH
+			// 
+			this.rHabHH.BeginInit();
+			this.rHabHH.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 70D, 84D);
+			this.rHabHH.FalseImage = new NxtControl.Drawing.ImageHolder();
+			this.rHabHH.FalseImageDisabled = new NxtControl.Drawing.ImageHolder();
+			this.rHabHH.FalseText = "Não";
+			this.rHabHH.Font = new NxtControl.Drawing.Font("ButtonFont");
+			this.rHabHH.FontScale = false;
+			this.rHabHH.Name = "rHabHH";
+			this.rHabHH.TagName = "CMD_HABILITA_ALARME_HH";
+			this.rHabHH.TrueImage = new NxtControl.Drawing.ImageHolder();
+			this.rHabHH.TrueImageDisabled = new NxtControl.Drawing.ImageHolder();
+			this.rHabHH.TrueText = "Sim";
+			this.rHabHH.Value = false;
+			this.rHabHH.Visible = false;
+			this.rHabHH.EndInit();
+			// 
+			// rHabH
+			// 
+			this.rHabH.BeginInit();
+			this.rHabH.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 70D, 124D);
+			this.rHabH.FalseImage = new NxtControl.Drawing.ImageHolder();
+			this.rHabH.FalseImageDisabled = new NxtControl.Drawing.ImageHolder();
+			this.rHabH.FalseText = "Não";
+			this.rHabH.Font = new NxtControl.Drawing.Font("ButtonFont");
+			this.rHabH.FontScale = false;
+			this.rHabH.Name = "rHabH";
+			this.rHabH.TagName = "CMD_HABILITA_ALARME_H";
+			this.rHabH.TrueImage = new NxtControl.Drawing.ImageHolder();
+			this.rHabH.TrueImageDisabled = new NxtControl.Drawing.ImageHolder();
+			this.rHabH.TrueText = "Sim";
+			this.rHabH.Value = false;
+			this.rHabH.Visible = false;
+			this.rHabH.EndInit();
+			// 
+			// rHabL
+			// 
+			this.rHabL.BeginInit();
+			this.rHabL.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 70D, 164D);
+			this.rHabL.FalseImage = new NxtControl.Drawing.ImageHolder();
+			this.rHabL.FalseImageDisabled = new NxtControl.Drawing.ImageHolder();
+			this.rHabL.FalseText = "Não";
+			this.rHabL.Font = new NxtControl.Drawing.Font("ButtonFont");
+			this.rHabL.FontScale = false;
+			this.rHabL.Name = "rHabL";
+			this.rHabL.TagName = "CMD_HABILITA_ALARME_L";
+			this.rHabL.TrueImage = new NxtControl.Drawing.ImageHolder();
+			this.rHabL.TrueImageDisabled = new NxtControl.Drawing.ImageHolder();
+			this.rHabL.TrueText = "Sim";
+			this.rHabL.Value = false;
+			this.rHabL.Visible = false;
+			this.rHabL.EndInit();
+			// 
+			// rHabLL
+			// 
+			this.rHabLL.BeginInit();
+			this.rHabLL.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 70D, 204D);
+			this.rHabLL.FalseImage = new NxtControl.Drawing.ImageHolder();
+			this.rHabLL.FalseImageDisabled = new NxtControl.Drawing.ImageHolder();
+			this.rHabLL.FalseText = "Não";
+			this.rHabLL.Font = new NxtControl.Drawing.Font("ButtonFont");
+			this.rHabLL.FontScale = false;
+			this.rHabLL.Name = "rHabLL";
+			this.rHabLL.TagName = "CMD_HABILITA_ALARME_LL";
+			this.rHabLL.TrueImage = new NxtControl.Drawing.ImageHolder();
+			this.rHabLL.TrueImageDisabled = new NxtControl.Drawing.ImageHolder();
+			this.rHabLL.TrueText = "Sim";
+			this.rHabLL.Value = false;
+			this.rHabLL.Visible = false;
+			this.rHabLL.EndInit();
+			// 
+			// rSpHH
+			// 
+			this.rSpHH.BeginInit();
+			this.rSpHH.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.62D, 0D, 0D, 1D, 196D, 86D);
+			this.rSpHH.MaximumTag = null;
+			this.rSpHH.MinimumTag = null;
+			this.rSpHH.Name = "rSpHH";
+			this.rSpHH.NumberBase = NxtControl.GuiFramework.NumberBase.Decimal;
+			this.rSpHH.Pen = new NxtControl.Drawing.Pen("TextBoxPen");
+			this.rSpHH.SetColor = new NxtControl.Drawing.Color("Yellow");
+			this.rSpHH.TagName = "STP_ALARME_HH";
+			this.rSpHH.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
+			this.rSpHH.UseInputPad = true;
+			this.rSpHH.Value = 0F;
+			this.rSpHH.Visible = false;
+			this.rSpHH.EndInit();
+			// 
+			// rSpH
+			// 
+			this.rSpH.BeginInit();
+			this.rSpH.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.62D, 0D, 0D, 1D, 196D, 126D);
+			this.rSpH.MaximumTag = null;
+			this.rSpH.MinimumTag = null;
+			this.rSpH.Name = "rSpH";
+			this.rSpH.NumberBase = NxtControl.GuiFramework.NumberBase.Decimal;
+			this.rSpH.Pen = new NxtControl.Drawing.Pen("TextBoxPen");
+			this.rSpH.SetColor = new NxtControl.Drawing.Color("Yellow");
+			this.rSpH.TagName = "STP_ALARME_H";
+			this.rSpH.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
+			this.rSpH.UseInputPad = true;
+			this.rSpH.Value = 0F;
+			this.rSpH.Visible = false;
+			this.rSpH.EndInit();
+			// 
+			// rSpL
+			// 
+			this.rSpL.BeginInit();
+			this.rSpL.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.62D, 0D, 0D, 1D, 196D, 166D);
+			this.rSpL.MaximumTag = null;
+			this.rSpL.MinimumTag = null;
+			this.rSpL.Name = "rSpL";
+			this.rSpL.NumberBase = NxtControl.GuiFramework.NumberBase.Decimal;
+			this.rSpL.Pen = new NxtControl.Drawing.Pen("TextBoxPen");
+			this.rSpL.SetColor = new NxtControl.Drawing.Color("Yellow");
+			this.rSpL.TagName = "STP_ALARME_L";
+			this.rSpL.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
+			this.rSpL.UseInputPad = true;
+			this.rSpL.Value = 0F;
+			this.rSpL.Visible = false;
+			this.rSpL.EndInit();
+			// 
+			// rSpLL
+			// 
+			this.rSpLL.BeginInit();
+			this.rSpLL.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.62D, 0D, 0D, 1D, 196D, 206D);
+			this.rSpLL.MaximumTag = null;
+			this.rSpLL.MinimumTag = null;
+			this.rSpLL.Name = "rSpLL";
+			this.rSpLL.NumberBase = NxtControl.GuiFramework.NumberBase.Decimal;
+			this.rSpLL.Pen = new NxtControl.Drawing.Pen("TextBoxPen");
+			this.rSpLL.SetColor = new NxtControl.Drawing.Color("Yellow");
+			this.rSpLL.TagName = "STP_ALARME_LL";
+			this.rSpLL.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
+			this.rSpLL.UseInputPad = true;
+			this.rSpLL.Value = 0F;
+			this.rSpLL.Visible = false;
+			this.rSpLL.EndInit();
+			// 
 			// fpParameter
 			// 
 			this.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(380D)), ((float)(330D)));
@@ -342,7 +490,15 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_Generico
 			this.xComunicacao,
 			this.xNivel,
 			this.xUnidade,
-			this.xFalhaAtiva});
+			this.xFalhaAtiva,
+			this.rHabHH,
+			this.rHabH,
+			this.rHabL,
+			this.rHabLL,
+			this.rSpHH,
+			this.rSpH,
+			this.rSpL,
+			this.rSpLL});
 			this.Size = new System.Drawing.Size(380, 330);
 
 		}
@@ -370,6 +526,14 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_Generico
 		private System.HMI.Symbols.Base.Execute<bool> xNivel;
 		private System.HMI.Symbols.Base.Execute<string> xUnidade;
 		private System.HMI.Symbols.Base.Execute<bool> xFalhaAtiva;
+		private System.HMI.Symbols.Base.CheckButton rHabHH;
+		private System.HMI.Symbols.Base.CheckButton rHabH;
+		private System.HMI.Symbols.Base.CheckButton rHabL;
+		private System.HMI.Symbols.Base.CheckButton rHabLL;
+		private System.HMI.Symbols.Base.TextBox<float> rSpHH;
+		private System.HMI.Symbols.Base.TextBox<float> rSpH;
+		private System.HMI.Symbols.Base.TextBox<float> rSpL;
+		private System.HMI.Symbols.Base.TextBox<float> rSpLL;
 		#endregion
 	}
 }

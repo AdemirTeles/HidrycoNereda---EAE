@@ -112,7 +112,7 @@ namespace SE.Nereda.Faceplates.MemoOC_D
 			this.freeText1.Font = new NxtControl.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Bold);
 			this.freeText1.Location = new NxtControl.Drawing.PointF(16D, 16D);
 			this.freeText1.Name = "freeText1";
-			this.freeText1.Text = "OC Status History";
+			this.freeText1.Text = "Hist\u00f3rico status OC";
 			// 
 			// OCStatus_Curr
 			// 
@@ -135,7 +135,7 @@ namespace SE.Nereda.Faceplates.MemoOC_D
 			this.freeText2.Font = new NxtControl.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Bold);
 			this.freeText2.Location = new NxtControl.Drawing.PointF(224D, 16D);
 			this.freeText2.Name = "freeText2";
-			this.freeText2.Text = "OC Status Values";
+			this.freeText2.Text = "Valores status OC";
 			// 
 			// OCStatus1
 			// 
@@ -278,7 +278,7 @@ namespace SE.Nereda.Faceplates.MemoOC_D
 			this.freeText3.Font = new NxtControl.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Bold);
 			this.freeText3.Location = new NxtControl.Drawing.PointF(16D, 64D);
 			this.freeText3.Name = "freeText3";
-			this.freeText3.Text = "Current OC Status Value";
+			this.freeText3.Text = "Valor atual status OC";
 			// 
 			// freeText4
 			// 
@@ -286,7 +286,7 @@ namespace SE.Nereda.Faceplates.MemoOC_D
 			this.freeText4.Font = new NxtControl.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Bold);
 			this.freeText4.Location = new NxtControl.Drawing.PointF(16D, 88D);
 			this.freeText4.Name = "freeText4";
-			this.freeText4.Text = "-1 OC Status Value";
+			this.freeText4.Text = "-1 Valor status OC";
 			// 
 			// freeText5
 			// 
@@ -294,7 +294,7 @@ namespace SE.Nereda.Faceplates.MemoOC_D
 			this.freeText5.Font = new NxtControl.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Bold);
 			this.freeText5.Location = new NxtControl.Drawing.PointF(16D, 112D);
 			this.freeText5.Name = "freeText5";
-			this.freeText5.Text = "-2 OC Status Value";
+			this.freeText5.Text = "-2 Valor status OC";
 			// 
 			// freeText6
 			// 
@@ -302,7 +302,7 @@ namespace SE.Nereda.Faceplates.MemoOC_D
 			this.freeText6.Font = new NxtControl.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Bold);
 			this.freeText6.Location = new NxtControl.Drawing.PointF(16D, 140D);
 			this.freeText6.Name = "freeText6";
-			this.freeText6.Text = "-3 OC Status Value";
+			this.freeText6.Text = "-3 Valor status OC";
 			// 
 			// freeText7
 			// 
@@ -310,7 +310,7 @@ namespace SE.Nereda.Faceplates.MemoOC_D
 			this.freeText7.Font = new NxtControl.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Bold);
 			this.freeText7.Location = new NxtControl.Drawing.PointF(16D, 168D);
 			this.freeText7.Name = "freeText7";
-			this.freeText7.Text = "-4 OC Status Value";
+			this.freeText7.Text = "-4 Valor status OC";
 			// 
 			// freeText8
 			// 
@@ -318,7 +318,7 @@ namespace SE.Nereda.Faceplates.MemoOC_D
 			this.freeText8.Font = new NxtControl.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Bold);
 			this.freeText8.Location = new NxtControl.Drawing.PointF(16D, 192D);
 			this.freeText8.Name = "freeText8";
-			this.freeText8.Text = "-5 OC Status Value";
+			this.freeText8.Text = "-5 Valor status OC";
 			// 
 			// freeText9
 			// 
@@ -326,7 +326,7 @@ namespace SE.Nereda.Faceplates.MemoOC_D
 			this.freeText9.Font = new NxtControl.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Bold);
 			this.freeText9.Location = new NxtControl.Drawing.PointF(16D, 216D);
 			this.freeText9.Name = "freeText9";
-			this.freeText9.Text = "-6 OC Status Value";
+			this.freeText9.Text = "-6 Valor status OC";
 			// 
 			// freeText10
 			// 
@@ -334,7 +334,7 @@ namespace SE.Nereda.Faceplates.MemoOC_D
 			this.freeText10.Font = new NxtControl.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Bold);
 			this.freeText10.Location = new NxtControl.Drawing.PointF(16D, 240D);
 			this.freeText10.Name = "freeText10";
-			this.freeText10.Text = "-7 OC Status Value";
+			this.freeText10.Text = "-7 Valor status OC";
 			// 
 			// freeText11
 			// 
@@ -342,7 +342,7 @@ namespace SE.Nereda.Faceplates.MemoOC_D
 			this.freeText11.Font = new NxtControl.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Bold);
 			this.freeText11.Location = new NxtControl.Drawing.PointF(16D, 264D);
 			this.freeText11.Name = "freeText11";
-			this.freeText11.Text = "-8 OC Status Value";
+			this.freeText11.Text = "-8 Valor status OC";
 			// 
 			// freeText12
 			// 
@@ -350,7 +350,7 @@ namespace SE.Nereda.Faceplates.MemoOC_D
 			this.freeText12.Font = new NxtControl.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Bold);
 			this.freeText12.Location = new NxtControl.Drawing.PointF(16D, 288D);
 			this.freeText12.Name = "freeText12";
-			this.freeText12.Text = "-9 OC Status Value";
+			this.freeText12.Text = "-9 Valor status OC";
 			// 
 			// rectangle3
 			// 
@@ -647,7 +647,7 @@ namespace SE.Nereda.Faceplates.MemoOC_D
 			this.OCStatus8_1,
 			this.OCStatus9_1});
 			this.Size = new System.Drawing.Size(392, 320);
-			this.Title = "OC Status History";
+			this.Title = "Hist\u00f3rico status OC";
 
 		}
 		private NxtControl.GuiFramework.Rectangle rectangle2;

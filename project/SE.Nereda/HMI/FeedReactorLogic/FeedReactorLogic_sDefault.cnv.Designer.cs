@@ -87,7 +87,7 @@ namespace SE.Nereda.Symbols.FeedReactorLogic
 			new NxtControl.Drawing.PointF(8D, 16D),
 			new NxtControl.Drawing.PointF(160D, 16D),
 			new NxtControl.Drawing.PointF(184D, 40D)});
-			this.polygon1.Text = "FEED REACTOR";
+			this.polygon1.Text = "ALIMENTA\u00c7\u00c3O";
 			this.polygon1.TextColor = new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(0)));
 			// 
 			// rowCmax
@@ -103,7 +103,7 @@ namespace SE.Nereda.Symbols.FeedReactorLogic
 			this.txtCmax.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.txtCmax.Location = new NxtControl.Drawing.PointF(16D, 44D);
 			this.txtCmax.Name = "txtCmax";
-			this.txtCmax.Text = "Max Speed 1 Pump (Cmax) :";
+			this.txtCmax.Text = "Veloc. m\u00e1x. 1 bomba (Cmax) :";
 			// 
 			// MaxCapacityOnePump
 			// 
@@ -135,7 +135,7 @@ namespace SE.Nereda.Symbols.FeedReactorLogic
 			this.txtC2.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.txtC2.Location = new NxtControl.Drawing.PointF(16D, 84D);
 			this.txtC2.Name = "txtC2";
-			this.txtC2.Text = "2nd Pump Start Speed (C2) :";
+			this.txtC2.Text = "Veloc. partida 2\u00aa bomba (C2) :";
 			// 
 			// C2Capacity
 			// 
@@ -167,7 +167,7 @@ namespace SE.Nereda.Symbols.FeedReactorLogic
 			this.txtC3.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.txtC3.Location = new NxtControl.Drawing.PointF(16D, 124D);
 			this.txtC3.Name = "txtC3";
-			this.txtC3.Text = "2nd Pump Stop Speed (C3) :";
+			this.txtC3.Text = "Veloc. parada 2\u00aa bomba (C3) :";
 			// 
 			// textBox_11
 			// 
@@ -199,7 +199,7 @@ namespace SE.Nereda.Symbols.FeedReactorLogic
 			this.txtCmin.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.txtCmin.Location = new NxtControl.Drawing.PointF(16D, 164D);
 			this.txtCmin.Name = "txtCmin";
-			this.txtCmin.Text = "Min. Pump Speed (Cmin) :";
+			this.txtCmin.Text = "Veloc. m\u00edn. bomba (Cmin) :";
 			// 
 			// Cmin
 			// 
@@ -231,7 +231,7 @@ namespace SE.Nereda.Symbols.FeedReactorLogic
 			this.txtTC2.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.txtTC2.Location = new NxtControl.Drawing.PointF(16D, 204D);
 			this.txtTC2.Name = "txtTC2";
-			this.txtTC2.Text = "Time at C2 (T_C2) :";
+			this.txtTC2.Text = "Tempo em C2 (T_C2) :";
 			// 
 			// T_C2
 			// 
@@ -257,7 +257,7 @@ namespace SE.Nereda.Symbols.FeedReactorLogic
 			this.txtTC3.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.txtTC3.Location = new NxtControl.Drawing.PointF(16D, 244D);
 			this.txtTC3.Name = "txtTC3";
-			this.txtTC3.Text = "Time below C3 (T_C3) :";
+			this.txtTC3.Text = "Tempo abaixo de C3 (T_C3) :";
 			// 
 			// T_C3
 			// 
@@ -283,7 +283,7 @@ namespace SE.Nereda.Symbols.FeedReactorLogic
 			this.txtRest.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.txtRest.Location = new NxtControl.Drawing.PointF(16D, 284D);
 			this.txtRest.Name = "txtRest";
-			this.txtRest.Text = "Feed Restart Waiting Time :";
+			this.txtRest.Text = "Espera p/ religar alimenta\u00e7\u00e3o :";
 			// 
 			// RestartWaitingTime
 			// 
@@ -309,7 +309,7 @@ namespace SE.Nereda.Symbols.FeedReactorLogic
 			this.txtFLL.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.txtFLL.Location = new NxtControl.Drawing.PointF(16D, 324D);
 			this.txtFLL.Name = "txtFLL";
-			this.txtFLL.Text = "Flow LowLow Time :";
+			this.txtFLL.Text = "Tempo vaz\u00e3o muito baixa :";
 			// 
 			// T_FlowLL
 			// 
@@ -335,7 +335,7 @@ namespace SE.Nereda.Symbols.FeedReactorLogic
 			this.txtCap.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.txtCap.Location = new NxtControl.Drawing.PointF(16D, 364D);
 			this.txtCap.Name = "txtCap";
-			this.txtCap.Text = "Theoretical Pump Capacity :";
+			this.txtCap.Text = "Capacidade te\u00f3rica da bomba :";
 			// 
 			// FlowCapTheo
 			// 
@@ -375,7 +375,7 @@ namespace SE.Nereda.Symbols.FeedReactorLogic
 			new NxtControl.Drawing.PointF(8D, 400D),
 			new NxtControl.Drawing.PointF(160D, 400D),
 			new NxtControl.Drawing.PointF(184D, 424D)});
-			this.polyTitle.Text = "PUMPS STATUS";
+			this.polyTitle.Text = "ESTADO DAS BOMBAS";
 			this.polyTitle.TextColor = new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(0)));
 			// 
 			// txtState
@@ -392,7 +392,7 @@ namespace SE.Nereda.Symbols.FeedReactorLogic
 			this.txtPumps.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular);
 			this.txtPumps.Location = new NxtControl.Drawing.PointF(16D, 456D);
 			this.txtPumps.Name = "txtPumps";
-			this.txtPumps.Text = "Pumps in service: -";
+			this.txtPumps.Text = "Bombas em servi\u00e7o: -";
 			// 
 			// txtSpeed
 			// 
@@ -400,7 +400,7 @@ namespace SE.Nereda.Symbols.FeedReactorLogic
 			this.txtSpeed.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
 			this.txtSpeed.Location = new NxtControl.Drawing.PointF(16D, 476D);
 			this.txtSpeed.Name = "txtSpeed";
-			this.txtSpeed.Text = "Speed per pump: - %";
+			this.txtSpeed.Text = "Velocidade por bomba: - %";
 			// 
 			// txtMode
 			// 

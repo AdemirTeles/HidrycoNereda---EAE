@@ -103,7 +103,7 @@ namespace SE.Nereda.Symbols.Mode
 			this.ModeTxt.Name = "ModeTxt";
 			this.ModeTxt.OpenFaceplates.Add(new NxtControl.GuiFramework.OpenFaceplate("ModeSelect", NxtControl.GuiFramework.MouseButtonType.Click));
 			this.ModeTxt.Pen = new NxtControl.Drawing.Pen("LabelPen");
-			this.ModeTxt.Text = "Mode";
+			this.ModeTxt.Text = "Modo";
 			this.ModeTxt.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleCenter;
 			this.ModeTxt.TextAutoSizeHorizontalOffset = 10;
 			this.ModeTxt.TextColor = new NxtControl.Drawing.Color(((byte)(64)), ((byte)(205)), ((byte)(32)));

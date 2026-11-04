@@ -92,7 +92,7 @@ namespace SE.Nereda.Symbols.AnalogInput
 			this.SensorName.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular);
 			this.SensorName.Location = new NxtControl.Drawing.PointF(16D, 12D);
 			this.SensorName.Name = "SensorName";
-			this.SensorName.Text = "Name";
+			this.SensorName.Text = "Nome";
 			// 
 			// alarmSAFrame1
 			// 

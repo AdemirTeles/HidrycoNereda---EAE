@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<busmaster xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="MB_DESINF_REMOTA" busId="MB_DESINF_REMOTA" protocol="modbus" busCycle="T#200ms" enableSymlinkOC="false" busTolerance="10" busActionMissedCycle="1" alignWithResPriority="false" ReconnectAfterTimeout="Enable">
+  <connectinfo mastertype="master" transportprotocol="tcp" interframedelay="10" />
+  <logging enable="false" filename="modbus.log" />
+  <buscoupler name="DESINF_A1_REMOTA" diagnostics="disabled">
+    <connectinfo transportprotocol="tcp" stationid="255" responsetimeout="500" fallbackValue="RESET">
+      <tcp ipaddress="10.26.208.137" port="502" />
+      <HA secondaryheartbeat="Enabled-ReadHoldingRegister" heartbeataddress="3001" />
+    </connectinfo>
+    <busdevice name="DESINF_A2_DI32K">
+      <parameter addresstype="register" length="2" addressautocalculation="disable" address="3001" datatype="inonly" ioevent="cyclic" />
+    </busdevice>
+    <busdevice name="DESINF_A4_AI8_VAL">
+      <parameter addresstype="register" length="8" addressautocalculation="disable" address="3003" datatype="inonly" ioevent="cyclic" />
+    </busdevice>
+  </buscoupler>
+  <buscoupler name="VC_700_01_COM" diagnostics="disabled">
+    <connectinfo transportprotocol="tcp" stationid="255" responsetimeout="500" fallbackValue="RESET">
+      <tcp ipaddress="10.26.208.165" port="502" />
+      <HA secondaryheartbeat="Enabled-ReadHoldingRegister" heartbeataddress="100" />
+    </connectinfo>
+    <busdevice name="VC_700_01_R40001">
+      <parameter addresstype="register" length="8" addressautocalculation="disable" address="100" datatype="inonly" ioevent="cyclic" />
+    </busdevice>
+    <busdevice name="VC_700_01_R40009">
+      <parameter addresstype="register" length="1" addressautocalculation="disable" address="108" datatype="inonly" ioevent="cyclic" />
+    </busdevice>
+    <busdevice name="VC_700_01_W40001">
+      <parameter addresstype="register" length="2" addressautocalculation="disable" address="0" datatype="output" ioevent="cyclic" />
+    </busdevice>
+  </buscoupler>
+</busmaster>

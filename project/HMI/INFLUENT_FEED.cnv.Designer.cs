@@ -44,7 +44,7 @@ namespace HMI.Main.Canvases
 			this.changeCanvasButton3.CanvasName = "REACTOR2";
 			this.changeCanvasButton3.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.changeCanvasButton3.Name = "changeCanvasButton3";
-			this.changeCanvasButton3.Text = "REACTOR 2";
+			this.changeCanvasButton3.Text = "REATOR NEREDA 2";
 			// 
 			// changeCanvasButton4
 			// 
@@ -52,7 +52,7 @@ namespace HMI.Main.Canvases
 			this.changeCanvasButton4.CanvasName = "REACTOR1";
 			this.changeCanvasButton4.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.changeCanvasButton4.Name = "changeCanvasButton4";
-			this.changeCanvasButton4.Text = "REACTOR 1";
+			this.changeCanvasButton4.Text = "REATOR NEREDA 1";
 			// 
 			// HeartBeat
 			// 

@@ -34,7 +34,7 @@ namespace SE.Nereda.Symbols.NextFeedHorizon
 			this.NextReactor.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.NextReactor.Location = new NxtControl.Drawing.PointF(48D, 40D);
 			this.NextReactor.Name = "NextReactor";
-			this.NextReactor.Text = "Next Feed Horizon Reactor 2 :";
+			this.NextReactor.Text = "Pr\u00f3x. alimenta\u00e7\u00e3o R2 :";
 			// 
 			// NextFeedHorizonR1_1
 			// 

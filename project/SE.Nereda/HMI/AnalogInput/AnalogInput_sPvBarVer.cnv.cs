@@ -25,9 +25,9 @@ namespace SE.Nereda.Symbols.AnalogInput
 		private float iPvMax;
 		private float iPvMin;
 
-		private string _Unit = "%";
+		private string _Unit = "m";
 		private string _SensorName = "Name";
-		private string UnitOut = "%";
+		private string UnitOut = "m";
 
 		public delegate void ShLevelPv(
 			float ShPvMax,
@@ -100,7 +100,7 @@ namespace SE.Nereda.Symbols.AnalogInput
 
 			if (iChFail)
 			{
-				StatusTxt.Text = "I/O Channel Failure";
+				StatusTxt.Text = "Falha do canal de E/S";
 				StatusTxt.TextColor =
 					new NxtControl.Drawing.BlinkColor(
 						"SE.Nereda.Orangwhite"
@@ -108,25 +108,25 @@ namespace SE.Nereda.Symbols.AnalogInput
 			}
 			else if (iLoLoPv)
 			{
-				StatusTxt.Text = "Low Low Level";
+				StatusTxt.Text = "N\u00edvel muito baixo";
 				StatusTxt.Color =
 					new NxtControl.Drawing.Color(255, 0, 0);
 			}
 			else if (iHiHiPv)
 			{
-				StatusTxt.Text = "High High Level";
+				StatusTxt.Text = "N\u00edvel muito alto";
 				StatusTxt.Color =
 					new NxtControl.Drawing.Color(255, 0, 0);
 			}
 			else if (iLoPv)
 			{
-				StatusTxt.Text = "Low Level";
+				StatusTxt.Text = "N\u00edvel baixo";
 				StatusTxt.Color =
 					new NxtControl.Drawing.Color(254, 186, 10);
 			}
 			else if (iHiPv)
 			{
-				StatusTxt.Text = "High Level";
+				StatusTxt.Text = "N\u00edvel alto";
 				StatusTxt.Color =
 					new NxtControl.Drawing.Color(254, 186, 10);
 			}
@@ -150,6 +150,8 @@ namespace SE.Nereda.Symbols.AnalogInput
 			if (range <= 0.0f)
 			{
 				ShowLevel.FillPercent = 0.0f;
+				if (Percent != null)
+					Percent.Text = "-- %";
 				return;
 			}
 
@@ -168,6 +170,10 @@ namespace SE.Nereda.Symbols.AnalogInput
 				fillPercent = 100.0f;
 
 			ShowLevel.FillPercent = fillPercent;
+
+			// Porcentagem da faixa PvMin..PvMax (4-20 mA = 0-100 %), embaixo do valor em unidade de engenharia
+			if (Percent != null)
+				Percent.Text = fillPercent.ToString("0.0") + " %";
 
 			if (ShareLevelPv != null)
 			{

@@ -45,7 +45,7 @@ namespace SE.Nereda.Symbols.SufficientFeedFlow
 			new NxtControl.Drawing.PointF(17D, 30D),
 			new NxtControl.Drawing.PointF(181D, 30D),
 			new NxtControl.Drawing.PointF(209D, 58D)});
-			this.polygon1.Text = "SUFFICIENT FEED FLOW";
+			this.polygon1.Text = "VAZ\u00c3O DE ALIMENTA\u00c7\u00c3O SUFICIENTE";
 			this.polygon1.TextColor = new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(0)));
 			// 
 			// rectangle1
@@ -61,7 +61,7 @@ namespace SE.Nereda.Symbols.SufficientFeedFlow
 			this.freeText11.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeText11.Location = new NxtControl.Drawing.PointF(29D, 60D);
 			this.freeText11.Name = "freeText11";
-			this.freeText11.Text = "Minimum Level Rise:";
+			this.freeText11.Text = "Subida m\u00ednima de n\u00edvel:";
 			// 
 			// freeText2
 			// 
@@ -69,7 +69,7 @@ namespace SE.Nereda.Symbols.SufficientFeedFlow
 			this.freeText2.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeText2.Location = new NxtControl.Drawing.PointF(29D, 100D);
 			this.freeText2.Name = "freeText2";
-			this.freeText2.Text = "Feed Flow Check Time:";
+			this.freeText2.Text = "Tempo verifica\u00e7\u00e3o vaz\u00e3o:";
 			// 
 			// MinLevelRiseSp_1
 			// 

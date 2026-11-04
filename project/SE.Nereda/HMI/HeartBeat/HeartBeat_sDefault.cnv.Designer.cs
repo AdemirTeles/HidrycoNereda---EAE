@@ -41,7 +41,7 @@ namespace SE.Nereda.Symbols.HeartBeat
 			this.label2.FontScale = true;
 			this.label2.Name = "label2";
 			this.label2.Pen = new NxtControl.Drawing.Pen("LabelPen");
-			this.label2.Text = "Nereda Controller Communication Status";
+			this.label2.Text = "Comunica\u00e7\u00e3o com o controlador Nereda";
 			this.label2.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleCenter;
 			this.label2.TextAutoSizeHorizontalOffset = 10;
 			this.label2.TextColor = new NxtControl.Drawing.BlinkColor("DevError");

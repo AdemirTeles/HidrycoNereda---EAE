@@ -70,7 +70,7 @@ namespace SE.Nereda.Faceplates.EmergencyManagement
 			this.freeText1.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeText1.Location = new NxtControl.Drawing.PointF(24D, 16D);
 			this.freeText1.Name = "freeText1";
-			this.freeText1.Text = "CT Reactor Actual   =   (Nbr Available Reactors   /   Nbr Total Reactors)   *   C" +
+			this.freeText1.Text = "CT reator atual   =   (N\u00ba reatores dispon\u00edveis   /   N\u00ba total de reatores)   *   C" +
 	"T Nominal";
 			// 
 			// CT_ReactorActual
@@ -170,7 +170,7 @@ namespace SE.Nereda.Faceplates.EmergencyManagement
 			this.freeText5.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeText5.Location = new NxtControl.Drawing.PointF(24D, 96D);
 			this.freeText5.Name = "freeText5";
-			this.freeText5.Text = "Start Interval   =   CT Reactor Actual   /   Nbr Available Reactors";
+			this.freeText5.Text = "Intervalo   =   CT reator atual   /   N\u00ba reatores dispon\u00edveis";
 			// 
 			// StartInterval
 			// 
@@ -244,7 +244,7 @@ namespace SE.Nereda.Faceplates.EmergencyManagement
 			this.freeText8.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeText8.Location = new NxtControl.Drawing.PointF(24D, 176D);
 			this.freeText8.Name = "freeText8";
-			this.freeText8.Text = "Settle Time R1   =   Minimum Settle Time  -   Time Since Start Aerate R1";
+			this.freeText8.Text = "Decanta\u00e7\u00e3o R1   =   Tempo m\u00edn. decanta\u00e7\u00e3o  -   Tempo desde in\u00edcio aera\u00e7\u00e3o R1";
 			// 
 			// freeText9
 			// 
@@ -313,7 +313,7 @@ namespace SE.Nereda.Faceplates.EmergencyManagement
 			this.freeText11.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeText11.Location = new NxtControl.Drawing.PointF(24D, 256D);
 			this.freeText11.Name = "freeText11";
-			this.freeText11.Text = "Settle Time R2   =   Minimum Settle Time  -   Time Since Start Aerate R2";
+			this.freeText11.Text = "Decanta\u00e7\u00e3o R2   =   Tempo m\u00edn. decanta\u00e7\u00e3o  -   Tempo desde in\u00edcio aera\u00e7\u00e3o R2";
 			// 
 			// freeText12
 			// 

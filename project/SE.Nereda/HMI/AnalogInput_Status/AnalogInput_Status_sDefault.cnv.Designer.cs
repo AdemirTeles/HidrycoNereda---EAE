@@ -38,7 +38,7 @@ namespace SE.Nereda.Symbols.AnalogInput_Status
 			this.drawnButton1.OpenFaceplates.Add(new NxtControl.GuiFramework.OpenFaceplate("fpStatus", NxtControl.GuiFramework.MouseButtonType.Click));
 			this.drawnButton1.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("transparent"), 1F, NxtControl.Drawing.DashStyle.Solid);
 			this.drawnButton1.Radius = 4D;
-			this.drawnButton1.Text = "STATUS";
+			this.drawnButton1.Text = "ESTADO";
 			this.drawnButton1.TextColor = new NxtControl.Drawing.Color("SE.Nereda.ButtonTextColor");
 			this.drawnButton1.TextColorMouseDown = new NxtControl.Drawing.Color("SE.Nereda.ButtonTextColorMouseDown");
 			this.drawnButton1.Use3DEffect = false;

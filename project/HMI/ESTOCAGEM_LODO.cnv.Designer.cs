@@ -102,6 +102,16 @@ namespace HMI.Main.Canvases
 			this.so2 = new Hidryco.HidrycoLib.Symbols.Motor_Generico.sSoprador();
 			this.vb4 = new Hidryco.HidrycoLib.Symbols.Atuador_Coester.sValvulaV();
 			this.processo = new Hidryco.HidrycoLib.Symbols.Fase_Solida.sDefault();
+			this.repAI1 = new SE.Nereda.Symbols.AnalogInputBase.sInstanceName();
+			this.repHH1 = new SE.App2Base.Symbols.LimitAlarm.sIndicator();
+			this.repH1 = new SE.App2Base.Symbols.LimitAlarm.sIndicator();
+			this.repL1 = new SE.App2Base.Symbols.LimitAlarm.sIndicator();
+			this.repLL1 = new SE.App2Base.Symbols.LimitAlarm.sIndicator();
+			this.repAI2 = new SE.Nereda.Symbols.AnalogInputBase.sInstanceName();
+			this.repHH2 = new SE.App2Base.Symbols.LimitAlarm.sIndicator();
+			this.repH2 = new SE.App2Base.Symbols.LimitAlarm.sIndicator();
+			this.repL2 = new SE.App2Base.Symbols.LimitAlarm.sIndicator();
+			this.repLL2 = new SE.App2Base.Symbols.LimitAlarm.sIndicator();
 			// 
 			// fundo
 			// 
@@ -842,6 +852,106 @@ namespace HMI.Main.Canvases
 			this.processo.TagName = "91957488A3380C04";
 			this.processo.EndInit();
 			// 
+			// repAI1
+			// 
+			this.repAI1.BeginInit();
+			this.repAI1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 0D, 0D);
+			this.repAI1.Name = "repAI1";
+			this.repAI1.SecurityToken = ((uint)(4294967295u));
+			this.repAI1.TagName = "356FB76E49F87763.LevelMeasurementReactor.AnalogInput";
+			this.repAI1.Visible = false;
+			this.repAI1.EndInit();
+			// 
+			// repHH1
+			// 
+			this.repHH1.BeginInit();
+			this.repHH1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 0D, 0D);
+			this.repHH1.Name = "repHH1";
+			this.repHH1.SecurityToken = ((uint)(4294967295u));
+			this.repHH1.TagName = "356FB76E49F87763.LevelMeasurementReactor.highHigh";
+			this.repHH1.Visible = false;
+			this.repHH1.EndInit();
+			// 
+			// repH1
+			// 
+			this.repH1.BeginInit();
+			this.repH1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 0D, 0D);
+			this.repH1.Name = "repH1";
+			this.repH1.SecurityToken = ((uint)(4294967295u));
+			this.repH1.TagName = "356FB76E49F87763.LevelMeasurementReactor.high";
+			this.repH1.Visible = false;
+			this.repH1.EndInit();
+			// 
+			// repL1
+			// 
+			this.repL1.BeginInit();
+			this.repL1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 0D, 0D);
+			this.repL1.Name = "repL1";
+			this.repL1.SecurityToken = ((uint)(4294967295u));
+			this.repL1.TagName = "356FB76E49F87763.LevelMeasurementReactor.low";
+			this.repL1.Visible = false;
+			this.repL1.EndInit();
+			// 
+			// repLL1
+			// 
+			this.repLL1.BeginInit();
+			this.repLL1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 0D, 0D);
+			this.repLL1.Name = "repLL1";
+			this.repLL1.SecurityToken = ((uint)(4294967295u));
+			this.repLL1.TagName = "356FB76E49F87763.LevelMeasurementReactor.lowLow";
+			this.repLL1.Visible = false;
+			this.repLL1.EndInit();
+			// 
+			// repAI2
+			// 
+			this.repAI2.BeginInit();
+			this.repAI2.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 0D, 0D);
+			this.repAI2.Name = "repAI2";
+			this.repAI2.SecurityToken = ((uint)(4294967295u));
+			this.repAI2.TagName = "864A57C6293E51C2.LevelMeasurementReactor.AnalogInput";
+			this.repAI2.Visible = false;
+			this.repAI2.EndInit();
+			// 
+			// repHH2
+			// 
+			this.repHH2.BeginInit();
+			this.repHH2.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 0D, 0D);
+			this.repHH2.Name = "repHH2";
+			this.repHH2.SecurityToken = ((uint)(4294967295u));
+			this.repHH2.TagName = "864A57C6293E51C2.LevelMeasurementReactor.highHigh";
+			this.repHH2.Visible = false;
+			this.repHH2.EndInit();
+			// 
+			// repH2
+			// 
+			this.repH2.BeginInit();
+			this.repH2.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 0D, 0D);
+			this.repH2.Name = "repH2";
+			this.repH2.SecurityToken = ((uint)(4294967295u));
+			this.repH2.TagName = "864A57C6293E51C2.LevelMeasurementReactor.high";
+			this.repH2.Visible = false;
+			this.repH2.EndInit();
+			// 
+			// repL2
+			// 
+			this.repL2.BeginInit();
+			this.repL2.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 0D, 0D);
+			this.repL2.Name = "repL2";
+			this.repL2.SecurityToken = ((uint)(4294967295u));
+			this.repL2.TagName = "864A57C6293E51C2.LevelMeasurementReactor.low";
+			this.repL2.Visible = false;
+			this.repL2.EndInit();
+			// 
+			// repLL2
+			// 
+			this.repLL2.BeginInit();
+			this.repLL2.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 0D, 0D);
+			this.repLL2.Name = "repLL2";
+			this.repLL2.SecurityToken = ((uint)(4294967295u));
+			this.repLL2.TagName = "864A57C6293E51C2.LevelMeasurementReactor.lowLow";
+			this.repLL2.Visible = false;
+			this.repLL2.EndInit();
+			// 
 			// ESTOCAGEM_LODO
 			// 
 			this.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(1366D)), ((float)(698D)));
@@ -938,7 +1048,17 @@ namespace HMI.Main.Canvases
 			this.so2,
 			this.vb4,
 			this.processo,
-			this.btnResetGeral});
+			this.btnResetGeral,
+			this.repAI1,
+			this.repHH1,
+			this.repH1,
+			this.repL1,
+			this.repLL1,
+			this.repAI2,
+			this.repHH2,
+			this.repH2,
+			this.repL2,
+			this.repLL2});
 		}
 		private NxtControl.GuiFramework.Rectangle fundo;
 		private NxtControl.GuiFramework.Rectangle cardProcesso;
@@ -1019,6 +1139,16 @@ namespace HMI.Main.Canvases
 		private Hidryco.HidrycoLib.Symbols.Atuador_Coester.sValvulaV vb4;
 		private Hidryco.HidrycoLib.Symbols.Fase_Solida.sDefault processo;
 		private NxtControl.GuiFramework.DrawnButton btnResetGeral;
+		private SE.Nereda.Symbols.AnalogInputBase.sInstanceName repAI1;
+		private SE.App2Base.Symbols.LimitAlarm.sIndicator repHH1;
+		private SE.App2Base.Symbols.LimitAlarm.sIndicator repH1;
+		private SE.App2Base.Symbols.LimitAlarm.sIndicator repL1;
+		private SE.App2Base.Symbols.LimitAlarm.sIndicator repLL1;
+		private SE.Nereda.Symbols.AnalogInputBase.sInstanceName repAI2;
+		private SE.App2Base.Symbols.LimitAlarm.sIndicator repHH2;
+		private SE.App2Base.Symbols.LimitAlarm.sIndicator repH2;
+		private SE.App2Base.Symbols.LimitAlarm.sIndicator repL2;
+		private SE.App2Base.Symbols.LimitAlarm.sIndicator repLL2;
 		#endregion
 	}
 }

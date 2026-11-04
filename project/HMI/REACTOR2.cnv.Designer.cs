@@ -75,6 +75,7 @@ namespace HMI.Main.Canvases
 			// sSensors1
 			// 
 			this.sSensors1.BeginInit();
+			this.sSensors1._iReator = "42";
 			this.sSensors1.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.79120474507283622D, 0D, 0D, 0.88387713675213642D, 24.000000000000004D, 328.00000000000006D);
 			this.sSensors1.Name = "sSensors1";
 			this.sSensors1.SecurityToken = ((uint)(4294967295u));
@@ -84,14 +85,14 @@ namespace HMI.Main.Canvases
 			// sReactor41
 			// 
 			this.sReactor41.BeginInit();
-			this.sReactor41._iAV4x101 = "AV4x101";
-			this.sReactor41._iAV4x102 = "AV4x102";
-			this.sReactor41._iAV4x103 = "AV4x103";
-			this.sReactor41._iAV4x170 = "AV4x170";
-			this.sReactor41._iAV4x171 = "AV4x171";
-			this.sReactor41._iAV4x172 = "AV4x172";
-			this.sReactor41._iLT001 = "4xLT1005";
-			this.sReactor41._iREACTOR = "Reactor 2";
+			this.sReactor41._iAV4x101 = "AV42101\r\nAlimenta\u00e7\u00e3o";
+			this.sReactor41._iAV4x102 = "AV42102\r\nN\u00edvel inferior";
+			this.sReactor41._iAV4x103 = "AV42103\r\nDescarte de lodo";
+			this.sReactor41._iAV4x170 = "AV42170\r\nAera\u00e7\u00e3o";
+			this.sReactor41._iAV4x171 = "AV42171\r\nPressuriza\u00e7\u00e3o";
+			this.sReactor41._iAV4x172 = "AV42172\r\nRespiro lodo";
+			this.sReactor41._iLT001 = "42LT1005\r\nN\u00edvel";
+			this.sReactor41._iREACTOR = "Reator Nereda 2";
 			this.sReactor41.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.8669833729216152D, 0D, 0D, 0.8669833729216152D, 496D, 152D);
 			this.sReactor41.Name = "sReactor41";
 			this.sReactor41.SecurityToken = ((uint)(4294967295u));

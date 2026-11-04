@@ -37,7 +37,7 @@ namespace SE.Nereda.Symbols.OpenWebPage
 			this.drawnButton1.Name = "drawnButton1";
 			this.drawnButton1.Pen = new NxtControl.Drawing.Pen("ButtonPen");
 			this.drawnButton1.Radius = 4D;
-			this.drawnButton1.Text = "Open WebPage";
+			this.drawnButton1.Text = "Abrir p\u00e1gina web";
 			this.drawnButton1.TextColor = new NxtControl.Drawing.Color("SE.Nereda.ButtonTextColor");
 			this.drawnButton1.TextColorMouseDown = new NxtControl.Drawing.Color("SE.Nereda.ButtonTextColorMouseDown");
 			this.drawnButton1.Use3DEffect = false;

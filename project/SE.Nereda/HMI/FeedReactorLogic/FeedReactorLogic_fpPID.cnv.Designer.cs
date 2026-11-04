@@ -49,7 +49,7 @@ namespace SE.Nereda.Faceplates.FeedReactorLogic
 			this.freeText1.Font = new NxtControl.Drawing.Font("LabelFont");
 			this.freeText1.Location = new NxtControl.Drawing.PointF(16D, 36D);
 			this.freeText1.Name = "freeText1";
-			this.freeText1.Text = "Process Value :";
+			this.freeText1.Text = "Valor de processo :";
 			// 
 			// freeText2
 			// 
@@ -65,7 +65,7 @@ namespace SE.Nereda.Faceplates.FeedReactorLogic
 			this.freeText3.Font = new NxtControl.Drawing.Font("LabelFont");
 			this.freeText3.Location = new NxtControl.Drawing.PointF(16D, 84D);
 			this.freeText3.Name = "freeText3";
-			this.freeText3.Text = "PID Output :";
+			this.freeText3.Text = "Sa\u00edda do PID :";
 			// 
 			// PID
 			// 
@@ -86,7 +86,7 @@ namespace SE.Nereda.Faceplates.FeedReactorLogic
 			this.ActName.Font = new NxtControl.Drawing.Font("LabelFont");
 			this.ActName.Location = new NxtControl.Drawing.PointF(16D, 16D);
 			this.ActName.Name = "ActName";
-			this.ActName.Text = "NVPP 001 ctp 001";
+			this.ActName.Text = "PID vaz\u00e3o 40FT05";
 			// 
 			// freeText4
 			// 
@@ -94,7 +94,7 @@ namespace SE.Nereda.Faceplates.FeedReactorLogic
 			this.freeText4.Font = new NxtControl.Drawing.Font("LabelFont");
 			this.freeText4.Location = new NxtControl.Drawing.PointF(16D, 108D);
 			this.freeText4.Name = "freeText4";
-			this.freeText4.Text = "RESET Lo Lo Flow Alarm :";
+			this.freeText4.Text = "RESET vaz\u00e3o m. baixa :";
 			// 
 			// drawnButton1
 			// 

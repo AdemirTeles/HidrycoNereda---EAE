@@ -43,7 +43,7 @@ namespace SE.Nereda.Symbols.CmdSludgeDischarge
 			this.freeText1.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeText1.Location = new NxtControl.Drawing.PointF(16D, 56D);
 			this.freeText1.Name = "freeText1";
-			this.freeText1.Text = "Sludge Discharge Level SetPoint :";
+			this.freeText1.Text = "SP n\u00edvel descarte de lodo :";
 			// 
 			// SDLevelSetPoint
 			// 
@@ -76,7 +76,7 @@ namespace SE.Nereda.Symbols.CmdSludgeDischarge
 			new NxtControl.Drawing.PointF(8D, 24D),
 			new NxtControl.Drawing.PointF(160D, 24D),
 			new NxtControl.Drawing.PointF(184D, 48D)});
-			this.polygon1.Text = "SLUDGE DISCHARGE";
+			this.polygon1.Text = "DESCARTE DE LODO";
 			this.polygon1.TextColor = new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(0)));
 			// 
 			// sDefault

@@ -45,7 +45,7 @@ namespace SE.Nereda.Symbols.CmdVent
 			this.freeText1.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeText1.Location = new NxtControl.Drawing.PointF(16D, 46D);
 			this.freeText1.Name = "freeText1";
-			this.freeText1.Text = "Air vent grid (Manual Mode) :";
+			this.freeText1.Text = "Respiro grade de ar (manual) :";
 			// 
 			// freeText2
 			// 
@@ -53,7 +53,7 @@ namespace SE.Nereda.Symbols.CmdVent
 			this.freeText2.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeText2.Location = new NxtControl.Drawing.PointF(16D, 86D);
 			this.freeText2.Name = "freeText2";
-			this.freeText2.Text = "Air vent influent grid (Manual Mode) :";
+			this.freeText2.Text = "Respiro grade afluente (manual) :";
 			// 
 			// VentAirGridMan
 			// 
@@ -98,7 +98,7 @@ namespace SE.Nereda.Symbols.CmdVent
 			new NxtControl.Drawing.PointF(8D, 16D),
 			new NxtControl.Drawing.PointF(160D, 16D),
 			new NxtControl.Drawing.PointF(184D, 40D)});
-			this.polygon1.Text = "VENT";
+			this.polygon1.Text = "RESPIRO";
 			this.polygon1.TextColor = new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(0)));
 			// 
 			// sDefault

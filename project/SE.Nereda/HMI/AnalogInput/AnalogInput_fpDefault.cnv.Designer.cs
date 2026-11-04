@@ -100,7 +100,7 @@ namespace SE.Nereda.Faceplates.AnalogInput
 			this.freeText1.Font = new NxtControl.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular);
 			this.freeText1.Location = new NxtControl.Drawing.PointF(32D, 56D);
 			this.freeText1.Name = "freeText1";
-			this.freeText1.Text = "Process Value :";
+			this.freeText1.Text = "Valor de processo :";
 			// 
 			// Unit
 			// 
@@ -486,7 +486,7 @@ namespace SE.Nereda.Faceplates.AnalogInput
 			this.Override.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular);
 			this.Override.Location = new NxtControl.Drawing.PointF(8D, 8D);
 			this.Override.Name = "Override";
-			this.Override.Text = "Override : Enabled";
+			this.Override.Text = "For\u00e7ado: habilitado";
 			// 
 			// iUnit
 			// 

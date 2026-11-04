@@ -41,7 +41,7 @@ namespace SE.Nereda.Symbols.NextFeedHorizon
 			new NxtControl.Drawing.PointF(8D, 8D),
 			new NxtControl.Drawing.PointF(264D, 8D),
 			new NxtControl.Drawing.PointF(296D, 32D)});
-			this.polygon2.Text = "NEXT FEED HORIZON";
+			this.polygon2.Text = "PR\u00d3XIMA ALIMENTA\u00c7\u00c3O";
 			this.polygon2.TextColor = new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(0)));
 			// 
 			// rectangle2

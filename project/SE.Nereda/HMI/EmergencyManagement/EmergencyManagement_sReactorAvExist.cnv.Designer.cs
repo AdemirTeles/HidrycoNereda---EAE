@@ -59,7 +59,7 @@ namespace SE.Nereda.Symbols.EmergencyManagement
 			this.freeText1.Font = new NxtControl.Drawing.Font("LabelFont");
 			this.freeText1.Location = new NxtControl.Drawing.PointF(12D, 12D);
 			this.freeText1.Name = "freeText1";
-			this.freeText1.Text = "Nbr Available Reactors :";
+			this.freeText1.Text = "N\u00ba reatores dispon\u00edveis :";
 			// 
 			// freeText2
 			// 
@@ -67,7 +67,7 @@ namespace SE.Nereda.Symbols.EmergencyManagement
 			this.freeText2.Font = new NxtControl.Drawing.Font("LabelFont");
 			this.freeText2.Location = new NxtControl.Drawing.PointF(12D, 28D);
 			this.freeText2.Name = "freeText2";
-			this.freeText2.Text = "Total Reactors :";
+			this.freeText2.Text = "Total de reatores :";
 			// 
 			// NbrTotalReactors
 			// 

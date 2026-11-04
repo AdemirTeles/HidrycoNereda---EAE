@@ -31,35 +31,35 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			switch(Convert.ToInt32(InStatus.Value))
 				{
 				case 0:
-					DisplayStatus.Text = "REACTOR READY";
+					DisplayStatus.Text = "REATOR PRONTO";
 					DisplayStatus.TextColor = new NxtControl.Drawing.Color(255, 255, 0);
 					break;
 				case 1:
-					DisplayStatus.Text = "REACTOR STARTING";
+					DisplayStatus.Text = "REATOR PARTINDO";
 					DisplayStatus.TextColor = new NxtControl.Drawing.Color(255, 255, 0);
 					break;
 				case 2:
-					DisplayStatus.Text = "REACTOR RUNNING";
+					DisplayStatus.Text = "REATOR EM OPERA\u00c7\u00c3O";
 					DisplayStatus.TextColor = new NxtControl.Drawing.Color(255, 255, 0);
 					break;
 				case 3:
-					DisplayStatus.Text = "REACTOR STOPPING";
+					DisplayStatus.Text = "REATOR PARANDO";
 					DisplayStatus.TextColor = new NxtControl.Drawing.Color(255, 255, 0);
 					break;
 				case 5:
-					DisplayStatus.Text = "REACTOR ABORTING";
+					DisplayStatus.Text = "REATOR ABORTANDO";
 					DisplayStatus.TextColor = new NxtControl.Drawing.Color(255, 255, 0);
 					break;
 				case 6:
-					DisplayStatus.Text = "REACTOR ABORTED";
+					DisplayStatus.Text = "REATOR ABORTADO";
 					DisplayStatus.TextColor = new NxtControl.Drawing.Color(255, 0, 0);
 					break;
 				case 7:
-					DisplayStatus.Text = "REACTOR INTERLOCKED";
+					DisplayStatus.Text = "REATOR INTERTRAVADO";
 					DisplayStatus.TextColor = new NxtControl.Drawing.Color(255, 0, 0);
 					break;
 				case 10:
-					DisplayStatus.Text = "REACTOR STATUS";
+					DisplayStatus.Text = "ESTADO DO REATOR";
 					DisplayStatus.TextColor = new NxtControl.Drawing.Color(255, 255, 0);
 					break;
 				}

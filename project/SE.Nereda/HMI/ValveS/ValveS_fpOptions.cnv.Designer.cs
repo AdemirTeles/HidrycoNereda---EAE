@@ -68,7 +68,7 @@ namespace SE.Nereda.Faceplates.ValveS
 			this.OpenMotFp.Name = "OpenMotFp";
 			this.OpenMotFp.Pen = new NxtControl.Drawing.Pen("ButtonPen");
 			this.OpenMotFp.Radius = 4D;
-			this.OpenMotFp.Text = "Valve Faceplate";
+			this.OpenMotFp.Text = "V\u00e1lvula";
 			this.OpenMotFp.TextColor = new NxtControl.Drawing.Color("ButtonTextColor");
 			this.OpenMotFp.TextColorMouseDown = new NxtControl.Drawing.Color("ButtonTextColorMouseDown");
 			this.OpenMotFp.Use3DEffect = false;
@@ -96,7 +96,7 @@ namespace SE.Nereda.Faceplates.ValveS
 			this.RearmBtn.Name = "RearmBtn";
 			this.RearmBtn.Pen = new NxtControl.Drawing.Pen("ButtonPen");
 			this.RearmBtn.Radius = 4D;
-			this.RearmBtn.Text = "Rearm";
+			this.RearmBtn.Text = "Rearmar";
 			this.RearmBtn.TextColor = new NxtControl.Drawing.Color("ButtonTextColor");
 			this.RearmBtn.TextColorMouseDown = new NxtControl.Drawing.Color("ButtonTextColorMouseDown");
 			this.RearmBtn.Use3DEffect = false;
@@ -126,7 +126,7 @@ namespace SE.Nereda.Faceplates.ValveS
 			this.maintenance,
 			this.RearmBtn});
 			this.Size = new System.Drawing.Size(216, 152);
-			this.Title = "Options";
+			this.Title = "Op\u00e7\u00f5es";
 
 		}
 		private SE.App2CommonProcess.Symbols.IlckCondSum.sInterlock interlock;

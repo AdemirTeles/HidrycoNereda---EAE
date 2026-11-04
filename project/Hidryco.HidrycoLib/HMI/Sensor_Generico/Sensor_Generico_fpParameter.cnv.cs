@@ -13,6 +13,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_Generico
 		public fpParameter()
 		{
 			InitializeComponent();
+			LigaReplica();
 		}
 
 		// Indicador de alarme (ISA-101): forma + numero de prioridade + texto; escondido quando normal.
@@ -60,5 +61,37 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_Generico
 			sinalBom.Visible = !f;
 		}
 
+		// ---- Replicacao dos ajustes: avisa a tela quando o operador grava faixa, altura, alarmes ou habilitacoes.
+		// As telas ESTOCAGEM_LODO e VISAO_GERAL replicam o LIT-900-01/02 no AnalogInput do SludgeHoldingTank1/2 da Nereda.
+		void LigaReplica()
+		{
+			foreach (System.HMI.Symbols.Base.TextBox<float> c in new System.HMI.Symbols.Base.TextBox<float>[] { rangeMin, rangeMax, altura, rSpHH, rSpH, rSpL, rSpLL })
+				c.OutputValueChanged += Replica;
+			foreach (System.HMI.Symbols.Base.CheckButton c in new System.HMI.Symbols.Base.CheckButton[] { rHabHH, rHabH, rHabL, rHabLL })
+				c.OutputValueChanged += Replica;
+		}
+
+		static float ValF(System.HMI.Symbols.Base.TextBox<float> c, object sender, ValueChangedEventArgs e)
+		{
+			return object.ReferenceEquals(c, sender) ? Convert.ToSingle(e.Value) : Convert.ToSingle(c.Value);
+		}
+
+		static bool ValB(System.HMI.Symbols.Base.CheckButton c, object sender, ValueChangedEventArgs e)
+		{
+			return object.ReferenceEquals(c, sender) ? Convert.ToBoolean(e.Value) : Convert.ToBoolean(c.Value);
+		}
+
+		void Replica(object sender, ValueChangedEventArgs e)
+		{
+			Hidryco.HidrycoLib.SupportClasses.AjustesSensor a = new Hidryco.HidrycoLib.SupportClasses.AjustesSensor();
+			a.Tag = TagName;
+			a.RangeMin = ValF(rangeMin, sender, e);
+			a.RangeMax = ValF(rangeMax, sender, e);
+			a.Altura = ValF(altura, sender, e);
+			a.Nivel = Convert.ToBoolean(xNivel.Value);
+			a.Hab[0] = ValB(rHabHH, sender, e); a.Hab[1] = ValB(rHabH, sender, e); a.Hab[2] = ValB(rHabL, sender, e); a.Hab[3] = ValB(rHabLL, sender, e);
+			a.Sp[0] = ValF(rSpHH, sender, e); a.Sp[1] = ValF(rSpH, sender, e); a.Sp[2] = ValF(rSpL, sender, e); a.Sp[3] = ValF(rSpLL, sender, e);
+			Hidryco.HidrycoLib.SupportClasses.ReplicaSensor.Publicar(a);
+		}
 	}
 }

@@ -76,7 +76,7 @@ namespace SE.Nereda.Faceplates.Phase
 			this.PhaseName.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(245)), ((byte)(245)), ((byte)(245))));
 			this.PhaseName.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
 			this.PhaseName.Name = "PhaseName";
-			this.PhaseName.Text = "Phase";
+			this.PhaseName.Text = "Fase";
 			this.PhaseName.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// freeText1
@@ -85,7 +85,7 @@ namespace SE.Nereda.Faceplates.Phase
 			this.freeText1.Font = new NxtControl.Drawing.Font("LabelFont");
 			this.freeText1.Location = new NxtControl.Drawing.PointF(16D, 56D);
 			this.freeText1.Name = "freeText1";
-			this.freeText1.Text = "Operating Condition 1";
+			this.freeText1.Text = "Condi\u00e7\u00e3o de opera\u00e7\u00e3o 1";
 			// 
 			// freeText2
 			// 
@@ -93,7 +93,7 @@ namespace SE.Nereda.Faceplates.Phase
 			this.freeText2.Font = new NxtControl.Drawing.Font("LabelFont");
 			this.freeText2.Location = new NxtControl.Drawing.PointF(16D, 80D);
 			this.freeText2.Name = "freeText2";
-			this.freeText2.Text = "Operating Condition 2";
+			this.freeText2.Text = "Condi\u00e7\u00e3o de opera\u00e7\u00e3o 2";
 			// 
 			// freeText3
 			// 
@@ -101,7 +101,7 @@ namespace SE.Nereda.Faceplates.Phase
 			this.freeText3.Font = new NxtControl.Drawing.Font("LabelFont");
 			this.freeText3.Location = new NxtControl.Drawing.PointF(16D, 104D);
 			this.freeText3.Name = "freeText3";
-			this.freeText3.Text = "Operating Condition 3";
+			this.freeText3.Text = "Condi\u00e7\u00e3o de opera\u00e7\u00e3o 3";
 			// 
 			// freeText4
 			// 
@@ -109,7 +109,7 @@ namespace SE.Nereda.Faceplates.Phase
 			this.freeText4.Font = new NxtControl.Drawing.Font("LabelFont");
 			this.freeText4.Location = new NxtControl.Drawing.PointF(16D, 128D);
 			this.freeText4.Name = "freeText4";
-			this.freeText4.Text = "Operating Condition 4";
+			this.freeText4.Text = "Condi\u00e7\u00e3o de opera\u00e7\u00e3o 4";
 			// 
 			// freeText5
 			// 
@@ -117,7 +117,7 @@ namespace SE.Nereda.Faceplates.Phase
 			this.freeText5.Font = new NxtControl.Drawing.Font("LabelFont");
 			this.freeText5.Location = new NxtControl.Drawing.PointF(16D, 152D);
 			this.freeText5.Name = "freeText5";
-			this.freeText5.Text = "Operating Condition 5";
+			this.freeText5.Text = "Condi\u00e7\u00e3o de opera\u00e7\u00e3o 5";
 			// 
 			// freeText6
 			// 
@@ -125,7 +125,7 @@ namespace SE.Nereda.Faceplates.Phase
 			this.freeText6.Font = new NxtControl.Drawing.Font("LabelFont");
 			this.freeText6.Location = new NxtControl.Drawing.PointF(16D, 176D);
 			this.freeText6.Name = "freeText6";
-			this.freeText6.Text = "Operating Condition 6";
+			this.freeText6.Text = "Condi\u00e7\u00e3o de opera\u00e7\u00e3o 6";
 			// 
 			// freeText7
 			// 
@@ -133,7 +133,7 @@ namespace SE.Nereda.Faceplates.Phase
 			this.freeText7.Font = new NxtControl.Drawing.Font("LabelFont");
 			this.freeText7.Location = new NxtControl.Drawing.PointF(16D, 200D);
 			this.freeText7.Name = "freeText7";
-			this.freeText7.Text = "Operating Condition 7";
+			this.freeText7.Text = "Condi\u00e7\u00e3o de opera\u00e7\u00e3o 7";
 			// 
 			// freeText8
 			// 
@@ -141,7 +141,7 @@ namespace SE.Nereda.Faceplates.Phase
 			this.freeText8.Font = new NxtControl.Drawing.Font("LabelFont");
 			this.freeText8.Location = new NxtControl.Drawing.PointF(16D, 224D);
 			this.freeText8.Name = "freeText8";
-			this.freeText8.Text = "Operating Condition 8";
+			this.freeText8.Text = "Condi\u00e7\u00e3o de opera\u00e7\u00e3o 8";
 			// 
 			// ellipse1
 			// 
@@ -205,7 +205,7 @@ namespace SE.Nereda.Faceplates.Phase
 			this.freeText9.Font = new NxtControl.Drawing.Font("LabelFont");
 			this.freeText9.Location = new NxtControl.Drawing.PointF(16D, 248D);
 			this.freeText9.Name = "freeText9";
-			this.freeText9.Text = "Operating Condition 9";
+			this.freeText9.Text = "Condi\u00e7\u00e3o de opera\u00e7\u00e3o 9";
 			// 
 			// freeText10
 			// 
@@ -213,7 +213,7 @@ namespace SE.Nereda.Faceplates.Phase
 			this.freeText10.Font = new NxtControl.Drawing.Font("LabelFont");
 			this.freeText10.Location = new NxtControl.Drawing.PointF(16D, 272D);
 			this.freeText10.Name = "freeText10";
-			this.freeText10.Text = "Operating Condition 10";
+			this.freeText10.Text = "Condi\u00e7\u00e3o de opera\u00e7\u00e3o 10";
 			// 
 			// freeText11
 			// 
@@ -221,7 +221,7 @@ namespace SE.Nereda.Faceplates.Phase
 			this.freeText11.Font = new NxtControl.Drawing.Font("LabelFont");
 			this.freeText11.Location = new NxtControl.Drawing.PointF(16D, 296D);
 			this.freeText11.Name = "freeText11";
-			this.freeText11.Text = "Operating Condition 11";
+			this.freeText11.Text = "Condi\u00e7\u00e3o de opera\u00e7\u00e3o 11";
 			// 
 			// freeText12
 			// 
@@ -229,7 +229,7 @@ namespace SE.Nereda.Faceplates.Phase
 			this.freeText12.Font = new NxtControl.Drawing.Font("LabelFont");
 			this.freeText12.Location = new NxtControl.Drawing.PointF(16D, 320D);
 			this.freeText12.Name = "freeText12";
-			this.freeText12.Text = "Operating Condition 12";
+			this.freeText12.Text = "Condi\u00e7\u00e3o de opera\u00e7\u00e3o 12";
 			// 
 			// freeText13
 			// 
@@ -237,7 +237,7 @@ namespace SE.Nereda.Faceplates.Phase
 			this.freeText13.Font = new NxtControl.Drawing.Font("LabelFont");
 			this.freeText13.Location = new NxtControl.Drawing.PointF(16D, 344D);
 			this.freeText13.Name = "freeText13";
-			this.freeText13.Text = "Operating Condition 13";
+			this.freeText13.Text = "Condi\u00e7\u00e3o de opera\u00e7\u00e3o 13";
 			// 
 			// freeText14
 			// 
@@ -245,7 +245,7 @@ namespace SE.Nereda.Faceplates.Phase
 			this.freeText14.Font = new NxtControl.Drawing.Font("LabelFont");
 			this.freeText14.Location = new NxtControl.Drawing.PointF(16D, 368D);
 			this.freeText14.Name = "freeText14";
-			this.freeText14.Text = "Operating Condition 14";
+			this.freeText14.Text = "Condi\u00e7\u00e3o de opera\u00e7\u00e3o 14";
 			// 
 			// freeText15
 			// 
@@ -253,7 +253,7 @@ namespace SE.Nereda.Faceplates.Phase
 			this.freeText15.Font = new NxtControl.Drawing.Font("LabelFont");
 			this.freeText15.Location = new NxtControl.Drawing.PointF(16D, 392D);
 			this.freeText15.Name = "freeText15";
-			this.freeText15.Text = "Operating Condition 15";
+			this.freeText15.Text = "Condi\u00e7\u00e3o de opera\u00e7\u00e3o 15";
 			// 
 			// freeText16
 			// 
@@ -261,7 +261,7 @@ namespace SE.Nereda.Faceplates.Phase
 			this.freeText16.Font = new NxtControl.Drawing.Font("LabelFont");
 			this.freeText16.Location = new NxtControl.Drawing.PointF(16D, 416D);
 			this.freeText16.Name = "freeText16";
-			this.freeText16.Text = "Operating Condition 16";
+			this.freeText16.Text = "Condi\u00e7\u00e3o de opera\u00e7\u00e3o 16";
 			// 
 			// ellipse9
 			// 

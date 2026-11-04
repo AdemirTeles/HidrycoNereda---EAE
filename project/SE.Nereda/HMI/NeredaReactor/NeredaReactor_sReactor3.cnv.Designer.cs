@@ -142,7 +142,7 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			this.freeText1.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeText1.Location = new NxtControl.Drawing.PointF(176D, 208D);
 			this.freeText1.Name = "freeText1";
-			this.freeText1.Text = "Phase Feed";
+			this.freeText1.Text = "Fase alimenta\u00e7\u00e3o";
 			// 
 			// freeText2
 			// 
@@ -150,7 +150,7 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			this.freeText2.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeText2.Location = new NxtControl.Drawing.PointF(176D, 232D);
 			this.freeText2.Name = "freeText2";
-			this.freeText2.Text = "Phase LowerLevel";
+			this.freeText2.Text = "Fase rebaixar n\u00edvel";
 			// 
 			// LowerLevelRun
 			// 
@@ -230,7 +230,7 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			this.freeText3.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeText3.Location = new NxtControl.Drawing.PointF(176D, 256D);
 			this.freeText3.Name = "freeText3";
-			this.freeText3.Text = "Phase Aerate";
+			this.freeText3.Text = "Fase aera\u00e7\u00e3o";
 			// 
 			// freeText4
 			// 
@@ -238,7 +238,7 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			this.freeText4.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeText4.Location = new NxtControl.Drawing.PointF(176D, 280D);
 			this.freeText4.Name = "freeText4";
-			this.freeText4.Text = "Phase Wait";
+			this.freeText4.Text = "Fase espera";
 			// 
 			// freeText5
 			// 
@@ -246,7 +246,7 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			this.freeText5.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeText5.Location = new NxtControl.Drawing.PointF(176D, 304D);
 			this.freeText5.Name = "freeText5";
-			this.freeText5.Text = "Phase SludgeDischarge";
+			this.freeText5.Text = "Fase descarte de lodo";
 			// 
 			// roundedRectangle3
 			// 
@@ -263,7 +263,7 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			this.ReactorState.Font = new NxtControl.Drawing.Font("Arial", 6F, System.Drawing.FontStyle.Bold);
 			this.ReactorState.Name = "ReactorState";
 			this.ReactorState.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(78)), ((byte)(78)), ((byte)(78))), 1F, NxtControl.Drawing.DashStyle.Solid);
-			this.ReactorState.Text = "State";
+			this.ReactorState.Text = "Estado";
 			this.ReactorState.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleCenter;
 			this.ReactorState.TextColor = new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(0)));
 			// 
@@ -445,7 +445,7 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			this.REACTOR.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold);
 			this.REACTOR.Name = "REACTOR";
 			this.REACTOR.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("transparent"), 1F, NxtControl.Drawing.DashStyle.Solid);
-			this.REACTOR.Text = "REACTOR 1";
+			this.REACTOR.Text = "REATOR NEREDA 1";
 			this.REACTOR.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// VentAerationGridRun
@@ -490,7 +490,7 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			this.freeText6.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeText6.Location = new NxtControl.Drawing.PointF(176D, 328D);
 			this.freeText6.Name = "freeText6";
-			this.freeText6.Text = "Phase VentAerationGrid";
+			this.freeText6.Text = "Fase respiro aera\u00e7\u00e3o";
 			// 
 			// freeText7
 			// 
@@ -498,7 +498,7 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			this.freeText7.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeText7.Location = new NxtControl.Drawing.PointF(176D, 352D);
 			this.freeText7.Name = "freeText7";
-			this.freeText7.Text = "Phase VentSludgeGrid";
+			this.freeText7.Text = "Fase respiro lodo";
 			// 
 			// group2
 			// 

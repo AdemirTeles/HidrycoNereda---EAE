@@ -94,13 +94,13 @@ namespace SE.Nereda.Symbols.FeedReactorLogic
 			string pumps = PumpName(sel);
 			if (sec >= 1 && sec <= 3)
 				pumps = pumps.Length > 0 ? pumps + " + " + PumpName(sec) : PumpName(sec);
-			txtPumps.Text = "Pumps in service: " + (pumps.Length > 0 ? pumps : "none") + "  (running: " + nPumps.ToString() + ")";
+			txtPumps.Text = "Bombas em servi\u00e7o: " + (pumps.Length > 0 ? pumps : "none") + "  (running: " + nPumps.ToString() + ")";
 
 			// ---- velocidade e setpoint
 			bool running = (grafcet == 3) && (pause == 0) && (nPumps >= 1);
 			float shown = running ? Clamp(speed) : 0F;
-			txtSpeed.Text = "Speed per pump: " + shown.ToString("0.0") + " %";
-			txtMode.Text = "Flow setpoint: " + flowSp.ToString("0.0") + " m³/h   (2 duty + 1 standby)";
+			txtSpeed.Text = "Velocidade por bomba: " + shown.ToString("0.0") + " %";
+			txtMode.Text = "SP vaz\u00e3o: " + flowSp.ToString("0.0") + " m³/h   (2 duty + 1 standby)";
 			rectBarFill.FillPercent = shown;
 			rectBarFill.BrushColor = atMin ? new NxtControl.Drawing.Color(254, 186, 10) : new NxtControl.Drawing.Color(61, 205, 88);
 
@@ -112,9 +112,9 @@ namespace SE.Nereda.Symbols.FeedReactorLogic
 
 			// ---- avisos
 			if (flowFail)
-				txtWarn1.Text = "Flowmeter 40FT0003 failed: speed from setpoint";
+				txtWarn1.Text = "Medidor 40FT05 em falha: velocidade pelo SP";
 			else if (atMin && running)
-				txtWarn1.Text = "At minimum speed (Cmin)";
+				txtWarn1.Text = "Na velocidade m\u00ednima (Cmin)";
 			else
 				txtWarn1.Text = "";
 			txtWarn2.Text = parBad ? "Check settings: C3 > Cmin, 2 x C3 < Cmax" : "";

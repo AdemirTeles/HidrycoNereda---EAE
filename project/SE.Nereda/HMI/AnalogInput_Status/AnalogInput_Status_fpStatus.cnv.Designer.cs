@@ -103,7 +103,7 @@ namespace SE.Nereda.Faceplates.AnalogInput_Status
 			this.label1.FontScale = true;
 			this.label1.Name = "label1";
 			this.label1.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
-			this.label1.Text = "Common Error";
+			this.label1.Text = "Erro comum";
 			this.label1.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
 			this.label1.TextAutoSizeHorizontalOffset = 10;
 			this.label1.TextPadding = new NxtControl.Drawing.Padding(2);
@@ -136,7 +136,7 @@ namespace SE.Nereda.Faceplates.AnalogInput_Status
 			this.label2.FontScale = true;
 			this.label2.Name = "label2";
 			this.label2.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
-			this.label2.Text = "Calibrating";
+			this.label2.Text = "Calibrando";
 			this.label2.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
 			this.label2.TextAutoSizeHorizontalOffset = 10;
 			this.label2.TextPadding = new NxtControl.Drawing.Padding(2);
@@ -169,7 +169,7 @@ namespace SE.Nereda.Faceplates.AnalogInput_Status
 			this.label3.FontScale = true;
 			this.label3.Name = "label3";
 			this.label3.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
-			this.label3.Text = "Service";
+			this.label3.Text = "Servi\u00e7o";
 			this.label3.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
 			this.label3.TextAutoSizeHorizontalOffset = 10;
 			this.label3.TextPadding = new NxtControl.Drawing.Padding(2);
@@ -202,7 +202,7 @@ namespace SE.Nereda.Faceplates.AnalogInput_Status
 			this.label4.FontScale = true;
 			this.label4.Name = "label4";
 			this.label4.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
-			this.label4.Text = "Cleaning";
+			this.label4.Text = "Limpando";
 			this.label4.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
 			this.label4.TextAutoSizeHorizontalOffset = 10;
 			this.label4.TextPadding = new NxtControl.Drawing.Padding(2);
@@ -227,7 +227,7 @@ namespace SE.Nereda.Faceplates.AnalogInput_Status
 			this.freeText1.Font = new NxtControl.Drawing.Font("LabelFont");
 			this.freeText1.Location = new NxtControl.Drawing.PointF(16D, 207D);
 			this.freeText1.Name = "freeText1";
-			this.freeText1.Text = "Error Value";
+			this.freeText1.Text = "Valor de erro";
 			// 
 			// Status_Value
 			// 
@@ -249,7 +249,7 @@ namespace SE.Nereda.Faceplates.AnalogInput_Status
 			this.freeText2.Font = new NxtControl.Drawing.Font("LabelFont");
 			this.freeText2.Location = new NxtControl.Drawing.PointF(16D, 234D);
 			this.freeText2.Name = "freeText2";
-			this.freeText2.Text = "Status Value";
+			this.freeText2.Text = "Valor de status";
 			// 
 			// Temp_C
 			// 
@@ -273,7 +273,7 @@ namespace SE.Nereda.Faceplates.AnalogInput_Status
 			this.freeText3.Font = new NxtControl.Drawing.Font("LabelFont");
 			this.freeText3.Location = new NxtControl.Drawing.PointF(16D, 261D);
 			this.freeText3.Name = "freeText3";
-			this.freeText3.Text = "Temp Value";
+			this.freeText3.Text = "Temperatura";
 			// 
 			// DaysToMaintenance
 			// 
@@ -299,7 +299,7 @@ namespace SE.Nereda.Faceplates.AnalogInput_Status
 			this.freeText4.Font = new NxtControl.Drawing.Font("LabelFont");
 			this.freeText4.Location = new NxtControl.Drawing.PointF(16D, 319D);
 			this.freeText4.Name = "freeText4";
-			this.freeText4.Text = "Days to maint";
+			this.freeText4.Text = "Dias p/ manut.";
 			// 
 			// freeText5
 			// 
@@ -307,7 +307,7 @@ namespace SE.Nereda.Faceplates.AnalogInput_Status
 			this.freeText5.Font = new NxtControl.Drawing.Font("LabelFont");
 			this.freeText5.Location = new NxtControl.Drawing.PointF(16D, 291D);
 			this.freeText5.Name = "freeText5";
-			this.freeText5.Text = "Reliability";
+			this.freeText5.Text = "Confiabilidade";
 			// 
 			// Reliability
 			// 
@@ -345,7 +345,7 @@ namespace SE.Nereda.Faceplates.AnalogInput_Status
 			this.label5.FontScale = true;
 			this.label5.Name = "label5";
 			this.label5.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
-			this.label5.Text = "Channel Failure";
+			this.label5.Text = "Falha de canal";
 			this.label5.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
 			this.label5.TextAutoSizeHorizontalOffset = 10;
 			this.label5.TextPadding = new NxtControl.Drawing.Padding(2);
@@ -413,7 +413,7 @@ namespace SE.Nereda.Faceplates.AnalogInput_Status
 			this.label6.FontScale = true;
 			this.label6.Name = "label6";
 			this.label6.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
-			this.label6.Text = "Override Status";
+			this.label6.Text = "Status for\u00e7ado";
 			this.label6.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
 			this.label6.TextAutoSizeHorizontalOffset = 10;
 			this.label6.TextPadding = new NxtControl.Drawing.Padding(2);

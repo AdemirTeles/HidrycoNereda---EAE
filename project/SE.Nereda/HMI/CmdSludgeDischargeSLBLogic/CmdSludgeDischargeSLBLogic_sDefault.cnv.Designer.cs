@@ -67,7 +67,7 @@ namespace SE.Nereda.Symbols.CmdSludgeDischargeSLBLogic
 			new NxtControl.Drawing.PointF(0D, 0D),
 			new NxtControl.Drawing.PointF(152D, 0D),
 			new NxtControl.Drawing.PointF(176D, 24D)});
-			this.polyTitle.Text = "PUMPS STATUS";
+			this.polyTitle.Text = "ESTADO DAS BOMBAS";
 			this.polyTitle.TextColor = new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(0)));
 			// 
 			// txtState
@@ -84,7 +84,7 @@ namespace SE.Nereda.Symbols.CmdSludgeDischargeSLBLogic
 			this.txtPumps.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular);
 			this.txtPumps.Location = new NxtControl.Drawing.PointF(8D, 56D);
 			this.txtPumps.Name = "txtPumps";
-			this.txtPumps.Text = "Running: -";
+			this.txtPumps.Text = "Em opera\u00e7\u00e3o: -";
 			// 
 			// txtSpeed
 			// 
@@ -92,7 +92,7 @@ namespace SE.Nereda.Symbols.CmdSludgeDischargeSLBLogic
 			this.txtSpeed.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
 			this.txtSpeed.Location = new NxtControl.Drawing.PointF(8D, 76D);
 			this.txtSpeed.Name = "txtSpeed";
-			this.txtSpeed.Text = "Speed per pump: - %";
+			this.txtSpeed.Text = "Velocidade por bomba: - %";
 			// 
 			// txtMode
 			// 

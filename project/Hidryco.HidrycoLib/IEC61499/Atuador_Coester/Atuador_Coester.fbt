@@ -2,121 +2,107 @@
 <!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
 <FBType GUID="29340048-6f4b-0e5b-280d-202d50f3544a" Name="Atuador_Coester" Format="2.0" Comment="Valvula com atuador Coester CSR (Modbus TCP) - HidrycoLib" Namespace="Hidryco.HidrycoLib">
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Hidryco" Version="1.2" Author="Hidryco" Date="27/10/2026" Remarks="1.2: IThis com as tags, tipos e comandos do legado (Atuador_Coester_CSR6T); extras sem OPC UA. 1.1: cfgHabilitada = FALSE para equipamento futuro. 1.0: atuador Coester CSR por Modbus TCP (MN_123_01). Campo por symlink ${PATH}: leitura mbW01..mbW09, mbW36, mbW86, mbW87 (INT, Words do atuador), mbConexao (connStatusInt, 1 = online); escrita mbCmdW01 (Word 1 comando) e mbCmdW02 (Word 2 posicao). cfgModulante = TRUE exige o atuador em posicionamento continuo (Word 36 b12)." />
+  <VersionInfo Organization="Hidryco" Version="2.1" Author="Hidryco" Date="04/11/2026" Remarks="2.1: campo por symlink ${PATH}: mbW01..mbW09 (leitura 100 a 108), mbConexao (connStatusInt), mbCmdW01 (comando, endereco 0, em pulso) e mbCmdW02 (posicao desejada, endereco 1, so no posicionador). cfgPosicionador = TRUE: posicionar e parar (700-VC-01). Alarmes: comunicacao, falha do atuador, nao abriu/fechou/posicionou. 2.0: refeito simples." />
   <InterfaceList>
     <EventInputs>
       <Event ID="6AE7937B5439A162" Name="REQ" Comment="Atualizacao do processo">
         <With Var="cmdAbrirAutomatico" />
         <With Var="cmdFecharAutomatico" />
         <With Var="stpPosicaoAutomatico" />
-        <With Var="ilkGeral" />
-        <With Var="ilkAutomatico" />
-        <With Var="ilkManual" />
       </Event>
       <Event ID="D903CD18EBE204D1" Name="E_RESET_FALHAS" Comment="Reset de falhas pelo processo (com cmdResetFalhas = TRUE)">
         <With Var="cmdResetFalhas" />
       </Event>
     </EventInputs>
     <EventOutputs>
-      <Event ID="CF6616D3CB5312F6" Name="CNF" Comment="Status (so na mudanca)">
+      <Event ID="CF6616D3CB5312F6" Name="CNF" Comment="Status (na mudanca)">
         <With Var="stsDisponivelAutomatico" />
         <With Var="stsAberta" />
         <With Var="stsFechada" />
         <With Var="stsPosicao" />
-        <With Var="stsRemoto" />
         <With Var="stsAutomatico" />
-        <With Var="stsFalha" />
         <With Var="stsComunicacaoOK" />
       </Event>
     </EventOutputs>
     <InputVars>
-      <VarDeclaration ID="05903B4B679AA14E" Name="cmdAbrirAutomatico" Type="BOOL" Comment="Abrir (valvula on/off, automatico)" />
-      <VarDeclaration ID="DD850CDC4ADBDD2B" Name="cmdFecharAutomatico" Type="BOOL" Comment="Fechar (valvula on/off, automatico)" />
-      <VarDeclaration ID="B08C4ED4004BD1E2" Name="stpPosicaoAutomatico" Type="REAL" Comment="Posicao desejada no automatico (%) - modulante" />
-      <VarDeclaration ID="9B339F9277A6A0C4" Name="ilkGeral" Type="BOOL" Comment="Intertravamento geral (mantem a posicao)" />
-      <VarDeclaration ID="3CF911DD39649E19" Name="ilkAutomatico" Type="BOOL" Comment="Intertravamento so do automatico" />
-      <VarDeclaration ID="9035BBA9DB82E02B" Name="ilkManual" Type="BOOL" Comment="Intertravamento so do manual" />
+      <VarDeclaration ID="05903B4B679AA14E" Name="cmdAbrirAutomatico" Type="BOOL" Comment="Automatico: abrir (valvula so abrir/fechar)" />
+      <VarDeclaration ID="DD850CDC4ADBDD2B" Name="cmdFecharAutomatico" Type="BOOL" Comment="Automatico: fechar (valvula so abrir/fechar)" />
+      <VarDeclaration ID="B08C4ED4004BD1E2" Name="stpPosicaoAutomatico" Type="REAL" Comment="Automatico: posicao desejada (%) - so com cfgPosicionador = TRUE" />
       <VarDeclaration ID="C82CBBE25FC56079" Name="cmdResetFalhas" Type="BOOL" Comment="Processo: reset de falhas (vale com TRUE)" />
-      <VarDeclaration ID="FC8FD119D7FC211F" Name="cfgModulante" Type="BOOL" InitialValue="FALSE" Comment="TRUE = modulante: atuador programado em posicionamento continuo (Word 36 b12)" />
       <VarDeclaration ID="FFAFC48D6FD3FF02" Name="cfgHabilitada" Type="BOOL" InitialValue="TRUE" Comment="FALSE = instancia desabilitada (equipamento futuro): sem alarme de comunicacao e fora do automatico" />
-      <VarDeclaration ID="DF6900A72D5BDD75" Name="cfgPosicaoMin" Type="REAL" InitialValue="0.0" Comment="Limite minimo da posicao no automatico (%)" />
-      <VarDeclaration ID="A05C536BD229E019" Name="cfgPosicaoMax" Type="REAL" InitialValue="100.0" Comment="Limite maximo da posicao no automatico (%)" />
-      <VarDeclaration ID="454E6238573E4508" Name="cfgPartidasDiaMax" Type="INT" InitialValue="0" Comment="Aviso de partidas/dia acima disto (0 = sem aviso)" />
+      <VarDeclaration ID="C65F121E4D57852C" Name="cfgPosicionador" Type="BOOL" InitialValue="FALSE" Comment="TRUE = posicionar e parar (so 700-VC-01; o .hcf escreve tambem a Word 2, endereco 1); FALSE = so abrir e fechar" />
     </InputVars>
     <OutputVars>
       <VarDeclaration ID="904DD3246D8E0F2F" Name="stsDisponivelAutomatico" Type="BOOL" Comment="Pode ser comandada pelo automatico agora" />
       <VarDeclaration ID="5EDB2238B0F9A6B6" Name="stsAberta" Type="BOOL" Comment="Posicao aberta" />
       <VarDeclaration ID="C1396A09200C7A2F" Name="stsFechada" Type="BOOL" Comment="Posicao fechada" />
-      <VarDeclaration ID="259F220E31BE1DFA" Name="stsPosicao" Type="REAL" Comment="Posicao atual (%)" />
-      <VarDeclaration ID="5173A0E658D4250F" Name="stsRemoto" Type="BOOL" Comment="Seletor em remoto" />
+      <VarDeclaration ID="259F220E31BE1DFA" Name="stsPosicao" Type="REAL" Comment="Posicao real (%) - Word 5" />
       <VarDeclaration ID="378CDAA06C4824E3" Name="stsAutomatico" Type="BOOL" Comment="Modo automatico" />
-      <VarDeclaration ID="6DEFE77C970ED010" Name="stsFalha" Type="BOOL" Comment="Alguma falha memorizada" />
       <VarDeclaration ID="5B46E3B5D12031DA" Name="stsComunicacaoOK" Type="BOOL" Comment="Comunicacao OK" />
     </OutputVars>
   </InterfaceList>
   <FBNetwork>
-    <FB ID="078FDAB443B210C1" Name="IThis" Type="Atuador_Coester_HMI" x="1140" y="1420" Namespace="Hidryco.HidrycoLib" />
-    <FB ID="1CD0268367AB3A09" Name="plcStart1" Type="plcStart" x="1400" y="200" Namespace="SE.App2Base">
+    <FB ID="078FDAB443B210C1" Name="IThis" Type="Atuador_Coester_HMI" x="1200" y="1400" Namespace="Hidryco.HidrycoLib">
+      <Parameter Name="$C373CB1AC84369E8" Value="TRUE" />
+    </FB>
+    <FB ID="1CD0268367AB3A09" Name="plcStart1" Type="plcStart" x="1200" y="200" Namespace="SE.App2Base">
       <Parameter Name="$Prio" Value="10" />
     </FB>
-    <FB ID="0846A16F7C121D3E" UID="1" Name="Leitura1" Type="SYMLINKMULTIVARDST_15292F208F22048C1" x="3400" y="200" Namespace="Hidryco.HidrycoLib">
-      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=4;VALUE${I}:INT,INT,INT,INT" />
+    <FB ID="34BD06F8A45B37B8" Name="Tick" Type="E_CYCLE" x="1200" y="800" Namespace="IEC61499.Standard">
+      <Parameter Name="$DT" Value="T#1s" />
+    </FB>
+    <FB ID="0846A16F7C121D3E" UID="1" Name="Leitura1" Type="SYMLINKMULTIVARDST_5A03F112CD5D470" x="3400" y="200" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=1;VALUE${I}:INT" />
       <Parameter Name="$QI" Value="TRUE" />
       <Parameter Name="$NAME1" Value="'$${PATH}mbW01'" />
-      <Parameter Name="$NAME2" Value="'$${PATH}mbW02'" />
-      <Parameter Name="$NAME3" Value="'$${PATH}mbW03'" />
-      <Parameter Name="$NAME4" Value="'$${PATH}mbW04'" />
     </FB>
     <FB ID="3DB1448635DB4727" UID="2" Name="Leitura2" Type="SYMLINKMULTIVARDST_15292F208F22048C1" x="3400" y="900" Namespace="Hidryco.HidrycoLib">
       <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=4;VALUE${I}:INT,INT,INT,INT" />
       <Parameter Name="$QI" Value="TRUE" />
-      <Parameter Name="$NAME1" Value="'$${PATH}mbW05'" />
-      <Parameter Name="$NAME2" Value="'$${PATH}mbW06'" />
-      <Parameter Name="$NAME3" Value="'$${PATH}mbW07'" />
-      <Parameter Name="$NAME4" Value="'$${PATH}mbW08'" />
+      <Parameter Name="$NAME1" Value="'$${PATH}mbW02'" />
+      <Parameter Name="$NAME2" Value="'$${PATH}mbW03'" />
+      <Parameter Name="$NAME3" Value="'$${PATH}mbW04'" />
+      <Parameter Name="$NAME4" Value="'$${PATH}mbW05'" />
     </FB>
     <FB ID="75225B52E6A157BD" UID="3" Name="Leitura3" Type="SYMLINKMULTIVARDST_15292F208F22048C1" x="3400" y="1600" Namespace="Hidryco.HidrycoLib">
       <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=4;VALUE${I}:INT,INT,INT,INT" />
       <Parameter Name="$QI" Value="TRUE" />
-      <Parameter Name="$NAME1" Value="'$${PATH}mbW09'" />
-      <Parameter Name="$NAME2" Value="'$${PATH}mbW36'" />
-      <Parameter Name="$NAME3" Value="'$${PATH}mbW86'" />
-      <Parameter Name="$NAME4" Value="'$${PATH}mbW87'" />
+      <Parameter Name="$NAME1" Value="'$${PATH}mbW06'" />
+      <Parameter Name="$NAME2" Value="'$${PATH}mbW07'" />
+      <Parameter Name="$NAME3" Value="'$${PATH}mbW08'" />
+      <Parameter Name="$NAME4" Value="'$${PATH}mbW09'" />
     </FB>
     <FB ID="9AB62F5A3DFFED9A" UID="4" Name="Conexao" Type="SYMLINKMULTIVARDST_5A03F112CD5D470" x="3400" y="2300" Namespace="Hidryco.HidrycoLib">
       <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=1;VALUE${I}:INT" />
       <Parameter Name="$QI" Value="TRUE" />
       <Parameter Name="$NAME1" Value="'$${PATH}mbConexao'" />
     </FB>
-    <FB ID="008C035A92A54138" UID="5" Name="EscritaCmd" Type="SYMLINKMULTIVARSRC_5A03F112CD5D470" x="7000" y="3600" Namespace="Hidryco.HidrycoLib">
+    <FB ID="577C6FE0CD1DD54D" Name="Logica" Type="basicValvulaCoester" x="5200" y="1000" Namespace="Hidryco.HidrycoLib" />
+    <FB ID="008C035A92A54138" UID="5" Name="EscritaCmd" Type="SYMLINKMULTIVARSRC_5A03F112CD5D470" x="8000" y="3000" Namespace="Hidryco.HidrycoLib">
       <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=1;VALUE${I}:INT" />
       <Parameter Name="$QI" Value="TRUE" />
       <Parameter Name="$NAME1" Value="'$${PATH}mbCmdW01'" />
     </FB>
-    <FB ID="7AD7DC3ECDC53CB4" UID="6" Name="EscritaPos" Type="SYMLINKMULTIVARSRC_5A03F112CD5D470" x="7000" y="4200" Namespace="Hidryco.HidrycoLib">
+    <FB ID="7AD7DC3ECDC53CB4" UID="6" Name="EscritaPos" Type="SYMLINKMULTIVARSRC_5A03F112CD5D470" x="8000" y="3700" Namespace="Hidryco.HidrycoLib">
       <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=1;VALUE${I}:INT" />
       <Parameter Name="$QI" Value="TRUE" />
       <Parameter Name="$NAME1" Value="'$${PATH}mbCmdW02'" />
     </FB>
-    <FB ID="577C6FE0CD1DD54D" Name="Logica" Type="basicValvulaCoester" x="5200" y="1200" Namespace="Hidryco.HidrycoLib" />
-    <FB ID="34BD06F8A45B37B8" Name="Tick" Type="E_CYCLE" x="1400" y="832" Namespace="IEC61499.Standard">
-      <Parameter Name="$DT" Value="T#1s" />
-    </FB>
-    <FB ID="B6F7827A8D75BDA7" Name="AlarmeComunicacao" Type="ALARM_BIT" x="8800" y="200" Namespace="Runtime.Standard">
+    <FB ID="B6F7827A8D75BDA7" Name="AlarmeComunicacao" Type="ALARM_BIT" x="8000" y="200" Namespace="Runtime.Standard">
       <Attribute Name="HMI.AlarmText" Value="Falha de comunicação" Context="IND_1" />
       <Attribute Name="HMI.AlarmClass" Value="Warning" Context="IND_1" />
       <Parameter Name="$TYPE" Value="1" />
       <Parameter Name="$ACKTYPE_1" Value="2" />
       <Parameter Name="$ACTIVE" Value="TRUE" />
     </FB>
-    <FB ID="B7B56D9BD612A776" Name="AlarmeAtuador" Type="ALARM_BIT" x="8800" y="900" Namespace="Runtime.Standard">
+    <FB ID="B7B56D9BD612A776" Name="AlarmeAtuador" Type="ALARM_BIT" x="8000" y="1100" Namespace="Runtime.Standard">
       <Attribute Name="HMI.AlarmText" Value="Falha do atuador" Context="IND_1" />
       <Parameter Name="$TYPE" Value="1" />
       <Parameter Name="$ACKTYPE_1" Value="2" />
       <Parameter Name="$ACTIVE" Value="TRUE" />
     </FB>
-    <FB ID="54666F499974BEA6" Name="AlarmePosicao" Type="ALARM_BIT" x="8800" y="1600" Namespace="Runtime.Standard">
-      <Attribute Name="HMI.AlarmText" Value="Posição não atingida" Context="IND_1" />
+    <FB ID="54666F499974BEA6" Name="AlarmePosicao" Type="ALARM_BIT" x="8000" y="2000" Namespace="Runtime.Standard">
+      <Attribute Name="HMI.AlarmText" Value="Válvula não abriu / não fechou / não posicionou no tempo" Context="IND_1" />
       <Parameter Name="$TYPE" Value="1" />
       <Parameter Name="$ACKTYPE_1" Value="2" />
       <Parameter Name="$ACTIVE" Value="TRUE" />
@@ -126,440 +112,1231 @@
     <Input ID="05903B4B679AA14E" Name="cmdAbrirAutomatico" x="200" y="316" Type="Data" />
     <Input ID="DD850CDC4ADBDD2B" Name="cmdFecharAutomatico" x="200" y="376" Type="Data" />
     <Input ID="B08C4ED4004BD1E2" Name="stpPosicaoAutomatico" x="200" y="436" Type="Data" />
-    <Input ID="9B339F9277A6A0C4" Name="ilkGeral" x="200" y="496" Type="Data" />
-    <Input ID="3CF911DD39649E19" Name="ilkAutomatico" x="200" y="556" Type="Data" />
-    <Input ID="9035BBA9DB82E02B" Name="ilkManual" x="200" y="616" Type="Data" />
-    <Input ID="C82CBBE25FC56079" Name="cmdResetFalhas" x="200" y="676" Type="Data" />
-    <Input ID="FC8FD119D7FC211F" Name="cfgModulante" x="200" y="735.9999" Type="Data" />
-    <Input ID="FFAFC48D6FD3FF02" Name="cfgHabilitada" x="200" y="796" Type="Data" />
-    <Input ID="DF6900A72D5BDD75" Name="cfgPosicaoMin" x="200" y="855.9999" Type="Data" />
-    <Input ID="A05C536BD229E019" Name="cfgPosicaoMax" x="200" y="915.9999" Type="Data" />
-    <Input ID="454E6238573E4508" Name="cfgPartidasDiaMax" x="200" y="976" Type="Data" />
-    <Output ID="CF6616D3CB5312F6" Name="CNF" x="14000" y="196" Type="Event" />
-    <Output ID="904DD3246D8E0F2F" Name="stsDisponivelAutomatico" x="14000" y="256" Type="Data" />
-    <Output ID="5EDB2238B0F9A6B6" Name="stsAberta" x="14000" y="316" Type="Data" />
-    <Output ID="C1396A09200C7A2F" Name="stsFechada" x="14000" y="376" Type="Data" />
-    <Output ID="259F220E31BE1DFA" Name="stsPosicao" x="14000" y="436" Type="Data" />
-    <Output ID="5173A0E658D4250F" Name="stsRemoto" x="14000" y="496" Type="Data" />
-    <Output ID="378CDAA06C4824E3" Name="stsAutomatico" x="14000" y="556" Type="Data" />
-    <Output ID="6DEFE77C970ED010" Name="stsFalha" x="14000" y="616" Type="Data" />
-    <Output ID="5B46E3B5D12031DA" Name="stsComunicacaoOK" x="14000" y="676" Type="Data" />
+    <Input ID="C82CBBE25FC56079" Name="cmdResetFalhas" x="200" y="496" Type="Data" />
+    <Input ID="FFAFC48D6FD3FF02" Name="cfgHabilitada" x="200" y="556" Type="Data" />
+    <Input ID="C65F121E4D57852C" Name="cfgPosicionador" x="200" y="616" Type="Data" />
+    <Output ID="CF6616D3CB5312F6" Name="CNF" x="11400" y="196" Type="Event" />
+    <Output ID="904DD3246D8E0F2F" Name="stsDisponivelAutomatico" x="11400" y="256" Type="Data" />
+    <Output ID="5EDB2238B0F9A6B6" Name="stsAberta" x="11400" y="316" Type="Data" />
+    <Output ID="C1396A09200C7A2F" Name="stsFechada" x="11400" y="376" Type="Data" />
+    <Output ID="259F220E31BE1DFA" Name="stsPosicao" x="11400" y="436" Type="Data" />
+    <Output ID="378CDAA06C4824E3" Name="stsAutomatico" x="11400" y="496" Type="Data" />
+    <Output ID="5B46E3B5D12031DA" Name="stsComunicacaoOK" x="11400" y="556" Type="Data" />
     <EventConnections>
-      <Connection Source="$078FDAB443B210C1.71CB1D0924F3BFDA" Destination="$577C6FE0CD1DD54D.30AE7F49F37189A9">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$078FDAB443B210C1.911B24FA4AD76ACA" Destination="$577C6FE0CD1DD54D.EC0B2AD711C1FF32">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$078FDAB443B210C1.30C7D4C005DA551B" Destination="$577C6FE0CD1DD54D.3CF8A223CC6B0E4B">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$078FDAB443B210C1.155C5D6A800071CB" Destination="$577C6FE0CD1DD54D.93A69175E8783E53">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$078FDAB443B210C1.13888B810B977A05" Destination="$577C6FE0CD1DD54D.A0107A1DD2534969">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$1CD0268367AB3A09.FIRST_INIT" Destination="$078FDAB443B210C1.2EABC7344B56B5EA">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$1CD0268367AB3A09.REDO_INIT" Destination="$078FDAB443B210C1.2EABC7344B56B5EA">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$078FDAB443B210C1.E11CDC2FD3197EF0" Destination="$0846A16F7C121D3E.INIT">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$0846A16F7C121D3E.INITO" Destination="$3DB1448635DB4727.INIT">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$3DB1448635DB4727.INITO" Destination="$75225B52E6A157BD.INIT">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$75225B52E6A157BD.INITO" Destination="$9AB62F5A3DFFED9A.INIT">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
+      <Connection Source="$1CD0268367AB3A09.FIRST_INIT" Destination="$078FDAB443B210C1.2EABC7344B56B5EA" dx1="68.08337" dx2="50" dy="410" />
+      <Connection Source="$1CD0268367AB3A09.REDO_INIT" Destination="$078FDAB443B210C1.2EABC7344B56B5EA" dx1="48.08337" dx2="50" dy="350" />
+      <Connection Source="$078FDAB443B210C1.E11CDC2FD3197EF0" Destination="$0846A16F7C121D3E.INIT" dx1="50" />
+      <Connection Source="$0846A16F7C121D3E.INITO" Destination="$3DB1448635DB4727.INIT" dx1="81.625" dx2="50" dy="530" />
+      <Connection Source="$3DB1448635DB4727.INITO" Destination="$75225B52E6A157BD.INIT" dx1="141.625" dx2="50" dy="-110" />
+      <Connection Source="$75225B52E6A157BD.INITO" Destination="$9AB62F5A3DFFED9A.INIT" dx1="141.625" dx2="50" dy="1230" />
       <Connection Source="$9AB62F5A3DFFED9A.INITO" Destination="$008C035A92A54138.INIT">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <Points>
+          <Points>
+            <X>987.09375</X>
+            <Y>585</Y>
+          </Points>
+          <Points>
+            <X>1007.5</X>
+            <Y>585</Y>
+          </Points>
+          <Points>
+            <X>1007.5</X>
+            <Y>932.5</Y>
+          </Points>
+          <Points>
+            <X>1567.5</X>
+            <Y>932.5</Y>
+          </Points>
+          <Points>
+            <X>1567.5</X>
+            <Y>760</Y>
+          </Points>
+          <Points>
+            <X>1995</X>
+            <Y>760</Y>
+          </Points>
+        </Points>
       </Connection>
-      <Connection Source="$008C035A92A54138.INITO" Destination="$7AD7DC3ECDC53CB4.INIT">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
+      <Connection Source="$008C035A92A54138.INITO" Destination="$7AD7DC3ECDC53CB4.INIT" dx1="40" dx2="50" dy="549.854" />
       <Connection Source="$7AD7DC3ECDC53CB4.INITO" Destination="$577C6FE0CD1DD54D.BC3FDAAC48C266C9">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <Points>
+          <Points>
+            <X>2138.28125</X>
+            <Y>935</Y>
+          </Points>
+          <Points>
+            <X>2148.28125</X>
+            <Y>935</Y>
+          </Points>
+          <Points>
+            <X>2148.28125</X>
+            <Y>907.5</Y>
+          </Points>
+          <Points>
+            <X>1987.5</X>
+            <Y>907.5</Y>
+          </Points>
+          <Points>
+            <X>1987.5</X>
+            <Y>932.5</Y>
+          </Points>
+          <Points>
+            <X>1087.5</X>
+            <Y>932.5</Y>
+          </Points>
+          <Points>
+            <X>1087.5</X>
+            <Y>260</Y>
+          </Points>
+          <Points>
+            <X>1295</X>
+            <Y>260</Y>
+          </Points>
+        </Points>
       </Connection>
       <Connection Source="$7AD7DC3ECDC53CB4.INITO" Destination="$078FDAB443B210C1.BE814A344599F8CD">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <Points>
+          <Points>
+            <X>2138.28125</X>
+            <Y>935</Y>
+          </Points>
+          <Points>
+            <X>2148.28125</X>
+            <Y>935</Y>
+          </Points>
+          <Points>
+            <X>2148.28125</X>
+            <Y>907.5</Y>
+          </Points>
+          <Points>
+            <X>1987.5</X>
+            <Y>907.5</Y>
+          </Points>
+          <Points>
+            <X>1987.5</X>
+            <Y>957.5</Y>
+          </Points>
+          <Points>
+            <X>137.5</X>
+            <Y>957.5</Y>
+          </Points>
+          <Points>
+            <X>137.5</X>
+            <Y>375</Y>
+          </Points>
+          <Points>
+            <X>295</X>
+            <Y>375</Y>
+          </Points>
+        </Points>
       </Connection>
       <Connection Source="$577C6FE0CD1DD54D.2C2FA7A6E9BF9047" Destination="$34BD06F8A45B37B8.START">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <Points>
+          <Points>
+            <X>1558.21875</X>
+            <Y>260</Y>
+          </Points>
+          <Points>
+            <X>1572.5</X>
+            <Y>260</Y>
+          </Points>
+          <Points>
+            <X>1572.5</X>
+            <Y>207.5</Y>
+          </Points>
+          <Points>
+            <X>837.5</X>
+            <Y>207.5</Y>
+          </Points>
+          <Points>
+            <X>837.5</X>
+            <Y>182.5</Y>
+          </Points>
+          <Points>
+            <X>282.5</X>
+            <Y>182.5</Y>
+          </Points>
+          <Points>
+            <X>282.5</X>
+            <Y>210</Y>
+          </Points>
+          <Points>
+            <X>295</X>
+            <Y>210</Y>
+          </Points>
+        </Points>
       </Connection>
-      <Connection Source="$577C6FE0CD1DD54D.2C2FA7A6E9BF9047" Destination="$B6F7827A8D75BDA7.INIT">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$B6F7827A8D75BDA7.INITO" Destination="$B6F7827A8D75BDA7.REQ_INITDATA">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$B6F7827A8D75BDA7.CNF_INITDATA" Destination="$B6F7827A8D75BDA7.ACTIVATE">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$B7B56D9BD612A776.INITO" Destination="$B7B56D9BD612A776.REQ_INITDATA">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$B7B56D9BD612A776.CNF_INITDATA" Destination="$B7B56D9BD612A776.ACTIVATE">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$B6F7827A8D75BDA7.INITO" Destination="$B7B56D9BD612A776.INIT">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$54666F499974BEA6.INITO" Destination="$54666F499974BEA6.REQ_INITDATA">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$54666F499974BEA6.CNF_INITDATA" Destination="$54666F499974BEA6.ACTIVATE">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$B7B56D9BD612A776.INITO" Destination="$54666F499974BEA6.INIT">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$54666F499974BEA6.INITO" Destination="$1CD0268367AB3A09.ACK_FIRST">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$0846A16F7C121D3E.CNF" Destination="$577C6FE0CD1DD54D.B53852AF9F22A018">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$3DB1448635DB4727.CNF" Destination="$577C6FE0CD1DD54D.1122F70F08541858">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$75225B52E6A157BD.CNF" Destination="$577C6FE0CD1DD54D.A294594AC3667AFD">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$9AB62F5A3DFFED9A.CNF" Destination="$577C6FE0CD1DD54D.45BC53B715393160">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
+      <Connection Source="$577C6FE0CD1DD54D.2C2FA7A6E9BF9047" Destination="$B6F7827A8D75BDA7.INIT" dx1="57.125" />
+      <Connection Source="$B6F7827A8D75BDA7.INITO" Destination="$B6F7827A8D75BDA7.REQ_INITDATA" dx1="100" dx2="70" dy="-110" />
+      <Connection Source="$B6F7827A8D75BDA7.CNF_INITDATA" Destination="$B6F7827A8D75BDA7.ACTIVATE" dx1="80" dx2="90" dy="-170" />
+      <Connection Source="$B6F7827A8D75BDA7.INITO" Destination="$B7B56D9BD612A776.INIT" dx1="100" dx2="50" dy="-110" />
+      <Connection Source="$B7B56D9BD612A776.INITO" Destination="$B7B56D9BD612A776.REQ_INITDATA" dx1="100" dx2="70" dy="-1010" />
+      <Connection Source="$B7B56D9BD612A776.CNF_INITDATA" Destination="$B7B56D9BD612A776.ACTIVATE" dx1="80" dx2="90" dy="-1070" />
+      <Connection Source="$B7B56D9BD612A776.INITO" Destination="$54666F499974BEA6.INIT" dx1="100" dx2="50" dy="2430" />
+      <Connection Source="$54666F499974BEA6.INITO" Destination="$54666F499974BEA6.REQ_INITDATA" dx1="100" dx2="70" dy="1530" />
+      <Connection Source="$54666F499974BEA6.CNF_INITDATA" Destination="$54666F499974BEA6.ACTIVATE" dx1="80" dx2="90" dy="1470" />
+      <Connection Source="$54666F499974BEA6.INITO" Destination="$1CD0268367AB3A09.ACK_FIRST" dx1="50.25" dx2="50" dy="-1910" />
+      <Connection Source="$0846A16F7C121D3E.CNF" Destination="$577C6FE0CD1DD54D.907C535FA0E42403" dx1="61.625" />
+      <Connection Source="$3DB1448635DB4727.CNF" Destination="$577C6FE0CD1DD54D.1122F70F08541858" dx1="121.625" />
+      <Connection Source="$75225B52E6A157BD.CNF" Destination="$577C6FE0CD1DD54D.A294594AC3667AFD" dx1="70" />
+      <Connection Source="$9AB62F5A3DFFED9A.CNF" Destination="$577C6FE0CD1DD54D.45BC53B715393160" dx1="70" />
       <Connection Source="$34BD06F8A45B37B8.EO" Destination="$577C6FE0CD1DD54D.AEE5258FE28533BC">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <Points>
+          <Points>
+            <X>385.375</X>
+            <Y>210</Y>
+          </Points>
+          <Points>
+            <X>397.5</X>
+            <Y>210</Y>
+          </Points>
+          <Points>
+            <X>397.5</X>
+            <Y>207.5</Y>
+          </Points>
+          <Points>
+            <X>997.5</X>
+            <Y>207.5</Y>
+          </Points>
+          <Points>
+            <X>997.5</X>
+            <Y>470</Y>
+          </Points>
+          <Points>
+            <X>1295</X>
+            <Y>470</Y>
+          </Points>
+        </Points>
       </Connection>
-      <Connection Source="$6AE7937B5439A162" Destination="$577C6FE0CD1DD54D.439C5B98809C2189" dx1="2424.771">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      <Connection Source="$6AE7937B5439A162" Destination="$577C6FE0CD1DD54D.439C5B98809C2189">
+        <Points>
+          <Points>
+            <X>115.114578</X>
+            <Y>55.9999962</Y>
+          </Points>
+          <Points>
+            <X>227.5</X>
+            <Y>55.9999962</Y>
+          </Points>
+          <Points>
+            <X>227.5</X>
+            <Y>162.5</Y>
+          </Points>
+          <Points>
+            <X>397.5</X>
+            <Y>162.5</Y>
+          </Points>
+          <Points>
+            <X>397.5</X>
+            <Y>192.5</Y>
+          </Points>
+          <Points>
+            <X>997.5</X>
+            <Y>192.5</Y>
+          </Points>
+          <Points>
+            <X>997.5</X>
+            <Y>275</Y>
+          </Points>
+          <Points>
+            <X>1295</X>
+            <Y>275</Y>
+          </Points>
+        </Points>
       </Connection>
-      <Connection Source="$6AE7937B5439A162" Destination="$577C6FE0CD1DD54D.9A76CBB51054FCFA" dx1="2374.771">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      <Connection Source="$D903CD18EBE204D1" Destination="$577C6FE0CD1DD54D.E0357D841C57E206">
+        <Points>
+          <Points>
+            <X>187.942688</X>
+            <Y>71</Y>
+          </Points>
+          <Points>
+            <X>227.5</X>
+            <Y>71</Y>
+          </Points>
+          <Points>
+            <X>227.5</X>
+            <Y>162.5</Y>
+          </Points>
+          <Points>
+            <X>397.5</X>
+            <Y>162.5</Y>
+          </Points>
+          <Points>
+            <X>397.5</X>
+            <Y>192.5</Y>
+          </Points>
+          <Points>
+            <X>997.5</X>
+            <Y>192.5</Y>
+          </Points>
+          <Points>
+            <X>997.5</X>
+            <Y>455</Y>
+          </Points>
+          <Points>
+            <X>1295</X>
+            <Y>455</Y>
+          </Points>
+        </Points>
       </Connection>
-      <Connection Source="$D903CD18EBE204D1" Destination="$577C6FE0CD1DD54D.E0357D841C57E206" dx1="2219.115">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$577C6FE0CD1DD54D.8A6711B6046FDA6A" Destination="$CF6616D3CB5312F6" dx1="3967.739">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      <Connection Source="$577C6FE0CD1DD54D.8A6711B6046FDA6A" Destination="$CF6616D3CB5312F6">
+        <Points>
+          <Points>
+            <X>1558.21875</X>
+            <Y>290</Y>
+          </Points>
+          <Points>
+            <X>1582.5</X>
+            <Y>290</Y>
+          </Points>
+          <Points>
+            <X>1582.5</X>
+            <Y>892.5</Y>
+          </Points>
+          <Points>
+            <X>2202.5</X>
+            <Y>892.5</Y>
+          </Points>
+          <Points>
+            <X>2202.5</X>
+            <Y>55.9999962</Y>
+          </Points>
+          <Points>
+            <X>2850</X>
+            <Y>55.9999962</Y>
+          </Points>
+        </Points>
       </Connection>
       <Connection Source="$078FDAB443B210C1.63B34773AE652DFD" Destination="$577C6FE0CD1DD54D.38061816A8BE25E9">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <Points>
+          <Points>
+            <X>690.4166</X>
+            <Y>375</Y>
+          </Points>
+          <Points>
+            <X>707.9166</X>
+            <Y>375</Y>
+          </Points>
+          <Points>
+            <X>707.9166</X>
+            <Y>717.5</Y>
+          </Points>
+          <Points>
+            <X>997.5</X>
+            <Y>717.5</Y>
+          </Points>
+          <Points>
+            <X>997.5</X>
+            <Y>350</Y>
+          </Points>
+          <Points>
+            <X>1295</X>
+            <Y>350</Y>
+          </Points>
+        </Points>
       </Connection>
-      <Connection Source="$078FDAB443B210C1.E86F0A936DC9D9A2" Destination="$577C6FE0CD1DD54D.0278FF007F66B823">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      <Connection Source="$078FDAB443B210C1.71CB1D0924F3BFDA" Destination="$577C6FE0CD1DD54D.30AE7F49F37189A9">
+        <Points>
+          <Points>
+            <X>690.4166</X>
+            <Y>390</Y>
+          </Points>
+          <Points>
+            <X>712.9166</X>
+            <Y>390</Y>
+          </Points>
+          <Points>
+            <X>712.9166</X>
+            <Y>717.5</Y>
+          </Points>
+          <Points>
+            <X>997.5</X>
+            <Y>717.5</Y>
+          </Points>
+          <Points>
+            <X>997.5</X>
+            <Y>365</Y>
+          </Points>
+          <Points>
+            <X>1295</X>
+            <Y>365</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$078FDAB443B210C1.911B24FA4AD76ACA" Destination="$577C6FE0CD1DD54D.EC0B2AD711C1FF32">
+        <Points>
+          <Points>
+            <X>690.4166</X>
+            <Y>405</Y>
+          </Points>
+          <Points>
+            <X>717.9166</X>
+            <Y>405</Y>
+          </Points>
+          <Points>
+            <X>717.9166</X>
+            <Y>717.5</Y>
+          </Points>
+          <Points>
+            <X>997.5</X>
+            <Y>717.5</Y>
+          </Points>
+          <Points>
+            <X>997.5</X>
+            <Y>380</Y>
+          </Points>
+          <Points>
+            <X>1295</X>
+            <Y>380</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$078FDAB443B210C1.155C5D6A800071CB" Destination="$577C6FE0CD1DD54D.93A69175E8783E53">
+        <Points>
+          <Points>
+            <X>690.4166</X>
+            <Y>420</Y>
+          </Points>
+          <Points>
+            <X>722.9166</X>
+            <Y>420</Y>
+          </Points>
+          <Points>
+            <X>722.9166</X>
+            <Y>717.5</Y>
+          </Points>
+          <Points>
+            <X>997.5</X>
+            <Y>717.5</Y>
+          </Points>
+          <Points>
+            <X>997.5</X>
+            <Y>395</Y>
+          </Points>
+          <Points>
+            <X>1295</X>
+            <Y>395</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$078FDAB443B210C1.30C7D4C005DA551B" Destination="$577C6FE0CD1DD54D.3CF8A223CC6B0E4B">
+        <Points>
+          <Points>
+            <X>690.4166</X>
+            <Y>435</Y>
+          </Points>
+          <Points>
+            <X>727.9166</X>
+            <Y>435</Y>
+          </Points>
+          <Points>
+            <X>727.9166</X>
+            <Y>717.5</Y>
+          </Points>
+          <Points>
+            <X>997.5</X>
+            <Y>717.5</Y>
+          </Points>
+          <Points>
+            <X>997.5</X>
+            <Y>410</Y>
+          </Points>
+          <Points>
+            <X>1295</X>
+            <Y>410</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$078FDAB443B210C1.13888B810B977A05" Destination="$577C6FE0CD1DD54D.0278FF007F66B823">
+        <Points>
+          <Points>
+            <X>690.4166</X>
+            <Y>465</Y>
+          </Points>
+          <Points>
+            <X>737.9166</X>
+            <Y>465</Y>
+          </Points>
+          <Points>
+            <X>737.9166</X>
+            <Y>717.5</Y>
+          </Points>
+          <Points>
+            <X>997.5</X>
+            <Y>717.5</Y>
+          </Points>
+          <Points>
+            <X>997.5</X>
+            <Y>425</Y>
+          </Points>
+          <Points>
+            <X>1295</X>
+            <Y>425</Y>
+          </Points>
+        </Points>
       </Connection>
       <Connection Source="$078FDAB443B210C1.F0C1E431EEC29CAD" Destination="$577C6FE0CD1DD54D.3A4B67BCD45EEA9F">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$577C6FE0CD1DD54D.990117E8CD2B8B73" Destination="$078FDAB443B210C1.481FCEE46722FF01">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$577C6FE0CD1DD54D.990117E8CD2B8B73" Destination="$B6F7827A8D75BDA7.REQ">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$B6F7827A8D75BDA7.IND_1" Destination="$078FDAB443B210C1.481FCEE46722FF01">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <Points>
+          <Points>
+            <X>690.4166</X>
+            <Y>450</Y>
+          </Points>
+          <Points>
+            <X>732.9166</X>
+            <Y>450</Y>
+          </Points>
+          <Points>
+            <X>732.9166</X>
+            <Y>717.5</Y>
+          </Points>
+          <Points>
+            <X>997.5</X>
+            <Y>717.5</Y>
+          </Points>
+          <Points>
+            <X>997.5</X>
+            <Y>440</Y>
+          </Points>
+          <Points>
+            <X>1295</X>
+            <Y>440</Y>
+          </Points>
+        </Points>
       </Connection>
       <Connection Source="$078FDAB443B210C1.F0C1E431EEC29CAD" Destination="$B6F7827A8D75BDA7.ACK_C1">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$577C6FE0CD1DD54D.990117E8CD2B8B73" Destination="$B7B56D9BD612A776.REQ">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$B7B56D9BD612A776.IND_1" Destination="$078FDAB443B210C1.481FCEE46722FF01">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <Points>
+          <Points>
+            <X>690.4166</X>
+            <Y>450</Y>
+          </Points>
+          <Points>
+            <X>732.9166</X>
+            <Y>450</Y>
+          </Points>
+          <Points>
+            <X>732.9166</X>
+            <Y>207.5</Y>
+          </Points>
+          <Points>
+            <X>997.5</X>
+            <Y>207.5</Y>
+          </Points>
+          <Points>
+            <X>997.5</X>
+            <Y>120</Y>
+          </Points>
+          <Points>
+            <X>1995</X>
+            <Y>120</Y>
+          </Points>
+        </Points>
       </Connection>
       <Connection Source="$078FDAB443B210C1.F0C1E431EEC29CAD" Destination="$B7B56D9BD612A776.ACK_C1">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$577C6FE0CD1DD54D.990117E8CD2B8B73" Destination="$54666F499974BEA6.REQ">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$54666F499974BEA6.IND_1" Destination="$078FDAB443B210C1.481FCEE46722FF01">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <Points>
+          <Points>
+            <X>690.4166</X>
+            <Y>450</Y>
+          </Points>
+          <Points>
+            <X>732.9166</X>
+            <Y>450</Y>
+          </Points>
+          <Points>
+            <X>732.9166</X>
+            <Y>932.5</Y>
+          </Points>
+          <Points>
+            <X>1567.5</X>
+            <Y>932.5</Y>
+          </Points>
+          <Points>
+            <X>1567.5</X>
+            <Y>345</Y>
+          </Points>
+          <Points>
+            <X>1995</X>
+            <Y>345</Y>
+          </Points>
+        </Points>
       </Connection>
       <Connection Source="$078FDAB443B210C1.F0C1E431EEC29CAD" Destination="$54666F499974BEA6.ACK_C1">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <Points>
+          <Points>
+            <X>690.4166</X>
+            <Y>450</Y>
+          </Points>
+          <Points>
+            <X>757.5</X>
+            <Y>450</Y>
+          </Points>
+          <Points>
+            <X>757.5</X>
+            <Y>932.5</Y>
+          </Points>
+          <Points>
+            <X>1567.5</X>
+            <Y>932.5</Y>
+          </Points>
+          <Points>
+            <X>1567.5</X>
+            <Y>570</Y>
+          </Points>
+          <Points>
+            <X>1995</X>
+            <Y>570</Y>
+          </Points>
+        </Points>
       </Connection>
-      <Connection Source="$577C6FE0CD1DD54D.5BDBF19AA0AAE2FE" Destination="$008C035A92A54138.REQ">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      <Connection Source="$577C6FE0CD1DD54D.990117E8CD2B8B73" Destination="$078FDAB443B210C1.481FCEE46722FF01">
+        <Points>
+          <Points>
+            <X>1558.21875</X>
+            <Y>305</Y>
+          </Points>
+          <Points>
+            <X>1703.21875</X>
+            <Y>305</Y>
+          </Points>
+          <Points>
+            <X>1703.21875</X>
+            <Y>232.5</Y>
+          </Points>
+          <Points>
+            <X>1287.5</X>
+            <Y>232.5</Y>
+          </Points>
+          <Points>
+            <X>1287.5</X>
+            <Y>717.5</Y>
+          </Points>
+          <Points>
+            <X>837.5</X>
+            <Y>717.5</Y>
+          </Points>
+          <Points>
+            <X>837.5</X>
+            <Y>332.5</Y>
+          </Points>
+          <Points>
+            <X>272.5</X>
+            <Y>332.5</Y>
+          </Points>
+          <Points>
+            <X>272.5</X>
+            <Y>390</Y>
+          </Points>
+          <Points>
+            <X>295</X>
+            <Y>390</Y>
+          </Points>
+        </Points>
       </Connection>
-      <Connection Source="$577C6FE0CD1DD54D.5BDBF19AA0AAE2FE" Destination="$7AD7DC3ECDC53CB4.REQ">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+      <Connection Source="$577C6FE0CD1DD54D.990117E8CD2B8B73" Destination="$B6F7827A8D75BDA7.REQ" dx1="117.125" />
+      <Connection Source="$577C6FE0CD1DD54D.990117E8CD2B8B73" Destination="$B7B56D9BD612A776.REQ" dx1="580" />
+      <Connection Source="$577C6FE0CD1DD54D.990117E8CD2B8B73" Destination="$54666F499974BEA6.REQ" dx1="580" />
+      <Connection Source="$B6F7827A8D75BDA7.IND_1" Destination="$078FDAB443B210C1.481FCEE46722FF01" dx1="60" dx2="90" dy="-290" />
+      <Connection Source="$B7B56D9BD612A776.IND_1" Destination="$078FDAB443B210C1.481FCEE46722FF01">
+        <Points>
+          <Points>
+            <X>2194.9375</X>
+            <Y>330</Y>
+          </Points>
+          <Points>
+            <X>2209.9375</X>
+            <Y>330</Y>
+          </Points>
+          <Points>
+            <X>2209.9375</X>
+            <Y>892.5</Y>
+          </Points>
+          <Points>
+            <X>1987.5</X>
+            <Y>892.5</Y>
+          </Points>
+          <Points>
+            <X>1987.5</X>
+            <Y>957.5</Y>
+          </Points>
+          <Points>
+            <X>272.5</X>
+            <Y>957.5</Y>
+          </Points>
+          <Points>
+            <X>272.5</X>
+            <Y>390</Y>
+          </Points>
+          <Points>
+            <X>295</X>
+            <Y>390</Y>
+          </Points>
+        </Points>
       </Connection>
+      <Connection Source="$54666F499974BEA6.IND_1" Destination="$078FDAB443B210C1.481FCEE46722FF01">
+        <Points>
+          <Points>
+            <X>2194.9375</X>
+            <Y>555</Y>
+          </Points>
+          <Points>
+            <X>2217.5</X>
+            <Y>555</Y>
+          </Points>
+          <Points>
+            <X>2217.5</X>
+            <Y>892.5</Y>
+          </Points>
+          <Points>
+            <X>1987.5</X>
+            <Y>892.5</Y>
+          </Points>
+          <Points>
+            <X>1987.5</X>
+            <Y>957.5</Y>
+          </Points>
+          <Points>
+            <X>142.5</X>
+            <Y>957.5</Y>
+          </Points>
+          <Points>
+            <X>142.5</X>
+            <Y>390</Y>
+          </Points>
+          <Points>
+            <X>295</X>
+            <Y>390</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$577C6FE0CD1DD54D.5BDBF19AA0AAE2FE" Destination="$008C035A92A54138.REQ" dx1="620" />
+      <Connection Source="$577C6FE0CD1DD54D.5BDBF19AA0AAE2FE" Destination="$7AD7DC3ECDC53CB4.REQ" dx1="620" />
     </EventConnections>
     <DataConnections>
-      <Connection Source="$078FDAB443B210C1.782E32D396726508" Destination="$577C6FE0CD1DD54D.5541C75939BAAAF4">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$078FDAB443B210C1.25AE4D0A97EEDA36" Destination="$577C6FE0CD1DD54D.C1B1DDD6702777D0">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$078FDAB443B210C1.D18E1EEBEE97BF05" Destination="$577C6FE0CD1DD54D.7957616432A80571">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$078FDAB443B210C1.00ADEFE9AF996DF4" Destination="$577C6FE0CD1DD54D.9314A77CB5285DA8">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$078FDAB443B210C1.95CEB40D72985F2C" Destination="$577C6FE0CD1DD54D.6DD97D51A927EFDE">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$078FDAB443B210C1.8ABE92B23ED26038" Destination="$577C6FE0CD1DD54D.544203CD781FBA82">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$078FDAB443B210C1.9FC046F40A62517B" Destination="$577C6FE0CD1DD54D.5D2134F1C8188850">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$577C6FE0CD1DD54D.9E9903A02854D46D" Destination="$078FDAB443B210C1.54DAE08BBDA057C8">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$577C6FE0CD1DD54D.784EA9F97E75518C" Destination="$078FDAB443B210C1.9E19AB905DF0AF71">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$0846A16F7C121D3E.VALUE1" Destination="$577C6FE0CD1DD54D.3192419CBD3456AF">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$0846A16F7C121D3E.VALUE2" Destination="$577C6FE0CD1DD54D.2E741C6D9D58AA99">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$0846A16F7C121D3E.VALUE3" Destination="$577C6FE0CD1DD54D.EEA997BD3624627A">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$0846A16F7C121D3E.VALUE4" Destination="$577C6FE0CD1DD54D.02686A07CF0DEA75">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$3DB1448635DB4727.VALUE1" Destination="$577C6FE0CD1DD54D.4CF28D0E5B603273">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$3DB1448635DB4727.VALUE2" Destination="$577C6FE0CD1DD54D.71BCBB12C2AF0796">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$3DB1448635DB4727.VALUE3" Destination="$577C6FE0CD1DD54D.A8A879D27B091910">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$3DB1448635DB4727.VALUE4" Destination="$577C6FE0CD1DD54D.5FC4C940D239F7B7">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$75225B52E6A157BD.VALUE1" Destination="$577C6FE0CD1DD54D.8966B61142E1C2AB">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$75225B52E6A157BD.VALUE2" Destination="$577C6FE0CD1DD54D.B732CC35D8316C22">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$75225B52E6A157BD.VALUE3" Destination="$577C6FE0CD1DD54D.B639CAC66B51D265">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$75225B52E6A157BD.VALUE4" Destination="$577C6FE0CD1DD54D.530128CBF41BDA17">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$9AB62F5A3DFFED9A.VALUE1" Destination="$577C6FE0CD1DD54D.93F81E7F7C459083">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$05903B4B679AA14E" Destination="$577C6FE0CD1DD54D.70687EF23AE88FC9" dx1="2087.813">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$DD850CDC4ADBDD2B" Destination="$577C6FE0CD1DD54D.F2C6EF86A9B85995" dx1="2056.583">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$B08C4ED4004BD1E2" Destination="$577C6FE0CD1DD54D.0F827E892CBAF45A" dx1="2052.354">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$9B339F9277A6A0C4" Destination="$577C6FE0CD1DD54D.F5A89B14C965772F" dx1="2177.438">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$3CF911DD39649E19" Destination="$577C6FE0CD1DD54D.B108A8663BF6F01D" dx1="2112.885">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$9035BBA9DB82E02B" Destination="$577C6FE0CD1DD54D.AD9606711ECD0A6E" dx1="2139.635">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$C82CBBE25FC56079" Destination="$577C6FE0CD1DD54D.E15FF261880BC83D" dx1="1929.938">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$FC8FD119D7FC211F" Destination="$577C6FE0CD1DD54D.EC14950A36464D14" dx1="2151.917">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$DF6900A72D5BDD75" Destination="$577C6FE0CD1DD54D.410C490809D6916D" dx1="2134.698">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$A05C536BD229E019" Destination="$577C6FE0CD1DD54D.9DB83B313D3D4707" dx1="2118.896">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$454E6238573E4508" Destination="$577C6FE0CD1DD54D.0008094B2F324685" dx1="2095.76">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$FFAFC48D6FD3FF02" Destination="$577C6FE0CD1DD54D.EF3C511F4EFC8BD0" dx1="2146.417">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$577C6FE0CD1DD54D.99653724F6BC8F08" Destination="$904DD3246D8E0F2F" dx1="3997.739">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$577C6FE0CD1DD54D.E6D08F90D5C52C33" Destination="$5EDB2238B0F9A6B6" dx1="3997.739">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$577C6FE0CD1DD54D.5DD78840DE028F7B" Destination="$C1396A09200C7A2F" dx1="4007.738">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$577C6FE0CD1DD54D.B46169A18CD32F7C" Destination="$259F220E31BE1DFA" dx1="4017.739">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$577C6FE0CD1DD54D.C659D358952CD6B7" Destination="$5173A0E658D4250F" dx1="3997.739">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$577C6FE0CD1DD54D.C86F8A1F62826E46" Destination="$378CDAA06C4824E3" dx1="4007.738">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$577C6FE0CD1DD54D.9F9558ECB3ECDED1" Destination="$6DEFE77C970ED010" dx1="4057.738">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$577C6FE0CD1DD54D.BCCB0E0F9BF49DCB" Destination="$5B46E3B5D12031DA" dx1="3997.739">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$078FDAB443B210C1.53A3AB6327E89C55" Destination="$577C6FE0CD1DD54D.FE01ADD91E2DE6AA">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$078FDAB443B210C1.4BBF2344676F45C3" Destination="$577C6FE0CD1DD54D.33A1A871455C269D">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$078FDAB443B210C1.71ABA80F1E8A7A1D" Destination="$577C6FE0CD1DD54D.06F0657BBA388BF2">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$577C6FE0CD1DD54D.BCCB0E0F9BF49DCB" Destination="$078FDAB443B210C1.B969FCDEF96130B5">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$577C6FE0CD1DD54D.C659D358952CD6B7" Destination="$078FDAB443B210C1.C3A21C41518F8C92">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$577C6FE0CD1DD54D.85BCBF8B868D0FA4" Destination="$078FDAB443B210C1.56BCE793160E4F9B">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$577C6FE0CD1DD54D.75E55D8876A4AB2E" Destination="$078FDAB443B210C1.E869DDA43722D98D">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$577C6FE0CD1DD54D.C86F8A1F62826E46" Destination="$078FDAB443B210C1.0DA1E5C3B5E4734A">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$577C6FE0CD1DD54D.E6D08F90D5C52C33" Destination="$078FDAB443B210C1.585941C85BCE83DA">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$577C6FE0CD1DD54D.5DD78840DE028F7B" Destination="$078FDAB443B210C1.118709CAD5681177">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$577C6FE0CD1DD54D.00643AE4F2863758" Destination="$078FDAB443B210C1.C04F7AF04E6EFF5A">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$577C6FE0CD1DD54D.32153BE2C861ECF0" Destination="$078FDAB443B210C1.4D2B4ABC1DF87081">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$577C6FE0CD1DD54D.9AABFB91073A915A" Destination="$078FDAB443B210C1.8BD21E91EDBEE9FF">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$577C6FE0CD1DD54D.0377F31FB4BC212E" Destination="$078FDAB443B210C1.4CCAE5CDCC0013D9">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$577C6FE0CD1DD54D.B46169A18CD32F7C" Destination="$078FDAB443B210C1.E92EDC6467677974">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$577C6FE0CD1DD54D.3B6F475C569C5069" Destination="$078FDAB443B210C1.53B5F5D2A95335A0">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$577C6FE0CD1DD54D.F1568A13AC3AEFBE" Destination="$078FDAB443B210C1.F8D90F2913DF52AF">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$577C6FE0CD1DD54D.71F9AE205389F66A" Destination="$078FDAB443B210C1.F9AC7CF3C819F645">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$577C6FE0CD1DD54D.EE389DE2DBE99516" Destination="$078FDAB443B210C1.DC69038179C46D37">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$577C6FE0CD1DD54D.A99EAB43BF4ADEB5" Destination="$078FDAB443B210C1.2BAF0C38CF5B5251">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$577C6FE0CD1DD54D.A3AC5D7D39845C2F" Destination="$078FDAB443B210C1.8B113EA8C9590EE1">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$577C6FE0CD1DD54D.F7CC3A22744D1368" Destination="$078FDAB443B210C1.44D930D90C400D59">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$577C6FE0CD1DD54D.4F78B2448EF3E2AC" Destination="$078FDAB443B210C1.3E19F65A533EE5A5">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$577C6FE0CD1DD54D.15B91D4F0D7EBACD" Destination="$078FDAB443B210C1.F43B41AD347B286F">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$577C6FE0CD1DD54D.8F1145FAD0EA7D30" Destination="$078FDAB443B210C1.8E15E2F3411058A4">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$577C6FE0CD1DD54D.08539AB6A2423C74" Destination="$078FDAB443B210C1.3445C45C8D3C07B1">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$577C6FE0CD1DD54D.1E38EF76B7197DEE" Destination="$078FDAB443B210C1.CAA9E8865AA9CC43">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$577C6FE0CD1DD54D.A7375D096F25E9A0" Destination="$078FDAB443B210C1.3C283C97FD003068">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$577C6FE0CD1DD54D.46F7138E9A587B4E" Destination="$078FDAB443B210C1.A6CED4D4BB171668">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$577C6FE0CD1DD54D.DD326BA823A25366" Destination="$078FDAB443B210C1.B295DEC4D3864237">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$577C6FE0CD1DD54D.99653724F6BC8F08" Destination="$078FDAB443B210C1.683B1DD33BEC1F11">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$577C6FE0CD1DD54D.BDE79BC355DC217B" Destination="$078FDAB443B210C1.3A63C12BF7F645F0">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$577C6FE0CD1DD54D.003D99BA219BA018" Destination="$078FDAB443B210C1.C6F00665AAAB8CE6">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$577C6FE0CD1DD54D.417216583F2DBCE9" Destination="$078FDAB443B210C1.917E2B83F09385E4">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$577C6FE0CD1DD54D.D71B40294CEB30AA" Destination="$078FDAB443B210C1.DEDA62E0EBADEB17">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$577C6FE0CD1DD54D.DB7EA302241EF8BC" Destination="$078FDAB443B210C1.DA6223C9ED3732BE">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$577C6FE0CD1DD54D.51C9C3E1B4E288BC" Destination="$078FDAB443B210C1.0CDC22B197562BCC">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$577C6FE0CD1DD54D.7A82F28321EB8D2C" Destination="$078FDAB443B210C1.2D2E2A67F151864E">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$577C6FE0CD1DD54D.08539AB6A2423C74" Destination="$B6F7827A8D75BDA7.INP">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
+      <Connection Source="$0846A16F7C121D3E.VALUE1" Destination="$577C6FE0CD1DD54D.3192419CBD3456AF" dx1="41.625" />
+      <Connection Source="$3DB1448635DB4727.VALUE1" Destination="$577C6FE0CD1DD54D.2E741C6D9D58AA99" dx1="101.625" />
+      <Connection Source="$3DB1448635DB4727.VALUE2" Destination="$577C6FE0CD1DD54D.EEA997BD3624627A" dx1="81.625" />
+      <Connection Source="$3DB1448635DB4727.VALUE3" Destination="$577C6FE0CD1DD54D.02686A07CF0DEA75" dx1="61.625" />
+      <Connection Source="$3DB1448635DB4727.VALUE4" Destination="$577C6FE0CD1DD54D.4CF28D0E5B603273" dx1="41.625" />
+      <Connection Source="$75225B52E6A157BD.VALUE1" Destination="$577C6FE0CD1DD54D.71BCBB12C2AF0796" dx1="101.625" />
+      <Connection Source="$75225B52E6A157BD.VALUE2" Destination="$577C6FE0CD1DD54D.A8A879D27B091910" dx1="81.625" />
+      <Connection Source="$75225B52E6A157BD.VALUE3" Destination="$577C6FE0CD1DD54D.5FC4C940D239F7B7" dx1="61.625" />
+      <Connection Source="$75225B52E6A157BD.VALUE4" Destination="$577C6FE0CD1DD54D.8966B61142E1C2AB" dx1="41.625" />
+      <Connection Source="$9AB62F5A3DFFED9A.VALUE1" Destination="$577C6FE0CD1DD54D.93F81E7F7C459083" dx1="41.625" />
+      <Connection Source="$577C6FE0CD1DD54D.AC804A87A5A79AB2" Destination="$008C035A92A54138.VALUE1" dx1="560" />
+      <Connection Source="$577C6FE0CD1DD54D.4FD4131076BF837A" Destination="$7AD7DC3ECDC53CB4.VALUE1" dx1="540" />
+      <Connection Source="$05903B4B679AA14E" Destination="$577C6FE0CD1DD54D.70687EF23AE88FC9">
+        <Points>
+          <Points>
+            <X>223.59375</X>
+            <Y>86</Y>
+          </Points>
+          <Points>
+            <X>233.59375</X>
+            <Y>86</Y>
+          </Points>
+          <Points>
+            <X>233.59375</X>
+            <Y>162.5</Y>
+          </Points>
+          <Points>
+            <X>397.5</X>
+            <Y>162.5</Y>
+          </Points>
+          <Points>
+            <X>397.5</X>
+            <Y>192.5</Y>
+          </Points>
+          <Points>
+            <X>997.5</X>
+            <Y>192.5</Y>
+          </Points>
+          <Points>
+            <X>997.5</X>
+            <Y>550</Y>
+          </Points>
+          <Points>
+            <X>1295</X>
+            <Y>550</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$DD850CDC4ADBDD2B" Destination="$577C6FE0CD1DD54D.F2C6EF86A9B85995">
+        <Points>
+          <Points>
+            <X>234.208313</X>
+            <Y>101</Y>
+          </Points>
+          <Points>
+            <X>244.208313</X>
+            <Y>101</Y>
+          </Points>
+          <Points>
+            <X>244.208313</X>
+            <Y>162.5</Y>
+          </Points>
+          <Points>
+            <X>397.5</X>
+            <Y>162.5</Y>
+          </Points>
+          <Points>
+            <X>397.5</X>
+            <Y>192.5</Y>
+          </Points>
+          <Points>
+            <X>997.5</X>
+            <Y>192.5</Y>
+          </Points>
+          <Points>
+            <X>997.5</X>
+            <Y>565</Y>
+          </Points>
+          <Points>
+            <X>1295</X>
+            <Y>565</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$B08C4ED4004BD1E2" Destination="$577C6FE0CD1DD54D.0F827E892CBAF45A">
+        <Points>
+          <Points>
+            <X>231.3229</X>
+            <Y>116</Y>
+          </Points>
+          <Points>
+            <X>242.5</X>
+            <Y>116</Y>
+          </Points>
+          <Points>
+            <X>242.5</X>
+            <Y>162.5</Y>
+          </Points>
+          <Points>
+            <X>397.5</X>
+            <Y>162.5</Y>
+          </Points>
+          <Points>
+            <X>397.5</X>
+            <Y>192.5</Y>
+          </Points>
+          <Points>
+            <X>997.5</X>
+            <Y>192.5</Y>
+          </Points>
+          <Points>
+            <X>997.5</X>
+            <Y>580</Y>
+          </Points>
+          <Points>
+            <X>1295</X>
+            <Y>580</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$C82CBBE25FC56079" Destination="$577C6FE0CD1DD54D.E15FF261880BC83D">
+        <Points>
+          <Points>
+            <X>207.53125</X>
+            <Y>131</Y>
+          </Points>
+          <Points>
+            <X>217.53125</X>
+            <Y>131</Y>
+          </Points>
+          <Points>
+            <X>217.53125</X>
+            <Y>162.5</Y>
+          </Points>
+          <Points>
+            <X>702.5</X>
+            <Y>162.5</Y>
+          </Points>
+          <Points>
+            <X>702.5</X>
+            <Y>895</Y>
+          </Points>
+          <Points>
+            <X>1295</X>
+            <Y>895</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$FFAFC48D6FD3FF02" Destination="$577C6FE0CD1DD54D.EF3C511F4EFC8BD0">
+        <Points>
+          <Points>
+            <X>189.291656</X>
+            <Y>146</Y>
+          </Points>
+          <Points>
+            <X>199.291656</X>
+            <Y>146</Y>
+          </Points>
+          <Points>
+            <X>199.291656</X>
+            <Y>162.5</Y>
+          </Points>
+          <Points>
+            <X>397.5</X>
+            <Y>162.5</Y>
+          </Points>
+          <Points>
+            <X>397.5</X>
+            <Y>192.5</Y>
+          </Points>
+          <Points>
+            <X>997.5</X>
+            <Y>192.5</Y>
+          </Points>
+          <Points>
+            <X>997.5</X>
+            <Y>520</Y>
+          </Points>
+          <Points>
+            <X>1295</X>
+            <Y>520</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$C65F121E4D57852C" Destination="$577C6FE0CD1DD54D.CC0CBBCAA6C58448">
+        <Points>
+          <Points>
+            <X>203.458313</X>
+            <Y>161</Y>
+          </Points>
+          <Points>
+            <X>397.5</X>
+            <Y>161</Y>
+          </Points>
+          <Points>
+            <X>397.5</X>
+            <Y>192.5</Y>
+          </Points>
+          <Points>
+            <X>997.5</X>
+            <Y>192.5</Y>
+          </Points>
+          <Points>
+            <X>997.5</X>
+            <Y>535</Y>
+          </Points>
+          <Points>
+            <X>1295</X>
+            <Y>535</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$577C6FE0CD1DD54D.99653724F6BC8F08" Destination="$904DD3246D8E0F2F">
+        <Points>
+          <Points>
+            <X>1558.21875</X>
+            <Y>760</Y>
+          </Points>
+          <Points>
+            <X>1672.5</X>
+            <Y>760</Y>
+          </Points>
+          <Points>
+            <X>1672.5</X>
+            <Y>892.5</Y>
+          </Points>
+          <Points>
+            <X>2202.5</X>
+            <Y>892.5</Y>
+          </Points>
+          <Points>
+            <X>2202.5</X>
+            <Y>71</Y>
+          </Points>
+          <Points>
+            <X>2850</X>
+            <Y>71</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$577C6FE0CD1DD54D.E6D08F90D5C52C33" Destination="$5EDB2238B0F9A6B6">
+        <Points>
+          <Points>
+            <X>1558.21875</X>
+            <Y>625</Y>
+          </Points>
+          <Points>
+            <X>1627.5</X>
+            <Y>625</Y>
+          </Points>
+          <Points>
+            <X>1627.5</X>
+            <Y>892.5</Y>
+          </Points>
+          <Points>
+            <X>2202.5</X>
+            <Y>892.5</Y>
+          </Points>
+          <Points>
+            <X>2202.5</X>
+            <Y>86</Y>
+          </Points>
+          <Points>
+            <X>2850</X>
+            <Y>86</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$577C6FE0CD1DD54D.5DD78840DE028F7B" Destination="$C1396A09200C7A2F">
+        <Points>
+          <Points>
+            <X>1558.21875</X>
+            <Y>640</Y>
+          </Points>
+          <Points>
+            <X>1632.5</X>
+            <Y>640</Y>
+          </Points>
+          <Points>
+            <X>1632.5</X>
+            <Y>892.5</Y>
+          </Points>
+          <Points>
+            <X>2202.5</X>
+            <Y>892.5</Y>
+          </Points>
+          <Points>
+            <X>2202.5</X>
+            <Y>101</Y>
+          </Points>
+          <Points>
+            <X>2850</X>
+            <Y>101</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$577C6FE0CD1DD54D.B46169A18CD32F7C" Destination="$259F220E31BE1DFA">
+        <Points>
+          <Points>
+            <X>1558.21875</X>
+            <Y>700</Y>
+          </Points>
+          <Points>
+            <X>1652.5</X>
+            <Y>700</Y>
+          </Points>
+          <Points>
+            <X>1652.5</X>
+            <Y>892.5</Y>
+          </Points>
+          <Points>
+            <X>2202.5</X>
+            <Y>892.5</Y>
+          </Points>
+          <Points>
+            <X>2202.5</X>
+            <Y>116</Y>
+          </Points>
+          <Points>
+            <X>2850</X>
+            <Y>116</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$577C6FE0CD1DD54D.C86F8A1F62826E46" Destination="$378CDAA06C4824E3">
+        <Points>
+          <Points>
+            <X>1558.21875</X>
+            <Y>745</Y>
+          </Points>
+          <Points>
+            <X>1667.5</X>
+            <Y>745</Y>
+          </Points>
+          <Points>
+            <X>1667.5</X>
+            <Y>892.5</Y>
+          </Points>
+          <Points>
+            <X>2202.5</X>
+            <Y>892.5</Y>
+          </Points>
+          <Points>
+            <X>2202.5</X>
+            <Y>131</Y>
+          </Points>
+          <Points>
+            <X>2850</X>
+            <Y>131</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$577C6FE0CD1DD54D.BCCB0E0F9BF49DCB" Destination="$5B46E3B5D12031DA">
+        <Points>
+          <Points>
+            <X>1558.21875</X>
+            <Y>550</Y>
+          </Points>
+          <Points>
+            <X>1602.5</X>
+            <Y>550</Y>
+          </Points>
+          <Points>
+            <X>1602.5</X>
+            <Y>892.5</Y>
+          </Points>
+          <Points>
+            <X>2202.5</X>
+            <Y>892.5</Y>
+          </Points>
+          <Points>
+            <X>2202.5</X>
+            <Y>146</Y>
+          </Points>
+          <Points>
+            <X>2850</X>
+            <Y>146</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$078FDAB443B210C1.53A3AB6327E89C55" Destination="$577C6FE0CD1DD54D.FE01ADD91E2DE6AA" dx1="228.3335" />
+      <Connection Source="$078FDAB443B210C1.782E32D396726508" Destination="$577C6FE0CD1DD54D.5541C75939BAAAF4" dx1="208.3335" />
+      <Connection Source="$078FDAB443B210C1.25AE4D0A97EEDA36" Destination="$577C6FE0CD1DD54D.C1B1DDD6702777D0" dx1="188.3335" />
+      <Connection Source="$078FDAB443B210C1.00ADEFE9AF996DF4" Destination="$577C6FE0CD1DD54D.9314A77CB5285DA8" dx1="168.3335" />
+      <Connection Source="$078FDAB443B210C1.D18E1EEBEE97BF05" Destination="$577C6FE0CD1DD54D.7957616432A80571" dx1="148.3335" />
+      <Connection Source="$078FDAB443B210C1.71ABA80F1E8A7A1D" Destination="$577C6FE0CD1DD54D.06F0657BBA388BF2" dx1="128.3335" />
+      <Connection Source="$078FDAB443B210C1.8ABE92B23ED26038" Destination="$577C6FE0CD1DD54D.544203CD781FBA82" dx1="108.3335" />
+      <Connection Source="$078FDAB443B210C1.9FC046F40A62517B" Destination="$577C6FE0CD1DD54D.5D2134F1C8188850" dx1="88.3335" />
+      <Connection Source="$078FDAB443B210C1.95CEB40D72985F2C" Destination="$577C6FE0CD1DD54D.6DD97D51A927EFDE" dx1="68.3335" />
+      <Connection Source="$078FDAB443B210C1.4BBF2344676F45C3" Destination="$577C6FE0CD1DD54D.33A1A871455C269D" dx1="48.3335" />
+      <Connection Source="$577C6FE0CD1DD54D.BCCB0E0F9BF49DCB" Destination="$078FDAB443B210C1.B969FCDEF96130B5" dx1="177.125" dx2="570" dy="1630" />
+      <Connection Source="$577C6FE0CD1DD54D.08539AB6A2423C74" Destination="$078FDAB443B210C1.3445C45C8D3C07B1" dx1="197.125" dx2="550" dy="1570" />
+      <Connection Source="$577C6FE0CD1DD54D.C659D358952CD6B7" Destination="$078FDAB443B210C1.C3A21C41518F8C92" dx1="217.125" dx2="530" dy="1510" />
+      <Connection Source="$577C6FE0CD1DD54D.85BCBF8B868D0FA4" Destination="$078FDAB443B210C1.56BCE793160E4F9B" dx1="237.125" dx2="510" dy="1450" />
+      <Connection Source="$577C6FE0CD1DD54D.75E55D8876A4AB2E" Destination="$078FDAB443B210C1.E869DDA43722D98D" dx1="257.125" dx2="490" dy="1390" />
+      <Connection Source="$577C6FE0CD1DD54D.E6D08F90D5C52C33" Destination="$078FDAB443B210C1.585941C85BCE83DA" dx1="277.125" dx2="470" dy="1330" />
+      <Connection Source="$577C6FE0CD1DD54D.5DD78840DE028F7B" Destination="$078FDAB443B210C1.118709CAD5681177" dx1="297.125" dx2="450" dy="1270" />
+      <Connection Source="$577C6FE0CD1DD54D.32153BE2C861ECF0" Destination="$078FDAB443B210C1.4D2B4ABC1DF87081" dx1="317.125" dx2="430" dy="1210" />
+      <Connection Source="$577C6FE0CD1DD54D.9AABFB91073A915A" Destination="$078FDAB443B210C1.8BD21E91EDBEE9FF" dx1="337.125" dx2="410" dy="1150" />
+      <Connection Source="$577C6FE0CD1DD54D.D71B40294CEB30AA" Destination="$078FDAB443B210C1.DEDA62E0EBADEB17" dx1="357.125" dx2="390" dy="1090" />
+      <Connection Source="$577C6FE0CD1DD54D.C86F8A1F62826E46" Destination="$078FDAB443B210C1.0DA1E5C3B5E4734A" dx1="437.125" dx2="370" dy="850" />
+      <Connection Source="$577C6FE0CD1DD54D.99653724F6BC8F08" Destination="$078FDAB443B210C1.683B1DD33BEC1F11" dx1="457.125" dx2="350" dy="790" />
+      <Connection Source="$577C6FE0CD1DD54D.A7375D096F25E9A0" Destination="$078FDAB443B210C1.3C283C97FD003068" dx1="477.125" dx2="330" dy="730" />
+      <Connection Source="$577C6FE0CD1DD54D.332B35E709843BAF" Destination="$078FDAB443B210C1.EAB8CECDEE47F405" dx1="280" dx2="430" dy="910" />
+      <Connection Source="$577C6FE0CD1DD54D.B46169A18CD32F7C" Destination="$078FDAB443B210C1.E92EDC6467677974" dx1="320" dx2="450" dy="1030" />
+      <Connection Source="$577C6FE0CD1DD54D.3B6F475C569C5069" Destination="$078FDAB443B210C1.53B5F5D2A95335A0" dx1="300" dx2="470" dy="970" />
+      <Connection Source="$577C6FE0CD1DD54D.1E38EF76B7197DEE" Destination="$078FDAB443B210C1.CAA9E8865AA9CC43" dx1="200" dx2="490" dy="670" />
+      <Connection Source="$577C6FE0CD1DD54D.46F7138E9A587B4E" Destination="$078FDAB443B210C1.A6CED4D4BB171668" dx1="180" dx2="510" dy="610" />
+      <Connection Source="$577C6FE0CD1DD54D.F1568A13AC3AEFBE" Destination="$078FDAB443B210C1.F8D90F2913DF52AF" dx1="160" dx2="550" dy="550" />
+      <Connection Source="$577C6FE0CD1DD54D.A99EAB43BF4ADEB5" Destination="$078FDAB443B210C1.2BAF0C38CF5B5251" dx1="140" dx2="570" dy="490" />
+      <Connection Source="$577C6FE0CD1DD54D.EE389DE2DBE99516" Destination="$078FDAB443B210C1.DC69038179C46D37" dx1="120" dx2="590" dy="430" />
+      <Connection Source="$577C6FE0CD1DD54D.71F9AE205389F66A" Destination="$078FDAB443B210C1.F9AC7CF3C819F645" dx1="100" dx2="610" dy="370" />
+      <Connection Source="$577C6FE0CD1DD54D.DB7EA302241EF8BC" Destination="$078FDAB443B210C1.DA6223C9ED3732BE" dx1="80" dx2="630" dy="310" />
+      <Connection Source="$577C6FE0CD1DD54D.51C9C3E1B4E288BC" Destination="$078FDAB443B210C1.0CDC22B197562BCC" dx1="60" dx2="650" dy="250" />
+      <Connection Source="$577C6FE0CD1DD54D.7A82F28321EB8D2C" Destination="$078FDAB443B210C1.2D2E2A67F151864E" dx1="40" dx2="670" dy="190" />
+      <Connection Source="$577C6FE0CD1DD54D.08539AB6A2423C74" Destination="$B6F7827A8D75BDA7.INP" dx1="197.125" />
+      <Connection Source="$577C6FE0CD1DD54D.1E38EF76B7197DEE" Destination="$B7B56D9BD612A776.INP" dx1="497.125" />
+      <Connection Source="$577C6FE0CD1DD54D.A7375D096F25E9A0" Destination="$54666F499974BEA6.INP" dx1="477.125" />
       <Connection Source="$B6F7827A8D75BDA7.STATE_1" Destination="$078FDAB443B210C1.B89204E4643E3E78">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$577C6FE0CD1DD54D.1E38EF76B7197DEE" Destination="$B7B56D9BD612A776.INP">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <Points>
+          <Points>
+            <X>2194.9375</X>
+            <Y>185</Y>
+          </Points>
+          <Points>
+            <X>2204.9375</X>
+            <Y>185</Y>
+          </Points>
+          <Points>
+            <X>2204.9375</X>
+            <Y>32.5</Y>
+          </Points>
+          <Points>
+            <X>287.5</X>
+            <Y>32.5</Y>
+          </Points>
+          <Points>
+            <X>287.5</X>
+            <Y>142.5</Y>
+          </Points>
+          <Points>
+            <X>197.5</X>
+            <Y>142.5</Y>
+          </Points>
+          <Points>
+            <X>197.5</X>
+            <Y>725</Y>
+          </Points>
+          <Points>
+            <X>295</X>
+            <Y>725</Y>
+          </Points>
+        </Points>
       </Connection>
       <Connection Source="$B7B56D9BD612A776.STATE_1" Destination="$078FDAB443B210C1.E687D663B06D7C72">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$577C6FE0CD1DD54D.A7375D096F25E9A0" Destination="$54666F499974BEA6.INP">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <Points>
+          <Points>
+            <X>2194.9375</X>
+            <Y>410</Y>
+          </Points>
+          <Points>
+            <X>2204.9375</X>
+            <Y>410</Y>
+          </Points>
+          <Points>
+            <X>2204.9375</X>
+            <Y>892.5</Y>
+          </Points>
+          <Points>
+            <X>1987.5</X>
+            <Y>892.5</Y>
+          </Points>
+          <Points>
+            <X>1987.5</X>
+            <Y>957.5</Y>
+          </Points>
+          <Points>
+            <X>162.5</X>
+            <Y>957.5</Y>
+          </Points>
+          <Points>
+            <X>162.5</X>
+            <Y>830</Y>
+          </Points>
+          <Points>
+            <X>295</X>
+            <Y>830</Y>
+          </Points>
+        </Points>
       </Connection>
       <Connection Source="$54666F499974BEA6.STATE_1" Destination="$078FDAB443B210C1.C3B11476CBB5BCEC">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$577C6FE0CD1DD54D.AC804A87A5A79AB2" Destination="$008C035A92A54138.VALUE1">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$577C6FE0CD1DD54D.4FD4131076BF837A" Destination="$7AD7DC3ECDC53CB4.VALUE1">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <Points>
+          <Points>
+            <X>2194.9375</X>
+            <Y>635</Y>
+          </Points>
+          <Points>
+            <X>2204.9375</X>
+            <Y>635</Y>
+          </Points>
+          <Points>
+            <X>2204.9375</X>
+            <Y>892.5</Y>
+          </Points>
+          <Points>
+            <X>1987.5</X>
+            <Y>892.5</Y>
+          </Points>
+          <Points>
+            <X>1987.5</X>
+            <Y>957.5</Y>
+          </Points>
+          <Points>
+            <X>192.5</X>
+            <Y>957.5</Y>
+          </Points>
+          <Points>
+            <X>192.5</X>
+            <Y>740</Y>
+          </Points>
+          <Points>
+            <X>295</X>
+            <Y>740</Y>
+          </Points>
+        </Points>
       </Connection>
     </DataConnections>
   </FBNetwork>

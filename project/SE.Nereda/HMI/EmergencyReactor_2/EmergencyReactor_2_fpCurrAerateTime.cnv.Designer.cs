@@ -43,7 +43,7 @@ namespace SE.Nereda.Faceplates.EmergencyReactor_2
 			new NxtControl.Drawing.PointF(8D, 8D),
 			new NxtControl.Drawing.PointF(216D, 8D),
 			new NxtControl.Drawing.PointF(264D, 32D)});
-			this.polygon2.Text = "S5 - AERATE : Remaining Time";
+			this.polygon2.Text = "S5 - AERA\u00c7\u00c3O : tempo restante";
 			this.polygon2.TextColor = new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(0)));
 			// 
 			// rectangle2

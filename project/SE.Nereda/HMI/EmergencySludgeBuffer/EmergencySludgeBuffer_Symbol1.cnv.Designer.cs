@@ -73,7 +73,7 @@ namespace SE.Nereda.Symbols.EmergencySludgeBuffer
 			this.FeedRecS1.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(14)), ((byte)(218)), ((byte)(255))));
 			this.FeedRecS1.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold);
 			this.FeedRecS1.Name = "FeedRecS1";
-			this.FeedRecS1.Text = "FEED";
+			this.FeedRecS1.Text = "ALIMENTA\u00c7\u00c3O";
 			this.FeedRecS1.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// WaitRecS2
@@ -82,7 +82,7 @@ namespace SE.Nereda.Symbols.EmergencySludgeBuffer
 			this.WaitRecS2.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(235)), ((byte)(235)), ((byte)(235))));
 			this.WaitRecS2.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold);
 			this.WaitRecS2.Name = "WaitRecS2";
-			this.WaitRecS2.Text = "WAIT";
+			this.WaitRecS2.Text = "ESPERA";
 			this.WaitRecS2.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// Step1
@@ -105,7 +105,7 @@ namespace SE.Nereda.Symbols.EmergencySludgeBuffer
 			this.SDRecS3.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(235)), ((byte)(235)), ((byte)(235))));
 			this.SDRecS3.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold);
 			this.SDRecS3.Name = "SDRecS3";
-			this.SDRecS3.Text = "SLUDGE DISCHARGE";
+			this.SDRecS3.Text = "DESCARTE DE LODO";
 			this.SDRecS3.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// Step3
@@ -121,7 +121,7 @@ namespace SE.Nereda.Symbols.EmergencySludgeBuffer
 			this.LLRecS4.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(235)), ((byte)(235)), ((byte)(235))));
 			this.LLRecS4.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold);
 			this.LLRecS4.Name = "LLRecS4";
-			this.LLRecS4.Text = "SUPERNANT DISCHARGE";
+			this.LLRecS4.Text = "SOBRENADANTE";
 			this.LLRecS4.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// Step4
@@ -282,7 +282,7 @@ namespace SE.Nereda.Symbols.EmergencySludgeBuffer
 			this.drawnButton1.OpenFaceplates.Add(new NxtControl.GuiFramework.OpenFaceplate("fpSettings", NxtControl.GuiFramework.MouseButtonType.Click));
 			this.drawnButton1.Pen = new NxtControl.Drawing.Pen("ButtonPen");
 			this.drawnButton1.Radius = 4D;
-			this.drawnButton1.Text = "Step Settings";
+			this.drawnButton1.Text = "Ajustes dos passos";
 			this.drawnButton1.TextColor = new NxtControl.Drawing.Color("ButtonTextColor");
 			this.drawnButton1.TextColorMouseDown = new NxtControl.Drawing.Color("ButtonTextColorMouseDown");
 			this.drawnButton1.Use3DEffect = false;
@@ -293,7 +293,7 @@ namespace SE.Nereda.Symbols.EmergencySludgeBuffer
 			this.roundedRectangle1.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(210)), ((byte)(234)), ((byte)(240))));
 			this.roundedRectangle1.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold);
 			this.roundedRectangle1.Name = "roundedRectangle1";
-			this.roundedRectangle1.Text = "IDLE";
+			this.roundedRectangle1.Text = "PARADO";
 			this.roundedRectangle1.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// Step0
@@ -317,7 +317,7 @@ namespace SE.Nereda.Symbols.EmergencySludgeBuffer
 			this.roundedRectangle2.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(238)), ((byte)(206)), ((byte)(206))));
 			this.roundedRectangle2.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold);
 			this.roundedRectangle2.Name = "roundedRectangle2";
-			this.roundedRectangle2.Text = "ABORTED";
+			this.roundedRectangle2.Text = "ABORTADO";
 			this.roundedRectangle2.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// Step5

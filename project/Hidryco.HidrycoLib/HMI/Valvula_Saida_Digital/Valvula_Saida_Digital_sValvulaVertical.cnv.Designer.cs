@@ -160,6 +160,7 @@ namespace Hidryco.HidrycoLib.Symbols.Valvula_Saida_Digital
 			this.fbkStsAutomatico.IsOnlyInput = true;
 			this.fbkStsAutomatico.Name = "fbkStsAutomatico";
 			propertyDictionary5.Add("Text", "M");
+			propertyDictionary5.Add("TextColor", new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))));
 			propertyDictionary6.Add("Text", "A");
 			this.fbkStsAutomatico.Ranges.Clear();
 			this.fbkStsAutomatico.Ranges.Add(new NxtControl.GuiFramework.Range<bool>(false, propertyDictionary5));

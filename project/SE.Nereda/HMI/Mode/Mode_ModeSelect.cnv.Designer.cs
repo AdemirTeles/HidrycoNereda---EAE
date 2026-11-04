@@ -41,7 +41,7 @@ namespace SE.Nereda.Faceplates.Mode
 			this.label1.FontScale = true;
 			this.label1.Name = "label1";
 			this.label1.Pen = new NxtControl.Drawing.Pen("LabelPen");
-			this.label1.Text = "Mode :";
+			this.label1.Text = "Modo :";
 			this.label1.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
 			this.label1.TextAutoSizeHorizontalOffset = 10;
 			this.label1.TextPadding = new NxtControl.Drawing.Padding(2);
@@ -92,7 +92,7 @@ namespace SE.Nereda.Faceplates.Mode
 			this.fbMode,
 			this.ModeSelector});
 			this.Size = new System.Drawing.Size(208, 88);
-			this.Title = "Mode";
+			this.Title = "Modo";
 
 		}
 		private NxtControl.GuiFramework.Label label1;

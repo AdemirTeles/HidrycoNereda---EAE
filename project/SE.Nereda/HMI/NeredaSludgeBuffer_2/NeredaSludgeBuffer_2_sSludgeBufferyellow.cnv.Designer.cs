@@ -324,9 +324,9 @@ namespace SE.Nereda.Symbols.NeredaSludgeBuffer_2
 			// 
 			this.freeText1.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.freeText1.Font = new NxtControl.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Bold);
-			this.freeText1.Location = new NxtControl.Drawing.PointF(268D, 339.0344827586207D);
+			this.freeText1.Location = new NxtControl.Drawing.PointF(213D, 339.0344827586207D);
 			this.freeText1.Name = "freeText1";
-			this.freeText1.Text = "Sludge Buffer";
+			this.freeText1.Text = "Tanque de equalização de lodo";
 			// 
 			// line4
 			// 
@@ -345,7 +345,7 @@ namespace SE.Nereda.Symbols.NeredaSludgeBuffer_2
 			// sPump1
 			// 
 			this.sPump1.BeginInit();
-			this.sPump1._iMotName = "Motor";
+			this.sPump1._iMotName = "P4901";
 			this.sPump1._iUnit = "%";
 			this.sPump1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 776D, 92D);
 			this.sPump1.Name = "sPump1";
@@ -357,7 +357,7 @@ namespace SE.Nereda.Symbols.NeredaSludgeBuffer_2
 			// sPump2
 			// 
 			this.sPump2.BeginInit();
-			this.sPump2._iMotName = "Motor";
+			this.sPump2._iMotName = "P4902";
 			this.sPump2._iUnit = "%";
 			this.sPump2.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 769D, 246D);
 			this.sPump2.Name = "sPump2";
@@ -369,7 +369,7 @@ namespace SE.Nereda.Symbols.NeredaSludgeBuffer_2
 			// sPump3
 			// 
 			this.sPump3.BeginInit();
-			this.sPump3._iMotName = "Motor";
+			this.sPump3._iMotName = "P4903";
 			this.sPump3._iUnit = "%";
 			this.sPump3.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 775D, 410D);
 			this.sPump3.Name = "sPump3";
@@ -588,8 +588,8 @@ namespace SE.Nereda.Symbols.NeredaSludgeBuffer_2
 			// sDefault1
 			// 
 			this.sDefault1.BeginInit();
-			this.sDefault1._iVlvName = "AV49002";
-			this.sDefault1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 576D, 254D);
+			this.sDefault1._iVlvName = "AV49002\r\n";
+			this.sDefault1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 569D, 254D);
 			this.sDefault1.Name = "sDefault1";
 			this.sDefault1.SecurityToken = ((uint)(4294967295u));
 			this.sDefault1.StateTextPosition = SE.Nereda.Symbols.ValveS.sDefault.StateTextPositionOption.Vertical;
@@ -1231,8 +1231,8 @@ namespace SE.Nereda.Symbols.NeredaSludgeBuffer_2
 			// sDefault2
 			// 
 			this.sDefault2.BeginInit();
-			this.sDefault2._iVlvName = "AV49005";
-			this.sDefault2.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 1004D, 198D);
+			this.sDefault2._iVlvName = "AV49005\r\nTanque 2";
+			this.sDefault2.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 995D, 199D);
 			this.sDefault2.Name = "sDefault2";
 			this.sDefault2.SecurityToken = ((uint)(4294967295u));
 			this.sDefault2.StateTextPosition = SE.Nereda.Symbols.ValveS.sDefault.StateTextPositionOption.Vertical;
@@ -1243,8 +1243,8 @@ namespace SE.Nereda.Symbols.NeredaSludgeBuffer_2
 			// sDefault3
 			// 
 			this.sDefault3.BeginInit();
-			this.sDefault3._iVlvName = "AV49004";
-			this.sDefault3.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 1005D, 298D);
+			this.sDefault3._iVlvName = "AV49004\r\nTanque 1";
+			this.sDefault3.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 998D, 298D);
 			this.sDefault3.Name = "sDefault3";
 			this.sDefault3.SecurityToken = ((uint)(4294967295u));
 			this.sDefault3.StateTextPosition = SE.Nereda.Symbols.ValveS.sDefault.StateTextPositionOption.Vertical;
@@ -1255,8 +1255,8 @@ namespace SE.Nereda.Symbols.NeredaSludgeBuffer_2
 			// sDefault4
 			// 
 			this.sDefault4.BeginInit();
-			this.sDefault4._iVlvName = "AV49003";
-			this.sDefault4.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 1006D, 400D);
+			this.sDefault4._iVlvName = "AV49003 Sobrenadante";
+			this.sDefault4.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 1000D, 400D);
 			this.sDefault4.Name = "sDefault4";
 			this.sDefault4.SecurityToken = ((uint)(4294967295u));
 			this.sDefault4.StateTextPosition = SE.Nereda.Symbols.ValveS.sDefault.StateTextPositionOption.Vertical;
@@ -1267,8 +1267,8 @@ namespace SE.Nereda.Symbols.NeredaSludgeBuffer_2
 			// sDefault5
 			// 
 			this.sDefault5.BeginInit();
-			this.sDefault5._iVlvName = "AV40001";
-			this.sDefault5.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 1093D, 400D);
+			this.sDefault5._iVlvName = "AV40101\r\nSobrenadante";
+			this.sDefault5.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 1085D, 400D);
 			this.sDefault5.Name = "sDefault5";
 			this.sDefault5.SecurityToken = ((uint)(4294967295u));
 			this.sDefault5.StateTextPosition = SE.Nereda.Symbols.ValveS.sDefault.StateTextPositionOption.Vertical;

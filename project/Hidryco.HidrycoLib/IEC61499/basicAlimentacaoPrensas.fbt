@@ -2,7 +2,7 @@
 <!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
 <FBType GUID="48f7af8f-3f6d-fa13-779f-f44080d94d76" Name="basicAlimentacaoPrensas" Comment="Alimentacao das prensas C-Press: rotas do barrilete, bombas helicoidais, PID de vazao, preparador, painel" Namespace="Hidryco.HidrycoLib">
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Hidryco" Version="1.1" Author="Hidryco" Date="21/10/2026" Remarks="1.1: velocidade de partida (stpVelInicial) e PIDs das prensas em Hz (60 Hz = 100 %); bombas continuam em %. 1.0: maquina de estados por prensa (valvulas, bomba, PID, suspensao por floculador/tanque), alocacao de bombas por no do barrilete, BO-02 reserva comum com rodizio na partida, horimetro persistente, ciclo das prensas e do preparador, SV manual, emergencia NF e disjuntores" />
+  <VersionInfo Organization="Hidryco" Version="1.2" Author="Hidryco" Date="04/11/2026" Remarks="1.2: emergencia do PCM LODO NA (TRUE = emergencia), confirmado em campo. 1.1: velocidade de partida (stpVelInicial) e PIDs das prensas em Hz (60 Hz = 100 %); bombas continuam em %. 1.0: maquina de estados por prensa (valvulas, bomba, PID, suspensao por floculador/tanque), alocacao de bombas por no do barrilete, BO-02 reserva comum com rodizio na partida, horimetro persistente, ciclo das prensas e do preparador, SV manual, emergencia NF e disjuntores" />
   <InterfaceList>
     <EventInputs>
       <Event ID="13FEA6D5249A7B77" Name="INIT" Comment="Inicializacao" />
@@ -76,7 +76,7 @@
         <With Var="tqNivelBaixo" />
       </Event>
       <Event ID="19B51840153EBC5A" Name="REQ_PAINEL" Comment="PCM LODO: emergencia e monitoramentos">
-        <With Var="pnEmergenciaNF" />
+        <With Var="pnEmergencia" />
         <With Var="pnMonitTrafo" />
         <With Var="pnMonitFonte" />
       </Event>
@@ -321,7 +321,7 @@
       <VarDeclaration ID="CC53CD434F3E136E" Name="ppFalha" Type="BOOL" Comment="Preparador em falha" />
       <VarDeclaration ID="70D9A60B95DEEE36" Name="tqNivelBaixo" Type="BOOL" Comment="Tanques de estocagem em nivel baixo" />
       <VarDeclaration ID="9252FB36847BBAB8" Name="pnRemota2Conexao" Type="INT" Comment="Remota 2 (.136): connStatusInt (1 = online)" />
-      <VarDeclaration ID="DE87224B5A8EF166" Name="pnEmergenciaNF" Type="BOOL" Comment="Emergencia do PCM LODO (contato NF: FALSE = emergencia)" />
+      <VarDeclaration ID="DE87224B5A8EF166" Name="pnEmergencia" Type="BOOL" Comment="Emergencia do PCM LODO (contato NA: TRUE = emergencia)" />
       <VarDeclaration ID="554D2A3603C18677" Name="pnMonitTrafo" Type="BOOL" Comment="Monitoramento do transformador" />
       <VarDeclaration ID="DFA71CBA2E1C52C4" Name="pnMonitFonte" Type="BOOL" Comment="Monitoramento da fonte" />
       <VarDeclaration ID="82720E0D992C7F0F" Name="pnRemota1Ok" Type="BOOL" Comment="Remota 1 (.135) comunicando (COM_OK do IO_DI32)" />
@@ -591,7 +591,7 @@
    - FT em falha durante a alimentacao: velocidade mantida + aviso;
    - preparador de polimero com ciclo ligado enquanto houver prensa ativa;
    - booster e solenoides so em manual (SV pela IHM);
-   - emergencia do PCM LODO (contato NF, como no PCM da EEE Bruto) para
+   - emergencia do PCM LODO (contato NA: TRUE = emergencia, confirmado em campo) para
      tudo; disjuntores de equipamentos existentes desligados geram aviso.
    ===================================================================== *)
 
@@ -676,11 +676,11 @@ FOR v := 0 TO 7 DO
     IF vaBloq[v] THEN mBloq := mBloq OR bitv[v]; END_IF;
 END_FOR;
 
-(* ---- 2. Painel: emergencia (NF), remotas e disjuntores ---- *)
+(* ---- 2. Painel: emergencia (NA), remotas e disjuntores ---- *)
 stsRemota1Ok := pnRemota1Ok;
 stsRemota2Ok := rem2Recebido AND (pnRemota2Conexao = 1);
 stsFalhaRemota := NOT pnRemota1Ok OR NOT stsRemota2Ok;
-emerg := pnRecebido AND pnRemota1Ok AND NOT pnEmergenciaNF;
+emerg := pnRecebido AND pnRemota1Ok AND pnEmergencia;
 stsEmergencia := emerg;
 stsMonitTrafo := pnMonitTrafo;
 stsMonitFonte := pnMonitFonte;

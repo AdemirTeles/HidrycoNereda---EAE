@@ -27,14 +27,14 @@ namespace SE.Nereda.Symbols.Mode
 		{
 			// TODO: Implement EmergencyValueChanged
 			if (Convert.ToBoolean(Emergency.Value))
-			    ModeTxt.Text = "Emergency"; 
+			    ModeTxt.Text = "Emerg\u00eancia"; 
 		}
 		
 		void AutoValueChanged(object sender, ValueChangedEventArgs e)
 		{
 			// TODO: Implement AutoValueChanged
 			if (Convert.ToBoolean(Auto.Value))
-			    ModeTxt.Text = "Automatic";    
+			    ModeTxt.Text = "Autom\u00e1tico";    
 		}
 
 		void ManualValueChanged(object sender, ValueChangedEventArgs e)
@@ -49,7 +49,7 @@ namespace SE.Nereda.Symbols.Mode
 			// TODO: Implement OFFValueChanged
 			if (Convert.ToBoolean(OFF.Value))
 			{
-			    ModeTxt.Text = "OFF"; 
+			    ModeTxt.Text = "DESL."; 
 			}
 		}	
 	}

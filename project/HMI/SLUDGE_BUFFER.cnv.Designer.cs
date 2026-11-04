@@ -170,7 +170,7 @@ namespace HMI.Main.Canvases
 			// sDisplayPv21
 			// 
 			this.sDisplayPv21.BeginInit();
-			this.sDisplayPv21._iSensorName = "Name";
+			this.sDisplayPv21._iSensorName = "N\u00edvel tanque estocagem lodo 1";
 			this.sDisplayPv21._iUnit = "m";
 			this.sDisplayPv21.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.73684210526315785D, 0D, 0D, 0.73684210526315785D, 1216D, 320D);
 			this.sDisplayPv21.Name = "sDisplayPv21";
@@ -181,7 +181,7 @@ namespace HMI.Main.Canvases
 			// sDisplayPv22
 			// 
 			this.sDisplayPv22.BeginInit();
-			this.sDisplayPv22._iSensorName = "Name";
+			this.sDisplayPv22._iSensorName = "N\u00edvel tanque estocagem lodo 2";
 			this.sDisplayPv22._iUnit = "m";
 			this.sDisplayPv22.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.73684210526315785D, 0D, 0D, 0.73684210526315752D, 1216D, 408D);
 			this.sDisplayPv22.Name = "sDisplayPv22";

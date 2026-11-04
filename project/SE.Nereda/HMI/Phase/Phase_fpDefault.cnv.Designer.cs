@@ -122,7 +122,7 @@ namespace SE.Nereda.Faceplates.Phase
 			this.State0.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(186)), ((byte)(186)), ((byte)(186))));
 			this.State0.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.State0.Name = "State0";
-			this.State0.Text = "Ready";
+			this.State0.Text = "Pronto";
 			this.State0.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// State1
@@ -131,7 +131,7 @@ namespace SE.Nereda.Faceplates.Phase
 			this.State1.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(186)), ((byte)(186)), ((byte)(186))));
 			this.State1.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.State1.Name = "State1";
-			this.State1.Text = "Starting";
+			this.State1.Text = "Partindo";
 			this.State1.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// State2
@@ -140,7 +140,7 @@ namespace SE.Nereda.Faceplates.Phase
 			this.State2.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(186)), ((byte)(186)), ((byte)(186))));
 			this.State2.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.State2.Name = "State2";
-			this.State2.Text = "Running";
+			this.State2.Text = "Em opera\u00e7\u00e3o";
 			this.State2.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// State3
@@ -149,7 +149,7 @@ namespace SE.Nereda.Faceplates.Phase
 			this.State3.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(186)), ((byte)(186)), ((byte)(186))));
 			this.State3.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.State3.Name = "State3";
-			this.State3.Text = "Stopping";
+			this.State3.Text = "Parando";
 			this.State3.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// line2
@@ -165,7 +165,7 @@ namespace SE.Nereda.Faceplates.Phase
 			this.freeText1.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular);
 			this.freeText1.Location = new NxtControl.Drawing.PointF(40D, 96D);
 			this.freeText1.Name = "freeText1";
-			this.freeText1.Text = "START";
+			this.freeText1.Text = "PARTIR";
 			// 
 			// line3
 			// 
@@ -180,7 +180,7 @@ namespace SE.Nereda.Faceplates.Phase
 			this.freeText2.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular);
 			this.freeText2.Location = new NxtControl.Drawing.PointF(40D, 176D);
 			this.freeText2.Name = "freeText2";
-			this.freeText2.Text = "Start\r\nReady";
+			this.freeText2.Text = "Partir\r\npronto";
 			// 
 			// line4
 			// 
@@ -195,7 +195,7 @@ namespace SE.Nereda.Faceplates.Phase
 			this.freeText3.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular);
 			this.freeText3.Location = new NxtControl.Drawing.PointF(40D, 272D);
 			this.freeText3.Name = "freeText3";
-			this.freeText3.Text = "STOP";
+			this.freeText3.Text = "PARAR";
 			// 
 			// line5
 			// 
@@ -210,7 +210,7 @@ namespace SE.Nereda.Faceplates.Phase
 			this.freeText4.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular);
 			this.freeText4.Location = new NxtControl.Drawing.PointF(40D, 352D);
 			this.freeText4.Name = "freeText4";
-			this.freeText4.Text = "Stop\r\nReady";
+			this.freeText4.Text = "Parar\r\npronto";
 			// 
 			// Ready2Ilck1
 			// 
@@ -225,7 +225,7 @@ namespace SE.Nereda.Faceplates.Phase
 			this.State4.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(186)), ((byte)(186)), ((byte)(186))));
 			this.State4.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.State4.Name = "State4";
-			this.State4.Text = "Aborting";
+			this.State4.Text = "Abortando";
 			this.State4.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// State5
@@ -234,7 +234,7 @@ namespace SE.Nereda.Faceplates.Phase
 			this.State5.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(186)), ((byte)(186)), ((byte)(186))));
 			this.State5.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.State5.Name = "State5";
-			this.State5.Text = "Aborted";
+			this.State5.Text = "Abortado";
 			this.State5.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// line7
@@ -250,7 +250,7 @@ namespace SE.Nereda.Faceplates.Phase
 			this.freeText5.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular);
 			this.freeText5.Location = new NxtControl.Drawing.PointF(264D, 416D);
 			this.freeText5.Name = "freeText5";
-			this.freeText5.Text = "Abort\r\nReady";
+			this.freeText5.Text = "Abortar\r\npronto";
 			// 
 			// Starting2Abort
 			// 
@@ -265,7 +265,7 @@ namespace SE.Nereda.Faceplates.Phase
 			this.State6.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(186)), ((byte)(186)), ((byte)(186))));
 			this.State6.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.State6.Name = "State6";
-			this.State6.Text = "Interlocked";
+			this.State6.Text = "Intertravado";
 			this.State6.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// line10
@@ -288,7 +288,7 @@ namespace SE.Nereda.Faceplates.Phase
 			this.freeText6.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular);
 			this.freeText6.Location = new NxtControl.Drawing.PointF(168D, 56D);
 			this.freeText6.Name = "freeText6";
-			this.freeText6.Text = "no operating conditions";
+			this.freeText6.Text = "sem cond. opera\u00e7\u00e3o";
 			// 
 			// freeText7
 			// 
@@ -296,7 +296,7 @@ namespace SE.Nereda.Faceplates.Phase
 			this.freeText7.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular);
 			this.freeText7.Location = new NxtControl.Drawing.PointF(168D, 144D);
 			this.freeText7.Name = "freeText7";
-			this.freeText7.Text = "no operating conditions";
+			this.freeText7.Text = "sem cond. opera\u00e7\u00e3o";
 			// 
 			// Run2Abort
 			// 
@@ -318,7 +318,7 @@ namespace SE.Nereda.Faceplates.Phase
 			this.freeText8.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular);
 			this.freeText8.Location = new NxtControl.Drawing.PointF(168D, 232D);
 			this.freeText8.Name = "freeText8";
-			this.freeText8.Text = "no operating conditions";
+			this.freeText8.Text = "sem cond. opera\u00e7\u00e3o";
 			// 
 			// Stopping2Abort
 			// 
@@ -340,7 +340,7 @@ namespace SE.Nereda.Faceplates.Phase
 			this.freeText9.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular);
 			this.freeText9.Location = new NxtControl.Drawing.PointF(168D, 320D);
 			this.freeText9.Name = "freeText9";
-			this.freeText9.Text = "no operating conditions";
+			this.freeText9.Text = "sem cond. opera\u00e7\u00e3o";
 			// 
 			// line16
 			// 
@@ -355,7 +355,7 @@ namespace SE.Nereda.Faceplates.Phase
 			this.freeText10.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular);
 			this.freeText10.Location = new NxtControl.Drawing.PointF(248D, 512D);
 			this.freeText10.Name = "freeText10";
-			this.freeText10.Text = "RESET and\r\noperating\r\nconditions";
+			this.freeText10.Text = "RESET e\r\ncondi\u00e7\u00f5es\r\nde opera\u00e7\u00e3o";
 			// 
 			// Aborted2Interlocked1
 			// 
@@ -377,7 +377,7 @@ namespace SE.Nereda.Faceplates.Phase
 			this.freeText11.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular);
 			this.freeText11.Location = new NxtControl.Drawing.PointF(408D, 440D);
 			this.freeText11.Name = "freeText11";
-			this.freeText11.Text = "RESET and\r\nno operating\r\nconditions";
+			this.freeText11.Text = "RESET e\r\nsem condi\u00e7\u00f5es\r\nde opera\u00e7\u00e3o";
 			// 
 			// Ready2Ilck2
 			// 
@@ -399,7 +399,7 @@ namespace SE.Nereda.Faceplates.Phase
 			this.freeText12.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular);
 			this.freeText12.Location = new NxtControl.Drawing.PointF(440D, 608D);
 			this.freeText12.Name = "freeText12";
-			this.freeText12.Text = "Operating\r\nconditions";
+			this.freeText12.Text = "Condi\u00e7\u00f5es de\r\nopera\u00e7\u00e3o";
 			// 
 			// Interlocked2Ready2
 			// 
@@ -548,7 +548,7 @@ namespace SE.Nereda.Faceplates.Phase
 			this.PhaseName.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(240)), ((byte)(240)), ((byte)(240))));
 			this.PhaseName.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
 			this.PhaseName.Name = "PhaseName";
-			this.PhaseName.Text = "Phase";
+			this.PhaseName.Text = "Fase";
 			this.PhaseName.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// roundedRectangle2
@@ -574,7 +574,7 @@ namespace SE.Nereda.Faceplates.Phase
 			this.ManStart.Name = "ManStart";
 			this.ManStart.Pen = new NxtControl.Drawing.Pen("ButtonPen");
 			this.ManStart.Radius = 4D;
-			this.ManStart.Text = "START";
+			this.ManStart.Text = "PARTIR";
 			this.ManStart.TextColor = new NxtControl.Drawing.Color("ButtonTextColor");
 			this.ManStart.TextColorMouseDown = new NxtControl.Drawing.Color("ButtonTextColorMouseDown");
 			this.ManStart.Use3DEffect = false;
@@ -589,7 +589,7 @@ namespace SE.Nereda.Faceplates.Phase
 			this.ManStop.Name = "ManStop";
 			this.ManStop.Pen = new NxtControl.Drawing.Pen("ButtonPen");
 			this.ManStop.Radius = 4D;
-			this.ManStop.Text = "STOP";
+			this.ManStop.Text = "PARAR";
 			this.ManStop.TextColor = new NxtControl.Drawing.Color("ButtonTextColor");
 			this.ManStop.TextColorMouseDown = new NxtControl.Drawing.Color("ButtonTextColorMouseDown");
 			this.ManStop.Use3DEffect = false;
@@ -616,7 +616,7 @@ namespace SE.Nereda.Faceplates.Phase
 			this.freeText13.Font = new NxtControl.Drawing.Font("LabelFont");
 			this.freeText13.Location = new NxtControl.Drawing.PointF(560D, 64D);
 			this.freeText13.Name = "freeText13";
-			this.freeText13.Text = "Manuel Mode :";
+			this.freeText13.Text = "Modo manual :";
 			// 
 			// NoActionAllowed
 			// 
@@ -624,7 +624,7 @@ namespace SE.Nereda.Faceplates.Phase
 			this.NoActionAllowed.Font = new NxtControl.Drawing.Font("LabelFont");
 			this.NoActionAllowed.Location = new NxtControl.Drawing.PointF(581D, 136D);
 			this.NoActionAllowed.Name = "NoActionAllowed";
-			this.NoActionAllowed.Text = "######## mode : No action allowed";
+			this.NoActionAllowed.Text = "Modo ########: nenhuma a\u00e7\u00e3o permitida";
 			// 
 			// FTrs1
 			// 
@@ -836,7 +836,7 @@ namespace SE.Nereda.Faceplates.Phase
 			this.roundedRectangle4.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(240)), ((byte)(240)), ((byte)(240))));
 			this.roundedRectangle4.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
 			this.roundedRectangle4.Name = "roundedRectangle4";
-			this.roundedRectangle4.Text = "Enable Forced Transitions";
+			this.roundedRectangle4.Text = "Transi\u00e7\u00f5es for\u00e7adas";
 			this.roundedRectangle4.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// group1

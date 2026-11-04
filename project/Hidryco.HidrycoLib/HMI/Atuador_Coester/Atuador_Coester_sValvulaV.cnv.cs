@@ -1,8 +1,7 @@
 /*
- * Hidryco - Valvula_Coester - sValvulaV
- * ISA-101: valvula com atuador em tubo vertical (corpo cheio = aberta, vazio = fechada, meio = intermediaria), posicao, modo e indicador de alarme.
+ * Hidryco - Atuador_Coester 2.2 - sValvulaV
+ * ISA-101: valvula com atuador em tubo vertical (cores do estado no corpo), letra do modo (A/M), estado em texto e indicador de alarme.
  */
-
 using System;
 using NxtControl.GuiFramework;
 
@@ -16,24 +15,11 @@ namespace Hidryco.HidrycoLib.Symbols.Atuador_Coester
 			Atualiza();
 		}
 
-		// Indicador de alarme (ISA-101): forma + numero de prioridade + texto; escondido quando normal.
-		// naoRec = alarme ainda nao reconhecido: a forma pisca (fase do temporizador), o texto fica fixo.
+		// Indicador de alarme (ISA-101): forma + numero de prioridade; escondido quando normal; pisca se nao reconhecido
 		bool fase = true;
-		void Indicador(Rectangle p1, FreeText p1n, Polygon p2, FreeText p2n, FreeText txt, int prioridade, string texto, bool naoRec = false)
-		{
-			bool mostra = !naoRec || fase;
-			p1.Visible = prioridade == 1 && mostra; p1n.Visible = prioridade == 1 && mostra;
-			p2.Visible = prioridade == 2 && mostra; p2n.Visible = prioridade == 2 && mostra;
-			txt.Visible = prioridade > 0;
-			txt.Text = texto;
-		}
-
-		// Estado do ALARM_BIT (STATE_1): 2 = ativo nao reconhecido, 3 = saiu nao reconhecido, 4 = ativo e saiu nao reconhecido
+		System.Timers.Timer tPisca;
 		static bool NaoRec(byte estadoAlarme) { return estadoAlarme >= 2 && estadoAlarme <= 4; }
 
-		System.Timers.Timer tPisca;
-
-		// Liga o pisca (500 ms) enquanto houver alarme nao reconhecido; desliga e deixa a forma fixa quando nao houver
 		void Pisca(bool precisa)
 		{
 			if (precisa && tPisca == null)
@@ -77,84 +63,60 @@ namespace Hidryco.HidrycoLib.Symbols.Atuador_Coester
 			base.Dispose(disposing);
 		}
 
-		static readonly string[] FALHAS = { "", "FALTA DE FASE", "SOBREAQUECIMENTO DO MOTOR", "ATUADOR SEM PROGRAMAÇÃO", "PARADA DE EMERGÊNCIA LOCAL",
-			"TORQUE NA ABERTURA", "TORQUE NO FECHAMENTO", "VÁLVULA TRAVADA", "OPERAÇÃO INCOMPLETA", "FALHA AO ENERGIZAR O MOTOR",
-			"MOTOR ENERGIZADO APÓS FIM DE CURSO", "MOTOR ENERGIZADO APÓS PARADA", "FALHA DE COMANDO", "TENSÃO ALTA", "TENSÃO BAIXA",
-			"FIM DE CURSO MECÂNICO ULTRAPASSADO", "FIM DE CURSO PROGRAMADO ULTRAPASSADO", "CARTÃO DE REDE NÃO DETECTADO" };
-		static string Falha(short c) { return c > 0 && c < FALHAS.Length ? FALHAS[c] : "FALHA DO ATUADOR"; }
-
 		// ---- dados recebidos da logica (Execute invisiveis)
-		short anim, cod, cmdMan;
-		float pos, refe;
-		bool auto, rem, loc, desl, fCom, fAtu, fPos, aCfg, aPart, bloq, disp, modul;
-		byte eCom, eAtu, ePos;
+		short anim;
+		bool auto, rem, loc, desl, fCom, fPos, fAtu;
+		byte eCom, ePos, eAtu;
 		void XANIMValueChanged(object s, ValueChangedEventArgs e) { anim = Convert.ToInt16(e.Value); Atualiza(); }
-		void XPOSValueChanged(object s, ValueChangedEventArgs e) { pos = Convert.ToSingle(e.Value); Atualiza(); }
-		void XREFValueChanged(object s, ValueChangedEventArgs e) { refe = Convert.ToSingle(e.Value); Atualiza(); }
 		void XAUTOValueChanged(object s, ValueChangedEventArgs e) { auto = Convert.ToBoolean(e.Value); Atualiza(); }
 		void XREMValueChanged(object s, ValueChangedEventArgs e) { rem = Convert.ToBoolean(e.Value); Atualiza(); }
 		void XLOCValueChanged(object s, ValueChangedEventArgs e) { loc = Convert.ToBoolean(e.Value); Atualiza(); }
 		void XDESLValueChanged(object s, ValueChangedEventArgs e) { desl = Convert.ToBoolean(e.Value); Atualiza(); }
 		void XFCOMValueChanged(object s, ValueChangedEventArgs e) { fCom = Convert.ToBoolean(e.Value); Atualiza(); }
-		void XFATUValueChanged(object s, ValueChangedEventArgs e) { fAtu = Convert.ToBoolean(e.Value); Atualiza(); }
 		void XFPOSValueChanged(object s, ValueChangedEventArgs e) { fPos = Convert.ToBoolean(e.Value); Atualiza(); }
-		void XCODValueChanged(object s, ValueChangedEventArgs e) { cod = Convert.ToInt16(e.Value); Atualiza(); }
-		void XACFGValueChanged(object s, ValueChangedEventArgs e) { aCfg = Convert.ToBoolean(e.Value); Atualiza(); }
-		void XAPARTValueChanged(object s, ValueChangedEventArgs e) { aPart = Convert.ToBoolean(e.Value); Atualiza(); }
-		void XBLOQValueChanged(object s, ValueChangedEventArgs e) { bloq = Convert.ToBoolean(e.Value); Atualiza(); }
-		void XDISPValueChanged(object s, ValueChangedEventArgs e) { disp = Convert.ToBoolean(e.Value); Atualiza(); }
-		void XMODValueChanged(object s, ValueChangedEventArgs e) { modul = Convert.ToBoolean(e.Value); Atualiza(); }
-		void XCMDMValueChanged(object s, ValueChangedEventArgs e) { cmdMan = Convert.ToInt16(e.Value); Atualiza(); }
+		void XFATUValueChanged(object s, ValueChangedEventArgs e) { fAtu = Convert.ToBoolean(e.Value); Atualiza(); }
 		void XECOMValueChanged(object s, ValueChangedEventArgs e) { eCom = Convert.ToByte(e.Value); Atualiza(); }
-		void XEATUValueChanged(object s, ValueChangedEventArgs e) { eAtu = Convert.ToByte(e.Value); Atualiza(); }
 		void XEPOSValueChanged(object s, ValueChangedEventArgs e) { ePos = Convert.ToByte(e.Value); Atualiza(); }
+		void XEATUValueChanged(object s, ValueChangedEventArgs e) { eAtu = Convert.ToByte(e.Value); Atualiza(); }
 
-		// Alarme de maior prioridade da valvula
-		int Prioridade(out string texto, out bool naoRec)
-		{
-			if (fCom) { texto = "SEM COMUNICAÇÃO"; naoRec = NaoRec(eCom); return 1; }
-			if (fAtu) { texto = Falha(cod); naoRec = NaoRec(eAtu); return 1; }
-			if (fPos) { texto = "POSIÇÃO NÃO ATINGIDA"; naoRec = NaoRec(ePos); return 2; }
-			if (aCfg) { texto = "ATUADOR FORA DO POSICIONAMENTO CONTÍNUO"; naoRec = false; return 2; }
-			if (aPart) { texto = "PARTIDAS/DIA ACIMA DO LIMITE"; naoRec = false; return 2; }
-			texto = ""; naoRec = false; return 0;
-		}
-		bool AlgumNaoRec() { return (fCom && NaoRec(eCom)) || (fAtu && NaoRec(eAtu)) || (fPos && NaoRec(ePos)); }
-		// STS_ANIMACAO (codificacao do legado): 0 fechada, 1 aberta, 2 falha, 3 intermediaria parada, 4 abrindo, 5 fechando, 99 fins de curso incoerentes
-		string Estado()
-		{
-			if (fCom) return "SEM COMUNICAÇÃO";
-			if (anim == 2) return "FALHA";
-			if (!rem) return "FORA DE REMOTO";
-			switch (anim)
-			{
-				case 0: return "FECHADA";
-				case 1: return "ABERTA";
-				case 3: return "INTERMEDIÁRIA";
-				case 4: return "ABRINDO";
-				case 5: return "FECHANDO";
-				case 99: return "FINS DE CURSO INCOERENTES";
-			}
-			return "-";
-		}
-		string Chave() { return fCom ? "????" : (rem ? "REMOTO" : (loc ? "LOCAL" : (desl ? "DESLIGADO" : "-"))); }
+		// Cores no padrao dos motores e valvulas do projeto (HidrycoColors): aberta = vermelho (Ligado), fechada = verde (Desligado),
+		// falha ou sem comunicacao = amarelo (Falha); intermediaria parada = meio verde / meio vermelho;
+		// abrindo = metade de cima vermelho fixo e metade de baixo piscando; fechando = metade de cima verde fixo e metade de baixo piscando.
+		static readonly NxtControl.Drawing.Color ABERTA = Hidryco.HidrycoLib.SupportClasses.HidrycoColors.Ligado;
+		static readonly NxtControl.Drawing.Color FECHADA = Hidryco.HidrycoLib.SupportClasses.HidrycoColors.Desligado;
+		static readonly NxtControl.Drawing.Color FALHA = Hidryco.HidrycoLib.SupportClasses.HidrycoColors.Falha;
 
-		static readonly NxtControl.Drawing.Color CHEIO = new NxtControl.Drawing.Color(64, 64, 64);
-		static readonly NxtControl.Drawing.Color MEIO = new NxtControl.Drawing.Color(160, 160, 160);
-		static readonly NxtControl.Drawing.Color VAZIO = new NxtControl.Drawing.Color(255, 255, 255);
-		static readonly NxtControl.Drawing.Color SEMCOM = new NxtControl.Drawing.Color(224, 224, 224);
+		// STS_ANIMACAO: 0 fechada, 1 aberta, 2 falha, 3 intermediaria parada, 4 abrindo, 5 fechando
+		static string Texto(short a) { switch (a) { case 0: return "FECHADA"; case 1: return "ABERTA"; case 4: return "ABRINDO"; case 5: return "FECHANDO"; case 2: return "FALHA"; } return "PARADA"; }
 
 		void Atualiza()
 		{
-			string t; bool nr; int p = Prioridade(out t, out nr);
-			Indicador(alP1, alP1n, alP2, alP2n, alTxt, p, "", nr);
-			Pisca(AlgumNaoRec());
-			NxtControl.Drawing.Color c = fCom ? SEMCOM : (anim == 1 ? CHEIO : (anim == 0 ? VAZIO : MEIO));
-			corpoE.BrushColor = c;
-			corpoD.BrushColor = c;
+			int p = (fCom || fAtu) ? 1 : (fPos ? 2 : 0);
+			bool nr = (fCom && NaoRec(eCom)) || (fAtu && NaoRec(eAtu)) || (fPos && NaoRec(ePos));
+			bool mostra = !nr || fase;
+			alP1.Visible = p == 1 && mostra; alP1n.Visible = p == 1 && mostra;
+			alP2.Visible = p == 2 && mostra; alP2n.Visible = p == 2 && mostra;
+			alTxt.Visible = false;
+			bool movendo = !fCom && (anim == 4 || anim == 5);
+			Pisca(nr || movendo);
+			NxtControl.Drawing.Color e, d;
+			if (fCom || anim == 2) { e = FALHA; d = FALHA; }
+			else if (anim == 1) { e = ABERTA; d = ABERTA; }
+			else if (anim == 0) { e = FECHADA; d = FECHADA; }
+			else if (anim == 4) { e = ABERTA; d = fase ? ABERTA : FECHADA; }
+			else if (anim == 5) { e = FECHADA; d = fase ? FECHADA : ABERTA; }
+			else { e = FECHADA; d = ABERTA; }
+			corpoE.BrushColor = e;
+			corpoD.BrushColor = d;
+			// caixa R/L e A/M no padrao dos motores; o estado fora do normal (L, D, M) fica em preto, o normal (R, A) em cinza
+			tRem.Text = fCom ? "?" : (rem ? "R" : (desl ? "D" : (loc ? "L" : "?")));
+			tRem.Color = (!fCom && rem) ? NORMAL : FORA;
 			tModo.Text = auto ? "A" : "M";
-			tPos.Text = fCom ? "????" : ((anim == 4 ? "▲ " : (anim == 5 ? "▼ " : "")) + pos.ToString("0") + " %" + (rem ? "" : " L"));   // ▲ abrindo, ▼ fechando
+			tModo.Color = auto ? NORMAL : FORA;
+			tPos.Text = fCom ? "????" : Texto(anim);
 		}
 
+		static readonly NxtControl.Drawing.Color NORMAL = new NxtControl.Drawing.Color("LabelTextColor");
+		static readonly NxtControl.Drawing.Color FORA = new NxtControl.Drawing.Color(0, 0, 0);
 	}
 }

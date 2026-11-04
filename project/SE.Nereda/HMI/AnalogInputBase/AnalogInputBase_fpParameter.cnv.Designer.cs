@@ -445,7 +445,7 @@ namespace SE.Nereda.Faceplates.AnalogInputBase
 			this.labelS1.Name = "labelS1";
 			this.labelS1.NameSpace = "SE.App2CommonProcess";
 			this.labelS1.SeperatorVisiblity = true;
-			this.labelS1.Text = "Enable Scale";
+			this.labelS1.Text = "Habilitar escala";
 			this.labelS1.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleRight;
 			this.labelS1.TextColor = new NxtControl.Drawing.Color("FpLabelText");
 			this.labelS1.TextKey = "LabelEnScale";
@@ -459,7 +459,7 @@ namespace SE.Nereda.Faceplates.AnalogInputBase
 			this.labelS2.Name = "labelS2";
 			this.labelS2.NameSpace = "SE.App2CommonProcess";
 			this.labelS2.SeperatorVisiblity = true;
-			this.labelS2.Text = "Use Limits";
+			this.labelS2.Text = "Usar limites";
 			this.labelS2.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleRight;
 			this.labelS2.TextColor = new NxtControl.Drawing.Color("FpLabelText");
 			this.labelS2.TextKey = "LabelUseLimits";
@@ -473,7 +473,7 @@ namespace SE.Nereda.Faceplates.AnalogInputBase
 			this.labelS3.Name = "labelS3";
 			this.labelS3.NameSpace = "SE.App2CommonProcess";
 			this.labelS3.SeperatorVisiblity = true;
-			this.labelS3.Text = "Min Raw";
+			this.labelS3.Text = "Bruto m\u00edn.";
 			this.labelS3.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleRight;
 			this.labelS3.TextColor = new NxtControl.Drawing.Color("FpLabelText");
 			this.labelS3.TextKey = "LabelMinRaw";
@@ -487,7 +487,7 @@ namespace SE.Nereda.Faceplates.AnalogInputBase
 			this.labelS4.Name = "labelS4";
 			this.labelS4.NameSpace = "SE.App2CommonProcess";
 			this.labelS4.SeperatorVisiblity = true;
-			this.labelS4.Text = "Max Raw";
+			this.labelS4.Text = "Bruto m\u00e1x.";
 			this.labelS4.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleRight;
 			this.labelS4.TextColor = new NxtControl.Drawing.Color("FpLabelText");
 			this.labelS4.TextKey = "LabelMaxRaw";
@@ -501,7 +501,7 @@ namespace SE.Nereda.Faceplates.AnalogInputBase
 			this.labelS5.Name = "labelS5";
 			this.labelS5.NameSpace = "SE.App2CommonProcess";
 			this.labelS5.SeperatorVisiblity = true;
-			this.labelS5.Text = "Min Pv";
+			this.labelS5.Text = "PV m\u00edn.";
 			this.labelS5.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleRight;
 			this.labelS5.TextColor = new NxtControl.Drawing.Color("FpLabelText");
 			this.labelS5.TextKey = "LabelMinPv";
@@ -515,7 +515,7 @@ namespace SE.Nereda.Faceplates.AnalogInputBase
 			this.labelS6.Name = "labelS6";
 			this.labelS6.NameSpace = "SE.App2CommonProcess";
 			this.labelS6.SeperatorVisiblity = true;
-			this.labelS6.Text = "Max Pv";
+			this.labelS6.Text = "PV m\u00e1x.";
 			this.labelS6.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleRight;
 			this.labelS6.TextColor = new NxtControl.Drawing.Color("FpLabelText");
 			this.labelS6.TextKey = "LabelMaxPv";
@@ -529,7 +529,7 @@ namespace SE.Nereda.Faceplates.AnalogInputBase
 			this.labelS7.Name = "labelS7";
 			this.labelS7.NameSpace = "SE.App2CommonProcess";
 			this.labelS7.SeperatorVisiblity = true;
-			this.labelS7.Text = "Cutoff Pv";
+			this.labelS7.Text = "Corte PV";
 			this.labelS7.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleRight;
 			this.labelS7.TextColor = new NxtControl.Drawing.Color("FpLabelText");
 			this.labelS7.TextKey = "LabelCutoff";
@@ -543,7 +543,7 @@ namespace SE.Nereda.Faceplates.AnalogInputBase
 			this.labelS8.Name = "labelS8";
 			this.labelS8.NameSpace = "SE.App2CommonProcess";
 			this.labelS8.SeperatorVisiblity = true;
-			this.labelS8.Text = "Pv Offset";
+			this.labelS8.Text = "Offset PV";
 			this.labelS8.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleRight;
 			this.labelS8.TextColor = new NxtControl.Drawing.Color("FpLabelText");
 			this.labelS8.TextKey = "LabelOffset";
@@ -557,7 +557,7 @@ namespace SE.Nereda.Faceplates.AnalogInputBase
 			this.labelS10.Name = "labelS10";
 			this.labelS10.NameSpace = "SE.App2CommonProcess";
 			this.labelS10.SeperatorVisiblity = true;
-			this.labelS10.Text = "Filter Time";
+			this.labelS10.Text = "Tempo de filtro";
 			this.labelS10.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleRight;
 			this.labelS10.TextColor = new NxtControl.Drawing.Color("FpLabelText");
 			this.labelS10.TextKey = "LabelFilterTime";
@@ -571,7 +571,7 @@ namespace SE.Nereda.Faceplates.AnalogInputBase
 			this.labelS11.Name = "labelS11";
 			this.labelS11.NameSpace = "SE.App2CommonProcess";
 			this.labelS11.SeperatorVisiblity = true;
-			this.labelS11.Text = "Cycle Time";
+			this.labelS11.Text = "Tempo de ciclo";
 			this.labelS11.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleRight;
 			this.labelS11.TextColor = new NxtControl.Drawing.Color("FpLabelText");
 			this.labelS11.TextKey = "LabelCycleTime";
@@ -585,7 +585,7 @@ namespace SE.Nereda.Faceplates.AnalogInputBase
 			this.labelS12.Name = "labelS12";
 			this.labelS12.NameSpace = "SE.App2CommonProcess";
 			this.labelS12.SeperatorVisiblity = true;
-			this.labelS12.Text = "Smooth Type";
+			this.labelS12.Text = "Tipo de suaviza\u00e7\u00e3o";
 			this.labelS12.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleRight;
 			this.labelS12.TextColor = new NxtControl.Drawing.Color("FpLabelText");
 			this.labelS12.TextKey = "LabelSmoothType";
@@ -599,7 +599,7 @@ namespace SE.Nereda.Faceplates.AnalogInputBase
 			this.labelS13.Name = "labelS13";
 			this.labelS13.NameSpace = "SE.App2CommonProcess";
 			this.labelS13.SeperatorVisiblity = true;
-			this.labelS13.Text = "Time Difference";
+			this.labelS13.Text = "Diferen\u00e7a de tempo";
 			this.labelS13.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleRight;
 			this.labelS13.TextColor = new NxtControl.Drawing.Color("FpLabelText");
 			this.labelS13.TextKey = "LabelTimeDifference";
@@ -613,7 +613,7 @@ namespace SE.Nereda.Faceplates.AnalogInputBase
 			this.labelS14.Name = "labelS14";
 			this.labelS14.NameSpace = "SE.App2CommonProcess";
 			this.labelS14.SeperatorVisiblity = true;
-			this.labelS14.Text = "Value Difference";
+			this.labelS14.Text = "Diferen\u00e7a de valor";
 			this.labelS14.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleRight;
 			this.labelS14.TextColor = new NxtControl.Drawing.Color("FpLabelText");
 			this.labelS14.TextKey = "LabelValueDifference";
@@ -627,7 +627,7 @@ namespace SE.Nereda.Faceplates.AnalogInputBase
 			this.labelS15.Name = "labelS15";
 			this.labelS15.NameSpace = "SE.App2CommonProcess";
 			this.labelS15.SeperatorVisiblity = true;
-			this.labelS15.Text = "Bad Pv Selection";
+			this.labelS15.Text = "Sele\u00e7\u00e3o de PV ruim";
 			this.labelS15.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleRight;
 			this.labelS15.TextColor = new NxtControl.Drawing.Color("FpLabelText");
 			this.labelS15.TextKey = "BadPvSel";
@@ -641,7 +641,7 @@ namespace SE.Nereda.Faceplates.AnalogInputBase
 			this.labelS16.Name = "labelS16";
 			this.labelS16.NameSpace = "SE.App2CommonProcess";
 			this.labelS16.SeperatorVisiblity = true;
-			this.labelS16.Text = "Bad Pv";
+			this.labelS16.Text = "PV ruim";
 			this.labelS16.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleRight;
 			this.labelS16.TextColor = new NxtControl.Drawing.Color("FpLabelText");
 			this.labelS16.TextKey = "BadPv";
@@ -655,7 +655,7 @@ namespace SE.Nereda.Faceplates.AnalogInputBase
 			this.labelS17.Name = "labelS17";
 			this.labelS17.NameSpace = "SE.App2CommonProcess";
 			this.labelS17.SeperatorVisiblity = true;
-			this.labelS17.Text = "Override";
+			this.labelS17.Text = "For\u00e7ado";
 			this.labelS17.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleRight;
 			this.labelS17.TextColor = new NxtControl.Drawing.Color("FpLabelText");
 			this.labelS17.TextKey = "LabelOverride";
@@ -669,7 +669,7 @@ namespace SE.Nereda.Faceplates.AnalogInputBase
 			this.labelS18.Name = "labelS18";
 			this.labelS18.NameSpace = "SE.App2CommonProcess";
 			this.labelS18.SeperatorVisiblity = true;
-			this.labelS18.Text = "Override Value";
+			this.labelS18.Text = "Valor for\u00e7ado";
 			this.labelS18.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleRight;
 			this.labelS18.TextColor = new NxtControl.Drawing.Color("FpLabelText");
 			this.labelS18.TextKey = "LabelOverrideValue";
@@ -683,7 +683,7 @@ namespace SE.Nereda.Faceplates.AnalogInputBase
 			this.labelS19.Name = "labelS19";
 			this.labelS19.NameSpace = "SE.App2CommonProcess";
 			this.labelS19.SeperatorVisiblity = true;
-			this.labelS19.Text = "Input Value";
+			this.labelS19.Text = "Valor de entrada";
 			this.labelS19.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleRight;
 			this.labelS19.TextColor = new NxtControl.Drawing.Color("FpLabelText");
 			this.labelS19.TextKey = "InputValue";

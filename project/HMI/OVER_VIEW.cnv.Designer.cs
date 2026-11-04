@@ -76,7 +76,7 @@ namespace HMI.Main.Canvases
 			// Reactor1
 			// 
 			this.Reactor1.BeginInit();
-			this.Reactor1._iREACTOR = "Reactor 1";
+			this.Reactor1._iREACTOR = "REATOR NEREDA 1";
 			this.Reactor1.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.48571428571428571D, 0D, 0D, 0.48571428571428571D, 464D, 160D);
 			this.Reactor1.Name = "Reactor1";
 			this.Reactor1.SecurityToken = ((uint)(4294967295u));
@@ -86,7 +86,7 @@ namespace HMI.Main.Canvases
 			// Reactor2
 			// 
 			this.Reactor2.BeginInit();
-			this.Reactor2._iREACTOR = "Reactor 1";
+			this.Reactor2._iREACTOR = "REATOR NEREDA 2";
 			this.Reactor2.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.48571428571428571D, 0D, 0D, 0.48571428571428571D, 464D, 392D);
 			this.Reactor2.Name = "Reactor2";
 			this.Reactor2.SecurityToken = ((uint)(4294967295u));

@@ -55,7 +55,7 @@ namespace SE.Nereda.Faceplates.AnalogInput
 			this.freeText1.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular);
 			this.freeText1.Location = new NxtControl.Drawing.PointF(8D, 0D);
 			this.freeText1.Name = "freeText1";
-			this.freeText1.Text = "Colors :";
+			this.freeText1.Text = "Cores :";
 			// 
 			// Color1
 			// 

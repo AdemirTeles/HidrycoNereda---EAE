@@ -43,7 +43,7 @@ namespace SE.Nereda.Symbols.EmergencyReactor_2
 			this.rectangle6.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular);
 			this.rectangle6.Name = "rectangle6";
 			this.rectangle6.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.BlinkColor("SE.HwCommon.DevLEDOrangeRedFlash"), 2F, NxtControl.Drawing.DashStyle.Solid);
-			this.rectangle6.Text = "Sum of Steps Duration Exceeds The Actual Reactor Cycle Time";
+			this.rectangle6.Text = "Soma dos passos excede o tempo de ciclo atual do reator";
 			this.rectangle6.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// group1

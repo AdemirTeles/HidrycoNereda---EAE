@@ -170,7 +170,7 @@ namespace SE.Nereda.Faceplates.Phase
 		void REQ_PHASE_NAME_Fired_EventHandler(object sender, SE.Nereda.Symbols.Phase.REQ_PHASE_NAMEEventArgs e)
 		{
 			// TODO: Implement REQ_PHASE_NAME_Fired_EventHandler
-			PhaseName.Text = "Phase: " + e.PhaseName;
+			PhaseName.Text = "Fase: " + e.PhaseName;
 		}
 
 		void CURR_MODE_Fired_EventHandler(object sender, SE.Nereda.Symbols.Phase.CURR_MODEEventArgs e)
@@ -178,12 +178,12 @@ namespace SE.Nereda.Faceplates.Phase
 			// TODO: Implement CURR_MODE_Fired_EventHandler
 			if(e.CurrMode == 0){ //Automatic Mode
 				ManStart.Enabled = ManStop.Enabled = ManReset.Enabled = false;
-				NoActionAllowed.Text = "Automatic mode : No action allowed";
+				NoActionAllowed.Text = "Modo autom\u00e1tico: nenhuma a\u00e7\u00e3o permitida";
 				NoActionAllowed.Visible = true;
 			}
 			else if(e.CurrMode == 1){ //OFF Mode
 				ManStart.Enabled = ManStop.Enabled = ManReset.Enabled = false;
-				NoActionAllowed.Text = "OFF mode : No action allowed";
+				NoActionAllowed.Text = "Modo desligado: nenhuma a\u00e7\u00e3o permitida";
 				NoActionAllowed.Visible = true;
 				FireEvent_MAN_START(false);
 				FireEvent_MAN_STOP(false);
@@ -195,7 +195,7 @@ namespace SE.Nereda.Faceplates.Phase
 			}
 			else if(e.CurrMode == 3){ //Emergency Mode
 				ManStart.Enabled = ManStop.Enabled = ManReset.Enabled = false;
-				NoActionAllowed.Text = "Emergency mode : No action allowed";
+				NoActionAllowed.Text = "Modo emerg\u00eancia: nenhuma a\u00e7\u00e3o permitida";
 				NoActionAllowed.Visible = true;
 			}
 		}

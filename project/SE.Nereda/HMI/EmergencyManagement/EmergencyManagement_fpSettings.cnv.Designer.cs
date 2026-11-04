@@ -56,7 +56,7 @@ namespace SE.Nereda.Faceplates.EmergencyManagement
 			new NxtControl.Drawing.PointF(8D, 8D),
 			new NxtControl.Drawing.PointF(264D, 8D),
 			new NxtControl.Drawing.PointF(296D, 32D)});
-			this.polygon1.Text = "EMERGENCY MANAGEMENT";
+			this.polygon1.Text = "GEST\u00c3O DE EMERG\u00caNCIA";
 			this.polygon1.TextColor = new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(0)));
 			// 
 			// rectangle1
@@ -72,7 +72,7 @@ namespace SE.Nereda.Faceplates.EmergencyManagement
 			this.freeText1.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeText1.Location = new NxtControl.Drawing.PointF(16D, 37D);
 			this.freeText1.Name = "freeText1";
-			this.freeText1.Text = "Nominal Cycle Time (CT_Nominal) :";
+			this.freeText1.Text = "Ciclo nominal (CT_Nominal) :";
 			// 
 			// CT_Nominal
 			// 
@@ -108,7 +108,7 @@ namespace SE.Nereda.Faceplates.EmergencyManagement
 			this.freeText2.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeText2.Location = new NxtControl.Drawing.PointF(16D, 77D);
 			this.freeText2.Name = "freeText2";
-			this.freeText2.Text = "Emergency Start Up Delay :";
+			this.freeText2.Text = "Atraso de partida em emerg\u00eancia :";
 			// 
 			// drawnButton2
 			// 
@@ -120,7 +120,7 @@ namespace SE.Nereda.Faceplates.EmergencyManagement
 			this.drawnButton2.OpenFaceplates.Add(new NxtControl.GuiFramework.OpenFaceplate("fpEquations", NxtControl.GuiFramework.MouseButtonType.Click));
 			this.drawnButton2.Pen = new NxtControl.Drawing.Pen("ButtonPen");
 			this.drawnButton2.Radius = 4D;
-			this.drawnButton2.Text = "Equations";
+			this.drawnButton2.Text = "Equa\u00e7\u00f5es";
 			this.drawnButton2.TextColor = new NxtControl.Drawing.Color("ButtonTextColor");
 			this.drawnButton2.TextColorMouseDown = new NxtControl.Drawing.Color("ButtonTextColorMouseDown");
 			this.drawnButton2.Use3DEffect = false;
@@ -131,7 +131,7 @@ namespace SE.Nereda.Faceplates.EmergencyManagement
 			this.freeText4.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeText4.Location = new NxtControl.Drawing.PointF(16D, 156D);
 			this.freeText4.Name = "freeText4";
-			this.freeText4.Text = "Emergency Management Equations :";
+			this.freeText4.Text = "Equa\u00e7\u00f5es de emerg\u00eancia :";
 			// 
 			// ForceAvaibility
 			// 
@@ -166,7 +166,7 @@ namespace SE.Nereda.Faceplates.EmergencyManagement
 			this.freeText3.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeText3.Location = new NxtControl.Drawing.PointF(16D, 117D);
 			this.freeText3.Name = "freeText3";
-			this.freeText3.Text = "Minimum Settle Time :";
+			this.freeText3.Text = "Tempo m\u00ednimo de decanta\u00e7\u00e3o :";
 			// 
 			// MinSettleTime
 			// 
@@ -216,7 +216,7 @@ namespace SE.Nereda.Faceplates.EmergencyManagement
 			this.freeText5.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeText5.Location = new NxtControl.Drawing.PointF(16D, 200D);
 			this.freeText5.Name = "freeText5";
-			this.freeText5.Text = "FB IBL1 - Influent buffer level :";
+			this.freeText5.Text = "FB IBL1 - N\u00edvel B4000 :";
 			// 
 			// fpSettings
 			// 

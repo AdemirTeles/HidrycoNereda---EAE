@@ -1,6 +1,7 @@
 /*
- * Hidryco - Valvula_Coester - fpDefault
- * ISA-101: estado, posicao (barra e referencia), alarme por prioridade, chave/modo/disponibilidade, comando manual, reset e diagnostico.
+ * Hidryco - Atuador_Coester 2.1 - fpDefault
+ * ISA-101: estado, posicao, alarme por prioridade, chave/modo/disponibilidade, comando manual, tempos, reset e diagnostico.
+ * Parar e posicionar so aparecem no posicionador (STS_POSICIONADOR, 700-VC-01); as demais so abrir e fechar.
  */
 
 using System;
@@ -16,24 +17,11 @@ namespace Hidryco.HidrycoLib.Faceplates.Atuador_Coester
 			Atualiza();
 		}
 
-		// Indicador de alarme (ISA-101): forma + numero de prioridade + texto; escondido quando normal.
-		// naoRec = alarme ainda nao reconhecido: a forma pisca (fase do temporizador), o texto fica fixo.
+		// Indicador de alarme (ISA-101): forma + numero de prioridade; escondido quando normal; pisca se nao reconhecido
 		bool fase = true;
-		void Indicador(Rectangle p1, FreeText p1n, Polygon p2, FreeText p2n, FreeText txt, int prioridade, string texto, bool naoRec = false)
-		{
-			bool mostra = !naoRec || fase;
-			p1.Visible = prioridade == 1 && mostra; p1n.Visible = prioridade == 1 && mostra;
-			p2.Visible = prioridade == 2 && mostra; p2n.Visible = prioridade == 2 && mostra;
-			txt.Visible = prioridade > 0;
-			txt.Text = texto;
-		}
-
-		// Estado do ALARM_BIT (STATE_1): 2 = ativo nao reconhecido, 3 = saiu nao reconhecido, 4 = ativo e saiu nao reconhecido
+		System.Timers.Timer tPisca;
 		static bool NaoRec(byte estadoAlarme) { return estadoAlarme >= 2 && estadoAlarme <= 4; }
 
-		System.Timers.Timer tPisca;
-
-		// Liga o pisca (500 ms) enquanto houver alarme nao reconhecido; desliga e deixa a forma fixa quando nao houver
 		void Pisca(bool precisa)
 		{
 			if (precisa && tPisca == null)
@@ -84,9 +72,9 @@ namespace Hidryco.HidrycoLib.Faceplates.Atuador_Coester
 		static string Falha(short c) { return c > 0 && c < FALHAS.Length ? FALHAS[c] : "FALHA DO ATUADOR"; }
 
 		// ---- dados recebidos da logica (Execute invisiveis)
-		short anim, cod, cmdMan;
+		short anim, cod;
 		float pos, refe;
-		bool auto, rem, loc, desl, fCom, fAtu, fPos, aCfg, aPart, bloq, disp, modul;
+		bool auto, rem, loc, desl, fCom, fAtu, fPos, disp, posic;
 		byte eCom, eAtu, ePos;
 		void XANIMValueChanged(object s, ValueChangedEventArgs e) { anim = Convert.ToInt16(e.Value); Atualiza(); }
 		void XPOSValueChanged(object s, ValueChangedEventArgs e) { pos = Convert.ToSingle(e.Value); Atualiza(); }
@@ -99,33 +87,26 @@ namespace Hidryco.HidrycoLib.Faceplates.Atuador_Coester
 		void XFATUValueChanged(object s, ValueChangedEventArgs e) { fAtu = Convert.ToBoolean(e.Value); Atualiza(); }
 		void XFPOSValueChanged(object s, ValueChangedEventArgs e) { fPos = Convert.ToBoolean(e.Value); Atualiza(); }
 		void XCODValueChanged(object s, ValueChangedEventArgs e) { cod = Convert.ToInt16(e.Value); Atualiza(); }
-		void XACFGValueChanged(object s, ValueChangedEventArgs e) { aCfg = Convert.ToBoolean(e.Value); Atualiza(); }
-		void XAPARTValueChanged(object s, ValueChangedEventArgs e) { aPart = Convert.ToBoolean(e.Value); Atualiza(); }
-		void XBLOQValueChanged(object s, ValueChangedEventArgs e) { bloq = Convert.ToBoolean(e.Value); Atualiza(); }
 		void XDISPValueChanged(object s, ValueChangedEventArgs e) { disp = Convert.ToBoolean(e.Value); Atualiza(); }
-		void XMODValueChanged(object s, ValueChangedEventArgs e) { modul = Convert.ToBoolean(e.Value); Atualiza(); }
-		void XCMDMValueChanged(object s, ValueChangedEventArgs e) { cmdMan = Convert.ToInt16(e.Value); Atualiza(); }
+		void XMODValueChanged(object s, ValueChangedEventArgs e) { posic = Convert.ToBoolean(e.Value); Atualiza(); }
 		void XECOMValueChanged(object s, ValueChangedEventArgs e) { eCom = Convert.ToByte(e.Value); Atualiza(); }
 		void XEATUValueChanged(object s, ValueChangedEventArgs e) { eAtu = Convert.ToByte(e.Value); Atualiza(); }
 		void XEPOSValueChanged(object s, ValueChangedEventArgs e) { ePos = Convert.ToByte(e.Value); Atualiza(); }
 
-		// Alarme de maior prioridade da valvula
+		// Alarme de maior prioridade
 		int Prioridade(out string texto, out bool naoRec)
 		{
 			if (fCom) { texto = "SEM COMUNICAÇÃO"; naoRec = NaoRec(eCom); return 1; }
 			if (fAtu) { texto = Falha(cod); naoRec = NaoRec(eAtu); return 1; }
-			if (fPos) { texto = "POSIÇÃO NÃO ATINGIDA"; naoRec = NaoRec(ePos); return 2; }
-			if (aCfg) { texto = "ATUADOR FORA DO POSICIONAMENTO CONTÍNUO"; naoRec = false; return 2; }
-			if (aPart) { texto = "PARTIDAS/DIA ACIMA DO LIMITE"; naoRec = false; return 2; }
+			if (fPos) { texto = posic ? "NÃO ATINGIU A POSIÇÃO" : "NÃO ABRIU / NÃO FECHOU"; naoRec = NaoRec(ePos); return 2; }
 			texto = ""; naoRec = false; return 0;
 		}
-		bool AlgumNaoRec() { return (fCom && NaoRec(eCom)) || (fAtu && NaoRec(eAtu)) || (fPos && NaoRec(ePos)); }
-		// STS_ANIMACAO (codificacao do legado): 0 fechada, 1 aberta, 2 falha, 3 intermediaria parada, 4 abrindo, 5 fechando, 99 fins de curso incoerentes
+		// STS_ANIMACAO: 0 fechada, 1 aberta, 2 falha, 3 intermediaria parada, 4 abrindo, 5 fechando
 		string Estado()
 		{
 			if (fCom) return "SEM COMUNICAÇÃO";
-			if (anim == 2) return "FALHA";
-			if (!rem) return "FORA DE REMOTO";
+			if (fAtu) return "FALHA DO ATUADOR";
+			if (fPos) return posic ? "NÃO ATINGIU A POSIÇÃO" : "NÃO ABRIU / NÃO FECHOU";
 			switch (anim)
 			{
 				case 0: return "FECHADA";
@@ -133,44 +114,52 @@ namespace Hidryco.HidrycoLib.Faceplates.Atuador_Coester
 				case 3: return "INTERMEDIÁRIA";
 				case 4: return "ABRINDO";
 				case 5: return "FECHANDO";
-				case 99: return "FINS DE CURSO INCOERENTES";
 			}
 			return "-";
 		}
 		string Chave() { return fCom ? "????" : (rem ? "REMOTO" : (loc ? "LOCAL" : (desl ? "DESLIGADO" : "-"))); }
 
-		static readonly string[] CMD = { "parar (mantém a posição)", "abrir", "fechar", "posicionar" };
+		static readonly NxtControl.Drawing.Color ATIVO = new NxtControl.Drawing.Color(96, 96, 96);
+		static readonly NxtControl.Drawing.Color INATIVO = new NxtControl.Drawing.Color(208, 208, 208);
+		static readonly NxtControl.Drawing.Color BRANCO = new NxtControl.Drawing.Color(255, 255, 255);
+		static readonly NxtControl.Drawing.Color PRETO = new NxtControl.Drawing.Color(0, 0, 0);
 
 		void Atualiza()
 		{
 			string t; bool nr; int p = Prioridade(out t, out nr);
-			Indicador(alP1, alP1n, alP2, alP2n, alTxt, p, t, nr);
-			Pisca(AlgumNaoRec());
+			bool mostra = !nr || fase;
+			alP1.Visible = p == 1 && mostra; alP1n.Visible = p == 1 && mostra;
+			alP2.Visible = p == 2 && mostra; alP2n.Visible = p == 2 && mostra;
+			alTxt.Visible = p > 0; alTxt.Text = t;
+			Pisca((fCom && NaoRec(eCom)) || (fAtu && NaoRec(eAtu)) || (fPos && NaoRec(ePos)));
 			textoEstado.Text = Estado();
 			float pp = Math.Max(0F, Math.Min(100F, pos));
 			float rr = Math.Max(0F, Math.Min(100F, refe));
 			barra.Bounds = new NxtControl.Drawing.RectF(20F, 72F, 320F * pp / 100F, 18F);
 			marcaRef.Location = new NxtControl.Drawing.PointF(14F + 320F * rr / 100F, 92F);
-			vPos.Text = fCom ? "Atual: ????" : ("Atual: " + pos.ToString("0.0") + " %");
-			vRef.Text = "Referência: " + refe.ToString("0.0") + " %";
+			marcaRef.Visible = posic;
+			vPos.Text = fCom ? "Atual: ????" : ("Atual: " + pos.ToString("0") + " %");
+			vRef.Text = posic ? ("Referência: " + refe.ToString("0") + " %") : "";
 			textoChave.Text = "Chave: " + Chave();
 			textoDisp.Text = "Disp. automático: " + (disp ? "SIM" : "NÃO");
-			btnAutomatico.BrushColor = auto ? new NxtControl.Drawing.Color(96, 96, 96) : new NxtControl.Drawing.Color(208, 208, 208);
-			btnManual.BrushColor = !auto ? new NxtControl.Drawing.Color(96, 96, 96) : new NxtControl.Drawing.Color(208, 208, 208);
-			btnAutomatico.TextColor = auto ? new NxtControl.Drawing.Color(255, 255, 255) : new NxtControl.Drawing.Color(0, 0, 0);
-			btnManual.TextColor = !auto ? new NxtControl.Drawing.Color(255, 255, 255) : new NxtControl.Drawing.Color(0, 0, 0);
-			btnAbrir.Enabled = !auto; btnFechar.Enabled = !auto; btnParar.Enabled = !auto; btnPosicionar.Enabled = !auto;
-			textoCmd.Text = auto ? "Em automático: comandos manuais desabilitados" : ("Comando atual: " + (cmdMan >= 0 && cmdMan < CMD.Length ? CMD[cmdMan] : "-"));
-			textoBloq.Text = bloq ? "INTERTRAVADA: mantém a posição" : "";
+			btnAutomatico.BrushColor = auto ? ATIVO : INATIVO;
+			btnManual.BrushColor = !auto ? ATIVO : INATIVO;
+			btnAutomatico.TextColor = auto ? BRANCO : PRETO;
+			btnManual.TextColor = !auto ? BRANCO : PRETO;
+			bool podeMan = !auto && rem && !fCom;
+			btnAbrir.Enabled = podeMan; btnFechar.Enabled = podeMan; btnParar.Enabled = podeMan; btnPosicionar.Enabled = podeMan;
+			// parar e posicionar so no posicionador
+			btnParar.Visible = posic; rSp.Visible = posic; vSpMan.Visible = posic; btnPosicionar.Visible = posic;
+			textoCmd.Text = auto ? "Em automático: comandos manuais desabilitados"
+				: (fCom ? "Sem comunicação: sem comando" : (rem ? "Manual: comando pelos botões" : "Fora de remoto: comando no atuador"));
 		}
 
 		void BtnAutomaticoClick(object sender, EventArgs e) { FireEvent_E_STS_AUTOMATICO(true); }
 		void BtnManualClick(object sender, EventArgs e) { FireEvent_E_STS_AUTOMATICO(false); }
 		void BtnAbrirClick(object sender, EventArgs e) { if (!auto) FireEvent_E_CMD_ABRIR_MANUAL(true); }
 		void BtnFecharClick(object sender, EventArgs e) { if (!auto) FireEvent_E_CMD_FECHAR_MANUAL(true); }
-		void BtnPararClick(object sender, EventArgs e) { if (!auto) FireEvent_E_CMD_PARAR_MANUAL(true); }
-		void BtnPosicionarClick(object sender, EventArgs e) { if (!auto) FireEvent_E_CMD_POSICIONAR_MANUAL(true); }
+		void BtnPararClick(object sender, EventArgs e) { if (!auto && posic) FireEvent_E_CMD_PARAR_MANUAL(true); }
+		void BtnPosicionarClick(object sender, EventArgs e) { if (!auto && posic) FireEvent_E_CMD_POSICIONAR_MANUAL(true); }
 		void BtnResetClick(object sender, EventArgs e) { FireEvent_E_CMD_RESET_FALHA(true); FireEvent_E_CMD_RESET_FALHA(false); }
-
 	}
 }

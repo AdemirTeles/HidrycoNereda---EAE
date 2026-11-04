@@ -37,7 +37,7 @@ namespace SE.Nereda.Symbols.EmergencyManagement
 			this.drawnButton1.OpenFaceplates.Add(new NxtControl.GuiFramework.OpenFaceplate("fpSettings", NxtControl.GuiFramework.MouseButtonType.Click));
 			this.drawnButton1.Pen = new NxtControl.Drawing.Pen("ButtonPen");
 			this.drawnButton1.Radius = 4D;
-			this.drawnButton1.Text = "Fallback Scheduler Reactors \r\nSettings";
+			this.drawnButton1.Text = "Ajustes da receita\r\nde emerg\u00eancia";
 			this.drawnButton1.TextColor = new NxtControl.Drawing.Color("ButtonTextColor");
 			this.drawnButton1.TextColorMouseDown = new NxtControl.Drawing.Color("ButtonTextColorMouseDown");
 			this.drawnButton1.Use3DEffect = false;

@@ -295,9 +295,9 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			// 
 			this.REACTOR.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.REACTOR.Font = new NxtControl.Drawing.Font("Arial", 16F, System.Drawing.FontStyle.Bold);
-			this.REACTOR.Location = new NxtControl.Drawing.PointF(504D, 320D);
+			this.REACTOR.Location = new NxtControl.Drawing.PointF(464D, 320D);
 			this.REACTOR.Name = "REACTOR";
-			this.REACTOR.Text = "Reactor 1";
+			this.REACTOR.Text = "Reator Nereda 1";
 			// 
 			// ShowLevel
 			// 
@@ -1551,7 +1551,7 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			// 
 			this.sDefault2.BeginInit();
 			this.sDefault2._iVlvName = "Valve";
-			this.sDefault2.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 304D, 176D);
+			this.sDefault2.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 296D, 176D);
 			this.sDefault2.Name = "sDefault2";
 			this.sDefault2.SecurityToken = ((uint)(4294967295u));
 			this.sDefault2.StateTextPosition = SE.Nereda.Symbols.ValveS.sDefault.StateTextPositionOption.Vertical;
@@ -1582,7 +1582,7 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			// 
 			this.sDefault3.BeginInit();
 			this.sDefault3._iVlvName = "Valve";
-			this.sDefault3.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 472D, 176D);
+			this.sDefault3.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 464D, 176D);
 			this.sDefault3.Name = "sDefault3";
 			this.sDefault3.SecurityToken = ((uint)(4294967295u));
 			this.sDefault3.StateTextPosition = SE.Nereda.Symbols.ValveS.sDefault.StateTextPositionOption.Vertical;

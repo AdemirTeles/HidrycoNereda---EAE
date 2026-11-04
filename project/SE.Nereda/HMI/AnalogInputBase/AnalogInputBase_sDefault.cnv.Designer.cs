@@ -146,7 +146,7 @@ namespace SE.Nereda.Symbols.AnalogInputBase
 			this.lblInstanceName.FontScale = true;
 			this.lblInstanceName.Name = "lblInstanceName";
 			this.lblInstanceName.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
-			this.lblInstanceName.Text = "Label";
+			this.lblInstanceName.Text = "R\u00f3tulo";
 			this.lblInstanceName.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
 			this.lblInstanceName.TextAutoSizeHorizontalOffset = 10;
 			this.lblInstanceName.TextColor = new NxtControl.Drawing.Color("SE.App2Base.aaLibSymInstanceLabelTextColor");

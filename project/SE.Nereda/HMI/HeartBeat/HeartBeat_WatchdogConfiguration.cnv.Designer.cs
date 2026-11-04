@@ -46,7 +46,7 @@ namespace SE.Nereda.Faceplates.HeartBeat
 			this.label1.FontScale = true;
 			this.label1.Name = "label1";
 			this.label1.Pen = new NxtControl.Drawing.Pen("LabelPen");
-			this.label1.Text = "Watchdog Time Out :";
+			this.label1.Text = "Tempo limite :";
 			this.label1.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
 			this.label1.TextAutoSizeHorizontalOffset = 10;
 			this.label1.TextPadding = new NxtControl.Drawing.Padding(2);
@@ -98,7 +98,7 @@ namespace SE.Nereda.Faceplates.HeartBeat
 			this.label2.FontScale = true;
 			this.label2.Name = "label2";
 			this.label2.Pen = new NxtControl.Drawing.Pen("LabelPen");
-			this.label2.Text = "Watchdog Simulation :";
+			this.label2.Text = "Simula\u00e7\u00e3o :";
 			this.label2.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
 			this.label2.TextAutoSizeHorizontalOffset = 10;
 			this.label2.TextPadding = new NxtControl.Drawing.Padding(2);
@@ -132,7 +132,7 @@ namespace SE.Nereda.Faceplates.HeartBeat
 			this.label3.FontScale = true;
 			this.label3.Name = "label3";
 			this.label3.Pen = new NxtControl.Drawing.Pen("LabelPen");
-			this.label3.Text = "Watchdog Time Out :";
+			this.label3.Text = "Tempo limite :";
 			this.label3.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
 			this.label3.TextAutoSizeHorizontalOffset = 10;
 			this.label3.TextPadding = new NxtControl.Drawing.Padding(2);

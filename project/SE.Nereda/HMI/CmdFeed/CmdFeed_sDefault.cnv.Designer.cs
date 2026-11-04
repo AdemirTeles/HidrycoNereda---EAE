@@ -43,7 +43,7 @@ namespace SE.Nereda.Symbols.CmdFeed
 			this.freeText1.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeText1.Location = new NxtControl.Drawing.PointF(16D, 44D);
 			this.freeText1.Name = "freeText1";
-			this.freeText1.Text = "Feed Flow Setpoint (Manual Mode) :";
+			this.freeText1.Text = "SP vaz\u00e3o alimenta\u00e7\u00e3o (manual) :";
 			// 
 			// FeedFlowSpMan
 			// 
@@ -76,7 +76,7 @@ namespace SE.Nereda.Symbols.CmdFeed
 			new NxtControl.Drawing.PointF(8D, 16D),
 			new NxtControl.Drawing.PointF(160D, 16D),
 			new NxtControl.Drawing.PointF(184D, 40D)});
-			this.polygon1.Text = "FEED";
+			this.polygon1.Text = "ALIMENTA\u00c7\u00c3O";
 			this.polygon1.TextColor = new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(0)));
 			// 
 			// sDefault

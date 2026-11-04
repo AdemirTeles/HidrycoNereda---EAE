@@ -118,7 +118,7 @@ namespace SE.Nereda.Symbols.FieldSignals
 			this.rectangle2.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))));
 			this.rectangle2.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
 			this.rectangle2.Name = "rectangle2";
-			this.rectangle2.Text = "Electri Circuit Fail";
+			this.rectangle2.Text = "Falha circuito el\u00e9trico";
 			this.rectangle2.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleCenter;
 			this.rectangle2.TextColor = new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(255)));
 			// 
@@ -170,7 +170,7 @@ namespace SE.Nereda.Symbols.FieldSignals
 			this.rectangle3.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))));
 			this.rectangle3.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
 			this.rectangle3.Name = "rectangle3";
-			this.rectangle3.Text = "Safety Switch";
+			this.rectangle3.Text = "Chave de seguran\u00e7a";
 			this.rectangle3.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleCenter;
 			this.rectangle3.TextColor = new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(255)));
 			// 
@@ -222,7 +222,7 @@ namespace SE.Nereda.Symbols.FieldSignals
 			this.rectangle4.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))));
 			this.rectangle4.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
 			this.rectangle4.Name = "rectangle4";
-			this.rectangle4.Text = "Frequency Inverter Fail";
+			this.rectangle4.Text = "Falha do inversor";
 			this.rectangle4.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleCenter;
 			this.rectangle4.TextColor = new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(255)));
 			// 
@@ -274,7 +274,7 @@ namespace SE.Nereda.Symbols.FieldSignals
 			this.rectangle5.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))));
 			this.rectangle5.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
 			this.rectangle5.Name = "rectangle5";
-			this.rectangle5.Text = "Remote Mode";
+			this.rectangle5.Text = "Modo remoto";
 			this.rectangle5.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleCenter;
 			this.rectangle5.TextColor = new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(255)));
 			// 
@@ -326,7 +326,7 @@ namespace SE.Nereda.Symbols.FieldSignals
 			this.rectangle6.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))));
 			this.rectangle6.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
 			this.rectangle6.Name = "rectangle6";
-			this.rectangle6.Text = "Auto Mode";
+			this.rectangle6.Text = "Modo autom\u00e1tico";
 			this.rectangle6.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleCenter;
 			this.rectangle6.TextColor = new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(255)));
 			// 
@@ -378,7 +378,7 @@ namespace SE.Nereda.Symbols.FieldSignals
 			this.rectangle7.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))));
 			this.rectangle7.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
 			this.rectangle7.Name = "rectangle7";
-			this.rectangle7.Text = "Power Status";
+			this.rectangle7.Text = "Alimenta\u00e7\u00e3o el\u00e9trica";
 			this.rectangle7.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleCenter;
 			this.rectangle7.TextColor = new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(255)));
 			// 
@@ -430,7 +430,7 @@ namespace SE.Nereda.Symbols.FieldSignals
 			this.rectangle8.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))));
 			this.rectangle8.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
 			this.rectangle8.Name = "rectangle8";
-			this.rectangle8.Text = "Drive Avaibility";
+			this.rectangle8.Text = "Inversor dispon\u00edvel";
 			this.rectangle8.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleCenter;
 			this.rectangle8.TextColor = new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(255)));
 			// 
@@ -481,7 +481,7 @@ namespace SE.Nereda.Symbols.FieldSignals
 			this.PanelName.Font = new NxtControl.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
 			this.PanelName.Location = new NxtControl.Drawing.PointF(16D, 10D);
 			this.PanelName.Name = "PanelName";
-			this.PanelName.Text = "Name";
+			this.PanelName.Text = "Nome";
 			// 
 			// line1
 			// 
