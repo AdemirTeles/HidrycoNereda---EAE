@@ -1290,6 +1290,12 @@ namespace Hidryco.HidrycoLib.Symbols.DesidratacaoLodo
        get { return STP_TEMPO_SEM_PARTIR_field; }
        set { STP_TEMPO_SEM_PARTIR_field = value; }
     }
+    private System.Single? STP_VEL_SOPRADORES_field = null;
+    public System.Single? STP_VEL_SOPRADORES
+    {
+       get { return STP_VEL_SOPRADORES_field; }
+       set { STP_VEL_SOPRADORES_field = value; }
+    }
 
   }
 
@@ -1436,13 +1442,13 @@ stack Trace:
 
       }
     }
-    public bool FireEvent_E_PARAMETROS(System.Boolean HAB_SOPRADORES, System.Single STP_NIVEL_MIN_TQ, System.Single STP_NIVEL_RETOMA_TQ, System.Single STP_VAZAO_AD1, System.Single STP_VAZAO_AD2, System.Single STP_VAZAO_AD3, System.Single STP_VEL_INICIAL, System.Single STP_NIVEL_SUSPENDE, System.Single STP_NIVEL_RETOMA, System.Int16 STP_TEMPO_VALVULAS, System.Int16 STP_DIF_HORAS_BO, System.Int16 STP_TEMPO_SEM_PARTIR)
+    public bool FireEvent_E_PARAMETROS(System.Boolean HAB_SOPRADORES, System.Single STP_NIVEL_MIN_TQ, System.Single STP_NIVEL_RETOMA_TQ, System.Single STP_VAZAO_AD1, System.Single STP_VAZAO_AD2, System.Single STP_VAZAO_AD3, System.Single STP_VEL_INICIAL, System.Single STP_NIVEL_SUSPENDE, System.Single STP_NIVEL_RETOMA, System.Int16 STP_TEMPO_VALVULAS, System.Int16 STP_DIF_HORAS_BO, System.Int16 STP_TEMPO_SEM_PARTIR, System.Single STP_VEL_SOPRADORES)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {HAB_SOPRADORES, STP_NIVEL_MIN_TQ, STP_NIVEL_RETOMA_TQ, STP_VAZAO_AD1, STP_VAZAO_AD2, STP_VAZAO_AD3, STP_VEL_INICIAL, STP_NIVEL_SUSPENDE, STP_NIVEL_RETOMA, STP_TEMPO_VALVULAS, STP_DIF_HORAS_BO, STP_TEMPO_SEM_PARTIR});
+      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {HAB_SOPRADORES, STP_NIVEL_MIN_TQ, STP_NIVEL_RETOMA_TQ, STP_VAZAO_AD1, STP_VAZAO_AD2, STP_VAZAO_AD3, STP_VEL_INICIAL, STP_NIVEL_SUSPENDE, STP_NIVEL_RETOMA, STP_TEMPO_VALVULAS, STP_DIF_HORAS_BO, STP_TEMPO_SEM_PARTIR, STP_VEL_SOPRADORES});
     }
     public bool FireEvent_E_PARAMETROS(Hidryco.HidrycoLib.Symbols.DesidratacaoLodo.E_PARAMETROSEventArgs ea)
     {
-      object[] _values_ = new object[12];
+      object[] _values_ = new object[13];
       if (ea.HAB_SOPRADORES.HasValue) _values_[0] = ea.HAB_SOPRADORES.Value;
       if (ea.STP_NIVEL_MIN_TQ.HasValue) _values_[1] = ea.STP_NIVEL_MIN_TQ.Value;
       if (ea.STP_NIVEL_RETOMA_TQ.HasValue) _values_[2] = ea.STP_NIVEL_RETOMA_TQ.Value;
@@ -1455,11 +1461,12 @@ stack Trace:
       if (ea.STP_TEMPO_VALVULAS.HasValue) _values_[9] = ea.STP_TEMPO_VALVULAS.Value;
       if (ea.STP_DIF_HORAS_BO.HasValue) _values_[10] = ea.STP_DIF_HORAS_BO.Value;
       if (ea.STP_TEMPO_SEM_PARTIR.HasValue) _values_[11] = ea.STP_TEMPO_SEM_PARTIR.Value;
+      if (ea.STP_VEL_SOPRADORES.HasValue) _values_[12] = ea.STP_VEL_SOPRADORES.Value;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
-    public bool FireEvent_E_PARAMETROS(System.Boolean HAB_SOPRADORES, bool ignore_HAB_SOPRADORES, System.Single STP_NIVEL_MIN_TQ, bool ignore_STP_NIVEL_MIN_TQ, System.Single STP_NIVEL_RETOMA_TQ, bool ignore_STP_NIVEL_RETOMA_TQ, System.Single STP_VAZAO_AD1, bool ignore_STP_VAZAO_AD1, System.Single STP_VAZAO_AD2, bool ignore_STP_VAZAO_AD2, System.Single STP_VAZAO_AD3, bool ignore_STP_VAZAO_AD3, System.Single STP_VEL_INICIAL, bool ignore_STP_VEL_INICIAL, System.Single STP_NIVEL_SUSPENDE, bool ignore_STP_NIVEL_SUSPENDE, System.Single STP_NIVEL_RETOMA, bool ignore_STP_NIVEL_RETOMA, System.Int16 STP_TEMPO_VALVULAS, bool ignore_STP_TEMPO_VALVULAS, System.Int16 STP_DIF_HORAS_BO, bool ignore_STP_DIF_HORAS_BO, System.Int16 STP_TEMPO_SEM_PARTIR, bool ignore_STP_TEMPO_SEM_PARTIR)
+    public bool FireEvent_E_PARAMETROS(System.Boolean HAB_SOPRADORES, bool ignore_HAB_SOPRADORES, System.Single STP_NIVEL_MIN_TQ, bool ignore_STP_NIVEL_MIN_TQ, System.Single STP_NIVEL_RETOMA_TQ, bool ignore_STP_NIVEL_RETOMA_TQ, System.Single STP_VAZAO_AD1, bool ignore_STP_VAZAO_AD1, System.Single STP_VAZAO_AD2, bool ignore_STP_VAZAO_AD2, System.Single STP_VAZAO_AD3, bool ignore_STP_VAZAO_AD3, System.Single STP_VEL_INICIAL, bool ignore_STP_VEL_INICIAL, System.Single STP_NIVEL_SUSPENDE, bool ignore_STP_NIVEL_SUSPENDE, System.Single STP_NIVEL_RETOMA, bool ignore_STP_NIVEL_RETOMA, System.Int16 STP_TEMPO_VALVULAS, bool ignore_STP_TEMPO_VALVULAS, System.Int16 STP_DIF_HORAS_BO, bool ignore_STP_DIF_HORAS_BO, System.Int16 STP_TEMPO_SEM_PARTIR, bool ignore_STP_TEMPO_SEM_PARTIR, System.Single STP_VEL_SOPRADORES, bool ignore_STP_VEL_SOPRADORES)
     {
-      object[] _values_ = new object[12];
+      object[] _values_ = new object[13];
       if (!ignore_HAB_SOPRADORES) _values_[0] = HAB_SOPRADORES;
       if (!ignore_STP_NIVEL_MIN_TQ) _values_[1] = STP_NIVEL_MIN_TQ;
       if (!ignore_STP_NIVEL_RETOMA_TQ) _values_[2] = STP_NIVEL_RETOMA_TQ;
@@ -1472,6 +1479,7 @@ stack Trace:
       if (!ignore_STP_TEMPO_VALVULAS) _values_[9] = STP_TEMPO_VALVULAS;
       if (!ignore_STP_DIF_HORAS_BO) _values_[10] = STP_DIF_HORAS_BO;
       if (!ignore_STP_TEMPO_SEM_PARTIR) _values_[11] = STP_TEMPO_SEM_PARTIR;
+      if (!ignore_STP_VEL_SOPRADORES) _values_[12] = STP_VEL_SOPRADORES;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
     public bool FireEvent_E_COMANDO(System.Boolean CMD_AD1, System.Boolean CMD_AD2, System.Boolean CMD_AD3)
@@ -1597,13 +1605,13 @@ stack Trace:
 
       }
     }
-    public bool FireEvent_E_PARAMETROS(System.Boolean HAB_SOPRADORES, System.Single STP_NIVEL_MIN_TQ, System.Single STP_NIVEL_RETOMA_TQ, System.Single STP_VAZAO_AD1, System.Single STP_VAZAO_AD2, System.Single STP_VAZAO_AD3, System.Single STP_VEL_INICIAL, System.Single STP_NIVEL_SUSPENDE, System.Single STP_NIVEL_RETOMA, System.Int16 STP_TEMPO_VALVULAS, System.Int16 STP_DIF_HORAS_BO, System.Int16 STP_TEMPO_SEM_PARTIR)
+    public bool FireEvent_E_PARAMETROS(System.Boolean HAB_SOPRADORES, System.Single STP_NIVEL_MIN_TQ, System.Single STP_NIVEL_RETOMA_TQ, System.Single STP_VAZAO_AD1, System.Single STP_VAZAO_AD2, System.Single STP_VAZAO_AD3, System.Single STP_VEL_INICIAL, System.Single STP_NIVEL_SUSPENDE, System.Single STP_NIVEL_RETOMA, System.Int16 STP_TEMPO_VALVULAS, System.Int16 STP_DIF_HORAS_BO, System.Int16 STP_TEMPO_SEM_PARTIR, System.Single STP_VEL_SOPRADORES)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {HAB_SOPRADORES, STP_NIVEL_MIN_TQ, STP_NIVEL_RETOMA_TQ, STP_VAZAO_AD1, STP_VAZAO_AD2, STP_VAZAO_AD3, STP_VEL_INICIAL, STP_NIVEL_SUSPENDE, STP_NIVEL_RETOMA, STP_TEMPO_VALVULAS, STP_DIF_HORAS_BO, STP_TEMPO_SEM_PARTIR});
+      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {HAB_SOPRADORES, STP_NIVEL_MIN_TQ, STP_NIVEL_RETOMA_TQ, STP_VAZAO_AD1, STP_VAZAO_AD2, STP_VAZAO_AD3, STP_VEL_INICIAL, STP_NIVEL_SUSPENDE, STP_NIVEL_RETOMA, STP_TEMPO_VALVULAS, STP_DIF_HORAS_BO, STP_TEMPO_SEM_PARTIR, STP_VEL_SOPRADORES});
     }
     public bool FireEvent_E_PARAMETROS(Hidryco.HidrycoLib.Symbols.DesidratacaoLodo.E_PARAMETROSEventArgs ea)
     {
-      object[] _values_ = new object[12];
+      object[] _values_ = new object[13];
       if (ea.HAB_SOPRADORES.HasValue) _values_[0] = ea.HAB_SOPRADORES.Value;
       if (ea.STP_NIVEL_MIN_TQ.HasValue) _values_[1] = ea.STP_NIVEL_MIN_TQ.Value;
       if (ea.STP_NIVEL_RETOMA_TQ.HasValue) _values_[2] = ea.STP_NIVEL_RETOMA_TQ.Value;
@@ -1616,11 +1624,12 @@ stack Trace:
       if (ea.STP_TEMPO_VALVULAS.HasValue) _values_[9] = ea.STP_TEMPO_VALVULAS.Value;
       if (ea.STP_DIF_HORAS_BO.HasValue) _values_[10] = ea.STP_DIF_HORAS_BO.Value;
       if (ea.STP_TEMPO_SEM_PARTIR.HasValue) _values_[11] = ea.STP_TEMPO_SEM_PARTIR.Value;
+      if (ea.STP_VEL_SOPRADORES.HasValue) _values_[12] = ea.STP_VEL_SOPRADORES.Value;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
-    public bool FireEvent_E_PARAMETROS(System.Boolean HAB_SOPRADORES, bool ignore_HAB_SOPRADORES, System.Single STP_NIVEL_MIN_TQ, bool ignore_STP_NIVEL_MIN_TQ, System.Single STP_NIVEL_RETOMA_TQ, bool ignore_STP_NIVEL_RETOMA_TQ, System.Single STP_VAZAO_AD1, bool ignore_STP_VAZAO_AD1, System.Single STP_VAZAO_AD2, bool ignore_STP_VAZAO_AD2, System.Single STP_VAZAO_AD3, bool ignore_STP_VAZAO_AD3, System.Single STP_VEL_INICIAL, bool ignore_STP_VEL_INICIAL, System.Single STP_NIVEL_SUSPENDE, bool ignore_STP_NIVEL_SUSPENDE, System.Single STP_NIVEL_RETOMA, bool ignore_STP_NIVEL_RETOMA, System.Int16 STP_TEMPO_VALVULAS, bool ignore_STP_TEMPO_VALVULAS, System.Int16 STP_DIF_HORAS_BO, bool ignore_STP_DIF_HORAS_BO, System.Int16 STP_TEMPO_SEM_PARTIR, bool ignore_STP_TEMPO_SEM_PARTIR)
+    public bool FireEvent_E_PARAMETROS(System.Boolean HAB_SOPRADORES, bool ignore_HAB_SOPRADORES, System.Single STP_NIVEL_MIN_TQ, bool ignore_STP_NIVEL_MIN_TQ, System.Single STP_NIVEL_RETOMA_TQ, bool ignore_STP_NIVEL_RETOMA_TQ, System.Single STP_VAZAO_AD1, bool ignore_STP_VAZAO_AD1, System.Single STP_VAZAO_AD2, bool ignore_STP_VAZAO_AD2, System.Single STP_VAZAO_AD3, bool ignore_STP_VAZAO_AD3, System.Single STP_VEL_INICIAL, bool ignore_STP_VEL_INICIAL, System.Single STP_NIVEL_SUSPENDE, bool ignore_STP_NIVEL_SUSPENDE, System.Single STP_NIVEL_RETOMA, bool ignore_STP_NIVEL_RETOMA, System.Int16 STP_TEMPO_VALVULAS, bool ignore_STP_TEMPO_VALVULAS, System.Int16 STP_DIF_HORAS_BO, bool ignore_STP_DIF_HORAS_BO, System.Int16 STP_TEMPO_SEM_PARTIR, bool ignore_STP_TEMPO_SEM_PARTIR, System.Single STP_VEL_SOPRADORES, bool ignore_STP_VEL_SOPRADORES)
     {
-      object[] _values_ = new object[12];
+      object[] _values_ = new object[13];
       if (!ignore_HAB_SOPRADORES) _values_[0] = HAB_SOPRADORES;
       if (!ignore_STP_NIVEL_MIN_TQ) _values_[1] = STP_NIVEL_MIN_TQ;
       if (!ignore_STP_NIVEL_RETOMA_TQ) _values_[2] = STP_NIVEL_RETOMA_TQ;
@@ -1633,6 +1642,7 @@ stack Trace:
       if (!ignore_STP_TEMPO_VALVULAS) _values_[9] = STP_TEMPO_VALVULAS;
       if (!ignore_STP_DIF_HORAS_BO) _values_[10] = STP_DIF_HORAS_BO;
       if (!ignore_STP_TEMPO_SEM_PARTIR) _values_[11] = STP_TEMPO_SEM_PARTIR;
+      if (!ignore_STP_VEL_SOPRADORES) _values_[12] = STP_VEL_SOPRADORES;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
     public bool FireEvent_E_COMANDO(System.Boolean CMD_AD1, System.Boolean CMD_AD2, System.Boolean CMD_AD3)
@@ -1758,13 +1768,13 @@ stack Trace:
 
       }
     }
-    public bool FireEvent_E_PARAMETROS(System.Boolean HAB_SOPRADORES, System.Single STP_NIVEL_MIN_TQ, System.Single STP_NIVEL_RETOMA_TQ, System.Single STP_VAZAO_AD1, System.Single STP_VAZAO_AD2, System.Single STP_VAZAO_AD3, System.Single STP_VEL_INICIAL, System.Single STP_NIVEL_SUSPENDE, System.Single STP_NIVEL_RETOMA, System.Int16 STP_TEMPO_VALVULAS, System.Int16 STP_DIF_HORAS_BO, System.Int16 STP_TEMPO_SEM_PARTIR)
+    public bool FireEvent_E_PARAMETROS(System.Boolean HAB_SOPRADORES, System.Single STP_NIVEL_MIN_TQ, System.Single STP_NIVEL_RETOMA_TQ, System.Single STP_VAZAO_AD1, System.Single STP_VAZAO_AD2, System.Single STP_VAZAO_AD3, System.Single STP_VEL_INICIAL, System.Single STP_NIVEL_SUSPENDE, System.Single STP_NIVEL_RETOMA, System.Int16 STP_TEMPO_VALVULAS, System.Int16 STP_DIF_HORAS_BO, System.Int16 STP_TEMPO_SEM_PARTIR, System.Single STP_VEL_SOPRADORES)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {HAB_SOPRADORES, STP_NIVEL_MIN_TQ, STP_NIVEL_RETOMA_TQ, STP_VAZAO_AD1, STP_VAZAO_AD2, STP_VAZAO_AD3, STP_VEL_INICIAL, STP_NIVEL_SUSPENDE, STP_NIVEL_RETOMA, STP_TEMPO_VALVULAS, STP_DIF_HORAS_BO, STP_TEMPO_SEM_PARTIR});
+      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {HAB_SOPRADORES, STP_NIVEL_MIN_TQ, STP_NIVEL_RETOMA_TQ, STP_VAZAO_AD1, STP_VAZAO_AD2, STP_VAZAO_AD3, STP_VEL_INICIAL, STP_NIVEL_SUSPENDE, STP_NIVEL_RETOMA, STP_TEMPO_VALVULAS, STP_DIF_HORAS_BO, STP_TEMPO_SEM_PARTIR, STP_VEL_SOPRADORES});
     }
     public bool FireEvent_E_PARAMETROS(Hidryco.HidrycoLib.Symbols.DesidratacaoLodo.E_PARAMETROSEventArgs ea)
     {
-      object[] _values_ = new object[12];
+      object[] _values_ = new object[13];
       if (ea.HAB_SOPRADORES.HasValue) _values_[0] = ea.HAB_SOPRADORES.Value;
       if (ea.STP_NIVEL_MIN_TQ.HasValue) _values_[1] = ea.STP_NIVEL_MIN_TQ.Value;
       if (ea.STP_NIVEL_RETOMA_TQ.HasValue) _values_[2] = ea.STP_NIVEL_RETOMA_TQ.Value;
@@ -1777,11 +1787,12 @@ stack Trace:
       if (ea.STP_TEMPO_VALVULAS.HasValue) _values_[9] = ea.STP_TEMPO_VALVULAS.Value;
       if (ea.STP_DIF_HORAS_BO.HasValue) _values_[10] = ea.STP_DIF_HORAS_BO.Value;
       if (ea.STP_TEMPO_SEM_PARTIR.HasValue) _values_[11] = ea.STP_TEMPO_SEM_PARTIR.Value;
+      if (ea.STP_VEL_SOPRADORES.HasValue) _values_[12] = ea.STP_VEL_SOPRADORES.Value;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
-    public bool FireEvent_E_PARAMETROS(System.Boolean HAB_SOPRADORES, bool ignore_HAB_SOPRADORES, System.Single STP_NIVEL_MIN_TQ, bool ignore_STP_NIVEL_MIN_TQ, System.Single STP_NIVEL_RETOMA_TQ, bool ignore_STP_NIVEL_RETOMA_TQ, System.Single STP_VAZAO_AD1, bool ignore_STP_VAZAO_AD1, System.Single STP_VAZAO_AD2, bool ignore_STP_VAZAO_AD2, System.Single STP_VAZAO_AD3, bool ignore_STP_VAZAO_AD3, System.Single STP_VEL_INICIAL, bool ignore_STP_VEL_INICIAL, System.Single STP_NIVEL_SUSPENDE, bool ignore_STP_NIVEL_SUSPENDE, System.Single STP_NIVEL_RETOMA, bool ignore_STP_NIVEL_RETOMA, System.Int16 STP_TEMPO_VALVULAS, bool ignore_STP_TEMPO_VALVULAS, System.Int16 STP_DIF_HORAS_BO, bool ignore_STP_DIF_HORAS_BO, System.Int16 STP_TEMPO_SEM_PARTIR, bool ignore_STP_TEMPO_SEM_PARTIR)
+    public bool FireEvent_E_PARAMETROS(System.Boolean HAB_SOPRADORES, bool ignore_HAB_SOPRADORES, System.Single STP_NIVEL_MIN_TQ, bool ignore_STP_NIVEL_MIN_TQ, System.Single STP_NIVEL_RETOMA_TQ, bool ignore_STP_NIVEL_RETOMA_TQ, System.Single STP_VAZAO_AD1, bool ignore_STP_VAZAO_AD1, System.Single STP_VAZAO_AD2, bool ignore_STP_VAZAO_AD2, System.Single STP_VAZAO_AD3, bool ignore_STP_VAZAO_AD3, System.Single STP_VEL_INICIAL, bool ignore_STP_VEL_INICIAL, System.Single STP_NIVEL_SUSPENDE, bool ignore_STP_NIVEL_SUSPENDE, System.Single STP_NIVEL_RETOMA, bool ignore_STP_NIVEL_RETOMA, System.Int16 STP_TEMPO_VALVULAS, bool ignore_STP_TEMPO_VALVULAS, System.Int16 STP_DIF_HORAS_BO, bool ignore_STP_DIF_HORAS_BO, System.Int16 STP_TEMPO_SEM_PARTIR, bool ignore_STP_TEMPO_SEM_PARTIR, System.Single STP_VEL_SOPRADORES, bool ignore_STP_VEL_SOPRADORES)
     {
-      object[] _values_ = new object[12];
+      object[] _values_ = new object[13];
       if (!ignore_HAB_SOPRADORES) _values_[0] = HAB_SOPRADORES;
       if (!ignore_STP_NIVEL_MIN_TQ) _values_[1] = STP_NIVEL_MIN_TQ;
       if (!ignore_STP_NIVEL_RETOMA_TQ) _values_[2] = STP_NIVEL_RETOMA_TQ;
@@ -1794,6 +1805,7 @@ stack Trace:
       if (!ignore_STP_TEMPO_VALVULAS) _values_[9] = STP_TEMPO_VALVULAS;
       if (!ignore_STP_DIF_HORAS_BO) _values_[10] = STP_DIF_HORAS_BO;
       if (!ignore_STP_TEMPO_SEM_PARTIR) _values_[11] = STP_TEMPO_SEM_PARTIR;
+      if (!ignore_STP_VEL_SOPRADORES) _values_[12] = STP_VEL_SOPRADORES;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
     public bool FireEvent_E_COMANDO(System.Boolean CMD_AD1, System.Boolean CMD_AD2, System.Boolean CMD_AD3)
@@ -1919,13 +1931,13 @@ stack Trace:
 
       }
     }
-    public bool FireEvent_E_PARAMETROS(System.Boolean HAB_SOPRADORES, System.Single STP_NIVEL_MIN_TQ, System.Single STP_NIVEL_RETOMA_TQ, System.Single STP_VAZAO_AD1, System.Single STP_VAZAO_AD2, System.Single STP_VAZAO_AD3, System.Single STP_VEL_INICIAL, System.Single STP_NIVEL_SUSPENDE, System.Single STP_NIVEL_RETOMA, System.Int16 STP_TEMPO_VALVULAS, System.Int16 STP_DIF_HORAS_BO, System.Int16 STP_TEMPO_SEM_PARTIR)
+    public bool FireEvent_E_PARAMETROS(System.Boolean HAB_SOPRADORES, System.Single STP_NIVEL_MIN_TQ, System.Single STP_NIVEL_RETOMA_TQ, System.Single STP_VAZAO_AD1, System.Single STP_VAZAO_AD2, System.Single STP_VAZAO_AD3, System.Single STP_VEL_INICIAL, System.Single STP_NIVEL_SUSPENDE, System.Single STP_NIVEL_RETOMA, System.Int16 STP_TEMPO_VALVULAS, System.Int16 STP_DIF_HORAS_BO, System.Int16 STP_TEMPO_SEM_PARTIR, System.Single STP_VEL_SOPRADORES)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {HAB_SOPRADORES, STP_NIVEL_MIN_TQ, STP_NIVEL_RETOMA_TQ, STP_VAZAO_AD1, STP_VAZAO_AD2, STP_VAZAO_AD3, STP_VEL_INICIAL, STP_NIVEL_SUSPENDE, STP_NIVEL_RETOMA, STP_TEMPO_VALVULAS, STP_DIF_HORAS_BO, STP_TEMPO_SEM_PARTIR});
+      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {HAB_SOPRADORES, STP_NIVEL_MIN_TQ, STP_NIVEL_RETOMA_TQ, STP_VAZAO_AD1, STP_VAZAO_AD2, STP_VAZAO_AD3, STP_VEL_INICIAL, STP_NIVEL_SUSPENDE, STP_NIVEL_RETOMA, STP_TEMPO_VALVULAS, STP_DIF_HORAS_BO, STP_TEMPO_SEM_PARTIR, STP_VEL_SOPRADORES});
     }
     public bool FireEvent_E_PARAMETROS(Hidryco.HidrycoLib.Symbols.DesidratacaoLodo.E_PARAMETROSEventArgs ea)
     {
-      object[] _values_ = new object[12];
+      object[] _values_ = new object[13];
       if (ea.HAB_SOPRADORES.HasValue) _values_[0] = ea.HAB_SOPRADORES.Value;
       if (ea.STP_NIVEL_MIN_TQ.HasValue) _values_[1] = ea.STP_NIVEL_MIN_TQ.Value;
       if (ea.STP_NIVEL_RETOMA_TQ.HasValue) _values_[2] = ea.STP_NIVEL_RETOMA_TQ.Value;
@@ -1938,11 +1950,12 @@ stack Trace:
       if (ea.STP_TEMPO_VALVULAS.HasValue) _values_[9] = ea.STP_TEMPO_VALVULAS.Value;
       if (ea.STP_DIF_HORAS_BO.HasValue) _values_[10] = ea.STP_DIF_HORAS_BO.Value;
       if (ea.STP_TEMPO_SEM_PARTIR.HasValue) _values_[11] = ea.STP_TEMPO_SEM_PARTIR.Value;
+      if (ea.STP_VEL_SOPRADORES.HasValue) _values_[12] = ea.STP_VEL_SOPRADORES.Value;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
-    public bool FireEvent_E_PARAMETROS(System.Boolean HAB_SOPRADORES, bool ignore_HAB_SOPRADORES, System.Single STP_NIVEL_MIN_TQ, bool ignore_STP_NIVEL_MIN_TQ, System.Single STP_NIVEL_RETOMA_TQ, bool ignore_STP_NIVEL_RETOMA_TQ, System.Single STP_VAZAO_AD1, bool ignore_STP_VAZAO_AD1, System.Single STP_VAZAO_AD2, bool ignore_STP_VAZAO_AD2, System.Single STP_VAZAO_AD3, bool ignore_STP_VAZAO_AD3, System.Single STP_VEL_INICIAL, bool ignore_STP_VEL_INICIAL, System.Single STP_NIVEL_SUSPENDE, bool ignore_STP_NIVEL_SUSPENDE, System.Single STP_NIVEL_RETOMA, bool ignore_STP_NIVEL_RETOMA, System.Int16 STP_TEMPO_VALVULAS, bool ignore_STP_TEMPO_VALVULAS, System.Int16 STP_DIF_HORAS_BO, bool ignore_STP_DIF_HORAS_BO, System.Int16 STP_TEMPO_SEM_PARTIR, bool ignore_STP_TEMPO_SEM_PARTIR)
+    public bool FireEvent_E_PARAMETROS(System.Boolean HAB_SOPRADORES, bool ignore_HAB_SOPRADORES, System.Single STP_NIVEL_MIN_TQ, bool ignore_STP_NIVEL_MIN_TQ, System.Single STP_NIVEL_RETOMA_TQ, bool ignore_STP_NIVEL_RETOMA_TQ, System.Single STP_VAZAO_AD1, bool ignore_STP_VAZAO_AD1, System.Single STP_VAZAO_AD2, bool ignore_STP_VAZAO_AD2, System.Single STP_VAZAO_AD3, bool ignore_STP_VAZAO_AD3, System.Single STP_VEL_INICIAL, bool ignore_STP_VEL_INICIAL, System.Single STP_NIVEL_SUSPENDE, bool ignore_STP_NIVEL_SUSPENDE, System.Single STP_NIVEL_RETOMA, bool ignore_STP_NIVEL_RETOMA, System.Int16 STP_TEMPO_VALVULAS, bool ignore_STP_TEMPO_VALVULAS, System.Int16 STP_DIF_HORAS_BO, bool ignore_STP_DIF_HORAS_BO, System.Int16 STP_TEMPO_SEM_PARTIR, bool ignore_STP_TEMPO_SEM_PARTIR, System.Single STP_VEL_SOPRADORES, bool ignore_STP_VEL_SOPRADORES)
     {
-      object[] _values_ = new object[12];
+      object[] _values_ = new object[13];
       if (!ignore_HAB_SOPRADORES) _values_[0] = HAB_SOPRADORES;
       if (!ignore_STP_NIVEL_MIN_TQ) _values_[1] = STP_NIVEL_MIN_TQ;
       if (!ignore_STP_NIVEL_RETOMA_TQ) _values_[2] = STP_NIVEL_RETOMA_TQ;
@@ -1955,6 +1968,7 @@ stack Trace:
       if (!ignore_STP_TEMPO_VALVULAS) _values_[9] = STP_TEMPO_VALVULAS;
       if (!ignore_STP_DIF_HORAS_BO) _values_[10] = STP_DIF_HORAS_BO;
       if (!ignore_STP_TEMPO_SEM_PARTIR) _values_[11] = STP_TEMPO_SEM_PARTIR;
+      if (!ignore_STP_VEL_SOPRADORES) _values_[12] = STP_VEL_SOPRADORES;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
     public bool FireEvent_E_COMANDO(System.Boolean CMD_AD1, System.Boolean CMD_AD2, System.Boolean CMD_AD3)
@@ -2080,13 +2094,13 @@ stack Trace:
 
       }
     }
-    public bool FireEvent_E_PARAMETROS(System.Boolean HAB_SOPRADORES, System.Single STP_NIVEL_MIN_TQ, System.Single STP_NIVEL_RETOMA_TQ, System.Single STP_VAZAO_AD1, System.Single STP_VAZAO_AD2, System.Single STP_VAZAO_AD3, System.Single STP_VEL_INICIAL, System.Single STP_NIVEL_SUSPENDE, System.Single STP_NIVEL_RETOMA, System.Int16 STP_TEMPO_VALVULAS, System.Int16 STP_DIF_HORAS_BO, System.Int16 STP_TEMPO_SEM_PARTIR)
+    public bool FireEvent_E_PARAMETROS(System.Boolean HAB_SOPRADORES, System.Single STP_NIVEL_MIN_TQ, System.Single STP_NIVEL_RETOMA_TQ, System.Single STP_VAZAO_AD1, System.Single STP_VAZAO_AD2, System.Single STP_VAZAO_AD3, System.Single STP_VEL_INICIAL, System.Single STP_NIVEL_SUSPENDE, System.Single STP_NIVEL_RETOMA, System.Int16 STP_TEMPO_VALVULAS, System.Int16 STP_DIF_HORAS_BO, System.Int16 STP_TEMPO_SEM_PARTIR, System.Single STP_VEL_SOPRADORES)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {HAB_SOPRADORES, STP_NIVEL_MIN_TQ, STP_NIVEL_RETOMA_TQ, STP_VAZAO_AD1, STP_VAZAO_AD2, STP_VAZAO_AD3, STP_VEL_INICIAL, STP_NIVEL_SUSPENDE, STP_NIVEL_RETOMA, STP_TEMPO_VALVULAS, STP_DIF_HORAS_BO, STP_TEMPO_SEM_PARTIR});
+      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {HAB_SOPRADORES, STP_NIVEL_MIN_TQ, STP_NIVEL_RETOMA_TQ, STP_VAZAO_AD1, STP_VAZAO_AD2, STP_VAZAO_AD3, STP_VEL_INICIAL, STP_NIVEL_SUSPENDE, STP_NIVEL_RETOMA, STP_TEMPO_VALVULAS, STP_DIF_HORAS_BO, STP_TEMPO_SEM_PARTIR, STP_VEL_SOPRADORES});
     }
     public bool FireEvent_E_PARAMETROS(Hidryco.HidrycoLib.Symbols.DesidratacaoLodo.E_PARAMETROSEventArgs ea)
     {
-      object[] _values_ = new object[12];
+      object[] _values_ = new object[13];
       if (ea.HAB_SOPRADORES.HasValue) _values_[0] = ea.HAB_SOPRADORES.Value;
       if (ea.STP_NIVEL_MIN_TQ.HasValue) _values_[1] = ea.STP_NIVEL_MIN_TQ.Value;
       if (ea.STP_NIVEL_RETOMA_TQ.HasValue) _values_[2] = ea.STP_NIVEL_RETOMA_TQ.Value;
@@ -2099,11 +2113,12 @@ stack Trace:
       if (ea.STP_TEMPO_VALVULAS.HasValue) _values_[9] = ea.STP_TEMPO_VALVULAS.Value;
       if (ea.STP_DIF_HORAS_BO.HasValue) _values_[10] = ea.STP_DIF_HORAS_BO.Value;
       if (ea.STP_TEMPO_SEM_PARTIR.HasValue) _values_[11] = ea.STP_TEMPO_SEM_PARTIR.Value;
+      if (ea.STP_VEL_SOPRADORES.HasValue) _values_[12] = ea.STP_VEL_SOPRADORES.Value;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
-    public bool FireEvent_E_PARAMETROS(System.Boolean HAB_SOPRADORES, bool ignore_HAB_SOPRADORES, System.Single STP_NIVEL_MIN_TQ, bool ignore_STP_NIVEL_MIN_TQ, System.Single STP_NIVEL_RETOMA_TQ, bool ignore_STP_NIVEL_RETOMA_TQ, System.Single STP_VAZAO_AD1, bool ignore_STP_VAZAO_AD1, System.Single STP_VAZAO_AD2, bool ignore_STP_VAZAO_AD2, System.Single STP_VAZAO_AD3, bool ignore_STP_VAZAO_AD3, System.Single STP_VEL_INICIAL, bool ignore_STP_VEL_INICIAL, System.Single STP_NIVEL_SUSPENDE, bool ignore_STP_NIVEL_SUSPENDE, System.Single STP_NIVEL_RETOMA, bool ignore_STP_NIVEL_RETOMA, System.Int16 STP_TEMPO_VALVULAS, bool ignore_STP_TEMPO_VALVULAS, System.Int16 STP_DIF_HORAS_BO, bool ignore_STP_DIF_HORAS_BO, System.Int16 STP_TEMPO_SEM_PARTIR, bool ignore_STP_TEMPO_SEM_PARTIR)
+    public bool FireEvent_E_PARAMETROS(System.Boolean HAB_SOPRADORES, bool ignore_HAB_SOPRADORES, System.Single STP_NIVEL_MIN_TQ, bool ignore_STP_NIVEL_MIN_TQ, System.Single STP_NIVEL_RETOMA_TQ, bool ignore_STP_NIVEL_RETOMA_TQ, System.Single STP_VAZAO_AD1, bool ignore_STP_VAZAO_AD1, System.Single STP_VAZAO_AD2, bool ignore_STP_VAZAO_AD2, System.Single STP_VAZAO_AD3, bool ignore_STP_VAZAO_AD3, System.Single STP_VEL_INICIAL, bool ignore_STP_VEL_INICIAL, System.Single STP_NIVEL_SUSPENDE, bool ignore_STP_NIVEL_SUSPENDE, System.Single STP_NIVEL_RETOMA, bool ignore_STP_NIVEL_RETOMA, System.Int16 STP_TEMPO_VALVULAS, bool ignore_STP_TEMPO_VALVULAS, System.Int16 STP_DIF_HORAS_BO, bool ignore_STP_DIF_HORAS_BO, System.Int16 STP_TEMPO_SEM_PARTIR, bool ignore_STP_TEMPO_SEM_PARTIR, System.Single STP_VEL_SOPRADORES, bool ignore_STP_VEL_SOPRADORES)
     {
-      object[] _values_ = new object[12];
+      object[] _values_ = new object[13];
       if (!ignore_HAB_SOPRADORES) _values_[0] = HAB_SOPRADORES;
       if (!ignore_STP_NIVEL_MIN_TQ) _values_[1] = STP_NIVEL_MIN_TQ;
       if (!ignore_STP_NIVEL_RETOMA_TQ) _values_[2] = STP_NIVEL_RETOMA_TQ;
@@ -2116,6 +2131,7 @@ stack Trace:
       if (!ignore_STP_TEMPO_VALVULAS) _values_[9] = STP_TEMPO_VALVULAS;
       if (!ignore_STP_DIF_HORAS_BO) _values_[10] = STP_DIF_HORAS_BO;
       if (!ignore_STP_TEMPO_SEM_PARTIR) _values_[11] = STP_TEMPO_SEM_PARTIR;
+      if (!ignore_STP_VEL_SOPRADORES) _values_[12] = STP_VEL_SOPRADORES;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
     public bool FireEvent_E_COMANDO(System.Boolean CMD_AD1, System.Boolean CMD_AD2, System.Boolean CMD_AD3)
@@ -2241,13 +2257,13 @@ stack Trace:
 
       }
     }
-    public bool FireEvent_E_PARAMETROS(System.Boolean HAB_SOPRADORES, System.Single STP_NIVEL_MIN_TQ, System.Single STP_NIVEL_RETOMA_TQ, System.Single STP_VAZAO_AD1, System.Single STP_VAZAO_AD2, System.Single STP_VAZAO_AD3, System.Single STP_VEL_INICIAL, System.Single STP_NIVEL_SUSPENDE, System.Single STP_NIVEL_RETOMA, System.Int16 STP_TEMPO_VALVULAS, System.Int16 STP_DIF_HORAS_BO, System.Int16 STP_TEMPO_SEM_PARTIR)
+    public bool FireEvent_E_PARAMETROS(System.Boolean HAB_SOPRADORES, System.Single STP_NIVEL_MIN_TQ, System.Single STP_NIVEL_RETOMA_TQ, System.Single STP_VAZAO_AD1, System.Single STP_VAZAO_AD2, System.Single STP_VAZAO_AD3, System.Single STP_VEL_INICIAL, System.Single STP_NIVEL_SUSPENDE, System.Single STP_NIVEL_RETOMA, System.Int16 STP_TEMPO_VALVULAS, System.Int16 STP_DIF_HORAS_BO, System.Int16 STP_TEMPO_SEM_PARTIR, System.Single STP_VEL_SOPRADORES)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {HAB_SOPRADORES, STP_NIVEL_MIN_TQ, STP_NIVEL_RETOMA_TQ, STP_VAZAO_AD1, STP_VAZAO_AD2, STP_VAZAO_AD3, STP_VEL_INICIAL, STP_NIVEL_SUSPENDE, STP_NIVEL_RETOMA, STP_TEMPO_VALVULAS, STP_DIF_HORAS_BO, STP_TEMPO_SEM_PARTIR});
+      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {HAB_SOPRADORES, STP_NIVEL_MIN_TQ, STP_NIVEL_RETOMA_TQ, STP_VAZAO_AD1, STP_VAZAO_AD2, STP_VAZAO_AD3, STP_VEL_INICIAL, STP_NIVEL_SUSPENDE, STP_NIVEL_RETOMA, STP_TEMPO_VALVULAS, STP_DIF_HORAS_BO, STP_TEMPO_SEM_PARTIR, STP_VEL_SOPRADORES});
     }
     public bool FireEvent_E_PARAMETROS(Hidryco.HidrycoLib.Symbols.DesidratacaoLodo.E_PARAMETROSEventArgs ea)
     {
-      object[] _values_ = new object[12];
+      object[] _values_ = new object[13];
       if (ea.HAB_SOPRADORES.HasValue) _values_[0] = ea.HAB_SOPRADORES.Value;
       if (ea.STP_NIVEL_MIN_TQ.HasValue) _values_[1] = ea.STP_NIVEL_MIN_TQ.Value;
       if (ea.STP_NIVEL_RETOMA_TQ.HasValue) _values_[2] = ea.STP_NIVEL_RETOMA_TQ.Value;
@@ -2260,11 +2276,12 @@ stack Trace:
       if (ea.STP_TEMPO_VALVULAS.HasValue) _values_[9] = ea.STP_TEMPO_VALVULAS.Value;
       if (ea.STP_DIF_HORAS_BO.HasValue) _values_[10] = ea.STP_DIF_HORAS_BO.Value;
       if (ea.STP_TEMPO_SEM_PARTIR.HasValue) _values_[11] = ea.STP_TEMPO_SEM_PARTIR.Value;
+      if (ea.STP_VEL_SOPRADORES.HasValue) _values_[12] = ea.STP_VEL_SOPRADORES.Value;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
-    public bool FireEvent_E_PARAMETROS(System.Boolean HAB_SOPRADORES, bool ignore_HAB_SOPRADORES, System.Single STP_NIVEL_MIN_TQ, bool ignore_STP_NIVEL_MIN_TQ, System.Single STP_NIVEL_RETOMA_TQ, bool ignore_STP_NIVEL_RETOMA_TQ, System.Single STP_VAZAO_AD1, bool ignore_STP_VAZAO_AD1, System.Single STP_VAZAO_AD2, bool ignore_STP_VAZAO_AD2, System.Single STP_VAZAO_AD3, bool ignore_STP_VAZAO_AD3, System.Single STP_VEL_INICIAL, bool ignore_STP_VEL_INICIAL, System.Single STP_NIVEL_SUSPENDE, bool ignore_STP_NIVEL_SUSPENDE, System.Single STP_NIVEL_RETOMA, bool ignore_STP_NIVEL_RETOMA, System.Int16 STP_TEMPO_VALVULAS, bool ignore_STP_TEMPO_VALVULAS, System.Int16 STP_DIF_HORAS_BO, bool ignore_STP_DIF_HORAS_BO, System.Int16 STP_TEMPO_SEM_PARTIR, bool ignore_STP_TEMPO_SEM_PARTIR)
+    public bool FireEvent_E_PARAMETROS(System.Boolean HAB_SOPRADORES, bool ignore_HAB_SOPRADORES, System.Single STP_NIVEL_MIN_TQ, bool ignore_STP_NIVEL_MIN_TQ, System.Single STP_NIVEL_RETOMA_TQ, bool ignore_STP_NIVEL_RETOMA_TQ, System.Single STP_VAZAO_AD1, bool ignore_STP_VAZAO_AD1, System.Single STP_VAZAO_AD2, bool ignore_STP_VAZAO_AD2, System.Single STP_VAZAO_AD3, bool ignore_STP_VAZAO_AD3, System.Single STP_VEL_INICIAL, bool ignore_STP_VEL_INICIAL, System.Single STP_NIVEL_SUSPENDE, bool ignore_STP_NIVEL_SUSPENDE, System.Single STP_NIVEL_RETOMA, bool ignore_STP_NIVEL_RETOMA, System.Int16 STP_TEMPO_VALVULAS, bool ignore_STP_TEMPO_VALVULAS, System.Int16 STP_DIF_HORAS_BO, bool ignore_STP_DIF_HORAS_BO, System.Int16 STP_TEMPO_SEM_PARTIR, bool ignore_STP_TEMPO_SEM_PARTIR, System.Single STP_VEL_SOPRADORES, bool ignore_STP_VEL_SOPRADORES)
     {
-      object[] _values_ = new object[12];
+      object[] _values_ = new object[13];
       if (!ignore_HAB_SOPRADORES) _values_[0] = HAB_SOPRADORES;
       if (!ignore_STP_NIVEL_MIN_TQ) _values_[1] = STP_NIVEL_MIN_TQ;
       if (!ignore_STP_NIVEL_RETOMA_TQ) _values_[2] = STP_NIVEL_RETOMA_TQ;
@@ -2277,6 +2294,7 @@ stack Trace:
       if (!ignore_STP_TEMPO_VALVULAS) _values_[9] = STP_TEMPO_VALVULAS;
       if (!ignore_STP_DIF_HORAS_BO) _values_[10] = STP_DIF_HORAS_BO;
       if (!ignore_STP_TEMPO_SEM_PARTIR) _values_[11] = STP_TEMPO_SEM_PARTIR;
+      if (!ignore_STP_VEL_SOPRADORES) _values_[12] = STP_VEL_SOPRADORES;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
     public bool FireEvent_E_COMANDO(System.Boolean CMD_AD1, System.Boolean CMD_AD2, System.Boolean CMD_AD3)
@@ -2402,13 +2420,13 @@ stack Trace:
 
       }
     }
-    public bool FireEvent_E_PARAMETROS(System.Boolean HAB_SOPRADORES, System.Single STP_NIVEL_MIN_TQ, System.Single STP_NIVEL_RETOMA_TQ, System.Single STP_VAZAO_AD1, System.Single STP_VAZAO_AD2, System.Single STP_VAZAO_AD3, System.Single STP_VEL_INICIAL, System.Single STP_NIVEL_SUSPENDE, System.Single STP_NIVEL_RETOMA, System.Int16 STP_TEMPO_VALVULAS, System.Int16 STP_DIF_HORAS_BO, System.Int16 STP_TEMPO_SEM_PARTIR)
+    public bool FireEvent_E_PARAMETROS(System.Boolean HAB_SOPRADORES, System.Single STP_NIVEL_MIN_TQ, System.Single STP_NIVEL_RETOMA_TQ, System.Single STP_VAZAO_AD1, System.Single STP_VAZAO_AD2, System.Single STP_VAZAO_AD3, System.Single STP_VEL_INICIAL, System.Single STP_NIVEL_SUSPENDE, System.Single STP_NIVEL_RETOMA, System.Int16 STP_TEMPO_VALVULAS, System.Int16 STP_DIF_HORAS_BO, System.Int16 STP_TEMPO_SEM_PARTIR, System.Single STP_VEL_SOPRADORES)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {HAB_SOPRADORES, STP_NIVEL_MIN_TQ, STP_NIVEL_RETOMA_TQ, STP_VAZAO_AD1, STP_VAZAO_AD2, STP_VAZAO_AD3, STP_VEL_INICIAL, STP_NIVEL_SUSPENDE, STP_NIVEL_RETOMA, STP_TEMPO_VALVULAS, STP_DIF_HORAS_BO, STP_TEMPO_SEM_PARTIR});
+      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {HAB_SOPRADORES, STP_NIVEL_MIN_TQ, STP_NIVEL_RETOMA_TQ, STP_VAZAO_AD1, STP_VAZAO_AD2, STP_VAZAO_AD3, STP_VEL_INICIAL, STP_NIVEL_SUSPENDE, STP_NIVEL_RETOMA, STP_TEMPO_VALVULAS, STP_DIF_HORAS_BO, STP_TEMPO_SEM_PARTIR, STP_VEL_SOPRADORES});
     }
     public bool FireEvent_E_PARAMETROS(Hidryco.HidrycoLib.Symbols.DesidratacaoLodo.E_PARAMETROSEventArgs ea)
     {
-      object[] _values_ = new object[12];
+      object[] _values_ = new object[13];
       if (ea.HAB_SOPRADORES.HasValue) _values_[0] = ea.HAB_SOPRADORES.Value;
       if (ea.STP_NIVEL_MIN_TQ.HasValue) _values_[1] = ea.STP_NIVEL_MIN_TQ.Value;
       if (ea.STP_NIVEL_RETOMA_TQ.HasValue) _values_[2] = ea.STP_NIVEL_RETOMA_TQ.Value;
@@ -2421,11 +2439,12 @@ stack Trace:
       if (ea.STP_TEMPO_VALVULAS.HasValue) _values_[9] = ea.STP_TEMPO_VALVULAS.Value;
       if (ea.STP_DIF_HORAS_BO.HasValue) _values_[10] = ea.STP_DIF_HORAS_BO.Value;
       if (ea.STP_TEMPO_SEM_PARTIR.HasValue) _values_[11] = ea.STP_TEMPO_SEM_PARTIR.Value;
+      if (ea.STP_VEL_SOPRADORES.HasValue) _values_[12] = ea.STP_VEL_SOPRADORES.Value;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
-    public bool FireEvent_E_PARAMETROS(System.Boolean HAB_SOPRADORES, bool ignore_HAB_SOPRADORES, System.Single STP_NIVEL_MIN_TQ, bool ignore_STP_NIVEL_MIN_TQ, System.Single STP_NIVEL_RETOMA_TQ, bool ignore_STP_NIVEL_RETOMA_TQ, System.Single STP_VAZAO_AD1, bool ignore_STP_VAZAO_AD1, System.Single STP_VAZAO_AD2, bool ignore_STP_VAZAO_AD2, System.Single STP_VAZAO_AD3, bool ignore_STP_VAZAO_AD3, System.Single STP_VEL_INICIAL, bool ignore_STP_VEL_INICIAL, System.Single STP_NIVEL_SUSPENDE, bool ignore_STP_NIVEL_SUSPENDE, System.Single STP_NIVEL_RETOMA, bool ignore_STP_NIVEL_RETOMA, System.Int16 STP_TEMPO_VALVULAS, bool ignore_STP_TEMPO_VALVULAS, System.Int16 STP_DIF_HORAS_BO, bool ignore_STP_DIF_HORAS_BO, System.Int16 STP_TEMPO_SEM_PARTIR, bool ignore_STP_TEMPO_SEM_PARTIR)
+    public bool FireEvent_E_PARAMETROS(System.Boolean HAB_SOPRADORES, bool ignore_HAB_SOPRADORES, System.Single STP_NIVEL_MIN_TQ, bool ignore_STP_NIVEL_MIN_TQ, System.Single STP_NIVEL_RETOMA_TQ, bool ignore_STP_NIVEL_RETOMA_TQ, System.Single STP_VAZAO_AD1, bool ignore_STP_VAZAO_AD1, System.Single STP_VAZAO_AD2, bool ignore_STP_VAZAO_AD2, System.Single STP_VAZAO_AD3, bool ignore_STP_VAZAO_AD3, System.Single STP_VEL_INICIAL, bool ignore_STP_VEL_INICIAL, System.Single STP_NIVEL_SUSPENDE, bool ignore_STP_NIVEL_SUSPENDE, System.Single STP_NIVEL_RETOMA, bool ignore_STP_NIVEL_RETOMA, System.Int16 STP_TEMPO_VALVULAS, bool ignore_STP_TEMPO_VALVULAS, System.Int16 STP_DIF_HORAS_BO, bool ignore_STP_DIF_HORAS_BO, System.Int16 STP_TEMPO_SEM_PARTIR, bool ignore_STP_TEMPO_SEM_PARTIR, System.Single STP_VEL_SOPRADORES, bool ignore_STP_VEL_SOPRADORES)
     {
-      object[] _values_ = new object[12];
+      object[] _values_ = new object[13];
       if (!ignore_HAB_SOPRADORES) _values_[0] = HAB_SOPRADORES;
       if (!ignore_STP_NIVEL_MIN_TQ) _values_[1] = STP_NIVEL_MIN_TQ;
       if (!ignore_STP_NIVEL_RETOMA_TQ) _values_[2] = STP_NIVEL_RETOMA_TQ;
@@ -2438,6 +2457,7 @@ stack Trace:
       if (!ignore_STP_TEMPO_VALVULAS) _values_[9] = STP_TEMPO_VALVULAS;
       if (!ignore_STP_DIF_HORAS_BO) _values_[10] = STP_DIF_HORAS_BO;
       if (!ignore_STP_TEMPO_SEM_PARTIR) _values_[11] = STP_TEMPO_SEM_PARTIR;
+      if (!ignore_STP_VEL_SOPRADORES) _values_[12] = STP_VEL_SOPRADORES;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
     public bool FireEvent_E_COMANDO(System.Boolean CMD_AD1, System.Boolean CMD_AD2, System.Boolean CMD_AD3)
@@ -2563,13 +2583,13 @@ stack Trace:
 
       }
     }
-    public bool FireEvent_E_PARAMETROS(System.Boolean HAB_SOPRADORES, System.Single STP_NIVEL_MIN_TQ, System.Single STP_NIVEL_RETOMA_TQ, System.Single STP_VAZAO_AD1, System.Single STP_VAZAO_AD2, System.Single STP_VAZAO_AD3, System.Single STP_VEL_INICIAL, System.Single STP_NIVEL_SUSPENDE, System.Single STP_NIVEL_RETOMA, System.Int16 STP_TEMPO_VALVULAS, System.Int16 STP_DIF_HORAS_BO, System.Int16 STP_TEMPO_SEM_PARTIR)
+    public bool FireEvent_E_PARAMETROS(System.Boolean HAB_SOPRADORES, System.Single STP_NIVEL_MIN_TQ, System.Single STP_NIVEL_RETOMA_TQ, System.Single STP_VAZAO_AD1, System.Single STP_VAZAO_AD2, System.Single STP_VAZAO_AD3, System.Single STP_VEL_INICIAL, System.Single STP_NIVEL_SUSPENDE, System.Single STP_NIVEL_RETOMA, System.Int16 STP_TEMPO_VALVULAS, System.Int16 STP_DIF_HORAS_BO, System.Int16 STP_TEMPO_SEM_PARTIR, System.Single STP_VEL_SOPRADORES)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {HAB_SOPRADORES, STP_NIVEL_MIN_TQ, STP_NIVEL_RETOMA_TQ, STP_VAZAO_AD1, STP_VAZAO_AD2, STP_VAZAO_AD3, STP_VEL_INICIAL, STP_NIVEL_SUSPENDE, STP_NIVEL_RETOMA, STP_TEMPO_VALVULAS, STP_DIF_HORAS_BO, STP_TEMPO_SEM_PARTIR});
+      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {HAB_SOPRADORES, STP_NIVEL_MIN_TQ, STP_NIVEL_RETOMA_TQ, STP_VAZAO_AD1, STP_VAZAO_AD2, STP_VAZAO_AD3, STP_VEL_INICIAL, STP_NIVEL_SUSPENDE, STP_NIVEL_RETOMA, STP_TEMPO_VALVULAS, STP_DIF_HORAS_BO, STP_TEMPO_SEM_PARTIR, STP_VEL_SOPRADORES});
     }
     public bool FireEvent_E_PARAMETROS(Hidryco.HidrycoLib.Symbols.DesidratacaoLodo.E_PARAMETROSEventArgs ea)
     {
-      object[] _values_ = new object[12];
+      object[] _values_ = new object[13];
       if (ea.HAB_SOPRADORES.HasValue) _values_[0] = ea.HAB_SOPRADORES.Value;
       if (ea.STP_NIVEL_MIN_TQ.HasValue) _values_[1] = ea.STP_NIVEL_MIN_TQ.Value;
       if (ea.STP_NIVEL_RETOMA_TQ.HasValue) _values_[2] = ea.STP_NIVEL_RETOMA_TQ.Value;
@@ -2582,11 +2602,12 @@ stack Trace:
       if (ea.STP_TEMPO_VALVULAS.HasValue) _values_[9] = ea.STP_TEMPO_VALVULAS.Value;
       if (ea.STP_DIF_HORAS_BO.HasValue) _values_[10] = ea.STP_DIF_HORAS_BO.Value;
       if (ea.STP_TEMPO_SEM_PARTIR.HasValue) _values_[11] = ea.STP_TEMPO_SEM_PARTIR.Value;
+      if (ea.STP_VEL_SOPRADORES.HasValue) _values_[12] = ea.STP_VEL_SOPRADORES.Value;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
-    public bool FireEvent_E_PARAMETROS(System.Boolean HAB_SOPRADORES, bool ignore_HAB_SOPRADORES, System.Single STP_NIVEL_MIN_TQ, bool ignore_STP_NIVEL_MIN_TQ, System.Single STP_NIVEL_RETOMA_TQ, bool ignore_STP_NIVEL_RETOMA_TQ, System.Single STP_VAZAO_AD1, bool ignore_STP_VAZAO_AD1, System.Single STP_VAZAO_AD2, bool ignore_STP_VAZAO_AD2, System.Single STP_VAZAO_AD3, bool ignore_STP_VAZAO_AD3, System.Single STP_VEL_INICIAL, bool ignore_STP_VEL_INICIAL, System.Single STP_NIVEL_SUSPENDE, bool ignore_STP_NIVEL_SUSPENDE, System.Single STP_NIVEL_RETOMA, bool ignore_STP_NIVEL_RETOMA, System.Int16 STP_TEMPO_VALVULAS, bool ignore_STP_TEMPO_VALVULAS, System.Int16 STP_DIF_HORAS_BO, bool ignore_STP_DIF_HORAS_BO, System.Int16 STP_TEMPO_SEM_PARTIR, bool ignore_STP_TEMPO_SEM_PARTIR)
+    public bool FireEvent_E_PARAMETROS(System.Boolean HAB_SOPRADORES, bool ignore_HAB_SOPRADORES, System.Single STP_NIVEL_MIN_TQ, bool ignore_STP_NIVEL_MIN_TQ, System.Single STP_NIVEL_RETOMA_TQ, bool ignore_STP_NIVEL_RETOMA_TQ, System.Single STP_VAZAO_AD1, bool ignore_STP_VAZAO_AD1, System.Single STP_VAZAO_AD2, bool ignore_STP_VAZAO_AD2, System.Single STP_VAZAO_AD3, bool ignore_STP_VAZAO_AD3, System.Single STP_VEL_INICIAL, bool ignore_STP_VEL_INICIAL, System.Single STP_NIVEL_SUSPENDE, bool ignore_STP_NIVEL_SUSPENDE, System.Single STP_NIVEL_RETOMA, bool ignore_STP_NIVEL_RETOMA, System.Int16 STP_TEMPO_VALVULAS, bool ignore_STP_TEMPO_VALVULAS, System.Int16 STP_DIF_HORAS_BO, bool ignore_STP_DIF_HORAS_BO, System.Int16 STP_TEMPO_SEM_PARTIR, bool ignore_STP_TEMPO_SEM_PARTIR, System.Single STP_VEL_SOPRADORES, bool ignore_STP_VEL_SOPRADORES)
     {
-      object[] _values_ = new object[12];
+      object[] _values_ = new object[13];
       if (!ignore_HAB_SOPRADORES) _values_[0] = HAB_SOPRADORES;
       if (!ignore_STP_NIVEL_MIN_TQ) _values_[1] = STP_NIVEL_MIN_TQ;
       if (!ignore_STP_NIVEL_RETOMA_TQ) _values_[2] = STP_NIVEL_RETOMA_TQ;
@@ -2599,6 +2620,7 @@ stack Trace:
       if (!ignore_STP_TEMPO_VALVULAS) _values_[9] = STP_TEMPO_VALVULAS;
       if (!ignore_STP_DIF_HORAS_BO) _values_[10] = STP_DIF_HORAS_BO;
       if (!ignore_STP_TEMPO_SEM_PARTIR) _values_[11] = STP_TEMPO_SEM_PARTIR;
+      if (!ignore_STP_VEL_SOPRADORES) _values_[12] = STP_VEL_SOPRADORES;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
     public bool FireEvent_E_COMANDO(System.Boolean CMD_AD1, System.Boolean CMD_AD2, System.Boolean CMD_AD3)
@@ -2724,13 +2746,13 @@ stack Trace:
 
       }
     }
-    public bool FireEvent_E_PARAMETROS(System.Boolean HAB_SOPRADORES, System.Single STP_NIVEL_MIN_TQ, System.Single STP_NIVEL_RETOMA_TQ, System.Single STP_VAZAO_AD1, System.Single STP_VAZAO_AD2, System.Single STP_VAZAO_AD3, System.Single STP_VEL_INICIAL, System.Single STP_NIVEL_SUSPENDE, System.Single STP_NIVEL_RETOMA, System.Int16 STP_TEMPO_VALVULAS, System.Int16 STP_DIF_HORAS_BO, System.Int16 STP_TEMPO_SEM_PARTIR)
+    public bool FireEvent_E_PARAMETROS(System.Boolean HAB_SOPRADORES, System.Single STP_NIVEL_MIN_TQ, System.Single STP_NIVEL_RETOMA_TQ, System.Single STP_VAZAO_AD1, System.Single STP_VAZAO_AD2, System.Single STP_VAZAO_AD3, System.Single STP_VEL_INICIAL, System.Single STP_NIVEL_SUSPENDE, System.Single STP_NIVEL_RETOMA, System.Int16 STP_TEMPO_VALVULAS, System.Int16 STP_DIF_HORAS_BO, System.Int16 STP_TEMPO_SEM_PARTIR, System.Single STP_VEL_SOPRADORES)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {HAB_SOPRADORES, STP_NIVEL_MIN_TQ, STP_NIVEL_RETOMA_TQ, STP_VAZAO_AD1, STP_VAZAO_AD2, STP_VAZAO_AD3, STP_VEL_INICIAL, STP_NIVEL_SUSPENDE, STP_NIVEL_RETOMA, STP_TEMPO_VALVULAS, STP_DIF_HORAS_BO, STP_TEMPO_SEM_PARTIR});
+      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {HAB_SOPRADORES, STP_NIVEL_MIN_TQ, STP_NIVEL_RETOMA_TQ, STP_VAZAO_AD1, STP_VAZAO_AD2, STP_VAZAO_AD3, STP_VEL_INICIAL, STP_NIVEL_SUSPENDE, STP_NIVEL_RETOMA, STP_TEMPO_VALVULAS, STP_DIF_HORAS_BO, STP_TEMPO_SEM_PARTIR, STP_VEL_SOPRADORES});
     }
     public bool FireEvent_E_PARAMETROS(Hidryco.HidrycoLib.Symbols.DesidratacaoLodo.E_PARAMETROSEventArgs ea)
     {
-      object[] _values_ = new object[12];
+      object[] _values_ = new object[13];
       if (ea.HAB_SOPRADORES.HasValue) _values_[0] = ea.HAB_SOPRADORES.Value;
       if (ea.STP_NIVEL_MIN_TQ.HasValue) _values_[1] = ea.STP_NIVEL_MIN_TQ.Value;
       if (ea.STP_NIVEL_RETOMA_TQ.HasValue) _values_[2] = ea.STP_NIVEL_RETOMA_TQ.Value;
@@ -2743,11 +2765,12 @@ stack Trace:
       if (ea.STP_TEMPO_VALVULAS.HasValue) _values_[9] = ea.STP_TEMPO_VALVULAS.Value;
       if (ea.STP_DIF_HORAS_BO.HasValue) _values_[10] = ea.STP_DIF_HORAS_BO.Value;
       if (ea.STP_TEMPO_SEM_PARTIR.HasValue) _values_[11] = ea.STP_TEMPO_SEM_PARTIR.Value;
+      if (ea.STP_VEL_SOPRADORES.HasValue) _values_[12] = ea.STP_VEL_SOPRADORES.Value;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
-    public bool FireEvent_E_PARAMETROS(System.Boolean HAB_SOPRADORES, bool ignore_HAB_SOPRADORES, System.Single STP_NIVEL_MIN_TQ, bool ignore_STP_NIVEL_MIN_TQ, System.Single STP_NIVEL_RETOMA_TQ, bool ignore_STP_NIVEL_RETOMA_TQ, System.Single STP_VAZAO_AD1, bool ignore_STP_VAZAO_AD1, System.Single STP_VAZAO_AD2, bool ignore_STP_VAZAO_AD2, System.Single STP_VAZAO_AD3, bool ignore_STP_VAZAO_AD3, System.Single STP_VEL_INICIAL, bool ignore_STP_VEL_INICIAL, System.Single STP_NIVEL_SUSPENDE, bool ignore_STP_NIVEL_SUSPENDE, System.Single STP_NIVEL_RETOMA, bool ignore_STP_NIVEL_RETOMA, System.Int16 STP_TEMPO_VALVULAS, bool ignore_STP_TEMPO_VALVULAS, System.Int16 STP_DIF_HORAS_BO, bool ignore_STP_DIF_HORAS_BO, System.Int16 STP_TEMPO_SEM_PARTIR, bool ignore_STP_TEMPO_SEM_PARTIR)
+    public bool FireEvent_E_PARAMETROS(System.Boolean HAB_SOPRADORES, bool ignore_HAB_SOPRADORES, System.Single STP_NIVEL_MIN_TQ, bool ignore_STP_NIVEL_MIN_TQ, System.Single STP_NIVEL_RETOMA_TQ, bool ignore_STP_NIVEL_RETOMA_TQ, System.Single STP_VAZAO_AD1, bool ignore_STP_VAZAO_AD1, System.Single STP_VAZAO_AD2, bool ignore_STP_VAZAO_AD2, System.Single STP_VAZAO_AD3, bool ignore_STP_VAZAO_AD3, System.Single STP_VEL_INICIAL, bool ignore_STP_VEL_INICIAL, System.Single STP_NIVEL_SUSPENDE, bool ignore_STP_NIVEL_SUSPENDE, System.Single STP_NIVEL_RETOMA, bool ignore_STP_NIVEL_RETOMA, System.Int16 STP_TEMPO_VALVULAS, bool ignore_STP_TEMPO_VALVULAS, System.Int16 STP_DIF_HORAS_BO, bool ignore_STP_DIF_HORAS_BO, System.Int16 STP_TEMPO_SEM_PARTIR, bool ignore_STP_TEMPO_SEM_PARTIR, System.Single STP_VEL_SOPRADORES, bool ignore_STP_VEL_SOPRADORES)
     {
-      object[] _values_ = new object[12];
+      object[] _values_ = new object[13];
       if (!ignore_HAB_SOPRADORES) _values_[0] = HAB_SOPRADORES;
       if (!ignore_STP_NIVEL_MIN_TQ) _values_[1] = STP_NIVEL_MIN_TQ;
       if (!ignore_STP_NIVEL_RETOMA_TQ) _values_[2] = STP_NIVEL_RETOMA_TQ;
@@ -2760,6 +2783,7 @@ stack Trace:
       if (!ignore_STP_TEMPO_VALVULAS) _values_[9] = STP_TEMPO_VALVULAS;
       if (!ignore_STP_DIF_HORAS_BO) _values_[10] = STP_DIF_HORAS_BO;
       if (!ignore_STP_TEMPO_SEM_PARTIR) _values_[11] = STP_TEMPO_SEM_PARTIR;
+      if (!ignore_STP_VEL_SOPRADORES) _values_[12] = STP_VEL_SOPRADORES;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
     public bool FireEvent_E_COMANDO(System.Boolean CMD_AD1, System.Boolean CMD_AD2, System.Boolean CMD_AD3)
@@ -2885,13 +2909,13 @@ stack Trace:
 
       }
     }
-    public bool FireEvent_E_PARAMETROS(System.Boolean HAB_SOPRADORES, System.Single STP_NIVEL_MIN_TQ, System.Single STP_NIVEL_RETOMA_TQ, System.Single STP_VAZAO_AD1, System.Single STP_VAZAO_AD2, System.Single STP_VAZAO_AD3, System.Single STP_VEL_INICIAL, System.Single STP_NIVEL_SUSPENDE, System.Single STP_NIVEL_RETOMA, System.Int16 STP_TEMPO_VALVULAS, System.Int16 STP_DIF_HORAS_BO, System.Int16 STP_TEMPO_SEM_PARTIR)
+    public bool FireEvent_E_PARAMETROS(System.Boolean HAB_SOPRADORES, System.Single STP_NIVEL_MIN_TQ, System.Single STP_NIVEL_RETOMA_TQ, System.Single STP_VAZAO_AD1, System.Single STP_VAZAO_AD2, System.Single STP_VAZAO_AD3, System.Single STP_VEL_INICIAL, System.Single STP_NIVEL_SUSPENDE, System.Single STP_NIVEL_RETOMA, System.Int16 STP_TEMPO_VALVULAS, System.Int16 STP_DIF_HORAS_BO, System.Int16 STP_TEMPO_SEM_PARTIR, System.Single STP_VEL_SOPRADORES)
     {
-      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {HAB_SOPRADORES, STP_NIVEL_MIN_TQ, STP_NIVEL_RETOMA_TQ, STP_VAZAO_AD1, STP_VAZAO_AD2, STP_VAZAO_AD3, STP_VEL_INICIAL, STP_NIVEL_SUSPENDE, STP_NIVEL_RETOMA, STP_TEMPO_VALVULAS, STP_DIF_HORAS_BO, STP_TEMPO_SEM_PARTIR});
+      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {HAB_SOPRADORES, STP_NIVEL_MIN_TQ, STP_NIVEL_RETOMA_TQ, STP_VAZAO_AD1, STP_VAZAO_AD2, STP_VAZAO_AD3, STP_VEL_INICIAL, STP_NIVEL_SUSPENDE, STP_NIVEL_RETOMA, STP_TEMPO_VALVULAS, STP_DIF_HORAS_BO, STP_TEMPO_SEM_PARTIR, STP_VEL_SOPRADORES});
     }
     public bool FireEvent_E_PARAMETROS(Hidryco.HidrycoLib.Symbols.DesidratacaoLodo.E_PARAMETROSEventArgs ea)
     {
-      object[] _values_ = new object[12];
+      object[] _values_ = new object[13];
       if (ea.HAB_SOPRADORES.HasValue) _values_[0] = ea.HAB_SOPRADORES.Value;
       if (ea.STP_NIVEL_MIN_TQ.HasValue) _values_[1] = ea.STP_NIVEL_MIN_TQ.Value;
       if (ea.STP_NIVEL_RETOMA_TQ.HasValue) _values_[2] = ea.STP_NIVEL_RETOMA_TQ.Value;
@@ -2904,11 +2928,12 @@ stack Trace:
       if (ea.STP_TEMPO_VALVULAS.HasValue) _values_[9] = ea.STP_TEMPO_VALVULAS.Value;
       if (ea.STP_DIF_HORAS_BO.HasValue) _values_[10] = ea.STP_DIF_HORAS_BO.Value;
       if (ea.STP_TEMPO_SEM_PARTIR.HasValue) _values_[11] = ea.STP_TEMPO_SEM_PARTIR.Value;
+      if (ea.STP_VEL_SOPRADORES.HasValue) _values_[12] = ea.STP_VEL_SOPRADORES.Value;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
-    public bool FireEvent_E_PARAMETROS(System.Boolean HAB_SOPRADORES, bool ignore_HAB_SOPRADORES, System.Single STP_NIVEL_MIN_TQ, bool ignore_STP_NIVEL_MIN_TQ, System.Single STP_NIVEL_RETOMA_TQ, bool ignore_STP_NIVEL_RETOMA_TQ, System.Single STP_VAZAO_AD1, bool ignore_STP_VAZAO_AD1, System.Single STP_VAZAO_AD2, bool ignore_STP_VAZAO_AD2, System.Single STP_VAZAO_AD3, bool ignore_STP_VAZAO_AD3, System.Single STP_VEL_INICIAL, bool ignore_STP_VEL_INICIAL, System.Single STP_NIVEL_SUSPENDE, bool ignore_STP_NIVEL_SUSPENDE, System.Single STP_NIVEL_RETOMA, bool ignore_STP_NIVEL_RETOMA, System.Int16 STP_TEMPO_VALVULAS, bool ignore_STP_TEMPO_VALVULAS, System.Int16 STP_DIF_HORAS_BO, bool ignore_STP_DIF_HORAS_BO, System.Int16 STP_TEMPO_SEM_PARTIR, bool ignore_STP_TEMPO_SEM_PARTIR)
+    public bool FireEvent_E_PARAMETROS(System.Boolean HAB_SOPRADORES, bool ignore_HAB_SOPRADORES, System.Single STP_NIVEL_MIN_TQ, bool ignore_STP_NIVEL_MIN_TQ, System.Single STP_NIVEL_RETOMA_TQ, bool ignore_STP_NIVEL_RETOMA_TQ, System.Single STP_VAZAO_AD1, bool ignore_STP_VAZAO_AD1, System.Single STP_VAZAO_AD2, bool ignore_STP_VAZAO_AD2, System.Single STP_VAZAO_AD3, bool ignore_STP_VAZAO_AD3, System.Single STP_VEL_INICIAL, bool ignore_STP_VEL_INICIAL, System.Single STP_NIVEL_SUSPENDE, bool ignore_STP_NIVEL_SUSPENDE, System.Single STP_NIVEL_RETOMA, bool ignore_STP_NIVEL_RETOMA, System.Int16 STP_TEMPO_VALVULAS, bool ignore_STP_TEMPO_VALVULAS, System.Int16 STP_DIF_HORAS_BO, bool ignore_STP_DIF_HORAS_BO, System.Int16 STP_TEMPO_SEM_PARTIR, bool ignore_STP_TEMPO_SEM_PARTIR, System.Single STP_VEL_SOPRADORES, bool ignore_STP_VEL_SOPRADORES)
     {
-      object[] _values_ = new object[12];
+      object[] _values_ = new object[13];
       if (!ignore_HAB_SOPRADORES) _values_[0] = HAB_SOPRADORES;
       if (!ignore_STP_NIVEL_MIN_TQ) _values_[1] = STP_NIVEL_MIN_TQ;
       if (!ignore_STP_NIVEL_RETOMA_TQ) _values_[2] = STP_NIVEL_RETOMA_TQ;
@@ -2921,6 +2946,7 @@ stack Trace:
       if (!ignore_STP_TEMPO_VALVULAS) _values_[9] = STP_TEMPO_VALVULAS;
       if (!ignore_STP_DIF_HORAS_BO) _values_[10] = STP_DIF_HORAS_BO;
       if (!ignore_STP_TEMPO_SEM_PARTIR) _values_[11] = STP_TEMPO_SEM_PARTIR;
+      if (!ignore_STP_VEL_SOPRADORES) _values_[12] = STP_VEL_SOPRADORES;
       return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
     }
     public bool FireEvent_E_COMANDO(System.Boolean CMD_AD1, System.Boolean CMD_AD2, System.Boolean CMD_AD3)

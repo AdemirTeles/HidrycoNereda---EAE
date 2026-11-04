@@ -2,7 +2,7 @@
 <!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
 <FBType GUID="48f7af8f-3f6d-fa13-779f-f44080d94d76" Name="basicAlimentacaoPrensas" Comment="Alimentacao das prensas C-Press: rotas do barrilete, bombas helicoidais, PID de vazao, preparador, painel" Namespace="Hidryco.HidrycoLib">
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Hidryco" Version="1.2" Author="Hidryco" Date="04/11/2026" Remarks="1.2: emergencia do PCM LODO NA (TRUE = emergencia), confirmado em campo. 1.1: velocidade de partida (stpVelInicial) e PIDs das prensas em Hz (60 Hz = 100 %); bombas continuam em %. 1.0: maquina de estados por prensa (valvulas, bomba, PID, suspensao por floculador/tanque), alocacao de bombas por no do barrilete, BO-02 reserva comum com rodizio na partida, horimetro persistente, ciclo das prensas e do preparador, SV manual, emergencia NF e disjuntores" />
+  <VersionInfo Organization="Hidryco" Version="1.3" Author="Hidryco" Date="04/11/2026" Remarks="1.3: FT desabilitado conta como falha (ftNHab); rota so e liberada com a bomba parada; CNF_BO tambem na mudanca de comando/emergencia. 1.2: emergencia do PCM LODO NA (TRUE = emergencia), confirmado em campo. 1.1: velocidade de partida (stpVelInicial) e PIDs das prensas em Hz (60 Hz = 100 %); bombas continuam em %. 1.0: maquina de estados por prensa (valvulas, bomba, PID, suspensao por floculador/tanque), alocacao de bombas por no do barrilete, BO-02 reserva comum com rodizio na partida, horimetro persistente, ciclo das prensas e do preparador, SV manual, emergencia NF e disjuntores" />
   <InterfaceList>
     <EventInputs>
       <Event ID="13FEA6D5249A7B77" Name="INIT" Comment="Inicializacao" />
@@ -61,6 +61,9 @@
         <With Var="ft2Falha" />
         <With Var="ft3Valor" />
         <With Var="ft3Falha" />
+        <With Var="ft1Hab" />
+        <With Var="ft2Hab" />
+        <With Var="ft3Hab" />
       </Event>
       <Event ID="37F5128277E33C7D" Name="REQ_PID" Comment="Saida dos PID de vazao">
         <With Var="pid1Out" />
@@ -312,6 +315,9 @@
       <VarDeclaration ID="0B775DA830BA5C8F" Name="ft2Valor" Type="REAL" Comment="Vazao (m3/h) - FT da AD-02" />
       <VarDeclaration ID="BF4060DB062B029B" Name="ft2Falha" Type="BOOL" Comment="Em falha - FT da AD-02" />
       <VarDeclaration ID="1C872E508B6F9CCA" Name="ft3Valor" Type="REAL" Comment="Vazao (m3/h) - FT da AD-03" />
+      <VarDeclaration ID="ACEA17EBE8E63CF3" Name="ft1Hab" Type="BOOL" InitialValue="TRUE" Comment="Habilitado na IHM - FT da AD-01 (desabilitado = falha)" />
+      <VarDeclaration ID="3475850F1055D0F8" Name="ft2Hab" Type="BOOL" InitialValue="TRUE" Comment="Habilitado na IHM - FT da AD-02 (desabilitado = falha)" />
+      <VarDeclaration ID="FB3DD143CAF4663F" Name="ft3Hab" Type="BOOL" InitialValue="TRUE" Comment="Habilitado na IHM - FT da AD-03 (desabilitado = falha)" />
       <VarDeclaration ID="6DEAF5F9074BEFF6" Name="ft3Falha" Type="BOOL" Comment="Em falha - FT da AD-03" />
       <VarDeclaration ID="EF0418ED47F514A0" Name="pid1Out" Type="REAL" Comment="Saida do PID da AD-01 (% de velocidade)" />
       <VarDeclaration ID="CB7E7E5A60558086" Name="pid2Out" Type="REAL" Comment="Saida do PID da AD-02 (% de velocidade)" />
@@ -506,6 +512,8 @@
       <VarDeclaration ID="BAF300F62AC361E6" Name="oldVa" Type="WORD" InitialValue="16#FFFF" />
       <VarDeclaration ID="EF34B29E888C76CE" Name="oldCic" Type="INT" InitialValue="-1" />
       <VarDeclaration ID="A088B6003C39D956" Name="nCic" Type="INT" />
+      <VarDeclaration ID="EAA075F77C74FC65" Name="nBo" Type="INT" Comment="Assinatura dos comandos das bombas e da emergencia" />
+      <VarDeclaration ID="CFEF539707C3F8DD" Name="oldBo" Type="INT" InitialValue="-1" />
       <VarDeclaration ID="54D246E6EA723FC0" Name="sig" Type="DINT" />
       <VarDeclaration ID="13B278D55B21D548" Name="oldSig" Type="DINT" InitialValue="-1" />
       <VarDeclaration ID="B349A34E988D2770" Name="tBo" Type="INT" Comment="Reenvio periodico" />
@@ -652,7 +660,7 @@ END_IF;
 aDsp[0] := ad1Disp; adF[0] := ad1Func; adN[0] := ad1Nivel;
 aDsp[1] := ad2Disp; adF[1] := ad2Func; adN[1] := ad2Nivel;
 aDsp[2] := ad3Disp; adF[2] := ad3Func; adN[2] := ad3Nivel;
-ftF[0] := ft1Falha; ftF[1] := ft2Falha; ftF[2] := ft3Falha;
+ftF[0] := ft1Falha OR NOT ft1Hab; ftF[1] := ft2Falha OR NOT ft2Hab; ftF[2] := ft3Falha OR NOT ft3Hab;   (* FT desabilitado = sem medicao: PID em manual *)
 pOut[0] := pid1Out / 0.6; pOut[1] := pid2Out / 0.6; pOut[2] := pid3Out / 0.6;   (* PIDs em Hz -> % das bombas *)
 sp[0] := stpVazao1; sp[1] := stpVazao2; sp[2] := stpVazao3;
 ped[0] := hmiAD1; ped[1] := hmiAD2; ped[2] := hmiAD3;
@@ -851,7 +859,7 @@ FOR k := 0 TO 2 DO
             est[k] := 2; tEst[k] := 0;
         END_IF;
     5:  (* parando: espera a bomba parar e libera a rota *)
-        IF NOT boL[b] OR NOT boD[b] OR boF[b] OR (tEst[k] >= 30) THEN
+        IF NOT boL[b] THEN                 (* so libera a rota com a bomba parada: valvulas nunca fecham contra a bomba *)
             uso[b] := 0;
             bomba[k] := -1;
             est[k] := 0; tEst[k] := 0;
@@ -961,8 +969,14 @@ IF primeiro OR TICK OR (nMod <> oldMod) THEN
     CNF_PID := TRUE;                       (* tracking a cada 1 s e na troca de modo *)
     oldMod := nMod;
 END_IF;
-IF primeiro OR TICK OR (nCic <> oldCic) THEN
-    CNF_BO := TRUE;                        (* velocidade acompanha o PID a cada 1 s *)
+nBo := 0;
+IF cB[0] THEN nBo := nBo + 1; END_IF;
+IF cB[1] THEN nBo := nBo + 2; END_IF;
+IF cB[2] THEN nBo := nBo + 4; END_IF;
+IF emerg THEN nBo := nBo + 8; END_IF;
+IF primeiro OR TICK OR (nCic <> oldCic) OR (nBo <> oldBo) THEN
+    CNF_BO := TRUE;                        (* velocidade a cada 1 s; comando e emergencia na hora *)
+    oldBo := nBo;
 END_IF;
 IF primeiro OR (mAbr <> oldVa) OR (tBo >= 10) THEN
     CNF_VA := TRUE;

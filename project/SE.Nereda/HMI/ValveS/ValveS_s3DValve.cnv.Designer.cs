@@ -33,7 +33,7 @@ namespace SE.Nereda.Symbols.ValveS
 			this.permissive = new SE.App2CommonProcess.Symbols.PermCondSum.sPermissiveSmall();
 			this.VlvName = new NxtControl.GuiFramework.Rectangle();
 			this.OpenFp = new NxtControl.GuiFramework.Rectangle();
-			this.Base = new SE.App2CommonProcess.Symbols.ValveBase.sDefault();
+			this.Base = new SE.Nereda.Symbols.ValveBaseNer.sDefault();
 			this.pipe24 = new NxtControl.GuiFramework.Pipe();
 			this.pipe23 = new NxtControl.GuiFramework.Pipe();
 			this.VlvBase1 = new NxtControl.GuiFramework.Ellipse();
@@ -322,7 +322,7 @@ namespace SE.Nereda.Symbols.ValveS
 		private SE.App2CommonProcess.Symbols.PermCondSum.sPermissiveSmall permissive;
 		private NxtControl.GuiFramework.Rectangle VlvName;
 		private NxtControl.GuiFramework.Rectangle OpenFp;
-		private SE.App2CommonProcess.Symbols.ValveBase.sDefault Base;
+		private SE.Nereda.Symbols.ValveBaseNer.sDefault Base;
 		private NxtControl.GuiFramework.Pipe pipe24;
 		private NxtControl.GuiFramework.Pipe pipe23;
 		private NxtControl.GuiFramework.Ellipse VlvBase1;

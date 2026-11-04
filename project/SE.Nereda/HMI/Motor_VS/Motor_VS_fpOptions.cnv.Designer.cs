@@ -30,7 +30,7 @@ namespace SE.Nereda.Faceplates.Motor_VS
 			this.permissive = new SE.App2CommonProcess.Symbols.PermCondSum.sPermissive();
 			this.failure = new SE.App2CommonProcess.Symbols.FailCondSum.sFailure();
 			this.OpenMotFp = new NxtControl.GuiFramework.DrawnButton();
-			this.BaseVs = new SE.App2CommonProcess.Symbols.MotorVsBase.sDefault();
+			this.BaseVs = new SE.Nereda.Symbols.MotorVsBaseNer.sDefault();
 			this.maintenance = new SE.App2CommonProcess.Symbols.DevMnt.sDefault();
 			this.RearmBtn = new NxtControl.GuiFramework.DrawnButton();
 			this.MotorVsFailuresAlarms = new SE.Nereda.Symbols.MotVsFailures.sDefault();
@@ -170,7 +170,7 @@ namespace SE.Nereda.Faceplates.Motor_VS
 		private SE.App2CommonProcess.Symbols.PermCondSum.sPermissive permissive;
 		private SE.App2CommonProcess.Symbols.FailCondSum.sFailure failure;
 		private NxtControl.GuiFramework.DrawnButton OpenMotFp;
-		private SE.App2CommonProcess.Symbols.MotorVsBase.sDefault BaseVs;
+		private SE.Nereda.Symbols.MotorVsBaseNer.sDefault BaseVs;
 		private SE.App2CommonProcess.Symbols.DevMnt.sDefault maintenance;
 		private NxtControl.GuiFramework.DrawnButton RearmBtn;
 		private SE.Nereda.Symbols.MotVsFailures.sDefault MotorVsFailuresAlarms;

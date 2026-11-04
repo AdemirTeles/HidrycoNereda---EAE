@@ -87,6 +87,7 @@ namespace Hidryco.HidrycoLib.Symbols.UV_Trojan
 		byte eCom, eCri, eMai;
 		void XFCOMValueChanged(object s, ValueChangedEventArgs e) { fCom = Convert.ToBoolean(e.Value); Atualiza(); }
 		void XOPValueChanged(object s, ValueChangedEventArgs e) { op = Convert.ToBoolean(e.Value); Atualiza(); }
+		void XGERValueChanged(object s, ValueChangedEventArgs e) { raioGerador.Animacao = Convert.ToInt32(e.Value); }
 		void XALValueChanged(object s, ValueChangedEventArgs e) { al = Convert.ToInt16(e.Value); Atualiza(); }
 		void XNBValueChanged(object s, ValueChangedEventArgs e) { nb = Convert.ToBoolean(e.Value); Atualiza(); }
 		void XOFValueChanged(object s, ValueChangedEventArgs e) { of = Convert.ToBoolean(e.Value); Atualiza(); }

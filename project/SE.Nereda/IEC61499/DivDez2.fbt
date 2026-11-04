@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="fd6a99c3-547d-5e0c-b7c2-8779d0585e52" Name="DivDez2" Comment="Dois valores INT em decimos para REAL (/10)" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Hidryco" Version="1.0" Author="Hidryco" Date="04/11/2026" Remarks="1.0: OUT1 = IN1 / 10, OUT2 = IN2 / 10. No FieldSignals: corrente (0,1 A) e rotacao (0,1 Hz) dos sopradores Sulzer." />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="D1214B8F082DE0A5" Name="REQ" Comment="Converte">
+        <With Var="IN1" />
+        <With Var="IN2" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="76A2C7728097811D" Name="CNF" Comment="Valores convertidos">
+        <With Var="OUT1" />
+        <With Var="OUT2" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="2D0E0E9959A78EDE" Name="IN1" Type="INT" Comment="Valor em decimos" />
+      <VarDeclaration ID="566741D5D93D41D2" Name="IN2" Type="INT" Comment="Valor em decimos" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="17FF7396943AAB57" Name="OUT1" Type="REAL" Comment="IN1 / 10" />
+      <VarDeclaration ID="FB26999DB1ACA69C" Name="OUT2" Type="REAL" Comment="IN2 / 10" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="e9f6ee8e-ccf3-55a1-9784-d18d22205a56">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="Divide" />
+    <ECC>
+      <ECState Name="START" Comment="Estado inicial" x="550" y="430" />
+      <ECState Name="CONVERTE" Comment="Divide por 10" x="1170" y="730">
+        <ECAction Algorithm="Divide" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="CONVERTE" Condition="REQ" x="895" y="505" />
+      <ECTransition Source="CONVERTE" Destination="START" Condition="1" x="880" y="665" />
+    </ECC>
+    <Algorithm Name="Divide" Comment="Decimos para unidade">
+      <ST><![CDATA[
+OUT1 := INT_TO_REAL(IN1) / 10.0;
+OUT2 := INT_TO_REAL(IN2) / 10.0;
+]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

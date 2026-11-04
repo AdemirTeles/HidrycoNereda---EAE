@@ -4,8 +4,24 @@
   <Attribute Name="HMI.Alias" Value="" />
   <Attribute Name="Configuration.FB.IDCounter" Value="20" />
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Schneider Electric" Version="0.0" Author="SESA713705" Date="4/25/2024" Remarks="template" />
+  <VersionInfo Organization="Schneider Electric" Version="0.1" Author="SESA713705" Date="4/25/2024" Remarks="0.1: carga no gerador: REQ_GERADOR repassado aos atuadores (V4601-V4604). template" />
   <InterfaceList>
+    <EventInputs>
+      <Event ID="343299A527021480" Name="REQ_GERADOR" Comment="Planta nos geradores e liberacao dos sopradores (Subestacao)">
+        <With Var="geradorHabilitaV4601" />
+        <With Var="geradorHabilitaV4602" />
+        <With Var="geradorHabilitaV4603" />
+        <With Var="geradorHabilitaV4604" />
+        <With Var="stsGerador" />
+      </Event>
+    </EventInputs>
+    <InputVars>
+      <VarDeclaration ID="E8E5FF489B43618A" Name="geradorHabilitaV4601" Type="BOOL" Comment="V4601 liberado para operar com a planta nos geradores" />
+      <VarDeclaration ID="A6249B75BAECD359" Name="geradorHabilitaV4602" Type="BOOL" Comment="V4602 liberado para operar com a planta nos geradores" />
+      <VarDeclaration ID="9706F98C2A856240" Name="geradorHabilitaV4603" Type="BOOL" Comment="V4603 liberado para operar com a planta nos geradores" />
+      <VarDeclaration ID="639EFA592CF3B7AB" Name="geradorHabilitaV4604" Type="BOOL" Comment="V4604 liberado para operar com a planta nos geradores" />
+      <VarDeclaration ID="B6004AB02CFE077D" Name="stsGerador" Type="BOOL" Comment="TRUE = planta alimentada pelos geradores" />
+    </InputVars>
     <AdapterInputs>
       <Adapter ID="IBlowerReactor" Name="IAerateReactor01" Type="ICommonBlower" Namespace="SE.Nereda" />
       <Adapter ID="036B0699AE92B07E" Name="IAerateReactor02" Type="ICommonBlower" Namespace="SE.Nereda" />
@@ -170,7 +186,15 @@
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
         <AvoidsNodes>false</AvoidsNodes>
       </Connection>
+      <Connection Source="$343299A527021480" Destination="$4026C8B8FC307876.REQ_GERADOR" />
     </EventConnections>
+    <DataConnections>
+      <Connection Source="$E8E5FF489B43618A" Destination="$4026C8B8FC307876.55A85525E8532209" />
+      <Connection Source="$B6004AB02CFE077D" Destination="$4026C8B8FC307876.4AA7486859FC0C6D" />
+      <Connection Source="$A6249B75BAECD359" Destination="$4026C8B8FC307876.561829D523F0F6C2" />
+      <Connection Source="$9706F98C2A856240" Destination="$4026C8B8FC307876.CCD2AACD7477A063" />
+      <Connection Source="$639EFA592CF3B7AB" Destination="$4026C8B8FC307876.B7376CF11E60CA18" />
+    </DataConnections>
     <AdapterConnections>
       <Connection Source="$IBlowerReactor" Destination="$9BFFB6715D933413.17" dx1="120">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />

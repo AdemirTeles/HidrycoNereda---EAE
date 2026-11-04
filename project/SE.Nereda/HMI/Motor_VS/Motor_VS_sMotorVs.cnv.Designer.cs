@@ -29,13 +29,15 @@ namespace SE.Nereda.Symbols.Motor_VS
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary1 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary4 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary3 = new NxtControl.GuiFramework.PropertyDictionary();
+			this.raioCirc = new NxtControl.GuiFramework.Ellipse();
+			this.raioRaio = new NxtControl.GuiFramework.Polygon();
 			this.State = new SE.Nereda.Symbols.ActState.sDefault();
 			this.interlock = new SE.App2CommonProcess.Symbols.IlckCondSum.sInterlockSmall();
 			this.failure = new SE.App2CommonProcess.Symbols.FailCondSum.sFailureSmall();
 			this.permissive = new SE.App2CommonProcess.Symbols.PermCondSum.sPermissiveSmall();
 			this.group1 = new NxtControl.GuiFramework.Group();
 			this.OpenFp = new NxtControl.GuiFramework.Rectangle();
-			this.BaseVs = new SE.App2CommonProcess.Symbols.MotorVsBase.sDefault();
+			this.BaseVs = new SE.Nereda.Symbols.MotorVsBaseNer.sDefault();
 			this.SpeedSp = new System.HMI.Symbols.Base.FreeText<float>();
 			this.FbSpeed = new System.HMI.Symbols.Base.FreeText<float>();
 			this.Unit = new NxtControl.GuiFramework.FreeText();
@@ -54,7 +56,7 @@ namespace SE.Nereda.Symbols.Motor_VS
 			this.line6 = new NxtControl.GuiFramework.Line();
 			this.group4 = new NxtControl.GuiFramework.Group();
 			this.MotBase6 = new NxtControl.GuiFramework.Rectangle();
-			this.Base = new SE.App2CommonProcess.Symbols.MotorBase.sDefault();
+			this.Base = new SE.Nereda.Symbols.MotorBaseNer.sDefault();
 			this.alarmFrame = new NxtControl.GuiFramework.AlarmFrame();
 			this.MotName = new NxtControl.GuiFramework.Rectangle();
 			this.VertMot = new NxtControl.GuiFramework.Group();
@@ -380,8 +382,34 @@ namespace SE.Nereda.Symbols.Motor_VS
 			// 
 			// sMotorVs
 			// 
+			// 
+			// raioCirc
+			// 
+			this.raioCirc.Bounds = new NxtControl.Drawing.RectF(((float)(90D)), ((float)(50D)), ((float)(24D)), ((float)(24D)));
+			this.raioCirc.Brush = new NxtControl.Drawing.Brush(true);
+			this.raioCirc.Name = "raioCirc";
+			this.raioCirc.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(154)), ((byte)(154)), ((byte)(154))), 2F, NxtControl.Drawing.DashStyle.Solid);
+			this.raioCirc.Visible = false;
+			// 
+			// raioRaio
+			// 
+			this.raioRaio.Bounds = new NxtControl.Drawing.RectF(((float)(97D)), ((float)(53D)), ((float)(10D)), ((float)(18D)));
+			this.raioRaio.Brush = new NxtControl.Drawing.Brush(true);
+			this.raioRaio.Closed = true;
+			this.raioRaio.Name = "raioRaio";
+			this.raioRaio.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(154)), ((byte)(154)), ((byte)(154))), 2F, NxtControl.Drawing.DashStyle.Solid);
+			this.raioRaio.Points.AddRange(new NxtControl.Drawing.PointF[] {
+			new NxtControl.Drawing.PointF(103.060606D, 53D),
+			new NxtControl.Drawing.PointF(97D, 64.142857D),
+			new NxtControl.Drawing.PointF(101.040404D, 64.142857D),
+			new NxtControl.Drawing.PointF(101.040404D, 71D),
+			new NxtControl.Drawing.PointF(107D, 60.714286D),
+			new NxtControl.Drawing.PointF(103.060606D, 60.714286D)});
+			this.raioRaio.Visible = false;
 			this.Shapes.AddRange(new System.ComponentModel.IComponent[] {
-			this.group5});
+			this.group5,
+			this.raioCirc,
+			this.raioRaio});
 			this.SymbolSize = new System.Drawing.Size(168, 152);
 			((System.ComponentModel.ISupportInitialize)(this.alarmFrame)).EndInit();
 
@@ -393,7 +421,9 @@ namespace SE.Nereda.Symbols.Motor_VS
 		private NxtControl.GuiFramework.Group group1;
 		private NxtControl.GuiFramework.Rectangle MotName;
 		private NxtControl.GuiFramework.Rectangle OpenFp;
-		private SE.App2CommonProcess.Symbols.MotorVsBase.sDefault BaseVs;
+		private NxtControl.GuiFramework.Ellipse raioCirc;
+		private NxtControl.GuiFramework.Polygon raioRaio;
+		private SE.Nereda.Symbols.MotorVsBaseNer.sDefault BaseVs;
 		private System.HMI.Symbols.Base.FreeText<float> SpeedSp;
 		private System.HMI.Symbols.Base.FreeText<float> FbSpeed;
 		private NxtControl.GuiFramework.FreeText Unit;
@@ -413,7 +443,7 @@ namespace SE.Nereda.Symbols.Motor_VS
 		private NxtControl.GuiFramework.Line line6;
 		private NxtControl.GuiFramework.Group group4;
 		private NxtControl.GuiFramework.Rectangle MotBase6;
-		private SE.App2CommonProcess.Symbols.MotorBase.sDefault Base;
+		private SE.Nereda.Symbols.MotorBaseNer.sDefault Base;
 		private NxtControl.GuiFramework.AlarmFrame alarmFrame;
 		private NxtControl.GuiFramework.Group VertMot;
 		private NxtControl.GuiFramework.Group HoriMot;

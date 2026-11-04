@@ -3,7 +3,7 @@
 <FBType GUID="9b8be7cf-a8d0-484a-9672-85f193df4b6a" Name="AnalogInput" Format="2.0" Comment="CAT Function Block Type" Namespace="SE.Nereda">
   <Attribute Name="HMI.Alias" Value="" />
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Schneider Electric" Version="1.0" Author="Claude/Hidryco" Date="10/7/2026" Remarks="Rev1 - QualityFailDelay: tolerancia da falha de canal por qualidade do sinal (ChFailFilter + ChFailTimer); 0 = imediato, comportamento anterior. Alarmes BadQuality/UncertainQuality so com a falha confirmada." />
+  <VersionInfo Organization="Schneider Electric" Version="1.0" Author="Claude/Hidryco" Date="10/7/2026" Remarks="Hidryco 04/11/2026: HiHiAlarm, HiAlarm, LoAlarm, LoLoAlarm, RocAlarm e DevAlarm so com o alarme habilitado (AlarmesHabilitados: LimitReached AND NOT Disabled). Rev1 - QualityFailDelay: tolerancia da falha de canal por qualidade do sinal (ChFailFilter + ChFailTimer); 0 = imediato, comportamento anterior. Alarmes BadQuality/UncertainQuality so com a falha confirmada." />
   <InterfaceList>
     <EventInputs>
       <Event ID="536A16EAB96A59B7" Name="REQ_SUPPRESS" Comment="Request to suppress the channel failure alarm">
@@ -108,6 +108,7 @@
       <Attribute Name="Configuration.Component.HideUnusedPorts" Value="" />
     </FB>
     <FB ID="8396C0299878FB57" UID="68A3688371821D2F" Name="CNF_ALARM" Type="E_MERGE_12" x="4240" y="6120" Namespace="SE.Nereda" />
+    <FB ID="E67B5245A9A9C2E7" Name="AlarmesHab" Type="AlarmesHabilitados" x="5400" y="6800" Namespace="SE.Nereda" />
     <FB ID="6E62C95CF5CB65E8" Name="HighAnalog" Type="encodeIAnalog" x="4660" y="3540" Namespace="SE.App2CommonProcess">
       <Attribute Name="Configuration.Component.HideUnusedPorts" Value="" />
     </FB>
@@ -452,36 +453,6 @@
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
         <AvoidsNodes>false</AvoidsNodes>
       </Connection>
-      <Connection Source="$8396C0299878FB57.EO" Destination="$3F29AC8AB4D6A90D">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-        <Points>
-          <Points>
-            <X>1159.86462</X>
-            <Y>1539.49988</Y>
-          </Points>
-          <Points>
-            <X>1169.86462</X>
-            <Y>1539.49988</Y>
-          </Points>
-          <Points>
-            <X>1169.86462</X>
-            <Y>866.9999</Y>
-          </Points>
-          <Points>
-            <X>1237.5</X>
-            <Y>866.9999</Y>
-          </Points>
-          <Points>
-            <X>1237.5</X>
-            <Y>358.999878</Y>
-          </Points>
-          <Points>
-            <X>1719.99988</X>
-            <Y>358.999878</Y>
-          </Points>
-        </Points>
-        <AvoidsNodes>false</AvoidsNodes>
-      </Connection>
       <Connection Source="$4AD90EB4D21DFDC5.5C15B34FA0BE2D12" Destination="$FBC4282D9A0E2D46.REQ" />
       <Connection Source="$BB3C6016091755F3.5C15B34FA0BE2D12" Destination="$4C121D786A4FCD03.REQ" />
       <Connection Source="$17B49EAE45CD7218.CNF_PV" Destination="$4AD90EB4D21DFDC5.F1EF33EDF930102A">
@@ -733,140 +704,20 @@
       <Connection Source="$F108FECB0DC0DC88.9F58EC819BE28CD6" Destination="$B47511C1B72F0474.START" dx1="120" dx2="49.99976" dy="530" />
       <Connection Source="$F108FECB0DC0DC88.D03D083CB42919B5" Destination="$B47511C1B72F0474.STOP" dx1="100" dx2="69.99976" dy="470" />
       <Connection Source="$B47511C1B72F0474.EO" Destination="$F108FECB0DC0DC88.5ACBE650D38A1821" dx1="48.50024" dx2="129.9998" dy="-110" />
+      <Connection Source="$8396C0299878FB57.EO" Destination="$E67B5245A9A9C2E7.REQ" />
+      <Connection Source="$E67B5245A9A9C2E7.CNF" Destination="$3F29AC8AB4D6A90D" />
+      <Connection Source="$DA9DB4CB56194499.IND" Destination="$E67B5245A9A9C2E7.REQ_DIS" />
+      <Connection Source="$8C14E51BEF88CD9F.IND" Destination="$E67B5245A9A9C2E7.REQ_DIS" />
+      <Connection Source="$05D38AB79F1310E5.IND" Destination="$E67B5245A9A9C2E7.REQ_DIS" />
+      <Connection Source="$3097A66F8F6FD866.IND" Destination="$E67B5245A9A9C2E7.REQ_DIS" />
+      <Connection Source="$9673FD25337ED703.IND" Destination="$E67B5245A9A9C2E7.REQ_DIS" />
+      <Connection Source="$68A22637A7783E01.IND" Destination="$E67B5245A9A9C2E7.REQ_DIS" />
+      <Connection Source="$DA9DB4CB56194499.CNF_LIMITSP" Destination="$E67B5245A9A9C2E7.REQ_DIS" />
+      <Connection Source="$8C14E51BEF88CD9F.CNF_LIMITSP" Destination="$E67B5245A9A9C2E7.REQ_DIS" />
+      <Connection Source="$05D38AB79F1310E5.CNF_LIMITSP" Destination="$E67B5245A9A9C2E7.REQ_DIS" />
+      <Connection Source="$3097A66F8F6FD866.CNF_LIMITSP" Destination="$E67B5245A9A9C2E7.REQ_DIS" />
     </EventConnections>
     <DataConnections>
-      <Connection Source="$DA9DB4CB56194499.LimitReached" Destination="$73FBB798962293ED">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-        <Points>
-          <Points>
-            <X>1044.29688</X>
-            <Y>959.5</Y>
-          </Points>
-          <Points>
-            <X>2228.33862</X>
-            <Y>959.5</Y>
-          </Points>
-          <Points>
-            <X>2228.33862</X>
-            <Y>554.5</Y>
-          </Points>
-          <Points>
-            <X>1528.95313</X>
-            <Y>554.5</Y>
-          </Points>
-        </Points>
-        <AvoidsNodes>false</AvoidsNodes>
-      </Connection>
-      <Connection Source="$8C14E51BEF88CD9F.LimitReached" Destination="$7E554EE4816FF1BB">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-        <Points>
-          <Points>
-            <X>1479.29675</X>
-            <Y>959.5</Y>
-          </Points>
-          <Points>
-            <X>2707.94238</X>
-            <Y>959.5</Y>
-          </Points>
-          <Points>
-            <X>2707.94238</X>
-            <Y>-343</Y>
-          </Points>
-          <Points>
-            <X>620.0885</X>
-            <Y>-343</Y>
-          </Points>
-        </Points>
-        <AvoidsNodes>false</AvoidsNodes>
-      </Connection>
-      <Connection Source="$05D38AB79F1310E5.LimitReached" Destination="$D1E3C24C04232A1F">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-        <Points>
-          <Points>
-            <X>1044.29688</X>
-            <Y>1179.5</Y>
-          </Points>
-          <Points>
-            <X>2117.56763</X>
-            <Y>1179.5</Y>
-          </Points>
-          <Points>
-            <X>2117.56763</X>
-            <Y>-78</Y>
-          </Points>
-          <Points>
-            <X>-69.91138</X>
-            <Y>-78</Y>
-          </Points>
-        </Points>
-        <AvoidsNodes>false</AvoidsNodes>
-      </Connection>
-      <Connection Source="$3097A66F8F6FD866.LimitReached" Destination="$17F9137098988035">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-        <Points>
-          <Points>
-            <X>1479.29675</X>
-            <Y>1179.5</Y>
-          </Points>
-          <Points>
-            <X>2302.56738</X>
-            <Y>1179.5</Y>
-          </Points>
-          <Points>
-            <X>2302.56738</X>
-            <Y>-43</Y>
-          </Points>
-          <Points>
-            <X>105.0885</X>
-            <Y>-43</Y>
-          </Points>
-        </Points>
-        <AvoidsNodes>false</AvoidsNodes>
-      </Connection>
-      <Connection Source="$9673FD25337ED703.LimitReached" Destination="$A32C13DFAD1488C4">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-        <Points>
-          <Points>
-            <X>1475.34363</X>
-            <Y>1399.5</Y>
-          </Points>
-          <Points>
-            <X>2210.21582</X>
-            <Y>1399.5</Y>
-          </Points>
-          <Points>
-            <X>2210.21582</X>
-            <Y>564.5</Y>
-          </Points>
-          <Points>
-            <X>790.0885</X>
-            <Y>564.5</Y>
-          </Points>
-        </Points>
-        <AvoidsNodes>false</AvoidsNodes>
-      </Connection>
-      <Connection Source="$68A22637A7783E01.LimitReached" Destination="$F02868080991E3C2">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-        <Points>
-          <Points>
-            <X>1040.34375</X>
-            <Y>1399.5</Y>
-          </Points>
-          <Points>
-            <X>1032.6355</X>
-            <Y>1399.5</Y>
-          </Points>
-          <Points>
-            <X>1032.6355</X>
-            <Y>499.5</Y>
-          </Points>
-          <Points>
-            <X>-54.864502</X>
-            <Y>499.5</Y>
-          </Points>
-        </Points>
-        <AvoidsNodes>false</AvoidsNodes>
-      </Connection>
       <Connection Source="$FBC4282D9A0E2D46.Output" Destination="$A97F7594726B9149" dx1="1863.938">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
@@ -1187,6 +1038,24 @@
       <Connection Source="$F108FECB0DC0DC88.1A1043D3C0733A7D" Destination="$D1466634A02DB4A8.INP" dx1="2210.125" />
       <Connection Source="$F108FECB0DC0DC88.1A6AD5B0D24F0EA5" Destination="$8BE6FE3641678EEF.INP" dx1="3810.125" />
       <Connection Source="$FA79D5A30FC55CE5" Destination="$B47511C1B72F0474.DT" dx1="45.02087" />
+      <Connection Source="$DA9DB4CB56194499.LimitReached" Destination="$E67B5245A9A9C2E7.LimHH" />
+      <Connection Source="$DA9DB4CB56194499.Disabled" Destination="$E67B5245A9A9C2E7.DisHH" />
+      <Connection Source="$E67B5245A9A9C2E7.HiHiAlarm" Destination="$73FBB798962293ED" />
+      <Connection Source="$8C14E51BEF88CD9F.LimitReached" Destination="$E67B5245A9A9C2E7.LimH" />
+      <Connection Source="$8C14E51BEF88CD9F.Disabled" Destination="$E67B5245A9A9C2E7.DisH" />
+      <Connection Source="$E67B5245A9A9C2E7.HiAlarm" Destination="$7E554EE4816FF1BB" />
+      <Connection Source="$05D38AB79F1310E5.LimitReached" Destination="$E67B5245A9A9C2E7.LimL" />
+      <Connection Source="$05D38AB79F1310E5.Disabled" Destination="$E67B5245A9A9C2E7.DisL" />
+      <Connection Source="$E67B5245A9A9C2E7.LoAlarm" Destination="$D1E3C24C04232A1F" />
+      <Connection Source="$3097A66F8F6FD866.LimitReached" Destination="$E67B5245A9A9C2E7.LimLL" />
+      <Connection Source="$3097A66F8F6FD866.Disabled" Destination="$E67B5245A9A9C2E7.DisLL" />
+      <Connection Source="$E67B5245A9A9C2E7.LoLoAlarm" Destination="$17F9137098988035" />
+      <Connection Source="$9673FD25337ED703.LimitReached" Destination="$E67B5245A9A9C2E7.LimRoc" />
+      <Connection Source="$9673FD25337ED703.Disabled" Destination="$E67B5245A9A9C2E7.DisRoc" />
+      <Connection Source="$E67B5245A9A9C2E7.RocAlarm" Destination="$A32C13DFAD1488C4" />
+      <Connection Source="$68A22637A7783E01.LimitReached" Destination="$E67B5245A9A9C2E7.LimDev" />
+      <Connection Source="$68A22637A7783E01.Disabled" Destination="$E67B5245A9A9C2E7.DisDev" />
+      <Connection Source="$E67B5245A9A9C2E7.DevAlarm" Destination="$F02868080991E3C2" />
     </DataConnections>
     <AdapterConnections>
       <Connection Source="$C578D9359C46D59F.IAnalog" Destination="$DA9DB4CB56194499.IPv" dx1="134.1875">

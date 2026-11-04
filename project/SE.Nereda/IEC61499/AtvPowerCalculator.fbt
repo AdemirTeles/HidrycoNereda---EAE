@@ -2,11 +2,14 @@
 <!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
 <FBType GUID="b8cf66d4-f59a-4ab6-a3a0-e8b194596963" Name="AtvPowerCalculator" Comment="Basic Function Block Type" Namespace="SE.Nereda">
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Schneider Electric" Version="0.0" Author="SESA713705" Date="8/23/2024" Remarks="Template" />
+  <VersionInfo Organization="Schneider Electric" Version="0.1" Author="SESA713705" Date="8/23/2024" Remarks="0.1 (Hidryco 04/11/2026): REQ_KW10 com PowerKw10 (INT, 0,1 kW): PowerKW = PowerKw10 / 10, para os sopradores Sulzer (hr 34463 Potencia de entrada). Vale com o AtvType vazio (os Sulzer nao recebem REQ_ATV_TYPE). Template" />
   <InterfaceList>
     <EventInputs>
       <Event Name="REQ_ATV_TYPE">
         <With Var="AtvType" />
+      </Event>
+      <Event Name="REQ_KW10" Comment="Potencia ja em kW x10 (Sulzer)">
+        <With Var="PowerKw10" />
       </Event>
       <Event Name="REQ_POWER_PERC">
         <With Var="PowerPercent" />
@@ -19,6 +22,7 @@
     </EventOutputs>
     <InputVars>
       <VarDeclaration Name="PowerPercent" Type="REAL" />
+      <VarDeclaration ID="E05AEE523C4D048A" Name="PowerKw10" Type="INT" Comment="Potencia em 0,1 kW (Sulzer hr 34463)" />
       <VarDeclaration ID="5CC1D4617F64C731" Name="AtvType" Type="STRING[20]" />
     </InputVars>
     <OutputVars>
@@ -26,7 +30,7 @@
     </OutputVars>
   </InterfaceList>
   <BasicFB>
-    <Attribute Name="FBType.Basic.Algorithm.Order" Value="Type40N4,Type55N4,Type30N4,Type07N4,Type22N4,Type75N4" />
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="Type40N4,Type55N4,Type30N4,Type07N4,Type22N4,Type75N4,KW10" />
     <ECC>
       <ECState Name="START" Comment="Initial State" x="1050.941" y="941.4117" />
       <ECState Name="STATE1" x="2794.857" y="300.4286">
@@ -46,6 +50,9 @@
       </ECState>
       <ECState Name="STATE6" x="2886.429" y="3005">
         <ECAction Algorithm="Type75N4" Output="CNF_POWER" />
+      </ECState>
+      <ECState Name="STATE7" Comment="Potencia ja em kW x10 (Sulzer)" x="2900" y="3550">
+        <ECAction Algorithm="KW10" Output="CNF_POWER" />
       </ECState>
       <ECTransition Source="START" Destination="STATE1" Condition="AtvType = '40N4'" x="1885.769" y="556.7139">
         <Attribute Name="Configuration.Transaction.BezierPoints" Value="407.5461,157.8682,532.9202,111.523" />
@@ -91,6 +98,8 @@
       <ECTransition Source="STATE4" Destination="STATE4" Condition="REQ_POWER_PERC" x="2837.857" y="2103.514" />
       <ECTransition Source="STATE5" Destination="STATE5" Condition="REQ_POWER_PERC" x="2863.856" y="2643.513" />
       <ECTransition Source="STATE6" Destination="STATE6" Condition="REQ_POWER_PERC" x="2886.427" y="3187.086" />
+      <ECTransition Source="START" Destination="STATE7" Condition="REQ_KW10" x="1100" y="3300" />
+      <ECTransition Source="STATE7" Destination="START" Condition="1" x="950" y="3450" />
     </ECC>
     <Algorithm Name="Type40N4">
       <ST><![CDATA[;
@@ -115,6 +124,10 @@ PowerKW := (PowerPercent/100) * 1.8;]]></ST>
     <Algorithm Name="Type75N4">
       <ST><![CDATA[;
 PowerKW := (PowerPercent/100) * 6;]]></ST>
+    </Algorithm>
+    <Algorithm Name="KW10" Comment="Sulzer: potencia de entrada em 0,1 kW">
+      <ST><![CDATA[;
+PowerKW := INT_TO_REAL(PowerKw10) / 10.0;]]></ST>
     </Algorithm>
   </BasicFB>
 </FBType>

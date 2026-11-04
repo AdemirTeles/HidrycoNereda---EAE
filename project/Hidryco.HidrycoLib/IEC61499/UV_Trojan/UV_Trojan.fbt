@@ -2,8 +2,15 @@
 <!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
 <FBType GUID="61a9092d-9d4c-1099-bf9a-6e80dae54faf" Name="UV_Trojan" Comment="Sistema UV Trojan UV3000Plus (monitoracao Modbus TCP) - HidrycoLib" Namespace="Hidryco.HidrycoLib">
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Hidryco" Version="1.0" Author="Hidryco" Date="19/10/2026" Remarks="1.0: Trojan UV3000Plus (SCC M580, servidor Modbus TCP, CP141200010 p.606-611). Campo por symlink ${PATH}: leitura mbR41001..mbR41191 (INT, registro = nome), mbConexao (connStatusInt, 1 = online); escrita mbW40006 (heartbeat bit 1). Somente monitoracao: o SCC nao aceita comandos por rede." />
+  <VersionInfo Organization="Hidryco" Version="1.1" Author="Hidryco" Date="19/10/2026" Remarks="1.1: raio do gerador nos canais (REQ_GERADOR com geradorHabilitaCanal1/2 e stsGerador; AnimGeradorCanal1/2 -> STS_CH1/CH2_ANIMACAO_GERADOR). So indicacao: o SCC nao aceita comando. 1.0: Trojan UV3000Plus (SCC M580, servidor Modbus TCP, CP141200010 p.606-611). Campo por symlink ${PATH}: leitura mbR41001..mbR41191 (INT, registro = nome), mbConexao (connStatusInt, 1 = online); escrita mbW40006 (heartbeat bit 1). Somente monitoracao: o SCC nao aceita comandos por rede." />
   <InterfaceList>
+    <EventInputs>
+      <Event ID="6FAFCDDE653CB65D" Name="REQ_GERADOR" Comment="Planta no gerador e liberacao dos canais (Subestacao)">
+        <With Var="geradorHabilitaCanal1" />
+        <With Var="geradorHabilitaCanal2" />
+        <With Var="stsGerador" />
+      </Event>
+    </EventInputs>
     <EventOutputs>
       <Event ID="41148E14CCAE49D5" Name="CNF" Comment="Status (alarmes na hora, valores a cada 1 s)">
         <With Var="stsComunicacaoOK" />
@@ -19,6 +26,9 @@
     </EventOutputs>
     <InputVars>
       <VarDeclaration ID="BDB67EB10EE3CF24" Name="cfgTimeoutHeartbeat" Type="INT" InitialValue="10" Comment="Tempo sem alternar o heartbeat do SCC para falha de comunicacao (s)" />
+      <VarDeclaration ID="29A04DF02BFCF18C" Name="geradorHabilitaCanal1" Type="BOOL" Comment="700-UV-01 (canal 1) liberado para operar com a planta nos geradores" />
+      <VarDeclaration ID="410574851060558C" Name="geradorHabilitaCanal2" Type="BOOL" Comment="700-UV-02 (canal 2) liberado para operar com a planta nos geradores" />
+      <VarDeclaration ID="9B4A40E24325447A" Name="stsGerador" Type="BOOL" Comment="TRUE = planta alimentada pelos geradores" />
     </InputVars>
     <OutputVars>
       <VarDeclaration ID="8A986F32247F8461" Name="stsComunicacaoOK" Type="BOOL" Comment="Comunicacao Modbus e heartbeat do SCC OK" />
@@ -129,6 +139,12 @@
       <Parameter Name="$TYPE" Value="1" />
       <Parameter Name="$ACKTYPE_1" Value="2" />
       <Parameter Name="$ACTIVE" Value="TRUE" />
+    </FB>
+    <FB ID="2204E9D48B6030A3" Name="AnimGeradorCanal1" Type="basicCargaGerador" x="1400" y="4500" Namespace="Hidryco.HidrycoLib">
+      <Parameter Name="$AB02A6BAE011AA16" Value="TRUE" />
+    </FB>
+    <FB ID="70026B5C4D75A150" Name="AnimGeradorCanal2" Type="basicCargaGerador" x="1400" y="5200" Namespace="Hidryco.HidrycoLib">
+      <Parameter Name="$AB02A6BAE011AA16" Value="TRUE" />
     </FB>
     <Input ID="BDB67EB10EE3CF24" Name="cfgTimeoutHeartbeat" x="200" y="200" Type="Data" />
     <Output ID="41148E14CCAE49D5" Name="CNF" x="14000" y="200" Type="Event" />
@@ -289,6 +305,12 @@
       <Connection Source="$34153D1E9C19E465.581232B93B1DD4EF" Destination="$B5EB3D031544A22D.REQ">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
+      <Connection Source="$6FAFCDDE653CB65D" Destination="$2204E9D48B6030A3.00789A423C908128" />
+      <Connection Source="$6FAFCDDE653CB65D" Destination="$70026B5C4D75A150.00789A423C908128" />
+      <Connection Source="$34153D1E9C19E465.BC8871B735E03A3B" Destination="$2204E9D48B6030A3.00789A423C908128" />
+      <Connection Source="$34153D1E9C19E465.BC8871B735E03A3B" Destination="$70026B5C4D75A150.00789A423C908128" />
+      <Connection Source="$2204E9D48B6030A3.D13B80EB42E4132B" Destination="$AA5D538889FF7AE5.EB65E8EFF6E74925" />
+      <Connection Source="$70026B5C4D75A150.D13B80EB42E4132B" Destination="$AA5D538889FF7AE5.EB65E8EFF6E74925" />
     </EventConnections>
     <DataConnections>
       <Connection Source="$9721424B61ED4D49.VALUE1" Destination="$34153D1E9C19E465.2A8FFE90B1F1E261">
@@ -603,6 +625,14 @@
       <Connection Source="$34153D1E9C19E465.06946B36B49CCADC" Destination="$B5EB3D031544A22D.VALUE1">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
+      <Connection Source="$29A04DF02BFCF18C" Destination="$2204E9D48B6030A3.E98CC3FC79967C8B" />
+      <Connection Source="$410574851060558C" Destination="$70026B5C4D75A150.E98CC3FC79967C8B" />
+      <Connection Source="$9B4A40E24325447A" Destination="$2204E9D48B6030A3.9DDD74C1F0C45B78" />
+      <Connection Source="$9B4A40E24325447A" Destination="$70026B5C4D75A150.9DDD74C1F0C45B78" />
+      <Connection Source="$34153D1E9C19E465.018A4B302C939307" Destination="$2204E9D48B6030A3.92CF573A93E227B1" />
+      <Connection Source="$34153D1E9C19E465.6A9501B8C3966D94" Destination="$70026B5C4D75A150.92CF573A93E227B1" />
+      <Connection Source="$2204E9D48B6030A3.87DFF1D389B6D369" Destination="$AA5D538889FF7AE5.6328E94C56C87F6C" />
+      <Connection Source="$70026B5C4D75A150.87DFF1D389B6D369" Destination="$AA5D538889FF7AE5.6F057DB5A9F534BA" />
     </DataConnections>
   </FBNetwork>
 </FBType>

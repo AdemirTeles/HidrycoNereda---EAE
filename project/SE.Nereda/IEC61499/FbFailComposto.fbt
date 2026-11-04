@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="ade2af4d-5b5f-5e1c-9ccf-8bd85ab43fe6" Name="FbFailComposto" Comment="FbFail = alarme de realimentacao OU falha OU intertravamento" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Hidryco" Version="1.0" Author="Hidryco" Date="04/11/2026" Remarks="1.0: FbFailOut.value = FbAlarm.value OU Fail OU IlckCond; qualidade do FbAlarm; carimbo de tempo novo quando o valor muda. Usado nos CATs MotorVsBaseNer, MotorBaseNer e ValveBaseNer antes do IThis.FbFail." />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="594458DF2A5BB47C" Name="REQ" Comment="Recalcula">
+        <With Var="FbAlarm" />
+        <With Var="Fail" />
+        <With Var="IlckCond" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="16943D7D3AD410BC" Name="CNF" Comment="FbFail composto">
+        <With Var="FbFailOut" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="3F9FEFE8A07BE74F" Name="FbAlarm" Type="VTQBOOL" Comment="AlarmStatus do alarme de realimentacao (feedbackFailure)" />
+      <VarDeclaration ID="12594D80635DBCE8" Name="Fail" Type="BOOL" Comment="1 = falha ativa" />
+      <VarDeclaration ID="C72C731F987D59D4" Name="IlckCond" Type="BOOL" Comment="1 = intertravamento ativo" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="CA70046049C9A2EC" Name="FbFailOut" Type="VTQBOOL" Comment="Para o IThis.FbFail" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="94bd9084-455f-5728-b8b2-c019fbcd5f14">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="Calcula" />
+    <InternalVars>
+      <VarDeclaration ID="DC80DF94F3285E78" Name="Novo" Type="BOOL" Comment="Valor calculado" />
+    </InternalVars>
+    <ECC>
+      <ECState Name="START" Comment="Estado inicial" x="550" y="430" />
+      <ECState Name="CALCULO" Comment="Calcula o FbFail" x="1170" y="730">
+        <ECAction Algorithm="Calcula" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="CALCULO" Condition="REQ" x="895" y="505" />
+      <ECTransition Source="CALCULO" Destination="START" Condition="1" x="880" y="665" />
+    </ECC>
+    <Algorithm Name="Calcula" Comment="OU com carimbo de tempo">
+      <ST><![CDATA[
+Novo := FbAlarm.value OR Fail OR IlckCond;
+IF Novo <> FbFailOut.value THEN
+    FbFailOut.timestamp := CURRENT_DT();
+END_IF;
+FbFailOut.value := Novo;
+FbFailOut.quality := FbAlarm.quality;
+]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

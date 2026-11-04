@@ -2,7 +2,7 @@
 <!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
 <FBType GUID="3af978b7-e4d2-5fe1-b398-fb9c07f1a450" Name="EstocagemLodo" Comment="Estocagem do lodo (900): tanques TQ-01/02 (LIT), sopradores SO-01/02, valvulas VA-01/02 e VB-03/04 - HidrycoLib" Namespace="Hidryco.HidrycoLib">
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Hidryco" Version="1.0" Author="Hidryco" Date="04/11/2026" Remarks="1.0: divisao da Fase_Solida 1.5 como no legado (estocagem). Sem simbolos proprios: o resumo e os faceplates ficam na DesidratacaoLodo, que recebe CNF_HMI e devolve REQ_PARA, ACK_ALARMES e REQ_EMERG pela camada." />
+  <VersionInfo Organization="Hidryco" Version="1.2" Author="Hidryco" Date="04/11/2026" Remarks="1.2: CNF_NEREDA com H/HH (com tempo, sem memoria) e disponivel dos LIT-900-01/02 para os SludgeHoldingTank1/2 da Nereda; sai na mudanca e a cada 5 s (TickNereda). 1.1: SO sem supervisao de termica (sem sinal no PCE); STP_VEL_SOPRADORES (Hz) no REQ_PARA -> stpVelocidadeAutomatico dos SO. 1.0: divisao da Fase_Solida 1.5 como no legado (estocagem). Sem simbolos proprios: o resumo e os faceplates ficam na DesidratacaoLodo, que recebe CNF_HMI e devolve REQ_PARA, ACK_ALARMES e REQ_EMERG pela camada." />
   <InterfaceList>
     <EventInputs>
       <Event ID="DAB96FE935A92679" Name="E_RESET_FALHAS" Comment="Reset pelo processo (estocagem e equipamentos) com cmdResetFalhas = TRUE">
@@ -12,6 +12,7 @@
         <With Var="HAB_SOPRADORES" />
         <With Var="STP_NIVEL_MIN_TQ" />
         <With Var="STP_NIVEL_RETOMA_TQ" />
+        <With Var="STP_VEL_SOPRADORES" />
       </Event>
       <Event ID="AB5FAE61D1BCDDFE" Name="REQ_EMERG" Comment="DesidratacaoLodo: emergencia do PCM LODO">
         <With Var="emergencia" />
@@ -33,6 +34,14 @@
         <With Var="STS_ALM_SOPRADORES_EST" />
         <With Var="STS_ALM_NIVEL_TQ_EST" />
       </Event>
+      <Event ID="3B317909428F66BD" Name="CNF_NEREDA" Comment="Nivel dos tanques para a Nereda (SludgeHoldingTank1/2): na mudanca e a cada 5 s">
+        <With Var="TQ1_HH" />
+        <With Var="TQ1_H" />
+        <With Var="TQ1_DISPONIVEL" />
+        <With Var="TQ2_HH" />
+        <With Var="TQ2_H" />
+        <With Var="TQ2_DISPONIVEL" />
+      </Event>
     </EventOutputs>
     <InputVars>
       <VarDeclaration ID="24CD1B2317618B18" Name="cmdResetFalhas" Type="BOOL" Comment="TRUE = reset (com o evento E_RESET_FALHAS)" />
@@ -40,6 +49,7 @@
       <VarDeclaration ID="8E87331950BD000E" Name="STP_NIVEL_MIN_TQ" Type="REAL" Comment="Da DesidratacaoLodo (IHM): STP_NIVEL_MIN_TQ" />
       <VarDeclaration ID="3B31F82669E06299" Name="STP_NIVEL_RETOMA_TQ" Type="REAL" Comment="Da DesidratacaoLodo (IHM): STP_NIVEL_RETOMA_TQ" />
       <VarDeclaration ID="EE49B187C469C0B7" Name="emergencia" Type="BOOL" Comment="Emergencia do PCM LODO" />
+      <VarDeclaration ID="A8767255ECC4E3FD" Name="STP_VEL_SOPRADORES" Type="REAL" InitialValue="60.0" Comment="Da DesidratacaoLodo (IHM): velocidade dos sopradores no automatico (Hz)" />
     </InputVars>
     <OutputVars>
       <VarDeclaration ID="5405EB7088EC4BDE" Name="stsNivelBaixoTQ" Type="BOOL" Comment="Tanques de estocagem em nivel baixo" />
@@ -52,6 +62,12 @@
       <VarDeclaration ID="28C5117F80A71252" Name="STS_SEM_NIVEL_TQ" Type="BOOL" Comment="Para a DesidratacaoLodo (IHM): STS_SEM_NIVEL_TQ" />
       <VarDeclaration ID="F39C9B782425030B" Name="STS_ALM_SOPRADORES_EST" Type="USINT" Comment="Para a DesidratacaoLodo (IHM): STS_ALM_SOPRADORES_EST" />
       <VarDeclaration ID="CA5C991A51FB83CF" Name="STS_ALM_NIVEL_TQ_EST" Type="USINT" Comment="Para a DesidratacaoLodo (IHM): STS_ALM_NIVEL_TQ_EST" />
+      <VarDeclaration ID="E2CA55FAEBB4E606" Name="TQ1_HH" Type="BOOL" Comment="TQ-01 (LIT-900-01): alarme HH com tempo, sem memoria - para o SludgeHoldingTank1 da Nereda" />
+      <VarDeclaration ID="5FECFF6590BA1CB8" Name="TQ1_H" Type="BOOL" Comment="TQ-01 (LIT-900-01): alarme H com tempo, sem memoria - para o SludgeHoldingTank1 da Nereda" />
+      <VarDeclaration ID="C03F8F23B8219B89" Name="TQ1_DISPONIVEL" Type="BOOL" Comment="TQ-01 (LIT-900-01): nivel disponivel (sensor habilitado e sem falha) - para o SludgeHoldingTank1 da Nereda" />
+      <VarDeclaration ID="47DA0D3EDA2667D7" Name="TQ2_HH" Type="BOOL" Comment="TQ-02 (LIT-900-02): alarme HH com tempo, sem memoria - para o SludgeHoldingTank2 da Nereda" />
+      <VarDeclaration ID="5EDEC437D5610CDE" Name="TQ2_H" Type="BOOL" Comment="TQ-02 (LIT-900-02): alarme H com tempo, sem memoria - para o SludgeHoldingTank2 da Nereda" />
+      <VarDeclaration ID="D43E44FA212AEC2C" Name="TQ2_DISPONIVEL" Type="BOOL" Comment="TQ-02 (LIT-900-02): nivel disponivel (sensor habilitado e sem falha) - para o SludgeHoldingTank2 da Nereda" />
     </OutputVars>
   </InterfaceList>
   <FBNetwork>
@@ -63,6 +79,9 @@
     </FB>
     <FB ID="2D667EB938E5EEF1" Name="Tick" Type="E_CYCLE" x="1400" y="832" Namespace="IEC61499.Standard">
       <Parameter Name="$DT" Value="T#1s" />
+    </FB>
+    <FB ID="87D4D8B77188CEF6" Name="TickNereda" Type="E_CYCLE" x="1400" y="1100" Namespace="IEC61499.Standard">
+      <Parameter Name="$DT" Value="T#5s" />
     </FB>
     <FB ID="3AFB82264A8D9ACB" Name="Estocagem" Type="basicEstocagemLodo" x="9000" y="600" Namespace="Hidryco.HidrycoLib" />
     <FB ID="932EF6701387F154" Name="LIT_900_01" Type="Sensor_Generico" x="6000" y="200" Namespace="Hidryco.HidrycoLib">
@@ -76,10 +95,12 @@
       <Parameter Name="$6D3A2524C5D0F0D1" Value="2" />
     </FB>
     <FB ID="073AA3D2A1A22B7D" Name="SO_900_01" Type="Motor_Generico" x="17000" y="200" Namespace="Hidryco.HidrycoLib">
+      <Parameter Name="$D34C88BE7FFF3208" Value="FALSE" />
       <Parameter Name="$63EFEFB7C85EC93E" Value="TRUE" />
       <Parameter Name="$39489193B7758574" Value="600.0" />
     </FB>
     <FB ID="CE5035F8B65CC320" Name="SO_900_02" Type="Motor_Generico" x="17000" y="1100" Namespace="Hidryco.HidrycoLib">
+      <Parameter Name="$D34C88BE7FFF3208" Value="FALSE" />
       <Parameter Name="$63EFEFB7C85EC93E" Value="TRUE" />
       <Parameter Name="$39489193B7758574" Value="600.0" />
     </FB>
@@ -185,6 +206,10 @@
       <Connection Source="$3AFB82264A8D9ACB.5F76B62564497316" Destination="$615C22233EEEF0AC.1DF068F97CBC55AD" />
       <Connection Source="$3AFB82264A8D9ACB.5F76B62564497316" Destination="$CD8F2D930D79495E.INIT" />
       <Connection Source="$08B405C50C22B28E.INITO" Destination="$1CD9B76210A77F9C.ACK_FIRST" />
+      <Connection Source="$3AFB82264A8D9ACB.5F76B62564497316" Destination="$87D4D8B77188CEF6.START" />
+      <Connection Source="$87D4D8B77188CEF6.EO" Destination="$3B317909428F66BD" />
+      <Connection Source="$932EF6701387F154.28A380156DB271B8" Destination="$3B317909428F66BD" />
+      <Connection Source="$E9FFA102916FE976.28A380156DB271B8" Destination="$3B317909428F66BD" />
     </EventConnections>
     <DataConnections>
       <Connection Source="$073AA3D2A1A22B7D.EBDC9E59C4286586" Destination="$3AFB82264A8D9ACB.9D0A018985052F58">
@@ -281,6 +306,15 @@
       <Connection Source="$3AFB82264A8D9ACB.53980AC2D919D417" Destination="$615C22233EEEF0AC.30C56EFD8B8A4EB9">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
+      <Connection Source="$A8767255ECC4E3FD" Destination="$3AFB82264A8D9ACB.AE27A9FC614464FF" />
+      <Connection Source="$3AFB82264A8D9ACB.59B400080C7CCAAB" Destination="$073AA3D2A1A22B7D.F94ABA993E8E9FF4" />
+      <Connection Source="$3AFB82264A8D9ACB.59B400080C7CCAAB" Destination="$CE5035F8B65CC320.F94ABA993E8E9FF4" />
+      <Connection Source="$932EF6701387F154.0A7E41873A4DE750" Destination="$E2CA55FAEBB4E606" />
+      <Connection Source="$932EF6701387F154.41659C068F94B5C6" Destination="$5FECFF6590BA1CB8" />
+      <Connection Source="$932EF6701387F154.B7194E42DC1D5273" Destination="$C03F8F23B8219B89" />
+      <Connection Source="$E9FFA102916FE976.0A7E41873A4DE750" Destination="$47DA0D3EDA2667D7" />
+      <Connection Source="$E9FFA102916FE976.41659C068F94B5C6" Destination="$5EDEC437D5610CDE" />
+      <Connection Source="$E9FFA102916FE976.B7194E42DC1D5273" Destination="$D43E44FA212AEC2C" />
     </DataConnections>
     <Input ID="DAB96FE935A92679" Name="E_RESET_FALHAS" x="200" y="200" Type="Event" />
     <Input ID="39F3DF7DDD7B4C23" Name="REQ_PARA" x="200" y="260" Type="Event" />
@@ -291,6 +325,7 @@
     <Input ID="8E87331950BD000E" Name="STP_NIVEL_MIN_TQ" x="200" y="560" Type="Data" />
     <Input ID="3B31F82669E06299" Name="STP_NIVEL_RETOMA_TQ" x="200" y="620" Type="Data" />
     <Input ID="EE49B187C469C0B7" Name="emergencia" x="200" y="680" Type="Data" />
+    <Input ID="A8767255ECC4E3FD" Name="STP_VEL_SOPRADORES" x="200" y="740" Type="Data" />
     <Output ID="E3809710B35A5BE3" Name="CNF" x="14000" y="200" Type="Event" />
     <Output ID="974B4969DB603762" Name="CNF_HMI" x="14000" y="260" Type="Event" />
     <Output ID="5405EB7088EC4BDE" Name="stsNivelBaixoTQ" x="14000" y="320" Type="Data" />
@@ -303,5 +338,12 @@
     <Output ID="28C5117F80A71252" Name="STS_SEM_NIVEL_TQ" x="14000" y="740" Type="Data" />
     <Output ID="F39C9B782425030B" Name="STS_ALM_SOPRADORES_EST" x="14000" y="800" Type="Data" />
     <Output ID="CA5C991A51FB83CF" Name="STS_ALM_NIVEL_TQ_EST" x="14000" y="860" Type="Data" />
+    <Output ID="3B317909428F66BD" Name="CNF_NEREDA" x="14000" y="920" Type="Event" />
+    <Output ID="E2CA55FAEBB4E606" Name="TQ1_HH" x="14000" y="980" Type="Data" />
+    <Output ID="5FECFF6590BA1CB8" Name="TQ1_H" x="14000" y="1040" Type="Data" />
+    <Output ID="C03F8F23B8219B89" Name="TQ1_DISPONIVEL" x="14000" y="1100" Type="Data" />
+    <Output ID="47DA0D3EDA2667D7" Name="TQ2_HH" x="14000" y="1160" Type="Data" />
+    <Output ID="5EDEC437D5610CDE" Name="TQ2_H" x="14000" y="1220" Type="Data" />
+    <Output ID="D43E44FA212AEC2C" Name="TQ2_DISPONIVEL" x="14000" y="1280" Type="Data" />
   </FBNetwork>
 </FBType>

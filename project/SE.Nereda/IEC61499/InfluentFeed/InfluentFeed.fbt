@@ -3,8 +3,20 @@
 <FBType GUID="cf2c0f94-d415-4125-bebb-959e1ef8fc48" Name="InfluentFeed" Format="2.0" Comment="CAT Function Block Type" Namespace="SE.Nereda">
   <Attribute Name="HMI.Alias" Value="" />
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Schneider Electric" Version="0.1" Author=" " Date="30/10/2026" Remarks="0.1: chave do buffer de entrada e LL (alarme LevelLowLowInfluentBuffer, antes LevelTooHighInfluentBuffer) e desliga as bombas FeedReactorPump01/02/03; falha do radar para os misturadores. template" />
+  <VersionInfo Organization="Schneider Electric" Version="0.2" Author=" " Date="30/10/2026" Remarks="0.2: carga no gerador: REQ_GERADOR repassado aos atuadores (R4005A/B). 0.1: chave do buffer de entrada e LL (alarme LevelLowLowInfluentBuffer, antes LevelTooHighInfluentBuffer) e desliga as bombas FeedReactorPump01/02/03; falha do radar para os misturadores. template" />
   <InterfaceList>
+    <EventInputs>
+      <Event ID="9990B718E668E6B3" Name="REQ_GERADOR" Comment="Planta nos geradores e liberacao de R4005A/B (Subestacao)">
+        <With Var="geradorHabilitaR4005A" />
+        <With Var="geradorHabilitaR4005B" />
+        <With Var="stsGerador" />
+      </Event>
+    </EventInputs>
+    <InputVars>
+      <VarDeclaration ID="FB134FF10099DEF1" Name="geradorHabilitaR4005A" Type="BOOL" Comment="R4005A liberado para operar com a planta nos geradores" />
+      <VarDeclaration ID="2D5BC448F9BDE10B" Name="geradorHabilitaR4005B" Type="BOOL" Comment="R4005B liberado para operar com a planta nos geradores" />
+      <VarDeclaration ID="4BFFE021F8C35676" Name="stsGerador" Type="BOOL" Comment="TRUE = planta alimentada pelos geradores" />
+    </InputVars>
     <AdapterInputs>
       <Adapter ID="458126F8619187E9" Name="IFeedReactor1" Type="IFeeding2" Namespace="SE.Nereda" />
       <Adapter ID="13A00CB3B1B3C5BD" Name="IFeedReactor2" Type="IFeeding2" Namespace="SE.Nereda" />
@@ -212,6 +224,7 @@
       <Connection Source="$2EC6A70750FD7D7B.409CEAF28252E4B1" Destination="$ADD50A9583FF3EA3.DB6CF389044532A0">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
+      <Connection Source="$9990B718E668E6B3" Destination="$ADD50A9583FF3EA3.CBD8AAE3503334DB" />
     </EventConnections>
     <DataConnections>
       <Connection Source="$2EC6A70750FD7D7B.D0710625DAA94EBC" Destination="$ADD50A9583FF3EA3.08871A634DE02788">
@@ -226,6 +239,9 @@
       <Connection Source="$2EC6A70750FD7D7B.63B99AA1B0849BC6" Destination="$ADD50A9583FF3EA3.77E22D1CDDB0AEF7">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
+      <Connection Source="$FB134FF10099DEF1" Destination="$ADD50A9583FF3EA3.FA43499D8E311D21" />
+      <Connection Source="$4BFFE021F8C35676" Destination="$ADD50A9583FF3EA3.11DA45B74B73A4F0" />
+      <Connection Source="$2D5BC448F9BDE10B" Destination="$ADD50A9583FF3EA3.751D97F7223B9F33" />
     </DataConnections>
     <AdapterConnections>
       <Connection Source="$2EC6A70750FD7D7B.2E67B850256E4773" Destination="$3C10F30A94E5502F.E1C86A9341152426">

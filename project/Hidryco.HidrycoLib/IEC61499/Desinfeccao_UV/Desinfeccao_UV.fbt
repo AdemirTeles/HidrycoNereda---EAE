@@ -2,11 +2,16 @@
 <!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
 <FBType GUID="a6411642-91f1-d62c-d6bc-747391f33726" Name="Desinfeccao_UV" Comment="Desinfeccao UV e limitacao da vazao de lancamento (700) - HidrycoLib" Namespace="Hidryco.HidrycoLib">
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Hidryco" Version="1.2" Author="Hidryco" Date="21/10/2026" Remarks="1.2: pidCtl Pid com CycleTime 1000 ms (sem ele o calculo ciclico do pidSC ficava sem periodo). 1.1: ajustes do PID no sub-CAT PID_VC_700_01 (padrao Desinfeccao do legado; desejado = vazao maxima); reset cmdResetFalhas / E_RESET_FALHAS_PROCESSO; AIT_700_01/03/04. 1.0: desinfeccao (700). Sub-CATs: VC_700_01 (Valvula_Coester modulante), UV (UV_Trojan), FT_700_01 (Parshall 4-20 mA, m3/h), AIT_700_001 turbidez, AIT_700_003 pH, AIT_700_004 OD (SC4500 por comunicacao). PID continuo (pidCtl, Direction TRUE: vazao acima do setpoint fecha a valvula) limita a vazao de lancamento (padrao 1242 m3/h = 345 L/s). Campo por symlink ${PATH}: djPCEDesligado, djPCMDesligado, djUV01, djUV02, djVC01, djMO01 (remota %I0.0-0.5), stsRemotaComOk (COM_OK do IO_DI32 da remota)." />
+  <VersionInfo Organization="Hidryco" Version="1.3" Author="Hidryco" Date="21/10/2026" Remarks="1.3: REQ_GERADOR (geradorHabilitaUV01/02, stsGerador; Subestacao HAB_UV_700_01/02 e stsPlantaNoGerador) repassado ao UV para o raio dos canais. 1.2: pidCtl Pid com CycleTime 1000 ms (sem ele o calculo ciclico do pidSC ficava sem periodo). 1.1: ajustes do PID no sub-CAT PID_VC_700_01 (padrao Desinfeccao do legado; desejado = vazao maxima); reset cmdResetFalhas / E_RESET_FALHAS_PROCESSO; AIT_700_01/03/04. 1.0: desinfeccao (700). Sub-CATs: VC_700_01 (Valvula_Coester modulante), UV (UV_Trojan), FT_700_01 (Parshall 4-20 mA, m3/h), AIT_700_001 turbidez, AIT_700_003 pH, AIT_700_004 OD (SC4500 por comunicacao). PID continuo (pidCtl, Direction TRUE: vazao acima do setpoint fecha a valvula) limita a vazao de lancamento (padrao 1242 m3/h = 345 L/s). Campo por symlink ${PATH}: djPCEDesligado, djPCMDesligado, djUV01, djUV02, djVC01, djMO01 (remota %I0.0-0.5), stsRemotaComOk (COM_OK do IO_DI32 da remota)." />
   <InterfaceList>
     <EventInputs>
       <Event ID="F61B5D54A50A440E" Name="E_RESET_FALHAS" Comment="Reset pelo processo (desinfeccao, valvula, UV e sensores) com cmdResetFalhas = TRUE">
         <With Var="cmdResetFalhas" />
+      </Event>
+      <Event ID="3AA953731967D084" Name="REQ_GERADOR" Comment="Planta no gerador e liberacao do UV (Subestacao)">
+        <With Var="geradorHabilitaUV01" />
+        <With Var="geradorHabilitaUV02" />
+        <With Var="stsGerador" />
       </Event>
     </EventInputs>
     <EventOutputs>
@@ -19,6 +24,9 @@
     </EventOutputs>
     <InputVars>
       <VarDeclaration ID="D75ACBAB39349035" Name="cmdResetFalhas" Type="BOOL" Comment="TRUE = reset (com o evento E_RESET_FALHAS)" />
+      <VarDeclaration ID="B6FA6DECDD9ED22F" Name="geradorHabilitaUV01" Type="BOOL" Comment="700-UV-01 liberado para operar com a planta nos geradores" />
+      <VarDeclaration ID="FE5067C199042FFC" Name="geradorHabilitaUV02" Type="BOOL" Comment="700-UV-02 liberado para operar com a planta nos geradores" />
+      <VarDeclaration ID="29FAEE93999A7375" Name="stsGerador" Type="BOOL" Comment="TRUE = planta alimentada pelos geradores" />
     </InputVars>
     <OutputVars>
       <VarDeclaration ID="B3C085A02B02C2C4" Name="stsVazao" Type="REAL" Comment="Vazao do efluente final (m3/h)" />
@@ -314,6 +322,7 @@
       <Connection Source="$55F41B4AE326646F.04CB25776C0D242A" Destination="$492AF61116B378D5.7BD84B0FC1882775">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
+      <Connection Source="$3AA953731967D084" Destination="$AD7B97BE4BACEA3E.6FAFCDDE653CB65D" />
     </EventConnections>
     <DataConnections>
       <Connection Source="$2EF2A2F7777AD0DF.output3" Destination="$55F41B4AE326646F.E77A551E7F1625D6">
@@ -565,6 +574,9 @@
       <Connection Source="$55F41B4AE326646F.BB5C6CDA218388F6" Destination="$492AF61116B378D5.260D6E81A1639D84">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
+      <Connection Source="$B6FA6DECDD9ED22F" Destination="$AD7B97BE4BACEA3E.29A04DF02BFCF18C" />
+      <Connection Source="$FE5067C199042FFC" Destination="$AD7B97BE4BACEA3E.410574851060558C" />
+      <Connection Source="$29FAEE93999A7375" Destination="$AD7B97BE4BACEA3E.9B4A40E24325447A" />
     </DataConnections>
   </FBNetwork>
 </FBType>

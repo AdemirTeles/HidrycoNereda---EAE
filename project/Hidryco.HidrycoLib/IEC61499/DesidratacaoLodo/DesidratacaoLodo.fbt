@@ -2,7 +2,7 @@
 <!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
 <FBType GUID="cd66cc86-31ed-51c3-9a0a-7da15d055844" Name="DesidratacaoLodo" Comment="Desidratacao do lodo (900): alimentacao das prensas C-Press, bombas, barrilete, polimero e painel PCM LODO - HidrycoLib" Namespace="Hidryco.HidrycoLib">
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Hidryco" Version="1.1" Author="Hidryco" Date="04/11/2026" Remarks="1.1: SV_900_01..08 como sub-CATs Valvula_Solenoide (caminho do legado para a IO List da Nereda), ligadas ao CNF_SV da Alimentacao. 1.0: divisao da Fase_Solida 1.5 como no legado: DesidratacaoLodo (prensas, bombas BO/BR, barrilete VA-06..13, FT, SV, PP, painel PCM) + EstocagemLodo (tanques, sopradores, VA-01/02, VB-03/04). O resumo e os faceplates continuam aqui; a estocagem troca status, ajustes, reset e emergencia com a EstocagemLodo pela camada." />
+  <VersionInfo Organization="Hidryco" Version="1.2" Author="Hidryco" Date="04/11/2026" Remarks="Revisao 04/11/2026: BR sem supervisao de termica; STP_VEL_SOPRADORES para a EstocagemLodo; FT stsHabilitado na Alimentacao. 1.1: SV_900_01..08 como sub-CATs Valvula_Solenoide (caminho do legado para a IO List da Nereda), ligadas ao CNF_SV da Alimentacao. 1.0: divisao da Fase_Solida 1.5 como no legado: DesidratacaoLodo (prensas, bombas BO/BR, barrilete VA-06..13, FT, SV, PP, painel PCM) + EstocagemLodo (tanques, sopradores, VA-01/02, VB-03/04). O resumo e os faceplates continuam aqui; a estocagem troca status, ajustes, reset e emergencia com a EstocagemLodo pela camada." />
   <InterfaceList>
     <EventInputs>
       <Event ID="DAB96FE935A92679" Name="E_RESET_FALHAS" Comment="Reset pelo processo (desidratacao e equipamentos) com cmdResetFalhas = TRUE">
@@ -32,6 +32,7 @@
         <With Var="HAB_SOPRADORES" />
         <With Var="STP_NIVEL_MIN_TQ" />
         <With Var="STP_NIVEL_RETOMA_TQ" />
+        <With Var="STP_VEL_SOPRADORES" />
       </Event>
       <Event ID="EE8958653A86D261" Name="ACK_ESTOCAGEM" Comment="IHM: reconhecer os alarmes da EstocagemLodo" />
     </EventOutputs>
@@ -54,6 +55,7 @@
       <VarDeclaration ID="A2D8149F0FE69321" Name="HAB_SOPRADORES" Type="BOOL" Comment="Para a EstocagemLodo: HAB_SOPRADORES" />
       <VarDeclaration ID="08464482A0BF6120" Name="STP_NIVEL_MIN_TQ" Type="REAL" Comment="Para a EstocagemLodo: STP_NIVEL_MIN_TQ" />
       <VarDeclaration ID="4080C84A5DF2BAE8" Name="STP_NIVEL_RETOMA_TQ" Type="REAL" Comment="Para a EstocagemLodo: STP_NIVEL_RETOMA_TQ" />
+      <VarDeclaration ID="9DCD88E1901DA328" Name="STP_VEL_SOPRADORES" Type="REAL" Comment="Para a EstocagemLodo: velocidade dos sopradores no automatico (Hz)" />
     </OutputVars>
   </InterfaceList>
   <FBNetwork>
@@ -211,10 +213,12 @@
       <Parameter Name="$66763E13F70A4420" Value="FALSE" />
     </FB>
     <FB ID="1A01173E0E79DEE5" Name="BR_900_01" Type="Motor_Generico" x="17000" y="4700" Namespace="Hidryco.HidrycoLib">
+      <Parameter Name="$D34C88BE7FFF3208" Value="FALSE" />
       <Parameter Name="$63EFEFB7C85EC93E" Value="TRUE" />
       <Parameter Name="$39489193B7758574" Value="600.0" />
     </FB>
     <FB ID="B3B7B5DA142B5F9A" Name="BR_900_02" Type="Motor_Generico" x="17000" y="5600" Namespace="Hidryco.HidrycoLib">
+      <Parameter Name="$D34C88BE7FFF3208" Value="FALSE" />
       <Parameter Name="$63EFEFB7C85EC93E" Value="TRUE" />
       <Parameter Name="$39489193B7758574" Value="600.0" />
     </FB>
@@ -741,6 +745,10 @@
       <Connection Source="$31F2EC8F74D266C5.28A4416677CA3C6A" Destination="$5B5350F0E2DE312B.D0E4493379BA5C47" />
       <Connection Source="$31F2EC8F74D266C5.21FE5B252B52D38C" Destination="$A69E7616C7F59CE7.D0E4493379BA5C47" />
       <Connection Source="$31F2EC8F74D266C5.2A1E389F770A9C7F" Destination="$E9F277FA6189D4D5.D0E4493379BA5C47" />
+      <Connection Source="$31F7876DB3EEEFEE.26B669BC676D1FB2" Destination="$9DCD88E1901DA328" />
+      <Connection Source="$EE07BE08577527AD.07C3588C57A022B8" Destination="$31F2EC8F74D266C5.ACEA17EBE8E63CF3" />
+      <Connection Source="$C288081DE209417C.07C3588C57A022B8" Destination="$31F2EC8F74D266C5.3475850F1055D0F8" />
+      <Connection Source="$0C05FC8D1BBE56F1.07C3588C57A022B8" Destination="$31F2EC8F74D266C5.FB3DD143CAF4663F" />
     </DataConnections>
     <Input ID="DAB96FE935A92679" Name="E_RESET_FALHAS" x="200" y="200" Type="Event" />
     <Input ID="91E17855232378A8" Name="REQ_ESTOCAGEM" x="200" y="260" Type="Event" />
@@ -764,5 +772,6 @@
     <Output ID="A2D8149F0FE69321" Name="HAB_SOPRADORES" x="14000" y="500" Type="Data" />
     <Output ID="08464482A0BF6120" Name="STP_NIVEL_MIN_TQ" x="14000" y="560" Type="Data" />
     <Output ID="4080C84A5DF2BAE8" Name="STP_NIVEL_RETOMA_TQ" x="14000" y="620" Type="Data" />
+    <Output ID="9DCD88E1901DA328" Name="STP_VEL_SOPRADORES" x="14000" y="680" Type="Data" />
   </FBNetwork>
 </FBType>

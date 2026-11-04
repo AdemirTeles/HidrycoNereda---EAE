@@ -34,13 +34,15 @@ namespace SE.Nereda.Faceplates.CAerationLogic
 			this.freeText1 = new NxtControl.GuiFramework.FreeText();
 			this.freeText5 = new NxtControl.GuiFramework.FreeText();
 			this.MaximumCapacityBlower = new System.HMI.Symbols.Base.TextBox<float>();
+			this.freeText6 = new NxtControl.GuiFramework.FreeText();
+			this.MinimumCapacity = new System.HMI.Symbols.Base.TextBox<float>();
 			this.freeText4 = new NxtControl.GuiFramework.FreeText();
 			this.C2_AdjustableTime = new System.HMI.Symbols.Base.TimeTextBox();
 			this.C3_AdjustableTime = new System.HMI.Symbols.Base.TimeTextBox();
 			// 
 			// rectangle1
 			// 
-			this.rectangle1.Bounds = new NxtControl.Drawing.RectF(((float)(8D)), ((float)(8D)), ((float)(368D)), ((float)(200D)));
+			this.rectangle1.Bounds = new NxtControl.Drawing.RectF(((float)(8D)), ((float)(8D)), ((float)(368D)), ((float)(237D)));
 			this.rectangle1.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(250)), ((byte)(250)), ((byte)(250))));
 			this.rectangle1.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
 			this.rectangle1.Name = "rectangle1";
@@ -51,7 +53,7 @@ namespace SE.Nereda.Faceplates.CAerationLogic
 			this.freeText2.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeText2.Location = new NxtControl.Drawing.PointF(16D, 20D);
 			this.freeText2.Name = "freeText2";
-			this.freeText2.Text = "SP partida 2\u00ba soprador (C2) :";
+			this.freeText2.Text = "Veloc. partida 2\u00ba soprador (C2) :";
 			// 
 			// C2_IN
 			// 
@@ -77,7 +79,7 @@ namespace SE.Nereda.Faceplates.CAerationLogic
 			this.freeText3.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeText3.Location = new NxtControl.Drawing.PointF(16D, 57D);
 			this.freeText3.Name = "freeText3";
-			this.freeText3.Text = "SP partida 3\u00ba soprador (C3) :";
+			this.freeText3.Text = "Veloc. parada 2\u00ba soprador (C3) :";
 			// 
 			// C3_IN
 			// 
@@ -103,15 +105,15 @@ namespace SE.Nereda.Faceplates.CAerationLogic
 			this.freeText1.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.freeText1.Location = new NxtControl.Drawing.PointF(16D, 94D);
 			this.freeText1.Name = "freeText1";
-			this.freeText1.Text = "Capacidade m\u00e1x. sopradores :";
+			this.freeText1.Text = "Capacidade m\u00e1x. de 1 soprador :";
 			// 
 			// freeText5
 			// 
 			this.freeText5.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.freeText5.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-			this.freeText5.Location = new NxtControl.Drawing.PointF(16D, 131D);
+			this.freeText5.Location = new NxtControl.Drawing.PointF(16D, 168D);
 			this.freeText5.Name = "freeText5";
-			this.freeText5.Text = "Tempo ajust\u00e1vel (C2) :";
+			this.freeText5.Text = "Tempo em C2 (T_C2) :";
 			// 
 			// MaximumCapacityBlower
 			// 
@@ -125,24 +127,52 @@ namespace SE.Nereda.Faceplates.CAerationLogic
 			this.MaximumCapacityBlower.SetColor = new NxtControl.Drawing.Color("Yellow");
 			this.MaximumCapacityBlower.Suffix = "%";
 			this.MaximumCapacityBlower.TagName = "MaximumCapacityBlower";
+			this.MaximumCapacityBlower.UseInputPad = true;
 			this.MaximumCapacityBlower.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleCenter;
 			this.MaximumCapacityBlower.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.MaximumCapacityBlower.UseRange = true;
 			this.MaximumCapacityBlower.Value = 0F;
 			this.MaximumCapacityBlower.EndInit();
 			// 
+			// freeText6
+			// 
+			this.freeText6.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.freeText6.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+			this.freeText6.Location = new NxtControl.Drawing.PointF(16D, 131D);
+			this.freeText6.Name = "freeText6";
+			this.freeText6.Text = "Capacidade m\u00edn. de 1 soprador :";
+			// 
+			// MinimumCapacity
+			// 
+			this.MinimumCapacity.BeginInit();
+			this.MinimumCapacity.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.58666666666666667D, 0D, 0D, 1D, 256D, 127D);
+			this.MinimumCapacity.MaximumTag = null;
+			this.MinimumCapacity.MinimumTag = null;
+			this.MinimumCapacity.Name = "MinimumCapacity";
+			this.MinimumCapacity.NumberBase = NxtControl.GuiFramework.NumberBase.Decimal;
+			this.MinimumCapacity.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("Black"), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.MinimumCapacity.SetColor = new NxtControl.Drawing.Color("Yellow");
+			this.MinimumCapacity.Suffix = "%";
+			this.MinimumCapacity.TagName = "MinimumCapacity";
+			this.MinimumCapacity.UseInputPad = true;
+			this.MinimumCapacity.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleCenter;
+			this.MinimumCapacity.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.MinimumCapacity.UseRange = true;
+			this.MinimumCapacity.Value = 0F;
+			this.MinimumCapacity.EndInit();
+			// 
 			// freeText4
 			// 
 			this.freeText4.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.freeText4.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-			this.freeText4.Location = new NxtControl.Drawing.PointF(16D, 168D);
+			this.freeText4.Location = new NxtControl.Drawing.PointF(16D, 205D);
 			this.freeText4.Name = "freeText4";
-			this.freeText4.Text = "Tempo ajust\u00e1vel (C3) :";
+			this.freeText4.Text = "Tempo abaixo de C3 (T_C3) :";
 			// 
 			// C2_AdjustableTime
 			// 
 			this.C2_AdjustableTime.BeginInit();
-			this.C2_AdjustableTime.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.58666666666666667D, 0D, 0D, 1D, 256D, 126D);
+			this.C2_AdjustableTime.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.58666666666666667D, 0D, 0D, 1D, 256D, 164D);
 			this.C2_AdjustableTime.MaximumTag = null;
 			this.C2_AdjustableTime.MinimumTag = null;
 			this.C2_AdjustableTime.Name = "C2_AdjustableTime";
@@ -154,7 +184,7 @@ namespace SE.Nereda.Faceplates.CAerationLogic
 			// C3_AdjustableTime
 			// 
 			this.C3_AdjustableTime.BeginInit();
-			this.C3_AdjustableTime.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.58666666666666667D, 0D, 0D, 1D, 256D, 164D);
+			this.C3_AdjustableTime.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.58666666666666667D, 0D, 0D, 1D, 256D, 201D);
 			this.C3_AdjustableTime.MaximumTag = null;
 			this.C3_AdjustableTime.MinimumTag = null;
 			this.C3_AdjustableTime.Name = "C3_AdjustableTime";
@@ -165,7 +195,7 @@ namespace SE.Nereda.Faceplates.CAerationLogic
 			// 
 			// fpSettingsS
 			// 
-			this.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(384D)), ((float)(232D)));
+			this.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(384D)), ((float)(269D)));
 			this.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(154)), ((byte)(154)), ((byte)(154))));
 			this.Shapes.AddRange(new System.ComponentModel.IComponent[] {
 			this.rectangle1,
@@ -176,10 +206,12 @@ namespace SE.Nereda.Faceplates.CAerationLogic
 			this.freeText1,
 			this.freeText5,
 			this.MaximumCapacityBlower,
+			this.freeText6,
+			this.MinimumCapacity,
 			this.freeText4,
 			this.C2_AdjustableTime,
 			this.C3_AdjustableTime});
-			this.Size = new System.Drawing.Size(384, 232);
+			this.Size = new System.Drawing.Size(384, 269);
 			this.Title = "Aeration Settings";
 
 		}
@@ -191,6 +223,8 @@ namespace SE.Nereda.Faceplates.CAerationLogic
 		private NxtControl.GuiFramework.FreeText freeText1;
 		private NxtControl.GuiFramework.FreeText freeText5;
 		private System.HMI.Symbols.Base.TextBox<float> MaximumCapacityBlower;
+		private NxtControl.GuiFramework.FreeText freeText6;
+		private System.HMI.Symbols.Base.TextBox<float> MinimumCapacity;
 		private NxtControl.GuiFramework.FreeText freeText4;
 		private System.HMI.Symbols.Base.TimeTextBox C2_AdjustableTime;
 		private System.HMI.Symbols.Base.TimeTextBox C3_AdjustableTime;

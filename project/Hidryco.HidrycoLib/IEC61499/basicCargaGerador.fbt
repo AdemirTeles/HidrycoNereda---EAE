@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="dfe39c9c-04c4-5078-9b96-93e67fc6051f" Name="basicCargaGerador" Comment="Carga alimentada pelos geradores: raio na IHM e bloqueio" Namespace="Hidryco.HidrycoLib">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Hidryco" Version="1.0" Author="Hidryco" Date="04/11/2026" Remarks="1.0: raio do gerador (0 nao conectado, 1 nao liberada, 2 liberada, 3 liberada e funcionando com a planta nos geradores) e bloqueio (conectada, planta nos geradores e nao liberada na Subestacao)." />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="00789A423C908128" Name="REQ" Comment="Atualizacao">
+        <With Var="geradorConectado" />
+        <With Var="geradorHabilita" />
+        <With Var="stsGerador" />
+        <With Var="stsLigado" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="D13B80EB42E4132B" Name="CNF" Comment="Raio e bloqueio">
+        <With Var="stsAnimacaoGerador" />
+        <With Var="stsBloqueio" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="AB02A6BAE011AA16" Name="geradorConectado" Type="BOOL" Comment="TRUE = o gerador pode alimentar esta carga" />
+      <VarDeclaration ID="E98CC3FC79967C8B" Name="geradorHabilita" Type="BOOL" Comment="Carga liberada para operar com a planta nos geradores (Subestacao)" />
+      <VarDeclaration ID="9DDD74C1F0C45B78" Name="stsGerador" Type="BOOL" Comment="TRUE = planta alimentada pelos geradores" />
+      <VarDeclaration ID="92CF573A93E227B1" Name="stsLigado" Type="BOOL" Comment="Carga em funcionamento" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="87DFF1D389B6D369" Name="stsAnimacaoGerador" Type="INT" Comment="0 nao conectado, 1 nao liberada, 2 liberada, 3 liberada e funcionando nos geradores" />
+      <VarDeclaration ID="30043F0B708135A2" Name="stsBloqueio" Type="BOOL" Comment="Planta nos geradores e carga conectada nao liberada" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="8440a1d0-88a0-5702-9fde-82395eb8c16b">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="Calcula" />
+    <ECC>
+      <ECState Name="START" Comment="Estado inicial" x="550" y="430" />
+      <ECState Name="CALCULO" Comment="Calcula raio e bloqueio" x="1170" y="730">
+        <ECAction Algorithm="Calcula" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="CALCULO" Condition="REQ" x="895" y="505" />
+      <ECTransition Source="CALCULO" Destination="START" Condition="1" x="880" y="665" />
+    </ECC>
+    <Algorithm Name="Calcula" Comment="Raio e bloqueio">
+      <ST><![CDATA[
+IF NOT geradorConectado THEN
+    stsAnimacaoGerador := 0;
+ELSIF NOT geradorHabilita THEN
+    stsAnimacaoGerador := 1;
+ELSIF stsGerador AND stsLigado THEN
+    stsAnimacaoGerador := 3;
+ELSE
+    stsAnimacaoGerador := 2;
+END_IF;
+stsBloqueio := geradorConectado AND stsGerador AND NOT geradorHabilita;
+]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

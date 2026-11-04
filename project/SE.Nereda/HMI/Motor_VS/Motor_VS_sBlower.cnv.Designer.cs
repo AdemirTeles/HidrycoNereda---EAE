@@ -30,6 +30,8 @@ namespace SE.Nereda.Symbols.Motor_VS
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary4 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary3 = new NxtControl.GuiFramework.PropertyDictionary();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(sBlower));
+			this.raioCirc = new NxtControl.GuiFramework.Ellipse();
+			this.raioRaio = new NxtControl.GuiFramework.Polygon();
 			this.Base1 = new NxtControl.GuiFramework.Ellipse();
 			this.State = new SE.Nereda.Symbols.ActState.sDefault();
 			this.alarmFrame = new NxtControl.GuiFramework.AlarmFrame();
@@ -41,7 +43,7 @@ namespace SE.Nereda.Symbols.Motor_VS
 			this.OpenFp = new NxtControl.GuiFramework.Rectangle();
 			this.PipeIn = new NxtControl.GuiFramework.Rectangle();
 			this.PipeOut = new NxtControl.GuiFramework.Rectangle();
-			this.BaseVs = new SE.App2CommonProcess.Symbols.MotorVsBase.sDefault();
+			this.BaseVs = new SE.Nereda.Symbols.MotorVsBaseNer.sDefault();
 			this.SpeedSp = new System.HMI.Symbols.Base.FreeText<float>();
 			this.FbSpeed = new System.HMI.Symbols.Base.FreeText<float>();
 			this.Unit = new NxtControl.GuiFramework.FreeText();
@@ -265,8 +267,34 @@ namespace SE.Nereda.Symbols.Motor_VS
 			// 
 			// sBlower
 			// 
+			// 
+			// raioCirc
+			// 
+			this.raioCirc.Bounds = new NxtControl.Drawing.RectF(((float)(22D)), ((float)(60D)), ((float)(24D)), ((float)(24D)));
+			this.raioCirc.Brush = new NxtControl.Drawing.Brush(true);
+			this.raioCirc.Name = "raioCirc";
+			this.raioCirc.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(154)), ((byte)(154)), ((byte)(154))), 2F, NxtControl.Drawing.DashStyle.Solid);
+			this.raioCirc.Visible = false;
+			// 
+			// raioRaio
+			// 
+			this.raioRaio.Bounds = new NxtControl.Drawing.RectF(((float)(29D)), ((float)(63D)), ((float)(10D)), ((float)(18D)));
+			this.raioRaio.Brush = new NxtControl.Drawing.Brush(true);
+			this.raioRaio.Closed = true;
+			this.raioRaio.Name = "raioRaio";
+			this.raioRaio.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(154)), ((byte)(154)), ((byte)(154))), 2F, NxtControl.Drawing.DashStyle.Solid);
+			this.raioRaio.Points.AddRange(new NxtControl.Drawing.PointF[] {
+			new NxtControl.Drawing.PointF(35.060606D, 63D),
+			new NxtControl.Drawing.PointF(29D, 74.142857D),
+			new NxtControl.Drawing.PointF(33.040404D, 74.142857D),
+			new NxtControl.Drawing.PointF(33.040404D, 81D),
+			new NxtControl.Drawing.PointF(39D, 70.714286D),
+			new NxtControl.Drawing.PointF(35.060606D, 70.714286D)});
+			this.raioRaio.Visible = false;
 			this.Shapes.AddRange(new System.ComponentModel.IComponent[] {
-			this.group3});
+			this.group3,
+			this.raioCirc,
+			this.raioRaio});
 			this.SymbolSize = new System.Drawing.Size(600, 400);
 			((System.ComponentModel.ISupportInitialize)(this.alarmFrame)).EndInit();
 
@@ -280,9 +308,11 @@ namespace SE.Nereda.Symbols.Motor_VS
 		private NxtControl.GuiFramework.Group group1;
 		private NxtControl.GuiFramework.Rectangle MotName;
 		private NxtControl.GuiFramework.Rectangle OpenFp;
+		private NxtControl.GuiFramework.Ellipse raioCirc;
+		private NxtControl.GuiFramework.Polygon raioRaio;
 		private NxtControl.GuiFramework.Rectangle PipeIn;
 		private NxtControl.GuiFramework.Rectangle PipeOut;
-		private SE.App2CommonProcess.Symbols.MotorVsBase.sDefault BaseVs;
+		private SE.Nereda.Symbols.MotorVsBaseNer.sDefault BaseVs;
 		private System.HMI.Symbols.Base.FreeText<float> SpeedSp;
 		private System.HMI.Symbols.Base.FreeText<float> FbSpeed;
 		private NxtControl.GuiFramework.FreeText Unit;

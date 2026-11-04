@@ -19,6 +19,8 @@ namespace Hidryco.HidrycoLib.Symbols.Gradeamento_Inovaisa
 		#region Component Designer generated code
 		private void InitializeComponent()
 		{
+			this.raioGerador = new Hidryco.HidrycoLib.Graphics.Energizado_por_Gerador();
+			this.xGER = new System.HMI.Symbols.Base.Execute<short>();
 			this.fundo = new NxtControl.GuiFramework.Rectangle();
 			this.InstanceName = new NxtControl.GuiFramework.AliasDisplayLabel();
 			this.stCiclo = new NxtControl.GuiFramework.Rectangle();
@@ -275,6 +277,27 @@ namespace Hidryco.HidrycoLib.Symbols.Gradeamento_Inovaisa
 			// sDefault
 			// 
 			this.Name = "sDefault";
+			// 
+			// raioGerador
+			// 
+			this.raioGerador.BeginInit();
+			this.raioGerador.Animacao = 0;
+			this.raioGerador.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 212D, 0D);
+			this.raioGerador.Name = "raioGerador";
+			this.raioGerador.EndInit();
+			// 
+			// xGER
+			// 
+			this.xGER.BeginInit();
+			this.xGER.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, double.NaN, double.NaN);
+			this.xGER.IsOnlyInput = true;
+			this.xGER.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
+			this.xGER.Name = "xGER";
+			this.xGER.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
+			this.xGER.TagName = "STS_ANIMACAO_GERADOR";
+			this.xGER.Value = ((short)(0));
+			this.xGER.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.XGERValueChanged);
+			this.xGER.EndInit();
 			this.Shapes.AddRange(new System.ComponentModel.IComponent[] {
 			this.fundo,
 			this.InstanceName,
@@ -296,6 +319,8 @@ namespace Hidryco.HidrycoLib.Symbols.Gradeamento_Inovaisa
 			this.xECOM,
 			this.xEEMG,
 			this.xEPAI,
+			this.raioGerador,
+			this.xGER,
 			this.abrir});
 			this.SymbolSize = new System.Drawing.Size(260, 96);
 
@@ -321,6 +346,8 @@ namespace Hidryco.HidrycoLib.Symbols.Gradeamento_Inovaisa
 		private System.HMI.Symbols.Base.Execute<byte> xEEMG;
 		private System.HMI.Symbols.Base.Execute<byte> xEPAI;
 		private NxtControl.GuiFramework.DrawnButton abrir;
+		private Hidryco.HidrycoLib.Graphics.Energizado_por_Gerador raioGerador;
+		private System.HMI.Symbols.Base.Execute<short> xGER;
 		#endregion
 	}
 }

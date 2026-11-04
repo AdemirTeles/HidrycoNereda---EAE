@@ -1146,6 +1146,46 @@ namespace Hidryco.HidrycoLib.Symbols.UV_Trojan
     }  }
 
 
+    public bool Get_STS_CH1_ANIMACAO_GERADOR(ref System.Int16 value)
+    {
+      if (accessorService == null)
+        return false;
+      System.Int64 var = 0;
+      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,55, ref var);
+      if (ret) value = (System.Int16) var;
+      return ret;
+    }
+
+    public System.Int16? STS_CH1_ANIMACAO_GERADOR
+    { get {
+      if (accessorService == null)
+        return null;
+      System.Int64 var = 0;
+      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,55, ref var);
+      if (!ret) return null;
+      return (System.Int16) var;
+    }  }
+
+    public bool Get_STS_CH2_ANIMACAO_GERADOR(ref System.Int16 value)
+    {
+      if (accessorService == null)
+        return false;
+      System.Int64 var = 0;
+      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,56, ref var);
+      if (ret) value = (System.Int16) var;
+      return ret;
+    }
+
+    public System.Int16? STS_CH2_ANIMACAO_GERADOR
+    { get {
+      if (accessorService == null)
+        return null;
+      System.Int64 var = 0;
+      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,56, ref var);
+      if (!ret) return null;
+      return (System.Int16) var;
+    }  }
+
   }
 
 }

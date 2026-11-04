@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="8dcef0b0-8ba9-522c-8180-bce40b9b6656" Name="AlarmesHabilitados" Comment="Alarmes de limite do AnalogInput so quando habilitados (alarme desabilitado nao bloqueia nada)" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Hidryco" Version="1.0" Author="Hidryco" Date="04/11/2026" Remarks="1.0: saida = LimitReached AND NOT Disabled de cada alarme (HH, H, L, LL, ROC, DEV). O LimitReached da SE.App2Base compara mesmo com o alarme desabilitado. REQ recalcula e sempre emite CNF (mesmo tempo de hoje); REQ_DIS (mudanca de ajuste) so derruba os desabilitados e emite CNF se mudou. Usado no AnalogInput." />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="2AEEBBA0A5EC440E" Name="REQ" Comment="Novo estado dos alarmes (CNF dos alarmes)">
+        <With Var="LimHH" />
+        <With Var="DisHH" />
+        <With Var="LimH" />
+        <With Var="DisH" />
+        <With Var="LimL" />
+        <With Var="DisL" />
+        <With Var="LimLL" />
+        <With Var="DisLL" />
+        <With Var="LimRoc" />
+        <With Var="DisRoc" />
+        <With Var="LimDev" />
+        <With Var="DisDev" />
+      </Event>
+      <Event ID="3C111C57EDC808A6" Name="REQ_DIS" Comment="Ajuste ou habilitacao mudou (CNF_LIMITSP / IND dos alarmes)">
+        <With Var="LimHH" />
+        <With Var="DisHH" />
+        <With Var="LimH" />
+        <With Var="DisH" />
+        <With Var="LimL" />
+        <With Var="DisL" />
+        <With Var="LimLL" />
+        <With Var="DisLL" />
+        <With Var="LimRoc" />
+        <With Var="DisRoc" />
+        <With Var="LimDev" />
+        <With Var="DisDev" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="62FB394541C64B06" Name="CNF" Comment="Alarmes so com habilitacao">
+        <With Var="HiHiAlarm" />
+        <With Var="HiAlarm" />
+        <With Var="LoAlarm" />
+        <With Var="LoLoAlarm" />
+        <With Var="RocAlarm" />
+        <With Var="DevAlarm" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="9D85630A5A0B7418" Name="LimHH" Type="BOOL" Comment="LimitReached do alarme HH" />
+      <VarDeclaration ID="E6168D841AF568EC" Name="DisHH" Type="BOOL" Comment="Disabled do alarme HH" />
+      <VarDeclaration ID="30FEF5F65F2DC589" Name="LimH" Type="BOOL" Comment="LimitReached do alarme H" />
+      <VarDeclaration ID="870E5A1861D2187B" Name="DisH" Type="BOOL" Comment="Disabled do alarme H" />
+      <VarDeclaration ID="6D15D424C848362E" Name="LimL" Type="BOOL" Comment="LimitReached do alarme L" />
+      <VarDeclaration ID="1C7F0DEED92EE2E9" Name="DisL" Type="BOOL" Comment="Disabled do alarme L" />
+      <VarDeclaration ID="4C0BCAD35CD318B1" Name="LimLL" Type="BOOL" Comment="LimitReached do alarme LL" />
+      <VarDeclaration ID="EBEF5228D16A180C" Name="DisLL" Type="BOOL" Comment="Disabled do alarme LL" />
+      <VarDeclaration ID="6DD2EA90A86E3D03" Name="LimRoc" Type="BOOL" Comment="LimitReached do alarme Roc" />
+      <VarDeclaration ID="25E88E6A27DF1603" Name="DisRoc" Type="BOOL" Comment="Disabled do alarme Roc" />
+      <VarDeclaration ID="D3143B2F20577E60" Name="LimDev" Type="BOOL" Comment="LimitReached do alarme Dev" />
+      <VarDeclaration ID="FB24454C4C35C2A2" Name="DisDev" Type="BOOL" Comment="Disabled do alarme Dev" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="028412022F91BA74" Name="HiHiAlarm" Type="BOOL" Comment="Alarme HH so com o alarme habilitado" />
+      <VarDeclaration ID="E3033ACD2171201F" Name="HiAlarm" Type="BOOL" Comment="Alarme H so com o alarme habilitado" />
+      <VarDeclaration ID="00FE253604652B49" Name="LoAlarm" Type="BOOL" Comment="Alarme L so com o alarme habilitado" />
+      <VarDeclaration ID="A7F222F22540A831" Name="LoLoAlarm" Type="BOOL" Comment="Alarme LL so com o alarme habilitado" />
+      <VarDeclaration ID="A1EE9C6053408678" Name="RocAlarm" Type="BOOL" Comment="Alarme Roc so com o alarme habilitado" />
+      <VarDeclaration ID="47E79D585BAD2C10" Name="DevAlarm" Type="BOOL" Comment="Alarme Dev so com o alarme habilitado" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="7443cd24-d27b-540d-8e78-bad288821b00">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="Calcula" />
+    <InternalVars>
+      <VarDeclaration ID="AC858DF29C6131DA" Name="oldHiHiAlarm" Type="BOOL" />
+      <VarDeclaration ID="A43142A568ECC76B" Name="oldHiAlarm" Type="BOOL" />
+      <VarDeclaration ID="3340615AE86D30A0" Name="oldLoAlarm" Type="BOOL" />
+      <VarDeclaration ID="7C1B8C45EBF75FB2" Name="oldLoLoAlarm" Type="BOOL" />
+      <VarDeclaration ID="5E026F8FAE4A9C02" Name="oldRocAlarm" Type="BOOL" />
+      <VarDeclaration ID="893040B0456B61C2" Name="oldDevAlarm" Type="BOOL" />
+    </InternalVars>
+    <ECC>
+      <ECState Name="START" Comment="Estado inicial" x="550" y="430" />
+      <ECState Name="CALCULO" Comment="Calcula; o algoritmo decide se o CNF sai" x="1170" y="730">
+        <ECAction Algorithm="Calcula" />
+      </ECState>
+      <ECTransition Source="START" Destination="CALCULO" Condition="REQ OR REQ_DIS" x="895" y="505" />
+      <ECTransition Source="CALCULO" Destination="START" Condition="1" x="880" y="665" />
+    </ECC>
+    <Algorithm Name="Calcula" Comment="LimitReached AND NOT Disabled">
+      <ST><![CDATA[
+CNF := FALSE;
+IF REQ THEN
+    (* mesmo momento de hoje: o CNF dos alarmes ja respeita o tempo do alarme *)
+    HiHiAlarm := LimHH AND NOT DisHH;
+    HiAlarm := LimH AND NOT DisH;
+    LoAlarm := LimL AND NOT DisL;
+    LoLoAlarm := LimLL AND NOT DisLL;
+    RocAlarm := LimRoc AND NOT DisRoc;
+    DevAlarm := LimDev AND NOT DisDev;
+    CNF := TRUE;
+ELSE
+    (* mudanca de ajuste: so derruba quem foi desabilitado (habilitar espera o proximo CNF do alarme) *)
+    HiHiAlarm := HiHiAlarm AND NOT DisHH;
+    HiAlarm := HiAlarm AND NOT DisH;
+    LoAlarm := LoAlarm AND NOT DisL;
+    LoLoAlarm := LoLoAlarm AND NOT DisLL;
+    RocAlarm := RocAlarm AND NOT DisRoc;
+    DevAlarm := DevAlarm AND NOT DisDev;
+    CNF := (HiHiAlarm <> oldHiHiAlarm) OR (HiAlarm <> oldHiAlarm) OR (LoAlarm <> oldLoAlarm) OR (LoLoAlarm <> oldLoLoAlarm) OR (RocAlarm <> oldRocAlarm) OR (DevAlarm <> oldDevAlarm);
+END_IF;
+oldHiHiAlarm := HiHiAlarm;
+oldHiAlarm := HiAlarm;
+oldLoAlarm := LoAlarm;
+oldLoLoAlarm := LoLoAlarm;
+oldRocAlarm := RocAlarm;
+oldDevAlarm := DevAlarm;
+]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

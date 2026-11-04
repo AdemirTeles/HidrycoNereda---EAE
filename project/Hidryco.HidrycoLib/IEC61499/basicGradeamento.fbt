@@ -2,7 +2,7 @@
 <!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
 <FBType GUID="732377f3-b4f0-731b-084c-94a874814483" Name="basicGradeamento" Comment="Logica do gradeamento mecanizado (painel Vibropac, Modbus TCP Inovaisa)" Namespace="Hidryco.HidrycoLib">
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Hidryco" Version="1.0" Author="Hidryco" Date="22/10/2026" Remarks="1.0: ciclo remoto 4001, reset 4002 (3 s), setpoints 4003/4004 em % (x10 no CLP), leitura 4005..4018, niveis em %" />
+  <VersionInfo Organization="Hidryco" Version="1.1" Author="Hidryco" Date="22/10/2026" Remarks="1.1: REQ_GERADOR (geradorHabilita, stsGerador): com a planta nos geradores e a grade nao liberada o ciclo remoto (4001) fica em 0 (stsBloqueioGerador). 1.0: ciclo remoto 4001, reset 4002 (3 s), setpoints 4003/4004 em % (x10 no CLP), leitura 4005..4018, niveis em %" />
   <InterfaceList>
     <EventInputs>
       <Event ID="518C29172BF7055D" Name="INIT" Comment="Inicializacao" />
@@ -45,6 +45,10 @@
         <With Var="g1Ligado" />
         <With Var="g2Ligado" />
         <With Var="rtLigado" />
+      </Event>
+      <Event ID="F3638F475B575790" Name="REQ_GERADOR" Comment="Subestacao: planta nos geradores e liberacao da grade">
+        <With Var="geradorHabilita" />
+        <With Var="stsGerador" />
       </Event>
       <Event ID="220EF84FD56D066A" Name="TICK" Comment="Base de tempo de 1 s" />
     </EventInputs>
@@ -89,6 +93,7 @@
         <With Var="stsCicloLigado" />
         <With Var="stsFalhaMotor" />
         <With Var="stsFuncionando" />
+        <With Var="stsBloqueioGerador" />
       </Event>
     </EventOutputs>
     <InputVars>
@@ -118,6 +123,8 @@
       <VarDeclaration ID="710DE56279147CB9" Name="g1Ligado" Type="BOOL" />
       <VarDeclaration ID="910F61598CD02A9A" Name="g2Ligado" Type="BOOL" />
       <VarDeclaration ID="373787043AB8D8D4" Name="rtLigado" Type="BOOL" />
+      <VarDeclaration ID="162C592D6763A41A" Name="geradorHabilita" Type="BOOL" Comment="Grade liberada para operar com a planta nos geradores" />
+      <VarDeclaration ID="29083538F3254FDC" Name="stsGerador" Type="BOOL" Comment="TRUE = planta alimentada pelos geradores" />
     </InputVars>
     <OutputVars>
       <VarDeclaration ID="2350FEDB0EF73756" Name="acmCiclo" Type="INT" Comment="Registro 4001: 1 liga ciclo remoto, 0 desliga" />
@@ -144,6 +151,7 @@
       <VarDeclaration ID="26FB5E58803038CB" Name="stsCicloLigado" Type="BOOL" Comment="Comando de ciclo remoto ligado (4001 = 1)" />
       <VarDeclaration ID="77ADF001A8F11DA2" Name="stsFalhaMotor" Type="BOOL" Comment="Grade ou rosca em falha ou sobretorque" />
       <VarDeclaration ID="F73DC825969A7AAC" Name="stsFuncionando" Type="BOOL" Comment="Alguma grade ou a rosca funcionando" />
+      <VarDeclaration ID="D71FD796EB9DFC39" Name="stsBloqueioGerador" Type="BOOL" Comment="Ciclo bloqueado: planta nos geradores e grade nao liberada" />
     </OutputVars>
   </InterfaceList>
   <BasicFB ID="add18c23-d2c6-a625-3187-a2438009f355">
@@ -166,6 +174,7 @@
       <VarDeclaration ID="35C614E08C86BD9D" Name="oldSig" Type="INT" InitialValue="-1" />
       <VarDeclaration ID="198E37FF2C2A826F" Name="oldDif1" Type="REAL" InitialValue="-1.0" />
       <VarDeclaration ID="B6ABAEAC4DD93AC4" Name="oldDif2" Type="REAL" InitialValue="-1.0" />
+      <VarDeclaration ID="FF21CCAB53957918" Name="bBloqGerador" Type="BOOL" Comment="Planta nos geradores e grade nao liberada" />
     </InternalVars>
     <ECC>
       <ECState Name="START" Comment="Estado inicial" x="1500" y="640" />
@@ -177,7 +186,7 @@
         <ECAction Output="CNF" />
         <ECAction Output="CNF_HMI" />
       </ECState>
-      <ECTransition Source="START" Destination="EXEC" Condition="INIT OR REQ_FB OR REQ_FB2 OR REQ_COM OR REQ_CMD OR REQ_RESET OR REQ_RESET_PROC OR REQ_SUB OR TICK" x="1580" y="860" />
+      <ECTransition Source="START" Destination="EXEC" Condition="INIT OR REQ_FB OR REQ_FB2 OR REQ_COM OR REQ_CMD OR REQ_RESET OR REQ_RESET_PROC OR REQ_SUB OR REQ_GERADOR OR TICK" x="1580" y="860" />
       <ECTransition Source="EXEC" Destination="START" Condition="1" x="1420" y="860" />
     </ECC>
     <Algorithm Name="algGradeamento" Comment="Logica completa (um unico algoritmo)">
@@ -246,14 +255,17 @@ ELSE
 END_IF;
 
 (* ---- 2. Comandos (4001..4004) e reset ---- *)
-stsCicloLigado := cmdCiclo;
+(* planta nos geradores e grade nao liberada na Subestacao: ciclo remoto em 0 *)
+bBloqGerador := stsGerador AND NOT geradorHabilita;
+stsBloqueioGerador := bBloqGerador;
+stsCicloLigado := cmdCiclo AND NOT bBloqGerador;
 IF (REQ_RESET AND hmiReset) OR (REQ_RESET_PROC AND cmdResetProc) THEN
     tReset := 3;
 END_IF;
 IF TICK AND (tReset > 0) THEN
     tReset := tReset - 1;
 END_IF;
-IF cmdCiclo THEN
+IF cmdCiclo AND NOT bBloqGerador THEN
     acmCiclo := 1;
 ELSE
     acmCiclo := 0;
@@ -300,6 +312,7 @@ IF stsCicloLigado THEN sig := sig + 8; END_IF;
 IF stsFalhaMotor THEN sig := sig + 16; END_IF;
 IF stsFuncionando THEN sig := sig + 32; END_IF;
 IF stsAlarme THEN sig := sig + 64; END_IF;
+IF stsBloqueioGerador THEN sig := sig + 128; END_IF;
 IF primeiro OR REQ_RESET OR (sig <> oldSig) THEN
     CNF_HMI := TRUE;
     CNF := TRUE;

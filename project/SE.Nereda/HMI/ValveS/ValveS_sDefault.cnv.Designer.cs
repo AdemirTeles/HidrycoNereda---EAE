@@ -41,7 +41,7 @@ namespace SE.Nereda.Symbols.ValveS
 			this.VlvBase4 = new NxtControl.GuiFramework.Polygon();
 			this.line2 = new NxtControl.GuiFramework.Line();
 			this.State_1 = new SE.Nereda.Symbols.ActState.sStateTop();
-			this.Base = new SE.App2CommonProcess.Symbols.ValveBase.sDefault();
+			this.Base = new SE.Nereda.Symbols.ValveBaseNer.sDefault();
 			this.HorizontalBase = new NxtControl.GuiFramework.Group();
 			this.Horizontal = new NxtControl.GuiFramework.Group();
 			this.Vertical = new NxtControl.GuiFramework.Group();
@@ -258,7 +258,7 @@ namespace SE.Nereda.Symbols.ValveS
 		private NxtControl.GuiFramework.Polygon VlvBase4;
 		private NxtControl.GuiFramework.Line line2;
 		private SE.Nereda.Symbols.ActState.sStateTop State_1;
-		private SE.App2CommonProcess.Symbols.ValveBase.sDefault Base;
+		private SE.Nereda.Symbols.ValveBaseNer.sDefault Base;
 		private NxtControl.GuiFramework.Group HorizontalBase;
 		private NxtControl.GuiFramework.Group Horizontal;
 		private NxtControl.GuiFramework.Group Vertical;

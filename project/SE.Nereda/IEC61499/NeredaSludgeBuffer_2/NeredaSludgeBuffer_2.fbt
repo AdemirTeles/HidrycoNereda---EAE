@@ -4,8 +4,22 @@
   <Attribute Name="HMI.Alias" Value="" />
   <Attribute Name="Configuration.FB.IDCounter" Value="20" />
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Schneider Electric" Version="1.1" Author="Claude/Hidryco" Date="9/30/2026" Remarks="Rev1.1 - Religadas as 4 conexoes do 49FT0004 (PV2..PV5 -&gt; FlowMeasurement_SD1/SD2/WD1/WD2)" />
+  <VersionInfo Organization="Schneider Electric" Version="1.2" Author="Claude/Hidryco" Date="9/30/2026" Remarks="1.2: carga no gerador: REQ_GERADOR repassado aos atuadores (P4901-P4903). Rev1.1 - Religadas as 4 conexoes do 49FT0004 (PV2..PV5 -&gt; FlowMeasurement_SD1/SD2/WD1/WD2)" />
   <InterfaceList>
+    <EventInputs>
+      <Event ID="9DD23EB33BCCE747" Name="REQ_GERADOR" Comment="Planta nos geradores e liberacao das bombas P4901-P4903 (Subestacao)">
+        <With Var="geradorHabilitaP4901" />
+        <With Var="geradorHabilitaP4902" />
+        <With Var="geradorHabilitaP4903" />
+        <With Var="stsGerador" />
+      </Event>
+    </EventInputs>
+    <InputVars>
+      <VarDeclaration ID="7D03DBDF71B8C2FE" Name="geradorHabilitaP4901" Type="BOOL" Comment="P4901 liberado para operar com a planta nos geradores" />
+      <VarDeclaration ID="D58F38BFC1670450" Name="geradorHabilitaP4902" Type="BOOL" Comment="P4902 liberado para operar com a planta nos geradores" />
+      <VarDeclaration ID="5CEDBAD4251CEB62" Name="geradorHabilitaP4903" Type="BOOL" Comment="P4903 liberado para operar com a planta nos geradores" />
+      <VarDeclaration ID="169E5A2DB0450A6B" Name="stsGerador" Type="BOOL" Comment="TRUE = planta alimentada pelos geradores" />
+    </InputVars>
     <AdapterInputs>
       <Adapter ID="642947B3B08BBF0A" Name="ICalamity" Type="IHiHiLevel" Namespace="SE.Nereda" />
       <Adapter ID="6D7943A09F73313C" Name="IMode" Type="IMode" Namespace="SE.Nereda" />
@@ -171,6 +185,7 @@
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
         <AvoidsNodes>false</AvoidsNodes>
       </Connection>
+      <Connection Source="$9DD23EB33BCCE747" Destination="$0CEB8DC5014D1994.REQ_GERADOR" />
     </EventConnections>
     <DataConnections>
       <Connection Source="$5499D4F435B971C7.C5C1B8B409063B7A" Destination="$8.04E0874FDDD12A13">
@@ -179,6 +194,10 @@
       <Connection Source="$5499D4F435B971C7.6DED050C37342A8D" Destination="$8.DF0AD27AB0A501A4">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
+      <Connection Source="$7D03DBDF71B8C2FE" Destination="$0CEB8DC5014D1994.468A05F0F024D9EE" />
+      <Connection Source="$169E5A2DB0450A6B" Destination="$0CEB8DC5014D1994.E5BEFB89820CAB05" />
+      <Connection Source="$D58F38BFC1670450" Destination="$0CEB8DC5014D1994.F6539F72F34D7C90" />
+      <Connection Source="$5CEDBAD4251CEB62" Destination="$0CEB8DC5014D1994.018DE2B62FADB172" />
     </DataConnections>
     <AdapterConnections>
       <Connection Source="$642947B3B08BBF0A" Destination="$89F65F31890D192D.57C6A46265899F0E" dx1="244.75">

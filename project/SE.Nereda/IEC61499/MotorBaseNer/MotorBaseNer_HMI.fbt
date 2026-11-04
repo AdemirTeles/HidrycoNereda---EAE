@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="9b1119dd-bf17-5754-a149-26008fd30937" Name="MotorBaseNer_HMI" Comment="Service Interface Function Block Type" Namespace="SE.Nereda">
+  <Attribute Name="Runtime.Persistence.Storage" Value="0" />
+  <Attribute Name="HMI.Alias" Value="" />
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Schneider Electric" Version="1.0.1" Author="ApplicationLibDevTeam" Date="1/30/2024" Remarks="First Version" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="34A017503AC1070A" Name="INIT">
+        <With Var="QI" />
+      </Event>
+      <Event ID="F2953B6BB9388F21" Name="REQ_INITDATA" Comment="Request to initialize data" />
+      <Event ID="EC791CA6E67D66B3" Name="UPD" Comment="Update data to supervision">
+        <With Var="FbStatus" />
+        <With Var="TransFbStatus" />
+        <With Var="CurrentOp" />
+        <With Var="CurrentSp" />
+        <With Var="NeedReset" />
+        <With Var="FbFail" />
+        <With Var="DeviceFail" />
+        <With Var="IlckCond" />
+        <With Var="PermStop" />
+        <With Var="PermRun" />
+        <With Var="Fail" />
+        <With Var="CurrentOwner" />
+        <With Var="StdOwnerConnected" />
+        <With Var="ExternalControlled" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="377462E9CE5193B5" Name="INITO">
+        <With Var="QO" />
+        <With Var="STATUS" />
+      </Event>
+      <Event ID="95BEA68906019444" Name="CFG" Comment="Request for new parameter">
+        <With Var="MonTime" />
+        <With Var="TripTime" />
+        <With Var="ConfResetReq" />
+        <With Var="FailResetReq" />
+        <With Var="ScanTime" />
+        <With Var="AlmAckType" />
+        <With Var="EnTrackSp" />
+        <With Var="EnResetSp" />
+      </Event>
+      <Event ID="C6CA4032A5F6989A" Name="SP_CMD" Comment="Request for new operator setpoint">
+        <With Var="Sp" />
+      </Event>
+      <Event ID="1A2B085F4B246BF1" Name="RESET_CMD" Comment="Request to reset device">
+        <With Var="Reset" />
+      </Event>
+      <Event ID="4711DA9A2DFC024" Name="IND_MODE" Comment="Request for new operational modes">
+        <With Var="Simulation" />
+        <With Var="FbOverride" />
+        <With Var="Maintenance" />
+        <With Var="OutOfService" />
+      </Event>
+      <Event ID="B42FC414051FE233" Name="OWNER" Comment="Request for owner change">
+        <With Var="Owner" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="A08029BD5BCA0193" Name="QI" Type="BOOL" />
+      <VarDeclaration ID="E35507CB164A688E" Name="FbStatus" Type="INT" Comment="Device state(0 = stopped, 1= Running)">
+        <Attribute Name="Runtime.Archive.Counters" Value="AbsoluteValues=False" />
+        <Attribute Name="Runtime.Archive.Id" Value="1" />
+        <Attribute Name="Runtime.History.Depth" Value="100" />
+        <Attribute Name="Runtime.History.SmoothTime" Value="60000" />
+        <Attribute Name="Runtime.History.SmoothValue" Value="1" />
+      </VarDeclaration>
+      <VarDeclaration ID="937CA40F4D16204B" Name="TransFbStatus" Type="INT" Comment="Device transition state( 0 = Stopped, 1 = Running, 5 = Stopping , 6 = Starting and 253 = Unknown)">
+        <Attribute Name="Runtime.Archive.Counters" Value="AbsoluteValues=False" />
+        <Attribute Name="Runtime.Archive.Id" Value="1" />
+        <Attribute Name="Runtime.History.Depth" Value="100" />
+        <Attribute Name="Runtime.History.SmoothTime" Value="60000" />
+        <Attribute Name="Runtime.History.SmoothValue" Value="1" />
+      </VarDeclaration>
+      <VarDeclaration ID="D2C35BC47DF71FCC" Name="CurrentOp" Type="INT" Comment="Current value of the output ( 0 = Stop command and 1 = start command)">
+        <Attribute Name="Runtime.Archive.Counters" Value="AbsoluteValues=False" />
+        <Attribute Name="Runtime.Archive.Id" Value="1" />
+        <Attribute Name="Runtime.History.Depth" Value="100" />
+        <Attribute Name="Runtime.History.SmoothTime" Value="60000" />
+        <Attribute Name="Runtime.History.SmoothValue" Value="1" />
+      </VarDeclaration>
+      <VarDeclaration ID="C6876D790F3A950E" Name="CurrentSp" Type="INT" Comment="Current value of the setpoint ( 0 = Stop Setpoint and 1 = start setpoint">
+        <Attribute Name="Runtime.Archive.Counters" Value="AbsoluteValues=False" />
+        <Attribute Name="Runtime.Archive.Id" Value="1" />
+        <Attribute Name="Runtime.History.Depth" Value="100" />
+        <Attribute Name="Runtime.History.SmoothTime" Value="60000" />
+        <Attribute Name="Runtime.History.SmoothValue" Value="1" />
+      </VarDeclaration>
+      <VarDeclaration ID="9CB24E1B5B149DBC" Name="CurrentOwner" Type="WORD" Comment="Current Owner status ( 16#08 = Program remote  and 16#10 = Operator)" />
+      <VarDeclaration ID="AB1D2B96094C90BD" Name="PermStop" Type="BOOL" Comment="1= Stop permission available" />
+      <VarDeclaration ID="18DA785EF50AD374" Name="PermRun" Type="BOOL" Comment="1= Start permission available" />
+      <VarDeclaration ID="22A0744EA4DC0124" Name="IlckCond" Type="BOOL" Comment="1= Interlock active" />
+      <VarDeclaration ID="D28866DFD0C1393B" Name="Fail" Type="BOOL" Comment="1= Fail active" />
+      <VarDeclaration ID="E4BB2C7DF94BE70A" Name="DeviceFail" Type="VTQBOOL" Comment="1=Device fail alarm status active" />
+      <VarDeclaration ID="7F794E74835A9A2" Name="FbFail" Type="VTQBOOL" Comment="1=Feedback fail alarm status active" />
+      <VarDeclaration ID="9CD6749867E91606" Name="NeedReset" Type="BOOL" Comment="1= Device need reset" />
+      <VarDeclaration ID="621B2EAA60B4DCF6" Name="StdOwnerConnected" Type="BOOL" Comment="1= External owner connected" />
+      <VarDeclaration ID="130A3A1CA20AF67A" Name="ExternalControlled" Type="BOOL" Comment="1 = Device is externally controlled" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="6FC14464C1C740FE" Name="QO" Type="BOOL" Comment="Event Output Qualifier" />
+      <VarDeclaration ID="4F225555750B7DE3" Name="STATUS" Type="STRING" Comment="Service Status" />
+      <VarDeclaration ID="922C4AB423622B98" Name="Owner" Type="WORD" Comment="Requested owner (16#10 = Operator, 16#8 = Program remote)" />
+      <VarDeclaration ID="861B8773AF2757FC" Name="MonTime" Type="DINT" Comment="Feedback monitoring time" />
+      <VarDeclaration ID="5568E3E91B9AAED8" Name="TripTime" Type="DINT" Comment="Feedback trip time" />
+      <VarDeclaration ID="3DA6D0F9276D43A4" Name="ConfResetReq" Type="BOOL" Comment="1= Need reset on confirmation mismatch" />
+      <VarDeclaration ID="22AB1FF8E4CF2F97" Name="FailResetReq" Type="BOOL" Comment="1 = Need reset on device detected failure" />
+      <VarDeclaration ID="4D34C1A4533BA5DF" Name="Reset" Type="BOOL" Comment="1 = Reset request from supervision" />
+      <VarDeclaration ID="869E02415F6A841" Name="Sp" Type="INT" Comment="New setpoint from the supervision" />
+      <VarDeclaration ID="CF1EA84FDDBF53A1" Name="Simulation" Type="BOOL" Comment="1 = Enable device in simulation" />
+      <VarDeclaration ID="AD38F01F8F0043E7" Name="FbOverride" Type="BOOL" Comment="1 = Enable device in override mode" />
+      <VarDeclaration ID="C8DEEF765E4F14C0" Name="Maintenance" Type="BOOL" Comment="1 = Enable device in maintenance mode" />
+      <VarDeclaration ID="6EDFC17C06F3153" Name="OutOfService" Type="BOOL" Comment="1 = Enable device in out of service mode" />
+      <VarDeclaration ID="152A2BD44E46F288" Name="ScanTime" Type="DINT" Comment="Alarm holding time" />
+      <VarDeclaration ID="3CCC10520A21214A" Name="AlmAckType" Type="USINT" Comment="0=Not ackable; 1=Ack deletes; 2=Came has to be acked; 3=Came and gone have to be acked; 4=Pair has to be acked" />
+      <VarDeclaration ID="89CD17990DC40B0E" Name="EnTrackSp" Type="BOOL" Comment="1= Enable the tracking of Interlock setpoint" />
+      <VarDeclaration ID="B2B61A4BABE50F70" Name="EnResetSp" Type="BOOL" Comment="1= Enable Reset Setpoint" />
+    </OutputVars>
+  </InterfaceList>
+  <Service RightInterface="" LeftInterface="">
+    <ServiceSequence Name="" />
+  </Service>
+</FBType>

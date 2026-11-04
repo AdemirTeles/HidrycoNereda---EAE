@@ -3,7 +3,7 @@
 <FBType GUID="e84eb29a-d6dc-49a2-862e-d83a3ef0c522" Name="FieldSignals" Format="2.0" Comment="CAT Function Block Type" Namespace="SE.Nereda">
   <Attribute Name="HMI.Alias" Value="" />
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Schneider Electric" Version="0.1" Author="Hidryco" Date="23/10/2026" Remarks="0.1: leituras do ATV (marcha avante/reversa, ETI, HMIS, rpm, torque, corrente, codigo de falha, aviso, codigo de aviso, comunicacao) por symlink ${PATH} para o IThis (evento REQ_ATV); recolocados CurrentFb (symlink CurrentFbl) e RpmFb (symlink RpmFb) com o ANY2ANY1 para o IThis, como no commit 7a2d4e5. Safety Switch (oSafetySwitchOff) e Power Status (oPowerFb) sempre OK (TRUE): SelSafetySwitchOff e SelPowerFb com IN1 e IN2 fixos em TRUE, por decisao do usuario em 23/10/2026. 0.0: template" />
+  <VersionInfo Organization="Schneider Electric" Version="0.1" Author="Hidryco" Date="23/10/2026" Remarks="0.3 (Hidryco 04/11/2026): ANY2ANY1 virou Div10Sulzer (DivDez2): CurrentFbl (0,1 A) e RpmFb (0,1 Hz, Sulzer hr 34454) divididos por 10; so os V4601-V4604 ligam esses symlinks. 0.2 (Hidryco 04/11/2026): symlinks INT PowerKw10 (0,1 kW -> PowerCalculator.REQ_KW10) e FreqHz10 (0,1 Hz -> FreqSel -> IThis.Frequency; o MotorFrequecy do ATV tambem passa pelo FreqSel), ligados so nos sopradores Sulzer V4601-V4604 (hr 34463 e 34453). 0.1: leituras do ATV (marcha avante/reversa, ETI, HMIS, rpm, torque, corrente, codigo de falha, aviso, codigo de aviso, comunicacao) por symlink ${PATH} para o IThis (evento REQ_ATV); recolocados CurrentFb (symlink CurrentFbl) e RpmFb (symlink RpmFb) com o ANY2ANY1 para o IThis, como no commit 7a2d4e5. Safety Switch (oSafetySwitchOff) e Power Status (oPowerFb) sempre OK (TRUE): SelSafetySwitchOff e SelPowerFb com IN1 e IN2 fixos em TRUE, por decisao do usuario em 23/10/2026. 0.0: template" />
   <InterfaceList>
     <EventInputs>
       <Event ID="62FE49324B71C4B0" Name="REQ_ATV_TYPE">
@@ -143,6 +143,17 @@
       <Parameter Name="$QI" Value="TRUE" />
       <Parameter Name="$NAME1" Value="'$${PATH}MotorFrequecy'" />
     </FB>
+    <FB ID="C3828B8C3CA00ECF" Name="PowerKw10_Sym" Type="SYMLINKMULTIVARDST_5A03F112CD5D470" x="820" y="9500" Namespace="SE.Nereda">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=1;VALUE${I}:INT" />
+      <Parameter Name="$QI" Value="TRUE" />
+      <Parameter Name="$NAME1" Value="'$${PATH}PowerKw10'" />
+    </FB>
+    <FB ID="9A4FA1C48A0764E1" Name="FreqHz10_Sym" Type="SYMLINKMULTIVARDST_5A03F112CD5D470" x="820" y="10200" Namespace="SE.Nereda">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=1;VALUE${I}:INT" />
+      <Parameter Name="$QI" Value="TRUE" />
+      <Parameter Name="$NAME1" Value="'$${PATH}FreqHz10'" />
+    </FB>
+    <FB ID="A4B8D787B3AD1DA0" Name="FreqSel" Type="FrequenciaSel" x="2000" y="10200" Namespace="SE.Nereda" />
     <FB ID="51D71E55DB73DC3A" Name="PowerPercent_Sym" Type="SYMLINKMULTIVARDST_197068ABA215D7EBA" x="820" y="8120" Namespace="SE.Nereda">
       <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=1;VALUE${I}:REAL" />
       <Parameter Name="$QI" Value="TRUE" />
@@ -181,9 +192,7 @@
       <Parameter Name="$QI" Value="TRUE" />
       <Parameter Name="$NAME1" Value="'$${PATH}RpmFb'" />
     </FB>
-    <FB ID="155FFBAEA2F9B2D8" UID="0D505F1D2827A170" Name="ANY2ANY1" Type="ANY2ANY_39AA4A6524A43C2E" x="4300" y="2440" Namespace="SE.Nereda">
-      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNT:=2;IN${CNT}:INT,INT;OUT${CNT}:REAL,REAL" />
-    </FB>
+    <FB ID="155FFBAEA2F9B2D8" UID="0D505F1D2827A170" Name="Div10Sulzer" Type="DivDez2" x="4300" y="2440" Namespace="SE.Nereda" />
     <FB ID="57AE9ADBFDA6305F" UID="CD02D95A3053974B" Name="AtvRunForward" Type="SYMLINKMULTIVARDST_1559B0FF8170C9BA0" x="2700" y="10400" Namespace="SE.Nereda">
       <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=1;VALUE${I}:BOOL" />
       <Parameter Name="$QI" Value="TRUE" />
@@ -495,7 +504,7 @@
       <Connection Source="$9849EC9CC42921F8.EO" Destination="$CAAADA7932C2244A.63337A003134C8E1">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$1432CF995CA74B3E.CNF" Destination="$CAAADA7932C2244A.63337A003134C8E1">
+      <Connection Source="$1432CF995CA74B3E.CNF" Destination="$A4B8D787B3AD1DA0.D6E1C6284AD78375">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
       <Connection Source="$A652EC98598F505A.CNF" Destination="$CAAADA7932C2244A.DAE3B0FAEAC06339">
@@ -575,8 +584,8 @@
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
         <AvoidsNodes>false</AvoidsNodes>
       </Connection>
-      <Connection Source="$96C3A9B7FD4A5458.CNF" Destination="$155FFBAEA2F9B2D8.REQ" dx1="61.625" />
-      <Connection Source="$237A08AD1DE137C4.CNF" Destination="$155FFBAEA2F9B2D8.REQ" dx1="70" />
+      <Connection Source="$96C3A9B7FD4A5458.CNF" Destination="$155FFBAEA2F9B2D8.D1214B8F082DE0A5" dx1="61.625" />
+      <Connection Source="$237A08AD1DE137C4.CNF" Destination="$155FFBAEA2F9B2D8.D1214B8F082DE0A5" dx1="70" />
       <Connection Source="$96C3A9B7FD4A5458.INITO" Destination="$237A08AD1DE137C4.INIT" dx1="81.625" dx2="50" dy="530" />
       <Connection Source="$237A08AD1DE137C4.INITO" Destination="$57AE9ADBFDA6305F.INIT">
         <Points>
@@ -622,7 +631,7 @@
           </Points>
         </Points>
       </Connection>
-      <Connection Source="$155FFBAEA2F9B2D8.CNF" Destination="$CAAADA7932C2244A.63337A003134C8E1" dx1="323.75" dx2="670" dy="-2050" />
+      <Connection Source="$155FFBAEA2F9B2D8.76A2C7728097811D" Destination="$CAAADA7932C2244A.63337A003134C8E1" dx1="323.75" dx2="670" dy="-2050" />
       <Connection Source="$57AE9ADBFDA6305F.INITO" Destination="$1D0349B378DF11A4.INIT" />
       <Connection Source="$1D0349B378DF11A4.INITO" Destination="$F368A4C596477299.INIT" dx1="81.625" dx2="50" dy="530" />
       <Connection Source="$F368A4C596477299.INITO" Destination="$1759BAA386A048E2.INIT" />
@@ -820,6 +829,11 @@
         </Points>
       </Connection>
       <Connection Source="$55C4A63A62D0AE19.CNF" Destination="$CAAADA7932C2244A.47A23F4E65E4F017" dx1="221.625" dx2="530" dy="-11870" />
+      <Connection Source="$51D71E55DB73DC3A.INITO" Destination="$C3828B8C3CA00ECF.INIT" />
+      <Connection Source="$C3828B8C3CA00ECF.CNF" Destination="$7ED121164DDD29EE.REQ_KW10" />
+      <Connection Source="$51D71E55DB73DC3A.INITO" Destination="$9A4FA1C48A0764E1.INIT" />
+      <Connection Source="$9A4FA1C48A0764E1.CNF" Destination="$A4B8D787B3AD1DA0.FCB0C05F10D5FC7C" />
+      <Connection Source="$A4B8D787B3AD1DA0.386018EDE404EA75" Destination="$CAAADA7932C2244A.63337A003134C8E1" />
     </EventConnections>
     <DataConnections>
       <Connection Source="$E6630FC738E5EB4E.OUT1" Destination="$9DA3D6735086B77A" dx1="121.625">
@@ -965,7 +979,7 @@
       <Connection Source="$132A73B0D35E9500.OUT" Destination="$CAAADA7932C2244A.924CCF49C7E501AB">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$1432CF995CA74B3E.VALUE1" Destination="$CAAADA7932C2244A.F85EB7A00FC83BE7">
+      <Connection Source="$1432CF995CA74B3E.VALUE1" Destination="$A4B8D787B3AD1DA0.2EE9B719B31B02CF">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
       <Connection Source="$7ED121164DDD29EE.PowerKW" Destination="$CAAADA7932C2244A.C9B2A692966C7391">
@@ -1033,10 +1047,10 @@
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
       <Connection Source="$E23BA1B7C241F038.VALUE1" Destination="$C2D0E0AAB243994E.IN1" dx1="90" />
-      <Connection Source="$237A08AD1DE137C4.VALUE1" Destination="$155FFBAEA2F9B2D8.IN2" dx1="221.625" />
-      <Connection Source="$96C3A9B7FD4A5458.VALUE1" Destination="$155FFBAEA2F9B2D8.IN1" dx1="41.625" />
-      <Connection Source="$155FFBAEA2F9B2D8.OUT1" Destination="$CAAADA7932C2244A.5268DAF3B6EDA5F2" dx1="323.75" dx2="270" dy="250" />
-      <Connection Source="$155FFBAEA2F9B2D8.OUT2" Destination="$CAAADA7932C2244A.64F2283FD43409B5" dx1="323.75" dx2="250" dy="190" />
+      <Connection Source="$237A08AD1DE137C4.VALUE1" Destination="$155FFBAEA2F9B2D8.566741D5D93D41D2" dx1="221.625" />
+      <Connection Source="$96C3A9B7FD4A5458.VALUE1" Destination="$155FFBAEA2F9B2D8.2D0E0E9959A78EDE" dx1="41.625" />
+      <Connection Source="$155FFBAEA2F9B2D8.17FF7396943AAB57" Destination="$CAAADA7932C2244A.5268DAF3B6EDA5F2" dx1="323.75" dx2="270" dy="250" />
+      <Connection Source="$155FFBAEA2F9B2D8.FB26999DB1ACA69C" Destination="$CAAADA7932C2244A.64F2283FD43409B5" dx1="323.75" dx2="250" dy="190" />
       <Connection Source="$57AE9ADBFDA6305F.VALUE1" Destination="$CAAADA7932C2244A.8AE53C7E6C6EADE5" dx1="221.625" />
       <Connection Source="$1D0349B378DF11A4.VALUE1" Destination="$CAAADA7932C2244A.A6773729150B4E0E" dx1="90" dx2="210" dy="-550" />
       <Connection Source="$F368A4C596477299.VALUE1" Destination="$CAAADA7932C2244A.5D8A8908811B29A7" dx1="221.625" />
@@ -1048,6 +1062,9 @@
       <Connection Source="$35AE2C844AB8CCBA.VALUE1" Destination="$CAAADA7932C2244A.633809FAADF382E2" dx1="221.625" />
       <Connection Source="$663D511E7E249B9C.VALUE1" Destination="$CAAADA7932C2244A.864B84B920DCC4AA" dx1="90" dx2="50" dy="-3109.999" />
       <Connection Source="$55C4A63A62D0AE19.VALUE1" Destination="$CAAADA7932C2244A.CF8B8D964E304848" dx1="221.625" />
+      <Connection Source="$C3828B8C3CA00ECF.VALUE1" Destination="$7ED121164DDD29EE.PowerKw10" />
+      <Connection Source="$9A4FA1C48A0764E1.VALUE1" Destination="$A4B8D787B3AD1DA0.43DCD2A8EE47DF90" />
+      <Connection Source="$A4B8D787B3AD1DA0.AA3D5721C6DDEF41" Destination="$CAAADA7932C2244A.F85EB7A00FC83BE7" />
     </DataConnections>
   </FBNetwork>
 </FBType>

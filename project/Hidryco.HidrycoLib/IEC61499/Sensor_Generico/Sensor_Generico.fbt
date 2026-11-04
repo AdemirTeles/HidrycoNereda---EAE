@@ -4,7 +4,7 @@
   <Attribute Name="HMI.Alias" Value="" />
   <Attribute Name="Configuration.FB.IDCounter" Value="2" />
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Hidryco" Version="2.0" Author="Hidryco" Date="04/11/2026" Remarks="2.0: tags da IO List da Nereda no IThis: CommonError (mesma origem do STS_FALHA_SENSOR), Reliability = 80 fixo e DaysToMaintenance = 0. 1.9: limites dos alarmes em unidade de engenharia (Logica.stsLimHH..LL) para o grafico da IHM. 1.8: tag STS_FALHA renomeada para STS_FALHA_SENSOR (mesmo ID F96D4140FF4E3BE0), so com a falha do sensor (fora da faixa ou falha do instrumento); a comunicacao fica em STS_FALHA_COMUNICACAO; STS_FALHA_ATIVA com qualquer falha. 1.7: E_CYCLE TickHmi (1 s): valores para a IHM no maximo 1 vez por segundo. 1.6: tag STS_FALHA_SENSOR renomeada para STS_FALHA = falha ativa (sensor em falha agora, sem memoria); nova tag STS_FALHA_COMUNICACAO (sensores por comunicacao ou com status da conexao). 1.5: sensor de nivel (cfgNivel) com os setpoints de alarme em % da altura maxima. 1.4: sinal em falha tambem pelo status da conexao Modbus (symlink stsConexao INT, 1 = online) com cfgUsaConexao, no 4-20 mA lido por remota e na comunicacao. 1.3: entrada inibeAlarmesBaixos (E_INIBE) e saidas stsCondicaoHH/H/L/LL (limite ultrapassado agora). 1.2: alarmes na lista do EAE com reconhecimento pelo reset e pisca na IHM (ISA-101), tempo padrao de alarme 5 s. 1.0: sensor generico (substitui Sensor_4a20, Sensor_Nivel_4a20 e Sensor_Comunicacao). Campo por symlink ${PATH}: 4-20 mA = stsSensorBruto (INT); comunicacao = stsFalhaSensor, stsEntrada (REAL), stsFalhaComunicacao. Alarmes HH/H/L/LL e falha no sistema de alarmes do EAE (ALARM_BIT)." />
+  <VersionInfo Organization="Hidryco" Version="2.1" Author="Hidryco" Date="04/11/2026" Remarks="2.1: saidas stsAtivoHH/stsAtivoH (alarme com tempo e sem memoria) e stsDisponivel no CNF. 2.0: tags da IO List da Nereda no IThis: CommonError (mesma origem do STS_FALHA_SENSOR), Reliability = 80 fixo e DaysToMaintenance = 0. 1.9: limites dos alarmes em unidade de engenharia (Logica.stsLimHH..LL) para o grafico da IHM. 1.8: tag STS_FALHA renomeada para STS_FALHA_SENSOR (mesmo ID F96D4140FF4E3BE0), so com a falha do sensor (fora da faixa ou falha do instrumento); a comunicacao fica em STS_FALHA_COMUNICACAO; STS_FALHA_ATIVA com qualquer falha. 1.7: E_CYCLE TickHmi (1 s): valores para a IHM no maximo 1 vez por segundo. 1.6: tag STS_FALHA_SENSOR renomeada para STS_FALHA = falha ativa (sensor em falha agora, sem memoria); nova tag STS_FALHA_COMUNICACAO (sensores por comunicacao ou com status da conexao). 1.5: sensor de nivel (cfgNivel) com os setpoints de alarme em % da altura maxima. 1.4: sinal em falha tambem pelo status da conexao Modbus (symlink stsConexao INT, 1 = online) com cfgUsaConexao, no 4-20 mA lido por remota e na comunicacao. 1.3: entrada inibeAlarmesBaixos (E_INIBE) e saidas stsCondicaoHH/H/L/LL (limite ultrapassado agora). 1.2: alarmes na lista do EAE com reconhecimento pelo reset e pisca na IHM (ISA-101), tempo padrao de alarme 5 s. 1.0: sensor generico (substitui Sensor_4a20, Sensor_Nivel_4a20 e Sensor_Comunicacao). Campo por symlink ${PATH}: 4-20 mA = stsSensorBruto (INT); comunicacao = stsFalhaSensor, stsEntrada (REAL), stsFalhaComunicacao. Alarmes HH/H/L/LL e falha no sistema de alarmes do EAE (ALARM_BIT)." />
   <InterfaceList>
     <EventInputs>
       <Event ID="D21DAA5004F58516" Name="E_RESET_FALHAS" Comment="Reset da falha e dos alarmes pelo processo (com cmdResetFalhas = TRUE)">
@@ -30,6 +30,9 @@
         <With Var="stsCondicaoH" />
         <With Var="stsCondicaoL" />
         <With Var="stsCondicaoLL" />
+        <With Var="stsAtivoHH" />
+        <With Var="stsAtivoH" />
+        <With Var="stsDisponivel" />
       </Event>
     </EventOutputs>
     <InputVars>
@@ -61,6 +64,9 @@
       <VarDeclaration ID="613F6EF6FA647237" Name="stsCondicaoH" Type="BOOL" Comment="Valor alem do setpoint H agora (sem tempo e sem memoria; so com o alarme habilitado e o sinal bom)" />
       <VarDeclaration ID="324136474F57E8DB" Name="stsCondicaoL" Type="BOOL" Comment="Valor alem do setpoint L agora (sem tempo e sem memoria; so com o alarme habilitado e o sinal bom)" />
       <VarDeclaration ID="4D71F9AF04DA2016" Name="stsCondicaoLL" Type="BOOL" Comment="Valor alem do setpoint LL agora (sem tempo e sem memoria; so com o alarme habilitado e o sinal bom)" />
+      <VarDeclaration ID="0A7E41873A4DE750" Name="stsAtivoHH" Type="BOOL" Comment="Alarme HH com o tempo do alarme e sem memoria (some quando o valor volta)" />
+      <VarDeclaration ID="41659C068F94B5C6" Name="stsAtivoH" Type="BOOL" Comment="Alarme H com o tempo do alarme e sem memoria (some quando o valor volta)" />
+      <VarDeclaration ID="B7194E42DC1D5273" Name="stsDisponivel" Type="BOOL" Comment="Sensor habilitado, com leitura e sem falha" />
     </OutputVars>
     <Plugs>
       <AdapterDeclaration ID="6CDDEE4759B81B9D" Name="IStatus" Type="ISensorStatus" Namespace="Hidryco.HidrycoLib" x="6100" y="3460" />
@@ -158,6 +164,9 @@
     <Output ID="613F6EF6FA647237" Name="stsCondicaoH" x="10328" y="1032" Type="Data" />
     <Output ID="324136474F57E8DB" Name="stsCondicaoL" x="10328" y="1092" Type="Data" />
     <Output ID="4D71F9AF04DA2016" Name="stsCondicaoLL" x="10328" y="1152" Type="Data" />
+    <Output ID="0A7E41873A4DE750" Name="stsAtivoHH" x="10328" y="1212" Type="Data" />
+    <Output ID="41659C068F94B5C6" Name="stsAtivoH" x="10328" y="1272" Type="Data" />
+    <Output ID="B7194E42DC1D5273" Name="stsDisponivel" x="10328" y="1332" Type="Data" />
     <EventConnections>
       <Connection Source="$1DA04E5D7EE17604.FIRST_INIT" Destination="$21DBF75529B17174.B11E9EDFB330BB0A">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
@@ -666,6 +675,9 @@
       <Connection Source="$1A2582F2B07E0C54.082D88F711CCD739" Destination="$21DBF75529B17174.2007E90E21C8B4CF" />
       <Connection Source="$1A2582F2B07E0C54.D91E42414EEE194E" Destination="$21DBF75529B17174.7B165BE1315191C3" />
       <Connection Source="$1A2582F2B07E0C54.6D7F45595C9C84C3" Destination="$21DBF75529B17174.FFEA0503A1019B14" />
+      <Connection Source="$1A2582F2B07E0C54.1C96D9FB2C39CC10" Destination="$0A7E41873A4DE750" />
+      <Connection Source="$1A2582F2B07E0C54.48B250C8BC490C7B" Destination="$41659C068F94B5C6" />
+      <Connection Source="$1A2582F2B07E0C54.0DF0DDE240BFC12B" Destination="$B7194E42DC1D5273" />
     </DataConnections>
   </FBNetwork>
 </FBType>

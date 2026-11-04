@@ -25,7 +25,7 @@ namespace SE.Nereda.Symbols.MotorS
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.Base = new SE.App2CommonProcess.Symbols.MotorBase.sDefault();
+			this.Base = new SE.Nereda.Symbols.MotorBaseNer.sDefault();
 			this.State = new SE.Nereda.Symbols.ActState.sDefault();
 			this.alarmFrame = new NxtControl.GuiFramework.AlarmFrame();
 			this.interlock = new SE.App2CommonProcess.Symbols.IlckCondSum.sInterlockSmall();
@@ -177,7 +177,7 @@ namespace SE.Nereda.Symbols.MotorS
 			((System.ComponentModel.ISupportInitialize)(this.alarmFrame)).EndInit();
 
 		}
-		private SE.App2CommonProcess.Symbols.MotorBase.sDefault Base;
+		private SE.Nereda.Symbols.MotorBaseNer.sDefault Base;
 		private SE.Nereda.Symbols.ActState.sDefault State;
 		private NxtControl.GuiFramework.AlarmFrame alarmFrame;
 		private SE.App2CommonProcess.Symbols.IlckCondSum.sInterlockSmall interlock;

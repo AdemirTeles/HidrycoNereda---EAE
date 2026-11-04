@@ -85,6 +85,7 @@ namespace Hidryco.HidrycoLib.Symbols.Gradeamento_Inovaisa
 		void XCOMValueChanged(object s, ValueChangedEventArgs e) { com = Convert.ToBoolean(e.Value); Atualiza(); }
 		void XAPAIValueChanged(object s, ValueChangedEventArgs e) { aPai = Convert.ToBoolean(e.Value); Atualiza(); }
 		void XCICValueChanged(object s, ValueChangedEventArgs e) { ciclo = Convert.ToBoolean(e.Value); Atualiza(); }
+		void XGERValueChanged(object s, ValueChangedEventArgs e) { raioGerador.Animacao = Convert.ToInt32(e.Value); }
 		void XFMOTValueChanged(object s, ValueChangedEventArgs e) { fMot = Convert.ToBoolean(e.Value); Atualiza(); }
 		void XFUNCValueChanged(object s, ValueChangedEventArgs e) { func = Convert.ToBoolean(e.Value); Atualiza(); }
 		void XECOMValueChanged(object s, ValueChangedEventArgs e) { eCom = Convert.ToByte(e.Value); Atualiza(); }

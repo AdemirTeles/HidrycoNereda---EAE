@@ -30,7 +30,7 @@ namespace SE.Nereda.Faceplates.MotorS
 			this.permissive = new SE.App2CommonProcess.Symbols.PermCondSum.sPermissive();
 			this.failure = new SE.App2CommonProcess.Symbols.FailCondSum.sFailure();
 			this.OpenMotFp = new NxtControl.GuiFramework.DrawnButton();
-			this.Base = new SE.App2CommonProcess.Symbols.MotorBase.sDefault();
+			this.Base = new SE.Nereda.Symbols.MotorBaseNer.sDefault();
 			this.maintenance = new SE.App2CommonProcess.Symbols.DevMnt.sDefault();
 			this.RearmBtn = new NxtControl.GuiFramework.DrawnButton();
 			// 
@@ -148,7 +148,7 @@ namespace SE.Nereda.Faceplates.MotorS
 		private SE.App2CommonProcess.Symbols.PermCondSum.sPermissive permissive;
 		private SE.App2CommonProcess.Symbols.FailCondSum.sFailure failure;
 		private NxtControl.GuiFramework.DrawnButton OpenMotFp;
-		private SE.App2CommonProcess.Symbols.MotorBase.sDefault Base;
+		private SE.Nereda.Symbols.MotorBaseNer.sDefault Base;
 		private SE.App2CommonProcess.Symbols.DevMnt.sDefault maintenance;
 		private NxtControl.GuiFramework.DrawnButton RearmBtn;
 		#endregion

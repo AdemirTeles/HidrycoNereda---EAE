@@ -31,7 +31,7 @@ namespace SE.Nereda.Faceplates.ValveS
 			this.OpenMotFp = new NxtControl.GuiFramework.DrawnButton();
 			this.maintenance = new SE.App2CommonProcess.Symbols.DevMnt.sDefault();
 			this.RearmBtn = new NxtControl.GuiFramework.DrawnButton();
-			this.Base = new SE.App2CommonProcess.Symbols.ValveBase.sDefault();
+			this.Base = new SE.Nereda.Symbols.ValveBaseNer.sDefault();
 			// 
 			// interlock
 			// 
@@ -134,7 +134,7 @@ namespace SE.Nereda.Faceplates.ValveS
 		private NxtControl.GuiFramework.DrawnButton OpenMotFp;
 		private SE.App2CommonProcess.Symbols.DevMnt.sDefault maintenance;
 		private NxtControl.GuiFramework.DrawnButton RearmBtn;
-		private SE.App2CommonProcess.Symbols.ValveBase.sDefault Base;
+		private SE.Nereda.Symbols.ValveBaseNer.sDefault Base;
 		#endregion
 	}
 }

@@ -26,7 +26,7 @@ namespace SE.Nereda.Symbols.MotorS
 		private void InitializeComponent()
 		{
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(sMotor));
-			this.Base = new SE.App2CommonProcess.Symbols.MotorBase.sDefault();
+			this.Base = new SE.Nereda.Symbols.MotorBaseNer.sDefault();
 			this.ManuelMode = new NxtControl.GuiFramework.Rectangle();
 			this.State = new SE.Nereda.Symbols.ActState.sDefault();
 			this.alarmFrame = new NxtControl.GuiFramework.AlarmFrame();
@@ -295,7 +295,7 @@ namespace SE.Nereda.Symbols.MotorS
 			((System.ComponentModel.ISupportInitialize)(this.alarmFrame)).EndInit();
 
 		}
-		private SE.App2CommonProcess.Symbols.MotorBase.sDefault Base;
+		private SE.Nereda.Symbols.MotorBaseNer.sDefault Base;
 		private NxtControl.GuiFramework.Rectangle ManuelMode;
 		private SE.Nereda.Symbols.ActState.sDefault State;
 		private NxtControl.GuiFramework.AlarmFrame alarmFrame;

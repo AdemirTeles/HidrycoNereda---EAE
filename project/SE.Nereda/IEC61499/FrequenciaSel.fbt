@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="41d6d714-1907-5e8d-ad29-3e26e9ed7a38" Name="FrequenciaSel" Comment="Frequencia do motor: do ATV (REAL, Hz) ou da Sulzer (INT, 0,1 Hz)" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Hidryco" Version="1.0" Author="Hidryco" Date="04/11/2026" Remarks="1.0: REQ_REAL repassa FreqReal; REQ_HZ10 converte FreqHz10 / 10. Vale o ultimo que chegou (cada motor so tem uma das duas ligadas no hardware)." />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="D6E1C6284AD78375" Name="REQ_REAL" Comment="Frequencia em Hz (symlink MotorFrequecy)">
+        <With Var="FreqReal" />
+      </Event>
+      <Event ID="FCB0C05F10D5FC7C" Name="REQ_HZ10" Comment="Frequencia em 0,1 Hz (symlink FreqHz10, Sulzer)">
+        <With Var="FreqHz10" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="386018EDE404EA75" Name="CNF" Comment="Frequencia em Hz">
+        <With Var="Frequency" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="2EE9B719B31B02CF" Name="FreqReal" Type="REAL" Comment="Hz" />
+      <VarDeclaration ID="43DCD2A8EE47DF90" Name="FreqHz10" Type="INT" Comment="0,1 Hz" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="AA3D5721C6DDEF41" Name="Frequency" Type="REAL" Comment="Hz" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="e2819cd8-2f6a-5278-ba11-96e329b851bd">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="DoReal,DoHz10" />
+    <ECC>
+      <ECState Name="START" Comment="Estado inicial" x="550" y="430" />
+      <ECState Name="REAL_HZ" Comment="Do ATV" x="1170" y="300">
+        <ECAction Algorithm="DoReal" Output="CNF" />
+      </ECState>
+      <ECState Name="HZ10" Comment="Da Sulzer" x="1170" y="900">
+        <ECAction Algorithm="DoHz10" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="REAL_HZ" Condition="REQ_REAL" x="850" y="330" />
+      <ECTransition Source="REAL_HZ" Destination="START" Condition="1" x="850" y="420" />
+      <ECTransition Source="START" Destination="HZ10" Condition="REQ_HZ10" x="850" y="760" />
+      <ECTransition Source="HZ10" Destination="START" Condition="1" x="850" y="860" />
+    </ECC>
+    <Algorithm Name="DoReal" Comment="Hz direto">
+      <ST><![CDATA[
+Frequency := FreqReal;
+]]></ST>
+    </Algorithm>
+    <Algorithm Name="DoHz10" Comment="0,1 Hz para Hz">
+      <ST><![CDATA[
+Frequency := INT_TO_REAL(FreqHz10) / 10.0;
+]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

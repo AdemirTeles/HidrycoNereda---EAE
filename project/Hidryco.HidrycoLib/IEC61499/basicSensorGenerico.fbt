@@ -2,7 +2,7 @@
 <!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
 <FBType GUID="024198ab-e6ed-4357-bf39-bdd2a7c5fcc4" Name="basicSensorGenerico" Comment="Logica unica do sensor generico (4-20 mA ou comunicacao)" Namespace="Hidryco.HidrycoLib">
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Hidryco" Version="1.8" Author="Hidryco" Date="04/11/2026" Remarks="1.8: limites dos alarmes em unidade de engenharia para o grafico da IHM (stsLimHH..LL; nivel: % x altura maxima / 100). 1.7: stsFalhaSensor (STS_FALHA_SENSOR) so com a falha do sensor (fora da faixa ou falha do instrumento), sem a comunicacao; stsFalhaAtiva e o alarme de falha com qualquer falha. 1.6: IHM: valor, % e bruto no maximo 1 vez por segundo (evento TICK de 1 s); estado, falha e alarmes na hora. 1.5: saida stsFalhaComunicacao (comunicacao do instrumento ou conexao Modbus offline). 1.4: stsFalhaSensor (STS_FALHA_SENSOR na IHM) = falha ativa: sensor em falha agora, sem memoria nem reset; o alarme de falha segue. 1.3: sensor de nivel (cfgNivel) compara os alarmes HH/H/L/LL com a % da altura maxima (setpoints em %); os demais com o valor. 1.2: falha do sinal tambem pelo status da conexao Modbus (fldConexao INT, 1 = online) com cfgUsaConexao, nos dois modos (4-20 mA lido por remota e comunicacao). 1.1: inibicao de L/LL pelo processo e condicao instantanea de cada limite. 1.0: padrao SE.App2CommonProcess - escala, falha NAMUR confirmada por tempo, alarmes HH/H/L/LL com tempo proprio e memoria ate o reset, supressao em falha" />
+  <VersionInfo Organization="Hidryco" Version="1.9" Author="Hidryco" Date="04/11/2026" Remarks="1.9: stsAtivoHH/stsAtivoH (alarme com o tempo do alarme e sem memoria; some quando o valor volta) e stsDisponivel (sensor habilitado, com leitura e sem falha) no CNF. 1.8: limites dos alarmes em unidade de engenharia para o grafico da IHM (stsLimHH..LL; nivel: % x altura maxima / 100). 1.7: stsFalhaSensor (STS_FALHA_SENSOR) so com a falha do sensor (fora da faixa ou falha do instrumento), sem a comunicacao; stsFalhaAtiva e o alarme de falha com qualquer falha. 1.6: IHM: valor, % e bruto no maximo 1 vez por segundo (evento TICK de 1 s); estado, falha e alarmes na hora. 1.5: saida stsFalhaComunicacao (comunicacao do instrumento ou conexao Modbus offline). 1.4: stsFalhaSensor (STS_FALHA_SENSOR na IHM) = falha ativa: sensor em falha agora, sem memoria nem reset; o alarme de falha segue. 1.3: sensor de nivel (cfgNivel) compara os alarmes HH/H/L/LL com a % da altura maxima (setpoints em %); os demais com o valor. 1.2: falha do sinal tambem pelo status da conexao Modbus (fldConexao INT, 1 = online) com cfgUsaConexao, nos dois modos (4-20 mA lido por remota e comunicacao). 1.1: inibicao de L/LL pelo processo e condicao instantanea de cada limite. 1.0: padrao SE.App2CommonProcess - escala, falha NAMUR confirmada por tempo, alarmes HH/H/L/LL com tempo proprio e memoria ate o reset, supressao em falha" />
   <InterfaceList>
     <EventInputs>
       <Event ID="A313A1584C9E1BE5" Name="INIT" Comment="Inicializacao">
@@ -84,6 +84,9 @@
         <With Var="stsCondicaoH" />
         <With Var="stsCondicaoL" />
         <With Var="stsCondicaoLL" />
+        <With Var="stsAtivoHH" />
+        <With Var="stsAtivoH" />
+        <With Var="stsDisponivel" />
       </Event>
       <Event ID="FC4E06ABE3EBBDDF" Name="CNF_PV" Comment="Valor para o plug (na mudanca)">
         <With Var="stsValor" />
@@ -196,6 +199,9 @@
       <VarDeclaration ID="B271C2D0A9370A7F" Name="stsCondicaoH" Type="BOOL" Comment="Valor alem do setpoint H agora (sem tempo e sem memoria; so com o alarme habilitado e o sinal bom)" />
       <VarDeclaration ID="80C046EE3841337A" Name="stsCondicaoL" Type="BOOL" Comment="Valor alem do setpoint L agora (sem tempo e sem memoria; so com o alarme habilitado e o sinal bom)" />
       <VarDeclaration ID="46248A230C3897E2" Name="stsCondicaoLL" Type="BOOL" Comment="Valor alem do setpoint LL agora (sem tempo e sem memoria; so com o alarme habilitado e o sinal bom)" />
+      <VarDeclaration ID="1C96D9FB2C39CC10" Name="stsAtivoHH" Type="BOOL" Comment="Alarme HH com o tempo do alarme e sem memoria (some quando o valor volta; so com o alarme habilitado e o sinal bom)" />
+      <VarDeclaration ID="48B250C8BC490C7B" Name="stsAtivoH" Type="BOOL" Comment="Alarme H com o tempo do alarme e sem memoria (some quando o valor volta; so com o alarme habilitado e o sinal bom)" />
+      <VarDeclaration ID="0DF0DDE240BFC12B" Name="stsDisponivel" Type="BOOL" Comment="Sensor habilitado, com leitura e sem falha" />
       <VarDeclaration ID="821A07A8E8DE848B" Name="stsEstado" Type="INT" Comment="IHM: 0 normal, 1 alerta (H/L), 2 alarme (HH/LL), 3 falha, 4 desabilitado" />
       <VarDeclaration ID="8550C71DBEEC8F3F" Name="stsBruto" Type="REAL" Comment="IHM: valor bruto lido (diagnostico)" />
       <VarDeclaration ID="7CD1C7E9D29D5BA8" Name="almHH" Type="BOOL" Comment="Entrada do ALARM_BIT HH" />
@@ -239,6 +245,8 @@
       <VarDeclaration ID="615104FC3857E4FE" Name="bMemH" Type="BOOL" />
       <VarDeclaration ID="13279DA9D1363B3F" Name="bTimH" Type="BOOL" />
       <VarDeclaration ID="8FE8256330417B72" Name="oldTimH" Type="BOOL" />
+      <VarDeclaration ID="4F480968234923BE" Name="bTempoHH" Type="BOOL" Comment="Tempo do HH venceu com a condicao presente (sem memoria)" />
+      <VarDeclaration ID="4FC8717401BF0B6B" Name="bTempoH" Type="BOOL" Comment="Tempo do H venceu com a condicao presente (sem memoria)" />
       <VarDeclaration ID="924435AEAE9D6F01" Name="bAcimaH" Type="BOOL" />
       <VarDeclaration ID="60E04E87B334E095" Name="bCondL" Type="BOOL" />
       <VarDeclaration ID="5A612AA9529ACD98" Name="bMemL" Type="BOOL" />
@@ -420,6 +428,7 @@ bAcimaHH := rCmp > stpAlarmeHH;
 bCondHH := hmiHabilitaAlarmeHH AND NOT bSuprimido AND bAcimaHH;
 stsCondicaoHH := bCondHH;
 IF HH_MAX AND bCondHH THEN
+    bTempoHH := TRUE;                     (* com tempo, sem memoria *)
     bMemHH := TRUE;                       (* tempo do alarme HH venceu com a condicao presente *)
 END_IF;
 IF bReset AND NOT bCondHH THEN
@@ -428,7 +437,11 @@ END_IF;
 IF NOT hmiHabilitaAlarmeHH OR NOT hmiHabilitaSensor THEN
     bMemHH := FALSE;                      (* alarme ou sensor desabilitado zera o alarme *)
 END_IF;
-bTimHH := bCondHH AND NOT bMemHH;
+IF NOT bCondHH THEN
+    bTempoHH := FALSE;                    (* condicao sumiu: sai na hora *)
+END_IF;
+(* o tempo conta a cada vez que a condicao aparece, mesmo com o alarme ainda memorizado (para o stsAtivoHH) *)
+bTimHH := bCondHH AND NOT bTempoHH;
 IF bTimHH <> oldTimHH THEN
     IF bTimHH THEN
         TempoHH := TO_TIME(UINT_TO_DINT(stpTempoAlarmeHH) * 1000);
@@ -439,11 +452,13 @@ IF bTimHH <> oldTimHH THEN
     oldTimHH := bTimHH;
 END_IF;
 stsAlarmeHH := bMemHH AND NOT bSuprimido;
+stsAtivoHH := bTempoHH AND bCondHH;
 
 bAcimaH := rCmp > stpAlarmeH;
 bCondH := hmiHabilitaAlarmeH AND NOT bSuprimido AND bAcimaH;
 stsCondicaoH := bCondH;
 IF H_MAX AND bCondH THEN
+    bTempoH := TRUE;                     (* com tempo, sem memoria *)
     bMemH := TRUE;                       (* tempo do alarme H venceu com a condicao presente *)
 END_IF;
 IF bReset AND NOT bCondH THEN
@@ -452,7 +467,11 @@ END_IF;
 IF NOT hmiHabilitaAlarmeH OR NOT hmiHabilitaSensor THEN
     bMemH := FALSE;                      (* alarme ou sensor desabilitado zera o alarme *)
 END_IF;
-bTimH := bCondH AND NOT bMemH;
+IF NOT bCondH THEN
+    bTempoH := FALSE;                    (* condicao sumiu: sai na hora *)
+END_IF;
+(* o tempo conta a cada vez que a condicao aparece, mesmo com o alarme ainda memorizado (para o stsAtivoH) *)
+bTimH := bCondH AND NOT bTempoH;
 IF bTimH <> oldTimH THEN
     IF bTimH THEN
         TempoH := TO_TIME(UINT_TO_DINT(stpTempoAlarmeH) * 1000);
@@ -463,6 +482,7 @@ IF bTimH <> oldTimH THEN
     oldTimH := bTimH;
 END_IF;
 stsAlarmeH := bMemH AND NOT bSuprimido;
+stsAtivoH := bTempoH AND bCondH;
 
 bAcimaL := rCmp < stpAlarmeL;
 bCondL := hmiHabilitaAlarmeL AND NOT bSuprimido AND bAcimaL AND NOT inibeBaixos;
@@ -520,6 +540,7 @@ stsAlarmeLL := bMemLL AND NOT bSuprimido;
 
 stsAlarme := stsAlarmeHH OR stsAlarmeH OR stsAlarmeL OR stsAlarmeLL;
 stsHabilitado := hmiHabilitaSensor;
+stsDisponivel := hmiHabilitaSensor AND fbRecebido AND NOT bRuimAgora AND NOT stsFalhaAtiva;
 
 (* ---- 6. Entradas dos ALARM_BIT (lista de alarmes do EAE) ---- *)
 almHH := stsAlarmeHH;
@@ -555,6 +576,9 @@ IF stsCondicaoH   THEN wSts := wSts OR 16#0200; END_IF;
 IF stsCondicaoL   THEN wSts := wSts OR 16#0400; END_IF;
 IF stsCondicaoLL  THEN wSts := wSts OR 16#0800; END_IF;
 IF stsFalhaComunicacao THEN wSts := wSts OR 16#1000; END_IF;
+IF stsAtivoHH    THEN wSts := wSts OR 16#2000; END_IF;
+IF stsAtivoH     THEN wSts := wSts OR 16#4000; END_IF;
+IF stsDisponivel THEN wSts := wSts OR 16#8000; END_IF;
 wAlm := 0;
 IF almHH    THEN wAlm := wAlm OR 16#0001; END_IF;
 IF almH     THEN wAlm := wAlm OR 16#0002; END_IF;

@@ -2,11 +2,15 @@
 <!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
 <FBType GUID="442e55ee-a2c7-edc6-56a2-898c58faa625" Name="Gradeamento_Inovaisa" Comment="Gradeamento mecanizado (area 100) - painel Vibropac, grades, rosca e comportas - HidrycoLib" Namespace="Hidryco.HidrycoLib">
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Hidryco" Version="1.0" Author="Hidryco" Date="22/10/2026" Remarks="1.0: gradeamento mecanizado da area 100 (painel Vibropac PV-35524, CLP TM241, tabela Modbus TCP Inovaisa Rev.B). Instancia &quot;Gradeamento&quot; com os caminhos do legado: Grade_Status1 (Controle_Gradeamento), GM_100_01/02 (Grade_Inovaisa: SensorMontante, SensorJusante, SensorDiferencial, Grade_Mecanizada_Inovaisa1), RT_100_01 (Motor_Inovaisa, rosca), CO_100_01..04 (Valvula_Coester on/off, comandadas pela IHM). Campo por symlink ${PATH}: leitura mbR4005..mbR4018 (INT), mbConexao (connStatusInt); escrita mbW4001 (ciclo), mbW4002 (reset), mbW4003/mbW4004 (setpoints 0-1000). O reset (cmdResetFalhas no E_RESET_FALHAS_PROCESSO) inclui o 4002 do painel, as grades, os sensores e as comportas." />
+  <VersionInfo Organization="Hidryco" Version="1.1" Author="Hidryco" Date="22/10/2026" Remarks="1.1: carga no gerador: REQ_GERADOR (geradorHabilita, stsGerador; Subestacao HAB_GM_100_01 e stsPlantaNoGerador) bloqueia o ciclo remoto na Logica e anima o raio do simbolo (AnimGerador -> STS_ANIMACAO_GERADOR). 1.0: gradeamento mecanizado da area 100 (painel Vibropac PV-35524, CLP TM241, tabela Modbus TCP Inovaisa Rev.B). Instancia &quot;Gradeamento&quot; com os caminhos do legado: Grade_Status1 (Controle_Gradeamento), GM_100_01/02 (Grade_Inovaisa: SensorMontante, SensorJusante, SensorDiferencial, Grade_Mecanizada_Inovaisa1), RT_100_01 (Motor_Inovaisa, rosca), CO_100_01..04 (Valvula_Coester on/off, comandadas pela IHM). Campo por symlink ${PATH}: leitura mbR4005..mbR4018 (INT), mbConexao (connStatusInt); escrita mbW4001 (ciclo), mbW4002 (reset), mbW4003/mbW4004 (setpoints 0-1000). O reset (cmdResetFalhas no E_RESET_FALHAS_PROCESSO) inclui o 4002 do painel, as grades, os sensores e as comportas." />
   <InterfaceList>
     <EventInputs>
       <Event ID="7776DF3575084C20" Name="E_RESET_FALHAS" Comment="Reset pelo processo (painel, grades, sensores e comportas) com cmdResetFalhas = TRUE">
         <With Var="cmdResetFalhas" />
+      </Event>
+      <Event ID="D1B66AFAEC6D2FF0" Name="REQ_GERADOR" Comment="Planta no gerador e liberacao da grade (Subestacao)">
+        <With Var="geradorHabilita" />
+        <With Var="stsGerador" />
       </Event>
     </EventInputs>
     <EventOutputs>
@@ -19,6 +23,8 @@
     </EventOutputs>
     <InputVars>
       <VarDeclaration ID="0E787FBCD5903656" Name="cmdResetFalhas" Type="BOOL" Comment="TRUE = reset (com o evento E_RESET_FALHAS)" />
+      <VarDeclaration ID="358F3774D14189DB" Name="geradorHabilita" Type="BOOL" Comment="100-GM-01 liberada para operar com a planta nos geradores" />
+      <VarDeclaration ID="98A20843E1C25CF2" Name="stsGerador" Type="BOOL" Comment="TRUE = planta alimentada pelos geradores" />
     </InputVars>
     <OutputVars>
       <VarDeclaration ID="E2311DC6D94C7749" Name="stsAlarme" Type="BOOL" Comment="Algum alarme do gradeamento (comunicacao, painel, emergencia, motores)" />
@@ -103,6 +109,9 @@
       <Parameter Name="$TYPE" Value="1" />
       <Parameter Name="$ACKTYPE_1" Value="2" />
       <Parameter Name="$ACTIVE" Value="TRUE" />
+    </FB>
+    <FB ID="68A4AE75C54E8096" Name="AnimGerador" Type="basicCargaGerador" x="1400" y="5900" Namespace="Hidryco.HidrycoLib">
+      <Parameter Name="$AB02A6BAE011AA16" Value="TRUE" />
     </FB>
     <Input ID="7776DF3575084C20" Name="E_RESET_FALHAS" x="200" y="198" Type="Event" />
     <Input ID="0E787FBCD5903656" Name="cmdResetFalhas" x="200" y="258" Type="Data" />
@@ -283,6 +292,10 @@
       <Connection Source="$72DDB71898663648.INITO" Destination="$1607F91786D6DB4C.ACK_FIRST">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
+      <Connection Source="$D1B66AFAEC6D2FF0" Destination="$9DECAD4F72919903.F3638F475B575790" />
+      <Connection Source="$D1B66AFAEC6D2FF0" Destination="$68A4AE75C54E8096.00789A423C908128" />
+      <Connection Source="$9DECAD4F72919903.229705CA5D539927" Destination="$68A4AE75C54E8096.00789A423C908128" />
+      <Connection Source="$68A4AE75C54E8096.D13B80EB42E4132B" Destination="$7608E0CBF55D8A54.38275147D3F77B46" />
     </EventConnections>
     <DataConnections>
       <Connection Source="$3120BC57EDA70613.VALUE1" Destination="$9DECAD4F72919903.EAAE7720A229695F">
@@ -498,6 +511,12 @@
       <Connection Source="$72DDB71898663648.STATE_1" Destination="$7608E0CBF55D8A54.9BCF8DFF4840D2B4">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
+      <Connection Source="$358F3774D14189DB" Destination="$9DECAD4F72919903.162C592D6763A41A" />
+      <Connection Source="$98A20843E1C25CF2" Destination="$9DECAD4F72919903.29083538F3254FDC" />
+      <Connection Source="$358F3774D14189DB" Destination="$68A4AE75C54E8096.E98CC3FC79967C8B" />
+      <Connection Source="$98A20843E1C25CF2" Destination="$68A4AE75C54E8096.9DDD74C1F0C45B78" />
+      <Connection Source="$9DECAD4F72919903.F73DC825969A7AAC" Destination="$68A4AE75C54E8096.92CF573A93E227B1" />
+      <Connection Source="$68A4AE75C54E8096.87DFF1D389B6D369" Destination="$7608E0CBF55D8A54.4B4EC1B0C0F9D0FF" />
     </DataConnections>
   </FBNetwork>
 </FBType>

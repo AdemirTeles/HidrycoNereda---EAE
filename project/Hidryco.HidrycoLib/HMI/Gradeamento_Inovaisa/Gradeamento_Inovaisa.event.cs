@@ -266,6 +266,26 @@ namespace Hidryco.HidrycoLib.Symbols.Gradeamento_Inovaisa
     }  }
 
 
+    public bool Get_STS_ANIMACAO_GERADOR(ref System.Int16 value)
+    {
+      if (accessorService == null)
+        return false;
+      System.Int64 var = 0;
+      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,11, ref var);
+      if (ret) value = (System.Int16) var;
+      return ret;
+    }
+
+    public System.Int16? STS_ANIMACAO_GERADOR
+    { get {
+      if (accessorService == null)
+        return null;
+      System.Int64 var = 0;
+      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,11, ref var);
+      if (!ret) return null;
+      return (System.Int16) var;
+    }  }
+
   }
 
 }

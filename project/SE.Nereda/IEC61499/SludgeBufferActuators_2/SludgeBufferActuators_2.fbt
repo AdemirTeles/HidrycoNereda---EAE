@@ -4,14 +4,26 @@
   <Attribute Name="HMI.Alias" Value="" />
   <Attribute Name="Configuration.FB.IDCounter" Value="20" />
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Schneider Electric" Version="1.0" Author="Claude/Hidryco" Date="9/30/2026" Remarks="Rev1 - Intertravamentos Pump3/ValveInfeed destrocados" />
+  <VersionInfo Organization="Schneider Electric" Version="1.1" Author="Claude/Hidryco" Date="9/30/2026" Remarks="1.1: carga no gerador: REQ_GERADOR para Pump1-3 (P4901-P4903). Rev1 - Intertravamentos Pump3/ValveInfeed destrocados" />
   <InterfaceList>
     <EventInputs>
       <Event Name="INIT" />
+      <Event Name="REQ_GERADOR" Comment="Planta nos geradores e liberacao das bombas P4901-P4903 (Subestacao)">
+        <With Var="geradorHabilitaP4901" />
+        <With Var="geradorHabilitaP4902" />
+        <With Var="geradorHabilitaP4903" />
+        <With Var="stsGerador" />
+      </Event>
     </EventInputs>
     <EventOutputs>
       <Event Name="INITO" />
     </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="468A05F0F024D9EE" Name="geradorHabilitaP4901" Type="BOOL" Comment="P4901 liberado para operar com a planta nos geradores" />
+      <VarDeclaration ID="F6539F72F34D7C90" Name="geradorHabilitaP4902" Type="BOOL" Comment="P4902 liberado para operar com a planta nos geradores" />
+      <VarDeclaration ID="018DE2B62FADB172" Name="geradorHabilitaP4903" Type="BOOL" Comment="P4903 liberado para operar com a planta nos geradores" />
+      <VarDeclaration ID="E5BEFB89820CAB05" Name="stsGerador" Type="BOOL" Comment="TRUE = planta alimentada pelos geradores" />
+    </InputVars>
     <AdapterInputs>
       <Adapter ID="D5C49F7D36A7EF36" Name="Pump1_CmdIn1" Type="INeredaAct" Namespace="SE.Nereda" />
       <Adapter ID="C6C634B8D0FF3554" Name="Pump1_CmdIn2" Type="INeredaAct" Namespace="SE.Nereda" />
@@ -64,9 +76,15 @@
     <FB ID="7762065DE39F41C7" UID="899DAAA177ECCD3B" Name="Pump1_Cmd" Type="MultiNeredaCmd" x="3980" y="1780" Namespace="SE.Nereda" />
     <FB ID="87F9301012F6E13E" UID="47B389D814C23984" Name="Pump2_Cmd" Type="MultiNeredaCmd" x="3980" y="2340" Namespace="SE.Nereda" />
     <FB ID="C2C5420083DEDA2B" UID="46BA9670EA54D8F6" Name="Pump3_Cmd" Type="MultiNeredaCmd" x="3980" y="2940" Namespace="SE.Nereda" />
-    <FB ID="FE2638476257561D" UID="A090D7AAAF033663" Name="Pump1" Type="Motor_VS" x="5620" y="1820" Namespace="SE.Nereda" />
-    <FB ID="D13664CA3247A0EC" Name="Pump2" Type="Motor_VS" x="5640" y="3260" Namespace="SE.Nereda" />
-    <FB ID="3807B2E26DD186DF" Name="Pump3" Type="Motor_VS" x="5640" y="4740" Namespace="SE.Nereda" />
+    <FB ID="FE2638476257561D" UID="A090D7AAAF033663" Name="Pump1" Type="Motor_VS" x="5620" y="1820" Namespace="SE.Nereda">
+      <Parameter Name="$DCB761C03CD4608B" Value="TRUE" />
+    </FB>
+    <FB ID="D13664CA3247A0EC" Name="Pump2" Type="Motor_VS" x="5640" y="3260" Namespace="SE.Nereda">
+      <Parameter Name="$DCB761C03CD4608B" Value="TRUE" />
+    </FB>
+    <FB ID="3807B2E26DD186DF" Name="Pump3" Type="Motor_VS" x="5640" y="4740" Namespace="SE.Nereda">
+      <Parameter Name="$DCB761C03CD4608B" Value="TRUE" />
+    </FB>
     <FB ID="0CFFB45FF2CD1039" Name="ValveInfeed" Type="ValveS" x="7100" y="2860" Namespace="SE.Nereda" />
     <FB ID="80A121B04751E33B" Name="ValveTank1" Type="ValveS" x="7100" y="3940" Namespace="SE.Nereda" />
     <FB ID="F1E6CE752C4F8021" Name="BufferValve_Status1" Type="MultiActStatus" x="2920" y="3500" Namespace="SE.Nereda" />
@@ -229,7 +247,18 @@
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
         <AvoidsNodes>false</AvoidsNodes>
       </Connection>
+      <Connection Source="$REQ_GERADOR" Destination="$FE2638476257561D.REQ_GERADOR" />
+      <Connection Source="$REQ_GERADOR" Destination="$D13664CA3247A0EC.REQ_GERADOR" />
+      <Connection Source="$REQ_GERADOR" Destination="$3807B2E26DD186DF.REQ_GERADOR" />
     </EventConnections>
+    <DataConnections>
+      <Connection Source="$468A05F0F024D9EE" Destination="$FE2638476257561D.675F7F871C14320E" />
+      <Connection Source="$E5BEFB89820CAB05" Destination="$FE2638476257561D.9446122E66FA8402" />
+      <Connection Source="$F6539F72F34D7C90" Destination="$D13664CA3247A0EC.675F7F871C14320E" />
+      <Connection Source="$E5BEFB89820CAB05" Destination="$D13664CA3247A0EC.9446122E66FA8402" />
+      <Connection Source="$018DE2B62FADB172" Destination="$3807B2E26DD186DF.675F7F871C14320E" />
+      <Connection Source="$E5BEFB89820CAB05" Destination="$3807B2E26DD186DF.9446122E66FA8402" />
+    </DataConnections>
     <AdapterConnections>
       <Connection Source="$3B7595DFEC7E49F4.E9B1CB906EB3FD07" Destination="$F1E6CE752C4F8021.18836B5B646921E0">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />

@@ -2,7 +2,7 @@
 <!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
 <FBType GUID="2ffcb8c4-d225-6146-9f8b-cf1be4d342fe" Name="basicEstocagemLodo" Comment="Tanques de estocagem de lodo: sopradores 1+1 com rodizio e intertravamento de nivel das bombas" Namespace="Hidryco.HidrycoLib">
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Hidryco" Version="1.1" Author="Hidryco" Date="21/10/2026" Remarks="1.1: revezamento com horas por soprador (revHabilita, stpTempoB1/B2, padrao do sub-CAT Revezamento) e tempo restante (stsRestanteHor/Min/Seg). 1.0: um soprador sempre ligado no automatico, rodizio por horas (liga o outro antes de desligar), substituicao por indisponibilidade; VA-01/02 e VB-03/04 abertas no automatico; nivel baixo dos tanques com histerese" />
+  <VersionInfo Organization="Hidryco" Version="1.2" Author="Hidryco" Date="21/10/2026" Remarks="1.2: velocidade dos sopradores no automatico (stpVelSopradores em Hz no REQ_PARA, velSO em % no CNF_SO). 1.1: revezamento com horas por soprador (revHabilita, stpTempoB1/B2, padrao do sub-CAT Revezamento) e tempo restante (stsRestanteHor/Min/Seg). 1.0: um soprador sempre ligado no automatico, rodizio por horas (liga o outro antes de desligar), substituicao por indisponibilidade; VA-01/02 e VB-03/04 abertas no automatico; nivel baixo dos tanques com histerese" />
   <InterfaceList>
     <EventInputs>
       <Event ID="243DC77CA0D0953F" Name="INIT" Comment="Inicializacao" />
@@ -28,6 +28,7 @@
         <With Var="stpTempoB2" />
         <With Var="stpNivelMinTQ" />
         <With Var="stpNivelRetomaTQ" />
+        <With Var="stpVelSopradores" />
       </Event>
       <Event ID="E8C8FA9D941AAB25" Name="TICK" Comment="Base de tempo de 1 s" />
     </EventInputs>
@@ -37,6 +38,7 @@
         <With Var="cmdSO1" />
         <With Var="cmdSO2" />
         <With Var="emergOut" />
+        <With Var="velSO" />
       </Event>
       <Event ID="820328527C60D44B" Name="CNF_VAL" Comment="VA-01, VA-02, VB-03 e VB-04 abertas no automatico">
         <With Var="cmdAbrirTQ" />
@@ -73,6 +75,7 @@
       <VarDeclaration ID="F2FB54ACA0B1231D" Name="stpTempoB2" Type="UINT" Comment="Horas do SO-02 como principal; 0 = sem troca por tempo" />
       <VarDeclaration ID="834BCC8A73E45242" Name="stpNivelMinTQ" Type="REAL" Comment="Nivel minimo dos tanques para as bombas (%); 0 = sem intertravamento" />
       <VarDeclaration ID="6A41927EA4F7A44E" Name="stpNivelRetomaTQ" Type="REAL" Comment="Nivel para retomar as bombas (%)" />
+      <VarDeclaration ID="AE27A9FC614464FF" Name="stpVelSopradores" Type="REAL" InitialValue="60.0" Comment="Velocidade dos sopradores no automatico (Hz, IHM)" />
     </InputVars>
     <OutputVars>
       <VarDeclaration ID="6EEF3183DA620253" Name="cmdSO1" Type="BOOL" Comment="Liga SO-01 (automatico)" />
@@ -89,6 +92,7 @@
       <VarDeclaration ID="C56DE563E1383C2E" Name="stsRestanteHor" Type="UINT" Comment="Tempo para a troca do soprador principal (h)" />
       <VarDeclaration ID="6097DB009BDB40DE" Name="stsRestanteMin" Type="UINT" Comment="Tempo para a troca do soprador principal (min)" />
       <VarDeclaration ID="53980AC2D919D417" Name="stsRestanteSeg" Type="UINT" Comment="Tempo para a troca do soprador principal (s)" />
+      <VarDeclaration ID="59B400080C7CCAAB" Name="velSO" Type="REAL" Comment="Referencia dos sopradores no automatico (%, 60 Hz = 100 %)" />
     </OutputVars>
   </InterfaceList>
   <BasicFB ID="8f33c477-753f-4778-40cb-192ce7f76197">
@@ -187,6 +191,7 @@ END_IF;
 cmdSO1 := habSopradores AND ((ativo = 1) OR (stsSoTransferindo AND (ativo = 2)));
 cmdSO2 := habSopradores AND ((ativo = 2) OR (stsSoTransferindo AND (ativo = 1)));
 emergOut := emergencia;
+velSO := LIMIT(0.0, stpVelSopradores / 0.6, 100.0);   (* IHM em Hz -> % do Motor_Generico *)
 stsSoAtivo := ativo;
 stsSoHorasAtual := DINT_TO_INT(tRod / 3600);
 (* tempo para a troca do principal: 0 = sem troca por tempo (desabilitada, 0 h ou sem soprador) *)

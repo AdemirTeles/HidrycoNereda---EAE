@@ -4,14 +4,28 @@
   <Attribute Name="HMI.Alias" Value="" />
   <Attribute Name="Configuration.FB.IDCounter" Value="20" />
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Schneider Electric" Version="0.0" Author="SESA371406" Date="11/16/2023" Remarks="template" />
+  <VersionInfo Organization="Schneider Electric" Version="0.1" Author="SESA371406" Date="11/16/2023" Remarks="0.1: carga no gerador: REQ_GERADOR para os sopradores V4601-V4604. template" />
   <InterfaceList>
     <EventInputs>
       <Event Name="INIT" />
+      <Event Name="REQ_GERADOR" Comment="Planta nos geradores e liberacao dos sopradores (Subestacao)">
+        <With Var="geradorHabilitaV4601" />
+        <With Var="geradorHabilitaV4602" />
+        <With Var="geradorHabilitaV4603" />
+        <With Var="geradorHabilitaV4604" />
+        <With Var="stsGerador" />
+      </Event>
     </EventInputs>
     <EventOutputs>
       <Event Name="INITO" />
     </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="55A85525E8532209" Name="geradorHabilitaV4601" Type="BOOL" Comment="V4601 liberado para operar com a planta nos geradores" />
+      <VarDeclaration ID="561829D523F0F6C2" Name="geradorHabilitaV4602" Type="BOOL" Comment="V4602 liberado para operar com a planta nos geradores" />
+      <VarDeclaration ID="CCD2AACD7477A063" Name="geradorHabilitaV4603" Type="BOOL" Comment="V4603 liberado para operar com a planta nos geradores" />
+      <VarDeclaration ID="B7376CF11E60CA18" Name="geradorHabilitaV4604" Type="BOOL" Comment="V4604 liberado para operar com a planta nos geradores" />
+      <VarDeclaration ID="4AA7486859FC0C6D" Name="stsGerador" Type="BOOL" Comment="TRUE = planta alimentada pelos geradores" />
+    </InputVars>
     <AdapterInputs>
       <Adapter ID="CD98332339C83299" Name="IBlower1_Cmd1" Type="INeredaAct" Namespace="SE.Nereda" />
       <Adapter ID="4D8482D3F746F14C" Name="IBlower1_Cmd2" Type="INeredaAct" Namespace="SE.Nereda" />
@@ -70,15 +84,19 @@
     <FB ID="87F9301012F6E13E" UID="47B389D814C23984" Name="Blower2_Cmd" Type="MultiNeredaCmd" x="3980" y="2340" Namespace="SE.Nereda" />
     <FB ID="C2C5420083DEDA2B" UID="46BA9670EA54D8F6" Name="Blower3_Cmd" Type="MultiNeredaCmd" x="3980" y="2940" Namespace="SE.Nereda" />
     <FB ID="8582A5910D7E17C5" Name="V4601" Type="Motor_VS" x="5580" y="1780" Namespace="SE.Nereda">
+      <Parameter Name="$DCB761C03CD4608B" Value="TRUE" />
       <Parameter Name="$C15DED4271ABC4C5" Value="'55N4'" />
     </FB>
     <FB ID="43CF68D7882D62B9" Name="V4602" Type="Motor_VS" x="5580" y="3280" Namespace="SE.Nereda">
+      <Parameter Name="$DCB761C03CD4608B" Value="TRUE" />
       <Parameter Name="$C15DED4271ABC4C5" Value="'55N4'" />
     </FB>
     <FB ID="5D488BD889C392BA" Name="V4603" Type="Motor_VS" x="5580" y="4780" Namespace="SE.Nereda">
+      <Parameter Name="$DCB761C03CD4608B" Value="TRUE" />
       <Parameter Name="$C15DED4271ABC4C5" Value="'55N4'" />
     </FB>
     <FB ID="5ABFD6AD5D1DA92A" Name="V4604" Type="Motor_VS" x="5580" y="6280" Namespace="SE.Nereda">
+      <Parameter Name="$DCB761C03CD4608B" Value="TRUE" />
       <Parameter Name="$C15DED4271ABC4C5" Value="'55N4'" />
     </FB>
     <FB ID="361698711A99789F" Name="Blower4_Status" Type="MultiActStatus" x="2920" y="3580" Namespace="SE.Nereda" />
@@ -104,29 +122,35 @@
     <FB ID="BEA98EEF11AC78E9" Name="Valve2_Cmd1" Type="MultiNeredaCmd" x="3980" y="7280" Namespace="SE.Nereda" />
     <FB ID="5C5405155084CD52" Name="Valve3_Status1" Type="MultiActStatus" x="2920" y="7920" Namespace="SE.Nereda" />
     <FB ID="B8E68F072AFF5471" Name="Valve3_Cmd1" Type="MultiNeredaCmd" x="3980" y="7920" Namespace="SE.Nereda" />
-    <Input Name="INIT" x="1380" y="1004" Type="Event" />
-    <Input ID="846EE90A7900F10A" Name="IBlower2_Cmd1" x="680" y="1826" Type="Adapter" />
-    <Input ID="E3019DFF4EAF0777" Name="IBlower3_Cmd1" x="680" y="2066" Type="Adapter" />
-    <Input ID="26E93B720424803C" Name="IBlower3_Cmd2" x="680" y="2126" Type="Adapter" />
-    <Input ID="CD98332339C83299" Name="IBlower1_Cmd1" x="680" y="1590" Type="Adapter" />
-    <Input ID="1929C5BC400E58A5" Name="IBlower2_Cmd2" x="680" y="1886" Type="Adapter" />
-    <Input ID="4D8482D3F746F14C" Name="IBlower1_Cmd2" x="680" y="1648" Type="Adapter" />
-    <Input ID="DDF9E24FFAF0358C" Name="IBlower4_Cmd1" x="680" y="2296" Type="Adapter" />
-    <Input ID="64A3CCD02CE5A0D7" Name="IBlower4_Cmd2" x="680" y="2356" Type="Adapter" />
-    <Input ID="3C1EAB6DF847649B" Name="IValve1_Cmd1" x="680" y="2538" Type="Adapter" />
-    <Input ID="2C908B39E60C1D02" Name="IValve2_Cmd1" x="680" y="2778" Type="Adapter" />
-    <Input ID="1A695655C1B0C6A0" Name="IValve2_Cmd2" x="680" y="2838" Type="Adapter" />
-    <Input ID="9DD67A5D446E5FF1" Name="IValve1_Cmd2" x="680" y="2598" Type="Adapter" />
-    <Input ID="55D68A8426D634E7" Name="IValve3_Cmd1" x="680" y="2998" Type="Adapter" />
-    <Input ID="92549F4E08A256BD" Name="IValve3_Cmd2" x="680" y="3058" Type="Adapter" />
-    <Input ID="17AFD3C938422FC2" Name="INeredaCmdIn1" x="660" y="3252" Type="Adapter" />
-    <Input ID="9E891FA5C9B83DEE" Name="INeredaCmdIn2" x="660" y="3312" Type="Adapter" />
-    <Input ID="605E0927C8525F19" Name="INeredaCmdIn3" x="660" y="3512" Type="Adapter" />
-    <Input ID="80D0929C2EC8255E" Name="INeredaCmdIn4" x="660" y="3572" Type="Adapter" />
-    <Input ID="3BDAEFA05CACA744" Name="INeredaCmdIn5" x="660" y="3752" Type="Adapter" />
-    <Input ID="FA6CF7EE5546F8FD" Name="INeredaCmdIn6" x="660" y="3812" Type="Adapter" />
-    <Input ID="69931961CE521A84" Name="INeredaCmdIn7" x="660" y="3992" Type="Adapter" />
-    <Input ID="6AA352E39A975EA7" Name="INeredaCmdIn8" x="660" y="4052" Type="Adapter" />
+    <Input Name="INIT" x="1380" y="1002" Type="Event" />
+    <Input ID="846EE90A7900F10A" Name="IBlower2_Cmd1" x="680" y="1824" Type="Adapter" />
+    <Input ID="E3019DFF4EAF0777" Name="IBlower3_Cmd1" x="680" y="2064" Type="Adapter" />
+    <Input ID="26E93B720424803C" Name="IBlower3_Cmd2" x="680" y="2124" Type="Adapter" />
+    <Input ID="CD98332339C83299" Name="IBlower1_Cmd1" x="680" y="1588" Type="Adapter" />
+    <Input ID="1929C5BC400E58A5" Name="IBlower2_Cmd2" x="680" y="1884" Type="Adapter" />
+    <Input ID="4D8482D3F746F14C" Name="IBlower1_Cmd2" x="680" y="1646" Type="Adapter" />
+    <Input ID="DDF9E24FFAF0358C" Name="IBlower4_Cmd1" x="680" y="2294" Type="Adapter" />
+    <Input ID="64A3CCD02CE5A0D7" Name="IBlower4_Cmd2" x="680" y="2354" Type="Adapter" />
+    <Input ID="3C1EAB6DF847649B" Name="IValve1_Cmd1" x="680" y="2536" Type="Adapter" />
+    <Input ID="2C908B39E60C1D02" Name="IValve2_Cmd1" x="680" y="2776" Type="Adapter" />
+    <Input ID="1A695655C1B0C6A0" Name="IValve2_Cmd2" x="680" y="2836" Type="Adapter" />
+    <Input ID="9DD67A5D446E5FF1" Name="IValve1_Cmd2" x="680" y="2596" Type="Adapter" />
+    <Input ID="55D68A8426D634E7" Name="IValve3_Cmd1" x="680" y="2996" Type="Adapter" />
+    <Input ID="92549F4E08A256BD" Name="IValve3_Cmd2" x="680" y="3056" Type="Adapter" />
+    <Input ID="17AFD3C938422FC2" Name="INeredaCmdIn1" x="660" y="3250" Type="Adapter" />
+    <Input ID="9E891FA5C9B83DEE" Name="INeredaCmdIn2" x="660" y="3310" Type="Adapter" />
+    <Input ID="605E0927C8525F19" Name="INeredaCmdIn3" x="660" y="3510" Type="Adapter" />
+    <Input ID="80D0929C2EC8255E" Name="INeredaCmdIn4" x="660" y="3570" Type="Adapter" />
+    <Input ID="3BDAEFA05CACA744" Name="INeredaCmdIn5" x="660" y="3750" Type="Adapter" />
+    <Input ID="FA6CF7EE5546F8FD" Name="INeredaCmdIn6" x="660" y="3810" Type="Adapter" />
+    <Input ID="69931961CE521A84" Name="INeredaCmdIn7" x="660" y="3990" Type="Adapter" />
+    <Input ID="6AA352E39A975EA7" Name="INeredaCmdIn8" x="660" y="4050" Type="Adapter" />
+    <Input Name="REQ_GERADOR" x="12" y="12" Type="Event" />
+    <Input ID="55A85525E8532209" Name="geradorHabilitaV4601" x="4636.771" y="2592" Type="Data" />
+    <Input ID="561829D523F0F6C2" Name="geradorHabilitaV4602" x="4636.771" y="4092" Type="Data" />
+    <Input ID="CCD2AACD7477A063" Name="geradorHabilitaV4603" x="4636.771" y="5592" Type="Data" />
+    <Input ID="B7376CF11E60CA18" Name="geradorHabilitaV4604" x="4636.771" y="7092" Type="Data" />
+    <Input ID="4AA7486859FC0C6D" Name="stsGerador" x="4839.208" y="2652" Type="Data" />
     <Frame Name="FRAME6" X="420" Y="1440" Width="2160" Height="2780">
       <Parameter Name="BackgroundColor" Value="AntiqueWhite" />
       <Parameter Name="TextColor" Value="Black" />
@@ -226,29 +250,29 @@
       <Parameter Name="Text" Value="Reset All Actuators" />
       <Parameter Name="NxtLayerIdentifier" Value="" />
     </Frame>
-    <Output ID="76B0FA56F7F9AFC4" Name="IStatusOut1" x="8500" y="3472" Type="Adapter" />
-    <Output ID="EC1C86B82E175685" Name="IStatusOut2" x="8500" y="3532" Type="Adapter" />
-    <Output ID="957B76EEC4F1EF79" Name="IStatusOut3" x="8500" y="3712" Type="Adapter" />
-    <Output ID="0A3907C0A8493A5A" Name="IStatusOut4" x="8500" y="3772" Type="Adapter" />
-    <Output ID="3E377839374E6BB6" Name="IStatusOut5" x="8500" y="3992" Type="Adapter" />
-    <Output ID="30882A49E933F337" Name="IStatusOut6" x="8500" y="4052" Type="Adapter" />
-    <Output ID="91A277013AFF4AA6" Name="IStatusOut7" x="8500" y="4252" Type="Adapter" />
-    <Output ID="ED8ADBF2B80244C9" Name="IStatusOut8" x="8500" y="4312" Type="Adapter" />
-    <Output ID="A2F1A5E916FD520C" Name="IValve3_Status1" x="8500" y="3178" Type="Adapter" />
-    <Output ID="FA1F36F18BFA8D40" Name="IValve3_Status2" x="8500" y="3238" Type="Adapter" />
-    <Output ID="3FC0102DAD409170" Name="IValve1_Status1" x="8500" y="2658" Type="Adapter" />
-    <Output ID="992F294843A5E82D" Name="IValve1_Status2" x="8500" y="2718" Type="Adapter" />
-    <Output ID="D8495564B4614A95" Name="IValve2_Status1" x="8500" y="2918" Type="Adapter" />
-    <Output ID="2F39B1760C6A06E8" Name="IValve2_Status2" x="8500" y="2978" Type="Adapter" />
-    <Output ID="CBB1764813680DB3" Name="IBlower4_Status1" x="8500" y="2400" Type="Adapter" />
-    <Output ID="5840F9A38E9B9590" Name="IBlower4_Status2" x="8500" y="2460" Type="Adapter" />
-    <Output ID="EAFAABEE532B9015" Name="IBlower1_Status1" x="8500" y="1620" Type="Adapter" />
-    <Output ID="3BED8506FEF90ABB" Name="IBlower1_Status2" x="8500" y="1680" Type="Adapter" />
-    <Output ID="E75B3ACBCAEFEF2D" Name="IBlower2_Status1" x="8500" y="1880" Type="Adapter" />
-    <Output ID="CF266C966D280EC0" Name="IBlower2_Status2" x="8500" y="1940" Type="Adapter" />
-    <Output ID="B48AF5117A07CE64" Name="IBlower3_Status1" x="8500" y="2140" Type="Adapter" />
-    <Output ID="29C34458BB579990" Name="IBlower3_Status2" x="8500" y="2200" Type="Adapter" />
-    <Output Name="INITO" x="1340" y="1144" Type="Event" />
+    <Output ID="76B0FA56F7F9AFC4" Name="IStatusOut1" x="8500" y="3470" Type="Adapter" />
+    <Output ID="EC1C86B82E175685" Name="IStatusOut2" x="8500" y="3530" Type="Adapter" />
+    <Output ID="957B76EEC4F1EF79" Name="IStatusOut3" x="8500" y="3710" Type="Adapter" />
+    <Output ID="0A3907C0A8493A5A" Name="IStatusOut4" x="8500" y="3770" Type="Adapter" />
+    <Output ID="3E377839374E6BB6" Name="IStatusOut5" x="8500" y="3990" Type="Adapter" />
+    <Output ID="30882A49E933F337" Name="IStatusOut6" x="8500" y="4050" Type="Adapter" />
+    <Output ID="91A277013AFF4AA6" Name="IStatusOut7" x="8500" y="4250" Type="Adapter" />
+    <Output ID="ED8ADBF2B80244C9" Name="IStatusOut8" x="8500" y="4310" Type="Adapter" />
+    <Output ID="A2F1A5E916FD520C" Name="IValve3_Status1" x="8500" y="3176" Type="Adapter" />
+    <Output ID="FA1F36F18BFA8D40" Name="IValve3_Status2" x="8500" y="3236" Type="Adapter" />
+    <Output ID="3FC0102DAD409170" Name="IValve1_Status1" x="8500" y="2656" Type="Adapter" />
+    <Output ID="992F294843A5E82D" Name="IValve1_Status2" x="8500" y="2716" Type="Adapter" />
+    <Output ID="D8495564B4614A95" Name="IValve2_Status1" x="8500" y="2916" Type="Adapter" />
+    <Output ID="2F39B1760C6A06E8" Name="IValve2_Status2" x="8500" y="2976" Type="Adapter" />
+    <Output ID="CBB1764813680DB3" Name="IBlower4_Status1" x="8500" y="2398" Type="Adapter" />
+    <Output ID="5840F9A38E9B9590" Name="IBlower4_Status2" x="8500" y="2458" Type="Adapter" />
+    <Output ID="EAFAABEE532B9015" Name="IBlower1_Status1" x="8500" y="1618" Type="Adapter" />
+    <Output ID="3BED8506FEF90ABB" Name="IBlower1_Status2" x="8500" y="1678" Type="Adapter" />
+    <Output ID="E75B3ACBCAEFEF2D" Name="IBlower2_Status1" x="8500" y="1878" Type="Adapter" />
+    <Output ID="CF266C966D280EC0" Name="IBlower2_Status2" x="8500" y="1938" Type="Adapter" />
+    <Output ID="B48AF5117A07CE64" Name="IBlower3_Status1" x="8500" y="2138" Type="Adapter" />
+    <Output ID="29C34458BB579990" Name="IBlower3_Status2" x="8500" y="2198" Type="Adapter" />
+    <Output Name="INITO" x="1340" y="1142" Type="Event" />
     <EventConnections>
       <Connection Source="$INIT" Destination="$5211972DEE3AA273.INIT" dx1="361.4167">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
@@ -258,7 +282,21 @@
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
         <AvoidsNodes>false</AvoidsNodes>
       </Connection>
+      <Connection Source="$REQ_GERADOR" Destination="$8582A5910D7E17C5.REQ_GERADOR" />
+      <Connection Source="$REQ_GERADOR" Destination="$43CF68D7882D62B9.REQ_GERADOR" />
+      <Connection Source="$REQ_GERADOR" Destination="$5D488BD889C392BA.REQ_GERADOR" />
+      <Connection Source="$REQ_GERADOR" Destination="$5ABFD6AD5D1DA92A.REQ_GERADOR" />
     </EventConnections>
+    <DataConnections>
+      <Connection Source="$55A85525E8532209" Destination="$8582A5910D7E17C5.675F7F871C14320E" />
+      <Connection Source="$4AA7486859FC0C6D" Destination="$8582A5910D7E17C5.9446122E66FA8402" />
+      <Connection Source="$561829D523F0F6C2" Destination="$43CF68D7882D62B9.675F7F871C14320E" />
+      <Connection Source="$4AA7486859FC0C6D" Destination="$43CF68D7882D62B9.9446122E66FA8402" dx1="50" />
+      <Connection Source="$CCD2AACD7477A063" Destination="$5D488BD889C392BA.675F7F871C14320E" />
+      <Connection Source="$4AA7486859FC0C6D" Destination="$5D488BD889C392BA.9446122E66FA8402" dx1="50" />
+      <Connection Source="$B7376CF11E60CA18" Destination="$5ABFD6AD5D1DA92A.675F7F871C14320E" />
+      <Connection Source="$4AA7486859FC0C6D" Destination="$5ABFD6AD5D1DA92A.9446122E66FA8402" dx1="50" />
+    </DataConnections>
     <AdapterConnections>
       <Connection Source="$CD98332339C83299" Destination="$7762065DE39F41C7.F1CE5E5BC0F88348" dx1="1862.688">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
@@ -421,183 +459,27 @@
       </Connection>
       <Connection Source="$17AFD3C938422FC2" Destination="$44F4D3ADDC0060F2.F1CE5E5BC0F88348">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-        <Points>
-          <Points>
-            <X>661.59375</X>
-            <Y>1550</Y>
-          </Points>
-          <Points>
-            <X>672.5</X>
-            <Y>1550</Y>
-          </Points>
-          <Points>
-            <X>672.5</X>
-            <Y>1497.5</Y>
-          </Points>
-          <Points>
-            <X>897.5</X>
-            <Y>1497.5</Y>
-          </Points>
-          <Points>
-            <X>897.5</X>
-            <Y>1560</Y>
-          </Points>
-          <Points>
-            <X>990</X>
-            <Y>1560</Y>
-          </Points>
-        </Points>
       </Connection>
       <Connection Source="$9E891FA5C9B83DEE" Destination="$44F4D3ADDC0060F2.814FBE7646911966">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-        <Points>
-          <Points>
-            <X>661.59375</X>
-            <Y>1565</Y>
-          </Points>
-          <Points>
-            <X>672.5</X>
-            <Y>1565</Y>
-          </Points>
-          <Points>
-            <X>672.5</X>
-            <Y>1497.5</Y>
-          </Points>
-          <Points>
-            <X>897.5</X>
-            <Y>1497.5</Y>
-          </Points>
-          <Points>
-            <X>897.5</X>
-            <Y>1575</Y>
-          </Points>
-          <Points>
-            <X>990</X>
-            <Y>1575</Y>
-          </Points>
-        </Points>
       </Connection>
       <Connection Source="$605E0927C8525F19" Destination="$E94AD7D7D25ECEC4.F1CE5E5BC0F88348" dx1="1143.625">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
       <Connection Source="$80D0929C2EC8255E" Destination="$E94AD7D7D25ECEC4.814FBE7646911966">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-        <Points>
-          <Points>
-            <X>631.59375</X>
-            <Y>1655</Y>
-          </Points>
-          <Points>
-            <X>642.5</X>
-            <Y>1655</Y>
-          </Points>
-          <Points>
-            <X>642.5</X>
-            <Y>1652.5</Y>
-          </Points>
-          <Points>
-            <X>897.5</X>
-            <Y>1652.5</Y>
-          </Points>
-          <Points>
-            <X>897.5</X>
-            <Y>1730</Y>
-          </Points>
-          <Points>
-            <X>990</X>
-            <Y>1730</Y>
-          </Points>
-        </Points>
       </Connection>
       <Connection Source="$3BDAEFA05CACA744" Destination="$BEA98EEF11AC78E9.F1CE5E5BC0F88348">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-        <Points>
-          <Points>
-            <X>635.7969</X>
-            <Y>1810</Y>
-          </Points>
-          <Points>
-            <X>647.5</X>
-            <Y>1810</Y>
-          </Points>
-          <Points>
-            <X>647.5</X>
-            <Y>1802.5</Y>
-          </Points>
-          <Points>
-            <X>897.5</X>
-            <Y>1802.5</Y>
-          </Points>
-          <Points>
-            <X>897.5</X>
-            <Y>1865</Y>
-          </Points>
-          <Points>
-            <X>990</X>
-            <Y>1865</Y>
-          </Points>
-        </Points>
       </Connection>
       <Connection Source="$FA6CF7EE5546F8FD" Destination="$BEA98EEF11AC78E9.814FBE7646911966">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-        <Points>
-          <Points>
-            <X>636.59375</X>
-            <Y>1825</Y>
-          </Points>
-          <Points>
-            <X>647.5</X>
-            <Y>1825</Y>
-          </Points>
-          <Points>
-            <X>647.5</X>
-            <Y>1802.5</Y>
-          </Points>
-          <Points>
-            <X>897.5</X>
-            <Y>1802.5</Y>
-          </Points>
-          <Points>
-            <X>897.5</X>
-            <Y>1880</Y>
-          </Points>
-          <Points>
-            <X>990</X>
-            <Y>1880</Y>
-          </Points>
-        </Points>
       </Connection>
       <Connection Source="$69931961CE521A84" Destination="$B8E68F072AFF5471.F1CE5E5BC0F88348" dx1="1286.813">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
       <Connection Source="$6AA352E39A975EA7" Destination="$B8E68F072AFF5471.814FBE7646911966">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-        <Points>
-          <Points>
-            <X>596.59375</X>
-            <Y>1965</Y>
-          </Points>
-          <Points>
-            <X>607.5</X>
-            <Y>1965</Y>
-          </Points>
-          <Points>
-            <X>607.5</X>
-            <Y>1962.5</Y>
-          </Points>
-          <Points>
-            <X>897.5</X>
-            <Y>1962.5</Y>
-          </Points>
-          <Points>
-            <X>897.5</X>
-            <Y>2040</Y>
-          </Points>
-          <Points>
-            <X>990</X>
-            <Y>2040</Y>
-          </Points>
-        </Points>
       </Connection>
       <Connection Source="$F866C8958F401F0B.8244952938F4EC92" Destination="$76B0FA56F7F9AFC4" dx1="120">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />

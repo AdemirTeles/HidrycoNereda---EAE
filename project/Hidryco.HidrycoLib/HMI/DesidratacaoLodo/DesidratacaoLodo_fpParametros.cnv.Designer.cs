@@ -47,7 +47,8 @@ namespace Hidryco.HidrycoLib.Faceplates.DesidratacaoLodo
 			this.btnSoOn = new NxtControl.GuiFramework.DrawnButton();
 			this.btnSoOff = new NxtControl.GuiFramework.DrawnButton();
 			this.xHab = new System.HMI.Symbols.Base.Execute<bool>();
-			this.Revezamento = new Hidryco.HidrycoLib.Symbols.Controle_Revezamento_2.sAjustes();
+			this.l16 = new NxtControl.GuiFramework.FreeText();
+			this.t16 = new System.HMI.Symbols.Base.TextBox<float>();
 			this.PID = new Hidryco.HidrycoLib.Symbols.Controle_PID.sAjustes();
 			// 
 			// cabecalho
@@ -392,18 +393,30 @@ namespace Hidryco.HidrycoLib.Faceplates.DesidratacaoLodo
 			this.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(990D)), ((float)(460D)));
 			this.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(224)), ((byte)(224)), ((byte)(224))));
 			// 
-			// Revezamento
+			// l16
 			// 
-			this.Revezamento.BeginInit();
-			this.Revezamento.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 540D, 52D);
-			this.Revezamento.Name = "Revezamento";
-			this.Revezamento.SecurityToken = ((uint)(4294967295u));
-			this.Revezamento.TagName = "Revezamento";
-			this.Revezamento.Titulo = "Revezamento dos sopradores";
-			this.Revezamento.Rotulo_CMD_HABILITA = "Troca do soprador principal por tempo";
-			this.Revezamento.Rotulo_STP_TEMPO_B1 = "Horas do SO-01 como principal";
-			this.Revezamento.Rotulo_STP_TEMPO_B2 = "Horas do SO-02 como principal";
-			this.Revezamento.EndInit();
+			this.l16.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.l16.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular);
+			this.l16.Location = new NxtControl.Drawing.PointF(540D, 56D);
+			this.l16.Name = "l16";
+			this.l16.Text = "Velocidade dos sopradores no autom\u00e1tico";
+			// 
+			// t16
+			// 
+			this.t16.BeginInit();
+			this.t16.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.5D, 0D, 0D, 1D, 860D, 52D);
+			this.t16.MaximumTag = null;
+			this.t16.MinimumTag = null;
+			this.t16.Name = "t16";
+			this.t16.NumberBase = NxtControl.GuiFramework.NumberBase.Decimal;
+			this.t16.Pen = new NxtControl.Drawing.Pen("TextBoxPen");
+			this.t16.SetColor = new NxtControl.Drawing.Color("Yellow");
+			this.t16.Suffix = " Hz";
+			this.t16.TagName = "STP_VEL_SOPRADORES";
+			this.t16.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
+			this.t16.UseInputPad = true;
+			this.t16.Value = 0F;
+			this.t16.EndInit();
 			// 
 			// PID
 			// 
@@ -454,7 +467,8 @@ namespace Hidryco.HidrycoLib.Faceplates.DesidratacaoLodo
 			this.btnSoOn,
 			this.btnSoOff,
 			this.xHab,
-			this.Revezamento,
+			this.l16,
+			this.t16,
 			this.PID});
 			this.Size = new System.Drawing.Size(990, 460);
 
@@ -487,7 +501,8 @@ namespace Hidryco.HidrycoLib.Faceplates.DesidratacaoLodo
 		private NxtControl.GuiFramework.DrawnButton btnSoOn;
 		private NxtControl.GuiFramework.DrawnButton btnSoOff;
 		private System.HMI.Symbols.Base.Execute<bool> xHab;
-		private Hidryco.HidrycoLib.Symbols.Controle_Revezamento_2.sAjustes Revezamento;
+		private NxtControl.GuiFramework.FreeText l16;
+		private System.HMI.Symbols.Base.TextBox<float> t16;
 		private Hidryco.HidrycoLib.Symbols.Controle_PID.sAjustes PID;
 		#endregion
 	}

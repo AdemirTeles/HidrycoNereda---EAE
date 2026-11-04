@@ -3,7 +3,7 @@
 <FBType GUID="0dea89b7-acc2-4962-889a-3baabf65719a" Name="Motor_VS" Format="2.0" Comment="CAT Function Block Type" Namespace="SE.Nereda">
   <Attribute Name="HMI.Alias" Value="" />
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Schneider Electric" Version="0.1" Author=" " Date="26/10/2026" Remarks="0.1: em Local (LocalPanel.oRemoteSelect = FALSE) a base recebe ExternalControlled = TRUE (LocalMode = NOT oRemoteSelect, pelo CNF_STATUS): sem falha de feedback em Local; o extControlled (symlink DIn sem publicador) ficou sem ligacao." />
+  <VersionInfo Organization="Schneider Electric" Version="0.2" Author=" " Date="26/10/2026" Remarks="Hidryco 04/11/2026: BaseVs agora e MotorVsBaseNer (SE.Nereda), copia do MotorVsBase com FbFail = realimentacao OU falha OU intertravamento. 0.2: carga no gerador (Hidryco): REQ_GERADOR (geradorHabilita, stsGerador) e geradorConectado; com a planta nos geradores e a carga nao liberada na Subestacao o intertravamento GeradorBloqueio (ilckCondItem, depois do SafetySwitchOff; calculado no CargaGerador so com a Subestacao) para o motor; raio na IHM (CargaGeradorRaio, tambem com o FbRunning; STS_ANIMACAO_GERADOR no FB_FWD). 0.1: em Local (LocalPanel.oRemoteSelect = FALSE) a base recebe ExternalControlled = TRUE (LocalMode = NOT oRemoteSelect, pelo CNF_STATUS): sem falha de feedback em Local; o extControlled (symlink DIn sem publicador) ficou sem ligacao." />
   <InterfaceList>
     <EventInputs>
       <Event ID="2DBEE771C3E6546D" Name="REQ_SUPPRESS_ALM" Comment="Request to update the alarm suppress status">
@@ -14,6 +14,10 @@
       </Event>
       <Event ID="A9A1C3CD924494DF" Name="REQ_ATV_TYPE">
         <With Var="AtvType" />
+      </Event>
+      <Event Name="REQ_GERADOR" Comment="Planta nos geradores e liberacao da carga (Subestacao)">
+        <With Var="geradorHabilita" />
+        <With Var="stsGerador" />
       </Event>
     </EventInputs>
     <EventOutputs>
@@ -47,6 +51,9 @@
       <VarDeclaration ID="9D943327E9BA3A69" Name="SuppressAlarm" Type="BOOL" Comment="1 = Suppress alarm in HMI" />
       <VarDeclaration ID="29B38549D8BB58F5" Name="Reset" Type="BOOL" Comment="1 = Reset device failure" />
       <VarDeclaration ID="C15DED4271ABC4C5" Name="AtvType" Type="STRING" />
+      <VarDeclaration ID="DCB761C03CD4608B" Name="geradorConectado" Type="BOOL" InitialValue="FALSE" Comment="TRUE = carga da lista de cargas no gerador da Subestacao (raio e bloqueio)" />
+      <VarDeclaration ID="675F7F871C14320E" Name="geradorHabilita" Type="BOOL" Comment="Carga liberada para operar com a planta nos geradores" />
+      <VarDeclaration ID="9446122E66FA8402" Name="stsGerador" Type="BOOL" Comment="TRUE = planta alimentada pelos geradores" />
     </InputVars>
     <OutputVars>
       <VarDeclaration ID="2E4659C0F7E5B209" Name="FbStopped" Type="BOOL" Comment="1 = Stopped" />
@@ -85,7 +92,7 @@
       <Parameter Name="$Prio" Value="35" />
       <Parameter Name="$Delay" Value="T#0ms" />
     </FB>
-    <FB ID="B94C8AF9FC7861D2" Name="LocalMode" Type="NOT_42C76073DCEB1A7A" x="820" y="2340" Namespace="SE.Nereda" Comment="TRUE = bomba em Local (seletor do painel fora de Remoto): a base nao monitora feedback">
+    <FB ID="B94C8AF9FC7861D2" Name="LocalMode" Type="NOT_42C76073DCEB1A7A" Comment="TRUE = bomba em Local (seletor do painel fora de Remoto): a base nao monitora feedback" x="820" y="2340" Namespace="SE.Nereda">
       <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNT:=1;OUT${CNT}:BOOL" />
     </FB>
     <FB ID="FA3481C80D7C1466" Name="extControlled" Type="dISignal" x="820" y="2000" Namespace="SE.App2Base">
@@ -135,7 +142,7 @@
     <FB ID="4637A301A1C376C3" Name="permissive" Type="PermCondSum" x="4520" y="2080" Namespace="SE.App2CommonProcess">
       <Attribute Name="Configuration.Component.HideUnusedPorts" Value="" />
     </FB>
-    <FB ID="B3B507C963A8FE90" Name="BaseVs" Type="MotorVsBase" x="7200" y="5160" Namespace="SE.App2CommonProcess" />
+    <FB ID="B3B507C963A8FE90" Name="BaseVs" Type="MotorVsBaseNer" x="7200" y="5160" Namespace="SE.Nereda" />
     <FB ID="78891E83BCFB5FBB" UID="8F0C0E086777380F" Name="interlockMotVs" Type="IlckMotVs" x="5400" y="9520" Namespace="SE.Nereda" />
     <FB ID="6C937361D4C7D0A7" Name="fbFwd" Type="dISignal" x="1840" y="2360" Namespace="SE.App2Base">
       <Attribute Name="Configuration.Component.HideUnusedPorts" Value="" />
@@ -260,19 +267,29 @@
       <Parameter Name="$QI" Value="TRUE" />
       <Parameter Name="$NAME1" Value="'$${PATH}fbSpeedINT'" />
     </FB>
-    <Input ID="9C9EE774F196CD99" Name="IIlck" x="880" y="6250" Type="Adapter" />
-    <Input ID="5CB9CA76997AD5A1" Name="IFail" x="880" y="6310" Type="Adapter" />
-    <Input ID="2DBEE771C3E6546D" Name="REQ_SUPPRESS_ALM" x="880" y="6510" Type="Event" />
-    <Input ID="9D943327E9BA3A69" Name="SuppressAlarm" x="880" y="6570" Type="Data" />
-    <Input ID="0108549E65B066A9" Name="IPerm" x="880" y="6370" Type="Adapter" />
-    <Input ID="0818F4256712489E" Name="REQ_RESET" x="880" y="6690" Type="Event" />
-    <Input ID="29B38549D8BB58F5" Name="Reset" x="880" y="6750" Type="Data" />
-    <Input ID="7B42577132F4F0A2" Name="IIlckSpeed" x="880" y="6190" Type="Adapter" />
-    <Input ID="AA4199CFAA425BE1" Name="IRsp" x="880" y="6010" Type="Adapter" />
-    <Input ID="99822422D1C0EA26" Name="IRSpeedSp" x="880" y="6070" Type="Adapter" />
-    <Input ID="517887402377409D" Name="ISc" x="880" y="6130" Type="Adapter" />
-    <Input ID="A9A1C3CD924494DF" Name="REQ_ATV_TYPE" x="1680" y="6690" Type="Event" />
-    <Input ID="C15DED4271ABC4C5" Name="AtvType" x="1680" y="6750" Type="Data" />
+    <FB ID="24D8BB3C17F0D1CE" Name="CargaGerador" Type="CargaGerador" x="2960" y="11600" Namespace="SE.Nereda" />
+    <FB ID="402E428A03E11D9E" Name="CargaGeradorRaio" Type="CargaGerador" x="2960" y="12500" Namespace="SE.Nereda" />
+    <FB ID="81FA76459079DDA2" Name="GeradorBloqueio" Type="ilckCondItem" x="4060" y="11600" Namespace="SE.App2CommonProcess">
+      <Parameter Name="$CondCause" Value="Active1" />
+      <Parameter Name="$CondName" Value="'Planta nos geradores: carga nao liberada'" />
+    </FB>
+    <Input ID="9C9EE774F196CD99" Name="IIlck" x="880" y="6248" Type="Adapter" />
+    <Input ID="5CB9CA76997AD5A1" Name="IFail" x="880" y="6308" Type="Adapter" />
+    <Input ID="2DBEE771C3E6546D" Name="REQ_SUPPRESS_ALM" x="880" y="6508" Type="Event" />
+    <Input ID="9D943327E9BA3A69" Name="SuppressAlarm" x="880" y="6568" Type="Data" />
+    <Input ID="0108549E65B066A9" Name="IPerm" x="880" y="6368" Type="Adapter" />
+    <Input ID="0818F4256712489E" Name="REQ_RESET" x="880" y="6688" Type="Event" />
+    <Input ID="29B38549D8BB58F5" Name="Reset" x="880" y="6748" Type="Data" />
+    <Input ID="7B42577132F4F0A2" Name="IIlckSpeed" x="880" y="6188" Type="Adapter" />
+    <Input ID="AA4199CFAA425BE1" Name="IRsp" x="880" y="6008" Type="Adapter" />
+    <Input ID="99822422D1C0EA26" Name="IRSpeedSp" x="880" y="6068" Type="Adapter" />
+    <Input ID="517887402377409D" Name="ISc" x="880" y="6128" Type="Adapter" />
+    <Input ID="A9A1C3CD924494DF" Name="REQ_ATV_TYPE" x="1680" y="6688" Type="Event" />
+    <Input ID="C15DED4271ABC4C5" Name="AtvType" x="1680" y="6748" Type="Data" />
+    <Input Name="REQ_GERADOR" x="2240.271" y="11612" Type="Event" />
+    <Input ID="DCB761C03CD4608B" Name="geradorConectado" x="2076.812" y="11812" Type="Data" />
+    <Input ID="675F7F871C14320E" Name="geradorHabilita" x="2140.146" y="11872" Type="Data" />
+    <Input ID="9446122E66FA8402" Name="stsGerador" x="2219.208" y="11932" Type="Data" />
     <Frame Name="FRAME6" X="320" Y="5920" Width="2160" Height="2680">
       <Parameter Name="BackgroundColor" Value="AntiqueWhite" />
       <Parameter Name="TextColor" Value="Black" />
@@ -498,27 +515,28 @@
       <Parameter Name="Text" Value="Comment&#xD;&#xA;&#xD;&#xA;When `SafetySwitchOff = TRUE`,&#xD;&#xA;it means that the safety switch is **OFF**." />
       <Parameter Name="NxtLayerIdentifier" Value="" />
     </Frame>
-    <Output ID="5A9E481FF1AB435E" Name="CNF_SPEED" x="6980" y="372" Type="Event" />
-    <Output ID="AAAC0E160F15BA1E" Name="FbSpeed" x="6980" y="972" Type="Data" />
-    <Output ID="B7F345BDC18C6733" Name="FbReverse" x="6979.999" y="881.9998" Type="Data" />
-    <Output ID="3EF369864DB114AA" Name="CurrentSp" x="6980" y="1212" Type="Data" />
-    <Output ID="B08F9C4F4A29F4CD" Name="CNF_SP" x="6980" y="611.9998" Type="Event" />
-    <Output ID="9780F7C84A330891" Name="CNF_OPD" x="6980" y="671.9998" Type="Event" />
-    <Output ID="8CA338EBC9995753" Name="TotalOperationDuration" x="6979.999" y="1272" Type="Data" />
-    <Output ID="A1FF7DB001BF016D" Name="CurrentOperationDuration" x="6980" y="1332" Type="Data" />
-    <Output ID="A6872E8F86F7E888" Name="OperationCount" x="6980" y="1392" Type="Data" />
-    <Output ID="E10EF93D9AEB3CF9" Name="CNF_FB" x="6980" y="312" Type="Event" />
-    <Output ID="2E4659C0F7E5B209" Name="FbStopped" x="6980" y="791.9998" Type="Data" />
-    <Output ID="998617E6584B9D98" Name="FbForward" x="6980" y="851.9998" Type="Data" />
-    <Output ID="70FFD00EBB9F0909" Name="CNF_READY" x="6979.999" y="431.9999" Type="Event" />
-    <Output ID="1023720AA2B2B931" Name="Ready" x="6980" y="1032" Type="Data" />
-    <Output ID="F0B88CCAAD94C4E0" Name="CNF_FB_ALM" x="6980" y="491.9998" Type="Event" />
-    <Output ID="5F78B2A26C6EAED5" Name="FbAlarm" x="6980" y="1092" Type="Data" />
-    <Output ID="145FB6EE971172E9" Name="FbFailure" x="6980" y="1152" Type="Data" />
-    <Output ID="B8FBA093B968DB4F" Name="CNF_FAIL" x="6980" y="551.9998" Type="Event" />
+    <Output ID="5A9E481FF1AB435E" Name="CNF_SPEED" x="6980" y="370" Type="Event" />
+    <Output ID="AAAC0E160F15BA1E" Name="FbSpeed" x="6980" y="970" Type="Data" />
+    <Output ID="B7F345BDC18C6733" Name="FbReverse" x="6979.999" y="879.9998" Type="Data" />
+    <Output ID="3EF369864DB114AA" Name="CurrentSp" x="6980" y="1210" Type="Data" />
+    <Output ID="B08F9C4F4A29F4CD" Name="CNF_SP" x="6980" y="609.9998" Type="Event" />
+    <Output ID="9780F7C84A330891" Name="CNF_OPD" x="6980" y="669.9998" Type="Event" />
+    <Output ID="8CA338EBC9995753" Name="TotalOperationDuration" x="6979.999" y="1270" Type="Data" />
+    <Output ID="A1FF7DB001BF016D" Name="CurrentOperationDuration" x="6980" y="1330" Type="Data" />
+    <Output ID="A6872E8F86F7E888" Name="OperationCount" x="6980" y="1390" Type="Data" />
+    <Output ID="E10EF93D9AEB3CF9" Name="CNF_FB" x="6980" y="310" Type="Event" />
+    <Output ID="2E4659C0F7E5B209" Name="FbStopped" x="6980" y="789.9998" Type="Data" />
+    <Output ID="998617E6584B9D98" Name="FbForward" x="6980" y="849.9998" Type="Data" />
+    <Output ID="70FFD00EBB9F0909" Name="CNF_READY" x="6979.999" y="429.9999" Type="Event" />
+    <Output ID="1023720AA2B2B931" Name="Ready" x="6980" y="1030" Type="Data" />
+    <Output ID="F0B88CCAAD94C4E0" Name="CNF_FB_ALM" x="6980" y="489.9998" Type="Event" />
+    <Output ID="5F78B2A26C6EAED5" Name="FbAlarm" x="6980" y="1090" Type="Data" />
+    <Output ID="145FB6EE971172E9" Name="FbFailure" x="6980" y="1150" Type="Data" />
+    <Output ID="B8FBA093B968DB4F" Name="CNF_FAIL" x="6980" y="549.9998" Type="Event" />
     <EventConnections>
       <Connection Source="$6C937361D4C7D0A7.CNF" Destination="$035A9C3F2AA186EC.5787DAD88CBF4054">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
       </Connection>
       <Connection Source="$AA7CAD5AC025204C.08EBB16DA2AE2E53" Destination="$B94C8AF9FC7861D2.REQ">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
@@ -1007,10 +1025,88 @@
       <Connection Source="$AA842A22E482891D.INITO" Destination="$03F0AA53FA37ED13.INIT">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
+      <Connection Source="$REQ_GERADOR" Destination="$24D8BB3C17F0D1CE.CBDA4E7ACB706297" />
+      <Connection Source="$76494EA47EAB0A30.141F2765F0199247" Destination="$24D8BB3C17F0D1CE.CBDA4E7ACB706297" dx1="267.1045" dx2="49.99976" dy="4710" />
+      <Connection Source="$24D8BB3C17F0D1CE.CA6A15984D5E93C2" Destination="$81FA76459079DDA2.REQ" />
+      <Connection Source="$REQ_GERADOR" Destination="$402E428A03E11D9E.CBDA4E7ACB706297" dx1="40" />
+      <Connection Source="$EC8557B662BFFC7F.CNF" Destination="$402E428A03E11D9E.CBDA4E7ACB706297">
+        <Points>
+          <Points>
+            <X>1325.63025</X>
+            <Y>790</Y>
+          </Points>
+          <Points>
+            <X>1342.5</X>
+            <Y>790</Y>
+          </Points>
+          <Points>
+            <X>1342.5</X>
+            <Y>877.5</Y>
+          </Points>
+          <Points>
+            <X>1117.5</X>
+            <Y>877.5</Y>
+          </Points>
+          <Points>
+            <X>1117.5</X>
+            <Y>1317.5</Y>
+          </Points>
+          <Points>
+            <X>722.5</X>
+            <Y>1317.5</Y>
+          </Points>
+          <Points>
+            <X>722.5</X>
+            <Y>3135</Y>
+          </Points>
+          <Points>
+            <X>734.999939</X>
+            <Y>3135</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$76494EA47EAB0A30.141F2765F0199247" Destination="$402E428A03E11D9E.CBDA4E7ACB706297" dx1="267.1045" dx2="49.99976" dy="4710" />
+      <Connection Source="$402E428A03E11D9E.CA6A15984D5E93C2" Destination="$76494EA47EAB0A30.C9F8920D38B4A811">
+        <Points>
+          <Points>
+            <X>963.6145</X>
+            <Y>3135</Y>
+          </Points>
+          <Points>
+            <X>977.5</X>
+            <Y>3135</Y>
+          </Points>
+          <Points>
+            <X>977.5</X>
+            <Y>2252.5</Y>
+          </Points>
+          <Points>
+            <X>1077.5</X>
+            <Y>2252.5</Y>
+          </Points>
+          <Points>
+            <X>1077.5</X>
+            <Y>747.5</Y>
+          </Points>
+          <Points>
+            <X>977.5</X>
+            <Y>747.5</Y>
+          </Points>
+          <Points>
+            <X>977.5</X>
+            <Y>230</Y>
+          </Points>
+          <Points>
+            <X>1030</X>
+            <Y>230</Y>
+          </Points>
+        </Points>
+      </Connection>
     </EventConnections>
     <DataConnections>
       <Connection Source="$6C937361D4C7D0A7.Out" Destination="$035A9C3F2AA186EC.2A8D8066783C9AEC">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
+        <AvoidsNodes>false</AvoidsNodes>
       </Connection>
       <Connection Source="$AA7CAD5AC025204C.DA445F1C2864A153" Destination="$B94C8AF9FC7861D2.IN1">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
@@ -1104,35 +1200,35 @@
         <Points>
           <Points>
             <X>435.916656</X>
-            <Y>1014.49994</Y>
+            <Y>1029.5</Y>
           </Points>
           <Points>
             <X>448.041656</X>
-            <Y>1014.49994</Y>
+            <Y>1029.5</Y>
           </Points>
           <Points>
             <X>448.041656</X>
-            <Y>1092</Y>
+            <Y>1107</Y>
           </Points>
           <Points>
             <X>873.0416</X>
-            <Y>1092</Y>
+            <Y>1107</Y>
           </Points>
           <Points>
             <X>873.0416</X>
-            <Y>1227</Y>
+            <Y>1242</Y>
           </Points>
           <Points>
             <X>1903.0415</X>
-            <Y>1227</Y>
+            <Y>1242</Y>
           </Points>
           <Points>
             <X>1903.0415</X>
-            <Y>1669.5</Y>
+            <Y>1684.5</Y>
           </Points>
           <Points>
             <X>2073.151</X>
-            <Y>1669.5</Y>
+            <Y>1684.5</Y>
           </Points>
         </Points>
         <AvoidsNodes>false</AvoidsNodes>
@@ -1515,6 +1611,85 @@
       <Connection Source="$AA842A22E482891D.QO" Destination="$035A9C3F2AA186EC.46C4F82F6CC69CD7">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
+      <Connection Source="$DCB761C03CD4608B" Destination="$24D8BB3C17F0D1CE.9088724ABC940154" />
+      <Connection Source="$675F7F871C14320E" Destination="$24D8BB3C17F0D1CE.5B562DCC53E7C7E0" />
+      <Connection Source="$9446122E66FA8402" Destination="$24D8BB3C17F0D1CE.71FF6E86C822A1E4" />
+      <Connection Source="$24D8BB3C17F0D1CE.9767CD73572D0AF4" Destination="$81FA76459079DDA2.CondSignal" />
+      <Connection Source="$DCB761C03CD4608B" Destination="$402E428A03E11D9E.9088724ABC940154" dx1="40" />
+      <Connection Source="$675F7F871C14320E" Destination="$402E428A03E11D9E.5B562DCC53E7C7E0" dx1="40" />
+      <Connection Source="$9446122E66FA8402" Destination="$402E428A03E11D9E.71FF6E86C822A1E4" dx1="40" />
+      <Connection Source="$EC8557B662BFFC7F.OUT" Destination="$402E428A03E11D9E.629B422BA823BB18">
+        <Points>
+          <Points>
+            <X>1325.63025</X>
+            <Y>840</Y>
+          </Points>
+          <Points>
+            <X>1337.5</X>
+            <Y>840</Y>
+          </Points>
+          <Points>
+            <X>1337.5</X>
+            <Y>877.5</Y>
+          </Points>
+          <Points>
+            <X>1117.5</X>
+            <Y>877.5</Y>
+          </Points>
+          <Points>
+            <X>1117.5</X>
+            <Y>1317.5</Y>
+          </Points>
+          <Points>
+            <X>702.5</X>
+            <Y>1317.5</Y>
+          </Points>
+          <Points>
+            <X>702.5</X>
+            <Y>3230</Y>
+          </Points>
+          <Points>
+            <X>734.999939</X>
+            <Y>3230</Y>
+          </Points>
+        </Points>
+      </Connection>
+      <Connection Source="$402E428A03E11D9E.7C61F11FF182428D" Destination="$76494EA47EAB0A30.B0F95C047C8F928B">
+        <Points>
+          <Points>
+            <X>963.6145</X>
+            <Y>3185</Y>
+          </Points>
+          <Points>
+            <X>982.5</X>
+            <Y>3185</Y>
+          </Points>
+          <Points>
+            <X>982.5</X>
+            <Y>2252.5</Y>
+          </Points>
+          <Points>
+            <X>1077.5</X>
+            <Y>2252.5</Y>
+          </Points>
+          <Points>
+            <X>1077.5</X>
+            <Y>747.5</Y>
+          </Points>
+          <Points>
+            <X>1042.5</X>
+            <Y>747.5</Y>
+          </Points>
+          <Points>
+            <X>1042.5</X>
+            <Y>415</Y>
+          </Points>
+          <Points>
+            <X>1050</X>
+            <Y>415</Y>
+          </Points>
+        </Points>
+      </Connection>
     </DataConnections>
     <AdapterConnections>
       <Connection Source="$9C9EE774F196CD99" Destination="$77265060F849498A.ICondChainIn" dx1="556">
@@ -1589,32 +1764,33 @@
         <Points>
           <Points>
             <X>433.286438</X>
-            <Y>1554.5</Y>
+            <Y>1554</Y>
           </Points>
           <Points>
             <X>497.5</X>
-            <Y>1554.5</Y>
+            <Y>1554</Y>
           </Points>
           <Points>
             <X>497.5</X>
-            <Y>1389.5</Y>
+            <Y>1389</Y>
           </Points>
           <Points>
             <X>1042.5</X>
-            <Y>1389.5</Y>
+            <Y>1389</Y>
           </Points>
           <Points>
             <X>1042.5</X>
-            <Y>1077</Y>
+            <Y>1076.5</Y>
           </Points>
           <Points>
             <X>1130</X>
-            <Y>1077</Y>
+            <Y>1076.5</Y>
           </Points>
         </Points>
         <AvoidsNodes>false</AvoidsNodes>
       </Connection>
-      <Connection Source="$77265060F849498A.ICondChainOut" Destination="$00A039A786EBBD27.IOpCondIn">
+      <Connection Source="$77265060F849498A.ICondChainOut" Destination="$81FA76459079DDA2.ICondChainIn" dx1="40" dx2="129.9998" dy="570" />
+      <Connection Source="$81FA76459079DDA2.ICondChainOut" Destination="$00A039A786EBBD27.IOpCondIn" dx1="40">
         <AvoidsNodes>false</AvoidsNodes>
       </Connection>
     </AdapterConnections>

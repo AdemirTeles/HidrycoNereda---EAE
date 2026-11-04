@@ -33,6 +33,7 @@ namespace SE.Nereda.Symbols.Motor_VS
 			// The InitializeComponent() call is required for Windows Forms designer support.
 			//
 			InitializeComponent();
+			this.FB_FWD_Fired += FB_FWD_RaioGerador;
 			SpeedInfo.Visible = true;
 			this.SPEED_SP_FB_Fired += SPEED_SP_FB_Fired_EventHandler;
 			SpeedPv.SweepAngle = 0;
@@ -130,6 +131,18 @@ namespace SE.Nereda.Symbols.Motor_VS
 		{
 			// TODO: Implement SPEED_SP_FB_Fired_EventHandler
 			SpeedPv.SweepAngle = 0 + ((float)e.FbSpeed / 100f) * 306;
+		}
+
+		// raio do gerador (Hidryco): 0 invisivel, 1 so contorno (nao liberado), 2 cinza (liberado), 3 vermelho (liberado e funcionando nos geradores)
+		void FB_FWD_RaioGerador(object sender, FB_FWDEventArgs e)
+		{
+			short? a = e.STS_ANIMACAO_GERADOR;
+			int an = a.HasValue ? a.Value : 0;
+			raioCirc.Visible = an > 0;
+			raioRaio.Visible = an > 0;
+			if (an == 3) raioRaio.BrushColor = System.Drawing.Color.Red;
+			else if (an == 2) raioRaio.BrushColor = System.Drawing.Color.LightGray;
+			else raioRaio.BrushColor = System.Drawing.Color.Transparent;
 		}
 	}
 }

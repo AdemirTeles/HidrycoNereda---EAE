@@ -103,6 +103,7 @@ namespace HMI.Main.Canvases
 			this.so2 = new Hidryco.HidrycoLib.Symbols.Motor_Generico.sSoprador();
 			this.vb4 = new Hidryco.HidrycoLib.Symbols.Atuador_Coester.sValvulaV();
 			this.processo = new Hidryco.HidrycoLib.Symbols.DesidratacaoLodo.sDefault();
+			this.revezamento = new Hidryco.HidrycoLib.Symbols.Controle_Revezamento_2.sAjustes();
 			this.repAI1 = new SE.Nereda.Symbols.AnalogInputBase.sInstanceName();
 			this.repHH1 = new SE.App2Base.Symbols.LimitAlarm.sIndicator();
 			this.repH1 = new SE.App2Base.Symbols.LimitAlarm.sIndicator();
@@ -853,6 +854,19 @@ namespace HMI.Main.Canvases
 			this.processo.TagName = "91957488A3380C04";
 			this.processo.EndInit();
 			// 
+			// revezamento
+			// 
+			this.revezamento.BeginInit();
+			this.revezamento.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 905D, 500D);
+			this.revezamento.Name = "revezamento";
+			this.revezamento.SecurityToken = ((uint)(4294967295u));
+			this.revezamento.TagName = "A03873967E84DB27.Revezamento";
+			this.revezamento.Titulo = "Revezamento dos sopradores";
+			this.revezamento.Rotulo_CMD_HABILITA = "Troca do soprador principal por tempo";
+			this.revezamento.Rotulo_STP_TEMPO_B1 = "Horas do SO-01 como principal";
+			this.revezamento.Rotulo_STP_TEMPO_B2 = "Horas do SO-02 como principal";
+			this.revezamento.EndInit();
+			// 
 			// repAI1
 			// 
 			this.repAI1.BeginInit();
@@ -1062,6 +1076,7 @@ namespace HMI.Main.Canvases
 			this.so2,
 			this.vb4,
 			this.processo,
+			this.revezamento,
 			this.btnResetGeral,
 			this.repAI1,
 			this.repHH1,
@@ -1153,6 +1168,7 @@ namespace HMI.Main.Canvases
 		private Hidryco.HidrycoLib.Symbols.Motor_Generico.sSoprador so2;
 		private Hidryco.HidrycoLib.Symbols.Atuador_Coester.sValvulaV vb4;
 		private Hidryco.HidrycoLib.Symbols.DesidratacaoLodo.sDefault processo;
+		private Hidryco.HidrycoLib.Symbols.Controle_Revezamento_2.sAjustes revezamento;
 		private NxtControl.GuiFramework.DrawnButton btnResetGeral;
 		private NxtControl.GuiFramework.DrawnButton btnReconhecerGeral;
 		private SE.Nereda.Symbols.AnalogInputBase.sInstanceName repAI1;
