@@ -4,7 +4,7 @@
   <Attribute Name="HMI.Alias" Value="" />
   <Attribute Name="Configuration.FB.IDCounter" Value="19" />
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Schneider Electric" Version="1.4" Author="Claude/Hidryco" Date="30/10/2026" Remarks="Rev1.4 - Estado das 4 fases (State/CNF_STATE) para a emergencia (IEmergency.PHASE_STATE). Rev1.3 - Revertidas as ligacoes de emergencia da Rev1.2 (FB_* e comando nos Av) que fechavam laco de eventos com a receita de emergencia; igual a Rev1.1" />
+  <VersionInfo Organization="Schneider Electric" Version="1.4" Author="Claude/Hidryco" Date="30/10/2026" Remarks="Hidryco 05/11/2026: FaseCalc (FaseAtivaNereda) ligado direto nas fases (Starting/Run/Stopping/Aborting/Aborted) -> CNF_FASE (FaseAtiva, FaseAbortada, Abortado). Rev1.4 - Estado das 4 fases (State/CNF_STATE) para a emergencia (IEmergency.PHASE_STATE). Rev1.3 - Revertidas as ligacoes de emergencia da Rev1.2 (FB_* e comando nos Av) que fechavam laco de eventos com a receita de emergencia; igual a Rev1.1" />
   <InterfaceList>
     <EventInputs>
       <Event Name="INIT" Comment="Initialization Request" />
@@ -29,6 +29,11 @@
         <With Var="AlarmAborted" />
         <With Var="ReactorStatus" />
       </Event>
+      <Event ID="847EC51144D3E49E" Name="CNF_FASE" Comment="Fase ativa ou abortada mudou (OPC UA)">
+        <With Var="FaseAtiva" />
+        <With Var="FaseAbortada" />
+        <With Var="Abortado" />
+      </Event>
     </EventOutputs>
     <OutputVars>
       <VarDeclaration ID="4FB4981DA46091E0" Name="Mode" Type="INT" Comment="Response Data from Socket" />
@@ -44,6 +49,9 @@
       <VarDeclaration ID="60DD065D79B88190" Name="WaterDischargeAborted" Type="BOOL" />
       <VarDeclaration ID="03B7062989FEA7B3" Name="AlarmAborted" Type="BOOL" Comment="Result: IN1 OR IN2 OR ..." />
       <VarDeclaration ID="570A526D3E96023D" Name="ReactorStatus" Type="STRING[50]" Comment="Output event qualifier" />
+      <VarDeclaration ID="41189B2ADB9DD398" Name="FaseAtiva" Type="INT" Comment="Fase ativa (partindo, rodando, parando ou abortando): 0 nenhuma; 1 Feed, 2 Sludge Discharge, 3 Water Discharge, 4 Wait" />
+      <VarDeclaration ID="59EAFF55936F7874" Name="FaseAbortada" Type="INT" Comment="Fase abortada: 0 nenhuma; mesma numeracao" />
+      <VarDeclaration ID="970C645A4C14FBB6" Name="Abortado" Type="BOOL" Comment="TRUE = alguma fase abortada" />
     </OutputVars>
     <Sockets>
       <AdapterDeclaration ID="B6B2ED85FF741ABC" Name="LevelMeasurement" Type="IAnalog" Namespace="SE.App2Base" x="859.9999" y="2020" />
@@ -217,6 +225,7 @@
     <FB ID="FA5A88B77373859C" UID="DBC13CB278BC9ACE" Name="CheckPhaseRunning1" Type="OR_550FE6D62F509EB3" x="6180" y="9820" Namespace="SE.Nereda">
       <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNT:=3;OUT:BOOL" />
     </FB>
+    <FB ID="CD9F0FFD9113C730" Name="FaseCalc" Type="FaseAtivaNereda" x="8400" y="6000" Namespace="SE.Nereda" />
     <Input Name="INIT" x="1580" y="1128" Type="Event" />
     <Input ID="F49C543F5C002B3D" Name="Pump1_Status1" x="1180" y="8248" Type="Adapter" />
     <Input ID="0F671A8319403079" Name="Pump2_Status1" x="1180" y="8308" Type="Adapter" />
@@ -377,6 +386,10 @@
     <Output ID="E10899E5A113EE85" Name="SludgeDischargeRun" x="9280" y="4970" Type="Data" />
     <Output ID="2BC1C3B4560E878C" Name="WaitRun" x="9280" y="4910" Type="Data" />
     <Output ID="570A526D3E96023D" Name="ReactorStatus" x="9280" y="4770" Type="Data" />
+    <Output ID="847EC51144D3E49E" Name="CNF_FASE" x="9280" y="6100" Type="Event" />
+    <Output ID="41189B2ADB9DD398" Name="FaseAtiva" x="9280" y="6160" Type="Data" />
+    <Output ID="59EAFF55936F7874" Name="FaseAbortada" x="9280" y="6220" Type="Data" />
+    <Output ID="970C645A4C14FBB6" Name="Abortado" x="9280" y="6280" Type="Data" />
     <Output ID="B7A538539266F1E7" Name="CNF_REACTOR_STATUS" x="9280" y="4690" Type="Event" />
     <Output ID="3DA9624087A74DA7" Name="IInterlock_Valve4" x="9140" y="2550" Type="Adapter" />
     <Output ID="DB6554290D3E07B3" Name="IInterlock_Pump2" x="9140" y="1390" Type="Adapter" />
@@ -786,6 +799,11 @@
       <Connection Source="$6874E8693C525A20.C9D225E9FF976CF5" Destination="$60E2A1E0C2F716DD.596B692476DDC92F">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
+      <Connection Source="$6EFEBB1406288320.C9D225E9FF976CF5" Destination="$CD9F0FFD9113C730.A76E3B1EFBF012F4" />
+      <Connection Source="$7279D4A369E7E94D.C9D225E9FF976CF5" Destination="$CD9F0FFD9113C730.A76E3B1EFBF012F4" />
+      <Connection Source="$6874E8693C525A20.C9D225E9FF976CF5" Destination="$CD9F0FFD9113C730.A76E3B1EFBF012F4" />
+      <Connection Source="$D26A3350E9C64552.C9D225E9FF976CF5" Destination="$CD9F0FFD9113C730.A76E3B1EFBF012F4" />
+      <Connection Source="$CD9F0FFD9113C730.F942923829CA4F86" Destination="$847EC51144D3E49E" />
     </EventConnections>
     <DataConnections>
       <Connection Source="$B6B2ED85FF741ABC.Status" Destination="$CBA90F6FB409D6A8.Status" dx1="155.1669">
@@ -1352,6 +1370,29 @@
       <Connection Source="$6874E8693C525A20.55EEFFD67FC4D75B" Destination="$60E2A1E0C2F716DD.48F7B66A5538DD21">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
+      <Connection Source="$6EFEBB1406288320.79A84BC5970E2DB6" Destination="$CD9F0FFD9113C730.591CC865A0A9C817" />
+      <Connection Source="$6EFEBB1406288320.810982233799B264" Destination="$CD9F0FFD9113C730.8DC54DA8BE4140A6" />
+      <Connection Source="$6EFEBB1406288320.0EEF2A6CD1053E7B" Destination="$CD9F0FFD9113C730.4D5F29BA3DA21536" />
+      <Connection Source="$6EFEBB1406288320.EF831512DB1FF436" Destination="$CD9F0FFD9113C730.820F693A84C59235" />
+      <Connection Source="$6EFEBB1406288320.9521593C56F0BC35" Destination="$CD9F0FFD9113C730.258DE18A074C1C6F" />
+      <Connection Source="$7279D4A369E7E94D.79A84BC5970E2DB6" Destination="$CD9F0FFD9113C730.BC6EEBAF0123EC44" />
+      <Connection Source="$7279D4A369E7E94D.810982233799B264" Destination="$CD9F0FFD9113C730.AFD8F7A43D20F456" />
+      <Connection Source="$7279D4A369E7E94D.0EEF2A6CD1053E7B" Destination="$CD9F0FFD9113C730.1D95A0A6B6503428" />
+      <Connection Source="$7279D4A369E7E94D.EF831512DB1FF436" Destination="$CD9F0FFD9113C730.BF2AE25BCB363A24" />
+      <Connection Source="$7279D4A369E7E94D.9521593C56F0BC35" Destination="$CD9F0FFD9113C730.C94C8D3A016FBD40" />
+      <Connection Source="$6874E8693C525A20.79A84BC5970E2DB6" Destination="$CD9F0FFD9113C730.51FC11A272A4B05C" />
+      <Connection Source="$6874E8693C525A20.810982233799B264" Destination="$CD9F0FFD9113C730.7C4B823DD71D26D7" />
+      <Connection Source="$6874E8693C525A20.0EEF2A6CD1053E7B" Destination="$CD9F0FFD9113C730.2FA6A7AA1CB412E1" />
+      <Connection Source="$6874E8693C525A20.EF831512DB1FF436" Destination="$CD9F0FFD9113C730.AF551534ABAEDE3F" />
+      <Connection Source="$6874E8693C525A20.9521593C56F0BC35" Destination="$CD9F0FFD9113C730.A77D63E32F331553" />
+      <Connection Source="$D26A3350E9C64552.79A84BC5970E2DB6" Destination="$CD9F0FFD9113C730.E156702E5EE24E9D" />
+      <Connection Source="$D26A3350E9C64552.810982233799B264" Destination="$CD9F0FFD9113C730.CA2D78818200B056" />
+      <Connection Source="$D26A3350E9C64552.0EEF2A6CD1053E7B" Destination="$CD9F0FFD9113C730.34B81776E2C33178" />
+      <Connection Source="$D26A3350E9C64552.EF831512DB1FF436" Destination="$CD9F0FFD9113C730.D2D6B4CA266DBF39" />
+      <Connection Source="$D26A3350E9C64552.9521593C56F0BC35" Destination="$CD9F0FFD9113C730.D67D3E5F736F9369" />
+      <Connection Source="$CD9F0FFD9113C730.510DBF64A9858AD2" Destination="$41189B2ADB9DD398" />
+      <Connection Source="$CD9F0FFD9113C730.2862F8884DCC93F5" Destination="$59EAFF55936F7874" />
+      <Connection Source="$CD9F0FFD9113C730.4D0A848FDD4477A8" Destination="$970C645A4C14FBB6" />
     </DataConnections>
     <AdapterConnections>
       <Connection Source="$6C21C59B9F54C6B9.ICondChainOut" Destination="$7003DBCF68D589A0" dx1="693.6875">

@@ -4,7 +4,7 @@
   <Attribute Name="HMI.Alias" Value="" />
   <Attribute Name="Configuration.FB.IDCounter" Value="78" />
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Schneider Electric" Version="0.0" Author="SESA371406" Date="11/14/2023" Remarks="template" />
+  <VersionInfo Organization="Schneider Electric" Version="0.0" Author="SESA371406" Date="11/14/2023" Remarks="Hidryco 05/11/2026: Prognosys do SC1000 (symlinks PrognosysErro/Avisos/Erros, posicoes 80-82) -> IThis.REQ_PROGNOSYS (OPC UA). template" />
   <InterfaceList>
     <EventInputs>
       <Event Name="INIT" Comment="Initializes the symbolic link data destination FB with N (1 &lt;= N &lt;= 16) variables" />
@@ -74,6 +74,21 @@
     <FB ID="42910E5430FFFF36" Name="AirFlowMeasurementReactor_Status" Type="AnalogInput_Status" x="9080" y="4060" Namespace="SE.Nereda" />
     <FB ID="10F9D865ED3390F2" Name="TurbidityMeasurementBothReactors" Type="AnalogInput" x="8580" y="7400" Namespace="SE.Nereda" />
     <FB ID="931F5452AC4E7A33" Name="TurbidityMeasurementBothReactors_Status" Type="AnalogInput_Status" x="10180" y="4060" Namespace="SE.Nereda" />
+    <FB ID="52C7F763445448B3" Name="PrognosysErro_Sym" Type="SYMLINKMULTIVARDST_5A03F112CD5D470" x="3400" y="200" Namespace="SE.Nereda">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=1;VALUE${I}:INT" />
+      <Parameter Name="$QI" Value="TRUE" />
+      <Parameter Name="$NAME1" Value="'$${PATH}PrognosysErro'" />
+    </FB>
+    <FB ID="530108309634F04D" Name="PrognosysAvisos_Sym" Type="SYMLINKMULTIVARDST_5A03F112CD5D470" x="4100" y="200" Namespace="SE.Nereda">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=1;VALUE${I}:INT" />
+      <Parameter Name="$QI" Value="TRUE" />
+      <Parameter Name="$NAME1" Value="'$${PATH}PrognosysAvisos'" />
+    </FB>
+    <FB ID="BC856AE7A4F083B5" Name="PrognosysErros_Sym" Type="SYMLINKMULTIVARDST_5A03F112CD5D470" x="4800" y="200" Namespace="SE.Nereda">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=1;VALUE${I}:INT" />
+      <Parameter Name="$QI" Value="TRUE" />
+      <Parameter Name="$NAME1" Value="'$${PATH}PrognosysErros'" />
+    </FB>
     <Input Name="INIT" x="1300" y="1144" Type="Event" />
     <Frame Name="FRAME3" X="20620" Y="5460" Width="1880" Height="1140">
       <Parameter Name="BackgroundColor" Value="LightGoldenrodYellow" />
@@ -279,9 +294,10 @@
     <Output ID="6BB9795C0E236086" Name="ILevelMeasurementReactor_Pv3" x="9580" y="2042" Type="Adapter" />
     <Output Name="INITO" x="1260" y="1324" Type="Event" />
     <EventConnections>
-      <Connection Source="$931F5452AC4E7A33.INITO" Destination="$INITO" dx1="120" dx2="120" dy="-1068.146">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
+      <Connection Source="$931F5452AC4E7A33.INITO" Destination="$52C7F763445448B3.INIT" />
+      <Connection Source="$52C7F763445448B3.INITO" Destination="$530108309634F04D.INIT" />
+      <Connection Source="$530108309634F04D.INITO" Destination="$BC856AE7A4F083B5.INIT" />
+      <Connection Source="$BC856AE7A4F083B5.INITO" Destination="$INITO" />
       <Connection Source="$INIT" Destination="$74.4714B2733E881033" dx1="975.7084">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
@@ -343,6 +359,9 @@
       <Connection Source="$5EF848D25BE69261.INITO" Destination="$839AD2D7F4826232.INIT" />
       <Connection Source="$839AD2D7F4826232.INITO" Destination="$42910E5430FFFF36.INIT" dx1="40" />
       <Connection Source="$42910E5430FFFF36.INITO" Destination="$931F5452AC4E7A33.INIT" />
+      <Connection Source="$52C7F763445448B3.CNF" Destination="$74.12C4CF179EB6F000" />
+      <Connection Source="$530108309634F04D.CNF" Destination="$74.12C4CF179EB6F000" />
+      <Connection Source="$BC856AE7A4F083B5.CNF" Destination="$74.12C4CF179EB6F000" />
     </EventConnections>
     <DataConnections>
       <Connection Source="$78.RESULT" Destination="$76.NAME1" dx1="70" />
@@ -435,6 +454,9 @@
           </Points>
         </Points>
       </Connection>
+      <Connection Source="$52C7F763445448B3.VALUE1" Destination="$74.74BCCDA2DAB96431" />
+      <Connection Source="$530108309634F04D.VALUE1" Destination="$74.879EF95614DE9948" />
+      <Connection Source="$BC856AE7A4F083B5.VALUE1" Destination="$74.206052A46C705435" />
     </DataConnections>
     <AdapterConnections>
       <Connection Source="$AE65E0748F970E41.73A667132981F8F7" Destination="$1209A3C57B6DE362.404867D502801067">

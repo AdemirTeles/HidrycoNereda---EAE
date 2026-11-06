@@ -468,7 +468,7 @@ namespace HMI.Main.Canvases
 			this.repAIft.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 0D, 0D);
 			this.repAIft.Name = "repAIft";
 			this.repAIft.SecurityToken = ((uint)(4294967295u));
-			this.repAIft.TagName = "DE5E3E2FE4C5E300.Sensors.FeedInfluentFlowPv.AnalogInput";
+			this.repAIft.TagName = "B949570768DD3945.Sensors.FeedInfluentFlowPv.AnalogInput";
 			this.repAIft.Visible = false;
 			this.repAIft.EndInit();
 			// 
@@ -478,7 +478,7 @@ namespace HMI.Main.Canvases
 			this.repHHft.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 0D, 0D);
 			this.repHHft.Name = "repHHft";
 			this.repHHft.SecurityToken = ((uint)(4294967295u));
-			this.repHHft.TagName = "DE5E3E2FE4C5E300.Sensors.FeedInfluentFlowPv.highHigh";
+			this.repHHft.TagName = "B949570768DD3945.Sensors.FeedInfluentFlowPv.highHigh";
 			this.repHHft.Visible = false;
 			this.repHHft.EndInit();
 			// 
@@ -488,7 +488,7 @@ namespace HMI.Main.Canvases
 			this.repHft.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 0D, 0D);
 			this.repHft.Name = "repHft";
 			this.repHft.SecurityToken = ((uint)(4294967295u));
-			this.repHft.TagName = "DE5E3E2FE4C5E300.Sensors.FeedInfluentFlowPv.high";
+			this.repHft.TagName = "B949570768DD3945.Sensors.FeedInfluentFlowPv.high";
 			this.repHft.Visible = false;
 			this.repHft.EndInit();
 			// 
@@ -498,7 +498,7 @@ namespace HMI.Main.Canvases
 			this.repLft.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 0D, 0D);
 			this.repLft.Name = "repLft";
 			this.repLft.SecurityToken = ((uint)(4294967295u));
-			this.repLft.TagName = "DE5E3E2FE4C5E300.Sensors.FeedInfluentFlowPv.low";
+			this.repLft.TagName = "B949570768DD3945.Sensors.FeedInfluentFlowPv.low";
 			this.repLft.Visible = false;
 			this.repLft.EndInit();
 			// 
@@ -508,7 +508,7 @@ namespace HMI.Main.Canvases
 			this.repLLft.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 0D, 0D);
 			this.repLLft.Name = "repLLft";
 			this.repLLft.SecurityToken = ((uint)(4294967295u));
-			this.repLLft.TagName = "DE5E3E2FE4C5E300.Sensors.FeedInfluentFlowPv.lowLow";
+			this.repLLft.TagName = "B949570768DD3945.Sensors.FeedInfluentFlowPv.lowLow";
 			this.repLLft.Visible = false;
 			this.repLLft.EndInit();
 			// 

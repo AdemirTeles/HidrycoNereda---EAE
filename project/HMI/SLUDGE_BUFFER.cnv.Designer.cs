@@ -41,6 +41,20 @@ namespace HMI.Main.Canvases
 			this.sDefault2 = new SE.App2CommonProcess.Symbols.Autotune.sDefault();
 			this.sDisplayPv21 = new SE.Nereda.Symbols.AnalogInput.sDisplayPv2();
 			this.sDisplayPv22 = new SE.Nereda.Symbols.AnalogInput.sDisplayPv2();
+			this.sVertical1 = new SE.Nereda.Symbols.AnalogInput.sVertical();
+			// 
+			// btnAckNereda
+			// 
+			this.btnAckNereda.Bounds = new NxtControl.Drawing.RectF(((float)(212D)), ((float)(12D)), ((float)(200D)), ((float)(32D)));
+			this.btnAckNereda.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208))));
+			this.btnAckNereda.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+			this.btnAckNereda.InnerBorderColor = new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208)));
+			this.btnAckNereda.Name = "btnAckNereda";
+			this.btnAckNereda.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(160)), ((byte)(160)), ((byte)(160))), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.btnAckNereda.Radius = 2D;
+			this.btnAckNereda.Text = "Reconhecer alarmes";
+			this.btnAckNereda.Use3DEffect = false;
+			this.btnAckNereda.Click += new System.EventHandler(this.BtnAckNeredaClick);
 			// 
 			// polygon7
 			// 
@@ -60,7 +74,7 @@ namespace HMI.Main.Canvases
 			this.HeartBeat.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 8D, 8D);
 			this.HeartBeat.Name = "HeartBeat";
 			this.HeartBeat.SecurityToken = ((uint)(4294967295u));
-			this.HeartBeat.TagName = "32B44D45F962192F";
+			this.HeartBeat.TagName = "1A7AD4234C2BE11C";
 			this.HeartBeat.EndInit();
 			// 
 			// Mode
@@ -69,7 +83,7 @@ namespace HMI.Main.Canvases
 			this.Mode.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 424D, 8D);
 			this.Mode.Name = "Mode";
 			this.Mode.SecurityToken = ((uint)(4294967295u));
-			this.Mode.TagName = "7A79C015B9ADE3EB";
+			this.Mode.TagName = "ECC9B0BB08A85534";
 			this.Mode.EndInit();
 			// 
 			// OpenWebPage
@@ -78,7 +92,7 @@ namespace HMI.Main.Canvases
 			this.OpenWebPage.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 840D, 8D);
 			this.OpenWebPage.Name = "OpenWebPage";
 			this.OpenWebPage.SecurityToken = ((uint)(4294967295u));
-			this.OpenWebPage.TagName = "61745BDDB91DBEF5";
+			this.OpenWebPage.TagName = "61C067078E62D90F";
 			this.OpenWebPage.EndInit();
 			// 
 			// SludgeBuffer_1
@@ -87,7 +101,7 @@ namespace HMI.Main.Canvases
 			this.SludgeBuffer_1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 1008D, 80D);
 			this.SludgeBuffer_1.Name = "SludgeBuffer_1";
 			this.SludgeBuffer_1.SecurityToken = ((uint)(4294967295u));
-			this.SludgeBuffer_1.TagName = "9AA3696311BF0C3E";
+			this.SludgeBuffer_1.TagName = "2EDD2709EE346B30";
 			this.SludgeBuffer_1.EndInit();
 			// 
 			// SludgeBuffer
@@ -96,7 +110,7 @@ namespace HMI.Main.Canvases
 			this.SludgeBuffer.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 24D, 224D);
 			this.SludgeBuffer.Name = "SludgeBuffer";
 			this.SludgeBuffer.SecurityToken = ((uint)(4294967295u));
-			this.SludgeBuffer.TagName = "9AA3696311BF0C3E";
+			this.SludgeBuffer.TagName = "2EDD2709EE346B30";
 			this.SludgeBuffer.EndInit();
 			// 
 			// SludgeBuffer_2
@@ -105,7 +119,7 @@ namespace HMI.Main.Canvases
 			this.SludgeBuffer_2.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 32D, 112D);
 			this.SludgeBuffer_2.Name = "SludgeBuffer_2";
 			this.SludgeBuffer_2.SecurityToken = ((uint)(4294967295u));
-			this.SludgeBuffer_2.TagName = "9AA3696311BF0C3E";
+			this.SludgeBuffer_2.TagName = "2EDD2709EE346B30";
 			this.SludgeBuffer_2.EndInit();
 			// 
 			// SludgeBuffer_3
@@ -114,7 +128,7 @@ namespace HMI.Main.Canvases
 			this.SludgeBuffer_3.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 520D, 80D);
 			this.SludgeBuffer_3.Name = "SludgeBuffer_3";
 			this.SludgeBuffer_3.SecurityToken = ((uint)(4294967295u));
-			this.SludgeBuffer_3.TagName = "9AA3696311BF0C3E";
+			this.SludgeBuffer_3.TagName = "2EDD2709EE346B30";
 			this.SludgeBuffer_3.EndInit();
 			// 
 			// sDefault1
@@ -126,7 +140,7 @@ namespace HMI.Main.Canvases
 			this.sDefault1.MyTagDisplayName = null;
 			this.sDefault1.Name = "sDefault1";
 			this.sDefault1.SecurityToken = ((uint)(4294967295u));
-			this.sDefault1.TagName = "9AA3696311BF0C3E.Logic.CmdSludgeDischargeSLB1.CommandLogic.Autotune1";
+			this.sDefault1.TagName = "2EDD2709EE346B30.Logic.CmdSludgeDischargeSLB1.CommandLogic.Autotune1";
 			this.sDefault1.EndInit();
 			// 
 			// sBarPvSpOpVert2
@@ -139,7 +153,7 @@ namespace HMI.Main.Canvases
 			this.sBarPvSpOpVert2.MyTagDisplayName = null;
 			this.sBarPvSpOpVert2.Name = "sBarPvSpOpVert2";
 			this.sBarPvSpOpVert2.SecurityToken = ((uint)(4294967295u));
-			this.sBarPvSpOpVert2.TagName = "9AA3696311BF0C3E.Logic.CmdSludgeDischargeSLB1.CommandLogic.PID";
+			this.sBarPvSpOpVert2.TagName = "2EDD2709EE346B30.Logic.CmdSludgeDischargeSLB1.CommandLogic.PID";
 			this.sBarPvSpOpVert2.EndInit();
 			// 
 			// sBarPvSpOpVert1
@@ -152,7 +166,7 @@ namespace HMI.Main.Canvases
 			this.sBarPvSpOpVert1.MyTagDisplayName = null;
 			this.sBarPvSpOpVert1.Name = "sBarPvSpOpVert1";
 			this.sBarPvSpOpVert1.SecurityToken = ((uint)(4294967295u));
-			this.sBarPvSpOpVert1.TagName = "9AA3696311BF0C3E.Logic.CmdWaterDischargeSLB1.CommandLogic.PID";
+			this.sBarPvSpOpVert1.TagName = "2EDD2709EE346B30.Logic.CmdWaterDischargeSLB1.CommandLogic.PID";
 			this.sBarPvSpOpVert1.EndInit();
 			// 
 			// sDefault2
@@ -164,48 +178,44 @@ namespace HMI.Main.Canvases
 			this.sDefault2.MyTagDisplayName = null;
 			this.sDefault2.Name = "sDefault2";
 			this.sDefault2.SecurityToken = ((uint)(4294967295u));
-			this.sDefault2.TagName = "9AA3696311BF0C3E.Logic.CmdWaterDischargeSLB1.CommandLogic.Autotune1";
+			this.sDefault2.TagName = "2EDD2709EE346B30.Logic.CmdWaterDischargeSLB1.CommandLogic.Autotune1";
 			this.sDefault2.EndInit();
 			// 
 			// sDisplayPv21
 			// 
 			this.sDisplayPv21.BeginInit();
-			this.sDisplayPv21._iSensorName = "N\u00edvel tanque estocagem lodo 1";
+			this.sDisplayPv21._iSensorName = "Nível tanque estocagem lodo 1";
 			this.sDisplayPv21._iUnit = "m";
 			this.sDisplayPv21.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.73684210526315785D, 0D, 0D, 0.73684210526315785D, 1216D, 320D);
 			this.sDisplayPv21.Name = "sDisplayPv21";
 			this.sDisplayPv21.SecurityToken = ((uint)(4294967295u));
-			this.sDisplayPv21.TagName = "356FB76E49F87763.LevelMeasurementReactor";
+			this.sDisplayPv21.TagName = "428D497DE5BC46AE.LevelMeasurementReactor";
 			this.sDisplayPv21.EndInit();
 			// 
 			// sDisplayPv22
 			// 
 			this.sDisplayPv22.BeginInit();
-			this.sDisplayPv22._iSensorName = "N\u00edvel tanque estocagem lodo 2";
+			this.sDisplayPv22._iSensorName = "Nível tanque estocagem lodo 2";
 			this.sDisplayPv22._iUnit = "m";
 			this.sDisplayPv22.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.73684210526315785D, 0D, 0D, 0.73684210526315752D, 1216D, 408D);
 			this.sDisplayPv22.Name = "sDisplayPv22";
 			this.sDisplayPv22.SecurityToken = ((uint)(4294967295u));
-			this.sDisplayPv22.TagName = "864A57C6293E51C2.LevelMeasurementReactor";
+			this.sDisplayPv22.TagName = "15BC11099FA14F71.LevelMeasurementReactor";
 			this.sDisplayPv22.EndInit();
+			// 
+			// sVertical1
+			// 
+			this.sVertical1.BeginInit();
+			this.sVertical1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 176D, 384D);
+			this.sVertical1.Name = "sVertical1";
+			this.sVertical1.SecurityToken = ((uint)(4294967295u));
+			this.sVertical1.TagName = "2EDD2709EE346B30.Sensors.LevelMeasurementSludgeBuffer";
+			this.sVertical1.EndInit();
 			// 
 			// SLUDGE_BUFFER
 			// 
 			this.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(1366D)), ((float)(698D)));
 			this.Brush = new NxtControl.Drawing.Brush("CanvasBrush");
-			// 
-			// btnAckNereda
-			// 
-			this.btnAckNereda.Bounds = new NxtControl.Drawing.RectF(((float)(212D)), ((float)(12D)), ((float)(200D)), ((float)(32D)));
-			this.btnAckNereda.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208))));
-			this.btnAckNereda.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-			this.btnAckNereda.InnerBorderColor = new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208)));
-			this.btnAckNereda.Name = "btnAckNereda";
-			this.btnAckNereda.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(160)), ((byte)(160)), ((byte)(160))), 1F, NxtControl.Drawing.DashStyle.Solid);
-			this.btnAckNereda.Radius = 2D;
-			this.btnAckNereda.Text = "Reconhecer alarmes";
-			this.btnAckNereda.Use3DEffect = false;
-			this.btnAckNereda.Click += new System.EventHandler(this.BtnAckNeredaClick);
 			this.Shapes.AddRange(new System.ComponentModel.IComponent[] {
 			this.polygon7,
 			this.HeartBeat,
@@ -221,7 +231,8 @@ namespace HMI.Main.Canvases
 			this.sDefault2,
 			this.sDisplayPv21,
 			this.btnAckNereda,
-			this.sDisplayPv22});
+			this.sDisplayPv22,
+			this.sVertical1});
 			this.Size = new System.Drawing.Size(1366, 698);
 
 		}
@@ -240,6 +251,7 @@ namespace HMI.Main.Canvases
 		private SE.Nereda.Symbols.AnalogInput.sDisplayPv2 sDisplayPv21;
 		private SE.Nereda.Symbols.AnalogInput.sDisplayPv2 sDisplayPv22;
 		private NxtControl.GuiFramework.DrawnButton btnAckNereda;
+		private SE.Nereda.Symbols.AnalogInput.sVertical sVertical1;
 		#endregion
 	}
 }

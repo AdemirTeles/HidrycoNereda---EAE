@@ -1110,7 +1110,7 @@ namespace HMI.Main.Canvases
 			this.p4001.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.513761D, 0D, 0D, 0.513761D, 575.67D, 76.28D);
 			this.p4001.Name = "p4001";
 			this.p4001.SecurityToken = ((uint)(4294967295u));
-			this.p4001.TagName = "DE5E3E2FE4C5E300.Actuators.FeedReactorPump01";
+			this.p4001.TagName = "B949570768DD3945.Actuators.FeedReactorPump01";
 			this.p4001.EndInit();
 			// 
 			// p4002
@@ -1119,7 +1119,7 @@ namespace HMI.Main.Canvases
 			this.p4002.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.513761D, 0D, 0D, 0.513761D, 655D, 76.28D);
 			this.p4002.Name = "p4002";
 			this.p4002.SecurityToken = ((uint)(4294967295u));
-			this.p4002.TagName = "DE5E3E2FE4C5E300.Actuators.FeedReactorPump02";
+			this.p4002.TagName = "B949570768DD3945.Actuators.FeedReactorPump02";
 			this.p4002.EndInit();
 			// 
 			// p4003
@@ -1128,7 +1128,7 @@ namespace HMI.Main.Canvases
 			this.p4003.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.513761D, 0D, 0D, 0.513761D, 734.33D, 76.28D);
 			this.p4003.Name = "p4003";
 			this.p4003.SecurityToken = ((uint)(4294967295u));
-			this.p4003.TagName = "DE5E3E2FE4C5E300.Actuators.FeedReactorPump03";
+			this.p4003.TagName = "B949570768DD3945.Actuators.FeedReactorPump03";
 			this.p4003.EndInit();
 			// 
 			// infNivel
@@ -1137,7 +1137,7 @@ namespace HMI.Main.Canvases
 			this.infNivel.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.959677D, 0D, 0D, 0.959677D, 564D, 238D);
 			this.infNivel.Name = "infNivel";
 			this.infNivel.SecurityToken = ((uint)(4294967295u));
-			this.infNivel.TagName = "DE5E3E2FE4C5E300.Sensors.LevelPvInfluentBuffer";
+			this.infNivel.TagName = "B949570768DD3945.Sensors.LevelPvInfluentBuffer";
 			this.infNivel.EndInit();
 			// 
 			// infVazao
@@ -1146,7 +1146,7 @@ namespace HMI.Main.Canvases
 			this.infVazao.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.959677D, 0D, 0D, 0.959677D, 564D, 266D);
 			this.infVazao.Name = "infVazao";
 			this.infVazao.SecurityToken = ((uint)(4294967295u));
-			this.infVazao.TagName = "DE5E3E2FE4C5E300.Sensors.FeedReactorFlowPv";
+			this.infVazao.TagName = "B949570768DD3945.Sensors.FeedReactorFlowPv";
 			this.infVazao.EndInit();
 			// 
 			// v4601
@@ -1155,7 +1155,7 @@ namespace HMI.Main.Canvases
 			this.v4601.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.571429D, 0D, 0D, 0.571429D, 845.24D, 66D);
 			this.v4601.Name = "v4601";
 			this.v4601.SecurityToken = ((uint)(4294967295u));
-			this.v4601.TagName = "6307B68BAFBA5753.Actuators.V4601";
+			this.v4601.TagName = "35A194BD3A715270.Actuators.V4601";
 			this.v4601.EndInit();
 			// 
 			// v4602
@@ -1164,7 +1164,7 @@ namespace HMI.Main.Canvases
 			this.v4602.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.571429D, 0D, 0D, 0.571429D, 924.57D, 66D);
 			this.v4602.Name = "v4602";
 			this.v4602.SecurityToken = ((uint)(4294967295u));
-			this.v4602.TagName = "6307B68BAFBA5753.Actuators.V4602";
+			this.v4602.TagName = "35A194BD3A715270.Actuators.V4602";
 			this.v4602.EndInit();
 			// 
 			// v4603
@@ -1173,7 +1173,7 @@ namespace HMI.Main.Canvases
 			this.v4603.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.571429D, 0D, 0D, 0.571429D, 1003.9D, 66D);
 			this.v4603.Name = "v4603";
 			this.v4603.SecurityToken = ((uint)(4294967295u));
-			this.v4603.TagName = "6307B68BAFBA5753.Actuators.V4603";
+			this.v4603.TagName = "35A194BD3A715270.Actuators.V4603";
 			this.v4603.EndInit();
 			// 
 			// v4604
@@ -1182,7 +1182,7 @@ namespace HMI.Main.Canvases
 			this.v4604.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.571429D, 0D, 0D, 0.571429D, 845.24D, 142D);
 			this.v4604.Name = "v4604";
 			this.v4604.SecurityToken = ((uint)(4294967295u));
-			this.v4604.TagName = "6307B68BAFBA5753.Actuators.V4604";
+			this.v4604.TagName = "35A194BD3A715270.Actuators.V4604";
 			this.v4604.EndInit();
 			// 
 			// r1Nivel
@@ -1191,7 +1191,7 @@ namespace HMI.Main.Canvases
 			this.r1Nivel.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.959677D, 0D, 0D, 0.959677D, 833D, 238D);
 			this.r1Nivel.Name = "r1Nivel";
 			this.r1Nivel.SecurityToken = ((uint)(4294967295u));
-			this.r1Nivel.TagName = "D41247DF3E1D30DC.Sensors.LevelMeasurementReactor";
+			this.r1Nivel.TagName = "0F513B831BAFCB32.Sensors.LevelMeasurementReactor";
 			this.r1Nivel.EndInit();
 			// 
 			// r2Nivel
@@ -1200,7 +1200,7 @@ namespace HMI.Main.Canvases
 			this.r2Nivel.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.959677D, 0D, 0D, 0.959677D, 833D, 266D);
 			this.r2Nivel.Name = "r2Nivel";
 			this.r2Nivel.SecurityToken = ((uint)(4294967295u));
-			this.r2Nivel.TagName = "1D81A826384C2197.Sensors.LevelMeasurementReactor";
+			this.r2Nivel.TagName = "19E8555E9622C1D3.Sensors.LevelMeasurementReactor";
 			this.r2Nivel.EndInit();
 			// 
 			// vc70001
@@ -1227,7 +1227,7 @@ namespace HMI.Main.Canvases
 			this.p4901.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.513761D, 0D, 0D, 0.513761D, 171.67D, 398.28D);
 			this.p4901.Name = "p4901";
 			this.p4901.SecurityToken = ((uint)(4294967295u));
-			this.p4901.TagName = "9AA3696311BF0C3E.Actuators.Pump1";
+			this.p4901.TagName = "2EDD2709EE346B30.Actuators.Pump1";
 			this.p4901.EndInit();
 			// 
 			// p4902
@@ -1236,7 +1236,7 @@ namespace HMI.Main.Canvases
 			this.p4902.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.513761D, 0D, 0D, 0.513761D, 251D, 398.28D);
 			this.p4902.Name = "p4902";
 			this.p4902.SecurityToken = ((uint)(4294967295u));
-			this.p4902.TagName = "9AA3696311BF0C3E.Actuators.Pump2";
+			this.p4902.TagName = "2EDD2709EE346B30.Actuators.Pump2";
 			this.p4902.EndInit();
 			// 
 			// p4903
@@ -1245,7 +1245,7 @@ namespace HMI.Main.Canvases
 			this.p4903.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.513761D, 0D, 0D, 0.513761D, 330.33D, 398.28D);
 			this.p4903.Name = "p4903";
 			this.p4903.SecurityToken = ((uint)(4294967295u));
-			this.p4903.TagName = "9AA3696311BF0C3E.Actuators.Pump3";
+			this.p4903.TagName = "2EDD2709EE346B30.Actuators.Pump3";
 			this.p4903.EndInit();
 			// 
 			// slbNivel
@@ -1254,7 +1254,7 @@ namespace HMI.Main.Canvases
 			this.slbNivel.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.959677D, 0D, 0D, 0.959677D, 160D, 560D);
 			this.slbNivel.Name = "slbNivel";
 			this.slbNivel.SecurityToken = ((uint)(4294967295u));
-			this.slbNivel.TagName = "9AA3696311BF0C3E.Sensors.LevelMeasurementSludgeBuffer";
+			this.slbNivel.TagName = "2EDD2709EE346B30.Sensors.LevelMeasurementSludgeBuffer";
 			this.slbNivel.EndInit();
 			// 
 			// slbVazao
@@ -1263,7 +1263,7 @@ namespace HMI.Main.Canvases
 			this.slbVazao.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.959677D, 0D, 0D, 0.959677D, 160D, 588D);
 			this.slbVazao.Name = "slbVazao";
 			this.slbVazao.SecurityToken = ((uint)(4294967295u));
-			this.slbVazao.TagName = "9AA3696311BF0C3E.Sensors.FlowMeasurementDischargeSludge";
+			this.slbVazao.TagName = "2EDD2709EE346B30.Sensors.FlowMeasurementDischargeSludge";
 			this.slbVazao.EndInit();
 			// 
 			// so901
@@ -1389,7 +1389,7 @@ namespace HMI.Main.Canvases
 			this.repAI1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 0D, 0D);
 			this.repAI1.Name = "repAI1";
 			this.repAI1.SecurityToken = ((uint)(4294967295u));
-			this.repAI1.TagName = "356FB76E49F87763.LevelMeasurementReactor.AnalogInput";
+			this.repAI1.TagName = "428D497DE5BC46AE.LevelMeasurementReactor.AnalogInput";
 			this.repAI1.Visible = false;
 			this.repAI1.EndInit();
 			// 
@@ -1399,7 +1399,7 @@ namespace HMI.Main.Canvases
 			this.repHH1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 0D, 0D);
 			this.repHH1.Name = "repHH1";
 			this.repHH1.SecurityToken = ((uint)(4294967295u));
-			this.repHH1.TagName = "356FB76E49F87763.LevelMeasurementReactor.highHigh";
+			this.repHH1.TagName = "428D497DE5BC46AE.LevelMeasurementReactor.highHigh";
 			this.repHH1.Visible = false;
 			this.repHH1.EndInit();
 			// 
@@ -1409,7 +1409,7 @@ namespace HMI.Main.Canvases
 			this.repH1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 0D, 0D);
 			this.repH1.Name = "repH1";
 			this.repH1.SecurityToken = ((uint)(4294967295u));
-			this.repH1.TagName = "356FB76E49F87763.LevelMeasurementReactor.high";
+			this.repH1.TagName = "428D497DE5BC46AE.LevelMeasurementReactor.high";
 			this.repH1.Visible = false;
 			this.repH1.EndInit();
 			// 
@@ -1419,7 +1419,7 @@ namespace HMI.Main.Canvases
 			this.repL1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 0D, 0D);
 			this.repL1.Name = "repL1";
 			this.repL1.SecurityToken = ((uint)(4294967295u));
-			this.repL1.TagName = "356FB76E49F87763.LevelMeasurementReactor.low";
+			this.repL1.TagName = "428D497DE5BC46AE.LevelMeasurementReactor.low";
 			this.repL1.Visible = false;
 			this.repL1.EndInit();
 			// 
@@ -1429,7 +1429,7 @@ namespace HMI.Main.Canvases
 			this.repLL1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 0D, 0D);
 			this.repLL1.Name = "repLL1";
 			this.repLL1.SecurityToken = ((uint)(4294967295u));
-			this.repLL1.TagName = "356FB76E49F87763.LevelMeasurementReactor.lowLow";
+			this.repLL1.TagName = "428D497DE5BC46AE.LevelMeasurementReactor.lowLow";
 			this.repLL1.Visible = false;
 			this.repLL1.EndInit();
 			// 
@@ -1439,7 +1439,7 @@ namespace HMI.Main.Canvases
 			this.repAI2.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 0D, 0D);
 			this.repAI2.Name = "repAI2";
 			this.repAI2.SecurityToken = ((uint)(4294967295u));
-			this.repAI2.TagName = "864A57C6293E51C2.LevelMeasurementReactor.AnalogInput";
+			this.repAI2.TagName = "15BC11099FA14F71.LevelMeasurementReactor.AnalogInput";
 			this.repAI2.Visible = false;
 			this.repAI2.EndInit();
 			// 
@@ -1449,7 +1449,7 @@ namespace HMI.Main.Canvases
 			this.repHH2.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 0D, 0D);
 			this.repHH2.Name = "repHH2";
 			this.repHH2.SecurityToken = ((uint)(4294967295u));
-			this.repHH2.TagName = "864A57C6293E51C2.LevelMeasurementReactor.highHigh";
+			this.repHH2.TagName = "15BC11099FA14F71.LevelMeasurementReactor.highHigh";
 			this.repHH2.Visible = false;
 			this.repHH2.EndInit();
 			// 
@@ -1459,7 +1459,7 @@ namespace HMI.Main.Canvases
 			this.repH2.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 0D, 0D);
 			this.repH2.Name = "repH2";
 			this.repH2.SecurityToken = ((uint)(4294967295u));
-			this.repH2.TagName = "864A57C6293E51C2.LevelMeasurementReactor.high";
+			this.repH2.TagName = "15BC11099FA14F71.LevelMeasurementReactor.high";
 			this.repH2.Visible = false;
 			this.repH2.EndInit();
 			// 
@@ -1469,7 +1469,7 @@ namespace HMI.Main.Canvases
 			this.repL2.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 0D, 0D);
 			this.repL2.Name = "repL2";
 			this.repL2.SecurityToken = ((uint)(4294967295u));
-			this.repL2.TagName = "864A57C6293E51C2.LevelMeasurementReactor.low";
+			this.repL2.TagName = "15BC11099FA14F71.LevelMeasurementReactor.low";
 			this.repL2.Visible = false;
 			this.repL2.EndInit();
 			// 
@@ -1479,7 +1479,7 @@ namespace HMI.Main.Canvases
 			this.repLL2.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 0D, 0D);
 			this.repLL2.Name = "repLL2";
 			this.repLL2.SecurityToken = ((uint)(4294967295u));
-			this.repLL2.TagName = "864A57C6293E51C2.LevelMeasurementReactor.lowLow";
+			this.repLL2.TagName = "15BC11099FA14F71.LevelMeasurementReactor.lowLow";
 			this.repLL2.Visible = false;
 			this.repLL2.EndInit();
 			// 
@@ -1489,7 +1489,7 @@ namespace HMI.Main.Canvases
 			this.repAIft.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 0D, 0D);
 			this.repAIft.Name = "repAIft";
 			this.repAIft.SecurityToken = ((uint)(4294967295u));
-			this.repAIft.TagName = "DE5E3E2FE4C5E300.Sensors.FeedInfluentFlowPv.AnalogInput";
+			this.repAIft.TagName = "B949570768DD3945.Sensors.FeedInfluentFlowPv.AnalogInput";
 			this.repAIft.Visible = false;
 			this.repAIft.EndInit();
 			// 
@@ -1499,7 +1499,7 @@ namespace HMI.Main.Canvases
 			this.repHHft.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 0D, 0D);
 			this.repHHft.Name = "repHHft";
 			this.repHHft.SecurityToken = ((uint)(4294967295u));
-			this.repHHft.TagName = "DE5E3E2FE4C5E300.Sensors.FeedInfluentFlowPv.highHigh";
+			this.repHHft.TagName = "B949570768DD3945.Sensors.FeedInfluentFlowPv.highHigh";
 			this.repHHft.Visible = false;
 			this.repHHft.EndInit();
 			// 
@@ -1509,7 +1509,7 @@ namespace HMI.Main.Canvases
 			this.repHft.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 0D, 0D);
 			this.repHft.Name = "repHft";
 			this.repHft.SecurityToken = ((uint)(4294967295u));
-			this.repHft.TagName = "DE5E3E2FE4C5E300.Sensors.FeedInfluentFlowPv.high";
+			this.repHft.TagName = "B949570768DD3945.Sensors.FeedInfluentFlowPv.high";
 			this.repHft.Visible = false;
 			this.repHft.EndInit();
 			// 
@@ -1519,7 +1519,7 @@ namespace HMI.Main.Canvases
 			this.repLft.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 0D, 0D);
 			this.repLft.Name = "repLft";
 			this.repLft.SecurityToken = ((uint)(4294967295u));
-			this.repLft.TagName = "DE5E3E2FE4C5E300.Sensors.FeedInfluentFlowPv.low";
+			this.repLft.TagName = "B949570768DD3945.Sensors.FeedInfluentFlowPv.low";
 			this.repLft.Visible = false;
 			this.repLft.EndInit();
 			// 
@@ -1529,7 +1529,7 @@ namespace HMI.Main.Canvases
 			this.repLLft.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 0D, 0D);
 			this.repLLft.Name = "repLLft";
 			this.repLLft.SecurityToken = ((uint)(4294967295u));
-			this.repLLft.TagName = "DE5E3E2FE4C5E300.Sensors.FeedInfluentFlowPv.lowLow";
+			this.repLLft.TagName = "B949570768DD3945.Sensors.FeedInfluentFlowPv.lowLow";
 			this.repLLft.Visible = false;
 			this.repLLft.EndInit();
 			// 

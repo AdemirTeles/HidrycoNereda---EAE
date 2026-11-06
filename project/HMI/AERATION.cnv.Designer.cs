@@ -53,7 +53,7 @@ namespace HMI.Main.Canvases
 			this.HeartBeat.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 8D, 8D);
 			this.HeartBeat.Name = "HeartBeat";
 			this.HeartBeat.SecurityToken = ((uint)(4294967295u));
-			this.HeartBeat.TagName = "32B44D45F962192F";
+			this.HeartBeat.TagName = "1A7AD4234C2BE11C";
 			this.HeartBeat.EndInit();
 			// 
 			// Mode
@@ -62,7 +62,7 @@ namespace HMI.Main.Canvases
 			this.Mode.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 424D, 8D);
 			this.Mode.Name = "Mode";
 			this.Mode.SecurityToken = ((uint)(4294967295u));
-			this.Mode.TagName = "7A79C015B9ADE3EB";
+			this.Mode.TagName = "ECC9B0BB08A85534";
 			this.Mode.EndInit();
 			// 
 			// OpenWebPage
@@ -71,7 +71,7 @@ namespace HMI.Main.Canvases
 			this.OpenWebPage.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 840D, 8D);
 			this.OpenWebPage.Name = "OpenWebPage";
 			this.OpenWebPage.SecurityToken = ((uint)(4294967295u));
-			this.OpenWebPage.TagName = "61745BDDB91DBEF5";
+			this.OpenWebPage.TagName = "61C067078E62D90F";
 			this.OpenWebPage.EndInit();
 			// 
 			// AERATION_1
@@ -80,7 +80,7 @@ namespace HMI.Main.Canvases
 			this.AERATION_1.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.99038461538461553D, 0D, 0D, 1D, 368.00000000000011D, 304D);
 			this.AERATION_1.Name = "AERATION_1";
 			this.AERATION_1.SecurityToken = ((uint)(4294967295u));
-			this.AERATION_1.TagName = "6307B68BAFBA5753";
+			this.AERATION_1.TagName = "35A194BD3A715270";
 			this.AERATION_1.EndInit();
 			// 
 			// pipe1

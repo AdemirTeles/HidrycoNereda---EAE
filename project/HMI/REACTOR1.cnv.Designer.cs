@@ -42,7 +42,7 @@ namespace HMI.Main.Canvases
 			this.HeartBeat.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 8D, 8D);
 			this.HeartBeat.Name = "HeartBeat";
 			this.HeartBeat.SecurityToken = ((uint)(4294967295u));
-			this.HeartBeat.TagName = "32B44D45F962192F";
+			this.HeartBeat.TagName = "1A7AD4234C2BE11C";
 			this.HeartBeat.EndInit();
 			// 
 			// Mode
@@ -51,7 +51,7 @@ namespace HMI.Main.Canvases
 			this.Mode.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 424D, 8D);
 			this.Mode.Name = "Mode";
 			this.Mode.SecurityToken = ((uint)(4294967295u));
-			this.Mode.TagName = "7A79C015B9ADE3EB";
+			this.Mode.TagName = "ECC9B0BB08A85534";
 			this.Mode.EndInit();
 			// 
 			// OpenWebPage
@@ -60,7 +60,7 @@ namespace HMI.Main.Canvases
 			this.OpenWebPage.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 840D, 8D);
 			this.OpenWebPage.Name = "OpenWebPage";
 			this.OpenWebPage.SecurityToken = ((uint)(4294967295u));
-			this.OpenWebPage.TagName = "61745BDDB91DBEF5";
+			this.OpenWebPage.TagName = "61C067078E62D90F";
 			this.OpenWebPage.EndInit();
 			// 
 			// Mode_1
@@ -69,7 +69,7 @@ namespace HMI.Main.Canvases
 			this.Mode_1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 1112D, 8D);
 			this.Mode_1.Name = "Mode_1";
 			this.Mode_1.SecurityToken = ((uint)(4294967295u));
-			this.Mode_1.TagName = "7A79C015B9ADE3EB";
+			this.Mode_1.TagName = "ECC9B0BB08A85534";
 			this.Mode_1.EndInit();
 			// 
 			// sSensors1
@@ -79,7 +79,7 @@ namespace HMI.Main.Canvases
 			this.sSensors1.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.79120474507283622D, 0D, 0D, 0.88387713675213642D, 24.000000000000004D, 320.00000000000006D);
 			this.sSensors1.Name = "sSensors1";
 			this.sSensors1.SecurityToken = ((uint)(4294967295u));
-			this.sSensors1.TagName = "D41247DF3E1D30DC";
+			this.sSensors1.TagName = "0F513B831BAFCB32";
 			this.sSensors1.EndInit();
 			// 
 			// sReactor41
@@ -96,7 +96,7 @@ namespace HMI.Main.Canvases
 			this.sReactor41.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.8669833729216152D, 0D, 0D, 0.8669833729216152D, 496D, 152D);
 			this.sReactor41.Name = "sReactor41";
 			this.sReactor41.SecurityToken = ((uint)(4294967295u));
-			this.sReactor41.TagName = "D41247DF3E1D30DC";
+			this.sReactor41.TagName = "0F513B831BAFCB32";
 			this.sReactor41.EndInit();
 			// 
 			// sPhase21
@@ -105,7 +105,7 @@ namespace HMI.Main.Canvases
 			this.sPhase21.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.87931034482758619D, 0D, 0D, 0.87931034482758619D, 16D, 72D);
 			this.sPhase21.Name = "sPhase21";
 			this.sPhase21.SecurityToken = ((uint)(4294967295u));
-			this.sPhase21.TagName = "D41247DF3E1D30DC";
+			this.sPhase21.TagName = "0F513B831BAFCB32";
 			this.sPhase21.EndInit();
 			// 
 			// sSettingsBtn1
@@ -114,7 +114,7 @@ namespace HMI.Main.Canvases
 			this.sSettingsBtn1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 1112D, 72D);
 			this.sSettingsBtn1.Name = "sSettingsBtn1";
 			this.sSettingsBtn1.SecurityToken = ((uint)(4294967295u));
-			this.sSettingsBtn1.TagName = "D41247DF3E1D30DC";
+			this.sSettingsBtn1.TagName = "0F513B831BAFCB32";
 			this.sSettingsBtn1.EndInit();
 			// 
 			// REACTOR1

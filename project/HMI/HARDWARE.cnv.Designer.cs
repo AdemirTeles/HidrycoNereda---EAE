@@ -128,7 +128,7 @@ namespace HMI.Main.Canvases
 			// 
 			// sepNER
 			// 
-			this.sepNER.Bounds = new NxtControl.Drawing.RectF(((float)(28D)), ((float)(309.8D)), ((float)(412D)), ((float)(1D)));
+			this.sepNER.Bounds = new NxtControl.Drawing.RectF(((float)(28D)), ((float)(309.79998779296875D)), ((float)(412D)), ((float)(1D)));
 			this.sepNER.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(190)), ((byte)(190)), ((byte)(190))));
 			this.sepNER.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
 			this.sepNER.Name = "sepNER";
@@ -232,7 +232,7 @@ namespace HMI.Main.Canvases
 			// 
 			// sepSUB
 			// 
-			this.sepSUB.Bounds = new NxtControl.Drawing.RectF(((float)(475D)), ((float)(309.8D)), ((float)(412D)), ((float)(1D)));
+			this.sepSUB.Bounds = new NxtControl.Drawing.RectF(((float)(475D)), ((float)(309.79998779296875D)), ((float)(412D)), ((float)(1D)));
 			this.sepSUB.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(190)), ((byte)(190)), ((byte)(190))));
 			this.sepSUB.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
 			this.sepSUB.Name = "sepSUB";
@@ -384,7 +384,7 @@ namespace HMI.Main.Canvases
 			// 
 			// sepLODO
 			// 
-			this.sepLODO.Bounds = new NxtControl.Drawing.RectF(((float)(922D)), ((float)(309.8D)), ((float)(412D)), ((float)(1D)));
+			this.sepLODO.Bounds = new NxtControl.Drawing.RectF(((float)(922D)), ((float)(309.79998779296875D)), ((float)(412D)), ((float)(1D)));
 			this.sepLODO.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(190)), ((byte)(190)), ((byte)(190))));
 			this.sepLODO.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
 			this.sepLODO.Name = "sepLODO";
@@ -669,6 +669,8 @@ namespace HMI.Main.Canvases
 			this.srLODO0,
 			this.srLODO1,
 			this.srLODO2});
+			this.Size = new System.Drawing.Size(1366, 698);
+
 		}
 		private NxtControl.GuiFramework.Rectangle fundo;
 		private NxtControl.GuiFramework.Rectangle cardProcesso;

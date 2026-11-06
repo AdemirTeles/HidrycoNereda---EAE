@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="7e63448b-5379-5023-81d2-8a0efed5f0c4" Name="ResetConfSemIlck" Comment="ConfResetReq efetivo: ConfResetIn AND NOT SemReset (alarme de realimentacao nao pede reset na janela de intertravamento)" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Hidryco" Version="1.1" Author="Hidryco" Date="05/11/2026" Remarks="1.1: eventos de saida listados no ECAction (sem isso o runtime nao emite nenhum; o ST so liga/desliga). 1.0: ConfResetOut = ConfResetIn AND NOT SemReset; repassa o REQ (gera CNF sempre) para o REQ_PARA do controle." />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="10F5B93FC2ADBEB4" Name="REQ" Comment="Parametros ou janela mudaram">
+        <With Var="ConfResetIn" />
+        <With Var="SemReset" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="03ADC6A592DA93B4" Name="CNF" Comment="Para o REQ_PARA do controle">
+        <With Var="ConfResetOut" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="FD14A6EA6E0C056F" Name="ConfResetIn" Type="BOOL" Comment="ConfResetReq da IHM" />
+      <VarDeclaration ID="91D728003BFD5ED4" Name="SemReset" Type="BOOL" Comment="Janela de intertravamento" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="59FF6797DCEFC4C9" Name="ConfResetOut" Type="BOOL" Comment="ConfResetReq para o controle" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="8fea278d-c045-54bf-8387-32eace10d18e">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="Calcula" />
+    <ECC>
+      <ECState Name="START" Comment="Estado inicial" x="550" y="430" />
+      <ECState Name="CALCULO" Comment="Calcula; o algoritmo decide quais eventos saem" x="1170" y="730">
+        <ECAction Algorithm="Calcula" />
+        <ECAction Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="CALCULO" Condition="REQ" x="895" y="505" />
+      <ECTransition Source="CALCULO" Destination="START" Condition="1" x="880" y="665" />
+    </ECC>
+    <Algorithm Name="Calcula" Comment="ConfResetReq efetivo: ConfResetIn AND NOT SemReset (alarme de realimentacao nao pede reset na janela de intertravamento)">
+      <ST><![CDATA[
+ConfResetOut := ConfResetIn AND NOT SemReset;
+CNF := TRUE;
+]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

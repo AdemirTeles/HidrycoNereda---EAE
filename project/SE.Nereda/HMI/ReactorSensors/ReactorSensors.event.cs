@@ -15,118 +15,78 @@ using NxtControl.Services;
 namespace SE.Nereda.Symbols.ReactorSensors
 {
 
-  public class REQ_LT_004EventArgs : System.EventArgs
+  public class REQ_PROGNOSYSEventArgs : System.EventArgs
   {
     IHMIAccessorService accessorService;
     int channelId;
     int cookie; 
     int eventIndex;
 
-    public REQ_LT_004EventArgs(int channelId, int cookie, int eventIndex)
+    public REQ_PROGNOSYSEventArgs(int channelId, int cookie, int eventIndex)
     {
       this.accessorService = (IHMIAccessorService)ServiceProvider.GetService(typeof(IHMIAccessorService));
       this.channelId = channelId;
       this.cookie = cookie;
       this.eventIndex = eventIndex;
     }
-    public bool Get_HiHiAlarm_lt004(ref System.Boolean value)
+    public bool Get_PrognosysErro(ref System.Int16 value)
     {
       if (accessorService == null)
         return false;
-      bool var = false;
-      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,0, ref var);
-      if (ret) value = (System.Boolean) var;
+      System.Int64 var = 0;
+      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,0, ref var);
+      if (ret) value = (System.Int16) var;
       return ret;
     }
 
-    public System.Boolean? HiHiAlarm_lt004
+    public System.Int16? PrognosysErro
     { get {
       if (accessorService == null)
         return null;
-      bool var = false;
-      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,0, ref var);
+      System.Int64 var = 0;
+      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,0, ref var);
       if (!ret) return null;
-      return (System.Boolean) var;
+      return (System.Int16) var;
     }  }
 
-    public bool Get_HiAlarm_lt004(ref System.Boolean value)
+    public bool Get_PrognosysAvisos(ref System.Int16 value)
     {
       if (accessorService == null)
         return false;
-      bool var = false;
-      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,1, ref var);
-      if (ret) value = (System.Boolean) var;
+      System.Int64 var = 0;
+      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,1, ref var);
+      if (ret) value = (System.Int16) var;
       return ret;
     }
 
-    public System.Boolean? HiAlarm_lt004
+    public System.Int16? PrognosysAvisos
     { get {
       if (accessorService == null)
         return null;
-      bool var = false;
-      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,1, ref var);
+      System.Int64 var = 0;
+      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,1, ref var);
       if (!ret) return null;
-      return (System.Boolean) var;
+      return (System.Int16) var;
     }  }
 
-    public bool Get_LoAlarm_lt004(ref System.Boolean value)
+    public bool Get_PrognosysErros(ref System.Int16 value)
     {
       if (accessorService == null)
         return false;
-      bool var = false;
-      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,2, ref var);
-      if (ret) value = (System.Boolean) var;
+      System.Int64 var = 0;
+      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,2, ref var);
+      if (ret) value = (System.Int16) var;
       return ret;
     }
 
-    public System.Boolean? LoAlarm_lt004
+    public System.Int16? PrognosysErros
     { get {
       if (accessorService == null)
         return null;
-      bool var = false;
-      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,2, ref var);
+      System.Int64 var = 0;
+      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,2, ref var);
       if (!ret) return null;
-      return (System.Boolean) var;
-    }  }
-
-    public bool Get_LoLoAlarm_lt004(ref System.Boolean value)
-    {
-      if (accessorService == null)
-        return false;
-      bool var = false;
-      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,3, ref var);
-      if (ret) value = (System.Boolean) var;
-      return ret;
-    }
-
-    public System.Boolean? LoLoAlarm_lt004
-    { get {
-      if (accessorService == null)
-        return null;
-      bool var = false;
-      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,3, ref var);
-      if (!ret) return null;
-      return (System.Boolean) var;
-    }  }
-
-    public bool Get_Alarm_Failure(ref System.Boolean value)
-    {
-      if (accessorService == null)
-        return false;
-      bool var = false;
-      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,4, ref var);
-      if (ret) value = (System.Boolean) var;
-      return ret;
-    }
-
-    public System.Boolean? Alarm_Failure
-    { get {
-      if (accessorService == null)
-        return null;
-      bool var = false;
-      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,4, ref var);
-      if (!ret) return null;
-      return (System.Boolean) var;
+      return (System.Int16) var;
     }  }
 
 
@@ -139,11 +99,11 @@ namespace SE.Nereda.Symbols.ReactorSensors
   partial class sDefault
   {
 
-    private event EventHandler<SE.Nereda.Symbols.ReactorSensors.REQ_LT_004EventArgs> REQ_LT_004_Fired;
+    private event EventHandler<SE.Nereda.Symbols.ReactorSensors.REQ_PROGNOSYSEventArgs> REQ_PROGNOSYS_Fired;
 
     protected override void OnEndInit()
     {
-      if (REQ_LT_004_Fired != null)
+      if (REQ_PROGNOSYS_Fired != null)
         AttachEventInput(0);
 
     }
@@ -155,17 +115,17 @@ namespace SE.Nereda.Symbols.ReactorSensors
         default:
           break;
         case 0:
-          if (REQ_LT_004_Fired != null)
+          if (REQ_PROGNOSYS_Fired != null)
           {
             try
             {
-              REQ_LT_004_Fired(this, new SE.Nereda.Symbols.ReactorSensors.REQ_LT_004EventArgs(channelId, cookie, eventIndex));
+              REQ_PROGNOSYS_Fired(this, new SE.Nereda.Symbols.ReactorSensors.REQ_PROGNOSYSEventArgs(channelId, cookie, eventIndex));
             }
             catch (System.Exception e)
             {
               NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
 stack Trace:
-{4}","REQ_LT_004_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+{4}","REQ_PROGNOSYS_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
             }
           }
         break; 

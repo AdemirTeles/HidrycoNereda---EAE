@@ -4,7 +4,7 @@
   <Attribute Name="HMI.Alias" Value="" />
   <Attribute Name="Configuration.FB.IDCounter" Value="31" />
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Schneider Electric" Version="0.1" Author="Hidryco" Date="03/11/2026" Remarks="0.1: Reliability da IHM fixo em 80 (parametro do IThis); REQ do IThis no fim da inicializacao para publicar o valor na partida. 0.0: template" />
+  <VersionInfo Organization="Schneider Electric" Version="0.2" Author="Hidryco" Date="05/11/2026" Remarks="0.2: Reliability real do SC1000 na IHM (RelIhm: 80 ate chegar o primeiro MEASUREMENT IND.; pH e ORP nao tem e ficam em 80). 0.1: Reliability da IHM fixo em 80 (parametro do IThis); REQ do IThis no fim da inicializacao para publicar o valor na partida. 0.0: template" />
   <InterfaceList>
     <EventInputs>
       <Event Name="INIT" Comment="Initializes the symbolic link data destination FB with N (1 &lt;= N &lt;= 16) variables" />
@@ -41,12 +41,12 @@
   <FBNetwork>
     <FB ID="8" Name="IThis" Type="AnalogInput_Status_HMI" x="2740" y="560" Namespace="SE.Nereda">
       <Parameter Name="$D558640F8EBAAF8E" Value="TRUE" />
-      <Parameter Name="$8529AECF7FF4A30F" Value="80" />
     </FB>
     <FB ID="21" UID="19" Name="BitMan" Type="BITMAN_8DFA169087FA704" x="3080" y="2260" Namespace="SE.Nereda">
       <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNTIN:=1;CNTOUT:=4;IN${CNTIN}:WORD;OUT${CNTOUT}:BOOL,BOOL,BOOL,BOOL" />
     </FB>
     <FB ID="74A5515BC11AE3EC" UID="210FC9319082C50A" Name="INT2WORD" Type="INT2WORD" x="2380" y="2320" Namespace="SE.Nereda" />
+    <FB ID="AE47E2E5A14B2E9B" Name="RelIhm" Type="ReliabilityIhm" x="2380" y="1300" Namespace="SE.Nereda" />
     <Input Name="INIT" x="1140" y="1686" Type="Event" />
     <Frame Name="FRAME6" X="540" Y="340" Width="1580" Height="1680">
       <Parameter Name="BackgroundColor" Value="AntiqueWhite" />
@@ -283,6 +283,8 @@
       <Connection Source="$21.INITO" Destination="$8.16664CB9A116E3DB">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
+      <Connection Source="$404867D502801067.B7F22091CD20E50E" Destination="$AE47E2E5A14B2E9B.D8BDB914876ED622" />
+      <Connection Source="$AE47E2E5A14B2E9B.BD5C489160CE7106" Destination="$8.16664CB9A116E3DB" />
     </EventConnections>
     <DataConnections>
       <Connection Source="$404867D502801067.B041611FD4630B12" Destination="$Status">
@@ -469,6 +471,8 @@
       <Connection Source="$404867D502801067.C60745C2D02E38CD" Destination="$8.56630B97A7881441">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
+      <Connection Source="$404867D502801067.7E801A3D14F8993F" Destination="$AE47E2E5A14B2E9B.3DDC80A9FB0ED3E3" />
+      <Connection Source="$AE47E2E5A14B2E9B.F7779C6CB065FBE2" Destination="$8.8529AECF7FF4A30F" />
     </DataConnections>
   </FBNetwork>
 </FBType>

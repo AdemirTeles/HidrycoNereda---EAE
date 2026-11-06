@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="c33a8b9a-b5ff-5a79-8572-7ac6398874d0" Name="PartidaComReset" Comment="Partida com reset antes: na subida do comando liga o reset por TempoReset, espera TempoPausa e so entao liga o comando (Sulzer HST: bit 2 Reset, bit 0 Start)" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Hidryco" Version="1.2" Author="Hidryco" Date="05/11/2026" Remarks="1.2: eventos de saida listados no ECAction (sem isso o runtime nao emite nenhum; o ST so liga/desliga). 1.1: REQ_RESET - na subida do ResetIn (reset do EAE), com o equipamento parado e cfgAtivo, da TempoReset de reset; se houver comando de partida no fim, segue a pausa e a partida. 1.0: sequencia reset -> pausa -> partida (1 s / 1 s). Comando FALSE durante a sequencia aborta (reset e comando em FALSE). cfgAtivo = FALSE: repassa o comando como antes (cada REQ gera CNF_CMD)." />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="378A722B725B1BAA" Name="REQ" Comment="Novo comando da base (CNF_OUT)">
+        <With Var="CmdIn" />
+        <With Var="cfgAtivo" />
+      </Event>
+      <Event ID="2D0F5F510F291DCC" Name="TIMER" Comment="Fim do tempo (E_DELAY.EO)" />
+      <Event ID="0A7898AA46E3126A" Name="REQ_RESET" Comment="Reset do EAE (ResetCmd)">
+        <With Var="ResetIn" />
+        <With Var="cfgAtivo" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="F5FACB257F4BFD8C" Name="CNF_CMD" Comment="Comando para a saida (cmdFwd)">
+        <With Var="CmdOut" />
+      </Event>
+      <Event ID="D2BB73171527A25E" Name="CNF_RESET" Comment="Reset para o equipamento">
+        <With Var="ResetOut" />
+      </Event>
+      <Event ID="CBB34DBFF2088000" Name="START_T" Comment="Inicia o tempo (E_DELAY.START)">
+        <With Var="Tempo" />
+      </Event>
+      <Event ID="D1A8C71C0FAC3194" Name="STOP_T" Comment="Cancela o tempo (E_DELAY.STOP)" />
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="530327D721FAE6E4" Name="CmdIn" Type="BOOL" Comment="Comando da base (OutFwd)" />
+      <VarDeclaration ID="E1F7FFFB6D775146" Name="ResetIn" Type="BOOL" Comment="Reset do EAE (OU de todos os resets do Motor_VS)" />
+      <VarDeclaration ID="0815DBF402220E33" Name="cfgAtivo" Type="BOOL" Comment="TRUE = reset antes de cada partida" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="423203D485DE38C6" Name="CmdOut" Type="BOOL" Comment="Comando para a saida" />
+      <VarDeclaration ID="2AFDF1E189A44206" Name="ResetOut" Type="BOOL" Comment="Reset para o equipamento" />
+      <VarDeclaration ID="53BE48F84EFE475D" Name="Tempo" Type="TIME" Comment="Tempo do E_DELAY" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="095bbce8-54cc-53fd-8bf5-df47c6236d99">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="Calcula" />
+    <InternalVars>
+      <VarDeclaration ID="DBC9AE8863F4A90E" Name="fase" Type="INT" Comment="0 parado ou repassando, 1 reset, 2 pausa antes da partida, 3 reset pedido pelo EAE" />
+      <VarDeclaration ID="C7FB721C737BA567" Name="oldResetIn" Type="BOOL" Comment="ResetIn anterior (borda)" />
+      <VarDeclaration ID="4DD12AAAC249C4A6" Name="TempoReset" Type="TIME" InitialValue="T#1s" Comment="Tempo do reset" />
+      <VarDeclaration ID="7E20705FCEA94FC1" Name="TempoPausa" Type="TIME" InitialValue="T#1s" Comment="Pausa entre o fim do reset e a partida" />
+    </InternalVars>
+    <ECC>
+      <ECState Name="START" Comment="Estado inicial" x="550" y="430" />
+      <ECState Name="CALCULO" Comment="Calcula; o algoritmo decide quais eventos saem" x="1170" y="730">
+        <ECAction Algorithm="Calcula" />
+        <ECAction Output="STOP_T" />
+        <ECAction Output="START_T" />
+        <ECAction Output="CNF_RESET" />
+        <ECAction Output="CNF_CMD" />
+      </ECState>
+      <ECTransition Source="START" Destination="CALCULO" Condition="REQ OR TIMER OR REQ_RESET" x="895" y="505" />
+      <ECTransition Source="CALCULO" Destination="START" Condition="1" x="880" y="665" />
+    </ECC>
+    <Algorithm Name="Calcula" Comment="Sequencia reset -> pausa -> partida">
+      <ST><![CDATA[
+CNF_CMD := FALSE;
+CNF_RESET := FALSE;
+START_T := FALSE;
+STOP_T := FALSE;
+IF REQ THEN
+    IF NOT CmdIn THEN
+        (* parar: aborta a sequencia de partida (o reset pedido pelo EAE, fase 3, termina normalmente) *)
+        IF fase = 1 OR fase = 2 THEN
+            STOP_T := TRUE;
+            fase := 0;
+            IF ResetOut THEN
+                ResetOut := FALSE;
+                CNF_RESET := TRUE;
+            END_IF;
+        END_IF;
+        CmdOut := FALSE;
+        CNF_CMD := TRUE;
+    ELSIF fase = 0 THEN
+        IF cfgAtivo AND NOT CmdOut THEN
+            (* partida: primeiro o reset *)
+            fase := 1;
+            ResetOut := TRUE;
+            CNF_RESET := TRUE;
+            Tempo := TempoReset;
+            START_T := TRUE;
+        ELSE
+            CmdOut := TRUE;
+            CNF_CMD := TRUE;
+        END_IF;
+    END_IF;
+ELSIF REQ_RESET THEN
+    (* reset do EAE: so na subida, parado e sem sequencia em andamento *)
+    IF ResetIn AND NOT oldResetIn AND cfgAtivo AND fase = 0 AND NOT CmdOut THEN
+        fase := 3;
+        ResetOut := TRUE;
+        CNF_RESET := TRUE;
+        Tempo := TempoReset;
+        START_T := TRUE;
+    END_IF;
+    oldResetIn := ResetIn;
+ELSIF TIMER THEN
+    IF fase = 3 THEN
+        ResetOut := FALSE;
+        CNF_RESET := TRUE;
+        IF CmdIn THEN
+            (* chegou comando de partida durante o reset: pausa e parte *)
+            fase := 2;
+            Tempo := TempoPausa;
+            START_T := TRUE;
+        ELSE
+            fase := 0;
+        END_IF;
+    ELSIF fase = 1 THEN
+        ResetOut := FALSE;
+        CNF_RESET := TRUE;
+        fase := 2;
+        Tempo := TempoPausa;
+        START_T := TRUE;
+    ELSIF fase = 2 THEN
+        fase := 0;
+        CmdOut := TRUE;
+        CNF_CMD := TRUE;
+    END_IF;
+END_IF;
+]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

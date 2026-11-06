@@ -65,6 +65,8 @@ namespace SE.Nereda.Symbols.FieldSignals
 			this.SimAtvEta = new System.HMI.Symbols.Base.TextBox<ushort>();
 			this.rectangle9 = new NxtControl.GuiFramework.Rectangle();
 			this.PanelName = new NxtControl.GuiFramework.FreeText();
+			this.txtSulzerFalha = new NxtControl.GuiFramework.FreeText();
+			this.txtSulzerFalha2 = new NxtControl.GuiFramework.FreeText();
 			this.line1 = new NxtControl.GuiFramework.Line();
 			this.line2 = new NxtControl.GuiFramework.Line();
 			this.OverEn_ElectricCircuitFail = new System.HMI.Symbols.Base.SwitchButton();
@@ -80,7 +82,7 @@ namespace SE.Nereda.Symbols.FieldSignals
 			// 
 			// rectangle1
 			// 
-			this.rectangle1.Bounds = new NxtControl.Drawing.RectF(((float)(8D)), ((float)(8D)), ((float)(392D)), ((float)(376D)));
+			this.rectangle1.Bounds = new NxtControl.Drawing.RectF(((float)(8D)), ((float)(8D)), ((float)(392D)), ((float)(412D)));
 			this.rectangle1.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(231)), ((byte)(231)), ((byte)(231))), new NxtControl.Drawing.GradientFill(NxtControl.Drawing.GradientFillOrientation.DiagonalLeftTop));
 			this.rectangle1.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
 			this.rectangle1.Name = "rectangle1";
@@ -483,6 +485,24 @@ namespace SE.Nereda.Symbols.FieldSignals
 			this.PanelName.Name = "PanelName";
 			this.PanelName.Text = "Nome";
 			// 
+			// txtSulzerFalha
+			// 
+			this.txtSulzerFalha.Color = new NxtControl.Drawing.Color(((byte)(192)), ((byte)(0)), ((byte)(0)));
+			this.txtSulzerFalha.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+			this.txtSulzerFalha.Location = new NxtControl.Drawing.PointF(16D, 382D);
+			this.txtSulzerFalha.Name = "txtSulzerFalha";
+			this.txtSulzerFalha.Text = "Falha Sulzer";
+			this.txtSulzerFalha.Visible = false;
+			// 
+			// txtSulzerFalha2
+			// 
+			this.txtSulzerFalha2.Color = new NxtControl.Drawing.Color(((byte)(192)), ((byte)(0)), ((byte)(0)));
+			this.txtSulzerFalha2.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+			this.txtSulzerFalha2.Location = new NxtControl.Drawing.PointF(16D, 398D);
+			this.txtSulzerFalha2.Name = "txtSulzerFalha2";
+			this.txtSulzerFalha2.Text = "";
+			this.txtSulzerFalha2.Visible = false;
+			// 
 			// line1
 			// 
 			this.line1.EndPoint = new NxtControl.Drawing.PointF(392D, 176D);
@@ -690,8 +710,10 @@ namespace SE.Nereda.Symbols.FieldSignals
 			this.OverEn_PowerFb,
 			this.OverEn_AtvEta,
 			this.EnOverride_MDPMS,
-			this.OverrideV_MDPMS});
-			this.SymbolSize = new System.Drawing.Size(424, 392);
+			this.OverrideV_MDPMS,
+			this.txtSulzerFalha,
+			this.txtSulzerFalha2});
+			this.SymbolSize = new System.Drawing.Size(424, 428);
 
 		}
 		private NxtControl.GuiFramework.Rectangle rectangle1;
@@ -733,6 +755,8 @@ namespace SE.Nereda.Symbols.FieldSignals
 		private System.HMI.Symbols.Base.TextBox<ushort> SimAtvEta;
 		private NxtControl.GuiFramework.Rectangle rectangle9;
 		private NxtControl.GuiFramework.FreeText PanelName;
+		private NxtControl.GuiFramework.FreeText txtSulzerFalha;
+		private NxtControl.GuiFramework.FreeText txtSulzerFalha2;
 		private NxtControl.GuiFramework.Line line1;
 		private NxtControl.GuiFramework.Line line2;
 		private System.HMI.Symbols.Base.SwitchButton OverEn_ElectricCircuitFail;

@@ -34,7 +34,7 @@ namespace HMI.Main.Canvases
 			this.EmergencySB.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 64D, 184D);
 			this.EmergencySB.Name = "EmergencySB";
 			this.EmergencySB.SecurityToken = ((uint)(4294967295u));
-			this.EmergencySB.TagName = "9C8DCCD6030E46A0";
+			this.EmergencySB.TagName = "A17D611BA9B31348";
 			this.EmergencySB.EndInit();
 			// 
 			// SB_EMERGENCY_RECIPE

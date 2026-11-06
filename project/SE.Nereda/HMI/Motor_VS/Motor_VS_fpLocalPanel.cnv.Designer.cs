@@ -39,11 +39,11 @@ namespace SE.Nereda.Faceplates.Motor_VS
 			// 
 			// fpLocalPanel
 			// 
-			this.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(408D)), ((float)(400D)));
+			this.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(408D)), ((float)(436D)));
 			this.Brush = new NxtControl.Drawing.Brush("FaceplateBrush");
 			this.Shapes.AddRange(new System.ComponentModel.IComponent[] {
 			this.LocalPanel});
-			this.Size = new System.Drawing.Size(408, 400);
+			this.Size = new System.Drawing.Size(408, 436);
 
 		}
 		private SE.Nereda.Symbols.FieldSignals.sPanel LocalPanel;

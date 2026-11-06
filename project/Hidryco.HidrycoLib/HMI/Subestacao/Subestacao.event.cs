@@ -786,7 +786,7 @@ namespace Hidryco.HidrycoLib.Symbols.Subestacao
       return (System.Boolean) var;
     }  }
 
-    public bool Get_MPL_1Q1(ref System.Boolean value)
+    public bool Get_LOCAL_1Q1(ref System.Boolean value)
     {
       if (accessorService == null)
         return false;
@@ -796,7 +796,7 @@ namespace Hidryco.HidrycoLib.Symbols.Subestacao
       return ret;
     }
 
-    public System.Boolean? MPL_1Q1
+    public System.Boolean? LOCAL_1Q1
     { get {
       if (accessorService == null)
         return null;
@@ -806,7 +806,7 @@ namespace Hidryco.HidrycoLib.Symbols.Subestacao
       return (System.Boolean) var;
     }  }
 
-    public bool Get_MPR_1Q1(ref System.Boolean value)
+    public bool Get_REMOTO_1Q1(ref System.Boolean value)
     {
       if (accessorService == null)
         return false;
@@ -816,7 +816,7 @@ namespace Hidryco.HidrycoLib.Symbols.Subestacao
       return ret;
     }
 
-    public System.Boolean? MPR_1Q1
+    public System.Boolean? REMOTO_1Q1
     { get {
       if (accessorService == null)
         return null;
@@ -826,7 +826,7 @@ namespace Hidryco.HidrycoLib.Symbols.Subestacao
       return (System.Boolean) var;
     }  }
 
-    public bool Get_MPP_1Q1(ref System.Boolean value)
+    public bool Get_PRONTO_1Q1(ref System.Boolean value)
     {
       if (accessorService == null)
         return false;
@@ -836,7 +836,7 @@ namespace Hidryco.HidrycoLib.Symbols.Subestacao
       return ret;
     }
 
-    public System.Boolean? MPP_1Q1
+    public System.Boolean? PRONTO_1Q1
     { get {
       if (accessorService == null)
         return null;
@@ -846,7 +846,7 @@ namespace Hidryco.HidrycoLib.Symbols.Subestacao
       return (System.Boolean) var;
     }  }
 
-    public bool Get_MPC_1Q1(ref System.Boolean value)
+    public bool Get_CARREGADO_1Q1(ref System.Boolean value)
     {
       if (accessorService == null)
         return false;
@@ -856,7 +856,7 @@ namespace Hidryco.HidrycoLib.Symbols.Subestacao
       return ret;
     }
 
-    public System.Boolean? MPC_1Q1
+    public System.Boolean? CARREGADO_1Q1
     { get {
       if (accessorService == null)
         return null;
@@ -866,7 +866,7 @@ namespace Hidryco.HidrycoLib.Symbols.Subestacao
       return (System.Boolean) var;
     }  }
 
-    public bool Get_MPSF_1Q1(ref System.Boolean value)
+    public bool Get_SEM_FALHA_1Q1(ref System.Boolean value)
     {
       if (accessorService == null)
         return false;
@@ -876,7 +876,7 @@ namespace Hidryco.HidrycoLib.Symbols.Subestacao
       return ret;
     }
 
-    public System.Boolean? MPSF_1Q1
+    public System.Boolean? SEM_FALHA_1Q1
     { get {
       if (accessorService == null)
         return null;
@@ -886,7 +886,7 @@ namespace Hidryco.HidrycoLib.Symbols.Subestacao
       return (System.Boolean) var;
     }  }
 
-    public bool Get_MPL_1Q0(ref System.Boolean value)
+    public bool Get_LOCAL_1Q0(ref System.Boolean value)
     {
       if (accessorService == null)
         return false;
@@ -896,7 +896,7 @@ namespace Hidryco.HidrycoLib.Symbols.Subestacao
       return ret;
     }
 
-    public System.Boolean? MPL_1Q0
+    public System.Boolean? LOCAL_1Q0
     { get {
       if (accessorService == null)
         return null;
@@ -906,7 +906,7 @@ namespace Hidryco.HidrycoLib.Symbols.Subestacao
       return (System.Boolean) var;
     }  }
 
-    public bool Get_MPR_1Q0(ref System.Boolean value)
+    public bool Get_REMOTO_1Q0(ref System.Boolean value)
     {
       if (accessorService == null)
         return false;
@@ -916,7 +916,7 @@ namespace Hidryco.HidrycoLib.Symbols.Subestacao
       return ret;
     }
 
-    public System.Boolean? MPR_1Q0
+    public System.Boolean? REMOTO_1Q0
     { get {
       if (accessorService == null)
         return null;
@@ -926,7 +926,7 @@ namespace Hidryco.HidrycoLib.Symbols.Subestacao
       return (System.Boolean) var;
     }  }
 
-    public bool Get_MPP_1Q0(ref System.Boolean value)
+    public bool Get_PRONTO_1Q0(ref System.Boolean value)
     {
       if (accessorService == null)
         return false;
@@ -936,7 +936,7 @@ namespace Hidryco.HidrycoLib.Symbols.Subestacao
       return ret;
     }
 
-    public System.Boolean? MPP_1Q0
+    public System.Boolean? PRONTO_1Q0
     { get {
       if (accessorService == null)
         return null;
@@ -946,7 +946,7 @@ namespace Hidryco.HidrycoLib.Symbols.Subestacao
       return (System.Boolean) var;
     }  }
 
-    public bool Get_MPC_1Q0(ref System.Boolean value)
+    public bool Get_CARREGADO_1Q0(ref System.Boolean value)
     {
       if (accessorService == null)
         return false;
@@ -956,7 +956,7 @@ namespace Hidryco.HidrycoLib.Symbols.Subestacao
       return ret;
     }
 
-    public System.Boolean? MPC_1Q0
+    public System.Boolean? CARREGADO_1Q0
     { get {
       if (accessorService == null)
         return null;
@@ -966,7 +966,7 @@ namespace Hidryco.HidrycoLib.Symbols.Subestacao
       return (System.Boolean) var;
     }  }
 
-    public bool Get_MPSF_1Q0(ref System.Boolean value)
+    public bool Get_SEM_FALHA_1Q0(ref System.Boolean value)
     {
       if (accessorService == null)
         return false;
@@ -976,7 +976,7 @@ namespace Hidryco.HidrycoLib.Symbols.Subestacao
       return ret;
     }
 
-    public System.Boolean? MPSF_1Q0
+    public System.Boolean? SEM_FALHA_1Q0
     { get {
       if (accessorService == null)
         return null;
@@ -986,7 +986,7 @@ namespace Hidryco.HidrycoLib.Symbols.Subestacao
       return (System.Boolean) var;
     }  }
 
-    public bool Get_MPL_1Q2(ref System.Boolean value)
+    public bool Get_LOCAL_1Q2(ref System.Boolean value)
     {
       if (accessorService == null)
         return false;
@@ -996,7 +996,7 @@ namespace Hidryco.HidrycoLib.Symbols.Subestacao
       return ret;
     }
 
-    public System.Boolean? MPL_1Q2
+    public System.Boolean? LOCAL_1Q2
     { get {
       if (accessorService == null)
         return null;
@@ -1006,7 +1006,7 @@ namespace Hidryco.HidrycoLib.Symbols.Subestacao
       return (System.Boolean) var;
     }  }
 
-    public bool Get_MPR_1Q2(ref System.Boolean value)
+    public bool Get_REMOTO_1Q2(ref System.Boolean value)
     {
       if (accessorService == null)
         return false;
@@ -1016,7 +1016,7 @@ namespace Hidryco.HidrycoLib.Symbols.Subestacao
       return ret;
     }
 
-    public System.Boolean? MPR_1Q2
+    public System.Boolean? REMOTO_1Q2
     { get {
       if (accessorService == null)
         return null;
@@ -1026,7 +1026,7 @@ namespace Hidryco.HidrycoLib.Symbols.Subestacao
       return (System.Boolean) var;
     }  }
 
-    public bool Get_MPP_1Q2(ref System.Boolean value)
+    public bool Get_PRONTO_1Q2(ref System.Boolean value)
     {
       if (accessorService == null)
         return false;
@@ -1036,7 +1036,7 @@ namespace Hidryco.HidrycoLib.Symbols.Subestacao
       return ret;
     }
 
-    public System.Boolean? MPP_1Q2
+    public System.Boolean? PRONTO_1Q2
     { get {
       if (accessorService == null)
         return null;
@@ -1046,7 +1046,7 @@ namespace Hidryco.HidrycoLib.Symbols.Subestacao
       return (System.Boolean) var;
     }  }
 
-    public bool Get_MPC_1Q2(ref System.Boolean value)
+    public bool Get_CARREGADO_1Q2(ref System.Boolean value)
     {
       if (accessorService == null)
         return false;
@@ -1056,7 +1056,7 @@ namespace Hidryco.HidrycoLib.Symbols.Subestacao
       return ret;
     }
 
-    public System.Boolean? MPC_1Q2
+    public System.Boolean? CARREGADO_1Q2
     { get {
       if (accessorService == null)
         return null;
@@ -1066,7 +1066,7 @@ namespace Hidryco.HidrycoLib.Symbols.Subestacao
       return (System.Boolean) var;
     }  }
 
-    public bool Get_MPSF_1Q2(ref System.Boolean value)
+    public bool Get_SEM_FALHA_1Q2(ref System.Boolean value)
     {
       if (accessorService == null)
         return false;
@@ -1076,7 +1076,7 @@ namespace Hidryco.HidrycoLib.Symbols.Subestacao
       return ret;
     }
 
-    public System.Boolean? MPSF_1Q2
+    public System.Boolean? SEM_FALHA_1Q2
     { get {
       if (accessorService == null)
         return null;
@@ -1806,7 +1806,7 @@ namespace Hidryco.HidrycoLib.Symbols.Subestacao
       return (System.Boolean) var;
     }  }
 
-    public bool Get_CMD_ABRIR1Q1(ref System.Boolean value)
+    public bool Get_PULSO_ABRIR_1Q1(ref System.Boolean value)
     {
       if (accessorService == null)
         return false;
@@ -1816,7 +1816,7 @@ namespace Hidryco.HidrycoLib.Symbols.Subestacao
       return ret;
     }
 
-    public System.Boolean? CMD_ABRIR1Q1
+    public System.Boolean? PULSO_ABRIR_1Q1
     { get {
       if (accessorService == null)
         return null;
@@ -1826,7 +1826,7 @@ namespace Hidryco.HidrycoLib.Symbols.Subestacao
       return (System.Boolean) var;
     }  }
 
-    public bool Get_CMD_FECHAR1Q1(ref System.Boolean value)
+    public bool Get_PULSO_FECHAR_1Q1(ref System.Boolean value)
     {
       if (accessorService == null)
         return false;
@@ -1836,7 +1836,7 @@ namespace Hidryco.HidrycoLib.Symbols.Subestacao
       return ret;
     }
 
-    public System.Boolean? CMD_FECHAR1Q1
+    public System.Boolean? PULSO_FECHAR_1Q1
     { get {
       if (accessorService == null)
         return null;
@@ -1846,7 +1846,7 @@ namespace Hidryco.HidrycoLib.Symbols.Subestacao
       return (System.Boolean) var;
     }  }
 
-    public bool Get_CMD_ABRIR1Q0(ref System.Boolean value)
+    public bool Get_PULSO_ABRIR_1Q0(ref System.Boolean value)
     {
       if (accessorService == null)
         return false;
@@ -1856,7 +1856,7 @@ namespace Hidryco.HidrycoLib.Symbols.Subestacao
       return ret;
     }
 
-    public System.Boolean? CMD_ABRIR1Q0
+    public System.Boolean? PULSO_ABRIR_1Q0
     { get {
       if (accessorService == null)
         return null;
@@ -1866,7 +1866,7 @@ namespace Hidryco.HidrycoLib.Symbols.Subestacao
       return (System.Boolean) var;
     }  }
 
-    public bool Get_CMD_FECHAR1Q0(ref System.Boolean value)
+    public bool Get_PULSO_FECHAR_1Q0(ref System.Boolean value)
     {
       if (accessorService == null)
         return false;
@@ -1876,7 +1876,7 @@ namespace Hidryco.HidrycoLib.Symbols.Subestacao
       return ret;
     }
 
-    public System.Boolean? CMD_FECHAR1Q0
+    public System.Boolean? PULSO_FECHAR_1Q0
     { get {
       if (accessorService == null)
         return null;
@@ -1886,7 +1886,7 @@ namespace Hidryco.HidrycoLib.Symbols.Subestacao
       return (System.Boolean) var;
     }  }
 
-    public bool Get_CMD_ABRIR1Q2(ref System.Boolean value)
+    public bool Get_PULSO_ABRIR_1Q2(ref System.Boolean value)
     {
       if (accessorService == null)
         return false;
@@ -1896,7 +1896,7 @@ namespace Hidryco.HidrycoLib.Symbols.Subestacao
       return ret;
     }
 
-    public System.Boolean? CMD_ABRIR1Q2
+    public System.Boolean? PULSO_ABRIR_1Q2
     { get {
       if (accessorService == null)
         return null;
@@ -1906,7 +1906,7 @@ namespace Hidryco.HidrycoLib.Symbols.Subestacao
       return (System.Boolean) var;
     }  }
 
-    public bool Get_CMD_FECHAR1Q2(ref System.Boolean value)
+    public bool Get_PULSO_FECHAR_1Q2(ref System.Boolean value)
     {
       if (accessorService == null)
         return false;
@@ -1916,7 +1916,7 @@ namespace Hidryco.HidrycoLib.Symbols.Subestacao
       return ret;
     }
 
-    public System.Boolean? CMD_FECHAR1Q2
+    public System.Boolean? PULSO_FECHAR_1Q2
     { get {
       if (accessorService == null)
         return null;
@@ -2427,6 +2427,126 @@ namespace Hidryco.HidrycoLib.Symbols.Subestacao
     }  }
 
 
+
+    public bool Get_ABERTO_1Q0(ref System.Boolean value)
+    {
+      if (accessorService == null)
+        return false;
+      bool var = false;
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,119, ref var);
+      if (ret) value = (System.Boolean) var;
+      return ret;
+    }
+
+    public System.Boolean? ABERTO_1Q0
+    { get {
+      if (accessorService == null)
+        return null;
+      bool var = false;
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,119, ref var);
+      if (!ret) return null;
+      return (System.Boolean) var;
+    }  }
+
+    public bool Get_FECHADO_1Q0(ref System.Boolean value)
+    {
+      if (accessorService == null)
+        return false;
+      bool var = false;
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,120, ref var);
+      if (ret) value = (System.Boolean) var;
+      return ret;
+    }
+
+    public System.Boolean? FECHADO_1Q0
+    { get {
+      if (accessorService == null)
+        return null;
+      bool var = false;
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,120, ref var);
+      if (!ret) return null;
+      return (System.Boolean) var;
+    }  }
+
+    public bool Get_ABERTO_1Q1(ref System.Boolean value)
+    {
+      if (accessorService == null)
+        return false;
+      bool var = false;
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,121, ref var);
+      if (ret) value = (System.Boolean) var;
+      return ret;
+    }
+
+    public System.Boolean? ABERTO_1Q1
+    { get {
+      if (accessorService == null)
+        return null;
+      bool var = false;
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,121, ref var);
+      if (!ret) return null;
+      return (System.Boolean) var;
+    }  }
+
+    public bool Get_FECHADO_1Q1(ref System.Boolean value)
+    {
+      if (accessorService == null)
+        return false;
+      bool var = false;
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,122, ref var);
+      if (ret) value = (System.Boolean) var;
+      return ret;
+    }
+
+    public System.Boolean? FECHADO_1Q1
+    { get {
+      if (accessorService == null)
+        return null;
+      bool var = false;
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,122, ref var);
+      if (!ret) return null;
+      return (System.Boolean) var;
+    }  }
+
+    public bool Get_ABERTO_1Q2(ref System.Boolean value)
+    {
+      if (accessorService == null)
+        return false;
+      bool var = false;
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,123, ref var);
+      if (ret) value = (System.Boolean) var;
+      return ret;
+    }
+
+    public System.Boolean? ABERTO_1Q2
+    { get {
+      if (accessorService == null)
+        return null;
+      bool var = false;
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,123, ref var);
+      if (!ret) return null;
+      return (System.Boolean) var;
+    }  }
+
+    public bool Get_FECHADO_1Q2(ref System.Boolean value)
+    {
+      if (accessorService == null)
+        return false;
+      bool var = false;
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,124, ref var);
+      if (ret) value = (System.Boolean) var;
+      return ret;
+    }
+
+    public System.Boolean? FECHADO_1Q2
+    { get {
+      if (accessorService == null)
+        return null;
+      bool var = false;
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,124, ref var);
+      if (!ret) return null;
+      return (System.Boolean) var;
+    }  }
   }
 
 }
@@ -2667,6 +2787,84 @@ namespace Hidryco.HidrycoLib.Symbols.Subestacao
     }
 
   }
+  public class E_ABRIR_1Q0EventArgs : System.EventArgs
+  {
+    public E_ABRIR_1Q0EventArgs()
+    {
+    }
+    private System.Boolean? ABRIR_1Q0_field = null;
+    public System.Boolean? ABRIR_1Q0
+    {
+       get { return ABRIR_1Q0_field; }
+       set { ABRIR_1Q0_field = value; }
+    }
+
+  }
+  public class E_FECHAR_1Q0EventArgs : System.EventArgs
+  {
+    public E_FECHAR_1Q0EventArgs()
+    {
+    }
+    private System.Boolean? FECHAR_1Q0_field = null;
+    public System.Boolean? FECHAR_1Q0
+    {
+       get { return FECHAR_1Q0_field; }
+       set { FECHAR_1Q0_field = value; }
+    }
+
+  }
+  public class E_ABRIR_1Q1EventArgs : System.EventArgs
+  {
+    public E_ABRIR_1Q1EventArgs()
+    {
+    }
+    private System.Boolean? ABRIR_1Q1_field = null;
+    public System.Boolean? ABRIR_1Q1
+    {
+       get { return ABRIR_1Q1_field; }
+       set { ABRIR_1Q1_field = value; }
+    }
+
+  }
+  public class E_FECHAR_1Q1EventArgs : System.EventArgs
+  {
+    public E_FECHAR_1Q1EventArgs()
+    {
+    }
+    private System.Boolean? FECHAR_1Q1_field = null;
+    public System.Boolean? FECHAR_1Q1
+    {
+       get { return FECHAR_1Q1_field; }
+       set { FECHAR_1Q1_field = value; }
+    }
+
+  }
+  public class E_ABRIR_1Q2EventArgs : System.EventArgs
+  {
+    public E_ABRIR_1Q2EventArgs()
+    {
+    }
+    private System.Boolean? ABRIR_1Q2_field = null;
+    public System.Boolean? ABRIR_1Q2
+    {
+       get { return ABRIR_1Q2_field; }
+       set { ABRIR_1Q2_field = value; }
+    }
+
+  }
+  public class E_FECHAR_1Q2EventArgs : System.EventArgs
+  {
+    public E_FECHAR_1Q2EventArgs()
+    {
+    }
+    private System.Boolean? FECHAR_1Q2_field = null;
+    public System.Boolean? FECHAR_1Q2
+    {
+       get { return FECHAR_1Q2_field; }
+       set { FECHAR_1Q2_field = value; }
+    }
+
+  }
 
 }
 
@@ -2838,6 +3036,102 @@ stack Trace:
       object[] _values_ = new object[1];
       if (!ignore_CMD_DISJUNTOR) _values_[0] = CMD_DISJUNTOR;
       return ((IHMIAccessorOutput)this).FireEvent(2, _values_);
+    }
+    public bool FireEvent_E_ABRIR_1Q0(System.Boolean ABRIR_1Q0)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(3, new object[] {ABRIR_1Q0});
+    }
+    public bool FireEvent_E_ABRIR_1Q0(Hidryco.HidrycoLib.Symbols.Subestacao.E_ABRIR_1Q0EventArgs ea)
+    {
+      object[] _values_ = new object[1];
+      if (ea.ABRIR_1Q0.HasValue) _values_[0] = ea.ABRIR_1Q0.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(3, _values_);
+    }
+    public bool FireEvent_E_ABRIR_1Q0(System.Boolean ABRIR_1Q0, bool ignore_ABRIR_1Q0)
+    {
+      object[] _values_ = new object[1];
+      if (!ignore_ABRIR_1Q0) _values_[0] = ABRIR_1Q0;
+      return ((IHMIAccessorOutput)this).FireEvent(3, _values_);
+    }
+    public bool FireEvent_E_FECHAR_1Q0(System.Boolean FECHAR_1Q0)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(4, new object[] {FECHAR_1Q0});
+    }
+    public bool FireEvent_E_FECHAR_1Q0(Hidryco.HidrycoLib.Symbols.Subestacao.E_FECHAR_1Q0EventArgs ea)
+    {
+      object[] _values_ = new object[1];
+      if (ea.FECHAR_1Q0.HasValue) _values_[0] = ea.FECHAR_1Q0.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(4, _values_);
+    }
+    public bool FireEvent_E_FECHAR_1Q0(System.Boolean FECHAR_1Q0, bool ignore_FECHAR_1Q0)
+    {
+      object[] _values_ = new object[1];
+      if (!ignore_FECHAR_1Q0) _values_[0] = FECHAR_1Q0;
+      return ((IHMIAccessorOutput)this).FireEvent(4, _values_);
+    }
+    public bool FireEvent_E_ABRIR_1Q1(System.Boolean ABRIR_1Q1)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(5, new object[] {ABRIR_1Q1});
+    }
+    public bool FireEvent_E_ABRIR_1Q1(Hidryco.HidrycoLib.Symbols.Subestacao.E_ABRIR_1Q1EventArgs ea)
+    {
+      object[] _values_ = new object[1];
+      if (ea.ABRIR_1Q1.HasValue) _values_[0] = ea.ABRIR_1Q1.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(5, _values_);
+    }
+    public bool FireEvent_E_ABRIR_1Q1(System.Boolean ABRIR_1Q1, bool ignore_ABRIR_1Q1)
+    {
+      object[] _values_ = new object[1];
+      if (!ignore_ABRIR_1Q1) _values_[0] = ABRIR_1Q1;
+      return ((IHMIAccessorOutput)this).FireEvent(5, _values_);
+    }
+    public bool FireEvent_E_FECHAR_1Q1(System.Boolean FECHAR_1Q1)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(6, new object[] {FECHAR_1Q1});
+    }
+    public bool FireEvent_E_FECHAR_1Q1(Hidryco.HidrycoLib.Symbols.Subestacao.E_FECHAR_1Q1EventArgs ea)
+    {
+      object[] _values_ = new object[1];
+      if (ea.FECHAR_1Q1.HasValue) _values_[0] = ea.FECHAR_1Q1.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(6, _values_);
+    }
+    public bool FireEvent_E_FECHAR_1Q1(System.Boolean FECHAR_1Q1, bool ignore_FECHAR_1Q1)
+    {
+      object[] _values_ = new object[1];
+      if (!ignore_FECHAR_1Q1) _values_[0] = FECHAR_1Q1;
+      return ((IHMIAccessorOutput)this).FireEvent(6, _values_);
+    }
+    public bool FireEvent_E_ABRIR_1Q2(System.Boolean ABRIR_1Q2)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(7, new object[] {ABRIR_1Q2});
+    }
+    public bool FireEvent_E_ABRIR_1Q2(Hidryco.HidrycoLib.Symbols.Subestacao.E_ABRIR_1Q2EventArgs ea)
+    {
+      object[] _values_ = new object[1];
+      if (ea.ABRIR_1Q2.HasValue) _values_[0] = ea.ABRIR_1Q2.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(7, _values_);
+    }
+    public bool FireEvent_E_ABRIR_1Q2(System.Boolean ABRIR_1Q2, bool ignore_ABRIR_1Q2)
+    {
+      object[] _values_ = new object[1];
+      if (!ignore_ABRIR_1Q2) _values_[0] = ABRIR_1Q2;
+      return ((IHMIAccessorOutput)this).FireEvent(7, _values_);
+    }
+    public bool FireEvent_E_FECHAR_1Q2(System.Boolean FECHAR_1Q2)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(8, new object[] {FECHAR_1Q2});
+    }
+    public bool FireEvent_E_FECHAR_1Q2(Hidryco.HidrycoLib.Symbols.Subestacao.E_FECHAR_1Q2EventArgs ea)
+    {
+      object[] _values_ = new object[1];
+      if (ea.FECHAR_1Q2.HasValue) _values_[0] = ea.FECHAR_1Q2.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(8, _values_);
+    }
+    public bool FireEvent_E_FECHAR_1Q2(System.Boolean FECHAR_1Q2, bool ignore_FECHAR_1Q2)
+    {
+      object[] _values_ = new object[1];
+      if (!ignore_FECHAR_1Q2) _values_[0] = FECHAR_1Q2;
+      return ((IHMIAccessorOutput)this).FireEvent(8, _values_);
     }
 
   }
@@ -3012,6 +3306,102 @@ stack Trace:
       if (!ignore_CMD_DISJUNTOR) _values_[0] = CMD_DISJUNTOR;
       return ((IHMIAccessorOutput)this).FireEvent(2, _values_);
     }
+    public bool FireEvent_E_ABRIR_1Q0(System.Boolean ABRIR_1Q0)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(3, new object[] {ABRIR_1Q0});
+    }
+    public bool FireEvent_E_ABRIR_1Q0(Hidryco.HidrycoLib.Symbols.Subestacao.E_ABRIR_1Q0EventArgs ea)
+    {
+      object[] _values_ = new object[1];
+      if (ea.ABRIR_1Q0.HasValue) _values_[0] = ea.ABRIR_1Q0.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(3, _values_);
+    }
+    public bool FireEvent_E_ABRIR_1Q0(System.Boolean ABRIR_1Q0, bool ignore_ABRIR_1Q0)
+    {
+      object[] _values_ = new object[1];
+      if (!ignore_ABRIR_1Q0) _values_[0] = ABRIR_1Q0;
+      return ((IHMIAccessorOutput)this).FireEvent(3, _values_);
+    }
+    public bool FireEvent_E_FECHAR_1Q0(System.Boolean FECHAR_1Q0)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(4, new object[] {FECHAR_1Q0});
+    }
+    public bool FireEvent_E_FECHAR_1Q0(Hidryco.HidrycoLib.Symbols.Subestacao.E_FECHAR_1Q0EventArgs ea)
+    {
+      object[] _values_ = new object[1];
+      if (ea.FECHAR_1Q0.HasValue) _values_[0] = ea.FECHAR_1Q0.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(4, _values_);
+    }
+    public bool FireEvent_E_FECHAR_1Q0(System.Boolean FECHAR_1Q0, bool ignore_FECHAR_1Q0)
+    {
+      object[] _values_ = new object[1];
+      if (!ignore_FECHAR_1Q0) _values_[0] = FECHAR_1Q0;
+      return ((IHMIAccessorOutput)this).FireEvent(4, _values_);
+    }
+    public bool FireEvent_E_ABRIR_1Q1(System.Boolean ABRIR_1Q1)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(5, new object[] {ABRIR_1Q1});
+    }
+    public bool FireEvent_E_ABRIR_1Q1(Hidryco.HidrycoLib.Symbols.Subestacao.E_ABRIR_1Q1EventArgs ea)
+    {
+      object[] _values_ = new object[1];
+      if (ea.ABRIR_1Q1.HasValue) _values_[0] = ea.ABRIR_1Q1.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(5, _values_);
+    }
+    public bool FireEvent_E_ABRIR_1Q1(System.Boolean ABRIR_1Q1, bool ignore_ABRIR_1Q1)
+    {
+      object[] _values_ = new object[1];
+      if (!ignore_ABRIR_1Q1) _values_[0] = ABRIR_1Q1;
+      return ((IHMIAccessorOutput)this).FireEvent(5, _values_);
+    }
+    public bool FireEvent_E_FECHAR_1Q1(System.Boolean FECHAR_1Q1)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(6, new object[] {FECHAR_1Q1});
+    }
+    public bool FireEvent_E_FECHAR_1Q1(Hidryco.HidrycoLib.Symbols.Subestacao.E_FECHAR_1Q1EventArgs ea)
+    {
+      object[] _values_ = new object[1];
+      if (ea.FECHAR_1Q1.HasValue) _values_[0] = ea.FECHAR_1Q1.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(6, _values_);
+    }
+    public bool FireEvent_E_FECHAR_1Q1(System.Boolean FECHAR_1Q1, bool ignore_FECHAR_1Q1)
+    {
+      object[] _values_ = new object[1];
+      if (!ignore_FECHAR_1Q1) _values_[0] = FECHAR_1Q1;
+      return ((IHMIAccessorOutput)this).FireEvent(6, _values_);
+    }
+    public bool FireEvent_E_ABRIR_1Q2(System.Boolean ABRIR_1Q2)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(7, new object[] {ABRIR_1Q2});
+    }
+    public bool FireEvent_E_ABRIR_1Q2(Hidryco.HidrycoLib.Symbols.Subestacao.E_ABRIR_1Q2EventArgs ea)
+    {
+      object[] _values_ = new object[1];
+      if (ea.ABRIR_1Q2.HasValue) _values_[0] = ea.ABRIR_1Q2.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(7, _values_);
+    }
+    public bool FireEvent_E_ABRIR_1Q2(System.Boolean ABRIR_1Q2, bool ignore_ABRIR_1Q2)
+    {
+      object[] _values_ = new object[1];
+      if (!ignore_ABRIR_1Q2) _values_[0] = ABRIR_1Q2;
+      return ((IHMIAccessorOutput)this).FireEvent(7, _values_);
+    }
+    public bool FireEvent_E_FECHAR_1Q2(System.Boolean FECHAR_1Q2)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(8, new object[] {FECHAR_1Q2});
+    }
+    public bool FireEvent_E_FECHAR_1Q2(Hidryco.HidrycoLib.Symbols.Subestacao.E_FECHAR_1Q2EventArgs ea)
+    {
+      object[] _values_ = new object[1];
+      if (ea.FECHAR_1Q2.HasValue) _values_[0] = ea.FECHAR_1Q2.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(8, _values_);
+    }
+    public bool FireEvent_E_FECHAR_1Q2(System.Boolean FECHAR_1Q2, bool ignore_FECHAR_1Q2)
+    {
+      object[] _values_ = new object[1];
+      if (!ignore_FECHAR_1Q2) _values_[0] = FECHAR_1Q2;
+      return ((IHMIAccessorOutput)this).FireEvent(8, _values_);
+    }
 
   }
 }
@@ -3184,6 +3574,102 @@ stack Trace:
       object[] _values_ = new object[1];
       if (!ignore_CMD_DISJUNTOR) _values_[0] = CMD_DISJUNTOR;
       return ((IHMIAccessorOutput)this).FireEvent(2, _values_);
+    }
+    public bool FireEvent_E_ABRIR_1Q0(System.Boolean ABRIR_1Q0)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(3, new object[] {ABRIR_1Q0});
+    }
+    public bool FireEvent_E_ABRIR_1Q0(Hidryco.HidrycoLib.Symbols.Subestacao.E_ABRIR_1Q0EventArgs ea)
+    {
+      object[] _values_ = new object[1];
+      if (ea.ABRIR_1Q0.HasValue) _values_[0] = ea.ABRIR_1Q0.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(3, _values_);
+    }
+    public bool FireEvent_E_ABRIR_1Q0(System.Boolean ABRIR_1Q0, bool ignore_ABRIR_1Q0)
+    {
+      object[] _values_ = new object[1];
+      if (!ignore_ABRIR_1Q0) _values_[0] = ABRIR_1Q0;
+      return ((IHMIAccessorOutput)this).FireEvent(3, _values_);
+    }
+    public bool FireEvent_E_FECHAR_1Q0(System.Boolean FECHAR_1Q0)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(4, new object[] {FECHAR_1Q0});
+    }
+    public bool FireEvent_E_FECHAR_1Q0(Hidryco.HidrycoLib.Symbols.Subestacao.E_FECHAR_1Q0EventArgs ea)
+    {
+      object[] _values_ = new object[1];
+      if (ea.FECHAR_1Q0.HasValue) _values_[0] = ea.FECHAR_1Q0.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(4, _values_);
+    }
+    public bool FireEvent_E_FECHAR_1Q0(System.Boolean FECHAR_1Q0, bool ignore_FECHAR_1Q0)
+    {
+      object[] _values_ = new object[1];
+      if (!ignore_FECHAR_1Q0) _values_[0] = FECHAR_1Q0;
+      return ((IHMIAccessorOutput)this).FireEvent(4, _values_);
+    }
+    public bool FireEvent_E_ABRIR_1Q1(System.Boolean ABRIR_1Q1)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(5, new object[] {ABRIR_1Q1});
+    }
+    public bool FireEvent_E_ABRIR_1Q1(Hidryco.HidrycoLib.Symbols.Subestacao.E_ABRIR_1Q1EventArgs ea)
+    {
+      object[] _values_ = new object[1];
+      if (ea.ABRIR_1Q1.HasValue) _values_[0] = ea.ABRIR_1Q1.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(5, _values_);
+    }
+    public bool FireEvent_E_ABRIR_1Q1(System.Boolean ABRIR_1Q1, bool ignore_ABRIR_1Q1)
+    {
+      object[] _values_ = new object[1];
+      if (!ignore_ABRIR_1Q1) _values_[0] = ABRIR_1Q1;
+      return ((IHMIAccessorOutput)this).FireEvent(5, _values_);
+    }
+    public bool FireEvent_E_FECHAR_1Q1(System.Boolean FECHAR_1Q1)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(6, new object[] {FECHAR_1Q1});
+    }
+    public bool FireEvent_E_FECHAR_1Q1(Hidryco.HidrycoLib.Symbols.Subestacao.E_FECHAR_1Q1EventArgs ea)
+    {
+      object[] _values_ = new object[1];
+      if (ea.FECHAR_1Q1.HasValue) _values_[0] = ea.FECHAR_1Q1.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(6, _values_);
+    }
+    public bool FireEvent_E_FECHAR_1Q1(System.Boolean FECHAR_1Q1, bool ignore_FECHAR_1Q1)
+    {
+      object[] _values_ = new object[1];
+      if (!ignore_FECHAR_1Q1) _values_[0] = FECHAR_1Q1;
+      return ((IHMIAccessorOutput)this).FireEvent(6, _values_);
+    }
+    public bool FireEvent_E_ABRIR_1Q2(System.Boolean ABRIR_1Q2)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(7, new object[] {ABRIR_1Q2});
+    }
+    public bool FireEvent_E_ABRIR_1Q2(Hidryco.HidrycoLib.Symbols.Subestacao.E_ABRIR_1Q2EventArgs ea)
+    {
+      object[] _values_ = new object[1];
+      if (ea.ABRIR_1Q2.HasValue) _values_[0] = ea.ABRIR_1Q2.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(7, _values_);
+    }
+    public bool FireEvent_E_ABRIR_1Q2(System.Boolean ABRIR_1Q2, bool ignore_ABRIR_1Q2)
+    {
+      object[] _values_ = new object[1];
+      if (!ignore_ABRIR_1Q2) _values_[0] = ABRIR_1Q2;
+      return ((IHMIAccessorOutput)this).FireEvent(7, _values_);
+    }
+    public bool FireEvent_E_FECHAR_1Q2(System.Boolean FECHAR_1Q2)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(8, new object[] {FECHAR_1Q2});
+    }
+    public bool FireEvent_E_FECHAR_1Q2(Hidryco.HidrycoLib.Symbols.Subestacao.E_FECHAR_1Q2EventArgs ea)
+    {
+      object[] _values_ = new object[1];
+      if (ea.FECHAR_1Q2.HasValue) _values_[0] = ea.FECHAR_1Q2.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(8, _values_);
+    }
+    public bool FireEvent_E_FECHAR_1Q2(System.Boolean FECHAR_1Q2, bool ignore_FECHAR_1Q2)
+    {
+      object[] _values_ = new object[1];
+      if (!ignore_FECHAR_1Q2) _values_[0] = FECHAR_1Q2;
+      return ((IHMIAccessorOutput)this).FireEvent(8, _values_);
     }
 
   }

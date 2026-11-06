@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="985cf039-0eab-5f95-8982-902da1ecefc8" Name="JanelaIntertravamento" Comment="Janela de intertravamento: TRUE com o intertravamento ativo e ate TempoDepois apos ele sair" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Hidryco" Version="1.1" Author="Hidryco" Date="05/11/2026" Remarks="1.1: eventos de saida listados no ECAction (sem isso o runtime nao emite nenhum; o ST so liga/desliga). 1.0: Janela = intertravamento ativo OU contando TempoDepois (10 s) depois que ele sai. Usado no Motor_VS para o intertravamento nao deixar o equipamento pedindo reset." />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="083E0B64AC84EF71" Name="REQ" Comment="Intertravamento mudou">
+        <With Var="IlckCond" />
+      </Event>
+      <Event ID="F9A0B1C647677E53" Name="TIMER" Comment="Fim do tempo (E_DELAY.EO)" />
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="E850F2E42429AD5D" Name="CNF" Comment="Janela mudou">
+        <With Var="Janela" />
+      </Event>
+      <Event ID="8042BD32460BA625" Name="START_T" Comment="Inicia o tempo (E_DELAY.START)">
+        <With Var="Tempo" />
+      </Event>
+      <Event ID="EDCD0BD1ACF3506C" Name="STOP_T" Comment="Cancela o tempo (E_DELAY.STOP)" />
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="0EC67C971536E056" Name="IlckCond" Type="BOOL" Comment="Intertravamento ativo" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="9DAFAB11B5DDD8F4" Name="Janela" Type="BOOL" Comment="Intertravamento ativo ou recem-saido" />
+      <VarDeclaration ID="97E6447181D2B0D7" Name="Tempo" Type="TIME" Comment="Tempo do E_DELAY" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="5f1b67c2-f383-5244-82f3-1f304a433664">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="Calcula" />
+    <InternalVars>
+      <VarDeclaration ID="E6C98FDDA22BF224" Name="contando" Type="BOOL" Comment="Contando o tempo depois do intertravamento" />
+      <VarDeclaration ID="B03694E12DB75529" Name="TempoDepois" Type="TIME" InitialValue="T#10s" Comment="Quanto tempo a janela continua depois que o intertravamento sai" />
+    </InternalVars>
+    <ECC>
+      <ECState Name="START" Comment="Estado inicial" x="550" y="430" />
+      <ECState Name="CALCULO" Comment="Calcula; o algoritmo decide quais eventos saem" x="1170" y="730">
+        <ECAction Algorithm="Calcula" />
+        <ECAction Output="STOP_T" />
+        <ECAction Output="START_T" />
+        <ECAction Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="CALCULO" Condition="REQ OR TIMER" x="895" y="505" />
+      <ECTransition Source="CALCULO" Destination="START" Condition="1" x="880" y="665" />
+    </ECC>
+    <Algorithm Name="Calcula" Comment="Janela de intertravamento: TRUE com o intertravamento ativo e ate TempoDepois apos ele sair">
+      <ST><![CDATA[
+CNF := FALSE;
+START_T := FALSE;
+STOP_T := FALSE;
+IF REQ THEN
+    IF IlckCond THEN
+        IF contando THEN
+            STOP_T := TRUE;
+            contando := FALSE;
+        END_IF;
+        IF NOT Janela THEN
+            Janela := TRUE;
+            CNF := TRUE;
+        END_IF;
+    ELSIF Janela AND NOT contando THEN
+        (* saiu do intertravamento: segura a janela por TempoDepois *)
+        contando := TRUE;
+        Tempo := TempoDepois;
+        START_T := TRUE;
+    END_IF;
+ELSIF TIMER THEN
+    IF contando THEN
+        contando := FALSE;
+        IF NOT IlckCond THEN
+            Janela := FALSE;
+            CNF := TRUE;
+        END_IF;
+    END_IF;
+END_IF;
+]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

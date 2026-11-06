@@ -69,7 +69,8 @@ namespace SE.Nereda.Faceplates.CAerationLogic
 			this.C2_IN.TagName = "C2_IN";
 			this.C2_IN.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleCenter;
 			this.C2_IN.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.C2_IN.UseInputPad = true;
+			this.C2_IN.IsOnlyInput = true;
+			this.C2_IN.UseInputPad = false;
 			this.C2_IN.Value = 0F;
 			this.C2_IN.EndInit();
 			// 
@@ -95,7 +96,8 @@ namespace SE.Nereda.Faceplates.CAerationLogic
 			this.C3_IN.TagName = "C3_IN";
 			this.C3_IN.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleCenter;
 			this.C3_IN.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.C3_IN.UseInputPad = true;
+			this.C3_IN.IsOnlyInput = true;
+			this.C3_IN.UseInputPad = false;
 			this.C3_IN.Value = 0F;
 			this.C3_IN.EndInit();
 			// 
@@ -127,7 +129,8 @@ namespace SE.Nereda.Faceplates.CAerationLogic
 			this.MaximumCapacityBlower.SetColor = new NxtControl.Drawing.Color("Yellow");
 			this.MaximumCapacityBlower.Suffix = "%";
 			this.MaximumCapacityBlower.TagName = "MaximumCapacityBlower";
-			this.MaximumCapacityBlower.UseInputPad = true;
+			this.MaximumCapacityBlower.IsOnlyInput = true;
+			this.MaximumCapacityBlower.UseInputPad = false;
 			this.MaximumCapacityBlower.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleCenter;
 			this.MaximumCapacityBlower.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.MaximumCapacityBlower.UseRange = true;
@@ -154,7 +157,8 @@ namespace SE.Nereda.Faceplates.CAerationLogic
 			this.MinimumCapacity.SetColor = new NxtControl.Drawing.Color("Yellow");
 			this.MinimumCapacity.Suffix = "%";
 			this.MinimumCapacity.TagName = "MinimumCapacity";
-			this.MinimumCapacity.UseInputPad = true;
+			this.MinimumCapacity.IsOnlyInput = true;
+			this.MinimumCapacity.UseInputPad = false;
 			this.MinimumCapacity.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleCenter;
 			this.MinimumCapacity.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.MinimumCapacity.UseRange = true;

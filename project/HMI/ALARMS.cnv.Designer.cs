@@ -69,7 +69,7 @@ namespace HMI.Main.Canvases
 			this.HeartBeat.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 8D, 8D);
 			this.HeartBeat.Name = "HeartBeat";
 			this.HeartBeat.SecurityToken = ((uint)(4294967295u));
-			this.HeartBeat.TagName = "32B44D45F962192F";
+			this.HeartBeat.TagName = "1A7AD4234C2BE11C";
 			this.HeartBeat.EndInit();
 			// 
 			// Mode
@@ -78,7 +78,7 @@ namespace HMI.Main.Canvases
 			this.Mode.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 424D, 8D);
 			this.Mode.Name = "Mode";
 			this.Mode.SecurityToken = ((uint)(4294967295u));
-			this.Mode.TagName = "7A79C015B9ADE3EB";
+			this.Mode.TagName = "ECC9B0BB08A85534";
 			this.Mode.EndInit();
 			// 
 			// OpenWebPage
@@ -87,7 +87,7 @@ namespace HMI.Main.Canvases
 			this.OpenWebPage.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 840D, 8D);
 			this.OpenWebPage.Name = "OpenWebPage";
 			this.OpenWebPage.SecurityToken = ((uint)(4294967295u));
-			this.OpenWebPage.TagName = "61745BDDB91DBEF5";
+			this.OpenWebPage.TagName = "61C067078E62D90F";
 			this.OpenWebPage.EndInit();
 			// 
 			// ALARMS

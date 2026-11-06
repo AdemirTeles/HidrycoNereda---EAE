@@ -562,6 +562,41 @@ namespace SE.Nereda.Symbols.FieldSignals
 
 
   }
+  public class REQ_SULZEREventArgs : System.EventArgs
+  {
+    IHMIAccessorService accessorService;
+    int channelId;
+    int cookie;
+    int eventIndex;
+
+    public REQ_SULZEREventArgs(int channelId, int cookie, int eventIndex)
+    {
+      this.accessorService = (IHMIAccessorService)ServiceProvider.GetService(typeof(IHMIAccessorService));
+      this.channelId = channelId;
+      this.cookie = cookie;
+      this.eventIndex = eventIndex;
+    }
+    public bool Get_SULZER_FALHA(ref System.Int16 value)
+    {
+      if (accessorService == null)
+        return false;
+      System.Int64 var = 0;
+      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,0, ref var);
+      if (ret) value = (System.Int16) var;
+      return ret;
+    }
+
+    public System.Int16? SULZER_FALHA
+    { get {
+      if (accessorService == null)
+        return null;
+      System.Int64 var = 0;
+      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,0, ref var);
+      if (!ret) return null;
+      return (System.Int16) var;
+    }  }
+
+  }
 
 
 }
@@ -834,6 +869,8 @@ namespace SE.Nereda.Symbols.FieldSignals
 
     private event EventHandler<SE.Nereda.Symbols.FieldSignals.REQ_ATVEventArgs> REQ_ATV_Fired;
 
+    private event EventHandler<SE.Nereda.Symbols.FieldSignals.REQ_SULZEREventArgs> REQ_SULZER_Fired;
+
     protected override void OnEndInit()
     {
       if (REQ_STATE_Fired != null)
@@ -844,6 +881,8 @@ namespace SE.Nereda.Symbols.FieldSignals
         AttachEventInput(2);
       if (REQ_ATV_Fired != null)
         AttachEventInput(3);
+      if (REQ_SULZER_Fired != null)
+        AttachEventInput(4);
 
     }
 
@@ -910,6 +949,21 @@ stack Trace:
               NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
 stack Trace:
 {4}","REQ_ATV_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break; 
+        case 4:
+          if (REQ_SULZER_Fired != null)
+          {
+            try
+            {
+              REQ_SULZER_Fired(this, new SE.Nereda.Symbols.FieldSignals.REQ_SULZEREventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","REQ_SULZER_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
             }
           }
         break; 
@@ -1141,6 +1195,8 @@ namespace SE.Nereda.Symbols.FieldSignals
 
     private event EventHandler<SE.Nereda.Symbols.FieldSignals.REQ_ATVEventArgs> REQ_ATV_Fired;
 
+    private event EventHandler<SE.Nereda.Symbols.FieldSignals.REQ_SULZEREventArgs> REQ_SULZER_Fired;
+
     protected override void OnEndInit()
     {
       if (REQ_STATE_Fired != null)
@@ -1151,6 +1207,8 @@ namespace SE.Nereda.Symbols.FieldSignals
         AttachEventInput(2);
       if (REQ_ATV_Fired != null)
         AttachEventInput(3);
+      if (REQ_SULZER_Fired != null)
+        AttachEventInput(4);
 
     }
 
@@ -1217,6 +1275,21 @@ stack Trace:
               NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
 stack Trace:
 {4}","REQ_ATV_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break; 
+        case 4:
+          if (REQ_SULZER_Fired != null)
+          {
+            try
+            {
+              REQ_SULZER_Fired(this, new SE.Nereda.Symbols.FieldSignals.REQ_SULZEREventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","REQ_SULZER_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
             }
           }
         break; 

@@ -726,7 +726,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Subestacao
 			this.xL_1Q1.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
 			this.xL_1Q1.Name = "xL_1Q1";
 			this.xL_1Q1.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
-			this.xL_1Q1.TagName = "MPL_1Q1";
+			this.xL_1Q1.TagName = "LOCAL_1Q1";
 			this.xL_1Q1.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.Muda);
 			this.xL_1Q1.EndInit();
 			// 
@@ -738,7 +738,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Subestacao
 			this.xR_1Q1.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
 			this.xR_1Q1.Name = "xR_1Q1";
 			this.xR_1Q1.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
-			this.xR_1Q1.TagName = "MPR_1Q1";
+			this.xR_1Q1.TagName = "REMOTO_1Q1";
 			this.xR_1Q1.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.Muda);
 			this.xR_1Q1.EndInit();
 			// 
@@ -750,7 +750,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Subestacao
 			this.xP_1Q1.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
 			this.xP_1Q1.Name = "xP_1Q1";
 			this.xP_1Q1.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
-			this.xP_1Q1.TagName = "MPP_1Q1";
+			this.xP_1Q1.TagName = "PRONTO_1Q1";
 			this.xP_1Q1.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.Muda);
 			this.xP_1Q1.EndInit();
 			// 
@@ -762,7 +762,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Subestacao
 			this.xC_1Q1.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
 			this.xC_1Q1.Name = "xC_1Q1";
 			this.xC_1Q1.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
-			this.xC_1Q1.TagName = "MPC_1Q1";
+			this.xC_1Q1.TagName = "CARREGADO_1Q1";
 			this.xC_1Q1.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.Muda);
 			this.xC_1Q1.EndInit();
 			// 
@@ -774,7 +774,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Subestacao
 			this.xSF_1Q1.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
 			this.xSF_1Q1.Name = "xSF_1Q1";
 			this.xSF_1Q1.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
-			this.xSF_1Q1.TagName = "MPSF_1Q1";
+			this.xSF_1Q1.TagName = "SEM_FALHA_1Q1";
 			this.xSF_1Q1.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.Muda);
 			this.xSF_1Q1.EndInit();
 			// 
@@ -822,7 +822,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Subestacao
 			this.xCA_1Q1.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
 			this.xCA_1Q1.Name = "xCA_1Q1";
 			this.xCA_1Q1.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
-			this.xCA_1Q1.TagName = "CMD_ABRIR1Q1";
+			this.xCA_1Q1.TagName = "PULSO_ABRIR_1Q1";
 			this.xCA_1Q1.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.Muda);
 			this.xCA_1Q1.EndInit();
 			// 
@@ -834,7 +834,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Subestacao
 			this.xCF_1Q1.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
 			this.xCF_1Q1.Name = "xCF_1Q1";
 			this.xCF_1Q1.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
-			this.xCF_1Q1.TagName = "CMD_FECHAR1Q1";
+			this.xCF_1Q1.TagName = "PULSO_FECHAR_1Q1";
 			this.xCF_1Q1.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.Muda);
 			this.xCF_1Q1.EndInit();
 			// 
@@ -846,7 +846,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Subestacao
 			this.xL_1Q0.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
 			this.xL_1Q0.Name = "xL_1Q0";
 			this.xL_1Q0.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
-			this.xL_1Q0.TagName = "MPL_1Q0";
+			this.xL_1Q0.TagName = "LOCAL_1Q0";
 			this.xL_1Q0.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.Muda);
 			this.xL_1Q0.EndInit();
 			// 
@@ -858,7 +858,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Subestacao
 			this.xR_1Q0.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
 			this.xR_1Q0.Name = "xR_1Q0";
 			this.xR_1Q0.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
-			this.xR_1Q0.TagName = "MPR_1Q0";
+			this.xR_1Q0.TagName = "REMOTO_1Q0";
 			this.xR_1Q0.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.Muda);
 			this.xR_1Q0.EndInit();
 			// 
@@ -870,7 +870,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Subestacao
 			this.xP_1Q0.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
 			this.xP_1Q0.Name = "xP_1Q0";
 			this.xP_1Q0.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
-			this.xP_1Q0.TagName = "MPP_1Q0";
+			this.xP_1Q0.TagName = "PRONTO_1Q0";
 			this.xP_1Q0.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.Muda);
 			this.xP_1Q0.EndInit();
 			// 
@@ -882,7 +882,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Subestacao
 			this.xC_1Q0.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
 			this.xC_1Q0.Name = "xC_1Q0";
 			this.xC_1Q0.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
-			this.xC_1Q0.TagName = "MPC_1Q0";
+			this.xC_1Q0.TagName = "CARREGADO_1Q0";
 			this.xC_1Q0.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.Muda);
 			this.xC_1Q0.EndInit();
 			// 
@@ -894,7 +894,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Subestacao
 			this.xSF_1Q0.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
 			this.xSF_1Q0.Name = "xSF_1Q0";
 			this.xSF_1Q0.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
-			this.xSF_1Q0.TagName = "MPSF_1Q0";
+			this.xSF_1Q0.TagName = "SEM_FALHA_1Q0";
 			this.xSF_1Q0.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.Muda);
 			this.xSF_1Q0.EndInit();
 			// 
@@ -942,7 +942,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Subestacao
 			this.xCA_1Q0.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
 			this.xCA_1Q0.Name = "xCA_1Q0";
 			this.xCA_1Q0.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
-			this.xCA_1Q0.TagName = "CMD_ABRIR1Q0";
+			this.xCA_1Q0.TagName = "PULSO_ABRIR_1Q0";
 			this.xCA_1Q0.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.Muda);
 			this.xCA_1Q0.EndInit();
 			// 
@@ -954,7 +954,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Subestacao
 			this.xCF_1Q0.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
 			this.xCF_1Q0.Name = "xCF_1Q0";
 			this.xCF_1Q0.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
-			this.xCF_1Q0.TagName = "CMD_FECHAR1Q0";
+			this.xCF_1Q0.TagName = "PULSO_FECHAR_1Q0";
 			this.xCF_1Q0.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.Muda);
 			this.xCF_1Q0.EndInit();
 			// 
@@ -966,7 +966,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Subestacao
 			this.xL_1Q2.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
 			this.xL_1Q2.Name = "xL_1Q2";
 			this.xL_1Q2.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
-			this.xL_1Q2.TagName = "MPL_1Q2";
+			this.xL_1Q2.TagName = "LOCAL_1Q2";
 			this.xL_1Q2.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.Muda);
 			this.xL_1Q2.EndInit();
 			// 
@@ -978,7 +978,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Subestacao
 			this.xR_1Q2.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
 			this.xR_1Q2.Name = "xR_1Q2";
 			this.xR_1Q2.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
-			this.xR_1Q2.TagName = "MPR_1Q2";
+			this.xR_1Q2.TagName = "REMOTO_1Q2";
 			this.xR_1Q2.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.Muda);
 			this.xR_1Q2.EndInit();
 			// 
@@ -990,7 +990,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Subestacao
 			this.xP_1Q2.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
 			this.xP_1Q2.Name = "xP_1Q2";
 			this.xP_1Q2.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
-			this.xP_1Q2.TagName = "MPP_1Q2";
+			this.xP_1Q2.TagName = "PRONTO_1Q2";
 			this.xP_1Q2.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.Muda);
 			this.xP_1Q2.EndInit();
 			// 
@@ -1002,7 +1002,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Subestacao
 			this.xC_1Q2.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
 			this.xC_1Q2.Name = "xC_1Q2";
 			this.xC_1Q2.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
-			this.xC_1Q2.TagName = "MPC_1Q2";
+			this.xC_1Q2.TagName = "CARREGADO_1Q2";
 			this.xC_1Q2.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.Muda);
 			this.xC_1Q2.EndInit();
 			// 
@@ -1014,7 +1014,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Subestacao
 			this.xSF_1Q2.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
 			this.xSF_1Q2.Name = "xSF_1Q2";
 			this.xSF_1Q2.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
-			this.xSF_1Q2.TagName = "MPSF_1Q2";
+			this.xSF_1Q2.TagName = "SEM_FALHA_1Q2";
 			this.xSF_1Q2.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.Muda);
 			this.xSF_1Q2.EndInit();
 			// 
@@ -1062,7 +1062,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Subestacao
 			this.xCA_1Q2.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
 			this.xCA_1Q2.Name = "xCA_1Q2";
 			this.xCA_1Q2.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
-			this.xCA_1Q2.TagName = "CMD_ABRIR1Q2";
+			this.xCA_1Q2.TagName = "PULSO_ABRIR_1Q2";
 			this.xCA_1Q2.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.Muda);
 			this.xCA_1Q2.EndInit();
 			// 
@@ -1074,7 +1074,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Subestacao
 			this.xCF_1Q2.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
 			this.xCF_1Q2.Name = "xCF_1Q2";
 			this.xCF_1Q2.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
-			this.xCF_1Q2.TagName = "CMD_FECHAR1Q2";
+			this.xCF_1Q2.TagName = "PULSO_FECHAR_1Q2";
 			this.xCF_1Q2.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.Muda);
 			this.xCF_1Q2.EndInit();
 			// 

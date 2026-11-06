@@ -2,7 +2,7 @@
 <!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
 <FBType GUID="8dcef0b0-8ba9-522c-8180-bce40b9b6656" Name="AlarmesHabilitados" Comment="Alarmes de limite do AnalogInput so quando habilitados (alarme desabilitado nao bloqueia nada)" Namespace="SE.Nereda">
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Hidryco" Version="1.0" Author="Hidryco" Date="04/11/2026" Remarks="1.0: saida = LimitReached AND NOT Disabled de cada alarme (HH, H, L, LL, ROC, DEV). O LimitReached da SE.App2Base compara mesmo com o alarme desabilitado. REQ recalcula e sempre emite CNF (mesmo tempo de hoje); REQ_DIS (mudanca de ajuste) so derruba os desabilitados e emite CNF se mudou. Usado no AnalogInput." />
+  <VersionInfo Organization="Hidryco" Version="1.1" Author="Hidryco" Date="05/11/2026" Remarks="1.1: eventos de saida listados no ECAction (sem isso o runtime nao emite nenhum; o ST so liga/desliga). 1.0: saida = LimitReached AND NOT Disabled de cada alarme (HH, H, L, LL, ROC, DEV). O LimitReached da SE.App2Base compara mesmo com o alarme desabilitado. REQ recalcula e sempre emite CNF (mesmo tempo de hoje); REQ_DIS (mudanca de ajuste) so derruba os desabilitados e emite CNF se mudou. Usado no AnalogInput." />
   <InterfaceList>
     <EventInputs>
       <Event ID="2AEEBBA0A5EC440E" Name="REQ" Comment="Novo estado dos alarmes (CNF dos alarmes)">
@@ -81,6 +81,7 @@
       <ECState Name="START" Comment="Estado inicial" x="550" y="430" />
       <ECState Name="CALCULO" Comment="Calcula; o algoritmo decide se o CNF sai" x="1170" y="730">
         <ECAction Algorithm="Calcula" />
+        <ECAction Output="CNF" />
       </ECState>
       <ECTransition Source="START" Destination="CALCULO" Condition="REQ OR REQ_DIS" x="895" y="505" />
       <ECTransition Source="CALCULO" Destination="START" Condition="1" x="880" y="665" />

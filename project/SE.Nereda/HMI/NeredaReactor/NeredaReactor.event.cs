@@ -323,6 +323,84 @@ namespace SE.Nereda.Symbols.NeredaReactor
 
   }
 
+
+  public class FASEEventArgs : System.EventArgs
+  {
+    IHMIAccessorService accessorService;
+    int channelId;
+    int cookie;
+    int eventIndex;
+
+    public FASEEventArgs(int channelId, int cookie, int eventIndex)
+    {
+      this.accessorService = (IHMIAccessorService)ServiceProvider.GetService(typeof(IHMIAccessorService));
+      this.channelId = channelId;
+      this.cookie = cookie;
+      this.eventIndex = eventIndex;
+    }
+    public bool Get_FaseAtiva(ref System.Int16 value)
+    {
+      if (accessorService == null)
+        return false;
+      System.Int64 var = 0;
+      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,0, ref var);
+      if (ret) value = (System.Int16) var;
+      return ret;
+    }
+
+    public System.Int16? FaseAtiva
+    { get {
+      if (accessorService == null)
+        return null;
+      System.Int64 var = 0;
+      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,0, ref var);
+      if (!ret) return null;
+      return (System.Int16) var;
+    }  }
+
+    public bool Get_FaseAbortada(ref System.Int16 value)
+    {
+      if (accessorService == null)
+        return false;
+      System.Int64 var = 0;
+      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,1, ref var);
+      if (ret) value = (System.Int16) var;
+      return ret;
+    }
+
+    public System.Int16? FaseAbortada
+    { get {
+      if (accessorService == null)
+        return null;
+      System.Int64 var = 0;
+      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,1, ref var);
+      if (!ret) return null;
+      return (System.Int16) var;
+    }  }
+
+    public bool Get_Abortado(ref System.Boolean value)
+    {
+      if (accessorService == null)
+        return false;
+      bool var = false;
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,2, ref var);
+      if (ret) value = (System.Boolean) var;
+      return ret;
+    }
+
+    public System.Boolean? Abortado
+    { get {
+      if (accessorService == null)
+        return null;
+      bool var = false;
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,2, ref var);
+      if (!ret) return null;
+      return (System.Boolean) var;
+    }  }
+
+
+  }
+
 }
 
 namespace SE.Nereda.Symbols.NeredaReactor
@@ -371,6 +449,8 @@ namespace SE.Nereda.Symbols.NeredaReactor
 
     private event EventHandler<SE.Nereda.Symbols.NeredaReactor.REA_STATUSEventArgs> REA_STATUS_Fired;
 
+    private event EventHandler<SE.Nereda.Symbols.NeredaReactor.FASEEventArgs> FASE_Fired;
+
     protected override void OnEndInit()
     {
       if (PHASE_Fired != null)
@@ -381,6 +461,8 @@ namespace SE.Nereda.Symbols.NeredaReactor
         AttachEventInput(2);
       if (REA_STATUS_Fired != null)
         AttachEventInput(3);
+      if (FASE_Fired != null)
+        AttachEventInput(4);
 
     }
 
@@ -447,6 +529,21 @@ stack Trace:
               NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
 stack Trace:
 {4}","REA_STATUS_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break;
+        case 4:
+          if (FASE_Fired != null)
+          {
+            try
+            {
+              FASE_Fired(this, new SE.Nereda.Symbols.NeredaReactor.FASEEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","FASE_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
             }
           }
         break; 
@@ -502,6 +599,8 @@ namespace SE.Nereda.Symbols.NeredaReactor
 
     private event EventHandler<SE.Nereda.Symbols.NeredaReactor.REA_STATUSEventArgs> REA_STATUS_Fired;
 
+    private event EventHandler<SE.Nereda.Symbols.NeredaReactor.FASEEventArgs> FASE_Fired;
+
     protected override void OnEndInit()
     {
       if (PHASE_Fired != null)
@@ -512,6 +611,8 @@ namespace SE.Nereda.Symbols.NeredaReactor
         AttachEventInput(2);
       if (REA_STATUS_Fired != null)
         AttachEventInput(3);
+      if (FASE_Fired != null)
+        AttachEventInput(4);
 
     }
 
@@ -578,6 +679,21 @@ stack Trace:
               NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
 stack Trace:
 {4}","REA_STATUS_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break;
+        case 4:
+          if (FASE_Fired != null)
+          {
+            try
+            {
+              FASE_Fired(this, new SE.Nereda.Symbols.NeredaReactor.FASEEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","FASE_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
             }
           }
         break; 
@@ -633,6 +749,8 @@ namespace SE.Nereda.Symbols.NeredaReactor
 
     private event EventHandler<SE.Nereda.Symbols.NeredaReactor.REA_STATUSEventArgs> REA_STATUS_Fired;
 
+    private event EventHandler<SE.Nereda.Symbols.NeredaReactor.FASEEventArgs> FASE_Fired;
+
     protected override void OnEndInit()
     {
       if (PHASE_Fired != null)
@@ -643,6 +761,8 @@ namespace SE.Nereda.Symbols.NeredaReactor
         AttachEventInput(2);
       if (REA_STATUS_Fired != null)
         AttachEventInput(3);
+      if (FASE_Fired != null)
+        AttachEventInput(4);
 
     }
 
@@ -709,6 +829,21 @@ stack Trace:
               NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
 stack Trace:
 {4}","REA_STATUS_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break;
+        case 4:
+          if (FASE_Fired != null)
+          {
+            try
+            {
+              FASE_Fired(this, new SE.Nereda.Symbols.NeredaReactor.FASEEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","FASE_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
             }
           }
         break; 
@@ -764,6 +899,8 @@ namespace SE.Nereda.Symbols.NeredaReactor
 
     private event EventHandler<SE.Nereda.Symbols.NeredaReactor.REA_STATUSEventArgs> REA_STATUS_Fired;
 
+    private event EventHandler<SE.Nereda.Symbols.NeredaReactor.FASEEventArgs> FASE_Fired;
+
     protected override void OnEndInit()
     {
       if (PHASE_Fired != null)
@@ -774,6 +911,8 @@ namespace SE.Nereda.Symbols.NeredaReactor
         AttachEventInput(2);
       if (REA_STATUS_Fired != null)
         AttachEventInput(3);
+      if (FASE_Fired != null)
+        AttachEventInput(4);
 
     }
 
@@ -840,6 +979,21 @@ stack Trace:
               NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
 stack Trace:
 {4}","REA_STATUS_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break;
+        case 4:
+          if (FASE_Fired != null)
+          {
+            try
+            {
+              FASE_Fired(this, new SE.Nereda.Symbols.NeredaReactor.FASEEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","FASE_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
             }
           }
         break; 
@@ -895,6 +1049,8 @@ namespace SE.Nereda.Symbols.NeredaReactor
 
     private event EventHandler<SE.Nereda.Symbols.NeredaReactor.REA_STATUSEventArgs> REA_STATUS_Fired;
 
+    private event EventHandler<SE.Nereda.Symbols.NeredaReactor.FASEEventArgs> FASE_Fired;
+
     protected override void OnEndInit()
     {
       if (PHASE_Fired != null)
@@ -905,6 +1061,8 @@ namespace SE.Nereda.Symbols.NeredaReactor
         AttachEventInput(2);
       if (REA_STATUS_Fired != null)
         AttachEventInput(3);
+      if (FASE_Fired != null)
+        AttachEventInput(4);
 
     }
 
@@ -971,6 +1129,21 @@ stack Trace:
               NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
 stack Trace:
 {4}","REA_STATUS_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break;
+        case 4:
+          if (FASE_Fired != null)
+          {
+            try
+            {
+              FASE_Fired(this, new SE.Nereda.Symbols.NeredaReactor.FASEEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","FASE_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
             }
           }
         break; 
@@ -1026,6 +1199,8 @@ namespace SE.Nereda.Faceplates.NeredaReactor
 
     private event EventHandler<SE.Nereda.Symbols.NeredaReactor.REA_STATUSEventArgs> REA_STATUS_Fired;
 
+    private event EventHandler<SE.Nereda.Symbols.NeredaReactor.FASEEventArgs> FASE_Fired;
+
     protected override void OnEndInit()
     {
       if (PHASE_Fired != null)
@@ -1036,6 +1211,8 @@ namespace SE.Nereda.Faceplates.NeredaReactor
         AttachEventInput(2);
       if (REA_STATUS_Fired != null)
         AttachEventInput(3);
+      if (FASE_Fired != null)
+        AttachEventInput(4);
 
     }
 
@@ -1102,6 +1279,21 @@ stack Trace:
               NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
 stack Trace:
 {4}","REA_STATUS_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break;
+        case 4:
+          if (FASE_Fired != null)
+          {
+            try
+            {
+              FASE_Fired(this, new SE.Nereda.Symbols.NeredaReactor.FASEEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","FASE_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
             }
           }
         break; 
@@ -1157,6 +1349,8 @@ namespace SE.Nereda.Symbols.NeredaReactor
 
     private event EventHandler<SE.Nereda.Symbols.NeredaReactor.REA_STATUSEventArgs> REA_STATUS_Fired;
 
+    private event EventHandler<SE.Nereda.Symbols.NeredaReactor.FASEEventArgs> FASE_Fired;
+
     protected override void OnEndInit()
     {
       if (PHASE_Fired != null)
@@ -1167,6 +1361,8 @@ namespace SE.Nereda.Symbols.NeredaReactor
         AttachEventInput(2);
       if (REA_STATUS_Fired != null)
         AttachEventInput(3);
+      if (FASE_Fired != null)
+        AttachEventInput(4);
 
     }
 
@@ -1233,6 +1429,21 @@ stack Trace:
               NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
 stack Trace:
 {4}","REA_STATUS_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break;
+        case 4:
+          if (FASE_Fired != null)
+          {
+            try
+            {
+              FASE_Fired(this, new SE.Nereda.Symbols.NeredaReactor.FASEEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","FASE_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
             }
           }
         break; 
@@ -1288,6 +1499,8 @@ namespace SE.Nereda.Symbols.NeredaReactor
 
     private event EventHandler<SE.Nereda.Symbols.NeredaReactor.REA_STATUSEventArgs> REA_STATUS_Fired;
 
+    private event EventHandler<SE.Nereda.Symbols.NeredaReactor.FASEEventArgs> FASE_Fired;
+
     protected override void OnEndInit()
     {
       if (PHASE_Fired != null)
@@ -1298,6 +1511,8 @@ namespace SE.Nereda.Symbols.NeredaReactor
         AttachEventInput(2);
       if (REA_STATUS_Fired != null)
         AttachEventInput(3);
+      if (FASE_Fired != null)
+        AttachEventInput(4);
 
     }
 
@@ -1364,6 +1579,21 @@ stack Trace:
               NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
 stack Trace:
 {4}","REA_STATUS_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break;
+        case 4:
+          if (FASE_Fired != null)
+          {
+            try
+            {
+              FASE_Fired(this, new SE.Nereda.Symbols.NeredaReactor.FASEEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","FASE_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
             }
           }
         break; 
@@ -1419,6 +1649,8 @@ namespace SE.Nereda.Faceplates.NeredaReactor
 
     private event EventHandler<SE.Nereda.Symbols.NeredaReactor.REA_STATUSEventArgs> REA_STATUS_Fired;
 
+    private event EventHandler<SE.Nereda.Symbols.NeredaReactor.FASEEventArgs> FASE_Fired;
+
     protected override void OnEndInit()
     {
       if (PHASE_Fired != null)
@@ -1429,6 +1661,8 @@ namespace SE.Nereda.Faceplates.NeredaReactor
         AttachEventInput(2);
       if (REA_STATUS_Fired != null)
         AttachEventInput(3);
+      if (FASE_Fired != null)
+        AttachEventInput(4);
 
     }
 
@@ -1495,6 +1729,21 @@ stack Trace:
               NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
 stack Trace:
 {4}","REA_STATUS_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break;
+        case 4:
+          if (FASE_Fired != null)
+          {
+            try
+            {
+              FASE_Fired(this, new SE.Nereda.Symbols.NeredaReactor.FASEEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","FASE_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
             }
           }
         break; 
@@ -1550,6 +1799,8 @@ namespace SE.Nereda.Symbols.NeredaReactor
 
     private event EventHandler<SE.Nereda.Symbols.NeredaReactor.REA_STATUSEventArgs> REA_STATUS_Fired;
 
+    private event EventHandler<SE.Nereda.Symbols.NeredaReactor.FASEEventArgs> FASE_Fired;
+
     protected override void OnEndInit()
     {
       if (PHASE_Fired != null)
@@ -1560,6 +1811,8 @@ namespace SE.Nereda.Symbols.NeredaReactor
         AttachEventInput(2);
       if (REA_STATUS_Fired != null)
         AttachEventInput(3);
+      if (FASE_Fired != null)
+        AttachEventInput(4);
 
     }
 
@@ -1626,6 +1879,21 @@ stack Trace:
               NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
 stack Trace:
 {4}","REA_STATUS_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break;
+        case 4:
+          if (FASE_Fired != null)
+          {
+            try
+            {
+              FASE_Fired(this, new SE.Nereda.Symbols.NeredaReactor.FASEEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","FASE_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
             }
           }
         break; 
@@ -1681,6 +1949,8 @@ namespace SE.Nereda.Symbols.NeredaReactor
 
     private event EventHandler<SE.Nereda.Symbols.NeredaReactor.REA_STATUSEventArgs> REA_STATUS_Fired;
 
+    private event EventHandler<SE.Nereda.Symbols.NeredaReactor.FASEEventArgs> FASE_Fired;
+
     protected override void OnEndInit()
     {
       if (PHASE_Fired != null)
@@ -1691,6 +1961,8 @@ namespace SE.Nereda.Symbols.NeredaReactor
         AttachEventInput(2);
       if (REA_STATUS_Fired != null)
         AttachEventInput(3);
+      if (FASE_Fired != null)
+        AttachEventInput(4);
 
     }
 
@@ -1757,6 +2029,21 @@ stack Trace:
               NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
 stack Trace:
 {4}","REA_STATUS_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break;
+        case 4:
+          if (FASE_Fired != null)
+          {
+            try
+            {
+              FASE_Fired(this, new SE.Nereda.Symbols.NeredaReactor.FASEEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","FASE_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
             }
           }
         break; 

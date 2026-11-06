@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="3ce0a079-057c-599f-1079-b8c36ca41cef" Name="ReliabilityIhm" Comment="Reliability para a IHM: valor padrao ate chegar o primeiro valor do analisador" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Hidryco" Version="1.0" Author="Hidryco" Date="05/11/2026" Remarks="1.0: Saida comeca em 80 (sensor sem MEASUREMENT IND. no SC1000, como pH e ORP, continua com 80); cada REQ copia Entrada para Saida e emite CNF." />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="D8BDB914876ED622" Name="REQ" Comment="Chegou valor de Reliability">
+        <With Var="Entrada" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="BD5C489160CE7106" Name="CNF" Comment="Valor atualizado">
+        <With Var="Saida" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="3DDC80A9FB0ED3E3" Name="Entrada" Type="INT" Comment="Reliability lido (MEASUREMENT IND.)" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="F7779C6CB065FBE2" Name="Saida" Type="INT" InitialValue="80" Comment="Reliability para a IHM" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="5ef63c38-89d1-1d46-eaec-ee75b1625cfa">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="Copia" />
+    <ECC>
+      <ECState Name="START" Comment="Estado inicial" x="550" y="430" />
+      <ECState Name="ATUALIZA" Comment="Copia o valor" x="1170" y="730">
+        <ECAction Algorithm="Copia" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="ATUALIZA" Condition="REQ" x="895" y="505" />
+      <ECTransition Source="ATUALIZA" Destination="START" Condition="1" x="880" y="665" />
+    </ECC>
+    <Algorithm Name="Copia" Comment="Saida := Entrada">
+      <ST><![CDATA[
+Saida := Entrada;
+]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

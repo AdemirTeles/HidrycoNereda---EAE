@@ -143,6 +143,7 @@ namespace SE.Nereda.Symbols.NeredaSludgeBuffer_2
 			this.pipe5 = new NxtControl.GuiFramework.Pipe();
 			this.pipe23 = new NxtControl.GuiFramework.Pipe();
 			this.pipe25 = new NxtControl.GuiFramework.Pipe();
+			this.LevelPv = new System.HMI.Symbols.Base.Execute<float>();
 			// 
 			// pipe7
 			// 
@@ -1312,6 +1313,19 @@ namespace SE.Nereda.Symbols.NeredaSludgeBuffer_2
 			new NxtControl.Drawing.PointF(999D, 443D)});
 			this.pipe25.Width = 10;
 			// 
+			// LevelPv
+			// 
+			this.LevelPv.BeginInit();
+			this.LevelPv.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 644D, 517D);
+			this.LevelPv.IsOnlyInput = true;
+			this.LevelPv.Location = new NxtControl.Drawing.PointF(644D, 517D);
+			this.LevelPv.Name = "LevelPv";
+			this.LevelPv.Size = new NxtControl.Drawing.SizeF(100D, 20D);
+			this.LevelPv.TagName = "LevelPv";
+			this.LevelPv.Value = 0F;
+			this.LevelPv.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.LevelPvValueChanged);
+			this.LevelPv.EndInit();
+			// 
 			// sSludgeBufferyellow
 			// 
 			this.AnchorPoint = new NxtControl.Drawing.PointF(0D, 1D);
@@ -1379,7 +1393,8 @@ namespace SE.Nereda.Symbols.NeredaSludgeBuffer_2
 			this.pipe17,
 			this.line34,
 			this.line35,
-			this.pipe25});
+			this.pipe25,
+			this.LevelPv});
 			this.SymbolSize = new System.Drawing.Size(1272, 744);
 
 		}
@@ -1501,6 +1516,7 @@ namespace SE.Nereda.Symbols.NeredaSludgeBuffer_2
 		private SE.Nereda.Symbols.ValveS.sDefault sDefault3;
 		private SE.Nereda.Symbols.ValveS.sDefault sDefault4;
 		private SE.Nereda.Symbols.ValveS.sDefault sDefault5;
+		private System.HMI.Symbols.Base.Execute<float> LevelPv;
 		#endregion
 	}
 }

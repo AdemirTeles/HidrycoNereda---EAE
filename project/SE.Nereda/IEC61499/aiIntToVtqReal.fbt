@@ -2,7 +2,7 @@
 <!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
 <FBType GUID="33145006-51b4-42c2-b739-6bccac165d73" Name="aiIntToVtqReal" Comment="Converte valor bruto INT (remota) em VTQREAL para a entrada externa do aiSignalDecode" Namespace="SE.Nereda">
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Hidryco" Version="1.0" Author="Hidryco" Date="10/5/2026" Remarks="Entrada INT para AnalogInput (4-20 mA via TM3BCEIP)" />
+  <VersionInfo Organization="Hidryco" Version="1.1" Author="Hidryco" Date="05/11/2026" Remarks="1.1: bruto abaixo de 3800 ou acima de 22000 = qualidade ruim (vira falha de canal do AnalogInput depois do QualityFailDelay). 1.0: Entrada INT para AnalogInput (4-20 mA via TM3BCEIP)" />
   <InterfaceList>
     <EventInputs>
       <Event ID="9C64D832256C82B4" Name="REQ" Comment="Novo valor bruto">
@@ -27,6 +27,10 @@
   </InterfaceList>
   <BasicFB ID="d199dc0e-b325-4526-95f2-3987ff7fe1a8">
     <Attribute Name="FBType.Basic.Algorithm.Order" Value="Main" />
+    <InternalVars>
+      <VarDeclaration ID="5E1A7C3B9D2F4A61" Name="FalhaMin" Type="INT" InitialValue="3800" Comment="Abaixo deste bruto = sensor em falha (3,8 mA)" />
+      <VarDeclaration ID="8B3D6E2F1C4A7B92" Name="FalhaMax" Type="INT" InitialValue="22000" Comment="Acima deste bruto = sensor em falha (22,0 mA)" />
+    </InternalVars>
     <ECC>
       <ECState Name="START" Comment="Initial State" x="550" y="425" />
       <ECState Name="EXEC" x="550" y="1100">
@@ -41,7 +45,11 @@
    symlink AInInt esta efetivamente conectado (QO do SYMLINKMULTIVARDST). *)
 IF QI_DST THEN
     PV_OUT.value := INT_TO_REAL(RAW_IN);
-    PV_OUT.quality := 16#00000000;
+    IF (RAW_IN < FalhaMin) OR (RAW_IN > FalhaMax) THEN
+        PV_OUT.quality := 16#80000010;     (* ruim: sensor fora de 3,8..22 mA *)
+    ELSE
+        PV_OUT.quality := 16#00000000;
+    END_IF;
     USE_INT := TRUE;
 END_IF;]]></ST>
     </Algorithm>

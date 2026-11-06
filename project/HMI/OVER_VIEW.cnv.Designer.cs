@@ -52,7 +52,7 @@ namespace HMI.Main.Canvases
 			this.HeartBeat.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 8D, 8D);
 			this.HeartBeat.Name = "HeartBeat";
 			this.HeartBeat.SecurityToken = ((uint)(4294967295u));
-			this.HeartBeat.TagName = "32B44D45F962192F";
+			this.HeartBeat.TagName = "1A7AD4234C2BE11C";
 			this.HeartBeat.EndInit();
 			// 
 			// Mode
@@ -61,7 +61,7 @@ namespace HMI.Main.Canvases
 			this.Mode.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 424D, 8D);
 			this.Mode.Name = "Mode";
 			this.Mode.SecurityToken = ((uint)(4294967295u));
-			this.Mode.TagName = "7A79C015B9ADE3EB";
+			this.Mode.TagName = "ECC9B0BB08A85534";
 			this.Mode.EndInit();
 			// 
 			// OpenWebPage
@@ -70,7 +70,7 @@ namespace HMI.Main.Canvases
 			this.OpenWebPage.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 840D, 8D);
 			this.OpenWebPage.Name = "OpenWebPage";
 			this.OpenWebPage.SecurityToken = ((uint)(4294967295u));
-			this.OpenWebPage.TagName = "61745BDDB91DBEF5";
+			this.OpenWebPage.TagName = "61C067078E62D90F";
 			this.OpenWebPage.EndInit();
 			// 
 			// Reactor1
@@ -80,7 +80,7 @@ namespace HMI.Main.Canvases
 			this.Reactor1.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.48571428571428571D, 0D, 0D, 0.48571428571428571D, 464D, 160D);
 			this.Reactor1.Name = "Reactor1";
 			this.Reactor1.SecurityToken = ((uint)(4294967295u));
-			this.Reactor1.TagName = "D41247DF3E1D30DC";
+			this.Reactor1.TagName = "0F513B831BAFCB32";
 			this.Reactor1.EndInit();
 			// 
 			// Reactor2
@@ -90,7 +90,7 @@ namespace HMI.Main.Canvases
 			this.Reactor2.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.48571428571428571D, 0D, 0D, 0.48571428571428571D, 464D, 392D);
 			this.Reactor2.Name = "Reactor2";
 			this.Reactor2.SecurityToken = ((uint)(4294967295u));
-			this.Reactor2.TagName = "1D81A826384C2197";
+			this.Reactor2.TagName = "19E8555E9622C1D3";
 			this.Reactor2.EndInit();
 			// 
 			// OVER_VIEW

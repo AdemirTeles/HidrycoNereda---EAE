@@ -4,7 +4,7 @@
   <Attribute Name="HMI.Alias" Value="" />
   <Attribute Name="Configuration.FB.IDCounter" Value="204" />
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Schneider Electric" Version="1.0.1" Author="ApplicationLibDevTeam" Date="2/5/2024" Remarks="Hidryco 04/11/2026: copia do SE.App2CommonProcess MotorVsBase 26.0.0.13 (export da Schneider). FbFail = AlarmStatus do feedbackFailure OU Fail OU IlckCond (FbFailCalc, FbFailComposto). Original: First Version" />
+  <VersionInfo Organization="Schneider Electric" Version="1.0.1" Author="ApplicationLibDevTeam" Date="2/5/2024" Remarks="Hidryco 05/11/2026: SemResetConf/REQ_SEM_RESET - ConfResetReq do controle = IThis.ConfResetReq AND NOT SemResetConf (ConfResetCalc): alarme de realimentacao nao pede reset na janela de intertravamento. Hidryco 04/11/2026: copia do SE.App2CommonProcess MotorVsBase 26.0.0.13 (export da Schneider). FbFail = AlarmStatus do feedbackFailure OU Fail OU IlckCond (FbFailCalc, FbFailComposto). Original: First Version" />
   <InterfaceList>
     <EventInputs>
       <Event Name="REQ_SP" Comment="Request to update setpoint">
@@ -40,6 +40,9 @@
         <With Var="Fail" />
       </Event>
       <Event Name="REQ_DIS_FB_ALM" Comment="Request to disable feedback alarm" />
+      <Event Name="REQ_SEM_RESET" Comment="Hidryco: janela de intertravamento mudou">
+        <With Var="SemResetConf" />
+      </Event>
       <Event Name="REQ_EXT_CTL" Comment="Request External control signal">
         <With Var="ExternalControlled" />
       </Event>
@@ -124,6 +127,7 @@
       <VarDeclaration Name="SuppressAlarm" Type="BOOL" Comment="1 = Suppress alarm in HMI" />
       <VarDeclaration Name="ExternalControlled" Type="BOOL" Comment="1 = External control is active" />
       <VarDeclaration Name="Reset" Type="BOOL" Comment="1 = Reset device failure" />
+      <VarDeclaration Name="SemResetConf" Type="BOOL" Comment="Hidryco: TRUE = janela de intertravamento - alarme de realimentacao nao pede reset" />
     </InputVars>
     <OutputVars>
       <VarDeclaration Name="Out" Type="INT" Comment="Calculated output of the device ( 0 = Stop command, 1 = Forward Run command,  1 = Reverse Run command)" />
@@ -172,6 +176,7 @@
       <Parameter Name="$EnBumpless2" Value="TRUE" />
       <Parameter Name="$EnBumpless3" Value="FALSE" />
     </FB>
+    <FB ID="0EBFB1916E111DDB" Name="ConfResetCalc" Type="ResetConfSemIlck" x="5000" y="3240" Namespace="SE.Nereda" />
     <FB ID="184" UID="170" Name="control" Type="motorVsLogic" x="5740" y="3240" Namespace="SE.App2CommonProcess">
       <Attribute Name="Configuration.Component.HideUnusedPorts" Value="" />
     </FB>
@@ -226,6 +231,8 @@
     <Input Name="REQ_PERM" x="5480" y="6246" Type="Event" />
     <Input Name="REQ_FAIL" x="4420" y="3552" Type="Event" />
     <Input Name="REQ_DIS_FB_ALM" x="4420" y="3612" Type="Event" />
+    <Input Name="REQ_SEM_RESET" x="4420" y="3672" Type="Event" />
+    <Input Name="SemResetConf" x="4420" y="3732" Type="Data" />
     <Input Name="REQ_EXT_CTL" x="4420" y="3706" Type="Event" />
     <Input Name="ExternalControlled" x="4420" y="5466" Type="Data" />
     <Input Name="SpeedSp" x="4880" y="8532" Type="Data" />
@@ -431,9 +438,6 @@
         <AvoidsNodes>false</AvoidsNodes>
       </Connection>
       <Connection Source="$REQ_FAIL" Destination="$184.REQ_FAIL" dx1="462.9478">
-        <AvoidsNodes>false</AvoidsNodes>
-      </Connection>
-      <Connection Source="$REQ_DIS_FB_ALM" Destination="$184.REQ_PARA" dx1="377.771">
         <AvoidsNodes>false</AvoidsNodes>
       </Connection>
       <Connection Source="$180.INITO" Destination="$181.INIT">
@@ -698,10 +702,6 @@
       <Connection Source="$47.1E115F107370F478" Destination="$IServiceExtension.CNF_OWNER">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$47.95BEA68906019444" Destination="$184.REQ_PARA">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-        <AvoidsNodes>false</AvoidsNodes>
-      </Connection>
       <Connection Source="$47.95BEA68906019444" Destination="$181.REQ_PARA">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
@@ -729,10 +729,6 @@
       </Connection>
       <Connection Source="$47.4711DA9A2DFC024" Destination="$175.REQ_FORCE">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$47.4711DA9A2DFC024" Destination="$184.REQ_PARA">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-        <AvoidsNodes>false</AvoidsNodes>
       </Connection>
       <Connection Source="$47.4711DA9A2DFC024" Destination="$107.REQ_SEL">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
@@ -768,6 +764,11 @@
       <Connection Source="$900.16943D7D3AD410BC" Destination="$47.EC791CA6E67D66B3" />
       <Connection Source="$REQ_FAIL" Destination="$900.594458DF2A5BB47C" />
       <Connection Source="$REQ_ILCK" Destination="$900.594458DF2A5BB47C" />
+      <Connection Source="$REQ_DIS_FB_ALM" Destination="$0EBFB1916E111DDB.REQ" />
+      <Connection Source="$47.95BEA68906019444" Destination="$0EBFB1916E111DDB.REQ" />
+      <Connection Source="$47.4711DA9A2DFC024" Destination="$0EBFB1916E111DDB.REQ" />
+      <Connection Source="$REQ_SEM_RESET" Destination="$0EBFB1916E111DDB.REQ" />
+      <Connection Source="$0EBFB1916E111DDB.CNF" Destination="$184.REQ_PARA" />
     </EventConnections>
     <DataConnections>
       <Connection Source="$107.PermVal" Destination="$184.Sp">
@@ -1261,10 +1262,6 @@
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
         <AvoidsNodes>false</AvoidsNodes>
       </Connection>
-      <Connection Source="$47.3DA6D0F9276D43A4" Destination="$184.ConfResetReq">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-        <AvoidsNodes>false</AvoidsNodes>
-      </Connection>
       <Connection Source="$47.22AB1FF8E4CF2F97" Destination="$184.FailResetReq">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
         <AvoidsNodes>false</AvoidsNodes>
@@ -1402,6 +1399,9 @@
       <Connection Source="$900.CA70046049C9A2EC" Destination="$47.7F794E74835A9A2" />
       <Connection Source="$IlckCond" Destination="$900.C72C731F987D59D4" />
       <Connection Source="$Fail" Destination="$900.12594D80635DBCE8" />
+      <Connection Source="$47.3DA6D0F9276D43A4" Destination="$0EBFB1916E111DDB.ConfResetIn" />
+      <Connection Source="$SemResetConf" Destination="$0EBFB1916E111DDB.SemReset" />
+      <Connection Source="$0EBFB1916E111DDB.ConfResetOut" Destination="$184.ConfResetReq" />
     </DataConnections>
   </FBNetwork>
 </FBType>

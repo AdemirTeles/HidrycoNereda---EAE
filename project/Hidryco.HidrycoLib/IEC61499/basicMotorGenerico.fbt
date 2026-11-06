@@ -2,7 +2,7 @@
 <!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
 <FBType GUID="05042151-8115-451f-8d99-594dad2c1076" Name="basicMotorGenerico" Comment="Logica unica do motor generico (partida direta ou inversor)" Namespace="Hidryco.HidrycoLib">
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Hidryco" Version="2.0" Author="Hidryco" Date="27/10/2026" Remarks="2.0: velocidade da IHM/SCADA (stsVelocidadeIhm, antes stsVelocidadeHz) em %%: com inversor = fldVelocidadePct (LSP 0 %% a HSP 100 %%), sem inversor = 0 ou 100 %%; referencia e manual continuam em Hz. 1.9: velocidade manual (stpVelocidadeManual) em Hz; saidas stsVelocidadeHz/stsReferenciaHz para a IHM (conversao no CLP, 60 Hz = 100 %). 1.8: IHM: velocidade e referencia no maximo 1 vez por segundo com o motor ligado (antes a cada 0,1 %); o plug/processo (CNF_SPEED) continua na hora. 1.7: saida stsFalhaAtiva (falha presente agora: emergencia, termica, acionamento ou comunicacao) no CNF_HMI. 1.6: protecao termica nao memoriza - sai sozinha quando normaliza (sem reset). 1.5: reset so libera a falha de parada com o motor parado (antes liberava com o motor ainda ligado e a supervisao nao recomecava). 1.1: refeito no padrao SE.App2CommonProcess - eventos por grupo de dados, saidas so na mudanca, supervisao por E_DELAY (MON_T/MON_RESET/MON_MAX), horimetro e partidas pelo devMntCalc, escala linear com limites. 1.4: horimetro proprio com resolucao de 1 s (E_CYCLE + PERSISTENCE), termica NF por padrao" />
+  <VersionInfo Organization="Hidryco" Version="2.1" Author="Hidryco" Date="05/11/2026" Remarks="2.1: raio do gerador vermelho (3) so com a carga liberada, a planta nos geradores E o motor ligado (igual ao Motor_VS, gradeamento e UV); liberado e parado = cinza (2). 2.0: velocidade da IHM/SCADA (stsVelocidadeIhm, antes stsVelocidadeHz) em %%: com inversor = fldVelocidadePct (LSP 0 %% a HSP 100 %%), sem inversor = 0 ou 100 %%; referencia e manual continuam em Hz. 1.9: velocidade manual (stpVelocidadeManual) em Hz; saidas stsVelocidadeHz/stsReferenciaHz para a IHM (conversao no CLP, 60 Hz = 100 %). 1.8: IHM: velocidade e referencia no maximo 1 vez por segundo com o motor ligado (antes a cada 0,1 %); o plug/processo (CNF_SPEED) continua na hora. 1.7: saida stsFalhaAtiva (falha presente agora: emergencia, termica, acionamento ou comunicacao) no CNF_HMI. 1.6: protecao termica nao memoriza - sai sozinha quando normaliza (sem reset). 1.5: reset so libera a falha de parada com o motor parado (antes liberava com o motor ainda ligado e a supervisao nao recomecava). 1.1: refeito no padrao SE.App2CommonProcess - eventos por grupo de dados, saidas so na mudanca, supervisao por E_DELAY (MON_T/MON_RESET/MON_MAX), horimetro e partidas pelo devMntCalc, escala linear com limites. 1.4: horimetro proprio com resolucao de 1 s (E_CYCLE + PERSISTENCE), termica NF por padrao" />
   <InterfaceList>
     <EventInputs>
       <Event ID="683CE05B486FAC1D" Name="INIT" Comment="Inicializacao (configuracao da instancia)">
@@ -588,10 +588,10 @@ IF NOT geradorConectado THEN
     stsAnimacaoGerador := 0;
 ELSIF NOT geradorHabilita THEN
     stsAnimacaoGerador := 1;
-ELSIF NOT inGerador THEN
-    stsAnimacaoGerador := 2;
+ELSIF inGerador AND bLigado THEN
+    stsAnimacaoGerador := 3;              (* liberado, planta nos geradores e motor ligado *)
 ELSE
-    stsAnimacaoGerador := 3;
+    stsAnimacaoGerador := 2;              (* liberado, parado ou planta fora dos geradores *)
 END_IF;
 
 (* ---- 12. Emissao so na mudanca ---- *)

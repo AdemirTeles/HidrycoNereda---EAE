@@ -62,7 +62,7 @@ namespace HMI.Main.Canvases
 			this.HeartBeat.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 8D, 8D);
 			this.HeartBeat.Name = "HeartBeat";
 			this.HeartBeat.SecurityToken = ((uint)(4294967295u));
-			this.HeartBeat.TagName = "32B44D45F962192F";
+			this.HeartBeat.TagName = "1A7AD4234C2BE11C";
 			this.HeartBeat.EndInit();
 			// 
 			// Mode
@@ -71,7 +71,7 @@ namespace HMI.Main.Canvases
 			this.Mode.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 424D, 8D);
 			this.Mode.Name = "Mode";
 			this.Mode.SecurityToken = ((uint)(4294967295u));
-			this.Mode.TagName = "7A79C015B9ADE3EB";
+			this.Mode.TagName = "ECC9B0BB08A85534";
 			this.Mode.EndInit();
 			// 
 			// OpenWebPage
@@ -80,7 +80,7 @@ namespace HMI.Main.Canvases
 			this.OpenWebPage.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 840D, 8D);
 			this.OpenWebPage.Name = "OpenWebPage";
 			this.OpenWebPage.SecurityToken = ((uint)(4294967295u));
-			this.OpenWebPage.TagName = "61745BDDB91DBEF5";
+			this.OpenWebPage.TagName = "61C067078E62D90F";
 			this.OpenWebPage.EndInit();
 			// 
 			// EmergencyManagement_4
@@ -89,7 +89,7 @@ namespace HMI.Main.Canvases
 			this.EmergencyManagement_4.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 1152D, 8D);
 			this.EmergencyManagement_4.Name = "EmergencyManagement_4";
 			this.EmergencyManagement_4.SecurityToken = ((uint)(4294967295u));
-			this.EmergencyManagement_4.TagName = "A990A73C5D482C0A";
+			this.EmergencyManagement_4.TagName = "E384F46199BCC782";
 			this.EmergencyManagement_4.EndInit();
 			// 
 			// EmergencyManagement_3
@@ -98,7 +98,7 @@ namespace HMI.Main.Canvases
 			this.EmergencyManagement_3.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 960D, 8D);
 			this.EmergencyManagement_3.Name = "EmergencyManagement_3";
 			this.EmergencyManagement_3.SecurityToken = ((uint)(4294967295u));
-			this.EmergencyManagement_3.TagName = "A990A73C5D482C0A";
+			this.EmergencyManagement_3.TagName = "E384F46199BCC782";
 			this.EmergencyManagement_3.EndInit();
 			// 
 			// EmergencyReactor1
@@ -108,7 +108,7 @@ namespace HMI.Main.Canvases
 			this.EmergencyReactor1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 40D, 72D);
 			this.EmergencyReactor1.Name = "EmergencyReactor1";
 			this.EmergencyReactor1.SecurityToken = ((uint)(4294967295u));
-			this.EmergencyReactor1.TagName = "A5740D5EBB5FFB16";
+			this.EmergencyReactor1.TagName = "7208AF28B1BB04CE";
 			this.EmergencyReactor1.EndInit();
 			// 
 			// WarningR1
@@ -117,7 +117,7 @@ namespace HMI.Main.Canvases
 			this.WarningR1.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.7931034482758621D, 0D, 0D, 0.7931034482758621D, 448D, 80D);
 			this.WarningR1.Name = "WarningR1";
 			this.WarningR1.SecurityToken = ((uint)(4294967295u));
-			this.WarningR1.TagName = "A5740D5EBB5FFB16";
+			this.WarningR1.TagName = "7208AF28B1BB04CE";
 			this.WarningR1.EndInit();
 			// 
 			// WarningR2
@@ -126,7 +126,7 @@ namespace HMI.Main.Canvases
 			this.WarningR2.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.7931034482758621D, 0D, 0D, 0.7931034482758621D, 720D, 80D);
 			this.WarningR2.Name = "WarningR2";
 			this.WarningR2.SecurityToken = ((uint)(4294967295u));
-			this.WarningR2.TagName = "94EBD1CCA84A7246";
+			this.WarningR2.TagName = "8A97CA739546E604";
 			this.WarningR2.EndInit();
 			// 
 			// EmergencyReactor2
@@ -136,7 +136,7 @@ namespace HMI.Main.Canvases
 			this.EmergencyReactor2.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 1120D, 72D);
 			this.EmergencyReactor2.Name = "EmergencyReactor2";
 			this.EmergencyReactor2.SecurityToken = ((uint)(4294967295u));
-			this.EmergencyReactor2.TagName = "94EBD1CCA84A7246";
+			this.EmergencyReactor2.TagName = "8A97CA739546E604";
 			this.EmergencyReactor2.EndInit();
 			// 
 			// EmergencyManagement
@@ -145,7 +145,7 @@ namespace HMI.Main.Canvases
 			this.EmergencyManagement.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.7931034482758621D, 0D, 0D, 0.7931034482758621D, 912D, 80D);
 			this.EmergencyManagement.Name = "EmergencyManagement";
 			this.EmergencyManagement.SecurityToken = ((uint)(4294967295u));
-			this.EmergencyManagement.TagName = "A990A73C5D482C0A";
+			this.EmergencyManagement.TagName = "E384F46199BCC782";
 			this.EmergencyManagement.EndInit();
 			// 
 			// EmergencyManagement_1
@@ -154,7 +154,7 @@ namespace HMI.Main.Canvases
 			this.EmergencyManagement_1.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.7931034482758621D, 0D, 0D, 0.7931034482758621D, 256D, 80D);
 			this.EmergencyManagement_1.Name = "EmergencyManagement_1";
 			this.EmergencyManagement_1.SecurityToken = ((uint)(4294967295u));
-			this.EmergencyManagement_1.TagName = "A990A73C5D482C0A";
+			this.EmergencyManagement_1.TagName = "E384F46199BCC782";
 			this.EmergencyManagement_1.EndInit();
 			// 
 			// Reactor2
@@ -163,7 +163,7 @@ namespace HMI.Main.Canvases
 			this.Reactor2.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.74137931034482762D, 0D, 0D, 0.6206896551724137D, 760D, 520D);
 			this.Reactor2.Name = "Reactor2";
 			this.Reactor2.SecurityToken = ((uint)(4294967295u));
-			this.Reactor2.TagName = "1D81A826384C2197";
+			this.Reactor2.TagName = "19E8555E9622C1D3";
 			this.Reactor2.EndInit();
 			// 
 			// Reactor1
@@ -172,7 +172,7 @@ namespace HMI.Main.Canvases
 			this.Reactor1.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.74137931034482762D, 0D, 0D, 0.62068965517241381D, 264D, 520D);
 			this.Reactor1.Name = "Reactor1";
 			this.Reactor1.SecurityToken = ((uint)(4294967295u));
-			this.Reactor1.TagName = "D41247DF3E1D30DC";
+			this.Reactor1.TagName = "0F513B831BAFCB32";
 			this.Reactor1.EndInit();
 			// 
 			// EmergencySB
@@ -181,7 +181,7 @@ namespace HMI.Main.Canvases
 			this.EmergencySB.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 600D, 40D);
 			this.EmergencySB.Name = "EmergencySB";
 			this.EmergencySB.SecurityToken = ((uint)(4294967295u));
-			this.EmergencySB.TagName = "9C8DCCD6030E46A0";
+			this.EmergencySB.TagName = "A17D611BA9B31348";
 			this.EmergencySB.EndInit();
 			// 
 			// SludgeBuffer
@@ -190,7 +190,7 @@ namespace HMI.Main.Canvases
 			this.SludgeBuffer.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.84482758620689646D, 0D, 0D, 0.77586206896551724D, 488D, 368D);
 			this.SludgeBuffer.Name = "SludgeBuffer";
 			this.SludgeBuffer.SecurityToken = ((uint)(4294967295u));
-			this.SludgeBuffer.TagName = "9AA3696311BF0C3E";
+			this.SludgeBuffer.TagName = "2EDD2709EE346B30";
 			this.SludgeBuffer.EndInit();
 			// 
 			// EMERGENCY_RECIPE
