@@ -77,6 +77,17 @@ namespace Hidryco.HidrycoLib.Symbols.Sensor_Generico
 			base.Dispose(disposing);
 		}
 
+		// Opcao Porcentagem: mostra STS_PORCENTAGEM (calculada no CLP) em vez de STS_SENSOR
+		bool _porcentagem;
+		[System.ComponentModel.RefreshProperties(System.ComponentModel.RefreshProperties.Repaint)]
+		[System.ComponentModel.Category("Tagnames")]
+		[System.ComponentModel.DisplayName("Porcentagem")]
+		public bool _iPorcentagem
+		{
+			get { return _porcentagem; }
+			set { _porcentagem = value; Atualiza(); }
+		}
+
 		// ---- dados recebidos da logica e da IHM (atualizados pelos Execute invisiveis)
 		short estado = 4;
 		bool falha, falhaAtiva, alHH, alH, alL, alLL, bHabHH, bHabH, bHabL, bHabLL;
@@ -158,6 +169,9 @@ namespace Hidryco.HidrycoLib.Symbols.Sensor_Generico
 			Indicador(alP1, alP1n, alP2, alP2n, alTxt, p, t, NaoRecDe(t));
 			Pisca(AlgumNaoRec());
 			Valor(valor, invalido);
+			bool ok = valor.Visible;
+			valor.Visible = ok && !_porcentagem;
+			valorPct.Visible = ok && _porcentagem;
 		}
 
 	}

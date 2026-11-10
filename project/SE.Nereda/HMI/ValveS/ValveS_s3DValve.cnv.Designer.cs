@@ -109,6 +109,7 @@ namespace SE.Nereda.Symbols.ValveS
 			this.VlvName.Bounds = new NxtControl.Drawing.RectF(((float)(16D)), ((float)(120D)), ((float)(96D)), ((float)(16D)));
 			this.VlvName.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("transparent"));
 			this.VlvName.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
+			this.VlvName.FontScale = true;
 			this.VlvName.Name = "VlvName";
 			this.VlvName.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("transparent"), 1F, NxtControl.Drawing.DashStyle.Solid);
 			this.VlvName.Text = "Valve";

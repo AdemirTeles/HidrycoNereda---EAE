@@ -136,6 +136,7 @@ namespace SE.Nereda.Symbols.AnalogInput
 			this.Override.Bounds = new NxtControl.Drawing.RectF(((float)(24D)), ((float)(120D)), ((float)(12D)), ((float)(12D)));
 			this.Override.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.BlinkColor("SE.Nereda.Orangwhite"));
 			this.Override.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular);
+			this.Override.FontScale = true;
 			this.Override.Name = "Override";
 			this.Override.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("transparent"), 1F, NxtControl.Drawing.DashStyle.Solid);
 			this.Override.Text = "!";

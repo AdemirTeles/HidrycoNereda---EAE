@@ -81,6 +81,7 @@ namespace SE.Nereda.Symbols.ActState
 			this.Mode.Bounds = new NxtControl.Drawing.RectF(((float)(54D)), ((float)(8D)), ((float)(50D)), ((float)(16D)));
 			this.Mode.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("transparent"));
 			this.Mode.Font = new NxtControl.Drawing.Font("Lucida Console", 8F, System.Drawing.FontStyle.Bold);
+			this.Mode.FontScale = true;
 			this.Mode.Name = "Mode";
 			this.Mode.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("transparent"), 1F, NxtControl.Drawing.DashStyle.Solid);
 			this.Mode.Text = "STE";

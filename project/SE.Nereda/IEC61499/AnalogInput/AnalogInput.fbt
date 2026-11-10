@@ -3,7 +3,7 @@
 <FBType GUID="9b8be7cf-a8d0-484a-9672-85f193df4b6a" Name="AnalogInput" Format="2.0" Comment="CAT Function Block Type" Namespace="SE.Nereda">
   <Attribute Name="HMI.Alias" Value="" />
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Schneider Electric" Version="1.0" Author="Claude/Hidryco" Date="10/7/2026" Remarks="Hidryco 04/11/2026: HiHiAlarm, HiAlarm, LoAlarm, LoLoAlarm, RocAlarm e DevAlarm so com o alarme habilitado (AlarmesHabilitados: LimitReached AND NOT Disabled). Rev1 - QualityFailDelay: tolerancia da falha de canal por qualidade do sinal (ChFailFilter + ChFailTimer); 0 = imediato, comportamento anterior. Alarmes BadQuality/UncertainQuality so com a falha confirmada." />
+  <VersionInfo Organization="Schneider Electric" Version="1.0" Author="Claude/Hidryco" Date="10/7/2026" Remarks="Hidryco 06/11/2026: PvPct (PvPorcentagem) -&gt; IThis.REQ_PCT: Pv em % da faixa calculado no CLP para a IHM. Hidryco 04/11/2026: HiHiAlarm, HiAlarm, LoAlarm, LoLoAlarm, RocAlarm e DevAlarm so com o alarme habilitado (AlarmesHabilitados: LimitReached AND NOT Disabled). Rev1 - QualityFailDelay: tolerancia da falha de canal por qualidade do sinal (ChFailFilter + ChFailTimer); 0 = imediato, comportamento anterior. Alarmes BadQuality/UncertainQuality so com a falha confirmada." />
   <InterfaceList>
     <EventInputs>
       <Event ID="536A16EAB96A59B7" Name="REQ_SUPPRESS" Comment="Request to suppress the channel failure alarm">
@@ -160,6 +160,7 @@
     <FB ID="41321FEE593D40D4" Name="rawPvIntConv" Type="aiIntToVtqReal" x="1320" y="1640" Namespace="SE.Nereda" />
     <FB ID="F108FECB0DC0DC88" Name="ChFailFilter" Type="QualityFailFilter" x="3240" y="8960" Namespace="SE.Nereda" />
     <FB ID="B47511C1B72F0474" Name="ChFailTimer" Type="E_DELAY" x="3240" y="9700" Namespace="IEC61499.Standard" />
+    <FB ID="7623B258416A1C2C" Name="PvPct" Type="PvPorcentagem" x="9200" y="3690" Namespace="SE.Nereda" />
     <Input ID="536A16EAB96A59B7" Name="REQ_SUPPRESS" x="939.9999" y="3900" Type="Event" />
     <Input ID="BB91D7C73416AF1A" Name="SuppressAlarm" x="940" y="3960" Type="Data" />
     <Input ID="FA79D5A30FC55CE5" Name="QualityFailDelay" x="300" y="9060" Type="Data" />
@@ -716,6 +717,8 @@
       <Connection Source="$8C14E51BEF88CD9F.CNF_LIMITSP" Destination="$E67B5245A9A9C2E7.REQ_DIS" />
       <Connection Source="$05D38AB79F1310E5.CNF_LIMITSP" Destination="$E67B5245A9A9C2E7.REQ_DIS" />
       <Connection Source="$3097A66F8F6FD866.CNF_LIMITSP" Destination="$E67B5245A9A9C2E7.REQ_DIS" />
+      <Connection Source="$17B49EAE45CD7218.CNF_PV" Destination="$7623B258416A1C2C.7B15236268FCE0A2" />
+      <Connection Source="$7623B258416A1C2C.CF7FDF29450618D2" Destination="$AF1C1550B4169EC2.53388357BD3C335B" />
     </EventConnections>
     <DataConnections>
       <Connection Source="$FBC4282D9A0E2D46.Output" Destination="$A97F7594726B9149" dx1="1863.938">
@@ -1056,6 +1059,10 @@
       <Connection Source="$68A22637A7783E01.LimitReached" Destination="$E67B5245A9A9C2E7.LimDev" />
       <Connection Source="$68A22637A7783E01.Disabled" Destination="$E67B5245A9A9C2E7.DisDev" />
       <Connection Source="$E67B5245A9A9C2E7.DevAlarm" Destination="$F02868080991E3C2" />
+      <Connection Source="$17B49EAE45CD7218.Pv" Destination="$7623B258416A1C2C.397433E28EDA79AB" />
+      <Connection Source="$17B49EAE45CD7218.PvMin" Destination="$7623B258416A1C2C.BFCBD6A90AA2C09A" />
+      <Connection Source="$17B49EAE45CD7218.PvMax" Destination="$7623B258416A1C2C.6B6261356EC003D8" />
+      <Connection Source="$7623B258416A1C2C.D60DBBF724F0D446" Destination="$AF1C1550B4169EC2.1BE94B434833FBE7" />
     </DataConnections>
     <AdapterConnections>
       <Connection Source="$C578D9359C46D59F.IAnalog" Destination="$DA9DB4CB56194499.IPv" dx1="134.1875">

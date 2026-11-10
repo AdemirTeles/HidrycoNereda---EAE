@@ -117,7 +117,7 @@ namespace SE.Nereda.Symbols.NeredaSludgeBuffer_2
 			this.SLUDGE_BUFFER.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold);
 			this.SLUDGE_BUFFER.Name = "SLUDGE_BUFFER";
 			this.SLUDGE_BUFFER.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("transparent"), 1F, NxtControl.Drawing.DashStyle.Solid);
-			this.SLUDGE_BUFFER.Text = "SLUDGE BUFFER";
+			this.SLUDGE_BUFFER.Text = "TANQUE DE EQUALIZAÇÃO DE LODO";
 			this.SLUDGE_BUFFER.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// group1

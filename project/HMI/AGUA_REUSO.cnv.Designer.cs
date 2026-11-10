@@ -24,6 +24,8 @@ namespace HMI.Main.Canvases
 		private void InitializeComponent()
 		{
 			this.btnResetGeral = new NxtControl.GuiFramework.DrawnButton();
+			this.liqRes1 = new Hidryco.HidrycoLib.Symbols.Sensor_Generico.sLiquido();
+			this.liqRes2 = new Hidryco.HidrycoLib.Symbols.Sensor_Generico.sLiquido();
 			this.btnReconhecerGeral = new NxtControl.GuiFramework.DrawnButton();
 			this.boiaLSL01 = new Hidryco.HidrycoLib.Symbols.Agua_Reuso.sBoiaL();
 			this.fundo = new NxtControl.GuiFramework.Rectangle();
@@ -499,6 +501,26 @@ namespace HMI.Main.Canvases
 			this.mge.TagName = "FB91426C191C180F";
 			this.mge.EndInit();
 			// 
+			// liqRes1 (liquido sobe com o nivel em %)
+			// 
+			this.liqRes1.BeginInit();
+			this.liqRes1._iFluido = Hidryco.HidrycoLib.Symbols.Sensor_Generico.sLiquido.FluidoOption.Agua;
+			this.liqRes1.DesignMatrix = new NxtControl.Drawing.Matrix2D(2.1D, 0D, 0D, 2.2D, 160D, 100D);
+			this.liqRes1.Name = "liqRes1";
+			this.liqRes1.SecurityToken = ((uint)(4294967295u));
+			this.liqRes1.TagName = "F134E1AF157DF837.PIT_1000_01";
+			this.liqRes1.EndInit();
+			// 
+			// liqRes2 (liquido sobe com o nivel em %)
+			// 
+			this.liqRes2.BeginInit();
+			this.liqRes2._iFluido = Hidryco.HidrycoLib.Symbols.Sensor_Generico.sLiquido.FluidoOption.Agua;
+			this.liqRes2.DesignMatrix = new NxtControl.Drawing.Matrix2D(2.1D, 0D, 0D, 2.2D, 570D, 100D);
+			this.liqRes2.Name = "liqRes2";
+			this.liqRes2.SecurityToken = ((uint)(4294967295u));
+			this.liqRes2.TagName = "F134E1AF157DF837.PIT_1000_02";
+			this.liqRes2.EndInit();
+			// 
 			// AGUA_REUSO
 			// 
 			this.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(1366D)), ((float)(698D)));
@@ -547,6 +569,7 @@ namespace HMI.Main.Canvases
 			this.chao,
 			this.tuboEntradaR1,
 			this.resInterior1,
+			this.liqRes1,
 			this.resParedeEsq1,
 			this.resParedeDir1,
 			this.resFundo1,
@@ -562,6 +585,7 @@ namespace HMI.Main.Canvases
 			this.rotPITb1,
 			this.tuboEntradaR2,
 			this.resInterior2,
+			this.liqRes2,
 			this.resParedeEsq2,
 			this.resParedeDir2,
 			this.resFundo2,
@@ -646,6 +670,8 @@ namespace HMI.Main.Canvases
 		private Hidryco.HidrycoLib.Symbols.Agua_Reuso.sBoiaL boiaLSL01;
 		private NxtControl.GuiFramework.DrawnButton btnResetGeral;
 		private NxtControl.GuiFramework.DrawnButton btnReconhecerGeral;
+		private Hidryco.HidrycoLib.Symbols.Sensor_Generico.sLiquido liqRes1;
+		private Hidryco.HidrycoLib.Symbols.Sensor_Generico.sLiquido liqRes2;
 		#endregion
 	}
 }

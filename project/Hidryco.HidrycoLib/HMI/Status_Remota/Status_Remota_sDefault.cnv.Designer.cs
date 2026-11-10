@@ -22,6 +22,7 @@ namespace Hidryco.HidrycoLib.Symbols.Status_Remota
 			this.fundo = new NxtControl.GuiFramework.Rectangle();
 			this.tEst = new NxtControl.GuiFramework.FreeText();
 			this.xEST = new System.HMI.Symbols.Base.Execute<short>();
+			this.xVIVO = new System.HMI.Symbols.Base.Execute<short>();
 			// 
 			// fundo
 			// 
@@ -51,19 +52,33 @@ namespace Hidryco.HidrycoLib.Symbols.Status_Remota
 			this.xEST.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.XESTValueChanged);
 			this.xEST.EndInit();
 			// 
+			// xVIVO (sinal de vida do CLP)
+			// 
+			this.xVIVO.BeginInit();
+			this.xVIVO.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, double.NaN, double.NaN);
+			this.xVIVO.IsOnlyInput = true;
+			this.xVIVO.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
+			this.xVIVO.Name = "xVIVO";
+			this.xVIVO.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
+			this.xVIVO.TagName = "STS_VIVO";
+			this.xVIVO.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.XVIVOValueChanged);
+			this.xVIVO.EndInit();
+			// 
 			// sDefault
 			// 
 			this.Name = "sDefault";
 			this.Shapes.AddRange(new System.ComponentModel.IComponent[] {
 			this.fundo,
 			this.tEst,
-			this.xEST});
+			this.xEST,
+			this.xVIVO});
 			this.SymbolSize = new System.Drawing.Size(150, 24);
 
 		}
 		private NxtControl.GuiFramework.Rectangle fundo;
 		private NxtControl.GuiFramework.FreeText tEst;
 		private System.HMI.Symbols.Base.Execute<short> xEST;
+		private System.HMI.Symbols.Base.Execute<short> xVIVO;
 		#endregion
 	}
 }

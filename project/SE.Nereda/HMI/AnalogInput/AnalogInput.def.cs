@@ -1189,6 +1189,109 @@ namespace SE.Nereda.Symbols.AnalogInput
 
   }
 }
+namespace SE.Nereda.Symbols.AnalogInput
+{
+  partial class sPorcentagem
+  {
+
+    private SE.Nereda.Faceplates.AnalogInput.fpDefault fpDefault
+    {
+      get
+      { 
+        if (IsOpenFaceplateSecure() == false)
+          return null;
+
+        SE.Nereda.Faceplates.AnalogInput.fpDefault faceplate = null;
+        
+        IHMIManagementService hmiManagementService = (IHMIManagementService)ServiceProvider.GetService(typeof(IHMIManagementService));
+        if (hmiManagementService != null)
+          faceplate = (SE.Nereda.Faceplates.AnalogInput.fpDefault)hmiManagementService.GetRegisteredHMIFaceplate(MapPath, typeof(SE.Nereda.Faceplates.AnalogInput.fpDefault));
+        
+        if (faceplate == null)
+        {
+          faceplate = new SE.Nereda.Faceplates.AnalogInput.fpDefault();
+
+          faceplate.SetConnectionInfo(this.TagName, this.SymbolPath, this.ChannelId, GetType());
+
+          if (hmiManagementService != null)
+            hmiManagementService.RegisterHMIFaceplate(faceplate);
+        }
+        return faceplate;
+      }
+    }
+     
+    private SE.Nereda.Faceplates.AnalogInput.fpColor fpColor
+    {
+      get
+      { 
+        if (IsOpenFaceplateSecure() == false)
+          return null;
+
+        SE.Nereda.Faceplates.AnalogInput.fpColor faceplate = null;
+        
+        IHMIManagementService hmiManagementService = (IHMIManagementService)ServiceProvider.GetService(typeof(IHMIManagementService));
+        if (hmiManagementService != null)
+          faceplate = (SE.Nereda.Faceplates.AnalogInput.fpColor)hmiManagementService.GetRegisteredHMIFaceplate(MapPath, typeof(SE.Nereda.Faceplates.AnalogInput.fpColor));
+        
+        if (faceplate == null)
+        {
+          faceplate = new SE.Nereda.Faceplates.AnalogInput.fpColor();
+
+          faceplate.SetConnectionInfo(this.TagName, this.SymbolPath, this.ChannelId, GetType());
+
+          if (hmiManagementService != null)
+            hmiManagementService.RegisterHMIFaceplate(faceplate);
+        }
+        return faceplate;
+      }
+    }
+     
+    protected override void DoOpenFaceplate(OpenFaceplate openFaceplate)
+    {
+      NxtControl.GuiFramework.HMIFaceplate hmiFaceplate = null;
+
+      if ("fpDefault" == (string)openFaceplate.FaceplateType)
+        hmiFaceplate = fpDefault;
+
+      if ("fpColor" == (string)openFaceplate.FaceplateType)
+        hmiFaceplate = fpColor;
+
+      if (hmiFaceplate != null)
+      {
+        if (hmiFaceplate.Initialized == true)
+          hmiFaceplate.Activate();
+        else
+        {
+          OnInitializeFaceplate(hmiFaceplate);
+          hmiFaceplate.Show(this);
+        }
+      }
+    }
+
+    public override void DoOpenFaceplate(string openFaceplate)
+    {
+      NxtControl.GuiFramework.HMIFaceplate hmiFaceplate = null;
+
+      if ("fpDefault" == openFaceplate)
+        hmiFaceplate = fpDefault;
+
+      if ("fpColor" == openFaceplate)
+        hmiFaceplate = fpColor;
+
+      if (hmiFaceplate != null)
+      {
+        if (hmiFaceplate.Initialized == true)
+          hmiFaceplate.Activate();
+        else
+        {
+          OnInitializeFaceplate(hmiFaceplate);
+          hmiFaceplate.Show(this);
+        }
+      }
+    }
+
+  }
+}
 #endregion AnalogInput_HMI;
 
 #endregion Definitions;

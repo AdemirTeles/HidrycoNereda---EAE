@@ -22,6 +22,8 @@ namespace Hidryco.HidrycoLib.Symbols.Sensor_Generico
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary1 = new NxtControl.GuiFramework.PropertyDictionary();
 			this.fundo = new NxtControl.GuiFramework.Rectangle();
 			this.valor = new System.HMI.Symbols.Base.Label<System.Single>();
+			this.valorPct = new System.HMI.Symbols.Base.Label<System.Single>();
+			NxtControl.GuiFramework.PropertyDictionary propertyDictionaryPct = new NxtControl.GuiFramework.PropertyDictionary();
 			this.invalido = new NxtControl.GuiFramework.FreeText();
 			this.alP1 = new NxtControl.GuiFramework.Rectangle();
 			this.alP1n = new NxtControl.GuiFramework.FreeText();
@@ -75,6 +77,30 @@ namespace Hidryco.HidrycoLib.Symbols.Sensor_Generico
 			this.valor.TagName = "STS_SENSOR";
 			this.valor.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleRight;
 			this.valor.EndInit();
+			// 
+			// valorPct (porcentagem calculada no CLP: STS_PORCENTAGEM; visivel com a opcao Porcentagem)
+			// 
+			this.valorPct.BeginInit();
+			this.valorPct.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.valorPct.DecimalPlacesCount = ((uint)(1u));
+			this.valorPct.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.62D, 0D, 0D, 0.95D, 4D, 0D);
+			this.valorPct.Font = new NxtControl.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Bold);
+			this.valorPct.FontScale = false;
+			this.valorPct.IsOnlyInput = true;
+			this.valorPct.IsPrefixSuffixOutside = false;
+			this.valorPct.LeadingZeros = ((uint)(0u));
+			this.valorPct.Name = "valorPct";
+			this.valorPct.NumberBase = NxtControl.GuiFramework.NumberBase.Decimal;
+			propertyDictionaryPct.Add("Text", "${Value}");
+			propertyDictionaryPct.Add("TextColor", new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))));
+			propertyDictionaryPct.Add("Brush", new NxtControl.Drawing.Brush(true));
+			propertyDictionaryPct.Add("Pen", new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("Transparent"), 1F, NxtControl.Drawing.DashStyle.Solid));
+			this.valorPct.Ranges.DefaultPropertyValues = propertyDictionaryPct;
+			this.valorPct.Suffix = " %";
+			this.valorPct.TagName = "STS_PORCENTAGEM";
+			this.valorPct.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleRight;
+			this.valorPct.Visible = false;
+			this.valorPct.EndInit();
 			// 
 			// invalido
 			// 
@@ -336,6 +362,7 @@ namespace Hidryco.HidrycoLib.Symbols.Sensor_Generico
 			this.Shapes.AddRange(new System.ComponentModel.IComponent[] {
 			this.fundo,
 			this.valor,
+			this.valorPct,
 			this.invalido,
 			this.alP1,
 			this.alP1n,
@@ -362,6 +389,7 @@ namespace Hidryco.HidrycoLib.Symbols.Sensor_Generico
 		}
 		private NxtControl.GuiFramework.Rectangle fundo;
 		private System.HMI.Symbols.Base.Label<System.Single> valor;
+		private System.HMI.Symbols.Base.Label<System.Single> valorPct;
 		private NxtControl.GuiFramework.FreeText invalido;
 		private NxtControl.GuiFramework.Rectangle alP1;
 		private NxtControl.GuiFramework.FreeText alP1n;

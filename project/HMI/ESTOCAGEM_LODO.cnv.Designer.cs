@@ -24,6 +24,8 @@ namespace HMI.Main.Canvases
 		private void InitializeComponent()
 		{
 			this.btnResetGeral = new NxtControl.GuiFramework.DrawnButton();
+			this.liqTq1 = new Hidryco.HidrycoLib.Symbols.Sensor_Generico.sLiquido();
+			this.liqTq2 = new Hidryco.HidrycoLib.Symbols.Sensor_Generico.sLiquido();
 			this.btnReconhecerGeral = new NxtControl.GuiFramework.DrawnButton();
 			this.fundo = new NxtControl.GuiFramework.Rectangle();
 			this.cardProcesso = new NxtControl.GuiFramework.Rectangle();
@@ -967,6 +969,26 @@ namespace HMI.Main.Canvases
 			this.repLL2.Visible = false;
 			this.repLL2.EndInit();
 			// 
+			// liqTq1 (liquido sobe com o nivel em %)
+			// 
+			this.liqTq1.BeginInit();
+			this.liqTq1._iFluido = Hidryco.HidrycoLib.Symbols.Sensor_Generico.sLiquido.FluidoOption.Lodo;
+			this.liqTq1.DesignMatrix = new NxtControl.Drawing.Matrix2D(2.17D, 0D, 0D, 2.6D, 300D, 140D);
+			this.liqTq1.Name = "liqTq1";
+			this.liqTq1.SecurityToken = ((uint)(4294967295u));
+			this.liqTq1.TagName = "A03873967E84DB27.LIT_900_01";
+			this.liqTq1.EndInit();
+			// 
+			// liqTq2 (liquido sobe com o nivel em %)
+			// 
+			this.liqTq2.BeginInit();
+			this.liqTq2._iFluido = Hidryco.HidrycoLib.Symbols.Sensor_Generico.sLiquido.FluidoOption.Lodo;
+			this.liqTq2.DesignMatrix = new NxtControl.Drawing.Matrix2D(2.17D, 0D, 0D, 2.6D, 523D, 140D);
+			this.liqTq2.Name = "liqTq2";
+			this.liqTq2.SecurityToken = ((uint)(4294967295u));
+			this.liqTq2.TagName = "A03873967E84DB27.LIT_900_02";
+			this.liqTq2.EndInit();
+			// 
 			// ESTOCAGEM_LODO
 			// 
 			this.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(1366D)), ((float)(698D)));
@@ -1000,6 +1022,8 @@ namespace HMI.Main.Canvases
 			this.Shapes.AddRange(new System.ComponentModel.IComponent[] {
 			this.fundo,
 			this.cardProcesso,
+			this.liqTq1,
+			this.liqTq2,
 			this.pE,
 			this.pD,
 			this.pF,
@@ -1181,6 +1205,8 @@ namespace HMI.Main.Canvases
 		private SE.App2Base.Symbols.LimitAlarm.sIndicator repH2;
 		private SE.App2Base.Symbols.LimitAlarm.sIndicator repL2;
 		private SE.App2Base.Symbols.LimitAlarm.sIndicator repLL2;
+		private Hidryco.HidrycoLib.Symbols.Sensor_Generico.sLiquido liqTq1;
+		private Hidryco.HidrycoLib.Symbols.Sensor_Generico.sLiquido liqTq2;
 		#endregion
 	}
 }

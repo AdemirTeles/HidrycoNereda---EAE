@@ -1256,7 +1256,7 @@ namespace SE.Nereda.Symbols.NeredaSludgeBuffer_2
 			// sDefault4
 			// 
 			this.sDefault4.BeginInit();
-			this.sDefault4._iVlvName = "AV49003 Sobrenadante";
+			this.sDefault4._iVlvName = "AV49003\r\nSobrenadante";
 			this.sDefault4.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 1000D, 400D);
 			this.sDefault4.Name = "sDefault4";
 			this.sDefault4.SecurityToken = ((uint)(4294967295u));

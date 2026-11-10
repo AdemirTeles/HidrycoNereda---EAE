@@ -109,6 +109,7 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			this.group10 = new NxtControl.GuiFramework.Group();
 			this.arc21 = new NxtControl.GuiFramework.Arc();
 			this.pipe7 = new NxtControl.GuiFramework.Pipe();
+			this.pipe22 = new NxtControl.GuiFramework.Pipe();
 			this.pipe16 = new NxtControl.GuiFramework.Pipe();
 			this.pipe15 = new NxtControl.GuiFramework.Pipe();
 			this.pipe14 = new NxtControl.GuiFramework.Pipe();
@@ -147,9 +148,7 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			this.line51 = new NxtControl.GuiFramework.Line();
 			this.line52 = new NxtControl.GuiFramework.Line();
 			this.line3 = new NxtControl.GuiFramework.Line();
-			this.line55 = new NxtControl.GuiFramework.Line();
 			this.line56 = new NxtControl.GuiFramework.Line();
-			this.line57 = new NxtControl.GuiFramework.Line();
 			this.polyline5 = new NxtControl.GuiFramework.Polyline();
 			this.polyline6 = new NxtControl.GuiFramework.Polyline();
 			this.arc31 = new NxtControl.GuiFramework.Arc();
@@ -181,18 +180,12 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			this.ellipse3 = new NxtControl.GuiFramework.Ellipse();
 			this.ellipse4 = new NxtControl.GuiFramework.Ellipse();
 			this.pipe11 = new NxtControl.GuiFramework.Pipe();
-			this.XV002 = new NxtControl.GuiFramework.FreeText();
-			this.CV001 = new NxtControl.GuiFramework.FreeText();
-			this.CV002 = new NxtControl.GuiFramework.FreeText();
-			this.CV003 = new NxtControl.GuiFramework.FreeText();
-			this.CV004 = new NxtControl.GuiFramework.FreeText();
-			this.XV003 = new NxtControl.GuiFramework.FreeText();
-			this.XV004 = new NxtControl.GuiFramework.FreeText();
-			this.XV005 = new NxtControl.GuiFramework.FreeText();
-			this.XV006 = new NxtControl.GuiFramework.FreeText();
-			this.XV007 = new NxtControl.GuiFramework.FreeText();
-			this.XV008 = new NxtControl.GuiFramework.FreeText();
-			this.CV005 = new NxtControl.GuiFramework.FreeText();
+			this.AV4x172 = new NxtControl.GuiFramework.FreeText();
+			this.AV4x102 = new NxtControl.GuiFramework.FreeText();
+			this.AV4x171 = new NxtControl.GuiFramework.FreeText();
+			this.AV4x170 = new NxtControl.GuiFramework.FreeText();
+			this.AV4x103 = new NxtControl.GuiFramework.FreeText();
+			this.AV4x101 = new NxtControl.GuiFramework.FreeText();
 			this.LT001 = new NxtControl.GuiFramework.FreeText();
 			this.REACTOR = new NxtControl.GuiFramework.FreeText();
 			this.pipe17 = new NxtControl.GuiFramework.Pipe();
@@ -207,8 +200,8 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			this.group4 = new NxtControl.GuiFramework.Group();
 			this.group5 = new NxtControl.GuiFramework.Group();
 			this.group6 = new NxtControl.GuiFramework.Group();
-			this.XV001 = new NxtControl.GuiFramework.FreeText();
 			this.sDefault2 = new SE.Nereda.Symbols.ValveS.sDefault();
+			this.sDefault6 = new SE.Nereda.Symbols.ValveS.sDefault();
 			this.pipe9 = new NxtControl.GuiFramework.Pipe();
 			this.pipe12 = new NxtControl.GuiFramework.Pipe();
 			this.pipe18 = new NxtControl.GuiFramework.Pipe();
@@ -218,7 +211,6 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			this.pipe20 = new NxtControl.GuiFramework.Pipe();
 			this.sDefault5 = new SE.Nereda.Symbols.ValveS.sDefault();
 			this.pipe21 = new NxtControl.GuiFramework.Pipe();
-			this.rectangle5 = new NxtControl.GuiFramework.Rectangle();
 			this.rectangle4 = new NxtControl.GuiFramework.Rectangle();
 			this.group27 = new NxtControl.GuiFramework.Group();
 			this.polygon11 = new NxtControl.GuiFramework.Polygon();
@@ -950,14 +942,25 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			// 
 			// pipe7
 			// 
-			this.pipe7.Bounds = new NxtControl.Drawing.RectF(((float)(136D)), ((float)(352D)), ((float)(84D)), ((float)(0D)));
+			this.pipe7.Bounds = new NxtControl.Drawing.RectF(((float)(100D)), ((float)(352D)), ((float)(120D)), ((float)(0D)));
 			this.pipe7.InnerColor = new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(255)));
 			this.pipe7.Name = "pipe7";
 			this.pipe7.OuterColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.pipe7.Points.AddRange(new NxtControl.Drawing.PointF[] {
 			new NxtControl.Drawing.PointF(220D, 352D),
-			new NxtControl.Drawing.PointF(136D, 352D)});
+			new NxtControl.Drawing.PointF(100D, 352D)});
 			this.pipe7.Width = 10;
+			// 
+			// pipe22
+			// 
+			this.pipe22.Bounds = new NxtControl.Drawing.RectF(((float)(16D)), ((float)(352D)), ((float)(60D)), ((float)(0D)));
+			this.pipe22.InnerColor = new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(255)));
+			this.pipe22.Name = "pipe22";
+			this.pipe22.OuterColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.pipe22.Points.AddRange(new NxtControl.Drawing.PointF[] {
+			new NxtControl.Drawing.PointF(76D, 352D),
+			new NxtControl.Drawing.PointF(16D, 352D)});
+			this.pipe22.Width = 10;
 			// 
 			// pipe16
 			// 
@@ -1327,26 +1330,12 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			this.line3.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
 			this.line3.StartPoint = new NxtControl.Drawing.PointF(184D, 664D);
 			// 
-			// line55
-			// 
-			this.line55.EndPoint = new NxtControl.Drawing.PointF(192D, 544D);
-			this.line55.Name = "line55";
-			this.line55.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
-			this.line55.StartPoint = new NxtControl.Drawing.PointF(176D, 544D);
-			// 
 			// line56
 			// 
 			this.line56.EndPoint = new NxtControl.Drawing.PointF(192D, 664D);
 			this.line56.Name = "line56";
 			this.line56.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
 			this.line56.StartPoint = new NxtControl.Drawing.PointF(176D, 664D);
-			// 
-			// line57
-			// 
-			this.line57.EndPoint = new NxtControl.Drawing.PointF(192D, 712D);
-			this.line57.Name = "line57";
-			this.line57.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
-			this.line57.StartPoint = new NxtControl.Drawing.PointF(176D, 712D);
 			// 
 			// polyline5
 			// 
@@ -1619,103 +1608,53 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			new NxtControl.Drawing.PointF(392D, 312D)});
 			this.pipe11.Width = 10;
 			// 
-			// XV002
+			// AV4x172
 			// 
-			this.XV002.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.XV002.Font = new NxtControl.Drawing.Font("LabelFont");
-			this.XV002.Location = new NxtControl.Drawing.PointF(312D, 292D);
-			this.XV002.Name = "XV002";
-			this.XV002.Text = "NVPP 001 a-- 059";
-			this.XV002.TextAngle = 90F;
+			this.AV4x172.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.AV4x172.Font = new NxtControl.Drawing.Font("LabelFont");
+			this.AV4x172.Location = new NxtControl.Drawing.PointF(356D, 100D);
+			this.AV4x172.Name = "AV4x172";
+			this.AV4x172.Text = "AV4x172";
 			// 
-			// CV001
+			// AV4x102
 			// 
-			this.CV001.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.CV001.Font = new NxtControl.Drawing.Font("LabelFont");
-			this.CV001.Location = new NxtControl.Drawing.PointF(356D, 100D);
-			this.CV001.Name = "CV001";
-			this.CV001.Text = "NVPP 001 a-- 038";
+			this.AV4x102.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.AV4x102.Font = new NxtControl.Drawing.Font("LabelFont");
+			this.AV4x102.Location = new NxtControl.Drawing.PointF(40D, 364D);
+			this.AV4x102.Name = "AV4x102";
+			this.AV4x102.Text = "AV4x102";
 			// 
-			// CV002
+			// AV4x171
 			// 
-			this.CV002.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.CV002.Font = new NxtControl.Drawing.Font("LabelFont");
-			this.CV002.Location = new NxtControl.Drawing.PointF(468D, 64D);
-			this.CV002.Name = "CV002";
-			this.CV002.Text = "NVPP 001 a-- 067";
+			this.AV4x171.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.AV4x171.Font = new NxtControl.Drawing.Font("LabelFont");
+			this.AV4x171.Location = new NxtControl.Drawing.PointF(468D, 64D);
+			this.AV4x171.Name = "AV4x171";
+			this.AV4x171.Text = "AV4x171";
 			// 
-			// CV003
+			// AV4x170
 			// 
-			this.CV003.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.CV003.Font = new NxtControl.Drawing.Font("LabelFont");
-			this.CV003.Location = new NxtControl.Drawing.PointF(356D, 196D);
-			this.CV003.Name = "CV003";
-			this.CV003.Text = "NVPP 001 a-- 036";
+			this.AV4x170.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.AV4x170.Font = new NxtControl.Drawing.Font("LabelFont");
+			this.AV4x170.Location = new NxtControl.Drawing.PointF(356D, 196D);
+			this.AV4x170.Name = "AV4x170";
+			this.AV4x170.Text = "AV4x170";
 			// 
-			// CV004
+			// AV4x103
 			// 
-			this.CV004.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.CV004.Font = new NxtControl.Drawing.Font("LabelFont");
-			this.CV004.Location = new NxtControl.Drawing.PointF(32D, 452D);
-			this.CV004.Name = "CV004";
-			this.CV004.Text = "NVPP 001 a-- 023";
+			this.AV4x103.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.AV4x103.Font = new NxtControl.Drawing.Font("LabelFont");
+			this.AV4x103.Location = new NxtControl.Drawing.PointF(32D, 452D);
+			this.AV4x103.Name = "AV4x103";
+			this.AV4x103.Text = "AV4x103";
 			// 
-			// XV003
+			// AV4x101
 			// 
-			this.XV003.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.XV003.Font = new NxtControl.Drawing.Font("LabelFont");
-			this.XV003.Location = new NxtControl.Drawing.PointF(28D, 496D);
-			this.XV003.Name = "XV003";
-			this.XV003.Text = "NVPP 001 a-- 022";
-			// 
-			// XV004
-			// 
-			this.XV004.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.XV004.Font = new NxtControl.Drawing.Font("LabelFont");
-			this.XV004.Location = new NxtControl.Drawing.PointF(34D, 568D);
-			this.XV004.Name = "XV004";
-			this.XV004.Text = "NVPP 001 a-- 050";
-			// 
-			// XV005
-			// 
-			this.XV005.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.XV005.Font = new NxtControl.Drawing.Font("LabelFont");
-			this.XV005.Location = new NxtControl.Drawing.PointF(34D, 664D);
-			this.XV005.Name = "XV005";
-			this.XV005.Text = "NVPP 001 a-- 051";
-			// 
-			// XV006
-			// 
-			this.XV006.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.XV006.Font = new NxtControl.Drawing.Font("LabelFont");
-			this.XV006.Location = new NxtControl.Drawing.PointF(180D, 540D);
-			this.XV006.Name = "XV006";
-			this.XV006.Text = "NVPP 001 a-- 091";
-			this.XV006.TextAngle = 90F;
-			// 
-			// XV007
-			// 
-			this.XV007.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.XV007.Font = new NxtControl.Drawing.Font("LabelFont");
-			this.XV007.Location = new NxtControl.Drawing.PointF(152D, 714D);
-			this.XV007.Name = "XV007";
-			this.XV007.Text = "NVPP 001 a-- 092";
-			// 
-			// XV008
-			// 
-			this.XV008.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.XV008.Font = new NxtControl.Drawing.Font("LabelFont");
-			this.XV008.Location = new NxtControl.Drawing.PointF(264D, 768D);
-			this.XV008.Name = "XV008";
-			this.XV008.Text = "NVPP 001 a-- 097";
-			// 
-			// CV005
-			// 
-			this.CV005.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.CV005.Font = new NxtControl.Drawing.Font("LabelFont");
-			this.CV005.Location = new NxtControl.Drawing.PointF(488D, 664D);
-			this.CV005.Name = "CV005";
-			this.CV005.Text = "NVPP 001 a-- 007";
+			this.AV4x101.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.AV4x101.Font = new NxtControl.Drawing.Font("LabelFont");
+			this.AV4x101.Location = new NxtControl.Drawing.PointF(488D, 664D);
+			this.AV4x101.Name = "AV4x101";
+			this.AV4x101.Text = "AV4x101";
 			// 
 			// LT001
 			// 
@@ -1723,7 +1662,7 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			this.LT001.Font = new NxtControl.Drawing.Font("LabelFont");
 			this.LT001.Location = new NxtControl.Drawing.PointF(262D, 568D);
 			this.LT001.Name = "LT001";
-			this.LT001.Text = "NVPP 001 lt 004";
+			this.LT001.Text = "4xLT1005";
 			// 
 			// REACTOR
 			// 
@@ -1731,7 +1670,7 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			this.REACTOR.Font = new NxtControl.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
 			this.REACTOR.Location = new NxtControl.Drawing.PointF(272D, 388D);
 			this.REACTOR.Name = "REACTOR";
-			this.REACTOR.Text = "Reactor 1";
+			this.REACTOR.Text = "Reator Nereda 1";
 			// 
 			// pipe17
 			// 
@@ -1827,7 +1766,6 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			this.group3.BeginInit();
 			this.group3.Name = "group3";
 			this.group3.Shapes.AddRange(new System.ComponentModel.IComponent[] {
-			this.line55,
 			this.line4,
 			this.line58,
 			this.line60,
@@ -1846,7 +1784,6 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			this.line2,
 			this.line3,
 			this.line56,
-			this.line57,
 			this.line59,
 			this.line61,
 			this.line63,
@@ -1870,15 +1807,6 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			this.polyline6});
 			this.group6.EndInit();
 			// 
-			// XV001
-			// 
-			this.XV001.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.XV001.Font = new NxtControl.Drawing.Font("LabelFont");
-			this.XV001.Location = new NxtControl.Drawing.PointF(192D, 292D);
-			this.XV001.Name = "XV001";
-			this.XV001.Text = "NVPP 001 a-- 073";
-			this.XV001.TextAngle = 90F;
-			// 
 			// sDefault2
 			// 
 			this.sDefault2.BeginInit();
@@ -1888,8 +1816,20 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			this.sDefault2.SecurityToken = ((uint)(4294967295u));
 			this.sDefault2.StateTextPosition = SE.Nereda.Symbols.ValveS.sDefault.StateTextPositionOption.Vertical;
 			this.sDefault2.SymbolNameDisplay = SE.Nereda.Symbols.ValveS.sDefault.SymbolNameDisplayOption.Hide;
-			this.sDefault2.TagName = "Actuators.VentValve";
+			this.sDefault2.TagName = "Actuators.VentSludgeGridValve_AV4x172";
 			this.sDefault2.EndInit();
+			// 
+			// sDefault6
+			// 
+			this.sDefault6.BeginInit();
+			this.sDefault6._iVlvName = "Valve";
+			this.sDefault6.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 40D, 304D);
+			this.sDefault6.Name = "sDefault6";
+			this.sDefault6.SecurityToken = ((uint)(4294967295u));
+			this.sDefault6.StateTextPosition = SE.Nereda.Symbols.ValveS.sDefault.StateTextPositionOption.Vertical;
+			this.sDefault6.SymbolNameDisplay = SE.Nereda.Symbols.ValveS.sDefault.SymbolNameDisplayOption.Hide;
+			this.sDefault6.TagName = "Actuators.LowerLevelValve_AV4x102";
+			this.sDefault6.EndInit();
 			// 
 			// pipe9
 			// 
@@ -1938,7 +1878,7 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			this.sDefault3.SecurityToken = ((uint)(4294967295u));
 			this.sDefault3.StateTextPosition = SE.Nereda.Symbols.ValveS.sDefault.StateTextPositionOption.Horizontal;
 			this.sDefault3.SymbolNameDisplay = SE.Nereda.Symbols.ValveS.sDefault.SymbolNameDisplayOption.Hide;
-			this.sDefault3.TagName = "Actuators.AirValveInfluentGrid";
+			this.sDefault3.TagName = "Actuators.AirFillValveSludgeDischarge_AV4x171";
 			this.sDefault3.EndInit();
 			// 
 			// pipe19
@@ -1961,7 +1901,7 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			this.sDefault4.SecurityToken = ((uint)(4294967295u));
 			this.sDefault4.StateTextPosition = SE.Nereda.Symbols.ValveS.sDefault.StateTextPositionOption.Vertical;
 			this.sDefault4.SymbolNameDisplay = SE.Nereda.Symbols.ValveS.sDefault.SymbolNameDisplayOption.Hide;
-			this.sDefault4.TagName = "Actuators.AirValveAerationGrid";
+			this.sDefault4.TagName = "Actuators.AerationBlockValve_AV4x170";
 			this.sDefault4.EndInit();
 			// 
 			// pipe20
@@ -1999,16 +1939,6 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			new NxtControl.Drawing.PointF(136D, 720D)});
 			this.pipe21.Width = 10;
 			// 
-			// rectangle5
-			// 
-			this.rectangle5.Bounds = new NxtControl.Drawing.RectF(((float)(208D)), ((float)(360D)), ((float)(200D)), ((float)(144D)));
-			this.rectangle5.Brush = new NxtControl.Drawing.Brush(true);
-			this.rectangle5.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
-			this.rectangle5.Name = "rectangle5";
-			this.rectangle5.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("transparent"), 1F, NxtControl.Drawing.DashStyle.Solid);
-			this.rectangle5.Text = "50m³\r\nmax : 27m³/batch";
-			this.rectangle5.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleCenter;
-			// 
 			// rectangle4
 			// 
 			this.rectangle4.Bounds = new NxtControl.Drawing.RectF(((float)(208D)), ((float)(312D)), ((float)(200D)), ((float)(400D)));
@@ -2029,6 +1959,7 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			this.pipe2,
 			this.pipe1,
 			this.pipe7,
+			this.pipe22,
 			this.pipe5,
 			this.pipe8,
 			this.pipe16,
@@ -2078,19 +2009,12 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			this.ellipse2,
 			this.ellipse3,
 			this.pipe11,
-			this.XV001,
-			this.XV002,
-			this.CV001,
-			this.CV002,
-			this.CV003,
-			this.CV004,
-			this.XV003,
-			this.XV004,
-			this.XV005,
-			this.XV006,
-			this.XV007,
-			this.XV008,
-			this.CV005,
+			this.AV4x172,
+			this.AV4x102,
+			this.AV4x171,
+			this.AV4x170,
+			this.AV4x103,
+			this.AV4x101,
 			this.REACTOR,
 			this.group2,
 			this.AirBubbles1,
@@ -2102,12 +2026,12 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			this.group5,
 			this.group6,
 			this.sDefault2,
+			this.sDefault6,
 			this.pipe12,
 			this.sDefault3,
 			this.sDefault4,
 			this.sDefault5,
 			this.LT001,
-			this.rectangle5,
 			this.rectangle4,
 			this.pipe13,
 			this.ellipse4,
@@ -2367,6 +2291,7 @@ namespace SE.Nereda.Symbols.NeredaReactor
 		private NxtControl.GuiFramework.Group group10;
 		private NxtControl.GuiFramework.Arc arc21;
 		private NxtControl.GuiFramework.Pipe pipe7;
+		private NxtControl.GuiFramework.Pipe pipe22;
 		private NxtControl.GuiFramework.Pipe pipe16;
 		private NxtControl.GuiFramework.Pipe pipe15;
 		private NxtControl.GuiFramework.Pipe pipe14;
@@ -2405,9 +2330,7 @@ namespace SE.Nereda.Symbols.NeredaReactor
 		private NxtControl.GuiFramework.Line line51;
 		private NxtControl.GuiFramework.Line line52;
 		private NxtControl.GuiFramework.Line line3;
-		private NxtControl.GuiFramework.Line line55;
 		private NxtControl.GuiFramework.Line line56;
-		private NxtControl.GuiFramework.Line line57;
 		private NxtControl.GuiFramework.Polyline polyline5;
 		private NxtControl.GuiFramework.Polyline polyline6;
 		private NxtControl.GuiFramework.Arc arc31;
@@ -2440,19 +2363,12 @@ namespace SE.Nereda.Symbols.NeredaReactor
 		private NxtControl.GuiFramework.Ellipse ellipse4;
 		private NxtControl.GuiFramework.Pipe pipe11;
 		private NxtControl.GuiFramework.Pipe pipe12;
-		private NxtControl.GuiFramework.FreeText XV001;
-		private NxtControl.GuiFramework.FreeText XV002;
-		private NxtControl.GuiFramework.FreeText CV001;
-		private NxtControl.GuiFramework.FreeText CV002;
-		private NxtControl.GuiFramework.FreeText CV003;
-		private NxtControl.GuiFramework.FreeText CV004;
-		private NxtControl.GuiFramework.FreeText XV003;
-		private NxtControl.GuiFramework.FreeText XV004;
-		private NxtControl.GuiFramework.FreeText XV005;
-		private NxtControl.GuiFramework.FreeText XV006;
-		private NxtControl.GuiFramework.FreeText XV007;
-		private NxtControl.GuiFramework.FreeText XV008;
-		private NxtControl.GuiFramework.FreeText CV005;
+		private NxtControl.GuiFramework.FreeText AV4x172;
+		private NxtControl.GuiFramework.FreeText AV4x102;
+		private NxtControl.GuiFramework.FreeText AV4x171;
+		private NxtControl.GuiFramework.FreeText AV4x170;
+		private NxtControl.GuiFramework.FreeText AV4x103;
+		private NxtControl.GuiFramework.FreeText AV4x101;
 		private NxtControl.GuiFramework.FreeText LT001;
 		private NxtControl.GuiFramework.FreeText REACTOR;
 		private NxtControl.GuiFramework.Pipe pipe17;
@@ -2470,6 +2386,7 @@ namespace SE.Nereda.Symbols.NeredaReactor
 		private NxtControl.GuiFramework.Group group5;
 		private NxtControl.GuiFramework.Group group6;
 		private SE.Nereda.Symbols.ValveS.sDefault sDefault2;
+		private SE.Nereda.Symbols.ValveS.sDefault sDefault6;
 		private NxtControl.GuiFramework.Pipe pipe18;
 		private SE.Nereda.Symbols.ValveS.sDefault sDefault3;
 		private NxtControl.GuiFramework.Pipe pipe19;
@@ -2477,7 +2394,6 @@ namespace SE.Nereda.Symbols.NeredaReactor
 		private NxtControl.GuiFramework.Pipe pipe20;
 		private SE.Nereda.Symbols.ValveS.sDefault sDefault5;
 		private NxtControl.GuiFramework.Pipe pipe21;
-		private NxtControl.GuiFramework.Rectangle rectangle5;
 		private NxtControl.GuiFramework.Group group27;
 		private NxtControl.GuiFramework.Polygon polygon11;
 		private NxtControl.GuiFramework.Polygon polygon12;

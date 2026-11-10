@@ -24,6 +24,12 @@ namespace HMI.Main.Canvases
 		private void InitializeComponent()
 		{
 			this.fundo = new NxtControl.GuiFramework.Rectangle();
+			this.dgTNER = new NxtControl.GuiFramework.Rectangle();
+			this.dgXNER = new NxtControl.GuiFramework.Rectangle();
+			this.dgTSUB = new NxtControl.GuiFramework.Rectangle();
+			this.dgXSUB = new NxtControl.GuiFramework.Rectangle();
+			this.dgTLODO = new NxtControl.GuiFramework.Rectangle();
+			this.dgXLODO = new NxtControl.GuiFramework.Rectangle();
 			this.cardProcesso = new NxtControl.GuiFramework.Rectangle();
 			this.cardNER = new NxtControl.GuiFramework.Rectangle();
 			this.titNER = new NxtControl.GuiFramework.FreeText();
@@ -602,6 +608,72 @@ namespace HMI.Main.Canvases
 			this.srLODO2.TagName = "265BB641B3F671EF";
 			this.srLODO2.EndInit();
 			// 
+			// dgTNER
+			// 
+			this.dgTNER.Bounds = new NxtControl.Drawing.RectF(((float)(28D)), ((float)(590D)), ((float)(412D)), ((float)(16D)));
+			this.dgTNER.Brush = new NxtControl.Drawing.Brush(true);
+			this.dgTNER.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold);
+			this.dgTNER.Name = "dgTNER";
+			this.dgTNER.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("Transparent"), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.dgTNER.Text = "DIAGNÓSTICO";
+			this.dgTNER.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
+			this.dgTNER.TextColor = new NxtControl.Drawing.Color(((byte)(110)), ((byte)(110)), ((byte)(110)));
+			// 
+			// dgXNER
+			// 
+			this.dgXNER.Bounds = new NxtControl.Drawing.RectF(((float)(28D)), ((float)(606D)), ((float)(412D)), ((float)(72D)));
+			this.dgXNER.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(250)), ((byte)(250)), ((byte)(250))));
+			this.dgXNER.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular);
+			this.dgXNER.Name = "dgXNER";
+			this.dgXNER.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(190)), ((byte)(190)), ((byte)(190))), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.dgXNER.Text = "Aguardando dados dos CLPs...";
+			this.dgXNER.TextAlignment = NxtControl.Drawing.ContentAlignment.TopLeft;
+			this.dgXNER.TextColor = new NxtControl.Drawing.Color(((byte)(40)), ((byte)(40)), ((byte)(40)));
+			// 
+			// dgTSUB
+			// 
+			this.dgTSUB.Bounds = new NxtControl.Drawing.RectF(((float)(475D)), ((float)(590D)), ((float)(412D)), ((float)(16D)));
+			this.dgTSUB.Brush = new NxtControl.Drawing.Brush(true);
+			this.dgTSUB.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold);
+			this.dgTSUB.Name = "dgTSUB";
+			this.dgTSUB.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("Transparent"), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.dgTSUB.Text = "DIAGNÓSTICO";
+			this.dgTSUB.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
+			this.dgTSUB.TextColor = new NxtControl.Drawing.Color(((byte)(110)), ((byte)(110)), ((byte)(110)));
+			// 
+			// dgXSUB
+			// 
+			this.dgXSUB.Bounds = new NxtControl.Drawing.RectF(((float)(475D)), ((float)(606D)), ((float)(412D)), ((float)(72D)));
+			this.dgXSUB.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(250)), ((byte)(250)), ((byte)(250))));
+			this.dgXSUB.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular);
+			this.dgXSUB.Name = "dgXSUB";
+			this.dgXSUB.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(190)), ((byte)(190)), ((byte)(190))), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.dgXSUB.Text = "Aguardando dados dos CLPs...";
+			this.dgXSUB.TextAlignment = NxtControl.Drawing.ContentAlignment.TopLeft;
+			this.dgXSUB.TextColor = new NxtControl.Drawing.Color(((byte)(40)), ((byte)(40)), ((byte)(40)));
+			// 
+			// dgTLODO
+			// 
+			this.dgTLODO.Bounds = new NxtControl.Drawing.RectF(((float)(922D)), ((float)(590D)), ((float)(412D)), ((float)(16D)));
+			this.dgTLODO.Brush = new NxtControl.Drawing.Brush(true);
+			this.dgTLODO.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold);
+			this.dgTLODO.Name = "dgTLODO";
+			this.dgTLODO.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("Transparent"), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.dgTLODO.Text = "DIAGNÓSTICO";
+			this.dgTLODO.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
+			this.dgTLODO.TextColor = new NxtControl.Drawing.Color(((byte)(110)), ((byte)(110)), ((byte)(110)));
+			// 
+			// dgXLODO
+			// 
+			this.dgXLODO.Bounds = new NxtControl.Drawing.RectF(((float)(922D)), ((float)(606D)), ((float)(412D)), ((float)(72D)));
+			this.dgXLODO.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(250)), ((byte)(250)), ((byte)(250))));
+			this.dgXLODO.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular);
+			this.dgXLODO.Name = "dgXLODO";
+			this.dgXLODO.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(190)), ((byte)(190)), ((byte)(190))), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.dgXLODO.Text = "Aguardando dados dos CLPs...";
+			this.dgXLODO.TextAlignment = NxtControl.Drawing.ContentAlignment.TopLeft;
+			this.dgXLODO.TextColor = new NxtControl.Drawing.Color(((byte)(40)), ((byte)(40)), ((byte)(40)));
+			// 
 			// HARDWARE
 			// 
 			this.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(1366D)), ((float)(698D)));
@@ -668,7 +740,13 @@ namespace HMI.Main.Canvases
 			this.cpuLODO,
 			this.srLODO0,
 			this.srLODO1,
-			this.srLODO2});
+			this.srLODO2,
+			this.dgTNER,
+			this.dgXNER,
+			this.dgTSUB,
+			this.dgXSUB,
+			this.dgTLODO,
+			this.dgXLODO});
 			this.Size = new System.Drawing.Size(1366, 698);
 
 		}
@@ -734,6 +812,12 @@ namespace HMI.Main.Canvases
 		private Hidryco.HidrycoLib.Symbols.Status_Remota.sDefault srLODO0;
 		private Hidryco.HidrycoLib.Symbols.Status_Remota.sDefault srLODO1;
 		private Hidryco.HidrycoLib.Symbols.Status_Remota.sDefault srLODO2;
+		private NxtControl.GuiFramework.Rectangle dgTNER;
+		private NxtControl.GuiFramework.Rectangle dgXNER;
+		private NxtControl.GuiFramework.Rectangle dgTSUB;
+		private NxtControl.GuiFramework.Rectangle dgXSUB;
+		private NxtControl.GuiFramework.Rectangle dgTLODO;
+		private NxtControl.GuiFramework.Rectangle dgXLODO;
 		#endregion
 	}
 }

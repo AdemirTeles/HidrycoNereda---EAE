@@ -24,6 +24,7 @@ namespace HMI.Main.Canvases
 		private void InitializeComponent()
 		{
 			this.irGradeamento = new NxtControl.GuiFramework.ChangeCanvasButton();
+			this.liqPoco = new Hidryco.HidrycoLib.Symbols.Sensor_Generico.sLiquido();
 			this.btnResetGeral = new NxtControl.GuiFramework.DrawnButton();
 			this.btnReconhecerGeral = new NxtControl.GuiFramework.DrawnButton();
 			this.boiaLSL04 = new Hidryco.HidrycoLib.Symbols.EEE_Bruto.sBoiaL();
@@ -505,6 +506,16 @@ namespace HMI.Main.Canvases
 			this.elevatoria.TagName = "F8F84A6966B68EF2";
 			this.elevatoria.EndInit();
 			// 
+			// liqPoco (liquido sobe com o nivel em %)
+			// 
+			this.liqPoco.BeginInit();
+			this.liqPoco._iFluido = Hidryco.HidrycoLib.Symbols.Sensor_Generico.sLiquido.FluidoOption.Esgoto;
+			this.liqPoco.DesignMatrix = new NxtControl.Drawing.Matrix2D(6D, 0D, 0D, 5.32D, 158D, 120D);
+			this.liqPoco.Name = "liqPoco";
+			this.liqPoco.SecurityToken = ((uint)(4294967295u));
+			this.liqPoco.TagName = "F8F84A6966B68EF2.LIT_100_03";
+			this.liqPoco.EndInit();
+			// 
 			// EEE_BRUTO
 			// 
 			this.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(1366D)), ((float)(698D)));
@@ -593,6 +604,7 @@ namespace HMI.Main.Canvases
 			this.rotChegada2,
 			this.setaChegada,
 			this.pocoInterior,
+			this.liqPoco,
 			this.paredeEsq,
 			this.paredeDir,
 			this.paredeFundo,
@@ -694,6 +706,7 @@ namespace HMI.Main.Canvases
 		private NxtControl.GuiFramework.FreeText rotPITag;
 		private NxtControl.GuiFramework.FreeText rotPITxt;
 		private NxtControl.GuiFramework.ChangeCanvasButton irGradeamento;
+		private Hidryco.HidrycoLib.Symbols.Sensor_Generico.sLiquido liqPoco;
 		#endregion
 	}
 }

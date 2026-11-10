@@ -1122,6 +1122,128 @@ stack Trace:
 
   }
 }
+namespace Hidryco.HidrycoLib.Symbols.Sensor_Generico
+{
+  partial class sLiquido
+  {
+
+    private event EventHandler<Hidryco.HidrycoLib.Symbols.Sensor_Generico.LOAD_PERS_DATAEventArgs> LOAD_PERS_DATA_Fired;
+
+    private event EventHandler<Hidryco.HidrycoLib.Symbols.Sensor_Generico.REQEventArgs> REQ_Fired;
+
+    protected override void OnEndInit()
+    {
+      if (LOAD_PERS_DATA_Fired != null)
+        AttachEventInput(0);
+      if (REQ_Fired != null)
+        AttachEventInput(1);
+
+    }
+
+    protected override void FireEventCallback(int channelId, int cookie, int eventIndex)
+    {
+      switch(eventIndex)
+      {
+        default:
+          break;
+        case 0:
+          if (LOAD_PERS_DATA_Fired != null)
+          {
+            try
+            {
+              LOAD_PERS_DATA_Fired(this, new Hidryco.HidrycoLib.Symbols.Sensor_Generico.LOAD_PERS_DATAEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","LOAD_PERS_DATA_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break; 
+        case 1:
+          if (REQ_Fired != null)
+          {
+            try
+            {
+              REQ_Fired(this, new Hidryco.HidrycoLib.Symbols.Sensor_Generico.REQEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","REQ_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break; 
+
+      }
+    }
+    public bool FireEvent_E_PARAMETROS(System.Boolean CMD_HABILITA_SENSOR, System.Single STP_RANGE_MINIMO, System.Single STP_RANGE_MAXIMO, System.Single STP_ALTURA_MAXIMA, System.Boolean CMD_HABILITA_ALARME_HH, System.Boolean CMD_HABILITA_ALARME_H, System.Boolean CMD_HABILITA_ALARME_L, System.Boolean CMD_HABILITA_ALARME_LL, System.Single STP_ALARME_HH, System.Single STP_ALARME_H, System.Single STP_ALARME_L, System.Single STP_ALARME_LL, System.UInt16 STP_TEMPO_ALARME_HH, System.UInt16 STP_TEMPO_ALARME_H, System.UInt16 STP_TEMPO_ALARME_L, System.UInt16 STP_TEMPO_ALARME_LL)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {CMD_HABILITA_SENSOR, STP_RANGE_MINIMO, STP_RANGE_MAXIMO, STP_ALTURA_MAXIMA, CMD_HABILITA_ALARME_HH, CMD_HABILITA_ALARME_H, CMD_HABILITA_ALARME_L, CMD_HABILITA_ALARME_LL, STP_ALARME_HH, STP_ALARME_H, STP_ALARME_L, STP_ALARME_LL, STP_TEMPO_ALARME_HH, STP_TEMPO_ALARME_H, STP_TEMPO_ALARME_L, STP_TEMPO_ALARME_LL});
+    }
+    public bool FireEvent_E_PARAMETROS(Hidryco.HidrycoLib.Symbols.Sensor_Generico.E_PARAMETROSEventArgs ea)
+    {
+      object[] _values_ = new object[16];
+      if (ea.CMD_HABILITA_SENSOR.HasValue) _values_[0] = ea.CMD_HABILITA_SENSOR.Value;
+      if (ea.STP_RANGE_MINIMO.HasValue) _values_[1] = ea.STP_RANGE_MINIMO.Value;
+      if (ea.STP_RANGE_MAXIMO.HasValue) _values_[2] = ea.STP_RANGE_MAXIMO.Value;
+      if (ea.STP_ALTURA_MAXIMA.HasValue) _values_[3] = ea.STP_ALTURA_MAXIMA.Value;
+      if (ea.CMD_HABILITA_ALARME_HH.HasValue) _values_[4] = ea.CMD_HABILITA_ALARME_HH.Value;
+      if (ea.CMD_HABILITA_ALARME_H.HasValue) _values_[5] = ea.CMD_HABILITA_ALARME_H.Value;
+      if (ea.CMD_HABILITA_ALARME_L.HasValue) _values_[6] = ea.CMD_HABILITA_ALARME_L.Value;
+      if (ea.CMD_HABILITA_ALARME_LL.HasValue) _values_[7] = ea.CMD_HABILITA_ALARME_LL.Value;
+      if (ea.STP_ALARME_HH.HasValue) _values_[8] = ea.STP_ALARME_HH.Value;
+      if (ea.STP_ALARME_H.HasValue) _values_[9] = ea.STP_ALARME_H.Value;
+      if (ea.STP_ALARME_L.HasValue) _values_[10] = ea.STP_ALARME_L.Value;
+      if (ea.STP_ALARME_LL.HasValue) _values_[11] = ea.STP_ALARME_LL.Value;
+      if (ea.STP_TEMPO_ALARME_HH.HasValue) _values_[12] = ea.STP_TEMPO_ALARME_HH.Value;
+      if (ea.STP_TEMPO_ALARME_H.HasValue) _values_[13] = ea.STP_TEMPO_ALARME_H.Value;
+      if (ea.STP_TEMPO_ALARME_L.HasValue) _values_[14] = ea.STP_TEMPO_ALARME_L.Value;
+      if (ea.STP_TEMPO_ALARME_LL.HasValue) _values_[15] = ea.STP_TEMPO_ALARME_LL.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
+    }
+    public bool FireEvent_E_PARAMETROS(System.Boolean CMD_HABILITA_SENSOR, bool ignore_CMD_HABILITA_SENSOR, System.Single STP_RANGE_MINIMO, bool ignore_STP_RANGE_MINIMO, System.Single STP_RANGE_MAXIMO, bool ignore_STP_RANGE_MAXIMO, System.Single STP_ALTURA_MAXIMA, bool ignore_STP_ALTURA_MAXIMA, System.Boolean CMD_HABILITA_ALARME_HH, bool ignore_CMD_HABILITA_ALARME_HH, System.Boolean CMD_HABILITA_ALARME_H, bool ignore_CMD_HABILITA_ALARME_H, System.Boolean CMD_HABILITA_ALARME_L, bool ignore_CMD_HABILITA_ALARME_L, System.Boolean CMD_HABILITA_ALARME_LL, bool ignore_CMD_HABILITA_ALARME_LL, System.Single STP_ALARME_HH, bool ignore_STP_ALARME_HH, System.Single STP_ALARME_H, bool ignore_STP_ALARME_H, System.Single STP_ALARME_L, bool ignore_STP_ALARME_L, System.Single STP_ALARME_LL, bool ignore_STP_ALARME_LL, System.UInt16 STP_TEMPO_ALARME_HH, bool ignore_STP_TEMPO_ALARME_HH, System.UInt16 STP_TEMPO_ALARME_H, bool ignore_STP_TEMPO_ALARME_H, System.UInt16 STP_TEMPO_ALARME_L, bool ignore_STP_TEMPO_ALARME_L, System.UInt16 STP_TEMPO_ALARME_LL, bool ignore_STP_TEMPO_ALARME_LL)
+    {
+      object[] _values_ = new object[16];
+      if (!ignore_CMD_HABILITA_SENSOR) _values_[0] = CMD_HABILITA_SENSOR;
+      if (!ignore_STP_RANGE_MINIMO) _values_[1] = STP_RANGE_MINIMO;
+      if (!ignore_STP_RANGE_MAXIMO) _values_[2] = STP_RANGE_MAXIMO;
+      if (!ignore_STP_ALTURA_MAXIMA) _values_[3] = STP_ALTURA_MAXIMA;
+      if (!ignore_CMD_HABILITA_ALARME_HH) _values_[4] = CMD_HABILITA_ALARME_HH;
+      if (!ignore_CMD_HABILITA_ALARME_H) _values_[5] = CMD_HABILITA_ALARME_H;
+      if (!ignore_CMD_HABILITA_ALARME_L) _values_[6] = CMD_HABILITA_ALARME_L;
+      if (!ignore_CMD_HABILITA_ALARME_LL) _values_[7] = CMD_HABILITA_ALARME_LL;
+      if (!ignore_STP_ALARME_HH) _values_[8] = STP_ALARME_HH;
+      if (!ignore_STP_ALARME_H) _values_[9] = STP_ALARME_H;
+      if (!ignore_STP_ALARME_L) _values_[10] = STP_ALARME_L;
+      if (!ignore_STP_ALARME_LL) _values_[11] = STP_ALARME_LL;
+      if (!ignore_STP_TEMPO_ALARME_HH) _values_[12] = STP_TEMPO_ALARME_HH;
+      if (!ignore_STP_TEMPO_ALARME_H) _values_[13] = STP_TEMPO_ALARME_H;
+      if (!ignore_STP_TEMPO_ALARME_L) _values_[14] = STP_TEMPO_ALARME_L;
+      if (!ignore_STP_TEMPO_ALARME_LL) _values_[15] = STP_TEMPO_ALARME_LL;
+      return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
+    }
+    public bool FireEvent_E_RESET(System.Boolean CMD_RESET)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {CMD_RESET});
+    }
+    public bool FireEvent_E_RESET(Hidryco.HidrycoLib.Symbols.Sensor_Generico.E_RESETEventArgs ea)
+    {
+      object[] _values_ = new object[1];
+      if (ea.CMD_RESET.HasValue) _values_[0] = ea.CMD_RESET.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
+    }
+    public bool FireEvent_E_RESET(System.Boolean CMD_RESET, bool ignore_CMD_RESET)
+    {
+      object[] _values_ = new object[1];
+      if (!ignore_CMD_RESET) _values_[0] = CMD_RESET;
+      return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
+    }
+
+  }
+}
 
 namespace Hidryco.HidrycoLib.Faceplates.Sensor_Generico
 {

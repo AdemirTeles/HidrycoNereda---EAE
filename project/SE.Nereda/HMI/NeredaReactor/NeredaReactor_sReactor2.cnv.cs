@@ -17,12 +17,13 @@ namespace SE.Nereda.Symbols.NeredaReactor
 	/// </summary>
 	public partial class sReactor2 : NxtControl.GuiFramework.HMISymbol
 	{
-		private string _CV001 = "NVPP 001 a-- 038";
-		private string _CV002 = "NVPP 001 a-- 067";
-		private string _CV003 = "NVPP 001 a-- 036";
-		private string _CV004 = "NVPP 001 a-- 023";
-		private string _CV005 = "NVPP 001 a-- 007";
-		private string _REACTOR = "Reactor 1";
+		private string _AV4x172 = "AV4x172";
+		private string _AV4x171 = "AV4x171";
+		private string _AV4x170 = "AV4x170";
+		private string _AV4x103 = "AV4x103";
+		private string _AV4x101 = "AV4x101";
+		private string _AV4x102 = "AV4x102";
+		private string _REACTOR = "Reator Nereda 1";
 		float Percent;
 		public sReactor2()
 		{
@@ -40,76 +41,91 @@ namespace SE.Nereda.Symbols.NeredaReactor
 
 		[RefreshProperties(RefreshProperties.Repaint)]
 		[Category("Tagnames")]
-		[DisplayName("CV001 Code")]
+		[DisplayName("AV4x172 Code")]
 		
-		public string _iCV001
+		public string _iAV4x172
 		{
 			get{
-				return _CV001;
+				return _AV4x172;
 			}
 			set{
-				_CV001 = value;
-				CV001.Text = value.ToString();
+				_AV4x172 = value;
+				AV4x172.Text = value.ToString();
 			}
 		}
 		
 		[RefreshProperties(RefreshProperties.Repaint)]
 		[Category("Tagnames")]
-		[DisplayName("CV002 Code")]
+		[DisplayName("AV4x171 Code")]
 		
-		public string _iCV002
+		public string _iAV4x171
 		{
 			get{
-				return _CV002;
+				return _AV4x171;
 			}
 			set{
-				_CV002 = value;
-				CV002.Text = value.ToString();
+				_AV4x171 = value;
+				AV4x171.Text = value.ToString();
 			}
 		}
 		
 		[RefreshProperties(RefreshProperties.Repaint)]
 		[Category("Tagnames")]
-		[DisplayName("CV003 Code")]
+		[DisplayName("AV4x170 Code")]
 		
-		public string _iCV003
+		public string _iAV4x170
 		{
 			get{
-				return _CV003;
+				return _AV4x170;
 			}
 			set{
-				_CV003 = value;
-				CV003.Text = value.ToString();
+				_AV4x170 = value;
+				AV4x170.Text = value.ToString();
 			}
 		}
 		
 		[RefreshProperties(RefreshProperties.Repaint)]
 		[Category("Tagnames")]
-		[DisplayName("CV004 Code")]
+		[DisplayName("AV4x103 Code")]
 		
-		public string _iCV004
+		public string _iAV4x103
 		{
 			get{
-				return _CV004;
+				return _AV4x103;
 			}
 			set{
-				_CV004 = value;
-				CV004.Text = value.ToString();
+				_AV4x103 = value;
+				AV4x103.Text = value.ToString();
 			}
 		}
 		
 		[RefreshProperties(RefreshProperties.Repaint)]
 		[Category("Tagnames")]
-		[DisplayName("CV005 Code")]
+		[DisplayName("AV4x101 Code")]
 		
-		public string _iCV005
+		public string _iAV4x101
 		{
 			get{
-				return _CV005;
+				return _AV4x101;
 			}
 			set{
-				_CV005 = value;
-				CV005.Text = value.ToString();
+				_AV4x101 = value;
+				AV4x101.Text = value.ToString();
+			}
+		}
+		
+		[RefreshProperties(RefreshProperties.Repaint)]
+		[Category("Tagnames")]
+		[DisplayName("AV4x102 Code")]
+		
+		public string _iAV4x102
+		{
+			get{
+				return _AV4x102;
+			}
+			set{
+				_AV4x102 = value;
+				AV4x102.Text = value.ToString();
 			}
 		}
 		

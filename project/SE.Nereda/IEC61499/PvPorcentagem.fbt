@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="509e00ac-85e7-4211-982f-64c040ef95ff" Name="PvPorcentagem" Comment="Pv em porcentagem da faixa de medicao (PvMin..PvMax), calculado no CLP para a IHM" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Hidryco" Version="1.0" Author="Hidryco" Date="06/11/2026" Remarks="1.0: PvPct = (Pv - PvMin) / (PvMax - PvMin) x 100; faixa nula = 0. Sem limitar a 0..100 (acima da faixa aparece acima de 100)." />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="7B15236268FCE0A2" Name="REQ" Comment="Novo valor medido">
+        <With Var="Pv" />
+        <With Var="PvMin" />
+        <With Var="PvMax" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="CF7FDF29450618D2" Name="CNF" Comment="Porcentagem atualizada">
+        <With Var="PvPct" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="397433E28EDA79AB" Name="Pv" Type="REAL" Comment="Valor medido (unidade de engenharia)" />
+      <VarDeclaration ID="BFCBD6A90AA2C09A" Name="PvMin" Type="REAL" Comment="Inicio da faixa (4 mA)" />
+      <VarDeclaration ID="6B6261356EC003D8" Name="PvMax" Type="REAL" Comment="Fim da faixa (20 mA)" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="D60DBBF724F0D446" Name="PvPct" Type="REAL" Comment="Valor em porcentagem da faixa" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="061b167d-7682-4d8d-9066-4706b4316ce1">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="Calcula" />
+    <ECC>
+      <ECState Name="START" Comment="Estado inicial" x="550" y="430" />
+      <ECState Name="ATUALIZA" Comment="Calcula e emite" x="1150" y="430">
+        <ECAction Algorithm="Calcula" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="ATUALIZA" Condition="REQ" x="800" y="500" />
+      <ECTransition Source="ATUALIZA" Destination="START" Condition="1" x="840" y="560" />
+    </ECC>
+    <Algorithm Name="Calcula" Comment="Porcentagem da faixa">
+      <ST><![CDATA[
+IF PvMax <> PvMin THEN
+    PvPct := (Pv - PvMin) / (PvMax - PvMin) * 100.0;
+ELSE
+    PvPct := 0.0;
+END_IF;
+]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

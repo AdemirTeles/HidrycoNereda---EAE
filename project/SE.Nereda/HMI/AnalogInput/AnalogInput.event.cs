@@ -557,6 +557,43 @@ namespace SE.Nereda.Symbols.AnalogInput
 
   }
 
+
+  public class REQ_PCTEventArgs : System.EventArgs
+  {
+    IHMIAccessorService accessorService;
+    int channelId;
+    int cookie;
+    int eventIndex;
+
+    public REQ_PCTEventArgs(int channelId, int cookie, int eventIndex)
+    {
+      this.accessorService = (IHMIAccessorService)ServiceProvider.GetService(typeof(IHMIAccessorService));
+      this.channelId = channelId;
+      this.cookie = cookie;
+      this.eventIndex = eventIndex;
+    }
+    public bool Get_PvPct(ref System.Single value)
+    {
+      if (accessorService == null)
+        return false;
+      float var = 0;
+      bool ret = accessorService.GetFloatValue(channelId, cookie, eventIndex, true,0, ref var);
+      if (ret) value = (System.Single) var;
+      return ret;
+    }
+
+    public System.Single? PvPct
+    { get {
+      if (accessorService == null)
+        return null;
+      float var = 0;
+      bool ret = accessorService.GetFloatValue(channelId, cookie, eventIndex, true,0, ref var);
+      if (!ret) return null;
+      return (System.Single) var;
+    }  }
+
+  }
+
 }
 
 namespace SE.Nereda.Symbols.AnalogInput
@@ -649,6 +686,8 @@ namespace SE.Nereda.Symbols.AnalogInput
 
     private event EventHandler<SE.Nereda.Symbols.AnalogInput.LOAD_PERS_DATAEventArgs> LOAD_PERS_DATA_Fired;
 
+    private event EventHandler<SE.Nereda.Symbols.AnalogInput.REQ_PCTEventArgs> REQ_PCT_Fired;
+
     protected override void OnEndInit()
     {
       if (REQ_PV_Fired != null)
@@ -663,6 +702,8 @@ namespace SE.Nereda.Symbols.AnalogInput
         AttachEventInput(4);
       if (LOAD_PERS_DATA_Fired != null)
         AttachEventInput(5);
+      if (REQ_PCT_Fired != null)
+        AttachEventInput(6);
 
     }
 
@@ -759,6 +800,21 @@ stack Trace:
               NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
 stack Trace:
 {4}","LOAD_PERS_DATA_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break;
+        case 6:
+          if (REQ_PCT_Fired != null)
+          {
+            try
+            {
+              REQ_PCT_Fired(this, new SE.Nereda.Symbols.AnalogInput.REQ_PCTEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","REQ_PCT_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
             }
           }
         break; 
@@ -854,6 +910,8 @@ namespace SE.Nereda.Faceplates.AnalogInput
 
     private event EventHandler<SE.Nereda.Symbols.AnalogInput.LOAD_PERS_DATAEventArgs> LOAD_PERS_DATA_Fired;
 
+    private event EventHandler<SE.Nereda.Symbols.AnalogInput.REQ_PCTEventArgs> REQ_PCT_Fired;
+
     protected override void OnEndInit()
     {
       if (REQ_PV_Fired != null)
@@ -868,6 +926,8 @@ namespace SE.Nereda.Faceplates.AnalogInput
         AttachEventInput(4);
       if (LOAD_PERS_DATA_Fired != null)
         AttachEventInput(5);
+      if (REQ_PCT_Fired != null)
+        AttachEventInput(6);
 
     }
 
@@ -964,6 +1024,21 @@ stack Trace:
               NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
 stack Trace:
 {4}","LOAD_PERS_DATA_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break;
+        case 6:
+          if (REQ_PCT_Fired != null)
+          {
+            try
+            {
+              REQ_PCT_Fired(this, new SE.Nereda.Symbols.AnalogInput.REQ_PCTEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","REQ_PCT_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
             }
           }
         break; 
@@ -1059,6 +1134,8 @@ namespace SE.Nereda.Symbols.AnalogInput
 
     private event EventHandler<SE.Nereda.Symbols.AnalogInput.LOAD_PERS_DATAEventArgs> LOAD_PERS_DATA_Fired;
 
+    private event EventHandler<SE.Nereda.Symbols.AnalogInput.REQ_PCTEventArgs> REQ_PCT_Fired;
+
     protected override void OnEndInit()
     {
       if (REQ_PV_Fired != null)
@@ -1073,6 +1150,8 @@ namespace SE.Nereda.Symbols.AnalogInput
         AttachEventInput(4);
       if (LOAD_PERS_DATA_Fired != null)
         AttachEventInput(5);
+      if (REQ_PCT_Fired != null)
+        AttachEventInput(6);
 
     }
 
@@ -1169,6 +1248,21 @@ stack Trace:
               NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
 stack Trace:
 {4}","LOAD_PERS_DATA_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break;
+        case 6:
+          if (REQ_PCT_Fired != null)
+          {
+            try
+            {
+              REQ_PCT_Fired(this, new SE.Nereda.Symbols.AnalogInput.REQ_PCTEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","REQ_PCT_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
             }
           }
         break; 
@@ -1264,6 +1358,8 @@ namespace SE.Nereda.Symbols.AnalogInput
 
     private event EventHandler<SE.Nereda.Symbols.AnalogInput.LOAD_PERS_DATAEventArgs> LOAD_PERS_DATA_Fired;
 
+    private event EventHandler<SE.Nereda.Symbols.AnalogInput.REQ_PCTEventArgs> REQ_PCT_Fired;
+
     protected override void OnEndInit()
     {
       if (REQ_PV_Fired != null)
@@ -1278,6 +1374,8 @@ namespace SE.Nereda.Symbols.AnalogInput
         AttachEventInput(4);
       if (LOAD_PERS_DATA_Fired != null)
         AttachEventInput(5);
+      if (REQ_PCT_Fired != null)
+        AttachEventInput(6);
 
     }
 
@@ -1374,6 +1472,21 @@ stack Trace:
               NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
 stack Trace:
 {4}","LOAD_PERS_DATA_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break;
+        case 6:
+          if (REQ_PCT_Fired != null)
+          {
+            try
+            {
+              REQ_PCT_Fired(this, new SE.Nereda.Symbols.AnalogInput.REQ_PCTEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","REQ_PCT_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
             }
           }
         break; 
@@ -1469,6 +1582,8 @@ namespace SE.Nereda.Symbols.AnalogInput
 
     private event EventHandler<SE.Nereda.Symbols.AnalogInput.LOAD_PERS_DATAEventArgs> LOAD_PERS_DATA_Fired;
 
+    private event EventHandler<SE.Nereda.Symbols.AnalogInput.REQ_PCTEventArgs> REQ_PCT_Fired;
+
     protected override void OnEndInit()
     {
       if (REQ_PV_Fired != null)
@@ -1483,6 +1598,8 @@ namespace SE.Nereda.Symbols.AnalogInput
         AttachEventInput(4);
       if (LOAD_PERS_DATA_Fired != null)
         AttachEventInput(5);
+      if (REQ_PCT_Fired != null)
+        AttachEventInput(6);
 
     }
 
@@ -1579,6 +1696,21 @@ stack Trace:
               NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
 stack Trace:
 {4}","LOAD_PERS_DATA_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break;
+        case 6:
+          if (REQ_PCT_Fired != null)
+          {
+            try
+            {
+              REQ_PCT_Fired(this, new SE.Nereda.Symbols.AnalogInput.REQ_PCTEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","REQ_PCT_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
             }
           }
         break; 
@@ -1674,6 +1806,8 @@ namespace SE.Nereda.Symbols.AnalogInput
 
     private event EventHandler<SE.Nereda.Symbols.AnalogInput.LOAD_PERS_DATAEventArgs> LOAD_PERS_DATA_Fired;
 
+    private event EventHandler<SE.Nereda.Symbols.AnalogInput.REQ_PCTEventArgs> REQ_PCT_Fired;
+
     protected override void OnEndInit()
     {
       if (REQ_PV_Fired != null)
@@ -1688,6 +1822,8 @@ namespace SE.Nereda.Symbols.AnalogInput
         AttachEventInput(4);
       if (LOAD_PERS_DATA_Fired != null)
         AttachEventInput(5);
+      if (REQ_PCT_Fired != null)
+        AttachEventInput(6);
 
     }
 
@@ -1784,6 +1920,21 @@ stack Trace:
               NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
 stack Trace:
 {4}","LOAD_PERS_DATA_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break;
+        case 6:
+          if (REQ_PCT_Fired != null)
+          {
+            try
+            {
+              REQ_PCT_Fired(this, new SE.Nereda.Symbols.AnalogInput.REQ_PCTEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","REQ_PCT_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
             }
           }
         break; 
@@ -1879,6 +2030,8 @@ namespace SE.Nereda.Symbols.AnalogInput
 
     private event EventHandler<SE.Nereda.Symbols.AnalogInput.LOAD_PERS_DATAEventArgs> LOAD_PERS_DATA_Fired;
 
+    private event EventHandler<SE.Nereda.Symbols.AnalogInput.REQ_PCTEventArgs> REQ_PCT_Fired;
+
     protected override void OnEndInit()
     {
       if (REQ_PV_Fired != null)
@@ -1893,6 +2046,8 @@ namespace SE.Nereda.Symbols.AnalogInput
         AttachEventInput(4);
       if (LOAD_PERS_DATA_Fired != null)
         AttachEventInput(5);
+      if (REQ_PCT_Fired != null)
+        AttachEventInput(6);
 
     }
 
@@ -1989,6 +2144,21 @@ stack Trace:
               NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
 stack Trace:
 {4}","LOAD_PERS_DATA_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break;
+        case 6:
+          if (REQ_PCT_Fired != null)
+          {
+            try
+            {
+              REQ_PCT_Fired(this, new SE.Nereda.Symbols.AnalogInput.REQ_PCTEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","REQ_PCT_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
             }
           }
         break; 
@@ -2084,6 +2254,8 @@ namespace SE.Nereda.Symbols.AnalogInput
 
     private event EventHandler<SE.Nereda.Symbols.AnalogInput.LOAD_PERS_DATAEventArgs> LOAD_PERS_DATA_Fired;
 
+    private event EventHandler<SE.Nereda.Symbols.AnalogInput.REQ_PCTEventArgs> REQ_PCT_Fired;
+
     protected override void OnEndInit()
     {
       if (REQ_PV_Fired != null)
@@ -2098,6 +2270,8 @@ namespace SE.Nereda.Symbols.AnalogInput
         AttachEventInput(4);
       if (LOAD_PERS_DATA_Fired != null)
         AttachEventInput(5);
+      if (REQ_PCT_Fired != null)
+        AttachEventInput(6);
 
     }
 
@@ -2194,6 +2368,21 @@ stack Trace:
               NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
 stack Trace:
 {4}","LOAD_PERS_DATA_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break;
+        case 6:
+          if (REQ_PCT_Fired != null)
+          {
+            try
+            {
+              REQ_PCT_Fired(this, new SE.Nereda.Symbols.AnalogInput.REQ_PCTEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","REQ_PCT_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
             }
           }
         break; 
@@ -2289,6 +2478,8 @@ namespace SE.Nereda.Faceplates.AnalogInput
 
     private event EventHandler<SE.Nereda.Symbols.AnalogInput.LOAD_PERS_DATAEventArgs> LOAD_PERS_DATA_Fired;
 
+    private event EventHandler<SE.Nereda.Symbols.AnalogInput.REQ_PCTEventArgs> REQ_PCT_Fired;
+
     protected override void OnEndInit()
     {
       if (REQ_PV_Fired != null)
@@ -2303,6 +2494,8 @@ namespace SE.Nereda.Faceplates.AnalogInput
         AttachEventInput(4);
       if (LOAD_PERS_DATA_Fired != null)
         AttachEventInput(5);
+      if (REQ_PCT_Fired != null)
+        AttachEventInput(6);
 
     }
 
@@ -2399,6 +2592,21 @@ stack Trace:
               NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
 stack Trace:
 {4}","LOAD_PERS_DATA_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break;
+        case 6:
+          if (REQ_PCT_Fired != null)
+          {
+            try
+            {
+              REQ_PCT_Fired(this, new SE.Nereda.Symbols.AnalogInput.REQ_PCTEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","REQ_PCT_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
             }
           }
         break; 
@@ -2494,6 +2702,8 @@ namespace SE.Nereda.Symbols.AnalogInput
 
     private event EventHandler<SE.Nereda.Symbols.AnalogInput.LOAD_PERS_DATAEventArgs> LOAD_PERS_DATA_Fired;
 
+    private event EventHandler<SE.Nereda.Symbols.AnalogInput.REQ_PCTEventArgs> REQ_PCT_Fired;
+
     protected override void OnEndInit()
     {
       if (REQ_PV_Fired != null)
@@ -2508,6 +2718,8 @@ namespace SE.Nereda.Symbols.AnalogInput
         AttachEventInput(4);
       if (LOAD_PERS_DATA_Fired != null)
         AttachEventInput(5);
+      if (REQ_PCT_Fired != null)
+        AttachEventInput(6);
 
     }
 
@@ -2604,6 +2816,21 @@ stack Trace:
               NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
 stack Trace:
 {4}","LOAD_PERS_DATA_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break;
+        case 6:
+          if (REQ_PCT_Fired != null)
+          {
+            try
+            {
+              REQ_PCT_Fired(this, new SE.Nereda.Symbols.AnalogInput.REQ_PCTEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","REQ_PCT_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
             }
           }
         break; 
@@ -2699,6 +2926,8 @@ namespace SE.Nereda.Symbols.AnalogInput
 
     private event EventHandler<SE.Nereda.Symbols.AnalogInput.LOAD_PERS_DATAEventArgs> LOAD_PERS_DATA_Fired;
 
+    private event EventHandler<SE.Nereda.Symbols.AnalogInput.REQ_PCTEventArgs> REQ_PCT_Fired;
+
     protected override void OnEndInit()
     {
       if (REQ_PV_Fired != null)
@@ -2713,6 +2942,8 @@ namespace SE.Nereda.Symbols.AnalogInput
         AttachEventInput(4);
       if (LOAD_PERS_DATA_Fired != null)
         AttachEventInput(5);
+      if (REQ_PCT_Fired != null)
+        AttachEventInput(6);
 
     }
 
@@ -2809,6 +3040,21 @@ stack Trace:
               NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
 stack Trace:
 {4}","LOAD_PERS_DATA_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break;
+        case 6:
+          if (REQ_PCT_Fired != null)
+          {
+            try
+            {
+              REQ_PCT_Fired(this, new SE.Nereda.Symbols.AnalogInput.REQ_PCTEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","REQ_PCT_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
             }
           }
         break; 
@@ -2904,6 +3150,8 @@ namespace SE.Nereda.Symbols.AnalogInput
 
     private event EventHandler<SE.Nereda.Symbols.AnalogInput.LOAD_PERS_DATAEventArgs> LOAD_PERS_DATA_Fired;
 
+    private event EventHandler<SE.Nereda.Symbols.AnalogInput.REQ_PCTEventArgs> REQ_PCT_Fired;
+
     protected override void OnEndInit()
     {
       if (REQ_PV_Fired != null)
@@ -2918,6 +3166,8 @@ namespace SE.Nereda.Symbols.AnalogInput
         AttachEventInput(4);
       if (LOAD_PERS_DATA_Fired != null)
         AttachEventInput(5);
+      if (REQ_PCT_Fired != null)
+        AttachEventInput(6);
 
     }
 
@@ -3014,6 +3264,244 @@ stack Trace:
               NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
 stack Trace:
 {4}","LOAD_PERS_DATA_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break;
+        case 6:
+          if (REQ_PCT_Fired != null)
+          {
+            try
+            {
+              REQ_PCT_Fired(this, new SE.Nereda.Symbols.AnalogInput.REQ_PCTEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","REQ_PCT_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break; 
+
+      }
+    }
+    public bool FireEvent_CNF_UNIT(System.String oUnit, System.Boolean oFlowSensor)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {oUnit, oFlowSensor});
+    }
+    public bool FireEvent_CNF_UNIT(SE.Nereda.Symbols.AnalogInput.CNF_UNITEventArgs ea)
+    {
+      object[] _values_ = new object[2];
+      if (ea.oUnit != null) _values_[0] = ea.oUnit;
+      if (ea.oFlowSensor.HasValue) _values_[1] = ea.oFlowSensor.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
+    }
+    public bool FireEvent_CNF_UNIT(System.String oUnit, bool ignore_oUnit, System.Boolean oFlowSensor, bool ignore_oFlowSensor)
+    {
+      object[] _values_ = new object[2];
+      if (!ignore_oUnit) _values_[0] = oUnit;
+      if (!ignore_oFlowSensor) _values_[1] = oFlowSensor;
+      return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
+    }
+    public bool FireEvent_CNF_COLOR(System.Int16 oColor)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {oColor});
+    }
+    public bool FireEvent_CNF_COLOR(SE.Nereda.Symbols.AnalogInput.CNF_COLOREventArgs ea)
+    {
+      object[] _values_ = new object[1];
+      if (ea.oColor.HasValue) _values_[0] = ea.oColor.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
+    }
+    public bool FireEvent_CNF_COLOR(System.Int16 oColor, bool ignore_oColor)
+    {
+      object[] _values_ = new object[1];
+      if (!ignore_oColor) _values_[0] = oColor;
+      return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
+    }
+    public bool FireEvent_CNF_LEVEL_SP(System.Single LevelSp1, System.Single LevelSp2)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(2, new object[] {LevelSp1, LevelSp2});
+    }
+    public bool FireEvent_CNF_LEVEL_SP(SE.Nereda.Symbols.AnalogInput.CNF_LEVEL_SPEventArgs ea)
+    {
+      object[] _values_ = new object[2];
+      if (ea.LevelSp1.HasValue) _values_[0] = ea.LevelSp1.Value;
+      if (ea.LevelSp2.HasValue) _values_[1] = ea.LevelSp2.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(2, _values_);
+    }
+    public bool FireEvent_CNF_LEVEL_SP(System.Single LevelSp1, bool ignore_LevelSp1, System.Single LevelSp2, bool ignore_LevelSp2)
+    {
+      object[] _values_ = new object[2];
+      if (!ignore_LevelSp1) _values_[0] = LevelSp1;
+      if (!ignore_LevelSp2) _values_[1] = LevelSp2;
+      return ((IHMIAccessorOutput)this).FireEvent(2, _values_);
+    }
+    public bool FireEvent_CNF_EN_F_C(System.Boolean EnFlowConversion)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(3, new object[] {EnFlowConversion});
+    }
+    public bool FireEvent_CNF_EN_F_C(SE.Nereda.Symbols.AnalogInput.CNF_EN_F_CEventArgs ea)
+    {
+      object[] _values_ = new object[1];
+      if (ea.EnFlowConversion.HasValue) _values_[0] = ea.EnFlowConversion.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(3, _values_);
+    }
+    public bool FireEvent_CNF_EN_F_C(System.Boolean EnFlowConversion, bool ignore_EnFlowConversion)
+    {
+      object[] _values_ = new object[1];
+      if (!ignore_EnFlowConversion) _values_[0] = EnFlowConversion;
+      return ((IHMIAccessorOutput)this).FireEvent(3, _values_);
+    }
+
+  }
+}
+namespace SE.Nereda.Symbols.AnalogInput
+{
+  partial class sPorcentagem
+  {
+
+    private event EventHandler<SE.Nereda.Symbols.AnalogInput.REQ_PVEventArgs> REQ_PV_Fired;
+
+    private event EventHandler<SE.Nereda.Symbols.AnalogInput.REQ_ALM_LIM_SPEventArgs> REQ_ALM_LIM_SP_Fired;
+
+    private event EventHandler<SE.Nereda.Symbols.AnalogInput.REQ_UNITEventArgs> REQ_UNIT_Fired;
+
+    private event EventHandler<SE.Nereda.Symbols.AnalogInput.FB_COLOREventArgs> FB_COLOR_Fired;
+
+    private event EventHandler<SE.Nereda.Symbols.AnalogInput.CH_FAILEventArgs> CH_FAIL_Fired;
+
+    private event EventHandler<SE.Nereda.Symbols.AnalogInput.LOAD_PERS_DATAEventArgs> LOAD_PERS_DATA_Fired;
+
+    private event EventHandler<SE.Nereda.Symbols.AnalogInput.REQ_PCTEventArgs> REQ_PCT_Fired;
+
+    protected override void OnEndInit()
+    {
+      if (REQ_PV_Fired != null)
+        AttachEventInput(0);
+      if (REQ_ALM_LIM_SP_Fired != null)
+        AttachEventInput(1);
+      if (REQ_UNIT_Fired != null)
+        AttachEventInput(2);
+      if (FB_COLOR_Fired != null)
+        AttachEventInput(3);
+      if (CH_FAIL_Fired != null)
+        AttachEventInput(4);
+      if (LOAD_PERS_DATA_Fired != null)
+        AttachEventInput(5);
+      if (REQ_PCT_Fired != null)
+        AttachEventInput(6);
+
+    }
+
+    protected override void FireEventCallback(int channelId, int cookie, int eventIndex)
+    {
+      switch(eventIndex)
+      {
+        default:
+          break;
+        case 0:
+          if (REQ_PV_Fired != null)
+          {
+            try
+            {
+              REQ_PV_Fired(this, new SE.Nereda.Symbols.AnalogInput.REQ_PVEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","REQ_PV_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break; 
+        case 1:
+          if (REQ_ALM_LIM_SP_Fired != null)
+          {
+            try
+            {
+              REQ_ALM_LIM_SP_Fired(this, new SE.Nereda.Symbols.AnalogInput.REQ_ALM_LIM_SPEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","REQ_ALM_LIM_SP_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break; 
+        case 2:
+          if (REQ_UNIT_Fired != null)
+          {
+            try
+            {
+              REQ_UNIT_Fired(this, new SE.Nereda.Symbols.AnalogInput.REQ_UNITEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","REQ_UNIT_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break; 
+        case 3:
+          if (FB_COLOR_Fired != null)
+          {
+            try
+            {
+              FB_COLOR_Fired(this, new SE.Nereda.Symbols.AnalogInput.FB_COLOREventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","FB_COLOR_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break; 
+        case 4:
+          if (CH_FAIL_Fired != null)
+          {
+            try
+            {
+              CH_FAIL_Fired(this, new SE.Nereda.Symbols.AnalogInput.CH_FAILEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","CH_FAIL_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break; 
+        case 5:
+          if (LOAD_PERS_DATA_Fired != null)
+          {
+            try
+            {
+              LOAD_PERS_DATA_Fired(this, new SE.Nereda.Symbols.AnalogInput.LOAD_PERS_DATAEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","LOAD_PERS_DATA_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break;
+        case 6:
+          if (REQ_PCT_Fired != null)
+          {
+            try
+            {
+              REQ_PCT_Fired(this, new SE.Nereda.Symbols.AnalogInput.REQ_PCTEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","REQ_PCT_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
             }
           }
         break; 
