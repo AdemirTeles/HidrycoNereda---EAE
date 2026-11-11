@@ -29,7 +29,6 @@ namespace HMI.Main.Canvases
 			this.btnAckNereda = new NxtControl.GuiFramework.DrawnButton();
 			this.HeartBeat = new SE.Nereda.Symbols.HeartBeat.sDefault();
 			this.Mode = new SE.Nereda.Symbols.Mode.ReactorMode();
-			this.OpenWebPage = new SE.Nereda.Symbols.OpenWebPage.sDefault();
 			this.EmergencyManagement_4 = new SE.Nereda.Symbols.EmergencyManagement.sReactorAvExist();
 			this.EmergencyManagement_3 = new SE.Nereda.Symbols.EmergencyManagement.sSettingsBtn();
 			this.EmergencyReactor1 = new SE.Nereda.Symbols.EmergencyReactor_2.sDefault();
@@ -73,15 +72,6 @@ namespace HMI.Main.Canvases
 			this.Mode.SecurityToken = ((uint)(4294967295u));
 			this.Mode.TagName = "ECC9B0BB08A85534";
 			this.Mode.EndInit();
-			// 
-			// OpenWebPage
-			// 
-			this.OpenWebPage.BeginInit();
-			this.OpenWebPage.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 840D, 8D);
-			this.OpenWebPage.Name = "OpenWebPage";
-			this.OpenWebPage.SecurityToken = ((uint)(4294967295u));
-			this.OpenWebPage.TagName = "61C067078E62D90F";
-			this.OpenWebPage.EndInit();
 			// 
 			// EmergencyManagement_4
 			// 
@@ -200,7 +190,6 @@ namespace HMI.Main.Canvases
 			this.Shapes.AddRange(new System.ComponentModel.IComponent[] {
 			this.HeartBeat,
 			this.Mode,
-			this.OpenWebPage,
 			this.EmergencyManagement_4,
 			this.EmergencyManagement_3,
 			this.btnAckNereda,
@@ -219,7 +208,6 @@ namespace HMI.Main.Canvases
 		}
 		private SE.Nereda.Symbols.HeartBeat.sDefault HeartBeat;
 		private SE.Nereda.Symbols.Mode.ReactorMode Mode;
-		private SE.Nereda.Symbols.OpenWebPage.sDefault OpenWebPage;
 		private SE.Nereda.Symbols.EmergencyManagement.sDataR2 EmergencyManagement;
 		private SE.Nereda.Symbols.EmergencyManagement.sDataR1 EmergencyManagement_1;
 		private SE.Nereda.Symbols.EmergencyManagement.sSettingsBtn EmergencyManagement_3;

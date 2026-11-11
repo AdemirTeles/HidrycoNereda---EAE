@@ -49,7 +49,7 @@ namespace SE.Nereda.Faceplates.MotorBaseNer
 		void SimValueChanged(object sender, ValueChangedEventArgs e)
 		{
 			simulValue = (bool) e.Value;
-			LabelSim.Abnormal = (bool) e.Value;
+			Destaque(lSim, (bool) e.Value);
 			ModeEnablement();
 		}
 		
@@ -58,7 +58,7 @@ namespace SE.Nereda.Faceplates.MotorBaseNer
 		void OverValueChanged(object sender, ValueChangedEventArgs e)
 		{
 			ovrrideVal = (bool) e.Value;
-			LabelOver.Abnormal =  (bool) e.Value && isOverrideEnabled;
+			Destaque(lOver, (bool) e.Value && isOverrideEnabled);
 			ModeEnablement();
 		}
 
@@ -71,12 +71,12 @@ namespace SE.Nereda.Faceplates.MotorBaseNer
 		
 		void MaintValueChanged(object sender, ValueChangedEventArgs e)
 		{
-			LabelMaint.Abnormal = (bool)e.Value;
+			Destaque(lMaint, (bool)e.Value);
 		}
 		
 		void OutOfServiceValueChanged(object sender, ValueChangedEventArgs e)
 		{
-			LabelOos.Abnormal = (bool)e.Value;
+			Destaque(lOos, (bool)e.Value);
 		}
 
 		#region Mode Buttons Enablement with Security and Conditions
@@ -111,6 +111,12 @@ namespace SE.Nereda.Faceplates.MotorBaseNer
 		}
 
 		#endregion
+	
+		static void Destaque(FreeText f, bool ativo)
+		{
+			f.Color = ativo ? new NxtControl.Drawing.Color(((byte)(200)), ((byte)(90)), ((byte)(0))) : new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			f.Font = new NxtControl.Drawing.Font("Arial", 10F, ativo ? System.Drawing.FontStyle.Bold : System.Drawing.FontStyle.Regular);
+		}
 	}
 }
 

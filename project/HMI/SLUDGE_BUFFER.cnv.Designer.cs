@@ -30,7 +30,6 @@ namespace HMI.Main.Canvases
 			this.polygon7 = new NxtControl.GuiFramework.Polygon();
 			this.HeartBeat = new SE.Nereda.Symbols.HeartBeat.sDefault();
 			this.Mode = new SE.Nereda.Symbols.Mode.ReactorMode();
-			this.OpenWebPage = new SE.Nereda.Symbols.OpenWebPage.sDefault();
 			this.SludgeBuffer_1 = new SE.Nereda.Symbols.NeredaSludgeBuffer_2.sSettingsSLB();
 			this.SludgeBuffer = new SE.Nereda.Symbols.NeredaSludgeBuffer_2.sSludgeBufferyellow();
 			this.SludgeBuffer_2 = new SE.Nereda.Symbols.NeredaSludgeBuffer_2.sPhases();
@@ -85,15 +84,6 @@ namespace HMI.Main.Canvases
 			this.Mode.SecurityToken = ((uint)(4294967295u));
 			this.Mode.TagName = "ECC9B0BB08A85534";
 			this.Mode.EndInit();
-			// 
-			// OpenWebPage
-			// 
-			this.OpenWebPage.BeginInit();
-			this.OpenWebPage.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 840D, 8D);
-			this.OpenWebPage.Name = "OpenWebPage";
-			this.OpenWebPage.SecurityToken = ((uint)(4294967295u));
-			this.OpenWebPage.TagName = "61C067078E62D90F";
-			this.OpenWebPage.EndInit();
 			// 
 			// SludgeBuffer_1
 			// 
@@ -220,7 +210,6 @@ namespace HMI.Main.Canvases
 			this.polygon7,
 			this.HeartBeat,
 			this.Mode,
-			this.OpenWebPage,
 			this.SludgeBuffer_1,
 			this.SludgeBuffer,
 			this.SludgeBuffer_2,
@@ -239,7 +228,6 @@ namespace HMI.Main.Canvases
 		private NxtControl.GuiFramework.Polygon polygon7;
 		private SE.Nereda.Symbols.HeartBeat.sDefault HeartBeat;
 		private SE.Nereda.Symbols.Mode.ReactorMode Mode;
-		private SE.Nereda.Symbols.OpenWebPage.sDefault OpenWebPage;
 		private SE.Nereda.Symbols.NeredaSludgeBuffer_2.sSludgeBufferyellow SludgeBuffer;
 		private SE.Nereda.Symbols.NeredaSludgeBuffer_2.sSettingsSLB SludgeBuffer_1;
 		private SE.Nereda.Symbols.NeredaSludgeBuffer_2.sPhases SludgeBuffer_2;

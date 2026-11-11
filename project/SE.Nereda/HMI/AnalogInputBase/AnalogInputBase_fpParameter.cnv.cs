@@ -31,9 +31,9 @@ namespace SE.Nereda.Faceplates.AnalogInputBase
 			SelectBad.DropDownItems.Clear();
 			this.SelectBad.DropDownItems.AddRange(new System.HMI.Symbols.Base.DropDownItem[]
 			                                      {
-			                                      	new System.HMI.Symbols.Base.DropDownItem("$key:SE.App2CommonProcess.LabelInputValue", ((int)(0))),
-			                                      	new System.HMI.Symbols.Base.DropDownItem("$key:SE.App2CommonProcess.LabelBadPv", ((int)(1))),
-			                                      	new System.HMI.Symbols.Base.DropDownItem("$key:SE.App2CommonProcess.LabelLastGoodPv", ((int)(2)))});
+			                                      	new System.HMI.Symbols.Base.DropDownItem("Valor de entrada", ((int)(0))),
+			                                      	new System.HMI.Symbols.Base.DropDownItem("Valor fixo", ((int)(1))),
+			                                      	new System.HMI.Symbols.Base.DropDownItem("\u00daltimo valor bom", ((int)(2)))});
 			
 			
 		}
@@ -42,12 +42,12 @@ namespace SE.Nereda.Faceplates.AnalogInputBase
 		{
 			SmoothType.Items.Clear();
 			SmoothType.Items.AddRange(new string[] {
-			                          	"$key:SE.App2CommonProcess.TxtNone",
-			                          	"$key:SE.App2CommonProcess.TxtOldNew",
-			                          	"$key:SE.App2CommonProcess.TxtValueDiff",
-			                          	"$key:SE.App2CommonProcess.TxtTimeDiff",
-			                          	"$key:SE.App2CommonProcess.TxtValueOrTime",
-			                          	"$key:SE.App2CommonProcess.TxtValueAndTime"});
+			                          	"Nenhum",
+			                          	"Novo/antigo",
+			                          	"Diferen\u00e7a de valor",
+			                          	"Diferen\u00e7a de tempo",
+			                          	"Valor ou tempo",
+			                          	"Valor e tempo"});
 		}
 		// End of DropDown Box Populating
 #region Security Group
@@ -184,7 +184,7 @@ namespace SE.Nereda.Faceplates.AnalogInputBase
 		void ExecOverValueChanged(object sender, ValueChangedEventArgs e)
 		{
 			OverrideEnable = (bool)e.Value;
-			labelS17.Abnormal = (bool) e.Value;
+			Destaque(lOver, (bool) e.Value);
 			if (OverrideEnable)
 			{
 				FireEvent_IND_MODE(false,true,PvToSim,false);
@@ -274,6 +274,12 @@ namespace SE.Nereda.Faceplates.AnalogInputBase
 #endregion UserProperties
 
 		
+	
+		static void Destaque(FreeText f, bool ativo)
+		{
+			f.Color = ativo ? new NxtControl.Drawing.Color(((byte)(200)), ((byte)(90)), ((byte)(0))) : new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			f.Font = new NxtControl.Drawing.Font("Arial", 10F, ativo ? System.Drawing.FontStyle.Bold : System.Drawing.FontStyle.Regular);
+		}
 	}
 }
 

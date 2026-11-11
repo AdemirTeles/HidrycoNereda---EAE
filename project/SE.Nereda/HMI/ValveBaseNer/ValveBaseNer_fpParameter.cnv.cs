@@ -58,9 +58,9 @@ namespace SE.Nereda.Faceplates.ValveBaseNer
 			combofbmode.DropDownItems.Clear();
 			this.combofbmode.DropDownItems.AddRange(new System.HMI.Symbols.Base.DropDownItem[]
 			                                        {
-			                                        	new System.HMI.Symbols.Base.DropDownItem("$key:SE.App2CommonProcess.TxtOpenCloseFb", ((byte)(0))),
-			                                        	new System.HMI.Symbols.Base.DropDownItem("$key:SE.App2CommonProcess.TxtOnlyOpenFb", ((byte)(1))),
-			                                        	new System.HMI.Symbols.Base.DropDownItem("$key:SE.App2CommonProcess.TxtNoFb", ((byte)(3))) });
+			                                        	new System.HMI.Symbols.Base.DropDownItem("Abrir e fechar", ((byte)(0))),
+			                                        	new System.HMI.Symbols.Base.DropDownItem("Somente aberta", ((byte)(1))),
+			                                        	new System.HMI.Symbols.Base.DropDownItem("Sem realimenta\u00e7\u00e3o", ((byte)(3))) });
 			
 		}
 		// End of DropDown Box Populating
@@ -78,7 +78,7 @@ namespace SE.Nereda.Faceplates.ValveBaseNer
 		void SimValueChanged(object sender, ValueChangedEventArgs e)
 		{
 			simulationEnable = (bool) e.Value;
-			labelS5.Abnormal = simulationEnable;
+			Destaque(lSim, simulationEnable);
 			ModeEnablement();
 		}
 
@@ -86,7 +86,7 @@ namespace SE.Nereda.Faceplates.ValveBaseNer
 		void OverValueChanged(object sender, ValueChangedEventArgs e)
 		{
 			overrideEnable = (bool) e.Value;
-			labelS6.Abnormal = overrideEnable;
+			Destaque(lOver, overrideEnable);
 			ModeEnablement();
 		}
 		
@@ -94,14 +94,14 @@ namespace SE.Nereda.Faceplates.ValveBaseNer
 		void MaintValueChanged(object sender, ValueChangedEventArgs e)
 		{
 			maintEnable = (bool) e.Value;
-			labelS7.Abnormal = maintEnable;
+			Destaque(lMaint, maintEnable);
 		}
 
 		//Oos mode
 		void OosOutputValueChanged(object sender, ValueChangedEventArgs e)
 		{
 			oosEnable = (bool)e.Value;
-			labelS4.Abnormal =  oosEnable;
+			Destaque(lOos, oosEnable);
 		}
 		
 		//Process value change detected
@@ -121,6 +121,12 @@ namespace SE.Nereda.Faceplates.ValveBaseNer
 		}
 		
 		
+		static void Destaque(FreeText f, bool ativo)
+		{
+			f.Color = ativo ? new NxtControl.Drawing.Color(((byte)(200)), ((byte)(90)), ((byte)(0))) : new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			f.Font = new NxtControl.Drawing.Font("Arial", 10F, ativo ? System.Drawing.FontStyle.Bold : System.Drawing.FontStyle.Regular);
+		}
+
 		//Code to decisde the enabling disabling of mode buttons
 		void ModeEnablement()
 		{

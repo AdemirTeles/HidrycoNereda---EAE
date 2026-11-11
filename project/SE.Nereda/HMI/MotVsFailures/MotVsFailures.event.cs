@@ -316,6 +316,48 @@ stack Trace:
   }
 }
 
+namespace SE.Nereda.Symbols.MotVsFailures
+{
+  partial class sDiagnostico
+  {
+
+    private event EventHandler<SE.Nereda.Symbols.MotVsFailures.REQEventArgs> REQ_Fired;
+
+    protected override void OnEndInit()
+    {
+      if (REQ_Fired != null)
+        AttachEventInput(0);
+
+    }
+
+    protected override void FireEventCallback(int channelId, int cookie, int eventIndex)
+    {
+      switch(eventIndex)
+      {
+        default:
+          break;
+        case 0:
+          if (REQ_Fired != null)
+          {
+            try
+            {
+              REQ_Fired(this, new SE.Nereda.Symbols.MotVsFailures.REQEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","REQ_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break; 
+
+      }
+    }
+
+  }
+}
+
 namespace SE.Nereda.Faceplates.MotVsFailures
 {
   partial class fpData

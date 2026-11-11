@@ -32,7 +32,8 @@ namespace SE.Nereda.Symbols.Motor_VS
 			this.raioCirc = new NxtControl.GuiFramework.Ellipse();
 			this.raioRaio = new NxtControl.GuiFramework.Polygon();
 			this.Pump = new NxtControl.GuiFramework.Ellipse();
-			this.State = new SE.Nereda.Symbols.ActState.sDefault();
+			this.State = new SE.Nereda.Symbols.ActState.sCompacto();
+			this.modo = new SE.Nereda.Symbols.ActState.sModo();
 			this.alarmFrame = new NxtControl.GuiFramework.AlarmFrame();
 			this.interlock = new SE.App2CommonProcess.Symbols.IlckCondSum.sInterlockSmall();
 			this.failure = new SE.App2CommonProcess.Symbols.FailCondSum.sFailureSmall();
@@ -60,16 +61,16 @@ namespace SE.Nereda.Symbols.Motor_VS
 			// State
 			// 
 			this.State.BeginInit();
-			this.State.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 20D, 88D);
+			this.State.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 40D, 92D);
 			this.State.Name = "State";
 			this.State.SecurityToken = ((uint)(4294967295u));
 			this.State.TagName = "State";
-			this.State.ActuatorStatus += new SE.Nereda.Symbols.ActState.sDefault.ActState(this.StateActuatorStatus);
+			this.State.ActuatorStatus += new SE.Nereda.Symbols.ActState.sCompacto.ActState(this.StateActuatorStatus);
 			this.State.EndInit();
 			// 
 			// alarmFrame
 			// 
-			this.alarmFrame.Bounds = new NxtControl.Drawing.RectF(((float)(37D)), ((float)(46D)), ((float)(84D)), ((float)(59D)));
+			this.alarmFrame.Bounds = new NxtControl.Drawing.RectF(((float)(37D)), ((float)(46D)), ((float)(41D)), ((float)(40D)));
 			this.alarmFrame.FrameWidth = ((uint)(2u));
 			this.alarmFrame.Name = "alarmFrame";
 			this.alarmFrame.Radius = 5D;
@@ -122,7 +123,7 @@ namespace SE.Nereda.Symbols.Motor_VS
 			// 
 			// MotName
 			// 
-			this.MotName.Bounds = new NxtControl.Drawing.RectF(((float)(12D)), ((float)(16D)), ((float)(96D)), ((float)(16D)));
+			this.MotName.Bounds = new NxtControl.Drawing.RectF(((float)(12D)), ((float)(16D)), ((float)(88D)), ((float)(16D)));
 			this.MotName.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("transparent"));
 			this.MotName.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
 			this.MotName.FontScale = true;
@@ -137,7 +138,6 @@ namespace SE.Nereda.Symbols.Motor_VS
 			this.OpenFp.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("transparent"));
 			this.OpenFp.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
 			this.OpenFp.Name = "OpenFp";
-			this.OpenFp.OpenFaceplates.Add(new NxtControl.GuiFramework.OpenFaceplate("fpOptions", NxtControl.GuiFramework.MouseButtonType.Click));
 			this.OpenFp.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("transparent"), 1F, NxtControl.Drawing.DashStyle.Solid);
 			this.OpenFp.Click += new System.EventHandler(this.OpenFpClick);
 			// 
@@ -169,7 +169,7 @@ namespace SE.Nereda.Symbols.Motor_VS
 			// 
 			this.SpeedSp.BeginInit();
 			this.SpeedSp.DecimalPlacesCount = ((uint)(2u));
-			this.SpeedSp.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 74D, 92D);
+			this.SpeedSp.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 82D, 90D);
 			this.SpeedSp.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.SpeedSp.IsOnlyInput = true;
 			this.SpeedSp.Name = "SpeedSp";
@@ -186,7 +186,7 @@ namespace SE.Nereda.Symbols.Motor_VS
 			// 
 			this.FbSpeed.BeginInit();
 			this.FbSpeed.DecimalPlacesCount = ((uint)(2u));
-			this.FbSpeed.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 74D, 76D);
+			this.FbSpeed.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 82D, 73D);
 			this.FbSpeed.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular);
 			this.FbSpeed.IsOnlyInput = true;
 			this.FbSpeed.Name = "FbSpeed";
@@ -203,7 +203,7 @@ namespace SE.Nereda.Symbols.Motor_VS
 			// 
 			this.Unit.Color = new NxtControl.Drawing.Color("LabelTextColor");
 			this.Unit.Font = new NxtControl.Drawing.Font("LabelFont");
-			this.Unit.Location = new NxtControl.Drawing.PointF(80D, 64D);
+			this.Unit.Location = new NxtControl.Drawing.PointF(84D, 60D);
 			this.Unit.Name = "Unit";
 			this.Unit.Text = "%";
 			// 
@@ -246,12 +246,21 @@ namespace SE.Nereda.Symbols.Motor_VS
 			this.OpenFp});
 			this.group2.EndInit();
 			// 
+			// modo
+			// 
+			this.modo.BeginInit();
+			this.modo.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.7D, 0D, 0D, 0.7D, 104D, 16D);
+			this.modo.Name = "modo";
+			this.modo.SecurityToken = ((uint)(4294967295u));
+			this.modo.TagName = "State";
+			this.modo.EndInit();
+			// 
 			// sPump
 			// 
 			// 
 			// raioCirc
 			// 
-			this.raioCirc.Bounds = new NxtControl.Drawing.RectF(((float)(10D)), ((float)(50D)), ((float)(24D)), ((float)(24D)));
+			this.raioCirc.Bounds = new NxtControl.Drawing.RectF(((float)(12D)), ((float)(50D)), ((float)(24D)), ((float)(24D)));
 			this.raioCirc.Brush = new NxtControl.Drawing.Brush(true);
 			this.raioCirc.Name = "raioCirc";
 			this.raioCirc.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(154)), ((byte)(154)), ((byte)(154))), 2F, NxtControl.Drawing.DashStyle.Solid);
@@ -259,29 +268,31 @@ namespace SE.Nereda.Symbols.Motor_VS
 			// 
 			// raioRaio
 			// 
-			this.raioRaio.Bounds = new NxtControl.Drawing.RectF(((float)(17D)), ((float)(53D)), ((float)(10D)), ((float)(18D)));
+			this.raioRaio.Bounds = new NxtControl.Drawing.RectF(((float)(19D)), ((float)(53D)), ((float)(10D)), ((float)(18D)));
 			this.raioRaio.Brush = new NxtControl.Drawing.Brush(true);
 			this.raioRaio.Closed = true;
 			this.raioRaio.Name = "raioRaio";
 			this.raioRaio.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(154)), ((byte)(154)), ((byte)(154))), 2F, NxtControl.Drawing.DashStyle.Solid);
 			this.raioRaio.Points.AddRange(new NxtControl.Drawing.PointF[] {
-			new NxtControl.Drawing.PointF(23.060606D, 53D),
-			new NxtControl.Drawing.PointF(17D, 64.142857D),
-			new NxtControl.Drawing.PointF(21.040404D, 64.142857D),
-			new NxtControl.Drawing.PointF(21.040404D, 71D),
-			new NxtControl.Drawing.PointF(27D, 60.714286D),
-			new NxtControl.Drawing.PointF(23.060606D, 60.714286D)});
+			new NxtControl.Drawing.PointF(25.0606D, 53D),
+			new NxtControl.Drawing.PointF(19D, 64.1429D),
+			new NxtControl.Drawing.PointF(23.0404D, 64.1429D),
+			new NxtControl.Drawing.PointF(23.0404D, 71D),
+			new NxtControl.Drawing.PointF(29D, 60.7143D),
+			new NxtControl.Drawing.PointF(25.0606D, 60.7143D)});
 			this.raioRaio.Visible = false;
 			this.Shapes.AddRange(new System.ComponentModel.IComponent[] {
 			this.group2,
 			this.raioCirc,
-			this.raioRaio});
+			this.raioRaio,
+			this.modo});
 			this.SymbolSize = new System.Drawing.Size(600, 400);
 			((System.ComponentModel.ISupportInitialize)(this.alarmFrame)).EndInit();
 
 		}
 		private NxtControl.GuiFramework.Ellipse Pump;
-		private SE.Nereda.Symbols.ActState.sDefault State;
+		private SE.Nereda.Symbols.ActState.sCompacto State;
+		private SE.Nereda.Symbols.ActState.sModo modo;
 		private NxtControl.GuiFramework.AlarmFrame alarmFrame;
 		private SE.App2CommonProcess.Symbols.IlckCondSum.sInterlockSmall interlock;
 		private SE.App2CommonProcess.Symbols.FailCondSum.sFailureSmall failure;

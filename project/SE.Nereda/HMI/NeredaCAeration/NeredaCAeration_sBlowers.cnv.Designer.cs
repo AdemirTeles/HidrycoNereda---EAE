@@ -271,7 +271,7 @@ namespace SE.Nereda.Symbols.NeredaCAeration
 			// Logic
 			// 
 			this.Logic.BeginInit();
-			this.Logic.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 280D, 296D);
+			this.Logic.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 244D, 268D);
 			this.Logic.Name = "Logic";
 			this.Logic.SecurityToken = ((uint)(4294967295u));
 			this.Logic.TagName = "Logic";

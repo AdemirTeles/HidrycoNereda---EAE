@@ -29,7 +29,6 @@ namespace HMI.Main.Canvases
 			this.btnAckNereda = new NxtControl.GuiFramework.DrawnButton();
 			this.HeartBeat = new SE.Nereda.Symbols.HeartBeat.sDefault();
 			this.Mode = new SE.Nereda.Symbols.Mode.ReactorMode();
-			this.OpenWebPage = new SE.Nereda.Symbols.OpenWebPage.sDefault();
 			this.AERATION_1 = new SE.Nereda.Symbols.NeredaCAeration.sBlowers();
 			this.pipe1 = new NxtControl.GuiFramework.Pipe();
 			this.pipe2 = new NxtControl.GuiFramework.Pipe();
@@ -64,15 +63,6 @@ namespace HMI.Main.Canvases
 			this.Mode.SecurityToken = ((uint)(4294967295u));
 			this.Mode.TagName = "ECC9B0BB08A85534";
 			this.Mode.EndInit();
-			// 
-			// OpenWebPage
-			// 
-			this.OpenWebPage.BeginInit();
-			this.OpenWebPage.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 840D, 8D);
-			this.OpenWebPage.Name = "OpenWebPage";
-			this.OpenWebPage.SecurityToken = ((uint)(4294967295u));
-			this.OpenWebPage.TagName = "61C067078E62D90F";
-			this.OpenWebPage.EndInit();
 			// 
 			// AERATION_1
 			// 
@@ -116,7 +106,6 @@ namespace HMI.Main.Canvases
 			this.Shapes.AddRange(new System.ComponentModel.IComponent[] {
 			this.HeartBeat,
 			this.Mode,
-			this.OpenWebPage,
 			this.AERATION_1,
 			this.pipe1,
 			this.btnAckNereda,
@@ -126,7 +115,6 @@ namespace HMI.Main.Canvases
 		}
 		private SE.Nereda.Symbols.HeartBeat.sDefault HeartBeat;
 		private SE.Nereda.Symbols.Mode.ReactorMode Mode;
-		private SE.Nereda.Symbols.OpenWebPage.sDefault OpenWebPage;
 		private SE.Nereda.Symbols.NeredaCAeration.sBlowers AERATION_1;
 		private NxtControl.GuiFramework.Pipe pipe1;
 		private NxtControl.GuiFramework.Pipe pipe2;

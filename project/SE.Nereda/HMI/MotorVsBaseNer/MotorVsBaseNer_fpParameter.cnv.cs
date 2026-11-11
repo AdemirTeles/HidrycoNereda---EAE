@@ -90,7 +90,7 @@ namespace SE.Nereda.Faceplates.MotorVsBaseNer
 		void SimulationValueChanged(object sender, ValueChangedEventArgs e)
 		{
 			simulValue = (bool)e.Value;
-			labelS6.Abnormal = (bool)e.Value;
+			Destaque(lSim, (bool)e.Value);
 			ModeEnablement();
 		}
 		
@@ -99,18 +99,18 @@ namespace SE.Nereda.Faceplates.MotorVsBaseNer
 		void FbOverrideValueChanged(object sender, ValueChangedEventArgs e)
 		{
 			ovrrideVal = (bool)e.Value;
-			labelS7.Abnormal = (bool)e.Value && isOverrideEnabled;
+			Destaque(lOver, (bool)e.Value && isOverrideEnabled);
 			ModeEnablement();
 		}
 		
 		void MaintenanceValueChanged(object sender, ValueChangedEventArgs e)
 		{
-			labelS8.Abnormal = (bool)e.Value;
+			Destaque(lMaint, (bool)e.Value);
 		}
 		
 		void OutOfServiceValueChanged(object sender, ValueChangedEventArgs e)
 		{
-			LabelOos.Abnormal = (bool)e.Value;
+			Destaque(lOos, (bool)e.Value);
 		}
 		
 		void SpeedSpRangeSelValueChanged(object sender, ValueChangedEventArgs e)
@@ -140,13 +140,9 @@ namespace SE.Nereda.Faceplates.MotorVsBaseNer
 			uniDirection = (bool)e.Value;
 			
 			if (uniDirection) {
-				this.Size = new System.Drawing.Size(this.Size.Width, 416);
-				labelS3.Visible = PassiveTime.Visible = false;
-				disReverseAllocGroup.Location = new NxtControl.Drawing.PointF(4, 68);
+				lPassivo.Visible = PassiveTime.Visible = false;
 			} else {
-				this.Size = new System.Drawing.Size(this.Size.Width, 446);
-				labelS3.Visible = PassiveTime.Visible = true;
-				disReverseAllocGroup.Location = new NxtControl.Drawing.PointF(4, 98);
+				lPassivo.Visible = PassiveTime.Visible = true;
 			}
 		}
 		
@@ -191,6 +187,12 @@ namespace SE.Nereda.Faceplates.MotorVsBaseNer
 		#endregion Speed Owner Config
 		
 		
+	
+		static void Destaque(FreeText f, bool ativo)
+		{
+			f.Color = ativo ? new NxtControl.Drawing.Color(((byte)(200)), ((byte)(90)), ((byte)(0))) : new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			f.Font = new NxtControl.Drawing.Font("Arial", 10F, ativo ? System.Drawing.FontStyle.Bold : System.Drawing.FontStyle.Regular);
+		}
 	}
 }
 

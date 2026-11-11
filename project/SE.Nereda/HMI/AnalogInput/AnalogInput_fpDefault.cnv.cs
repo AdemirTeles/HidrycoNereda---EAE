@@ -14,207 +14,150 @@ using SE.App2Base.SupportClasses;
 namespace SE.Nereda.Faceplates.AnalogInput
 {
 	/// <summary>
-	/// Description of fpDefault.
+	/// Faceplate do sensor do Nereda no padrao Hidryco. Eventos do CLP (REQ_PV, REQ_ALM_LIM_SP, FB_COLOR, CH_FAIL),
+	/// botoes de limite Schneider e pontos L1/L2 inalterados.
 	/// </summary>
 	public partial class fpDefault : NxtControl.GuiFramework.HMIFaceplate
 	{
-		float Percent;
-		float iPvMin;
-		float iPvMax;
+		float iPvMin, iPvMax = 100f;
+		float spHH, spH, spL, spLL;
 		string InUnit;
-		bool iLoLoPv;
-		bool iLoPv;
-		bool iHiPv;
-		bool iHiHiPv;
-		bool iChFail;
-		bool isitFlowSensor;
+		bool iLoLoPv, iLoPv, iHiPv, iHiHiPv, iChFail, isitFlowSensor;
+		bool disHH, disH, disL, disLL;
+
 		public fpDefault()
 		{
-			//
-			// The InitializeComponent() call is required for Windows Forms designer support.
-			//
 			InitializeComponent();
 			this.REQ_PV_Fired += REQ_PV_Fired_EventHandler;
 			this.REQ_ALM_LIM_SP_Fired += REQ_ALM_LIM_SP_Fired_EventHandler;
 			this.FB_COLOR_Fired += FB_COLOR_Fired_EventHandler;
 			this.CH_FAIL_Fired += CH_FAIL_Fired_EventHandler;
+			Estados();
+		}
+
+		float Pct(float v)
+		{
+			float f = iPvMax - iPvMin;
+			return f > 0 ? Math.Max(0f, Math.Min(100f, (v - iPvMin) / f * 100f)) : 0f;
 		}
 
 		void REQ_PV_Fired_EventHandler(object sender, SE.Nereda.Symbols.AnalogInput.REQ_PVEventArgs e)
 		{
-			// TODO: Implement REQ_PV_Fired_EventHandler
-			Override.Visible = (bool) e.OverrideStatus;
-			Percent = (((float)e.Pv - (float)e.PvMin) / ((float)e.PvMax - (float)e.PvMin)) * 100;
-			iPvMax = (float) e.PvMax;
-			iPvMin = (float) e.PvMin;
-			ShowLevel.FillPercent = Percent;
-			
-			L1v.BrushColor = (bool) e.L1 ? new NxtControl.Drawing.Color(0, 255, 0) : new NxtControl.Drawing.Color(54, 54, 54);
-			L2v.BrushColor = (bool) e.L2 ? new NxtControl.Drawing.Color(0, 255, 0) : new NxtControl.Drawing.Color(54, 54, 54);
+			Override.Visible = (bool)e.OverrideStatus;
+			iPvMax = (float)e.PvMax;
+			iPvMin = (float)e.PvMin;
+			ShowLevel.FillPercent = Pct((float)e.Pv);
+			L1v.BrushColor = (bool)e.L1 ? new NxtControl.Drawing.Color(0, 255, 0) : new NxtControl.Drawing.Color(54, 54, 54);
+			L2v.BrushColor = (bool)e.L2 ? new NxtControl.Drawing.Color(0, 255, 0) : new NxtControl.Drawing.Color(54, 54, 54);
+			Marcas();
 		}
 
 		void REQ_ALM_LIM_SP_Fired_EventHandler(object sender, SE.Nereda.Symbols.AnalogInput.REQ_ALM_LIM_SPEventArgs e)
 		{
-			// TODO: Implement REQ_ALM_LIM_SP_Fired_EventHandler
-			HighHigh.Location = new NxtControl.Drawing.PointF(104, 304 - (((float) e.HiHiSp - iPvMin) / (iPvMax - iPvMin)) * (304 - 128));
-			High.Location = new NxtControl.Drawing.PointF(104, 304 - (((float) e.HiSp - iPvMin) / (iPvMax - iPvMin)) * (304 - 128));
-			Low.Location = new NxtControl.Drawing.PointF(104, 312 - (((float)e.LoSp - iPvMin) / (iPvMax - iPvMin)) * (312 - 136));
-			LowLow.Location = new NxtControl.Drawing.PointF(104, 312 - (((float)e.LoLoSp - iPvMin) / (iPvMax - iPvMin)) * (312 - 136));
-			
-			LowLowBar.FillPercent = (((float)e.LoLoSp - iPvMin) / (iPvMax - iPvMin)) * 100;
-			LowBar.FillPercent = (((float)e.LoSp - iPvMin) / (iPvMax - iPvMin)) * 100;
-			HighBar.FillPercent = 100 - (((float)e.HiSp - iPvMin) / (iPvMax - iPvMin)) * 100;
-			HighHighBar.FillPercent = 100 - (((float)e.HiHiSp - iPvMin) / (iPvMax - iPvMin)) * 100;
-			
-			iLoLoPv = (bool) e.LoLoPv;
-			iLoPv = (bool) e.LoPv;
-			iHiPv = (bool) e.HiPv;
-			iHiHiPv = (bool) e.HiHiPv;
-			LevelSensorStatus();
+			spHH = (float)e.HiHiSp; spH = (float)e.HiSp; spL = (float)e.LoSp; spLL = (float)e.LoLoSp;
+			iLoLoPv = (bool)e.LoLoPv;
+			iLoPv = (bool)e.LoPv;
+			iHiPv = (bool)e.HiPv;
+			iHiHiPv = (bool)e.HiHiPv;
+			Marcas();
+			Estados();
 		}
-			
+
+		// marcas dos limites na barra (escondidas quando o alarme esta desabilitado)
+		void Marcas()
+		{
+			Marca(mHH, spHH, disHH);
+			Marca(mH, spH, disH);
+			Marca(mL, spL, disL);
+			Marca(mLL, spLL, disLL);
+		}
+		void Marca(Rectangle m, float sp, bool desab)
+		{
+			m.Visible = !desab;
+			m.Bounds = new NxtControl.Drawing.RectF(20f + 338f * Pct(sp) / 100f, 94f, 2f, 22f);
+		}
+
 		void SettingsClick(object sender, EventArgs e)
 		{
-			// TODO: Implement SettingsClick
 			AnalogInput.Unit.EngineeringValue = InUnit;
-		    this.AnalogInput.DoOpenFaceplate("fpParameter");
+			this.AnalogInput.DoOpenFaceplate("fpParameter");
 		}
 
 		void TrendsClick(object sender, EventArgs e)
 		{
-			// TODO: Implement TrendsClick
 			this.AnalogInput.DoOpenFaceplate("fpTrend");
 		}
 
 		void FB_COLOR_Fired_EventHandler(object sender, SE.Nereda.Symbols.AnalogInput.FB_COLOREventArgs e)
 		{
-			// TODO: Implement FB_COLOR_Fired_EventHandler
 			switch (e.iColor)
 			{
-			    case 1:
-					ShowLevel.BrushColor = new NxtControl.Drawing.Color(255,255,255);
-			        break;
-			    case 2:
-					ShowLevel.BrushColor = new NxtControl.Drawing.Color(154, 154, 154);
-			        break;
-			    case 3:
-					ShowLevel.BrushColor = new NxtControl.Drawing.Color(178, 14, 18);
-			        break;
-			    case 4:
-					ShowLevel.BrushColor = new NxtControl.Drawing.Color(234, 22, 30);
-			        break;
-			    case 5:
-					ShowLevel.BrushColor = new NxtControl.Drawing.Color(254, 186, 10);
-			        break;
-			    case 6:
-					ShowLevel.BrushColor = new NxtControl.Drawing.Color(255, 255, 0);
-			        break;
-			    case 7:
-					ShowLevel.BrushColor = new NxtControl.Drawing.Color(150, 214, 66);
-			        break;
-			    case 8:
-					ShowLevel.BrushColor = new NxtControl.Drawing.Color(61, 205, 88);
-			        break;
-			    case 9:
-					ShowLevel.BrushColor = new NxtControl.Drawing.Color(2, 178, 238);
-			        break;
-			    case 10:
-					ShowLevel.BrushColor = new NxtControl.Drawing.Color(0, 114, 188);
-			        break;
-			    case 11:
-					ShowLevel.BrushColor = new NxtControl.Drawing.Color(47, 54, 153);
-			        break;
-			    case 12:
-					ShowLevel.BrushColor = new NxtControl.Drawing.Color(111, 49, 152);
-			        break;
+				case 1: ShowLevel.BrushColor = new NxtControl.Drawing.Color(255, 255, 255); break;
+				case 2: ShowLevel.BrushColor = new NxtControl.Drawing.Color(154, 154, 154); break;
+				case 3: ShowLevel.BrushColor = new NxtControl.Drawing.Color(178, 14, 18); break;
+				case 4: ShowLevel.BrushColor = new NxtControl.Drawing.Color(234, 22, 30); break;
+				case 5: ShowLevel.BrushColor = new NxtControl.Drawing.Color(254, 186, 10); break;
+				case 6: ShowLevel.BrushColor = new NxtControl.Drawing.Color(255, 255, 0); break;
+				case 7: ShowLevel.BrushColor = new NxtControl.Drawing.Color(150, 214, 66); break;
+				case 8: ShowLevel.BrushColor = new NxtControl.Drawing.Color(61, 205, 88); break;
+				case 9: ShowLevel.BrushColor = new NxtControl.Drawing.Color(2, 178, 238); break;
+				case 10: ShowLevel.BrushColor = new NxtControl.Drawing.Color(0, 114, 188); break;
+				case 11: ShowLevel.BrushColor = new NxtControl.Drawing.Color(47, 54, 153); break;
+				case 12: ShowLevel.BrushColor = new NxtControl.Drawing.Color(111, 49, 152); break;
 			}
 		}
 
 		void CH_FAIL_Fired_EventHandler(object sender, SE.Nereda.Symbols.AnalogInput.CH_FAILEventArgs e)
 		{
-			// TODO: Implement CH_FAIL_Fired_EventHandler
-			iChFail = (bool) e.ChFail;
-			LevelSensorStatus();
+			iChFail = (bool)e.ChFail;
+			Estados();
 		}
-		
-		void LevelSensorStatus(){
-			LevelStatus.Text = "";
-			
-			// Display Level Status
-			if(iChFail == true){
+
+		static readonly NxtControl.Drawing.Color Normal = new NxtControl.Drawing.Color(64, 64, 64);
+		static readonly NxtControl.Drawing.Color Aviso = new NxtControl.Drawing.Color(200, 120, 0);
+		static readonly NxtControl.Drawing.Color Grave = new NxtControl.Drawing.Color(210, 0, 0);
+
+		void Est(FreeText f, bool desab, bool ativo, bool grave)
+		{
+			f.Text = desab ? "Desabilitado" : (ativo ? "ATIVO" : "\u2014");
+			f.Color = desab ? Normal : (ativo ? (grave ? Grave : Aviso) : Normal);
+		}
+
+		// situacao do valor (mesma regra de antes, com textos que servem para qualquer medicao) e coluna Estado
+		void Estados()
+		{
+			if (iChFail)
+			{
 				LevelStatus.Text = "Falha do canal de E/S";
-				LevelStatus.TextColor = new NxtControl.Drawing.BlinkColor("SE.Nereda.Orangwhite");
+				LevelStatus.Color = Grave;
 			}
-			else{
-				if (iLoLoPv == false && iLoPv == false && iHiPv == false && iHiHiPv == false)
-				{
-				    LevelStatus.Text = "N\u00edvel normal";
-				    LevelStatus.Color = new NxtControl.Drawing.Color(61, 205, 88); // Green
-				}
-				else if (iLoPv == true && iLoLoPv == false)
-				{
-				    LevelStatus.Text = "N\u00edvel baixo";
-				    LevelStatus.Color = new NxtControl.Drawing.Color(254, 186, 10); // Orange
-				}
-				else if (iHiPv == true && iHiHiPv == false)
-				{
-				    LevelStatus.Text = "N\u00edvel alto";
-				    LevelStatus.Color = new NxtControl.Drawing.Color(254, 186, 10); // Orange
-				}
-				else if (iLoPv == true && iLoLoPv == true)
-				{
-				    LevelStatus.Text = "N\u00edvel muito baixo";
-				    LevelStatus.Color = new NxtControl.Drawing.Color(255, 0, 0); // Red
-				}
-				else if (iHiPv == true && iHiHiPv == true)
-				{
-				    LevelStatus.Text = "N\u00edvel muito alto";
-				    LevelStatus.Color = new NxtControl.Drawing.Color(255, 0, 0); // Red
-				}
-			}
+			else if (iHiPv && iHiHiPv) { LevelStatus.Text = "Muito alto (HH)"; LevelStatus.Color = Grave; }
+			else if (iLoPv && iLoLoPv) { LevelStatus.Text = "Muito baixo (LL)"; LevelStatus.Color = Grave; }
+			else if (iHiPv) { LevelStatus.Text = "Alto (H)"; LevelStatus.Color = Aviso; }
+			else if (iLoPv) { LevelStatus.Text = "Baixo (L)"; LevelStatus.Color = Aviso; }
+			else { LevelStatus.Text = "Normal"; LevelStatus.Color = new NxtControl.Drawing.Color(40, 150, 60); }
+			Est(estHH, disHH, iHiHiPv, true);
+			Est(estH, disH, iHiPv, false);
+			Est(estL, disL, iLoPv, false);
+			Est(estLL, disLL, iLoLoPv, true);
+			estFalha.Text = iChFail ? "FALHA" : "\u2014";
+			estFalha.Color = iChFail ? Grave : Normal;
 		}
 
 		void IUnitValueChanged(object sender, ValueChangedEventArgs e)
 		{
-			// TODO: Implement IUnitValueChanged
-			if(isitFlowSensor == true){
-				InUnit = Unit.Text = Unit2.Text = Unit3.Text =  highHighBtn.Unit = highBtn.Unit = lowBtn.Unit = lowLowBtn.Unit =
-				rateOfChangeBtn.Unit = deviationBtn.Unit = "m³/h";
-			}
-			else{
-				InUnit = Unit.Text = Unit2.Text = Unit3.Text =  highHighBtn.Unit = highBtn.Unit = lowBtn.Unit = lowLowBtn.Unit =
-				rateOfChangeBtn.Unit = deviationBtn.Unit = e.Value.ToString();
-			}
+			if (isitFlowSensor == true)
+				InUnit = Unit.Text = Unit2.Text = Unit3.Text = highHighBtn.Unit = highBtn.Unit = lowBtn.Unit = lowLowBtn.Unit =
+					rateOfChangeBtn.Unit = deviationBtn.Unit = "m\u00b3/h";
+			else
+				InUnit = Unit.Text = Unit2.Text = Unit3.Text = highHighBtn.Unit = highBtn.Unit = lowBtn.Unit = lowLowBtn.Unit =
+					rateOfChangeBtn.Unit = deviationBtn.Unit = e.Value.ToString();
 		}
 
-		void IFlowSensorValueChanged(object sender, ValueChangedEventArgs e)
-		{
-			// TODO: Implement IFlowSensorValueChanged
-			isitFlowSensor = (bool) e.Value;
-		}
-
-		void HiHiDisabledValueChanged(object sender, ValueChangedEventArgs e)
-		{
-			// TODO: Implement HiHiDisabledValueChanged
-			HighHigh.Visible = HighHighBar.Visible = !(bool)e.Value;
-		}
-
-		void HiDisabledValueChanged(object sender, ValueChangedEventArgs e)
-		{
-			// TODO: Implement HiDisabledValueChanged
-			High.Visible = HighBar.Visible = !(bool)e.Value;
-		}
-
-		void LoDisabledValueChanged(object sender, ValueChangedEventArgs e)
-		{
-			// TODO: Implement LoDisabledValueChanged
-			Low.Visible = LowBar.Visible = !(bool)e.Value;
-		}
-
-		void LoLoDisabledValueChanged(object sender, ValueChangedEventArgs e)
-		{
-			// TODO: Implement LoLoDisabledValueChanged
-			LowLow.Visible = LowLowBar.Visible = !(bool)e.Value;
-		}
+		void IFlowSensorValueChanged(object sender, ValueChangedEventArgs e) { isitFlowSensor = (bool)e.Value; }
+		void HiHiDisabledValueChanged(object sender, ValueChangedEventArgs e) { disHH = (bool)e.Value; Marcas(); Estados(); }
+		void HiDisabledValueChanged(object sender, ValueChangedEventArgs e) { disH = (bool)e.Value; Marcas(); Estados(); }
+		void LoDisabledValueChanged(object sender, ValueChangedEventArgs e) { disL = (bool)e.Value; Marcas(); Estados(); }
+		void LoLoDisabledValueChanged(object sender, ValueChangedEventArgs e) { disLL = (bool)e.Value; Marcas(); Estados(); }
 	}
 }

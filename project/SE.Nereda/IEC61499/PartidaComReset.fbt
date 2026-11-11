@@ -2,7 +2,7 @@
 <!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
 <FBType GUID="c33a8b9a-b5ff-5a79-8572-7ac6398874d0" Name="PartidaComReset" Comment="Partida com reset antes: na subida do comando liga o reset por TempoReset, espera TempoPausa e so entao liga o comando (Sulzer HST: bit 2 Reset, bit 0 Start)" Namespace="SE.Nereda">
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Hidryco" Version="1.2" Author="Hidryco" Date="05/11/2026" Remarks="1.2: eventos de saida listados no ECAction (sem isso o runtime nao emite nenhum; o ST so liga/desliga). 1.1: REQ_RESET - na subida do ResetIn (reset do EAE), com o equipamento parado e cfgAtivo, da TempoReset de reset; se houver comando de partida no fim, segue a pausa e a partida. 1.0: sequencia reset -> pausa -> partida (1 s / 1 s). Comando FALSE durante a sequencia aborta (reset e comando em FALSE). cfgAtivo = FALSE: repassa o comando como antes (cada REQ gera CNF_CMD)." />
+  <VersionInfo Organization="Hidryco" Version="1.3" Author="Hidryco" Date="10/11/2026" Remarks="1.3: cfgResetClique - REQ_RESET (clique de reset na IHM) da o pulso de reset tambem com cfgAtivo = FALSE (Sulzer: reset so no clique, sem reset na partida). 1.2: eventos de saida listados no ECAction (sem isso o runtime nao emite nenhum; o ST so liga/desliga). 1.1: REQ_RESET - na subida do ResetIn (reset do EAE), com o equipamento parado e cfgAtivo, da TempoReset de reset; se houver comando de partida no fim, segue a pausa e a partida. 1.0: sequencia reset -> pausa -> partida (1 s / 1 s). Comando FALSE durante a sequencia aborta (reset e comando em FALSE). cfgAtivo = FALSE: repassa o comando como antes (cada REQ gera CNF_CMD)." />
   <InterfaceList>
     <EventInputs>
       <Event ID="378A722B725B1BAA" Name="REQ" Comment="Novo comando da base (CNF_OUT)">
@@ -13,6 +13,7 @@
       <Event ID="0A7898AA46E3126A" Name="REQ_RESET" Comment="Reset do EAE (ResetCmd)">
         <With Var="ResetIn" />
         <With Var="cfgAtivo" />
+        <With Var="cfgResetClique" />
       </Event>
     </EventInputs>
     <EventOutputs>
@@ -31,6 +32,7 @@
       <VarDeclaration ID="530327D721FAE6E4" Name="CmdIn" Type="BOOL" Comment="Comando da base (OutFwd)" />
       <VarDeclaration ID="E1F7FFFB6D775146" Name="ResetIn" Type="BOOL" Comment="Reset do EAE (OU de todos os resets do Motor_VS)" />
       <VarDeclaration ID="0815DBF402220E33" Name="cfgAtivo" Type="BOOL" Comment="TRUE = reset antes de cada partida" />
+      <VarDeclaration ID="C0A1521C618D268E" Name="cfgResetClique" Type="BOOL" Comment="TRUE = o clique de reset (REQ_RESET) da o pulso de reset mesmo com cfgAtivo = FALSE" />
     </InputVars>
     <OutputVars>
       <VarDeclaration ID="423203D485DE38C6" Name="CmdOut" Type="BOOL" Comment="Comando para a saida" />
@@ -91,8 +93,8 @@ IF REQ THEN
         END_IF;
     END_IF;
 ELSIF REQ_RESET THEN
-    (* reset do EAE: so na subida, parado e sem sequencia em andamento *)
-    IF ResetIn AND NOT oldResetIn AND cfgAtivo AND fase = 0 AND NOT CmdOut THEN
+    (* reset pelo clique: so na subida, parado e sem sequencia em andamento *)
+    IF ResetIn AND NOT oldResetIn AND (cfgAtivo OR cfgResetClique) AND fase = 0 AND NOT CmdOut THEN
         fase := 3;
         ResetOut := TRUE;
         CNF_RESET := TRUE;

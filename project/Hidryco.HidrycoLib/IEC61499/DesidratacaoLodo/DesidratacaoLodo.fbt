@@ -2,7 +2,7 @@
 <!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
 <FBType GUID="cd66cc86-31ed-51c3-9a0a-7da15d055844" Name="DesidratacaoLodo" Comment="Desidratacao do lodo (900): alimentacao das prensas C-Press, bombas, barrilete, polimero e painel PCM LODO - HidrycoLib" Namespace="Hidryco.HidrycoLib">
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Hidryco" Version="1.2" Author="Hidryco" Date="04/11/2026" Remarks="Revisao 04/11/2026: BR sem supervisao de termica; STP_VEL_SOPRADORES para a EstocagemLodo; FT stsHabilitado na Alimentacao. 1.1: SV_900_01..08 como sub-CATs Valvula_Solenoide (caminho do legado para a IO List da Nereda), ligadas ao CNF_SV da Alimentacao. 1.0: divisao da Fase_Solida 1.5 como no legado: DesidratacaoLodo (prensas, bombas BO/BR, barrilete VA-06..13, FT, SV, PP, painel PCM) + EstocagemLodo (tanques, sopradores, VA-01/02, VB-03/04). O resumo e os faceplates continuam aqui; a estocagem troca status, ajustes, reset e emergencia com a EstocagemLodo pela camada." />
+  <VersionInfo Organization="Hidryco" Version="1.3" Author="Hidryco" Date="10/11/2026" Remarks="1.3 (10/11/2026): falha UCP das BO-900-01/02/03 e NF (cfgTermicaNF no padrao TRUE; antes FALSE, vinha invertida). 900-FT-03 mede a AD-02 (fluxograma FLX-002): FT_900_03 alimenta a prensa 2 (Alimentacao e Pid2) e FT_900_02 fica na vaga da prensa 3 (futura, sem medidor). Revisao 04/11/2026: BR sem supervisao de termica; STP_VEL_SOPRADORES para a EstocagemLodo; FT stsHabilitado na Alimentacao. 1.1: SV_900_01..08 como sub-CATs Valvula_Solenoide (caminho do legado para a IO List da Nereda), ligadas ao CNF_SV da Alimentacao. 1.0: divisao da Fase_Solida 1.5 como no legado: DesidratacaoLodo (prensas, bombas BO/BR, barrilete VA-06..13, FT, SV, PP, painel PCM) + EstocagemLodo (tanques, sopradores, VA-01/02, VB-03/04). O resumo e os faceplates continuam aqui; a estocagem troca status, ajustes, reset e emergencia com a EstocagemLodo pela camada." />
   <InterfaceList>
     <EventInputs>
       <Event ID="DAB96FE935A92679" Name="E_RESET_FALHAS" Comment="Reset pelo processo (desidratacao e equipamentos) com cmdResetFalhas = TRUE">
@@ -200,17 +200,14 @@
     <FB ID="5D217E334A0CE453" Name="BO_900_01" Type="Motor_Generico" x="17000" y="2000" Namespace="Hidryco.HidrycoLib">
       <Parameter Name="$63EFEFB7C85EC93E" Value="TRUE" />
       <Parameter Name="$39489193B7758574" Value="600.0" />
-      <Parameter Name="$66763E13F70A4420" Value="FALSE" />
     </FB>
     <FB ID="61CCEF6D7D2AB3A8" Name="BO_900_02" Type="Motor_Generico" x="17000" y="2900" Namespace="Hidryco.HidrycoLib">
       <Parameter Name="$63EFEFB7C85EC93E" Value="TRUE" />
       <Parameter Name="$39489193B7758574" Value="600.0" />
-      <Parameter Name="$66763E13F70A4420" Value="FALSE" />
     </FB>
     <FB ID="7B454A76083D8E2C" Name="BO_900_03" Type="Motor_Generico" x="17000" y="3800" Namespace="Hidryco.HidrycoLib">
       <Parameter Name="$63EFEFB7C85EC93E" Value="TRUE" />
       <Parameter Name="$39489193B7758574" Value="600.0" />
-      <Parameter Name="$66763E13F70A4420" Value="FALSE" />
     </FB>
     <FB ID="1A01173E0E79DEE5" Name="BR_900_01" Type="Motor_Generico" x="17000" y="4700" Namespace="Hidryco.HidrycoLib">
       <Parameter Name="$D34C88BE7FFF3208" Value="FALSE" />
@@ -384,13 +381,13 @@
       <Connection Source="$D4A5EDC7792F64D3.C_CNF" Destination="$31F2EC8F74D266C5.37F5128277E33C7D" />
       <Connection Source="$C288081DE209417C.28A380156DB271B8" Destination="$31F2EC8F74D266C5.48ABB9D9BB2D6CEE" />
       <Connection Source="$31F7876DB3EEEFEE.2286FBFA7E7E3034" Destination="$9EE86B339377729C.REQ_SP" />
-      <Connection Source="$C288081DE209417C.28A380156DB271B8" Destination="$9EE86B339377729C.REQ" />
+      <Connection Source="$0C05FC8D1BBE56F1.28A380156DB271B8" Destination="$9EE86B339377729C.REQ" />
       <Connection Source="$31F2EC8F74D266C5.CF7635F428763261" Destination="$9EE86B339377729C.REQ" />
       <Connection Source="$9EE86B339377729C.CNF" Destination="$31F2EC8F74D266C5.37F5128277E33C7D" />
       <Connection Source="$9EE86B339377729C.C_CNF" Destination="$31F2EC8F74D266C5.37F5128277E33C7D" />
       <Connection Source="$0C05FC8D1BBE56F1.28A380156DB271B8" Destination="$31F2EC8F74D266C5.48ABB9D9BB2D6CEE" />
       <Connection Source="$31F7876DB3EEEFEE.2286FBFA7E7E3034" Destination="$94D6EC3B93042F00.REQ_SP" />
-      <Connection Source="$0C05FC8D1BBE56F1.28A380156DB271B8" Destination="$94D6EC3B93042F00.REQ" />
+      <Connection Source="$C288081DE209417C.28A380156DB271B8" Destination="$94D6EC3B93042F00.REQ" />
       <Connection Source="$31F2EC8F74D266C5.CF7635F428763261" Destination="$94D6EC3B93042F00.REQ" />
       <Connection Source="$94D6EC3B93042F00.CNF" Destination="$31F2EC8F74D266C5.37F5128277E33C7D" />
       <Connection Source="$94D6EC3B93042F00.C_CNF" Destination="$31F2EC8F74D266C5.37F5128277E33C7D" />
@@ -592,16 +589,16 @@
       <Connection Source="$31F2EC8F74D266C5.AC7C96EC320F9B56" Destination="$D4A5EDC7792F64D3.Mode" />
       <Connection Source="$31F2EC8F74D266C5.66CC0FC8380DE7A9" Destination="$D4A5EDC7792F64D3.PresetValue" />
       <Connection Source="$D4A5EDC7792F64D3.Out" Destination="$31F2EC8F74D266C5.EF0418ED47F514A0" />
-      <Connection Source="$C288081DE209417C.D7422D307E6AF52D" Destination="$31F2EC8F74D266C5.0B775DA830BA5C8F" />
-      <Connection Source="$C288081DE209417C.726640D1704B3F86" Destination="$31F2EC8F74D266C5.BF4060DB062B029B" />
-      <Connection Source="$C288081DE209417C.D7422D307E6AF52D" Destination="$9EE86B339377729C.Pv" />
+      <Connection Source="$0C05FC8D1BBE56F1.D7422D307E6AF52D" Destination="$31F2EC8F74D266C5.0B775DA830BA5C8F" />
+      <Connection Source="$0C05FC8D1BBE56F1.726640D1704B3F86" Destination="$31F2EC8F74D266C5.BF4060DB062B029B" />
+      <Connection Source="$0C05FC8D1BBE56F1.D7422D307E6AF52D" Destination="$9EE86B339377729C.Pv" />
       <Connection Source="$31F7876DB3EEEFEE.76E9ED00F32CFE6B" Destination="$9EE86B339377729C.Sp" />
       <Connection Source="$31F2EC8F74D266C5.8D0D9C2E90DCA136" Destination="$9EE86B339377729C.Mode" />
       <Connection Source="$31F2EC8F74D266C5.82217E0576C4A321" Destination="$9EE86B339377729C.PresetValue" />
       <Connection Source="$9EE86B339377729C.Out" Destination="$31F2EC8F74D266C5.CB7E7E5A60558086" />
-      <Connection Source="$0C05FC8D1BBE56F1.D7422D307E6AF52D" Destination="$31F2EC8F74D266C5.1C872E508B6F9CCA" />
-      <Connection Source="$0C05FC8D1BBE56F1.726640D1704B3F86" Destination="$31F2EC8F74D266C5.6DEAF5F9074BEFF6" />
-      <Connection Source="$0C05FC8D1BBE56F1.D7422D307E6AF52D" Destination="$94D6EC3B93042F00.Pv" />
+      <Connection Source="$C288081DE209417C.D7422D307E6AF52D" Destination="$31F2EC8F74D266C5.1C872E508B6F9CCA" />
+      <Connection Source="$C288081DE209417C.726640D1704B3F86" Destination="$31F2EC8F74D266C5.6DEAF5F9074BEFF6" />
+      <Connection Source="$C288081DE209417C.D7422D307E6AF52D" Destination="$94D6EC3B93042F00.Pv" />
       <Connection Source="$31F7876DB3EEEFEE.9A1935965FF11A1D" Destination="$94D6EC3B93042F00.Sp" />
       <Connection Source="$31F2EC8F74D266C5.580E8B452F14C837" Destination="$94D6EC3B93042F00.Mode" />
       <Connection Source="$31F2EC8F74D266C5.F7E26881AF4B195B" Destination="$94D6EC3B93042F00.PresetValue" />
@@ -747,8 +744,8 @@
       <Connection Source="$31F2EC8F74D266C5.2A1E389F770A9C7F" Destination="$E9F277FA6189D4D5.D0E4493379BA5C47" />
       <Connection Source="$31F7876DB3EEEFEE.26B669BC676D1FB2" Destination="$9DCD88E1901DA328" />
       <Connection Source="$EE07BE08577527AD.07C3588C57A022B8" Destination="$31F2EC8F74D266C5.ACEA17EBE8E63CF3" />
-      <Connection Source="$C288081DE209417C.07C3588C57A022B8" Destination="$31F2EC8F74D266C5.3475850F1055D0F8" />
-      <Connection Source="$0C05FC8D1BBE56F1.07C3588C57A022B8" Destination="$31F2EC8F74D266C5.FB3DD143CAF4663F" />
+      <Connection Source="$0C05FC8D1BBE56F1.07C3588C57A022B8" Destination="$31F2EC8F74D266C5.3475850F1055D0F8" />
+      <Connection Source="$C288081DE209417C.07C3588C57A022B8" Destination="$31F2EC8F74D266C5.FB3DD143CAF4663F" />
     </DataConnections>
     <Input ID="DAB96FE935A92679" Name="E_RESET_FALHAS" x="200" y="200" Type="Event" />
     <Input ID="91E17855232378A8" Name="REQ_ESTOCAGEM" x="200" y="260" Type="Event" />

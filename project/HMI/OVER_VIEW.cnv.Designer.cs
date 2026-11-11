@@ -29,7 +29,6 @@ namespace HMI.Main.Canvases
 			this.btnAckNereda = new NxtControl.GuiFramework.DrawnButton();
 			this.HeartBeat = new SE.Nereda.Symbols.HeartBeat.sDefault();
 			this.Mode = new SE.Nereda.Symbols.Mode.ReactorMode();
-			this.OpenWebPage = new SE.Nereda.Symbols.OpenWebPage.sDefault();
 			this.cAlim = new NxtControl.GuiFramework.Rectangle();
 			this.cRea = new NxtControl.GuiFramework.Rectangle();
 			this.cAer = new NxtControl.GuiFramework.Rectangle();
@@ -78,15 +77,6 @@ namespace HMI.Main.Canvases
 			this.Mode.TagName = "ECC9B0BB08A85534";
 			this.Mode.EndInit();
 			// 
-			// OpenWebPage
-			// 
-			this.OpenWebPage.BeginInit();
-			this.OpenWebPage.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 840D, 8D);
-			this.OpenWebPage.Name = "OpenWebPage";
-			this.OpenWebPage.SecurityToken = ((uint)(4294967295u));
-			this.OpenWebPage.TagName = "61C067078E62D90F";
-			this.OpenWebPage.EndInit();
-			// 
 			// cAlim
 			// 
 			this.cAlim.Bounds = new NxtControl.Drawing.RectF(((float)(6D)), ((float)(54D)), ((float)(604D)), ((float)(356D)));
@@ -125,7 +115,7 @@ namespace HMI.Main.Canvases
 			this.irAlim.CanvasName = "INFLUENT_FEED";
 			this.irAlim.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
 			this.irAlim.Name = "irAlim";
-			this.irAlim.Text = "ALIMENTA\u00c7\u00c3O  \u203a";
+			this.irAlim.Text = "ALIMENTAÇÃO  ›";
 			// 
 			// irR1
 			// 
@@ -133,7 +123,7 @@ namespace HMI.Main.Canvases
 			this.irR1.CanvasName = "REACTOR1";
 			this.irR1.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
 			this.irR1.Name = "irR1";
-			this.irR1.Text = "REATOR NEREDA 1  \u203a";
+			this.irR1.Text = "REATOR NEREDA 1  ›";
 			// 
 			// irR2
 			// 
@@ -141,7 +131,7 @@ namespace HMI.Main.Canvases
 			this.irR2.CanvasName = "REACTOR2";
 			this.irR2.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
 			this.irR2.Name = "irR2";
-			this.irR2.Text = "REATOR NEREDA 2  \u203a";
+			this.irR2.Text = "REATOR NEREDA 2  ›";
 			// 
 			// irAer
 			// 
@@ -149,7 +139,7 @@ namespace HMI.Main.Canvases
 			this.irAer.CanvasName = "AERATION";
 			this.irAer.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
 			this.irAer.Name = "irAer";
-			this.irAer.Text = "AERA\u00c7\u00c3O  \u203a";
+			this.irAer.Text = "AERAÇÃO  ›";
 			// 
 			// irLodo
 			// 
@@ -157,12 +147,12 @@ namespace HMI.Main.Canvases
 			this.irLodo.CanvasName = "SLUDGE_BUFFER";
 			this.irLodo.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
 			this.irLodo.Name = "irLodo";
-			this.irLodo.Text = "BUFFER DE LODO  \u203a";
+			this.irLodo.Text = "BUFFER DE LODO  ›";
 			// 
 			// InfluentFeed
 			// 
 			this.InfluentFeed.BeginInit();
-			this.InfluentFeed.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.6852D, 0D, 0D, 0.6852D, 12.0D, 96.0D);
+			this.InfluentFeed.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.6852D, 0D, 0D, 0.6852D, 12D, 96D);
 			this.InfluentFeed.Name = "InfluentFeed";
 			this.InfluentFeed.SecurityToken = ((uint)(4294967295u));
 			this.InfluentFeed.TagName = "B949570768DD3945";
@@ -171,15 +161,15 @@ namespace HMI.Main.Canvases
 			// Reactor1
 			// 
 			this.Reactor1.BeginInit();
-			this.Reactor1._iAV4x101 = "AV41101\r\nAlimenta\u00e7\u00e3o";
-			this.Reactor1._iAV4x102 = "AV41102\r\nN\u00edvel inferior";
+			this.Reactor1._iAV4x101 = "AV41101\r\nAlimentação";
+			this.Reactor1._iAV4x102 = "AV41102\r\nNível inferior";
 			this.Reactor1._iAV4x103 = "AV41103\r\nDescarte de lodo";
-			this.Reactor1._iAV4x170 = "AV41170\r\nAera\u00e7\u00e3o";
-			this.Reactor1._iAV4x171 = "AV41171\r\nPressuriza\u00e7\u00e3o";
+			this.Reactor1._iAV4x170 = "AV41170\r\nAeração";
+			this.Reactor1._iAV4x171 = "AV41171\r\nPressurização";
 			this.Reactor1._iAV4x172 = "AV41172\r\nRespiro lodo";
-			this.Reactor1._iLT001 = "41LT1005\r\nN\u00edvel";
+			this.Reactor1._iLT001 = "41LT1005\r\nNível";
 			this.Reactor1._iREACTOR = "Reator Nereda 1";
-			this.Reactor1.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.49D, 0D, 0D, 0.49D, 621.0D, 92.0D);
+			this.Reactor1.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.49D, 0D, 0D, 0.49D, 621D, 92D);
 			this.Reactor1.Name = "Reactor1";
 			this.Reactor1.SecurityToken = ((uint)(4294967295u));
 			this.Reactor1.TagName = "0F513B831BAFCB32";
@@ -189,7 +179,7 @@ namespace HMI.Main.Canvases
 			// 
 			this.FaseR1.BeginInit();
 			this.FaseR1._iNome = "Fase atual";
-			this.FaseR1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1.3D, 0D, 0D, 1.3D, 685.0D, 342.0D);
+			this.FaseR1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1.3D, 0D, 0D, 1.3D, 685D, 342D);
 			this.FaseR1.Name = "FaseR1";
 			this.FaseR1.SecurityToken = ((uint)(4294967295u));
 			this.FaseR1.TagName = "0F513B831BAFCB32";
@@ -198,15 +188,15 @@ namespace HMI.Main.Canvases
 			// Reactor2
 			// 
 			this.Reactor2.BeginInit();
-			this.Reactor2._iAV4x101 = "AV42101\r\nAlimenta\u00e7\u00e3o";
-			this.Reactor2._iAV4x102 = "AV42102\r\nN\u00edvel inferior";
+			this.Reactor2._iAV4x101 = "AV42101\r\nAlimentação";
+			this.Reactor2._iAV4x102 = "AV42102\r\nNível inferior";
 			this.Reactor2._iAV4x103 = "AV42103\r\nDescarte de lodo";
-			this.Reactor2._iAV4x170 = "AV42170\r\nAera\u00e7\u00e3o";
-			this.Reactor2._iAV4x171 = "AV42171\r\nPressuriza\u00e7\u00e3o";
+			this.Reactor2._iAV4x170 = "AV42170\r\nAeração";
+			this.Reactor2._iAV4x171 = "AV42171\r\nPressurização";
 			this.Reactor2._iAV4x172 = "AV42172\r\nRespiro lodo";
-			this.Reactor2._iLT001 = "42LT1005\r\nN\u00edvel";
+			this.Reactor2._iLT001 = "42LT1005\r\nNível";
 			this.Reactor2._iREACTOR = "Reator Nereda 2";
-			this.Reactor2.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.49D, 0D, 0D, 0.49D, 993.0D, 92.0D);
+			this.Reactor2.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.49D, 0D, 0D, 0.49D, 993D, 92D);
 			this.Reactor2.Name = "Reactor2";
 			this.Reactor2.SecurityToken = ((uint)(4294967295u));
 			this.Reactor2.TagName = "19E8555E9622C1D3";
@@ -216,7 +206,7 @@ namespace HMI.Main.Canvases
 			// 
 			this.FaseR2.BeginInit();
 			this.FaseR2._iNome = "Fase atual";
-			this.FaseR2.DesignMatrix = new NxtControl.Drawing.Matrix2D(1.3D, 0D, 0D, 1.3D, 1057.0D, 342.0D);
+			this.FaseR2.DesignMatrix = new NxtControl.Drawing.Matrix2D(1.3D, 0D, 0D, 1.3D, 1057D, 342D);
 			this.FaseR2.Name = "FaseR2";
 			this.FaseR2.SecurityToken = ((uint)(4294967295u));
 			this.FaseR2.TagName = "19E8555E9622C1D3";
@@ -225,7 +215,7 @@ namespace HMI.Main.Canvases
 			// Aeration
 			// 
 			this.Aeration.BeginInit();
-			this.Aeration.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.75D, 0D, 0D, 0.75D, 92.0D, 452.0D);
+			this.Aeration.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.75D, 0D, 0D, 0.75D, 92D, 452D);
 			this.Aeration.Name = "Aeration";
 			this.Aeration.SecurityToken = ((uint)(4294967295u));
 			this.Aeration.TagName = "35A194BD3A715270";
@@ -263,14 +253,12 @@ namespace HMI.Main.Canvases
 			this.SludgeBuffer,
 			this.HeartBeat,
 			this.Mode,
-			this.OpenWebPage,
 			this.btnAckNereda});
 			this.Size = new System.Drawing.Size(1366, 698);
 
 		}
 		private SE.Nereda.Symbols.HeartBeat.sDefault HeartBeat;
 		private SE.Nereda.Symbols.Mode.ReactorMode Mode;
-		private SE.Nereda.Symbols.OpenWebPage.sDefault OpenWebPage;
 		private NxtControl.GuiFramework.DrawnButton btnAckNereda;
 		private NxtControl.GuiFramework.Rectangle cAlim;
 		private NxtControl.GuiFramework.Rectangle cRea;

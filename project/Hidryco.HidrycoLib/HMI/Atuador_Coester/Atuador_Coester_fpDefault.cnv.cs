@@ -105,7 +105,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Atuador_Coester
 		string Estado()
 		{
 			if (fCom) return "SEM COMUNICAÇÃO";
-			if (fAtu) return "FALHA DO ATUADOR";
+			// falha do atuador: so na linha de alarme e no diagnostico; o estado mostra a posicao real
 			if (fPos) return posic ? "NÃO ATINGIU A POSIÇÃO" : "NÃO ABRIU / NÃO FECHOU";
 			switch (anim)
 			{

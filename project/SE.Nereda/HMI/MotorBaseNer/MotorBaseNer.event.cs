@@ -1019,6 +1019,148 @@ stack Trace:
 
 namespace SE.Nereda.Symbols.MotorBaseNer
 {
+  partial class sDiagnostico
+  {
+
+    private event EventHandler<SE.Nereda.Symbols.MotorBaseNer.UPDEventArgs> UPD_Fired;
+
+    protected override void OnEndInit()
+    {
+      if (UPD_Fired != null)
+        AttachEventInput(0);
+
+    }
+
+    protected override void FireEventCallback(int channelId, int cookie, int eventIndex)
+    {
+      switch(eventIndex)
+      {
+        default:
+          break;
+        case 0:
+          if (UPD_Fired != null)
+          {
+            try
+            {
+              UPD_Fired(this, new SE.Nereda.Symbols.MotorBaseNer.UPDEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","UPD_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break; 
+
+      }
+    }
+    public bool FireEvent_CFG(System.Int32 MonTime, System.Int32 TripTime, System.Boolean ConfResetReq, System.Boolean FailResetReq, System.Int32 ScanTime, System.Byte AlmAckType, System.Boolean EnTrackSp, System.Boolean EnResetSp)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {MonTime, TripTime, ConfResetReq, FailResetReq, ScanTime, AlmAckType, EnTrackSp, EnResetSp});
+    }
+    public bool FireEvent_CFG(SE.Nereda.Symbols.MotorBaseNer.CFGEventArgs ea)
+    {
+      object[] _values_ = new object[8];
+      if (ea.MonTime.HasValue) _values_[0] = ea.MonTime.Value;
+      if (ea.TripTime.HasValue) _values_[1] = ea.TripTime.Value;
+      if (ea.ConfResetReq.HasValue) _values_[2] = ea.ConfResetReq.Value;
+      if (ea.FailResetReq.HasValue) _values_[3] = ea.FailResetReq.Value;
+      if (ea.ScanTime.HasValue) _values_[4] = ea.ScanTime.Value;
+      if (ea.AlmAckType.HasValue) _values_[5] = ea.AlmAckType.Value;
+      if (ea.EnTrackSp.HasValue) _values_[6] = ea.EnTrackSp.Value;
+      if (ea.EnResetSp.HasValue) _values_[7] = ea.EnResetSp.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
+    }
+    public bool FireEvent_CFG(System.Int32 MonTime, bool ignore_MonTime, System.Int32 TripTime, bool ignore_TripTime, System.Boolean ConfResetReq, bool ignore_ConfResetReq, System.Boolean FailResetReq, bool ignore_FailResetReq, System.Int32 ScanTime, bool ignore_ScanTime, System.Byte AlmAckType, bool ignore_AlmAckType, System.Boolean EnTrackSp, bool ignore_EnTrackSp, System.Boolean EnResetSp, bool ignore_EnResetSp)
+    {
+      object[] _values_ = new object[8];
+      if (!ignore_MonTime) _values_[0] = MonTime;
+      if (!ignore_TripTime) _values_[1] = TripTime;
+      if (!ignore_ConfResetReq) _values_[2] = ConfResetReq;
+      if (!ignore_FailResetReq) _values_[3] = FailResetReq;
+      if (!ignore_ScanTime) _values_[4] = ScanTime;
+      if (!ignore_AlmAckType) _values_[5] = AlmAckType;
+      if (!ignore_EnTrackSp) _values_[6] = EnTrackSp;
+      if (!ignore_EnResetSp) _values_[7] = EnResetSp;
+      return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
+    }
+    public bool FireEvent_SP_CMD(System.Int16 Sp)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {Sp});
+    }
+    public bool FireEvent_SP_CMD(SE.Nereda.Symbols.MotorBaseNer.SP_CMDEventArgs ea)
+    {
+      object[] _values_ = new object[1];
+      if (ea.Sp.HasValue) _values_[0] = ea.Sp.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
+    }
+    public bool FireEvent_SP_CMD(System.Int16 Sp, bool ignore_Sp)
+    {
+      object[] _values_ = new object[1];
+      if (!ignore_Sp) _values_[0] = Sp;
+      return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
+    }
+    public bool FireEvent_RESET_CMD(System.Boolean Reset)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(2, new object[] {Reset});
+    }
+    public bool FireEvent_RESET_CMD(SE.Nereda.Symbols.MotorBaseNer.RESET_CMDEventArgs ea)
+    {
+      object[] _values_ = new object[1];
+      if (ea.Reset.HasValue) _values_[0] = ea.Reset.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(2, _values_);
+    }
+    public bool FireEvent_RESET_CMD(System.Boolean Reset, bool ignore_Reset)
+    {
+      object[] _values_ = new object[1];
+      if (!ignore_Reset) _values_[0] = Reset;
+      return ((IHMIAccessorOutput)this).FireEvent(2, _values_);
+    }
+    public bool FireEvent_IND_MODE(System.Boolean Simulation, System.Boolean FbOverride, System.Boolean Maintenance, System.Boolean OutOfService)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(3, new object[] {Simulation, FbOverride, Maintenance, OutOfService});
+    }
+    public bool FireEvent_IND_MODE(SE.Nereda.Symbols.MotorBaseNer.IND_MODEEventArgs ea)
+    {
+      object[] _values_ = new object[4];
+      if (ea.Simulation.HasValue) _values_[0] = ea.Simulation.Value;
+      if (ea.FbOverride.HasValue) _values_[1] = ea.FbOverride.Value;
+      if (ea.Maintenance.HasValue) _values_[2] = ea.Maintenance.Value;
+      if (ea.OutOfService.HasValue) _values_[3] = ea.OutOfService.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(3, _values_);
+    }
+    public bool FireEvent_IND_MODE(System.Boolean Simulation, bool ignore_Simulation, System.Boolean FbOverride, bool ignore_FbOverride, System.Boolean Maintenance, bool ignore_Maintenance, System.Boolean OutOfService, bool ignore_OutOfService)
+    {
+      object[] _values_ = new object[4];
+      if (!ignore_Simulation) _values_[0] = Simulation;
+      if (!ignore_FbOverride) _values_[1] = FbOverride;
+      if (!ignore_Maintenance) _values_[2] = Maintenance;
+      if (!ignore_OutOfService) _values_[3] = OutOfService;
+      return ((IHMIAccessorOutput)this).FireEvent(3, _values_);
+    }
+    public bool FireEvent_OWNER(System.UInt16 Owner)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(4, new object[] {Owner});
+    }
+    public bool FireEvent_OWNER(SE.Nereda.Symbols.MotorBaseNer.OWNEREventArgs ea)
+    {
+      object[] _values_ = new object[1];
+      if (ea.Owner.HasValue) _values_[0] = ea.Owner.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(4, _values_);
+    }
+    public bool FireEvent_OWNER(System.UInt16 Owner, bool ignore_Owner)
+    {
+      object[] _values_ = new object[1];
+      if (!ignore_Owner) _values_[0] = Owner;
+      return ((IHMIAccessorOutput)this).FireEvent(4, _values_);
+    }
+
+  }
+}
+
+namespace SE.Nereda.Symbols.MotorBaseNer
+{
   partial class sPump
   {
 

@@ -3,6 +3,8 @@
  * Percorre todos os simbolos de equipamento da tela (inclusive os que estao dentro de outros simbolos) e dispara
  * em cada um o mesmo evento do botao "Reconhecer / Reset" do faceplate dele: FireEvent_<reset>(true) e (false).
  * Nao mexe em horimetro nem em numero de partidas. Cada instancia de CAT e resetada uma vez so.
+ * Motores do Nereda (Motor_VS, MotorS): RESET do CAT, o mesmo do botao Reset do faceplate (reseta a base e, no
+ * Motor_VS, manda um pulso de reset ao equipamento, so com ele parado).
  */
 
 using System;
@@ -38,6 +40,14 @@ namespace HMI.Main
 		};
 		const string NS = "Hidryco.HidrycoLib.Symbols.";
 
+		// motores do Nereda (SE.Nereda): evento RESET do CAT
+		static readonly Dictionary<string, string> EVENTO_NEREDA = new Dictionary<string, string>
+		{
+			{ "Motor_VS", "FireEvent_RESET" },
+			{ "MotorS", "FireEvent_RESET" },
+		};
+		const string NS_NEREDA = "SE.Nereda.Symbols.";
+
 		/// <summary>Reseta todos os equipamentos da tela. Retorna quantas instancias foram resetadas.</summary>
 		public static int Executar(GroupShape tela)
 		{
@@ -61,10 +71,19 @@ namespace HMI.Main
 		static void Reseta(HMISymbol s, HashSet<string> feitos, ref int n)
 		{
 			Type t = s.GetType();
-			if (t.Namespace == null || !t.Namespace.StartsWith(NS)) return;
-			string cat = t.Namespace.Substring(NS.Length);
-			string evento;
-			if (!EVENTO.TryGetValue(cat, out evento)) return;
+			if (t.Namespace == null) return;
+			string cat, evento;
+			if (t.Namespace.StartsWith(NS))
+			{
+				cat = t.Namespace.Substring(NS.Length);
+				if (!EVENTO.TryGetValue(cat, out evento)) return;
+			}
+			else if (t.Namespace.StartsWith(NS_NEREDA))
+			{
+				cat = t.Namespace.Substring(NS_NEREDA.Length);
+				if (!EVENTO_NEREDA.TryGetValue(cat, out evento)) return;
+			}
+			else return;
 			MethodInfo m = t.GetMethod(evento, new Type[] { typeof(bool) });
 			if (m == null) return;
 			// mesma instancia de CAT em varios simbolos da tela (ex.: sDefault + sSV01..08): reseta uma vez so

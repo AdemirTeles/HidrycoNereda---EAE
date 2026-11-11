@@ -41,9 +41,7 @@ namespace SE.Nereda.Symbols.MotorS
 			InitializeComponent();
 			VertMot.Visible = false;
             HoriMot.Visible = true;  
-            alarmFrame.Size = new NxtControl.Drawing.SizeF(50,64);
-            State.Location = new NxtControl.Drawing.PointF(48,48);
-            ManuelMode.Location = new NxtControl.Drawing.PointF(28,48);
+            ApplyStateTextPosition(_stateTextPosition);
 		}
 
 		void StateActuatorStatus(short StateValue)
@@ -70,7 +68,8 @@ namespace SE.Nereda.Symbols.MotorS
 		void OpenFpClick(object sender, EventArgs e)
 		{
 			// TODO: Implement OpenFpClick
-			//this.Base.DoOpenFaceplate("fpDefault");
+			// abre direto o faceplate principal (antes abria o menu fpOptions)
+			this.Base.DoOpenFaceplate("fpDefault");
 		}
 		
 		[RefreshProperties(RefreshProperties.Repaint)]
@@ -144,18 +143,20 @@ namespace SE.Nereda.Symbols.MotorS
                     // Text en haut du symbole
                     VertMot.Visible = true;
                     HoriMot.Visible = false;
-                    alarmFrame.Size = new NxtControl.Drawing.SizeF(58,56);
-                    State.Location = new NxtControl.Drawing.PointF(76,64);
-                    ManuelMode.Location = new NxtControl.Drawing.PointF(76,48);
+                    alarmFrame.Bounds = new NxtControl.Drawing.RectF(46f, 46f, 28f, 40f);
+                    State.Location = new NxtControl.Drawing.PointF(96f, 52f);
+                    modo.Location = new NxtControl.Drawing.PointF(90f, 72f);
+                    ManuelMode.Location = new NxtControl.Drawing.PointF(76f, 52f);
                     break;
 
                 case StateTextPositionOption.Vertical:
                     // Text à droite du symbole
                     VertMot.Visible = false;
                     HoriMot.Visible = true;  
-                    alarmFrame.Size = new NxtControl.Drawing.SizeF(50,64);
-                    State.Location = new NxtControl.Drawing.PointF(48,48);
-                    ManuelMode.Location = new NxtControl.Drawing.PointF(28,48);
+                    alarmFrame.Bounds = new NxtControl.Drawing.RectF(46f, 48f, 40f, 46f);
+                    State.Location = new NxtControl.Drawing.PointF(68f, 50f);
+                    modo.Location = new NxtControl.Drawing.PointF(90f, 62f);
+                    ManuelMode.Location = new NxtControl.Drawing.PointF(48f, 50f);
                     break;
             }
         }

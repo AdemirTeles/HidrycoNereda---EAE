@@ -1710,6 +1710,249 @@ stack Trace:
 
 namespace SE.Nereda.Symbols.MotorVsBaseNer
 {
+  partial class sDiagnostico
+  {
+
+    private event EventHandler<SE.Nereda.Symbols.MotorVsBaseNer.UPDEventArgs> UPD_Fired;
+
+    private event EventHandler<SE.Nereda.Symbols.MotorVsBaseNer.UPD_TIMEEventArgs> UPD_TIME_Fired;
+
+    protected override void OnEndInit()
+    {
+      if (UPD_Fired != null)
+        AttachEventInput(0);
+      if (UPD_TIME_Fired != null)
+        AttachEventInput(1);
+
+    }
+
+    protected override void FireEventCallback(int channelId, int cookie, int eventIndex)
+    {
+      switch(eventIndex)
+      {
+        default:
+          break;
+        case 0:
+          if (UPD_Fired != null)
+          {
+            try
+            {
+              UPD_Fired(this, new SE.Nereda.Symbols.MotorVsBaseNer.UPDEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","UPD_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break; 
+        case 1:
+          if (UPD_TIME_Fired != null)
+          {
+            try
+            {
+              UPD_TIME_Fired(this, new SE.Nereda.Symbols.MotorVsBaseNer.UPD_TIMEEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","UPD_TIME_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break; 
+
+      }
+    }
+    public bool FireEvent_OWNER(System.UInt16 Owner)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {Owner});
+    }
+    public bool FireEvent_OWNER(SE.Nereda.Symbols.MotorVsBaseNer.OWNEREventArgs ea)
+    {
+      object[] _values_ = new object[1];
+      if (ea.Owner.HasValue) _values_[0] = ea.Owner.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
+    }
+    public bool FireEvent_OWNER(System.UInt16 Owner, bool ignore_Owner)
+    {
+      object[] _values_ = new object[1];
+      if (!ignore_Owner) _values_[0] = Owner;
+      return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
+    }
+    public bool FireEvent_SPEED_OWNER(System.Boolean EnSpeedOwner, System.Boolean SpeedOwner)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {EnSpeedOwner, SpeedOwner});
+    }
+    public bool FireEvent_SPEED_OWNER(SE.Nereda.Symbols.MotorVsBaseNer.SPEED_OWNEREventArgs ea)
+    {
+      object[] _values_ = new object[2];
+      if (ea.EnSpeedOwner.HasValue) _values_[0] = ea.EnSpeedOwner.Value;
+      if (ea.SpeedOwner.HasValue) _values_[1] = ea.SpeedOwner.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
+    }
+    public bool FireEvent_SPEED_OWNER(System.Boolean EnSpeedOwner, bool ignore_EnSpeedOwner, System.Boolean SpeedOwner, bool ignore_SpeedOwner)
+    {
+      object[] _values_ = new object[2];
+      if (!ignore_EnSpeedOwner) _values_[0] = EnSpeedOwner;
+      if (!ignore_SpeedOwner) _values_[1] = SpeedOwner;
+      return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
+    }
+    public bool FireEvent_CFG(System.Int32 MonTime, System.Int32 TripTime, System.Int32 PassiveTime, System.Boolean ConfResetReq, System.Boolean FailResetReq, System.Int32 ScanTime, System.Byte AlmAckType, System.Boolean EnTrackSp, System.Boolean EnResetSp, System.Boolean DisReverse, System.Boolean SpeedSpRangeSel)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(2, new object[] {MonTime, TripTime, PassiveTime, ConfResetReq, FailResetReq, ScanTime, AlmAckType, EnTrackSp, EnResetSp, DisReverse, SpeedSpRangeSel});
+    }
+    public bool FireEvent_CFG(SE.Nereda.Symbols.MotorVsBaseNer.CFGEventArgs ea)
+    {
+      object[] _values_ = new object[11];
+      if (ea.MonTime.HasValue) _values_[0] = ea.MonTime.Value;
+      if (ea.TripTime.HasValue) _values_[1] = ea.TripTime.Value;
+      if (ea.PassiveTime.HasValue) _values_[2] = ea.PassiveTime.Value;
+      if (ea.ConfResetReq.HasValue) _values_[3] = ea.ConfResetReq.Value;
+      if (ea.FailResetReq.HasValue) _values_[4] = ea.FailResetReq.Value;
+      if (ea.ScanTime.HasValue) _values_[5] = ea.ScanTime.Value;
+      if (ea.AlmAckType.HasValue) _values_[6] = ea.AlmAckType.Value;
+      if (ea.EnTrackSp.HasValue) _values_[7] = ea.EnTrackSp.Value;
+      if (ea.EnResetSp.HasValue) _values_[8] = ea.EnResetSp.Value;
+      if (ea.DisReverse.HasValue) _values_[9] = ea.DisReverse.Value;
+      if (ea.SpeedSpRangeSel.HasValue) _values_[10] = ea.SpeedSpRangeSel.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(2, _values_);
+    }
+    public bool FireEvent_CFG(System.Int32 MonTime, bool ignore_MonTime, System.Int32 TripTime, bool ignore_TripTime, System.Int32 PassiveTime, bool ignore_PassiveTime, System.Boolean ConfResetReq, bool ignore_ConfResetReq, System.Boolean FailResetReq, bool ignore_FailResetReq, System.Int32 ScanTime, bool ignore_ScanTime, System.Byte AlmAckType, bool ignore_AlmAckType, System.Boolean EnTrackSp, bool ignore_EnTrackSp, System.Boolean EnResetSp, bool ignore_EnResetSp, System.Boolean DisReverse, bool ignore_DisReverse, System.Boolean SpeedSpRangeSel, bool ignore_SpeedSpRangeSel)
+    {
+      object[] _values_ = new object[11];
+      if (!ignore_MonTime) _values_[0] = MonTime;
+      if (!ignore_TripTime) _values_[1] = TripTime;
+      if (!ignore_PassiveTime) _values_[2] = PassiveTime;
+      if (!ignore_ConfResetReq) _values_[3] = ConfResetReq;
+      if (!ignore_FailResetReq) _values_[4] = FailResetReq;
+      if (!ignore_ScanTime) _values_[5] = ScanTime;
+      if (!ignore_AlmAckType) _values_[6] = AlmAckType;
+      if (!ignore_EnTrackSp) _values_[7] = EnTrackSp;
+      if (!ignore_EnResetSp) _values_[8] = EnResetSp;
+      if (!ignore_DisReverse) _values_[9] = DisReverse;
+      if (!ignore_SpeedSpRangeSel) _values_[10] = SpeedSpRangeSel;
+      return ((IHMIAccessorOutput)this).FireEvent(2, _values_);
+    }
+    public bool FireEvent_SPEEDSP_CFG(System.Single SpeedRawMin, System.Single SpeedRawMax, System.Boolean SpeedRawIsAbsolute, System.Single SpeedSpMin, System.Single SpeedSpMax)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(3, new object[] {SpeedRawMin, SpeedRawMax, SpeedRawIsAbsolute, SpeedSpMin, SpeedSpMax});
+    }
+    public bool FireEvent_SPEEDSP_CFG(SE.Nereda.Symbols.MotorVsBaseNer.SPEEDSP_CFGEventArgs ea)
+    {
+      object[] _values_ = new object[5];
+      if (ea.SpeedRawMin.HasValue) _values_[0] = ea.SpeedRawMin.Value;
+      if (ea.SpeedRawMax.HasValue) _values_[1] = ea.SpeedRawMax.Value;
+      if (ea.SpeedRawIsAbsolute.HasValue) _values_[2] = ea.SpeedRawIsAbsolute.Value;
+      if (ea.SpeedSpMin.HasValue) _values_[3] = ea.SpeedSpMin.Value;
+      if (ea.SpeedSpMax.HasValue) _values_[4] = ea.SpeedSpMax.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(3, _values_);
+    }
+    public bool FireEvent_SPEEDSP_CFG(System.Single SpeedRawMin, bool ignore_SpeedRawMin, System.Single SpeedRawMax, bool ignore_SpeedRawMax, System.Boolean SpeedRawIsAbsolute, bool ignore_SpeedRawIsAbsolute, System.Single SpeedSpMin, bool ignore_SpeedSpMin, System.Single SpeedSpMax, bool ignore_SpeedSpMax)
+    {
+      object[] _values_ = new object[5];
+      if (!ignore_SpeedRawMin) _values_[0] = SpeedRawMin;
+      if (!ignore_SpeedRawMax) _values_[1] = SpeedRawMax;
+      if (!ignore_SpeedRawIsAbsolute) _values_[2] = SpeedRawIsAbsolute;
+      if (!ignore_SpeedSpMin) _values_[3] = SpeedSpMin;
+      if (!ignore_SpeedSpMax) _values_[4] = SpeedSpMax;
+      return ((IHMIAccessorOutput)this).FireEvent(3, _values_);
+    }
+    public bool FireEvent_SPEEDOUT_CFG(System.Single SpeedOutMin, System.Single SpeedOutMax)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(4, new object[] {SpeedOutMin, SpeedOutMax});
+    }
+    public bool FireEvent_SPEEDOUT_CFG(SE.Nereda.Symbols.MotorVsBaseNer.SPEEDOUT_CFGEventArgs ea)
+    {
+      object[] _values_ = new object[2];
+      if (ea.SpeedOutMin.HasValue) _values_[0] = ea.SpeedOutMin.Value;
+      if (ea.SpeedOutMax.HasValue) _values_[1] = ea.SpeedOutMax.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(4, _values_);
+    }
+    public bool FireEvent_SPEEDOUT_CFG(System.Single SpeedOutMin, bool ignore_SpeedOutMin, System.Single SpeedOutMax, bool ignore_SpeedOutMax)
+    {
+      object[] _values_ = new object[2];
+      if (!ignore_SpeedOutMin) _values_[0] = SpeedOutMin;
+      if (!ignore_SpeedOutMax) _values_[1] = SpeedOutMax;
+      return ((IHMIAccessorOutput)this).FireEvent(4, _values_);
+    }
+    public bool FireEvent_SP_CMD(System.Int16 Sp)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(5, new object[] {Sp});
+    }
+    public bool FireEvent_SP_CMD(SE.Nereda.Symbols.MotorVsBaseNer.SP_CMDEventArgs ea)
+    {
+      object[] _values_ = new object[1];
+      if (ea.Sp.HasValue) _values_[0] = ea.Sp.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(5, _values_);
+    }
+    public bool FireEvent_SP_CMD(System.Int16 Sp, bool ignore_Sp)
+    {
+      object[] _values_ = new object[1];
+      if (!ignore_Sp) _values_[0] = Sp;
+      return ((IHMIAccessorOutput)this).FireEvent(5, _values_);
+    }
+    public bool FireEvent_SPEEDSP_CMD(System.Single SpeedSp)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(6, new object[] {SpeedSp});
+    }
+    public bool FireEvent_SPEEDSP_CMD(SE.Nereda.Symbols.MotorVsBaseNer.SPEEDSP_CMDEventArgs ea)
+    {
+      object[] _values_ = new object[1];
+      if (ea.SpeedSp.HasValue) _values_[0] = ea.SpeedSp.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(6, _values_);
+    }
+    public bool FireEvent_SPEEDSP_CMD(System.Single SpeedSp, bool ignore_SpeedSp)
+    {
+      object[] _values_ = new object[1];
+      if (!ignore_SpeedSp) _values_[0] = SpeedSp;
+      return ((IHMIAccessorOutput)this).FireEvent(6, _values_);
+    }
+    public bool FireEvent_RESET_CMD(System.Boolean Reset)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(7, new object[] {Reset});
+    }
+    public bool FireEvent_RESET_CMD(SE.Nereda.Symbols.MotorVsBaseNer.RESET_CMDEventArgs ea)
+    {
+      object[] _values_ = new object[1];
+      if (ea.Reset.HasValue) _values_[0] = ea.Reset.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(7, _values_);
+    }
+    public bool FireEvent_RESET_CMD(System.Boolean Reset, bool ignore_Reset)
+    {
+      object[] _values_ = new object[1];
+      if (!ignore_Reset) _values_[0] = Reset;
+      return ((IHMIAccessorOutput)this).FireEvent(7, _values_);
+    }
+    public bool FireEvent_IND_MODE(System.Boolean Simulation, System.Boolean FbOverride, System.Boolean Maintenance, System.Boolean OutOfService)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(8, new object[] {Simulation, FbOverride, Maintenance, OutOfService});
+    }
+    public bool FireEvent_IND_MODE(SE.Nereda.Symbols.MotorVsBaseNer.IND_MODEEventArgs ea)
+    {
+      object[] _values_ = new object[4];
+      if (ea.Simulation.HasValue) _values_[0] = ea.Simulation.Value;
+      if (ea.FbOverride.HasValue) _values_[1] = ea.FbOverride.Value;
+      if (ea.Maintenance.HasValue) _values_[2] = ea.Maintenance.Value;
+      if (ea.OutOfService.HasValue) _values_[3] = ea.OutOfService.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(8, _values_);
+    }
+    public bool FireEvent_IND_MODE(System.Boolean Simulation, bool ignore_Simulation, System.Boolean FbOverride, bool ignore_FbOverride, System.Boolean Maintenance, bool ignore_Maintenance, System.Boolean OutOfService, bool ignore_OutOfService)
+    {
+      object[] _values_ = new object[4];
+      if (!ignore_Simulation) _values_[0] = Simulation;
+      if (!ignore_FbOverride) _values_[1] = FbOverride;
+      if (!ignore_Maintenance) _values_[2] = Maintenance;
+      if (!ignore_OutOfService) _values_[3] = OutOfService;
+      return ((IHMIAccessorOutput)this).FireEvent(8, _values_);
+    }
+
+  }
+}
+
+namespace SE.Nereda.Symbols.MotorVsBaseNer
+{
   partial class sPump
   {
 

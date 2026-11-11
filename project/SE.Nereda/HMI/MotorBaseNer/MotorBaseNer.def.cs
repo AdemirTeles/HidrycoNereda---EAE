@@ -488,6 +488,142 @@ namespace SE.Nereda.Symbols.MotorBaseNer
 
 namespace SE.Nereda.Symbols.MotorBaseNer
 {
+  partial class sDiagnostico
+  {
+
+    private SE.Nereda.Faceplates.MotorBaseNer.fpDefault fpDefault
+    {
+      get
+      { 
+        if (IsOpenFaceplateSecure() == false)
+          return null;
+
+        SE.Nereda.Faceplates.MotorBaseNer.fpDefault faceplate = null;
+        
+        IHMIManagementService hmiManagementService = (IHMIManagementService)ServiceProvider.GetService(typeof(IHMIManagementService));
+        if (hmiManagementService != null)
+          faceplate = (SE.Nereda.Faceplates.MotorBaseNer.fpDefault)hmiManagementService.GetRegisteredHMIFaceplate(MapPath, typeof(SE.Nereda.Faceplates.MotorBaseNer.fpDefault));
+        
+        if (faceplate == null)
+        {
+          faceplate = new SE.Nereda.Faceplates.MotorBaseNer.fpDefault();
+
+          faceplate.SetConnectionInfo(this.TagName, this.SymbolPath, this.ChannelId, GetType());
+
+          if (hmiManagementService != null)
+            hmiManagementService.RegisterHMIFaceplate(faceplate);
+        }
+        return faceplate;
+      }
+    }
+     
+    private SE.Nereda.Faceplates.MotorBaseNer.fpParameter fpParameter
+    {
+      get
+      { 
+        if (IsOpenFaceplateSecure() == false)
+          return null;
+
+        SE.Nereda.Faceplates.MotorBaseNer.fpParameter faceplate = null;
+        
+        IHMIManagementService hmiManagementService = (IHMIManagementService)ServiceProvider.GetService(typeof(IHMIManagementService));
+        if (hmiManagementService != null)
+          faceplate = (SE.Nereda.Faceplates.MotorBaseNer.fpParameter)hmiManagementService.GetRegisteredHMIFaceplate(MapPath, typeof(SE.Nereda.Faceplates.MotorBaseNer.fpParameter));
+        
+        if (faceplate == null)
+        {
+          faceplate = new SE.Nereda.Faceplates.MotorBaseNer.fpParameter();
+
+          faceplate.SetConnectionInfo(this.TagName, this.SymbolPath, this.ChannelId, GetType());
+
+          if (hmiManagementService != null)
+            hmiManagementService.RegisterHMIFaceplate(faceplate);
+        }
+        return faceplate;
+      }
+    }
+     
+    private SE.Nereda.Faceplates.MotorBaseNer.fpTrend fpTrend
+    {
+      get
+      { 
+        if (IsOpenFaceplateSecure() == false)
+          return null;
+
+        SE.Nereda.Faceplates.MotorBaseNer.fpTrend faceplate = null;
+        
+        IHMIManagementService hmiManagementService = (IHMIManagementService)ServiceProvider.GetService(typeof(IHMIManagementService));
+        if (hmiManagementService != null)
+          faceplate = (SE.Nereda.Faceplates.MotorBaseNer.fpTrend)hmiManagementService.GetRegisteredHMIFaceplate(MapPath, typeof(SE.Nereda.Faceplates.MotorBaseNer.fpTrend));
+        
+        if (faceplate == null)
+        {
+          faceplate = new SE.Nereda.Faceplates.MotorBaseNer.fpTrend();
+
+          faceplate.SetConnectionInfo(this.TagName, this.SymbolPath, this.ChannelId, GetType());
+
+          if (hmiManagementService != null)
+            hmiManagementService.RegisterHMIFaceplate(faceplate);
+        }
+        return faceplate;
+      }
+    }
+     
+    protected override void DoOpenFaceplate(OpenFaceplate openFaceplate)
+    {
+      NxtControl.GuiFramework.HMIFaceplate hmiFaceplate = null;
+
+      if ("fpDefault" == (string)openFaceplate.FaceplateType)
+        hmiFaceplate = fpDefault;
+
+      if ("fpParameter" == (string)openFaceplate.FaceplateType)
+        hmiFaceplate = fpParameter;
+
+      if ("fpTrend" == (string)openFaceplate.FaceplateType)
+        hmiFaceplate = fpTrend;
+
+      if (hmiFaceplate != null)
+      {
+        if (hmiFaceplate.Initialized == true)
+          hmiFaceplate.Activate();
+        else
+        {
+          OnInitializeFaceplate(hmiFaceplate);
+          hmiFaceplate.Show(this);
+        }
+      }
+    }
+
+    public override void DoOpenFaceplate(string openFaceplate)
+    {
+      NxtControl.GuiFramework.HMIFaceplate hmiFaceplate = null;
+
+      if ("fpDefault" == openFaceplate)
+        hmiFaceplate = fpDefault;
+
+      if ("fpParameter" == openFaceplate)
+        hmiFaceplate = fpParameter;
+
+      if ("fpTrend" == openFaceplate)
+        hmiFaceplate = fpTrend;
+
+      if (hmiFaceplate != null)
+      {
+        if (hmiFaceplate.Initialized == true)
+          hmiFaceplate.Activate();
+        else
+        {
+          OnInitializeFaceplate(hmiFaceplate);
+          hmiFaceplate.Show(this);
+        }
+      }
+    }
+
+  }
+}
+
+namespace SE.Nereda.Symbols.MotorBaseNer
+{
   partial class sPump
   {
 

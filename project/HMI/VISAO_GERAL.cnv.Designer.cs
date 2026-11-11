@@ -660,7 +660,7 @@ namespace HMI.Main.Canvases
 			this.ft90002.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 254D, 574D);
 			this.ft90002.Name = "ft90002";
 			this.ft90002.SecurityToken = ((uint)(4294967295u));
-			this.ft90002.TagName = "91957488A3380C04.FT_900_02";
+			this.ft90002.TagName = "91957488A3380C04.FT_900_03";
 			this.ft90002.EndInit();
 			// 
 			// pit100001
@@ -1599,7 +1599,7 @@ namespace HMI.Main.Canvases
 			this.tx46.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular);
 			this.tx46.Name = "tx46";
 			this.tx46.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("Transparent"), 1F, NxtControl.Drawing.DashStyle.Solid);
-			this.tx46.Text = "900-FT-02 – Vazão";
+			this.tx46.Text = "900-FT-03 – Vazão";
 			this.tx46.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
 			this.tx46.TextColor = new NxtControl.Drawing.Color(((byte)(70)), ((byte)(70)), ((byte)(70)));
 			// 

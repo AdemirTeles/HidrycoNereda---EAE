@@ -44,6 +44,7 @@ namespace SE.Nereda.Symbols.Motor_VS
 			SpeedPv.FillPercent = 0;
 			SpeedInfo.Visible = true;
 			this.SPEED_SP_FB_Fired += SPEED_SP_FB_Fired_EventHandler;
+			ApplyStateTextPosition(_stateTextPosition);
 		}
 
 		void StateActuatorStatus(short StateValue)
@@ -73,7 +74,8 @@ namespace SE.Nereda.Symbols.Motor_VS
 		void OpenFpClick(object sender, EventArgs e)
 		{
 			// TODO: Implement OpenFpClick
-			//this.BaseVs.DoOpenFaceplate("fpDefault");
+			// abre direto o faceplate principal (antes abria o menu fpOptions)
+			this.BaseVs.DoOpenFaceplate("fpDefault");
 		}
 		
 		[RefreshProperties(RefreshProperties.Repaint)]
@@ -162,16 +164,18 @@ namespace SE.Nereda.Symbols.Motor_VS
                     // Text en haut du symbole
                     VertMot.Visible = true;
                     HoriMot.Visible = false;
-                    alarmFrame.Size = new NxtControl.Drawing.SizeF(58,56);
-                    State.Location = new NxtControl.Drawing.PointF(76,64);
+                    alarmFrame.Bounds = new NxtControl.Drawing.RectF(46f, 46f, 28f, 40f);
+                    State.Location = new NxtControl.Drawing.PointF(96f, 52f);
+                    modo.Location = new NxtControl.Drawing.PointF(99f, 16f);
                     break;
 
                 case StateTextPositionOption.Vertical:
                     // Text à droite du symbole
                     VertMot.Visible = false;
                     HoriMot.Visible = true;  
-                    alarmFrame.Size = new NxtControl.Drawing.SizeF(50,64);
-                    State.Location = new NxtControl.Drawing.PointF(48,48);
+                    alarmFrame.Bounds = new NxtControl.Drawing.RectF(46f, 48f, 40f, 46f);
+                    State.Location = new NxtControl.Drawing.PointF(68f, 50f);
+                    modo.Location = new NxtControl.Drawing.PointF(99f, 16f);
                     break;
             }
         }

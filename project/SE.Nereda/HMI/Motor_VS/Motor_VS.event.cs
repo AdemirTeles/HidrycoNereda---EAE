@@ -1379,6 +1379,212 @@ stack Trace:
   }
 }
 
+namespace SE.Nereda.Faceplates.Motor_VS
+{
+  partial class fpDiagnostico
+  {
+
+    private event EventHandler<SE.Nereda.Symbols.Motor_VS.LOAD_PERS_DATAEventArgs> LOAD_PERS_DATA_Fired;
+
+    private event EventHandler<SE.Nereda.Symbols.Motor_VS.FB_STATEEventArgs> FB_STATE_Fired;
+
+    private event EventHandler<SE.Nereda.Symbols.Motor_VS.SPEED_SP_FBEventArgs> SPEED_SP_FB_Fired;
+
+    private event EventHandler<SE.Nereda.Symbols.Motor_VS.NEED_RESETEventArgs> NEED_RESET_Fired;
+
+    private event EventHandler<SE.Nereda.Symbols.Motor_VS.FB_FAILEventArgs> FB_FAIL_Fired;
+
+    private event EventHandler<SE.Nereda.Symbols.Motor_VS.FB_FWDEventArgs> FB_FWD_Fired;
+
+    private event EventHandler<SE.Nereda.Symbols.Motor_VS.FB_CAPACITYEventArgs> FB_CAPACITY_Fired;
+
+    protected override void OnEndInit()
+    {
+      if (LOAD_PERS_DATA_Fired != null)
+        AttachEventInput(0);
+      if (FB_STATE_Fired != null)
+        AttachEventInput(1);
+      if (SPEED_SP_FB_Fired != null)
+        AttachEventInput(2);
+      if (NEED_RESET_Fired != null)
+        AttachEventInput(3);
+      if (FB_FAIL_Fired != null)
+        AttachEventInput(4);
+      if (FB_FWD_Fired != null)
+        AttachEventInput(5);
+      if (FB_CAPACITY_Fired != null)
+        AttachEventInput(6);
+
+    }
+
+    protected override void FireEventCallback(int channelId, int cookie, int eventIndex)
+    {
+      switch(eventIndex)
+      {
+        default:
+          break;
+        case 0:
+          if (LOAD_PERS_DATA_Fired != null)
+          {
+            try
+            {
+              LOAD_PERS_DATA_Fired(this, new SE.Nereda.Symbols.Motor_VS.LOAD_PERS_DATAEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","LOAD_PERS_DATA_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break; 
+        case 1:
+          if (FB_STATE_Fired != null)
+          {
+            try
+            {
+              FB_STATE_Fired(this, new SE.Nereda.Symbols.Motor_VS.FB_STATEEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","FB_STATE_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break; 
+        case 2:
+          if (SPEED_SP_FB_Fired != null)
+          {
+            try
+            {
+              SPEED_SP_FB_Fired(this, new SE.Nereda.Symbols.Motor_VS.SPEED_SP_FBEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","SPEED_SP_FB_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break; 
+        case 3:
+          if (NEED_RESET_Fired != null)
+          {
+            try
+            {
+              NEED_RESET_Fired(this, new SE.Nereda.Symbols.Motor_VS.NEED_RESETEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","NEED_RESET_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break; 
+        case 4:
+          if (FB_FAIL_Fired != null)
+          {
+            try
+            {
+              FB_FAIL_Fired(this, new SE.Nereda.Symbols.Motor_VS.FB_FAILEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","FB_FAIL_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break; 
+        case 5:
+          if (FB_FWD_Fired != null)
+          {
+            try
+            {
+              FB_FWD_Fired(this, new SE.Nereda.Symbols.Motor_VS.FB_FWDEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","FB_FWD_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break; 
+        case 6:
+          if (FB_CAPACITY_Fired != null)
+          {
+            try
+            {
+              FB_CAPACITY_Fired(this, new SE.Nereda.Symbols.Motor_VS.FB_CAPACITYEventArgs(channelId, cookie, eventIndex));
+            }
+            catch (System.Exception e)
+            {
+              NxtControl.Services.LoggingService.ErrorFormatted(@"In Event Callback for event:'{0}' Type:'{1}' CAT:'{2}' came exception:{3}
+stack Trace:
+{4}","FB_CAPACITY_Fired", this.GetType().Name, this.CATName, e.Message, e.StackTrace);
+            }
+          }
+        break; 
+
+      }
+    }
+    public bool FireEvent_CNF_ATV_EXIST(System.Boolean AtvExist)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(0, new object[] {AtvExist});
+    }
+    public bool FireEvent_CNF_ATV_EXIST(SE.Nereda.Symbols.Motor_VS.CNF_ATV_EXISTEventArgs ea)
+    {
+      object[] _values_ = new object[1];
+      if (ea.AtvExist.HasValue) _values_[0] = ea.AtvExist.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
+    }
+    public bool FireEvent_CNF_ATV_EXIST(System.Boolean AtvExist, bool ignore_AtvExist)
+    {
+      object[] _values_ = new object[1];
+      if (!ignore_AtvExist) _values_[0] = AtvExist;
+      return ((IHMIAccessorOutput)this).FireEvent(0, _values_);
+    }
+    public bool FireEvent_RESET(System.Boolean Reset)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(1, new object[] {Reset});
+    }
+    public bool FireEvent_RESET(SE.Nereda.Symbols.Motor_VS.RESETEventArgs ea)
+    {
+      object[] _values_ = new object[1];
+      if (ea.Reset.HasValue) _values_[0] = ea.Reset.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
+    }
+    public bool FireEvent_RESET(System.Boolean Reset, bool ignore_Reset)
+    {
+      object[] _values_ = new object[1];
+      if (!ignore_Reset) _values_[0] = Reset;
+      return ((IHMIAccessorOutput)this).FireEvent(1, _values_);
+    }
+    public bool FireEvent_SPEED_SP_CONF(System.Single SpeedSpMin, System.Single SpeedSpMax)
+    {
+      return ((IHMIAccessorOutput)this).FireEvent(2, new object[] {SpeedSpMin, SpeedSpMax});
+    }
+    public bool FireEvent_SPEED_SP_CONF(SE.Nereda.Symbols.Motor_VS.SPEED_SP_CONFEventArgs ea)
+    {
+      object[] _values_ = new object[2];
+      if (ea.SpeedSpMin.HasValue) _values_[0] = ea.SpeedSpMin.Value;
+      if (ea.SpeedSpMax.HasValue) _values_[1] = ea.SpeedSpMax.Value;
+      return ((IHMIAccessorOutput)this).FireEvent(2, _values_);
+    }
+    public bool FireEvent_SPEED_SP_CONF(System.Single SpeedSpMin, bool ignore_SpeedSpMin, System.Single SpeedSpMax, bool ignore_SpeedSpMax)
+    {
+      object[] _values_ = new object[2];
+      if (!ignore_SpeedSpMin) _values_[0] = SpeedSpMin;
+      if (!ignore_SpeedSpMax) _values_[1] = SpeedSpMax;
+      return ((IHMIAccessorOutput)this).FireEvent(2, _values_);
+    }
+
+  }
+}
+
 namespace SE.Nereda.Symbols.Motor_VS
 {
   partial class sMotorVs

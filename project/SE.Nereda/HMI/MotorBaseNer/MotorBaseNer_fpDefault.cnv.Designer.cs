@@ -26,129 +26,316 @@ namespace SE.Nereda.Faceplates.MotorBaseNer
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.line7 = new NxtControl.GuiFramework.Line();
-			this.line1 = new NxtControl.GuiFramework.Line();
-			this.IconBottomBorder1 = new NxtControl.GuiFramework.Group();
-			this.lblIsPv = new NxtControl.GuiFramework.Label();
-			this.lblReqOp = new NxtControl.GuiFramework.Label();
+			this.cabecalho = new NxtControl.GuiFramework.Rectangle();
+			this.caixaEstado = new NxtControl.GuiFramework.Rectangle();
+			this.textoEstado = new NxtControl.GuiFramework.FreeText();
+			this.textoComando = new NxtControl.GuiFramework.FreeText();
+			this.textoSaida = new NxtControl.GuiFramework.FreeText();
+			this.textoSituacao = new NxtControl.GuiFramework.FreeText();
+			this.tituloModo = new NxtControl.GuiFramework.FreeText();
+			this.btnManual = new NxtControl.GuiFramework.DrawnButton();
+			this.btnAutomatico = new NxtControl.GuiFramework.DrawnButton();
+			this.tituloComando = new NxtControl.GuiFramework.FreeText();
 			this.btnManOff = new NxtControl.GuiFramework.DrawnButton();
 			this.btnManOn = new NxtControl.GuiFramework.DrawnButton();
 			this.btnReset = new NxtControl.GuiFramework.DrawnButton();
+			this.sep = new NxtControl.GuiFramework.Rectangle();
+			this.btnAjustes = new NxtControl.GuiFramework.DrawnButton();
+			this.btnGrafico = new NxtControl.GuiFramework.DrawnButton();
+			this.btnDiagnostico = new NxtControl.GuiFramework.DrawnButton();
+			this.fpNavigationPane = new SE.App2Base.Graphics.FpNavigationPane();
+			this.ownerSwitch = new SE.App2Base.Graphics.OwnerSwitchBasic();
 			this.NeedReset = new System.HMI.Symbols.Base.Execute<bool>();
 			this.Fb = new System.HMI.Symbols.Base.Execute<short>();
 			this.CurrentSp = new System.HMI.Symbols.Base.Execute<short>();
 			this.TransFbStatus = new System.HMI.Symbols.Base.Execute<short>();
-			this.lblAutoSp = new NxtControl.GuiFramework.Label();
-			this.labelS2 = new SE.App2Base.Graphics.LabelS();
-			this.labelS1 = new SE.App2Base.Graphics.LabelS();
-			this.labelS3 = new SE.App2Base.Graphics.LabelS();
-			this.fpNavigationPane = new SE.App2Base.Graphics.FpNavigationPane();
 			this.Sim = new System.HMI.Symbols.Base.Execute<bool>();
 			this.Over = new System.HMI.Symbols.Base.Execute<bool>();
 			this.Maint = new System.HMI.Symbols.Base.Execute<bool>();
 			this.Oos = new System.HMI.Symbols.Base.Execute<bool>();
-			this.ownerStatus = new SE.App2Base.Graphics.OwnerStatusBasic();
-			this.ownerSwitch = new SE.App2Base.Graphics.OwnerSwitchBasic();
 			this.CurrentOwnerBasic = new System.HMI.Symbols.Base.Execute<ushort>();
 			this.CurrentOp = new System.HMI.Symbols.Base.Execute<short>();
 			this.StdOwnerConnected = new System.HMI.Symbols.Base.Execute<bool>();
 			this.ExternalControlled = new System.HMI.Symbols.Base.Execute<bool>();
 			// 
-			// line7
+			// cabecalho
 			// 
-			this.line7.EndPoint = new NxtControl.Drawing.PointF(270D, 150D);
-			this.line7.Name = "line7";
-			this.line7.Pen = new NxtControl.Drawing.Pen("FpLinePen");
-			this.line7.StartPoint = new NxtControl.Drawing.PointF(1D, 150D);
+			this.cabecalho.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(360D)), ((float)(124D)));
+			this.cabecalho.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(235)), ((byte)(235)), ((byte)(235))));
+			this.cabecalho.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
+			this.cabecalho.Name = "cabecalho";
+			this.cabecalho.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("Transparent"), 0F, NxtControl.Drawing.DashStyle.Solid);
 			// 
-			// line1
+			// caixaEstado
 			// 
-			this.line1.EndPoint = new NxtControl.Drawing.PointF(270D, 150D);
-			this.line1.Name = "line1";
-			this.line1.Pen = new NxtControl.Drawing.Pen("FpLinePen");
-			this.line1.StartPoint = new NxtControl.Drawing.PointF(1D, 150D);
+			this.caixaEstado.Bounds = new NxtControl.Drawing.RectF(((float)(20D)), ((float)(14D)), ((float)(22D)), ((float)(22D)));
+			this.caixaEstado.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(255))));
+			this.caixaEstado.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
+			this.caixaEstado.Name = "caixaEstado";
+			this.caixaEstado.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 2F, NxtControl.Drawing.DashStyle.Solid);
 			// 
-			// IconBottomBorder1
+			// textoEstado
 			// 
-			this.IconBottomBorder1.BeginInit();
-			this.IconBottomBorder1.Name = "IconBottomBorder1";
-			this.IconBottomBorder1.Shapes.AddRange(new System.ComponentModel.IComponent[] {
-			this.line7,
-			this.line1});
-			this.IconBottomBorder1.EndInit();
+			this.textoEstado.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.textoEstado.Font = new NxtControl.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Bold);
+			this.textoEstado.Location = new NxtControl.Drawing.PointF(50D, 14D);
+			this.textoEstado.Name = "textoEstado";
+			this.textoEstado.Text = "DESLIGADO";
 			// 
-			// lblIsPv
+			// textoComando
 			// 
-			this.lblIsPv.AngleIgnore = true;
-			this.lblIsPv.BorderStyle = System.Windows.Forms.BorderStyle.None;
-			this.lblIsPv.Bounds = new NxtControl.Drawing.RectF(((float)(120D)), ((float)(8D)), ((float)(109D)), ((float)(25D)));
-			this.lblIsPv.Brush = new NxtControl.Drawing.Brush();
-			this.lblIsPv.Font = new NxtControl.Drawing.Font("SE.App2Base.Pv");
-			this.lblIsPv.Name = "lblIsPv";
-			this.lblIsPv.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
-			this.lblIsPv.Text = "$key:SE.App2CommonProcess.LabelUnknown";
-			this.lblIsPv.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
-			this.lblIsPv.TextColor = new NxtControl.Drawing.Color("SE.App2Base.aaLibFpData");
+			this.textoComando.Color = new NxtControl.Drawing.Color(((byte)(64)), ((byte)(64)), ((byte)(64)));
+			this.textoComando.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular);
+			this.textoComando.Location = new NxtControl.Drawing.PointF(20D, 48D);
+			this.textoComando.Name = "textoComando";
+			this.textoComando.Text = "Comando atual: -";
 			// 
-			// lblReqOp
+			// textoSaida
 			// 
-			this.lblReqOp.AngleIgnore = true;
-			this.lblReqOp.BorderStyle = System.Windows.Forms.BorderStyle.None;
-			this.lblReqOp.Bounds = new NxtControl.Drawing.RectF(((float)(120D)), ((float)(52D)), ((float)(109D)), ((float)(25D)));
-			this.lblReqOp.Brush = new NxtControl.Drawing.Brush();
-			this.lblReqOp.Font = new NxtControl.Drawing.Font("SE.App2Base.Pv");
-			this.lblReqOp.IsPrefixSuffixOutside = false;
-			this.lblReqOp.Name = "lblReqOp";
-			this.lblReqOp.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
-			this.lblReqOp.SuffixPadding = 1;
-			this.lblReqOp.Text = "$key:SE.App2CommonProcess.LabelUnknown";
-			this.lblReqOp.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
-			this.lblReqOp.TextColor = new NxtControl.Drawing.Color("SE.App2Base.aaLibFpOp");
+			this.textoSaida.Color = new NxtControl.Drawing.Color(((byte)(64)), ((byte)(64)), ((byte)(64)));
+			this.textoSaida.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular);
+			this.textoSaida.Location = new NxtControl.Drawing.PointF(20D, 68D);
+			this.textoSaida.Name = "textoSaida";
+			this.textoSaida.Text = "Sa\u00edda atual: -";
+			// 
+			// textoSituacao
+			// 
+			this.textoSituacao.Color = new NxtControl.Drawing.Color(((byte)(64)), ((byte)(64)), ((byte)(64)));
+			this.textoSituacao.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+			this.textoSituacao.Location = new NxtControl.Drawing.PointF(20D, 92D);
+			this.textoSituacao.Name = "textoSituacao";
+			this.textoSituacao.Text = "";
+			// 
+			// tituloModo
+			// 
+			this.tituloModo.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.tituloModo.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+			this.tituloModo.Location = new NxtControl.Drawing.PointF(20D, 136D);
+			this.tituloModo.Name = "tituloModo";
+			this.tituloModo.Text = "Modo de opera\u00e7\u00e3o";
+			// 
+			// btnManual
+			// 
+			this.btnManual.Bounds = new NxtControl.Drawing.RectF(((float)(20D)), ((float)(158D)), ((float)(150D)), ((float)(34D)));
+			this.btnManual.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208))));
+			this.btnManual.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+			this.btnManual.InnerBorderColor = new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208)));
+			this.btnManual.Name = "btnManual";
+			this.btnManual.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(160)), ((byte)(160)), ((byte)(160))), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.btnManual.Radius = 2D;
+			this.btnManual.Text = "Manual";
+			this.btnManual.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.btnManual.TextColorMouseDown = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.btnManual.Use3DEffect = false;
+			this.btnManual.Click += new System.EventHandler(this.BtnManualClick);
+			// 
+			// btnAutomatico
+			// 
+			this.btnAutomatico.Bounds = new NxtControl.Drawing.RectF(((float)(190D)), ((float)(158D)), ((float)(150D)), ((float)(34D)));
+			this.btnAutomatico.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208))));
+			this.btnAutomatico.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+			this.btnAutomatico.InnerBorderColor = new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208)));
+			this.btnAutomatico.Name = "btnAutomatico";
+			this.btnAutomatico.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(160)), ((byte)(160)), ((byte)(160))), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.btnAutomatico.Radius = 2D;
+			this.btnAutomatico.Text = "Autom\u00e1tico";
+			this.btnAutomatico.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.btnAutomatico.TextColorMouseDown = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.btnAutomatico.Use3DEffect = false;
+			this.btnAutomatico.Click += new System.EventHandler(this.BtnAutomaticoClick);
+			// 
+			// tituloComando
+			// 
+			this.tituloComando.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.tituloComando.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+			this.tituloComando.Location = new NxtControl.Drawing.PointF(20D, 206D);
+			this.tituloComando.Name = "tituloComando";
+			this.tituloComando.Text = "Comando manual";
 			// 
 			// btnManOff
 			// 
-			this.btnManOff.Bounds = new NxtControl.Drawing.RectF(((float)(16D)), ((float)(224D)), ((float)(114D)), ((float)(30D)));
-			this.btnManOff.Brush = new NxtControl.Drawing.Brush("ButtonBrush");
-			this.btnManOff.Font = new NxtControl.Drawing.Font("ButtonFont");
-			this.btnManOff.InnerBorderColor = new NxtControl.Drawing.Color("ButtonInnerBorderColor");
+			this.btnManOff.Bounds = new NxtControl.Drawing.RectF(((float)(20D)), ((float)(228D)), ((float)(150D)), ((float)(34D)));
+			this.btnManOff.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208))));
+			this.btnManOff.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+			this.btnManOff.InnerBorderColor = new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208)));
 			this.btnManOff.Name = "btnManOff";
-			this.btnManOff.Pen = new NxtControl.Drawing.Pen("ButtonPen");
-			this.btnManOff.Radius = 4D;
-			this.btnManOff.Text = "$key:SE.App2CommonProcess.BtnManPassive";
-			this.btnManOff.TextColor = new NxtControl.Drawing.Color("ButtonTextColor");
-			this.btnManOff.TextColorMouseDown = new NxtControl.Drawing.Color("ButtonTextColorMouseDown");
+			this.btnManOff.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(160)), ((byte)(160)), ((byte)(160))), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.btnManOff.Radius = 2D;
+			this.btnManOff.Text = "Desligar";
+			this.btnManOff.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.btnManOff.TextColorMouseDown = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.btnManOff.Use3DEffect = false;
 			this.btnManOff.Click += new System.EventHandler(this.BtnManOffClick);
 			// 
 			// btnManOn
 			// 
-			this.btnManOn.Bounds = new NxtControl.Drawing.RectF(((float)(141D)), ((float)(224D)), ((float)(114D)), ((float)(30D)));
-			this.btnManOn.Brush = new NxtControl.Drawing.Brush("ButtonBrush");
-			this.btnManOn.Font = new NxtControl.Drawing.Font("ButtonFont");
-			this.btnManOn.InnerBorderColor = new NxtControl.Drawing.Color("ButtonInnerBorderColor");
+			this.btnManOn.Bounds = new NxtControl.Drawing.RectF(((float)(190D)), ((float)(228D)), ((float)(150D)), ((float)(34D)));
+			this.btnManOn.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208))));
+			this.btnManOn.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+			this.btnManOn.InnerBorderColor = new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208)));
 			this.btnManOn.Name = "btnManOn";
-			this.btnManOn.Pen = new NxtControl.Drawing.Pen("ButtonPen");
-			this.btnManOn.Radius = 4D;
-			this.btnManOn.Text = "$key:SE.App2CommonProcess.BtnManActive";
-			this.btnManOn.TextColor = new NxtControl.Drawing.Color("ButtonTextColor");
-			this.btnManOn.TextColorMouseDown = new NxtControl.Drawing.Color("ButtonTextColorMouseDown");
+			this.btnManOn.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(160)), ((byte)(160)), ((byte)(160))), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.btnManOn.Radius = 2D;
+			this.btnManOn.Text = "Ligar";
+			this.btnManOn.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.btnManOn.TextColorMouseDown = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.btnManOn.Use3DEffect = false;
 			this.btnManOn.Click += new System.EventHandler(this.BtnManOnClick);
 			// 
 			// btnReset
 			// 
-			this.btnReset.Bounds = new NxtControl.Drawing.RectF(((float)(81D)), ((float)(280D)), ((float)(108D)), ((float)(30D)));
-			this.btnReset.Brush = new NxtControl.Drawing.Brush("ButtonBrush");
-			this.btnReset.Font = new NxtControl.Drawing.Font("ButtonFont");
-			this.btnReset.InnerBorderColor = new NxtControl.Drawing.Color("ButtonInnerBorderColor");
+			this.btnReset.Bounds = new NxtControl.Drawing.RectF(((float)(20D)), ((float)(280D)), ((float)(150D)), ((float)(34D)));
+			this.btnReset.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208))));
+			this.btnReset.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+			this.btnReset.InnerBorderColor = new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208)));
 			this.btnReset.Name = "btnReset";
-			this.btnReset.Pen = new NxtControl.Drawing.Pen("ButtonPen");
-			this.btnReset.Radius = 4D;
-			this.btnReset.Text = "$key:SE.App2CommonProcess.LabelRearm";
-			this.btnReset.TextColor = new NxtControl.Drawing.Color("ButtonTextColor");
-			this.btnReset.TextColorMouseDown = new NxtControl.Drawing.Color("ButtonTextColorMouseDown");
+			this.btnReset.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(160)), ((byte)(160)), ((byte)(160))), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.btnReset.Radius = 2D;
+			this.btnReset.Text = "Reconhecer / Reset";
+			this.btnReset.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.btnReset.TextColorMouseDown = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.btnReset.Use3DEffect = false;
 			this.btnReset.Click += new System.EventHandler(this.BtnResetClick);
+			// 
+			// sep
+			// 
+			this.sep.Bounds = new NxtControl.Drawing.RectF(((float)(20D)), ((float)(330D)), ((float)(320D)), ((float)(1D)));
+			this.sep.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(160)), ((byte)(160)), ((byte)(160))));
+			this.sep.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
+			this.sep.Name = "sep";
+			this.sep.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("Transparent"), 0F, NxtControl.Drawing.DashStyle.Solid);
+			// 
+			// btnAjustes
+			// 
+			this.btnAjustes.Bounds = new NxtControl.Drawing.RectF(((float)(20D)), ((float)(342D)), ((float)(100D)), ((float)(32D)));
+			this.btnAjustes.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208))));
+			this.btnAjustes.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold);
+			this.btnAjustes.InnerBorderColor = new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208)));
+			this.btnAjustes.Name = "btnAjustes";
+			this.btnAjustes.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(160)), ((byte)(160)), ((byte)(160))), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.btnAjustes.Radius = 2D;
+			this.btnAjustes.Text = "Ajustes";
+			this.btnAjustes.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.btnAjustes.TextColorMouseDown = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.btnAjustes.Use3DEffect = false;
+			this.btnAjustes.Click += new System.EventHandler(this.BtnAjustesClick);
+			// 
+			// btnGrafico
+			// 
+			this.btnGrafico.Bounds = new NxtControl.Drawing.RectF(((float)(130D)), ((float)(342D)), ((float)(100D)), ((float)(32D)));
+			this.btnGrafico.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208))));
+			this.btnGrafico.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold);
+			this.btnGrafico.InnerBorderColor = new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208)));
+			this.btnGrafico.Name = "btnGrafico";
+			this.btnGrafico.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(160)), ((byte)(160)), ((byte)(160))), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.btnGrafico.Radius = 2D;
+			this.btnGrafico.Text = "Gr\u00e1fico";
+			this.btnGrafico.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.btnGrafico.TextColorMouseDown = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.btnGrafico.Use3DEffect = false;
+			this.btnGrafico.Click += new System.EventHandler(this.BtnGraficoClick);
+			// 
+			// btnDiagnostico
+			// 
+			this.btnDiagnostico.Bounds = new NxtControl.Drawing.RectF(((float)(240D)), ((float)(342D)), ((float)(100D)), ((float)(32D)));
+			this.btnDiagnostico.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208))));
+			this.btnDiagnostico.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold);
+			this.btnDiagnostico.InnerBorderColor = new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208)));
+			this.btnDiagnostico.Name = "btnDiagnostico";
+			this.btnDiagnostico.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(160)), ((byte)(160)), ((byte)(160))), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.btnDiagnostico.Radius = 2D;
+			this.btnDiagnostico.Text = "Diagn\u00f3stico";
+			this.btnDiagnostico.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.btnDiagnostico.TextColorMouseDown = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.btnDiagnostico.Use3DEffect = false;
+			this.btnDiagnostico.Click += new System.EventHandler(this.BtnDiagnosticoClick);
+			// 
+			// fpNavigationPane
+			// 
+			this.fpNavigationPane.BeginInit();
+			this.fpNavigationPane.Backwash.AliasName = "";
+			this.fpNavigationPane.Backwash.Availablity = SE.App2Base.SupportClasses.FpIconSymbolAllocation.NotAvailable;
+			this.fpNavigationPane.Backwash.InstanceName = null;
+			this.fpNavigationPane.Backwash.ParentTitle = "Title";
+			this.fpNavigationPane.Backwash.SymbolType = "SE.AppWWW.Symbols.Backwash.sDefault";
+			this.fpNavigationPane.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 360D, 0D);
+			this.fpNavigationPane.Failure.AliasName = "";
+			this.fpNavigationPane.Failure.Availablity = SE.App2Base.SupportClasses.FpIconSymbolAllocation.Slot3L;
+			this.fpNavigationPane.Failure.InstanceName = null;
+			this.fpNavigationPane.Failure.LabelActive1 = SE.App2Base.SupportClasses.CondActive1LabelText.On;
+			this.fpNavigationPane.Failure.LabelPassive = SE.App2Base.SupportClasses.CondPassiveLabelText.Off;
+			this.fpNavigationPane.Failure.ParentTitle = "Title";
+			this.fpNavigationPane.Failure.SymbolType = "SE.AppCommonProcess.Symbols.CondSum.sFailure";
+			this.fpNavigationPane.Filtration.AliasName = "";
+			this.fpNavigationPane.Filtration.Availablity = SE.App2Base.SupportClasses.FpIconSymbolAllocation.NotAvailable;
+			this.fpNavigationPane.Filtration.InstanceName = null;
+			this.fpNavigationPane.Filtration.ParentTitle = "Title";
+			this.fpNavigationPane.Filtration.SymbolType = "SE.AppWWW.Symbols.Filtration.sDefault";
+			this.fpNavigationPane.GeneralPropertySubscription.AddRange(new string[] {
+			"System.ShowTagNames"});
+			this.fpNavigationPane.HideSlider = false;
+			this.fpNavigationPane.InputParameters.Availablity = SE.App2Base.SupportClasses.FpIconSymbolAllocation.NotAvailable;
+			this.fpNavigationPane.Interlock.AliasName = "";
+			this.fpNavigationPane.Interlock.Availablity = SE.App2Base.SupportClasses.FpIconSymbolAllocation.Slot2L;
+			this.fpNavigationPane.Interlock.InstanceName = null;
+			this.fpNavigationPane.Interlock.LabelActive1 = SE.App2Base.SupportClasses.CondActive1LabelText.On;
+			this.fpNavigationPane.Interlock.LabelPassive = SE.App2Base.SupportClasses.CondPassiveLabelText.Off;
+			this.fpNavigationPane.Interlock.ParentTitle = "Title";
+			this.fpNavigationPane.Interlock.SymbolType = "SE.AppCommonProcess.Symbols.IlckCondSum.sInterlock";
+			this.fpNavigationPane.IsBasic = false;
+			this.fpNavigationPane.LocalPanel.AliasName = "";
+			this.fpNavigationPane.LocalPanel.Availablity = SE.App2Base.SupportClasses.FpIconSymbolAllocation.Slot4R;
+			this.fpNavigationPane.LocalPanel.InstanceName = null;
+			this.fpNavigationPane.LocalPanel.LabelActive1 = SE.App2Base.SupportClasses.CondActive1LabelText.On;
+			this.fpNavigationPane.LocalPanel.LabelPassive = SE.App2Base.SupportClasses.CondPassiveLabelText.Off;
+			this.fpNavigationPane.LocalPanel.ParentTitle = "Title";
+			this.fpNavigationPane.LocalPanel.SymbolType = "SE.AppCommonProcess.Symbols.DevLp.sDefault";
+			this.fpNavigationPane.Maintenance.AliasName = "";
+			this.fpNavigationPane.Maintenance.Availablity = SE.App2Base.SupportClasses.FpIconSymbolAllocation.Slot1L;
+			this.fpNavigationPane.Maintenance.InstanceName = null;
+			this.fpNavigationPane.Maintenance.ParentTitle = "Title";
+			this.fpNavigationPane.Maintenance.SymbolType = "SE.AppCommonProcess.Symbols.DevMnt.sDefault";
+			this.fpNavigationPane.Measures.Availablity = SE.App2Base.SupportClasses.FpIconSymbolAllocation.NotAvailable;
+			this.fpNavigationPane.Name = "fpNavigationPane";
+			this.fpNavigationPane.OutputParameters.Availablity = SE.App2Base.SupportClasses.FpIconSymbolAllocation.NotAvailable;
+			this.fpNavigationPane.Owner.AliasName = "";
+			this.fpNavigationPane.Owner.Availablity = SE.App2Base.SupportClasses.FpIconSymbolAllocation.Slot1R;
+			this.fpNavigationPane.Owner.InstanceName = null;
+			this.fpNavigationPane.Owner.ParentTitle = "Title";
+			this.fpNavigationPane.Owner.SymbolType = "SE.App2Base.Symbols.Owner.sOwnerConfig";
+			this.fpNavigationPane.Parameter.Availablity = SE.App2Base.SupportClasses.FpIconSymbolAllocation.NotAvailable;
+			this.fpNavigationPane.ParentTitle = "";
+			this.fpNavigationPane.Permissive.AliasName = "";
+			this.fpNavigationPane.Permissive.Availablity = SE.App2Base.SupportClasses.FpIconSymbolAllocation.Slot4L;
+			this.fpNavigationPane.Permissive.InstanceName = null;
+			this.fpNavigationPane.Permissive.LabelActive1 = SE.App2Base.SupportClasses.CondActive1LabelText.On;
+			this.fpNavigationPane.Permissive.LabelPassive = SE.App2Base.SupportClasses.CondPassiveLabelText.Off;
+			this.fpNavigationPane.Permissive.ParentTitle = "Title";
+			this.fpNavigationPane.Permissive.SymbolType = "SE.AppCommonProcess.Symbols.PermCondSum.sPermissive";
+			this.fpNavigationPane.SecMode = 6;
+			this.fpNavigationPane.SecOwner = 3;
+			this.fpNavigationPane.SecParameter = 12;
+			this.fpNavigationPane.SecSetpoint = 3;
+			this.fpNavigationPane.ShortFlush.AliasName = "";
+			this.fpNavigationPane.ShortFlush.Availablity = SE.App2Base.SupportClasses.FpIconSymbolAllocation.NotAvailable;
+			this.fpNavigationPane.ShortFlush.InstanceName = null;
+			this.fpNavigationPane.ShortFlush.ParentTitle = "Title";
+			this.fpNavigationPane.ShortFlush.SymbolType = "SE.AppWWW.Symbols.ShortFlush.sDefault";
+			this.fpNavigationPane.Trend.Availablity = SE.App2Base.SupportClasses.FpIconSymbolAllocation.NotAvailable;
+			this.fpNavigationPane.OnParameterClick += new SE.App2Base.Graphics.FpNavigationPane.ParameterClicked(this.FpNavigationPaneOnParameterClick);
+			this.fpNavigationPane.OnTrendClick += new SE.App2Base.Graphics.FpNavigationPane.TrendClicked(this.FpNavigationPaneOnTrendClick);
+			this.fpNavigationPane.EndInit();
+			// 
+			// ownerSwitch
+			// 
+			this.ownerSwitch.BeginInit();
+			this.ownerSwitch.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.05D, 0D, 0D, 0.05D, -60D, -60D);
+			this.ownerSwitch.ExternalAvailable = false;
+			this.ownerSwitch.InstanceName = "";
+			this.ownerSwitch.Name = "ownerSwitch";
+			this.ownerSwitch.SecOwner = 0;
+			this.ownerSwitch.SecurityToken = ((uint)(4294967295u));
+			this.ownerSwitch.EndInit();
 			// 
 			// NeedReset
 			// 
@@ -206,137 +393,6 @@ namespace SE.Nereda.Faceplates.MotorBaseNer
 			this.TransFbStatus.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.TransFbStatusValueChanged);
 			this.TransFbStatus.EndInit();
 			// 
-			// lblAutoSp
-			// 
-			this.lblAutoSp.AngleIgnore = true;
-			this.lblAutoSp.BorderStyle = System.Windows.Forms.BorderStyle.None;
-			this.lblAutoSp.Bounds = new NxtControl.Drawing.RectF(((float)(120D)), ((float)(30D)), ((float)(109D)), ((float)(25D)));
-			this.lblAutoSp.Brush = new NxtControl.Drawing.Brush();
-			this.lblAutoSp.Font = new NxtControl.Drawing.Font("SE.App2Base.Pv");
-			this.lblAutoSp.Name = "lblAutoSp";
-			this.lblAutoSp.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
-			this.lblAutoSp.Text = "$key:SE.App2CommonProcess.LabelUnknown";
-			this.lblAutoSp.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
-			this.lblAutoSp.TextColor = new NxtControl.Drawing.Color("SE.App2Base.aaLibFpSp");
-			// 
-			// labelS2
-			// 
-			this.labelS2.BeginInit();
-			this.labelS2.DesignMatrix = new NxtControl.Drawing.Matrix2D(1.0000000084395959D, 0D, 0D, 1D, 5D, 30D);
-			this.labelS2.Font = new NxtControl.Drawing.Font("SE.App2Base.LabelFont");
-			this.labelS2.Name = "labelS2";
-			this.labelS2.NameSpace = "SE.App2CommonProcess";
-			this.labelS2.SeperatorVisiblity = true;
-			this.labelS2.Text = "Current Setpoint";
-			this.labelS2.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleRight;
-			this.labelS2.TextColor = new NxtControl.Drawing.Color("FpLabelText");
-			this.labelS2.TextKey = "LabelCurrentSetpoint";
-			this.labelS2.EndInit();
-			// 
-			// labelS1
-			// 
-			this.labelS1.BeginInit();
-			this.labelS1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 5D, 8D);
-			this.labelS1.Font = new NxtControl.Drawing.Font("SE.App2Base.LabelFont");
-			this.labelS1.Name = "labelS1";
-			this.labelS1.NameSpace = "SE.App2CommonProcess";
-			this.labelS1.SeperatorVisiblity = true;
-			this.labelS1.Text = "Status";
-			this.labelS1.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleRight;
-			this.labelS1.TextColor = new NxtControl.Drawing.Color("FpLabelText");
-			this.labelS1.TextKey = "LabelRunState";
-			this.labelS1.EndInit();
-			// 
-			// labelS3
-			// 
-			this.labelS3.BeginInit();
-			this.labelS3.DesignMatrix = new NxtControl.Drawing.Matrix2D(1.0000000084395959D, 0D, 0D, 1D, 5D, 52D);
-			this.labelS3.Font = new NxtControl.Drawing.Font("SE.App2Base.LabelFont");
-			this.labelS3.Name = "labelS3";
-			this.labelS3.NameSpace = "SE.App2CommonProcess";
-			this.labelS3.SeperatorVisiblity = true;
-			this.labelS3.Text = "Current Output";
-			this.labelS3.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleRight;
-			this.labelS3.TextColor = new NxtControl.Drawing.Color("FpLabelText");
-			this.labelS3.TextKey = "LabelCurrentOutput";
-			this.labelS3.EndInit();
-			// 
-			// fpNavigationPane
-			// 
-			this.fpNavigationPane.BeginInit();
-			this.fpNavigationPane.Backwash.AliasName = "";
-			this.fpNavigationPane.Backwash.Availablity = SE.App2Base.SupportClasses.FpIconSymbolAllocation.NotAvailable;
-			this.fpNavigationPane.Backwash.InstanceName = null;
-			this.fpNavigationPane.Backwash.ParentTitle = "Title";
-			this.fpNavigationPane.Backwash.SymbolType = "SE.AppWWW.Symbols.Backwash.sDefault";
-			this.fpNavigationPane.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 215D, 0D);
-			this.fpNavigationPane.Failure.AliasName = "";
-			this.fpNavigationPane.Failure.Availablity = SE.App2Base.SupportClasses.FpIconSymbolAllocation.Slot3L;
-			this.fpNavigationPane.Failure.InstanceName = null;
-			this.fpNavigationPane.Failure.LabelActive1 = SE.App2Base.SupportClasses.CondActive1LabelText.On;
-			this.fpNavigationPane.Failure.LabelPassive = SE.App2Base.SupportClasses.CondPassiveLabelText.Off;
-			this.fpNavigationPane.Failure.ParentTitle = "Title";
-			this.fpNavigationPane.Failure.SymbolType = "SE.AppCommonProcess.Symbols.CondSum.sFailure";
-			this.fpNavigationPane.Filtration.AliasName = "";
-			this.fpNavigationPane.Filtration.Availablity = SE.App2Base.SupportClasses.FpIconSymbolAllocation.NotAvailable;
-			this.fpNavigationPane.Filtration.InstanceName = null;
-			this.fpNavigationPane.Filtration.ParentTitle = "Title";
-			this.fpNavigationPane.Filtration.SymbolType = "SE.AppWWW.Symbols.Filtration.sDefault";
-			this.fpNavigationPane.GeneralPropertySubscription.AddRange(new string[] {
-			"System.ShowTagNames"});
-			this.fpNavigationPane.HideSlider = false;
-			this.fpNavigationPane.InputParameters.Availablity = SE.App2Base.SupportClasses.FpIconSymbolAllocation.NotAvailable;
-			this.fpNavigationPane.Interlock.AliasName = "";
-			this.fpNavigationPane.Interlock.Availablity = SE.App2Base.SupportClasses.FpIconSymbolAllocation.Slot2L;
-			this.fpNavigationPane.Interlock.InstanceName = null;
-			this.fpNavigationPane.Interlock.LabelActive1 = SE.App2Base.SupportClasses.CondActive1LabelText.On;
-			this.fpNavigationPane.Interlock.LabelPassive = SE.App2Base.SupportClasses.CondPassiveLabelText.Off;
-			this.fpNavigationPane.Interlock.ParentTitle = "Title";
-			this.fpNavigationPane.Interlock.SymbolType = "SE.AppCommonProcess.Symbols.IlckCondSum.sInterlock";
-			this.fpNavigationPane.IsBasic = false;
-			this.fpNavigationPane.LocalPanel.AliasName = "";
-			this.fpNavigationPane.LocalPanel.Availablity = SE.App2Base.SupportClasses.FpIconSymbolAllocation.Slot4R;
-			this.fpNavigationPane.LocalPanel.InstanceName = null;
-			this.fpNavigationPane.LocalPanel.LabelActive1 = SE.App2Base.SupportClasses.CondActive1LabelText.On;
-			this.fpNavigationPane.LocalPanel.LabelPassive = SE.App2Base.SupportClasses.CondPassiveLabelText.Off;
-			this.fpNavigationPane.LocalPanel.ParentTitle = "Title";
-			this.fpNavigationPane.LocalPanel.SymbolType = "SE.AppCommonProcess.Symbols.DevLp.sDefault";
-			this.fpNavigationPane.Maintenance.AliasName = "";
-			this.fpNavigationPane.Maintenance.Availablity = SE.App2Base.SupportClasses.FpIconSymbolAllocation.Slot1L;
-			this.fpNavigationPane.Maintenance.InstanceName = null;
-			this.fpNavigationPane.Maintenance.ParentTitle = "Title";
-			this.fpNavigationPane.Maintenance.SymbolType = "SE.AppCommonProcess.Symbols.DevMnt.sDefault";
-			this.fpNavigationPane.Measures.Availablity = SE.App2Base.SupportClasses.FpIconSymbolAllocation.NotAvailable;
-			this.fpNavigationPane.Name = "fpNavigationPane";
-			this.fpNavigationPane.OutputParameters.Availablity = SE.App2Base.SupportClasses.FpIconSymbolAllocation.NotAvailable;
-			this.fpNavigationPane.Owner.AliasName = "";
-			this.fpNavigationPane.Owner.Availablity = SE.App2Base.SupportClasses.FpIconSymbolAllocation.Slot1R;
-			this.fpNavigationPane.Owner.InstanceName = null;
-			this.fpNavigationPane.Owner.ParentTitle = "Title";
-			this.fpNavigationPane.Owner.SymbolType = "SE.App2Base.Symbols.Owner.sOwnerConfig";
-			this.fpNavigationPane.Parameter.Availablity = SE.App2Base.SupportClasses.FpIconSymbolAllocation.Slot2R;
-			this.fpNavigationPane.ParentTitle = "";
-			this.fpNavigationPane.Permissive.AliasName = "";
-			this.fpNavigationPane.Permissive.Availablity = SE.App2Base.SupportClasses.FpIconSymbolAllocation.Slot4L;
-			this.fpNavigationPane.Permissive.InstanceName = null;
-			this.fpNavigationPane.Permissive.LabelActive1 = SE.App2Base.SupportClasses.CondActive1LabelText.On;
-			this.fpNavigationPane.Permissive.LabelPassive = SE.App2Base.SupportClasses.CondPassiveLabelText.Off;
-			this.fpNavigationPane.Permissive.ParentTitle = "Title";
-			this.fpNavigationPane.Permissive.SymbolType = "SE.AppCommonProcess.Symbols.PermCondSum.sPermissive";
-			this.fpNavigationPane.SecMode = 6;
-			this.fpNavigationPane.SecOwner = 3;
-			this.fpNavigationPane.SecParameter = 12;
-			this.fpNavigationPane.SecSetpoint = 3;
-			this.fpNavigationPane.ShortFlush.AliasName = "";
-			this.fpNavigationPane.ShortFlush.Availablity = SE.App2Base.SupportClasses.FpIconSymbolAllocation.NotAvailable;
-			this.fpNavigationPane.ShortFlush.InstanceName = null;
-			this.fpNavigationPane.ShortFlush.ParentTitle = "Title";
-			this.fpNavigationPane.ShortFlush.SymbolType = "SE.AppWWW.Symbols.ShortFlush.sDefault";
-			this.fpNavigationPane.Trend.Availablity = SE.App2Base.SupportClasses.FpIconSymbolAllocation.Slot3R;
-			this.fpNavigationPane.OnParameterClick += new SE.App2Base.Graphics.FpNavigationPane.ParameterClicked(this.FpNavigationPaneOnParameterClick);
-			this.fpNavigationPane.OnTrendClick += new SE.App2Base.Graphics.FpNavigationPane.TrendClicked(this.FpNavigationPaneOnTrendClick);
-			this.fpNavigationPane.EndInit();
-			// 
 			// Sim
 			// 
 			this.Sim.BeginInit();
@@ -388,28 +444,6 @@ namespace SE.Nereda.Faceplates.MotorBaseNer
 			this.Oos.Value = false;
 			this.Oos.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.OosValueChanged);
 			this.Oos.EndInit();
-			// 
-			// ownerStatus
-			// 
-			this.ownerStatus.BeginInit();
-			this.ownerStatus.CurrentBasicOwner = false;
-			this.ownerStatus.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 5D, 74D);
-			this.ownerStatus.ExternalAvailable = false;
-			this.ownerStatus.InstanceName = "";
-			this.ownerStatus.Name = "ownerStatus";
-			this.ownerStatus.EndInit();
-			// 
-			// ownerSwitch
-			// 
-			this.ownerSwitch.BeginInit();
-			this.ownerSwitch.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 5D, 169D);
-			this.ownerSwitch.ExternalAvailable = false;
-			this.ownerSwitch.InstanceName = "";
-			this.ownerSwitch.Name = "ownerSwitch";
-			this.ownerSwitch.SecOwner = 0;
-			this.ownerSwitch.SecurityToken = ((uint)(4294967295u));
-			this.ownerSwitch.OnBasicOwnerChanged += new SE.App2Base.Graphics.OwnerSwitchBasic.BasicOwnerChanged(this.OwnerSwitchOnBasicOwnerChanged);
-			this.ownerSwitch.EndInit();
 			// 
 			// CurrentOwnerBasic
 			// 
@@ -466,73 +500,81 @@ namespace SE.Nereda.Faceplates.MotorBaseNer
 			// 
 			// fpDefault
 			// 
-			this.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(275D)), ((float)(350D)));
-			this.Brush = new NxtControl.Drawing.Brush("FpBackgroundBrush");
+			this.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(420D)), ((float)(386D)));
+			this.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(224)), ((byte)(224)), ((byte)(224))));
 			this.FormBorderStyle = NxtControl.GuiFramework.FormBorderStyle.FixedSingle;
 			this.SecurityToken = ((uint)(4294967175u));
 			this.Shapes.AddRange(new System.ComponentModel.IComponent[] {
-			this.IconBottomBorder1,
+			this.cabecalho,
+			this.caixaEstado,
+			this.textoEstado,
+			this.textoComando,
+			this.textoSaida,
+			this.textoSituacao,
+			this.tituloModo,
+			this.btnManual,
+			this.btnAutomatico,
+			this.tituloComando,
 			this.btnManOff,
 			this.btnManOn,
 			this.btnReset,
+			this.sep,
+			this.btnAjustes,
+			this.btnGrafico,
+			this.btnDiagnostico,
+			this.fpNavigationPane,
+			this.ownerSwitch,
 			this.NeedReset,
 			this.Fb,
 			this.CurrentSp,
 			this.TransFbStatus,
-			this.lblReqOp,
-			this.lblAutoSp,
-			this.lblIsPv,
-			this.labelS2,
-			this.labelS1,
-			this.labelS3,
 			this.Sim,
 			this.Over,
 			this.Maint,
 			this.Oos,
-			this.ownerStatus,
-			this.ownerSwitch,
 			this.CurrentOwnerBasic,
 			this.CurrentOp,
 			this.StdOwnerConnected,
-			this.ExternalControlled,
-			this.fpNavigationPane});
-			this.Size = new System.Drawing.Size(275, 350);
+			this.ExternalControlled});
+			this.Size = new System.Drawing.Size(420, 386);
 			this.SecurityOwnerChanged += new SE.App2Base.Faceplates.SEAppLibHMIFaceplate.OnSecurityOwnerChanged(this.FpDefaultSecurityOwnerChanged);
 			this.SecurityParameterChanged += new SE.App2Base.Faceplates.SEAppLibHMIFaceplate.OnSecurityParameterChanged(this.FpDefaultSecurityParameterChanged);
 			this.SecuritySetpointChanged += new SE.App2Base.Faceplates.SEAppLibHMIFaceplate.OnSecuritySetpointChanged(this.FpDefaultSecuritySetpointChanged);
 			this.UpdateOptionalService += new SE.App2Base.Faceplates.SEAppLibHMIFaceplate.OnUpdateOptionalService(this.FpDefaultUpdateOptionalService);
 
 		}
-		private NxtControl.GuiFramework.Line line7;
-		private NxtControl.GuiFramework.Line line1;
-		private NxtControl.GuiFramework.Group IconBottomBorder1;
-		private NxtControl.GuiFramework.Label lblIsPv;
-		private NxtControl.GuiFramework.Label lblReqOp;
+		private NxtControl.GuiFramework.Rectangle cabecalho;
+		private NxtControl.GuiFramework.Rectangle caixaEstado;
+		private NxtControl.GuiFramework.FreeText textoEstado;
+		private NxtControl.GuiFramework.FreeText textoComando;
+		private NxtControl.GuiFramework.FreeText textoSaida;
+		private NxtControl.GuiFramework.FreeText textoSituacao;
+		private NxtControl.GuiFramework.FreeText tituloModo;
+		private NxtControl.GuiFramework.DrawnButton btnManual;
+		private NxtControl.GuiFramework.DrawnButton btnAutomatico;
+		private NxtControl.GuiFramework.FreeText tituloComando;
 		private NxtControl.GuiFramework.DrawnButton btnManOff;
 		private NxtControl.GuiFramework.DrawnButton btnManOn;
 		private NxtControl.GuiFramework.DrawnButton btnReset;
+		private NxtControl.GuiFramework.Rectangle sep;
+		private NxtControl.GuiFramework.DrawnButton btnAjustes;
+		private NxtControl.GuiFramework.DrawnButton btnGrafico;
+		private NxtControl.GuiFramework.DrawnButton btnDiagnostico;
+		private SE.App2Base.Graphics.FpNavigationPane fpNavigationPane;
+		private SE.App2Base.Graphics.OwnerSwitchBasic ownerSwitch;
 		private System.HMI.Symbols.Base.Execute<bool> NeedReset;
 		private System.HMI.Symbols.Base.Execute<short> Fb;
 		private System.HMI.Symbols.Base.Execute<short> CurrentSp;
 		private System.HMI.Symbols.Base.Execute<short> TransFbStatus;
-		private NxtControl.GuiFramework.Label lblAutoSp;
-		private SE.App2Base.Graphics.LabelS labelS2;
-		private SE.App2Base.Graphics.LabelS labelS1;
-		private SE.App2Base.Graphics.LabelS labelS3;
-		private SE.App2Base.Graphics.FpNavigationPane fpNavigationPane;
 		private System.HMI.Symbols.Base.Execute<bool> Sim;
 		private System.HMI.Symbols.Base.Execute<bool> Over;
 		private System.HMI.Symbols.Base.Execute<bool> Maint;
 		private System.HMI.Symbols.Base.Execute<bool> Oos;
-		private SE.App2Base.Graphics.OwnerStatusBasic ownerStatus;
-		private SE.App2Base.Graphics.OwnerSwitchBasic ownerSwitch;
 		private System.HMI.Symbols.Base.Execute<ushort> CurrentOwnerBasic;
 		private System.HMI.Symbols.Base.Execute<short> CurrentOp;
 		private System.HMI.Symbols.Base.Execute<bool> StdOwnerConnected;
 		private System.HMI.Symbols.Base.Execute<bool> ExternalControlled;
+
 		#endregion
 	}
 }
-
-
-

@@ -1773,7 +1773,7 @@ namespace HMI.Main.Canvases
 			this.fr143.Font = new NxtControl.Drawing.Font("Arial", 7F, System.Drawing.FontStyle.Bold);
 			this.fr143.Location = new NxtControl.Drawing.PointF(874D, 317D);
 			this.fr143.Name = "fr143";
-			this.fr143.Text = "FT-02";
+			this.fr143.Text = "FT-03";
 			// 
 			// ft144
 			// 
@@ -1789,7 +1789,7 @@ namespace HMI.Main.Canvases
 			this.fr145.Font = new NxtControl.Drawing.Font("Arial", 7F, System.Drawing.FontStyle.Bold);
 			this.fr145.Location = new NxtControl.Drawing.PointF(971D, 407D);
 			this.fr145.Name = "fr145";
-			this.fr145.Text = "FT-03";
+			this.fr145.Text = "FT-02";
 			// 
 			// fr146
 			// 
@@ -2309,7 +2309,7 @@ namespace HMI.Main.Canvases
 			this.ft02.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.8D, 0D, 0D, 0.8D, 874D, 330D);
 			this.ft02.Name = "ft02";
 			this.ft02.SecurityToken = ((uint)(4294967295u));
-			this.ft02.TagName = "91957488A3380C04.FT_900_02";
+			this.ft02.TagName = "91957488A3380C04.FT_900_03";
 			this.ft02.EndInit();
 			// 
 			// ft03
@@ -2318,7 +2318,7 @@ namespace HMI.Main.Canvases
 			this.ft03.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.8D, 0D, 0D, 0.8D, 971D, 420D);
 			this.ft03.Name = "ft03";
 			this.ft03.SecurityToken = ((uint)(4294967295u));
-			this.ft03.TagName = "91957488A3380C04.FT_900_03";
+			this.ft03.TagName = "91957488A3380C04.FT_900_02";
 			this.ft03.EndInit();
 			// 
 			// br01

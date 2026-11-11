@@ -2,7 +2,7 @@
 <!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
 <FBType GUID="b35c8a41-0d79-3721-eaed-dd872cf5fd7c" Name="basicValvulaCoester" Comment="Logica do atuador Coester CSR (Modbus TCP)" Namespace="Hidryco.HidrycoLib">
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Hidryco" Version="2.2" Author="Hidryco" Date="04/11/2026" Remarks="2.2: stsAlarme para a IO List da Nereda. 2.1: leituras 100 a 108 (posicao, torque, temperatura, tempo de percurso, status 2, alarmes), falha do atuador, posicionar por comando e parar so com cfgPosicionador (Word 2 de escrita). 2.0: refeito simples." />
+  <VersionInfo Organization="Hidryco" Version="2.3" Author="Hidryco" Date="10/11/2026" Remarks="2.3: falha do atuador (alarmes da comunicacao) nao bloqueia o comando (fica disponivel em automatico) e nao muda a cor (sem animacao de falha); continua no alarme, no STS_ALARME e no diagnostico. 2.2: stsAlarme para a IO List da Nereda. 2.1: leituras 100 a 108 (posicao, torque, temperatura, tempo de percurso, status 2, alarmes), falha do atuador, posicionar por comando e parar so com cfgPosicionador (Word 2 de escrita). 2.0: refeito simples." />
   <InterfaceList>
     <EventInputs>
       <Event ID="BC3FDAAC48C266C9" Name="INIT" Comment="Inicializacao">
@@ -232,7 +232,8 @@
      posicao, com a tolerancia) nao veio no tempo configurado (0 = sem
      supervisao); memoriza ate o reset e pulsa parar;
    - falha do atuador: status 2 b0-b2, alarme 1 b1-b12, alarme 2 b0, b1,
-     b4-b8; memoriza ate o reset;
+     b4-b8; memoriza ate o reset; so informa (alarme e diagnostico):
+     nao bloqueia o comando nem muda a cor da valvula;
    - cfgHabilitada = FALSE (equipamento futuro): sem alarme, fora do automatico.
    ===================================================================== *)
 
@@ -445,8 +446,8 @@ END_IF;
 
 (* ---- 7. Saidas ---- *)
 stsAutomatico := bAuto;
-stsDisponivelAutomatico := bComOk AND stsRemoto AND bAuto AND NOT stsFalhaPosicao AND NOT stsFalhaAtuador;
-IF NOT bComOk OR stsFalhaPosicao OR stsFalhaAtuador THEN
+stsDisponivelAutomatico := bComOk AND stsRemoto AND bAuto AND NOT stsFalhaPosicao;   (* falha do atuador nao bloqueia *)
+IF NOT bComOk OR stsFalhaPosicao THEN                                                (* falha do atuador nao muda a cor *)
     stsAnimacao := 2;
 ELSIF stsAbrindo THEN
     stsAnimacao := 4;

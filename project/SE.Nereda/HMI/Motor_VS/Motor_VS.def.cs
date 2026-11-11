@@ -63,6 +63,32 @@ namespace SE.Nereda.Symbols.Motor_VS
       }
     }
      
+    private SE.Nereda.Faceplates.Motor_VS.fpDiagnostico fpDiagnostico
+    {
+      get
+      { 
+        if (IsOpenFaceplateSecure() == false)
+          return null;
+
+        SE.Nereda.Faceplates.Motor_VS.fpDiagnostico faceplate = null;
+        
+        IHMIManagementService hmiManagementService = (IHMIManagementService)ServiceProvider.GetService(typeof(IHMIManagementService));
+        if (hmiManagementService != null)
+          faceplate = (SE.Nereda.Faceplates.Motor_VS.fpDiagnostico)hmiManagementService.GetRegisteredHMIFaceplate(MapPath, typeof(SE.Nereda.Faceplates.Motor_VS.fpDiagnostico));
+        
+        if (faceplate == null)
+        {
+          faceplate = new SE.Nereda.Faceplates.Motor_VS.fpDiagnostico();
+
+          faceplate.SetConnectionInfo(this.TagName, this.SymbolPath, this.ChannelId, GetType());
+
+          if (hmiManagementService != null)
+            hmiManagementService.RegisterHMIFaceplate(faceplate);
+        }
+        return faceplate;
+      }
+    }
+     
     protected override void DoOpenFaceplate(OpenFaceplate openFaceplate)
     {
       NxtControl.GuiFramework.HMIFaceplate hmiFaceplate = null;
@@ -72,6 +98,9 @@ namespace SE.Nereda.Symbols.Motor_VS
 
       if ("fpLocalPanel" == (string)openFaceplate.FaceplateType)
         hmiFaceplate = fpLocalPanel;
+
+      if ("fpDiagnostico" == (string)openFaceplate.FaceplateType)
+        hmiFaceplate = fpDiagnostico;
 
       if (hmiFaceplate != null)
       {
@@ -94,6 +123,9 @@ namespace SE.Nereda.Symbols.Motor_VS
 
       if ("fpLocalPanel" == openFaceplate)
         hmiFaceplate = fpLocalPanel;
+
+      if ("fpDiagnostico" == openFaceplate)
+        hmiFaceplate = fpDiagnostico;
 
       if (hmiFaceplate != null)
       {
@@ -141,12 +173,41 @@ namespace SE.Nereda.Faceplates.Motor_VS
       }
     }
      
+    private SE.Nereda.Faceplates.Motor_VS.fpDiagnostico fpDiagnostico
+    {
+      get
+      { 
+        if (IsOpenFaceplateSecure() == false)
+          return null;
+
+        SE.Nereda.Faceplates.Motor_VS.fpDiagnostico faceplate = null;
+        
+        IHMIManagementService hmiManagementService = (IHMIManagementService)ServiceProvider.GetService(typeof(IHMIManagementService));
+        if (hmiManagementService != null)
+          faceplate = (SE.Nereda.Faceplates.Motor_VS.fpDiagnostico)hmiManagementService.GetRegisteredHMIFaceplate(MapPath, typeof(SE.Nereda.Faceplates.Motor_VS.fpDiagnostico));
+        
+        if (faceplate == null)
+        {
+          faceplate = new SE.Nereda.Faceplates.Motor_VS.fpDiagnostico();
+
+          faceplate.SetConnectionInfo(this.TagName, this.ConnectionSymbolPath, this.ChannelId, this.ParentType);
+
+          if (hmiManagementService != null)
+            hmiManagementService.RegisterHMIFaceplate(faceplate);
+        }
+        return faceplate;
+      }
+    }
+     
     protected override void DoOpenFaceplate(OpenFaceplate openFaceplate)
     {
       NxtControl.GuiFramework.HMIFaceplate hmiFaceplate = null;
 
       if ("fpLocalPanel" == (string)openFaceplate.FaceplateType)
         hmiFaceplate = fpLocalPanel;
+
+      if ("fpDiagnostico" == (string)openFaceplate.FaceplateType)
+        hmiFaceplate = fpDiagnostico;
 
       if (hmiFaceplate != null)
       {
@@ -166,6 +227,9 @@ namespace SE.Nereda.Faceplates.Motor_VS
 
       if ("fpLocalPanel" == openFaceplate)
         hmiFaceplate = fpLocalPanel;
+
+      if ("fpDiagnostico" == openFaceplate)
+        hmiFaceplate = fpDiagnostico;
 
       if (hmiFaceplate != null)
       {
@@ -239,6 +303,32 @@ namespace SE.Nereda.Symbols.Motor_VS
       }
     }
      
+    private SE.Nereda.Faceplates.Motor_VS.fpDiagnostico fpDiagnostico
+    {
+      get
+      { 
+        if (IsOpenFaceplateSecure() == false)
+          return null;
+
+        SE.Nereda.Faceplates.Motor_VS.fpDiagnostico faceplate = null;
+        
+        IHMIManagementService hmiManagementService = (IHMIManagementService)ServiceProvider.GetService(typeof(IHMIManagementService));
+        if (hmiManagementService != null)
+          faceplate = (SE.Nereda.Faceplates.Motor_VS.fpDiagnostico)hmiManagementService.GetRegisteredHMIFaceplate(MapPath, typeof(SE.Nereda.Faceplates.Motor_VS.fpDiagnostico));
+        
+        if (faceplate == null)
+        {
+          faceplate = new SE.Nereda.Faceplates.Motor_VS.fpDiagnostico();
+
+          faceplate.SetConnectionInfo(this.TagName, this.SymbolPath, this.ChannelId, GetType());
+
+          if (hmiManagementService != null)
+            hmiManagementService.RegisterHMIFaceplate(faceplate);
+        }
+        return faceplate;
+      }
+    }
+     
     protected override void DoOpenFaceplate(OpenFaceplate openFaceplate)
     {
       NxtControl.GuiFramework.HMIFaceplate hmiFaceplate = null;
@@ -248,6 +338,9 @@ namespace SE.Nereda.Symbols.Motor_VS
 
       if ("fpLocalPanel" == (string)openFaceplate.FaceplateType)
         hmiFaceplate = fpLocalPanel;
+
+      if ("fpDiagnostico" == (string)openFaceplate.FaceplateType)
+        hmiFaceplate = fpDiagnostico;
 
       if (hmiFaceplate != null)
       {
@@ -270,6 +363,9 @@ namespace SE.Nereda.Symbols.Motor_VS
 
       if ("fpLocalPanel" == openFaceplate)
         hmiFaceplate = fpLocalPanel;
+
+      if ("fpDiagnostico" == openFaceplate)
+        hmiFaceplate = fpDiagnostico;
 
       if (hmiFaceplate != null)
       {
@@ -343,6 +439,32 @@ namespace SE.Nereda.Symbols.Motor_VS
       }
     }
      
+    private SE.Nereda.Faceplates.Motor_VS.fpDiagnostico fpDiagnostico
+    {
+      get
+      { 
+        if (IsOpenFaceplateSecure() == false)
+          return null;
+
+        SE.Nereda.Faceplates.Motor_VS.fpDiagnostico faceplate = null;
+        
+        IHMIManagementService hmiManagementService = (IHMIManagementService)ServiceProvider.GetService(typeof(IHMIManagementService));
+        if (hmiManagementService != null)
+          faceplate = (SE.Nereda.Faceplates.Motor_VS.fpDiagnostico)hmiManagementService.GetRegisteredHMIFaceplate(MapPath, typeof(SE.Nereda.Faceplates.Motor_VS.fpDiagnostico));
+        
+        if (faceplate == null)
+        {
+          faceplate = new SE.Nereda.Faceplates.Motor_VS.fpDiagnostico();
+
+          faceplate.SetConnectionInfo(this.TagName, this.SymbolPath, this.ChannelId, GetType());
+
+          if (hmiManagementService != null)
+            hmiManagementService.RegisterHMIFaceplate(faceplate);
+        }
+        return faceplate;
+      }
+    }
+     
     protected override void DoOpenFaceplate(OpenFaceplate openFaceplate)
     {
       NxtControl.GuiFramework.HMIFaceplate hmiFaceplate = null;
@@ -352,6 +474,9 @@ namespace SE.Nereda.Symbols.Motor_VS
 
       if ("fpLocalPanel" == (string)openFaceplate.FaceplateType)
         hmiFaceplate = fpLocalPanel;
+
+      if ("fpDiagnostico" == (string)openFaceplate.FaceplateType)
+        hmiFaceplate = fpDiagnostico;
 
       if (hmiFaceplate != null)
       {
@@ -375,6 +500,9 @@ namespace SE.Nereda.Symbols.Motor_VS
       if ("fpLocalPanel" == openFaceplate)
         hmiFaceplate = fpLocalPanel;
 
+      if ("fpDiagnostico" == openFaceplate)
+        hmiFaceplate = fpDiagnostico;
+
       if (hmiFaceplate != null)
       {
         if (hmiFaceplate.Initialized == true)
@@ -393,6 +521,78 @@ namespace SE.Nereda.Symbols.Motor_VS
 namespace SE.Nereda.Faceplates.Motor_VS
 {
   partial class fpLocalPanel
+  {
+
+    private SE.Nereda.Faceplates.Motor_VS.fpOptions fpOptions
+    {
+      get
+      { 
+        if (IsOpenFaceplateSecure() == false)
+          return null;
+
+        SE.Nereda.Faceplates.Motor_VS.fpOptions faceplate = null;
+        
+        IHMIManagementService hmiManagementService = (IHMIManagementService)ServiceProvider.GetService(typeof(IHMIManagementService));
+        if (hmiManagementService != null)
+          faceplate = (SE.Nereda.Faceplates.Motor_VS.fpOptions)hmiManagementService.GetRegisteredHMIFaceplate(MapPath, typeof(SE.Nereda.Faceplates.Motor_VS.fpOptions));
+        
+        if (faceplate == null)
+        {
+          faceplate = new SE.Nereda.Faceplates.Motor_VS.fpOptions();
+
+          faceplate.SetConnectionInfo(this.TagName, this.ConnectionSymbolPath, this.ChannelId, this.ParentType);
+
+          if (hmiManagementService != null)
+            hmiManagementService.RegisterHMIFaceplate(faceplate);
+        }
+        return faceplate;
+      }
+    }
+     
+    protected override void DoOpenFaceplate(OpenFaceplate openFaceplate)
+    {
+      NxtControl.GuiFramework.HMIFaceplate hmiFaceplate = null;
+
+      if ("fpOptions" == (string)openFaceplate.FaceplateType)
+        hmiFaceplate = fpOptions;
+
+      if (hmiFaceplate != null)
+      {
+        if (hmiFaceplate.Initialized == true)
+          hmiFaceplate.Activate();
+        else
+        {
+          OnInitializeFaceplate(hmiFaceplate);
+          hmiFaceplate.Show(this);
+        }
+      }
+    }
+
+    public override void DoOpenFaceplate(string openFaceplate)
+    {
+      NxtControl.GuiFramework.HMIFaceplate hmiFaceplate = null;
+
+      if ("fpOptions" == openFaceplate)
+        hmiFaceplate = fpOptions;
+
+      if (hmiFaceplate != null)
+      {
+        if (hmiFaceplate.Initialized == true)
+          hmiFaceplate.Activate();
+        else
+        {
+          OnInitializeFaceplate(hmiFaceplate);
+          hmiFaceplate.Show(this);
+        }
+      }
+    }
+
+  }
+}
+
+namespace SE.Nereda.Faceplates.Motor_VS
+{
+  partial class fpDiagnostico
   {
 
     private SE.Nereda.Faceplates.Motor_VS.fpOptions fpOptions
@@ -519,6 +719,32 @@ namespace SE.Nereda.Symbols.Motor_VS
       }
     }
      
+    private SE.Nereda.Faceplates.Motor_VS.fpDiagnostico fpDiagnostico
+    {
+      get
+      { 
+        if (IsOpenFaceplateSecure() == false)
+          return null;
+
+        SE.Nereda.Faceplates.Motor_VS.fpDiagnostico faceplate = null;
+        
+        IHMIManagementService hmiManagementService = (IHMIManagementService)ServiceProvider.GetService(typeof(IHMIManagementService));
+        if (hmiManagementService != null)
+          faceplate = (SE.Nereda.Faceplates.Motor_VS.fpDiagnostico)hmiManagementService.GetRegisteredHMIFaceplate(MapPath, typeof(SE.Nereda.Faceplates.Motor_VS.fpDiagnostico));
+        
+        if (faceplate == null)
+        {
+          faceplate = new SE.Nereda.Faceplates.Motor_VS.fpDiagnostico();
+
+          faceplate.SetConnectionInfo(this.TagName, this.SymbolPath, this.ChannelId, GetType());
+
+          if (hmiManagementService != null)
+            hmiManagementService.RegisterHMIFaceplate(faceplate);
+        }
+        return faceplate;
+      }
+    }
+     
     protected override void DoOpenFaceplate(OpenFaceplate openFaceplate)
     {
       NxtControl.GuiFramework.HMIFaceplate hmiFaceplate = null;
@@ -528,6 +754,9 @@ namespace SE.Nereda.Symbols.Motor_VS
 
       if ("fpLocalPanel" == (string)openFaceplate.FaceplateType)
         hmiFaceplate = fpLocalPanel;
+
+      if ("fpDiagnostico" == (string)openFaceplate.FaceplateType)
+        hmiFaceplate = fpDiagnostico;
 
       if (hmiFaceplate != null)
       {
@@ -550,6 +779,9 @@ namespace SE.Nereda.Symbols.Motor_VS
 
       if ("fpLocalPanel" == openFaceplate)
         hmiFaceplate = fpLocalPanel;
+
+      if ("fpDiagnostico" == openFaceplate)
+        hmiFaceplate = fpDiagnostico;
 
       if (hmiFaceplate != null)
       {
@@ -623,6 +855,32 @@ namespace SE.Nereda.Symbols.Motor_VS
       }
     }
      
+    private SE.Nereda.Faceplates.Motor_VS.fpDiagnostico fpDiagnostico
+    {
+      get
+      { 
+        if (IsOpenFaceplateSecure() == false)
+          return null;
+
+        SE.Nereda.Faceplates.Motor_VS.fpDiagnostico faceplate = null;
+        
+        IHMIManagementService hmiManagementService = (IHMIManagementService)ServiceProvider.GetService(typeof(IHMIManagementService));
+        if (hmiManagementService != null)
+          faceplate = (SE.Nereda.Faceplates.Motor_VS.fpDiagnostico)hmiManagementService.GetRegisteredHMIFaceplate(MapPath, typeof(SE.Nereda.Faceplates.Motor_VS.fpDiagnostico));
+        
+        if (faceplate == null)
+        {
+          faceplate = new SE.Nereda.Faceplates.Motor_VS.fpDiagnostico();
+
+          faceplate.SetConnectionInfo(this.TagName, this.SymbolPath, this.ChannelId, GetType());
+
+          if (hmiManagementService != null)
+            hmiManagementService.RegisterHMIFaceplate(faceplate);
+        }
+        return faceplate;
+      }
+    }
+     
     protected override void DoOpenFaceplate(OpenFaceplate openFaceplate)
     {
       NxtControl.GuiFramework.HMIFaceplate hmiFaceplate = null;
@@ -632,6 +890,9 @@ namespace SE.Nereda.Symbols.Motor_VS
 
       if ("fpLocalPanel" == (string)openFaceplate.FaceplateType)
         hmiFaceplate = fpLocalPanel;
+
+      if ("fpDiagnostico" == (string)openFaceplate.FaceplateType)
+        hmiFaceplate = fpDiagnostico;
 
       if (hmiFaceplate != null)
       {
@@ -654,6 +915,9 @@ namespace SE.Nereda.Symbols.Motor_VS
 
       if ("fpLocalPanel" == openFaceplate)
         hmiFaceplate = fpLocalPanel;
+
+      if ("fpDiagnostico" == openFaceplate)
+        hmiFaceplate = fpDiagnostico;
 
       if (hmiFaceplate != null)
       {

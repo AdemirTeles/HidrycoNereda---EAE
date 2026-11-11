@@ -58,7 +58,8 @@ namespace SE.Nereda.Symbols.MotorS
 		void OpenFpClick(object sender, EventArgs e)
 		{
 			// TODO: Implement OpenFpClick
-			//this.Base.DoOpenFaceplate("fpDefault");
+			// abre direto o faceplate principal (antes abria o menu fpOptions)
+			this.Base.DoOpenFaceplate("fpDefault");
 		}
 		
 		[RefreshProperties(RefreshProperties.Repaint)]
