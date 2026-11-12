@@ -2,7 +2,7 @@
 <!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
 <FBType GUID="05042151-8115-451f-8d99-594dad2c1076" Name="basicMotorGenerico" Comment="Logica unica do motor generico (partida direta ou inversor)" Namespace="Hidryco.HidrycoLib">
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Hidryco" Version="2.1" Author="Hidryco" Date="05/11/2026" Remarks="2.1: raio do gerador vermelho (3) so com a carga liberada, a planta nos geradores E o motor ligado (igual ao Motor_VS, gradeamento e UV); liberado e parado = cinza (2). 2.0: velocidade da IHM/SCADA (stsVelocidadeIhm, antes stsVelocidadeHz) em %%: com inversor = fldVelocidadePct (LSP 0 %% a HSP 100 %%), sem inversor = 0 ou 100 %%; referencia e manual continuam em Hz. 1.9: velocidade manual (stpVelocidadeManual) em Hz; saidas stsVelocidadeHz/stsReferenciaHz para a IHM (conversao no CLP, 60 Hz = 100 %). 1.8: IHM: velocidade e referencia no maximo 1 vez por segundo com o motor ligado (antes a cada 0,1 %); o plug/processo (CNF_SPEED) continua na hora. 1.7: saida stsFalhaAtiva (falha presente agora: emergencia, termica, acionamento ou comunicacao) no CNF_HMI. 1.6: protecao termica nao memoriza - sai sozinha quando normaliza (sem reset). 1.5: reset so libera a falha de parada com o motor parado (antes liberava com o motor ainda ligado e a supervisao nao recomecava). 1.1: refeito no padrao SE.App2CommonProcess - eventos por grupo de dados, saidas so na mudanca, supervisao por E_DELAY (MON_T/MON_RESET/MON_MAX), horimetro e partidas pelo devMntCalc, escala linear com limites. 1.4: horimetro proprio com resolucao de 1 s (E_CYCLE + PERSISTENCE), termica NF por padrao" />
+  <VersionInfo Organization="Hidryco" Version="2.2" Author="Hidryco" Date="12/11/2026" Remarks="2.2: cfgFalhaNA (contato de falha NA, dosagem 800). 2.1: raio do gerador vermelho (3) so com a carga liberada, a planta nos geradores E o motor ligado (igual ao Motor_VS, gradeamento e UV); liberado e parado = cinza (2). 2.0: velocidade da IHM/SCADA (stsVelocidadeIhm, antes stsVelocidadeHz) em %%: com inversor = fldVelocidadePct (LSP 0 %% a HSP 100 %%), sem inversor = 0 ou 100 %%; referencia e manual continuam em Hz. 1.9: velocidade manual (stpVelocidadeManual) em Hz; saidas stsVelocidadeHz/stsReferenciaHz para a IHM (conversao no CLP, 60 Hz = 100 %). 1.8: IHM: velocidade e referencia no maximo 1 vez por segundo com o motor ligado (antes a cada 0,1 %); o plug/processo (CNF_SPEED) continua na hora. 1.7: saida stsFalhaAtiva (falha presente agora: emergencia, termica, acionamento ou comunicacao) no CNF_HMI. 1.6: protecao termica nao memoriza - sai sozinha quando normaliza (sem reset). 1.5: reset so libera a falha de parada com o motor parado (antes liberava com o motor ainda ligado e a supervisao nao recomecava). 1.1: refeito no padrao SE.App2CommonProcess - eventos por grupo de dados, saidas so na mudanca, supervisao por E_DELAY (MON_T/MON_RESET/MON_MAX), horimetro e partidas pelo devMntCalc, escala linear com limites. 1.4: horimetro proprio com resolucao de 1 s (E_CYCLE + PERSISTENCE), termica NF por padrao" />
   <InterfaceList>
     <EventInputs>
       <Event ID="683CE05B486FAC1D" Name="INIT" Comment="Inicializacao (configuracao da instancia)">
@@ -13,6 +13,7 @@
         <With Var="cfgSaidaMax" />
         <With Var="cfgUsaTermica" />
         <With Var="cfgTermicaNF" />
+        <With Var="cfgFalhaNA" />
         <With Var="cfgUsaFalhaComunicacao" />
         <With Var="stpTempoFalhaLigamento" />
         <With Var="stpTempoFalhaDesligamento" />
@@ -26,6 +27,7 @@
         <With Var="cfgSaidaMax" />
         <With Var="cfgUsaTermica" />
         <With Var="cfgTermicaNF" />
+        <With Var="cfgFalhaNA" />
         <With Var="cfgUsaFalhaComunicacao" />
         <With Var="stpTempoFalhaLigamento" />
         <With Var="stpTempoFalhaDesligamento" />
@@ -163,6 +165,7 @@
       <VarDeclaration ID="B9430F14918E2745" Name="cfgSaidaMax" Type="REAL" InitialValue="100.0" Comment="Valor de campo equivalente a 100 % (ex.: 100 = %, 60 = Hz, 10000 = Sulzer 0,01 %)" />
       <VarDeclaration ID="28C58F5448A1FB06" Name="cfgUsaTermica" Type="BOOL" InitialValue="TRUE" Comment="TRUE = supervisiona a protecao termica" />
       <VarDeclaration ID="851269AC75CA9E8E" Name="cfgTermicaNF" Type="BOOL" InitialValue="TRUE" Comment="TRUE = termica NF (FALSE no campo = atuada). Padrao NF (definido pelo usuario)" />
+      <VarDeclaration ID="BC9C4A0B25009270" Name="cfgFalhaNA" Type="BOOL" InitialValue="FALSE" Comment="TRUE = contato de falha do acionamento NA (TRUE no campo = falha, ligado em stsSemFalha). Padrao FALSE = NF (SEM FALHA)" />
       <VarDeclaration ID="F88C337DE680E3C6" Name="cfgUsaFalhaComunicacao" Type="BOOL" InitialValue="TRUE" Comment="TRUE = considera o bit de falha de comunicacao da remota" />
       <VarDeclaration ID="545E40FBFE122A17" Name="stpTempoFalhaLigamento" Type="UINT" Comment="Tempo maximo para confirmar a partida (s). 0 = sem supervisao" />
       <VarDeclaration ID="6A2A6C1686F090F5" Name="stpTempoFalhaDesligamento" Type="UINT" Comment="Tempo maximo para confirmar a parada (s). 0 = sem supervisao" />
@@ -364,7 +367,7 @@ IF bComOk THEN
     bLocal  := fldLocal;
     bLigado := fldLigado;
     bTermicaAtiva  := cfgUsaTermica AND (fldProtecaoTermica XOR cfgTermicaNF);
-    bFalhaInvAtiva := NOT fldSemFalha;     (* falha NF: FALSE no campo = falha *)
+    bFalhaInvAtiva := fldSemFalha XOR NOT cfgFalhaNA;   (* NF (padrao): FALSE no campo = falha; cfgFalhaNA: TRUE no campo = falha *)
 ELSE
     bRemoto := FALSE;                      (* sem comunicacao: sai de remoto *)
     bLocal  := FALSE;

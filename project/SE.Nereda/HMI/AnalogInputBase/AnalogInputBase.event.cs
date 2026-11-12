@@ -126,6 +126,27 @@ namespace SE.Nereda.Symbols.AnalogInputBase
       return (System.Single) var;
     }  }
 
+    public bool Get_CFG_SEM_ESCALA(ref System.Boolean value)
+    {
+      if (accessorService == null)
+        return false;
+      bool var = false;
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,2, ref var);
+      if (ret) value = (System.Boolean) var;
+      return ret;
+    }
+
+    public System.Boolean? CFG_SEM_ESCALA
+    { get {
+      if (accessorService == null)
+        return null;
+      bool var = false;
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,2, ref var);
+      if (!ret) return null;
+      return (System.Boolean) var;
+    }  }
+
+
 
   }
 

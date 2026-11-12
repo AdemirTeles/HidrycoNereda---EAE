@@ -35,7 +35,7 @@ namespace SE.Nereda.Symbols.NeredaSludgeBuffer_2
 			this.DisplayStatus.Font = new NxtControl.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Bold);
 			this.DisplayStatus.Name = "DisplayStatus";
 			this.DisplayStatus.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(78)), ((byte)(78)), ((byte)(78))), 1F, NxtControl.Drawing.DashStyle.Solid);
-			this.DisplayStatus.Text = "ESTADO DO REATOR";
+			this.DisplayStatus.Text = "ESTADO DO BUFFER DE LODO";
 			this.DisplayStatus.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleCenter;
 			this.DisplayStatus.TextColor = new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(0)));
 			// 

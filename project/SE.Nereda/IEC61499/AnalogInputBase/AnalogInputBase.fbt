@@ -4,7 +4,7 @@
   <Attribute Name="HMI.Alias" Value="" />
   <Attribute Name="Configuration.FB.IDCounter" Value="78" />
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Schneider Electric" Version="1.0.1" Author="ApplicationLibDevTeam" Date="1/16/2024" Remarks="First Version" />
+  <VersionInfo Organization="Schneider Electric" Version="1.0.1" Author="ApplicationLibDevTeam" Date="1/16/2024" Remarks="Hidryco 12/11/2026: cfgSemEscala (sensor por Modbus: sem escala, limites e corte). First Version" />
   <InterfaceList>
     <EventInputs>
       <Event Name="REQ_PV" Comment="Request input value">
@@ -29,6 +29,7 @@
     <InputVars>
       <VarDeclaration Name="RawPvIn" Type="VTQREAL" Comment="Unscaled analog signal" />
       <VarDeclaration Name="SuppressAlarm" Type="BOOL" Comment="1 = Suppress channel failure in HMI" />
+      <VarDeclaration ID="6BAEE4AFB7939DF9" Name="cfgSemEscala" Type="BOOL" InitialValue="FALSE" Comment="TRUE = valor ja em unidade de engenharia (Modbus): sem escala, sem limites e sem corte (EnScale/UseLimits FALSE, PvCutOff -1E30), ignorando os valores gravados" />
     </InputVars>
     <OutputVars>
       <VarDeclaration Name="Pv" Type="VTQREAL" Comment="Scaled process signal" />
@@ -39,6 +40,18 @@
     </OutputVars>
   </InterfaceList>
   <FBNetwork>
+    <FB ID="6A28385D0F7E2371" Name="SelEnScale" Type="SELECT_81F91C08E00C8B28" x="1900" y="5200" Namespace="SE.Nereda">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNT:=2;SELECT:BOOL;IN${CNT}:BOOL" />
+      <Parameter Name="$IN2" Value="FALSE" />
+    </FB>
+    <FB ID="BE6BDF1E91BA7516" Name="SelUseLimits" Type="SELECT_81F91C08E00C8B28" x="2500" y="5200" Namespace="SE.Nereda">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNT:=2;SELECT:BOOL;IN${CNT}:BOOL" />
+      <Parameter Name="$IN2" Value="FALSE" />
+    </FB>
+    <FB ID="4380A73788A2FF7F" Name="SelCutOff" Type="SELECT_218F0E76F8A148ECD" x="3100" y="5200" Namespace="SE.Nereda">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNT:=2;SELECT:BOOL;IN${CNT}:REAL" />
+      <Parameter Name="$IN2" Value="-1.0E30" />
+    </FB>
     <FB ID="30" Name="plcStart" Type="plcStart" x="1020" y="460" Namespace="SE.App2Base">
       <Parameter Name="$Delay" Value="T#0ms" />
       <Parameter Name="$Prio" Value="16" />
@@ -100,6 +113,7 @@
     <Output Name="PvMax" x="4860" y="1032" Type="Data" />
     <Output Name="CNF_PV" x="4820" y="2692" Type="Event" />
     <Output Name="Pv" x="4840" y="3072" Type="Data" />
+    <Input ID="6BAEE4AFB7939DF9" Name="cfgSemEscala" x="600" y="5200" Type="Data" />
     <EventConnections>
       <Connection Source="$REQ_PV" Destination="$36.REQ_PV">
         <AvoidsNodes>false</AvoidsNodes>
@@ -165,10 +179,6 @@
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
         <AvoidsNodes>false</AvoidsNodes>
       </Connection>
-      <Connection Source="$35.2886E7A2DEFD0865" Destination="$36.REQ_PARA">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-        <AvoidsNodes>false</AvoidsNodes>
-      </Connection>
       <Connection Source="$35.E65C45AA2DF89F67" Destination="$36.REQ_SIM">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
         <AvoidsNodes>false</AvoidsNodes>
@@ -177,6 +187,10 @@
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
         <AvoidsNodes>false</AvoidsNodes>
       </Connection>
+      <Connection Source="$35.2886E7A2DEFD0865" Destination="$6A28385D0F7E2371.REQ" />
+      <Connection Source="$6A28385D0F7E2371.CNF" Destination="$BE6BDF1E91BA7516.REQ" />
+      <Connection Source="$BE6BDF1E91BA7516.CNF" Destination="$4380A73788A2FF7F.REQ" />
+      <Connection Source="$4380A73788A2FF7F.CNF" Destination="$36.REQ_PARA" />
     </EventConnections>
     <DataConnections>
       <Connection Source="$36.Pv" Destination="$Pv" dx1="158.4063">
@@ -262,18 +276,6 @@
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
         <AvoidsNodes>false</AvoidsNodes>
       </Connection>
-      <Connection Source="$35.CC5A9FA114144AA6" Destination="$36.EnScale">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-        <AvoidsNodes>false</AvoidsNodes>
-      </Connection>
-      <Connection Source="$35.DED953899C2CCD91" Destination="$36.UseLimits">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-        <AvoidsNodes>false</AvoidsNodes>
-      </Connection>
-      <Connection Source="$35.BECBF433BD9EED60" Destination="$36.PvCutOff">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-        <AvoidsNodes>false</AvoidsNodes>
-      </Connection>
       <Connection Source="$35.7DE032517A417D96" Destination="$36.PvOffset">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
         <AvoidsNodes>false</AvoidsNodes>
@@ -318,6 +320,16 @@
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
         <AvoidsNodes>false</AvoidsNodes>
       </Connection>
+      <Connection Source="$35.CC5A9FA114144AA6" Destination="$6A28385D0F7E2371.IN1" />
+      <Connection Source="$35.DED953899C2CCD91" Destination="$BE6BDF1E91BA7516.IN1" />
+      <Connection Source="$35.BECBF433BD9EED60" Destination="$4380A73788A2FF7F.IN1" />
+      <Connection Source="$6BAEE4AFB7939DF9" Destination="$6A28385D0F7E2371.SELECT" />
+      <Connection Source="$6BAEE4AFB7939DF9" Destination="$BE6BDF1E91BA7516.SELECT" />
+      <Connection Source="$6BAEE4AFB7939DF9" Destination="$4380A73788A2FF7F.SELECT" />
+      <Connection Source="$6A28385D0F7E2371.OUT" Destination="$36.EnScale" />
+      <Connection Source="$BE6BDF1E91BA7516.OUT" Destination="$36.UseLimits" />
+      <Connection Source="$4380A73788A2FF7F.OUT" Destination="$36.PvCutOff" />
+      <Connection Source="$6BAEE4AFB7939DF9" Destination="$35.DF4F8717452AC34F" />
     </DataConnections>
   </FBNetwork>
 </FBType>

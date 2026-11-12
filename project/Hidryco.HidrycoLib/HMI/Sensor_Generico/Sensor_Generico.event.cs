@@ -626,6 +626,27 @@ namespace Hidryco.HidrycoLib.Symbols.Sensor_Generico
       return (System.Int16) var;
     }  }
 
+    public bool Get_CFG_SKID(ref System.Boolean value)
+    {
+      if (accessorService == null)
+        return false;
+      bool var = false;
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,29, ref var);
+      if (ret) value = (System.Boolean) var;
+      return ret;
+    }
+
+    public System.Boolean? CFG_SKID
+    { get {
+      if (accessorService == null)
+        return null;
+      bool var = false;
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,29, ref var);
+      if (!ret) return null;
+      return (System.Boolean) var;
+    }  }
+
+
 
   }
 

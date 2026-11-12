@@ -63,6 +63,7 @@ namespace SE.Nereda.Faceplates.AnalogInputBase
 			this.txtoverridevalue = new System.HMI.Symbols.Base.TextBox<float>();
 			this.BadPvSel = new System.HMI.Symbols.Base.Execute<short>();
 			this.Execover = new System.HMI.Symbols.Base.Execute<bool>();
+			this.xSemEscala = new System.HMI.Symbols.Base.Execute<bool>();
 			this.Pv = new System.HMI.Symbols.Base.Execute<float>();
 			this.execute_11 = new System.HMI.Symbols.Base.Execute<byte>();
 			this.PvMin = new System.HMI.Symbols.Base.Execute<float>();
@@ -585,6 +586,18 @@ namespace SE.Nereda.Faceplates.AnalogInputBase
 			this.Execover.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.ExecOverValueChanged);
 			this.Execover.EndInit();
 			// 
+			// xSemEscala
+			// 
+			this.xSemEscala.BeginInit();
+			this.xSemEscala.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, double.NaN, double.NaN);
+			this.xSemEscala.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
+			this.xSemEscala.Name = "xSemEscala";
+			this.xSemEscala.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
+			this.xSemEscala.TagName = "CFG_SEM_ESCALA";
+			this.xSemEscala.Value = false;
+			this.xSemEscala.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.SemEscalaValueChanged);
+			this.xSemEscala.EndInit();
+			// 
 			// Pv
 			// 
 			this.Pv.BeginInit();
@@ -684,6 +697,7 @@ namespace SE.Nereda.Faceplates.AnalogInputBase
 			this.txtoverridevalue,
 			this.BadPvSel,
 			this.Execover,
+			this.xSemEscala,
 			this.Pv,
 			this.execute_11,
 			this.PvMin,
@@ -735,6 +749,7 @@ namespace SE.Nereda.Faceplates.AnalogInputBase
 		private System.HMI.Symbols.Base.TextBox<float> txtoverridevalue;
 		private System.HMI.Symbols.Base.Execute<short> BadPvSel;
 		private System.HMI.Symbols.Base.Execute<bool> Execover;
+		private System.HMI.Symbols.Base.Execute<bool> xSemEscala;
 		private System.HMI.Symbols.Base.Execute<float> Pv;
 		private System.HMI.Symbols.Base.Execute<byte> execute_11;
 		private System.HMI.Symbols.Base.Execute<float> PvMin;

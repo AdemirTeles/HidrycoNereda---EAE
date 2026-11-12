@@ -113,8 +113,8 @@
       <VarDeclaration ID="EFE29EA2A963985E" Name="fldR4018" Type="INT" Comment="Registro 4018" />
       <VarDeclaration ID="188BF646E72EEEA1" Name="fldConexao" Type="INT" Comment="connStatusInt (1 = online)" />
       <VarDeclaration ID="05EA1552B9E3115E" Name="cmdCiclo" Type="BOOL" Comment="CMD_LIGA_CICLO_REMOTO" />
-      <VarDeclaration ID="8B073DFA930CDFDF" Name="stpDif1" Type="REAL" Comment="STP_DIFERENCIAL_NIVEL_GRADE1 (%)" />
-      <VarDeclaration ID="2CD93C02AEE34611" Name="stpDif2" Type="REAL" Comment="STP_DIFERENCIAL_NIVEL_GRADE2 (%)" />
+      <VarDeclaration ID="8B073DFA930CDFDF" Name="stpDif1" Type="REAL" Comment="STP_DIFERENCIAL_NIVEL_GRADE1 (mm)" />
+      <VarDeclaration ID="2CD93C02AEE34611" Name="stpDif2" Type="REAL" Comment="STP_DIFERENCIAL_NIVEL_GRADE2 (mm)" />
       <VarDeclaration ID="C648B0BD976A65D6" Name="hmiReset" Type="BOOL" Comment="IHM: reset" />
       <VarDeclaration ID="E2508CD3A47CDCD2" Name="cmdResetProc" Type="BOOL" Comment="Processo: reset" />
       <VarDeclaration ID="BE2397D1A1602A70" Name="g1Alarme" Type="BOOL" />
@@ -194,16 +194,16 @@
    basicGradeamento v1.0 - logica do CAT Gradeamento_Inovaisa (HidrycoLib)
    Painel Vibropac PV-35524 (CLP TM241, tabela Modbus TCP Inovaisa Rev.B):
    4001 liga/desliga ciclo remoto, 4002 reset, 4003/4004 setpoint do
-   diferencial de nivel das grades (0-1000 = 0-100 %), 4005 alarme,
+   diferencial de nivel das grades (mm), 4005 alarme,
    4006 emergencia, 4007/4008 grades (0 parado, 1 avante, 2 reverso,
    3 falha), 4009 rosca (0 parado, 1 funcionando, 2 falha), 4010/4011
-   sobretorque, 4013..4018 niveis montante/jusante/diferencial (0-1000).
+   sobretorque, 4013..4018 niveis montante/jusante/diferencial (mm).
    O painel tem a propria logica (limpeza pelo diferencial, reverso,
    rosca); o CLP da planta liga/desliga o ciclo, manda os setpoints e le.
    Regras:
    - escrita a cada 5 s e na mudanca (o painel guarda o ultimo valor);
    - reset (IHM ou processo): 4002 = 1 por 3 s;
-   - niveis em % (conversao aqui, no CLP: valor / 10);
+   - niveis e setpoints de diferencial em mm, sem conversao (valor do registrador = mm);
    - sem comunicacao: estados zerados, sensores em falha de comunicacao.
    ===================================================================== *)
 INITO      := FALSE;
@@ -241,12 +241,12 @@ IF stsComunicacaoOK THEN
     rtStatus := fldR4009;
     g1Sobre := fldR4010;
     g2Sobre := fldR4011;
-    g1Mont := LIMIT(0.0, INT_TO_REAL(fldR4013) / 10.0, 100.0);
-    g1Jus  := LIMIT(0.0, INT_TO_REAL(fldR4014) / 10.0, 100.0);
-    g1Dif  := LIMIT(0.0, INT_TO_REAL(fldR4015) / 10.0, 100.0);
-    g2Mont := LIMIT(0.0, INT_TO_REAL(fldR4016) / 10.0, 100.0);
-    g2Jus  := LIMIT(0.0, INT_TO_REAL(fldR4017) / 10.0, 100.0);
-    g2Dif  := LIMIT(0.0, INT_TO_REAL(fldR4018) / 10.0, 100.0);
+    g1Mont := INT_TO_REAL(fldR4013);     (* mm *)
+    g1Jus  := INT_TO_REAL(fldR4014);
+    g1Dif  := INT_TO_REAL(fldR4015);
+    g2Mont := INT_TO_REAL(fldR4016);
+    g2Jus  := INT_TO_REAL(fldR4017);
+    g2Dif  := INT_TO_REAL(fldR4018);
 ELSE
     stsAlarmeAcionado := FALSE;
     stsEmergencia := FALSE;
@@ -275,8 +275,8 @@ IF tReset > 0 THEN
 ELSE
     acmReset := 0;
 END_IF;
-acmSp1 := REAL_TO_INT(LIMIT(0.0, stpDif1, 100.0) * 10.0);
-acmSp2 := REAL_TO_INT(LIMIT(0.0, stpDif2, 100.0) * 10.0);
+acmSp1 := REAL_TO_INT(LIMIT(0.0, stpDif1, 32767.0));    (* mm *)
+acmSp2 := REAL_TO_INT(LIMIT(0.0, stpDif2, 32767.0));
 IF TICK THEN
     tEnvio := tEnvio + 1;
 END_IF;

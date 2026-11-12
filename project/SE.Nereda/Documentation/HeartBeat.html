@@ -1,0 +1,192 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>HeartBeat</title><link rel="stylesheet" href="css/project.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.74.0"><meta name="description" content="The HeartBeat block is used to monitor the communication between the PLC and the Nereda controller."><link rel="home" href="index.html" title="Library: SE.Nereda"><link rel="up" href="CATs.html" title="Composite Automation Types"><link rel="prev" href="GritScreenLogic.GritScreenLogic_HMI.sRunHoldTime.html" title="sRunHoldTime"><link rel="next" href="HeartBeat.HeartBeat_HMI.sDefault.html" title="sDefault"></head><body><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="HeartBeat"></a>HeartBeat</h2></div><div><h2 class="subtitle" style="clear: both">Type: CAT Library: SE.Nereda</h2></div><div><div class="author"><h3 class="author"><span class="firstname">Nouriddin</span> <span class="surname">Ouechen</span></h3><code class="email"><a class="email" href="mailto:nouriddin.ouechen@non.se.com">nouriddin.ouechen@non.se.com</a></code></div></div><div><div class="abstract"><p class="title"><b>Abstract</b></p><p>The HeartBeat block is used to monitor the communication between the PLC and the Nereda controller.</p>
+  </div></div></div></div>
+    
+    
+
+    
+        <div class="figure"><a name="id178488"></a><p class="title"><b>Figure 305. Interface</b></p><div class="figure-contents">
+          
+          <div class="mediaobject"><img src="HeartBeat.fbt.gif" alt="Interface"></div>
+        </div></div><br class="figure-break">
+
+        <div class="table"><a name="id178493"></a><p class="title"><b>Table 735. Event Interface</b></p><div class="table-contents">
+            
+            
+            <table summary="Event Interface" border="1"><colgroup><col align="left"><col align="left"><col align="left"></colgroup><thead><tr><th align="left">Name</th><th align="left">With</th><th align="left">Description</th></tr></thead><tbody></tbody></table>
+        </div></div><br class="table-break">
+
+        <div class="table"><a name="id178505"></a><p class="title"><b>Table 736. Data Interface</b></p><div class="table-contents">
+            
+            
+            <table summary="Data Interface" border="1"><colgroup><col align="left"><col align="left"><col align="left"><col align="left"></colgroup><thead><tr><th align="left">Name</th><th align="left">Type</th><th align="left">Init Value</th><th align="left">Description</th></tr></thead><tbody><tr class="titlerow"><td colspan="4" align="left">Plugs</td></tr><tr><td align="left">IEmergencyManagement</td><td align="left">SE.Nereda.IEmergencyON</td><td align="left"> </td><td align="left"> </td></tr><tr><td align="left">IEmergencySB</td><td align="left">SE.Nereda.IEmergencyON</td><td align="left"> </td><td align="left"> </td></tr><tr><td align="left">IMode</td><td align="left">SE.Nereda.IEmergencyON</td><td align="left"> </td><td align="left"> </td></tr></tbody></table>
+        </div></div><br class="table-break">
+<span class="descriptionbox"><p class="descriptionboxtitle">Description</p></span><p>
+    <span class="bold"><strong>Description :</strong></span>
+  </p><p>Communication between the Nereda® Controller and PLC will be monitored by means of a watchdog signal. The control system initiates the first watchdog signal and sends a Boolean signal to the Nereda® Controller.</p><p>The HeartBeat block will receive a Boolean signal of 0 or 1 from the Nereda® Controller, and then the HeartBeat block will check the value received from the Nereda® Controller and send back the inverse bit (if the Nereda® Controller sends 1, the HeartBeat will send 0, and vice versa). Every time, the Nereda® Server will send back the same value that the HeartBeat block sent.</p><p>In case the HeartBeat does not receive the same value that it sent to the Nereda® Controller within a predefined adjustable ‘watchdog’ time, it will generate a communication failure.</p><p>If the Nereda® process control is in "Auto" mode, the emergency recipe is automatically started for each reactor for which the emergency recipe is set to ‘On’. After watchdog communication is restored, the Nereda® process control mode must be switched back to "Auto" or "Manual" by the operator. This is not an automatic action from the process automation system or the Nereda® Controller.</p><p><span class="bold"><strong>HeartBeat Representation :</strong></span></p><span class="bold"><strong>
+<div class="informalfigure-float"><div class="informalfigure"><div class="mediaobject"><img src="Images/HeartBeat.PNG" width="293" height="107"></div></div></div>
+ 
+<table class="table" style="WIDTH: 50px" cols="3" width="50" align="left" border="2" id="id178552">
+Output Adapters :
+<thead>
+<tr>
+<td width="100%">Name</td>
+<td width="100%">Adapter</td>
+<td width="100%">Description</td></tr></thead>
+<tbody>
+<tr>
+<td>IEmergencyManagement</td>
+<td>
+<div class="informalfigure-float"><div class="informalfigure"><div class="mediaobject"><img src="Images/EmergencyOnPlug.PNG" width="175" height="108"></div></div></div></td>
+<td>
+<p>This Adapter 'IEmergencyON' is used to send the state of the connection between the PLC and the Nereda® Controller through the variable EmergencyOn:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><span class="bold"><strong>EmergencyOn = TRUE:</strong></span> the connection is lost.</p></li><li><p><span class="bold"><strong>EmergencyOn = FALSE:</strong></span> the connection is good.</p></li></ul></div>
+                                                                                                   </td></tr>
+<tr>
+<td>IEmergencySB</td>
+<td>
+<div class="informalfigure-float"><div class="informalfigure"><div class="mediaobject"><img src="Images/EmergencyOnPlug.PNG" width="176" height="105"></div></div></div></td>
+<td> 
+<p>This Adapter 'IEmergencyON' is used to send the state of the connection between the PLC and the Nereda® Controller through the variable EmergencyOn:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><span class="bold"><strong>EmergencyOn = TRUE:</strong></span> the connection is lost.</p></li><li><p><span class="bold"><strong>EmergencyOn = FALSE:</strong></span> the connection is good.</p></li></ul></div></td></tr>
+<tr>
+<td>IMode</td>
+<td>
+<div class="informalfigure-float"><div class="informalfigure"><div class="mediaobject"><img src="Images/EmergencyOnPlug.PNG" width="176" height="109"></div></div></div></td>
+<td> 
+<p>This Adapter 'IEmergencyON' is used to send the state of the connection between the PLC and the Nereda® Controller through the variable EmergencyOn:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><span class="bold"><strong>EmergencyOn = TRUE:</strong></span> the connection is lost.</p></li><li><p><span class="bold"><strong>EmergencyOn = FALSE:</strong></span> the connection is good.</p></li></ul></div></td></tr></tbody></table><div class="literallayout"><p><br>
+</p></div><div class="literallayout"><p><br>
+</p></div></strong></span><p> </p>
+  
+        <div class="table"><a name="id178611"></a><p class="title"><b>Table 738. Offline Parametrization</b></p><div class="table-contents">
+            
+            
+            <table summary="Offline Parametrization" border="1"><colgroup><col align="left"><col align="left"><col align="left"><col align="left"><col align="left"></colgroup><thead><tr><th align="left">Path</th><th align="left">Type</th><th align="left">Default Value</th><th align="left">Persisted</th><th align="left">PersistenceType</th><th align="left">Unit</th><th align="left">Description</th></tr></thead><tbody><tr><td align="left">HeartBeat.IThis_ForOPCUA.Watchdog</td><td align="left">TIME</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> TIME#0d_0h_0m_20s_0.0ms</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> False</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left"> </td></tr><tr><td align="left">HeartBeat.IThis_ForOPCUA.EmergFalhaCom</td><td align="left">BOOL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> TRUE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> False</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">Falha de comunicacao em Automatico: TRUE vai para Emergencia (padrao), FALSE para Desligado</td></tr><tr><td align="left">HeartBeat.TimeOutDisplayCounter</td><td align="left">SE.Nereda.COUNTER</td><td align="left"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left"> </td><td class="auto-generated"> </td><td class="auto-generated"> </td><td class="auto-generated"> </td><td class="auto-generated"> </td></tr><tr><td align="left">HeartBeat.TimeOutDisplayCounter.CounterDurationCalc.persistance</td><td align="left">Runtime.Standard.PERSISTENCE</td><td align="left"> </td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left"> </td><td class="auto-generated"> </td><td class="auto-generated"> </td><td class="auto-generated"> </td><td class="auto-generated"> </td></tr></tbody></table>
+        </div></div><br class="table-break"><p>
+            <img src="Images\locked.png">  : This value cannot be further changed by parent function blocks (type or instance)</p><p>
+            <img src="Images\overparametrization.png">  : This value has been modified and differs from initially configured value</p><p></p>
+        <div class="table"><a name="id178746"></a><p class="title"><b>Table 739. OPCUA</b></p><div class="table-contents">
+            
+            
+            <table summary="OPCUA" border="1"><colgroup><col align="left"><col align="left"><col align="left"><col align="left"><col align="left"><col align="left"><col align="left"></colgroup><thead><tr><th align="left">Path</th><th align="left">Browse Path</th><th align="left">Type</th><th align="left">Access Level</th><th align="left">Display Name</th><th align="left">Min. Sampl. Interval</th><th align="left">Description</th></tr></thead><tbody><tr><td align="left">HeartBeat.IThis_ForOPCUA.HeartBeat_PLC_to_Nereda</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IThis_ForOPCUA.HeartBeat_PLC_to_Nereda</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> HeartBeat_PLC_to_Nereda</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td></tr><tr><td align="left">HeartBeat.IThis_ForOPCUA.HeartBeat_Nereda_to_PLC</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IThis_ForOPCUA.HeartBeat_Nereda_to_PLC</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> HeartBeat_Nereda_to_PLC</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td></tr><tr><td align="left">HeartBeat.TimeOutDisplayCounter.IThis.CurrOperDur</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> TimeOutDisplayCounter.IThis.CurrOperDur</td><td align="left">Duration</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrOperDur</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td></tr><tr><td align="left">HeartBeat.TimeOutDisplayCounter.IThis.TotOperDur</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> TimeOutDisplayCounter.IThis.TotOperDur</td><td align="left">Duration</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> TotOperDur</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td></tr><tr><td align="left">HeartBeat.TimeOutDisplayCounter.IThis.ElapsedDur</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> TimeOutDisplayCounter.IThis.ElapsedDur</td><td align="left">Duration</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> ElapsedDur</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td></tr><tr><td align="left">HeartBeat.TimeOutDisplayCounter.IThis.Sp</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> TimeOutDisplayCounter.IThis.Sp</td><td align="left">Duration</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Sp</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td></tr><tr><td align="left">HeartBeat.TimeOutDisplayCounter.IThis.Pv</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> TimeOutDisplayCounter.IThis.Pv</td><td align="left">Duration</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Pv</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td></tr></tbody></table>
+        </div></div><br class="table-break"><p>
+            <img src="Images\locked.png">  : This value cannot be further changed by parent function blocks (type or instance)</p><p>
+            <img src="Images\overparametrization.png">  : This value has been modified and differs from initially configured value</p><p></p>
+    
+    
+
+    
+
+    <p></p><span class="linkbox"><p class="linkboxtitle">See also</p>
+    <p>
+    </p><p><a class="xref" href="HeartBeat.HeartBeat_HMI.sDefault.html" title="sDefault">sDefault</a></p><p>
+    </p><p><a class="xref" href="HeartBeat.HeartBeat_HMI.WatchdogConfiguration.html" title="WatchdogConfiguration">WatchdogConfiguration</a></p>
+    <p><a class="xref" href="index.html" title="Library: SE.Nereda">Library: SE.Nereda</a></p>
+    </span>
+</div></body></html>

@@ -4,7 +4,7 @@
   <Attribute Name="HMI.Alias" Value="" />
   <Attribute Name="Configuration.FB.IDCounter" Value="4" />
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Hidryco" Version="2.1" Author="Hidryco" Date="27/10/2026" Remarks="2.1: velocidade da IHM (STS_VELOCIDADE) em %% entre LSP e HSP lidos do inversor (symlinks stsFrequenciaMaxima HSP 3104, stsFrequenciaMinima LSP 3105); controle continua em Hz. 2.0: inversores ATV600 por Modbus TCP generico (MODBUSGENTCPS unit 248, planilha ATV600 V4.6) no lugar do ATVSpeedControlMbtcp: symlinks com os mesmos nomes em INT (stsVelocidade RFR 0,1 Hz, stsCorrente LCR, stsTensao UOP, stsPotencia OPR, stsTorque OTR, stsCodigoFalha LFT, stsRpm RFRD; stpVelocidade LFR 0,1 Hz; stsFalhaComunicacao = connStatusInt, 1 online), novo cmdPalavraInversor (CMD 8501, bit 7 reset), conversao no basicInversorATV600, cfgEscalaCorrente; com inversor usar cfgSaidaMax = 600 (60,0 Hz = 100 %). 1.9: velocidades da IHM/SCADA em Hz no CLP: STP_SAIDA_MANUAL, STS_VELOCIDADE e STS_VELOCIDADE_REFERENCIA. 1.8: tag STS_FALHA = falha ativa (motor em falha agora, sem memoria). 1.7: alarme de protecao termica sem reconhecimento (ACKTYPE 0) - aparece e some com a termica; velocidade na IHM em Hz (100 % = 60 Hz). 1.6: simbolos sBomba/sMotor/sSoprador - icones de termica e de falha de comunicacao piscam enquanto o alarme nao foi reconhecido. 1.5: symlink stsFalhaComunicacao recebe o ComStatus do ATV (TRUE = comunicacao OK), invertido por NOT para a logica; saida stsComunicacaoOK no CNF. 1.1: padrao SE.App2CommonProcess (supervisao por E_DELAY, horimetro/partidas pelo devMntCalc, escala com limites). 1.3: faceplates ISA-101. 1.4: horimetro com resolucao de 1 s (E_CYCLE + PERSISTENCE), falhas na lista de alarmes do EAE (ALARM_BIT, comunicacao = Warning), reset reconhece os alarmes, termica NF e velocidade manual 50 % por padrao. Campo por symlink ${PATH}: stsFalhaComunicacao, stsRemoto, stsLocal, stsLigado, stsProtecaoTermica, stsSemFalha (NF); saidas cmdAcionamento, stpVelocidade, cmdReset; inversor (cfgInversor=TRUE): stsVelocidade, stsCorrente, stsTensao, stsPotencia, stsFrequencia, stsTorque, stsCodigoFalha, stsRpm" />
+  <VersionInfo Organization="Hidryco" Version="2.2" Author="Hidryco" Date="12/11/2026" Remarks="2.2: cfgFalhaNA (contato de falha NA). 2.1: velocidade da IHM (STS_VELOCIDADE) em %% entre LSP e HSP lidos do inversor (symlinks stsFrequenciaMaxima HSP 3104, stsFrequenciaMinima LSP 3105); controle continua em Hz. 2.0: inversores ATV600 por Modbus TCP generico (MODBUSGENTCPS unit 248, planilha ATV600 V4.6) no lugar do ATVSpeedControlMbtcp: symlinks com os mesmos nomes em INT (stsVelocidade RFR 0,1 Hz, stsCorrente LCR, stsTensao UOP, stsPotencia OPR, stsTorque OTR, stsCodigoFalha LFT, stsRpm RFRD; stpVelocidade LFR 0,1 Hz; stsFalhaComunicacao = connStatusInt, 1 online), novo cmdPalavraInversor (CMD 8501, bit 7 reset), conversao no basicInversorATV600, cfgEscalaCorrente; com inversor usar cfgSaidaMax = 600 (60,0 Hz = 100 %). 1.9: velocidades da IHM/SCADA em Hz no CLP: STP_SAIDA_MANUAL, STS_VELOCIDADE e STS_VELOCIDADE_REFERENCIA. 1.8: tag STS_FALHA = falha ativa (motor em falha agora, sem memoria). 1.7: alarme de protecao termica sem reconhecimento (ACKTYPE 0) - aparece e some com a termica; velocidade na IHM em Hz (100 % = 60 Hz). 1.6: simbolos sBomba/sMotor/sSoprador - icones de termica e de falha de comunicacao piscam enquanto o alarme nao foi reconhecido. 1.5: symlink stsFalhaComunicacao recebe o ComStatus do ATV (TRUE = comunicacao OK), invertido por NOT para a logica; saida stsComunicacaoOK no CNF. 1.1: padrao SE.App2CommonProcess (supervisao por E_DELAY, horimetro/partidas pelo devMntCalc, escala com limites). 1.3: faceplates ISA-101. 1.4: horimetro com resolucao de 1 s (E_CYCLE + PERSISTENCE), falhas na lista de alarmes do EAE (ALARM_BIT, comunicacao = Warning), reset reconhece os alarmes, termica NF e velocidade manual 50 % por padrao. Campo por symlink ${PATH}: stsFalhaComunicacao, stsRemoto, stsLocal, stsLigado, stsProtecaoTermica, stsSemFalha (NF); saidas cmdAcionamento, stpVelocidade, cmdReset; inversor (cfgInversor=TRUE): stsVelocidade, stsCorrente, stsTensao, stsPotencia, stsFrequencia, stsTorque, stsCodigoFalha, stsRpm" />
   <InterfaceList>
     <EventInputs>
       <Event ID="21070E4B73BFECDC" Name="REQ" Comment="Atualizacao do processo">
@@ -52,6 +52,7 @@
       <VarDeclaration ID="39489193B7758574" Name="cfgSaidaMax" Type="REAL" InitialValue="100.0" Comment="Valor de campo equivalente a 100 % (ex.: 100 = %, 60 = Hz, 10000 = Sulzer 0,01 %)" />
       <VarDeclaration ID="D34C88BE7FFF3208" Name="cfgUsaTermica" Type="BOOL" InitialValue="TRUE" Comment="TRUE = supervisiona a protecao termica" />
       <VarDeclaration ID="66763E13F70A4420" Name="cfgTermicaNF" Type="BOOL" InitialValue="TRUE" Comment="TRUE = termica NF (FALSE no campo = atuada). Padrao NF (definido pelo usuario)" />
+      <VarDeclaration ID="7E2990CF98A28E53" Name="cfgFalhaNA" Type="BOOL" InitialValue="FALSE" Comment="TRUE = contato de falha do acionamento NA (TRUE no campo = falha), ligado no symlink stsSemFalha. Padrao FALSE = NF (SEM FALHA)" />
       <VarDeclaration ID="22F828987A86425B" Name="cfgEscalaCorrente" Type="REAL" InitialValue="0.1" Comment="Inversor: A por unidade do LCR (ATV600: 0,1 = LCR em 0,1 A; conferir no display do inversor)" />
       <VarDeclaration ID="3AD811F03C7B9855" Name="cfgUsaFalhaComunicacao" Type="BOOL" InitialValue="TRUE" Comment="TRUE = considera o bit de falha de comunicacao da remota" />
     </InputVars>
@@ -194,6 +195,7 @@
     <Input ID="39489193B7758574" Name="cfgSaidaMax" x="200" y="1268" Type="Data" />
     <Input ID="D34C88BE7FFF3208" Name="cfgUsaTermica" x="200" y="1328" Type="Data" />
     <Input ID="66763E13F70A4420" Name="cfgTermicaNF" x="200" y="1388" Type="Data" />
+    <Input ID="7E2990CF98A28E53" Name="cfgFalhaNA" x="200" y="1418" Type="Data" />
     <Input ID="3AD811F03C7B9855" Name="cfgUsaFalhaComunicacao" x="200" y="1448" Type="Data" />
     <Output ID="0F3C10FA447A4A49" Name="stsComunicacaoOK" x="11960" y="801.9999" Type="Data" />
     <Output ID="9D4F26EE27EDF5B9" Name="CNF" x="11968" y="196" Type="Event" />
@@ -853,6 +855,7 @@
       <Connection Source="$B52BCA011F6E34DF.E6B78B01125D043A" Destination="$912CF01C0DF81366.7B3A3676FBDE5F7A">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
+      <Connection Source="$7E2990CF98A28E53" Destination="$B52BCA011F6E34DF.BC9C4A0B25009270" />
     </DataConnections>
   </FBNetwork>
 </FBType>

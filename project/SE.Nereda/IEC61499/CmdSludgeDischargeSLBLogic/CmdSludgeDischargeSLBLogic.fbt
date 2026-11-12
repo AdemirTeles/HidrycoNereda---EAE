@@ -3,7 +3,7 @@
 <FBType GUID="5b0ec4da-6284-45c3-86c9-fe46ccc0e257" Name="CmdSludgeDischargeSLBLogic" Format="2.0" Comment="CAT Function Block Type" Namespace="SE.Nereda">
   <Attribute Name="HMI.Alias" Value="" />
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Schneider Electric" Version="7.0" Author="Claude/Hidryco" Date="10/1/2026" Remarks="Rev7 - Status das bombas para a IHM (CmdLogic.HMI_STS -&gt; IThis.PUMP_STS); Rev6 - Velocidade real das bombas (FB_SPEED/FbSpeedPv) para a logica (descida ate C2 antes de partir bomba nova); Rev5 - Valor do 49FT0004 para a logica (setpoint acompanha durante C2); Cmin (velocidade minima por bomba) e faixa do 49FT0004 para a logica; SpeedSpFlowSensorFail removido (falha do medidor tratada na logica); PumpSpeed direto ao SpeedGate/bombas; Rev4.1 - Velocidade reenviada a cada mudanca de comando das bombas e a cada 1 s (SpeedGate aberto); Rev4 - PID pela logica; Rev3.1 - SpeedGate" />
+  <VersionInfo Organization="Schneider Electric" Version="9.1" Author="Claude/Hidryco" Date="12/11/2026" Remarks="9.1 (12/11/2026): sem Autotune (pedido do usuario). Rev9 - PID unico do Buffer de Lodo no caminho antigo (tags OPC UA iguais): cfgPidMestre = TRUE no sobrenadante (CmdWaterDischargeSLB1), que roda o PID com o setpoint do comando que esta rodando (proprio ou PID_EXT do lodo) e publica PID_OUT; o lodo (escravo) deixa o PID proprio parado e usa PID_UPD. Rev7 - Status das bombas para a IHM (CmdLogic.HMI_STS -&gt; IThis.PUMP_STS); Rev6 - Velocidade real das bombas (FB_SPEED/FbSpeedPv) para a logica (descida ate C2 antes de partir bomba nova); Rev5 - Valor do 49FT0004 para a logica (setpoint acompanha durante C2); Cmin (velocidade minima por bomba) e faixa do 49FT0004 para a logica; SpeedSpFlowSensorFail removido (falha do medidor tratada na logica); PumpSpeed direto ao SpeedGate/bombas; Rev4.1 - Velocidade reenviada a cada mudanca de comando das bombas e a cada 1 s (SpeedGate aberto); Rev4 - PID pela logica; Rev3.1 - SpeedGate" />
   <InterfaceList>
     <EventInputs>
       <Event ID="A14398C211A20C12" Name="INIT" />
@@ -88,6 +88,13 @@
       <Event ID="024991AC33B2DF2D" Name="REQ_LEVEL" Comment="Nivel L do 49LT0001">
         <With Var="LowLevel" />
       </Event>
+      <Event ID="AFB9C6F9FCB45D2E" Name="PID_EXT" Comment="Mestre: pedido do comando escravo (lodo) ao PID unico">
+        <With Var="PidSpExt" />
+        <With Var="PidRunExt" />
+      </Event>
+      <Event ID="E88B64D259FB3584" Name="PID_UPD" Comment="Escravo: saida do PID do comando mestre (sobrenadante)">
+        <With Var="PidOut" />
+      </Event>
     </EventInputs>
     <EventOutputs>
       <Event ID="75C95E56F6162690" Name="INITO" />
@@ -108,6 +115,13 @@
       </Event>
       <Event ID="53236A8C814FFA4F" Name="ABORT_READY">
         <With Var="AbortReady" />
+      </Event>
+      <Event ID="476F11CD7FD6E01C" Name="PID_REQ" Comment="Pedido deste comando ao PID unico (setpoint so com as bombas rodando)">
+        <With Var="PidSp" />
+        <With Var="PidRun" />
+      </Event>
+      <Event ID="B94CEC5AA268C867" Name="PID_OUT" Comment="Mestre: saida do PID unico para o comando escravo">
+        <With Var="PidOutExt" />
       </Event>
     </EventOutputs>
     <InputVars>
@@ -150,6 +164,10 @@
       <VarDeclaration ID="22E149C0CC432615" Name="T_FlowLL" Type="TIME" Comment="Vazao LL por este tempo com bomba rodando = pausa (0 = desabilitado)" />
       <VarDeclaration ID="0F129CC61BF3460D" Name="LowLevel" Type="BOOL" Comment="Nivel L do 49LT0001 (pausa a descarga)" />
       <VarDeclaration ID="A13D37C90CBA8B2D" Name="Cmin" Type="REAL" Comment="Velocidade minima de cada bomba em servico [% velocidade]" />
+      <VarDeclaration ID="CE0B7E045A418943" Name="cfgPidMestre" Type="BOOL" InitialValue="FALSE" Comment="TRUE = este comando roda o PID unico do Buffer de Lodo (sobrenadante); FALSE = usa a saida do mestre (PID_UPD) e o PID proprio fica parado" />
+      <VarDeclaration ID="65ADEC4DC0DB750E" Name="PidSpExt" Type="REAL" Comment="Mestre: setpoint do comando escravo [m3/h]" />
+      <VarDeclaration ID="A7C344B105221145" Name="PidRunExt" Type="BOOL" Comment="Mestre: bombas do comando escravo rodando" />
+      <VarDeclaration ID="F291A3F009EA7ADC" Name="PidOut" Type="VTQREAL" Comment="Escravo: saida do PID do mestre = demanda [%]" />
     </InputVars>
     <OutputVars>
       <VarDeclaration ID="37ED00F2D74A1977" Name="CmdValveTank1" Type="BOOL" />
@@ -160,6 +178,9 @@
       <VarDeclaration ID="A0873A10F64BE3F2" Name="StartReady" Type="BOOL" />
       <VarDeclaration ID="3E5CE56C6D257D11" Name="StopReady" Type="BOOL" />
       <VarDeclaration ID="3EC99F3974DE065F" Name="AbortReady" Type="BOOL" />
+      <VarDeclaration ID="9BD7B719366462A5" Name="PidSp" Type="REAL" Comment="Setpoint efetivo deste comando para o PID unico [m3/h]" />
+      <VarDeclaration ID="02D251287C1A5264" Name="PidRun" Type="BOOL" Comment="Bombas deste comando rodando" />
+      <VarDeclaration ID="859BA42BF48FF61F" Name="PidOutExt" Type="VTQREAL" Comment="Mestre: saida do PID unico" />
     </OutputVars>
     <Sockets>
       <AdapterDeclaration ID="F89AF997F6D64559" Name="FlowMeasurement_1" Type="IAnalog" Namespace="SE.App2Base" x="220" y="5280" />
@@ -269,8 +290,20 @@
     <FB ID="4B3B9D3B03125C65" Name="TickCycle" Type="E_CYCLE" x="1500" y="900" Namespace="IEC61499.Standard">
       <Parameter Name="$DT" Value="T#1s" />
     </FB>
+    <FB ID="48FA00015D8025F0" Name="PidSpGate" Type="E_PERMIT" x="2700" y="9800" Namespace="IEC61499.Standard" />
+    <FB ID="29F02529AB597849" Name="PidReqMerge" Type="E_MERGE" x="3300" y="9800" Namespace="IEC61499.Standard" />
+    <FB ID="C791293F7B37E065" Name="PidSelSp" Type="DS_SELECTX_241474DAEB4FE6DF6" x="3900" y="9800" Namespace="SE.Nereda">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNTX:=3;CNTY:=1;DI${CNTX,_,CNTY}:REAL" />
+    </FB>
+    <FB ID="D5FF6DAE181292E7" Name="PidSelRun" Type="DS_SELECTX_2536758B411A6CE51" x="4500" y="9800" Namespace="SE.Nereda">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNTX:=2;CNTY:=1;DI${CNTX,_,CNTY}:BOOL" />
+    </FB>
+    <FB ID="F3B16C9C1E947FE9" Name="PidMgrGate" Type="E_PERMIT" x="5100" y="9800" Namespace="IEC61499.Standard" />
+    <FB ID="0C567CDCFFAAB51B" Name="PidIntGate" Type="E_PERMIT" x="2700" y="10600" Namespace="IEC61499.Standard" />
+    <FB ID="9D3233268D5A4A32" Name="PidOutSel" Type="DS_SELECTX_241474DAEB4FE6DF6" x="3300" y="10600" Namespace="SE.Nereda">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNTX:=3;CNTY:=1;DI${CNTX,_,CNTY}:REAL" />
+    </FB>
     <FB ID="439FB8F923A1C107" Name="SpeedGate" Type="E_PERMIT" x="5200" y="4940" Namespace="IEC61499.Standard" />
-    <FB ID="B32BDA429F8D08D9" Name="Autotune1" Type="Autotune" x="3980" y="5040" Namespace="SE.App2CommonProcess" />
     <Input ID="393B564B9DA2DBA7" Name="REQ_PHASE" x="600" y="1360" Type="Event" />
     <Input ID="C1328A46AF65D0A6" Name="Ready" x="600" y="1420" Type="Data" />
     <Input ID="B6C61BC7391E4616" Name="Starting" x="600" y="1480" Type="Data" />
@@ -419,6 +452,17 @@
     <Output ID="A0873A10F64BE3F2" Name="StartReady" x="5680" y="558" Type="Data" />
     <Output ID="3E5CE56C6D257D11" Name="StopReady" x="5680" y="618" Type="Data" />
     <Output ID="3EC99F3974DE065F" Name="AbortReady" x="5680" y="677.9999" Type="Data" />
+    <Input ID="CE0B7E045A418943" Name="cfgPidMestre" x="600" y="9800" Type="Data" />
+    <Input ID="AFB9C6F9FCB45D2E" Name="PID_EXT" x="600" y="9860" Type="Event" />
+    <Input ID="65ADEC4DC0DB750E" Name="PidSpExt" x="600" y="9920" Type="Data" />
+    <Input ID="A7C344B105221145" Name="PidRunExt" x="600" y="9980" Type="Data" />
+    <Input ID="E88B64D259FB3584" Name="PID_UPD" x="600" y="10600" Type="Event" />
+    <Input ID="F291A3F009EA7ADC" Name="PidOut" x="600" y="10660" Type="Data" />
+    <Output ID="476F11CD7FD6E01C" Name="PID_REQ" x="5680" y="9800" Type="Event" />
+    <Output ID="9BD7B719366462A5" Name="PidSp" x="5680" y="9860" Type="Data" />
+    <Output ID="02D251287C1A5264" Name="PidRun" x="5680" y="9920" Type="Data" />
+    <Output ID="B94CEC5AA268C867" Name="PID_OUT" x="5680" y="10600" Type="Event" />
+    <Output ID="859BA42BF48FF61F" Name="PidOutExt" x="5680" y="10660" Type="Data" />
     <EventConnections>
       <Connection Source="$5E57AC1E5187B5EA.CNF1" Destination="$C8E0B42A51574B97.REQ1" dx1="130.021">
         <AvoidsNodes>false</AvoidsNodes>
@@ -730,7 +774,6 @@
       <Connection Source="$669106E7B3FBF6FC.CHD" Destination="$4B99F90E82BDCEFA.REQ">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$4B99F90E82BDCEFA.CNF" Destination="$356753C86B428E61.REQ" dx1="747.4792" />
       <Connection Source="$A14398C211A20C12" Destination="$891FF4F323402185.2F65FBA3287455C1" dx1="1040.708">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
@@ -778,7 +821,6 @@
       <Connection Source="$4B3B9D3B03125C65.EO" Destination="$72901911AC298791.2AFCCC4D006C5A58" dx1="48.5" dx2="290" dy="350" />
       <Connection Source="$971F31261154ACD5" Destination="$72901911AC298791.888C7FFA93152C07" dx1="40.89587" />
       <Connection Source="$65CF25B02F3B6C57" Destination="$72901911AC298791.888C7FFA93152C07" dx1="40" dx2="1490" dy="-38" />
-      <Connection Source="$72901911AC298791.948C0A3C8D4A59E4" Destination="$356753C86B428E61.REQ" dx1="600" dx2="70" dy="1520" />
       <Connection Source="$024991AC33B2DF2D" Destination="$72901911AC298791.19EED5631A4ADE11" dx1="293.1667" dx2="1490" dy="-218" />
       <Connection Source="$F89AF997F6D64559.REQ_STATUS" Destination="$50F02C4F22414254.REQ" dx1="75.16675">
         <AvoidsNodes>false</AvoidsNodes>
@@ -842,43 +884,6 @@
             <Y>1070</Y>
           </Points>
         </Points>
-      </Connection>
-      <Connection Source="$CDE6639853DBE923.CNF" Destination="$72901911AC298791.D9E0400EF0DD670E">
-        <Points>
-          <Points>
-            <X>1323.1875</X>
-            <Y>1260</Y>
-          </Points>
-          <Points>
-            <X>1237.5</X>
-            <Y>1260</Y>
-          </Points>
-          <Points>
-            <X>1237.5</X>
-            <Y>1347.5</Y>
-          </Points>
-          <Points>
-            <X>512.5</X>
-            <Y>1347.5</Y>
-          </Points>
-          <Points>
-            <X>512.5</X>
-            <Y>612.5</Y>
-          </Points>
-          <Points>
-            <X>277.5</X>
-            <Y>612.5</Y>
-          </Points>
-          <Points>
-            <X>277.5</X>
-            <Y>585</Y>
-          </Points>
-          <Points>
-            <X>520</X>
-            <Y>585</Y>
-          </Points>
-        </Points>
-        <AvoidsNodes>false</AvoidsNodes>
       </Connection>
       <Connection Source="$72901911AC298791.6F9F08BA58B8009D" Destination="$439FB8F923A1C107.EI" dx1="921.1875" />
       <Connection Source="$4B99F90E82BDCEFA.CNF" Destination="$439FB8F923A1C107.EI">
@@ -1054,6 +1059,21 @@
         </Points>
       </Connection>
       <Connection Source="$72901911AC298791.5CD64F6ACD94781F" Destination="$891FF4F323402185.23D8CA8AFE208019" dx1="821.1875" dx2="449.9998" dy="-1390" />
+      <Connection Source="$72901911AC298791.948C0A3C8D4A59E4" Destination="$48FA00015D8025F0.EI" />
+      <Connection Source="$48FA00015D8025F0.EO" Destination="$29F02529AB597849.EI1" />
+      <Connection Source="$4B99F90E82BDCEFA.CNF" Destination="$29F02529AB597849.EI2" />
+      <Connection Source="$29F02529AB597849.EO" Destination="$476F11CD7FD6E01C" />
+      <Connection Source="$29F02529AB597849.EO" Destination="$C791293F7B37E065.REQ1" />
+      <Connection Source="$AFB9C6F9FCB45D2E" Destination="$C791293F7B37E065.REQ2" />
+      <Connection Source="$C791293F7B37E065.CNF1" Destination="$D5FF6DAE181292E7.REQ1" />
+      <Connection Source="$C791293F7B37E065.CNF2" Destination="$D5FF6DAE181292E7.REQ2" />
+      <Connection Source="$D5FF6DAE181292E7.IND" Destination="$F3B16C9C1E947FE9.EI" />
+      <Connection Source="$F3B16C9C1E947FE9.EO" Destination="$356753C86B428E61.REQ" />
+      <Connection Source="$CDE6639853DBE923.CNF" Destination="$0C567CDCFFAAB51B.EI" />
+      <Connection Source="$0C567CDCFFAAB51B.EO" Destination="$9D3233268D5A4A32.REQ1" />
+      <Connection Source="$E88B64D259FB3584" Destination="$9D3233268D5A4A32.REQ2" />
+      <Connection Source="$9D3233268D5A4A32.IND" Destination="$72901911AC298791.D9E0400EF0DD670E" />
+      <Connection Source="$CDE6639853DBE923.CNF" Destination="$B94CEC5AA268C867" />
     </EventConnections>
     <DataConnections>
       <Connection Source="$27CE4ADED7F6BD9F.Output" Destination="$2C35B14C59730EA7.4573FC8F228EB71D" dx1="150" />
@@ -1443,7 +1463,6 @@
       <Connection Source="$ABD210CD48F90617.Output" Destination="$4B99F90E82BDCEFA.IN3">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$4B99F90E82BDCEFA.OUT" Destination="$356753C86B428E61.RunPID" dx1="747.4792" />
       <Connection Source="$72901911AC298791.DB4AE032AE08C110" Destination="$891FF4F323402185.930FFC0215E780EF">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
@@ -1505,7 +1524,6 @@
       <Connection Source="$443B51A39FD2F517" Destination="$72901911AC298791.097CEF7D3109D4BE" dx1="312.75" dx2="1010" dy="1962" />
       <Connection Source="$26D3C3E31EC21607" Destination="$72901911AC298791.37F2A16CD48B9A9D" dx1="229.7709" dx2="1030" dy="1902" />
       <Connection Source="$22E149C0CC432615" Destination="$72901911AC298791.E9499B195D781C20" dx1="229.5" dx2="1050" dy="1842" />
-      <Connection Source="$72901911AC298791.CFFB125A7B539DE2" Destination="$356753C86B428E61.Setpoint" dx1="360" dx2="110" dy="1010" />
       <Connection Source="$0F129CC61BF3460D" Destination="$72901911AC298791.E364687AE6285E4B" dx1="199.7292" dx2="1070" dy="1462" />
       <Connection Source="$50F02C4F22414254.LoLoAlarm" Destination="$72901911AC298791.CF4621EC925C43E9" dx1="70">
         <AvoidsNodes>false</AvoidsNodes>
@@ -1540,35 +1558,6 @@
             <Y>1295</Y>
           </Points>
         </Points>
-      </Connection>
-      <Connection Source="$CDE6639853DBE923.Out" Destination="$72901911AC298791.A7D276693781888D">
-        <Points>
-          <Points>
-            <X>1323.1875</X>
-            <Y>1325</Y>
-          </Points>
-          <Points>
-            <X>1242.5</X>
-            <Y>1325</Y>
-          </Points>
-          <Points>
-            <X>1242.5</X>
-            <Y>1347.5</Y>
-          </Points>
-          <Points>
-            <X>477.5</X>
-            <Y>1347.5</Y>
-          </Points>
-          <Points>
-            <X>477.5</X>
-            <Y>1220</Y>
-          </Points>
-          <Points>
-            <X>520</X>
-            <Y>1220</Y>
-          </Points>
-        </Points>
-        <AvoidsNodes>false</AvoidsNodes>
       </Connection>
       <Connection Source="$A13D37C90CBA8B2D" Destination="$72901911AC298791.EB5C203C0888EDB6" dx1="47.54169" dx2="1510" dy="42" />
       <Connection Source="$F89AF997F6D64559.Value" Destination="$72901911AC298791.AF76E8DD0A107DA1" dx1="95.16675" />
@@ -1943,6 +1932,21 @@
         </Points>
       </Connection>
       <Connection Source="$72901911AC298791.E05A148A6452F547" Destination="$891FF4F323402185.1E133DD0E8AC3B58" dx1="770" dx2="40" dy="-1120" />
+      <Connection Source="$4B99F90E82BDCEFA.OUT" Destination="$48FA00015D8025F0.PERMIT" />
+      <Connection Source="$72901911AC298791.CFFB125A7B539DE2" Destination="$9BD7B719366462A5" />
+      <Connection Source="$4B99F90E82BDCEFA.OUT" Destination="$02D251287C1A5264" />
+      <Connection Source="$72901911AC298791.CFFB125A7B539DE2" Destination="$C791293F7B37E065.DI1_1" />
+      <Connection Source="$65ADEC4DC0DB750E" Destination="$C791293F7B37E065.DI2_1" />
+      <Connection Source="$4B99F90E82BDCEFA.OUT" Destination="$D5FF6DAE181292E7.DI1_1" />
+      <Connection Source="$A7C344B105221145" Destination="$D5FF6DAE181292E7.DI2_1" />
+      <Connection Source="$C791293F7B37E065.OUT1" Destination="$356753C86B428E61.Setpoint" />
+      <Connection Source="$D5FF6DAE181292E7.OUT1" Destination="$356753C86B428E61.RunPID" />
+      <Connection Source="$CE0B7E045A418943" Destination="$F3B16C9C1E947FE9.PERMIT" />
+      <Connection Source="$CE0B7E045A418943" Destination="$0C567CDCFFAAB51B.PERMIT" />
+      <Connection Source="$CDE6639853DBE923.Out" Destination="$9D3233268D5A4A32.DI1_1" />
+      <Connection Source="$F291A3F009EA7ADC" Destination="$9D3233268D5A4A32.DI2_1" />
+      <Connection Source="$9D3233268D5A4A32.OUT1" Destination="$72901911AC298791.A7D276693781888D" />
+      <Connection Source="$CDE6639853DBE923.Out" Destination="$859BA42BF48FF61F" />
     </DataConnections>
     <AdapterConnections>
       <Connection Source="$356753C86B428E61.FACD1DD4E791A86A" Destination="$CDE6639853DBE923.ISc" dx1="47.04199" />
@@ -1950,7 +1954,6 @@
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
         <AvoidsNodes>false</AvoidsNodes>
       </Connection>
-      <Connection Source="$B32BDA429F8D08D9.IAutotune" Destination="$CDE6639853DBE923.IAutotune" dx1="42.854" dx2="510" dy="90" />
     </AdapterConnections>
   </FBNetwork>
 </FBType>

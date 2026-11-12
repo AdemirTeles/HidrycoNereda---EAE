@@ -35,7 +35,7 @@ namespace SE.Nereda.Symbols.HeartBeat
 			// 
 			this.label2.AngleIgnore = true;
 			this.label2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-			this.label2.Bounds = new NxtControl.Drawing.RectF(((float)(185D)), ((float)(135D)), ((float)(158D)), ((float)(42D)));
+			this.label2.Bounds = new NxtControl.Drawing.RectF(((float)(189D)), ((float)(134D)), ((float)(152D)), ((float)(36D)));
 			this.label2.Brush = new NxtControl.Drawing.Brush("LabelBrush");
 			this.label2.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.label2.FontScale = true;

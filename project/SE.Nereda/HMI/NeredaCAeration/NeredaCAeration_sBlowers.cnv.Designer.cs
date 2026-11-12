@@ -44,7 +44,6 @@ namespace SE.Nereda.Symbols.NeredaCAeration
 			this.BL002 = new NxtControl.GuiFramework.FreeText();
 			this.freeText1 = new NxtControl.GuiFramework.FreeText();
 			this.freeText2 = new NxtControl.GuiFramework.FreeText();
-			this.Logic = new SE.Nereda.Symbols.CAerationLogic.sSettingsBtn();
 			this.line1 = new NxtControl.GuiFramework.Line();
 			this.polygon1 = new NxtControl.GuiFramework.Polygon();
 			this.freeText3 = new NxtControl.GuiFramework.FreeText();
@@ -268,15 +267,6 @@ namespace SE.Nereda.Symbols.NeredaCAeration
 			this.freeText2.Name = "freeText2";
 			this.freeText2.Text = "V4604";
 			// 
-			// Logic
-			// 
-			this.Logic.BeginInit();
-			this.Logic.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 244D, 268D);
-			this.Logic.Name = "Logic";
-			this.Logic.SecurityToken = ((uint)(4294967295u));
-			this.Logic.TagName = "Logic";
-			this.Logic.EndInit();
-			// 
 			// line1
 			// 
 			this.line1.EndPoint = new NxtControl.Drawing.PointF(116D, 268D);
@@ -300,9 +290,9 @@ namespace SE.Nereda.Symbols.NeredaCAeration
 			// 
 			this.freeText3.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.freeText3.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-			this.freeText3.Location = new NxtControl.Drawing.PointF(120D, 308D);
+			this.freeText3.Location = new NxtControl.Drawing.PointF(120D, 280D);
 			this.freeText3.Name = "freeText3";
-			this.freeText3.Text = "Coletor 1";
+			this.freeText3.Text = "Coletor 1\r\nReator 1";
 			// 
 			// line2
 			// 
@@ -327,9 +317,9 @@ namespace SE.Nereda.Symbols.NeredaCAeration
 			// 
 			this.freeText4.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.freeText4.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-			this.freeText4.Location = new NxtControl.Drawing.PointF(516D, 308D);
+			this.freeText4.Location = new NxtControl.Drawing.PointF(516D, 280D);
 			this.freeText4.Name = "freeText4";
-			this.freeText4.Text = "Coletor 2";
+			this.freeText4.Text = "Coletor 2\r\nReator 2";
 			// 
 			// sDefault4
 			// 
@@ -481,7 +471,6 @@ namespace SE.Nereda.Symbols.NeredaCAeration
 			this.BL002,
 			this.freeText1,
 			this.freeText2,
-			this.Logic,
 			this.line1,
 			this.polygon1,
 			this.freeText3,
@@ -518,7 +507,6 @@ namespace SE.Nereda.Symbols.NeredaCAeration
 		private NxtControl.GuiFramework.FreeText BL002;
 		private NxtControl.GuiFramework.FreeText freeText1;
 		private NxtControl.GuiFramework.FreeText freeText2;
-		private SE.Nereda.Symbols.CAerationLogic.sSettingsBtn Logic;
 		private NxtControl.GuiFramework.Line line1;
 		private NxtControl.GuiFramework.Polygon polygon1;
 		private NxtControl.GuiFramework.FreeText freeText3;

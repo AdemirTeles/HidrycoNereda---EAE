@@ -1,0 +1,1738 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>UCT_PreTratamento</title><link rel="stylesheet" href="css/project.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.74.0"><meta name="description" content="Summary"><link rel="home" href="index.html" title="Project: Hidryco.HidrycoLib"><link rel="up" href="CATs.html" title="Composite Automation Types"><link rel="prev" href="UCT_Equipamento.UCT_Equipamento_HMI.sRaspador.html" title="sRaspador"><link rel="next" href="UCT_PreTratamento.UCT_PreTratamento_HMI.sDefault.html" title="sDefault"></head><body><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="UCT_PreTratamento"></a>UCT_PreTratamento</h2></div><div><h2 class="subtitle" style="clear: both">Type: CAT Library: Hidryco.HidrycoLib</h2></div><div><div class="author"><h3 class="author"><span class="firstname">Firstname</span> <span class="surname">Surname</span></h3><code class="email"><a class="email" href="mailto:name@company.com">name@company.com</a></code></div></div><div><div class="abstract"><p class="title"><b>Abstract</b></p><p>Summary</p></div></div></div></div><div class="figure"><a name="id134904"></a><p class="title"><b>Figure 53. Interface</b></p><div class="figure-contents"><div class="mediaobject"><img src="UCT_PreTratamento.fbt.gif" alt="Interface"></div></div></div><br class="figure-break"><div class="table"><a name="id134909"></a><p class="title"><b>Table 161. Event Interface</b></p><div class="table-contents"><table summary="Event Interface" border="1"><colgroup><col align="left"><col align="left"><col align="left"></colgroup><thead><tr><th align="left">Name</th><th align="left">With</th><th align="left">Description</th></tr></thead><tbody><tr class="titlerow"><td colspan="3" align="left">Event Inputs</td></tr><tr><td align="left">REQ</td><td align="left">stsEmergencia; geradorConectado; geradorHabilita; stsGerador; antHabilitada; antDisponivel</td><td align="left">Atualizacao do processo</td></tr><tr><td align="left">E_RESET_FALHAS</td><td align="left">cmdResetFalhas</td><td align="left">Reset pelo processo (UCT e bomba de gordura) com cmdResetFalhas = TRUE</td></tr><tr class="titlerow"><td colspan="3" align="left">Event Outputs</td></tr><tr><td align="left">CNF</td><td align="left">stsDisponivel; stsAlgumaHabilitada; stsAlgumaDisponivel; stsBloqueioEEE; stsFalhaComunicacao; stsEmergenciaUCT; stsNivelAltoGordura; stsAlarme; stsBombaGorduraLigada</td><td align="left">Disponibilidade, cadeia das UCTs e estados (so na mudanca)</td></tr></tbody></table></div></div><br class="table-break"><div class="table"><a name="id134937"></a><p class="title"><b>Table 162. Data Interface</b></p><div class="table-contents"><table summary="Data Interface" border="1"><colgroup><col align="left"><col align="left"><col align="left"><col align="left"></colgroup><thead><tr><th align="left">Name</th><th align="left">Type</th><th align="left">Init Value</th><th align="left">Description</th></tr></thead><tbody><tr class="titlerow"><td colspan="4" align="left">Inputs</td></tr><tr><td align="left">stsEmergencia</td><td align="left">BOOL</td><td align="left"> </td><td align="left">Emergencia pelo processo: retira o comando da bomba de gordura e fecha a valvula de lavagem</td></tr><tr><td align="left">geradorConectado</td><td align="left">BOOL</td><td align="left">TRUE</td><td align="left">A bomba de gordura pode ser alimentada pelo gerador</td></tr><tr><td align="left">geradorHabilita</td><td align="left">BOOL</td><td align="left"> </td><td align="left">Bomba de gordura liberada para operar com a planta no gerador (HAB_UCT_200_0x do CAT Subestacao)</td></tr><tr><td align="left">stsGerador</td><td align="left">BOOL</td><td align="left"> </td><td align="left">Planta alimentada pelo gerador</td></tr><tr><td align="left">antHabilitada</td><td align="left">BOOL</td><td align="left"> </td><td align="left">Cadeia: alguma UCT anterior habilitada (stsAlgumaHabilitada da UCT anterior)</td></tr><tr><td align="left">antDisponivel</td><td align="left">BOOL</td><td align="left"> </td><td align="left">Cadeia: alguma UCT anterior disponivel (stsAlgumaDisponivel da UCT anterior)</td></tr><tr><td align="left">cmdResetFalhas</td><td align="left">BOOL</td><td align="left"> </td><td align="left">TRUE = reset (com o evento E_RESET_FALHAS)</td></tr><tr><td align="left">cfgInstalada</td><td align="left">BOOL</td><td align="left">TRUE</td><td align="left">FALSE = UCT ainda nao existe em campo (sem comunicacao, sem alarmes, fora do bloqueio da EEE)</td></tr><tr><td align="left">cfgTempoCom</td><td align="left">UINT</td><td align="left">10</td><td align="left">Tempo (s) sem comunicacao com a UCT para confirmar a falha</td></tr><tr><td align="left">cfgTempoReset</td><td align="left">UINT</td><td align="left">2</td><td align="left">Tempo (s) do pulso de reset escrito na UCT (40005.3)</td></tr><tr class="titlerow"><td colspan="4" align="left">Outputs</td></tr><tr><td align="left">stsDisponivel</td><td align="left">BOOL</td><td align="left"> </td><td align="left">UCT disponivel (saida do AND)</td></tr><tr><td align="left">stsAlgumaHabilitada</td><td align="left">BOOL</td><td align="left"> </td><td align="left">Esta UCT ou alguma anterior habilitada</td></tr><tr><td align="left">stsAlgumaDisponivel</td><td align="left">BOOL</td><td align="left"> </td><td align="left">Esta UCT ou alguma anterior disponivel</td></tr><tr><td align="left">stsBloqueioEEE</td><td align="left">BOOL</td><td align="left"> </td><td align="left">Bloqueio do automatico da EEE Bruto: ha UCT habilitada e nenhuma disponivel</td></tr><tr><td align="left">stsFalhaComunicacao</td><td align="left">BOOL</td><td align="left"> </td><td align="left">Falha de comunicacao com a UCT</td></tr><tr><td align="left">stsEmergenciaUCT</td><td align="left">BOOL</td><td align="left"> </td><td align="left">Emergencia acionada na UCT</td></tr><tr><td align="left">stsNivelAltoGordura</td><td align="left">BOOL</td><td align="left"> </td><td align="left">Nivel alto do tanque de gordura (UCT)</td></tr><tr><td align="left">stsAlarme</td><td align="left">BOOL</td><td align="left"> </td><td align="left">Algum alarme da UCT</td></tr><tr><td align="left">stsBombaGorduraLigada</td><td align="left">BOOL</td><td align="left"> </td><td align="left">Bomba de gordura ligada</td></tr></tbody></table></div></div><br class="table-break"><p>
+  </p><div class="table"><a name="id135051"></a><p class="title"><b>Table 163. Offline Parametrization</b></p><div class="table-contents"><table summary="Offline Parametrization" border="1"><colgroup><col align="left"><col align="left"><col align="left"><col align="left"><col align="left"></colgroup><thead><tr><th align="left">Path</th><th align="left">Type</th><th align="left">Default Value</th><th align="left">Persisted</th><th align="left">PersistenceType</th><th align="left">Unit</th><th align="left">Description</th></tr></thead><tbody><tr><td align="left">UCT_PreTratamento.IThis.STP_HABILITADA</td><td align="left">BOOL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> TRUE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> False</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">UCT habilitada no bloqueio da EEE Bruto (desabilitada nao conta)</td></tr><tr><td align="left">UCT_PreTratamento.IThis.STP_TEMPO_PRE_LAVAGEM</td><td align="left">UINT</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 10</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> False</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">Tempo (s) com a valvula de lavagem aberta antes de ligar a bomba de gordura (0 = liga junto)</td></tr><tr><td align="left">UCT_PreTratamento.IThis.STP_TEMPO_VALVULA_APOS_PARTIDA</td><td align="left">UINT</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> False</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">Tempo (s) que a valvula fica aberta depois que a bomba liga (0 = fecha na partida)</td></tr><tr><td align="left">UCT_PreTratamento.IThis.STP_TEMPO_DESLIGA_BOMBA</td><td align="left">UINT</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 60</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> False</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">Tempo (s) que a bomba de gordura continua ligada depois que o nivel alto do tanque abaixa</td></tr><tr><td align="left">UCT_PreTratamento.IThis.STP_VELOCIDADE_BOMBA_GORDURA</td><td align="left">REAL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 60.0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> False</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">Velocidade da bomba de gordura em automatico (Hz)</td></tr><tr><td align="left">UCT_PreTratamento.BombaGordura</td><td align="left">Hidryco.HidrycoLib.Motor_Generico</td><td align="left"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left"> </td><td class="auto-generated"> </td><td class="auto-generated"> </td><td class="auto-generated"> </td><td class="auto-generated"> </td></tr><tr><td align="left">UCT_PreTratamento.BombaGordura.IThis.STP_FALHA_LIGAMENTO</td><td align="left">UINT</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 10</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> False</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">Tempo maximo para confirmar partida (s). 0 = desabilitado</td></tr><tr><td align="left">UCT_PreTratamento.BombaGordura.IThis.STP_FALHA_DESLIGAMENTO</td><td align="left">UINT</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 10</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> False</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">Tempo maximo para confirmar parada (s). 0 = desabilitado</td></tr><tr><td align="left">UCT_PreTratamento.BombaGordura.IThis.STP_SAIDA_MANUAL</td><td align="left">REAL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 30.0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> False</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">Velocidade em manual (Hz)</td></tr><tr><td align="left">UCT_PreTratamento.BombaGordura.PersHorimetro</td><td align="left">Runtime.Standard.PERSISTENCE</td><td align="left"> </td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left"> </td><td class="auto-generated"> </td><td class="auto-generated"> </td><td class="auto-generated"> </td><td class="auto-generated"> </td></tr><tr><td align="left">UCT_PreTratamento.BombaGordura.Manutencao.persistance</td><td align="left">Runtime.Standard.PERSISTENCE</td><td align="left"> </td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left"> </td><td class="auto-generated"> </td><td class="auto-generated"> </td><td class="auto-generated"> </td><td class="auto-generated"> </td></tr></tbody></table></div></div><br class="table-break"><p>
+            <img src="Images\locked.png">  : This value cannot be further changed by parent function blocks (type or instance)</p><p>
+            <img src="Images\overparametrization.png">  : This value has been modified and differs from initially configured value</p><p></p><div class="table"><a name="id135435"></a><p class="title"><b>Table 164. OPCUA</b></p><div class="table-contents"><table summary="OPCUA" border="1"><colgroup><col align="left"><col align="left"><col align="left"><col align="left"><col align="left"><col align="left"><col align="left"></colgroup><thead><tr><th align="left">Path</th><th align="left">Browse Path</th><th align="left">Type</th><th align="left">Access Level</th><th align="left">Display Name</th><th align="left">Min. Sampl. Interval</th><th align="left">Description</th></tr></thead><tbody><tr><td align="left">UCT_PreTratamento.IThis.STS_EMERGENCIA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IThis.STS_EMERGENCIA</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_EMERGENCIA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Emergencia acionada na UCT</td></tr><tr><td align="left">UCT_PreTratamento.IThis.STS_NIVEL_BAIXO_PENEIRA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IThis.STS_NIVEL_BAIXO_PENEIRA</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_NIVEL_BAIXO_PENEIRA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Nivel baixo da peneira</td></tr><tr><td align="left">UCT_PreTratamento.IThis.STS_NIVEL_ALTO_PENEIRA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IThis.STS_NIVEL_ALTO_PENEIRA</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_NIVEL_ALTO_PENEIRA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Nivel alto da peneira</td></tr><tr><td align="left">UCT_PreTratamento.IThis.STS_NIVEL_BAIXO_TANQUE_AGUA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IThis.STS_NIVEL_BAIXO_TANQUE_AGUA</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_NIVEL_BAIXO_TANQUE_AGUA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Nivel baixo do tanque de agua</td></tr><tr><td align="left">UCT_PreTratamento.IThis.STS_NIVEL_ALTO_TANQUE_GORDURA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IThis.STS_NIVEL_ALTO_TANQUE_GORDURA</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_NIVEL_ALTO_TANQUE_GORDURA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Nivel alto do tanque de gordura</td></tr><tr><td align="left">UCT_PreTratamento.IThis.STS_NIVEL_PENEIRA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IThis.STS_NIVEL_PENEIRA</td><td align="left">Float</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_NIVEL_PENEIRA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Nivel da peneira (%)</td></tr><tr><td align="left">UCT_PreTratamento.IThis.STS_FALHA_COMUNICACAO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IThis.STS_FALHA_COMUNICACAO</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_FALHA_COMUNICACAO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Falha de comunicacao com a UCT</td></tr><tr><td align="left">UCT_PreTratamento.IThis.STS_DISPONIVEL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IThis.STS_DISPONIVEL</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_DISPONIVEL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> UCT disponivel</td></tr><tr><td align="left">UCT_PreTratamento.IThis.STS_HABILITADA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IThis.STS_HABILITADA</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_HABILITADA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> UCT instalada e habilitada</td></tr><tr><td align="left">UCT_PreTratamento.IThis.STS_BLOQUEIO_EEE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IThis.STS_BLOQUEIO_EEE</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_BLOQUEIO_EEE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Bloqueio do automatico da EEE Bruto (cadeia das UCTs)</td></tr><tr><td align="left">UCT_PreTratamento.IThis.STS_ALARME</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IThis.STS_ALARME</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_ALARME</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Algum alarme da UCT</td></tr><tr><td align="left">UCT_PreTratamento.IThis.STS_AUTOMATICO_PENEIRA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IThis.STS_AUTOMATICO_PENEIRA</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_AUTOMATICO_PENEIRA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Subsistema peneira e higienização em automatico</td></tr><tr><td align="left">UCT_PreTratamento.IThis.STS_AUTOMATICO_ROSCAS</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IThis.STS_AUTOMATICO_ROSCAS</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_AUTOMATICO_ROSCAS</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Subsistema roscas em automatico</td></tr><tr><td align="left">UCT_PreTratamento.IThis.STS_AUTOMATICO_RASPCOMP</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IThis.STS_AUTOMATICO_RASPCOMP</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_AUTOMATICO_RASPCOMP</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Subsistema raspador e compressor em automatico</td></tr><tr><td align="left">UCT_PreTratamento.IThis.STS_LIGA_AUTOMATICO_PENEIRA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IThis.STS_LIGA_AUTOMATICO_PENEIRA</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_LIGA_AUTOMATICO_PENEIRA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Subsistema peneira e higienização: liga automatico em vigor</td></tr><tr><td align="left">UCT_PreTratamento.IThis.STS_LIGA_AUTOMATICO_ROSCAS</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IThis.STS_LIGA_AUTOMATICO_ROSCAS</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_LIGA_AUTOMATICO_ROSCAS</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Subsistema roscas: liga automatico em vigor</td></tr><tr><td align="left">UCT_PreTratamento.IThis.STS_LIGA_AUTOMATICO_RASPCOMP</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IThis.STS_LIGA_AUTOMATICO_RASPCOMP</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_LIGA_AUTOMATICO_RASPCOMP</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Subsistema raspador e compressor: liga automatico em vigor</td></tr><tr><td align="left">UCT_PreTratamento.IThis.STS_SELECAO_BOMBA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IThis.STS_SELECAO_BOMBA</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_SELECAO_BOMBA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Bomba de higienizacao selecionada (FALSE bomba 1, TRUE bomba 2)</td></tr><tr><td align="left">UCT_PreTratamento.IThis.STS_VALVULA_LAVAGEM</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IThis.STS_VALVULA_LAVAGEM</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_VALVULA_LAVAGEM</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Valvula de lavagem do tanque de gordura aberta</td></tr><tr><td align="left">UCT_PreTratamento.IThis.STS_ETAPA_GORDURA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IThis.STS_ETAPA_GORDURA</td><td align="left">Int16</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_ETAPA_GORDURA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Bomba de gordura: 0 parada, 1 pre-lavagem, 2 bombeando, 3 contando para desligar, 4 fora do automatico</td></tr><tr><td align="left">UCT_PreTratamento.IThis.STS_TEMPO_RESTANTE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IThis.STS_TEMPO_RESTANTE</td><td align="left">Int16</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_TEMPO_RESTANTE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Tempo restante (s) da etapa</td></tr><tr><td align="left">UCT_PreTratamento.IThis.STS_ALARME_COM</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IThis.STS_ALARME_COM</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_ALARME_COM</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Falha de comunicação com a UCT</td></tr><tr><td align="left">UCT_PreTratamento.IThis.STS_ALARME_EMERGENCIA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IThis.STS_ALARME_EMERGENCIA</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_ALARME_EMERGENCIA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Emergência acionada na UCT</td></tr><tr><td align="left">UCT_PreTratamento.IThis.STS_ALARME_DEFPEN</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IThis.STS_ALARME_DEFPEN</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_ALARME_DEFPEN</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Defeito: Peneira rotativa</td></tr><tr><td align="left">UCT_PreTratamento.IThis.STS_ALARME_DEFB1</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IThis.STS_ALARME_DEFB1</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_ALARME_DEFB1</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Defeito: Bomba 1 de higienização da peneira</td></tr><tr><td align="left">UCT_PreTratamento.IThis.STS_ALARME_DEFB2</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IThis.STS_ALARME_DEFB2</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_ALARME_DEFB2</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Defeito: Bomba 2 de higienização da peneira</td></tr><tr><td align="left">UCT_PreTratamento.IThis.STS_ALARME_DEFCMP</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IThis.STS_ALARME_DEFCMP</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_ALARME_DEFCMP</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Defeito: Compressor de ar</td></tr><tr><td align="left">UCT_PreTratamento.IThis.STS_ALARME_DEFRSP</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IThis.STS_ALARME_DEFRSP</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_ALARME_DEFRSP</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Defeito: Raspador de gordura</td></tr><tr><td align="left">UCT_PreTratamento.IThis.STS_ALARME_DEFR1</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IThis.STS_ALARME_DEFR1</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_ALARME_DEFR1</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Defeito: Rosca 1 - horizontal</td></tr><tr><td align="left">UCT_PreTratamento.IThis.STS_ALARME_DEFR2</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IThis.STS_ALARME_DEFR2</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_ALARME_DEFR2</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Defeito: Rosca 2 - inclinada</td></tr><tr><td align="left">UCT_PreTratamento.IThis.STS_ALARME_NIVELAGUA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IThis.STS_ALARME_NIVELAGUA</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_ALARME_NIVELAGUA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Nível baixo do tanque de água de higienização da UCT</td></tr><tr><td align="left">UCT_PreTratamento.IThis.STS_ALARME_NIVELPENEIRA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IThis.STS_ALARME_NIVELPENEIRA</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_ALARME_NIVELPENEIRA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Nível alto na peneira da UCT</td></tr><tr><td align="left">UCT_PreTratamento.IThis.STS_LIGADO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IThis.STS_LIGADO</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_LIGADO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> UCT ligada: algum subsistema com liga-automatico (peneira, roscas ou raspador/compressor)</td></tr><tr><td align="left">UCT_PreTratamento.IThis.STS_AUTOMATICO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IThis.STS_AUTOMATICO</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_AUTOMATICO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> UCT em automatico: subsistema peneira em automatico</td></tr><tr><td align="left">UCT_PreTratamento.IThis.cmdLigaSubsistemaPeneira</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IThis.cmdLigaSubsistemaPeneira</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> cmdLigaSubsistemaPeneira</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Comando cmdLigaSubsistemaPeneira</td></tr><tr><td align="left">UCT_PreTratamento.IThis.cmdSelecaoSubsistemaPeneira</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IThis.cmdSelecaoSubsistemaPeneira</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> cmdSelecaoSubsistemaPeneira</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Comando cmdSelecaoSubsistemaPeneira</td></tr><tr><td align="left">UCT_PreTratamento.IThis.cmdLigaSubsistemaRoscas</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IThis.cmdLigaSubsistemaRoscas</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> cmdLigaSubsistemaRoscas</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Comando cmdLigaSubsistemaRoscas</td></tr><tr><td align="left">UCT_PreTratamento.IThis.cmdSelecaoSubsistemaRoscas</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IThis.cmdSelecaoSubsistemaRoscas</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> cmdSelecaoSubsistemaRoscas</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Comando cmdSelecaoSubsistemaRoscas</td></tr><tr><td align="left">UCT_PreTratamento.IThis.cmdLigaSubsistemaRaspComp</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IThis.cmdLigaSubsistemaRaspComp</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> cmdLigaSubsistemaRaspComp</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Comando cmdLigaSubsistemaRaspComp</td></tr><tr><td align="left">UCT_PreTratamento.IThis.cmdSelecaoSubsistemaRaspComp</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IThis.cmdSelecaoSubsistemaRaspComp</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> cmdSelecaoSubsistemaRaspComp</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Comando cmdSelecaoSubsistemaRaspComp</td></tr><tr><td align="left">UCT_PreTratamento.IThis.cmdSelecaoBombaHigienizacao</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IThis.cmdSelecaoBombaHigienizacao</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> cmdSelecaoBombaHigienizacao</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Comando cmdSelecaoBombaHigienizacao</td></tr><tr><td align="left">UCT_PreTratamento.IThis.cmdResetFalha</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IThis.cmdResetFalha</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> cmdResetFalha</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Reset/reconhecimento da UCT e da bomba de gordura</td></tr><tr><td align="left">UCT_PreTratamento.IThis.CMD_VALVULA_LAVAGEM</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IThis.CMD_VALVULA_LAVAGEM</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CMD_VALVULA_LAVAGEM</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Valvula de lavagem aberta (TRUE) / fechada (FALSE), so fora do automatico</td></tr><tr><td align="left">UCT_PreTratamento.IThis.STP_HABILITADA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IThis.STP_HABILITADA</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STP_HABILITADA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> UCT habilitada no bloqueio da EEE Bruto (desabilitada nao conta)</td></tr><tr><td align="left">UCT_PreTratamento.IThis.STP_TEMPO_PRE_LAVAGEM</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IThis.STP_TEMPO_PRE_LAVAGEM</td><td align="left">UInt16</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STP_TEMPO_PRE_LAVAGEM</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Tempo (s) com a valvula de lavagem aberta antes de ligar a bomba de gordura (0 = liga junto)</td></tr><tr><td align="left">UCT_PreTratamento.IThis.STP_TEMPO_VALVULA_APOS_PARTIDA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IThis.STP_TEMPO_VALVULA_APOS_PARTIDA</td><td align="left">UInt16</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STP_TEMPO_VALVULA_APOS_PARTIDA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Tempo (s) que a valvula fica aberta depois que a bomba liga (0 = fecha na partida)</td></tr><tr><td align="left">UCT_PreTratamento.IThis.STP_TEMPO_DESLIGA_BOMBA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IThis.STP_TEMPO_DESLIGA_BOMBA</td><td align="left">UInt16</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STP_TEMPO_DESLIGA_BOMBA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Tempo (s) que a bomba de gordura continua ligada depois que o nivel alto do tanque abaixa</td></tr><tr><td align="left">UCT_PreTratamento.IThis.STP_VELOCIDADE_BOMBA_GORDURA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IThis.STP_VELOCIDADE_BOMBA_GORDURA</td><td align="left">Float</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STP_VELOCIDADE_BOMBA_GORDURA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Velocidade da bomba de gordura em automatico (Hz)</td></tr><tr><td align="left">UCT_PreTratamento.Bomba_Higienizacao1.IThis.STS_ANIMACAO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Bomba_Higienizacao1.IThis.STS_ANIMACAO</td><td align="left">Int16</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_ANIMACAO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Estado do equipamento na UCT: 0 desligado, 1 ligado, 2 falha, 3 manutencao, 4 sem comunicacao</td></tr><tr><td align="left">UCT_PreTratamento.Bomba_Higienizacao1.IThis.STS_DEFEITO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Bomba_Higienizacao1.IThis.STS_DEFEITO</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_DEFEITO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Defeito do equipamento (palavra 40081 da UCT)</td></tr><tr><td align="left">UCT_PreTratamento.Bomba_Higienizacao1.IThis.STS_HORIMETRO_HOR</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Bomba_Higienizacao1.IThis.STS_HORIMETRO_HOR</td><td align="left">Int32</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_HORIMETRO_HOR</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Horimetro do equipamento (h, lido da UCT)</td></tr><tr><td align="left">UCT_PreTratamento.Bomba_Higienizacao1.IThis.STS_AUTOMATICO_SUBSISTEMA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Bomba_Higienizacao1.IThis.STS_AUTOMATICO_SUBSISTEMA</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_AUTOMATICO_SUBSISTEMA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Subsistema do equipamento em automatico (comandos manuais bloqueados)</td></tr><tr><td align="left">UCT_PreTratamento.Bomba_Higienizacao1.IThis.STS_VELOCIDADE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Bomba_Higienizacao1.IThis.STS_VELOCIDADE</td><td align="left">Float</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_VELOCIDADE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Velocidade ajustada na UCT (Hz)</td></tr><tr><td align="left">UCT_PreTratamento.Bomba_Higienizacao1.IThis.CMD_MANUAL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Bomba_Higienizacao1.IThis.CMD_MANUAL</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CMD_MANUAL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IHM: liga (TRUE) / desliga (FALSE) em manual</td></tr><tr><td align="left">UCT_PreTratamento.Bomba_Higienizacao1.IThis.STP_VELOCIDADE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Bomba_Higienizacao1.IThis.STP_VELOCIDADE</td><td align="left">Float</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STP_VELOCIDADE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IHM: velocidade (Hz)</td></tr><tr><td align="left">UCT_PreTratamento.Bomba_Higienizacao1.IThis.CMD_INTERMITENTE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Bomba_Higienizacao1.IThis.CMD_INTERMITENTE</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CMD_INTERMITENTE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IHM: liga (TRUE) / desliga (FALSE) o intermitente</td></tr><tr><td align="left">UCT_PreTratamento.Bomba_Higienizacao1.IThis.HABILITA_REVERSAO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Bomba_Higienizacao1.IThis.HABILITA_REVERSAO</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> HABILITA_REVERSAO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IHM: habilita (TRUE) / desabilita (FALSE) a reversao</td></tr><tr><td align="left">UCT_PreTratamento.Bomba_Higienizacao2.IThis.STS_ANIMACAO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Bomba_Higienizacao2.IThis.STS_ANIMACAO</td><td align="left">Int16</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_ANIMACAO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Estado do equipamento na UCT: 0 desligado, 1 ligado, 2 falha, 3 manutencao, 4 sem comunicacao</td></tr><tr><td align="left">UCT_PreTratamento.Bomba_Higienizacao2.IThis.STS_DEFEITO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Bomba_Higienizacao2.IThis.STS_DEFEITO</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_DEFEITO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Defeito do equipamento (palavra 40081 da UCT)</td></tr><tr><td align="left">UCT_PreTratamento.Bomba_Higienizacao2.IThis.STS_HORIMETRO_HOR</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Bomba_Higienizacao2.IThis.STS_HORIMETRO_HOR</td><td align="left">Int32</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_HORIMETRO_HOR</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Horimetro do equipamento (h, lido da UCT)</td></tr><tr><td align="left">UCT_PreTratamento.Bomba_Higienizacao2.IThis.STS_AUTOMATICO_SUBSISTEMA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Bomba_Higienizacao2.IThis.STS_AUTOMATICO_SUBSISTEMA</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_AUTOMATICO_SUBSISTEMA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Subsistema do equipamento em automatico (comandos manuais bloqueados)</td></tr><tr><td align="left">UCT_PreTratamento.Bomba_Higienizacao2.IThis.STS_VELOCIDADE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Bomba_Higienizacao2.IThis.STS_VELOCIDADE</td><td align="left">Float</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_VELOCIDADE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Velocidade ajustada na UCT (Hz)</td></tr><tr><td align="left">UCT_PreTratamento.Bomba_Higienizacao2.IThis.CMD_MANUAL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Bomba_Higienizacao2.IThis.CMD_MANUAL</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CMD_MANUAL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IHM: liga (TRUE) / desliga (FALSE) em manual</td></tr><tr><td align="left">UCT_PreTratamento.Bomba_Higienizacao2.IThis.STP_VELOCIDADE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Bomba_Higienizacao2.IThis.STP_VELOCIDADE</td><td align="left">Float</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STP_VELOCIDADE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IHM: velocidade (Hz)</td></tr><tr><td align="left">UCT_PreTratamento.Bomba_Higienizacao2.IThis.CMD_INTERMITENTE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Bomba_Higienizacao2.IThis.CMD_INTERMITENTE</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CMD_INTERMITENTE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IHM: liga (TRUE) / desliga (FALSE) o intermitente</td></tr><tr><td align="left">UCT_PreTratamento.Bomba_Higienizacao2.IThis.HABILITA_REVERSAO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Bomba_Higienizacao2.IThis.HABILITA_REVERSAO</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> HABILITA_REVERSAO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IHM: habilita (TRUE) / desabilita (FALSE) a reversao</td></tr><tr><td align="left">UCT_PreTratamento.Valvula_Higienizacao1.IThis.STS_ANIMACAO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Valvula_Higienizacao1.IThis.STS_ANIMACAO</td><td align="left">Int16</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_ANIMACAO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Estado do equipamento na UCT: 0 desligado, 1 ligado, 2 falha, 3 manutencao, 4 sem comunicacao</td></tr><tr><td align="left">UCT_PreTratamento.Valvula_Higienizacao1.IThis.STS_DEFEITO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Valvula_Higienizacao1.IThis.STS_DEFEITO</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_DEFEITO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Defeito do equipamento (palavra 40081 da UCT)</td></tr><tr><td align="left">UCT_PreTratamento.Valvula_Higienizacao1.IThis.STS_HORIMETRO_HOR</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Valvula_Higienizacao1.IThis.STS_HORIMETRO_HOR</td><td align="left">Int32</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_HORIMETRO_HOR</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Horimetro do equipamento (h, lido da UCT)</td></tr><tr><td align="left">UCT_PreTratamento.Valvula_Higienizacao1.IThis.STS_AUTOMATICO_SUBSISTEMA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Valvula_Higienizacao1.IThis.STS_AUTOMATICO_SUBSISTEMA</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_AUTOMATICO_SUBSISTEMA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Subsistema do equipamento em automatico (comandos manuais bloqueados)</td></tr><tr><td align="left">UCT_PreTratamento.Valvula_Higienizacao1.IThis.STS_VELOCIDADE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Valvula_Higienizacao1.IThis.STS_VELOCIDADE</td><td align="left">Float</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_VELOCIDADE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Velocidade ajustada na UCT (Hz)</td></tr><tr><td align="left">UCT_PreTratamento.Valvula_Higienizacao1.IThis.CMD_MANUAL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Valvula_Higienizacao1.IThis.CMD_MANUAL</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CMD_MANUAL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IHM: liga (TRUE) / desliga (FALSE) em manual</td></tr><tr><td align="left">UCT_PreTratamento.Valvula_Higienizacao1.IThis.STP_VELOCIDADE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Valvula_Higienizacao1.IThis.STP_VELOCIDADE</td><td align="left">Float</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STP_VELOCIDADE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IHM: velocidade (Hz)</td></tr><tr><td align="left">UCT_PreTratamento.Valvula_Higienizacao1.IThis.CMD_INTERMITENTE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Valvula_Higienizacao1.IThis.CMD_INTERMITENTE</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CMD_INTERMITENTE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IHM: liga (TRUE) / desliga (FALSE) o intermitente</td></tr><tr><td align="left">UCT_PreTratamento.Valvula_Higienizacao1.IThis.HABILITA_REVERSAO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Valvula_Higienizacao1.IThis.HABILITA_REVERSAO</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> HABILITA_REVERSAO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IHM: habilita (TRUE) / desabilita (FALSE) a reversao</td></tr><tr><td align="left">UCT_PreTratamento.Valvula_Higienizacao2.IThis.STS_ANIMACAO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Valvula_Higienizacao2.IThis.STS_ANIMACAO</td><td align="left">Int16</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_ANIMACAO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Estado do equipamento na UCT: 0 desligado, 1 ligado, 2 falha, 3 manutencao, 4 sem comunicacao</td></tr><tr><td align="left">UCT_PreTratamento.Valvula_Higienizacao2.IThis.STS_DEFEITO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Valvula_Higienizacao2.IThis.STS_DEFEITO</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_DEFEITO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Defeito do equipamento (palavra 40081 da UCT)</td></tr><tr><td align="left">UCT_PreTratamento.Valvula_Higienizacao2.IThis.STS_HORIMETRO_HOR</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Valvula_Higienizacao2.IThis.STS_HORIMETRO_HOR</td><td align="left">Int32</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_HORIMETRO_HOR</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Horimetro do equipamento (h, lido da UCT)</td></tr><tr><td align="left">UCT_PreTratamento.Valvula_Higienizacao2.IThis.STS_AUTOMATICO_SUBSISTEMA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Valvula_Higienizacao2.IThis.STS_AUTOMATICO_SUBSISTEMA</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_AUTOMATICO_SUBSISTEMA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Subsistema do equipamento em automatico (comandos manuais bloqueados)</td></tr><tr><td align="left">UCT_PreTratamento.Valvula_Higienizacao2.IThis.STS_VELOCIDADE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Valvula_Higienizacao2.IThis.STS_VELOCIDADE</td><td align="left">Float</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_VELOCIDADE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Velocidade ajustada na UCT (Hz)</td></tr><tr><td align="left">UCT_PreTratamento.Valvula_Higienizacao2.IThis.CMD_MANUAL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Valvula_Higienizacao2.IThis.CMD_MANUAL</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CMD_MANUAL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IHM: liga (TRUE) / desliga (FALSE) em manual</td></tr><tr><td align="left">UCT_PreTratamento.Valvula_Higienizacao2.IThis.STP_VELOCIDADE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Valvula_Higienizacao2.IThis.STP_VELOCIDADE</td><td align="left">Float</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STP_VELOCIDADE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IHM: velocidade (Hz)</td></tr><tr><td align="left">UCT_PreTratamento.Valvula_Higienizacao2.IThis.CMD_INTERMITENTE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Valvula_Higienizacao2.IThis.CMD_INTERMITENTE</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CMD_INTERMITENTE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IHM: liga (TRUE) / desliga (FALSE) o intermitente</td></tr><tr><td align="left">UCT_PreTratamento.Valvula_Higienizacao2.IThis.HABILITA_REVERSAO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Valvula_Higienizacao2.IThis.HABILITA_REVERSAO</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> HABILITA_REVERSAO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IHM: habilita (TRUE) / desabilita (FALSE) a reversao</td></tr><tr><td align="left">UCT_PreTratamento.Compressor1.IThis.STS_ANIMACAO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Compressor1.IThis.STS_ANIMACAO</td><td align="left">Int16</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_ANIMACAO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Estado do equipamento na UCT: 0 desligado, 1 ligado, 2 falha, 3 manutencao, 4 sem comunicacao</td></tr><tr><td align="left">UCT_PreTratamento.Compressor1.IThis.STS_DEFEITO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Compressor1.IThis.STS_DEFEITO</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_DEFEITO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Defeito do equipamento (palavra 40081 da UCT)</td></tr><tr><td align="left">UCT_PreTratamento.Compressor1.IThis.STS_HORIMETRO_HOR</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Compressor1.IThis.STS_HORIMETRO_HOR</td><td align="left">Int32</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_HORIMETRO_HOR</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Horimetro do equipamento (h, lido da UCT)</td></tr><tr><td align="left">UCT_PreTratamento.Compressor1.IThis.STS_AUTOMATICO_SUBSISTEMA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Compressor1.IThis.STS_AUTOMATICO_SUBSISTEMA</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_AUTOMATICO_SUBSISTEMA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Subsistema do equipamento em automatico (comandos manuais bloqueados)</td></tr><tr><td align="left">UCT_PreTratamento.Compressor1.IThis.STS_VELOCIDADE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Compressor1.IThis.STS_VELOCIDADE</td><td align="left">Float</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_VELOCIDADE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Velocidade ajustada na UCT (Hz)</td></tr><tr><td align="left">UCT_PreTratamento.Compressor1.IThis.CMD_MANUAL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Compressor1.IThis.CMD_MANUAL</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CMD_MANUAL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IHM: liga (TRUE) / desliga (FALSE) em manual</td></tr><tr><td align="left">UCT_PreTratamento.Compressor1.IThis.STP_VELOCIDADE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Compressor1.IThis.STP_VELOCIDADE</td><td align="left">Float</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STP_VELOCIDADE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IHM: velocidade (Hz)</td></tr><tr><td align="left">UCT_PreTratamento.Compressor1.IThis.CMD_INTERMITENTE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Compressor1.IThis.CMD_INTERMITENTE</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CMD_INTERMITENTE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IHM: liga (TRUE) / desliga (FALSE) o intermitente</td></tr><tr><td align="left">UCT_PreTratamento.Compressor1.IThis.HABILITA_REVERSAO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Compressor1.IThis.HABILITA_REVERSAO</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> HABILITA_REVERSAO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IHM: habilita (TRUE) / desabilita (FALSE) a reversao</td></tr><tr><td align="left">UCT_PreTratamento.Raspador_Gordura1.IThis.STS_ANIMACAO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Raspador_Gordura1.IThis.STS_ANIMACAO</td><td align="left">Int16</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_ANIMACAO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Estado do equipamento na UCT: 0 desligado, 1 ligado, 2 falha, 3 manutencao, 4 sem comunicacao</td></tr><tr><td align="left">UCT_PreTratamento.Raspador_Gordura1.IThis.STS_DEFEITO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Raspador_Gordura1.IThis.STS_DEFEITO</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_DEFEITO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Defeito do equipamento (palavra 40081 da UCT)</td></tr><tr><td align="left">UCT_PreTratamento.Raspador_Gordura1.IThis.STS_HORIMETRO_HOR</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Raspador_Gordura1.IThis.STS_HORIMETRO_HOR</td><td align="left">Int32</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_HORIMETRO_HOR</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Horimetro do equipamento (h, lido da UCT)</td></tr><tr><td align="left">UCT_PreTratamento.Raspador_Gordura1.IThis.STS_AUTOMATICO_SUBSISTEMA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Raspador_Gordura1.IThis.STS_AUTOMATICO_SUBSISTEMA</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_AUTOMATICO_SUBSISTEMA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Subsistema do equipamento em automatico (comandos manuais bloqueados)</td></tr><tr><td align="left">UCT_PreTratamento.Raspador_Gordura1.IThis.STS_VELOCIDADE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Raspador_Gordura1.IThis.STS_VELOCIDADE</td><td align="left">Float</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_VELOCIDADE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Velocidade ajustada na UCT (Hz)</td></tr><tr><td align="left">UCT_PreTratamento.Raspador_Gordura1.IThis.CMD_MANUAL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Raspador_Gordura1.IThis.CMD_MANUAL</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CMD_MANUAL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IHM: liga (TRUE) / desliga (FALSE) em manual</td></tr><tr><td align="left">UCT_PreTratamento.Raspador_Gordura1.IThis.STP_VELOCIDADE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Raspador_Gordura1.IThis.STP_VELOCIDADE</td><td align="left">Float</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STP_VELOCIDADE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IHM: velocidade (Hz)</td></tr><tr><td align="left">UCT_PreTratamento.Raspador_Gordura1.IThis.CMD_INTERMITENTE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Raspador_Gordura1.IThis.CMD_INTERMITENTE</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CMD_INTERMITENTE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IHM: liga (TRUE) / desliga (FALSE) o intermitente</td></tr><tr><td align="left">UCT_PreTratamento.Raspador_Gordura1.IThis.HABILITA_REVERSAO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Raspador_Gordura1.IThis.HABILITA_REVERSAO</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> HABILITA_REVERSAO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IHM: habilita (TRUE) / desabilita (FALSE) a reversao</td></tr><tr><td align="left">UCT_PreTratamento.Rosca1Horizontal.IThis.STS_ANIMACAO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Rosca1Horizontal.IThis.STS_ANIMACAO</td><td align="left">Int16</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_ANIMACAO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Estado do equipamento na UCT: 0 desligado, 1 ligado, 2 falha, 3 manutencao, 4 sem comunicacao</td></tr><tr><td align="left">UCT_PreTratamento.Rosca1Horizontal.IThis.STS_DEFEITO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Rosca1Horizontal.IThis.STS_DEFEITO</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_DEFEITO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Defeito do equipamento (palavra 40081 da UCT)</td></tr><tr><td align="left">UCT_PreTratamento.Rosca1Horizontal.IThis.STS_HORIMETRO_HOR</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Rosca1Horizontal.IThis.STS_HORIMETRO_HOR</td><td align="left">Int32</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_HORIMETRO_HOR</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Horimetro do equipamento (h, lido da UCT)</td></tr><tr><td align="left">UCT_PreTratamento.Rosca1Horizontal.IThis.STS_AUTOMATICO_SUBSISTEMA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Rosca1Horizontal.IThis.STS_AUTOMATICO_SUBSISTEMA</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_AUTOMATICO_SUBSISTEMA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Subsistema do equipamento em automatico (comandos manuais bloqueados)</td></tr><tr><td align="left">UCT_PreTratamento.Rosca1Horizontal.IThis.STS_VELOCIDADE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Rosca1Horizontal.IThis.STS_VELOCIDADE</td><td align="left">Float</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_VELOCIDADE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Velocidade ajustada na UCT (Hz)</td></tr><tr><td align="left">UCT_PreTratamento.Rosca1Horizontal.IThis.CMD_MANUAL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Rosca1Horizontal.IThis.CMD_MANUAL</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CMD_MANUAL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IHM: liga (TRUE) / desliga (FALSE) em manual</td></tr><tr><td align="left">UCT_PreTratamento.Rosca1Horizontal.IThis.STP_VELOCIDADE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Rosca1Horizontal.IThis.STP_VELOCIDADE</td><td align="left">Float</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STP_VELOCIDADE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IHM: velocidade (Hz)</td></tr><tr><td align="left">UCT_PreTratamento.Rosca1Horizontal.IThis.CMD_INTERMITENTE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Rosca1Horizontal.IThis.CMD_INTERMITENTE</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CMD_INTERMITENTE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IHM: liga (TRUE) / desliga (FALSE) o intermitente</td></tr><tr><td align="left">UCT_PreTratamento.Rosca1Horizontal.IThis.HABILITA_REVERSAO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Rosca1Horizontal.IThis.HABILITA_REVERSAO</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> HABILITA_REVERSAO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IHM: habilita (TRUE) / desabilita (FALSE) a reversao</td></tr><tr><td align="left">UCT_PreTratamento.Rosca2Inclinada.IThis.STS_ANIMACAO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Rosca2Inclinada.IThis.STS_ANIMACAO</td><td align="left">Int16</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_ANIMACAO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Estado do equipamento na UCT: 0 desligado, 1 ligado, 2 falha, 3 manutencao, 4 sem comunicacao</td></tr><tr><td align="left">UCT_PreTratamento.Rosca2Inclinada.IThis.STS_DEFEITO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Rosca2Inclinada.IThis.STS_DEFEITO</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_DEFEITO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Defeito do equipamento (palavra 40081 da UCT)</td></tr><tr><td align="left">UCT_PreTratamento.Rosca2Inclinada.IThis.STS_HORIMETRO_HOR</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Rosca2Inclinada.IThis.STS_HORIMETRO_HOR</td><td align="left">Int32</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_HORIMETRO_HOR</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Horimetro do equipamento (h, lido da UCT)</td></tr><tr><td align="left">UCT_PreTratamento.Rosca2Inclinada.IThis.STS_AUTOMATICO_SUBSISTEMA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Rosca2Inclinada.IThis.STS_AUTOMATICO_SUBSISTEMA</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_AUTOMATICO_SUBSISTEMA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Subsistema do equipamento em automatico (comandos manuais bloqueados)</td></tr><tr><td align="left">UCT_PreTratamento.Rosca2Inclinada.IThis.STS_VELOCIDADE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Rosca2Inclinada.IThis.STS_VELOCIDADE</td><td align="left">Float</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_VELOCIDADE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Velocidade ajustada na UCT (Hz)</td></tr><tr><td align="left">UCT_PreTratamento.Rosca2Inclinada.IThis.CMD_MANUAL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Rosca2Inclinada.IThis.CMD_MANUAL</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CMD_MANUAL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IHM: liga (TRUE) / desliga (FALSE) em manual</td></tr><tr><td align="left">UCT_PreTratamento.Rosca2Inclinada.IThis.STP_VELOCIDADE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Rosca2Inclinada.IThis.STP_VELOCIDADE</td><td align="left">Float</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STP_VELOCIDADE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IHM: velocidade (Hz)</td></tr><tr><td align="left">UCT_PreTratamento.Rosca2Inclinada.IThis.CMD_INTERMITENTE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Rosca2Inclinada.IThis.CMD_INTERMITENTE</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CMD_INTERMITENTE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IHM: liga (TRUE) / desliga (FALSE) o intermitente</td></tr><tr><td align="left">UCT_PreTratamento.Rosca2Inclinada.IThis.HABILITA_REVERSAO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Rosca2Inclinada.IThis.HABILITA_REVERSAO</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> HABILITA_REVERSAO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IHM: habilita (TRUE) / desabilita (FALSE) a reversao</td></tr><tr><td align="left">UCT_PreTratamento.BombaGordura.IThis.STS_REMOTO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BombaGordura.IThis.STS_REMOTO</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_REMOTO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Chave em remoto</td></tr><tr><td align="left">UCT_PreTratamento.BombaGordura.IThis.STS_LOCAL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BombaGordura.IThis.STS_LOCAL</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_LOCAL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Chave em local</td></tr><tr><td align="left">UCT_PreTratamento.BombaGordura.IThis.STS_MANUTENCAO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BombaGordura.IThis.STS_MANUTENCAO</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_MANUTENCAO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Chave nem local nem remoto</td></tr><tr><td align="left">UCT_PreTratamento.BombaGordura.IThis.STS_LIGADO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BombaGordura.IThis.STS_LIGADO</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_LIGADO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Motor ligado</td></tr><tr><td align="left">UCT_PreTratamento.BombaGordura.IThis.fbkStsAutomatico</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BombaGordura.IThis.fbkStsAutomatico</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> fbkStsAutomatico</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Modo automatico (retorno para a IHM)</td></tr><tr><td align="left">UCT_PreTratamento.BombaGordura.IThis.STS_ANIMACAO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BombaGordura.IThis.STS_ANIMACAO</td><td align="left">Int16</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_ANIMACAO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0 desligado, 1 ligado, 2 falha, 3 manutencao</td></tr><tr><td align="left">UCT_PreTratamento.BombaGordura.IThis.STS_ANIMACAO_GERADOR</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BombaGordura.IThis.STS_ANIMACAO_GERADOR</td><td align="left">Int16</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_ANIMACAO_GERADOR</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0 nao conectado, 1 conectado, 2 selecionado, 3 selecionado e gerador ligado</td></tr><tr><td align="left">UCT_PreTratamento.BombaGordura.IThis.STS_ALARME</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BombaGordura.IThis.STS_ALARME</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_ALARME</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Alarme geral</td></tr><tr><td align="left">UCT_PreTratamento.BombaGordura.IThis.STS_FALHA_COMUNICACAO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BombaGordura.IThis.STS_FALHA_COMUNICACAO</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_FALHA_COMUNICACAO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Falha de comunicacao com a remota</td></tr><tr><td align="left">UCT_PreTratamento.BombaGordura.IThis.STS_PROTECAO_TERMICA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BombaGordura.IThis.STS_PROTECAO_TERMICA</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_PROTECAO_TERMICA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Falha termica (memorizada)</td></tr><tr><td align="left">UCT_PreTratamento.BombaGordura.IThis.STS_FALHA_INVERSOR</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BombaGordura.IThis.STS_FALHA_INVERSOR</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_FALHA_INVERSOR</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Falha do inversor/acionamento (memorizada)</td></tr><tr><td align="left">UCT_PreTratamento.BombaGordura.IThis.STS_FALHA_PARTIDA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BombaGordura.IThis.STS_FALHA_PARTIDA</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_FALHA_PARTIDA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Nao confirmou partida (memorizada)</td></tr><tr><td align="left">UCT_PreTratamento.BombaGordura.IThis.STS_FALHA_PARADA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BombaGordura.IThis.STS_FALHA_PARADA</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_FALHA_PARADA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Nao confirmou parada (memorizada)</td></tr><tr><td align="left">UCT_PreTratamento.BombaGordura.IThis.STS_VELOCIDADE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BombaGordura.IThis.STS_VELOCIDADE</td><td align="left">Float</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_VELOCIDADE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Velocidade (%): com inversor 0 % no LSP e 100 % no HSP; sem inversor 0 ou 100</td></tr><tr><td align="left">UCT_PreTratamento.BombaGordura.IThis.STS_HORIMETRO_HORA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BombaGordura.IThis.STS_HORIMETRO_HORA</td><td align="left">UInt32</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_HORIMETRO_HORA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Horimetro (h)</td></tr><tr><td align="left">UCT_PreTratamento.BombaGordura.IThis.STS_HORIMETRO_MINUTO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BombaGordura.IThis.STS_HORIMETRO_MINUTO</td><td align="left">UInt16</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_HORIMETRO_MINUTO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Horimetro (min)</td></tr><tr><td align="left">UCT_PreTratamento.BombaGordura.IThis.STS_NUMERO_PARTIDA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BombaGordura.IThis.STS_NUMERO_PARTIDA</td><td align="left">UInt32</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_NUMERO_PARTIDA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Numero de partidas</td></tr><tr><td align="left">UCT_PreTratamento.BombaGordura.IThis.STS_CORRENTE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BombaGordura.IThis.STS_CORRENTE</td><td align="left">Float</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_CORRENTE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Corrente (A)</td></tr><tr><td align="left">UCT_PreTratamento.BombaGordura.IThis.STS_TENSAO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BombaGordura.IThis.STS_TENSAO</td><td align="left">Float</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_TENSAO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Tensao (V)</td></tr><tr><td align="left">UCT_PreTratamento.BombaGordura.IThis.STS_POTENCIA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BombaGordura.IThis.STS_POTENCIA</td><td align="left">Float</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_POTENCIA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Potencia (kW)</td></tr><tr><td align="left">UCT_PreTratamento.BombaGordura.IThis.STS_FREQUENCIA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BombaGordura.IThis.STS_FREQUENCIA</td><td align="left">Float</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_FREQUENCIA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Frequencia (Hz)</td></tr><tr><td align="left">UCT_PreTratamento.BombaGordura.IThis.STS_TORQUE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BombaGordura.IThis.STS_TORQUE</td><td align="left">Float</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_TORQUE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Torque (%)</td></tr><tr><td align="left">UCT_PreTratamento.BombaGordura.IThis.STS_RPM</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BombaGordura.IThis.STS_RPM</td><td align="left">Float</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_RPM</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Rotacao (rpm)</td></tr><tr><td align="left">UCT_PreTratamento.BombaGordura.IThis.STS_AUTOMATICO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BombaGordura.IThis.STS_AUTOMATICO</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_AUTOMATICO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0 = manual, 1 = automatico (nao persistente)</td></tr><tr><td align="left">UCT_PreTratamento.BombaGordura.IThis.CMD_MANUAL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BombaGordura.IThis.CMD_MANUAL</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CMD_MANUAL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0 = desligar, 1 = ligar (nao persistente)</td></tr><tr><td align="left">UCT_PreTratamento.BombaGordura.IThis.CMD_RESET_FALHA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BombaGordura.IThis.CMD_RESET_FALHA</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CMD_RESET_FALHA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Reset de falhas</td></tr><tr><td align="left">UCT_PreTratamento.BombaGordura.IThis.CMD_RESET_NUMERO_PARTIDA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BombaGordura.IThis.CMD_RESET_NUMERO_PARTIDA</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CMD_RESET_NUMERO_PARTIDA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Zera numero de partidas</td></tr><tr><td align="left">UCT_PreTratamento.BombaGordura.IThis.CMD_RESET_HORIMETRO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BombaGordura.IThis.CMD_RESET_HORIMETRO</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CMD_RESET_HORIMETRO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Zera horimetro</td></tr><tr><td align="left">UCT_PreTratamento.BombaGordura.IThis.STP_FALHA_LIGAMENTO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BombaGordura.IThis.STP_FALHA_LIGAMENTO</td><td align="left">UInt16</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STP_FALHA_LIGAMENTO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Tempo maximo para confirmar partida (s). 0 = desabilitado</td></tr><tr><td align="left">UCT_PreTratamento.BombaGordura.IThis.STP_FALHA_DESLIGAMENTO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BombaGordura.IThis.STP_FALHA_DESLIGAMENTO</td><td align="left">UInt16</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STP_FALHA_DESLIGAMENTO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Tempo maximo para confirmar parada (s). 0 = desabilitado</td></tr><tr><td align="left">UCT_PreTratamento.BombaGordura.IThis.STP_SAIDA_MANUAL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BombaGordura.IThis.STP_SAIDA_MANUAL</td><td align="left">Float</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STP_SAIDA_MANUAL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Velocidade em manual (Hz)</td></tr><tr><td align="left">UCT_PreTratamento.Peneira_Rotativa1.IThis.STS_ANIMACAO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Peneira_Rotativa1.IThis.STS_ANIMACAO</td><td align="left">Int16</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_ANIMACAO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Estado do equipamento na UCT: 0 desligado, 1 ligado, 2 falha, 3 manutencao, 4 sem comunicacao</td></tr><tr><td align="left">UCT_PreTratamento.Peneira_Rotativa1.IThis.STS_DEFEITO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Peneira_Rotativa1.IThis.STS_DEFEITO</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_DEFEITO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Defeito do equipamento (palavra 40081 da UCT)</td></tr><tr><td align="left">UCT_PreTratamento.Peneira_Rotativa1.IThis.STS_HORIMETRO_HOR</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Peneira_Rotativa1.IThis.STS_HORIMETRO_HOR</td><td align="left">Int32</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_HORIMETRO_HOR</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Horimetro do equipamento (h, lido da UCT)</td></tr><tr><td align="left">UCT_PreTratamento.Peneira_Rotativa1.IThis.STS_AUTOMATICO_SUBSISTEMA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Peneira_Rotativa1.IThis.STS_AUTOMATICO_SUBSISTEMA</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_AUTOMATICO_SUBSISTEMA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Subsistema do equipamento em automatico (comandos manuais bloqueados)</td></tr><tr><td align="left">UCT_PreTratamento.Peneira_Rotativa1.IThis.STS_VELOCIDADE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Peneira_Rotativa1.IThis.STS_VELOCIDADE</td><td align="left">Float</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_VELOCIDADE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Velocidade ajustada na UCT (Hz)</td></tr><tr><td align="left">UCT_PreTratamento.Peneira_Rotativa1.IThis.CMD_MANUAL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Peneira_Rotativa1.IThis.CMD_MANUAL</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CMD_MANUAL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IHM: liga (TRUE) / desliga (FALSE) em manual</td></tr><tr><td align="left">UCT_PreTratamento.Peneira_Rotativa1.IThis.STP_VELOCIDADE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Peneira_Rotativa1.IThis.STP_VELOCIDADE</td><td align="left">Float</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STP_VELOCIDADE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IHM: velocidade (Hz)</td></tr><tr><td align="left">UCT_PreTratamento.Peneira_Rotativa1.IThis.CMD_INTERMITENTE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Peneira_Rotativa1.IThis.CMD_INTERMITENTE</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CMD_INTERMITENTE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IHM: liga (TRUE) / desliga (FALSE) o intermitente</td></tr><tr><td align="left">UCT_PreTratamento.Peneira_Rotativa1.IThis.HABILITA_REVERSAO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Peneira_Rotativa1.IThis.HABILITA_REVERSAO</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> HABILITA_REVERSAO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IHM: habilita (TRUE) / desabilita (FALSE) a reversao</td></tr></tbody></table></div></div><br class="table-break"><p>
+            <img src="Images\locked.png">  : This value cannot be further changed by parent function blocks (type or instance)</p><p>
+            <img src="Images\overparametrization.png">  : This value has been modified and differs from initially configured value</p><p></p><p></p><span class="linkbox"><p class="linkboxtitle">See also</p>
+    <p>
+    </p><p><a class="xref" href="UCT_PreTratamento.UCT_PreTratamento_HMI.sDefault.html" title="sDefault">sDefault</a></p><p>
+    </p><p><a class="xref" href="UCT_PreTratamento.UCT_PreTratamento_HMI.fpDefault.html" title="fpDefault">fpDefault</a></p><p>
+    </p><p><a class="xref" href="UCT_PreTratamento.UCT_PreTratamento_HMI.fpParameter.html" title="fpParameter">fpParameter</a></p><p>
+    </p><p><a class="xref" href="UCT_PreTratamento.UCT_PreTratamento_HMI.sSkid.html" title="sSkid">sSkid</a></p><p>
+    </p><p><a class="xref" href="UCT_PreTratamento.UCT_PreTratamento_HMI.sGordura.html" title="sGordura">sGordura</a></p>
+    <p><a class="xref" href="">???</a></p>
+    </span></div></body></html>

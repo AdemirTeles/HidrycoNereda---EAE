@@ -33,12 +33,34 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_Generico
 
 
 		// Valor por comunicacao ja chega em unidade de engenharia: a faixa vira so a escala do indicador analogico
+		bool com, skid, alturaAcima;
 		void ComunicacaoValueChanged(object sender, ValueChangedEventArgs e)
 		{
-			bool com = Convert.ToBoolean(e.Value);
-			origem.Text = com ? "Origem: comunicação (valor já em unidade de engenharia)" : "Origem: entrada 4-20 mA";
+			com = Convert.ToBoolean(e.Value);
+			Origem();
+		}
+
+		// Valor de skid (gradeamento, UCT, C-Press) ja vem escalado do equipamento: sem ajuste de escala;
+		// a altura maxima sobe para o lugar da escala
+		void SkidValueChanged(object sender, ValueChangedEventArgs e)
+		{
+			skid = Convert.ToBoolean(e.Value);
+			Origem();
+		}
+
+		void Origem()
+		{
+			origem.Text = skid ? "Origem: skid (valor já escalado no equipamento)" : (com ? "Origem: comunicação (valor já em unidade de engenharia)" : "Origem: entrada 4-20 mA");
 			lblMin.Text = com ? "Mínimo da escala" : "Valor em 4 mA";
 			lblMax.Text = com ? "Máximo da escala" : "Valor em 20 mA";
+			lblMin.Visible = !skid; rangeMin.Visible = !skid;
+			lblMax.Visible = !skid; rangeMax.Visible = !skid;
+			if (skid != alturaAcima)
+			{
+				int dy = skid ? -80 : 80;              // DesignMatrix/Location so valem na criacao: depois anda com Move
+				lblAltura.Move(0, dy); altura.Move(0, dy);
+				alturaAcima = skid;
+			}
 		}
 
 		void NivelValueChanged(object sender, ValueChangedEventArgs e)

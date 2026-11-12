@@ -3,7 +3,7 @@
 <FBType GUID="dd6982a8-ad4d-4ae7-a93e-56c4eba6c9f1" Name="CmdWaterDischargeSLB" Format="2.0" Comment="CAT Function Block Type" Namespace="SE.Nereda">
   <Attribute Name="HMI.Alias" Value="" />
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Schneider Electric" Version="2.0" Author="Claude/Hidryco" Date="10/1/2026" Remarks="Rev2 - Cmin (velocidade minima por bomba) do IThis para a logica; Rev1 - Nivel L e pausa (T_Restart/T_FlowLL); Modo sobrenadante (2 servico + 1 reserva); parametros Cmax/C2/C3/T_C2/T_C3; LOAD_PERS_DATA na inicializacao" />
+  <VersionInfo Organization="Schneider Electric" Version="2.2" Author="Claude/Hidryco" Date="12/11/2026" Remarks="2.2 (12/11/2026): PID unico MESTRE aqui (cfgPidMestre do CommandLogic): PID_REQ/PID_EXT/PID_OUT/PID_UPD. Rev2 - Cmin (velocidade minima por bomba) do IThis para a logica; Rev1 - Nivel L e pausa (T_Restart/T_FlowLL); Modo sobrenadante (2 servico + 1 reserva); parametros Cmax/C2/C3/T_C2/T_C3; LOAD_PERS_DATA na inicializacao" />
   <InterfaceList>
     <EventInputs>
       <Event ID="413C016DFFB59D18" Name="INIT" />
@@ -16,15 +16,37 @@
       <Event ID="4D285A87325FFED2" Name="REQ_LEVEL" Comment="Nivel L do 49LT0001">
         <With Var="LowLevel" />
       </Event>
+      <Event ID="AFB9C6F9FCB45D2E" Name="PID_EXT" Comment="Mestre: pedido do comando escravo ao PID unico">
+        <With Var="PidSpExt" />
+        <With Var="PidRunExt" />
+      </Event>
+      <Event ID="E88B64D259FB3584" Name="PID_UPD" Comment="Escravo: saida do PID do mestre">
+        <With Var="PidOut" />
+      </Event>
     </EventInputs>
     <EventOutputs>
       <Event ID="B72A275F8DEDE920" Name="INITO" />
+      <Event ID="476F11CD7FD6E01C" Name="PID_REQ" Comment="Pedido deste comando ao PID unico">
+        <With Var="PidSp" />
+        <With Var="PidRun" />
+      </Event>
+      <Event ID="B94CEC5AA268C867" Name="PID_OUT" Comment="Mestre: saida do PID unico">
+        <With Var="PidOutExt" />
+      </Event>
     </EventOutputs>
     <InputVars>
       <VarDeclaration ID="359E24E45FC44765" Name="Mode" Type="INT" />
       <VarDeclaration ID="6B6DC0CDC9D4BF59" Name="EmergencyFlowSP" Type="REAL" />
       <VarDeclaration ID="EB4DFF33F4044630" Name="LowLevel" Type="BOOL" Comment="Nivel L do 49LT0001 (pausa a descarga)" />
+      <VarDeclaration ID="65ADEC4DC0DB750E" Name="PidSpExt" Type="REAL" />
+      <VarDeclaration ID="A7C344B105221145" Name="PidRunExt" Type="BOOL" />
+      <VarDeclaration ID="F291A3F009EA7ADC" Name="PidOut" Type="VTQREAL" />
     </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="9BD7B719366462A5" Name="PidSp" Type="REAL" />
+      <VarDeclaration ID="02D251287C1A5264" Name="PidRun" Type="BOOL" />
+      <VarDeclaration ID="859BA42BF48FF61F" Name="PidOutExt" Type="VTQREAL" />
+    </OutputVars>
     <Sockets>
       <AdapterDeclaration ID="E1021AA83C1C4121" Name="IPhase" Type="IPhase" Namespace="SE.Nereda" x="959.9999" y="2160" />
     </Sockets>
@@ -49,6 +71,7 @@
     <FB ID="AFD291E014234F02" UID="DAA36F849AB68AD9" Name="CommandLogic" Type="CmdSludgeDischargeSLBLogic" x="2500" y="2300" Namespace="SE.Nereda">
       <Attribute Name="Configuration.Component.HideUnusedPorts" Value="" />
       <Parameter Name="$EDA46437701491D7" Value="TRUE" />
+      <Parameter Name="$CE0B7E045A418943" Value="TRUE" />
     </FB>
     <Input ID="413C016DFFB59D18" Name="INIT" x="1140" y="1220" Type="Event" />
     <Input ID="42062FCE2A6CF2D8" Name="MODE" x="959.9999" y="3046" Type="Event" />
@@ -138,6 +161,16 @@
     <Output ID="D7089B5E98615F78" Name="ValveBuffer" x="5520" y="2798" Type="Adapter" />
     <Output ID="7AD0808434312B30" Name="ValveInfluent" x="5520" y="2858" Type="Adapter" />
     <Output ID="B72A275F8DEDE920" Name="INITO" x="1100" y="1330" Type="Event" />
+    <Input ID="AFB9C6F9FCB45D2E" Name="PID_EXT" x="800" y="4100" Type="Event" />
+    <Input ID="65ADEC4DC0DB750E" Name="PidSpExt" x="800" y="4160" Type="Data" />
+    <Input ID="A7C344B105221145" Name="PidRunExt" x="800" y="4220" Type="Data" />
+    <Input ID="E88B64D259FB3584" Name="PID_UPD" x="800" y="4300" Type="Event" />
+    <Input ID="F291A3F009EA7ADC" Name="PidOut" x="800" y="4360" Type="Data" />
+    <Output ID="476F11CD7FD6E01C" Name="PID_REQ" x="6000" y="4100" Type="Event" />
+    <Output ID="9BD7B719366462A5" Name="PidSp" x="6000" y="4160" Type="Data" />
+    <Output ID="02D251287C1A5264" Name="PidRun" x="6000" y="4220" Type="Data" />
+    <Output ID="B94CEC5AA268C867" Name="PID_OUT" x="6000" y="4300" Type="Event" />
+    <Output ID="859BA42BF48FF61F" Name="PidOutExt" x="6000" y="4360" Type="Data" />
     <EventConnections>
       <Connection Source="$42062FCE2A6CF2D8" Destination="$49575727A957F4E6.MODE" dx1="1462">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
@@ -225,6 +258,10 @@
       <Connection Source="$B124CCEF76705C58.5F8E6D9D33956FD6" Destination="$AFD291E014234F02.65CF25B02F3B6C57" dx1="240" dx2="110" dy="-410">
         <AvoidsNodes>false</AvoidsNodes>
       </Connection>
+      <Connection Source="$AFB9C6F9FCB45D2E" Destination="$AFD291E014234F02.AFB9C6F9FCB45D2E" />
+      <Connection Source="$E88B64D259FB3584" Destination="$AFD291E014234F02.E88B64D259FB3584" />
+      <Connection Source="$AFD291E014234F02.476F11CD7FD6E01C" Destination="$476F11CD7FD6E01C" />
+      <Connection Source="$AFD291E014234F02.B94CEC5AA268C867" Destination="$B94CEC5AA268C867" />
     </EventConnections>
     <DataConnections>
       <Connection Source="$359E24E45FC44765" Destination="$49575727A957F4E6.Mode" dx1="1426.677">
@@ -304,6 +341,12 @@
       <Connection Source="$B124CCEF76705C58.A932B147BEA14658" Destination="$AFD291E014234F02.A13D37C90CBA8B2D" dx1="40" dx2="450" dy="1528">
         <AvoidsNodes>false</AvoidsNodes>
       </Connection>
+      <Connection Source="$65ADEC4DC0DB750E" Destination="$AFD291E014234F02.65ADEC4DC0DB750E" />
+      <Connection Source="$A7C344B105221145" Destination="$AFD291E014234F02.A7C344B105221145" />
+      <Connection Source="$F291A3F009EA7ADC" Destination="$AFD291E014234F02.F291A3F009EA7ADC" />
+      <Connection Source="$AFD291E014234F02.9BD7B719366462A5" Destination="$9BD7B719366462A5" />
+      <Connection Source="$AFD291E014234F02.02D251287C1A5264" Destination="$02D251287C1A5264" />
+      <Connection Source="$AFD291E014234F02.859BA42BF48FF61F" Destination="$859BA42BF48FF61F" />
     </DataConnections>
     <AdapterConnections>
       <Connection Source="$7E27CDF23DBBB407" Destination="$AFD291E014234F02.F89AF997F6D64559" dx1="120">

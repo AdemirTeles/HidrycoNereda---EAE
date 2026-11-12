@@ -35,7 +35,6 @@ namespace HMI.Main.Canvases
 			this.InfluentFeed = new SE.Nereda.Symbols.InfluentFeed.sInfluentFeed2();
 			this.InfluentFeed_1 = new SE.Nereda.Symbols.InfluentFeed.sSensors();
 			this.sDrainSettings1 = new SE.Nereda.Symbols.InfluentFeedLogic.sDrainSettings();
-			this.sDefault1 = new SE.App2CommonProcess.Symbols.Autotune.sDefault();
 			// 
 			// btnAckNereda
 			// 
@@ -52,7 +51,7 @@ namespace HMI.Main.Canvases
 			// 
 			// changeCanvasButton3
 			// 
-			this.changeCanvasButton3.Bounds = new NxtControl.Drawing.RectF(((float)(752D)), ((float)(296D)), ((float)(168D)), ((float)(32D)));
+			this.changeCanvasButton3.Bounds = new NxtControl.Drawing.RectF(((float)(844D)), ((float)(213.6D)), ((float)(193.2D)), ((float)(36.8D)));
 			this.changeCanvasButton3.CanvasName = "REACTOR2";
 			this.changeCanvasButton3.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.changeCanvasButton3.Name = "changeCanvasButton3";
@@ -60,7 +59,7 @@ namespace HMI.Main.Canvases
 			// 
 			// changeCanvasButton4
 			// 
-			this.changeCanvasButton4.Bounds = new NxtControl.Drawing.RectF(((float)(752D)), ((float)(232D)), ((float)(168D)), ((float)(32D)));
+			this.changeCanvasButton4.Bounds = new NxtControl.Drawing.RectF(((float)(844D)), ((float)(140D)), ((float)(193.2D)), ((float)(36.8D)));
 			this.changeCanvasButton4.CanvasName = "REACTOR1";
 			this.changeCanvasButton4.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
 			this.changeCanvasButton4.Name = "changeCanvasButton4";
@@ -86,21 +85,21 @@ namespace HMI.Main.Canvases
 			// 
 			// pipe1
 			// 
-			this.pipe1.Bounds = new NxtControl.Drawing.RectF(((float)(736D)), ((float)(248D)), ((float)(40D)), ((float)(64D)));
+			this.pipe1.Bounds = new NxtControl.Drawing.RectF(((float)(825.6D)), ((float)(158.4D)), ((float)(46D)), ((float)(73.6D)));
 			this.pipe1.InnerColor = new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(255)));
 			this.pipe1.Name = "pipe1";
 			this.pipe1.OuterColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.pipe1.Points.AddRange(new NxtControl.Drawing.PointF[] {
-			new NxtControl.Drawing.PointF(776D, 248D),
-			new NxtControl.Drawing.PointF(736D, 248D),
-			new NxtControl.Drawing.PointF(736D, 312D),
-			new NxtControl.Drawing.PointF(776D, 312D)});
+			new NxtControl.Drawing.PointF(871.6D, 158.4D),
+			new NxtControl.Drawing.PointF(825.6D, 158.4D),
+			new NxtControl.Drawing.PointF(825.6D, 232D),
+			new NxtControl.Drawing.PointF(871.6D, 232D)});
 			this.pipe1.Width = 10;
 			// 
 			// InfluentFeed
 			// 
 			this.InfluentFeed.BeginInit();
-			this.InfluentFeed.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 32D, 232D);
+			this.InfluentFeed.DesignMatrix = new NxtControl.Drawing.Matrix2D(1.15D, 0D, 0D, 1.15D, 16D, 140D);
 			this.InfluentFeed.Name = "InfluentFeed";
 			this.InfluentFeed.SecurityToken = ((uint)(4294967295u));
 			this.InfluentFeed.TagName = "B949570768DD3945";
@@ -109,7 +108,7 @@ namespace HMI.Main.Canvases
 			// InfluentFeed_1
 			// 
 			this.InfluentFeed_1.BeginInit();
-			this.InfluentFeed_1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 992D, 216D);
+			this.InfluentFeed_1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 1190D, 140D);
 			this.InfluentFeed_1.Name = "InfluentFeed_1";
 			this.InfluentFeed_1.SecurityToken = ((uint)(4294967295u));
 			this.InfluentFeed_1.TagName = "B949570768DD3945";
@@ -118,23 +117,11 @@ namespace HMI.Main.Canvases
 			// sDrainSettings1
 			// 
 			this.sDrainSettings1.BeginInit();
-			this.sDrainSettings1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 1096D, 160D);
+			this.sDrainSettings1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 1238D, 8D);
 			this.sDrainSettings1.Name = "sDrainSettings1";
 			this.sDrainSettings1.SecurityToken = ((uint)(4294967295u));
 			this.sDrainSettings1.TagName = "B949570768DD3945.InfluentFeedLogic";
 			this.sDrainSettings1.EndInit();
-			// 
-			// sDefault1
-			// 
-			this.sDefault1.BeginInit();
-			this.sDefault1.DefaultInstanceName = null;
-			this.sDefault1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 440D, 160D);
-			this.sDefault1.Instancelayer = SE.App2Base.SupportClasses.InstanceLayer.Base;
-			this.sDefault1.MyTagDisplayName = null;
-			this.sDefault1.Name = "sDefault1";
-			this.sDefault1.SecurityToken = ((uint)(4294967295u));
-			this.sDefault1.TagName = "B949570768DD3945.InfluentFeedLogic.Drain_InfluentFeed.Autotune1";
-			this.sDefault1.EndInit();
 			// 
 			// INFLUENT_FEED
 			// 
@@ -149,8 +136,7 @@ namespace HMI.Main.Canvases
 			this.changeCanvasButton3,
 			this.InfluentFeed_1,
 			this.sDrainSettings1,
-			this.btnAckNereda,
-			this.sDefault1});
+			this.btnAckNereda});
 			this.Size = new System.Drawing.Size(1366, 698);
 
 		}
@@ -162,7 +148,6 @@ namespace HMI.Main.Canvases
 		private SE.Nereda.Symbols.InfluentFeed.sInfluentFeed2 InfluentFeed;
 		private SE.Nereda.Symbols.InfluentFeed.sSensors InfluentFeed_1;
 		private SE.Nereda.Symbols.InfluentFeedLogic.sDrainSettings sDrainSettings1;
-		private SE.App2CommonProcess.Symbols.Autotune.sDefault sDefault1;
 		private NxtControl.GuiFramework.DrawnButton btnAckNereda;
 		#endregion
 	}

@@ -191,7 +191,7 @@ namespace SE.Nereda.Symbols.EmergencySludgeBuffer
 			this.ReactorName.Font = new NxtControl.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Bold);
 			this.ReactorName.Name = "ReactorName";
 			this.ReactorName.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("transparent"), 1F, NxtControl.Drawing.DashStyle.Solid);
-			this.ReactorName.Text = "Sludge Buffer";
+			this.ReactorName.Text = "Buffer de lodo";
 			this.ReactorName.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// line10

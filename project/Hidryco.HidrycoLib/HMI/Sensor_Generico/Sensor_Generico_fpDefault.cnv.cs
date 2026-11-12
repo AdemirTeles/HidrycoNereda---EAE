@@ -79,7 +79,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_Generico
 
 		// ---- dados recebidos da logica e da IHM (atualizados pelos Execute invisiveis)
 		short estado = 4;
-		bool falha, falhaAtiva, alHH, alH, alL, alLL, bHabHH, bHabH, bHabL, bHabLL;
+		bool falha, falhaAtiva, falhaCom, alHH, alH, alL, alLL, bHabHH, bHabH, bHabL, bHabLL;
 		float pv, rMin, rMax = 100F, fHH, fH, fL, fLL, fAltura;
 		string unidade = "";
 		uint casas = 2;
@@ -87,6 +87,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_Generico
 		void EstadoValueChanged(object sender, ValueChangedEventArgs e) { estado = Convert.ToInt16(e.Value); Atualiza(); }
 		void FalhaValueChanged(object sender, ValueChangedEventArgs e) { falha = Convert.ToBoolean(e.Value); Atualiza(); }
 		void FalhaAtivaValueChanged(object sender, ValueChangedEventArgs e) { falhaAtiva = Convert.ToBoolean(e.Value); Atualiza(); }
+		void FalhaComValueChanged(object sender, ValueChangedEventArgs e) { falhaCom = Convert.ToBoolean(e.Value); Atualiza(); }
 		void AlHHValueChanged(object sender, ValueChangedEventArgs e) { alHH = Convert.ToBoolean(e.Value); Atualiza(); }
 		void AlHValueChanged(object sender, ValueChangedEventArgs e) { alH = Convert.ToBoolean(e.Value); Atualiza(); }
 		void AlLValueChanged(object sender, ValueChangedEventArgs e) { alL = Convert.ToBoolean(e.Value); Atualiza(); }
@@ -132,7 +133,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_Generico
 		int Prioridade(out string texto)
 		{
 			if (estado == 4) { texto = ""; return 0; }
-			if (falha) { texto = "FALHA"; return 1; }
+			if (falha || falhaAtiva) { texto = "FALHA"; return 1; }   // o alarme de falha (AlarmeFalha) vale para sensor ou comunicacao
 			if (alHH) { texto = "HH"; return 1; }
 			if (alLL) { texto = "LL"; return 1; }
 			if (alH) { texto = "H"; return 2; }
@@ -170,6 +171,9 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_Generico
 			r.Bounds = new NxtControl.Drawing.RectF(x1, MAI_Y, Math.Max(x2 - x1, 0.01F), MAI_H);
 		}
 
+		bool skid;
+		void SkidValueChanged(object sender, ValueChangedEventArgs e) { skid = Convert.ToBoolean(e.Value); btnParametros.Visible = !skid; Atualiza(); }   // skid: sem ajustes
+
 		void AtualizaMai()
 		{
 			float x0 = MAI_X, x5 = MAI_X + MAI_W;
@@ -180,7 +184,10 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_Generico
 			if (xH < xL) xH = xL;
 			Zona(maiLL, x0, xLL); Zona(maiL, xLL, xL); Zona(maiN, xL, xH); Zona(maiH, xH, xHH); Zona(maiHH, xHH, x5);
 			bool ok = estado != 4 && !falhaAtiva;
-			maiPonteiro.Visible = ok;
+			// valor de skid (ja escalado no equipamento): sem indicador de faixa nem escala
+			maiLL.Visible = !skid; maiL.Visible = !skid; maiN.Visible = !skid; maiH.Visible = !skid; maiHH.Visible = !skid;
+			escalaMin.Visible = !skid; escalaMax.Visible = !skid;
+			maiPonteiro.Visible = ok && !skid;
 			maiPonteiro.Location = new NxtControl.Drawing.PointF(Pos(nivelOn ? pct : pv) - 5F, MAI_Y + MAI_H);
 		}
 
@@ -199,10 +206,10 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_Generico
 		void Atualiza()
 		{
 			string t; int p = Prioridade(out t);
-			Indicador(alP1, alP1n, alP2, alP2n, alTxt, p, t == "FALHA" ? "FALHA DO SENSOR" : (t.Length > 0 ? "ALARME " + t : ""), NaoRecDe(t));
+			Indicador(alP1, alP1n, alP2, alP2n, alTxt, p, t == "FALHA" ? (falhaCom ? "SEM COMUNICAÇÃO" : "FALHA DO SENSOR") : (t.Length > 0 ? "ALARME " + t : ""), NaoRecDe(t));
 			Pisca(AlgumNaoRec());
 			Valor(valor, invalido);
-			textoEstado.Text = estado == 4 ? "Sensor desabilitado" : (falha || falhaAtiva ? "Sensor em falha" : (p == 0 ? "Normal" : "Em alarme"));
+			textoEstado.Text = estado == 4 ? "Sensor desabilitado" : (falha || falhaAtiva ? (falhaCom ? "Sensor sem comunicação" : "Sensor em falha") : (p == 0 ? "Normal" : "Em alarme"));
 			bool ok = estado != 4 && !falhaAtiva;
 			tituloNivel.Visible = nivelOn; porcentagem.Visible = nivelOn && ok;
 			string suf = nivelOn ? " %" : Sufixo();   // sensor de nivel: setpoints de alarme em %
@@ -213,7 +220,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_Generico
 			Linha(estHP1, estHP1n, estHP2, estHP2n, estHTxt, normalH, estado != 4 && alH, 2, "ATIVO", NaoRec(eH));
 			Linha(estLP1, estLP1n, estLP2, estLP2n, estLTxt, normalL, estado != 4 && alL, 2, "ATIVO", NaoRec(eL));
 			Linha(estLLP1, estLLP1n, estLLP2, estLLP2n, estLLTxt, normalLL, estado != 4 && alLL, 1, "ATIVO", NaoRec(eLL));
-			Linha(estFalhaP1, estFalhaP1n, estFalhaP2, estFalhaP2n, estFalhaTxt, normalFalha, falha, 1, "FALHA", NaoRec(eFalha));
+			Linha(estFalhaP1, estFalhaP1n, estFalhaP2, estFalhaP2n, estFalhaTxt, normalFalha, estado != 4 && (falha || falhaAtiva), 1, "FALHA", NaoRec(eFalha));
 			AtualizaMai();
 		}
 

@@ -1,0 +1,353 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>EmergencyManagement</title><link rel="stylesheet" href="css/project.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.74.0"><meta name="description" content=""><link rel="home" href="index.html" title="Library: SE.Nereda"><link rel="up" href="CATs.html" title="Composite Automation Types"><link rel="prev" href="EmergencyInit2.EmergencyInit2_HMI.sInitStatus.html" title="sInitStatus"><link rel="next" href="EmergencyManagement.EmergencyManagement_HMI.sDefault.html" title="sDefault"></head><body><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="EmergencyManagement"></a>EmergencyManagement</h2></div><div><h2 class="subtitle" style="clear: both">Type: CAT Library: SE.Nereda</h2></div><div><div class="author"><h3 class="author"><span class="firstname">Firstname</span> <span class="surname">Surname</span></h3><code class="email"><a class="email" href="mailto:name@company.com">name@company.com</a></code></div></div><div><div class="abstract"><p class="title"><b>Abstract</b></p></div></div></div></div>
+    
+    
+
+    
+        <div class="figure"><a name="id152958"></a><p class="title"><b>Figure 287. Interface</b></p><div class="figure-contents">
+          
+          <div class="mediaobject"><img src="EmergencyManagement.fbt.gif" alt="Interface"></div>
+        </div></div><br class="figure-break">
+
+        <div class="table"><a name="id152963"></a><p class="title"><b>Table 663. Event Interface</b></p><div class="table-contents">
+            
+            
+            <table summary="Event Interface" border="1"><colgroup><col align="left"><col align="left"><col align="left"></colgroup><thead><tr><th align="left">Name</th><th align="left">With</th><th align="left">Description</th></tr></thead><tbody></tbody></table>
+        </div></div><br class="table-break">
+
+        <div class="table"><a name="id152975"></a><p class="title"><b>Table 664. Data Interface</b></p><div class="table-contents">
+            
+            
+            <table summary="Data Interface" border="1"><colgroup><col align="left"><col align="left"><col align="left"><col align="left"></colgroup><thead><tr><th align="left">Name</th><th align="left">Type</th><th align="left">Init Value</th><th align="left">Description</th></tr></thead><tbody><tr class="titlerow"><td colspan="4" align="left">Sockets</td></tr><tr><td align="left">IMode</td><td align="left">SE.Nereda.IMode</td><td align="left"> </td><td align="left"> </td></tr><tr><td align="left">IReactor1</td><td align="left">SE.Nereda.IEmergencyManagement</td><td align="left"> </td><td align="left"> </td></tr><tr><td align="left">IReactor2</td><td align="left">SE.Nereda.IEmergencyManagement</td><td align="left"> </td><td align="left"> </td></tr><tr><td align="left">IReactor3</td><td align="left">SE.Nereda.IEmergencyManagement</td><td align="left"> </td><td align="left"> </td></tr><tr><td align="left">IReactor4</td><td align="left">SE.Nereda.IEmergencyManagement</td><td align="left"> </td><td align="left"> </td></tr><tr><td align="left">IReactor5</td><td align="left">SE.Nereda.IEmergencyManagement</td><td align="left"> </td><td align="left"> </td></tr><tr><td align="left">IReactor6</td><td align="left">SE.Nereda.IEmergencyManagement</td><td align="left"> </td><td align="left"> </td></tr><tr><td align="left">ISludgeBuffer</td><td align="left">SE.Nereda.IEmergencyManagement</td><td align="left"> </td><td align="left"> </td></tr><tr><td align="left">IInfluentLevelMeasurement</td><td align="left">SE.App2Base.IAnalog</td><td align="left"> </td><td align="left"> </td></tr><tr class="titlerow"><td colspan="4" align="left">Plugs</td></tr><tr><td align="left">ITotalReactor</td><td align="left">SE.Nereda.ITotalReactor</td><td align="left"> </td><td align="left"> </td></tr><tr><td align="left">IEmergencyR1</td><td align="left">SE.Nereda.IReactorData</td><td align="left"> </td><td align="left"> </td></tr><tr><td align="left">IEmergencyR2</td><td align="left">SE.Nereda.IReactorData</td><td align="left"> </td><td align="left"> </td></tr><tr><td align="left">IEmergencyR3</td><td align="left">SE.Nereda.IReactorData</td><td align="left"> </td><td align="left"> </td></tr><tr><td align="left">IEmergencyR4</td><td align="left">SE.Nereda.IReactorData</td><td align="left"> </td><td align="left"> </td></tr><tr><td align="left">IEmergencyR5</td><td align="left">SE.Nereda.IReactorData</td><td align="left"> </td><td align="left"> </td></tr><tr><td align="left">IEmergencyR6</td><td align="left">SE.Nereda.IReactorData</td><td align="left"> </td><td align="left"> </td></tr></tbody></table>
+        </div></div><br class="table-break">
+<span class="descriptionbox"><p class="descriptionboxtitle">Description</p></span><p>For each reactor, the scheduler maintains a <code class="code">TimeSinceStartFeed</code> value.</p><p>This timer runs continuously for each reactor and is reset whenever the corresponding reactor enters the <span class="bold"><strong>Starting</strong></span> state of the Feed phase.</p><p>Example:</p><div class="itemizedlist"><ul type="disc"><li><p>Reactor 1: <code class="code">125 min</code> </p></li><li><p>Reactor 2: <code class="code">5 min</code> </p></li><li><p>Reactor 3: <code class="code">65 min</code> </p></li></ul></div><h4><a name="id153091"></a>2. Feed Order</h4><p>The reactors are ordered according to their <code class="code">TimeSinceStartFeed</code>.</p><p>The reactor with the <span class="bold"><strong>highest <code class="code">TimeSinceStartFeed</code> receives the highest feeding priority</strong></span>, because it is the reactor that has been waiting the longest since its previous Feed phase.</p><p>This ensures that the reactor which has had the longest available treatment time is selected first.</p><p>Example:</p><pre class="programlisting"><span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<pre class="code"><emphasis role="code"><div class="pointer-events-none absolute end-1.5 top-1 z-2 md:end-2 md:top-1"></div><div class="relative"><div class="pe-11 pt-3"><div class="relative z-0 flex max-w-full"><div id="code-block-viewer" class="q9tKkq_viewer cm-editor z-10 light:cm-light dark:cm-light flex h-full w-full flex-col items-stretch ͼd ͼr" dir="ltr"><div class="cm-scroller"><programlisting><code>TimeSinceStartFeed:
+R1 = 125 min
+R2 =   5 min
+R3 =  65 min</code></programlisting></div></div></div></div></div></emphasis></pre>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span><span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span></pre><p>Sorted from highest to lowest:</p><pre class="programlisting"><span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<pre class="code"><emphasis role="code"><div class="pointer-events-none absolute end-1.5 top-1 z-2 md:end-2 md:top-1"></div><div class="relative"><div class="pe-11 pt-3"><div class="relative z-0 flex max-w-full"><div id="code-block-viewer" class="q9tKkq_viewer cm-editor z-10 light:cm-light dark:cm-light flex h-full w-full flex-col items-stretch ͼd ͼr" dir="ltr"><div class="cm-scroller"><programlisting><code>125 → 65 → 5</code></programlisting></div></div></div></div></div></emphasis></pre>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span><span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span></pre><p>Therefore, the feed order is:</p><pre class="programlisting"><span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<pre class="code"><emphasis role="code"><div class="pointer-events-none absolute end-1.5 top-1 z-2 md:end-2 md:top-1"></div><div class="relative"><div class="pe-11 pt-3"><div class="relative z-0 flex max-w-full"><div id="code-block-viewer" class="q9tKkq_viewer cm-editor z-10 light:cm-light dark:cm-light flex h-full w-full flex-col items-stretch ͼd ͼr" dir="ltr"><div class="cm-scroller"><programlisting><code>R1 → R3 → R2</code></programlisting></div></div></div></div></div></emphasis></pre>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span><span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span></pre><p>Queue positions:</p><pre class="programlisting"><span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<pre class="code"><emphasis role="code"><div class="pointer-events-none absolute end-1.5 top-1 z-2 md:end-2 md:top-1"></div><div class="relative"><div class="pe-11 pt-3"><div class="relative z-0 flex max-w-full"><div id="code-block-viewer" class="q9tKkq_viewer cm-editor z-10 light:cm-light dark:cm-light flex h-full w-full flex-col items-stretch ͼd ͼr" dir="ltr"><div class="cm-scroller"><programlisting><code>R1 = 0
+R3 = 1
+R2 = 2</code></programlisting></div></div></div></div></div></emphasis></pre>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span><span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span></pre><h4><a name="id153178"></a>3. Feed Interval and Actual Cycle Time</h4><p>The nominal Feed Interval is calculated from the configured nominal cycle time and the total number of reactors:</p><pre class="programlisting"><span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<pre class="code"><emphasis role="code"><div class="pointer-events-none absolute end-1.5 top-1 z-2 md:end-2 md:top-1"></div><div class="relative"><div class="pe-11 pt-3"><div class="relative z-0 flex max-w-full"><div id="code-block-viewer" class="q9tKkq_viewer cm-editor z-10 light:cm-light dark:cm-light flex h-full w-full flex-col items-stretch ͼd ͼr" dir="ltr"><div class="cm-scroller"><programlisting><code>FeedInterval = NominalCycleTime / NumberOfReactors</code></programlisting></div></div></div></div></div></emphasis></pre>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span><span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span></pre><p>The Feed Interval remains unchanged when a reactor becomes unavailable, aborts, or is deselected.</p><p>Instead, the <span class="bold"><strong>Actual Cycle Time</strong></span> is reduced according to the number of available reactors:</p><pre class="programlisting"><span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<pre class="code"><emphasis role="code"><div class="pointer-events-none absolute end-1.5 top-1 z-2 md:end-2 md:top-1"></div><div class="relative"><div class="pe-11 pt-3"><div class="relative z-0 flex max-w-full"><div id="code-block-viewer" class="q9tKkq_viewer cm-editor z-10 light:cm-light dark:cm-light flex h-full w-full flex-col items-stretch ͼd ͼr" dir="ltr"><div class="cm-scroller"><programlisting><code>ActualCycleTime =
+NominalCycleTime ×
+(NumberOfAvailableReactors / NumberOfReactors)</code></programlisting></div></div></div></div></div></emphasis></pre>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span><span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span></pre><p>The Feed Interval can also be calculated from the Actual Cycle Time:</p><pre class="programlisting"><span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<pre class="code"><emphasis role="code"><div class="pointer-events-none absolute end-1.5 top-1 z-2 md:end-2 md:top-1"></div><div class="relative"><div class="pe-11 pt-3"><div class="relative z-0 flex max-w-full"><div id="code-block-viewer" class="q9tKkq_viewer cm-editor z-10 light:cm-light dark:cm-light flex h-full w-full flex-col items-stretch ͼd ͼr" dir="ltr"><div class="cm-scroller"><programlisting><code>FeedInterval =
+ActualCycleTime / NumberOfAvailableReactors</code></programlisting></div></div></div></div></div></emphasis></pre>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span><span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span></pre><p>Both calculations result in the same Feed Interval.</p><p>Example:</p><pre class="programlisting"><span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<pre class="code"><emphasis role="code"><div class="pointer-events-none absolute end-1.5 top-1 z-2 md:end-2 md:top-1"></div><div class="relative"><div class="pe-11 pt-3"><div class="relative z-0 flex max-w-full"><div id="code-block-viewer" class="q9tKkq_viewer cm-editor z-10 light:cm-light dark:cm-light flex h-full w-full flex-col items-stretch ͼd ͼr" dir="ltr"><div class="cm-scroller"><programlisting><code>NominalCycleTime = 300 min
+NumberOfReactors = 3</code></programlisting></div></div></div></div></div></emphasis></pre>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span><span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span></pre><p>Therefore:</p><pre class="programlisting"><span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<pre class="code"><emphasis role="code"><div class="pointer-events-none absolute end-1.5 top-1 z-2 md:end-2 md:top-1"></div><div class="relative"><div class="pe-11 pt-3"><div class="relative z-0 flex max-w-full"><div id="code-block-viewer" class="q9tKkq_viewer cm-editor z-10 light:cm-light dark:cm-light flex h-full w-full flex-col items-stretch ͼd ͼr" dir="ltr"><div class="cm-scroller"><programlisting><code>FeedInterval = 300 / 3
+             = 100 min</code></programlisting></div></div></div></div></div></emphasis></pre>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span><span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span></pre><p>If one reactor becomes unavailable:</p><pre class="programlisting"><span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<pre class="code"><emphasis role="code"><div class="pointer-events-none absolute end-1.5 top-1 z-2 md:end-2 md:top-1"></div><div class="relative"><div class="pe-11 pt-3"><div class="relative z-0 flex max-w-full"><div id="code-block-viewer" class="q9tKkq_viewer cm-editor z-10 light:cm-light dark:cm-light flex h-full w-full flex-col items-stretch ͼd ͼr" dir="ltr"><div class="cm-scroller"><programlisting><code>NumberOfAvailableReactors = 2</code></programlisting></div></div></div></div></div></emphasis></pre>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span><span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span></pre><p>Then:</p><pre class="programlisting"><span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<pre class="code"><emphasis role="code"><div class="pointer-events-none absolute end-1.5 top-1 z-2 md:end-2 md:top-1"></div><div class="relative"><div class="pe-11 pt-3"><div class="relative z-0 flex max-w-full"><div id="code-block-viewer" class="q9tKkq_viewer cm-editor z-10 light:cm-light dark:cm-light flex h-full w-full flex-col items-stretch ͼd ͼr" dir="ltr"><div class="cm-scroller"><programlisting><code>ActualCycleTime = 300 × (2 / 3)
+                = 200 min</code></programlisting></div></div></div></div></div></emphasis></pre>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span><span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span></pre><p>And:</p><pre class="programlisting"><span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<pre class="code"><emphasis role="code"><div class="pointer-events-none absolute end-1.5 top-1 z-2 md:end-2 md:top-1"></div><div class="relative"><div class="pe-11 pt-3"><div class="relative z-0 flex max-w-full"><div id="code-block-viewer" class="q9tKkq_viewer cm-editor z-10 light:cm-light dark:cm-light flex h-full w-full flex-col items-stretch ͼd ͼr" dir="ltr"><div class="cm-scroller"><programlisting><code>FeedInterval = 200 / 2
+             = 100 min</code></programlisting></div></div></div></div></div></emphasis></pre>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span><span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span></pre><p>Therefore, the Feed Interval remains <span class="bold"><strong>100 minutes</strong></span>, while the Actual Cycle Time becomes shorter.</p><h4><a name="id153344"></a>4. Plant Next Feed Horizon</h4><p>The <code class="code">NextFeedHorizon</code> represents the remaining time before the next Feed phase must start in the plant.</p><p>It is calculated using the <span class="bold"><strong>lowest <code class="code">TimeSinceStartFeed</code> among the reactors currently participating in the feed schedule</strong></span>:</p><pre class="programlisting"><span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<pre class="code"><emphasis role="code"><div class="pointer-events-none absolute end-1.5 top-1 z-2 md:end-2 md:top-1"></div><div class="relative"><div class="pe-11 pt-3"><div class="relative z-0 flex max-w-full"><div id="code-block-viewer" class="q9tKkq_viewer cm-editor z-10 light:cm-light dark:cm-light flex h-full w-full flex-col items-stretch ͼd ͼr" dir="ltr"><div class="cm-scroller"><programlisting><code>NextFeedHorizon =
+FeedInterval - LowestTimeSinceStartFeed</code></programlisting></div></div></div></div></div></emphasis></pre>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span><span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span></pre><p>Example:</p><pre class="programlisting"><span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<pre class="code"><emphasis role="code"><div class="pointer-events-none absolute end-1.5 top-1 z-2 md:end-2 md:top-1"></div><div class="relative"><div class="pe-11 pt-3"><div class="relative z-0 flex max-w-full"><div id="code-block-viewer" class="q9tKkq_viewer cm-editor z-10 light:cm-light dark:cm-light flex h-full w-full flex-col items-stretch ͼd ͼr" dir="ltr"><div class="cm-scroller"><programlisting><code>TimeSinceStartFeed:
+125 min
+5 min
+65 min</code></programlisting></div></div></div></div></div></emphasis></pre>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span><span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span></pre><p>The lowest value is:</p><pre class="programlisting"><span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<pre class="code"><emphasis role="code"><div class="pointer-events-none absolute end-1.5 top-1 z-2 md:end-2 md:top-1"></div><div class="relative"><div class="pe-11 pt-3"><div class="relative z-0 flex max-w-full"><div id="code-block-viewer" class="q9tKkq_viewer cm-editor z-10 light:cm-light dark:cm-light flex h-full w-full flex-col items-stretch ͼd ͼr" dir="ltr"><div class="cm-scroller"><programlisting><code>LowestTimeSinceStartFeed = 5 min</code></programlisting></div></div></div></div></div></emphasis></pre>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span><span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span></pre><p>With:</p><pre class="programlisting"><span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<pre class="code"><emphasis role="code"><div class="pointer-events-none absolute end-1.5 top-1 z-2 md:end-2 md:top-1"></div><div class="relative"><div class="pe-11 pt-3"><div class="relative z-0 flex max-w-full"><div id="code-block-viewer" class="q9tKkq_viewer cm-editor z-10 light:cm-light dark:cm-light flex h-full w-full flex-col items-stretch ͼd ͼr" dir="ltr"><div class="cm-scroller"><programlisting><code>FeedInterval = 100 min</code></programlisting></div></div></div></div></div></emphasis></pre>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span><span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span></pre><p>The result is:</p><pre class="programlisting"><span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<pre class="code"><emphasis role="code"><div class="pointer-events-none absolute end-1.5 top-1 z-2 md:end-2 md:top-1"></div><div class="relative"><div class="pe-11 pt-3"><div class="relative z-0 flex max-w-full"><div id="code-block-viewer" class="q9tKkq_viewer cm-editor z-10 light:cm-light dark:cm-light flex h-full w-full flex-col items-stretch ͼd ͼr" dir="ltr"><div class="cm-scroller"><programlisting><code>NextFeedHorizon = 100 - 5
+                = 95 min</code></programlisting></div></div></div></div></div></emphasis></pre>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span><span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span></pre><p>Therefore, the next Feed phase must start in <span class="bold"><strong>95 minutes</strong></span>.</p><h4><a name="id153451"></a>5. Next Feed Horizon per Reactor</h4><p>Each reactor receives its own <code class="code">NextFeedHorizonReactor</code> according to its position in the Feed queue.</p><p>The calculation is:</p><pre class="programlisting"><span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<pre class="code"><emphasis role="code"><div class="pointer-events-none absolute end-1.5 top-1 z-2 md:end-2 md:top-1"></div><div class="relative"><div class="pe-11 pt-3"><div class="relative z-0 flex max-w-full"><div id="code-block-viewer" class="q9tKkq_viewer cm-editor z-10 light:cm-light dark:cm-light flex h-full w-full flex-col items-stretch ͼd ͼr" dir="ltr"><div class="cm-scroller"><programlisting><code>NextFeedHorizonReactor =
+NextFeedHorizon +
+(FeedInterval × QueuePosition)</code></programlisting></div></div></div></div></div></emphasis></pre>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span><span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span></pre><p>Using the previous example:</p><pre class="programlisting"><span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<pre class="code"><emphasis role="code"><div class="pointer-events-none absolute end-1.5 top-1 z-2 md:end-2 md:top-1"></div><div class="relative"><div class="pe-11 pt-3"><div class="relative z-0 flex max-w-full"><div id="code-block-viewer" class="q9tKkq_viewer cm-editor z-10 light:cm-light dark:cm-light flex h-full w-full flex-col items-stretch ͼd ͼr" dir="ltr"><div class="cm-scroller"><programlisting><code>FeedInterval = 100 min
+NextFeedHorizon = 95 min</code></programlisting></div></div></div></div></div></emphasis></pre>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span><span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span></pre><p>Feed queue:</p><pre class="programlisting"><span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<pre class="code"><emphasis role="code"><div class="pointer-events-none absolute end-1.5 top-1 z-2 md:end-2 md:top-1"></div><div class="relative"><div class="pe-11 pt-3"><div class="relative z-0 flex max-w-full"><div id="code-block-viewer" class="q9tKkq_viewer cm-editor z-10 light:cm-light dark:cm-light flex h-full w-full flex-col items-stretch ͼd ͼr" dir="ltr"><div class="cm-scroller"><programlisting><code>R1 = Position 0
+R3 = Position 1
+R2 = Position 2</code></programlisting></div></div></div></div></div></emphasis></pre>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span><span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span></pre><p>Therefore:</p><pre class="programlisting"><span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<pre class="code"><emphasis role="code"><div class="pointer-events-none absolute end-1.5 top-1 z-2 md:end-2 md:top-1"></div><div class="relative"><div class="pe-11 pt-3"><div class="relative z-0 flex max-w-full"><div id="code-block-viewer" class="q9tKkq_viewer cm-editor z-10 light:cm-light dark:cm-light flex h-full w-full flex-col items-stretch ͼd ͼr" dir="ltr"><div class="cm-scroller"><programlisting><code>R1 = 95 + (100 × 0)
+   = 95 min
+
+R3 = 95 + (100 × 1)
+   = 195 min
+
+R2 = 95 + (100 × 2)
+   = 295 min</code></programlisting></div></div></div></div></div></emphasis></pre>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span><span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span></pre><h4><a name="id153534"></a>6. Interface with Reactor Fallback Control</h4><p>The scheduler sends the calculated <code class="code">NextFeedHorizonReactor</code> to each reactor instance.</p><p>Each reactor instance sends its current <span class="bold"><strong>availability status</strong></span> back to the scheduler.</p><p>The scheduler uses this information to determine:</p><pre class="programlisting"><span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;<pre class="code"><emphasis role="code"><div class="pointer-events-none absolute end-1.5 top-1 z-2 md:end-2 md:top-1"></div><div class="relative"><div class="pe-11 pt-3"><div class="relative z-0 flex max-w-full"><div id="code-block-viewer" class="q9tKkq_viewer cm-editor z-10 light:cm-light dark:cm-light flex h-full w-full flex-col items-stretch ͼd ͼr" dir="ltr"><div class="cm-scroller"><programlisting><code>NumberOfAvailableReactors</code></programlisting></div></div></div></div></div></emphasis></pre>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span><span style="color: red">&lt;div&gt;<span style="color: red">&lt;div&gt;&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span>&lt;/div&gt;</span></pre><p>and to update the Feed queue, Actual Cycle Time, and Next Feed Horizon accordingly.</p><p>I would use this version for a <span class="bold"><strong>functional specification / code description</strong></span>, because it explains both <span class="bold"><strong>what the logic does and why it does it</strong></span>.</p>
+  
+        <div class="table"><a name="id153563"></a><p class="title"><b>Table 665. Offline Parametrization</b></p><div class="table-contents">
+            
+            
+            <table summary="Offline Parametrization" border="1"><colgroup><col align="left"><col align="left"><col align="left"><col align="left"><col align="left"></colgroup><thead><tr><th align="left">Path</th><th align="left">Type</th><th align="left">Default Value</th><th align="left">Persisted</th><th align="left">PersistenceType</th><th align="left">Unit</th><th align="left">Description</th></tr></thead><tbody><tr><td align="left">EmergencyManagement.IThis.CT_Nominal</td><td align="left">TIME</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> TIME#0d_0h_0m_0s_0.0ms</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> False</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">Nominal cycle time</td></tr><tr><td align="left">EmergencyManagement.IThis.StartUpDelay</td><td align="left">TIME</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> TIME#0d_0h_0m_0s_0.0ms</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> False</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left"> </td></tr><tr><td align="left">EmergencyManagement.IThis.MinSettleTime</td><td align="left">TIME</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> TIME#0d_0h_0m_0s_0.0ms</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> False</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left"> </td></tr><tr><td align="left">EmergencyManagement.IThis.FB_IBL1</td><td align="left">REAL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0.0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> False</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left"> </td></tr><tr><td align="left">EmergencyManagement.NextFeedHorizon</td><td align="left">SE.Nereda.NextFeedHorizon</td><td align="left"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left"> </td><td class="auto-generated"> </td><td class="auto-generated"> </td><td class="auto-generated"> </td><td class="auto-generated"> </td></tr><tr><td align="left">EmergencyManagement.NextFeedHorizon.FallbackElapsedTime.FallbackElapsedTimeCalc.persistance</td><td align="left">Runtime.Standard.PERSISTENCE</td><td align="left"> </td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left"> </td><td class="auto-generated"> </td><td class="auto-generated"> </td><td class="auto-generated"> </td><td class="auto-generated"> </td></tr></tbody></table>
+        </div></div><br class="table-break"><p>
+            <img src="Images\locked.png">  : This value cannot be further changed by parent function blocks (type or instance)</p><p>
+            <img src="Images\overparametrization.png">  : This value has been modified and differs from initially configured value</p><p></p>
+        <div class="table"><a name="id153776"></a><p class="title"><b>Table 666. OPCUA</b></p><div class="table-contents">
+            
+            
+            <table summary="OPCUA" border="1"><colgroup><col align="left"><col align="left"><col align="left"><col align="left"><col align="left"><col align="left"><col align="left"></colgroup><thead><tr><th align="left">Path</th><th align="left">Browse Path</th><th align="left">Type</th><th align="left">Access Level</th><th align="left">Display Name</th><th align="left">Min. Sampl. Interval</th><th align="left">Description</th></tr></thead><tbody><tr><td align="left">EmergencyManagement.IThis.MinutesSinceLastFeedR1</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IThis.MinutesSinceLastFeedR1</td><td align="left">Duration</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> MinutesSinceLastFeedR1</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td></tr><tr><td align="left">EmergencyManagement.IThis.MinutesSinceLastAerateR1</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IThis.MinutesSinceLastAerateR1</td><td align="left">Duration</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> MinutesSinceLastAerateR1</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td></tr><tr><td align="left">EmergencyManagement.IThis.StartFeedPositionR1</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IThis.StartFeedPositionR1</td><td align="left">Int16</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> StartFeedPositionR1</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td></tr><tr><td align="left">EmergencyManagement.IThis.SettleTimeR1</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IThis.SettleTimeR1</td><td align="left">Duration</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> SettleTimeR1</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td></tr><tr><td align="left">EmergencyManagement.IThis.MinutesSinceLastAerateR2</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IThis.MinutesSinceLastAerateR2</td><td align="left">Duration</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> MinutesSinceLastAerateR2</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td></tr><tr><td align="left">EmergencyManagement.IThis.SettleTimeR2</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IThis.SettleTimeR2</td><td align="left">Duration</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> SettleTimeR2</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td></tr><tr><td align="left">EmergencyManagement.IThis.CT_ReactorActual</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IThis.CT_ReactorActual</td><td align="left">Duration</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CT_ReactorActual</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td></tr><tr><td align="left">EmergencyManagement.IThis.NbrTotalReactors</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IThis.NbrTotalReactors</td><td align="left">Int16</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> NbrTotalReactors</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td></tr><tr><td align="left">EmergencyManagement.IThis.NbrAvailableReactors</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IThis.NbrAvailableReactors</td><td align="left">Int16</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> NbrAvailableReactors</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td></tr><tr><td align="left">EmergencyManagement.IThis.iCT_Nominal</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IThis.iCT_Nominal</td><td align="left">Duration</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> iCT_Nominal</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td></tr><tr><td align="left">EmergencyManagement.IThis.FeedInterval</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IThis.FeedInterval</td><td align="left">Duration</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> FeedInterval</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td></tr><tr><td align="left">EmergencyManagement.IThis.CT_Nominal</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IThis.CT_Nominal</td><td align="left">Duration</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CT_Nominal</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Nominal cycle time</td></tr><tr><td align="left">EmergencyManagement.IThis.StartUpDelay</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IThis.StartUpDelay</td><td align="left">Duration</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> StartUpDelay</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td></tr><tr><td align="left">EmergencyManagement.IThis.MinSettleTime</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IThis.MinSettleTime</td><td align="left">Duration</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> MinSettleTime</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td></tr><tr><td align="left">EmergencyManagement.IThis.FB_IBL1</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IThis.FB_IBL1</td><td align="left">Float</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> FB_IBL1</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td></tr><tr><td align="left">EmergencyManagement.StartUpDelay.IThis.DurSp</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> StartUpDelay.IThis.DurSp</td><td align="left">Duration</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> DurSp</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td></tr><tr><td align="left">EmergencyManagement.StartUpDelay.IThis.DurPv</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> StartUpDelay.IThis.DurPv</td><td align="left">Duration</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> DurPv</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td></tr><tr><td align="left">EmergencyManagement.NextFeedHorizon.IThis.NextFeedHorizonR1</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> NextFeedHorizon.IThis.NextFeedHorizonR1</td><td align="left">Duration</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> NextFeedHorizonR1</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td></tr><tr><td align="left">EmergencyManagement.NextFeedHorizon.IThis.NextFeedHorizonR2</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> NextFeedHorizon.IThis.NextFeedHorizonR2</td><td align="left">Duration</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> NextFeedHorizonR2</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td></tr></tbody></table>
+        </div></div><br class="table-break"><p>
+            <img src="Images\locked.png">  : This value cannot be further changed by parent function blocks (type or instance)</p><p>
+            <img src="Images\overparametrization.png">  : This value has been modified and differs from initially configured value</p><p></p>
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <p></p><span class="linkbox"><p class="linkboxtitle">See also</p>
+    <p>
+    </p><p><a class="xref" href="EmergencyManagement.EmergencyManagement_HMI.sDefault.html" title="sDefault">sDefault</a></p><p>
+    </p><p><a class="xref" href="EmergencyManagement.EmergencyManagement_HMI.fpSettings.html" title="fpSettings">fpSettings</a></p><p>
+    </p><p><a class="xref" href="EmergencyManagement.EmergencyManagement_HMI.fpEquations.html" title="fpEquations">fpEquations</a></p><p>
+    </p><p><a class="xref" href="EmergencyManagement.EmergencyManagement_HMI.fpDiagram.html" title="fpDiagram">fpDiagram</a></p><p>
+    </p><p><a class="xref" href="EmergencyManagement.EmergencyManagement_HMI.sDataR1.html" title="sDataR1">sDataR1</a></p><p>
+    </p><p><a class="xref" href="EmergencyManagement.EmergencyManagement_HMI.sSettingsBtn.html" title="sSettingsBtn">sSettingsBtn</a></p><p>
+    </p><p><a class="xref" href="EmergencyManagement.EmergencyManagement_HMI.sDataR2.html" title="sDataR2">sDataR2</a></p><p>
+    </p><p><a class="xref" href="EmergencyManagement.EmergencyManagement_HMI.sReactorAvExist.html" title="sReactorAvExist">sReactorAvExist</a></p><p>
+    </p><p><a class="xref" href="EmergencyManagement.EmergencyManagement_HMI.sCycleCounter.html" title="sCycleCounter">sCycleCounter</a></p>
+    <p><a class="xref" href="index.html" title="Library: SE.Nereda">Library: SE.Nereda</a></p>
+    </span>
+</div></body></html>

@@ -25,27 +25,31 @@ namespace SE.Nereda.Symbols.CAerationLogic
 		/// </summary>
 		private void InitializeComponent()
 		{
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(sSettingsBtn));
-			this.OpenFp = new NxtControl.GuiFramework.RoundedRectangle();
+			this.OpenFp = new NxtControl.GuiFramework.DrawnButton();
 			// 
 			// OpenFp
 			// 
-			this.OpenFp.Bounds = new NxtControl.Drawing.RectF(((float)(8D)), ((float)(8D)), ((float)(40D)), ((float)(40D)));
-			this.OpenFp.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("transparent"));
-			this.OpenFp.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
-			this.OpenFp.ImageBytes = resources.GetString("OpenFp.ImageBytes");
+			this.OpenFp.Bounds = new NxtControl.Drawing.RectF(((float)(8D)), ((float)(8D)), ((float)(120D)), ((float)(40D)));
+			this.OpenFp.Brush = new NxtControl.Drawing.Brush("ButtonBrush");
+			this.OpenFp.Font = new NxtControl.Drawing.Font("ButtonFont");
+			this.OpenFp.InnerBorderColor = new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(0)));
 			this.OpenFp.Name = "OpenFp";
 			this.OpenFp.OpenFaceplates.Add(new NxtControl.GuiFramework.OpenFaceplate("fpSettingsS", NxtControl.GuiFramework.MouseButtonType.Click));
-			this.OpenFp.Radius = 10D;
+			this.OpenFp.Pen = new NxtControl.Drawing.Pen("ButtonPen");
+			this.OpenFp.Radius = 4D;
+			this.OpenFp.Text = "Ajustes da aeração";
+			this.OpenFp.TextColor = new NxtControl.Drawing.Color("ButtonTextColor");
+			this.OpenFp.TextColorMouseDown = new NxtControl.Drawing.Color("ButtonTextColorMouseDown");
+			this.OpenFp.Use3DEffect = false;
 			// 
 			// sSettingsBtn
 			// 
 			this.Shapes.AddRange(new System.ComponentModel.IComponent[] {
 			this.OpenFp});
-			this.SymbolSize = new System.Drawing.Size(96, 96);
+			this.SymbolSize = new System.Drawing.Size(232, 200);
 
 		}
-		private NxtControl.GuiFramework.RoundedRectangle OpenFp;
+		private NxtControl.GuiFramework.DrawnButton OpenFp;
 		#endregion
 	}
 }

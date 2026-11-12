@@ -1,0 +1,2642 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>EEE_Bruto</title><link rel="stylesheet" href="css/project.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.74.0"><meta name="description" content="Summary"><link rel="home" href="index.html" title="Project: Hidryco.HidrycoLib"><link rel="up" href="CATs.html" title="Composite Automation Types"><link rel="prev" href="Dosagem_Alcalinizante.html" title="Dosagem_Alcalinizante"><link rel="next" href="EEE_Bruto.EEE_Bruto_HMI.sDefault.html" title="sDefault"></head><body><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="EEE_Bruto"></a>EEE_Bruto</h2></div><div><h2 class="subtitle" style="clear: both">Type: CAT Library: Hidryco.HidrycoLib</h2></div><div><div class="author"><h3 class="author"><span class="firstname">Firstname</span> <span class="surname">Surname</span></h3><code class="email"><a class="email" href="mailto:name@company.com">name@company.com</a></code></div></div><div><div class="abstract"><p class="title"><b>Abstract</b></p><p>Summary</p></div></div></div></div><div class="figure"><a name="id53130"></a><p class="title"><b>Figure 36. Interface</b></p><div class="figure-contents"><div class="mediaobject"><img src="EEE_Bruto.fbt.gif" alt="Interface"></div></div></div><br class="figure-break"><div class="table"><a name="id53135"></a><p class="title"><b>Table 92. Event Interface</b></p><div class="table-contents"><table summary="Event Interface" border="1"><colgroup><col align="left"><col align="left"><col align="left"></colgroup><thead><tr><th align="left">Name</th><th align="left">With</th><th align="left">Description</th></tr></thead><tbody><tr class="titlerow"><td colspan="3" align="left">Event Inputs</td></tr><tr><td align="left">REQ</td><td align="left">stsBufferHH; stsEmergencia; ilkExterno; geradorConectado; geradorHabilitaBS01; geradorHabilitaBS02; geradorHabilitaBS03; stsGerador</td><td align="left">Atualizacao do processo</td></tr><tr><td align="left">E_RESET_FALHAS</td><td align="left">cmdResetFalhas</td><td align="left">Reset pelo processo (elevatoria, bombas e sensores) com cmdResetFalhas = TRUE</td></tr><tr class="titlerow"><td colspan="3" align="left">Event Outputs</td></tr><tr><td align="left">CNF</td><td align="left">stsNecessidade; stsBombasLigadas; stsSegurandoBuffer; stsModoBoias; stsFalhaRecalque; stsAlarme</td><td align="left">Status (so na mudanca)</td></tr></tbody></table></div></div><br class="table-break"><div class="table"><a name="id53163"></a><p class="title"><b>Table 93. Data Interface</b></p><div class="table-contents"><table summary="Data Interface" border="1"><colgroup><col align="left"><col align="left"><col align="left"><col align="left"></colgroup><thead><tr><th align="left">Name</th><th align="left">Type</th><th align="left">Init Value</th><th align="left">Description</th></tr></thead><tbody><tr class="titlerow"><td colspan="4" align="left">Inputs</td></tr><tr><td align="left">stsBufferHH</td><td align="left">BOOL</td><td align="left"> </td><td align="left">Alarme HH do nivel do tanque de equalizacao do Nereda (40-LT-0001): a elevatoria segura o esgoto</td></tr><tr><td align="left">stsEmergencia</td><td align="left">BOOL</td><td align="left"> </td><td align="left">Emergencia pelo processo (soma com a emergencia do PCM lida pelo symlink stsEmergenciaPainel): retira o comando das bombas</td></tr><tr><td align="left">ilkExterno</td><td align="left">BOOL</td><td align="left"> </td><td align="left">Intertravamento externo do automatico das bombas (ex.: falha das UCTs, futuro)</td></tr><tr><td align="left">geradorConectado</td><td align="left">BOOL</td><td align="left"> </td><td align="left">O gerador pode alimentar as bombas</td></tr><tr><td align="left">geradorHabilitaBS01</td><td align="left">BOOL</td><td align="left"> </td><td align="left">Bomba 100-BS-01 liberada para operar com a planta no gerador (HAB_BS_100_01 do CAT Subestacao)</td></tr><tr><td align="left">geradorHabilitaBS02</td><td align="left">BOOL</td><td align="left"> </td><td align="left">Bomba 100-BS-02 liberada para operar com a planta no gerador (HAB_BS_100_02 do CAT Subestacao)</td></tr><tr><td align="left">geradorHabilitaBS03</td><td align="left">BOOL</td><td align="left"> </td><td align="left">Bomba 100-BS-03 liberada para operar com a planta no gerador (HAB_BS_100_03 do CAT Subestacao)</td></tr><tr><td align="left">stsGerador</td><td align="left">BOOL</td><td align="left"> </td><td align="left">Planta alimentada pelo gerador</td></tr><tr><td align="left">cmdResetFalhas</td><td align="left">BOOL</td><td align="left"> </td><td align="left">TRUE = reset (com o evento E_RESET_FALHAS)</td></tr><tr><td align="left">cfgTempoFalhaBoiaL</td><td align="left">UINT</td><td align="left">10</td><td align="left">Operacao pelas boias com a boia LSL com defeito: bombas ficam ligadas este tempo (min) depois que a LSH desce</td></tr><tr><td align="left">cfgTempoPartidaPressao</td><td align="left">UINT</td><td align="left">30</td><td align="left">Alarmes L/LL do PIT-01 inibidos ate a bomba estar ligada ha este tempo (s); tambem inibidos com as bombas paradas</td></tr><tr><td align="left">cfgUsaFalhaComunicacao</td><td align="left">BOOL</td><td align="left">TRUE</td><td align="left">Bombas: TRUE = falha de comunicacao com o ATV630 (symlink atvComunicacaoBS0x = ComStatus do HW CAT) tira a bomba do automatico</td></tr><tr class="titlerow"><td colspan="4" align="left">Outputs</td></tr><tr><td align="left">stsNecessidade</td><td align="left">UINT</td><td align="left"> </td><td align="left">Numero de bombas pedidas (0, 1, 2)</td></tr><tr><td align="left">stsBombasLigadas</td><td align="left">UINT</td><td align="left"> </td><td align="left">Bombas ligadas</td></tr><tr><td align="left">stsSegurandoBuffer</td><td align="left">BOOL</td><td align="left"> </td><td align="left">Elevatoria parada segurando o esgoto (HH do tanque do Nereda)</td></tr><tr><td align="left">stsModoBoias</td><td align="left">BOOL</td><td align="left"> </td><td align="left">Operacao de emergencia pelas boias (LIT-03 em falha)</td></tr><tr><td align="left">stsFalhaRecalque</td><td align="left">BOOL</td><td align="left"> </td><td align="left">Falha de recalque (pressao LL com bomba ligada) - memorizada ate o reset</td></tr><tr><td align="left">stsAlarme</td><td align="left">BOOL</td><td align="left"> </td><td align="left">Algum alarme da elevatoria</td></tr></tbody></table></div></div><br class="table-break"><p>
+  </p><div class="table"><a name="id53272"></a><p class="title"><b>Table 94. Offline Parametrization</b></p><div class="table-contents"><table summary="Offline Parametrization" border="1"><colgroup><col align="left"><col align="left"><col align="left"><col align="left"><col align="left"></colgroup><thead><tr><th align="left">Path</th><th align="left">Type</th><th align="left">Default Value</th><th align="left">Persisted</th><th align="left">PersistenceType</th><th align="left">Unit</th><th align="left">Description</th></tr></thead><tbody><tr><td align="left">EEE_Bruto.LIT_100_03</td><td align="left">Hidryco.HidrycoLib.Sensor_Generico</td><td align="left"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left"> </td></tr><tr><td align="left">EEE_Bruto.LIT_100_03.IThis.CMD_HABILITA_SENSOR</td><td align="left">BOOL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> TRUE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> False</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">Sensor habilitado</td></tr><tr><td align="left">EEE_Bruto.LIT_100_03.IThis.STP_RANGE_MINIMO</td><td align="left">REAL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0.0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> False</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">Valor de engenharia em 4 mA</td></tr><tr><td align="left">EEE_Bruto.LIT_100_03.IThis.STP_RANGE_MAXIMO</td><td align="left">REAL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 100.0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> False</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">Valor de engenharia em 20 mA</td></tr><tr><td align="left">EEE_Bruto.LIT_100_03.IThis.STP_ALTURA_MAXIMA</td><td align="left">REAL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0.0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> False</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">Altura maxima do tanque (nivel)</td></tr><tr><td align="left">EEE_Bruto.LIT_100_03.IThis.CMD_HABILITA_ALARME_HH</td><td align="left">BOOL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> FALSE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> False</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">Alarme HH habilitado</td></tr><tr><td align="left">EEE_Bruto.LIT_100_03.IThis.CMD_HABILITA_ALARME_H</td><td align="left">BOOL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> FALSE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> False</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">Alarme H habilitado</td></tr><tr><td align="left">EEE_Bruto.LIT_100_03.IThis.CMD_HABILITA_ALARME_L</td><td align="left">BOOL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> FALSE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> False</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">Alarme L habilitado</td></tr><tr><td align="left">EEE_Bruto.LIT_100_03.IThis.CMD_HABILITA_ALARME_LL</td><td align="left">BOOL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> FALSE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> False</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">Alarme LL habilitado</td></tr><tr><td align="left">EEE_Bruto.LIT_100_03.IThis.STP_ALARME_HH</td><td align="left">REAL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0.0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> False</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">Setpoint do alarme HH</td></tr><tr><td align="left">EEE_Bruto.LIT_100_03.IThis.STP_ALARME_H</td><td align="left">REAL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0.0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> False</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">Setpoint do alarme H</td></tr><tr><td align="left">EEE_Bruto.LIT_100_03.IThis.STP_ALARME_L</td><td align="left">REAL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0.0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> False</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">Setpoint do alarme L</td></tr><tr><td align="left">EEE_Bruto.LIT_100_03.IThis.STP_ALARME_LL</td><td align="left">REAL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0.0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> False</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">Setpoint do alarme LL</td></tr><tr><td align="left">EEE_Bruto.LIT_100_03.IThis.STP_TEMPO_ALARME_HH</td><td align="left">UINT</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 5</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> False</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">Tempo do alarme HH (s); padrao 5 s (retardo contra alarme falso, ISA-18.2)</td></tr><tr><td align="left">EEE_Bruto.LIT_100_03.IThis.STP_TEMPO_ALARME_H</td><td align="left">UINT</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 5</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> False</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">Tempo do alarme H (s); padrao 5 s (retardo contra alarme falso, ISA-18.2)</td></tr><tr><td align="left">EEE_Bruto.LIT_100_03.IThis.STP_TEMPO_ALARME_L</td><td align="left">UINT</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 5</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> False</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">Tempo do alarme L (s); padrao 5 s (retardo contra alarme falso, ISA-18.2)</td></tr><tr><td align="left">EEE_Bruto.LIT_100_03.IThis.STP_TEMPO_ALARME_LL</td><td align="left">UINT</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 5</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> False</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">Tempo do alarme LL (s); padrao 5 s (retardo contra alarme falso, ISA-18.2)</td></tr><tr><td align="left">EEE_Bruto.PT_100_01</td><td align="left">Hidryco.HidrycoLib.Sensor_Generico</td><td align="left"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left"> </td><td class="auto-generated"> </td><td class="auto-generated"> </td><td class="auto-generated"> </td><td class="auto-generated"> </td></tr><tr><td align="left">EEE_Bruto.PT_100_01.IThis.CMD_HABILITA_SENSOR</td><td align="left">BOOL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> TRUE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> False</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">Sensor habilitado</td></tr><tr><td align="left">EEE_Bruto.PT_100_01.IThis.STP_RANGE_MINIMO</td><td align="left">REAL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0.0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> False</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">Valor de engenharia em 4 mA</td></tr><tr><td align="left">EEE_Bruto.PT_100_01.IThis.STP_RANGE_MAXIMO</td><td align="left">REAL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 100.0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> False</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">Valor de engenharia em 20 mA</td></tr><tr><td align="left">EEE_Bruto.PT_100_01.IThis.STP_ALTURA_MAXIMA</td><td align="left">REAL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0.0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> False</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">Altura maxima do tanque (nivel)</td></tr><tr><td align="left">EEE_Bruto.PT_100_01.IThis.CMD_HABILITA_ALARME_HH</td><td align="left">BOOL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> FALSE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> False</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">Alarme HH habilitado</td></tr><tr><td align="left">EEE_Bruto.PT_100_01.IThis.CMD_HABILITA_ALARME_H</td><td align="left">BOOL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> FALSE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> False</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">Alarme H habilitado</td></tr><tr><td align="left">EEE_Bruto.PT_100_01.IThis.CMD_HABILITA_ALARME_L</td><td align="left">BOOL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> FALSE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> False</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">Alarme L habilitado</td></tr><tr><td align="left">EEE_Bruto.PT_100_01.IThis.CMD_HABILITA_ALARME_LL</td><td align="left">BOOL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> FALSE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> False</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">Alarme LL habilitado</td></tr><tr><td align="left">EEE_Bruto.PT_100_01.IThis.STP_ALARME_HH</td><td align="left">REAL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0.0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> False</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">Setpoint do alarme HH</td></tr><tr><td align="left">EEE_Bruto.PT_100_01.IThis.STP_ALARME_H</td><td align="left">REAL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0.0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> False</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">Setpoint do alarme H</td></tr><tr><td align="left">EEE_Bruto.PT_100_01.IThis.STP_ALARME_L</td><td align="left">REAL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0.0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> False</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">Setpoint do alarme L</td></tr><tr><td align="left">EEE_Bruto.PT_100_01.IThis.STP_ALARME_LL</td><td align="left">REAL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0.0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> False</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">Setpoint do alarme LL</td></tr><tr><td align="left">EEE_Bruto.PT_100_01.IThis.STP_TEMPO_ALARME_HH</td><td align="left">UINT</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 5</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> False</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">Tempo do alarme HH (s); padrao 5 s (retardo contra alarme falso, ISA-18.2)</td></tr><tr><td align="left">EEE_Bruto.PT_100_01.IThis.STP_TEMPO_ALARME_H</td><td align="left">UINT</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 5</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> False</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">Tempo do alarme H (s); padrao 5 s (retardo contra alarme falso, ISA-18.2)</td></tr><tr><td align="left">EEE_Bruto.PT_100_01.IThis.STP_TEMPO_ALARME_L</td><td align="left">UINT</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 5</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> False</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">Tempo do alarme L (s); padrao 5 s (retardo contra alarme falso, ISA-18.2)</td></tr><tr><td align="left">EEE_Bruto.PT_100_01.IThis.STP_TEMPO_ALARME_LL</td><td align="left">UINT</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 5</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> False</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">Tempo do alarme LL (s); padrao 5 s (retardo contra alarme falso, ISA-18.2)</td></tr><tr><td align="left">EEE_Bruto.BS_100_01</td><td align="left">Hidryco.HidrycoLib.Motor_Generico</td><td align="left"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left"> </td><td class="auto-generated"> </td><td class="auto-generated"> </td><td class="auto-generated"> </td><td class="auto-generated"> </td></tr><tr><td align="left">EEE_Bruto.BS_100_01.IThis.STP_FALHA_LIGAMENTO</td><td align="left">UINT</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 10</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> False</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">Tempo maximo para confirmar partida (s). 0 = desabilitado</td></tr><tr><td align="left">EEE_Bruto.BS_100_01.IThis.STP_FALHA_DESLIGAMENTO</td><td align="left">UINT</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 10</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> False</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">Tempo maximo para confirmar parada (s). 0 = desabilitado</td></tr><tr><td align="left">EEE_Bruto.BS_100_01.IThis.STP_SAIDA_MANUAL</td><td align="left">REAL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 30.0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> False</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">Velocidade em manual (Hz)</td></tr><tr><td align="left">EEE_Bruto.BS_100_01.PersHorimetro</td><td align="left">Runtime.Standard.PERSISTENCE</td><td align="left"> </td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left"> </td><td class="auto-generated"> </td><td class="auto-generated"> </td><td class="auto-generated"> </td><td class="auto-generated"> </td></tr><tr><td align="left">EEE_Bruto.BS_100_01.Manutencao.persistance</td><td align="left">Runtime.Standard.PERSISTENCE</td><td align="left"> </td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left"> </td><td class="auto-generated"> </td><td class="auto-generated"> </td><td class="auto-generated"> </td><td class="auto-generated"> </td></tr><tr><td align="left">EEE_Bruto.BS_100_02</td><td align="left">Hidryco.HidrycoLib.Motor_Generico</td><td align="left"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left"> </td><td class="auto-generated"> </td><td class="auto-generated"> </td><td class="auto-generated"> </td><td class="auto-generated"> </td></tr><tr><td align="left">EEE_Bruto.BS_100_02.IThis.STP_FALHA_LIGAMENTO</td><td align="left">UINT</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 10</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> False</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">Tempo maximo para confirmar partida (s). 0 = desabilitado</td></tr><tr><td align="left">EEE_Bruto.BS_100_02.IThis.STP_FALHA_DESLIGAMENTO</td><td align="left">UINT</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 10</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> False</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">Tempo maximo para confirmar parada (s). 0 = desabilitado</td></tr><tr><td align="left">EEE_Bruto.BS_100_02.IThis.STP_SAIDA_MANUAL</td><td align="left">REAL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 30.0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> False</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">Velocidade em manual (Hz)</td></tr><tr><td align="left">EEE_Bruto.BS_100_02.PersHorimetro</td><td align="left">Runtime.Standard.PERSISTENCE</td><td align="left"> </td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left"> </td><td class="auto-generated"> </td><td class="auto-generated"> </td><td class="auto-generated"> </td><td class="auto-generated"> </td></tr><tr><td align="left">EEE_Bruto.BS_100_02.Manutencao.persistance</td><td align="left">Runtime.Standard.PERSISTENCE</td><td align="left"> </td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left"> </td><td class="auto-generated"> </td><td class="auto-generated"> </td><td class="auto-generated"> </td><td class="auto-generated"> </td></tr><tr><td align="left">EEE_Bruto.BS_100_03</td><td align="left">Hidryco.HidrycoLib.Motor_Generico</td><td align="left"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left"> </td><td class="auto-generated"> </td><td class="auto-generated"> </td><td class="auto-generated"> </td><td class="auto-generated"> </td></tr><tr><td align="left">EEE_Bruto.BS_100_03.IThis.STP_FALHA_LIGAMENTO</td><td align="left">UINT</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 10</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> False</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">Tempo maximo para confirmar partida (s). 0 = desabilitado</td></tr><tr><td align="left">EEE_Bruto.BS_100_03.IThis.STP_FALHA_DESLIGAMENTO</td><td align="left">UINT</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 10</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> False</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">Tempo maximo para confirmar parada (s). 0 = desabilitado</td></tr><tr><td align="left">EEE_Bruto.BS_100_03.IThis.STP_SAIDA_MANUAL</td><td align="left">REAL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 30.0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> False</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">Velocidade em manual (Hz)</td></tr><tr><td align="left">EEE_Bruto.BS_100_03.PersHorimetro</td><td align="left">Runtime.Standard.PERSISTENCE</td><td align="left"> </td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left"> </td><td class="auto-generated"> </td><td class="auto-generated"> </td><td class="auto-generated"> </td><td class="auto-generated"> </td></tr><tr><td align="left">EEE_Bruto.BS_100_03.Manutencao.persistance</td><td align="left">Runtime.Standard.PERSISTENCE</td><td align="left"> </td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left"> </td><td class="auto-generated"> </td><td class="auto-generated"> </td><td class="auto-generated"> </td><td class="auto-generated"> </td></tr><tr><td align="left">EEE_Bruto.Necessidade</td><td align="left">Hidryco.HidrycoLib.Controle_Necessidade</td><td align="left"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left"> </td><td class="auto-generated"> </td><td class="auto-generated"> </td><td class="auto-generated"> </td><td class="auto-generated"> </td></tr><tr><td align="left">EEE_Bruto.Necessidade.IThis.CMD_HABILITA</td><td align="left">BOOL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> TRUE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> False</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">Habilitado</td></tr><tr><td align="left">EEE_Bruto.Necessidade.IThis.STP_LIMITE_FAIXA_1</td><td align="left">REAL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 20.0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> False</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">Limite da faixa 1</td></tr><tr><td align="left">EEE_Bruto.Necessidade.IThis.STP_LIMITE_FAIXA_2</td><td align="left">REAL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 40.0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> False</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">Limite da faixa 2</td></tr><tr><td align="left">EEE_Bruto.Necessidade.IThis.STP_LIMITE_FAIXA_3</td><td align="left">REAL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 50.0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> False</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">Limite da faixa 3</td></tr><tr><td align="left">EEE_Bruto.Necessidade.IThis.STP_LIMITE_FAIXA_4</td><td align="left">REAL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 70.0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> False</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">Limite da faixa 4</td></tr><tr><td align="left">EEE_Bruto.Revezamento</td><td align="left">Hidryco.HidrycoLib.Controle_Revezamento_3</td><td align="left"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left"> </td><td class="auto-generated"> </td><td class="auto-generated"> </td><td class="auto-generated"> </td><td class="auto-generated"> </td></tr><tr><td align="left">EEE_Bruto.Revezamento.IThis.CMD_HABILITA</td><td align="left">BOOL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> TRUE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> False</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">Troca da principal por tempo</td></tr><tr><td align="left">EEE_Bruto.Revezamento.IThis.STP_TEMPO_B1</td><td align="left">UINT</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 24</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> False</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">Horas do equipamento 1 como principal</td></tr><tr><td align="left">EEE_Bruto.Revezamento.IThis.STP_TEMPO_B2</td><td align="left">UINT</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 24</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> False</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">Horas do equipamento 2 como principal</td></tr><tr><td align="left">EEE_Bruto.Revezamento.IThis.STP_TEMPO_B3</td><td align="left">UINT</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 24</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> False</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">Horas do equipamento 3 como principal</td></tr><tr><td align="left">EEE_Bruto.Revezamento.IThis.CMD_SELECAO_BOMBA</td><td align="left">INT</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> False</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">Bomba principal</td></tr><tr><td align="left">EEE_Bruto.PID</td><td align="left">Hidryco.HidrycoLib.Controle_PID</td><td align="left"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left"> </td><td class="auto-generated"> </td><td class="auto-generated"> </td><td class="auto-generated"> </td><td class="auto-generated"> </td></tr><tr><td align="left">EEE_Bruto.PID.IThis.CMD_HABILITA</td><td align="left">BOOL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> TRUE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> False</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">PID habilitado</td></tr><tr><td align="left">EEE_Bruto.PID.IThis.STP_DESEJADO</td><td align="left">REAL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 50.0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> False</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">Valor desejado</td></tr><tr><td align="left">EEE_Bruto.PID.IThis.STP_PARAMETRO_KP</td><td align="left">REAL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 2.0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> False</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">Ganho (Kp)</td></tr><tr><td align="left">EEE_Bruto.PID.IThis.STP_PARAMETRO_KI</td><td align="left">REAL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 120.0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> False</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">Tempo integral (s)</td></tr><tr><td align="left">EEE_Bruto.PID.IThis.STP_PARAMETRO_KD</td><td align="left">REAL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0.0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> False</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">Tempo derivativo (s)</td></tr><tr><td align="left">EEE_Bruto.PID.IThis.STP_MINIMO</td><td align="left">REAL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0.0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> False</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">Saída mínima</td></tr><tr><td align="left">EEE_Bruto.PID.IThis.STP_MAXIMO</td><td align="left">REAL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 100.0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> True</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> False</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Standard</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> </td><td align="left">Saída máxima</td></tr></tbody></table></div></div><br class="table-break"><p>
+            <img src="Images\locked.png">  : This value cannot be further changed by parent function blocks (type or instance)</p><p>
+            <img src="Images\overparametrization.png">  : This value has been modified and differs from initially configured value</p><p></p><div class="table"><a name="id55771"></a><p class="title"><b>Table 95. OPCUA</b></p><div class="table-contents"><table summary="OPCUA" border="1"><colgroup><col align="left"><col align="left"><col align="left"><col align="left"><col align="left"><col align="left"><col align="left"></colgroup><thead><tr><th align="left">Path</th><th align="left">Browse Path</th><th align="left">Type</th><th align="left">Access Level</th><th align="left">Display Name</th><th align="left">Min. Sampl. Interval</th><th align="left">Description</th></tr></thead><tbody><tr><td align="left">EEE_Bruto.IThis.STS_VELOCIDADE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IThis.STS_VELOCIDADE</td><td align="left">Float</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_VELOCIDADE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Velocidade enviada as bombas (Hz)</td></tr><tr><td align="left">EEE_Bruto.IThis.STS_BOIA_L</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IThis.STS_BOIA_L</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_BOIA_L</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> LSL-04 levantada</td></tr><tr><td align="left">EEE_Bruto.IThis.STS_BOIA_H</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IThis.STS_BOIA_H</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_BOIA_H</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> LSH-05 levantada</td></tr><tr><td align="left">EEE_Bruto.IThis.cmdResetFalhas</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> IThis.cmdResetFalhas</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> cmdResetFalhas</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Reset das falhas da elevatoria (recalque, boia) e reconhecimento</td></tr><tr><td align="left">EEE_Bruto.LIT_100_03.IThis.STS_SENSOR</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> LIT_100_03.IThis.STS_SENSOR</td><td align="left">Float</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_SENSOR</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Valor em unidade de engenharia</td></tr><tr><td align="left">EEE_Bruto.LIT_100_03.IThis.STS_PORCENTAGEM</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> LIT_100_03.IThis.STS_PORCENTAGEM</td><td align="left">Float</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_PORCENTAGEM</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Nivel em % (so sensor de nivel)</td></tr><tr><td align="left">EEE_Bruto.LIT_100_03.IThis.STS_FALHA_SENSOR</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> LIT_100_03.IThis.STS_FALHA_SENSOR</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_FALHA_SENSOR</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Falha do sensor (4-20 mA fora da faixa ou falha do instrumento), sem a falha de comunicacao</td></tr><tr><td align="left">EEE_Bruto.LIT_100_03.IThis.STS_ALARME_HH</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> LIT_100_03.IThis.STS_ALARME_HH</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_ALARME_HH</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Alarme HH</td></tr><tr><td align="left">EEE_Bruto.LIT_100_03.IThis.STS_ALARME_H</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> LIT_100_03.IThis.STS_ALARME_H</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_ALARME_H</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Alarme H</td></tr><tr><td align="left">EEE_Bruto.LIT_100_03.IThis.STS_ALARME_L</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> LIT_100_03.IThis.STS_ALARME_L</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_ALARME_L</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Alarme L</td></tr><tr><td align="left">EEE_Bruto.LIT_100_03.IThis.STS_ALARME_LL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> LIT_100_03.IThis.STS_ALARME_LL</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_ALARME_LL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Alarme LL</td></tr><tr><td align="left">EEE_Bruto.LIT_100_03.IThis.STS_ALARME</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> LIT_100_03.IThis.STS_ALARME</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_ALARME</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Algum alarme</td></tr><tr><td align="left">EEE_Bruto.LIT_100_03.IThis.CommonError</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> LIT_100_03.IThis.CommonError</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CommonError</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Nereda: erro do sensor (= STS_FALHA_SENSOR)</td></tr><tr><td align="left">EEE_Bruto.LIT_100_03.IThis.Reliability</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> LIT_100_03.IThis.Reliability</td><td align="left">Int16</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Reliability</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Nereda: confiabilidade do sensor (%), fixo em 80</td></tr><tr><td align="left">EEE_Bruto.LIT_100_03.IThis.DaysToMaintenance</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> LIT_100_03.IThis.DaysToMaintenance</td><td align="left">Int16</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> DaysToMaintenance</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Nereda: dias para a manutencao (sem fonte: 0)</td></tr><tr><td align="left">EEE_Bruto.LIT_100_03.IThis.CMD_HABILITA_SENSOR</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> LIT_100_03.IThis.CMD_HABILITA_SENSOR</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CMD_HABILITA_SENSOR</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Sensor habilitado</td></tr><tr><td align="left">EEE_Bruto.LIT_100_03.IThis.STP_RANGE_MINIMO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> LIT_100_03.IThis.STP_RANGE_MINIMO</td><td align="left">Float</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STP_RANGE_MINIMO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Valor de engenharia em 4 mA</td></tr><tr><td align="left">EEE_Bruto.LIT_100_03.IThis.STP_RANGE_MAXIMO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> LIT_100_03.IThis.STP_RANGE_MAXIMO</td><td align="left">Float</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STP_RANGE_MAXIMO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Valor de engenharia em 20 mA</td></tr><tr><td align="left">EEE_Bruto.LIT_100_03.IThis.STP_ALTURA_MAXIMA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> LIT_100_03.IThis.STP_ALTURA_MAXIMA</td><td align="left">Float</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STP_ALTURA_MAXIMA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Altura maxima do tanque (nivel)</td></tr><tr><td align="left">EEE_Bruto.LIT_100_03.IThis.CMD_HABILITA_ALARME_HH</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> LIT_100_03.IThis.CMD_HABILITA_ALARME_HH</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CMD_HABILITA_ALARME_HH</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Alarme HH habilitado</td></tr><tr><td align="left">EEE_Bruto.LIT_100_03.IThis.CMD_HABILITA_ALARME_H</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> LIT_100_03.IThis.CMD_HABILITA_ALARME_H</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CMD_HABILITA_ALARME_H</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Alarme H habilitado</td></tr><tr><td align="left">EEE_Bruto.LIT_100_03.IThis.CMD_HABILITA_ALARME_L</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> LIT_100_03.IThis.CMD_HABILITA_ALARME_L</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CMD_HABILITA_ALARME_L</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Alarme L habilitado</td></tr><tr><td align="left">EEE_Bruto.LIT_100_03.IThis.CMD_HABILITA_ALARME_LL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> LIT_100_03.IThis.CMD_HABILITA_ALARME_LL</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CMD_HABILITA_ALARME_LL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Alarme LL habilitado</td></tr><tr><td align="left">EEE_Bruto.LIT_100_03.IThis.STP_ALARME_HH</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> LIT_100_03.IThis.STP_ALARME_HH</td><td align="left">Float</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STP_ALARME_HH</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Setpoint do alarme HH</td></tr><tr><td align="left">EEE_Bruto.LIT_100_03.IThis.STP_ALARME_H</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> LIT_100_03.IThis.STP_ALARME_H</td><td align="left">Float</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STP_ALARME_H</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Setpoint do alarme H</td></tr><tr><td align="left">EEE_Bruto.LIT_100_03.IThis.STP_ALARME_L</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> LIT_100_03.IThis.STP_ALARME_L</td><td align="left">Float</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STP_ALARME_L</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Setpoint do alarme L</td></tr><tr><td align="left">EEE_Bruto.LIT_100_03.IThis.STP_ALARME_LL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> LIT_100_03.IThis.STP_ALARME_LL</td><td align="left">Float</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STP_ALARME_LL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Setpoint do alarme LL</td></tr><tr><td align="left">EEE_Bruto.LIT_100_03.IThis.STP_TEMPO_ALARME_HH</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> LIT_100_03.IThis.STP_TEMPO_ALARME_HH</td><td align="left">UInt16</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STP_TEMPO_ALARME_HH</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Tempo do alarme HH (s); padrao 5 s (retardo contra alarme falso, ISA-18.2)</td></tr><tr><td align="left">EEE_Bruto.LIT_100_03.IThis.STP_TEMPO_ALARME_H</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> LIT_100_03.IThis.STP_TEMPO_ALARME_H</td><td align="left">UInt16</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STP_TEMPO_ALARME_H</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Tempo do alarme H (s); padrao 5 s (retardo contra alarme falso, ISA-18.2)</td></tr><tr><td align="left">EEE_Bruto.LIT_100_03.IThis.STP_TEMPO_ALARME_L</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> LIT_100_03.IThis.STP_TEMPO_ALARME_L</td><td align="left">UInt16</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STP_TEMPO_ALARME_L</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Tempo do alarme L (s); padrao 5 s (retardo contra alarme falso, ISA-18.2)</td></tr><tr><td align="left">EEE_Bruto.LIT_100_03.IThis.STP_TEMPO_ALARME_LL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> LIT_100_03.IThis.STP_TEMPO_ALARME_LL</td><td align="left">UInt16</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STP_TEMPO_ALARME_LL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Tempo do alarme LL (s); padrao 5 s (retardo contra alarme falso, ISA-18.2)</td></tr><tr><td align="left">EEE_Bruto.LIT_100_03.IThis.CMD_RESET</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> LIT_100_03.IThis.CMD_RESET</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CMD_RESET</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Reset de falha e alarmes</td></tr><tr><td align="left">EEE_Bruto.PT_100_01.IThis.STS_SENSOR</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> PT_100_01.IThis.STS_SENSOR</td><td align="left">Float</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_SENSOR</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Valor em unidade de engenharia</td></tr><tr><td align="left">EEE_Bruto.PT_100_01.IThis.STS_PORCENTAGEM</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> PT_100_01.IThis.STS_PORCENTAGEM</td><td align="left">Float</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_PORCENTAGEM</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Nivel em % (so sensor de nivel)</td></tr><tr><td align="left">EEE_Bruto.PT_100_01.IThis.STS_FALHA_SENSOR</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> PT_100_01.IThis.STS_FALHA_SENSOR</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_FALHA_SENSOR</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Falha do sensor (4-20 mA fora da faixa ou falha do instrumento), sem a falha de comunicacao</td></tr><tr><td align="left">EEE_Bruto.PT_100_01.IThis.STS_ALARME_HH</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> PT_100_01.IThis.STS_ALARME_HH</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_ALARME_HH</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Alarme HH</td></tr><tr><td align="left">EEE_Bruto.PT_100_01.IThis.STS_ALARME_H</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> PT_100_01.IThis.STS_ALARME_H</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_ALARME_H</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Alarme H</td></tr><tr><td align="left">EEE_Bruto.PT_100_01.IThis.STS_ALARME_L</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> PT_100_01.IThis.STS_ALARME_L</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_ALARME_L</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Alarme L</td></tr><tr><td align="left">EEE_Bruto.PT_100_01.IThis.STS_ALARME_LL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> PT_100_01.IThis.STS_ALARME_LL</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_ALARME_LL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Alarme LL</td></tr><tr><td align="left">EEE_Bruto.PT_100_01.IThis.STS_ALARME</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> PT_100_01.IThis.STS_ALARME</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_ALARME</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Algum alarme</td></tr><tr><td align="left">EEE_Bruto.PT_100_01.IThis.CommonError</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> PT_100_01.IThis.CommonError</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CommonError</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Nereda: erro do sensor (= STS_FALHA_SENSOR)</td></tr><tr><td align="left">EEE_Bruto.PT_100_01.IThis.Reliability</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> PT_100_01.IThis.Reliability</td><td align="left">Int16</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Reliability</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Nereda: confiabilidade do sensor (%), fixo em 80</td></tr><tr><td align="left">EEE_Bruto.PT_100_01.IThis.DaysToMaintenance</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> PT_100_01.IThis.DaysToMaintenance</td><td align="left">Int16</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> DaysToMaintenance</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Nereda: dias para a manutencao (sem fonte: 0)</td></tr><tr><td align="left">EEE_Bruto.PT_100_01.IThis.CMD_HABILITA_SENSOR</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> PT_100_01.IThis.CMD_HABILITA_SENSOR</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CMD_HABILITA_SENSOR</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Sensor habilitado</td></tr><tr><td align="left">EEE_Bruto.PT_100_01.IThis.STP_RANGE_MINIMO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> PT_100_01.IThis.STP_RANGE_MINIMO</td><td align="left">Float</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STP_RANGE_MINIMO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Valor de engenharia em 4 mA</td></tr><tr><td align="left">EEE_Bruto.PT_100_01.IThis.STP_RANGE_MAXIMO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> PT_100_01.IThis.STP_RANGE_MAXIMO</td><td align="left">Float</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STP_RANGE_MAXIMO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Valor de engenharia em 20 mA</td></tr><tr><td align="left">EEE_Bruto.PT_100_01.IThis.STP_ALTURA_MAXIMA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> PT_100_01.IThis.STP_ALTURA_MAXIMA</td><td align="left">Float</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STP_ALTURA_MAXIMA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Altura maxima do tanque (nivel)</td></tr><tr><td align="left">EEE_Bruto.PT_100_01.IThis.CMD_HABILITA_ALARME_HH</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> PT_100_01.IThis.CMD_HABILITA_ALARME_HH</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CMD_HABILITA_ALARME_HH</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Alarme HH habilitado</td></tr><tr><td align="left">EEE_Bruto.PT_100_01.IThis.CMD_HABILITA_ALARME_H</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> PT_100_01.IThis.CMD_HABILITA_ALARME_H</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CMD_HABILITA_ALARME_H</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Alarme H habilitado</td></tr><tr><td align="left">EEE_Bruto.PT_100_01.IThis.CMD_HABILITA_ALARME_L</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> PT_100_01.IThis.CMD_HABILITA_ALARME_L</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CMD_HABILITA_ALARME_L</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Alarme L habilitado</td></tr><tr><td align="left">EEE_Bruto.PT_100_01.IThis.CMD_HABILITA_ALARME_LL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> PT_100_01.IThis.CMD_HABILITA_ALARME_LL</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CMD_HABILITA_ALARME_LL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Alarme LL habilitado</td></tr><tr><td align="left">EEE_Bruto.PT_100_01.IThis.STP_ALARME_HH</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> PT_100_01.IThis.STP_ALARME_HH</td><td align="left">Float</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STP_ALARME_HH</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Setpoint do alarme HH</td></tr><tr><td align="left">EEE_Bruto.PT_100_01.IThis.STP_ALARME_H</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> PT_100_01.IThis.STP_ALARME_H</td><td align="left">Float</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STP_ALARME_H</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Setpoint do alarme H</td></tr><tr><td align="left">EEE_Bruto.PT_100_01.IThis.STP_ALARME_L</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> PT_100_01.IThis.STP_ALARME_L</td><td align="left">Float</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STP_ALARME_L</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Setpoint do alarme L</td></tr><tr><td align="left">EEE_Bruto.PT_100_01.IThis.STP_ALARME_LL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> PT_100_01.IThis.STP_ALARME_LL</td><td align="left">Float</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STP_ALARME_LL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Setpoint do alarme LL</td></tr><tr><td align="left">EEE_Bruto.PT_100_01.IThis.STP_TEMPO_ALARME_HH</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> PT_100_01.IThis.STP_TEMPO_ALARME_HH</td><td align="left">UInt16</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STP_TEMPO_ALARME_HH</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Tempo do alarme HH (s); padrao 5 s (retardo contra alarme falso, ISA-18.2)</td></tr><tr><td align="left">EEE_Bruto.PT_100_01.IThis.STP_TEMPO_ALARME_H</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> PT_100_01.IThis.STP_TEMPO_ALARME_H</td><td align="left">UInt16</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STP_TEMPO_ALARME_H</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Tempo do alarme H (s); padrao 5 s (retardo contra alarme falso, ISA-18.2)</td></tr><tr><td align="left">EEE_Bruto.PT_100_01.IThis.STP_TEMPO_ALARME_L</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> PT_100_01.IThis.STP_TEMPO_ALARME_L</td><td align="left">UInt16</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STP_TEMPO_ALARME_L</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Tempo do alarme L (s); padrao 5 s (retardo contra alarme falso, ISA-18.2)</td></tr><tr><td align="left">EEE_Bruto.PT_100_01.IThis.STP_TEMPO_ALARME_LL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> PT_100_01.IThis.STP_TEMPO_ALARME_LL</td><td align="left">UInt16</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STP_TEMPO_ALARME_LL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Tempo do alarme LL (s); padrao 5 s (retardo contra alarme falso, ISA-18.2)</td></tr><tr><td align="left">EEE_Bruto.PT_100_01.IThis.CMD_RESET</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> PT_100_01.IThis.CMD_RESET</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CMD_RESET</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Reset de falha e alarmes</td></tr><tr><td align="left">EEE_Bruto.BS_100_01.IThis.STS_REMOTO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_01.IThis.STS_REMOTO</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_REMOTO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Chave em remoto</td></tr><tr><td align="left">EEE_Bruto.BS_100_01.IThis.STS_LOCAL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_01.IThis.STS_LOCAL</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_LOCAL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Chave em local</td></tr><tr><td align="left">EEE_Bruto.BS_100_01.IThis.STS_MANUTENCAO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_01.IThis.STS_MANUTENCAO</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_MANUTENCAO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Chave nem local nem remoto</td></tr><tr><td align="left">EEE_Bruto.BS_100_01.IThis.STS_LIGADO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_01.IThis.STS_LIGADO</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_LIGADO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Motor ligado</td></tr><tr><td align="left">EEE_Bruto.BS_100_01.IThis.fbkStsAutomatico</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_01.IThis.fbkStsAutomatico</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> fbkStsAutomatico</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Modo automatico (retorno para a IHM)</td></tr><tr><td align="left">EEE_Bruto.BS_100_01.IThis.STS_ANIMACAO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_01.IThis.STS_ANIMACAO</td><td align="left">Int16</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_ANIMACAO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0 desligado, 1 ligado, 2 falha, 3 manutencao</td></tr><tr><td align="left">EEE_Bruto.BS_100_01.IThis.STS_ANIMACAO_GERADOR</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_01.IThis.STS_ANIMACAO_GERADOR</td><td align="left">Int16</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_ANIMACAO_GERADOR</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0 nao conectado, 1 conectado, 2 selecionado, 3 selecionado e gerador ligado</td></tr><tr><td align="left">EEE_Bruto.BS_100_01.IThis.STS_ALARME</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_01.IThis.STS_ALARME</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_ALARME</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Alarme geral</td></tr><tr><td align="left">EEE_Bruto.BS_100_01.IThis.STS_FALHA_COMUNICACAO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_01.IThis.STS_FALHA_COMUNICACAO</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_FALHA_COMUNICACAO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Falha de comunicacao com a remota</td></tr><tr><td align="left">EEE_Bruto.BS_100_01.IThis.STS_PROTECAO_TERMICA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_01.IThis.STS_PROTECAO_TERMICA</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_PROTECAO_TERMICA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Falha termica (memorizada)</td></tr><tr><td align="left">EEE_Bruto.BS_100_01.IThis.STS_FALHA_INVERSOR</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_01.IThis.STS_FALHA_INVERSOR</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_FALHA_INVERSOR</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Falha do inversor/acionamento (memorizada)</td></tr><tr><td align="left">EEE_Bruto.BS_100_01.IThis.STS_FALHA_PARTIDA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_01.IThis.STS_FALHA_PARTIDA</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_FALHA_PARTIDA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Nao confirmou partida (memorizada)</td></tr><tr><td align="left">EEE_Bruto.BS_100_01.IThis.STS_FALHA_PARADA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_01.IThis.STS_FALHA_PARADA</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_FALHA_PARADA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Nao confirmou parada (memorizada)</td></tr><tr><td align="left">EEE_Bruto.BS_100_01.IThis.STS_VELOCIDADE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_01.IThis.STS_VELOCIDADE</td><td align="left">Float</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_VELOCIDADE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Velocidade (%): com inversor 0 % no LSP e 100 % no HSP; sem inversor 0 ou 100</td></tr><tr><td align="left">EEE_Bruto.BS_100_01.IThis.STS_HORIMETRO_HORA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_01.IThis.STS_HORIMETRO_HORA</td><td align="left">UInt32</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_HORIMETRO_HORA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Horimetro (h)</td></tr><tr><td align="left">EEE_Bruto.BS_100_01.IThis.STS_HORIMETRO_MINUTO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_01.IThis.STS_HORIMETRO_MINUTO</td><td align="left">UInt16</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_HORIMETRO_MINUTO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Horimetro (min)</td></tr><tr><td align="left">EEE_Bruto.BS_100_01.IThis.STS_NUMERO_PARTIDA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_01.IThis.STS_NUMERO_PARTIDA</td><td align="left">UInt32</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_NUMERO_PARTIDA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Numero de partidas</td></tr><tr><td align="left">EEE_Bruto.BS_100_01.IThis.STS_CORRENTE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_01.IThis.STS_CORRENTE</td><td align="left">Float</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_CORRENTE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Corrente (A)</td></tr><tr><td align="left">EEE_Bruto.BS_100_01.IThis.STS_TENSAO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_01.IThis.STS_TENSAO</td><td align="left">Float</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_TENSAO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Tensao (V)</td></tr><tr><td align="left">EEE_Bruto.BS_100_01.IThis.STS_POTENCIA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_01.IThis.STS_POTENCIA</td><td align="left">Float</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_POTENCIA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Potencia (kW)</td></tr><tr><td align="left">EEE_Bruto.BS_100_01.IThis.STS_FREQUENCIA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_01.IThis.STS_FREQUENCIA</td><td align="left">Float</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_FREQUENCIA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Frequencia (Hz)</td></tr><tr><td align="left">EEE_Bruto.BS_100_01.IThis.STS_TORQUE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_01.IThis.STS_TORQUE</td><td align="left">Float</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_TORQUE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Torque (%)</td></tr><tr><td align="left">EEE_Bruto.BS_100_01.IThis.STS_RPM</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_01.IThis.STS_RPM</td><td align="left">Float</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_RPM</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Rotacao (rpm)</td></tr><tr><td align="left">EEE_Bruto.BS_100_01.IThis.STS_AUTOMATICO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_01.IThis.STS_AUTOMATICO</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_AUTOMATICO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0 = manual, 1 = automatico (nao persistente)</td></tr><tr><td align="left">EEE_Bruto.BS_100_01.IThis.CMD_MANUAL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_01.IThis.CMD_MANUAL</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CMD_MANUAL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0 = desligar, 1 = ligar (nao persistente)</td></tr><tr><td align="left">EEE_Bruto.BS_100_01.IThis.CMD_RESET_FALHA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_01.IThis.CMD_RESET_FALHA</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CMD_RESET_FALHA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Reset de falhas</td></tr><tr><td align="left">EEE_Bruto.BS_100_01.IThis.CMD_RESET_NUMERO_PARTIDA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_01.IThis.CMD_RESET_NUMERO_PARTIDA</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CMD_RESET_NUMERO_PARTIDA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Zera numero de partidas</td></tr><tr><td align="left">EEE_Bruto.BS_100_01.IThis.CMD_RESET_HORIMETRO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_01.IThis.CMD_RESET_HORIMETRO</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CMD_RESET_HORIMETRO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Zera horimetro</td></tr><tr><td align="left">EEE_Bruto.BS_100_01.IThis.STP_FALHA_LIGAMENTO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_01.IThis.STP_FALHA_LIGAMENTO</td><td align="left">UInt16</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STP_FALHA_LIGAMENTO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Tempo maximo para confirmar partida (s). 0 = desabilitado</td></tr><tr><td align="left">EEE_Bruto.BS_100_01.IThis.STP_FALHA_DESLIGAMENTO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_01.IThis.STP_FALHA_DESLIGAMENTO</td><td align="left">UInt16</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STP_FALHA_DESLIGAMENTO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Tempo maximo para confirmar parada (s). 0 = desabilitado</td></tr><tr><td align="left">EEE_Bruto.BS_100_01.IThis.STP_SAIDA_MANUAL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_01.IThis.STP_SAIDA_MANUAL</td><td align="left">Float</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STP_SAIDA_MANUAL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Velocidade em manual (Hz)</td></tr><tr><td align="left">EEE_Bruto.BS_100_02.IThis.STS_REMOTO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_02.IThis.STS_REMOTO</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_REMOTO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Chave em remoto</td></tr><tr><td align="left">EEE_Bruto.BS_100_02.IThis.STS_LOCAL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_02.IThis.STS_LOCAL</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_LOCAL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Chave em local</td></tr><tr><td align="left">EEE_Bruto.BS_100_02.IThis.STS_MANUTENCAO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_02.IThis.STS_MANUTENCAO</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_MANUTENCAO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Chave nem local nem remoto</td></tr><tr><td align="left">EEE_Bruto.BS_100_02.IThis.STS_LIGADO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_02.IThis.STS_LIGADO</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_LIGADO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Motor ligado</td></tr><tr><td align="left">EEE_Bruto.BS_100_02.IThis.fbkStsAutomatico</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_02.IThis.fbkStsAutomatico</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> fbkStsAutomatico</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Modo automatico (retorno para a IHM)</td></tr><tr><td align="left">EEE_Bruto.BS_100_02.IThis.STS_ANIMACAO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_02.IThis.STS_ANIMACAO</td><td align="left">Int16</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_ANIMACAO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0 desligado, 1 ligado, 2 falha, 3 manutencao</td></tr><tr><td align="left">EEE_Bruto.BS_100_02.IThis.STS_ANIMACAO_GERADOR</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_02.IThis.STS_ANIMACAO_GERADOR</td><td align="left">Int16</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_ANIMACAO_GERADOR</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0 nao conectado, 1 conectado, 2 selecionado, 3 selecionado e gerador ligado</td></tr><tr><td align="left">EEE_Bruto.BS_100_02.IThis.STS_ALARME</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_02.IThis.STS_ALARME</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_ALARME</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Alarme geral</td></tr><tr><td align="left">EEE_Bruto.BS_100_02.IThis.STS_FALHA_COMUNICACAO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_02.IThis.STS_FALHA_COMUNICACAO</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_FALHA_COMUNICACAO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Falha de comunicacao com a remota</td></tr><tr><td align="left">EEE_Bruto.BS_100_02.IThis.STS_PROTECAO_TERMICA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_02.IThis.STS_PROTECAO_TERMICA</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_PROTECAO_TERMICA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Falha termica (memorizada)</td></tr><tr><td align="left">EEE_Bruto.BS_100_02.IThis.STS_FALHA_INVERSOR</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_02.IThis.STS_FALHA_INVERSOR</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_FALHA_INVERSOR</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Falha do inversor/acionamento (memorizada)</td></tr><tr><td align="left">EEE_Bruto.BS_100_02.IThis.STS_FALHA_PARTIDA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_02.IThis.STS_FALHA_PARTIDA</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_FALHA_PARTIDA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Nao confirmou partida (memorizada)</td></tr><tr><td align="left">EEE_Bruto.BS_100_02.IThis.STS_FALHA_PARADA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_02.IThis.STS_FALHA_PARADA</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_FALHA_PARADA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Nao confirmou parada (memorizada)</td></tr><tr><td align="left">EEE_Bruto.BS_100_02.IThis.STS_VELOCIDADE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_02.IThis.STS_VELOCIDADE</td><td align="left">Float</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_VELOCIDADE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Velocidade (%): com inversor 0 % no LSP e 100 % no HSP; sem inversor 0 ou 100</td></tr><tr><td align="left">EEE_Bruto.BS_100_02.IThis.STS_HORIMETRO_HORA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_02.IThis.STS_HORIMETRO_HORA</td><td align="left">UInt32</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_HORIMETRO_HORA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Horimetro (h)</td></tr><tr><td align="left">EEE_Bruto.BS_100_02.IThis.STS_HORIMETRO_MINUTO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_02.IThis.STS_HORIMETRO_MINUTO</td><td align="left">UInt16</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_HORIMETRO_MINUTO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Horimetro (min)</td></tr><tr><td align="left">EEE_Bruto.BS_100_02.IThis.STS_NUMERO_PARTIDA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_02.IThis.STS_NUMERO_PARTIDA</td><td align="left">UInt32</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_NUMERO_PARTIDA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Numero de partidas</td></tr><tr><td align="left">EEE_Bruto.BS_100_02.IThis.STS_CORRENTE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_02.IThis.STS_CORRENTE</td><td align="left">Float</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_CORRENTE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Corrente (A)</td></tr><tr><td align="left">EEE_Bruto.BS_100_02.IThis.STS_TENSAO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_02.IThis.STS_TENSAO</td><td align="left">Float</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_TENSAO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Tensao (V)</td></tr><tr><td align="left">EEE_Bruto.BS_100_02.IThis.STS_POTENCIA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_02.IThis.STS_POTENCIA</td><td align="left">Float</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_POTENCIA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Potencia (kW)</td></tr><tr><td align="left">EEE_Bruto.BS_100_02.IThis.STS_FREQUENCIA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_02.IThis.STS_FREQUENCIA</td><td align="left">Float</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_FREQUENCIA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Frequencia (Hz)</td></tr><tr><td align="left">EEE_Bruto.BS_100_02.IThis.STS_TORQUE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_02.IThis.STS_TORQUE</td><td align="left">Float</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_TORQUE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Torque (%)</td></tr><tr><td align="left">EEE_Bruto.BS_100_02.IThis.STS_RPM</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_02.IThis.STS_RPM</td><td align="left">Float</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_RPM</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Rotacao (rpm)</td></tr><tr><td align="left">EEE_Bruto.BS_100_02.IThis.STS_AUTOMATICO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_02.IThis.STS_AUTOMATICO</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_AUTOMATICO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0 = manual, 1 = automatico (nao persistente)</td></tr><tr><td align="left">EEE_Bruto.BS_100_02.IThis.CMD_MANUAL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_02.IThis.CMD_MANUAL</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CMD_MANUAL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0 = desligar, 1 = ligar (nao persistente)</td></tr><tr><td align="left">EEE_Bruto.BS_100_02.IThis.CMD_RESET_FALHA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_02.IThis.CMD_RESET_FALHA</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CMD_RESET_FALHA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Reset de falhas</td></tr><tr><td align="left">EEE_Bruto.BS_100_02.IThis.CMD_RESET_NUMERO_PARTIDA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_02.IThis.CMD_RESET_NUMERO_PARTIDA</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CMD_RESET_NUMERO_PARTIDA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Zera numero de partidas</td></tr><tr><td align="left">EEE_Bruto.BS_100_02.IThis.CMD_RESET_HORIMETRO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_02.IThis.CMD_RESET_HORIMETRO</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CMD_RESET_HORIMETRO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Zera horimetro</td></tr><tr><td align="left">EEE_Bruto.BS_100_02.IThis.STP_FALHA_LIGAMENTO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_02.IThis.STP_FALHA_LIGAMENTO</td><td align="left">UInt16</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STP_FALHA_LIGAMENTO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Tempo maximo para confirmar partida (s). 0 = desabilitado</td></tr><tr><td align="left">EEE_Bruto.BS_100_02.IThis.STP_FALHA_DESLIGAMENTO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_02.IThis.STP_FALHA_DESLIGAMENTO</td><td align="left">UInt16</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STP_FALHA_DESLIGAMENTO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Tempo maximo para confirmar parada (s). 0 = desabilitado</td></tr><tr><td align="left">EEE_Bruto.BS_100_02.IThis.STP_SAIDA_MANUAL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_02.IThis.STP_SAIDA_MANUAL</td><td align="left">Float</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STP_SAIDA_MANUAL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Velocidade em manual (Hz)</td></tr><tr><td align="left">EEE_Bruto.BS_100_03.IThis.STS_REMOTO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_03.IThis.STS_REMOTO</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_REMOTO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Chave em remoto</td></tr><tr><td align="left">EEE_Bruto.BS_100_03.IThis.STS_LOCAL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_03.IThis.STS_LOCAL</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_LOCAL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Chave em local</td></tr><tr><td align="left">EEE_Bruto.BS_100_03.IThis.STS_MANUTENCAO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_03.IThis.STS_MANUTENCAO</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_MANUTENCAO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Chave nem local nem remoto</td></tr><tr><td align="left">EEE_Bruto.BS_100_03.IThis.STS_LIGADO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_03.IThis.STS_LIGADO</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_LIGADO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Motor ligado</td></tr><tr><td align="left">EEE_Bruto.BS_100_03.IThis.fbkStsAutomatico</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_03.IThis.fbkStsAutomatico</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> fbkStsAutomatico</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Modo automatico (retorno para a IHM)</td></tr><tr><td align="left">EEE_Bruto.BS_100_03.IThis.STS_ANIMACAO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_03.IThis.STS_ANIMACAO</td><td align="left">Int16</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_ANIMACAO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0 desligado, 1 ligado, 2 falha, 3 manutencao</td></tr><tr><td align="left">EEE_Bruto.BS_100_03.IThis.STS_ANIMACAO_GERADOR</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_03.IThis.STS_ANIMACAO_GERADOR</td><td align="left">Int16</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_ANIMACAO_GERADOR</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0 nao conectado, 1 conectado, 2 selecionado, 3 selecionado e gerador ligado</td></tr><tr><td align="left">EEE_Bruto.BS_100_03.IThis.STS_ALARME</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_03.IThis.STS_ALARME</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_ALARME</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Alarme geral</td></tr><tr><td align="left">EEE_Bruto.BS_100_03.IThis.STS_FALHA_COMUNICACAO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_03.IThis.STS_FALHA_COMUNICACAO</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_FALHA_COMUNICACAO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Falha de comunicacao com a remota</td></tr><tr><td align="left">EEE_Bruto.BS_100_03.IThis.STS_PROTECAO_TERMICA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_03.IThis.STS_PROTECAO_TERMICA</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_PROTECAO_TERMICA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Falha termica (memorizada)</td></tr><tr><td align="left">EEE_Bruto.BS_100_03.IThis.STS_FALHA_INVERSOR</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_03.IThis.STS_FALHA_INVERSOR</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_FALHA_INVERSOR</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Falha do inversor/acionamento (memorizada)</td></tr><tr><td align="left">EEE_Bruto.BS_100_03.IThis.STS_FALHA_PARTIDA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_03.IThis.STS_FALHA_PARTIDA</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_FALHA_PARTIDA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Nao confirmou partida (memorizada)</td></tr><tr><td align="left">EEE_Bruto.BS_100_03.IThis.STS_FALHA_PARADA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_03.IThis.STS_FALHA_PARADA</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_FALHA_PARADA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Nao confirmou parada (memorizada)</td></tr><tr><td align="left">EEE_Bruto.BS_100_03.IThis.STS_VELOCIDADE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_03.IThis.STS_VELOCIDADE</td><td align="left">Float</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_VELOCIDADE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Velocidade (%): com inversor 0 % no LSP e 100 % no HSP; sem inversor 0 ou 100</td></tr><tr><td align="left">EEE_Bruto.BS_100_03.IThis.STS_HORIMETRO_HORA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_03.IThis.STS_HORIMETRO_HORA</td><td align="left">UInt32</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_HORIMETRO_HORA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Horimetro (h)</td></tr><tr><td align="left">EEE_Bruto.BS_100_03.IThis.STS_HORIMETRO_MINUTO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_03.IThis.STS_HORIMETRO_MINUTO</td><td align="left">UInt16</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_HORIMETRO_MINUTO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Horimetro (min)</td></tr><tr><td align="left">EEE_Bruto.BS_100_03.IThis.STS_NUMERO_PARTIDA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_03.IThis.STS_NUMERO_PARTIDA</td><td align="left">UInt32</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_NUMERO_PARTIDA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Numero de partidas</td></tr><tr><td align="left">EEE_Bruto.BS_100_03.IThis.STS_CORRENTE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_03.IThis.STS_CORRENTE</td><td align="left">Float</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_CORRENTE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Corrente (A)</td></tr><tr><td align="left">EEE_Bruto.BS_100_03.IThis.STS_TENSAO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_03.IThis.STS_TENSAO</td><td align="left">Float</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_TENSAO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Tensao (V)</td></tr><tr><td align="left">EEE_Bruto.BS_100_03.IThis.STS_POTENCIA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_03.IThis.STS_POTENCIA</td><td align="left">Float</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_POTENCIA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Potencia (kW)</td></tr><tr><td align="left">EEE_Bruto.BS_100_03.IThis.STS_FREQUENCIA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_03.IThis.STS_FREQUENCIA</td><td align="left">Float</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_FREQUENCIA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Frequencia (Hz)</td></tr><tr><td align="left">EEE_Bruto.BS_100_03.IThis.STS_TORQUE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_03.IThis.STS_TORQUE</td><td align="left">Float</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_TORQUE</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Torque (%)</td></tr><tr><td align="left">EEE_Bruto.BS_100_03.IThis.STS_RPM</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_03.IThis.STS_RPM</td><td align="left">Float</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_RPM</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Rotacao (rpm)</td></tr><tr><td align="left">EEE_Bruto.BS_100_03.IThis.STS_AUTOMATICO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_03.IThis.STS_AUTOMATICO</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_AUTOMATICO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0 = manual, 1 = automatico (nao persistente)</td></tr><tr><td align="left">EEE_Bruto.BS_100_03.IThis.CMD_MANUAL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_03.IThis.CMD_MANUAL</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CMD_MANUAL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0 = desligar, 1 = ligar (nao persistente)</td></tr><tr><td align="left">EEE_Bruto.BS_100_03.IThis.CMD_RESET_FALHA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_03.IThis.CMD_RESET_FALHA</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CMD_RESET_FALHA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Reset de falhas</td></tr><tr><td align="left">EEE_Bruto.BS_100_03.IThis.CMD_RESET_NUMERO_PARTIDA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_03.IThis.CMD_RESET_NUMERO_PARTIDA</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CMD_RESET_NUMERO_PARTIDA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Zera numero de partidas</td></tr><tr><td align="left">EEE_Bruto.BS_100_03.IThis.CMD_RESET_HORIMETRO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_03.IThis.CMD_RESET_HORIMETRO</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CMD_RESET_HORIMETRO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Zera horimetro</td></tr><tr><td align="left">EEE_Bruto.BS_100_03.IThis.STP_FALHA_LIGAMENTO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_03.IThis.STP_FALHA_LIGAMENTO</td><td align="left">UInt16</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STP_FALHA_LIGAMENTO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Tempo maximo para confirmar partida (s). 0 = desabilitado</td></tr><tr><td align="left">EEE_Bruto.BS_100_03.IThis.STP_FALHA_DESLIGAMENTO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_03.IThis.STP_FALHA_DESLIGAMENTO</td><td align="left">UInt16</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STP_FALHA_DESLIGAMENTO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Tempo maximo para confirmar parada (s). 0 = desabilitado</td></tr><tr><td align="left">EEE_Bruto.BS_100_03.IThis.STP_SAIDA_MANUAL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> BS_100_03.IThis.STP_SAIDA_MANUAL</td><td align="left">Float</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STP_SAIDA_MANUAL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Velocidade em manual (Hz)</td></tr><tr><td align="left">EEE_Bruto.Necessidade.IThis.STS_NECESSIDADE_EQUIPAMENTO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Necessidade.IThis.STS_NECESSIDADE_EQUIPAMENTO</td><td align="left">UInt16</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_NECESSIDADE_EQUIPAMENTO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Equipamentos pedidos pelas faixas</td></tr><tr><td align="left">EEE_Bruto.Necessidade.IThis.STS_NIVEL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Necessidade.IThis.STS_NIVEL</td><td align="left">Float</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_NIVEL</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Nivel comparado com as faixas (% da altura)</td></tr><tr><td align="left">EEE_Bruto.Necessidade.IThis.CMD_HABILITA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Necessidade.IThis.CMD_HABILITA</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CMD_HABILITA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Habilitado</td></tr><tr><td align="left">EEE_Bruto.Necessidade.IThis.STP_LIMITE_FAIXA_1</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Necessidade.IThis.STP_LIMITE_FAIXA_1</td><td align="left">Float</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STP_LIMITE_FAIXA_1</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Limite da faixa 1</td></tr><tr><td align="left">EEE_Bruto.Necessidade.IThis.STP_LIMITE_FAIXA_2</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Necessidade.IThis.STP_LIMITE_FAIXA_2</td><td align="left">Float</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STP_LIMITE_FAIXA_2</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Limite da faixa 2</td></tr><tr><td align="left">EEE_Bruto.Necessidade.IThis.STP_LIMITE_FAIXA_3</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Necessidade.IThis.STP_LIMITE_FAIXA_3</td><td align="left">Float</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STP_LIMITE_FAIXA_3</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Limite da faixa 3</td></tr><tr><td align="left">EEE_Bruto.Necessidade.IThis.STP_LIMITE_FAIXA_4</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Necessidade.IThis.STP_LIMITE_FAIXA_4</td><td align="left">Float</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STP_LIMITE_FAIXA_4</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Limite da faixa 4</td></tr><tr><td align="left">EEE_Bruto.Revezamento.IThis.STS_RESTANTE_HOR</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Revezamento.IThis.STS_RESTANTE_HOR</td><td align="left">UInt16</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_RESTANTE_HOR</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Tempo para a troca da principal (h)</td></tr><tr><td align="left">EEE_Bruto.Revezamento.IThis.STS_RESTANTE_MIN</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Revezamento.IThis.STS_RESTANTE_MIN</td><td align="left">UInt16</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_RESTANTE_MIN</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Tempo para a troca da principal (min)</td></tr><tr><td align="left">EEE_Bruto.Revezamento.IThis.STS_RESTANTE_SEG</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Revezamento.IThis.STS_RESTANTE_SEG</td><td align="left">UInt16</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STS_RESTANTE_SEG</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Tempo para a troca da principal (s)</td></tr><tr><td align="left">EEE_Bruto.Revezamento.IThis.CMD_HABILITA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Revezamento.IThis.CMD_HABILITA</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CMD_HABILITA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Troca da principal por tempo</td></tr><tr><td align="left">EEE_Bruto.Revezamento.IThis.STP_TEMPO_B1</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Revezamento.IThis.STP_TEMPO_B1</td><td align="left">UInt16</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STP_TEMPO_B1</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Horas do equipamento 1 como principal</td></tr><tr><td align="left">EEE_Bruto.Revezamento.IThis.STP_TEMPO_B2</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Revezamento.IThis.STP_TEMPO_B2</td><td align="left">UInt16</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STP_TEMPO_B2</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Horas do equipamento 2 como principal</td></tr><tr><td align="left">EEE_Bruto.Revezamento.IThis.STP_TEMPO_B3</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Revezamento.IThis.STP_TEMPO_B3</td><td align="left">UInt16</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STP_TEMPO_B3</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Horas do equipamento 3 como principal</td></tr><tr><td align="left">EEE_Bruto.Revezamento.IThis.CMD_SELECAO_BOMBA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Revezamento.IThis.CMD_SELECAO_BOMBA</td><td align="left">Int16</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CMD_SELECAO_BOMBA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Bomba principal</td></tr><tr><td align="left">EEE_Bruto.PID.IThis.stsSaidaPID</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> PID.IThis.stsSaidaPID</td><td align="left">Float</td><td align="left">
+            <img src="Images\locked.png"> 
+            <img src="Images\empty.png"> CurrentRead</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> stsSaidaPID</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Saida do PID (%)</td></tr><tr><td align="left">EEE_Bruto.PID.IThis.CMD_HABILITA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> PID.IThis.CMD_HABILITA</td><td align="left">Boolean</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CMD_HABILITA</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> PID habilitado</td></tr><tr><td align="left">EEE_Bruto.PID.IThis.STP_DESEJADO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> PID.IThis.STP_DESEJADO</td><td align="left">Float</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STP_DESEJADO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Valor desejado</td></tr><tr><td align="left">EEE_Bruto.PID.IThis.STP_PARAMETRO_KP</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> PID.IThis.STP_PARAMETRO_KP</td><td align="left">Float</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STP_PARAMETRO_KP</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Ganho (Kp)</td></tr><tr><td align="left">EEE_Bruto.PID.IThis.STP_PARAMETRO_KI</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> PID.IThis.STP_PARAMETRO_KI</td><td align="left">Float</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STP_PARAMETRO_KI</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Tempo integral (s)</td></tr><tr><td align="left">EEE_Bruto.PID.IThis.STP_PARAMETRO_KD</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> PID.IThis.STP_PARAMETRO_KD</td><td align="left">Float</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STP_PARAMETRO_KD</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Tempo derivativo (s)</td></tr><tr><td align="left">EEE_Bruto.PID.IThis.STP_MINIMO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> PID.IThis.STP_MINIMO</td><td align="left">Float</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STP_MINIMO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Saída mínima</td></tr><tr><td align="left">EEE_Bruto.PID.IThis.STP_MAXIMO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> PID.IThis.STP_MAXIMO</td><td align="left">Float</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> CurrentRead;CurrentWrite</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> STP_MAXIMO</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> 0</td><td align="left">
+            <img src="Images\empty.png"> 
+            <img src="Images\empty.png"> Saída máxima</td></tr></tbody></table></div></div><br class="table-break"><p>
+            <img src="Images\locked.png">  : This value cannot be further changed by parent function blocks (type or instance)</p><p>
+            <img src="Images\overparametrization.png">  : This value has been modified and differs from initially configured value</p><p></p><p></p><span class="linkbox"><p class="linkboxtitle">See also</p>
+    <p>
+    </p><p><a class="xref" href="EEE_Bruto.EEE_Bruto_HMI.sDefault.html" title="sDefault">sDefault</a></p><p>
+    </p><p><a class="xref" href="EEE_Bruto.EEE_Bruto_HMI.sBoiaH.html" title="sBoiaH">sBoiaH</a></p><p>
+    </p><p><a class="xref" href="EEE_Bruto.EEE_Bruto_HMI.sBoiaL.html" title="sBoiaL">sBoiaL</a></p><p>
+    </p><p><a class="xref" href="EEE_Bruto.EEE_Bruto_HMI.fpDefault.html" title="fpDefault">fpDefault</a></p><p>
+    </p><p><a class="xref" href="EEE_Bruto.EEE_Bruto_HMI.fpParameter.html" title="fpParameter">fpParameter</a></p>
+    <p><a class="xref" href="">???</a></p>
+    </span></div></body></html>

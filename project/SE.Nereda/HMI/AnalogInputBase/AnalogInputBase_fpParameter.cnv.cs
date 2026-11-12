@@ -198,10 +198,42 @@ namespace SE.Nereda.Faceplates.AnalogInputBase
 		}
 		
 
+		// Sensor por Modbus (CFG_SEM_ESCALA): o valor ja vem em unidade de engenharia; sem escala, limites e corte.
+		// Some a secao de escala e o deslocamento sobe para o lugar dela; o valor forcado fica sem limite de faixa.
+		bool semEscala, offsetAcima;
+		void SemEscalaValueChanged(object sender, ValueChangedEventArgs e)
+		{
+			semEscala = Convert.ToBoolean(e.Value);
+			lEnScale.Visible = !semEscala;
+			EnScaleBtn.Visible = !semEscala;
+			lMinRaw.Visible = !semEscala;
+			txtMinRaw.Visible = !semEscala;
+			lMaxRaw.Visible = !semEscala;
+			txtMaxRaw.Visible = !semEscala;
+			lMinPv.Visible = !semEscala;
+			txtMinPv.Visible = !semEscala;
+			lMaxPv.Visible = !semEscala;
+			txtMaxPv.Visible = !semEscala;
+			lUseLim.Visible = !semEscala;
+			UseLimitsBtn.Visible = !semEscala;
+			lCutoff.Visible = !semEscala;
+			txtPvCutOff.Visible = !semEscala;
+			sec0_Escala.Text = semEscala ? "Valor (vem pronto da comunica\u00e7\u00e3o)" : "Escala";
+			if (semEscala != offsetAcima)
+			{
+				int dy = semEscala ? -238 : 238;
+				lOffset.Move(0, dy); txtPvOffset.Move(0, dy);
+				offsetAcima = semEscala;
+			}
+			if (semEscala) { txtoverridevalue.Minimum = -1.0E30F; txtoverridevalue.Maximum = 1.0E30F; }
+			else { txtoverridevalue.Minimum = PvMinvalue; txtoverridevalue.Maximum = PvMaxvalue; }
+		}
+
 		float PvMaxvalue;
 		void PvMaxValueChanged(object sender, ValueChangedEventArgs e)
 		{
 			PvMaxvalue =(float)e.Value;
+			if (semEscala) return;
 			txtoverridevalue.Maximum = PvMaxvalue;
 			if (overval>PvMaxvalue)
 			{
@@ -213,6 +245,7 @@ namespace SE.Nereda.Faceplates.AnalogInputBase
 		void PvMinValueChanged(object sender, ValueChangedEventArgs e)
 		{
 			PvMinvalue = (float)e.Value;
+			if (semEscala) return;
 			txtoverridevalue.Minimum = PvMinvalue;
 			if (overval< PvMinvalue)
 			{

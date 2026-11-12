@@ -69,7 +69,7 @@ namespace HMI.Main.Canvases
 			// Mode_1
 			// 
 			this.Mode_1.BeginInit();
-			this.Mode_1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 1112D, 8D);
+			this.Mode_1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 1238D, 8D);
 			this.Mode_1.Name = "Mode_1";
 			this.Mode_1.SecurityToken = ((uint)(4294967295u));
 			this.Mode_1.TagName = "ECC9B0BB08A85534";
@@ -79,7 +79,7 @@ namespace HMI.Main.Canvases
 			// 
 			this.sSensors1.BeginInit();
 			this.sSensors1._iReator = "41";
-			this.sSensors1.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.79120474507283622D, 0D, 0D, 0.88387713675213642D, 24.000000000000004D, 320.00000000000006D);
+			this.sSensors1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 36D, 304D);
 			this.sSensors1.Name = "sSensors1";
 			this.sSensors1.SecurityToken = ((uint)(4294967295u));
 			this.sSensors1.TagName = "0F513B831BAFCB32";
@@ -96,7 +96,7 @@ namespace HMI.Main.Canvases
 			this.sReactor41._iAV4x172 = "AV41172\r\nRespiro lodo";
 			this.sReactor41._iLT001 = "41LT1005\r\nNível";
 			this.sReactor41._iREACTOR = "Reator Nereda 1";
-			this.sReactor41.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.8669833729216152D, 0D, 0D, 0.8669833729216152D, 496D, 152D);
+			this.sReactor41.DesignMatrix = new NxtControl.Drawing.Matrix2D(1.2D, 0D, 0D, 1.2D, 451D, 79D);
 			this.sReactor41.Name = "sReactor41";
 			this.sReactor41.SecurityToken = ((uint)(4294967295u));
 			this.sReactor41.TagName = "0F513B831BAFCB32";
@@ -105,7 +105,7 @@ namespace HMI.Main.Canvases
 			// sPhase21
 			// 
 			this.sPhase21.BeginInit();
-			this.sPhase21.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.87931034482758619D, 0D, 0D, 0.87931034482758619D, 16D, 72D);
+			this.sPhase21.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.8793103448275862D, 0D, 0D, 0.8793103448275862D, 8D, 64D);
 			this.sPhase21.Name = "sPhase21";
 			this.sPhase21.SecurityToken = ((uint)(4294967295u));
 			this.sPhase21.TagName = "0F513B831BAFCB32";
@@ -114,7 +114,7 @@ namespace HMI.Main.Canvases
 			// sSettingsBtn1
 			// 
 			this.sSettingsBtn1.BeginInit();
-			this.sSettingsBtn1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 1112D, 72D);
+			this.sSettingsBtn1.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 1104D, 8D);
 			this.sSettingsBtn1.Name = "sSettingsBtn1";
 			this.sSettingsBtn1.SecurityToken = ((uint)(4294967295u));
 			this.sSettingsBtn1.TagName = "0F513B831BAFCB32";

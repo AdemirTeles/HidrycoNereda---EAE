@@ -41,6 +41,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_Generico
 			this.sinalP2n = new NxtControl.GuiFramework.FreeText();
 			this.sinalTxt = new NxtControl.GuiFramework.FreeText();
 			this.xComunicacao = new System.HMI.Symbols.Base.Execute<bool>();
+			this.xSkid = new System.HMI.Symbols.Base.Execute<bool>();
 			this.xNivel = new System.HMI.Symbols.Base.Execute<bool>();
 			this.xUnidade = new System.HMI.Symbols.Base.Execute<string>();
 			this.xFalhaAtiva = new System.HMI.Symbols.Base.Execute<bool>();
@@ -288,6 +289,18 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_Generico
 			this.xComunicacao.TagName = "CFG_COMUNICACAO";
 			this.xComunicacao.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.ComunicacaoValueChanged);
 			this.xComunicacao.EndInit();
+			// 
+			// xSkid
+			// 
+			this.xSkid.BeginInit();
+			this.xSkid.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, double.NaN, double.NaN);
+			this.xSkid.IsOnlyInput = true;
+			this.xSkid.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
+			this.xSkid.Name = "xSkid";
+			this.xSkid.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
+			this.xSkid.TagName = "CFG_SKID";
+			this.xSkid.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.SkidValueChanged);
+			this.xSkid.EndInit();
 			// 
 			// xNivel
 			// 
@@ -560,6 +573,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_Generico
 			this.sinalP2n,
 			this.sinalTxt,
 			this.xComunicacao,
+			this.xSkid,
 			this.xNivel,
 			this.xUnidade,
 			this.xFalhaAtiva,
@@ -599,6 +613,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_Generico
 		private NxtControl.GuiFramework.FreeText sinalP2n;
 		private NxtControl.GuiFramework.FreeText sinalTxt;
 		private System.HMI.Symbols.Base.Execute<bool> xComunicacao;
+		private System.HMI.Symbols.Base.Execute<bool> xSkid;
 		private System.HMI.Symbols.Base.Execute<bool> xNivel;
 		private System.HMI.Symbols.Base.Execute<string> xUnidade;
 		private System.HMI.Symbols.Base.Execute<bool> xFalhaAtiva;

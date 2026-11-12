@@ -129,10 +129,12 @@ namespace Hidryco.HidrycoLib.Symbols.Controle_Revezamento_3
 			if (dx != 0 || dy != 0) s.Move(dx, dy);
 		}
 
-		// ---- bomba principal por botoes: 0 = automatica, 1/2/3 = fixa (grava CMD_SELECAO_BOMBA; o destaque segue a tag) ----
+		// ---- bomba principal por botoes: so 1, 2 ou 3 (grava CMD_SELECAO_BOMBA; o destaque segue a tag).
+		//      A selecionada e a principal ao escolher e sempre que as bombas partem de novo; o revezamento troca a partir dela.
+		//      O botao "Automatica" (0) saiu: fica escondido; 0 gravado de antes vale como 1 (na logica e no destaque).
 		short sel;
 		DrawnButton[] BotoesSel() { return new DrawnButton[] { b_sel0, b_sel1, b_sel2, b_sel3 }; }
-		static readonly float[] SEL_X = { 140F, 234F, 298F, 362F };
+		static readonly float[] SEL_X = { 140F, 140F, 204F, 268F };
 		static readonly float[] SEL_W = { 88F, 60F, 60F, 60F };
 		void PosicionaSel(double y, bool v)
 		{
@@ -140,7 +142,7 @@ namespace Hidryco.HidrycoLib.Symbols.Controle_Revezamento_3
 			for (int i = 0; i < b.Length; i++)
 			{
 				b[i].Bounds = new NxtControl.Drawing.RectF(SEL_X[i], (float)y, SEL_W[i], 28F);
-				b[i].Visible = v;
+				b[i].Visible = v && i > 0;
 			}
 		}
 		void MarcaSel()
@@ -148,7 +150,7 @@ namespace Hidryco.HidrycoLib.Symbols.Controle_Revezamento_3
 			DrawnButton[] b = BotoesSel();
 			for (int i = 0; i < b.Length; i++)
 			{
-				bool on = (i == sel);
+				bool on = (i == (sel >= 1 && sel <= 3 ? sel : 1));
 				b[i].BrushColor = on ? new NxtControl.Drawing.Color(96, 96, 96) : new NxtControl.Drawing.Color(208, 208, 208);
 				b[i].TextColor = on ? new NxtControl.Drawing.Color(255, 255, 255) : new NxtControl.Drawing.Color(0, 0, 0);
 			}

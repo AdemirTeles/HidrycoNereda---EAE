@@ -169,7 +169,7 @@ namespace Hidryco.HidrycoLib.Symbols.Subestacao
 			tBarraA.Text = "BARRA A - " + Fonte(S(xFA.Value));
 			tBarraB.Text = "BARRA B - " + Fonte(S(xFB.Value));
 			tPlanta.Text = B(xPlanta.Value) ? "Planta nos geradores" : "Planta na rede";
-			tRemota.Text = remota ? "Remota 1 sem comunicação: disjuntores sem informação" : "";
+			tRemota.Text = remota ? "Remota 1 sem comunicação" : "";
 
 			// Paineis de campo: DIs lidas pelo M262_Substacao nas remotas Nereda (.160), EEE Bruto (.197) e Desinfeccao (.137)
 			bool fNer = B(xFALHA_REMOTA_NER.Value), fEeeb = B(xFALHA_REMOTA_EEEB.Value), fDes = B(xFALHA_REMOTA_DES.Value);
@@ -198,6 +198,42 @@ namespace Hidryco.HidrycoLib.Symbols.Subestacao
 			Cor(bpUV_700_02, Dj(fDes, xDJ_UV_700_02.Value, false));
 			Cor(bpVC_700_01, Dj(fDes, xDJ_VC_700_01.Value, false));
 			Cor(bpMO_700_01, Dj(fDes, xDJ_MO_700_01.Value, false));
+
+			// Painel Lodo (PCE LODO 900): DIs lidas pelo M262_Substacao na remota 1 do Lodo (.135); PCE com contato de DESLIGADO
+			bool fLodo = B(xFALHA_REMOTA_LODO.Value);
+			pLODOc.Text = fLodo ? "REMOTA SEM COMUNICA\u00c7\u00c3O" : "";
+			Cor(bpL_PCE, Dj(fLodo, xDJ_900_PCE_DESLIGADO.Value, true));
+			Cor(bpL_PCM, Dj(fLodo, xDJ_900_PCM.Value, false));
+			Cor(bpL_SO_01, Dj(fLodo, xDJ_900_SO_01.Value, false));
+			Cor(bpL_SO_02, Dj(fLodo, xDJ_900_SO_02.Value, false));
+			Cor(bpL_AD_01, Dj(fLodo, xDJ_900_AD_01.Value, false));
+			Cor(bpL_AD_02, Dj(fLodo, xDJ_900_AD_02.Value, false));
+			Cor(bpL_AD_03, Dj(fLodo, xDJ_900_AD_03.Value, false));
+			Cor(bpL_PP_01, Dj(fLodo, xDJ_900_PP_01.Value, false));
+			Cor(bpL_MN_01, Dj(fLodo, xDJ_900_MN_01.Value, false));
+			Cor(bpL_MN_02, Dj(fLodo, xDJ_900_MN_02.Value, false));
+			Cor(bpL_MN_03, Dj(fLodo, xDJ_900_MN_03.Value, false));
+			Cor(bpL_MN_04, Dj(fLodo, xDJ_900_MN_04.Value, false));
+			Cor(bpL_MN_05, Dj(fLodo, xDJ_900_MN_05.Value, false));
+			Cor(bpL_BO_01, Dj(fLodo, xDJ_900_BO_01.Value, false));
+			Cor(bpL_BO_02, Dj(fLodo, xDJ_900_BO_02.Value, false));
+			Cor(bpL_BO_03, Dj(fLodo, xDJ_900_BO_03.Value, false));
+			Cor(bpL_BR_01, Dj(fLodo, xDJ_900_BR_01.Value, false));
+			Cor(bpL_BR_02, Dj(fLodo, xDJ_900_BR_02.Value, false));
+			Cor(bpL_VA_01, Dj(fLodo, xDJ_900_VA_01.Value, false));
+			Cor(bpL_VA_02, Dj(fLodo, xDJ_900_VA_02.Value, false));
+			Cor(bpL_VE_01, Dj(fLodo, xDJ_900_VE_01.Value, false));
+			Cor(bpL_VE_02, Dj(fLodo, xDJ_900_VE_02.Value, false));
+			Cor(bpL_VA_06, Dj(fLodo, xDJ_900_VA_06.Value, false));
+			Cor(bpL_VA_07, Dj(fLodo, xDJ_900_VA_07.Value, false));
+			Cor(bpL_VA_08, Dj(fLodo, xDJ_900_VA_08.Value, false));
+			Cor(bpL_VA_09, Dj(fLodo, xDJ_900_VA_09.Value, false));
+			Cor(bpL_VA_10, Dj(fLodo, xDJ_900_VA_10.Value, false));
+			Cor(bpL_VA_11, Dj(fLodo, xDJ_900_VA_11.Value, false));
+			Cor(bpL_VA_12, Dj(fLodo, xDJ_900_VA_12.Value, false));
+			Cor(bpL_VA_13, Dj(fLodo, xDJ_900_VA_13.Value, false));
+			Cor(bpL_VB_03, Dj(fLodo, xDJ_900_VB_03.Value, false));
+			Cor(bpL_VB_04, Dj(fLodo, xDJ_900_VB_04.Value, false));
 
 			bool algum = false, naoRec = false; int prio = 0;
 

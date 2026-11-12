@@ -295,7 +295,7 @@ namespace SE.Nereda.Symbols.NeredaReactor
 			// 
 			this.REACTOR.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.REACTOR.Font = new NxtControl.Drawing.Font("Arial", 16F, System.Drawing.FontStyle.Bold);
-			this.REACTOR.Location = new NxtControl.Drawing.PointF(464D, 320D);
+			this.REACTOR.Location = new NxtControl.Drawing.PointF(448D, 320D);
 			this.REACTOR.Name = "REACTOR";
 			this.REACTOR.Text = "Reator Nereda 1";
 			// 

@@ -34,7 +34,7 @@ namespace SE.Nereda.Symbols.Mode
 			this.Reset_Command.FalseBrush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(78)), ((byte)(78)), ((byte)(78))));
 			this.Reset_Command.FalseImage = new NxtControl.Drawing.ImageHolder();
 			this.Reset_Command.FalseImageDisabled = new NxtControl.Drawing.ImageHolder();
-			this.Reset_Command.FalseText = "Reset Reactor 1";
+			this.Reset_Command.FalseText = "Reset reator 1";
 			this.Reset_Command.Font = new NxtControl.Drawing.Font("ButtonFont");
 			this.Reset_Command.FontScale = false;
 			this.Reset_Command.InnerBorderColor = new NxtControl.Drawing.Color(((byte)(2)), ((byte)(178)), ((byte)(238)));
@@ -43,7 +43,7 @@ namespace SE.Nereda.Symbols.Mode
 			this.Reset_Command.TagName = "ResetReactor1";
 			this.Reset_Command.TrueImage = new NxtControl.Drawing.ImageHolder();
 			this.Reset_Command.TrueImageDisabled = new NxtControl.Drawing.ImageHolder();
-			this.Reset_Command.TrueText = "Reset Reactor 1";
+			this.Reset_Command.TrueText = "Reset reator 1";
 			this.Reset_Command.Value = false;
 			this.Reset_Command.OutputValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.Reset_CommandOutputValueChanged);
 			this.Reset_Command.EndInit();

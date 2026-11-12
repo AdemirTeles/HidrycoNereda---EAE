@@ -96,7 +96,7 @@ namespace Hidryco.HidrycoLib.Symbols.Controle_Gradeamento
 			this.c_STP_DIFERENCIAL_NIVEL_GRADE1.NumberBase = NxtControl.GuiFramework.NumberBase.Decimal;
 			this.c_STP_DIFERENCIAL_NIVEL_GRADE1.Pen = new NxtControl.Drawing.Pen("TextBoxPen");
 			this.c_STP_DIFERENCIAL_NIVEL_GRADE1.SetColor = new NxtControl.Drawing.Color("Yellow");
-			this.c_STP_DIFERENCIAL_NIVEL_GRADE1.Suffix = " %";
+			this.c_STP_DIFERENCIAL_NIVEL_GRADE1.Suffix = " mm";
 			this.c_STP_DIFERENCIAL_NIVEL_GRADE1.TagName = "STP_DIFERENCIAL_NIVEL_GRADE1";
 			this.c_STP_DIFERENCIAL_NIVEL_GRADE1.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
 			this.c_STP_DIFERENCIAL_NIVEL_GRADE1.UseInputPad = true;
@@ -121,7 +121,7 @@ namespace Hidryco.HidrycoLib.Symbols.Controle_Gradeamento
 			this.c_STP_DIFERENCIAL_NIVEL_GRADE2.NumberBase = NxtControl.GuiFramework.NumberBase.Decimal;
 			this.c_STP_DIFERENCIAL_NIVEL_GRADE2.Pen = new NxtControl.Drawing.Pen("TextBoxPen");
 			this.c_STP_DIFERENCIAL_NIVEL_GRADE2.SetColor = new NxtControl.Drawing.Color("Yellow");
-			this.c_STP_DIFERENCIAL_NIVEL_GRADE2.Suffix = " %";
+			this.c_STP_DIFERENCIAL_NIVEL_GRADE2.Suffix = " mm";
 			this.c_STP_DIFERENCIAL_NIVEL_GRADE2.TagName = "STP_DIFERENCIAL_NIVEL_GRADE2";
 			this.c_STP_DIFERENCIAL_NIVEL_GRADE2.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
 			this.c_STP_DIFERENCIAL_NIVEL_GRADE2.UseInputPad = true;

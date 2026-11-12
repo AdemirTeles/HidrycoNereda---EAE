@@ -37,7 +37,10 @@ namespace Hidryco.HidrycoLib.Symbols.Sensor_Generico
 			this.maiPonteiro = new NxtControl.GuiFramework.Polygon();
 			this.xEstado = new System.HMI.Symbols.Base.Execute<short>();
 			this.xFalha = new System.HMI.Symbols.Base.Execute<bool>();
+			this.xSkid = new System.HMI.Symbols.Base.Execute<bool>();
 			this.xFalhaAtiva = new System.HMI.Symbols.Base.Execute<bool>();
+			this.xFalhaCom = new System.HMI.Symbols.Base.Execute<bool>();
+			this.icoCom = new Hidryco.HidrycoLib.Graphics.falha_comunicacao();
 			this.xValor = new System.HMI.Symbols.Base.Execute<float>();
 			this.xUnidade = new System.HMI.Symbols.Base.Execute<string>();
 			this.xCasas = new System.HMI.Symbols.Base.Execute<ushort>();
@@ -257,6 +260,27 @@ namespace Hidryco.HidrycoLib.Symbols.Sensor_Generico
 			this.xFalhaAtiva.TagName = "STS_FALHA_ATIVA";
 			this.xFalhaAtiva.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.FalhaAtivaValueChanged);
 			this.xFalhaAtiva.EndInit();
+			// 
+			// xFalhaCom
+			// 
+			this.xFalhaCom.BeginInit();
+			this.xFalhaCom.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, double.NaN, double.NaN);
+			this.xFalhaCom.IsOnlyInput = true;
+			this.xFalhaCom.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
+			this.xFalhaCom.Name = "xFalhaCom";
+			this.xFalhaCom.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
+			this.xFalhaCom.TagName = "STS_FALHA_COMUNICACAO";
+			this.xFalhaCom.Value = false;
+			this.xFalhaCom.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.FalhaComValueChanged);
+			this.xFalhaCom.EndInit();
+			// 
+			// icoCom
+			// 
+			this.icoCom.BeginInit();
+			this.icoCom.DesignMatrix = new NxtControl.Drawing.Matrix2D(0.75D, 0D, 0D, 0.75D, 150D, 22D);
+			this.icoCom.Name = "icoCom";
+			this.icoCom.Visible = false;
+			this.icoCom.EndInit();
 			// 
 			// xValor
 			// 
@@ -564,7 +588,20 @@ namespace Hidryco.HidrycoLib.Symbols.Sensor_Generico
 			// sDefault
 			// 
 			this.Name = "sDefault";
+			// 
+			// xSkid
+			// 
+			this.xSkid.BeginInit();
+			this.xSkid.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, double.NaN, double.NaN);
+			this.xSkid.IsOnlyInput = true;
+			this.xSkid.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
+			this.xSkid.Name = "xSkid";
+			this.xSkid.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
+			this.xSkid.TagName = "CFG_SKID";
+			this.xSkid.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.SkidValueChanged);
+			this.xSkid.EndInit();
 			this.Shapes.AddRange(new System.ComponentModel.IComponent[] {
+			this.xSkid,
 			this.fundo,
 			this.InstanceName,
 			this.valor,
@@ -583,6 +620,7 @@ namespace Hidryco.HidrycoLib.Symbols.Sensor_Generico
 			this.xEstado,
 			this.xFalha,
 			this.xFalhaAtiva,
+			this.xFalhaCom,
 			this.xValor,
 			this.xUnidade,
 			this.xCasas,
@@ -605,6 +643,7 @@ namespace Hidryco.HidrycoLib.Symbols.Sensor_Generico
 			this.xSpLL,
 			this.xRMin,
 			this.xRMax,
+			this.icoCom,
 			this.abrir,
 			this.xNivel,
 			this.xPct});
@@ -627,7 +666,10 @@ namespace Hidryco.HidrycoLib.Symbols.Sensor_Generico
 		private NxtControl.GuiFramework.Polygon maiPonteiro;
 		private System.HMI.Symbols.Base.Execute<short> xEstado;
 		private System.HMI.Symbols.Base.Execute<bool> xFalha;
+		private System.HMI.Symbols.Base.Execute<bool> xSkid;
 		private System.HMI.Symbols.Base.Execute<bool> xFalhaAtiva;
+		private System.HMI.Symbols.Base.Execute<bool> xFalhaCom;
+		private Hidryco.HidrycoLib.Graphics.falha_comunicacao icoCom;
 		private System.HMI.Symbols.Base.Execute<float> xValor;
 		private System.HMI.Symbols.Base.Execute<string> xUnidade;
 		private System.HMI.Symbols.Base.Execute<ushort> xCasas;

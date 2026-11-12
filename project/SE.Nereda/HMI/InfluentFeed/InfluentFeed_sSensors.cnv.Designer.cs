@@ -34,7 +34,7 @@ namespace SE.Nereda.Symbols.InfluentFeed
 			// sDisplayPv21
 			// 
 			this.sDisplayPv21.BeginInit();
-			this.sDisplayPv21._iSensorName = "Level Measurement";
+			this.sDisplayPv21._iSensorName = "40LIT0001 N\u00edvel";
 			this.sDisplayPv21._iUnit = "m";
 			this.sDisplayPv21.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 48D, 40D);
 			this.sDisplayPv21.Name = "sDisplayPv21";
@@ -45,8 +45,8 @@ namespace SE.Nereda.Symbols.InfluentFeed
 			// sDisplayPv22
 			// 
 			this.sDisplayPv22.BeginInit();
-			this.sDisplayPv22._iSensorName = "Flow Measurement";
-			this.sDisplayPv22._iUnit = "";
+			this.sDisplayPv22._iSensorName = "40FT05 Vaz\u00e3o";
+			this.sDisplayPv22._iUnit = "m³/h";
 			this.sDisplayPv22.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 48D, 168D);
 			this.sDisplayPv22.Name = "sDisplayPv22";
 			this.sDisplayPv22.SecurityToken = ((uint)(4294967295u));
@@ -56,7 +56,7 @@ namespace SE.Nereda.Symbols.InfluentFeed
 			// sDisplayPv23
 			// 
 			this.sDisplayPv23.BeginInit();
-			this.sDisplayPv23._iSensorName = "pH Measurement";
+			this.sDisplayPv23._iSensorName = "40QT0005 pH";
 			this.sDisplayPv23._iUnit = "";
 			this.sDisplayPv23.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 48D, 104D);
 			this.sDisplayPv23.Name = "sDisplayPv23";
@@ -67,7 +67,7 @@ namespace SE.Nereda.Symbols.InfluentFeed
 			// sDisplayPv24
 			// 
 			this.sDisplayPv24.BeginInit();
-			this.sDisplayPv24._iSensorName = "Cond Measurement";
+			this.sDisplayPv24._iSensorName = "40QT0004 Condutiv.";
 			this.sDisplayPv24._iUnit = "";
 			this.sDisplayPv24.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 48D, 232D);
 			this.sDisplayPv24.Name = "sDisplayPv24";

@@ -4,7 +4,7 @@
   <Attribute Name="HMI.Alias" Value="" />
   <Attribute Name="Configuration.FB.IDCounter" Value="6" />
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Hidryco" Version="1.1" Author="Hidryco" Date="15/10/2026" Remarks="1.0: QGBT 440 V da ETE Tijuco Preto (unifilar HID-PE-DE-ETE-ELE-002): QTAM 1 (G2) -&gt; 1Q1 -&gt; barra A, QTAM 2 (G1) -&gt; 1Q2 -&gt; barra B, 1Q0 acoplamento. Disjuntores pelos DIs da remota 1 (A3/A4/A5 TM3DI32K do PCE SUBESTACAO) publicados por IO_DI32 em ${PATH}dj&lt;nome&gt;, ${PATH}mp&lt;sinal&gt;_1q&lt;n&gt; e ${PATH}stsFalhaRemota1. Geradores pelos Gerador_Generico internos GMG_G1 (QTAM 2) e GMG_G2 (QTAM 1). Cargas liberadas no gerador escolhidas na IHM (persistentes, padrao liberado): saidas HAB_* e stsPlantaNoGerador para os CATs de processo. v1.1: comandos de abrir/fechar dos Masterpact pela IHM (fpComandos) com intertravamentos, publicados em ${PATH}cmdAbrir1q1 ... ${PATH}cmdFechar1q2 para o IO_DQ32 do A8 TM3DQ32TK da remota 1 (word 0 b05..b10, escrita pelo M262_Substacao); reservas no unifilar." />
+  <VersionInfo Organization="Hidryco" Version="1.2" Author="Hidryco" Date="11/11/2026" Remarks="1.2: disjuntores ligados do PCE LODO (900) lidos pelo M262_Substacao na remota 1 do Lodo (.135): ${PATH}dj900_* e ${PATH}stsFalhaRemotaLODO -&gt; IThis DJ_900_* e FALHA_REMOTA_LODO (PCE com logica invertida). 1.0: QGBT 440 V da ETE Tijuco Preto (unifilar HID-PE-DE-ETE-ELE-002): QTAM 1 (G2) -&gt; 1Q1 -&gt; barra A, QTAM 2 (G1) -&gt; 1Q2 -&gt; barra B, 1Q0 acoplamento. Disjuntores pelos DIs da remota 1 (A3/A4/A5 TM3DI32K do PCE SUBESTACAO) publicados por IO_DI32 em ${PATH}dj&lt;nome&gt;, ${PATH}mp&lt;sinal&gt;_1q&lt;n&gt; e ${PATH}stsFalhaRemota1. Geradores pelos Gerador_Generico internos GMG_G1 (QTAM 2) e GMG_G2 (QTAM 1). Cargas liberadas no gerador escolhidas na IHM (persistentes, padrao liberado): saidas HAB_* e stsPlantaNoGerador para os CATs de processo. v1.1: comandos de abrir/fechar dos Masterpact pela IHM (fpComandos) com intertravamentos, publicados em ${PATH}cmdAbrir1q1 ... ${PATH}cmdFechar1q2 para o IO_DQ32 do A8 TM3DQ32TK da remota 1 (word 0 b05..b10, escrita pelo M262_Substacao); reservas no unifilar." />
   <InterfaceList>
     <EventInputs>
       <Event ID="AFE3943D783C7378" Name="E_RESET_FALHAS" Comment="Reconhecimento pelo processo com cmdResetFalhas = TRUE">
@@ -362,6 +362,75 @@
       <Parameter Name="$NAME3" Value="'$${PATH}stsFalhaRemotaNER'" />
       <Parameter Name="$NAME4" Value="'$${PATH}stsFalhaRemotaEEEB'" />
       <Parameter Name="$NAME5" Value="'$${PATH}stsFalhaRemotaDES'" />
+      <Parameter Name="$QI" Value="TRUE" />
+    </FB>
+    <FB ID="757AAB88B8121630" Name="Lodo01" Type="SYMLINKMULTIVARDST_65D63179E2618F5E" x="7300" y="21000" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=5;VALUE${I}:BOOL,BOOL,BOOL,BOOL,BOOL" />
+      <Parameter Name="$NAME1" Value="'$${PATH}dj900_PCE_DESL'" />
+      <Parameter Name="$NAME2" Value="'$${PATH}dj900_PCM'" />
+      <Parameter Name="$NAME3" Value="'$${PATH}dj900_SO_01'" />
+      <Parameter Name="$NAME4" Value="'$${PATH}dj900_SO_02'" />
+      <Parameter Name="$NAME5" Value="'$${PATH}dj900_AD_01'" />
+      <Parameter Name="$QI" Value="TRUE" />
+    </FB>
+    <FB ID="51939099190D988A" Name="Lodo02" Type="SYMLINKMULTIVARDST_65D63179E2618F5E" x="7300" y="21932" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=5;VALUE${I}:BOOL,BOOL,BOOL,BOOL,BOOL" />
+      <Parameter Name="$NAME1" Value="'$${PATH}dj900_AD_02'" />
+      <Parameter Name="$NAME2" Value="'$${PATH}dj900_AD_03'" />
+      <Parameter Name="$NAME3" Value="'$${PATH}dj900_PP_01'" />
+      <Parameter Name="$NAME4" Value="'$${PATH}dj900_MN_01'" />
+      <Parameter Name="$NAME5" Value="'$${PATH}dj900_MN_02'" />
+      <Parameter Name="$QI" Value="TRUE" />
+    </FB>
+    <FB ID="85F158D93779463B" Name="Lodo03" Type="SYMLINKMULTIVARDST_65D63179E2618F5E" x="7300" y="22864" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=5;VALUE${I}:BOOL,BOOL,BOOL,BOOL,BOOL" />
+      <Parameter Name="$NAME1" Value="'$${PATH}dj900_MN_03'" />
+      <Parameter Name="$NAME2" Value="'$${PATH}dj900_MN_04'" />
+      <Parameter Name="$NAME3" Value="'$${PATH}dj900_MN_05'" />
+      <Parameter Name="$NAME4" Value="'$${PATH}dj900_BO_01'" />
+      <Parameter Name="$NAME5" Value="'$${PATH}dj900_BO_02'" />
+      <Parameter Name="$QI" Value="TRUE" />
+    </FB>
+    <FB ID="4928186BE26A49B4" Name="Lodo04" Type="SYMLINKMULTIVARDST_65D63179E2618F5E" x="7300" y="23796" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=5;VALUE${I}:BOOL,BOOL,BOOL,BOOL,BOOL" />
+      <Parameter Name="$NAME1" Value="'$${PATH}dj900_BO_03'" />
+      <Parameter Name="$NAME2" Value="'$${PATH}dj900_BR_01'" />
+      <Parameter Name="$NAME3" Value="'$${PATH}dj900_BR_02'" />
+      <Parameter Name="$NAME4" Value="'$${PATH}dj900_VA_01'" />
+      <Parameter Name="$NAME5" Value="'$${PATH}dj900_VA_02'" />
+      <Parameter Name="$QI" Value="TRUE" />
+    </FB>
+    <FB ID="F02D421758300FCF" Name="Lodo05" Type="SYMLINKMULTIVARDST_65D63179E2618F5E" x="7300" y="24728" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=5;VALUE${I}:BOOL,BOOL,BOOL,BOOL,BOOL" />
+      <Parameter Name="$NAME1" Value="'$${PATH}dj900_VE_01'" />
+      <Parameter Name="$NAME2" Value="'$${PATH}dj900_VE_02'" />
+      <Parameter Name="$NAME3" Value="'$${PATH}dj900_VA_06'" />
+      <Parameter Name="$NAME4" Value="'$${PATH}dj900_VA_07'" />
+      <Parameter Name="$NAME5" Value="'$${PATH}dj900_VA_08'" />
+      <Parameter Name="$QI" Value="TRUE" />
+    </FB>
+    <FB ID="E202052CC50A0019" Name="Lodo06" Type="SYMLINKMULTIVARDST_65D63179E2618F5E" x="7300" y="25660" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=5;VALUE${I}:BOOL,BOOL,BOOL,BOOL,BOOL" />
+      <Parameter Name="$NAME1" Value="'$${PATH}dj900_VA_09'" />
+      <Parameter Name="$NAME2" Value="'$${PATH}dj900_VA_10'" />
+      <Parameter Name="$NAME3" Value="'$${PATH}dj900_VA_11'" />
+      <Parameter Name="$NAME4" Value="'$${PATH}dj900_VA_12'" />
+      <Parameter Name="$NAME5" Value="'$${PATH}dj900_VA_13'" />
+      <Parameter Name="$QI" Value="TRUE" />
+    </FB>
+    <FB ID="1ADF408620DF0C37" Name="Lodo07" Type="SYMLINKMULTIVARDST_1559B0FF8170C9BA0" x="7300" y="26592" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=1;VALUE${I}:BOOL" />
+      <Parameter Name="$NAME1" Value="'$${PATH}dj900_VB_03'" />
+      <Parameter Name="$QI" Value="TRUE" />
+    </FB>
+    <FB ID="5AB29B42F8EFD106" Name="Lodo08" Type="SYMLINKMULTIVARDST_1559B0FF8170C9BA0" x="7300" y="27524" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=1;VALUE${I}:BOOL" />
+      <Parameter Name="$NAME1" Value="'$${PATH}dj900_VB_04'" />
+      <Parameter Name="$QI" Value="TRUE" />
+    </FB>
+    <FB ID="DA64181C32FEBC6E" Name="Lodo09" Type="SYMLINKMULTIVARDST_1559B0FF8170C9BA0" x="7300" y="28456" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=1;VALUE${I}:BOOL" />
+      <Parameter Name="$NAME1" Value="'$${PATH}stsFalhaRemotaLODO'" />
       <Parameter Name="$QI" Value="TRUE" />
     </FB>
     <FB ID="68D1220CCD32ADA5" UID="16" Name="ComandoMP1" Type="SYMLINKMULTIVARSRC_151ACB50A2F8223B2" x="10712" y="200" Namespace="Hidryco.HidrycoLib">
@@ -2901,6 +2970,24 @@
       <Connection Source="$5FE33B2C1250855C.F8CF6E0EF48DB29B" Destination="$51228EBB93C5F091.595E0499F319E304" dx1="1175.896" />
       <Connection Source="$5FE33B2C1250855C.D54B14D55C063013" Destination="$51228EBB93C5F091.37499387BE57FB9C" dx1="1175.896" />
       <Connection Source="$5FE33B2C1250855C.42CF28208CFC0370" Destination="$51228EBB93C5F091.86D713EC07C37891" dx1="1175.896" />
+      <Connection Source="$51228EBB93C5F091.0C14AE8D21235D8D" Destination="$757AAB88B8121630.INIT" />
+      <Connection Source="$757AAB88B8121630.CNF" Destination="$5FE33B2C1250855C.9B4185F7D8FD7429" />
+      <Connection Source="$51228EBB93C5F091.0C14AE8D21235D8D" Destination="$51939099190D988A.INIT" />
+      <Connection Source="$51939099190D988A.CNF" Destination="$5FE33B2C1250855C.9B4185F7D8FD7429" />
+      <Connection Source="$51228EBB93C5F091.0C14AE8D21235D8D" Destination="$85F158D93779463B.INIT" />
+      <Connection Source="$85F158D93779463B.CNF" Destination="$5FE33B2C1250855C.9B4185F7D8FD7429" />
+      <Connection Source="$51228EBB93C5F091.0C14AE8D21235D8D" Destination="$4928186BE26A49B4.INIT" />
+      <Connection Source="$4928186BE26A49B4.CNF" Destination="$5FE33B2C1250855C.9B4185F7D8FD7429" />
+      <Connection Source="$51228EBB93C5F091.0C14AE8D21235D8D" Destination="$F02D421758300FCF.INIT" />
+      <Connection Source="$F02D421758300FCF.CNF" Destination="$5FE33B2C1250855C.9B4185F7D8FD7429" />
+      <Connection Source="$51228EBB93C5F091.0C14AE8D21235D8D" Destination="$E202052CC50A0019.INIT" />
+      <Connection Source="$E202052CC50A0019.CNF" Destination="$5FE33B2C1250855C.9B4185F7D8FD7429" />
+      <Connection Source="$51228EBB93C5F091.0C14AE8D21235D8D" Destination="$1ADF408620DF0C37.INIT" />
+      <Connection Source="$1ADF408620DF0C37.CNF" Destination="$5FE33B2C1250855C.9B4185F7D8FD7429" />
+      <Connection Source="$51228EBB93C5F091.0C14AE8D21235D8D" Destination="$5AB29B42F8EFD106.INIT" />
+      <Connection Source="$5AB29B42F8EFD106.CNF" Destination="$5FE33B2C1250855C.9B4185F7D8FD7429" />
+      <Connection Source="$51228EBB93C5F091.0C14AE8D21235D8D" Destination="$DA64181C32FEBC6E.INIT" />
+      <Connection Source="$DA64181C32FEBC6E.CNF" Destination="$5FE33B2C1250855C.9B4185F7D8FD7429" />
     </EventConnections>
     <DataConnections>
       <Connection Source="$8ADE63FD44A842A3" Destination="$51228EBB93C5F091.8C990B5C2FD24909">
@@ -6848,6 +6935,39 @@
       <Connection Source="$5FE33B2C1250855C.D63D283E086C1625" Destination="$51228EBB93C5F091.621C7B35EA10B6F5" dx1="80" />
       <Connection Source="$5FE33B2C1250855C.1463EB2C758A93FB" Destination="$51228EBB93C5F091.5943FED7EE63C910" dx1="60" />
       <Connection Source="$5FE33B2C1250855C.719A39E6AD840B6D" Destination="$51228EBB93C5F091.F5DCE484B86495C1" dx1="40" />
+      <Connection Source="$757AAB88B8121630.VALUE1" Destination="$5FE33B2C1250855C.B10C785E4683C1B6" />
+      <Connection Source="$757AAB88B8121630.VALUE2" Destination="$5FE33B2C1250855C.1373ADB1D39EE182" />
+      <Connection Source="$757AAB88B8121630.VALUE3" Destination="$5FE33B2C1250855C.448500E7DB550F95" />
+      <Connection Source="$757AAB88B8121630.VALUE4" Destination="$5FE33B2C1250855C.8B8DD3B440CE42AC" />
+      <Connection Source="$757AAB88B8121630.VALUE5" Destination="$5FE33B2C1250855C.D1C0BB941BF28EBB" />
+      <Connection Source="$51939099190D988A.VALUE1" Destination="$5FE33B2C1250855C.4670EA26F25B5E3D" />
+      <Connection Source="$51939099190D988A.VALUE2" Destination="$5FE33B2C1250855C.69A1461F54F625C6" />
+      <Connection Source="$51939099190D988A.VALUE3" Destination="$5FE33B2C1250855C.7730CDE381FE264D" />
+      <Connection Source="$51939099190D988A.VALUE4" Destination="$5FE33B2C1250855C.E02537D078F276D5" />
+      <Connection Source="$51939099190D988A.VALUE5" Destination="$5FE33B2C1250855C.8E5083F6A4B4387A" />
+      <Connection Source="$85F158D93779463B.VALUE1" Destination="$5FE33B2C1250855C.0CF8CC05DB652F80" />
+      <Connection Source="$85F158D93779463B.VALUE2" Destination="$5FE33B2C1250855C.6DB9CC4795BCA41F" />
+      <Connection Source="$85F158D93779463B.VALUE3" Destination="$5FE33B2C1250855C.B8564152FA1B04B7" />
+      <Connection Source="$85F158D93779463B.VALUE4" Destination="$5FE33B2C1250855C.97824558375F0E5B" />
+      <Connection Source="$85F158D93779463B.VALUE5" Destination="$5FE33B2C1250855C.650D933F23BC0B22" />
+      <Connection Source="$4928186BE26A49B4.VALUE1" Destination="$5FE33B2C1250855C.30BEC7131C5A14A8" />
+      <Connection Source="$4928186BE26A49B4.VALUE2" Destination="$5FE33B2C1250855C.5DFC8535FB565FA4" />
+      <Connection Source="$4928186BE26A49B4.VALUE3" Destination="$5FE33B2C1250855C.ABA3CB28A43EDAD3" />
+      <Connection Source="$4928186BE26A49B4.VALUE4" Destination="$5FE33B2C1250855C.31A7371662CBE848" />
+      <Connection Source="$4928186BE26A49B4.VALUE5" Destination="$5FE33B2C1250855C.EE00E5FF917944D3" />
+      <Connection Source="$F02D421758300FCF.VALUE1" Destination="$5FE33B2C1250855C.F22F25F79420BBEA" />
+      <Connection Source="$F02D421758300FCF.VALUE2" Destination="$5FE33B2C1250855C.786C00DAB8635085" />
+      <Connection Source="$F02D421758300FCF.VALUE3" Destination="$5FE33B2C1250855C.A47A1DDB4619794A" />
+      <Connection Source="$F02D421758300FCF.VALUE4" Destination="$5FE33B2C1250855C.12363B0454BC23C4" />
+      <Connection Source="$F02D421758300FCF.VALUE5" Destination="$5FE33B2C1250855C.74193D6A1F608DE7" />
+      <Connection Source="$E202052CC50A0019.VALUE1" Destination="$5FE33B2C1250855C.F680C3FCE84DB3CD" />
+      <Connection Source="$E202052CC50A0019.VALUE2" Destination="$5FE33B2C1250855C.B3C9BF39A7C6C290" />
+      <Connection Source="$E202052CC50A0019.VALUE3" Destination="$5FE33B2C1250855C.38CEE3A723CF5518" />
+      <Connection Source="$E202052CC50A0019.VALUE4" Destination="$5FE33B2C1250855C.397314465043FEA9" />
+      <Connection Source="$E202052CC50A0019.VALUE5" Destination="$5FE33B2C1250855C.1181D2E87745533A" />
+      <Connection Source="$1ADF408620DF0C37.VALUE1" Destination="$5FE33B2C1250855C.58E4ECC6FD4CD835" />
+      <Connection Source="$5AB29B42F8EFD106.VALUE1" Destination="$5FE33B2C1250855C.2884DE5F677AE328" />
+      <Connection Source="$DA64181C32FEBC6E.VALUE1" Destination="$5FE33B2C1250855C.536AA5CC2E6376A6" />
     </DataConnections>
   </FBNetwork>
 </FBType>

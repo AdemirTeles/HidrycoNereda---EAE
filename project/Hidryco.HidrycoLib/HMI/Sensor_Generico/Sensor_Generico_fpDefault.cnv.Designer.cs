@@ -117,7 +117,9 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_Generico
 			this.btnGrafico = new NxtControl.GuiFramework.DrawnButton();
 			this.xEstado = new System.HMI.Symbols.Base.Execute<short>();
 			this.xFalha = new System.HMI.Symbols.Base.Execute<bool>();
+			this.xSkid = new System.HMI.Symbols.Base.Execute<bool>();
 			this.xFalhaAtiva = new System.HMI.Symbols.Base.Execute<bool>();
+			this.xFalhaCom = new System.HMI.Symbols.Base.Execute<bool>();
 			this.xValor = new System.HMI.Symbols.Base.Execute<float>();
 			this.xUnidade = new System.HMI.Symbols.Base.Execute<string>();
 			this.xCasas = new System.HMI.Symbols.Base.Execute<ushort>();
@@ -199,7 +201,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_Generico
 			// 
 			// alP1
 			// 
-			this.alP1.Bounds = new NxtControl.Drawing.RectF(((float)(236D)), ((float)(12D)), ((float)(16D)), ((float)(16D)));
+			this.alP1.Bounds = new NxtControl.Drawing.RectF(((float)(188D)), ((float)(12D)), ((float)(16D)), ((float)(16D)));
 			this.alP1.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(230)), ((byte)(0)), ((byte)(0))));
 			this.alP1.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
 			this.alP1.Name = "alP1";
@@ -209,29 +211,29 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_Generico
 			// 
 			this.alP1n.Color = new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(255)));
 			this.alP1n.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
-			this.alP1n.Location = new NxtControl.Drawing.PointF(240D, 13D);
+			this.alP1n.Location = new NxtControl.Drawing.PointF(192D, 13D);
 			this.alP1n.Name = "alP1n";
 			this.alP1n.Text = "1";
 			this.alP1n.Visible = false;
 			// 
 			// alP2
 			// 
-			this.alP2.Bounds = new NxtControl.Drawing.RectF(((float)(236D)), ((float)(12D)), ((float)(16D)), ((float)(16D)));
+			this.alP2.Bounds = new NxtControl.Drawing.RectF(((float)(188D)), ((float)(12D)), ((float)(16D)), ((float)(16D)));
 			this.alP2.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(255)), ((byte)(205)), ((byte)(0))));
 			this.alP2.Closed = true;
 			this.alP2.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
 			this.alP2.Name = "alP2";
 			this.alP2.Points.AddRange(new NxtControl.Drawing.PointF[] {
-			new NxtControl.Drawing.PointF(236D, 28D),
-			new NxtControl.Drawing.PointF(244D, 12D),
-			new NxtControl.Drawing.PointF(252D, 28D)});
+			new NxtControl.Drawing.PointF(188D, 28D),
+			new NxtControl.Drawing.PointF(196D, 12D),
+			new NxtControl.Drawing.PointF(204D, 28D)});
 			this.alP2.Visible = false;
 			// 
 			// alP2n
 			// 
 			this.alP2n.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.alP2n.Font = new NxtControl.Drawing.Font("Arial", 7F, System.Drawing.FontStyle.Bold);
-			this.alP2n.Location = new NxtControl.Drawing.PointF(241D, 16D);
+			this.alP2n.Location = new NxtControl.Drawing.PointF(193D, 16D);
 			this.alP2n.Name = "alP2n";
 			this.alP2n.Text = "2";
 			this.alP2n.Visible = false;
@@ -240,7 +242,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_Generico
 			// 
 			this.alTxt.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.alTxt.Font = new NxtControl.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Bold);
-			this.alTxt.Location = new NxtControl.Drawing.PointF(256D, 12D);
+			this.alTxt.Location = new NxtControl.Drawing.PointF(208D, 12D);
 			this.alTxt.Name = "alTxt";
 			this.alTxt.Visible = false;
 			// 
@@ -1013,6 +1015,19 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_Generico
 			this.xFalhaAtiva.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.FalhaAtivaValueChanged);
 			this.xFalhaAtiva.EndInit();
 			// 
+			// xFalhaCom
+			// 
+			this.xFalhaCom.BeginInit();
+			this.xFalhaCom.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, double.NaN, double.NaN);
+			this.xFalhaCom.IsOnlyInput = true;
+			this.xFalhaCom.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
+			this.xFalhaCom.Name = "xFalhaCom";
+			this.xFalhaCom.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
+			this.xFalhaCom.TagName = "STS_FALHA_COMUNICACAO";
+			this.xFalhaCom.Value = false;
+			this.xFalhaCom.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.FalhaComValueChanged);
+			this.xFalhaCom.EndInit();
+			// 
 			// xValor
 			// 
 			this.xValor.BeginInit();
@@ -1318,7 +1333,20 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_Generico
 			// 
 			this.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(380D)), ((float)(398D)));
 			this.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(224)), ((byte)(224)), ((byte)(224))));
+			// 
+			// xSkid
+			// 
+			this.xSkid.BeginInit();
+			this.xSkid.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, double.NaN, double.NaN);
+			this.xSkid.IsOnlyInput = true;
+			this.xSkid.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
+			this.xSkid.Name = "xSkid";
+			this.xSkid.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
+			this.xSkid.TagName = "CFG_SKID";
+			this.xSkid.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.SkidValueChanged);
+			this.xSkid.EndInit();
 			this.Shapes.AddRange(new System.ComponentModel.IComponent[] {
+			this.xSkid,
 			this.cabecalho,
 			this.tituloValor,
 			this.valor,
@@ -1398,6 +1426,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_Generico
 			this.xEstado,
 			this.xFalha,
 			this.xFalhaAtiva,
+			this.xFalhaCom,
 			this.xValor,
 			this.xUnidade,
 			this.xCasas,
@@ -1503,7 +1532,9 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_Generico
 		private NxtControl.GuiFramework.DrawnButton btnGrafico;
 		private System.HMI.Symbols.Base.Execute<short> xEstado;
 		private System.HMI.Symbols.Base.Execute<bool> xFalha;
+		private System.HMI.Symbols.Base.Execute<bool> xSkid;
 		private System.HMI.Symbols.Base.Execute<bool> xFalhaAtiva;
+		private System.HMI.Symbols.Base.Execute<bool> xFalhaCom;
 		private System.HMI.Symbols.Base.Execute<float> xValor;
 		private System.HMI.Symbols.Base.Execute<string> xUnidade;
 		private System.HMI.Symbols.Base.Execute<ushort> xCasas;

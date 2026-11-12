@@ -139,7 +139,7 @@
       <VarDeclaration ID="CCF7F3F47A1A1320" Name="stpTempoB1" Type="UINT" Comment="IHM: horas da bomba 1 como principal antes da troca; 0 = sem troca por tempo (STP_TEMPO_B1)" />
       <VarDeclaration ID="665448845ED3554E" Name="stpTempoB2" Type="UINT" Comment="IHM: horas da bomba 2 como principal antes da troca; 0 = sem troca por tempo (STP_TEMPO_B2)" />
       <VarDeclaration ID="06814213D61A9713" Name="stpTempoB3" Type="UINT" Comment="IHM: horas da bomba 3 como principal antes da troca; 0 = sem troca por tempo (STP_TEMPO_B3)" />
-      <VarDeclaration ID="54CD99170D68F8C4" Name="revSelecao" Type="INT" Comment="IHM: 0 = principal automatica; 1, 2, 3 = principal fixa (CMD_SELECAO_BOMBA)" />
+      <VarDeclaration ID="54CD99170D68F8C4" Name="revSelecao" Type="INT" Comment="IHM: bomba principal 1, 2 ou 3 (CMD_SELECAO_BOMBA); comeca por ela ao escolher e a cada nova partida" />
       <VarDeclaration ID="9E10D0E429B4004A" Name="pidHabilita" Type="BOOL" Comment="IHM: velocidade pelo PID de nivel (PID_CMD_HABILITA); FALSE = velocidade maxima" />
       <VarDeclaration ID="39D99F13A06DDE55" Name="pidMinimo" Type="REAL" Comment="IHM: velocidade minima / saida minima do PID, % (STP_MINIMO)" />
       <VarDeclaration ID="6FE815DDF49B081F" Name="pidMaximo" Type="REAL" Comment="IHM: velocidade maxima / saida maxima do PID, % (STP_MAXIMO)" />
@@ -219,6 +219,8 @@
       <VarDeclaration ID="552DAA145AE14F3D" Name="oldNec" Type="UINT" />
       <VarDeclaration ID="5E46100FCD7AE74E" Name="bCampoRecebido" Type="BOOL" Comment="Ja houve leitura da emergencia do painel" />
       <VarDeclaration ID="9CED41839A9F5891" Name="iPrincipal" Type="UINT" InitialValue="1" Comment="Bomba principal (revezamento)" />
+      <VarDeclaration Name="iSel" Type="INT" Comment="Selecao da principal valida (1..3)" />
+      <VarDeclaration Name="oldSel" Type="INT" Comment="Ultima selecao aplicada" />
       <VarDeclaration ID="5321C7BB92071026" Name="iUso" Type="UINT" Comment="Principal em uso (fixa indisponivel = proxima)" />
       <VarDeclaration ID="64241379E2D955C0" Name="iSeg" Type="UINT" Comment="2a bomba" />
       <VarDeclaration ID="F4B42C5F3F9E208C" Name="iProx" Type="UINT" />
@@ -277,9 +279,11 @@
    Regras (definidas pelo usuario, out/2026):
    - numero de bombas por faixas de nivel do LIT-03 (mesmas tags do CAT
      Necessidade_2_Equipamentos), no maximo 2; velocidade pelo PID de nivel;
-   - revezamento: troca da principal apos STP_TEMPO_Bx horas ligada, na
-     sequencia 1-2-3 pulando a indisponivel; a 2a e a proxima da sequencia;
-     principal indisponivel = troca na hora (tags do Revezamento_3_Motores);
+   - revezamento: a principal selecionada (1, 2 ou 3) e a primeira a partir
+     (ao escolher e sempre que as bombas partem de novo); com o revezamento
+     habilitado troca apos STP_TEMPO_Bx horas ligada, na sequencia 1-2-3
+     pulando a indisponivel; a 2a e a proxima da sequencia; principal
+     indisponivel = troca na hora (tags do Revezamento_3_Motores);
    - HH do tanque do Nereda: a elevatoria para e segura o esgoto; volta a
      bombear quando o poco chega ao H dele (ou na LSH) - o tanque do Nereda
      tem extravasor; depois que esvazia ate a faixa 1, volta a segurar;
@@ -426,14 +430,24 @@ oldNec := iNec;
 stsNecessidade := iNec;
 
 (* ---- 7. Revezamento ---- *)
-IF iPrincipal < 1 OR iPrincipal > 3 THEN
-    iPrincipal := 1;
+(* selecao da principal so 1, 2 ou 3 (0 gravado de antes vale 1); a selecionada vira a principal ao ser
+   escolhida e sempre que as bombas partem de novo (todas paradas e sem necessidade); com o revezamento
+   habilitado a troca por tempo segue a partir dela *)
+iSel := revSelecao;
+IF iSel < 1 OR iSel > 3 THEN
+    iSel := 1;
 END_IF;
-IF revSelecao >= 1 AND revSelecao <= 3 THEN
-    IF iPrincipal <> INT_TO_UINT(revSelecao) THEN
-        iPrincipal := INT_TO_UINT(revSelecao);
-        uSegPrincipal := 0;
-    END_IF;
+IF iPrincipal < 1 OR iPrincipal > 3 THEN
+    iPrincipal := INT_TO_UINT(iSel);
+END_IF;
+IF iSel <> oldSel THEN
+    iPrincipal := INT_TO_UINT(iSel);
+    uSegPrincipal := 0;
+    oldSel := iSel;
+END_IF;
+IF iNec = 0 AND NOT lig1 AND NOT lig2 AND NOT lig3 THEN
+    iPrincipal := INT_TO_UINT(iSel);       (* proxima partida comeca pela selecionada *)
+    uSegPrincipal := 0;
 END_IF;
 (* proxima disponivel depois da principal, na sequencia 1-2-3 *)
 iProx := 0;
@@ -455,43 +469,42 @@ FOR i := 1 TO 2 DO
     END_IF;
 END_FOR;
 IF iPrincipal = 1 THEN
-    bDispP := disp1; bLigP := lig1; uLimite := UINT_TO_UDINT(stpTempoB1) * 3600;
+    bDispP := disp1; bLigP := lig1;
 ELSIF iPrincipal = 2 THEN
-    bDispP := disp2; bLigP := lig2; uLimite := UINT_TO_UDINT(stpTempoB2) * 3600;
+    bDispP := disp2; bLigP := lig2;
 ELSE
-    bDispP := disp3; bLigP := lig3; uLimite := UINT_TO_UDINT(stpTempoB3) * 3600;
+    bDispP := disp3; bLigP := lig3;
 END_IF;
-IF revSelecao >= 1 AND revSelecao <= 3 THEN
-    (* principal fixa: se estiver indisponivel, a proxima assume so enquanto ela estiver fora *)
-    IF NOT bDispP AND iProx <> 0 THEN
-        iUso := iProx;
-    ELSE
-        iUso := iPrincipal;
-    END_IF;
-    uLimite := 0;
-ELSE
+IF revHabilita THEN
     IF NOT bDispP AND iProx <> 0 THEN
         iPrincipal := iProx;               (* principal indisponivel: troca na hora *)
         uSegPrincipal := 0;
     ELSE
-        IF TICK AND bLigP AND revHabilita AND uLimite > 0 THEN
+        IF TICK AND bLigP AND uLimite > 0 THEN
             uSegPrincipal := uSegPrincipal + 1;
         END_IF;
-        IF revHabilita AND uLimite > 0 AND uSegPrincipal >= uLimite AND iProx <> 0 THEN
+        IF uLimite > 0 AND uSegPrincipal >= uLimite AND iProx <> 0 THEN
             iPrincipal := iProx;           (* venceu o tempo da principal *)
             uSegPrincipal := 0;
         END_IF;
     END_IF;
     iUso := iPrincipal;
-    IF NOT revHabilita THEN
-        uLimite := 0;
-    ELSIF iPrincipal = 1 THEN
-        uLimite := UINT_TO_UDINT(stpTempoB1) * 3600;
-    ELSIF iPrincipal = 2 THEN
-        uLimite := UINT_TO_UDINT(stpTempoB2) * 3600;
+ELSE
+    (* sem revezamento: a selecionada e sempre a principal; indisponivel, a proxima assume so enquanto ela estiver fora *)
+    IF NOT bDispP AND iProx <> 0 THEN
+        iUso := iProx;
     ELSE
-        uLimite := UINT_TO_UDINT(stpTempoB3) * 3600;
+        iUso := iPrincipal;
     END_IF;
+END_IF;
+IF NOT revHabilita THEN
+    uLimite := 0;
+ELSIF iPrincipal = 1 THEN
+    uLimite := UINT_TO_UDINT(stpTempoB1) * 3600;
+ELSIF iPrincipal = 2 THEN
+    uLimite := UINT_TO_UDINT(stpTempoB2) * 3600;
+ELSE
+    uLimite := UINT_TO_UDINT(stpTempoB3) * 3600;
 END_IF;
 (* 2a bomba: proxima disponivel depois da principal em uso *)
 iSeg := 0;

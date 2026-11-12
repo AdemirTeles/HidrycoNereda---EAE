@@ -4,9 +4,26 @@
   <Attribute Name="HMI.Alias" Value="" />
   <Attribute Name="Configuration.FB.IDCounter" Value="9" />
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Schneider Electric" Version="0.0" Author="SESA685388" Date="9/9/2024" Remarks="template" />
-  <InterfaceList />
+  <VersionInfo Organization="Schneider Electric" Version="0.1" Author="Hidryco" Date="12/11/2026" Remarks="0.1 (Hidryco 12/11/2026): REQ_DOSADORAS (cmdDO04/05 da DosagemAlcalinizante no M262_Substacao) -&gt; symlinks ${PATH}cmdDO04/05 para o SUB_A8_DQ32TK0 (%Q0.16/17). template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="456D871DCB00F480" Name="REQ_DOSADORAS" Comment="Comando das dosadoras 800-DO-04/05 vindo da DosagemAlcalinizante (M262_Substacao)">
+        <With Var="cmdDO04" />
+        <With Var="cmdDO05" />
+      </Event>
+    </EventInputs>
+    <InputVars>
+      <VarDeclaration ID="380D19E58AADF575" Name="cmdDO04" Type="BOOL" Comment="LIGA 800-DO-04 -&gt; ${PATH}cmdDO04 (SUB_A8_DQ32TK0 %Q0.16)" />
+      <VarDeclaration ID="B240C89A22FE0002" Name="cmdDO05" Type="BOOL" Comment="LIGA 800-DO-05 -&gt; ${PATH}cmdDO05 (SUB_A8_DQ32TK0 %Q0.17)" />
+    </InputVars>
+  </InterfaceList>
   <FBNetwork>
+    <FB ID="2B3655969027A2F1" Name="Dosadoras" Type="SYMLINKMULTIVARSRC_277E97BEC1451D2C" x="1700" y="1900" Namespace="SE.Nereda">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=2;VALUE${I}:BOOL,BOOL" />
+      <Parameter Name="$QI" Value="TRUE" />
+      <Parameter Name="$NAME1" Value="'$${PATH}cmdDO04'" />
+      <Parameter Name="$NAME2" Value="'$${PATH}cmdDO05'" />
+    </FB>
     <FB ID="7548BF19DA48B0C9" UID="1" Name="INIT" Type="plcStart" x="400" y="420" Namespace="SE.App2Base">
       <Parameter Name="$Prio" Value="64" />
       <Parameter Name="$Delay" Value="T#0ms" />
@@ -42,7 +59,8 @@
       <Connection Source="$8.INITO" Destination="$9.INIT">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$9.INITO" Destination="$7548BF19DA48B0C9.ACK_FIRST">
+      <Connection Source="$9.INITO" Destination="$2B3655969027A2F1.INIT" />
+      <Connection Source="$2B3655969027A2F1.INITO" Destination="$7548BF19DA48B0C9.ACK_FIRST">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
       <Connection Source="$7548BF19DA48B0C9.FIRST_INIT" Destination="$2.771E517E1E231431">
@@ -66,6 +84,7 @@
       <Connection Source="$2.A8C893C190B8881B" Destination="$6.INIT">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
+      <Connection Source="$456D871DCB00F480" Destination="$2B3655969027A2F1.REQ" />
     </EventConnections>
     <DataConnections>
       <Connection Source="$7548BF19DA48B0C9.Started" Destination="$2.AF69C8C0895FA19C">
@@ -83,6 +102,11 @@
       <Connection Source="$9.VALUE1" Destination="$2.90B77FB264D5A999">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
+      <Connection Source="$380D19E58AADF575" Destination="$2B3655969027A2F1.VALUE1" />
+      <Connection Source="$B240C89A22FE0002" Destination="$2B3655969027A2F1.VALUE2" />
     </DataConnections>
+    <Input ID="456D871DCB00F480" Name="REQ_DOSADORAS" x="200" y="1900" Type="Event" />
+    <Input ID="380D19E58AADF575" Name="cmdDO04" x="200" y="1960" Type="Data" />
+    <Input ID="B240C89A22FE0002" Name="cmdDO05" x="200" y="2020" Type="Data" />
   </FBNetwork>
 </FBType>

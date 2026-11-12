@@ -3,7 +3,7 @@
 <FBType GUID="9b8be7cf-a8d0-484a-9672-85f193df4b6a" Name="AnalogInput" Format="2.0" Comment="CAT Function Block Type" Namespace="SE.Nereda">
   <Attribute Name="HMI.Alias" Value="" />
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Schneider Electric" Version="1.0" Author="Claude/Hidryco" Date="10/7/2026" Remarks="Hidryco 06/11/2026: PvPct (PvPorcentagem) -&gt; IThis.REQ_PCT: Pv em % da faixa calculado no CLP para a IHM. Hidryco 04/11/2026: HiHiAlarm, HiAlarm, LoAlarm, LoLoAlarm, RocAlarm e DevAlarm so com o alarme habilitado (AlarmesHabilitados: LimitReached AND NOT Disabled). Rev1 - QualityFailDelay: tolerancia da falha de canal por qualidade do sinal (ChFailFilter + ChFailTimer); 0 = imediato, comportamento anterior. Alarmes BadQuality/UncertainQuality so com a falha confirmada." />
+  <VersionInfo Organization="Schneider Electric" Version="1.0" Author="Claude/Hidryco" Date="10/7/2026" Remarks="Hidryco 12/11/2026: cfgSemEscala -&gt; AnalogInputBase (sensores por Modbus sem escala/limites/corte). Hidryco 06/11/2026: PvPct (PvPorcentagem) -&gt; IThis.REQ_PCT: Pv em % da faixa calculado no CLP para a IHM. Hidryco 04/11/2026: HiHiAlarm, HiAlarm, LoAlarm, LoLoAlarm, RocAlarm e DevAlarm so com o alarme habilitado (AlarmesHabilitados: LimitReached AND NOT Disabled). Rev1 - QualityFailDelay: tolerancia da falha de canal por qualidade do sinal (ChFailFilter + ChFailTimer); 0 = imediato, comportamento anterior. Alarmes BadQuality/UncertainQuality so com a falha confirmada." />
   <InterfaceList>
     <EventInputs>
       <Event ID="536A16EAB96A59B7" Name="REQ_SUPPRESS" Comment="Request to suppress the channel failure alarm">
@@ -40,6 +40,7 @@
     <InputVars>
       <VarDeclaration ID="BB91D7C73416AF1A" Name="SuppressAlarm" Type="BOOL" Comment="1 = Suppress channel failure in HMI" />
       <VarDeclaration ID="FA79D5A30FC55CE5" Name="QualityFailDelay" Type="TIME" InitialValue="T#5s" Comment="Tolerancia da falha de canal por qualidade do sinal: so acusa se durar este tempo (0 = imediato, comportamento anterior)" />
+      <VarDeclaration ID="7DAACD7499A2A48D" Name="cfgSemEscala" Type="BOOL" InitialValue="FALSE" Comment="TRUE = sensor por Modbus com valor ja em unidade de engenharia: sem escala, limites e corte" />
     </InputVars>
     <OutputVars>
       <VarDeclaration ID="0B48A7A0C76CA60B" Name="Pv" Type="VTQREAL" Comment="Scaled process signal" />
@@ -372,6 +373,7 @@
     <Output ID="D1E3C24C04232A1F" Name="LoAlarm" x="6820" y="1624" Type="Data" />
     <Output ID="F02868080991E3C2" Name="DevAlarm" x="6819.999" y="1744" Type="Data" />
     <Output ID="A32C13DFAD1488C4" Name="RocAlarm" x="6819.999" y="1804" Type="Data" />
+    <Input ID="7DAACD7499A2A48D" Name="cfgSemEscala" x="600" y="9000" Type="Data" />
     <EventConnections>
       <Connection Source="$3679CA5D12E8EEBC.EO" Destination="$62FA503C8D6E7E00" dx1="121.5415" />
       <Connection Source="$FBC4282D9A0E2D46.CHD" Destination="$3679CA5D12E8EEBC.EI1">
@@ -1065,6 +1067,7 @@
       <Connection Source="$17B49EAE45CD7218.PvMin" Destination="$7623B258416A1C2C.BFCBD6A90AA2C09A" />
       <Connection Source="$17B49EAE45CD7218.PvMax" Destination="$7623B258416A1C2C.6B6261356EC003D8" />
       <Connection Source="$7623B258416A1C2C.D60DBBF724F0D446" Destination="$AF1C1550B4169EC2.1BE94B434833FBE7" />
+      <Connection Source="$7DAACD7499A2A48D" Destination="$17B49EAE45CD7218.6BAEE4AFB7939DF9" />
     </DataConnections>
     <AdapterConnections>
       <Connection Source="$C578D9359C46D59F.IAnalog" Destination="$DA9DB4CB56194499.IPv" dx1="134.1875">
