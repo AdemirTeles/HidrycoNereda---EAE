@@ -1607,7 +1607,7 @@
             </ItemProperty>
             <ItemProperty>
               <Name>connectinfo.tcp.ipaddress</Name>
-              <Value xsi:type="xsd:string">10.26.208.156</Value>
+              <Value xsi:type="xsd:string">10.26.208.253</Value>
             </ItemProperty>
             <ItemProperty>
               <Name>connectinfo.tcp.port</Name>
@@ -1627,7 +1627,7 @@
             </ItemProperty>
           </ItemProperties>
           <ParameterValues>
-            <ParameterValue Name="SLAVE_BUS_ID" Value="'SC4500_DESINF_PH_OD'" Comment="SC4500 pH / LDO (700-AIT-003 pH e 700-AIT-004 OD) Modbus TCP 10.26.208.156:502, Unit ID 1. Mapa de registradores a configurar no SC4500 (mesmo layout do SC4500_IF do Nereda)." />
+            <ParameterValue Name="SLAVE_BUS_ID" Value="'SC4500_DESINF_PH_OD'" Comment="SC4500 pH / ORP (700-AIT-003 pH e 700-AIT-004 ORP) Modbus TCP 10.26.208.253:502, Unit ID 1. Lista do SC4500 (foto de campo 12/11/2026): 0 pH, 1 ORP, 2 temperatura (float), 3 aviso, 4 erro (int)." />
             <ParameterValue Name="connStatus" Value="" Comment="Status da conexao em texto. Sem symlink." IsSymlink="true" />
             <ParameterValue Name="connStatusInt" Value="49CE7B2B43D675D3.19B9F1896EFC8062.95905F9933710D97.stsConexao" Comment="SC4500 pH/OD: status da conexao (1 = online) -&gt; DESINFECCAO.AIT_700_003.stsConexao" IsSymlink="true" />
             <ParameterValue Name="connDisable" Value="" Comment="Sem symlink." IsSymlink="true" />
@@ -1679,8 +1679,8 @@
               </ItemProperties>
               <ParameterValues>
                 <ParameterValue Name="swapWords" Value="TRUE" Comment="Como nos SC4500/SC1000 do Nereda. VALIDAR com um valor conhecido no comissionamento." />
-                <ParameterValue Name="r0LinkName" Value="49CE7B2B43D675D3.19B9F1896EFC8062.95905F9933710D97.stsEntrada" Comment="hr 0 (float32) - pH 700-AIT-003 -&gt; DESINFECCAO.AIT_700_003. CONFIRMAR o mapa no SC4500" IsSymlink="true" />
-                <ParameterValue Name="r1LinkName" Value="" Comment="hr 2 (float32) - temperatura da sonda de pH" IsSymlink="true" />
+                <ParameterValue Name="r0LinkName" Value="49CE7B2B43D675D3.19B9F1896EFC8062.95905F9933710D97.stsEntrada" Comment="hr 0 (float32) - pH 700-AIT-003 -&gt; DESINFECCAO.AIT_700_03" IsSymlink="true" />
+                <ParameterValue Name="r1LinkName" Value="49CE7B2B43D675D3.19B9F1896EFC8062.F3D23AABE16F1274.stsEntrada" Comment="hr 2 (float32) - ORP (mV) 700-AIT-004 -&gt; DESINFECCAO.AIT_700_04" IsSymlink="true" />
                 <ParameterValue Name="reqReadLinkName" Value="" Comment="Não utilizado (leitura cíclica)." IsSymlink="true" />
               </ParameterValues>
               <PreviousItem>
@@ -1690,10 +1690,10 @@
               <Items />
             </ConfigurationBaseItem>
             <ConfigurationBaseItem>
-              <Name>SC4500_DESINF_OD_VAL</Name>
-              <ID>EA9D8619A021EBFD</ID>
+              <Name>SC4500_DESINF_PH_STS</Name>
+              <ID>6109454766DD96D7</ID>
               <Type>
-                <Name>MODBUSRREG2_REAL</Name>
+                <Name>MODBUSRREG2</Name>
                 <Namespace>Standard.IoModbus</Namespace>
               </Type>
               <ItemProperties>
@@ -1713,7 +1713,7 @@
                 </ItemProperty>
                 <ItemProperty>
                   <Name>input.length</Name>
-                  <Value xsi:type="xsd:unsignedByte">4</Value>
+                  <Value xsi:type="xsd:unsignedByte">2</Value>
                 </ItemProperty>
                 <ItemProperty>
                   <Name>input.addressautocalculation</Name>
@@ -1729,13 +1729,62 @@
                 </ItemProperty>
               </ItemProperties>
               <ParameterValues>
-                <ParameterValue Name="swapWords" Value="TRUE" Comment="Como nos SC4500/SC1000 do Nereda. VALIDAR com um valor conhecido no comissionamento." />
-                <ParameterValue Name="r0LinkName" Value="49CE7B2B43D675D3.19B9F1896EFC8062.F3D23AABE16F1274.stsEntrada" Comment="hr 6 (float32) - OD 700-AIT-004 -&gt; DESINFECCAO.AIT_700_004. CONFIRMAR o mapa no SC4500" IsSymlink="true" />
-                <ParameterValue Name="r1LinkName" Value="" Comment="hr 8 (float32) - temperatura da sonda de OD" IsSymlink="true" />
+                <ParameterValue Name="r0LinkName" Value="49CE7B2B43D675D3.19B9F1896EFC8062.95905F9933710D97.stsAvisoDispositivo" Comment="hr 6 (int) - condição de aviso do dispositivo -&gt; DESINFECCAO.AIT_700_03 (alarme de aviso)" IsSymlink="true" />
+                <ParameterValue Name="r1LinkName" Value="49CE7B2B43D675D3.19B9F1896EFC8062.95905F9933710D97.stsErroDispositivo" Comment="hr 7 (int) - condição de erro do dispositivo -&gt; DESINFECCAO.AIT_700_03 (falha do sensor)" IsSymlink="true" />
                 <ParameterValue Name="reqReadLinkName" Value="" Comment="Não utilizado (leitura cíclica)." IsSymlink="true" />
               </ParameterValues>
               <PreviousItem>
                 <Name>SC4500_DESINF_PH_VAL</Name>
+                <PortName>BUSOUT</PortName>
+              </PreviousItem>
+              <Items />
+            </ConfigurationBaseItem>
+            <ConfigurationBaseItem>
+              <Name>SC4500_DESINF_ORP_STS</Name>
+              <ID>91D7DEF713377B27</ID>
+              <Type>
+                <Name>MODBUSRREG2</Name>
+                <Namespace>Standard.IoModbus</Namespace>
+              </Type>
+              <ItemProperties>
+                <ItemProperty>
+                  <Name>busid</Name>
+                  <HWParameters>
+                    <string>SLAVE_BUS_ID</string>
+                  </HWParameters>
+                </ItemProperty>
+                <ItemProperty>
+                  <Name>input.addresstype</Name>
+                  <Value xsi:type="xsd:string">register</Value>
+                </ItemProperty>
+                <ItemProperty>
+                  <Name>input.datatype</Name>
+                  <Value xsi:type="xsd:string">inonly</Value>
+                </ItemProperty>
+                <ItemProperty>
+                  <Name>input.length</Name>
+                  <Value xsi:type="xsd:unsignedByte">2</Value>
+                </ItemProperty>
+                <ItemProperty>
+                  <Name>input.addressautocalculation</Name>
+                  <Value xsi:type="xsd:string">disable</Value>
+                </ItemProperty>
+                <ItemProperty>
+                  <Name>input.address</Name>
+                  <Value xsi:type="xsd:unsignedShort">6</Value>
+                </ItemProperty>
+                <ItemProperty>
+                  <Name>input.ioevent</Name>
+                  <Value xsi:type="xsd:string">cyclic</Value>
+                </ItemProperty>
+              </ItemProperties>
+              <ParameterValues>
+                <ParameterValue Name="r0LinkName" Value="49CE7B2B43D675D3.19B9F1896EFC8062.F3D23AABE16F1274.stsAvisoDispositivo" Comment="hr 6 (int) - condição de aviso do dispositivo -&gt; DESINFECCAO.AIT_700_04 (alarme de aviso)" IsSymlink="true" />
+                <ParameterValue Name="r1LinkName" Value="49CE7B2B43D675D3.19B9F1896EFC8062.F3D23AABE16F1274.stsErroDispositivo" Comment="hr 7 (int) - condição de erro do dispositivo -&gt; DESINFECCAO.AIT_700_04 (falha do sensor)" IsSymlink="true" />
+                <ParameterValue Name="reqReadLinkName" Value="" Comment="Não utilizado (leitura cíclica)." IsSymlink="true" />
+              </ParameterValues>
+              <PreviousItem>
+                <Name>SC4500_DESINF_PH_STS</Name>
                 <PortName>BUSOUT</PortName>
               </PreviousItem>
               <Items />
@@ -1752,7 +1801,7 @@
               <ItemProperties />
               <ParameterValues />
               <PreviousItem>
-                <Name>SC4500_DESINF_OD_VAL</Name>
+                <Name>SC4500_DESINF_ORP_STS</Name>
                 <PortName>BUSOUT</PortName>
               </PreviousItem>
               <Items />
@@ -1793,7 +1842,7 @@
             </ItemProperty>
             <ItemProperty>
               <Name>connectinfo.tcp.ipaddress</Name>
-              <Value xsi:type="xsd:string">10.26.208.157</Value>
+              <Value xsi:type="xsd:string">10.26.208.252</Value>
             </ItemProperty>
             <ItemProperty>
               <Name>connectinfo.tcp.port</Name>
@@ -1813,7 +1862,7 @@
             </ItemProperty>
           </ItemProperties>
           <ParameterValues>
-            <ParameterValue Name="SLAVE_BUS_ID" Value="'SC4500_DESINF_TURB'" Comment="SC4500 turbidez (700-AIT-001) Modbus TCP 10.26.208.157:502, Unit ID 1. Mapa de registradores a configurar no SC4500." />
+            <ParameterValue Name="SLAVE_BUS_ID" Value="'SC4500_DESINF_TURB'" Comment="SC4500 turbidez (700-AIT-001) Modbus TCP 10.26.208.252:502, Unit ID 1. Lista do SC4500 (foto de campo 12/11/2026): 0 turbidez (float), 1 aviso, 2 erro (int)." />
             <ParameterValue Name="connStatus" Value="" Comment="Status da conexao em texto. Sem symlink." IsSymlink="true" />
             <ParameterValue Name="connStatusInt" Value="49CE7B2B43D675D3.19B9F1896EFC8062.C7A8BC8BE7F1E520.stsConexao" Comment="SC4500 turbidez: status da conexao (1 = online) -&gt; DESINFECCAO.AIT_700_001.stsConexao" IsSymlink="true" />
             <ParameterValue Name="connDisable" Value="" Comment="Sem symlink." IsSymlink="true" />
@@ -1865,12 +1914,62 @@
               </ItemProperties>
               <ParameterValues>
                 <ParameterValue Name="swapWords" Value="TRUE" Comment="Como nos SC4500/SC1000 do Nereda. VALIDAR com um valor conhecido no comissionamento." />
-                <ParameterValue Name="r0LinkName" Value="49CE7B2B43D675D3.19B9F1896EFC8062.C7A8BC8BE7F1E520.stsEntrada" Comment="hr 0 (float32) - turbidez 700-AIT-001 -&gt; DESINFECCAO.AIT_700_001. CONFIRMAR o mapa no SC4500" IsSymlink="true" />
+                <ParameterValue Name="r0LinkName" Value="49CE7B2B43D675D3.19B9F1896EFC8062.C7A8BC8BE7F1E520.stsEntrada" Comment="hr 0 (float32) - turbidez 700-AIT-001 -&gt; DESINFECCAO.AIT_700_01" IsSymlink="true" />
                 <ParameterValue Name="reqReadLinkName" Value="" Comment="Não utilizado (leitura cíclica)." IsSymlink="true" />
               </ParameterValues>
               <PreviousItem>
                 <Name>SC4500_DESINF_TURB</Name>
                 <PortName>slotBus</PortName>
+              </PreviousItem>
+              <Items />
+            </ConfigurationBaseItem>
+            <ConfigurationBaseItem>
+              <Name>SC4500_DESINF_TURB_STS</Name>
+              <ID>D70EBC98D7AF9852</ID>
+              <Type>
+                <Name>MODBUSRREG2</Name>
+                <Namespace>Standard.IoModbus</Namespace>
+              </Type>
+              <ItemProperties>
+                <ItemProperty>
+                  <Name>busid</Name>
+                  <HWParameters>
+                    <string>SLAVE_BUS_ID</string>
+                  </HWParameters>
+                </ItemProperty>
+                <ItemProperty>
+                  <Name>input.addresstype</Name>
+                  <Value xsi:type="xsd:string">register</Value>
+                </ItemProperty>
+                <ItemProperty>
+                  <Name>input.datatype</Name>
+                  <Value xsi:type="xsd:string">inonly</Value>
+                </ItemProperty>
+                <ItemProperty>
+                  <Name>input.length</Name>
+                  <Value xsi:type="xsd:unsignedByte">2</Value>
+                </ItemProperty>
+                <ItemProperty>
+                  <Name>input.addressautocalculation</Name>
+                  <Value xsi:type="xsd:string">disable</Value>
+                </ItemProperty>
+                <ItemProperty>
+                  <Name>input.address</Name>
+                  <Value xsi:type="xsd:unsignedShort">2</Value>
+                </ItemProperty>
+                <ItemProperty>
+                  <Name>input.ioevent</Name>
+                  <Value xsi:type="xsd:string">cyclic</Value>
+                </ItemProperty>
+              </ItemProperties>
+              <ParameterValues>
+                <ParameterValue Name="r0LinkName" Value="49CE7B2B43D675D3.19B9F1896EFC8062.C7A8BC8BE7F1E520.stsAvisoDispositivo" Comment="hr 2 (int) - condição de aviso do dispositivo -&gt; DESINFECCAO.AIT_700_01 (alarme de aviso)" IsSymlink="true" />
+                <ParameterValue Name="r1LinkName" Value="49CE7B2B43D675D3.19B9F1896EFC8062.C7A8BC8BE7F1E520.stsErroDispositivo" Comment="hr 3 (int) - condição de erro do dispositivo -&gt; DESINFECCAO.AIT_700_01 (falha do sensor)" IsSymlink="true" />
+                <ParameterValue Name="reqReadLinkName" Value="" Comment="Não utilizado (leitura cíclica)." IsSymlink="true" />
+              </ParameterValues>
+              <PreviousItem>
+                <Name>SC4500_DESINF_TURB_VAL</Name>
+                <PortName>BUSOUT</PortName>
               </PreviousItem>
               <Items />
             </ConfigurationBaseItem>
@@ -1886,7 +1985,7 @@
               <ItemProperties />
               <ParameterValues />
               <PreviousItem>
-                <Name>SC4500_DESINF_TURB_VAL</Name>
+                <Name>SC4500_DESINF_TURB_STS</Name>
                 <PortName>BUSOUT</PortName>
               </PreviousItem>
               <Items />

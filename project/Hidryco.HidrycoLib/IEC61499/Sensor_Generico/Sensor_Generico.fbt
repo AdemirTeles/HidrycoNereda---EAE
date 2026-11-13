@@ -4,7 +4,7 @@
   <Attribute Name="HMI.Alias" Value="" />
   <Attribute Name="Configuration.FB.IDCounter" Value="2" />
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Hidryco" Version="2.3" Author="Hidryco" Date="11/11/2026" Remarks="2.3: cfgSkid (valor ja escalado no skid): sensor sempre habilitado (Logica) e IHM sem escala e sem ajustes (CFG_SKID). 2.2: cfgFalhaMin/Max padrao 3800/22000 (eram 3600/21000). 2.1: saidas stsAtivoHH/stsAtivoH (alarme com tempo e sem memoria) e stsDisponivel no CNF. 2.0: tags da IO List da Nereda no IThis: CommonError (mesma origem do STS_FALHA_SENSOR), Reliability = 80 fixo e DaysToMaintenance = 0. 1.9: limites dos alarmes em unidade de engenharia (Logica.stsLimHH..LL) para o grafico da IHM. 1.8: tag STS_FALHA renomeada para STS_FALHA_SENSOR (mesmo ID F96D4140FF4E3BE0), so com a falha do sensor (fora da faixa ou falha do instrumento); a comunicacao fica em STS_FALHA_COMUNICACAO; STS_FALHA_ATIVA com qualquer falha. 1.7: E_CYCLE TickHmi (1 s): valores para a IHM no maximo 1 vez por segundo. 1.6: tag STS_FALHA_SENSOR renomeada para STS_FALHA = falha ativa (sensor em falha agora, sem memoria); nova tag STS_FALHA_COMUNICACAO (sensores por comunicacao ou com status da conexao). 1.5: sensor de nivel (cfgNivel) com os setpoints de alarme em % da altura maxima. 1.4: sinal em falha tambem pelo status da conexao Modbus (symlink stsConexao INT, 1 = online) com cfgUsaConexao, no 4-20 mA lido por remota e na comunicacao. 1.3: entrada inibeAlarmesBaixos (E_INIBE) e saidas stsCondicaoHH/H/L/LL (limite ultrapassado agora). 1.2: alarmes na lista do EAE com reconhecimento pelo reset e pisca na IHM (ISA-101), tempo padrao de alarme 5 s. 1.0: sensor generico (substitui Sensor_4a20, Sensor_Nivel_4a20 e Sensor_Comunicacao). Campo por symlink ${PATH}: 4-20 mA = stsSensorBruto (INT); comunicacao = stsFalhaSensor, stsEntrada (REAL), stsFalhaComunicacao. Alarmes HH/H/L/LL e falha no sistema de alarmes do EAE (ALARM_BIT)." />
+  <VersionInfo Organization="Hidryco" Version="2.4" Author="Hidryco" Date="12/11/2026" Remarks="2.4: aviso e erro do proprio dispositivo (symlinks stsAvisoDispositivo e stsErroDispositivo, INT, so com cfgComunicacao): erro = falha do sensor, aviso = alarme AlarmeAviso (Warning); codigos no diagnostico (fpParameter). 2.3: cfgSkid (valor ja escalado no skid): sensor sempre habilitado (Logica) e IHM sem escala e sem ajustes (CFG_SKID). 2.2: cfgFalhaMin/Max padrao 3800/22000 (eram 3600/21000). 2.1: saidas stsAtivoHH/stsAtivoH (alarme com tempo e sem memoria) e stsDisponivel no CNF. 2.0: tags da IO List da Nereda no IThis: CommonError (mesma origem do STS_FALHA_SENSOR), Reliability = 80 fixo e DaysToMaintenance = 0. 1.9: limites dos alarmes em unidade de engenharia (Logica.stsLimHH..LL) para o grafico da IHM. 1.8: tag STS_FALHA renomeada para STS_FALHA_SENSOR (mesmo ID F96D4140FF4E3BE0), so com a falha do sensor (fora da faixa ou falha do instrumento); a comunicacao fica em STS_FALHA_COMUNICACAO; STS_FALHA_ATIVA com qualquer falha. 1.7: E_CYCLE TickHmi (1 s): valores para a IHM no maximo 1 vez por segundo. 1.6: tag STS_FALHA_SENSOR renomeada para STS_FALHA = falha ativa (sensor em falha agora, sem memoria); nova tag STS_FALHA_COMUNICACAO (sensores por comunicacao ou com status da conexao). 1.5: sensor de nivel (cfgNivel) com os setpoints de alarme em % da altura maxima. 1.4: sinal em falha tambem pelo status da conexao Modbus (symlink stsConexao INT, 1 = online) com cfgUsaConexao, no 4-20 mA lido por remota e na comunicacao. 1.3: entrada inibeAlarmesBaixos (E_INIBE) e saidas stsCondicaoHH/H/L/LL (limite ultrapassado agora). 1.2: alarmes na lista do EAE com reconhecimento pelo reset e pisca na IHM (ISA-101), tempo padrao de alarme 5 s. 1.0: sensor generico (substitui Sensor_4a20, Sensor_Nivel_4a20 e Sensor_Comunicacao). Campo por symlink ${PATH}: 4-20 mA = stsSensorBruto (INT); comunicacao = stsFalhaSensor, stsEntrada (REAL), stsFalhaComunicacao. Alarmes HH/H/L/LL e falha no sistema de alarmes do EAE (ALARM_BIT)." />
   <InterfaceList>
     <EventInputs>
       <Event ID="D21DAA5004F58516" Name="E_RESET_FALHAS" Comment="Reset da falha e dos alarmes pelo processo (com cmdResetFalhas = TRUE)">
@@ -74,6 +74,21 @@
     </Plugs>
   </InterfaceList>
   <FBNetwork>
+    <FB ID="7696FEF15C7E59AC" Name="CampoAviso" Type="SYMLINKMULTIVARDST_5A03F112CD5D470" x="3160" y="2200" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=1;VALUE${I}:INT" />
+      <Parameter Name="$NAME1" Value="'$${PATH}stsAvisoDispositivo'" />
+    </FB>
+    <FB ID="BFA4B77E913023E5" Name="CampoErro" Type="SYMLINKMULTIVARDST_5A03F112CD5D470" x="3160" y="2700" Namespace="Hidryco.HidrycoLib">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=1;VALUE${I}:INT" />
+      <Parameter Name="$NAME1" Value="'$${PATH}stsErroDispositivo'" />
+    </FB>
+    <FB ID="57D1E87E9D85A770" Name="AlarmeAviso" Type="ALARM_BIT" x="8675.999" y="2100" Namespace="Runtime.Standard">
+      <Attribute Name="HMI.AlarmText" Value="Aviso do próprio sensor" Context="IND_1" />
+      <Attribute Name="HMI.AlarmClass" Value="Warning" Context="IND_1" />
+      <Parameter Name="$TYPE" Value="1" />
+      <Parameter Name="$ACKTYPE_1" Value="2" />
+      <Parameter Name="$ACTIVE" Value="TRUE" />
+    </FB>
     <FB ID="21DBF75529B17174" Name="IThis" Type="Sensor_Generico_HMI" x="1220" y="1140" Namespace="Hidryco.HidrycoLib">
       <Parameter Name="$1C38ED12C8BD1D24" Value="TRUE" />
       <Parameter Name="$3B6F1F6BAD6853A9" Value="80" />
@@ -371,6 +386,16 @@
       <Connection Source="$DA6A70167165ECE3.EO" Destination="$1A2582F2B07E0C54.01B9A26CA80ECAC9">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
+      <Connection Source="$1A2582F2B07E0C54.AFC15B7A52538DC1" Destination="$7696FEF15C7E59AC.INIT" />
+      <Connection Source="$1A2582F2B07E0C54.AFC15B7A52538DC1" Destination="$BFA4B77E913023E5.INIT" />
+      <Connection Source="$7696FEF15C7E59AC.CNF" Destination="$1A2582F2B07E0C54.13DE6C7C018FFF3E" />
+      <Connection Source="$BFA4B77E913023E5.CNF" Destination="$1A2582F2B07E0C54.13DE6C7C018FFF3E" />
+      <Connection Source="$13FDF8017F05FBD1.INITO" Destination="$57D1E87E9D85A770.INIT" />
+      <Connection Source="$57D1E87E9D85A770.INITO" Destination="$57D1E87E9D85A770.REQ_INITDATA" />
+      <Connection Source="$57D1E87E9D85A770.CNF_INITDATA" Destination="$57D1E87E9D85A770.ACTIVATE" />
+      <Connection Source="$1A2582F2B07E0C54.DA3C0D9212A1D794" Destination="$57D1E87E9D85A770.REQ" />
+      <Connection Source="$57D1E87E9D85A770.IND_1" Destination="$21DBF75529B17174.0DB49FB1D65E52DB" />
+      <Connection Source="$21DBF75529B17174.4275246E291683C0" Destination="$57D1E87E9D85A770.ACK_C1" />
     </EventConnections>
     <DataConnections>
       <Connection Source="$D46B37D45FD5AF5D" Destination="$1A2582F2B07E0C54.BDC9951972159B49" dx1="1861.104">
@@ -682,6 +707,14 @@
       <Connection Source="$1A2582F2B07E0C54.0DF0DDE240BFC12B" Destination="$B7194E42DC1D5273" />
       <Connection Source="$ABA610916FDA3B1A" Destination="$21DBF75529B17174.BB5D27FFFC44E39C" />
       <Connection Source="$ABA610916FDA3B1A" Destination="$1A2582F2B07E0C54.C03D96BA9EA046E5" />
+      <Connection Source="$1A2582F2B07E0C54.9DEE58A20A0B0AFD" Destination="$7696FEF15C7E59AC.QI" />
+      <Connection Source="$1A2582F2B07E0C54.9DEE58A20A0B0AFD" Destination="$BFA4B77E913023E5.QI" />
+      <Connection Source="$7696FEF15C7E59AC.VALUE1" Destination="$1A2582F2B07E0C54.DB454D1BA11A0DE9" />
+      <Connection Source="$BFA4B77E913023E5.VALUE1" Destination="$1A2582F2B07E0C54.222F1372FEE9B05F" />
+      <Connection Source="$1A2582F2B07E0C54.789D37109634E4C8" Destination="$57D1E87E9D85A770.INP" />
+      <Connection Source="$57D1E87E9D85A770.STATE_1" Destination="$21DBF75529B17174.F428A55205D49D87" />
+      <Connection Source="$1A2582F2B07E0C54.7DE82A7B3D5EBDF3" Destination="$21DBF75529B17174.8291008A357A190E" />
+      <Connection Source="$1A2582F2B07E0C54.CC00142E36E22C6A" Destination="$21DBF75529B17174.F79BEE55D150EAB5" />
     </DataConnections>
   </FBNetwork>
 </FBType>

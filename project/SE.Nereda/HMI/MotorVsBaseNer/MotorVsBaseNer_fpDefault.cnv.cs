@@ -249,6 +249,12 @@ namespace SE.Nereda.Faceplates.MotorVsBaseNer
 			if (s != null)
 				s.DoOpenFaceplate("fpDiagnostico");
 		}
+		void BtnMedicoesClick(object sender, EventArgs e)
+		{
+			NxtControl.GuiFramework.HMISymbol s = SimboloMotor();
+			if (s != null)
+				s.DoOpenFaceplate("fpMedicoes");
+		}
 
 
 		static void Selecao(DrawnButton b, bool sel)

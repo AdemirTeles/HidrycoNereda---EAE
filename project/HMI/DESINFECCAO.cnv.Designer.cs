@@ -261,7 +261,7 @@ namespace HMI.Main.Canvases
 			this.rAIT4.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular);
 			this.rAIT4.Location = new NxtControl.Drawing.PointF(1010D, 156D);
 			this.rAIT4.Name = "rAIT4";
-			this.rAIT4.Text = "700-AIT-004 (OD)";
+			this.rAIT4.Text = "700-AIT-004 (ORP)";
 			// 
 			// rAIT3
 			// 

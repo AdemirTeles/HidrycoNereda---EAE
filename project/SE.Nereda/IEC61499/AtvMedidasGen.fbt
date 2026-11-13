@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="0a5524ab-abe2-485f-990a-20b75be21c2d" Name="AtvMedidasGen" Comment="Medidas do ATV600 por Modbus generico (INT da planilha V4.6) para REAL na unidade de engenharia" Namespace="SE.Nereda">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Hidryco" Version="0.1" Author="Hidryco" Date="12/11/2026" Remarks="Hidryco 12/11/2026: RFRD 8604 rpm (1 rpm), OTR 3205 torque (0,1 %), OPR 3211 potencia (1 %), UOP 3208 tensao do motor (1 V)." />
+  <InterfaceList>
+    <EventInputs>
+      <Event ID="A1B290BEDCEAD58D" Name="REQ" Comment="Converte">
+        <With Var="RpmInt" />
+        <With Var="TorqueInt" />
+        <With Var="PotenciaInt" />
+        <With Var="TensaoInt" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event ID="1BE7939A658F20AA" Name="CNF" Comment="Valores convertidos">
+        <With Var="Rpm" />
+        <With Var="TorquePct" />
+        <With Var="PotenciaPct" />
+        <With Var="TensaoV" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ID="8B960B71FEC01EC6" Name="RpmInt" Type="INT" Comment="RFRD 8604 - velocidade do motor (1 rpm)" />
+      <VarDeclaration ID="F736A278CBBAFA30" Name="TorqueInt" Type="INT" Comment="OTR 3205 - torque do motor (0,1 %)" />
+      <VarDeclaration ID="52B2E12A797D6FFA" Name="PotenciaInt" Type="INT" Comment="OPR 3211 - potencia mecanica do motor (1 %)" />
+      <VarDeclaration ID="F2E0722B21AF46EE" Name="TensaoInt" Type="INT" Comment="UOP 3208 - tensao do motor (1 V)" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ID="D59CED07C572E655" Name="Rpm" Type="REAL" Comment="Velocidade do motor (rpm)" />
+      <VarDeclaration ID="29668FCB39E62ECF" Name="TorquePct" Type="REAL" Comment="Torque do motor (%)" />
+      <VarDeclaration ID="A7043F8D7C6DAF54" Name="PotenciaPct" Type="REAL" Comment="Potencia do motor (%)" />
+      <VarDeclaration ID="0DE8BC5CB842F789" Name="TensaoV" Type="REAL" Comment="Tensao do motor (V)" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB ID="8b5c703c-b495-4b1d-ae84-b52c0573aee3">
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="REQ" />
+    <ECC>
+      <ECState Name="START" Comment="Inicial" x="550" y="430" />
+      <ECState Name="REQ" Comment="Converte" x="1150" y="430">
+        <ECAction Algorithm="REQ" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="REQ" Condition="REQ" x="800" y="500" />
+      <ECTransition Source="REQ" Destination="START" Condition="1" x="840" y="560" />
+    </ECC>
+    <Algorithm Name="REQ" Comment="Conversao">
+      <ST><![CDATA[
+Rpm       := INT_TO_REAL(RpmInt);
+TorquePct := INT_TO_REAL(TorqueInt) / 10.0;
+PotenciaPct := INT_TO_REAL(PotenciaInt);
+TensaoV   := INT_TO_REAL(TensaoInt);   (* UOP e UINT: ate 32767 V cabe em INT *)
+]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

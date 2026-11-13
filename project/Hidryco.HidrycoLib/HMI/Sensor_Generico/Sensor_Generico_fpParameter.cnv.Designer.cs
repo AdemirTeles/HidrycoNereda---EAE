@@ -40,6 +40,22 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_Generico
 			this.sinalP2 = new NxtControl.GuiFramework.Polygon();
 			this.sinalP2n = new NxtControl.GuiFramework.FreeText();
 			this.sinalTxt = new NxtControl.GuiFramework.FreeText();
+			this.lblErro = new NxtControl.GuiFramework.FreeText();
+			this.erroNenhum = new NxtControl.GuiFramework.FreeText();
+			this.erroP1 = new NxtControl.GuiFramework.Rectangle();
+			this.erroP1n = new NxtControl.GuiFramework.FreeText();
+			this.erroP2 = new NxtControl.GuiFramework.Polygon();
+			this.erroP2n = new NxtControl.GuiFramework.FreeText();
+			this.erroTxt = new NxtControl.GuiFramework.FreeText();
+			this.lblAviso = new NxtControl.GuiFramework.FreeText();
+			this.avisoNenhum = new NxtControl.GuiFramework.FreeText();
+			this.avisoP1 = new NxtControl.GuiFramework.Rectangle();
+			this.avisoP1n = new NxtControl.GuiFramework.FreeText();
+			this.avisoP2 = new NxtControl.GuiFramework.Polygon();
+			this.avisoP2n = new NxtControl.GuiFramework.FreeText();
+			this.avisoTxt = new NxtControl.GuiFramework.FreeText();
+			this.xCodErro = new System.HMI.Symbols.Base.Execute<short>();
+			this.xCodAviso = new System.HMI.Symbols.Base.Execute<short>();
 			this.xComunicacao = new System.HMI.Symbols.Base.Execute<bool>();
 			this.xSkid = new System.HMI.Symbols.Base.Execute<bool>();
 			this.xNivel = new System.HMI.Symbols.Base.Execute<bool>();
@@ -277,6 +293,162 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_Generico
 			this.sinalTxt.Name = "sinalTxt";
 			this.sinalTxt.Text = "";
 			this.sinalTxt.Visible = false;
+			// 
+			// lblErro
+			// 
+			this.lblErro.Color = new NxtControl.Drawing.Color(((byte)(64)), ((byte)(64)), ((byte)(64)));
+			this.lblErro.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular);
+			this.lblErro.Location = new NxtControl.Drawing.PointF(20D, 314D);
+			this.lblErro.Name = "lblErro";
+			this.lblErro.Text = "Erro do próprio sensor";
+			// 
+			// erroNenhum
+			// 
+			this.erroNenhum.Color = new NxtControl.Drawing.Color(((byte)(64)), ((byte)(64)), ((byte)(64)));
+			this.erroNenhum.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular);
+			this.erroNenhum.Location = new NxtControl.Drawing.PointF(224D, 314D);
+			this.erroNenhum.Name = "erroNenhum";
+			this.erroNenhum.Text = "nenhum";
+			// 
+			// erroP1
+			// 
+			this.erroP1.Bounds = new NxtControl.Drawing.RectF(((float)(220D)), ((float)(312D)), ((float)(16D)), ((float)(16D)));
+			this.erroP1.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(230)), ((byte)(0)), ((byte)(0))));
+			this.erroP1.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
+			this.erroP1.Name = "erroP1";
+			this.erroP1.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.erroP1.Visible = false;
+			// 
+			// erroP1n
+			// 
+			this.erroP1n.Color = new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(255)));
+			this.erroP1n.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+			this.erroP1n.Location = new NxtControl.Drawing.PointF(224D, 313D);
+			this.erroP1n.Name = "erroP1n";
+			this.erroP1n.Text = "1";
+			this.erroP1n.Visible = false;
+			// 
+			// erroP2
+			// 
+			this.erroP2.Bounds = new NxtControl.Drawing.RectF(((float)(220D)), ((float)(312D)), ((float)(16D)), ((float)(16D)));
+			this.erroP2.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(255)), ((byte)(205)), ((byte)(0))));
+			this.erroP2.Closed = true;
+			this.erroP2.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
+			this.erroP2.Name = "erroP2";
+			this.erroP2.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.erroP2.Points.AddRange(new NxtControl.Drawing.PointF[] {
+			new NxtControl.Drawing.PointF(220D, 328D),
+			new NxtControl.Drawing.PointF(228D, 312D),
+			new NxtControl.Drawing.PointF(236D, 328D)});
+			this.erroP2.Visible = false;
+			// 
+			// erroP2n
+			// 
+			this.erroP2n.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.erroP2n.Font = new NxtControl.Drawing.Font("Arial", 7F, System.Drawing.FontStyle.Bold);
+			this.erroP2n.Location = new NxtControl.Drawing.PointF(225D, 316D);
+			this.erroP2n.Name = "erroP2n";
+			this.erroP2n.Text = "2";
+			this.erroP2n.Visible = false;
+			// 
+			// erroTxt
+			// 
+			this.erroTxt.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.erroTxt.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+			this.erroTxt.Location = new NxtControl.Drawing.PointF(240D, 312D);
+			this.erroTxt.Name = "erroTxt";
+			this.erroTxt.Text = "";
+			this.erroTxt.Visible = false;
+			// 
+			// lblAviso
+			// 
+			this.lblAviso.Color = new NxtControl.Drawing.Color(((byte)(64)), ((byte)(64)), ((byte)(64)));
+			this.lblAviso.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular);
+			this.lblAviso.Location = new NxtControl.Drawing.PointF(20D, 346D);
+			this.lblAviso.Name = "lblAviso";
+			this.lblAviso.Text = "Aviso do próprio sensor";
+			// 
+			// avisoNenhum
+			// 
+			this.avisoNenhum.Color = new NxtControl.Drawing.Color(((byte)(64)), ((byte)(64)), ((byte)(64)));
+			this.avisoNenhum.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular);
+			this.avisoNenhum.Location = new NxtControl.Drawing.PointF(224D, 346D);
+			this.avisoNenhum.Name = "avisoNenhum";
+			this.avisoNenhum.Text = "nenhum";
+			// 
+			// avisoP1
+			// 
+			this.avisoP1.Bounds = new NxtControl.Drawing.RectF(((float)(220D)), ((float)(344D)), ((float)(16D)), ((float)(16D)));
+			this.avisoP1.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(230)), ((byte)(0)), ((byte)(0))));
+			this.avisoP1.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
+			this.avisoP1.Name = "avisoP1";
+			this.avisoP1.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.avisoP1.Visible = false;
+			// 
+			// avisoP1n
+			// 
+			this.avisoP1n.Color = new NxtControl.Drawing.Color(((byte)(255)), ((byte)(255)), ((byte)(255)));
+			this.avisoP1n.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+			this.avisoP1n.Location = new NxtControl.Drawing.PointF(224D, 345D);
+			this.avisoP1n.Name = "avisoP1n";
+			this.avisoP1n.Text = "1";
+			this.avisoP1n.Visible = false;
+			// 
+			// avisoP2
+			// 
+			this.avisoP2.Bounds = new NxtControl.Drawing.RectF(((float)(220D)), ((float)(344D)), ((float)(16D)), ((float)(16D)));
+			this.avisoP2.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(255)), ((byte)(205)), ((byte)(0))));
+			this.avisoP2.Closed = true;
+			this.avisoP2.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
+			this.avisoP2.Name = "avisoP2";
+			this.avisoP2.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0))), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.avisoP2.Points.AddRange(new NxtControl.Drawing.PointF[] {
+			new NxtControl.Drawing.PointF(220D, 360D),
+			new NxtControl.Drawing.PointF(228D, 344D),
+			new NxtControl.Drawing.PointF(236D, 360D)});
+			this.avisoP2.Visible = false;
+			// 
+			// avisoP2n
+			// 
+			this.avisoP2n.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.avisoP2n.Font = new NxtControl.Drawing.Font("Arial", 7F, System.Drawing.FontStyle.Bold);
+			this.avisoP2n.Location = new NxtControl.Drawing.PointF(225D, 348D);
+			this.avisoP2n.Name = "avisoP2n";
+			this.avisoP2n.Text = "2";
+			this.avisoP2n.Visible = false;
+			// 
+			// avisoTxt
+			// 
+			this.avisoTxt.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.avisoTxt.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+			this.avisoTxt.Location = new NxtControl.Drawing.PointF(240D, 344D);
+			this.avisoTxt.Name = "avisoTxt";
+			this.avisoTxt.Text = "";
+			this.avisoTxt.Visible = false;
+			// 
+			// xCodErro
+			// 
+			this.xCodErro.BeginInit();
+			this.xCodErro.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, double.NaN, double.NaN);
+			this.xCodErro.IsOnlyInput = true;
+			this.xCodErro.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
+			this.xCodErro.Name = "xCodErro";
+			this.xCodErro.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
+			this.xCodErro.TagName = "STS_CODIGO_ERRO";
+			this.xCodErro.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.CodErroValueChanged);
+			this.xCodErro.EndInit();
+			// 
+			// xCodAviso
+			// 
+			this.xCodAviso.BeginInit();
+			this.xCodAviso.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, double.NaN, double.NaN);
+			this.xCodAviso.IsOnlyInput = true;
+			this.xCodAviso.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
+			this.xCodAviso.Name = "xCodAviso";
+			this.xCodAviso.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
+			this.xCodAviso.TagName = "STS_CODIGO_AVISO";
+			this.xCodAviso.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.CodAvisoValueChanged);
+			this.xCodAviso.EndInit();
 			// 
 			// xComunicacao
 			// 
@@ -548,7 +720,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_Generico
 			// 
 			// fpParameter
 			// 
-			this.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(380D)), ((float)(330D)));
+			this.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(380D)), ((float)(394D)));
 			this.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(224)), ((byte)(224)), ((byte)(224))));
 			this.Name = "fpParameter";
 			this.Shapes.AddRange(new System.ComponentModel.IComponent[] {
@@ -572,6 +744,22 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_Generico
 			this.sinalP2,
 			this.sinalP2n,
 			this.sinalTxt,
+			this.lblErro,
+			this.erroNenhum,
+			this.erroP1,
+			this.erroP1n,
+			this.erroP2,
+			this.erroP2n,
+			this.erroTxt,
+			this.lblAviso,
+			this.avisoNenhum,
+			this.avisoP1,
+			this.avisoP1n,
+			this.avisoP2,
+			this.avisoP2n,
+			this.avisoTxt,
+			this.xCodErro,
+			this.xCodAviso,
 			this.xComunicacao,
 			this.xSkid,
 			this.xNivel,
@@ -589,7 +777,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_Generico
 			this.rTempoH,
 			this.rTempoL,
 			this.rTempoLL});
-			this.Size = new System.Drawing.Size(380, 330);
+			this.Size = new System.Drawing.Size(380, 394);
 
 		}
 		private NxtControl.GuiFramework.FreeText titulo;
@@ -612,6 +800,22 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_Generico
 		private NxtControl.GuiFramework.Polygon sinalP2;
 		private NxtControl.GuiFramework.FreeText sinalP2n;
 		private NxtControl.GuiFramework.FreeText sinalTxt;
+		private NxtControl.GuiFramework.FreeText lblErro;
+		private NxtControl.GuiFramework.FreeText erroNenhum;
+		private NxtControl.GuiFramework.Rectangle erroP1;
+		private NxtControl.GuiFramework.FreeText erroP1n;
+		private NxtControl.GuiFramework.Polygon erroP2;
+		private NxtControl.GuiFramework.FreeText erroP2n;
+		private NxtControl.GuiFramework.FreeText erroTxt;
+		private NxtControl.GuiFramework.FreeText lblAviso;
+		private NxtControl.GuiFramework.FreeText avisoNenhum;
+		private NxtControl.GuiFramework.Rectangle avisoP1;
+		private NxtControl.GuiFramework.FreeText avisoP1n;
+		private NxtControl.GuiFramework.Polygon avisoP2;
+		private NxtControl.GuiFramework.FreeText avisoP2n;
+		private NxtControl.GuiFramework.FreeText avisoTxt;
+		private System.HMI.Symbols.Base.Execute<short> xCodErro;
+		private System.HMI.Symbols.Base.Execute<short> xCodAviso;
 		private System.HMI.Symbols.Base.Execute<bool> xComunicacao;
 		private System.HMI.Symbols.Base.Execute<bool> xSkid;
 		private System.HMI.Symbols.Base.Execute<bool> xNivel;

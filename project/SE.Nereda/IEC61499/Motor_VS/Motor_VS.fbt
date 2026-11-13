@@ -3,7 +3,7 @@
 <FBType GUID="0dea89b7-acc2-4962-889a-3baabf65719a" Name="Motor_VS" Format="2.0" Comment="CAT Function Block Type" Namespace="SE.Nereda">
   <Attribute Name="HMI.Alias" Value="" />
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Schneider Electric" Version="0.6" Author=" " Date="10/11/2026" Remarks="0.6 (Hidryco 10/11/2026): cfgResetSoClique padrao TRUE (nenhum motor Nereda com reset automatico; antes so os Sulzer); Reset_Init DI1_1 = FALSE: sem reset automatico da BaseVs na inicializacao (State.INITO) - reset do equipamento so pelo clique de reset na IHM (IThis.RESET): PartidaReset.REQ_RESET/ResetIn agora vem so do IThis (antes vinha do ResetCmd, que inclui Reset_Init na inicializacao e o INereda); cfgResetSoClique vai para PartidaReset.cfgResetClique e LocalPanel.cfgSemResetAuto (sem o reset automatico do AtvResetError). 0.5 (Hidryco 05/11/2026): ResetCmd -> PartidaReset.REQ_RESET: o reset do EAE tambem reseta o Sulzer (cfgResetNaPartida) com o soprador parado. 0.4 (Hidryco 05/11/2026): intertravamento nao deixa pedindo reset - JanelaIlck (intertravamento + 10 s) -> BaseVs.SemResetConf (alarme de realimentacao sem reset) e PowerFailure.Suppress (falta de potencia na janela); falhas do equipamento continuam pedindo reset. 0.3 (Hidryco 05/11/2026): cfgResetNaPartida - PartidaReset (PartidaComReset + DelayPartida) entre BaseVs.OutFwd e cmdFwd: reset 1 s, pausa 1 s e partida; reset pelo LocalPanel.ResetPartida (symlink ResetError_ATV). Hidryco 04/11/2026: BaseVs agora e MotorVsBaseNer (SE.Nereda), copia do MotorVsBase com FbFail = realimentacao OU falha OU intertravamento. 0.2: carga no gerador (Hidryco): REQ_GERADOR (geradorHabilita, stsGerador) e geradorConectado; com a planta nos geradores e a carga nao liberada na Subestacao o intertravamento GeradorBloqueio (ilckCondItem, depois do SafetySwitchOff; calculado no CargaGerador so com a Subestacao) para o motor; raio na IHM (CargaGeradorRaio, tambem com o FbRunning; STS_ANIMACAO_GERADOR no FB_FWD). 0.1: em Local (LocalPanel.oRemoteSelect = FALSE) a base recebe ExternalControlled = TRUE (LocalMode = NOT oRemoteSelect, pelo CNF_STATUS): sem falha de feedback em Local; o extControlled (symlink DIn sem publicador) ficou sem ligacao." />
+  <VersionInfo Organization="Schneider Electric" Version="0.6" Author=" " Date="10/11/2026" Remarks="Hidryco 12/11/2026 (2): falha de comunicacao do ATV por Modbus generico como o Motor_Generico - cfgUsaFalhaComunicacao, symlink AtvComInt (connStatusInt), offline 5 s intertrava (ComIlck) e alarma (AlarmeComunicacao); IHM STS_FALHA_COMUNICACAO/STS_ALM_COMUNICACAO_EST no FB_FWD. Hidryco 12/11/2026: cmdFrequency em 0,1 Hz (OutSpeed x 6, 100 % = 60 Hz) para o LFR 8502 do ATV600 generico; cfgEscalaRetorno (FbSpeedAdapter) e cfgProntoForcado (FieldSignals). 0.6 (Hidryco 10/11/2026): cfgResetSoClique padrao TRUE (nenhum motor Nereda com reset automatico; antes so os Sulzer); Reset_Init DI1_1 = FALSE: sem reset automatico da BaseVs na inicializacao (State.INITO) - reset do equipamento so pelo clique de reset na IHM (IThis.RESET): PartidaReset.REQ_RESET/ResetIn agora vem so do IThis (antes vinha do ResetCmd, que inclui Reset_Init na inicializacao e o INereda); cfgResetSoClique vai para PartidaReset.cfgResetClique e LocalPanel.cfgSemResetAuto (sem o reset automatico do AtvResetError). 0.5 (Hidryco 05/11/2026): ResetCmd -> PartidaReset.REQ_RESET: o reset do EAE tambem reseta o Sulzer (cfgResetNaPartida) com o soprador parado. 0.4 (Hidryco 05/11/2026): intertravamento nao deixa pedindo reset - JanelaIlck (intertravamento + 10 s) -> BaseVs.SemResetConf (alarme de realimentacao sem reset) e PowerFailure.Suppress (falta de potencia na janela); falhas do equipamento continuam pedindo reset. 0.3 (Hidryco 05/11/2026): cfgResetNaPartida - PartidaReset (PartidaComReset + DelayPartida) entre BaseVs.OutFwd e cmdFwd: reset 1 s, pausa 1 s e partida; reset pelo LocalPanel.ResetPartida (symlink ResetError_ATV). Hidryco 04/11/2026: BaseVs agora e MotorVsBaseNer (SE.Nereda), copia do MotorVsBase com FbFail = realimentacao OU falha OU intertravamento. 0.2: carga no gerador (Hidryco): REQ_GERADOR (geradorHabilita, stsGerador) e geradorConectado; com a planta nos geradores e a carga nao liberada na Subestacao o intertravamento GeradorBloqueio (ilckCondItem, depois do SafetySwitchOff; calculado no CargaGerador so com a Subestacao) para o motor; raio na IHM (CargaGeradorRaio, tambem com o FbRunning; STS_ANIMACAO_GERADOR no FB_FWD). 0.1: em Local (LocalPanel.oRemoteSelect = FALSE) a base recebe ExternalControlled = TRUE (LocalMode = NOT oRemoteSelect, pelo CNF_STATUS): sem falha de feedback em Local; o extControlled (symlink DIn sem publicador) ficou sem ligacao." />
   <InterfaceList>
     <EventInputs>
       <Event ID="2DBEE771C3E6546D" Name="REQ_SUPPRESS_ALM" Comment="Request to update the alarm suppress status">
@@ -52,6 +52,9 @@
       <VarDeclaration ID="29B38549D8BB58F5" Name="Reset" Type="BOOL" Comment="1 = Reset device failure" />
       <VarDeclaration ID="C15DED4271ABC4C5" Name="AtvType" Type="STRING" />
       <VarDeclaration ID="6BCF92D2F3567973" Name="cfgResetNaPartida" Type="BOOL" InitialValue="FALSE" Comment="TRUE = reset do equipamento antes de cada partida (Sulzer HST: bit 2 Reset da palavra de comando), 1 s de reset e 1 s de pausa" />
+      <VarDeclaration ID="B28D95CCDB629245" Name="cfgEscalaRetorno" Type="REAL" InitialValue="100.0" Comment="Retorno de velocidade bruto (fbSpeedINT): % = bruto / cfgEscalaRetorno (Sulzer 100; ATV600 RFR em 0,1 Hz com 100 % = 60 Hz: 6)" />
+      <VarDeclaration ID="82A72FB192516113" Name="cfgProntoForcado" Type="BOOL" InitialValue="FALSE" Comment="TRUE = inversor pronto forcado (ATV por Modbus generico, sem HW CAT)" />
+      <VarDeclaration ID="6662AF1CEF423C64" Name="cfgUsaFalhaComunicacao" Type="BOOL" InitialValue="FALSE" Comment="TRUE = supervisiona a comunicacao Modbus do inversor (symlink AtvComInt = connStatusInt, 1 online): sem comunicacao por 5 s intertrava o motor (retira o comando, sem memorizar) e gera alarme, como o Motor_Generico" />
       <VarDeclaration ID="EB8B51A6243EA31A" Name="cfgResetSoClique" Type="BOOL" InitialValue="TRUE" Comment="TRUE (padrao) = reset do equipamento (ResetError_ATV) so pelo clique de reset na IHM, um pulso com o motor parado: sem o reset automatico do AtvResetError (ATV e Sulzer)" />
       <VarDeclaration ID="DCB761C03CD4608B" Name="geradorConectado" Type="BOOL" InitialValue="FALSE" Comment="TRUE = carga da lista de cargas no gerador da Subestacao (raio e bloqueio)" />
       <VarDeclaration ID="675F7F871C14320E" Name="geradorHabilita" Type="BOOL" Comment="Carga liberada para operar com a planta nos geradores" />
@@ -87,6 +90,29 @@
     </AdapterInputs>
   </InterfaceList>
   <FBNetwork>
+    <FB ID="04D8A1BC2D31423F" Name="ComInt" Type="SYMLINKMULTIVARDST_5A03F112CD5D470" x="3000" y="12800" Namespace="SE.Nereda">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=1;VALUE${I}:INT" />
+      <Parameter Name="$QI" Value="TRUE" />
+      <Parameter Name="$NAME1" Value="'$${PATH}AtvComInt'" />
+    </FB>
+    <FB ID="B6F0503FAFEC388B" Name="ComPermit" Type="E_PERMIT" x="4200" y="12800" Namespace="IEC61499.Standard" />
+    <FB ID="3FC49FEDA4EAA880" Name="ComOnline" Type="INT2BOOL" x="5200" y="12800" Namespace="SE.Nereda" />
+    <FB ID="1920BD1F34FDF998" Name="ComSwitch" Type="E_SWITCH" x="6200" y="12800" Namespace="IEC61499.Standard" />
+    <FB ID="E178AEEFFF94700E" Name="ComDelay" Type="E_DELAY" x="7200" y="12800" Namespace="IEC61499.Standard">
+      <Parameter Name="$DT" Value="T#5s" />
+    </FB>
+    <FB ID="66E9443E60D7CBAD" Name="ComLatch" Type="E_SR" x="8200" y="12800" Namespace="IEC61499.Standard" />
+    <FB ID="A8BD03FAD69EA370" Name="ComIlck" Type="ilckCondItem" x="4060" y="12100" Namespace="SE.App2CommonProcess">
+      <Parameter Name="$CondCause" Value="Active1" />
+      <Parameter Name="$CondName" Value="'Inversor sem comunicacao'" />
+    </FB>
+    <FB ID="9E848E30E131B7FC" Name="AlarmeComunicacao" Type="ALARM_BIT" x="9300" y="12800" Namespace="Runtime.Standard">
+      <Attribute Name="HMI.AlarmText" Value="Acionamento sem comunicação" Context="IND_1" />
+      <Attribute Name="HMI.AlarmClass" Value="Warning" Context="IND_1" />
+      <Parameter Name="$TYPE" Value="1" />
+      <Parameter Name="$ACKTYPE_1" Value="2" />
+      <Parameter Name="$ACTIVE" Value="TRUE" />
+    </FB>
     <FB ID="76494EA47EAB0A30" Name="IThis" Type="Motor_VS_HMI" x="4220" y="520" Namespace="SE.Nereda">
       <Parameter Name="$48A01E462BD24109" Value="TRUE" />
     </FB>
@@ -257,7 +283,7 @@
     <FB ID="75FE14740EB3E28C" Name="MotorVsFailuresAlarms" Type="MotVsFailures" x="7120" y="10700" Namespace="SE.Nereda" />
     <FB ID="3E8C5AF05D5E8050" UID="D18E97EA7BB1A44E" Name="MUL1" Type="MUL_1329C2AB45109BAAB" x="8180" y="3660" Namespace="SE.Nereda">
       <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNT:=2;IN${CNT}:REAL" />
-      <Parameter Name="$IN2" Value="0.6" />
+      <Parameter Name="$IN2" Value="6.0" />
     </FB>
     <FB ID="A0F7886C161DF82C" UID="0D5B87626626777E" Name="SYMLINKMULTIVARSRC1" Type="SYMLINKMULTIVARSRC_5A03F112CD5D470" x="7280" y="3820" Namespace="SE.Nereda">
       <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=1;VALUE${I}:INT" />
@@ -274,7 +300,6 @@
       <Parameter Name="$EEBD45F5182DE80D" Value="100.0" />
     </FB>
     <FB ID="035A9C3F2AA186EC" Name="FbSpeedAdapter" Type="speedFbAdapter" x="1160" y="3760" Namespace="SE.Nereda">
-      <Parameter Name="$919EBDC14EE69C57" Value="100.0" />
     </FB>
     <FB ID="AA842A22E482891D" UID="82AB745CA4524FD9" Name="fbSpeedINT" Type="SYMLINKMULTIVARDST_5A03F112CD5D470" x="1140" y="3060" Namespace="SE.Nereda">
       <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=1;VALUE${I}:INT" />
@@ -304,6 +329,9 @@
     <Input ID="DCB761C03CD4608B" Name="geradorConectado" x="2076.812" y="11812" Type="Data" />
     <Input ID="6BCF92D2F3567973" Name="cfgResetNaPartida" x="2076.812" y="11872" Type="Data" />
     <Input ID="EB8B51A6243EA31A" Name="cfgResetSoClique" x="2076.812" y="11992" Type="Data" />
+    <Input ID="6662AF1CEF423C64" Name="cfgUsaFalhaComunicacao" x="2076.812" y="12352" Type="Data" />
+    <Input ID="B28D95CCDB629245" Name="cfgEscalaRetorno" x="2076.812" y="12112" Type="Data" />
+    <Input ID="82A72FB192516113" Name="cfgProntoForcado" x="2076.812" y="12232" Type="Data" />
     <Input ID="675F7F871C14320E" Name="geradorHabilita" x="2140.146" y="11872" Type="Data" />
     <Input ID="9446122E66FA8402" Name="stsGerador" x="2219.208" y="11932" Type="Data" />
     <Frame Name="FRAME6" X="320" Y="5920" Width="2160" Height="2680">
@@ -861,7 +889,6 @@
       <Connection Source="$B3B507C963A8FE90.CNF_NEED_RESET" Destination="$4786771BF016BABD.REQ">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$CEA076345452F5D3.INITO" Destination="$24F99C5D5618E7CE.INIT" />
       <Connection Source="$4A3831806C7D9E68.INITO" Destination="$36976330F6F3E636.INIT" />
       <Connection Source="$36976330F6F3E636.INITO" Destination="$A5DC193E64B89597.INIT" />
       <Connection Source="$4A3831806C7D9E68.CNF_INITDATA" Destination="$4A3831806C7D9E68.REQ">
@@ -1034,9 +1061,6 @@
       <Connection Source="$AA842A22E482891D.CNF" Destination="$035A9C3F2AA186EC.D15EB431906F2F27">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
-      <Connection Source="$AA842A22E482891D.INITO" Destination="$03F0AA53FA37ED13.INIT">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
       <Connection Source="$REQ_GERADOR" Destination="$24D8BB3C17F0D1CE.CBDA4E7ACB706297" />
       <Connection Source="$76494EA47EAB0A30.141F2765F0199247" Destination="$24D8BB3C17F0D1CE.CBDA4E7ACB706297" dx1="267.1045" dx2="49.99976" dy="4710" />
       <Connection Source="$24D8BB3C17F0D1CE.CA6A15984D5E93C2" Destination="$81FA76459079DDA2.REQ" />
@@ -1127,6 +1151,24 @@
       <Connection Source="$CCC1F85DE95D4D77.EDCD0BD1ACF3506C" Destination="$E9884C56AB56C8A7.STOP" />
       <Connection Source="$E9884C56AB56C8A7.EO" Destination="$CCC1F85DE95D4D77.F9A0B1C647677E53" />
       <Connection Source="$76494EA47EAB0A30.6535878B6880E95C" Destination="$B0A2DEC8FF5AFF4C.0A7898AA46E3126A" />
+      <Connection Source="$AA842A22E482891D.INITO" Destination="$04D8A1BC2D31423F.INIT" />
+      <Connection Source="$04D8A1BC2D31423F.INITO" Destination="$03F0AA53FA37ED13.INIT" />
+      <Connection Source="$04D8A1BC2D31423F.INITO" Destination="$B6F0503FAFEC388B.EI" />
+      <Connection Source="$04D8A1BC2D31423F.CNF" Destination="$B6F0503FAFEC388B.EI" />
+      <Connection Source="$B6F0503FAFEC388B.EO" Destination="$3FC49FEDA4EAA880.DD5870AA881150BB" />
+      <Connection Source="$3FC49FEDA4EAA880.6FC99A5BD1C38561" Destination="$1920BD1F34FDF998.EI" />
+      <Connection Source="$1920BD1F34FDF998.EO0" Destination="$E178AEEFFF94700E.START" />
+      <Connection Source="$1920BD1F34FDF998.EO1" Destination="$E178AEEFFF94700E.STOP" />
+      <Connection Source="$1920BD1F34FDF998.EO1" Destination="$66E9443E60D7CBAD.R" />
+      <Connection Source="$E178AEEFFF94700E.EO" Destination="$66E9443E60D7CBAD.S" />
+      <Connection Source="$66E9443E60D7CBAD.EO" Destination="$A8BD03FAD69EA370.REQ" />
+      <Connection Source="$66E9443E60D7CBAD.EO" Destination="$9E848E30E131B7FC.REQ" />
+      <Connection Source="$66E9443E60D7CBAD.EO" Destination="$76494EA47EAB0A30.C9F8920D38B4A811" />
+      <Connection Source="$9E848E30E131B7FC.IND_1" Destination="$76494EA47EAB0A30.C9F8920D38B4A811" />
+      <Connection Source="$CEA076345452F5D3.INITO" Destination="$9E848E30E131B7FC.INIT" />
+      <Connection Source="$9E848E30E131B7FC.INITO" Destination="$24F99C5D5618E7CE.INIT" />
+      <Connection Source="$9E848E30E131B7FC.INITO" Destination="$9E848E30E131B7FC.REQ_INITDATA" />
+      <Connection Source="$9E848E30E131B7FC.CNF_INITDATA" Destination="$9E848E30E131B7FC.ACTIVATE" />
     </EventConnections>
     <DataConnections>
       <Connection Source="$6C937361D4C7D0A7.Out" Destination="$035A9C3F2AA186EC.2A8D8066783C9AEC">
@@ -1723,6 +1765,15 @@
       <Connection Source="$76494EA47EAB0A30.3B77DD9B964F7734" Destination="$B0A2DEC8FF5AFF4C.E1F7FFFB6D775146" />
       <Connection Source="$EB8B51A6243EA31A" Destination="$B0A2DEC8FF5AFF4C.C0A1521C618D268E" />
       <Connection Source="$EB8B51A6243EA31A" Destination="$AA7CAD5AC025204C.97762544BDC6A429" />
+      <Connection Source="$B28D95CCDB629245" Destination="$035A9C3F2AA186EC.919EBDC14EE69C57" />
+      <Connection Source="$82A72FB192516113" Destination="$AA7CAD5AC025204C.8738C926C91ED54C" />
+      <Connection Source="$04D8A1BC2D31423F.VALUE1" Destination="$3FC49FEDA4EAA880.4573FC8F228EB71D" />
+      <Connection Source="$6662AF1CEF423C64" Destination="$B6F0503FAFEC388B.PERMIT" />
+      <Connection Source="$3FC49FEDA4EAA880.A6DEF5F9C27C1848" Destination="$1920BD1F34FDF998.G" />
+      <Connection Source="$66E9443E60D7CBAD.Q" Destination="$A8BD03FAD69EA370.CondSignal" />
+      <Connection Source="$66E9443E60D7CBAD.Q" Destination="$9E848E30E131B7FC.INP" />
+      <Connection Source="$66E9443E60D7CBAD.Q" Destination="$76494EA47EAB0A30.03A2072F1F6D9171" />
+      <Connection Source="$9E848E30E131B7FC.STATE_1" Destination="$76494EA47EAB0A30.E1EF81ADB4EB9A1C" />
     </DataConnections>
     <AdapterConnections>
       <Connection Source="$9C9EE774F196CD99" Destination="$77265060F849498A.ICondChainIn" dx1="556">
@@ -1823,9 +1874,8 @@
         <AvoidsNodes>false</AvoidsNodes>
       </Connection>
       <Connection Source="$77265060F849498A.ICondChainOut" Destination="$81FA76459079DDA2.ICondChainIn" dx1="40" dx2="129.9998" dy="570" />
-      <Connection Source="$81FA76459079DDA2.ICondChainOut" Destination="$00A039A786EBBD27.IOpCondIn" dx1="40">
-        <AvoidsNodes>false</AvoidsNodes>
-      </Connection>
+      <Connection Source="$81FA76459079DDA2.ICondChainOut" Destination="$A8BD03FAD69EA370.ICondChainIn" />
+      <Connection Source="$A8BD03FAD69EA370.ICondChainOut" Destination="$00A039A786EBBD27.IOpCondIn" />
     </AdapterConnections>
   </FBNetwork>
 </FBType>

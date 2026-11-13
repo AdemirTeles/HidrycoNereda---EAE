@@ -25,6 +25,8 @@ namespace SE.Nereda.Faceplates.Motor_VS
 			this.secEstados = new NxtControl.GuiFramework.FreeText();
 			this.estados = new SE.Nereda.Symbols.MotorVsBaseNer.sDiagnostico();
 			this.secAcion = new NxtControl.GuiFramework.FreeText();
+			this.secUltFalha = new NxtControl.GuiFramework.FreeText();
+			this.ultFalha = new SE.Nereda.Symbols.FieldSignals.sFalha();
 			this.r_Pronto = new NxtControl.GuiFramework.FreeText();
 			this.v_Pronto = new NxtControl.GuiFramework.FreeText();
 			this.r_Circ = new NxtControl.GuiFramework.FreeText();
@@ -230,10 +232,29 @@ namespace SE.Nereda.Faceplates.Motor_VS
 			// 
 			// fpDiagnostico
 			// 
-			this.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(380D)), ((float)(578D)));
+			this.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(380D)), ((float)(670D)));
 			this.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(224)), ((byte)(224)), ((byte)(224))));
 			this.FormBorderStyle = NxtControl.GuiFramework.FormBorderStyle.FixedSingle;
+			// 
+			// secUltFalha
+			// 
+			this.secUltFalha.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.secUltFalha.Font = new NxtControl.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+			this.secUltFalha.Location = new NxtControl.Drawing.PointF(20D, 578D);
+			this.secUltFalha.Name = "secUltFalha";
+			this.secUltFalha.Text = "\u00daltima falha registrada no inversor";
+			// 
+			// ultFalha
+			// 
+			this.ultFalha.BeginInit();
+			this.ultFalha.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 22D, 602D);
+			this.ultFalha.Name = "ultFalha";
+			this.ultFalha.SecurityToken = ((uint)(4294967295u));
+			this.ultFalha.TagName = "LocalPanel";
+			this.ultFalha.EndInit();
 			this.Shapes.AddRange(new System.ComponentModel.IComponent[] {
+			this.secUltFalha,
+			this.ultFalha,
 			this.titulo,
 			this.secEstados,
 			this.estados,
@@ -254,7 +275,7 @@ namespace SE.Nereda.Faceplates.Motor_VS
 			this.colAgora,
 			this.colOcorr,
 			this.falhas});
-			this.Size = new System.Drawing.Size(380, 578);
+			this.Size = new System.Drawing.Size(380, 670);
 
 		}
 		private NxtControl.GuiFramework.FreeText titulo;
@@ -277,6 +298,8 @@ namespace SE.Nereda.Faceplates.Motor_VS
 		private NxtControl.GuiFramework.FreeText colAgora;
 		private NxtControl.GuiFramework.FreeText colOcorr;
 		private SE.Nereda.Symbols.MotVsFailures.sDiagnostico falhas;
+		private NxtControl.GuiFramework.FreeText secUltFalha;
+		private SE.Nereda.Symbols.FieldSignals.sFalha ultFalha;
 
 		#endregion
 	}

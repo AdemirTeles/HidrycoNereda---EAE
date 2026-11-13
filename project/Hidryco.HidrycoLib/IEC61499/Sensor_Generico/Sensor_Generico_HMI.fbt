@@ -2,7 +2,7 @@
 <!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
 <FBType GUID="50e735ae-4a34-4649-af13-db99d323a359" Name="Sensor_Generico_HMI" Comment="Service Interface Function Block Type" Namespace="Hidryco.HidrycoLib">
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Hidryco" Version="1.5" Author="Hidryco" Date="04/11/2026" Remarks="1.5: CommonError, Reliability e DaysToMaintenance para a IO List da Nereda. 1.4: STS_LIMITE_HH..LL (limites dos alarmes em unidade de engenharia) para o grafico. IHM do Sensor_Generico" />
+  <VersionInfo Organization="Hidryco" Version="1.6" Author="Hidryco" Date="12/11/2026" Remarks="1.6: STS_CODIGO_ERRO, STS_CODIGO_AVISO e STS_ALM_AVISO_EST (aviso/erro do proprio dispositivo). 1.5: CommonError, Reliability e DaysToMaintenance para a IO List da Nereda. 1.4: STS_LIMITE_HH..LL (limites dos alarmes em unidade de engenharia) para o grafico. IHM do Sensor_Generico" />
   <InterfaceList>
     <EventInputs>
       <Event ID="B11E9EDFB330BB0A" Name="INIT">
@@ -40,6 +40,9 @@
         <With Var="Reliability" />
         <With Var="DaysToMaintenance" />
         <With Var="CFG_SKID" />
+        <With Var="STS_CODIGO_ERRO" />
+        <With Var="STS_CODIGO_AVISO" />
+        <With Var="STS_ALM_AVISO_EST" />
       </Event>
     </EventInputs>
     <EventOutputs>
@@ -71,7 +74,11 @@
     </EventOutputs>
     <InputVars>
       <VarDeclaration ID="1C38ED12C8BD1D24" Name="QI" Type="BOOL" />
-      <VarDeclaration ID="8897CDA500AC3B43" Name="STS_SENSOR" Type="REAL" Comment="Valor em unidade de engenharia" />
+      <VarDeclaration ID="8897CDA500AC3B43" Name="STS_SENSOR" Type="REAL" Comment="Valor em unidade de engenharia">
+        <Attribute Name="Runtime.History.Depth" Value="500" />
+        <Attribute Name="Runtime.History.SmoothTime" Value="60000" />
+        <Attribute Name="Runtime.History.SmoothValue" Value="0.1" />
+      </VarDeclaration>
       <VarDeclaration ID="03F005FFEA8B1EB7" Name="STS_PORCENTAGEM" Type="REAL" Comment="Nivel em % (so sensor de nivel)" />
       <VarDeclaration ID="8C3B32492EDE30F6" Name="STS_ESTADO" Type="INT" Comment="0 normal, 1 alerta, 2 alarme, 3 falha, 4 desabilitado" />
       <VarDeclaration ID="F96D4140FF4E3BE0" Name="STS_FALHA_SENSOR" Type="BOOL" Comment="Falha do sensor (4-20 mA fora da faixa ou falha do instrumento), sem a falha de comunicacao" />
@@ -93,14 +100,33 @@
       <VarDeclaration ID="C4A67D01408D3D56" Name="STS_ALM_LL_EST" Type="USINT" Comment="Estado do ALARM_BIT LL (0 normal, 1 ativo reconhecido, 2 ativo nao reconhecido, 3 saiu nao reconhecido, 4 ativo e saiu nao reconhecido)" />
       <VarDeclaration ID="D31A79F7D2BBEF19" Name="STS_ALM_FALHA_EST" Type="USINT" Comment="Estado do ALARM_BIT FALHA (0 normal, 1 ativo reconhecido, 2 ativo nao reconhecido, 3 saiu nao reconhecido, 4 ativo e saiu nao reconhecido)" />
       <VarDeclaration ID="3066A0DA727B2781" Name="STS_FALHA_COMUNICACAO" Type="BOOL" Comment="Falha de comunicacao do sensor" />
-      <VarDeclaration ID="4D0002C974B24A69" Name="STS_LIMITE_HH" Type="REAL" Comment="Limite do alarme HH em unidade de engenharia" />
-      <VarDeclaration ID="2007E90E21C8B4CF" Name="STS_LIMITE_H" Type="REAL" Comment="Limite do alarme H em unidade de engenharia" />
-      <VarDeclaration ID="7B165BE1315191C3" Name="STS_LIMITE_L" Type="REAL" Comment="Limite do alarme L em unidade de engenharia" />
-      <VarDeclaration ID="FFEA0503A1019B14" Name="STS_LIMITE_LL" Type="REAL" Comment="Limite do alarme LL em unidade de engenharia" />
+      <VarDeclaration ID="4D0002C974B24A69" Name="STS_LIMITE_HH" Type="REAL" Comment="Limite do alarme HH em unidade de engenharia">
+        <Attribute Name="Runtime.History.Depth" Value="100" />
+        <Attribute Name="Runtime.History.SmoothTime" Value="60000" />
+        <Attribute Name="Runtime.History.SmoothValue" Value="0" />
+      </VarDeclaration>
+      <VarDeclaration ID="2007E90E21C8B4CF" Name="STS_LIMITE_H" Type="REAL" Comment="Limite do alarme H em unidade de engenharia">
+        <Attribute Name="Runtime.History.Depth" Value="100" />
+        <Attribute Name="Runtime.History.SmoothTime" Value="60000" />
+        <Attribute Name="Runtime.History.SmoothValue" Value="0" />
+      </VarDeclaration>
+      <VarDeclaration ID="7B165BE1315191C3" Name="STS_LIMITE_L" Type="REAL" Comment="Limite do alarme L em unidade de engenharia">
+        <Attribute Name="Runtime.History.Depth" Value="100" />
+        <Attribute Name="Runtime.History.SmoothTime" Value="60000" />
+        <Attribute Name="Runtime.History.SmoothValue" Value="0" />
+      </VarDeclaration>
+      <VarDeclaration ID="FFEA0503A1019B14" Name="STS_LIMITE_LL" Type="REAL" Comment="Limite do alarme LL em unidade de engenharia">
+        <Attribute Name="Runtime.History.Depth" Value="100" />
+        <Attribute Name="Runtime.History.SmoothTime" Value="60000" />
+        <Attribute Name="Runtime.History.SmoothValue" Value="0" />
+      </VarDeclaration>
       <VarDeclaration ID="339076CC42EE7FBD" Name="CommonError" Type="BOOL" Comment="Nereda: erro do sensor (= STS_FALHA_SENSOR)" />
       <VarDeclaration ID="3B6F1F6BAD6853A9" Name="Reliability" Type="INT" Comment="Nereda: confiabilidade do sensor (%), fixo em 80" />
       <VarDeclaration ID="9CD8D28946EE45E2" Name="DaysToMaintenance" Type="INT" Comment="Nereda: dias para a manutencao (sem fonte: 0)" />
       <VarDeclaration ID="BB5D27FFFC44E39C" Name="CFG_SKID" Type="BOOL" Comment="Configuracao: valor ja escalado no skid (sem ajuste de escala na IHM)" />
+      <VarDeclaration ID="8291008A357A190E" Name="STS_CODIGO_ERRO" Type="INT" Comment="Codigo de erro do proprio dispositivo (0 = nenhum)" />
+      <VarDeclaration ID="F79BEE55D150EAB5" Name="STS_CODIGO_AVISO" Type="INT" Comment="Codigo de aviso do proprio dispositivo (0 = nenhum)" />
+      <VarDeclaration ID="F428A55205D49D87" Name="STS_ALM_AVISO_EST" Type="USINT" Comment="Estado do ALARM_BIT de aviso do dispositivo (0 normal, 1 ativo reconhecido, 2 ativo nao reconhecido, 3 saiu nao reconhecido, 4 ativo e saiu)" />
     </InputVars>
     <OutputVars>
       <VarDeclaration ID="05157ADCFA2355D6" Name="QO" Type="BOOL" Comment="Event Output Qualifier" />

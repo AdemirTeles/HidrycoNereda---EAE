@@ -275,6 +275,48 @@ namespace SE.Nereda.Symbols.Motor_VS
       return (System.Int16) var;
     }  }
 
+
+    public bool Get_STS_FALHA_COMUNICACAO(ref System.Boolean value)
+    {
+      if (accessorService == null)
+        return false;
+      bool var = false;
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,2, ref var);
+      if (ret) value = (System.Boolean) var;
+      return ret;
+    }
+
+    public System.Boolean? STS_FALHA_COMUNICACAO
+    { get {
+      if (accessorService == null)
+        return null;
+      bool var = false;
+      bool ret = accessorService.GetBoolValue(channelId, cookie, eventIndex, true,2, ref var);
+      if (!ret) return null;
+      return (System.Boolean) var;
+    }  }
+
+
+    public bool Get_STS_ALM_COMUNICACAO_EST(ref System.Byte value)
+    {
+      if (accessorService == null)
+        return false;
+      byte var = 0;
+      bool ret = accessorService.GetByteValue(channelId, cookie, eventIndex, true,3, ref var);
+      if (ret) value = (System.Byte) var;
+      return ret;
+    }
+
+    public System.Byte? STS_ALM_COMUNICACAO_EST
+    { get {
+      if (accessorService == null)
+        return null;
+      byte var = 0;
+      bool ret = accessorService.GetByteValue(channelId, cookie, eventIndex, true,3, ref var);
+      if (!ret) return null;
+      return (System.Byte) var;
+    }  }
+
   }
 
   public class FB_CAPACITYEventArgs : System.EventArgs

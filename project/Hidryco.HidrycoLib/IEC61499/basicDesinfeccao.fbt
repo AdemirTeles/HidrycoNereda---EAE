@@ -2,7 +2,7 @@
 <!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
 <FBType GUID="816d1b12-0d99-0d77-41e5-231c81e1d08d" Name="basicDesinfeccao" Comment="Logica da desinfeccao (limitacao de vazao pela 700-VC-01, totalizacao, alarmes)" Namespace="Hidryco.HidrycoLib">
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Hidryco" Version="1.0" Author="Hidryco" Date="19/10/2026" Remarks="1.0: PID continuo sobre a 700-FT-01 (m3/h) comandando a 700-VC-01; FT em falha ou valvula indisponivel mantem a posicao; totalizador persistente; vazao alta e variacao brusca" />
+  <VersionInfo Organization="Hidryco" Version="1.1" Author="Hidryco" Date="12/11/2026" Remarks="1.1: sentido dos disjuntores conferido em campo - PCE/PCM: 1 = ligado (invertido); UV-01/02, VC-01 e monovia: 1 = ligado (sem mudanca); variaveis e tags sem mudanca de nome; alarme de disjuntor desativado (stsAvisoDisjuntor sempre FALSE), status dos disjuntores mantidos. 1.0: PID continuo sobre a 700-FT-01 (m3/h) comandando a 700-VC-01; FT em falha ou valvula indisponivel mantem a posicao; totalizador persistente; vazao alta e variacao brusca" />
   <InterfaceList>
     <EventInputs>
       <Event ID="9E12B42E11EB9FB7" Name="INIT" Comment="Inicializacao" />
@@ -342,9 +342,12 @@ END_IF;
 stsRemotaOk := remComOk;
 stsFalhaRemota := NOT stsRemotaOk;
 IF stsRemotaOk THEN
-    stsDjPCE := djPCEDesligado; stsDjPCM := djPCMDesligado;
+    (* sentido conferido em campo (12/11/2026): %I0.0 PCE e %I0.1 PCM = 1 com o disjuntor LIGADO
+       (invertido em relacao ao nome); %I0.2 a %I0.5 (UV-01, UV-02, VC-01, monovia) = 1 ligado.
+       Nomes das variaveis/tags mantidos. *)
+    stsDjPCE := NOT djPCEDesligado; stsDjPCM := NOT djPCMDesligado;
     stsDjUV01 := djUV01; stsDjUV02 := djUV02; stsDjVC01 := djVC01; stsDjMO01 := djMO01;
-    stsAvisoDisjuntor := djPCEDesligado OR djPCMDesligado OR NOT djUV01 OR NOT djUV02 OR NOT djVC01;
+    stsAvisoDisjuntor := FALSE;   (* alarme de disjuntor desativado a pedido do usuario (12/11/2026); os status continuam *)
 ELSE
     stsAvisoDisjuntor := FALSE;
 END_IF;

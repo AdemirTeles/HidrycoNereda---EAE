@@ -2,7 +2,7 @@
 <!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
 <FBType GUID="024198ab-e6ed-4357-bf39-bdd2a7c5fcc4" Name="basicSensorGenerico" Comment="Logica unica do sensor generico (4-20 mA ou comunicacao)" Namespace="Hidryco.HidrycoLib">
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Hidryco" Version="2.1" Author="Hidryco" Date="12/11/2026" Remarks="2.1: cfgSkid = sensor sempre habilitado. 2.0: falha do 4-20 mA abaixo de 3800 ou acima de 22000 (eram 3600/21000), confirmada em cfgTempoFalha. 1.9: stsAtivoHH/stsAtivoH (alarme com o tempo do alarme e sem memoria; some quando o valor volta) e stsDisponivel (sensor habilitado, com leitura e sem falha) no CNF. 1.8: limites dos alarmes em unidade de engenharia para o grafico da IHM (stsLimHH..LL; nivel: % x altura maxima / 100). 1.7: stsFalhaSensor (STS_FALHA_SENSOR) so com a falha do sensor (fora da faixa ou falha do instrumento), sem a comunicacao; stsFalhaAtiva e o alarme de falha com qualquer falha. 1.6: IHM: valor, % e bruto no maximo 1 vez por segundo (evento TICK de 1 s); estado, falha e alarmes na hora. 1.5: saida stsFalhaComunicacao (comunicacao do instrumento ou conexao Modbus offline). 1.4: stsFalhaSensor (STS_FALHA_SENSOR na IHM) = falha ativa: sensor em falha agora, sem memoria nem reset; o alarme de falha segue. 1.3: sensor de nivel (cfgNivel) compara os alarmes HH/H/L/LL com a % da altura maxima (setpoints em %); os demais com o valor. 1.2: falha do sinal tambem pelo status da conexao Modbus (fldConexao INT, 1 = online) com cfgUsaConexao, nos dois modos (4-20 mA lido por remota e comunicacao). 1.1: inibicao de L/LL pelo processo e condicao instantanea de cada limite. 1.0: padrao SE.App2CommonProcess - escala, falha NAMUR confirmada por tempo, alarmes HH/H/L/LL com tempo proprio e memoria ate o reset, supressao em falha" />
+  <VersionInfo Organization="Hidryco" Version="2.2" Author="Hidryco" Date="12/11/2026" Remarks="2.2: aviso e erro do proprio dispositivo por comunicacao (fldAvisoDisp/fldErroDisp, REQ_FB_DISP): erro diferente de 0 = falha do sensor (cfgTempoFalha); aviso = alarme almAviso; codigos stsCodigoErro/stsCodigoAviso para o diagnostico. 2.1: cfgSkid = sensor sempre habilitado. 2.0: falha do 4-20 mA abaixo de 3800 ou acima de 22000 (eram 3600/21000), confirmada em cfgTempoFalha. 1.9: stsAtivoHH/stsAtivoH (alarme com o tempo do alarme e sem memoria; some quando o valor volta) e stsDisponivel (sensor habilitado, com leitura e sem falha) no CNF. 1.8: limites dos alarmes em unidade de engenharia para o grafico da IHM (stsLimHH..LL; nivel: % x altura maxima / 100). 1.7: stsFalhaSensor (STS_FALHA_SENSOR) so com a falha do sensor (fora da faixa ou falha do instrumento), sem a comunicacao; stsFalhaAtiva e o alarme de falha com qualquer falha. 1.6: IHM: valor, % e bruto no maximo 1 vez por segundo (evento TICK de 1 s); estado, falha e alarmes na hora. 1.5: saida stsFalhaComunicacao (comunicacao do instrumento ou conexao Modbus offline). 1.4: stsFalhaSensor (STS_FALHA_SENSOR na IHM) = falha ativa: sensor em falha agora, sem memoria nem reset; o alarme de falha segue. 1.3: sensor de nivel (cfgNivel) compara os alarmes HH/H/L/LL com a % da altura maxima (setpoints em %); os demais com o valor. 1.2: falha do sinal tambem pelo status da conexao Modbus (fldConexao INT, 1 = online) com cfgUsaConexao, nos dois modos (4-20 mA lido por remota e comunicacao). 1.1: inibicao de L/LL pelo processo e condicao instantanea de cada limite. 1.0: padrao SE.App2CommonProcess - escala, falha NAMUR confirmada por tempo, alarmes HH/H/L/LL com tempo proprio e memoria ate o reset, supressao em falha" />
   <InterfaceList>
     <EventInputs>
       <Event ID="A313A1584C9E1BE5" Name="INIT" Comment="Inicializacao">
@@ -41,6 +41,10 @@
         <With Var="fldValor" />
         <With Var="fldFalhaSensor" />
         <With Var="fldFalhaComunicacao" />
+      </Event>
+      <Event ID="13DE6C7C018FFF3E" Name="REQ_FB_DISP" Comment="Aviso e erro do proprio dispositivo (comunicacao)">
+        <With Var="fldAvisoDisp" />
+        <With Var="fldErroDisp" />
       </Event>
       <Event ID="BA1EF67945330BA4" Name="REQ_FB_CON" Comment="Status da conexao Modbus (comunicacao)">
         <With Var="fldConexao" />
@@ -117,6 +121,8 @@
         <With Var="stsLimH" />
         <With Var="stsLimL" />
         <With Var="stsLimLL" />
+        <With Var="stsCodigoErro" />
+        <With Var="stsCodigoAviso" />
       </Event>
       <Event ID="DA3C0D9212A1D794" Name="CNF_ALM" Comment="Alarmes para os ALARM_BIT (na mudanca)">
         <With Var="almHH" />
@@ -124,6 +130,7 @@
         <With Var="almL" />
         <With Var="almLL" />
         <With Var="almFalha" />
+        <With Var="almAviso" />
       </Event>
       <Event ID="8A583D6DDA99E174" Name="FALHA_RESET" Comment="Cancela o tempo de falha (E_DELAY.STOP) - sai antes do FALHA_T" />
       <Event ID="88B29E7FCEDFD04A" Name="FALHA_T" Comment="Inicia o tempo de falha (E_DELAY.START)">
@@ -181,6 +188,8 @@
       <VarDeclaration ID="DC02530AB13A0CE9" Name="fldFalhaSensor" Type="BOOL" Comment="Campo (comunicacao): falha do instrumento" />
       <VarDeclaration ID="AC6220939047FF1C" Name="fldFalhaComunicacao" Type="BOOL" Comment="Campo (comunicacao): falha de comunicacao" />
       <VarDeclaration ID="A01E732EBCA193E3" Name="fldConexao" Type="INT" Comment="Campo (comunicacao): status da conexao Modbus (connStatusInt: 1 = online, 0 = offline)" />
+      <VarDeclaration ID="DB454D1BA11A0DE9" Name="fldAvisoDisp" Type="INT" Comment="Campo (comunicacao): condicao de aviso do proprio dispositivo (0 = nenhum)" />
+      <VarDeclaration ID="222F1372FEE9B05F" Name="fldErroDisp" Type="INT" Comment="Campo (comunicacao): condicao de erro do proprio dispositivo (0 = nenhum)" />
     </InputVars>
     <OutputVars>
       <VarDeclaration ID="0D31DC1406BFACF0" Name="qiBruto" Type="BOOL" Comment="Assina o symlink 4-20 mA (NOT cfgComunicacao)" />
@@ -220,6 +229,9 @@
       <VarDeclaration ID="082D88F711CCD739" Name="stsLimH" Type="REAL" Comment="Limite do alarme H em unidade de engenharia (para o grafico)" />
       <VarDeclaration ID="D91E42414EEE194E" Name="stsLimL" Type="REAL" Comment="Limite do alarme L em unidade de engenharia (para o grafico)" />
       <VarDeclaration ID="6D7F45595C9C84C3" Name="stsLimLL" Type="REAL" Comment="Limite do alarme LL em unidade de engenharia (para o grafico)" />
+      <VarDeclaration ID="7DE82A7B3D5EBDF3" Name="stsCodigoErro" Type="INT" Comment="IHM: codigo de erro do proprio dispositivo (0 = nenhum; diferente de 0 = falha do sensor)" />
+      <VarDeclaration ID="CC00142E36E22C6A" Name="stsCodigoAviso" Type="INT" Comment="IHM: codigo de aviso do proprio dispositivo (0 = nenhum; so alarme)" />
+      <VarDeclaration ID="789D37109634E4C8" Name="almAviso" Type="BOOL" Comment="Entrada do ALARM_BIT de aviso do proprio dispositivo" />
     </OutputVars>
   </InterfaceList>
   <BasicFB ID="2f63afe4-b754-4117-a634-ef0c8af1ed93">
@@ -267,6 +279,8 @@
       <VarDeclaration ID="630EC76340804E37" Name="oldSts" Type="WORD" InitialValue="16#FFFF" />
       <VarDeclaration ID="4E66C4A8714FA80B" Name="wAlm" Type="WORD" />
       <VarDeclaration ID="E0DDBCCFB6260BA3" Name="oldAlm" Type="WORD" InitialValue="16#FFFF" />
+      <VarDeclaration ID="8EEB77A69EB2D02A" Name="oldCodErro" Type="INT" InitialValue="-1" />
+      <VarDeclaration ID="CFCB843FF45330EB" Name="oldCodAviso" Type="INT" InitialValue="-1" />
       <VarDeclaration ID="D21ECFE977898748" Name="oldEstado" Type="INT" InitialValue="-1" />
       <VarDeclaration ID="B9D48B5280F885B7" Name="hmiBruto" Type="REAL" InitialValue="-1.0" />
       <VarDeclaration ID="0A8FB337BF7C21CC" Name="hmiPct" Type="REAL" InitialValue="-1.0" />
@@ -298,7 +312,7 @@
         <ECAction Output="LL_RESET" />
         <ECAction Output="LL_T" />
       </ECState>
-      <ECTransition Source="START" Destination="EXEC" Condition="INIT OR REQ_PARA OR REQ_FB OR REQ_FB_COM OR REQ_FB_CON OR REQ_RESET OR REQ_RESET_PROC OR REQ_RESET_PLUG OR REQ_INIBE OR FALHA_MAX OR HH_MAX OR H_MAX OR L_MAX OR LL_MAX OR TICK" x="1580" y="860" />
+      <ECTransition Source="START" Destination="EXEC" Condition="INIT OR REQ_PARA OR REQ_FB OR REQ_FB_COM OR REQ_FB_CON OR REQ_FB_DISP OR REQ_RESET OR REQ_RESET_PROC OR REQ_RESET_PLUG OR REQ_INIBE OR FALHA_MAX OR HH_MAX OR H_MAX OR L_MAX OR LL_MAX OR TICK" x="1580" y="860" />
       <ECTransition Source="EXEC" Destination="START" Condition="1" x="1420" y="860" />
     </ECC>
     <Algorithm Name="algSensor" Comment="Logica completa do sensor (um unico algoritmo)">
@@ -367,6 +381,12 @@ ELSE
     rBruto     := INT_TO_REAL(fldBruto);
     bRuimAgora := fbRecebido AND ((rBruto < cfgFalhaMin) OR (rBruto > cfgFalhaMax) OR (cfgUsaConexao AND fldConexao <> 1));
     bSensorRuim := fbRecebido AND ((rBruto < cfgFalhaMin) OR (rBruto > cfgFalhaMax));
+END_IF;
+
+(* erro do proprio dispositivo (ex.: SC4500 por Modbus): falha do sensor, confirmada pelo mesmo tempo *)
+IF fbRecebido AND (fldErroDisp <> 0) THEN
+    bRuimAgora  := TRUE;
+    bSensorRuim := TRUE;
 END_IF;
 
 (* ---- 3. Falha do sensor: confirmada pelo tempo; vale enquanto o sensor estiver em falha (sem memoria) ---- *)
@@ -585,12 +605,22 @@ IF stsFalhaComunicacao THEN wSts := wSts OR 16#1000; END_IF;
 IF stsAtivoHH    THEN wSts := wSts OR 16#2000; END_IF;
 IF stsAtivoH     THEN wSts := wSts OR 16#4000; END_IF;
 IF stsDisponivel THEN wSts := wSts OR 16#8000; END_IF;
+(* codigos do proprio dispositivo para o diagnostico; aviso = so alarme *)
+IF hmiHabilitaSensor THEN
+    stsCodigoErro  := fldErroDisp;
+    stsCodigoAviso := fldAvisoDisp;
+ELSE
+    stsCodigoErro  := 0;
+    stsCodigoAviso := 0;
+END_IF;
+almAviso := hmiHabilitaSensor AND fbRecebido AND (fldAvisoDisp <> 0) AND NOT stsFalhaComunicacao;
 wAlm := 0;
 IF almHH    THEN wAlm := wAlm OR 16#0001; END_IF;
 IF almH     THEN wAlm := wAlm OR 16#0002; END_IF;
 IF almL     THEN wAlm := wAlm OR 16#0004; END_IF;
 IF almLL    THEN wAlm := wAlm OR 16#0008; END_IF;
 IF almFalha THEN wAlm := wAlm OR 16#0010; END_IF;
+IF almAviso THEN wAlm := wAlm OR 16#0020; END_IF;
 
 (* limites dos alarmes em unidade de engenharia (grafico da IHM); nivel: setpoints em % da altura maxima *)
 IF cfgNivel THEN
@@ -607,7 +637,7 @@ CNF_PV     := initPass OR (stsValor <> oldValor);
 CNF_STATUS := initPass OR ((wSts AND 16#00F2) <> (oldSts AND 16#00F2));
 CNF        := initPass OR (stsValor <> oldValor) OR (stsPorcentagem <> oldPct) OR (wSts <> oldSts);
 (* IHM: estado/falha/alarme na hora; valor, % e bruto no maximo 1 vez por segundo (TICK) *)
-CNF_HMI    := initPass OR (wSts <> oldSts) OR (stsEstado <> oldEstado)
+CNF_HMI    := initPass OR (wSts <> oldSts) OR (stsEstado <> oldEstado) OR (stsCodigoErro <> oldCodErro) OR (stsCodigoAviso <> oldCodAviso)
               OR (TICK AND ((stsValor <> hmiValor) OR (stsPorcentagem <> hmiPct) OR (rBruto <> hmiBruto)))
               OR (stsLimHH <> ostsLimHH) OR (stsLimH <> ostsLimH) OR (stsLimL <> ostsLimL) OR (stsLimLL <> ostsLimLL);
 IF CNF_HMI THEN
@@ -621,6 +651,8 @@ oldBruto  := rBruto;
 oldSts    := wSts;
 oldAlm    := wAlm;
 oldEstado := stsEstado;
+oldCodErro  := stsCodigoErro;
+oldCodAviso := stsCodigoAviso;
 
 initPass := FALSE;
 ]]></ST>

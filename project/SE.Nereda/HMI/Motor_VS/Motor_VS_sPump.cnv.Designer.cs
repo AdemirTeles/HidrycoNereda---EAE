@@ -25,11 +25,15 @@ namespace SE.Nereda.Symbols.Motor_VS
 		/// </summary>
 		private void InitializeComponent()
 		{
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(sPump));
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary2 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary1 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary4 = new NxtControl.GuiFramework.PropertyDictionary();
 			NxtControl.GuiFramework.PropertyDictionary propertyDictionary3 = new NxtControl.GuiFramework.PropertyDictionary();
 			this.raioCirc = new NxtControl.GuiFramework.Ellipse();
+			this.comImg = new NxtControl.GuiFramework.Rectangle();
+			this.comCirc = new NxtControl.GuiFramework.Ellipse();
+			this.comRisco = new NxtControl.GuiFramework.Line();
 			this.raioRaio = new NxtControl.GuiFramework.Polygon();
 			this.Pump = new NxtControl.GuiFramework.Ellipse();
 			this.State = new SE.Nereda.Symbols.ActState.sCompacto();
@@ -281,11 +285,39 @@ namespace SE.Nereda.Symbols.Motor_VS
 			new NxtControl.Drawing.PointF(29D, 60.7143D),
 			new NxtControl.Drawing.PointF(25.0606D, 60.7143D)});
 			this.raioRaio.Visible = false;
+			// 
+			// comImg
+			// 
+			this.comImg.Bounds = new NxtControl.Drawing.RectF(((float)(19D)), ((float)(35D)), ((float)(10D)), ((float)(10D)));
+			this.comImg.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("Transparent"));
+			this.comImg.ImageBytes = resources.GetString("comImg.ImageBytes");
+			this.comImg.Name = "comImg";
+			this.comImg.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color("Transparent"), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.comImg.Visible = false;
+			// 
+			// comCirc
+			// 
+			this.comCirc.Bounds = new NxtControl.Drawing.RectF(((float)(16D)), ((float)(32D)), ((float)(16D)), ((float)(16D)));
+			this.comCirc.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color("Transparent"));
+			this.comCirc.Name = "comCirc";
+			this.comCirc.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(234)), ((byte)(22)), ((byte)(30))), 1.5F, NxtControl.Drawing.DashStyle.Solid);
+			this.comCirc.Visible = false;
+			// 
+			// comRisco
+			// 
+			this.comRisco.EndPoint = new NxtControl.Drawing.PointF(19D, 45D);
+			this.comRisco.Name = "comRisco";
+			this.comRisco.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(234)), ((byte)(22)), ((byte)(30))), 1.5F, NxtControl.Drawing.DashStyle.Solid);
+			this.comRisco.StartPoint = new NxtControl.Drawing.PointF(29D, 35D);
+			this.comRisco.Visible = false;
 			this.Shapes.AddRange(new System.ComponentModel.IComponent[] {
 			this.group2,
 			this.raioCirc,
 			this.raioRaio,
-			this.modo});
+			this.modo,
+			this.comImg,
+			this.comCirc,
+			this.comRisco});
 			this.SymbolSize = new System.Drawing.Size(600, 400);
 			((System.ComponentModel.ISupportInitialize)(this.alarmFrame)).EndInit();
 
@@ -301,6 +333,9 @@ namespace SE.Nereda.Symbols.Motor_VS
 		private NxtControl.GuiFramework.Rectangle MotName;
 		private NxtControl.GuiFramework.Rectangle OpenFp;
 		private NxtControl.GuiFramework.Ellipse raioCirc;
+		private NxtControl.GuiFramework.Rectangle comImg;
+		private NxtControl.GuiFramework.Ellipse comCirc;
+		private NxtControl.GuiFramework.Line comRisco;
 		private NxtControl.GuiFramework.Polygon raioRaio;
 		private NxtControl.GuiFramework.Rectangle PipeIn;
 		private NxtControl.GuiFramework.Rectangle PipeOut;

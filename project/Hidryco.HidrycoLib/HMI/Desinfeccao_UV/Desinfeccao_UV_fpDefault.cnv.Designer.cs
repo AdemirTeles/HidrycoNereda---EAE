@@ -64,7 +64,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Desinfeccao_UV
 			// 
 			// cabecalho
 			// 
-			this.cabecalho.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(400D)), ((float)(80D)));
+			this.cabecalho.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(450D)), ((float)(80D)));
 			this.cabecalho.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(235)), ((byte)(235)), ((byte)(235))));
 			this.cabecalho.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
 			this.cabecalho.Name = "cabecalho";
@@ -221,7 +221,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Desinfeccao_UV
 			// 
 			// btnZera
 			// 
-			this.btnZera.Bounds = new NxtControl.Drawing.RectF(((float)(20D)), ((float)(498D)), ((float)(170D)), ((float)(34D)));
+			this.btnZera.Bounds = new NxtControl.Drawing.RectF(((float)(20D)), ((float)(498D)), ((float)(195D)), ((float)(34D)));
 			this.btnZera.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208))));
 			this.btnZera.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
 			this.btnZera.InnerBorderColor = new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208)));
@@ -234,7 +234,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Desinfeccao_UV
 			// 
 			// btnReset
 			// 
-			this.btnReset.Bounds = new NxtControl.Drawing.RectF(((float)(210D)), ((float)(498D)), ((float)(170D)), ((float)(34D)));
+			this.btnReset.Bounds = new NxtControl.Drawing.RectF(((float)(235D)), ((float)(498D)), ((float)(195D)), ((float)(34D)));
 			this.btnReset.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208))));
 			this.btnReset.Font = new NxtControl.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
 			this.btnReset.InnerBorderColor = new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208)));
@@ -555,7 +555,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Desinfeccao_UV
 			// 
 			// fpDefault
 			// 
-			this.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(400D)), ((float)(562D)));
+			this.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(450D)), ((float)(562D)));
 			this.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(224)), ((byte)(224)), ((byte)(224))));
 			this.Shapes.AddRange(new System.ComponentModel.IComponent[] {
 			this.cabecalho,
@@ -600,7 +600,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Desinfeccao_UV
 			this.xTOT,
 			this.PID_VC_700_01,
 			this.stPID});
-			this.Size = new System.Drawing.Size(400, 562);
+			this.Size = new System.Drawing.Size(450, 562);
 
 		}
 		private NxtControl.GuiFramework.Rectangle cabecalho;

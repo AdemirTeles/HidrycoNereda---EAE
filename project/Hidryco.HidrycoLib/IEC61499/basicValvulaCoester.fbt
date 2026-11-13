@@ -2,7 +2,7 @@
 <!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
 <FBType GUID="b35c8a41-0d79-3721-eaed-dd872cf5fd7c" Name="basicValvulaCoester" Comment="Logica do atuador Coester CSR (Modbus TCP)" Namespace="Hidryco.HidrycoLib">
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Hidryco" Version="2.3" Author="Hidryco" Date="10/11/2026" Remarks="2.3: falha do atuador (alarmes da comunicacao) nao bloqueia o comando (fica disponivel em automatico) e nao muda a cor (sem animacao de falha); continua no alarme, no STS_ALARME e no diagnostico. 2.2: stsAlarme para a IO List da Nereda. 2.1: leituras 100 a 108 (posicao, torque, temperatura, tempo de percurso, status 2, alarmes), falha do atuador, posicionar por comando e parar so com cfgPosicionador (Word 2 de escrita). 2.0: refeito simples." />
+  <VersionInfo Organization="Hidryco" Version="2.5" Author="Hidryco" Date="12/11/2026" Remarks="2.5: mapa revisado pelo MN_065 rev.3 (Modbus RTU, painel BLE): leitura 101-109 e comandos conferidos; posicao (word 105) = bits 0-7 parte inteira, bits 8-15 parte decimal - usa so o byte baixo, sem filtro de faixa (antes a word inteira dava valores acima de 1000). 2.4: posicao (Word 5) so atualiza com leitura de 0 a 100; fora da faixa mantem a ultima valida (antes era limitada, e um valor acima de 1000 virava 100 %%). 2.3: falha do atuador (alarmes da comunicacao) nao bloqueia o comando (fica disponivel em automatico) e nao muda a cor (sem animacao de falha); continua no alarme, no STS_ALARME e no diagnostico. 2.2: stsAlarme para a IO List da Nereda. 2.1: leituras 100 a 108 (posicao, torque, temperatura, tempo de percurso, status 2, alarmes), falha do atuador, posicionar por comando e parar so com cfgPosicionador (Word 2 de escrita). 2.0: refeito simples." />
   <InterfaceList>
     <EventInputs>
       <Event ID="BC3FDAAC48C266C9" Name="INIT" Comment="Inicializacao">
@@ -267,7 +267,9 @@ IF bComOk THEN
     stsFechada   := (w01 AND 16#0010) <> 16#0000;
     stsAbrindo   := (w01 AND 16#0040) <> 16#0000;
     stsFechando  := (w01 AND 16#0080) <> 16#0000;
-    stsPosicao       := LIMIT(0.0, INT_TO_REAL(fldW05), 100.0);
+    (* posicao (MN_065 rev.3, painel BLE, word 105): bits 0-7 = parte inteira (%), bits 8-15 = parte
+       decimal; usa so o byte baixo (parte inteira) *)
+    stsPosicao := INT_TO_REAL(WORD_TO_INT(INT_TO_WORD(fldW05) AND 16#00FF));
     stsTorque        := fldW06;
     stsTempoPercurso := fldW07;
     stsTemperatura   := fldW08 - 19;

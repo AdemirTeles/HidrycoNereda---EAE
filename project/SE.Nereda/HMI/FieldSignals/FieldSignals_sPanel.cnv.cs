@@ -129,11 +129,13 @@ namespace SE.Nereda.Symbols.FieldSignals
 		{
 			// TODO: Implement REQ_NAME_Fired_EventHandler
 			PanelName.Text = e.Name;
+			nomePainel = e.Name ?? "";
+			MostraFalha();
 		}
 		// ---- Sulzer HST: codigo da falha inicial (Initial fault specifier, Process Data out 15) ----
 		// Descricoes: lista "Eventos do compressor" do manual HST 10 (databook Sulzer, item 8.6.5).
 		// So aparece nos equipamentos que publicam o codigo (symlink SulzerFaultCode), ou seja, os Sulzer.
-		static readonly System.Collections.Generic.Dictionary<int, string> EventosSulzer = new System.Collections.Generic.Dictionary<int, string> {
+		internal static readonly System.Collections.Generic.Dictionary<int, string> EventosSulzer = new System.Collections.Generic.Dictionary<int, string> {
 			{1, "O bloqueio de software n\u00e3o est\u00e1 funcionando"},
 			{2, "Erro de vers\u00e3o do bloqueio de software"},
 			{3, "Dados de bloqueio de software ausentes"},
@@ -293,22 +295,71 @@ namespace SE.Nereda.Symbols.FieldSignals
 			{159, "Ajuste em zero do sensor de press\u00e3o"},
 		};
 
+		// ---- ATV600: codigo LFT 7121 (ultimo erro) -> mnemonico do display (planilha ATV600-Communication-parameters V4.6, lista LFT)
+		internal static readonly System.Collections.Generic.Dictionary<int, string> FalhasAtv = new System.Collections.Generic.Dictionary<int, string> {
+			{0, "NOF"}, {2, "EEF1"}, {3, "CFF"}, {4, "CFI"}, {5, "SLF1"}, {6, "ILF"}, {7, "CNF"}, {8, "EPF1"}, {9, "OCF"}, {10, "CRF1"}, {13, "LFF2"}, {15, "IHF"}, {16, "OHF"}, {17, "OLF"}, {18, "OBF"}, {19, "OSF"}, {20, "OPF1"}, {21, "PHF"}, {22, "USF"}, {23, "SCF1"}, {24, "SOF"}, {25, "TNF"}, {26, "INF1"}, {27, "INF2"}, {28, "INF3"}, {29, "INF4"}, {30, "EEF2"}, {32, "SCF3"}, {33, "OPF2"}, {34, "COF"}, {37, "INF7"}, {38, "EPF2"}, {40, "INF8"}, {42, "SLF2"}, {45, "SLF3"}, {51, "INF9"}, {52, "INFA"}, {53, "INFB"}, {54, "TJF"}, {55, "SCF4"}, {56, "SCF5"}, {58, "FCF1"}, {59, "FCF2"}, {60, "INFC"}, {64, "LCF"}, {68, "INF6"}, {69, "INFE"}, {71, "LFF3"}, {72, "LFF4"}, {73, "HCF"}, {77, "CFI2"}, {79, "LFF5"}, {80, "FFDF"}, {81, "MOF"}, {82, "LKON"}, {99, "CSF"}, {100, "ULF"}, {101, "OLC"}, {105, "ASF"}, {106, "LFF1"}, {107, "SAFF"}, {110, "TH2F"}, {111, "T2CF"}, {112, "TH3F"}, {113, "T3CF"}, {114, "PCPF"}, {115, "OPLF"}, {116, "HFPF"}, {117, "IPPF"}, {119, "PLFF"}, {120, "TH4F"}, {121, "T4CF"}, {122, "TH5F"}, {123, "T5CF"}, {124, "JAMF"}, {125, "OPHF"}, {126, "DRYF"}, {127, "PFMF"}, {128, "PGLF"}, {129, "PGRF"}, {130, "MPLF"}, {131, "LCLF"}, {132, "LCHF"}, {142, "INFG"}, {143, "INFH"}, {144, "INF0"}, {146, "INFD"}, {148, "STF"}, {149, "INFL"}, {150, "ETHF"}, {151, "INFF"}, {152, "FWER"}, {153, "INFM"}, {154, "INFP"}, {155, "INFK"}, {157, "INFR"}, {158, "INFN"}, {159, "SCF6"}, {160, "OBF2"}, {161, "INFS"}, {162, "IFA"}, {163, "IFB"}, {164, "IFC"}, {165, "IFD"}, {166, "CFA"}, {167, "CFB"}, {168, "CFC"}, {169, "TFA"}, {170, "TFB"}, {171, "TFC"}, {172, "TFD"}, {173, "CHF"}, {174, "URF"}, {175, "INFV"}, {176, "INFT"}, {177, "INFU"}, {179, "TJF2"}, {180, "CRF3"}, {181, "CFI3"}, {182, "CBF"}, {186, "MDLF"}, {190, "MPDF"}, {191, "ACF1"}, {192, "ACF2"}, {193, "MFF"}, {200, "FDR1"}, {201, "FDR2"}, {203, "P24C"}, {206, "DCRE"}, {207, "VCF"}, {208, "IDLF"}, {211, "SPFC"}, {212, "ACF3"}, {213, "COPF"}, {220, "AFLF"}
+		};
+
+		// ---- ATV600: codigo LFT -> texto em portugues (traducao da lista LFT da planilha V4.6)
+		internal static readonly System.Collections.Generic.Dictionary<int, string> TextosAtv = new System.Collections.Generic.Dictionary<int, string> {
+			{0, "Sem falha"}, {2, "Erro na mem\u00f3ria de controle"}, {3, "Configura\u00e7\u00e3o incorreta"}, {4, "Configura\u00e7\u00e3o inv\u00e1lida"}, {5, "Interrup\u00e7\u00e3o da comunica\u00e7\u00e3o Modbus"}, {6, "Interrup\u00e7\u00e3o da comunica\u00e7\u00e3o interna com o m\u00f3dulo opcional"}, {7, "Interrup\u00e7\u00e3o da comunica\u00e7\u00e3o de rede (fieldbus)"}, {8, "Falha externa detectada"}, {9, "Sobrecorrente"}, {10, "Falha no capacitor de pr\u00e9-carga"}, {13, "Perda do sinal 4-20 mA da AI2"}, {15, "Sobreaquecimento da entrada"}, {16, "Sobreaquecimento do inversor"}, {17, "Sobrecarga do motor"}, {18, "Sobretens\u00e3o no barramento CC"}, {19, "Sobretens\u00e3o na rede de alimenta\u00e7\u00e3o"}, {20, "Perda de uma fase de sa\u00edda"}, {21, "Perda de fase na entrada"}, {22, "Subtens\u00e3o na rede de alimenta\u00e7\u00e3o"}, {23, "Curto-circuito no motor"}, {24, "Sobrevelocidade do motor"}, {25, "Erro no autoajuste"}, {26, "Erro interno 1 (pot\u00eancia nominal)"}, {27, "Erro interno 2 (software)"}, {28, "Erro interno 3 (comunica\u00e7\u00e3o interna)"}, {29, "Erro interno 4 (fabrica\u00e7\u00e3o)"}, {30, "Erro na mem\u00f3ria de pot\u00eancia"}, {32, "Curto-circuito \u00e0 terra"}, {33, "Perda de fase na sa\u00edda"}, {34, "Interrup\u00e7\u00e3o da comunica\u00e7\u00e3o CANopen"}, {37, "Erro interno 7 (inicializa\u00e7\u00e3o)"}, {38, "Falha externa detectada pela rede"}, {40, "Erro interno 8 (fonte chaveada)"}, {42, "Interrup\u00e7\u00e3o da comunica\u00e7\u00e3o com o PC"}, {45, "Interrup\u00e7\u00e3o da comunica\u00e7\u00e3o com o terminal gr\u00e1fico"}, {51, "Erro interno 9 (medi\u00e7\u00e3o)"}, {52, "Erro interno 10 (rede)"}, {53, "Erro interno 11 (temperatura)"}, {54, "Sobreaquecimento do inversor (IGBT)"}, {55, "Curto-circuito no IGBT"}, {56, "Curto-circuito no motor"}, {58, "Contator de sa\u00edda fechado indevidamente"}, {59, "Contator de sa\u00edda aberto indevidamente"}, {60, "Erro interno 12 (alimenta\u00e7\u00e3o de corrente interna)"}, {64, "Falha no contator de entrada"}, {68, "Erro interno 6 (opcional)"}, {69, "Erro interno 14 (CPU)"}, {71, "Perda do sinal 4-20 mA da AI3"}, {72, "Perda do sinal 4-20 mA da AI4"}, {73, "Incompatibilidade entre placas"}, {77, "Erro na transfer\u00eancia da configura\u00e7\u00e3o"}, {79, "Perda do sinal 4-20 mA da AI5"}, {80, "Falha no retorno do ventilador"}, {81, "Sobreaquecimento do m\u00f3dulo"}, {82, "Erro de bloqueio ON"}, {99, "Erro na troca de canal"}, {100, "Subcarga do processo"}, {101, "Sobrecarga do processo"}, {105, "Erro de \u00e2ngulo"}, {106, "Perda do sinal 4-20 mA da AI1"}, {107, "Erro na fun\u00e7\u00e3o de seguran\u00e7a"}, {110, "N\u00edvel t\u00e9rmico da AI2"}, {111, "Erro no sensor t\u00e9rmico da AI2"}, {112, "N\u00edvel t\u00e9rmico da AI3"}, {113, "Erro no sensor t\u00e9rmico da AI3"}, {114, "Erro na partida do ciclo da bomba"}, {115, "Press\u00e3o de sa\u00edda baixa"}, {116, "Vaz\u00e3o alta"}, {117, "Erro na press\u00e3o de entrada"}, {119, "Vaz\u00e3o baixa da bomba"}, {120, "N\u00edvel t\u00e9rmico da AI4"}, {121, "Erro no sensor t\u00e9rmico da AI4"}, {122, "N\u00edvel t\u00e9rmico da AI5"}, {123, "Erro no sensor t\u00e9rmico da AI5"}, {124, "Erro do antitravamento (anti-jam)"}, {125, "Press\u00e3o de sa\u00edda alta"}, {126, "Bomba operando a seco"}, {127, "Erro no retorno do PID"}, {128, "Erro ao carregar o programa"}, {129, "Erro na execu\u00e7\u00e3o do programa"}, {130, "Bomba principal indispon\u00edvel"}, {131, "N\u00edvel baixo"}, {132, "N\u00edvel alto"}, {142, "Erro interno 16 (m\u00f3dulo de E/S - rel\u00e9)"}, {143, "Erro interno 17 (m\u00f3dulo de E/S - padr\u00e3o)"}, {144, "Erro interno 0 (IPC)"}, {146, "Erro interno 13 (corrente diferencial)"}, {148, "Motor travado"}, {149, "Erro interno 21 (rel\u00f3gio)"}, {150, "Interrup\u00e7\u00e3o da comunica\u00e7\u00e3o Ethernet embarcada"}, {151, "Erro interno 15 (mem\u00f3ria flash)"}, {152, "Erro na atualiza\u00e7\u00e3o de firmware"}, {153, "Erro interno 22 (Ethernet embarcada)"}, {154, "Erro interno 25 (incompatibilidade de placa e software)"}, {155, "Erro interno 20 (placa de interface do opcional)"}, {157, "Erro interno 27 (CPLD de diagn\u00f3stico)"}, {158, "Erro interno 23 (liga\u00e7\u00e3o de m\u00f3dulo)"}, {159, "Curto-circuito no AFE"}, {160, "Desequil\u00edbrio do barramento do AFE"}, {161, "Erro interno 28 (AFE)"}, {162, "Erro no circuito de monitora\u00e7\u00e3o A"}, {163, "Erro no circuito de monitora\u00e7\u00e3o B"}, {164, "Erro no circuito de monitora\u00e7\u00e3o C"}, {165, "Erro no circuito de monitora\u00e7\u00e3o D"}, {166, "Erro no circuito do painel A"}, {167, "Erro no circuito do painel B"}, {168, "Erro no circuito do painel C"}, {169, "Erro no enrolamento A do motor"}, {170, "Erro no enrolamento B do motor"}, {171, "Erro no mancal A do motor"}, {172, "Erro no mancal B do motor"}, {173, "Sobreaquecimento do painel"}, {174, "Subtens\u00e3o na rede do AFE"}, {175, "Erro interno 31 (m\u00f3dulo ausente)"}, {176, "Erro interno 29 (inversor)"}, {177, "Erro interno 30 (retificador)"}, {179, "Sobreaquecimento do IGBT do AFE"}, {180, "Erro no retorno do contator do AFE"}, {181, "Erro na transfer\u00eancia das pr\u00e9-configura\u00e7\u00f5es"}, {182, "Falha no disjuntor"}, {186, "Erro na liga\u00e7\u00e3o MultiDrive"}, {190, "Erro no dispositivo multibomba"}, {191, "Erro nos capacitores CC do AFE"}, {192, "Erro no controle de corrente do AFE"}, {193, "Frequ\u00eancia da rede fora da faixa"}, {200, "Erro no FDR da Ethernet embarcada"}, {201, "Erro no FDR do m\u00f3dulo Ethernet"}, {203, "Falta de 24 V nas E/S do painel"}, {206, "Ondula\u00e7\u00e3o no barramento CC"}, {207, "Erro no controle de v\u00f3rtice"}, {208, "Erro ao sair do modo de economia"}, {211, "Arquivos de seguran\u00e7a corrompidos"}, {212, "Erro no filtro de linha do AFE"}, {213, "Falha na bomba de refrigera\u00e7\u00e3o"}, {220, "Fun\u00e7\u00e3o avan\u00e7ada bloqueada"}
+		};
+
+		// Descricao da falha: curto = "45 - SLF3" (ATV) ou "45" (Sulzer); texto = descricao em portugues
+		internal static void DescreveFalha(int cod, bool sulzer, out string curto, out string texto)
+		{
+			string mn;
+			curto = cod.ToString(); texto = "";
+			if (cod == 0) { curto = "nenhuma"; return; }
+			if (sulzer) { if (!EventosSulzer.TryGetValue(cod, out texto)) texto = "evento sem descri\u00e7\u00e3o no manual"; return; }
+			if (FalhasAtv.TryGetValue(cod, out mn)) curto = cod.ToString() + " - " + mn;
+			if (!TextosAtv.TryGetValue(cod, out texto)) texto = "c\u00f3digo sem descri\u00e7\u00e3o na lista do ATV600";
+		}
+
+
+		string nomePainel = "";
+		int codFalha;
+		bool temCodigo;
 		void REQ_SULZER_Fired_EventHandler(object sender, SE.Nereda.Symbols.FieldSignals.REQ_SULZEREventArgs e)
 		{
-			int cod = e.SULZER_FALHA.HasValue ? e.SULZER_FALHA.Value : 0;
-			string l1 = "Sulzer: sem falha", l2 = "";
-			if (cod != 0)
+			codFalha = e.SULZER_FALHA.HasValue ? e.SULZER_FALHA.Value : 0;
+			temCodigo = true;
+			MostraFalha();
+		}
+
+		// Sulzer (sopradores V4601-V4604): tabela de eventos do manual HST; ATV600 (Modbus generico): mnemonico do display
+		void MostraFalha()
+		{
+			if (!temCodigo) return;
+			int cod = codFalha;
+			bool sulzer = nomePainel.Contains("V460");
+			string l1, l2 = "";
+			if (sulzer)
 			{
-				string desc;
-				if (!EventosSulzer.TryGetValue(cod, out desc)) desc = "evento sem descri\u00e7\u00e3o no manual";
-				l1 = "Falha Sulzer " + cod.ToString() + ": " + desc;
-				if (l1.Length > 58)
+				l1 = "Sulzer: sem falha";
+				if (cod != 0)
 				{
-					int corte = l1.LastIndexOf(' ', 58);
-					if (corte < 20) corte = 58;
-					l2 = l1.Substring(corte).TrimStart();
-					l1 = l1.Substring(0, corte);
+					string desc;
+					if (!EventosSulzer.TryGetValue(cod, out desc)) desc = "evento sem descri\u00e7\u00e3o no manual";
+					l1 = "Falha Sulzer " + cod.ToString() + ": " + desc;
 				}
+			}
+			else
+			{
+				l1 = "Inversor: sem falha";
+				if (cod != 0)
+				{
+					string curto, texto;
+					DescreveFalha(cod, false, out curto, out texto);
+					l1 = "Falha do inversor " + curto + ": " + texto;
+				}
+			}
+			if (l1.Length > 58)
+			{
+				int corte = l1.LastIndexOf(' ', 58);
+				if (corte < 20) corte = 58;
+				l2 = l1.Substring(corte).TrimStart();
+				l1 = l1.Substring(0, corte);
 			}
 			NxtControl.Drawing.Color cor = cod == 0 ? new NxtControl.Drawing.Color(0, 128, 0) : new NxtControl.Drawing.Color(192, 0, 0);
 			txtSulzerFalha.Text = l1;

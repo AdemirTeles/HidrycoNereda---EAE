@@ -76,6 +76,21 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_Generico
 			rangeMin.Suffix = suf; rangeMax.Suffix = suf; altura.Suffix = suf;
 		}
 
+		// Diagnostico do proprio dispositivo (ex.: SC4500 por Modbus): erro = falha do sensor; aviso = so alarme
+		void CodErroValueChanged(object sender, ValueChangedEventArgs e)
+		{
+			int cod = Convert.ToInt32(e.Value);
+			Indicador(erroP1, erroP1n, erroP2, erroP2n, erroTxt, cod != 0 ? 1 : 0, "FALHA (código " + cod.ToString() + ")");
+			erroNenhum.Visible = cod == 0;
+		}
+
+		void CodAvisoValueChanged(object sender, ValueChangedEventArgs e)
+		{
+			int cod = Convert.ToInt32(e.Value);
+			Indicador(avisoP1, avisoP1n, avisoP2, avisoP2n, avisoTxt, cod != 0 ? 2 : 0, "AVISO (código " + cod.ToString() + ")");
+			avisoNenhum.Visible = cod == 0;
+		}
+
 		void FalhaAtivaValueChanged(object sender, ValueChangedEventArgs e)
 		{
 			bool f = Convert.ToBoolean(e.Value);

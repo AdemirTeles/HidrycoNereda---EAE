@@ -17,6 +17,10 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_Generico
 		private void InitializeComponent()
 		{
 			this.trendControl1 = new NxtControl.GuiFramework.TrendControl();
+			this.btn5m = new NxtControl.GuiFramework.DrawnButton();
+			this.btn30m = new NxtControl.GuiFramework.DrawnButton();
+			this.btn1h = new NxtControl.GuiFramework.DrawnButton();
+			this.btn8h = new NxtControl.GuiFramework.DrawnButton();
 			this.tCasas = new System.HMI.Symbols.Base.Execute<ushort>();
 			this.tRangeMin = new System.HMI.Symbols.Base.TextBox<float>();
 			this.tRangeMax = new System.HMI.Symbols.Base.TextBox<float>();
@@ -30,7 +34,7 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_Generico
 			// trendControl1
 			// 
 			this.trendControl1.Font = new NxtControl.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular);
-			this.trendControl1.Location = new System.Drawing.Point(0, 0);
+			this.trendControl1.Location = new System.Drawing.Point(0, 40);
 			this.trendControl1.MinimalSize = new System.Drawing.Size(60, 60);
 			this.trendControl1.Name = "trendControl1";
 			this.trendControl1.ParentSymbol = this;
@@ -48,6 +52,20 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_Generico
 			this.trendControl1.ZoomPercentX = 10D;
 			this.trendControl1.ZoomPercentY = 10D;
 			// 
+			// tCasas
+			// 
+			this.tCasas.BeginInit();
+			this.tCasas.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, double.NaN, double.NaN);
+			this.tCasas.IsOnlyInput = true;
+			this.tCasas.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
+			this.tCasas.Name = "tCasas";
+			this.tCasas.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
+			this.tCasas.TagName = "CFG_CASAS_DECIMAIS";
+			this.tCasas.Value = ((ushort)(0));
+			this.tCasas.Visible = false;
+			this.tCasas.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.OcultoValueChanged);
+			this.tCasas.EndInit();
+			// 
 			// tRangeMin
 			// 
 			this.tRangeMin.BeginInit();
@@ -62,8 +80,8 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_Generico
 			this.tRangeMin.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
 			this.tRangeMin.UseInputPad = true;
 			this.tRangeMin.Value = 0F;
-			this.tRangeMin.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.OcultoValueChanged);
 			this.tRangeMin.Visible = false;
+			this.tRangeMin.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.OcultoValueChanged);
 			this.tRangeMin.EndInit();
 			// 
 			// tRangeMax
@@ -80,8 +98,8 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_Generico
 			this.tRangeMax.TextAlignment = NxtControl.Drawing.ContentAlignment.MiddleLeft;
 			this.tRangeMax.UseInputPad = true;
 			this.tRangeMax.Value = 0F;
-			this.tRangeMax.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.OcultoValueChanged);
 			this.tRangeMax.Visible = false;
+			this.tRangeMax.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.OcultoValueChanged);
 			this.tRangeMax.EndInit();
 			// 
 			// tHabHH
@@ -99,8 +117,8 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_Generico
 			this.tHabHH.TrueImageDisabled = new NxtControl.Drawing.ImageHolder();
 			this.tHabHH.TrueText = "Sim";
 			this.tHabHH.Value = false;
-			this.tHabHH.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.OcultoValueChanged);
 			this.tHabHH.Visible = false;
+			this.tHabHH.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.OcultoValueChanged);
 			this.tHabHH.EndInit();
 			// 
 			// tHabH
@@ -118,8 +136,8 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_Generico
 			this.tHabH.TrueImageDisabled = new NxtControl.Drawing.ImageHolder();
 			this.tHabH.TrueText = "Sim";
 			this.tHabH.Value = false;
-			this.tHabH.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.OcultoValueChanged);
 			this.tHabH.Visible = false;
+			this.tHabH.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.OcultoValueChanged);
 			this.tHabH.EndInit();
 			// 
 			// tHabL
@@ -137,8 +155,8 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_Generico
 			this.tHabL.TrueImageDisabled = new NxtControl.Drawing.ImageHolder();
 			this.tHabL.TrueText = "Sim";
 			this.tHabL.Value = false;
-			this.tHabL.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.OcultoValueChanged);
 			this.tHabL.Visible = false;
+			this.tHabL.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.OcultoValueChanged);
 			this.tHabL.EndInit();
 			// 
 			// tHabLL
@@ -156,8 +174,8 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_Generico
 			this.tHabLL.TrueImageDisabled = new NxtControl.Drawing.ImageHolder();
 			this.tHabLL.TrueText = "Sim";
 			this.tHabLL.Value = false;
-			this.tHabLL.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.OcultoValueChanged);
 			this.tHabLL.Visible = false;
+			this.tHabLL.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.OcultoValueChanged);
 			this.tHabLL.EndInit();
 			// 
 			// tUnidade
@@ -169,30 +187,80 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_Generico
 			this.tUnidade.Name = "tUnidade";
 			this.tUnidade.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
 			this.tUnidade.TagName = "CFG_UNIDADE";
-			this.tUnidade.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.OcultoValueChanged);
+			this.tUnidade.Value = null;
 			this.tUnidade.Visible = false;
+			this.tUnidade.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.OcultoValueChanged);
 			this.tUnidade.EndInit();
-			// 
-			// tCasas
-			// 
-			this.tCasas.BeginInit();
-			this.tCasas.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, double.NaN, double.NaN);
-			this.tCasas.IsOnlyInput = true;
-			this.tCasas.Location = new NxtControl.Drawing.PointF(double.NaN, double.NaN);
-			this.tCasas.Name = "tCasas";
-			this.tCasas.Size = new NxtControl.Drawing.SizeF(double.NegativeInfinity, double.NegativeInfinity);
-			this.tCasas.TagName = "CFG_CASAS_DECIMAIS";
-			this.tCasas.Value = ((ushort)(0));
-			this.tCasas.ValueChanged += new System.EventHandler<NxtControl.GuiFramework.ValueChangedEventArgs>(this.OcultoValueChanged);
-			this.tCasas.Visible = false;
-			this.tCasas.EndInit();
 			// 
 			// fpTrend
 			// 
-			this.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(700D)), ((float)(400D)));
+			this.Bounds = new NxtControl.Drawing.RectF(((float)(0D)), ((float)(0D)), ((float)(700D)), ((float)(440D)));
 			this.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(224)), ((byte)(224)), ((byte)(224))));
-			this.Name = "fpTrend";
+			// 
+			// btn5m
+			// 
+			this.btn5m.Bounds = new NxtControl.Drawing.RectF(((float)(10D)), ((float)(6D)), ((float)(80D)), ((float)(28D)));
+			this.btn5m.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(215)), ((byte)(215)), ((byte)(215))));
+			this.btn5m.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold);
+			this.btn5m.InnerBorderColor = new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208)));
+			this.btn5m.Name = "btn5m";
+			this.btn5m.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(160)), ((byte)(160)), ((byte)(160))), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.btn5m.Radius = 2D;
+			this.btn5m.Text = "5 min";
+			this.btn5m.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.btn5m.TextColorMouseDown = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.btn5m.Use3DEffect = false;
+			this.btn5m.Click += new System.EventHandler(this.BtnTempoClick);
+			// 
+			// btn30m
+			// 
+			this.btn30m.Bounds = new NxtControl.Drawing.RectF(((float)(96D)), ((float)(6D)), ((float)(80D)), ((float)(28D)));
+			this.btn30m.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(215)), ((byte)(215)), ((byte)(215))));
+			this.btn30m.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold);
+			this.btn30m.InnerBorderColor = new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208)));
+			this.btn30m.Name = "btn30m";
+			this.btn30m.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(160)), ((byte)(160)), ((byte)(160))), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.btn30m.Radius = 2D;
+			this.btn30m.Text = "30 min";
+			this.btn30m.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.btn30m.TextColorMouseDown = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.btn30m.Use3DEffect = false;
+			this.btn30m.Click += new System.EventHandler(this.BtnTempoClick);
+			// 
+			// btn1h
+			// 
+			this.btn1h.Bounds = new NxtControl.Drawing.RectF(((float)(182D)), ((float)(6D)), ((float)(80D)), ((float)(28D)));
+			this.btn1h.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(215)), ((byte)(215)), ((byte)(215))));
+			this.btn1h.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold);
+			this.btn1h.InnerBorderColor = new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208)));
+			this.btn1h.Name = "btn1h";
+			this.btn1h.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(160)), ((byte)(160)), ((byte)(160))), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.btn1h.Radius = 2D;
+			this.btn1h.Text = "1 h";
+			this.btn1h.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.btn1h.TextColorMouseDown = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.btn1h.Use3DEffect = false;
+			this.btn1h.Click += new System.EventHandler(this.BtnTempoClick);
+			// 
+			// btn8h
+			// 
+			this.btn8h.Bounds = new NxtControl.Drawing.RectF(((float)(268D)), ((float)(6D)), ((float)(80D)), ((float)(28D)));
+			this.btn8h.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(215)), ((byte)(215)), ((byte)(215))));
+			this.btn8h.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold);
+			this.btn8h.InnerBorderColor = new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208)));
+			this.btn8h.Name = "btn8h";
+			this.btn8h.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(160)), ((byte)(160)), ((byte)(160))), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.btn8h.Radius = 2D;
+			this.btn8h.Text = "8 h";
+			this.btn8h.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.btn8h.TextColorMouseDown = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.btn8h.Use3DEffect = false;
+			this.btn8h.Click += new System.EventHandler(this.BtnTempoClick);
 			this.Shapes.AddRange(new System.ComponentModel.IComponent[] {
+			this.btn5m,
+			this.btn30m,
+			this.btn1h,
+			this.btn8h,
 			this.trendControl1,
 			this.tRangeMin,
 			this.tRangeMax,
@@ -202,11 +270,15 @@ namespace Hidryco.HidrycoLib.Faceplates.Sensor_Generico
 			this.tHabLL,
 			this.tUnidade,
 			this.tCasas});
-			this.Size = new System.Drawing.Size(700, 400);
+			this.Size = new System.Drawing.Size(700, 440);
 			((System.ComponentModel.ISupportInitialize)(this.trendControl1)).EndInit();
 
 		}
 		private NxtControl.GuiFramework.TrendControl trendControl1;
+		private NxtControl.GuiFramework.DrawnButton btn5m;
+		private NxtControl.GuiFramework.DrawnButton btn30m;
+		private NxtControl.GuiFramework.DrawnButton btn1h;
+		private NxtControl.GuiFramework.DrawnButton btn8h;
 		private System.HMI.Symbols.Base.Execute<ushort> tCasas;
 		private System.HMI.Symbols.Base.TextBox<float> tRangeMin;
 		private System.HMI.Symbols.Base.TextBox<float> tRangeMax;

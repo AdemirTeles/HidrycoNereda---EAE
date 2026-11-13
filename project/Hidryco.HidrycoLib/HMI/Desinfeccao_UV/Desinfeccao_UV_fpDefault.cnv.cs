@@ -111,11 +111,11 @@ namespace Hidryco.HidrycoLib.Faceplates.Desinfeccao_UV
 			if (aVa) { texto = "VAZÃO DE LANÇAMENTO ACIMA DO LIMITE"; naoRec = NaoRec(eVa); return 1; }
 			if (ftF) { texto = "700-FT-01 EM FALHA - VÁLVULA MANTIDA"; naoRec = false; return 1; }
 			if (fRem) { texto = "SEM COMUNICAÇÃO COM A REMOTA"; naoRec = NaoRec(eRem); return 2; }
-			if (aDj) { texto = "DISJUNTOR DESLIGADO"; naoRec = NaoRec(eDj); return 2; }
+			// disjuntores nao aparecem mais na tela (pedido do usuario 12/11/2026)
 			if (aVr) { texto = "VARIAÇÃO BRUSCA DA VAZÃO"; naoRec = NaoRec(eVr); return 2; }
 			texto = ""; naoRec = false; return 0;
 		}
-		bool AlgumNaoRec() { return (aVa && NaoRec(eVa)) || (fRem && NaoRec(eRem)) || (aDj && NaoRec(eDj)) || (aVr && NaoRec(eVr)); }
+		bool AlgumNaoRec() { return (aVa && NaoRec(eVa)) || (fRem && NaoRec(eRem)) || (aVr && NaoRec(eVr)); }
 		static readonly string[] MOTIVO = { "PID CONTROLANDO A VC-01", "controle desabilitado - válvula mantida", "FT-01 em falha - válvula mantida", "VC-01 indisponível (manual, local, falha ou sem comunicação)", "retomando o controle..." };
 		string Motivo() { return motivo >= 0 && motivo < MOTIVO.Length ? MOTIVO[motivo] : "-"; }
 		string Dj() { if (!remOk) return "????"; return "PCE " + (dPce ? "DESL" : "ok") + "  PCM " + (dPcm ? "DESL" : "ok") + "  UV1 " + (dUv1 ? "lig" : "DESL") + "  UV2 " + (dUv2 ? "lig" : "DESL") + "  VC " + (dVc ? "lig" : "DESL") + "  MO " + (dMo ? "lig" : "desl"); }

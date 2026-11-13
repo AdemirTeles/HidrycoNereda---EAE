@@ -646,6 +646,67 @@ namespace Hidryco.HidrycoLib.Symbols.Sensor_Generico
       return (System.Boolean) var;
     }  }
 
+    public bool Get_STS_CODIGO_ERRO(ref System.Int16 value)
+    {
+      if (accessorService == null)
+        return false;
+      System.Int64 var = 0;
+      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,30, ref var);
+      if (ret) value = (System.Int16) var;
+      return ret;
+    }
+
+    public System.Int16? STS_CODIGO_ERRO
+    { get {
+      if (accessorService == null)
+        return null;
+      System.Int64 var = 0;
+      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,30, ref var);
+      if (!ret) return null;
+      return (System.Int16) var;
+    }  }
+
+    public bool Get_STS_CODIGO_AVISO(ref System.Int16 value)
+    {
+      if (accessorService == null)
+        return false;
+      System.Int64 var = 0;
+      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,31, ref var);
+      if (ret) value = (System.Int16) var;
+      return ret;
+    }
+
+    public System.Int16? STS_CODIGO_AVISO
+    { get {
+      if (accessorService == null)
+        return null;
+      System.Int64 var = 0;
+      bool ret = accessorService.GetInt64Value(channelId, cookie, eventIndex, true,31, ref var);
+      if (!ret) return null;
+      return (System.Int16) var;
+    }  }
+
+    public bool Get_STS_ALM_AVISO_EST(ref System.Byte value)
+    {
+      if (accessorService == null)
+        return false;
+      byte var = 0;
+      bool ret = accessorService.GetByteValue(channelId, cookie, eventIndex, true,32, ref var);
+      if (ret) value = (System.Byte) var;
+      return ret;
+    }
+
+    public System.Byte? STS_ALM_AVISO_EST
+    { get {
+      if (accessorService == null)
+        return null;
+      byte var = 0;
+      bool ret = accessorService.GetByteValue(channelId, cookie, eventIndex, true,32, ref var);
+      if (!ret) return null;
+      return (System.Byte) var;
+    }  }
+
+
 
 
   }

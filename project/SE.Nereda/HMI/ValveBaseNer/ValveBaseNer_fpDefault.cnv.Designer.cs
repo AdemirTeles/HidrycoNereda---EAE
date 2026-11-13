@@ -41,7 +41,6 @@ namespace SE.Nereda.Faceplates.ValveBaseNer
 			this.btnReset = new NxtControl.GuiFramework.DrawnButton();
 			this.sep = new NxtControl.GuiFramework.Rectangle();
 			this.btnAjustes = new NxtControl.GuiFramework.DrawnButton();
-			this.btnGrafico = new NxtControl.GuiFramework.DrawnButton();
 			this.fpNavigationPane = new SE.App2Base.Graphics.FpNavigationPane();
 			this.ownerSwitch = new SE.App2Base.Graphics.OwnerSwitchBasic();
 			this.NeedReset = new System.HMI.Symbols.Base.Execute<bool>();
@@ -218,21 +217,6 @@ namespace SE.Nereda.Faceplates.ValveBaseNer
 			this.btnAjustes.TextColorMouseDown = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.btnAjustes.Use3DEffect = false;
 			this.btnAjustes.Click += new System.EventHandler(this.BtnAjustesClick);
-			// 
-			// btnGrafico
-			// 
-			this.btnGrafico.Bounds = new NxtControl.Drawing.RectF(((float)(190D)), ((float)(342D)), ((float)(150D)), ((float)(32D)));
-			this.btnGrafico.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208))));
-			this.btnGrafico.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold);
-			this.btnGrafico.InnerBorderColor = new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208)));
-			this.btnGrafico.Name = "btnGrafico";
-			this.btnGrafico.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(160)), ((byte)(160)), ((byte)(160))), 1F, NxtControl.Drawing.DashStyle.Solid);
-			this.btnGrafico.Radius = 2D;
-			this.btnGrafico.Text = "Gr\u00e1fico";
-			this.btnGrafico.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.btnGrafico.TextColorMouseDown = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.btnGrafico.Use3DEffect = false;
-			this.btnGrafico.Click += new System.EventHandler(this.BtnGraficoClick);
 			// 
 			// fpNavigationPane
 			// 
@@ -501,7 +485,6 @@ namespace SE.Nereda.Faceplates.ValveBaseNer
 			this.btnReset,
 			this.sep,
 			this.btnAjustes,
-			this.btnGrafico,
 			this.fpNavigationPane,
 			this.ownerSwitch,
 			this.NeedReset,
@@ -538,7 +521,6 @@ namespace SE.Nereda.Faceplates.ValveBaseNer
 		private NxtControl.GuiFramework.DrawnButton btnReset;
 		private NxtControl.GuiFramework.Rectangle sep;
 		private NxtControl.GuiFramework.DrawnButton btnAjustes;
-		private NxtControl.GuiFramework.DrawnButton btnGrafico;
 		private SE.App2Base.Graphics.FpNavigationPane fpNavigationPane;
 		private SE.App2Base.Graphics.OwnerSwitchBasic ownerSwitch;
 		private System.HMI.Symbols.Base.Execute<bool> NeedReset;

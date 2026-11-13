@@ -211,7 +211,6 @@ namespace SE.Nereda.Faceplates.MotorBaseNer
 		void BtnManualClick(object sender, EventArgs e) { PedeDono(true); }
 		void BtnAutomaticoClick(object sender, EventArgs e) { PedeDono(false); }
 		void BtnAjustesClick(object sender, EventArgs e) { DoOpenFaceplate("fpParameter"); }
-		void BtnGraficoClick(object sender, EventArgs e) { DoOpenFaceplate("fpTrend"); }
 		void FpNavigationPaneOnParameterClick() { DoOpenFaceplate("fpParameter"); }
 		void FpNavigationPaneOnTrendClick() { DoOpenFaceplate("fpTrend"); }
 

@@ -3,7 +3,7 @@
 <FBType GUID="e84eb29a-d6dc-49a2-862e-d83a3ef0c522" Name="FieldSignals" Format="2.0" Comment="CAT Function Block Type" Namespace="SE.Nereda">
   <Attribute Name="HMI.Alias" Value="" />
   <Identification Standard="61499-2" />
-  <VersionInfo Organization="Schneider Electric" Version="0.6" Author="Hidryco" Date="23/10/2026" Remarks="0.6 (Hidryco 10/11/2026): padrao TRUE - nenhum motor Nereda tem reset automatico. cfgSemResetAuto - ResetAutoSel entre o AtvResetError e o ResetOu; TRUE (Sulzer) bloqueia o reset automatico do AtvResetError (que disparava sempre que AtvReady = bit 8 Partida disponivel ficava FALSE); o symlink ResetError_ATV fica so com o ResetPartida. 0.5 (Hidryco 05/11/2026): symlink SulzerFaultCode (INT, Initial fault specifier do Sulzer HST) -> IThis.SULZER_FALHA (REQ_SULZER) para a IHM. 0.4 (Hidryco 05/11/2026): ResetPartida (REQ_RESET_PARTIDA) em OU com o ResetError do AtvResetError no symlink ResetError_ATV (reset antes da partida do Sulzer). 0.3 (Hidryco 04/11/2026): ANY2ANY1 virou Div10Sulzer (DivDez2): CurrentFbl (0,1 A) e RpmFb (0,1 Hz, Sulzer hr 34454) divididos por 10; so os V4601-V4604 ligam esses symlinks. 0.2 (Hidryco 04/11/2026): symlinks INT PowerKw10 (0,1 kW -> PowerCalculator.REQ_KW10) e FreqHz10 (0,1 Hz -> FreqSel -> IThis.Frequency; o MotorFrequecy do ATV tambem passa pelo FreqSel), ligados so nos sopradores Sulzer V4601-V4604 (hr 34463 e 34453). 0.1: leituras do ATV (marcha avante/reversa, ETI, HMIS, rpm, torque, corrente, codigo de falha, aviso, codigo de aviso, comunicacao) por symlink ${PATH} para o IThis (evento REQ_ATV); recolocados CurrentFb (symlink CurrentFbl) e RpmFb (symlink RpmFb) com o ANY2ANY1 para o IThis, como no commit 7a2d4e5. Safety Switch (oSafetySwitchOff) e Power Status (oPowerFb) sempre OK (TRUE): SelSafetySwitchOff e SelPowerFb com IN1 e IN2 fixos em TRUE, por decisao do usuario em 23/10/2026. 0.0: template" />
+  <VersionInfo Organization="Schneider Electric" Version="0.8" Author="Hidryco" Date="12/11/2026" Remarks="0.8 (Hidryco 12/11/2026): medicoes do ATV600 por Modbus generico como o Motor_Generico - symlinks INT AtvRpmInt (RFRD 8604), AtvTorqueInt (OTR 3205), AtvTensaoInt (UOP 3208), AtvPotenciaInt (OPR 3211) para AtvMedidasGen para AtvSpeedRpm, AtvTorquePct, AtvTensaoV, AtvPotenciaPct; AtvCurrentA = CurrentFbl / 10 (LCR). 0.7 (Hidryco 12/11/2026): cfgProntoForcado (AtvReady = AtvReady OR cfgProntoForcado) para os ATV por Modbus generico. 0.6 (Hidryco 10/11/2026): padrao TRUE - nenhum motor Nereda tem reset automatico. cfgSemResetAuto - ResetAutoSel entre o AtvResetError e o ResetOu; TRUE (Sulzer) bloqueia o reset automatico do AtvResetError (que disparava sempre que AtvReady = bit 8 Partida disponivel ficava FALSE); o symlink ResetError_ATV fica so com o ResetPartida. 0.5 (Hidryco 05/11/2026): symlink SulzerFaultCode (INT, Initial fault specifier do Sulzer HST) -> IThis.SULZER_FALHA (REQ_SULZER) para a IHM. 0.4 (Hidryco 05/11/2026): ResetPartida (REQ_RESET_PARTIDA) em OU com o ResetError do AtvResetError no symlink ResetError_ATV (reset antes da partida do Sulzer). 0.3 (Hidryco 04/11/2026): ANY2ANY1 virou Div10Sulzer (DivDez2): CurrentFbl (0,1 A) e RpmFb (0,1 Hz, Sulzer hr 34454) divididos por 10; so os V4601-V4604 ligam esses symlinks. 0.2 (Hidryco 04/11/2026): symlinks INT PowerKw10 (0,1 kW -> PowerCalculator.REQ_KW10) e FreqHz10 (0,1 Hz -> FreqSel -> IThis.Frequency; o MotorFrequecy do ATV tambem passa pelo FreqSel), ligados so nos sopradores Sulzer V4601-V4604 (hr 34463 e 34453). 0.1: leituras do ATV (marcha avante/reversa, ETI, HMIS, rpm, torque, corrente, codigo de falha, aviso, codigo de aviso, comunicacao) por symlink ${PATH} para o IThis (evento REQ_ATV); recolocados CurrentFb (symlink CurrentFbl) e RpmFb (symlink RpmFb) com o ANY2ANY1 para o IThis, como no commit 7a2d4e5. Safety Switch (oSafetySwitchOff) e Power Status (oPowerFb) sempre OK (TRUE): SelSafetySwitchOff e SelPowerFb com IN1 e IN2 fixos em TRUE, por decisao do usuario em 23/10/2026. 0.0: template" />
   <InterfaceList>
     <EventInputs>
       <Event ID="62FE49324B71C4B0" Name="REQ_ATV_TYPE">
@@ -33,6 +33,7 @@
       <VarDeclaration ID="62A70FF94078EC4D" Name="AtvType" Type="STRING[20]" />
       <VarDeclaration ID="9DBB8C5AB271C8D0" Name="ResetPartida" Type="BOOL" Comment="Reset antes da partida: vai para o symlink ResetError_ATV junto (OU) com o reset do AtvResetError" />
       <VarDeclaration ID="97762544BDC6A429" Name="cfgSemResetAuto" Type="BOOL" InitialValue="TRUE" Comment="TRUE (padrao) = sem reset automatico do AtvResetError no symlink ResetError_ATV: reset do equipamento so pelo clique. FALSE = reset automatico do ATV (3 tentativas)" />
+      <VarDeclaration ID="8738C926C91ED54C" Name="cfgProntoForcado" Type="BOOL" InitialValue="FALSE" Comment="TRUE = inversor pronto (AtvReady) forcado em TRUE: ATV por Modbus generico, sem HW CAT (padrao da elevatoria)" />
     </InputVars>
     <OutputVars>
       <VarDeclaration ID="9DA3D6735086B77A" Name="oElectricCircuitFail" Type="BOOL" Comment="Current value(i) in the named variable array element" />
@@ -52,6 +53,30 @@
     </Plugs>
   </InterfaceList>
   <FBNetwork>
+    <FB ID="2C49C5775854128E" Name="AtvRpmInt" Type="SYMLINKMULTIVARDST_5A03F112CD5D470" x="1500" y="14400" Namespace="SE.Nereda">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=1;VALUE${I}:INT" />
+      <Parameter Name="$QI" Value="TRUE" />
+      <Parameter Name="$NAME1" Value="'$${PATH}AtvRpmInt'" />
+    </FB>
+    <FB ID="B0342129EED3C70D" Name="AtvTorqueInt" Type="SYMLINKMULTIVARDST_5A03F112CD5D470" x="1500" y="15040" Namespace="SE.Nereda">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=1;VALUE${I}:INT" />
+      <Parameter Name="$QI" Value="TRUE" />
+      <Parameter Name="$NAME1" Value="'$${PATH}AtvTorqueInt'" />
+    </FB>
+    <FB ID="34B3A8E13C020475" Name="AtvTensaoInt" Type="SYMLINKMULTIVARDST_5A03F112CD5D470" x="1500" y="15680" Namespace="SE.Nereda">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=1;VALUE${I}:INT" />
+      <Parameter Name="$QI" Value="TRUE" />
+      <Parameter Name="$NAME1" Value="'$${PATH}AtvTensaoInt'" />
+    </FB>
+    <FB ID="152E7625730DA18A" Name="AtvPotenciaInt" Type="SYMLINKMULTIVARDST_5A03F112CD5D470" x="1500" y="16320" Namespace="SE.Nereda">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.System#I:=1;VALUE${I}:INT" />
+      <Parameter Name="$QI" Value="TRUE" />
+      <Parameter Name="$NAME1" Value="'$${PATH}AtvPotenciaInt'" />
+    </FB>
+    <FB ID="0B9136C0BD10D76D" Name="AtvMedidas" Type="AtvMedidasGen" x="3000" y="14400" Namespace="SE.Nereda" />
+    <FB ID="E0B503DB2C3AE243" Name="OrPronto" Type="OR_88A3DD8EC65DD11C" x="1500" y="6800" Namespace="SE.Nereda">
+      <Attribute Name="Configuration.GenericFBType.InterfaceParams" Value="Runtime.Standard#CNT:=2;OUT:BOOL" />
+    </FB>
     <FB ID="785B2B7F39003416" Name="INIT" Type="plcStart" x="700" y="580" Namespace="SE.App2Base">
       <Parameter Name="$Prio" Value="24" />
       <Parameter Name="$Delay" Value="T#0ms" />
@@ -268,6 +293,7 @@
     </FB>
     <Input ID="62FE49324B71C4B0" Name="REQ_ATV_TYPE" x="680" y="1404" Type="Event" />
     <Input ID="62A70FF94078EC4D" Name="AtvType" x="680" y="1464" Type="Data" />
+    <Input ID="8738C926C91ED54C" Name="cfgProntoForcado" x="680" y="1584" Type="Data" />
     <Input ID="142413C70B06F4A9" Name="REQ_RESET_PARTIDA" x="680" y="1524" Type="Event" />
     <Input ID="9DBB8C5AB271C8D0" Name="ResetPartida" x="680" y="1584" Type="Data" />
     <Input ID="97762544BDC6A429" Name="cfgSemResetAuto" x="680" y="1644" Type="Data" />
@@ -390,9 +416,6 @@
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
       <Connection Source="$C8B3EDCAF377B21C.CNF" Destination="$3928EB7E7885DCC4.REQ">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$C05EDA0BCF508383.CNF" Destination="$132A73B0D35E9500.REQ">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
       <Connection Source="$1432CF995CA74B3E.INITO" Destination="$51D71E55DB73DC3A.INIT">
@@ -857,6 +880,19 @@
       <Connection Source="$1041AD88602FB7D9.CNF" Destination="$D0B64F42392CAE46.REQ" />
       <Connection Source="$51D71E55DB73DC3A.INITO" Destination="$D3E6D57DB7EFAB3A.INIT" />
       <Connection Source="$D3E6D57DB7EFAB3A.CNF" Destination="$CAAADA7932C2244A.ADAD4243CC1F39B8" />
+      <Connection Source="$C05EDA0BCF508383.CNF" Destination="$E0B503DB2C3AE243.REQ" />
+      <Connection Source="$C05EDA0BCF508383.INITO" Destination="$E0B503DB2C3AE243.REQ" />
+      <Connection Source="$E0B503DB2C3AE243.CNF" Destination="$132A73B0D35E9500.REQ" />
+      <Connection Source="$7301D4E8666FF609.INITO" Destination="$2C49C5775854128E.INIT" />
+      <Connection Source="$2C49C5775854128E.CNF" Destination="$0B9136C0BD10D76D.A1B290BEDCEAD58D" />
+      <Connection Source="$7301D4E8666FF609.INITO" Destination="$B0342129EED3C70D.INIT" />
+      <Connection Source="$B0342129EED3C70D.CNF" Destination="$0B9136C0BD10D76D.A1B290BEDCEAD58D" />
+      <Connection Source="$7301D4E8666FF609.INITO" Destination="$34B3A8E13C020475.INIT" />
+      <Connection Source="$34B3A8E13C020475.CNF" Destination="$0B9136C0BD10D76D.A1B290BEDCEAD58D" />
+      <Connection Source="$7301D4E8666FF609.INITO" Destination="$152E7625730DA18A.INIT" />
+      <Connection Source="$152E7625730DA18A.CNF" Destination="$0B9136C0BD10D76D.A1B290BEDCEAD58D" />
+      <Connection Source="$0B9136C0BD10D76D.1BE7939A658F20AA" Destination="$CAAADA7932C2244A.47A23F4E65E4F017" />
+      <Connection Source="$155FFBAEA2F9B2D8.76A2C7728097811D" Destination="$CAAADA7932C2244A.47A23F4E65E4F017" />
     </EventConnections>
     <DataConnections>
       <Connection Source="$E6630FC738E5EB4E.OUT1" Destination="$9DA3D6735086B77A" dx1="121.625">
@@ -896,9 +932,6 @@
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
       <Connection Source="$5641C71E58EBF833.VALUE1" Destination="$F348F30442BF01F5.IN1">
-        <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
-      </Connection>
-      <Connection Source="$C05EDA0BCF508383.VALUE1" Destination="$132A73B0D35E9500.IN1">
         <Attribute Name="Configuration.Connections.CrossReference" Value="True" />
       </Connection>
       <Connection Source="$F616233DCC81424F.VALUE1" Destination="$B2CF3E097A216741.IN1">
@@ -1074,9 +1107,6 @@
       <Connection Source="$1D0349B378DF11A4.VALUE1" Destination="$CAAADA7932C2244A.A6773729150B4E0E" dx1="90" dx2="210" dy="-550" />
       <Connection Source="$F368A4C596477299.VALUE1" Destination="$CAAADA7932C2244A.5D8A8908811B29A7" dx1="221.625" />
       <Connection Source="$1759BAA386A048E2.VALUE1" Destination="$CAAADA7932C2244A.F740364027CCE306" dx1="90" dx2="170" dy="-549.999" />
-      <Connection Source="$453CB0C62DA21C5E.VALUE1" Destination="$CAAADA7932C2244A.F6B0643D9A610C31" dx1="221.625" />
-      <Connection Source="$07946D2308177FCC.VALUE1" Destination="$CAAADA7932C2244A.CA3B3F07C6168355" dx1="90" dx2="130" dy="-1830" />
-      <Connection Source="$7301D4E8666FF609.VALUE1" Destination="$CAAADA7932C2244A.FEACF4BBB1DCFD70" dx1="221.625" />
       <Connection Source="$B5BC2B51631978C2.VALUE1" Destination="$CAAADA7932C2244A.24EE582A2B5F5F8C" dx1="90" dx2="90" dy="-2470" />
       <Connection Source="$35AE2C844AB8CCBA.VALUE1" Destination="$CAAADA7932C2244A.633809FAADF382E2" dx1="221.625" />
       <Connection Source="$663D511E7E249B9C.VALUE1" Destination="$CAAADA7932C2244A.864B84B920DCC4AA" dx1="90" dx2="50" dy="-3109.999" />
@@ -1090,6 +1120,18 @@
       <Connection Source="$9DBB8C5AB271C8D0" Destination="$1041AD88602FB7D9.IN2" />
       <Connection Source="$1041AD88602FB7D9.OUT" Destination="$D0B64F42392CAE46.VALUE1" />
       <Connection Source="$D3E6D57DB7EFAB3A.VALUE1" Destination="$CAAADA7932C2244A.C60B856B1B7726F0" />
+      <Connection Source="$C05EDA0BCF508383.VALUE1" Destination="$E0B503DB2C3AE243.IN1" />
+      <Connection Source="$8738C926C91ED54C" Destination="$E0B503DB2C3AE243.IN2" />
+      <Connection Source="$E0B503DB2C3AE243.OUT" Destination="$132A73B0D35E9500.IN1" />
+      <Connection Source="$2C49C5775854128E.VALUE1" Destination="$0B9136C0BD10D76D.8B960B71FEC01EC6" />
+      <Connection Source="$B0342129EED3C70D.VALUE1" Destination="$0B9136C0BD10D76D.F736A278CBBAFA30" />
+      <Connection Source="$34B3A8E13C020475.VALUE1" Destination="$0B9136C0BD10D76D.F2E0722B21AF46EE" />
+      <Connection Source="$152E7625730DA18A.VALUE1" Destination="$0B9136C0BD10D76D.52B2E12A797D6FFA" />
+      <Connection Source="$0B9136C0BD10D76D.D59CED07C572E655" Destination="$CAAADA7932C2244A.F6B0643D9A610C31" />
+      <Connection Source="$0B9136C0BD10D76D.29668FCB39E62ECF" Destination="$CAAADA7932C2244A.CA3B3F07C6168355" />
+      <Connection Source="$0B9136C0BD10D76D.0DE8BC5CB842F789" Destination="$CAAADA7932C2244A.BDE2DDE2B587E21E" />
+      <Connection Source="$0B9136C0BD10D76D.A7043F8D7C6DAF54" Destination="$CAAADA7932C2244A.F7B9D0A0B4602A52" />
+      <Connection Source="$155FFBAEA2F9B2D8.17FF7396943AAB57" Destination="$CAAADA7932C2244A.FEACF4BBB1DCFD70" />
     </DataConnections>
   </FBNetwork>
 </FBType>

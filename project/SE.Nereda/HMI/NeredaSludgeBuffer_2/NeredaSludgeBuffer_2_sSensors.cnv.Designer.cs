@@ -31,8 +31,6 @@ namespace SE.Nereda.Symbols.NeredaSludgeBuffer_2
 			this.sQT002 = new SE.Nereda.Symbols.AnalogInput.sDisplayPv2();
 			this.sDefault1 = new SE.Nereda.Symbols.AnalogInput_Status.sDefault();
 			this.sQT003 = new SE.Nereda.Symbols.AnalogInput.sDisplayPv2();
-			this.sQT004 = new SE.Nereda.Symbols.AnalogInput.sDisplayPv2();
-			this.freeText4 = new NxtControl.GuiFramework.FreeText();
 			this.freeText5 = new NxtControl.GuiFramework.FreeText();
 			this.sDefault2 = new SE.Nereda.Symbols.AnalogInput_Status.sDefault();
 			this.sQT010 = new SE.Nereda.Symbols.AnalogInput.sDisplayPv2();
@@ -131,25 +129,6 @@ namespace SE.Nereda.Symbols.NeredaSludgeBuffer_2
 			this.freeText1.Name = "freeText1";
 			this.freeText1.Text = "S\u00f3lidos no descarte";
 			// 
-			// sQT004 (turbidez do 49QT0003)
-			// 
-			this.sQT004.BeginInit();
-			this.sQT004._iSensorName = "49QT0003 Turbidez";
-			this.sQT004._iUnit = "";
-			this.sQT004.DesignMatrix = new NxtControl.Drawing.Matrix2D(1D, 0D, 0D, 1D, 480D, 24D);
-			this.sQT004.Name = "sQT004";
-			this.sQT004.SecurityToken = ((uint)(4294967295u));
-			this.sQT004.TagName = "Sensors.TurbidityDischargeSludge";
-			this.sQT004.EndInit();
-			// 
-			// freeText4
-			// 
-			this.freeText4.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.freeText4.Font = new NxtControl.Drawing.Font("LabelFont");
-			this.freeText4.Location = new NxtControl.Drawing.PointF(456D, 8D);
-			this.freeText4.Name = "freeText4";
-			this.freeText4.Text = "Turbidez no descarte";
-			// 
 			// freeText5
 			// 
 			this.freeText5.Color = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
@@ -186,8 +165,6 @@ namespace SE.Nereda.Symbols.NeredaSludgeBuffer_2
 			// sSensors
 			// 
 			this.Shapes.AddRange(new System.ComponentModel.IComponent[] {
-			this.sQT004,
-			this.freeText4,
 			this.freeText5,
 			this.rectangle3,
 			this.rectangle2,
@@ -208,8 +185,6 @@ namespace SE.Nereda.Symbols.NeredaSludgeBuffer_2
 		private NxtControl.GuiFramework.Rectangle rectangle3;
 		private NxtControl.GuiFramework.Rectangle rectangle1;
 		private NxtControl.GuiFramework.FreeText freeText1;
-		private SE.Nereda.Symbols.AnalogInput.sDisplayPv2 sQT004;
-		private NxtControl.GuiFramework.FreeText freeText4;
 		private NxtControl.GuiFramework.FreeText freeText5;
 		private NxtControl.GuiFramework.FreeText freeText2;
 		private NxtControl.GuiFramework.Rectangle rectangle2;

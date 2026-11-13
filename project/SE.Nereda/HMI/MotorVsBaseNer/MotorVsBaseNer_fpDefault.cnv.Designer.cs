@@ -68,6 +68,7 @@ namespace SE.Nereda.Faceplates.MotorVsBaseNer
 			this.btnAjustes = new NxtControl.GuiFramework.DrawnButton();
 			this.btnGrafico = new NxtControl.GuiFramework.DrawnButton();
 			this.btnDiagnostico = new NxtControl.GuiFramework.DrawnButton();
+			this.btnMedicoes = new NxtControl.GuiFramework.DrawnButton();
 			this.fpNavigationPane = new SE.App2Base.Graphics.FpNavigationPane();
 			this.ownerSwitch = new SE.App2Base.Graphics.OwnerSwitchBasic();
 			this.FbStatus = new System.HMI.Symbols.Base.Execute<short>();
@@ -469,7 +470,7 @@ namespace SE.Nereda.Faceplates.MotorVsBaseNer
 			// 
 			// btnAjustes
 			// 
-			this.btnAjustes.Bounds = new NxtControl.Drawing.RectF(((float)(20D)), ((float)(522D)), ((float)(100D)), ((float)(32D)));
+			this.btnAjustes.Bounds = new NxtControl.Drawing.RectF(((float)(20D)), ((float)(522D)), ((float)(88D)), ((float)(32D)));
 			this.btnAjustes.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208))));
 			this.btnAjustes.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold);
 			this.btnAjustes.InnerBorderColor = new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208)));
@@ -484,7 +485,7 @@ namespace SE.Nereda.Faceplates.MotorVsBaseNer
 			// 
 			// btnGrafico
 			// 
-			this.btnGrafico.Bounds = new NxtControl.Drawing.RectF(((float)(130D)), ((float)(522D)), ((float)(100D)), ((float)(32D)));
+			this.btnGrafico.Bounds = new NxtControl.Drawing.RectF(((float)(113D)), ((float)(522D)), ((float)(88D)), ((float)(32D)));
 			this.btnGrafico.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208))));
 			this.btnGrafico.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold);
 			this.btnGrafico.InnerBorderColor = new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208)));
@@ -499,7 +500,7 @@ namespace SE.Nereda.Faceplates.MotorVsBaseNer
 			// 
 			// btnDiagnostico
 			// 
-			this.btnDiagnostico.Bounds = new NxtControl.Drawing.RectF(((float)(240D)), ((float)(522D)), ((float)(100D)), ((float)(32D)));
+			this.btnDiagnostico.Bounds = new NxtControl.Drawing.RectF(((float)(206D)), ((float)(522D)), ((float)(88D)), ((float)(32D)));
 			this.btnDiagnostico.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208))));
 			this.btnDiagnostico.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold);
 			this.btnDiagnostico.InnerBorderColor = new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208)));
@@ -511,6 +512,21 @@ namespace SE.Nereda.Faceplates.MotorVsBaseNer
 			this.btnDiagnostico.TextColorMouseDown = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
 			this.btnDiagnostico.Use3DEffect = false;
 			this.btnDiagnostico.Click += new System.EventHandler(this.BtnDiagnosticoClick);
+			// 
+			// btnMedicoes
+			// 
+			this.btnMedicoes.Bounds = new NxtControl.Drawing.RectF(((float)(299D)), ((float)(522D)), ((float)(88D)), ((float)(32D)));
+			this.btnMedicoes.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208))));
+			this.btnMedicoes.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold);
+			this.btnMedicoes.InnerBorderColor = new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208)));
+			this.btnMedicoes.Name = "btnMedicoes";
+			this.btnMedicoes.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(160)), ((byte)(160)), ((byte)(160))), 1F, NxtControl.Drawing.DashStyle.Solid);
+			this.btnMedicoes.Radius = 2D;
+			this.btnMedicoes.Text = "Medi\u00e7\u00f5es";
+			this.btnMedicoes.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.btnMedicoes.TextColorMouseDown = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
+			this.btnMedicoes.Use3DEffect = false;
+			this.btnMedicoes.Click += new System.EventHandler(this.BtnMedicoesClick);
 			// 
 			// fpNavigationPane
 			// 
@@ -947,6 +963,7 @@ namespace SE.Nereda.Faceplates.MotorVsBaseNer
 			this.btnAjustes,
 			this.btnGrafico,
 			this.btnDiagnostico,
+			this.btnMedicoes,
 			this.fpNavigationPane,
 			this.ownerSwitch,
 			this.FbStatus,
@@ -1013,6 +1030,7 @@ namespace SE.Nereda.Faceplates.MotorVsBaseNer
 		private NxtControl.GuiFramework.DrawnButton btnAjustes;
 		private NxtControl.GuiFramework.DrawnButton btnGrafico;
 		private NxtControl.GuiFramework.DrawnButton btnDiagnostico;
+		private NxtControl.GuiFramework.DrawnButton btnMedicoes;
 		private SE.App2Base.Graphics.FpNavigationPane fpNavigationPane;
 		private SE.App2Base.Graphics.OwnerSwitchBasic ownerSwitch;
 		private System.HMI.Symbols.Base.Execute<short> FbStatus;

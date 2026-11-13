@@ -41,7 +41,6 @@ namespace SE.Nereda.Faceplates.MotorBaseNer
 			this.btnReset = new NxtControl.GuiFramework.DrawnButton();
 			this.sep = new NxtControl.GuiFramework.Rectangle();
 			this.btnAjustes = new NxtControl.GuiFramework.DrawnButton();
-			this.btnGrafico = new NxtControl.GuiFramework.DrawnButton();
 			this.btnDiagnostico = new NxtControl.GuiFramework.DrawnButton();
 			this.fpNavigationPane = new SE.App2Base.Graphics.FpNavigationPane();
 			this.ownerSwitch = new SE.App2Base.Graphics.OwnerSwitchBasic();
@@ -220,24 +219,9 @@ namespace SE.Nereda.Faceplates.MotorBaseNer
 			this.btnAjustes.Use3DEffect = false;
 			this.btnAjustes.Click += new System.EventHandler(this.BtnAjustesClick);
 			// 
-			// btnGrafico
-			// 
-			this.btnGrafico.Bounds = new NxtControl.Drawing.RectF(((float)(130D)), ((float)(342D)), ((float)(100D)), ((float)(32D)));
-			this.btnGrafico.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208))));
-			this.btnGrafico.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold);
-			this.btnGrafico.InnerBorderColor = new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208)));
-			this.btnGrafico.Name = "btnGrafico";
-			this.btnGrafico.Pen = new NxtControl.Drawing.Pen(new NxtControl.Drawing.Color(((byte)(160)), ((byte)(160)), ((byte)(160))), 1F, NxtControl.Drawing.DashStyle.Solid);
-			this.btnGrafico.Radius = 2D;
-			this.btnGrafico.Text = "Gr\u00e1fico";
-			this.btnGrafico.TextColor = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.btnGrafico.TextColorMouseDown = new NxtControl.Drawing.Color(((byte)(0)), ((byte)(0)), ((byte)(0)));
-			this.btnGrafico.Use3DEffect = false;
-			this.btnGrafico.Click += new System.EventHandler(this.BtnGraficoClick);
-			// 
 			// btnDiagnostico
 			// 
-			this.btnDiagnostico.Bounds = new NxtControl.Drawing.RectF(((float)(240D)), ((float)(342D)), ((float)(100D)), ((float)(32D)));
+			this.btnDiagnostico.Bounds = new NxtControl.Drawing.RectF(((float)(130D)), ((float)(342D)), ((float)(100D)), ((float)(32D)));
 			this.btnDiagnostico.Brush = new NxtControl.Drawing.Brush(new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208))));
 			this.btnDiagnostico.Font = new NxtControl.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold);
 			this.btnDiagnostico.InnerBorderColor = new NxtControl.Drawing.Color(((byte)(208)), ((byte)(208)), ((byte)(208)));
@@ -520,7 +504,6 @@ namespace SE.Nereda.Faceplates.MotorBaseNer
 			this.btnReset,
 			this.sep,
 			this.btnAjustes,
-			this.btnGrafico,
 			this.btnDiagnostico,
 			this.fpNavigationPane,
 			this.ownerSwitch,
@@ -558,7 +541,6 @@ namespace SE.Nereda.Faceplates.MotorBaseNer
 		private NxtControl.GuiFramework.DrawnButton btnReset;
 		private NxtControl.GuiFramework.Rectangle sep;
 		private NxtControl.GuiFramework.DrawnButton btnAjustes;
-		private NxtControl.GuiFramework.DrawnButton btnGrafico;
 		private NxtControl.GuiFramework.DrawnButton btnDiagnostico;
 		private SE.App2Base.Graphics.FpNavigationPane fpNavigationPane;
 		private SE.App2Base.Graphics.OwnerSwitchBasic ownerSwitch;
